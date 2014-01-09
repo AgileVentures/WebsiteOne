@@ -1,29 +1,18 @@
-development:
-    adapter: postgresql
-    encoding: unicode
-    database: db/websiteone_development
-    pool: 5
-    username: postgres
-    password:
+development: &dev
+  adapter: postgresql
+  encoding: unicode
+  database: websiteone_development
+  pool: 5
+  username: postgres
+  password:
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test: &test
-    adapter: postgresql
-    encoding: unicode
-    database: db/websiteone_test
-    pool: 5
-    username: postgres
-    password:
+  <<: *dev
+  database: websiteone_test
 
 production:
-    adapter: postgresql
-    encoding: unicode
-    database: db/websiteone_production
-    pool: 5
-    username: postgres
-    password:
+  <<: *dev
+  database: websiteone_production
 
 cucumber:
   <<: *test
