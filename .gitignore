@@ -37,3 +37,6 @@
 #/config/application.yml
 .env
 
+# Versioning
+.rvmrc
+
