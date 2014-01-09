@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.0.0p247
+  - 2.0.0-p247
   #- 2.1.0
 before_script:
 - bundle exec rake db:create:all
