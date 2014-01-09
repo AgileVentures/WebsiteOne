@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'debugger', group: [:development, :test]
 
 group :test do
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'rspec-rails'
