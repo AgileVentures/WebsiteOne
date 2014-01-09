@@ -18,10 +18,14 @@ gem 'jbuilder', '~> 1.2'
 gem 'debugger', group: [:development, :test]
 
 group :test do
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'capybara'
   gem 'capybara-webkit'
-  gem 'rspec-rails'
   gem 'webrat'
   gem 'launchy'
+  gem 'database_cleaner'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
 end
