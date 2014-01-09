@@ -6,7 +6,6 @@
 
 # Ignore bundler config.
 /.bundle
-/.idea
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -15,3 +14,26 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# scm revert files
+**.orig
+
+# Mac finder artifacts
+.DS_Store
+
+# Netbeans project directory
+/nbproject/
+
+# RubyMine project files
+.idea
+
+# Textmate project files
+/*.tmproj
+
+# vim artifacts
+**.swp
+
+# Ignore application configuration
+#/config/application.yml
+.env
+
