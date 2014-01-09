@@ -2,13 +2,28 @@
 <html>
 <head>
   <title>WebsiteOne</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+<% flash.each do |name, msg| %>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div id="flash_<%= "#{name}" %>" class="alert alert-<%= name == :notice ? "success" : "danger" %>">
+          <a class="close" data-dismiss="alert">&#215;</a>
+          <%= content_tag :div, msg %>
+        </div>
+      </div>
+    </div>
+<% end %>
+<section id="header">
+  <%= render 'layouts/navbar' %>
+</section>
+<section id="main">
+  <%= yield %>
+</section>
+<section id="footer"></section>
 
 </body>
 </html>

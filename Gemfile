@@ -12,6 +12,8 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'devise'
+gem 'bootstrap-sass', '~> 3.0.2.0'
 
 
 # Use debugger
@@ -21,8 +23,11 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'capybara'
   gem 'capybara-webkit'
-  gem 'rspec-rails'
   gem 'webrat'
   gem 'launchy'
   gem 'database_cleaner'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
 end

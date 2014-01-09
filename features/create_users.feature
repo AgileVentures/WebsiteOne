@@ -3,9 +3,11 @@ Feature: As a developer
   I want to register as a user
 
 Scenario: Let a visitor register as a site user
-  Given I visit the site
-  And I click the "Register" link
-  Then I should be on "register" page
-  And I should see a register form
+  Given I am on the registration page
+  And I submit "user@example.com" as username
+  And I submit "password" as password
+  And I click "Sign up"
+  Then I should be on the home page
+  And I should see "Welcome! You have signed up successfully."
 
 #Scenario: Allow registration
