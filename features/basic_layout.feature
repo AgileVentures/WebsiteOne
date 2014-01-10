@@ -1,7 +1,8 @@
-Feature:
-  As a user,
-  when I visit the site
-  I should see a basic design elements
+Feature: Setting up basic page layout for site
+  As a user
+  So that I can navigate the site
+  I should see a basic navigation elements
+  https://www.pivotaltracker.com/story/show/63523208
 
 
 Background:
