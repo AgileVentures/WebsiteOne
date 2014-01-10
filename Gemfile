@@ -12,6 +12,8 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'devise'
+gem 'bootstrap-sass', '~> 3.0.2.0'
 
 
 # Use debugger
