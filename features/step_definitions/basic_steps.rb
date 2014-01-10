@@ -41,7 +41,6 @@ Then(/^I should be on the ([^"]*) page$/) do |page|
 end
 
 When /^I should see "([^"]*)"$/ do |string|
-  p have_text string
   page.should have_text string
 end
 
