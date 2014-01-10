@@ -42,3 +42,7 @@ end
 When(/^I should see a "([^"]*)" link$/) do |link|
   page.should have_link link
 end
+
+Then(/^show me the page$/) do
+  save_and_open_page
+end

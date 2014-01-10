@@ -9,6 +9,7 @@ describe 'layouts/application.html.erb' do
   end
 
   it 'should render a navbar' do
+    render
     rendered.should have_selector('div.navbar-wrapper')
   end
 
@@ -17,14 +18,17 @@ describe 'layouts/application.html.erb' do
     rendered.should have_link 'Our projects', :href => '#'
   end
 
-  context 'not signed in as registred user' do
+  context 'not signed in as registered user' do
     before :each do
       view.stub(:user_signed_in?).and_return(false)
     end
     it 'should render a navigation bar with links' do
       render
-      rendered.should have_link 'Check in', :href => new_user_session_path
-      rendered.should have_link 'Sign up', :href => new_user_registration_path
+      # https://github.com/jnicklas/capybara/issues/384#issuecomment-1667712
+      Capybara.string(rendered).find('section#header').tap do |header|
+        header.should have_link 'Check in', :href => new_user_session_path
+        header.should have_link 'Sign up', :href => new_user_registration_path
+      end
     end
   end
 
