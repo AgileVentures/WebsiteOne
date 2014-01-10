@@ -4,8 +4,7 @@ describe 'projects/projects.html.erb' do
   it 'should display table with columns' do
     render
     rendered.should have_css('table#projects')
-    Capybara.string(rendered).find('table#projects thead').tap do |t|
-    #rendered.within('table#projects thead') do |t|
+    rendered.within('table#projects thead') do |t|
       t.should have_css('legend', :text => 'List of Projects')
       t.should have_css('th', :text => 'Title')
       t.should have_css('th', :text => 'Description')
