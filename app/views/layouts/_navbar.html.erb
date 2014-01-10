@@ -17,10 +17,12 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Our projects', '#' %></li>
-          <li><%= link_to 'Check in', '#' %></li>
-          <li><%= link_to 'Sign up', '#' %></li>
-
-
+          <% unless user_signed_in? %>
+          <li><%= link_to 'Check in', new_user_session_path %></li>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          <% else %>
+          <li><%= link_to 'My Account', edit_user_registration_path %></li>
+          <% end %>
         </ul>
       </div>
       <!--/.nav-collapse -->
