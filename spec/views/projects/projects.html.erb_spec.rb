@@ -40,7 +40,7 @@ describe 'projects/projects.html.erb' do
       render
       rendered.within('table#projects tbody') do |table_row|
         #TODO Y replace with valid :id
-        expect(table_row).to have_link('Destroy', href: destroy_project_path(1))
+        expect(table_row).to have_link('Destroy', href: destroy_project_path(1), method: :delete)
       end
     end
 

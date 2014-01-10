@@ -33,14 +33,14 @@ end
 # Easy creation of mocks
 #  gem 'factory_girl_rails'
 # Speeds up rake tasks, like rspec, cucumber, etc., by preloading rails environment
-#  gem 'zeus'
+  gem 'zeus'
 # Guard support for zeus
-#  gem 'guard-zeus'
+  gem 'guard-zeus'
 # Guard support for rspec
-#  gem 'guard-rspec'
+  gem 'guard-rspec'
 # Guard support for cucumber
-#  gem 'guard-cucumber'
+  gem 'guard-cucumber'
 # Guard support for livereload (reloads opened page in your browser)
-#  gem 'guard-livereload'
+  gem 'guard-livereload'
 # Patch for guard (fixes locked files issue)
-#  gem "rb-readline", "~> 0.5.0"  #to fix the guard crashes
+  gem "rb-readline", "~> 0.5.0"  #to fix the guard crashes
