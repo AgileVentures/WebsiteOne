@@ -14,7 +14,14 @@ Given(/^I am on the ([^"]*) page$/) do |page|
     when "sign in" then visit new_user_session_path
     when "projects" then visit projects_path
   end
+end
 
+Then(/^I should be on the ([^"]*) page$/) do |page|
+  case page
+    when "home" then expect(current_path).to eq(root_path)
+    when "registration" then expect(current_path).to eq(new_user_registration_path)
+    when "projects" then expect(current_path).to eq(projects_path)
+  end
 end
 
 When(/^I submit "([^"]*)" as username$/) do |email|
@@ -34,13 +41,6 @@ When(/^I follow "([^"]*)"$/) do |text|
   click_link text
 end
 
-Then(/^I should be on the ([^"]*) page$/) do |page|
- case page
-   when "home" then expect(current_path).to eq(root_path)
-   when "registration" then expect(current_path).to eq(new_user_registration_path)
- end
-end
-
 When /^I should see "([^"]*)"$/ do |string|
   page.should have_text string
 end
@@ -52,7 +52,7 @@ end
 
 
 Then(/^show me the page$/) do
-  #save_and_open_page
+  save_and_open_page
 end
 
 When(/^I am logged in as a user$/) do
