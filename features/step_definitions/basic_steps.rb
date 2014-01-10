@@ -1,5 +1,5 @@
 Then /^I should see a button "([^"]*)"$/ do |name|
-  page.should have_button name
+  page.should have_link name
 end
 
 
@@ -42,7 +42,6 @@ Then(/^I should be on the ([^"]*) page$/) do |page|
 end
 
 When /^I should see "([^"]*)"$/ do |string|
-  debugger
   page.should have_text string
 end
 
@@ -54,4 +53,8 @@ end
 
 Then(/^show me the page$/) do
   #save_and_open_page
+end
+
+When(/^I am logged in as a user$/) do
+  #page.stub(:user_signed_in?).and_return(true)
 end

@@ -5,6 +5,10 @@
     <th>Title</th>
     <th>Description</th>
     <th>Status</th>
+    <th>Created</th>
   </tr>
   </thead>
 </table>
+<% if user_signed_in? %>
+<%= link_to 'New Project', new_project_path, :type => 'button', :class => 'btn btn-default'%>
+<% end %>
