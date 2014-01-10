@@ -1,3 +1,8 @@
+Then /^I should see a button "([^"]*)"$/ do |name|
+  page.should have_button name
+end
+
+
 Given(/^I visit the site$/) do
   visit root_path
 end
@@ -35,14 +40,17 @@ Then(/^I should be on the ([^"]*) page$/) do |page|
  end
 end
 
-When(/^I should see "([^"]*)"$/) do |string|
-  page.should have_content string
+When /^I should see "([^"]*)"$/ do |string|
+  p have_text string
+  page.should have_text string
 end
+
 
 When(/^I should see a "([^"]*)" link$/) do |link|
   page.should have_link link
 end
 
+
 Then(/^show me the page$/) do
-  save_and_open_page
+  #save_and_open_page
 end

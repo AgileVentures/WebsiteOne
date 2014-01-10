@@ -16,7 +16,8 @@
       <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to 'Our projects', '#' %></li>
+          <%# #TODO Y replace href with path helper %>
+          <li><%= link_to 'Our projects', 'projects' %></li>
           <% unless user_signed_in? %>
           <li><%= link_to 'Check in', new_user_session_path %></li>
           <li><%= link_to 'Sign up', new_user_registration_path %></li>
