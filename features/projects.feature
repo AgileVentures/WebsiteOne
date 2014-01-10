@@ -13,6 +13,8 @@ Scenario: See a list of current projects
   And I should see "Status"
 
 Scenario: Show New Project button if user is logged in
+
+#TODO Make an cuc/rspec test for checking if devise functions for logging in are working
   When I am logged in
   And I am on the projects page
   Then I should see a button "New Project"
@@ -29,11 +31,13 @@ Scenario Outline: Columns in list of projects table
   |Created    |
 
 Scenario Outline: Buttons in list of projects table
-  When I am on the projects page
+  Given I am logged in
+  And I am on the projects page
+
   Then I should see a "List of Projects" table
-  Then I should see button <button>
+  And I should see button <link>
 Examples:
-  | button |
+  | link   |
   |Show    |
   |Edit    |
   |Destroy |

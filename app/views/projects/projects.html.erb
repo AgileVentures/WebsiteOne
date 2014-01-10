@@ -8,6 +8,18 @@
     <th>Created</th>
   </tr>
   </thead>
+  <tbody>
+  <tr>
+    <td>Title text</td>
+    <td>Description text</td>
+    <td>Status text</td>
+    <td>Created text</td>
+    <td><%= link_to 'Show', 'projects_path' , type: 'button', :class => 'btn btn-default'%></td>
+    <td><%= link_to 'Show', 'edit_project_path' , type: 'button', :class => 'btn btn-default'%></td>
+    <td>Destroy button</td>
+  </tr>
+  </tbody>
+
 </table>
 <% if user_signed_in? %>
 <%= link_to 'New Project', new_project_path, :type => 'button', :class => 'btn btn-default'%>

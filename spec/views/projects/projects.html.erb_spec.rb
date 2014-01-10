@@ -20,6 +20,30 @@ describe 'projects/projects.html.erb' do
       render
       rendered.should have_link('New Project', :href => new_project_path)
     end
+
+    it 'should render a link Show' do
+      render
+      rendered.within('table#projects tbody') do |table_row|
+        expect(table_row).to have_link('Show', href: projects_path)
+      end
+    end
+
+    it 'should render a link Edit' do
+      render
+      rendered.within('table#projects tbody') do |table_row|
+        #TODO Y replace with valid :id
+        expect(table_row).to have_link('Edit', href: edit_project_path(1))
+      end
+    end
+
+    it 'should render a link Destroy' do
+      render
+      rendered.within('table#projects tbody') do |table_row|
+        #TODO Y replace with valid :id
+        expect(table_row).to have_link('Destroy', href: destroy_project_path(1))
+      end
+    end
+
   end
 
 end
