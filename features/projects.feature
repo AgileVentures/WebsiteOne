@@ -4,13 +4,16 @@ Feature: Create and maintain projects
   I would like to add a new project
 
 Background:
-  Given I am on the home page
+  Given  I am on the home page
 
-Scenario: Display list of projects
-  When I follow "Our projects"
-  Then I should see "List of projects"
-  And I should see "Title"
-  And I should see "Description"
+  Scenario: See a list of current projects
+    When I follow "Our projects"
+    Then I should see "List of projects"
+    And I should see "Title"
+    And I should see "Description"
+    And I should see "Created"
+    And I should see "Status"
+    And I should see a button "Create a new project"
 
 Scenario Outline: List of projects table
   When I follow "Our projects"
