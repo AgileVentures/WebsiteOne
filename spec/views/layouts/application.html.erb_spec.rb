@@ -15,7 +15,8 @@ describe 'layouts/application.html.erb' do
 
   it 'should render links to site features' do
     render
-    rendered.should have_link 'Our projects', :href => '#'
+    #TODO Y replace href with project_path helper
+    rendered.should have_link 'Our projects', :href => projects_url
   end
 
   context 'not signed in as registered user' do

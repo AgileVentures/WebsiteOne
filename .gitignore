@@ -26,6 +26,7 @@
 
 # RubyMine project files
 .idea
+/.idea/*
 
 # Textmate project files
 /*.tmproj
