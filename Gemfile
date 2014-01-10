@@ -43,4 +43,4 @@ end
 # Guard support for livereload (reloads opened page in your browser)
   gem 'guard-livereload'
 # Patch for guard (fixes locked files issue)
-  gem "rb-readline", "~> 0.5.0"  #to fix the guard crashes
+#  gem "rb-readline", "~> 0.5.0"  #to fix the guard crashes

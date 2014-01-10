@@ -3,7 +3,7 @@ Feature: Create and maintain projects
   So that I can participate in AgileVentures activities
   I would like to add a new project
 
-Scenario: See a list of current projects
+Scenario: See a table of current projects
   Given  I am on the home page
   When I follow "Our projects"
   Then I should see "List of Projects"
@@ -11,6 +11,14 @@ Scenario: See a list of current projects
   And I should see "Description"
   And I should see "Created"
   And I should see "Status"
+
+Scenario: See a list of current projects
+  Given  I am on the home page
+  And There is a project in the database
+  When I follow "Our projects"
+  Then I should see "Title 1"
+  And I should see "Description 1"
+  And I should see "Status 1"
 
 Scenario: Show New Project button if user is logged in
 
@@ -31,15 +39,14 @@ Scenario Outline: Columns in list of projects table
   |Created    |
 
 Scenario Outline: Buttons in list of projects table
-  Given I am logged in
+  Given There is a project in the database
+  And I am logged in
   And I am on the projects page
-
   Then I should see a "List of Projects" table
   And I should see button <link>
-Examples:
+  Examples:
   | link   |
   |Show    |
   |Edit    |
   |Destroy |
-
 

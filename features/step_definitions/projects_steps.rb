@@ -11,8 +11,13 @@ When(/^I should see column (.*)$/) do |column|
 end
 
 When(/^I should see button (.*)$/) do |link|
-  within('table#projects thead') do
+  within('table#projects') do
     p link
+    p page.body
     page.should have_link link
   end
+end
+
+When(/^There is a project in the database$/) do
+  project = Project.create(title: "Title 1", description: "Description 1", status: "Status 1")
 end

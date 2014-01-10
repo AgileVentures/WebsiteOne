@@ -9,15 +9,17 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>Title text</td>
-    <td>Description text</td>
-    <td>Status text</td>
-    <td>Created text</td>
-    <td><%= link_to 'Show', 'projects_path' , type: 'button', :class => 'btn btn-default'%></td>
-    <td><%= link_to 'Edit', 'edit_project_path' , type: 'button', :class => 'btn btn-default'%></td>
-    <td>Destroy button</td>
-  </tr>
+  <% @projects.each do |p| %>
+    <tr>
+      <td><%= p.title %></td>
+      <td><%= p.description %></td>
+      <td><%= p.status %></td>
+      <td><%= p.created_at %></td>
+      <td><%= link_to 'Show', project_path(p.id) , type: 'button', :class => 'btn btn-default'%></td>
+      <td><%= link_to 'Edit', edit_project_path(p.id) , type: 'button', :class => 'btn btn-default'%></td>
+      <td><%= link_to 'Destroy', project_path(p.id), type: 'button', class: 'btn btn-default', method: :delete %></td>
+    </tr>
+  <% end %>
   </tbody>
 
 </table>
