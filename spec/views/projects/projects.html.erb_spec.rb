@@ -1,20 +1,15 @@
 require 'spec_helper'
 
 describe 'projects/projects.html.erb' do
-
-  # this is duplicating the specs in cuc scenario, but we have it here anyway
-  describe "content elements" do
-    it 'should have text List of projects'
-    it 'should have text Title'
-    it 'should have text Description'
-    it 'should have text Created'
-    it 'should have text Status'
-  end
-
-  describe "content formatting" do
-    it 'should be in a table'
-    it 'should have columns'
-    it 'should be wide or narrow or whatever'
+  it 'should display table with columns' do
+    render
+    rendered.should have_css('table#projects')
+    rendered.within('table#projects thead') do |t|
+      t.should have_css('legend', :text => 'List of projects')
+      t.should have_css('th', :text => 'Title')
+      t.should have_css('th', :text => 'Description')
+      t.should have_css('th', :text => 'Status')
+    end
   end
 
 end

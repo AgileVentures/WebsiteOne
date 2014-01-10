@@ -12,6 +12,7 @@ Given(/^I am on the ([^"]*) page$/) do |page|
     when "home" then visit root_path
     when "registration" then visit new_user_registration_path
     when "sign in" then visit new_user_session_path
+    when "projects" then visit projects_path
   end
 
 end
@@ -41,6 +42,7 @@ Then(/^I should be on the ([^"]*) page$/) do |page|
 end
 
 When /^I should see "([^"]*)"$/ do |string|
+  debugger
   page.should have_text string
 end
 
