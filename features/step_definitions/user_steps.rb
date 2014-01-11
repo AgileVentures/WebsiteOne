@@ -1,5 +1,5 @@
 Given /^I am not logged in$/ do
-  visit '/users/sign_out'
+  visit destroy_user_session_path
 end
 
 Given /^I am logged in$/ do
@@ -27,11 +27,6 @@ When /^I sign in with valid credentials$/ do
 end
 
 When /^I sign out$/ do
-  username = [@visitor[:first_name], @visitor[:last_name]].join(' ')
-  page.should have_css('a[href="/users/sign_out"]', :text => 'Log out', :visible => false)
-  find("a[id='#{username}']").click
-  page.should have_css('a[href="/users/sign_out"]', :text => 'Log out', :visible => true)
-  #find('a[href="/users/sign_out"]').click
   visit '/users/sign_out'
 end
 
@@ -65,7 +60,7 @@ When /^I sign up with a mismatched password confirmation$/ do
 end
 
 When /^I return to the site$/ do
-  visit '/'
+  visit root_path
 end
 
 When /^I sign in with a wrong email$/ do
@@ -97,15 +92,15 @@ end
 
 ### THEN ###
 Then /^I should be signed in$/ do
-  current_user.should == @user
-  page.should have_selector('a[href="/users/sign_out"]')
+  find_user.should == @user
+  page.should have_content "Log out"
   page.should_not have_content "Sign up"
   page.should_not have_content "Check-in"
 end
 
 Then /^I should be signed out$/ do
   page.should have_content "Sign up"
-  page.should have_content "Check-in"
+  page.should have_content "Check in"
   page.should_not have_content "Log out"
 end
 
