@@ -6,7 +6,6 @@ module Helpers
                    :password_confirmation => "changeme" }
   end
 
-
   def find_user
     @user ||= User.where(:email => @visitor[:email]).first
   end
