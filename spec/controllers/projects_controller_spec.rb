@@ -23,9 +23,17 @@ describe ProjectsController do
     expect(response).to render_template 'new'
   end
 
-  #it 'should assign the requested project as @project' do
-  #  project = Project.create! valid_attributes
-  #  get :show, {:id => project.to_param}, valid_session
-  #  assigns(:project).should eq(project)
-  #end
+  context '#show, #edit, #update, #destroy' do
+    before(:each) do
+    end
+
+      it 'should delete a project' do
+        project = double(Project)
+        Project.stub(:find).and_return(project)
+
+        expect(project).to receive(:destroy)
+        delete :destroy, {:id => 'test'}
+      end
+
+  end
 end

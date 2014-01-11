@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_filter :set_project, only: [:show, :edit, :update, :destroy]
+
   def index
     @projects = Project.all
     render 'index'
@@ -19,6 +22,10 @@ class ProjectsController < ApplicationController
       else
          render action: 'new'
       end
+  end
+
+  def destroy
+    @project.destroy
   end
 
   private
