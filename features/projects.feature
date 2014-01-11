@@ -49,6 +49,7 @@ Scenario: Show New Project button if user is logged in
 #  |Description|
 #  |Status     |
 #  |Created    |
+
 Scenario: Columns in projects table
   When I go to the projects page
 
