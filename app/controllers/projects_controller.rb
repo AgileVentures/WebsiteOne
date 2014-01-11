@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    set_project
   end
 
   

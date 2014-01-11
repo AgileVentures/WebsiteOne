@@ -7,8 +7,8 @@ Background:
   #TODO set constraint: unique titles?
   Given the follow projects exist:
     | title       | description          | status   | id |
-    | hello world | greetings earthlings | active   | 1 |
-    | hello mars  | greetings aliens     | inactive | 2 |
+    | hello world | greetings earthlings | active   | 1  |
+    | hello mars  | greetings aliens     | inactive | 2  |
 
 Scenario: List of projects in table layout
   Given  I am on the "home" page
@@ -79,10 +79,9 @@ Scenario: Saving a new project
 Scenario: Editing a project
   Given I am logged in
   And I am on the "projects" page
-  And show me the page
   And I click the first "Edit" button
   Then I should be on the edit page
-  # And I should see
+  And I should see "greetings earthlings"
 
 Scenario: Destroying a project
   Given I am logged in
