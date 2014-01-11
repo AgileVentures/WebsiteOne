@@ -79,7 +79,7 @@ Scenario: Saving a new project
 Scenario: Destroying a project
   Given I am logged in
   And I am on the "projects" page
-  Then the "Destroy" button works for "hello world"
+  Then the Destroy button works for "hello world"
 
 
 
