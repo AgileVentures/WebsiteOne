@@ -12,12 +12,12 @@ end
 
 When(/^I should see button (.*)$/) do |link|
   within('table#projects') do
-    p link
-    p page.body
     page.should have_link link
   end
 end
 
-When(/^There is a project in the database$/) do
-  project = Project.create(title: "Title 1", description: "Description 1", status: "Status 1")
+When(/^There are projects in the database$/) do
+  #TODO Y use factoryGirl
+  Project.create(title: "Title 1", description: "Description 1", status: "Status 1")
+  Project.create(title: "Title 2", description: "Description 2", status: "Status 2")
 end

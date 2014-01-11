@@ -1,3 +1,12 @@
+def path_to(page)
+  case page
+    when 'home' then root_path
+    when 'registration' then new_user_registration_path
+    when 'sign in' then new_user_session_path
+    when 'projects' then projects_path
+  end
+end
+
 Then /^I should see a button "([^"]*)"$/ do |name|
   page.should have_link name
 end
@@ -8,20 +17,15 @@ Given(/^I visit the site$/) do
 end
 
 Given(/^I am on the ([^"]*) page$/) do |page|
-  case page
-    when "home" then visit root_path
-    when "registration" then visit new_user_registration_path
-    when "sign in" then visit new_user_session_path
-    when "projects" then visit projects_path
-  end
+  visit path_to(page)
+end
+
+Given(/^I go to the ([^"]*) page$/) do |page|
+  visit path_to(page)
 end
 
 Then(/^I should be on the ([^"]*) page$/) do |page|
-  case page
-    when "home" then expect(current_path).to eq(root_path)
-    when "registration" then expect(current_path).to eq(new_user_registration_path)
-    when "projects" then expect(current_path).to eq(projects_path)
-  end
+    expect(current_path).to eq path_to(page)
 end
 
 When(/^I submit "([^"]*)" as username$/) do |email|

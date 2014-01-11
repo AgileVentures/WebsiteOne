@@ -5,8 +5,6 @@ WebsiteOne::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'visitors#index'
-  delete 'projects/:id/' => 'projects#destroy', as: :destroy
-
   resources :projects
 
   # Example of regular route:
