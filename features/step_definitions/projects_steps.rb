@@ -39,7 +39,7 @@ Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
   end
 end
 
-Then(/^the Destroy button works for "(.*?)"$/) do |button, project_title|
+Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
   id = Project.find_by_title(project_title).id
   within("tr##{id}") do
     expect { click_link button }.to change(Project, :count).by(-1)
