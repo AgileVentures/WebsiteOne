@@ -77,7 +77,7 @@ Scenario: Editing a project
   And I am on the "projects" page
   And show me the page
   And I click the first "Edit" button
-  Then I should be on the "Edit" page
+  Then I should be on the Edit page
 
 
 

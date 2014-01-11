@@ -22,8 +22,9 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    puts "EDIT" + params.inspect
   end
+
+  
   private
   def set_project
     @project = Project.find(params[:id])
