@@ -1,0 +1,9 @@
+<%= form_tag("/new", :method => "get", id: 'new_project') do %>
+    <%= label_tag(:title, "Title") %>
+    <%= text_field_tag(:title) %>
+    <%= label_tag(:description, "Description") %>
+    <%= text_field_tag(:description) %>
+    <%= label_tag(:status, "Status") %>
+    <%= text_field_tag(:status) %>
+    <%= submit_tag("Create") %>
+<% end %>

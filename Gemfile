@@ -18,6 +18,7 @@ group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
   gem 'capybara-webkit'  # Headless driver for capybara
+  gem 'selenium-webdriver'
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
@@ -32,15 +33,15 @@ end
 #  gem 'cucumber-rails-training-wheels'
 # Easy creation of mocks
 #  gem 'factory_girl_rails'
-# Speeds up rake tasks, like rspec, cucumber, etc., by preloading rails environment
+## Speeds up rake tasks, like rspec, cucumber, etc., by preloading rails environment
 #  gem 'zeus'
-# Guard support for zeus
+## Guard support for zeus
 #  gem 'guard-zeus'
-# Guard support for rspec
+## Guard support for rspec
 #  gem 'guard-rspec'
-# Guard support for cucumber
+## Guard support for cucumber
 #  gem 'guard-cucumber'
-# Guard support for livereload (reloads opened page in your browser)
+## Guard support for livereload (reloads opened page in your browser)
 #  gem 'guard-livereload'
-# Patch for guard (fixes locked files issue)
-#  gem "rb-readline", "~> 0.5.0"  #to fix the guard crashes
+## Patch for guard (fixes locked files issue)
+#  gem "rb-readline", "~> 0.5.0", :require => false  #to fix the guard crashes
