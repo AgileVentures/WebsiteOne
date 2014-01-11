@@ -19,6 +19,7 @@ describe 'projects/projects.html.erb' do
       table_row.should have_css('legend', :text => 'List of Projects')
       table_row.should have_css('th', :text => 'Title')
       table_row.should have_css('th', :text => 'Description')
+      table_row.should have_css('th', :text => 'Created')
       table_row.should have_css('th', :text => 'Status')
     end
   end

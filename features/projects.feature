@@ -4,10 +4,11 @@ Feature: Create and maintain projects
   I would like to add a new project
 
 Background:
+#TODO YA create specific projects from a table
   Given There are projects in the database
 
 Scenario: List of projects in table layout
-  Given  I am on the home page
+  Given  I am on the "home" page
 
   When I follow "Our projects"
 
@@ -18,7 +19,7 @@ Scenario: List of projects in table layout
   And I should see "Status"
 
 Scenario: See a list of current projects
-  Given  I am on the home page
+  Given  I am on the "home" page
   And There are projects in the database
 
   When I follow "Our projects"
@@ -33,53 +34,51 @@ Scenario: See a list of current projects
 
 Scenario: Show New Project button if user is logged in
   When I am logged in
-  And I am on the projects page
+  And I am on the "projects" page
   Then I should see a button "New Project"
 
-#TODO Y Consider using a shorter version below, as there is only one column in the outline
-#TODO Y using outlines increases the test output, because the same steps are run for each column/link
-#Scenario Outline: Columns in list of projects table
-#  When I am on the projects page
-#
-#  Then I should see a "List of Projects" table
-#  And I should see column <column>
-#  Examples:
-#  | column |
-#  |Title   |
-#  |Description|
-#  |Status     |
-#  |Created    |
-
 Scenario: Columns in projects table
-  When I go to the projects page
+  When I go to the "projects" page
 
   Then I should see a "List of Projects" table
-  And I should see column Title
-  And I should see column Description
-  And I should see column Status
-  And I should see column Created
+  And I should see column "Title"
+  And I should see column "Description"
+  And I should see column "Status"
+  And I should see column "Created"
 
-
-Scenario: CRUD buttons in projects table
-  Given There are projects in the database
+  Scenario: Show, edit, delete buttons in projects table
   And I am logged in
 
-  When I go to the projects page
+  When I go to the "projects" page
 
   Then I should see a "List of Projects" table
-  And I should see button Show
-  And I should see button Edit
-  And I should see button Destroy
+  And I should see button "Show"
+  And I should see button "Edit"
+  And I should see button "Destroy"
 
-#  Scenario Outline: Buttons in list of projects table
-#    Given There are projects in the database
-#    And I am logged in
-#    And I am on the projects page
-#
-#    Then I should see a "List of Projects" table
-#    And I should see button <link>
-#  Examples:
-#    | link   |
-#    |Show    |
-#    |Edit    |
-#    |Destroy |
+Scenario: Creating a new project
+  Given I am logged in
+  And I am on the "projects" page
+
+  And I follow "New Project"
+  Then I should see a form for "creating a new project"
+  And I should see field "Title"
+  And I should see field "Description"
+  And I should see field "Status"
+  And I should see form button "Create"
+
+Scenario: Saving a new project
+  Given I am logged in
+  And I am on the "projects" page
+  And I follow "New Project"
+
+  When I fill in "Title" with "Title 1"
+  And I fill in "Description" with "Description 1"
+  And I fill in "Status" with "Status 1"
+  And I click the "Submit" button
+
+  Then I should see a message "New Project successfully created"
+
+
+
+
