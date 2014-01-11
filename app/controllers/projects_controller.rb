@@ -5,7 +5,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    render 'show'
+    set_project
+    #render 'show'
   end
 
   def new
@@ -23,6 +24,18 @@ class ProjectsController < ApplicationController
 
   def edit
     set_project
+  end
+
+  def update
+    set_project
+    # @project.status = "undetermined"
+    # @project.save!
+    if @project.update_attributes(project_params)
+      redirect_to @project, notice: 'Project was successfully updated.'
+    else
+      # TODO change this to notify for invalid params
+      render 'edit', notice: 'Project was not updated.'
+    end
   end
 
   

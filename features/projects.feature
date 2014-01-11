@@ -76,12 +76,19 @@ Scenario: Saving a new project
   Then I should see "Project was successfully created."
 
 
-Scenario: Editing a project
+Scenario: Edit page exists
   Given I am logged in
   And I am on the "projects" page
   And I click the first "Edit" button
   Then I should be on the edit page
-  And I should see "greetings earthlings"
+  And I should see form button "Update Project"
+
+Scenario: Saving project edits at Edit page
+  Given I am logged in
+  And I am on the "edit" page
+  And I fill in "Status" with "undetermined"
+  And I click "Update Project"
+  Then I should see "undetermined"
 
 Scenario: Destroying a project
   Given I am logged in
