@@ -75,6 +75,10 @@ Scenario: Saving a new project
   And I fill in "Status" with "Status 1"
   And I click the "Create" button
   Then I should see "Project was successfully created."
+  And I am redirected to the "projects" page
+  And I should see "Title 1"
+  And I should see "Description 1"
+  And I should see "Status 1"
 
 Scenario: Destroying a project
   Given I am logged in
