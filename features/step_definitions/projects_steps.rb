@@ -39,6 +39,7 @@ end
 
 Then(/^the "(.*?)" button works for "(.*?)"$/) do |button, project_title|
   id = Project.find_by_title(project_title).id
-  button = find("tr##{id} td a[data-method='delete']")
-  expect { button.click }.to change(Project, :count).by(-1)
+  within("tr##{id}") do
+    expect { click_link button }.to change(Project, :count).by(-1)
+  end
 end
