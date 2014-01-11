@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'projects/projects.html.erb' do
+describe 'projects/index.html.erb' do
   before :each do
     #TODO Y use factoryGirl
     Project.create(id: 1, title: "Title 1", description: "Description 1", status: "Status 1")

@@ -21,13 +21,10 @@ Scenario: List of projects in table layout
 Scenario: See a list of current projects
   Given  I am on the "home" page
   And There are projects in the database
-
   When I follow "Our projects"
-
   Then I should see "Title 1"
   And I should see "Description 1"
   And I should see "Status 1"
-
   And I should see "Title 2"
   And I should see "Description 2"
   And I should see "Status 2"
@@ -59,8 +56,8 @@ Scenario: Columns in projects table
 Scenario: Creating a new project
   Given I am logged in
   And I am on the "projects" page
-
   And I follow "New Project"
+  Then show me the page
   Then I should see a form for "creating a new project"
   And I should see field "Title"
   And I should see field "Description"
@@ -71,13 +68,11 @@ Scenario: Saving a new project
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
-
   When I fill in "Title" with "Title 1"
   And I fill in "Description" with "Description 1"
   And I fill in "Status" with "Status 1"
-  And I click the "Submit" button
-
-  Then I should see a message "New Project successfully created"
+  And I click the "Create" button
+  Then I should see "Project was successfully created."
 
 
 
