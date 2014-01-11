@@ -6,9 +6,9 @@ Feature: Create and maintain projects
 Background:
   #TODO set constraint: unique titles?
   Given the follow projects exist:
-    | title       | description          | status   |
-    | hello world | greetings earthlings | active   |
-    | hello mars  | greetings aliens     | inactive |
+    | title       | description          | status   | id |
+    | hello world | greetings earthlings | active   | 1 |
+    | hello mars  | greetings aliens     | inactive | 2 |
 
 Scenario: List of projects in table layout
   Given  I am on the "home" page
@@ -81,7 +81,8 @@ Scenario: Editing a project
   And I am on the "projects" page
   And show me the page
   And I click the first "Edit" button
-  Then I should be on the Edit page
+  Then I should be on the edit page
+  # And I should see
 
 Scenario: Destroying a project
   Given I am logged in
