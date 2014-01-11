@@ -28,6 +28,10 @@ Given(/^I am on the "([^"]*)" page$/) do |page|
   visit path_to(page)
 end
 
+And(/^I am redirected to the "([^"]*)" page$/) do |page|
+  expect(current_path).to eq path_to(page)
+end
+
 Given(/^I go to the "([^"]*)" page$/) do |page|
   visit path_to(page)
 end

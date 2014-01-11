@@ -1,12 +1,13 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+
   def index
     @projects = Project.all
-    render 'index'
   end
 
   def show
     set_project
-    #render 'show'
   end
 
   def new
@@ -28,8 +29,7 @@ class ProjectsController < ApplicationController
 
   def update
     set_project
-    # @project.status = "undetermined"
-    # @project.save!
+
     if @project.update_attributes(project_params)
       redirect_to @project, notice: 'Project was successfully updated.'
     else
@@ -38,7 +38,12 @@ class ProjectsController < ApplicationController
     end
   end
 
-  
+  def destroy
+    @project.destroy
+    redirect_to projects_path
+  end
+
+
   private
   def set_project
     @project = Project.find(params[:id])
