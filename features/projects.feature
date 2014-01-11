@@ -43,11 +43,9 @@ Scenario: Columns in projects table
   And I should see column "Status"
   And I should see column "Created"
 
-  Scenario: Show, edit, delete buttons in projects table
-  And I am logged in
-
+Scenario: Show, edit, delete buttons in projects table
+  Given I am logged in
   When I go to the "projects" page
-
   Then I should see a "List of Projects" table
   And I should see button "Show"
   And I should see button "Edit"
@@ -57,7 +55,7 @@ Scenario: Creating a new project
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
-  Then show me the page
+  ###Then show me the page
   Then I should see a form for "creating a new project"
   And I should see field "Title"
   And I should see field "Description"
@@ -73,6 +71,13 @@ Scenario: Saving a new project
   And I fill in "Status" with "Status 1"
   And I click the "Create" button
   Then I should see "Project was successfully created."
+
+Scenario: Editing a project
+  Given I am logged in
+  And I am on the "projects" page
+  And show me the page
+  And I click the first "Edit" button
+  Then I should be on the "Edit" page
 
 
 
