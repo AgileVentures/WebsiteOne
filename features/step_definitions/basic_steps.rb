@@ -73,15 +73,6 @@ Then(/^I should see field "([^"]*)"$/) do |field|
   page.should have_field(field)
 end
 
-Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
-  #TODO YA check if capybara has form lookup method
-  case form_purpose
-    when 'creating a new project'
-      page.should have_text form_purpose
-      page.should have_css('form#new_project')
-  end
-end
-
 When(/^I should see button "([^"]*)"$/) do |link|
   page.should have_link link
 end

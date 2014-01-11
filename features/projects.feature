@@ -4,8 +4,11 @@ Feature: Create and maintain projects
   I would like to add a new project
 
 Background:
-#TODO YA create specific projects from a table
-  Given There are projects in the database
+  #TODO set constraint: unique titles?
+  Given the follow projects exist:
+    | title       | description          | status   |
+    | hello world | greetings earthlings | active   |
+    | hello mars  | greetings aliens     | inactive |
 
 Scenario: List of projects in table layout
   Given  I am on the "home" page
@@ -55,7 +58,7 @@ Scenario: Creating a new project
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
-  ###Then show me the page
+
   Then I should see a form for "creating a new project"
   And I should see field "Title"
   And I should see field "Description"
@@ -72,6 +75,7 @@ Scenario: Saving a new project
   And I click the "Create" button
   Then I should see "Project was successfully created."
 
+
 Scenario: Editing a project
   Given I am logged in
   And I am on the "projects" page
@@ -79,6 +83,10 @@ Scenario: Editing a project
   And I click the first "Edit" button
   Then I should be on the Edit page
 
+Scenario: Destroying a project
+  Given I am logged in
+  And I am on the "projects" page
+  Then the Destroy button works for "hello world"
 
 
 
