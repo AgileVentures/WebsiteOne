@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe ProjectsController do
-  let(:valid_attributes) { { :title => '"Title',
-                             :description => 'Description',
-                             :status => 'active' } }
-  let(:valid_session) { {} }
+  #TODO split specs into 'logged in' vs 'not logged in'
+  before :each do
+    user = double('user')
+    request.env['warden'].stub :authenticate! => user
+    controller.stub :current_user => user
+  end
 
   it 'should render index page for projects' do
     get :index
@@ -23,17 +25,19 @@ describe ProjectsController do
     expect(response).to render_template 'new'
   end
 
-  context '#show, #edit, #update, #destroy' do
-    before(:each) do
+  context '#destroy' do
+    before :each do
+      @project = double(Project)
+      Project.stub(:find).and_return(@project)
     end
-
-      it 'should delete a project' do
-        project = double(Project)
-        Project.stub(:find).and_return(project)
-
-        expect(project).to receive(:destroy)
-        delete :destroy, {:id => 'test'}
-      end
-
+    it 'should delete a project' do
+      expect(@project).to receive(:destroy)
+      delete :destroy, { :id => 'test' }
+    end
+    it 'should redirect to the index' do
+      allow(@project).to receive(:destroy)
+      delete :destroy, { :id => 'test' }
+      expect(response).to redirect_to(projects_path)
+    end
   end
 end
