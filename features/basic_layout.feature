@@ -16,7 +16,7 @@ Scenario: Load basic design elements
 
 Scenario: Render navigation bar
   Then I should see a navigation bar
-  Then show me the page
+#  Then show me the page
   And I should see a "Our projects" link
   And I should see a "Check in" link
   And I should see a "Sign up" link
