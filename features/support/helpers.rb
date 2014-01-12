@@ -1,9 +1,9 @@
 module Helpers
   def create_visitor
     #@visitor =FactoryGirl(:user)
-    @visitor ||= { :email => "example@example.com",
-                   :password => "changeme",
-                   :password_confirmation => "changeme" }
+    @visitor ||= {:email => "example@example.com",
+                  :password => "changeme",
+                  :password_confirmation => "changeme"}
   end
 
   def find_user
@@ -14,7 +14,7 @@ module Helpers
     create_visitor
     delete_user
     sign_up
-    visit '/users/sign_out'
+    visit destroy_user_session_path
   end
 
   def create_user
@@ -30,21 +30,23 @@ module Helpers
 
   def sign_up
     delete_user
-    visit '/users/sign_up'
-    within ('#wrap') do
-      fill_in "user_email", :with => @visitor[:email]
-      fill_in "user_password", :with => @visitor[:password]
-      fill_in "user_password_confirmation", :with => @visitor[:password_confirmation]
-      click_button "Sign up"
-      find_user
+    visit new_user_registration_path
+    within ('#devise') do
+      fill_in 'Email', :with => @visitor[:email]
+      fill_in 'Password', :with => @visitor[:password]
+      fill_in 'Password confirmation', :with => @visitor[:password_confirmation]
+      click_button 'Sign up'
     end
+    find_user
   end
 
   def sign_in
     visit new_user_session_path
-    fill_in 'user_email', :with => @visitor[:email]
-    fill_in 'user_password', :with => @visitor[:password]
-    click_button 'Sign in'
+    within ('#devise') do
+      fill_in 'user_email', :with => @visitor[:email]
+      fill_in 'user_password', :with => @visitor[:password]
+      click_button 'Sign in'
+    end
   end
 end
 
