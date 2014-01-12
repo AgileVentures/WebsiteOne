@@ -11,7 +11,7 @@ def path_to(page)
     when 'new project' then
       new_project_path
     when 'edit' then
-      edit_project_path(1)
+      edit_project_path(id: 1)
   end
 end
 
