@@ -98,6 +98,13 @@ Scenario: Destroying a project
   Given I am logged in
   And I am on the "projects" page
   Then the Destroy button works for "hello world"
+  And I should see "Project was successfully deleted."
 
+#This need someone to tell how to emulate this behavior
+#Scenario: Destroying a project (bad path)
+#  Given I am logged in
+#  And I am on the "projects" page
+#  Then the Destroy button works for "nonexistent project"
+#  And I should see "Project not found."
 
 

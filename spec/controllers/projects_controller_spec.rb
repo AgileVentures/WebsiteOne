@@ -25,7 +25,16 @@ describe ProjectsController do
     expect(response).to render_template 'new'
   end
 
+  it 'should notice if the project does not exist' do
+    @project = Project.new
+    delete :destroy, { :id => 'nonexistent project' }
+    expect(response).to redirect_to(projects_path)
+    expect(flash[:notice]).to eq 'Project not found.'
+  end
+
   context '#destroy' do
+
+
     before :each do
       @project = double(Project)
       Project.stub(:find).and_return(@project)
@@ -39,5 +48,6 @@ describe ProjectsController do
       delete :destroy, { :id => 'test' }
       expect(response).to redirect_to(projects_path)
     end
+
   end
 end

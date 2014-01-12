@@ -40,13 +40,20 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path
+    redirect_to projects_path, notice: 'Project was successfully deleted.'
   end
+
 
 
   private
   def set_project
-    @project = Project.find(params[:id])
+    begin
+      @project = Project.find(params[:id])
+
+    rescue ActiveRecord::RecordNotFound => e
+      redirect_to projects_path, notice: 'Project not found.'
+    end
+
   end
 
   def project_params
