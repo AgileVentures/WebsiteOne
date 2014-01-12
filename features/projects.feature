@@ -6,9 +6,10 @@ Feature: Create and maintain projects
 Background:
   #TODO set constraint: unique titles?
   Given the follow projects exist:
-    | title       | description          | status   | id |
-    | hello world | greetings earthlings | active   | 1  |
-    | hello mars  | greetings aliens     | inactive | 2  |
+    | title       | description          | status   |
+    | hello world | greetings earthlings | active   |
+    | hello mars  | greetings aliens     | inactive |
+    | hello mars  | greetings aliens     | inactive |
 
 Scenario: List of projects in table layout
   Given  I am on the "home" page
