@@ -16,7 +16,6 @@ When(/^There are projects in the database$/) do
   Project.create(title: "Title 2", description: "Description 2", status: "Status 2")
 end
 
-
 Given(/^the follow projects exist:$/) do |table|
   table.hashes.each do |hash|
     project = Project.create(hash)
@@ -34,6 +33,26 @@ Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
       puts 'OOPS YOU MESSED UP!!!'
       save_and_open_page
   end
+end
+
+When(/^I click the "(.*?)" button for project "(.*?)"$/) do |button, title|
+ id = Project.find_by_title(title).id
+ within("tr##{id}") do
+   click_link button
+ end
+end
+
+# Matches Given I am on.. | When I go to.. | Then I am on..
+Given(/^I (go to|.* on)? the "(.*?)" page for project "(.*?)"$/) do |stay_or_go, page, title|
+  project = Project.find_by_title title
+  method_name = page.downcase + '_project_path'
+  edit_project_path_for_id = send method_name, project
+  visit edit_project_path_for_id if stay_or_go == 'go to'
+  expect(current_fullpath).to eq edit_project_path_for_id
+end
+
+def current_fullpath
+  URI.parse(current_url).request_uri
 end
 
 Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
