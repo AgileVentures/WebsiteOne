@@ -1,11 +1,13 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+
   def index
     @projects = Project.all
-    render 'index'
   end
 
   def show
-    render 'show'
+    set_project
   end
 
   def new
@@ -21,9 +23,37 @@ class ProjectsController < ApplicationController
       end
   end
 
+  def edit
+    set_project
+  end
+
+  def update
+    set_project
+
+    if @project.update_attributes(project_params)
+      redirect_to @project, notice: 'Project was successfully updated.'
+    else
+      # TODO change this to notify for invalid params
+      render 'edit', notice: 'Project was not updated.'
+    end
+  end
+
+  def destroy
+    @project.destroy
+    redirect_to projects_path, notice: 'Project was successfully deleted.'
+  end
+
+
+
   private
   def set_project
-    @project = Project.find(params[:id])
+    begin
+      @project = Project.find(params[:id])
+
+    rescue ActiveRecord::RecordNotFound => e
+      redirect_to projects_path, notice: 'Project not found.'
+    end
+
   end
 
   def project_params

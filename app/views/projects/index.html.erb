@@ -10,7 +10,7 @@
   </thead>
   <tbody>
   <% @projects.each do |project| %>
-    <tr>
+      <tr id="<%=project.id%>" >
       <td><%= project.title %></td>
       <td><%= project.description %></td>
       <td><%= project.status %></td>
