@@ -6,9 +6,9 @@ Feature: Create and maintain projects
 Background:
   #TODO set constraint: unique titles?
   Given the follow projects exist:
-    | title       | description          | status   |
-    | hello world | greetings earthlings | active   |
-    | hello mars  | greetings aliens     | inactive |
+    | title       | description          | status   | id |
+    | hello world | greetings earthlings | active   | 1  |
+    | hello mars  | greetings aliens     | inactive | 2  |
 
 Scenario: List of projects in table layout
   Given  I am on the "home" page
@@ -46,11 +46,9 @@ Scenario: Columns in projects table
   And I should see column "Status"
   And I should see column "Created"
 
-  Scenario: Show, edit, delete buttons in projects table
-  And I am logged in
-
+Scenario: Show, edit, delete buttons in projects table
+  Given I am logged in
   When I go to the "projects" page
-
   Then I should see a "List of Projects" table
   And I should see button "Show"
   And I should see button "Edit"
@@ -60,6 +58,7 @@ Scenario: Creating a new project
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
+
   Then I should see a form for "creating a new project"
   And I should see field "Title"
   And I should see field "Description"
@@ -79,6 +78,21 @@ Scenario: Saving a new project
 #  And I should see "Title 1"
 #  And I should see "Description 1"
 #  And I should see "Status 1"
+
+
+Scenario: Edit page exists
+  Given I am logged in
+  And I am on the "projects" page
+  And I click the first "Edit" button
+  Then I should be on the edit page
+  And I should see form button "Update Project"
+
+Scenario: Saving project edits at Edit page
+  Given I am logged in
+  And I am on the "edit" page
+  And I fill in "Status" with "undetermined"
+  And I click "Update Project"
+  Then I should see "undetermined"
 
 Scenario: Destroying a project
   Given I am logged in

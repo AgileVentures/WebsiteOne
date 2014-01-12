@@ -1,0 +1,9 @@
+<%= form_for @project, :html => { :class => 'form-vertical' } do |f| %>
+    <%= f.label(:title) %>
+    <%= f.text_field(:title) %>
+    <%= f.label(:description) %>
+    <%= f.text_field(:description) %>
+    <%= f.label(:status) %>
+    <%= f.text_field(:status) %>
+    <%= f.submit %>
+<% end %>

@@ -16,6 +16,9 @@ When(/^There are projects in the database$/) do
   Project.create(title: "Title 2", description: "Description 2", status: "Status 2")
 end
 
+Given(/^I click the first "(.*?)" button$/) do |arg1|
+  page.all('table#projects tr a', :text => arg1).first.click
+end
 
 Given(/^the follow projects exist:$/) do |table|
   table.hashes.each do |hash|
