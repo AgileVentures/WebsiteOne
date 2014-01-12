@@ -83,14 +83,14 @@ Scenario: Saving a new project
 Scenario: Edit page exists
   Given I am logged in
   And I am on the "projects" page
-  And I click the first "Edit" button
-  Then I should be on the edit page
+  When I click the "Edit" button for project "hello mars"
+  Then I should be on the "Edit" page for project "hello mars"
   And I should see form button "Update Project"
 
 Scenario: Saving project edits at Edit page
   Given I am logged in
-  And I am on the "edit" page
-  And I fill in "Status" with "undetermined"
+  And I go to the "Edit" page for project "hello mars"
+  When I fill in "Status" with "undetermined"
   And I click "Update Project"
   Then I should see "undetermined"
 
