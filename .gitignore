@@ -26,6 +26,7 @@
 
 # RubyMine project files
 .idea
+/.idea/*
 
 # Textmate project files
 /*.tmproj
@@ -37,3 +38,5 @@
 #/config/application.yml
 .env
 
+# Versioning
+.rvmrc

@@ -1,0 +1,28 @@
+<table id="projects">
+  <thead>
+  <legend>List of Projects</legend>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Created</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.title %></td>
+      <td><%= project.description %></td>
+      <td><%= project.status %></td>
+      <td><%= project.created_at %></td>
+      <td><%= link_to 'Show', project_path(project.id) , type: 'button', :class => 'btn btn-default'%></td>
+      <td><%= link_to 'Edit', edit_project_path(project.id) , type: 'button', :class => 'btn btn-default'%></td>
+      <td><%= link_to 'Destroy', project_path(project.id), type: 'button', class: 'btn btn-default', method: :delete %></td>
+    </tr>
+  <% end %>
+  </tbody>
+
+</table>
+<% if user_signed_in? %>
+<%= link_to 'New Project', new_project_path, :type => 'button', :class => 'btn btn-default'%>
+<% end %>
