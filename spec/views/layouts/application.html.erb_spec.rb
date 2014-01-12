@@ -15,7 +15,8 @@ describe 'layouts/application.html.erb' do
 
   it 'should render links to site features' do
     render
-    rendered.should have_link 'Our projects', :href => '#'
+    #TODO Y replace href with project_path helper
+    rendered.should have_link 'Our projects', :href => projects_url
   end
 
   context 'not signed in as registered user' do
@@ -24,8 +25,7 @@ describe 'layouts/application.html.erb' do
     end
     it 'should render a navigation bar with links' do
       render
-      # https://github.com/jnicklas/capybara/issues/384#issuecomment-1667712
-      Capybara.string(rendered).find('section#header').tap do |header|
+      rendered.within('section#header') do |header|
         header.should have_link 'Check in', :href => new_user_session_path
         header.should have_link 'Sign up', :href => new_user_registration_path
       end
@@ -38,9 +38,11 @@ describe 'layouts/application.html.erb' do
     end
     it 'should render a navigation bar with links' do
       render
-      rendered.should_not have_link 'Check in', :href => new_user_session_path
-      rendered.should_not have_link 'Sign up', :href => new_user_registration_path
-      rendered.should have_link 'My Account', :href => edit_user_registration_path
+      rendered.within('section#header') do |header|
+        header.should_not have_link 'Check in', :href => new_user_session_path
+        header.should_not have_link 'Sign up', :href => new_user_registration_path
+        header.should have_link 'My Account', :href => edit_user_registration_path
+      end
     end
   end
 end
