@@ -35,7 +35,6 @@ describe ProjectsController do
   end
 
   describe '#new' do
-    #TODO YA refactor with doubles
     it 'should render a new project page' do
       get :new
       assigns(:project).should be_a_new(Project)
@@ -105,15 +104,14 @@ describe ProjectsController do
     before(:each) do
       @project = double(Project)
       Project.stub(:find).and_return(@project)
+      get :edit, id: 'show'
     end
 
     it 'renders the edit template' do
-      get :edit, id: 'show'
       expect(response).to render_template 'edit'
     end
 
     it 'assigns the requested project as @project' do
-      get :edit, id: 'show'
       expect(assigns(:project)).to eq(@project)
     end
   end
@@ -123,38 +121,35 @@ describe ProjectsController do
       @project = double(Project)
       Project.stub(:find).and_return(@project)
     end
-    it 'deletes a project' do
+    it 'receives destroy call' do
       expect(@project).to receive(:destroy)
-      delete :destroy, :id => 'test'
-    end
-    it 'redirects to index' do
-      allow(@project).to receive(:destroy)
-      delete :destroy, :id => 'test'
-      expect(response).to redirect_to(projects_path)
-    end
-    it 'raises exception if the project does not exist' do
-      #TODO YA write implementation
-      # unstub :find that was stubbed in before(:each)
-      Project.stub(:find).and_call_original
-
-      #expect { delete :destroy, :id => 'nonexistent project' }.to raise_error(ActiveRecord::RecordNotFound)
-      delete :destroy, :id => 'nonexistent project'
-
-      expect(response).to redirect_to(projects_path)
-      expect(flash[:notice]).to eq 'Project not found.'
+      delete :destroy, id: 'test'
     end
 
-    it 'destroys the requested project' do
-      project = Project.create! valid_attributes
-      expect {
-        delete :destroy, { :id => project.to_param }, valid_session
-      }.to change(Project, :count).by(-1)
+    context 'on successful delete' do
+      before(:each) do
+        @project.stub(:destroy).and_return(true)
+        delete :destroy, id: 'test'
+      end
+      it 'redirects to index' do
+        expect(response).to redirect_to(projects_path)
+      end
+      it 'shows the correct message' do
+        expect(flash[:notice]).to eq 'Project was successfully deleted.'
+      end
     end
 
-    it 'redirects to the projects list' do
-      project = Project.create! valid_attributes
-      delete :destroy, { :id => project.to_param }, valid_session
-      response.should redirect_to(projects_url)
+    context 'on unsuccessful delete' do
+      before do
+        @project.stub(:destroy).and_return(false)
+        delete :destroy, id: 'test'
+      end
+      it 'redirects to index' do
+        expect(response).to redirect_to(projects_path)
+      end
+      it 'shows the correct message' do
+        expect(flash[:notice]).to eq 'Project was not successfully deleted.'
+      end
     end
   end
 
