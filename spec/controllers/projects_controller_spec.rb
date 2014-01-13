@@ -12,48 +12,90 @@ describe ProjectsController do
     controller.stub :current_user => user
   end
 
-  it 'should render index page for projects' do
-    get :index
-    expect(response).to render_template 'index'
+  context '#index' do
+    it 'should render index page for projects' do
+      get :index
+      expect(response).to render_template 'index'
+    end
+
+    it 'should assign variables to be rendered by view' do
+      projects = [double(Project), double(Project)]
+      Project.stub(:all).and_return(projects)
+      get :index
+      expect(assigns(:projects)).to eq projects
+    end
   end
 
-  it 'should assign variables to be rendered by view' do
-    projects = [ double(Project), double(Project) ]
-    Project.stub(:all).and_return(projects)
-    get :index
-    expect(assigns(:projects)).to eq projects
+  context '#new' do
+    it 'should render a new project page' do
+      get :new
+      expect(response).to render_template 'new'
+    end
   end
 
-  it 'should render a new project page' do
-    get :new
-    expect(response).to render_template 'new'
-  end
 
-  it 'should notice if the project does not exist' do
-    @project = Project.new
-    delete :destroy, { :id => 'nonexistent project' }
-    expect(response).to redirect_to(projects_path)
-    expect(flash[:notice]).to eq 'Project not found.'
+  context '#create' do
+    before(:each) do
+      @params = {
+          project: {
+              id: 1,
+              title: 'Title 1',
+              description: 'Description 1',
+              status: 'Status 1'
+          }
+      }
+      @project = mock_model(Project, id: 1)
+      Project.stub(:new).and_return(@project)
+    end
+
+    it 'redirects to show view on successful save' do
+      @project.stub(:save).and_return(true)
+
+      post :create, @params
+
+      expect(response).to redirect_to(project_path(1))
+      #TODO YA add a show view_spec to check if flash is actually displayed
+      expect(flash[:notice]).to eql('Project was successfully created.')
+    end
+    it 'renders failure message on unsuccessful save' do
+      @project.stub(:save).and_return(false)
+
+      post :create, @params
+
+      expect(response).to render_template :new
+      expect(flash[:alert]).to eql('Project was not saved. Please check the input.')
+    end
   end
 
   context '#destroy' do
-
-
     before :each do
       @project = double(Project)
       Project.stub(:find).and_return(@project)
     end
-    it 'should delete a project' do
+    it 'deletes a project' do
       expect(@project).to receive(:destroy)
-      delete :destroy, { :id => 'test' }
+      delete :destroy, :id => 'test'
     end
-    it 'should redirect to the index' do
+    it 'redirects to index' do
       allow(@project).to receive(:destroy)
-      delete :destroy, { :id => 'test' }
+      delete :destroy, :id => 'test'
       expect(response).to redirect_to(projects_path)
     end
+    it 'raises exception if the project does not exist' do
+      #TODO YA write implementation
+      # unstub :find that was stubbed in before(:each)
+      Project.stub(:find).and_call_original
 
+      #expect { delete :destroy, :id => 'nonexistent project' }.to raise_error(ActiveRecord::RecordNotFound)
+      delete :destroy, :id => 'nonexistent project'
+
+      expect(response).to redirect_to(projects_path)
+      expect(flash[:notice]).to eq 'Project not found.'
+    end
   end
+
+#TODO YA need to refactor the specs below, as there are duplication with the above specs
+#TODO YA need to refactor to account for introduced model validations
   describe 'GET index' do
     it 'assigns all projects as @projects' do
       project = Project.create! valid_attributes
@@ -171,4 +213,5 @@ describe ProjectsController do
       response.should redirect_to(projects_url)
     end
   end
+
 end
