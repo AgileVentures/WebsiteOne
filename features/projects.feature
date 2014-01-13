@@ -8,7 +8,7 @@ Feature: Create and maintain projects
 
 Background:
   #TODO set constraint: unique titles?
-  Given the follow projects exist:
+  Given the following projects exist:
     | title       | description          | status   |
     | hello world | greetings earthlings | active   |
     | hello mars  | greetings aliens     | inactive |

@@ -16,7 +16,7 @@ When(/^There are projects in the database$/) do
   Project.create(title: "Title 2", description: "Description 2", status: "Status 2")
 end
 
-Given(/^the follow projects exist:$/) do |table|
+Given(/^the following projects exist:$/) do |table|
   table.hashes.each do |hash|
     project = Project.create(hash)
     project.save

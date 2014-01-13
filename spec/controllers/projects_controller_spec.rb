@@ -4,6 +4,7 @@ describe ProjectsController do
 
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
+    #TODO YA refactor to a helper method to stub the logged in user
     user = double('user')
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user
@@ -56,38 +57,64 @@ describe ProjectsController do
       Project.stub(:new).and_return(@project)
     end
 
-    it 'redirects to show view on successful save' do
-      @project.stub(:save).and_return(true)
-
-      post :create, @params
-
-      expect(response).to redirect_to(project_path(1))
-      #TODO YA add a show view_spec to check if flash is actually displayed
-      expect(flash[:notice]).to eql('Project was successfully created.')
-    end
-
-    it 'renders new template with failure message on unsuccessful save' do
-      @project.stub(:save).and_return(false)
-
-      post :create, @params
-
-      expect(response).to render_template :new
-      expect(flash[:alert]).to eql('Project was not saved. Please check the input.')
-    end
-
     it 'assigns a newly created project as @project' do
       @project.stub(:save)
       post :create, @params
       expect(assigns(:project)).to eq @project
     end
+
+    context 'successful save' do
+
+      it 'redirects to show' do
+        @project.stub(:save).and_return(true)
+
+        post :create, @params
+
+        expect(response).to redirect_to(project_path(1))
+      end
+      it 'assigns successful message' do
+        @project.stub(:save).and_return(true)
+
+        post :create, @params
+
+        #TODO YA add a show view_spec to check if flash is actually displayed
+        expect(flash[:notice]).to eql('Project was successfully created.')
+      end
+    end
+
+    context 'unsuccessful save' do
+      it 'renders new template' do
+        @project.stub(:save).and_return(false)
+
+        post :create, @params
+
+        expect(response).to render_template :new
+      end
+
+      it 'assigns failure message' do
+        @project.stub(:save).and_return(false)
+
+        post :create, @params
+
+        expect(flash[:alert]).to eql('Project was not saved. Please check the input.')
+      end
+    end
   end
 
   describe '#edit' do
-#TODO YA refactor
+    before(:each) do
+      @project = double(Project)
+      Project.stub(:find).and_return(@project)
+    end
+
+    it 'renders the edit template' do
+      get :edit, id: 'show'
+      expect(response).to render_template 'edit'
+    end
+
     it 'assigns the requested project as @project' do
-      project = Project.create! valid_attributes
-      get :edit, { :id => project.to_param }, valid_session
-      assigns(:project).should eq(project)
+      get :edit, id: 'show'
+      expect(assigns(:project)).to eq(@project)
     end
   end
 
