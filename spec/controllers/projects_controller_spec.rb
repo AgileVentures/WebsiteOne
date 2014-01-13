@@ -12,7 +12,7 @@ describe ProjectsController do
     controller.stub :current_user => user
   end
 
-  context '#index' do
+  describe '#index' do
     it 'should render index page for projects' do
       get :index
       expect(response).to render_template 'index'
@@ -26,15 +26,26 @@ describe ProjectsController do
     end
   end
 
-  context '#new' do
+  describe '#show' do
+
+    #TODO YA refactor with doubles
+    it 'assigns the requested project as @project' do
+      project = Project.create! valid_attributes
+      get :show, { :id => project.to_param }, valid_session
+      assigns(:project).should eq(project)
+    end
+  end
+
+  describe '#new' do
+    #TODO YA refactor with doubles
     it 'should render a new project page' do
       get :new
+      assigns(:project).should be_a_new(Project)
       expect(response).to render_template 'new'
     end
   end
 
-
-  context '#create' do
+  describe '#create' do
     before(:each) do
       @params = {
           project: {
@@ -65,9 +76,55 @@ describe ProjectsController do
       expect(response).to render_template :new
       expect(flash[:alert]).to eql('Project was not saved. Please check the input.')
     end
+
+    describe 'POST create' do
+      describe 'with valid params' do
+        it 'creates a new Project' do
+          expect {
+            post :create, { :project => valid_attributes }, valid_session
+          }.to change(Project, :count).by(1)
+        end
+
+        it 'assigns a newly created project as @project' do
+          post :create, { :project => valid_attributes }, valid_session
+          assigns(:project).should be_a(Project)
+          assigns(:project).should be_persisted
+        end
+
+        it 'redirects to the created project' do
+          post :create, { :project => valid_attributes }, valid_session
+          response.should redirect_to(Project.last)
+        end
+      end
+
+      describe 'with invalid params' do
+        it 'assigns a newly created but unsaved project as @project' do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Project.any_instance.stub(:save).and_return(false)
+          post :create, { :project => { "title" => "invalid value" } }, valid_session
+          assigns(:project).should be_a_new(Project)
+        end
+
+        it 're-renders the new template' do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Project.any_instance.stub(:save).and_return(false)
+          post :create, { :project => { "title" => "invalid value" } }, valid_session
+          response.should render_template("new")
+        end
+      end
+    end
   end
 
-  context '#destroy' do
+  describe '#edit' do
+#TODO YA refactor
+    it 'assigns the requested project as @project' do
+      project = Project.create! valid_attributes
+      get :edit, { :id => project.to_param }, valid_session
+      assigns(:project).should eq(project)
+    end
+  end
+
+  describe '#destroy' do
     before :each do
       @project = double(Project)
       Project.stub(:find).and_return(@project)
@@ -92,90 +149,37 @@ describe ProjectsController do
       expect(response).to redirect_to(projects_path)
       expect(flash[:notice]).to eq 'Project not found.'
     end
+
+    it 'destroys the requested project' do
+      project = Project.create! valid_attributes
+      expect {
+        delete :destroy, { :id => project.to_param }, valid_session
+      }.to change(Project, :count).by(-1)
+    end
+
+    it 'redirects to the projects list' do
+      project = Project.create! valid_attributes
+      delete :destroy, { :id => project.to_param }, valid_session
+      response.should redirect_to(projects_url)
+    end
   end
 
 #TODO YA need to refactor the specs below, as there are duplication with the above specs
 #TODO YA need to refactor to account for introduced model validations
-  describe 'GET index' do
-    it 'assigns all projects as @projects' do
-      project = Project.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:projects).should eq([project])
-    end
-  end
 
-  describe 'GET show' do
-    it 'assigns the requested project as @project' do
-      project = Project.create! valid_attributes
-      get :show, {:id => project.to_param}, valid_session
-      assigns(:project).should eq(project)
-    end
-  end
 
-  describe 'GET new' do
-    it 'assigns a new project as @project' do
-      get :new, {}, valid_session
-      assigns(:project).should be_a_new(Project)
-    end
-  end
-
-  describe 'GET edit' do
-    it 'assigns the requested project as @project' do
-      project = Project.create! valid_attributes
-      get :edit, {:id => project.to_param}, valid_session
-      assigns(:project).should eq(project)
-    end
-  end
-
-  describe 'POST create' do
-    describe 'with valid params' do
-      it 'creates a new Project' do
-        expect {
-          post :create, {:project => valid_attributes}, valid_session
-        }.to change(Project, :count).by(1)
-      end
-
-      it 'assigns a newly created project as @project' do
-        post :create, {:project => valid_attributes}, valid_session
-        assigns(:project).should be_a(Project)
-        assigns(:project).should be_persisted
-      end
-
-      it 'redirects to the created project' do
-        post :create, {:project => valid_attributes}, valid_session
-        response.should redirect_to(Project.last)
-      end
-    end
-
-    describe 'with invalid params' do
-      it 'assigns a newly created but unsaved project as @project' do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Project.any_instance.stub(:save).and_return(false)
-        post :create, {:project => { "title" => "invalid value" }}, valid_session
-        assigns(:project).should be_a_new(Project)
-      end
-
-      it 're-renders the new template' do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Project.any_instance.stub(:save).and_return(false)
-        post :create, {:project => { "title" => "invalid value" }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe 'PUT update' do
+  describe '#update' do
     describe 'with valid params' do
 
       it 'assigns the requested project as @project' do
         project = Project.create! valid_attributes
-        put :update, {:id => project.to_param, :project => valid_attributes}, valid_session
+        put :update, { :id => project.to_param, :project => valid_attributes }, valid_session
         assigns(:project).should eq(project)
       end
 
       it 'redirects to the project' do
         project = Project.create! valid_attributes
-        put :update, {:id => project.to_param, :project => valid_attributes}, valid_session
+        put :update, { :id => project.to_param, :project => valid_attributes }, valid_session
         response.should redirect_to(project)
       end
     end
@@ -185,7 +189,7 @@ describe ProjectsController do
         project = Project.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Project.any_instance.stub(:save).and_return(false)
-        put :update, {:id => project.to_param, :project => { "title" => "invalid value" }}, valid_session
+        put :update, { :id => project.to_param, :project => { "title" => "invalid value" } }, valid_session
         assigns(:project).should eq(project)
       end
 
@@ -193,25 +197,11 @@ describe ProjectsController do
         project = Project.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Project.any_instance.stub(:save).and_return(false)
-        put :update, {:id => project.to_param, :project => { "title" => "invalid value" }}, valid_session
+        put :update, { :id => project.to_param, :project => { "title" => "invalid value" } }, valid_session
         response.should render_template("edit")
       end
     end
   end
 
-  describe 'DELETE destroy' do
-    it 'destroys the requested project' do
-      project = Project.create! valid_attributes
-      expect {
-        delete :destroy, {:id => project.to_param}, valid_session
-      }.to change(Project, :count).by(-1)
-    end
-
-    it 'redirects to the projects list' do
-      project = Project.create! valid_attributes
-      delete :destroy, {:id => project.to_param}, valid_session
-      response.should redirect_to(projects_url)
-    end
-  end
 
 end
