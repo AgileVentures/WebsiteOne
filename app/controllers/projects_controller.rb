@@ -29,12 +29,12 @@ class ProjectsController < ApplicationController
   end
 
   def update
-
     if @project.update_attributes(project_params)
       redirect_to @project, notice: 'Project was successfully updated.'
     else
       # TODO change this to notify for invalid params
-      render 'edit', notice: 'Project was not updated.'
+      flash.now[:alert] =  'Project was not updated.'
+      render 'edit'
     end
   end
 

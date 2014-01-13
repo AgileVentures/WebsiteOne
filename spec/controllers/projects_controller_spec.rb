@@ -4,7 +4,7 @@ describe ProjectsController do
 
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
-    #TODO YA refactor to a helper method to stub the logged in user
+    # stubbing out devise methods to simulate authenticated user
     user = double('user')
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user
@@ -153,41 +153,44 @@ describe ProjectsController do
     end
   end
 
-#TODO YA need to refactor the specs below, as there are duplication with the above specs
-#TODO YA need to refactor to account for introduced model validations
-
-
   describe '#update' do
-    describe 'with valid params' do
+    before(:each) do
+      @project = mock_model(Project)
+      Project.stub(:find).and_return(@project)
+    end
 
-      it 'assigns the requested project as @project' do
-        project = Project.create! valid_attributes
-        put :update, { :id => project.to_param, :project => valid_attributes }, valid_session
-        assigns(:project).should eq(project)
+    it 'assigns the requested project as @project' do
+      @project.stub(:update_attributes)
+      put :update, id: 'update', project: { title: ''}
+      expect(assigns(:project)).to eq(@project)
+    end
+
+    context 'successful update' do
+      before(:each) do
+        @project.stub(:update_attributes).and_return(true)
+        put :update, id: 'update', project: { title: ''}
       end
 
       it 'redirects to the project' do
-        project = Project.create! valid_attributes
-        put :update, { :id => project.to_param, :project => valid_attributes }, valid_session
-        response.should redirect_to(project)
+        expect(response).to redirect_to(@project)
+      end
+
+      it 'shows a success message' do
+        expect(flash[:notice]).to eq('Project was successfully updated.')
       end
     end
 
-    describe 'with invalid params' do
-      it 'assigns the project as @project' do
-        project = Project.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Project.any_instance.stub(:save).and_return(false)
-        put :update, { :id => project.to_param, :project => { "title" => "invalid value" } }, valid_session
-        assigns(:project).should eq(project)
+    context 'unsuccessful save' do
+      before(:each) do
+        @project.stub(:update_attributes).and_return(false)
+        put :update, id: 'update', project: { title: ''}
+      end
+      it 'renders edit' do
+        expect(response).to render_template(:edit)
       end
 
-      it 're-renders the edit template' do
-        project = Project.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Project.any_instance.stub(:save).and_return(false)
-        put :update, { :id => project.to_param, :project => { "title" => "invalid value" } }, valid_session
-        response.should render_template("edit")
+      it 'shows an unsuccessful message' do
+        expect(flash[:alert]).to eq('Project was not updated.')
       end
     end
   end
