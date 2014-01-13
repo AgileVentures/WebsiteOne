@@ -63,7 +63,7 @@ Scenario: Creating a new project
   And I should see field "Title"
   And I should see field "Description"
   And I should see field "Status"
-  And I should see form button "Create"
+  And I should see form button "Submit"
 
 Scenario: Saving a new project
   Given I am logged in
@@ -72,7 +72,7 @@ Scenario: Saving a new project
   When I fill in "Title" with "Title 1"
   And I fill in "Description" with "Description 1"
   And I fill in "Status" with "Status 1"
-  And I click the "Create" button
+  And I click the "Submit" button
   Then I should see "Project was successfully created."
 #  And I am redirected to the "projects" page
 #  And I should see "Title 1"
@@ -85,13 +85,13 @@ Scenario: Edit page exists
   And I am on the "projects" page
   When I click the "Edit" button for project "hello mars"
   Then I should be on the "Edit" page for project "hello mars"
-  And I should see form button "Update Project"
+  And I should see form button "Submit"
 
 Scenario: Saving project edits at Edit page
   Given I am logged in
   When I go to the "Edit" page for project "hello mars"
   When I fill in "Status" with "undetermined"
-  Then I click "Update Project"
+  Then I click "Submit"
   And I should see "undetermined"
 
 Scenario: Destroying a project
