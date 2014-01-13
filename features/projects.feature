@@ -46,11 +46,9 @@ Scenario: Columns in projects table
   And I should see column "Status"
   And I should see column "Created"
 
-  Scenario: Show, edit, delete buttons in projects table
-  And I am logged in
-
+Scenario: Show, edit, delete buttons in projects table
+  Given I am logged in
   When I go to the "projects" page
-
   Then I should see a "List of Projects" table
   And I should see button "Show"
   And I should see button "Edit"
@@ -60,6 +58,7 @@ Scenario: Creating a new project
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
+
   Then I should see a form for "creating a new project"
   And I should see field "Title"
   And I should see field "Description"
@@ -75,11 +74,30 @@ Scenario: Saving a new project
   And I fill in "Status" with "Status 1"
   And I click the "Create" button
   Then I should see "Project was successfully created."
+#  And I am redirected to the "projects" page
+#  And I should see "Title 1"
+#  And I should see "Description 1"
+#  And I should see "Status 1"
+
+
+Scenario: Edit page exists
+  Given I am logged in
+  And I am on the "projects" page
+  When I click the "Edit" button for project "hello mars"
+  Then I should be on the "Edit" page for project "hello mars"
+  And I should see form button "Update Project"
+
+Scenario: Saving project edits at Edit page
+  Given I am logged in
+  When I go to the "Edit" page for project "hello mars"
+  When I fill in "Status" with "undetermined"
+  Then I click "Update Project"
+  And I should see "undetermined"
 
 Scenario: Destroying a project
   Given I am logged in
   And I am on the "projects" page
-  Then the "destroy" button works for "hello world"
+  Then the Destroy button works for "hello world"
 
 
 
