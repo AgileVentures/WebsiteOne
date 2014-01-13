@@ -6,6 +6,8 @@ html, body {
     /* The html and body elements cannot have any padding or margin. */
 }
 
+
+
 /* Wrapper for page content to push down footer */
 
 #wrap {
@@ -254,3 +256,22 @@ html, body {
         margin: 0 30px 0 0; }
     #footer .credits {
         margin-top: 20px; } }
+
+
+.form-frame {
+    padding: 30px;
+    max-width: 400px;
+    border-radius: 2px;
+    background: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-frame input[type=text], .form-frame input[type=email], .form-frame textarea {
+    background: rgb(235, 241, 245);
+    color: rgb(36, 39, 41);
+}
+
+.form-frame  input:focus, .form-frame  textarea:focus {
+    outline: 0;
+    background: #FFF;
+}
