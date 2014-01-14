@@ -1,23 +1,26 @@
-<table id="projects">
+<table id="projects" class="table table-striped">
   <thead>
   <legend>List of Projects</legend>
   <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Status</th>
-    <th>Created</th>
+    <th style="width:150px"><strong>Title</strong></th>
+    <th style="width:250px">Description</th>
+    <th style="width:100px">Status</th>
+    <th style="width:100px">Created</th>
+    <th style="width:15px"></th>
+    <th style="width:15px"></th>
+    <th style="width:15px"></th>
   </tr>
   </thead>
   <tbody>
   <% @projects.each do |project| %>
       <tr id="<%=project.id%>" >
-      <td><%= project.title %></td>
+      <td><strong><%= project.title %></strong></td>
       <td><%= project.description %></td>
       <td><%= project.status %></td>
-      <td><%= project.created_at %></td>
-      <td><%= link_to 'Show', project_path(project.id) , type: 'button', :class => 'btn btn-default'%></td>
-      <td><%= link_to 'Edit', edit_project_path(project.id) , type: 'button', :class => 'btn btn-default'%></td>
-      <td><%= link_to 'Destroy', project_path(project.id), type: 'button', class: 'btn btn-default', method: :delete %></td>
+      <td><%= project.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= link_to 'Show', project_path(project.id) , type: 'button', :class => 'btn btn-success btn-xs'%></td>
+      <td><%= link_to 'Edit', edit_project_path(project.id) , type: 'button', :class => 'btn btn-primary btn-xs'%></td>
+      <td><%= link_to 'Destroy', project_path(project.id), type: 'button', class: 'btn btn-danger btn-xs', method: :delete %></td>
     </tr>
   <% end %>
   </tbody>

@@ -1,9 +1,23 @@
-<%= form_for @project, :html => { :class => 'form-vertical' } do |f| %>
-    <%= f.label(:title) %>
-    <%= f.text_field(:title) %>
-    <%= f.label(:description) %>
-    <%= f.text_field(:description) %>
-    <%= f.label(:status) %>
-    <%= f.text_field(:status) %>
-    <%= f.submit %>
-<% end %>
+<div class='row'>
+  <div class='col-sm-6'>
+    <%= form_for @project, :html => { :class => 'form-vertical' } do |f| %>
+        <div class='form-group'>
+          <%= f.label :title %>
+          <%= f.text_field :title, :class => 'form-control', placeholder: 'Name' %>
+        </div>
+        <div class='form-group'>
+          <%= f.label :description %>
+          <%= f.text_area :description, :class => 'form-control',  'rows' => 10, placeholder: 'Description'%>
+        </div>
+        <div class='form-group'>
+          <%= f.label :status %>
+          <%= f.text_field :status, :class => 'form-control', placeholder: 'Group url' %>
+        </div>
+        <div class='form-group'>
+          <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+

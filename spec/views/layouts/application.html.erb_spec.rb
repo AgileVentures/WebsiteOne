@@ -19,6 +19,13 @@ describe 'layouts/application.html.erb' do
     rendered.should have_link 'Our projects', :href => projects_path
   end
 
+  it 'should render a footer' do
+    render
+    rendered.should have_selector('footer')
+    rendered.should have_text ('AgileVentures - Crowdsourced Learning')
+  end
+
+
   context 'not signed in as registered user' do
     before :each do
       view.stub(:user_signed_in?).and_return(false)

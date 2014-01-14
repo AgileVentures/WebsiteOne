@@ -12,3 +12,9 @@
  *= require_tree .
  */
 @import "bootstrap";
+
+.signin {
+  h2 { margin-top: 0; }
+  form { margin-bottom: 20px; }
+  .glyphicon { top: 0; }
+}

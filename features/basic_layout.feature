@@ -21,4 +21,8 @@ Scenario: Render navigation bar
   And I should see a "Check in" link
   And I should see a "Sign up" link
 
+  Scenario: Render footer
+    And I should see "AgileVentures" in footer
+    And I should see "Crowdsourced Learning" in footer
+
 
