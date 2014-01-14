@@ -76,16 +76,13 @@ Scenario: Creating a new project
   And I follow "New Project"
 
   Then I should see a form for "creating a new project"
-  When I fill in "Title" with "Title 1"
-  And I fill in "Description" with "Description 1"
-  And I fill in "Status" with "Status 1"
-  And I click the "Submit" button
 
-  Then I am redirected to the "projects" page
-  And I should see "Project was successfully created."
-  And I should see "Title 1"
-  And I should see "Description 1"
-  And I should see "Status 1"
+Scenario: Edit page exists
+  Given I am logged in
+  And I am on the "projects" page
+  When I click the "Edit" button for project "hello mars"
+  Then I am on the "Edit" page for project "hello mars"
+  And I should see form button "Submit"
 
 Scenario: Updating a project
   Given I am logged in
@@ -109,6 +106,12 @@ Scenario: Saving a project: show successful message
   And I fill in "Status" with "Status 1"
   And I click the "Submit" button
 
+  Then I am redirected to the "projects" page
+  And I should see "Project was successfully created."
+  And I should see "Title 1"
+  And I should see "Description 1"
+  And I should see "Status 1"
+
 Scenario: Saving a project: show error message
   Given I am logged in
   And I am on the "projects" page
@@ -118,13 +121,6 @@ Scenario: Saving a project: show error message
   And I click the "Submit" button
 
   Then I should see "Project was not saved. Please check the input."
-
-Scenario: Edit page exists
-  Given I am logged in
-  And I am on the "projects" page
-  When I click the "Edit" button for project "hello mars"
-  Then I am on the "Edit" page for project "hello mars"
-  And I should see form button "Submit"
 
 Scenario: Show page has a return link
   Given I am on the "Show" page for project "hello mars"
