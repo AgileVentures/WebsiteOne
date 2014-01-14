@@ -82,6 +82,12 @@ Scenario: Creating a new project
   And I should see field "Status"
   And I should see form button "Submit"
 
+  Then I am redirected to the "projects" page
+  And I should see "Project was successfully created."
+  And I should see "Title 1"
+  And I should see "Description 1"
+  And I should see "Status 1"
+
 Scenario: Saving a new project: show successful message
   Given I am logged in
   And I am on the "projects" page
@@ -92,11 +98,6 @@ Scenario: Saving a new project: show successful message
   And I fill in "Status" with "Status 1"
   And I click the "Submit" button
 
-  Then I should see "Project was successfully created."
-#  And I am redirected to the "projects" page
-#  And I should see "Title 1"
-#  And I should see "Description 1"
-#  And I should see "Status 1"
 
 Scenario: Saving a new project: show error message
   Given I am logged in
