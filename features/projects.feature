@@ -117,7 +117,7 @@ Scenario: Edit page exists
   Given I am logged in
   And I am on the "projects" page
   When I click the "Edit" button for project "hello mars"
-  Then I should be on the "Edit" page for project "hello mars"
+  Then I am on the "Edit" page for project "hello mars"
   And I should see form button "Submit"
 
 Scenario: Show page has a return link

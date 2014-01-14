@@ -35,13 +35,14 @@ Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
   end
 end
 
-When(/^I click the "(.*?)" button for project "(.*?)"$/) do |button, title|
- id = Project.find_by_title(title).id
- within("tr##{id}") do
-   click_link button
- end
+When(/^I click the "(.*?)" button for project "(.*?)"$/) do |button, project_name|
+  id = Project.find_by_title(project_name).id
+  within("tr##{id}") do
+    click_link button
+  end
 end
 
+#TODO YA conisder a simpler version below
 # Matches Given I am on.. | When I go to.. | Then I am on..
 #Given(/^I (go to|.* on)? the "(.*?)" page for project "(.*?)"$/) do |stay_or_go, page, title|
 #  project = Project.find_by_title title
@@ -51,12 +52,14 @@ end
 #  expect(current_fullpath).to eq edit_project_path_for_id
 #end
 
-Given(/^I am on the "(.*?)" page for project "(.*?)"$/) do |pagename, project|
+Given(/^I am on the "(.*?)" page for project "(.*?)"$/) do |page_name, project_name|
   steps %Q{
     Given I am logged in
     And I am on the "projects" page
-    And I click the "#{pagename}" button for project "#{project}"
+    And I click the "#{page_name}" button for project "#{project_name}"
   }
+  id = Project.find_by_title(project_name).id
+  expect(current_path).to eq(path_to(page_name, id))
 end
 
 def current_fullpath
@@ -70,4 +73,4 @@ Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
       expect { click_link "Destroy" }.to change(Project, :count).by(-1)
     end
   end
- end
+end
