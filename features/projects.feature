@@ -132,6 +132,11 @@ Scenario: Show page has a return link
   When I click the "Back" button
   Then I am redirected to the "projects" page
 
+  Scenario: Edit page has a return link
+    Given I am on the "Edit" page for project "hello mars"
+    When I click the "Back" button
+    Then I am redirected to the "projects" page
+
 Scenario: Destroying a project: successful
   Given I am logged in
   And I am on the "projects" page
