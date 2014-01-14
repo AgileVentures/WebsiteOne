@@ -19,12 +19,11 @@ end
 Given(/^the following projects exist:$/) do |table|
   table.hashes.each do |hash|
     project = Project.create(hash)
-    project.save
+    project.save!
   end
 end
 
 Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
-  #TODO YA check if capybara has form lookup method
   case form_purpose
     when 'creating a new project'
       page.should have_text form_purpose
@@ -32,12 +31,12 @@ Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
   end
 end
 
-When(/^I click the "(.*?)" button for project "(.*?)"$/) do |button, project_name|
+When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project_name|
   project = Project.find_by_title(project_name)
 
   if project
     within("tr##{project.id}") do
-      click_link button
+      click_link_or_button button
     end
   else
     visit path_to(button, 'non-existent')
@@ -54,7 +53,7 @@ end
 #  expect(current_fullpath).to eq edit_project_path_for_id
 #end
 
-Given(/^I am on the "(.*?)" page for project "(.*?)"$/) do |page_name, project_name|
+Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |page_name, project_name|
   steps %Q{
     Given I am logged in
     And I am on the "projects" page

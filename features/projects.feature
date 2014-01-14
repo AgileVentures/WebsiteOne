@@ -87,17 +87,17 @@ Scenario: Creating a new project
   And I should see "Description 1"
   And I should see "Status 1"
 
-  Scenario: Updating a project
-    Given I am logged in
-    And I am on the "projects" page
-    When I click the "Edit" button for project "hello mars"
+Scenario: Updating a project
+  Given I am logged in
+  And I am on the "projects" page
+  When I click the "Edit" button for project "hello mars"
 
-    And I fill in "Description" with "Hello, Uranus!"
-    And I click the "Submit" button
+  And I fill in "Description" with "Hello, Uranus!"
+  And I click the "Submit" button
 
-    Then I am redirected to the "projects" page
-    And I should see "Project was successfully updated."
-    And I should see "Hello, Uranus!"
+  Then I am redirected to the "projects" page
+  And I should see "Project was successfully updated."
+  And I should see "Hello, Uranus!"
 
 Scenario: Saving a project: show successful message
   Given I am logged in
@@ -108,7 +108,6 @@ Scenario: Saving a project: show successful message
   And I fill in "Description" with "Description 1"
   And I fill in "Status" with "Status 1"
   And I click the "Submit" button
-
 
 Scenario: Saving a project: show error message
   Given I am logged in
@@ -132,10 +131,10 @@ Scenario: Show page has a return link
   When I click the "Back" button
   Then I am redirected to the "projects" page
 
-  Scenario: Edit page has a return link
-    Given I am on the "Edit" page for project "hello mars"
-    When I click the "Back" button
-    Then I am redirected to the "projects" page
+Scenario: Edit page has a return link
+  Given I am on the "Edit" page for project "hello mars"
+  When I click the "Back" button
+  Then I am redirected to the "projects" page
 
 Scenario: Destroying a project: successful
   Given I am logged in
@@ -146,13 +145,13 @@ Scenario: Destroying a project: successful
   Then I am redirected to the "projects" page
   And I should see "Project was successfully deleted."
 
- Scenario: Requesting action for non-existing project
-    Given I am logged in
-    And I am on the "projects" page
+Scenario: Requesting action for non-existing project
+  Given I am logged in
+  And I am on the "projects" page
 
-    When I click the "Edit" button for project "Non-existent"
+  When I click the "Edit" button for project "Non-existent"
 
-    Then I am redirected to the "projects" page
-    And I should see "Project not found."
+  Then I am redirected to the "projects" page
+  And I should see "Project not found."
 
 
