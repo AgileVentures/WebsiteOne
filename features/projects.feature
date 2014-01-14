@@ -1,3 +1,6 @@
+#TODO YA consider refactoring multiple steps of "I should see a button",
+#into plural version of "I should see buttons"
+
 Feature: Create and maintain projects
   As a member of AgileVentures
   So that I can participate in AgileVentures activities
@@ -5,7 +8,7 @@ Feature: Create and maintain projects
 
 Background:
   #TODO set constraint: unique titles?
-  Given the follow projects exist:
+  Given the following projects exist:
     | title       | description          | status   |
     | hello world | greetings earthlings | active   |
     | hello mars  | greetings aliens     | inactive |
@@ -32,10 +35,16 @@ Scenario: See a list of current projects
   And I should see "Description 2"
   And I should see "Status 2"
 
+#TODO YA Consider refactoring happy and sad scenarios into one scenario outline
 Scenario: Show New Project button if user is logged in
   When I am logged in
   And I am on the "projects" page
-  Then I should see a button "New Project"
+  Then I should see button "New Project"
+
+Scenario: Do not show New Project button if user is not logged in
+  Given I am not logged in
+  When I am on the "projects" page
+  Then I should not see button "New Project"
 
 Scenario: Columns in projects table
   When I go to the "projects" page
@@ -46,13 +55,21 @@ Scenario: Columns in projects table
   And I should see column "Status"
   And I should see column "Created"
 
-Scenario: Show, edit, delete buttons in projects table
+Scenario: Display Show, edit, delete buttons in projects table
   Given I am logged in
   When I go to the "projects" page
   Then I should see a "List of Projects" table
   And I should see button "Show"
   And I should see button "Edit"
   And I should see button "Destroy"
+
+Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
+  Given I am not logged in
+  When I go to the "projects" page
+  Then I should see a "List of Projects" table
+  And I should not see button "Show"
+  And I should not see button "Edit"
+  And I should not see button "Destroy"
 
 Scenario: Creating a new project
   Given I am logged in
@@ -65,15 +82,31 @@ Scenario: Creating a new project
   And I should see field "Status"
   And I should see form button "Submit"
 
-Scenario: Saving a new project
+Scenario: Saving a new project: show successful message
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
+
   When I fill in "Title" with "Title 1"
   And I fill in "Description" with "Description 1"
   And I fill in "Status" with "Status 1"
   And I click the "Submit" button
+
   Then I should see "Project was successfully created."
+#  And I am redirected to the "projects" page
+#  And I should see "Title 1"
+#  And I should see "Description 1"
+#  And I should see "Status 1"
+
+Scenario: Saving a new project: show error message
+  Given I am logged in
+  And I am on the "projects" page
+  And I follow "New Project"
+
+  When I fill in "Title" with ""
+  And I click the "Submit" button
+
+  Then I should see "Project was not saved. Please check the input."
 #  And I am redirected to the "projects" page
 #  And I should see "Title 1"
 #  And I should see "Description 1"
@@ -100,8 +133,8 @@ Scenario: Destroying a project
   Then the Destroy button works for "hello world"
   And I should see "Project was successfully deleted."
 
-#This need someone to tell how to emulate this behavior
-#Scenario: Destroying a project (bad path)
+#TODO YA need to refactor the step
+#Scenario: Destroy project: shows error if project does not exist
 #  Given I am logged in
 #  And I am on the "projects" page
 #  Then the Destroy button works for "nonexistent project"

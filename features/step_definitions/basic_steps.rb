@@ -13,10 +13,13 @@ def path_to(page)
   end
 end
 
-Then /^I should see a button "([^"]*)"$/ do |name|
-  page.should have_link name
+Then /^I should( not)? see button "([^"]*)"$/ do |negative, name|
+  if negative
+    page.should_not have_link name
+  else
+    page.should have_link name
+  end
 end
-
 
 Given(/^I visit the site$/) do
   visit root_path
@@ -75,10 +78,6 @@ end
 
 Then(/^I should see field "([^"]*)"$/) do |field|
   page.should have_field(field)
-end
-
-When(/^I should see button "([^"]*)"$/) do |link|
-  page.should have_link link
 end
 
 When(/^I should see form button "([^"]*)"$/) do |button|
