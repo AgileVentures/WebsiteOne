@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update_attributes(project_params)
-      redirect_to @project, notice: 'Project was successfully updated.'
+      redirect_to projects_path, notice: 'Project was successfully updated.'
     else
       # TODO change this to notify for invalid params
       flash.now[:alert] =  'Project was not updated.'

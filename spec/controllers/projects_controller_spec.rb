@@ -172,7 +172,7 @@ describe ProjectsController do
       end
 
       it 'redirects to the project' do
-        expect(response).to redirect_to(@project)
+        expect(response).to redirect_to(projects_path)
       end
 
       it 'shows a success message' do

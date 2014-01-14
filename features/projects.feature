@@ -88,7 +88,19 @@ Scenario: Creating a new project
   And I should see "Description 1"
   And I should see "Status 1"
 
-Scenario: Saving a new project: show successful message
+  Scenario: Updating a project
+    Given I am logged in
+    And I am on the "projects" page
+    When I click the "Edit" button for project "hello mars"
+
+    And I fill in "Description" with "Hello, Uranus!"
+    And I click the "Submit" button
+
+    Then I am redirected to the "projects" page
+    And I should see "Project was successfully created."
+    And I should see "Hello, Uranus!"
+
+Scenario: Saving a project: show successful message
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
@@ -99,7 +111,7 @@ Scenario: Saving a new project: show successful message
   And I click the "Submit" button
 
 
-Scenario: Saving a new project: show error message
+Scenario: Saving a project: show error message
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
@@ -108,11 +120,6 @@ Scenario: Saving a new project: show error message
   And I click the "Submit" button
 
   Then I should see "Project was not saved. Please check the input."
-#  And I am redirected to the "projects" page
-#  And I should see "Title 1"
-#  And I should see "Description 1"
-#  And I should see "Status 1"
-
 
 Scenario: Edit page exists
   Given I am logged in
