@@ -16,7 +16,7 @@ When(/^There are projects in the database$/) do
   Project.create(title: "Title 2", description: "Description 2", status: "Status 2")
 end
 
-Given(/^the follow projects exist:$/) do |table|
+Given(/^the following projects exist:$/) do |table|
   table.hashes.each do |hash|
     project = Project.create(hash)
     project.save
@@ -56,8 +56,10 @@ def current_fullpath
 end
 
 Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
-  id = Project.find_by_title(project_title).id
-  within("tr##{id}") do
-    expect { click_link "Destroy" }.to change(Project, :count).by(-1)
+  unless Project.find_by_title(project_title).nil?
+    id = Project.find_by_title(project_title).id
+    within("tr##{id}") do
+      expect { click_link "Destroy" }.to change(Project, :count).by(-1)
+    end
   end
-end
+ end

@@ -2,163 +2,198 @@ require 'spec_helper'
 
 describe ProjectsController do
 
-  let(:valid_attributes) { { "title" => "Title" } }
-
-  let(:valid_session) { {} }
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
+    # stubbing out devise methods to simulate authenticated user
     user = double('user')
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user
   end
 
-  it 'should render index page for projects' do
-    get :index
-    expect(response).to render_template 'index'
+  describe '#index' do
+    it 'should render index page for projects' do
+      get :index
+      expect(response).to render_template 'index'
+    end
+
+    it 'should assign variables to be rendered by view' do
+      projects = [double(Project), double(Project)]
+      Project.stub(:all).and_return(projects)
+      get :index
+      expect(assigns(:projects)).to eq projects
+    end
   end
 
-  it 'should assign variables to be rendered by view' do
-    projects = [ double(Project), double(Project) ]
-    Project.stub(:all).and_return(projects)
-    get :index
-    expect(assigns(:projects)).to eq projects
+  describe '#show' do
+
+    it 'assigns the requested project as @project' do
+      project = double(Project)
+      Project.stub(:find).and_return(project)
+      get :show, { :id => project.to_param }
+      assigns(:project).should eq(project)
+    end
   end
 
-  it 'should render a new project page' do
-    get :new
-    expect(response).to render_template 'new'
+  describe '#new' do
+    it 'should render a new project page' do
+      get :new
+      assigns(:project).should be_a_new(Project)
+      expect(response).to render_template 'new'
+    end
   end
 
-  context '#destroy' do
+  describe '#create' do
+    before(:each) do
+      @params = {
+          project: {
+              id: 1,
+              title: 'Title 1',
+              description: 'Description 1',
+              status: 'Status 1'
+          }
+      }
+      @project = mock_model(Project, id: 1)
+      Project.stub(:new).and_return(@project)
+    end
+
+    it 'assigns a newly created project as @project' do
+      @project.stub(:save)
+      post :create, @params
+      expect(assigns(:project)).to eq @project
+    end
+
+    context 'successful save' do
+
+      it 'redirects to show' do
+        @project.stub(:save).and_return(true)
+
+        post :create, @params
+
+        expect(response).to redirect_to(project_path(1))
+      end
+      it 'assigns successful message' do
+        @project.stub(:save).and_return(true)
+
+        post :create, @params
+
+        #TODO YA add a show view_spec to check if flash is actually displayed
+        expect(flash[:notice]).to eql('Project was successfully created.')
+      end
+    end
+
+    context 'unsuccessful save' do
+      it 'renders new template' do
+        @project.stub(:save).and_return(false)
+
+        post :create, @params
+
+        expect(response).to render_template :new
+      end
+
+      it 'assigns failure message' do
+        @project.stub(:save).and_return(false)
+
+        post :create, @params
+
+        expect(flash[:alert]).to eql('Project was not saved. Please check the input.')
+      end
+    end
+  end
+
+  describe '#edit' do
+    before(:each) do
+      @project = double(Project)
+      Project.stub(:find).and_return(@project)
+      get :edit, id: 'show'
+    end
+
+    it 'renders the edit template' do
+      expect(response).to render_template 'edit'
+    end
+
+    it 'assigns the requested project as @project' do
+      expect(assigns(:project)).to eq(@project)
+    end
+  end
+
+  describe '#destroy' do
     before :each do
       @project = double(Project)
       Project.stub(:find).and_return(@project)
     end
-    it 'should delete a project' do
+    it 'receives destroy call' do
       expect(@project).to receive(:destroy)
-      delete :destroy, { :id => 'test' }
+      delete :destroy, id: 'test'
     end
-    it 'should redirect to the index' do
-      allow(@project).to receive(:destroy)
-      delete :destroy, { :id => 'test' }
-      expect(response).to redirect_to(projects_path)
+
+    context 'on successful delete' do
+      before(:each) do
+        @project.stub(:destroy).and_return(true)
+        delete :destroy, id: 'test'
+      end
+      it 'redirects to index' do
+        expect(response).to redirect_to(projects_path)
+      end
+      it 'shows the correct message' do
+        expect(flash[:notice]).to eq 'Project was successfully deleted.'
+      end
     end
-  end
-  describe 'GET index' do
-    it 'assigns all projects as @projects' do
-      project = Project.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:projects).should eq([project])
+
+    context 'on unsuccessful delete' do
+      before do
+        @project.stub(:destroy).and_return(false)
+        delete :destroy, id: 'test'
+      end
+      it 'redirects to index' do
+        expect(response).to redirect_to(projects_path)
+      end
+      it 'shows the correct message' do
+        expect(flash[:notice]).to eq 'Project was not successfully deleted.'
+      end
     end
   end
 
-  describe 'GET show' do
+  describe '#update' do
+    before(:each) do
+      @project = mock_model(Project)
+      Project.stub(:find).and_return(@project)
+    end
+
     it 'assigns the requested project as @project' do
-      project = Project.create! valid_attributes
-      get :show, {:id => project.to_param}, valid_session
-      assigns(:project).should eq(project)
-    end
-  end
-
-  describe 'GET new' do
-    it 'assigns a new project as @project' do
-      get :new, {}, valid_session
-      assigns(:project).should be_a_new(Project)
-    end
-  end
-
-  describe 'GET edit' do
-    it 'assigns the requested project as @project' do
-      project = Project.create! valid_attributes
-      get :edit, {:id => project.to_param}, valid_session
-      assigns(:project).should eq(project)
-    end
-  end
-
-  describe 'POST create' do
-    describe 'with valid params' do
-      it 'creates a new Project' do
-        expect {
-          post :create, {:project => valid_attributes}, valid_session
-        }.to change(Project, :count).by(1)
-      end
-
-      it 'assigns a newly created project as @project' do
-        post :create, {:project => valid_attributes}, valid_session
-        assigns(:project).should be_a(Project)
-        assigns(:project).should be_persisted
-      end
-
-      it 'redirects to the created project' do
-        post :create, {:project => valid_attributes}, valid_session
-        response.should redirect_to(Project.last)
-      end
+      @project.stub(:update_attributes)
+      put :update, id: 'update', project: { title: ''}
+      expect(assigns(:project)).to eq(@project)
     end
 
-    describe 'with invalid params' do
-      it 'assigns a newly created but unsaved project as @project' do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Project.any_instance.stub(:save).and_return(false)
-        post :create, {:project => { "title" => "invalid value" }}, valid_session
-        assigns(:project).should be_a_new(Project)
-      end
-
-      it 're-renders the new template' do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Project.any_instance.stub(:save).and_return(false)
-        post :create, {:project => { "title" => "invalid value" }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe 'PUT update' do
-    describe 'with valid params' do
-
-      it 'assigns the requested project as @project' do
-        project = Project.create! valid_attributes
-        put :update, {:id => project.to_param, :project => valid_attributes}, valid_session
-        assigns(:project).should eq(project)
+    context 'successful update' do
+      before(:each) do
+        @project.stub(:update_attributes).and_return(true)
+        put :update, id: 'update', project: { title: ''}
       end
 
       it 'redirects to the project' do
-        project = Project.create! valid_attributes
-        put :update, {:id => project.to_param, :project => valid_attributes}, valid_session
-        response.should redirect_to(project)
+        expect(response).to redirect_to(@project)
+      end
+
+      it 'shows a success message' do
+        expect(flash[:notice]).to eq('Project was successfully updated.')
       end
     end
 
-    describe 'with invalid params' do
-      it 'assigns the project as @project' do
-        project = Project.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Project.any_instance.stub(:save).and_return(false)
-        put :update, {:id => project.to_param, :project => { "title" => "invalid value" }}, valid_session
-        assigns(:project).should eq(project)
+    context 'unsuccessful save' do
+      before(:each) do
+        @project.stub(:update_attributes).and_return(false)
+        put :update, id: 'update', project: { title: ''}
+      end
+      it 'renders edit' do
+        expect(response).to render_template(:edit)
       end
 
-      it 're-renders the edit template' do
-        project = Project.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Project.any_instance.stub(:save).and_return(false)
-        put :update, {:id => project.to_param, :project => { "title" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+      it 'shows an unsuccessful message' do
+        expect(flash[:alert]).to eq('Project was not updated.')
       end
     end
   end
 
-  describe 'DELETE destroy' do
-    it 'destroys the requested project' do
-      project = Project.create! valid_attributes
-      expect {
-        delete :destroy, {:id => project.to_param}, valid_session
-      }.to change(Project, :count).by(-1)
-    end
 
-    it 'redirects to the projects list' do
-      project = Project.create! valid_attributes
-      delete :destroy, {:id => project.to_param}, valid_session
-      response.should redirect_to(projects_url)
-    end
-  end
 end
