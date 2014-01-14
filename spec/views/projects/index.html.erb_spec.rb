@@ -121,4 +121,5 @@ describe 'projects/index.html.erb' do
     end
 
   end
+
 end
