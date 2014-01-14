@@ -29,20 +29,22 @@ Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
     when 'creating a new project'
       page.should have_text form_purpose
       page.should have_css('form#new_project')
-    else
-      puts 'OOPS YOU MESSED UP!!!'
-      save_and_open_page
   end
 end
 
 When(/^I click the "(.*?)" button for project "(.*?)"$/) do |button, project_name|
-  id = Project.find_by_title(project_name).id
-  within("tr##{id}") do
-    click_link button
+  project = Project.find_by_title(project_name)
+
+  if project
+    within("tr##{project.id}") do
+      click_link button
+    end
+  else
+    visit path_to(button, 'non-existent')
   end
 end
 
-#TODO YA conisder a simpler version below
+#TODO YA consider a simpler version below
 # Matches Given I am on.. | When I go to.. | Then I am on..
 #Given(/^I (go to|.* on)? the "(.*?)" page for project "(.*?)"$/) do |stay_or_go, page, title|
 #  project = Project.find_by_title title
@@ -66,11 +68,12 @@ def current_fullpath
   URI.parse(current_url).request_uri
 end
 
-Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
-  unless Project.find_by_title(project_title).nil?
-    id = Project.find_by_title(project_title).id
-    within("tr##{id}") do
-      expect { click_link "Destroy" }.to change(Project, :count).by(-1)
-    end
-  end
-end
+#TODO YA redundant after adding universal method for clicking any button
+#Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
+#  unless Project.find_by_title(project_title).nil?
+#    id = Project.find_by_title(project_title).id
+#    within("tr##{id}") do
+#      expect { click_link "Destroy" }.to change(Project, :count).by(-1)
+#    end
+#  end
+#end

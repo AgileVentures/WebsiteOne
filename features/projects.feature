@@ -7,7 +7,6 @@ Feature: Create and maintain projects
   I would like to add a new project
 
 Background:
-  #TODO set constraint: unique titles?
   Given the following projects exist:
     | title       | description          | status   |
     | hello world | greetings earthlings | active   |
@@ -77,10 +76,10 @@ Scenario: Creating a new project
   And I follow "New Project"
 
   Then I should see a form for "creating a new project"
-  And I should see field "Title"
-  And I should see field "Description"
-  And I should see field "Status"
-  And I should see form button "Submit"
+  When I fill in "Title" with "Title 1"
+  And I fill in "Description" with "Description 1"
+  And I fill in "Status" with "Status 1"
+  And I click the "Submit" button
 
   Then I am redirected to the "projects" page
   And I should see "Project was successfully created."
@@ -97,7 +96,7 @@ Scenario: Creating a new project
     And I click the "Submit" button
 
     Then I am redirected to the "projects" page
-    And I should see "Project was successfully created."
+    And I should see "Project was successfully updated."
     And I should see "Hello, Uranus!"
 
 Scenario: Saving a project: show successful message
@@ -131,19 +130,24 @@ Scenario: Edit page exists
 Scenario: Show page has a return link
   Given I am on the "Show" page for project "hello mars"
   When I click the "Back" button
-  Then I am on the "projects" page
+  Then I am redirected to the "projects" page
 
-Scenario: Destroying a project
+Scenario: Destroying a project: successful
   Given I am logged in
   And I am on the "projects" page
-  Then the Destroy button works for "hello world"
+
+  When I click the "Destroy" button for project "hello mars"
+
+  Then I am redirected to the "projects" page
   And I should see "Project was successfully deleted."
 
-#TODO YA need to refactor the step
-#Scenario: Destroy project: shows error if project does not exist
-#  Given I am logged in
-#  And I am on the "projects" page
-#  Then the Destroy button works for "nonexistent project"
-#  And I should see "Project not found."
+ Scenario: Requesting action for non-existing project
+    Given I am logged in
+    And I am on the "projects" page
+
+    When I click the "Edit" button for project "Non-existent"
+
+    Then I am redirected to the "projects" page
+    And I should see "Project not found."
 
 
