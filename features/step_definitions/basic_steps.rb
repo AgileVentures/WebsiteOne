@@ -84,8 +84,8 @@ When(/^I should see form button "([^"]*)"$/) do |button|
   page.should have_button button
 end
 
-And(/^I click the "(.*?)" button$/) do |button|
-  click_button button
+And(/^I click the "([^"]*)" button$/) do |button|
+  click_link_or_button button
 end
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
