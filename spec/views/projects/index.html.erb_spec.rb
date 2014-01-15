@@ -109,4 +109,17 @@ describe 'projects/index.html.erb' do
     end
   end
 
+  describe 'content formatting' do
+    it 'renders format in short style' do
+
+      render
+      # checking the date of project_id: 1 on row 1, column 4
+      rendered.within('table tr#1 td[4]') do |rendered_date|
+        correct_date = Project.find(1).created_at.strftime("%Y-%m-%d")
+        expect(rendered_date.text).to eq(correct_date)
+      end
+    end
+
+  end
+
 end
