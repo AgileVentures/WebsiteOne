@@ -1,5 +1,5 @@
 Given /^I am not logged in$/ do
-  visit destroy_user_session_path
+  page.driver.submit :delete, destroy_user_session_path, {}
 end
 
 Given /^I am logged in$/ do
@@ -27,7 +27,7 @@ When /^I sign in with valid credentials$/ do
 end
 
 When /^I sign out$/ do
-  visit '/users/sign_out'
+  page.driver.submit :delete, destroy_user_session_path, {}
 end
 
 When /^I sign up with valid user data$/ do

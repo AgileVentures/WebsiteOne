@@ -16,8 +16,15 @@ describe 'layouts/application.html.erb' do
   it 'should render links to site features' do
     render
     #TODO Y replace href with project_path helper
-    rendered.should have_link 'Our projects', :href => projects_url
+    rendered.should have_link 'Our projects', :href => projects_path
   end
+
+  it 'should render a footer' do
+    render
+    rendered.should have_selector('footer')
+    rendered.should have_text ('AgileVentures - Crowdsourced Learning')
+  end
+
 
   context 'not signed in as registered user' do
     before :each do

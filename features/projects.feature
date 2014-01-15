@@ -4,8 +4,11 @@ Feature: Create and maintain projects
   I would like to add a new project
 
 Background:
-#TODO YA create specific projects from a table
-  Given There are projects in the database
+  #TODO set constraint: unique titles?
+  Given the follow projects exist:
+    | title       | description          | status   |
+    | hello world | greetings earthlings | active   |
+    | hello mars  | greetings aliens     | inactive |
 
 Scenario: List of projects in table layout
   Given  I am on the "home" page
@@ -43,11 +46,9 @@ Scenario: Columns in projects table
   And I should see column "Status"
   And I should see column "Created"
 
-  Scenario: Show, edit, delete buttons in projects table
-  And I am logged in
-
+Scenario: Show, edit, delete buttons in projects table
+  Given I am logged in
   When I go to the "projects" page
-
   Then I should see a "List of Projects" table
   And I should see button "Show"
   And I should see button "Edit"
@@ -57,12 +58,12 @@ Scenario: Creating a new project
   Given I am logged in
   And I am on the "projects" page
   And I follow "New Project"
-  Then show me the page
+
   Then I should see a form for "creating a new project"
   And I should see field "Title"
   And I should see field "Description"
   And I should see field "Status"
-  And I should see form button "Create"
+  And I should see form button "Submit"
 
 Scenario: Saving a new project
   Given I am logged in
@@ -71,9 +72,32 @@ Scenario: Saving a new project
   When I fill in "Title" with "Title 1"
   And I fill in "Description" with "Description 1"
   And I fill in "Status" with "Status 1"
-  And I click the "Create" button
+  And I click the "Submit" button
   Then I should see "Project was successfully created."
+#  And I am redirected to the "projects" page
+#  And I should see "Title 1"
+#  And I should see "Description 1"
+#  And I should see "Status 1"
 
+
+Scenario: Edit page exists
+  Given I am logged in
+  And I am on the "projects" page
+  When I click the "Edit" button for project "hello mars"
+  Then I should be on the "Edit" page for project "hello mars"
+  And I should see form button "Submit"
+
+Scenario: Saving project edits at Edit page
+  Given I am logged in
+  When I go to the "Edit" page for project "hello mars"
+  When I fill in "Status" with "undetermined"
+  Then I click "Submit"
+  And I should see "undetermined"
+
+Scenario: Destroying a project
+  Given I am logged in
+  And I am on the "projects" page
+  Then the Destroy button works for "hello world"
 
 
 

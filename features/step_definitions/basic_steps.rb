@@ -26,6 +26,10 @@ Given(/^I am on the "([^"]*)" page$/) do |page|
   visit path_to(page)
 end
 
+And(/^I am redirected to the "([^"]*)" page$/) do |page|
+  expect(current_path).to eq path_to(page)
+end
+
 Given(/^I go to the "([^"]*)" page$/) do |page|
   visit path_to(page)
 end
@@ -71,15 +75,6 @@ end
 
 Then(/^I should see field "([^"]*)"$/) do |field|
   page.should have_field(field)
-end
-
-Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
-  #TODO YA check if capybara has form lookup method
-  case form_purpose
-    when 'creating a new project'
-      page.should have_text form_purpose
-      page.should have_css('form#new_project')
-  end
 end
 
 When(/^I should see button "([^"]*)"$/) do |link|
