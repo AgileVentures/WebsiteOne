@@ -17,7 +17,8 @@ module Helpers
     visit destroy_user_session_path
   end
 
-  def create_user
+  def create_user(user = nil)
+    #TODO YA clarify the two steps below
     create_visitor
     delete_user
     @user = FactoryGirl.create(:user, @visitor)

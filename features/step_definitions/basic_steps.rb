@@ -1,3 +1,10 @@
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+end
+World(WithinHelpers)
+
 def path_to(page_name, id = '')
   name = page_name.downcase
   case name
@@ -15,6 +22,20 @@ def path_to(page_name, id = '')
       edit_project_path(id)
     when 'show' then
       project_path(id)
+    #when 'My account' then
+    #  edit_user_path(id)
+  end
+end
+
+Then /^the "([^"]*)" field(?: within (.*))? should( not)? contain "([^"]*)"$/ do |field, parent, negative, value|
+  with_scope(parent) do
+    field = find_field(field)
+    field_value = (field.tag_name == 'textarea') ? field.text : field.value
+    if negative
+      field_value.should_not =~ /#{value}/
+    else
+      field_value.should =~ /#{value}/
+    end
   end
 end
 
@@ -63,8 +84,12 @@ When(/^I follow "([^"]*)"$/) do |text|
   click_link text
 end
 
-When /^I should see "([^"]*)"$/ do |string|
-  page.should have_text string
+When /^I should( not)? see "([^"]*)"$/ do |negative, string|
+  if negative
+    page.should_not have_text string
+  else
+    page.should have_text string
+  end
 end
 
 
@@ -93,5 +118,5 @@ And(/^I click the "([^"]*)" button$/) do |button|
 end
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
-    fill_in field, :with => value
+  fill_in field, :with => value
 end
