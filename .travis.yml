@@ -1,7 +1,6 @@
 language: ruby
 rvm:
-  - 2.0.0-p247
-  #- 2.1.0
+- 2.0.0-p247
 before_script:
 - bundle exec rake db:create:all
 - bundle exec rake db:migrate
@@ -9,10 +8,10 @@ before_script:
 script:
 - bundle exec rake cucumber
 - bundle exec rake spec
-
 deploy:
   provider: heroku
-  api_key: 4339362a-3bcb-4cce-8004-a2584c4bc1cc
+  api_key:
+    secure: CzwqozXqTBrn74UZJB+hFdFlS3cOqsLZzCQ5MQKI4ejNWG9Hhia08euPH3iqFea43foCuIgczdTkx4gBg34prdEpaZkaWmwMJ0cwFjrI6B04QfPETV8iMGJO6eLKpQbOJz+Sa7jaMiTpWGoIVfDsy1uXbwAk5/XZfJoCik/aLn4=
   app:
     develop: websiteone-develop
-
+    master: websiteone-master
