@@ -11,7 +11,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: CzwqozXqTBrn74UZJB+hFdFlS3cOqsLZzCQ5MQKI4ejNWG9Hhia08euPH3iqFea43foCuIgczdTkx4gBg34prdEpaZkaWmwMJ0cwFjrI6B04QfPETV8iMGJO6eLKpQbOJz+Sa7jaMiTpWGoIVfDsy1uXbwAk5/XZfJoCik/aLn4=
+    secure: kzWKAeVxm2ZRP+51KM0t8JIKDAPmpoVG9tuZ6sRuW882Ns/zwgHjfObRtJmgNeiHDFS40y/GnT1MGxikFBGD/AYZdQkGfwEiGgUDFYxKFOv9itpc+dri9eEVf0qEh2SI2CnV8Zt3f/bIrvo8XEPxUW3hl3nSsYjhab/h/EAkLIA=
   app:
     develop: websiteone-develop
     master: websiteone-master
