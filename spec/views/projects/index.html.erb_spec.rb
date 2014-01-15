@@ -24,6 +24,15 @@ describe 'projects/index.html.erb' do
         table_row.should have_css('th', :text => 'Status')
       end
     end
+
+    it 'should render a documents button' do
+      render
+      i = 0
+      rendered.within('table#projects tbody') do |table_row|
+        i += 1
+        expect(table_row).to have_link('Documents', href: new_project_document_path(i))
+      end
+    end
   end
 
   context 'user signed in' do
