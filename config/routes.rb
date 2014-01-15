@@ -4,5 +4,8 @@ WebsiteOne::Application.routes.draw do
 
   root 'visitors#index'
 
-  resources :projects
+  resources :projects do
+    resources :documents
+  end
+
 end
