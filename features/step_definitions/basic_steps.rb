@@ -1,5 +1,6 @@
-def path_to(page)
-  case page
+def path_to(page_name, id = '')
+  name = page_name.downcase
+  case name
     when 'home' then
       root_path
     when 'registration' then
@@ -10,6 +11,10 @@ def path_to(page)
       projects_path
     when 'new project' then
       new_project_path
+    when 'edit' then
+      edit_project_path(id)
+    when 'show' then
+      project_path(id)
   end
 end
 
@@ -67,7 +72,6 @@ When(/^I should see a "([^"]*)" link$/) do |link|
   page.should have_link link
 end
 
-
 Then(/^show me the page$/) do
   save_and_open_page
 end
@@ -84,8 +88,8 @@ When(/^I should see form button "([^"]*)"$/) do |button|
   page.should have_button button
 end
 
-And(/^I click the "(.*?)" button$/) do |button|
-  click_button button
+And(/^I click the "([^"]*)" button$/) do |button|
+  click_link_or_button button
 end
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
