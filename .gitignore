@@ -39,4 +39,4 @@
 .env
 
 # Versioning
-.rvmrc
+.rvmrc.env
