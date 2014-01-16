@@ -35,11 +35,11 @@ Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
   end
 end
 
-When(/^I click the "(.*?)" button for project "(.*?)"$/) do |button, title|
- id = Project.find_by_title(title).id
- within("tr##{id}") do
-   click_link button
- end
+When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, title|
+  id = Project.find_by_title(title).id
+  within("tr##{id}") do
+    click_link button
+  end
 end
 
 # Matches Given I am on.. | When I go to.. | Then I am on..
@@ -51,17 +51,18 @@ end
 #  expect(current_fullpath).to eq edit_project_path_for_id
 #end
 
-Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |pagename, project|
-  steps %Q{
-    Given I am logged in
-    And I am on the "projects" page
-    And I click the "#{pagename}" button for project "#{project}"
-  }
-end
+#Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |pagename, project|
+#  steps %Q{
+#    Given I am logged in
+#    And I am on the "projects" page
+#    And I click the "#{pagename}" button for project "#{project}"
+#  }
+#end
 
-def current_fullpath
-  URI.parse(current_url).request_uri
-end
+# Bryan: Does not appear to be used
+#def current_fullpath
+#  URI.parse(current_url).request_uri
+#end
 
 Then(/^the Destroy button works for "([^"]*)"$/) do |project_title|
   unless Project.find_by_title(project_title).nil?
@@ -72,7 +73,8 @@ Then(/^the Destroy button works for "([^"]*)"$/) do |project_title|
   end
 end
 
-Then(/^I should be on the "([^"]*)" page for project "([^"]*)"$/) do |act, title|
-  id = Project.find_by_title(title).id
-  expect(current_path).to eq eval("#{act.downcase}_project_path(#{id})")
-end
+# Bryan: replaced with more general approach
+#Then(/^I should be on the "([^"]*)" page for project "([^"]*)"$/) do |act, title|
+#  id = Project.find_by_title(title).id
+#  expect(current_path).to eq eval("#{act.downcase}_project_path(#{id})")
+#end
