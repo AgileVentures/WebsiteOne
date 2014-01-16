@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :document do
     title "MyString"
     body "MyText"
-    project_id 1
+    project
   end
 end
