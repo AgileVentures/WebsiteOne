@@ -95,3 +95,27 @@ end
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
     fill_in field, :with => value
 end
+
+# Bryan: custom url generation for models with titles
+def url_for_title(options)
+  controller = options[:controller]
+  id = eval("#{controller.capitalize.singularize}.find_by_title('#{options[:title]}').id")
+  action = options[:action].downcase
+  if action == 'show'
+    "/#{controller.downcase.pluralize}/#{id}"
+  else
+    "/#{controller.downcase.pluralize}/#{id}/#{action}"
+  end
+end
+
+Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
+  visit url_for_title(action: action, controller: controller, title: title)
+end
+
+Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, controller, title|
+  expect(current_path).to eq url_for_title(action: action, controller: controller, title: title)
+end
+
+When(/^I should see a link to "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
+  page.has_link?(action, href: url_for_title(action: action, controller: controller, title: title))
+end
