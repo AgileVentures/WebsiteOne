@@ -51,11 +51,10 @@ end
 #  expect(current_fullpath).to eq edit_project_path_for_id
 #end
 
-# Bryan: made it slightly more general
-Given(/^I am on the "(.*?)" page for (\w+?) "(.*?)"$/) do |pagename, item, project|
+Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |pagename, project|
   steps %Q{
     Given I am logged in
-    And I am on the "#{item.downcase.pluralize}" page
+    And I am on the project page
     And I click the "#{pagename}" button for project "#{project}"
   }
 end
@@ -64,14 +63,15 @@ def current_fullpath
   URI.parse(current_url).request_uri
 end
 
-Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
+Then(/^the Destroy button works for "([^"]*)"$/) do |project_title|
   unless Project.find_by_title(project_title).nil?
     id = Project.find_by_title(project_title).id
     within("tr##{id}") do
       expect { click_link "Destroy" }.to change(Project, :count).by(-1)
     end
   end
- end
+end
+
 Then(/^I should be on the "([^"]*)" page for project "([^"]*)"$/) do |act, title|
   id = Project.find_by_title(title).id
   expect(current_path).to eq eval("#{act.downcase}_project_path(#{id})")
