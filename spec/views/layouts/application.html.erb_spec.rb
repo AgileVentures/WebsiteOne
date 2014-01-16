@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe 'layouts/application.html.erb' do
-  it 'should include jQuery and bootstrap 3.0+ css & js files' do
+  it 'should include css & js files' do
     render
     rendered.should have_xpath("//link[contains(@href, '.css')]")
     rendered.should have_xpath("//script[contains(@src, '.js')]")
-    #rendered.should have_xpath("//script[contains(@src, 'jquery')]")
   end
 
   it 'should render a navbar' do
@@ -35,6 +34,18 @@ describe 'layouts/application.html.erb' do
       rendered.within('section#header') do |header|
         header.should have_link 'Check in', :href => new_user_session_path
         header.should have_link 'Sign up', :href => new_user_registration_path
+      end
+    end
+
+    it 'should return 200 for all links' do
+      render
+      rendered.within('section#header') do |header|
+        links = header.all('a').map { |el| el[:href] }
+        links.each do |link|
+            visit link
+            debugger
+            page.status_code.should == 200
+        end
       end
     end
   end
