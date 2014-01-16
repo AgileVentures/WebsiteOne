@@ -59,4 +59,3 @@ Scenario: Destroy a document
   When I click the "Destroy" button for document "Howto"
   Then I should be on the "Documents" page for project "hello world"
   And I should see "Document was successfully deleted."
-
