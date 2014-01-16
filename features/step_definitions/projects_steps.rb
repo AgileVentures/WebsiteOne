@@ -54,7 +54,7 @@ end
 Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |pagename, project|
   steps %Q{
     Given I am logged in
-    And I am on the project page
+    And I am on the "projects" page
     And I click the "#{pagename}" button for project "#{project}"
   }
 end
