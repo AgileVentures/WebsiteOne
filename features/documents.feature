@@ -27,16 +27,23 @@ Scenario: Render of list documents
   And I should not see "Another doc"
 
 Scenario: Create a new document
-  Given I am on the "projects" page
-  When I click the "Documents" button for project "hello world"
-  Then I should be on documents page for "hello world"
-  And I click the "New Document" button
+  Given I am on the "Documents" page for project "hello world"
+  And I am logged in as a user
+  When I click the "New Document" button
   And I fill in "Title" with "New doc title"
   And I fill in "Body" with "Document content"
-  And I click the "Submit" button
+  And I click the "Create Document" button
   Then I should see "Document was successfully created."
 
-
+Scenario: Edit a document
+  Given I am on the "Documents" page for project "hello world"
+  And I am logged in as a user
+  # TODO needs writing up
+  When I click the "Edit" button for document "hello world"
+  And I fill in "Title" with "My new title"
+  And I fill in "Body" with "New document body"
+  And I click the "Update Document" button
+  Then I should see "Document was successfully updated."
 
 
 
