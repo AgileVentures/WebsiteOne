@@ -43,12 +43,21 @@ When(/^I click the "(.*?)" button for project "(.*?)"$/) do |button, title|
 end
 
 # Matches Given I am on.. | When I go to.. | Then I am on..
-Given(/^I (go to|.* on)? the "(.*?)" page for project "(.*?)"$/) do |stay_or_go, page, title|
-  project = Project.find_by_title title
-  method_name = page.downcase + '_project_path'
-  edit_project_path_for_id = send method_name, project
-  visit edit_project_path_for_id if stay_or_go == 'go to'
-  expect(current_fullpath).to eq edit_project_path_for_id
+#Given(/^I (go to|.* on)? the "(.*?)" page for project "(.*?)"$/) do |stay_or_go, page, title|
+#  project = Project.find_by_title title
+#  method_name = page.downcase + '_project_path'
+#  edit_project_path_for_id = send method_name, project
+#  visit edit_project_path_for_id if stay_or_go == 'go to'
+#  expect(current_fullpath).to eq edit_project_path_for_id
+#end
+
+# Bryan: made it slightly more general
+Given(/^I am on the "(.*?)" page for (\w+?) "(.*?)"$/) do |pagename, item, project|
+  steps %Q{
+    Given I am logged in
+    And I am on the "#{item.downcase.pluralize}" page
+    And I click the "#{pagename}" button for project "#{project}"
+  }
 end
 
 def current_fullpath
@@ -63,3 +72,7 @@ Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
     end
   end
  end
+Then(/^I should be on the "([^"]*)" page for project "([^"]*)"$/) do |act, title|
+  id = Project.find_by_title(title).id
+  expect(current_path).to eq eval("#{act.downcase}_project_path(#{id})")
+end

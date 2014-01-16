@@ -63,11 +63,10 @@ Scenario: Display Show, edit, delete buttons in projects table
   And I should see button "Edit"
   And I should see button "Destroy"
 
-Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
+Scenario: Do not display edit, delete buttons in projects table when not logged in
   Given I am not logged in
   When I go to the "projects" page
   Then I should see a "List of Projects" table
-  And I should not see button "Show"
   And I should not see button "Edit"
   And I should not see button "Destroy"
 
@@ -120,12 +119,10 @@ Scenario: Edit page exists
   Then I should be on the "Edit" page for project "hello mars"
   And I should see form button "Submit"
 
-Scenario: Saving project edits at Edit page
-  Given I am logged in
-  When I go to the "Edit" page for project "hello mars"
-  When I fill in "Status" with "undetermined"
-  Then I click "Submit"
-  And I should see "undetermined"
+Scenario: Show page has a return link
+  Given I am on the "Show" page for project "hello mars"
+  When I click the "Back" button
+  Then I am on the "projects" page
 
 Scenario: Destroying a project
   Given I am logged in

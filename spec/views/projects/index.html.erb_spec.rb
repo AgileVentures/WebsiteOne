@@ -24,16 +24,14 @@ describe 'projects/index.html.erb' do
         table_row.should have_css('th', :text => 'Status')
       end
     end
-  end
 
-  context 'user signed in' do
-    before :each do
-      view.stub(:user_signed_in?).and_return(true)
-    end
-
-    it 'should render a create new project button' do
+    it 'should render a documents button' do
       render
-      rendered.should have_link('New Project', :href => new_project_path)
+      i = 0
+      rendered.within('table#projects tbody') do |table_row|
+        i += 1
+        expect(table_row).to have_link('Documents', href: project_documents_path(i))
+      end
     end
 
     it 'should render a link Show' do
@@ -44,6 +42,18 @@ describe 'projects/index.html.erb' do
         i += 1
         expect(table_row).to have_link('Show', href: project_path(i))
       end
+    end
+
+  end
+
+  context 'user signed in' do
+    before :each do
+      view.stub(:user_signed_in?).and_return(true)
+    end
+
+    it 'should render a create new project button' do
+      render
+      rendered.should have_link('New Project', :href => new_project_path)
     end
 
     it 'should render a link Edit' do
@@ -78,16 +88,6 @@ describe 'projects/index.html.erb' do
       expect(rendered).not_to have_link('New Project', :href => new_project_path)
     end
 
-    it 'should not render a link Show' do
-      render
-      #TODO Y refactor to a smarter traversing
-      i = 0
-      rendered.within('table#projects tbody') do |table_row|
-        i += 1
-        expect(table_row).not_to have_link('Show', href: project_path(i))
-      end
-    end
-
     it 'should not render a link Edit' do
       render
       #TODO Y refactor to a smarter traversing
@@ -107,6 +107,19 @@ describe 'projects/index.html.erb' do
         expect(table_row).not_to have_link('Destroy', href: project_path(i))
       end
     end
+  end
+
+  describe 'content formatting' do
+    it 'renders format in short style' do
+
+      render
+      # checking the date of project_id: 1 on row 1, column 4
+      rendered.within('table tr#1 td[4]') do |rendered_date|
+        correct_date = Project.find(1).created_at.strftime("%Y-%m-%d")
+        expect(rendered_date.text).to eq(correct_date)
+      end
+    end
+
   end
 
 end
