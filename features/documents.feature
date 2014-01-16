@@ -26,6 +26,19 @@ Scenario: Render of list documents
   And I should see "Documentation"
   And I should not see "Another doc"
 
+Scenario: Create a new document
+  Given I am on the "projects" page
+  When I click the "Documents" button for project "hello world"
+  Then I should be on documents page for "hello world"
+  And I click the "New Document" button
+  And I fill in "Title" with "New doc title"
+  And I fill in "Body" with "Document content"
+  And I click the "Submit" button
+  Then I should see "Document was successfully created."
+
+
+
+
 
 
 
