@@ -61,9 +61,10 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
+    id = @document.project_id
     @document.destroy
     respond_to do |format|
-      format.html { redirect_to documents_url }
+      format.html { redirect_to project_documents_path(id), notice: 'Document was successfully deleted.' }
       format.json { head :no_content }
     end
   end

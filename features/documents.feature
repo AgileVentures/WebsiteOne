@@ -45,8 +45,18 @@ Scenario: Edit a document
   And I click the "Update Document" button
   Then I should see "Document was successfully updated."
 
+Scenario: Show a document
+  Given I am on the "Documents" page for project "hello world"
+  When I click the "Show" button for document "Howto"
+  Then I should be on "Show" documents page for document "Howto"
+  And I should see "Howto"
+  And I should see "How to start"
+  And I should see a link to "Edit" page for document "Howto"
+
 Scenario: Destroy a document
-  # TODO
-
-
+  Given I am on the "Documents" page for project "hello world"
+  And I am logged in as a user
+  When I click the "Destroy" button for document "Howto"
+  Then I should be on the documents page for project "hello world"
+  And I should see "Document was successfully deleted."
 
