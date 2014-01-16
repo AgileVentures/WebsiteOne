@@ -14,6 +14,7 @@
           <%= f.text_field :status, :class => 'form-control', placeholder: 'Group url' %>
         </div>
         <div class='form-group'>
+          <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default'%>
           <%= f.submit 'Submit', :class => 'btn btn-primary' %>
         </div>
     <% end %>
