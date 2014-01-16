@@ -72,3 +72,7 @@ Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
     end
   end
  end
+Then(/^I should be on the "([^"]*)" page for project "([^"]*)"$/) do |act, title|
+  id = Project.find_by_title(title).id
+  expect(current_path).to eq eval("#{act.downcase}_project_path(#{id})")
+end
