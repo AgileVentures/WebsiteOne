@@ -63,11 +63,10 @@ Scenario: Display Show, edit, delete buttons in projects table
   And I should see button "Edit"
   And I should see button "Destroy"
 
-Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
+Scenario: Do not display edit, delete buttons in projects table when not logged in
   Given I am not logged in
   When I go to the "projects" page
   Then I should see a "List of Projects" table
-  And I should not see button "Show"
   And I should not see button "Edit"
   And I should not see button "Destroy"
 
