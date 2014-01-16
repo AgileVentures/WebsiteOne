@@ -21,7 +21,11 @@ Background:
 Scenario: Render of list documents
   Given I am on the "projects" page
   When I click the "Documents" button for project "hello world"
-  Then I should be on documents page
+  Then I should be on documents page for "hello world"
+  And I should see "Howto"
+  And I should see "Documentation"
+  And I should not see "Another doc"
+
 
 
 

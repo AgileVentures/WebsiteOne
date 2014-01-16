@@ -1,10 +1,16 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
+
+  before_action :find_project
+
+
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    #@documents = Document.all
+    @documents = Document.where("project_id = ?", @project.id).order(:created_at)
+
   end
 
   # GET /documents/1
@@ -62,8 +68,13 @@ class DocumentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_document
+  def find_project
+    if params[:project_id]
+      @project = Project.find_by_id(params[:project_id])
+    end
+  end
+
+  def set_document
       @document = Document.find(params[:id])
     end
 

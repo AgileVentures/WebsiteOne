@@ -62,6 +62,10 @@ When /^I should see "([^"]*)"$/ do |string|
   page.should have_text string
 end
 
+When /^I should not see "([^"]*)"$/ do |string|
+  page.should_not have_text string
+end
+
 
 When(/^I should see a "([^"]*)" link$/) do |link|
   page.should have_link link
