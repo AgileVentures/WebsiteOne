@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.0.0'
 gem 'rails', '4.0.2'
 gem 'pg'  # PostgreSQL database support
 gem 'sass-rails', '~> 4.0.0' # Sass stylesheet language
@@ -12,7 +12,6 @@ gem 'jbuilder', '~> 1.2' # Json for declaring
 gem 'devise' # Authentication local and 3rd party
 gem 'bootstrap-sass', '~> 3.0.2.0' # JS Bootstrap library support
 gem 'factory_girl_rails'
-gem 'debugger', group: [:development, :test] # Use debugger
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -26,7 +25,14 @@ end
 
 group :development, :test do
   gem 'rspec-rails' #unit testing
+  gem 'debugger'  # Use debugger
 end
+
+group :production do
+  gem 'rails_12factor'
+  gem 'unicorn'
+end
+
 
 # Suggested gems:
 # Provides cucumber feature scaffolds to be generated with rails generate

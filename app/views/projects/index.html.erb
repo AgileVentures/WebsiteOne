@@ -6,6 +6,7 @@
     <th style="width:250px">Description</th>
     <th style="width:100px">Status</th>
     <th style="width:100px">Created</th>
+    <th style="width:15px"></th>
     <% if user_signed_in? %>
         <th style="width:15px"></th>
         <th style="width:15px"></th>
@@ -20,8 +21,9 @@
       <td><%= project.description %></td>
       <td><%= project.status %></td>
       <td><%= project.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= link_to 'Documents', project_documents_path(project.id), :type => 'button', :class => 'btn btn-default btn-xs' %></td>
+      <td><%= link_to 'Show', project_path(project.id) , type: 'button', :class => 'btn btn-success btn-xs'%></td>
       <% if user_signed_in? %>
-        <td><%= link_to 'Show', project_path(project.id) , type: 'button', :class => 'btn btn-success btn-xs'%></td>
         <td><%= link_to 'Edit', edit_project_path(project.id) , type: 'button', :class => 'btn btn-primary btn-xs'%></td>
         <td><%= link_to 'Destroy', project_path(project.id), type: 'button', class: 'btn btn-danger btn-xs', method: :delete %></td>
       <% end %>
