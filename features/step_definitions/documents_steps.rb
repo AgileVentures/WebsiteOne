@@ -18,6 +18,7 @@ end
 Then(/I should be on "([^"]*)" documents page for document "([^"]*)"/) do |action, title|
   id = Document.find_by_title(title).id
   action = action.downcase.singularize
+  p
   if action == 'show'
     expect(current_path).to eq document_path(id)
   else
@@ -41,7 +42,7 @@ When(/^I should see a link to "([^"]*)" page for document "([^"]*)"$/) do |actio
   id = Document.find_by_title(title).id
   action = action.downcase.singularize
   # TODO figure out why this always returns www.example.com
-  # url_for(controller: :documents, action: action, id: id)
+  #url_for(controller: :documents, action: action, id: id)
   if action == 'show'
     expected_path = document_path(id)
   else
