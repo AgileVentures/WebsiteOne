@@ -38,14 +38,15 @@ Scenario: Create a new document
 Scenario: Edit a document
   Given I am on the "Documents" page for project "hello world"
   And I am logged in as a user
-  # TODO needs writing up
-  When I click the "Edit" button for document "hello world"
-  And I fill in "Title" with "My new title"
+  When I click the "Edit" button for document "Howto"
+  Then I should be on "Edit" documents page for document "Howto"
+  When I fill in "Title" with "My new title"
   And I fill in "Body" with "New document body"
   And I click the "Update Document" button
   Then I should see "Document was successfully updated."
 
-
+Scenario: Destroy a document
+  # TODO
 
 
 

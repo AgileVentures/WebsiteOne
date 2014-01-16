@@ -51,10 +51,11 @@ end
 #  expect(current_fullpath).to eq edit_project_path_for_id
 #end
 
-Given(/^I am on the "(.*?)" page for project "(.*?)"$/) do |pagename, project|
+# Bryan: made it slightly more general
+Given(/^I am on the "(.*?)" page for (\w+?) "(.*?)"$/) do |pagename, item, project|
   steps %Q{
     Given I am logged in
-    And I am on the "projects" page
+    And I am on the "#{item.downcase.pluralize}" page
     And I click the "#{pagename}" button for project "#{project}"
   }
 end
