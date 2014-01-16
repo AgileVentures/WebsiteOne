@@ -24,28 +24,27 @@ describe 'layouts/application.html.erb' do
     rendered.should have_text ('AgileVentures - Crowdsourced Learning')
   end
 
+  it 'should return 200 for all link visits' do
+    render
+    rendered.within('section#header') do |header|
+      links = header.all('a').map { |el| el[:href] }
+      links.each do |link|
+        visit link
+        page.status_code.should == 200
+      end
+    end
+  end
 
   context 'not signed in as registered user' do
     before :each do
       view.stub(:user_signed_in?).and_return(false)
     end
-    it 'should render a navigation bar with links' do
+
+    it 'should render login & sign-up links' do
       render
       rendered.within('section#header') do |header|
         header.should have_link 'Check in', :href => new_user_session_path
         header.should have_link 'Sign up', :href => new_user_registration_path
-      end
-    end
-
-    it 'should return 200 for all links' do
-      render
-      rendered.within('section#header') do |header|
-        links = header.all('a').map { |el| el[:href] }
-        links.each do |link|
-            visit link
-            debugger
-            page.status_code.should == 200
-        end
       end
     end
   end
@@ -54,7 +53,7 @@ describe 'layouts/application.html.erb' do
     before :each do
       view.stub(:user_signed_in?).and_return(true)
     end
-    it 'should render a navigation bar with links' do
+    it 'should render navigation links' do
       render
       rendered.within('section#header') do |header|
         header.should_not have_link 'Check in', :href => new_user_session_path
@@ -62,6 +61,12 @@ describe 'layouts/application.html.erb' do
         header.should have_link 'My Account', :href => edit_user_registration_path
       end
     end
+
+    it 'should return 200 on link visit' do
+      visit edit_user_registration_path
+      page.status_code.should == 200
+    end
+
   end
 end
 
