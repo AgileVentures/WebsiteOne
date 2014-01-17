@@ -1,7 +1,9 @@
 WebsiteOne::Application.routes.draw do
 
   mount Mercury::Engine => '/'
-  resources :documents
+  resources :documents do
+    post :mercury_update
+  end
 
   devise_for :users
 
