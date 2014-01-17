@@ -6,148 +6,174 @@ Feature: Create and maintain projects
   So that I can participate in AgileVentures activities
   I would like to add a new project
 
-Background:
-  Given the following projects exist:
-    | title       | description          | status   |
-    | hello world | greetings earthlings | active   |
-    | hello mars  | greetings aliens     | inactive |
+  Background:
+    Given the following projects exist:
+      | title       | description          | status   |
+      | hello world | greetings earthlings | active   |
+      | hello mars  | greetings aliens     | inactive |
 
-Scenario: List of projects in table layout
-  Given  I am on the "home" page
+#  Scenarios for Index page
 
-  When I follow "Our projects"
+  #TODO YA consider refactoring to a higher level scenarios and move low-level into view specs
+  Scenario: List of projects in table layout
+    Given  I am on the "home" page
 
-  Then I should see "List of Projects"
-  And I should see "Title"
-  And I should see "Description"
-  And I should see "Created"
-  And I should see "Status"
+    When I follow "Our projects"
 
-Scenario: See a list of current projects
-  Given  I am on the "home" page
-  And There are projects in the database
-  When I follow "Our projects"
-  Then I should see "Title 1"
-  And I should see "Description 1"
-  And I should see "Status 1"
-  And I should see "Title 2"
-  And I should see "Description 2"
-  And I should see "Status 2"
+    Then I should see "List of Projects"
+    And I should see "Title"
+    And I should see "Description"
+    And I should see "Created"
+    And I should see "Status"
+
+  Scenario: Columns in projects table
+    When I go to the "projects" page
+
+    Then I should see a "List of Projects" table
+    And I should see column "Title"
+    And I should see column "Description"
+    And I should see column "Status"
+    And I should see column "Created"
+
+  #TODO YA consider refactoring to use a table
+  Scenario: See a list of current projects
+    Given  I am on the "home" page
+    And There are projects in the database
+    When I follow "Our projects"
+    Then I should see "Title 1"
+    And I should see "Description 1"
+    And I should see "Status 1"
+    And I should see "Title 2"
+    And I should see "Description 2"
+    And I should see "Status 2"
 
 #TODO YA Consider refactoring happy and sad scenarios into one scenario outline
-Scenario: Show New Project button if user is logged in
-  When I am logged in
-  And I am on the "projects" page
-  Then I should see button "New Project"
+  Scenario: Show New Project button if user is logged in
+    When I am logged in
+    And I am on the "projects" page
+    Then I should see button "New Project"
 
-Scenario: Do not show New Project button if user is not logged in
-  Given I am not logged in
-  When I am on the "projects" page
-  Then I should not see button "New Project"
+  Scenario: Do not show New Project button if user is not logged in
+    Given I am not logged in
+    When I am on the "projects" page
+    Then I should not see button "New Project"
 
-Scenario: Columns in projects table
-  When I go to the "projects" page
+  Scenario: Display Show, edit, delete buttons in projects table
+    Given I am logged in
+    When I go to the "projects" page
+    Then I should see a "List of Projects" table
+    And I should see button "Show"
+    And I should see button "Edit"
+    And I should see button "Destroy"
 
-  Then I should see a "List of Projects" table
-  And I should see column "Title"
-  And I should see column "Description"
-  And I should see column "Status"
-  And I should see column "Created"
+  Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
+    Given I am not logged in
+    When I go to the "projects" page
+    Then I should see a "List of Projects" table
+    And I should not see button "Show"
+    And I should not see button "Edit"
+    And I should not see button "Destroy"
 
-Scenario: Display Show, edit, delete buttons in projects table
-  Given I am logged in
-  When I go to the "projects" page
-  Then I should see a "List of Projects" table
-  And I should see button "Show"
-  And I should see button "Edit"
-  And I should see button "Destroy"
+#  Scenarios for New page
 
-Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
-  Given I am not logged in
-  When I go to the "projects" page
-  Then I should see a "List of Projects" table
-  And I should not see button "Show"
-  And I should not see button "Edit"
-  And I should not see button "Destroy"
+  Scenario: Creating a new project
+    Given I am logged in
+    And I am on the "projects" page
+    And I follow "New Project"
 
-Scenario: Creating a new project
-  Given I am logged in
-  And I am on the "projects" page
-  And I follow "New Project"
+    Then I should see a form for "creating a new project"
 
-  Then I should see a form for "creating a new project"
+#  Scenarios for Show page
 
-Scenario: Edit page exists
-  Given I am logged in
-  And I am on the "projects" page
-  When I click the "Edit" button for project "hello mars"
-  Then I am on the "Edit" page for project "hello mars"
-  And I should see form button "Submit"
+  Scenario: opens "Show" page with projects details
+    Given I am logged in
+    And I am on the "Projects" page
 
-Scenario: Updating a project
-  Given I am logged in
-  And I am on the "projects" page
-  When I click the "Edit" button for project "hello mars"
+    When I click the "Show" button for project "hello world"
+    Then I should see:
+    | Text                  |
+    | hello world           |
+    | greetings earthlings  |
+    | active                |
 
-  And I fill in "Description" with "Hello, Uranus!"
-  And I click the "Submit" button
+  Scenario: Show page has a return link
+    Given I am on the "Show" page for project "hello mars"
+    When I click the "Back" button
+    Then I should be on the "projects" page
 
-  Then I am redirected to the "projects" page
-  And I should see "Project was successfully updated."
-  And I should see "Hello, Uranus!"
+#  Scenarios for Edit page
 
-Scenario: Saving a project: show successful message
-  Given I am logged in
-  And I am on the "projects" page
-  And I follow "New Project"
+  Scenario: Edit page exists
+    Given I am logged in
+    And I am on the "projects" page
+    When I click the "Edit" button for project "hello mars"
+    Then I am on the "Edit" page for project "hello mars"
+    And I should see button "Submit"
 
-  When I fill in "Title" with "Title 1"
-  And I fill in "Description" with "Description 1"
-  And I fill in "Status" with "Status 1"
-  And I click the "Submit" button
+  Scenario: Edit page has a return link
+    Given I am on the "Edit" page for project "hello mars"
+    When I click the "Back" button
+    Then I should be on the "projects" page
 
-  Then I am redirected to the "projects" page
-  And I should see "Project was successfully created."
-  And I should see "Title 1"
-  And I should see "Description 1"
-  And I should see "Status 1"
+  Scenario: Updating a project
+    Given I am logged in
+    And I am on the "projects" page
+    When I click the "Edit" button for project "hello mars"
 
-Scenario: Saving a project: show error message
-  Given I am logged in
-  And I am on the "projects" page
-  And I follow "New Project"
+    And I fill in "Description" with "Hello, Uranus!"
+    And I click the "Submit" button
 
-  When I fill in "Title" with ""
-  And I click the "Submit" button
+    Then I should be on the "projects" page
+    And I should see "Project was successfully updated."
+    And I should see "Hello, Uranus!"
 
-  Then I should see "Project was not saved. Please check the input."
+#  Scenarios for Save action
 
-Scenario: Show page has a return link
-  Given I am on the "Show" page for project "hello mars"
-  When I click the "Back" button
-  Then I am redirected to the "projects" page
+  Scenario: Saving a project: show successful message
+    Given I am logged in
+    And I am on the "projects" page
+    And I follow "New Project"
 
-Scenario: Edit page has a return link
-  Given I am on the "Edit" page for project "hello mars"
-  When I click the "Back" button
-  Then I am redirected to the "projects" page
+    When I fill in "Title" with "Title 1"
+    And I fill in "Description" with "Description 1"
+    And I fill in "Status" with "Status 1"
+    And I click the "Submit" button
 
-Scenario: Destroying a project: successful
-  Given I am logged in
-  And I am on the "projects" page
+    Then I should be on the "projects" page
+    And I should see "Project was successfully created."
+    And I should see "Title 1"
+    And I should see "Description 1"
+    And I should see "Status 1"
 
-  When I click the "Destroy" button for project "hello mars"
+  Scenario: Saving a project: show error message
+    Given I am logged in
+    And I am on the "projects" page
+    And I follow "New Project"
 
-  Then I am redirected to the "projects" page
-  And I should see "Project was successfully deleted."
+    When I fill in "Title" with ""
+    And I click the "Submit" button
 
-Scenario: Requesting action for non-existing project
-  Given I am logged in
-  And I am on the "projects" page
+    Then I should see "Project was not saved. Please check the input."
 
-  When I click the "Edit" button for project "Non-existent"
+  #  Scenarios for Destroy action
 
-  Then I am redirected to the "projects" page
-  And I should see "Project not found."
+  Scenario: Destroying a project: successful
+    Given I am logged in
+    And I am on the "projects" page
+
+    When I click the "Destroy" button for project "hello mars"
+
+    Then I should be on the "projects" page
+    And I should see "Project was successfully deleted."
+
+  #TODO YA move into controller spec
+  Scenario: Requesting action for non-existing project
+    Given I am logged in
+    And I am on the "projects" page
+
+    When I click the "Edit" button for project "Non-existent"
+
+    Then I should be on the "projects" page
+    And I should see "Project not found."
 
 
