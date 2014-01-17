@@ -8,32 +8,44 @@ Feature: Create and maintain projects
     And I am on the "home" page
 
   Scenario: Having My account page
-    When I follow "My Account"
-    Then I should see a user form for "Editing my user details"
-    And the "Email" field should contain "current@email.com"
-    And the "Password" field should not contain "12345678"
+    When I click "My Account"
+    Then I should see "Edit user details:"
+    And I should see a form with:
+      | Field                 |                     |
+      | Email                 | current@email.com   |
+      | Password              |                     |
+      | Password confirmation |                     |
+      | Current password      |                     |
 
   Scenario: Editing details: successful
-    Given I follow "My Account"
-    And I fill in "Email" with "a@a.com"
-    And I fill in "Password" with "87654321"
-    And I fill in "Password confirmation" with "87654321"
-    And I fill in "Current password" with "12345678"
+    Given I click "My Account"
+    And I fill in:
+      | Field                 | Text      |
+      | Email                 | a@a.com   |
+      | Password              | 87654321  |
+      | Password confirmation | 87654321  |
+      | Current password      | 12345678  |
 
     When I click the "Update" button
     Then I should be on the "home" page
     And I should see "You updated your account successfully."
 
   Scenario: Editing details: failure
-    When I follow "My Account"
-    And I fill in "Email" with "new@email.com"
-    And I fill in "Password" with "87654321"
-    And I fill in "Password confirmation" with "87654321"
-    And I fill in "Current password" with "wrong password"
+    Given I follow "My Account"
+    And I fill in:
+      | Field                 | Text      |
+      | Email                 | a@a.com   |
+      | Password              | 87654321  |
+      | Password confirmation | 87654321  |
+      | Current password      | wrong     |
 
     When I click the "Update" button
-    And I should see "There was an error updating your account."
+    Then I should see "There was an error updating your account."
     And I should see "Current password is invalid"
+
+
+
+
 
 
 

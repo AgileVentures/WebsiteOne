@@ -31,22 +31,22 @@ module Helpers
   def sign_up
     delete_user
     visit new_user_registration_path
-    within ('#devise') do
+    #within ('#devise') do
       fill_in 'Email', :with => @visitor[:email]
       fill_in 'Password', :with => @visitor[:password]
       fill_in 'Password confirmation', :with => @visitor[:password_confirmation]
       click_button 'Sign up'
-    end
+    #end
     find_user
   end
 
   def sign_in
     visit new_user_session_path
-    within ('#devise') do
+    #within ('#devise') do
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]
       click_button 'Sign in'
-    end
+    #end
   end
 end
 World(Helpers)
