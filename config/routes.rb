@@ -1,5 +1,6 @@
 WebsiteOne::Application.routes.draw do
 
+  mount Mercury::Engine => '/'
   resources :documents
 
   devise_for :users
