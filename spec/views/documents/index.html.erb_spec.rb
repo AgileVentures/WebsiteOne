@@ -7,7 +7,9 @@ describe 'documents/index' do
         stub_model(Document, :title => "Title", :body => "MyText", :project_id => 2)
 				 ]
     assign(:documents, @documents)
-    assign(:project, FactoryGirl.create(:project))
+    @dummy_project = FactoryGirl.create(:project)
+    assign(:project, @dummy_project)
+    @project_id = @documents[0].project_id
   end
   context 'for signed in and not signed in users' do
     it 'renders a list of documents' do
@@ -29,14 +31,14 @@ describe 'documents/index' do
       view.stub(:user_signed_in?).and_return(true)
     end
  
- 	it 'should not have edit button if not signed in' do
-	  render
-	  rendered.should have_link 'New Document', :href => new_document_path
-	end
+    it 'should have edit button' do
+      render
+      rendered.should have_link 'Edit', :href => edit_project_document_path(id: @documents[0].id, project_id: @project_id)
+    end
 
     it 'should render a New Document button' do
       render
-      rendered.should have_link 'New Document', :href => new_document_path
+      rendered.should have_link 'New Document', :href => new_project_document_path(project_id: @dummy_project.id)
     end
 
   end
@@ -45,15 +47,15 @@ describe 'documents/index' do
       view.stub(:user_signed_in?).and_return(false)
     end
 	
-	it 'should not have edit button if not signed in' do
-	  render
-	  rendered.should_not have_link 'Edit', :href => edit_document_path(@documents[0].id)
-	end
-	
-	it 'should not have edit button if not signed in' do
-	  render
-	  rendered.should_not have_link 'Destroy', :href => document_path, method: 
-	end
+    it 'should not have edit button if not signed in' do
+      render
+      rendered.should_not have_link 'Edit', :href => edit_project_document_path(id: @documents[0].id, project_id: @project_id)
+    end
+
+    it 'should not have edit button if not signed in' do
+      render
+      rendered.should_not have_link 'Destroy', :href => project_document_path(id: @documents[0].id, project_id: @project_id)
+    end
 
   end
 end

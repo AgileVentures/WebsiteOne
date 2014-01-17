@@ -20,10 +20,10 @@
         <td><%= document.title %></td>
         <td><%= document.body %></td>
         <td><%= document.project_id %></td>
-        <td><%= link_to 'Show', document %></td>
+        <td><%= link_to 'Show', project_document_path(id: document.id, project_id: document.project_id) %></td>
         <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_document_path(document) %></td>
-        <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_project_document_path(id: document.id, project_id: document.project_id) %></td>
+        <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<% end %>
       </tr>
     <% end %>
@@ -32,5 +32,5 @@
 
 <br>
 <% if user_signed_in? %>
-<%= link_to 'New Document', new_document_path %>
+<%= link_to 'New Document', new_project_document_path(project_id: @project.id) %>
 <% end %>

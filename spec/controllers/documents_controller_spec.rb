@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe DocumentsController do
+  before(:each) do
+    user = double('user')
+    request.env['warden'].stub :authenticate! => user
+    controller.stub :current_user => user
+  end
 
-  let(:valid_attributes) { { "title" => "MyString" } }
   let(:document) { FactoryGirl.create(:document) }
+  let(:valid_attributes) { { title: "MyString", project_id: document.project_id} }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -21,14 +26,14 @@ describe DocumentsController do
   describe "GET show" do
     it "assigns the requested document as @document" do
       #document = Document.create! valid_attributes
-      get :show, {:id => document.to_param}, valid_session
+      get :show, {:id => document.to_param, project_id: document.project_id}, valid_session
       assigns(:document).should eq(document)
     end
   end
 
   describe "GET new" do
     it "assigns a new document as @document" do
-      get :new, {}, valid_session
+      get :new, {project_id: document.project_id}, valid_session
       assigns(:document).should be_a_new(Document)
     end
   end
@@ -36,7 +41,7 @@ describe DocumentsController do
   describe "GET edit" do
     it "assigns the requested document as @document" do
       #document = Document.create! valid_attributes
-      get :edit, {:id => document.to_param}, valid_session
+      get :edit, {:id => document.to_param, project_id: document.project_id}, valid_session
       assigns(:document).should eq(document)
     end
   end
@@ -44,20 +49,21 @@ describe DocumentsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Document" do
+        document # document is lazily loaded
         expect {
-          post :create, {:document => valid_attributes}, valid_session
-        }.to change(Document, :count).by(1)
+          post :create, {project_id: document.project_id, :document => valid_attributes}
+        }.to change(Document, :count).by 1
       end
 
       it "assigns a newly created document as @document" do
-        post :create, {:document => valid_attributes}, valid_session
+        post :create, {project_id: document.project_id, :document => valid_attributes}, valid_session
         assigns(:document).should be_a(Document)
         assigns(:document).should be_persisted
       end
 
       it "redirects to the created document" do
-        post :create, {:document => valid_attributes}, valid_session
-        response.should redirect_to(Document.last)
+        post :create, {project_id: document.project_id, :document => valid_attributes}, valid_session
+        response.should redirect_to project_documents_path(project_id: Document.last.project_id)
       end
     end
 
@@ -65,14 +71,14 @@ describe DocumentsController do
       it "assigns a newly created but unsaved document as @document" do
         # Trigger the behavior that occurs when invalid params are submitted
         Document.any_instance.stub(:save).and_return(false)
-        post :create, {:document => { "title" => "invalid value" }}, valid_session
+        post :create, {project_id: document.project_id, :document => { "title" => "invalid value" }}, valid_session
         assigns(:document).should be_a_new(Document)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Document.any_instance.stub(:save).and_return(false)
-        post :create, {:document => { "title" => "invalid value" }}, valid_session
+        post :create, {project_id: document.project_id, :document => { "title" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -87,19 +93,19 @@ describe DocumentsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Document.any_instance.should_receive(:update).with({ "title" => "MyString" })
-        put :update, {:id => document.to_param, :document => { "title" => "MyString" }}, valid_session
+        put :update, {project_id: document.project_id, :id => document.to_param, :document => { "title" => "MyString" }}, valid_session
       end
 
       it "assigns the requested document as @document" do
         #document = Document.create! valid_attributes
-        put :update, {:id => document.to_param, :document => valid_attributes}, valid_session
+        put :update, {:id => document.to_param, project_id: document.project_id, :document => valid_attributes}, valid_session
         assigns(:document).should eq(document)
       end
 
       it "redirects to the document" do
         #document = Document.create! valid_attributes
-        put :update, {:id => document.to_param, :document => valid_attributes}, valid_session
-        response.should redirect_to(document)
+        put :update, {:id => document.to_param, project_id: document.project_id, :document => valid_attributes}, valid_session
+        response.should redirect_to project_document_path(id: Document.last.id, project_id: Document.last.project_id)
       end
     end
 
@@ -108,7 +114,7 @@ describe DocumentsController do
         #document = Document.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Document.any_instance.stub(:save).and_return(false)
-        put :update, {:id => document.to_param, :document => { "title" => "invalid value" }}, valid_session
+        put :update, {:id => document.to_param, project_id: document.project_id, :document => { "title" => "invalid value" }}, valid_session
         assigns(:document).should eq(document)
       end
 
@@ -116,7 +122,7 @@ describe DocumentsController do
         #document = Document.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Document.any_instance.stub(:save).and_return(false)
-        put :update, {:id => document.to_param, :document => { "title" => "invalid value" }}, valid_session
+        put :update, {:id => document.to_param, project_id: document.project_id, :document => { "title" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
@@ -128,14 +134,14 @@ describe DocumentsController do
 
     it "destroys the requested document" do
       expect {
-        delete :destroy, {:id => @document.to_param}, valid_session
+        delete :destroy, {:id => @document.to_param, project_id: @document.project_id}, valid_session
       }.to change(Document, :count).by(-1)
     end
 
     it "redirects to the documents list" do
       #document = Document.create! valid_attributes
       id = @document.project.id
-      delete :destroy, {:id => @document.to_param}, valid_session
+      delete :destroy, {:id => @document.to_param, project_id: @document.project_id}, valid_session
       response.should redirect_to(project_documents_path(id))
     end
   end
