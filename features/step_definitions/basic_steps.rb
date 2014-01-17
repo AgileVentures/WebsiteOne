@@ -59,6 +59,12 @@ When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in field, :with => value
 end
 
+When(/^I fill in:$/) do |table|
+  table.rows.each do |row|
+    fill_in row[0], with: row[1]
+  end
+end
+
 # THEN steps
 
 Then /^I should be on the "([^"]*)" page$/ do |page|
@@ -104,6 +110,7 @@ Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field
   with_scope(parent) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
+    field_value ||= ''
     field_value.should =~ /#{value}/
   end
 end
