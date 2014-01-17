@@ -81,7 +81,8 @@ Then /^I should see a form with:$/ do |table|
 end
 
 Then /^I should see:$/ do |table|
-  table.rows.flatten.each.each do |string|
+  p table.rows.flatten
+  table.rows.flatten.each do |string|
     page.should have_text string
   end
 end
@@ -96,6 +97,16 @@ end
 
 Then /^I should see field "([^"]*)"$/ do |field|
   page.should have_field(field)
+end
+
+Then /^I should( not)? see buttons:$/ do |negative, table|
+  table.rows.flatten.each do |button|
+    unless negative
+      expect(has_link_or_button?(page, button)).to be_true
+    else
+      expect(has_link_or_button?(page, button)).to be_false
+    end
+  end
 end
 
 Then /^I should( not)? see button "([^"]*)"$/ do |negative, name|
