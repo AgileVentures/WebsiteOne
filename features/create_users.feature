@@ -11,7 +11,7 @@ Scenario: Let a visitor register as a site user
   And I submit "user@example.com" as username
   And I submit "password" as password
   And I click "Sign up"
-  Then I should be on the home page
+  Then I should be on the "home" page
   And I should see a successful sign up message
 
   Scenario: User signs up with valid data
