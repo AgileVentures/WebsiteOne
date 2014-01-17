@@ -1,4 +1,5 @@
 require 'spec_helper'
+#TODO YA add specs for row id's. since cuc scenarios rely on them
 
 describe 'projects/index.html.erb' do
   before :each do
