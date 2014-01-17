@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
     begin
       @project = Project.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      redirect_to projects_path, notice: 'Project not found.'
+      redirect_to projects_path, alert: 'Requested action failed.  Project was not found.'
     end
 
   end
