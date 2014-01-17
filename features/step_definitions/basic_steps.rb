@@ -15,44 +15,20 @@ def path_to(page_name, id = '')
       edit_project_path(id)
     when 'show' then
       project_path(id)
+    else
+      raise('path to specified is not listed in #path_to')
   end
 end
 
-Then /^I should( not)? see button "([^"]*)"$/ do |negative, name|
-  if negative
-    page.should_not have_link name
-  else
-    page.should have_link name
-  end
-end
-
-Given(/^I visit the site$/) do
-  visit root_path
-end
+# GIVEN steps
 
 Given(/^I am on the "([^"]*)" page$/) do |page|
   visit path_to(page)
 end
 
-And(/^I am redirected to the "([^"]*)" page$/) do |page|
-  expect(current_path).to eq path_to(page)
-end
-
-Given(/^I go to the "([^"]*)" page$/) do |page|
+# WHEN steps
+When(/^I go to the "([^"]*)" page$/) do |page|
   visit path_to(page)
-end
-
-Then(/^I should be on the ([^"]*) page$/) do |page|
-  expect(current_path).to eq path_to(page)
-end
-
-When(/^I submit "([^"]*)" as username$/) do |email|
-  fill_in('Email', :with => email)
-end
-
-When(/^I submit "([^"]*)" as password$/) do |password|
-  fill_in('Password', :with => password)
-  fill_in('Password confirmation', :with => password)
 end
 
 When(/^I click "([^"]*)"$/) do |text|
@@ -63,35 +39,57 @@ When(/^I follow "([^"]*)"$/) do |text|
   click_link text
 end
 
-When /^I should see "([^"]*)"$/ do |string|
-  page.should have_text string
-end
-
-
-When(/^I should see a "([^"]*)" link$/) do |link|
-  page.should have_link link
-end
-
-Then(/^show me the page$/) do
-  save_and_open_page
-end
-
-When(/^I am logged in as a user$/) do
-  #page.stub(:user_signed_in?).and_return(true)
-end
-
-Then(/^I should see field "([^"]*)"$/) do |field|
-  page.should have_field(field)
-end
-
-When(/^I should see form button "([^"]*)"$/) do |button|
-  page.should have_button button
-end
-
 And(/^I click the "([^"]*)" button$/) do |button|
   click_link_or_button button
 end
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
     fill_in field, :with => value
+end
+
+# THEN steps
+
+Then /^I should be on the "([^"]*)" page$/ do |page|
+  expect(current_path).to eq path_to(page)
+end
+
+#Then /^I am redirected to the "([^"]*)" page$/ do |page|
+#  expect(current_path).to eq path_to(page)
+#end
+
+Then /^I should see:$/ do |table|
+  table.rows.flatten.each.each do |string|
+    page.should have_text string
+  end
+end
+
+Then /^I should see "([^"]*)"$/ do |string|
+  page.should have_text string
+end
+
+Then /^I should see link "([^"]*)"$/ do |link|
+  page.should have_link link
+end
+
+Then /^I should see field "([^"]*)"$/ do |field|
+  page.should have_field(field)
+end
+
+Then /^I should( not)? see button "([^"]*)"$/ do |negative, name|
+  unless negative
+    expect(page.has_link?(name) || page.has_button?(name)).to be_true
+  else
+    expect(page.has_link?(name) || page.has_button?(name)).to be_false
+  end
+end
+
+Then(/^show me the page$/) do
+  save_and_open_page
+end
+
+
+
+# unused steps
+Given(/^I visit the site$/) do
+  visit root_path
 end

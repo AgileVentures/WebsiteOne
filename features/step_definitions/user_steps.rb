@@ -21,6 +21,19 @@ Given /^I exist as an unconfirmed user$/ do
 end
 
 ### WHEN ###
+When(/^I submit "([^"]*)" as username$/) do |email|
+  fill_in('Email', :with => email)
+end
+
+When(/^I submit "([^"]*)" as password$/) do |password|
+  fill_in('Password', :with => password)
+  fill_in('Password confirmation', :with => password)
+end
+
+When(/^I am logged in as a user$/) do
+  #page.stub(:user_signed_in?).and_return(true)
+end
+
 When /^I sign in with valid credentials$/ do
   create_visitor
   sign_in
@@ -160,3 +173,4 @@ end
 Given(/^The database is clean$/) do
   DatabaseCleaner.clean
 end
+
