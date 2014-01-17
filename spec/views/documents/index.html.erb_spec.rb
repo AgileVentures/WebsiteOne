@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe 'documents/index' do
   before(:each) do
-    assign(:documents, [
-        stub_model(Document, :title => "Title",:body => "MyText", :project_id => 1 ),
+	@documents = [        
+		stub_model(Document, :title => "Title",:body => "MyText", :project_id => 1 ),
         stub_model(Document, :title => "Title", :body => "MyText", :project_id => 2)
-    ])
+				 ]
+    assign(:documents, @documents)
+    assign(:project, FactoryGirl.create(:project))
   end
   context 'for signed in and not signed in users' do
     it 'renders a list of documents' do
@@ -18,18 +20,23 @@ describe 'documents/index' do
 
     it 'should render column headers in table' do
       render
-      rendered.should have_selector('th', :text => 'Title')
-      rendered.should have_selector('th', :text => 'Body')
+      rendered.should have_css('th', :text => 'Title')
+      rendered.should have_css('th', :text => 'Body')
     end
   end
   context 'for signed in users' do
     before :each do
       view.stub(:user_signed_in?).and_return(true)
     end
+ 
+ 	it 'should not have edit button if not signed in' do
+	  render
+	  rendered.should have_link 'New Document', :href => new_document_path
+	end
 
     it 'should render a New Document button' do
       render
-      rendered.should have_link('New Document', :href => new_document_path)
+      rendered.should have_link 'New Document', :href => new_document_path
     end
 
   end
@@ -37,7 +44,16 @@ describe 'documents/index' do
     before :each do
       view.stub(:user_signed_in?).and_return(false)
     end
-
+	
+	it 'should not have edit button if not signed in' do
+	  render
+	  rendered.should_not have_link 'Edit', :href => edit_document_path(@documents[0].id)
+	end
+	
+	it 'should not have edit button if not signed in' do
+	  render
+	  rendered.should_not have_link 'Destroy', :href => document_path, method: 
+	end
 
   end
 end
