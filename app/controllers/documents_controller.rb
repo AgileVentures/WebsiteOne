@@ -70,6 +70,7 @@ class DocumentsController < ApplicationController
   end
 
   def mercury_update
+    # TODO update with mercury params
     render text: ''
   end
 
