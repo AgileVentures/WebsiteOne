@@ -46,8 +46,28 @@ module Helpers
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]
       click_button 'Sign in'
+  end
+end
+World(Helpers)
+
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+
+  def has_link_or_button?(page, name)
+    page.has_link?(name) || page.has_button?(name)
+  end
+end
+World(WithinHelpers)
+
+module Capybara
+  class Session
+    def has_link_or_button?(name)
+      has_link?(name) || has_button?(name)
     end
   end
 end
 
-World(Helpers)
+
+
