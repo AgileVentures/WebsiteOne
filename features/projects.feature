@@ -84,7 +84,7 @@ Feature: Create and maintain projects
     Given I am logged in
     And I am on the "projects" page
 
-    When I click the "New Project" button
+    When I click "New Project"
 
     Then I should see "Creating a new Project"
     And I should see a form with:
@@ -116,7 +116,7 @@ Feature: Create and maintain projects
   Scenario: Saving a new project: failure
     Given I am logged in
     And I am on the "projects" page
-    And I click the "New Project" button
+    And I click "New Project"
 
     When I fill in "Title" with ""
     And I click the "Submit" button
@@ -138,7 +138,7 @@ Feature: Create and maintain projects
 
   Scenario: Show page has a return link
     Given I am on the "Show" page for project "hello mars"
-    When I click the "Back" button
+    When I click "Back"
     Then I should be on the "projects" page
 
 #  Scenarios for EDIT page
@@ -156,7 +156,7 @@ Feature: Create and maintain projects
 
   Scenario: Edit page has a return link
     Given I am on the "Edit" page for project "hello mars"
-    When I click the "Back" button
+    When I click "Back"
     Then I should be on the "projects" page
 
   Scenario: Updating a project: success

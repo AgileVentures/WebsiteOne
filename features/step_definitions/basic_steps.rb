@@ -1,24 +1,3 @@
-module WithinHelpers
-  def with_scope(locator)
-    locator ? within(*selector_for(locator)) { yield } : yield
-  end
-
-  #TODO YA refactor to extend the page class
-  def has_link_or_button?(page, name)
-    page.has_link?(name) || page.has_button?(name)
-  end
-end
-
-module Capybara
-  class Session
-    def has_link_or_button?(name)
-      has_link?(name) || has_button?(name)
-    end
-  end
-end
-
-World(WithinHelpers)
-
 def path_to(page_name, id = '')
   name = page_name.downcase
   case name
@@ -53,16 +32,21 @@ When(/^I go to the "([^"]*)" page$/) do |page|
 end
 
 When(/^I click "([^"]*)"$/) do |text|
-  click_button text
+  click_link_or_button text
+end
+
+When(/^I click the "([^"]*)" button$/) do |button|
+  click_button button
+end
+
+When(/^I click the "([^"]*)" link$/) do |button|
+  click_link button
 end
 
 When(/^I follow "([^"]*)"$/) do |text|
   click_link text
 end
 
-And(/^I click the "([^"]*)" button$/) do |button|
-  click_link_or_button button
-end
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in field, :with => value
@@ -125,12 +109,16 @@ Then /^I should( not)? see button "([^"]*)"$/ do |negative, button|
   end
 end
 
-Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field, parent, value|
+Then /^the "([^"]*)" field(?: within (.*))? should( not)? contain "([^"]*)"$/ do |field, parent, negative, value|
   with_scope(parent) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
     field_value ||= ''
-    field_value.should =~ /#{value}/
+    unless negative
+      field_value.should =~ /#{value}/
+    else
+      field_value.should_not =~ /#{value}/
+    end
   end
 end
 
