@@ -120,9 +120,7 @@ Feature: Create and maintain projects
     Then I should be on the "projects" page
 
   Scenario: Updating a project
-    Given I am logged in
-    And I am on the "projects" page
-    When I click the "Edit" button for project "hello mars"
+    Given I am on the "Edit" page for project "hello mars"
 
     And I fill in "Description" with "Hello, Uranus!"
     And I click the "Submit" button
@@ -131,7 +129,7 @@ Feature: Create and maintain projects
     And I should see "Project was successfully updated."
     And I should see "Hello, Uranus!"
 
-#  Scenarios for Save action
+#  Scenarios for SAVE action
 
   Scenario: Saving a project: show successful message
     Given I am logged in
@@ -150,16 +148,14 @@ Feature: Create and maintain projects
     And I should see "Status 1"
 
   Scenario: Saving a project: show error message
-    Given I am logged in
-    And I am on the "projects" page
-    And I follow "New Project"
+    Given I am on the "Edit" page for project "hello mars"
 
     When I fill in "Title" with ""
     And I click the "Submit" button
 
     Then I should see "Project was not saved. Please check the input."
 
-  #  Scenarios for Destroy action
+  #  Scenarios for DESTROY action
 
   Scenario: Destroying a project: successful
     Given I am logged in

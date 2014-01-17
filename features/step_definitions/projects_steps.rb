@@ -48,6 +48,4 @@ Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |page_name, proje
     And I am on the "projects" page
     And I click the "#{page_name}" button for project "#{project_name}"
   }
-  id = Project.find_by_title(project_name).id
-  expect(current_path).to eq(path_to(page_name, id))
 end
