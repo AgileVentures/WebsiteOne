@@ -8,6 +8,15 @@ module WithinHelpers
     page.has_link?(name) || page.has_button?(name)
   end
 end
+
+module Capybara
+  class Session
+    def has_link_or_button?(name)
+      has_link?(name) || has_button?(name)
+    end
+  end
+end
+
 World(WithinHelpers)
 
 def path_to(page_name, id = '')
@@ -101,18 +110,18 @@ end
 Then /^I should( not)? see buttons:$/ do |negative, table|
   table.rows.flatten.each do |button|
     unless negative
-      expect(has_link_or_button?(page, button)).to be_true
+      expect(page.has_link_or_button? button).to be_true
     else
-      expect(has_link_or_button?(page, button)).to be_false
+      expect(page.has_link_or_button? button).to be_false
     end
   end
 end
 
-Then /^I should( not)? see button "([^"]*)"$/ do |negative, name|
+Then /^I should( not)? see button "([^"]*)"$/ do |negative, button|
   unless negative
-    expect(has_link_or_button?(page, name)).to be_true
+    expect(page.has_link_or_button? button).to be_true
   else
-    expect(has_link_or_button?(page, name)).to be_false
+    expect(page.has_link_or_button? button).to be_false
   end
 end
 
