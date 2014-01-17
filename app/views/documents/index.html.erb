@@ -1,4 +1,4 @@
-<h1>Listing documents</h1>
+<h1>List of documents for <%= @project.title %></h1>
 
 <table>
   <thead>
@@ -27,5 +27,6 @@
 </table>
 
 <br>
-
+<% if user_signed_in? %>
 <%= link_to 'New Document', new_document_path %>
+<% end %>

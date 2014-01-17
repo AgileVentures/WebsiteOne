@@ -15,11 +15,29 @@ describe 'documents/index' do
       assert_select "tr>td", :text => 1.to_s, :count => 1
       assert_select "tr>td", :text => 2.to_s, :count => 1
     end
+
+    it 'should render column headers in table' do
+      render
+      rendered.should have_selector('th', :text => 'Title')
+      rendered.should have_selector('th', :text => 'Body')
+    end
   end
   context 'for signed in users' do
+    before :each do
+      view.stub(:user_signed_in?).and_return(true)
+    end
+
+    it 'should render a New Document button' do
+      render
+      rendered.should have_link('New Document', :href => new_document_path)
+    end
 
   end
   context 'for not signed in users' do
+    before :each do
+      view.stub(:user_signed_in?).and_return(false)
+    end
+
 
   end
 end
