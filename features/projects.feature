@@ -74,7 +74,7 @@ Feature: Create and maintain projects
     And I should not see button "Edit"
     And I should not see button "Destroy"
 
-#  Scenarios for New page
+#  Scenarios for NEW page
 
   Scenario: Creating a new project
     Given I am logged in
@@ -83,7 +83,7 @@ Feature: Create and maintain projects
 
     Then I should see a form for "creating a new project"
 
-#  Scenarios for Show page
+#  Scenarios for SHOW page
 
   Scenario: opens "Show" page with projects details
     Given I am logged in
@@ -101,14 +101,18 @@ Feature: Create and maintain projects
     When I click the "Back" button
     Then I should be on the "projects" page
 
-#  Scenarios for Edit page
+#  Scenarios for EDIT page
 
-  Scenario: Edit page exists
+  Scenario: opens "Edit" page with projects details
     Given I am logged in
-    And I am on the "projects" page
-    When I click the "Edit" button for project "hello mars"
-    Then I am on the "Edit" page for project "hello mars"
-    And I should see button "Submit"
+    And I am on the "Projects" page
+
+    When I click the "Edit" button for project "hello world"
+    Then I should see a form with:
+      | Field        | Text                  |
+      | Title        | hello world           |
+      | Description  | greetings earthlings  |
+      | Status       | active                |
 
   Scenario: Edit page has a return link
     Given I am on the "Edit" page for project "hello mars"

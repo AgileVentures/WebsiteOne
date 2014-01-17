@@ -1,3 +1,15 @@
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+
+  #TODO YA refactor to extend the page class
+  def has_link_or_button?(page, name)
+    page.has_link?(name) || page.has_button?(name)
+  end
+end
+World(WithinHelpers)
+
 def path_to(page_name, id = '')
   name = page_name.downcase
   case name
@@ -44,7 +56,7 @@ And(/^I click the "([^"]*)" button$/) do |button|
 end
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
-    fill_in field, :with => value
+  fill_in field, :with => value
 end
 
 # THEN steps
@@ -56,6 +68,11 @@ end
 #Then /^I am redirected to the "([^"]*)" page$/ do |page|
 #  expect(current_path).to eq path_to(page)
 #end
+Then /^I should see a form with:$/ do |table|
+  table.rows.each do |row|
+    step %Q{the "#{row[0]}" field should contain "#{row[1]}"}
+  end
+end
 
 Then /^I should see:$/ do |table|
   table.rows.flatten.each.each do |string|
@@ -77,16 +94,23 @@ end
 
 Then /^I should( not)? see button "([^"]*)"$/ do |negative, name|
   unless negative
-    expect(page.has_link?(name) || page.has_button?(name)).to be_true
+    expect(has_link_or_button?(page, name)).to be_true
   else
-    expect(page.has_link?(name) || page.has_button?(name)).to be_false
+    expect(has_link_or_button?(page, name)).to be_false
+  end
+end
+
+Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field, parent, value|
+  with_scope(parent) do
+    field = find_field(field)
+    field_value = (field.tag_name == 'textarea') ? field.text : field.value
+    field_value.should =~ /#{value}/
   end
 end
 
 Then(/^show me the page$/) do
   save_and_open_page
 end
-
 
 
 # unused steps
