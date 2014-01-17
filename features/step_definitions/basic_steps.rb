@@ -81,7 +81,6 @@ Then /^I should see a form with:$/ do |table|
 end
 
 Then /^I should see:$/ do |table|
-  p table.rows.flatten
   table.rows.flatten.each do |string|
     page.should have_text string
   end

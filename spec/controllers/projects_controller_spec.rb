@@ -196,4 +196,15 @@ describe ProjectsController do
   end
 
 
+  ##TODO YA move into controller spec
+  #Scenario: Requesting action for non-existing project
+  #Given I am logged in
+  #And I am on the "projects" page
+  #
+  #When I click the "Edit" button for project "Non-existent"
+  #
+  #                                 Then I should be on the "projects" page
+  #                                 And I should see "Project not found."
+
+
 end
