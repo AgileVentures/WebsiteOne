@@ -1,9 +1,9 @@
 module Helpers
   def create_visitor
     #@visitor =FactoryGirl(:user)
-    @visitor ||= {:email => "example@example.com",
-                  :password => "changeme",
-                  :password_confirmation => "changeme"}
+    @visitor ||= { :email => "example@example.com",
+                   :password => "changeme",
+                   :password_confirmation => "changeme" }
   end
 
   def find_user
@@ -46,6 +46,7 @@ module Helpers
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]
       click_button 'Sign in'
+    end
   end
 end
 World(Helpers)
