@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :mercury_update]
   before_action :authenticate_user!, except: [ :index, :show ]
 
   before_action :find_project
@@ -69,7 +69,7 @@ class DocumentsController < ApplicationController
   end
 
   def mercury_update
-    # TODO update with mercury params
+    p parms.inspect
     render text: ''
   end
 

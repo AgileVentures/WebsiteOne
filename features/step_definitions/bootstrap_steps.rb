@@ -29,6 +29,7 @@ Then /^I should see that bootstrap css library has been loaded$/ do
                   visible-xs
                 ]
   visit(path_to_css)
+  #sleep(5)
 
   css_tags.each do |name|
     expect(page.html).to include(name)
@@ -55,6 +56,7 @@ Then /^I should see that bootstrap js library has been loaded$/ do
                   bootstrap
                 ]
   visit(path_to_js)
+  #sleep(5)
 
   js_libraries.each do |name|
     expect(page.html).to include(name)
@@ -65,6 +67,8 @@ Then /^I should see that bootstrap is functioning$/ do
 #  run bootstrap specific functions that change the DOM
 #  if bootstrap is not loaded that the result will be 'is not a function'
   visit('/')
+  sleep(5)
+
   expect(page.evaluate_script('$("").modal()')).to be_true
   expect(page.evaluate_script('$("").dropdown()')).to be_true
   expect(page.evaluate_script('$(this).scrollspy("refresh")')).to be_true
