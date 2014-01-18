@@ -1,4 +1,4 @@
-<%= form_for(@document) do |f| %>
+<%= form_for([@project, @document], :html => { :class => 'form-vertical' }) do |f| %>
   <% if @document.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
@@ -19,10 +19,7 @@
     <%= f.label :body %><br>
     <%= f.text_area :body %>
   </div>
-  <div class="field">
-    <%= f.label :project_id %><br>
-    <%= f.number_field :project_id %>
-  </div>
+  <%= f.hidden_field :project_id, value: params[:project_id] %>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -27,8 +27,8 @@ Scenario: Render of list documents
   And I should not see "Another doc"
 
 Scenario: Create a new document
-  Given I am on the "Documents" page for project "hello world"
-  And I am logged in as a user
+  Given I am logged in
+  And I am on the "Documents" page for project "hello world"
   When I click the "New Document" button
   And I fill in "Title" with "New doc title"
   And I fill in "Body" with "Document content"
@@ -36,8 +36,8 @@ Scenario: Create a new document
   Then I should see "Document was successfully created."
 
 Scenario: Edit a document
-  Given I am on the "Documents" page for project "hello world"
-  And I am logged in as a user
+  Given I am logged in
+  And I am on the "Documents" page for project "hello world"
   When I click the "Edit" button for document "Howto"
   Then I should be on the "Edit" page for document "Howto"
   When I fill in "Title" with "My new title"
@@ -54,8 +54,8 @@ Scenario: Show a document
   And I should see a link to "Edit" page for document "Howto"
 
 Scenario: Destroy a document
-  Given I am on the "Documents" page for project "hello world"
-  And I am logged in as a user
+  Given I am logged in
+  And I am on the "Documents" page for project "hello world"
   When I click the "Destroy" button for document "Howto"
   Then I should be on the "Documents" page for project "hello world"
   And I should see "Document was successfully deleted."

@@ -20,6 +20,7 @@
 </p>
 <% if user_signed_in? %>
 <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
-            data: { save_url: document_mercury_update_path(@document) }%>
+            data: { save_url: project_document_mercury_update_path(@project, @document) }%>
 <% end %>
-<%= link_to 'Back', documents_path %>
+<% # link_to 'Edit', edit_project_document_path(id: @document.id, project_id: @document.project_id) %> |
+<%= link_to 'Back', project_documents_path(project_id: @document.project_id) %>

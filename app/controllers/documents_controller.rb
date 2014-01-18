@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, except: [ :index, :show ]
 
   before_action :find_project
 
@@ -32,10 +32,9 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = Document.new(document_params)
-
     respond_to do |format|
       if @document.save
-        format.html { redirect_to @document, notice: 'Document was successfully created.' }
+        format.html { redirect_to project_documents_path(@project), notice: 'Document was successfully created.' }
         format.json { render action: 'show', status: :created, location: @document }
       else
         format.html { render action: 'new' }
@@ -49,7 +48,7 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @document.update(document_params)
-        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
+        format.html { redirect_to project_document_path(id: @document.id, project_id: @document.project_id), notice: 'Document was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

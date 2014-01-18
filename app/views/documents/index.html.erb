@@ -1,4 +1,4 @@
-<h1>Listing documents</h1>
+<h1>List of documents for <%= @project.title %></h1>
 
 <table>
   <thead>
@@ -7,8 +7,10 @@
       <th>Body</th>
       <th>Project</th>
       <th></th>
+      <% if user_signed_in? %>
       <th></th>
       <th></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -18,14 +20,17 @@
         <td><%= document.title %></td>
         <td><%= document.body %></td>
         <td><%= document.project_id %></td>
-        <td><%= link_to 'Show', document %></td>
-        <td><%= link_to 'Edit', edit_document_path(document) %></td>
-        <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', project_document_path(id: document.id, project_id: document.project_id) %></td>
+        <% if user_signed_in? %>
+        <td><%= link_to 'Edit', edit_project_document_path(id: document.id, project_id: document.project_id) %></td>
+        <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Document', new_document_path %>
+<% if user_signed_in? %>
+<%= link_to 'New Document', new_project_document_path(project_id: @project.id) %>
+<% end %>
