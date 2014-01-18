@@ -1,4 +1,4 @@
-Then(/^I should see a "([^"]*)" table$/) do |legend|
+Then(/^I should see "([^"]*)" table$/) do |legend|
   within('table#projects') do
     page.should have_css('legend', :text => legend)
   end
@@ -11,7 +11,6 @@ When(/^I should see column "([^"]*)"$/) do |column|
 end
 
 When(/^There are projects in the database$/) do
-  #TODO Y use factoryGirl
   Project.create(title: "Title 1", description: "Description 1", status: "Status 1")
   Project.create(title: "Title 2", description: "Description 2", status: "Status 2")
 end
@@ -19,7 +18,7 @@ end
 Given(/^the following projects exist:$/) do |table|
   table.hashes.each do |hash|
     project = Project.create(hash)
-    project.save!
+    project.save
   end
 end
 
@@ -33,7 +32,6 @@ end
 
 When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project_name|
   project = Project.find_by_title(project_name)
-
   if project
     within("tr##{project.id}") do
       click_link_or_button button
@@ -43,36 +41,13 @@ When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project
   end
 end
 
-#TODO YA consider a simpler version below
-# Matches Given I am on.. | When I go to.. | Then I am on..
-#Given(/^I (go to|.* on)? the "(.*?)" page for project "(.*?)"$/) do |stay_or_go, page, title|
-#  project = Project.find_by_title title
-#  method_name = page.downcase + '_project_path'
-#  edit_project_path_for_id = send method_name, project
-#  visit edit_project_path_for_id if stay_or_go == 'go to'
-#  expect(current_fullpath).to eq edit_project_path_for_id
-#end
-
 Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |page_name, project_name|
   steps %Q{
     Given I am logged in
-    And I am on the "projects" page
-    And I click the "#{page_name}" button for project "#{project_name}"
-  }
-  id = Project.find_by_title(project_name).id
-  expect(current_path).to eq(path_to(page_name, id))
+    And I am on the "projects" page }
+  if page_name == 'Show'
+    steps %Q{ And I click "#{project_name}" }
+  else
+    steps %Q{ And I click the "#{page_name}" button for project "#{project_name}" }
+  end
 end
-
-def current_fullpath
-  URI.parse(current_url).request_uri
-end
-
-#TODO YA redundant after adding universal method for clicking any button
-#Then(/^the Destroy button works for "(.*?)"$/) do |project_title|
-#  unless Project.find_by_title(project_title).nil?
-#    id = Project.find_by_title(project_title).id
-#    within("tr##{id}") do
-#      expect { click_link "Destroy" }.to change(Project, :count).by(-1)
-#    end
-#  end
-#end

@@ -1,6 +1,12 @@
 language: ruby
 rvm:
 - 2.0.0-p247
+
+# to enable javascript testing with X server and firefox
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
 before_script:
 - bundle exec rake db:create:all
 - bundle exec rake db:migrate
@@ -9,7 +15,6 @@ before_script:
 script:
 - bundle exec rake cucumber
 - bundle exec rake spec
-
 deploy:
   provider: heroku
   api_key:
@@ -17,4 +22,4 @@ deploy:
   app:
       develop: websiteone-develop
       master: websiteone-production
-
+  run: "rake db:migrate"

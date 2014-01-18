@@ -77,7 +77,7 @@ describe ProjectsController do
         post :create, @params
 
         #TODO YA add a show view_spec to check if flash is actually displayed
-        expect(flash[:notice]).to eql('Project was successfully created.')
+        expect(flash[:notice]).to eq('Project was successfully created.')
       end
     end
 
@@ -195,5 +195,11 @@ describe ProjectsController do
     end
   end
 
+  it 'shows a notice if requested action for non-existing project ' do
+    get :edit,  id: 'non-existent'
+    p response.body
+    expect(flash[:alert]).to eq('Requested action failed.  Project was not found.')
+    expect(response).to redirect_to(projects_path)
+  end
 
 end
