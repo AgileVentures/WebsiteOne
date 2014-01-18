@@ -17,8 +17,12 @@ Scenario: Load basic design elements
 Scenario: Render navigation bar
   Then I should see a navigation bar
 #  Then show me the page
-  And I should see a "Our projects" link
-  And I should see a "Check in" link
-  And I should see a "Sign up" link
+  And I should see link "Our projects"
+  And I should see link "Check in"
+  And I should see link "Sign up"
+
+  Scenario: Render footer
+#    And I should see "AgileVentures" in footer
+#    And I should see "Crowdsourced Learning" in footer
 
 

@@ -1,5 +1,5 @@
 Given /^I am not logged in$/ do
-  visit destroy_user_session_path
+  step 'I sign out'
 end
 
 Given /^I am logged in$/ do
@@ -21,13 +21,26 @@ Given /^I exist as an unconfirmed user$/ do
 end
 
 ### WHEN ###
+When(/^I submit "([^"]*)" as username$/) do |email|
+  fill_in('Email', :with => email)
+end
+
+When(/^I submit "([^"]*)" as password$/) do |password|
+  fill_in('Password', :with => password)
+  fill_in('Password confirmation', :with => password)
+end
+
+When(/^I am logged in as a user$/) do
+  #page.stub(:user_signed_in?).and_return(true)
+end
+
 When /^I sign in with valid credentials$/ do
   create_visitor
   sign_in
 end
 
 When /^I sign out$/ do
-  visit '/users/sign_out'
+  page.driver.submit :delete, destroy_user_session_path, {}
 end
 
 When /^I sign up with valid user data$/ do
@@ -76,7 +89,7 @@ end
 When /^I edit my account details$/ do
   visit '/users/edit'
   #click_link "Edit account"
-  within ('section#devise')  do
+  within ('section#devise') do
     fill_in "user_first_name", :with => "newname"
     fill_in "user_last_name", :with => "Lastname"
     fill_in "user_organization", :with => "Company"
@@ -160,3 +173,4 @@ end
 Given(/^The database is clean$/) do
   DatabaseCleaner.clean
 end
+
