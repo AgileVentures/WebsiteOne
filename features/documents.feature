@@ -29,10 +29,10 @@ Scenario: Render of list documents
 Scenario: Create a new document
   Given I am logged in
   And I am on the "Documents" page for project "hello world"
-  When I click the "New Document" button
+  When I click "New Document"
   And I fill in "Title" with "New doc title"
   And I fill in "Body" with "Document content"
-  And I click the "Create Document" button
+  And I click "Create Document"
   Then I should see "Document was successfully created."
 
 Scenario: Edit a document
@@ -42,7 +42,7 @@ Scenario: Edit a document
   Then I should be on the "Edit" page for document "Howto"
   When I fill in "Title" with "My new title"
   And I fill in "Body" with "New document body"
-  And I click the "Update Document" button
+  And I click "Update Document"
   Then I should see "Document was successfully updated."
 
 Scenario: Show a document
