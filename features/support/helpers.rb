@@ -1,9 +1,9 @@
 module Helpers
   def create_visitor
     #@visitor =FactoryGirl(:user)
-    @visitor ||= {:email => "example@example.com",
-                  :password => "changeme",
-                  :password_confirmation => "changeme"}
+    @visitor ||= { :email => "example@example.com",
+                   :password => "changeme",
+                   :password_confirmation => "changeme" }
   end
 
   def find_user
@@ -49,5 +49,26 @@ module Helpers
     end
   end
 end
-
 World(Helpers)
+
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+
+  def has_link_or_button?(page, name)
+    page.has_link?(name) || page.has_button?(name)
+  end
+end
+World(WithinHelpers)
+
+module Capybara
+  class Session
+    def has_link_or_button?(name)
+      has_link?(name) || has_button?(name)
+    end
+  end
+end
+
+
+
