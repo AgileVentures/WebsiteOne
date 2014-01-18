@@ -59,3 +59,15 @@ Scenario: Destroy a document
   When I click the "Destroy" button for document "Howto"
   Then I should be on the "Documents" page for project "hello world"
   And I should see "Document was successfully deleted."
+
+Scenario: Has a link to edit a document using the Mercury Editor
+  Given I am logged in
+  And I am on the "Show" page for document "Howto"
+  When I click the "Edit" button
+  Then I should be in the Mercury Editor
+
+@javascript
+Scenario: Mercury Editor is working
+  Given I am on the Mercury Editor for "Show" page for document "Howto"
+  Then I should see the editable field "Title" for document "Howto"
+  And I should see the editable field "Body" for document "Howto"

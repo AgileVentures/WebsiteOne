@@ -52,3 +52,18 @@ end
 #  end
 #  page.has_link?(action, href: expected_path)
 #end
+
+Then(/^I should be in the Mercury Editor$/) do
+  expect(current_path).to match(/\/editor\//i)
+end
+
+When(/^I am on the Mercury Editor for "([^"]*)" page for document "([^"]*)"$/) do |button, title|
+  visit "/editor#{url_for_title(action: button, controller: 'documents', title: title)}"
+end
+
+# Bryan: not completely reliable but works for the time being
+Then(/^I should see the editable field "([^"]*)" for document "([^"]*)"$/) do |field, title|
+  page.should have_text title
+  # the contenteditable attribute is added by Mercury, which means mercury is at least running partially
+  find(:css, "div#document_#{field.downcase.singularize}[contenteditable]")
+end

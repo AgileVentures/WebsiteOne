@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :mercury_update]
+  before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [ :index, :show ]
 
   before_action :find_project
@@ -69,8 +69,11 @@ class DocumentsController < ApplicationController
   end
 
   def mercury_update
-    p parms.inspect
-    render text: ''
+    @document = Document.find(params[:document_id])
+    if @document.update_attributes(title: params[:content][:document_title][:value],
+                                   body: params[:content][:document_body][:value])
+      render text: '' # So mercury knows it is successful
+    end
   end
 
   private
