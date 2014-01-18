@@ -15,3 +15,8 @@ Then(/^I should see a navigation bar$/) do
     find ('div.navbar')
   end
 end
+When(/^I should see "([^"]*)" in footer$/) do |string|
+  within('section#footer') do
+    page.should have_text string
+  end
+end
