@@ -10,15 +10,15 @@ describe Project do
     context 'returns false on invalid inputs' do
       it 'blank Title' do
         project.title = ''
-        expect(project.save).to_not be_true
+        expect(project.save).to be_false
       end
       it 'blank Description' do
         project.description = ''
-        expect(project.save).to_not be_true
+        expect(project.save).to be_false
       end
       it 'blank Status' do
         project.status = ''
-        expect(project.save).to_not be_true
+        expect(project.save).to be_false
       end
     end
   end

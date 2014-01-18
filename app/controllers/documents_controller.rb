@@ -68,6 +68,11 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def mercury_update
+    # TODO update with mercury params
+    render text: ''
+  end
+
   private
   def find_project
     if params[:project_id]
