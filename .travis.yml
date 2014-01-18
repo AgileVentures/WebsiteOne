@@ -22,3 +22,4 @@ deploy:
   app:
       develop: websiteone-develop
       master: websiteone-production
+  run: "rake db:migrate"
