@@ -1,0 +1,36 @@
+<h1>List of documents for <%= @project.title %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Project</th>
+      <th></th>
+      <% if user_signed_in? %>
+      <th></th>
+      <th></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @documents.each do |document| %>
+      <tr>
+        <td><%= document.title %></td>
+        <td><%= document.body %></td>
+        <td><%= document.project_id %></td>
+        <td><%= link_to 'Show', project_document_path(id: document.id, project_id: document.project_id) %></td>
+        <% if user_signed_in? %>
+        <td><%= link_to 'Edit', edit_project_document_path(id: document.id, project_id: document.project_id) %></td>
+        <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user_signed_in? %>
+<%= link_to 'New Document', new_project_document_path(project_id: @project.id) %>
+<% end %>
