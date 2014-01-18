@@ -9,7 +9,7 @@ describe DocumentsController do
   end
 
   let(:document) { @document }
-  let(:valid_attributes) { { 'title' => 'MyString', 'project_id' => "#{document.project_id}"} }
+  let(:valid_attributes) { { 'title' => 'MyString', 'body' => 'MyText', 'project_id' => "#{document.project_id}"} }
 
   let(:valid_session) { {} }
 
