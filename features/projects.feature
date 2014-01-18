@@ -16,9 +16,8 @@ Background:
 Scenario: List of projects in table layout
   Given  I am on the "home" page
   When I follow "Our projects"
+  And There are projects in the database
   Then I should see "List of Projects"
-  And I should see "Title"
-  And I should see "Description"
   And I should see "Created"
   And I should see "Status"
 
@@ -26,10 +25,10 @@ Scenario: See a list of current projects
   Given  I am on the "home" page
   And There are projects in the database
   When I follow "Our projects"
-  Then I should see "Title 1"
+  And I should see a "Title 1" link
   And I should see "Description 1"
   And I should see "Status 1"
-  And I should see "Title 2"
+  And I should see a "Title 2" link
   And I should see "Description 2"
   And I should see "Status 2"
 
@@ -47,16 +46,11 @@ Scenario: Do not show New Project button if user is not logged in
 Scenario: Columns in projects table
   When I go to the "projects" page
   Then I should see a "List of Projects" table
-  And I should see column "Title"
-  And I should see column "Description"
-  And I should see column "Status"
-  And I should see column "Created"
 
 Scenario: Display Show, edit, delete buttons in projects table
   Given I am logged in
   When I go to the "projects" page
   Then I should see a "List of Projects" table
-  And I should see button "Show"
   And I should see button "Edit"
   And I should see button "Destroy"
 
