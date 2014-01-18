@@ -3,8 +3,8 @@ FactoryGirl.define do
     # first_name 'Test'
     # last_name 'User'
     email 'example@example.com'
-    password 'changeme'
-    password_confirmation 'changeme'
+    password 'changemelater'
+    password_confirmation 'changemelater'
     # required if the Devise Confirmable module is used
     # confirmed_at Time.now
   end

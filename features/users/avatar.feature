@@ -8,6 +8,4 @@ Feature:  In order to make my personal avatar visible to other users
 
   Scenario: See my avatar on My account page
     When I click "My Account"
-    Then I should see my avatar image:
-
-
+    Then I should see my avatar image
