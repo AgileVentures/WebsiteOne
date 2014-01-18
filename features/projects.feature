@@ -8,9 +8,10 @@ Feature: Create and maintain projects
 
 Background:
   Given the following projects exist:
-    | title       | description          | status   |
-    | hello world | greetings earthlings | active   |
-    | hello mars  | greetings aliens     | inactive |
+    | title         | description           | status   |
+    | hello world   | greetings earthlings  | active   |
+    | hello mars    | greetings aliens      | inactive |
+    | delete-in-bg! | deleted while in use  | missing  |
 
 Scenario: List of projects in table layout
   Given  I am on the "home" page
@@ -134,19 +135,13 @@ Scenario: Edit page has a return link
 Scenario: Destroying a project: successful
   Given I am logged in
   And I am on the "projects" page
-
   When I click the "Destroy" button for project "hello mars"
-
   Then I am redirected to the "projects" page
   And I should see "Project was successfully deleted."
 
-Scenario: Requesting action for non-existing project
+Scenario: Edit a project which has been deleted after rendering
   Given I am logged in
   And I am on the "projects" page
-
-  When I click the "Edit" button for project "Non-existent"
-
+  When I click the "Edit" button for project "delete-in-bg!"
   Then I am redirected to the "projects" page
   And I should see "Project not found."
-
-

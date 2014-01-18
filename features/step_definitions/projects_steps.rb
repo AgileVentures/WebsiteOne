@@ -36,7 +36,9 @@ Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
 end
 
 When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, title|
-  id = Project.find_by_title(title).id
+  project = Project.find_by_title title
+  id = project.id
+  Project.delete project if project.title == 'delete-in-bg!'
   within("tr##{id}") do
     click_link button
   end
