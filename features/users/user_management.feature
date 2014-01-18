@@ -9,7 +9,7 @@ Feature: Create and maintain projects
 
   Scenario: Having My account page
     When I click "My Account"
-    Then I should see "Edit user details:"
+    Then I should see "Edit your details:"
     And I should see a form with:
       | Field                 |                     |
       | Email                 | current@email.com   |
