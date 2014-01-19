@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :document do
-    title "MyString"
-    body "MyText"
+    sequence(:title) {|n| "Title #{n}"}
+    sequence(:body) {|n| "MyText #{n}"}
     project
   end
 end
+
