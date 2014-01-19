@@ -46,16 +46,12 @@ end
 
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
-  fill_in('Email', :with => email)
+  fill_in('user_email', :with => email)
 end
 
 When(/^I submit "([^"]*)" as password$/) do |password|
-  fill_in('Password', :with => password)
-  fill_in('Password confirmation', :with => password)
-end
-
-When(/^I am logged in as a user$/) do
-  #page.stub(:user_signed_in?).and_return(true)
+  fill_in('user_password', :with => password)
+  fill_in('user_password_confirmation', :with => password)
 end
 
 When /^I sign in with valid credentials$/ do
