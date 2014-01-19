@@ -49,7 +49,6 @@ module Helpers
     end
   end
 end
-World(Helpers)
 
 module WithinHelpers
   def with_scope(locator)
@@ -60,7 +59,7 @@ module WithinHelpers
     page.has_link?(name) || page.has_button?(name)
   end
 end
-World(WithinHelpers)
+
 
 module Capybara
   class Session
@@ -71,3 +70,5 @@ module Capybara
 end
 
 World(ApplicationHelper)
+World(Helpers)
+World(WithinHelpers)

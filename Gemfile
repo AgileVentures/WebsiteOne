@@ -23,7 +23,7 @@ group :test do
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
-  gem 'zeus'
+  gem 'zeus' # rails preloading environment
 end
 
 group :development, :test do

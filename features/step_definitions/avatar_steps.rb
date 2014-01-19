@@ -1,3 +1,3 @@
 Then /^I should see my avatar image$/ do
-  page.find(:xpath, "//img[@src=\"#{gravatar_for(@user)}\"]")
+  expect(page).to have_xpath("//img[contains(@src, '#{@avatar_link}')]")
 end

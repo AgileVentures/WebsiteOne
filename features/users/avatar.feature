@@ -3,7 +3,8 @@ Feature:  In order to make my personal avatar visible to other users
   I want to link my avatar image to my account
 
   Background:
-    Given I am logged in as user with email "current@email.com", with password "12345678"
+    Given I am logged in as user with email "MyEmailAddress@example.com", with password "12345678"
+    And I have an avatar image at "http://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?s=80&d=mm"
     And I am on the "home" page
 
   Scenario: See my avatar on My account page
