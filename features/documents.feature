@@ -32,7 +32,7 @@ Scenario: Create a new document
   When I click "New Document"
   And I fill in "Title" with "New doc title"
   And I fill in "Body" with "Document content"
-  And I click "Create Document"
+  And I click "Submit"
   Then I should see "Document was successfully created."
 
 Scenario: Edit a document
@@ -42,7 +42,7 @@ Scenario: Edit a document
   Then I should be on the "Edit" page for document "Howto"
   When I fill in "Title" with "My new title"
   And I fill in "Body" with "New document body"
-  And I click "Update Document"
+  And I click "Submit"
   Then I should see "Document was successfully updated."
 
 Scenario: Show a document
