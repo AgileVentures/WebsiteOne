@@ -32,7 +32,7 @@ Scenario: Create a new document
   When I click "New Document"
   And I fill in "Title" with "New doc title"
   And I fill in "Body" with "Document content"
-  And I click "Create Document"
+  And I click "Submit"
   Then I should see "Document was successfully created."
 
 Scenario: Edit a document
@@ -42,16 +42,16 @@ Scenario: Edit a document
   Then I should be on the "Edit" page for document "Howto"
   When I fill in "Title" with "My new title"
   And I fill in "Body" with "New document body"
-  And I click "Update Document"
+  And I click "Submit"
   Then I should see "Document was successfully updated."
 
 Scenario: Show a document
-  Given I am on the "Documents" page for project "hello world"
-  When I click the "Show" button for document "Howto"
-  Then I should be on the "Show" page for document "Howto"
-  And I should see "Howto"
-  And I should see "How to start"
-  And I should see a link to "Edit" page for document "Howto"
+  Given I am on the "Documents" page for project "hello mars"
+  When I click "Howto 2"
+  Then I should be on the "Show" page for document "Howto 2"
+  And I should see "Howto 2"
+  And I should see "My documentation"
+  And I should see a link to "Edit" page for document "Howto 2"
 
 Scenario: Destroy a document
   Given I am logged in
