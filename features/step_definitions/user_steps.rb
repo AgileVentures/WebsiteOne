@@ -1,10 +1,15 @@
+Given /^I have an avatar image at "([^"]*)"$/ do |link|
+  @avatar_link = link
+end
+
 Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @visitor = { email: email,
-                 password: password,
-                 password_confirmation: password
-  }
-  @user = FactoryGirl.create(:user, @visitor)
-  sign_in
+  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password )
+  visit new_user_session_path
+  within ('#devise') do
+    fill_in 'user_email', :with => email
+    fill_in 'user_password', :with => password
+    click_button 'Sign in'
+  end
 end
 
 Then /^I should see a user form for "([^"]*)"$/ do |form_purpose|

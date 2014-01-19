@@ -9,7 +9,7 @@ Feature: Create and maintain projects
 
   Scenario: Having My account page
     When I click "My Account"
-    Then I should see "Edit your details:"
+    Then I should see "Edit your user details:"
     And I should see a form with:
       | Field                 |                     |
       | Email                 | current@email.com   |
@@ -42,6 +42,10 @@ Feature: Create and maintain projects
     When I click the "Update" button
     Then I should see "There was an error updating your account."
     And I should see "Current password is invalid"
+
+    Scenario: Clicking Back button
+
+    Scenario: Cancel my account
 
 
 

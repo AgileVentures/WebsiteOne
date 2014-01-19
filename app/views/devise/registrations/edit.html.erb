@@ -1,8 +1,8 @@
 <section id='devise' xmlns="http://www.w3.org/1999/html">
   <div class="col-md-4 col-md-offset-4 form-frame signin">
-    <h3>Edit your details: </h3>
-    <%- devise_error_messages_flash %>
-    <img src="<%= gravatar_for(resource) %>"/>
+    <%= devise_error_messages_flash %>
+    <h3>Edit your user details: </h3>
+    <img src="<%= gravatar_for(resource.email) %>"/>
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
         <div><%= f.label :email %>
@@ -44,8 +44,6 @@
         </br>
         <div><%= f.submit "Update", class: 'btn btn-primary btn-block ' %></div>
     <% end %>
-
-    <h3>Cancel my account</h3>
 
     <p>Unhappy? <%= button_to "Cancel my account",  registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger' %></p>
 
