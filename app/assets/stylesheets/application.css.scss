@@ -18,3 +18,17 @@
   form { margin-bottom: 20px; }
   .glyphicon { top: 0; }
 }
+
+.navbar-nav>li>a {
+  padding-top: 17px;
+  padding-bottom: 13px;
+}
+
+#devise label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 1px;
+  position: absolute;
+}

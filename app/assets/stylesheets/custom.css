@@ -17,13 +17,13 @@ html, body {
     height: 100%;
     /* Top margin to compensate for navbar */
     /* Negative indent footer by it's height */
-    margin: 0px auto -60px;
+    margin: 0px auto -210px;
 }
 
 /* Set the fixed height of the footer here */
 
 #push {
-    height: 60px;
+    height: 160px;
 }
 
 #footer {
@@ -50,7 +50,7 @@ html, body {
 -------------------------------------------------- */
 #footer {
     min-height: 160px;
-    margin-top: 140px;
+    margin-top: 0px;
     background-color: #252528;
     color: #fff;
     padding-top: 35px;
