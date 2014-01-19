@@ -67,7 +67,7 @@ Then /^I should see that bootstrap is functioning$/ do
 #  run bootstrap specific functions that change the DOM
 #  if bootstrap is not loaded that the result will be 'is not a function'
   visit('/')
-  sleep(5)
+  #sleep(5)
 
   expect(page.evaluate_script('$("").modal()')).to be_true
   expect(page.evaluate_script('$("").dropdown()')).to be_true
