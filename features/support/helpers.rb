@@ -70,5 +70,4 @@ module Capybara
   end
 end
 
-
-
+World(ApplicationHelper)

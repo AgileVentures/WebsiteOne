@@ -3,7 +3,6 @@ WebsiteOne::Application.routes.draw do
   mount Mercury::Engine => '/'
 
   devise_for :users
-
   root 'visitors#index'
 
   resources :projects do

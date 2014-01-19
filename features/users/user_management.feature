@@ -43,10 +43,6 @@ Feature: Create and maintain projects
     Then I should see "There was an error updating your account."
     And I should see "Current password is invalid"
 
-    Scenario: Security issues (confirmation password)
-    Scenario: Security issues (current password)
-
-
 
 
 

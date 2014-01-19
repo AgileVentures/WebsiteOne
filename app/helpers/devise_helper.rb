@@ -9,13 +9,13 @@ module DeviseHelper
 
     html = <<-HTML
     <div id="error_explanation">
-      <b>#{sentence}</b>
+      #{sentence}
       <ul>#{messages}</ul>
     </div>
     HTML
 
-    flash[:alert] = 'There was an error updating your account.'
-    flash[:warning] = html.html_safe
+    warning = '<div><b>There was an error updating your account.</b></div></br>'
+    flash[:warning] = warning.html_safe + html.html_safe
   end
 
   def devise_error_messages!
