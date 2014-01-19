@@ -4,8 +4,9 @@ describe 'documents/index' do
   before(:each) do
 	@documents = [        
 		stub_model(Document, :title => "Title",:body => "MyText", :project_id => 1 ),
-        stub_model(Document, :title => "Title", :body => "MyText", :project_id => 2)
-				 ]
+    stub_model(Document, :title => "Title", :body => "MyText", :project_id => 2)
+		 ]
+
     assign(:documents, @documents)
     @dummy_project = FactoryGirl.create(:project)
     assign(:project, @dummy_project)
@@ -14,16 +15,8 @@ describe 'documents/index' do
   context 'for signed in and not signed in users' do
     it 'renders a list of documents' do
       render
-      assert_select "tr>td", :text => "Title".to_s, :count => 2
-      assert_select "tr>td", :text => "MyText".to_s, :count => 2
-      assert_select "tr>td", :text => 1.to_s, :count => 1
-      assert_select "tr>td", :text => 2.to_s, :count => 1
-    end
-
-    it 'should render column headers in table' do
-      render
-      rendered.should have_css('th', :text => 'Title')
-      rendered.should have_css('th', :text => 'Body')
+      rendered.should have_link('Title', :count => 2)
+      rendered.should have_content('MyText', :count => 2)
     end
   end
   context 'for signed in users' do
