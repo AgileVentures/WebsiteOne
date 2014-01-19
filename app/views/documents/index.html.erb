@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <% @documents.each do |document| %>
-      <tr>
+      <tr id="<%=document.id%>">
         <td><h3><%= link_to document.title, project_document_path(id: document.id, project_id: document.project_id) %></h3>
           <%= document.body.truncate(250, separator: ' ') %></td>
         <% if user_signed_in? %>
