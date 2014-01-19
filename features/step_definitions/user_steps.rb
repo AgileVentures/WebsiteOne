@@ -1,3 +1,27 @@
+Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
+  @visitor = { email: email,
+                 password: password,
+                 password_confirmation: password
+  }
+  @user = FactoryGirl.create(:user, @visitor)
+  sign_in
+end
+
+Then /^I should see a user form for "([^"]*)"$/ do |form_purpose|
+  case form_purpose
+    when 'creating a new project'
+      page.should have_text form_purpose
+      page.should have_css('form#new_project')
+    when 'Editing my user details' then
+      expect(page).to have_text('Edit User')
+      expect(page).to have_field('Email')
+      expect(page).to have_field('Password')
+      expect(page).to have_field('Password confirmation')
+      expect(page).to have_field('Current password')
+      expect(page).to have_link('Back')
+  end
+end
+
 Given /^I am not logged in$/ do
   step 'I sign out'
 end
@@ -22,16 +46,12 @@ end
 
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
-  fill_in('Email', :with => email)
+  fill_in('user_email', :with => email)
 end
 
 When(/^I submit "([^"]*)" as password$/) do |password|
-  fill_in('Password', :with => password)
-  fill_in('Password confirmation', :with => password)
-end
-
-When(/^I am logged in as a user$/) do
-  #page.stub(:user_signed_in?).and_return(true)
+  fill_in('user_password', :with => password)
+  fill_in('user_password_confirmation', :with => password)
 end
 
 When /^I sign in with valid credentials$/ do

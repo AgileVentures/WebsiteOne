@@ -1,35 +1,28 @@
 <section id="devise">
   <div class="col-md-4 col-md-offset-4 form-frame signin">
-  <h2>Sign up</h2>
-
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <%= form_group_for f, :email, label: false do %>
-          <div class="input-group">
-            <%= f.email_field :email, class: 'form-control input-lg', placeholder: 'Email' %>
-            <span class="input-group-addon glyphicon glyphicon-user"></span>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <fieldset>
+          <legend>Sign up</legend>
+          <div class='form-group'>
+            <%= f.email_field :email, autofocus: true, placeholder: 'Enter email', class: 'form-control' %>
           </div>
-      <% end %>
-
-      <%= form_group_for f, :password, label: false do %>
-          <div class="input-group">
-            <%= f.password_field :password, class: 'form-control input-lg', placeholder: 'Password' %>
-            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+          <div class='form-group'>
+            <%= f.password_field :password, placeholder: 'Enter password', class: 'form-control' %>
           </div>
-      <% end %>
-
-      <%= form_group_for f, :password_confirmation, label: false do %>
-          <div class="input-group">
-            <%= f.password_field :password_confirmation, class: 'form-control input-lg', placeholder: 'Password confirmation' %>
-            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+          <div class='form-group'>
+            <%= f.password_field :password_confirmation, placeholder: 'Repeat password', class: 'form-control' %>
           </div>
-      <% end %>
-
-      <div><%= f.submit 'Sign up', class: 'btn btn-primary btn-block btn-lg' %></div>
-  <% end %>
-
-  <%= flash_messages layout_flash: false %>
-
-
-<%= render "devise/shared/links" %>
+          <div class='form-group'>
+            <%= f.submit 'Sign up', class: 'btn btn-primary btn-large btn-block' %>
+          </div>
+          <%= devise_error_simple_message %>
+    <% end %>
+    <p>
+      <small>By registering, you understand that we will store and make use the information provided in accordance with
+        our Privacy statement.
+      </small>
+    </p>
+    <%= render 'devise/shared/links' %>
+    </fieldset>
   </div>
 </section>
