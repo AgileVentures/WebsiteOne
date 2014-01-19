@@ -1,29 +1,53 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section id='devise' xmlns="http://www.w3.org/1999/html">
+  <div class="col-md-4 col-md-offset-4 form-frame signin">
+    <h3>Edit your details: </h3>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+        <%- devise_error_messages_flash %>
+        <div><%= f.label :email %>
+          <br/>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+          <div class="input-group">
+            <%= f.email_field :email, :autofocus => true %>
+            <span class="input-group-addon glyphicon glyphicon-user"></span>
+          </div>
+        </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+        <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+          <div class="input-group">
+            <%= f.password_field :password, :autocomplete => "off" %>
+            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+          </div>
+        </div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
+        <div><%= f.label :password_confirmation %>
+          <br/>
 
-  <div><%= f.submit "Update" %></div>
-<% end %>
+          <div class="input-group">
+            <%= f.password_field :password_confirmation %>
+            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+          </div>
+        </div>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+        <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
+          <div class="input-group">
+            <%= f.password_field :current_password %>
+            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+          </div></div>
+        </br>
+        <div><%= f.submit "Update", class: 'btn btn-primary btn-block ' %></div>
+    <% end %>
 
-<%= link_to "Back", :back %>
+    <h3>Cancel my account</h3>
+
+    <p>Unhappy? <%= button_to "Cancel my account",  registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger' %></p>
+
+    <%= link_to "Back", :back, :class => 'btn btn-default' %>
+  </div>
+</section>
