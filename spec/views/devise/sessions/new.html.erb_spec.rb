@@ -16,4 +16,10 @@ describe 'devise/sessions/new' do
       rendered.should have_button('Sign in')
     end
   end
+
+  it 'renders social login links' do
+    render
+    rendered.should have_link('Login with GitHub', '#')
+    rendered.should have_link('Login with Google+', '#')
+  end
 end

@@ -12,6 +12,6 @@ Scenario: Log in with GitHub account
   Then I should see "You are connected"
 
   Scenario: Log in with Google + account
-    When I click "Login with Google"
+    When I click "Login with Google+"
     Then I should see "You are connected"
 
