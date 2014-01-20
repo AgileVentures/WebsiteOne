@@ -4,6 +4,7 @@ rvm:
 
 # to enable javascript testing with X server and firefox
 before_install:
+  - gem install bundler
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 
