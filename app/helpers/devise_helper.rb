@@ -30,4 +30,16 @@ module DeviseHelper
     HTML
     html.html_safe
   end
+
+  def devise_error_simple_message
+    return "" if resource.errors.empty?
+    messages = resource.errors.full_messages.map { |msg| msg + '<br/>' }.join
+    html = <<-HTML
+      <div class="alert alert-danger">
+        <p>#{messages}</p>
+      </div>
+    HTML
+    html.html_safe
+  end
+
 end
