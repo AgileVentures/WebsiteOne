@@ -71,6 +71,12 @@ When(/^I fill in:$/) do |table|
   end
 end
 
+When /^I accept the warning popup$/ do
+  # works only with @javascript tagged scenario
+  page.driver.browser.accept_js_confirms
+end
+
+
 # THEN steps
 
 Then /^I should be on the "([^"]*)" page$/ do |page|

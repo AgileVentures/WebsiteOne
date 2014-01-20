@@ -2,18 +2,25 @@
 
 <p>
   <strong>Title:</strong>
-  <%= @document.title %>
+  <div id="document_title" data-mercury="full">
+    <%= @document.title %>
+  </div>
 </p>
 
 <p>
   <strong>Body:</strong>
-  <%= @document.body %>
+  <div id="document_body" data-mercury="full">
+    <%= @document.body %>
+  </div>
 </p>
 
 <p>
   <strong>Project:</strong>
   <%= @document.project_id %>
 </p>
-
-<%= link_to 'Edit', edit_project_document_path(id: @document.id, project_id: @document.project_id) %> |
+<% if user_signed_in? %>
+<%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
+            data: { save_url: project_document_mercury_update_path(@project, @document) }%>
+<% end %>
+<% # link_to 'Edit', edit_project_document_path(id: @document.id, project_id: @document.project_id) %>
 <%= link_to 'Back', project_documents_path(project_id: @document.project_id) %>

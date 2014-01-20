@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
-//= require_tree .
+
+// Bryan: removed require_tree . because mercury causes problems if loaded on every page

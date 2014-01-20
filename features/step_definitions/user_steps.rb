@@ -1,24 +1,14 @@
-Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @visitor = { email: email,
-                 password: password,
-                 password_confirmation: password
-  }
-  @user = FactoryGirl.create(:user, @visitor)
-  sign_in
+Given /^I have an avatar image at "([^"]*)"$/ do |link|
+  @avatar_link = link
 end
 
-Then /^I should see a user form for "([^"]*)"$/ do |form_purpose|
-  case form_purpose
-    when 'creating a new project'
-      page.should have_text form_purpose
-      page.should have_css('form#new_project')
-    when 'Editing my user details' then
-      expect(page).to have_text('Edit User')
-      expect(page).to have_field('Email')
-      expect(page).to have_field('Password')
-      expect(page).to have_field('Password confirmation')
-      expect(page).to have_field('Current password')
-      expect(page).to have_link('Back')
+Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
+  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password )
+  visit new_user_session_path
+  within ('#devise') do
+    fill_in 'user_email', :with => email
+    fill_in 'user_password', :with => password
+    click_button 'Sign in'
   end
 end
 
@@ -183,11 +173,13 @@ Then /^I should see my name$/ do
 end
 
 Given /^the sign in form is visible$/ do
-  #expect(page).to have_form('loginForm')
   expect(page).to have_field('user_email')
   expect(page).to have_field('user_password')
   expect(page).to have_button('signin')
-  #click_link 'Org Login'
+end
+
+Then /^my account should be deleted$/ do
+  expect(User.find_by_id(@user)).to be_false
 end
 
 Given(/^The database is clean$/) do

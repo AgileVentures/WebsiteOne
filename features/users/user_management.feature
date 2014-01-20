@@ -9,9 +9,11 @@ Feature: Create and maintain projects
 
   Scenario: Having My account page
     When I click "My Account"
-    Then I should see "Edit your details:"
+    Then I should see "Edit your user details:"
     And I should see a form with:
       | Field                 |                     |
+      | First name            |                     |
+      | Last name             |                     |
       | Email                 | current@email.com   |
       | Password              |                     |
       | Password confirmation |                     |
@@ -21,6 +23,8 @@ Feature: Create and maintain projects
     Given I click "My Account"
     And I fill in:
       | Field                 | Text      |
+      | First name            | John      |
+      | Last name             | Doe       |
       | Email                 | a@a.com   |
       | Password              | 87654321  |
       | Password confirmation | 87654321  |
@@ -34,14 +38,31 @@ Feature: Create and maintain projects
     Given I follow "My Account"
     And I fill in:
       | Field                 | Text      |
+      | First name            | John      |
+      | Last name             | Doe       |
       | Email                 | a@a.com   |
       | Password              | 87654321  |
       | Password confirmation | 87654321  |
       | Current password      | wrong     |
-
     When I click the "Update" button
-    Then I should see "There was an error updating your account."
+    Then I should see "error prohibited this user from being saved:"
     And I should see "Current password is invalid"
+
+  Scenario: Clicking Back button
+    Given I am on the "Projects" page
+    And I follow "My Account"
+    When I click "Back"
+    Then I should be on the "Projects" page
+
+  @javascript
+  Scenario: Cancel my account
+    Given I follow "My Account"
+    When I click "Cancel my account"
+    And I accept the warning popup
+    Then I should be on the "home" page
+    And I should see "Your account was successfully cancelled."
+    And my account should be deleted
+
 
 
 

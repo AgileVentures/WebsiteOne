@@ -12,6 +12,8 @@ gem 'jbuilder', '~> 1.2' # Json for declaring
 gem 'devise' # Authentication local and 3rd party
 gem 'bootstrap-sass', '~> 3.0.2.0' # JS Bootstrap library support
 gem 'factory_girl_rails'
+gem 'mercury-rails', github: 'jejacks0n/mercury'
+
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -21,7 +23,7 @@ group :test do
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
-  gem 'zeus'
+  gem 'zeus' # rails preloading environment
 end
 
 group :development, :test do
