@@ -44,7 +44,6 @@ Feature: Create and maintain projects
       | Password              | 87654321  |
       | Password confirmation | 87654321  |
       | Current password      | wrong     |
-
     When I click the "Update" button
     Then I should see "error prohibited this user from being saved:"
     And I should see "Current password is invalid"
@@ -52,20 +51,18 @@ Feature: Create and maintain projects
     Scenario: Clicking Back button
       Given I am on the "Projects" page
       And I follow "My Account"
-
       When I click "Back"
       Then I should be on the "Projects" page
 
   @javascript
   Scenario: Cancel my account
       Given I follow "My Account"
-
       When I click "Cancel my account"
       And I accept the warning popup
-
       Then I should be on the "home" page
       And I should see "Your account was successfully cancelled."
       And my account should be deleted
+
 
 
 
