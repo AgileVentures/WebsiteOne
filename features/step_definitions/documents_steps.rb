@@ -29,14 +29,25 @@ end
 #end
 
 # TODO Bryan: pretty hackish way, possibly could use refactoring
-When(/I click the "([^"]*)" button for document "([^"]*)"/) do |button, title|
-  all(:xpath, '//tbody/tr').each do |elem|
-    begin
-      elem.find(:xpath, 'td', text: title)
-      elem.click_link_or_button button
-    rescue
-      # do nothing
+#When(/I click the "([^"]*)" button for document "([^"]*)"/) do |button, title|
+#  all(:xpath, '//tbody/tr').each do |elem|
+#    begin
+#      elem.find(:xpath, 'td', text: title)
+#      elem.click_link_or_button button
+#    rescue
+#      # do nothing
+#    end
+#  end
+#end
+
+When(/^I click the "([^"]*)" button for document "([^"]*)"$/) do |button, document_name|
+  document = Document.find_by_title(document_name)
+  if document
+    within("tr##{document.id}") do
+      click_link_or_button button
     end
+  else
+    visit path_to(button, 'non-existent')
   end
 end
 

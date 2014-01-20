@@ -1,29 +1,23 @@
 <h1>List of documents for <%= @project.title %></h1>
 
-<table>
+<table id="documents" class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Project</th>
-      <th></th>
+      <th style="width:90%"></th>
       <% if user_signed_in? %>
-      <th></th>
-      <th></th>
+          <th style="width:15px"></th>
+          <th style="width:15px"></th>
       <% end %>
     </tr>
   </thead>
-
   <tbody>
     <% @documents.each do |document| %>
-      <tr>
-        <td><%= document.title %></td>
-        <td><%= document.body %></td>
-        <td><%= document.project_id %></td>
-        <td><%= link_to 'Show', project_document_path(id: document.id, project_id: document.project_id) %></td>
+      <tr id="<%=document.id%>">
+        <td><h3><%= link_to document.title, project_document_path(id: document.id, project_id: document.project_id) %></h3>
+          <%= document.body.truncate(250, separator: ' ') %></td>
         <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_project_document_path(id: document.id, project_id: document.project_id) %></td>
-        <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_project_document_path(id: document.id, project_id: document.project_id), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
+        <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), type: 'button', class: 'btn btn-danger btn-xs', method: :delete %></td>
 		<% end %>
       </tr>
     <% end %>
@@ -32,5 +26,5 @@
 
 <br>
 <% if user_signed_in? %>
-<%= link_to 'New Document', new_project_document_path(project_id: @project.id) %>
+<%= link_to 'New Document', new_project_document_path(project_id: @project.id), :type => 'button', :class => 'btn btn-default' %>
 <% end %>

@@ -1,31 +1,26 @@
 <section id="devise">
   <div class="col-md-4 col-md-offset-4 form-frame signin">
-    <h2>Sign in</h2>
-
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-        <%= form_group_for f, :email, label: false do %>
-            <div class="input-group">
-              <%= f.email_field :email, class: 'form-control ', placeholder: 'Email' %>
-              <span class="input-group-addon glyphicon glyphicon-user"></span>
-            </div>
-        <% end %>
-
-        <%= form_group_for f, :password, label: false do %>
-            <div class="input-group">
-              <%= f.password_field :password, class: 'form-control ', placeholder: 'Password' %>
-              <span class="input-group-addon glyphicon glyphicon-lock"></span>
-            </div>
-        <% end %>
-
-        <% if devise_mapping.rememberable? -%>
-            <div class="form-group"><%= f.check_box :remember_me %> &nbsp; <%= f.label :remember_me %></div>
-        <% end -%>
-
-        <div><%= f.submit "Sign in", class: 'btn btn-primary btn-block ' %></div>
-    <% end %>
-
-    <%= flash_messages layout_flash: false %>
-
-    <%= render "devise/shared/links" %>
+        <fieldset>
+          <legend>Sign in</legend>
+          <div class='form-group'>
+            <%= f.email_field :email, autofocus: true, placeholder: 'Enter email', class: 'form-control' %>
+          </div>
+          <div class='form-group'>
+            <%= f.password_field :password, placeholder: 'Enter password', class: 'form-control' %>
+          </div>
+          <% if devise_mapping.rememberable? -%>
+              <div class='form-group'>
+                <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+              </div>
+          <% end -%>
+          <div class='form-group'>
+            <%= f.submit 'Sign in', class: 'btn btn-primary btn-large btn-block' %>
+          </div>
+          <%= devise_error_simple_message %>
+          <%= flash_messages layout_flash: false %>
+        </fieldset>
+  <% end %>
+    <%= render 'devise/shared/links' %>
   </div>
 </section>

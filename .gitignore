@@ -40,3 +40,5 @@
 
 # Versioning
 .rvmrc.env
+
+.rvmrc
