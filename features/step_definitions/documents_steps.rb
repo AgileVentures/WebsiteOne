@@ -58,7 +58,7 @@ Then(/^I should be in the Mercury Editor$/) do
 end
 
 When(/^I am using the Mercury Editor to edit ([^"]*) "([^"]*)"$/) do |model, title|
-  Capybara.current_driver = :selenium
+  #Capybara.current_driver = :selenium
   visit "/editor#{url_for_title(action: 'show', controller: model, title: title)}"
 end
 
@@ -71,11 +71,15 @@ When /^(?:|I )click "([^"]*)" within the Mercury Editor toolbar$/ do |button|
   selector_for = {
       'save' => 'mercury-save-button'
   }
-  p page.evaluate_script("Mercury.saveUrl = 'http://#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{project_document_mercury_update_path(project_id: 1, document_id: 1)}';window.mercuryInstance.options.saveStyle = 'form';window.mercuryInstance.options.saveMethod = 'PUT';Mercury.saveUrl")
   page.execute_script("$('.#{selector_for[button.downcase]}').click()")
-  sleep(5)
+  p 'sleep(0.1)'
+  sleep(0.1)
 end
 
 Then(/(.*) within the content frame$/) do |s|
   page.driver.within_frame('mercury_iframe') { step(s) }
+end
+
+Given(/^I am going to use the Mercury editor/) do
+  Capybara.current_driver = :selenium
 end

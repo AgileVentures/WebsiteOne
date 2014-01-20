@@ -69,12 +69,15 @@ class DocumentsController < ApplicationController
   end
 
   def mercury_update
-    p 'i have received it laksfjlaskfj laksjlkjasfljaslfkjl akjflaksjflkfjdslkgjiowej'
     @document = Document.find(params[:document_id])
     if @document.update_attributes(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
       render text: '' # So mercury knows it is successful
     end
+  end
+
+  def mercury_saved
+    redirect_to project_document_path(@project, id: params[:document_id]), notice: 'The document has been successfully updated.'
   end
 
   private

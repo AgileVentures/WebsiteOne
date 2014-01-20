@@ -68,7 +68,8 @@ Scenario: Has a link to edit a document using the Mercury Editor
 
 @javascript
 Scenario: The Mercury Editor loads successfully
-  Given I am logged in
+  Given I am going to use the Mercury editor
+  And I am logged in
   And I am using the Mercury Editor to edit document "Howto"
   Then I should see "Save"
   And I should see the editable field "Title" within the content frame
@@ -76,8 +77,9 @@ Scenario: The Mercury Editor loads successfully
 
 @javascript
 Scenario: The Mercury Editor save button works
-  Given I am logged in
+  Given I am going to use the Mercury editor
+  And I am logged in
   And I am using the Mercury Editor to edit document "Howto"
   When I click "Save" within the Mercury Editor toolbar
   Then I should be on the "Show" page for document "Howto"
-  And I should see "The document has been updated successfully."
+  And I should see "The document has been successfully updated."
