@@ -5,9 +5,9 @@
   </span>
 </h3>
 <small>Created: <%= @document.created_at -%> Project: <%= @project.title %> </small>
-<div id="document_body" class="mercury-region" data-mercury="full" data-type="editable">
+<span id="document_body" class="mercury-region" data-mercury="full" data-type="editable">
   <%= raw @document.body %>
-</div>
+</span>
 <% if user_signed_in? %>
     <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
                 data: { save_url: project_document_mercury_update_path(@project, @document) }%>

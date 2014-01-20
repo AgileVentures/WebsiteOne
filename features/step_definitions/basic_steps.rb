@@ -49,7 +49,7 @@ When(/^I click "([^"]*)"$/) do |text|
 end
 
 When(/^I click the "([^"]*)" button$/) do |button|
-  click_button button
+  click_link_or_button button
 end
 
 When(/^I click the "([^"]*)" link$/) do |button|
@@ -147,6 +147,11 @@ end
 
 Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, controller, title|
   expect(current_path).to eq url_for_title(action: action, controller: controller, title: title)
+end
+
+Given(/^I am on the "([^"]*)" page for document "([^"]*)"$/) do |action, title|
+  controller = 'document'
+  visit url_for_title(action: action, controller: controller, title: title)
 end
 
 Then(/^I should see a link to "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|

@@ -75,7 +75,8 @@ end
 
 # Bryan: not completely reliable but works for the time being
 Then(/^I should see the editable field "([^"]*)"$/) do |field|
-  find(:css, "div#document_#{field.downcase.singularize}[contenteditable]")
+  #find(:css, "span#document_#{field.downcase.singularize}[editable]")
+  find(:css, "span#document_#{field.downcase.singularize}")
 end
 
 When /^(?:|I )click "([^"]*)" within the Mercury Editor toolbar$/ do |button|
