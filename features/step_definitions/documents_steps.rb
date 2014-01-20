@@ -75,7 +75,6 @@ end
 
 # Bryan: not completely reliable but works for the time being
 Then(/^I should see the editable field "([^"]*)"$/) do |field|
-  #find(:css, "span#document_#{field.downcase.singularize}[editable]")
   find(:css, "span#document_#{field.downcase.singularize}")
 end
 
