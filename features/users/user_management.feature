@@ -12,6 +12,8 @@ Feature: Create and maintain projects
     Then I should see "Edit your user details:"
     And I should see a form with:
       | Field                 |                     |
+      | First name            |                     |
+      | Last name             |                     |
       | Email                 | current@email.com   |
       | Password              |                     |
       | Password confirmation |                     |
@@ -21,6 +23,8 @@ Feature: Create and maintain projects
     Given I click "My Account"
     And I fill in:
       | Field                 | Text      |
+      | First name            | John      |
+      | Last name             | Doe       |
       | Email                 | a@a.com   |
       | Password              | 87654321  |
       | Password confirmation | 87654321  |
@@ -34,6 +38,8 @@ Feature: Create and maintain projects
     Given I follow "My Account"
     And I fill in:
       | Field                 | Text      |
+      | First name            | John      |
+      | Last name             | Doe       |
       | Email                 | a@a.com   |
       | Password              | 87654321  |
       | Password confirmation | 87654321  |

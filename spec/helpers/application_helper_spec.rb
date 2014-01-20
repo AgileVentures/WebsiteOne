@@ -14,7 +14,7 @@ describe ApplicationHelper do
     end
 
     it 'specifies image size' do
-      expect(helper.gravatar_for(@email, 200)).to match /\?s=200&/
+      expect(helper.gravatar_for(@email, size: 200)).to match /\?s=200&/
     end
   end
 end

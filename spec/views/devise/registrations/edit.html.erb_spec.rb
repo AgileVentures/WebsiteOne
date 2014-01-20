@@ -11,6 +11,8 @@ describe 'devise/registrations/edit.html.erb' do
   it 'shows required labels' do
     render
     expect(rendered).to have_text('Edit your user details:')
+    expect(rendered).to have_text('First name')
+    expect(rendered).to have_text('Last name')
     expect(rendered).to have_text('Email')
     expect(rendered).to have_text('Password')
     expect(rendered).to have_text('Password confirmation')
@@ -20,6 +22,8 @@ describe 'devise/registrations/edit.html.erb' do
 
   it 'shows required user fields' do
     render
+    expect(rendered).to have_field('First name')
+    expect(rendered).to have_field('Last name')
     expect(rendered).to have_field('Email')
     expect(rendered).to have_field('Password')
     expect(rendered).to have_field('Password confirmation')
