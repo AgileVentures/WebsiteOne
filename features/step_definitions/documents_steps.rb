@@ -57,13 +57,25 @@ Then(/^I should be in the Mercury Editor$/) do
   expect(current_path).to match(/\/editor\//i)
 end
 
-When(/^I am on the Mercury Editor for "([^"]*)" page for document "([^"]*)"$/) do |button, title|
-  visit "/editor#{url_for_title(action: button, controller: 'documents', title: title)}"
+When(/^I am using the Mercury Editor to edit ([^"]*) "([^"]*)"$/) do |model, title|
+  Capybara.current_driver = :selenium
+  visit "/editor#{url_for_title(action: 'show', controller: model, title: title)}"
 end
 
 # Bryan: not completely reliable but works for the time being
-Then(/^I should see the editable field "([^"]*)" for document "([^"]*)"$/) do |field, title|
-  page.should have_text title
-  # the contenteditable attribute is added by Mercury, which means mercury is at least running partially
+Then(/^I should see the editable field "([^"]*)"$/) do |field|
   find(:css, "div#document_#{field.downcase.singularize}[contenteditable]")
+end
+
+When /^(?:|I )click "([^"]*)" within the Mercury Editor toolbar$/ do |button|
+  selector_for = {
+      'save' => 'mercury-save-button'
+  }
+  p "$('.#{selector_for[button.downcase]}').click()"
+  page.execute_script("$('.#{selector_for[button.downcase]}').click()")
+  sleep(5)
+end
+
+Then(/(.*) within the content frame$/) do |s|
+  page.driver.within_frame('mercury_iframe') { step(s) }
 end

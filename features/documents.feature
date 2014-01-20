@@ -66,8 +66,18 @@ Scenario: Has a link to edit a document using the Mercury Editor
   When I click the "Edit" button
   Then I should be in the Mercury Editor
 
-@javacript
-Scenario: There is a link to the Mercury Editor
-  Given I am on the Mercury Editor for "Show" page for document "Howto"
-  Then I should see the editable field "Title" for document "Howto"
-  Then I should see the editable field "Body" for document "Howto"
+@javascript
+Scenario: The Mercury Editor loads successfully
+  Given I am logged in
+  And I am using the Mercury Editor to edit document "Howto"
+  Then I should see "Save"
+  And I should see the editable field "Title" within the content frame
+  And I should see the editable field "Body" within the content frame
+
+@javascript
+Scenario: The Mercury Editor save button works
+  Given I am logged in
+  And I am using the Mercury Editor to edit document "Howto"
+  When I click "Save" within the Mercury Editor toolbar
+  Then I should be on the "Show" page for document "Howto"
+  And I should see "The document has been updated successfully."

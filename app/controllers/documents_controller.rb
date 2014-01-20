@@ -69,6 +69,7 @@ class DocumentsController < ApplicationController
   end
 
   def mercury_update
+    p 'i have received it'
     @document = Document.find(params[:document_id])
     if @document.update_attributes(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
