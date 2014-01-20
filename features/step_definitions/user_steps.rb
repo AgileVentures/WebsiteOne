@@ -178,6 +178,10 @@ Given /^the sign in form is visible$/ do
   expect(page).to have_button('signin')
 end
 
+Then /^my account should be deleted$/ do
+  expect(User.find_by_id(@user)).to be_false
+end
+
 Given(/^The database is clean$/) do
   DatabaseCleaner.clean
 end
