@@ -3,19 +3,18 @@ require 'spec_helper'
 describe 'devise/registrations/edit.html.erb' do
   before(:each) do
     #stubbing out devise methods
-    view.should_receive(:resource).at_least(1).times.and_return(User.new)
-    view.should_receive(:resource_name).at_least(1).times.and_return('user')
-    view.should_receive(:devise_mapping).and_return(Devise.mappings[:user])
+    view.stub(:resource).and_return(User.new)
+    view.stub(:resource_name).and_return('user')
+    view.stub(:devise_mapping).and_return(Devise.mappings[:user])
   end
 
   it 'shows required labels' do
     render
-    expect(rendered).to have_text('Edit your details:')
+    expect(rendered).to have_text('Edit your user details:')
     expect(rendered).to have_text('Email')
     expect(rendered).to have_text('Password')
     expect(rendered).to have_text('Password confirmation')
     expect(rendered).to have_text('Current password')
-    expect(rendered).to have_text('Cancel my account')
     expect(rendered).to have_text('Unhappy?')
   end
 
@@ -49,6 +48,17 @@ describe 'devise/registrations/edit.html.erb' do
   it 'shows Back button' do
     render
     expect(rendered).to have_link('Back')
+  end
+
+  it '#devise_error_messages_flash shows error messages ' do
+    user = User.new
+    user.password = ''
+    user.save
+
+    view.stub(:resource).and_return(user)
+
+    render
+    expect(rendered).to have_text("Password can't be blank")
   end
 
 end
