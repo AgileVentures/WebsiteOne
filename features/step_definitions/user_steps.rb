@@ -12,21 +12,6 @@ Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ d
   end
 end
 
-Then /^I should see a user form for "([^"]*)"$/ do |form_purpose|
-  case form_purpose
-    when 'creating a new project'
-      page.should have_text form_purpose
-      page.should have_css('form#new_project')
-    when 'Editing my user details' then
-      expect(page).to have_text('Edit User')
-      expect(page).to have_field('Email')
-      expect(page).to have_field('Password')
-      expect(page).to have_field('Password confirmation')
-      expect(page).to have_field('Current password')
-      expect(page).to have_link('Back')
-  end
-end
-
 Given /^I am not logged in$/ do
   step 'I sign out'
 end
@@ -47,6 +32,14 @@ end
 
 Given /^I exist as an unconfirmed user$/ do
   create_unconfirmed_user
+end
+
+Given /^the sign in form is visible$/ do
+  #expect(page).to have_form('loginForm')
+  expect(page).to have_field('user_email')
+  expect(page).to have_field('user_password')
+  expect(page).to have_button('signin')
+  #click_link 'Org Login'
 end
 
 ### WHEN ###
@@ -191,12 +184,23 @@ Then /^I should see my name$/ do
   page.should have_content @user[:first_name]
 end
 
-Given /^the sign in form is visible$/ do
-  #expect(page).to have_form('loginForm')
-  expect(page).to have_field('user_email')
-  expect(page).to have_field('user_password')
-  expect(page).to have_button('signin')
-  #click_link 'Org Login'
+Then /^I should see a user form for "([^"]*)"$/ do |form_purpose|
+  case form_purpose
+    when 'creating a new project'
+      page.should have_text form_purpose
+      page.should have_css('form#new_project')
+    when 'Editing my user details' then
+      expect(page).to have_text('Edit User')
+      expect(page).to have_field('Email')
+      expect(page).to have_field('Password')
+      expect(page).to have_field('Password confirmation')
+      expect(page).to have_field('Current password')
+      expect(page).to have_link('Back')
+  end
+end
+
+Then /^my account should be deleted$/ do
+  expect(User.find_by_id(@user)).to be_false
 end
 
 Given(/^The database is clean$/) do
