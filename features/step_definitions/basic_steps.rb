@@ -52,6 +52,10 @@ When(/^I click the "([^"]*)" button$/) do |button|
   click_link_or_button button
 end
 
+When(/^I click "([^"]*)" button$/) do |button|
+  click_button button
+end
+
 When(/^I click the "([^"]*)" link$/) do |button|
   click_link button
 end
