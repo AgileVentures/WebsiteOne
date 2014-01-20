@@ -69,7 +69,7 @@ class DocumentsController < ApplicationController
   end
 
   def mercury_update
-    p 'i have received it'
+    p 'i have received it laksfjlaskfj laksjlkjasfljaslfkjl akjflaksjflkfjdslkgjiowej'
     @document = Document.find(params[:document_id])
     if @document.update_attributes(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
@@ -85,11 +85,11 @@ class DocumentsController < ApplicationController
   end
 
   def set_document
-      @document = Document.find(params[:id])
-    end
+    @document = Document.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def document_params
-      params.require(:document).permit(:title, :body, :project_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def document_params
+    params.require(:document).permit(:title, :body, :project_id)
+  end
 end

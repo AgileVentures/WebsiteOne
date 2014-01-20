@@ -71,7 +71,7 @@ When /^(?:|I )click "([^"]*)" within the Mercury Editor toolbar$/ do |button|
   selector_for = {
       'save' => 'mercury-save-button'
   }
-  p "$('.#{selector_for[button.downcase]}').click()"
+  p page.evaluate_script("Mercury.saveUrl = 'http://#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{project_document_mercury_update_path(project_id: 1, document_id: 1)}';window.mercuryInstance.options.saveStyle = 'form';window.mercuryInstance.options.saveMethod = 'PUT';Mercury.saveUrl")
   page.execute_script("$('.#{selector_for[button.downcase]}').click()")
   sleep(5)
 end
