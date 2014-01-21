@@ -12,13 +12,18 @@
   .glyphicon { top: 0; }
 }
 
-.navbar-nav>li>a {
-  padding-top: 17px;
-  padding-bottom: 13px;
-}
 
 #devise .custom-label {
   margin-left: 5px;
-  margin-top: 1px;
+  margin-top: 3px;
   position: absolute;
+  color: black;
+}
+
+.alert {
+  margin-top: 5px;
+}
+
+label {
+  color: black;
 }

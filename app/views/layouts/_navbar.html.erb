@@ -1,13 +1,16 @@
 <header class="masthead">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-lg-2">
         <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
+      </div>
+      <div class="col-lg-10 pull-left">
+        <%= render 'layouts/flash' %>
       </div>
     </div>
   </div>
 </header>
-<!-- Fixed navbar -->
+<!-- navbar -->
 <div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
   <div class="container">
     <div class="navbar-header">
@@ -21,16 +24,15 @@
       <ul class="nav navbar-nav nav-justified">
         <li><%= link_to 'Our projects', projects_path %></li>
         <% unless user_signed_in? %>
-            <li><%= link_to 'Check in', new_user_session_path %></li>
+            <li><%= link_to 'Log in', new_user_session_path %></li>
             <li><%= link_to 'Sign up', new_user_registration_path %></li>
         <% else %>
             <li><%= link_to 'My Account', edit_user_registration_path %></li>
             <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
-
         <% end %>
       </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+    </div>
+  </div>
+</div>
 
 
