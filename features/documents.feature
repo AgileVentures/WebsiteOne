@@ -91,7 +91,7 @@ Scenario: The Mercury Editor can be accessed from the document index page
 
 @javascript
 Scenario: The Mercury Editor save button works
-  Given I am going to use the Mercury editor
+  Given I am going to use the Mercury Editor
   And I am logged in
   And I am using the Mercury Editor to edit document "Howto"
   When I fill in the editable field "Title" with "My new title"
@@ -100,6 +100,7 @@ Scenario: The Mercury Editor save button works
   Then I should see "The document has been successfully updated."
   And I should be on the "Show" page for document "My new title"
   And I should see "This is my new body text"
+#  Then I no longer need the Mercury Editor
 
 Scenario: The Mercury Editor should only work for the documents
   Given I am logged in

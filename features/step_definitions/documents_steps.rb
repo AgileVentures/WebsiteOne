@@ -43,9 +43,13 @@ Then(/(.*) within the content frame$/) do |s|
   page.driver.within_frame('mercury_iframe') { step(s) }
 end
 
-Given(/^I am going to use the Mercury editor/) do
+Given(/^I am going to use the Mercury Editor/) do
   Capybara.current_driver = :selenium
 end
+
+#Then(/^I no longer need the Mercury Editor$/) do
+#  Capybara.use_default_driver
+#end
 
 When(/^I fill in the editable field "([^"]*)" with "([^"]*)"$/) do |field, s|
   page.driver.within_frame('mercury_iframe') {
