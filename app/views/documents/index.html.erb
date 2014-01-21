@@ -14,9 +14,9 @@
     <% @documents.each do |document| %>
       <tr id="<%=document.id%>">
         <td><h3><%= link_to document.title, project_document_path(id: document.id, project_id: document.project_id) %></h3>
-          <%= document.body.truncate(250, separator: ' ') %></td>
+          <%= clean_html_summary(document.body) %></td>
         <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_project_document_path(id: document.id, project_id: document.project_id), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
+        <td><%= link_to 'Edit', mercury_edit_path(project_document_path(id: document.id, project_id: document.project_id)), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), type: 'button', class: 'btn btn-danger btn-xs', method: :delete %></td>
 		<% end %>
       </tr>
