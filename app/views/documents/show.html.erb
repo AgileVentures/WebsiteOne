@@ -1,12 +1,14 @@
 <h1>
-  <span id="document_title" data-mercury="simple" data-type="editable"><%= @document.title %></span>
+  <div id="document_title" style="max-width: 100%; overflow: auto;" data-mercury="simple" data-type="editable"><%= @document.title %></div>
 </h1>
 <small>Created: <%= @document.created_at -%> Project: <%= @project.title %> </small><br />
-<span id="document_body" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></span>
+<div id="document_body" style="max-width: 100%; overflow: auto;" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
+<br/>
 <div>
   <% if user_signed_in? %>
   <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
-                  data: { save_url: project_document_mercury_update_path(@project, @document) }%>
+                  data: { save_url: project_document_mercury_update_path(@project, @document) },
+                  class: 'btn btn-default' %>
   <% end %>
-  <%= link_to 'Back', project_documents_path(@project) %>
+  <%= link_to 'Back', project_documents_path(@project), class: 'btn btn-default' %>
 </div>

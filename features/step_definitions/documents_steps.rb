@@ -27,7 +27,7 @@ end
 
 # Bryan: not completely reliable but works for the time being
 Then(/^I should see the editable field "([^"]*)"$/) do |field|
-  find(:css, "span#document_#{field.downcase.singularize}")
+  find(:css, "div#document_#{field.downcase.singularize}")
 end
 
 When /^(?:|I )click "([^"]*)" within the Mercury Editor toolbar$/ do |button|
@@ -56,10 +56,10 @@ When(/^I fill in the editable field "([^"]*)" with "([^"]*)"$/) do |field, s|
     field = field.downcase.singularize
     # This selector is specific to the mercury region used!
     if field == 'title'
-      find(:css, 'span#document_title>textarea').set(s)
+      find(:css, 'div#document_title>textarea').set(s)
     elsif field == 'body'
       page.execute_script("$('#document_body').text('#{s}')")
-      #find(:css, 'span#document_body').set(s)
+      #find(:css, 'div#document_body').set(s)
     end
   }
 end
