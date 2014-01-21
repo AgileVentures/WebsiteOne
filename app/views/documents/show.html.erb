@@ -1,15 +1,12 @@
-<p id="notice"><%= notice %></p>
-<h3>
-  <span id="document_title" class="mercury-region" data-mercury="full" data-type="editable">
-    <%= raw @document.title %>
-  </span>
-</h3>
+<h1>
+  <span id="document_title" data-mercury="simple" data-type="editable"><%= @document.title %></span>
+</h1>
 <small>Created: <%= @document.created_at -%> Project: <%= @project.title %> </small><br />
-<span id="document_body" class="mercury-region" data-mercury="full" data-type="editable">
-  <%= raw @document.body %>
-</span>
-<% if user_signed_in? %>
-    <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
-                data: { save_url: project_document_mercury_update_path(@project, @document) }%>
-<% end %>
-<%= link_to 'Back', project_documents_path(@project) %>
+<span id="document_body" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></span>
+<div>
+  <% if user_signed_in? %>
+  <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
+                  data: { save_url: project_document_mercury_update_path(@project, @document) }%>
+  <% end %>
+  <%= link_to 'Back', project_documents_path(@project) %>
+</div>
