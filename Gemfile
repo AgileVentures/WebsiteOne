@@ -34,4 +34,5 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'unicorn'
+  gem 'jquery', '1.7'
 end
