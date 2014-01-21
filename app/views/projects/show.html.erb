@@ -1,0 +1,15 @@
+<h1> <%= @project.title %> project</h1>
+<p>
+	<strong>Title:</strong>
+	<%= @project.title %>
+</p><p>
+	<strong>Description</strong>
+	<%= @project.description %>
+</p><p>
+	<strong>Status</strong>
+	<%= @project.status %>
+</p>
+<div>
+  <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default'%>
+</div>
+

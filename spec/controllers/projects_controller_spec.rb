@@ -1,31 +1,205 @@
 require 'spec_helper'
 
 describe ProjectsController do
-  let(:valid_attributes) { { :title => '"Title',
-                             :description => 'Description',
-                             :status => 'active' } }
-  let(:valid_session) { {} }
 
-  it 'should render index page for projects' do
-    get :index
-    expect(response).to render_template 'index'
+  #TODO split specs into 'logged in' vs 'not logged in'
+  before :each do
+    # stubbing out devise methods to simulate authenticated user
+    user = double('user')
+    request.env['warden'].stub :authenticate! => user
+    controller.stub :current_user => user
   end
 
-  it 'should assign variables to be rendered by view' do
-    projects = [ double(Project), double(Project) ]
-    Project.stub(:all).and_return(projects)
-    get :index
-    expect(assigns(:projects)).to eq projects
+  describe '#index' do
+    it 'should render index page for projects' do
+      get :index
+      expect(response).to render_template 'index'
+    end
+
+    it 'should assign variables to be rendered by view' do
+      projects = [double(Project), double(Project)]
+      Project.stub(:all).and_return(projects)
+      get :index
+      expect(assigns(:projects)).to eq projects
+    end
   end
 
-  it 'should render a new project page' do
-    get :new
-    expect(response).to render_template 'new'
+  describe '#show' do
+
+    it 'assigns the requested project as @project' do
+      project = double(Project)
+      Project.stub(:find).and_return(project)
+      get :show, { :id => project.to_param }
+      assigns(:project).should eq(project)
+    end
   end
 
-  #it 'should assign the requested project as @project' do
-  #  project = Project.create! valid_attributes
-  #  get :show, {:id => project.to_param}, valid_session
-  #  assigns(:project).should eq(project)
-  #end
+  describe '#new' do
+    it 'should render a new project page' do
+      get :new
+      assigns(:project).should be_a_new(Project)
+      expect(response).to render_template 'new'
+    end
+  end
+
+  describe '#create' do
+    before(:each) do
+      @params = {
+          project: {
+              id: 1,
+              title: 'Title 1',
+              description: 'Description 1',
+              status: 'Status 1'
+          }
+      }
+      @project = mock_model(Project, id: 1)
+      Project.stub(:new).and_return(@project)
+    end
+
+    it 'assigns a newly created project as @project' do
+      @project.stub(:save)
+      post :create, @params
+      expect(assigns(:project)).to eq @project
+    end
+
+    context 'successful save' do
+
+      it 'redirects to index' do
+        @project.stub(:save).and_return(true)
+
+        post :create, @params
+
+        expect(response).to redirect_to(projects_path)
+      end
+      it 'assigns successful message' do
+        @project.stub(:save).and_return(true)
+
+        post :create, @params
+
+        #TODO YA add a show view_spec to check if flash is actually displayed
+        expect(flash[:notice]).to eq('Project was successfully created.')
+      end
+    end
+
+    context 'unsuccessful save' do
+      it 'renders new template' do
+        @project.stub(:save).and_return(false)
+
+        post :create, @params
+
+        expect(response).to render_template :new
+      end
+
+      it 'assigns failure message' do
+        @project.stub(:save).and_return(false)
+
+        post :create, @params
+
+        expect(flash[:alert]).to eql('Project was not saved. Please check the input.')
+      end
+    end
+  end
+
+  describe '#edit' do
+    before(:each) do
+      @project = double(Project)
+      Project.stub(:find).and_return(@project)
+      get :edit, id: 'show'
+    end
+
+    it 'renders the edit template' do
+      expect(response).to render_template 'edit'
+    end
+
+    it 'assigns the requested project as @project' do
+      expect(assigns(:project)).to eq(@project)
+    end
+  end
+
+  describe '#destroy' do
+    before :each do
+      @project = double(Project)
+      Project.stub(:find).and_return(@project)
+    end
+    it 'receives destroy call' do
+      expect(@project).to receive(:destroy)
+      delete :destroy, id: 'test'
+    end
+
+    context 'on successful delete' do
+      before(:each) do
+        @project.stub(:destroy).and_return(true)
+        delete :destroy, id: 'test'
+      end
+      it 'redirects to index' do
+        expect(response).to redirect_to(projects_path)
+      end
+      it 'shows the correct message' do
+        expect(flash[:notice]).to eq 'Project was successfully deleted.'
+      end
+    end
+
+    context 'on unsuccessful delete' do
+      before do
+        @project.stub(:destroy).and_return(false)
+        delete :destroy, id: 'test'
+      end
+      it 'redirects to index' do
+        expect(response).to redirect_to(projects_path)
+      end
+      it 'shows the correct message' do
+        expect(flash[:notice]).to eq 'Project was not successfully deleted.'
+      end
+    end
+  end
+
+  describe '#update' do
+    before(:each) do
+      @project = mock_model(Project)
+      Project.stub(:find).and_return(@project)
+    end
+
+    it 'assigns the requested project as @project' do
+      @project.stub(:update_attributes)
+      put :update, id: 'update', project: { title: ''}
+      expect(assigns(:project)).to eq(@project)
+    end
+
+    context 'successful update' do
+      before(:each) do
+        @project.stub(:update_attributes).and_return(true)
+        put :update, id: 'update', project: { title: ''}
+      end
+
+      it 'redirects to the project' do
+        expect(response).to redirect_to(projects_path)
+      end
+
+      it 'shows a success message' do
+        expect(flash[:notice]).to eq('Project was successfully updated.')
+      end
+    end
+
+    context 'unsuccessful save' do
+      before(:each) do
+        @project.stub(:update_attributes).and_return(false)
+        put :update, id: 'update', project: { title: ''}
+      end
+      it 'renders edit' do
+        expect(response).to render_template(:edit)
+      end
+
+      it 'shows an unsuccessful message' do
+        expect(flash[:alert]).to eq('Project was not updated.')
+      end
+    end
+  end
+
+  it 'shows a notice if requested action for non-existing project ' do
+    get :edit,  id: 'non-existent'
+    p response.body
+    expect(flash[:alert]).to eq('Requested action failed.  Project was not found.')
+    expect(response).to redirect_to(projects_path)
+  end
+
 end

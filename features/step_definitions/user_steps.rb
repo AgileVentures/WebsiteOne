@@ -1,5 +1,19 @@
+Given /^I have an avatar image at "([^"]*)"$/ do |link|
+  @avatar_link = link
+end
+
+Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
+  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password )
+  visit new_user_session_path
+  within ('#devise') do
+    fill_in 'user_email', :with => email
+    fill_in 'user_password', :with => password
+    click_button 'Sign in'
+  end
+end
+
 Given /^I am not logged in$/ do
-  visit destroy_user_session_path
+  step 'I sign out'
 end
 
 Given /^I am logged in$/ do
@@ -21,13 +35,22 @@ Given /^I exist as an unconfirmed user$/ do
 end
 
 ### WHEN ###
+When(/^I submit "([^"]*)" as username$/) do |email|
+  fill_in('user_email', :with => email)
+end
+
+When(/^I submit "([^"]*)" as password$/) do |password|
+  fill_in('user_password', :with => password)
+  fill_in('user_password_confirmation', :with => password)
+end
+
 When /^I sign in with valid credentials$/ do
   create_visitor
   sign_in
 end
 
 When /^I sign out$/ do
-  visit '/users/sign_out'
+  page.driver.submit :delete, destroy_user_session_path, {}
 end
 
 When /^I sign up with valid user data$/ do
@@ -76,7 +99,7 @@ end
 When /^I edit my account details$/ do
   visit '/users/edit'
   #click_link "Edit account"
-  within ('section#devise')  do
+  within ('section#devise') do
     fill_in "user_first_name", :with => "newname"
     fill_in "user_last_name", :with => "Lastname"
     fill_in "user_organization", :with => "Company"
@@ -150,13 +173,16 @@ Then /^I should see my name$/ do
 end
 
 Given /^the sign in form is visible$/ do
-  #expect(page).to have_form('loginForm')
   expect(page).to have_field('user_email')
   expect(page).to have_field('user_password')
   expect(page).to have_button('signin')
-  #click_link 'Org Login'
+end
+
+Then /^my account should be deleted$/ do
+  expect(User.find_by_id(@user)).to be_false
 end
 
 Given(/^The database is clean$/) do
   DatabaseCleaner.clean
 end
+

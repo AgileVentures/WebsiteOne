@@ -1,0 +1,280 @@
+
+
+
+/* Sticky footer styles
+     -------------------------------------------------- */
+
+html, body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+
+
+/* Wrapper for page content to push down footer */
+
+#wrap {
+
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Top margin to compensate for navbar */
+    /* Negative indent footer by it's height */
+    margin: 0px auto -210px;
+}
+
+/* Set the fixed height of the footer here */
+
+#push {
+    height: 160px;
+}
+
+#footer {
+    height: auto;
+    background-color: #f5f5f5;
+}
+
+#footer p {
+
+    margin-top: 15px;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Footer
+-------------------------------------------------- */
+#footer {
+    min-height: 160px;
+    margin-top: 80px;
+    background-color: #252528;
+    color: #fff;
+    padding-top: 35px;
+    /* testimonials */
+    /* contact */
+    /* credits */
+    /* inner footer */ }
+#footer .footer_header {
+    color: #c4c4c4;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 25px;
+    margin-bottom: 40px;
+    margin-left: 15px; }
+#footer .recent_posts {
+    margin-left: 0px; }
+#footer .recent_posts .post {
+    margin-bottom: 70px;
+    width: 93%; }
+#footer .recent_posts .post img {
+    float: left;
+    margin-right: 20px; }
+#footer .recent_posts .post .date {
+    font-weight: bold;
+    font-style: italic; }
+#footer .recent_posts .post .title {
+    display: block;
+    color: #b5b5b6;
+    font-size: 14px; }
+#footer .testimonials .wrapper {
+    margin: 0 auto;
+    width: 82%; }
+#footer .testimonials .footer_header {
+    margin-left: 30px; }
+#footer .testimonials .quote {
+    color: #bfbfc0; }
+#footer .testimonials .quote span {
+    font-size: 32px;
+    font-style: italic;
+    position: relative;
+    top: 5px;
+    font-family: Georgia !important;
+    float: left;
+    margin-right: 8px; }
+#footer .testimonials .author {
+    margin-top: 40px; }
+#footer .testimonials .author img {
+    float: left;
+    margin-right: 15px;
+    position: relative;
+    top: -6px; }
+#footer .testimonials .name {
+    font-size: 13px;
+    font-weight: bold; }
+#footer .testimonials .info {
+    font-style: italic;
+    color: #ccc; }
+#footer .contact {
+    text-align: right; }
+#footer .contact .footer_header {
+    text-align: left;
+    margin-left: 35px; }
+#footer .contact input[type="text"], #footer .contact textarea {
+    border: none;
+    background-color: #1f1f21;
+    color: #868687;
+    padding: 8px 20px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: Lato !important;
+    width: 95%;
+    -webkit-transition: background-color .2s linear;
+    -moz-transition: background-color .2s linear;
+    margin-bottom: 10px; }
+#footer .contact input[type="text"]:focus, #footer .contact textarea:focus {
+    border: none;
+    box-shadow: none;
+    background-color: #000; }
+#footer .contact input[type="text"]:moz-placeholder, #footer .contact textarea:moz-placeholder {
+    color: #868687; }
+#footer .contact input[type="text"]::-webkit-input-placeholder, #footer .contact textarea::-webkit-input-placeholder {
+    color: #868687; }
+#footer .contact input[type="text"]:-ms-input-placeholder, #footer .contact textarea:-ms-input-placeholder {
+    color: #868687; }
+#footer .contact input[type="submit"] {
+    background-color: #3e3e40;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    -webkit-transition: background-color .2s linear;
+    -moz-transition: background-color .2s linear; }
+#footer .contact input[type="submit"]:hover {
+    background-color: #2190DB; }
+#footer .credits {
+    border-top: 1px solid #343437;
+    padding: 10px 0px 60px 0px; }
+#footer .credits .social {
+    margin-top: 30px;
+    text-align: center; }
+#footer .credits .social a {
+    margin: 10px; }
+#footer .credits .social a span {
+    display: inline-block;
+    width: 33px;
+    height: 33px; }
+#footer .credits .social a span.ico1, #footer .credits .social a span.icoh {
+    background-position: 0px 0px; }
+#footer .credits .social a span.ico2, #footer .credits .social a span.ico2h {
+    background-position: -37px 0px; }
+#footer .credits .social a span.ico3, #footer .credits .social a span.ico3h {
+    background-position: -75px 0px; }
+#footer .credits .social a span.ico4, #footer .credits .social a span.ico4h {
+    background-position: -112px -1px; }
+#footer .credits .social a span.ico5, #footer .credits .social a span.ico5h {
+    background-position: -151px 0px; }
+#footer .credits .social a span.ico6, #footer .credits .social a span.ico6h {
+    background-position: -188px -1px; }
+#footer .credits .social a span.ico7, #footer .credits .social a span.ico7h {
+    background-position: -226px 0px; }
+#footer .credits .social a:hover span.socialicons {
+    display: none; }
+#footer .credits .social a:hover span.socialicons_h {
+    display: inline-block !important; }
+#footer .credits .social span.socialicons_h {
+    display: none; }
+#footer .credits .copyright {
+    color: #a6a6a7;
+    font-style: italic;
+    text-align: center;
+    margin-top: 30px; }
+#footer .credits .socialicons {
+    background: url("../images/socialicons.png") no-repeat;
+    width: 265px;
+    height: 36px; }
+#footer .credits .socialicons_h {
+    background: url("../images/socialicons_h.png") no-repeat;
+    width: 265px;
+    height: 36px; }
+#footer .info {
+    margin-bottom: 10px;
+    margin-left: 0; }
+#footer .info .residence {
+    margin-left: 0; }
+#footer .info ul {
+    margin: 0;
+    padding: 0; }
+#footer .info ul li {
+    list-style: none;
+    font-size: 16px;
+    color: #777E83;
+    line-height: 23px; }
+#footer .info ul a {
+    color: #777E83;
+    -webkit-transition: color .2s;
+    -moz-transition: color .2s;
+    -ms-transition: color .2s;
+    transition: color .2s; }
+#footer .info ul a:hover {
+    color: #A9B4BB; }
+#footer .info .touch {
+    float: right; }
+#footer .info .touch ul li {
+    display: inline-block;
+    margin-left: 22px; }
+
+/* Responsive
+-------------------------------------------------- */
+@media (max-width: 991px) {
+    body {
+        padding-top: 0 !important; }
+
+
+
+    #footer .container {
+        padding: 0px 20px; }
+    #footer .footer_header {
+        margin-left: 0; }
+    #footer .footer_header h3 {
+        margin-left: 0; }
+    #footer .testimonials {
+        overflow: hidden;
+        margin-bottom: 40px; }
+    #footer .testimonials .footer_header {
+        margin-left: 0; }
+    #footer .testimonials .wrapper {
+        float: left;
+        width: 100%; }
+    #footer .contact {
+        margin: 0; }
+    #footer .contact .footer_header {
+        margin-left: 0; }
+    #footer .contact input[type="text"], #footer .contact textarea {
+        float: left;
+        width: 100%; }
+    #footer .info .touch {
+        float: none; }
+    #footer .info .touch ul {
+        margin: 15px 0 15px; }
+    #footer .info .touch ul li {
+        margin: 0 30px 0 0; }
+    #footer .credits {
+        margin-top: 20px; } }
+
+
+.form-frame {
+    padding: 30px;
+    max-width: 400px;
+    border-radius: 2px;
+    background: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-frame input[type=text], .form-frame input[type=email], .form-frame textarea {
+    background: rgb(235, 241, 245);
+    color: rgb(36, 39, 41);
+}
+
+.form-frame  input:focus, .form-frame  textarea:focus {
+    outline: 0;
+    background: #FFF;
+}

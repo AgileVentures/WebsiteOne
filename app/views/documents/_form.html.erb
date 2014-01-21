@@ -1,0 +1,33 @@
+<div class='row'>
+  <div class='col-sm-6'>
+    <%= form_for [@project, @document], :html => { :class => 'form-vertical' } do |f| %>
+        <% if @document.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+              <ul>
+                <% @document.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+        <div class='form-group'>
+          <%= f.label :title %>
+          <%= f.text_field :title, :class => 'form-control', placeholder: 'Title' %>
+        </div>
+        <div class='form-group'>
+          <%= f.label :body %>
+          <%= f.text_area :body, :class => 'form-control',  'rows' => 10, placeholder: 'Document body'%>
+        </div>
+        <div class='form-group'>
+          <%= f.hidden_field :project_id, value: params[:project_id] %>
+        </div>
+        <div class='form-group'>
+          <%= f.submit 'Submit', :class => 'btn btn-primary', data: { disable_with: 'Working...' } %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+

@@ -1,10 +1,2 @@
-   <h1>creating a new project</h1>
-   <%= form_for @project, :html => { :class => 'form-vertical' } do |f| %>
-    <%= f.label(:title) %>
-    <%= f.text_field(:title) %>
-    <%= f.label(:description) %>
-    <%= f.text_field(:description) %>
-    <%= f.label(:status) %>
-    <%= f.text_field(:status) %>
-    <%= f.submit("Create") %>
-<% end %>
+   <h1>Creating a new Project</h1>
+   <%= render "form" %>
