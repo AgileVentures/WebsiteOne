@@ -1,37 +1,36 @@
-<!-- NAVBAR
-================================================== -->
-<div class="navbar-wrapper">
-  <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+<header class="masthead">
   <div class="container">
-    <div class="navbar navbar-inverse" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+    <div class="row">
+      <div class="col-sm-6">
         <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
       </div>
-      <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to 'Our projects', projects_path %></li>
-          <% unless user_signed_in? %>
-              <li><%= link_to 'Check in', new_user_session_path %></li>
-              <li><%= link_to 'Sign up', new_user_registration_path %></li>
-          <% else %>
-              <li><%= link_to 'My Account', edit_user_registration_path %></li>
-              <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
-
-          <% end %>
-        </ul>
-      </div>
-      <!--/.nav-collapse -->
     </div>
-    <!-- /.navbar-inner -->
   </div>
-  <!-- /.navbar -->
-</div> <!-- /.container -->
-</div><!-- /.navbar-wrapper -->
+</header>
+<!-- Fixed navbar -->
+<div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav nav-justified">
+        <li><%= link_to 'Our projects', projects_path %></li>
+        <% unless user_signed_in? %>
+            <li><%= link_to 'Check in', new_user_session_path %></li>
+            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        <% else %>
+            <li><%= link_to 'My Account', edit_user_registration_path %></li>
+            <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
+
+        <% end %>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
 
