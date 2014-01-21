@@ -2,7 +2,14 @@ module Mercury
   module Authentication
 
     def can_edit?
-      true # check here to see if the user is logged in/has access
+      if user_signed_in? and /editor(\/|\/\/)projects\/\d+\/documents\/\d+/i.match(request.env['PATH_INFO'])
+        # TODO Bryan: examine user privileges
+        true
+      else
+        flash[:alert] = 'You do not have the right privileges to complete action.'
+        false
+      end
     end
+
   end
 end

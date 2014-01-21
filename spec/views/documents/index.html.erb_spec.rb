@@ -1,4 +1,5 @@
 require 'spec_helper'
+include MercuryHelper
 
 describe 'documents/index' do
   before(:each) do
@@ -26,7 +27,7 @@ describe 'documents/index' do
  
     it 'should have edit button' do
       render
-      rendered.should have_link 'Edit', :href => edit_project_document_path(id: @documents[0].id, project_id: @project_id)
+      rendered.should have_link 'Edit', :href => mercury_edit_path(project_document_path(id: @documents[0].id, project_id: @project_id))
     end
 
     it 'should render a New Document button' do
@@ -42,7 +43,7 @@ describe 'documents/index' do
 	
     it 'should not have edit button if not signed in' do
       render
-      rendered.should_not have_link 'Edit', :href => edit_project_document_path(id: @documents[0].id, project_id: @project_id)
+      rendered.should_not have_link 'Edit', :href => mercury_edit_path(project_document_path(id: @documents[0].id, project_id: @project_id))
     end
 
     it 'should not have edit button if not signed in' do
