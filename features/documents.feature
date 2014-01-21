@@ -35,17 +35,6 @@ Scenario: Create a new document
   And I click "Submit"
   Then I should see "Document was successfully created."
 
-# Bryan: Replaced with mercury editing
-#Scenario: Edit a document
-#  Given I am logged in
-#  And I am on the "Documents" page for project "hello world"
-#  When I click the "Edit" button for document "Howto"
-#  Then I should be on the "Edit" page for document "Howto"
-#  When I fill in "Title" with "My new title"
-#  And I fill in "Body" with "New document body"
-#  And I click "Submit"
-#  Then I should see "Document was successfully updated."
-
 Scenario: Show a document
   Given I am on the "Documents" page for project "hello mars"
   When I click "Howto 2"
@@ -66,16 +55,6 @@ Scenario: Has a link to edit a document using the Mercury Editor
   And I am on the "Show" page for document "Howto"
   When I click the "Edit" button
   Then I should be in the Mercury Editor
-
-# Bryan: redundant test, merged with the last scenario
-#@javascript
-#Scenario: The Mercury Editor loads successfully
-#  Given I am going to use the Mercury editor
-#  And I am logged in
-#  And I am using the Mercury Editor to edit document "Howto"
-#  Then I should see "Save"
-#  And I should see the editable field "Title" within the content frame
-#  And I should see the editable field "Body" within the content frame
 
 Scenario: The Mercury Editor cannot be accessed by non-logged in users
   Given I am on the "Show" page for document "Documentation"
