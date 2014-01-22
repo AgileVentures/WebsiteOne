@@ -19,16 +19,18 @@ Background:
 
 
 Scenario: Render of list documents
-  Given I am on the "projects" page
-  When I click the "Documents" button for project "hello world"
-  Then I should be on the "Documents" page for project "hello world"
+  Given I am on the "Show" page for project "hello world"
+#  Given I am on the "projects" page
+#  When I click the "Documents" button for project "hello world"
+#  Then I should be on the "Documents" page for project "hello world"
   And I should see "Howto"
   And I should see "Documentation"
   And I should not see "Another doc"
 
 Scenario: Create a new document
   Given I am logged in
-  And I am on the "Documents" page for project "hello world"
+  Given I am on the "Show" page for project "hello world"
+#  And I am on the "Documents" page for project "hello world"
   When I click "New Document"
   And I fill in "Title" with "New doc title"
   And I fill in "Body" with "Document content"
@@ -36,7 +38,8 @@ Scenario: Create a new document
   Then I should see "Document was successfully created."
 
 Scenario: Show a document
-  Given I am on the "Documents" page for project "hello mars"
+  Given I am on the "Show" page for project "hello mars"
+#  Given I am on the "Documents" page for project "hello mars"
   When I click "Howto 2"
   Then I should be on the "Show" page for document "Howto 2"
   And I should see "Howto 2"
@@ -45,7 +48,8 @@ Scenario: Show a document
 
 Scenario: Destroy a document
   Given I am logged in
-  And I am on the "Documents" page for project "hello world"
+  Given I am on the "Show" page for project "hello world"
+# And I am on the "Documents" page for project "hello world"
   When I click the "Destroy" button for document "Howto"
   Then I should be on the "Documents" page for project "hello world"
   And I should see "Document was successfully deleted."
@@ -64,7 +68,8 @@ Scenario: The Mercury Editor cannot be accessed by non-logged in users
 
 Scenario: The Mercury Editor can be accessed from the document index page
   Given I am logged in
-  And I am on the "Documents" page for project "hello world"
+  Given I am on the "Show" page for project "hello world"
+#  And I am on the "Documents" page for project "hello world"
   When I click the "Edit" button for document "Howto"
   Then I should be in the Mercury Editor
 

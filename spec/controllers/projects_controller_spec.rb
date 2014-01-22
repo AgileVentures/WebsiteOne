@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe ProjectsController do
 
+  let(:valid_attributes) { { :title => 'MyProject',
+                             :description => 'My project description',
+                             :status => 'Active' } }
+  let(:valid_session) { {} }
+
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
     # stubbing out devise methods to simulate authenticated user
@@ -27,9 +32,8 @@ describe ProjectsController do
   describe '#show' do
 
     it 'assigns the requested project as @project' do
-      project = double(Project)
-      Project.stub(:find).and_return(project)
-      get :show, { :id => project.to_param }
+      project = Project.create! valid_attributes
+      get :show, {:id => project.to_param}, valid_session
       assigns(:project).should eq(project)
     end
   end
