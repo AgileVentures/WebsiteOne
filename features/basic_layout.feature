@@ -16,13 +16,14 @@ Scenario: Load basic design elements
 
 Scenario: Render navigation bar
   Then I should see a navigation bar
-#  Then show me the page
-  And I should see link "Our projects"
-  And I should see link "Check in"
-  And I should see link "Sign up"
+  And I should see link
+  | Our projects |
+  | Log in       |
+  | Sign up      |
 
-  Scenario: Render footer
-    And I should see "AgileVentures" in footer
-    And I should see "Crowdsourced Learning" in footer
+
+Scenario: Render footer
+  And I should see "AgileVentures" in footer
+  And I should see "Crowdsourced Learning" in footer
 
 

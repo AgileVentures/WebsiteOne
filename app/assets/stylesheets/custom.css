@@ -12,7 +12,7 @@ h1, h2, h3, h4 {
     color: darkgray;
 }
 
-p, a, small, td, tr {
+p, a, small, td, tr, i {
     color: #000000;
     line-height: 28px;
 }
@@ -264,3 +264,4 @@ border-radius: 5px;
 padding-bottom: 30px;
 margin-bottom: 30px;
 }
+

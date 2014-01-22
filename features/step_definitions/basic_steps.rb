@@ -165,3 +165,12 @@ end
 Then(/^show me the page$/) do
   save_and_open_page
 end
+When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
+  find(:select, field).find(:option, option).select_option
+end
+
+When(/^I should see a selector with options$/) do |table|
+  table.rows.flatten.each do |option|
+    page.should have_select(:options => [option])
+  end
+end
