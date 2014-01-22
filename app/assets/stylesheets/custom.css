@@ -224,29 +224,43 @@ section {
 
 .bg-1 {
     background: url('http://www.ilikewallpaper.net/ipad-air-wallpapers/download/8253/Dark-Pattern-ipad-4-wallpaper-ilikewallpaper_com_1024.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+/*background: #f16251;*/
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 }
 
 .bg-2 {
-    background: url('http://www.thetelegram.com/media/photos/unis/2013/11/20/2013-11-20-08-21-31-A12-bw-Social-Media-laptop.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+background: url('http://www.thetelegram.com/media/photos/unis/2013/11/20/2013-11-20-08-21-31-A12-bw-Social-Media-laptop.jpg') no-repeat center center fixed;
+/*background: #ffcc33; */
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 }
 
 .bg-3 {
-    background: url('http://wirtschaftsblatt.at/images/uploads/8/b/c/1317052/prueft_meldepflicht_fuer_hackerangriffe_hacker20121126164534.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+background: url('http://wirtschaftsblatt.at/images/uploads/8/b/c/1317052/prueft_meldepflicht_fuer_hackerangriffe_hacker20121126164534.jpg') no-repeat center center fixed;
+/*background: #f16251; */
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 }
 
 .bg-4 {
-    padding-top:30px;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(20,20,20,0.2)),to(rgba(255,255,255,0)), color-stop(1,#000));
+padding-top:30px;
+background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(20,20,20,0.2)),to(rgba(255,255,255,0)), color-stop(1,#000));
+}
+
+.bg-5 {
+padding-top:20px;
+background-color: rgba(255,255,255,.9);
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-khtml-border-radius: 5px;
+border-radius: 5px;
+padding-bottom: 30px;
+margin-bottom: 30px;
 }
