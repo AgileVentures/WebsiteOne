@@ -10,7 +10,7 @@ describe 'devise/registrations/edit.html.erb' do
 
   it 'shows required labels' do
     render
-    expect(rendered).to have_text('Edit your user details:')
+    expect(rendered).to have_text('Account details')
     expect(rendered).to have_text('First name')
     expect(rendered).to have_text('Last name')
     expect(rendered).to have_text('Email')
@@ -60,10 +60,10 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_button('Cancel my account')
   end
 
-  it 'shows Back button' do
-    render
-    expect(rendered).to have_link('Back')
-  end
+  #it 'shows Back button' do
+  #  render
+  #  expect(rendered).to have_link('Back')
+  #end
 
   it '#devise_error_messages_flash shows error messages ' do
     user = User.new
