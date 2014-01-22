@@ -1,5 +1,5 @@
 Then(/^I should see a navigation header$/) do
-  page.should have_selector('section#header')
+  page.should have_selector('header.masthead')
 end
 
 Then(/^I should see a main content area$/) do
@@ -11,12 +11,16 @@ Then(/^I should see a footer area$/) do
 end
 
 Then(/^I should see a navigation bar$/) do
-  within('section#header') do
     find ('div.navbar')
-  end
 end
 When(/^I should see "([^"]*)" in footer$/) do |string|
   within('section#footer') do
     page.should have_text string
+  end
+end
+
+Then /^I should see link$/ do |table|
+  table.rows.flatten.each do |link|
+    page.should have_link link
   end
 end

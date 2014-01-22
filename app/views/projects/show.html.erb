@@ -1,15 +1,44 @@
-<h1> <%= @project.title %> project</h1>
-<p>
-	<strong>Title:</strong>
-	<%= @project.title %>
-</p><p>
-	<strong>Description</strong>
-	<%= @project.description %>
-</p><p>
-	<strong>Status</strong>
-	<%= @project.status %>
-</p>
-<div>
-  <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default'%>
-</div>
+<div class="container">
+  <h1> <%= @project.title %> project</h1>
+  <small>Status: <%= @project.status %> Created: <%= @project.created_at %></small>
+  <p>
+    <strong><%= @project.description %></strong>
+  </p>
 
+  <div>
+    <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default' %>
+  </div>
+  <h2>Documents</h2>
+  <div class="col-lg-6">
+  <table id="documents" class="table table-striped">
+    <thead>
+    <tr>
+      <th style="width:90%"></th>
+      <% if user_signed_in? %>
+          <th style="width:15px"></th>
+          <th style="width:15px"></th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody>
+    <% @documents.each do |document| %>
+
+        <tr id="<%=document.id%>">
+          <td><h2><%= link_to document.title, project_document_path(id: document.id, project_id: document.project_id) %></h2>
+            <%= clean_html_summary(document.body) %></td>
+          <% if user_signed_in? %>
+              <td><%= link_to 'Edit', mercury_edit_path(project_document_path(id: document.id, project_id: document.project_id)), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
+              <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), type: 'button', class: 'btn btn-danger btn-xs', method: :delete %></td>
+          <% end %>
+        </tr>
+
+    <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  <% if user_signed_in? %>
+      <%= link_to 'New Document', new_project_document_path(project_id: @project.id), :type => 'button', :class => 'btn btn-default' %>
+  <% end %>
+  </div>
+</div>

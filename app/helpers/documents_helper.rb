@@ -9,4 +9,8 @@ module DocumentsHelper
   def clean_html_summary(html)
     sanitize(html.gsub(/<[^>]*>/, ' '), tags: [], attributes: []).truncate(250, separator: ' ')
   end
+
+  def documents
+    @documents = Document.where("project_id = ?", @project.id).order(:created_at)
+  end
 end

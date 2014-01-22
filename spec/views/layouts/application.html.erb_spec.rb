@@ -7,9 +7,19 @@ describe 'layouts/application.html.erb' do
     rendered.should have_xpath("//script[contains(@src, '.js')]")
   end
 
+  it 'should not have div nested inside p' do
+    should_not have_selector("p>div")
+  end
+
+  it 'should not have extra escaped html' do
+    should_not =~ /&lt;/
+    should_not =~ /&gt;/
+    should_not =~ /&amp;/
+  end
+
   it 'should render a navbar' do
     render
-    rendered.should have_selector('div.navbar-wrapper')
+    rendered.should have_selector('div.navbar')
   end
 
   it 'should render links to site features' do
@@ -26,7 +36,7 @@ describe 'layouts/application.html.erb' do
 
   it 'should return 200 for all link visits' do
     render
-    rendered.within('section#header') do |header|
+    rendered.within('div.navbar') do |header|
       links = header.all('a').map { |el| el[:href] }
       links.each do |link|
         visit link
@@ -42,8 +52,8 @@ describe 'layouts/application.html.erb' do
 
     it 'should render login & sign-up links' do
       render
-      rendered.within('section#header') do |header|
-        header.should have_link 'Check in', :href => new_user_session_path
+      rendered.within('div.navbar') do |header|
+        header.should have_link 'Log in', :href => new_user_session_path
         header.should have_link 'Sign up', :href => new_user_registration_path
       end
     end
@@ -55,8 +65,8 @@ describe 'layouts/application.html.erb' do
     end
     it 'should render navigation links' do
       render
-      rendered.within('section#header') do |header|
-        header.should_not have_link 'Check in', :href => new_user_session_path
+      rendered.within('div.navbar') do |header|
+        header.should_not have_link 'Log in', :href => new_user_session_path
         header.should_not have_link 'Sign up', :href => new_user_registration_path
         header.should have_link 'My Account', :href => edit_user_registration_path
       end
