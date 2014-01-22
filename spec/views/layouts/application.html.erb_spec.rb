@@ -7,6 +7,16 @@ describe 'layouts/application.html.erb' do
     rendered.should have_xpath("//script[contains(@src, '.js')]")
   end
 
+  it 'should not have div nested inside p' do
+    should_not have_selector("p>div")
+  end
+
+  it 'should not have extra escaped html' do
+    should_not =~ /&lt;/
+    should_not =~ /&gt;/
+    should_not =~ /&amp;/
+  end
+
   it 'should render a navbar' do
     render
     rendered.should have_selector('div.navbar')
