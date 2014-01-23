@@ -86,7 +86,12 @@ $(function() {
         notSidebar = $('#not-sidebar'),
         headerHeight = header.height();
 
+    // only worry about the complex sidebar behaviour if the sidebar is shorter than the actual document
     var worryAboutSidebar = (sidebar != null) && (sidebar.height() < notSidebar.height());
+
+    if (sidebar != null) {
+      sidebar.css({ 'max-height': 500 });
+    }
 
     function adjustSidebarPosition() {
       // TODO Bryan: avoid hardcoded values if possible
@@ -99,20 +104,23 @@ $(function() {
     // TODO Bryan: this works but gives jittery animation
     var h1 = 0,
         h2 = 0,
-        checkDelay = 30;
+        checkDelay = 30; // can't seem to go too low
     function checkSidebarHeight() {
       h2 = sidebar.height();
       worryAboutSidebar = (h2 < notSidebar.height());
-      if (worryAboutSidebar && h1 != h2) {
+      if (h1 != h2) {
         adjustSidebarPosition();
         h1 = h2;
         setTimeout(checkSidebarHeight, checkDelay);
-      } else if (!worryAboutSidebar) {
+      }
+
+      if (!worryAboutSidebar) {
         sidebar.removeClass('affix');
         sidebar.css({ 'top': 0 });
       }
     }
 
+    // a hack to follow collapse animation, ideally should find the right animation callbacks
     $('.project-collapse').on('click', function() {
       h1 = h2 = sidebar.height();
       if ($(window).scrollTop() > headerHeight) {
