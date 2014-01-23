@@ -48,11 +48,12 @@ Feature: Create and maintain projects
     Then I should see "error prohibited this user from being saved:"
     And I should see "Current password is invalid"
 
-  Scenario: Clicking Back button
-    Given I am on the "Projects" page
-    And I follow "My Account"
-    When I click "Back"
-    Then I should be on the "Projects" page
+  # Removed The Back button /Thomas
+  #Scenario: Clicking Back button
+  #  Given I am on the "Projects" page
+  #  And I follow "My Account"
+  #  When I click "Back"
+  #  Then I should be on the "Projects" page
 
   @javascript
   Scenario: Cancel my account
