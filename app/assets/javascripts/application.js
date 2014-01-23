@@ -74,6 +74,23 @@ $(function() {
         css.type = "text/css";
         css.innerHTML = ".txt-rotate > .wrap";
         document.body.appendChild(css);
+
+        // Bryan: Quick fix for navbar
+        var affixedNav = $('#nav'),
+            header = $('#main_header'),
+            wrapper = $('#wrap');
+        var headerHeight = header.height();
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > headerHeight) {
+                if (!affixedNav.hasClass('affix')) {
+                    affixedNav.addClass('affix');
+                    wrapper.css({ 'padding-top': affixedNav.height() + parseInt(affixedNav.css('margin-bottom')) });
+                }
+            } else if (affixedNav.hasClass('affix')) {
+                affixedNav.removeClass('affix');
+                wrapper.css({ 'padding-top': 0 })
+            }
+        });
     }
 
     $(document).ready(ready);
