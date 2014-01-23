@@ -79,9 +79,9 @@ $(function() {
         var affixedNav = $('#nav'),
             header = $('#main_header'),
             wrapper = $('#wrap');
-        var headerHeight = header.height();
+        var thresholdHeight = header.height() + affixedNav.height();
         $(window).scroll(function() {
-            if ($(this).scrollTop() > headerHeight) {
+            if ($(this).scrollTop() > thresholdHeight) {
                 if (!affixedNav.hasClass('affix')) {
                     affixedNav.addClass('affix');
                     wrapper.css({ 'padding-top': affixedNav.height() + parseInt(affixedNav.css('margin-bottom')) });
