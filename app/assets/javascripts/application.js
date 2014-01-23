@@ -84,7 +84,7 @@ $(function() {
         wrapper = $('#wrap'),
         sidebar = $('#sidebar'),
         notSidebar = $('#not-sidebar'),
-        headerHeight = header.height();
+        thresholdHeight = header.height();
 
     // only worry about the complex sidebar behaviour if the sidebar is shorter than the actual document
     var worryAboutSidebar = (sidebar != null) && (sidebar.height() < notSidebar.height());
@@ -123,13 +123,13 @@ $(function() {
     // a hack to follow collapse animation, ideally should find the right animation callbacks
     $('.project-collapse').on('click', function() {
       h1 = h2 = sidebar.height();
-      if ($(window).scrollTop() > headerHeight) {
+      if ($(window).scrollTop() > thresholdHeight) {
         setTimeout(checkSidebarHeight, checkDelay);
       }
     });
 
     $(window).scroll(function() {
-      if ($(this).scrollTop() > headerHeight) {
+      if ($(this).scrollTop() > thresholdHeight) {
         if (!affixedNav.hasClass('affix')) {
           affixedNav.addClass('affix');
           wrapper.css({ 'padding-top': affixedNav.height() + parseInt(affixedNav.css('margin-bottom')) });
