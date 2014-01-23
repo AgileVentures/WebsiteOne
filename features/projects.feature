@@ -59,7 +59,6 @@ Feature: Create and maintain projects
       | Button  |
       | Documents    |
       | Edit         |
-      | Destroy      |
 
   Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
     Given I am not logged in
@@ -68,7 +67,6 @@ Feature: Create and maintain projects
     And I should not see buttons:
       | Button       |
       | Edit         |
-      | Destroy      |
 
 #  Scenarios for NEW page
 
@@ -162,13 +160,14 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
-  #  Scenarios for DESTROY action
 
-  Scenario: Destroying a project: successful
-    Given I am logged in
-    And I am on the "projects" page
-    When I click the "Destroy" button for project "hello mars"
-    Then I should be on the "projects" page
-    And I should see "Project was successfully deleted."
+#  Scenarios for DESTROY action commented out until this functionality is needed
+
+#  Scenario: Destroying a project: successful
+#    Given I am logged in
+#    And I am on the "projects" page
+#    When I click the "Destroy" button for project "hello mars"
+#    Then I should be on the "projects" page
+#    And I should see "Project was successfully deleted."
 
 
