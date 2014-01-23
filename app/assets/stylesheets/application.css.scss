@@ -28,3 +28,30 @@ label {
   color: black;
 }
 
+.bg-3 {
+  background: url('bg1.jpg') no-repeat center center fixed;
+  /*background: #f16251; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-1 {
+  background: url('http://www.ilikewallpaper.net/ipad-air-wallpapers/download/8253/Dark-Pattern-ipad-4-wallpaper-ilikewallpaper_com_1024.jpg') no-repeat center center fixed;
+  /*background: #f16251;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-2 {
+  background: url('http://www.thetelegram.com/media/photos/unis/2013/11/20/2013-11-20-08-21-31-A12-bw-Social-Media-laptop.jpg') no-repeat center center fixed;
+  /*background: #ffcc33; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+

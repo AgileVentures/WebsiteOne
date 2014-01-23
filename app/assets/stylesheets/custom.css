@@ -12,8 +12,7 @@ h1, h2, h3, h4 {
     color: darkgray;
 }
 
-p, a, small, td, tr, i {
-    color: #000000;
+p, a {
     line-height: 28px;
 }
 
@@ -215,39 +214,14 @@ h1 {
 
 
 section {
-    color: #ffffff;
     min-height: 400px;
     height: auto !important;
     height: 100%;
     padding-top:100px;
 }
 
-.bg-1 {
-    background: url('http://www.ilikewallpaper.net/ipad-air-wallpapers/download/8253/Dark-Pattern-ipad-4-wallpaper-ilikewallpaper_com_1024.jpg') no-repeat center center fixed;
-/*background: #f16251;*/
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-}
 
-.bg-2 {
-background: url('http://www.thetelegram.com/media/photos/unis/2013/11/20/2013-11-20-08-21-31-A12-bw-Social-Media-laptop.jpg') no-repeat center center fixed;
-/*background: #ffcc33; */
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-}
 
-.bg-3 {
-background: url('http://wirtschaftsblatt.at/images/uploads/8/b/c/1317052/prueft_meldepflicht_fuer_hackerangriffe_hacker20121126164534.jpg') no-repeat center center fixed;
-/*background: #f16251; */
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-}
 
 .bg-4 {
 padding-top:30px;
