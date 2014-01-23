@@ -67,3 +67,7 @@ end
 When(/^I try to edit the page$/) do
   visit '/editor' + current_path
 end
+
+When(/^I should not see the document "([^"]*)"$/) do |title|
+  page.should have_text title, visible: false
+end

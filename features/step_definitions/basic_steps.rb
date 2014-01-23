@@ -153,8 +153,7 @@ Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, con
   expect(current_path).to eq url_for_title(action: action, controller: controller, title: title)
 end
 
-Given(/^I am on the "([^"]*)" page for document "([^"]*)"$/) do |action, title|
-  controller = 'document'
+Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
   visit url_for_title(action: action, controller: controller, title: title)
 end
 

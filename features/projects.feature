@@ -115,7 +115,7 @@ Feature: Create and maintain projects
   Scenario: opens "Show" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-    When I click "hello world"
+    When I click "hello world" in the list of projects
     Then I should see:
       | Text                  |
       | hello world           |
@@ -142,12 +142,14 @@ Feature: Create and maintain projects
 
 
   Scenario: Edit page has a return link
-    Given I am on the "Edit" page for project "hello mars"
+    Given I am logged in
+    And I am on the "Edit" page for project "hello mars"
     When I click "Back"
     Then I should be on the "projects" page
 
   Scenario: Updating a project: success
-    Given I am on the "Edit" page for project "hello mars"
+    Given I am logged in
+    And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I click the "Submit" button
     Then I should be on the "projects" page
@@ -155,7 +157,8 @@ Feature: Create and maintain projects
     And I should see "Hello, Uranus!"
 
   Scenario: Saving a project: failure
-    Given I am on the "Edit" page for project "hello mars"
+    Given I am logged in
+    And I am on the "Edit" page for project "hello mars"
     When I fill in "Title" with ""
     And I click the "Submit" button
     Then I should see "Project was not updated."

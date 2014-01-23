@@ -25,7 +25,7 @@ Scenario: Render of list documents
 #  Then I should be on the "Documents" page for project "hello world"
   And I should see "Howto"
   And I should see "Documentation"
-  And I should not see "Another doc"
+  And I should not see the document "Another doc"
 
 Scenario: Create a new document
   Given I am logged in
@@ -46,13 +46,13 @@ Scenario: Show a document
   And I should see "My documentation"
   And I should see a link to "Edit" page for document "Howto 2"
 
-Scenario: Destroy a document
-  Given I am logged in
-  Given I am on the "Show" page for project "hello world"
-# And I am on the "Documents" page for project "hello world"
-  When I click the "Destroy" button for document "Howto"
-  Then I should be on the "Documents" page for project "hello world"
-  And I should see "Document was successfully deleted."
+#Scenario: Destroy a document
+#  Given I am logged in
+#  Given I am on the "Show" page for project "hello world"
+## And I am on the "Documents" page for project "hello world"
+#  When I click the "Destroy" button for document "Howto"
+#  Then I should be on the "Documents" page for project "hello world"
+#  And I should see "Document was successfully deleted."
 
 Scenario: Has a link to edit a document using the Mercury Editor
   Given I am logged in
@@ -66,12 +66,12 @@ Scenario: The Mercury Editor cannot be accessed by non-logged in users
   And I try to use the Mercury Editor to edit document "Documentation"
   Then I should see "You do not have the right privileges to complete action."
 
-Scenario: The Mercury Editor can be accessed from the document index page
-  Given I am logged in
-  Given I am on the "Show" page for project "hello world"
-#  And I am on the "Documents" page for project "hello world"
-  When I click the "Edit" button for document "Howto"
-  Then I should be in the Mercury Editor
+#Scenario: The Mercury Editor can be accessed from the document index page
+#  Given I am logged in
+#  Given I am on the "Show" page for project "hello world"
+##  And I am on the "Documents" page for project "hello world"
+#  When I click the "Edit" button for document "Howto"
+#  Then I should be in the Mercury Editor
 
 @javascript
 Scenario: The Mercury Editor save button works

@@ -1,29 +1,21 @@
 <h3>Current Projects</h3>
 <ul>
-  <% current_projects.all.each do |p, index| %>
+  <% current_projects.each do |p, index| %>
     <a href="<%= project_path(p) %>"><li>
       <%= p.title %>
-<!--      <% has_docs = p.documents.any? %>
+      <% has_docs = p.documents.any? %>
       <% if has_docs %>
         <a href="#collapse<%= index %>" class="pull-right" data-toggle="collapse">
           <span class="glyphicon glyphicon-chevron-down"></span>
         </a>
-      <% end %> -->
+      <% end %>
     </li></a>
-    <% if p == project and p.documents.any? %>
-      <ul>
-        <% p.documents.each do |d| %>
-          <a href="<%= project_document_path(p, d) %>"><li><%= d.title %></li></a>
-        <% end %>
-      </ul>
-    <% end %>
-    <!--
     <% if has_docs %>
       <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
         <% p.documents.each do |d| %>
           <a href="<%= project_document_path(p, d) %>"><li><%= d.title %></li></a>
         <% end %>
       </ul>
-    <% end %> -->
+    <% end %>
   <% end %>
 </ul>
