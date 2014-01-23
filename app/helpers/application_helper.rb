@@ -15,5 +15,8 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
-  
+
+  def current_projects
+    Project.all
+  end
 end

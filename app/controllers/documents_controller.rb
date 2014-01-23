@@ -5,14 +5,12 @@ class DocumentsController < ApplicationController
 
   before_action :find_project
 
-
   # GET /documents
   # GET /documents.json
   def index
     # TODO separate route for "documents for a project"
     #@documents = Document.all
-    @documents = Document.where("project_id = ?", @project.id).order(:created_at)
-
+    @documents = Document.where('project_id = ?', @project.id).order(:created_at)
   end
 
   # GET /documents/1
