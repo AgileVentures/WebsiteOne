@@ -1,0 +1,6 @@
+<h3>Current Projects</h3>
+<ul>
+  <% Project.all.each do |p| %>
+    <a href="<%= project_path(p) %>"><li><%= p.title %></li></a>
+  <% end %>
+</ul>

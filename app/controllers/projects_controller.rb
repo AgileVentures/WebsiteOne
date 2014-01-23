@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  layout 'with_sidebar'
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   include DocumentsHelper

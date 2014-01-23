@@ -1,0 +1,52 @@
+@import "variables";
+
+#sidebar {
+    padding: 0;
+    width: $sidebar-width;
+    background: $sidebar-bg-color;
+}
+
+#sidebar * {
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar a {
+    color: $sidebar-a-color;
+}
+
+#sidebar a:hover, a:active {
+    color: $sidebar-a-hover-color;
+    text-decoration: none;
+}
+
+#sidebar h3 {
+    padding: 15px 0 5px 0;
+    font-size: 130%;
+    width: 100%;
+    text-align: center;
+}
+
+#sidebar ul {
+    list-style: none;
+}
+
+#sidebar li {
+    font-size: 110%;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+#sidebar ul ul li {
+    padding: 5px 10px 5px 20px;
+}
+
+#sidebar li:hover {
+    background: $sidebar-a-bg-hover-color;
+}
+
+.separator {
+    width: 100%;
+    height: 10px;
+    border-bottom: 1px solid $sidebar-a-color;
+}

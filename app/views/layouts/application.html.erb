@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>WebsiteOne</title>
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <% if current_page? root_path %>
         <%= render 'layouts/content' %>
     <% else %>
-        <%= yield %>
+        <%= content_for?(:content) ? yield(:content) : yield %>
     <% end %>
   </section>
   <div id="push"></div>
