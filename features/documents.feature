@@ -80,7 +80,7 @@ Scenario: The Mercury Editor save button works
   And I am using the Mercury Editor to edit document "Howto"
   When I fill in the editable field "Title" with "My new title"
   And I fill in the editable field "Body" with "This is my new body text"
-  And I click "Save" within the Mercury Editor toolbar
+  And I click "Save" within Mercury Editor toolbar
   Then I should see "The document has been successfully updated."
   And I should be on the "Show" page for document "My new title"
   And I should see "This is my new body text"
@@ -97,3 +97,13 @@ Scenario: The Mercury Editor should only work for the documents
   Given I am on the "Documents" page for project "hello world"
   When I try to edit the page
   Then I should see "You do not have the right privileges to complete action."
+
+Scenario: Sidebar always shows the relevant information
+  Given I am logged in
+  And I am on the "Show" page for document "Howto"
+  Then I should see a link to "Show" page for project "hello world" within the sidebar
+  And I should see a link to "Show" page for document "Howto" within the sidebar
+  And I should see a link to "Show" page for document "Documentation" within the sidebar
+  And I should see a link to "Show" page for project "hello mars" within the sidebar
+  And I should not be able to see a link to "Show" page for document "Another doc" within the sidebar
+  And I should not be able to see a link to "Show" page for document "Howto 2" within the sidebar

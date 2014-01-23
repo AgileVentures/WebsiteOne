@@ -84,13 +84,13 @@ $(function() {
         wrapper = $('#wrap'),
         sidebar = $('#sidebar'),
         notSidebar = $('#not-sidebar'),
-        thresholdHeight = header.height();
+        thresholdHeight = header.height() + affixedNav.height();
 
     // only worry about the complex sidebar behaviour if the sidebar is shorter than the actual document
     var worryAboutSidebar = (sidebar != null) && (sidebar.height() < notSidebar.height());
 
     if (sidebar != null) {
-      sidebar.css({ 'max-height': 500 });
+      sidebar.css({ 'max-height': 500 }); // TODO Bryan: hardcoded value...
     }
 
     function adjustSidebarPosition() {

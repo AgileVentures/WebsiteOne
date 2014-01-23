@@ -157,8 +157,11 @@ Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controll
   visit url_for_title(action: action, controller: controller, title: title)
 end
 
-Then(/^I should see a link to "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
+Then(/^I should( not be able to)? see a link to "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |invisible, action, controller, title|
   page.has_link?(action, href: url_for_title(action: action, controller: controller, title: title))
+  unless invisible
+    page.should have_text title, visible: false
+  end
 end
 
 Then(/^show me the page$/) do
@@ -171,5 +174,21 @@ end
 When(/^I should see a selector with options$/) do |table|
   table.rows.flatten.each do |option|
     page.should have_select(:options => [option])
+  end
+end
+
+Then(/^I should see the sidebar$/) do
+  page.find(:css, 'nav#sidebar')
+end
+
+Then(/(.*) within the ([^"]*)$/) do |s, m|
+  m = m.downcase
+  if m == 'mercury editor'
+    page.driver.within_frame('mercury_iframe') { step(s) }
+  else
+    selector_for = {
+        'sidebar' => '#sidebar'
+    }
+    page.within(selector_for[m]) { step(s) }
   end
 end

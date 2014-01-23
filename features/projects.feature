@@ -107,7 +107,6 @@ Feature: Create and maintain projects
     And I click "New Project"
     When I fill in "Title" with ""
     And I click the "Submit" button
-
     Then I should see "Project was not saved. Please check the input."
 
 #  Scenarios for SHOW page
@@ -173,4 +172,13 @@ Feature: Create and maintain projects
 #    Then I should be on the "projects" page
 #    And I should see "Project was successfully deleted."
 
-
+Scenario: Sidebar is always visible
+  Given I am logged in
+  And I am on the "Edit" page for project "hello mars"
+  Then I should see the sidebar
+  Given I am on the "Show" page for project "hello mars"
+  Then I should see the sidebar
+  Given I am on the "projects" page
+  Then I should see the sidebar
+  When I click "New Project"
+  Then I should see the sidebar
