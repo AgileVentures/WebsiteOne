@@ -3,7 +3,7 @@
     <nav id="sidebar" class="col-xs-3" role="complementary">
       <%= render partial: 'layouts/sidebar', locals: { project: @project } %>
     </nav>
-    <div class="col-xs-9 pull-right">
+    <div id="not-sidebar" class="col-xs-9 pull-right">
       <%= yield %>
     </div>
   </div>
