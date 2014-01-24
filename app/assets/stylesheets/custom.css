@@ -41,8 +41,6 @@ p, a {
 }
 
 
-
-
 /* Custom page CSS
 -------------------------------------------------- */
 
@@ -131,7 +129,7 @@ h1 {
 #nav.affix {
     position: fixed;
     top: 0;
-    z-index:10;
+    z-index: 1000;
     -webkit-transition: all .6s ease-in-out;
 }
 

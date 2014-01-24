@@ -57,7 +57,6 @@ Feature: Create and maintain projects
     Then I should see "List of Projects" table
     And I should see buttons:
       | Button  |
-      | Documents    |
       | Edit         |
 
   Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
@@ -107,7 +106,6 @@ Feature: Create and maintain projects
     And I click "New Project"
     When I fill in "Title" with ""
     And I click the "Submit" button
-
     Then I should see "Project was not saved. Please check the input."
 
 #  Scenarios for SHOW page
@@ -115,7 +113,7 @@ Feature: Create and maintain projects
   Scenario: opens "Show" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-    When I click "hello world"
+    When I click "hello world" in the list of projects
     Then I should see:
       | Text                  |
       | hello world           |
@@ -142,12 +140,14 @@ Feature: Create and maintain projects
 
 
   Scenario: Edit page has a return link
-    Given I am on the "Edit" page for project "hello mars"
+    Given I am logged in
+    And I am on the "Edit" page for project "hello mars"
     When I click "Back"
     Then I should be on the "projects" page
 
   Scenario: Updating a project: success
-    Given I am on the "Edit" page for project "hello mars"
+    Given I am logged in
+    And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I click the "Submit" button
     Then I should be on the "projects" page
@@ -155,7 +155,8 @@ Feature: Create and maintain projects
     And I should see "Hello, Uranus!"
 
   Scenario: Saving a project: failure
-    Given I am on the "Edit" page for project "hello mars"
+    Given I am logged in
+    And I am on the "Edit" page for project "hello mars"
     When I fill in "Title" with ""
     And I click the "Submit" button
     Then I should see "Project was not updated."
@@ -170,4 +171,13 @@ Feature: Create and maintain projects
 #    Then I should be on the "projects" page
 #    And I should see "Project was successfully deleted."
 
-
+Scenario: Sidebar is always visible
+  Given I am logged in
+  And I am on the "Edit" page for project "hello mars"
+  Then I should see the sidebar
+  Given I am on the "Show" page for project "hello mars"
+  Then I should see the sidebar
+  Given I am on the "projects" page
+  Then I should see the sidebar
+  When I click "New Project"
+  Then I should see the sidebar
