@@ -32,6 +32,7 @@
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
+        <% if resource.password_required? %>
         <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
 
           <div class="form-group">
@@ -50,6 +51,8 @@
             <%= f.password_field :current_password, class: 'form-control' %>
           </div>
         </div>
+        <% end %>
+
         <div><%= f.submit "Update", class: 'btn btn-primary btn-lg btn-block' %></div>
     <% end %>
 
