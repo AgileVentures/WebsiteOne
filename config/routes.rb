@@ -8,7 +8,7 @@ WebsiteOne::Application.routes.draw do
   get 'users/sign_out' => redirect('/404.html')
   get 'users/password' => redirect('/404.html')
 
-  get '/auth/:provider/callback' => 'authentication#create'
+  post '/auth/:provider/callback' => 'authentication#create'
 
   resources :projects do
     resources :documents do
