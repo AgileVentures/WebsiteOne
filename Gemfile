@@ -13,6 +13,7 @@ gem 'devise' # Authentication local and 3rd party
 gem 'bootstrap-sass', '~> 3.0.2.0' # JS Bootstrap library support
 gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
+gem 'faker'
 gem 'high_voltage'
 
 
@@ -30,6 +31,8 @@ end
 group :development, :test do
   gem 'rspec-rails' #unit testing
   gem 'debugger'  # Use debugger
+  gem 'jasmine'
+  gem 'jasmine-jquery-rails'
 end
 
 group :production do

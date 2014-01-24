@@ -1,7 +1,5 @@
 Then(/^I should see "([^"]*)" table$/) do |legend|
-  within('table#projects') do
-    page.should have_css('legend', :text => legend)
-  end
+  page.should have_css 'h1', text: legend
 end
 
 When(/^I should see column "([^"]*)"$/) do |column|
@@ -41,13 +39,18 @@ When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project
   end
 end
 
-Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |page_name, project_name|
-  steps %Q{
-    Given I am logged in
-    And I am on the "projects" page }
-  if page_name == 'Show'
-    steps %Q{ And I click "#{project_name}" }
-  else
-    steps %Q{ And I click the "#{page_name}" button for project "#{project_name}" }
-  end
+When(/^(.*) in the list of projects$/) do |s|
+  page.within(:css, 'table#projects') { step(s) }
 end
+
+# Bryan: Replaced with more general step
+#Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |page_name, project_name|
+#  steps %Q{
+#    Given I am logged in
+#    And I am on the "projects" page }
+#  if page_name == 'Show'
+#    steps %Q{ And I click "#{project_name}" }
+#  else
+#    steps %Q{ And I click the "#{page_name}" button for project "#{project_name}" }
+#  end
+#end

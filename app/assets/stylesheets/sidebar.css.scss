@@ -1,0 +1,73 @@
+@import "variables";
+
+#sidebar-container {
+  position: relative;
+}
+
+#sidebar {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: auto;
+  width: $sidebar-width;
+  padding: 0;
+  background: #ffffff;
+  overflow: scroll;
+  z-index: 0;
+}
+
+#sidebar * {
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar a {
+  color: $sidebar-a-color;
+}
+
+#sidebar a:hover, a:active {
+  color: $sidebar-a-hover-color;
+  text-decoration: none;
+}
+
+#sidebar h3 {
+  padding: 15px 0 5px 0;
+  font-size: 130%;
+  width: 100%;
+  text-align: center;
+}
+
+#sidebar ul {
+  list-style: none;
+}
+
+#sidebar li {
+  font-size: 15px;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+#sidebar ul ul li {
+  font-size: 14px;
+  padding: 2px 10px 2px 20px;
+}
+
+#sidebar .focused {
+  font-weight: bold;
+}
+
+.separator {
+  width: 100%;
+  height: 10px;
+  border-bottom: 1px solid $sidebar-a-color;
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 1px;
+}
+
+#sidebar::-webkit-scrollbar-track { }
+
+#sidebar::-webkit-scrollbar-thumb {
+  background: $sidebar-a-color;
+}
