@@ -15,7 +15,7 @@ gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
 gem 'faker'
 gem 'omniauth'
-gem 'omniauth-github'
+gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-google-oauth2'
 gem 'high_voltage'
 

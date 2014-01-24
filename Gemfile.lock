@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/intridea/omniauth-github.git
+  revision: a17d8b9e4765251de9892f47facba1fcfd6a8fa7
+  specs:
+    omniauth-github (1.1.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+
+GIT
   remote: git://github.com/jejacks0n/mercury.git
   revision: 1cc637b0bccea19085f824d2881c6513ed5ee8ae
   specs:
@@ -144,9 +152,6 @@ GEM
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
-    omniauth-github (1.1.1)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
     omniauth-google-oauth2 (0.2.2)
       omniauth (~> 1.0)
       omniauth-oauth2
@@ -269,7 +274,7 @@ DEPENDENCIES
   launchy
   mercury-rails!
   omniauth
-  omniauth-github
+  omniauth-github!
   omniauth-google-oauth2
   pg
   rails (= 4.0.2)
