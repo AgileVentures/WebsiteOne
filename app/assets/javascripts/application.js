@@ -88,46 +88,86 @@ $(function() {
 
     /*
       AFFIX BEHAVIOUR RELATED CODE
+
+      Why not use Bootstrap affix?
+      1. Well first off, the header margins needs to be adjusted to compensate for affixing
+         the navbar, which bootstrap appears to not have any callbacks for.
+      2. Second, the current available implementation of bootstrap is buggy for affix-bottom,
+         it is a little extra work to have it working
+         related bug: https://github.com/twbs/bootstrap/issues/4647
+      3. There is no guarantee that embedded collapsible items will work well with affix
      */
 
     var affixedNav = $('#nav'),
         header = $('#main_header'),
         sidebar = $('#sidebar'),
         notSidebar = $('#not-sidebar'),
-        thresholdHeight = header.height() + affixedNav.height();
+        // manually selected properties which will affect affix threshold height, if layout changes,
+        // readjust as necessary
+        thresholdHeight = header.height() + affixedNav.height(),
+        footer = $('#footer'),
+        // manually selected properties which will affect affix threshold height, if layout changes,
+        // readjust as necessary
+        bottomThreshold = parseInt(footer.css('margin-top')) + footer.height() +
+            parseInt(footer.css('padding-top')) + parseInt(footer.css('padding-bottom')),
+        affixOffsetHeight = parseInt(affixedNav.css('margin-bottom')) + parseInt($('#main').css('padding-top'));
+
+    if (sidebar != null) {
+//      sidebar.css({ 'max-height': 300 }); // TODO Bryan: hardcoded value...
+
+      sidebar.custom = {
+        AFFIX_TOP:  0,
+        AFFIX:      1,
+        AFFIX_BTM:  2,
+        state: this.AFFIX_TOP,
+        affixTop: function() {
+          if (this.state == this.AFFIX_TOP) return;
+          // Bryan: turns off any per element styling
+          sidebar.css({ 'position': '', 'top': '', 'left': '', 'bottom': '' })
+          this.state = this.AFFIX_TOP;
+        },
+        affix: function() {
+          if (this.state == this.AFFIX) return;
+          // Bryan: affixOffsetHeight must be tuned to work correctly
+          sidebar.css({ 'position': 'fixed', 'top': affixOffsetHeight, 'left': 'auto', 'bottom': '' })
+          this.state = this.AFFIX;
+        },
+        affixBottom: function() {
+          if (this.state == this.AFFIX_BTM) return;
+          // Bryan: The left property must be tuned to work properly, in this case, it is just the left padding
+          sidebar.css({ 'position': 'absolute', 'top': 'auto', 'left': $('#sidebar-container').css('padding-left'), 'bottom': 0 })
+          this.state = this.AFFIX_BTM;
+        },
+        checkBottom: function() {
+          var diff = $(window).scrollTop() + affixOffsetHeight + sidebar.height() + bottomThreshold - $(document).height();
+          if (diff > 0) {
+            this.affixBottom();
+          } else {
+            this.affix();
+          }
+        }
+      };
+    }
 
     // only worry about the complex sidebar behaviour if the sidebar is shorter than the actual document
     var worryAboutSidebar = (sidebar != null) && (sidebar.height() < notSidebar.height());
 
-    if (sidebar != null) {
-      sidebar.css({ 'max-height': 300 }); // TODO Bryan: hardcoded value...
-    }
-
-    function adjustSidebarPosition() {
-      // TODO Bryan: avoid hardcoded values if possible
-      var diff = $(window).scrollTop() + sidebar.height() + 700 - $(document).height();
-      if (diff > 0) {
-        sidebar.css({ 'top': affixedNav.height() + 125 - diff });
-      }
-    }
-
-    // TODO Bryan: this works but gives jittery animation
     var h1 = 0,
         h2 = 0,
+        oldState = 0,
         checkDelay = 30; // can't seem to go too low
     function checkSidebarHeight() {
       h2 = sidebar.height();
       worryAboutSidebar = (h2 < notSidebar.height());
       if (h1 != h2) {
-        if (worryAboutSidebar) {
-          adjustSidebarPosition();
-        }
+        sidebar.custom.checkBottom();
         h1 = h2;
-        setTimeout(checkSidebarHeight, checkDelay);
+        if (oldState == sidebar.custom.state) {
+          setTimeout(checkSidebarHeight, checkDelay);
+        }
 
         if (!worryAboutSidebar) {
-          sidebar.removeClass('affix');
-          sidebar.css({ 'top': 0 });
+          sidebar.custom.affixTop();
         }
       }
     }
@@ -135,7 +175,8 @@ $(function() {
     // a hack to follow collapse animation, ideally should find the right animation callbacks
     $('.collapse-button').on('click', function() {
       h1 = h2 = sidebar.height();
-      if ($(window).scrollTop() > thresholdHeight) {
+      if (sidebar.custom.state != sidebar.custom.AFFIX_TOP) {
+        oldState = sidebar.custom.state;
         setTimeout(checkSidebarHeight, checkDelay);
       }
     });
@@ -144,22 +185,19 @@ $(function() {
       if ($(this).scrollTop() > thresholdHeight) {
         if (!affixedNav.hasClass('affix')) {
           affixedNav.addClass('affix');
-          header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom')) });
+          header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
           if (worryAboutSidebar) {
-            // TODO Bryan: avoid hardcoded values if possible
-            sidebar.css({ 'top': affixedNav.height() + 125 });
-            sidebar.addClass('affix');
+            sidebar.custom.affix();
           }
         }
         if (worryAboutSidebar) {
-          adjustSidebarPosition();
+          sidebar.custom.checkBottom();
         }
       } else if (affixedNav.hasClass('affix')) {
         affixedNav.removeClass('affix');
         header.css({ 'margin-bottom': 0 });
         if (worryAboutSidebar) {
-          sidebar.removeClass('affix');
-          sidebar.css({ 'top': 0 });
+          sidebar.custom.affixTop();
         }
       }
     });
