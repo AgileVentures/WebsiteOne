@@ -1,7 +1,5 @@
 Then(/^I should see "([^"]*)" table$/) do |legend|
-  within('table#projects') do
-    page.should have_css('legend', :text => legend)
-  end
+  page.should have_css 'h1', text: legend
 end
 
 When(/^I should see column "([^"]*)"$/) do |column|

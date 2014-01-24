@@ -57,7 +57,6 @@ Feature: Create and maintain projects
     Then I should see "List of Projects" table
     And I should see buttons:
       | Button  |
-      | Documents    |
       | Edit         |
 
   Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
