@@ -1,6 +1,6 @@
 <div class='row'>
   <div class='col-sm-6'>
-    <%= form_for @project, :html => { :class => 'form-vertical' } do |f| %>
+    <%= form_for @project, :html => { :class => 'form-horizontal', :role => 'form' } do |f| %>
         <div class='form-group'>
           <%= f.label :title %>
           <%= f.text_field :title, :class => 'form-control', placeholder: 'Name' %>
@@ -11,7 +11,7 @@
         </div>
         <div class='form-group'>
           <%= f.label :status %>
-          <%= f.text_field :status, :class => 'form-control', placeholder: 'Status' %>
+          <%= f.select :status, ['Active', 'Closed', 'Pending'], {}, :class => 'form-control input-lg' %>
         </div>
         <div class='form-group'>
           <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default'%>

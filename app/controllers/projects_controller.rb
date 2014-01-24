@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  include DocumentsHelper
 
 #TODO YA Add controller specs for all the code
 
@@ -9,6 +10,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    documents
   end
 
   def new
@@ -41,12 +43,12 @@ class ProjectsController < ApplicationController
 
 
   def destroy
-    if @project.destroy
-      @notice = 'Project was successfully deleted.'
-    else
-      @notice = 'Project was not successfully deleted.'
-    end
-    redirect_to projects_path, notice: @notice
+    #if @project.destroy
+    #  @notice = 'Project was successfully deleted.'
+    #else
+    #  @notice = 'Project was not successfully deleted.'
+    #end
+    #redirect_to projects_path, notice: @notice
   end
 
 

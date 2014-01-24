@@ -5,7 +5,7 @@ end
 Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
   @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password )
   visit new_user_session_path
-  within ('#devise') do
+  within ('#main') do
     fill_in 'user_email', :with => email
     fill_in 'user_password', :with => password
     click_button 'Sign in'
@@ -118,12 +118,12 @@ Then /^I should be signed in$/ do
   find_user.should == @user
   page.should have_content "Log out"
   page.should_not have_content "Sign up"
-  page.should_not have_content "Check-in"
+  page.should_not have_content "Log in"
 end
 
 Then /^I should be signed out$/ do
   page.should have_content "Sign up"
-  page.should have_content "Check in"
+  page.should have_content "Log in"
   page.should_not have_content "Log out"
 end
 

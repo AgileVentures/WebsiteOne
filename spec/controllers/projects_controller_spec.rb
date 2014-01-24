@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe ProjectsController do
 
+  let(:valid_attributes) { { :title => 'MyProject',
+                             :description => 'My project description',
+                             :status => 'Active' } }
+  let(:valid_session) { {} }
+
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
     # stubbing out devise methods to simulate authenticated user
@@ -27,9 +32,8 @@ describe ProjectsController do
   describe '#show' do
 
     it 'assigns the requested project as @project' do
-      project = double(Project)
-      Project.stub(:find).and_return(project)
-      get :show, { :id => project.to_param }
+      project = Project.create! valid_attributes
+      get :show, {:id => project.to_param}, valid_session
       assigns(:project).should eq(project)
     end
   end
@@ -116,42 +120,43 @@ describe ProjectsController do
     end
   end
 
-  describe '#destroy' do
-    before :each do
-      @project = double(Project)
-      Project.stub(:find).and_return(@project)
-    end
-    it 'receives destroy call' do
-      expect(@project).to receive(:destroy)
-      delete :destroy, id: 'test'
-    end
-
-    context 'on successful delete' do
-      before(:each) do
-        @project.stub(:destroy).and_return(true)
-        delete :destroy, id: 'test'
-      end
-      it 'redirects to index' do
-        expect(response).to redirect_to(projects_path)
-      end
-      it 'shows the correct message' do
-        expect(flash[:notice]).to eq 'Project was successfully deleted.'
-      end
-    end
-
-    context 'on unsuccessful delete' do
-      before do
-        @project.stub(:destroy).and_return(false)
-        delete :destroy, id: 'test'
-      end
-      it 'redirects to index' do
-        expect(response).to redirect_to(projects_path)
-      end
-      it 'shows the correct message' do
-        expect(flash[:notice]).to eq 'Project was not successfully deleted.'
-      end
-    end
-  end
+  #  Scenarios for DESTROY action commented out until this functionality is needed
+  #describe '#destroy' do
+  #  before :each do
+  #    @project = double(Project)
+  #    Project.stub(:find).and_return(@project)
+  #  end
+  #  it 'receives destroy call' do
+  #    expect(@project).to receive(:destroy)
+  #    delete :destroy, id: 'test'
+  #  end
+  #
+  #  context 'on successful delete' do
+  #    before(:each) do
+  #      @project.stub(:destroy).and_return(true)
+  #      delete :destroy, id: 'test'
+  #    end
+  #    it 'redirects to index' do
+  #      expect(response).to redirect_to(projects_path)
+  #    end
+  #    it 'shows the correct message' do
+  #      expect(flash[:notice]).to eq 'Project was successfully deleted.'
+  #    end
+  #  end
+  #
+  #  context 'on unsuccessful delete' do
+  #    before do
+  #      @project.stub(:destroy).and_return(false)
+  #      delete :destroy, id: 'test'
+  #    end
+  #    it 'redirects to index' do
+  #      expect(response).to redirect_to(projects_path)
+  #    end
+  #    it 'shows the correct message' do
+  #      expect(flash[:notice]).to eq 'Project was not successfully deleted.'
+  #    end
+  #  end
+  #end
 
   describe '#update' do
     before(:each) do

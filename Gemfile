@@ -16,7 +16,7 @@ gem 'mercury-rails', github: 'jejacks0n/mercury'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
-
+gem 'high_voltage'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

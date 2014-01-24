@@ -49,6 +49,10 @@ When(/^I click "([^"]*)"$/) do |text|
 end
 
 When(/^I click the "([^"]*)" button$/) do |button|
+  click_link_or_button button
+end
+
+When(/^I click "([^"]*)" button$/) do |button|
   click_button button
 end
 
@@ -149,10 +153,24 @@ Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, con
   expect(current_path).to eq url_for_title(action: action, controller: controller, title: title)
 end
 
+Given(/^I am on the "([^"]*)" page for document "([^"]*)"$/) do |action, title|
+  controller = 'document'
+  visit url_for_title(action: action, controller: controller, title: title)
+end
+
 Then(/^I should see a link to "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
   page.has_link?(action, href: url_for_title(action: action, controller: controller, title: title))
 end
 
 Then(/^show me the page$/) do
   save_and_open_page
+end
+When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
+  find(:select, field).find(:option, option).select_option
+end
+
+When(/^I should see a selector with options$/) do |table|
+  table.rows.flatten.each do |option|
+    page.should have_select(:options => [option])
+  end
 end

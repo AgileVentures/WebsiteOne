@@ -17,9 +17,7 @@ Feature: Create and maintain projects
   #TODO YA consider refactoring to a higher level scenarios and move low-level (headers and columns) into view specs
   Scenario: List of projects in table layout
     Given  I am on the "home" page
-
     When I follow "Our projects"
-
     Then I should see "List of Projects"
     Then I should see:
       | Text          |
@@ -61,7 +59,6 @@ Feature: Create and maintain projects
       | Button  |
       | Documents    |
       | Edit         |
-      | Destroy      |
 
   Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
     Given I am not logged in
@@ -70,7 +67,6 @@ Feature: Create and maintain projects
     And I should not see buttons:
       | Button       |
       | Edit         |
-      | Destroy      |
 
 #  Scenarios for NEW page
 
@@ -91,27 +87,24 @@ Feature: Create and maintain projects
     Given I am logged in
     And I am on the "projects" page
     And I follow "New Project"
-
     When I fill in:
       | Field        | Text              |
       | Title        | Title New         |
       | Description  | Description New   |
-      | Status       | Status New        |
+    And I select "Status" to "Active"
     And I click the "Submit" button
-
     Then I should be on the "projects" page
     And I should see:
       | Text              |
       | Title New         |
       | Description New   |
-      | Status New        |
+      | Active        |
     And I should see "Project was successfully created."
 
   Scenario: Saving a new project: failure
     Given I am logged in
     And I am on the "projects" page
     And I click "New Project"
-
     When I fill in "Title" with ""
     And I click the "Submit" button
 
@@ -122,7 +115,6 @@ Feature: Create and maintain projects
   Scenario: opens "Show" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-
     When I click "hello world"
     Then I should see:
       | Text                  |
@@ -140,13 +132,14 @@ Feature: Create and maintain projects
   Scenario: opens "Edit" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-
     When I click the "Edit" button for project "hello world"
     Then I should see a form with:
       | Field        | Text                  |
       | Title        | hello world           |
       | Description  | greetings earthlings  |
-      | Status       | active                |
+    And I should see a selector with options
+      |Active|
+
 
   Scenario: Edit page has a return link
     Given I am on the "Edit" page for project "hello mars"
@@ -155,31 +148,26 @@ Feature: Create and maintain projects
 
   Scenario: Updating a project: success
     Given I am on the "Edit" page for project "hello mars"
-
     And I fill in "Description" with "Hello, Uranus!"
     And I click the "Submit" button
-
     Then I should be on the "projects" page
     And I should see "Project was successfully updated."
     And I should see "Hello, Uranus!"
 
   Scenario: Saving a project: failure
     Given I am on the "Edit" page for project "hello mars"
-
     When I fill in "Title" with ""
     And I click the "Submit" button
-
     Then I should see "Project was not updated."
 
-  #  Scenarios for DESTROY action
 
-  Scenario: Destroying a project: successful
-    Given I am logged in
-    And I am on the "projects" page
+#  Scenarios for DESTROY action commented out until this functionality is needed
 
-    When I click the "Destroy" button for project "hello mars"
-
-    Then I should be on the "projects" page
-    And I should see "Project was successfully deleted."
+#  Scenario: Destroying a project: successful
+#    Given I am logged in
+#    And I am on the "projects" page
+#    When I click the "Destroy" button for project "hello mars"
+#    Then I should be on the "projects" page
+#    And I should see "Project was successfully deleted."
 
 
