@@ -19,7 +19,7 @@ while true
 
     # Bryan: avoid creating repeated entries
     Project.create!({:title => 'Autograder',
-                     :description => 'Autgrader for the EdX CS169.x SaaS course',
+                     :description => 'Autograder for the EdX CS169.x SaaS course',
                      :status => 'Active' })
     Project.create!({:title => 'WebsiteOne',
                      :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
@@ -44,7 +44,7 @@ end
 
 for i in (1..3)
   p = Project.create!({ title: Faker::Lorem.words(3).join(' '), description: Faker::Lorem.paragraph, status: 'active' })
-  for j in (1..2)
+  for j in (1..3)
     p.documents.create!({ title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph })
   end
 end

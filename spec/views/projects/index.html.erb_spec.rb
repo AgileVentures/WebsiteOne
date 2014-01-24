@@ -15,10 +15,7 @@ describe 'projects/index.html.erb' do
       render
 
       rendered.should have_css('table#projects')
-
-      rendered.within('table#projects thead') do |table_row|
-        table_row.should have_css('legend', :text => 'List of Projects')
-      end
+      rendered.should have_css('h1', :text => 'List of Projects')
     end
 
     it 'should display content' do
@@ -26,15 +23,6 @@ describe 'projects/index.html.erb' do
       rendered.within('table#projects tbody') do |table_row|
         table_row.should have_content 'Created:'
         table_row.should have_content 'Status:'
-      end
-    end
-
-    it 'should render a documents button' do
-      render
-      i = 0
-      rendered.within('table#projects tbody') do |table_row|
-        i += 1
-        expect(table_row).to have_link('Documents', href: project_documents_path(i))
       end
     end
 

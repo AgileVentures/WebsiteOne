@@ -62,14 +62,11 @@
 }
 
 #sidebar::-webkit-scrollbar {
-  width: 12px;
+  width: 1px;
 }
 
 #sidebar::-webkit-scrollbar-track { }
 
-#sidebar::-webkit-scrollbar-thumb { }
-
-#sidebar::-webkit-scrollbar-button:decrement:vertical {
-  background: black;
-  color: black;
+#sidebar::-webkit-scrollbar-thumb {
+  background: $sidebar-a-color;
 }

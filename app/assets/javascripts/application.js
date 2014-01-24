@@ -75,16 +75,11 @@ $(function() {
     css.innerHTML = ".txt-rotate > .wrap";
     document.body.appendChild(css);
 
-    $('.collapse-button').on('click', function() {
-      child = $(this).find('>:first-child');
-      if (child.hasClass('glyphicon-chevron-down')) {
-        child.removeClass('glyphicon-chevron-down');
-        child.addClass('glyphicon-chevron-up');
-      } else {
-        child.removeClass('glyphicon-chevron-up');
-        child.addClass('glyphicon-chevron-down');
-      }
-    });
+    window.setTimeout(function() {
+      $(".flash-div").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove();
+      });
+    }, 5000);
 
     /*
       AFFIX BEHAVIOUR RELATED CODE
@@ -113,7 +108,7 @@ $(function() {
         affixOffsetHeight = parseInt(affixedNav.css('margin-bottom')) + parseInt($('#main').css('padding-top'));
 
     if (sidebar != null) {
-      sidebar.css({ 'max-height': 300 }); // TODO Bryan: hardcoded value...
+      sidebar.css({ 'max-height': $(window).height() - thresholdHeight });
 
       sidebar.custom = {
         AFFIX_TOP:  0,
@@ -147,6 +142,11 @@ $(function() {
           }
         }
       };
+
+      $(window).resize(function() {
+        sidebar.css({ 'max-height': $(window).height() - thresholdHeight });
+        sidebar.custom.checkBottom();
+      });
     }
 
     // only worry about the complex sidebar behaviour if the sidebar is shorter than the actual document
@@ -174,6 +174,16 @@ $(function() {
 
     // a hack to follow collapse animation, ideally should find the right animation callbacks
     $('.collapse-button').on('click', function() {
+      // TODO Bryan: This does not work properly if the user clicks too fast
+      var child = $(this).find('>:first-child');
+      if (child.hasClass('glyphicon-chevron-down')) {
+        child.removeClass('glyphicon-chevron-down');
+        child.addClass('glyphicon-chevron-up');
+      } else if (child.hasClass('glyphicon-chevron-up')) {
+        child.removeClass('glyphicon-chevron-up');
+        child.addClass('glyphicon-chevron-down');
+      }
+      // catch any collapsing element
       h1 = h2 = sidebar.height();
       if (sidebar.custom.state != sidebar.custom.AFFIX_TOP) {
         oldState = sidebar.custom.state;
@@ -181,8 +191,10 @@ $(function() {
       }
     });
 
+    // Bryan: catch scroll events
     $(window).scroll(function() {
       if ($(this).scrollTop() > thresholdHeight) {
+        // add affix behaviour if scroll is above threshold
         if (!affixedNav.hasClass('affix')) {
           affixedNav.addClass('affix');
           header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
@@ -194,6 +206,7 @@ $(function() {
           sidebar.custom.checkBottom();
         }
       } else if (affixedNav.hasClass('affix')) {
+        // remove affix if the scroll is below threshold
         affixedNav.removeClass('affix');
         header.css({ 'margin-bottom': 0 });
         if (worryAboutSidebar) {
