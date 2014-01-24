@@ -17,6 +17,7 @@ gem 'faker'
 gem 'omniauth'
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-google-oauth2'
+gem 'font-awesome-rails'
 gem 'high_voltage'
 
 group :test do
