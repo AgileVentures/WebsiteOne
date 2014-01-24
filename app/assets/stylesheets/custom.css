@@ -67,7 +67,7 @@ h1,h2,h3,h4 {
 }
 
 header {
-    background: #f16251;
+    background: rgba(211, 84, 0,1.0);
     height: 60px;
     color: #000000;
 }
@@ -80,7 +80,7 @@ header h1,header h2,header h3 a,header a,header a:hover {
 
 header h3 {
     font-family: 'Kreon', serif;
-    background: #ffcc33;
+    background: rgba(241, 196, 15,1.0);
     padding:10px;
     border-radius:3px;
     font-size:34px;
@@ -89,7 +89,7 @@ header h3 {
 
 header .dropdown-menu {
     top:74px;
-    background: #ffcc33;
+    background: rgba(241, 196, 15,1.0);
     border-width:0;
 }
 
@@ -106,7 +106,7 @@ h1 {
     border-radius: 5px;
 }
 .opacity-light h1 {
-    color: gray;
+    color: rgba(52, 73, 94,1.0);
 }
 
 .opacity-light {
@@ -237,5 +237,144 @@ background-color: rgba(255,255,255,.9);
 border-radius: 5px;
 padding-bottom: 30px;
 margin-bottom: 30px;
+}
+
+
+/* Portfolio css */
+
+.view p {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 12px;
+    position: relative;
+    color: #fff;
+    padding: 10px 20px 10px;
+    text-align: center;
+}
+
+.view-tenth p {
+    color: #333;
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
+.view {
+    z-index: 9;
+    cursor: default;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 0 3px #ddd;
+}
+
+.view .mask, .view .content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.view img {
+    display: block;
+    position: relative;
+}
+
+.view-tenth img {
+    left: 10px;
+    margin-left: -10px;
+    position: relative;
+    -webkit-transition: all 0.6s ease-in-out;
+    -moz-transition: all 0.6s ease-in-out;
+    -o-transition: all 0.6s ease-in-out;
+    -ms-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+}
+
+.view-tenth:hover > img {
+    -webkit-transform: scale(2) rotate(10deg);
+    -moz-transform: scale(2) rotate(10deg);
+    -o-transform: scale(2) rotate(10deg);
+    -ms-transform: scale(2) rotate(10deg);
+    transform: scale(2) rotate(10deg);
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+}
+
+.view h2 {
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    font-size: 22px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    margin: 20px 0 0 0;
+    text-shadow: none;
+}
+
+.view-tenth h2 {
+    color: #333;
+    margin: 20px 40px 0;
+    background: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+
+
+.view-tenth a.info {
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
+.view-tenth:hover h2,
+.view-tenth:hover p,
+.view-tenth:hover a.info {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
 }
 
