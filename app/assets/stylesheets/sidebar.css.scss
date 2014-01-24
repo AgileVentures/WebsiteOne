@@ -12,7 +12,7 @@
   width: $sidebar-width;
   padding: 0;
   background: #ffffff;
-  overflow: none;
+  overflow: scroll;
 }
 
 #sidebar * {
@@ -59,4 +59,17 @@
   width: 100%;
   height: 10px;
   border-bottom: 1px solid $sidebar-a-color;
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 12px;
+}
+
+#sidebar::-webkit-scrollbar-track { }
+
+#sidebar::-webkit-scrollbar-thumb { }
+
+#sidebar::-webkit-scrollbar-button:decrement:vertical {
+  background: black;
+  color: black;
 }

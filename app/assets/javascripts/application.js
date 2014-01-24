@@ -113,7 +113,7 @@ $(function() {
         affixOffsetHeight = parseInt(affixedNav.css('margin-bottom')) + parseInt($('#main').css('padding-top'));
 
     if (sidebar != null) {
-//      sidebar.css({ 'max-height': 300 }); // TODO Bryan: hardcoded value...
+      sidebar.css({ 'max-height': 300 }); // TODO Bryan: hardcoded value...
 
       sidebar.custom = {
         AFFIX_TOP:  0,
