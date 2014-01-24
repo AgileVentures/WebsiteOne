@@ -1,3 +1,5 @@
+<div class="container">
+
 <h1>
   <div id="document_title" style="max-width: 100%; overflow: auto;" data-mercury="simple" data-type="editable"><%= @document.title %></div>
 </h1>
@@ -10,5 +12,6 @@
                   data: { save_url: project_document_mercury_update_path(@project, @document) },
                   class: 'btn btn-default' %>
   <% end %>
-  <%= link_to 'Back', project_documents_path(@project), class: 'btn btn-default' %>
+  <%= link_to 'Back', project_path(@project), class: 'btn btn-default' %>
+</div>
 </div>

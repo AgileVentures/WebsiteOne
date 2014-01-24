@@ -13,6 +13,7 @@ gem 'devise' # Authentication local and 3rd party
 gem 'bootstrap-sass', '~> 3.0.2.0' # JS Bootstrap library support
 gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
+gem 'high_voltage'
 
 
 group :test do

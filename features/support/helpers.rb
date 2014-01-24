@@ -31,7 +31,7 @@ module Helpers
   def sign_up
     delete_user
     visit new_user_registration_path
-    within ('#devise') do
+    within ('#main') do
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]
       fill_in 'user_password_confirmation', :with => @visitor[:password_confirmation]
@@ -42,7 +42,7 @@ module Helpers
 
   def sign_in
     visit new_user_session_path
-    within ('#devise') do
+    within ('#main') do
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]
       click_button 'Sign in'
