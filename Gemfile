@@ -29,6 +29,8 @@ end
 group :development, :test do
   gem 'rspec-rails' #unit testing
   gem 'debugger'  # Use debugger
+  gem 'jasmine'
+  gem 'jasmine-jquery-rails'
 end
 
 group :production do
