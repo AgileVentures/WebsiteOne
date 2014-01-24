@@ -1,19 +1,21 @@
 <h3>Current Projects</h3>
 <ul>
   <% current_projects.each_with_index do |p, index| %>
-    <a href="<%= project_path(p) %>"><li>
-      <%= p.title %>
-      <% has_docs = p.documents.any? %>
+    <% should_focus = project == p %>
+    <% has_docs = p.documents.any? %>
+    <li>
+      <%= link_to p.title, project_path(p), class: should_focus ? 'focused' : '' %>
       <% if has_docs %>
-        <a href="#collapse<%= index %>" class="pull-right project-collapse" data-toggle="collapse">
-          <span class="glyphicon glyphicon-chevron-down"></span>
+        <a href="#collapse<%= index %>" class="pull-right collapse-button" data-toggle="collapse">
+          <span class="glyphicon glyphicon-chevron-<%= has_docs and should_focus ? 'up' : 'down' %>"></span>
         </a>
       <% end %>
-    </li></a>
+    </li>
     <% if has_docs %>
       <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
         <% p.documents.each do |d| %>
-          <a href="<%= project_document_path(p, d) %>"><li><%= d.title %></li></a>
+          <% doc_focus = (should_focus and @document == d) %>
+          <li><%= link_to d.title, project_document_path(p, d), class: doc_focus ? 'focused' : '' %></li>
         <% end %>
       </ul>
     <% end %>

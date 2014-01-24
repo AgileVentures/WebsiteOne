@@ -1,9 +1,9 @@
 @import "variables";
 
 #sidebar {
-  padding: 0;
   width: $sidebar-width;
-  background: $sidebar-bg-color;
+  padding: 0;
+  background: #ffffff;
   overflow: auto;
 }
 
@@ -33,17 +33,18 @@
 }
 
 #sidebar li {
-  font-size: 110%;
+  font-size: 15px;
   width: 100%;
   padding: 5px 10px;
 }
 
 #sidebar ul ul li {
-  padding: 5px 10px 5px 20px;
+  font-size: 14px;
+  padding: 2px 10px 2px 20px;
 }
 
-#sidebar li:hover {
-  background: $sidebar-a-bg-hover-color;
+#sidebar .focused {
+  font-weight: bold;
 }
 
 .separator {

@@ -75,13 +75,23 @@ $(function() {
     css.innerHTML = ".txt-rotate > .wrap";
     document.body.appendChild(css);
 
+    $('.collapse-button').on('click', function() {
+      child = $(this).find('>:first-child');
+      if (child.hasClass('glyphicon-chevron-down')) {
+        child.removeClass('glyphicon-chevron-down');
+        child.addClass('glyphicon-chevron-up');
+      } else {
+        child.removeClass('glyphicon-chevron-up');
+        child.addClass('glyphicon-chevron-down');
+      }
+    });
+
     /*
       AFFIX BEHAVIOUR RELATED CODE
      */
 
     var affixedNav = $('#nav'),
         header = $('#main_header'),
-        wrapper = $('#wrap'),
         sidebar = $('#sidebar'),
         notSidebar = $('#not-sidebar'),
         thresholdHeight = header.height() + affixedNav.height();
@@ -109,19 +119,21 @@ $(function() {
       h2 = sidebar.height();
       worryAboutSidebar = (h2 < notSidebar.height());
       if (h1 != h2) {
-        adjustSidebarPosition();
+        if (worryAboutSidebar) {
+          adjustSidebarPosition();
+        }
         h1 = h2;
         setTimeout(checkSidebarHeight, checkDelay);
-      }
 
-      if (!worryAboutSidebar) {
-        sidebar.removeClass('affix');
-        sidebar.css({ 'top': 0 });
+        if (!worryAboutSidebar) {
+          sidebar.removeClass('affix');
+          sidebar.css({ 'top': 0 });
+        }
       }
     }
 
     // a hack to follow collapse animation, ideally should find the right animation callbacks
-    $('.project-collapse').on('click', function() {
+    $('.collapse-button').on('click', function() {
       h1 = h2 = sidebar.height();
       if ($(window).scrollTop() > thresholdHeight) {
         setTimeout(checkSidebarHeight, checkDelay);
@@ -132,11 +144,11 @@ $(function() {
       if ($(this).scrollTop() > thresholdHeight) {
         if (!affixedNav.hasClass('affix')) {
           affixedNav.addClass('affix');
-          wrapper.css({ 'padding-top': affixedNav.height() + parseInt(affixedNav.css('margin-bottom')) });
+          header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom')) });
           if (worryAboutSidebar) {
-            sidebar.addClass('affix');
             // TODO Bryan: avoid hardcoded values if possible
             sidebar.css({ 'top': affixedNav.height() + 125 });
+            sidebar.addClass('affix');
           }
         }
         if (worryAboutSidebar) {
@@ -144,7 +156,7 @@ $(function() {
         }
       } else if (affixedNav.hasClass('affix')) {
         affixedNav.removeClass('affix');
-        wrapper.css({ 'padding-top': 0 });
+        header.css({ 'margin-bottom': 0 });
         if (worryAboutSidebar) {
           sidebar.removeClass('affix');
           sidebar.css({ 'top': 0 });
