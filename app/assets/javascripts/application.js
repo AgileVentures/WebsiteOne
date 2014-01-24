@@ -100,7 +100,7 @@ $(function() {
     var worryAboutSidebar = (sidebar != null) && (sidebar.height() < notSidebar.height());
 
     if (sidebar != null) {
-      sidebar.css({ 'max-height': 500 }); // TODO Bryan: hardcoded value...
+      sidebar.css({ 'max-height': 300 }); // TODO Bryan: hardcoded value...
     }
 
     function adjustSidebarPosition() {

@@ -16,9 +16,26 @@ while true
   if response == 'y' or response == 'yes'
     puts 'Clearing existing projects and documents'
     [Project, Document].each(&:destroy_all)
-    pf = Project.create({ title: 'WebsiteOne', description: 'The vision for the future', status: 'inactive' })
-    pf.documents.create({ title: 'Project Structure', body: '<h2>How things should be done</h2><blockquote>Just do it</blockquote>' })
-    pf.documents.create({ title: 'Wiki', body: '<h2>The Project Wiki</h2>empty' })
+
+    # Bryan: avoid creating repeated entries
+    Project.create!({:title => 'Autograder',
+                     :description => 'Autgrader for the EdX CS169.x SaaS course',
+                     :status => 'Active' })
+    Project.create!({:title => 'WebsiteOne',
+                     :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
+                     :status => 'Active' })
+    Project.create!({:title => 'LocalSupport',
+                     :description => 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
+Our customer is the non-profit organization Voluntary Action Harrow.
+The mission is to support members of the public searching for support groups for things like helping care for an elderly or sick relative; and also to help charities and non-profits find each other and network.',
+                     :status => 'Active' })
+    Project.create!({:title => 'EduChat',
+                     :description => 'Supporting real time synchronous chat in online classes',
+                     :status => 'Active' })
+    Project.create!({:title => 'PP Scheduler',
+                     :description => "Problem: Lots of people want to pair, but they don't know when each other are available
+Solution: is something that requires absolutely minimal effort on their part to use in order to let them pair",
+                     :status => 'Active' })
     break
   elsif response == 'n' or response == 'no'
     break
@@ -26,9 +43,9 @@ while true
 end
 
 for i in (1..3)
-  p = Project.create({ title: Faker::Name.name, description: Faker::Lorem.paragraph, status: 'active' })
+  p = Project.create!({ title: Faker::Lorem.words(3).join(' '), description: Faker::Lorem.paragraph, status: 'active' })
   for j in (1..2)
-    p.documents.create({ title: Faker::Name.title, body: Faker::Lorem.paragraph })
+    p.documents.create!({ title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph })
   end
 end
 
