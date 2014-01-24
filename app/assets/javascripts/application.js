@@ -145,7 +145,6 @@ $(function() {
 
       $(window).resize(function() {
         sidebar.css({ 'max-height': $(window).height() - thresholdHeight });
-        sidebar.custom.checkBottom();
       });
     }
 
