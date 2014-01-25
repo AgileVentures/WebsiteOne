@@ -7,12 +7,14 @@
           <div class='form-group'>
             <%= f.email_field :email, autofocus: true, placeholder: 'Enter email', class: 'form-control input-lg' %>
           </div>
-          <div class='form-group'>
-            <%= f.password_field :password, placeholder: 'Enter password', class: 'form-control input-lg' %>
-          </div>
-          <div class='form-group'>
-            <%= f.password_field :password_confirmation, placeholder: 'Repeat password', class: 'form-control input-lg' %>
-          </div>
+          <% if resource.password_required? %>
+            <div class='form-group'>
+              <%= f.password_field :password, placeholder: 'Enter password', class: 'form-control input-lg' %>
+            </div>
+            <div class='form-group'>
+              <%= f.password_field :password_confirmation, placeholder: 'Repeat password', class: 'form-control input-lg' %>
+            </div>
+          <% end %>
           <div class='form-group'>
             <%= f.submit 'Sign up', class: 'btn btn-primary btn-lg btn-block' %>
           </div>
@@ -20,8 +22,9 @@
         </fieldset>
     <% end %>
 
-    <%= social_button('github') %>
-    <%= social_button('gplus') %>
+    <% supported_third_parties.each do |provider| %>
+      <%= social_button provider %>
+    <% end %>
 
     <p>
       <small>By registering, you understand that we will store and make use the information provided in accordance with
