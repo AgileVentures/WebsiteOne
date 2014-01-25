@@ -1,14 +1,35 @@
 <h1>
   <div id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div>
 </h1>
-<small>Created: <%= @document.created_at -%> Project: <%= @project.title %> </small><br />
-<div id="document_body" style="width: 100%" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
-<br/>
-<div>
-  <% if user_signed_in? %>
-  <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
-                  data: { save_url: project_document_mercury_update_path(@project, @document) },
-                  class: 'btn btn-default' %>
+<small>Created: <%= @document.created_at -%> Project: <%= @project.title %>
+  <% unless @document.ancestors.empty? %>
+      Parent document: <%= link_to @document.parent.title, project_document_path(@project, @document.parent) %> </small>
+      <br/>
   <% end %>
-  <%= link_to 'Back', project_path(@project), class: 'btn btn-default' %>
-</div>
+  <div class="small-divider"></div>
+  <div id="document_body" style="width: 100%" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
+
+  <div class="small-divider">
+    <% unless @document.children.empty? %>
+        <% string = 'Documents' %>
+        <h2>
+          <%= string.singularize if @document.children.count == 1 %>
+          <%= string if @document.children.count > 1 %> for <%= @document.title.downcase %> </h2>
+        <ul class="list-group">
+          <% for child in @document.children %>
+              <li class="list-group-item">
+                <strong><%= link_to child.title, project_document_path(@project, child) %>  </strong>
+                Created: <%= child.created_at -%></li>
+          <% end %>
+        </ul>
+    <% end %>
+    <% if user_signed_in? %>
+        <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
+                    data: {save_url: project_document_mercury_update_path(@project, @document)},
+                    class: 'btn btn-default' %>
+        <% if @document.root? %>
+            <%= link_to (['New ', @document.title.singularize].join), new_project_document_path(project_id: @project.id), :type => 'button', :class => 'btn btn-default' %>
+        <% end %>
+    <% end %>
+    <%= link_to 'Back', project_path(@project), class: 'btn btn-default' %>
+  </div>

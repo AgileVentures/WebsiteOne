@@ -19,4 +19,8 @@ module ApplicationHelper
   def current_projects
     Project.all
   end
+
+  def roots
+    @roots = Document.roots.where("project_id = ?", @project.id).order(:created_at)
+  end
 end

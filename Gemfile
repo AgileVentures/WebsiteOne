@@ -15,6 +15,7 @@ gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
 gem 'faker'
 gem 'high_voltage'
+gem 'acts_as_tree', '~> 1.5.0'
 
 
 group :test do

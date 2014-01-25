@@ -24,7 +24,7 @@
 
     <tr id="<%=document.id%>">
       <td><h2><%= link_to document.title, project_document_path(id: document.id, project_id: document.project_id) %></h2>
-        <%= clean_html_summary(document.body) %></td>
+        <%= clean_html_summary(document.body) if document.body.present?  %></td>
       <% if user_signed_in? %>
         <td><%= link_to 'Edit', mercury_edit_path(project_document_path(id: document.id, project_id: document.project_id)), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), type: 'button', class: 'btn btn-danger btn-xs', method: :delete %></td>

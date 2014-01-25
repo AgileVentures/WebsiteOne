@@ -13,7 +13,7 @@
     </li>
     <% if has_docs %>
       <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
-        <% p.documents.each do |d| %>
+        <% p.documents.roots.each do |d| %>
           <% doc_focus = (should_focus and @document == d) %>
           <li><%= link_to d.title, project_document_path(p, d), class: doc_focus ? 'focused' : '' %></li>
         <% end %>
