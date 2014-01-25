@@ -30,7 +30,7 @@ describe 'OmniAuth authentication' do
     it 'should work with valid credentials' do
       visit new_user_session_path
       page.should have_content('Connect with GitHub')
-      click_link 'Connect with Github'
+      click_link 'Connect with GitHub'
       page.should have_content('Signed in successfully.')
     end
 
@@ -38,7 +38,7 @@ describe 'OmniAuth authentication' do
       OmniAuth.config.mock_auth[:github] = :invalid_credentials
       visit new_user_session_path
       page.should have_content('Connect with GitHub')
-      click_link 'Connect with Github'
+      click_link 'Connect with GitHub'
       page.should have_content('Authentication failed.')
     end
   end
@@ -52,7 +52,7 @@ describe 'OmniAuth authentication' do
     end
 
     it 'should not work with invalid credentials' do
-      OmniAuth.config.mock_auth[:github] = :invalid_credentials
+      OmniAuth.config.mock_auth[:gplus] = :invalid_credentials
       visit new_user_session_path
       page.should have_content('Connect with Google+')
       click_link 'Connect with Google+'
@@ -71,7 +71,7 @@ describe 'OmniAuth authentication' do
         visit new_user_session_path
         page.should have_content('Connect with GitHub')
         expect { expect {
-          click_link 'Connect with Github'
+          click_link 'Connect with GitHub'
         }.to change(User, :count).by(0) }.to change(Authentication, :count).by(0)
         page.should have_content('Signed in successfully.')
       end
