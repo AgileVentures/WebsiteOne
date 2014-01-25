@@ -19,8 +19,9 @@
                                   Document.roots.where('project_id = ?', @project.id),
                                   :id,
                                   :title,
-                                  :include_blank => true,
-                                  :class => 'form-control' %>
+                                  :include_blank => 'Root - No parent',
+                                  :class => 'form-control input-lg',
+                                  :prompt => 'Please select parent' %>
         </div>
 
 
