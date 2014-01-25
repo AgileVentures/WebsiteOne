@@ -32,24 +32,8 @@
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
+        <a href="/registrations/change_password">I want to change my password</a>
 
-          <div class="form-group">
-            <%= f.password_field :password, :autocomplete => "off", class: 'form-control' %>
-          </div>
-        </div>
-
-        <div><%= f.label :password_confirmation %>
-          <div class="form-group">
-            <%= f.password_field :password_confirmation, class: 'form-control' %>
-          </div>
-        </div>
-        <div><%= f.label :current_password %> <p>(we need your current password to confirm your changes)</p>
-
-          <div class="form-group">
-            <%= f.password_field :current_password, class: 'form-control' %>
-          </div>
-        </div>
         <div><%= f.submit "Update", class: 'btn btn-primary btn-lg btn-block' %></div>
     <% end %>
 

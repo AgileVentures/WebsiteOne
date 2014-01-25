@@ -15,9 +15,7 @@ Feature: Create and maintain projects
       | First name            |                     |
       | Last name             |                     |
       | Email                 | current@email.com   |
-      | Password              |                     |
-      | Password confirmation |                     |
-      | Current password      |                     |
+
 
   Scenario: Editing details: successful
     Given I click "My Account"
@@ -26,27 +24,23 @@ Feature: Create and maintain projects
       | First name            | John      |
       | Last name             | Doe       |
       | Email                 | a@a.com   |
-      | Password              | 87654321  |
-      | Password confirmation | 87654321  |
-      | Current password      | 12345678  |
+
 
     When I click the "Update" button
     Then I should be on the "home" page
     And I should see "You updated your account successfully."
 
-  Scenario: Editing details: failure
-    Given I follow "My Account"
-    And I fill in:
-      | Field                 | Text      |
-      | First name            | John      |
-      | Last name             | Doe       |
-      | Email                 | a@a.com   |
-      | Password              | 87654321  |
-      | Password confirmation | 87654321  |
-      | Current password      | wrong     |
-    When I click the "Update" button
-    Then I should see "error prohibited this user from being saved:"
-    And I should see "Current password is invalid"
+#  Scenario: Editing details: failure
+#    Given I follow "My Account"
+#    And I fill in:
+#      | Field                 | Text      |
+#      | First name            | John      |
+#      | Last name             | Doe       |
+#      | Email                 | a@a.com   |
+#
+#    When I click the "Update" button
+#    Then I should see "error prohibited this user from being saved:"
+#    And I should see "Current password is invalid"
 
   # Removed The Back button /Thomas
   #Scenario: Clicking Back button
