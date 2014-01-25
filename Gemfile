@@ -36,6 +36,7 @@ group :development, :test do
   gem 'debugger'  # Use debugger
   gem 'jasmine'
   gem 'jasmine-jquery-rails'
+  gem 'colored'
 end
 
 group :production do
