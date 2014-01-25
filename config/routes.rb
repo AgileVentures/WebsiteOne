@@ -11,6 +11,8 @@ WebsiteOne::Application.routes.draw do
   get '/auth/:provider/callback' => 'authentications#create'
   get '/auth/failure' => 'authentications#failure'
 
+  get '/auth/:id', to: 'authentications#destroy', via: :delete
+
   resources :projects do
     resources :documents do
       put :mercury_update

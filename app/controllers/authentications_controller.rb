@@ -1,7 +1,5 @@
 class AuthenticationsController < ApplicationController
-  def index
-    @authentications = current_user.authentications if current_user
-  end
+  before_action :authenticate_user!, except: [ :create ]
 
   def create
     omniauth = request.env['omniauth.auth']
@@ -34,8 +32,15 @@ class AuthenticationsController < ApplicationController
 
   def destroy
     @authentication = current_user.authentications.find(params[:id])
-    @authentication.destroy
-    flash[:notice] = 'Successfully destroyed authentication.'
-    redirect_to authentications_url
+    if @authentication
+      if @authentication.destroy
+        flash[:notice] = 'Successfully destroyed authentication.'
+      else
+        flash[:alert] = 'Authentication method could not be removed.'
+      end
+    else
+      flash[:alert] = 'Authentication method not found.'
+    end
+    redirect_to edit_user_registration_path(current_user)
   end
 end
