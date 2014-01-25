@@ -23,7 +23,7 @@ module ApplicationHelper
   def social_button(provider)
     provider = provider.downcase
     display_name = {
-        'github' => 'Github',
+        'github' => 'GitHub',
         'gplus'  => 'Google+'
     }
     fa_icon = {

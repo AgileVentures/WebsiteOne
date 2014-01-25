@@ -6,12 +6,13 @@ Feature: Connect to social sites
 
 Background:
   Given I am on the "Sign in" page
+  And I want to use third party authentications
 
 Scenario: Log in with GitHub account
-  When I click "Login with GitHub"
-  Then I should see "You are connected"
+  When I click "Connect with GitHub"
+  Then I should see "Signed in successfully."
 
-  Scenario: Log in with Google + account
-    When I click "Login with Google+"
-    Then I should see "You are connected"
+Scenario: Log in with Google + account
+  When I click "Connect with Google+"
+  Then I should see "Signed in successfully."
 

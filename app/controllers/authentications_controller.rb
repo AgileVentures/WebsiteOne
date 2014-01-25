@@ -27,6 +27,11 @@ class AuthenticationsController < ApplicationController
     end
   end
 
+  def failure
+    flash[:alert] = 'Authentication failed.'
+    redirect_to root_path
+  end
+
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
