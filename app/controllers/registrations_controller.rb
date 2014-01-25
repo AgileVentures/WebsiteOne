@@ -7,6 +7,11 @@ class RegistrationsController < Devise::RegistrationsController
   def update
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
 
+    if account_update_params[:password].blank?
+      account_update_params.delete('password')
+      account_update_params.delete('password_confirmation')
+    end
+
     # Bryan: creates a new but identical object
     @user = User.find(current_user.id)
     if @user.update_attributes(account_update_params)
