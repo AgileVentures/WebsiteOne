@@ -19,4 +19,13 @@ module ApplicationHelper
   def current_projects
     Project.all
   end
+
+  def social_button(provider)
+    provider = provider.downcase.singularize
+    display_name = {
+        'github' => 'Github',
+        'gplus'  => 'Google+'
+    }
+    raw %Q{<button class="btn btn-#{provider}"><a href="/auth/#{provider}"><i class="fa fa-#{provider}"></i> | Connect with #{display_name[provider]}</a></button>}
+  end
 end

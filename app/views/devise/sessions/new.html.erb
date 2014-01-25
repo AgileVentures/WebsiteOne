@@ -18,6 +18,7 @@
         <div class='form-group'>
           <%= f.submit 'Sign in', class: 'btn btn-primary btn-lg btn-block' %>
         </div>
+        <%= social_button('github') %>
         <%= devise_error_simple_message %>
         <%= flash_messages layout_flash: false %>
       </fieldset>

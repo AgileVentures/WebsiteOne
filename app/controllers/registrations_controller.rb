@@ -9,15 +9,6 @@ class RegistrationsController < Devise::RegistrationsController
 
     # Bryan: creates a new but identical object
     @user = User.find(current_user.id)
-    if @user.password_required?
-      unless @user.valid_password?(account_update_params[:current_password])
-        render 'edit'
-        return
-      end
-    else
-      # TODO Bryan: find a way to authenticate with third party libraries
-    end
-
     if @user.update_attributes(account_update_params)
       set_flash_message :notice, :updated
       # Sign in the user bypassing validation in case his password changed

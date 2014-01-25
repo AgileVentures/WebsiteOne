@@ -32,31 +32,10 @@
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <% if resource.password_required? %>
-        <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
-
-          <div class="form-group">
-            <%= f.password_field :password, :autocomplete => "off", class: 'form-control' %>
-          </div>
-        </div>
-
-        <div><%= f.label :password_confirmation %>
-          <div class="form-group">
-            <%= f.password_field :password_confirmation, class: 'form-control' %>
-          </div>
-        </div>
-        <div><%= f.label :current_password %> <p>(we need your current password to confirm your changes)</p>
-
-          <div class="form-group">
-            <%= f.password_field :current_password, class: 'form-control' %>
-          </div>
-        </div>
-        <% end %>
+        <a href="/registrations/change_password">I want to change my password</a>
 
         <div><%= f.submit "Update", class: 'btn btn-primary btn-lg btn-block' %></div>
     <% end %>
-
-    <button class="btn btn-social btn-github"><a href="/auth/github"><i class="fa fa-github"></i> | Connect with Github</a></button>
 
     <p>Unhappy? We would hate to miss you as a friend...
       <%= button_to "Cancel my account", registration_path(resource_name), :data => {:confirm => "Are you sure?"}, :method => :delete, :class => 'btn btn-danger btn-lg btn-block' %></p>
