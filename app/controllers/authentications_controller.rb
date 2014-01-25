@@ -5,18 +5,20 @@ class AuthenticationsController < ApplicationController
     omniauth = request.env['omniauth.auth']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
 
+    path = request.env['omniauth.origin'] || root_path
+
     if authentication.present?
       flash[:notice] = 'Signed in successfully.'
-      if authentication.user != current_user
+      if current_user.present? and authentication.user != current_user
         flash[:alert] = 'An account already exists with these credentials!'
-        redirect_to request.env['omniauth.origin']
+        redirect_to path
       else
         sign_in_and_redirect(:user, authentication.user)
       end
     elsif current_user
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
       flash[:notice] = 'Authentication successful.'
-      redirect_to request.env['omniauth.origin']
+      redirect_to path
     else
       user = User.new
       user.apply_omniauth(omniauth)
