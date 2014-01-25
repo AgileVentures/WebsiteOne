@@ -7,7 +7,12 @@ class AuthenticationsController < ApplicationController
 
     if authentication.present?
       flash[:notice] = 'Signed in successfully.'
-      sign_in_and_redirect(:user, authentication.user)
+      if authentication.user != current_user
+        flash[:alert] = 'An account already exists with these credentials!'
+        redirect_to request.env['omniauth.origin']
+      else
+        sign_in_and_redirect(:user, authentication.user)
+      end
     elsif current_user
       current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
       flash[:notice] = 'Authentication successful.'
@@ -33,7 +38,9 @@ class AuthenticationsController < ApplicationController
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     if @authentication
-      if @authentication.destroy
+      if current_user.authentications.count == 1 and current_user.encrypted_password.blank?
+        flash[:alert] = 'Bad idea!' # TODO Bryan: this user will have no way of logging back in!!!
+      elsif @authentication.destroy
         flash[:notice] = 'Successfully destroyed authentication.'
       else
         flash[:alert] = 'Authentication method could not be removed.'
