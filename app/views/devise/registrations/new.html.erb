@@ -16,10 +16,11 @@
           <div class='form-group'>
             <%= f.submit 'Sign up', class: 'btn btn-primary btn-lg btn-block' %>
           </div>
-          <%= social_button('github') %>
           <%= devise_error_simple_message %>
         </fieldset>
     <% end %>
+
+    <%= social_button('github') %>
 
     <p>
       <small>By registering, you understand that we will store and make use the information provided in accordance with

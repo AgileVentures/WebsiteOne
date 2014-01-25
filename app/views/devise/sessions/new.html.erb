@@ -1,6 +1,6 @@
 <div class="col-md-4 col-md-offset-4" style="margin-top: -80px;  padding-left: 140px; padding-right: 60px">
   <h1 class="text-center"> Log In  </h1>
-  <h4 class="text-center">Don't have an account? <%= link_to "Sign up", new_registration_path(resource_name) %></h4>
+  <h4 class="text-center">Don't have an account? <%= link_to 'Sign up', new_registration_path(resource_name) %></h4>
 
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <fieldset>
@@ -18,10 +18,10 @@
         <div class='form-group'>
           <%= f.submit 'Sign in', class: 'btn btn-primary btn-lg btn-block' %>
         </div>
-        <%= social_button('github') %>
         <%= devise_error_simple_message %>
         <%= flash_messages layout_flash: false %>
       </fieldset>
   <% end %>
+  <%= social_button('github') %>
   <%# render 'devise/shared/links' %>
 </div>
