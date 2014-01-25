@@ -21,11 +21,15 @@ module ApplicationHelper
   end
 
   def social_button(provider)
-    provider = provider.downcase.singularize
+    provider = provider.downcase
     display_name = {
         'github' => 'Github',
         'gplus'  => 'Google+'
     }
-    raw %Q{<button class="btn btn-#{provider}"><a href="/auth/#{provider}"><i class="fa fa-#{provider}"></i> | Connect with #{display_name[provider]}</a></button>}
+    fa_icon = {
+        'github' => 'github-alt',
+        'gplus'  => 'google-plus'
+    }
+    raw %Q{<a class="btn btn-block btn-social btn-#{provider}" href="/auth/#{provider}"><i class="fa fa-#{fa_icon[provider]}"></i> Connect with #{display_name[provider]}</a>}
   end
 end
