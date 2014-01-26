@@ -18,8 +18,8 @@ describe 'OmniAuth authentication' do
     end
   end
 
-  context 'for unregistered users' do
-    supported_auths.each do |provider, name|
+  supported_auths.each do |provider, name|
+    context 'for unregistered users' do
       context "with a #{name} profile" do
         it 'should work with valid credentials' do
           visit new_user_session_path
@@ -56,14 +56,12 @@ describe 'OmniAuth authentication' do
         end
       end
     end
-  end
 
-  context 'for registered users' do
-    before do
-      @user = User.create!(email: 'something_else@email.com', password: '123456789')
-    end
+    context 'for registered users' do
+      before do
+        @user = User.create!(email: 'something_else@email.com', password: '123456789')
+      end
 
-    supported_auths.each do |provider, name|
       context "with a #{name} profile" do
         before do
           @user.authentications.create!(provider: provider, uid: @uid)

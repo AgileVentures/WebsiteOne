@@ -118,60 +118,79 @@ $(function() {
         header = $('#main_header'),
         sidebar = $('#sidebar'),
         notSidebar = $('#not-sidebar'),
+        sidebarContainer = $('#sidebar-container'),
         wrapper = $('#wrap'),
         main = $('#main'),
         // manually selected properties which will affect affix threshold height, if layout changes,
         // readjust as necessary
-        thresholdHeight = header.height() + affixedNav.height(),
+        thresholdTop = header.height() + affixedNav.height(),
         footer = $('#footer'),
         // manually selected properties which will affect affix threshold height, if layout changes,
         // readjust as necessary
         bottomThreshold = parseInt(footer.css('margin-top')) + footer.height() +
             parseInt(footer.css('padding-top')) + parseInt(footer.css('padding-bottom')),
-        affixOffsetHeight = parseInt(affixedNav.css('margin-bottom')) + parseInt($('#main').css('padding-top')),
-        mainTopPadding = parseInt(main.css('padding-top'));
+        affixOffsetHeight = parseInt(affixedNav.css('margin-bottom')) + parseInt(main.css('padding-top')),
+        mainTopPadding = parseInt(main.css('padding-top')),
+        mobileWidth = 768; // Bryan: Based on Bootstrap's 3 docs
+
+    // only worry about the complex sidebar behaviour if the sidebar is shorter than the actual document
+    var worryAboutSidebar = (sidebar != null) && (sidebar.height() < notSidebar.height()) && ($(window).width() > mobileWidth);
 
     if (sidebar != null) {
-      sidebar.css({ 'max-height': $(window).height() - thresholdHeight });
-
       // attach a custom object
       sidebar.custom = {
         AFFIX_TOP:  0,
         AFFIX:      1,
         AFFIX_BTM:  2,
-        state: this.AFFIX_TOP,
+        state:      0,  // Bryan: AFFIX_TOP is not guaranteed to be defined at initialization
         affixTop: function() {
-          if (this.state == this.AFFIX_TOP) return;
+          if (this.state === this.AFFIX_TOP) return;
           // Bryan: turns off any per element styling
           sidebar.css({
             'position': '',
             'top': '',
             'left': '',
-            'bottom': ''
-          })
+            'bottom': '',
+            'width': ''
+          });
           this.state = this.AFFIX_TOP;
         },
         affix: function() {
-          if (this.state == this.AFFIX) return;
+          if (this.state === this.AFFIX) return;
           // Bryan: affixOffsetHeight must be tuned to work correctly
           sidebar.css({
             'position': 'fixed',
             'top': affixOffsetHeight,
             'left': 'auto',
-            'bottom': ''
-          })
+            'bottom': '',
+            'width': sidebarContainer.width() * 0.25 // assuming col-3 is being used
+          });
           this.state = this.AFFIX;
         },
         affixBottom: function() {
-          if (this.state == this.AFFIX_BTM) return;
+          if (this.state === this.AFFIX_BTM) return;
           // Bryan: The left property must be tuned to work properly, in this case, it is just the left padding
           sidebar.css({
             'position': 'absolute',
             'top': 'auto',
             'left': $('#sidebar-container').css('padding-left'),
-            'bottom': main.height() + mainTopPadding - wrapper.height()
-          })
+            'bottom': main.height() + mainTopPadding - wrapper.height(),
+            'width': sidebarContainer.width() * 0.25
+          });
           this.state = this.AFFIX_BTM;
+        },
+        onResize: function() {
+          worryAboutSidebar = (sidebar.height() < notSidebar.height()) && ($(window).width() > mobileWidth);
+          sidebar.css({ 'max-height': $(window).height() - thresholdTop - 40 }); // Bryan: 40px bottom padding
+          if (worryAboutSidebar && ($(window).scrollTop() > thresholdTop)) {
+            this.affix();
+            this.checkBottom();
+            if (this.state !== this.AFFIX_TOP) {
+              sidebar.css({ 'width': sidebarContainer.width() * 0.25 });
+            }
+          } else {
+            this.affixTop();
+          }
         },
         checkBottom: function() {
           var diff = $(window).scrollTop() + affixOffsetHeight + sidebar.height() + bottomThreshold - $(document).height();
@@ -184,12 +203,11 @@ $(function() {
       };
 
       $(window).resize(function() {
-        sidebar.css({ 'max-height': $(window).height() - thresholdHeight });
+        sidebar.custom.onResize();
       });
-    }
 
-    // only worry about the complex sidebar behaviour if the sidebar is shorter than the actual document
-    var worryAboutSidebar = (sidebar != null) && (sidebar.height() < notSidebar.height());
+      sidebar.custom.onResize();
+    }
 
     // TODO Bryan: a similar function for watching main content height, IF collapsible content exists
     var h1 = 0,
@@ -225,7 +243,7 @@ $(function() {
       }
       // catch any collapsing element
       h1 = h2 = sidebar.height();
-      if (sidebar.custom.state != sidebar.custom.AFFIX_TOP) {
+      if (sidebar.custom.state != sidebar.custom.AFFIX_TOP && $(window).width() > mobileWidth) {
         oldState = sidebar.custom.state;
         setTimeout(checkSidebarHeight, checkDelay);
       }
@@ -233,7 +251,7 @@ $(function() {
 
     // Bryan: catch scroll events
     $(window).scroll(function() {
-      if ($(this).scrollTop() > thresholdHeight) {
+      if ($(this).scrollTop() > thresholdTop) {
         // add affix behaviour if scroll is above threshold
         if (!affixedNav.hasClass('affix')) {
           affixedNav.addClass('affix');
