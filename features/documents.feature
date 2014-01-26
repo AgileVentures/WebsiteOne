@@ -88,6 +88,7 @@ Scenario: The Mercury Editor cannot be accessed by non-logged in users
 
 @javascript
 Scenario: The Mercury Editor save button works
+  Given the document "Guides" has a child document with title "Howto"
   Given I am going to use the Mercury Editor
   And I am logged in
   And I am using the Mercury Editor to edit document "Howto"
