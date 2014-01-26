@@ -200,10 +200,6 @@ Given(/^I want to use third party authentications$/) do
       'uid' => '12345678',
       'info' => {
           'email' => 'mock@email.com'
-      },
-      credentials: {
-          token: 'some_token',
-          secret: 'some_secret'
       }
   }
   OmniAuth.config.mock_auth[:gplus] = {
@@ -211,10 +207,6 @@ Given(/^I want to use third party authentications$/) do
       'uid' => '12345678',
       'info' => {
           'email' => 'mock@email.com'
-      },
-      credentials: {
-          token: 'some_token',
-          secret: 'some_secret'
       }
   }
 end

@@ -1,5 +1,5 @@
 class AuthenticationsController < ApplicationController
-  before_action :authenticate_user!, except: [ :create ]
+  before_action :authenticate_user!, only: [ :destroy ]
 
   def create
     omniauth = request.env['omniauth.auth']
@@ -16,9 +16,14 @@ class AuthenticationsController < ApplicationController
         sign_in_and_redirect(:user, authentication.user)
       end
     elsif current_user
-      current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
-      flash[:notice] = 'Authentication successful.'
-      redirect_to path
+      auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+      if auth.save
+        flash[:notice] = 'Authentication successful.'
+        redirect_to path
+      else
+        flash[:alert] = 'Unable to create additional profiles.'
+        redirect_to path
+      end
     else
       user = User.new
       user.apply_omniauth(omniauth)
@@ -41,9 +46,9 @@ class AuthenticationsController < ApplicationController
     @authentication = current_user.authentications.find(params[:id])
     if @authentication
       if current_user.authentications.count == 1 and current_user.encrypted_password.blank?
-        flash[:alert] = 'Bad idea!' # TODO Bryan: this user will have no way of logging back in!!!
+        flash[:alert] = 'Bad idea!'
       elsif @authentication.destroy
-        flash[:notice] = 'Successfully destroyed authentication.'
+        flash[:notice] = 'Successfully removed profile.'
       else
         flash[:alert] = 'Authentication method could not be removed.'
       end
