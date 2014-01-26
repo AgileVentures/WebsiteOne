@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "documents/show" do
   before(:each) do
+
     @project = assign(:project, stub_model(Project, :id => 1, :title => "Project1"))
     @document = stub_model(Document,
                            :id => 1,
@@ -16,6 +17,7 @@ describe "documents/show" do
                                  :project_id => 1,
                                  :parent_id => 1
     )
+    @document.stub(:children).and_return([ @document_child ])
   end
   #
   #it "renders attributes in <span>" do

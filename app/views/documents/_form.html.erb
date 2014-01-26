@@ -13,16 +13,10 @@
             </div>
         <% end %>
 
-        <div class='form-group'>
-          <%= f.label :parent_id, 'Parent document' %>
-          <%= f.collection_select :parent_id,
-                                  Document.roots.where('project_id = ?', @project.id),
-                                  :id,
-                                  :title,
-                                  :include_blank => 'Root - No parent',
-                                  :class => 'form-control input-lg',
-                                  :prompt => 'Please select parent' %>
-        </div>
+
+
+
+        <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
 
 
         <div class='form-group'>

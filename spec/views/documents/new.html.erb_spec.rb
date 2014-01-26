@@ -17,8 +17,8 @@ describe "documents/new" do
     end
     it "renders new document form" do
       render
-
       assert_select "form[action=?][method=?]", project_document_path(@project, @document), "post" do
+        assert_select "input#document_parent_id[name=?]", "document[parent_id]"
         assert_select "input#document_title[name=?]", "document[title]"
         assert_select "input#document_project_id[name=?]", "document[project_id]"
       end
