@@ -14,9 +14,9 @@ Background:
     | title         | body             | project_id | id | parent_id |
     | Guides        | My guide to      |          2 | 33 |           |
     | Documentation | My documentation |          1 | 44 |           |
-    | Howto         | How to start     |          2 | 55 |     33    |
-    | Another doc   | My content       |          2 | 66 |     33    |
-    | Howto 2       | My documentation |          1 | 77 |     44    |
+   # | Howto         | How to start     |          2 | 55 |     33    |
+   # | Another doc   | My content       |          2 | 66 |     33    |
+   # | Howto 2       | My documentation |          1 | 77 |     44    |
 
 
 Scenario: Render of list documents
@@ -46,6 +46,17 @@ Scenario: Show a document
   And I should see "Guides"
   And I should see "My guide to"
   And I should see a link to "Edit" page for document "Guides"
+
+
+Scenario: A document can have children
+  Given the document "Guides" has a child document with title "Howto"
+  Given I am on the "Show" page for document "Guides"
+  Then I should see "Howto"
+  When I click "Howto"
+  Then I should be on the "Show" page for document "Howto"
+  And I should see "Subdocument of guides"
+
+
 
 #Scenario: Destroy a document
 #  Given I am logged in
