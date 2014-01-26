@@ -22,8 +22,10 @@
         </fieldset>
     <% end %>
 
-    <% supported_third_parties.each do |provider| %>
-      <%= social_button provider %>
+    <% if resource.password_required? %>
+      <% supported_third_parties.each do |provider| %>
+        <%= social_button provider %>
+      <% end %>
     <% end %>
 
     <p>

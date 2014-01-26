@@ -34,7 +34,7 @@
 
         <a href="/registrations/change_password">I want to change my password</a>
 
-        <div><%= f.submit "Update", class: 'btn btn-primary btn-lg btn-block' %></div>
+        <div><%= f.submit 'Update', class: 'btn btn-primary btn-lg btn-block' %></div>
     <% end %>
 
     <br>
@@ -42,9 +42,9 @@
       <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
     <% end %>
 
-    <p>Unhappy? We would hate to miss you as a friend...</p>
-    <%= button_to "Cancel my account", registration_path(resource_name),
-                  :data => {:confirm => "Are you sure?"}, :method => :delete,
+    <p>Unhappy? You will be sorely missed...</p>
+    <%= button_to 'Cancel my account', registration_path(resource_name),
+                  :data => {:confirm => 'Are you sure?'}, :method => :delete,
                   :class => 'btn btn-danger btn-lg btn-block' %>
 
     <%# link_to "Back", :back, :class => 'btn btn-default' %>

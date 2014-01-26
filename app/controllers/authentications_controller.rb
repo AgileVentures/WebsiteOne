@@ -8,11 +8,11 @@ class AuthenticationsController < ApplicationController
     path = request.env['omniauth.origin'] || root_path
 
     if authentication.present?
-      flash[:notice] = 'Signed in successfully.'
       if current_user.present? and authentication.user != current_user
         flash[:alert] = 'An account already exists with these credentials!'
         redirect_to path
       else
+        flash[:notice] = 'Signed in successfully.'
         sign_in_and_redirect(:user, authentication.user)
       end
     elsif current_user
