@@ -16,8 +16,7 @@ end
 
 Then /^I should see that bootstrap css library has been loaded$/ do
   # add css tags specific to bootstrap
-  css_tags = %w[  viewport
-                  carousel
+  css_tags = %w[  carousel
                   img-responsive
                   container
                   table-striped
