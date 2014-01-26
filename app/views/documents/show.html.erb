@@ -1,6 +1,6 @@
 <% unless @document.ancestors.empty? %>
     <h4>
-    Subdocument of <%= link_to @document.parent.title.downcase , project_document_path(@project, @document.parent) %> collection
+    Subdocument of <%= link_to @document.parent.title.downcase , project_document_path(@project, @document.parent) %>
     </h4>
 <% end %>
 <h1>

@@ -67,6 +67,7 @@ Scenario: A document can have children
 #  And I should see "Document was successfully deleted."
 
 Scenario: Has a link to edit a document using the Mercury Editor
+  Given the document "Guides" has a child document with title "Howto"
   Given I am logged in
   And I am on the "Show" page for document "Howto"
   When I click the "Edit" button
