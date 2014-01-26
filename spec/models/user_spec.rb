@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-  before(:each) do
+  before do
     @attr = attributes_for(:user)
   end
 

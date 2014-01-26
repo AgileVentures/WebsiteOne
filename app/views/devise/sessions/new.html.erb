@@ -23,8 +23,9 @@
       </fieldset>
   <% end %>
 
-  <%= social_button('github') %>
-  <%= social_button('gplus') %>
+  <% supported_third_parties.each do |provider| %>
+    <%= social_button provider %>
+  <% end %>
 
   <%# render 'devise/shared/links' %>
 </div>

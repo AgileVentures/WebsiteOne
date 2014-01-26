@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   #validates :first_name, :last_name, presence: true
 
-  has_many :authentications
+  validates :email, uniqueness: true
+  has_many :authentications, dependent: :destroy
 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
@@ -14,5 +15,9 @@ class User < ActiveRecord::Base
 
   def password_required?
     (authentications.empty? || !password.blank?) && super
+  end
+
+  def has_auth(provider)
+    !authentications.where(provider: provider).empty?
   end
 end

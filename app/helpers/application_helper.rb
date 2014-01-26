@@ -20,16 +20,27 @@ module ApplicationHelper
     Project.all
   end
 
-  def social_button(provider)
+  def social_button(provider, options={})
     provider = provider.downcase
     display_name = {
         'github' => 'GitHub',
         'gplus'  => 'Google+'
     }
+
     fa_icon = {
         'github' => 'github-alt',
         'gplus'  => 'google-plus'
     }
-    raw %Q{<a class="btn btn-lg btn-block btn-social btn-#{provider}" href="/auth/#{provider}"><i class="fa fa-#{fa_icon[provider]}"></i> Connect with #{display_name[provider]}</a>}
+
+    options[:url] ||= root_path
+    text = options[:delete] ? 'Remove' : 'Connect with'
+    path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
+        "/auth/#{provider}#{"?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}" if options[:url].present?}"
+
+    raw %Q{<a class="btn btn-lg btn-block btn-social btn-#{provider}" #{'method="delete" ' if options[:delete]}href=#{path}><i class="fa fa-#{fa_icon[provider]}"></i> #{text} #{display_name[provider]}</a>}
+  end
+
+  def supported_third_parties
+    %w{ github gplus }
   end
 end
