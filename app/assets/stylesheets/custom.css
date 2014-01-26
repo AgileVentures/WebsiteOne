@@ -8,13 +8,31 @@ body {
     font: normal 14px arial,sans-serif;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
     color: darkgray;
+}
+
+h4 {
+    color: #000000;
+    line-height: 28px;
 }
 
 p, a {
     line-height: 28px;
 }
+a, a:hover, a:visited, a:active {
+    color: #F07F48;
+    text-decoration: none;
+}
+
+.btn {
+    color: white !important;
+}
+
+.btn-default {
+    color: #000000 !important;
+}
+
 
 .row {
     margin-left:0px;
@@ -65,7 +83,7 @@ h1,h2,h3,h4 {
 }
 
 header {
-    background: rgba(211, 84, 0,1.0);
+    background: #F07F48;
     height: 60px;
     color: #000000;
 }
@@ -78,7 +96,7 @@ header h1,header h2,header h3 a,header a,header a:hover {
 
 header h3 {
     font-family: 'Kreon', serif;
-    background: rgba(241, 196, 15,1.0);
+    background: #F07F48;
     padding:10px;
     border-radius:3px;
     font-size:34px;
@@ -87,7 +105,7 @@ header h3 {
 
 header .dropdown-menu {
     top:74px;
-    background: rgba(241, 196, 15,1.0);
+    background: #F07F48;
     border-width:0;
 }
 
@@ -205,7 +223,7 @@ h1 {
     bottom:0;
     right:6%;
     z-index:100;
-    background: #ffcc33;
+    background: #F07F48;
     font-size:24px;
     border-top-left-radius:3px;
     border-top-right-radius:3px;
