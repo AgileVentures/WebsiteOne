@@ -9,9 +9,10 @@
 old_project_count = Project.count
 old_doc_count = Document.count
 
-puts 'Would you like to clear the existing projects and documents from the database?'
+puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
+
 while true
-  puts 'yes(y) or no(n):'
+  puts 'yes(y)/no(n):'
   response = STDIN.gets.downcase.chomp
   if response == 'y' or response == 'yes'
     puts 'Clearing existing projects and documents'

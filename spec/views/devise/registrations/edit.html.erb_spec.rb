@@ -14,9 +14,6 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_text('First name')
     expect(rendered).to have_text('Last name')
     expect(rendered).to have_text('Email')
-    expect(rendered).to have_text('Password')
-    expect(rendered).to have_text('Password confirmation')
-    expect(rendered).to have_text('Current password')
     expect(rendered).to have_text('Unhappy?')
   end
 
@@ -33,9 +30,6 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_field('First name')
     expect(rendered).to have_field('Last name')
     expect(rendered).to have_field('Email')
-    expect(rendered).to have_field('Password')
-    expect(rendered).to have_field('Password confirmation')
-    expect(rendered).to have_field('Current password')
   end
 
   it 'shows Update button' do
@@ -65,16 +59,16 @@ describe 'devise/registrations/edit.html.erb' do
   #  expect(rendered).to have_link('Back')
   #end
 
-  it '#devise_error_messages_flash shows error messages ' do
-    user = User.new
-    user.password = ''
-    user.save
-
-    view.stub(:resource).and_return(user)
-
-    render
-    expect(rendered).to have_text("Password can't be blank")
-  end
+  #it '#devise_error_messages_flash shows error messages ' do
+  #  user = User.new
+  #  user.password = ''
+  #  user.save
+  #
+  #  view.stub(:resource).and_return(user)
+  #
+  #  render
+  #  expect(rendered).to have_text("Password can't be blank")
+  #end
 
 
 end

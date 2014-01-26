@@ -1,5 +1,6 @@
 class Document < ActiveRecord::Base
   belongs_to :project
+
   acts_as_tree
   validates :title, :project_id, presence: true
 

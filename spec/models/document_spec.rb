@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Document do
-  before(:each) do
+  before do
     @document = FactoryGirl.create(:document)
   end
 
