@@ -11,11 +11,12 @@ Background:
     | hello mars  | greetings aliens     | inactive | 2  |
 
   And the following documents exist:
-    | title         | body             | project_id |
-    | Howto         | How to start     |          1 |
-    | Documentation | My documentation |          1 |
-    | Another doc   | My content       |          2 |
-    | Howto 2       | My documentation |          2 |
+    | title         | body             | project_id | id | parent_id |
+    | Guides        | My guide to      |          2 | 33 |           |
+    | Documentation | My documentation |          1 | 44 |           |
+    | Howto         | How to start     |          2 | 55 |     33    |
+    | Another doc   | My content       |          2 | 66 |     33    |
+    | Howto 2       | My documentation |          1 | 77 |     44    |
 
 
 Scenario: Render of list documents
@@ -23,9 +24,10 @@ Scenario: Render of list documents
 #  Given I am on the "projects" page
 #  When I click the "Documents" button for project "hello world"
 #  Then I should be on the "Documents" page for project "hello world"
-  And I should see "Howto"
   And I should see "Documentation"
-  And I should not see the document "Another doc"
+  And I should not see "Howto 2"
+  And I should not see "Another doc"
+  And I should not see the document "Guides"
 
 Scenario: Create a new document
   Given I am logged in
@@ -39,11 +41,11 @@ Scenario: Create a new document
 Scenario: Show a document
   Given I am on the "Show" page for project "hello mars"
 #  Given I am on the "Documents" page for project "hello mars"
-  When I click "Howto 2"
-  Then I should be on the "Show" page for document "Howto 2"
-  And I should see "Howto 2"
-  And I should see "My documentation"
-  And I should see a link to "Edit" page for document "Howto 2"
+  When I click "Guides"
+  Then I should be on the "Show" page for document "Guides"
+  And I should see "Guides"
+  And I should see "My guide to"
+  And I should see a link to "Edit" page for document "Guides"
 
 #Scenario: Destroy a document
 #  Given I am logged in
