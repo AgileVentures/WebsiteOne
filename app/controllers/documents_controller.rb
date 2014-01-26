@@ -5,6 +5,7 @@ class DocumentsController < ApplicationController
 
   before_action :find_project
 
+
   # GET /documents
   # GET /documents.json
   def index
@@ -33,7 +34,7 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     respond_to do |format|
       if @document.save
-        format.html { redirect_to project_documents_path(@project), notice: 'Document was successfully created.' }
+        format.html { redirect_to project_path(@project), notice: 'Document was successfully created.' }
         format.json { render action: 'show', status: :created, location: @document }
       else
         format.html { render action: 'new' }
@@ -92,6 +93,6 @@ class DocumentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def document_params
-    params.require(:document).permit(:title, :body, :project_id)
+    params.require(:document).permit(:title, :body, :project_id, :parent_id)
   end
 end

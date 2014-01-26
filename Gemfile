@@ -19,6 +19,7 @@ gem 'omniauth-github', git: 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-gplus', git: 'git://github.com/samdunne/omniauth-gplus.git'
 gem 'font-awesome-rails'
 gem 'high_voltage'
+gem 'acts_as_tree', '~> 1.5.0'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

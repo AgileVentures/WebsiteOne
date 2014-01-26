@@ -20,6 +20,10 @@ module ApplicationHelper
     Project.all
   end
 
+  def roots
+    @roots = Document.roots.where('project_id = ?', @project.id).order(:created_at)
+  end
+
   def social_button(provider, options={})
     provider = provider.downcase
     display_name = {

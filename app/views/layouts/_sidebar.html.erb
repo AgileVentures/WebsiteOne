@@ -1,4 +1,4 @@
-<h3>Current Projects</h3>
+<h3>Current Projects<%= raw %Q{ <span style="font-size: 80%;"><a style="margin-left: 20px;" href="#{new_project_path}"><i class="glyphicon glyphicon-plus"></i></a></span>} if user_signed_in? %></h3>
 <ul>
   <% current_projects.each_with_index do |p, index| %>
     <% should_focus = project == p %>
@@ -13,9 +13,9 @@
     </li>
     <% if has_docs %>
       <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
-        <% p.documents.each do |d| %>
-          <% doc_focus = (should_focus and @document == d) %>
-          <li><%= link_to d.title, project_document_path(p, d), class: doc_focus ? 'focused' : '' %></li>
+        <% p.documents.roots.each do |d| %>
+          <% doc_focus = (should_focus and (@document == d or @document.try(&:root) == d)) %>
+          <li><%= link_to %Q{#{d.title}#{" (#{d.children.count})" unless d.children.empty?}}, project_document_path(p, d), class: doc_focus ? 'focused' : '' %></li>
         <% end %>
       </ul>
     <% end %>

@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140124213333) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
   end
 
   create_table "projects", force: true do |t|

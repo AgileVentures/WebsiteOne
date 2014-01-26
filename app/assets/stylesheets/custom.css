@@ -198,7 +198,11 @@ h1 {
 }
 
 .divider {
-    height:100px;
+    height:50px;
+}
+
+.small-divider {
+    height:25px;
 }
 
 .panel {

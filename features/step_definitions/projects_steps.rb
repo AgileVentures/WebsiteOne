@@ -54,3 +54,10 @@ end
 #    steps %Q{ And I click the "#{page_name}" button for project "#{project_name}" }
 #  end
 #end
+
+
+Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |parent, child|
+  parent_doc = Document.find_by_title(parent)
+  parent_project_id = parent_doc.project_id
+  child_doc = parent_doc.children.create!( { :project_id => parent_project_id,:title => child })
+end

@@ -69,4 +69,6 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(:title, :description, :created, :status)
   end
 
+
+
 end
