@@ -32,29 +32,20 @@
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
+        <a href="/registrations/change_password">I want to change my password</a>
 
-          <div class="form-group">
-            <%= f.password_field :password, :autocomplete => "off", class: 'form-control' %>
-          </div>
-        </div>
-
-        <div><%= f.label :password_confirmation %>
-          <div class="form-group">
-            <%= f.password_field :password_confirmation, class: 'form-control' %>
-          </div>
-        </div>
-        <div><%= f.label :current_password %> <p>(we need your current password to confirm your changes)</p>
-
-          <div class="form-group">
-            <%= f.password_field :current_password, class: 'form-control' %>
-          </div>
-        </div>
-        <div><%= f.submit "Update", class: 'btn btn-primary btn-lg btn-block' %></div>
+        <div><%= f.submit 'Update', class: 'btn btn-primary btn-lg btn-block' %></div>
     <% end %>
 
-    <p>Unhappy? We would hate to miss you as a friend...
-      <%= button_to "Cancel my account", registration_path(resource_name), :data => {:confirm => "Are you sure?"}, :method => :delete, :class => 'btn btn-danger btn-lg btn-block' %></p>
+    <br>
+    <% supported_third_parties.each do |provider| %>
+      <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
+    <% end %>
+
+    <p>Unhappy? You will be sorely missed...</p>
+    <%= button_to 'Cancel my account', registration_path(resource_name),
+                  :data => {:confirm => 'Are you sure?'}, :method => :delete,
+                  :class => 'btn btn-danger btn-lg btn-block' %>
 
     <%# link_to "Back", :back, :class => 'btn btn-default' %>
   </div>
