@@ -33,7 +33,6 @@ Scenario: Create a new document
 #  And I am on the "Documents" page for project "hello world"
   When I click "New Document"
   And I fill in "Title" with "New doc title"
-  And I fill in "Body" with "Document content"
   And I click "Submit"
   Then I should see "Document was successfully created."
 
