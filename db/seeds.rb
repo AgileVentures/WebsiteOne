@@ -8,6 +8,7 @@
 
 old_project_count = Project.count
 old_doc_count = Document.count
+old_user_count = User.count
 
 puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
 
@@ -16,7 +17,7 @@ while true
   response = STDIN.gets.downcase.chomp
   if response == 'y' or response == 'yes'
     puts 'Clearing existing projects and documents'
-    [Project, Document].each(&:destroy_all)
+    [Project, Document, User].each(&:destroy_all)
 
     # Bryan: avoid creating repeated entries
     Project.create!({:title => 'Autograder',
@@ -44,11 +45,22 @@ Solution: is something that requires absolutely minimal effort on their part to 
 end
 
 for i in (1..3)
-  p = Project.create!({ title: Faker::Lorem.words(3).join(' '), description: Faker::Lorem.paragraph, status: 'active' })
+  p = Project.create title: Faker::Lorem.words(3).join(' '), description: Faker::Lorem.paragraph, status: 'active'
   for j in (1..3)
-    p.documents.create!({ title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph })
+    d = p.documents.create title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph
+    for k in (1..rand(3))
+      d.children.create title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph, project_id: p.id
+    end
+  end
+end
+
+for i in (1..5)
+  u = User.create first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: Faker::Lorem.characters(10)
+  Project.all.sample(3).each do |p|
+    u.follow p
   end
 end
 
 puts 'Project.count ' + old_project_count.to_s + ' -> ' + Project.count.to_s
 puts 'Document.count ' + old_doc_count.to_s + ' -> ' + Document.count.to_s
+puts 'User.count ' + old_user_count.to_s + ' -> ' + User.count.to_s
