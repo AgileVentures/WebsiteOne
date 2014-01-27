@@ -8,9 +8,10 @@
   <div class="col-md-1 col-md-offset-4">
 
     <img src="<%= gravatar_for(resource.email) %>" class="thumbnail img-rounded media-object">
-<p>Member of: <br />
-  <% user_follows.each do |project|%>
-  <%= link_to project.title, project_path(project) %>
+
+    <p>Member of: <br/>
+      <% user_follows.each do |project| %>
+          <%= link_to project.title, project_path(project) %>
       <% end %>
  </p>
   </div>
