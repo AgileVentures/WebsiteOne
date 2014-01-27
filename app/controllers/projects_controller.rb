@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
   include DocumentsHelper
 
 #TODO YA Add controller specs for all the code
@@ -11,7 +12,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    documents
+
   end
 
   def new
@@ -52,7 +53,26 @@ class ProjectsController < ApplicationController
     #redirect_to projects_path, notice: @notice
   end
 
+  def follow
+    set_project
+    if current_user
+      current_user.follow(@project)
 
+      redirect_to project_path(@project)
+      flash[:notice] = "You just joined #{@project.title}."
+    else
+      flash[:error] = "You must <a href='/users/sign_in'>login</a> to follow #{@project.title}.".html_safe
+    end
+  end
+
+  def unfollow
+    set_project
+
+    current_user.stop_following(@project)
+
+    redirect_to project_path(@project)
+    flash[:notice] = "You are no longer a member of #{@project.title}."
+  end
 
   private
   def set_project
@@ -62,6 +82,10 @@ class ProjectsController < ApplicationController
       redirect_to projects_path, alert: 'Requested action failed.  Project was not found.'
     end
 
+  end
+
+  def set_user
+    @user = User.find_by_id(current_user.id)
   end
 
   def project_params

@@ -61,3 +61,19 @@ Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |
   parent_project_id = parent_doc.project_id
   child_doc = parent_doc.children.create!( { :project_id => parent_project_id,:title => child })
 end
+
+Then(/^I should become a member of project "([^"]*)"$/) do | name|
+  object = Project.find_by_title(name)
+  @user.follow(object)
+end
+
+When(/^I am a member of project "([^"]*)"$/) do |name|
+  step %Q{I should become a member of project "#{name}"}
+end
+Then(/^I should stop being a member of project "([^"]*)"$/) do |name|
+  object = Project.find_by_title(name)
+  @user.stop_following(object)
+end
+When(/^I am not a member of project "([^"]*)"$/) do |name|
+  step %Q{I should stop being a member of project "#{name}"}
+end
