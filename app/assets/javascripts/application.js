@@ -234,12 +234,12 @@ $(function() {
     $('.collapse-button').on('click', function() {
       // TODO Bryan: This does not work properly if the user clicks too fast
       var child = $(this).find('>:first-child');
-      if (child.hasClass('glyphicon-chevron-down')) {
-        child.removeClass('glyphicon-chevron-down');
-        child.addClass('glyphicon-chevron-up');
-      } else if (child.hasClass('glyphicon-chevron-up')) {
-        child.removeClass('glyphicon-chevron-up');
-        child.addClass('glyphicon-chevron-down');
+      if (child.hasClass('fa-caret-down')) {
+        child.removeClass('fa-caret-down');
+        child.addClass('fa-caret-up');
+      } else if (child.hasClass('fa-caret-up')) {
+        child.removeClass('fa-caret-up');
+        child.addClass('fa-caret-down');
       }
       // catch any collapsing element
       h1 = h2 = sidebar.height();

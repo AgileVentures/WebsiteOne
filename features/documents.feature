@@ -14,16 +14,11 @@ Background:
     | title         | body             | project_id | id | parent_id |
     | Guides        | My guide to      |          2 | 33 |           |
     | Documentation | My documentation |          1 | 44 |           |
-   # | Howto         | How to start     |          2 | 55 |     33    |
-   # | Another doc   | My content       |          2 | 66 |     33    |
-   # | Howto 2       | My documentation |          1 | 77 |     44    |
+
 
 
 Scenario: Render of list documents
   Given I am on the "Show" page for project "hello world"
-#  Given I am on the "projects" page
-#  When I click the "Documents" button for project "hello world"
-#  Then I should be on the "Documents" page for project "hello world"
   And I should see "Documentation"
   And I should not see "Howto 2"
   And I should not see "Another doc"
@@ -32,7 +27,6 @@ Scenario: Render of list documents
 Scenario: Create a new document
   Given I am logged in
   Given I am on the "Show" page for project "hello world"
-#  And I am on the "Documents" page for project "hello world"
   When I click "New Document"
   And I fill in "Title" with "New doc title"
   And I click "Submit"
@@ -40,8 +34,7 @@ Scenario: Create a new document
 
 Scenario: Show a document
   Given I am on the "Show" page for project "hello mars"
-#  Given I am on the "Documents" page for project "hello mars"
-  When I click "Guides"
+  When I click the sidebar link "Guides"
   Then I should be on the "Show" page for document "Guides"
   And I should see "Guides"
   And I should see "My guide to"

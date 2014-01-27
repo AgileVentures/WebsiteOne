@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    @projects = Project.all
+    @projects = Project.order(created_at: :desc)
   end
 
   def show

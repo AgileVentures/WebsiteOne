@@ -3,7 +3,10 @@ require 'spec_helper'
 describe 'devise/registrations/edit.html.erb' do
   before(:each) do
     #stubbing out devise methods
-    view.stub(:resource).and_return(User.new)
+    @user = User.new
+    @user.stub(:all_following).and_return([ stub_model(Project, title: 'Title 1'), stub_model(Project, title: 'Title 2') ])
+    view.stub(:current_user).and_return(@user)
+    view.stub(:resource).and_return(@user)
     view.stub(:resource_name).and_return('user')
     view.stub(:devise_mapping).and_return(Devise.mappings[:user])
   end
@@ -52,6 +55,12 @@ describe 'devise/registrations/edit.html.erb' do
   it 'shows Cancel my account button' do
     render
     expect(rendered).to have_button('Cancel my account')
+  end
+
+  it 'shows a list of projects being followed' do
+    render
+    expect(rendered).to have_link 'Title 1'
+    expect(rendered).to have_link 'Title 2'
   end
 
   #it 'shows Back button' do
