@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def current_projects
-    Project.all
+    Project.order(created_at: :desc)
   end
 
   def roots
