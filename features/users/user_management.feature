@@ -49,7 +49,7 @@ Feature: Create and maintain projects
   #  When I click "Back"
   #  Then I should be on the "Projects" page
 
-  @javascript
+ @javascript
   Scenario: Cancel my account
     Given I follow "My Account"
     When I click "Cancel my account"

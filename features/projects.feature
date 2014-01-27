@@ -1,6 +1,3 @@
-#TODO YA consider refactoring multiple steps of "I should see a button",
-#into plural version of "I should see buttons"
-
 Feature: Create and maintain projects
   As a member of AgileVentures
   So that I can participate in AgileVentures activities
@@ -14,7 +11,6 @@ Feature: Create and maintain projects
 
 #  Scenarios for Index page
 
-  #TODO YA consider refactoring to a higher level scenarios and move low-level (headers and columns) into view specs
   Scenario: List of projects in table layout
     Given  I am on the "home" page
     When I follow "Our projects"
