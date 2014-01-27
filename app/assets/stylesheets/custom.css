@@ -20,8 +20,13 @@ h4 {
 p, a {
     line-height: 28px;
 }
-a, a:hover, a:visited, a:active {
+
+a {
     color: #F07F48;
+}
+
+a:hover, a:active {
+    color: #b06137;
     text-decoration: none;
 }
 

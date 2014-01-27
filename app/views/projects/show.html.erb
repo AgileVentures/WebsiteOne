@@ -14,6 +14,15 @@
   <strong><%= @project.description %></strong>
 </p>
 
+<ul>
+  <% unless @project.documents.empty? %>
+    Related documents:
+    <% @project.documents.roots.each do |d| %>
+      <li style="display: inline-block;"><%= link_to d.title, project_document_path(@project, d) %></li>,
+    <% end %>
+  <% end %>
+</ul>
+
 <div>
   <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default' %>
   <% if user_signed_in? %>

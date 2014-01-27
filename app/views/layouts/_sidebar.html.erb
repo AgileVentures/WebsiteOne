@@ -6,7 +6,7 @@
     <li>
       <% if has_docs %>
         <a href="#collapse<%= index %>" class="collapse-button" data-toggle="collapse">
-          <span class="glyphicon glyphicon-chevron-<%= has_docs and should_focus ? 'up' : 'down' %>"></span>
+          <span class="glyphicon fa fa-caret-<%= has_docs and should_focus ? 'up' : 'down' %>"></span>
         </a>
       <% else %>
         <span class="glyphicon"></span>
@@ -17,7 +17,7 @@
       <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
         <% p.documents.roots.each do |d| %>
           <% doc_focus = (should_focus and (@document == d or @document.try(&:root) == d)) %>
-          <li><%= link_to %Q{#{d.title}#{" (#{d.children.count})" unless d.children.empty?}}, project_document_path(p, d), class: doc_focus ? 'focused' : '' %></li>
+          <li><span class="glyphicon"></span><%= link_to %Q{#{d.title}#{" (#{d.children.count})" unless d.children.empty?}}, project_document_path(p, d), class: doc_focus ? 'focused' : '' %></li>
         <% end %>
       </ul>
     <% end %>

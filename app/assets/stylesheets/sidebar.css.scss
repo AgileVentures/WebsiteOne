@@ -20,8 +20,7 @@
 }
 
 #sidebar span {
-  font-size: 70%;
-  margin-right: 5px;
+  font-size: 120%;
 }
 
 #sidebar a {
@@ -44,15 +43,14 @@
   list-style: none;
 }
 
+#sidebar ul ul {
+  padding-left: 20px;
+}
+
 #sidebar li {
   font-size: 15px;
   width: 100%;
-  padding: 5px 10px;
-}
-
-#sidebar ul ul li {
-  font-size: 14px;
-  padding: 2px 10px 2px 50px;
+  padding: 3px 10px;
 }
 
 #sidebar .focused {
