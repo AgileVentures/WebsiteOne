@@ -5,7 +5,6 @@ describe 'projects/show.html.erb' do
     @project = Project.create(id: 1, title: "Title 1", description: "Description 1", status: "Active")
     assign(:project, Project.first)
     @user =  FactoryGirl.create(:user)
-    assign(:user, User.first)
 
   end
 
@@ -26,21 +25,24 @@ describe 'projects/show.html.erb' do
     render
     rendered.should have_link('Back', :href => projects_path)
   end
+
+
   context 'user is signed in' do
     before :each do
       view.stub(:user_signed_in?).and_return(true)
+      view.stub(:current_user).and_return(@user)
     end
 
     context 'user is a member of project' do
       it 'should render join project button' do
-        @user.follow(@project)
+        @user.stub(:following?).and_return(true)
         render
         rendered.should have_link('Leave project', unfollow_project_path(@project))
       end
     end
     context 'user is not a member of project' do
       it 'should render leave project button' do
-        @user.stop_following(@project)
+        @user.stub(:following?).and_return(false)
         render
         rendered.should have_link('Join this project', follow_project_path(@project))
       end

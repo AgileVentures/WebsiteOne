@@ -2,7 +2,7 @@
 <small>Status: <%= @project.status %> Created: <%= @project.created_at %></small>
 <div>
   <% if user_signed_in? %>
-      <% unless @user.following?(@project) %>
+      <% unless current_user.following?(@project) %>
           <%= link_to 'Join this project', follow_project_path(@project) , :type => 'button', :class => 'btn btn-success btn-xs' %>
       <% else %>
           <%= link_to 'Leave project', unfollow_project_path(@project), :type => 'button', :class => 'btn btn-danger btn-xs' %>
