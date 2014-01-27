@@ -13,8 +13,14 @@ gem 'devise' # Authentication local and 3rd party
 gem 'bootstrap-sass', '~> 3.0.2.0' # JS Bootstrap library support
 gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
+gem 'faker'
+gem 'omniauth'
+gem 'omniauth-github', git: 'git://github.com/intridea/omniauth-github.git'
+gem 'omniauth-gplus', git: 'git://github.com/samdunne/omniauth-gplus.git'
+gem 'font-awesome-rails'
 gem 'high_voltage'
-
+gem 'acts_as_tree', '~> 1.5.0'
+gem 'acts_as_follower'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -30,6 +36,9 @@ end
 group :development, :test do
   gem 'rspec-rails' #unit testing
   gem 'debugger'  # Use debugger
+  gem 'jasmine'
+  gem 'jasmine-jquery-rails'
+  gem 'colored'
 end
 
 group :production do

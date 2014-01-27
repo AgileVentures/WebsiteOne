@@ -13,4 +13,6 @@ module DocumentsHelper
   def documents
     @documents = Document.where("project_id = ?", @project.id).order(:created_at)
   end
+
+
 end

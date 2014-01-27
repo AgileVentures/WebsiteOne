@@ -153,13 +153,15 @@ Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, con
   expect(current_path).to eq url_for_title(action: action, controller: controller, title: title)
 end
 
-Given(/^I am on the "([^"]*)" page for document "([^"]*)"$/) do |action, title|
-  controller = 'document'
+Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
   visit url_for_title(action: action, controller: controller, title: title)
 end
 
-Then(/^I should see a link to "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
+Then(/^I should( not be able to)? see a link to "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |invisible, action, controller, title|
   page.has_link?(action, href: url_for_title(action: action, controller: controller, title: title))
+  unless invisible
+    page.should have_text title, visible: false
+  end
 end
 
 Then(/^show me the page$/) do
@@ -173,4 +175,38 @@ When(/^I should see a selector with options$/) do |table|
   table.rows.flatten.each do |option|
     page.should have_select(:options => [option])
   end
+end
+
+Then(/^I should see the sidebar$/) do
+  page.find(:css, 'nav#sidebar')
+end
+
+Then(/(.*) within the ([^"]*)$/) do |s, m|
+  m = m.downcase
+  if m == 'mercury editor'
+    page.driver.within_frame('mercury_iframe') { step(s) }
+  else
+    selector_for = {
+        'sidebar' => '#sidebar'
+    }
+    page.within(selector_for[m]) { step(s) }
+  end
+end
+
+Given(/^I want to use third party authentications$/) do
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:github] = {
+      'provider' => 'github',
+      'uid' => '12345678',
+      'info' => {
+          'email' => 'mock@email.com'
+      }
+  }
+  OmniAuth.config.mock_auth[:gplus] = {
+      'provider' => 'gplus',
+      'uid' => '12345678',
+      'info' => {
+          'email' => 'mock@email.com'
+      }
+  }
 end

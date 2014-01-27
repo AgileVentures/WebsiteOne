@@ -1,9 +1,8 @@
 class Document < ActiveRecord::Base
   belongs_to :project
-  validates :title, :body, :project_id, presence: true
 
-
-
+  acts_as_tree
+  validates :title, :project_id, presence: true
 
   def url_for_me(action)
     if action == 'show'
@@ -12,5 +11,4 @@ class Document < ActiveRecord::Base
       "/projects/#{project.to_param}/documents/#{to_param}/#{action}"
     end
   end
-
 end

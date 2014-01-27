@@ -1,17 +1,13 @@
 require 'spec_helper'
 
 describe Document do
-  before(:each) do
+  before do
     @document = FactoryGirl.create(:document)
   end
 
   context 'return false on invalid inputs' do
     it 'blank Title' do
       @document.title = ''
-      expect(@document.save).to be_false
-    end
-    it 'blank Body' do
-      @document.body = ''
       expect(@document.save).to be_false
     end
     it 'blank project' do

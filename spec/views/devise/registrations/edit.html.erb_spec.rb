@@ -3,7 +3,10 @@ require 'spec_helper'
 describe 'devise/registrations/edit.html.erb' do
   before(:each) do
     #stubbing out devise methods
-    view.stub(:resource).and_return(User.new)
+    @user = User.new
+    @user.stub(:all_following).and_return([ stub_model(Project, title: 'Title 1'), stub_model(Project, title: 'Title 2') ])
+    view.stub(:current_user).and_return(@user)
+    view.stub(:resource).and_return(@user)
     view.stub(:resource_name).and_return('user')
     view.stub(:devise_mapping).and_return(Devise.mappings[:user])
   end
@@ -14,9 +17,6 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_text('First name')
     expect(rendered).to have_text('Last name')
     expect(rendered).to have_text('Email')
-    expect(rendered).to have_text('Password')
-    expect(rendered).to have_text('Password confirmation')
-    expect(rendered).to have_text('Current password')
     expect(rendered).to have_text('Unhappy?')
   end
 
@@ -33,9 +33,6 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_field('First name')
     expect(rendered).to have_field('Last name')
     expect(rendered).to have_field('Email')
-    expect(rendered).to have_field('Password')
-    expect(rendered).to have_field('Password confirmation')
-    expect(rendered).to have_field('Current password')
   end
 
   it 'shows Update button' do
@@ -58,6 +55,12 @@ describe 'devise/registrations/edit.html.erb' do
   it 'shows Cancel my account button' do
     render
     expect(rendered).to have_button('Cancel my account')
+  end
+
+  it 'shows a list of projects being followed' do
+    render
+    expect(rendered).to have_link 'Title 1'
+    expect(rendered).to have_link 'Title 2'
   end
 
   #it 'shows Back button' do
@@ -65,16 +68,16 @@ describe 'devise/registrations/edit.html.erb' do
   #  expect(rendered).to have_link('Back')
   #end
 
-  it '#devise_error_messages_flash shows error messages ' do
-    user = User.new
-    user.password = ''
-    user.save
-
-    view.stub(:resource).and_return(user)
-
-    render
-    expect(rendered).to have_text("Password can't be blank")
-  end
+  #it '#devise_error_messages_flash shows error messages ' do
+  #  user = User.new
+  #  user.password = ''
+  #  user.save
+  #
+  #  view.stub(:resource).and_return(user)
+  #
+  #  render
+  #  expect(rendered).to have_text("Password can't be blank")
+  #end
 
 
 end

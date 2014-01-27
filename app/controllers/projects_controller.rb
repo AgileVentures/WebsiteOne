@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  layout 'with_sidebar'
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   include DocumentsHelper
@@ -51,7 +52,26 @@ class ProjectsController < ApplicationController
     #redirect_to projects_path, notice: @notice
   end
 
+  def follow
+    set_project
+    if current_user
+      current_user.follow(@project)
 
+      redirect_to project_path(@project)
+      flash[:notice] = "You just joined #{@project.title}."
+    else
+      flash[:error] = "You must <a href='/users/sign_in'>login</a> to follow #{@project.title}.".html_safe
+    end
+  end
+
+  def unfollow
+    set_project
+
+    current_user.stop_following(@project)
+
+    redirect_to project_path(@project)
+    flash[:notice] = "You are no longer a member of #{@project.title}."
+  end
 
   private
   def set_project
@@ -63,9 +83,13 @@ class ProjectsController < ApplicationController
 
   end
 
+
+
   def project_params
     # permit the mass assignments
     params.require(:project).permit(:title, :description, :created, :status)
   end
+
+
 
 end

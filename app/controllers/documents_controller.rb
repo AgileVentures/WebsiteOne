@@ -1,4 +1,5 @@
 class DocumentsController < ApplicationController
+  layout 'with_sidebar'
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [ :index, :show ]
 
@@ -10,8 +11,7 @@ class DocumentsController < ApplicationController
   def index
     # TODO separate route for "documents for a project"
     #@documents = Document.all
-    @documents = Document.where("project_id = ?", @project.id).order(:created_at)
-
+    @documents = Document.where('project_id = ?', @project.id).order(:created_at)
   end
 
   # GET /documents/1
@@ -34,7 +34,7 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     respond_to do |format|
       if @document.save
-        format.html { redirect_to project_documents_path(@project), notice: 'Document was successfully created.' }
+        format.html { redirect_to project_path(@project), notice: 'Document was successfully created.' }
         format.json { render action: 'show', status: :created, location: @document }
       else
         format.html { render action: 'new' }
@@ -93,6 +93,6 @@ class DocumentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def document_params
-    params.require(:document).permit(:title, :body, :project_id)
+    params.require(:document).permit(:title, :body, :project_id, :parent_id)
   end
 end

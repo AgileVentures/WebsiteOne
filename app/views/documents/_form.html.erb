@@ -12,14 +12,21 @@
               </ul>
             </div>
         <% end %>
+
+
+
+
+        <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
+
+
         <div class='form-group'>
           <%= f.label :title %>
           <%= f.text_field :title, :class => 'form-control', placeholder: 'Title' %>
         </div>
-        <div class='form-group'>
+        <!--div class='form-group'>
           <%= f.label :body %>
           <%= f.text_area :body, :class => 'form-control',  'rows' => 10, placeholder: 'Document body'%>
-        </div>
+        </div-->
         <div class='form-group'>
           <%= f.hidden_field :project_id, value: params[:project_id] %>
         </div>
