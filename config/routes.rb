@@ -14,6 +14,10 @@ WebsiteOne::Application.routes.draw do
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
 
   resources :projects do
+    member do
+      get :follow
+      get :unfollow
+    end
     resources :documents do
       put :mercury_update
       get :mercury_saved
