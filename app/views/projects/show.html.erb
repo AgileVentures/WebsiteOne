@@ -1,41 +1,24 @@
 <h1> <%= @project.title %> project</h1>
 <small>Status: <%= @project.status %> Created: <%= @project.created_at %></small>
+<div>
+  <% if user_signed_in? %>
+      <% unless @user.following?(@project) %>
+          <%= link_to 'Join this project', follow_project_path(@project) , :type => 'button', :class => 'btn btn-success btn-xs' %>
+      <% else %>
+          <%= link_to 'Leave project', unfollow_project_path(@project), :type => 'button', :class => 'btn btn-danger btn-xs' %>
+      <% end %>
+  <% end %>
+</div>
+<small>This project has <%= @project.followers_count %> members</small>
 <p>
   <strong><%= @project.description %></strong>
 </p>
 
 <div>
   <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default' %>
-</div>
-<!-- Bryan: redundant because of the sidebar?
-<h2>Documents</h2>
-<table id="documents" class="table table-striped">
-  <thead>
-  <tr>
-    <th style="width:90%"></th>
-    <% if user_signed_in? %>
-      <th style="width:15px"></th>
-      <th style="width:15px"></th>
-    <% end %>
-  </tr>
-  </thead>
-  <tbody>
-  <% @documents.each do |document| %>
-
-    <tr id="<%=document.id%>">
-      <td><h2><%= link_to document.title, project_document_path(id: document.id, project_id: document.project_id) %></h2>
-        <%= clean_html_summary(document.body) if document.body.present?  %></td>
-      <% if user_signed_in? %>
-        <td><%= link_to 'Edit', mercury_edit_path(project_document_path(id: document.id, project_id: document.project_id)), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
-        <td><%= link_to 'Destroy', project_document_path(id: document.id, project_id: document.project_id), type: 'button', class: 'btn btn-danger btn-xs', method: :delete %></td>
-      <% end %>
-    </tr>
-
+  <% if user_signed_in? %>
+      <%= link_to 'New Document', new_project_document_path(project_id: @project.id), :type => 'button', :class => 'btn btn-default' %>
   <% end %>
-  </tbody>
-</table> -->
+</div>
 
-<br>
-<% if user_signed_in? %>
-  <%= link_to 'New Document', new_project_document_path(project_id: @project.id), :type => 'button', :class => 'btn btn-default' %>
-<% end %>
+

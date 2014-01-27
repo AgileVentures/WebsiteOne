@@ -42,4 +42,12 @@ module DeviseHelper
     html.html_safe
   end
 
+  def user_follows
+    @user_f = []
+    current_user.all_follows.each do |follow|
+    @user_f << Project.find_by_id(follow.followable_id)
+    end
+    return(@user_f)
+  end
+
 end

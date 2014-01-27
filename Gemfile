@@ -20,6 +20,7 @@ gem 'omniauth-gplus', git: 'git://github.com/samdunne/omniauth-gplus.git'
 gem 'font-awesome-rails'
 gem 'high_voltage'
 gem 'acts_as_tree', '~> 1.5.0'
+gem 'acts_as_follower'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
