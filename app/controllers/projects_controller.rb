@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :set_user
   include DocumentsHelper
 
 #TODO YA Add controller specs for all the code
@@ -12,7 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-
+    documents
   end
 
   def new
@@ -84,9 +83,7 @@ class ProjectsController < ApplicationController
 
   end
 
-  def set_user
-    @user = User.find_by_id(current_user.id)
-  end
+
 
   def project_params
     # permit the mass assignments
