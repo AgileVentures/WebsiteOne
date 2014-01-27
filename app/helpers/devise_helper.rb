@@ -31,6 +31,7 @@ module DeviseHelper
     html.html_safe
   end
 
+
   def devise_error_simple_message
     return "" if resource.errors.empty?
     messages = resource.errors.full_messages.map { |msg| msg + '<br/>' }.join
@@ -41,5 +42,6 @@ module DeviseHelper
     HTML
     html.html_safe
   end
+
 
 end
