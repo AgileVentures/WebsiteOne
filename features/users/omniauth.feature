@@ -9,10 +9,10 @@ Background:
   And I want to use third party authentications
 
 Scenario: Log in with GitHub account
-  When I click "Connect with GitHub"
+  When I click "GitHub"
   Then I should see "Signed in successfully."
 
 Scenario: Log in with Google + account
-  When I click "Connect with Google+"
+  When I click "Google+"
   Then I should see "Signed in successfully."
 
