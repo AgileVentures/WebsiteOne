@@ -116,7 +116,7 @@ $(function() {
 
     var affixedNav = $('#nav'),
         header = $('#main_header'),
-        sidebar = $('#sidebar'),
+        sidebar = $('#sidebarnav'),
         notSidebar = $('#not-sidebar'),
         sidebarContainer = $('#sidebar-container'),
         wrapper = $('#wrap'),
