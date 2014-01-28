@@ -1,13 +1,9 @@
 require 'spec_helper'
 
-def acts_well_when_no_error
-  helper.stub_chain(:resource, :errors, :empty?).and_return true
-  result = helper.devise_error_messages_flash
-  expect(result).to eq ""
-end
-
 describe DeviseHelper do
+  before(:each) do
 
+  end
   describe 'devise_error_messages_flash' do
 
     it 'when no error' do
@@ -44,4 +40,10 @@ describe DeviseHelper do
     end
 
   end
+end
+
+def acts_well_when_no_error
+  helper.stub_chain(:resource, :errors, :empty?).and_return true
+  result = helper.devise_error_messages_flash
+  expect(result).to eq ""
 end
