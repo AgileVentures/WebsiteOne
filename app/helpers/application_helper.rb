@@ -37,7 +37,7 @@ module ApplicationHelper
     }
 
     options[:url] ||= root_path
-    text = options[:text] || (options[:delete] ? 'Remove' : 'Connect with')
+    text = options[:text] || (options[:delete] ? 'Remove' : '')
     path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
         "/auth/#{provider}#{"?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}" if options[:url].present?}"
 
