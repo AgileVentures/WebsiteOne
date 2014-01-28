@@ -23,7 +23,7 @@ describe ProjectsController do
 
     it 'should assign variables to be rendered by view' do
       projects = [double(Project), double(Project)]
-      Project.stub(:all).and_return(projects)
+      Project.stub(:order).and_return(projects)
       get :index
       expect(assigns(:projects)).to eq projects
     end

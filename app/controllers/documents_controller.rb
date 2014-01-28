@@ -2,7 +2,6 @@ class DocumentsController < ApplicationController
   layout 'with_sidebar'
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [ :index, :show ]
-
   before_action :find_project
 
 
@@ -21,7 +20,9 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
+    set_parent
     @document = Document.new
+
   end
 
   # GET /documents/1/edit
@@ -34,7 +35,7 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     respond_to do |format|
       if @document.save
-        format.html { redirect_to project_path(@project), notice: 'Document was successfully created.' }
+        format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully created.' }
         format.json { render action: 'show', status: :created, location: @document }
       else
         format.html { render action: 'new' }
@@ -89,6 +90,15 @@ class DocumentsController < ApplicationController
 
   def set_document
     @document = Document.find(params[:id])
+  end
+
+  def set_parent
+    if params[:parent_id].present?
+    @parent = Document.find(params[:parent_id]).title
+    else
+      @parent = 'Document'
+    end
+
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

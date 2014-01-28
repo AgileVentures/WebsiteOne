@@ -116,10 +116,12 @@ Feature: Create and maintain projects
       | greetings earthlings  |
       | active                |
 
-  Scenario: Show page has a return link
-    Given I am on the "Show" page for project "hello mars"
-    When I click "Back"
-    Then I should be on the "projects" page
+# No back buttons on show pages
+
+#  Scenario: Show page has a return link
+#    Given I am on the "Show" page for project "hello mars"
+#    When I click "Back"
+#    Then I should be on the "projects" page
 
 #  Scenarios for EDIT page
 

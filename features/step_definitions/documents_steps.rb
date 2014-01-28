@@ -35,3 +35,8 @@ end
 #    visit path_to(button, 'non-existent')
 #  end
 #end
+When(/^I click the sidebar link "([^"]*)"$/) do |link|
+  within('ul#sidebar') do
+    click_link_or_button link
+  end
+end

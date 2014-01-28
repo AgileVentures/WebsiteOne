@@ -9,6 +9,7 @@ describe "documents/new" do
       :body => "MyText",
       :project_id => 1
     ))
+    @parent = 'Document'
   end
 
   context 'user is signed in' do

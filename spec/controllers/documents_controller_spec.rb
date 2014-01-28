@@ -81,7 +81,7 @@ describe DocumentsController do
 
       it 'redirects to the created document' do
         post :create, {project_id: document.project_id, :document => valid_attributes}, valid_session
-        expect(response).to redirect_to project_path(Document.last.project)
+        expect(response).to redirect_to project_document_path(Document.last.project, Document.last)
       end
     end
 
