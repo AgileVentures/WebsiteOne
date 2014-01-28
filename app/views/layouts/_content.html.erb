@@ -1,23 +1,10 @@
 <!-- Begin page content -->
 <section class="bg-3" style="margin-top: -120px;">
-  <!--div class="col-sm-10 col-sm-offset-1">
-    <div class="page-header opacity-dark text-center">
-      <h1><span class="txt-rotate fw700" data-period="2500" data-rotate='[ "Learn", "Code", "Grow" ]'></span> TOGETHER
-      </h1>
-    </div>
-  </div-->
+
   <div class="container">
     <div class="col-sm-12  text-center bg-5">
-      <!--h1>You are not alone</h1-->
       <%= render 'layouts/round_banners' %>
-      <!--h4 class="text-center">
-        Want to pair program online and put some of that BDD and TDD into practise in real projects? We hold pair
-        programming sessions every day with participants from all time zones and on all levels. Bring your own problem
-        set or collaborate on one of our <%= link_to 'Open Source projects', projects_path %>.
-        <br/>
-        Learn new tricks and skills. Teach others and improve your communication ability. Get feedback and insight on
-        things you're making. Make new friends and enjoy hanging out with like minded people :)
-      </h4-->
+
 
     </div>
   </div>
@@ -25,6 +12,14 @@
 </section>
 <div class="divider"></div>
 <div class="container">
+  <div class="col-sm-8 col-sm-offset-2 text-center">
+    <h1>Connect and Collaborate</h1>
+
+    <p class="text-center">
+      We hold pair
+      programming sessions every day with participants from all time zones and on all levels. Bring your own problem
+      set or collaborate on one of our <%= link_to 'Open Source projects', projects_path %>. </p>
+  </div>
   <div class="row">
     <div class="col-sm-6 col-xs-6">
       <div class="view view-tenth">
@@ -37,7 +32,7 @@
             our <%= link_to 'Google+ Pair Programming', 'https://plus.google.com/u/0/communities/100279740984094902927', :target => '_blank' %>
             group and access tens of daily pair programming events</p>
 
-          <%= link_to 'Join now!', 'https://plus.google.com/u/0/communities/100279740984094902927', :class => 'btn btn-danger info', :target => '_blank' %>
+          <%= link_to 'Join now!', 'https://plus.google.com/u/0/communities/100279740984094902927', :class => 'btn btn-danger info-btn', :target => '_blank' %>
         </div>
       </div>
     </div>
@@ -50,7 +45,7 @@
           <h2>Join our Meetup group</h2>
 
           <p>Meet friendly peers to connect, hack, and collaborate with. We meet virtually at least once a week</p>
-          <%= link_to 'Check it out', 'http://www.meetup.com/remote-pair-programming/', :class => 'btn btn-danger info', :target => '_blank' %>
+          <%= link_to 'Check it out', 'http://www.meetup.com/remote-pair-programming/', :class => 'btn btn-danger info-btn', :target => '_blank' %>
         </div>
       </div>
     </div>
@@ -67,7 +62,7 @@
           <p>Bring your own problem
             set or collaborate on one of our <%= link_to 'Open Source projects', projects_path, :target => '_blank' %>
             .</p>
-          <%= link_to 'Read more', projects_path, :class => 'btn btn-danger info', :target => '_blank' %>
+          <%= link_to 'Read more', projects_path, :class => 'btn btn-danger info-btn', :target => '_blank' %>
         </div>
       </div>
     </div>
@@ -76,16 +71,6 @@
 </div>
 
 
-<div class="divider"></div>
-<div class="container">
-  <div class="col-sm-8 col-sm-offset-2 text-center">
-    <h1>Crowdsourced Software Engineering</h1>
-
-    <p class="text-center">
-      Crowdsourcing is an online, distributed problem-solving and production model.
-    </p>
-  </div>
-</div>
 <div class="divider"></div>
 <section class="bg-2">
   <div class="col-sm-10 col-sm-offset-1">
@@ -97,22 +82,39 @@
 <div class="divider"></div>
 <div class="container">
   <div class="col-sm-8 col-sm-offset-2 text-center">
-    <h1>Sub heading</h1>
 
-    <p class="text-center">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet reprehenderit nam quod repudiandae vel animi
-      neque
-      fuga. Obcaecati dolorum quibusdam odit velit reiciendis asperiores nostrum voluptas commodi autem accusantium
-      nihil
-      itaque blanditiis molestiae suscipit hic rerum totam quasi explicabo error saepe tempora iure placeat aliquid
-      magnam
-      corporis esse ipsa minima. Odio ipsa velit non unde quas repellat ducimus quam explicabo assumenda minus doloribus
-      vero recusandae alias optio libero consectetur aspernatur nemo facere aliquam totam nisi corporis cumque nesciunt
-      eum consequuntur!
-    </p>
+      <div class="page-header opacity-dark text-center">
+        <h1><span class="txt-rotate fw700" data-period="2500" data-rotate='[ "Learn", "Code", "Grow" ]'></span> TOGETHER
+        </h1>
+      </div>
+
+    <div class="row">
+      <p class="text-center">
+        Want to pair program online and put some of that BDD and TDD into practise in real projects? We hold pair
+        programming sessions every day with participants from all time zones and on all levels. Bring your own problem
+        set or collaborate on one of our <%= link_to 'Open Source projects', projects_path %>.
+        <br/>
+        Learn new tricks and skills. Teach others and improve your communication ability. Get feedback and insight on
+        things you're making. Make new friends and enjoy hanging out with like minded people :)
+      </p>
+    </div>
   </div>
 </div>
 <div class="divider"></div>
+
+<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).mousemove(function (e) {
+            TweenLite.to($('.bg-2'),
+                    .5,
+                    { css: {
+                        'background-position': parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / 12) + "px, " + parseInt(event.pageX / 15) + "px " + parseInt(event.pageY / 15) + "px, " + parseInt(event.pageX / 30) + "px " + parseInt(event.pageY / 30) + "px"
+                    }
+                    });
+        });
+    });
+</script>
 
 
 

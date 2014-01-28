@@ -178,7 +178,7 @@ When(/^I should see a selector with options$/) do |table|
 end
 
 Then(/^I should see the sidebar$/) do
-  page.find(:css, 'nav#sidebar')
+  page.find(:css, 'nav#sidebarnav')
 end
 
 Then(/(.*) within the ([^"]*)$/) do |s, m|

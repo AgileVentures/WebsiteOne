@@ -378,7 +378,7 @@ margin-bottom: 30px;
 
 
 
-.view-tenth a.info {
+.view-tenth a.info-btn {
     -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
     opacity: 0;
@@ -396,7 +396,7 @@ margin-bottom: 30px;
 
 .view-tenth:hover h2,
 .view-tenth:hover p,
-.view-tenth:hover a.info {
+.view-tenth:hover a.info-btn {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -o-transform: scale(1);

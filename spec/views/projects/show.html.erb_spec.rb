@@ -21,12 +21,6 @@ describe 'projects/show.html.erb' do
     expect(rendered).to have_text("This project has #{follow_count} members")
   end
 
-  it 'renders Back button' do
-    render
-    rendered.should have_link('Back', :href => projects_path)
-  end
-
-
   context 'user is signed in' do
     before :each do
       view.stub(:user_signed_in?).and_return(true)
