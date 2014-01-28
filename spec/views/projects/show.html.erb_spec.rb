@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe 'projects/show.html.erb' do
   before :each do
-    @project = Project.create(id: 1, title: "Title 1", description: "Description 1", status: "Active")
-    assign(:project, Project.first)
-    @user =  FactoryGirl.create(:user)
-
+    @project = mock_model(Project, :id => 1, :title => "Title 1", :description => "Description 1", :status => "Active", :followers_count => 1, :documents => [])
+    @user = mock_model(User)
   end
 
   it 'renders project description' do
