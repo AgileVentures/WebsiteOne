@@ -22,5 +22,6 @@ deploy:
     secure: qjGSUm5TSMjgarhzvBnZhNVyMcLCXpszb68D+aj9rKtNwHggz2dmCyqATr3Ynl38I193/QEaOUEarHguI7ABSW6SCmdAIoAEP/h7bbyOgLAYV9+ct/qhk8N4PdjnKUYUYZ9lsd5UcErMMgD03USQg3CeG1X1LwSX18jcScBHkss=
   app:
       develop: websiteone-develop
+      staging: websiteone-staging
       master: websiteone-production
   run: "rake db:migrate"
