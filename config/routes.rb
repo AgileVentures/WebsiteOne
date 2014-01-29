@@ -1,4 +1,5 @@
 WebsiteOne::Application.routes.draw do
+  get "users/index"
   root 'visitors#index'
   mount Mercury::Engine => '/'
 
