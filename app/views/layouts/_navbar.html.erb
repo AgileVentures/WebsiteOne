@@ -21,6 +21,7 @@
       <ul class="nav navbar-nav nav-justified">
         <li><%= link_to 'About us', page_path('about_us') %></li>
         <li><%= link_to 'Our projects', projects_path %></li>
+        <li><%= link_to 'Our members', users_path %></li>
         <% unless user_signed_in? %>
             <li><%= link_to 'Log in', new_user_session_path %></li>
             <li><%= link_to 'Sign up', new_user_registration_path %></li>

@@ -186,3 +186,9 @@ Given(/^The database is clean$/) do
   DatabaseCleaner.clean
 end
 
+Given /^the following users exist$/ do |table|
+  table.hashes.each do |hash|
+    user = User.create(hash)
+    user.save
+  end
+end
