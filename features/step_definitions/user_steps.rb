@@ -188,7 +188,11 @@ end
 
 Given /^the following users exist$/ do |table|
   table.hashes.each do |hash|
-    user = User.create(hash)
-    user.save
+    @users = User.create(hash)
+    @users.save
   end
+end
+When(/^I should see a list of all users$/) do
+  #this is up to refactoring. Just a quick fix to get things rolling /Thomas
+  page.should have_content 'All users'
 end
