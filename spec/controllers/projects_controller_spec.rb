@@ -30,12 +30,19 @@ describe ProjectsController do
   end
 
   describe '#show' do
+    before(:each) do
+      @project = Project.create! valid_attributes
+      get :show, {:id => @project.id}, valid_session
+    end
 
     it 'assigns the requested project as @project' do
-      project = Project.create! valid_attributes
-      get :show, {:id => project.to_param}, valid_session
-      assigns(:project).should eq(project)
+      assigns(:project).should eq(@project)
     end
+
+    it 'renders the show template' do
+      expect(response).to render_template 'show'
+    end
+
   end
 
   describe '#new' do
