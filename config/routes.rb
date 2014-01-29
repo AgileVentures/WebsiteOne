@@ -5,7 +5,6 @@ WebsiteOne::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => 'registrations', :users => 'index'}
   # devise does not provide some GET routes, which causes routing exceptions
-
   get 'users/sign_out' => redirect('/404.html')
   get 'users/password' => redirect('/404.html')
 
