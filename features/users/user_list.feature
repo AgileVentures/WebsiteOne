@@ -20,11 +20,5 @@ Feature: As a site owner
       | Bob Butcher  |
       | Croutch      |
       | Dave         |
-    And I should see my avatar image
-
-
-
-
-
-
+    And I should see "5" avatars
 
