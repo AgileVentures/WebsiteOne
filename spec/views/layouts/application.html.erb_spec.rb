@@ -85,5 +85,39 @@ describe 'layouts/application.html.erb' do
     end
 
   end
+
+  describe 'contact_form' do
+
+    it 'renders a form' do
+      render
+      rendered.within('#footer') do |selection|
+        expect(selection).to have_css('#contact_form')
+      end
+    end
+    it 'shows  required labels' do
+      render
+      rendered.within('#contact_form') do |selection|
+        expect(selection).to have_text('Name')
+        expect(selection).to have_text('Email')
+        expect(selection).to have_text('Message')
+      end
+
+    end
+    it 'shows required fields' do
+      render
+      rendered.within('#contact_form') do |selection|
+        expect(selection).to have_field('name')
+        expect(selection).to have_field('email')
+        expect(selection).to have_field('message')
+      end
+    end
+    it 'shows Send message button ' do
+      render
+      rendered.within('#contact_form') do |selection|
+        expect(selection).to have_button('send')
+      end
+    end
+  end
+
 end
 
