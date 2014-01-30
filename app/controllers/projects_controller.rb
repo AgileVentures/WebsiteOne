@@ -87,7 +87,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     # permit the mass assignments
-    params.require(:project).permit(:title, :description, :created, :status)
+    params.require(:project).permit(:title, :description, :created, :status, :created_by)
   end
 
 
