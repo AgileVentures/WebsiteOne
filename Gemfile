@@ -21,6 +21,7 @@ gem 'font-awesome-rails'
 gem 'high_voltage'
 gem 'acts_as_tree', '~> 1.5.0'
 gem 'acts_as_follower'
+gem 'will_paginate-bootstrap'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

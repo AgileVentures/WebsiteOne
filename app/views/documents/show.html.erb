@@ -24,10 +24,12 @@
             <li class="list-group-item">
               <strong><%= link_to child.title, project_document_path(@project, child) %>  </strong>
               <div class="pull-right">Created: <%= child.created_at.strftime("%dth %b %Y.") -%></div>
+
             </li>
         <% end %>
       </ul>
   <% end %>
+
   <br />
   <% if user_signed_in? %>
       <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',

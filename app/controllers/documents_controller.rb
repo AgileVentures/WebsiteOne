@@ -12,6 +12,8 @@ class DocumentsController < ApplicationController
     # TODO separate route for "documents for a project"
     #@documents = Document.all
     @documents = Document.where('project_id = ?', @project.id).order(:created_at)
+
+
   end
 
   # GET /documents/1
@@ -41,6 +43,7 @@ class DocumentsController < ApplicationController
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /documents/1

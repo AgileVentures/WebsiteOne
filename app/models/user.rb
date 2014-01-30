@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
     (authentications.empty? || !password.blank?) && super
   end
 
+
+
   def has_auth(provider)
     !authentications.where(provider: provider).empty?
   end
