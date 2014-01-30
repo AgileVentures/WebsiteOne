@@ -671,3 +671,22 @@ margin-bottom: 30px;
     *display:none;
 }
 
+
+/* CSS for All USERS page */
+
+#user-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#user-container .user-item {
+    width: 25%;
+    height: 120px;
+    margin-bottom: -10px!important;
+}
+
+#user-container .user-item h2, .user-item h4, .user-item p, .user-item a  {
+    padding-left: 8px !important;
+}
+
+/* End of CSS for All USERS page */

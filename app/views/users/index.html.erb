@@ -1,11 +1,21 @@
 <div class="container">
   <h1>All users</h1>
-
-  <p>Find me in app/views/users/index.html.erb</p>
-  <% @users.each do |user| %>
-      <p><%= user.first_name %> </p>
+  <% @users.each_slice(3) do |slice| %>
+      <ul id="user-container" class="media-list">
+        <% slice.each do |user| %>
+            <li class="media-item user-item">
+              <a class="pull-left" href="#" target="_blank">
+                <img src="<%= gravatar_for(user.email) %>" class="thumbnail img-rounded media-object">
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"><%= [user.first_name, user.last_name].join(' ') %></h4>
+              </div>
+            </li>
+        <% end %>
+      </ul>
   <% end %>
 </div>
+
 
 
 
