@@ -6,7 +6,7 @@
 <h1>
   <div id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div>
 </h1>
-<small>Created: <%= @document.created_at -%> Project: <%= @project.title %>  </small>
+<small><%= created_date %> <%= created_by %> Project: <%= @project.title %>  </small>
 
 <div class="small-divider"></div>
 <div id="document_body" style="width: 100%" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
