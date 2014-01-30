@@ -4,7 +4,8 @@ WebsiteOne::Application.routes.draw do
   mount Mercury::Engine => '/'
 
   devise_for :users, :controllers => {:registrations => 'registrations', :users => 'index'}
-  # devise does not provide some GET routes, which causes routing exceptions
+  get 'pages/about_us' => 'high_voltage/pages#show', id: 'about_us'
+
   get 'users/sign_out' => redirect('/404.html')
   get 'users/password' => redirect('/404.html')
 
