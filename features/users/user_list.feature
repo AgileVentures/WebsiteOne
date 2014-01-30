@@ -9,17 +9,17 @@ Feature: As a site owner
       | first_name  | last_name   | email                   | password  |
       | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |
       | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |
-      | Carl        | Croutch     | c.croutch@enterprise.us | 12345678  |
-      | Dave        | Dixon       | dave@dixons.me          | 12345678  |
+      |             | Croutch     | c.croutch@enterprise.us | 12345678  |
+      | Dave        |             | dave@dixons.me          | 12345678  |
 
   Scenario: Having All Users page
     When I click "Our members"
     Then I should be on the "our members" page
     And I should see:
-    |Alice |
-    |Bob   |
-    |Carl  |
-    |Dave  |
+      | Alice Jones  |
+      | Bob Butcher  |
+      | Croutch      |
+      | Dave         |
 
 
 

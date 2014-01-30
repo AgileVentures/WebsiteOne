@@ -12,10 +12,6 @@ require 'spec_helper'
 # end
 describe UsersHelper do
 
-  before(:each) do
-    @user = FactoryGirl.build(:user)
-  end
-
   it 'should return empty string when first name and last name are empty' do
     user = mock_model(User)
     result = helper.user_display_name(user)
