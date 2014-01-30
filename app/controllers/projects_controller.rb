@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(project_params.merge("user_id" => current_user.id))
       if @project.save
         redirect_to projects_path, notice: 'Project was successfully created.'
       else

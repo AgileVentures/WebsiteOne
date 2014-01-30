@@ -63,8 +63,10 @@ describe ProjectsController do
               status: 'Status 1'
           }
       }
+      @user = mock_model(User, id: 1)
       @project = mock_model(Project, id: 1)
       Project.stub(:new).and_return(@project)
+      controller.stub(:current_user).and_return(@user)
     end
 
     it 'assigns a newly created project as @project' do
@@ -89,6 +91,12 @@ describe ProjectsController do
 
         #TODO YA add a show view_spec to check if flash is actually displayed
         expect(flash[:notice]).to eq('Project was successfully created.')
+      end
+
+      it 'passes current_user id into new' do
+        Project.should_receive(:new).with({"title"=>"Title 1", "description"=>"Description 1", "status"=>"Status 1", "user_id" => @user.id})
+        @project.stub(:save).and_return(true)
+        post :create, @params
       end
     end
 
