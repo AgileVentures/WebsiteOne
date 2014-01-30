@@ -5,7 +5,7 @@ module ProjectsHelper
       if user.first_name.present?
         ['by:', ([user.first_name, user.last_name].join(' '))].join(' ')
       else
-       [ 'by:', (user.email)].join(' ')
+        ['by:', (user.email).split('@').first].join(' ')
       end
     else
       'No author'
@@ -13,8 +13,8 @@ module ProjectsHelper
   end
 
   def created_date
-    date = @project.created_at.strftime("Created: %Y-%m-%d")
-    return(date)
+    date = @project.created_at.strftime('Created: %Y-%m-%d')
+    (date)
   end
 
 end

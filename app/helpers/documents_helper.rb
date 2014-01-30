@@ -20,7 +20,7 @@ module DocumentsHelper
       if user.first_name.present?
         ['by:', ([user.first_name, user.last_name].join(' '))].join(' ')
       else
-        [ 'by:', (user.email)].join(' ')
+        ['by:', (user.email).split('@').first].join(' ')
       end
     else
       'No author'
@@ -28,8 +28,8 @@ module DocumentsHelper
   end
 
   def created_date
-    date = @documentm.created_at.strftime("Created: %Y-%m-%d")
-    return(date)
+    date = @documentm.created_at.strftime('Created: %Y-%m-%d')
+    (date)
   end
 
 
