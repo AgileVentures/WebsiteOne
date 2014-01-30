@@ -3,7 +3,7 @@
     <%= form_for [@project, @document], :html => { :class => 'form-vertical' } do |f| %>
         <% if @document.errors.any? %>
             <div id="error_explanation">
-              <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
+              <h2><%= pluralize(@document.errors.count, "error") %> prevented this document from being saved:</h2>
 
               <ul>
                 <% @document.errors.full_messages.each do |msg| %>

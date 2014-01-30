@@ -48,11 +48,11 @@ label {
 }
 
 .bg-2 {
-  background: url('http://www.thetelegram.com/media/photos/unis/2013/11/20/2013-11-20-08-21-31-A12-bw-Social-Media-laptop.jpg') no-repeat center center fixed;
+  background: url(http://mymaplist.com/img/parallax/back.png);
+  background-color: #444;
+  background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);
+  padding-top:100px;
   /*background: #ffcc33; */
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+
 }
 

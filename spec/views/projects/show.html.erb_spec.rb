@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe 'projects/show.html.erb' do
   before :each do
-    @project = Project.create(id: 1, title: "Title 1", description: "Description 1", status: "Active")
-    assign(:project, Project.first)
-    @user =  FactoryGirl.create(:user)
+    @user = mock_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org')
+    @project = mock_model(Project, :id => 1, :title => "Title 1", :description => "Description 1", :status => "Active", :followers_count => 1, :user_id => @user.id, :created_at => Time.now, :documents => [])
+    @created_by = ['by:', ([@user.first_name, @user.last_name].join(' '))].join(' ')
+    assign(:project, @project)
+    assign(:user, @user)
+    view.stub(:created_by).and_return(@created_by)
 
   end
 
@@ -13,6 +16,8 @@ describe 'projects/show.html.erb' do
     expect(rendered).to have_text('Title 1')
     expect(rendered).to have_text('Description 1')
     expect(rendered).to have_text('Active')
+    expect(rendered).to have_text('John Simpson')
+
   end
 
   it 'renders a followers count' do
@@ -20,12 +25,6 @@ describe 'projects/show.html.erb' do
     render
     expect(rendered).to have_text("This project has #{follow_count} members")
   end
-
-  it 'renders Back button' do
-    render
-    rendered.should have_link('Back', :href => projects_path)
-  end
-
 
   context 'user is signed in' do
     before :each do
