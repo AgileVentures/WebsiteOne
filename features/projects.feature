@@ -68,9 +68,7 @@ Feature: Create and maintain projects
   Scenario: Creating a new project
     Given I am logged in
     And I am on the "projects" page
-
     When I click "New Project"
-
     Then I should see "Creating a new Project"
     And I should see a form with:
       | Field        |   |
@@ -115,6 +113,8 @@ Feature: Create and maintain projects
       | hello world           |
       | greetings earthlings  |
       | active                |
+    And I should see "Created"
+
 
 # No back buttons on show pages
 

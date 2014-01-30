@@ -1,5 +1,5 @@
 <h1> <%= @project.title %> project</h1>
-<small>Status: <%= @project.status %> Created: <%= @project.created_at %></small>
+<small>Status: <%= @project.status %> <%= created_date %> <%= created_by %></small>
 <div>
   <% if user_signed_in? %>
       <% unless current_user.following?(@project) %>
