@@ -428,7 +428,7 @@ window.Mercury = {
     // need to include a few styles to indicate regions, as well as the different states of them (eg. focused).  These
     // styles are injected into your document, and as simple as they might be, you may want to change them.
     injectedStyles: '' +
-      '[data-mercury]       { min-height: 10px; outline: 1px dotted #09F } ' +
+      '[data-mercury]       { min-height: 30px; outline: 1px dotted #09F } ' +
       '[data-mercury]:focus { outline: none; -webkit-box-shadow: 0 0 10px #09F, 0 0 1px #045; box-shadow: 0 0 10px #09F, 0 0 1px #045 }' +
       '[data-mercury].focus { outline: none; -webkit-box-shadow: 0 0 10px #09F, 0 0 1px #045; box-shadow: 0 0 10px #09F, 0 0 1px #045 }' +
       '[data-mercury]:after { content: "."; display: block; visibility: hidden; clear: both; height: 0; overflow: hidden; }' +
