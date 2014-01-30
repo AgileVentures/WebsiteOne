@@ -32,7 +32,7 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params)
+    @document = Document.new(document_params.merge("user_id" => current_user.id))
     respond_to do |format|
       if @document.save
         format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully created.' }
@@ -103,6 +103,6 @@ class DocumentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def document_params
-    params.require(:document).permit(:title, :body, :project_id, :parent_id, :created_by)
+    params.require(:document).permit(:title, :body, :project_id, :parent_id, :user_id)
   end
 end
