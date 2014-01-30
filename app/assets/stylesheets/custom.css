@@ -671,3 +671,48 @@ margin-bottom: 30px;
     *display:none;
 }
 
+
+/* CSS for All USERS page */
+
+#user-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#user-container .user-item {
+    width: 25%;
+    height: 120px;
+    margin-bottom: -10px!important;
+}
+
+#user-container .user-item h2, .user-item h4, .user-item p, .user-item a  {
+    padding-left: 8px !important;
+}
+
+/* Responsive versions */
+@media (min-width: 768px) and (max-width: 979px) {
+    #user-container .user-item {
+        width: 50%;
+        height: 120px;
+        margin-bottom: -20px!important;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+
+    #user-container .user-item {
+        width: 50%;
+        height: 120px;
+        margin-bottom: -20px!important;
+    }
+}
+@media (max-width: 480px) {
+
+    #user-container .user-item {
+        width: 100%;
+        height: 120px;
+        margin-bottom: -10px!important;
+    }
+}
+
+/* End of CSS for All USERS page */
