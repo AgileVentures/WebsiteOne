@@ -15,8 +15,6 @@ Feature: As a site owner
   Scenario: Having All Users page
     When I click "Our members"
     Then I should be on the "our members" page
-    And I should see a list of all users
-    Then show me the page
     And I should see:
     |Alice |
     |Bob   |
