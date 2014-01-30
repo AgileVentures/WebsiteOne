@@ -6,6 +6,9 @@ module UsersHelper
     str = first.to_s + last.to_s
     if first && last
       [first, last].join(' ')
+    elsif !first && !last
+      # User has not filled in their profile
+      "Anon"
     else
       str
     end
