@@ -8,5 +8,5 @@ Feature:  In order to make my personal avatar visible to other users
     And I am on the "home" page
 
   Scenario: See my avatar on My account page
-    When I click "My Account"
+    When I click pulldown link "My account"
     Then I should see my avatar image

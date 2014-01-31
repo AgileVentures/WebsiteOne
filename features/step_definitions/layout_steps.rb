@@ -1,4 +1,4 @@
-Then(/^I should see a navigation header$/) do
+Then(/^I(?:| should) see a navigation header$/) do
   page.should have_selector('header.masthead')
 end
 
