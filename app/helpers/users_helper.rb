@@ -8,7 +8,7 @@ module UsersHelper
       [first, last].join(' ')
     elsif !first && !last
       # User has not filled in their profile
-      "Anon"
+      user.email.split('@').first
     else
       str
     end

@@ -3,10 +3,10 @@ require 'spec_helper'
 
 describe UsersHelper do
   describe '#user_display_name' do
-    it 'should return Anon when first name and last name are empty' do
-      user = mock_model(User)
+    it 'should return the first part of the users email when first name and last name are empty' do
+      user = mock_model(User, email: 'jsimp@work.co.uk')
       result = helper.user_display_name(user)
-      expect(result).to eq "Anon"
+      expect(result).to eq "jsimp"
     end
 
     it 'should return John when first name is John and last name is empty' do
