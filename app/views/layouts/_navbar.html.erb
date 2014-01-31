@@ -4,6 +4,16 @@
       <div class="col-lg-2">
         <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
       </div>
+      <% if user_signed_in? %>
+      <div class="col-lg-3 pull-right text-right" style="margin-top: 17px;">
+        <img src="<%= gravatar_for(current_user.email) %>" style="width: 30px; height: 30px; margin-right: 5px;" class="img-rounded">
+        <a id="user_info" href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user_details %></a>
+        <ul class="dropdown-menu text-left">
+          <li><%= link_to '<i class="glyphicon glyphicon-user"></i> My account'.html_safe, edit_user_registration_path %> </li>
+          <li><%= link_to '<i class="glyphicon glyphicon-log-out"></i> Log out'.html_safe, destroy_user_session_path, :method => :delete %></li>
+        </ul>
+      </div>
+      <% end %>
     </div>
   </div>
 </header>
@@ -25,9 +35,6 @@
         <% unless user_signed_in? %>
             <li><%= link_to 'Log in', new_user_session_path %></li>
             <li><%= link_to 'Sign up', new_user_registration_path %></li>
-        <% else %>
-            <li><%= link_to 'My Account', edit_user_registration_path %></li>
-            <li><%= link_to 'Log out', destroy_user_session_path, :method => :delete %></li>
         <% end %>
       </ul>
     </div>

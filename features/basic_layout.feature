@@ -18,6 +18,7 @@ Scenario: Render navigation bar
   Then I should see a navigation bar
   And I should see link
   | Our projects |
+  | Our members  |
   | Log in       |
   | Sign up      |
 
