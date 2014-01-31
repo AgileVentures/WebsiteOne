@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe 'layouts/application.html.erb' do
+  before do
+    @user = User.new
+    view.stub(:current_user).and_return(@user)
+  end
   it 'should include css & js files' do
     render
     rendered.should have_xpath("//link[contains(@href, '.css')]")
@@ -66,10 +70,12 @@ describe 'layouts/application.html.erb' do
     end
     it 'should render navigation links' do
       render
+      rendered.should have_css('a#user_info', :visible => true)
+      rendered.should have_link 'My account', :href => edit_user_registration_path, :visible => false
       rendered.within('div.navbar') do |header|
         header.should_not have_link 'Log in', :href => new_user_session_path
         header.should_not have_link 'Sign up', :href => new_user_registration_path
-        header.should have_link 'My Account', :href => edit_user_registration_path
+
       end
     end
 

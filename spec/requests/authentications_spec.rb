@@ -46,7 +46,9 @@ describe 'OmniAuth authentication' do
         it 'should not allow removal of profiles without passwords' do
           visit new_user_session_path
           click_link "#{name}"
-          click_link 'My Account'
+          visit edit_user_registration_path
+          #click_link '#user_info'
+          #click_link 'My Account'
           expect {
             expect {
               click_link "Remove #{name}"
