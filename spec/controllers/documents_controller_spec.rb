@@ -1,17 +1,21 @@
 require 'spec_helper'
 
 describe DocumentsController do
+  let(:user) { double('User', id: '1') }
+  let(:document) { @document }
+  let(:valid_attributes) { {
+      'title' => 'MyString',
+      'body' => 'MyText',
+      'project_id' => "#{document.project_id}",
+      'user_id' => user.id
+  } }
+  let(:valid_session) { {} }
   before(:each) do
-    user = double('user')
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user
     @document = FactoryGirl.create(:document)
   end
 
-  let(:document) { @document }
-  let(:valid_attributes) { { 'title' => 'MyString', 'body' => 'MyText', 'project_id' => "#{document.project_id}"} }
-
-  let(:valid_session) { {} }
 
   describe 'GET index' do
     before(:each) { get :index, { project_id: document.project_id }, valid_session }
@@ -81,7 +85,7 @@ describe DocumentsController do
 
       it 'redirects to the created document' do
         post :create, {project_id: document.project_id, :document => valid_attributes}, valid_session
-        expect(response).to redirect_to project_path(Document.last.project)
+        expect(response).to redirect_to project_document_path(Document.last.project, Document.last)
       end
     end
 
@@ -107,16 +111,16 @@ describe DocumentsController do
     describe 'with valid params' do
       it 'updates the requested document' do
         Document.any_instance.should_receive(:update).with(valid_attributes)
-        put :update, {project_id: document.project_id, :id => document.to_param, :document => valid_attributes}, valid_session
+        put :update, {id: document.to_param, project_id: document.project_id, document: valid_attributes}, valid_session
       end
 
       it 'assigns the requested document as @document' do
-        put :update, {:id => document.to_param, project_id: document.project_id, :document => valid_attributes}, valid_session
+        put :update, {id: document.to_param, project_id: document.project_id, document: valid_attributes}, valid_session
         assigns(:document).should eq(document)
       end
 
       it 'redirects to the document' do
-        put :update, {:id => document.to_param, project_id: document.project_id, :document => valid_attributes}, valid_session
+        put :update, {id: document.to_param, project_id: document.project_id, document: valid_attributes}, valid_session
         response.should redirect_to project_document_path(id: Document.last.id, project_id: Document.last.project_id)
       end
     end

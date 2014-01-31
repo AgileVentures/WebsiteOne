@@ -1,37 +1,41 @@
 <div class="col-md-4 col-md-offset-4" style="margin-top: -80px;  padding-left: 140px; padding-right: 60px">
-  <h1 class="text-center"> Sign up  </h1>
+  <h1 class="text-center"> Sign up </h1>
+  <% if resource.password_required? %>
+      <div class="row">
+        <% supported_third_parties.each do |provider| %>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <%= social_button provider %>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
   <h4 class="text-center">Already a member? <%= link_to "Sign in", new_session_path(resource_name) %></h4>
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-        <fieldset>
-          <div class='form-group'>
-            <%= f.email_field :email, autofocus: true, placeholder: 'Enter email', class: 'form-control input-lg' %>
-          </div>
-          <% if resource.password_required? %>
+      <fieldset>
+        <div class='form-group'>
+          <%= f.email_field :email, autofocus: true, placeholder: 'Enter email', class: 'form-control input-lg' %>
+        </div>
+        <% if resource.password_required? %>
             <div class='form-group'>
               <%= f.password_field :password, placeholder: 'Enter password', class: 'form-control input-lg' %>
             </div>
             <div class='form-group'>
               <%= f.password_field :password_confirmation, placeholder: 'Repeat password', class: 'form-control input-lg' %>
             </div>
-          <% end %>
-          <div class='form-group'>
-            <%= f.submit 'Sign up', class: 'btn btn-primary btn-lg btn-block' %>
-          </div>
-          <%= devise_error_simple_message %>
-        </fieldset>
-    <% end %>
+        <% end %>
+        <div class='form-group'>
+          <%= f.submit 'Sign up', class: 'btn btn-primary btn-lg btn-block' %>
+        </div>
+        <%= devise_error_simple_message %>
+      </fieldset>
+  <% end %>
 
-    <% if resource.password_required? %>
-      <% supported_third_parties.each do |provider| %>
-        <%= social_button provider %>
-      <% end %>
-    <% end %>
 
-    <p>
-      <small>By registering, you understand that we will store and make use the information provided in accordance with
-        our Privacy statement.
-      </small>
-    </p>
-    <%# render 'devise/shared/links' %>
-  </div>
+  <p>
+    <small>By registering, you understand that we will store and make use the information provided in accordance with
+      our Privacy statement.
+    </small>
+  </p>
+  <%# render 'devise/shared/links' %>
+</div>

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
   has_many :authentications, dependent: :destroy
+  has_many :projects
+  has_many :documents
 
   acts_as_follower
 

@@ -20,6 +20,8 @@ def path_to(page_name, id = '')
       edit_project_path(id)
     when 'show' then
       project_path(id)
+    when 'our members' then
+      users_index_path
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -178,7 +180,7 @@ When(/^I should see a selector with options$/) do |table|
 end
 
 Then(/^I should see the sidebar$/) do
-  page.find(:css, 'nav#sidebar')
+  page.find(:css, 'nav#sidebarnav')
 end
 
 Then(/(.*) within the ([^"]*)$/) do |s, m|
