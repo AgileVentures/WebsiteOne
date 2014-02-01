@@ -82,8 +82,7 @@ Given(/^we paginate (\d+) projects per page$/) do |arg|
   #pending
 end
 
-Then(/^I should see these projects in page 1:$/) do |table|
-  # table is a | hello mars      |
+Then(/^I should see these projects in page "([^"]*)"$/) do |table|
  # pending
 end
 

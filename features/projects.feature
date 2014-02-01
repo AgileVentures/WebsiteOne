@@ -5,13 +5,13 @@ Feature: Create and maintain projects
 
   Background:
     Given the following projects exist:
-      | title       | description          | status   |
-      | hello world | greetings earthlings | active   |
-      | hello mars  | greetings aliens     | inactive |
-      | hello jupiter |greetings jupiter folks |active|
-      | hello mercury |greetings mercury folks |inactive|
-      | hello saturn |greetings saturn folks |active|
-      | hello sun |greetings sun folks |active|
+      | title         | description             | status   |
+      | hello world   | greetings earthlings    | active   |
+      | a hello mars    | greetings aliens        | inactive |
+      | hello jupiter |greetings jupiter folks  | active   |
+      | hello mercury |greetings mercury folks  | inactive |
+      | hello saturn  |greetings saturn folks   | active   |
+      | hello sun     |greetings sun folks      | active   |
 #  Scenarios for Index page
 
   Scenario: List of projects in table layout
@@ -68,17 +68,17 @@ Feature: Create and maintain projects
 
   Scenario: Display pagination in "Our Projects" page
     Given I am on the home page
-    And we paginate 5 projects per page
     When I follow "Our projects"
-    Then I should see these projects in page 1:
-
-
+    And we paginate 5 projects per page
+    Then I should see these projects in page "1"
     | hello world     |
     | hello mars      |
     | hello jupiter   |
     | hello mercury   |
     | hello saturn    |
-    Then show me the page
+    When I click "Naxt"
+    Then I should see these projects in page "2"
+    | hello sun       |
 
 
 
@@ -124,15 +124,17 @@ Feature: Create and maintain projects
     Then I should see "Project was not saved. Please check the input."
 
 #  Scenarios for SHOW page
+  # Refactor this step
 
   Scenario: opens "Show" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-    When I click "hello world" in the list of projects
+    Then show me the page
+    When I click "hello saturn" in the list of projects
     Then I should see:
       | Text                  |
-      | hello world           |
-      | greetings earthlings  |
+      | hello saturn           |
+      | greetings saturn folks  |
       | active                |
     And I should see "Created"
 
@@ -149,11 +151,11 @@ Feature: Create and maintain projects
   Scenario: opens "Edit" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-    When I click the "Edit" button for project "hello world"
+    When I click the "Edit" button for project "hello saturn"
     Then I should see a form with:
       | Field        | Text                  |
-      | Title        | hello world           |
-      | Description  | greetings earthlings  |
+      | Title        | hello saturn           |
+      | Description  | greetings saturn folks  |
     And I should see a selector with options
       |Active|
 

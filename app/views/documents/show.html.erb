@@ -7,7 +7,6 @@
   <div id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div>
 </h1>
 <small><%= created_date %> <%= created_by %> Project: <%= @project.title %>  </small>
-<p><%= will_paginate @documents %></p>
 
 <div class="small-divider"></div>
 <div id="document_body" style="width: 100%" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
@@ -24,6 +23,7 @@
 <div class="small-divider"></div>
 <div>
   <% unless @document.children.empty? %>
+      <!--p><%#= will_paginate @documents.children %></p-->
       <% string = 'Documents' %>
       <h2>
         <%= string.singularize if @document.children.count == 1 %>
