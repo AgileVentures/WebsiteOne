@@ -16,9 +16,10 @@ Feature: As a site owner
     When I click "Our members"
     Then I should be on the "our members" page
     And I should see:
+      | Test User    |
       | Alice Jones  |
       | Bob Butcher  |
       | Croutch      |
       | Dave         |
-    And I should see "5" avatars
+    And I should see "5" user avatars
 

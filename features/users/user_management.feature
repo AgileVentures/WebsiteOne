@@ -7,8 +7,9 @@ Feature: Create and maintain projects
     Given I am logged in as user with email "current@email.com", with password "12345678"
     And I am on the "home" page
 
+  @javascript
   Scenario: Having My account page
-    When I click "My Account"
+    When I click pulldown link "My account"
     Then I should see "Account details"
     And I should see a form with:
       | Field                 |                     |
@@ -16,9 +17,9 @@ Feature: Create and maintain projects
       | Last name             |                     |
       | Email                 | current@email.com   |
 
-
+  @javascript
   Scenario: Editing details: successful
-    Given I click "My Account"
+    Given I click pulldown link "My account"
     And I fill in:
       | Field                 | Text      |
       | First name            | John      |
@@ -51,7 +52,7 @@ Feature: Create and maintain projects
 
  @javascript
   Scenario: Cancel my account
-    Given I follow "My Account"
+    Given I click pulldown link "My account"
     When I click "Cancel my account"
     And I accept the warning popup
     Then I should be on the "home" page
