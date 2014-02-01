@@ -169,7 +169,8 @@ end
 
 Then /^I should see my name$/ do
   create_user
-  page.should have_content @user[:first_name]
+  #page.should have_content @user[:first_name]
+  page.should have_content([@user.first_name, @user.last_name].join(' '))
 end
 
 Given /^the sign in form is visible$/ do
@@ -186,3 +187,18 @@ Given(/^The database is clean$/) do
   DatabaseCleaner.clean
 end
 
+Given /^the following users exist$/ do |table|
+  table.hashes.each do |hash|
+    @users = User.create(hash)
+    @users.save
+  end
+end
+When(/^I should see a list of all users$/) do
+  #this is up to refactoring. Just a quick fix to get things rolling /Thomas
+  page.should have_content 'All users'
+end
+
+When(/^I click pulldown link "([^"]*)"$/) do |text|
+  page.find("#user_info").click
+  click_link_or_button text
+end

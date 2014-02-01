@@ -20,8 +20,8 @@ describe 'devise/sessions/new' do
   it 'renders the social buttons' do
     render
     rendered.should have_css('.btn-github')
-    rendered.should have_link('Connect with GitHub', '/auth/github')
+    rendered.should have_link('GitHub', '/auth/github')
     rendered.should have_css('.btn-gplus')
-    rendered.should have_link('Connect with Google+', '/auth/gplus')
+    rendered.should have_link('Google+', '/auth/gplus')
   end
 end

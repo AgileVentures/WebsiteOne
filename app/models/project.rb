@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   validates :title, :description, :status, presence: true
   acts_as_followable
+  belongs_to :user
   has_many :documents
 
   def self.search(search, page)
@@ -9,7 +10,6 @@ class Project < ActiveRecord::Base
              :order => 'title'
   end
 
-
   def url_for_me(action)
     if action == 'show'
       "/projects/#{to_param}"
@@ -17,9 +17,4 @@ class Project < ActiveRecord::Base
       "/projects/#{to_param}/#{action}"
     end
   end
-
-
-
-
-
 end

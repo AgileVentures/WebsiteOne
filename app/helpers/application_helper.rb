@@ -3,6 +3,17 @@ module ApplicationHelper
     hash = Digest::MD5::hexdigest(email.strip.downcase)
     "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=mm"
   end
+  def current_user_details
+    if current_user.present?
+      if current_user.first_name.present?
+        ([current_user.first_name, current_user.last_name].join(' '))
+      else
+        (current_user.email).split('@').first
+      end
+    else
+      'Something is wrong'
+    end
+  end
   
   def resource_name
     :user
@@ -37,7 +48,7 @@ module ApplicationHelper
     }
 
     options[:url] ||= root_path
-    text = options[:text] || (options[:delete] ? 'Remove' : 'Connect with')
+    text = options[:text] || (options[:delete] ? 'Remove' : '')
     path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
         "/auth/#{provider}#{"?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}" if options[:url].present?}"
 

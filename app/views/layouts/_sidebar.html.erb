@@ -1,5 +1,5 @@
 <h3>Current Projects</h3>
-<ul>
+<ul id="sidebar">
   <% current_projects.each_with_index do |p, index| %>
     <% should_focus = project == p %>
     <% has_docs = p.documents.any? %>

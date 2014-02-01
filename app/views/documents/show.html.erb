@@ -6,12 +6,21 @@
 <h1>
   <div id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div>
 </h1>
-<small>Created: <%= @document.created_at.strftime("%dth %b %Y.") -%> Project: <%= @project.title %>  </small>
+<small><%= created_date %> <%= created_by %> Project: <%= @project.title %>  </small>
 <p><%= will_paginate @documents %></p>
 
 <div class="small-divider"></div>
 <div id="document_body" style="width: 100%" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
 
+<div class="small-divider"></div>
+<% if user_signed_in? %>
+    <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
+                data: {save_url: project_document_mercury_update_path(@project, @document)},
+                class: 'btn btn-primary' %>
+    <% if @document.root? %>
+        <%= link_to (['New ', @document.title.singularize].join), new_project_document_path(project_id: @project.id, parent_id: @document.id), :type => 'button', :class => 'btn btn-default' %>
+    <% end %>
+<% end %>
 <div class="small-divider"></div>
 <div>
   <% unless @document.children.empty? %>
@@ -23,14 +32,13 @@
         <% @document.children.each do |child| %>
             <li class="list-group-item">
               <strong><%= link_to child.title, project_document_path(@project, child) %>  </strong>
-              <div class="pull-right">Created: <%= child.created_at.strftime("%dth %b %Y.") -%></div>
-
+              <div class="pull-right">Created: <%= child.created_at -%></div>
             </li>
         <% end %>
       </ul>
   <% end %>
-
   <br />
+
   <% if user_signed_in? %>
       <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
                   data: {save_url: project_document_mercury_update_path(@project, @document)},

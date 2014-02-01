@@ -116,7 +116,7 @@ $(function() {
 
     var affixedNav = $('#nav'),
         header = $('#main_header'),
-        sidebar = $('#sidebar'),
+        sidebar = $('#sidebarnav'),
         notSidebar = $('#not-sidebar'),
         sidebarContainer = $('#sidebar-container'),
         wrapper = $('#wrap'),
@@ -273,6 +273,8 @@ $(function() {
       }
     });
   }
+
+
 
   $(document).on('page:fetch',   function() { NProgress.start(); });
   $(document).on('page:change',  function() { NProgress.done(); });
