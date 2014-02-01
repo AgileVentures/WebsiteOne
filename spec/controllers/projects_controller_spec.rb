@@ -15,11 +15,20 @@ describe ProjectsController do
     controller.stub :current_user => user
   end
 
-  describe '#index' do
-    it 'should render index page for projects' do
+  describe "pagination" do
+    it "should paginate the feed" do
+      visit root_path
+      page.should have_selector("div.pagination")
+    end
+  end
+
+
+    describe '#index' do
+      it 'should render index page for projects' do
       get :index
       expect(response).to render_template 'index'
     end
+
 
     it 'should assign variables to be rendered by view' do
       projects = [double(Project), double(Project)]

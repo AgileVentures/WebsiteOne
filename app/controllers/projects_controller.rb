@@ -10,10 +10,12 @@ class ProjectsController < ApplicationController
     #@projects = Project.order(created_at: :desc)
     @projects = Project.search(params[:search], params[:page])
 
+
   end
 
   def show
     documents
+
   end
 
   def new

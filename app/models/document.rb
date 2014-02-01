@@ -4,6 +4,12 @@ class Document < ActiveRecord::Base
   acts_as_tree
   validates :title, :project_id, presence: true
 
+  def self.search(search, page)
+    paginate :per_page => 5, :page => page,
+             :conditions => ['title like ?', "%#{search}%"],
+             :order => 'project_id'
+  end
+
 
 
   def url_for_me(action)

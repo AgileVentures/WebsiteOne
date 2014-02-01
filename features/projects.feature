@@ -8,7 +8,10 @@ Feature: Create and maintain projects
       | title       | description          | status   |
       | hello world | greetings earthlings | active   |
       | hello mars  | greetings aliens     | inactive |
-
+      | hello jupiter |greetings jupiter folks |active|
+      | hello mercury |greetings mercury folks |inactive|
+      | hello saturn |greetings saturn folks |active|
+      | hello sun |greetings sun folks |active|
 #  Scenarios for Index page
 
   Scenario: List of projects in table layout
@@ -62,6 +65,24 @@ Feature: Create and maintain projects
     And I should not see buttons:
       | Button       |
       | Edit         |
+
+  Scenario: Display pagination in "Our Projects" page
+    Given I am on the home page
+    And we paginate 5 projects per page
+    When I follow "Our projects"
+    Then I should see these projects in page 1:
+
+
+    | hello world     |
+    | hello mars      |
+    | hello jupiter   |
+    | hello mercury   |
+    | hello saturn    |
+    Then show me the page
+
+
+
+
 
 #  Scenarios for NEW page
 

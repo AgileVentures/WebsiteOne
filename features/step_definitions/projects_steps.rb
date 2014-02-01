@@ -77,3 +77,17 @@ end
 When(/^I am not a member of project "([^"]*)"$/) do |name|
   step %Q{I should stop being a member of project "#{name}"}
 end
+
+Given(/^we paginate (\d+) projects per page$/) do |arg|
+  #pending
+end
+
+Then(/^I should see these projects in page 1:$/) do |table|
+  # table is a | hello mars      |
+ # pending
+end
+
+
+Given(/^I am on the home page$/) do
+  visit "/"
+end

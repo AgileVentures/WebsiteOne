@@ -11,7 +11,8 @@ class DocumentsController < ApplicationController
   def index
     # TODO separate route for "documents for a project"
     #@documents = Document.all
-    @documents = Document.where('project_id = ?', @project.id).order(:created_at)
+    #@documents = Document.where('project_id = ?', @project.id).order(:created_at)
+
 
 
   end
@@ -19,6 +20,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    @documents = Document.search(params[:search], params[:page])
   end
 
   # GET /documents/new
