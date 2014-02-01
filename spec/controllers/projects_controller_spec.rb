@@ -23,19 +23,26 @@ describe ProjectsController do
 
     it 'should assign variables to be rendered by view' do
       projects = [double(Project), double(Project)]
-      Project.stub(:all).and_return(projects)
+      Project.stub(:order).and_return(projects)
       get :index
       expect(assigns(:projects)).to eq projects
     end
   end
 
   describe '#show' do
+    before(:each) do
+      @project = Project.create! valid_attributes
+      get :show, {:id => @project.id}, valid_session
+    end
 
     it 'assigns the requested project as @project' do
-      project = Project.create! valid_attributes
-      get :show, {:id => project.to_param}, valid_session
-      assigns(:project).should eq(project)
+      assigns(:project).should eq(@project)
     end
+
+    it 'renders the show template' do
+      expect(response).to render_template 'show'
+    end
+
   end
 
   describe '#new' do
@@ -56,8 +63,10 @@ describe ProjectsController do
               status: 'Status 1'
           }
       }
+      @user = mock_model(User, id: 1)
       @project = mock_model(Project, id: 1)
       Project.stub(:new).and_return(@project)
+      controller.stub(:current_user).and_return(@user)
     end
 
     it 'assigns a newly created project as @project' do
@@ -82,6 +91,12 @@ describe ProjectsController do
 
         #TODO YA add a show view_spec to check if flash is actually displayed
         expect(flash[:notice]).to eq('Project was successfully created.')
+      end
+
+      it 'passes current_user id into new' do
+        Project.should_receive(:new).with({"title"=>"Title 1", "description"=>"Description 1", "status"=>"Status 1", "user_id" => @user.id})
+        @project.stub(:save).and_return(true)
+        post :create, @params
       end
     end
 

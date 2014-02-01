@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   validates :title, :description, :status, presence: true
   acts_as_followable
 
+  belongs_to :user
   has_many :documents
 
 
