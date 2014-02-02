@@ -27,7 +27,7 @@ Feature: Rendering contact us form
       | Email                 | johndoe@gmail.com               |
       | Message               | New message from John Doe       |
     And I click the "Send message" button
-    Then I should see "Your message has been sent successfully"
+    Then I should see "Your message has been sent successfully!"
 
   Scenario: Receiving the message
     Given I have sent the message with "New message from Ivan Petrov"
