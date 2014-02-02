@@ -15,7 +15,16 @@
     <% if current_page? root_path %>
         <%= render 'layouts/content' %>
     <% else %>
-        <%= content_for?(:content) ? yield(:content) : yield %>
+        <div class="container">
+          <div class="col-lg-9">
+            <%= content_for?(:content) ? yield(:content) : yield %>
+          </div>
+          <div class="col-lg-3">
+            <%= render 'layouts/sponsors' %>
+          </div>
+        </div>
+
+
     <% end %>
   </section>
   <div id="push"></div>
