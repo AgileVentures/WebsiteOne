@@ -10,7 +10,8 @@ class VisitorsController < ApplicationController
       return
     end
 
-    if Mailer.contact_form
+    mail = Mailer.contact_form(params)
+    if mail.deliver
       redirect_to '/', notice: 'Your message has been sent successfully!'
     else
       redirect_to '/', alert: 'Your message has not been sent!'
