@@ -26,8 +26,8 @@
   </div>
 
   <div class="sponsorsTier">
-    <a href="/sponsors#ourSponsors" class="seeAllSponsorLink">All sponsors</a>
-    <a href="/sponsors" class="btn btn-danger btn-small">Become a sponsor</a>
+    <%= link_to 'All sponsors', page_path('sponsors'), id: 'ourSponsors'  %>
+    <%= link_to 'Become a sponsor', page_path('sponsors'), id: 'ourSponsors', class: 'btn btn-danger btn-small', type: 'button'  %>
   </div>
   <div id="heroes" class="sponsorsTier text-center">
     <h3>AV Heroes</h3>
@@ -58,7 +58,7 @@
     </a></div>
   </div>
   <div class="sponsorsTier">
-    <a href="/sponsors#ourHeroes" class="seeAllSponsorLink">All heroes</a>
-    <a href="/sponsors#becomeHero" class="btn btn-danger btn-small">Become a hero</a>
+    <%= link_to 'All heroes', page_path('sponsors'), id: 'ourHeroes'  %>
+    <%= link_to 'Become a hero', page_path('sponsors'), id: 'ourHeroes', class: 'btn btn-danger btn-small', type: 'button'  %>
   </div>
 </div>

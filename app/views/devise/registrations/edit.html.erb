@@ -1,11 +1,12 @@
-<div class="row" style="margin-top: -80px;">
-  <div class="col-md-4 col-md-offset-4">
+<div class="container">
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
     <%= devise_error_messages_flash %>
     <h2>Account details</h2>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-1 col-md-offset-4">
+  <div class="col-md-2 col-md-offset-2">
 
     <img src="<%= gravatar_for(resource.email) %>" class="thumbnail img-rounded media-object">
   <p>Member of: <br />
@@ -14,7 +15,7 @@
       <% end %>
  </p>
   </div>
-  <div class="col-md-3 ">
+  <div class="col-md-4 ">
 
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
@@ -45,7 +46,7 @@
     <% supported_third_parties.each do |provider| %>
       <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
     <% end %>
-
+    <div class="divider"></div>
     <p>Unhappy? You will be sorely missed...</p>
     <%= button_to 'Cancel my account', registration_path(resource_name),
                   :data => {:confirm => 'Are you sure?'}, :method => :delete,
@@ -53,4 +54,5 @@
 
     <%# link_to "Back", :back, :class => 'btn btn-default' %>
   </div>
+</div>
 </div>

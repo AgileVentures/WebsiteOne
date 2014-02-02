@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def gravatar_for(email, options = { size: 80 })
+  def gravatar_for(email, options = { size: 180 })
     hash = Digest::MD5::hexdigest(email.strip.downcase)
     "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=mm"
   end
@@ -62,4 +62,6 @@ module ApplicationHelper
   def supported_third_parties
     %w{ github gplus }
   end
+
+
 end
