@@ -11,7 +11,7 @@ Feature: Create and maintain projects
   Scenario: Having My account page
     When I click pulldown link "My account"
     Then I should see "Account details"
-    And I should see a form with:
+    And I should see a form "Account details" with:
       | Field                 |                     |
       | First name            |                     |
       | Last name             |                     |
@@ -20,13 +20,11 @@ Feature: Create and maintain projects
   @javascript
   Scenario: Editing details: successful
     Given I click pulldown link "My account"
-    And I fill in:
+    And I fill in "Account details":
       | Field                 | Text      |
       | First name            | John      |
       | Last name             | Doe       |
       | Email                 | a@a.com   |
-
-
     When I click the "Update" button
     Then I should be on the "home" page
     And I should see "You updated your account successfully."

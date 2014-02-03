@@ -15,6 +15,8 @@ WebsiteOne::Application.routes.draw do
 
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
 
+  post 'mail_contact_form', to: 'visitors#send_contact_form'
+
   resources :projects do
     member do
       get :follow

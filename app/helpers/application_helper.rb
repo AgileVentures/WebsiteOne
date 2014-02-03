@@ -62,6 +62,4 @@ module ApplicationHelper
   def supported_third_parties
     %w{ github gplus }
   end
-
-
 end
