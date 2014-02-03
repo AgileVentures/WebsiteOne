@@ -39,12 +39,22 @@ describe "users/index.html.erb" do
     end
   end
 
-  it 'renders avatar with id: avatar-user.id' do
+  it 'renders avatar link with id: avatar-user.id' do
     render
 
     expect(rendered).to have_link('avatar-1')
     expect(rendered).to have_link('avatar-2')
-    expect(rendered).to have_link('avatar-3')
-    expect(rendered).to have_link('avatar-4')
+  end
+
+  it 'renders avatar-link with href' do
+    render
+    expect(rendered).to have_xpath("//a[@id='avatar-1' and contains(@href, '/users/show/1')]")
+    expect(rendered).to have_xpath("//a[@id='avatar-2' and contains(@href, '/users/show/2')]")
+  end
+
+  it 'renders User name link with href' do
+    render
+    expect(rendered).to have_xpath("//a[text()='Bill Black' and contains(@href, '/users/show/1')]")
+    expect(rendered).to have_xpath("//a[text()='Charles Cyan' and contains(@href, '/users/show/2')]")
   end
 end

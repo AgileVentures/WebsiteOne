@@ -29,4 +29,3 @@ Feature: As a site owner
     Then I should be on the "user profile" page for "Alice"
     And I should see the avatar for "Alice"
     And I should see "Alice Jones"
-    And I should see "alice@btinternet.co.uk"
