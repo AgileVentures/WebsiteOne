@@ -132,7 +132,6 @@ Feature: Create and maintain projects
   Scenario: opens "Show" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-    Then show me the page
     When I click "hello saturn" in the list of projects
     Then I should see:
       | Text                   |
