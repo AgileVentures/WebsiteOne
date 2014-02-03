@@ -1,6 +1,6 @@
 #footer {
     min-height: 260px;
-    margin-top: 140px;
+    margin-top: 40px;
     background-color: #252528;
     color: #fff;
     padding-top: 35px;
@@ -10,8 +10,12 @@
     /* inner footer */ }
 #footer .contact {
     text-align: right; }
+#footer .contact label{
+    color: #ffffff; }
+
 #footer .contact .footer_header {
     text-align: left;
+    margin-top: -20px;
     margin-left: 35px; }
 #footer .contact input[type="text"], #footer .contact textarea {
     border: none;
@@ -20,7 +24,6 @@
     padding: 8px 20px;
     border-radius: 3px;
     font-size: 14px;
-    font-family: Lato !important;
     width: 95%;
     -webkit-transition: background-color .2s linear;
     -moz-transition: background-color .2s linear;
@@ -45,5 +48,7 @@
     font-weight: bold;
     -webkit-transition: background-color .2s linear;
     -moz-transition: background-color .2s linear; }
+
 #footer .contact input[type="submit"]:hover {
-    background-color: #2190DB; }
+    background-color: #2190DB;
+}
