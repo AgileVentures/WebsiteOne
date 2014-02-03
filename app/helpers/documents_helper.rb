@@ -28,7 +28,7 @@ module DocumentsHelper
   end
 
   def created_date
-    date = @documentm.created_at.strftime('Created: %Y-%m-%d')
+    date = @document.created_at.strftime('Created: %Y-%m-%d')
     (date)
   end
 
