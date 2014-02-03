@@ -207,5 +207,5 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   this_user = User.find_by_first_name(user)
   # p user
   # p this_user.inspect
-  visit path_to(page, this_user)
+  expect(current_path).to eq path_to(page, this_user)
 end
