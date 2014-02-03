@@ -93,10 +93,10 @@ Feature: Create and maintain projects
     When I click "New Project"
     Then I should see "Creating a new Project"
     And I should see a form with:
-      | Field       |  |
-      | Title       |  |
-      | Description |  |
-      | Status      |  |
+      | Field       |
+      | Title       |
+      | Description |
+      | Status      |
 
   Scenario: Saving a new project: success
     Given I am logged in

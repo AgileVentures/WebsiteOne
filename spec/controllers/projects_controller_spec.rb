@@ -226,7 +226,6 @@ describe ProjectsController do
 
   it 'shows a notice if requested action for non-existing project ' do
     get :edit,  id: 'non-existent'
-    p response.body
     expect(flash[:alert]).to eq('Requested action failed.  Project was not found.')
     expect(response).to redirect_to(projects_path)
   end
