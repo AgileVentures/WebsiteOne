@@ -183,6 +183,7 @@ Then(/^I should see the sidebar$/) do
   page.find(:css, 'nav#sidebarnav')
 end
 
+#TODO Bryan please replase s and m with meaningful names
 Then(/(.*) within the ([^"]*)$/) do |s, m|
   m = m.downcase
   if m == 'mercury editor'

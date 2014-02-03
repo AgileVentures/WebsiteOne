@@ -9,31 +9,62 @@ Feature: Rendering contact us form
   Background:
     Given I visit the site
 
-  Scenario: Load contact us form
+  Scenario: Rendering contact us form
     Then I should see a footer area
     And I should see "Contact us" form in footer
 
   Scenario: Contact form contents
     And I should see a form with:
+      | Field                 |                     |
       | Name                  |                     |
       | Email                 |                     |
       | Message               |                     |
     And I should see button "Send message"
 
-
-  Scenario: Sending a message
+  Scenario: Sending a message (valid inputs)
     Given I fill in:
-      | Name                  | John Doe                        |
-      | Email                 | johndoe@gmail.com               |
-      | Message               | New message from John Doe       |
+      | Field                 | Contents                        |
+      | Name                  | Ivan Petrov                     |
+      | Email                 | ivan@petrov.com                 |
+      | Message               | New message from Ivan Petrov    |
     And I click the "Send message" button
     Then I should see "Your message has been sent successfully!"
 
-  Scenario: Receiving the message
-    Given I have sent the message with "New message from Ivan Petrov"
-    Then I should receive confirmation email
-    And administrator should receive email with my message
+  Scenario: Sending a message (invalid inputs: no message)
+    Given I fill in:
+      | Field                 | Contents                        |
+      | Name                  | Ivan Petrov                     |
+      | Email                 |                                 |
+      | Message               |                                 |
+    And I click the "Send message" button
+    Then I should see "Please, fill in Name and Message field"
 
+  Scenario: Sending a message (invalid inputs: no name)
+    Given I fill in:
+      | Field                 | Contents                        |
+      | Name                  |                                 |
+      | Email                 |                                 |
+      | Message               | I love your site!               |
+    And I click the "Send message" button
+    Then I should see "Please, fill in Name and Message field"
+
+  Scenario: Receiving the message
+    Given I fill in:
+      | Field                 | Contents                        |
+      | Name                  | Ivan Petrov                     |
+      | Message               | New message from Ivan Petrov    |
+    And I click the "Send message" button
+    Then administrator should receive email with the message
+
+  Scenario: Receiving the message
+    Given I fill in:
+      | Field                 | Contents                        |
+      | Name                  | Ivan Petrov                     |
+      | Email                 | ivan@petrov.com                 |
+      | Message               | New message from Ivan Petrov    |
+    And I click the "Send message" button
+    Then I should receive confirmation email
+    And administrator should receive email with the message
 
 
 
