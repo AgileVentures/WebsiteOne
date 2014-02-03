@@ -62,4 +62,9 @@ module ApplicationHelper
   def supported_third_parties
     %w{ github gplus }
   end
+
+  def valid_email?(email)
+    !!(email =~ /\A([^@\s]+)@((?:[\w]+\.)+[a-z]{2,})\z/i)
+  end
+
 end

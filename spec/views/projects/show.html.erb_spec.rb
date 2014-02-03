@@ -7,7 +7,7 @@ describe 'projects/show.html.erb' do
     @created_by = ['by:', ([@user.first_name, @user.last_name].join(' '))].join(' ')
     assign(:project, @project)
     assign(:user, @user)
-    view.stub(:created_by).and_return(@created_by)
+    view.stub(:project_created_by).and_return(@created_by)
 
   end
 
