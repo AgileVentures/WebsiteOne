@@ -4,7 +4,7 @@
       <ul id="user-container" class="media-list">
         <% slice.each do |user| %>
             <li class="media-item user-item">
-              <a class="pull-left" href="#<% user.id %>" target="_blank">
+              <a class="pull-left" id="<%= "avatar-#{user.id}" %>" href="#<% user.id %>" target="_blank">
                 <img id="avatar" src="<%= gravatar_for(user.email) %>" class="thumbnail img-rounded media-object">
               </a>
               <div class="media-body">
