@@ -26,7 +26,7 @@ Feature: As a site owner
   Scenario: Having user profile page
     Given I am on the "Our members" page
     When I click on the avatar for "Alice"
-    Then I should be on the "profile page"
+    Then I should be on the "user profile" page for "Alice"
     And I should see the avatar for "Alice"
     And I should see "Alice Jones"
     And I should see "alice@btinternet.co.uk"

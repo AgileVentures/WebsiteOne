@@ -202,3 +202,10 @@ When(/^I click pulldown link "([^"]*)"$/) do |text|
   page.find("#user_info").click
   click_link_or_button text
 end
+
+Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
+  this_user = User.find_by_first_name(user)
+  # p user
+  # p this_user.inspect
+  visit path_to(page, this_user)
+end

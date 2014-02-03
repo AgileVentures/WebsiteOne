@@ -22,6 +22,8 @@ def path_to(page_name, id = '')
       project_path(id)
     when 'our members' then
       users_index_path
+    when 'user profile' then
+      users_show_path(id)
     else
       raise('path to specified is not listed in #path_to')
   end
