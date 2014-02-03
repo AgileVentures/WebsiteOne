@@ -7,7 +7,7 @@ Feature: Create and maintain projects
     Given the following projects exist:
       | title         | description             | status   |
       | hello world   | greetings earthlings    | active   |
-      | a hello mars  | greetings aliens        | inactive |
+      | hello mars    | greetings aliens        | inactive |
       | hello jupiter | greetings jupiter folks | active   |
       | hello mercury | greetings mercury folks | inactive |
       | hello saturn  | greetings saturn folks  | active   |
@@ -162,10 +162,9 @@ Feature: Create and maintain projects
     And I should see a selector with options
       | Active |
 
-
   Scenario: Edit page has a return link
     Given I am logged in
-    And I am on the "Edit" page for project "hello mars"
+    And I am on the "edit" page for projects "hello mars"
     When I click "Back"
     Then I should be on the "projects" page
 
