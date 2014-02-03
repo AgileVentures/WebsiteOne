@@ -17,4 +17,19 @@ describe ApplicationHelper do
       expect(helper.gravatar_for(@email, size: 200)).to match /\?s=200&/
     end
   end
+
+  describe '#valid_email?' do
+    it 'returns true if email is valid' do
+      expect(valid_email?('valid@valid.com')).to be_true
+    end
+
+    it 'returns false if email is invalid' do
+      expect(valid_email?('invalid')).to be_false
+      expect(valid_email?('invalid@')).to be_false
+      expect(valid_email?('invalid@invalid')).to be_false
+      expect(valid_email?('invalid@invalid.')).to be_false
+      expect(valid_email?('invalid@.invalid')).to be_false
+      expect(valid_email?('invalid@invalid.i')).to be_false
+    end
+  end
 end
