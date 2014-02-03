@@ -32,13 +32,13 @@ Feature: Create and maintain projects
     Given  I am on the "home" page
     When I follow "Our projects"
     Then I should see:
-      | Text                 |
-      | hello world          |
-      | greetings earthlings |
-      | active               |
-      | hello mars           |
-      | greetings aliens     |
-      | inactive             |
+      | Text                    |
+      | hello jupiter           |
+      | greetings jupiter folks |
+      | active                  |
+      | hello mars              |
+      | greetings aliens        |
+      | inactive                |
 
   Scenario: Show New Project button if user is logged in
     When I am logged in
@@ -109,12 +109,14 @@ Feature: Create and maintain projects
     And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "projects" page
+    And I should see "Project was successfully created."
+    #TODO make it take you to the page with the new project?
+    When I click "Next"
     And I should see:
       | Text            |
       | Title New       |
       | Description New |
       | Active          |
-    And I should see "Project was successfully created."
 
   Scenario: Saving a new project: failure
     Given I am logged in
