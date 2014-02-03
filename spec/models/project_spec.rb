@@ -23,3 +23,11 @@ describe Project do
     end
   end
 end
+
+describe '#search' do
+  before(:each) { 9.times { FactoryGirl.create(:project) } }
+  after(:each) { Project.delete_all }
+  it 'returns paginated values' do
+    Project.search(nil, nil).should eq Project.first 5
+  end
+end
