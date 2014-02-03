@@ -1,5 +1,5 @@
 module ProjectsHelper
-  def created_by
+  def project_created_by
     if @project.user_id.present?
       user = User.find_by_id(@project.user_id)
       if user.first_name.present?
