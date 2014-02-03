@@ -23,3 +23,9 @@ Feature: As a site owner
       | Dave         |
     And I should see "5" user avatars
 
+  Scenario: Having user profile page
+    When I click on the avatar for "Alice"
+    Then I should be on the "profile page"
+    And I should see the avatar for "Alice"
+    And I should see "Alice Jones"
+    And I should see "alice@btinternet.co.uk"

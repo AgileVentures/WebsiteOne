@@ -12,3 +12,8 @@ Then /^I should see "([^"]*)" user avatars$/ do | arg |
     section.should have_xpath("//img[contains(@id, 'avatar')]", :count => arg)
   end
 end
+
+When /^I click on the avatar for "(.*?)"$/ do | user |
+  this_user = User.find_by_first_name(user)
+  step %Q{I follow "avatar-#{this_user.id}"}
+end
