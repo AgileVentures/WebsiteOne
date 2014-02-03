@@ -71,9 +71,11 @@ When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in field, :with => value
 end
 
-When(/^I fill in:$/) do |table|
-  table.rows.each do |row|
-    fill_in row[0], with: row[1]
+When /^I fill in(?: "([^"]*)")?:$/ do |name, table|
+  with_scope(name) do
+    table.rows.each do |row|
+      fill_in row[0], with: row[1]
+    end
   end
 end
 
@@ -92,9 +94,11 @@ end
 #Then /^I am redirected to the "([^"]*)" page$/ do |page|
 #  expect(current_path).to eq path_to(page)
 #end
-Then /^I should see a form with:$/ do |table|
-  table.rows.each do |row|
-    step %Q{the "#{row[0]}" field should contain "#{row[1]}"}
+Then /^I should see a form(?: "([^"]*)")? with:$/ do |name, table|
+  with_scope(name) do
+    table.rows.each do |row|
+      step %Q{the "#{row[0]}" field should contain "#{row[1]}"}
+    end
   end
 end
 
