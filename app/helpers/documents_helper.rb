@@ -16,7 +16,7 @@ module DocumentsHelper
 
   def created_by
     if @document.user_id.present?
-      user = User.find_by_id(@documentm.user_id)
+      user = User.find_by_id(@document.user_id)
       if user.first_name.present?
         ['by:', ([user.first_name, user.last_name].join(' '))].join(' ')
       else
@@ -28,7 +28,7 @@ module DocumentsHelper
   end
 
   def created_date
-    date = @documentm.created_at.strftime('Created: %Y-%m-%d')
+    date = @document.created_at.strftime('Created: %Y-%m-%d')
     (date)
   end
 
