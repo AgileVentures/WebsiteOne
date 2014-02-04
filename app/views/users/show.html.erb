@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-2 col-md-offset-4">
 
-    <img src="<%= gravatar_for(@user.email) %>" class="thumbnail img-rounded media-object">
+    <img src="<%= gravatar_for(@user.email, size: 330) %>" class="thumbnail img-rounded media-object">
     <h3><%= user_display_name @user %></h3>
 
   </div>

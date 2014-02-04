@@ -3,10 +3,6 @@ require 'spec_helper'
 describe UsersController do
 
   describe "GET 'index'" do
-  	# before :all do
-  	# 	@user = mock_model(:user)
-
-  	# end
 
     it "returns http success" do
       get 'index'
@@ -21,11 +17,19 @@ describe UsersController do
   end
 
   describe "GET 'show'" do
-  	it "assigns a user instance" do
-  		pending
-  		get 'show'
-  		assigns(:user).should_not be_nil
-  	end
+    before :each do
+      #@user = double('User')
+    	@user = double('User', id: 1, first_name: 'Hermionie', last_name: 'Granger', email: 'hgranger@hogwarts.ac.uk')
+      User.stub(find: @user)
+    end
+    it "assigns a user instance" do
+  		get 'show', id: @user.id
+  		expect(assigns(:user)).not_to be_nil
+    end
+    it "renders the show view" do
+      get 'show', id: @user.id
+      expect(response).to render_template :show
+    end
   end
 
 end

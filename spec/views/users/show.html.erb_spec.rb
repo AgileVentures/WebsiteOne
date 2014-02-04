@@ -6,19 +6,20 @@ describe "users/show.html.erb" do
 		assign :user, @user
 	end
 
-  it 'renders user avatar' do
-    view.stub(:gravatar_for).and_return('img_link')
+  it 'renders big user avatar' do
+    #view.stub(:gravatar_for).and_return('img_link')
+    expect(view).to receive(:gravatar_for).with(@user.email ,size: 330).and_return('img_link')
     render
     expect(rendered).to have_css('img')
     expect(rendered).to have_xpath("//img[contains(@src, 'img_link')]")
   end
   it 'renders user first and last names' do
   	render
-  	expect(rendered).to have_content(@user.last_name)
+  	expect(rendered).to have_content(@user.first_name)
   	expect(rendered).to have_content(@user.last_name)
   end
   it 'show link to GitHub profile' do
-  	pending("github API integration")
+  	pending("requires github API integration")
   end
 
 
