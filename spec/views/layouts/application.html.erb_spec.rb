@@ -94,6 +94,14 @@ describe 'layouts/application.html.erb' do
         expect(selection).to have_css('#contact_form')
       end
     end
+    it 'shows info link' do
+      render
+      rendered.within('#footer') do |selection|
+        expect(selection).to have_content('Send a traditional email to info@agileventures.org, or use the contact form.')
+        expect(selection).to have_link('info@agileventures.org')
+      end
+    end
+
     it 'shows  required labels' do
       render
       rendered.within('#contact_form') do |selection|
