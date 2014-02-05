@@ -24,6 +24,8 @@ def path_to(page_name, id = '')
       users_index_path
     when 'user profile' then
       users_show_path(id)
+    when 'my accout' then
+      edit_user_registration_path(id)
     else
       raise('path to specified is not listed in #path_to')
   end

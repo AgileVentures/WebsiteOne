@@ -21,7 +21,25 @@ describe "users/show.html.erb" do
   it 'show link to GitHub profile' do
   	pending("requires github API integration")
   end
+  it 'should not display an edit button' do
+    render
+    expect(rendered).not_to have_xpath("//a[contains(@type, 'button')]")
+  end
 
+  context 'users own profile page' do
+    before :each do
+      #logged in as Eric
+      #def signed_in_as_a_valid_user
+        @user_logged_in ||= FactoryGirl.create :user
+        sign_in @user_logged_in # method from devise:TestHelpers
+      #end
+    end
+    it 'displays an edit button' do
+      render
+      expect(rendered).to have_xpath("//a[contains(@type, 'button')]")
+    end
+
+  end
 
   it 'renders list of followed projects'
   it 'renders user statistics'

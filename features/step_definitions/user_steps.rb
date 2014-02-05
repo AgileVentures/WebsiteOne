@@ -204,7 +204,7 @@ When(/^I click pulldown link "([^"]*)"$/) do |text|
 end
 
 Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
-  this_user = User.find_by_first_name(user)
+  this_user = User.find_by_first_name(user) || User.find_by_email(user)
   # p user
   # p this_user.inspect
   expect(current_path).to eq path_to(page, this_user)
