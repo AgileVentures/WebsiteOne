@@ -457,26 +457,6 @@ jQuery(window).on('mercury:ready', function() {
     link.hide();
 });
 
-jQuery(window).on('mercury:ready', function() {
-    var link = $('#mercury_iframe').contents().find('#new_document_link');
-    link.hide();
-});
-
-jQuery(window).on('mercury:ready', function() {
-    var link = $('#mercury_iframe').contents().find('#cancel_link');
-    link.show();
-});
-
-jQuery(window).on('mercury:ready', function() {
-    var link = $('#mercury_iframe').contents().find('#save_link');
-    link.show();
-    link.on('click', function(event) {
-        event.preventDefault();
-        $('.mercury-button.mercury-save-button').click();
-    });
-});
-
 jQuery(window).on('mercury:saved', function() {
     window.location.href = window.location.href.replace(/\/editor\//i, '/') + '/mercury_saved';
 });
-

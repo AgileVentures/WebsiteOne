@@ -52,10 +52,10 @@ GEM
     acts_as_tree (1.5.0)
       activerecord (>= 3.0.0)
     addressable (2.3.5)
-    arel (4.0.1)
+    arel (4.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
-    bootstrap-sass (3.1.0.1)
+    bootstrap-sass (3.0.2.1)
       sass (~> 3.2)
     builder (3.1.4)
     capybara (2.2.1)
@@ -138,7 +138,7 @@ GEM
       rake
     jasmine-core (2.0.0)
     jasmine-jquery-rails (2.0.2)
-    jbuilder (2.0.2)
+    jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jquery-rails (3.1.0)
@@ -147,7 +147,7 @@ GEM
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
-    kgio (2.9.0)
+    kgio (2.9.1)
     launchy (2.4.2)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
@@ -264,7 +264,7 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.8.1)
+    unicorn (4.8.2)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -286,7 +286,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_follower
   acts_as_tree (~> 1.5.0)
-  bootstrap-sass (~> 3.1.0.1)
+  bootstrap-sass (~> 3.0.2.0)
   capybara
   capybara-webkit
   coffee-rails (~> 4.0.0)
@@ -303,8 +303,8 @@ DEPENDENCIES
   high_voltage
   jasmine
   jasmine-jquery-rails
-  jbuilder (~> 2.0.2)
-  jquery-rails (~> 3.1.0)
+  jbuilder (~> 1.2)
+  jquery-rails
   launchy
   mercury-rails!
   omniauth
