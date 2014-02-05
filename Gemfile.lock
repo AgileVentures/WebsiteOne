@@ -126,6 +126,7 @@ GEM
       railties (>= 3.2, < 5.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
+    google-analytics-rails (0.0.4)
     hashie (2.0.5)
     high_voltage (2.1.0)
     hike (1.2.3)
@@ -298,6 +299,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
+  google-analytics-rails
   high_voltage
   jasmine
   jasmine-jquery-rails

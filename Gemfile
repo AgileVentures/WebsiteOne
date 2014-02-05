@@ -22,6 +22,7 @@ gem 'high_voltage'
 gem 'acts_as_tree', '~> 1.5.0'
 gem 'acts_as_follower'
 gem 'coveralls', require: false
+gem 'google-analytics-rails'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
