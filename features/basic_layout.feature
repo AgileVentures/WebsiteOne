@@ -6,7 +6,7 @@ Feature: Setting up basic page layout for site
 
 
   Background:
-    Given the app is in production mode
+#    Given I visit the site in production mode
     Given I visit the site
 
   Scenario: Load basic design elements
@@ -14,8 +14,8 @@ Feature: Setting up basic page layout for site
     And I should see a main content area
     And I should see a footer area
 
-  Scenario: Check for Analytics code in production
-    And the page should include script for Google Analytics
+#  Scenario: Check for Analytics code in production
+#    And the page should include script for Google Analytics
     #And I should see the tracking code
 
   Scenario: Render navigation bar

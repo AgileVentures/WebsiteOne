@@ -37,10 +37,11 @@ When(/^the page should include ([^"]*) for ([^"]*)$/) do |tag, content|
   end
 end
 
-Given /^the app is in production mode$/ do
-  Capybara.current_driver = :selenium
-  #Capybara.app_host = 'http://localhost:3000'
-  Capybara.app_host = 'http://mighty-fortress-9827.herokuapp.com/'
+Given /^(.*)? in production mode$/ do |s|
+  dummy = Object.new
+  Rails.any_instance.should_receive(:env).and_return(dummy)
+  dummy.should_receive(:production?).and_return(true)
+  step s
 end
 
 When /^I go home$/ do
@@ -49,7 +50,7 @@ When /^I go home$/ do
 end
 
 Then /^I should see the tracking code$/ do
-  page.should have_xpath("//script[text()[contains(.,'UA-47795185-1')]]", visible: false)
+  page.should have_xpath("//script[text()[contains(.,#{GA.tracker})]]", visible: false)
 
   #page.body.should match /UA-47795185-1/
 end
