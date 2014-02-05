@@ -102,9 +102,10 @@ Then /^I should see a form(?: "([^"]*)")? with:$/ do |name, table|
   end
 end
 
-Then /^I should see:$/ do |table|
+Then /^I should( not)? see:$/ do |negative, table|
+  expectation = negative ? :should_not : :should
   table.rows.flatten.each do |string|
-    page.should have_text string
+    page.send(expectation, have_text(string))
   end
 end
 

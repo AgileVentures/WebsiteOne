@@ -23,10 +23,13 @@
         </tr>
     <% end %>
     </tbody>
+
   </table>
+
 
   <br>
   <% if user_signed_in? %>
       <%= link_to 'New Document', new_project_document_path(project_id: @project.id), :type => 'button', :class => 'btn btn-default' %>
   <% end %>
 </div>
+

@@ -7,11 +7,12 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    @projects = Project.order(created_at: :desc)
+    @projects = Project.search(params[:search], params[:page])
   end
 
   def show
     documents
+
   end
 
   def new

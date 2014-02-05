@@ -16,6 +16,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    #@documents = Document.search(params[:search], params[:page])
   end
 
   # GET /documents/new
@@ -42,6 +43,7 @@ class DocumentsController < ApplicationController
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /documents/1
