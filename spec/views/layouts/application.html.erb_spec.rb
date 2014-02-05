@@ -11,6 +11,14 @@ describe 'layouts/application.html.erb' do
     rendered.should have_xpath("//script[contains(@src, '.js')]")
   end
 
+  it 'should include the Google analytics script' do
+    dummy = Object.new
+    Rails.should_receive(:env).and_return(dummy)
+    dummy.should_receive(:production?).and_return(true)
+    render
+    rendered.should have_xpath("//script[text()[contains(.,#{GA.tracker})]]")
+  end
+
   it 'should not have div nested inside p' do
     should_not have_selector("p>div")
   end
