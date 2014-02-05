@@ -100,6 +100,7 @@ WebsiteOne::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  GA.tracker = 'UA-47795185-1'
 
   # may be needed for integrating bootstrap with Heroku deployment
   #config.cache_classes = true

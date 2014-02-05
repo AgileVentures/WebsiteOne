@@ -6,11 +6,11 @@ gem 'sass-rails', '~> 4.0.0' # Sass stylesheet language
 gem 'uglifier', '>= 1.3.0'   # Javascript compressor
 gem 'coffee-rails', '~> 4.0.0'  # Coffee-script support
 gem 'therubyracer', platforms: :ruby  # Google V8 javascript engine
-gem 'jquery-rails'  # Use jquery as the JavaScript library
+gem 'jquery-rails', '~> 3.1.0'  # Use jquery as the JavaScript library
 gem 'turbolinks' # Follow links faster
-gem 'jbuilder', '~> 1.2' # Json for declaring
+gem 'jbuilder', '~> 2.0.2'  # Json for declaring
 gem 'devise' # Authentication local and 3rd party
-gem 'bootstrap-sass', '~> 3.0.2.0' # JS Bootstrap library support
+gem 'bootstrap-sass', '~> 3.1.0.1' # JS Bootstrap library support
 gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
 gem 'faker'
@@ -22,6 +22,7 @@ gem 'high_voltage'
 gem 'acts_as_tree', '~> 1.5.0'
 gem 'acts_as_follower'
 gem 'coveralls', require: false
+gem 'google-analytics-rails'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
