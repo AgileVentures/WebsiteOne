@@ -15,10 +15,8 @@
     <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
                 data: {save_url: project_document_mercury_update_path(@project, @document)},
                 class: 'btn btn-primary' %>
-    <%= link_to 'Save', '' , id: 'save_link', class: 'btn btn-primary', style: 'display:none;' %>
-    <%= link_to 'Cancel', '' , id: 'cancel_link', class: 'btn btn-warning', style: 'display:none;' %>
     <% if @document.root? %>
-        <%= link_to (['New ', @document.title.singularize].join), new_project_document_path(project_id: @project.id, parent_id: @document.id), id: 'new_document_link', :type => 'button', :class => 'btn btn-default' %>
+        <%= link_to (['New ', @document.title.singularize].join), new_project_document_path(project_id: @project.id, parent_id: @document.id), :type => 'button', :class => 'btn btn-default' %>
     <% end %>
 <% end %>
 <div class="small-divider"></div>
