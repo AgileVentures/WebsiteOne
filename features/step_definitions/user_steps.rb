@@ -34,6 +34,12 @@ Given /^I exist as an unconfirmed user$/ do
   create_unconfirmed_user
 end
 
+Given /user "([^"]*)" has joined on "([^"]*)"/ do |user_name, date|
+  user = User.find_by_first_name(user_name)
+  user.created_at = date.to_date
+  user.save!
+end
+
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
   fill_in('user_email', :with => email)
@@ -201,4 +207,11 @@ end
 When(/^I click pulldown link "([^"]*)"$/) do |text|
   page.find("#user_info").click
   click_link_or_button text
+end
+
+Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
+  this_user = User.find_by_first_name(user) || User.find_by_email(user)
+  # p user
+  # p this_user.inspect
+  expect(current_path).to eq path_to(page, this_user)
 end

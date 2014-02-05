@@ -14,4 +14,8 @@ module UsersHelper
     end
   end
 
+  def date_format(date)
+    date.strftime("#{date.day.ordinalize} %b %Y")
+  end
+
 end
