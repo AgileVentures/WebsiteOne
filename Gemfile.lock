@@ -55,7 +55,7 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
-    bootstrap-sass (3.0.2.1)
+    bootstrap-sass (3.1.0.1)
       sass (~> 3.2)
     builder (3.1.4)
     capybara (2.2.1)
@@ -75,7 +75,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.3)
+    coffee-script-source (1.7.0)
     colored (1.2)
     columnize (0.3.6)
     coveralls (0.7.0)
@@ -137,16 +137,16 @@ GEM
       rake
     jasmine-core (2.0.0)
     jasmine-jquery-rails (1.5.9)
-    jbuilder (1.5.3)
+    jbuilder (2.0.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
-    jquery-rails (3.0.4)
+    jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
-    kgio (2.8.1)
+    kgio (2.9.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
@@ -208,9 +208,9 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec-core (2.14.7)
-    rspec-expectations (2.14.4)
+    rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.4)
+    rspec-mocks (2.14.5)
     rspec-rails (2.14.1)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -220,7 +220,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     rubyzip (1.1.0)
-    sass (3.2.13)
+    sass (3.2.14)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
@@ -246,24 +246,24 @@ GEM
       sprockets (~> 2.8)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
-    therubyracer (0.12.0)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
-    tins (0.13.1)
+    tins (0.13.2)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.0)
+    turbolinks (2.2.1)
       coffee-rails
     tzinfo (0.3.38)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.8.0)
+    unicorn (4.8.1)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -285,7 +285,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_follower
   acts_as_tree (~> 1.5.0)
-  bootstrap-sass (~> 3.0.2.0)
+  bootstrap-sass (~> 3.1.0.1)
   capybara
   capybara-webkit
   coffee-rails (~> 4.0.0)
@@ -301,8 +301,8 @@ DEPENDENCIES
   high_voltage
   jasmine
   jasmine-jquery-rails
-  jbuilder (~> 1.2)
-  jquery-rails
+  jbuilder (~> 2.0.2)
+  jquery-rails (~> 3.1.0)
   launchy
   mercury-rails!
   omniauth
