@@ -34,6 +34,12 @@ Given /^I exist as an unconfirmed user$/ do
   create_unconfirmed_user
 end
 
+Given /user "([^"]*)" has joined on "([^"]*)"/ do |user_name, date|
+  user = User.find_by_first_name(user_name)
+  user.created_at = date.to_date
+  user.save!
+end
+
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
   fill_in('user_email', :with => email)

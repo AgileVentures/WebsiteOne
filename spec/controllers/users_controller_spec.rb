@@ -19,7 +19,11 @@ describe UsersController do
   describe "GET 'show'" do
     before :each do
       #@user = double('User')
-    	@user = double('User', id: 1, first_name: 'Hermionie', last_name: 'Granger', email: 'hgranger@hogwarts.ac.uk')
+    	@user = double('User', id: 1,
+                     first_name: 'Hermionie',
+                     last_name: 'Granger',
+                     email: 'hgranger@hogwarts.ac.uk',
+                    )
       User.stub(find: @user)
     end
     it "assigns a user instance" do

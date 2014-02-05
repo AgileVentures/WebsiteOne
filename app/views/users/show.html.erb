@@ -22,6 +22,7 @@
     <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary", type: "button" if current_user %>
 
   	<h4>Pair Programming</h4>
+    <p>Joined on: <%=date_format(@user.created_at) %> </p>
   	<!-- TODO Insert list of PP youtube or G+ session links -->
 
   </div>
