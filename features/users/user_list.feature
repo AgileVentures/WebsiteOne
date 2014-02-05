@@ -34,7 +34,7 @@ Feature: As a site owner
     Given I am on the "Our members" page
     When I click on the avatar for "brett@example.com"
     Then I should be on the "user profile" page for "brett@example.com"
-    And I should see button "edit"
-    And I click "edit" button
+    And I should see button "Edit"
+    And I click the "Edit" button
     And I should be on the "my accout" page
     
