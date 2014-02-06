@@ -194,6 +194,11 @@ Then /^my account should be deleted$/ do
   expect(User.find_by_id(@user)).to be_false
 end
 
+Then /I should see a list of videos for user "([^"]*)"/ do |user|
+  pending
+end
+
+
 Given(/^The database is clean$/) do
   DatabaseCleaner.clean
 end
@@ -216,8 +221,6 @@ end
 
 Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   this_user = User.find_by_first_name(user) || User.find_by_email(user)
-  # p user
-  # p this_user.inspect
   expect(current_path).to eq path_to(page, this_user)
 end
 
