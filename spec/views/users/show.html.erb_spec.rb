@@ -9,8 +9,21 @@ describe "users/show.html.erb" do
                              created_at: Date.new(2014, 1, 1)
                       )
 		assign :user, @user
+    @youtube_videos = [{url: "http://www.youtube.com/100", title: "Random"}, {url: "http://www.youtube.com/340", title: "Stuff"}, {url: "http://www.youtube.com/2340", title: "Here's something"}]
+    assign :youtube_videos, @youtube_videos
 	end
 
+  it 'renders list of PP sessions' do
+    render
+    @youtube_videos.each do |link|
+      expect(rendered).to have_link(link[:title], :href => link[:url])
+    end
+  end
+  it 'handles rendering with no PP sessions' do
+    assign(:youtube_videos, nil)
+    render
+    expect(rendered).to have_text("Eric Els has no publicly viewable Youtube videos.")
+  end
   it 'renders big user avatar' do
     #view.stub(:gravatar_for).and_return('img_link')
     expect(view).to receive(:gravatar_for).with(@user.email ,size: 275).and_return('img_link')
@@ -60,6 +73,5 @@ describe "users/show.html.erb" do
 
   it 'renders list of followed projects'
   it 'renders user statistics'
-  it 'renders list of PP sessions'
   it 'renders the embedded YT most recent PP'
 end

@@ -28,6 +28,13 @@
 
     <h4>Pair Programming</h4>
   	<!-- TODO Insert list of PP youtube or G+ session links -->
+    <%if !@youtube_videos.blank?%>
+      <%@youtube_videos.each do |link| %>
+         <%= link_to(link[:title], link[:url]) %>
+      <%end%>
+    <%else%>
+      <h4><%=user_display_name @user %> has no publicly viewable Youtube videos.</h4>
+    <%end%>
 
   </div>
   <div class="col-md-4 col-sm-5">
