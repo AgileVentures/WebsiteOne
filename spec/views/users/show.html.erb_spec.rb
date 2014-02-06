@@ -2,7 +2,12 @@ require 'spec_helper'
 
 describe "users/show.html.erb" do
 	before :each do
-	  @user = mock_model(User, id: 4, :first_name => 'Eric', :last_name => 'Els', :email => 'eric@somemail.se')
+	  @user = mock_model(User, id: 4,
+                             first_name: 'Eric',
+                             last_name: 'Els',
+                             email: 'eric@somemail.se',
+                             created_at: Date.new(2015, 1, 1)
+                      )
 		assign :user, @user
 	end
 
@@ -18,12 +23,19 @@ describe "users/show.html.erb" do
   	expect(rendered).to have_content(@user.first_name)
   	expect(rendered).to have_content(@user.last_name)
   end
+
   it 'show link to GitHub profile' do
   	pending("requires github API integration")
   end
-  it 'should not display an edit button' do
+
+  it 'should not display an edit button if it is not my profile' do
     render
     expect(rendered).not_to have_xpath("//a[contains(@type, 'button')]")
+  end
+
+  it 'should display Joined on ..' do
+    render
+    expect(rendered).to have_text('Joined on: 1st Jan 2015')
   end
 
   context 'users own profile page' do

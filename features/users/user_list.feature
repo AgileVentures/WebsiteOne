@@ -25,10 +25,12 @@ Feature: As a site owner
 
   Scenario: Having user profile page
     Given I am on the "Our members" page
+    And user "Alice" has joined on "01/01/2015"
     When I click on the avatar for "Alice"
     Then I should be on the "user profile" page for "Alice"
     And I should see the avatar for "Alice" at 330 px
     And I should see "Alice Jones"
+    And I should see "Joined on: 1st Jan 2015"
 
   Scenario: Having edit button on the profile page
     Given I am on the "Our members" page
@@ -36,5 +38,4 @@ Feature: As a site owner
     Then I should be on the "user profile" page for "brett@example.com"
     And I should see button "Edit"
     And I click the "Edit" button
-    And I should be on the "my accout" page
-    
+    And I should be on the "my account" page
