@@ -37,6 +37,9 @@ The mission is to support members of the public searching for support groups for
     Project.create!({:title => 'PP Scheduler',
                      :description => "Problem: Lots of people want to pair, but they don't know when each other are available
 Solution: is something that requires absolutely minimal effort on their part to use in order to let them pair",
+                     :status => 'Active'})
+    Project.create!({:title => 'Funniest Computer Ever',
+                     :description => "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
                      :status => 'Active' })
     break
   elsif response == 'n' or response == 'no'

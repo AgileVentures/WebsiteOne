@@ -1,13 +1,26 @@
 require 'spec_helper'
 
 describe 'projects/index.html.erb' do
-  before :each do
-    #TODO Y use factoryGirl
-    @project_one = Project.create(id: 1, title: "Title 1", description: "Description 1", status: "Status 1")
-    @project_two = Project.create(id: 2, title: "Title 2", description: "Description 2", status: "Status 2")
-    @project_three = Project.create(id: 3, title: "Title 3", description: "Description 3", status: "Status 3")
+  let(:projects_collection) { (1..9).map { |id|
+    stub_model(Project, {
+        id: id,
+        title: 'hello',
+        description: 'world',
+        status: 'one',
+        created_at: '2014-01-23 23:39:15'
+    }) } }
 
-    assign(:projects, Project.all)
+  before :each do
+    projects_collection.stub(:total_pages).and_return(2)
+    projects_collection.stub(:current_page).and_return(1)
+    assign(:projects, projects_collection)
+  end
+
+  context 'pagination' do
+    it 'should render previous, next, and page numbers' do
+      render
+      rendered.should have_content '← Previous 1 2 Next →'
+    end
   end
 
   context 'for signed in and not signed in users' do
@@ -28,8 +41,9 @@ describe 'projects/index.html.erb' do
 
     it 'should render a link' do
       render
+      project = projects_collection.first
       rendered.within('table#projects tbody') do |table_row|
-        expect(table_row).to have_link(@project_one.title, href: project_path(@project_one.id))
+        expect(table_row).to have_link(project.title, href: project_path(project.id))
       end
     end
 
@@ -81,7 +95,7 @@ describe 'projects/index.html.erb' do
     it 'renders format in short style' do
       render
       rendered.within('table tr#1 td[1]') do |rendered_date|
-        correct_date = Project.find(1).created_at.strftime("%Y-%m-%d")
+        correct_date = projects_collection.first.created_at.strftime("%Y-%m-%d")
         expect(rendered_date.text).to contain(correct_date)
       end
     end

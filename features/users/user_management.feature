@@ -7,7 +7,7 @@ Feature: Create and maintain projects
     Given I am logged in as user with email "current@email.com", with password "12345678"
     And I am on the "home" page
 
-  @javascript
+
   Scenario: Having My account page
     When I click pulldown link "My account"
     Then I should see "Account details"
