@@ -217,11 +217,15 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
 end
 
 Given(/^I am on my profile page$/) do
-  pending
+  visit edit_user_registration_path(@user)
 end
 
 Then(/^I (should not|should)? see my email$/) do |option|
-  pending
+  if option == "should"
+    page.should have_content @user.email
+  else
+    page.should_not have_content @user.email
+  end
 end
 
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
@@ -235,3 +239,5 @@ end
 Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
   pending
 end
+
+

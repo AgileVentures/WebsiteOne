@@ -36,8 +36,8 @@
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-
-
+        <%= button_to 'Preview', (users_preview_path(resource_name)),
+                  class: 'btn btn-primary btn-lg btn-block', method: 'get' %>
         <div><%= f.submit 'Update', class: 'btn btn-primary btn-lg btn-block' %></div>
     <% end %>
 

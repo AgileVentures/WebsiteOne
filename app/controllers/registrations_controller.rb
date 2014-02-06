@@ -24,6 +24,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def preview
+    redirect_to root_path
+  end
+
   private
 
   def build_resource(*args)

@@ -9,6 +9,7 @@ WebsiteOne::Application.routes.draw do
   get 'users/sign_out' => redirect('/404.html')
   get 'users/password' => redirect('/404.html')
   get 'users/show/:id', to: 'users#show', as: 'users_show'
+  get 'users/preview/:id', to: 'users#preview', as: 'users_preview'
 
   get '/auth/:provider/callback' => 'authentications#create'
   get '/auth/failure' => 'authentications#failure'
