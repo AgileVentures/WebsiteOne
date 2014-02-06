@@ -10,20 +10,20 @@
 
 <div class="small-divider"></div>
 <div id="document_body" style="width: 100%" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
-
 <div class="small-divider"></div>
 <% if user_signed_in? %>
     <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
                 data: {save_url: project_document_mercury_update_path(@project, @document)},
                 class: 'btn btn-primary' %>
+    <%= link_to 'Save', '' , id: 'save_link', class: 'btn btn-primary', style: 'display:none;' %>
+    <%= link_to 'Cancel', '' , id: 'cancel_link', class: 'btn btn-warning', style: 'display:none;' %>
     <% if @document.root? %>
-        <%= link_to (['New ', @document.title.singularize].join), new_project_document_path(project_id: @project.id, parent_id: @document.id), :type => 'button', :class => 'btn btn-default' %>
+        <%= link_to (['New ', @document.title.singularize].join), new_project_document_path(project_id: @project.id, parent_id: @document.id), id: 'new_document_link', :type => 'button', :class => 'btn btn-default' %>
     <% end %>
 <% end %>
 <div class="small-divider"></div>
 <div>
   <% unless @document.children.empty? %>
-      <!--p><%#= will_paginate @documents.children %></p-->
       <% string = 'Documents' %>
       <h2>
         <%= string.singularize if @document.children.count == 1 %>
@@ -38,6 +38,5 @@
       </ul>
   <% end %>
   <br />
-
 
 </div>
