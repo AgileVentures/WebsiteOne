@@ -28,7 +28,7 @@ Feature: As a site owner
     And user "Alice" has joined on "01/01/2015"
     When I click on the avatar for "Alice"
     Then I should be on the "user profile" page for "Alice"
-    And I should see the avatar for "Alice" at 330 px
+    And I should see the avatar for "Alice" at 275 px
     And I should see "Alice Jones"
     And I should see "Joined on: 1st Jan 2015"
 
