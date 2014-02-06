@@ -47,7 +47,7 @@ Feature: As a site owner
   Scenario: List of users youtube videos
     #TODO YA add a step Given I am on user profile page for "user"
     Given I am on the "Our members" page
-    And user "Alice" has videos in playlist "PP sessions"
+    And user "Alice" has YouTube account id "UCgTOz02neY70sqnk05zNkGA" with some videos in it
 
     When I click on the avatar for "Alice"
 

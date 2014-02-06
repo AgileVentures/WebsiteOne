@@ -1,9 +1,11 @@
+require './lib/youtube/youtube_search'
+
 Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
 
 Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password )
+  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
@@ -43,6 +45,12 @@ end
 Given /^today is "([^"]*)"$/ do |date|
   Date.stub(today: date.to_date)
   #distance_of_time_in_words('01/01/2013'.to_date, Date.current)
+end
+
+Given /^user "([^"]*)" has YouTube account id "([^"]*)" with some videos in it/ do |user, account_id|
+  @user_youtube_id = account_id
+  @youtube_user_response_xml = File.read('spec/fixtures/youtube_user_response.xml')
+
 end
 
 ### WHEN ###
@@ -195,7 +203,10 @@ Then /^my account should be deleted$/ do
 end
 
 Then /I should see a list of videos for user "([^"]*)"/ do |user|
-  pending
+  response = YoutubeSearch.user_videos(@user_youtube_id)
+  correct_number = YoutubeSearch.parse(@youtube_user_response_xml).count
+  video_links = page.find(:xpath, "//a[@src='http://www.youtube.com/watch']")
+  expect(video_links).to have(correct_number).items
 end
 
 
