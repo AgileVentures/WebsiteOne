@@ -13,7 +13,7 @@ describe "users/show.html.erb" do
 
   it 'renders big user avatar' do
     #view.stub(:gravatar_for).and_return('img_link')
-    expect(view).to receive(:gravatar_for).with(@user.email ,size: 330).and_return('img_link')
+    expect(view).to receive(:gravatar_for).with(@user.email ,size: 275).and_return('img_link')
     render
     expect(rendered).to have_css('img')
     expect(rendered).to have_xpath("//img[contains(@src, 'img_link')]")
