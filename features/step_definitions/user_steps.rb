@@ -215,3 +215,23 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   # p this_user.inspect
   expect(current_path).to eq path_to(page, this_user)
 end
+
+Given(/^I am on my profile page$/) do
+  pending
+end
+
+Then(/^I (should not|should)? see my email$/) do |option|
+  pending
+end
+
+When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
+  pending
+end
+
+Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
+  pending
+end
+
+Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
+  pending
+end
