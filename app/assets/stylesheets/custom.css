@@ -715,3 +715,21 @@ margin-bottom: 30px;
 }
 
 /* End of CSS for All USERS page */
+
+/* CSS for USER PROFILE page */
+
+.avatar-group .avatar-lower {
+    width: 330px;
+    margin-top: -70px;
+    margin-left: 20px;
+    margin-bottom: 50px;
+}
+
+.avatar-group .avatar-lower h3 {
+    color: white;
+    text-shadow: 2px 1px 1px black;
+}
+
+/* Responsive versions */
+
+/* End of CSS for USER PROFILE page */
