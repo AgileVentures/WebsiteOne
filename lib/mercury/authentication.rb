@@ -2,7 +2,7 @@ module Mercury
   module Authentication
 
     def can_edit?
-      if user_signed_in? and /editor(\/|\/\/)projects\/\d+\/documents\/\d+/i.match(request.env['PATH_INFO'])
+      if user_signed_in? and /editor(\/|\/\/)projects\/[^\/]+\/documents\/[^\/]+/i.match(request.env['PATH_INFO'])
         # TODO Bryan: examine user privileges
         true
       else

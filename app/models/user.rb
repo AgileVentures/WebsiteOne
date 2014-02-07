@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   #validates :first_name, :last_name, presence: true
 
+  # TODO Bryan: implement slug for users
+  #extend FriendlyId
+  #friendly_id :display_name, :slugged
+
   validates :email, uniqueness: true
   has_many :authentications, dependent: :destroy
   has_many :projects
@@ -20,8 +24,6 @@ class User < ActiveRecord::Base
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
-
-
 
   def has_auth(provider)
     !authentications.where(provider: provider).empty?

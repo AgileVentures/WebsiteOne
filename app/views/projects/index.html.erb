@@ -21,11 +21,11 @@
   <% @projects.each do |project| %>
 
     <tr id="<%= project.id %>">
-      <td><h3><%= link_to project.title, project_path(project.id) %></h3>
+      <td><h3><%= link_to project.title, project_path(project) %></h3>
         <small>Status: <%= project.status %> Created: <%= project.created_at.strftime("%Y-%m-%d") %></small>
         <p><%= project.description.truncate(250, separator: ' ') %></p></td>
       <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_project_path(project.id), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
+        <td><%= link_to 'Edit', edit_project_path(project), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
       <% end %>
     </tr>
 
