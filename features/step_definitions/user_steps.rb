@@ -41,7 +41,8 @@ Given /user "([^"]*)" has joined on "([^"]*)"/ do |user_name, date|
 end
 
 Given /^today is "([^"]*)"$/ do |date|
-  pending
+  Date.stub(today: date.to_date)
+  #distance_of_time_in_words('01/01/2013'.to_date, Date.current)
 end
 
 ### WHEN ###
