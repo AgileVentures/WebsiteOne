@@ -72,3 +72,4 @@ end
 World(ApplicationHelper)
 World(Helpers)
 World(WithinHelpers)
+World(ActionView::Helpers)

@@ -38,7 +38,7 @@ describe "users/show.html.erb" do
 
   it 'should display Joined on ..' do
     render
-    expect(rendered).to have_text('Joined on: 1st Jan 2015')
+    expect(rendered).to have_text('Member for: over 1 month')
   end
 
   context 'users own profile page' do
