@@ -29,8 +29,11 @@ describe "users/show.html.erb" do
   end
 
   it 'should not display an edit button if it is not my profile' do
+    @user_logged_in ||= FactoryGirl.create :user
+    sign_in @user_logged_in
+
     render
-    expect(rendered).not_to have_xpath("//a[contains(@type, 'button')]")
+    expect(rendered).not_to have_link('Edit', href: '/users/edit')
   end
 
   it 'should display Joined on ..' do
@@ -46,10 +49,11 @@ describe "users/show.html.erb" do
         sign_in @user_logged_in # method from devise:TestHelpers
       #end
     end
-    it 'displays an edit button' do
+    it 'displays an edit button if it is my profile' do
       render
       expect(rendered).to have_xpath("//a[contains(@type, 'button')]")
     end
+
 
   end
 

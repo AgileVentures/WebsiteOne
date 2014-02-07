@@ -40,6 +40,10 @@ Given /user "([^"]*)" has joined on "([^"]*)"/ do |user_name, date|
   user.save!
 end
 
+Given /^today is "([^"]*)"$/ do |date|
+  pending
+end
+
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
   fill_in('user_email', :with => email)

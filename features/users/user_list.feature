@@ -26,11 +26,12 @@ Feature: As a site owner
   Scenario: Having user profile page
     Given I am on the "Our members" page
     And user "Alice" has joined on "01/01/2015"
+    And today is "07/02/2015"
     When I click on the avatar for "Alice"
     Then I should be on the "user profile" page for "Alice"
     And I should see the avatar for "Alice" at 275 px
     And I should see "Alice Jones"
-    And I should see "Joined on: 1st Jan 2015"
+    And I should see "Member for: over 1 month"
 
   Scenario: Having edit button on the profile page
     Given I am on the "Our members" page
