@@ -21,7 +21,8 @@ Feature: As a site user
     Given I am on my edit profile page
     When I set my email to be public
     And I click "Update"
-    Then My email should be public
+    And I am on my profile page
+    Then I should see my email
 
     # Bryan: To be added back later in another story
 #  Scenario: Should be able to make my email private again
