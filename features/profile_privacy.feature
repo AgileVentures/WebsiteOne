@@ -5,25 +5,29 @@ Feature: As a site user
   Background:
     Given I am logged in as user with email "brett@example.com", with password "12345678"
 
-  @javascript
   Scenario: Email should be private by default
     Given I am on my profile page
     When I click "Preview"
     Then I should not see my email in the preview
 
-  @javascript
-  Scenario: Should be able to make my email public
+  Scenario: Should be preview my email as public
     Given I am on my profile page
     When I set my email to be public
     And I click "Preview"
     Then I should see my email in the preview
 
-  # Scenario: Should be able to make my email private again
-  #   Given My email was set to public
-  #   And I am on my profile page
-  #   When I set my email to be private
-  #   And I click "Preview"
-  #   Then I should not see my email
+  Scenario: Should be able to make my email public
+    Given I am on my profile page
+    When I set my email to be public
+    And I click "Update"
+    Then My email should be public
+
+  Scenario: Should be able to make my email private again
+     Given My email was set to public
+     And I am on my profile page
+     When I set my email to be private
+     And I click "Preview"
+     Then I should not see my email in the preview
 
   # Scenario: GitHub profiles should be private by default
   #   Given I am on my profile page

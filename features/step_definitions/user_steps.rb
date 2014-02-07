@@ -232,8 +232,13 @@ Then(/^(.*) in the preview$/) do |s|
   page.within(:css, 'div.preview_box') { step(s) }
 end
 
+Then(/^My email should be public$/) do
+  user = User.find(@user.id)
+  expect(user.display_email).to be_true
+end
+
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
-  check("display_#{value}")
+  check("user_display_#{value}")
 end
 
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|

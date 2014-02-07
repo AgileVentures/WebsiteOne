@@ -18,6 +18,8 @@ class RegistrationsController < Devise::RegistrationsController
         account_update_params.delete('password_confirmation')
       end
 
+      p account_update_params
+
       # Bryan: creates a new but identical object
       @user = User.find(current_user.id)
       if @user.update_attributes(account_update_params)

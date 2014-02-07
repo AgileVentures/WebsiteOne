@@ -37,7 +37,7 @@
             <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
           </div>
           <div><%= f.label :display_email %>
-            <%= f.check_box :display_email, id: 'display_email' %>
+            <%= f.check_box :display_email %>
           </div>
         </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
