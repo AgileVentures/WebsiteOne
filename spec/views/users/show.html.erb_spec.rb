@@ -51,7 +51,7 @@ describe "users/show.html.erb" do
     end
     it 'displays an edit button if it is my profile' do
       render
-      expect(rendered).to have_xpath("//a[contains(@type, 'button')]")
+      expect(rendered).to_not have_xpath("//a[contains(@type, 'button')]")
     end
 
 
