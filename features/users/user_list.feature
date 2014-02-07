@@ -39,3 +39,8 @@ Feature: As a site owner
     And I should see button "Edit"
     And I click the "Edit" button
     And I should be on the "my account" page
+
+  Scenario: Not seeing an edit button on others profile pages
+    Given I am on the "Our members" page
+    When I click on the avatar for "Bob"
+    And I should not see button "Edit"
