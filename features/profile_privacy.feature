@@ -9,14 +9,14 @@ Feature: As a site user
   Scenario: Email should be private by default
     Given I am on my profile page
     When I click "Preview"
-    Then I should not see my email
+    Then I should not see my email in the preview
 
   @javascript
   Scenario: Should be able to make my email public
     Given I am on my profile page
     When I set my email to be public
     And I click "Preview"
-    Then I should see my email
+    Then I should see my email in the preview
 
   # Scenario: Should be able to make my email private again
   #   Given My email was set to public

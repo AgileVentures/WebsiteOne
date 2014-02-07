@@ -222,10 +222,14 @@ end
 
 Then(/^I (should not|should)? see my email$/) do |option|
   if option == "should"
-    page.within(:css, 'div.preview_box') { @user.email }
+    page.should have_content @user.email
   else
     page.should_not have_content @user.email
   end
+end
+
+Then(/^(.*) in the preview$/) do |s|
+  page.within(:css, 'div.preview_box') { step(s) }
 end
 
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
