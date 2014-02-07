@@ -6,7 +6,7 @@ describe "users/show.html.erb" do
                              first_name: 'Eric',
                              last_name: 'Els',
                              email: 'eric@somemail.se',
-                             created_at: Date.new(2015, 1, 1)
+                             created_at: Date.new(2014, 1, 1)
                       )
 		assign :user, @user
 	end
@@ -37,8 +37,9 @@ describe "users/show.html.erb" do
   end
 
   it 'should display Joined on ..' do
+    Date.stub(today:'07/02/2014'.to_date)
     render
-    expect(rendered).to have_text('Member for: over 1 month')
+    expect(rendered).to have_text('Member for: about 1 month')
   end
 
   context 'users own profile page' do

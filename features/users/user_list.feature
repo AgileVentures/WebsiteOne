@@ -25,8 +25,8 @@ Feature: As a site owner
 
   Scenario: Having user profile page
     Given I am on the "Our members" page
-    And user "Alice" has joined on "01/01/2015"
-#    And today is "07/02/2015"
+    And user "Alice" has joined on "01/01/2014"
+    And today is "07/02/2014"
     When I click on the avatar for "Alice"
     Then I should be on the "user profile" page for "Alice"
     And I should see the avatar for "Alice" at 275 px
