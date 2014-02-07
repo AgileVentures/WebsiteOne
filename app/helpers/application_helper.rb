@@ -67,7 +67,4 @@ module ApplicationHelper
     !!(email =~ /\A([^@\s]+)@((?:[\w]+\.)+[a-z]{2,})\z/i)
   end
 
-  def display_email?
-    session[:display_email]
-  end
 end

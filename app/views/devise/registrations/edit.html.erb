@@ -4,6 +4,11 @@
     <h2>Account details</h2>
   </div>
 </div>
+<div class="row preview_box">
+  <% if params[:preview] %>
+    <%= render 'preview' %>
+  <% end %>
+</div>
 <div class="row">
   <div class="col-md-1 col-md-offset-4">
 

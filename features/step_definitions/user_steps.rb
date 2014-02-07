@@ -222,7 +222,7 @@ end
 
 Then(/^I (should not|should)? see my email$/) do |option|
   if option == "should"
-    page.should have_content @user.email
+    page.within(:css, 'div.preview_box') { @user.email }
   else
     page.should_not have_content @user.email
   end

@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
     if params[:preview]
       params[:user][:display_email] == '1' ? display_email = true : display_email = false
       session[:display_email] = display_email
-      redirect_to users_preview_path(current_user.id)
+      render :action => 'edit'
     else
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
 
@@ -32,7 +32,9 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def preview
+    @user = current_user
   end
+
 
   private
 
