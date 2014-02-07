@@ -229,7 +229,7 @@ Then(/^I (should not|should)? see my email$/) do |option|
 end
 
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
-  pending
+  check("display_#{value}")
 end
 
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
