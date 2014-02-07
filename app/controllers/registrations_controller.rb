@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     # raise 'sf'
     if params[:preview]
       params[:user][:display_email] == '1' ? display_email = true : display_email = false
-      session[:display_email] = display_email
+      resource.display_email = display_email
       render :action => 'edit'
     else
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
@@ -17,8 +17,6 @@ class RegistrationsController < Devise::RegistrationsController
         account_update_params.delete('password')
         account_update_params.delete('password_confirmation')
       end
-
-      p account_update_params
 
       # Bryan: creates a new but identical object
       @user = User.find(current_user.id)
