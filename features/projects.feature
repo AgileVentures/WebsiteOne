@@ -111,6 +111,7 @@ Feature: Create and maintain projects
     Then I should be on the "projects" page
     And I should see "Project was successfully created."
     #TODO make it take you to the page with the new project?
+    And show me the page
     When I click "Next"
     And I should see:
       | Text            |

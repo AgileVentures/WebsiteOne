@@ -63,10 +63,10 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_link 'Title 2'
   end
 
-  it "displays a preview button" do
-    render
-    expect(rendered).to have_link 'Preview'
-  end
+  #it "displays a preview button" do
+  #  render
+  #  expect(rendered).to have_link 'Preview'
+  #end
 
   #it 'shows Back button' do
   #  render

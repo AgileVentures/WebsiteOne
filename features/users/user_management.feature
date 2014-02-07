@@ -9,7 +9,7 @@ Feature: Create and maintain projects
 
 
   Scenario: Having My account page
-    When I click pulldown link "My account"
+    Given I am on my edit profile page
     Then I should see "Account details"
     And I should see a form "Account details" with:
       | Field                 |                     |
@@ -19,7 +19,7 @@ Feature: Create and maintain projects
 
   @javascript
   Scenario: Editing details: successful
-    Given I click pulldown link "My account"
+    Given I am on my edit profile page
     And I fill in "Account details":
       | Field                 | Text      |
       | First name            | John      |
@@ -50,7 +50,7 @@ Feature: Create and maintain projects
 
  @javascript
   Scenario: Cancel my account
-    Given I click pulldown link "My account"
+    Given I am on my edit profile page
     When I click "Cancel my account"
     And I accept the warning popup
     Then I should be on the "home" page
