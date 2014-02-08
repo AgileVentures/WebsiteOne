@@ -10,7 +10,8 @@ class Project < ActiveRecord::Base
   def self.search(search, page)
     paginate :per_page => 5, :page => page,
              :conditions => ['title like ?', "%#{search}%"],
-             :order => 'title'
+             :order => 'LOWER(title)'
+
   end
 
   def url_for_me(action)
