@@ -1,6 +1,6 @@
 class Document < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :slug_candidates, use: :slugged
 
   belongs_to :project
   belongs_to :user
@@ -23,5 +23,13 @@ class Document < ActiveRecord::Base
       "/projects/#{project.to_param}/documents/#{to_param}/#{action}"
     end
 
+  end
+
+  def slug_candidates
+    [ :title, [:title, :project_title] ]
+  end
+
+  def project_title
+    project.title
   end
 end

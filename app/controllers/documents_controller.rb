@@ -51,7 +51,7 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @document.update(document_params)
-        format.html { redirect_to project_document_path(id: @document.id, project_id: @document.project_id), notice: 'Document was successfully updated.' }
+        format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
