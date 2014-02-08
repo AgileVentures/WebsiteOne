@@ -18,7 +18,6 @@
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
-
 $(function() {
   function ready() {
     // Bryan: run these functions only in the home page

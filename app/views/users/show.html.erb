@@ -2,27 +2,31 @@
   <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1">
 
     <div class="avatar-group">
-        <img src="<%= gravatar_for(@user.email, size: 330) %>" class="thumbnail img-rounded media-object">
+        <img src="<%= gravatar_for(@user.email, size: 275) %>" class="thumbnail img-rounded media-object">
         <div class="avatar-lower">
             <h3><%= user_display_name @user %></h3>
         </div>
     </div>
-
+    <p>Joined on: <%=date_format(@user.created_at) %> </p>
+    <p>Member for: <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
   </div>
   <div class="col-md-4 col-sm-5">
 
-  	<h4>Projects</h3>
+  	<h4>Projects</h4>
   	<!-- TODO Insert list of followed projects -->
 
-	</div>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1">
-    
-    <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary", type: "button" if current_user %>
 
-  	<h4>Pair Programming</h4>
-    <p>Joined on: <%=date_format(@user.created_at) %> </p>
+    <% if @user.display_email%>
+        <h3> <%= @user.email %></h3>
+    <% end %>
+
+    <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary", type: "button" if @user.eql?(current_user)%>
+
+    <h4>Pair Programming</h4>
   	<!-- TODO Insert list of PP youtube or G+ session links -->
 
   </div>

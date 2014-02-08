@@ -40,6 +40,11 @@ Given /user "([^"]*)" has joined on "([^"]*)"/ do |user_name, date|
   user.save!
 end
 
+Given /^today is "([^"]*)"$/ do |date|
+  Date.stub(today: date.to_date)
+  #distance_of_time_in_words('01/01/2013'.to_date, Date.current)
+end
+
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
   fill_in('user_email', :with => email)
@@ -214,4 +219,61 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   # p user
   # p this_user.inspect
   expect(current_path).to eq path_to(page, this_user)
+end
+
+Given(/^I am on my (.*) page$/) do |page|
+  if page == 'profile'
+    visit users_show_path(@user)
+  elsif page == 'edit profile'
+    visit edit_user_registration_path(@user)
+  else
+    pending
+  end
+end
+
+Then(/^I (should not|should)? see my email$/) do |option|
+  if option == "should"
+    page.should have_content @user.email
+  else
+    page.should_not have_content @user.email
+  end
+end
+
+Then(/^(.*) in the preview$/) do |s|
+  page.within(:css, 'div.preview_box') { step(s) }
+end
+
+Then(/^My email should be public$/) do
+  user = User.find(@user.id)
+  expect(user.display_email).to be_true
+end
+
+When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
+  if option == 'public'
+    check("user_display_#{value}")
+  end
+end
+
+Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
+  if value == 'email'
+    @user.update_attributes(display_email: (option == 'value'))
+  else
+    pending
+  end
+end
+
+Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
+  pending
+end
+
+Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
+  if name == 'Display email'
+    if option == 'should'
+      page.find(:css, 'input#user_display_email').should be_checked
+    else
+      page.find(:css, 'input#user_display_email').should_not be_checked
+    end
+  else
+    pending
+  end
 end

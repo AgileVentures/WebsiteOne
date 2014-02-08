@@ -10,6 +10,20 @@ WebsiteOne::Application.routes.draw do
   get 'users/password' => redirect('/404.html')
   get 'users/show/:id', to: 'users#show', as: 'users_show'
 
+  resources :projects do
+    member do
+      get :follow
+      get :unfollow
+    end
+
+    resources :documents do
+      put :mercury_update
+      get :mercury_saved
+    end
+  end
+
+  get 'projects/:project_id/:id', to: 'documents#show'
+
   get '/auth/:provider/callback' => 'authentications#create'
   get '/auth/failure' => 'authentications#failure'
 
@@ -17,15 +31,5 @@ WebsiteOne::Application.routes.draw do
 
   post 'mail_contact_form', to: 'visitors#send_contact_form'
 
-  resources :projects do
-    member do
-      get :follow
-      get :unfollow
-    end
-    resources :documents do
-      put :mercury_update
-      get :mercury_saved
-    end
-  end
 
 end

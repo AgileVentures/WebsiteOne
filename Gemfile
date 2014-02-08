@@ -24,6 +24,7 @@ gem 'acts_as_follower'
 gem 'will_paginate-bootstrap'
 gem 'coveralls', require: false
 gem 'google-analytics-rails'
+gem 'friendly_id', '~> 5.0.0'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
