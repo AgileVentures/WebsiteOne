@@ -8,11 +8,9 @@ class Project < ActiveRecord::Base
   has_many :documents
 
   def self.search(search, page)
-    paginate :per_page => 5, :page => page,
-             :conditions => ['title like ?', "%#{search}%"],
-             :order => 'LOWER(title)'
-
+    order('LOWER(title)').where('title LIKE ?', "%#{search}%").paginate(per_page: 5, page: page)
   end
+
 
   def url_for_me(action)
     if action == 'show'
