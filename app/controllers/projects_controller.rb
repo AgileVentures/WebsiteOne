@@ -76,12 +76,12 @@ class ProjectsController < ApplicationController
 
   private
   def set_project
+    raise 'USING ID ERROR' if params[:id] =~ /^\d+$/
     begin
-      @project = Project.find(params[:id])
+      @project = Project.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       redirect_to projects_path, alert: 'Requested action failed.  Project was not found.'
     end
-
   end
 
 

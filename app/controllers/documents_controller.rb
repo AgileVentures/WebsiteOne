@@ -33,7 +33,7 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params.merge(user_id: current_user.id))
+    @document = @project.documents.build(document_params.merge(user_id: current_user.id))
     respond_to do |format|
       if @document.save
         format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully created.' }
@@ -51,7 +51,7 @@ class DocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @document.update(document_params)
-        format.html { redirect_to project_document_path(id: @document.id, project_id: @document.project_id), notice: 'Document was successfully updated.' }
+        format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -72,7 +72,7 @@ class DocumentsController < ApplicationController
   end
 
   def mercury_update
-    @document = Document.find(params[:document_id])
+    @document = Document.friendly.find(params[:document_id])
     if @document.update_attributes(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
       render text: '' # So mercury knows it is successful
@@ -86,17 +86,19 @@ class DocumentsController < ApplicationController
   private
   def find_project
     if params[:project_id]
-      @project = Project.find_by_id(params[:project_id])
+      raise 'USING ID ERROR' if params[:project_id] =~ /^\d+$/
+      @project = Project.friendly.find(params[:project_id])
     end
   end
 
   def set_document
-    @document = Document.find(params[:id])
+    raise 'USING ID ERROR' if params[:id] =~ /^\d+$/
+    @document = Document.friendly.find(params[:id])
   end
 
   def set_parent
     if params[:parent_id].present?
-    @parent = Document.find(params[:parent_id]).title
+      @parent = Document.find(params[:parent_id]).title
     else
       @parent = 'Document'
     end
@@ -105,6 +107,6 @@ class DocumentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def document_params
-    params.require(:document).permit(:title, :body, :project_id, :parent_id, :user_id)
+    params.require(:document).permit(:title, :body, :parent_id, :user_id)
   end
 end

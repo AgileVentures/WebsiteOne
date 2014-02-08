@@ -1,4 +1,7 @@
 class Project < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   validates :title, :description, :status, presence: true
   acts_as_followable
   belongs_to :user
