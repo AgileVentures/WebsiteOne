@@ -6,14 +6,14 @@ describe "users/show.html.erb" do
                              first_name: 'Eric',
                              last_name: 'Els',
                              email: 'eric@somemail.se',
-                             created_at: Date.new(2015, 1, 1)
+                             created_at: Date.new(2014, 1, 1)
                       )
 		assign :user, @user
 	end
 
   it 'renders big user avatar' do
     #view.stub(:gravatar_for).and_return('img_link')
-    expect(view).to receive(:gravatar_for).with(@user.email ,size: 330).and_return('img_link')
+    expect(view).to receive(:gravatar_for).with(@user.email ,size: 275).and_return('img_link')
     render
     expect(rendered).to have_css('img')
     expect(rendered).to have_xpath("//img[contains(@src, 'img_link')]")
@@ -29,13 +29,17 @@ describe "users/show.html.erb" do
   end
 
   it 'should not display an edit button if it is not my profile' do
+    @user_logged_in ||= FactoryGirl.create :user
+    sign_in @user_logged_in
+
     render
-    expect(rendered).not_to have_xpath("//a[contains(@type, 'button')]")
+    expect(rendered).not_to have_link('Edit', href: '/users/edit')
   end
 
   it 'should display Joined on ..' do
+    Date.stub(today:'07/02/2014'.to_date)
     render
-    expect(rendered).to have_text('Joined on: 1st Jan 2015')
+    expect(rendered).to have_text('Member for: about 1 month')
   end
 
   context 'users own profile page' do
@@ -46,10 +50,11 @@ describe "users/show.html.erb" do
         sign_in @user_logged_in # method from devise:TestHelpers
       #end
     end
-    it 'displays an edit button' do
+    it 'displays an edit button if it is my profile' do
       render
-      expect(rendered).to have_xpath("//a[contains(@type, 'button')]")
+      expect(rendered).to_not have_xpath("//a[contains(@type, 'button')]")
     end
+
 
   end
 

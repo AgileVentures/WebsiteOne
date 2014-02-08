@@ -40,6 +40,11 @@ Given /user "([^"]*)" has joined on "([^"]*)"/ do |user_name, date|
   user.save!
 end
 
+Given /^today is "([^"]*)"$/ do |date|
+  Date.stub(today: date.to_date)
+  #distance_of_time_in_words('01/01/2013'.to_date, Date.current)
+end
+
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
   fill_in('user_email', :with => email)
