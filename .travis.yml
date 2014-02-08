@@ -25,3 +25,4 @@ deploy:
       staging: websiteone-staging
       master: websiteone-production
   run: "rake db:migrate"
+  run: "rake db:regenerate_slugs"
