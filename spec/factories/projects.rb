@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :project do
     sequence(:title) {|n| "Title #{n}"}
-    description "Description 1"
-    status "Status 1"
+    description "Warp fields stabilize."
+    status "We feel your presence."
   end
 end

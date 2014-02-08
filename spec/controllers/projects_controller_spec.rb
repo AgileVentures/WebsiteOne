@@ -2,18 +2,28 @@ require 'spec_helper'
 
 describe ProjectsController do
 
-  let(:valid_attributes) { { :title => 'MyProject',
-                             :description => 'My project description',
-                             :status => 'Active' } }
+  let(:valid_attributes) { {:title => 'MyProject',
+                            :description => 'My project description',
+                            :status => 'Active'} }
   let(:valid_session) { {} }
 
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
     # stubbing out devise methods to simulate authenticated user
-    user = double('user')
-    request.env['warden'].stub :authenticate! => user
-    controller.stub :current_user => user
+    @user = double('user', id: 1, friendly_id: 'some-id')
+    request.env['warden'].stub :authenticate! => @user
+    controller.stub :current_user => @user
   end
+
+  let(:user) { @user }
+
+  #describe "pagination" do
+  #  it "should paginate the feed" do
+  #    visit root_path
+  #    page.should have_selector("div.pagination")
+  #  end
+  #end
+
 
   describe '#index' do
     it 'should render index page for projects' do
@@ -21,18 +31,18 @@ describe ProjectsController do
       expect(response).to render_template 'index'
     end
 
+
     it 'should assign variables to be rendered by view' do
-      projects = [double(Project), double(Project)]
-      Project.stub(:order).and_return(projects)
+      Project.stub(:search).and_return('Carrier has arrived.')
       get :index
-      expect(assigns(:projects)).to eq projects
+      expect(assigns(:projects)).to eq 'Carrier has arrived.'
     end
   end
 
   describe '#show' do
     before(:each) do
       @project = Project.create! valid_attributes
-      get :show, {:id => @project.id}, valid_session
+      get :show, {:id => @project.friendly_id}, valid_session
     end
 
     it 'assigns the requested project as @project' do
@@ -63,8 +73,7 @@ describe ProjectsController do
               status: 'Status 1'
           }
       }
-      @user = mock_model(User, id: 1)
-      @project = mock_model(Project, id: 1)
+      @project = mock_model(Project, friendly_id: 'some-project')
       Project.stub(:new).and_return(@project)
       controller.stub(:current_user).and_return(@user)
     end
@@ -94,7 +103,7 @@ describe ProjectsController do
       end
 
       it 'passes current_user id into new' do
-        Project.should_receive(:new).with({"title"=>"Title 1", "description"=>"Description 1", "status"=>"Status 1", "user_id" => @user.id})
+        Project.should_receive(:new).with({"title" => "Title 1", "description" => "Description 1", "status" => "Status 1", "user_id" => @user.id})
         @project.stub(:save).and_return(true)
         post :create, @params
       end
@@ -122,8 +131,8 @@ describe ProjectsController do
   describe '#edit' do
     before(:each) do
       @project = double(Project)
-      Project.stub(:find).and_return(@project)
-      get :edit, id: 'show'
+      Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
+      get :edit, id: 'some-random-thing'
     end
 
     it 'renders the edit template' do
@@ -176,19 +185,19 @@ describe ProjectsController do
   describe '#update' do
     before(:each) do
       @project = mock_model(Project)
-      Project.stub(:find).and_return(@project)
+      Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
     end
 
     it 'assigns the requested project as @project' do
-      @project.stub(:update_attributes)
-      put :update, id: 'update', project: { title: ''}
+      @project.should_receive(:update_attributes)
+      put :update, id: 'update', project: {title: ''}
       expect(assigns(:project)).to eq(@project)
     end
 
     context 'successful update' do
       before(:each) do
         @project.stub(:update_attributes).and_return(true)
-        put :update, id: 'update', project: { title: ''}
+        put :update, id: 'update', project: {title: ''}
       end
 
       it 'redirects to the project' do
@@ -203,7 +212,7 @@ describe ProjectsController do
     context 'unsuccessful save' do
       before(:each) do
         @project.stub(:update_attributes).and_return(false)
-        put :update, id: 'update', project: { title: ''}
+        put :update, id: 'update', project: {title: ''}
       end
       it 'renders edit' do
         expect(response).to render_template(:edit)
@@ -216,7 +225,7 @@ describe ProjectsController do
   end
 
   it 'shows a notice if requested action for non-existing project ' do
-    get :edit,  id: 'non-existent'
+    get :edit, id: 'non-existent'
     expect(flash[:alert]).to eq('Requested action failed.  Project was not found.')
     expect(response).to redirect_to(projects_path)
   end

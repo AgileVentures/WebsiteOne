@@ -12,13 +12,17 @@
   </div>
   <div class="col-md-4 col-sm-5">
 
-    <h4>Projects</h3>
-    <!-- TODO Insert list of followed projects -->
+  	<h4>Projects</h4>
+  	<!-- TODO Insert list of followed projects -->
 
   </div>
 </div>
 <div class="row">
   <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1">
+
+    <% if @user.display_email%>
+        <h3> <%= @user.email %></h3>
+    <% end %>
 
     <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary", type: "button" if @user.eql?(current_user)%>
 
