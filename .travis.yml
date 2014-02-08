@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.0.0-p247
+- 2.0.0-p353
 
 # to enable javascript testing with X server and firefox
 before_install:
@@ -25,3 +25,4 @@ deploy:
       staging: websiteone-staging
       master: websiteone-production
   run: "rake db:migrate"
+  run: "rake db:regenerate_slugs"

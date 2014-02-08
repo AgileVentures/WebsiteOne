@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'projects/show.html.erb' do
   before :each do
-    @user = mock_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org')
-    @project = mock_model(Project, :id => 1, :title => "Title 1", :description => "Description 1", :status => "Active", :followers_count => 1, :user_id => @user.id, :created_at => Time.now, :documents => [])
+    @user = mock_model(User, id: 1, friendly_id: 'my-friend', first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org')
+    @project = mock_model(Project, :id => 1, friendly_id: 'my-friend-project', :title => "Title 1", :description => "Description 1", :status => "Active", :followers_count => 1, :user_id => @user.id, :created_at => Time.now, :documents => [])
     @created_by = ['by:', ([@user.first_name, @user.last_name].join(' '))].join(' ')
     assign(:project, @project)
     assign(:user, @user)
@@ -34,14 +34,14 @@ describe 'projects/show.html.erb' do
 
     context 'user is a member of project' do
       it 'should render join project button' do
-        @user.stub(:following?).and_return(true)
+        @user.should_receive(:following?).and_return(true)
         render
         rendered.should have_link('Leave project', unfollow_project_path(@project))
       end
     end
     context 'user is not a member of project' do
       it 'should render leave project button' do
-        @user.stub(:following?).and_return(false)
+        @user.should_receive(:following?).and_return(false)
         render
         rendered.should have_link('Join this project', follow_project_path(@project))
       end

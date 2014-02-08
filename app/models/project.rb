@@ -1,4 +1,7 @@
 class Project < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   validates :title, :description, :status, presence: true
   acts_as_followable
   belongs_to :user
@@ -7,7 +10,8 @@ class Project < ActiveRecord::Base
   def self.search(search, page)
     paginate :per_page => 5, :page => page,
              :conditions => ['title like ?', "%#{search}%"],
-             :order => 'title'
+             :order => 'LOWER(title)'
+
   end
 
   def url_for_me(action)

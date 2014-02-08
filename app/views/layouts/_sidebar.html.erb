@@ -17,7 +17,8 @@
       <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
         <% p.documents.roots.each do |d| %>
           <% doc_focus = (should_focus and (@document == d or @document.try(&:root) == d)) %>
-          <li style="margin-left: 15px;"><span class="glyphicon"></span><%= link_to %Q{#{d.title}#{" (#{d.children.count})" unless d.children.empty?}}, project_document_path(p, d), class: doc_focus ? 'focused' : '' %></li>
+          <li style="margin-left: 15px;"><span class="glyphicon"></span><%= link_to %Q{#{d.title}#{" (#{d.children.count})" unless
+              d.children.empty?}}, project_document_path(p, {id: d.to_param}), class: doc_focus ? 'focused' : '' %></li>
         <% end %>
       </ul>
     <% end %>

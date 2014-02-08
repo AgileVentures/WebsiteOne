@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130073828) do
+ActiveRecord::Schema.define(version: 20140207190458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,8 +34,10 @@ ActiveRecord::Schema.define(version: 20140130073828) do
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.integer  "user_id"
+    t.string   "slug"
   end
 
+  add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "follows", force: true do |t|
@@ -58,9 +60,46 @@ ActiveRecord::Schema.define(version: 20140130073828) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "slug"
   end
 
+  add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "simon_asks_comments", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.string   "state",      limit: 50, default: "pending"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simon_asks_comments", ["owner_id", "owner_type"], name: "index_simon_asks_comments_on_owner_id_and_owner_type", using: :btree
+  add_index "simon_asks_comments", ["user_id"], name: "index_simon_asks_comments_on_user_id", using: :btree
+
+  create_table "simon_asks_question_answers", force: true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.integer  "question_id"
+    t.integer  "comments_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "simon_asks_questions", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "content"
+    t.boolean  "marked",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -77,9 +116,12 @@ ActiveRecord::Schema.define(version: 20140130073828) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "display_email"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
 end

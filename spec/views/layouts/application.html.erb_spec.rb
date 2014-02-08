@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'layouts/application.html.erb' do
   before do
-    @user = User.new
+    @user = FactoryGirl.create(:user)
     view.stub(:current_user).and_return(@user)
   end
   it 'should include css & js files' do
@@ -79,7 +79,7 @@ describe 'layouts/application.html.erb' do
     it 'should render navigation links' do
       render
       rendered.should have_css('a#user_info', :visible => true)
-      rendered.should have_link 'My account', :href => edit_user_registration_path, :visible => false
+      rendered.should have_link 'My account', :href => users_show_path(@user), :visible => false
       rendered.within('div.navbar') do |header|
         header.should_not have_link 'Log in', :href => new_user_session_path
         header.should_not have_link 'Sign up', :href => new_user_registration_path

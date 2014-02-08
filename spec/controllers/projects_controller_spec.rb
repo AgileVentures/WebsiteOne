@@ -10,10 +10,12 @@ describe ProjectsController do
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
     # stubbing out devise methods to simulate authenticated user
-    user = double('user')
-    request.env['warden'].stub :authenticate! => user
-    controller.stub :current_user => user
+    @user = double('user', id: 1, friendly_id: 'some-id')
+    request.env['warden'].stub :authenticate! => @user
+    controller.stub :current_user => @user
   end
+
+  let(:user) { @user }
 
   #describe "pagination" do
   #  it "should paginate the feed" do
@@ -40,7 +42,7 @@ describe ProjectsController do
   describe '#show' do
     before(:each) do
       @project = Project.create! valid_attributes
-      get :show, {:id => @project.id}, valid_session
+      get :show, {:id => @project.friendly_id}, valid_session
     end
 
     it 'assigns the requested project as @project' do
@@ -71,8 +73,7 @@ describe ProjectsController do
               status: 'Status 1'
           }
       }
-      @user = mock_model(User, id: 1)
-      @project = mock_model(Project, id: 1)
+      @project = mock_model(Project, friendly_id: 'some-project')
       Project.stub(:new).and_return(@project)
       controller.stub(:current_user).and_return(@user)
     end
@@ -130,8 +131,8 @@ describe ProjectsController do
   describe '#edit' do
     before(:each) do
       @project = double(Project)
-      Project.stub(:find).and_return(@project)
-      get :edit, id: 'show'
+      Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
+      get :edit, id: 'some-random-thing'
     end
 
     it 'renders the edit template' do
@@ -184,11 +185,11 @@ describe ProjectsController do
   describe '#update' do
     before(:each) do
       @project = mock_model(Project)
-      Project.stub(:find).and_return(@project)
+      Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
     end
 
     it 'assigns the requested project as @project' do
-      @project.stub(:update_attributes)
+      @project.should_receive(:update_attributes)
       put :update, id: 'update', project: {title: ''}
       expect(assigns(:project)).to eq(@project)
     end
