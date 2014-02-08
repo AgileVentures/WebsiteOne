@@ -132,6 +132,6 @@ Feature: Manage Document
     Given I am on the "Projects" page
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
-    Given I am on the "Documents" page for project "hello world"
+    Given I am on the "Show" page for project "hello world"
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
