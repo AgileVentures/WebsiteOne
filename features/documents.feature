@@ -31,6 +31,13 @@ Feature: Manage Document
     And I click "Submit"
     Then I should see "Document was successfully created."
 
+  Scenario: Create a new document page should have a back button
+    Given I am logged in
+    Given I am on the "Show" page for project "hello world"
+    When I click "New Document"
+    And I click "Back"
+    Then I should be on the "Show" page for project "hello world"
+
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
     When I click the sidebar link "Guides"
@@ -109,6 +116,8 @@ Feature: Manage Document
 ##  And I am on the "Documents" page for project "hello world"
 #  When I click the "Edit" button for document "Howto"
 #  Then I should be in the Mercury Editor
+
+  Scenario: Pressing the Back button will
 
   @javascript
   Scenario: The Mercury Editor save button works
