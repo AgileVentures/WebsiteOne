@@ -7,7 +7,6 @@
             <h3><%= user_display_name @user %></h3>
         </div>
     </div>
-    <p>Joined on: <%=date_format(@user.created_at) %> </p>
     <p>Member for: <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
   </div>
   <div class="col-md-4 col-sm-5">
