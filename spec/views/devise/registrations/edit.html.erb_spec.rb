@@ -63,6 +63,16 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_link 'Title 2'
   end
 
+  it 'should render a checkbox for the public email option' do
+    render
+    expect(rendered).to have_css "input[type='checkbox']#user_display_email"
+  end
+
+  it 'should render a checkbox for the public profile option' do
+    render
+    expect(rendered).to have_css "input[type='checkbox']#user_display_profile"
+  end
+
   #it "displays a preview button" do
   #  render
   #  expect(rendered).to have_link 'Preview'

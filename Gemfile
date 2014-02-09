@@ -22,9 +22,9 @@ gem 'high_voltage'
 gem 'acts_as_tree', '~> 1.5.0'
 gem 'acts_as_follower'
 gem 'will_paginate-bootstrap'
-gem 'coveralls', require: false
+gem 'coveralls', require: false # TODO Bryan: move to production group?
 gem 'google-analytics-rails'
-gem 'friendly_id', '~> 5.0.0'
+gem 'friendly_id', '~> 5.0.0' # Bryan: for more REST-ful routes, use human-readable IDs
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
