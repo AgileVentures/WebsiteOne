@@ -25,6 +25,7 @@ describe UsersController do
                      email: 'hgranger@hogwarts.ac.uk',
                     )
       User.stub(find: @user)
+      @user.stub(folloing_by_type: @projects)
     end
     it "assigns a user instance" do
   		get 'show', id: @user.id
@@ -33,6 +34,21 @@ describe UsersController do
     it "renders the show view" do
       get 'show', id: @user.id
       expect(response).to render_template :show
+    end
+
+    context "with followed projects" do
+      before :each do
+        @projects = [
+          mock_model(Project, friendly_id: 'title-1', title: 'Title 1'),
+          mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
+          mock_model(Project, friendly_id: 'title-3', title: 'Title 3')
+        ]
+      end
+
+      it "assigns a list of project being followed" do
+        get 'show', id: @user.id
+        expect(assigns(:users_projects).to eq(@fake_projects))
+      end
     end
   end
 
