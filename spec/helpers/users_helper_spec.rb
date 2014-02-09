@@ -27,7 +27,7 @@ describe UsersHelper do
       expect(result).to eq "Test User"
     end
 
-    it '#date_format returns formatted date 1st jan 2015' do
+    it '#date_format returns formatted date 1st Jan 2015' do
       expect(date_format(Date.new(2015,1,1))).to eq('1st Jan 2015')
       expect(date_format(Date.new(2015,5,3))).to eq('3rd May 2015')
     end

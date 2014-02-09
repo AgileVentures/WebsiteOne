@@ -9,23 +9,41 @@ describe "users/show.html.erb" do
                              created_at: Date.new(2014, 1, 1)
                       )
 		assign :user, @user
-    @youtube_videos = [{url: "http://www.youtube.com/100", title: "Random"}, {url: "http://www.youtube.com/340", title: "Stuff"}, {url: "http://www.youtube.com/2340", title: "Here's something"}]
+    @youtube_videos = [
+        {
+            url: "http://www.youtube.com/100",
+            title: "Random",
+            published: '01/01/2015'.to_date
+        },
+        {
+            url: "http://www.youtube.com/340",
+            title: "Stuff",
+            published: '01/01/2015'.to_date
+        },
+        {
+            url: "http://www.youtube.com/2340",
+            title: "Here's something",
+            published: '01/01/2015'.to_date
+        }
+    ]
     assign :youtube_videos, @youtube_videos
 	end
 
-  it 'renders list of PP sessions' do
+  it 'renders list of youtube links and published dates if user has videos' do
     render
     @youtube_videos.each do |link|
       expect(rendered).to have_link(link[:title], :href => link[:url])
     end
   end
-  it 'handles rendering with no PP sessions' do
+  it 'renders "no available videos" if user has no videos' do
     assign(:youtube_videos, nil)
     render
     expect(rendered).to have_text("Eric Els has no publicly viewable Youtube videos.")
   end
+
+  it 'renders "connect youtube channel" when user views his profile and it is not yet connected'
+
   it 'renders big user avatar' do
-    #view.stub(:gravatar_for).and_return('img_link')
     expect(view).to receive(:gravatar_for).with(@user.email ,size: 275).and_return('img_link')
     render
     expect(rendered).to have_css('img')
@@ -57,11 +75,8 @@ describe "users/show.html.erb" do
 
   context 'users own profile page' do
     before :each do
-      #logged in as Eric
-      #def signed_in_as_a_valid_user
         @user_logged_in ||= FactoryGirl.create :user
         sign_in @user_logged_in # method from devise:TestHelpers
-      #end
     end
     it 'displays an edit button if it is my profile' do
       render
@@ -73,5 +88,4 @@ describe "users/show.html.erb" do
 
   it 'renders list of followed projects'
   it 'renders user statistics'
-  it 'renders the embedded YT most recent PP'
 end

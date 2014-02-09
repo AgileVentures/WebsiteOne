@@ -1,3 +1,4 @@
+<%= javascript_include_tag '/javascripts/users' %>
 <div class="row">
   <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1">
 
@@ -14,12 +15,10 @@
 
   	<h4>Projects</h4>
   	<!-- TODO Insert list of followed projects -->
-
   </div>
 </div>
 <div class="row">
   <div class="col-md-4 col-md-offset-2 col-sm-5 col-sm-offset-1">
-
     <% if @user.display_email%>
         <h3> <%= @user.email %></h3>
     <% end %>
@@ -27,20 +26,47 @@
     <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary", type: "button" if @user.eql?(current_user)%>
 
     <h4>Pair Programming</h4>
-  	<!-- TODO Insert list of PP youtube or G+ session links -->
-    <%if !@youtube_videos.blank?%>
-      <%@youtube_videos.each do |link| %>
-         <%= link_to(link[:title], link[:url]) %>
-      <%end%>
-    <%else%>
-      <h4><%=user_display_name @user %> has no publicly viewable Youtube videos.</h4>
-    <%end%>
+    <p>Joined on: <%= date_format(@user.created_at) %> </p>
+
+    <% unless @youtube_videos.blank? %>
+        <div class="row">
+          <div class="col-md-8">
+            <table class="table table-bordered table-striped table-hover table-condensed">
+              <tr>
+                <th>Title</th>
+                <th>Published</th>
+              </tr>
+              <% @youtube_videos.each do |video| %>
+                  <tr>
+                    <td><%= link_to video[:title], video[:url], id: video[:id], class: 'yt_link', data: { content: video[:content] } %></td>
+                    <td><%= date_format(video[:published]) %></td>
+                  </tr>
+
+              <% end %>
+            </table>
+          </div>
+        </div>
+    <% else %>
+        <tr>
+          <td><h4><%= user_display_name @user %> has no publicly viewable Youtube videos.</h4></td>
+        </tr>
+    <% end %>
 
   </div>
-  <div class="col-md-4 col-sm-5">
-
-  	<!-- TODO Embed youtube player here -->
-  	<img src="placeholder" width="300" height="150">
-
-  </div>
+  <% if @youtube_videos %>
+      <div class="col-md-4 col-sm-5">
+        <table class="table table-condensed">
+          <tr>
+            <td><h4 id="video_contents"><%= @youtube_videos.first[:content] %></h4></td>
+          </tr>
+          <tr>
+            <td>
+              <iframe id="ytplayer" type="text/html" width="640" height="390"
+                      src="http://www.youtube.com/v/<%= @youtube_videos.first[:id] %>?version=3&enablejsapi=1"
+                      frameborder="0"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+  <% end %>
 </div>
