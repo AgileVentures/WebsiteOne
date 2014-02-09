@@ -4,15 +4,24 @@ Feature: As a site user
 
   Background:
     Given the following users exist
-      | first_name  | last_name   | email                   | password  |
-      | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |
-      | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |
+      | first_name  | last_name   | email                   | password  |   display_profile |
+      | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |   false           |
+      | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |   true            |
+
 
   Scenario: User profile should be public by default
     Given I am not logged in
     And I am on the "Our members" page
-    Then I should see "Alice Jones"
+    Then I should not see "Alice Jones"
     And I should see "Bob Butcher"
+
+  Scenario: Visitor should not be able to access a private profile
+    Given I am logged in
+    And I am on the "Our members" page
+    Then I should not see "Alice Jones"
+    And I should see "Bob Butcher"
+
+
 
   Scenario: Should be able to make my profile private
     Given I am logged in as "Bob"
