@@ -20,9 +20,8 @@ Feature: As a site user
     When I set my profile to be private
     Then "Display profile" should not be checked
     And I click "Update"
-    And show me the user
     And I am on the "Our members" page
-    Then I should not see "Bob Butcher"
+    Then I should not see "Bob Butcher" in the members list
 
   Scenario: Should be able to make my profile public again
     Given I am logged in as "Bob"

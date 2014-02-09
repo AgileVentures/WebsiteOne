@@ -8,7 +8,7 @@ Then /^I should see "([^"]*)" avatars$/ do | arg |
 end
 
 Then /^I should see "([^"]*)" user avatars$/ do | arg |
-  find('#all_mambers').tap do |section|
+  find('#all_members').tap do |section|
     section.should have_xpath("//img[contains(@id, 'avatar')]", :count => arg)
   end
 end

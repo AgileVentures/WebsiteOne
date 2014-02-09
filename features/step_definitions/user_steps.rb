@@ -259,10 +259,6 @@ When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
   end
 end
 
-When(/^show me the user$/) do
-  p @user
-end
-
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
   case value.downcase
     when 'email'
@@ -309,5 +305,11 @@ Given(/^I am logged in as "([^"]*)"$/) do |first_name|
     fill_in 'user_email', :with => @user.email
     fill_in 'user_password', :with => '12345678'
     click_button 'Sign in'
+  end
+end
+
+Then(/^(.*) in the members list$/) do |s|
+  page.within(:css, '#all_members') do
+    step s
   end
 end
