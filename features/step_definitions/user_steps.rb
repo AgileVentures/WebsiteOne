@@ -1,5 +1,3 @@
-require './lib/youtube/youtube_search'
-
 Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
@@ -45,12 +43,6 @@ end
 Given /^today is "([^"]*)"$/ do |date|
   Date.stub(today: date.to_date)
   #distance_of_time_in_words('01/01/2013'.to_date, Date.current)
-end
-
-Given /^user "([^"]*)" has YouTube account id "([^"]*)" with some videos in it/ do |user, account_id|
-  @user_youtube_id = account_id
-  @youtube_user_response_xml = File.read('spec/fixtures/youtube_user_response.xml')
-
 end
 
 ### WHEN ###
@@ -202,14 +194,6 @@ Then /^my account should be deleted$/ do
   expect(User.find_by_id(@user)).to be_false
 end
 
-Then /I should see a list of videos for user "([^"]*)"/ do |user|
-  response = YoutubeSearch.user_videos(@user_youtube_id)
-  correct_number = YoutubeSearch.parse(@youtube_user_response_xml).count
-  video_links = page.find(:xpath, "//a[@src='http://www.youtube.com/watch']")
-  expect(video_links).to have(correct_number).items
-end
-
-
 Given(/^The database is clean$/) do
   DatabaseCleaner.clean
 end
@@ -235,7 +219,7 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   expect(current_path).to eq path_to(page, this_user)
 end
 
-Given(/^I am on my "([^"]*)" page$/) do |page|
+Given(/^I am on my (.*) page$/) do |page|
   page.downcase!
   if page == 'profile'
     visit users_show_path(@user)
@@ -243,6 +227,21 @@ Given(/^I am on my "([^"]*)" page$/) do |page|
     visit edit_user_registration_path(@user)
   else
     pending
+  end
+end
+
+Given /^I am on "(.*?)" page for user "(.*?)"$/ do |page, user_name|
+  if user_name == "me"
+    user = @user
+  else
+    user = User.find_by_first_name(user_name)
+  end
+
+  case page
+    when 'profile' then
+      visit users_show_path(user)
+    when page == 'edit profile'
+      visit edit_user_registration_path(user)
   end
 end
 

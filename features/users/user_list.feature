@@ -43,13 +43,3 @@ Feature: As a site owner
     And I should see button "Edit"
     And I click the "Edit" button
     And I should be on the "my account" page
-
-  Scenario: List of users youtube videos
-    #TODO YA add a step Given I am on user profile page for "user"
-    Given I am on the "Our members" page
-    And user "Alice" has YouTube account id "UCgTOz02neY70sqnk05zNkGA" with some videos in it
-
-    When I click on the avatar for "Alice"
-
-    Then I should be on the "user profile" page for "Alice"
-    And I should see a list of videos for user "Alice"
