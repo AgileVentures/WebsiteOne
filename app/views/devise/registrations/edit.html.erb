@@ -22,6 +22,9 @@
   <div class="col-md-3 ">
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
+        <div><%= f.label :display_profile %>
+          <%= f.check_box :display_profile %>
+        </div>
         <div><%= f.label :first_name %>
           <div class="form-group">
             <%= f.text_field :first_name, :autofocus => true, class: 'form-control' %>
