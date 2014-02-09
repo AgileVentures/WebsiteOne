@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all #.order(last_name: :desc, first_name: :desc)
+    @users = User.where('display_profile = ?', true) #.order(last_name: :desc, first_name: :desc)
   end
 
   def show

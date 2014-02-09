@@ -221,7 +221,8 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   expect(current_path).to eq path_to(page, this_user)
 end
 
-Given(/^I am on my (.*) page$/) do |page|
+Given(/^I am on my "([^"]*)" page$/) do |page|
+  page.downcase!
   if page == 'profile'
     visit users_show_path(@user)
   elsif page == 'edit profile'
@@ -251,29 +252,62 @@ end
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
   if option == 'public'
     check("user_display_#{value}")
+  else
+    #uncheck "Display #{value}"
+    find("input#user_display_#{value}").set(false)
+    find("input#user_display_#{value}").should_not be_checked
   end
+end
+
+When(/^show me the user$/) do
+  p @user
 end
 
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
-  if value == 'email'
-    @user.update_attributes(display_email: (option == 'value'))
-  else
-    pending
+  case value.downcase
+    when 'email'
+      @user.update_attributes(display_email: (option == 'public'))
+
+    when 'profile'
+      @user.update_attributes(display_profile: (option == 'public'))
+
+    else
+      pending
   end
 end
 
-Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
-  pending
-end
+# Bryan: To be deleted
+#Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
+#  pending
+#end
 
 Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
-  if name == 'Display email'
-    if option == 'should'
-      page.find(:css, 'input#user_display_email').should be_checked
+  case name
+    when 'Display email'
+      if option == 'should'
+        page.find(:css, 'input#user_display_email').should be_checked
+      else
+        page.find(:css, 'input#user_display_email').should_not be_checked
+      end
+
+    when 'Display profile'
+      if option == 'should'
+        page.find(:css, 'input#user_display_profile').should be_checked
+      else
+        page.find(:css, 'input#user_display_profile').should_not be_checked
+      end
+
     else
-      page.find(:css, 'input#user_display_email').should_not be_checked
-    end
-  else
-    pending
+      pending
+  end
+end
+
+Given(/^I am logged in as "([^"]*)"$/) do |first_name|
+  @user = User.find_by_first_name first_name
+  visit new_user_session_path
+  within ('#main') do
+    fill_in 'user_email', :with => @user.email
+    fill_in 'user_password', :with => '12345678'
+    click_button 'Sign in'
   end
 end
