@@ -53,7 +53,7 @@ Feature: As a user of the site
   	When I click "Bob Butcher"
   	Then I should be on the "user profile" page for "Bob"
   	And I should see:
-  	| title					|
+  	| title			|
   	| hello world 	|
   	| hello jupiter |
 

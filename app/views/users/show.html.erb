@@ -36,3 +36,11 @@
 
   </div>
 </div>
+
+<% unless @users_projects.empty? %>
+  <ul>
+    <% @users_projects.each do |project| %>
+      <li><%= link_to project.title, project_path(project) %></li>
+    <% end %>
+  </ul>
+<% end %>

@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @users_projects = @user.following_by_type('Project')
   end
 
 end
