@@ -16,12 +16,14 @@ Feature: As a site user
     And I should see "Bob Butcher"
 
   Scenario: Visitor should not be able to access a private profile
+    Given I am not logged in
+    And I visit Alice's profile page
+    Then I should see "User has set his profile to private"
+
+  Scenario: A logged in user should not be able to access a private profile
     Given I am logged in
-    And I am on the "Our members" page
-    Then I should not see "Alice Jones"
-    And I should see "Bob Butcher"
-
-
+    And I visit Alice's profile page
+    Then I should see "User has set his profile to private"
 
   Scenario: Should be able to make my profile private
     Given I am logged in as "Bob"

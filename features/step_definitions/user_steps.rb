@@ -313,3 +313,8 @@ Then(/^(.*) in the members list$/) do |s|
     step s
   end
 end
+
+Given(/^I visit (.*)'s profile page$/) do |name|
+  user = User.find_by_first_name name
+  visit users_show_path user
+end

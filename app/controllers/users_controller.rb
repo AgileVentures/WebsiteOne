@@ -6,8 +6,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    unless @user.display_profile && (current_user && current_user != @user)
-      #TODO Marcelo implement a 404 error once we implement custom name errors
+    if (current_user.try(&:id) != @user.id) && !@user.display_profile
+        #TODO Marcelo implement a 404 error once we implement custom name errors
       flash[:notice] = 'User has set his profile to private'
       redirect_to root_path
     end
