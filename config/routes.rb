@@ -11,8 +11,8 @@ WebsiteOne::Application.routes.draw do
   get 'users/show/:id', to: 'users#show', as: 'users_show'
 
   get "/404", :to => "errors#not_found"
-  get "/422", :to => "errors#unacceptable"
-  get "/500", :to => "errors#internal_error"
+  get "/mamama", :to => "errors#unacceptable"
+  get "/papapa", :to => "errors#internal_error"
 
   resources :projects do
     member do

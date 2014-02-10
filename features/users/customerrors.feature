@@ -11,14 +11,29 @@ Feature:
 #      | 500      | 500       | Internal server error                                    |
 #      | About Us | about     | We are the coolest guys around!                          |
 
-@allow-rescue
-  Scenario: Show custom 404 page
-    Given I visit "/666"
-    And the response status should be "404"
-    Then I should be on the static "404" page
-    Then the page should be titled "404 File Not Found"
-    And I should see "We're sorry, but we couldn't find the page you requested!"
+#  @allow-rescue
+#  Scenario: Show custom 404 page
+#    Given I visit "/whatever"
+#    And the response status should be "404-Page not found"
+#    Then I should be on the static "404" page
+#    Then the page should be titled "404 File Not Found"
+#    And I should see "We're sorry, but we couldn't find the page you requested!"
 
+
+#@allow-rescue
+#  Scenario: Show custom 404 page
+#    When I am on the "foobar" page
+#    Then the page should be titled "404 File Not Found"
+#    And the response status should be "404"
+#    And I should see "We're sorry, but we couldn't find the page you requested"
+
+@allow-rescue
+  Scenario: 404 page
+    When I am on the "foobar" page
+    Then the page should be titled "Page not found"
+    And the response status should be "404"
+    And I should see "We're sorry, but couldn't find the page you requested"
+    #And the response status should be "404"
 
 
 

@@ -26,6 +26,9 @@ def path_to(page_name, id = '')
       users_show_path(id)
     when 'my account' then
       edit_user_registration_path(id)
+    when "foobar" then
+      visit ("/#{page}")
+
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -37,9 +40,11 @@ Given(/^I visit the site$/) do
   visit root_path
 end
 
-Given(/^I am on the "([^"]*)" page$/) do |page|
-  visit path_to(page)
-end
+#Given(/^I am on the "([^"]*)" page$/) do |page|
+#  When(/^I go to the path "(.*?)"$/) do |arg1|
+#pending # express the regexp above with the code you wish you had
+#end
+#end
 
 #Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
 #  visit url_for_title(action: action, controller: controller, title: title)
@@ -47,6 +52,10 @@ end
 
 # WHEN steps
 When(/^I go to the "([^"]*)" page$/) do |page|
+  visit path_to(page)
+end
+
+When(/^I go to the path "(.*?)"$/) do |page|
   visit path_to(page)
 end
 
@@ -113,17 +122,20 @@ Then /^I should( not)? see:$/ do |negative, table|
   end
 end
 
-Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
-  unless negative
-    page.should have_text string
-  else
-    page.should_not have_text string
-  end
-end
+#Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
+#  unless negative
+#    page.should have_text string
+#  else
+#    page.should_not have_text string
+#  end
+#end
+
+
 
 Then /^I should see link "([^"]*)"$/ do |link|
   page.should have_link link
 end
+
 
 Then /^I should see field "([^"]*)"$/ do |field|
   page.should have_field(field)
@@ -192,6 +204,11 @@ Then(/^I should see the sidebar$/) do
   page.find(:css, 'nav#sidebarnav')
 end
 
+Then(/^I should see "(.*?)"$/) do |string|
+  #expect(page).to have_content(string)
+  page.should have_content(string)
+end
+
 #TODO Bryan please replase s and m with meaningful names
 Then(/(.*) within the ([^"]*)$/) do |s, m|
   m = m.downcase
@@ -221,4 +238,7 @@ Given(/^I want to use third party authentications$/) do
           'email' => 'mock@email.com'
       }
   }
+
+
+
 end
