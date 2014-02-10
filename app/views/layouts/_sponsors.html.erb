@@ -1,6 +1,6 @@
 <div id="sponsorsBar">
   <div class="gold sponsorsTier text-center">
-    <h3>AV Sponsors</h3>
+    <h3>Sponsors</h3>
     <ul>
       <li>
         <a href="#" class="sponsorMedal"><div class="sponsorStandinMedal">
@@ -8,14 +8,14 @@
         </div>
         </a></li>
       <li>
-        <a href="https://gondor.io/r/FNPYR/" class="sponsorMedal"><div class="sponsorStandinMedal">
-          <img alt="sponsor text" src="http://placehold.it/205x100">
+        <a href="#" class="sponsorMedal"><div class="sponsorStandinMedal">
+          <img alt="sponsor text" src="<%= image_path('AV205X100.png') %>">
         </div>
         </a></li>
     </ul>
   </div>
-  <div class="silver sponsorsTier text-center">
-    <h3>AV Friends</h3>
+  <!--div class="silver sponsorsTier text-center">
+    <h3>Friends</h3>
     <ul>
       <li>
         <a href="#" class="sponsorMedal"><div class="sponsorStandinMedal">
@@ -23,13 +23,13 @@
         </div>
         </a></li>
     </ul>
-  </div>
+  </div-->
 
   <div class="sponsorsTier">
     <%= link_to 'All sponsors', page_path('sponsors'), id: 'ourSponsors'  %>
     <%= link_to 'Become a sponsor', page_path('sponsors'), id: 'ourSponsors', class: 'btn btn-danger btn-small', type: 'button'  %>
   </div>
-  <div id="heroes" class="sponsorsTier text-center">
+  <!--div id="heroes" class="sponsorsTier text-center">
     <h3>AV Heroes</h3>
     <div>
       <a href="#" target="_blank"><img alt="Park Hyunwoo" src="https://secure.gravatar.com/avatar/8495265d0f883004d3be2f81a73ad1ce" title="Park Hyunwoo">
@@ -60,5 +60,5 @@
   <div class="sponsorsTier">
     <%= link_to 'All heroes', page_path('sponsors'), id: 'ourHeroes'  %>
     <%= link_to 'Become a hero', page_path('sponsors'), id: 'ourHeroes', class: 'btn btn-danger btn-small', type: 'button'  %>
-  </div>
+  </div-->
 </div>
