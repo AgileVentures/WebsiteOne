@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-
+    @members = @project.followers
   end
 
   def new

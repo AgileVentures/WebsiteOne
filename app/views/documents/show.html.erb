@@ -4,14 +4,18 @@
      </h4>
 <% end %>
 <h1>
-  <div id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %><% if user_signed_in? %>
-      <%= link_to 'Edit', mercury_edit_path, id: 'edit_link',
-          data: {save_url: project_document_mercury_update_path(@project, @document)},
-          class: 'btn-edit' %>
-    <% end %>
- </div>
+  <div style="display: inline-block;" id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div>
+  <% if user_signed_in? %>
+    <%= link_to raw('<i class="fa fa-pencil-square-o"></i>'), mercury_edit_path, id: 'edit_link',
+                data: {save_url: project_document_mercury_update_path(@project, @document)},
+                class: 'btn-edit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', title: 'Edit' %>
+  <% end %>
 </h1>
-<small><%= created_date %> <%= created_by %> Project: <%= @project.title %>  </small>
+
+<div style="font-size: 0.8em; font-style: italic;">
+  <div>Project: <%= link_to @project.title, project_path(@project) %></div>
+  <div><%= "Created #{time_ago_in_words(@document.created_at)} ago" %> by <%= created_by %></div>
+</div>
 
 <div class="small-divider"></div>
 <div id="document_body" style="width: 100%" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
@@ -19,9 +23,6 @@
 <% if user_signed_in? %>
    <%= link_to 'Save', '' , id: 'save_link', class: 'btn btn-primary', style: 'display:none;' %>
     <%= link_to 'Cancel', '' , id: 'cancel_link', class: 'btn btn-warning', style: 'display:none;' %>
-    <% if @document.root? %>
-        <%= link_to (['New ', @document.title.singularize].join), new_project_document_path(project_id: @project.friendly_id, parent_id: @document.id), id: 'new_document_link', :type => 'button', :class => 'btn btn-default' %>
-    <% end %>
 <% end %>
 <div class="small-divider"></div>
 <div>
@@ -29,7 +30,12 @@
       <% string = 'Documents' %>
       <h2>
         <%= string.singularize if @document.children.count == 1 %>
-        <%= string if @document.children.count > 1 %> for <%= @document.title.downcase %> </h2>
+        <%= string if @document.children.count > 1 %> for <%= @document.title.downcase %>
+        <% if @document.root? %>
+          <%= link_to raw('<i class="fa fa-plus-circle"></i>'), new_project_document_path(project_id: @project.friendly_id, parent_id: @document.id), id: 'new_document_link',
+                      :class => 'btn-edit', style: 'font-size: 100%;', 'data-toggle' => 'tooltip', 'data-placement' => 'top', title: 'New subdocument' %>
+        <% end %>
+      </h2>
       <ul class="list-group">
         <% @document.children.each do |child| %>
             <li class="list-group-item">
@@ -38,6 +44,11 @@
             </li>
         <% end %>
       </ul>
+  <% else %>
+    <% if @document.root? %>
+      <%= link_to (['New ', @document.title.singularize].join), new_project_document_path(project_id: @project.friendly_id, parent_id: @document.id), id: 'new_document_link', :type => 'button',
+                  :type => 'button', :class => 'btn btn-default' %>
+    <% end %>
   <% end %>
   <br />
 

@@ -1,36 +1,72 @@
-<h1><%= @project.title %><% if user_signed_in? %><%= link_to 'Edit', edit_project_path(@project.friendly_id), :class => 'btn-edit' %><% end %></h1>
-<small>Status: <%= @project.status %> <%= created_date %> <%= project_created_by %></small>
+<h1>
+  <%= @project.title %>
+  <% if user_signed_in? %>
+    <%= link_to raw('<i class="fa fa-pencil-square-o"></i>'), edit_project_path(@project.friendly_id),
+                :class => 'btn-edit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', title: 'Edit' %>
+  <% end %>
+</h1>
+
+<div style="font-size: 0.8em; font-style: italic;">
+  <div>Status: <strong style="font-style: normal;"><%= @project.status.upcase %></strong></div>
+  <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= project_created_by %></div>
+</div>
+
+<div class="small-divider"></div>
+
 <div>
   <% if user_signed_in? %>
       <% unless current_user.following?(@project) %>
-          <%= link_to 'Join this project', follow_project_path(@project) , :type => 'button', :class => 'btn btn-success btn-xs' %>
+
       <% else %>
           <%= link_to 'Leave project', unfollow_project_path(@project), :type => 'button', :class => 'btn btn-danger btn-xs' %>
           <div id="HOA-placeholder"></div>
       <% end %>
   <% end %>
 </div>
-<small>This project has <%= @project.followers_count %> members</small>
 <p>
   <strong><%= @project.description %></strong>
 </p>
 
+<div class="small-divider"></div>
 
-
-<div>
-  <% if user_signed_in? %>
-      <%= link_to 'New Document', new_project_document_path(project_id: @project.friendly_id), :type => 'button', :class => 'btn btn-default' %>
-  <% end %>
-</div>
-
-<ul class="list-group">
-  <% unless @project.documents.empty? %>
-    <h2>Related documents</h2>
-    <% @project.documents.roots.each do |d| %>
-          <li class="list-group-item"><strong><%= link_to d.title, project_document_path(@project, d) %></strong></li>
-    <% end %>
-  <% end %>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#documents_list" data-toggle="tab">Documents</a></li>
+  <li><a href="#members_list" data-toggle="tab">Members List (<%= @members.count %>)</a></li>
 </ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="documents_list">
+    <ul class="list-group">
+      <% unless @project.documents.empty? %>
+        <h2>
+          Related documents
+          <% if user_signed_in? %>
+            <%= link_to raw('<i class="fa fa-plus-circle"></i>'), new_project_document_path(project_id: @project.friendly_id),
+                        :class => 'btn-edit', style: 'font-size: 100%;', 'data-toggle' => 'tooltip', 'data-placement' => 'top', title: 'New document' %>
+          <% end %>
+        </h2>
+        <% @project.documents.roots.each do |d| %>
+          <li class="list-group-item"><strong><%= link_to d.title, project_document_path(@project, d) %></strong></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="tab-pane" id="members_list">
+    <ul class="list-group">
+      <h2>
+        List of Project Members
+        <% if user_signed_in? %>
+          <%= link_to raw('<i class="fa fa-plus-circle"></i>'), follow_project_path(@project) ,
+                      :class => 'btn-edit', style: 'font-size: 100%;', 'data-toggle' => 'tooltip', 'data-placement' => 'top', title: 'Follow project' %>
+        <% end %>
+      </h2>
+      <% @members.each do |member| %>
+        <li class="list-group-item"><strong><%= link_to member.email, users_show_path(member) %></strong></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
 <script src="https://apis.google.com/js/platform.js"></script>
 

@@ -28,8 +28,7 @@ module DocumentsHelper
   end
 
   def created_date
-    date = @document.created_at.strftime('Created: %Y-%m-%d')
-    (date)
+    "Created #{time_ago_in_words(@document.created_at)} ago"
   end
 
 
