@@ -2,13 +2,21 @@ require 'spec_helper'
 
 describe 'layouts/application.html.erb' do
   before do
-    @user = User.new
+    @user = FactoryGirl.create(:user)
     view.stub(:current_user).and_return(@user)
   end
   it 'should include css & js files' do
     render
     rendered.should have_xpath("//link[contains(@href, '.css')]")
     rendered.should have_xpath("//script[contains(@src, '.js')]")
+  end
+
+  it 'should include the Google analytics script' do
+    dummy = Object.new
+    Rails.should_receive(:env).and_return(dummy)
+    dummy.should_receive(:production?).and_return(true)
+    render
+    rendered.should have_xpath("//script[text()[contains(.,#{GA.tracker})]]")
   end
 
   it 'should not have div nested inside p' do
@@ -71,7 +79,7 @@ describe 'layouts/application.html.erb' do
     it 'should render navigation links' do
       render
       rendered.should have_css('a#user_info', :visible => true)
-      rendered.should have_link 'My account', :href => edit_user_registration_path, :visible => false
+      rendered.should have_link 'My account', :href => users_show_path(@user), :visible => false
       rendered.within('div.navbar') do |header|
         header.should_not have_link 'Log in', :href => new_user_session_path
         header.should_not have_link 'Sign up', :href => new_user_registration_path
@@ -94,6 +102,14 @@ describe 'layouts/application.html.erb' do
         expect(selection).to have_css('#contact_form')
       end
     end
+    it 'shows info link' do
+      render
+      rendered.within('#footer') do |selection|
+        expect(selection).to have_content('Send a traditional email to info@agileventures.org, or use the contact form.')
+        expect(selection).to have_link('info@agileventures.org')
+      end
+    end
+
     it 'shows  required labels' do
       render
       rendered.within('#contact_form') do |selection|

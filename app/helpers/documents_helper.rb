@@ -2,8 +2,8 @@ module DocumentsHelper
   # TODO Bryan: After being accepted as safe, this should move to the document
   # mercury update to sanitize html before it saves into the database
   def clean_html(html)
-    raw sanitize html, tags: %w(h1 h2 h3 h4 h5 h6 b i pre span iframe div img br blockquote p a),
-                 attributes: %w(src frameborder allowfullscreen style href)
+    raw sanitize html, tags: %w(h1 h2 h3 h4 h5 h6 b i ul li pre span iframe div img br blockquote p a),
+                 attributes: %w(src target frameborder allowfullscreen style href)
   end
 
   def clean_html_summary(html)
@@ -16,7 +16,7 @@ module DocumentsHelper
 
   def created_by
     if @document.user_id.present?
-      user = User.find_by_id(@documentm.user_id)
+      user = User.find_by_id(@document.user_id)
       if user.first_name.present?
         ['by:', ([user.first_name, user.last_name].join(' '))].join(' ')
       else
@@ -28,7 +28,7 @@ module DocumentsHelper
   end
 
   def created_date
-    date = @documentm.created_at.strftime('Created: %Y-%m-%d')
+    date = @document.created_at.strftime('Created: %Y-%m-%d')
     (date)
   end
 

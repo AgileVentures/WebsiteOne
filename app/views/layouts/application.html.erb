@@ -6,6 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
+  <%= analytics_init if Rails.env.production? %>
 
 </head>
 <body>
@@ -32,6 +33,7 @@
 <section id="footer">
   <%= render 'layouts/footer' %>
 </section>
+
 
 <script>
     /* highlight the top nav as scrolling occurs */

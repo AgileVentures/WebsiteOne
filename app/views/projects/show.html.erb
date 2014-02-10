@@ -1,5 +1,5 @@
 <h1> <%= @project.title %> project</h1>
-<small>Status: <%= @project.status %> <%= created_date %> <%= created_by %></small>
+<small>Status: <%= @project.status %> <%= created_date %> <%= project_created_by %></small>
 <div>
   <% if user_signed_in? %>
       <% unless current_user.following?(@project) %>
@@ -19,8 +19,8 @@
 
 <div>
   <% if user_signed_in? %>
-      <%= link_to 'Edit', edit_project_path(@project.id), type: 'button', :class => 'btn btn-primary' %>
-      <%= link_to 'New Document', new_project_document_path(project_id: @project.id), :type => 'button', :class => 'btn btn-default' %>
+      <%= link_to 'Edit', edit_project_path(@project.friendly_id), type: 'button', :class => 'btn btn-primary' %>
+      <%= link_to 'New Document', new_project_document_path(project_id: @project.friendly_id), :type => 'button', :class => 'btn btn-default' %>
   <% end %>
 </div>
 

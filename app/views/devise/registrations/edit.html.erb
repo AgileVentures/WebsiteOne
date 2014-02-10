@@ -5,6 +5,11 @@
     <h2>Account details</h2>
   </div>
 </div>
+<div class="row preview_box">
+  <% if params[:preview] %>
+    <%= render 'preview' %>
+  <% end %>
+</div>
 <div class="row">
   <div class="col-md-2 col-md-offset-2">
 
@@ -17,8 +22,10 @@
   </div>
   <div class="col-md-4 ">
 
-
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
+        <div><%= f.label :display_profile %>
+          <%= f.check_box :display_profile %>
+        </div>
         <div><%= f.label :first_name %>
           <div class="form-group">
             <%= f.text_field :first_name, :autofocus => true, class: 'form-control' %>
@@ -33,14 +40,20 @@
           <div class="form-group">
             <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
           </div>
+          <div><%= f.label :display_email %>
+            <%= f.check_box :display_email %>
+          </div>
         </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-
-
+      <!-- Bryan: To be added back in a later story
+        <div><%= f.submit 'Preview', class: 'btn btn-primary btn-lg btn-block', name: 'preview' %></div> -->
         <div><%= f.submit 'Update', class: 'btn btn-primary btn-lg btn-block' %></div>
     <% end %>
+
+<!--     <div><%= link_to 'Preview', '#',
+          class: 'btn btn-primary btn-lg btn-block', id: 'preview' %></div> -->
 
     <br>
     <% supported_third_parties.each do |provider| %>

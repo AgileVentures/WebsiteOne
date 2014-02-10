@@ -1,4 +1,4 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+// This is a manifest file that will be compiled into application.js, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -17,7 +17,6 @@
 //= require nprogressbar
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
-
 
 $(function() {
   function ready() {
@@ -236,9 +235,9 @@ $(function() {
       var child = $(this).find('>:first-child');
       if (child.hasClass('fa-caret-down')) {
         child.removeClass('fa-caret-down');
-        child.addClass('fa-caret-up');
-      } else if (child.hasClass('fa-caret-up')) {
-        child.removeClass('fa-caret-up');
+        child.addClass('fa-caret-right');
+      } else if (child.hasClass('fa-caret-right')) {
+        child.removeClass('fa-caret-right');
         child.addClass('fa-caret-down');
       }
       // catch any collapsing element

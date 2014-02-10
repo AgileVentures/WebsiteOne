@@ -63,7 +63,30 @@ WebsiteOne::Application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.smtp_settings = {
+      :address              => 'smtp.gmail.com',
+      :port                 => 587,
+      :domain               => '',
+      :user_name            => 'wso.av.test@gmail.com',     #This is a temporary solution
+      :password             => 'Wso12345',                  #This is a temporary solution
+      :authentication       => 'plain',
+      :enable_starttls_auto => true  }
+
+  #config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.delivery_method = :smtp
+  #ActionMailer::Base.smtp_settings = {
+  #    :address        => 'smtp.sendgrid.net',
+  #    :port           => '587',
+  #    :authentication => :plain,
+  #    :user_name      => ENV['SENDGRID_USERNAME'],
+  #    :password       => ENV['SENDGRID_PASSWORD'],
+  #    :domain         => 'heroku.com'
+  #}
+  #config.action_mailer.default_url_options = { :host => 'your_domain.com' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
@@ -77,6 +100,7 @@ WebsiteOne::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  GA.tracker = 'UA-47795185-1'
 
   # may be needed for integrating bootstrap with Heroku deployment
   #config.cache_classes = true
