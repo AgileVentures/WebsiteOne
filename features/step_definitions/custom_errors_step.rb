@@ -1,10 +1,5 @@
 Given(/^(?:|I )am on the "(.*?)" page$/) do |page|
   case page
-    #when "Home" then visit root_path('show')
-    #when "contributors" then visit contributors_path
-    #when "sign up" then visit new_user_registration_path
-    #when "sign in" then visit new_user_session_path
-    #when "about" then visit page_path('About')
     when "foobar" then visit ("/#{page}")
   end
 end
@@ -28,4 +23,6 @@ And(/^the response status should be "([^"]*)"$/) do |code|
 end
 
 
-
+Then(/^I should see the static "([^"]*)" page$/) do |arg|
+  pending
+end

@@ -1,7 +1,7 @@
 class ErrorsController < ApplicationController
 
   def not_found
-    render template: 'errors/not_found', layout: 'layouts/application', status: 404
+    render template: 'pages/not_found', layout: 'layouts/application', status: 404
     #render :status => 404}
   end
 

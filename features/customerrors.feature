@@ -29,10 +29,10 @@ Feature:
 
 @allow-rescue
   Scenario: 404 page
-    When I am on the "foobar" page
-    Then the page should be titled "Page not found"
+    When I visit "foobar"
+    And the page should be titled "Page not found"
     And the response status should be "404"
-    And I should see "We're sorry, but couldn't find the page you requested"
+    And I should see "We're sorry, but we couldn't find the page you requested"
     #And the response status should be "404"
 
 
