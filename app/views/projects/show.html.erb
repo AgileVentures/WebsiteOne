@@ -37,11 +37,7 @@
     <ul class="list-group">
       <% unless @documents.empty? %>
         <h2>
-          Related documents
-          <% if user_signed_in? %>
-            <%= link_to raw('<i class="fa fa-plus-circle"></i>'), new_project_document_path(project_id: @project.friendly_id),
-                        :class => 'btn-edit', style: 'font-size: 100%;', 'data-toggle' => 'tooltip', 'data-placement' => 'top', title: 'New document' %>
-          <% end %>
+          Related documents<%= custom_css_btn 'new document', new_project_document_path(project_id: @project.friendly_id) if user_signed_in? %>
         </h2>
         <% @project.documents.roots.each do |d| %>
           <li class="list-group-item"><strong><%= link_to d.title, project_document_path(@project, d) %></strong></li>

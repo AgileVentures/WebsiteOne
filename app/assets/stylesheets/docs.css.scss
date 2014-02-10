@@ -1,31 +1,28 @@
 @import "mixins";
 
 .doc-option {
-  font-size: 50%;
-  position: relative;
+  font-size: 60%;
   display: inline;
 }
 
 .doc-option-icon {
-  width: 60px;
-  padding-left: 35px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 2;
   display: inline-block;
   background: #fff;
+  height: 100%;
+  vertical-align: middle;
 }
 
 .doc-option-text {
-  @include css-transition(left, 0.3s, ease, 0s);
-  position: absolute;
-  display: inline;
-  left: 0;
-  top: 0;
-  z-index: 0;
+  @include css-transition(max-width, 0.3s, ease, 0s);
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  max-width: 0px;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .doc-option:hover .doc-option-text {
-  left: 60px;
+  max-width: 150px;
 }

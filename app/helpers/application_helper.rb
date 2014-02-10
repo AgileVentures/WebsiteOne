@@ -69,7 +69,8 @@ module ApplicationHelper
 
   def custom_css_btn(text, path, options={})
     icon_for = {
-        'edit' => 'fa fa-pencil-square-o'
+        'edit' => 'fa fa-pencil-square-o',
+        'new document' => 'fa fa-plus-circle'
     }
     s = ''
     options.each do |k, v|
