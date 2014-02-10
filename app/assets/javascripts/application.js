@@ -116,8 +116,9 @@ $(function() {
     var affixedNav = $('#nav'),
         header = $('#main_header'),
         sidebar = $('#sidebarnav'),
+        sidebarInner = $('#sidebar'),
         notSidebar = $('#not-sidebar'),
-        sidebarContainer = $('#sidebar-container'),
+        sidebarContainer = $('#with-sidebar-container '),
         wrapper = $('#wrap'),
         main = $('#main'),
         // manually selected properties which will affect affix threshold height, if layout changes,
@@ -172,7 +173,7 @@ $(function() {
           sidebar.css({
             'position': 'absolute',
             'top': 'auto',
-            'left': $('#sidebar-container').css('padding-left'),
+            'left': sidebarContainer.css('padding-left'),
             'bottom': main.height() + mainTopPadding - wrapper.height(),
             'width': sidebarContainer.width() * 0.25
           });
@@ -180,7 +181,7 @@ $(function() {
         },
         onResize: function() {
           worryAboutSidebar = (sidebar.height() < notSidebar.height()) && ($(window).width() > mobileWidth);
-          sidebar.css({ 'max-height': $(window).height() - thresholdTop - 40 }); // Bryan: 40px bottom padding
+          sidebarInner.css({ 'max-height': $(window).height() - thresholdTop - 40 }); // Bryan: 40px bottom padding
           if (worryAboutSidebar && ($(window).scrollTop() > thresholdTop)) {
             this.affix();
             this.checkBottom();
@@ -229,16 +230,25 @@ $(function() {
       }
     }
 
+    /**
+     * Carousel collapse button, switches icons when the collapse/button icon is clicked and triggers sidebar
+     * checking event. It listens to click events with CSS class 'collapse-button'
+     *
+     * To change the icons, alter collapsedClass and expandedClass to append the appropriate CSS classes
+     */
+
+    var collapsedClass = 'fa-caret-down',
+        expandedClass = 'fa-caret-right';
     // a hack to follow collapse animation, ideally should find the right animation callbacks
     $('.collapse-button').on('click', function() {
       // TODO Bryan: This does not work properly if the user clicks too fast
       var child = $(this).find('>:first-child');
-      if (child.hasClass('fa-caret-down')) {
-        child.removeClass('fa-caret-down');
-        child.addClass('fa-caret-right');
-      } else if (child.hasClass('fa-caret-right')) {
-        child.removeClass('fa-caret-right');
-        child.addClass('fa-caret-down');
+      if (child.hasClass(collapsedClass)) {
+        child.removeClass(collapsedClass);
+        child.addClass(expandedClass);
+      } else if (child.hasClass(expandedClass)) {
+        child.removeClass(expandedClass);
+        child.addClass(collapsedClass);
       }
       // catch any collapsing element
       h1 = h2 = sidebar.height();

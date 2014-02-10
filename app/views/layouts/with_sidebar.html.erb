@@ -1,10 +1,12 @@
 <%= content_for :content do %>
-  <div id="sidebar-container"class="container">
+  <div id="with-sidebar-container"class="container">
     <nav id="sidebarnav" class="col-sm-3" role="complementary">
     <%= render partial: 'layouts/sidebar', locals: { project: @project, document: @document } %>
     </nav>
     <div id="not-sidebar" class="col-sm-9 pull-right">
-      <%= yield %>
+      <div id="not-sidebar-content" class="pull-right">
+       <%= yield %>
+     </div>
     </div>
   </div>
 <% end %>

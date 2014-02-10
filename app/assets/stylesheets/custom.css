@@ -38,6 +38,11 @@ a:hover, a:active {
     color: #000000 !important;
 }
 
+.btn-edit {
+  font-size: 50%;
+  margin-left: 15px;
+  text-transform: lowercase;
+}
 
 .row {
     margin-left:0px;
