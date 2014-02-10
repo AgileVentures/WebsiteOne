@@ -22,7 +22,7 @@ And(/^the response status should be "([^"]*)"$/) do |code|
   page.status_code.should eql(code.to_i)
 end
 
-
-Then(/^I should see the static "([^"]*)" page$/) do |arg|
-  pending
+When(/^I encounter an internal server error$/) do
+  VisitorsController.any_instance.should_receive(:index).and_raise(Exception)
+  visit root_path
 end

@@ -33,19 +33,9 @@ Feature:
     And the page should be titled "Page not found"
     And the response status should be "404"
     And I should see "We're sorry, but we couldn't find the page you requested"
-    #And the response status should be "404"
 
-
-
-
-#@allow-rescue
-
-#Scenario: Show custom 500 page
-#  When I am on the "ewew||" page
-#  Then the page should be titled "500 Internal Error"
-#  And the response status should be "500"
-#  Then show me the page
-#  And I should see "We're sorry, but we couldn't process your request"
-
-
-
+Scenario: 500 page
+  When I encounter an internal server error
+  Then the page should be titled "500 Internal Error"
+  And the response status should be "500"
+  And I should see "Something went terribly wrong"
