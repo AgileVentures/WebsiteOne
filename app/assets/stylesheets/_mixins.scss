@@ -4,3 +4,10 @@
   -webkit-box-shadow: $h-shadow $v-shadow $blur-dist $spread $color;
   box-shadow:         $h-shadow $v-shadow $blur-dist $spread $color;
 }
+
+@mixin css-transition($property, $duration, $interpolation, $delay) {
+  -webkit-transition: $property $duration $interpolation $delay;
+  -moz-transition: $property $duration $interpolation $delay;
+  -o-transition: $property $duration $interpolation $delay;
+  transition: $property $duration $interpolation $delay;
+}

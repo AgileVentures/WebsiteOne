@@ -49,12 +49,19 @@
   text-align: center;
 }
 
+#sidebar span.collapse-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: -18px;
+}
+
 #sidebar ul {
   list-style: none;
+  padding-left: 18px;
 }
 
 #sidebar ul ul {
-  padding-left: 38px;
+  padding-left: 20px;
 }
 
 #sidebar li {

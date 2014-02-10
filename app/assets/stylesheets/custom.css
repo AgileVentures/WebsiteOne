@@ -146,6 +146,9 @@ h1 {
     color: #000000;
 }
 
+.flash-div {
+    opacity: 0.8;
+}
 
 #nav {
     width: 100%;

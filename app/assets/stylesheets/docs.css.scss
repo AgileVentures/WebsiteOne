@@ -1,0 +1,31 @@
+@import "mixins";
+
+.doc-option {
+  font-size: 50%;
+  position: relative;
+  display: inline;
+}
+
+.doc-option-icon {
+  width: 60px;
+  padding-left: 35px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  display: inline-block;
+  background: #fff;
+}
+
+.doc-option-text {
+  @include css-transition(left, 0.3s, ease, 0s);
+  position: absolute;
+  display: inline;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.doc-option:hover .doc-option-text {
+  left: 60px;
+}

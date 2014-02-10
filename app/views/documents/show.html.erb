@@ -4,16 +4,15 @@
      </h4>
 <% end %>
 <h1>
-  <div style="display: inline-block;" id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div>
+  <div style="display: inline;" id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div>
   <% if user_signed_in? %>
-    <%= link_to raw('<i class="fa fa-pencil-square-o"></i>'), mercury_edit_path, id: 'edit_link',
-                data: {save_url: project_document_mercury_update_path(@project, @document)},
-                class: 'btn-edit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', title: 'Edit' %>
+    <%= custom_css_btn 'edit', mercury_edit_path, id: 'edit_link',
+                       data: {save_url: project_document_mercury_update_path(@project, @document)} %>
   <% end %>
 </h1>
 
-<div style="font-size: 0.8em; font-style: italic;">
-  <div>Project: <%= link_to @project.title, project_path(@project) %></div>
+<div style="font-size: 1.0em; font-style: italic;">
+  <div>Project: <%= link_to @project.title, project_path(@project), style: 'font-style: normal;' %></div>
   <div><%= "Created #{time_ago_in_words(@document.created_at)} ago" %> by <%= created_by %></div>
 </div>
 

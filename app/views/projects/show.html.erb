@@ -1,12 +1,9 @@
 <h1>
   <%= @project.title %>
-  <% if user_signed_in? %>
-    <%= link_to raw('<i class="fa fa-pencil-square-o"></i>'), edit_project_path(@project.friendly_id),
-                :class => 'btn-edit', 'data-toggle' => 'tooltip', 'data-placement' => 'top', title: 'Edit' %>
-  <% end %>
+  <%= custom_css_btn 'edit', edit_project_path(@project) if user_signed_in? %>
 </h1>
 
-<div style="font-size: 0.8em; font-style: italic;">
+<div style="font-size: 1.0em; font-style: italic;">
   <div>Status: <strong style="font-style: normal;"><%= @project.status.upcase %></strong></div>
   <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= project_created_by %></div>
 </div>
@@ -30,7 +27,7 @@
 <div class="small-divider"></div>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#documents_list" data-toggle="tab">Documents</a></li>
+  <li class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.count %>)</a></li>
   <li><a href="#members_list" data-toggle="tab">Members List (<%= @members.count %>)</a></li>
 </ul>
 
@@ -38,7 +35,7 @@
 <div class="tab-content">
   <div class="tab-pane active" id="documents_list">
     <ul class="list-group">
-      <% unless @project.documents.empty? %>
+      <% unless @documents.empty? %>
         <h2>
           Related documents
           <% if user_signed_in? %>
@@ -49,6 +46,10 @@
         <% @project.documents.roots.each do |d| %>
           <li class="list-group-item"><strong><%= link_to d.title, project_document_path(@project, d) %></strong></li>
         <% end %>
+      <% else %>
+        <p style="margin-top: 20px;">No documents can be found for project "<%= @project.title %>"</p>
+        <%= link_to 'New Document', new_project_document_path(project_id: @project.friendly_id),
+                    type: 'button', class: 'btn btn-default' %>
       <% end %>
     </ul>
   </div>
