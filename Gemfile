@@ -34,7 +34,7 @@ group :test do
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
-  gem 'zeus' # rails preloading environment
+  gem 'zeus', '0.13.4.pre2' # rails preloading environment (the only ver that works with RubyMine)
   gem 'webmock' # mocking external net connections
 end
 
