@@ -86,6 +86,12 @@ Given(/^I am on the home page$/) do
   visit "/"
 end
 
+Then(/^(.*) in the project members list$/) do |s|
+  within(:css, '#members_list') do
+    step s
+  end
+end
+
 When(/^I go to the next page$/) do
   first(:css, 'a', text: 'Next').click()
 end

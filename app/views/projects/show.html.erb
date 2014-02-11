@@ -54,7 +54,7 @@
     <% unless @documents.empty? %>
       <h2>Related documents</h2>
       <ul class="listings">
-        <% @project.documents.roots.each do |d| %>
+        <% @documents.roots.each do |d| %>
           <li class="listings-item">
             <% num_children = d.children.count %>
             <strong><%= link_to d.title, project_document_path(@project, d) %></strong> <%= "(#{num_children})" if num_children > 0 %> -
