@@ -11,7 +11,7 @@
   </div>
 </div>
 <%= will_paginate @projects %>
-<ul style="list-style: none; padding-left: 0;">
+<ul id="project-list" style="list-style: none; padding-left: 0;">
   <% if @projects.empty? %>
     <li>No projects were found, wait wha..?</li>
   <% else %>

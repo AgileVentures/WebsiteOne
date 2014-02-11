@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   def display_name
     name = [ self.first_name, self.last_name ].join(' ').squish
     if name.match /^\s+$/
-      self.email
+      self.email.gsub(/@.*$/, '')
     else
       name
     end
