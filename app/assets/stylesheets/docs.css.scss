@@ -53,3 +53,30 @@
   font-size: 220%;
   list-style: none;
 }
+
+.project-listing {
+  padding: 10px;
+  color: #000;
+  width: 100%;
+  @include css-transition(background, 0.3s, ease, 0s);
+  position: relative;
+}
+
+.project-listing:hover {
+  background: #F7EFEB;
+}
+
+.project-listing-overview {
+  margin-right: 70px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.project-listing-stats {
+  width: 60px;
+  padding: 5px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

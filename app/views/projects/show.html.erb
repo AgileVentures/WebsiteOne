@@ -54,18 +54,18 @@
         <% end %>
       <% else %>
         <p style="margin-top: 20px;">No documents can be found for project "<%= @project.title %>"</p>
-        <%= link_to 'New Document', new_project_document_path(project_id: @project.friendly_id),
-                    type: 'button', class: 'btn btn-default' %>
       <% end %>
     </ul>
   </div>
   <div class="tab-pane" id="members_list">
     <ul class="list-group">
-      <h2>
-        List of Project Members
-      </h2>
-      <% @members.each do |member| %>
-        <li class="list-group-item"><strong><%= link_to member.email, users_show_path(member) %></strong></li>
+      <% if @members.empty? %>
+        <p style="margin-top: 20px;">No members in project "<%= @project.title %>"</p>
+      <% else %>
+        <h2>List of Project Members</h2>
+        <% @members.each do |member| %>
+          <li class="list-group-item"><strong><%= link_to member.email, users_show_path(member) %></strong></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

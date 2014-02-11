@@ -44,6 +44,13 @@ a:hover, a:active {
   text-transform: lowercase;
 }
 
+.fa {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    text-align: center;
+}
+
 .row {
     margin-left:0px;
     margin-right:0px;

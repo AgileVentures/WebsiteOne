@@ -1,39 +1,17 @@
-<!-- Bryan: commented out banner
-<section class="bg-3" style="margin-top: -120px;">
-  <div class="col-sm-10 col-sm-offset-1">
-    <div class="page-header opacity-dark text-center">
-      <h1>Agile PROJECTS</h1>
-    </div>
-  </div>
-</section>
-<div class="divider"></div> -->
 <h1>List of Projects</h1>
-<table id="projects" class="table table-striped">
-  <thead>
-  <tr>
-    <th style="width:90%"></th>
-    <% if user_signed_in? %>
-      <th style="width:15px"></th>
+<%= will_paginate @projects %>
+<ul style="list-style: none; padding-left: 0;">
+  <% if @projects.empty? %>
+    <li>No projects were found, wait wha..?</li>
+  <% else %>
+    <% @projects.each do |project| %>
+    <a href="<%= project_path(project) %>">
+      <li class="project-listing"><%= render 'listing', project: project %></li>
+    </a>
     <% end %>
-  </tr>
-  </thead>
-  <tbody>
-  <% @projects.each do |project| %>
-
-    <tr id="<%= project.id %>">
-      <td><h3><%= link_to project.title, project_path(project) %></h3>
-        <small>Status: <%= project.status %> Created: <%= project.created_at.strftime("%Y-%m-%d") %></small>
-        <p><%= project.description.truncate(250, separator: ' ') %></p></td>
-      <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_project_path(project), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
-      <% end %>
-    </tr>
-
   <% end %>
-  </tbody>
-  <p><%= will_paginate @projects %></p>
-
-</table>
+</ul>
+<%= will_paginate @projects %>
 
 <% if user_signed_in? %>
   <%= link_to 'New Project', new_project_path, :type => 'button', :class => 'btn btn-default' %>
