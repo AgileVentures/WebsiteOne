@@ -67,11 +67,7 @@ module ApplicationHelper
     !!(email =~ /\A([^@\s]+)@((?:[\w]+\.)+[a-z]{2,})\z/i)
   end
 
-  def custom_css_btn(text, path, options={})
-    icon_for = {
-        'edit' => 'fa fa-pencil-square-o',
-        'new document' => 'fa fa-plus-circle'
-    }
+  def custom_css_btn(text, icon_class, path, options={})
     s = ''
     options.each do |k, v|
       if k == 'data'
@@ -86,7 +82,7 @@ module ApplicationHelper
     raw <<-HTML
     <a href="#{path}"#{s}>
       <div class="doc-option">
-        <div class="doc-option-icon"><i class="#{icon_for[text.downcase] || 'fa fa-question-circle'}"></i></div>
+        <div class="doc-option-icon"><i class="#{icon_class}"></i></div>
         <div class="doc-option-text">#{text}</div>
       </div>
     </a>

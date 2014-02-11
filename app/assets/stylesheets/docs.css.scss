@@ -3,6 +3,9 @@
 .doc-option {
   font-size: 60%;
   display: inline;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .doc-option-icon {
@@ -13,10 +16,10 @@
 }
 
 .doc-option-text {
-  @include css-transition(max-width, 0.3s, ease, 0s);
+  @include css-transition(max-width, 0.4s, ease, 0s);
   display: inline-block;
   vertical-align: middle;
-  width: auto;
+  width: auto !important;
   max-width: 0px;
   height: 100%;
   white-space: nowrap;
@@ -24,5 +27,29 @@
 }
 
 .doc-option:hover .doc-option-text {
-  max-width: 150px;
+  max-width: 250px;
+}
+
+#doc-box {
+  height: auto;
+  width: 100%;
+  position: relative;
+}
+
+#doc-overview {
+  width: 70%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#doc-side-panel {
+  padding-top: 25px;
+  width: 20%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#doc-side-panel ul {
+  font-size: 220%;
+  list-style: none;
 }

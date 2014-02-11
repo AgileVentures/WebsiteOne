@@ -18,7 +18,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
-    #@documents = Document.search(params[:search], params[:page])
+    @children = @document.children
   end
 
   # GET /documents/new
