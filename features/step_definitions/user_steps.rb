@@ -311,6 +311,13 @@ Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
   end
 end
 
+Given(/^user "(.*?)" follows projects:$/) do |user, table|
+  @user = User.find_by_first_name user
+  table.hashes.each do | project |
+      step %Q{I should become a member of project "#{project[:title]}"}
+  end
+end
+
 Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   @user = User.find_by_first_name first_name
   visit new_user_session_path
