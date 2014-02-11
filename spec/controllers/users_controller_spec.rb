@@ -19,8 +19,8 @@ describe UsersController do
     end
 
     it 'assigns all users' do
-    	get 'index'
-    	assigns(:users).should eq @users
+      get 'index'
+      assigns(:users).should eq @users
     end
   end
 
@@ -33,15 +33,6 @@ describe UsersController do
                      display_profile: true,
                      youtube_id: 'test_id'
       )
-      User.should_receive(:find).and_return(@user)
-    end
-
-    it 'assigns a user instance' do
-  		get 'show', id: @user.id
-  		expect(assigns(:user)).not_to be_nil
-    end
-
-    it 'renders the show view' do
       User.stub(find: @user)
 
       @youtube_videos = [
@@ -64,24 +55,24 @@ describe UsersController do
       Youtube.stub(user_videos: @youtube_videos)
 
     end
-    it "assigns a user instance" do
+
+    it 'assigns a user instance' do
       get 'show', id: @user.id
       expect(assigns(:user)).to eq(@user)
     end
-
 
     it 'assigns youtube videos' do
       get 'show', id: @user.id
       expect(assigns(:youtube_videos)).to eq(@youtube_videos)
     end
 
-    it "renders the show view" do
+    it 'renders the show view' do
       get 'show', id: @user.id
       expect(response).to render_template :show
     end
 
     it 'it renders an error message when accessing a private profile' do
-      @user.should_receive(:display_profile).and_return(false)
+      @user.stub(display_profile: false)
       get 'show', id: @user.id
       expect(response).to redirect_to root_path
     end
