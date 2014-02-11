@@ -15,7 +15,6 @@ class UsersController < ApplicationController
       flash[:notice] = 'User has set his profile to private'
       redirect_to root_path
     else
-      puts "we are here"
       videos = Youtube.user_videos(@user) if @user
       if videos
         @youtube_videos = videos.select do |hash|
