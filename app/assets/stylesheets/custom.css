@@ -272,7 +272,7 @@ section {
 }
 
 section#main {
-    padding-top: 30px;
+    padding-top: 50px;
 }
 
 .bg-4 {
@@ -771,6 +771,14 @@ section#main {
 .avatar-group .avatar-lower h3 {
     color: white;
     text-shadow: 2px 1px 1px black;
+}
+
+.fa-large {
+    font-size: 28px;
+    margin-top: -10px;
+    margin-left: -5px;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 /* Responsive versions */

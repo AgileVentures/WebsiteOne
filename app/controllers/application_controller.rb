@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
       #logger.log(exception)
       case status
         when 404
-          render template: 'pages/not_found', status: 404
+          render template: 'pages/not_found', layout: 'layouts/application', status: 404
 
         when 500
           redirect_to '/internal_server_error'
