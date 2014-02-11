@@ -28,9 +28,8 @@
   </div>
 </div>
 
-<div class="small-divider"></div>
-<div id="document_body" style="width: 100%" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
-<div class="small-divider"></div>
+<div id="document_body" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
+
 <% if user_signed_in? %>
    <%= link_to 'Save', '' , id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
     <%= link_to 'Cancel', '' , id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>

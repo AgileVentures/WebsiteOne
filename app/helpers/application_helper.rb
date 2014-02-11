@@ -70,10 +70,10 @@ module ApplicationHelper
   def custom_css_btn(text, icon_class, path, options={})
     s = ''
     options.each do |k, v|
-      if k == 'data'
+      if v.is_a?(Hash)
         # Bryan: this extra level is to support data tags
         v.each do |key, value|
-          s = %Q{#{s} #{k}-#{key.to_s}="#{value}"}
+          s = %Q{#{s} #{k}-#{key.to_s.gsub(/_/, '-')}="#{value}"}
         end
       else
         s = %Q{#{s} #{k.to_s}="#{v}"}
