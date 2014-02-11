@@ -41,7 +41,7 @@ end
 group :development, :test do
   gem 'rspec-rails' #unit testing
 #TODO YA do we need it? It breaks Rubymine's debugging
-# gem 'debugger'  # Use debugger
+  gem 'debugger'  # Use debugger
   gem 'jasmine' # framework for testing javascript
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'colored' # colorizing console
