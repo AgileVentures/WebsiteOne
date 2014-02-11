@@ -773,6 +773,14 @@ section#main {
     text-shadow: 2px 1px 1px black;
 }
 
+.fa-large {
+    font-size: 28px;
+    margin-top: -10px;
+    margin-left: -5px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
 /* Responsive versions */
 
 /* End of CSS for USER PROFILE page */

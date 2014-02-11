@@ -63,7 +63,7 @@ describe "users/show.html.erb" do
     view.stub(current_user: @user)
 
     render
-    expect(rendered).to have_link('Link your YouTube channel')
+    expect(rendered).to have_link('Sync with YouTube')
   end
 
   it 'renders "disconnect youtube channel" when user views his profile and is connected' do
@@ -72,7 +72,7 @@ describe "users/show.html.erb" do
     view.stub(current_user: @user)
 
     render
-    expect(rendered).to have_link('Unlink your YouTube channel')
+    expect(rendered).to have_link('Disconnect YouTube')
   end
 
   it 'does not render "connect youtube channel" when user views other profile' do

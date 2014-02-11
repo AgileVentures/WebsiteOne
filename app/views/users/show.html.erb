@@ -30,7 +30,7 @@
         <h3> <%= @user.email %></h3>
     <% end %>
 
-    <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary", type: "button" if @user.eql?(current_user) %>
+    <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary btn-lg", type: "button" if @user.eql?(current_user) %>
     <% if @user.eql?(current_user) %>
         <% if @user.youtube_id %>
             <%= unlink_from_youtube_button(request.original_url) %>
