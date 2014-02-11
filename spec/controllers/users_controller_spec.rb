@@ -66,8 +66,9 @@ describe UsersController do
     end
     it "assigns a user instance" do
       get 'show', id: @user.id
-      expect(assigns(:user)).not_to be_nil
+      expect(assigns(:user)).to eq(@user)
     end
+
 
     it 'assigns youtube videos' do
       get 'show', id: @user.id
