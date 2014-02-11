@@ -219,7 +219,7 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   expect(current_path).to eq path_to(page, this_user)
 end
 
-Given(/^I am on my (.*) page$/) do |page|
+Given(/^I (?:am on|go to) my (.*) page$/) do |page|
   page.downcase!
   if page == 'profile'
     visit users_show_path(@user)

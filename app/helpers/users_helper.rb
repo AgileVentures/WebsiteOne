@@ -16,8 +16,21 @@ module UsersHelper
     end
   end
 
-  def date_format(date)
-    date.strftime("#{date.day.ordinalize} %b %Y")
+
+  def link_to_youtube_button(origin_url)
+    link_to 'Link your YouTube channel', "/auth/gplus/?youtube=true&origin=#{origin_url}", class: "btn btn-success", type: "button"
+  end
+
+  def unlink_from_youtube_button(origin_url)
+    link_to 'Unlink your YouTube channel', "/auth/destroy/0?youtube=true&origin=#{origin_url}", class: "btn btn-danger", type: "button"
+  end
+
+  def video_link(video)
+    link_to video[:title], video[:url], id: video[:id], class: 'yt_link', data: { content: video[:content] }
+  end
+
+  def video_embed_link(video)
+    "http://www.youtube.com/v/#{video[:id]}?version=3&enablejsapi=1"
   end
 
 end
@@ -26,25 +39,30 @@ end
 module Youtube
   class << self
 
-    def user_videos(user, token)
-      #user_id = user.youtube_id || channel_id(token)
-      user_id = 'UCgTOz02neY70sqnk05zNkGA'
-      parse_response(open("http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json").read)
+    def user_videos(user)
+      if user_id = user.youtube_id
+        parse_response(open("http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json").read)
+      end
     end
 
     def parse_response(response)
-      json = JSON.parse(response)
-      videos = json['feed']['entry']
-      videos.map do |hash|
-        {
-            id: hash['id']['$t'].split('/').last,
-            published: hash['published']['$t'].to_date,
-            title: hash['title']['$t'],
-            content: hash['content']['$t'],
-            url: hash['link'].first['href'],
-            thumbs: hash['media$group']['media$thumbnail'],
-            player_url: hash['media$group']['media$player'].first['url']
-        }
+      begin
+        json = JSON.parse(response)
+        videos = json['feed']['entry']
+        videos.map do |hash|
+          {
+              id:         hash['id']['$t'].split('/').last,
+              published:  hash['published']['$t'].to_date,
+              title:      hash['title']['$t'],
+              content:    hash['content']['$t'],
+              url:        hash['link'].first['href'],
+              thumbs:     hash['media$group']['media$thumbnail'],
+              player_url: hash['media$group']['media$player'].first['url']
+          }
+        end
+      rescue JSON::JSONError
+        Rails.logger.warn('Attempted to decode invalid JSON')
+        nil
       end
     end
 
