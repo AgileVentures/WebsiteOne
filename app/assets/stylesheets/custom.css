@@ -38,6 +38,19 @@ a:hover, a:active {
     color: #000000 !important;
 }
 
+.btn-edit {
+  font-size: 50%;
+  margin-left: 15px;
+  text-transform: lowercase;
+}
+
+.fa {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    text-align: center;
+}
+
 .row {
     margin-left: 0px;
     margin-right: 0px;
@@ -140,6 +153,10 @@ h1 {
 
 .opacity-light h1 {
     color: #000000;
+}
+
+.flash-div {
+    opacity: 0.8;
 }
 
 #nav {
@@ -252,6 +269,10 @@ section {
     height: auto !important;
     height: 100%;
     padding-top: 100px;
+}
+
+section#main {
+    padding-top: 30px;
 }
 
 .bg-4 {

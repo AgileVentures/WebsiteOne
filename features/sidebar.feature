@@ -25,7 +25,7 @@ Feature: Sidebar navigation
     Then I should see the sidebar
     Given I am on the "projects" page
     Then I should see the sidebar
-    When I click "New Project"
+    When I click the very stylish "New Project" button
     Then I should see the sidebar
 
   Scenario: Sidebar always shows the relevant information

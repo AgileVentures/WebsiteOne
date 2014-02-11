@@ -233,3 +233,15 @@ Given(/^I want to use third party authentications$/) do
      'credentials' => {'token' => 'test_token'}
   }
 end
+
+When(/^I click the very stylish "([^"]*)" button$/) do |button|
+  find(:css, %Q{a[data-link-text="#{button.downcase}"]}).click()
+end
+
+Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, button|
+  if should == 'not '
+    page.should_not have_css %Q{a[data-link-text="#{button.downcase}"]}
+  else
+    page.should have_css %Q{a[data-link-text="#{button.downcase}"]}
+  end
+end
