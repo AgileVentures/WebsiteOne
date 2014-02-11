@@ -35,6 +35,10 @@ module ApplicationHelper
     @roots = Document.roots.where('project_id = ?', @project.id).order(:created_at)
   end
 
+  def date_format(date)
+    date.strftime("#{date.day.ordinalize} %b %Y")
+  end
+
   def social_button(provider, options={})
     provider = provider.downcase
     display_name = {
@@ -79,6 +83,7 @@ module ApplicationHelper
         s = %Q{#{s} #{k.to_s}="#{v}"}
       end
     end
+    # Bryan: data-link-text attribute is used to find this element in the tests
     raw <<-HTML
     <a href="#{path}"#{s} data-link-text="#{text.downcase}">
       <div class="doc-option">
