@@ -452,28 +452,24 @@ window.Mercury = {
 };
 
 jQuery(window).on('mercury:ready', function() {
-    var link = $('#mercury_iframe').contents().find('#edit_link');
-    Mercury.saveUrl = link.data('save-url');
-    link.hide();
-});
+  var mercuryiframe = $('#mercury_iframe'),
+      editLink = mercuryiframe.contents().find('#edit_link'),
+      newDocLink = mercuryiframe.contents().find('#new_document_link'),
+      cancelLink = mercuryiframe.contents().find('#cancel_link'),
+      saveLink = mercuryiframe.contents().find('#save_link');
 
-jQuery(window).on('mercury:ready', function() {
-    var link = $('#mercury_iframe').contents().find('#new_document_link');
-    link.hide();
-});
+  Mercury.saveUrl = editLink.data('save-url');
+  editLink.hide();
 
-jQuery(window).on('mercury:ready', function() {
-    var link = $('#mercury_iframe').contents().find('#cancel_link');
-    link.show();
-});
+  newDocLink.hide();
 
-jQuery(window).on('mercury:ready', function() {
-    var link = $('#mercury_iframe').contents().find('#save_link');
-    link.show();
-    link.on('click', function(event) {
-        event.preventDefault();
-        $('.mercury-button.mercury-save-button').click();
-    });
+  cancelLink.show();
+
+  saveLink.show();
+  saveLink.on('click', function(event) {
+    event.preventDefault();
+    $('.mercury-button.mercury-save-button').click();
+  });
 });
 
 jQuery(window).on('mercury:saved', function() {

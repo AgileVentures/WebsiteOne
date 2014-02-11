@@ -1,0 +1,14 @@
+<div class="project-listing-overview">
+  <h3><%= project.title %></h3>
+  <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
+    <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
+    <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= project.user.display_name %></div>
+  </div>
+  <p><%= project.description.truncate(250, separator: ' ') %></p>
+</div>
+<div class="project-listing-stats">
+  <ul style="list-style: none; padding-left: 0;">
+    <li><i class="fa fa-users"></i> <%= project.followers.count %></li>
+    <li><i class="fa fa-file-text-o"></i> <%= project.documents.count %></li>
+  </ul>
+</div>

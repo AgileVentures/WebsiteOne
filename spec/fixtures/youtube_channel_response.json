@@ -1,0 +1,15 @@
+{
+    "kind": "youtube#channelListResponse",
+    "etag": "\"79S54kzisD_9SOTfQLu_0TVQSpY/jvmaKou3DdjuEH_svic1zjMHULg\"",
+    "pageInfo": {
+        "totalResults": 1,
+        "resultsPerPage": 1
+    },
+    "items": [
+        {
+            "kind": "youtube#channel",
+            "etag": "\"79S54kzisD_9SOTfQLu_0TVQSpY/_rRsdh5rrZwfKFcPLfiSbMSZNIk\"",
+            "id": "test_id"
+        }
+    ]
+}
