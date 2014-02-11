@@ -16,7 +16,7 @@
     <li>No projects were found, wait wha..?</li>
   <% else %>
     <% @projects.each do |project| %>
-    <a href="<%= project_path(project) %>">
+    <a href="<%= project_path(project) %>" data-link-text="<%= project.title.downcase %>">
       <li class="project-listing"><%= render 'listing', project: project %></li>
     </a>
     <% end %>

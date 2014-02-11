@@ -10,7 +10,7 @@
             <i class="collapse-icon fa fa-caret-<%= has_docs and should_focus ? 'down' : 'right' %>"></i>
           </a>
         <% end %>
-        <% if should_focus and @document.nil? %>
+        <% if should_focus and document.nil? %>
         <p style="display: inline;"><strong><%= p.title %></strong></p>
         <% else %>
         <%= link_to p.title, project_path(p), class: should_focus ? 'focused' : '' %>
@@ -19,10 +19,10 @@
       <% if has_docs %>
         <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
           <% p.documents.roots.each do |d| %>
-            <% doc_focus = (should_focus and (@document == d or @document.try(&:root) == d)) %>
+            <% doc_focus = (should_focus and (document == d or document.try(&:root) == d)) %>
             <li>
               <% display_text = %Q{#{d.title}#{" (#{d.children.count})" unless d.children.empty?}} %>
-              <% if doc_focus and @document == d %>
+              <% if doc_focus and document == d %>
               <p style="display: inline;"><strong><%= display_text %></strong></p>
               <% else %>
               <%= link_to display_text, project_document_path(p, {id: d.to_param}), class: doc_focus ? 'focused' : '' %>

@@ -2,19 +2,21 @@ require 'spec_helper'
 
 describe 'projects/index.html.erb' do
   before :each do
-   @projects_collection = (1..9).map { |id|
-    stub_model(Project, {
-        id: id,
-        title: 'hello',
-        description: 'world',
-        status: 'one',
-        friendly_id: "project-#{id}",
-        created_at: '2014-01-23 23:39:15'
-    }) }
+    @user = stub_model(User, display_name: 'John Butcher')
+    @projects_collection = (1..9).map { |id|
+      stub_model(Project, {
+          id: id,
+          title: 'hello',
+          description: 'world',
+          status: 'one',
+          friendly_id: "project-#{id}",
+          created_at: '2014-01-23 23:39:15',
+          user: @user
+      }) }
 
-   projects_collection.stub(:total_pages).and_return(2)
-    projects_collection.stub(:current_page).and_return(1)
-    assign(:projects, projects_collection)
+    @projects_collection.stub(:total_pages).and_return(2)
+    @projects_collection.stub(:current_page).and_return(1)
+    assign(:projects, @projects_collection)
   end
 
   let(:projects_collection) { @projects_collection }

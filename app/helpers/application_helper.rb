@@ -80,7 +80,7 @@ module ApplicationHelper
       end
     end
     raw <<-HTML
-    <a href="#{path}"#{s}>
+    <a href="#{path}"#{s} data-link-text="#{text.downcase}">
       <div class="doc-option">
         <div class="doc-option-icon"><i class="#{icon_class}"></i></div>
         <div class="doc-option-text">#{text}</div>
