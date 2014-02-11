@@ -125,8 +125,10 @@
         requestAnimFrame( animate );
     }
 
-    window.addEventListener ? window.addEventListener( 'load', initialize, false ) : window.onload = initialize;
+//    window.addEventListener ? window.addEventListener( 'load', initialize, false ) : window.onload = initialize;
 
+    $(document).ready(initialize);
+    $(document).on('page:load', initialize);
 })();
 
 
