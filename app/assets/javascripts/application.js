@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require nprogressbar
+//= require 404
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
