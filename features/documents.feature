@@ -6,14 +6,14 @@ Feature: Manage Document
 
   Background:
     Given the following projects exist:
-      | title       | description          | status   | id |
-      | hello world | greetings earthlings | active   | 1  |
-      | hello mars  | greetings aliens     | inactive | 2  |
+      | title       | description          | status   |
+      | hello world | greetings earthlings | active   |
+      | hello mars  | greetings aliens     | inactive |
 
     And the following documents exist:
-      | title         | body             | project_id | id | parent_id |
-      | Guides        | My guide to      | 2          | 33 |           |
-      | Documentation | My documentation | 1          | 44 |           |
+      | title         | body             | project     |
+      | Guides        | My guide to      | hello mars  |
+      | Documentation | My documentation | hello world |
 
 
   Scenario: Render of list documents
@@ -26,10 +26,17 @@ Feature: Manage Document
   Scenario: Create a new document
     Given I am logged in
     Given I am on the "Show" page for project "hello world"
-    When I click "New Document"
+    When I click the very stylish "New Document" button
     And I fill in "Title" with "New doc title"
     And I click "Submit"
     Then I should see "Document was successfully created."
+
+  Scenario: Create a new document page should have a back button
+    Given I am logged in
+    Given I am on the "Show" page for project "hello world"
+    When I click the very stylish "New Document" button
+    And I click "Back"
+    Then I should be on the "Show" page for project "hello world"
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
@@ -46,7 +53,7 @@ Feature: Manage Document
     Then I should see "Howto"
     When I click "Howto"
     Then I should be on the "Show" page for document "Howto"
-    And I should see "Subdocument of guides"
+    And I should see "Guides"
 
 
 
@@ -62,7 +69,7 @@ Feature: Manage Document
     Given the document "Guides" has a child document with title "Howto"
     Given I am logged in
     And I am on the "Show" page for document "Howto"
-    When I click the "Edit" button
+    When I click the very stylish "Edit" button
     Then I should be in the Mercury Editor
 
   @javascript
@@ -109,6 +116,8 @@ Feature: Manage Document
 ##  And I am on the "Documents" page for project "hello world"
 #  When I click the "Edit" button for document "Howto"
 #  Then I should be in the Mercury Editor
+
+  Scenario: Pressing the Back button will
 
   @javascript
   Scenario: The Mercury Editor save button works

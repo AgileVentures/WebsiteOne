@@ -26,6 +26,9 @@ def path_to(page_name, id = '')
       users_show_path(id)
     when 'my account' then
       edit_user_registration_path(id)
+    when "foobar" then
+      visit ("/#{page}")
+
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -37,16 +40,12 @@ Given(/^I visit the site$/) do
   visit root_path
 end
 
-Given(/^I am on the "([^"]*)" page$/) do |page|
+# WHEN steps
+When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
 end
 
-#Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
-#  visit url_for_title(action: action, controller: controller, title: title)
-#end
-
-# WHEN steps
-When(/^I go to the "([^"]*)" page$/) do |page|
+When(/^I go to the path "(.*?)"$/) do |page|
   visit path_to(page)
 end
 
@@ -95,9 +94,10 @@ Then /^I should be on the "([^"]*)" page$/ do |page|
   expect(current_path).to eq path_to(page)
 end
 
-#Then /^I am redirected to the "([^"]*)" page$/ do |page|
-#  expect(current_path).to eq path_to(page)
-#end
+Then /^I am redirected to the "([^"]*)" page$/ do |page|
+  expect(current_path).to eq path_to(page)
+end
+
 Then /^I should see a form(?: "([^"]*)")? with:$/ do |name, table|
   with_scope(name) do
     table.rows.each do |row|
@@ -119,6 +119,10 @@ Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
   else
     page.should_not have_text string
   end
+end
+
+Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
+  within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
 end
 
 Then /^I should see link "([^"]*)"$/ do |link|
@@ -177,6 +181,7 @@ end
 
 Then(/^show me the page$/) do
   save_and_open_page
+  puts page.body
 end
 When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
@@ -191,6 +196,11 @@ end
 Then(/^I should see the sidebar$/) do
   page.find(:css, 'nav#sidebarnav')
 end
+
+#Then(/^I should see "(.*?)"$/) do |string|
+#  #expect(page).to have_content(string)
+#  page.should have_content(string)
+#end
 
 #TODO Bryan please replase s and m with meaningful names
 Then(/(.*) within the ([^"]*)$/) do |s, m|
@@ -219,6 +229,19 @@ Given(/^I want to use third party authentications$/) do
       'uid' => '12345678',
       'info' => {
           'email' => 'mock@email.com'
-      }
+      },
+     'credentials' => {'token' => 'test_token'}
   }
+end
+
+When(/^I click the very stylish "([^"]*)" button$/) do |button|
+  find(:css, %Q{a[data-link-text="#{button.downcase}"]}).click()
+end
+
+Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, button|
+  if should == 'not '
+    page.should_not have_css %Q{a[data-link-text="#{button.downcase}"]}
+  else
+    page.should have_css %Q{a[data-link-text="#{button.downcase}"]}
+  end
 end

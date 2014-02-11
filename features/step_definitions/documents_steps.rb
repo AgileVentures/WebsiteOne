@@ -1,7 +1,23 @@
 Given(/^the following documents exist:$/) do |table|
+  temp_author = nil
   table.hashes.each do |hash|
-    project = Document.create(hash)
-    project.save
+    if hash[:project].present?
+      hash[:project_id] = Project.find_by_title(hash[:project]).id
+      hash.except! 'project'
+    end
+    if hash[:author].present?
+      u = User.find_by_first_name hash[:author]
+      hash.except! 'author'
+      u.documents.create(hash)
+    else
+      if temp_author.nil?
+        temp_author = User.create first_name: 'First',
+                                  last_name: 'Last',
+                                  email: "dummy#{User.count}@users.co",
+                                  password: '1234124124'
+      end
+      temp_author.documents.create hash
+    end
   end
 end
 
@@ -36,7 +52,7 @@ end
 #  end
 #end
 When(/^I click the sidebar link "([^"]*)"$/) do |link|
-  within('ul#sidebar') do
+  within('#sidebar') do
     click_link_or_button link
   end
 end

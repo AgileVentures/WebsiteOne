@@ -3,7 +3,7 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
 end
 
 Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password )
+  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
@@ -178,10 +178,14 @@ Then /^I should see an account edited message$/ do
   page.should have_content "You updated your account successfully."
 end
 
-Then /^I should see my name$/ do
+Then /^I should (not |)see my name$/ do |should|
   create_user
-  #page.should have_content @user[:first_name]
-  page.should have_content([@user.first_name, @user.last_name].join(' '))
+  # TODO Bryan: refactor to display_name
+  if should == 'not '
+    page.should_not have_content([@user.first_name, @user.last_name].join(' '))
+  else
+    page.should have_content([@user.first_name, @user.last_name].join(' '))
+  end
 end
 
 Given /^the sign in form is visible$/ do
@@ -216,18 +220,32 @@ end
 
 Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   this_user = User.find_by_first_name(user) || User.find_by_email(user)
-  # p user
-  # p this_user.inspect
   expect(current_path).to eq path_to(page, this_user)
 end
 
-Given(/^I am on my (.*) page$/) do |page|
+Given(/^I (?:am on|go to) my "([^"]*)" page$/) do |page|
+  page.downcase!
   if page == 'profile'
     visit users_show_path(@user)
   elsif page == 'edit profile'
     visit edit_user_registration_path(@user)
   else
     pending
+  end
+end
+
+Given /^I am on "(.*?)" page for user "(.*?)"$/ do |page, user_name|
+  if user_name == "me"
+    user = @user
+  else
+    user = User.find_by_first_name(user_name)
+  end
+
+  case page
+    when 'profile' then
+      visit users_show_path(user)
+    when page == 'edit profile'
+      visit edit_user_registration_path(user)
   end
 end
 
@@ -251,29 +269,76 @@ end
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
   if option == 'public'
     check("user_display_#{value}")
+  else
+    #uncheck "Display #{value}"
+    find("input#user_display_#{value}").set(false)
+    find("input#user_display_#{value}").should_not be_checked
   end
 end
 
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
-  if value == 'email'
-    @user.update_attributes(display_email: (option == 'value'))
-  else
-    pending
+  case value.downcase
+    when 'email'
+      @user.update_attributes(display_email: (option == 'public'))
+
+    when 'profile'
+      @user.update_attributes(display_profile: (option == 'public'))
+
+    else
+      pending
   end
 end
 
-Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
-  pending
-end
+# Bryan: To be deleted
+#Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
+#  pending
+#end
 
 Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
-  if name == 'Display email'
-    if option == 'should'
-      page.find(:css, 'input#user_display_email').should be_checked
+  case name
+    when 'Display email'
+      if option == 'should'
+        page.find(:css, 'input#user_display_email').should be_checked
+      else
+        page.find(:css, 'input#user_display_email').should_not be_checked
+      end
+
+    when 'Display profile'
+      if option == 'should'
+        page.find(:css, 'input#user_display_profile').should be_checked
+      else
+        page.find(:css, 'input#user_display_profile').should_not be_checked
+      end
+
     else
-      page.find(:css, 'input#user_display_email').should_not be_checked
-    end
-  else
-    pending
+      pending
   end
+end
+
+Given(/^user "(.*?)" follows projects:$/) do |user, table|
+  @user = User.find_by_first_name user
+  table.hashes.each do | project |
+      step %Q{I should become a member of project "#{project[:title]}"}
+  end
+end
+
+Given(/^I am logged in as "([^"]*)"$/) do |first_name|
+  @user = User.find_by_first_name first_name
+  visit new_user_session_path
+  within ('#main') do
+    fill_in 'user_email', :with => @user.email
+    fill_in 'user_password', :with => '12345678'
+    click_button 'Sign in'
+  end
+end
+
+Then(/^(.*) in the members list$/) do |s|
+  page.within(:css, '#all_members') do
+    step s
+  end
+end
+
+Given(/^I visit (.*)'s profile page$/) do |name|
+  user = User.find_by_first_name name
+  visit users_show_path user
 end

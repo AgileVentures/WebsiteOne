@@ -1,0 +1,109 @@
+@import "mixins";
+
+.doc-option {
+  font-size: 60%;
+  display: inline;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.doc-option-icon {
+  display: inline-block;
+  background: #fff;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.doc-option-text {
+  @include css-transition(max-width, 0.4s, ease, 0s);
+  display: inline-block;
+  vertical-align: middle;
+  width: auto !important;
+  max-width: 0px;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.doc-option:hover .doc-option-text {
+  max-width: 250px;
+}
+
+#doc-box {
+  height: auto;
+  width: 100%;
+  position: relative;
+}
+
+#doc-overview {
+  width: 70%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#doc-side-panel {
+  padding-top: 25px;
+  width: 20%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#doc-side-panel ul {
+  font-size: 220%;
+  list-style: none;
+}
+
+.project-listing {
+  padding: 10px;
+  color: #000;
+  width: 100%;
+  @include css-transition(background, 0.3s, ease, 0s);
+  position: relative;
+}
+
+.project-listing:hover {
+  background: #F7EFEB;
+}
+
+.project-listing-overview {
+  margin-right: 70px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.project-listing-stats {
+  width: 60px;
+  padding: 5px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.tab-content {
+  padding: 0 15px 10px 15px;
+  border: 1px solid #dddddd;
+  border-top-color: transparent;
+}
+
+.listings {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.listings-item {
+
+}
+
+.doc-status-text {
+  display: inline-block;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+#document_body {
+  width: 100%;
+  padding: 10px 5px;
+  margin: 15px 0;
+}

@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-
+    @members = @project.followers
   end
 
   def new
@@ -77,11 +77,7 @@ class ProjectsController < ApplicationController
   private
   def set_project
     raise 'USING ID ERROR' if params[:id] =~ /^\d+$/
-    begin
-      @project = Project.friendly.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to projects_path, alert: 'Requested action failed.  Project was not found.'
-    end
+    @project = Project.friendly.find(params[:id])
   end
 
 

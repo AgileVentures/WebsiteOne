@@ -35,39 +35,23 @@ Feature: Create and maintain projects
       | Text                    |
       | hello jupiter           |
       | greetings jupiter folks |
-      | active                  |
+      | ACTIVE                  |
       | hello mars              |
       | greetings aliens        |
-      | inactive                |
+      | INACTIVE                |
 
   Scenario: Show New Project button if user is logged in
     When I am logged in
     And I am on the "projects" page
-    Then I should see button "New Project"
+    Then I should see the very stylish "New Project" button
 
   Scenario: Do not show New Project button if user is not logged in
     Given I am not logged in
     When I am on the "projects" page
-    Then I should not see button "New Project"
-
-  Scenario: Display Show, edit, delete buttons in projects table
-    Given I am logged in
-    When I go to the "projects" page
-    Then I should see "List of Projects" table
-    And I should see buttons:
-      | Button |
-      | Edit   |
-
-  Scenario: Do not display Show, edit, delete buttons in projects table when not logged in
-    Given I am not logged in
-    When I go to the "projects" page
-    Then I should see "List of Projects" table
-    And I should not see buttons:
-      | Button |
-      | Edit   |
+    Then I should not see the very stylish "New Project" button
 
   Scenario: Alphabetically display pagination in "Our Projects" page
-    Given I am on the home page
+    Given I am on the "home" page
     When I follow "Our projects"
     Then I should see:
       | greetings aliens        |
@@ -76,7 +60,7 @@ Feature: Create and maintain projects
       | greetings saturn folks  |
       | greetings sun folks     |
     And I should not see "greetings earthlings"
-    When I click "Next"
+    When I go to the next page
     Then I should not see:
       | greetings aliens        |
       | greetings jupiter folks |
@@ -90,7 +74,7 @@ Feature: Create and maintain projects
   Scenario: Creating a new project
     Given I am logged in
     And I am on the "projects" page
-    When I click "New Project"
+    When I click the very stylish "New Project" button
     Then I should see "Creating a new Project"
     And I should see a form with:
       | Field       |
@@ -100,8 +84,8 @@ Feature: Create and maintain projects
 
   Scenario: Saving a new project: success
     Given I am logged in
-    And I am on the "projects" page
-    And I follow "New Project"
+    And I am on the "Projects" page
+    When I click the very stylish "New Project" button
     When I fill in:
       | Field       | Text            |
       | Title       | Title New       |
@@ -110,24 +94,22 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should be on the "projects" page
     And I should see "Project was successfully created."
-    #TODO make it take you to the page with the new project?
-    And show me the page
-    When I click "Next"
+    When I go to the next page
     And I should see:
       | Text            |
       | Title New       |
       | Description New |
-      | Active          |
+      | ACTIVE          |
 
   Scenario: Saving a new project: failure
     Given I am logged in
     And I am on the "projects" page
-    And I click "New Project"
+    And I click the very stylish "New Project" button
     When I fill in "Title" with ""
     And I click the "Submit" button
     Then I should see "Project was not saved. Please check the input."
 
-#  Scenarios for SHOW page
+# Scenarios for SHOW page
 # Refactor this step
 
   Scenario: opens "Show" page with projects details
@@ -138,33 +120,12 @@ Feature: Create and maintain projects
       | Text                   |
       | hello saturn           |
       | greetings saturn folks |
-      | active                 |
+      | ACTIVE                 |
     And I should see "Created"
-
-
-# No back buttons on show pages
-
-#  Scenario: Show page has a return link
-#    Given I am on the "Show" page for project "hello mars"
-#    When I click "Back"
-#    Then I should be on the "projects" page
-
-#  Scenarios for EDIT page
-
-  Scenario: opens "Edit" page with projects details
-    Given I am logged in
-    And I am on the "Projects" page
-    When I click the "Edit" button for project "hello saturn"
-    Then I should see a form with:
-      | Field       | Text                   |
-      | Title       | hello saturn           |
-      | Description | greetings saturn folks |
-    And I should see a selector with options
-      | Active |
 
   Scenario: Edit page has a return link
     Given I am logged in
-    And I am on the "edit" page for projects "hello mars"
+    And I am on the "Edit" page for projects "hello mars"
     When I click "Back"
     Then I should be on the "projects" page
 

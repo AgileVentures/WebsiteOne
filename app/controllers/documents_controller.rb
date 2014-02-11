@@ -10,13 +10,15 @@ class DocumentsController < ApplicationController
   def index
     # TODO separate route for "documents for a project"
     #@documents = Document.all
-    @documents = Document.where('project_id = ?', @project.id).order(:created_at)
+    # Bryan: Replaced with project show page
+    raise 'DEPRECATED PATH EXCEPTION'
+    #@documents = Document.where('project_id = ?', @project.id).order(:created_at)
   end
 
   # GET /documents/1
   # GET /documents/1.json
   def show
-    #@documents = Document.search(params[:search], params[:page])
+    @children = @document.children
   end
 
   # GET /documents/new
@@ -39,6 +41,7 @@ class DocumentsController < ApplicationController
         format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully created.' }
         format.json { render action: 'show', status: :created, location: @document }
       else
+        set_parent
         format.html { render action: 'new' }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
@@ -98,11 +101,8 @@ class DocumentsController < ApplicationController
 
   def set_parent
     if params[:parent_id].present?
-      @parent = Document.find(params[:parent_id]).title
-    else
-      @parent = 'Document'
+      @parent = Document.find(params[:parent_id])
     end
-
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

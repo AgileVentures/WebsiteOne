@@ -35,6 +35,10 @@ module ApplicationHelper
     @roots = Document.roots.where('project_id = ?', @project.id).order(:created_at)
   end
 
+  def date_format(date)
+    date.strftime("#{date.day.ordinalize} %b %Y")
+  end
+
   def social_button(provider, options={})
     provider = provider.downcase
     display_name = {
@@ -67,4 +71,26 @@ module ApplicationHelper
     !!(email =~ /\A([^@\s]+)@((?:[\w]+\.)+[a-z]{2,})\z/i)
   end
 
+  def custom_css_btn(text, icon_class, path, options={})
+    s = ''
+    options.each do |k, v|
+      if v.is_a?(Hash)
+        # Bryan: this extra level is to support data tags
+        v.each do |key, value|
+          s = %Q{#{s} #{k}-#{key.to_s.gsub(/_/, '-')}="#{value}"}
+        end
+      else
+        s = %Q{#{s} #{k.to_s}="#{v}"}
+      end
+    end
+    # Bryan: data-link-text attribute is used to find this element in the tests
+    raw <<-HTML
+    <a href="#{path}"#{s} data-link-text="#{text.downcase}">
+      <div class="doc-option">
+        <div class="doc-option-icon"><i class="#{icon_class}"></i></div>
+        <div class="doc-option-text">#{text}</div>
+      </div>
+    </a>
+    HTML
+  end
 end

@@ -1,20 +1,25 @@
 require 'spec_helper'
 
 describe 'projects/index.html.erb' do
-  let(:projects_collection) { (1..9).map { |id|
-    stub_model(Project, {
-        id: id,
-        title: 'hello',
-        description: 'world',
-        status: 'one',
-        created_at: '2014-01-23 23:39:15'
-    }) } }
-
   before :each do
-    projects_collection.stub(:total_pages).and_return(2)
-    projects_collection.stub(:current_page).and_return(1)
-    assign(:projects, projects_collection)
+    @user = stub_model(User, display_name: 'John Butcher')
+    @projects_collection = (1..9).map { |id|
+      stub_model(Project, {
+          id: id,
+          title: 'hello',
+          description: 'world',
+          status: 'one',
+          friendly_id: "project-#{id}",
+          created_at: '2014-01-23 23:39:15',
+          user: @user
+      }) }
+
+    @projects_collection.stub(:total_pages).and_return(2)
+    @projects_collection.stub(:current_page).and_return(1)
+    assign(:projects, @projects_collection)
   end
+
+  let(:projects_collection) { @projects_collection }
 
   context 'pagination' do
     it 'should render previous, next, and page numbers' do
@@ -24,26 +29,20 @@ describe 'projects/index.html.erb' do
   end
 
   context 'for signed in and not signed in users' do
-    it 'should display table with columns' do
+    it 'should display a list of projects' do
       render
 
-      rendered.should have_css('table#projects')
       rendered.should have_css('h1', :text => 'List of Projects')
+      rendered.should have_css 'ul#project-list'
     end
 
-    it 'should display content' do
-      render
-      rendered.within('table#projects tbody') do |table_row|
-        table_row.should have_content 'Created:'
-        table_row.should have_content 'Status:'
-      end
-    end
+    # Bryan: removed tests for table
 
     it 'should render a link' do
       render
       project = projects_collection.first
-      rendered.within('table#projects tbody') do |table_row|
-        expect(table_row).to have_link(project.title, href: project_path(project.id))
+      rendered.within('ul#project-list') do |list|
+        expect(list).to have_css %Q{a[href="#{project_path(projects_collection[0])}"]}, visible: true
       end
     end
 
@@ -56,18 +55,10 @@ describe 'projects/index.html.erb' do
 
     it 'should render a create new project button' do
       render
-      rendered.should have_link('New Project', :href => new_project_path)
+      rendered.should have_css %Q{a[href="#{new_project_path}"]}, visible: true
     end
 
-    it 'should render a link Edit' do
-      render
-      #TODO Y refactor to a smarter traversing
-      i = 0
-      rendered.within('table#projects tbody') do |table_row|
-        i += 1
-        expect(table_row).to have_link('Edit', href: edit_project_path(i))
-      end
-    end
+    # Bryan: removed edit button from index page, step no longer required
   end
 
   context 'user not signed in' do
@@ -80,22 +71,14 @@ describe 'projects/index.html.erb' do
       expect(rendered).not_to have_link('New Project', :href => new_project_path)
     end
 
-    it 'should not render a link Edit' do
-      render
-      #TODO Y refactor to a smarter traversing
-      i = 0
-      rendered.within('table#projects tbody') do |table_row|
-        i += 1
-        expect(table_row).not_to have_link('Edit', href: edit_project_path(i))
-      end
-    end
+    # Bryan: removed edit button from index page, tests no longer required
   end
 
   describe 'content formatting' do
     it 'renders format in short style' do
       render
-      rendered.within('table tr#1 td[1]') do |rendered_date|
-        correct_date = projects_collection.first.created_at.strftime("%Y-%m-%d")
+      rendered.within('ul#project-list') do |rendered_date|
+        correct_date = time_ago_in_words(projects_collection.sample(1).first.created_at)
         expect(rendered_date.text).to contain(correct_date)
       end
     end
