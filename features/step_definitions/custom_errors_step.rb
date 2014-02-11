@@ -14,7 +14,7 @@ Given(/^I visit "(.*?)"$/) do |path|
 end
 
 
-Then(/^the page should be titled "(.*?)"$/) do |arg1|
+Then(/^the page should be titled "(.*?)"$/) do |title|
   page.source.should have_css("title", :text => title, :visible => false)
 end
 

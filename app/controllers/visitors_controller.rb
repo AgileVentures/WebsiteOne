@@ -2,7 +2,6 @@ class VisitorsController < ApplicationController
   include ApplicationHelper
 
   def index
-    raise Exception
     @message = ''
   end
 

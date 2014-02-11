@@ -9,18 +9,12 @@ describe ErrorsController do
     end
   end
 
-  describe 'GET 500' do
+  describe 'GET internal_error' do
     it 'should return the 500 error page' do
       get :internal_error
       response.should render_template 'pages/internal_error'
       response.status.should eq 500
     end
 
-    it '' do
-      ErrorsController.any_instance.should_receive(:not_found).and_raise(Exception)
-      get :not_found
-      response.should render_template 'pages/internal_error'
-      response.status.should eq 500
-    end
   end
 end

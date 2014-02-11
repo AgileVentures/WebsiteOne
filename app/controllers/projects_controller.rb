@@ -7,7 +7,6 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    raise Exception
     @projects = Project.search(params[:search], params[:page])
   end
 
