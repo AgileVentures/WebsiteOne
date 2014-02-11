@@ -12,7 +12,13 @@
   <div class="col-md-4 col-sm-5">
 
   	<h4>Projects</h4>
-  	<!-- TODO Insert list of followed projects -->
+    <% unless @users_projects.empty? %>
+        <ul>
+          <% @users_projects.each do |project| %>
+              <li><%= link_to project.title, project_path(project) %></li>
+          <% end %>
+        </ul>
+    <% end %>
 
   </div>
 </div>
@@ -37,10 +43,4 @@
   </div>
 </div>
 
-<% unless @users_projects.empty? %>
-  <ul>
-    <% @users_projects.each do |project| %>
-      <li><%= link_to project.title, project_path(project) %></li>
-    <% end %>
-  </ul>
-<% end %>
+
