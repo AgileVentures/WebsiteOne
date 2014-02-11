@@ -35,6 +35,10 @@ module ApplicationHelper
     @roots = Document.roots.where('project_id = ?', @project.id).order(:created_at)
   end
 
+  def date_format(date)
+    date.strftime("#{date.day.ordinalize} %b %Y")
+  end
+
   def social_button(provider, options={})
     provider = provider.downcase
     display_name = {

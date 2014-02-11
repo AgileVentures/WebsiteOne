@@ -30,6 +30,10 @@ module HtmlSelectorsHelpers
         'form#edit_user'
       when "Contact form"
         'form#contact_form'
+      when 'video description'
+        '#video_contents'
+      when 'player'
+        '#ytplayer'
       when /^"(.+)"$/
         $1
 

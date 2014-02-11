@@ -15,30 +15,55 @@ describe UsersController do
 
     it 'returns http success' do
       get 'index'
-      response.should be_success
+      expect(response).to render_template 'index'
     end
 
     it 'assigns all users' do
-    	get 'index'
-    	assigns(:users).should eq @users
+      get 'index'
+      assigns(:users).should eq @users
     end
   end
 
-  describe "GET 'show'" do
+  describe 'GET show' do
     before :each do
-      #@user = double('User')
-    	@user = double('User', id: 1,
+      @user = double('User', id: 1,
                      first_name: 'Hermionie',
                      last_name: 'Granger',
                      email: 'hgranger@hogwarts.ac.uk',
-                     display_profile: true
-                    )
-      User.should_receive(:find).and_return(@user)
+                     display_profile: true,
+                     youtube_id: 'test_id'
+      )
+      User.stub(find: @user)
+
+      @youtube_videos = [
+          {
+              url: "http://www.youtube.com/100",
+              title: "Random",
+              published: '01/01/2015'
+          },
+          {
+              url: "http://www.youtube.com/340",
+              title: "Stuff",
+              published: '01/01/2015'
+          },
+          {
+              url: "http://www.youtube.com/2340",
+              title: "Here's something",
+              published: '01/01/2015'
+          }
+      ]
+      Youtube.stub(user_videos: @youtube_videos)
+
     end
 
     it 'assigns a user instance' do
-  		get 'show', id: @user.id
-  		expect(assigns(:user)).not_to be_nil
+      get 'show', id: @user.id
+      expect(assigns(:user)).to eq(@user)
+    end
+
+    it 'assigns youtube videos' do
+      get 'show', id: @user.id
+      expect(assigns(:youtube_videos)).to eq(@youtube_videos)
     end
 
     it 'renders the show view' do
@@ -47,7 +72,7 @@ describe UsersController do
     end
 
     it 'it renders an error message when accessing a private profile' do
-      @user.should_receive(:display_profile).and_return(false)
+      @user.stub(display_profile: false)
       get 'show', id: @user.id
       expect(response).to redirect_to root_path
     end

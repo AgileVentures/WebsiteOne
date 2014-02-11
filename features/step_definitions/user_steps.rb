@@ -3,7 +3,7 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
 end
 
 Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password )
+  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
@@ -216,12 +216,10 @@ end
 
 Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   this_user = User.find_by_first_name(user) || User.find_by_email(user)
-  # p user
-  # p this_user.inspect
   expect(current_path).to eq path_to(page, this_user)
 end
 
-Given(/^I am on my "([^"]*)" page$/) do |page|
+Given(/^I (?:am on|go to) my "([^"]*)" page$/) do |page|
   page.downcase!
   if page == 'profile'
     visit users_show_path(@user)
@@ -229,6 +227,21 @@ Given(/^I am on my "([^"]*)" page$/) do |page|
     visit edit_user_registration_path(@user)
   else
     pending
+  end
+end
+
+Given /^I am on "(.*?)" page for user "(.*?)"$/ do |page, user_name|
+  if user_name == "me"
+    user = @user
+  else
+    user = User.find_by_first_name(user_name)
+  end
+
+  case page
+    when 'profile' then
+      visit users_show_path(user)
+    when page == 'edit profile'
+      visit edit_user_registration_path(user)
   end
 end
 

@@ -121,6 +121,10 @@ Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
   end
 end
 
+Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
+  within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
+end
+
 Then /^I should see link "([^"]*)"$/ do |link|
   page.should have_link link
 end
@@ -177,6 +181,7 @@ end
 
 Then(/^show me the page$/) do
   save_and_open_page
+  puts page.body
 end
 When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
@@ -224,6 +229,7 @@ Given(/^I want to use third party authentications$/) do
       'uid' => '12345678',
       'info' => {
           'email' => 'mock@email.com'
-      }
+      },
+     'credentials' => {'token' => 'test_token'}
   }
 end

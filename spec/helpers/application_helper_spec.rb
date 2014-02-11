@@ -18,6 +18,11 @@ describe ApplicationHelper do
     end
   end
 
+  it '#date_format returns formatted date 1st Jan 2015' do
+    expect(date_format(Date.new(2015,1,1))).to eq('1st Jan 2015')
+    expect(date_format(Date.new(2015,5,3))).to eq('3rd May 2015')
+  end
+
   describe '#valid_email?' do
     it 'returns true if email is valid' do
       expect(valid_email?('valid@valid.com')).to be_true
