@@ -3,12 +3,59 @@ Feature: As a site owner
   I would like to display a index of users with links to user profiles
 
   Background:
-    Given I am logged in as user with email "brett@example.com", with password "12345678"
+    Given I want to use third party authentications
+    And I am logged in
     And the following users exist
       | first_name  | last_name   | email                   | password  |
       | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |
 
-  Scenario: List of users youtube videos
+  Scenario: Show 'link your channel' message if my page channel is not linked
+    Given my YouTube Channel is not connected
+    When I go to my profile page
+    Then I should not see a list of my videos
+    And I should see "Link your YouTube channel"
+
+  Scenario: Show 'unlink your channel' message if my channel is connected
+    Given my YouTube channel is connected
+    When I go to my profile page
+    Then I should see "Unlink your YouTube channel"
+
+  Scenario: Do not show 'link your channel' message if not my page
     Given I am on "profile" page for user "Alice"
-    Given user "Alice" has YouTube Channel ID "UCgTOz02neY70sqnk05zNkGA" with some videos in it
-    And I should see a list of videos for user "Alice"
+    And user "Alice" has YouTube Channel not connected
+    Then I should not see "Link your YouTube channel"
+
+  Scenario: Do not show 'unlink your channel' message if not my page
+    Given I am on "profile" page for user "Alice"
+    And user "Alice" has YouTube Channel connected
+    Then I should not see "Link your YouTube channel"
+
+  Scenario: Link my Youtube channel to my account
+    Given my YouTube Channel ID with some videos in it
+    But my YouTube Channel is not connected
+    And I am on my profile page
+
+    When I click "Link your YouTube channel"
+    Then I should see "Title"
+    And I should see "Published"
+    And I should see a list of my videos
+    But I should not see "Link your YouTube channel"
+
+  Scenario: Show 'no videos' message if there no videos
+    Given my YouTube Channel ID with no videos in it
+    And my YouTube channel is connected
+    When I go to my profile page
+    Then I should not see a list of my videos
+    And I should see "has no publicly viewable Youtube videos"
+
+  Scenario: show first in video and description, player, filter
+
+  @javascript
+  Scenario: Selecting videos from the list
+    Given I open my browser
+    And my YouTube Channel ID with some videos in it
+    And my YouTube channel is connected
+    And I am on my profile page
+    When I click "WebsiteOne - Pairing session"
+    Then I should see "WebsiteOne - Pairing session" in "video description"
+    And I should see video "WebsiteOne - Pairing session" in "player"
