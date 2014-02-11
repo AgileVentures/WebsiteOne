@@ -67,7 +67,7 @@ Feature: Create and maintain projects
       | Edit   |
 
   Scenario: Alphabetically display pagination in "Our Projects" page
-    Given I am on the home page
+    Given I am on the "home" page
     When I follow "Our projects"
     Then I should see:
       | greetings aliens        |
@@ -110,7 +110,6 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should be on the "projects" page
     And I should see "Project was successfully created."
-    #TODO make it take you to the page with the new project?
     When I click "Next"
     And I should see:
       | Text            |
@@ -126,7 +125,7 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should see "Project was not saved. Please check the input."
 
-#  Scenarios for SHOW page
+# Scenarios for SHOW page
 # Refactor this step
 
   Scenario: opens "Show" page with projects details
@@ -163,7 +162,7 @@ Feature: Create and maintain projects
 
   Scenario: Edit page has a return link
     Given I am logged in
-    And I am on the "edit" page for projects "hello mars"
+    And I am on the "Edit" page for projects "hello mars"
     When I click "Back"
     Then I should be on the "projects" page
 

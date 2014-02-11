@@ -12,7 +12,6 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-
   end
 
   def new
