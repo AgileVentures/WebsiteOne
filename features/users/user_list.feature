@@ -22,29 +22,3 @@ Feature: As a site owner
       | Croutch     |
       | Dave        |
     And I should see "5" user avatars
-
-  Scenario: Having user profile page
-    Given I am on the "Our members" page
-    #  We should be able to test this by setting user joined 1 month ago
-    #  rather than tying to stub the current date
-    # And user "Alice" has joined on "01/01/2014"
-    # And today is "07/02/2014"
-    When I click on the avatar for "Alice"
-    Then I should be on the "user profile" page for "Alice"
-    And I should see the avatar for "Alice" at 275 px
-    And I should see "Alice Jones"
-    # And I should see "Member for: about 1 month"
-    And I should see "Member for:"
-
-  Scenario: Having edit button on the profile page
-    Given I am on the "Our members" page
-    When I click on the avatar for "brett@example.com"
-    Then I should be on the "user profile" page for "brett@example.com"
-    And I should see button "Edit"
-    And I click the "Edit" button
-    And I should be on the "my account" page
-
-  Scenario: Not seeing an edit button on others profile pages
-    Given I am on the "Our members" page
-    When I click on the avatar for "Bob"
-    And I should not see button "Edit"
