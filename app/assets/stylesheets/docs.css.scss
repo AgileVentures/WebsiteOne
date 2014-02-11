@@ -80,3 +80,24 @@
   right: 0;
   top: 0;
 }
+
+.tab-content {
+  padding: 0 15px 10px 15px;
+  border: 1px solid #dddddd;
+  border-top-color: transparent;
+}
+
+.listings {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.listings-item {
+
+}
+
+.doc-status-text {
+  display: inline-block;
+  font-size: 0.9em;
+  font-style: italic;
+}

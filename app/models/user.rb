@@ -28,4 +28,13 @@ class User < ActiveRecord::Base
   def has_auth(provider)
     !authentications.where(provider: provider).empty?
   end
+
+  def display_name
+    name = [ self.first_name, self.last_name ].join(' ').squish
+    if name.match /^\s+$/
+      self.email
+    else
+      name
+    end
+  end
 end

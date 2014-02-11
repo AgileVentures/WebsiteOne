@@ -1,9 +1,14 @@
+<div>
+  <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
+  <strong><%= @project.title %></strong>
+</div>
+
 <div id="doc-box">
   <div id="doc-overview">
     <h1><%= @project.title %></h1>
-    <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
+    <div class="doc-status-text">
       <div>Status: <strong style="font-style: normal;"><%= @project.status.upcase %></strong></div>
-      <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= project_created_by %></div>
+      <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %></div>
     </div>
     <div class="small-divider"></div>
     <p><strong><%= @project.description %></strong></p>
@@ -40,31 +45,35 @@
 
 <ul class="nav nav-tabs">
   <li class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.count %>)</a></li>
-  <li><a href="#members_list" data-toggle="tab">Members List (<%= @members.count %>)</a></li>
+  <li><a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane active" id="documents_list">
-    <ul class="list-group">
-      <% unless @documents.empty? %>
-        <h2>Related documents</h2>
+    <% unless @documents.empty? %>
+      <h2>Related documents</h2>
+      <ul class="listings">
         <% @project.documents.roots.each do |d| %>
-          <li class="list-group-item"><strong><%= link_to d.title, project_document_path(@project, d) %></strong></li>
+          <li class="listings-item">
+            <% num_children = d.children.count %>
+            <strong><%= link_to d.title, project_document_path(@project, d) %></strong> <%= "(#{num_children})" if num_children > 0 %> -
+            <i>created by <%= d.user.display_name %> <%= time_ago_in_words(d.created_at) %> ago</i>
+          </li>
         <% end %>
-      <% else %>
-        <p style="margin-top: 20px;">No documents can be found for project "<%= @project.title %>"</p>
-      <% end %>
-    </ul>
+      </ul>
+    <% else %>
+      <p style="margin-top: 20px;">No documents can be found for project <strong><%= @project.title %></strong></p>
+    <% end %>
   </div>
   <div class="tab-pane" id="members_list">
-    <ul class="list-group">
+    <ul class="listings">
       <% if @members.empty? %>
-        <p style="margin-top: 20px;">No members in project "<%= @project.title %>"</p>
+        <p style="margin-top: 20px;">No members in project <strong><%= @project.title %></strong></p>
       <% else %>
         <h2>List of Project Members</h2>
         <% @members.each do |member| %>
-          <li class="list-group-item"><strong><%= link_to member.email, users_show_path(member) %></strong></li>
+          <li class="listings-item"><strong><%= link_to member.display_name, users_show_path(member) %></strong></li>
         <% end %>
       <% end %>
     </ul>

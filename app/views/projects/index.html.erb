@@ -1,4 +1,15 @@
-<h1>List of Projects</h1>
+<div id="doc-box">
+  <div id="doc-overview">
+    <h1>List of Projects</h1>
+  </div>
+  <div id="doc-side-panel">
+    <% if user_signed_in? %>
+      <ul>
+        <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
+      </ul>
+    <% end %>
+  </div>
+</div>
 <%= will_paginate @projects %>
 <ul style="list-style: none; padding-left: 0;">
   <% if @projects.empty? %>
@@ -12,7 +23,3 @@
   <% end %>
 </ul>
 <%= will_paginate @projects %>
-
-<% if user_signed_in? %>
-  <%= link_to 'New Project', new_project_path, :type => 'button', :class => 'btn btn-default' %>
-<% end %>

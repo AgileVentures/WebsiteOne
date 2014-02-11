@@ -14,7 +14,7 @@
 }
 
 #sidebar {
-  margin-top: 40px;
+  margin-top: 20px;
   @include css-shadow(0px, 0px, 15px, -5px, black);
 }
 
@@ -43,10 +43,10 @@
   text-align: center;
 }
 
-#sidebar span.collapse-icon {
+#sidebar .collapse-icon {
   width: 18px;
   height: 18px;
-  margin-left: -18px;
+  margin-left: -22px;
 }
 
 #sidebar ul {

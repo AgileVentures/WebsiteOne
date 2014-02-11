@@ -41,6 +41,7 @@ class DocumentsController < ApplicationController
         format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully created.' }
         format.json { render action: 'show', status: :created, location: @document }
       else
+        set_parent
         format.html { render action: 'new' }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
@@ -100,11 +101,8 @@ class DocumentsController < ApplicationController
 
   def set_parent
     if params[:parent_id].present?
-      @parent = Document.find(params[:parent_id]).title
-    else
-      @parent = 'Document'
+      @parent = Document.find(params[:parent_id])
     end
-
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
