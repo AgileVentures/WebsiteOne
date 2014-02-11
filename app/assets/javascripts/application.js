@@ -235,9 +235,9 @@ $(function() {
       var child = $(this).find('>:first-child');
       if (child.hasClass('fa-caret-down')) {
         child.removeClass('fa-caret-down');
-        child.addClass('fa-caret-up');
-      } else if (child.hasClass('fa-caret-up')) {
-        child.removeClass('fa-caret-up');
+        child.addClass('fa-caret-right');
+      } else if (child.hasClass('fa-caret-right')) {
+        child.removeClass('fa-caret-right');
         child.addClass('fa-caret-down');
       }
       // catch any collapsing element

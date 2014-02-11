@@ -21,6 +21,7 @@ module Helpers
     create_visitor
     delete_user
     @user = FactoryGirl.create(:user, @visitor)
+    @current_user = @user
   end
 
   def delete_user

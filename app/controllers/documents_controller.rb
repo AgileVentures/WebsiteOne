@@ -10,7 +10,9 @@ class DocumentsController < ApplicationController
   def index
     # TODO separate route for "documents for a project"
     #@documents = Document.all
-    @documents = Document.where('project_id = ?', @project.id).order(:created_at)
+    # Bryan: Replaced with project show page
+    raise 'DEPRECATED PATH EXCEPTION'
+    #@documents = Document.where('project_id = ?', @project.id).order(:created_at)
   end
 
   # GET /documents/1
