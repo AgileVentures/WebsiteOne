@@ -16,17 +16,18 @@ describe DocumentsController do
     @document = FactoryGirl.create(:document)
   end
 
-  describe 'GET index' do
-    before(:each) { get :index, { project_id: document.friendly_id }, valid_session }
-
-    it 'assigns all documents as @documents' do
-      assigns(:documents).should eq([document])
-    end
-
-    it 'renders the index template' do
-      expect(response).to render_template 'index'
-    end
-  end
+  # Bryan: Deprecated path
+  #describe 'GET index' do
+  #  before(:each) { get :index, { project_id: document.friendly_id }, valid_session }
+  #
+  #  it 'assigns all documents as @documents' do
+  #    assigns(:documents).should eq([document])
+  #  end
+  #
+  #  it 'renders the index template' do
+  #    expect(response).to render_template 'index'
+  #  end
+  #end
 
   describe 'GET show' do
     before(:each) do

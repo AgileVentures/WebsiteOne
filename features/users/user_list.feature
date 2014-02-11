@@ -5,11 +5,11 @@ Feature: As a site owner
   Background:
     Given I am on the "home" page
     And the following users exist
-      | first_name  | last_name   | email                   | password  |
-      | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |
-      | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |
-      |             | Croutch     | c.croutch@enterprise.us | 12345678  |
-      | Dave        |             | dave@dixons.me          | 12345678  |
+      | first_name  | last_name   | email                   | password  | display_profile |
+      | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |   true          |
+      | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |   true          |
+      |             | Croutch     | c.croutch@enterprise.us | 12345678  |   true          |
+      | Dave        |             | dave@dixons.me          | 12345678  |   true          |
     And I am logged in as user with email "brett@example.com", with password "12345678"
 
   Scenario: Having All Users page
