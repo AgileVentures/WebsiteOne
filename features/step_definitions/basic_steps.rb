@@ -40,18 +40,8 @@ Given(/^I visit the site$/) do
   visit root_path
 end
 
-#Given(/^I am on the "([^"]*)" page$/) do |page|
-#  When(/^I go to the path "(.*?)"$/) do |arg1|
-#pending # express the regexp above with the code you wish you had
-#end
-#end
-
-#Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
-#  visit url_for_title(action: action, controller: controller, title: title)
-#end
-
 # WHEN steps
-When(/^I go to the "([^"]*)" page$/) do |page|
+When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
 end
 
@@ -104,9 +94,10 @@ Then /^I should be on the "([^"]*)" page$/ do |page|
   expect(current_path).to eq path_to(page)
 end
 
-#Then /^I am redirected to the "([^"]*)" page$/ do |page|
-#  expect(current_path).to eq path_to(page)
-#end
+Then /^I am redirected to the "([^"]*)" page$/ do |page|
+  expect(current_path).to eq path_to(page)
+end
+
 Then /^I should see a form(?: "([^"]*)")? with:$/ do |name, table|
   with_scope(name) do
     table.rows.each do |row|
@@ -122,20 +113,17 @@ Then /^I should( not)? see:$/ do |negative, table|
   end
 end
 
-#Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
-#  unless negative
-#    page.should have_text string
-#  else
-#    page.should_not have_text string
-#  end
-#end
-
-
+Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
+  unless negative
+    page.should have_text string
+  else
+    page.should_not have_text string
+  end
+end
 
 Then /^I should see link "([^"]*)"$/ do |link|
   page.should have_link link
 end
-
 
 Then /^I should see field "([^"]*)"$/ do |field|
   page.should have_field(field)
@@ -204,10 +192,10 @@ Then(/^I should see the sidebar$/) do
   page.find(:css, 'nav#sidebarnav')
 end
 
-Then(/^I should see "(.*?)"$/) do |string|
-  #expect(page).to have_content(string)
-  page.should have_content(string)
-end
+#Then(/^I should see "(.*?)"$/) do |string|
+#  #expect(page).to have_content(string)
+#  page.should have_content(string)
+#end
 
 #TODO Bryan please replase s and m with meaningful names
 Then(/(.*) within the ([^"]*)$/) do |s, m|
@@ -238,7 +226,4 @@ Given(/^I want to use third party authentications$/) do
           'email' => 'mock@email.com'
       }
   }
-
-
-
 end

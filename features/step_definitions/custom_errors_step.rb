@@ -1,8 +1,3 @@
-Given(/^(?:|I )am on the "(.*?)" page$/) do |page|
-  case page
-    when "foobar" then visit ("/#{page}")
-  end
-end
 
 Given(/^the following pages exist:$/) do |table|
   # table is a Cucumber::Ast::Table
