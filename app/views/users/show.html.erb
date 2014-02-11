@@ -36,18 +36,17 @@
 
     <% unless @youtube_videos.blank? %>
         <div class="row">
-          <div class="col-md-8">
-            <table class="table table-bordered table-striped table-hover table-condensed">
+          <div class="col-md-11">
+            <table class="table table-bordered table-striped table-hover table-condensed" style="margin-left: -15px; width: 100%;">
               <tr>
                 <th>Title</th>
-                <th>Published</th>
+                <th style="width: 100px;">Published</th>
               </tr>
               <% @youtube_videos.each do |video| %>
                   <tr>
                     <td><%= video_link(video) %></td>
                     <td><%= video[:published].to_s(:db) %></td>
                   </tr>
-
               <% end %>
             </table>
           </div>
