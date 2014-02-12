@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(version: 20140209164254) do
     t.string   "slug"
     t.string   "youtube_id"
     t.boolean  "display_profile",        default: true
-    t.string   "youtube_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
