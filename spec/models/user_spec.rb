@@ -96,7 +96,7 @@ describe User do
   end
 
   describe 'display name' do
-    
+
     it 'should have a display_name method' do
       user = User.new
       user.should respond_to :display_name
@@ -106,11 +106,20 @@ describe User do
       user = User.new :email => 'joe@blow.com'
       user.display_name.should eq 'joe'
     end
+
+    it 'should display the name when first and last name fields contain white space' do
+      user = User.new :first_name => ' Joe ', :last_name => ' Blow '
+      user.display_name.should eq 'Joe Blow'
+    end
+
+    it 'should display the name when first or last name fields are given' do
+      user = User.new :first_name => ' Joe ', :last_name => ' Blow '
+      user.display_name.should eq 'Joe Blow'
+    end
+
+    it 'should display the name when first or last name field is empty' do
+      user = User.new :first_name => 'Joe', :last_name => ''
+      user.display_name.should eq 'Joe'
+    end
   end
-
-  # first and last white space chars
-  # only first or last given
-  # test behavior of when first and last given.
-  # first and last given but with extra white space
-
 end
