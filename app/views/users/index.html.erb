@@ -8,7 +8,7 @@
                 <img id="avatar" src="<%= gravatar_for(user.email) %>" class="thumbnail img-rounded media-object">
               </a>
               <div class="media-body">
-                <h4 class="media-heading"><a href="<%= users_show_path user.id %>"><%= user_display_name user %></a></h4>
+                <h4 class="media-heading"><a href="<%= users_show_path user.id %>"><%= user.display_name %></a></h4>
               </div>
             </li>
         <% end %>

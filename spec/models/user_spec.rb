@@ -95,4 +95,22 @@ describe User do
 
   end
 
+  describe 'display name' do
+    
+    it 'should have a display_name method' do
+      user = User.new
+      user.should respond_to :display_name
+    end
+
+    it 'should display the first part of the email address when no name is given' do
+      user = User.new :email => 'joe@blow.com'
+      user.display_name.should eq 'joe'
+    end
+  end
+
+  # first and last white space chars
+  # only first or last given
+  # test behavior of when first and last given.
+  # first and last given but with extra white space
+
 end
