@@ -30,7 +30,7 @@ module UsersHelper
   end
 
   def video_embed_link(video)
-    "http://www.youtube.com/v/#{video[:id]}?version=3&enablejsapi=1"
+    "http://www.youtube.com/embed/#{video[:id]}?enablejsapi=1"
   end
 
 end
