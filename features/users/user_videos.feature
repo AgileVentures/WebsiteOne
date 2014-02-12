@@ -13,33 +13,33 @@ Feature: As a site owner
     Given my YouTube Channel is not connected
     When I go to my "profile" page
     Then I should not see a list of my videos
-    And I should see "Link your YouTube channel"
+    And I should see "Sync with YouTube"
 
   Scenario: Show 'unlink your channel' message if my channel is connected
     Given my YouTube channel is connected
     When I go to my "profile" page
-    Then I should see "Unlink your YouTube channel"
+    Then I should see "Disconnect YouTube"
 
   Scenario: Do not show 'link your channel' message if not my page
     Given I am on "profile" page for user "Alice"
     And user "Alice" has YouTube Channel not connected
-    Then I should not see "Link your YouTube channel"
+    Then I should not see "Sync with YouTube"
 
   Scenario: Do not show 'unlink your channel' message if not my page
     Given I am on "profile" page for user "Alice"
     And user "Alice" has YouTube Channel connected
-    Then I should not see "Link your YouTube channel"
+    Then I should not see "Sync with YouTube"
 
   Scenario: Link my Youtube channel to my account
     Given my YouTube Channel ID with some videos in it
     But my YouTube Channel is not connected
     And I am on my "profile" page
 
-    When I click "Link your YouTube channel"
+    When I click "Sync with YouTube"
     Then I should see "Title"
     And I should see "Published"
     And I should see a list of my videos
-    But I should not see "Link your YouTube channel"
+    But I should not see "Sync with YouTube"
 
   Scenario: Show 'no videos' message if there no videos
     Given my YouTube Channel ID with no videos in it

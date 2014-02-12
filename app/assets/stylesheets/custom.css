@@ -38,6 +38,19 @@ a:hover, a:active {
     color: #000000 !important;
 }
 
+.btn-edit {
+  font-size: 50%;
+  margin-left: 15px;
+  text-transform: lowercase;
+}
+
+.fa {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    text-align: center;
+}
+
 .row {
     margin-left: 0px;
     margin-right: 0px;
@@ -140,6 +153,10 @@ h1 {
 
 .opacity-light h1 {
     color: #000000;
+}
+
+.flash-div {
+    opacity: 0.8;
 }
 
 #nav {
@@ -252,6 +269,10 @@ section {
     height: auto !important;
     height: 100%;
     padding-top: 100px;
+}
+
+section#main {
+    padding-top: 50px;
 }
 
 .bg-4 {
@@ -750,6 +771,14 @@ section {
 .avatar-group .avatar-lower h3 {
     color: white;
     text-shadow: 2px 1px 1px black;
+}
+
+.fa-large {
+    font-size: 28px;
+    margin-top: -10px;
+    margin-left: -5px;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 /* Responsive versions */

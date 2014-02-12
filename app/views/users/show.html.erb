@@ -13,8 +13,15 @@
   </div>
   <div class="col-md-4 col-sm-5">
 
-    <h4>Projects</h4>
-    <!-- TODO Insert list of followed projects -->
+  	<h4>Projects</h4>
+    <% unless @users_projects.empty? %>
+        <ul>
+          <% @users_projects.each do |project| %>
+              <li><%= link_to project.title, project_path(project) %></li>
+          <% end %>
+        </ul>
+    <% end %>
+
   </div>
 </div>
 <div class="row">
@@ -23,7 +30,7 @@
         <h3> <%= @user.email %></h3>
     <% end %>
 
-    <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary", type: "button" if @user.eql?(current_user) %>
+    <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary btn-lg", type: "button" if @user.eql?(current_user) %>
     <% if @user.eql?(current_user) %>
         <% if @user.youtube_id %>
             <%= unlink_from_youtube_button(request.original_url) %>
@@ -36,18 +43,17 @@
 
     <% unless @youtube_videos.blank? %>
         <div class="row">
-          <div class="col-md-8">
-            <table class="table table-bordered table-striped table-hover table-condensed">
+          <div class="col-md-11">
+            <table class="table table-bordered table-striped table-hover table-condensed" style="margin-left: -15px; width: 100%;">
               <tr>
                 <th>Title</th>
-                <th>Published</th>
+                <th style="width: 100px;">Published</th>
               </tr>
               <% @youtube_videos.each do |video| %>
                   <tr>
                     <td><%= video_link(video) %></td>
                     <td><%= video[:published].to_s(:db) %></td>
                   </tr>
-
               <% end %>
             </table>
           </div>
@@ -73,3 +79,5 @@
       </div>
   <% end %>
 </div>
+
+

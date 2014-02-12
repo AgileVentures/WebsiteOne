@@ -2,10 +2,8 @@
     404 File Not Found
 <% end %>
 <div class="container">
-  <section id="404" style="margin-top: -180px;">
-
+  <section id="404" style="margin-top: -150px;">
     <h3>404-Page not found</h3>
-
     <p>We're sorry, but we couldn't find the page you requested</p>
     <div id="fof">
       <div></div>
@@ -17,5 +15,5 @@
 </div>
 
 
-<%= javascript_include_tag '404', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag '404', data: { no_turbolink: true } %>
 

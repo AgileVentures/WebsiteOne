@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe "users/show.html.erb" do
 	before :each do
+    @projects = [
+        mock_model(Project, friendly_id: 'title-1', title: 'Title 1'),
+        mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
+        mock_model(Project, friendly_id: 'title-3', title: 'Title 3')
+    ]
 	  @user = mock_model(User, id: 4,
                              first_name: 'Eric',
                              last_name: 'Els',
@@ -9,6 +14,7 @@ describe "users/show.html.erb" do
                              created_at: Date.new(2014, 1, 1)
                       )
 		assign :user, @user
+    assign :users_projects, @projects
     @youtube_videos = [
         {
             url: "http://www.youtube.com/100",
@@ -57,7 +63,7 @@ describe "users/show.html.erb" do
     view.stub(current_user: @user)
 
     render
-    expect(rendered).to have_link('Link your YouTube channel')
+    expect(rendered).to have_link('Sync with YouTube')
   end
 
   it 'renders "disconnect youtube channel" when user views his profile and is connected' do
@@ -66,7 +72,7 @@ describe "users/show.html.erb" do
     view.stub(current_user: @user)
 
     render
-    expect(rendered).to have_link('Unlink your YouTube channel')
+    expect(rendered).to have_link('Disconnect YouTube')
   end
 
   it 'does not render "connect youtube channel" when user views other profile' do
@@ -121,6 +127,12 @@ describe "users/show.html.erb" do
 
   end
 
-  it 'renders list of followed projects'
+  it 'renders list of followed projects' do
+    render
+    @projects.each do |project|
+      expect(rendered).to have_link(project.title, href: project_path(project))
+    end
+  end
+
   it 'renders user statistics'
 end

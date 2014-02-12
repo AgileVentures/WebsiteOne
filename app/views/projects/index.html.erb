@@ -1,40 +1,25 @@
-<!-- Bryan: commented out banner
-<section class="bg-3" style="margin-top: -120px;">
-  <div class="col-sm-10 col-sm-offset-1">
-    <div class="page-header opacity-dark text-center">
-      <h1>Agile PROJECTS</h1>
-    </div>
+<div id="doc-box">
+  <div id="doc-overview">
+    <h1>List of Projects</h1>
   </div>
-</section>
-<div class="divider"></div> -->
-<h1>List of Projects</h1>
-<table id="projects" class="table table-striped">
-  <thead>
-  <tr>
-    <th style="width:90%"></th>
+  <div id="doc-side-panel">
     <% if user_signed_in? %>
-      <th style="width:15px"></th>
+      <ul>
+        <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
+      </ul>
     <% end %>
-  </tr>
-  </thead>
-  <tbody>
-  <% @projects.each do |project| %>
-
-    <tr id="<%= project.id %>">
-      <td><h3><%= link_to project.title, project_path(project) %></h3>
-        <small>Status: <%= project.status %> Created: <%= project.created_at.strftime("%Y-%m-%d") %></small>
-        <p><%= project.description.truncate(250, separator: ' ') %></p></td>
-      <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_project_path(project), type: 'button', :class => 'btn btn-primary btn-xs' %></td>
-      <% end %>
-    </tr>
-
+  </div>
+</div>
+<%= will_paginate @projects %>
+<ul id="project-list" style="list-style: none; padding-left: 0;">
+  <% if @projects.empty? %>
+    <li>No projects were found, wait wha..?</li>
+  <% else %>
+    <% @projects.each do |project| %>
+    <a href="<%= project_path(project) %>" data-link-text="<%= project.title.downcase %>">
+      <li class="project-listing"><%= render 'listing', project: project %></li>
+    </a>
+    <% end %>
   <% end %>
-  </tbody>
-  <p><%= will_paginate @projects %></p>
-
-</table>
-
-<% if user_signed_in? %>
-  <%= link_to 'New Project', new_project_path, :type => 'button', :class => 'btn btn-default' %>
-<% end %>
+</ul>
+<%= will_paginate @projects %>

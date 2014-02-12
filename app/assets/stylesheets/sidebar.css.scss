@@ -1,17 +1,21 @@
 @import "variables";
+@import "mixins";
 
-#sidebar-container {
+#with-sidebar-container {
   position: relative;
 }
 
+#not-sidebar-content {
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+  padding: 15px;
+//  @include css-shadow(0px, 0px, 15px, -5px, black);
+}
+
 #sidebar {
-  position: relative;
-  top: 0;
-  left: 0;
-  padding: 0;
-  background: #ffffff;
-  overflow: hidden;
-  z-index: 0;
+  margin-top: 20px;
+  @include css-shadow(0px, 0px, 15px, -5px, black);
 }
 
 #sidebar * {
@@ -39,8 +43,15 @@
   text-align: center;
 }
 
+#sidebar .collapse-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: -22px;
+}
+
 #sidebar ul {
   list-style: none;
+  padding-left: 18px;
 }
 
 #sidebar ul ul {
@@ -61,15 +72,4 @@
   width: 100%;
   height: 10px;
   /*border-bottom: 1px solid $sidebar-a-color;  */
-}
-
-#sidebar::-webkit-scrollbar {
-  width: 1px;
-  height: 1px;
-}
-
-#sidebar::-webkit-scrollbar-track { }
-
-#sidebar::-webkit-scrollbar-thumb {
-  background: $sidebar-a-color;
 }

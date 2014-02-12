@@ -178,10 +178,14 @@ Then /^I should see an account edited message$/ do
   page.should have_content "You updated your account successfully."
 end
 
-Then /^I should see my name$/ do
+Then /^I should (not |)see my name$/ do |should|
   create_user
-  #page.should have_content @user[:first_name]
-  page.should have_content([@user.first_name, @user.last_name].join(' '))
+  # TODO Bryan: refactor to display_name
+  if should == 'not '
+    page.should_not have_content([@user.first_name, @user.last_name].join(' '))
+  else
+    page.should have_content([@user.first_name, @user.last_name].join(' '))
+  end
 end
 
 Given /^the sign in form is visible$/ do
@@ -308,6 +312,13 @@ Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
 
     else
       pending
+  end
+end
+
+Given(/^user "(.*?)" follows projects:$/) do |user, table|
+  @user = User.find_by_first_name user
+  table.hashes.each do | project |
+      step %Q{I should become a member of project "#{project[:title]}"}
   end
 end
 

@@ -25,6 +25,7 @@ gem 'will_paginate-bootstrap'
 gem 'coveralls', require: false # TODO Bryan: move to production group?
 gem 'google-analytics-rails'
 gem 'friendly_id', '~> 5.0.0' # Bryan: for more REST-ful routes, use human-readable IDs
+gem 'colored' # colorizing console
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -44,7 +45,6 @@ group :development, :test do
   gem 'debugger'  # Use debugger
   gem 'jasmine' # framework for testing javascript
   gem 'jasmine-jquery-rails' # framework for testing javascript
-  gem 'colored' # colorizing console
   gem 'better_errors' # nice output of rails errors in browser
   gem 'binding_of_caller'  #online console and debugging in browser
 end

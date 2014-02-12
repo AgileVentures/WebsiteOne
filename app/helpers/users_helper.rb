@@ -18,11 +18,13 @@ module UsersHelper
 
 
   def link_to_youtube_button(origin_url)
-    link_to 'Link your YouTube channel', "/auth/gplus/?youtube=true&origin=#{origin_url}", class: "btn btn-success", type: "button"
+    link_to raw('<i class="fa fa-large fa-youtube"></i> Sync with YouTube'),
+            "/auth/gplus/?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button"
   end
 
   def unlink_from_youtube_button(origin_url)
-    link_to 'Unlink your YouTube channel', "/auth/destroy/0?youtube=true&origin=#{origin_url}", class: "btn btn-danger", type: "button"
+    link_to raw('<i class="fa fa-large fa-youtube"></i> Disconnect YouTube'),
+            "/auth/destroy/0?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button"
   end
 
   def video_link(video)
