@@ -6,7 +6,7 @@
       <img src="<%= gravatar_for(@user.email, size: 275) %>" class="thumbnail img-rounded media-object">
 
       <div class="avatar-lower">
-        <h3><%= user_display_name @user %></h3>
+        <h3><%= @user.display_name %></h3>
       </div>
     </div>
     <p>Member for: <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
