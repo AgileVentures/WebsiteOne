@@ -29,9 +29,10 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav nav-justified">
-        <li><%= link_to 'About us', page_path('about_us') %></li>
+        <li><%= link_to 'About us', page_path('about-us') %></li>
         <li><%= link_to 'Our projects', projects_path %></li>
         <li><%= link_to 'Our members', users_index_path %></li>
+        <li><%= link_to 'Getting Started', page_path('getting-started') %></li>
         <% unless user_signed_in? %>
             <li><%= link_to 'Log in', new_user_session_path %></li>
             <li><%= link_to 'Sign up', new_user_registration_path %></li>
