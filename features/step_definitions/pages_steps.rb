@@ -1,11 +1,15 @@
-Then /^I should be on the static "([^"]*)" page$/ do |page|
-  page = page.titleize.gsub(' ','').underscore
-  expect(current_path).to eq page_path(page)
-end
+Then /^I (am|should be) on the static "([^"]*)" page$/ do |option, page|
+  path = page_path page.downcase.squish.gsub(/\s+/,'-')
+  case option
+    when 'am'
+      visit path
 
-Then /^I am on the static "([^"]*)" page$/ do |page|
-  page = page.titleize.gsub(' ','').underscore
-  visit page_path(page)
+    when 'should be'
+      expect(current_path).to eq path
+
+    else
+      pending
+  end
 end
 
 
