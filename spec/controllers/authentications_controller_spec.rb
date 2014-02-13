@@ -5,8 +5,8 @@ describe AuthenticationsController do
   before(:each) do
     OmniAuth.config.mock_auth[:agileventures] = {
         'provider' => :agileventures,
-        'uid'      => '12345678',
-        'info'     => { 'email' => 'foo@agileventures.org' }
+        'uid' => '12345678',
+        'info' => { 'email' => 'foo@agileventures.org' }
     }
     @provider = :agileventures
   end
@@ -24,7 +24,7 @@ describe AuthenticationsController do
       controller.stub :current_user => @user
 
       @auth = double(Authentication)
-      @auths = [ @auth ]
+      @auths = [@auth]
       @user.should_receive(:authentications).at_least(1).and_return @auths
       @auths.should_receive(:find).and_return @auth
     end
@@ -47,7 +47,7 @@ describe AuthenticationsController do
 
   before(:each) do
     request.env['omniauth.auth'] = OmniAuth.config.mock_auth[@provider]
-    request.env['omniauth.params'] = { }
+    request.env['omniauth.params'] = {}
   end
 
   context 'for unregistered users' do
@@ -123,11 +123,49 @@ describe AuthenticationsController do
     end
   end
 
-  it 'calls #link_to_youtube' do
+  describe 'youtube authentication'
+  before(:each) do
+    controller.stub(authenticate_user!: true)
 
+    request.env['omniauth.auth'] = {}
+    request.env['omniauth.auth']['credentials'] = {}
 
+    request.env['omniauth.params'] = {}
+    request.env['omniauth.params']['youtube'] = true
+
+    request.env['omniauth.origin'] = 'back_path'
   end
-  it '#link_to_youtube' do
 
+  it 'calls #link_to_youtube' do
+    expect(controller).to receive(:link_to_youtube)
+    get :create, provider: 'github'
+  end
+  it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
+    request.env['omniauth.auth']['credentials']['token'] = 'token'
+    controller.stub(current_user: double(User, youtube_id: nil))
+
+    expect(Youtube).to receive(:channel_id)
+    get :create, provider: 'github'
+  end
+
+  it '#link_to_youtube: redirects back' do
+    get :create, provider: 'github'
+    expect(response).to redirect_to 'back_path'
+  end
+
+  it 'calls #unlink from youtube' do
+    controller.stub_chain(:current_user, :authentications, :find).and_return(double(User))
+    expect(controller).to receive(:unlink_from_youtube)
+    get :destroy, id: '1', youtube: true
+  end
+
+  it '#unlink_from_youtube' do
+    user = stub_model(User, youtube_id: '12345')
+    controller.stub(current_user: user)
+
+    get :destroy, id: '1', youtube: true, origin: 'back_path'
+    expect(user.youtube_id).to be_nil
+    expect(response).to redirect_to 'back_path'
   end
 end
+
