@@ -7,9 +7,11 @@ Feature: Guides
 	So that I can stay up to date with important topics
 	I want to access a guide section
 
-	Scenario: There should be a guide directory in the nav bar
+	Scenario: There should be a getting started link in the nav bar
 		Given I am on the home page
-		When I click "Guides"
-		Then I should be on the static "Guides" page
-		And I should see "Guides"
-		And I should see a list of guides
+		When I click "Getting Started"
+		Then I should be on the static "Getting Started" page
+		And I should see "Getting Started"
+        And I should see "Remote Pair Programming"
+        And I should see "Guides"
+#		And I should see a list of guides

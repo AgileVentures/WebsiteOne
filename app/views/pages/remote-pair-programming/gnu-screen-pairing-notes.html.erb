@@ -1,0 +1,53 @@
+<%= provide :title, 'GNU screen pairing notes' %>
+
+<div class="container">
+  <h1>GNU screen pairing notes</h1>
+  GNU screen allows 2 or more users to control a terminal screen.
+  <div><br>
+  </div>
+  <div>Screen only needs to be installed on the host machine. The client machines only need a terminal emulator, such as xterm, Apple Terminal.app, or GNOME Terminal, and an ssh client such as openssh (unix) or <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">putty</a> (Windows.)<br>
+    <div><br>
+    </div>
+    <div>Since the guests need to ssh into the host machine, this is simplest to set up when the host machine is not behind a NAT router. NAT routers are in the broadband modems used by many homes and small businesses. For example, you could use a virtual machine cloud server.</div>
+    <div><br>
+    </div>
+    <div><a href="http://blog.siyelo.com/remote-pair-programming-with-screen">This 2011 guide</a>&nbsp;from Siyelo&nbsp;covers a couple of options to set up and partially automate multiuser GNU screen for pairing.</div>
+    <div><br>
+    </div>
+    <div><a href="http://www.kuro5hin.org/story/2004/3/9/16838/14935" style="color:rgb(0,51,204);text-decoration:underline">This kuro5hin blog</a>&nbsp;introduces some of screen's useful features and keystrokes.</div>
+    <div><br>
+    </div>
+    <div>There is a handy reference page for the multiuser feature <a href="http://aperiodic.net/screen/multiuser">at aperiodic</a>.</div>
+  </div>
+  <div><br>
+  </div>
+  <div>Here is how one Agile Ventures engineer configured a Debian 7.1 cloud machine to host a Rails pairing session.</div>
+  <div>
+    <ol><li>Copy a <i>public</i>&nbsp;ssh key from the guest's computer. We copied the text from the &nbsp;<code>~/.ssh/id_rsa.pub&nbsp;</code>file in the guest's Ubuntu VM.</li>
+      <li>Now on the host machine, the Debian 7.1 Linux machine in the cloud, create a new user, as superuser with this command:&nbsp;<code>useradd</code></li>
+      <li>Now become the new user,</li>
+      <li><span style="color:rgb(0,96,0);font-family:monospace;line-height:13px">su - marian</span></li>
+      <li><span style="color:rgb(0,96,0);font-family:monospace;line-height:13px">cd</span></li>
+      <li><span style="color:rgb(0,96,0);font-family:monospace;line-height:13px">mkdir .ssh</span></li>
+      <li><span style="color:rgb(0,96,0);font-family:monospace;line-height:13px">cat &gt;&gt; .ssh/authorized_keys2</span>&nbsp;</li>
+      <li>Paste the public key you copied from the guest's own machine into the terminal. Then press control-D</li>
+      <li><code><span style="color:rgb(0,96,0);font-family:monospace;line-height:13px">cat&nbsp;ssh/authorized_keys2</span></code> to check that the key pasted in ok. It is important to check that you did not introduce any line breaks during the copy-paste operation. Exit back to the superuser (root) account.</li>
+      <li>As root, install GNU screen <code>apt-get install screen</code></li>
+      <li>Add the set-uid bit to screen&nbsp;<code>chmod 4755 /usr/bin/screen</code></li>
+      <li>Return to your own user account (in our case <code>david2</code>) on the host machine.</li>
+      <li>Adjust the terminal window to a reasonable size, as this will be the layout that all the guests will see.</li>
+      <li>Start or resume a screen session (the <code>-L</code> logs the session) &nbsp;<code>screen -R -D -L&nbsp;</code></li>
+      <li>Set up multiuser and add permission for the guest user with the next two key sequences. Don't forget the colon after control-A.</li>
+      <li><code>&lt;ctrl-a&gt;:multiuser on&lt;return&gt;</code></li>
+      <li><code>&lt;ctrl-a&gt;:acladd marian&lt;return&gt;</code></li>
+      <li>The following steps are on the guest's client PC.</li>
+      <li>Log in to the guest account on the cloud machine, for example <code>ssh marian@davids-cloud-host.example.com</code></li>
+      <li>Join the host's screen session by including the host's username in the following command. The slash at the end is important:&nbsp;<code>screen -x david2/</code></li>
+      <li>With a bit of luck, you should be sharing control of a terminal from which you can run console programs and full screen editors like <code>nano</code> <code>vim</code> and <code>emacs</code>&nbsp;. You could even install <code>links</code> which is a terminal web browser.</li>
+    </ol>
+
+    <p><br>
+    </p>
+  </div>
+
+</div>
