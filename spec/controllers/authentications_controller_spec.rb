@@ -59,24 +59,32 @@ describe AuthenticationsController do
   context 'for not signed in users' do
 
     before(:each) do
-      Authentication.should_receive(:find_by_provider_and_uid).and_return nil
       @user = double(User)
       @user.stub(:apply_omniauth)
     end
 
-    it 'should work with valid credentials' do
+    it 'should sign in the correct user for existing profiles' do
+      @auth = double(Authentication, user: @user)
+      Authentication.should_receive(:find_by_provider_and_uid).and_return @auth
+      controller.should_receive(:sign_in_and_redirect)
+      get :create, provider: @provider
+      expect(flash[:notice]).to eq 'Signed in successfully.'
+    end
+
+    it 'should create a new user for non-existing profiles' do
+      Authentication.should_receive(:find_by_provider_and_uid).and_return nil
       User.should_receive(:new).and_return(@user)
       @user.should_receive(:save).and_return(true)
       get :create, provider: @provider
       expect(flash[:notice]).to eq 'Signed in successfully.'
     end
 
-    it 'should sign in the correct user' do
-      Authentication.should_receive(:find_by_provider_and_uid).and_return @auth
-      controller.should_receive(:sign_in_and_redirect)
-      @auth.should_receive(:user).at_least(1).and_return @user
+    it 'should redirect to the new user form if there is an error' do
+      Authentication.should_receive(:find_by_provider_and_uid).and_return nil
+      User.should_receive(:new).and_return(@user)
+      @user.should_receive(:save).and_return(false)
       get :create, provider: @provider
-      expect(flash[:notice]).to eq 'Signed in successfully.'
+      expect(response).to redirect_to new_user_registration_url
     end
   end
 
