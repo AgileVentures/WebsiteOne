@@ -8,6 +8,7 @@ describe "users/show.html.erb" do
         mock_model(Project, friendly_id: 'title-3', title: 'Title 3')
     ]
 	  @user = mock_model(User, id: 4,
+                             display_name: 'Eric Els',
                              first_name: 'Eric',
                              last_name: 'Els',
                              email: 'eric@somemail.se',

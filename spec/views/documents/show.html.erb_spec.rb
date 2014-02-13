@@ -5,6 +5,7 @@ describe "documents/show" do
     @user = mock_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org', display_name: 'John Simpson')
     @project = assign(:project, stub_model(Project, :id => 1, :title => "Project1", :created_at => Time.now))
     @document = stub_model(Document,
+                           :user => @user,
                            :id => 1,
                            :title => "Title",
                            :body => "Content",
@@ -13,6 +14,7 @@ describe "documents/show" do
     )
 
     @document_child = stub_model(Document,
+                                 :user => @user,
                                  :title => "Child Title",
                                  :body => "Child content",
                                  :project_id => 1,
