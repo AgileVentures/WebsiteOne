@@ -95,3 +95,9 @@ end
 When(/^I go to the next page$/) do
   first(:css, 'a', text: 'Next').click()
 end
+
+Given(/^I (?:am on|go to) project "([^"]*)"$/) do |project|
+  project.downcase!
+  project = Project.find_by_title(project)
+  visit(path_to('projects', project.id ))
+end
