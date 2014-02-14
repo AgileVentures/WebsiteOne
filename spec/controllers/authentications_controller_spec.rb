@@ -9,6 +9,8 @@ describe AuthenticationsController do
         'info' => { 'email' => 'foo@agileventures.org' }
     }
     @provider = :agileventures
+    @path = '/some/path'
+    request.env['omniauth.origin'] = @path
   end
 
   it 'should render a failure message on unsuccessful authentication' do
@@ -29,6 +31,11 @@ describe AuthenticationsController do
       @auths.should_receive(:find).and_return @auth
     end
 
+    it 'should require authentication' do
+      controller.should_receive(:authenticate_user!)
+      get :destroy, id: 1
+    end
+
     it 'should be removable for users with a password' do
       @auths.should_receive(:count).and_return 2
       @auth.should_receive(:destroy).and_return true
@@ -39,7 +46,6 @@ describe AuthenticationsController do
     it 'should not be allowed for users without any other means of authentication' do
       @auths.should_receive(:count).and_return 1
       @user.should_receive(:encrypted_password).and_return nil
-      controller.should_receive(:authenticate_user!).and_return true
       get :destroy, id: 1
       expect(flash[:alert]).to eq 'Bad idea!'
     end
@@ -48,12 +54,6 @@ describe AuthenticationsController do
   before(:each) do
     request.env['omniauth.auth'] = OmniAuth.config.mock_auth[@provider]
     request.env['omniauth.params'] = {}
-  end
-
-  context 'for unregistered users' do
-
-    before(:each) do
-    end
   end
 
   context 'for not signed in users' do
@@ -71,20 +71,24 @@ describe AuthenticationsController do
       expect(flash[:notice]).to eq 'Signed in successfully.'
     end
 
-    it 'should create a new user for non-existing profiles' do
-      Authentication.should_receive(:find_by_provider_and_uid).and_return nil
-      User.should_receive(:new).and_return(@user)
-      @user.should_receive(:save).and_return(true)
-      get :create, provider: @provider
-      expect(flash[:notice]).to eq 'Signed in successfully.'
-    end
+    context 'for new profiles' do
+      before(:each) do
+        Authentication.should_receive(:find_by_provider_and_uid).and_return nil
+        User.should_receive(:new).and_return(@user)
+      end
 
-    it 'should redirect to the new user form if there is an error' do
-      Authentication.should_receive(:find_by_provider_and_uid).and_return nil
-      User.should_receive(:new).and_return(@user)
-      @user.should_receive(:save).and_return(false)
-      get :create, provider: @provider
-      expect(response).to redirect_to new_user_registration_url
+      it 'should create a new user for non-existing profiles' do
+        @user.should_receive(:save).and_return(true)
+        controller.should_receive(:sign_in_and_redirect)
+        get :create, provider: @provider
+        expect(flash[:notice]).to eq 'Signed in successfully.'
+      end
+
+      it 'should redirect to the new user form if there is an error' do
+        @user.should_receive(:save).and_return(false)
+        get :create, provider: @provider
+        expect(response).to redirect_to new_user_registration_path
+      end
     end
   end
 
@@ -104,7 +108,7 @@ describe AuthenticationsController do
       controller.stub :current_user => other_user
       get :create, provider: @provider
       expect(flash[:alert]).to eq 'Another account is already associated with these credentials!'
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to @path
     end
 
     context 'connecting to a new profile' do
@@ -120,6 +124,7 @@ describe AuthenticationsController do
           @auth.should_receive(:save).and_return true
           get :create, provider: p
           expect(flash[:notice]).to eq 'Authentication successful.'
+          expect(response).to redirect_to @path
         end
       end
 
@@ -127,53 +132,55 @@ describe AuthenticationsController do
         @auth.should_receive(:save).and_return false
         get :create, provider: @provider
         expect(flash[:alert]).to eq 'Unable to create additional profiles.'
+        expect(response).to redirect_to @path
       end
     end
   end
 
-  describe 'youtube authentication'
-  before(:each) do
-    controller.stub(authenticate_user!: true)
+  describe 'youtube authentication' do
+    before(:each) do
+      controller.stub(authenticate_user!: true)
 
-    request.env['omniauth.auth'] = {}
-    request.env['omniauth.auth']['credentials'] = {}
+      request.env['omniauth.auth'] = {}
+      request.env['omniauth.auth']['credentials'] = {}
 
-    request.env['omniauth.params'] = {}
-    request.env['omniauth.params']['youtube'] = true
+      request.env['omniauth.params'] = {}
+      request.env['omniauth.params']['youtube'] = true
 
-    request.env['omniauth.origin'] = 'back_path'
-  end
+      request.env['omniauth.origin'] = 'back_path'
+    end
 
-  it 'calls #link_to_youtube' do
-    expect(controller).to receive(:link_to_youtube)
-    get :create, provider: 'github'
-  end
-  it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
-    request.env['omniauth.auth']['credentials']['token'] = 'token'
-    controller.stub(current_user: double(User, youtube_id: nil))
+    it 'calls #link_to_youtube' do
+      expect(controller).to receive(:link_to_youtube)
+      get :create, provider: 'github'
+    end
+    it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
+      request.env['omniauth.auth']['credentials']['token'] = 'token'
+      controller.stub(current_user: double(User, youtube_id: nil))
 
-    expect(Youtube).to receive(:channel_id)
-    get :create, provider: 'github'
-  end
+      expect(Youtube).to receive(:channel_id)
+      get :create, provider: 'github'
+    end
 
-  it '#link_to_youtube: redirects back' do
-    get :create, provider: 'github'
-    expect(response).to redirect_to 'back_path'
-  end
+    it '#link_to_youtube: redirects back' do
+      get :create, provider: 'github'
+      expect(response).to redirect_to 'back_path'
+    end
 
-  it 'calls #unlink from youtube' do
-    controller.stub_chain(:current_user, :authentications, :find).and_return(double(User))
-    expect(controller).to receive(:unlink_from_youtube)
-    get :destroy, id: '1', youtube: true
-  end
+    it 'calls #unlink from youtube' do
+      controller.stub_chain(:current_user, :authentications, :find).and_return(double(User))
+      expect(controller).to receive(:unlink_from_youtube)
+      get :destroy, id: '1', youtube: true
+    end
 
-  it '#unlink_from_youtube' do
-    user = stub_model(User, youtube_id: '12345')
-    controller.stub(current_user: user)
+    it '#unlink_from_youtube' do
+      user = stub_model(User, youtube_id: '12345')
+      controller.stub(current_user: user)
 
-    get :destroy, id: '1', youtube: true, origin: 'back_path'
-    expect(user.youtube_id).to be_nil
-    expect(response).to redirect_to 'back_path'
+      get :destroy, id: '1', youtube: true, origin: 'back_path'
+      expect(user.youtube_id).to be_nil
+      expect(response).to redirect_to 'back_path'
+    end
   end
 end
 

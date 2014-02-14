@@ -31,7 +31,7 @@ WebsiteOne::Application.routes.draw do
   get '/auth/:provider/callback' => 'authentications#create'
   get '/auth/failure' => 'authentications#failure'
 
-  get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
+  delete '/auth/destroy/:id', to: 'authentications#destroy'
 
   post 'mail_contact_form', to: 'visitors#send_contact_form'
 

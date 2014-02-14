@@ -24,7 +24,7 @@ module UsersHelper
 
   def unlink_from_youtube_button(origin_url)
     link_to raw('<i class="fa fa-large fa-youtube"></i> Disconnect YouTube'),
-            "/auth/destroy/0?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button"
+            "/auth/destroy/0?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button", method: :delete
   end
 
   def video_link(video)
