@@ -12,16 +12,10 @@ class AuthenticationsController < ApplicationController
     @path = request.env['omniauth.origin'] || root_path
 
     if authentication.present?
-      if user_signed_in? and authentication.user.id != current_user.id
-        # Bryan: TESTED
-        flash[:alert] = 'Another account is already associated with these credentials!'
-        redirect_to @path
-      else
-        # Bryan: TESTED
-        flash[:notice] = 'Signed in successfully.'
-        sign_in_and_redirect(:user, authentication.user)
-      end
+      attempt_login_with_authentication(authentication, @path)
+
     elsif current_user
+      create_new_authentication_for_current_user ()
       auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
       if auth.save
         # Bryan: TESTED
@@ -91,5 +85,15 @@ class AuthenticationsController < ApplicationController
     current_user.save
 
     redirect_to(params[:origin] || root_path)
+  end
+
+  def attempt_login_with_authentication (authentication, path)
+    if current_user.present? and authentication.user != current_user
+      flash[:alert] = 'Another account is already associated with these credentials!'
+      redirect_to path
+    else
+      flash[:notice] = 'Signed in successfully.'
+      sign_in_and_redirect(:user, authentication.user)
+    end
   end
 end
