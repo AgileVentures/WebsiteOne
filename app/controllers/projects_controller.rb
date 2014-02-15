@@ -14,17 +14,17 @@ class ProjectsController < ApplicationController
     documents
     @members = @project.followers.reject { |member| !member.display_profile }
     @videos = []
+    tag_list = [ @project.title ] + @project.tag_list
     @members.each do |member|
-      # Här måste vi fixa till sorteringen
       videos = Youtube.user_videos(member)
       next if videos.nil?
 
       videos.each do |video|
-        regex = Regexp.new(@project.tag_list.join('|').squish, Regexp::IGNORECASE)
+        regex = Regexp.new(tag_list.join('|').squish, Regexp::IGNORECASE)
         @videos << video if video[:title] =~ regex
       end
     end
-    @videos.sort_by! { |v| v[:title].downcase }
+    @videos.sort_by! { |v| v[:published] }
   end
 
   def new

@@ -96,7 +96,10 @@
           <% else %>
               <h2>List of Project videos</h2>
               <% @videos.each do |video| %>
-                  <li><%= video_link(video) %></li>
+                  <li>
+                    <%= video_link(video) %><br /><small><%= video[:published] %> by
+                    <%= link_to video[:user].display_name, users_show_path(video[:user]) %></small>
+                  </li>
               <% end %>
           <% end %>
         </ul>

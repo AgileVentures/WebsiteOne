@@ -45,8 +45,9 @@ describe ProjectsController do
     before(:each) do
       @project = mock_model(Project, valid_attributes)
       Project.stub_chain(:friendly, :find).and_return @project
-      @users = [ mock_model(User, friendly_id: 'my-friendly-id') ]
-      @project.should_receive(:followers).and_return @users
+      @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
+      @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
+      @project.should_receive(:followers).and_return @more_users
     end
 
     it 'assigns the requested project as @project' do
@@ -65,7 +66,8 @@ describe ProjectsController do
     end
 
     it 'assigns the list of related YouTube videos in alphabetical order' do
-      tags = [ 'WebsiteFive', 'WTF' ]
+      @project.title = 'WebsiteFive'
+      tags = [ 'WTF' ]
       accepted_videos = [
           { title: 'WebsiteFive PP'},
           { title: 'WTF PP'},
@@ -85,7 +87,7 @@ describe ProjectsController do
       Youtube.should_receive(:user_videos).and_return videos
       @project.stub(:tag_list).and_return tags
       get :show, { id: @project.friendly_id }, valid_session
-      assigns(:videos).should eq accepted_videos.sort_by! { |v| v[:title].downcase }
+      assigns(:videos).should eq accepted_videos.sort_by! { |v| v[:published] }
     end
   end
 
