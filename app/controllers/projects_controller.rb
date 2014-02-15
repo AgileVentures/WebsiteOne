@@ -12,15 +12,19 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-    @members = @project.followers
+    @members = @project.followers.reject { |member| !member.display_profile }
     @videos = []
+    tag_list = [ @project.title ] + @project.tag_list
     @members.each do |member|
-      if youtube_videos = Youtube.user_videos(member)
-        youtube_videos.each do |hash|
-          @videos << hash if hash[:title] =~ /#{@project.title}/
-        end
+      videos = Youtube.user_videos(member)
+      next if videos.nil?
+
+      videos.each do |video|
+        regex = Regexp.new(tag_list.join('|').squish, Regexp::IGNORECASE)
+        @videos << video if video[:title] =~ regex
       end
     end
+    @videos.sort_by! { |v| v[:published] }
   end
 
   def new

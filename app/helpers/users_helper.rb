@@ -43,11 +43,11 @@ module Youtube
 
     def user_videos(user)
       if user_id = user.youtube_id
-        parse_response(open("http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json").read)
+        parse_response(open("http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json").read, user)
       end
     end
 
-    def parse_response(response)
+    def parse_response(response, user)
       begin
         json = JSON.parse(response)
         videos = json['feed']['entry']
@@ -59,7 +59,8 @@ module Youtube
               content:    hash['content']['$t'],
               url:        hash['link'].first['href'],
               thumbs:     hash['media$group']['media$thumbnail'],
-              player_url: hash['media$group']['media$player'].first['url']
+              player_url: hash['media$group']['media$player'].first['url'],
+              user: user
           }
         end
       rescue JSON::JSONError
