@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ProjectsController do
 
   let(:valid_attributes) { {:id => 1,
-                            :title => 'MyProject',
+                            :title => 'WebTwentyFive',
                             :description => 'My project description',
                             :status => 'Active',
                             :friendly_id => 'my-project' } }
@@ -44,6 +44,7 @@ describe ProjectsController do
   describe '#show' do
     before(:each) do
       @project = mock_model(Project, valid_attributes)
+      @project.stub(:tag_list).and_return [ 'WTF' ]
       Project.stub_chain(:friendly, :find).and_return @project
       @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
       @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
@@ -66,16 +67,14 @@ describe ProjectsController do
     end
 
     it 'assigns the list of related YouTube videos in alphabetical order' do
-      @project.title = 'WebsiteFive'
-      tags = [ 'WTF' ]
       accepted_videos = [
-          { title: 'WebsiteFive PP'},
+          { title: 'WebTwentyFive PP' },
           { title: 'WTF PP'},
-          { title: 'PP on WebsiteFive'},
+          { title: 'PP on WebtwentyFive'},
           { title: 'pp on wtf'},
           { title: 'A PP on WTF'},
           { title: 'My PP on WTF'},
-          { title: 'websiteFive PP on refactoring'}
+          { title: 'webtwentyfive PP on refactoring'}
       ]
       rejected_videos = [
           { title: 'Cat Movie' },
@@ -85,7 +84,6 @@ describe ProjectsController do
       ]
       videos = rejected_videos + accepted_videos
       Youtube.should_receive(:user_videos).and_return videos
-      @project.stub(:tag_list).and_return tags
       get :show, { id: @project.friendly_id }, valid_session
       assigns(:videos).should eq accepted_videos.sort_by! { |v| v[:published] }
     end

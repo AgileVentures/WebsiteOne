@@ -97,8 +97,7 @@
               <h2>List of Project videos</h2>
               <% @videos.each do |video| %>
                   <li>
-                    <%= video_link(video) %><br /><small><%= video[:published] %> by
-                    <%= link_to video[:user].display_name, users_show_path(video[:user]) %></small>
+                    <%= video_link(video) %> - published: <%= video[:published] %>
                   </li>
               <% end %>
           <% end %>
@@ -108,7 +107,7 @@
         <% unless @videos.empty? %>
             <h4 id="video_contents"><%= @videos.first[:content] %></h4>
             <iframe id="ytplayer" type="text/html" width="340" height="210"
-                    src="<%= video_embed_link(@videos.first) %>" frameborder="0"/>
+                    src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
             </div>
         <% end %>
         </div>
