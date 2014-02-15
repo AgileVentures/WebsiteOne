@@ -26,6 +26,7 @@ gem 'coveralls', require: false # TODO Bryan: move to production group?
 gem 'google-analytics-rails'
 gem 'friendly_id', '~> 5.0.0' # Bryan: for more REST-ful routes, use human-readable IDs
 gem 'colored' # colorizing console
+gem 'acts-as-taggable-on'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

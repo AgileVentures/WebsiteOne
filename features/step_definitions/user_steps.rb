@@ -214,7 +214,7 @@ When(/^I should see a list of all users$/) do
 end
 
 When(/^I click pulldown link "([^"]*)"$/) do |text|
-  page.find("#user_info").click
+  page.find('#user_info').click
   click_link_or_button text
 end
 
@@ -235,7 +235,7 @@ Given(/^I (?:am on|go to) my "([^"]*)" page$/) do |page|
 end
 
 Given /^I am on "(.*?)" page for user "(.*?)"$/ do |page, user_name|
-  if user_name == "me"
+  if user_name == 'me'
     user = @user
   else
     user = User.find_by_first_name(user_name)

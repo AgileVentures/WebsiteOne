@@ -34,7 +34,7 @@
                       'render': 'createhangout',
                       'hangout_type': 'onair',
                       'initial_apps': [
-                          {'app_id': '463111787485', 'app_type': 'ROOM_APP' }
+                          {'app_type': 'ROOM_APP' }
                       ],
                   });
               </script>
@@ -96,7 +96,9 @@
           <% else %>
               <h2>List of Project videos</h2>
               <% @videos.each do |video| %>
-                  <li><%= video_link(video) %></li>
+                  <li>
+                    <%= video_link(video) %> - <i style="font-size: 85%; color: darkgray;">published: <%= video[:published] %></i>
+                  </li>
               <% end %>
           <% end %>
         </ul>
@@ -105,7 +107,7 @@
         <% unless @videos.empty? %>
             <h4 id="video_contents"><%= @videos.first[:content] %></h4>
             <iframe id="ytplayer" type="text/html" width="340" height="210"
-                    src="<%= video_embed_link(@videos.first) %>" frameborder="0"/>
+                    src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
             </div>
         <% end %>
         </div>
