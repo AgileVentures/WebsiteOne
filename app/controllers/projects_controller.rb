@@ -14,12 +14,18 @@ class ProjectsController < ApplicationController
     documents
     @members = @project.followers
     @videos = []
+    @title_tags = []
+    @title_tags << @project.title
+    @project.tag_list.each {|tag| @title_tags << tag}
     @members.each do |member|
       # Här måste vi fixa till sorteringen
-      if youtube_videos = Youtube.user_videos(member).sort_by {|vn| vn[:datetime]}
+      if youtube_videos = Youtube.user_videos(member)
         youtube_videos.each do |hash|
           # Här sker filtreringen nu.  Potentiellt måste vi kolla efter taggar här
-          @videos << hash if hash[:title] =~ /#{@project.title}/
+          @title_tags.each do |tag|
+            @videos << hash if hash[:title].downcase =~ /#{tag.downcase}/
+          end
+
         end
       end
     end
