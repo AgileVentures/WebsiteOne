@@ -15,30 +15,10 @@ class AuthenticationsController < ApplicationController
       attempt_login_with_authentication(authentication, @path)
 
     elsif current_user
-      create_new_authentication_for_current_user ()
-      auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-      if auth.save
-        # Bryan: TESTED
-        flash[:notice] = 'Authentication successful.'
-        redirect_to @path
-      else
-        # Bryan: TESTED
-        flash[:alert] = 'Unable to create additional profiles.'
-        redirect_to @path
-      end
+      create_new_authentication_for_current_user(omniauth, @path)
+
     else
-      user = User.new
-      user.apply_omniauth(omniauth)
-      if user.save
-        # Bryan: TESTED
-        flash[:notice] = 'Signed in successfully.'
-        sign_in_and_redirect(:user, user)
-      else
-        # Bryan: TESTED
-        session[:omniauth] = omniauth.except('extra')
-        redirect_to new_user_registration_url
-      end
-    end
+      create_new_user_with_authentication(omniauth)
   end
 
   def failure
@@ -96,4 +76,41 @@ class AuthenticationsController < ApplicationController
       sign_in_and_redirect(:user, authentication.user)
     end
   end
+
+  def create_new_authentication_for_current_user (omniauth, path)
+    if auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+      if auth.save
+        # Bryan: TESTED
+        flash[:notice] = 'Authentication successful.'
+        redirect_to path
+      else
+        # Bryan: TESTED
+        flash[:alert] = 'Unable to create additional profiles.'
+        redirect_to @path
+      end
+    end
+  end
+
+  def create_new_user_with_authentication(omniauth)
+    user = User.new
+    user.apply_omniauth(omniauth)
+
+    if user.save
+      # Bryan: TESTED
+      flash[:notice] = 'Signed in successfully.'
+      sign_in_and_redirect(:user, user)
+    else
+      # Bryan: TESTED
+      session[:omniauth] = omniauth.except('extra')
+      redirect_to new_user_registration_url
+    end
+  end
+ end
 end
+
+
+
+
+
+
+
