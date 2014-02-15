@@ -145,7 +145,15 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
+  Scenario: Project show page renders a list of members
+    Given The project "hello world" has 5 members
+    And I am on the "Show" page for project "hello world"
+    Then I should see "Members (5)"
 
+  # Bryan: Stub the YouTube API calls?
+  Scenario: Project show page renders a list of videos
+    Given I am on the "Show" page for project "hello mars"
+    Then I should see "Videos (0)"
 #  Scenarios for DESTROY action commented out until this functionality is needed
 
 #  Scenario: Destroying a project: successful
