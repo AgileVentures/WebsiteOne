@@ -13,6 +13,14 @@ class ProjectsController < ApplicationController
   def show
     documents
     @members = @project.followers
+    @videos = []
+    @members.each do |member|
+      if youtube_videos = Youtube.user_videos(member)
+        youtube_videos.each do |hash|
+          @videos << hash if hash[:title] =~ /#{@project.title}/
+        end
+      end
+    end
   end
 
   def new
@@ -21,12 +29,12 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params.merge("user_id" => current_user.id))
-      if @project.save
-        redirect_to projects_path, notice: 'Project was successfully created.'
-      else
-        flash.now[:alert] = 'Project was not saved. Please check the input.'
-        render action: 'new'
-      end
+    if @project.save
+      redirect_to projects_path, notice: 'Project was successfully created.'
+    else
+      flash.now[:alert] = 'Project was not saved. Please check the input.'
+      render action: 'new'
+    end
   end
 
   def edit
@@ -37,11 +45,10 @@ class ProjectsController < ApplicationController
       redirect_to projects_path, notice: 'Project was successfully updated.'
     else
       # TODO change this to notify for invalid params
-      flash.now[:alert] =  'Project was not updated.'
+      flash.now[:alert] = 'Project was not updated.'
       render 'edit'
     end
   end
-
 
 
   def destroy
@@ -81,12 +88,10 @@ class ProjectsController < ApplicationController
   end
 
 
-
   def project_params
     # permit the mass assignments
     params.require(:project).permit(:title, :description, :created, :status, :user_id)
   end
-
 
 
 end

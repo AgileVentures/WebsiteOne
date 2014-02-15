@@ -37,6 +37,7 @@ describe 'projects/show.html.erb' do
     view.stub(:project_created_by).and_return(@created_by)
     @project.should_receive(:user).and_return(@user)
 
+    assign :videos, []
   end
 
   it 'renders project description' do
