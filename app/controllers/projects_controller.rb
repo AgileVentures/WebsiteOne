@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-    @members = @project.followers
+    @members = @project.followers.reject { |member| !member.display_profile }
     @videos = []
     @members.each do |member|
       if youtube_videos = Youtube.user_videos(member)
