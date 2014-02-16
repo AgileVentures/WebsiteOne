@@ -5,9 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   #validates :first_name, :last_name, presence: true
 
-  # TODO Bryan: implement slug for users
-  #extend FriendlyId
-  #friendly_id :display_name, :slugged
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
 
   validates :email, uniqueness: true
   has_many :authentications, dependent: :destroy
@@ -32,9 +31,21 @@ class User < ActiveRecord::Base
   def display_name
     name = [ self.first_name, self.last_name ].join(' ').squish
     if name =~ /^\s*$/
-      self.email.gsub(/@.*$/, '')
+      self.email_first_part
     else
       name
     end
+  end
+
+  def should_generate_new_friendly_id?
+    (self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?
+  end
+
+  def email_first_part
+    self.email.gsub(/@.*$/, '')
+  end
+
+  def slug_candidates
+    [ :display_name, :email_first_part ]
   end
 end
