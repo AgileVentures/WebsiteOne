@@ -34,7 +34,6 @@ Feature: As a site owner
     Given my YouTube Channel ID with some videos in it
     But my YouTube Channel is not connected
     And I am on my "profile" page
-
     When I click "Sync with YouTube"
     Then I should see "Title"
     And I should see "Published"
