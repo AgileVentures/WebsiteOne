@@ -61,7 +61,7 @@ describe ProjectsController do
       expect(response).to render_template 'show'
     end
 
-    it 'assigns the list of members to @members' do
+    it 'assigns the list of members with public profiles to @members' do
       get :show, { id: @project.friendly_id }, valid_session
       assigns(:members).should eq @users
     end
