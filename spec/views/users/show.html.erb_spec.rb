@@ -110,7 +110,7 @@ describe "users/show.html.erb" do
   end
 
   it 'should display Joined on ..' do
-    Date.stub(today:'07/02/2014'.to_date)
+    Date.stub(today:'1/2/2013'.to_date)
     render
     expect(rendered).to have_text('Member for: about 1 month')
   end

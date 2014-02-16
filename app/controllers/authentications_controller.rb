@@ -12,13 +12,14 @@ class AuthenticationsController < ApplicationController
     @path = request.env['omniauth.origin'] || root_path
 
     if authentication.present?
-      attempt_login_with_authentication(authentication, @path)
+      attempt_login_with_auth(authentication, @path)
 
     elsif current_user
       create_new_authentication_for_current_user(omniauth, @path)
 
     else
       create_new_user_with_authentication(omniauth)
+    end
   end
 
   def failure
@@ -48,12 +49,13 @@ class AuthenticationsController < ApplicationController
     redirect_to edit_user_registration_path(current_user)
   end
 
+
   private
 
   def link_to_youtube
     user = current_user
     if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
-      user.youtube_id  = Youtube.channel_id(token)
+      user.youtube_id = Youtube.channel_id(token)
       user.save
     end
 
@@ -67,7 +69,7 @@ class AuthenticationsController < ApplicationController
     redirect_to(params[:origin] || root_path)
   end
 
-  def attempt_login_with_authentication (authentication, path)
+  def attempt_login_with_auth(authentication, path)
     if current_user.present? and authentication.user != current_user
       flash[:alert] = 'Another account is already associated with these credentials!'
       redirect_to path
@@ -77,7 +79,7 @@ class AuthenticationsController < ApplicationController
     end
   end
 
-  def create_new_authentication_for_current_user (omniauth, path)
+  def create_new_authentication_for_current_user(omniauth, path)
     if auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
       if auth.save
         # Bryan: TESTED
@@ -105,8 +107,9 @@ class AuthenticationsController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
- end
 end
+
+
 
 
 
