@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def should_generate_new_friendly_id?
-    (self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?
+    self.slug.nil? or ((self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?)
   end
 
   def email_first_part
