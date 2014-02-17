@@ -1,6 +1,5 @@
 WebsiteOne::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
@@ -17,7 +16,7 @@ WebsiteOne::Application.configure do
   config.static_cache_control = "public, max-age=3600"
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local       = false
   config.action_controller.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates.
@@ -33,4 +32,6 @@ WebsiteOne::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  GA.tracker = 'UA-00000000-1'
 end

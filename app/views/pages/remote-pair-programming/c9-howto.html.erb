@@ -1,0 +1,103 @@
+<%= provide :title, 'C9 Howto' %>
+
+<div class="container">
+  <h1>C9 Howto</h1>
+  <div><font size="4"><b>C9?</b></font></div>
+  Cloud 9 is a simple way to start sharing code in a highly interactive way without the hassle of downloading and installing a virtual machine environment.
+  <div>Their website address is:&nbsp;<a href="https://c9.io/">https://c9.io/</a><br>
+    <div><br>
+    </div>
+    <div><br>
+    </div>
+    <div><font size="4"><b>Creating a workspace</b></font></div>
+    <div>You will need to make an account before being able to make a workspace. T<span style="background-color:transparent;line-height:1.6;font-size:10pt">o start off press the "Create New Workspace" button near the top left of the browser window and then choose the first option,&nbsp;</span><span style="background-color:transparent;line-height:1.6;font-size:10pt">"Create a New Workspace"</span><span style="background-color:transparent;line-height:1.6;font-size:10pt">&nbsp;</span></div>
+    <div><span style="background-color:transparent;line-height:1.6;font-size:10pt"><br>
+</span></div>
+    <div><span style="background-color:transparent;line-height:1.6;font-size:10pt">You can name your new workspace whatever you like. Then click on Custom (the apple) and then Create.</span></div>
+    <div><span style="background-color:transparent;line-height:1.6;font-size:10pt"><br>
+</span></div>
+    <div>Your new workspace should appear under "My Projects" as processing. This may take up to 2 minutes.</div>
+    <div><br>
+    </div>
+    <div>Once it is done processing, you can start editing it. Press on the "Start Editing" button to start the editor. The link provided can be accessed by anyone although write privileges need to be set by the workspace administrator.</div>
+    <div><br>
+    </div>
+    <div><br>
+    </div>
+    <div><br>
+    </div>
+    <div><font size="4"><span style="line-height:28px"><b>Getting it up and running for cs169.1x</b></span></font></div>
+    <div>To be able to run some of the essentials in Cloud 9,<b>&nbsp;</b>you will need to install them with the terminal:</div>
+    <blockquote style="margin:0 0 0 40px;border:none;padding:0px">
+      <div><font face="courier new, monospace" style="font-style:normal">gem install bundle</font></div>
+    </blockquote>
+    <blockquote style="margin:0 0 0 40px;border:none;padding:0px">
+      <div><font face="courier new, monospace" style="font-style:normal">gem install debugger</font></div>
+    </blockquote>
+    <blockquote style="margin:0 0 0 40px;border:none;padding:0px">
+      <div><font face="courier new, monospace" style="font-style:normal">gem install nokogiri (this may take a while)</font></div>
+    </blockquote>
+    <div><br>
+    </div>
+    If you are working on <b>rottenpotatoes</b>, you will need to open the Gemfile file and change</div>
+  <div>
+    <div><font face="courier new, monospace"><span>&nbsp;&nbsp; &nbsp;<span>&nbsp;</span></span>gem 'ruby-debug19'&nbsp;</font></div>
+    <div>to&nbsp;</div>
+    <div><font face="courier new, monospace"><span>&nbsp;&nbsp; &nbsp;<span>&nbsp;</span></span>gem 'debugger'</font></div>
+    <div>so that bundle is able to install all dependencies successfully.</div>
+    <div>
+      <div><br>
+      </div>
+      <div><br>
+      </div>
+      <div><b><font size="4">Installing Heroku</font></b></div>
+      <div>Paste this into the terminal:</div>
+      <div><br>
+      </div>
+      <div>
+        <div><font face="courier new, monospace">wget http://assets.heroku.com/heroku-client/heroku-client.tgz</font></div>
+        <div><font face="courier new, monospace">tar xzfv heroku-client.tgz</font></div>
+        <div><font face="courier new, monospace">cd heroku-client/bin</font></div>
+        <div><font face="courier new, monospace">PATH=$PATH:$PWD</font></div>
+        <div><font face="courier new, monospace">exit</font></div>
+      </div>
+      <div><br>
+      </div>
+      <div><br>
+      </div>
+      <div><b><font size="4">Terminal Sharing</font></b></div>
+      <div>Terminal sharing is available by default. However,&nbsp;<span style="background-color:transparent;line-height:1.6;font-size:10pt">we can use Tmux to share terminals.</span><span style="background-color:transparent;line-height:1.6;font-size:10pt">One person can be a host while the others can join.</span></div>
+      <div><span style="background-color:transparent;line-height:1.6;font-size:10pt"><br>
+</span></div>
+      <div><span style="background-color:transparent;line-height:1.6;font-size:10pt">To</span><span style="background-color:transparent;line-height:1.6;font-size:10pt">&nbsp;host using Tmux, type into the terminal:</span></div>
+    </div>
+    <blockquote style="margin:0 0 0 40px;border:none;padding:0px">
+      <div>
+        <div>
+          <div><font face="courier new, monospace" style="font-style:normal">tmux new-session -s &lt;session_name&gt;</font></div>
+        </div>
+      </div>
+    </blockquote>
+    <div>
+      <div>
+        <div>and to join:</div>
+      </div>
+    </div>
+    <blockquote style="margin:0 0 0 40px;border:none;padding:0px">
+      <div>
+        <div>
+          <div><font face="courier new, monospace" style="font-style:normal">tmux attach-session -t &lt;session_name&gt;</font></div>
+        </div>
+      </div>
+    </blockquote>
+    <div>
+      <div>
+        <div>where &lt;session_name&gt; is to be replaced by your desired name choice for the session</div>
+      </div>
+      <div><br>
+      </div>
+      <div>We are currently experimenting with Cloud 9 and hoping that it can be fully compatible will all homeworks of CS169.1x,&nbsp;<span style="background-color:transparent;line-height:1.6;font-size:10pt">CS169.2x and with current Agile Ventures projects.</span></div>
+    </div>
+  </div>
+
+</div>

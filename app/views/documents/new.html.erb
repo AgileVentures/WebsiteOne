@@ -1,0 +1,9 @@
+<h3>
+  <% if @parent.nil? %>
+    new document for project <strong><%= @project.title %></strong>
+  <% else %>
+    new sub-document for <strong><%= @parent.title %></strong>
+  <% end %>
+</h3>
+
+<%= render 'form' %>
