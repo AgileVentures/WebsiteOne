@@ -122,4 +122,39 @@ describe User do
       user.display_name.should eq 'Joe'
     end
   end
+
+  describe 'slug generation' do
+    before(:each) do
+      @user = User.new first_name: 'Candice',
+                       last_name: 'Clemens',
+                       email: 'candice@clemens.com',
+                       password: '1234567890'
+    end
+
+    it 'should automatically generate a slug' do
+      @user.save
+      expect(@user.slug).to_not eq nil
+    end
+
+    it 'should be manually adjustable' do
+      slug = 'this-is-a-slug'
+      @user.slug = slug
+      @user.save
+      expect(User.find(@user.id).slug).to eq slug
+    end
+
+    it 'should be remade when the display name changes' do
+      @user.save
+      slug = @user.slug
+      @user.update_attributes first_name: 'Shawn'
+      expect(@user.slug).to_not eq slug
+    end
+
+    it 'should not be affected by multiple saves' do
+      @user.save
+      slug = @user.slug
+      @user.save
+      expect(@user.slug).to eq slug
+    end
+  end
 end

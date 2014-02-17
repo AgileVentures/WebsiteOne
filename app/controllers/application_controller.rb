@@ -24,8 +24,9 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def render_error(status, exception)
-      #logger.log(exception)
+    def render_error(status, e)
+      Rails.logger.error e.message
+      e.backtrace.each { |line| Rails.logger.error line }
       case status
         when 404
           render template: 'pages/not_found', layout: 'layouts/application', status: 404
