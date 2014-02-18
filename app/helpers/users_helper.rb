@@ -47,6 +47,10 @@ module Youtube
       end
     end
 
+    def project_videos(user)
+      parse_response(open("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=#{user_id}&order=date&q=#{search_term}&type=video&key=#{api_key}").read)
+    end
+
     def parse_response(response, user)
       begin
         json = JSON.parse(response)
