@@ -51,6 +51,7 @@ module Youtube
       begin
         json = JSON.parse(response)
         videos = json['feed']['entry']
+        return if videos.nil?
         videos.map do |hash|
           {
               id:         hash['id']['$t'].split('/').last,
