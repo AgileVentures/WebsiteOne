@@ -13,6 +13,11 @@
           <li><%= link_to '<i class="glyphicon glyphicon-log-out"></i> Log out'.html_safe, destroy_user_session_path, :method => :delete %></li>
         </ul>
       </div>
+          <% else %>
+          <div class="col-lg-3 pull-right text-right" style="margin-top: 17px;">
+            <li><%= link_to 'Log in', new_user_session_path %></li>
+            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          </div>
       <% end %>
     </div>
   </div>
