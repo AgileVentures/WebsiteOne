@@ -26,6 +26,8 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
+  resources :articles
+
   get 'projects/:project_id/:id', to: 'documents#show'
 
   get '/auth/:provider/callback' => 'authentications#create'
