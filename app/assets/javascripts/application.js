@@ -20,7 +20,7 @@
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
 $(function() {
-  function ready() {
+  $.fn.BryanHATESTHIS = function () {
     // Bryan: run these functions only in the home page
     if (window.location.pathname === '/') {
       var TxtRotate = function(el, toRotate, period) {
@@ -92,20 +92,20 @@ $(function() {
      * To change the icons, alter collapsedClass and expandedClass to append the appropriate CSS classes
      */
 
-    var collapsedClass = 'fa-caret-down',
-        expandedClass = 'fa-caret-right';
-    // a hack to follow collapse animation, ideally should find the right animation callbacks
-    $('.collapse-button').on('click', function() {
-      // TODO Bryan: This does not work properly if the user clicks too fast
-      var child = $(this).find('>:first-child');
-      if (child.hasClass(collapsedClass)) {
-        child.removeClass(collapsedClass);
-        child.addClass(expandedClass);
-      } else if (child.hasClass(expandedClass)) {
-        child.removeClass(expandedClass);
-        child.addClass(collapsedClass);
-      }
-    });
+//    var collapsedClass = 'fa-caret-down',
+//        expandedClass = 'fa-caret-right';
+//    // a hack to follow collapse animation, ideally should find the right animation callbacks
+//    $('.collapse-button').on('click', function() {
+//      // TODO Bryan: This does not work properly if the user clicks too fast
+//      var child = $(this).find('>:first-child');
+//      if (child.hasClass(collapsedClass)) {
+//        child.removeClass(collapsedClass);
+//        child.addClass(expandedClass);
+//      } else if (child.hasClass(expandedClass)) {
+//        child.removeClass(expandedClass);
+//        child.addClass(collapsedClass);
+//      }
+//    });
 
     var affixedNav = $('#nav'),
         header = $('#main_header'),
@@ -117,6 +117,7 @@ $(function() {
 
     // Bryan: catch scroll events
     $(window).scroll(function() {
+
       if ($(this).scrollTop() > thresholdTop) {
         // add affix behaviour if scroll is above threshold
         if (!affixedNav.hasClass('affix')) {
@@ -129,6 +130,8 @@ $(function() {
         header.css({ 'margin-bottom': 0 });
       }
     });
+
+    $(window).scroll();
   }
 
 
@@ -137,6 +140,6 @@ $(function() {
   $(document).on('page:change',  function() { NProgress.done(); });
   $(document).on('page:restore', function() { NProgress.remove(); });
 
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
+  $(document).ready($.fn.BryanHATESTHIS);
+  $(document).on('page:load', $.fn.BryanHATESTHIS);
 });

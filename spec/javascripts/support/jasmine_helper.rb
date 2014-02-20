@@ -9,3 +9,10 @@
 #end
 #
 
+# Without this, WebMock blocks "rake jasmine:ci" for travis
+module Jasmine
+  class Config
+    require 'webmock'
+    WebMock.allow_net_connect!
+  end
+end
