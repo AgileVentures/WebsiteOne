@@ -1,12 +1,18 @@
 class ArticlesController < ApplicationController
+  layout 'articles_layout'
   before_action :authenticate_user!, except: [ :index, :show ]
 
   def index
-    @articles = Article.all
+    if params[:tag].present?
+      @articles = Article.tagged_with(params[:tag])
+    else
+      @articles = Article.all
+    end
   end
 
   def show
     @article = Article.friendly.find(params[:id])
+    @author = @article.user
   end
 
   def new
@@ -18,12 +24,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    tags = params[:article][:tags]
-    params[:article][:tags] = nil
-
     @article = current_user.articles.build(article_params)
-
-    @article.tag_list = tags
 
     if @article.save
       flash[:notice] = "Successfully created the article entitled \"#{@article.title}!\""
@@ -37,11 +38,6 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.friendly.find(params[:id])
 
-    tags = params[:article][:tags]
-    params[:article][:tags] = nil
-
-    @article.tag_list = tags
-
     if @article.update_attributes(article_params)
       flash[:notice] = "Successfully updated the article \"#{@article.title}\""
       redirect_to article_path(@article)
@@ -54,6 +50,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params[:article].permit(:title, :content)
+    params[:article].permit(:title, :content, :tag_list)
   end
 end

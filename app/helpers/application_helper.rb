@@ -1,4 +1,17 @@
 module ApplicationHelper
+
+  @@markdown_engine = Redcarpet::Markdown.new(
+      Redcarpet::Render::HTML.new(
+          filter_html: true,
+          hard_wrap: true,
+          link_attributes: { target: '_blank' }
+      ),
+      autolink: true,
+      fenced_code_blocks: true,
+      no_intra_emphasis: true,
+      superscript: true,
+      footnotes: true)
+
   def gravatar_for(email, options = { size: 80 })
     hash = Digest::MD5::hexdigest(email.strip.downcase)
     "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=mm"
@@ -14,7 +27,7 @@ module ApplicationHelper
       'Something is wrong'
     end
   end
-  
+
   def resource_name
     :user
   end
@@ -92,5 +105,9 @@ module ApplicationHelper
       </div>
     </a>
     HTML
+  end
+
+  def from_markdown(markdown)
+    raw @@markdown_engine.render markdown
   end
 end
