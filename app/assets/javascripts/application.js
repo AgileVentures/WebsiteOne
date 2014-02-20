@@ -130,6 +130,8 @@ $(function() {
         header.css({ 'margin-bottom': 0 });
       }
     });
+
+    $(window).scroll();
   }
 
 
