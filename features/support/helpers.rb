@@ -50,6 +50,39 @@ module Helpers
       click_button 'Sign in'
     end
   end
+
+  def stub_geocode
+    Geocoder.configure(:ip_lookup => :test)
+    Geocoder::Lookup::Test.set_default_stub(
+        [
+            {
+                ip: '85.228.111.204',
+                country_code: 'SE',
+                country_name: 'Sweden',
+                region_code: '28',
+                region_name: 'Västra Götaland',
+                city: 'Alingsås',
+                zipcode: '44139',
+                latitude: 57.9333,
+                longitude: 12.5167,
+                metro_code: '',
+                areacode: ''
+            }
+        ]
+    )
+
+  end
+
+  def all_users
+    @all_users = User.all
+    @all_users.each do |user|
+      #user.geocode
+      puts user.email
+      puts user.last_sign_in_ip
+      puts user.longitude
+      puts user.country
+    end
+  end
 end
 
 module WithinHelpers

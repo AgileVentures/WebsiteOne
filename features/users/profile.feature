@@ -5,9 +5,9 @@ Feature: As a user of the site
 	Background:
 	  Given I am on the "home" page
 	  And the following users exist
-	    | first_name  | last_name   | email                   | password  | last_sign_in_ip |
-	    | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |  85.228.111.204 |
-	    | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |  85.228.111.204 |
+	    | first_name  | last_name   | email                   | password  | last_sign_in_ip |  country |
+	    | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |  85.228.111.204 |  Sweden  |
+	    | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |  85.228.111.204 |  Sweden  |
 	    # |             | Croutch     | c.croutch@enterprise.us | 12345678  |
 	    # | Dave        |             | dave@dixons.me          | 12345678  |
     And the following projects exist:

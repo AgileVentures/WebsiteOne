@@ -203,30 +203,11 @@ Given(/^The database is clean$/) do
 end
 
 Given /^the following users exist$/ do |table|
-
-  results = {
-      ip: '85.228.111.204',
-      country_code: 'SE',
-      country_name: 'Sweden',
-      region_code: '28',
-      region_name: 'Västra Götaland',
-      city: 'Alingsås',
-      zipcode: '44139',
-      latitude: 57.9333,
-      longitude: 12.5167,
-      metro_code: '',
-      areacode: ''
-  }
-
-  puts results.as_json.to_s
-  stub_request(:get, "http://freegeoip.net/json/85.228.111.204").
-      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-      to_return(:status => 200, :body => results.as_json.to_s, :headers => {'Content-Type' => 'text/plain; charset=utf-8' })
-
+  WebMock.allow_net_connect! #This is NOT the way to do it, but hell....
   table.hashes.each do |hash|
     @users = User.create(hash)
-    @users.save
   end
+  WebMock.disable_net_connect!(:allow_localhost => true)
 end
 When(/^I should see a list of all users$/) do
   #this is up to refactoring. Just a quick fix to get things rolling /Thomas
@@ -337,8 +318,8 @@ end
 
 Given(/^user "(.*?)" follows projects:$/) do |user, table|
   @user = User.find_by_first_name user
-  table.hashes.each do | project |
-      step %Q{I should become a member of project "#{project[:title]}"}
+  table.hashes.each do |project|
+    step %Q{I should become a member of project "#{project[:title]}"}
   end
 end
 

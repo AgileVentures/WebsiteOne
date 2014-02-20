@@ -6,8 +6,10 @@
 
 require 'cucumber/rails'
 require 'cucumber/rspec/doubles'
-
+require 'geocoder/lookups/base'
+require 'geocoder/results/freegeoip'
 require 'webmock/cucumber'
+
 WebMock.disable_net_connect!(:allow_localhost => true)
 
 # Capybara defaults to CSS3 selectors rather than XPath.
