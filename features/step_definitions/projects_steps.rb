@@ -101,3 +101,20 @@ Given(/^I (?:am on|go to) project "([^"]*)"$/) do |project|
   project = Project.find_by_title(project)
   visit(path_to('projects', project.id ))
 end
+
+Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created_by marcelo (\d+) days ago$/) do |parent, child, arg3|
+  parent_doc = Document.find_by_title(parent)
+  parent_doc.children.create!(
+      {
+          :project_id => parent_doc.project_id,
+          :title => child,
+          :created_at => arg3,
+          user_id: parent_doc.user_id
+      }
+  )
+end
+
+
+And(/^the following sub-documents exist:$/) do |table|
+  table.hashes
+end
