@@ -30,6 +30,7 @@ Feature: As a user of the site
     Then I should be on the "user profile" page for "Alice"
     And I should see the avatar for "Alice" at 275 px
     And I should see "Alice Jones"
+    And show me the page
     And I should geolocation "Sweden"
     # And I should see "Member for: about 1 month"
     And I should see "Member for:"

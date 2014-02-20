@@ -203,9 +203,24 @@ Given(/^The database is clean$/) do
 end
 
 Given /^the following users exist$/ do |table|
+
+  results = {
+      ip: "85.228.111.204",
+      country_code: "SE",
+      country_name: "Sweden",
+      region_code: "28",
+      region_name: "Västra Götaland",
+      city: "Gothenburg",
+      zipcode: "44139",
+      latitude: 57.9333,
+      longitude: 12.5167,
+      metro_code: "",
+      areacode: ""
+  }
+
   stub_request(:get, "http://freegeoip.net/json/85.228.111.204").
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-      to_return(:status => 200, :body => "Sweden", :headers => {})
+      to_return(:status => 200, :body => "#{results}", :headers => {})
 
   table.hashes.each do |hash|
     @users = User.create(hash)

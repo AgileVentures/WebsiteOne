@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
 
     @users_projects = @user.following_by_type('Project')
-
+     debugger
     @users_location = request.location
 
     if !@user.display_profile  && (current_user.try(&:id) != @user.id)
