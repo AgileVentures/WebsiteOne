@@ -203,9 +203,8 @@ Given(/^The database is clean$/) do
 end
 
 Given /^the following users exist$/ do |table|
-  table.hashes.each do |hash|
-    @users = User.create(hash)
-    @users.save
+  table.hashes.each do |attributes|
+    create_test_user(attributes)
   end
 end
 When(/^I should see a list of all users$/) do
@@ -317,8 +316,8 @@ end
 
 Given(/^user "(.*?)" follows projects:$/) do |user, table|
   @user = User.find_by_first_name user
-  table.hashes.each do | project |
-      step %Q{I should become a member of project "#{project[:title]}"}
+  table.hashes.each do |project|
+    step %Q{I should become a member of project "#{project[:title]}"}
   end
 end
 
@@ -327,7 +326,7 @@ Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => @user.email
-    fill_in 'user_password', :with => '12345678'
+    fill_in 'user_password', :with => test_user_password
     click_button 'Sign in'
   end
 end

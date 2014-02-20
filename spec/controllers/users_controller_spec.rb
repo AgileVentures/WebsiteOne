@@ -5,12 +5,12 @@ describe UsersController do
   describe "GET 'index'" do
     before(:each) do
       @users = [
-          double('User'),
-          double('User'),
-          double('User'),
-          double('User')
+          double('User', country: 'some country'),
+          double('User', country: 'some country'),
+          double('User', country: 'some country'),
+          double('User', country: 'some country')
       ]
-      User.should_receive(:where).and_return(@users)
+      User.stub_chain(:where, :order).and_return(@users)
     end
 
     it 'returns http success' do
