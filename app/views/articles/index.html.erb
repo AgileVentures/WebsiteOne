@@ -1,9 +1,25 @@
 <%= provide :title, 'Articles' %>
 
-<h1>List of Articles</h1>
+<div id="doc-box">
+  <div id="doc-overview">
+    <h1><%= "#{params[:tag].present? ? params[:tag] : 'All'} "%>Articles</h1>
+  </div>
+  <div id="doc-side-panel">
+    <% if user_signed_in? %>
+      <ul>
+        <li><%= custom_css_btn 'new article', 'fa fa-plus', new_article_path(tag: params[:tag]) %></li>
+      </ul>
+    <% end %>
+  </div>
+</div>
 
-<ul>
+<div class="article-list">
   <% @articles.each do |a| %>
-  <li><%= link_to a.title, article_path(a) %></li>
+    <section class="article-preview">
+      <header class="article-header">
+        <h2><%= link_to a.title, article_path(a) %></h2>
+      </header>
+      <main class="md-preview"><%= markdown_preview a.content %></main>
+    </section>
   <% end %>
-</ul>
+</div>

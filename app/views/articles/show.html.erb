@@ -1,14 +1,23 @@
 <%= provide :title, @article.title %>
 
 <section class="article-full">
-  <header class="article-header">
-    <h1><%= @article.title %></h1>
-    <ul>
-      <li>Created on <%= @article.created_at.strftime('%d %B %y') %> by <%= link_to @author.display_name, users_show_path(@author) %></li>
-      <li>Last updated <%= time_ago_in_words(@article.updated_at) %> ago</li>
-      <li><%= link_to_tags(@article.tag_list) %></li>
-    </ul>
-  </header>
+  <div id="doc-box">
+    <div id="doc-overview">
+      <h1><%= @article.title %></h1>
+      <ul>
+        <li>Created on <%= @article.created_at.strftime('%d %B %y') %> by <%= link_to @author.display_name, users_show_path(@author) %></li>
+        <li>Last updated <%= time_ago_in_words(@article.updated_at) %> ago</li>
+        <li><%= link_to_tags(@article.tag_list) %></li>
+      </ul>
+    </div>
+    <div id="doc-side-panel">
+      <% if user_signed_in? %>
+        <ul>
+          <li><%= custom_css_btn 'new article', 'fa fa-plus', new_article_path(tag: params[:tag]) %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
 
   <article><%= from_markdown @article.content %></article>
 

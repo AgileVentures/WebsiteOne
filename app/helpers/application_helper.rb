@@ -96,25 +96,4 @@ module ApplicationHelper
     </a>
     HTML
   end
-
-  class CodeRayify < Redcarpet::Render::HTML
-    def block_code(code, language)
-      CodeRay.scan(code, language).div
-    end
-  end
-
-  renderer = CodeRayify.new filter_html: true,
-                            hard_wrap: true,
-                            link_attributes: { target: '_blank', rel: 'nofollow' }
-
-  @@markdown_engine = Redcarpet::Markdown.new(renderer,
-                                              autolink: true,
-                                              fenced_code_blocks: true,
-                                              no_intra_emphasis: true,
-                                              superscript: true,
-                                              footnotes: true)
-
-  def from_markdown(markdown)
-    raw @@markdown_engine.render markdown
-  end
 end

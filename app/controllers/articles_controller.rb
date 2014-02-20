@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @article.tag_list = [ params[:tag] ]
   end
 
   def edit

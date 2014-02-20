@@ -9,6 +9,18 @@ section.article-full {
   padding: 0;
 }
 
+section.article-preview {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 20px;
+  max-height: 200px;
+  overflow: hidden;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+}
+
 header.article-header {
   height: auto;
   background: transparent;
@@ -17,4 +29,8 @@ header.article-header {
 textarea.md-edit {
   font-family: monospace;
   resize: none;
+}
+
+.md-preview {
+  overflow: hidden;
 }
