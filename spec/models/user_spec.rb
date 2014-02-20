@@ -160,28 +160,49 @@ describe User do
 
   describe 'geocoding' do
     before(:each) do
-      WebMock.allow_net_connect! #This is NOT the way to do it, but hell....
+      Geocoder.configure(:ip_lookup => :test)
+      Geocoder::Lookup::Test.add_stub(
+          '85.228.111.204', [
+          {
+              ip: '85.228.111.204',
+              country_code: 'SE',
+              country_name: 'Sweden',
+              region_code: '28',
+              region_name: 'Västra Götaland',
+              city: 'Alingsås',
+              zipcode: '44139',
+              latitude: 57.9333,
+              longitude: 12.5167,
+              metro_code: '',
+              areacode: ''
+          }.as_json
+      ]
+      )
+
+      Geocoder::Lookup::Test.add_stub(
+          '50.78.167.161', [
+          {
+              ip: '50.78.167.161',
+              country_code: 'US',
+              country_name: 'United States',
+              region_code: 'WA',
+              region_name: 'Washington',
+              city: 'Seattle',
+              zipcode: '',
+              latitude: 47.6062,
+              longitude: -122.3321,
+              metro_code: '819',
+              areacode: '206'
+          }.as_json
+      ]
+      )
+
       @user = User.new first_name: 'Geo',
                        last_name: 'Coder',
                        email: 'candice@clemens.com',
                        password: '1234567890',
                        last_sign_in_ip: '85.228.111.204'
     end
-    after(:each) do
-      WebMock.disable_net_connect!(:allow_localhost => true)
-    end
-
-        #ip: '85.228.111.204',
-        #country_code: 'SE',
-        #country_name: 'Sweden',
-        #region_code: '28',
-        #region_name: 'Västra Götaland',
-        #city: 'Alingsås',
-        #zipcode: '44139',
-        #latitude: 57.9333,
-        #longitude: 12.5167,
-        #metro_code: '',
-        #areacode: ''
 
     it 'should perform geocode' do
       @user.save
