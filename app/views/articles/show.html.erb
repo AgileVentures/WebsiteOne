@@ -4,8 +4,7 @@
   <header class="article-header">
     <h1><%= @article.title %></h1>
     <ul>
-      <li>Created by <%= link_to @author.display_name, users_show_path(@author) %></li>
-      <li>Created on <%= @article.created_at %></li>
+      <li>Created on <%= @article.created_at.strftime('%d %B %y') %> by <%= link_to @author.display_name, users_show_path(@author) %></li>
       <li>Last updated <%= time_ago_in_words(@article.updated_at) %> ago</li>
       <li><%= link_to_tags(@article.tag_list) %></li>
     </ul>
@@ -13,7 +12,7 @@
 
   <article><%= from_markdown @article.content %></article>
 
-  <footer class="article-footer">Footer</footer>
+  <footer class="article-footer">Footer PLACEHOLDER</footer>
 </section>
 
 

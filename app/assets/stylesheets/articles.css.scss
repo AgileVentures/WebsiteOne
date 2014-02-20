@@ -2,14 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-import 'mixins'
+@import "mixins";
 
 section.article-full {
   margin: 0;
   padding: 0;
-  display: block;
 }
 
 header.article-header {
   height: auto;
+  background: transparent;
+}
+
+textarea.md-edit {
+  font-family: monospace;
+  resize: none;
 }

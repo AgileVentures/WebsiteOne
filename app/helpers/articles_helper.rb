@@ -1,6 +1,6 @@
 module ArticlesHelper
   def standard_tags
-    %w( Git Ruby Rails PostgreSQL Javascript JQuery Python NodeJS Heroku Travis Jasmine Cucumber RSpec )
+    %w( Ruby Rails Javascript JQuery Jasmine Cucumber RSpec Git Heroku Travis PostgreSQL Python NodeJS )
   end
 
   def link_to_tags(tags)

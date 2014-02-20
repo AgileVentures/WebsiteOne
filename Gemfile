@@ -28,6 +28,7 @@ gem 'friendly_id', '~> 5.0.0' # Bryan: for more REST-ful routes, use human-reada
 gem 'colored' # colorizing console
 gem 'acts-as-taggable-on'
 gem 'redcarpet'
+gem 'coderay'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

@@ -1,16 +1,6 @@
 module ApplicationHelper
 
-  @@markdown_engine = Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(
-          filter_html: true,
-          hard_wrap: true,
-          link_attributes: { target: '_blank' }
-      ),
-      autolink: true,
-      fenced_code_blocks: true,
-      no_intra_emphasis: true,
-      superscript: true,
-      footnotes: true)
+  include ArticlesHelper
 
   def gravatar_for(email, options = { size: 80 })
     hash = Digest::MD5::hexdigest(email.strip.downcase)
@@ -106,6 +96,23 @@ module ApplicationHelper
     </a>
     HTML
   end
+
+  class CodeRayify < Redcarpet::Render::HTML
+    def block_code(code, language)
+      CodeRay.scan(code, language).div
+    end
+  end
+
+  renderer = CodeRayify.new filter_html: true,
+                            hard_wrap: true,
+                            link_attributes: { target: '_blank', rel: 'nofollow' }
+
+  @@markdown_engine = Redcarpet::Markdown.new(renderer,
+                                              autolink: true,
+                                              fenced_code_blocks: true,
+                                              no_intra_emphasis: true,
+                                              superscript: true,
+                                              footnotes: true)
 
   def from_markdown(markdown)
     raw @@markdown_engine.render markdown

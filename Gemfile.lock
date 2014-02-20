@@ -313,6 +313,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.0.2.0)
   capybara
   capybara-webkit
+  coderay
   coffee-rails (~> 4.0.0)
   colored
   coveralls

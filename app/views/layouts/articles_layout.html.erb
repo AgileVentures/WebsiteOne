@@ -2,7 +2,12 @@
   <div class="container">
     <aside class="col-sm-3">
       <nav role="complementary">
-        PLACEHOLDER
+        <ul>
+          <li><%= link_to 'All Articles', articles_path %></li>
+          <% standard_tags.each do |tag| %>
+          <li><%= link_to tag, articles_path(tag: tag) %></li>
+          <% end %>
+        </ul>
       </nav>
     </aside>
     <div class="col-sm-6">
