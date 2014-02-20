@@ -1,16 +1,16 @@
 <%= content_for :content do %>
   <div class="container">
-    <aside class="col-sm-3">
+    <aside id="articles-sidebar" class="col-sm-3">
       <nav role="complementary">
-        <ul>
-          <li><%= link_to 'All Articles', articles_path %></li>
+        <ul id="articles-sidebar-list">
+          <a href="<%= articles_path %>"><li class="listing">All Articles</li></a>
           <% standard_tags.each do |tag| %>
-          <li><%= link_to tag, articles_path(tag: tag) %></li>
+            <a href="<%= articles_path(tag: tag) %>"><li class="listing"><%= tag %></li></a>
           <% end %>
         </ul>
       </nav>
     </aside>
-    <div class="col-sm-6">
+    <div id="article-container" class="col-sm-6">
       <%= yield %>
     </div>
   </div>

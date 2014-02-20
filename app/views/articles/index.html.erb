@@ -15,11 +15,17 @@
 
 <div class="article-list">
   <% @articles.each do |a| %>
-    <section class="article-preview">
-      <header class="article-header">
-        <h2><%= link_to a.title, article_path(a) %></h2>
-      </header>
-      <main class="md-preview"><%= markdown_preview a.content %></main>
-    </section>
+    <a href="<%= article_path(a) %>">
+      <section class="article-preview listing">
+        <header class="article-header">
+          <h2><%= a.title %></h2>
+        </header>
+        <main class="md-preview"><%= markdown_preview a.content %></main>
+      </section>
+    </a>
+
+    <% if a.id != @articles.last.id %>
+    <div style="height: 5px; width: 70px; margin: 0 auto; background: #F07F48"></div>
+    <% end %>
   <% end %>
 </div>

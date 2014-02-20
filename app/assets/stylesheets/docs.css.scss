@@ -54,15 +54,16 @@
   list-style: none;
 }
 
-.project-listing {
+.listing {
   padding: 10px;
   color: #000;
   width: 100%;
+  margin: 0;
   @include css-transition(background, 0.3s, ease, 0s);
   position: relative;
 }
 
-.project-listing:hover {
+.listing:hover {
   background: #F7EFEB;
 }
 

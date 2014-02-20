@@ -21,7 +21,7 @@ p, a {
     line-height: 28px;
 }
 
-a {
+a, a:visited, a:link {
     color: #F07F48;
 }
 
@@ -99,19 +99,19 @@ h1, h2, h3, h4 {
     vertical-align: middle;
 }
 
-header {
+header#main_header {
     background: #F07F48;
     height: 60px;
     color: #000000;
 }
 
-header h1, header h2, header h3 a, header a, header a:hover {
+header#main_header h1, header#main_header h2, header#main_header h3 a, header#main_header a, header#main_header a:hover {
     color: #101010;
     font-weight: 800;
     text-decoration: none;
 }
 
-header h3 {
+header#main_header h3 {
     font-family: 'Kreon', serif;
     background: #F07F48;
     padding: 10px;
@@ -120,7 +120,7 @@ header h3 {
     padding: 12px 10px 6px 10px;
 }
 
-header .dropdown-menu {
+header#main_header .dropdown-menu {
     background: #F07F48;
     border-width: 0;
 }
