@@ -120,10 +120,9 @@ $(function() {
 
         if ($(this).scrollTop() > thresholdTop) {
         // add affix behaviour if scroll is above threshold
-        if (affixedNav.length != 0 && !affixedNav.hasClass('affix')) {
+        if (!affixedNav.hasClass('affix')) {
           affixedNav.addClass('affix');
           header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
-          "blah";
         }
       } else if (affixedNav.hasClass('affix')) {
         // remove affix if the scroll is below threshold
