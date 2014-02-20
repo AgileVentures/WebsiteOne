@@ -14,10 +14,10 @@
         </ul>
       </div>
           <% else %>
-          <div class="col-lg-3 pull-right text-right" style="margin-top: 17px;">
+          <ul class="nav navbar-nav pull-right">
             <li><%= link_to 'Log in', new_user_session_path %></li>
             <li><%= link_to 'Sign up', new_user_registration_path %></li>
-          </div>
+          </ul>
       <% end %>
     </div>
   </div>
@@ -38,10 +38,6 @@
         <li><%= link_to 'Our projects', projects_path %></li>
         <li><%= link_to 'Our members', users_index_path %></li>
         <li><%= link_to 'Getting Started', page_path('getting-started') %></li>
-        <% unless user_signed_in? %>
-            <li><%= link_to 'Log in', new_user_session_path %></li>
-            <li><%= link_to 'Sign up', new_user_registration_path %></li>
-        <% end %>
       </ul>
     </div>
   </div>

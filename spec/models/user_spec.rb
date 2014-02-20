@@ -157,4 +157,54 @@ describe User do
       expect(@user.slug).to eq slug
     end
   end
+
+  describe 'geocoding' do
+    before(:each) do
+      WebMock.allow_net_connect! #This is NOT the way to do it, but hell....
+      @user = User.new first_name: 'Geo',
+                       last_name: 'Coder',
+                       email: 'candice@clemens.com',
+                       password: '1234567890',
+                       last_sign_in_ip: '85.228.111.204'
+    end
+    after(:each) do
+      WebMock.disable_net_connect!(:allow_localhost => true)
+    end
+
+        #ip: '85.228.111.204',
+        #country_code: 'SE',
+        #country_name: 'Sweden',
+        #region_code: '28',
+        #region_name: 'Västra Götaland',
+        #city: 'Alingsås',
+        #zipcode: '44139',
+        #latitude: 57.9333,
+        #longitude: 12.5167,
+        #metro_code: '',
+        #areacode: ''
+
+    it 'should perform geocode' do
+      @user.save
+      expect(@user.latitude).to_not eq nil
+      expect(@user.longitude).to_not eq nil
+      expect(@user.city).to_not eq nil
+      expect(@user.country).to_not eq nil
+    end
+
+    it 'should set user location' do
+      @user.save
+      expect(@user.latitude).to eq 57.9333
+      expect(@user.longitude).to eq 12.5167
+      expect(@user.city).to eq 'Alingsås'
+      expect(@user.country).to eq 'Sweden'
+    end
+
+    it 'should change location if ip changes' do
+      @user.save
+      @user.update_attributes last_sign_in_ip: '50.78.167.161'
+      expect(@user.city).to eq 'Seattle'
+      expect(@user.country).to eq 'United States'
+    end
+
+  end
 end
