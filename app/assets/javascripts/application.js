@@ -107,21 +107,23 @@ $(function() {
 //      }
 //    });
 
-    var affixedNav = $('#nav'),
-        header = $('#main_header'),
-        main = $('#main'),
-    // manually selected properties which will affect affix threshold height, if layout changes,
-    // readjust as necessary
-        thresholdTop = header.height() + affixedNav.height(),
-        footer = $('#footer');
 
     // Bryan: catch scroll events
     $(window).scroll(function() {
-      if ($(this).scrollTop() > thresholdTop) {
+        var affixedNav = $('#nav'),
+            header = $('#main_header'),
+            main = $('#main'),
+        // manually selected properties which will affect affix threshold height, if layout changes,
+        // readjust as necessary
+            thresholdTop = header.height() + affixedNav.height(),
+            footer = $('#footer');
+
+        if ($(this).scrollTop() > thresholdTop) {
         // add affix behaviour if scroll is above threshold
         if (!affixedNav.hasClass('affix')) {
           affixedNav.addClass('affix');
-          header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
+            header.css({ 'margin-bottom': 0 });
+//            header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
         }
       } else if (affixedNav.hasClass('affix')) {
         // remove affix if the scroll is below threshold
