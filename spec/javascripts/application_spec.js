@@ -10,11 +10,12 @@ describe('Affixed Navbar', function() {
         main = $('#main');
         footer = $('#footer');
         height = spyOn($.prototype, 'height').and.callFake(function() { return 50 });
-        scrollTop = spyOn($.prototype, 'scrollTop')
+        scrollTop = spyOn($.prototype, 'scrollTop');
+        $.fn.BryanHATESTHIS()
     });
     it('scrolling causes heights to be calculated', function() {
-        $(window).scroll();
         expect(height).toHaveBeenCalled();
+        $(window).scroll();
         expect(scrollTop).toHaveBeenCalled();
     });
     describe('scrolling down', function() {
@@ -25,7 +26,7 @@ describe('Affixed Navbar', function() {
         it('affixes navbar to top', function() {
             expect(affixedNav).toHaveClass('affix');
         });
-        it('')
+//        it('pads the ')
     });
     describe('scrolling back up', function() {
         beforeEach(function() {
