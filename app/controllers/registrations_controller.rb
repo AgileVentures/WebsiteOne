@@ -26,6 +26,8 @@ class RegistrationsController < Devise::RegistrationsController
         sign_in current_user, :bypass => true
         redirect_to after_update_path_for(@user)
       else
+        puts @user.inspect
+        puts @user.errors.full_message.join(', ')
         render :edit
       end
     end

@@ -203,11 +203,9 @@ Given(/^The database is clean$/) do
 end
 
 Given /^the following users exist$/ do |table|
-  WebMock.allow_net_connect! #This is NOT the way to do it, but hell....
-  table.hashes.each do |hash|
-    @users = User.create(hash)
+  table.hashes.each do |attributes|
+    create_test_user(attributes)
   end
-  WebMock.disable_net_connect!(:allow_localhost => true)
 end
 When(/^I should see a list of all users$/) do
   #this is up to refactoring. Just a quick fix to get things rolling /Thomas
@@ -328,7 +326,7 @@ Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => @user.email
-    fill_in 'user_password', :with => '12345678'
+    fill_in 'user_password', :with => test_user_password
     click_button 'Sign in'
   end
 end

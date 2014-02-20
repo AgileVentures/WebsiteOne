@@ -1,10 +1,34 @@
 module Helpers
+
+  def test_ip_address
+    '127.0.0.1'
+  end
+
+  def test_user_password
+    '12345678'
+  end
+
+  def default_test_user_details
+    {
+        email: Faker::Internet.email,
+        last_sign_in_ip: test_ip_address,
+        password: test_user_password,
+        password_confirmation: test_user_password,
+        display_profile: true
+    }
+  end
+
   def create_visitor
     #@visitor =FactoryGirl(:user)
     @visitor ||= { :email => 'example@example.com',
                    :password => 'changemesomeday',
                    :password_confirmation => 'changemesomeday',
                    :slug => 'slug-ma'}
+  end
+
+  def create_test_user(options = {})
+    options = default_test_user_details.merge options
+    User.create!(options)
   end
 
   def find_user
@@ -49,28 +73,6 @@ module Helpers
       fill_in 'user_password', :with => @visitor[:password]
       click_button 'Sign in'
     end
-  end
-
-  def stub_geocode
-    Geocoder.configure(:ip_lookup => :test)
-    Geocoder::Lookup::Test.set_default_stub(
-        [
-            {
-                ip: '85.228.111.204',
-                country_code: 'SE',
-                country_name: 'Sweden',
-                region_code: '28',
-                region_name: 'Västra Götaland',
-                city: 'Alingsås',
-                zipcode: '44139',
-                latitude: 57.9333,
-                longitude: 12.5167,
-                metro_code: '',
-                areacode: ''
-            }
-        ]
-    )
-
   end
 
   def all_users
