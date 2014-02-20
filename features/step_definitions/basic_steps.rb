@@ -245,3 +245,12 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
     page.should have_css %Q{a[data-link-text="#{button.downcase}"]}
   end
 end
+
+Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
+  page.should have_text string, arg
+end
+
+
+And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
+  page.should have_text string, arg
+end

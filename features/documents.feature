@@ -61,12 +61,14 @@ Feature: Manage Document
     Then I should be on the "Show" page for document "Howto"
     And I should see "Guides"
 
+  #NOTE: below scenario is for children's documents of documents, not projects'
+
   Scenario: Documents children should be sorted in ASCENDING order by create date
     Given the document "Guides" has a sub-document with title "SubDoc1" created_by marcelo 3 days ago
     Given the document "Guides" has a sub-document with title "SubDoc2" created_by thomas 10 days ago
     Given I am on the "Show" page for document "Guides"
     Then I should see "SubDoc1" created_by marcelo 3 days ago first
-    And I should see "SubDoc2" created_by thomas 10 days second
+    And I should see "SubDoc2" created_by thomas 10 days ago second
 
 
 
