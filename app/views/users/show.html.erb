@@ -7,6 +7,7 @@
 
       <div class="avatar-lower">
         <h3><%= @user.display_name %></h3>
+        <p><%= @users_location %></p>
       </div>
     </div>
     <p>Member for: <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>

@@ -203,6 +203,10 @@ Given(/^The database is clean$/) do
 end
 
 Given /^the following users exist$/ do |table|
+  stub_request(:get, "http://freegeoip.net/json/85.228.111.204").
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => "Sweden", :headers => {})
+
   table.hashes.each do |hash|
     @users = User.create(hash)
     @users.save
@@ -341,4 +345,10 @@ end
 Given(/^I visit (.*)'s profile page$/) do |name|
   user = User.find_by_first_name name
   visit users_show_path user
+end
+When(/^I should geolocation "([^"]*)"$/) do |location|
+  stub_request(:get, "http://freegeoip.net/json/85.228.111.204").
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => location, :headers => {})
+  page.should have_content :body
 end
