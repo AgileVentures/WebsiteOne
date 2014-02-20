@@ -20,7 +20,7 @@
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
 $(function() {
-    $.fn.BryanHATESTHIS = function () {
+  $.fn.BryanHATESTHIS = function () {
     // Bryan: run these functions only in the home page
     if (window.location.pathname === '/') {
       var TxtRotate = function(el, toRotate, period) {
@@ -107,18 +107,18 @@ $(function() {
 //      }
 //    });
 
-      var affixedNav = $('#nav'),
-          header = $('#main_header'),
-          main = $('#main'),
-      // manually selected properties which will affect affix threshold height, if layout changes,
-      // readjust as necessary
-          thresholdTop = header.height() + affixedNav.height(),
-          footer = $('#footer');
+    var affixedNav = $('#nav'),
+        header = $('#main_header'),
+        main = $('#main'),
+    // manually selected properties which will affect affix threshold height, if layout changes,
+    // readjust as necessary
+        thresholdTop = header.height() + affixedNav.height(),
+        footer = $('#footer');
 
     // Bryan: catch scroll events
     $(window).scroll(function() {
 
-        if ($(this).scrollTop() > thresholdTop) {
+      if ($(this).scrollTop() > thresholdTop) {
         // add affix behaviour if scroll is above threshold
         if (!affixedNav.hasClass('affix')) {
           affixedNav.addClass('affix');

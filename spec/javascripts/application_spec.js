@@ -33,7 +33,7 @@ describe('Affixed Navbar', function () {
         it('affixes navbar to top', function() {
             expect(affixedNav).toHaveClass('affix');
         });
-        it('pads the margin bottom appropriately', function () {
+        it('pads the margin bottom of the header appropriately', function () {
             expect(parseInt).toHaveBeenCalled();
             expect(header).toHaveCss({ 'margin-bottom': '55px' })
         });
@@ -46,6 +46,9 @@ describe('Affixed Navbar', function () {
         });
         it('un-affixes navbar from top', function() {
             expect(affixedNav).not.toHaveClass('affix');
+        });
+        it('sets the margin-bottom of the header back to zero', function() {
+            expect(header).toHaveCss({ 'margin-bottom': '0px' })
         });
     });
 });
