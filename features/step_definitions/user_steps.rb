@@ -205,22 +205,23 @@ end
 Given /^the following users exist$/ do |table|
 
   results = {
-      ip: "85.228.111.204",
-      country_code: "SE",
-      country_name: "Sweden",
-      region_code: "28",
-      region_name: "Västra Götaland",
-      city: "Gothenburg",
-      zipcode: "44139",
+      ip: '85.228.111.204',
+      country_code: 'SE',
+      country_name: 'Sweden',
+      region_code: '28',
+      region_name: 'Västra Götaland',
+      city: 'Alingsås',
+      zipcode: '44139',
       latitude: 57.9333,
       longitude: 12.5167,
-      metro_code: "",
-      areacode: ""
+      metro_code: '',
+      areacode: ''
   }
 
+  puts results.as_json.to_s
   stub_request(:get, "http://freegeoip.net/json/85.228.111.204").
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-      to_return(:status => 200, :body => "#{results}", :headers => {})
+      to_return(:status => 200, :body => results.as_json.to_s, :headers => {'Content-Type' => 'text/plain; charset=utf-8' })
 
   table.hashes.each do |hash|
     @users = User.create(hash)
@@ -360,10 +361,4 @@ end
 Given(/^I visit (.*)'s profile page$/) do |name|
   user = User.find_by_first_name name
   visit users_show_path user
-end
-When(/^I should geolocation "([^"]*)"$/) do |location|
-  stub_request(:get, "http://freegeoip.net/json/85.228.111.204").
-      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-      to_return(:status => 200, :body => location, :headers => {})
-  page.should have_content :body
 end

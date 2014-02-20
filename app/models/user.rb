@@ -4,14 +4,22 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   #validates :first_name, :last_name, presence: true
-  geocoded_by :last_sign_in_ip
+  geocoded_by :last_sign_in_ip do |user, res|
+    if geo = res.first
+      user.latitude = geo.data['latitude']
+      user.longitude = geo.data['longitude']
+      user.city = geo.data['city']
+      user.region = geo.data['region_name']
+      user.country = geo.data['country_name']
+    end
+  end
 
+  after_validation :geocode
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
   validates :email, uniqueness: true
-  after_validation :geocode
   has_many :authentications, dependent: :destroy
   has_many :projects
   has_many :documents
@@ -52,10 +60,5 @@ class User < ActiveRecord::Base
 
   def slug_candidates
     [ :display_name, :email_first_part ]
-  end
-
-  def location
-    result = request.location
-    return result
   end
 end
