@@ -19,6 +19,13 @@
       <section class="article-preview listing">
         <header class="article-header">
           <h2><%= a.title %></h2>
+          <small>Created by <%= a.user.display_name %>, <%= time_ago_in_words(a.created_at) %> ago,
+          <% if a.tag_list.count > 0 %>
+          tagged with <%= a.tag_list.join(', ') %>
+          <% else %>
+          not tagged with anything
+          <% end %>
+          </small>
         </header>
         <main class="md-preview"><%= markdown_preview a.content %></main>
       </section>
