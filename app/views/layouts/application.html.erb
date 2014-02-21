@@ -17,8 +17,11 @@
         <%= render 'layouts/content' %>
     <% else %>
         <div class="container">
-          <div class="col-lg-12">
+          <div class="col-lg-9">
             <%= content_for?(:content) ? yield(:content) : yield %>
+          </div>
+          <div class="col-lg-3">
+            <%= render 'layouts/sponsors' %>
           </div>
         </div>
 
