@@ -14,9 +14,21 @@ When(/^There are projects in the database$/) do
 end
 
 Given(/^the following projects exist:$/) do |table|
+  temp_author = nil
   table.hashes.each do |hash|
-    project = Project.create(hash)
-    project.save
+    if hash[:author].present?
+      u = User.find_by_first_name hash[:author]
+      hash.except! 'author'
+      u.projects.create(hash)
+    else
+      if temp_author.nil?
+        temp_author = User.create first_name: 'First',
+                                  last_name: 'Last',
+                                  email: "dummy#{User.count}@users.co",
+                                  password: '1234124124'
+      end
+      temp_author.projects.create hash
+    end
   end
 end
 
@@ -39,27 +51,19 @@ When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project
   end
 end
 
-When(/^(.*) in the list of projects$/) do |s|
-  page.within(:css, 'table#projects') { step(s) }
+When(/^I click "([^"]*)" in the list of projects$/) do |name|
+  find(:css, %Q{a[data-link-text="#{name.downcase}"]}).click()
 end
-
-# Bryan: Replaced with more general step
-#Given(/^I am on the "([^"]*)" page for project "([^"]*)"$/) do |page_name, project_name|
-#  steps %Q{
-#    Given I am logged in
-#    And I am on the "projects" page }
-#  if page_name == 'Show'
-#    steps %Q{ And I click "#{project_name}" }
-#  else
-#    steps %Q{ And I click the "#{page_name}" button for project "#{project_name}" }
-#  end
-#end
-
 
 Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |parent, child|
   parent_doc = Document.find_by_title(parent)
-  parent_project_id = parent_doc.project_id
-  child_doc = parent_doc.children.create!( { :project_id => parent_project_id,:title => child })
+  parent_doc.children.create!(
+      {
+          :project_id => parent_doc.project_id,
+          :title => child,
+          user_id: parent_doc.user_id
+      }
+  )
 end
 
 Then(/^I should become a member of project "([^"]*)"$/) do | name|
@@ -80,4 +84,34 @@ end
 
 Given(/^I am on the home page$/) do
   visit "/"
+end
+
+Then(/^(.*) in the project members list$/) do |s|
+  within(:css, '#members_list') do
+    step s
+  end
+end
+
+When(/^I go to the next page$/) do
+  first(:css, 'a', text: 'Next').click()
+end
+
+Given(/^I (?:am on|go to) project "([^"]*)"$/) do |project|
+  project.downcase!
+  project = Project.find_by_title(project)
+  visit(path_to('projects', project.id ))
+end
+
+Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
+  project = Project.find_by_title(title)
+  case item.downcase.pluralize
+    when 'members'
+      (1..num.to_i).each do
+        u = User.create(email: Faker::Internet.email, password: '1234567890')
+        u.follow(project)
+      end
+
+    else
+      pending
+  end
 end

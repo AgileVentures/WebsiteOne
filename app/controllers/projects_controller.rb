@@ -12,7 +12,19 @@ class ProjectsController < ApplicationController
 
   def show
     documents
+    @members = @project.followers.reject { |member| !member.display_profile }
+    @videos = []
+    tag_list = [ @project.title ] + @project.tag_list
+    @members.each do |member|
+      videos = Youtube.user_videos(member)
+      next if videos.nil?
 
+      videos.each do |video|
+        regex = Regexp.new(tag_list.join('|').squish, Regexp::IGNORECASE)
+        @videos << video if video[:title] =~ regex
+      end
+    end
+    @videos.sort_by! { |v| v[:published] }
   end
 
   def new
@@ -21,12 +33,12 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params.merge("user_id" => current_user.id))
-      if @project.save
-        redirect_to projects_path, notice: 'Project was successfully created.'
-      else
-        flash.now[:alert] = 'Project was not saved. Please check the input.'
-        render action: 'new'
-      end
+    if @project.save
+      redirect_to projects_path, notice: 'Project was successfully created.'
+    else
+      flash.now[:alert] = 'Project was not saved. Please check the input.'
+      render action: 'new'
+    end
   end
 
   def edit
@@ -37,11 +49,10 @@ class ProjectsController < ApplicationController
       redirect_to projects_path, notice: 'Project was successfully updated.'
     else
       # TODO change this to notify for invalid params
-      flash.now[:alert] =  'Project was not updated.'
+      flash.now[:alert] = 'Project was not updated.'
       render 'edit'
     end
   end
-
 
 
   def destroy
@@ -77,20 +88,14 @@ class ProjectsController < ApplicationController
   private
   def set_project
     raise 'USING ID ERROR' if params[:id] =~ /^\d+$/
-    begin
-      @project = Project.friendly.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to projects_path, alert: 'Requested action failed.  Project was not found.'
-    end
+    @project = Project.friendly.find(params[:id])
   end
-
 
 
   def project_params
     # permit the mass assignments
     params.require(:project).permit(:title, :description, :created, :status, :user_id)
   end
-
 
 
 end

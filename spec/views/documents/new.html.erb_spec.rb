@@ -9,7 +9,7 @@ describe 'documents/new' do
       :body => 'MyText',
       :project_id => 1
     ))
-    @parent = 'Document'
+    @parent = mock_model(Document, title: 'My title') 
   end
 
   context 'user is signed in' do

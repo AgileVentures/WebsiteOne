@@ -1,49 +1,112 @@
-<h1> <%= @project.title %> project</h1>
-<small>Status: <%= @project.status %> <%= created_date %> <%= project_created_by %></small>
+<%= javascript_include_tag '/javascripts/users', 'data-turbolinks-track' => true %>
 <div>
-  <% if user_signed_in? %>
-      <% unless current_user.following?(@project) %>
-          <%= link_to 'Join this project', follow_project_path(@project) , :type => 'button', :class => 'btn btn-success btn-xs' %>
-      <% else %>
-          <%= link_to 'Leave project', unfollow_project_path(@project), :type => 'button', :class => 'btn btn-danger btn-xs' %>
-          <div id="HOA-placeholder"></div>
-      <% end %>
-  <% end %>
-</div>
-<small>This project has <%= @project.followers_count %> members</small>
-<p>
-  <strong><%= @project.description %></strong>
-</p>
-
-
-
-<div>
-  <% if user_signed_in? %>
-      <%= link_to 'Edit', edit_project_path(@project.friendly_id), type: 'button', :class => 'btn btn-primary' %>
-      <%= link_to 'New Document', new_project_document_path(project_id: @project.friendly_id), :type => 'button', :class => 'btn btn-default' %>
-  <% end %>
+  <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
+  <strong><%= @project.title %></strong>
 </div>
 
-<ul class="list-group">
-  <% unless @project.documents.empty? %>
-    <h2>Related documents</h2>
-    <% @project.documents.roots.each do |d| %>
-          <li class="list-group-item"><strong><%= link_to d.title, project_document_path(@project, d) %></strong></li>
+<div id="doc-box">
+  <div id="doc-overview">
+    <h1><%= @project.title %></h1>
+
+    <div class="doc-status-text">
+      <div>Status: <strong style="font-style: normal;"><%= @project.status.upcase %></strong></div>
+      <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %></div>
+    </div>
+    <div class="small-divider"></div>
+    <p><strong><%= @project.description %></strong></p>
+  </div>
+  <div id="doc-side-panel">
+    <% if user_signed_in? %>
+      <ul>
+        <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', edit_project_path(@project) %></li>
+        <li><%= custom_css_btn 'new document', 'fa fa-file-text-o', new_project_document_path(project_id: @project.friendly_id) %></li>
+        <% if current_user.following?(@project) %>
+          <li><%= custom_css_btn 'leave project', 'fa fa-users', unfollow_project_path(@project) %></li>
+          <li><div id="HOA-placeholder"></div></li>
+
+          <script src="https://apis.google.com/js/platform.js" data-turbolinks-track="true"></script>
+          <script data-turbolinks-track="true">
+            gapi.hangout.render('HOA-placeholder', {
+              'topic': 'AgileVentures Pairing: <%= @project.title %> - <%= Time.now.utc.strftime('%d/%m/%Y %H00 %Z') %>',
+              'render': 'createhangout',
+              'hangout_type': 'onair',
+              'initial_apps': [
+                { 'app_type': 'ROOM_APP' }
+              ]
+            });
+          </script>
+        <% else %>
+          <li><%= custom_css_btn 'join project', 'fa fa-users', follow_project_path(@project) %></li>
+        <% end %>
+      </ul>
     <% end %>
-  <% end %>
+  </div>
+</div>
+
+<div class="small-divider"></div>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.count %>)</a></li>
+  <li><a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a></li>
+  <li><a href="#videos_list" data-toggle="tab">Videos (<%= @videos.count %>)</a></li>
 </ul>
 
-<script src="https://apis.google.com/js/platform.js"></script>
-
-<script>
-    gapi.hangout.render('HOA-placeholder', {
-        'topic': '<%= @project.title%> - Pairing session',
-        'render': 'createhangout',
-        'hangout_type': 'onair',
-        'initial_apps': [{'app_id' : '463111787485', 'app_type' : 'ROOM_APP' }],
-    });
-</script>
-
-
-
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="documents_list">
+    <% unless @documents.empty? %>
+      <h2>Related documents</h2>
+      <ul class="listings">
+        <% @documents.roots.each do |d| %>
+          <li class="listings-item">
+            <% num_children = d.children.count %>
+            <strong><%= link_to d.title, project_document_path(@project, d) %></strong> <%= "(#{num_children})" if num_children > 0 %>
+            -
+            <i>created by <%= d.user.display_name %> <%= time_ago_in_words(d.created_at) %> ago</i>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p style="margin-top: 20px;">No documents can be found for project <strong><%= @project.title %></strong></p>
+    <% end %>
+  </div>
+  <div class="tab-pane" id="members_list">
+    <ul class="listings">
+      <% if @members.empty? %>
+        <p style="margin-top: 20px;">No members in project <strong><%= @project.title %></strong></p>
+      <% else %>
+        <h2>List of Project Members</h2>
+        <% @members.each do |member| %>
+          <li class="listings-item"><strong><%= link_to member.display_name, users_show_path(member) %></strong>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="tab-pane" id="videos_list">
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="listings">
+          <% if @videos.empty? %>
+            <p style="margin-top: 20px;">No videos in project <strong><%= @project.title %></strong></p>
+          <% else %>
+            <h2>List of Project videos</h2>
+            <% @videos.each do |video| %>
+              <li>
+                <%= video_link(video) %> - <i style="font-size: 85%; color: darkgray;">published: <%= video[:published] %></i>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <% unless @videos.empty? %>
+          <h4 id="video_contents"><%= @videos.first[:content] %></h4>
+          <iframe id="ytplayer" type="text/html" width="340" height="210"
+                  src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
+          </div>
+        <% end %>
+        </div>
+  </div>
+</div>
 

@@ -3,7 +3,7 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
 end
 
 Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password )
+  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
@@ -178,10 +178,14 @@ Then /^I should see an account edited message$/ do
   page.should have_content "You updated your account successfully."
 end
 
-Then /^I should see my name$/ do
+Then /^I should (not |)see my name$/ do |should|
   create_user
-  #page.should have_content @user[:first_name]
-  page.should have_content([@user.first_name, @user.last_name].join(' '))
+  # TODO Bryan: refactor to display_name
+  if should == 'not '
+    page.should_not have_content([@user.first_name, @user.last_name].join(' '))
+  else
+    page.should have_content([@user.first_name, @user.last_name].join(' '))
+  end
 end
 
 Given /^the sign in form is visible$/ do
@@ -199,9 +203,8 @@ Given(/^The database is clean$/) do
 end
 
 Given /^the following users exist$/ do |table|
-  table.hashes.each do |hash|
-    @users = User.create(hash)
-    @users.save
+  table.hashes.each do |attributes|
+    create_test_user(attributes)
   end
 end
 When(/^I should see a list of all users$/) do
@@ -210,18 +213,16 @@ When(/^I should see a list of all users$/) do
 end
 
 When(/^I click pulldown link "([^"]*)"$/) do |text|
-  page.find("#user_info").click
+  page.find('#user_info').click
   click_link_or_button text
 end
 
 Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   this_user = User.find_by_first_name(user) || User.find_by_email(user)
-  # p user
-  # p this_user.inspect
   expect(current_path).to eq path_to(page, this_user)
 end
 
-Given(/^I am on my "([^"]*)" page$/) do |page|
+Given(/^I (?:am on|go to) my "([^"]*)" page$/) do |page|
   page.downcase!
   if page == 'profile'
     visit users_show_path(@user)
@@ -229,6 +230,21 @@ Given(/^I am on my "([^"]*)" page$/) do |page|
     visit edit_user_registration_path(@user)
   else
     pending
+  end
+end
+
+Given /^I am on "(.*?)" page for user "(.*?)"$/ do |page, user_name|
+  if user_name == 'me'
+    user = @user
+  else
+    user = User.find_by_first_name(user_name)
+  end
+
+  case page
+    when 'profile' then
+      visit users_show_path(user)
+    when page == 'edit profile'
+      visit edit_user_registration_path(user)
   end
 end
 
@@ -298,12 +314,19 @@ Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
   end
 end
 
+Given(/^user "(.*?)" follows projects:$/) do |user, table|
+  @user = User.find_by_first_name user
+  table.hashes.each do |project|
+    step %Q{I should become a member of project "#{project[:title]}"}
+  end
+end
+
 Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   @user = User.find_by_first_name first_name
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => @user.email
-    fill_in 'user_password', :with => '12345678'
+    fill_in 'user_password', :with => test_user_password
     click_button 'Sign in'
   end
 end

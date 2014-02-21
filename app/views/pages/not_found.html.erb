@@ -1,0 +1,19 @@
+<% content_for :title do %>
+    404 File Not Found
+<% end %>
+<div class="container">
+  <section id="404" style="margin-top: -150px;">
+    <h3>404-Page not found</h3>
+    <p>We're sorry, but we couldn't find the page you requested</p>
+    <div id="fof">
+      <div></div>
+      <canvas></canvas>
+    </div>
+
+   <p>Big thx to Hakim El Hattab for this effect.<%= link_to 'GitHub repo', 'https://github.com/hakimel/404', target: '_blank' %>  </p>
+  </section>
+</div>
+
+
+<%= javascript_include_tag '404', data: { no_turbolink: true } %>
+

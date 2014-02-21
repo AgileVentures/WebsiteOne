@@ -2,9 +2,11 @@ require 'spec_helper'
 
 describe ProjectsController do
 
-  let(:valid_attributes) { {:title => 'MyProject',
+  let(:valid_attributes) { {:id => 1,
+                            :title => 'WebTwentyFive',
                             :description => 'My project description',
-                            :status => 'Active'} }
+                            :status => 'Active',
+                            :friendly_id => 'my-project' } }
   let(:valid_session) { {} }
 
   #TODO split specs into 'logged in' vs 'not logged in'
@@ -41,18 +43,50 @@ describe ProjectsController do
 
   describe '#show' do
     before(:each) do
-      @project = Project.create! valid_attributes
-      get :show, {:id => @project.friendly_id}, valid_session
+      @project = mock_model(Project, valid_attributes)
+      @project.stub(:tag_list).and_return [ 'WTF' ]
+      Project.stub_chain(:friendly, :find).and_return @project
+      @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
+      @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
+      @project.should_receive(:followers).and_return @more_users
     end
 
     it 'assigns the requested project as @project' do
+      get :show, {:id => @project.friendly_id}, valid_session
       assigns(:project).should eq(@project)
     end
 
     it 'renders the show template' do
+      get :show, {:id => @project.friendly_id}, valid_session
       expect(response).to render_template 'show'
     end
 
+    it 'assigns the list of members with public profiles to @members' do
+      get :show, { id: @project.friendly_id }, valid_session
+      assigns(:members).should eq @users
+    end
+
+    it 'assigns the list of related YouTube videos in alphabetical order' do
+      accepted_videos = [
+          { title: 'WebTwentyFive PP' },
+          { title: 'WTF PP'},
+          { title: 'PP on WebtwentyFive'},
+          { title: 'pp on wtf'},
+          { title: 'A PP on WTF'},
+          { title: 'My PP on WTF'},
+          { title: 'webtwentyfive PP on refactoring'}
+      ]
+      rejected_videos = [
+          { title: 'Cat Movie' },
+          { title: 'Dogs and Cats' },
+          { title: 'My Cats newborn' },
+          { title: 'Cat Attack' }
+      ]
+      videos = rejected_videos + accepted_videos
+      Youtube.should_receive(:user_videos).and_return videos
+      get :show, { id: @project.friendly_id }, valid_session
+      assigns(:videos).should eq accepted_videos.sort_by! { |v| v[:published] }
+    end
   end
 
   describe '#new' do
@@ -223,11 +257,4 @@ describe ProjectsController do
       end
     end
   end
-
-  it 'shows a notice if requested action for non-existing project ' do
-    get :edit, id: 'non-existent'
-    expect(flash[:alert]).to eq('Requested action failed.  Project was not found.')
-    expect(response).to redirect_to(projects_path)
-  end
-
 end

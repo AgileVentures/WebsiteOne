@@ -7,9 +7,13 @@ WebsiteOne::Application.routes.draw do
   get 'about_us' => 'high_voltage/pages#show', id: 'about_us'
   get 'sponsors' => 'high_voltage/pages#show', id: 'sponsors'
 
-  get 'users/sign_out' => redirect('/404.html')
-  get 'users/password' => redirect('/404.html')
+  #get 'users/sign_out' => redirect('/404.html')
+  #get 'users/password' => redirect('/404.html')
   get 'users/show/:id', to: 'users#show', as: 'users_show'
+
+  get "/404", :to => "errors#not_found"
+  get "/mamama", :to => "errors#unacceptable"
+  get '/internal_server_error', :to => 'errors#internal_error'
 
   resources :projects do
     member do
