@@ -12,4 +12,9 @@ class Mailer < ActionMailer::Base
     to = contact_form[:email]
     mail(to: to, subject: 'WebsiteOne Contact Form')
   end
+
+  def send_welcome_message(user)
+     @user = user
+    mail(to: user.email, subject: 'Welcome to AgileVentures.org')
+  end
 end
