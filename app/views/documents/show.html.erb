@@ -40,7 +40,7 @@
     <% if @document.root? %>
       <h2>Sub-documents</h2>
     <% end %>
-    <ul class="listings">
+    <ul class="listings" id="listings">
       <% @children.each do |child| %>
         <li class="listings-item">
           <strong><%= link_to child.title, project_document_path(@project, child) %></strong> -
