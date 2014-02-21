@@ -33,8 +33,8 @@ class AuthenticationsController < ApplicationController
       user.apply_omniauth(omniauth)
       if user.save
         flash[:notice] = 'Signed in successfully.'
-        sign_in_and_redirect(:user, user)
         Mailer.send_welcome_message(user).deliver unless user.invalid?
+        sign_in_and_redirect(:user, user)
       else
         session[:omniauth] = omniauth.except('extra')
         redirect_to new_user_registration_url
