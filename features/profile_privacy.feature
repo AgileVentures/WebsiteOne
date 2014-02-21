@@ -4,9 +4,9 @@ Feature: As a site user
 
   Background:
     Given the following users exist
-      | first_name  | last_name   | email                   | password  |   display_profile |
-      | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |   false           |
-      | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |   true            |
+      | first_name  | last_name   | email                   | display_profile |
+      | Alice       | Jones       | alice@btinternet.co.uk  |     false       |
+      | Bob         | Butcher     | bobb112@hotmail.com     |     true        |
 
 
   Scenario: User profile should be public by default

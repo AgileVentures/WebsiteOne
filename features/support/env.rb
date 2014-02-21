@@ -6,8 +6,10 @@
 
 require 'cucumber/rails'
 require 'cucumber/rspec/doubles'
-
+require 'geocoder/lookups/base'
+require 'geocoder/results/freegeoip'
 require 'webmock/cucumber'
+
 WebMock.disable_net_connect!(:allow_localhost => true)
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -61,4 +63,24 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+
+Geocoder.configure(:ip_lookup => :test)
+Geocoder::Lookup::Test.add_stub(
+    '127.0.0.1', [
+    {
+        ip: '127.0.0.1',
+        country_code: 'SE',
+        country_name: 'Sweden',
+        region_code: '28',
+        region_name: 'Västra Götaland',
+        city: 'Alingsås',
+        zipcode: '44139',
+        latitude: 57.9333,
+        longitude: 12.5167,
+        metro_code: '',
+        areacode: ''
+    }.as_json
+]
+)
 
