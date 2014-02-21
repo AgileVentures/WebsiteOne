@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   end
 
   after_validation :geocode
-
+  #after_create Mailer.send_welcome_mail()
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
