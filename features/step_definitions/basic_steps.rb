@@ -246,8 +246,30 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
   end
 end
 
-Then(/^I should see "([^"]*)" created (\d+) days ago ([^"]*)$/) do |string, arg, order|
-  # TODO: We need to actually test for order. How is this content rendered. In a table or div. We can potentially check for child or something...
-  page.should have_text string, arg
+Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
+  page.should have_text string
 end
 
+
+And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
+  page.should have_text string
+end
+
+Then(/^I should see the sub-documents in this order:$/) do   |table|
+  expected_order = table.raw
+  actual_order = page.all('li.listings-item a').collect(&:text).flatten
+  expected_order.should == actual_order
+  #docs = page.all('li.listings-item a').collect(&:text)
+  #page.should have_selector('tbody li:nth-child(1)', text: SubDoc1)
+  #page.should have_selector('tbody li:nth-child(2)', text: SubDoc2)
+end
+
+#li class="listings-item">
+
+#Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
+#  page.body.should =~ /#{first_example}.*#{second_example}/
+#end
+
+#Then(/^SubDoc(\d+) should appear before SubDoc(\d+)$/) do |first_example, second_example|
+#  page.body.should =~ /#{first_example}.*#{second_example}/m
+#end

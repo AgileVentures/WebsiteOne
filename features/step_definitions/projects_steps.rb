@@ -102,21 +102,7 @@ Given(/^I (?:am on|go to) project "([^"]*)"$/) do |project|
   visit(path_to('projects', project.id ))
 end
 
-Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
-  project = Project.find_by_title(title)
-  case item.downcase.pluralize
-    when 'members'
-      (1..num.to_i).each do
-        u = User.create(email: Faker::Internet.email, password: '1234567890')
-        u.follow(project)
-      end
-
-    else
-      pending
-  end
-end
-
-Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" (\d+) days ago$/) do |parent, child, arg3|
+Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (\d+) days ago$/) do |parent, child, arg3|
   parent_doc = Document.find_by_title(parent)
   parent_doc.children.create!(
       {
