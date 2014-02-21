@@ -14,7 +14,7 @@ class Mailer < ActionMailer::Base
   end
 
   def send_welcome_message(user)
-     @user = user
+    @user = user
     mail(to: user.email, subject: 'Welcome to AgileVentures.org')
   end
 end
