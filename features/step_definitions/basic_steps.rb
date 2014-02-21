@@ -254,3 +254,7 @@ end
 And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
   page.should have_text string, arg
 end
+
+Then(/^I should see the sub-documents in this order:$/) do   |table|
+  table.hashes
+end

@@ -102,7 +102,7 @@ Given(/^I (?:am on|go to) project "([^"]*)"$/) do |project|
   visit(path_to('projects', project.id ))
 end
 
-Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created_by marcelo (\d+) days ago$/) do |parent, child, arg3|
+Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (\d+) days ago$/) do |parent, child, arg3|
   parent_doc = Document.find_by_title(parent)
   parent_doc.children.create!(
       {
