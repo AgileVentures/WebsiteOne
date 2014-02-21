@@ -4,15 +4,27 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   #validates :first_name, :last_name, presence: true
+  geocoded_by :last_sign_in_ip do |user, res|
+    if geo = res.first
+      user.latitude = geo.data['latitude']
+      user.longitude = geo.data['longitude']
+      user.city = geo.data['city']
+      user.region = geo.data['region_name']
+      user.country = geo.data['country_name']
+    end
+  end
 
-  # TODO Bryan: implement slug for users
-  #extend FriendlyId
-  #friendly_id :display_name, :slugged
+  after_validation :geocode
+
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
 
   validates :email, uniqueness: true
   has_many :authentications, dependent: :destroy
   has_many :projects
   has_many :documents
+
+
 
   acts_as_follower
 
@@ -32,9 +44,21 @@ class User < ActiveRecord::Base
   def display_name
     name = [ self.first_name, self.last_name ].join(' ').squish
     if name =~ /^\s*$/
-      self.email.gsub(/@.*$/, '')
+      self.email_first_part
     else
       name
     end
+  end
+
+  def should_generate_new_friendly_id?
+    self.slug.nil? or ((self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?)
+  end
+
+  def email_first_part
+    self.email.gsub(/@.*$/, '')
+  end
+
+  def slug_candidates
+    [ :display_name, :email_first_part ]
   end
 end

@@ -556,16 +556,23 @@ section#main {
     color: #FFF;
 }
 
-.back .description ul {
+.back .description p ul {
     width: 55%;
     margin: auto;
 }
 
-.back .description ul li {
+.back .description p ul li {
     color: #FFF !important;
     text-align: left;
     list-style: none;
     line-height: 1.4;
+}
+
+.back p {
+
+    color: #FFF !important;
+    font-weight: bold;
+
 }
 
 .popular {

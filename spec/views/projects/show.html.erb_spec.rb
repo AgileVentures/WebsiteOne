@@ -24,6 +24,11 @@ describe 'projects/show.html.erb' do
                           user_id: @user.id,
                           created_at: Time.now
 
+    @videos = [
+        { title: 'First video', user: @user, published: '12/12/2012', url: 'somewhere', id: '123', content: 'some text' },
+        { title: 'Second video', user: @user, published: '13/13/2013', url: 'somewhere', id: '123', content: 'some text' }
+    ]
+
     @documents = [ @document ]
     @documents.should_receive(:roots).and_return(@documents)
     @document.should_receive(:children).and_return( [] )
@@ -34,10 +39,9 @@ describe 'projects/show.html.erb' do
     assign :user, @user
     assign :documents, @documents
     assign :members, [ @user ]
+    assign :videos, @videos
     view.stub(:project_created_by).and_return(@created_by)
     @project.should_receive(:user).and_return(@user)
-
-    assign :videos, []
   end
 
   it 'renders project description' do
@@ -58,6 +62,15 @@ describe 'projects/show.html.erb' do
     render
     expect(rendered).to have_text 'Members (1)'
     expect(rendered).to have_text @user.display_name, visible: false
+  end
+
+  it 'renders a list of videos' do
+    render
+    expect(rendered).to have_text 'Videos (2)'
+    @videos.each do |video|
+      expect(rendered).to have_text video[:title], visible: false
+      expect(rendered).to have_text video[:published], visible: false
+    end
   end
 
   context 'user is signed in' do

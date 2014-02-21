@@ -246,11 +246,8 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
   end
 end
 
-Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
+Then(/^I should see "([^"]*)" created (\d+) days ago ([^"]*)$/) do |string, arg, order|
+  # TODO: We need to actually test for order. How is this content rendered. In a table or div. We can potentially check for child or something...
   page.should have_text string, arg
 end
 
-
-And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
-  page.should have_text string, arg
-end

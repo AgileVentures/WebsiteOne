@@ -2,11 +2,12 @@ class UsersController < ApplicationController
   include Youtube
 
   def index
-    @users = User.where('display_profile = ?', true) #.order(last_name: :desc, first_name: :desc)
+    @users = User.where('display_profile = ?', true).order(:created_at)
   end
 
   def show
-    @user = User.find(params[:id])
+    raise 'Deprecated Numeric ID' if params[:id] =~ /^\d+$/
+    @user = User.friendly.find(params[:id])
 
     @users_projects = @user.following_by_type('Project')
 

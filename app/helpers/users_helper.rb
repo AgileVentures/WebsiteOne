@@ -43,14 +43,19 @@ module Youtube
 
     def user_videos(user)
       if user_id = user.youtube_id
-        parse_response(open("http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json").read)
+        parse_response(open("http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json").read, user)
       end
     end
 
-    def parse_response(response)
+    #def project_videos(user)
+    #  parse_response(open("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=#{user_id}&order=date&q=#{search_term}&type=video&key=#{api_key}").read)
+    #end
+
+    def parse_response(response, user)
       begin
         json = JSON.parse(response)
         videos = json['feed']['entry']
+        return if videos.nil?
         videos.map do |hash|
           {
               id:         hash['id']['$t'].split('/').last,
@@ -59,7 +64,8 @@ module Youtube
               content:    hash['content']['$t'],
               url:        hash['link'].first['href'],
               thumbs:     hash['media$group']['media$thumbnail'],
-              player_url: hash['media$group']['media$player'].first['url']
+              player_url: hash['media$group']['media$player'].first['url'],
+              user: user
           }
         end
       rescue JSON::JSONError
