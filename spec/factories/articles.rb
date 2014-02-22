@@ -2,5 +2,9 @@
 
 FactoryGirl.define do
   factory :article do
+    sequence(:title) {|n| "Title #{n}"}
+    content Faker::Lorem.paragraph(1)
+    tag_list [ 'Ruby' ]
+    user
   end
 end

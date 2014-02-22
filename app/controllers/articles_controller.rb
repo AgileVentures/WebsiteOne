@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
 
     if @article.save
-      flash[:notice] = "Successfully created the article entitled \"#{@article.title}!\""
+      flash[:notice] = "Successfully created the article \"#{@article.title}!\""
       redirect_to article_path(@article)
     else
       flash.now[:alert] = @article.errors.full_messages.join(', ')

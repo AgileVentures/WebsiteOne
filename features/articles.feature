@@ -21,8 +21,16 @@ Feature:
     And I should see "Rails is not for trains"
     And I should see "JQuery cannot be queried"
 
-  Scenario: There should be a working link to each project
+  Scenario: Should be able to visit an article from the article index page
+    Given I am on the "Articles" page
+    When I click "Ruby is on Fire"
+    Then I should be on the "Show" page for article "Ruby is on Fire"
 
   Scenario: There should be a link to articles filtered by certain tags
-
-  Scenario: The article show page should contain the article content, title and other metadata
+    Given I am on the "Articles" page
+    Then I should see "Ruby"
+    When I click "Ruby" in the articles sidebar
+    Then I should be on the "Articles" page
+    And I should see "Ruby is on Fire"
+    And I should not see "Rails is not for trains"
+    And I should not see "JQuery cannot be queried"
