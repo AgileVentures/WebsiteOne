@@ -48,6 +48,15 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def preview
+    @article = Article.new(article_params)
+
+    # fill with dummy data
+    @article.created_at = Time.now
+    @article.updated_at = Time.now
+    @author = current_user
+  end
+
   private
 
   def article_params

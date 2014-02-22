@@ -1,27 +1,3 @@
 <%= provide :title, @article.title %>
 
-<section class="article-full">
-  <div id="doc-box">
-    <div id="doc-overview">
-      <h1><%= @article.title %></h1>
-      <ul style="list-style: none">
-        <li>Created on <%= @article.created_at.strftime('%d %B %y') %> by <%= link_to @author.display_name, users_show_path(@author) %></li>
-        <li>Last updated <%= time_ago_in_words(@article.updated_at) %> ago</li>
-        <li><%= link_to_tags(@article.tag_list) %></li>
-      </ul>
-    </div>
-    <div id="doc-side-panel">
-      <% if user_signed_in? %>
-        <ul>
-          <li><%= custom_css_btn 'edit article', 'fa  fa-pencil-square-o', edit_article_path(@article) %></li>
-        </ul>
-      <% end %>
-    </div>
-  </div>
-
-  <article><%= from_markdown @article.content %></article>
-
-  <!--<footer class="article-footer">Footer PLACEHOLDER</footer>-->
-</section>
-
-
+<%= render 'article', article: @article, author: @author %>

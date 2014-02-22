@@ -10,6 +10,9 @@ def css_selector_for(container)
     when 'projects sidebar'
       '#sidebar'
 
+    when 'main content'
+      '#main'
+
     else
       pending
   end
