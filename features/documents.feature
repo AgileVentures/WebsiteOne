@@ -71,12 +71,6 @@ Feature: Manage Document
       | SubDoc2 |
 
 
-
-
-
-
-
-
 #Scenario: Destroy a document
 #  Given I am logged in
 #  Given I am on the "Show" page for project "hello world"
