@@ -16,6 +16,8 @@
 //= require bootstrap
 //= require nprogressbar
 //= require 404
+//= require bootstrap-tokenfield.min
+//= require typeahead
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
@@ -92,20 +94,20 @@ $(function() {
      * To change the icons, alter collapsedClass and expandedClass to append the appropriate CSS classes
      */
 
-//    var collapsedClass = 'fa-caret-down',
-//        expandedClass = 'fa-caret-right';
-//    // a hack to follow collapse animation, ideally should find the right animation callbacks
-//    $('.collapse-button').on('click', function() {
-//      // TODO Bryan: This does not work properly if the user clicks too fast
-//      var child = $(this).find('>:first-child');
-//      if (child.hasClass(collapsedClass)) {
-//        child.removeClass(collapsedClass);
-//        child.addClass(expandedClass);
-//      } else if (child.hasClass(expandedClass)) {
-//        child.removeClass(expandedClass);
-//        child.addClass(collapsedClass);
-//      }
-//    });
+    var collapsedClass = 'fa-caret-down',
+        expandedClass = 'fa-caret-right';
+    // a hack to follow collapse animation, ideally should find the right animation callbacks
+    $('.collapse-button').on('click', function() {
+      // TODO Bryan: This does not work properly if the user clicks too fast
+      var child = $(this).find('>:first-child');
+      if (child.hasClass(collapsedClass)) {
+        child.removeClass(collapsedClass);
+        child.addClass(expandedClass);
+      } else if (child.hasClass(expandedClass)) {
+        child.removeClass(expandedClass);
+        child.addClass(collapsedClass);
+      }
+    });
 
     var affixedNav = $('#nav'),
         header = $('#main_header'),
