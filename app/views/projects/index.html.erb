@@ -1,25 +1,29 @@
-<div id="doc-box">
-  <div id="doc-overview">
-    <h1>List of Projects</h1>
+<% provide :title, 'Projects' %>
+
+<div class="col-sm-8">
+  <div id="doc-box">
+    <div id="doc-overview">
+      <h1>List of Projects</h1>
+    </div>
+    <div id="doc-side-panel">
+      <% if user_signed_in? %>
+        <ul>
+          <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
+        </ul>
+      <% end %>
+    </div>
   </div>
-  <div id="doc-side-panel">
-    <% if user_signed_in? %>
-      <ul>
-        <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
-      </ul>
+  <%= will_paginate @projects %>
+  <ul id="project-list" style="list-style: none; padding-left: 0;">
+    <% if @projects.empty? %>
+      <li>No projects were found, wait wha..?</li>
+    <% else %>
+      <% @projects.each do |project| %>
+        <li class="listing">
+          <%= render 'listing', project: project %>
+        </li>
+      <% end %>
     <% end %>
-  </div>
+  </ul>
+  <%= will_paginate @projects %>
 </div>
-<%= will_paginate @projects %>
-<ul id="project-list" style="list-style: none; padding-left: 0;">
-  <% if @projects.empty? %>
-    <li>No projects were found, wait wha..?</li>
-  <% else %>
-    <% @projects.each do |project| %>
-    <a href="<%= project_path(project) %>" data-link-text="<%= project.title.downcase %>">
-      <li class="project-listing"><%= render 'listing', project: project %></li>
-    </a>
-    <% end %>
-  <% end %>
-</ul>
-<%= will_paginate @projects %>

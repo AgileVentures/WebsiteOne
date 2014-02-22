@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for?(:title) ? [yield(:title),  ' | AgileVentures - WebsiteOne'].join(' ') : '| AgileVentures - WebsiteOne' %></title>
+  <title><%= content_for?(:title) ? [ yield(:title),  ' | AgileVentures - WebsiteOne'].join(' ') : 'AgileVentures - WebsiteOne' %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -13,11 +13,7 @@
 <%= render 'layouts/navbar' %>
 <div id="wrap">
   <section id="main" >
-    <% if current_page? root_path %>
-        <%= render 'layouts/content' %>
-    <% else %>
-        <%= content_for?(:content) ? yield(:content) : yield %>
-    <% end %>
+    <%= content_for?(:content) ? yield(:content) : yield %>
   </section>
   <div id="push"></div>
 </div>
