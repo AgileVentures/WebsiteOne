@@ -16,13 +16,14 @@ class Document < ActiveRecord::Base
              :order => 'project_id'
   end
 
+  # Bryan: Used to generate paths, used only in testing.
+  # Might want to switch to rake generated paths in the future
   def url_for_me(action)
     if action == 'show'
       "/projects/#{project.to_param}/documents/#{to_param}"
     else
       "/projects/#{project.to_param}/documents/#{to_param}/#{action}"
     end
-
   end
 
   def slug_candidates

@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'users', 'data-turbolinks-track' => true %>
+<% provide :title, @project.title %>
 <div>
   <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
   <strong><%= @project.title %></strong>
@@ -37,7 +37,7 @@
 <div class="small-divider"></div>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.count %>)</a></li>
+  <li class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a></li>
   <li><a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a></li>
   <li><a href="#videos_list" data-toggle="tab">Videos (<%= @videos.count %>)</a></li>
 </ul>

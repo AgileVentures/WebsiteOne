@@ -16,10 +16,9 @@ Feature: Manage Document
       | Documentation | My documentation | hello world |
 
     And the following sub-documents exist:
-      | title         | body             | created_at                    |  project |
-      | SubDoc1       | Blog One         | created 3 days ago | hello mars |
-      | SubDoc2       | Another Blog     | created 10 days ago | hello mars |
-
+      | title   | body         | created_at          | project    |
+      | SubDoc1 | Blog One     | created 3 days ago  | hello mars |
+      | SubDoc2 | Another Blog | created 10 days ago | hello mars |
 
 
   Scenario: Render of list documents
@@ -46,7 +45,7 @@ Feature: Manage Document
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
-    When I click the sidebar link "Guides"
+    When I click the "Guides" link within the sidebar
     Then I should be on the "Show" page for document "Guides"
     And I should see "Guides"
     And I should see "My guide to"
@@ -61,7 +60,7 @@ Feature: Manage Document
     Then I should be on the "Show" page for document "Howto"
     And I should see "Guides"
 
-  #NOTE: below scenario is for children's documents of documents, not projects'
+#NOTE: below scenario is for children's documents of documents, not projects'
 
   Scenario: Documents children should be sorted in ASCENDING order by create date
     Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
@@ -89,7 +88,7 @@ Feature: Manage Document
 
   @javascript
   Scenario: Mercury editor shows Save and Cancel buttons, hides New Document button,
-    Save button works
+  Save button works
 
     Given the document "Guides" has a child document with title "Howto"
     Given I am going to use the Mercury Editor

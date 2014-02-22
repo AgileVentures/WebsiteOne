@@ -9,6 +9,7 @@
 old_project_count = Project.count
 old_doc_count = Document.count
 old_user_count = User.count
+old_article_count = Article.count
 
 puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
 
@@ -17,7 +18,7 @@ while true
   response = STDIN.gets.downcase.chomp
   if response == 'y' or response == 'yes'
     puts 'Clearing existing projects and documents'
-    [Project, Document, User].each(&:destroy_all)
+    [Project, Document, User, Article].each(&:destroy_all)
 
     pw = 'randomrandom'
     u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
@@ -74,6 +75,13 @@ for i in (1..5)
   end
 end
 
+for i in (1..4)
+  User.all.sample(3).each do |u|
+    u.articles.create!(title: Faker::Lorem.words(3).join(' '), content: Faker::Lorem.paragraphs(3).join('\n'))
+  end
+end
+
 puts 'Project.count ' + old_project_count.to_s.bold.red + ' -> ' + Project.count.to_s.bold.green
 puts 'Document.count ' + old_doc_count.to_s.bold.red + ' -> ' + Document.count.to_s.bold.green
 puts 'User.count ' + old_user_count.to_s.bold.red + ' -> ' + User.count.to_s.bold.green
+puts 'Article.count ' + old_article_count.to_s.bold.red + ' -> ' + Article.count.to_s.bold.green

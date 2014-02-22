@@ -51,10 +51,6 @@ When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project
   end
 end
 
-When(/^I click "([^"]*)" in the list of projects$/) do |name|
-  find(:css, %Q{a[data-link-text="#{name.downcase}"]}).click()
-end
-
 Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |parent, child|
   parent_doc = Document.find_by_title(parent)
   parent_doc.children.create!(

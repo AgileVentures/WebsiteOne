@@ -1,3 +1,5 @@
+<% provide :title, "#{@document.title} - #{@project.title}" %>
+
 <div>
   <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
   <strong><%= link_to @project.title, project_path(@project) %></strong> <i class="fa fa-angle-double-right"></i>

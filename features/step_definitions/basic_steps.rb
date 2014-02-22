@@ -16,6 +16,8 @@ def path_to(page_name, id = '')
       projects_path
     when 'new project' then
       new_project_path
+    when 'articles' then
+      articles_path
     when 'edit' then
       edit_project_path(id)
     when 'show' then
@@ -194,26 +196,13 @@ When(/^I should see a selector with options$/) do |table|
 end
 
 Then(/^I should see the sidebar$/) do
-  page.find(:css, 'nav#sidebarnav')
+  page.find(:css, '#sidebar')
 end
 
 #Then(/^I should see "(.*?)"$/) do |string|
 #  #expect(page).to have_content(string)
 #  page.should have_content(string)
 #end
-
-#TODO Bryan please replase s and m with meaningful names
-Then(/(.*) within the ([^"]*)$/) do |s, m|
-  m = m.downcase
-  if m == 'mercury editor'
-    page.driver.within_frame('mercury_iframe') { step(s) }
-  else
-    selector_for = {
-        'sidebar' => '#sidebar'
-    }
-    page.within(selector_for[m]) { step(s) }
-  end
-end
 
 Given(/^I want to use third party authentications$/) do
   OmniAuth.config.test_mode = true
