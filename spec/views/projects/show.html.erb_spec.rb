@@ -30,9 +30,10 @@ describe 'projects/show.html.erb' do
     ]
 
     @documents = [ @document ]
-    @documents.should_receive(:roots).and_return(@documents)
-    @document.should_receive(:children).and_return( [] )
-    @document.should_receive(:user).and_return(@user)
+    @documents.stub(:roots).and_return(@documents)
+    @documents.stub(:count).and_return(1)
+    @document.stub(:children).and_return( [] )
+    @document.stub(:user).and_return(@user)
 
     @created_by = ['by:', ([@user.first_name, @user.last_name].join(' '))].join(' ')
     assign :project, @project
@@ -41,7 +42,7 @@ describe 'projects/show.html.erb' do
     assign :members, [ @user ]
     assign :videos, @videos
     view.stub(:project_created_by).and_return(@created_by)
-    @project.should_receive(:user).and_return(@user)
+    @project.stub(:user).and_return(@user)
   end
 
   it 'renders project description' do
