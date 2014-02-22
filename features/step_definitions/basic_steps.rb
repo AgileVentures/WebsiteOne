@@ -256,20 +256,8 @@ And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |stri
 end
 
 Then(/^I should see the sub-documents in this order:$/) do   |table|
-  expected_order = table.raw
-  actual_order = page.all('li.listings-item a').collect(&:text).flatten
+  expected_order = table.raw.flatten
+  actual_order = page.all('li.listings-item a').collect(&:text)
   expected_order.should == actual_order
-  #docs = page.all('li.listings-item a').collect(&:text)
-  #page.should have_selector('tbody li:nth-child(1)', text: SubDoc1)
-  #page.should have_selector('tbody li:nth-child(2)', text: SubDoc2)
 end
 
-#li class="listings-item">
-
-#Then /"(.*)" should appear before "(.*)"/ do |first_example, second_example|
-#  page.body.should =~ /#{first_example}.*#{second_example}/
-#end
-
-#Then(/^SubDoc(\d+) should appear before SubDoc(\d+)$/) do |first_example, second_example|
-#  page.body.should =~ /#{first_example}.*#{second_example}/m
-#end
