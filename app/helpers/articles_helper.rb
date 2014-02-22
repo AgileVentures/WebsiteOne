@@ -1,6 +1,6 @@
 module ArticlesHelper
   def standard_tags
-    %w( Pair-Programming AgileVentures Ruby Rails Javascript JQuery Jasmine Cucumber RSpec Git Heroku )
+    %w( Pair-Programming AgileVentures Ruby Rails Javascript jQuery Jasmine Cucumber RSpec Git Heroku )
   end
 
   def link_to_tags(tags)

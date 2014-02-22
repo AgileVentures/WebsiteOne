@@ -7,7 +7,7 @@
       <li><%= link_to_tags(article.tag_list) %></li>
     </ul>
     <% if user_signed_in? and not article.new_record? %>
-      <%= custom_css_btn 'edit article', 'fa  fa-pencil-square-o', edit_article_path(article), style: 'font-size: 130%;' %>
+      <%= custom_css_btn 'edit article', 'fa fa-pencil-square-o', edit_article_path(article), style: 'font-size: 130%;' %>
     <% end %>
   </div>
 
