@@ -67,16 +67,9 @@ Feature: Manage Document
     Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
     Given the document "Guides" has a sub-document with title "SubDoc2" created 10 days ago
     Given I am on the "Show" page for document "Guides"
-    And show me the page
     Then I should see the sub-documents in this order:
       | SubDoc1 |
       | SubDoc2 |
-
-
-
-
-
-
 
 
 #Scenario: Destroy a document
