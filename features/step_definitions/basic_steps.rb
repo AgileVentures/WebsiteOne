@@ -245,3 +245,34 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
     page.should have_css %Q{a[data-link-text="#{button.downcase}"]}
   end
 end
+
+Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
+  page.should have_text string
+end
+
+
+And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
+  page.should have_text string
+end
+
+Then(/^I should see the sub-documents in this order:$/) do   |table|
+  expected_order = table.raw.flatten
+  actual_order = page.all('li.listings-item a').collect(&:text)
+  expected_order.should == actual_order
+end
+
+
+
+Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
+    project = Project.find_by_title(title)
+    case item.downcase.pluralize
+      when 'members'
+        (1..num.to_i).each do
+          u = User.create(email: Faker::Internet.email, password: '1234567890')
+          u.follow(project)
+        end
+
+      else
+        pending
+    end
+end

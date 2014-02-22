@@ -56,3 +56,4 @@ When(/^I click the sidebar link "([^"]*)"$/) do |link|
     click_link_or_button link
   end
 end
+
