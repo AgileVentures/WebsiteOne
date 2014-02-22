@@ -35,3 +35,9 @@ Feature:
     And I should see "Ruby is on Fire"
     And I should not see "Rails is not for trains"
     And I should not see "JQuery cannot be queried"
+
+  Scenario: Should be able to create a new article from the article index page
+
+  Scenario: Should be able to edit an article from the article show page
+
+  Scenario: Should be able to preview an article when editing

@@ -24,6 +24,7 @@
 
   <div class="form-group">
     <%= f.submit (article.new_record? ? 'Save' : 'Update'), class: 'btn btn-default' %>
+    <button formaction="<%= preview_articles_path %>" class="btn btn-default" formtarget="_blank" >Preview</button>
     <%= link_to 'Back', (article.new_record? ? articles_path : article_path(article)), class: 'btn btn-default' %>
   </div>
 <% end %>
