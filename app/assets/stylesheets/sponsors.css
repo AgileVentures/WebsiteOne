@@ -77,3 +77,7 @@
 #sponsorsBar .sponsorsTier ~ .sponsorsTier {
     padding-top: 15px;
 }
+
+#ourSponsors {
+    display: block;
+}
