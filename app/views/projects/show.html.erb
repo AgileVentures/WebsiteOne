@@ -1,4 +1,4 @@
-<%= javascript_include_tag '/javascripts/users', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'users', 'data-turbolinks-track' => true %>
 <div>
   <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
   <strong><%= @project.title %></strong>
@@ -22,19 +22,10 @@
         <li><%= custom_css_btn 'new document', 'fa fa-file-text-o', new_project_document_path(project_id: @project.friendly_id) %></li>
         <% if current_user.following?(@project) %>
           <li><%= custom_css_btn 'leave project', 'fa fa-users', unfollow_project_path(@project) %></li>
-          <li><div id="HOA-placeholder"></div></li>
+          <li><div id="HOA-placeholder" data-hoa-title="AgileVentures Pairing: <%= @project.title %> - <%= Time.now.utc.strftime('%d/%m/%Y %H00 %Z') %>"></div></li>
 
           <script src="https://apis.google.com/js/platform.js" data-turbolinks-track="true"></script>
-          <script data-turbolinks-track="true">
-            gapi.hangout.render('HOA-placeholder', {
-              'topic': 'AgileVentures Pairing: <%= @project.title %> - <%= Time.now.utc.strftime('%d/%m/%Y %H00 %Z') %>',
-              'render': 'createhangout',
-              'hangout_type': 'onair',
-              'initial_apps': [
-                { 'app_type': 'ROOM_APP' }
-              ]
-            });
-          </script>
+          <%= javascript_include_tag 'HOA', 'data-turbolinks-track' => true %>
         <% else %>
           <li><%= custom_css_btn 'join project', 'fa fa-users', follow_project_path(@project) %></li>
         <% end %>
