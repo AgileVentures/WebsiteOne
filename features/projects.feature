@@ -148,6 +148,7 @@ Feature: Create and maintain projects
   Scenario: Project show page renders a list of members
     Given The project "hello world" has 5 members
     And I am on the "Show" page for project "hello world"
+    #And show me the page
     Then I should see "Members (5)"
 
   # Bryan: Stub the YouTube API calls?
