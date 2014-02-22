@@ -37,6 +37,15 @@ Feature:
     And I should not see "JQuery cannot be queried"
 
   Scenario: Should be able to create a new article from the article index page
+    Given I am logged in
+    When I am on the "Articles" page
+    And I click the very stylish "New Article" button
+    Then I should see "Create a New Article"
+    When I fill in "Title" with "Hello, Uranus!"
+    And I fill in "Content" with "**An example of** ``Markdown``"
+    And I click the "Create" button
+    Then I should see "Hello, Uranus!" within the main content
+    And I should see "An example of Markdown"
 
   Scenario: Should be able to edit an article from the article show page
 
