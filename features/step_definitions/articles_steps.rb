@@ -18,7 +18,3 @@ Given(/^the following articles exist:$/) do |table|
     end
   end
 end
-
-When(/^(.*) in the articles sidebar$/) do |s|
-  page.within('#articles-sidebar') { step(s) }
-end

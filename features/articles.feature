@@ -10,9 +10,10 @@ Feature:
       | Rails is not for trains   | Train `tracks` do not work          |   Rails                 |
       | JQuery cannot be queried  | JQuery moves **towards** the ...    |   Javascript, JQuery    |
 
-  Scenario: There should be a link to the articles page on the Getting Started page
-    Given I am on the static "Getting Started" page
-    When I click "articles"
+  Scenario: There should be a link to the articles page on the navbar
+    Given I am on the home page
+    Then I should see "Articles" within the navigation bar
+    When I click "Articles" within the navigation bar
     Then I should be on the "Articles" page
 
   Scenario: There should be a list of articles on the index page
@@ -29,7 +30,7 @@ Feature:
   Scenario: There should be a link to articles filtered by certain tags
     Given I am on the "Articles" page
     Then I should see "Ruby"
-    When I click "Ruby" in the articles sidebar
+    When I click "Ruby" within the articles sidebar
     Then I should be on the "Articles" page
     And I should see "Ruby is on Fire"
     And I should not see "Rails is not for trains"

@@ -204,19 +204,6 @@ end
 #  page.should have_content(string)
 #end
 
-#TODO Bryan please replase s and m with meaningful names
-Then(/(.*) within the ([^"]*)$/) do |s, m|
-  m = m.downcase
-  if m == 'mercury editor'
-    page.driver.within_frame('mercury_iframe') { step(s) }
-  else
-    selector_for = {
-        'sidebar' => '#sidebar'
-    }
-    page.within(selector_for[m]) { step(s) }
-  end
-end
-
 Given(/^I want to use third party authentications$/) do
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:github] = {
