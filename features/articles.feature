@@ -5,10 +5,10 @@ Feature:
 
   Background:
     Given the following articles exist:
-      |        Title              |           Content                   |         Tag List        |
-      | Ruby is on Fire           | Fire is fire and sunny              |   Ruby, Rails           |
-      | Rails is not for trains   | Train `tracks` do not work          |   Rails                 |
-      | JQuery cannot be queried  | JQuery moves **towards** the ...    |   Javascript, JQuery    |
+      | Title                    | Content                          | Tag List           |
+      | Ruby is on Fire          | Fire is fire and sunny           | Ruby, Rails        |
+      | Rails is not for trains  | Train `tracks` do not work       | Rails              |
+      | JQuery cannot be queried | JQuery moves **towards** the ... | Javascript, JQuery |
 
   Scenario: There should be a link to the articles page on the navbar
     Given I am on the home page
@@ -48,5 +48,26 @@ Feature:
     And I should see "An example of Markdown"
 
   Scenario: Should be able to edit an article from the article show page
+    Given I am logged in
+    And I am on the "Show" page for article "Ruby is on Fire"
+    And I click the very stylish "Edit article" button
+    Then I should be on the "Edit" page for article "Ruby is on Fire"
+    And I fill in "Content" with "**New content** ``New Markdown``"
+    And I click the "Update" button
+    Then I should be on the "Show" page for article "Ruby is on Fire"
+    And I should see "Successfully updated the article"
+    And I should see "New content New Markdown"
 
+  @javascript
   Scenario: Should be able to preview an article when editing
+    Given I intend to see a preview of an article
+    And I am logged in as user with email "brett@example.com", with password "12345678"
+    And I am on the "Show" page for article "Ruby is on Fire"
+    And I click the very stylish "Edit article" button
+    Then I should be on the "Edit" page for article "Ruby is on Fire"
+    And I fill in "Title" with "Thomas is on Fire"
+    And I fill in "Content" with "**New content** ``New Markdown``"
+    And I click the "Preview" button
+    Then I should see a preview containing:
+      | Thomas is on Fire        |
+      | New content New Markdown |

@@ -18,3 +18,17 @@ Given(/^the following articles exist:$/) do |table|
     end
   end
 end
+Then(/^I should see a preview containing:$/)  do   |table|
+  content = table.raw.flatten
+  new_window=page.driver.browser.window_handles.last
+  page.within_window new_window do
+    content.each do |text|
+      page.should have_text text
+    end
+  end
+end
+
+
+When(/^I intend to see a preview of an article$/) do
+  Capybara.current_driver = :selenium
+end
