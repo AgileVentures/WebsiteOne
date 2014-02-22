@@ -5,9 +5,9 @@ Feature: As a user of the site
 	Background:
 	  Given I am on the "home" page
 	  And the following users exist
-	    | first_name  | last_name   | email                   | password  |
-	    | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |
-	    | Bob         | Butcher     | bobb112@hotmail.com     | 12345678  |
+	    | first_name  | last_name   | email                   |
+	    | Alice       | Jones       | alice@btinternet.co.uk  |
+	    | Bob         | Butcher     | bobb112@hotmail.com     |
 	    # |             | Croutch     | c.croutch@enterprise.us | 12345678  |
 	    # | Dave        |             | dave@dixons.me          | 12345678  |
     And the following projects exist:
@@ -30,6 +30,7 @@ Feature: As a user of the site
     Then I should be on the "user profile" page for "Alice"
     And I should see the avatar for "Alice" at 275 px
     And I should see "Alice Jones"
+    And I should see "Sweden"
     # And I should see "Member for: about 1 month"
     And I should see "Member for:"
 
