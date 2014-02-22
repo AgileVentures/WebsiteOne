@@ -186,4 +186,43 @@ describe ArticlesController do
       response.should render_template :edit
     end
   end
+
+  describe 'POST/PATCH preview' do
+    before(:each) do
+      @params = { article: { title: 'Patch title', content: 'Some content', tag_list: 'Ruby'}}
+      controller.stub(:authenticate_user!).and_return(true)
+    end
+
+    it 'should require authentication' do
+      controller.should_receive(:authenticate_user!)
+      patch :preview, @params
+    end
+
+    it 'should render the preview template' do
+      patch :preview, @params
+      response.should render_template :preview
+    end
+
+    it 'should assign a new article with the given parameters' do
+      patch :preview, @params
+      assigns(:article).should be_a(Article)
+      @params[:article].each_pair do |k, v|
+        # calls the method "k"
+        if k == :tag_list
+          assigns(:article).send(k).should eq [ v ]
+        else
+          assigns(:article).send(k).should eq v
+        end
+      end
+    end
+
+    it 'should assign default parameters to the preview article' do
+      @user = double('User')
+      controller.stub(:current_user).and_return(@user)
+      patch :preview, @params
+      assigns(:author).should eq @user
+      assigns(:article).send(:created_at).should be_a(DateTime)
+      assigns(:article).send(:updated_at).should be_a(DateTime)
+    end
+  end
 end
