@@ -196,7 +196,7 @@ When(/^I should see a selector with options$/) do |table|
 end
 
 Then(/^I should see the sidebar$/) do
-  page.find(:css, 'nav#sidebarnav')
+  page.find(:css, '#sidebar')
 end
 
 #Then(/^I should see "(.*?)"$/) do |string|

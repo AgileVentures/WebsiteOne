@@ -1,11 +1,36 @@
+@import "variables";
 @import "mixins";
 
 .doc-option {
-  font-size: 60%;
   display: inline;
   vertical-align: middle;
   overflow: hidden;
   white-space: nowrap;
+}
+
+section.doc-preview {
+  margin: 10px 0;
+  padding: 5px 10px;
+  height: auto;
+  min-height: 20px;
+  max-height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.doc-preview-overview {
+  margin-right: 70px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.doc-preview-stats {
+  width: 60px;
+  padding: 5px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 20px;
 }
 
 .doc-option-icon {
@@ -43,6 +68,7 @@
 }
 
 #doc-side-panel {
+  font-size: 130%;
   padding-top: 25px;
   width: 20%;
   display: inline-block;
@@ -50,13 +76,12 @@
 }
 
 #doc-side-panel ul {
-  font-size: 220%;
   list-style: none;
 }
 
 .listing {
   padding: 10px;
-  color: #000;
+  color: $black;
   width: 100%;
   margin: 0;
   @include css-transition(background, 0.3s, ease, 0s);
@@ -64,22 +89,7 @@
 }
 
 .listing:hover {
-  background: #F7EFEB;
-}
-
-.project-listing-overview {
-  margin-right: 70px;
-  vertical-align: top;
-  display: inline-block;
-}
-
-.project-listing-stats {
-  width: 60px;
-  padding: 5px;
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 0;
+  background: $highlight-color;
 }
 
 .tab-content {

@@ -30,7 +30,7 @@ Feature:
   Scenario: There should be a link to articles filtered by certain tags
     Given I am on the "Articles" page
     Then I should see "Ruby"
-    When I click "Ruby" within the articles sidebar
+    When I click "Ruby" within the sidebar
     Then I should be on the "Articles" page
     And I should see "Ruby is on Fire"
     And I should not see "Rails is not for trains"

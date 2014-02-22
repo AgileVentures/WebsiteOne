@@ -1,3 +1,4 @@
+@import "variables";
 @import url(http://fonts.googleapis.com/css?family=Kreon:400,700);
 
 html,
@@ -9,7 +10,7 @@ body {
 }
 
 h1, h2, h3 {
-    color: darkgray;
+    color: $black;
 }
 
 h4 {
@@ -22,12 +23,16 @@ p, a {
 }
 
 a, a:visited, a:link {
-    color: #F07F48;
+    color: $link-color;
 }
 
 a:hover, a:active {
-    color: #b06137;
+    color: $link-hover-color;
     text-decoration: none;
+}
+
+strong {
+  color: $black;
 }
 
 .btn {

@@ -115,7 +115,7 @@ Feature: Create and maintain projects
   Scenario: opens "Show" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-    When I click "hello saturn" in the list of projects
+    When I click "hello saturn" within the List of Projects
     Then I should see:
       | Text                   |
       | hello saturn           |
@@ -148,7 +148,6 @@ Feature: Create and maintain projects
   Scenario: Project show page renders a list of members
     Given The project "hello world" has 5 members
     And I am on the "Show" page for project "hello world"
-    #And show me the page
     Then I should see "Members (5)"
 
   # Bryan: Stub the YouTube API calls?

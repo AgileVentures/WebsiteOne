@@ -15,7 +15,7 @@
 
 <div class="article-list">
   <% @articles.each do |a| %>
-    <section class="article-preview listing">
+    <section class="doc-preview listing">
       <header class="article-header">
         <h2><%= link_to a.title, article_path(a) %></h2>
         <small>Created by <%= link_to a.user.display_name, users_show_path(a.user) %>, <%= time_ago_in_words(a.created_at) %> ago,

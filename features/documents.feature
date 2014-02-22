@@ -45,7 +45,7 @@ Feature: Manage Document
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
-    When I click the sidebar link "Guides"
+    When I click the "Guides" link within the sidebar
     Then I should be on the "Show" page for document "Guides"
     And I should see "Guides"
     And I should see "My guide to"
@@ -66,7 +66,6 @@ Feature: Manage Document
     Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
     Given the document "Guides" has a sub-document with title "SubDoc2" created 10 days ago
     Given I am on the "Show" page for document "Guides"
-    And show me the page
     Then I should see the sub-documents in this order:
       | SubDoc1 |
       | SubDoc2 |

@@ -4,14 +4,14 @@ def css_selector_for(container)
     when 'navigation bar' || 'navbar'
       '#nav'
 
-    when 'articles sidebar'
-      '#articles-sidebar'
-
-    when 'projects sidebar'
+    when 'sidebar'
       '#sidebar'
 
     when 'main content'
       '#main'
+
+    when 'list of projects'
+      '#project-list'
 
     else
       pending
