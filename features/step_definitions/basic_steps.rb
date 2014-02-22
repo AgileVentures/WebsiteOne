@@ -261,3 +261,18 @@ Then(/^I should see the sub-documents in this order:$/) do   |table|
   expected_order.should == actual_order
 end
 
+
+
+Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
+    project = Project.find_by_title(title)
+    case item.downcase.pluralize
+      when 'members'
+        (1..num.to_i).each do
+          u = User.create(email: Faker::Internet.email, password: '1234567890')
+          u.follow(project)
+        end
+
+      else
+        pending
+    end
+end
