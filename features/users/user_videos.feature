@@ -49,9 +49,8 @@ Feature: As a site owner
 
   Scenario: show first in video and description, player, filter
 
-  @javascript
+  @javascript @selenium
   Scenario: Selecting videos from the list
-    Given I open my browser
     And my YouTube Channel ID with some videos in it
     And my YouTube channel is connected
     And I am on my "profile" page

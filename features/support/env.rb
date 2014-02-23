@@ -84,3 +84,10 @@ Geocoder::Lookup::Test.add_stub(
 ]
 )
 
+Before('@selenium') do
+  Capybara.current_driver = :selenium
+end
+
+After('@selenium') do
+  Capybara.current_driver = Capybara.default_driver
+end
