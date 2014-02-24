@@ -58,10 +58,9 @@ Feature:
     And I should see "Successfully updated the article"
     And I should see "New content New Markdown"
 
-  @javascript
+  @javascript @selenium
   Scenario: Should be able to preview an article when editing
-    Given I intend to see a preview of an article
-    And I am logged in as user with email "brett@example.com", with password "12345678"
+    Given I am logged in as user with email "brett@example.com", with password "12345678"
     And I am on the "Show" page for article "Ruby is on Fire"
     And I click the very stylish "Edit article" button
     Then I should be on the "Edit" page for article "Ruby is on Fire"

@@ -824,3 +824,18 @@ section#main {
 
     background: #000;
 }
+
+// Bryan: corrections to twitter-typeahead
+.tokenfield .twitter-typeahead input.tt-hint {
+  padding: 6px 5px;
+  overflow: none;
+  height: auto;
+}
+
+.tokenfield .twitter-typeahead input.token-input {
+  padding-left: 5px;
+}
+
+.tokenfield div.token {
+  margin-top: 6px;
+}

@@ -2,10 +2,6 @@ Given /^my YouTube Channel ID with (some|no) videos in it/ do |qty|
   step %Q{user "me" has YouTube Channel ID with #{qty} videos in it}
 end
 
-Given /I open my browser/ do
-  Capybara.current_driver = :selenium
-end
-
 Given /my YouTube channel is connected/ do
   step 'user "me" has YouTube Channel connected'
 end

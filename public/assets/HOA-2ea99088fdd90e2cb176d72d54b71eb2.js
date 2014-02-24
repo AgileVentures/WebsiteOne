@@ -1,0 +1,1 @@
+$(function(){function a(){var a=$("#HOA-placeholder");gapi.hangout.render("HOA-placeholder",{topic:a.data("hoa-title"),render:"createhangout",hangout_type:"onair",initial_apps:[{app_type:"ROOM_APP"}]})}$(document).ready(a),$(document).on("page:load",a)});
