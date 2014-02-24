@@ -15,6 +15,10 @@ Feature: Manage Document
       | Guides        | My guide to      | hello mars  |
       | Documentation | My documentation | hello world |
 
+    And the following revisions exist
+      | title         | revisions  |
+      | Guides        | 1          |
+      | Documentation | 3          |
 
   Scenario: Render of list documents
     Given I am on the "Show" page for project "hello world"
@@ -144,3 +148,7 @@ Feature: Manage Document
     Given I am on the "Show" page for project "hello world"
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
+
+  Scenario: Document should have a history of changes 
+    Given I am on the "Show" page for document "Guides"
+    Then I should see "Revisions"

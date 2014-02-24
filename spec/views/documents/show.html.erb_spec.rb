@@ -30,6 +30,12 @@ describe "documents/show" do
   #  rendered.should have_content('Title')
   #  rendered.should have_content('MyText')
   #end
+
+  it 'should render document revisions history' do
+    render
+    rendered.should have_content 'Revisions'
+  end
+  
   context 'document is root' do
     before do
       assign :document, @document

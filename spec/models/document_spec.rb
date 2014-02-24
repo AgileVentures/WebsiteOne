@@ -1,9 +1,19 @@
 require 'spec_helper'
 
 describe Document do
+
+  before(:all) do
+    class Document < ActiveRecord::Base
+      has_paper_trail
+    end
+  end
+
+  end
   before do
     @document = FactoryGirl.create(:document)
   end
+
+  it { should be_versioned }
 
   context 'return false on invalid inputs' do
     it 'blank Title' do

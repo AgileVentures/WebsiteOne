@@ -21,6 +21,18 @@ Given(/^the following documents exist:$/) do |table|
   end
 end
 
+Given(/^the following revisions exist$/) do |table|
+  table is a | Guides        | 1          |
+    table.hashes.each do |hash|
+    hash[:revisions].to_i.times do |number|
+      doc = Document.find_by_title(hash[:title])
+      doc.update(:body => "New content #{number}")
+      doc.save
+      puts [doc.title, doc.body].join(' ')
+    end
+  end
+end
+
 When(/^I click the "([^"]*)" button for document "([^"]*)"$/) do |button, document_name|
   document = Document.find_by_title(document_name)
   if document
