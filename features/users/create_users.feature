@@ -14,6 +14,7 @@ Scenario: Let a visitor register as a site user
   Then I should be on the "home" page
   And I should see a successful sign up message
   And I should receive a "Welcome to AgileVentures.org" email
+  And replies to the email should go to "info@agileventures.org"
 
 
 Scenario: User signs up with valid data
