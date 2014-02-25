@@ -1,5 +1,5 @@
 class Mailer < ActionMailer::Base
-  default from: 'info@agileventures.org'
+  default from: 'info@agileventures.org', reply_to: 'info@agileventures.org'
 
   def contact_form(contact_form)
     @contact_form = contact_form
@@ -15,6 +15,6 @@ class Mailer < ActionMailer::Base
 
   def send_welcome_message(user)
     @user = user
-    mail(reply_to: :from, to: user.email, subject: 'Welcome to AgileVentures.org')
+    mail(to: user.email, subject: 'Welcome to AgileVentures.org')
   end
 end
