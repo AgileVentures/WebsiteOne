@@ -28,7 +28,7 @@ Given(/^the following revisions exist$/) do |table|
       doc = Document.find_by_title(hash[:title])
       doc.update(:body => "New content #{number}")
       doc.save
-      puts [doc.title, doc.body].join(' ')
+      #puts [doc.title, doc.body].join(' ')
     end
   end
 end
