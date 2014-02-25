@@ -1,0 +1,2 @@
+module EventInstancesHelper
+end

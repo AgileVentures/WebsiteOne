@@ -1,0 +1,9 @@
+<%= link_to 'New Event', new_event_path %>
+<br/>
+<br/>
+<br/>
+<% @events.each do |event| %>
+    <%= link_to event.name, edit_event_path(event) %>
+    <br/>
+    <br/>
+<% end %>

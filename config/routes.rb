@@ -1,4 +1,5 @@
 WebsiteOne::Application.routes.draw do
+
   get "users/index"
   root 'visitors#index'
   mount Mercury::Engine => '/'
@@ -10,8 +11,7 @@ WebsiteOne::Application.routes.draw do
   #get 'users/password' => redirect('/404.html')
   get 'users/show/:id', to: 'users#show', as: 'users_show'
 
-  get "/404", :to => "errors#not_found"
-  get "/mamama", :to => "errors#unacceptable"
+  get '/404', :to => 'errors#not_found'
   get '/internal_server_error', :to => 'errors#internal_error'
 
   resources :projects do
@@ -26,7 +26,9 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
+
   resources :events
+  #get 'events/:format', to: 'events#index'
   resources :event_instances
 
   post 'preview/article', to: 'articles#preview'

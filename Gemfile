@@ -32,6 +32,8 @@ gem 'acts-as-taggable-on' # Add tags to objects. Used on Projects
 gem 'geocoder' # geocoding
 gem 'paper_trail', '~> 3.0.0'
 gem 'verbs'
+gem 'ice_cube'
+gem 'squeel'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

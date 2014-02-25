@@ -1,0 +1,29 @@
+<div class="span3 pull-right">
+  <%= link_to 'Back To Calendar', root_path, :class => 'btn btn-danger' %>
+  <%= link_to 'Edit', edit_event_path(event), :class => 'btn btn-primary' %>
+</div>
+<strong>Name:</strong>
+<%= event.name %>
+<br/>
+<strong>Description:</strong>
+<%= event.description %>
+<br/>
+<strong>From:</strong>
+<%= event.from_date %>
+<%= event.from_time %>
+<br/>
+<strong>To:</strong>
+<%= event.to_date %>
+<%= event.to_time %>
+<br/>
+<strong>Duration:</strong>
+<%= event.schedule.duration %>
+<br/>
+<strong>Schedule:</strong>
+<%= event.schedule %>
+<br/>
+<strong>Upcomming Events:</strong>
+<% event.schedule.first(5).each do |e| %>
+    <br/>
+    <%= e.to_s %>
+<% end %>

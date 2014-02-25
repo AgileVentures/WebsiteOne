@@ -5,7 +5,7 @@ class EventInstance
   delegate :url_helpers, to: 'Rails.application.routes'
   attr_accessor :title, :start, :end, :allDay, :event_id, :color, :url, :background_color, :textColor
 
-  def self.occurrences_between(begin_date, end_date, calendar_ids = '')
+  def self.occurrences_between(begin_date, end_date)
     # Using Squeel
     # line 1 = Event doesn't repeat, but ends in window
     # line 2 = Event doesn't repeat, but starts in window
