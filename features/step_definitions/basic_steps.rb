@@ -171,8 +171,6 @@ Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, con
 end
 
 Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
-  puts url_for_title(action: action.downcase, controller: controller, title: title)
-
   visit url_for_title(action: action, controller: controller, title: title)
 end
 
@@ -185,7 +183,7 @@ end
 
 Then(/^show me the page$/) do
   save_and_open_page
-  puts page.body
+  #puts page.body
 end
 When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option

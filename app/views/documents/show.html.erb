@@ -13,7 +13,7 @@
   <div id="doc-overview">
     <h1><div style="display: inline;" id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div></h1>
     <div class="doc-status-text">
-      <div><%= "#{@document.versions.last.event.titleize}d #{time_ago_in_words(@document.created_at)} ago" %> by <%=user_details(@document.versions.last.version_author)%></div>
+      <div><%= metadata %></div>
     </div>
   </div>
   <div id="doc-side-panel">

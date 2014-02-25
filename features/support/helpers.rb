@@ -19,7 +19,6 @@ module Helpers
   end
 
   def create_visitor
-    #@visitor =FactoryGirl(:user)
     @visitor ||= { :email => 'example@example.com',
                    :password => 'changemesomeday',
                    :password_confirmation => 'changemesomeday',
@@ -77,13 +76,6 @@ module Helpers
 
   def all_users
     @all_users = User.all
-    @all_users.each do |user|
-      #user.geocode
-      puts user.email
-      puts user.last_sign_in_ip
-      puts user.longitude
-      puts user.country
-    end
   end
 end
 
