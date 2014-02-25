@@ -4,13 +4,21 @@ describe "documents/show" do
   before(:each) do
     @user = mock_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org', display_name: 'John Simpson')
     @project = assign(:project, stub_model(Project, :id => 1, :title => "Project1", :created_at => Time.now))
+    @version = stub_model(PaperTrail::Version,
+                          item_type: "Document",
+                          event: "create",
+                          whodunnit: @user.id,
+                          object: nil,
+                          created_at: "2014-02-25 11:50:56"
+    )
     @document = stub_model(Document,
                            :user => @user,
                            :id => 1,
                            :title => "Title",
                            :body => "Content",
                            :project_id => 1 ,
-                           :created_at => Time.now
+                           :created_at => Time.now,
+                           :versions => [@version]
     )
 
     @document_child = stub_model(Document,
@@ -19,9 +27,10 @@ describe "documents/show" do
                                  :body => "Child content",
                                  :project_id => 1,
                                  :parent_id => 1,
-                                 :created_at => Time.now
+                                 :created_at => Time.now,
+                                 :versions => [@version]
     )
-    assign(:user, @user)
+
     view.stub(:created_by).and_return(@created_by)
   end
   #
@@ -31,10 +40,7 @@ describe "documents/show" do
   #  rendered.should have_content('MyText')
   #end
 
-  it 'should render document revisions history' do
-    render
-    rendered.should have_content 'Revisions'
-  end
+
   
   context 'document is root' do
     before do
@@ -48,17 +54,26 @@ describe "documents/show" do
       rendered.should have_content @document.body
       rendered.should have_content @document_child.title
     end
+    it 'should render document revisions history' do
+      render
+      rendered.should have_content 'Revisions'
+    end
   end
 
   context 'document is a child' do
     before do
       assign :document, @document_child
-      assign :children, [] 
+      assign :children, []
+      assign :versions, [ @version ]
     end
     it 'render content of document' do
       render
       rendered.should have_content @document_child.title
       rendered.should have_content @document_child.body
+    end
+    it 'should render document revisions history' do
+      render
+      rendered.should have_content 'Revisions'
     end
   end
 end

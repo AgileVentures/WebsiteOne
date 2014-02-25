@@ -31,6 +31,7 @@ gem 'coderay' # syntax highlighting for markdown code blocks
 gem 'acts-as-taggable-on' # Add tags to objects. Used on Projects
 gem 'geocoder' # geocoding
 gem 'paper_trail', '~> 3.0.0'
+gem 'verbs'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
