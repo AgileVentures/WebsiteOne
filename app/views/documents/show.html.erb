@@ -50,4 +50,11 @@
     </ul>
   <% end %>
   <br />
+  <% unless @document.versions.empty?  %>
+    <h4>Revisions</h4>
+    <% @document.versions.each do |version| %>
+      <% who = User.find version.whodunnit.to_i %>
+      <%= version.created_at %> <%= who.slug %> <%= version.event %>d <b>"<%= @document.title %>"</b><br/>
+    <% end %>
+              <% end %>
 </div>

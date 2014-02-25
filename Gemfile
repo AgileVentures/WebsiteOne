@@ -27,6 +27,7 @@ gem 'google-analytics-rails'
 gem 'friendly_id', '~> 5.0.0' # Bryan: for more REST-ful routes, use human-readable IDs
 gem 'colored' # colorizing console
 gem 'acts-as-taggable-on'
+gem 'paper_trail', '~> 3.0.0'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

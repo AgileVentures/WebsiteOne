@@ -8,7 +8,6 @@ describe Document do
     end
   end
 
-  end
   before do
     @document = FactoryGirl.create(:document)
   end
@@ -20,6 +19,7 @@ describe Document do
       @document.title = ''
       expect(@document.save).to be_false
     end
+    
     it 'blank project' do
       @document.project_id = nil
       expect(@document.save).to be_false
@@ -32,4 +32,3 @@ describe Document do
     end
   end
 end
-
