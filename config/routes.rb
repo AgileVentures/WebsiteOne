@@ -26,6 +26,9 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
+  resources :events
+  resources :event_instances
+
   post 'preview/article', to: 'articles#preview'
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles'
   resources :articles
