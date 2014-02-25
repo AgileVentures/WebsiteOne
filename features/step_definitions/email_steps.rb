@@ -11,3 +11,8 @@ end
 And /^the email queue is clear$/ do
   ActionMailer::Base.deliveries.clear
 end
+
+When(/^replies to that email should go to "([^"]*)"$/) do |email|
+  @email = ActionMailer::Base.deliveries.last
+  @email.reply_to.should include email
+end

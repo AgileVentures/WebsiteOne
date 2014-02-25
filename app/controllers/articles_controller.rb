@@ -4,9 +4,9 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:tag].present?
-      @articles = Article.tagged_with(params[:tag]).order('created_at ASC')
+      @articles = Article.tagged_with(params[:tag]).order('created_at DESC')
     else
-      @articles = Article.order('created_at ASC')
+      @articles = Article.order('created_at DESC')
     end
   end
 

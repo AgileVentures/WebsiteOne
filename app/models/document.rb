@@ -4,6 +4,7 @@ class Document < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :user
+  has_paper_trail
 
   acts_as_tree
   validates :title, :project_id, presence: true
