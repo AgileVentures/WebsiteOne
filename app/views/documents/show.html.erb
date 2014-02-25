@@ -56,7 +56,7 @@
     <h4>Revisions</h4>
     <% @document.versions.each do |version| %>
      <%= user_details(version.whodunnit.to_i) %>
-          <%= version.event %>d <b>"<%= @document.title %>"</b>  <%= time_ago_in_words(version.created_at)%>   <br/>
+          <%= version.event %>d <b>"<%= @document.title %>"</b>  <%= time_ago_in_words(version.created_at)%> ago  <br/>
     <% end %>
   <% end %>
 </div>
