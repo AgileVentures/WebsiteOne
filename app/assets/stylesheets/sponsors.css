@@ -7,9 +7,9 @@
     padding-top: 4px;
     text-decoration: underline;
 }
-#sponsorsBar .btn {
+/*#sponsorsBar .btn {
     float: right;
-}
+}*/
 #sponsorsBar .docLink {
     font-size: 10px;
     font-weight: normal;
@@ -78,6 +78,10 @@
     padding-top: 15px;
 }
 
-#ourSponsors {
+/*#ourSponsors {
     display: block;
+}*/
+
+#ourSponsors {
+  text-align: center;
 }
