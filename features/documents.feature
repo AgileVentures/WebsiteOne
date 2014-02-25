@@ -15,11 +15,15 @@ Feature: Manage Document
       | Guides        | My guide to      | hello mars  |
       | Documentation | My documentation | hello world |
 
+    And the following revisions exist
+      | title         | revisions  |
+      | Guides        | 1          |
+      | Documentation | 3          |
+    
     And the following sub-documents exist:
       | title   | body         | created_at          | project    |
       | SubDoc1 | Blog One     | created 3 days ago  | hello mars |
       | SubDoc2 | Another Blog | created 10 days ago | hello mars |
-
 
   Scenario: Render of list documents
     Given I am on the "Show" page for project "hello world"
@@ -45,10 +49,11 @@ Feature: Manage Document
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
-    When I click the "Guides" link within the sidebar
+  #???
+    When I click the sidebar link "Guides"
     Then I should be on the "Show" page for document "Guides"
     And I should see "Guides"
-    And I should see "My guide to"
+    And I should see "New content 0"
     And I should see a link to "Edit" page for document "Guides"
 
 
@@ -146,3 +151,8 @@ Feature: Manage Document
     Given I am on the "Show" page for project "hello world"
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
+
+  Scenario: Document should have a history of changes 
+    Given I am on the "Show" page for document "Documentation"
+    Then I should see "Revisions"
+    And I should see 4 revisions for "Guides"

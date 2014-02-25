@@ -171,6 +171,8 @@ Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, con
 end
 
 Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
+  puts url_for_title(action: action.downcase, controller: controller, title: title)
+
   visit url_for_title(action: action, controller: controller, title: title)
 end
 

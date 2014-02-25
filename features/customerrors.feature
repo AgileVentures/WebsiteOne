@@ -4,6 +4,8 @@ Feature:
   I would like to have a comprehensible error message
   https://www.pivotaltracker.com/s/projects/982890/stories/64956494
 
+  Background:
+    Given App is in production
 
   @custom-errors @allow-rescue
   Scenario: 404 page

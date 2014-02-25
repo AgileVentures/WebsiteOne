@@ -13,7 +13,7 @@
   <div id="doc-overview">
     <h1><div style="display: inline;" id="document_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @document.title %></div></h1>
     <div class="doc-status-text">
-      <div><%= "Created #{time_ago_in_words(@document.created_at)} ago" %> by <%= @document.user.display_name %></div>
+      <div><%= "#{@document.versions.last.event.titleize}d #{time_ago_in_words(@document.created_at)} ago" %> by <%=user_details(@document.versions.last.version_author)%></div>
     </div>
   </div>
   <div id="doc-side-panel">
@@ -52,4 +52,11 @@
     </ul>
   <% end %>
   <br />
+  <% unless @document.versions.empty?  %>
+    <h4>Revisions</h4>
+    <% @document.versions.each do |version| %>
+     <%= user_details(version.whodunnit.to_i) %>
+          <%= version.event %>d <b>"<%= @document.title %>"</b>  <%= time_ago_in_words(version.created_at)%> ago  <br/>
+    <% end %>
+  <% end %>
 </div>
