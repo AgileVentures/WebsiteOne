@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "users/show.html.erb" do
 	before :each do
     now = DateTime.now
-    thirty_days_ago = (now - 30)
+    thirty_days_ago = (now - 33)
     @projects = [
         mock_model(Project, friendly_id: 'title-1', title: 'Title 1'),
         mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),

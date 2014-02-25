@@ -16,11 +16,13 @@
 //= require bootstrap
 //= require nprogressbar
 //= require 404
+//= require bootstrap-tokenfield.min
+//= require typeahead
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
 $(function() {
-  function ready() {
+  $.fn.BryanHATESTHIS = function () {
     // Bryan: run these functions only in the home page
     if (window.location.pathname === '/') {
       var TxtRotate = function(el, toRotate, period) {
@@ -117,6 +119,7 @@ $(function() {
 
     // Bryan: catch scroll events
     $(window).scroll(function() {
+
       if ($(this).scrollTop() > thresholdTop) {
         // add affix behaviour if scroll is above threshold
         if (!affixedNav.hasClass('affix')) {
@@ -129,6 +132,8 @@ $(function() {
         header.css({ 'margin-bottom': 0 });
       }
     });
+
+    $(window).scroll();
   }
 
 
@@ -137,6 +142,6 @@ $(function() {
   $(document).on('page:change',  function() { NProgress.done(); });
   $(document).on('page:restore', function() { NProgress.remove(); });
 
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
+  $(document).ready($.fn.BryanHATESTHIS);
+  $(document).on('page:load', $.fn.BryanHATESTHIS);
 });
