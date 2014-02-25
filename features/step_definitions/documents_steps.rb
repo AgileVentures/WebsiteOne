@@ -22,7 +22,7 @@ Given(/^the following documents exist:$/) do |table|
 end
 
 Given(/^the following revisions exist$/) do |table|
-  table is a | Guides        | 1          |
+
     table.hashes.each do |hash|
     hash[:revisions].to_i.times do |number|
       doc = Document.find_by_title(hash[:title])
@@ -67,4 +67,8 @@ When(/^I click the sidebar link "([^"]*)"$/) do |link|
   within('#sidebar') do
     click_link_or_button link
   end
+end
+When(/^I should see ([^"]*) revisions for "([^"]*)"$/) do |revisions, document|
+  doc = Document.find_by_title(document)
+  expect doc.versions.count == revisions
 end

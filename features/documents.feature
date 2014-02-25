@@ -73,6 +73,7 @@ Feature: Manage Document
     Given the document "Guides" has a child document with title "Howto"
     Given I am logged in
     And I am on the "Show" page for document "Howto"
+    #Then I should see 1 revisions for "Howto"
     When I click the very stylish "Edit" button
     Then I should be in the Mercury Editor
 
@@ -150,5 +151,6 @@ Feature: Manage Document
     Then I should see "You do not have the right privileges to complete action."
 
   Scenario: Document should have a history of changes 
-    Given I am on the "Show" page for document "Guides"
+    Given I am on the "Show" page for document "Documentation"
     Then I should see "Revisions"
+    And I should see 4 revisions for "Guides"
