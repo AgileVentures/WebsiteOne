@@ -1,21 +1,21 @@
-class Event < ActiveRecord::Base
-  include IceCube
-  validates :name, :from_date, :to_date, :time_zone, presence: true
-  validates :from_time,:to_time, presence: true, :if => :not_all_day?
-
-  validates :repeats_every_n_days, :presence => true, :if => lambda { |e| e.repeats == "daily" }
-  validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
-  validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == "weekly" }
-  validates :repeats_every_n_months, :presence => true, :if => lambda { |e| e.repeats == "monthly" }
-  validates :repeats_monthly, :presence => true, :if => lambda { |e| e.repeats == "monthly" }
-  validate :must_have_at_least_one_repeats_monthly_each_days_of_the_month, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'each' }
-  validate :must_have_at_least_one_repeats_monthly_on_ordinals, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'on' }
-  validate :must_have_at_least_one_repeats_monthly_on_days_of_the_week, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'on' }
-  validates :repeats_every_n_years, :presence => true, :if => lambda { |e| e.repeats == "yearly" }
-  validate :must_have_at_least_one_repeats_yearly_each_months_of_the_year, :if => lambda { |e| e.repeats == "yearly" }
-  validate :must_have_at_least_one_repeats_yearly_on_ordinals, :if => lambda { |e| e.repeats == "yearly" && e.repeats_yearly_on }
-  validate :must_have_at_least_one_repeats_yearly_on_days_of_the_week, :if => lambda { |e| e.repeats == "yearly" && e.repeats_yearly_on }
-  validate :from_must_come_before_to
+module IceCubeMethods
+  #def self.included(base)
+  #
+  #  base.send :validates, :repeats, :presence => true
+  #  base.send :validates, :repeats_every_n_days, :presence => true, :if => lambda { |e| e.repeats == "daily" }
+  #  base.send :validates, :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
+  #  base.send :validate, :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == "weekly" }
+  #  base.send :validates, :repeats_every_n_months, :presence => true, :if => lambda { |e| e.repeats == "monthly" }
+  #  base.send :validates, :repeats_monthly, :presence => true, :if => lambda { |e| e.repeats == "monthly" }
+  #  base.send :validate, :must_have_at_least_one_repeats_monthly_each_days_of_the_month, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'each' }
+  #  base.send :validate, :must_have_at_least_one_repeats_monthly_on_ordinals, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'on' }
+  #  base.send :validate, :must_have_at_least_one_repeats_monthly_on_days_of_the_week, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'on' }
+  #  base.send :validates, :repeats_every_n_years, :presence => true, :if => lambda { |e| e.repeats == "yearly" }
+  #  base.send :validate, :must_have_at_least_one_repeats_yearly_each_months_of_the_year, :if => lambda { |e| e.repeats == "yearly" }
+  #  base.send :validate, :must_have_at_least_one_repeats_yearly_on_ordinals, :if => lambda { |e| e.repeats == "yearly" && e.repeats_yearly_on }
+  #  base.send :validate, :must_have_at_least_one_repeats_yearly_on_days_of_the_week, :if => lambda { |e| e.repeats == "yearly" && e.repeats_yearly_on }
+  #  base.send :validate, :from_must_come_before_to
+  #end
 
   RepeatsOptions = ['never','daily','weekly','monthly','yearly']
   RepeatEndsOptions = ['never','on']
@@ -25,16 +25,6 @@ class Event < ActiveRecord::Base
   Ordinals = [1,2,3,4,-1]
   HumanOrdinals = ['first','second','third','fourth','last']
   MonthsOfTheYear = %w[january february march april may june july august september october november december]
-
-
-
-  def not_all_day?
-    if is_all_day
-      return false
-    else
-      return true
-    end
-  end
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
     self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DaysOfTheWeek).map { |r| 2**DaysOfTheWeek.index(r) }.inject(0, :+)
@@ -165,7 +155,6 @@ class Event < ActiveRecord::Base
     return s
   end
 
-
   private
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
@@ -214,6 +203,5 @@ class Event < ActiveRecord::Base
       errors.add(:to_date, "must come after the from date")
     end
   end
-
 
 end

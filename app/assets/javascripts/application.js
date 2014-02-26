@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require bootstrap-datetimepicker
 //= require nprogressbar
 //= require 404
 //= require bootstrap-tokenfield.min
