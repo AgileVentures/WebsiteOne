@@ -36,7 +36,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     if @event.save
       flash[:notice] = 'Event Created'
-      redirect_to root_path
+      redirect_to events_path
     else
       flash[:notice] = @event.errors.full_messages.to_sentence
       render :new
@@ -46,12 +46,12 @@ class EventsController < ApplicationController
   def update
     @event.update_attributes(event_params)
     flash[:notice] = 'Event Updated'
-    redirect_to root_path
+    redirect_to events_path
   end
 
   def destroy
     @event.destroy
-    redirect_to root_path
+    redirect_to events_path
   end
 
 
