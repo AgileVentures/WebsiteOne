@@ -62,6 +62,11 @@
     text-decoration: underline;
 }
 
+#sponsorsBar .sponsorsTier img {
+    display: table-cell;
+    vertical-align: middle;
+}
+
 #sponsorsBar .sponsorsTier input[type="email"] {
     font-size: 12px;
     width: 130px;
@@ -69,6 +74,8 @@
 #sponsorsBar .sponsorsTier .sponsorStandinMedal {
     height: 160px;
     width: 205px;
+    display: table-cell;
+    vertical-align: middle;
 }
 #sponsorsBar .sponsorsTier.silver .sponsorStandinMedal {
     background: #354a57;
