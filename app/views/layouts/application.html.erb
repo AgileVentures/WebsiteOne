@@ -14,7 +14,7 @@
 <div id="wrap">
   <section id="main" >
     <% if current_page? root_path %>
-        <%= render 'layouts/content' %>
+        <%= yield %>
     <% elsif content_for?(:content) %>
       <div class="container">
         <div class="col-lg-12"> 
