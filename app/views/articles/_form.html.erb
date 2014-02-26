@@ -1,0 +1,57 @@
+<%= form_for article do |f| %>
+  <% errored = article.errors.messages[:title].present? %>
+  <div class="form-group <%= 'has-error has-feedback' if errored %>">
+    <%= f.label :title, class: 'control-label' %>
+    <%= f.text_field :title, class: 'form-control' %>
+    <% if errored %>
+      <span class="help-block control-label"><%= article.errors.messages[:title].join(', ') %></span>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <label for="tag_list" class="control-label">Tags</label>
+    <input type="text" class="form-control" id="article_tag_list" name="article[tag_list]" value="<%= article.tag_list.join(',') %>" />
+  </div>
+
+  <% errored = article.errors.messages[:content].present? %>
+  <div class="form-group <%= 'has-error has-feedback' if errored %>">
+    <%= f.label :content, class: 'control-label' %>
+    <%= f.text_area :content, rows: 25, class: 'form-control md-edit' %>
+    <% if errored %>
+    <span class="help-block control-label"><%= article.errors.messages[:content].join(', ') %></span>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit (article.new_record? ? 'Create' : 'Update'), class: 'btn btn-default' %>
+    <button formaction="<%= preview_articles_path %>" class="btn btn-default" formtarget="_blank" >Preview</button>
+    <%= link_to 'Back', (article.new_record? ? articles_path : article_path(article)), class: 'btn btn-default' %>
+  </div>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $('#article_tag_list').tokenfield({
+    typeahead: {
+      name: 'tags',
+      local: <%= raw standard_tags %>
+    }
+  });
+  $(document).delegate('.md-edit', 'keydown', function(e) {
+    var keyCode = e.keyCode || e.which;
+
+    if (keyCode == 9) {
+      e.preventDefault();
+      var start = $(this).get(0).selectionStart;
+      var end = $(this).get(0).selectionEnd;
+
+      // set textarea value to: text before caret + tab + text after caret
+      $(this).val($(this).val().substring(0, start)
+          + "\t"
+          + $(this).val().substring(end));
+
+      // put caret at right position again
+      $(this).get(0).selectionStart =
+          $(this).get(0).selectionEnd = start + 1;
+    }
+  });
+</script>

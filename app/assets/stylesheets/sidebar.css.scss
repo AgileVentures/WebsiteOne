@@ -1,21 +1,19 @@
 @import "variables";
 @import "mixins";
 
-#with-sidebar-container {
-  position: relative;
-}
-
 #not-sidebar-content {
   width: 100%;
   height: 100%;
   margin-left: 10px;
   padding: 15px;
+//  padding-left: 30px;
 //  @include css-shadow(0px, 0px, 15px, -5px, black);
 }
 
 #sidebar {
+  padding: 10px;
   margin-top: 20px;
-  @include css-shadow(0px, 0px, 15px, -5px, black);
+  background: $highlight-color;
 }
 
 #sidebar * {
@@ -25,15 +23,6 @@
 
 #sidebar span {
   font-size: 120%;
-}
-
-#sidebar a {
-  color: $sidebar-a-color;
-}
-
-#sidebar a:hover, a:active {
-  color: $sidebar-a-hover-color;
-  text-decoration: none;
 }
 
 #sidebar h3 {
@@ -65,6 +54,13 @@
 }
 
 #sidebar .focused {
+  color: $link-hover-color;
+  font-weight: bold;
+}
+
+.sidebar-selected {
+  display: inline;
+  color: $link-hover-color;
   font-weight: bold;
 }
 

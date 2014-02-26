@@ -1,4 +1,6 @@
-<div id="all_members" >
+<% provide :title, 'Members' %>
+
+<div id="all_members">
   <h1>All members</h1>
   <% @users.each_slice(3) do |slice| %>
       <ul id="user-container" class="media-list">
@@ -9,7 +11,7 @@
               </a>
               <div class="media-body">
                 <h4 class="media-heading"><a href="<%= users_show_path user %>"><%= user.display_name %></a></h4>
-                <p><%= user.country if user.country.present? %></p>
+                <p style="margin-left: 8px;"><%= user.country if user.country.present? %></p>
               </div>
             </li>
         <% end %>

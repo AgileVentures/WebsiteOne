@@ -13,5 +13,4 @@ Feature: Guides
 		Then I should be on the static "Getting Started" page
 		And I should see "Getting Started"
         And I should see "Remote Pair Programming"
-        And I should see "Guides"
 #		And I should see a list of guides

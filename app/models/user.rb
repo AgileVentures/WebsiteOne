@@ -14,15 +14,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  after_validation :geocode
-
+  #after_create Mailer.send_welcome_mail()
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
   validates :email, uniqueness: true
+  after_validation :geocode
   has_many :authentications, dependent: :destroy
   has_many :projects
   has_many :documents
+  has_many :articles
 
 
 

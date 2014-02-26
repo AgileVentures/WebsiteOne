@@ -18,7 +18,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
-    @children = @document.children
+    @children = @document.children.order(created_at: :desc)
   end
 
   # GET /documents/new
@@ -104,6 +104,8 @@ class DocumentsController < ApplicationController
       @parent = Document.find(params[:parent_id])
     end
   end
+
+
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def document_params

@@ -115,7 +115,7 @@ Feature: Create and maintain projects
   Scenario: opens "Show" page with projects details
     Given I am logged in
     And I am on the "Projects" page
-    When I click "hello saturn" in the list of projects
+    When I click "hello saturn" within the List of Projects
     Then I should see:
       | Text                   |
       | hello saturn           |
