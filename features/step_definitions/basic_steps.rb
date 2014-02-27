@@ -183,7 +183,7 @@ end
 
 Then(/^show me the page$/) do
   save_and_open_page
-  puts page.body
+  #puts page.body
 end
 When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
