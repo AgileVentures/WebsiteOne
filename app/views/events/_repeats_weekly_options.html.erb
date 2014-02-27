@@ -1,5 +1,4 @@
 <fieldset class="event_option" id="repeats_weekly_options">
-  <%= f.number_field :repeats_every_n_weeks %>
   <div class="control-group">
     <label class="control-label">Each</label>
     <div class="controls">
@@ -9,7 +8,7 @@
               <%= day_of_the_week.humanize %>
           <% end %>
       <% end %>
-      <%= hidden_field_tag "event[repeats_weekly_each_days_of_the_week][]", "" %>
+      <%= hidden_field_tag 'event[repeats_weekly_each_days_of_the_week][]', '' %>
     </div>
   </div>
 </fieldset>

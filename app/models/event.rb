@@ -17,15 +17,12 @@ class Event < ActiveRecord::Base
   validate :must_have_at_least_one_repeats_yearly_on_days_of_the_week, :if => lambda { |e| e.repeats == "yearly" && e.repeats_yearly_on }
   validate :from_must_come_before_to
 
-  RepeatsOptions = ['never','daily','weekly','monthly','yearly']
+  RepeatsOptions = [ 'never','weekly' ]
   RepeatEndsOptions = ['never','on']
   RepeatMonthlyOptions = ['each','on']
-  DaysOfTheWeek = %w[sunday monday tuesday wednesday thursday friday saturday]
-  DaysOfTheMonth = (1..31).to_a
+  DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
   Ordinals = [1,2,3,4,-1]
   HumanOrdinals = ['first','second','third','fourth','last']
-  MonthsOfTheYear = %w[january february march april may june july august september october november december]
-
 
 
   def not_all_day?
