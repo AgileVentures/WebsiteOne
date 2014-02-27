@@ -1,9 +1,33 @@
 module Helpers
+
+  def test_ip_address
+    '127.0.0.1'
+  end
+
+  def test_user_password
+    '12345678'
+  end
+
+  def default_test_user_details
+    {
+        email: Faker::Internet.email,
+        last_sign_in_ip: test_ip_address,
+        password: test_user_password,
+        password_confirmation: test_user_password,
+        display_profile: true
+    }
+  end
+
   def create_visitor
-    #@visitor =FactoryGirl(:user)
-    @visitor ||= { :email => "example@example.com",
-                   :password => "changeme",
-                   :password_confirmation => "changeme" }
+    @visitor ||= { :email => 'example@example.com',
+                   :password => 'changemesomeday',
+                   :password_confirmation => 'changemesomeday',
+                   :slug => 'slug-ma'}
+  end
+
+  def create_test_user(options = {})
+    options = default_test_user_details.merge options
+    User.create!(options)
   end
 
   def find_user
@@ -48,6 +72,10 @@ module Helpers
       fill_in 'user_password', :with => @visitor[:password]
       click_button 'Sign in'
     end
+  end
+
+  def all_users
+    @all_users = User.all
   end
 end
 

@@ -65,7 +65,7 @@ describe 'layouts/application.html.erb' do
 
     it 'should render login & sign-up links' do
       render
-      rendered.within('div.navbar') do |header|
+      rendered.within('header#main_header') do |header|
         header.should have_link 'Log in', :href => new_user_session_path
         header.should have_link 'Sign up', :href => new_user_registration_path
       end

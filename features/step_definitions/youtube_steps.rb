@@ -2,10 +2,6 @@ Given /^my YouTube Channel ID with (some|no) videos in it/ do |qty|
   step %Q{user "me" has YouTube Channel ID with #{qty} videos in it}
 end
 
-Given /I open my browser/ do
-  Capybara.current_driver = :selenium
-end
-
 Given /my YouTube channel is connected/ do
   step 'user "me" has YouTube Channel connected'
 end
@@ -17,7 +13,7 @@ end
 
 
 Then /I should( not)? see a list of my videos/ do |negative|
-  correct_number = Youtube.parse_response(@user_youtube_response).count if @user_youtube_response
+  correct_number = Youtube.parse_response(@user_youtube_response, nil).count if @user_youtube_response
   video_links = page.all(:css, '.yt_link')
   if negative
     expect(video_links).to have(0).items
