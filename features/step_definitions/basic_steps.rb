@@ -265,3 +265,9 @@ Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
         pending
     end
 end
+When(/^I should se buttons:$/) do |table|
+  table.hashes.each do |button|
+    page.should have_button(button)
+  end
+
+end
