@@ -124,7 +124,7 @@
     text-align: center;
     margin: 4px
 }
-.cbp-l-caption-buttonLeft: hover,.cbp-l-caption-buttonRight: hover {
+.cbp-l-caption-buttonLeft:hover,.cbp-l-caption-buttonRight:hover {
     background-color: #2578B3
 }
 .cbp-caption-fadeIn .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-minimal .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-moveRight .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-overlayBottom .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-overlayRightAlong .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-pushDown .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-pushTop .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-revealBottom .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-revealLeft .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-revealTop .cbp-l-caption-alignLeft .cbp-l-caption-body,.cbp-caption-zoom .cbp-l-caption-alignLeft .cbp-l-caption-body {
@@ -154,7 +154,7 @@
     -o-transform: translateY(100%);
     transform: translateY(100%)
 }
-.cbp-caption-minimal .cbp-caption: hover .cbp-l-caption-desc,.cbp-caption-minimal .cbp-caption: hover .cbp-l-caption-title {
+.cbp-caption-minimal .cbp-caption:hover .cbp-l-caption-desc,.cbp-caption-minimal .cbp-caption:hover .cbp-l-caption-title {
     opacity: 1;
     -webkit-transform: translateY(0);
     -moz-transform: translateY(0);
@@ -184,7 +184,7 @@
 .cbp-caption-minimal .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight,.cbp-caption-overlayBottom .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight,.cbp-caption-overlayBottomAlong .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight,.cbp-caption-overlayBottomPush .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight {
     left: 20px
 }
-.cbp-caption: hover .cbp-l-caption-alignCenter .cbp-l-caption-buttonLeft,.cbp-caption: hover .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight,.cbp-ie8 .cbp-l-caption-alignCenter .cbp-l-caption-buttonLeft,.cbp-ie8 .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight,.cbp-ie9 .cbp-l-caption-alignCenter .cbp-l-caption-buttonLeft,.cbp-ie9 .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight {
+.cbp-caption:hover .cbp-l-caption-alignCenter .cbp-l-caption-buttonLeft,.cbp-caption:hover .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight,.cbp-ie8 .cbp-l-caption-alignCenter .cbp-l-caption-buttonLeft,.cbp-ie8 .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight,.cbp-ie9 .cbp-l-caption-alignCenter .cbp-l-caption-buttonLeft,.cbp-ie9 .cbp-l-caption-alignCenter .cbp-l-caption-buttonRight {
     left: 0
 }
 .cbp-caption-pushTop .cbp-caption-activeWrap,.cbp-caption-pushTop .cbp-caption-defaultWrap {
@@ -198,13 +198,13 @@
     bottom: -100%;
     background: none repeat scroll 0 0 #282727
 }
-.cbp-caption-pushTop .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-pushTop .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 100%
 }
-.cbp-caption-pushTop .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-pushTop.cbp-ie8 .cbp-caption: hover .cbp-caption-defaultWrap,.cbp-caption-pushTop.cbp-ie9 .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-pushTop .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-pushTop.cbp-ie8 .cbp-caption:hover .cbp-caption-defaultWrap,.cbp-caption-pushTop.cbp-ie9 .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 0
 }
-.cbp-caption-pushTop.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-pushTop.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-pushTop.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-pushTop.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -100%
 }
 .cbp-caption-pushDown .cbp-caption-activeWrap,.cbp-caption-pushDown .cbp-caption-defaultWrap {
@@ -218,13 +218,13 @@
     bottom: 100%;
     background: none repeat scroll 0 0 #282727
 }
-.cbp-caption-pushDown .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-pushDown .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: -100%
 }
-.cbp-caption-pushDown .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-pushDown.cbp-ie8 .cbp-caption: hover .cbp-caption-defaultWrap,.cbp-caption-pushDown.cbp-ie9 .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-pushDown .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-pushDown.cbp-ie8 .cbp-caption:hover .cbp-caption-defaultWrap,.cbp-caption-pushDown.cbp-ie9 .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 0
 }
-.cbp-caption-pushDown.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-pushDown.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-pushDown.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-pushDown.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: 100%
 }
 .cbp-caption-revealBottom .cbp-caption-defaultWrap {
@@ -240,10 +240,10 @@
     z-index: 1;
     background: none repeat scroll 0 0 #282727
 }
-.cbp-caption-revealBottom .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-revealBottom .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 100%
 }
-.cbp-caption-revealBottom.cbp-ie8 .cbp-caption: hover .cbp-caption-defaultWrap,.cbp-caption-revealBottom.cbp-ie9 .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-revealBottom.cbp-ie8 .cbp-caption:hover .cbp-caption-defaultWrap,.cbp-caption-revealBottom.cbp-ie9 .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 0
 }
 .cbp-caption-revealTop .cbp-caption-defaultWrap {
@@ -259,10 +259,10 @@
     z-index: 1;
     background: none repeat scroll 0 0 #282727
 }
-.cbp-caption-revealTop .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-revealTop .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: -100%
 }
-.cbp-caption-revealTop.cbp-ie8 .cbp-caption: hover .cbp-caption-defaultWrap,.cbp-caption-revealTop.cbp-ie9 .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-revealTop.cbp-ie8 .cbp-caption:hover .cbp-caption-defaultWrap,.cbp-caption-revealTop.cbp-ie9 .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 0
 }
 .cbp-caption-overlayBottomReveal .cbp-caption-defaultWrap {
@@ -279,10 +279,10 @@
     height: 70px;
     background: none repeat scroll 0 0 #282727
 }
-.cbp-caption-overlayBottomReveal .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-overlayBottomReveal .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 70px
 }
-.cbp-caption-overlayBottomReveal.cbp-ie8 .cbp-caption: hover .cbp-caption-defaultWrap,.cbp-caption-overlayBottomReveal.cbp-ie9 .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-overlayBottomReveal.cbp-ie8 .cbp-caption:hover .cbp-caption-defaultWrap,.cbp-caption-overlayBottomReveal.cbp-ie9 .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 0
 }
 .cbp-caption-overlayBottomPush .cbp-caption-activeWrap,.cbp-caption-overlayBottomPush .cbp-caption-defaultWrap {
@@ -297,13 +297,13 @@
     height: 70px;
     background: none repeat scroll 0 0 #282727
 }
-.cbp-caption-overlayBottomPush .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-overlayBottomPush .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 70px
 }
-.cbp-caption-overlayBottomPush .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-overlayBottomPush.cbp-ie8 .cbp-caption: hover .cbp-caption-defaultWrap,.cbp-caption-overlayBottomPush.cbp-ie9 .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-overlayBottomPush .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-overlayBottomPush.cbp-ie8 .cbp-caption:hover .cbp-caption-defaultWrap,.cbp-caption-overlayBottomPush.cbp-ie9 .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 0
 }
-.cbp-caption-overlayBottomPush.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-overlayBottomPush.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-overlayBottomPush.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-overlayBottomPush.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -70px
 }
 .cbp-caption-overlayBottom .cbp-caption-activeWrap {
@@ -316,10 +316,10 @@
     -o-transition: bottom .6s cubic-bezier(.19,1,.22,1);
     transition: bottom .6s cubic-bezier(.19,1,.22,1)
 }
-.cbp-caption-overlayBottom .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-overlayBottom .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: 0
 }
-.cbp-caption-overlayBottom.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-overlayBottom.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -70px
 }
 .cbp-caption-moveRight .cbp-caption-activeWrap {
@@ -331,10 +331,10 @@
     -o-transition: left .6s cubic-bezier(.19,1,.22,1);
     transition: left .6s cubic-bezier(.19,1,.22,1)
 }
-.cbp-caption-moveRight .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-moveRight .cbp-caption:hover .cbp-caption-activeWrap {
     left: 0
 }
-.cbp-caption-moveRight.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-moveRight.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-moveRight.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-moveRight.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     left: -100%
 }
 .cbp-caption-revealLeft .cbp-caption-activeWrap {
@@ -346,24 +346,24 @@
     -o-transition: left .6s cubic-bezier(.19,1,.22,1);
     transition: left .6s cubic-bezier(.19,1,.22,1)
 }
-.cbp-caption-revealLeft .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-revealLeft .cbp-caption:hover .cbp-caption-activeWrap {
     left: 0
 }
-.cbp-caption-revealLeft.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-revealLeft.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-revealLeft.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-revealLeft.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     left: 100%
 }
 .cbp-caption-minimal .cbp-caption-activeWrap {
     background-color: rgba(0,0,0,.8);
     opacity: 0
 }
-.cbp-caption-minimal .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-minimal .cbp-caption:hover .cbp-caption-activeWrap {
     opacity: 1
 }
 .cbp-caption-minimal.cbp-ie8 .cbp-caption-activeWrap {
     background-color: #000;
     -ms-filter: "alpha(Opacity=0)"
 }
-.cbp-caption-minimal.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-minimal.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap {
     -ms-filter: "alpha(Opacity=90)"
 }
 .cbp-caption-fadeIn .cbp-caption-activeWrap {
@@ -383,10 +383,10 @@
     background-color: #000;
     -ms-filter: "alpha(Opacity=0)"
 }
-.cbp-caption-fadeIn .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-fadeIn .cbp-caption:hover .cbp-caption-activeWrap {
     opacity: 1
 }
-.cbp-caption-fadeIn.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-fadeIn.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     opacity: 0
 }
 .cbp-caption-overlayRightAlong .cbp-caption-activeWrap,.cbp-caption-overlayRightAlong .cbp-caption-defaultWrap {
@@ -401,13 +401,13 @@
     width: 50%;
     background: none repeat scroll 0 0 #282727
 }
-.cbp-caption-overlayRightAlong .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-overlayRightAlong .cbp-caption:hover .cbp-caption-defaultWrap {
     left: 25%
 }
-.cbp-caption-overlayRightAlong .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-overlayRightAlong.cbp-ie8 .cbp-caption: hover .cbp-caption-defaultWrap,.cbp-caption-overlayRightAlong.cbp-ie9 .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-overlayRightAlong .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-overlayRightAlong.cbp-ie8 .cbp-caption:hover .cbp-caption-defaultWrap,.cbp-caption-overlayRightAlong.cbp-ie9 .cbp-caption:hover .cbp-caption-defaultWrap {
     left: 0
 }
-.cbp-caption-overlayRightAlong.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-overlayRightAlong.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-overlayRightAlong.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-overlayRightAlong.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     left: -50%
 }
 .cbp-caption-overlayBottomAlong .cbp-caption-activeWrap,.cbp-caption-overlayBottomAlong .cbp-caption-defaultWrap {
@@ -422,13 +422,13 @@
     height: 70px;
     background: none repeat scroll 0 0 #282727
 }
-.cbp-caption-overlayBottomAlong .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-overlayBottomAlong .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 35px
 }
-.cbp-caption-overlayBottomAlong .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-overlayBottomAlong.cbp-ie8 .cbp-caption: hover .cbp-caption-defaultWrap,.cbp-caption-overlayBottomAlong.cbp-ie9 .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-overlayBottomAlong .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-overlayBottomAlong.cbp-ie8 .cbp-caption:hover .cbp-caption-defaultWrap,.cbp-caption-overlayBottomAlong.cbp-ie9 .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 0
 }
-.cbp-caption-overlayBottomAlong.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-caption-overlayBottomAlong.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-overlayBottomAlong.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-caption-overlayBottomAlong.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -70px
 }
 .cbp-caption-zoom .cbp-caption-defaultWrap {
@@ -440,7 +440,7 @@
     -o-transition: -o-transform .6s cubic-bezier(.19,1,.22,1);
     transition: transform .6s cubic-bezier(.19,1,.22,1)
 }
-.cbp-caption-zoom .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-caption-zoom .cbp-caption:hover .cbp-caption-defaultWrap {
     -webkit-transform: scale(1.25);
     -moz-transform: scale(1.25);
     -o-transform: scale(1.25);
@@ -463,10 +463,10 @@
     background-color: #000;
     -ms-filter: "alpha(Opacity=0)"
 }
-.cbp-caption-zoom .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-zoom .cbp-caption:hover .cbp-caption-activeWrap {
     opacity: 1
 }
-.cbp-caption-zoom.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-caption-zoom.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     opacity: 0
 }
 .cbp-animation-fadeOut {
@@ -1933,7 +1933,7 @@
     background: #fff;
     -ms-filter: "alpha(Opacity=100)"
 }
-.cbp-popup-wrap: before {
+.cbp-popup-wrap:before {
     content: '';
     display: inline-block;
     height: 100%;
@@ -2059,7 +2059,7 @@
     left: 20px;
     margin: auto
 }
-.cbp-popup-lightbox .cbp-popup-prev: hover {
+.cbp-popup-lightbox .cbp-popup-prev:hover {
     background-position: -2px -48px
 }
 .cbp-popup-singlePage .cbp-popup-prev {
@@ -2071,7 +2071,7 @@
     margin: auto;
     right: 108px
 }
-.cbp-popup-singlePage .cbp-popup-prev: hover {
+.cbp-popup-singlePage .cbp-popup-prev:hover {
     background-position: -2px -140px
 }
 .cbp-popup-lightbox .cbp-popup-next {
@@ -2083,7 +2083,7 @@
     right: 20px;
     margin: auto
 }
-.cbp-popup-lightbox .cbp-popup-next: hover {
+.cbp-popup-lightbox .cbp-popup-next:hover {
     background-position: -48px -48px
 }
 .cbp-popup-singlePage .cbp-popup-next {
@@ -2095,7 +2095,7 @@
     margin: auto;
     left: 108px
 }
-.cbp-popup-singlePage .cbp-popup-next: hover {
+.cbp-popup-singlePage .cbp-popup-next:hover {
     background-position: -48px -140px
 }
 .cbp-popup-lightbox .cbp-popup-close {
@@ -2105,7 +2105,7 @@
     right: 20px;
     top: 20px
 }
-.cbp-popup-lightbox .cbp-popup-close: hover {
+.cbp-popup-lightbox .cbp-popup-close:hover {
     background-position: -94px -48px
 }
 .cbp-popup-singlePage .cbp-popup-close {
@@ -2117,7 +2117,7 @@
     top: 30px;
     left: 0
 }
-.cbp-popup-singlePage .cbp-popup-close: hover {
+.cbp-popup-singlePage .cbp-popup-close:hover {
     background-position: -94px -140px
 }
 .cbp-popup-loadingBox {
@@ -2235,7 +2235,7 @@
     background-color: #34425C;
     padding: 6px 12px
 }
-.cbp-popup-singlePage .cbp-l-project-details-visit: hover {
+.cbp-popup-singlePage .cbp-l-project-details-visit:hover {
     color: #AFBBDB
 }
 .cbp-popup-singlePage .cbp-l-member-img {
@@ -2284,7 +2284,7 @@
     right: 20px;
     top: 30px
 }
-.cbp-popup-singlePageInline .cbp-popup-close: hover {
+.cbp-popup-singlePageInline .cbp-popup-close:hover {
     opacity: .7
 }
 .cbp-popup-singlePageInline .cbp-popup-content {
@@ -2361,7 +2361,7 @@
     padding: 8px 18px 7px;
     border: 2px solid #ccc
 }
-.cbp-l-inline-view: hover {
+.cbp-l-inline-view:hover {
     color: #757575;
     border-color: #DFDFDF
 }
@@ -2385,7 +2385,7 @@
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out
 }
-.cbp-l-filters-button .cbp-filter-item: hover {
+.cbp-l-filters-button .cbp-filter-item:hover {
     color: #5d5d5d
 }
 .cbp-l-filters-button .cbp-filter-item-active {
@@ -2413,7 +2413,7 @@
     -o-transition: opacity .25s ease,bottom .25s ease;
     transition: opacity .25s ease,bottom .25s ease
 }
-.cbp-l-filters-button .cbp-filter-counter: before {
+.cbp-l-filters-button .cbp-filter-counter:before {
     content: "";
     position: absolute;
     bottom: -4px;
@@ -2427,10 +2427,10 @@
     border-top: 4px solid #3288C4;
     visibility: hidden
 }
-.cbp-l-filters-button .cbp-filter-item: hover .cbp-filter-counter: before {
+.cbp-l-filters-button .cbp-filter-item:hover .cbp-filter-counter:before {
     visibility: visible
 }
-.cbp-l-filters-button .cbp-filter-item: hover .cbp-filter-counter {
+.cbp-l-filters-button .cbp-filter-item:hover .cbp-filter-counter {
     bottom: 44px;
     -ms-filter: "alpha(Opacity=100)";
     opacity: 1
@@ -2454,7 +2454,7 @@
     cursor: pointer;
     position: relative
 }
-.cbp-l-filters-dropdownHeader: after {
+.cbp-l-filters-dropdownHeader:after {
     border-color: #FFF rgba(0,0,0,0);
     border-style: solid;
     border-width: 5px 5px 0;
@@ -2466,7 +2466,7 @@
     width: 0;
     margin-top: -1px
 }
-.cbp-l-filters-dropdownWrap: hover .cbp-l-filters-dropdownHeader: after {
+.cbp-l-filters-dropdownWrap:hover .cbp-l-filters-dropdownHeader:after {
     border-width: 0 5px 5px
 }
 .cbp-l-filters-dropdownList {
@@ -2475,7 +2475,7 @@
     margin: 0;
     padding: 0
 }
-.cbp-l-filters-dropdownWrap: hover .cbp-l-filters-dropdownList {
+.cbp-l-filters-dropdownWrap:hover .cbp-l-filters-dropdownList {
     display: block
 }
 .cbp-l-filters-dropdownList .cbp-filter-item {
@@ -2490,7 +2490,7 @@
     border: 0;
     border-top: 1px solid #5592C2
 }
-.cbp-l-filters-dropdownList .cbp-filter-item-active,.cbp-l-filters-dropdownList .cbp-filter-item: hover {
+.cbp-l-filters-dropdownList .cbp-filter-item-active,.cbp-l-filters-dropdownList .cbp-filter-item:hover {
     color: #e6e6e6
 }
 .cbp-l-filters-alignLeft {
@@ -2512,7 +2512,7 @@
     transition: all .3s ease-in-out;
     color: #888
 }
-.cbp-l-filters-alignLeft .cbp-filter-item: hover {
+.cbp-l-filters-alignLeft .cbp-filter-item:hover {
     color: #3c3c3c
 }
 .cbp-l-filters-alignLeft .cbp-filter-item-active {
@@ -2542,7 +2542,7 @@
     border: medium none;
     background-color: transparent
 }
-.cbp-l-filters-alignCenter .cbp-filter-item: hover {
+.cbp-l-filters-alignCenter .cbp-filter-item:hover {
     color: #3288C4
 }
 .cbp-l-filters-alignCenter .cbp-filter-item-active {
@@ -2568,7 +2568,7 @@
     -o-transition: all .25s ease;
     transition: all .25s ease
 }
-.cbp-l-filters-alignCenter .cbp-filter-counter: before {
+.cbp-l-filters-alignCenter .cbp-filter-counter:before {
     content: "";
     position: absolute;
     bottom: -4px;
@@ -2582,10 +2582,10 @@
     border-top: 4px solid #3288C4;
     visibility: hidden
 }
-.cbp-l-filters-alignCenter button: hover .cbp-filter-counter: before {
+.cbp-l-filters-alignCenter button:hover .cbp-filter-counter:before {
     visibility: visible
 }
-.cbp-l-filters-alignCenter button: hover .cbp-filter-counter {
+.cbp-l-filters-alignCenter button:hover .cbp-filter-counter {
     bottom: 30px;
     -ms-filter: "alpha(Opacity=100)";
     opacity: 1
@@ -2610,7 +2610,7 @@
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out
 }
-.cbp-l-filters-alignRight .cbp-filter-item: hover {
+.cbp-l-filters-alignRight .cbp-filter-item:hover {
     color: #2B3444
 }
 .cbp-l-filters-alignRight .cbp-filter-item-active {
@@ -2639,7 +2639,7 @@
     -o-transition: opacity .25s ease,bottom .25s ease;
     transition: opacity .25s ease,bottom .25s ease
 }
-.cbp-l-filters-alignRight .cbp-filter-counter: before {
+.cbp-l-filters-alignRight .cbp-filter-counter:before {
     content: "";
     position: absolute;
     bottom: -4px;
@@ -2653,10 +2653,10 @@
     border-top: 4px solid #3288C4;
     visibility: hidden
 }
-.cbp-l-filters-alignRight .cbp-filter-item: hover .cbp-filter-counter: before {
+.cbp-l-filters-alignRight .cbp-filter-item:hover .cbp-filter-counter:before {
     visibility: visible
 }
-.cbp-l-filters-alignRight .cbp-filter-item: hover .cbp-filter-counter {
+.cbp-l-filters-alignRight .cbp-filter-item:hover .cbp-filter-counter {
     bottom: 44px;
     -ms-filter: "alpha(Opacity=100)";
     opacity: 1
@@ -2683,7 +2683,7 @@
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out
 }
-.cbp-l-filters-list .cbp-filter-item: hover {
+.cbp-l-filters-list .cbp-filter-item:hover {
     color: #000
 }
 .cbp-l-filters-list .cbp-filter-item-active {
@@ -2731,40 +2731,40 @@
 .cbp-l-grid-projects-inlineFilters {
     cursor: pointer
 }
-.cbp-l-grid-projects-inlineFilters: hover {
+.cbp-l-grid-projects-inlineFilters:hover {
     text-decoration: underline
 }
 .cbp-l-grid-projects.cbp-caption-overlayBottomPush .cbp-caption-activeWrap {
     bottom: -50px;
     height: 50px
 }
-.cbp-l-grid-projects.cbp-caption-overlayBottomPush .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-l-grid-projects.cbp-caption-overlayBottomPush .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 50px
 }
-.cbp-l-grid-projects.cbp-caption-overlayBottomPush.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-l-grid-projects.cbp-caption-overlayBottomPush.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-l-grid-projects.cbp-caption-overlayBottomPush.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-l-grid-projects.cbp-caption-overlayBottomPush.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -50px
 }
 .cbp-l-grid-projects.cbp-caption-overlayBottomAlong .cbp-caption-activeWrap {
     bottom: -50px;
     height: 50px
 }
-.cbp-l-grid-projects.cbp-caption-overlayBottomAlong .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-l-grid-projects.cbp-caption-overlayBottomAlong .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 25px
 }
-.cbp-l-grid-projects.cbp-caption-overlayBottomAlong.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-l-grid-projects.cbp-caption-overlayBottomAlong.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-l-grid-projects.cbp-caption-overlayBottomAlong.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-l-grid-projects.cbp-caption-overlayBottomAlong.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -50px
 }
 .cbp-l-grid-projects.cbp-caption-overlayBottom .cbp-caption-activeWrap {
     bottom: -50px;
     height: 50px
 }
-.cbp-l-grid-projects.cbp-caption-overlayBottom.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-l-grid-projects.cbp-caption-overlayBottom.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -50px
 }
 .cbp-l-grid-projects.cbp-caption-overlayBottomReveal .cbp-caption-activeWrap {
     height: 50px
 }
-.cbp-l-grid-projects.cbp-caption-overlayBottomReveal .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-l-grid-projects.cbp-caption-overlayBottomReveal .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 50px
 }
 .cbp-l-grid-gallery {
@@ -2794,7 +2794,7 @@
     text-align: center;
     margin-bottom: 3px
 }
-.cbp-l-grid-team-name: hover {
+.cbp-l-grid-team-name:hover {
     color: #34425C
 }
 .cbp-l-grid-team-position {
@@ -2813,33 +2813,33 @@
     bottom: -44px;
     height: 44px
 }
-.cbp-l-grid-team.cbp-caption-overlayBottomPush .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-l-grid-team.cbp-caption-overlayBottomPush .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 44px
 }
-.cbp-l-grid-team.cbp-caption-overlayBottomPush.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-l-grid-team.cbp-caption-overlayBottomPush.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-l-grid-team.cbp-caption-overlayBottomPush.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-l-grid-team.cbp-caption-overlayBottomPush.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -44px
 }
 .cbp-l-grid-team.cbp-caption-overlayBottomAlong .cbp-caption-activeWrap {
     bottom: -44px;
     height: 44px
 }
-.cbp-l-grid-team.cbp-caption-overlayBottomAlong .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-l-grid-team.cbp-caption-overlayBottomAlong .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 22px
 }
-.cbp-l-grid-team.cbp-caption-overlayBottomAlong.cbp-ie8 .cbp-caption: hover .cbp-caption-activeWrap,.cbp-l-grid-team.cbp-caption-overlayBottomAlong.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-l-grid-team.cbp-caption-overlayBottomAlong.cbp-ie8 .cbp-caption:hover .cbp-caption-activeWrap,.cbp-l-grid-team.cbp-caption-overlayBottomAlong.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -44px
 }
 .cbp-l-grid-team.cbp-caption-overlayBottom .cbp-caption-activeWrap {
     bottom: -44px;
     height: 44px
 }
-.cbp-l-grid-team.cbp-caption-overlayBottom.cbp-ie9 .cbp-caption: hover .cbp-caption-activeWrap {
+.cbp-l-grid-team.cbp-caption-overlayBottom.cbp-ie9 .cbp-caption:hover .cbp-caption-activeWrap {
     bottom: -44px
 }
 .cbp-l-grid-team.cbp-caption-overlayBottomReveal .cbp-caption-activeWrap {
     height: 44px
 }
-.cbp-l-grid-team.cbp-caption-overlayBottomReveal .cbp-caption: hover .cbp-caption-defaultWrap {
+.cbp-l-grid-team.cbp-caption-overlayBottomReveal .cbp-caption:hover .cbp-caption-defaultWrap {
     bottom: 44px
 }
 .cbp-l-grid-fullScreen {
@@ -2879,7 +2879,7 @@
     clear: both;
     text-decoration: none
 }
-.cbp-l-grid-blog-title: hover {
+.cbp-l-grid-blog-title:hover {
     color: #787878
 }
 .cbp-l-grid-blog-date {
@@ -2893,7 +2893,7 @@
     color: #3C6FBB;
     text-decoration: none
 }
-.cbp-l-grid-blog-comments: hover {
+.cbp-l-grid-blog-comments:hover {
     opacity: .8
 }
 .cbp-l-grid-blog-desc {
@@ -2921,7 +2921,7 @@
     min-width: 120px;
     text-decoration: none
 }
-.cbp-l-loadMore-button-link: hover {
+.cbp-l-loadMore-button-link:hover {
     color: #B0B0B0
 }
 .cbp-l-loadMore-button-stop {
