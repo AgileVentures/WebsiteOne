@@ -71,28 +71,29 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params[:event].permit(:name,
-                          :category,
-                          :description,
-                          :is_all_day,
-                          :from_date,
-                          :to_date,
-                          :from_time,
-                          :to_time,
-                          :time_zone,
-                          :repeats,
-                          :repeats_every_n_days,
-                          :repeats_every_n_weeks,
-                          :repeats_weekly_each_days_of_the_week,
-                          :repeats_monthly_each_days_of_the_month,
-                          :repeats_monthly_on_ordinals,
-                          :repeats_monthly_on_days_of_the_week,
-                          :repeats_yearly_each_months_of_the_year,
-                          :repeats_yearly_on_ordinals,
-                          :repeats_yearly_on_days_of_the_week,
-                          :repeat_ends,
-                          :repeat_ends_on
-    )
+    params.require(:event).permit!
+    #params[:event].permit(:name,
+    #                      :category,
+    #                      :description,
+    #                      :is_all_day,
+    #                      :from_date,
+    #                      :to_date,
+    #                      :from_time,
+    #                      :to_time,
+    #                      :time_zone,
+    #                      :repeats,
+    #                      :repeats_every_n_days,
+    #                      :repeats_every_n_weeks,
+    #                      :repeats_weekly_each_days_of_the_week,
+    #                      :repeats_monthly_each_days_of_the_month,
+    #                      :repeats_monthly_on_ordinals,
+    #                      :repeats_monthly_on_days_of_the_week,
+    #                      :repeats_yearly_each_months_of_the_year,
+    #                      :repeats_yearly_on_ordinals,
+    #                      :repeats_yearly_on_days_of_the_week,
+    #                      :repeat_ends,
+    #                      :repeat_ends_on
+    #)
   end
 
 

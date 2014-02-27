@@ -1,6 +1,6 @@
 <% start_date = params[:start_date].to_datetime.strftime('%F') if params[:start_date] %>
-<% start_time = params[:start_date].to_datetime.strftime('%I:%M %p') if params[:start_date] %>
-<% end_time = (params[:start_date].to_datetime + 30.minutes).strftime('%I:%M %p') if params[:start_date] %>
+<% start_time = params[:start_time].to_datetime.strftime('%I:%M %p') if params[:start_date] %>
+<% end_time = (params[:end_time].to_datetime + 30.minutes).strftime('%I:%M %p') if params[:start_date] %>
 
 <div class="container">
   <div class="col-lg-6 col-lg-offset-3">
@@ -61,8 +61,7 @@
         </div>
         <div class="form-group">
           <%= f.label :repeats, :class => 'control-label' %>
-          <%= f.select :repeats, Event::RepeatsOptions, {}, :class => 'form-control'  %>
-          <%= render partial: 'repeats_daily_options', locals: {f: f} %>
+          <%= f.select :repeats, Event::RepeatsOptions, {}, :default => "never", :class => 'form-control'  %>
           <%= render partial: 'repeats_weekly_options', locals: {f: f} %>
           <%= render partial: 'repeats_monthly_options', locals: {f: f} %>
           <%= render partial: 'repeats_yearly_options', locals: {f: f} %>

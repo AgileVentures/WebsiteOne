@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   include IceCube
-  validates :name, :from_date, :to_date, :time_zone, presence: true
+  validates :name, :from_date, :to_date, :time_zone, :repeats, presence: true
   validates :from_time,:to_time, presence: true, :if => :not_all_day?
 
   validates :repeats_every_n_days, :presence => true, :if => lambda { |e| e.repeats == "daily" }

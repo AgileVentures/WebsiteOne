@@ -11,7 +11,6 @@ gem 'turbolinks' # Follow links faster
 gem 'jbuilder', '~> 1.2' # Json for declaring
 gem 'devise' # Authentication local and 3rd party
 gem 'bootstrap-sass', '~> 3.0.2.0' # JS Bootstrap library support
-gem 'bootstrap-datetimepicker-rails' #Date & Time picker for bootstrap
 gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
 gem 'faker'
