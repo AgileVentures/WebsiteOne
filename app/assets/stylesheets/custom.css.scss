@@ -1,6 +1,39 @@
 @import "variables";
 @import url(http://fonts.googleapis.com/css?family=Kreon:400,700);
 
+/*  ---------------------------------------------------------------
+    general style
+    --------------------------------------------------------------- */
+
+/* apply a natural box layout model to all elements  - http://www.paulirish.com/2012/box-sizing-border-box-ftw/*/
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: 0;
+}
+
+::-moz-focus-inner { padding:0; border:0 }  /* ! removes focus line */
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
+/*  END - general style */
+
+
+/* style for Cube Portfolio wrapper*/
+.wrapper {
+  width: 96%;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+
 html,
 body {
     height: 100%;
@@ -839,3 +872,6 @@ section#main {
 .tokenfield div.token {
   margin-top: 6px;
 }
+
+
+

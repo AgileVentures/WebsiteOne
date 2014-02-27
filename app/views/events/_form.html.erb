@@ -11,6 +11,12 @@
           <%= f.text_field :name, :class => 'form-control', placeholder: 'Title' %>
         </div>
         <div class='form-group'>
+          <%= f.label :category, :class => 'control-label' %>
+          <%= f.select :category, %w( Scrum PairProgramming ), {}, :class => 'form-control' %>
+        </div>
+
+
+        <div class='form-group'>
           <%= f.label :description %>
           <%= f.text_area :description, :class => 'form-control', 'rows' => 10, placeholder: 'Document body' %>
         </div>
@@ -55,7 +61,7 @@
         </div>
         <div class="form-group">
           <%= f.label :repeats, :class => 'control-label' %>
-          <%= f.select :repeats, Event::RepeatsOptions %>
+          <%= f.select :repeats, Event::RepeatsOptions, {}, :class => 'form-control'  %>
           <%= render partial: 'repeats_daily_options', locals: {f: f} %>
           <%= render partial: 'repeats_weekly_options', locals: {f: f} %>
           <%= render partial: 'repeats_monthly_options', locals: {f: f} %>
@@ -64,7 +70,7 @@
 
         <div class="form-group event_option" id="repeats_options">
           <%= f.label :repeat_ends, :class => 'control-label' %>
-          <%= f.select :repeat_ends, Event::RepeatEndsOptions %>
+          <%= f.select :repeat_ends, Event::RepeatEndsOptions, {}, :class => 'form-control'  %>
         </div>
         <div class="form-group">
           <div id="event_repeat_ends_on">
@@ -76,7 +82,7 @@
 
         <div class="form-group">
           <%= f.label :time_zone %>
-          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :default => "Eastern Time (US & Canada)" %>
+          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, :default => "London" %>
         </div>
 
         <div class="form-group">

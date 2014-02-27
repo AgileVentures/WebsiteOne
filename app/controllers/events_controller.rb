@@ -10,6 +10,7 @@ class EventsController < ApplicationController
   end
 
   def index
+    #@events = Event.all.order(from_date: :desc)
     @events = Event.all
   end
 
@@ -71,6 +72,7 @@ class EventsController < ApplicationController
 
   def event_params
     params[:event].permit(:name,
+                          :category,
                           :description,
                           :is_all_day,
                           :from_date,
@@ -81,20 +83,17 @@ class EventsController < ApplicationController
                           :repeats,
                           :repeats_every_n_days,
                           :repeats_every_n_weeks,
-                          :repeats_weekly_each_days_of_the_week_mask,
-                          :repeats_every_n_months,
-                          :repeats_monthly,
-                          :repeats_monthly_each_days_of_the_month_mask,
-                          :repeats_monthly_on_ordinals_mask,
-                          :repeats_monthly_on_days_of_the_week_mask,
-                          :repeats_every_n_years,
-                          :repeats_yearly_each_months_of_the_year_mask,
-                          :repeats_yearly_on,
-                          :repeats_yearly_on_ordinals_mask,
-                          :repeats_yearly_on_days_of_the_week_mask,
+                          :repeats_weekly_each_days_of_the_week,
+                          :repeats_monthly_each_days_of_the_month,
+                          :repeats_monthly_on_ordinals,
+                          :repeats_monthly_on_days_of_the_week,
+                          :repeats_yearly_each_months_of_the_year,
+                          :repeats_yearly_on_ordinals,
+                          :repeats_yearly_on_days_of_the_week,
                           :repeat_ends,
                           :repeat_ends_on
     )
   end
+
 
 end
