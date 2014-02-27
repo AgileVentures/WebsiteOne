@@ -15,5 +15,12 @@ Feature: Events
       | Pair Programming |
 
 
-
-
+  Scenario: Create a new event
+    Given I am logged in
+    And I am on Events index page
+    When I click "New Event"
+    And I fill in "Name" with "Whatever" within the main content
+    And I fill in "Description" with "something else"
+    And I click the "Save" button
+    Then I should see "Event Created"
+    Then I should be on the Events index page

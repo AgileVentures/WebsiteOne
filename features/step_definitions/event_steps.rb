@@ -11,3 +11,7 @@ Given(/^following events exist:$/) do |table|
   #ActionView::Base.any_instance.stub(:cover_for) { image_path('event-scrum-cover.png') }
 
 end
+
+Then(/^I should be on the Events index page$/) do
+  current_path.should eq events_path
+end

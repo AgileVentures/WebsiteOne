@@ -18,15 +18,13 @@ class EventsController < ApplicationController
   end
 
   def create
-
-
     if params[:event][:from_date].empty?
       params[:event][:from_date] = Date.today
     end
     if params[:event][:to_date].empty?
       params[:event][:to_date] = Date.today
     end
-    if params[:event][:is_all_day] == false
+    if params[:event][:is_all_day] == '0'
       if params[:event][:from_time].empty?
         params[:event][:from_time] = Time.now.beginning_of_day
       end
