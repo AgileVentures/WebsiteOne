@@ -8,12 +8,12 @@ Feature: Events
 
   Scenario: Show index of events
     Given I am on Events index page
-    Then show me the page
     Then I should see "AgileVentures Events"
-    And I should se buttons:
+    And I should see buttons:
       | All              |
       | Scrum            |
       | Pair Programming |
+
 
 
 
