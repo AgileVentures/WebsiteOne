@@ -31,7 +31,6 @@ describe 'projects/index.html.erb' do
   context 'for signed in and not signed in users' do
     it 'should display a list of projects' do
       render
-
       rendered.should have_css('h1', :text => 'List of Projects')
       rendered.should have_css 'ul#project-list'
     end

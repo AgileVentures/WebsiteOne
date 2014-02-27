@@ -24,19 +24,25 @@ describe 'projects/show.html.erb' do
                           user_id: @user.id,
                           created_at: Time.now
 
+    @videos = [
+        { title: 'First video', user: @user, published: '12/12/2012', url: 'somewhere', id: '123', content: 'some text' },
+        { title: 'Second video', user: @user, published: '13/13/2013', url: 'somewhere', id: '123', content: 'some text' }
+    ]
+
     @documents = [ @document ]
-    @documents.should_receive(:roots).and_return(@documents)
-    @document.should_receive(:children).and_return( [] )
-    @document.should_receive(:user).and_return(@user)
+    @documents.stub(:roots).and_return(@documents)
+    @documents.stub(:count).and_return(1)
+    @document.stub(:children).and_return( [] )
+    @document.stub(:user).and_return(@user)
 
     @created_by = ['by:', ([@user.first_name, @user.last_name].join(' '))].join(' ')
     assign :project, @project
     assign :user, @user
     assign :documents, @documents
     assign :members, [ @user ]
+    assign :videos, @videos
     view.stub(:project_created_by).and_return(@created_by)
-    @project.should_receive(:user).and_return(@user)
-
+    @project.stub(:user).and_return(@user)
   end
 
   it 'renders project description' do
@@ -57,6 +63,15 @@ describe 'projects/show.html.erb' do
     render
     expect(rendered).to have_text 'Members (1)'
     expect(rendered).to have_text @user.display_name, visible: false
+  end
+
+  it 'renders a list of videos' do
+    render
+    expect(rendered).to have_text 'Videos (2)'
+    @videos.each do |video|
+      expect(rendered).to have_text video[:title], visible: false
+      expect(rendered).to have_text video[:published], visible: false
+    end
   end
 
   context 'user is signed in' do

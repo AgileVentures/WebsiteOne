@@ -24,18 +24,19 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def render_error(status, exception)
-      #logger.log(exception)
+    def render_error(status, e)
+      Rails.logger.error e.message
+      e.backtrace.each_with_index { |line, index| Rails.logger.error line; break if index > 5 }
       case status
         when 404
           render template: 'pages/not_found', layout: 'layouts/application', status: 404
 
         when 500
-          redirect_to '/internal_server_error'
+          render template: 'pages/internal_error', layout: 'layouts/application', status: 500
 
         else
-          logger.log('Unhandled exception???')
-          redirect_to '/internal_server_error'
+          Rails.logger.error('Unhandled exception')
+          render template: 'pages/internal_error', layout: 'layouts/application', status: 500
       end
     end
 end

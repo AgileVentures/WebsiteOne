@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "users/show.html.erb" do
 	before :each do
+    now = DateTime.now
+    thirty_days_ago = (now - 33)
     @projects = [
         mock_model(Project, friendly_id: 'title-1', title: 'Title 1'),
         mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
@@ -12,7 +14,7 @@ describe "users/show.html.erb" do
                              first_name: 'Eric',
                              last_name: 'Els',
                              email: 'eric@somemail.se',
-                             created_at: Date.new(2014, 1, 1)
+                             created_at: thirty_days_ago
                       )
 		assign :user, @user
     assign :users_projects, @projects
@@ -109,8 +111,8 @@ describe "users/show.html.erb" do
     expect(rendered).not_to have_link('Edit', href: '/users/edit')
   end
 
-  it 'should display Joined on ..' do
-    Date.stub(today:'07/02/2014'.to_date)
+  it 'should display Member for ..' do
+    #Date.stub(today:'07/02/2014'.to_date )
     render
     expect(rendered).to have_text('Member for: about 1 month')
   end
