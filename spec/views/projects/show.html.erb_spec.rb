@@ -82,7 +82,7 @@ describe 'projects/show.html.erb' do
 
     context 'user is a member of project' do
       it 'should render join project button' do
-        @user.should_receive(:following?).and_return(true)
+        @user.should_receive(:following?).at_least(1).and_return(true)
         render
         rendered.should have_css %Q{a[href="#{unfollow_project_path(@project)}"]}, visible: true
       end
@@ -90,7 +90,7 @@ describe 'projects/show.html.erb' do
 
     context 'user is not a member of project' do
       it 'should render leave project button' do
-        @user.should_receive(:following?).and_return(false)
+        @user.should_receive(:following?).at_least(1).and_return(false)
         render
         rendered.should have_css %Q{a[href="#{follow_project_path(@project)}"]}, visible: true
       end
