@@ -9,10 +9,7 @@ class Event < ActiveRecord::Base
 
   RepeatsOptions = [ 'never','weekly' ]
   RepeatEndsOptions = ['never','on']
-  RepeatMonthlyOptions = ['each','on']
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
-  Ordinals = [1,2,3,4,-1]
-  HumanOrdinals = ['first','second','third','fourth','last']
 
 
   def not_all_day?
@@ -29,63 +26,6 @@ class Event < ActiveRecord::Base
   def repeats_weekly_each_days_of_the_week
     DaysOfTheWeek.reject do |r|
       ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DaysOfTheWeek.index(r)).zero?
-    end
-  end
-
-  def repeats_monthly_each_days_of_the_month=(repeats_monthly_each_days_of_the_month)
-    repeats_monthly_each_days_of_the_month.map!{|d| d.to_i} # They come in as strings, but our array is full of integers
-    self.repeats_monthly_each_days_of_the_month_mask = (repeats_monthly_each_days_of_the_month & DaysOfTheMonth).map { |r| 2**DaysOfTheMonth.index(r) }.inject(0, :+)
-  end
-  def repeats_monthly_each_days_of_the_month
-    DaysOfTheMonth.reject do |r|
-      ((repeats_monthly_each_days_of_the_month_mask || 0) & 2**DaysOfTheMonth.index(r)).zero?
-    end
-  end
-
-  def repeats_monthly_on_ordinals=(repeats_monthly_on_ordinals)
-    repeats_monthly_on_ordinals.map!{|o| o.to_i} # They come in as strings, but our array is full of integers
-    self.repeats_monthly_on_ordinals_mask = (repeats_monthly_on_ordinals & Ordinals).map { |r| 2**Ordinals.index(r) }.inject(0, :+)
-  end
-  def repeats_monthly_on_ordinals
-    Ordinals.reject do |r|
-      ((repeats_monthly_on_ordinals_mask || 0) & 2**Ordinals.index(r)).zero?
-    end
-  end
-
-  def repeats_monthly_on_days_of_the_week=(repeats_monthly_on_days_of_the_week)
-    self.repeats_monthly_on_days_of_the_week_mask = (repeats_monthly_on_days_of_the_week & DaysOfTheWeek).map { |r| 2**DaysOfTheWeek.index(r) }.inject(0, :+)
-  end
-  def repeats_monthly_on_days_of_the_week
-    DaysOfTheWeek.reject do |r|
-      ((repeats_monthly_on_days_of_the_week_mask || 0) & 2**DaysOfTheWeek.index(r)).zero?
-    end
-  end
-
-  def repeats_yearly_each_months_of_the_year=(repeats_yearly_each_months_of_the_year)
-    self.repeats_yearly_each_months_of_the_year_mask = (repeats_yearly_each_months_of_the_year & MonthsOfTheYear).map { |r| 2**MonthsOfTheYear.index(r) }.inject(0, :+)
-  end
-  def repeats_yearly_each_months_of_the_year
-    MonthsOfTheYear.reject do |r|
-      ((repeats_yearly_each_months_of_the_year_mask || 0) & 2**MonthsOfTheYear.index(r)).zero?
-    end
-  end
-
-  def repeats_yearly_on_ordinals=(repeats_yearly_on_ordinals)
-    repeats_yearly_on_ordinals.map!{|o| o.to_i} # They come in as strings, but our array is full of integers
-    self.repeats_yearly_on_ordinals_mask = (repeats_yearly_on_ordinals & Ordinals).map { |r| 2**Ordinals.index(r) }.inject(0, :+)
-  end
-  def repeats_yearly_on_ordinals
-    Ordinals.reject do |r|
-      ((repeats_yearly_on_ordinals_mask || 0) & 2**Ordinals.index(r)).zero?
-    end
-  end
-
-  def repeats_yearly_on_days_of_the_week=(repeats_yearly_on_days_of_the_week)
-    self.repeats_yearly_on_days_of_the_week_mask = (repeats_yearly_on_days_of_the_week & DaysOfTheWeek).map { |r| 2**DaysOfTheWeek.index(r) }.inject(0, :+)
-  end
-  def repeats_yearly_on_days_of_the_week
-    DaysOfTheWeek.reject do |r|
-      ((repeats_yearly_on_days_of_the_week_mask || 0) & 2**DaysOfTheWeek.index(r)).zero?
     end
   end
 
@@ -135,47 +75,10 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def must_have_at_least_one_repeats_monthly_each_days_of_the_month
-    if repeats_monthly_each_days_of_the_month.empty?
-      errors.add(:base, "You must have at least one repeats monthly each days of the month")
-    end
-  end
-
-  def must_have_at_least_one_repeats_monthly_on_ordinals
-    if repeats_monthly_on_ordinals.empty?
-      errors.add(:base, "You must have at least one repeats monthly on ordinals")
-    end
-  end
-
-  def must_have_at_least_one_repeats_monthly_on_days_of_the_week
-    if repeats_monthly_on_days_of_the_week.empty?
-      errors.add(:base, "You must have at least one repeats monthly on days of the week")
-    end
-  end
-
-  def must_have_at_least_one_repeats_yearly_each_months_of_the_year
-    if repeats_yearly_each_months_of_the_year.empty?
-      errors.add(:base, "You must have at least one repeats yearly each months of the year")
-    end
-  end
-
-  def must_have_at_least_one_repeats_yearly_on_ordinals
-    if repeats_yearly_on_ordinals.empty?
-      errors.add(:base, "You must have at least one repeats yearly on ordinals")
-    end
-  end
-
-  def must_have_at_least_one_repeats_yearly_on_days_of_the_week
-    if repeats_yearly_on_days_of_the_week.empty?
-      errors.add(:base, "You must have at least one repeats yearly on days of the week")
-    end
-  end
 
   def from_must_come_before_to
     if from > to
       errors.add(:to_date, "must come after the from date")
     end
   end
-
-
 end
