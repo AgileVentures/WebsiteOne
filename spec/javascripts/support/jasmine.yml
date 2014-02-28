@@ -14,7 +14,7 @@
 # file from the gem, something to do with the asset pipeline?
 src_files:
   - assets/application.js
-  - assets/HOA.js
+  - assets/projects.js
   - assets/jasmine-jquery.js
 
 # stylesheets
