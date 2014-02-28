@@ -31,13 +31,11 @@ WebsiteOne::Application.routes.draw do
   resources :articles
 
   get 'projects/:project_id/:id', to: 'documents#show'
-
   get '/auth/:provider/callback' => 'authentications#create'
   get '/auth/failure' => 'authentications#failure'
-
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
-
   post 'mail_contact_form', to: 'visitors#send_contact_form'
+
 
 
 end
