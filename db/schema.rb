@@ -111,7 +111,6 @@ ActiveRecord::Schema.define(version: 20140225000044) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "display_email"
-    t.string   "youtube_id"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
     t.string   "youtube_id"

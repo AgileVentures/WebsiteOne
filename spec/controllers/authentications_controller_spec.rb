@@ -78,6 +78,7 @@ describe AuthenticationsController do
       end
 
       it 'should create a new user for non-existing profiles' do
+        Mailer.stub_chain :send_welcome_message, :deliver
         @user.should_receive(:save).and_return(true)
         controller.should_receive(:sign_in_and_redirect)
         get :create, provider: @provider
