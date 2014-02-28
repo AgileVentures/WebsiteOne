@@ -3,18 +3,8 @@ class Event < ActiveRecord::Base
   validates :name, :from_date, :to_date, :time_zone, :repeats, presence: true
   validates :from_time,:to_time, presence: true, :if => :not_all_day?
 
-  validates :repeats_every_n_days, :presence => true, :if => lambda { |e| e.repeats == "daily" }
-  validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
+  #validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == "weekly" }
-  validates :repeats_every_n_months, :presence => true, :if => lambda { |e| e.repeats == "monthly" }
-  validates :repeats_monthly, :presence => true, :if => lambda { |e| e.repeats == "monthly" }
-  validate :must_have_at_least_one_repeats_monthly_each_days_of_the_month, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'each' }
-  validate :must_have_at_least_one_repeats_monthly_on_ordinals, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'on' }
-  validate :must_have_at_least_one_repeats_monthly_on_days_of_the_week, :if => lambda { |e| e.repeats == "monthly" && e.repeats_monthly == 'on' }
-  validates :repeats_every_n_years, :presence => true, :if => lambda { |e| e.repeats == "yearly" }
-  validate :must_have_at_least_one_repeats_yearly_each_months_of_the_year, :if => lambda { |e| e.repeats == "yearly" }
-  validate :must_have_at_least_one_repeats_yearly_on_ordinals, :if => lambda { |e| e.repeats == "yearly" && e.repeats_yearly_on }
-  validate :must_have_at_least_one_repeats_yearly_on_days_of_the_week, :if => lambda { |e| e.repeats == "yearly" && e.repeats_yearly_on }
   validate :from_must_come_before_to
 
   RepeatsOptions = [ 'never','weekly' ]
@@ -130,34 +120,9 @@ class Event < ActiveRecord::Base
     case repeats
       when 'never'
         s.add_recurrence_time(starts_at)
-      when 'daily'
-        s.add_recurrence_rule IceCube::Rule.daily(repeats_every_n_days)
       when 'weekly'
         days = repeats_weekly_each_days_of_the_week.map {|d| d.to_sym }
         s.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
-      when 'monthly'
-        case repeats_monthly
-          when 'each'
-            s.add_recurrence_rule IceCube::Rule.monthly(repeats_every_n_months).day_of_month(*repeats_monthly_each_days_of_the_month)
-          when 'on'
-            h = {}
-            repeats_monthly_on_days_of_the_week.each do |day_of_the_week|
-              h[day_of_the_week.to_sym] = repeats_monthly_on_ordinals
-            end
-            s.add_recurrence_rule IceCube::Rule.monthly(repeats_every_n_months).day_of_week(h)
-        end
-      when 'yearly'
-        if repeats_yearly_on
-          h = {}
-          repeats_yearly_on_days_of_the_week.each do |day_of_the_week|
-            h[day_of_the_week.to_sym] = repeats_yearly_on_ordinals
-          end
-          months = repeats_yearly_each_months_of_the_year.map {|m| m.to_sym }
-          s.add_recurrence_rule IceCube::Rule.yearly(repeats_every_n_years).month_of_year(*months).day_of_week(h)
-        else
-          months = repeats_yearly_each_months_of_the_year.map {|m| m.to_sym }
-          s.add_recurrence_rule IceCube::Rule.yearly(repeats_every_n_years).month_of_year(*months)
-        end
     end
     return s
   end
