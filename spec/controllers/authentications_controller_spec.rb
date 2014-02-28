@@ -80,7 +80,9 @@ describe AuthenticationsController do
       it 'should create a new user for non-existing profiles' do
         Mailer.stub_chain :send_welcome_message, :deliver
         @user.should_receive(:save).and_return(true)
-        controller.should_receive(:sign_in_and_redirect)
+        controller.should_receive(:sign_in_and_redirect) do
+          controller.redirect_to root_path
+        end
         get :create, provider: @provider
         expect(flash[:notice]).to eq 'Signed in successfully.'
       end
