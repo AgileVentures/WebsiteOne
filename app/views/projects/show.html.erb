@@ -1,7 +1,7 @@
-<%= javascript_include_tag 'projects', data: { turbolinks_track: 'true' } %>
 <% if user_signed_in? and current_user.following?(@project) %>
-  <script src="https://apis.google.com/js/platform.js" data-turbolinks-track="true"></script>
+  <script src="https://apis.google.com/js/platform.js" ></script>
 <% end %>
+<%= javascript_include_tag 'projects' %>
 <% provide :title, @project.title %>
 
 <div>
