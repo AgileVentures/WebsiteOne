@@ -39,7 +39,7 @@
 <ul class="nav nav-tabs">
   <li id="documents" class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a></li>
   <li id="members"><a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a></li>
-  <li id="videos"><a href="#videos_list" data-toggle="tab">Videos (<%= @videos.count %>)</a></li>
+  <li id="videos"><a href="#videos_list" data-toggle="tab"> Videos (<%= @videos.count %>)</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -100,4 +100,16 @@
         </div>
   </div>
 </div>
+<script>
+  $(function(){
+  var hash = window.location.hash;
+  hash && $(hash + 's a').tab('show');
+  $('html,body').scrollTop($('body').scrollTop());
 
+  $('.nav-tabs a').click(function (e) {
+    $(this).tab('show');
+    window.location.hash = this.hash.replace("s_list", "");
+    $('html,body').scrollTop($('body').scrollTop());
+  });
+});
+</script>
