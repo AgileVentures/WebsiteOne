@@ -99,6 +99,7 @@ class AuthenticationsController < ApplicationController
 
     if user.save
       # Bryan: TESTED
+      Mailer.send_welcome_message(user).deliver
       flash[:notice] = 'Signed in successfully.'
       sign_in_and_redirect(:user, user)
     else
@@ -108,6 +109,8 @@ class AuthenticationsController < ApplicationController
     end
   end
 end
+
+
 
 
 

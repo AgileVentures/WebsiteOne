@@ -8,7 +8,7 @@ WebsiteOne::Application.routes.draw do
 
   #get 'users/sign_out' => redirect('/404.html')
   #get 'users/password' => redirect('/404.html')
-  get 'users/show/:id', to: 'users#show', as: 'users_show'
+  get 'users/:id', to: 'users#show', as: 'users_show'
 
   get "/404", :to => "errors#not_found"
   get "/mamama", :to => "errors#unacceptable"
@@ -25,6 +25,10 @@ WebsiteOne::Application.routes.draw do
       get :mercury_saved
     end
   end
+
+  post 'preview/article', to: 'articles#preview'
+  patch 'preview/article', to: 'articles#preview', as: 'preview_articles'
+  resources :articles
 
   get 'projects/:project_id/:id', to: 'documents#show'
   get '/auth/:provider/callback' => 'authentications#create'

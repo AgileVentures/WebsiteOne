@@ -10,8 +10,12 @@
 #   - lib/source2.js
 #   - dist/**/*.js
 #
+# I don't know how assets/ magically has access to the jasmine_jquery
+# file from the gem, something to do with the asset pipeline?
 src_files:
   - assets/application.js
+  - assets/projects.js
+  - assets/jasmine-jquery.js
 
 # stylesheets
 #
@@ -73,7 +77,7 @@ src_dir:
 #
 # spec_dir: spec/javascripts
 #
-spec_dir:
+spec_dir: spec/javascripts
 
 # spec_helper
 #

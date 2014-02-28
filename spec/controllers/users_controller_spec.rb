@@ -5,12 +5,12 @@ describe UsersController do
   describe "GET 'index'" do
     before(:each) do
       @users = [
-          double('User'),
-          double('User'),
-          double('User'),
-          double('User')
+          double('User', country: 'some country'),
+          double('User', country: 'some country'),
+          double('User', country: 'some country'),
+          double('User', country: 'some country')
       ]
-      User.should_receive(:where).and_return(@users)
+      User.stub_chain(:where, :order).and_return(@users)
     end
 
     it 'returns http success' do
@@ -35,12 +35,13 @@ describe UsersController do
       @user = double('User', id: 1,
                      first_name: 'Hermionie',
                      last_name: 'Granger',
+                     friendly_id: 'harry-potter',
                      email: 'hgranger@hogwarts.ac.uk',
                      display_profile: true,
                      youtube_id: 'test_id'
       )
       @user.stub(:following_by_type).and_return(@projects)
-      User.stub(find: @user)
+      User.stub_chain(:friendly, :find).and_return(@user)
 
       @youtube_videos = [
           {
@@ -63,33 +64,33 @@ describe UsersController do
     end
 
     it 'assigns a user instance' do
-      get 'show', id: @user.id
+      get 'show', id: @user.friendly_id
       expect(assigns(:user)).to eq(@user)
     end
 
     it 'assigns youtube videos' do
-      get 'show', id: @user.id
+      get 'show', id: @user.friendly_id
       expect(assigns(:youtube_videos)).to eq(@youtube_videos)
     end
 
     it 'renders the show view' do
-      get 'show', id: @user.id
+      get 'show', id: @user.friendly_id
       expect(response).to render_template :show
     end
 
-    context "with followed projects" do
-      before :each do
+    context 'with followed projects' do
+      # Bryan: Empty before block?
+      #before :each do
+      #end
 
-      end
-
-      it "assigns a list of project being followed" do
-        get 'show', id: @user.id
+      it 'assigns a list of project being followed' do
+        get 'show', id: @user.friendly_id
         expect(assigns(:users_projects)).to eq(@projects)
       end
 
       it 'it renders an error message when accessing a private profile' do
         @user.stub(display_profile: false)
-        get 'show', id: @user.id
+        get 'show', id: @user.friendly_id
         expect(response).to redirect_to root_path
       end
     end

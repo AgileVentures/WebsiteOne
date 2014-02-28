@@ -16,6 +16,8 @@ def path_to(page_name, id = '')
       projects_path
     when 'new project' then
       new_project_path
+    when 'articles' then
+      articles_path
     when 'edit' then
       edit_project_path(id)
     when 'show' then
@@ -181,7 +183,7 @@ end
 
 Then(/^show me the page$/) do
   save_and_open_page
-  puts page.body
+  #puts page.body
 end
 When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
@@ -194,26 +196,13 @@ When(/^I should see a selector with options$/) do |table|
 end
 
 Then(/^I should see the sidebar$/) do
-  page.find(:css, 'nav#sidebarnav')
+  page.find(:css, '#sidebar')
 end
 
 #Then(/^I should see "(.*?)"$/) do |string|
 #  #expect(page).to have_content(string)
 #  page.should have_content(string)
 #end
-
-#TODO Bryan please replase s and m with meaningful names
-Then(/(.*) within the ([^"]*)$/) do |s, m|
-  m = m.downcase
-  if m == 'mercury editor'
-    page.driver.within_frame('mercury_iframe') { step(s) }
-  else
-    selector_for = {
-        'sidebar' => '#sidebar'
-    }
-    page.within(selector_for[m]) { step(s) }
-  end
-end
 
 Given(/^I want to use third party authentications$/) do
   OmniAuth.config.test_mode = true
@@ -244,4 +233,35 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
   else
     page.should have_css %Q{a[data-link-text="#{button.downcase}"]}
   end
+end
+
+Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
+  page.should have_text string
+end
+
+
+And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
+  page.should have_text string
+end
+
+Then(/^I should see the sub-documents in this order:$/) do   |table|
+  expected_order = table.raw.flatten
+  actual_order = page.all('li.listings-item a').collect(&:text)
+  expected_order.should == actual_order
+end
+
+
+
+Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
+    project = Project.find_by_title(title)
+    case item.downcase.pluralize
+      when 'members'
+        (1..num.to_i).each do
+          u = User.create(email: Faker::Internet.email, password: '1234567890')
+          u.follow(project)
+        end
+
+      else
+        pending
+    end
 end

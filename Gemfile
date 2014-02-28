@@ -24,8 +24,14 @@ gem 'acts_as_follower'
 gem 'will_paginate-bootstrap'
 gem 'coveralls', require: false # TODO Bryan: move to production group?
 gem 'google-analytics-rails'
-gem 'friendly_id', '~> 5.0.0' # Bryan: for more REST-ful routes, use human-readable IDs
+gem 'friendly_id', '~> 5.0.0' # for more REST-ful routes, use human-readable IDs
 gem 'colored' # colorizing console
+gem 'redcarpet' # renders markdown
+gem 'coderay' # syntax highlighting for markdown code blocks
+gem 'acts-as-taggable-on' # Add tags to objects. Used on Projects
+gem 'geocoder' # geocoding
+gem 'paper_trail', '~> 3.0.0'
+gem 'verbs'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

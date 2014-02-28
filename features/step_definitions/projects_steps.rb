@@ -51,10 +51,6 @@ When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project
   end
 end
 
-When(/^I click "([^"]*)" in the list of projects$/) do |name|
-  find(:css, %Q{a[data-link-text="#{name.downcase}"]}).click()
-end
-
 Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |parent, child|
   parent_doc = Document.find_by_title(parent)
   parent_doc.children.create!(
@@ -95,3 +91,27 @@ end
 When(/^I go to the next page$/) do
   first(:css, 'a', text: 'Next').click()
 end
+
+Given(/^I (?:am on|go to) project "([^"]*)"$/) do |project|
+  project.downcase!
+  project = Project.find_by_title(project)
+  visit(path_to('projects', project.id ))
+end
+
+Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (\d+) days ago$/) do |parent, child, arg3|
+  parent_doc = Document.find_by_title(parent)
+  parent_doc.children.create!(
+      {
+          :project_id => parent_doc.project_id,
+          :title => child,
+          :created_at => arg3,
+          user_id: parent_doc.user_id
+      }
+  )
+end
+
+
+And(/^the following sub-documents exist:$/) do |table|
+  table.hashes
+end
+

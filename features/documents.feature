@@ -15,6 +15,15 @@ Feature: Manage Document
       | Guides        | My guide to      | hello mars  |
       | Documentation | My documentation | hello world |
 
+    And the following revisions exist
+      | title         | revisions  |
+      | Guides        | 1          |
+      | Documentation | 3          |
+    
+    And the following sub-documents exist:
+      | title   | body         | created_at          | project    |
+      | SubDoc1 | Blog One     | created 3 days ago  | hello mars |
+      | SubDoc2 | Another Blog | created 10 days ago | hello mars |
 
   Scenario: Render of list documents
     Given I am on the "Show" page for project "hello world"
@@ -40,10 +49,11 @@ Feature: Manage Document
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
+  #???
     When I click the sidebar link "Guides"
     Then I should be on the "Show" page for document "Guides"
     And I should see "Guides"
-    And I should see "My guide to"
+    And I should see "New content 0"
     And I should see a link to "Edit" page for document "Guides"
 
 
@@ -55,6 +65,15 @@ Feature: Manage Document
     Then I should be on the "Show" page for document "Howto"
     And I should see "Guides"
 
+#NOTE: below scenario is for children's documents of documents, not projects'
+
+  Scenario: Documents children should be sorted in ASCENDING order by create date
+    Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
+    Given the document "Guides" has a sub-document with title "SubDoc2" created 10 days ago
+    Given I am on the "Show" page for document "Guides"
+    Then I should see the sub-documents in this order:
+      | SubDoc1 |
+      | SubDoc2 |
 
 
 #Scenario: Destroy a document
@@ -72,12 +91,11 @@ Feature: Manage Document
     When I click the very stylish "Edit" button
     Then I should be in the Mercury Editor
 
-  @javascript
+  @javascript @selenium
   Scenario: Mercury editor shows Save and Cancel buttons, hides New Document button,
-    Save button works
+  Save button works
 
     Given the document "Guides" has a child document with title "Howto"
-    Given I am going to use the Mercury Editor
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
     Then I should see button "Save" in Mercury Editor
@@ -91,11 +109,10 @@ Feature: Manage Document
     And I should be on the "Show" page for document "My new title"
     And I should see "This is my new body text"
 
-  @javascript
+  @javascript @selenium
   Scenario: Mercury editor Cancel button works
 
     Given the document "Guides" has a child document with title "Howto"
-    Given I am going to use the Mercury Editor
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
 
@@ -110,19 +127,9 @@ Feature: Manage Document
     And I try to use the Mercury Editor to edit document "Documentation"
     Then I should see "You do not have the right privileges to complete action."
 
-#Scenario: The Mercury Editor can be accessed from the document index page
-#  Given I am logged in
-#  Given I am on the "Show" page for project "hello world"
-##  And I am on the "Documents" page for project "hello world"
-#  When I click the "Edit" button for document "Howto"
-#  Then I should be in the Mercury Editor
-
-  Scenario: Pressing the Back button will
-
-  @javascript
+  @javascript @selenium
   Scenario: The Mercury Editor save button works
     Given the document "Guides" has a child document with title "Howto"
-    Given I am going to use the Mercury Editor
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
     When I fill in the editable field "Title" with "My new title"
@@ -144,3 +151,8 @@ Feature: Manage Document
     Given I am on the "Show" page for project "hello world"
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
+
+  Scenario: Document should have a history of changes 
+    Given I am on the "Show" page for document "Documentation"
+    Then I should see "Revisions"
+    And I should see 4 revisions for "Guides"

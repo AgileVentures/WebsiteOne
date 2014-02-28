@@ -24,19 +24,25 @@ describe 'projects/show.html.erb' do
                           user_id: @user.id,
                           created_at: Time.now
 
+    @videos = [
+        { title: 'First video', user: @user, published: '12/12/2012', url: 'somewhere', id: '123', content: 'some text' },
+        { title: 'Second video', user: @user, published: '13/13/2013', url: 'somewhere', id: '123', content: 'some text' }
+    ]
+
     @documents = [ @document ]
-    @documents.should_receive(:roots).and_return(@documents)
-    @document.should_receive(:children).and_return( [] )
-    @document.should_receive(:user).and_return(@user)
+    @documents.stub(:roots).and_return(@documents)
+    @documents.stub(:count).and_return(1)
+    @document.stub(:children).and_return( [] )
+    @document.stub(:user).and_return(@user)
 
     @created_by = ['by:', ([@user.first_name, @user.last_name].join(' '))].join(' ')
     assign :project, @project
     assign :user, @user
     assign :documents, @documents
     assign :members, [ @user ]
+    assign :videos, @videos
     view.stub(:project_created_by).and_return(@created_by)
-    @project.should_receive(:user).and_return(@user)
-
+    @project.stub(:user).and_return(@user)
   end
 
   it 'renders project description' do
@@ -59,6 +65,15 @@ describe 'projects/show.html.erb' do
     expect(rendered).to have_text @user.display_name, visible: false
   end
 
+  it 'renders a list of videos' do
+    render
+    expect(rendered).to have_text 'Videos (2)'
+    @videos.each do |video|
+      expect(rendered).to have_text video[:title], visible: false
+      expect(rendered).to have_text video[:published], visible: false
+    end
+  end
+
   context 'user is signed in' do
     before :each do
       view.stub(:user_signed_in?).and_return(true)
@@ -67,7 +82,7 @@ describe 'projects/show.html.erb' do
 
     context 'user is a member of project' do
       it 'should render join project button' do
-        @user.should_receive(:following?).and_return(true)
+        @user.should_receive(:following?).at_least(1).and_return(true)
         render
         rendered.should have_css %Q{a[href="#{unfollow_project_path(@project)}"]}, visible: true
       end
@@ -75,7 +90,7 @@ describe 'projects/show.html.erb' do
 
     context 'user is not a member of project' do
       it 'should render leave project button' do
-        @user.should_receive(:following?).and_return(false)
+        @user.should_receive(:following?).at_least(1).and_return(false)
         render
         rendered.should have_css %Q{a[href="#{follow_project_path(@project)}"]}, visible: true
       end
