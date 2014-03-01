@@ -113,7 +113,7 @@ module ApplicationHelper
   end
 
   def count_down
-    event = Event.where(['from_date >= ?', DateTime.now]).first.schedule.to_hash
+    event = Event.where(['category = ? AND from_date >= ?', 'Scrum', DateTime.now]).first.schedule.to_hash
     @event_time = nested_hash_value(event,:time).to_datetime
     countdown = Time.now.to_datetime.distance_to(@event_time)
     @minutes_left = countdown[:minutes]
