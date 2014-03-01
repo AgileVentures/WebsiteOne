@@ -99,7 +99,9 @@
 <script>
 
     $(function () {
-      $( ".datepicker" ).datepicker();
+      $( ".datepicker" ).datepicker({
+        format: 'yyyy-mm-dd'
+      });
       $('.timepicker').timepicker();
 
         var toggle_repeats_yearly_on = function () {

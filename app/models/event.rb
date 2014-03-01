@@ -64,7 +64,7 @@ class Event < ActiveRecord::Base
         days = repeats_weekly_each_days_of_the_week.map {|d| d.to_sym }
         s.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
-    return s
+    s
   end
 
 
