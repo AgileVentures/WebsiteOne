@@ -3,7 +3,14 @@ class VisitorsController < ApplicationController
 
   def index
     @message = ''
+    count_down
   end
+
+
+
+
+
+
 
   def send_contact_form
     begin
@@ -26,4 +33,6 @@ class VisitorsController < ApplicationController
       redirect_to root_path
     end
   end
+
+
 end

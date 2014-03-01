@@ -111,4 +111,15 @@ module ApplicationHelper
     </a>
     HTML
   end
+
+  def count_down
+    @event_time = Event.first.schedule.start_time.to_datetime
+    #event_time = DateTime.parse('2014-03-01 09:29').utc
+    #countdown = (event_time - Time.now)
+    countdown = Time.now.to_date.distance_to(@event_time)
+    @minutes_left = countdown[:minutes]
+    @hours_left = countdown[:hours]
+    @days_left = countdown[:days]
+
+  end
 end
