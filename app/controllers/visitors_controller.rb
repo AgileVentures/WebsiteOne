@@ -3,10 +3,7 @@ class VisitorsController < ApplicationController
 
   def index
     @message = ''
-    #count_down
-    @minutes_left = '30'
-    @hours_left = '2'
-    @days_left = '1'
+    count_down
   end
 
 

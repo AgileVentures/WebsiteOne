@@ -1,4 +1,4 @@
-class Date
+class DateTime
   def distance_to(end_date)
     days = end_date.day - day
     hours = end_date.hour - hour
