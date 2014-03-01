@@ -265,3 +265,11 @@ Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
         pending
     end
 end
+
+Then(/^I check "([^"]*)"$/) do |item|
+  check item
+end
+
+Then(/^I wait for my slow internet to load$/) do
+  sleep(5)
+end

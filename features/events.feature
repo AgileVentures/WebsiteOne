@@ -14,7 +14,6 @@ Feature: Events
       | Scrum            |
       | Pair Programming |
 
-
   Scenario: Create a new event
     Given I am logged in
     And I am on Events index page
@@ -24,3 +23,18 @@ Feature: Events
     And I click the "Save" button
     Then I should see "Event Created"
     Then I should be on the Events index page
+
+  @javascript
+  Scenario: Creating a repeating event
+    Given I am logged in
+    And I am on Events index page
+    When I click "New Event"
+    And I fill in "Name" with "Scrum" within the main content
+    And I fill in "Description" with "scrum description"
+    And I select "Repeats" to "weekly"
+    And I check "Monday"
+    And I check "Thursday"
+    And I click the "Save" button
+    Then I should see "Event Created"
+    Then I should be on the Events index page
+    Then I should see multiple "Scrum" events

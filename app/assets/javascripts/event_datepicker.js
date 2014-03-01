@@ -11,7 +11,7 @@ $(function() {
       } else {
         $('#event_repeats_yearly_on_options').hide();
       }
-    }
+    };
     toggle_repeats_yearly_on();
     $('#event_repeats_yearly_on').on('change', function () {
       toggle_repeats_yearly_on();
@@ -22,7 +22,7 @@ $(function() {
       } else {
         $('.event_time').show();
       }
-    }
+    };
     toggle_event_times();
     $('#event_is_all_day').on('change', function () {
       toggle_event_times();
@@ -50,7 +50,7 @@ $(function() {
           $('#repeats_yearly_options').show();
           break;
       }
-    }
+    };
     toggle_event_options();
     $('#event_repeats').on('change', function () {
       toggle_event_options();
@@ -64,7 +64,7 @@ $(function() {
           $('#event_repeat_ends_on').show();
           break;
       }
-    }
+    };
     toggle_repeat_ends_on();
     $('#event_repeat_ends').on('change', function () {
       toggle_repeat_ends_on();
@@ -80,7 +80,7 @@ $(function() {
           $('#event_repeats_monthly_on').show();
           break;
       }
-    }
+    };
     toggle_repeats_monthly();
     $('#event_repeats_monthly').on('change', function () {
       toggle_repeats_monthly();
