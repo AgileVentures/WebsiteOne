@@ -2,7 +2,7 @@ module ApplicationHelper
 
   include ArticlesHelper
 
-  def gravatar_for(email, options = { size: 80 })
+  def gravatar_for(email, options = {size: 80})
     hash = Digest::MD5::hexdigest(email.strip.downcase)
     "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=mm"
   end
@@ -61,12 +61,12 @@ module ApplicationHelper
     provider = provider.downcase
     display_name = {
         'github' => 'GitHub',
-        'gplus'  => 'Google+'
+        'gplus' => 'Google+'
     }
 
     fa_icon = {
         'github' => 'github-alt',
-        'gplus'  => 'google-plus'
+        'gplus' => 'google-plus'
     }
 
     options[:url] ||= root_path
@@ -113,13 +113,11 @@ module ApplicationHelper
   end
 
   def count_down
-    #@event_time = Event.first.schedule.start_time.to_datetime
-    @event_time = DateTime.parse('2014-03-01 15:15').utc
-    #countdown = (event_time - Time.now)
+    event = Event.where(['from_date >= ?', DateTime.now]).first.schedule.to_hash
+    @event_time = nested_hash_value(event,:time).to_datetime
     countdown = Time.now.to_datetime.distance_to(@event_time)
     @minutes_left = countdown[:minutes]
     @hours_left = countdown[:hours]
     @days_left = countdown[:days]
-
   end
 end

@@ -23,7 +23,7 @@
       <% @events.each do |instance| %>
           <% event = instance[:event] %>
           <% time = instance[:time] %>
-          <li class="cbp-item <%= event.category.downcase %> pp">
+          <li class="cbp-item <%= event.category.downcase %>">
             <div class="cbp-l-grid-projects-title"><%= link_to event.name, event_path(event) %></div>
             <div class="cbp-caption">
               <div class=".cbp-caption-defaultWrap">
