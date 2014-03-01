@@ -11,7 +11,16 @@ class EventsController < ApplicationController
 
   def index
     #@events = Event.all.order(from_date: :desc)
-    @events = Event.all
+    @events = []
+    Event.all.each do |event|
+      event.schedule.occurrences(120.days.since).each do |time|
+        @events << {
+            event: event,
+            time: time
+        }
+      end
+    end
+    @events = @events.sort_by { |e| e[:time] }
   end
 
   def edit

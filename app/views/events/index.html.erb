@@ -11,7 +11,7 @@
       <div class="cbp-filter-counter"></div>
     </button>
     <% if user_signed_in? %>
-    <%= link_to 'New Event', new_event_path, :class => 'btn btn-primary pull-right' %>
+      <%= link_to 'New Event', new_event_path, :class => 'btn btn-primary pull-right' %>
     <% end %>
   </div>
 
@@ -19,26 +19,25 @@
   <div id="grid-container" class="cbp-l-grid-projects">
     <ul>
 
-      <% @events.each do |event| %>
-          <% event.schedule.first(5).each do |e| %>
-          <li class="cbp-item <%= event.category.downcase %> pp">
-            <div class="cbp-l-grid-projects-title"><%= link_to event.name, event_path(event) %></div>
-            <div class="cbp-caption">
+      <% @events.each do |instance| %>
+        <% event = instance[:event] %>
+        <% time = instance[:time] %>
+        <li class="cbp-item <%= event.category.downcase %> pp">
+          <div class="cbp-l-grid-projects-title"><%= link_to event.name, event_path(event) %></div>
+          <div class="cbp-caption">
 
-              <div class="cbp-caption-defaultWrap">
-                <img src="<%= cover_for(event) %>" alt="" width="100%">
-              </div>
+            <div class="cbp-caption-defaultWrap">
+              <img src="<%= cover_for(event) %>" alt="" width="100%">
             </div>
-            <% if user_signed_in? %>
-                <div class="cbp-l-grid-projects-desc"> <%= link_to e.strftime("%F at %I:%M%p"), edit_event_path(event) %></div>
-            <% else %>
-                <div class="cbp-l-grid-projects-title"><%= event.from_date %>
-                  - <%= event.from_time.strftime("at %I:%M%p") %></div>
-            <% end %>
-            <div class="cbp-l-grid-projects-desc"> <%= event.description %></div>
-
-          </li>
+          </div>
+          <% if user_signed_in? %>
+            <div class="cbp-l-grid-projects-desc"> <%= link_to time.strftime("%F at %I:%M%p"), edit_event_path(event) %></div>
+          <% else %>
+            <div class="cbp-l-grid-projects-title"><%= event.from_date %>
+              - <%= event.from_time.strftime("at %I:%M%p") %></div>
           <% end %>
+          <div class="cbp-l-grid-projects-desc"> <%= event.description %></div>
+        </li>
       <% end %>
 
     </ul>
@@ -54,109 +53,109 @@
 <%= javascript_include_tag 'confy', data: {no_turbolink: true} %>
 
 <script>
-    (function ($, window, document, undefined) {
+  (function ($, window, document, undefined) {
 
-        var gridContainer = $('#grid-container'),
-                filtersContainer = $('#filters-container');
+    var gridContainer = $('#grid-container'),
+        filtersContainer = $('#filters-container');
 
-        // init cubeportfolio
-        gridContainer.cubeportfolio({
+    // init cubeportfolio
+    gridContainer.cubeportfolio({
 
-            animationType: 'flipOut',
+      animationType: 'flipOut',
 
-            gapHorizontal: 45,
+      gapHorizontal: 45,
 
-            gapVertical: 30,
+      gapVertical: 30,
 
-            gridAdjustment: 'responsive',
+      gridAdjustment: 'responsive',
 
-            caption: 'overlayBottomReveal',
+      caption: 'overlayBottomReveal',
 
-            displayType: 'lazyLoading',
+      displayType: 'lazyLoading',
 
-            displayTypeSpeed: 100,
+      displayTypeSpeed: 100,
 
-            // lightbox
-            lightboxDelegate: '.cbp-lightbox',
-            lightboxGallery: true,
-            lightboxTitleSrc: 'data-title',
-            lightboxShowCounter: true,
+      // lightbox
+      lightboxDelegate: '.cbp-lightbox',
+      lightboxGallery: true,
+      lightboxTitleSrc: 'data-title',
+      lightboxShowCounter: true,
 
-            // singlePage popup
-            singlePageDelegate: '.cbp-singlePage',
-            singlePageDeeplinking: true,
-            singlePageStickyNavigation: true,
-            singlePageShowCounter: true,
-            singlePageCallback: function (url, element) {
+      // singlePage popup
+      singlePageDelegate: '.cbp-singlePage',
+      singlePageDeeplinking: true,
+      singlePageStickyNavigation: true,
+      singlePageShowCounter: true,
+      singlePageCallback: function (url, element) {
 
-                // to update singlePage content use the following method: this.updateSinglePage(yourContent)
-                var t = this;
+        // to update singlePage content use the following method: this.updateSinglePage(yourContent)
+        var t = this;
 
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    dataType: 'html',
-                    timeout: 5000
-                })
-                        .done(function (result) {
-                            t.updateSinglePage(result);
-                        })
-                        .fail(function () {
-                            t.updateSinglePage("Error! Please refresh the page!");
-                        });
-
-            },
-
-            // single page inline
-            singlePageInlineDelegate: '.cbp-singlePageInline',
-            singlePageInlinePosition: 'above',
-            singlePageInlineShowCounter: true,
-            singlePageInlineCallback: function (url, element) {
-                // to update singlePage Inline content use the following method: this.updateSinglePageInline(yourContent)
-            }
-        });
-
-        // add listener for filters click
-        filtersContainer.on('click', '.cbp-filter-item', function (e) {
-
-            var me = $(this);
-
-            // get cubeportfolio data and check if is still animating (reposition) the items.
-            if (!$.data(gridContainer[0], 'cubeportfolio').isAnimating) {
-                me.addClass('cbp-filter-item-active').siblings().removeClass('cbp-filter-item-active');
-            }
-
-            // filter the items
-            gridContainer.cubeportfolio('filter', me.data('filter'), function () {
+        $.ajax({
+          url: url,
+          type: 'GET',
+          dataType: 'html',
+          timeout: 5000
+        })
+            .done(function (result) {
+              t.updateSinglePage(result);
+            })
+            .fail(function () {
+              t.updateSinglePage("Error! Please refresh the page!");
             });
 
-        });
+      },
+
+      // single page inline
+      singlePageInlineDelegate: '.cbp-singlePageInline',
+      singlePageInlinePosition: 'above',
+      singlePageInlineShowCounter: true,
+      singlePageInlineCallback: function (url, element) {
+        // to update singlePage Inline content use the following method: this.updateSinglePageInline(yourContent)
+      }
+    });
+
+    // add listener for filters click
+    filtersContainer.on('click', '.cbp-filter-item', function (e) {
+
+      var me = $(this);
+
+      // get cubeportfolio data and check if is still animating (reposition) the items.
+      if (!$.data(gridContainer[0], 'cubeportfolio').isAnimating) {
+        me.addClass('cbp-filter-item-active').siblings().removeClass('cbp-filter-item-active');
+      }
+
+      // filter the items
+      gridContainer.cubeportfolio('filter', me.data('filter'), function () {
+      });
+
+    });
 
 
-        // add listener for inline filters click
-        gridContainer.on('click', '.cbp-l-grid-projects-inlineFilters', function (e) {
+    // add listener for inline filters click
+    gridContainer.on('click', '.cbp-l-grid-projects-inlineFilters', function (e) {
 
-            var filter = $(this).data('filter');
+      var filter = $(this).data('filter');
 
-            // get cubeportfolio data and check if is still animating (reposition) the items
-            if (!$.data(gridContainer[0], 'cubeportfolio').isAnimating) {
-                filtersContainer.children().removeClass('cbp-filter-item-active').filter('[data-filter="' + filter + '"]').addClass('cbp-filter-item-active');
-            }
+      // get cubeportfolio data and check if is still animating (reposition) the items
+      if (!$.data(gridContainer[0], 'cubeportfolio').isAnimating) {
+        filtersContainer.children().removeClass('cbp-filter-item-active').filter('[data-filter="' + filter + '"]').addClass('cbp-filter-item-active');
+      }
 
-            // filter the items
-            gridContainer.cubeportfolio('filter', filter, function () {
-            });
+      // filter the items
+      gridContainer.cubeportfolio('filter', filter, function () {
+      });
 
-        });
-
-
-        // activate counters
-        gridContainer.cubeportfolio('showCounter', filtersContainer.find('.cbp-filter-item'));
+    });
 
 
-    })(jQuery, window, document);
+    // activate counters
+    gridContainer.cubeportfolio('showCounter', filtersContainer.find('.cbp-filter-item'));
 
-    // See the code implemented in full @ http://scriptpie.com/cubeportfolio/website/index.php?q=juicy-projects
+
+  })(jQuery, window, document);
+
+  // See the code implemented in full @ http://scriptpie.com/cubeportfolio/website/index.php?q=juicy-projects
 </script>
 
 
