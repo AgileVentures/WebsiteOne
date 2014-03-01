@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226233711) do
+ActiveRecord::Schema.define(version: 20140225215805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,25 +61,13 @@ ActiveRecord::Schema.define(version: 20140226233711) do
     t.date     "to_date"
     t.time     "to_time"
     t.string   "repeats"
-    t.integer  "repeats_every_n_days"
-    t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
-    t.integer  "repeats_every_n_months"
-    t.string   "repeats_monthly"
-    t.integer  "repeats_monthly_each_days_of_the_month_mask"
-    t.integer  "repeats_monthly_on_ordinals_mask"
-    t.integer  "repeats_monthly_on_days_of_the_week_mask"
-    t.integer  "repeats_every_n_years"
-    t.integer  "repeats_yearly_each_months_of_the_year_mask"
-    t.boolean  "repeats_yearly_on"
-    t.integer  "repeats_yearly_on_ordinals_mask"
-    t.integer  "repeats_yearly_on_days_of_the_week_mask"
     t.string   "repeat_ends"
     t.date     "repeat_ends_on"
     t.string   "time_zone"
+    t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "category"
   end
 
   create_table "follows", force: true do |t|
@@ -141,9 +129,9 @@ ActiveRecord::Schema.define(version: 20140226233711) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "display_email"
+    t.string   "youtube_id"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
-    t.string   "youtube_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"

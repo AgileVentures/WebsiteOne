@@ -13,10 +13,6 @@ describe Event do
                             repeats: 'never',
                             repeats_every_n_days: nil,
                             repeats_every_n_weeks: nil,
-                            repeats_every_n_months: nil,
-                            repeats_monthly: 'each',
-                            repeats_every_n_years: nil,
-                            repeats_yearly_on: false,
                             repeat_ends: 'never',
                             repeat_ends_on: 'Mon, 17 Jun 2013',
                             time_zone: 'Eastern Time (US & Canada)')

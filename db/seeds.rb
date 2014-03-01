@@ -81,6 +81,20 @@ for i in (1..4)
   end
 end
 
+
+Event.create!( name: 'one time event',
+               category: 'Scrum',
+               description: '',
+               is_all_day: false,
+               from_date: 'Mon, 17 Jun 2013',
+               from_time: '2000-01-01 09:00:00 UTC',
+               to_date: 'Mon, 17 Jun 2013',
+               to_time: '2000-01-01 17:00:00 UTC',
+               repeats: 'never',
+               repeat_ends: 'never',
+               repeat_ends_on: 'Mon, 17 Jun 2013',
+               time_zone: 'Eastern Time (US & Canada)')
+
 puts 'Project.count ' + old_project_count.to_s.bold.red + ' -> ' + Project.count.to_s.bold.green
 puts 'Document.count ' + old_doc_count.to_s.bold.red + ' -> ' + Document.count.to_s.bold.green
 puts 'User.count ' + old_user_count.to_s.bold.red + ' -> ' + User.count.to_s.bold.green
