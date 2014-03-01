@@ -3,12 +3,12 @@ class Event < ActiveRecord::Base
   validates :name, :from_date, :to_date, :time_zone, :repeats, presence: true
   validates :from_time,:to_time, presence: true, :if => :not_all_day?
 
-  #validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
+  validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == "weekly" }
   validate :from_must_come_before_to
 
-  RepeatsOptions = [ 'never','weekly' ]
-  RepeatEndsOptions = ['never','on']
+  RepeatsOptions = %w[never weekly]
+  RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
 
 

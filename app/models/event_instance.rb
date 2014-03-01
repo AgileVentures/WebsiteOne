@@ -42,7 +42,6 @@ class EventInstance
       event.schedule.occurrences_between(begin_date, end_date).map { |date|
         i = EventInstance.new()
         i.title = event.name
-        i.color = event.calendar.color
         i.url = Rails.application.routes.url_helpers.event_path(event)
         i.start = date
         i.end = date + event.duration

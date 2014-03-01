@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20140225215805) do
     t.date     "to_date"
     t.time     "to_time"
     t.string   "repeats"
+    t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
     t.string   "repeat_ends"
     t.date     "repeat_ends_on"
