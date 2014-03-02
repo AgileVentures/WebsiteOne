@@ -1,36 +1,44 @@
 <div class="container">
   <div class="row">
-  <div class="col-lg-6">
-    <h2><%= @event.name %></h2>
+    <div class="col-lg-6">
+      <div class="media">
+        <a class="pull-left" href="#">
+          <img class="media-object" src="<%= cover_for(@event) %>" alt="<%= @event.name %>">
+        </a>
 
-    <strong><%= @event.description %></strong>
+        <div class="media-body">
+          <h4 class="media-heading"><%= @event.name %></h4>
+          <strong><%= @event.description %></strong>
 
-    <br/>
-    <strong>From:</strong>
-    <%= @event.from_date %>
-    <%= @event.from_time.strftime("at %I:%M%p") %>
-    <br/>
-    <strong>To:</strong>
-    <%= @event.to_date %>
-    <%= @event.to_time.strftime("at %I:%M%p") %>
-    <br/>
-    <strong>Duration:</strong>
+          <br/>
+          <%= @event.from_date %>
+          <br/>
+          <%= @event.from_time.strftime("%I:%M%p") %> - <%= @event.to_time.strftime("at %I:%M%p") %>
+          <br/>
 
-    <%= distance_of_time_in_words(@event.schedule.duration) %>
-    <br/>
-    <strong>Schedule:</strong>
-    <%= @event.schedule %>
-    <br/>
-    <strong>Upcomming Events:</strong>
-    <% @event.schedule.first(5).each do |e| %>
+        </div>
+      </div>
+      <% if @event.schedule.present? %>
+      <div class="media">
+
+        <strong>Schedule</strong>
+        <%= @event.schedule %>
         <br/>
-        <%= e.to_s %>
-    <% end %>
-  </div>
-  <div class="col-lg-6">
-    <%= link_to 'Back', root_path, :class => 'btn btn-danger' %>
-    <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary' %>
-  </div>
+
+        <strong>Upcomming <%= @event.name.pluralize %>:</strong>
+        <% @event.schedule.first(5).each do |e| %>
+            <br/>
+            <%= e.to_s %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+
+
+    <div class="col-lg-6">
+      <%= link_to 'Back', root_path, :class => 'btn btn-danger' %>
+      <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary' %>
+    </div>
   </div>
 </div>
 
