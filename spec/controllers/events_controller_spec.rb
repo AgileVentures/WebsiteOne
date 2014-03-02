@@ -6,7 +6,9 @@ describe EventsController do
 
   before :each do
     @event = FactoryGirl.create(:event)
-    @events = [@event]
+    debugger
+    @events = Event.all
+    #@events = [@event]
   end
 
   describe 'GET index' do

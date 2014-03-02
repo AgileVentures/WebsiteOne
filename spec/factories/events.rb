@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :event do
     sequence(:name) { |n| "Event #{n}" }
     description 'Scumie scrum'
+    category 'Scrum'
     is_all_day false
     from_date 'Mon, 17 Jun 2013'
     from_time '2000-01-01 09:00:00 UTC'

@@ -31,7 +31,7 @@ describe Event do
                             to_time: '2000-01-01 17:00:00 UTC',
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
-                            repeats_weekly_each_days_of_the_week_mask: 65,
+                            repeats_weekly_each_days_of_the_week_mask: 96,
                             repeat_ends: 'never',
                             repeat_ends_on: 'Tue, 25 Jun 2013',
                             time_zone: 'Eastern Time (US & Canada)')
@@ -50,7 +50,7 @@ describe Event do
                             to_time: '2000-01-01 17:00:00 UTC',
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
-                            repeats_weekly_each_days_of_the_week_mask: 1,
+                            repeats_weekly_each_days_of_the_week_mask: 64,
                             repeat_ends: 'never',
                             repeat_ends_on: 'Mon, 17 Jun 2013',
                             time_zone: 'Eastern Time (US & Canada)')
@@ -69,7 +69,7 @@ describe Event do
                             to_time: '2000-01-01 17:00:00 UTC',
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
-                            repeats_weekly_each_days_of_the_week_mask: 2,
+                            repeats_weekly_each_days_of_the_week_mask: 1,
                             repeat_ends: 'never',
                             repeat_ends_on: 'Mon, 17 Jun 2013',
                             time_zone: 'Eastern Time (US & Canada)')
