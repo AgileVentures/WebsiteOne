@@ -9,14 +9,15 @@ Feature: Events
   Scenario: Show index of events
     Given I am on Events index page
     Then I should see "AgileVentures Events"
-    And I should see buttons:
-      | All              |
-      | Scrum            |
-      | Pair Programming |
+
+  Scenario: Show index of events with a New Event button for logged in user
+    Given I am logged in
+    Given I am on Events index page
+    Then I should see "AgileVentures Events"
+    And I should see link "New Event"
 
 
   Scenario: Render Next Scrum info on landing page
-    Given I am logged in
     And I am on the home page
     Then I should see "Scrum"
     And the next event should be in:
