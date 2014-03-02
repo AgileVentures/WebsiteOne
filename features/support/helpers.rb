@@ -26,8 +26,11 @@ module Helpers
   end
 
   def create_test_user(options = {})
+    skills = options.delete "skills"
     options = default_test_user_details.merge options
-    User.create!(options)
+    user = User.create!(options)
+    user.skill_list = skills.strip.gsub(" ", ", ")
+    user.save!
   end
 
   def find_user
