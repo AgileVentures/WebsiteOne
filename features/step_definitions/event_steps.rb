@@ -4,6 +4,7 @@ Given(/^I am on Events index page$/) do
   visit('/events')
 end
 Given(/^following events exist:$/) do |table|
+  Delorean.time_travel_to(Time.parse("2014/02/01 09:15:00 UTC"))
   table.hashes.each do |hash|
     Event.create(hash)
     #@event = Event.new(hash)
@@ -23,12 +24,9 @@ Then(/^I should see multiple "([^"]*)" events$/) do |event|
   page.all(:css, 'a', text: event, visible: false).count.should be > 1
 end
 When(/^the next event should be in:$/) do |table|
-  # table is a | 22 | hours   |
   # today = mock_current_time(DateTime, '2014-02-01 09:15:00 UTC')
-  Delorean.time_travel_to(Time.parse("2014-02-01 09:15:00 UTC"))
 
   table.rows.each do |period, interval|
-    debugger
     page.should have_content([period, interval].join(' '))
   end
 
