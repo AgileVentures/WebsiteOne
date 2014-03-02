@@ -27,9 +27,9 @@ When(/^the next event should be in:$/) do |table|
   # today = mock_current_time(DateTime, '2014-02-01 09:15:00 UTC')
   Delorean.time_travel_to(Time.parse("2014-02-01 09:15:00 UTC"))
 
-  table.rows.flatten.each do |period, interval|
+  table.rows.each do |period, interval|
     debugger
-    page.should have_content([interval, period].join(' '))
+    page.should have_content([period, interval].join(' '))
   end
 
   Delorean.back_to_the_present
