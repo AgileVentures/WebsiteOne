@@ -40,4 +40,5 @@ WebsiteOne::Application.routes.draw do
   post 'mail_contact_form', to: 'visitors#send_contact_form'
 
 
+
 end

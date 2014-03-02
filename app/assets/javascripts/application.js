@@ -18,6 +18,8 @@
 //= require 404
 //= require bootstrap-tokenfield.min
 //= require typeahead
+//= require bootstrap/modal
+
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
@@ -109,7 +111,10 @@ $(function() {
       }
     });
 
-    var affixedNav = $('#nav'),
+
+
+
+      var affixedNav = $('#nav'),
         header = $('#main_header'),
         main = $('#main'),
     // manually selected properties which will affect affix threshold height, if layout changes,
@@ -137,7 +142,6 @@ $(function() {
   }
 
 
-
   $(document).on('page:fetch',   function() { NProgress.start(); });
   $(document).on('page:change',  function() { NProgress.done(); });
   $(document).on('page:restore', function() { NProgress.remove(); });
@@ -145,3 +149,5 @@ $(function() {
   $(document).ready($.fn.BryanHATESTHIS);
   $(document).on('page:load', $.fn.BryanHATESTHIS);
 });
+
+

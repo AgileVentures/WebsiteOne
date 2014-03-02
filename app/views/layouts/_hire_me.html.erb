@@ -1,0 +1,46 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h2 class="modal-title" id="myModalLabel">Hire Me Form</h2>
+    </div>
+    <div class="modal-body">
+      <%= form_tag('/mail_contact_form', id: 'contact_form', :class => 'form-horizontal', method: 'post') do %>
+          <%= label_tag :name %>
+          <%= text_field_tag :name %>
+          <%= label_tag :email %>
+          <%= text_field_tag :email %>
+          <%= label_tag :message %>
+          <%= text_area_tag :message %>
+          <div class="form-actions">
+            <%= submit_tag 'Send message', id: 'send', :class => 'btn btn-primary' %>
+          </div>
+      <% end %>
+
+
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!--<h3 class="footer_header">-->
+  <!--Contact us-->
+<!--</h3>-->
+<!--<p>Send a traditional email to <a href="mailto:info@agileventures.org">info@agileventures.org</a>, or use the contact form. </p>-->
+<!--<form accept-charset="UTF-8" action="/mail_contact_form" class="form-horizontal contact" id="contact_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="Nc/CT7/5JpoxEsGW1IarmbSqHLbXEeQRLr1xZHWqZFE=" /></div>-->
+  <!--<label for="name">Name</label>-->
+  <!--<input id="name" name="name" type="text" />-->
+  <!--<label for="email">Email</label>-->
+  <!--<input id="email" name="email" type="text" />-->
+  <!--<label for="message">Message</label>-->
+  <!--<textarea id="message" name="message">-->
+  <!--</textarea>-->
+  <!--<div class="form-actions">-->
+    <!--<input class="btn btn-primary" id="send" name="commit" type="submit" value="Send message" />-->
+  <!--</div>-->
+<!--</form>-->
