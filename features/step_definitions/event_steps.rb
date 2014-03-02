@@ -20,3 +20,10 @@ Then(/^I should see multiple "([^"]*)" events$/) do |event|
   puts page.body
   page.all(:css, 'a', text: event, visible: false).count.should be > 1
 end
+When(/^the next event should be in:$/) do |table|
+  # table is a | 22 | hours   |
+  today = mock_current_time(DateTime, '2014-02-01 09:15:00 UTC')
+
+  debugger
+  table.hashes.each do |hash|
+end

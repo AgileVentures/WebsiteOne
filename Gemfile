@@ -45,6 +45,7 @@ group :test do
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
   gem 'zeus', '0.13.4.pre2' # rails preloading environment (the only ver that works with RubyMine)
   gem 'webmock' # mocking external net connections
+  gem 'delorean'
 end
 
 group :development, :test do
