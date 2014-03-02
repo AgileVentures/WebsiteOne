@@ -24,12 +24,14 @@
             </ul>
           </nav>
         </aside>
-        <%= render partial: 'layouts/sponsors' %>
       </div>
     <div id="not-sidebar" class="col-sm-6">
       <div id="not-sidebar-content">
         <%= yield %>
       </div>
+    </div>
+    <div class="col-sm-3 pull-right">
+      <%= render partial: 'layouts/sponsors' %>
     </div>
   </div>
 <% end %>
