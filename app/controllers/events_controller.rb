@@ -13,7 +13,8 @@ class EventsController < ApplicationController
     #@events = Event.all.order(from_date: :desc)
     @events = []
     Event.all.each do |event|
-      event.schedule.occurrences_between(Date.today, event.repeat_ends_on).each do |time|
+      event.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
+      #event.schedule.occurrences_between(Date.today, event.repeat_ends_on).each do |time|
       #event.schedule.occurrences(120.days.since).each do |time|
         @events << {
             event: event,

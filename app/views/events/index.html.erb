@@ -13,20 +13,18 @@
             <% event = instance[:event] %>
             <% time = instance[:time] %>
             <li class="media-item event-item <%= event.category.downcase %>">
-              <div>
-                <h4 class="media-heading "><%= link_to event.name, event_path(event) %></h4>
-              <div>
+                <h4 class="media-heading"><%= link_to event.name, event_path(event) %></h4>
                 <div>
                   <img class="media-object" src="<%= cover_for(event) %>" alt="" width="100%">
                 </div>
-              </div>
+
               <% if user_signed_in? %>
                   <div> <%= link_to time.strftime("%F at %I:%M%p"), edit_event_path(event) %></div>
               <% else %>
                   <p><%= event.from_date %>
                     - <%= event.from_time.strftime("at %I:%M%p") %></p>
               <% end %>
-              <div> <%= event.description %></div>
+              <small> <%= event.description %></small>
             </li>
         <% end %>
       </ul>
