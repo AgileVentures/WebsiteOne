@@ -4,7 +4,7 @@
 }
 
 #event-container .event-item {
-    width: 25%;
+    width: 33.3%;
     /*height: 150px;*/
     margin: 5px, 15px, 5px, 5px;
 }
@@ -22,7 +22,7 @@
 
 #event-container .event-item img {
     margin-left: 8px !important;
-    width: 200px;
+    width: 250px;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
