@@ -4,11 +4,10 @@ describe EventsController do
   let(:event) { @event }
   let(:valid_session) { {} }
 
+
   before :each do
     @event = FactoryGirl.create(:event)
-    debugger
-    @events = Event.all
-    #@events = [@event]
+    @events = [@event]
   end
 
   describe 'GET index' do
