@@ -110,10 +110,10 @@ ActiveRecord::Schema.define(version: 20140225000044) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "youtube_id"
     t.boolean  "display_email"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
-    t.string   "youtube_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"
