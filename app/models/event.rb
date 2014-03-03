@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   include IceCube
-  validates :name, :from_date, :to_date, :time_zone, :repeats, presence: true
+  validates :name, :from_date, :to_date, :time_zone, :repeats, :category, presence: true
   validates :from_time,:to_time, presence: true, :if => :not_all_day?
 
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
@@ -71,14 +71,14 @@ class Event < ActiveRecord::Base
   private
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
-      errors.add(:base, "You must have at least one repeats weekly each days of the week")
+      errors.add(:base, 'You must have at least one repeats weekly each days of the week')
     end
   end
 
 
   def from_must_come_before_to
     if from > to
-      errors.add(:to_date, "must come after the from date")
+      errors.add(:to_date, 'must come after the from date')
     end
   end
 end

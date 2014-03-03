@@ -28,7 +28,8 @@
         <strong>Upcomming <%= @event.name.pluralize %>:</strong>
         <% @event.schedule.first(5).each do |e| %>
             <br/>
-            <%= e.to_s %>
+
+            <%= e.time.strftime("%F at %I:%M%p") %>
         <% end %>
       </div>
       <% end %>
