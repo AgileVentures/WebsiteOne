@@ -74,6 +74,13 @@ describe 'Youtube helpers' do
     Youtube.parse_response(response, user)
   end
 
+  it 'sorts videos by published date' do
+    response = File.read('spec/fixtures/youtube_user_response.json')
+    videos = Youtube.parse_response(response, 'user')
+    titles = videos.map {|video| video[:title]}
+    expect(titles.index('PP on WSO')).to be < titles.index('WebsiteOne - Pairing session')
+  end
+
   it 'retrieves channel ID for logged in user' do
     request_string = "https://www.googleapis.com/youtube/v3/channels?part=id&mine=true"
     WebMock.stub_request(:get, request_string).to_return(body: 'response')

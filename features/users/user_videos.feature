@@ -60,6 +60,12 @@ Feature: As a site owner
     When I go to my "profile" page
     Then I should see "Working in HW repo" in "video description"
 
+    Scenario: show videos sorted by published date
+      Given my YouTube Channel ID with some videos in it
+      And my YouTube channel is connected
+      When I go to my "profile" page
+      Then I should see "PP on WSO" before "WebsiteOne - Pairing session"
+
   Scenario: show embedded youtube player with the first video
     Given my YouTube Channel ID with some videos in it
     And my YouTube channel is connected

@@ -76,7 +76,7 @@ module Youtube
           all_videos += next_videos if next_videos
         end
 
-        all_videos
+        all_videos.sort_by{ |video| video[:published] }.reverse
       rescue JSON::JSONError
         Rails.logger.warn('Attempted to decode invalid JSON')
         nil

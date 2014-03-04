@@ -63,3 +63,8 @@ Given /^the following project video tags exist:$/ do |table|
   end
   Youtube.stub(parse_response: response)
 end
+
+
+Then /^I should see "([^"]*)" before "([^"]*)"$/ do |title_1, titile_2|
+  expect(page.body).to match(/#{title_1}.*#{titile_2}/m)
+end
