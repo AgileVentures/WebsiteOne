@@ -3,10 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  unless Rails.application.config.consider_all_requests_local
-    rescue_from Exception, with: lambda { |exception| render_error 500, exception }
-    rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
-  end
+  rescue_from Exception, with: lambda { |exception| render_error 500, exception }
+  rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
 
   protected
   # overriding the devise sanitizer class to allow for custom fields to be permitted for mass assignment
@@ -25,6 +23,8 @@ class ApplicationController < ActionController::Base
   private
 
     def render_error(status, e)
+      raise e unless Rails.env.production?
+
       Rails.logger.error e.message
       e.backtrace.each_with_index { |line, index| Rails.logger.error line; break if index > 5 }
       case status

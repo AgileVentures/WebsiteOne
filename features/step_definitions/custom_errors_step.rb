@@ -1,12 +1,9 @@
 Given(/^App is in production$/) do
-  WebsiteOne::Application.configure do
-    config.consider_all_requests_local       = false
-    config.action_controller.perform_caching = true
-  end
+  Rails.env.stub(production?: true)
 end
 
 Given(/^I visit "(.*?)"$/) do |path|
-  visit path
+  visit 'http://0.0.0.0:3000/' + path
 end
 
 Then(/^the page should be titled "(.*?)"$/) do |title|
