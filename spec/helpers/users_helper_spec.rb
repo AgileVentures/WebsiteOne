@@ -33,7 +33,7 @@ describe 'Youtube helpers' do
 
   it 'retrieves videos from youtube' do
     user = double(User, youtube_id: 'test_id')
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json'
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50'
     WebMock.stub_request(:get, request_string).to_return(body: 'response')
 
     expect(Youtube).to receive(:parse_response).with('response', user)
@@ -43,7 +43,7 @@ describe 'Youtube helpers' do
   it 'filters videos by project tags' do
     user = double(User, youtube_id: 'test_id')
     tags = ['London', 'Paris']
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&q=London%7CParis'
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&q=London%7CParis'
     WebMock.stub_request(:get, request_string).to_return(body: 'response')
 
     expect(Youtube).to receive(:parse_response).with('response', user)
@@ -63,8 +63,19 @@ describe 'Youtube helpers' do
     expect(Youtube.parse_response(response, 'user').first).to eq(hash)
   end
 
+  it 'retrieve more than max limit of 50 videos' do
+    user = double(User, youtube_id: 'test_id')
+    response = File.read('spec/fixtures/youtube_user_response_with_next_entry.json')
+    request_string = 'https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads?alt=json&start-index=51&max-results=50'
+    WebMock.stub_request(:get, request_string).to_return(body: 'next_response')
+
+    expect(Youtube).to receive(:parse_response).with(response, user).ordered.and_call_original
+    expect(Youtube).to receive(:parse_response).with('next_response', user)
+    Youtube.parse_response(response, user)
+  end
+
   it 'retrieves channel ID for logged in user' do
-    request_string = "https://www.googleapis.com/youtube/v3/channels?access_token=token&part=id&mine=true"
+    request_string = "https://www.googleapis.com/youtube/v3/channels?part=id&mine=true"
     WebMock.stub_request(:get, request_string).to_return(body: 'response')
     json = { 'items' => [{ 'id' => 'id' }] }
 
@@ -73,12 +84,21 @@ describe 'Youtube helpers' do
   end
 
   it 'retrieves youtube user_id for logged in user' do
-    request_string = "https://gdata.youtube.com/feeds/api/users/default?access_token=token&alt=json"
+    request_string = "https://gdata.youtube.com/feeds/api/users/default?alt=json"
     WebMock.stub_request(:get, request_string).to_return(body: 'response')
     json = { 'entry' => { 'yt$username' => { '$t' => 'id' } } }
 
     expect(JSON).to receive(:load).with('response').and_return(json)
     expect(Youtube.user_id('token')).to eq('id')
+  end
+
+  it 'retrieves youtube user_name for logged in user' do
+    request_string = "https://gdata.youtube.com/feeds/api/users/default?alt=json"
+    WebMock.stub_request(:get, request_string).to_return(body: 'response')
+    json = { 'entry' => { 'title' => { '$t' => 'Ivan Petrov' } } }
+
+    expect(JSON).to receive(:load).with('response').and_return(json)
+    expect(Youtube.user_name('token')).to eq('Ivan Petrov')
   end
 
   it 'creates a "link to youtube" button' do
@@ -99,7 +119,7 @@ describe 'Youtube helpers' do
 
   it 'creates a link to youtube player' do
     video = { id: 'id_1' }
-    link = "http://www.youtube.com/embed/id_1?enablejsapi=1"
+    link = 'http://www.youtube.com/embed/id_1?enablejsapi=1'
     expect(helper.video_embed_link(video)).to eq(link)
   end
 
