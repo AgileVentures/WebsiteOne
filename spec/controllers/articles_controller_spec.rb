@@ -47,7 +47,9 @@ describe ArticlesController do
     end
 
     it 'should search the database using the friendly id' do
-      Article.stub_chain(:friendly, :find).and_return(@article)
+      dummy = Object.new
+      Article.should_receive(:friendly).and_return(dummy)
+      dummy.should_receive(:find).with(@article.friendly_id).and_return(@article)
       get :show, id: @article.friendly_id
     end
 

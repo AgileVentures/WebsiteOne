@@ -9,7 +9,7 @@ WebsiteOne::Application.routes.draw do
 
   #get 'users/sign_out' => redirect('/404.html')
   #get 'users/password' => redirect('/404.html')
-  get 'users/show/:id', to: 'users#show', as: 'users_show'
+  get 'users/:id', to: 'users#show', as: 'users_show'
 
   get '/404', :to => 'errors#not_found'
   get '/internal_server_error', :to => 'errors#internal_error'
@@ -36,13 +36,11 @@ WebsiteOne::Application.routes.draw do
   resources :articles
 
   get 'projects/:project_id/:id', to: 'documents#show'
-
   get '/auth/:provider/callback' => 'authentications#create'
   get '/auth/failure' => 'authentications#failure'
-
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
-
   post 'mail_contact_form', to: 'visitors#send_contact_form'
+
 
 
 end
