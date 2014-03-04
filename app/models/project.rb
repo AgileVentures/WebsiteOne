@@ -14,6 +14,10 @@ class Project < ActiveRecord::Base
     order('LOWER(title)').where('title LIKE ?', "%#{search}%").paginate(per_page: 5, page: page)
   end
 
+  def self.all_tags
+    Project.tag_counts_on('tags').map{|tag| tag.name}
+  end
+
   # Bryan: Used to generate paths, used only in testing.
   # Might want to switch to rake generated paths in the future
   def url_for_me(action)
