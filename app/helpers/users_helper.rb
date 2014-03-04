@@ -22,6 +22,7 @@ module UsersHelper
             "/auth/gplus/?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button"
   end
 
+  #TODO YA change destroy/0 to /youtube_id
   def unlink_from_youtube_button(origin_url)
     link_to raw('<i class="fa fa-large fa-youtube"></i> Disconnect YouTube'),
             "/auth/destroy/0?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button", method: :delete
@@ -41,29 +42,28 @@ end
 module Youtube
   class << self
 
-    def user_videos(user)
+    def user_videos(user, tags = [])
       if user_id = user.youtube_id
-        parse_response(open("http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json").read, user)
+        request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json"
+        request += '&q=' + tags.join('%7C') unless tags.empty? # %7C is escaped '|' pipe sign
+
+        parse_response(open(request).read, user)
       end
     end
 
-    #def project_videos(user)
-    #  parse_response(open("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=#{user_id}&order=date&q=#{search_term}&type=video&key=#{api_key}").read)
-    #end
-
-    def parse_response(response, user)
+    def parse_response(response, user = '')
       begin
         json = JSON.parse(response)
         videos = json['feed']['entry']
         return if videos.nil?
         videos.map do |hash|
           {
-              id:         hash['id']['$t'].split('/').last,
-              published:  hash['published']['$t'].to_date,
-              title:      hash['title']['$t'],
-              content:    hash['content']['$t'],
-              url:        hash['link'].first['href'],
-              thumbs:     hash['media$group']['media$thumbnail'],
+              id: hash['id']['$t'].split('/').last,
+              published: hash['published']['$t'].to_date,
+              title: hash['title']['$t'],
+              content: hash['content']['$t'],
+              url: hash['link'].first['href'],
+              thumbs: hash['media$group']['media$thumbnail'],
               player_url: hash['media$group']['media$player'].first['url'],
               user: user
           }
