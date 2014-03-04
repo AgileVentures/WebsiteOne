@@ -114,7 +114,7 @@ module ApplicationHelper
 
   def count_down
     @events = []
-    Event.where(['category = ? AND from_date >= ?', 'Scrum', DateTime.now]).each do |event|
+    Event.where(['category = ?', 'Scrum']).each do |event|
       event.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
         unless time <= DateTime.now
         @events << {

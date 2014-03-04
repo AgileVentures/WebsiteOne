@@ -15,6 +15,5 @@ class CreateEvents < ActiveRecord::Migration
       t.string :time_zone
       t.timestamps
     end
-
   end
 end

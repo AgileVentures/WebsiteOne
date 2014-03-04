@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   include IceCube
   validates :name, :event_date, :start_time, :end_time, :time_zone, :repeats, :category, presence: true
 
-  validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
+  validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == "weekly" }
   validate :from_must_come_before_to
 
