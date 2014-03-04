@@ -9,17 +9,17 @@ describe Event do
     before do
       @event = FactoryGirl.create(:event)
     end
-    it 'blank Name' do
+    it 'nil :name' do
       @event.name = ''
       expect(@event.save).to be_false
     end
 
-    it 'blank category' do
+    it 'nil :category' do
       @event.category = nil
       expect(@event.save).to be_false
     end
 
-    it 'blank repeats' do
+    it 'nil :repeats' do
       @event.repeats = nil
       expect(@event.save).to be_false
     end
@@ -30,11 +30,9 @@ describe Event do
       event = Event.create!(name: 'one time event',
                             category: 'Scrum',
                             description: '',
-                            is_all_day: false,
-                            from_date: 'Mon, 17 Jun 2013',
-                            from_time: '2000-01-01 09:00:00 UTC',
-                            to_date: 'Mon, 17 Jun 2013',
-                            to_time: '2000-01-01 17:00:00 UTC',
+                            event_date: 'Mon, 17 Jun 2013',
+                            start_time: '2000-01-01 09:00:00 UTC',
+                            end_time: '2000-01-01 17:00:00 UTC',
                             repeats: 'never',
                             repeats_every_n_weeks: nil,
                             repeat_ends: 'never',
@@ -49,11 +47,9 @@ describe Event do
       event = Event.create!(name: 'every weekend event',
                             category: 'Scrum',
                             description: '',
-                            is_all_day: false,
-                            from_date: 'Mon, 17 Jun 2013',
-                            from_time: '2000-01-01 09:00:00 UTC',
-                            to_date: 'Mon, 17 Jun 2013',
-                            to_time: '2000-01-01 17:00:00 UTC',
+                            event_date: 'Mon, 17 Jun 2013',
+                            start_time: '2000-01-01 09:00:00 UTC',
+                            end_time: '2000-01-01 17:00:00 UTC',
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 96,
@@ -68,11 +64,9 @@ describe Event do
       event = Event.create!(name: 'every Sunday event',
                             category: 'Scrum',
                             description: '',
-                            is_all_day: false,
-                            from_date: 'Mon, 17 Jun 2013',
-                            from_time: '2000-01-01 09:00:00 UTC',
-                            to_date: 'Mon, 17 Jun 2013',
-                            to_time: '2000-01-01 17:00:00 UTC',
+                            event_date: 'Mon, 17 Jun 2013',
+                            start_time: '2000-01-01 09:00:00 UTC',
+                            end_time: '2000-01-01 17:00:00 UTC',
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 64,
@@ -87,11 +81,9 @@ describe Event do
       event = Event.create!(name: 'every Monday event',
                             category: 'Scrum',
                             description: '',
-                            is_all_day: false,
-                            from_date: 'Mon, 17 Jun 2013',
-                            from_time: '2000-01-01 09:00:00 UTC',
-                            to_date: 'Mon, 17 Jun 2013',
-                            to_time: '2000-01-01 17:00:00 UTC',
+                            event_date: 'Mon, 17 Jun 2013',
+                            start_time: '2000-01-01 09:00:00 UTC',
+                            end_time: '2000-01-01 17:00:00 UTC',
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 1,

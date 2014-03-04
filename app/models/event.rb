@@ -1,7 +1,6 @@
 class Event < ActiveRecord::Base
   include IceCube
-  validates :name, :from_date, :to_date, :time_zone, :repeats, :category, presence: true
-  validates :from_time,:to_time, presence: true, :if => :not_all_day?
+  validates :name, :event_date, :start_time, :end_time, :time_zone, :repeats, :category, presence: true
 
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == "weekly" }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == "weekly" }
@@ -12,13 +11,7 @@ class Event < ActiveRecord::Base
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
 
 
-  def not_all_day?
-    if is_all_day
-      return false
-    else
-      return true
-    end
-  end
+
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
     self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DaysOfTheWeek).map { |r| 2**DaysOfTheWeek.index(r) }.inject(0, :+)
@@ -30,19 +23,11 @@ class Event < ActiveRecord::Base
   end
 
   def from
-    if is_all_day
-      ActiveSupport::TimeZone[time_zone].parse(from_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day
-    else
-      ActiveSupport::TimeZone[time_zone].parse(from_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + from_time.seconds_since_midnight
-    end
+      ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + start_time.seconds_since_midnight
   end
 
   def to
-    if is_all_day
-      ActiveSupport::TimeZone[time_zone].parse(to_date.to_datetime.strftime('%Y-%m-%d')).end_of_day
-    else
-      ActiveSupport::TimeZone[time_zone].parse(to_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + to_time.seconds_since_midnight
-    end
+      ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + end_time.seconds_since_midnight
   end
 
   def duration

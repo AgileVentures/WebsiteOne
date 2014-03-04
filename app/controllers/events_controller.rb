@@ -14,8 +14,8 @@ class EventsController < ApplicationController
     @events = []
     Event.all.each do |event|
       event.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
-      #event.schedule.occurrences_between(Date.today, event.repeat_ends_on).each do |time|
-      #event.schedule.occurrences(120.days.since).each do |time|
+        #event.schedule.occurrences_between(Date.today, event.repeat_ends_on).each do |time|
+        #event.schedule.occurrences(120.days.since).each do |time|
         @events << {
             event: event,
             time: time
@@ -29,19 +29,14 @@ class EventsController < ApplicationController
   end
 
   def create
-    if params[:event][:from_date].empty?
-      params[:event][:from_date] = Date.today
+    if params[:event][:event_date].empty?
+      params[:event][:event_date] = Date.today
     end
-    if params[:event][:to_date].empty?
-      params[:event][:to_date] = Date.today
+    if params[:event][:start_time].empty?
+      params[:event][:start_time] = Time.now
     end
-    if params[:event][:is_all_day] == '0'
-      if params[:event][:from_time].empty?
-        params[:event][:from_time] = Time.now.beginning_of_day
-      end
-      if params[:event][:to_time].empty?
-        params[:event][:to_time] = Time.now.end_of_day
-      end
+    if params[:event][:end_time].empty?
+      params[:event][:end_time] = Time.now + 30.minutes
     end
     @event = Event.new(event_params)
     if @event.save
