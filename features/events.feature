@@ -2,9 +2,9 @@ Feature: Events
 
   Background:
     Given following events exist:
-      | name           | description             | category        | from_date  | to_date    | is_all_day | from_time               | to_time                 | repeats | time_zone                  |
-      | EuroAsia Scrum | Daily scrum meeting     | Scrum           | 2014/02/03 | 2014/02/03 | false      | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | London                     |
-      | PP Session     | Pair programming on WSO | PairProgramming | 2014/02/11 | 2014/02/11 | false      | 2000-01-01 10:00:00 UTC | 2000-01-01 10:15:00 UTC | never   | Eastern Time (US & Canada) |
+      | name           | description             | category        | event_date | start_time              | end_time                | repeats | time_zone                  |
+      | EuroAsia Scrum | Daily scrum meeting     | Scrum           | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | London                     |
+      | PP Session     | Pair programming on WSO | PairProgramming | 2014/02/11 | 2000-01-01 10:00:00 UTC | 2000-01-01 10:15:00 UTC | never   | Eastern Time (US & Canada) |
 
   Scenario: Show index of events
     Given I am on Events index page
@@ -26,23 +26,28 @@ Feature: Events
       | 21     | hours    |
       | 45     | minutes  |
 
+  @javascript @selenium
   Scenario: Create a new event
     Given I am logged in
     And I am on Events index page
     When I click "New Event"
-    And I fill in "Name" with "Whatever" within the main content
-    And I fill in "Description" with "something else"
+    And I fill in event field:
+      | name        | value          |
+      | Name        | Whatever       |
+      | Description | something else |
     And I click the "Save" button
     Then I should see "Event Created"
     Then I should be on the Events index page
 
-  @javascript
+  @javascript @selenium
   Scenario: Creating a repeating event
     Given I am logged in
     And I am on Events index page
     When I click "New Event"
-    And I fill in "Name" with "Scrum" within the main content
-    And I fill in "Description" with "scrum description"
+    And I fill in event field:
+      | name        | value             |
+      | Name        | Scrum             |
+      | Description | scrum description |
     And I select "Repeats" to "weekly"
     And I check "Monday"
     And I check "Thursday"
@@ -50,3 +55,21 @@ Feature: Events
     Then I should see "Event Created"
     Then I should be on the Events index page
     Then I should see multiple "Scrum" events
+
+  @javascript @selenium
+  Scenario: Don't save with empty name
+    Given I am logged in
+    And I am on Events index page
+    When I click "New Event"
+    And I fill in event field:
+      | name        | value             |
+      | Name        |              |
+      | Description | scrum description |
+    And I select "Repeats" to "weekly"
+    And I check "Monday"
+    And I check "Thursday"
+    And I click the "Save" button
+    Then I should see "Name can't be blank"
+
+
+    #Name can't be blank

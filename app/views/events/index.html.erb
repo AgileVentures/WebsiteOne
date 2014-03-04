@@ -21,8 +21,8 @@
               <% if user_signed_in? %>
                   <div> <%= link_to time.strftime("%F at %I:%M%p"), edit_event_path(event) %></div>
               <% else %>
-                  <p><%= event.from_date %>
-                    - <%= event.from_time.strftime("at %I:%M%p") %></p>
+                  <p><%= event.event_date %>
+                    - <%= event.start_time.strftime("at %I:%M%p") %></p>
               <% end %>
               <small> <%= event.description %></small>
             </li>
