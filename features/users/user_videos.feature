@@ -6,8 +6,8 @@ Feature: As a site owner
     Given I want to use third party authentications
     And I am logged in
     And the following users exist
-      | first_name  | last_name   | email                   | password  |
-      | Alice       | Jones       | alice@btinternet.co.uk  | 12345678  |
+      | first_name | last_name | email                  | password |
+      | Alice      | Jones     | alice@btinternet.co.uk | 12345678 |
 
   Scenario: Show 'link your channel' message if my page channel is not linked
     Given my YouTube Channel is not connected
@@ -47,7 +47,28 @@ Feature: As a site owner
     Then I should not see a list of my videos
     And I should see "has no publicly viewable Youtube videos"
 
-  Scenario: show first in video and description, player, filter
+  Scenario: show first video's description in the player's heading
+    Given my YouTube Channel ID with some videos in it
+    And my YouTube channel is connected
+    When I go to my "profile" page
+    Then I should see "Working in HW repo" in "video description"
+
+  Scenario: show embedded youtube player with the first video
+    Given my YouTube Channel ID with some videos in it
+    And my YouTube channel is connected
+    When I go to my "profile" page
+    And I should see video "Autograders - Pairing session" in "player"
+
+  Scenario: only show videos with that include project tags in their title or description
+    Given my YouTube Channel ID with some videos in it
+    And the following project video tags exist:
+      | tag        |
+      | WebsiteOne |
+      | WSO        |
+    And my YouTube channel is connected
+    When I go to my "profile" page
+    Then I should see "WebsiteOne - Pairing session"
+    But I should not see "Autograders"
 
   @javascript @selenium
   Scenario: Selecting videos from the list
