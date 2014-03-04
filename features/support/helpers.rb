@@ -29,7 +29,7 @@ module Helpers
     skills = options.delete "skills"
     options = default_test_user_details.merge options
     user = User.create!(options)
-    user.skill_list = skills.strip.gsub(" ", ", ")
+    user.skill_list = skills
     user.save!
   end
 

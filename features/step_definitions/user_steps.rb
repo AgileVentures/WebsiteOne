@@ -341,3 +341,15 @@ Given(/^I visit (.*)'s profile page$/) do |name|
   user = User.find_by_first_name name
   visit users_show_path user
 end
+
+Given(/^I type in skills "(.*)"/) do |skills|
+  #step %Q{I fill in "skills" with "#{skills}"}
+end
+
+Then(/^I should see skills "(.*)"/) do |skills|
+  find("#skills").value.should == skills
+end
+
+Then(/^I should see skills "(.*)" for "(.*)"/) do |skills, user|
+  pending
+end
