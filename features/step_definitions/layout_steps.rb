@@ -68,6 +68,5 @@ end
 #end
 
 Then(/^I should see a modal window with a form "([^"]*)"$/) do |arg|
-  sleep 1
-  page.should have_content("myModalLabel", visible: true)
+  page.should have_content("Hire Me Form", visible: true)
 end

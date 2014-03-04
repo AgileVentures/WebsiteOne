@@ -4,22 +4,29 @@
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h2 class="modal-title" id="myModalLabel">Hire Me Form</h2>
     </div>
-    <div class="modal-body">
-      <%= form_tag('/mail_contact_form', id: 'contact_form', :class => 'form-horizontal', method: 'post') do %>
-          <%= label_tag :name %>
-          <%= text_field_tag :name %>
-          <%= label_tag :email %>
-          <%= text_field_tag :email %>
-          <%= label_tag :message %>
-          <%= text_area_tag :message %>
-          <div class="form-actions">
-            <%= submit_tag 'Send message', id: 'send', :class => 'btn btn-primary' %>
-          </div>
-      <% end %>
-
-
-
+    <div class='row'>
+      <div class='col-sm-6'>
+        <%= form_for @layout, :html => { :class => 'form-horizontal', :role => 'form' } do |f| %>
+            <div class='form-group'>
+              <%= f.label :title %>
+              <%= f.text_field :title, :class => 'form-control', placeholder: 'Name' %>
+            </div>
+            <div class='form-group'>
+              <%= f.label :description %>
+              <%= f.text_area :description, :class => 'form-control',  'rows' => 10, placeholder: 'Description'%>
+            </div>
+            <div class='form-group'>
+              <%= f.label :status %>
+              <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
+            </div>
+            <div class='form-group'>
+              <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default'%>
+              <%= f.submit 'Submit', :class => 'btn btn-default' %>
+            </div>
+        <% end %>
+      </div>
     </div>
+
 
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -38,11 +38,11 @@ Feature: As a member of the Agile Ventures team
 #  page.should_not have_content $a_title
 #  endbackground do
 
- @javascript
+ @javascript @selenium
  Scenario: Testing for the modal functionality
    Given I visit Bob's profile page
    When I click "Hire me"
-   And show me the page
+   #And show me the page
    Then I should see a modal window with a form "Hire me form"
 
 #   And I fill in field first name with "Bob"
