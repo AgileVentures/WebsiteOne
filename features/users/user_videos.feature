@@ -40,6 +40,13 @@ Feature: As a site owner
     And I should see a list of my videos
     But I should not see "Sync with YouTube"
 
+  Scenario: Unlink my Youtube channel
+    Given my YouTube Channel ID with some videos in it
+    And my YouTube channel is connected
+    And I am on my "profile" page
+    When I click "Disconnect YouTube"
+    And I should see "has no publicly viewable Youtube videos"
+
   Scenario: Show 'no videos' message if there no videos
     Given my YouTube Channel ID with no videos in it
     And my YouTube channel is connected
