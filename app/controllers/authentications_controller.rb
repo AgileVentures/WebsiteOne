@@ -29,7 +29,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def destroy
-    if params[:youtube]
+    if params[:id]=='youtube'
       unlink_from_youtube and return
     end
 

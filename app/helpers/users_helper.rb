@@ -24,7 +24,7 @@ module UsersHelper
 
   def unlink_from_youtube_button(origin_url)
     link_to raw('<i class="fa fa-large fa-youtube"></i> Disconnect YouTube'),
-            "/auth/destroy/0?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button", method: :delete
+            "/auth/destroy/youtube?origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button"
   end
 
   def video_link(video)
@@ -41,33 +41,42 @@ end
 module Youtube
   class << self
 
-    def user_videos(user)
+    def user_videos(user, tags = [])
       if user_id = user.youtube_id
-        parse_response(open("http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json").read, user)
+        request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
+        request += '&q=' + tags.join('%7C') unless tags.empty? # %7C is an escaped '|' pipe sign
+
+        parse_response(open(request).read, user)
       end
     end
 
-    #def project_videos(user)
-    #  parse_response(open("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=#{user_id}&order=date&q=#{search_term}&type=video&key=#{api_key}").read)
-    #end
-
-    def parse_response(response, user)
+    def parse_response(response, user = '')
       begin
         json = JSON.parse(response)
+
         videos = json['feed']['entry']
+        videos_total = json['feed']['openSearch$totalResults']['$t']
+        links = json['feed']['link']
         return if videos.nil?
-        videos.map do |hash|
+        all_videos = videos.map do |hash|
           {
-              id:         hash['id']['$t'].split('/').last,
-              published:  hash['published']['$t'].to_date,
-              title:      hash['title']['$t'],
-              content:    hash['content']['$t'],
-              url:        hash['link'].first['href'],
-              thumbs:     hash['media$group']['media$thumbnail'],
+              id: hash['id']['$t'].split('/').last,
+              published: hash['published']['$t'].to_date,
+              title: hash['title']['$t'],
+              content: hash['content']['$t'],
+              url: hash['link'].first['href'],
+              thumbs: hash['media$group']['media$thumbnail'],
               player_url: hash['media$group']['media$player'].first['url'],
               user: user
           }
         end
+
+        if (next_link = links.detect { |link| link['rel']=='next' })
+          next_videos = parse_response(open(next_link['href']).read, user)
+          all_videos += next_videos if next_videos
+        end
+
+        all_videos.sort_by{ |video| video[:published] }.reverse
       rescue JSON::JSONError
         Rails.logger.warn('Attempted to decode invalid JSON')
         nil
@@ -76,14 +85,23 @@ module Youtube
 
     def channel_id(token)
       # API v3
-      json = JSON.load(open("https://www.googleapis.com/youtube/v3/channels?access_token=#{token}&part=id&mine=true").read)
+      response = open("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", 'Authorization' => "Bearer #{token}").read
+      json = JSON.load(response)
       json['items'].first['id']
     end
 
     def user_id(token)
       # API v2
-      json = JSON.load(open("https://gdata.youtube.com/feeds/api/users/default?access_token=#{token}&alt=json").read)
+      response = open("https://gdata.youtube.com/feeds/api/users/default?alt=json", 'Authorization' => "Bearer #{token}").read
+      json = JSON.load(response)
       json['entry']['yt$username']['$t']
+    end
+
+    def user_name(token)
+      # API v2
+      response = open("https://gdata.youtube.com/feeds/api/users/default?alt=json", 'Authorization' => "Bearer #{token}").read
+      json = JSON.load(response)
+      json['entry']['title']['$t']
     end
 
   end

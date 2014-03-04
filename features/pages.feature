@@ -11,5 +11,3 @@ Feature: Static pages
     When I click "About us"
     Then I should be on the static "About us" page
     And I should see "About us"    
-
-
