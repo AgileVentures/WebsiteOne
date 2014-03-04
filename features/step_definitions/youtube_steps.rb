@@ -32,7 +32,7 @@ Given /^user "([^"]*)" has YouTube Channel connected/ do |user|
   user.youtube_id = 'test_id'
   user.save
 
-  request = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json'
+  request = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50'
   request += '&q=' + @tags.sort.join('%7C') if @tags
   stub_request(:get, request).to_return(body: @user_youtube_response)
 end
@@ -43,8 +43,8 @@ Given /^user "([^"]*)" has YouTube Channel not connected/ do |user|
   user.save
 
   channel_id_response = File.read('spec/fixtures/youtube_channel_response.json')
-  stub_request(:get, 'https://www.googleapis.com/youtube/v3/channels?access_token=test_token&mine=true&part=id').to_return(body: channel_id_response)
-  stub_request(:get, 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json').to_return(body: @user_youtube_response)
+  stub_request(:get, 'https://www.googleapis.com/youtube/v3/channels?mine=true&part=id').to_return(body: channel_id_response)
+  stub_request(:get, 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50').to_return(body: @user_youtube_response)
 end
 
 Then /^I should see video "([^"]*)" in "player"$/ do |name|
@@ -62,4 +62,9 @@ Given /^the following project video tags exist:$/ do |table|
     @tags.any? { |tag| (video[:title] =~ /#{tag}/) || (video[:content] =~ /#{tag}/) }
   end
   Youtube.stub(parse_response: response)
+end
+
+
+Then /^I should see "([^"]*)" before "([^"]*)"$/ do |title_1, titile_2|
+  expect(page.body).to match(/#{title_1}.*#{titile_2}/m)
 end

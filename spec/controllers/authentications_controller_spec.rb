@@ -185,14 +185,14 @@ describe 'youtube authentication' do
     controller.stub_chain(:current_user, :authentications, :count).and_return(1)
     controller.stub_chain(:current_user, :encrypted_password).and_return(nil)
     expect(controller).to receive(:unlink_from_youtube)
-    get :destroy, id: '1', youtube: true
+    get :destroy, id: 'youtube'
   end
 
   it '#unlink_from_youtube' do
     user = stub_model(User, youtube_id: '12345')
     controller.stub(current_user: user)
 
-    get :destroy, id: '1', youtube: true, origin: 'back_path'
+    get :destroy, id: 'youtube', origin: 'back_path'
     expect(user.youtube_id).to be_nil
     expect(response).to redirect_to 'back_path'
   end

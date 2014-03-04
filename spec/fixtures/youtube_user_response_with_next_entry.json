@@ -48,6 +48,12 @@
                 "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/batch"
             },
             {
+                "rel": "next",
+                "type": "application/atom+xml",
+                "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads?alt=json&start-index=51&max-results=50"
+
+            },
+            {
                 "rel": "self",
                 "type": "application/atom+xml",
                 "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads?alt=json&start-index=1&max-results=25"
@@ -232,7 +238,7 @@
                     "$t": "http://gdata.youtube.com/feeds/api/videos/_Sd2_MeAVOA"
                 },
                 "published": {
-                    "$t": "2013-02-03T14:39:02.000Z"
+                    "$t": "2014-02-03T14:39:02.000Z"
                 },
                 "updated": {
                     "$t": "2014-02-06T15:41:19.000Z"
