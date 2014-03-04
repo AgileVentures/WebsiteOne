@@ -29,6 +29,7 @@ describe AuthenticationsController do
       @auths = [@auth]
       @user.should_receive(:authentications).at_least(1).and_return @auths
       @auths.should_receive(:find).and_return @auth
+      @auth.stub(destroy: true)
     end
 
     it 'should require authentication' do
@@ -66,7 +67,9 @@ describe AuthenticationsController do
     it 'should sign in the correct user for existing profiles' do
       @auth = double(Authentication, user: @user)
       Authentication.should_receive(:find_by_provider_and_uid).and_return @auth
-      controller.should_receive(:sign_in_and_redirect)
+      controller.should_receive(:sign_in_and_redirect) do
+        controller.redirect_to root_path
+      end
       get :create, provider: @provider
       expect(flash[:notice]).to eq 'Signed in successfully.'
     end
@@ -144,8 +147,12 @@ describe 'youtube authentication' do
   before(:each) do
     controller.stub(authenticate_user!: true)
 
-    request.env['omniauth.auth'] = {}
-    request.env['omniauth.auth']['credentials'] = {}
+    request.env['omniauth.auth'] = {
+        'provider' => :agileventures,
+        'uid' => '12345678',
+        'info' => {'email' => 'foo@agileventures.org'},
+        'credentials' => {}
+    }
 
     request.env['omniauth.params'] = {}
     request.env['omniauth.params']['youtube'] = true
@@ -159,7 +166,10 @@ describe 'youtube authentication' do
   end
   it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
     request.env['omniauth.auth']['credentials']['token'] = 'token'
-    controller.stub(current_user: double(User, youtube_id: nil))
+    user = double(User, youtube_id: nil)
+    controller.stub(current_user: user)
+    user.stub(:youtube_id=)
+    user.stub(:save)
 
     expect(Youtube).to receive(:channel_id)
     get :create, provider: 'github'
@@ -172,6 +182,8 @@ describe 'youtube authentication' do
 
   it 'calls #unlink from youtube' do
     controller.stub_chain(:current_user, :authentications, :find).and_return(double(User))
+    controller.stub_chain(:current_user, :authentications, :count).and_return(1)
+    controller.stub_chain(:current_user, :encrypted_password).and_return(nil)
     expect(controller).to receive(:unlink_from_youtube)
     get :destroy, id: '1', youtube: true
   end
