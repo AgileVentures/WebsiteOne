@@ -22,10 +22,9 @@ module UsersHelper
             "/auth/gplus/?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button"
   end
 
-  #TODO YA change destroy/0 to /youtube_id
   def unlink_from_youtube_button(origin_url)
     link_to raw('<i class="fa fa-large fa-youtube"></i> Disconnect YouTube'),
-            "/auth/destroy/0?youtube=true&origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button", method: :delete
+            "/auth/destroy/youtube?origin=#{origin_url}", class: "btn btn-danger btn-lg", type: "button"
   end
 
   def video_link(video)
@@ -45,7 +44,7 @@ module Youtube
     def user_videos(user, tags = [])
       if user_id = user.youtube_id
         request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json"
-        request += '&q=' + tags.join('%7C') unless tags.empty? # %7C is escaped '|' pipe sign
+        request += '&q=' + tags.join('%7C') unless tags.empty? # %7C is an escaped '|' pipe sign
 
         parse_response(open(request).read, user)
       end
@@ -54,6 +53,10 @@ module Youtube
     def parse_response(response, user = '')
       begin
         json = JSON.parse(response)
+        links = json['feed']['link']
+        next_link = links.detect{|link| link['rel']=='next'}
+        total = json['feed']['openSearch$totalResults']['$t']
+
         videos = json['feed']['entry']
         return if videos.nil?
         videos.map do |hash|
@@ -84,6 +87,12 @@ module Youtube
       # API v2
       json = JSON.load(open("https://gdata.youtube.com/feeds/api/users/default?access_token=#{token}&alt=json").read)
       json['entry']['yt$username']['$t']
+    end
+
+    def user_name(token)
+      # API v2
+      json = JSON.load(open("https://gdata.youtube.com/feeds/api/users/default?access_token=#{token}&alt=json").read)
+      json['entry']['title']['$t']
     end
 
   end

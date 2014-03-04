@@ -87,7 +87,7 @@ describe 'Youtube helpers' do
   end
 
   it 'creates an "unlink from youtube" button' do
-    link = '/auth/destroy/0?youtube=true&amp;origin=video_url'
+    link = '/auth/destroy/youtube?origin=video_url'
     expect(helper.unlink_from_youtube_button('video_url')).to include(link)
   end
 
