@@ -9,34 +9,8 @@ Feature: As a member of the Agile Ventures team
       | Bob         | Butcher     | bobb112@hotmail.com     |     true        |
 
 
-#  Scenario: Checking for modal toggle
-#    Given I visit Bob's profile page
-#    Then I should not see a modal
-#    When I click "Hire me"
-#    a pop up should come up
-#    and I should enter the data in the fields
-#    I will click on submit
-#    Then I should see a modal
 
 
-
-#  background do
-#  visit '/'
-#  click_on '+'
-#  fill_in 'title', :with => $a_title
-#  fill_in 'issued', :with => '1885'
-#  select 'invitation', :from => 'aeresType'
-#  click_on 'Enregistrer'
-#  end
-#
-#  scenario 'for any record' do
-#  click_on 'Supprimer...'
-#  page.should have_content 'Voulez-vous supprimer cette notice ?'
-#  in_dialog.click_button 'Supprimer'
-#  wait_until_dialog_closed
-#  page.should have_content 'Publications (références)'
-#  page.should_not have_content $a_title
-#  endbackground do
 
  @javascript @selenium
  Scenario: Testing for the modal functionality
@@ -44,11 +18,14 @@ Feature: As a member of the Agile Ventures team
    When I click "Hire me"
    #And show me the page
    Then I should see a modal window with a form "Hire me form"
+   When I fill in "f-name" with "Anonymous user"
+   When I fill in "f-email" with "anonymous@isp.net"
+   When I fill in "f-message" with "I want to hire you"
+   When I click "Send message"
+   #I should see a flash "message sent successfully"
 
-#   And I fill in field first name with "Bob"
-#   And I fill in field last name with "Butcher"
-#   And I fill in field email with "bobb112@hotmail.com"
-#   And I fill in field message with "I want to hire you"
-#   When I click "Send Message"
+   # message should be sent
+   #app mailer
+   #right routes form_for method
 
 

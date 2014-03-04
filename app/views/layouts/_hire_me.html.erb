@@ -4,50 +4,23 @@
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h2 class="modal-title" id="myModalLabel">Hire Me Form</h2>
     </div>
-    <div class='row'>
-      <div class='col-sm-6'>
-        <%= form_for @layout, :html => { :class => 'form-horizontal', :role => 'form' } do |f| %>
-            <div class='form-group'>
-              <%= f.label :title %>
-              <%= f.text_field :title, :class => 'form-control', placeholder: 'Name' %>
-            </div>
-            <div class='form-group'>
-              <%= f.label :description %>
-              <%= f.text_area :description, :class => 'form-control',  'rows' => 10, placeholder: 'Description'%>
-            </div>
-            <div class='form-group'>
-              <%= f.label :status %>
-              <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
-            </div>
-            <div class='form-group'>
-              <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default'%>
-              <%= f.submit 'Submit', :class => 'btn btn-default' %>
-            </div>
-        <% end %>
-      </div>
-    </div>
-
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Save changes</button>
+    <div class="modal-body">
+      <%= form_for '/mail_hire_me_form', :html => {:id => 'hire_me_form', :class => 'form-vertical', :role => 'form'} do |f| %>
+          <div class='form-group'>
+            <%= f.text_field :name, :id => "f-name", :class => 'form-control', placeholder: 'Name' %>
+          </div>
+          <div class='form-group'>
+            <%= f.text_field :email, :id => "f-email", :class => 'form-control', placeholder: 'Email' %>
+          </div>
+          <div class='form-group'>
+            <%= f.text_area :message, :id => "f-message", :class => 'form-control', placeholder: 'Message', 'rows' => 5 %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit 'Send message', id: 'send', :class => 'btn btn-primary' %>
+          </div>
+      <% end %>
     </div>
   </div>
 </div>
 
-<!--<h3 class="footer_header">-->
-  <!--Contact us-->
-<!--</h3>-->
-<!--<p>Send a traditional email to <a href="mailto:info@agileventures.org">info@agileventures.org</a>, or use the contact form. </p>-->
-<!--<form accept-charset="UTF-8" action="/mail_contact_form" class="form-horizontal contact" id="contact_form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="Nc/CT7/5JpoxEsGW1IarmbSqHLbXEeQRLr1xZHWqZFE=" /></div>-->
-  <!--<label for="name">Name</label>-->
-  <!--<input id="name" name="name" type="text" />-->
-  <!--<label for="email">Email</label>-->
-  <!--<input id="email" name="email" type="text" />-->
-  <!--<label for="message">Message</label>-->
-  <!--<textarea id="message" name="message">-->
-  <!--</textarea>-->
-  <!--<div class="form-actions">-->
-    <!--<input class="btn btn-primary" id="send" name="commit" type="submit" value="Send message" />-->
-  <!--</div>-->
-<!--</form>-->

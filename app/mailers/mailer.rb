@@ -17,4 +17,9 @@ class Mailer < ActionMailer::Base
     @user = user
     mail(to: user.email, subject: 'Welcome to AgileVentures.org')
   end
+
+  def hire_me_form(user, hire_me_form)
+    @user = user
+    @form = hire_me_form
+  end
 end
