@@ -5,9 +5,9 @@
 <%= stylesheet_link_tag 'bootstrap-timepicker.min' %>
 <%= javascript_include_tag 'event_datepicker' %>
 
-<% start_date = params[:start_date].to_datetime.strftime('%F') if params[:start_date] %>
-<% start_time = params[:start_time].to_datetime.strftime('%I:%M %p') if params[:start_date] %>
-<% end_time = (params[:end_time].to_datetime + 30.minutes).strftime('%I:%M %p') if params[:start_date] %>
+<% start_date = params[:event_date].to_datetime.strftime('%F') if params[:event_date] %>
+<% start_time = params[:start_time].to_datetime.strftime('%I:%M %p') if params[:event_date] %>
+<% end_time = (params[:end_time].to_datetime + 30.minutes).strftime('%I:%M %p') if params[:event_date] %>
 
 <div class="container">
   <div class="col-lg-6 col-lg-offset-3">
@@ -29,41 +29,29 @@
         </div>
 
 
-        <div class="form-group">
-          <%= f.label :is_all_day, :class => 'control-label' %>
-          <%= f.check_box :is_all_day %>
-        </div>
         <div class="form-group event_date">
-          <%= f.label :from_date, :class => 'control-label' %>
+          <%= f.label :start_date, :class => 'control-label' %>
           <% if params[:start_date] %>
-              <%= f.text_field :from_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker', :value => "#{start_date}"} %>
+              <%= f.text_field :start_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker', :value => "#{start_date}"} %>
           <% else %>
-              <%= f.text_field :from_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker'} %>
+              <%= f.text_field :start_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker'} %>
           <% end %>
         </div>
         <div class="form-group event_time">
-          <%= f.label :from_time, :class => 'control-label' %>
+          <%= f.label :start_time, :class => 'control-label' %>
           <% if params[:start_date] %>
-              <%= f.text_field :from_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker', :value => "#{start_time}"} %>
+              <%= f.text_field :start_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker', :value => "#{start_time}"} %>
           <% else %>
-              <%= f.text_field :from_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} %>
-          <% end %>
-        </div>
-        <div class="form-group event_date">
-          <%= f.label :to_date, :class => 'control-label' %>
-          <% if params[:start_date] %>
-              <%= f.text_field :to_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker', :value => "#{start_date}"} %>
-          <% else %>
-              <%= f.text_field :to_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker'} %>
+              <%= f.text_field :start_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} %>
           <% end %>
         </div>
         <div class="form-group event_time">
-          <%= f.label :to_time, :class => 'control-label' %>
+          <%= f.label :end_time, :class => 'control-label' %>
           <% if params[:start_date] %>
-              <%= f.text_field :to_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker', :value => "#{end_time}"} %>
+              <%= f.text_field :end_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker', :value => "#{end_time}"} %>
 
           <% else %>
-              <%= f.text_field :to_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} %>
+              <%= f.text_field :end_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} %>
           <% end %>
         </div>
         <div class="form-group">
