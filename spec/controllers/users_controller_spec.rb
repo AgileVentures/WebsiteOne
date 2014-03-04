@@ -61,6 +61,8 @@ describe UsersController do
           }
       ]
       Youtube.stub(user_videos: @youtube_videos)
+      @project_tags = %w{Random Stuff}
+      Project.stub(all_tags: @project_tags)
     end
 
     it 'assigns a user instance' do
@@ -72,6 +74,19 @@ describe UsersController do
       get 'show', id: @user.friendly_id
       expect(assigns(:youtube_videos)).to eq(@youtube_videos)
     end
+
+    it 'filters videos by project tags' do
+      expect(Youtube).to receive(:user_videos).with(@user, @project_tags)
+      get 'show', id: @user.friendly_id
+    end
+
+    #it 'filters videos by project tags' do
+    #  get 'show', id: @user.friendly_id
+    #  video_titles = assigns(:youtube_videos).map {|hash| hash[:title]}
+    #
+    #  expect(video_titles).to include('Random', 'Stuff')
+    #  expect(video_titles).not_to include("Here's something")
+    #end
 
     it 'renders the show view' do
       get 'show', id: @user.friendly_id

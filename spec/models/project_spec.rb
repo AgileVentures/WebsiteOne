@@ -31,3 +31,13 @@ describe '#search' do
     Project.search(nil, nil).should eq Project.first 5
   end
 end
+
+describe '#all_tags' do
+  it 'returns all project tags' do
+    FactoryGirl.create(:project_with_tags, tags: ['Tag_1', 'Tag_2'])
+    FactoryGirl.create(:project_with_tags, tags: ['Tag_2', 'Tag_3'])
+
+    expect(Project.all_tags).to include('Tag_1', 'Tag_2', 'Tag_3')
+  end
+end
+
