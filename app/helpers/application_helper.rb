@@ -113,9 +113,25 @@ module ApplicationHelper
   end
 
   def count_down
-    @event = Event.where(['category = ? AND from_date >= ?', 'Scrum', DateTime.now]).first
-    schedule = @event.schedule.to_hash
-    @event_time = nested_hash_value(schedule,:time).to_datetime
+    @events = []
+    Event.where(['category = ? AND from_date >= ?', 'Scrum', DateTime.now]).each do |event|
+      event.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
+        unless time <= DateTime.now
+        @events << {
+            event: event,
+            time: time
+        }
+        end
+      end
+    end
+    @events = @events.sort_by { |e| e[:time] }
+    one_event = @events[0]
+    @event = nested_hash_value(one_event,:event)
+    @event_time = nested_hash_value(one_event,:time).to_datetime
+    #@event_time = schedule
+    #@event = Event.where(['category = ? AND from_date >= ?', 'Scrum', DateTime.now]).first
+    #schedule = @event.schedule.to_hash
+    #@event_time = nested_hash_value(schedule,:time).to_datetime
     countdown = Time.now.to_datetime.distance_to(@event_time)
     @minutes_left = countdown[:minutes]
     @hours_left = countdown[:hours]

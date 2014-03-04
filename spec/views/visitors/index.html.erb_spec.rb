@@ -20,6 +20,7 @@ describe 'visitors/index.html.erb' do
 
   it 'should display countdown to next scrum' do
     render
+    expect(response).to have_link @event.name, event_path(@event)
     expect(response).to have_text [@event.name, 'in'].join(' ')
     expect(response).to have_text [@days_left, 'days'].join(' ')
     expect(response).to have_text [@hours_left, 'hours'].join(' ')
