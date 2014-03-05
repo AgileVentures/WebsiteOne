@@ -14,12 +14,12 @@ When(/^There are projects in the database$/) do
 end
 
 Given(/^the following projects exist:$/) do |table|
+  #TODO YA rewrite with factoryGirl
   temp_author = nil
   table.hashes.each do |hash|
     if hash[:author].present?
       u = User.find_by_first_name hash[:author]
-      hash.except! 'author'
-      u.projects.create(hash)
+      project = u.projects.create(hash.except('author', 'tags'))
     else
       if temp_author.nil?
         temp_author = User.create first_name: 'First',
@@ -27,7 +27,11 @@ Given(/^the following projects exist:$/) do |table|
                                   email: "dummy#{User.count}@users.co",
                                   password: '1234124124'
       end
-      temp_author.projects.create hash
+      project = temp_author.projects.create(hash.except('author', 'tags'))
+    end
+    if hash[:tags]
+      project.tag_list.add(hash[:tags], parse: true)
+      project.save
     end
   end
 end

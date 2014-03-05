@@ -219,7 +219,7 @@ Given(/^I want to use third party authentications$/) do
       'info' => {
           'email' => 'mock@email.com'
       },
-     'credentials' => {'token' => 'test_token'}
+      'credentials' => { 'token' => 'test_token' }
   }
 end
 
@@ -244,24 +244,31 @@ And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |stri
   page.should have_text string
 end
 
-Then(/^I should see the sub-documents in this order:$/) do   |table|
+Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
   actual_order = page.all('li.listings-item a').collect(&:text)
   expected_order.should == actual_order
 end
 
 
-
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
-    project = Project.find_by_title(title)
-    case item.downcase.pluralize
-      when 'members'
-        (1..num.to_i).each do
-          u = User.create(email: Faker::Internet.email, password: '1234567890')
-          u.follow(project)
-        end
+  project = Project.find_by_title(title)
+  case item.downcase.pluralize
+    when 'members'
+      (1..num.to_i).each do
+        u = User.create(email: Faker::Internet.email, password: '1234567890')
+        u.follow(project)
+      end
 
-      else
-        pending
-    end
+    else
+      pending
+  end
+end
+
+
+Then /^I should see a "([^"]*)" table with:$/ do |name, table|
+  expect(page).to have_text(name)
+  table.rows.flatten.each do |heading|
+      expect(page).to have_css('table th', :text => heading)
+  end
 end
