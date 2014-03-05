@@ -12,6 +12,8 @@ Feature: Create and maintain projects
       | hello mercury | greetings mercury folks | inactive |
       | hello saturn  | greetings saturn folks  | active   |
       | hello sun     | greetings sun folks     | active   |
+    And there are no videos
+
 #  Scenarios for Index page
 
   Scenario: List of projects in table layout
@@ -150,10 +152,6 @@ Feature: Create and maintain projects
     And I am on the "Show" page for project "hello world"
     Then I should see "Members (5)"
 
-  # Bryan: Stub the YouTube API calls?
-  Scenario: Project show page renders a list of videos
-    Given I am on the "Show" page for project "hello mars"
-    Then I should see "Videos (0)"
 #  Scenarios for DESTROY action commented out until this functionality is needed
 
 #  Scenario: Destroying a project: successful
