@@ -21,3 +21,8 @@ Feature:
 		And I should see sponsor banner for "Agile Ventures"
 		And I should see link "Become a supporter"
 
+	Scenario: Click on "Become a supporter"
+		When I click "Become a supporter"
+		Then I am on the "Supporters" page
+
+
