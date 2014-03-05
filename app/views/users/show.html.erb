@@ -25,6 +25,20 @@
         </ul>
     <% end %>
 
+    <h4>Skills</h4>
+    <div id="skills" class="tag-list" style="padding-left:25px;"></div>
+
+    <script>
+        $(function () {
+            var tags = $('#skills').tags({
+                readOnly: true,
+                tagSize: "lg",
+                tagData: <%= raw @user.skill_list.to_json %>,
+                readOnlyEmptyMessage: "No Skills"
+            });
+        });
+    </script>
+
   </div>
 </div>
 <div class="row">
