@@ -54,7 +54,7 @@ Feature: Events
     And I click the "Save" button
     Then I should see "Event Created"
     Then I should be on the Events index page
-    Then I should see multiple "Scrum" events
+    And I should see multiple "Scrum" events
 
   @javascript @selenium
   Scenario: Don't save with empty name
@@ -69,7 +69,7 @@ Feature: Events
     And I check "Monday"
     And I check "Thursday"
     And I click the "Save" button
-    Then I should see "Name can't be blank"
+    Then I should be on the Events index page
+    And I should see "Name can't be blank"
 
 
-    #Name can't be blank

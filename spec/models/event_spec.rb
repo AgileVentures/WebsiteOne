@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Event do
+  #it { should validate_presence_of :name }
+  #it { should validate_presence_of :event_date }
+  #it { should validate_presence_of :start_time }
+  #it { should validate_presence_of :end_time }
+  #it { should validate_presence_of :time_zone }
+  #it { should validate_presence_of :repeats }
+  #it { should validate_presence_of :category }
+
   it 'should respond to "schedule" method' do
     Event.respond_to?('schedule')
   end
@@ -92,6 +100,32 @@ describe Event do
                             time_zone: 'Eastern Time (US & Canada)')
       expect(event.schedule.first(5)).to eq(['Mon, 17 Jun 2013 09:00:00 EDT -04:00', 'Mon, 24 Jun 2013 09:00:00 EDT -04:00', 'Mon, 01 Jul 2013 09:00:00 EDT -04:00', 'Mon, 08 Jul 2013 09:00:00 EDT -04:00', 'Mon, 15 Jul 2013 09:00:00 EDT -04:00'])
       expect(event.schedule.first(5)).not_to eq(['Sun, 23 Jun 2013 09:00:00 EDT -04:00', 'Sun, 30 Jun 2013 09:00:00 EDT -04:00', 'Sun, 07 Jul 2013 09:00:00 EDT -04:00', 'Sun, 14 Jul 2013 09:00:00 EDT -04:00', 'Sun, 21 Jul 2013 09:00:00 EDT -04:00'])
+    end
+  end
+
+  context 'Event url' do
+    before (:each) do
+      @event = {name: 'one time event',
+               category: 'Scrum',
+               description: '',
+               event_date: 'Mon, 17 Jun 2013',
+               start_time: '2000-01-01 09:00:00 UTC',
+               end_time: '2000-01-01 17:00:00 UTC',
+               repeats: 'never',
+               repeats_every_n_weeks: nil,
+               repeat_ends: 'never',
+               repeat_ends_on: 'Mon, 17 Jun 2013',
+               time_zone: 'Eastern Time (US & Canada)'}
+    end
+
+    it 'should be set if valid' do
+      event = Event.create!(@event.merge(:url => 'http://google.com'))
+      expect(event.save).to be_true
+    end
+
+    it 'should be rejected if invalid' do
+      event = Event.create(@event.merge(:url => 'http:google.com'))
+      event.should have(1).error_on(:url)
     end
   end
 end
