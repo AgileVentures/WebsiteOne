@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225000044) do
+ActiveRecord::Schema.define(version: 20140225215805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title",      null: false
+    t.text     "content"
+    t.string   "slug",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
+  add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -39,6 +51,25 @@ ActiveRecord::Schema.define(version: 20140225000044) do
 
   add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "events", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "is_all_day"
+    t.date     "from_date"
+    t.time     "from_time"
+    t.date     "to_date"
+    t.time     "to_time"
+    t.string   "repeats"
+    t.integer  "repeats_every_n_weeks"
+    t.integer  "repeats_weekly_each_days_of_the_week_mask"
+    t.string   "repeat_ends"
+    t.date     "repeat_ends_on"
+    t.string   "time_zone"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "follows", force: true do |t|
     t.integer  "followable_id",                   null: false
@@ -98,11 +129,11 @@ ActiveRecord::Schema.define(version: 20140225000044) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "youtube_id"
     t.boolean  "display_email"
-    t.string   "slug"
     t.string   "youtube_id"
+    t.string   "slug"
     t.boolean  "display_profile",        default: true
+    t.boolean  "display_resume"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"

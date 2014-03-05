@@ -6,11 +6,18 @@ Feature:
 	And I would like to show our gratitude by displaying the sponsoring companies logotypes in a special section of AV website.
 	Pivotal Tracker Story - https://www.pivotaltracker.com/story/show/64723776
 
-	Background: 
-		#Given I am not on the home page
-		Given I am on the "Projects" page
+
+  Background:
+    Given the following projects exist:
+
+      | title       | description          | status   |
+      | hello world | greetings earthlings | active   |
+      | hello mars  | greetings aliens     | inactive |
+
+    Given I am on the "Projects" page
 
 	Scenario: See Sponsor Banners
-		Then I should to see sponsor banner for "sponsor 1"
-		And I should to see sponsor banner for "sponsor 2"
-		And I should to see link "Become a sponsor"
+		Then I should see sponsor banner for "Makers Academy"
+		And I should see sponsor banner for "Agile Ventures"
+		And I should see link "Become a supporter"
+
