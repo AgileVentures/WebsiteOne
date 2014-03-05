@@ -25,6 +25,7 @@ end
 Given /^user "([^"]*)" has YouTube Channel ID with (some|no) videos in it/ do |user, qty|
   #TODO YA check what the real response would be for no videos
   @user_youtube_response = (qty == 'some') ? File.read('spec/fixtures/youtube_user_response.json') : nil
+  @user_youtube_filtered_response = (qty == 'some') ? File.read('spec/fixtures/youtube_user_filtered_response.json') : nil
 end
 
 Given /^user "([^"]*)" has YouTube Channel connected/ do |user|
@@ -32,10 +33,11 @@ Given /^user "([^"]*)" has YouTube Channel connected/ do |user|
   user.youtube_id = 'test_id'
   user.save
 
-  request = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&start-index='
-  request += '&q=' + @tags.sort.join('%7C') if @tags
-  stub_request(:get, request + '1').to_return(body: @user_youtube_response)
-  stub_request(:get, request + '51').to_return(body: '')
+
+  stub_request(:get, /youtube.*title/).to_return(body: '{"entry":{"title":{"$t":"Ivan Petrov"}}}')
+  stub_request(:get, /youtube.*1/).to_return(body: @user_youtube_response)
+  stub_request(:get, /youtube.*WSO|WebsiteOne.*1/).to_return(body: @user_youtube_filtered_response)
+  stub_request(:get, /youtube.*51/).to_return(body: '')
 end
 
 Given /^user "([^"]*)" has YouTube Channel not connected/ do |user|
@@ -43,27 +45,14 @@ Given /^user "([^"]*)" has YouTube Channel not connected/ do |user|
   user.youtube_id = nil
   user.save
 
-  channel_id_response = File.read('spec/fixtures/youtube_channel_response.json')
-  stub_request(:get, 'https://www.googleapis.com/youtube/v3/channels?mine=true&part=id').to_return(body: channel_id_response)
-  stub_request(:get, 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&start-index=1').to_return(body: @user_youtube_response)
-  stub_request(:get, 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&start-index=51').to_return(body: '')
+  stub_request(:get, /googleapis/).to_return(body: '{ "items": [{"id": "test_id"}]}')
+  stub_request(:get, /youtube.*1/).to_return(body: @user_youtube_response)
+  stub_request(:get, /youtube.*51/).to_return(body: '')
 end
 
 Then /^I should see video "([^"]*)" in "player"$/ do |name|
   id = find_link(name)[:id]
   expect(page.find(:css, '#ytplayer')[:src]).to match /#{id}/
-end
-
-
-Given /^the following project video tags exist:$/ do |table|
-  @tags = table.hashes.map { |hash| hash[:tag] }
-  FactoryGirl.create(:project_with_tags, tags: @tags)
-
-  response = Youtube.parse_response(@user_youtube_response)
-  response.select! do |video|
-    @tags.any? { |tag| (video[:title] =~ /#{tag}/i) || (video[:content] =~ /#{tag}/i) }
-  end
-  Youtube.stub(parse_response: response)
 end
 
 
@@ -73,5 +62,5 @@ end
 
 
 Given /^there are no videos$/ do
-  stub_request(:get, /gdata\.youtube\.com/).to_return(body: '')
+  stub_request(:get, /youtube/).to_return(body: '')
 end
