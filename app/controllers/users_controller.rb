@@ -16,8 +16,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'User has set his profile to private'
       redirect_to root_path
     else
-      tags = Project.all_tags
-      @youtube_videos  = Youtube.user_videos(@user, tags) if @user
+      @youtube_videos  = Youtube.user_videos(@user) if @user
     end
   end
 end

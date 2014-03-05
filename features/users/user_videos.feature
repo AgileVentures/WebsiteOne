@@ -8,6 +8,10 @@ Feature: As a site owner
     And the following users exist
       | first_name | last_name | email                  | password |
       | Alice      | Jones     | alice@btinternet.co.uk | 12345678 |
+    And the following projects exist:
+      | title       | description          | status   | tags            |
+      | hello world | greetings earthlings | active   | WSO, WebsiteOne |
+      | hello mars  | greetings aliens     | inactive | Autograders     |
 
   Scenario: Show 'link your channel' message if my page channel is not linked
     Given my YouTube Channel is not connected
@@ -58,26 +62,23 @@ Feature: As a site owner
     Given my YouTube Channel ID with some videos in it
     And my YouTube channel is connected
     When I go to my "profile" page
-    Then I should see "Working in HW repo" in "video description"
+    Then I should see "WebsiteOne - Pairing session - refactoring authentication controller" in "video description"
 
-    Scenario: show videos sorted by published date
-      Given my YouTube Channel ID with some videos in it
-      And my YouTube channel is connected
-      When I go to my "profile" page
-      Then I should see "PP on WSO" before "WebsiteOne - Pairing session"
+  Scenario: show videos sorted by published date
+    Given my YouTube Channel ID with some videos in it
+    And my YouTube channel is connected
+    When I go to my "profile" page
+    Then I should see "PP on WSO" before "WebsiteOne - Pairing session"
 
   Scenario: show embedded youtube player with the first video
     Given my YouTube Channel ID with some videos in it
     And my YouTube channel is connected
     When I go to my "profile" page
-    And I should see video "Autograders - Pairing session" in "player"
+    And I should see video "WebsiteOne - Pairing session - refactoring authentication controller" in "player"
 
-  Scenario: only show videos with that include project tags in their title or description
+  Scenario: only show videos that include followed project tags in their title or description
     Given my YouTube Channel ID with some videos in it
-    And the following project video tags exist:
-      | tag        |
-      | WebsiteOne |
-      | WSO        |
+    And I am a member of project "hello world"
     And my YouTube channel is connected
     When I go to my "profile" page
     Then I should see "WebsiteOne - Pairing session"
@@ -88,6 +89,6 @@ Feature: As a site owner
     And my YouTube Channel ID with some videos in it
     And my YouTube channel is connected
     And I am on my "profile" page
-    When I click "WebsiteOne - Pairing session"
-    Then I should see "WebsiteOne - Pairing session" in "video description"
-    And I should see video "WebsiteOne - Pairing session" in "player"
+    When I click "Autograders - Pairing session"
+    Then I should see "Working in HW repo" in "video description"
+    And I should see video "Autograders - Pairing session" in "player"

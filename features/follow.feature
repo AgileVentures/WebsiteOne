@@ -11,8 +11,10 @@ Background:
     | title       | description          | status   |
     | hello world | greetings earthlings | active   |
     | hello mars  | greetings aliens     | inactive |
+  And there are no videos
 
-Scenario: Join a project
+
+  Scenario: Join a project
   Given I am logged in
   And I am not a member of project "hello mars"
   And I am on the "Show" page for project "hello mars"
