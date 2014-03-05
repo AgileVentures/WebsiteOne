@@ -18,11 +18,12 @@ Feature: As a member of the Agile Ventures team
    When I click "Hire me"
    #And show me the page
    Then I should see a modal window with a form "Hire me form"
-   When I fill in "f-name" with "Anonymous user"
-   When I fill in "f-email" with "anonymous@isp.net"
-   When I fill in "f-message" with "I want to hire you"
-   When I click "Send message"
-   #I should see a flash "message sent successfully"
+   And I fill in "f-name" with "Anonymous user"
+   And I fill in "f-email" with "anonymous@isp.net"
+   And I fill in "f-message" with "I want to hire you"
+   And I click the "Send message" button
+   And show me the page
+   Then I should see "Your message has been sent successfully!"
 
    # message should be sent
    #app mailer

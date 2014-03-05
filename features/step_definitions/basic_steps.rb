@@ -123,6 +123,7 @@ Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
   end
 end
 
+
 Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
   within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
 end

@@ -10,6 +10,8 @@ WebsiteOne::Application.routes.draw do
   #get 'users/password' => redirect('/404.html')
   get 'users/show/:id', to: 'users#show', as: 'users_show'
 
+
+
   get "/404", :to => "errors#not_found"
   get "/mamama", :to => "errors#unacceptable"
   get '/internal_server_error', :to => 'errors#internal_error'
@@ -38,7 +40,9 @@ WebsiteOne::Application.routes.draw do
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
 
   post 'mail_contact_form', to: 'visitors#send_contact_form'
+  post 'hire_me_form', to: 'modals#hire_me_contact_form', via: [:get, :post]
 
-
+  #match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  #match 'contact' => 'contact#create', :as => 'contact', :via => :post
 
 end
