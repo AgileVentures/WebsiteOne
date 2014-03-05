@@ -25,21 +25,21 @@ describe 'projects/show.html.erb' do
                           created_at: Time.now
 
     @videos = [
-        { title: 'First video', user: @user, published: '12/12/2012', url: 'somewhere', id: '123', content: 'some text' },
-        { title: 'Second video', user: @user, published: '13/13/2013', url: 'somewhere', id: '123', content: 'some text' }
+        { title: 'First video', user: @user, published: '12/12/2012'.to_date, url: 'somewhere', id: '123', content: 'some text' },
+        { title: 'Second video', user: @user, published: '13/12/2013'.to_date, url: 'somewhere', id: '123', content: 'some text' }
     ]
 
-    @documents = [ @document ]
+    @documents = [@document]
     @documents.stub(:roots).and_return(@documents)
     @documents.stub(:count).and_return(1)
-    @document.stub(:children).and_return( [] )
+    @document.stub(:children).and_return([])
     @document.stub(:user).and_return(@user)
 
     @created_by = ['by:', ([@user.first_name, @user.last_name].join(' '))].join(' ')
     assign :project, @project
     assign :user, @user
     assign :documents, @documents
-    assign :members, [ @user ]
+    assign :members, [@user]
     assign :videos, @videos
     view.stub(:project_created_by).and_return(@created_by)
     @project.stub(:user).and_return(@user)
@@ -65,12 +65,42 @@ describe 'projects/show.html.erb' do
     expect(rendered).to have_text @user.display_name, visible: false
   end
 
-  it 'renders a list of videos' do
-    render
-    expect(rendered).to have_text 'Videos (2)'
-    @videos.each do |video|
-      expect(rendered).to have_text video[:title], visible: false
-      expect(rendered).to have_text video[:published], visible: false
+  describe 'project videos' do
+
+    it 'renders Videos tab with videos quantity' do
+      render
+      rendered.within('.nav-tabs') do |content|
+        expect(content.find(:css, 'li#videos').text).to eq(' Videos (2)')
+      end
+      expect(render).to have_selector('div.tab-pane#videos_list')
+    end
+
+    it 'renders a table wih videos' do
+      render
+      rendered.within('div#videos_list table') do |content|
+        expect(content).to have_text('Video', 'Host', 'Published')
+      end
+    end
+
+    it 'renders an embedded player' do
+      render
+      rendered.within('div#videos_list') do |content|
+        expect(content).to have_css('iframe#ytplayer')
+      end
+    end
+
+    it 'renders list of youtube links and published dates if user has videos' do
+      render
+      @videos.each do |video|
+        expect(rendered).to have_link(video[:title], :href => video[:url])
+        expect(rendered).to have_text(video[:user].first_name)
+        expect(rendered).to have_text(video[:published])
+      end
+    end
+    it 'renders "no available videos" if user has no videos' do
+      assign(:videos, [])
+      render
+      expect(rendered).to have_text('No videos in project Title 1')
     end
   end
 

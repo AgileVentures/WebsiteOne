@@ -24,6 +24,7 @@ Feature: Manage Document
       | title   | body         | created_at          | project    |
       | SubDoc1 | Blog One     | created 3 days ago  | hello mars |
       | SubDoc2 | Another Blog | created 10 days ago | hello mars |
+    And there are no videos
 
   Scenario: Render of list documents
     Given I am on the "Show" page for project "hello world"
