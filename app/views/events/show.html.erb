@@ -5,32 +5,25 @@
         <a class="pull-left" href="#">
           <img class="media-object" src="<%= cover_for(@event) %>" alt="<%= @event.name %>">
         </a>
-
         <div class="media-body">
           <h2 class="media-heading"><%= @event.name %></h2>
+          <p><%= @event.schedule %></p>
           <strong><%= @event.description %></strong>
-
-
         </div>
       </div>
       <% if @event.schedule.present? %>
       <div class="media">
-
-        <strong>Schedule</strong>
-        <%= @event.schedule %>
+        <div class="well">
+        <strong>Upcoming schedule</strong>
         <br/>
-
-        <strong>Upcomming <%= @event.name.pluralize %>:</strong>
-        <% @event.schedule.first(5).each do |e| %>
+        <% @event_schedule.first(5).each do |e| %>
             <br/>
-
-            <%= e.time.strftime("%F at %I:%M%p") %>
+            <%= e.strftime("%F at %I:%M%p") %>
         <% end %>
+        </div>
       </div>
       <% end %>
     </div>
-
-
     <div class="col-lg-6">
       <%= link_to 'Back', root_path, :class => 'btn btn-danger' %>
       <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary' %>
