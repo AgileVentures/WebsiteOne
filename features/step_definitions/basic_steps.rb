@@ -218,7 +218,9 @@ Given(/^I want to use third party authentications$/) do
       'uid' => '12345678',
       'info' => {
           'email' => 'mock@email.com'
-      },
+      }
+  }
+end
 
 Given(/^I want to use third party authentications without a public email$/) do
   OmniAuth.config.test_mode = true
