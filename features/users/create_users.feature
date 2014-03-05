@@ -48,3 +48,4 @@ Feature: As a developer
     And I want to use third party authentications without a public email
     When I click "GitHub"
     Then I should see "Email can't be blank"
+    
