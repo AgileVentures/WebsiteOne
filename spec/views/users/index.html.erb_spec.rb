@@ -41,13 +41,13 @@ describe "users/index.html.erb" do
 
   it 'renders avatar-link with href' do
     render
-    expect(rendered).to have_xpath("//a[@id='avatar-1' and contains(@href, '/users/show/1')]")
-    expect(rendered).to have_xpath("//a[@id='avatar-2' and contains(@href, '/users/show/2')]")
+    expect(rendered).to have_xpath("//a[@id='avatar-1' and contains(@href, '/users/1')]")
+    expect(rendered).to have_xpath("//a[@id='avatar-2' and contains(@href, '/users/2')]")
   end
 
   it 'renders User name link with href' do
     render
-    expect(rendered).to have_xpath("//a[text()='Bill Black' and contains(@href, '/users/show/1')]")
-    expect(rendered).to have_xpath("//a[text()='Charles Cyan' and contains(@href, '/users/show/2')]")
+    expect(rendered).to have_xpath("//a[text()='Bill Black' and contains(@href, '/users/1')]")
+    expect(rendered).to have_xpath("//a[text()='Charles Cyan' and contains(@href, '/users/2')]")
   end
 end

@@ -49,7 +49,7 @@ describe ArticlesController do
     it 'should search the database using the friendly id' do
       dummy = Object.new
       Article.should_receive(:friendly).and_return(dummy)
-      dummy.should_receive(:find).with(@article.friendly_id)
+      dummy.should_receive(:find).with(@article.friendly_id).and_return(@article)
       get :show, id: @article.friendly_id
     end
 
@@ -135,7 +135,7 @@ describe ArticlesController do
       controller.should_receive(:current_user)
       dummy = Object.new
       @user.should_receive(:articles).and_return(dummy)
-      dummy.should_receive(:build)
+      dummy.should_receive(:build).and_return(@article)
       post :create, valid_params
     end
 
