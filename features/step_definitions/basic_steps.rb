@@ -218,7 +218,8 @@ Given(/^I want to use third party authentications$/) do
       'uid' => '12345678',
       'info' => {
           'email' => 'mock@email.com'
-      }
+      },
+      'credentials' => {'token' => 'test_token'}
   }
 end
 
