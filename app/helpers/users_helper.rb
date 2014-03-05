@@ -43,20 +43,25 @@ module Youtube
 
     def user_videos(user)
       if user_id = user.youtube_id
+        tags = followed_project_tags(user)
+
         request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
+        request += '&fields=entry(author(name),id,published,title,content,link)'
+        request += '&q=' + tags.join('|') unless tags.empty?
+        request += '&start-index='
 
-        projects = user.following_by_type('Project') || []
-        tags = []
+        get_response(request)
+      end
+    end
 
+    def followed_project_tags(user)
+      projects = user.following_by_type('Project') || []
+      [].tap do |tags|
         projects.each do |project|
           tags << project.tag_list
           tags << project.title if project.tag_list.empty?
         end
         tags.flatten!
-
-        request += '&q=' + tags.join('|') unless tags.empty?
-        request += '&start-index='
-        get_response(request)
       end
     end
 
@@ -70,11 +75,11 @@ module Youtube
       unless members.empty?
         filter = members.map { |user| "author/name='" + youtube_user_name(user) + "'" if youtube_user_name(user) }.compact
       end
-      filter = ["author/name=''"] unless filter
+      filter = ["author/name=''"] unless filter.present?
 
-      request += '&fields=link,entry[' + filter.join(' or ') + '](author,id,published,title,content,link,media:group)'
+      request += '&fields=entry[' + filter.join(' or ') + '](author(name),id,published,title,content,link)'
       request += '&start-index='
-
+      p request
       get_response(request)
     end
 
@@ -85,7 +90,8 @@ module Youtube
           index += increment
           array.concat(response)
         end
-        array.sort_by!{ |video| video[:published] }.reverse! unless array.empty?
+        array.sort_by! { |video| video[:published] }.reverse! unless array.empty?
+        p index
       end
     end
 
@@ -111,8 +117,6 @@ module Youtube
           title: hash['title']['$t'],
           content: hash['content']['$t'],
           url: hash['link'].first['href'],
-          thumbs: hash['media$group']['media$thumbnail'],
-          player_url: hash['media$group']['media$player'].first['url'],
       }
     end
 

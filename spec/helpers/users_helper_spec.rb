@@ -33,7 +33,7 @@ describe 'Youtube helpers' do
 
   it 'retrieves user videos from youtube' do
     user = double(User, youtube_id: 'test_id', following_by_type: nil)
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&start-index='
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)&start-index='
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.user_videos(user)
@@ -44,7 +44,7 @@ describe 'Youtube helpers' do
     project_2 = double(Project, title: 'Black hole', tag_list: [])
     user = double(User, youtube_id: 'test_id', following_by_type: [project_1, project_2])
 
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&q=Big|Boom|Bang|Black hole&start-index='
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)&q=Big|Boom|Bang|Black hole&start-index='
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.user_videos(user)
@@ -53,7 +53,7 @@ describe 'Youtube helpers' do
   it 'retrieves project videos from youtube filtering by tags and members' do
     project = double(Project, title: 'Big Boom', tag_list: ['Big', 'Boom', 'Bang'])
     members = [double(User, youtube_user_name: 'John Doe'), double(User, youtube_user_name: 'Ivan Petrov')]
-    request_string = %Q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&q=Big|Boom|Bang&fields=link,entry[author/name='John Doe' or author/name='Ivan Petrov'](author,id,published,title,content,link,media:group)&start-index=}
+    request_string = "http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&q=Big|Boom|Bang&fields=entry[author/name='John Doe' or author/name='Ivan Petrov'](author(name),id,published,title,content,link)&start-index="
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.project_videos(project, members)
@@ -62,14 +62,11 @@ describe 'Youtube helpers' do
   it 'parses youtube response into an array of hashes' do
     response = File.read('spec/fixtures/youtube_user_response.json')
     hash = { :author => "Yaro Apletov",
-             :id => "VT-efv6jhuk",
-             :published => 'Mon, 03 Feb 2014'.to_date,
-             :title => "Autograders - Pairing session",
-             :content => "Working in HW repo",
-             :url => "https://www.youtube.com/watch?v=VT-efv6jhuk&feature=youtube_gdata",
-             :thumbs => [{ "url" => "https://i1.ytimg.com/vi/VT-efv6jhuk/0.jpg", "height" => 360, "width" => 480, "time" => "01:22:56" }, { "url" => "https://i1.ytimg.com/vi/VT-efv6jhuk/1.jpg", "height" => 90, "width" => 120, "time" => "00:41:28" }, { "url" => "https://i1.ytimg.com/vi/VT-efv6jhuk/2.jpg", "height" => 90, "width" => 120, "time" => "01:22:56" }, { "url" => "https://i1.ytimg.com/vi/VT-efv6jhuk/3.jpg", "height" => 90, "width" => 120, "time" => "02:04:24" }],
-             :player_url => "https://www.youtube.com/watch?v=VT-efv6jhuk&feature=youtube_gdata_player"
-    }
+             :id => "3Hi41S5Tp54",
+             :published => 'Fri, 14 Feb 2014'.to_date,
+             :title => "WebsiteOne - Pairing session - refactoring authentication controller",
+             :content => "WebsiteOne - Pairing session - refactoring authentication controller",
+             :url => "http://www.youtube.com/watch?v=3Hi41S5Tp54&feature=youtube_gdata" }
     expect(Youtube.parse_response(response).first).to eq(hash)
   end
 
@@ -89,7 +86,7 @@ describe 'Youtube helpers' do
     response = File.read('spec/fixtures/youtube_user_response.json')
     videos = Youtube.parse_response(response)
     titles = videos.map { |video| video[:title] }
-    expect(titles.index('PP on WSO')).to be < titles.index('WebsiteOne - Pairing session')
+    expect(titles.index('WebsiteOne - Pairing session - refactoring authentication controller')).to be < titles.index('Autograders - Pairing session')
   end
 
   it 'retrieves channel ID for logged in user' do
