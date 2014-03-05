@@ -6,6 +6,11 @@ describe User do
     @attr = attributes_for(:user)
   end
 
+  it 'should fail for a new user' do
+    new_user = User.new(@attr.merge first_name: nil, last_name: nil, email: nil)
+    new_user.save.should be_false
+  end
+
   it 'should create a new instance given a valid attribute' do
     User.create!(@attr)
   end

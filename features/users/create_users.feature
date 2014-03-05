@@ -43,8 +43,8 @@ Feature: As a developer
     When I click "GitHub"
     Then I should see "Signed in successfully."
 
-  Scenario: User signs up with a GitHub account having no public email
+  Scenario: User signs up with a GitHub account having no public email (sad path)
     Given I am on the "registration" page
     And I want to use third party authentications without a public email
     When I click "GitHub"
-    Then I should see "Signed in successfully."
+    Then I should see "Email can't be blank"
