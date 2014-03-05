@@ -1,4 +1,9 @@
+<% if user_signed_in? and current_user.following?(@project) %>
+  <script src="https://apis.google.com/js/platform.js" ></script>
+<% end %>
+<%= javascript_include_tag 'projects' %>
 <% provide :title, @project.title %>
+
 <div>
   <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
   <strong><%= @project.title %></strong>
@@ -23,9 +28,6 @@
         <% if current_user.following?(@project) %>
           <li><%= custom_css_btn 'leave project', 'fa fa-users', unfollow_project_path(@project) %></li>
           <li><div id="HOA-placeholder" data-hoa-title="AgileVentures Pairing: <%= @project.title %> - <%= Time.now.utc.strftime('%d/%m/%Y %H00 %Z') %>"></div></li>
-
-          <script src="https://apis.google.com/js/platform.js" data-turbolinks-track="true"></script>
-          <%= javascript_include_tag 'HOA', 'data-turbolinks-track' => true %>
         <% else %>
           <li><%= custom_css_btn 'join project', 'fa fa-users', follow_project_path(@project) %></li>
         <% end %>
@@ -37,9 +39,9 @@
 <div class="small-divider"></div>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a></li>
-  <li><a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a></li>
-  <li><a href="#videos_list" data-toggle="tab">Videos (<%= @videos.count %>)</a></li>
+  <li id="documents" class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a></li>
+  <li id="members"><a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a></li>
+  <li id="videos"><a href="#videos_list" data-toggle="tab"> Videos (<%= @videos.count %>)</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -101,4 +103,3 @@
       </div>
   </div>
 </div>
-
