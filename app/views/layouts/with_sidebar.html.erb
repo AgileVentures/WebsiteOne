@@ -1,5 +1,4 @@
 <%= content_for :content do %>
-  <div id="with-sidebar-container" class="container">
     <aside class="col-sm-3">
       <nav id="sidebar" role="complementary">
         <%= render partial: 'layouts/sidebar', locals: { project: @project, document: @document } %>
@@ -11,6 +10,5 @@
        <%= yield %>
      </div>
     </div>
-  </div>
 <% end %>
 <%= render template: 'layouts/application' %>
