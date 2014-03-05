@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   friendly_id :slug_candidates, use: :slugged
 
   validates :email, uniqueness: true
-  after_validation :geocode
+  after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip }
+
   has_many :authentications, dependent: :destroy
   has_many :projects
   has_many :documents
