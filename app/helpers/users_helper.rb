@@ -79,7 +79,6 @@ module Youtube
 
       request += '&fields=entry[' + filter.join(' or ') + '](author(name),id,published,title,content,link)'
       request += '&start-index='
-      p request
       get_response(request)
     end
 
