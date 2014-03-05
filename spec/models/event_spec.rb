@@ -1,13 +1,6 @@
 require 'spec_helper'
 
 describe Event do
-  #it { should validate_presence_of :name }
-  #it { should validate_presence_of :event_date }
-  #it { should validate_presence_of :start_time }
-  #it { should validate_presence_of :end_time }
-  #it { should validate_presence_of :time_zone }
-  #it { should validate_presence_of :repeats }
-  #it { should validate_presence_of :category }
 
   it 'should respond to "schedule" method' do
     Event.respond_to?('schedule')

@@ -87,11 +87,12 @@ end
 When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
   with_scope(name) do
     table.rows.each do |row|
-      within('#event-form') do
+      within('form#event-form') do
         fill_in row[0], with: row[1]
       end
     end
   end
+  find('form#event-form').click
 end
 
 When /^I accept the warning popup$/ do

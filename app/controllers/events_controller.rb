@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  #require 'delorean'
+
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
@@ -17,6 +19,7 @@ class EventsController < ApplicationController
   end
 
   def index
+   # Delorean.time_travel_to(Time.parse("2014/03/09 09:15:00 UTC"))
     @events = []
     Event.all.each do |event|
       event.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
