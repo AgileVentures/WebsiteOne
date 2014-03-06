@@ -52,6 +52,22 @@ class Event < ActiveRecord::Base
     s
   end
 
+  def current
+    @events = []
+    Event.where(['category = ?', 'Scrum']).each do |event|
+      event.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
+        unless time <= DateTime.now
+          @events << {
+              event: event,
+              time: time
+          }
+        end
+      end
+    end
+    @events = @events.sort_by { |e| e[:time] }
+    return @events
+  end
+
 
   private
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week

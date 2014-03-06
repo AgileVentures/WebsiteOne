@@ -16,6 +16,18 @@ Feature: Events
     Then I should see "AgileVentures Events"
     And I should see link "New Event"
 
+    Scenario: Show an event
+      Given I am on Events index page
+      And I click "Scrum"
+      Then I should see "Scrum"
+      And I should see "Daily scrum meeting"
+      And I should see "Upcoming schedule"
+      And I should see "2014-02-03 at 07:00AM"
+      And I should see link "Edit"
+      And I should see link "Back"
+
+   Scenario: Update url
+
 
   Scenario: Render Next Scrum info on landing page
     And I am on the home page

@@ -5,7 +5,10 @@
   <div class="container">
     <div class="col-sm-12  text-center bg-5">
       <%= render 'layouts/round_banners' %>
-      <h2><%= link_to @event['name'], event_path(@event['id']) %> in <%= @days_left %> days <%= @hours_left %> hours <%= @minutes_left %> minutes</h2>
+      <% if @event.present? %>
+          <h2><%= link_to @event['name'], event_path(@event['id']) %> in <%= @days_left %> days <%= @hours_left %>
+            hours <%= @minutes_left %> minutes</h2>
+      <% end %>
     </div>
   </div>
 </section>
@@ -103,14 +106,14 @@
 
 <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
 <script>
-  $(document).ready(function () {
-    $(document).mousemove(function (e) {
-      TweenLite.to($('.bg-2'),
-          .5,
-          { css: {
-            'background-position': parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / 12) + "px, " + parseInt(event.pageX / 15) + "px " + parseInt(event.pageY / 15) + "px, " + parseInt(event.pageX / 30) + "px " + parseInt(event.pageY / 30) + "px"
-          }
-          });
+    $(document).ready(function () {
+        $(document).mousemove(function (e) {
+            TweenLite.to($('.bg-2'),
+                    .5,
+                    { css: {
+                        'background-position': parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / 12) + "px, " + parseInt(event.pageX / 15) + "px " + parseInt(event.pageY / 15) + "px, " + parseInt(event.pageX / 30) + "px " + parseInt(event.pageY / 30) + "px"
+                    }
+                    });
+        });
     });
-  });
 </script>

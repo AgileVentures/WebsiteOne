@@ -37,7 +37,7 @@
           </div>
       <% end %>
       <div class="col-lg-12">
-        <% unless @event.url.empty? %>
+        <% if @event.url.present? %>
             Hangout link:  <%= link_to @event.url, @event.url %>  -
             <button id="toggle-edit" class="btn btn-sm btn-default">Edit</button>
         <% end %>
