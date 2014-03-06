@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def gravatar_for(email, options = {size: 80})
     hash = Digest::MD5::hexdigest(email.strip.downcase)
-    "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=mm"
+    "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
   end
 
   def current_user_details
@@ -31,6 +31,25 @@ module ApplicationHelper
       'Anonymous'
     end
   end
+
+  #def user_details(id)
+  #  user = User.find_by_id(id)
+  #  if user.present?
+  #    first = user.try(:first_name)
+  #    last = user.try(:last_name)
+  #    str = first.to_s + last.to_s
+  #    if first && last
+  #      [first, last].join(' ')
+  #    elsif !first && !last
+  #      # User has not filled in their profile
+  #      user.email.split('@').first
+  #    else
+  #      str
+  #    end
+  #  else
+  #    'Anonymous'
+  #  end
+  #end
 
 
   def resource_name

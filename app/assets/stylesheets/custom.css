@@ -1,38 +1,4 @@
-@import "variables";
 @import url(http://fonts.googleapis.com/css?family=Kreon:400,700);
-
-/*  ---------------------------------------------------------------
-    general style
-    --------------------------------------------------------------- */
-
-/* apply a natural box layout model to all elements  - http://www.paulirish.com/2012/box-sizing-border-box-ftw/*/
-*, *:before, *:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-*:focus {
-  outline: 0;
-}
-
-::-moz-focus-inner { padding:0; border:0 }  /* ! removes focus line */
-
-html, body {
-  width: 100%;
-  min-height: 100%;
-}
-
-/*  END - general style */
-
-
-/* style for Cube Portfolio wrapper*/
-.wrapper {
-  width: 96%;
-  max-width: 1170px;
-  margin: 0 auto;
-}
-
 
 html,
 body {
@@ -43,7 +9,7 @@ body {
 }
 
 h1, h2, h3 {
-    color: $black;
+    color: #4d4e53;
 }
 
 h4 {
@@ -55,17 +21,13 @@ p, a {
     line-height: 28px;
 }
 
-a, a:visited, a:link {
-    color: $link-color;
+a {
+    color: #F07F48;
 }
 
 a:hover, a:active {
-    color: $link-hover-color;
+    color: #b06137;
     text-decoration: none;
-}
-
-strong {
-  color: $black;
 }
 
 .btn {
@@ -137,19 +99,19 @@ h1, h2, h3, h4 {
     vertical-align: middle;
 }
 
-header#main_header {
+header {
     background: #F07F48;
     height: 60px;
     color: #000000;
 }
 
-header#main_header h1, header#main_header h2, header#main_header h3 a, header#main_header a, header#main_header a:hover {
+header h1, header h2, header h3 a, header a, header a:hover {
     color: #101010;
     font-weight: 800;
     text-decoration: none;
 }
 
-header#main_header h3 {
+header h3 {
     font-family: 'Kreon', serif;
     background: #F07F48;
     padding: 10px;
@@ -158,7 +120,7 @@ header#main_header h3 {
     padding: 12px 10px 6px 10px;
 }
 
-header#main_header .dropdown-menu {
+header .dropdown-menu {
     background: #F07F48;
     border-width: 0;
 }
@@ -857,21 +819,3 @@ section#main {
 
     background: #000;
 }
-
-// Bryan: corrections to twitter-typeahead
-.tokenfield .twitter-typeahead input.tt-hint {
-  padding: 6px 5px;
-  overflow: none;
-  height: auto;
-}
-
-.tokenfield .twitter-typeahead input.token-input {
-  padding-left: 5px;
-}
-
-.tokenfield div.token {
-  margin-top: 6px;
-}
-
-
-
