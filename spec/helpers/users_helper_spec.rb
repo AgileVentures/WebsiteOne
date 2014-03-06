@@ -44,7 +44,7 @@ describe 'Youtube helpers' do
     project_2 = double(Project, title: 'Black hole', tag_list: [])
     user = double(User, youtube_id: 'test_id', following_by_type: [project_1, project_2])
 
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q="Big+Regret"|"Boom"|"Bang"|"Big+Boom"|"Black+hole"&start-index='
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q="Big+Regret"|"Boom"|"Bang"|"Big+Boom"|"scrum"|"Black+hole"&start-index='
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.user_videos(user)
