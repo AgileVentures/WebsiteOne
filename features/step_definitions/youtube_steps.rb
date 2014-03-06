@@ -36,7 +36,7 @@ Given /^user "([^"]*)" has YouTube Channel connected/ do |user|
 
   stub_request(:get, /youtube.*title/).to_return(body: '{"entry":{"title":{"$t":"Ivan Petrov"}}}')
   stub_request(:get, /youtube.*1/).to_return(body: @user_youtube_response)
-  stub_request(:get, /youtube.*WSO|WebsiteOne.*1/).to_return(body: @user_youtube_filtered_response)
+  stub_request(:get, /youtube.*WSO|WebsiteOne.*1/i).to_return(body: @user_youtube_filtered_response)
   stub_request(:get, /youtube.*51/).to_return(body: '')
 end
 

@@ -71,20 +71,40 @@ module Youtube
     def project_videos(project, members)
       return [] if members.empty?
 
-      filter = members.map { |user| "author/name='" + youtube_user_name(user) + "'" if youtube_user_name(user) }.compact
-      filter.map! { |member| member.gsub(' ', '+') }
+      #filter = members.map { |user| "author/name='" + youtube_user_name(user) + "'" if youtube_user_name(user) }.compact
+      filter = members.map { |user|  youtube_user_name(user) if youtube_user_name(user) }.compact
+
+      filter.map(&:downcase!)
+      filter.uniq!
+      filter.map! do |member|
+        if member.index(' ')
+          '"' + member.gsub(' ', '+') + '"'
+        else
+          member
+        end
+      end
       return [] if filter.empty?
 
       tags = project.tag_list
       tags << project.title
+
+      tags.map(&:downcase!)
       tags.uniq!
-      tags.map! { |tag| tag.gsub(' ', '+') }
+      tags.map! do |tag|
+        if tag.index(' ')
+          '"' + tag.gsub(' ', '+') + '"'
+        else
+          tag
+        end
+      end
 
       request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published'
-      request += '&q="' + tags.join('"|"') + '"'
+      request += '&q=(' + tags.join('|') + ')'
 
-      request += '&fields=entry[' + filter.join('+or+') + ']'
-      request += '(author(name),id,published,title,content,link)'
+      #request += '&fields=entry[' + filter.join(' or ') + ']'
+      request += '/(' + filter.join('|')  + ')'
+
+      request += '&fields=entry(author(name),id,published,title,content,link)'
       request += '&start-index='
       p URI.escape(request)
       get_response(request)
