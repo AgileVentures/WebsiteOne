@@ -40,9 +40,8 @@ WebsiteOne::Application.routes.draw do
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
 
   post 'mail_contact_form', to: 'visitors#send_contact_form'
-  post 'users/show/:id', to: 'users#hire_me_contact_form', via: [:get, :post]
+  post 'mail_hire_me_form', to: 'users#hire_me_contact_form'
 
-  #match 'contact' => 'contact#new', :as => 'contact', :via => :get
-  #match 'contact' => 'contact#create', :as => 'contact', :via => :post
+
 
 end
