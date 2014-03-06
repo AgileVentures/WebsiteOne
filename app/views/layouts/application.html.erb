@@ -13,7 +13,22 @@
 <%= render 'layouts/navbar' %>
 <div id="wrap">
   <section id="main" >
-    <%= content_for?(:content) ? yield(:content) : yield %>
+    <% if current_page? root_path %>
+        <%= yield %>
+    <% elsif content_for?(:content) %>
+      <div class="container" id="with-sidebar-container">
+          <%= yield(:content) %>
+      </div>
+    <% else %>
+        <div class="container">
+          <div class="col-lg-9">
+            <%= yield %>
+          </div>
+          <div class="col-lg-3">
+            <%= render 'layouts/sponsors' %>
+          </div>
+        </div>
+    <% end %>
   </section>
   <div id="push"></div>
 </div>

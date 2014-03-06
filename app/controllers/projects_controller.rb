@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.search(params[:search], params[:page])
+    render layout: 'with_sidebar_sponsor_right'
   end
 
   def show
@@ -86,6 +87,5 @@ class ProjectsController < ApplicationController
     # permit the mass assignments
     params.require(:project).permit(:title, :description, :created, :status, :user_id)
   end
-
 
 end
