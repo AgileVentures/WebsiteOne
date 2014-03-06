@@ -40,6 +40,8 @@
         <% if @event.url.present? %>
             Hangout link:  <%= link_to @event.url, @event.url %>  -
             <button id="toggle-edit" class="btn btn-sm btn-default">Edit</button>
+        <% else %>
+            <button id="toggle-add" class="btn btn-sm btn-default">Add url</button>
         <% end %>
         <%= form_for @event, html: {:class => 'form-vertical edit_url', :id => 'event-form'} do |f| %>
             <div class='form-group'>
@@ -47,7 +49,7 @@
               <%= f.text_field :url, :class => 'form-control', :value => "#{url}" -%>
             </div>
             <div class='form-group'>
-              <%= f.submit 'Update', class: 'btn btn-default', data: {disable_with: 'Working...'} %>
+              <%= f.submit 'Save', class: 'btn btn-default', data: {disable_with: 'Working...'} %>
             </div>
         <% end %>
 
@@ -62,10 +64,13 @@
 </div>
 
 <script>
-    $('#toggle-edit').click(function () {
+    $('#toggle-edit, #toggle-add').click(function () {
         $('#event-form').toggle();
         $('#toggle-edit').text(function (i, text) {
             return text === "Edit" ? "Cancel" : "Edit";
+        })
+        $('#toggle-add').text(function (i, text) {
+            return text === "Add url" ? "Cancel" : "Add url";
         })
     });
 </script>

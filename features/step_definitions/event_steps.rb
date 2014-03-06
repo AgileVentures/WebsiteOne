@@ -34,3 +34,11 @@ Then(/^I want to get back to the present$/) do
   Delorean.back_to_the_present
   ENV['TZ'] = @default_tz
 end
+
+
+Given(/^I am on the show page for event "([^"]*)"$/) do |name|
+  steps %Q{
+      Given I am on Events index page
+      And I click "#{name}"
+  }
+end

@@ -16,17 +16,31 @@ Feature: Events
     Then I should see "AgileVentures Events"
     And I should see link "New Event"
 
-    Scenario: Show an event
-      Given I am on Events index page
-      And I click "Scrum"
-      Then I should see "Scrum"
-      And I should see "Daily scrum meeting"
-      And I should see "Upcoming schedule"
-      And I should see "2014-02-03 at 07:00AM"
-      And I should see link "Edit"
-      And I should see link "Back"
+  Scenario: Show an event
+    Given I am on Events index page
+    And I click "Scrum"
+    Then I should see "Scrum"
+    And I should see "Daily scrum meeting"
+    And I should see "Upcoming schedule"
+    And I should see "2014-02-03 at 07:00AM"
+    And I should see link "Edit"
+    And I should see link "Back"
 
-   Scenario: Update url
+  Scenario: Update url if valid
+    Given I am logged in
+    Given I am on the show page for event "Scrum"
+    And I fill in "Url" with "http://google.com"
+    And I click "Save" button
+    Then I should be on the show page for "Scrum"
+    And I should see "Event has been updated"
+
+  Scenario: Reject url update if invalid
+    Given I am logged in
+    Given I am on the show page for event "Scrum"
+    And I fill in "Url" with "http:/google.com"
+    And I click "Save" button
+    Then I should be on the show page for "Scrum"
+    And I should see "You have to provide a valid url"
 
 
   Scenario: Render Next Scrum info on landing page
