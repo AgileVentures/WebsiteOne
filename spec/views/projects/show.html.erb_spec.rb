@@ -22,7 +22,8 @@ describe 'projects/show.html.erb' do
                           description: 'Description 1',
                           status: 'Active',
                           user_id: @user.id,
-                          created_at: Time.now
+                          created_at: Time.now,
+                          tag_list: []
 
     @videos = [
         { title: 'First video', user: @user, published: '12/12/2012'.to_date, url: 'somewhere', id: '123', content: 'some text' },
