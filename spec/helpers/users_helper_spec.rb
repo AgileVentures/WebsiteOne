@@ -32,8 +32,9 @@ end
 describe 'Youtube helpers' do
 
   it 'retrieves user videos from youtube' do
-    user = double(User, youtube_id: 'test_id', following_by_type: [])
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q=""&start-index='
+    user = double(User, youtube_id: 'test_id', youtube_user_name: 'test_name')
+    Youtube.stub(followed_project_tags: ['WSO'])
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)&start-index='
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.user_videos(user)
@@ -44,7 +45,7 @@ describe 'Youtube helpers' do
     project_2 = double(Project, title: 'Black hole', tag_list: [])
     user = double(User, youtube_id: 'test_id', following_by_type: [project_1, project_2])
 
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q="Big+Regret"|"Boom"|"Bang"|"Big+Boom"|"scrum"|"Black+hole"&start-index='
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)&start-index='
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.user_videos(user)
@@ -53,7 +54,7 @@ describe 'Youtube helpers' do
   it 'retrieves project videos from youtube filtering by tags and members' do
     project = double(Project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
     members = [double(User, youtube_user_name: 'John Doe'), double(User, youtube_user_name: 'Ivan Petrov')]
-    request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")&fields=entry(author(name),id,published,title,content,link)&start-index=}
+    request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")&fields=entry(author(name),id,published,title,content,link)&start-index=}
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.project_videos(project, members)
