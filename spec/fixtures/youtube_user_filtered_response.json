@@ -16,7 +16,7 @@
                     "type": "text"
                 },
                 "content": {
-                    "$t": "WebsiteOne - Pairing session - refactoring authentication controller",
+                    "$t": "WebsiteOne - Pairing session - refactoring authentication controller.",
                     "type": "text"
                 },
                 "link": [
@@ -61,7 +61,7 @@
                     "type": "text"
                 },
                 "content": {
-                    "$t": "WebsiteOne - Pairing session",
+                    "$t": "WebsiteOne - Pairing session.",
                     "type": "text"
                 },
                 "link": [
@@ -96,51 +96,6 @@
             },
             {
                 "id": {
-                    "$t": "http://gdata.youtube.com/feeds/api/videos/VT-efv6jhuk"
-                },
-                "published": {
-                    "$t": "2014-02-03T19:44:14.000Z"
-                },
-                "title": {
-                    "$t": "Autograders - Pairing session",
-                    "type": "text"
-                },
-                "content": {
-                    "$t": "Working in HW repo",
-                    "type": "text"
-                },
-                "link": [
-                    {
-                        "rel": "alternate",
-                        "type": "text/html",
-                        "href": "http://www.youtube.com/watch?v=VT-efv6jhuk&feature=youtube_gdata"
-                    },
-                    {
-                        "rel": "http://gdata.youtube.com/schemas/2007#video.related",
-                        "type": "application/atom+xml",
-                        "href": "http://gdata.youtube.com/feeds/api/videos/VT-efv6jhuk/related"
-                    },
-                    {
-                        "rel": "http://gdata.youtube.com/schemas/2007#mobile",
-                        "type": "text/html",
-                        "href": "http://m.youtube.com/details?v=VT-efv6jhuk"
-                    },
-                    {
-                        "rel": "self",
-                        "type": "application/atom+xml",
-                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/VT-efv6jhuk"
-                    }
-                ],
-                "author": [
-                    {
-                        "name": {
-                            "$t": "Yaro Apletov"
-                        }
-                    }
-                ]
-            },
-            {
-                "id": {
                     "$t": "http://gdata.youtube.com/feeds/api/videos/_Sd2_MeAVOA"
                 },
                 "published": {
@@ -151,7 +106,7 @@
                     "type": "text"
                 },
                 "content": {
-                    "$t": "WebsiteOne - Pairing session",
+                    "$t": "WebsiteOne - Pairing session.",
                     "type": "text"
                 },
                 "link": [
@@ -186,51 +141,6 @@
             },
             {
                 "id": {
-                    "$t": "http://gdata.youtube.com/feeds/api/videos/Zgw3oSllma8"
-                },
-                "published": {
-                    "$t": "2014-01-18T23:46:41.000Z"
-                },
-                "title": {
-                    "$t": "PP on WSO: Mercury gem integration",
-                    "type": "text"
-                },
-                "content": {
-                    "$t": "PP on WSO: Mercury gem integration",
-                    "type": "text"
-                },
-                "link": [
-                    {
-                        "rel": "alternate",
-                        "type": "text/html",
-                        "href": "http://www.youtube.com/watch?v=Zgw3oSllma8&feature=youtube_gdata"
-                    },
-                    {
-                        "rel": "http://gdata.youtube.com/schemas/2007#video.related",
-                        "type": "application/atom+xml",
-                        "href": "http://gdata.youtube.com/feeds/api/videos/Zgw3oSllma8/related"
-                    },
-                    {
-                        "rel": "http://gdata.youtube.com/schemas/2007#mobile",
-                        "type": "text/html",
-                        "href": "http://m.youtube.com/details?v=Zgw3oSllma8"
-                    },
-                    {
-                        "rel": "self",
-                        "type": "application/atom+xml",
-                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/Zgw3oSllma8"
-                    }
-                ],
-                "author": [
-                    {
-                        "name": {
-                            "$t": "Yaro Apletov"
-                        }
-                    }
-                ]
-            },
-            {
-                "id": {
                     "$t": "http://gdata.youtube.com/feeds/api/videos/RTj7YGduNUA"
                 },
                 "published": {
@@ -241,7 +151,7 @@
                     "type": "text"
                 },
                 "content": {
-                    "$t": "PP WSO UserManagement",
+                    "$t": "PP WSO UserManagement.",
                     "type": "text"
                 },
                 "link": [
@@ -286,7 +196,7 @@
                     "type": "text"
                 },
                 "content": {
-                    "$t": "PP WSO: User management",
+                    "$t": "PP WSO: User management.",
                     "type": "text"
                 },
                 "link": [
@@ -331,7 +241,7 @@
                     "type": "text"
                 },
                 "content": {
-                    "$t": "PP on WSO",
+                    "$t": "PP on WSO.",
                     "type": "text"
                 },
                 "link": [
@@ -376,7 +286,7 @@
                     "type": "text"
                 },
                 "content": {
-                    "$t": "Working on Project model spec",
+                    "$t": "Working on Project model spec.",
                     "type": "text"
                 },
                 "link": [
@@ -399,51 +309,6 @@
                         "rel": "self",
                         "type": "application/atom+xml",
                         "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/MfrMfVLrmJw"
-                    }
-                ],
-                "author": [
-                    {
-                        "name": {
-                            "$t": "Yaro Apletov"
-                        }
-                    }
-                ]
-            },
-            {
-                "id": {
-                    "$t": "http://gdata.youtube.com/feeds/api/videos/xlD8gdk6YSY"
-                },
-                "published": {
-                    "$t": "2014-01-11T13:34:05.000Z"
-                },
-                "title": {
-                    "$t": "PP on WSO",
-                    "type": "text"
-                },
-                "content": {
-                    "$t": "Working on projects feature",
-                    "type": "text"
-                },
-                "link": [
-                    {
-                        "rel": "alternate",
-                        "type": "text/html",
-                        "href": "http://www.youtube.com/watch?v=xlD8gdk6YSY&feature=youtube_gdata"
-                    },
-                    {
-                        "rel": "http://gdata.youtube.com/schemas/2007#video.related",
-                        "type": "application/atom+xml",
-                        "href": "http://gdata.youtube.com/feeds/api/videos/xlD8gdk6YSY/related"
-                    },
-                    {
-                        "rel": "http://gdata.youtube.com/schemas/2007#mobile",
-                        "type": "text/html",
-                        "href": "http://m.youtube.com/details?v=xlD8gdk6YSY"
-                    },
-                    {
-                        "rel": "self",
-                        "type": "application/atom+xml",
-                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/xlD8gdk6YSY"
                     }
                 ],
                 "author": [

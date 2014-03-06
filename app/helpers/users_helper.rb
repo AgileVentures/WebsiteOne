@@ -37,50 +37,97 @@ module UsersHelper
 
 end
 
-#TODO YA move to a separate helper module
+#TODO YA move to a separate helper module and upgrade to v3
 module Youtube
   class << self
 
-    def user_videos(user, tags = [])
+    def user_videos(user)
       if user_id = user.youtube_id
-        request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
-        request += '&q=' + tags.join('%7C') unless tags.empty? # %7C is an escaped '|' pipe sign
+        tags = followed_project_tags(user)
 
-        parse_response(open(request).read, user)
+        request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50&orderby=published"
+        request += '&fields=entry(author(name),id,published,title,content,link)'
+        request += '&q="' + tags.join('"|"') + '"'
+        request += '&start-index='
+        p URI.escape(request)
+        get_response(request)
       end
     end
 
-    def parse_response(response, user = '')
+    def followed_project_tags(user)
+      projects = user.following_by_type('Project')
+      [].tap do |tags|
+        projects.each do |project|
+          tags << project.tag_list
+          tags << project.title
+          tags << 'scrum'
+        end
+        tags.flatten!
+        tags.uniq!
+        tags.map! { |tag| tag.gsub(' ', '+') }
+      end
+    end
+
+    def project_videos(project, members)
+      return [] if members.empty?
+
+      filter = members.map { |user| "author/name='" + youtube_user_name(user) + "'" if youtube_user_name(user) }.compact
+      filter.map! { |member| member.gsub(' ', '+') }
+      return [] if filter.empty?
+
+      tags = project.tag_list
+      tags << project.title
+      tags.uniq!
+      tags.map! { |tag| tag.gsub(' ', '+') }
+
+      request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published'
+      request += '&q="' + tags.join('"|"') + '"'
+
+      request += '&fields=entry[' + filter.join('+or+') + ']'
+      request += '(author(name),id,published,title,content,link)'
+      request += '&start-index='
+      p URI.escape(request)
+      get_response(request)
+    end
+
+    def get_response(request, increment = 50)
+      index = 1
+      [].tap do |array|
+        #TODO YA commented out temporary to limit the number of requests
+        #while response = parse_response(open(URI.escape(request + index.to_s)).read)
+        #  index += increment
+        #  array.concat(response)
+        #end
+        #TODO YA rescue BadRequest
+        response = parse_response(open(URI.escape(request + '1')).read)
+        array.concat(response) if response
+        #array.sort_by! { |video| video[:published] }.reverse! unless array.empty?
+      end
+    end
+
+    def parse_response(response)
       begin
         json = JSON.parse(response)
 
         videos = json['feed']['entry']
-        videos_total = json['feed']['openSearch$totalResults']['$t']
-        links = json['feed']['link']
         return if videos.nil?
-        all_videos = videos.map do |hash|
-          {
-              id: hash['id']['$t'].split('/').last,
-              published: hash['published']['$t'].to_date,
-              title: hash['title']['$t'],
-              content: hash['content']['$t'],
-              url: hash['link'].first['href'],
-              thumbs: hash['media$group']['media$thumbnail'],
-              player_url: hash['media$group']['media$player'].first['url'],
-              user: user
-          }
-        end
 
-        if (next_link = links.detect { |link| link['rel']=='next' })
-          next_videos = parse_response(open(next_link['href']).read, user)
-          all_videos += next_videos if next_videos
-        end
-
-        all_videos.sort_by{ |video| video[:published] }.reverse
+        videos.map { |hash| beautify_youtube_response(hash) }
       rescue JSON::JSONError
         Rails.logger.warn('Attempted to decode invalid JSON')
         nil
       end
+    end
+
+    def beautify_youtube_response(hash)
+      {
+          author: hash['author'].first['name']['$t'],
+          id: hash['id']['$t'].split('/').last,
+          published: hash['published']['$t'].to_date,
+          title: hash['title']['$t'],
+          content: hash['content']['$t'],
+          url: hash['link'].first['href'],
+      }
     end
 
     def channel_id(token)
@@ -90,6 +137,7 @@ module Youtube
       json['items'].first['id']
     end
 
+    #TODO YA add fallback is user_id not found
     def user_id(token)
       # API v2
       response = open("https://gdata.youtube.com/feeds/api/users/default?alt=json", 'Authorization' => "Bearer #{token}").read
@@ -97,11 +145,22 @@ module Youtube
       json['entry']['yt$username']['$t']
     end
 
-    def user_name(token)
+    def user_name(user)
       # API v2
-      response = open("https://gdata.youtube.com/feeds/api/users/default?alt=json", 'Authorization' => "Bearer #{token}").read
+      return unless user.youtube_id
+      response = open("https://gdata.youtube.com/feeds/api/users/#{user.youtube_id}?fields=title&alt=json").read
       json = JSON.load(response)
       json['entry']['title']['$t']
+    end
+
+    #TODO YA add this to youtube connection
+    def youtube_user_name(user)
+      unless user.youtube_user_name
+        user.youtube_user_name = user_name(user)
+        user.save
+      end
+
+      user.youtube_user_name
     end
 
   end
