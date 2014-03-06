@@ -49,6 +49,7 @@ module Youtube
         request += '&fields=entry(author(name),id,published,title,content,link)'
         request += '&q="' + tags.join('"|"') + '"'
         request += '&start-index='
+        p URI.escape(request)
         get_response(request)
       end
     end
@@ -59,8 +60,10 @@ module Youtube
         projects.each do |project|
           tags << project.tag_list
           tags << project.title
+          tags << 'scrum'
         end
         tags.flatten!
+        tags.uniq!
         tags.map! { |tag| tag.gsub(' ', '+') }
       end
     end
@@ -68,18 +71,22 @@ module Youtube
     def project_videos(project, members)
       return [] if members.empty?
 
+      filter = members.map { |user| "author/name='" + youtube_user_name(user) + "'" if youtube_user_name(user) }.compact
+      filter.map! { |member| member.gsub(' ', '+') }
+      return [] if filter.empty?
+
       tags = project.tag_list
       tags << project.title
+      tags.uniq!
       tags.map! { |tag| tag.gsub(' ', '+') }
 
       request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published'
       request += '&q="' + tags.join('"|"') + '"'
 
-      filter = members.map { |user| "author/name='" + youtube_user_name(user) + "'" if youtube_user_name(user) }.compact
-      filter.map! { |member| member.gsub(' ', '+') }
-
-      request += '&fields=entry[' + filter.join('+or+') + '](author(name),id,published,title,content,link)'
+      request += '&fields=entry[' + filter.join('+or+') + ']'
+      request += '(author(name),id,published,title,content,link)'
       request += '&start-index='
+      p URI.escape(request)
       get_response(request)
     end
 
@@ -91,6 +98,7 @@ module Youtube
         #  index += increment
         #  array.concat(response)
         #end
+        #TODO YA rescue BadRequest
         response = parse_response(open(URI.escape(request + '1')).read)
         array.concat(response) if response
         #array.sort_by! { |video| video[:published] }.reverse! unless array.empty?
