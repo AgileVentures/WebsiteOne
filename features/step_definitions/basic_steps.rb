@@ -31,7 +31,7 @@ def path_to(page_name, id = '')
     when "foobar" then
       visit ("/#{page}")
     when "supporters" then
-      visit page_path('sponsors')
+      page_path('sponsors')
     else
       raise('path to specified is not listed in #path_to')
   end

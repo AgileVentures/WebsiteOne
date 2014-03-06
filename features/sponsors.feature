@@ -23,6 +23,6 @@ Feature:
 
 	Scenario: Click on "Become a supporter"
 		When I click "Become a supporter"
-		Then I am on the "Supporters" page
+		Then I am on the "supporters" page
 
 
