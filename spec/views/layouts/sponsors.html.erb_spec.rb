@@ -15,6 +15,6 @@ describe 'layouts/_sponsors' do
 	it 'should render the Makers Academy banner' do
 		render
 		response.body.should have_xpath("//a",:href => "http://www.makersacademy.com/")
-		response.body.should have_xpath("//img[contains(@src, 'makers2')]")
+		response.body.should have_selector('a.sponsorMedal img[src*="makers"]')
 	end
 end
