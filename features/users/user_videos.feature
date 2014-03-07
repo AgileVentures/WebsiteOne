@@ -12,6 +12,8 @@ Feature: As a site owner
       | title       | description          | status   | tags            |
       | hello world | greetings earthlings | active   | WSO, WebsiteOne |
       | hello mars  | greetings aliens     | inactive | Autograders     |
+    And I am a member of project "hello world"
+    And I am a member of project "hello mars"
 
   Scenario: Show 'link your channel' message if my page channel is not linked
     Given my YouTube Channel is not connected
@@ -40,7 +42,7 @@ Feature: As a site owner
     And I am on my "profile" page
     When I click "Sync with YouTube"
     Then I should see "Title"
-    And I should see "Published"
+    #And I should see "Published"
     And I should see a list of my videos
     But I should not see "Sync with YouTube"
 
@@ -76,9 +78,9 @@ Feature: As a site owner
     When I go to my "profile" page
     And I should see video "WebsiteOne - Pairing session - refactoring authentication controller" in "player"
 
-  Scenario: only show videos that include followed project tags in their title or description
+  Scenario: only show videos that include followed project tags in their title
     Given my YouTube Channel ID with some videos in it
-    And I am a member of project "hello world"
+    And I am not a member of project "hello mars"
     And my YouTube channel is connected
     When I go to my "profile" page
     Then I should see "WebsiteOne - Pairing session"
