@@ -54,7 +54,7 @@ describe 'Youtube helpers' do
   it 'retrieves project videos from youtube filtering by tags and members' do
     project = double(Project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
     members = [double(User, youtube_user_name: 'John Doe'), double(User, youtube_user_name: 'Ivan Petrov')]
-    request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")}
+    request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")}
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.project_videos(project, members)
