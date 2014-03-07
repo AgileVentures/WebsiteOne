@@ -17,7 +17,6 @@
     <div class="doc-status-text">
       <div>Status: <strong style="font-style: normal;"><%= @project.status.upcase %></strong></div>
       <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %></div>
-      <div><strong>Tags: </strong><%= @project.tag_list.to_s %></div>
     </div>
     <div class="small-divider"></div>
     <p><strong><%= @project.description %></strong></p>
