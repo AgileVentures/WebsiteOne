@@ -20,6 +20,7 @@
     </div>
     <div class="small-divider"></div>
     <p><strong><%= @project.description %></strong></p>
+
   </div>
   <div id="doc-side-panel">
     <% if user_signed_in? %>
@@ -83,26 +84,25 @@
   <div class="tab-pane" id="videos_list">
     <div class="row">
       <div class="col-md-6">
-        <!--<ul class="listings">-->
-          <% if @videos.empty? %>
-              <p style="margin-top: 20px;">No videos in project <strong><%= @project.title %></strong></p>
-          <% else %>
-              <h2>List of Project videos</h2>
-              <table class="table table-bordered table-striped table-hover table-condensed" style="margin-left: -15px; width: 100%;">
-                <tr>
-                  <th>Video</th>
-                  <th style="width: 80px;">Host</th>
-                  <th style="width: 80px;">Published</th>
-                </tr>
-                <% @videos.each do |video| %>
-                    <tr style="font-size: 85%">
-                      <td><%= video_link(video) %></td>
-                      <td><%= video[:author] %></td>
-                      <td><%= video[:published].to_s(:db) %></td>
-                    </tr>
-                <% end %>
-              </table>
-          <% end %>
+        <% if @videos.empty? %>
+            <p style="margin-top: 20px;">No videos in project <strong><%= @project.title %></strong></p>
+        <% else %>
+            <h2>List of Project videos</h2>
+            <table class="table table-bordered table-striped table-hover table-condensed" style="margin-left: -15px; width: 100%;">
+              <tr>
+                <th>Video</th>
+                <th style="width: 80px;">Host</th>
+                <th style="width: 80px;">Published</th>
+              </tr>
+              <% @videos.each do |video| %>
+                  <tr style="font-size: 85%">
+                    <td><%= video_link(video) %></td>
+                    <td><%= video[:author] %></td>
+                    <td><%= video[:published].to_s(:db) %></td>
+                  </tr>
+              <% end %>
+            </table>
+        <% end %>
       </div>
       <div class="col-md-6">
         <% unless @videos.empty? %>
@@ -112,5 +112,6 @@
             </div>
         <% end %>
         </div>
+      </div>
   </div>
 </div>
