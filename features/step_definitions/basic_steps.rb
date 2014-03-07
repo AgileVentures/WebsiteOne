@@ -30,7 +30,8 @@ def path_to(page_name, id = '')
       edit_user_registration_path(id)
     when "foobar" then
       visit ("/#{page}")
-
+    when "supporters" then
+      page_path('sponsors')
     else
       raise('path to specified is not listed in #path_to')
   end

@@ -32,8 +32,9 @@ end
 describe 'Youtube helpers' do
 
   it 'retrieves user videos from youtube' do
-    user = double(User, youtube_id: 'test_id', following_by_type: [])
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q=""&start-index='
+    user = double(User, youtube_id: 'test_id', youtube_user_name: 'test_name')
+    Youtube.stub(followed_project_tags: ['WSO'])
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.user_videos(user)
@@ -44,7 +45,7 @@ describe 'Youtube helpers' do
     project_2 = double(Project, title: 'Black hole', tag_list: [])
     user = double(User, youtube_id: 'test_id', following_by_type: [project_1, project_2])
 
-    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q="Big+Regret"|"Boom"|"Bang"|"Big+Boom"|"scrum"|"Black+hole"&start-index='
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.user_videos(user)
@@ -53,7 +54,7 @@ describe 'Youtube helpers' do
   it 'retrieves project videos from youtube filtering by tags and members' do
     project = double(Project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
     members = [double(User, youtube_user_name: 'John Doe'), double(User, youtube_user_name: 'Ivan Petrov')]
-    request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&q="Big+Regret"|"Boom"|"Bang"|"Big+Boom"&fields=entry[author/name='John+Doe'+or+author/name='Ivan+Petrov'](author(name),id,published,title,content,link)&start-index=}
+    request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")}
 
     expect(Youtube).to receive(:get_response).with(request_string)
     Youtube.project_videos(project, members)
@@ -61,7 +62,7 @@ describe 'Youtube helpers' do
 
   it 'parses youtube response into an array of hashes' do
     response = File.read('spec/fixtures/youtube_user_response.json')
-    hash = { :author => "Yaro Apletov",
+    hash = { :author => "John Doe",
              :id => "3Hi41S5Tp54",
              :published => 'Fri, 14 Feb 2014'.to_date,
              :title => "WebsiteOne - Pairing session - refactoring authentication controller",
@@ -69,18 +70,6 @@ describe 'Youtube helpers' do
              :url => "http://www.youtube.com/watch?v=3Hi41S5Tp54&feature=youtube_gdata" }
     expect(Youtube.parse_response(response).first).to eq(hash)
   end
-
-  #it 'retrieves more than max limit of 50 videos' do
-  #  request = URI.escape('https://gdata.youtube.com/request&start-index=')
-  #
-  #  WebMock.stub_request(:get, request + '1').to_return(body: 'response_1')
-  #  WebMock.stub_request(:get, request + '51').to_return(body: 'response_2')
-  #
-  #  expect(Youtube).to receive(:parse_response).with('response_1').and_return([])
-  #  expect(Youtube).to receive(:parse_response).with('response_2')
-  #
-  #  Youtube.get_response(request)
-  #end
 
   it 'sorts videos by published date' do
     response = File.read('spec/fixtures/youtube_user_response.json')

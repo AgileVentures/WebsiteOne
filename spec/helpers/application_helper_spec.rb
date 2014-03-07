@@ -8,7 +8,7 @@ describe ApplicationHelper do
       @user_hash = '0bc83cb571cd1c50ba6f3e8a78ef1346' # hash calculated manually
     end
     it 'constructs a link to image at gravatar.com' do
-      expected_gravatar_link = "http://www.gravatar.com/avatar/#{@user_hash}?s=80&d=mm"
+      expected_gravatar_link = "http://www.gravatar.com/avatar/#{@user_hash}?s=80&d=retro"
 
       expect(helper.gravatar_for(@email)).to eq(expected_gravatar_link)
     end
