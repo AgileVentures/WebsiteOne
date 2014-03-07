@@ -44,15 +44,14 @@ module Youtube
     def user_videos(user)
       if user_id = user.youtube_id
         tags = followed_project_tags(user)
-        #tags = escape_query_params(tags)
         return [] if tags.empty?
 
         request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
-        #request += '&q=' + tags.join('|')
         request += '&fields=entry(author(name),id,published,title,content,link)'
-        request += '&start-index='
 
-        p URI.escape(request)
+        #tags_filter = escape_query_params(tags)
+        #request += '&q=' + tags_filter.join('|')
+
         response = get_response(request)
         filter_response(response, tags, [youtube_user_name(user)]) if response
       end
@@ -62,12 +61,9 @@ module Youtube
       projects = user.following_by_type('Project')
       [].tap do |tags|
         projects.each do |project|
-          tags << project.tag_list
-          tags << project.title
-          tags << 'scrum'
+          tags.concat(project_tags(project))
         end
-        tags.flatten!
-        tags.map!(&:downcase)
+        tags << 'scrum'
         tags.uniq!
       end
     end
@@ -75,33 +71,38 @@ module Youtube
     def project_videos(project, members)
       return [] if members.empty?
 
-      members = members.map { |user| youtube_user_name(user) if youtube_user_name(user) }.compact
-      members.map!(&:downcase)
-      members.uniq!
-      return [] if members.empty?
+      members_tags = members_tags(members)
+      return [] if members_tags.empty?
 
-      members_filter = escape_query_params(members)
+      members_filter = escape_query_params(members_tags)
 
-      tags = project.tag_list
-      tags << project.title
-
-      tags.map!(&:downcase)
-      tags.uniq!
-
-      tags_filter = escape_query_params(tags)
+      project_tags = project_tags(project)
+      project_tags_filter = escape_query_params(project_tags)
 
       request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50'
-      request += '&q=(' + tags_filter.join('|') + ')'
-
+      request += '&fields=entry(author(name),id,published,title,content,link)'
       #request += '&fields=entry[' + filter.join(' or ') + ']'
+
+      request += '&q=(' + project_tags_filter.join('|') + ')'
       request += '/(' + members_filter.join('|') + ')'
 
-      request += '&fields=entry(author(name),id,published,title,content,link)'
-      request += '&start-index='
-
-      p URI.escape(request)
       response = get_response(request)
-      filter_response(response, tags, members) if response
+      filter_response(response, project_tags, members_tags) if response
+    end
+
+    def project_tags(project)
+      tags = project.tag_list
+      tags << project.title
+      tags.map!(&:downcase)
+      tags.uniq!
+      tags
+    end
+
+    def members_tags(members)
+      members_tags = members.map { |user| youtube_user_name(user) if youtube_user_name(user) }.compact
+      members_tags.map!(&:downcase)
+      members_tags.uniq!
+      members_tags
     end
 
     def escape_query_params(params)
@@ -114,16 +115,10 @@ module Youtube
       end
     end
 
-    def get_response(request, increment = 50)
-      index = 1
+    def get_response(request)
       [].tap do |array|
-        #TODO YA commented out temporary to limit the number of requests
-        #while response = parse_response(open(URI.escape(request + index.to_s)).read)
-        #  index += increment
-        #  array.concat(response)
-        #end
-        #TODO YA rescue BadRequest
-        response = parse_response(open(URI.escape(request + '1')).read)
+         #TODO YA rescue BadRequest
+        response = parse_response(open(URI.escape(request)).read)
         array.concat(response) if response
         array.sort_by! { |video| video[:published] }.reverse! unless array.empty?
       end
@@ -190,7 +185,6 @@ module Youtube
         user.youtube_user_name = user_name(user)
         user.save
       end
-
       user.youtube_user_name
     end
 
