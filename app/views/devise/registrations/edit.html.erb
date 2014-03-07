@@ -39,9 +39,13 @@
           <div class="form-group">
             <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
           </div>
-          <div><%= f.label :display_email %>
+          <div style="margin-bottom: 7px;"><%= f.label :display_email %>
             <%= f.check_box :display_email %>
           </div>
+        </div>
+        <div><%= f.label :skills %>
+          <div id="skills" class="tag-list"style="margin-bottom: 10px;"></div>
+          <%= f.text_field :skill_list, :hidden => true %>
         </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -49,6 +53,16 @@
       <!-- Bryan: To be added back in a later story
         <div><%= f.submit 'Preview', class: 'btn btn-primary btn-lg btn-block', name: 'preview' %></div> -->
         <div><%= f.submit 'Update', class: 'btn btn-primary btn-lg btn-block' %></div>
+
+        <script>
+            $(function () {
+                $('#skills').tags({
+                    tagSize: 'lg',
+                    tagData: <%= raw resource.skill_list.to_json %>,
+                    promptText: " "
+                });
+            });
+        </script>
     <% end %>
 
 <!--     <div><%= link_to 'Preview', '#',
@@ -67,3 +81,23 @@
     <%# link_to "Back", :back, :class => 'btn btn-default' %>
   </div>
 </div>
+
+<script>
+    $('#edit_user').bind("keyup keypress", function(e) {
+        var code = e.keyCode || e.which;
+        if (code  == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    $('#edit_user').submit(function(event){
+        $("#user_skill_list").val($("#skills").tags().getTags().join(","));
+    });
+</script>
+
+<style>
+  .tag a {
+      line-height: 18px;
+  }
+</style>
