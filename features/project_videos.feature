@@ -12,11 +12,11 @@ Feature: See project related videos
       | hello world | greetings earthlings | active   | WSO, WebsiteOne |
       | hello mars  | greetings aliens     | inactive | Autograders     |
     And I am a member of project "hello world"
+    And I am a member of project "hello mars"
 
 
   Scenario: Project show page renders a list of videos
     Given I am on the "Show" page for project "hello world"
-#    And show me the page
     Then I should see "Videos (7)"
     And I should see a "List of Project videos" table with:
       | columns   |
@@ -26,10 +26,10 @@ Feature: See project related videos
     And I should see:
       | text                         |
       | WebsiteOne - Pairing session |
-      | Yaro Apletov                 |
+      | John Doe                     |
       | 2014-02-13                   |
       | PP on WSO                    |
-      | Yaro Apletov                 |
+      | John Doe                     |
       | 2014-01-13                   |
     But I should not see "Autograders"
 
