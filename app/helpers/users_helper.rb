@@ -80,6 +80,7 @@ module Youtube
       project_tags_filter = escape_query_params(project_tags)
 
       request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50'
+      request += '&orderby=published'
       request += '&fields=entry(author(name),id,published,title,content,link)'
       #request += '&fields=entry[' + filter.join(' or ') + ']'
 
