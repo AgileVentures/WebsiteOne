@@ -4,9 +4,9 @@ class CreateEvents < ActiveRecord::Migration
       t.string :name
       t.string :category
       t.text :description
-      t.date :event_date, :null => false, :default =>  Date.today
-      t.time :start_time, :null => false, :default =>  Time.now
-      t.time :end_time, :null => false, :default => Time.now + 30.minutes
+      t.date :event_date, :null => false
+      t.time :start_time, :null => false
+      t.time :end_time, :null => false
       t.string :repeats
       t.integer :repeats_every_n_weeks
       t.integer :repeats_weekly_each_days_of_the_week_mask

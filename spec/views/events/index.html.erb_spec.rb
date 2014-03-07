@@ -5,11 +5,9 @@ describe 'events/index' do
     @event1 = stub_model(Event, name: 'EuroAsia Scrum',
                          category: 'Scrum',
                          description: 'EuroAsia Scrum and Pair hookup',
-                         is_all_day: false,
-                         from_date: 'Mon, 17 Feb 2013',
-                         from_time: '2000-01-01 09:00:00 UTC',
-                         to_date: 'Mon, 17 Feb 2013',
-                         to_time: '2000-01-01 09:30:00 UTC',
+                         event_date: 'Mon, 17 Feb 2013',
+                         start_time: '2000-01-01 09:00:00 UTC',
+                         end_time: '2000-01-01 09:30:00 UTC',
                          repeats: 'daily',
                          repeats_every_n_days: 1,
                          repeat_ends: 'never',
@@ -19,18 +17,23 @@ describe 'events/index' do
     @event2 = stub_model(Event, name: 'Daily Scrum',
                          category: 'Scrum',
                          description: 'Daily Scrum and Pair hookup',
-                         is_all_day: false,
-                         from_date: 'Mon, 17 Feb 2013',
-                         from_time: '2000-01-01 16:00:00 UTC',
-                         to_date: 'Mon, 17 Feb 2013',
-                         to_time: '2000-01-01 16:30:00 UTC',
+                         event_date: 'Mon, 17 Feb 2013',
+                         start_time: '2000-01-01 16:00:00 UTC',
+                         end_time: '2000-01-01 16:30:00 UTC',
                          repeats: 'daily',
                          repeats_every_n_days: 1,
                          repeat_ends: 'never',
                          repeat_ends_on: 'Mon, 17 Jun 2014',
                          time_zone: 'Eastern Time (US & Canada)')
 
-    @events = [@event1, @event2]
+
+    @events = []
+    [@event1, @event2].each do |event|
+      @events << {
+          event: event,
+          time: '2000-01-01 16:00:00 UTC'
+      }
+    end
     assign(:events, @events)
   end
 
@@ -38,10 +41,12 @@ describe 'events/index' do
     it 'renders a list of events' do
       render
       rendered.should have_text 'AgileVentures Events'
-      @events.each do |event|
-        rendered.should have_link event.name, :href => event_path(event)
+      @events.each do |slice|
+        slice.each do |instance|
+          event = instance['event']
+          rendered.should have_link event.name, :href => event_path(event)
+        end
       end
-
     end
   end
 

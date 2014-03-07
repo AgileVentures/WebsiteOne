@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 20140305125426) do
     t.string   "name"
     t.string   "category"
     t.text     "description"
-    t.date     "event_date",                                default: '2014-03-04',          null: false
-    t.time     "start_time",                                default: '2000-01-01 21:12:43', null: false
-    t.time     "end_time",                                  default: '2000-01-01 21:42:43', null: false
+    t.date     "event_date",                                null: false
+    t.time     "start_time",                                null: false
+    t.time     "end_time",                                  null: false
     t.string   "repeats"
     t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
@@ -82,29 +82,6 @@ ActiveRecord::Schema.define(version: 20140305125426) do
 
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
-
-  create_table "fullcalendar_engine_event_series", force: true do |t|
-    t.integer  "frequency",  default: 1
-    t.string   "period",     default: "monthly"
-    t.datetime "starttime"
-    t.datetime "endtime"
-    t.boolean  "all_day",    default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "fullcalendar_engine_events", force: true do |t|
-    t.string   "title"
-    t.datetime "starttime"
-    t.datetime "endtime"
-    t.boolean  "all_day",         default: false
-    t.text     "description"
-    t.integer  "event_series_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "fullcalendar_engine_events", ["event_series_id"], name: "index_fullcalendar_engine_events_on_event_series_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.string   "title"
