@@ -1,33 +1,38 @@
 <%= content_for :content do %>
-  <div id="sidetest" class="container">
-    <aside id="sidebar" class="col-sm-3">
-      <nav role="complementary">
-        <h3>Articles by tags</h3>
-        <ul>
-          <li>
-            <% if params[:tag] %>
-              <%= link_to 'All Articles', articles_path %>
-            <% else %>
-              <p class="sidebar-selected">All Articles</p>
-            <% end %>
-          </li>
-          <% standard_tags.each do |tag| %>
-            <li>
-              <% if params[:tag] == tag %>
-                <p class="sidebar-selected"><%= tag %></p>
-              <% else %>
-                <%= link_to tag, articles_path(tag: tag) %>
+  
+      <div class="col-sm-3">
+        <aside id="sidebar" >
+          <nav role="complementary">
+            <h3>Articles by tags</h3>
+            <ul>
+              <li>
+                <% if params[:tag] %>
+                  <%= link_to 'All Articles', articles_path %>
+                <% else %>
+                  <p class="sidebar-selected">All Articles</p>
+                <% end %>
+              </li>
+              <% standard_tags.each do |tag| %>
+                <li>
+                  <% if params[:tag] == tag %>
+                    <p class="sidebar-selected"><%= tag %></p>
+                  <% else %>
+                    <%= link_to tag, articles_path(tag: tag) %>
+                  <% end %>
+                </li>
               <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </nav>
-    </aside>
+            </ul>
+          </nav>
+        </aside>
+      </div>
     <div id="not-sidebar" class="col-sm-6">
       <div id="not-sidebar-content">
         <%= yield %>
       </div>
     </div>
-  </div>
+    <div class="col-sm-3 pull-right">
+      <%= render partial: 'layouts/sponsors' %>
+    </div>
+  
 <% end %>
 <%= render template: 'layouts/application' %>
