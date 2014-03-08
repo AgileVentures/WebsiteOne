@@ -3,6 +3,7 @@ require 'delorean'
 Given(/^I am on Events index page$/) do
   visit('/events')
 end
+
 Given(/^following events exist:$/) do |table|
   @default_tz = ENV['TZ']
   ENV['TZ'] = 'UTC'
@@ -41,4 +42,17 @@ Given(/^I am on the show page for event "([^"]*)"$/) do |name|
       Given I am on Events index page
       And I click "#{name}"
   }
+end
+
+Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
+  event = Event.find_by_name(name)
+  page.downcase!
+  case page
+    when 'show'
+      visit event_path(event)
+
+    else
+      visit eval("#{page}_event_path(event)")
+
+  end
 end

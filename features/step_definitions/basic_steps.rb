@@ -304,6 +304,6 @@ Then(/^I check "([^"]*)"$/) do |item|
   check item
 end
 
-Then(/^I wait for my slow internet to load$/) do
-  sleep(5)
-end
+#Then(/^I wait for my slow internet to load$/) do
+#  sleep(5)
+#end

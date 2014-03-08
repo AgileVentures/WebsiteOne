@@ -27,8 +27,11 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
-
-  resources :events
+  resources :events do
+    member do
+      patch :update_only_url
+    end
+  end
   #get 'events/:format', to: 'events#index'
   resources :event_instances
 

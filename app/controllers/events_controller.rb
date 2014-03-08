@@ -10,7 +10,8 @@ class EventsController < ApplicationController
 
   def show
     @event_schedule = []
-    @event_schedule <<@event.current_occurences if @event.present?
+    @event_schedule << @event.current_occurences if @event.present?
+    @event_schedule.flatten!
     #puts @event_schedule
   end
 
@@ -49,6 +50,12 @@ class EventsController < ApplicationController
     @event.update_attributes(event_params)
     flash[:notice] = 'Event Updated'
     redirect_to events_path
+  end
+
+  def update_only_url
+    @event.update_attributes(params[:event].permit(:url))
+    flash[:notice] = 'Event URL has been updated'
+    redirect_to event_path(@event)
   end
 
   def destroy
