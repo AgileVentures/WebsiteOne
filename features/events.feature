@@ -16,19 +16,33 @@ Feature: Events
     Then I should see "AgileVentures Events"
     And I should see link "New Event"
 
-  Scenario: Show an event
+  Scenario: Show an event when a user is not logged in
     Given I am on Events index page
     And I click "Scrum"
     Then I should see "Scrum"
     And I should see "Daily scrum meeting"
     And I should see "Upcoming schedule"
     And I should see "2014-02-03 at 07:00AM"
-    And I should see link "Edit"
-    And I should see link "Back"
+    And I should not see "Edit"
+    And I should not see "Add url"
+    And I should see "Back"
+
+  Scenario: Show an event when a user is logged in
+    Given I am logged in
+    And I am on Events index page
+    And I click "Scrum"
+    Then I should see "Scrum"
+    And I should see "Daily scrum meeting"
+    And I should see "Upcoming schedule"
+    And I should see "2014-02-03 at 07:00AM"
+    And I should see "Edit"
+    And I should see "Add url"
+    And I should see "Back"
 
   Scenario: Update url if valid
     Given I am logged in
     Given I am on the show page for event "Scrum"
+    And I click "Add url" button
     And I fill in "Url" with "http://google.com"
     And I click "Save" button
     Then I should be on the event "Show" page for "Scrum"
@@ -37,10 +51,11 @@ Feature: Events
   Scenario: Reject url update if invalid
     Given I am logged in
     Given I am on the show page for event "Scrum"
+    And I click "Add url" button
     And I fill in "Url" with "http:/google.com"
     And I click "Save" button
     Then I should be on the event "Show" page for "Scrum"
-    And I should see "You have to provide a valid url"
+    And I should see "You have to provide a valid hangout url"
 
 
   Scenario: Render Next Scrum info on landing page

@@ -2,16 +2,14 @@ class EventsController < ApplicationController
   #require 'delorean'
 
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
 
   def new
     @event = Event.new
   end
 
   def show
-    @event_schedule = []
-    @event_schedule << @event.current_occurences if @event.present?
-    @event_schedule.flatten!
+    @event_schedule = @event.current_occurences
     #puts @event_schedule
   end
 
@@ -53,8 +51,11 @@ class EventsController < ApplicationController
   end
 
   def update_only_url
-    @event.update_attributes(params[:event].permit(:url))
-    flash[:notice] = 'Event URL has been updated'
+    if @event.update_attributes(params[:event].permit(:url))
+      flash[:notice] = 'Event URL has been updated'
+    else
+      flash[:alert] = 'You have to provide a valid hangout url'
+    end
     redirect_to event_path(@event)
   end
 

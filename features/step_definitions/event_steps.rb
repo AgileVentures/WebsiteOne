@@ -49,10 +49,10 @@ Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
   page.downcase!
   case page
     when 'show'
-      visit event_path(event)
+      current_path.should eq event_path(event)
 
     else
-      visit eval("#{page}_event_path(event)")
+      current_path.should eq eval("#{page}_event_path(event)")
 
   end
 end
