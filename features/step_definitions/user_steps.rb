@@ -342,12 +342,12 @@ Given(/^I visit (.*)'s profile page$/) do |name|
   visit users_show_path user
 end
 
-Given(/^I type in skills "(.*)"/) do |skills|
-  #step %Q{I fill in "skills" with "#{skills}"}
+Given(/^I add skills "(.*)"/) do |skills|
+  skills.split(",").each { |s| page.execute_script "$('#skills').tags().addTag('#{s}')"}
 end
 
-Then(/^I should see skills "(.*)"/) do |skills|
-  find("#skills").value.should == skills
+Then(/^I should see skills "(.*)" on my profile/) do |skills|
+  page.all(:css, "#skills .tag span").collect { |e| e.text }.sort.should == skills.split(",").sort
 end
 
 Then(/^I should see skills "(.*)" for "(.*)"/) do |skills, user|

@@ -8,17 +8,18 @@ Feature: As a site user
       | first_name  | last_name   | email                   | skills                 |
       | Alice       | Jones       | alicejones@hotmail.com  | rails,cucumber,rspec   |
       | Bob         | Butcher     | bobb112@hotmail.com     |                        |
-	  And I am logged in as user with email "brett@example.com", with password "12345678"
+      And I am logged in as user with email "brett@example.com", with password "12345678"
 
-	Scenario: Can add skills to my profile
+	@javascript
+    Scenario: Can add skills to my profile
       Given I am on my "edit profile" page
-      And I click the "Edit" button
-      And I type in skills "c++,java,php"
-      And I click "Update"
-      When I click on the avatar for "brett@example.com"
+      And I add skills "c++,java,php"
+      And I click "Update" button
+      Given I go to my "profile" page
       Then I should be on the "user profile" page for "brett@example.com"
-      And I should see skills "c++,java,php"
+      And I should see skills "c++,java,php" on my profile
 
+    @javascript
     Scenario: Can see user skills on users index page
       Given I am on the "our members" page
       Then I should see skills "rails,cucumber,rspec" for "alicejones@hotmail.com"
