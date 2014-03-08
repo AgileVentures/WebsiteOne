@@ -10,8 +10,8 @@ describe 'events/index' do
                          event_date: 'Mon, 17 Feb 2013',
                          start_time: '2000-01-01 09:00:00 UTC',
                          end_time: '2000-01-01 09:30:00 UTC',
-                         repeats: 'daily',
-                         repeats_every_n_days: 1,
+                         repeats: 'never',
+                         repeats_every_n_weeks: nil,
                          repeat_ends: 'never',
                          repeat_ends_on: 'Mon, 17 Jun 2014',
                          time_zone: 'Eastern Time (US & Canada)')
@@ -22,8 +22,8 @@ describe 'events/index' do
                          event_date: 'Mon, 17 Feb 2013',
                          start_time: '2000-01-01 16:00:00 UTC',
                          end_time: '2000-01-01 16:30:00 UTC',
-                         repeats: 'daily',
-                         repeats_every_n_days: 1,
+                         repeats: 'weekly',
+                         repeats_every_n_weeks: 1,
                          repeat_ends: 'never',
                          repeat_ends_on: 'Mon, 17 Jun 2014',
                          time_zone: 'Eastern Time (US & Canada)')
@@ -35,6 +35,9 @@ describe 'events/index' do
     end
     @events.flatten!
     assign(:events, @events)
+  end
+  after (:each) do
+    Delorean.back_to_the_present
   end
 
   context 'for signed in and not signed in users' do
