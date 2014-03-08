@@ -8,6 +8,7 @@
       <%= form_for 'message_form', :url => {:controller => "users", :action => "hire_me_contact_form"}, :method => "post" do |f| %>
           <div class='form-group'>
             <%= f.text_field :name, :id => "f-name", :class => 'form-control', placeholder: 'Name' %>
+            <%= f.hidden_field :recipient_id, :value => @user.id %>
           </div>
           <div class='form-group'>
             <%= f.text_field :email, :id => "f-email", :class => 'form-control', placeholder: 'Email' %>

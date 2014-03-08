@@ -18,6 +18,7 @@ Feature: As a member of the Agile Ventures team
    And I fill in "f-email" with "anonymous@isp.net"
    And I fill in "f-message" with "I want to hire you"
    And I click the "Send message" button
+   Then The user should receive a "message from Anonymous user" email
    #And show me the page
    Then I should see "Your message has been sent successfully!"
 

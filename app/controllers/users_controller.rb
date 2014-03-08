@@ -7,14 +7,13 @@ class UsersController < ApplicationController
 
   def hire_me_contact_form
     begin
-      #debugger
       test = params['message_form']
+      user = User.where(id: test['recipient_id']).first
       if test['name'].empty? or test['message'].empty?
         redirect_to :back, alert: 'Please, fill in Name and Message field'
         return
       end
-
-      if Mailer.hire_me_form(params).deliver
+      if Mailer.hire_me_form(user, test).deliver
         redirect_to :back, notice: 'Your message has been sent successfully!'
       else
         redirect_to :back, alert: 'Your message has not been sent!'
