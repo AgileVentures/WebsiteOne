@@ -7,11 +7,7 @@ describe EventsController do
 
   before :each do
     @event = FactoryGirl.create(:event)
-    @events = []
-    @events << {
-        event: @event,
-        time: @event.schedule.first
-    }
+    @events = @event.current_occurences
   end
 
   describe 'GET index' do

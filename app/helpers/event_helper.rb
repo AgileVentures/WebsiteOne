@@ -1,9 +1,14 @@
 module EventHelper
   def cover_for(event)
-    if event.category == 'PairProgramming'
-      image_path('event-pairwithme-cover.png')
-    else
-      image_path('event-scrum-cover.png')
+    case event.category
+      when 'PairProgramming'
+        image_path('event-pairwithme-cover.png')
+
+      when 'Scrum'
+        image_path('event-scrum-cover.png')
+
+      else
+        ''
     end
   end
 end

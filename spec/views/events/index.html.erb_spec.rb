@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe 'events/index' do
   before(:each) do
+    ENV['TZ'] = 'UTC'
+    Delorean.time_travel_to(Time.parse('Mon, 17 Feb 2013'))
     @event1 = stub_model(Event, name: 'EuroAsia Scrum',
                          category: 'Scrum',
                          description: 'EuroAsia Scrum and Pair hookup',
@@ -29,11 +31,9 @@ describe 'events/index' do
 
     @events = []
     [@event1, @event2].each do |event|
-      @events << {
-          event: event,
-          time: '2000-01-01 16:00:00 UTC'
-      }
+      @events << event.current_occurences
     end
+    @events.flatten!
     assign(:events, @events)
   end
 
@@ -41,11 +41,9 @@ describe 'events/index' do
     it 'renders a list of events' do
       render
       rendered.should have_text 'AgileVentures Events'
-      @events.each do |slice|
-        slice.each do |instance|
-          event = instance['event']
-          rendered.should have_link event.name, :href => event_path(event)
-        end
+      @events.each do |instance|
+        event = instance[:event]
+        rendered.should have_link event.name, :href => event_path(event)
       end
     end
   end

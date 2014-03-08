@@ -121,4 +121,31 @@ describe Event do
       event.should have(1).error_on(:url)
     end
   end
+
+  context 'Event occurences' do
+    before(:each) do
+      ENV['TZ'] = 'UTC'
+      Delorean.time_travel_to(Time.parse('Mon, 17 Jun 2013'))
+      @event = Event.create!(name: 'every weekend event',
+                            category: 'Scrum',
+                            description: '',
+                            event_date: 'Mon, 17 Jun 2013',
+                            start_time: '2000-01-01 09:00:00 UTC',
+                            end_time: '2000-01-01 17:00:00 UTC',
+                            repeats: 'weekly',
+                            repeats_every_n_weeks: 1,
+                            repeats_weekly_each_days_of_the_week_mask: 96,
+                            repeat_ends: 'never',
+                            repeat_ends_on: 'Tue, 25 Jun 2013',
+                            time_zone: 'Eastern Time (US & Canada)')
+    end
+
+    it 'should respond to current_occurences' do
+      @event.should respond_to :current_occurences
+    end
+
+    it 'should return a list of events and occurence times' do
+      expect(@event.current_occurences.count).to eq 2
+    end
+  end
 end

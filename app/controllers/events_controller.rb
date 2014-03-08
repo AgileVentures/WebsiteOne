@@ -10,28 +10,16 @@ class EventsController < ApplicationController
 
   def show
     @event_schedule = []
-    @event.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
-      unless time <= DateTime.now
-        @event_schedule << time
-      end
-    end
-    puts @event_schedule
+    @event_schedule <<@event.current_occurences if @event.present?
+    #puts @event_schedule
   end
 
   def index
-   # Delorean.time_travel_to(Time.parse("2014/03/09 09:15:00 UTC"))
     @events = []
     Event.all.each do |event|
-      event.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
-        #event.schedule.occurrences_between(Date.today, event.repeat_ends_on).each do |time|
-        #event.schedule.occurrences(120.days.since).each do |time|
-        @events << {
-            event: event,
-            time: time
-        }
-      end
+      @events << event.current_occurences
     end
-    @events = @events.sort_by { |e| e[:time] }
+    @events = @events.flatten.sort_by { |e| e[:time] }
   end
 
   def edit
