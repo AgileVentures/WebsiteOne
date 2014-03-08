@@ -4,10 +4,6 @@ Feature: As a site user
 
 	Background:
       Given I am on the "home" page
-	  And the following users exist
-      | first_name  | last_name   | email                   | skills                 |
-      | Alice       | Jones       | alicejones@hotmail.com  | rails,cucumber,rspec   |
-      | Bob         | Butcher     | bobb112@hotmail.com     |                        |
       And I am logged in as user with email "brett@example.com", with password "12345678"
 
 	@javascript
@@ -18,8 +14,3 @@ Feature: As a site user
       Given I go to my "profile" page
       Then I should be on the "user profile" page for "brett@example.com"
       And I should see skills "c++,java,php" on my profile
-
-    @javascript
-    Scenario: Can see user skills on users index page
-      Given I am on the "our members" page
-      Then I should see skills "rails,cucumber,rspec" for "alicejones@hotmail.com"
