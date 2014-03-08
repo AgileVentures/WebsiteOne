@@ -30,7 +30,8 @@ def path_to(page_name, id = '')
       edit_user_registration_path(id)
     when "foobar" then
       visit ("/#{page}")
-
+    when "supporters" then
+      page_path('sponsors')
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -219,7 +220,22 @@ Given(/^I want to use third party authentications$/) do
       'info' => {
           'email' => 'mock@email.com'
       },
-     'credentials' => {'token' => 'test_token'}
+      'credentials' => {'token' => 'test_token'}
+  }
+end
+
+Given(/^I want to use third party authentications without a public email$/) do
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:github] = {
+      'provider' => 'github',
+      'uid' => '12345678',
+      'info' => { }
+  }
+  OmniAuth.config.mock_auth[:gplus] = {
+      'provider' => 'gplus',
+      'uid' => '12345678',
+      'info' => { },
+      'credentials' => {'token' => 'test_token'}
   }
 end
 
@@ -244,24 +260,31 @@ And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |stri
   page.should have_text string
 end
 
-Then(/^I should see the sub-documents in this order:$/) do   |table|
+Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
   actual_order = page.all('li.listings-item a').collect(&:text)
   expected_order.should == actual_order
 end
 
 
-
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
-    project = Project.find_by_title(title)
-    case item.downcase.pluralize
-      when 'members'
-        (1..num.to_i).each do
-          u = User.create(email: Faker::Internet.email, password: '1234567890')
-          u.follow(project)
-        end
+  project = Project.find_by_title(title)
+  case item.downcase.pluralize
+    when 'members'
+      (1..num.to_i).each do
+        u = User.create(email: Faker::Internet.email, password: '1234567890')
+        u.follow(project)
+      end
 
-      else
-        pending
-    end
+    else
+      pending
+  end
+end
+
+
+Then /^I should see a "([^"]*)" table with:$/ do |name, table|
+  expect(page).to have_text(name)
+  table.rows.flatten.each do |heading|
+      expect(page).to have_css('table th', :text => heading)
+  end
 end

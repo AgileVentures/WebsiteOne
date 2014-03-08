@@ -8,6 +8,7 @@ Feature: Add in-page links for projects show page to open the tabbed contents
       | title         | description             | status   |
       | hello world   | greetings earthlings    | active   |
       | hello mars    | greetings aliens        | inactive |
+    And there are no videos
     And I am on the "Show" page for project "hello world"
 
   @javascript

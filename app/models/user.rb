@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
   friendly_id :slug_candidates, use: :slugged
 
   validates :email, uniqueness: true
-  after_validation :geocode
+  after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip }
+
   has_many :authentications, dependent: :destroy
   has_many :projects
   has_many :documents
@@ -46,9 +47,11 @@ class User < ActiveRecord::Base
 
   def display_name
     name = [ self.first_name, self.last_name ].join(' ').squish
-    if name =~ /^\s*$/
+    if (name == '' || name == nil) && (self.email == '' || self.email == nil)
+      'Anonymous'
+    elsif name =~ /^\s*$/
       self.email_first_part
-    else
+    else 
       name
     end
   end
