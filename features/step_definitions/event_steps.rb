@@ -14,12 +14,21 @@ Given(/^following events exist:$/) do |table|
 
 end
 
-Then(/^I should be on the Events index page$/) do
-  current_path.should eq events_path
+Then(/^I should be on the Events "([^"]*)" page$/) do |page|
+  case page.downcase
+    when 'index'
+      current_path.should eq events_path
+
+    when 'create'
+      current_path.should eq new_event_path
+
+    else
+      pending
+  end
 end
 
 Then(/^I should see multiple "([^"]*)" events$/) do |event|
-  puts Time.now
+  #puts Time.now
   page.all(:css, 'a', text: event, visible: false).count.should be > 1
 end
 

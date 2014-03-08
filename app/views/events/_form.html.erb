@@ -3,7 +3,7 @@
 <%= javascript_include_tag 'bootstrap-timepicker.min' %>
 <%= stylesheet_link_tag 'datepicker' %>
 <%= stylesheet_link_tag 'bootstrap-timepicker.min' %>
-<%= javascript_include_tag 'event_datepicker' %>
+<%= javascript_include_tag 'event_datepicker', 'data-turbolinks-track' => true %>
 
 <% start_date = params[:event_date].to_datetime.strftime('%F') if params[:event_date] %>
 <% start_time = params[:start_time].to_datetime.strftime('%I:%M %p') if params[:event_date] %>

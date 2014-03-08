@@ -37,10 +37,10 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     if @event.save
       flash[:notice] = 'Event Created'
-      redirect_to events_path
+      redirect_to event_path(@event)
     else
       flash[:notice] = @event.errors.full_messages.to_sentence
-      render :new
+      redirect_to new_event_path
     end
   end
 

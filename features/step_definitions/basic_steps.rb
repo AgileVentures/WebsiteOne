@@ -93,7 +93,6 @@ When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
       end
     end
   end
-  find('form#event-form').click
 end
 
 When /^I accept the warning popup$/ do

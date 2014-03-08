@@ -67,7 +67,6 @@ Feature: Events
       | 21     | hours    |
       | 45     | minutes  |
 
-  @javascript
   Scenario: Create a new event
     Given I am logged in
     And I am on Events index page
@@ -78,27 +77,26 @@ Feature: Events
       | Description | something else |
     And I click the "Save" button
     Then I should see "Event Created"
-    Then I should be on the Events index page
+    Then I should be on the event "Show" page for "Whatever"
 
-  @javascript
   Scenario: Creating a repeating event
     Given I am logged in
     And I am on Events index page
     When I click "New Event"
     And I fill in event field:
       | name        | value             |
-      | Name        | Scrum             |
-      | Description | scrum description |
+      | Name        | Daily Scrum       |
       | Event date  | 2014-02-04        |
+      | Description | scrum description |
     And I select "Repeats" to "weekly"
     And I check "Monday"
     And I check "Thursday"
     And I click the "Save" button
     Then I should see "Event Created"
-    Then I should be on the Events index page
+    Then I should be on the event "Show" page for "Daily Scrum"
+    When I click "Events" within the navigation bar
     And I should see multiple "Scrum" events
 
-  @javascript
   Scenario: Don't save with empty name
     Given I am logged in
     And I am on Events index page
@@ -111,8 +109,8 @@ Feature: Events
     And I check "Monday"
     And I check "Thursday"
     And I click the "Save" button
-    Then I should be on the Events index page
+    Then I should be on the Events "Create" page
     And I should see "Name can't be blank"
 
-  Scenario: Go back to present
-    Then I want to get back to the present
+#  Scenario: Go back to present
+#    Then I want to get back to the present

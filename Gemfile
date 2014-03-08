@@ -34,6 +34,7 @@ gem 'paper_trail', '~> 3.0.0'
 gem 'verbs'
 gem 'ice_cube'
 gem 'squeel'
+gem 'jquery-turbolinks'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
