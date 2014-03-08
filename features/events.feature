@@ -31,15 +31,15 @@ Feature: Events
     Given I am on the show page for event "Scrum"
     And I fill in "Url" with "http://google.com"
     And I click "Save" button
-    Then I should be on the show page for "Scrum"
-    And I should see "Event has been updated"
+    Then I should be on the event "Show" page for "Scrum"
+    And I should see "Event URL has been updated"
 
   Scenario: Reject url update if invalid
     Given I am logged in
     Given I am on the show page for event "Scrum"
     And I fill in "Url" with "http:/google.com"
     And I click "Save" button
-    Then I should be on the show page for "Scrum"
+    Then I should be on the event "Show" page for "Scrum"
     And I should see "You have to provide a valid url"
 
 
