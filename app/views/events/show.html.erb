@@ -5,22 +5,23 @@
   <h2><%= @event.name %></h2>
   <small><%= @event.schedule %></small>
   <p><strong><%= @event.description %></strong></p>
-  <h2 class="media-heading"><%= @event.name %></h2>
 
   <% if @event.schedule.present? %>
-    <div class="row well">
-      <div class="col-lg-8">
+    <div class="row well well-sm" >
+      <div class="col-lg-8" style="margin-top: -10px">
         <h4>Upcoming schedule</h4>
         <% @event_schedule.first(5).each do |e| %>
           <%= nested_hash_value(e, :time).strftime("%F at %I:%M%p") %>
           <br/>
         <% end %>
       </div>
-      <div class="col-sm-4 ">
+      <div class="col-sm-4" style="margin-top: 10px">
         <%= link_to 'Back', root_path, :class => 'btn btn-danger' %>
         <% if user_signed_in? %>
           <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary' %>
-          <div id="HOA-placeholder" data-hoa-title="<%= @event.name %> - <%= @event_schedule.first(1).to_s %>"></div>
+            <div style="margin-top: 10px">
+            <div id="HOA-placeholder" data-hoa-title="<%= @event.name %> - <%= @event_schedule.first(1).to_s %>"></div>
+            </div>
         <% end %>
       </div>
     </div>
@@ -35,7 +36,7 @@
         <button id="toggle-add" class="btn btn-sm btn-default">Add url</button>
       <% end %>
       <%= form_for @event, url: update_only_url_event_path, html: {:class => 'form-vertical edit_url', :id => 'event-form'} do |f| %>
-        <div class='form-group'>
+        <div class='form-group' style="margin-top: 10px">
           <%= f.label :url, :class => 'control-label' -%>
           <%= f.text_field :url, :class => 'form-control', :value => "#{url}" -%>
         </div>
@@ -58,7 +59,7 @@
       return text === "Edit" ? "Cancel" : "Edit";
     })
     $('#toggle-add').text(function (i, text) {
-      return text === "Add Hangout url" ? "Cancel" : "Add Hangout url";
+      return text === "Add url" ? "Cancel" : "Add url";
     })
   });
 </script>
