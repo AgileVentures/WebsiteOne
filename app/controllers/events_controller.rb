@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def show
     @event_schedule = []
-    @event_schedule <<@event.current_occurences if @event.present?
+    @event_schedule << @event.current_occurences if @event.present?
     #puts @event_schedule
   end
 

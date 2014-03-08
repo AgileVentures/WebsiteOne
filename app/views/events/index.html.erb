@@ -1,4 +1,4 @@
-<div class="container">
+<% provide :title, 'Events' %>
   <h1>AgileVentures Events</h1>
 
   <% if user_signed_in? %>
@@ -30,6 +30,6 @@
       </ul>
   <% end %>
 
-</div>
+
 
 <%= javascript_include_tag 'events' %>
