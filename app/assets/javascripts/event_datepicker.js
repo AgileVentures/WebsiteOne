@@ -1,5 +1,10 @@
 $(function() {
   function ready() {
+    $( ".datepicker" ).datepicker({
+      format: 'yyyy-mm-dd'
+    });
+    $('.timepicker').timepicker();
+
     var toggle_event_options = function () {
       $('.event_option').hide();
       switch ($('#event_repeats').val()) {
