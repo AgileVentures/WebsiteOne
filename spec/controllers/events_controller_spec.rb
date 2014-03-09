@@ -4,7 +4,6 @@ describe EventsController do
   let(:event) { @event }
   let(:valid_session) { {} }
 
-
   before :each do
     @event = FactoryGirl.create(:event)
     @events = @event.current_occurences
@@ -55,22 +54,21 @@ describe EventsController do
     context 'with valid attributes' do
       it 'saves the new event in the database' do
         expect {
-          post :create, event: attributes_for(:event)
+          post :create, event: valid_attributes_for(:event)
         }.to change(Event, :count).by(1)
       end
 
       it 'redirects to events#show' do
-        Event.any_instance.stub(:save).and_return(true)
-        post :create, event: attributes_for(:event)
-        expect(response).to redirect_to events_path
+        post :create, event: valid_attributes_for(:event)
+        expect(response).to redirect_to event_path(controller.instance_variable_get('@event'))
       end
     end
 
     context 'with invalid attributes' do
       it 'does not save the new subject in the database' do
-        Event.any_instance.stub(:save).and_return(false)
+        #Event.any_instance.stub(:save).and_return(false)
         expect {
-          post :create, event: attributes_for(:event)
+          post :create, event: invalid_attributes_for(:event)
         }.to_not change(Event, :count)
         assigns(:event).should be_a_new(Event)
         assigns(:event).should_not be_persisted
@@ -78,8 +76,8 @@ describe EventsController do
 
       it 're-renders the events#new template' do
         Event.any_instance.stub(:save).and_return(false)
-        post :create, event: attributes_for(:event)
-        expect(response).to render_template :new
+        post :create, event: invalid_attributes_for(:event)
+        expect(response).to redirect_to new_event_path
       end
     end
   end
@@ -98,6 +96,88 @@ describe EventsController do
     it 'renders the events#edit template' do
       get :edit, id: @event
       expect(response).to render_template :edit
+    end
+  end
+
+  describe 'POST update' do
+    let(:valid_attributes) { { id: @event, event: valid_attributes_for(:event) } }
+
+    before(:each) do
+      controller.stub(:authenticate_user! => true)
+    end
+
+    it 'should require the user to be signed in' do
+      controller.should_receive(:authenticate_user!)
+      post :update, valid_attributes
+    end
+
+    context 'with valid params' do
+      before(:each) do
+        post :update, valid_attributes
+      end
+
+      it 'should redirected to the index page' do
+        expect(response).to redirect_to events_path
+      end
+
+      it 'should render a success flash message' do
+        expect(flash[:notice]).to eq 'Event Updated'
+      end
+    end
+
+    context 'with invalid params' do
+      before(:each) do
+        post :update, id: @event, event: { name: nil }.as_json
+      end
+
+      it 'should redirect to the event edit page' do
+        expect(response).to redirect_to edit_event_path(@event)
+      end
+
+      it 'should render a failure flash message' do
+        expect(flash[:alert]).to eq 'Failed to update event'
+      end
+    end
+  end
+
+  describe 'PATCH update_only_url' do
+    let(:valid_attributes) { { id: @event, event: { url: 'http://somewhere.net' } } }
+
+    before(:each) do
+      controller.stub(:authenticate_user! => true)
+    end
+
+    it 'should require user to be signed in' do
+      controller.should_receive(:authenticate_user!)
+      patch :update_only_url, valid_attributes
+    end
+
+    context 'with a valid url' do
+      before(:each) do
+        patch :update_only_url, valid_attributes
+      end
+
+      it 'should redirect to event show page' do
+        expect(response).to redirect_to event_path(@event)
+      end
+
+      it 'should render a successful flash message' do
+        expect(flash[:notice]).to eq 'Event URL has been updated'
+      end
+    end
+
+    context 'with an invalid url' do
+      before(:each) do
+        patch :update_only_url, id: @event, event: { url: 'not-a-real-url' }
+      end
+
+      it 'should redirect to the event show page' do
+        expect(response).to redirect_to event_path(@event)
+      end
+
+      it 'should render a failure flash message' do
+        expect(flash[:alert]).to eq 'You have to provide a valid hangout url'
+      end
     end
   end
 end

@@ -112,5 +112,5 @@ Feature: Events
     Then I should be on the Events "Create" page
     And I should see "Name can't be blank"
 
-#  Scenario: Go back to present
-#    Then I want to get back to the present
+  Scenario: Go back to present
+    Then I want to get back to the present
