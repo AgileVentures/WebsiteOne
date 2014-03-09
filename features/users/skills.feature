@@ -24,8 +24,8 @@ Feature: As a site user
       When I click "Our members"
       Then I should be on the "our members" page
       And I should see a tag cloud of skills:
-        | skill | size  |
-        | ruby  | large |
-        | rails | small |
-        | rspec | small |
-        | c++   | small |
+        | skill | class        |
+        | ruby  | btn-success  |
+        | rails | btn-primary  |
+        | rspec | btn-primary  |
+        | c++   | btn-primary  |
