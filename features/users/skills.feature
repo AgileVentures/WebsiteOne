@@ -18,14 +18,3 @@ Feature: As a site user
       Given I go to my "profile" page
       Then I should be on the "user profile" page for "brett@example.com"
       And I should see skills "c++,java,php" on my profile
-
-    @javascript
-    Scenario: Tag Cloud of Skills on members page
-      When I click "Our members"
-      Then I should be on the "our members" page
-      And I should see a tag cloud of skills:
-        | skill | class        |
-        | ruby  | btn-success  |
-        | rails | btn-primary  |
-        | rspec | btn-primary  |
-        | c++   | btn-primary  |

@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where('display_profile = ?', true).order(:created_at)
-    @skills = User.tag_counts_on :skills
   end
 
   def show
