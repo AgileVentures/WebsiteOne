@@ -32,7 +32,7 @@
     <% end %>
     <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-lg', type: 'button' if @user.eql?(current_user) %>
     <%#= link_to 'Hire me', class: 'btn btn-primary btn-lg', type: 'button' if @user.eql?(current_user) %>
-    <%= link_to 'Hire me', users_show_path, {:remote => true,  class: 'btn btn-primary btn-lg', 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}%>
+    <%= link_to 'Hire me', users_show_path(@user), {:remote => true,  class: 'btn btn-primary btn-lg', 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}%>
     <%#= link_to 'Hire me', users_show_path, {:remote => true, 'data-controls-modal' =>  "modal-window", 'data-backdrop' => true, 'data-keyboard' => true, :class => "btn btn-primary ", :id => 'edit_biz'} if @user.eql?(current_user)%>
     <% if @user.eql?(current_user) %>
         <% if @user.youtube_id %>

@@ -21,6 +21,7 @@ class Mailer < ActionMailer::Base
   def hire_me_form(user, hire_me_form)
     @user = user
     @form = hire_me_form
-    mail(to: @user.email, reply_to: @form['email'], from:@form['email'], subject: ['message from', @form['name']].join(' '), body:@form['message'])
+    subject = ['message from', @form[:name]].join(' ')
+    mail(to: @user.email, reply_to: @form[:email], from: @form[:email], subject: subject)
   end
 end
