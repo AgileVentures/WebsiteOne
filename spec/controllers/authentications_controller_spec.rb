@@ -3,12 +3,12 @@ require 'spec_helper'
 describe AuthenticationsController do
 
   before(:each) do
-    OmniAuth.config.mock_auth[:agileventures] = {
-        'provider' => :agileventures,
+    OmniAuth.config.mock_auth['agileventures'] = {
+        'provider' => 'agileventures',
         'uid' => '12345678',
         'info' => {'email' => 'foo@agileventures.org'}
     }
-    @provider = :agileventures
+    @provider = 'agileventures'
     @path = '/some/path'
     request.env['omniauth.origin'] = @path
   end
@@ -148,7 +148,7 @@ describe 'youtube authentication' do
     controller.stub(authenticate_user!: true)
 
     request.env['omniauth.auth'] = {
-        'provider' => :agileventures,
+        'provider' => 'agileventures',
         'uid' => '12345678',
         'info' => {'email' => 'foo@agileventures.org'},
         'credentials' => {}

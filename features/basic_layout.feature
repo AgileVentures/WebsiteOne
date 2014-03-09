@@ -17,10 +17,13 @@ Feature: Setting up basic page layout for site
   Scenario: Render navigation bar
     Then I should see a navigation bar
     And I should see link
-      | Our projects |
-      | Our members  |
-      | Log in       |
-      | Sign up      |
+      | Our projects    |
+      | Our members     |
+      | Log in          |
+      | Sign up         |
+      | Getting Started |
+      | Articles        |
+      | Events          |
 
   Scenario: Render footer
     And I should see "AgileVentures" in footer

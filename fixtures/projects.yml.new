@@ -1,0 +1,95 @@
+---
+projects_001:
+  id: '1'
+  title: Autograder
+  description: Autograder for the EdX CS169.x SaaS course
+  status: Active
+  created_at: '2014-03-01 13:34:59.451651'
+  updated_at: '2014-03-01 13:34:59.451651'
+  user_id: '1'
+  slug: autograder
+projects_002:
+  id: '2'
+  title: WebsiteOne
+  description: The AgileVentures site - a platform for online collaboration and crowdsourced
+    project development.
+  status: Active
+  created_at: '2014-03-01 13:34:59.471924'
+  updated_at: '2014-03-01 13:34:59.471924'
+  user_id: '1'
+  slug: websiteone
+projects_003:
+  id: '3'
+  title: LocalSupport
+  description: |-
+    The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
+    Our customer is the non-profit organization Voluntary Action Harrow.
+    The mission is to support members of the public searching for support groups for things like helping care for an elderly or sick relative; and also to help charities and non-profits find each other and network.
+  status: Active
+  created_at: '2014-03-01 13:34:59.477108'
+  updated_at: '2014-03-01 13:34:59.477108'
+  user_id: '1'
+  slug: localsupport
+projects_004:
+  id: '4'
+  title: EduChat
+  description: Supporting real time synchronous chat in online classes
+  status: Active
+  created_at: '2014-03-01 13:34:59.482318'
+  updated_at: '2014-03-01 13:34:59.482318'
+  user_id: '1'
+  slug: educhat
+projects_005:
+  id: '5'
+  title: PP Scheduler
+  description: |-
+    Problem: Lots of people want to pair, but they don't know when each other are available
+    Solution: is something that requires absolutely minimal effort on their part to use in order to let them pair
+  status: Active
+  created_at: '2014-03-01 13:34:59.487292'
+  updated_at: '2014-03-01 13:34:59.487292'
+  user_id: '1'
+  slug: pp-scheduler
+projects_006:
+  id: '6'
+  title: Funniest Computer Ever
+  description: Can YOU write a program to make humans laugh? Get your editors fired
+    up and your coding caps ready because you've arrived at the Funniest Computer
+    Ever competition!
+  status: Active
+  created_at: '2014-03-01 13:34:59.492239'
+  updated_at: '2014-03-01 13:34:59.492239'
+  user_id: '1'
+  slug: funniest-computer-ever
+projects_007:
+  id: '7'
+  title: aut dolorem consequuntur
+  description: Quaerat voluptas neque dolorem accusamus quae. Blanditiis iusto ea
+    eligendi ea. Non maiores corporis fuga quia doloribus.
+  status: active
+  created_at: '2014-02-01 13:34:59.494468'
+  updated_at: '2014-03-01 13:34:59.518706'
+  user_id: '1'
+  slug: aut-dolorem-consequuntur
+projects_008:
+  id: '8'
+  title: odio animi veniam
+  description: Aspernatur iste quod aut occaecati. Non molestiae itaque occaecati
+    eaque est. Modi provident nam quisquam amet eius. Doloremque soluta est voluptatem
+    quaerat.
+  status: active
+  created_at: '2014-02-01 13:34:59.651273'
+  updated_at: '2014-03-01 13:34:59.654275'
+  user_id: '1'
+  slug: odio-animi-veniam
+projects_009:
+  id: '9'
+  title: minus dolores eos
+  description: Sit dolorum aliquid expedita est voluptas quia autem. Ab aut possimus.
+    Ducimus animi quis non nam aut eos. Amet fugiat qui autem molestiae eos corporis
+    aspernatur. Dolor enim et eum eligendi reprehenderit.
+  status: active
+  created_at: '2014-02-01 13:34:59.712904'
+  updated_at: '2014-03-01 13:34:59.716109'
+  user_id: '1'
+  slug: minus-dolores-eos

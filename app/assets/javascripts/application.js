@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.turbolinks
 //= require bootstrap
 //= require nprogressbar
 //= require 404
-//= require bootstrap-tokenfield.min
 //= require typeahead
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
