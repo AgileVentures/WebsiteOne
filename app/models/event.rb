@@ -65,13 +65,16 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def start_time_with_timezone
+    DateTime.parse(start_time.strftime('%k:%M ')).in_time_zone(time_zone)
+  end
+
   private
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
       errors.add(:base, 'You must have at least one repeats weekly each days of the week')
     end
   end
-
 
   def from_must_come_before_to
     if from > to

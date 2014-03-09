@@ -1,34 +1,33 @@
 <% provide :title, 'Events' %>
-  <h1>AgileVentures Events</h1>
+<h1>AgileVentures Events</h1>
 
-  <% if user_signed_in? %>
-      <div class="row">
-        <%= link_to 'New Event', new_event_path, :class => 'btn btn-primary pull-right' %>
-      </div>
-  <% end %>
+<% if user_signed_in? %>
+  <div class="row">
+    <%= link_to 'New Event', new_event_path, :class => 'btn btn-primary pull-right' %>
+  </div>
+<% end %>
 
-  <% @events.each_slice(3) do |slice| %>
-      <ul id="event-container" class="media-list">
-        <% slice.each do |instance| %>
-            <% event = instance[:event] %>
-            <% time = instance[:time] %>
-            <li class="media-item event-item <%= event.category.downcase %>">
-                <h4 class="media-heading"><%= link_to event.name, event_path(event) %></h4>
-                <div>
-                  <img class="media-object" src="<%= cover_for(event) %>" alt="" width="100%">
-                </div>
+<% @events.each_slice(3) do |slice| %>
+  <ul id="event-container" class="media-list">
+    <% slice.each do |instance| %>
+      <% event = instance[:event] %>
+      <% time = instance[:time] %>
+      <li class="media-item event-item <%= event.category.downcase %>">
+        <h4 class="media-heading"><%= link_to event.name, event_path(event) %></h4>
+        <div style="margin-bottom: 5px;">
+          <img class="media-object" src="<%= cover_for(event) %>" alt="" width="100%">
+        </div>
 
-              <% if user_signed_in? %>
-                  <div> <%= link_to time.strftime("%F at %I:%M%p"), edit_event_path(event) %></div>
-              <% else %>
-                  <p><%= event.event_date %>
-                    - <%= event.start_time.strftime("at %I:%M%p") %></p>
-              <% end %>
-              <small> <%= event.description %></small>
-            </li>
+        <% display_time = time.strftime('%F') + ' at ' + event.start_time_with_timezone.strftime('%k:%M %Z') %>
+        <% if user_signed_in? %>
+          <%= link_to display_time, edit_event_path(event) %>
+        <% else %>
+          <p><%= display_time %></p>
         <% end %>
-      </ul>
-  <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
 
 
