@@ -45,9 +45,13 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event.update_attributes(event_params)
-    flash[:notice] = 'Event Updated'
-    redirect_to events_path
+    if @event.update_attributes(event_params)
+      flash[:notice] = 'Event Updated'
+      redirect_to events_path
+    else
+      flash[:alert] = 'Failed to update event'
+      redirect_to edit_event_path(@event)
+    end
   end
 
   def update_only_url
