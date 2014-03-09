@@ -342,12 +342,10 @@ Given(/^I visit (.*)'s profile page$/) do |name|
   visit users_show_path user
 end
 
+Given(/^I add skills "(.*)"/) do |skills|
+  skills.split(",").each { |s| page.execute_script "$('#skills').tags().addTag('#{s}')"}
+end
 
-
-
-
-#And(/^I fill in field "([^"]*)" with "([^"]*)"$/) do |field, value|
-#  fill_in field, :with => value
-#end
-
-
+Then(/^I should see skills "(.*)" on my profile/) do |skills|
+  page.all(:css, "#skills .tag span").collect { |e| e.text }.sort.should == skills.split(",").sort
+end

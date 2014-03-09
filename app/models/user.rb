@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  acts_as_taggable_on :skills
+
   #after_create Mailer.send_welcome_mail()
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged

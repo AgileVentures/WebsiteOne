@@ -18,8 +18,8 @@
 //= require nprogressbar
 //= require 404
 //= require typeahead
+//= require bootstrap-tags
 //= require bootstrap/modal
-
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
@@ -111,10 +111,7 @@ $(function() {
       }
     });
 
-
-
-
-      var affixedNav = $('#nav'),
+    var affixedNav = $('#nav'),
         header = $('#main_header'),
         main = $('#main'),
     // manually selected properties which will affect affix threshold height, if layout changes,
