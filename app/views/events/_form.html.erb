@@ -1,6 +1,6 @@
 <% provide :title, 'New Events' %>
 <%= javascript_include_tag 'bootstrap-datepicker', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'bootstrap-timepicker.min', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'bootstrap-timepicker', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'event_datepicker', 'data-turbolinks-track' => true %>
 
 <% start_date = params[:event_date].to_datetime.strftime('%F') if params[:event_date] %>
