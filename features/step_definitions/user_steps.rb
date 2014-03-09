@@ -350,6 +350,8 @@ Then(/^I should see skills "(.*)" on my profile/) do |skills|
   page.all(:css, "#skills .tag span").collect { |e| e.text }.sort.should == skills.split(",").sort
 end
 
-Then(/^I should see skills "(.*)" for "(.*)"/) do |skills, user|
+Then /^I should see a tag cloud of skills:/ do |table|
   pending
+  #table.hashes.each do |attributes|
+  #end
 end
