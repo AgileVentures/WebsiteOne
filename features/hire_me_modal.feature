@@ -13,7 +13,7 @@ Feature: As a member of the Agile Ventures team
    Given I visit Bob's profile page
    When I click "Hire me"
    #And show me the page
-   Then I should see a modal window with a form "Hire me form"
+   Then I should see a modal window with a form "Contact Bob Butcher"
    And I fill in "f-name" with "Anonymous user"
    And I fill in "f-email" with "anonymous@isp.net"
    And I fill in "f-message" with "I want to hire you"
