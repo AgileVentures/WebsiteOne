@@ -18,6 +18,7 @@
 //= require nprogressbar
 //= require 404
 //= require typeahead
+//= require bootstrap-tokenfield.min
 //= require bootstrap-tags
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
