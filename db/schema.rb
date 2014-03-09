@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304210808) do
+ActiveRecord::Schema.define(version: 20140305125426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,21 +54,20 @@ ActiveRecord::Schema.define(version: 20140304210808) do
 
   create_table "events", force: true do |t|
     t.string   "name"
+    t.string   "category"
     t.text     "description"
-    t.boolean  "is_all_day"
-    t.date     "from_date"
-    t.time     "from_time"
-    t.date     "to_date"
-    t.time     "to_time"
+    t.date     "event_date",                                null: false
+    t.time     "start_time",                                null: false
+    t.time     "end_time",                                  null: false
     t.string   "repeats"
     t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
-    t.string   "repeat_ends"
+    t.boolean  "repeat_ends"
     t.date     "repeat_ends_on"
     t.string   "time_zone"
-    t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
   create_table "follows", force: true do |t|
@@ -132,7 +131,6 @@ ActiveRecord::Schema.define(version: 20140304210808) do
     t.boolean  "display_email"
     t.string   "youtube_id"
     t.string   "slug"
-    t.string   "youtube_id"
     t.boolean  "display_profile",        default: true
     t.float    "latitude"
     t.float    "longitude"

@@ -5,7 +5,7 @@
         <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
       </div>
       <% if user_signed_in? %>
-      <div class="col-lg-3 pull-right text-right" style="margin-top: 17px;">
+      <div class="col-lg-10 pull-right text-right" style="margin-top: 17px;">
         <img src="<%= gravatar_for(current_user.email) %>" style="width: 30px; height: 30px; margin-right: 5px;" class="img-rounded">
         <a id="user_info" href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user_details %></a>
         <ul class="dropdown-menu text-left">
@@ -39,6 +39,7 @@
         <li><%= link_to 'Our members', users_index_path %></li>
         <li><%= link_to 'Getting Started', page_path('getting-started') %></li>
         <li><%= link_to 'Articles', articles_path %></li>
+        <li><%= link_to 'Events', events_path %></li>
       </ul>
     </div>
   </div>
