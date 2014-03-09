@@ -8,6 +8,7 @@ class AuthenticationsController < ApplicationController
 
     omniauth = request.env['omniauth.auth']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+
     @path = request.env['omniauth.origin'] || root_path
 
     if authentication.present?
