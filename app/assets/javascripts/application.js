@@ -16,6 +16,8 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require nprogressbar
+//= require bootstrap-datepicker
+//= require bootstrap-timepicker
 //= require 404
 //= require typeahead
 
