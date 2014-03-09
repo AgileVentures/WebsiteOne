@@ -2,7 +2,7 @@
 
 <div id="skills" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
   <div class="tags">
-    <% tag_cloud(@skills, %w(btn-primary btn-danger btn-success)) do |skill, css_class| %>
+    <% tag_cloud(@skills, %w(btn-warning btn-primary btn-success)) do |skill, css_class| %>
         <a href="<%= users_index_path(skill: skill.name) %>">
             <div class="tag label lg <%= css_class %>">
               <span><%= skill.name %></span>
