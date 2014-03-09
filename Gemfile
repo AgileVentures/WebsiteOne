@@ -30,8 +30,12 @@ gem 'redcarpet' # renders markdown
 gem 'coderay' # syntax highlighting for markdown code blocks
 gem 'acts-as-taggable-on' # Add tags to objects. Used on Projects
 gem 'geocoder' # geocoding
-gem 'paper_trail', '~> 3.0.0'
-gem 'verbs'
+gem 'paper_trail', '~> 3.0.0'   # version control for Document
+gem 'verbs'   # language and verbs - not used for now but I plan to use it in Events /Thomas
+gem 'ice_cube'     # used for Event
+gem 'squeel'
+gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??
+gem 'addressable'       # used for uri validation
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -43,6 +47,7 @@ group :test do
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
   gem 'zeus', '0.13.4.pre2' # rails preloading environment (the only ver that works with RubyMine)
   gem 'webmock' # mocking external net connections
+  gem 'delorean'
 end
 
 group :development, :test do

@@ -85,6 +85,16 @@ When /^I fill in(?: "([^"]*)")?:$/ do |name, table|
   end
 end
 
+When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
+  with_scope(name) do
+    table.rows.each do |row|
+      within('form#event-form') do
+        fill_in row[0], with: row[1]
+      end
+    end
+  end
+end
+
 When /^I accept the warning popup$/ do
   # works only with @javascript tagged scenario
   page.driver.browser.accept_js_confirms
@@ -288,3 +298,11 @@ Then /^I should see a "([^"]*)" table with:$/ do |name, table|
       expect(page).to have_css('table th', :text => heading)
   end
 end
+
+Then(/^I check "([^"]*)"$/) do |item|
+  check item
+end
+
+#Then(/^I wait for my slow internet to load$/) do
+#  sleep(5)
+#end
