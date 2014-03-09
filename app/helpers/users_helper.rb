@@ -1,6 +1,7 @@
 require 'open-uri'
 
 module UsersHelper
+  include ActsAsTaggableOn::TagsHelper
 
   def user_display_name user
     first = user.try(:first_name)

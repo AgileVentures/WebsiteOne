@@ -1,5 +1,17 @@
 <% provide :title, 'Members' %>
 
+<div id="skills" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
+  <div class="tags">
+    <% tag_cloud(@skills, %w(btn-primary btn-danger btn-success)) do |skill, css_class| %>
+        <a href="<%= users_index_path(skill: skill.name) %>">
+            <div class="tag label lg <%= css_class %>">
+              <span><%= skill.name %></span>
+            </div>
+        </a>
+    <% end %>
+  </div>
+</div>
+<br /><br />
 <div id="all_members">
   <h1>All members</h1>
   <% @users.each_slice(3) do |slice| %>
@@ -19,7 +31,8 @@
   <% end %>
 </div>
 
-
-
-
-
+<style>
+  .tag {
+      margin: 5px;
+  }
+</style>
