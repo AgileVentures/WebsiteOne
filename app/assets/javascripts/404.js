@@ -24,8 +24,8 @@
  */
 (function(){
 
-    var DISPLAY_WIDTH = 960,
-        DISPLAY_HEIGHT = 480,
+    var DISPLAY_WIDTH = 860,//960, NEEDS TO BE CHANGED IN custom_errors.css.scss too!
+        DISPLAY_HEIGHT = 430,//480,
         DISPLAY_DURATION = 10,
         OVERLAY_DURATION = 3;
 
