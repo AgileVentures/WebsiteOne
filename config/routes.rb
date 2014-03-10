@@ -1,5 +1,4 @@
 WebsiteOne::Application.routes.draw do
-
   get "users/index"
   root 'visitors#index'
   mount Mercury::Engine => '/'
@@ -32,8 +31,7 @@ WebsiteOne::Application.routes.draw do
       patch :update_only_url
     end
   end
-  #get 'events/:format', to: 'events#index'
-  resources :event_instances
+
 
   post 'preview/article', to: 'articles#preview'
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles'
@@ -44,6 +42,8 @@ WebsiteOne::Application.routes.draw do
   get '/auth/failure' => 'authentications#failure'
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
   post 'mail_contact_form', to: 'visitors#send_contact_form'
+  post 'mail_hire_me_form', to: 'users#hire_me_contact_form'
+
 
 
 

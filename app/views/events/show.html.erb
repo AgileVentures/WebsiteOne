@@ -2,6 +2,7 @@
 <script src="https://apis.google.com/js/platform.js"></script>
 <%= javascript_include_tag 'projects' %>
 <div class="col-lg-8 col-lg-offset-2">
+
   <h2><%= @event.name %></h2>
   <small><%= @event.schedule %></small>
   <p><strong><%= @event.description %></strong></p>
@@ -11,7 +12,7 @@
       <div class="col-lg-8" style="margin-top: -10px">
         <h4>Upcoming schedule</h4>
         <% @event_schedule.first(5).each do |e| %>
-          <%= nested_hash_value(e, :time).strftime("%F at %I:%M%p") %>
+          <%= current_occurrence_time(e) %>
           <br/>
         <% end %>
       </div>
@@ -20,7 +21,7 @@
         <% if user_signed_in? %>
           <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary' %>
             <div style="margin-top: 10px">
-            <div id="HOA-placeholder" data-hoa-title="<%= @event.name %> - <%= @event_schedule.first(1).to_s %>"></div>
+            <div id="HOA-placeholder" data-hoa-title="<%= @event.name %> - <%= current_occurrence_time(@event_schedule.first(1)) %>"></div>
             </div>
         <% end %>
       </div>

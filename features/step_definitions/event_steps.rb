@@ -9,7 +9,7 @@ Given(/^following events exist:$/) do |table|
   ENV['TZ'] = 'UTC'
   Delorean.time_travel_to(Time.parse('2014/02/01 09:15:00 UTC'))
   table.hashes.each do |hash|
-    Event.create(hash)
+    Event.create!(hash)
   end
 
 end

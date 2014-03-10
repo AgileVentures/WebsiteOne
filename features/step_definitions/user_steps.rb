@@ -347,5 +347,5 @@ Given(/^I add skills "(.*)"/) do |skills|
 end
 
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
-  page.all(:css, "#skills .tag span").collect { |e| e.text }.sort.should == skills.split(",").sort
+  page.all(:css, "#skills-show .tag span").collect { |e| e.text }.sort.should == skills.split(",").sort
 end

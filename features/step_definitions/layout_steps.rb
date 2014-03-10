@@ -51,6 +51,9 @@ end
 
 Then /^I should see the tracking code$/ do
   page.should have_xpath("//script[text()[contains(.,#{GA.tracker})]]", visible: false)
+end
 
-  #page.body.should match /UA-47795185-1/
+
+Then(/^I should see a modal window with a form "([^"]*)"$/) do |arg|
+  page.should have_content(arg, visible: true)
 end

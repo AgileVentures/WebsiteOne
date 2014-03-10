@@ -134,6 +134,7 @@ Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
   end
 end
 
+
 Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
   within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
 end
@@ -239,12 +240,12 @@ Given(/^I want to use third party authentications without a public email$/) do
   OmniAuth.config.mock_auth[:github] = {
       'provider' => 'github',
       'uid' => '12345678',
-      'info' => { }
+      'info' => {}
   }
   OmniAuth.config.mock_auth[:gplus] = {
       'provider' => 'gplus',
       'uid' => '12345678',
-      'info' => { },
+      'info' => {},
       'credentials' => {'token' => 'test_token'}
   }
 end
@@ -295,7 +296,7 @@ end
 Then /^I should see a "([^"]*)" table with:$/ do |name, table|
   expect(page).to have_text(name)
   table.rows.flatten.each do |heading|
-      expect(page).to have_css('table th', :text => heading)
+    expect(page).to have_css('table th', :text => heading)
   end
 end
 
