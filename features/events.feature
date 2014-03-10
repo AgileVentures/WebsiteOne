@@ -4,11 +4,15 @@ Feature: Events
     Given following events exist:
       | name       | description             | category        | event_date | start_time              | end_time                | repeats | time_zone                  |
       | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | London                     |
-      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/11 | 2000-01-01 10:00:00 UTC | 2000-01-01 10:15:00 UTC | never   | Eastern Time (US & Canada) |
+      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 | 2000-01-01 10:00:00 UTC | 2000-01-01 10:15:00 UTC | never   | Eastern Time (US & Canada) |
 
   Scenario: Show index of events
     Given I am on Events index page
     Then I should see "AgileVentures Events"
+    And I should see "Scrum"
+    And I should see "PP Session"
+    And I should see "GMT"
+    And I should see "EDT"
 
   Scenario: Show index of events with a New Event button for logged in user
     Given I am logged in
