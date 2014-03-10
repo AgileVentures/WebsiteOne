@@ -109,111 +109,93 @@ describe AuthenticationsController do
     end
 
     it 'should not allow connecting to a profile when the profile already exists under a different user' do
-      Authentication.stub(:find_by_provider_and_uid).and_return @auth
-      other_user = double(User, id: @user.id + 1)
-      controller.stub :current_user => other_user
-      get :create, provider: @provider
-      expect(flash[:alert]).to eq 'Another account is already associated with these credentials!'
-      expect(response).to redirect_to @path
+    Authentication.stub(:find_by_provider_and_uid).and_return @auth
+    other_user = double(User, id: @user.id + 1)
+    controller.stub :current_user => other_user
+    get :create, provider: @provider
+    expect(flash[:alert]).to eq 'Another account is already associated with these credentials!'
+    expect(response).to redirect_to @path
+  end
+
+  context 'connecting to a new profile' do
+
+    before(:each) do
+      Authentication.stub(:find_by_provider_and_uid).and_return nil
+      @user.stub_chain(:authentications, :build).and_return @auth
     end
 
-    context 'connecting to a new profile' do
-
-      before(:each) do
-        Authentication.stub(:find_by_provider_and_uid).and_return nil
-        @user.stub_chain(:authentications, :build).and_return @auth
-      end
-
-      it 'should be able to create other profiles' do
-        other_auths = %w( Glitter Smoogle HitPub )
-        other_auths.each do |p|
-          @auth.should_receive(:save).and_return true
-          get :create, provider: p
-          expect(flash[:notice]).to eq 'Authentication successful.'
-          expect(response).to redirect_to @path
-        end
-      end
-
-      it 'should not accept multiple profiles from the same source' do
-        @auth.should_receive(:save).and_return false
-        get :create, provider: @provider
-        expect(flash[:alert]).to eq 'Unable to create additional profiles.'
+    it 'should be able to create other profiles' do
+      other_auths = %w( Glitter Smoogle HitPub )
+      other_auths.each do |p|
+        @auth.should_receive(:save).and_return true
+        get :create, provider: p
+        expect(flash[:notice]).to eq 'Authentication successful.'
         expect(response).to redirect_to @path
       end
     end
-  end
 
-  describe 'youtube authentication' do
-    before(:each) do
-      controller.stub(authenticate_user!: true)
-
-      request.env['omniauth.auth'] = {
-          'provider' => 'agileventures',
-          'uid' => '12345678',
-          'info' => {'email' => 'foo@agileventures.org'},
-          'credentials' => {}
-      }
-
-      request.env['omniauth.params'] = {}
-      request.env['omniauth.params']['youtube'] = true
-
-      request.env['omniauth.origin'] = 'back_path'
-    end
-
-    it 'calls #link_to_youtube' do
-      expect(controller).to receive(:link_to_youtube)
-      get :create, provider: 'github'
-    end
-    it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
-      request.env['omniauth.auth']['credentials']['token'] = 'token'
-      user = double(User, youtube_id: nil)
-      controller.stub(current_user: user)
-      user.stub(:youtube_id=)
-      user.stub(:save)
-
-      expect(Youtube).to receive(:channel_id)
-      get :create, provider: 'github'
-    end
-
-    it '#link_to_youtube: redirects back' do
-      get :create, provider: 'github'
-      expect(response).to redirect_to 'back_path'
-    end
-
-    it 'calls #unlink from youtube' do
-      controller.stub_chain(:current_user, :authentications, :find).and_return(double(User))
-      controller.stub_chain(:current_user, :authentications, :count).and_return(1)
-      controller.stub_chain(:current_user, :encrypted_password).and_return(nil)
-      expect(controller).to receive(:unlink_from_youtube)
-      get :destroy, id: 'youtube'
-    end
-
-    it '#unlink_from_youtube' do
-      user = stub_model(User, youtube_id: '12345')
-      controller.stub(current_user: user)
-
-      get :destroy, id: 'youtube', origin: 'back_path'
-      expect(user.youtube_id).to be_nil
-      expect(response).to redirect_to 'back_path'
+    it 'should not accept multiple profiles from the same source' do
+      @auth.should_receive(:save).and_return false
+      get :create, provider: @provider
+      expect(flash[:alert]).to eq 'Unable to create additional profiles.'
+      expect(response).to redirect_to @path
     end
   end
-  describe 'Github profile link' do
-    before(:each) do
-      controller.stub(authenticate_user!: true)
+end
 
-      request.env['omniauth.auth'] = {
-          'provider' => 'github',
-          'info' => { 'urls' => { 'GitHub' => 'http://github.com/test' } }
-      }
-    end
-    it 'links Github profile when authenticate with GitHub' do
-      user = stub_model(User, github_profile_url: nil)
-      controller.stub(current_user: user)
+describe 'youtube authentication' do
+  before(:each) do
+    controller.stub(authenticate_user!: true)
 
-      expect(controller).to receive(:link_github_profile).and_call_original
-      get :create, provider: 'github'
-      expect(user.github_profile_url).to eq('http://github.com/test')
-    end
+    request.env['omniauth.auth'] = {
+        'provider' => 'agileventures',
+        'uid' => '12345678',
+        'info' => {'email' => 'foo@agileventures.org'},
+        'credentials' => {}
+    }
+
+    request.env['omniauth.params'] = {}
+    request.env['omniauth.params']['youtube'] = true
+
+    request.env['omniauth.origin'] = 'back_path'
   end
+
+  it 'calls #link_to_youtube' do
+    expect(controller).to receive(:link_to_youtube)
+    get :create, provider: 'github'
+  end
+  it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
+    request.env['omniauth.auth']['credentials']['token'] = 'token'
+    user = double(User, youtube_id: nil)
+    controller.stub(current_user: user)
+    user.stub(:youtube_id=)
+    user.stub(:save)
+
+    expect(Youtube).to receive(:channel_id)
+    get :create, provider: 'github'
+  end
+
+  it '#link_to_youtube: redirects back' do
+    get :create, provider: 'github'
+    expect(response).to redirect_to 'back_path'
+  end
+
+  it 'calls #unlink from youtube' do
+    controller.stub_chain(:current_user, :authentications, :find).and_return(double(User))
+    controller.stub_chain(:current_user, :authentications, :count).and_return(1)
+    controller.stub_chain(:current_user, :encrypted_password).and_return(nil)
+    expect(controller).to receive(:unlink_from_youtube)
+    get :destroy, id: 'youtube'
+  end
+
+  it '#unlink_from_youtube' do
+    user = stub_model(User, youtube_id: '12345')
+    controller.stub(current_user: user)
+
+    get :destroy, id: 'youtube', origin: 'back_path'
+    expect(user.youtube_id).to be_nil
+    expect(response).to redirect_to 'back_path'
+  end
+end
 end
 
