@@ -48,6 +48,3 @@
 .rvmrc
 .ruby-version
 .ruby-gemset
-
-# Precompiled Assets
-public/**
