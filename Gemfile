@@ -65,3 +65,8 @@ group :production do
   gem 'rails_12factor'
   gem 'unicorn'
 end
+
+group :assets do
+  gem 'compass-rails'
+  # Add any compass extensions here
+end

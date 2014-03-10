@@ -78,14 +78,12 @@ label {
   margin: 5px, 15px, 5px, 5px;
 }
 
-
-
-#event-container .event-item p, .event-item a, .event-item small  {
+#event-container .event-item p, .event-item a, .event-item small {
   padding-left: 8px !important;
   line-height: 14px;
 }
 
-#event-container .event-item h4  {
+#event-container .event-item h4 {
   padding-left: 0px !important;
 }
 
@@ -98,7 +96,7 @@ label {
   #event-container .git-item {
     width: 50%;
     height: 150px;
-    margin-bottom: 10px!important;
+    margin-bottom: 10px !important;
   }
 }
 
@@ -107,15 +105,16 @@ label {
   #event-container .event-item {
     width: 50%;
     height: 150px;
-    margin-bottom: 10px!important;
+    margin-bottom: 10px !important;
   }
 }
+
 @media (max-width: 480px) {
 
   #event-container .event-item {
     width: 50%;
     height: 150px;
-    margin-bottom: 10px!important;
+    margin-bottom: 10px !important;
   }
 }
 

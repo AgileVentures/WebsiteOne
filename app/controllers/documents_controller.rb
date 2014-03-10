@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   layout 'with_sidebar'
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [ :index, :show, :create ]
+  before_action :authenticate_user!, except: [:index, :show, :create]
   before_action :find_project
 
 
@@ -104,7 +104,6 @@ class DocumentsController < ApplicationController
       @parent = Document.find(params[:parent_id])
     end
   end
-
 
 
   # Never trust parameters from the scary internet, only allow the white list through.

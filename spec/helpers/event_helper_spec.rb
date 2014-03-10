@@ -12,4 +12,13 @@ describe EventHelper do
     result = helper.cover_for(event)
     expect(result).to match /event-scrum-cover\.png/
   end
+
+  it 'extract event ocurrence from hash' do
+    ocurrence = Time.utc(2014,"mar",9,23,0,0)
+    time = IceCube::Occurrence.new(ocurrence)
+    event = mock_model(Event, name: 'DailyScrum', category: 'Scrum')
+    nested_value = {:event => event, :time => time}
+    result = helper.current_occurrence_time(nested_value)
+    expect(result).to match '2014-03-09 at 11:00PM'
+  end
 end
