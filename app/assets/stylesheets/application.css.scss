@@ -8,11 +8,16 @@
 @import "bootstrap";
 
 .signin {
-  h2 { margin-top: 0; }
-  form { margin-bottom: 20px; }
-  .glyphicon { top: 0; }
+  h2 {
+    margin-top: 0;
+  }
+  form {
+    margin-bottom: 20px;
+  }
+  .glyphicon {
+    top: 0;
+  }
 }
-
 
 #devise .custom-label {
   margin-left: 5px;
@@ -50,8 +55,8 @@ label {
 .bg-2 {
   background: url(http://mymaplist.com/img/parallax/back.png);
   background-color: #444;
-  background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);
-  padding-top:100px;
+  background: url(http://mymaplist.com/img/parallax/pinlayer2.png), url(http://mymaplist.com/img/parallax/pinlayer1.png), url(http://mymaplist.com/img/parallax/back.png);
+  padding-top: 100px;
   /*background: #ffcc33; */
 
 }
@@ -67,14 +72,12 @@ label {
   margin: 5px, 15px, 5px, 5px;
 }
 
-
-
-#event-container .event-item p, .event-item a, .event-item small  {
+#event-container .event-item p, .event-item a, .event-item small {
   padding-left: 8px !important;
   line-height: 14px;
 }
 
-#event-container .event-item h4  {
+#event-container .event-item h4 {
   padding-left: 0px !important;
 }
 
@@ -87,7 +90,7 @@ label {
   #event-container .git-item {
     width: 50%;
     height: 150px;
-    margin-bottom: 10px!important;
+    margin-bottom: 10px !important;
   }
 }
 
@@ -96,15 +99,16 @@ label {
   #event-container .event-item {
     width: 50%;
     height: 150px;
-    margin-bottom: 10px!important;
+    margin-bottom: 10px !important;
   }
 }
+
 @media (max-width: 480px) {
 
   #event-container .event-item {
     width: 50%;
     height: 150px;
-    margin-bottom: 10px!important;
+    margin-bottom: 10px !important;
   }
 }
 
