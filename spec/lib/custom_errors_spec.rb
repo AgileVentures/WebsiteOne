@@ -3,41 +3,43 @@ require 'custom_errors.rb'
 
 describe CustomErrors, type: 'controller' do
   controller do
-    include CustomErrors.setup '404' => { template: 'pages/not_found' },
-                               '500' => { template: 'pages/internal_error' },
-                               'log-limit' => 7
+    include CustomErrors
 
-    attr_accessor :error
+    def raise_404
+      raise ActiveRecord::RecordNotFound
+    end
 
-    def index
-      raise error
+    def raise_500
+      raise Exception
     end
   end
 
   before(:each) do
     Rails.stub_chain(:env, :production?).and_return(true)
-    controller.error = nil
   end
 
-  it 'should catch 404 errors' do
-    controller.error = ActiveRecord::RecordNotFound
-    get :index
+  specify 'should catch 404 errors' do
+    routes.draw { get 'raise_404' => 'anonymous#raise_404' }
+
+    get :raise_404
     expect(response).to render_template 'pages/not_found'
     expect(response.status).to eq 404
   end
 
   it 'should catch 500 errors' do
-    controller.error = Exception
-    get :index
+    routes.draw { get 'raise_500' => 'anonymous#raise_500' }
+
+    get :raise_500
     expect(response).to render_template 'pages/internal_error'
     expect(response.status).to eq 500
   end
 
   it 'should be able to adjust log stack trace limit' do
-    controller.error = Exception
+    routes.draw { get 'raise_500' => 'anonymous#raise_500' }
+
     dummy = Class.new
     Rails.stub(logger: dummy)
-    dummy.should_receive(:error).exactly(9)
-    get :index
+    dummy.should_receive(:error).exactly(7)
+    get :raise_500
   end
 end
