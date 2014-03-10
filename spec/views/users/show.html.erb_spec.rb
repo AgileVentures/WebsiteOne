@@ -14,7 +14,8 @@ describe "users/show.html.erb" do
                              first_name: 'Eric',
                              last_name: 'Els',
                              email: 'eric@somemail.se',
-                             created_at: thirty_days_ago
+                             created_at: thirty_days_ago,
+                             github_profile_url: 'http://github.com/Eric'
                       )
 		assign :user, @user
     assign :users_projects, @projects
@@ -101,10 +102,6 @@ describe "users/show.html.erb" do
   	expect(rendered).to have_content(@user.last_name)
   end
 
-  it 'show link to GitHub profile' do
-  	pending("requires github API integration")
-  end
-
   it 'should not display an edit button if it is not my profile' do
     @user_logged_in ||= FactoryGirl.create :user
     sign_in @user_logged_in
@@ -114,9 +111,19 @@ describe "users/show.html.erb" do
   end
 
   it 'should display Member for ..' do
-    #Date.stub(today:'07/02/2014'.to_date )
     render
     expect(rendered).to have_text('Member for: about 1 month')
+  end
+
+  it 'displays GitHub profile if it is linked' do
+    @user.stub(github_profile_url: nil)
+    render
+    expect(rendered).to have_text('GitHub profile: not linked')
+  end
+
+  it 'displays GitHub profile is not linked if it is not linked' do
+    render
+    expect(rendered).to have_link('Eric', href: 'http://github.com/Eric')
   end
 
   context 'users own profile page' do
