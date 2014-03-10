@@ -1,0 +1,27 @@
+@import "variables";
+
+#fof {
+  position: relative;
+  margin-top: -20px;
+  width: 860px;
+  height: 430px;
+}
+
+#fof canvas {
+  width: 860px;
+  height: 430px;
+}
+
+#fof > div#message {
+  position: absolute;
+  background-color: transparent;
+  z-index: 10;
+  opacity: 0;
+}
+
+#message h1, #message h2, #message h3, #message p {
+  text-shadow: 1px 1px 8px #f00;
+  padding-left: 20px;
+  color: #fff;
+  text-align: left;
+}

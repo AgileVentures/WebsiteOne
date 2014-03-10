@@ -8,6 +8,7 @@ class AuthenticationsController < ApplicationController
 
     omniauth = request.env['omniauth.auth']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+
     @path = request.env['omniauth.origin'] || root_path
 
     if authentication.present?
@@ -18,10 +19,6 @@ class AuthenticationsController < ApplicationController
 
     else
       create_new_user_with_authentication(omniauth)
-    end
-
-    if current_user && omniauth['provider']=='github' && current_user.github_profile_url.nil?
-      link_github_profile
     end
   end
 
@@ -44,6 +41,8 @@ class AuthenticationsController < ApplicationController
       elsif @authentication.destroy
         flash[:notice] = 'Successfully removed profile.'
       else
+        # Bryan: useful logging in case some unexpected error occurs
+        Rails.logger.error @authentication.errors.full_messages
         flash[:alert] = 'Authentication method could not be removed.'
       end
     else
@@ -54,14 +53,6 @@ class AuthenticationsController < ApplicationController
 
 
   private
-
-  def link_github_profile
-    omniauth = request.env['omniauth.auth']
-    p omniauth
-    return unless omniauth['info'].present? && omniauth['info']['urls'].present? && omniauth['info']['urls']['GitHub'].present?
-    current_user.github_profile_url = omniauth['info']['urls']['GitHub']
-    current_user.save
-  end
 
   def link_to_youtube
     user = current_user
