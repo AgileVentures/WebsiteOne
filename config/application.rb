@@ -23,4 +23,6 @@ module WebsiteOne
     # config.i18n.default_locale = :de
     I18n.enforce_available_locales = false
   end
+
+
 end

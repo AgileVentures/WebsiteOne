@@ -62,6 +62,8 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-modal-rails (2.2.0)
+      railties (>= 3.1)
     bootstrap-sass (3.0.2.1)
       sass (~> 3.2)
     builder (3.1.4)
@@ -76,6 +78,8 @@ GEM
       json
     childprocess (0.4.0)
       ffi (~> 1.0, >= 1.0.11)
+    chronic (0.10.2)
+    chunky_png (1.3.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -86,6 +90,12 @@ GEM
     coffee-script-source (1.7.0)
     colored (1.2)
     columnize (0.3.6)
+    compass (0.12.3)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (= 3.2.14)
+    compass-rails (1.1.3)
+      compass (>= 0.12.2)
     coveralls (0.7.0)
       multi_json (~> 1.3)
       rest-client
@@ -113,6 +123,8 @@ GEM
       debugger-ruby_core_source (~> 1.3.1)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.3.1)
+    delorean (2.1.0)
+      chronic
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -137,6 +149,7 @@ GEM
       railties (>= 3.2, < 5.0)
     friendly_id (5.0.2)
       activerecord (~> 4.0.0)
+    fssm (0.2.10)
     geocoder (1.1.9)
     gherkin (2.12.2)
       multi_json (~> 1.3)
@@ -145,6 +158,7 @@ GEM
     high_voltage (2.1.0)
     hike (1.2.3)
     i18n (0.6.9)
+    ice_cube (0.11.3)
     jasmine (2.0.0)
       jasmine-core (~> 2.0.0)
       phantomjs
@@ -158,6 +172,9 @@ GEM
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-turbolinks (2.0.2)
+      railties (>= 3.1.0)
+      turbolinks
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
@@ -198,6 +215,8 @@ GEM
       activesupport (>= 3.0, < 5.0)
     pg (0.17.1)
     phantomjs (1.9.2.1)
+    polyamorous (0.6.4)
+      activerecord (>= 3.0)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -264,6 +283,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    squeel (1.1.1)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      polyamorous (~> 0.6.0)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
     therubyracer (0.12.1)
@@ -315,18 +338,22 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_follower
   acts_as_tree (~> 1.5.0)
+  addressable
   better_errors
   binding_of_caller
+  bootstrap-modal-rails
   bootstrap-sass (~> 3.0.2.0)
   capybara
   capybara-webkit
   coderay
   coffee-rails (~> 4.0.0)
   colored
+  compass-rails
   coveralls
   cucumber-rails
   database_cleaner
   debugger
+  delorean
   devise
   factory_girl_rails
   faker
@@ -335,10 +362,12 @@ DEPENDENCIES
   geocoder
   google-analytics-rails
   high_voltage
+  ice_cube
   jasmine
   jasmine-jquery-rails
   jbuilder (~> 1.2)
   jquery-rails
+  jquery-turbolinks
   launchy
   mercury-rails!
   omniauth
@@ -352,6 +381,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.0)
   selenium-webdriver
+  squeel
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)

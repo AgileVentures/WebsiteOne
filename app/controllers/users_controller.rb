@@ -5,6 +5,27 @@ class UsersController < ApplicationController
     @users = User.where('display_profile = ?', true).order(:created_at)
   end
 
+  def hire_me_contact_form
+    begin
+      test = params['message_form']
+      user = User.where(id: test['recipient_id']).first
+      if test['name'].empty? or test['message'].empty?
+        redirect_to :back, alert: 'Please, fill in Name and Message field'
+        return
+      end
+      if Mailer.hire_me_form(user, test).deliver
+        redirect_to :back, notice: 'Your message has been sent successfully!'
+      else
+        redirect_to :back, alert: 'Your message has not been sent!'
+      end
+
+
+
+    rescue ActionController::RedirectBackError
+      redirect_to :back
+    end
+  end
+
   def show
     raise 'Deprecated Numeric ID' if params[:id] =~ /^\d+$/
     @user = User.friendly.find(params[:id])

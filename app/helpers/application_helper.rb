@@ -2,7 +2,7 @@ module ApplicationHelper
 
   include ArticlesHelper
 
-  def gravatar_for(email, options = { size: 80 })
+  def gravatar_for(email, options = {size: 80})
     hash = Digest::MD5::hexdigest(email.strip.downcase)
     "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
   end
@@ -31,6 +31,25 @@ module ApplicationHelper
       'Anonymous'
     end
   end
+
+  #def user_details(id)
+  #  user = User.find_by_id(id)
+  #  if user.present?
+  #    first = user.try(:first_name)
+  #    last = user.try(:last_name)
+  #    str = first.to_s + last.to_s
+  #    if first && last
+  #      [first, last].join(' ')
+  #    elsif !first && !last
+  #      # User has not filled in their profile
+  #      user.email.split('@').first
+  #    else
+  #      str
+  #    end
+  #  else
+  #    'Anonymous'
+  #  end
+  #end
 
 
   def resource_name
@@ -61,12 +80,12 @@ module ApplicationHelper
     provider = provider.downcase
     display_name = {
         'github' => 'GitHub',
-        'gplus'  => 'Google+'
+        'gplus' => 'Google+'
     }
 
     fa_icon = {
         'github' => 'github-alt',
-        'gplus'  => 'google-plus'
+        'gplus' => 'google-plus'
     }
 
     options[:url] ||= root_path
@@ -110,5 +129,22 @@ module ApplicationHelper
       </div>
     </a>
     HTML
+  end
+
+  def count_down
+    if Event.exists?
+      @events = []
+      Event.where(['category = ?', 'Scrum']).each do |event|
+        @events << event.current_occurences
+      end
+      @events = @events.flatten.sort_by { |e| e[:time] }
+      one_event = @events[0]
+      @event = nested_hash_value(one_event, :event)
+      @event_time = nested_hash_value(one_event, :time).to_datetime
+      countdown = Time.now.to_datetime.distance_to(@event_time)
+      @minutes_left = countdown[:minutes]
+      @hours_left = countdown[:hours]
+      @days_left = countdown[:days]
+    end
   end
 end

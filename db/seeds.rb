@@ -10,6 +10,7 @@ old_project_count = Project.count
 old_doc_count = Document.count
 old_user_count = User.count
 old_article_count = Article.count
+old_event_count = Event.count
 
 puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
 
@@ -18,7 +19,7 @@ while true
   response = STDIN.gets.downcase.chomp
   if response == 'y' or response == 'yes'
     puts 'Clearing existing projects and documents'
-    [Project, Document, User, Article].each(&:destroy_all)
+    [Project, Document, User, Article, Event].each(&:destroy_all)
 
     pw = 'randomrandom'
     u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
@@ -81,7 +82,22 @@ for i in (1..4)
   end
 end
 
+
+Event.create!( name: 'Seeded event',
+               category: 'Scrum',
+               description: 'Seeded content',
+               event_date: 'Mon, 17 Jun 2013',
+               start_time: '2000-01-01 09:00:00 UTC',
+               end_time: '2000-01-01 17:00:00 UTC',
+               repeats: 'weekly',
+               repeats_every_n_weeks: '1',
+               repeats_weekly_each_days_of_the_week_mask: '31',
+               repeat_ends: 'never',
+               repeat_ends_on: 'Mon, 17 Jun 2013',
+               time_zone: 'London')
+
 puts 'Project.count ' + old_project_count.to_s.bold.red + ' -> ' + Project.count.to_s.bold.green
 puts 'Document.count ' + old_doc_count.to_s.bold.red + ' -> ' + Document.count.to_s.bold.green
 puts 'User.count ' + old_user_count.to_s.bold.red + ' -> ' + User.count.to_s.bold.green
 puts 'Article.count ' + old_article_count.to_s.bold.red + ' -> ' + Article.count.to_s.bold.green
+puts 'Event.count ' + old_event_count.to_s.bold.red + ' -> ' + Event.count.to_s.bold.green
