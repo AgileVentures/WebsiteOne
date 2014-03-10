@@ -58,6 +58,7 @@
         <script>
             $(function () {
                 $('#skills').tags({
+                    readOnly: false,
                     tagSize: 'lg',
                     tagData: <%= raw resource.skill_list.to_json %>,
                     promptText: " "

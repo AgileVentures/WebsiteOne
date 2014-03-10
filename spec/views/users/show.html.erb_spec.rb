@@ -141,7 +141,7 @@ describe "users/show.html.erb" do
 
   it 'renders list of user skills' do
     render
-    expect(rendered).to have_css("#skills")
+    expect(rendered).to have_css("#skills-show")
   end
 
   it 'renders user statistics'
