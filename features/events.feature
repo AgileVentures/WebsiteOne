@@ -11,9 +11,8 @@ Feature: Events
     Then I should see "AgileVentures Events"
     And I should see "Scrum"
     And I should see "PP Session"
-    And show me the page
-    And I should see "UTC"
-    And I should see "EST"
+    And I should see "GMT"
+    And I should see "EDT"
 
   Scenario: Show index of events with a New Event button for logged in user
     Given I am logged in
