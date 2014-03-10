@@ -32,6 +32,7 @@
     var	mouse = { x: 0, y: 0 },
         container,
         overlay,
+        message,
         overlayOpacity = 1,
         canvas,
         context,
@@ -40,8 +41,9 @@
 
     function initialize() {
         container = document.getElementById( 'fof' );
-        overlay = document.querySelector( '#fof>div' );
+        overlay = document.querySelector( '#fof>div#overlay' );
         canvas = document.querySelector( '#fof>canvas' );
+        message = document.querySelector('#fof>div#message');
 
         if( canvas ) {
             canvas.width = DISPLAY_WIDTH;
@@ -112,6 +114,7 @@
             overlayOpacity = Math.max( overlayOpacity - 0.01, 0 );
 
             overlay.style.opacity = overlayOpacity;
+            message.style.opacity = 1.0 - overlayOpacity;
 
             if( overlayOpacity === 0 ) {
                 // We have no more use for the overlay, removing it ensures
