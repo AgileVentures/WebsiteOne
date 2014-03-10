@@ -19,8 +19,10 @@ class AuthenticationsController < ApplicationController
     else
       create_new_user_with_authentication(omniauth)
     end
+    p current_user
+    p omniauth['provider']
 
-    if current_user && omniauth['provider']=='github' && current_user.github_profile_url.nil?
+    if current_user && omniauth['provider']=='github' && current_user.github_profile_url.blank?
       link_github_profile
     end
   end
@@ -56,11 +58,18 @@ class AuthenticationsController < ApplicationController
   private
 
   def link_github_profile
+    p 'inside link_github'
     omniauth = request.env['omniauth.auth']
-    p omniauth
+    p omniauth['info']
+
     return unless omniauth['info'].present? && omniauth['info']['urls'].present? && omniauth['info']['urls']['GitHub'].present?
     current_user.github_profile_url = omniauth['info']['urls']['GitHub']
-    current_user.save
+    begin
+      current_user.save!
+    rescue Exception => e
+      puts e.message
+      puts e.backtrace.inspect
+    end
   end
 
   def link_to_youtube
