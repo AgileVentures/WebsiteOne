@@ -12,6 +12,11 @@
     <p><%= "Location: #{@user.country}" if @user.country.present? %></p>
 
     <p>Member for: <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
+    <% if @user.github_profile_url.present? %>
+        <p>GitHub profile: <%= link_to "#{@user.github_profile_url.split('/').last}", @user.github_profile_url %></p>
+    <% else %>
+        <p>GitHub profile: not linked</p>
+    <% end %>
   </div>
   <div class="col-md-7 col-sm-7">
     <!-- Here is a good place for bio section -->
@@ -25,7 +30,7 @@
     <% end %>
 
     <h4>Skills</h4>
-    <div id="skills" class="tag-list" style="padding-left:25px;"></div>
+    <div id="skills-show" class="tag-list" style="padding-left:25px;"></div>
 
   </div>
 </div>
@@ -85,7 +90,7 @@
 
 <script>
     $(function () {
-        $('#skills').tags({
+        $('#skills-show').tags({
             readOnly: true,
             tagSize: "lg",
             tagData: <%= raw @user.skill_list.to_json %>,
