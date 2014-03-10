@@ -16,7 +16,6 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require nprogressbar
-//= require 404
 //= require typeahead
 //= require bootstrap-tags
 
