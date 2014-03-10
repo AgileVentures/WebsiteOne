@@ -39,4 +39,5 @@ class ApplicationController < ActionController::Base
           render template: 'pages/internal_error', layout: 'layouts/application', status: 500
       end
     end
+
 end

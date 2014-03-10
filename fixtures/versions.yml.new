@@ -1,0 +1,169 @@
+---
+versions_001:
+  id: '1'
+  item_type: Document
+  item_id: '1'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.553348'
+versions_002:
+  id: '2'
+  item_type: Document
+  item_id: '2'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.617133'
+versions_003:
+  id: '3'
+  item_type: Document
+  item_id: '3'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.624962'
+versions_004:
+  id: '4'
+  item_type: Document
+  item_id: '4'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.63331'
+versions_005:
+  id: '5'
+  item_type: Document
+  item_id: '5'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.641372'
+versions_006:
+  id: '6'
+  item_type: Document
+  item_id: '6'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.649059'
+versions_007:
+  id: '7'
+  item_type: Document
+  item_id: '7'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.662327'
+versions_008:
+  id: '8'
+  item_type: Document
+  item_id: '8'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.670822'
+versions_009:
+  id: '9'
+  item_type: Document
+  item_id: '9'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.678621'
+versions_010:
+  id: '10'
+  item_type: Document
+  item_id: '10'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.685865'
+versions_011:
+  id: '11'
+  item_type: Document
+  item_id: '11'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.693733'
+versions_012:
+  id: '12'
+  item_type: Document
+  item_id: '12'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.701483'
+versions_013:
+  id: '13'
+  item_type: Document
+  item_id: '13'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.71055'
+versions_014:
+  id: '14'
+  item_type: Document
+  item_id: '14'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.724266'
+versions_015:
+  id: '15'
+  item_type: Document
+  item_id: '15'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.732749'
+versions_016:
+  id: '16'
+  item_type: Document
+  item_id: '16'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.740066'
+versions_017:
+  id: '17'
+  item_type: Document
+  item_id: '17'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.747779'
+versions_018:
+  id: '18'
+  item_type: Document
+  item_id: '18'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.757371'
+versions_019:
+  id: '19'
+  item_type: Document
+  item_id: '19'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.766267'
+versions_020:
+  id: '20'
+  item_type: Document
+  item_id: '20'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.7757'
+versions_021:
+  id: '21'
+  item_type: Document
+  item_id: '21'
+  event: create
+  whodunnit: 
+  object: 
+  created_at: '2014-03-01 13:34:59.784233'

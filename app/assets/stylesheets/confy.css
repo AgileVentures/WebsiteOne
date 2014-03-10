@@ -1,0 +1,157 @@
+.cfy-wrap {
+    background-color: #F2F2F2;
+    border-right: 1px solid #DFDFDF;
+    left: -261px;
+    position: absolute;
+    top: 0;
+    transition: left 0.35s ease 0s;
+    width: 260px;
+    z-index: 9;
+    min-height: 100%;
+    box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.15);
+}
+
+.cfy-wrap.cfy-wrap-loading {
+    background: url("../img/cfy-ajax-loader.gif") no-repeat scroll right 1px #F2F2F2;
+}
+
+.cfy-section {
+    border-bottom: 1px solid #DFDFDF;
+    overflow: hidden;
+    padding: 13px 0 13px 20px;
+    background: #f2f2f2;
+}
+
+.cfy-title h3 {
+    color: #767676;
+    display: inline-block;
+    font: 700 13px/18px 'Open Sans',sans-serif;
+    margin: 0 0 13px;
+}
+
+button.cfy-item {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #767676;
+    cursor: pointer;
+    float: left;
+    font: 400 11px/20px 'Open Sans',sans-serif;
+    margin: 0 15px 8px 0;
+    overflow: hidden;
+    padding: 0 5px;
+    text-align: left;
+    width: 102px;
+}
+
+button.cfy-item:hover {
+    opacity: 0.7;
+}
+
+button.cfy-active {
+    background: none repeat scroll 00 0 #3288C4;
+    color: #FFFFFF;
+    cursor: default;
+    opacity: 1 ! important;
+}
+
+button.cfy-on {
+    background-color: #F57B7B;
+}
+
+.cfy-clearButton {
+    background: none repeat scroll 0 0 #515151;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font: 11px 'Open Sans',sans-serif;
+    margin: 20px auto 50px;
+    padding: 4px 0;
+    text-align: center;
+    text-decoration: none;
+    width: 110px;
+}
+
+.cfy-clearButton:hover {
+    opacity: 0.8;
+}
+
+.cfy-toggle {
+    background: url("../img/cfy-toggle.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 100%;
+    position: absolute;
+    right: -22px;
+    text-indent: 9999px;
+    top: 0;
+    width: 22px;
+}
+
+.cfy-toggle.cfy-toggle-close {
+    background-position: -22px 0;
+}
+
+.cfy-section-textfield {
+    clear: both;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.cfy-section label {
+    color: #767676;
+    float: left;
+    font: 400 11px 'Open Sans',sans-serif;
+    margin-top: 3px;
+}
+
+input.cfy-item {
+    border: 1px solid #CDD3D6;
+    color: #767676;
+    float: right;
+    font: 11px 'Open Sans',sans-serif;
+    height: 20px;
+    margin-right: 25px;
+    padding: 0;
+    text-align: center;
+    width: 40px;
+}
+
+.cfy-item-checkbox {
+    color: #767676;
+    cursor: pointer;
+    float: left;
+    font: 400 12px/20px 'Open Sans',sans-serif;
+    margin-bottom: 8px;
+    margin-top: 3px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.cfy-item-checkbox:before {
+    background: none repeat scroll 0 0 #949494;
+    color: #FFFFFF;
+    content: "OFF";
+    cursor: pointer;
+    font: 9px/20px sans-serif;
+    height: 20px;
+    position: absolute;
+    right: 25px;
+    text-align: center;
+    top: 0;
+    width: 40px;
+}
+
+.cfy-item-checkbox.cfy-on:before {
+    background: none repeat scroll 0 0 #3288C4;
+    content: "ON";
+}
+
+.cfy-h2 {
+    font: bold 13px Open Sans, sans-serif;
+    color: #5E5B5B;
+    text-align: center;
+    padding: 10px 0 9px 0;
+    border-bottom: 1px solid #dfdfdf;
+    margin-bottom: 15px;
+}

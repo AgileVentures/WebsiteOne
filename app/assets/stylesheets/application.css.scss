@@ -4,15 +4,19 @@
  *= require font-awesome
  *= require_tree
  */
-
 @import "bootstrap";
 
 .signin {
-  h2 { margin-top: 0; }
-  form { margin-bottom: 20px; }
-  .glyphicon { top: 0; }
+  h2 {
+    margin-top: 0;
+  }
+  form {
+    margin-bottom: 20px;
+  }
+  .glyphicon {
+    top: 0;
+  }
 }
-
 
 #devise .custom-label {
   margin-left: 5px;
@@ -27,7 +31,14 @@
 
 label {
   color: black;
+  width: 20em;
+  float: left;
+  text-align: right;
+  margin-right: 0.5em;
+  display: block
 }
+
+
 
 .bg-3 {
   background: url('bg1-db4d48709782e1e17ea9b9f2c41da4a1.jpg') no-repeat center center fixed;
@@ -50,9 +61,61 @@ label {
 .bg-2 {
   background: url(http://mymaplist.com/img/parallax/back.png);
   background-color: #444;
-  background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);
-  padding-top:100px;
+  background: url(http://mymaplist.com/img/parallax/pinlayer2.png), url(http://mymaplist.com/img/parallax/pinlayer1.png), url(http://mymaplist.com/img/parallax/back.png);
+  padding-top: 100px;
   /*background: #ffcc33; */
 
 }
+
+#event-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#event-container .event-item {
+  width: 33.3%;
+  /*height: 150px;*/
+  margin: 5px, 15px, 5px, 5px;
+}
+
+#event-container .event-item p, .event-item a, .event-item small {
+  padding-left: 8px !important;
+  line-height: 14px;
+}
+
+#event-container .event-item h4 {
+  padding-left: 0px !important;
+}
+
+#event-container .event-item img {
+  margin-left: 8px !important;
+  width: 250px;
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #event-container .git-item {
+    width: 50%;
+    height: 150px;
+    margin-bottom: 10px !important;
+  }
+}
+
+@media (max-width: 767px) {
+
+  #event-container .event-item {
+    width: 50%;
+    height: 150px;
+    margin-bottom: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  #event-container .event-item {
+    width: 50%;
+    height: 150px;
+    margin-bottom: 10px !important;
+  }
+}
+
 

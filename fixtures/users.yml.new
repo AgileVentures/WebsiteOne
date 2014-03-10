@@ -1,0 +1,151 @@
+---
+users_001:
+  id: '1'
+  email: random@random.com
+  encrypted_password: $2a$10$4NA5KU4JkC5aHBuY4KlZ5uyNuGwaKDBriVc1OyWpQhre1Z42Wd6U.
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '2'
+  current_sign_in_at: '2014-03-02 13:55:08.046569'
+  last_sign_in_at: '2014-03-01 13:36:08.632015'
+  current_sign_in_ip: 127.0.0.1
+  last_sign_in_ip: 127.0.0.1
+  created_at: '2014-03-01 13:34:59.294645'
+  updated_at: '2014-03-02 13:55:08.04853'
+  first_name: Random
+  last_name: Guy
+  display_email: 
+  youtube_id: 
+  slug: random-guy
+  display_profile: t
+  latitude: 
+  longitude: 
+  country: 
+  city: 
+  region: 
+users_002:
+  id: '2'
+  email: trent@aufderharhalvorson.org
+  encrypted_password: $2a$10$/ZVItFwPebxJnIx31F5bkeUHJ.zPkE2yliCoJvgAEXjCqK4dEtF4W
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '0'
+  current_sign_in_at: 
+  last_sign_in_at: 
+  current_sign_in_ip: 
+  last_sign_in_ip: 
+  created_at: '2014-03-01 13:34:59.873502'
+  updated_at: '2014-03-01 13:34:59.873502'
+  first_name: Jabari
+  last_name: Osinski
+  display_email: 
+  youtube_id: 
+  slug: jabari-osinski
+  display_profile: t
+  latitude: 
+  longitude: 
+  country: 
+  city: 
+  region: 
+users_003:
+  id: '3'
+  email: eldred.lynch@nader.net
+  encrypted_password: $2a$10$Oeppv4NpF1ub9NAhdUGuCO4dblFoXBQeC9KcbRNTbmYB/95Qb7SkG
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '0'
+  current_sign_in_at: 
+  last_sign_in_at: 
+  current_sign_in_ip: 
+  last_sign_in_ip: 
+  created_at: '2014-03-01 13:35:00.106793'
+  updated_at: '2014-03-01 13:35:00.106793'
+  first_name: Lavonne
+  last_name: Dare
+  display_email: 
+  youtube_id: 
+  slug: lavonne-dare
+  display_profile: t
+  latitude: 
+  longitude: 
+  country: 
+  city: 
+  region: 
+users_004:
+  id: '4'
+  email: ignatius_cremin@zemlak.org
+  encrypted_password: $2a$10$ToWiRcj0QPsbsmrL6m4njeb4XXvdWo7chWFftVovmzm04x7Vyh602
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '0'
+  current_sign_in_at: 
+  last_sign_in_at: 
+  current_sign_in_ip: 
+  last_sign_in_ip: 
+  created_at: '2014-03-01 13:35:00.223389'
+  updated_at: '2014-03-01 13:35:00.223389'
+  first_name: Elsa
+  last_name: Ledner
+  display_email: 
+  youtube_id: 
+  slug: elsa-ledner
+  display_profile: t
+  latitude: 
+  longitude: 
+  country: 
+  city: 
+  region: 
+users_005:
+  id: '5'
+  email: kaylie@kertzmannkiehn.com
+  encrypted_password: $2a$10$lHW/aTxKf1FKtwazP5k90eUt3cKURmHkrjlViZyUF2twYVPX6/1RW
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '0'
+  current_sign_in_at: 
+  last_sign_in_at: 
+  current_sign_in_ip: 
+  last_sign_in_ip: 
+  created_at: '2014-03-01 13:35:00.327278'
+  updated_at: '2014-03-01 13:35:00.327278'
+  first_name: Adelbert
+  last_name: Gottlieb
+  display_email: 
+  youtube_id: 
+  slug: adelbert-gottlieb
+  display_profile: t
+  latitude: 
+  longitude: 
+  country: 
+  city: 
+  region: 
+users_006:
+  id: '6'
+  email: nicole@mayert.biz
+  encrypted_password: $2a$10$.lRxRVxhj62RNtUJmL9wX.5KJHL5g3pqHQso4f74c/hRLVe.NCdAO
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: '0'
+  current_sign_in_at: 
+  last_sign_in_at: 
+  current_sign_in_ip: 
+  last_sign_in_ip: 
+  created_at: '2014-03-01 13:35:00.432602'
+  updated_at: '2014-03-01 13:35:00.432602'
+  first_name: Jairo
+  last_name: Turcotte
+  display_email: 
+  youtube_id: 
+  slug: jairo-turcotte
+  display_profile: t
+  latitude: 
+  longitude: 
+  country: 
+  city: 
+  region: 
