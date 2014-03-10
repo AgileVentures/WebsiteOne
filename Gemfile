@@ -30,6 +30,7 @@ gem 'redcarpet' # renders markdown
 gem 'coderay' # syntax highlighting for markdown code blocks
 gem 'acts-as-taggable-on' # Add tags to objects. Used on Projects
 gem 'geocoder' # geocoding
+gem 'bootstrap-modal-rails'
 gem 'paper_trail', '~> 3.0.0'   # version control for Document
 gem 'verbs'   # language and verbs - not used for now but I plan to use it in Events /Thomas
 gem 'ice_cube'     # used for Event

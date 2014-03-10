@@ -4,7 +4,6 @@
  *= require font-awesome
  *= require_tree
  */
-
 @import "bootstrap";
 
 .signin {
@@ -32,7 +31,14 @@
 
 label {
   color: black;
+  width: 20em;
+  float: left;
+  text-align: right;
+  margin-right: 0.5em;
+  display: block
 }
+
+
 
 .bg-3 {
   background: url('bg1-db4d48709782e1e17ea9b9f2c41da4a1.jpg') no-repeat center center fixed;
