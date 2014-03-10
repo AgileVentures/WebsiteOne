@@ -35,6 +35,6 @@ module ArticlesHelper
   end
 
   def markdown_preview(markdown)
-    raw sanitize(@@markdown_engine.render(markdown), tags: %w( p pre )).truncate(100, separator: ' ')
+    raw sanitize(@@markdown_engine.render(markdown), tags: %w( p pre code strong em )).truncate(100, separator: ' ')
   end
 end
