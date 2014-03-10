@@ -199,21 +199,30 @@ describe AuthenticationsController do
   end
   describe 'Github profile link' do
     before(:each) do
-      controller.stub(authenticate_user!: true)
+      @user = stub_model(User, github_profile_url: nil)
+      @auth = double(Authentication, user: @user)
+      Authentication.should_receive(:find_by_provider_and_uid).and_return @auth
 
       request.env['omniauth.auth'] = {
           'provider' => 'github',
+          'uid' => '12345678',
           'info' => { 'urls' => { 'GitHub' => 'http://github.com/test' } }
       }
     end
     it 'links Github profile when authenticate with GitHub' do
-      user = stub_model(User, github_profile_url: nil)
-      controller.stub(current_user: user)
+      @user.email = 'test@test.com'
+      @user.save
 
       expect(controller).to receive(:link_github_profile).and_call_original
       get :create, provider: 'github'
-      expect(user.github_profile_url).to eq('http://github.com/test')
+      expect(@user.github_profile_url).to eq('http://github.com/test')
     end
+
+    it 'renders an error flash if linking Github fails' do
+      get :create, provider: 'github'
+      expect(flash[:alert]).to eq 'Linking your GitHub profile has failed'
+    end
+
   end
 end
 
