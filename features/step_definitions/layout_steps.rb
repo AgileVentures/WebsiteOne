@@ -51,22 +51,9 @@ end
 
 Then /^I should see the tracking code$/ do
   page.should have_xpath("//script[text()[contains(.,#{GA.tracker})]]", visible: false)
-
-  #page.body.should match /UA-47795185-1/
 end
 
-#Then(/^I should not see a modal$/) do
-#  page.should not have_selector('#modal-window', :visible => false)
-#end
-
-#Then(/^I should see a modal$/) do
-#  page.should have_content('#modal-window', visible => false)
-#end
-
-#within(#loginModal) do
-#    page.should have_content('a_modal_content_here') # async
-#end
 
 Then(/^I should see a modal window with a form "([^"]*)"$/) do |arg|
-  page.should have_content("Hire Me Form", visible: true)
+  page.should have_content(arg, visible: true)
 end
