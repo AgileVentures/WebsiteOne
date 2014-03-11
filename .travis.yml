@@ -21,6 +21,7 @@ deploy:
   provider: heroku
   api_key:
     secure: qjGSUm5TSMjgarhzvBnZhNVyMcLCXpszb68D+aj9rKtNwHggz2dmCyqATr3Ynl38I193/QEaOUEarHguI7ABSW6SCmdAIoAEP/h7bbyOgLAYV9+ct/qhk8N4PdjnKUYUYZ9lsd5UcErMMgD03USQg3CeG1X1LwSX18jcScBHkss=
+  strategy: git
   app:
       develop: websiteone-develop
       staging: websiteone-staging
