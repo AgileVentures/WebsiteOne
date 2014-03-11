@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304210808) do
+ActiveRecord::Schema.define(version: 20140305125426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,24 @@ ActiveRecord::Schema.define(version: 20140304210808) do
 
   add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "events", force: true do |t|
+    t.string   "name"
+    t.string   "category"
+    t.text     "description"
+    t.date     "event_date",                                default: '2014-03-06',          null: false
+    t.time     "start_time",                                default: '2000-01-01 14:55:03', null: false
+    t.time     "end_time",                                  default: '2000-01-01 15:25:03', null: false
+    t.string   "repeats"
+    t.integer  "repeats_every_n_weeks"
+    t.integer  "repeats_weekly_each_days_of_the_week_mask"
+    t.boolean  "repeat_ends"
+    t.date     "repeat_ends_on"
+    t.string   "time_zone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "url"
+  end
 
   create_table "follows", force: true do |t|
     t.integer  "followable_id",                   null: false
@@ -110,7 +128,6 @@ ActiveRecord::Schema.define(version: 20140304210808) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "youtube_id"
     t.boolean  "display_email"
     t.string   "slug"
     t.boolean  "display_profile",        default: true

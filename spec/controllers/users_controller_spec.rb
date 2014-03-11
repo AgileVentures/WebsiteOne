@@ -95,4 +95,9 @@ describe UsersController do
       end
     end
   end
+
+  describe 'send hire me button message' do
+
+
+  end
 end

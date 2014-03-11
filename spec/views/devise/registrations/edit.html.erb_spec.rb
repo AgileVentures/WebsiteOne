@@ -33,6 +33,7 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_field('First name')
     expect(rendered).to have_field('Last name')
     expect(rendered).to have_field('Email')
+    expect(rendered).to have_css('#skills')
   end
 
   it 'shows Update button' do

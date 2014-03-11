@@ -36,4 +36,23 @@ describe Mailer do
        expect(mail.body.raw_source).to include('Thanks for joining our community! ')
     end
   end
+
+  describe '#hire_me_contact_form' do
+    let(:valid_params) { { name: 'Thomas', email: 'thomas@email.com', message: 'Want to hire you!' } }
+    before(:each) do
+      @user = User.new first_name: 'Marcelo',
+                       last_name: 'Mr G',
+                       email: 'marcelo@whatever.com',
+                       password: '1234567890'
+
+    end
+    it 'should send hire_me message' do
+      mail = Mailer.hire_me_form(@user, valid_params)
+      expect(mail.from).to include('thomas@email.com')
+      expect(mail.reply_to).to include('thomas@email.com')
+      expect(mail.to).to include('marcelo@whatever.com')
+      expect(mail.subject).to include(['message from', valid_params[:name]].join(' '))
+      expect(mail.body.raw_source).to include(valid_params[:message])
+    end
+  end
 end

@@ -75,6 +75,8 @@ Feature: As a site user
     And I am on my "Profile" page
     Then I should not see my email
 
+
+
     # Bryan: To be added back later in another story
 #  Scenario: Should be able to make my email private again
 #    Given My email was set to public

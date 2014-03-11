@@ -44,12 +44,16 @@ module Youtube
     def user_videos(user)
       if user_id = user.youtube_id
         tags = followed_project_tags(user)
+        return [] if tags.empty?
 
-        request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50&orderby=published"
+        request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
         request += '&fields=entry(author(name),id,published,title,content,link)'
-        request += '&q="' + tags.join('"|"') + '"'
-        request += '&start-index='
-        get_response(request)
+
+        #tags_filter = escape_query_params(tags)
+        #request += '&q=' + tags_filter.join('|')
+
+        response = get_response(request)
+        filter_response(response, tags, [youtube_user_name(user)]) if response
       end
     end
 
@@ -57,43 +61,67 @@ module Youtube
       projects = user.following_by_type('Project')
       [].tap do |tags|
         projects.each do |project|
-          tags << project.tag_list
-          tags << project.title
+          tags.concat(project_tags(project))
         end
-        tags.flatten!
-        tags.map! { |tag| tag.gsub(' ', '+') }
+        tags << 'scrum'
+        tags.uniq!
       end
     end
 
     def project_videos(project, members)
       return [] if members.empty?
 
-      tags = project.tag_list
-      tags << project.title
-      tags.map! { |tag| tag.gsub(' ', '+') }
+      members_tags = members_tags(members)
+      return [] if members_tags.empty?
 
-      request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published'
-      request += '&q="' + tags.join('"|"') + '"'
+      members_filter = escape_query_params(members_tags)
 
-      filter = members.map { |user| "author/name='" + youtube_user_name(user) + "'" if youtube_user_name(user) }.compact
-      filter.map! { |member| member.gsub(' ', '+') }
+      project_tags = project_tags(project)
+      project_tags_filter = escape_query_params(project_tags)
 
-      request += '&fields=entry[' + filter.join('+or+') + '](author(name),id,published,title,content,link)'
-      request += '&start-index='
-      get_response(request)
+      request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50'
+      request += '&orderby=published'
+      request += '&fields=entry(author(name),id,published,title,content,link)'
+      #request += '&fields=entry[' + filter.join(' or ') + ']'
+
+      request += '&q=(' + project_tags_filter.join('|') + ')'
+      request += '/(' + members_filter.join('|') + ')'
+
+      response = get_response(request)
+      filter_response(response, project_tags, members_tags) if response
     end
 
-    def get_response(request, increment = 50)
-      index = 1
+    def project_tags(project)
+      tags = project.tag_list
+      tags << project.title
+      tags.map!(&:downcase)
+      tags.uniq!
+      tags
+    end
+
+    def members_tags(members)
+      members_tags = members.map { |user| youtube_user_name(user) if youtube_user_name(user) }.compact
+      members_tags.map!(&:downcase)
+      members_tags.uniq!
+      members_tags
+    end
+
+    def escape_query_params(params)
+      params.map do |param|
+        if param.index(' ')
+          '"' + param.gsub(' ', '+') + '"'
+        else
+          param
+        end
+      end
+    end
+
+    def get_response(request)
       [].tap do |array|
-        #TODO YA commented out temporary to limit the number of requests
-        #while response = parse_response(open(URI.escape(request + index.to_s)).read)
-        #  index += increment
-        #  array.concat(response)
-        #end
-        response = parse_response(open(URI.escape(request + '1')).read)
+         #TODO YA rescue BadRequest
+        response = parse_response(open(URI.escape(request)).read)
         array.concat(response) if response
-        #array.sort_by! { |video| video[:published] }.reverse! unless array.empty?
+        array.sort_by! { |video| video[:published] }.reverse! unless array.empty?
       end
     end
 
@@ -108,6 +136,13 @@ module Youtube
       rescue JSON::JSONError
         Rails.logger.warn('Attempted to decode invalid JSON')
         nil
+      end
+    end
+
+    def filter_response(response, tags, members)
+      response.select do |video|
+        members.detect { |member| video[:author] =~ /#{member}/i } &&
+            tags.detect { |tag| video[:title] =~ /#{tag}/i }
       end
     end
 
@@ -151,7 +186,6 @@ module Youtube
         user.youtube_user_name = user_name(user)
         user.save
       end
-
       user.youtube_user_name
     end
 
