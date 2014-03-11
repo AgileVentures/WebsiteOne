@@ -24,14 +24,15 @@
  */
 (function(){
 
-    var DISPLAY_WIDTH = 960,
-        DISPLAY_HEIGHT = 480,
+    var DISPLAY_WIDTH = 860,//960, NEEDS TO BE CHANGED IN custom_errors.css.scss too!
+        DISPLAY_HEIGHT = 430,//480,
         DISPLAY_DURATION = 10,
         OVERLAY_DURATION = 3;
 
     var	mouse = { x: 0, y: 0 },
         container,
         overlay,
+        message,
         overlayOpacity = 1,
         canvas,
         context,
@@ -40,8 +41,9 @@
 
     function initialize() {
         container = document.getElementById( 'fof' );
-        overlay = document.querySelector( '#fof>div' );
+        overlay = document.querySelector( '#fof>div#overlay' );
         canvas = document.querySelector( '#fof>canvas' );
+        message = document.querySelector('#fof>div#message');
 
         if( canvas ) {
             canvas.width = DISPLAY_WIDTH;
@@ -112,6 +114,7 @@
             overlayOpacity = Math.max( overlayOpacity - 0.01, 0 );
 
             overlay.style.opacity = overlayOpacity;
+            message.style.opacity = 1.0 - overlayOpacity;
 
             if( overlayOpacity === 0 ) {
                 // We have no more use for the overlay, removing it ensures

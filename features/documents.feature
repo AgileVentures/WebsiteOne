@@ -68,7 +68,8 @@ Feature: Manage Document
 
 #NOTE: below scenario is for children's documents of documents, not projects'
 
-  Scenario: Documents children should be sorted in ASCENDING order by create date
+  # Bryan: DESCENDING means SubDoc1 comes first (the most recent date is greater)
+  Scenario: Documents children should be sorted in DESCENDING order by create date
     Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
     Given the document "Guides" has a sub-document with title "SubDoc2" created 10 days ago
     Given I am on the "Show" page for document "Guides"
