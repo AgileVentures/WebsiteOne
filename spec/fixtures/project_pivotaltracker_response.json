@@ -1,0 +1,31 @@
+{
+  "id": 742821,
+  "point_scale_is_custom": false,
+  "iteration_length": 4,
+  "created_at": "2013-01-30T16:49:38Z",
+  "current_iteration_number": 14,
+  "atom_enabled": true,
+  "time_zone": {
+    "offset": "+00:00",
+    "olson_name": "Europe/London",
+    "kind": "time_zone"
+  },
+  "enable_tasks": true,
+  "start_time": "2013-02-25T00:00:00Z",
+  "has_google_domain": false,
+  "account_id": 8155,
+  "updated_at": "2014-02-06T15:43:23Z",
+  "enable_planned_mode": false,
+  "point_scale": "0,1,2,3",
+  "version": 1795,
+  "name": "AV: LocalSupport",
+  "enable_following": true,
+  "enable_incoming_emails": true,
+  "number_of_done_iterations_to_show": 12,
+  "bugs_and_chores_are_estimatable": false,
+  "kind": "project",
+  "public": true,
+  "initial_velocity": 10,
+  "velocity_averaged_over": 3,
+  "week_start_day": "Monday"
+}
