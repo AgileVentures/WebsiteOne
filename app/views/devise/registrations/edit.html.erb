@@ -59,6 +59,7 @@
             $(function () {
                 $('#skills').tags({
                     readOnly: false,
+                    tagClass: 'btn-agile',
                     tagSize: 'lg',
                     tagData: <%= raw resource.skill_list.to_json %>,
                     promptText: " "

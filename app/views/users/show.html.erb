@@ -87,6 +87,7 @@
     $(function () {
         $('#skills-show').tags({
             readOnly: true,
+            tagClass: 'btn-agile',
             tagSize: "lg",
             tagData: <%= raw @user.skill_list.to_json %>,
             readOnlyEmptyMessage: "No Skills"
