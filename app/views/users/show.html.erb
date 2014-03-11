@@ -19,7 +19,7 @@
     <% unless @users_projects.empty? %>
         <ul>
           <% @users_projects.each do |project| %>
-              <li><%= link_to project.title, project_path(project) %></li>
+              <li style="list-style-type: none"><%= link_to project.title, project_path(project) %></li>
           <% end %>
         </ul>
     <% end %>
@@ -74,20 +74,14 @@
     <%= render 'layouts/hire_me' %>
   </div>
 
-
-
-
-
-
-
-
 </div>
 
 <script>
     $(function () {
         $('#skills-show').tags({
             readOnly: true,
-            tagSize: "lg",
+            tagClass: 'btn-agile',
+            tagSize: "md",
             tagData: <%= raw @user.skill_list.to_json %>,
             readOnlyEmptyMessage: "No Skills"
         });
