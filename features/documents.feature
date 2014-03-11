@@ -24,6 +24,7 @@ Feature: Manage Document
       | title   | body         | created_at          | project    |
       | SubDoc1 | Blog One     | created 3 days ago  | hello mars |
       | SubDoc2 | Another Blog | created 10 days ago | hello mars |
+    And there are no videos
 
   Scenario: Render of list documents
     Given I am on the "Show" page for project "hello world"
@@ -67,7 +68,8 @@ Feature: Manage Document
 
 #NOTE: below scenario is for children's documents of documents, not projects'
 
-  Scenario: Documents children should be sorted in ASCENDING order by create date
+  # Bryan: DESCENDING means SubDoc1 comes first (the most recent date is greater)
+  Scenario: Documents children should be sorted in DESCENDING order by create date
     Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
     Given the document "Guides" has a sub-document with title "SubDoc2" created 10 days ago
     Given I am on the "Show" page for document "Guides"

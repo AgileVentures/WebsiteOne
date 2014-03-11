@@ -29,7 +29,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def destroy
-    if params[:youtube]
+    if params[:id]=='youtube'
       unlink_from_youtube and return
     end
 
@@ -41,6 +41,8 @@ class AuthenticationsController < ApplicationController
       elsif @authentication.destroy
         flash[:notice] = 'Successfully removed profile.'
       else
+        # Bryan: useful logging in case some unexpected error occurs
+        Rails.logger.error @authentication.errors.full_messages
         flash[:alert] = 'Authentication method could not be removed.'
       end
     else

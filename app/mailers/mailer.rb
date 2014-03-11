@@ -17,4 +17,11 @@ class Mailer < ActionMailer::Base
     @user = user
     mail(to: user.email, subject: 'Welcome to AgileVentures.org')
   end
+
+  def hire_me_form(user, hire_me_form)
+    @user = user
+    @form = hire_me_form
+    subject = ['message from', @form[:name]].join(' ')
+    mail(to: @user.email, reply_to: @form[:email], from: @form[:email], subject: subject)
+  end
 end

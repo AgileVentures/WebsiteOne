@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
       resource.display_email = display_email
       render :action => 'edit'
     else
+      skills = params[:user].delete "skill_list"
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
 
       if account_update_params[:password].blank?
@@ -22,6 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
 
       # Bryan: creates a new but identical object
       @user = User.friendly.find(current_user.friendly_id)
+      @user.skill_list = skills
       if @user.update_attributes(account_update_params)
         set_flash_message :notice, :updated
         # Sign in the user bypassing validation in case his password changed

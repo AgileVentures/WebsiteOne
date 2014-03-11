@@ -3,81 +3,97 @@
     "encoding": "UTF-8",
     "feed": {
         "xmlns": "http://www.w3.org/2005/Atom",
-        "xmlns$media": "http://search.yahoo.com/mrss/",
-        "xmlns$openSearch": "http://a9.com/-/spec/opensearchrss/1.0/",
-        "xmlns$gd": "http://schemas.google.com/g/2005",
-        "xmlns$yt": "http://gdata.youtube.com/schemas/2007",
-        "id": {
-            "$t": "http://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads"
-        },
-        "updated": {
-            "$t": "2014-02-07T02:14:46.866Z"
-        },
-        "category": [
-            {
-                "scheme": "http://schemas.google.com/g/2005#kind",
-                "term": "http://gdata.youtube.com/schemas/2007#video"
-            }
-        ],
-        "title": {
-            "$t": "Uploads by Yaro Apletov",
-            "type": "text"
-        },
-        "logo": {
-            "$t": "http://www.gstatic.com/youtube/img/logo.png"
-        },
-        "link": [
-            {
-                "rel": "related",
-                "type": "application/atom+xml",
-                "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
-            },
-            {
-                "rel": "alternate",
-                "type": "text/html",
-                "href": "https://www.youtube.com/channel/UCgTOz02neY70sqnk05zNkGA/videos"
-            },
-            {
-                "rel": "http://schemas.google.com/g/2005#feed",
-                "type": "application/atom+xml",
-                "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads"
-            },
-            {
-                "rel": "http://schemas.google.com/g/2005#batch",
-                "type": "application/atom+xml",
-                "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/batch"
-            },
-            {
-                "rel": "self",
-                "type": "application/atom+xml",
-                "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads?alt=json&start-index=1&max-results=25"
-            }
-        ],
-        "author": [
-            {
-                "name": {
-                    "$t": "Yaro Apletov"
-                },
-                "uri": {
-                    "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
-                }
-            }
-        ],
-        "generator": {
-            "$t": "YouTube data API",
-            "version": "2.1",
-            "uri": "http://gdata.youtube.com"
-        },
-        "openSearch$totalResults": {
-            "$t": 8
-        },
-        "openSearch$startIndex": {
-            "$t": 1
-        },
-        "openSearch$itemsPerPage": {
-            "$t": 25
-        },
         "entry": [
+            {
+                "id": {
+                    "$t": "http://gdata.youtube.com/feeds/api/videos/3Hi41S5Tp54"
+                },
+                "published": {
+                    "$t": "2014-02-14T22:01:55.000Z"
+                },
+                "title": {
+                    "$t": "WebsiteOne - Pairing session - refactoring authentication controller",
+                    "type": "text"
+                },
+                "content": {
+                    "$t": "WebsiteOne - Pairing session - refactoring authentication controller",
+                    "type": "text"
+                },
+                "link": [
+                    {
+                        "rel": "alternate",
+                        "type": "text/html",
+                        "href": "http://www.youtube.com/watch?v=3Hi41S5Tp54&feature=youtube_gdata"
+                    },
+                    {
+                        "rel": "http://gdata.youtube.com/schemas/2007#video.related",
+                        "type": "application/atom+xml",
+                        "href": "http://gdata.youtube.com/feeds/api/videos/3Hi41S5Tp54/related"
+                    },
+                    {
+                        "rel": "http://gdata.youtube.com/schemas/2007#mobile",
+                        "type": "text/html",
+                        "href": "http://m.youtube.com/details?v=3Hi41S5Tp54"
+                    },
+                    {
+                        "rel": "self",
+                        "type": "application/atom+xml",
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/3Hi41S5Tp54"
+                    }
+                ],
+                "author": [
+                    {
+                        "name": {
+                            "$t": "John Doe"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": {
+                    "$t": "http://gdata.youtube.com/feeds/api/videos/nmCIEC6iuxU"
+                },
+                "published": {
+                    "$t": "2014-02-13T14:06:40.000Z"
+                },
+                "title": {
+                    "$t": "WebsiteOne - Pairing session",
+                    "type": "text"
+                },
+                "content": {
+                    "$t": "WebsiteOne - Pairing session",
+                    "type": "text"
+                },
+                "link": [
+                    {
+                        "rel": "alternate",
+                        "type": "text/html",
+                        "href": "http://www.youtube.com/watch?v=nmCIEC6iuxU&feature=youtube_gdata"
+                    },
+                    {
+                        "rel": "http://gdata.youtube.com/schemas/2007#video.related",
+                        "type": "application/atom+xml",
+                        "href": "http://gdata.youtube.com/feeds/api/videos/nmCIEC6iuxU/related"
+                    },
+                    {
+                        "rel": "http://gdata.youtube.com/schemas/2007#mobile",
+                        "type": "text/html",
+                        "href": "http://m.youtube.com/details?v=nmCIEC6iuxU"
+                    },
+                    {
+                        "rel": "self",
+                        "type": "application/atom+xml",
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/nmCIEC6iuxU"
+                    }
+                ],
+                "author": [
+                    {
+                        "name": {
+                            "$t": "John Doe"
+                        }
+                    }
+                ]
+            },
             {
                 "id": {
                     "$t": "http://gdata.youtube.com/feeds/api/videos/VT-efv6jhuk"
@@ -85,20 +101,6 @@
                 "published": {
                     "$t": "2014-02-03T19:44:14.000Z"
                 },
-                "updated": {
-                    "$t": "2014-02-07T02:11:39.000Z"
-                },
-                "category": [
-                    {
-                        "scheme": "http://schemas.google.com/g/2005#kind",
-                        "term": "http://gdata.youtube.com/schemas/2007#video"
-                    },
-                    {
-                        "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat",
-                        "term": "Entertainment",
-                        "label": "Развлечения"
-                    }
-                ],
                 "title": {
                     "$t": "Autograders - Pairing session",
                     "type": "text"
@@ -111,121 +113,31 @@
                     {
                         "rel": "alternate",
                         "type": "text/html",
-                        "href": "https://www.youtube.com/watch?v=VT-efv6jhuk&feature=youtube_gdata"
+                        "href": "http://www.youtube.com/watch?v=VT-efv6jhuk&feature=youtube_gdata"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#video.related",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/VT-efv6jhuk/related"
+                        "href": "http://gdata.youtube.com/feeds/api/videos/VT-efv6jhuk/related"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#mobile",
                         "type": "text/html",
-                        "href": "https://m.youtube.com/details?v=VT-efv6jhuk"
+                        "href": "http://m.youtube.com/details?v=VT-efv6jhuk"
                     },
                     {
                         "rel": "self",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/VT-efv6jhuk"
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/VT-efv6jhuk"
                     }
                 ],
                 "author": [
                     {
                         "name": {
-                            "$t": "Yaro Apletov"
-                        },
-                        "uri": {
-                            "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
+                            "$t": "John Doe"
                         }
                     }
-                ],
-                "gd$comments": {
-                    "gd$feedLink": {
-                        "rel": "http://gdata.youtube.com/schemas/2007#comments",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/VT-efv6jhuk/comments",
-                        "countHint": 0
-                    }
-                },
-                "yt$hd": {},
-                "media$group": {
-                    "media$category": [
-                        {
-                            "$t": "Entertainment",
-                            "label": "Развлечения",
-                            "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat"
-                        }
-                    ],
-                    "media$content": [
-                        {
-                            "url": "https://www.youtube.com/v/VT-efv6jhuk?version=3&f=user_uploads&app=youtube_gdata",
-                            "type": "application/x-shockwave-flash",
-                            "medium": "video",
-                            "isDefault": "true",
-                            "expression": "full",
-                            "duration": 9952,
-                            "yt$format": 5
-                        },
-                        {
-                            "url": "rtsp://r5---sn-cg07luek.c.youtube.com/CigLENy73wIaHwnphqP-fp4_VRMYDSANFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 9952,
-                            "yt$format": 1
-                        },
-                        {
-                            "url": "rtsp://r5---sn-cg07luek.c.youtube.com/CigLENy73wIaHwnphqP-fp4_VRMYESARFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 9952,
-                            "yt$format": 6
-                        }
-                    ],
-                    "media$description": {
-                        "$t": "Working in HW repo",
-                        "type": "plain"
-                    },
-                    "media$keywords": {},
-                    "media$player": [
-                        {
-                            "url": "https://www.youtube.com/watch?v=VT-efv6jhuk&feature=youtube_gdata_player"
-                        }
-                    ],
-                    "media$thumbnail": [
-                        {
-                            "url": "https://i1.ytimg.com/vi/VT-efv6jhuk/0.jpg",
-                            "height": 360,
-                            "width": 480,
-                            "time": "01:22:56"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/VT-efv6jhuk/1.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:41:28"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/VT-efv6jhuk/2.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:22:56"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/VT-efv6jhuk/3.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "02:04:24"
-                        }
-                    ],
-                    "media$title": {
-                        "$t": "Autograders - Pairing session",
-                        "type": "plain"
-                    },
-                    "yt$duration": {
-                        "seconds": "9952"
-                    }
-                }
+                ]
             },
             {
                 "id": {
@@ -234,20 +146,6 @@
                 "published": {
                     "$t": "2014-02-03T14:39:02.000Z"
                 },
-                "updated": {
-                    "$t": "2014-02-06T15:41:19.000Z"
-                },
-                "category": [
-                    {
-                        "scheme": "http://schemas.google.com/g/2005#kind",
-                        "term": "http://gdata.youtube.com/schemas/2007#video"
-                    },
-                    {
-                        "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat",
-                        "term": "Entertainment",
-                        "label": "Развлечения"
-                    }
-                ],
                 "title": {
                     "$t": "WebsiteOne - Pairing session",
                     "type": "text"
@@ -260,121 +158,31 @@
                     {
                         "rel": "alternate",
                         "type": "text/html",
-                        "href": "https://www.youtube.com/watch?v=_Sd2_MeAVOA&feature=youtube_gdata"
+                        "href": "http://www.youtube.com/watch?v=_Sd2_MeAVOA&feature=youtube_gdata"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#video.related",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/_Sd2_MeAVOA/related"
+                        "href": "http://gdata.youtube.com/feeds/api/videos/_Sd2_MeAVOA/related"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#mobile",
                         "type": "text/html",
-                        "href": "https://m.youtube.com/details?v=_Sd2_MeAVOA"
+                        "href": "http://m.youtube.com/details?v=_Sd2_MeAVOA"
                     },
                     {
                         "rel": "self",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/_Sd2_MeAVOA"
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/_Sd2_MeAVOA"
                     }
                 ],
                 "author": [
                     {
                         "name": {
-                            "$t": "Yaro Apletov"
-                        },
-                        "uri": {
-                            "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
+                            "$t": "John Doe"
                         }
                     }
-                ],
-                "gd$comments": {
-                    "gd$feedLink": {
-                        "rel": "http://gdata.youtube.com/schemas/2007#comments",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/_Sd2_MeAVOA/comments",
-                        "countHint": 0
-                    }
-                },
-                "yt$hd": {},
-                "media$group": {
-                    "media$category": [
-                        {
-                            "$t": "Entertainment",
-                            "label": "Развлечения",
-                            "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat"
-                        }
-                    ],
-                    "media$content": [
-                        {
-                            "url": "https://www.youtube.com/v/_Sd2_MeAVOA?version=3&f=user_uploads&app=youtube_gdata",
-                            "type": "application/x-shockwave-flash",
-                            "medium": "video",
-                            "isDefault": "true",
-                            "expression": "full",
-                            "duration": 7586,
-                            "yt$format": 5
-                        },
-                        {
-                            "url": "rtsp://r7---sn-cg07lue6.c.youtube.com/CigLENy73wIaHwngVIDH_HYn_RMYDSANFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 7586,
-                            "yt$format": 1
-                        },
-                        {
-                            "url": "rtsp://r7---sn-cg07lue6.c.youtube.com/CigLENy73wIaHwngVIDH_HYn_RMYESARFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 7586,
-                            "yt$format": 6
-                        }
-                    ],
-                    "media$description": {
-                        "$t": "WebsiteOne - Pairing session",
-                        "type": "plain"
-                    },
-                    "media$keywords": {},
-                    "media$player": [
-                        {
-                            "url": "https://www.youtube.com/watch?v=_Sd2_MeAVOA&feature=youtube_gdata_player"
-                        }
-                    ],
-                    "media$thumbnail": [
-                        {
-                            "url": "https://i1.ytimg.com/vi/_Sd2_MeAVOA/0.jpg",
-                            "height": 360,
-                            "width": 480,
-                            "time": "01:03:13"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/_Sd2_MeAVOA/1.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:31:36.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/_Sd2_MeAVOA/2.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:03:13"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/_Sd2_MeAVOA/3.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:34:49.500"
-                        }
-                    ],
-                    "media$title": {
-                        "$t": "WebsiteOne - Pairing session",
-                        "type": "plain"
-                    },
-                    "yt$duration": {
-                        "seconds": "7586"
-                    }
-                }
+                ]
             },
             {
                 "id": {
@@ -383,20 +191,6 @@
                 "published": {
                     "$t": "2014-01-18T23:46:41.000Z"
                 },
-                "updated": {
-                    "$t": "2014-02-06T15:41:19.000Z"
-                },
-                "category": [
-                    {
-                        "scheme": "http://schemas.google.com/g/2005#kind",
-                        "term": "http://gdata.youtube.com/schemas/2007#video"
-                    },
-                    {
-                        "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat",
-                        "term": "Entertainment",
-                        "label": "Развлечения"
-                    }
-                ],
                 "title": {
                     "$t": "PP on WSO: Mercury gem integration",
                     "type": "text"
@@ -409,121 +203,31 @@
                     {
                         "rel": "alternate",
                         "type": "text/html",
-                        "href": "https://www.youtube.com/watch?v=Zgw3oSllma8&feature=youtube_gdata"
+                        "href": "http://www.youtube.com/watch?v=Zgw3oSllma8&feature=youtube_gdata"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#video.related",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/Zgw3oSllma8/related"
+                        "href": "http://gdata.youtube.com/feeds/api/videos/Zgw3oSllma8/related"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#mobile",
                         "type": "text/html",
-                        "href": "https://m.youtube.com/details?v=Zgw3oSllma8"
+                        "href": "http://m.youtube.com/details?v=Zgw3oSllma8"
                     },
                     {
                         "rel": "self",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/Zgw3oSllma8"
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/Zgw3oSllma8"
                     }
                 ],
                 "author": [
                     {
                         "name": {
-                            "$t": "Yaro Apletov"
-                        },
-                        "uri": {
-                            "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
+                            "$t": "John Doe"
                         }
                     }
-                ],
-                "gd$comments": {
-                    "gd$feedLink": {
-                        "rel": "http://gdata.youtube.com/schemas/2007#comments",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/Zgw3oSllma8/comments",
-                        "countHint": 0
-                    }
-                },
-                "yt$hd": {},
-                "media$group": {
-                    "media$category": [
-                        {
-                            "$t": "Entertainment",
-                            "label": "Развлечения",
-                            "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat"
-                        }
-                    ],
-                    "media$content": [
-                        {
-                            "url": "https://www.youtube.com/v/Zgw3oSllma8?version=3&f=user_uploads&app=youtube_gdata",
-                            "type": "application/x-shockwave-flash",
-                            "medium": "video",
-                            "isDefault": "true",
-                            "expression": "full",
-                            "duration": 10947,
-                            "yt$format": 5
-                        },
-                        {
-                            "url": "rtsp://r7---sn-cg07lue6.c.youtube.com/CigLENy73wIaHwmvmWUpoTcMZhMYDSANFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 10947,
-                            "yt$format": 1
-                        },
-                        {
-                            "url": "rtsp://r7---sn-cg07lue6.c.youtube.com/CigLENy73wIaHwmvmWUpoTcMZhMYESARFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 10947,
-                            "yt$format": 6
-                        }
-                    ],
-                    "media$description": {
-                        "$t": "PP on WSO: Mercury gem integration",
-                        "type": "plain"
-                    },
-                    "media$keywords": {},
-                    "media$player": [
-                        {
-                            "url": "https://www.youtube.com/watch?v=Zgw3oSllma8&feature=youtube_gdata_player"
-                        }
-                    ],
-                    "media$thumbnail": [
-                        {
-                            "url": "https://i1.ytimg.com/vi/Zgw3oSllma8/0.jpg",
-                            "height": 360,
-                            "width": 480,
-                            "time": "01:31:13.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/Zgw3oSllma8/1.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:45:36.750"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/Zgw3oSllma8/2.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:31:13.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/Zgw3oSllma8/3.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "02:16:50.250"
-                        }
-                    ],
-                    "media$title": {
-                        "$t": "PP on WSO: Mercury gem integration",
-                        "type": "plain"
-                    },
-                    "yt$duration": {
-                        "seconds": "10947"
-                    }
-                }
+                ]
             },
             {
                 "id": {
@@ -532,20 +236,6 @@
                 "published": {
                     "$t": "2014-01-18T15:17:03.000Z"
                 },
-                "updated": {
-                    "$t": "2014-02-06T15:41:19.000Z"
-                },
-                "category": [
-                    {
-                        "scheme": "http://schemas.google.com/g/2005#kind",
-                        "term": "http://gdata.youtube.com/schemas/2007#video"
-                    },
-                    {
-                        "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat",
-                        "term": "Entertainment",
-                        "label": "Развлечения"
-                    }
-                ],
                 "title": {
                     "$t": "PP WSO UserManagement",
                     "type": "text"
@@ -558,121 +248,31 @@
                     {
                         "rel": "alternate",
                         "type": "text/html",
-                        "href": "https://www.youtube.com/watch?v=RTj7YGduNUA&feature=youtube_gdata"
+                        "href": "http://www.youtube.com/watch?v=RTj7YGduNUA&feature=youtube_gdata"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#video.related",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/RTj7YGduNUA/related"
+                        "href": "http://gdata.youtube.com/feeds/api/videos/RTj7YGduNUA/related"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#mobile",
                         "type": "text/html",
-                        "href": "https://m.youtube.com/details?v=RTj7YGduNUA"
+                        "href": "http://m.youtube.com/details?v=RTj7YGduNUA"
                     },
                     {
                         "rel": "self",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/RTj7YGduNUA"
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/RTj7YGduNUA"
                     }
                 ],
                 "author": [
                     {
                         "name": {
-                            "$t": "Yaro Apletov"
-                        },
-                        "uri": {
-                            "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
+                            "$t": "John Doe"
                         }
                     }
-                ],
-                "gd$comments": {
-                    "gd$feedLink": {
-                        "rel": "http://gdata.youtube.com/schemas/2007#comments",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/RTj7YGduNUA/comments",
-                        "countHint": 0
-                    }
-                },
-                "yt$hd": {},
-                "media$group": {
-                    "media$category": [
-                        {
-                            "$t": "Entertainment",
-                            "label": "Развлечения",
-                            "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat"
-                        }
-                    ],
-                    "media$content": [
-                        {
-                            "url": "https://www.youtube.com/v/RTj7YGduNUA?version=3&f=user_uploads&app=youtube_gdata",
-                            "type": "application/x-shockwave-flash",
-                            "medium": "video",
-                            "isDefault": "true",
-                            "expression": "full",
-                            "duration": 6731,
-                            "yt$format": 5
-                        },
-                        {
-                            "url": "rtsp://r5---sn-cg07lue6.c.youtube.com/CigLENy73wIaHwlANW5nYPs4RRMYDSANFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 6731,
-                            "yt$format": 1
-                        },
-                        {
-                            "url": "rtsp://r5---sn-cg07lue6.c.youtube.com/CigLENy73wIaHwlANW5nYPs4RRMYESARFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 6731,
-                            "yt$format": 6
-                        }
-                    ],
-                    "media$description": {
-                        "$t": "PP WSO UserManagement",
-                        "type": "plain"
-                    },
-                    "media$keywords": {},
-                    "media$player": [
-                        {
-                            "url": "https://www.youtube.com/watch?v=RTj7YGduNUA&feature=youtube_gdata_player"
-                        }
-                    ],
-                    "media$thumbnail": [
-                        {
-                            "url": "https://i1.ytimg.com/vi/RTj7YGduNUA/0.jpg",
-                            "height": 360,
-                            "width": 480,
-                            "time": "00:56:05.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/RTj7YGduNUA/1.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:28:02.750"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/RTj7YGduNUA/2.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:56:05.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/RTj7YGduNUA/3.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:24:08.250"
-                        }
-                    ],
-                    "media$title": {
-                        "$t": "PP WSO UserManagement",
-                        "type": "plain"
-                    },
-                    "yt$duration": {
-                        "seconds": "6731"
-                    }
-                }
+                ]
             },
             {
                 "id": {
@@ -681,20 +281,6 @@
                 "published": {
                     "$t": "2014-01-15T19:59:47.000Z"
                 },
-                "updated": {
-                    "$t": "2014-02-06T15:41:19.000Z"
-                },
-                "category": [
-                    {
-                        "scheme": "http://schemas.google.com/g/2005#kind",
-                        "term": "http://gdata.youtube.com/schemas/2007#video"
-                    },
-                    {
-                        "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat",
-                        "term": "Entertainment",
-                        "label": "Развлечения"
-                    }
-                ],
                 "title": {
                     "$t": "PP WSO: User management",
                     "type": "text"
@@ -707,121 +293,31 @@
                     {
                         "rel": "alternate",
                         "type": "text/html",
-                        "href": "https://www.youtube.com/watch?v=6OiYaOAOOVs&feature=youtube_gdata"
+                        "href": "http://www.youtube.com/watch?v=6OiYaOAOOVs&feature=youtube_gdata"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#video.related",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/6OiYaOAOOVs/related"
+                        "href": "http://gdata.youtube.com/feeds/api/videos/6OiYaOAOOVs/related"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#mobile",
                         "type": "text/html",
-                        "href": "https://m.youtube.com/details?v=6OiYaOAOOVs"
+                        "href": "http://m.youtube.com/details?v=6OiYaOAOOVs"
                     },
                     {
                         "rel": "self",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/6OiYaOAOOVs"
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/6OiYaOAOOVs"
                     }
                 ],
                 "author": [
                     {
                         "name": {
-                            "$t": "Yaro Apletov"
-                        },
-                        "uri": {
-                            "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
+                            "$t": "John Doe"
                         }
                     }
-                ],
-                "gd$comments": {
-                    "gd$feedLink": {
-                        "rel": "http://gdata.youtube.com/schemas/2007#comments",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/6OiYaOAOOVs/comments",
-                        "countHint": 0
-                    }
-                },
-                "yt$hd": {},
-                "media$group": {
-                    "media$category": [
-                        {
-                            "$t": "Entertainment",
-                            "label": "Развлечения",
-                            "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat"
-                        }
-                    ],
-                    "media$content": [
-                        {
-                            "url": "https://www.youtube.com/v/6OiYaOAOOVs?version=3&f=user_uploads&app=youtube_gdata",
-                            "type": "application/x-shockwave-flash",
-                            "medium": "video",
-                            "isDefault": "true",
-                            "expression": "full",
-                            "duration": 10610,
-                            "yt$format": 5
-                        },
-                        {
-                            "url": "rtsp://r2---sn-cg07luek.c.youtube.com/CigLENy73wIaHwlbOQ7gaJjo6BMYDSANFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 10610,
-                            "yt$format": 1
-                        },
-                        {
-                            "url": "rtsp://r2---sn-cg07luek.c.youtube.com/CigLENy73wIaHwlbOQ7gaJjo6BMYESARFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 10610,
-                            "yt$format": 6
-                        }
-                    ],
-                    "media$description": {
-                        "$t": "PP WSO: User management",
-                        "type": "plain"
-                    },
-                    "media$keywords": {},
-                    "media$player": [
-                        {
-                            "url": "https://www.youtube.com/watch?v=6OiYaOAOOVs&feature=youtube_gdata_player"
-                        }
-                    ],
-                    "media$thumbnail": [
-                        {
-                            "url": "https://i1.ytimg.com/vi/6OiYaOAOOVs/0.jpg",
-                            "height": 360,
-                            "width": 480,
-                            "time": "01:28:25"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/6OiYaOAOOVs/1.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:44:12.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/6OiYaOAOOVs/2.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:28:25"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/6OiYaOAOOVs/3.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "02:12:37.500"
-                        }
-                    ],
-                    "media$title": {
-                        "$t": "PP WSO: User management",
-                        "type": "plain"
-                    },
-                    "yt$duration": {
-                        "seconds": "10610"
-                    }
-                }
+                ]
             },
             {
                 "id": {
@@ -830,20 +326,6 @@
                 "published": {
                     "$t": "2014-01-15T13:23:36.000Z"
                 },
-                "updated": {
-                    "$t": "2014-02-06T15:41:19.000Z"
-                },
-                "category": [
-                    {
-                        "scheme": "http://schemas.google.com/g/2005#kind",
-                        "term": "http://gdata.youtube.com/schemas/2007#video"
-                    },
-                    {
-                        "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat",
-                        "term": "Entertainment",
-                        "label": "Развлечения"
-                    }
-                ],
                 "title": {
                     "$t": "PP on WSO",
                     "type": "text"
@@ -856,121 +338,31 @@
                     {
                         "rel": "alternate",
                         "type": "text/html",
-                        "href": "https://www.youtube.com/watch?v=g_AEng6OZSE&feature=youtube_gdata"
+                        "href": "http://www.youtube.com/watch?v=g_AEng6OZSE&feature=youtube_gdata"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#video.related",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/g_AEng6OZSE/related"
+                        "href": "http://gdata.youtube.com/feeds/api/videos/g_AEng6OZSE/related"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#mobile",
                         "type": "text/html",
-                        "href": "https://m.youtube.com/details?v=g_AEng6OZSE"
+                        "href": "http://m.youtube.com/details?v=g_AEng6OZSE"
                     },
                     {
                         "rel": "self",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/g_AEng6OZSE"
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/g_AEng6OZSE"
                     }
                 ],
                 "author": [
                     {
                         "name": {
-                            "$t": "Yaro Apletov"
-                        },
-                        "uri": {
-                            "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
+                            "$t": "John Doe"
                         }
                     }
-                ],
-                "gd$comments": {
-                    "gd$feedLink": {
-                        "rel": "http://gdata.youtube.com/schemas/2007#comments",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/g_AEng6OZSE/comments",
-                        "countHint": 0
-                    }
-                },
-                "yt$hd": {},
-                "media$group": {
-                    "media$category": [
-                        {
-                            "$t": "Entertainment",
-                            "label": "Развлечения",
-                            "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat"
-                        }
-                    ],
-                    "media$content": [
-                        {
-                            "url": "https://www.youtube.com/v/g_AEng6OZSE?version=3&f=user_uploads&app=youtube_gdata",
-                            "type": "application/x-shockwave-flash",
-                            "medium": "video",
-                            "isDefault": "true",
-                            "expression": "full",
-                            "duration": 8111,
-                            "yt$format": 5
-                        },
-                        {
-                            "url": "rtsp://r8---sn-cg07luee.c.youtube.com/CigLENy73wIaHwkhZY4OngTwgxMYDSANFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 8111,
-                            "yt$format": 1
-                        },
-                        {
-                            "url": "rtsp://r8---sn-cg07luee.c.youtube.com/CigLENy73wIaHwkhZY4OngTwgxMYESARFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 8111,
-                            "yt$format": 6
-                        }
-                    ],
-                    "media$description": {
-                        "$t": "PP on WSO",
-                        "type": "plain"
-                    },
-                    "media$keywords": {},
-                    "media$player": [
-                        {
-                            "url": "https://www.youtube.com/watch?v=g_AEng6OZSE&feature=youtube_gdata_player"
-                        }
-                    ],
-                    "media$thumbnail": [
-                        {
-                            "url": "https://i1.ytimg.com/vi/g_AEng6OZSE/0.jpg",
-                            "height": 360,
-                            "width": 480,
-                            "time": "01:07:35.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/g_AEng6OZSE/1.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:33:47.750"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/g_AEng6OZSE/2.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:07:35.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/g_AEng6OZSE/3.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:41:23.250"
-                        }
-                    ],
-                    "media$title": {
-                        "$t": "PP on WSO",
-                        "type": "plain"
-                    },
-                    "yt$duration": {
-                        "seconds": "8111"
-                    }
-                }
+                ]
             },
             {
                 "id": {
@@ -979,20 +371,6 @@
                 "published": {
                     "$t": "2014-01-13T14:54:22.000Z"
                 },
-                "updated": {
-                    "$t": "2014-02-06T15:41:19.000Z"
-                },
-                "category": [
-                    {
-                        "scheme": "http://schemas.google.com/g/2005#kind",
-                        "term": "http://gdata.youtube.com/schemas/2007#video"
-                    },
-                    {
-                        "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat",
-                        "term": "Entertainment",
-                        "label": "Развлечения"
-                    }
-                ],
                 "title": {
                     "$t": "PP on WSO",
                     "type": "text"
@@ -1005,121 +383,31 @@
                     {
                         "rel": "alternate",
                         "type": "text/html",
-                        "href": "https://www.youtube.com/watch?v=MfrMfVLrmJw&feature=youtube_gdata"
+                        "href": "http://www.youtube.com/watch?v=MfrMfVLrmJw&feature=youtube_gdata"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#video.related",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/MfrMfVLrmJw/related"
+                        "href": "http://gdata.youtube.com/feeds/api/videos/MfrMfVLrmJw/related"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#mobile",
                         "type": "text/html",
-                        "href": "https://m.youtube.com/details?v=MfrMfVLrmJw"
+                        "href": "http://m.youtube.com/details?v=MfrMfVLrmJw"
                     },
                     {
                         "rel": "self",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/MfrMfVLrmJw"
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/MfrMfVLrmJw"
                     }
                 ],
                 "author": [
                     {
                         "name": {
-                            "$t": "Yaro Apletov"
-                        },
-                        "uri": {
-                            "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
+                            "$t": "John Doe"
                         }
                     }
-                ],
-                "gd$comments": {
-                    "gd$feedLink": {
-                        "rel": "http://gdata.youtube.com/schemas/2007#comments",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/MfrMfVLrmJw/comments",
-                        "countHint": 0
-                    }
-                },
-                "yt$hd": {},
-                "media$group": {
-                    "media$category": [
-                        {
-                            "$t": "Entertainment",
-                            "label": "Развлечения",
-                            "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat"
-                        }
-                    ],
-                    "media$content": [
-                        {
-                            "url": "https://www.youtube.com/v/MfrMfVLrmJw?version=3&f=user_uploads&app=youtube_gdata",
-                            "type": "application/x-shockwave-flash",
-                            "medium": "video",
-                            "isDefault": "true",
-                            "expression": "full",
-                            "duration": 12155,
-                            "yt$format": 5
-                        },
-                        {
-                            "url": "rtsp://r8---sn-cg07luek.c.youtube.com/CigLENy73wIaHwmcmOtSfcz6MRMYDSANFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 12155,
-                            "yt$format": 1
-                        },
-                        {
-                            "url": "rtsp://r8---sn-cg07luek.c.youtube.com/CigLENy73wIaHwmcmOtSfcz6MRMYESARFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 12155,
-                            "yt$format": 6
-                        }
-                    ],
-                    "media$description": {
-                        "$t": "Working on Project model spec",
-                        "type": "plain"
-                    },
-                    "media$keywords": {},
-                    "media$player": [
-                        {
-                            "url": "https://www.youtube.com/watch?v=MfrMfVLrmJw&feature=youtube_gdata_player"
-                        }
-                    ],
-                    "media$thumbnail": [
-                        {
-                            "url": "https://i1.ytimg.com/vi/MfrMfVLrmJw/0.jpg",
-                            "height": 360,
-                            "width": 480,
-                            "time": "01:41:17.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/MfrMfVLrmJw/1.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:50:38.750"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/MfrMfVLrmJw/2.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:41:17.500"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/MfrMfVLrmJw/3.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "02:31:56.250"
-                        }
-                    ],
-                    "media$title": {
-                        "$t": "PP on WSO",
-                        "type": "plain"
-                    },
-                    "yt$duration": {
-                        "seconds": "12155"
-                    }
-                }
+                ]
             },
             {
                 "id": {
@@ -1128,20 +416,6 @@
                 "published": {
                     "$t": "2014-01-11T13:34:05.000Z"
                 },
-                "updated": {
-                    "$t": "2014-02-06T15:41:19.000Z"
-                },
-                "category": [
-                    {
-                        "scheme": "http://schemas.google.com/g/2005#kind",
-                        "term": "http://gdata.youtube.com/schemas/2007#video"
-                    },
-                    {
-                        "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat",
-                        "term": "Entertainment",
-                        "label": "Развлечения"
-                    }
-                ],
                 "title": {
                     "$t": "PP on WSO",
                     "type": "text"
@@ -1154,121 +428,31 @@
                     {
                         "rel": "alternate",
                         "type": "text/html",
-                        "href": "https://www.youtube.com/watch?v=xlD8gdk6YSY&feature=youtube_gdata"
+                        "href": "http://www.youtube.com/watch?v=xlD8gdk6YSY&feature=youtube_gdata"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#video.related",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/xlD8gdk6YSY/related"
+                        "href": "http://gdata.youtube.com/feeds/api/videos/xlD8gdk6YSY/related"
                     },
                     {
                         "rel": "http://gdata.youtube.com/schemas/2007#mobile",
                         "type": "text/html",
-                        "href": "https://m.youtube.com/details?v=xlD8gdk6YSY"
+                        "href": "http://m.youtube.com/details?v=xlD8gdk6YSY"
                     },
                     {
                         "rel": "self",
                         "type": "application/atom+xml",
-                        "href": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA/uploads/xlD8gdk6YSY"
+                        "href": "http://gdata.youtube.com/feeds/api/users/UCgTOz02neY70sqnk05zNkGA/uploads/xlD8gdk6YSY"
                     }
                 ],
                 "author": [
                     {
                         "name": {
-                            "$t": "Yaro Apletov"
-                        },
-                        "uri": {
-                            "$t": "https://gdata.youtube.com/feeds/api/users/gTOz02neY70sqnk05zNkGA"
+                            "$t": "John Doe"
                         }
                     }
-                ],
-                "gd$comments": {
-                    "gd$feedLink": {
-                        "rel": "http://gdata.youtube.com/schemas/2007#comments",
-                        "href": "https://gdata.youtube.com/feeds/api/videos/xlD8gdk6YSY/comments",
-                        "countHint": 0
-                    }
-                },
-                "yt$hd": {},
-                "media$group": {
-                    "media$category": [
-                        {
-                            "$t": "Entertainment",
-                            "label": "Развлечения",
-                            "scheme": "http://gdata.youtube.com/schemas/2007/categories.cat"
-                        }
-                    ],
-                    "media$content": [
-                        {
-                            "url": "https://www.youtube.com/v/xlD8gdk6YSY?version=3&f=user_uploads&app=youtube_gdata",
-                            "type": "application/x-shockwave-flash",
-                            "medium": "video",
-                            "isDefault": "true",
-                            "expression": "full",
-                            "duration": 6968,
-                            "yt$format": 5
-                        },
-                        {
-                            "url": "rtsp://r1---sn-cg07luee.c.youtube.com/CigLENy73wIaHwkmYTrZgfxQxhMYDSANFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 6968,
-                            "yt$format": 1
-                        },
-                        {
-                            "url": "rtsp://r1---sn-cg07luee.c.youtube.com/CigLENy73wIaHwkmYTrZgfxQxhMYESARFEgGUgx1c2VyX3VwbG9hZHMM/0/0/0/video.3gp",
-                            "type": "video/3gpp",
-                            "medium": "video",
-                            "expression": "full",
-                            "duration": 6968,
-                            "yt$format": 6
-                        }
-                    ],
-                    "media$description": {
-                        "$t": "Working on projects feature",
-                        "type": "plain"
-                    },
-                    "media$keywords": {},
-                    "media$player": [
-                        {
-                            "url": "https://www.youtube.com/watch?v=xlD8gdk6YSY&feature=youtube_gdata_player"
-                        }
-                    ],
-                    "media$thumbnail": [
-                        {
-                            "url": "https://i1.ytimg.com/vi/xlD8gdk6YSY/0.jpg",
-                            "height": 360,
-                            "width": 480,
-                            "time": "00:58:04"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/xlD8gdk6YSY/1.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:29:02"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/xlD8gdk6YSY/2.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "00:58:04"
-                        },
-                        {
-                            "url": "https://i1.ytimg.com/vi/xlD8gdk6YSY/3.jpg",
-                            "height": 90,
-                            "width": 120,
-                            "time": "01:27:06"
-                        }
-                    ],
-                    "media$title": {
-                        "$t": "PP on WSO",
-                        "type": "plain"
-                    },
-                    "yt$duration": {
-                        "seconds": "6968"
-                    }
-                }
+                ]
             }
         ]
     }

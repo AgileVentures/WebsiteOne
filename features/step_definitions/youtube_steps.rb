@@ -13,7 +13,7 @@ end
 
 
 Then /I should( not)? see a list of my videos/ do |negative|
-  correct_number = Youtube.parse_response(@user_youtube_response, nil).count if @user_youtube_response
+  correct_number = Youtube.parse_response(@user_youtube_response).count if @user_youtube_response
   video_links = page.all(:css, '.yt_link')
   if negative
     expect(video_links).to have(0).items
@@ -24,14 +24,18 @@ end
 
 Given /^user "([^"]*)" has YouTube Channel ID with (some|no) videos in it/ do |user, qty|
   #TODO YA check what the real response would be for no videos
-  @user_youtube_response  = (qty == 'some') ? File.read('spec/fixtures/youtube_user_response.json') : nil
-  end
+  @user_youtube_response = (qty == 'some') ? File.read('spec/fixtures/youtube_user_response.json') : nil
+  @user_youtube_filtered_response = (qty == 'some') ? File.read('spec/fixtures/youtube_user_filtered_response.json') : nil
+end
 
 Given /^user "([^"]*)" has YouTube Channel connected/ do |user|
   user = user == 'me' ? @current_user : User.find_by_first_name(user)
   user.youtube_id = 'test_id'
+  user.youtube_user_name = 'John Doe'
   user.save
-  stub_request(:get, 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json').to_return(body: @user_youtube_response)
+
+  stub_request(:get, /youtube.*(videos|uploads)/).to_return(body: @user_youtube_response)
+  stub_request(:get, /youtube.*WSO|WebsiteOne/i).to_return(body: @user_youtube_filtered_response)
 end
 
 Given /^user "([^"]*)" has YouTube Channel not connected/ do |user|
@@ -39,13 +43,22 @@ Given /^user "([^"]*)" has YouTube Channel not connected/ do |user|
   user.youtube_id = nil
   user.save
 
-  channel_id_response = File.read('spec/fixtures/youtube_channel_response.json')
-  stub_request(:get, 'https://www.googleapis.com/youtube/v3/channels?access_token=test_token&mine=true&part=id').to_return(body: channel_id_response)
-  stub_request(:get, 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json').to_return(body: @user_youtube_response)
+  stub_request(:get, /youtube.*title/).to_return(body: '{"entry":{"title":{"$t":"John Doe"}}}')
+  stub_request(:get, /googleapis/).to_return(body: '{ "items": [{"id": "test_id"}]}')
+  stub_request(:get, /youtube.*(videos|uploads)/).to_return(body: @user_youtube_response)
 end
 
 Then /^I should see video "([^"]*)" in "player"$/ do |name|
   id = find_link(name)[:id]
   expect(page.find(:css, '#ytplayer')[:src]).to match /#{id}/
+end
 
+
+Then /^I should see "([^"]*)" before "([^"]*)"$/ do |title_1, titile_2|
+  expect(page.body).to match(/#{title_1}.*#{titile_2}/m)
+end
+
+
+Given /^there are no videos$/ do
+  stub_request(:get, /youtube/).to_return(body: '')
 end

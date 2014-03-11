@@ -1,7 +1,8 @@
 <% if user_signed_in? and current_user.following?(@project) %>
-  <script src="https://apis.google.com/js/platform.js" ></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
 <% end %>
 <%= javascript_include_tag 'projects' %>
+<%= javascript_include_tag 'users' %>
 <% provide :title, @project.title %>
 
 <div>
@@ -19,19 +20,22 @@
     </div>
     <div class="small-divider"></div>
     <p><strong><%= @project.description %></strong></p>
+
   </div>
   <div id="doc-side-panel">
     <% if user_signed_in? %>
-      <ul>
-        <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', edit_project_path(@project) %></li>
-        <li><%= custom_css_btn 'new document', 'fa fa-file-text-o', new_project_document_path(project_id: @project.friendly_id) %></li>
-        <% if current_user.following?(@project) %>
-          <li><%= custom_css_btn 'leave project', 'fa fa-users', unfollow_project_path(@project) %></li>
-          <li><div id="HOA-placeholder" data-hoa-title="AgileVentures Pairing: <%= @project.title %> - <%= Time.now.utc.strftime('%d/%m/%Y %H00 %Z') %>"></div></li>
-        <% else %>
-          <li><%= custom_css_btn 'join project', 'fa fa-users', follow_project_path(@project) %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', edit_project_path(@project) %></li>
+          <li><%= custom_css_btn 'new document', 'fa fa-file-text-o', new_project_document_path(project_id: @project.friendly_id) %></li>
+          <% if current_user.following?(@project) %>
+              <li><%= custom_css_btn 'leave project', 'fa fa-users', unfollow_project_path(@project) %></li>
+              <li>
+                <div id="HOA-placeholder" data-hoa-title="AgileVentures Pairing: <%= @project.title %> - <%= Time.now.utc.strftime('%d/%m/%Y %H00 %Z') %>"></div>
+              </li>
+          <% else %>
+              <li><%= custom_css_btn 'join project', 'fa fa-users', follow_project_path(@project) %></li>
+          <% end %>
+        </ul>
     <% end %>
   </div>
 </div>
@@ -39,7 +43,8 @@
 <div class="small-divider"></div>
 
 <ul class="nav nav-tabs">
-  <li id="documents" class="active"><a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a></li>
+  <li id="documents" class="active">
+    <a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a></li>
   <li id="members"><a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a></li>
   <li id="videos"><a href="#videos_list" data-toggle="tab"> Videos (<%= @videos.count %>)</a></li>
 </ul>
@@ -48,57 +53,65 @@
 <div class="tab-content">
   <div class="tab-pane active" id="documents_list">
     <% unless @documents.empty? %>
-      <h2>Related documents</h2>
-      <ul class="listings">
-        <% @documents.roots.each do |d| %>
-          <li class="listings-item">
-            <% num_children = d.children.count %>
-            <strong><%= link_to d.title, project_document_path(@project, d) %></strong> <%= "(#{num_children})" if num_children > 0 %>
-            -
-            <i>created by <%= d.user.display_name %> <%= time_ago_in_words(d.created_at) %> ago</i>
-          </li>
-        <% end %>
-      </ul>
+        <h2>Related documents</h2>
+        <ul class="listings">
+          <% @documents.roots.each do |d| %>
+              <li class="listings-item">
+                <% num_children = d.children.count %>
+                <strong><%= link_to d.title, project_document_path(@project, d) %></strong> <%= "(#{num_children})" if num_children > 0 %>
+                -
+                <i>created by <%= d.user.display_name %> <%= time_ago_in_words(d.created_at) %> ago</i>
+              </li>
+          <% end %>
+        </ul>
     <% else %>
-      <p style="margin-top: 20px;">No documents can be found for project <strong><%= @project.title %></strong></p>
+        <p style="margin-top: 20px;">No documents can be found for project <strong><%= @project.title %></strong></p>
     <% end %>
   </div>
   <div class="tab-pane" id="members_list">
     <ul class="listings">
       <% if @members.empty? %>
-        <p style="margin-top: 20px;">No members in project <strong><%= @project.title %></strong></p>
+          <p style="margin-top: 20px;">No members in project <strong><%= @project.title %></strong></p>
       <% else %>
-        <h2>List of Project Members</h2>
-        <% @members.each do |member| %>
-          <li class="listings-item"><strong><%= link_to member.display_name, users_show_path(member) %></strong>
-          </li>
-        <% end %>
+          <h2>List of Project Members</h2>
+          <% @members.each do |member| %>
+              <li class="listings-item"><strong><%= link_to member.display_name, users_show_path(member) %></strong>
+              </li>
+          <% end %>
       <% end %>
     </ul>
   </div>
   <div class="tab-pane" id="videos_list">
     <div class="row">
       <div class="col-md-6">
-        <ul class="listings">
-          <% if @videos.empty? %>
+        <% if @videos.empty? %>
             <p style="margin-top: 20px;">No videos in project <strong><%= @project.title %></strong></p>
-          <% else %>
+        <% else %>
             <h2>List of Project videos</h2>
-            <% @videos.each do |video| %>
-              <li>
-                <%= video_link(video) %> - <i style="font-size: 85%; color: darkgray;">published: <%= video[:published] %></i>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
+            <table class="table table-bordered table-striped table-hover table-condensed" style="margin-left: -15px; width: 100%;">
+              <tr>
+                <th>Video</th>
+                <th style="width: 80px;">Host</th>
+                <th style="width: 80px;">Published</th>
+              </tr>
+              <% @videos.each do |video| %>
+                  <tr style="font-size: 85%">
+                    <td><%= video_link(video) %></td>
+                    <td><%= video[:author] %></td>
+                    <td><%= video[:published].to_s(:db) %></td>
+                  </tr>
+              <% end %>
+            </table>
+        <% end %>
       </div>
       <div class="col-md-6">
         <% unless @videos.empty? %>
-          <h4 id="video_contents"><%= @videos.first[:content] %></h4>
-          <iframe id="ytplayer" type="text/html" width="340" height="210"
-                  src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
-          </div>
+            <h4 id="video_contents"><%= @videos.first[:content] %></h4>
+            <iframe id="ytplayer" type="text/html" width="340" height="210"
+                    src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
+            </div>
         <% end %>
         </div>
+      </div>
   </div>
 </div>

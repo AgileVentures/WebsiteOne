@@ -1,5 +1,6 @@
-<div class="row" style="margin-top: -80px;">
-  <div class="col-md-4 col-md-offset-4">
+<div class="container">
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
     <%= devise_error_messages_flash %>
     <h2>Account details</h2>
   </div>
@@ -10,7 +11,7 @@
   <% end %>
 </div>
 <div class="row">
-  <div class="col-md-1 col-md-offset-4">
+  <div class="col-md-2 col-md-offset-2">
 
     <img src="<%= gravatar_for(resource.email) %>" class="thumbnail img-rounded media-object">
   <p>Member of: <br />
@@ -19,7 +20,7 @@
       <% end %>
  </p>
   </div>
-  <div class="col-md-3 ">
+  <div class="col-md-4 ">
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
         <div><%= f.label :display_profile %>
@@ -39,9 +40,13 @@
           <div class="form-group">
             <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
           </div>
-          <div><%= f.label :display_email %>
+          <div style="margin-bottom: 7px;"><%= f.label :display_email %>
             <%= f.check_box :display_email %>
           </div>
+        </div>
+        <div><%= f.label :skills %>
+          <div id="skills" class="tag-list" style="margin-bottom: 10px;"></div>
+          <%= f.text_field :skill_list, :hidden => true %>
         </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -49,6 +54,17 @@
       <!-- Bryan: To be added back in a later story
         <div><%= f.submit 'Preview', class: 'btn btn-primary btn-lg btn-block', name: 'preview' %></div> -->
         <div><%= f.submit 'Update', class: 'btn btn-primary btn-lg btn-block' %></div>
+
+        <script>
+            $(function () {
+                $('#skills').tags({
+                    readOnly: false,
+                    tagSize: 'lg',
+                    tagData: <%= raw resource.skill_list.to_json %>,
+                    promptText: " "
+                });
+            });
+        </script>
     <% end %>
 
 <!--     <div><%= link_to 'Preview', '#',
@@ -58,7 +74,7 @@
     <% supported_third_parties.each do |provider| %>
       <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
     <% end %>
-
+    <div class="divider"></div>
     <p>Unhappy? You will be sorely missed...</p>
     <%= button_to 'Cancel my account', registration_path(resource_name),
                   :data => {:confirm => 'Are you sure?'}, :method => :delete,
@@ -66,4 +82,25 @@
 
     <%# link_to "Back", :back, :class => 'btn btn-default' %>
   </div>
+</div>
+
+<script>
+    $('#edit_user').bind("keyup keypress", function(e) {
+        var code = e.keyCode || e.which;
+        if (code  == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    $('#edit_user').submit(function(event){
+        $("#user_skill_list").val($("#skills").tags().getTags().join(","));
+    });
+</script>
+
+<style>
+  .tag a {
+      line-height: 18px;
+  }
+</style>
 </div>

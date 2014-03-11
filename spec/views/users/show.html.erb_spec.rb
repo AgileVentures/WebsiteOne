@@ -36,6 +36,8 @@ describe "users/show.html.erb" do
         }
     ]
     assign :youtube_videos, @youtube_videos
+
+    @user.stub(:skill_list).and_return(["rails"])
 	end
 
   it 'renders a table wih video links if there are videos' do
@@ -135,6 +137,11 @@ describe "users/show.html.erb" do
     @projects.each do |project|
       expect(rendered).to have_link(project.title, href: project_path(project))
     end
+  end
+
+  it 'renders list of user skills' do
+    render
+    expect(rendered).to have_css("#skills-show")
   end
 
   it 'renders user statistics'

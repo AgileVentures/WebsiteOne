@@ -6,13 +6,23 @@ describe User do
     @attr = attributes_for(:user)
   end
 
+  it 'should fail for a new user' do
+    new_user = User.new(@attr.merge first_name: nil, last_name: nil, email: nil)
+    new_user.save.should be_false
+  end
+
   it 'should create a new instance given a valid attribute' do
     User.create!(@attr)
   end
 
   it 'should require an email address' do
-    no_email_user = User.new(@attr.merge(:email => ""))
+    no_email_user = User.new(@attr.merge(:email => ''))
     no_email_user.should_not be_valid
+  end
+
+  it 'should not be valid when the email is nil' do
+    user = User.new @attr.merge(email: nil)
+    user.should_not be_valid
   end
 
   it 'should accept valid email addresses' do
@@ -120,6 +130,11 @@ describe User do
     it 'should display the name when first or last name field is empty' do
       user = User.new :first_name => 'Joe', :last_name => ''
       user.display_name.should eq 'Joe'
+    end
+
+    it 'should display anonymous when there is no first name, last name or email' do
+      user = User.new
+      user.display_name.should eq 'Anonymous'
     end
   end
 
