@@ -16,9 +16,12 @@
 //= require jquery.turbolinks
 //= require bootstrap
 //= require nprogressbar
-//= require 404
+//= require bootstrap-datepicker
+//= require bootstrap-timepicker
 //= require typeahead
+//= require bootstrap-tokenfield.min
 //= require bootstrap-tags
+//= require bootstrap/modal
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
@@ -138,7 +141,6 @@ $(function() {
   }
 
 
-
   $(document).on('page:fetch',   function() { NProgress.start(); });
   $(document).on('page:change',  function() { NProgress.done(); });
   $(document).on('page:restore', function() { NProgress.remove(); });
@@ -146,3 +148,5 @@ $(function() {
   $(document).ready($.fn.BryanHATESTHIS);
   $(document).on('page:load', $.fn.BryanHATESTHIS);
 });
+
+

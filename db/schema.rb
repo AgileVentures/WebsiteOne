@@ -132,7 +132,6 @@ ActiveRecord::Schema.define(version: 20140309133549) do
     t.string   "youtube_id"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
-    t.string   "youtube_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"

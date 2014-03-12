@@ -11,4 +11,12 @@ module EventHelper
         ''
     end
   end
+
+  def current_occurrence_time(event)
+    time = nested_hash_value(event, :time)
+
+    return nil if time.nil?
+
+    time.strftime("%F at %I:%M%p")
+  end
 end

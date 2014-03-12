@@ -9,8 +9,10 @@
               <a class="pull-left" id="<%= "avatar-#{user.id}" %>" href="<%= users_show_path user %>">
                 <img id="avatar" src="<%= gravatar_for(user.email) %>" class="thumbnail img-rounded media-object">
               </a>
+
               <div class="media-body">
                 <h4 class="media-heading"><a href="<%= users_show_path user %>"><%= user.display_name %></a></h4>
+
                 <p style="margin-left: 8px;"><%= user.country if user.country.present? %></p>
               </div>
             </li>

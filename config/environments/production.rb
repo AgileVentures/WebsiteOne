@@ -59,7 +59,7 @@ WebsiteOne::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( projects.js users.js bootstrap-datepicker.js bootstrap-timepicker.min.js event_datepicker.js events.js)
+  config.assets.precompile += %w( projects.js users.js bootstrap-datepicker.js bootstrap-tokenfield.min.js bootstrap-tags.js bootstrap-timepicker.min.js event_datepicker.js events.js 404.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
