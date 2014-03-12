@@ -75,6 +75,15 @@
     <% supported_third_parties.each do |provider| %>
       <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
     <% end %>
+    <% if @user.eql?(current_user) %>
+        <div style="margin-top: 10px;">
+          <% if @user.youtube_id %>
+              <%= unlink_from_youtube_button(request.original_url) %>
+          <% else %>
+              <%= link_to_youtube_button(request.original_url) %>
+          <% end %>
+        </div>
+    <% end %>
     <div class="divider"></div>
     <p>Unhappy? You will be sorely missed...</p>
     <%= button_to 'Cancel my account', registration_path(resource_name),

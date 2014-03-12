@@ -36,15 +36,6 @@
     <% end %>
     <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
     <%= link_to 'Hire me', users_show_path(@user), {:remote => true,  class: 'btn btn-primary btn-sm', 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}%>
-    <% if @user.eql?(current_user) %>
-        <div style="margin-top: 10px;">
-        <% if @user.youtube_id %>
-            <%= unlink_from_youtube_button(request.original_url) %>
-        <% else %>
-            <%= link_to_youtube_button(request.original_url) %>
-        <% end %>
-        </div>
-    <% end %>
     <h4>Pair Programming</h4>
     <% unless @youtube_videos.blank? %>
         <table class="table table-bordered table-striped table-hover table-condensed">
