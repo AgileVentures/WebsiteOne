@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305125426) do
+ActiveRecord::Schema.define(version: 20140309133549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 20140305125426) do
     t.string   "name"
     t.string   "category"
     t.text     "description"
-    t.date     "event_date",                                default: '2014-03-06',          null: false
-    t.time     "start_time",                                default: '2000-01-01 14:55:03', null: false
-    t.time     "end_time",                                  default: '2000-01-01 15:25:03', null: false
+    t.date     "event_date",                                null: false
+    t.time     "start_time",                                null: false
+    t.time     "end_time",                                  null: false
     t.string   "repeats"
     t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20140305125426) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "display_email"
+    t.string   "youtube_id"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
     t.float    "latitude"
@@ -137,6 +138,7 @@ ActiveRecord::Schema.define(version: 20140305125426) do
     t.string   "city"
     t.string   "region"
     t.string   "youtube_user_name"
+    t.string   "github_profile_url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
