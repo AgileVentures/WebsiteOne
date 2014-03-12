@@ -62,33 +62,6 @@ describe "users/show.html.erb" do
     expect(rendered).to have_text('Eric Els has no publicly viewable Youtube videos.')
   end
 
-  it 'renders "connect youtube channel" when user views his profile and it is not yet connected' do
-    @user.stub(youtube_id: nil)
-    assign(:youtube_videos, nil)
-    view.stub(current_user: @user)
-
-    render
-    expect(rendered).to have_link('Sync with YouTube')
-  end
-
-  it 'renders "disconnect youtube channel" when user views his profile and is connected' do
-    @user.stub(youtube_id: 'test')
-    assign(:youtube_videos, nil)
-    view.stub(current_user: @user)
-
-    render
-    expect(rendered).to have_link('Disconnect YouTube')
-  end
-
-  it 'does not render "connect youtube channel" when user views other profile' do
-    @user.stub(youtube_id: nil)
-    assign(:youtube_videos, nil)
-    view.stub(current_user: mock_model(User, id: 'test'))
-
-    render
-    expect(rendered).not_to have_text('Link your YouTube channel')
-  end
-
   it 'renders big user avatar' do
     expect(view).to receive(:gravatar_for).with(@user.email ,size: 275).and_return('img_link')
     render
