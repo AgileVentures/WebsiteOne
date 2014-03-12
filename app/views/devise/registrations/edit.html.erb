@@ -76,7 +76,7 @@
       <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
     <% end %>
     <% if @user.eql?(current_user) %>
-        <div style="margin-top: 10px;">
+        <div style="margin-top: 10px;" data-no-turbolink>
           <% if @user.youtube_id %>
               <%= unlink_from_youtube_button(request.original_url) %>
           <% else %>
