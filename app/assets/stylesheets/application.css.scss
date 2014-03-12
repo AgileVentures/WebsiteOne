@@ -30,8 +30,6 @@
 }
 
 label {
-  float: left;
-  text-align: right;
   margin-right: 0.5em;
   display: block
 }
@@ -88,6 +86,12 @@ label {
 #event-container .event-item img {
   margin-left: 8px !important;
   width: 250px;
+}
+
+.btn-agile {
+  color: #FFF;
+  background-color: #F07F48;
+  border-color: #EEA236;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {

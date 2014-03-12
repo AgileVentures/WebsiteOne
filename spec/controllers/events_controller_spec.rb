@@ -135,7 +135,7 @@ describe EventsController do
       end
 
       it 'should render a failure flash message' do
-        expect(flash[:alert]).to eq 'Failed to update event'
+        expect(flash[:alert]).to match 'Failed to update event'
       end
     end
   end
