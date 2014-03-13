@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309133549) do
+ActiveRecord::Schema.define(version: 20140313161712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,16 +49,16 @@ ActiveRecord::Schema.define(version: 20140309133549) do
     t.string   "slug"
   end
 
-  add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
+  add_index "documents", ["slug", "user_id"], name: "index_documents_on_slug_and_user_id", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "events", force: true do |t|
     t.string   "name"
     t.string   "category"
     t.text     "description"
-    t.date     "event_date",                                null: false
-    t.time     "start_time",                                null: false
-    t.time     "end_time",                                  null: false
+    t.date     "event_date",                                default: '2014-03-06',          null: false
+    t.time     "start_time",                                default: '2000-01-01 14:55:03', null: false
+    t.time     "end_time",                                  default: '2000-01-01 15:25:03', null: false
     t.string   "repeats"
     t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
