@@ -27,11 +27,6 @@ class Document < ActiveRecord::Base
     end
   end
 
-  def should_generate_new_friendly_id?
-    return nil if project_id.nil?
-    slug.nil? || project.documents.where('title = ? AND NOT id = ?', title, id).count != 0
-  end
-
   def slug_candidates
     [ :title, [:title, :project_title] ]
   end
