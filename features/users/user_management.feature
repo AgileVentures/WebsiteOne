@@ -57,7 +57,6 @@ Feature: Create and maintain projects
     And I should see "Your account was successfully cancelled."
     And my account should be deleted
 
-  @javascript @selenium
   Scenario: Link my GitHub profile link to my profile
     Given I have a GitHub profile with username "tochman"
     And I want to use third party authentications
@@ -65,18 +64,5 @@ Feature: Create and maintain projects
     When I click "GitHub"
     And my profile should be updated with my GH username
     When I am on "profile" page for user "me"
-    Then I should see "GitHub profile: tochman"
-    When I click "tochman"
-    Then the request should be to "https://github.com/tochman"
-
-
-
-
-
-
-
-
-
-
-
+    Then I should see a link "tochman" to "https://github.com/tochman"
 

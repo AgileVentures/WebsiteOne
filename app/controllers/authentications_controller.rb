@@ -59,14 +59,20 @@ class AuthenticationsController < ApplicationController
   def link_github_profile
     omniauth = request.env['omniauth.auth']
 
-    return unless omniauth['info'].present? && omniauth['info']['urls'].present? && omniauth['info']['urls']['GitHub'].present?
-    current_user.github_profile_url = omniauth['info']['urls']['GitHub']
-
+    url = ''
     begin
-      current_user.save!
-    rescue Exception => e
+      url = omniauth['info']['urls']['GitHub']
+    rescue NoMethodError
+      return
+    end
+
+    user = User.find(current_user.id)
+    if user.update_attributes(github_profile_url: url)
+      # success
+      current_user.reload
+    else
       flash[:alert] = 'Linking your GitHub profile has failed'
-      puts e.message
+      Rails.logger.error user.errors.full_messages
     end
   end
 
