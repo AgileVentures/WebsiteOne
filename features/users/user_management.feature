@@ -17,7 +17,7 @@ Feature: Create and maintain projects
       | Last name             |                     |
       | Email                 | current@email.com   |
 
-  @javascript
+  @javascript @selenium
   Scenario: Editing details: successful
     Given I am on my "Edit Profile" page
     And I fill in "Account details":
@@ -48,7 +48,7 @@ Feature: Create and maintain projects
   #  When I click "Back"
   #  Then I should be on the "Projects" page
 
- @javascript
+  @javascript
   Scenario: Cancel my account
     Given I am on my "Edit Profile" page
     When I click "Cancel my account"
@@ -56,6 +56,20 @@ Feature: Create and maintain projects
     Then I should be on the "home" page
     And I should see "Your account was successfully cancelled."
     And my account should be deleted
+
+  @javascript @selenium
+  Scenario: Link my GitHub profile link to my profile
+    Given I have a GitHub profile with username "tochman"
+    And I want to use third party authentications
+    And I am on my "Edit Profile" page
+    When I click "GitHub"
+    And my profile should be updated with my GH username
+    When I am on "profile" page for user "me"
+    Then I should see "GitHub profile: tochman"
+    When I click "tochman"
+    Then the request should be to "https://github.com/tochman"
+
+
 
 
 

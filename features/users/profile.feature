@@ -65,4 +65,3 @@ Feature: As a user of the site
       | hello jupiter |
 
 
-
