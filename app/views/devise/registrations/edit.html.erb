@@ -103,6 +103,15 @@
         }
     });
 
+    $('#skills').keypress(function(e) {
+        var code = e.keyCode || e.which;
+        if (code == 9 || code == 44) {
+            e.preventDefault();
+            $("#skills").tags().addTag($('input.tags-input').val().replace(",", ""));
+            $('input.tags-input').val("");
+        }
+    });
+
     $('#edit_user').submit(function(event){
         $("#user_skill_list").val($("#skills").tags().getTags().join(","));
     });
