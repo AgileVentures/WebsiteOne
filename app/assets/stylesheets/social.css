@@ -1,6 +1,7 @@
 .btn-social {
     position: relative;
     padding-left: 44px;
+    margin-bottom: 10px;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
