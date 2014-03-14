@@ -27,8 +27,12 @@
     <h4>Skills</h4>
     <div id="skills-show" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
       <div class="tags">
-        <% @user.skill_list.each do |skill| %>
-            <div class="tag label btn-agile md"> <span>&nbsp;&nbsp;<%= skill %>&nbsp;&nbsp;</span></div>
+        <% if @user.skill_list.empty? %>
+            No Skills
+        <% else %>
+            <% @user.skill_list.each do |skill| %>
+                <div class="tag label btn-agile md"> <span>&nbsp;&nbsp;<%= skill %>&nbsp;&nbsp;</span></div>
+            <% end %>
         <% end %>
       </div>
     </div>
