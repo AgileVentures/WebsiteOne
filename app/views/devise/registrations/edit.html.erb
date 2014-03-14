@@ -103,7 +103,7 @@
         }
     });
 
-    $('#skills').keypress(function(e) {
+    $('#skills').bind("keydown keypress", function(e) {
         var code = e.keyCode || e.which;
         if (code == 9 || code == 44) {
             e.preventDefault();
