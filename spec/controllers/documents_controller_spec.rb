@@ -16,6 +16,12 @@ describe DocumentsController do
     @document = FactoryGirl.create(:document)
   end
 
+  it 'should raise an error if no project was found' do
+    expect {
+      get :show, { id: @document.id, project_id: @document.project.id + 3 }, valid_session
+    }.to raise_error ActiveRecord::RecordNotFound
+  end
+
   # Bryan: Deprecated path
   #describe 'GET index' do
   #  before(:each) { get :index, { project_id: document.friendly_id }, valid_session }
@@ -30,16 +36,31 @@ describe DocumentsController do
   #end
 
   describe 'GET show' do
-    before(:each) do
-      get :show, {:id => document.to_param, project_id: document.project.friendly_id}, valid_session
+
+    context 'with a single project' do
+      before(:each) do
+        get :show, {:id => document.to_param, project_id: document.project.friendly_id}, valid_session
+      end
+
+      it 'assigns the requested document as @document' do
+        assigns(:document).should eq(document)
+      end
+
+      it 'renders the show template' do
+        expect(response).to render_template 'show'
+      end
     end
 
-    it 'assigns the requested document as @document' do
-      assigns(:document).should eq(document)
-    end
+    context 'with more than one project' do
+      before(:each) do
+        @document_2 = FactoryGirl.create(:document)
+      end
 
-    it 'renders the show template' do
-      expect(response).to render_template 'show'
+      it 'should not mistakenly render the document under the wrong project' do
+        expect {
+          get :show, { id: document.to_param, project_id: @document_2.project.friendly_id }
+        }.to raise_error ActiveRecord::RecordNotFound
+      end
     end
   end
 
