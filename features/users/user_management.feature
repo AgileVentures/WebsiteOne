@@ -17,7 +17,6 @@ Feature: Create and maintain projects
       | Last name             |                     |
       | Email                 | current@email.com   |
 
-  @javascript
   Scenario: Editing details: successful
     Given I am on my "Edit Profile" page
     And I fill in "Account details":
@@ -26,7 +25,7 @@ Feature: Create and maintain projects
       | Last name             | Doe       |
       | Email                 | a@a.com   |
     When I click the "Update" button
-    Then I should be on the "home" page
+    Then I should be on the "user profile" page for "John"
     And I should see "You updated your account successfully."
 
 #  Scenario: Editing details: failure
