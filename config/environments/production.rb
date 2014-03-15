@@ -17,10 +17,10 @@ WebsiteOne::Application.configure do
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
-  # config.action_dispatch.rack_cache = true
+  config.action_dispatch.rack_cache = true
 
-    config.serve_static_assets = true
-    config.static_cache_control = "public, max-age=31536000"
+  config.serve_static_assets = true
+  config.static_cache_control = "public, max-age=31536000"
 
   # Compress JavaScripts and CSS.
   config.assets.compress = true
