@@ -40,10 +40,19 @@ ActionController::Base.allow_rescue = false
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
+  #DatabaseCleaner.clean_with :truncation
   DatabaseCleaner.strategy = :transaction
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
+
+#Around do |scenario, block|
+#  DatabaseCleaner.start
+#
+#  block.call
+#
+#  DatabaseCleaner.clean
+#end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
@@ -84,23 +93,3 @@ Geocoder::Lookup::Test.add_stub(
     }.as_json
 ]
 )
-
-
-Before('@selenium') do
-  Capybara.current_driver = :selenium
-end
-
-After('@selenium') do
-  Capybara.current_driver = Capybara.default_driver
-end
-
-Before('@time-travel') do
-  @default_tz = ENV['TZ']
-  ENV['TZ'] = 'UTC'
-  Delorean.time_travel_to(Time.parse('2014/02/01 09:15:00 UTC'))
-end
-
-After('@time-travel') do
-  Delorean.back_to_the_present
-  ENV['TZ'] = @default_tz
-end

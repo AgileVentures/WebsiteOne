@@ -8,7 +8,7 @@
 #end
 
 Then(/^I should see "(.*?)" tab is active$/) do |tab|
-    page.find(:css, '#' + tab + ".active")
+    page.should have_css "##{tab}.active"
 end
 
 

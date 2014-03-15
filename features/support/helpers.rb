@@ -1,5 +1,13 @@
 module Helpers
 
+  def default_test_author
+    @default_test_author ||= User.create! first_name: 'Tester',
+                                          last_name: 'Man',
+                                          email: 'testing@test.agileventures.org',
+                                          password: test_user_password,
+                                          password_confirmation: test_user_password
+  end
+
   def test_ip_address
     '127.0.0.1'
   end
