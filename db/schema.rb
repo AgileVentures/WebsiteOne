@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20140313161712) do
     t.string   "city"
     t.string   "region"
     t.string   "youtube_user_name"
+    t.string   "github_profile_url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
