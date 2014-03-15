@@ -277,3 +277,7 @@ end
 When(/^I refresh the page$/) do
   visit current_url
 end
+
+Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
+  page.should have_css "a[href='#{link}']", text: text
+end

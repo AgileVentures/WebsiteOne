@@ -17,7 +17,6 @@ Feature: Create and maintain projects
       | Last name             |                     |
       | Email                 | current@email.com   |
 
-  @javascript
   Scenario: Editing details: successful
     Given I am on my "Edit Profile" page
     And I fill in "Account details":
@@ -26,7 +25,7 @@ Feature: Create and maintain projects
       | Last name             | Doe       |
       | Email                 | a@a.com   |
     When I click the "Update" button
-    Then I should be on the "home" page
+    Then I should be on the "user profile" page for "John"
     And I should see "You updated your account successfully."
 
 #  Scenario: Editing details: failure
@@ -57,12 +56,12 @@ Feature: Create and maintain projects
     And I should see "Your account was successfully cancelled."
     And my account should be deleted
 
-
-
-
-
-
-
-
-
+  Scenario: Link my GitHub profile link to my profile
+    Given I have a GitHub profile with username "tochman"
+    And I want to use third party authentications
+    And I am on my "Edit Profile" page
+    When I click "GitHub"
+    And my profile should be updated with my GH username
+    When I am on "profile" page for user "me"
+    Then I should see a link "tochman" to "https://github.com/tochman"
 

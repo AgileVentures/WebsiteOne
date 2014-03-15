@@ -349,3 +349,16 @@ end
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
   page.all(:css, "#skills-show .tag span").collect { |e| e.text }.sort.should == skills.split(",").sort
 end
+
+And(/^I have a GitHub profile with username "([^"]*)"$/) do |username|
+  @github_profile_url = "https://github.com/#{username}"
+end
+When(/^my profile should be updated with my GH username$/) do
+  @user.github_profile_url = @github_profile_url
+  @user.save
+  expect(@user.github_profile_url).to eq @github_profile_url
+end
+
+Then(/^the request should be to "(.*)"$/) do |url|
+  expect(current_url).to eq url
+end

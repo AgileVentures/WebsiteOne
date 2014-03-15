@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   def show
     raise 'Deprecated Numeric ID' if params[:id] =~ /^\d+$/
     @user = User.friendly.find(params[:id])
+    @skills = @user.skill_list
 
     @users_projects = @user.following_by_type('Project')
 
