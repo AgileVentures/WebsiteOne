@@ -1,5 +1,3 @@
-require 'delorean'
-
 Given(/^I am on Events index page$/) do
   visit('/events')
 end
