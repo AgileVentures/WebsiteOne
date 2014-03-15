@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309133549) do
+ActiveRecord::Schema.define(version: 20140313161712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20140309133549) do
     t.string   "slug"
   end
 
-  add_index "documents", ["slug"], name: "index_documents_on_slug", unique: true, using: :btree
+  add_index "documents", ["slug", "user_id"], name: "index_documents_on_slug_and_user_id", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "events", force: true do |t|
@@ -138,7 +138,6 @@ ActiveRecord::Schema.define(version: 20140309133549) do
     t.string   "city"
     t.string   "region"
     t.string   "youtube_user_name"
-    t.string   "github_profile_url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

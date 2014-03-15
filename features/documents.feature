@@ -1,4 +1,3 @@
-@focus
 Feature: Manage Document
   As a project member
   So that I can share my work related to a project
@@ -68,7 +67,6 @@ Feature: Manage Document
 
 #NOTE: below scenario is for children's documents of documents, not projects'
 
-  # Bryan: DESCENDING means SubDoc1 comes first (the most recent date is greater)
   Scenario: Documents children should be sorted in DESCENDING order by create date
     Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
     Given the document "Guides" has a sub-document with title "SubDoc2" created 10 days ago
@@ -76,15 +74,6 @@ Feature: Manage Document
     Then I should see the sub-documents in this order:
       | SubDoc1 |
       | SubDoc2 |
-
-
-#Scenario: Destroy a document
-#  Given I am logged in
-#  Given I am on the "Show" page for project "hello world"
-## And I am on the "Documents" page for project "hello world"
-#  When I click the "Destroy" button for document "Howto"
-#  Then I should be on the "Documents" page for project "hello world"
-#  And I should see "Document was successfully deleted."
 
   Scenario: Has a link to edit a document using the Mercury Editor
     Given the document "Guides" has a child document with title "Howto"
@@ -96,7 +85,6 @@ Feature: Manage Document
   @javascript @selenium
   Scenario: Mercury editor shows Save and Cancel buttons, hides New Document button,
   Save button works
-
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
@@ -117,10 +105,9 @@ Feature: Manage Document
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
-
     When I fill in the editable field "Title" with "My new title"
     And I click "Cancel" in Mercury Editor
-    And I should be on the "Show" page for document "Howto"
+    Then I should be on the "Show" page for document "Howto"
     And I should see "Howto"
 
   Scenario: The Mercury Editor cannot be accessed by non-logged in users
