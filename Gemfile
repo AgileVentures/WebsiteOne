@@ -38,6 +38,9 @@ gem 'squeel'
 gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??
 gem 'addressable'       # used for uri validation
 
+gem 'yui-compressor'
+gem 'compass-rails'
+
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
@@ -64,11 +67,4 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'unicorn'
-  gem 'heroku_rails_deflate'
-  gem 'sprockets-image_compressor'
-end
-
-group :assets do
-  gem 'compass-rails'
-  # Add any compass extensions here
 end
