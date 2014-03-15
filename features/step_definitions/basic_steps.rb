@@ -216,40 +216,6 @@ end
 #  page.should have_content(string)
 #end
 
-Given(/^I want to use third party authentications$/) do
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:github] = {
-      'provider' => 'github',
-      'uid' => '12345678',
-      'info' => {
-          'email' => 'mock@email.com'
-      }
-  }
-  OmniAuth.config.mock_auth[:gplus] = {
-      'provider' => 'gplus',
-      'uid' => '12345678',
-      'info' => {
-          'email' => 'mock@email.com'
-      },
-      'credentials' => {'token' => 'test_token'}
-  }
-end
-
-Given(/^I want to use third party authentications without a public email$/) do
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:github] = {
-      'provider' => 'github',
-      'uid' => '12345678',
-      'info' => {}
-  }
-  OmniAuth.config.mock_auth[:gplus] = {
-      'provider' => 'gplus',
-      'uid' => '12345678',
-      'info' => {},
-      'credentials' => {'token' => 'test_token'}
-  }
-end
-
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
   find(:css, %Q{a[data-link-text="#{button.downcase}"]}).click()
 end
