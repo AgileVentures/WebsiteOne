@@ -82,7 +82,7 @@ Feature: Manage Document
     When I click the very stylish "Edit" button
     Then I should be in the Mercury Editor
 
-  @javascript @selenium
+  @javascript
   Scenario: Mercury editor shows Save and Cancel buttons, hides New Document button,
   Save button works
     Given the document "Guides" has a child document with title "Howto"
@@ -99,7 +99,7 @@ Feature: Manage Document
     And I should be on the "Show" page for document "My new title"
     And I should see "This is my new body text"
 
-  @javascript @selenium
+  @javascript
   Scenario: Mercury editor Cancel button works
 
     Given the document "Guides" has a child document with title "Howto"
@@ -116,7 +116,7 @@ Feature: Manage Document
     And I try to use the Mercury Editor to edit document "Documentation"
     Then I should see "You do not have the right privileges to complete action."
 
-  @javascript @selenium
+  @javascript
   Scenario: The Mercury Editor save button works
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in

@@ -89,7 +89,7 @@ Feature: As a site owner
     Then I should see "WebsiteOne - Pairing session"
     But I should not see "Autograders"
 
-  @javascript @selenium
+  @javascript
   Scenario: Selecting videos from the list
     And my YouTube Channel ID with some videos in it
     And my YouTube channel is connected

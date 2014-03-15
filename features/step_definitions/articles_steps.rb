@@ -21,6 +21,8 @@ end
 
 Then(/^I should see a preview containing:$/)  do   |table|
   content = table.raw.flatten
+
+  # Bryan: for selenium javascript drivers
   new_window=page.driver.browser.window_handles.last
   page.within_window new_window do
     content.each do |text|

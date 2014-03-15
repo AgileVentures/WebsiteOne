@@ -1,11 +1,3 @@
-Before('@selenium') do
-  Capybara.current_driver = :selenium
-end
-
-After('@selenium') do
-  Capybara.current_driver = Capybara.default_driver
-end
-
 Before('@time-travel') do
   @default_tz = ENV['TZ']
   ENV['TZ'] = 'UTC'

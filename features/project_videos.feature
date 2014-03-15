@@ -45,7 +45,7 @@ Feature: See project related videos
     Given I am on the "Show" page for project "hello world"
     And I should see video "WebsiteOne - Pairing session - refactoring authentication controller" in "player"
 
-  @javascript @selenium
+  @javascript
   Scenario: Selecting videos from the list
     Given I am on the "Show" page for project "hello world"
     When I click "Videos (7)"

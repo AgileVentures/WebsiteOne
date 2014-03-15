@@ -8,16 +8,14 @@ Feature: As a member of the Agile Ventures team
       | Alice       | Jones       | alice@btinternet.co.uk  |     false       |
       | Bob         | Butcher     | bobb112@hotmail.com     |     true        |
 
- @javascript @selenium
- Scenario: Sending a message to user with 'Hire me' button
-   Given I visit Bob's profile page
-   When I click "Hire me"
-   Then I should see a modal window with a form "Contact Bob Butcher"
-   And I fill in "f-name" with "Anonymous user"
-   And I fill in "f-email" with "anonymous@isp.net"
-   And I fill in "f-message" with "I want to hire you"
-   And I click the "Send message" button
-   Then The user should receive a "message from Anonymous user" email
-   Then I should see "Your message has been sent successfully!"
-
-
+  @javascript @selenium
+  Scenario: Sending a message to user with 'Hire me' button
+    Given I visit Bob's profile page
+    When I click "Hire me"
+    Then I should see a modal window with a form "Contact Bob Butcher"
+    And I fill in "f-name" with "Anonymous user"
+    And I fill in "f-email" with "anonymous@isp.net"
+    And I fill in "f-message" with "I want to hire you"
+    And I click the "Send message" button within the modal dialog
+    Then The user should receive a "message from Anonymous user" email
+    Then I should see "Your message has been sent successfully!"

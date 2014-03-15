@@ -36,7 +36,7 @@ module Helpers
   def create_test_user(options = {})
     skills = options.delete "skills"
     options = default_test_user_details.merge options
-    user = User.create!(options)
+    user = User.new(options)
     user.skill_list = skills
     user.save!
   end

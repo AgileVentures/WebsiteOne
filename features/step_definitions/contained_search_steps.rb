@@ -13,6 +13,9 @@ def css_selector_for(container)
     when 'list of projects'
       '#project-list'
 
+    when 'modal dialog'
+      '#modal-window'
+
     else
       pending
   end

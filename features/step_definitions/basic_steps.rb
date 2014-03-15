@@ -96,7 +96,7 @@ When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
 end
 
 When /^I accept the warning popup$/ do
-  # works only with @javascript tagged scenario
+  # works only with webkit javascript drivers
   page.driver.browser.accept_js_confirms
 end
 

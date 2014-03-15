@@ -48,7 +48,7 @@ Feature: Create and maintain projects
   #  When I click "Back"
   #  Then I should be on the "Projects" page
 
- @javascript
+  @javascript @webkit
   Scenario: Cancel my account
     Given I am on my "Edit Profile" page
     When I click "Cancel my account"
