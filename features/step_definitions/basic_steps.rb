@@ -232,14 +232,14 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
   end
 end
 
-Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
-  page.should have_text string
-end
-
-
-And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
-  page.should have_text string
-end
+#Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
+#  page.should have_text string
+#end
+#
+#
+#And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
+#  page.should have_text string
+#end
 
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
