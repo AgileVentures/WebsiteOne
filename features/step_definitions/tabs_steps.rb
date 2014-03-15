@@ -10,6 +10,3 @@
 Then(/^I should see "(.*?)" tab is active$/) do |tab|
     page.should have_css "##{tab}.active"
 end
-
-
-
