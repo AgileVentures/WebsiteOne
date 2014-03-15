@@ -22,7 +22,7 @@ GIT
       omniauth-oauth2 (~> 1.1)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://bundler-api.herokuapp.com/
   specs:
     actionmailer (4.0.2)
       actionpack (= 4.0.2)
@@ -283,6 +283,8 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sprockets-image_compressor (0.2.2)
+      sprockets
     sprockets-rails (2.0.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -386,6 +388,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.0)
   selenium-webdriver
+  sprockets-image_compressor
   squeel
   therubyracer
   turbolinks

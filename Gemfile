@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://bundler-api.herokuapp.com'
 ruby '2.0.0'
 gem 'rails', '4.0.2'
 gem 'pg'  # PostgreSQL database support
@@ -65,6 +65,7 @@ group :production do
   gem 'rails_12factor'
   gem 'unicorn'
   gem 'heroku_rails_deflate'
+  gem 'sprockets-image_compressor'
 end
 
 group :assets do
