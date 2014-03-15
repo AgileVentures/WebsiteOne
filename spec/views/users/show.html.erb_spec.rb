@@ -38,7 +38,8 @@ describe "users/show.html.erb" do
     ]
     assign :youtube_videos, @youtube_videos
 
-    @user.stub(:skill_list).and_return(["rails"])
+    @skills = ["rails", "ruby", "rspec"]
+    assign :skills, @skills
 	end
 
   it 'renders a table wih video links if there are videos' do

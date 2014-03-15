@@ -95,11 +95,16 @@
 </div>
 
 <script>
-    $('#edit_user').bind("keyup keypress", function(e) {
+    $('#skills').bind("keydown keypress", function(e) {
         var code = e.keyCode || e.which;
-        if (code  == 13) {
+        if (code == 9 || code == 44) {
             e.preventDefault();
-            return false;
+            $("#skills").tags().addTag($('input.tags-input').val().replace(",", ""));
+            $('input.tags-input').val("");
+        }
+        // Sampriti: Let bootstrap-tags handle Enter event
+        else if (code == 13){
+            e.preventDefault();
         }
     });
 

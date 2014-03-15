@@ -209,6 +209,8 @@ describe AuthenticationsController do
     it 'links Github profile when authenticate with GitHub' do
       user = stub_model(User, github_profile_url: nil)
       controller.stub(current_user: user)
+      User.stub(find: user)
+      user.stub(:reload)
 
       expect(controller).to receive(:link_github_profile).and_call_original
       get :create, provider: 'github'

@@ -30,7 +30,17 @@
     <% end %>
 
     <h4>Skills</h4>
-    <div id="skills-show" class="tag-list" style="padding-left:25px;"></div>
+    <div id="skills-show" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
+      <div class="tags">
+        <% if @skills.empty? %>
+            No Skills
+        <% else %>
+            <% @skills.each do |skill| %>
+                <div class="tag label btn-agile md"> <span>&nbsp;&nbsp;<%= skill %>&nbsp;&nbsp;</span></div>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -72,14 +82,11 @@
 
 </div>
 
-<script>
-    $(function () {
-        $('#skills-show').tags({
-            readOnly: true,
-            tagClass: 'btn-agile',
-            tagSize: "md",
-            tagData: <%= raw @user.skill_list.to_json %>,
-            readOnlyEmptyMessage: "No Skills"
-        });
-    });
-</script>
+<style>
+  .tag {
+      margin-bottom: 0.4em!important;
+  }
+  .tags {
+      position: initial!important;
+  }
+</style>
