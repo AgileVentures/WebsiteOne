@@ -150,12 +150,3 @@ Feature: Create and maintain projects
     Given The project "hello world" has 5 members
     And I am on the "Show" page for project "hello world"
     Then I should see "Members (5)"
-
-#  Scenarios for DESTROY action commented out until this functionality is needed
-
-#  Scenario: Destroying a project: successful
-#    Given I am logged in
-#    And I am on the "projects" page
-#    When I click the "Destroy" button for project "hello mars"
-#    Then I should be on the "projects" page
-#    And I should see "Project was successfully deleted."

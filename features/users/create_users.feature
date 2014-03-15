@@ -16,7 +16,6 @@ Feature: As a developer
     And I should receive a "Welcome to AgileVentures.org" email
     And replies to that email should go to "info@agileventures.org"
 
-
   Scenario: User signs up with valid data
     When I sign up with valid user data
     Then I should see a successful sign up message
@@ -37,15 +36,15 @@ Feature: As a developer
     When I sign up with a mismatched password confirmation
     Then I should see a mismatched password message
 
+  @omniauth
   Scenario: User signs up with a GitHub account
     Given I am on the "registration" page
-    And I want to use third party authentications
     When I click "GitHub"
     Then I should see "Signed in successfully."
 
+  @omniauth-without-email
   Scenario: User signs up with a GitHub account having no public email (sad path)
     Given I am on the "registration" page
-    And I want to use third party authentications without a public email
     When I click "GitHub"
     Then I should see "Email can't be blank"
     

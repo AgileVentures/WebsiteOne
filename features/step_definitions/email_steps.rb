@@ -1,5 +1,5 @@
-And /^(The user|I) should receive a "(.*?)" email$/ do |form, arg1|
-  expect(ActionMailer::Base.deliveries[0].subject).to include(arg1)
+And /^(?:The user|I) should receive a "(.*?)" email$/ do |subject|
+  expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
   ActionMailer::Base.deliveries.size.should eq 1
 end
 
