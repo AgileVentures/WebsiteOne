@@ -128,7 +128,7 @@ Feature: Create and maintain projects
     Given I am logged in
     And I am on the "Edit" page for projects "hello mars"
     When I click "Back"
-    Then I should be on the "projects" page
+    Then I should be on the "Show" page for project "hello mars"
 
   Scenario: Updating a project: success
     Given I am logged in
