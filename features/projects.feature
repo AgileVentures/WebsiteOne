@@ -94,9 +94,8 @@ Feature: Create and maintain projects
       | Description | Description New |
     And I select "Status" to "Active"
     And I click the "Submit" button
-    Then I should be on the "projects" page
+    Then I should be on the "Show" page for project "Title New"
     And I should see "Project was successfully created."
-    When I go to the next page
     And I should see:
       | Text            |
       | Title New       |
@@ -136,7 +135,7 @@ Feature: Create and maintain projects
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I click the "Submit" button
-    Then I should be on the "projects" page
+    Then I should be on the "Show" page for project "hello mars"
     And I should see "Project was successfully updated."
     And I should see "Hello, Uranus!"
 
