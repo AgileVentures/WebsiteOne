@@ -64,6 +64,7 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'unicorn'
+  gem 'heroku_rails_deflate'
 end
 
 group :assets do
