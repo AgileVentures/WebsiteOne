@@ -41,6 +41,7 @@ gem 'addressable'       # used for uri validation
 gem 'yui-compressor'
 gem 'compass-rails'
 gem 'rack-cache'
+gem 'sprockets-image_compressor'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
