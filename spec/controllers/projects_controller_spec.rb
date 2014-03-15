@@ -109,7 +109,7 @@ describe ProjectsController do
 
         post :create, @params
 
-        expect(response).to redirect_to(projects_path)
+        expect(response).to redirect_to(project_path(@project))
       end
       it 'assigns successful message' do
         @project.stub(:save).and_return(true)
@@ -219,7 +219,7 @@ describe ProjectsController do
       end
 
       it 'redirects to the project' do
-        expect(response).to redirect_to(projects_path)
+        expect(response).to redirect_to(project_path(@project))
       end
 
       it 'shows a success message' do
