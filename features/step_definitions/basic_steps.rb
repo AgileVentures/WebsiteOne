@@ -307,3 +307,8 @@ end
 #Then(/^I wait for my slow internet to load$/) do
 #  sleep(5)
 #end
+
+
+Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
+  page.should have_css "a[href='#{link}']", text: text
+end
