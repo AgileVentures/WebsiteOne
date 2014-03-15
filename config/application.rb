@@ -24,8 +24,6 @@ module WebsiteOne
     I18n.enforce_available_locales = false
 
     config.assets.enabled = true
-    config.serve_static_assets = true
-    config.static_cache_control = "public, max-age=31536000"
   end
 
 
