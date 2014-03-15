@@ -8,7 +8,7 @@ Feature: As a member of the Agile Ventures team
       | Alice       | Jones       | alice@btinternet.co.uk  |     false       |
       | Bob         | Butcher     | bobb112@hotmail.com     |     true        |
 
-  @javascript @selenium
+  @javascript
   Scenario: Sending a message to user with 'Hire me' button
     Given I visit Bob's profile page
     When I click "Hire me"

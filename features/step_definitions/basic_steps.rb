@@ -28,9 +28,9 @@ def path_to(page_name, id = '')
       users_show_path(id)
     when 'my account' then
       edit_user_registration_path(id)
-    when "foobar" then
+    when 'foobar' then
       visit ("/#{page}")
-    when "supporters" then
+    when 'supporters' then
       page_path('sponsors')
     else
       raise('path to specified is not listed in #path_to')
@@ -39,8 +39,12 @@ end
 
 # GIVEN steps
 
-Given(/^I visit the site$/) do
+Given(/^I (?:visit|am on) the site$/) do
   visit root_path
+end
+
+Given(/^I visit "(.*?)"$/) do |path|
+  visit path
 end
 
 # WHEN steps
