@@ -56,7 +56,7 @@ Feature: As a site user
 #    Then "Display email" should be checked
 #    And I should see my email in the preview
 
-  @javascript @webkit
+  @javascript
   Scenario: Should be able to make my email public
     Given I am logged in
     And I am on my "Edit Profile" page
@@ -65,7 +65,7 @@ Feature: As a site user
     And I click "Update"
     Then I should see my email
 
-  @javascript @webkit
+  @javascript
   Scenario: Should be able to make my email private again
     Given I am logged in
     And My email was set to public
