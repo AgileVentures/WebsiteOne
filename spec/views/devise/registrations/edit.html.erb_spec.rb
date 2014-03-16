@@ -98,6 +98,12 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).not_to have_text('Link your YouTube channel')
   end
 
+  it 'should NOT have data-no-turbolink attribute around the youtube button' do
+    render
+
+    rendered.should_not have_css '[data-no-turbolink] .fa-youtube'
+  end
+
   #it "displays a preview button" do
   #  render
   #  expect(rendered).to have_link 'Preview'
