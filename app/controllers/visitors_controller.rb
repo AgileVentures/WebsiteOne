@@ -1,5 +1,6 @@
 class VisitorsController < ApplicationController
   include ApplicationHelper
+  caches_page :index
 
   def index
     @message = ''
