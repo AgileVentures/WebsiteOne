@@ -57,23 +57,16 @@ Feature: As a site user
 #    And I should see my email in the preview
 
   Scenario: Should be able to make my email public
-   # Given I am logged in
-    Given I exist as a user
-    And I am not logged in
-    When I sign in with valid credentials
-    Then I see a successful sign in message
+    Given I am logged in
     And I am on my "Edit Profile" page
     And "Display email" should not be checked
     When I set my email to be public
     And I click "Update"
-    #Then I should be on the "profile" page for "me"
-    #And I am on "profile" page for user "me"
-    #And I am on my "Profile" page
+    And I am on my "Profile" page
     Then I should see my email
 
   Scenario: Should be able to make my email private again
-    #Given I am logged in
-
+    Given I am logged in
     And My email was set to public
     And I am on my "Edit Profile" page
     Then "Display email" should be checked
@@ -81,8 +74,6 @@ Feature: As a site user
     And I click "Update"
     And I am on my "Profile" page
     Then I should not see my email
-
-
 
     # Bryan: To be added back later in another story
 #  Scenario: Should be able to make my email private again
