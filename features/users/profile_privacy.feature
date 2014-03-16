@@ -59,18 +59,10 @@ Feature: As a site user
   @javascript @webkit
   Scenario: Should be able to make my email public
     Given I am logged in
-#    Given I exist as a user
-#    And I am not logged in
-#    When I sign in with valid credentials
-#    Then I see a successful sign in message
     And I am on my "Edit Profile" page
     And "Display email" should not be checked
     When I set my email to be public
     And I click "Update"
-    And show me the page
-    #Then I should be on the "profile" page for "me"
-    #And I am on "profile" page for user "me"
-    #And I am on my "Profile" page
     Then I should see my email
 
   @javascript @webkit
@@ -83,8 +75,6 @@ Feature: As a site user
     And I click "Update"
     And I am on my "Profile" page
     Then I should not see my email
-
-
 
     # Bryan: To be added back later in another story
 #  Scenario: Should be able to make my email private again
