@@ -94,9 +94,8 @@ Feature: Create and maintain projects
       | Description | Description New |
     And I select "Status" to "Active"
     And I click the "Submit" button
-    Then I should be on the "projects" page
+    Then I should be on the "Show" page for project "Title New"
     And I should see "Project was successfully created."
-    When I go to the next page
     And I should see:
       | Text            |
       | Title New       |
@@ -129,14 +128,14 @@ Feature: Create and maintain projects
     Given I am logged in
     And I am on the "Edit" page for projects "hello mars"
     When I click "Back"
-    Then I should be on the "projects" page
+    Then I should be on the "Show" page for project "hello mars"
 
   Scenario: Updating a project: success
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I click the "Submit" button
-    Then I should be on the "projects" page
+    Then I should be on the "Show" page for project "hello mars"
     And I should see "Project was successfully updated."
     And I should see "Hello, Uranus!"
 
@@ -151,12 +150,3 @@ Feature: Create and maintain projects
     Given The project "hello world" has 5 members
     And I am on the "Show" page for project "hello world"
     Then I should see "Members (5)"
-
-#  Scenarios for DESTROY action commented out until this functionality is needed
-
-#  Scenario: Destroying a project: successful
-#    Given I am logged in
-#    And I am on the "projects" page
-#    When I click the "Destroy" button for project "hello mars"
-#    Then I should be on the "projects" page
-#    And I should see "Project was successfully deleted."

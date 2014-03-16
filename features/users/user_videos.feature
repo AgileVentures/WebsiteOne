@@ -1,10 +1,10 @@
+@omniauth
 Feature: As a site owner
   So I can make collaboration among registered users easier
   I would like to display a index of users with links to user profiles
 
   Background:
-    Given I want to use third party authentications
-    And I am logged in
+    Given I am logged in
     And the following users exist
       | first_name | last_name | email                  | password |
       | Alice      | Jones     | alice@btinternet.co.uk | 12345678 |
@@ -89,7 +89,7 @@ Feature: As a site owner
     Then I should see "WebsiteOne - Pairing session"
     But I should not see "Autograders"
 
-  @javascript @selenium
+  @javascript
   Scenario: Selecting videos from the list
     And my YouTube Channel ID with some videos in it
     And my YouTube channel is connected

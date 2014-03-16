@@ -2,10 +2,6 @@ Given(/^App is in production$/) do
   Rails.env.stub(production?: true)
 end
 
-Given(/^I visit "(.*?)"$/) do |path|
-  visit 'http://0.0.0.0:3000/' + path
-end
-
 Then(/^the page should be titled "(.*?)"$/) do |title|
   page.source.should have_css("title", :text => title, :visible => false)
 end

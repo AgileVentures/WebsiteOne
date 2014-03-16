@@ -1,4 +1,3 @@
-@focus
 Feature: Sidebar navigation
   As a user
   So that I may navigate through project documents with ease

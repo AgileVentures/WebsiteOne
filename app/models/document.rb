@@ -32,6 +32,7 @@ class Document < ActiveRecord::Base
   end
 
   def project_title
+    return nil if project_id.nil?
     project.title
   end
 end
