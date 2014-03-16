@@ -95,7 +95,7 @@ module ApplicationHelper
 
     raw <<-HTML
     <div data-no-turbolink>
-      <a class="btn btn-block btn-social btn-#{provider}" #{'method="delete" ' if options[:delete]}href=#{path}>
+      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'method="delete" ' if options[:delete]}href=#{path}>
         <i class="fa fa-#{fa_icon[provider]}"></i> #{text} #{display_name[provider]}
       </a>
     </div>
