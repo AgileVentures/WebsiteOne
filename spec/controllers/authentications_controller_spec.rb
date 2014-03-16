@@ -197,6 +197,7 @@ describe AuthenticationsController do
       expect(response).to redirect_to 'back_path'
     end
   end
+
   describe 'Github profile link' do
     before(:each) do
       controller.stub(authenticate_user!: true)

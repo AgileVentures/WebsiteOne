@@ -9,12 +9,11 @@ Feature:
 
   Background:
     Given the following projects exist:
-
       | title       | description          | status   |
       | hello world | greetings earthlings | active   |
       | hello mars  | greetings aliens     | inactive |
 
-    Given I am on the "Projects" page
+    And I am on the "Projects" page
 
 	Scenario: See Sponsor Banners
 		Then I should see sponsor banner for "Makers Academy"

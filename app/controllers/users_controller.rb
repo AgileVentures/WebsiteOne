@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     begin
       test = params['message_form']
       user = User.where(id: test['recipient_id']).first
-      if test['name'].empty? or test['message'].empty?
-        redirect_to :back, alert: 'Please, fill in Name and Message field'
+      if test['name'].empty? or test['email'].empty? or test['message'].empty?
+        redirect_to :back, alert: 'Please fill in Name, Email and Message field'
         return
       end
       if Mailer.hire_me_form(user, test).deliver
@@ -18,11 +18,9 @@ class UsersController < ApplicationController
       else
         redirect_to :back, alert: 'Your message has not been sent!'
       end
-
-
-
-    rescue ActionController::RedirectBackError
-      redirect_to :back
+    rescue Exception => e
+      Rails.logger.error e
+      redirect_to :back, alert: 'Something went terribly wrong'
     end
   end
 
