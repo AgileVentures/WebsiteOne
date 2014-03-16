@@ -14,7 +14,7 @@
           <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
         </div>
         <div class='form-group'>
-          <%= link_to 'Back', projects_path, :type => 'button', :class => 'btn btn-default'%>
+          <%= link_to 'Back', (@project.id.nil? ? projects_path : project_path(@project)), :type => 'button', :class => 'btn btn-default'%>
           <%= f.submit 'Submit', :class => 'btn btn-default' %>
         </div>
     <% end %>

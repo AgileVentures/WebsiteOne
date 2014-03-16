@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'projects/edit.html.erb' do
   before :each do
-    Project.create(id: 1, title: "Title 1", description: "Description 1", status: "Status 1")
+    @project = Project.create(id: 1, title: "Title 1", description: "Description 1", status: "Status 1")
 
-    assign(:project, Project.first)
+    assign(:project, @project)
   end
 
   it 'renders project form labels' do
@@ -30,7 +30,7 @@ describe 'projects/edit.html.erb' do
 
   it 'renders Back button' do
     render
-    rendered.should have_link('Back', :href => projects_path)
+    rendered.should have_link('Back', :href => project_path(@project))
   end
 
 end

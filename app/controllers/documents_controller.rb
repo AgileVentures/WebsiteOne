@@ -1,8 +1,8 @@
 class DocumentsController < ApplicationController
   layout 'with_sidebar'
+  before_action :find_project
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show, :create]
-  before_action :find_project
 
 
   # GET /documents
@@ -88,15 +88,17 @@ class DocumentsController < ApplicationController
 
   private
   def find_project
-    if params[:project_id]
-      raise 'USING ID ERROR' if params[:project_id] =~ /^\d+$/
-      @project = Project.friendly.find(params[:project_id])
-    end
+    # Bryan: Redundant
+    #if params[:project_id]
+      #raise 'USING ID ERROR' if params[:project_id] =~ /^\d+$/
+    @project = Project.friendly.find(params[:project_id])
+    #end
   end
 
   def set_document
-    raise 'USING ID ERROR' if params[:id] =~ /^\d+$/
-    @document = Document.friendly.find(params[:id])
+    # Bryan: Redundant
+    #raise 'USING ID ERROR' if params[:id] =~ /^\d+$/
+    @document = @project.documents.find_by_slug!(params[:id])
   end
 
   def set_parent

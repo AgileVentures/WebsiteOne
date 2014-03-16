@@ -3,6 +3,10 @@ WebsiteOne
 
 A website for Agile Ventures
 
+## Dependencies
+
+The tests requires `phantomjs` to run the cucumber tests, refer to the [Poltergeist](https://github.com/jonleighton/poltergeist)
+
 [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.png)](https://coveralls.io/r/AgileVentures/WebsiteOne)
 
 [![AgileVentures WebsiteOne](http://img.youtube.com/vi/kjDehcx6Igk/0.jpg)](http://www.youtube.com/watch?v=kjDehcx6Igk)
