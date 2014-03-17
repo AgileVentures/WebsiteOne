@@ -81,6 +81,7 @@ Feature: As a site user
     And I am on my "Profile" page
     Then I should not see button "Hire me"
 
+  @javascript
   Scenario: Should be able to make my Hire Me button public
     Given I am logged in
     And I am on my "Edit Profile" page
@@ -89,6 +90,7 @@ Feature: As a site user
     And I click "Update"
     Then I should see button "Hire me"
 
+  @javascript
   Scenario: Should be able to make my Hire Me button private again
     Given I am logged in
     And My hire me was set to public

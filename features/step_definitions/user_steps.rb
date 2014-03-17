@@ -266,7 +266,7 @@ Then(/^My email should be public$/) do
 end
 
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
-  value = value.to_s.underscore
+  value = value.underscore
   if option == 'public'
     check("user_display_#{value}")
   else
@@ -277,7 +277,7 @@ When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
 end
 
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
-  @user.update_attributes("display_#{value.underscore}" => (option == 'public'))
+  @user.update_attributes("display_#{value.underscore}".to_sym => (option == 'public'))
 end
 
 # Bryan: To be deleted
