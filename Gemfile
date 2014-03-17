@@ -42,7 +42,6 @@ group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
   gem 'capybara-webkit'  # Headless driver for capybara
-  gem 'selenium-webdriver' # Headful driver for capybara
   gem 'poltergeist', '1.5.0' # yet another headless driver for capybara
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
