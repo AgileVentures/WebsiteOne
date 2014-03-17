@@ -17,6 +17,7 @@ Feature: Create and maintain projects
       | Last name             |                     |
       | Email                 | current@email.com   |
 
+  @javascript
   Scenario: Editing details: successful
     Given I am on my "Edit Profile" page
     And I fill in "Account details":
