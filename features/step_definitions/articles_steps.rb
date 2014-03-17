@@ -14,12 +14,14 @@ Given(/^the following articles exist:$/) do |table|
   end
 end
 
-Then(/^I should see a preview containing:$/)  do   |table|
-  content = table.raw.flatten
+When(/^I click the Preview button$/) do
+  find_button("Preview").trigger("click")
+  sleep(0.1)
+end
 
-  # Bryan: for selenium javascript drivers
-  new_window=page.driver.browser.window_handles.last
-  page.within_window new_window do
+Then(/^I should see a preview containing:$/) do |table|
+  content = table.raw.flatten
+  page.within_window(page.driver.window_handles.last) do
     content.each do |text|
       page.should have_text text
     end
