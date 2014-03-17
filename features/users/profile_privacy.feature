@@ -79,7 +79,7 @@ Feature: As a site user
   Scenario: Hire Me button should be private by default
     Given I am logged in
     And I am on my "Profile" page
-    Then I should not see button "Hire Me"
+    Then I should not see button "Hire me"
 
   Scenario: Should be able to make my Hire Me button public
     Given I am logged in
@@ -87,7 +87,7 @@ Feature: As a site user
     And "Display Hire Me" should not be checked
     When I set my Hire Me to be public
     And I click "Update"
-    Then I should see button "Hire Me"
+    Then I should see button "Hire me"
 
   Scenario: Should be able to make my Hire Me button private again
     Given I am logged in
@@ -97,7 +97,7 @@ Feature: As a site user
     When I set my Hire Me to be private
     And I click "Update"
     And I am on my "Profile" page
-    Then I should not see button "Hire Me"
+    Then I should not see button "Hire me"
 
     # Bryan: To be added back later in another story
 #  Scenario: Should be able to make my email private again
