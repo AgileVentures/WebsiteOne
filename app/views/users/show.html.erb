@@ -48,9 +48,11 @@
   <div class="col-md-5 col-sm-5">
     <% if @user.display_email %>
         <h3> <%= @user.email %></h3>
+        <% end %>
+  <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
+    <% if @user.display_hire_me %>
+        <%= link_to 'Hire me', users_show_path(@user), {:remote => true,  class: 'btn btn-primary btn-sm', 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}%>
     <% end %>
-    <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
-    <%= link_to 'Hire me', users_show_path(@user), {:remote => true,  class: 'btn btn-primary btn-sm', 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}%>
     <h4>Pair Programming</h4>
     <% unless @youtube_videos.blank? %>
         <table class="table table-bordered table-striped table-hover table-condensed">
