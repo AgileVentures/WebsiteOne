@@ -266,6 +266,7 @@ Then(/^My email should be public$/) do
 end
 
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
+  value = value.to_s.snake_case
   if option == 'public'
     check("user_display_#{value}")
   else
@@ -283,9 +284,14 @@ Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
     when 'profile'
       @user.update_attributes(display_profile: (option == 'public'))
 
+    when 'hire me'
+      @user.update_attributes(display_hire_me: (option == 'public'))
+
     else
       pending
   end
+
+
 end
 
 # Bryan: To be deleted
@@ -294,19 +300,26 @@ end
 #end
 
 Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
-  case name
-    when 'Display email'
+  case name.downcase
+    when 'display email'
       if option == 'should'
         page.find(:css, 'input#user_display_email').should be_checked
       else
         page.find(:css, 'input#user_display_email').should_not be_checked
       end
 
-    when 'Display profile'
+    when 'display profile'
       if option == 'should'
         page.find(:css, 'input#user_display_profile').should be_checked
       else
         page.find(:css, 'input#user_display_profile').should_not be_checked
+      end
+
+    when 'display hire me'
+      if option == 'should'
+        page.find(:css, 'input#user_display_hire_me').should be_checked
+      else
+        page.find(:css, 'input#user_display_hire_me').should_not be_checked
       end
 
     else
