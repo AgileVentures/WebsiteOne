@@ -266,6 +266,7 @@ Then(/^My email should be public$/) do
 end
 
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
+  value = value.underscore
   if option == 'public'
     check("user_display_#{value}")
   else
@@ -276,16 +277,7 @@ When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
 end
 
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
-  case value.downcase
-    when 'email'
-      @user.update_attributes(display_email: (option == 'public'))
-
-    when 'profile'
-      @user.update_attributes(display_profile: (option == 'public'))
-
-    else
-      pending
-  end
+  @user.update_attributes("display_#{value.underscore}".to_sym => (option == 'public'))
 end
 
 # Bryan: To be deleted
@@ -294,23 +286,10 @@ end
 #end
 
 Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
-  case name
-    when 'Display email'
-      if option == 'should'
-        page.find(:css, 'input#user_display_email').should be_checked
-      else
-        page.find(:css, 'input#user_display_email').should_not be_checked
-      end
-
-    when 'Display profile'
-      if option == 'should'
-        page.find(:css, 'input#user_display_profile').should be_checked
-      else
-        page.find(:css, 'input#user_display_profile').should_not be_checked
-      end
-
-    else
-      pending
+  if option == 'should'
+    page.find(:css, "input#user_#{name.underscore}").should be_checked
+  else
+    page.find(:css, "input#user_#{name.underscore}").should_not be_checked
   end
 end
 
