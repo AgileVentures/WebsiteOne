@@ -20,7 +20,7 @@ module CustomErrors
     error.backtrace.each_with_index { |line, index| Rails.logger.error line; break if index >= 5 }
 
     unless [ 404 ].include? status
-      ExceptionNotifier.notify_exception(exception, env: request.env, :data => { message: 'was doing something wrong' })
+      ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'was doing something wrong' })
     end
 
     case status
