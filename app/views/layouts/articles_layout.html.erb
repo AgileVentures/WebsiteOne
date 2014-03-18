@@ -6,7 +6,7 @@
             <h3>Articles by tags</h3>
             <ul>
               <li>
-                <% if params[:tag] %>
+                <% if params[:tag]  || (params[:controller] == 'articles' && params[:action] == 'show') %>
                   <%= link_to 'All Articles', articles_path %>
                 <% else %>
                   <p class="sidebar-selected">All Articles</p>

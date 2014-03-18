@@ -3,8 +3,6 @@ Feature: Add current_user options to navbar
   In order to enhance user experience
   I want to add options available for the current user to the navigation bar
 
-  Background:
-
   Scenario: render user info in header
     Given I am logged in as user with email "thomas@nocebo.se", with password "12345678"
     And I am on the "home" page

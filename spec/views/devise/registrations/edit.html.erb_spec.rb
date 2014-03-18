@@ -58,11 +58,6 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_button('Cancel my account')
   end
 
-  it 'shows a list of projects being followed' do
-    render
-    expect(rendered).to have_link 'Title 1'
-    expect(rendered).to have_link 'Title 2'
-  end
 
   it 'should render a checkbox for the public email option' do
     render
@@ -101,6 +96,12 @@ describe 'devise/registrations/edit.html.erb' do
 
     render
     expect(rendered).not_to have_text('Link your YouTube channel')
+  end
+
+  it 'should NOT have data-no-turbolink attribute around the youtube button' do
+    render
+
+    rendered.should_not have_css '[data-no-turbolink] .fa-youtube'
   end
 
   #it "displays a preview button" do
