@@ -1,6 +1,6 @@
 And /^(?:The user|I) should receive a "(.*?)" email$/ do |subject|
-  expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
   ActionMailer::Base.deliveries.size.should eq 1
+  expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
 end
 
 And /^I should not receive an email$/ do
