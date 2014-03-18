@@ -84,6 +84,32 @@ describe "users/show.html.erb" do
     expect(rendered).not_to have_link('Edit', href: '/users/edit')
   end
 
+  context 'profile privacy' do
+    it 'should display email if it is set to public' do
+      @user.stub(display_email: true)
+      render
+      expect(rendered).to have_content(@user.email)
+    end
+
+    it 'should display an hire me button if it set to public' do
+      @user.stub(display_hire_me: false)
+      render
+      expect(rendered).not_to have_link('Hire me', href: users_show_path(@user))
+    end
+
+  it 'should not display email if it is set to private' do
+    @user.stub(display_email: false)
+    render
+    expect(rendered).to_not have_content(@user.email)
+  end
+
+  it 'should display an hire me button if it set to private' do
+    @user.stub(display_hire_me: false)
+    render
+    expect(rendered).not_to have_link('Hire me', href: users_show_path(@user))
+  end
+end
+
   it 'should display Member for ..' do
     render
     expect(rendered).to have_text('Member for: about 1 month')
