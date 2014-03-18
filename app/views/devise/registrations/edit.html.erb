@@ -20,6 +20,9 @@
         <div style="margin-bottom: 7px;display:inline-flex"><%= f.label :display_email %>
           <%= f.check_box :display_email %>
         </div>
+        <div style="margin-bottom: 7px;display:inline-flex"><%= f.label :display_hire_me %>
+          <%= f.check_box :display_hire_me %>
+        </div>
 
         <% supported_third_parties.each do |provider| %>
             <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
