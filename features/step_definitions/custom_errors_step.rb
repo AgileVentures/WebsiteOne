@@ -15,3 +15,6 @@ When(/^I encounter an internal server error$/) do
   visit root_path
 end
 
+And(/^The admins should receive an error notification email$/) do
+  step 'I should receive a "ERROR" email'
+end
