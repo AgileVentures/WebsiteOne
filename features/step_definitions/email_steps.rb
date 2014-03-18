@@ -15,3 +15,4 @@ When(/^replies to that email should go to "([^"]*)"$/) do |email|
   @email = ActionMailer::Base.deliveries.last
   @email.reply_to.should include email
 end
+
