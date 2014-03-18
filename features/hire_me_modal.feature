@@ -5,9 +5,9 @@ Feature: As a member of the Agile Ventures team
 
   Background:
     Given the following users exist
-      | first_name  | last_name   | email                   | display_profile |
-      | Alice       | Jones       | alice@btinternet.co.uk  |     false       |
-      | Bob         | Butcher     | bobb112@hotmail.com     |     true        |
+      | first_name  | last_name   | email                   | display_profile | display_hire_me |
+      | Alice       | Jones       | alice@btinternet.co.uk  |     false       |      false      |
+      | Bob         | Butcher     | bobb112@hotmail.com     |     true        |      true       |
 
   Scenario: Sending a message to user with 'Hire me' button
     Given I visit Bob's profile page

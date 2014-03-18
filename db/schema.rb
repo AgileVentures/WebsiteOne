@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313161712) do
+ActiveRecord::Schema.define(version: 20140317093616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,9 +129,9 @@ ActiveRecord::Schema.define(version: 20140313161712) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "display_email"
-    t.string   "youtube_id"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
+    t.string   "youtube_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20140313161712) do
     t.string   "region"
     t.string   "youtube_user_name"
     t.string   "github_profile_url"
+    t.boolean  "display_hire_me"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
