@@ -19,7 +19,18 @@
     <% end %>
   </div>
   <div class="col-md-7 col-sm-7">
-    <!-- Here is a good place for bio section -->
+    
+    <h4>Bio</h4>
+    <div id="bio-show" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
+      <div class="tags">
+        <% if @bio.nil? %>
+          <p>No Bio</p>        
+        <% else %>        
+          <div class="tag label btn-agile md"> <span>&nbsp;&nbsp;<%= @bio %>&nbsp;&nbsp;</span></div>      
+        <% end %>
+      </div>
+    </div>
+
     <h4>Projects</h4>
     <% unless @users_projects.empty? %>
         <ul>
