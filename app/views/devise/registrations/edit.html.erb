@@ -23,30 +23,6 @@
         <div style="margin-bottom: 7px;display:inline-flex"><%= f.label :display_hire_me %>
           <%= f.check_box :display_hire_me %>
         </div>
-
-
-        <div><%= f.textarea :display_bio %>
-
-        </div>
-
-        <%= form_tag("/search", method: "get") do %>
-            <%= label_tag(:q, "Search for:") %>
-            <%= text_field_tag(:q) %>
-            <%= submit_tag("Search") %>
-        <% end %>
-
-        <%= form_for @article, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-            <%= f.text_field :title %>
-            <%= f.text_area :body, size: "60x12" %>
-            <%= f.submit "Create" %>
-        <% end %>
-
-
-
-
-
-
-
         <% supported_third_parties.each do |provider| %>
             <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
         <% end %>
@@ -59,8 +35,6 @@
               <% end %>
             </div>
         <% end %>
-
-
       </div>
       <div class="col-md-5 ">
         <div><%= f.label :first_name %>
@@ -77,8 +51,14 @@
           <div class="form-group">
             <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
           </div>
-
         </div>
+
+        <div><%= f.label :bio %>
+          <div class="form-group">
+            <%= f.text_area :bio, :autofocus => true, class: 'form-control', 'rows' => 10 %>
+          </div>
+        </div>
+
         <div><%= f.label :skills, 'Skills - (separate with comma)' %>
           <div id="skills" class="tag-list" style="margin-bottom: 10px;"></div>
           <%= f.text_field :skill_list, :hidden => true %>

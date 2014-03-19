@@ -15,7 +15,8 @@ describe "users/show.html.erb" do
                              last_name: 'Els',
                              email: 'eric@somemail.se',
                              created_at: thirty_days_ago,
-                             github_profile_url: 'http://github.com/Eric'
+                             github_profile_url: 'http://github.com/Eric',
+                             bio: 'Lonesome Cowboy'
                       )
 		assign :user, @user
     assign :users_projects, @projects
@@ -37,7 +38,7 @@ describe "users/show.html.erb" do
         }
     ]
     assign :youtube_videos, @youtube_videos
-
+    assign :bio, @user.bio
     @skills = ["rails", "ruby", "rspec"]
     assign :skills, @skills
 	end
@@ -114,6 +115,21 @@ end
     render
     expect(rendered).to have_text('Member for: about 1 month')
   end
+  
+  it 'renders a bio' do
+    #@user.stub(bio: 'Lonesome Dove')
+    render
+    expect(renered).to have_text 'Bio'
+    expect(rendered).to have_text 'Lonesome Cowboy'
+  end
+
+  it 'renders "No Bio"' do
+    @user.stub(bio: nil)
+    assign :bio, @user.bio
+    render
+    expect(rendered).not_to have_text 'No Bio'
+    #not_have_css
+  end
 
   it 'displays GitHub profile if it is linked' do
     @user.stub(github_profile_url: nil)
@@ -150,6 +166,4 @@ end
     render
     expect(rendered).to have_css("#skills-show")
   end
-
-  it 'renders user statistics'
 end

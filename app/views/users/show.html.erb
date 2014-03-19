@@ -19,17 +19,12 @@
     <% end %>
   </div>
   <div class="col-md-7 col-sm-7">
-    
     <h4>Bio</h4>
-      <div>
-        <% if @bio.nil? || @bio.empty? %>
-           No Bio
-        <% else %>        
-          <div> <span>&nbsp;&nbsp;<%= @bio %>&nbsp;&nbsp;</span></div>
-        <% end %>
-      </div>
-    </div>
-
+      <% if @bio.nil? || @bio.empty? %>
+        No Bio
+      <% else %>        
+        <div> <span>&nbsp;&nbsp;<%= @bio %>&nbsp;&nbsp;</span></div>
+      <% end %>
     <h4>Projects</h4>
     <% unless @users_projects.empty? %>
         <ul>
@@ -38,7 +33,6 @@
           <% end %>
         </ul>
     <% end %>
-
     <h4>Skills</h4>
     <div id="skills-show" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
       <div class="tags">
