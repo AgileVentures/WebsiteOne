@@ -21,12 +21,11 @@
   <div class="col-md-7 col-sm-7">
     
     <h4>Bio</h4>
-    <div id="bio-show" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
-      <div class="tags">
-        <% if @bio.nil? %>
-          <p>No Bio</p>        
+      <div>
+        <% if @bio.nil? || @bio.empty? %>
+           No Bio
         <% else %>        
-          <div class="tag label btn-agile md"> <span>&nbsp;&nbsp;<%= @bio %>&nbsp;&nbsp;</span></div>      
+          <div> <span>&nbsp;&nbsp;<%= @bio %>&nbsp;&nbsp;</span></div>
         <% end %>
       </div>
     </div>
