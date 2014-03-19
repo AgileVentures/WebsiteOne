@@ -78,7 +78,6 @@ class ProjectsController < ApplicationController
 
   private
   def set_project
-    raise 'USING ID ERROR' if params[:id] =~ /^\d+$/
     @project = Project.friendly.find(params[:id])
   end
 
