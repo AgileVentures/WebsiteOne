@@ -18,7 +18,7 @@ Scenario: View user's bio details
 @jeff
 Scenario: User does not have a bio.
   When I visit Bob's profile page
-  Then I should see "No Bio"
+  Then I should see "User did not setup a bio section "
 
 @jeff2 @javascript
 Scenario: Add bio content to profile
