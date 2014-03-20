@@ -25,7 +25,7 @@ Scenario: Add bio content to profile
   Given I am logged in
   And I am on "profile" page for user "me"
   And I click the "Edit" button
-  And I fill in "Bio" with "Lives in the city"
+  And I fill in "Bio" with "Lives on a farm with many sheep and goats"
   And I click "Update"
-  Then I should see "Lives in the city"
+  Then I should see "Lives on a farm with many sheep and goats"
   

@@ -119,7 +119,7 @@ end
   it 'renders a bio' do
     #@user.stub(bio: 'Lonesome Dove')
     render
-    expect(renered).to have_text 'Bio'
+    expect(rendered).to have_text 'Bio'
     expect(rendered).to have_text 'Lonesome Cowboy'
   end
 
@@ -128,7 +128,6 @@ end
     assign :bio, @user.bio
     render
     expect(rendered).not_to have_text 'No Bio'
-    #not_have_css
   end
 
   it 'displays GitHub profile if it is linked' do

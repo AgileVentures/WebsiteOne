@@ -49,8 +49,8 @@ module Youtube
         request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
         request += '&fields=entry(author(name),id,published,title,content,link)'
 
-        #tags_filter = escape_query_params(tags)
-        #request += '&q=' + tags_filter.join('|')
+        tags_filter = escape_query_params(tags)
+        request += '&q=' + tags_filter.join('|')
 
         response = get_response(request)
         filter_response(response, tags, [youtube_user_name(user)]) if response
