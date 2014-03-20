@@ -4,33 +4,35 @@ Feature: Adding pivotal tracker stories to projects
     I would like to display projects current sprint activities as they are set in Pivotal Tracker 
 
     Background:
-	Given the following projects exist:
-            | title        | description    | status | pivotaltracker_id |
-            | LocalSupport | Local Support  | active |            742821 |
-            | WebsiteOne   | Agile Ventures | active |            982890 |
+       Given Enviroment should have a valid access token 
+       # And Projet with pivitaltracker_id 982890 has some stories in current
+       # And I have access to project with pivitaltracker_id 982890 in PivotalTracker
+       # And I have access to project iteration with pivitaltracker_id 982890 in PivotalTracker
+       And the following projects exist:
+         | title        | description    | status | pivotaltracker_id |
+         | WebsiteOne   | Agile Ventures | active |            982890 |
+         | LocalSupport | Local Support  | active |            742821 |
+
 
 
     Scenario: Project Show Page Renders List of Pivotal Tracker Stories
-	Given I am on the "Show" page for project "LocalSupport"
-        And Projet with pivitaltracker_id 742821 has some information
-        And I have access to project with pivitaltracker_id 742821 in PivotalTracker
+	Given I am on the "Show" page for project "WebsiteOne"
 	Then I click "Activity"
-	Then I should see a "List Of Pivotal Stories" table with:
-	    | column     |
-	    | Story ID   |	  
-	    | Name       |
-	    | Story Type |
-	    | Points     |
-	    | Requester  |
-	    | Owner      |
-	    | State      |
-
+	Then I should see a "Current" table with:
+             | column     |
+             | Story Type |
+	     | Points     |
+             | Labels     |
+             | Story ID   |
+             | Name       |
+	     | Owner      |
+	     | State      |
 	And I should see:
-	    | text           |
-	    | 64723776       |
-	    | Test Story     |
-	    | Feature        |
-	    | 3              |
-	    | Dima Sukhikh   |
-	    | Sampriti Panda |
-	    | Accepted       |
+             | text                    |
+             | chore                   |
+             |                         |
+             | Refactor cucumber steps |
+             | 67243926                |
+             | Bryan Yap               |
+             | Bryan Yap               |
+             | accepted                 |

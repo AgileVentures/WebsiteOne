@@ -28,9 +28,9 @@ def path_to(page_name, id = '')
       users_show_path(id)
     when 'my account' then
       edit_user_registration_path(id)
-    when "foobar" then
+    when 'foobar' then
       visit ("/#{page}")
-    when "supporters" then
+    when 'supporters' then
       page_path('sponsors')
     else
       raise('path to specified is not listed in #path_to')
@@ -39,8 +39,12 @@ end
 
 # GIVEN steps
 
-Given(/^I visit the site$/) do
+Given(/^I (?:visit|am on) the site$/) do
   visit root_path
+end
+
+Given(/^I visit "(.*?)"$/) do |path|
+  visit path
 end
 
 # WHEN steps
@@ -96,7 +100,7 @@ When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
 end
 
 When /^I accept the warning popup$/ do
-  # works only with @javascript tagged scenario
+  # works only with webkit javascript drivers
   page.driver.browser.accept_js_confirms
 end
 
@@ -216,40 +220,6 @@ end
 #  page.should have_content(string)
 #end
 
-Given(/^I want to use third party authentications$/) do
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:github] = {
-      'provider' => 'github',
-      'uid' => '12345678',
-      'info' => {
-          'email' => 'mock@email.com'
-      }
-  }
-  OmniAuth.config.mock_auth[:gplus] = {
-      'provider' => 'gplus',
-      'uid' => '12345678',
-      'info' => {
-          'email' => 'mock@email.com'
-      },
-      'credentials' => {'token' => 'test_token'}
-  }
-end
-
-Given(/^I want to use third party authentications without a public email$/) do
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:github] = {
-      'provider' => 'github',
-      'uid' => '12345678',
-      'info' => {}
-  }
-  OmniAuth.config.mock_auth[:gplus] = {
-      'provider' => 'gplus',
-      'uid' => '12345678',
-      'info' => {},
-      'credentials' => {'token' => 'test_token'}
-  }
-end
-
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
   find(:css, %Q{a[data-link-text="#{button.downcase}"]}).click()
 end
@@ -262,14 +232,14 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
   end
 end
 
-Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
-  page.should have_text string
-end
-
-
-And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
-  page.should have_text string
-end
+#Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
+#  page.should have_text string
+#end
+#
+#
+#And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
+#  page.should have_text string
+#end
 
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
@@ -304,6 +274,10 @@ Then(/^I check "([^"]*)"$/) do |item|
   check item
 end
 
-#Then(/^I wait for my slow internet to load$/) do
-#  sleep(5)
-#end
+When(/^I refresh the page$/) do
+  visit current_url
+end
+
+Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
+  page.should have_css "a[href='#{link}']", text: text
+end

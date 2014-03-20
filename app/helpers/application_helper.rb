@@ -94,9 +94,11 @@ module ApplicationHelper
         "/auth/#{provider}#{"?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}" if options[:url].present?}"
 
     raw <<-HTML
-      <a class="btn btn-lg btn-block btn-social btn-#{provider}" #{'method="delete" ' if options[:delete]}href=#{path}>
+    <div data-no-turbolink>
+      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'method="delete" ' if options[:delete]}href=#{path}>
         <i class="fa fa-#{fa_icon[provider]}"></i> #{text} #{display_name[provider]}
       </a>
+    </div>
     HTML
   end
 

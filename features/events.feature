@@ -1,3 +1,4 @@
+@time-travel
 Feature: Events
 
   Background:
@@ -115,6 +116,3 @@ Feature: Events
     And I click the "Save" button
     Then I should be on the Events "Create" page
     And I should see "Name can't be blank"
-
-  Scenario: Go back to present
-    Then I want to get back to the present

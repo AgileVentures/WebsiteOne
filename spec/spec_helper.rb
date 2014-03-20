@@ -32,9 +32,9 @@ RSpec.configure do |config|
 
   config.mock_with :rspec
   config.include Helpers
-  config.include Devise::TestHelpers, :type => :view
   config.include Devise::TestHelpers, :type => :controller
   config.include Devise::TestHelpers, :type => :helper
+  config.include Devise::TestHelpers, :type => :view
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

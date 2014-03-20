@@ -15,24 +15,17 @@ end
 
 Given(/^the following projects exist:$/) do |table|
   #TODO YA rewrite with factoryGirl
-  temp_author = nil
   table.hashes.each do |hash|
     if hash[:author].present?
       u = User.find_by_first_name hash[:author]
-      project = u.projects.create(hash.except('author', 'tags'))
+      project = Project.new(hash.except('author', 'tags').merge(user_id: u.id))
     else
-      if temp_author.nil?
-        temp_author = User.create first_name: 'First',
-                                  last_name: 'Last',
-                                  email: "dummy#{User.count}@users.co",
-                                  password: '1234124124'
-      end
-      project = temp_author.projects.create(hash.except('author', 'tags'))
+      project = default_test_author.projects.new(hash.except('author', 'tags'))
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
-      project.save
     end
+    project.save!
   end
 end
 
@@ -41,6 +34,9 @@ Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
     when 'creating a new project'
       page.should have_text form_purpose
       page.should have_css('form#new_project')
+
+    else
+      pending
   end
 end
 

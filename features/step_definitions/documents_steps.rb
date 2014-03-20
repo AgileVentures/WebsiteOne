@@ -1,5 +1,4 @@
 Given(/^the following documents exist:$/) do |table|
-  temp_author = nil
   table.hashes.each do |hash|
     if hash[:project].present?
       hash[:project_id] = Project.find_by_title(hash[:project]).id
@@ -8,27 +7,21 @@ Given(/^the following documents exist:$/) do |table|
     if hash[:author].present?
       u = User.find_by_first_name hash[:author]
       hash.except! 'author'
-      u.documents.create(hash)
+      document = u.documents.new hash
     else
-      if temp_author.nil?
-        temp_author = User.create first_name: 'First',
-                                  last_name: 'Last',
-                                  email: "dummy#{User.count}@users.co",
-                                  password: '1234124124'
-      end
-      temp_author.documents.create hash
+      document = default_test_author.documents.new hash
     end
+
+    document.save!
   end
 end
 
 Given(/^the following revisions exist$/) do |table|
-
-    table.hashes.each do |hash|
+  table.hashes.each do |hash|
     hash[:revisions].to_i.times do |number|
       doc = Document.find_by_title(hash[:title])
       doc.update(:body => "New content #{number}")
-      doc.save
-      #puts [doc.title, doc.body].join(' ')
+      doc.save!
     end
   end
 end
@@ -48,26 +41,12 @@ When(/^I should not see the document "([^"]*)"$/) do |title|
   page.should have_text title, visible: false
 end
 
-#| Howto         | How to start     |          2 | 55 |     33    |
-#| Another doc   | My content       |          2 | 66 |     33    |
-#| Howto 2       | My documentation |          1 | 77 |     44    |
-
-
-#When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project_name|
-#  project = Project.find_by_title(project_name)
-#  if project
-#    within("tr##{project.id}") do
-#      click_link_or_button button
-#    end
-#  else
-#    visit path_to(button, 'non-existent')
-#  end
-#end
 When(/^I click the sidebar link "([^"]*)"$/) do |link|
   within('#sidebar') do
     click_link_or_button link
   end
 end
+
 When(/^I should see ([^"]*) revisions for "([^"]*)"$/) do |revisions, document|
   doc = Document.find_by_title(document)
   expect doc.versions.count == revisions

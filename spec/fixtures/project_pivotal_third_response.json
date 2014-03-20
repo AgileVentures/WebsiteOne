@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Refactor cucumber steps",
+    "story_type": "chore",
+    "comments": [
+
+    ],
+    "labels": [
+
+    ],
+    "owned_by": {
+      "name": "Bryan Yap",
+      "kind": "person",
+      "username": "bryanyap",
+      "id": 1219108,
+      "initials": "BY"
+    },
+    "requested_by": {
+      "name": "Bryan Yap",
+      "kind": "person",
+      "username": "bryanyap",
+      "id": 1219108,
+      "initials": "BY"
+    },
+    "current_state": "accepted",
+    "id": 67243926,
+    "url": "https://www.pivotaltracker.com/story/show/67243926",
+    "tasks": [
+
+    ],
+    "description": "Remove duplication and improve feature step expressiveness"
+  },
+  {
+    "name": "investigate google instant hangout",
+    "story_type": "chore",
+    "comments": [
+
+    ],
+    "labels": [
+
+    ],
+    "requested_by": {
+      "name": "Sam Joseph",
+      "kind": "person",
+      "username": "tansaku",
+      "id": 8098,
+      "initials": "SJ"
+    },
+    "current_state": "unstarted",
+    "id": 67827134,
+    "url": "https://www.pivotaltracker.com/story/show/67827134",
+    "tasks": [
+
+    ],
+    "description": "https://github.com/google/instant-hangouts --> hopefully this can lead to feature that will disable hangout button once clicked and ensure that hangout link is clear for other people joining session"
+  }
+]

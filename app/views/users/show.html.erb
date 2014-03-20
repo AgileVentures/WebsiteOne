@@ -12,6 +12,11 @@
     <p><%= "Location: #{@user.country}" if @user.country.present? %></p>
 
     <p>Member for: <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
+    <% if @user.github_profile_url.present? %>
+        <p>GitHub profile: <%= link_to "#{@user.github_profile_url.split('/').last}", @user.github_profile_url %></p>
+    <% else %>
+        <p>GitHub profile: not linked</p>
+    <% end %>
   </div>
   <div class="col-md-7 col-sm-7">
     <!-- Here is a good place for bio section -->
@@ -19,13 +24,23 @@
     <% unless @users_projects.empty? %>
         <ul>
           <% @users_projects.each do |project| %>
-              <li><%= link_to project.title, project_path(project) %></li>
+              <li style="list-style-type: none"><%= link_to project.title, project_path(project) %></li>
           <% end %>
         </ul>
     <% end %>
 
     <h4>Skills</h4>
-    <div id="skills-show" class="tag-list" style="padding-left:25px;"></div>
+    <div id="skills-show" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
+      <div class="tags">
+        <% if @skills.empty? %>
+            No Skills
+        <% else %>
+            <% @skills.each do |skill| %>
+                <div class="tag label btn-agile md"> <span>&nbsp;&nbsp;<%= skill %>&nbsp;&nbsp;</span></div>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -36,15 +51,6 @@
     <% end %>
     <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
     <%= link_to 'Hire me', users_show_path(@user), {:remote => true,  class: 'btn btn-primary btn-sm', 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}%>
-    <% if @user.eql?(current_user) %>
-        <div style="margin-top: 10px;">
-        <% if @user.youtube_id %>
-            <%= unlink_from_youtube_button(request.original_url) %>
-        <% else %>
-            <%= link_to_youtube_button(request.original_url) %>
-        <% end %>
-        </div>
-    <% end %>
     <h4>Pair Programming</h4>
     <% unless @youtube_videos.blank? %>
         <table class="table table-bordered table-striped table-hover table-condensed">
@@ -74,22 +80,13 @@
     <%= render 'layouts/hire_me' %>
   </div>
 
-
-
-
-
-
-
-
 </div>
 
-<script>
-    $(function () {
-        $('#skills-show').tags({
-            readOnly: true,
-            tagSize: "lg",
-            tagData: <%= raw @user.skill_list.to_json %>,
-            readOnlyEmptyMessage: "No Skills"
-        });
-    });
-</script>
+<style>
+  .tag {
+      margin-bottom: 0.4em!important;
+  }
+  .tags {
+      position: initial!important;
+  }
+</style>

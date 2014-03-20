@@ -14,7 +14,8 @@ describe "users/show.html.erb" do
                              first_name: 'Eric',
                              last_name: 'Els',
                              email: 'eric@somemail.se',
-                             created_at: thirty_days_ago
+                             created_at: thirty_days_ago,
+                             github_profile_url: 'http://github.com/Eric'
                       )
 		assign :user, @user
     assign :users_projects, @projects
@@ -37,7 +38,8 @@ describe "users/show.html.erb" do
     ]
     assign :youtube_videos, @youtube_videos
 
-    @user.stub(:skill_list).and_return(["rails"])
+    @skills = ["rails", "ruby", "rspec"]
+    assign :skills, @skills
 	end
 
   it 'renders a table wih video links if there are videos' do
@@ -62,33 +64,6 @@ describe "users/show.html.erb" do
     expect(rendered).to have_text('Eric Els has no publicly viewable Youtube videos.')
   end
 
-  it 'renders "connect youtube channel" when user views his profile and it is not yet connected' do
-    @user.stub(youtube_id: nil)
-    assign(:youtube_videos, nil)
-    view.stub(current_user: @user)
-
-    render
-    expect(rendered).to have_link('Sync with YouTube')
-  end
-
-  it 'renders "disconnect youtube channel" when user views his profile and is connected' do
-    @user.stub(youtube_id: 'test')
-    assign(:youtube_videos, nil)
-    view.stub(current_user: @user)
-
-    render
-    expect(rendered).to have_link('Disconnect YouTube')
-  end
-
-  it 'does not render "connect youtube channel" when user views other profile' do
-    @user.stub(youtube_id: nil)
-    assign(:youtube_videos, nil)
-    view.stub(current_user: mock_model(User, id: 'test'))
-
-    render
-    expect(rendered).not_to have_text('Link your YouTube channel')
-  end
-
   it 'renders big user avatar' do
     expect(view).to receive(:gravatar_for).with(@user.email ,size: 275).and_return('img_link')
     render
@@ -101,10 +76,6 @@ describe "users/show.html.erb" do
   	expect(rendered).to have_content(@user.last_name)
   end
 
-  it 'show link to GitHub profile' do
-  	pending("requires github API integration")
-  end
-
   it 'should not display an edit button if it is not my profile' do
     @user_logged_in ||= FactoryGirl.create :user
     sign_in @user_logged_in
@@ -114,9 +85,19 @@ describe "users/show.html.erb" do
   end
 
   it 'should display Member for ..' do
-    #Date.stub(today:'07/02/2014'.to_date )
     render
     expect(rendered).to have_text('Member for: about 1 month')
+  end
+
+  it 'displays GitHub profile if it is linked' do
+    @user.stub(github_profile_url: nil)
+    render
+    expect(rendered).to have_text('GitHub profile: not linked')
+  end
+
+  it 'displays GitHub profile is not linked if it is not linked' do
+    render
+    expect(rendered).to have_link('Eric', href: 'http://github.com/Eric')
   end
 
   context 'users own profile page' do
