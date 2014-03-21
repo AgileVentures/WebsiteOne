@@ -117,19 +117,16 @@ end
   end
   
   it 'renders a bio' do
-    #@user.stub(bio: 'Lonesome Dove')
     render
     expect(rendered).to have_text 'Bio'
     expect(rendered).to have_text 'Lonesome Cowboy'
   end
 
-  it 'renders "User did not setup a bio section"' do
+  it 'renders no bio field' do
     @user.stub(bio: nil)
     assign :bio, @user.bio
     render
-    #expect(rendered).not_to have_text 'No Bio'
-    expect(rendered).to have_text(" ")
-    #@response.should have_text(" ")
+    expect(rendered).not_to have_text('Bio')
   end
 
   it 'displays GitHub profile if it is linked' do
