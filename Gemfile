@@ -38,6 +38,7 @@ gem 'squeel'
 gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
+gem 'exception_notification'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

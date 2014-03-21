@@ -52,7 +52,7 @@
   <li id="videos">
     <a href="#videos_list" data-toggle="tab"> Videos (<%= @videos.count %>)</a>
   </li>
-  <li id="activity">
+  <li id="activities">
     <a href="#activities_list" data-toggle="tab"> Activity</a>
   </li>
 </ul>
@@ -124,30 +124,31 @@
   </div>
   <div class="tab-pane" id="activities_list">
     <ul class="listings">
-      <h2>Current</h2>
-      <table class="table table-bordered table-striped table-hover table-condensed">
-	<tr>
-          <th>Story Type</th>
-	  <th>Points</th>
-          <th>Labels</th>
-          <th>Story ID</th>
-          <th>Name</th>
-	  <th>Owner</th>
-	  <th>State</th>
-	</tr>
-	<%= @stories %>
-	<%- @stories.each do |story| %>
-	<tr>
-	  <td><%= story.story_type %></td>
-	  <td><%= story.estimate %></td>
-	  <td><%= story.name %></td>
-	  <td><%= story.id %></td>
-	  <td><%= story.owned_by{:name} %></td>
-	  <td><%= story.requested_by %></td>
-	  <td><%= story.current_state %></td>
-	</tr>
-	<% end %>
-      </table>
+      <%- if @stories %>
+        <h2>Current</h2>
+        <table class="table table-bordered table-striped table-hover table-condensed">
+	  <tr>
+            <th>Story Type</th>
+	    <th>Points</th>
+            <th>Labels</th>
+            <th>Story ID</th>
+	    <th>Owner</th>
+	    <th>State</th>
+	  </tr>
+	  <%- @stories.each do |story| %>
+   	    <tr>
+	      <td><%= story.story_type %></td>
+	      <td><%= story.estimate %></td>
+	      <td><%= story.name %></td>
+	      <td><%= story.id %></td>
+	      <td><%= story.owned_by %></td>
+	      <td><%= story.current_state %></td>
+	    </tr>
+	  <% end %>
+        </table>
+      <% else %>
+        <p style="margin-top: 20px;">No PivotalTracker Stories can be found for project <strong><%= @project.title %></strong></p>
+      <% end %>
     </ul>
   </div>
 

@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :set_token, only: [:show]
+  before_action :get_current_stories, only: [:show]
   include DocumentsHelper
 
 #TODO YA Add controller specs for all the code
@@ -16,11 +16,6 @@ class ProjectsController < ApplicationController
     documents
     @members = @project.followers.reject { |member| !member.display_profile }
     @videos = Youtube.project_videos(@project, @members) if @project
-    if @project.pivotaltracker_id.present?
-      @projectpv    = PivotalService.one_project(@project.pivotaltracker_id, Scorer::Project.fields)
-      @iteration  = PivotalService.iterations(@project.pivotaltracker_id, 'current')
-      @stories   = @iteration.stories
-    end
   end
 
   def new
@@ -87,10 +82,13 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
-  def set_token
-    # This will set the @token in the Client class. Class caching must be enabled for the token to persist.
-    # config.cache_classes = true
+  def get_current_stories
     PivotalService.set_token('1e90ef53f12fc327d3b5d8ee007cce39')
+    if @project.pivotaltracker_id.present?
+      @projectpv    = PivotalService.one_project(@project.pivotaltracker_id, Scorer::Project.fields)
+      @iteration  = PivotalService.iterations(@project.pivotaltracker_id, 'current')
+      @stories   = @iteration.stories
+    end
   end
 
   def project_params

@@ -8,11 +8,8 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    # TODO separate route for "documents for a project"
-    #@documents = Document.all
-    # Bryan: Replaced with project show page
-    raise 'DEPRECATED PATH EXCEPTION'
-    #@documents = Document.where('project_id = ?', @project.id).order(:created_at)
+    # Bryan: So that Sampriti doesn't spam us with emails
+    redirect_to project_path @project
   end
 
   # GET /documents/1
@@ -88,16 +85,10 @@ class DocumentsController < ApplicationController
 
   private
   def find_project
-    # Bryan: Redundant
-    #if params[:project_id]
-      #raise 'USING ID ERROR' if params[:project_id] =~ /^\d+$/
     @project = Project.friendly.find(params[:project_id])
-    #end
   end
 
   def set_document
-    # Bryan: Redundant
-    #raise 'USING ID ERROR' if params[:id] =~ /^\d+$/
     @document = @project.documents.find_by_slug!(params[:id])
   end
 

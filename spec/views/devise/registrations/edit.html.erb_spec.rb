@@ -67,6 +67,11 @@ describe 'devise/registrations/edit.html.erb' do
   it 'should render a checkbox for the public profile option' do
     render
     expect(rendered).to have_css "input[type='checkbox']#user_display_profile"
+    end
+
+  it 'should render a checkbox for the public hire me button option' do
+    render
+    expect(rendered).to have_css "input[type='checkbox']#user_display_hire_me"
   end
 
   it 'renders "connect youtube channel" when user views his profile and it is not yet connected' do

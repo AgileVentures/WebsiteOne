@@ -18,28 +18,48 @@ describe CustomErrors, type: 'controller' do
     Rails.stub_chain(:env, :production?).and_return(true)
   end
 
-  specify 'should catch 404 errors' do
-    routes.draw { get 'raise_404' => 'anonymous#raise_404' }
+  context '404 errors' do
+    before(:each) do
+      routes.draw { get 'raise_404' => 'anonymous#raise_404' }
+    end
 
-    get :raise_404
-    expect(response).to render_template 'pages/not_found'
-    expect(response.status).to eq 404
+    it 'should catch 404 errors' do
+
+      get :raise_404
+      expect(response).to render_template 'pages/not_found'
+      expect(response.status).to eq 404
+    end
   end
 
-  it 'should catch 500 errors' do
-    routes.draw { get 'raise_500' => 'anonymous#raise_500' }
+  context '500 errors' do
+    before(:each) do
+      routes.draw { get 'raise_500' => 'anonymous#raise_500' }
+    end
 
-    get :raise_500
-    expect(response).to render_template 'pages/internal_error'
-    expect(response.status).to eq 500
-  end
+    it 'should catch 500 errors' do
+      get :raise_500
+      expect(response).to render_template 'pages/internal_error'
+      expect(response.status).to eq 500
+    end
 
-  it 'should be able to adjust log stack trace limit' do
-    routes.draw { get 'raise_500' => 'anonymous#raise_500' }
+    it 'should be able to adjust log stack trace limit' do
+      dummy = Class.new
+      Rails.stub(logger: dummy)
+      dummy.should_receive(:error).exactly(7)
+      get :raise_500
+    end
 
-    dummy = Class.new
-    Rails.stub(logger: dummy)
-    dummy.should_receive(:error).exactly(7)
-    get :raise_500
+#     it 'should send an error notification to the admin' do
+#       ActionMailer::Base.deliveries.clear
+#       get :raise_500
+# 
+#       ActionMailer::Base.deliveries.size.should eq 1
+#       email = ActionMailer::Base.deliveries[0]
+#       expect(email.subject).to include 'ERROR'
+# 
+#       recipients = email.to
+#       expect(recipients.size).to eq 1
+#       expect(recipients[0]).to eq 'info@agileventures.org'
+#     end
   end
 end
