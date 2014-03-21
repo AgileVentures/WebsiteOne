@@ -25,3 +25,4 @@ Feature:
     Then the page should be titled "500 Internal Error"
     And the response status should be "500"
     And I should see "Something went terribly wrong"
+    And The admins should receive an error notification email

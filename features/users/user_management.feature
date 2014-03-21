@@ -29,6 +29,17 @@ Feature: Create and maintain projects
     Then I should be on the "user profile" page for "John"
     And I should see "You updated your account successfully."
 
+  @javascript
+  Scenario: Editing details: successful
+    Given I am on my "Edit Profile" page
+    And I fill in "Account details":
+      | Field                 | Text      |
+      | First name            | John      |
+      | Last name             | Doe       |
+      | Email                 |           |
+    When I click the "Update" button
+    Then I should see "Email can't be blank"
+
 #  Scenario: Editing details: failure
 #    Given I follow "My Account"
 #    And I fill in:
