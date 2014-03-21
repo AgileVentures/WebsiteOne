@@ -1,3 +1,4 @@
+# Bryan: Disabled temporarily
 And /^(?:The user|I) should receive a "(.*?)" email$/ do |subject|
   ActionMailer::Base.deliveries.size.should eq 1
   expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
