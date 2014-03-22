@@ -1,14 +1,11 @@
-class Document < ActiveRecord::Base
-  extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+class Document < Page
+  
+  acts_as_tree
 
   belongs_to :project
   belongs_to :user
-  has_paper_trail
 
-  acts_as_tree
-  validates :title, :project_id, presence: true
-
+  validates :project_id, presence: true
 
   #TODO: This is created by Marcelo for future use of pagination
   def self.search(search, page)

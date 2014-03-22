@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Document do
 
   before(:all) do
-    class Document < ActiveRecord::Base
-      has_paper_trail
+    class Document < Page
     end
   end
 
