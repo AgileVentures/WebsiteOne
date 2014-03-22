@@ -29,6 +29,11 @@ describe ArticlesHelper do
       output.should have_css 'strong'
     end
 
+    it 'should render an empty string when the input is nil' do
+      output = helper.from_markdown nil
+      output.should be_empty
+    end
+
     context 'preview' do
       it 'should render a truncated markdown text' do
         markdown_text = 'this is some `coding` done with **bold** text and some other random *stuff*' +
@@ -49,6 +54,11 @@ describe ArticlesHelper do
         output.should have_css 'code'
         output.should_not have_css 'a'
         output.should_not have_css 'img'
+      end
+
+      it 'should render an empty string when the input is nil' do
+        output = helper.markdown_preview nil
+        output.should be_empty
       end
     end
   end
