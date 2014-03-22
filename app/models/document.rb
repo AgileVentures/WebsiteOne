@@ -1,5 +1,6 @@
 class Document < Page
-  
+  self.superclass.table_name = "documents"
+
   acts_as_tree
 
   belongs_to :project

@@ -1,6 +1,4 @@
 class Page < ActiveRecord::Base
-  self.table_name = "documents"
-
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
