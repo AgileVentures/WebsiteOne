@@ -31,10 +31,12 @@ module ArticlesHelper
   @@markdown_engine = Redcarpet::Markdown.new(CodeRayify.new(renderer_options), engine_options)
 
   def from_markdown(markdown)
+    return '' if markdown.nil?
     raw @@markdown_engine.render markdown
   end
 
   def markdown_preview(markdown)
+    return '' if markdown.nil?
     raw sanitize(@@markdown_engine.render(markdown), tags: %w( p pre code strong em )).truncate(100, separator: ' ')
   end
 end
