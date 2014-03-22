@@ -34,6 +34,13 @@ describe ArticlesHelper do
       output.should be_empty
     end
 
+    it 'should render "Failed to render markdown" when it CodeRay fails for whatever reason' do
+      renderer = ArticlesHelper::CodeRayify.new
+      CodeRay.stub(:scan).and_raise Exception
+      output = renderer.block_code 'function (a, b, c)', nil
+      output.should have_text 'Failed to render markdown'
+    end
+
     context 'preview' do
       it 'should render a truncated markdown text' do
         markdown_text = 'this is some `coding` done with **bold** text and some other random *stuff*' +
