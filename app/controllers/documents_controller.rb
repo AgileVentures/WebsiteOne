@@ -16,6 +16,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1.json
   def show
     @children = @document.children.order(created_at: :desc)
+    @children.map! {|child| child = Document.new(child.attributes)}
   end
 
   # GET /documents/new

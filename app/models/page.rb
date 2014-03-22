@@ -1,4 +1,6 @@
 class Page < ActiveRecord::Base
+  acts_as_tree
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
