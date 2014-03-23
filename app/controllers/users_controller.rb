@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
     @skills = @user.skill_list
+    @bio = @user.bio
 
     @users_projects = @user.following_by_type('Project')
 

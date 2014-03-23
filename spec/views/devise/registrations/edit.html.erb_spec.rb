@@ -34,6 +34,7 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_field('Last name')
     expect(rendered).to have_field('Email')
     expect(rendered).to have_css('#skills')
+    expect(rendered).to have_field('Bio')
   end
 
   it 'shows Update button' do
@@ -108,6 +109,7 @@ describe 'devise/registrations/edit.html.erb' do
 
     rendered.should_not have_css '[data-no-turbolink] .fa-youtube'
   end
+
 
   #it "displays a preview button" do
   #  render
