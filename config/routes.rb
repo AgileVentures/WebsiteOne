@@ -1,5 +1,5 @@
 WebsiteOne::Application.routes.draw do
-  get "users/index"
+  get 'users/index'
   root 'visitors#index'
   mount Mercury::Engine => '/'
 
@@ -42,5 +42,5 @@ WebsiteOne::Application.routes.draw do
   post 'mail_contact_form', to: 'visitors#send_contact_form'
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form'
 
-  get '/*id', to: 'pages#show', as: 'page'
+  get '/*id', to: 'static_pages#show', as: 'page'
 end

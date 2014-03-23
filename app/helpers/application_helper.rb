@@ -3,7 +3,7 @@ module ApplicationHelper
   include ArticlesHelper
 
   def page_path(page)
-    page.parameterize
+    "/#{page.parameterize}"
   end
 
   def gravatar_for(email, options = {size: 80})

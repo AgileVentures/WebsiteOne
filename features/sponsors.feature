@@ -13,6 +13,10 @@ Feature:
       | hello world | greetings earthlings | active   |
       | hello mars  | greetings aliens     | inactive |
 
+    And the following pages exist
+      | title     |
+      | sponsors  |
+
     And I am on the "Projects" page
 
 	Scenario: See Sponsor Banners

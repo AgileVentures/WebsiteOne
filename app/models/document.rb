@@ -1,5 +1,7 @@
-class Document < Page
-  self.superclass.table_name = "documents"
+require 'act_as_page'
+
+class Document < ActiveRecord::Base
+  include ActAsPage
 
   belongs_to :project
   belongs_to :user

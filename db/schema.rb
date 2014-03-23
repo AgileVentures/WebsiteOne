@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323020349) do
+ActiveRecord::Schema.define(version: 20140322120003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,17 +83,6 @@ ActiveRecord::Schema.define(version: 20140323020349) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
-  create_table "pages", force: true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "parent_id"
-    t.string   "slug"
-  end
-
-  add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
-
   create_table "projects", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -106,6 +95,17 @@ ActiveRecord::Schema.define(version: 20140323020349) do
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "static_pages", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "parent_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

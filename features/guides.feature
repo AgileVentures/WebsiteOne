@@ -7,6 +7,11 @@ Feature: Guides
 	So that I can stay up to date with important topics
 	I want to access a guide section
 
+    Background:
+      Given the following pages exist
+      | title           | body                    |
+      | Getting Started | Remote Pair Programming |
+
 	Scenario: There should be a getting started link in the nav bar
 		Given I am on the home page
 		When I click "Getting Started"
