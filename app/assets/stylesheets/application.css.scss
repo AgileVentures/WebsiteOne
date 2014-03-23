@@ -96,6 +96,12 @@ label {
   border-color: #EEA236;
 }
 
+
+.btn-agile a {
+  color: #FFF !important;
+  opacity: 1 !important;
+}
+
 @media (min-width: 768px) and (max-width: 979px) {
   #event-container .git-item {
     width: 50%;
