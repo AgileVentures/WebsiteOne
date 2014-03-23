@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20140322120003) do
     t.string   "youtube_user_name"
     t.string   "github_profile_url"
     t.boolean  "display_hire_me"
+    t.text     "bio"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

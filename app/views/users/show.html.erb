@@ -19,7 +19,11 @@
     <% end %>
   </div>
   <div class="col-md-7 col-sm-7">
-    <!-- Here is a good place for bio section -->
+    <% if not (@bio.nil? || @bio.empty?)%>
+        <h4>Bio</h4>
+        <p><%=@bio%></p>
+    <% end %>
+
     <h4>Projects</h4>
     <% unless @users_projects.empty? %>
         <ul>
@@ -28,15 +32,15 @@
           <% end %>
         </ul>
     <% end %>
-
     <h4>Skills</h4>
+
     <div id="skills-show" class="tag-list bootstrap-tags bootstrap-3" style="padding-left:25px;">
       <div class="tags">
         <% if @skills.empty? %>
             No Skills
         <% else %>
             <% @skills.each do |skill| %>
-                <div class="tag label btn-agile md"> <span>&nbsp;&nbsp;<%= skill %>&nbsp;&nbsp;</span></div>
+                <div class="tag label btn-agile md"><span>&nbsp;&nbsp;<%= skill %>&nbsp;&nbsp;</span></div>
             <% end %>
         <% end %>
       </div>
@@ -48,10 +52,10 @@
   <div class="col-md-5 col-sm-5">
     <% if @user.display_email %>
         <h3> <%= @user.email %></h3>
-        <% end %>
-  <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
+    <% end %>
+    <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
     <% if @user.display_hire_me %>
-        <%= link_to 'Hire me', users_show_path(@user), {:remote => true,  class: 'btn btn-primary btn-sm', 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}%>
+        <%= link_to 'Hire me', users_show_path(@user), {:remote => true, class: 'btn btn-primary btn-sm', 'data-toggle' => "modal", 'data-target' => '#modal-window'} %>
     <% end %>
     <h4>Pair Programming</h4>
     <% unless @youtube_videos.blank? %>
@@ -85,10 +89,11 @@
 </div>
 
 <style>
-  .tag {
-      margin-bottom: 0.4em!important;
-  }
-  .tags {
-      position: initial!important;
-  }
+    .tag {
+        margin-bottom: 0.4em !important;
+    }
+
+    .tags {
+        position: initial !important;
+    }
 </style>
