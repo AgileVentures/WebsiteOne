@@ -17,7 +17,7 @@
         <p><i class="fa fa-github-alt fa-lg"></i> GitHub
           profile <%= link_to "#{@user.github_profile_url.split('/').last}", @user.github_profile_url %></p>
     <% else %>
-        <p>GitHub profile not linked</p>
+        <p><i class="fa fa-github-alt fa-lg"></i> GitHub profile not linked</p>
     <% end %>
     <% if @user.display_email %>
         <p><i class="fa fa-envelope fa-lg"></i> <%= mail_to @user.email, @user.email %></p>
@@ -41,20 +41,23 @@
 
     <!-- Tab panes -->
     <div class="tab-content" style="margin-left: -25px; margin-right: -25px;">
-      <div class="tab-pane fade in active" id="bio">
-        <h4>About <%= @user.display_name %></h4>
-
-        <p> <%= @bio %> </p>
-      </div>
-      <div class="tab-pane fade" id="projects">
-        <% unless @users_projects.empty? %>
-            <div id="projects-show" class="tag-list bootstrap-tags bootstrap-3">
-              <h4><%= @user.display_name %> contributes to following projects</h4>
-              <% @users_projects.each do |project| %>
-                  <span class="tag label btn-agile md"><%= link_to project.title, project_path(project) %></span>
-              <% end %>
-            </div>
-        <% end %>
+      <% if not (@bio.nil? || @bio.empty?) %>
+          <div class="tab-pane fade in active" id="bio">
+            <h4>About <%= @user.display_name %></h4>
+            <p> <%= @bio %> </p>
+          </div>
+          <div class="tab-pane fade" id="projects">
+      <% else %>
+          <div class="tab-pane fade in active" id="projects">
+      <% end %>
+      <% unless @users_projects.empty? %>
+          <div id="projects-show" class="tag-list bootstrap-tags bootstrap-3">
+            <h4><%= @user.display_name %> contributes to following projects</h4>
+            <% @users_projects.each do |project| %>
+                <span class="tag label btn-agile md"><%= link_to project.title, project_path(project) %></span>
+            <% end %>
+          </div>
+      <% end %>
       </div>
       <div class="tab-pane fade" id="skills">
         <div id="skills-show" class="tag-list bootstrap-tags bootstrap-3">
@@ -70,55 +73,55 @@
 
         </div>
       </div>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="clear">
+    <hr/>
+  </div>
+  <div class="row">
+    <div class="col-md-5 col-sm-5">
+
+      <% unless @youtube_videos.blank? %>
+          <h4>Programming sessions</h4>
+          <table class="table table-bordered table-striped table-hover table-condensed">
+            <tr>
+              <th>Title</th>
+            </tr>
+            <% @youtube_videos.each do |video| %>
+                <tr>
+                  <td><%= video_link(video) %>
+                    <br/>
+                    <small><%= video[:published].to_s(:db) %></small>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
+      <% else %>
+          <h4><%= user_display_name @user %> has no publicly viewable Youtube videos.</h4>
+      <% end %>
+    </div>
+    <% unless @youtube_videos.blank? %>
+        <div class="col-md-7 col-sm-7">
+          <td><h4 id="video_contents"><%= @youtube_videos.first[:content] %></h4></td>
+          <iframe id="ytplayer" type="text/html" width="480" height="293" src="<%= video_embed_link(@youtube_videos.first) %>" frameborder="0"></iframe>
+        </div>
+    <% end %>
+    <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <%= render 'layouts/hire_me' %>
     </div>
 
-
-  </div>
-</div>
-<div class="clear">
-  <hr/>
-</div>
-<div class="row">
-  <div class="col-md-5 col-sm-5">
-
-    <% unless @youtube_videos.blank? %>
-        <h4>Programming sessions</h4>
-        <table class="table table-bordered table-striped table-hover table-condensed">
-          <tr>
-            <th>Title</th>
-          </tr>
-          <% @youtube_videos.each do |video| %>
-              <tr>
-                <td><%= video_link(video) %>
-                  <br/>
-                  <small><%= video[:published].to_s(:db) %></small>
-                </td>
-              </tr>
-          <% end %>
-        </table>
-    <% else %>
-        <h4><%= user_display_name @user %> has no publicly viewable Youtube videos.</h4>
-    <% end %>
-  </div>
-  <% unless @youtube_videos.blank? %>
-      <div class="col-md-7 col-sm-7">
-        <td><h4 id="video_contents"><%= @youtube_videos.first[:content] %></h4></td>
-        <iframe id="ytplayer" type="text/html" width="480" height="293" src="<%= video_embed_link(@youtube_videos.first) %>" frameborder="0"></iframe>
-      </div>
-  <% end %>
-  <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <%= render 'layouts/hire_me' %>
   </div>
 
-</div>
+  <style>
+      .tag {
+          margin-bottom: 0.4em !important;
+          float: none !important;
+      }
 
-<style>
-    .tag {
-        margin-bottom: 0.4em !important;
-        float: none !important;
-    }
-
-    .tags {
-        position: initial !important;
-    }
-</style>
+      .tags {
+          position: initial !important;
+      }
+  </style>
