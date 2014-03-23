@@ -132,7 +132,7 @@ end
   it 'displays GitHub profile if it is linked' do
     @user.stub(github_profile_url: nil)
     render
-    expect(rendered).to have_text('GitHub profile: not linked')
+    expect(rendered).to have_text('GitHub profile not linked')
   end
 
   it 'displays GitHub profile is not linked if it is not linked' do
