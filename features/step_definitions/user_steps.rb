@@ -45,6 +45,11 @@ Given /^today is "([^"]*)"$/ do |date|
   #distance_of_time_in_words('01/01/2013'.to_date, Date.current)
 end
 
+Given(/^user with a bio$/) do
+  step %{I exist as a user}
+  @user.bio = "Lives on a farm with pigs and cows."
+end
+
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
   fill_in('user_email', :with => email)
@@ -326,7 +331,8 @@ Given(/^I add skills "(.*)"/) do |skills|
 end
 
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
-  page.all(:css, "#skills-show .tag span").collect { |e| e.text }.sort.should == skills.split(",").sort
+  debugger
+  page.all(:css, "#skills-show span").collect { |e| e.text }.sort.should == skills.split(",").sort
 end
 
 And(/^I have a GitHub profile with username "([^"]*)"$/) do |username|
@@ -340,4 +346,8 @@ end
 
 Then(/^the request should be to "(.*)"$/) do |url|
   expect(current_url).to eq url
+end
+
+Then(/^I should see the user's bio$/) do
+  pending # express the regexp above with the code you wish you had
 end
