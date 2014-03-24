@@ -23,6 +23,8 @@ describe 'projects/show.html.erb' do
                           status: 'Active',
                           user_id: @user.id,
                           created_at: Time.now,
+                          github_url: "github.com/AgileVentures/myfriend",
+                          pivotaltracker_url: "www.pivotaltracker.com/s/projects/12345",
                           tag_list: []
 
     @videos = [
@@ -44,6 +46,18 @@ describe 'projects/show.html.erb' do
     assign :videos, @videos
     view.stub(:project_created_by).and_return(@created_by)
     @project.stub(:user).and_return(@user)
+  end
+
+  it "renders a link to the project's github page" do
+    render
+    debugger
+    expect(rendered).to have_link("#{@project.github_url.split('/').last} on GitHub", :href => @project.github_url)
+  end
+
+  it "renders a link to the project's Pivotal Tracker page" do
+    render
+    expect(rendered).to have_link(:href => @project.pivotaltracker_url)
+    expect(rendered).to have_text"on Pivotal Tracker"
   end
 
   it 'renders project description' do
