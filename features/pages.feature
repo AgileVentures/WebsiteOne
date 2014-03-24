@@ -48,3 +48,12 @@ Feature: Static pages
     And I click "Cancel" in Mercury Editor
     Then I should be on the static "About Us" page
     And I should see "About Us"
+
+  Scenario: The Mercury Editor should only work for the static pages
+    Given I am logged in
+    And I visit the site
+    When I try to edit the page
+    Then I should see "You do not have the right privileges to complete action."
+    Given I am on the "Projects" page
+    When I try to edit the page
+    Then I should see "You do not have the right privileges to complete action."
