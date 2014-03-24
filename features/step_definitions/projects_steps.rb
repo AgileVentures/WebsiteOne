@@ -121,6 +121,6 @@ end
 
 Given(/^I should see a link to the "(.*?)" on Pivotal Tracker$/) do |arg1|
   object = Project.find_by_title(name)
-  step %Q{I should see link "#{object.pivotal_tracker_url}"}
+  step %Q{I should see link "#{object.pivotaltracker_url}"}
 end
 
