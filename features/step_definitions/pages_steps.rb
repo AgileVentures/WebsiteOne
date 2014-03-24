@@ -1,6 +1,6 @@
 Given(/^the following pages exist$/) do |table|
   table.hashes.each do |hash|
-    Page.create!(hash)
+    StaticPage.create!(hash)
   end
 end
 
