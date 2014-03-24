@@ -150,3 +150,8 @@ Feature: Create and maintain projects
     Given The project "hello world" has 5 members
     And I am on the "Show" page for project "hello world"
     Then I should see "Members (5)"
+
+  Scenario: Project show page has links to github and Pivotal Tracker
+    Given I am on the "Show" page for project "hello saturn"
+    And I should see a link to "hello saturn" on github
+    And I should see a link to the "hello saturn" on Pivotal Tracker 
