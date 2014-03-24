@@ -1,12 +1,14 @@
 <% provide :title, @page.title %>
 
 <h1>
-  <div id="static_page_title" style="width: 100%" data-mercury="simple" data-type="editable"><%= @page.title %></div>
+  <div id="static_page_title" style="display: inline;" data-mercury="simple" data-type="editable"><%= @page.title %></div>
 </h1>
 
-<% if user_signed_in? %>
-  <%= custom_css_btn 'edit', 'fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
-                     data: { save_url: '' } %>
-<% end %>
+<div id="doc-side-panel">
+  <% if user_signed_in? %>
+    <%= custom_css_btn 'edit', 'fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
+      data: {save_url: static_page_mercury_update_path(@page.slug)} %>
+  <% end %>
+</div>
 
 <div id="static_page_body" data-mercury="full" data-type="editable"><%= clean_html(@page.body) %></div>
