@@ -6,8 +6,7 @@
     <div class="col-sm-12  text-center bg-5">
       <%= render 'layouts/round_banners' %>
       <% if @event.present? %>
-          <h2><%= link_to @event['name'], event_path(@event['id']) %>
-            in <%= display_countdown(@event) %> </h2>
+          <h2><%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %> </h2>
       <% end %>
     </div>
   </div>

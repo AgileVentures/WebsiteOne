@@ -20,11 +20,8 @@ describe Event do
     @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', time_zone: 'UTC', end_time: '11:00:00')
     Event.stub(:exists?).and_return true
     Event.stub(:where).and_return [@event]
-
     next_occurrence = Event.next_occurrence
     expect(next_occurrence).to eq @event
-    #({event: @event, time: DateTime.parse('Fri, 07 Mar 2014 10:30:00 UTC +00:00') })
-
   end
 
   context 'return false on invalid inputs' do
