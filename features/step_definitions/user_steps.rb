@@ -331,7 +331,8 @@ Given(/^I add skills "(.*)"/) do |skills|
 end
 
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
-  page.all(:css, "#skills-show .tag span").collect { |e| e.text }.sort.should == skills.split(",").sort
+  debugger
+  page.all(:css, "#skills-show span").collect { |e| e.text }.sort.should == skills.split(",").sort
 end
 
 And(/^I have a GitHub profile with username "([^"]*)"$/) do |username|

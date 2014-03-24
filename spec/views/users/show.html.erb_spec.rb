@@ -89,7 +89,7 @@ describe "users/show.html.erb" do
     it 'should display email if it is set to public' do
       @user.stub(display_email: true)
       render
-      expect(rendered).to have_content(@user.email)
+      expect(rendered).to have_link(@user.email)
     end
 
     it 'should display an hire me button if it set to public' do
@@ -101,7 +101,7 @@ describe "users/show.html.erb" do
   it 'should not display email if it is set to private' do
     @user.stub(display_email: false)
     render
-    expect(rendered).to_not have_content(@user.email)
+    expect(rendered).to_not have_link(@user.email)
   end
 
   it 'should display an hire me button if it set to private' do
@@ -113,7 +113,7 @@ end
 
   it 'should display Member for ..' do
     render
-    expect(rendered).to have_text('Member for: about 1 month')
+    expect(rendered).to have_text('Member for about 1 month')
   end
   
   it 'renders a bio' do
@@ -132,7 +132,7 @@ end
   it 'displays GitHub profile if it is linked' do
     @user.stub(github_profile_url: nil)
     render
-    expect(rendered).to have_text('GitHub profile: not linked')
+    expect(rendered).to have_text('GitHub profile not linked')
   end
 
   it 'displays GitHub profile is not linked if it is not linked' do
@@ -152,9 +152,19 @@ end
 
 
   end
+  it 'renders a tab view - nav-tabs' do
+    render
+    expect(rendered).to have_css('.nav-tabs')
+  end
+
+  it 'renders a tab view - tab panes' do
+    render
+    expect(rendered).to have_css('.tab-content')
+  end
 
   it 'renders list of followed projects' do
     render
+    expect(rendered).to have_css('#projects-show')
     @projects.each do |project|
       expect(rendered).to have_link(project.title, href: project_path(project))
     end
@@ -162,6 +172,6 @@ end
 
   it 'renders list of user skills' do
     render
-    expect(rendered).to have_css("#skills-show")
+    expect(rendered).to have_css('#skills-show')
   end
 end
