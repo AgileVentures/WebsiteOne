@@ -2,7 +2,7 @@ class VisitorsController < ApplicationController
   include ApplicationHelper
 
   def index
-    count_down
+    @event = Event.next_occurrence
   end
 
   def send_contact_form

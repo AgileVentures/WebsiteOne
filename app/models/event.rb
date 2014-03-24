@@ -5,12 +5,24 @@ class Event < ActiveRecord::Base
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == "weekly" }
   validate :from_must_come_before_to
+  attr_accessor :next_occurrence_time
 
   RepeatsOptions = %w[never weekly]
   RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
 
-
+  def self.next_occurrence
+    if Event.exists?
+      @events = []
+      Event.where(['category = ?', 'Scrum']).each do |event|
+        @events << event.current_occurences
+      end
+      @events = @events.flatten.sort_by { |e| e[:time] }
+      @events[0][:event].next_occurrence_time = @events[0][:time]
+      return @events[0][:event]
+    end
+    nil
+  end
 
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)

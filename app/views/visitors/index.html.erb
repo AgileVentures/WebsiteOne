@@ -7,7 +7,7 @@
       <%= render 'layouts/round_banners' %>
       <% if @event.present? %>
           <h2><%= link_to @event['name'], event_path(@event['id']) %>
-            in <%= display_countdown(@days_left, @hours_left, @minutes_left) %> </h2>
+            in <%= display_countdown(@event) %> </h2>
       <% end %>
     </div>
   </div>
