@@ -21,6 +21,13 @@
     <% else %>
         <p><i class="fa fa-github-alt fa-lg"></i> GitHub not linked</p>
     <% end %>
+
+    <% if @project.pivotaltracker_url.present? %>
+        <p><i class="fa fa-list"></i>
+          profile <%= link_to "#{@project.title} on PivotalTracker", @project.pivotaltracker_url %></p>
+    <% else %>
+        <p><i class="fa fa-list"></i> PivotalTracker not linked</p>
+    <% end %>
     </div>
     <div class="doc-status-text">
       <div>Status: <strong style="font-style: normal;"><%= @project.status.upcase %></strong></div>

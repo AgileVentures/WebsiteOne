@@ -50,14 +50,12 @@ describe 'projects/show.html.erb' do
 
   it "renders a link to the project's github page" do
     render
-    debugger
     expect(rendered).to have_link("#{@project.github_url.split('/').last} on GitHub", :href => @project.github_url)
   end
 
   it "renders a link to the project's Pivotal Tracker page" do
     render
-    expect(rendered).to have_link(:href => @project.pivotaltracker_url)
-    expect(rendered).to have_text"on Pivotal Tracker"
+    expect(rendered).to have_link("#{@project.title} on PivotalTracker", :href => @project.pivotaltracker_url)
   end
 
   it 'renders project description' do
