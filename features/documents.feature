@@ -129,6 +129,18 @@ Feature: Manage Document
     And I should see "This is my new body text"
 #  Then I no longer need the Mercury Editor
 
+  Scenario: The Mercury Editor should only work for the documents
+    Given I am logged in
+    And I visit the site
+    When I try to edit the page
+    Then I should see "You do not have the right privileges to complete action."
+    Given I am on the "Projects" page
+    When I try to edit the page
+    Then I should see "You do not have the right privileges to complete action."
+    Given I am on the "Show" page for project "hello world"
+    When I try to edit the page
+    Then I should see "You do not have the right privileges to complete action."
+
   Scenario: Document should have a history of changes 
     Given I am on the "Show" page for document "Documentation"
     Then I should see "Revisions"
