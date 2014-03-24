@@ -23,8 +23,6 @@ describe 'projects/show.html.erb' do
                           status: 'Active',
                           user_id: @user.id,
                           created_at: Time.now,
-                          github_url: "github.com/AgileVentures/myfriend",
-                          pivotaltracker_url: "www.pivotaltracker.com/s/projects/12345",
                           tag_list: []
 
     @videos = [
@@ -49,13 +47,25 @@ describe 'projects/show.html.erb' do
   end
 
   it "renders a link to the project's github page" do
+    @project.stub(:github_url).and_return("github.com/AgileVentures/myfriend")
     render
     expect(rendered).to have_link("#{@project.github_url.split('/').last} on GitHub", :href => @project.github_url)
   end
 
+  it "renders an unlinked message when project has no github link" do
+    render
+    expect(rendered).to have_text("not linked to GitHub")
+  end
+
   it "renders a link to the project's Pivotal Tracker page" do
+    @project.stub(:pivotaltracker_url).and_return("www.pivotaltracker.com/s/projects/12345")
     render
     expect(rendered).to have_link("#{@project.title} on PivotalTracker", :href => @project.pivotaltracker_url)
+  end
+  
+  it "renders an unlinked message when project has no PivotalTracker link" do
+    render
+    expect(rendered).to have_text("not linked to PivotalTracker")
   end
 
   it 'renders project description' do
