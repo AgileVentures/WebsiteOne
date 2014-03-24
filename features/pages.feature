@@ -57,3 +57,9 @@ Feature: Static pages
     Given I am on the "Projects" page
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
+
+  Scenario: The Mercury Editor cannot be accessed by non-logged in users
+    Given I am on the static "About Us" page
+    Then I should not see "Edit"
+    And I try to use the Mercury Editor to edit static "About Us" page
+    Then I should see "You do not have the right privileges to complete action."
