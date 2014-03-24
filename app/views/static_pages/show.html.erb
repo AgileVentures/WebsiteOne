@@ -4,11 +4,14 @@
   <div id="static_page_title" style="display: inline;" data-mercury="simple" data-type="editable"><%= @page.title %></div>
 </h1>
 
-<div id="doc-side-panel">
-  <% if user_signed_in? %>
+<% if user_signed_in? %>
     <%= custom_css_btn 'edit', 'fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
       data: {save_url: static_page_mercury_update_path(@page.slug)} %>
-  <% end %>
-</div>
+<% end %>
 
 <div id="static_page_body" data-mercury="full" data-type="editable"><%= clean_html(@page.body) %></div>
+
+<% if user_signed_in? %>
+    <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
+    <%= link_to 'Cancel', '', id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>
+<% end %>
