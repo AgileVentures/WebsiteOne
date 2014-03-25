@@ -6,8 +6,7 @@
     <div class="col-sm-12  text-center bg-5">
       <%= render 'layouts/round_banners' %>
       <% if @event.present? %>
-          <h2><%= link_to @event['name'], event_path(@event['id']) %> in <%= @days_left %> days <%= @hours_left %>
-            hours <%= @minutes_left %> minutes</h2>
+          <h2><%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %> </h2>
       <% end %>
     </div>
   </div>
@@ -18,9 +17,8 @@
     <h1>Connect and Collaborate</h1>
 
     <p class="text-center">
-      We hold pair
-      programming sessions every day with participants from all time zones and on all levels. Bring your own problem
-      set or collaborate on one of our <%= link_to 'Open Source projects', projects_path %>. </p>
+      We hold pair programming sessions every day with participants from all time zones and on all levels. Bring your
+      own problem set or collaborate on one of our <%= link_to 'Open Source projects', projects_path %>. </p>
   </div>
   <div class="row">
     <div class="col-sm-6 col-xs-6">
@@ -71,8 +69,6 @@
 
   </div>
 </div>
-
-
 <div class="divider"></div>
 <section class="bg-2">
   <div class="col-sm-10 col-sm-offset-1">
@@ -84,12 +80,10 @@
 <div class="divider"></div>
 <div class="container">
   <div class="col-sm-8 col-sm-offset-2 text-center">
-
     <div class="page-header opacity-dark text-center">
       <h1><span class="txt-rotate fw700" data-period="2500" data-rotate='[ "Learn", "Code", "Grow" ]'></span> TOGETHER
       </h1>
     </div>
-
     <div class="row">
       <p class="text-center">
         Want to pair program online and put some of that BDD and TDD into practise in real projects? We hold pair

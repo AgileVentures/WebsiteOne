@@ -1,5 +1,9 @@
 @time-travel
 Feature: Events
+  As a site user
+  In order to be able to plan activities
+  I would like to see event CRUD functionality
+  Pivotal Tracker:  https://www.pivotaltracker.com/story/show/66655876
 
   Background:
     Given following events exist:
