@@ -4,7 +4,12 @@ Before('@time-travel') do
   Delorean.time_travel_to(Time.parse('2014/02/01 09:15:00 UTC'))
 end
 
-After('@time-travel') do
+Before('@time-travel-step') do
+  @default_tz = ENV['TZ']
+  ENV['TZ'] = 'UTC'
+end
+
+After('@time-travel , @time-travel-step') do
   Delorean.back_to_the_present
   ENV['TZ'] = @default_tz
 end

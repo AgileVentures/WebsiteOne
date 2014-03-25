@@ -132,21 +132,4 @@ module ApplicationHelper
     </a>
     HTML
   end
-
-  def count_down
-    if Event.exists?
-      @events = []
-      Event.where(['category = ?', 'Scrum']).each do |event|
-        @events << event.current_occurences
-      end
-      @events = @events.flatten.sort_by { |e| e[:time] }
-      one_event = @events[0]
-      @event = nested_hash_value(one_event, :event)
-      @event_time = nested_hash_value(one_event, :time).to_datetime
-      countdown = Time.now.to_datetime.distance_to(@event_time)
-      @minutes_left = countdown[:minutes]
-      @hours_left = countdown[:hours]
-      @days_left = countdown[:days]
-    end
-  end
 end
