@@ -7,10 +7,10 @@ end
 Then /^I (am|should be) on the static "([^"]*)" page$/ do |option, page|
   case option
     when 'am'
-      visit page_path(page)
+      visit static_page_path(page)
 
     when 'should be'
-      expect(current_path.gsub('/', '')).to eq page_path(page).gsub('/', '')
+      expect(current_path).to eq static_page_path(page)
 
     else
       pending
@@ -18,7 +18,7 @@ Then /^I (am|should be) on the static "([^"]*)" page$/ do |option, page|
 end
 
 When(/^I (try to use|am using) the Mercury Editor to edit static "([^"]*)" page$/) do |opt, title|
-  visit "/editor/#{StaticPage.find_by_title(title).slug}"
+  visit "/editor#{static_page_path(title)}"
 end
 
 Given(/^the following page revisions exist$/) do |table|

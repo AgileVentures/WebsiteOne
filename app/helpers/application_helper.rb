@@ -2,8 +2,10 @@ module ApplicationHelper
 
   include ArticlesHelper
 
-  def page_path(page)
+  def static_page_path(page)
     "/#{page.parameterize}"
+    #static_page = StaticPage.find_by_title(page)
+    #"/#{static_page.ancestors.map(&:slug).reverse.append(static_page.slug).join("/")}"
   end
 
   def gravatar_for(email, options = {size: 80})

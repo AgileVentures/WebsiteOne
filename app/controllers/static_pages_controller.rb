@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def show
-    @page = StaticPage.friendly.find(params[:id])
+    @page = StaticPage.friendly.find(params[:id].split("/").last)
   end
 
   def mercury_update
