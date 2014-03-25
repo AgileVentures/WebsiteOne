@@ -5,7 +5,7 @@ describe StaticPage do
     @page = StaticPage.create!(valid_attributes_for(:static_page))
   end
 
-  xit { should be_versioned }
+  it { should be_versioned }
 
   context 'return false on invalid inputs' do
     it 'blank Title' do
