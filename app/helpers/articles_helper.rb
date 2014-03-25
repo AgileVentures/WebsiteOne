@@ -1,10 +1,15 @@
 module ArticlesHelper
+  def clean_html(html)
+    raw sanitize html, tags: %w(h1 h2 h3 h4 h5 h6 b i ul ol li pre span iframe div img br blockquote p a em del strong code tr table thead th tbody td dl dd dt hr),
+                 attributes: %w(src alt target frameborder allowfullscreen style href class id lang title align height width border)
+  end
+
   def standard_tags
     %w( Pair-Programming AgileVentures Ruby Rails Javascript jQuery Jasmine Cucumber RSpec Git Heroku )
   end
 
   def link_to_tags(tags)
-    raw tags.map{ |tag| link_to tag, articles_path(tag: tag) }.join(', ')
+    clean_html tags.map{ |tag| link_to tag, articles_path(tag: tag) }.join(', ')
   end
 
   class CodeRayify < Redcarpet::Render::HTML
@@ -20,12 +25,12 @@ module ArticlesHelper
 
   def from_markdown(markdown)
     return '' if markdown.nil?
-    raw markdown_engine.render markdown
+    clean_html(markdown_engine.render markdown)
   end
 
   def markdown_preview(markdown)
     return '' if markdown.nil?
-    raw sanitize(markdown_engine.render(markdown), tags: %w( p pre code strong em )).truncate(100, separator: ' ')
+    raw sanitize(markdown_engine.render(markdown), tags: %w( p pre code strong em ), attributes: %w(id class style)).truncate(100, separator: ' ')
   end
 
   def markdown_engine
