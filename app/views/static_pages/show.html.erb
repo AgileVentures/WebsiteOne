@@ -22,4 +22,21 @@
     <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
     <%= link_to 'Cancel', '', id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>
 <% end %>
-<div class="small-divider"></div>
+<% unless @page.versions.empty? %>
+    <a id="revisions-anchor" href=""><h4 style="display: inline-flex">Revisions</h4><i id="arrow" class="fa fa-arrow-down fa-lg" style="display:inline-flex;margin-left:5px;position:relative;top:2px;"></i></a>
+    <div id="revisions" style="display:none;">
+        <% @page.versions.each do |version| %>
+            <%= user_details(version.whodunnit.to_i) %>
+            <%= version.event %>d <b>"<%= @page.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago <br/>
+        <% end %>
+    </div>
+<% end %>
+
+<script>
+  $("#revisions-anchor").click(function(e){
+      e.preventDefault();
+      $("#revisions").toggle();
+      $("#arrow").toggleClass("fa-arrow-up");
+      $("#arrow").toggleClass("fa-arrow-down");
+  });
+</script>
