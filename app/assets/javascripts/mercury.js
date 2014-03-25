@@ -470,6 +470,8 @@ jQuery(window).on('mercury:ready', function() {
     event.preventDefault();
     $('.mercury-button.mercury-save-button').click();
   });
+
+  mercuryiframe.contents().find("#static_page_title .mercury-textarea").css("width", "125%");
 });
 
 jQuery(window).on('mercury:saved', function() {
