@@ -7,6 +7,9 @@ Feature: Static pages
     Given the following pages exist
       | title         | body             |
       | About Us      | Agile Ventures   |
+    And the following page revisions exist
+      | title         | revisions  |
+      | About Us      | 1          |
     And I am on the "home" page
 
   Scenario: Render about page
@@ -63,3 +66,8 @@ Feature: Static pages
     Then I should not see "Edit"
     And I try to use the Mercury Editor to edit static "About Us" page
     Then I should see "You do not have the right privileges to complete action."
+
+  Scenario: Page should have a history of changes
+    Given I am on the static "About Us" page
+    Then I should see "Revisions"
+    And I should see 4 revisions for the page "About Us"
