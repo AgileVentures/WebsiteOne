@@ -5,13 +5,13 @@ Feature: Create and maintain projects
 
   Background:
     Given the following projects exist:
-      | title         | description             | status   | github_url                  | pivotaltracker_url                     |
-      | hello world   | greetings earthlings    | active   | github.com/agileventures/ge | www.pivotaltracker.com/projects/742821 |
-      | hello mars    | greetings aliens        | inactive |                             |                                        |
-      | hello jupiter | greetings jupiter folks | active   |                             |                                        |
-      | hello mercury | greetings mercury folks | inactive |                             |                                        |
-      | hello saturn  | greetings saturn folks  | active   |                             |                                        |
-      | hello sun     | greetings sun folks     | active   |                             |                                        |
+      | title         | description             | status   | github_url                                  | pivotaltracker_url                     |
+      | hello world   | greetings earthlings    | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/projects/742821 |
+      | hello mars    | greetings aliens        | inactive |                                             |                                        |
+      | hello jupiter | greetings jupiter folks | active   |                                             |                                        |
+      | hello mercury | greetings mercury folks | inactive |                                             |                                        |
+      | hello saturn  | greetings saturn folks  | active   |                                             |                                        |
+      | hello sun     | greetings sun folks     | active   |                                             |                                        |
     And there are no videos
 
 #  Scenarios for Index page
@@ -154,4 +154,4 @@ Feature: Create and maintain projects
   Scenario: Project show page has links to github and Pivotal Tracker
     Given I am on the "Show" page for project "hello world"
     And I should see a link to "hello world" on github
-    And I should see a link to the "hello world" on Pivotal Tracker
+    And I should see a link to "hello world" on Pivotal Tracker
