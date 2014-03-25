@@ -16,5 +16,4 @@ FactoryGirl.define do
   factory :invalid_event do
     name nil
   end
-
 end
