@@ -30,7 +30,7 @@ Feature: As a user of the site
     And I should see "Alice Jones"
     And I should see "Sweden"
      # And I should see "Member for: about 1 month"
-    And I should see "Member for:"
+    And I should see "Member for"
 
   Scenario: Having edit button on the profile page
     When I click on the avatar for "brett@example.com"
@@ -45,11 +45,11 @@ Feature: As a user of the site
 
   Scenario: Show link to user's github page if authenticated with GitHub
     When I am on "profile" page for user "Alice"
-    Then I should see "GitHub profile: AliceSky"
+    Then I should see "GitHub profile AliceSky"
 
   Scenario: Show 'profile not linked'
     When I am on "profile" page for user "Bob"
-    Then I should see "GitHub profile: not linked"
+    Then I should see "GitHub profile not linked"
 
   Scenario: Having a list of followed projects on my profile page
     Given user "Bob" follows projects:

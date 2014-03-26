@@ -8,7 +8,7 @@ Feature: Add in-page links for projects show page to open the tabbed contents
     Given the following projects exist:
       | title         | description             | status   |
       | hello world   | greetings earthlings    | active   |
-    And there are no videos
+    #And there are no videos
     And I am on the "Show" page for project "hello world"
 
   Scenario: Share the link to documents tab

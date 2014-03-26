@@ -10,7 +10,7 @@ module ArticlesHelper
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
       begin
-        CodeRay.scan(code, language).div
+        CodeRay.scan(code, language || :plaintext).div
       rescue Exception => e
         Rails.logger.error e
         '<div class="CodeRay"><pre>Failed to render markdown</pre></div>'

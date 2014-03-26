@@ -43,6 +43,7 @@ describe UsersController do
       @user.stub(:following_by_type).and_return(@projects)
       @user.stub(:skill_list).and_return([])
       User.stub_chain(:friendly, :find).and_return(@user)
+      @user.stub(:bio).and_return('test_bio')
 
       @youtube_videos = [
           {
