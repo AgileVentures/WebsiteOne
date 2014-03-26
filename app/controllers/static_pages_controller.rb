@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def show
-    @page = StaticPage.friendly.find(params[:id].split("/").last)
+    @page = StaticPage.friendly.find(get_page_id(params[:id]))
   end
 
   def mercury_update
@@ -12,6 +12,12 @@ class StaticPagesController < ApplicationController
   end
 
   def mercury_saved
-    redirect_to static_page_path(params[:id]), notice: 'The page has been successfully updated.'
+    redirect_to "/#{StaticPage.url_for_me(get_page_id(params[:id]))}", notice: 'The page has been successfully updated.'
+  end
+
+  private
+
+  def get_page_id page
+    page.split("/").reject { |i| ["mercury_saved", "mercury_update"].include? i }.last
   end
 end

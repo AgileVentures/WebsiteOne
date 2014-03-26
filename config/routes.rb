@@ -42,7 +42,7 @@ WebsiteOne::Application.routes.draw do
   post 'mail_contact_form', to: 'visitors#send_contact_form'
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form'
 
-  get ':id', to: 'static_pages#show', as: 'static_page'
-  put ':id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update'
-  get ':id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved'
+  put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update'
+  get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved'
+  get '*id', to: 'static_pages#show', as: 'static_page'
 end
