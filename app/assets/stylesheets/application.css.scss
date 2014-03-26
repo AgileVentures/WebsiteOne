@@ -6,6 +6,8 @@
  */
 @import "bootstrap";
 
+
+
 .signin {
   h2 {
     margin-top: 0;
@@ -88,10 +90,23 @@ label {
   width: 250px;
 }
 
+.add-btn-agile {
+  color: #FFF;
+  background-color: #F07F48;
+  border-color: #EEA236;
+}
+
 .btn-agile {
   color: #FFF;
   background-color: #F07F48;
   border-color: #EEA236;
+  line-height: 35px !important;
+}
+
+
+.btn-agile a {
+  color: #FFF !important;
+  opacity: 1 !important;
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
