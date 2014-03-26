@@ -1,9 +1,27 @@
 require 'spec_helper'
 
 describe Event do
+  before :each do
+    @default_tz = ENV['TZ']
+    ENV['TZ'] = 'UTC'
+  end
+
+  after :each do
+    Delorean.back_to_the_present
+    ENV['TZ'] = @default_tz
+  end
 
   it 'should respond to "schedule" method' do
     Event.respond_to?('schedule')
+  end
+
+  it 'should be able to provide next_occurrence' do
+    Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
+    @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', time_zone: 'UTC', end_time: '11:00:00')
+    Event.stub(:exists?).and_return true
+    Event.stub(:where).and_return [@event]
+    next_occurrence = Event.next_occurrence
+    expect(next_occurrence).to eq @event
   end
 
   context 'return false on invalid inputs' do
