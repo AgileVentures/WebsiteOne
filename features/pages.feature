@@ -5,9 +5,11 @@ Feature: Static pages
 
   Background:
     Given the following pages exist
-      | title         | body             |
-      | About Us      | Agile Ventures   |
-      | Sponsors      | AV Sponsors      |
+      | title         | body                      |
+      | About Us      | Agile Ventures            |
+      | Sponsors      | AV Sponsors               |
+      | Getting Started | Remote Pair Programming |
+
     And the following page revisions exist
       | title         | revisions  |
       | About Us      | 1          |
@@ -19,6 +21,7 @@ Feature: Static pages
     Then I should be on the static "About Us" page
     And I should see "About Us"
 
+  # Sponsors and Guides scenarios not really needed. To be removed later.
   Scenario: See Sponsor Banners
     When I am on the "projects" page
     Then I should see sponsor banner for "Makers Academy"
@@ -29,6 +32,13 @@ Feature: Static pages
     When I am on the "projects" page
     And I click "Become a supporter"
     Then I should be on the static "Sponsors" page
+
+  Scenario: There should be a getting started link in the nav bar
+    When I am on the home page
+    And I click "Getting Started"
+    Then I should be on the static "Getting Started" page
+    And I should see "Getting Started"
+    And I should see "Remote Pair Programming"
 
   Scenario: Has a link to edit a page using the Mercury Editor
     Given I am logged in
