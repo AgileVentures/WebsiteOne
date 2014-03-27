@@ -38,7 +38,7 @@ describe 'layouts/application.html.erb' do
     render
     #TODO Y replace href with project_path helper
     rendered.should have_link 'Our projects', :href => projects_path
-    rendered.should have_link 'About us', :href => static_page_path('about-us')
+    rendered.should have_link 'About us', :href => static_page_path('About Us')
   end
 
   it 'should render a footer' do

@@ -1,3 +1,7 @@
+def static_page_path(page)
+  "/#{StaticPage.url_for_me(page)}"
+end
+
 Given(/^the following pages exist$/) do |table|
   table.hashes.each do |hash|
     StaticPage.create!(hash)
