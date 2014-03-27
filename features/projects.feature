@@ -134,12 +134,16 @@ Feature: Create and maintain projects
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
-    And I fill in "Github url" with "https://github.com/google/instant-hangouts"
-    And I fill in "Pivotaltracker url" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
+    And I fill in "PivotalTracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
+    And show me the page
     Then I should be on the "Show" page for project "hello mars"
     And I should see "Project was successfully updated."
     And I should see "Hello, Uranus!"
+    And I should see a link to "hello mars" on github
+    And I should see a link to "hello mars" on Pivotal Tracker
+
 
   Scenario: Saving a project: failure
     Given I am logged in
