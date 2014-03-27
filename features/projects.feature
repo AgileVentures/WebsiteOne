@@ -134,6 +134,8 @@ Feature: Create and maintain projects
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
+    And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
+    And I fill in "PivotalTracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see "Project was successfully updated."
