@@ -2,10 +2,6 @@ module ApplicationHelper
 
   include ArticlesHelper
 
-  def static_page_path(page)
-    "/#{StaticPage.url_for_me(page)}"
-  end
-
   def gravatar_for(email, options = {size: 80})
     hash = Digest::MD5::hexdigest(email.strip.downcase)
     "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"

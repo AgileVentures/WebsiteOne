@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
   end
 
   def mercury_saved
-    redirect_to "/#{StaticPage.url_for_me(get_page_id(params[:id]))}", notice: 'The page has been successfully updated.'
+    redirect_to static_page_path(get_page_id(params[:id])), notice: 'The page has been successfully updated.'
   end
 
   private
