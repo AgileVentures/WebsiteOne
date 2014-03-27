@@ -7,16 +7,28 @@ Feature: Static pages
     Given the following pages exist
       | title         | body             |
       | About Us      | Agile Ventures   |
+      | Sponsors      | AV Sponsors      |
     And the following page revisions exist
       | title         | revisions  |
       | About Us      | 1          |
     And I am on the "home" page
 
-  Scenario: Render about page
+  Scenario: Render About Us page
     Then I should see link "About us"
     When I click "About us"
     Then I should be on the static "About Us" page
     And I should see "About Us"
+
+  Scenario: See Sponsor Banners
+    When I am on the "projects" page
+    Then I should see sponsor banner for "Makers Academy"
+    And I should see sponsor banner for "Agile Ventures"
+    And I should see link "Become a supporter"
+
+  Scenario: Render Sponsors page
+    When I am on the "projects" page
+    And I click "Become a supporter"
+    Then I should be on the static "Sponsors" page
 
   Scenario: Has a link to edit a page using the Mercury Editor
     Given I am logged in

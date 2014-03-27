@@ -15,7 +15,7 @@ Feature:
 
     And the following pages exist
       | title     |
-      | sponsors  |
+      | Sponsors  |
 
     And I am on the "Projects" page
 
