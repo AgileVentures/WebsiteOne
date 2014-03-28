@@ -13,6 +13,13 @@ namespace :db do
       StaticPage.create!(title: get_title(page), body: File.open(Rails.root.join('app', 'views', 'pages', 'remote-pair-programming', page).to_s).read, parent_id: parent1.id)
       puts "Created Static Page: Remote Pair Programming/#{get_title(page)}"
     end
+
+    # Creating pair-programming-protocols
+    parent2 = StaticPage.find_by_slug('pair-programming-protocols')
+    Dir.entries(Rails.root.join('app', 'views', 'pages', 'remote-pair-programming', 'pair-programming-protocols').to_s).select { |f| f.ends_with? ".html.erb" }.each do |page|
+      StaticPage.create!(title: get_title(page), body: File.open(Rails.root.join('app', 'views', 'pages', 'remote-pair-programming', 'pair-programming-protocols', page).to_s).read, parent_id: parent2.id)
+      puts "Created Static Page: Remote Pair Programming/Pair Programming Protocols/#{get_title(page)}"
+    end
   end
 end
 
