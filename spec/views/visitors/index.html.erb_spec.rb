@@ -4,7 +4,7 @@ describe 'visitors/index.html.erb' do
   before :each do
     @default_tz = ENV['TZ']
     ENV['TZ'] = 'UTC'
-    @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', next_occurrence_time: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
+    @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', next_occurrence_time: double(IceCube::Occurrence, to_i:DateTime.parse('2014-03-07 10:30:00 UTC').to_i))
     assign :event, @event
   end
 
