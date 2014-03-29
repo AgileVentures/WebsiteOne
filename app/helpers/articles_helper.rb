@@ -14,8 +14,7 @@ module ArticlesHelper
 
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
-      CodeRay.scan(code, language).div
-
+      CodeRay.scan(code, language || :plaintext).div
     rescue Exception => e
       Rails.logger.error e
       'Failed to render code block'

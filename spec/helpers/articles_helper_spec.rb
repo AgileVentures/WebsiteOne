@@ -41,11 +41,18 @@ describe ArticlesHelper do
       output.should have_text 'Failed to render code block'
     end
 
-    it 'should render block code correcly' do
+    it 'should render block code correctly' do
       output = helper.from_markdown "this is an example:\n\n~~~ruby\nputs \"hello world\"\n~~~"
 
       output.should_not have_text '~~~'
       output.should_not have_text 'ruby'
+      output.should have_css '.code'
+    end
+
+    it 'should render block code without a language specified correctly' do
+      output = helper.from_markdown "this is an example:\n\n~~~ruby\nplain text\n~~~"
+
+      output.should_not have_text '~~~'
       output.should have_css '.code'
     end
 
