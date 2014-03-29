@@ -98,6 +98,17 @@ ActiveRecord::Schema.define(version: 20140324211134) do
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
+  create_table "static_pages", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "parent_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -131,8 +142,8 @@ ActiveRecord::Schema.define(version: 20140324211134) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "display_email"
-    t.string   "slug"
     t.string   "youtube_id"
+    t.string   "slug"
     t.boolean  "display_profile",        default: true
     t.float    "latitude"
     t.float    "longitude"

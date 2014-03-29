@@ -14,12 +14,11 @@ module ArticlesHelper
 
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
-      begin
-        CodeRay.scan(code, language || :plaintext).div
-      rescue Exception => e
-        Rails.logger.error e
-        '<div class="CodeRay"><pre>Failed to render markdown</pre></div>'
-      end
+      CodeRay.scan(code, language).div
+
+    rescue Exception => e
+      Rails.logger.error e
+      'Failed to render code block'
     end
   end
 
@@ -33,18 +32,19 @@ module ArticlesHelper
     raw sanitize(markdown_engine.render(markdown), tags: %w( p pre code strong em ), attributes: %w(id class style)).truncate(100, separator: ' ')
   end
 
+  private
+
   def markdown_engine
-    renderer = CodeRayify.new autolink: true,
-                              fenced_code_blocks: true,
-                              no_intra_emphasis: true,
-                              superscript: true,
-                              footnotes: true
+    renderer = CodeRayify.new filter_html: true,
+                              hard_wrap: true,
+                              with_toc_data: true,
+                              link_attributes: { target: '_blank', rel: 'nofollow' }
 
     Redcarpet::Markdown.new renderer,
-                            filter_html: true,
-                            hard_wrap: true,
-                            with_toc_data: true,
-                            link_attributes: { target: '_blank', rel: 'nofollow' }
+                            autolink: true,
+                            fenced_code_blocks: true,
+                            no_intra_emphasis: true,
+                            superscript: true,
+                            footnotes: true
   end
-  private :markdown_engine
 end

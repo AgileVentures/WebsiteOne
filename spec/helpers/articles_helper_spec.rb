@@ -38,7 +38,15 @@ describe ArticlesHelper do
       renderer = ArticlesHelper::CodeRayify.new
       CodeRay.stub(:scan).and_raise Exception
       output = renderer.block_code 'function (a, b, c)', nil
-      output.should have_text 'Failed to render markdown'
+      output.should have_text 'Failed to render code block'
+    end
+
+    it 'should render block code correcly' do
+      output = helper.from_markdown "this is an example:\n\n~~~ruby\nputs \"hello world\"\n~~~"
+
+      output.should_not have_text '~~~'
+      output.should_not have_text 'ruby'
+      output.should have_css '.code'
     end
 
     context 'preview' do
