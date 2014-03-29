@@ -114,4 +114,13 @@ end
 And(/^the following sub-documents exist:$/) do |table|
   table.hashes
 end
+Given(/^I should see a link to "(.*?)" on github$/) do |name|
+  object = Project.find_by_title(name)
+  step %Q{I should see link "#{object.github_url.split('/').last}"}
+end
+
+Given(/^I should see a link to "(.*?)" on Pivotal Tracker$/) do |name|
+  object = Project.find_by_title(name)
+  step %Q{I should see link "#{object.title}"}
+end
 
