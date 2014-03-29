@@ -1,4 +1,4 @@
-source 'http://bundler-api.herokuapp.com'
+source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '4.0.2'
 gem 'pg'  # PostgreSQL database support
@@ -43,7 +43,6 @@ gem 'yui-compressor'
 gem 'compass-rails'
 gem 'rack-cache'
 gem 'sprockets-image_compressor'
-gem 'actionpack-page_caching'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
