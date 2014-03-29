@@ -1,6 +1,7 @@
 <% provide :title, @page.title %>
 
 <div id="ancestry">
+  <strong><%= link_to 'Agile Ventures', root_path %></strong><i class="fa fa-angle-double-right"></i>
   <% @ancestry.each do |page| %>
       <strong><%= link_to page, static_page_path(page) %></strong>
       <% unless @ancestry.last == page %>

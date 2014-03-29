@@ -102,4 +102,4 @@ Feature: Static pages
   Scenario: Page should show ancestry details
     Given the page "About Us" has a child page with title "SubPage1"
     And I am on the static "SubPage1" page
-    Then I should see ancestry "About Us >> SubPage1"
+    Then I should see ancestry "Agile Ventures >> About Us >> SubPage1"
