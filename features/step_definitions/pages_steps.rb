@@ -65,7 +65,7 @@ Then(/^I should see ancestry "([^"]*)"$/) do |str|
   ancestry = str.split(" >> ")
   within("#ancestry") do
     ancestry.each do |a|
-      page.should have_text a
+      page.should have_content a
     end
   end
 end

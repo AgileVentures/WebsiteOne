@@ -16,8 +16,11 @@ describe "static_pages/show" do
                        :body => "Content",
                        :created_at => Time.now,
     )
+    @ancestry = [@page.title]
 
     assign :page, @page
+    assign :ancestry, @ancestry
+
     @page.stub(:versions).and_return([@version])
   end
 
@@ -30,5 +33,13 @@ describe "static_pages/show" do
   it 'should render page revisions history' do
     render
     rendered.should have_content 'Revisions'
+  end
+
+  it 'renders correct ancestry for static page' do
+    render
+    rendered.within("#ancestry") do
+      rendered.should have_content "Agile Ventures"
+      rendered.should have_content @page.title
+    end
   end
 end
