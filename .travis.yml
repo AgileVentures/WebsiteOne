@@ -28,6 +28,4 @@ deploy:
       master: websiteone-production
   run: "rake db:migrate"
 notifications:
-  email:
-    - thomas@nocebo.se
-    - info@agileventures.org
+  email: false
