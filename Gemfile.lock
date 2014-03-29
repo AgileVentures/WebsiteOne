@@ -22,7 +22,7 @@ GIT
       omniauth-oauth2 (~> 1.1)
 
 GEM
-  remote: http://bundler-api.herokuapp.com/
+  remote: https://rubygems.org/
   specs:
     actionmailer (4.0.2)
       actionpack (= 4.0.2)
@@ -33,8 +33,6 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionpack-page_caching (1.0.2)
-      actionpack (>= 4.0.0, < 5)
     activemodel (4.0.2)
       activesupport (= 4.0.2)
       builder (~> 3.1.0)
@@ -355,7 +353,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack-page_caching
   acts-as-taggable-on
   acts_as_follower
   acts_as_tree (~> 1.5.0)
