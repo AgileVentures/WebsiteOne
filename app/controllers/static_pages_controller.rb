@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
   def show
     @page = StaticPage.friendly.find(get_page_id(params[:id]))
+    @ancestry = @page.self_and_ancestors.map(&:title).reverse
   end
 
   def mercury_update

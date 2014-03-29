@@ -1,5 +1,14 @@
 <% provide :title, @page.title %>
 
+<div id="ancestry">
+  <% @ancestry.each do |page| %>
+      <strong><%= link_to page, static_page_path(page) %></strong>
+      <% unless @ancestry.last == page %>
+          <i class="fa fa-angle-double-right"></i>
+      <% end %>
+  <% end %>
+</div>
+
 <div id="page-box">
   <div id="page-overview">
     <h1>
