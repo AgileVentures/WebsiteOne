@@ -60,3 +60,12 @@ end
 Then(/^the current page url should be "([^"]*)"$/) do |url|
   current_path.should == "/#{url}"
 end
+
+Then(/^I should see ancestry "([^"]*)"$/) do |str|
+  ancestry = str.split(" >> ")
+  within("#ancestry") do
+    ancestry.each do |a|
+      page.should have_text a
+    end
+  end
+end

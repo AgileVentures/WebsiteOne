@@ -98,3 +98,8 @@ Feature: Static pages
     Given the page "About Us" has a child page with title "SubPage1"
     And I am on the static "SubPage1" page
     Then the current page url should be "about-us/subpage1"
+
+  Scenario: Page should show ancestry details
+    Given the page "About Us" has a child page with title "SubPage1"
+    And I am on the static "SubPage1" page
+    Then I should see ancestry "About Us >> SubPage1"
