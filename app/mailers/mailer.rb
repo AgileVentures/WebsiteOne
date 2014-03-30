@@ -14,7 +14,6 @@ class Mailer < ActionMailer::Base
   end
 
   def send_welcome_message(user)
-    # Bryan: Disabled while the email limit is over
     @user = user
     mail(to: user.email, subject: 'Welcome to AgileVentures.org')
   end
