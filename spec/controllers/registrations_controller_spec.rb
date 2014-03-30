@@ -59,6 +59,7 @@ describe RegistrationsController do
   describe '#update' do
     let(:valid_session) { {} }
 
+
     before(:each) do
       # stubbing out devise methods to simulate authenticated user
       @user = double('user', id: 1, friendly_id: 'some-id')
@@ -68,6 +69,12 @@ describe RegistrationsController do
       request.env["devise.mapping"] = Devise.mappings[:user]
       User.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@user)
       @user.stub(:skill_list=)
+    end
+
+    it 'renders edit on preview' do
+      @user.stub(:display_email=)
+      put :update, id: 'update', preview: true, user: {email: ''}
+      expect(response).to render_template(:edit)
     end
 
     it 'assigns the requested project as @project' do
@@ -91,7 +98,19 @@ describe RegistrationsController do
       end
     end
 
-    context 'unsuccessful save' do
+    context 'unsuccessful update' do
+      before(:each) do
+        @user.stub(:update_attributes).and_return(false)
+        put :update, id: 'some-id', user: {email: ''}
+      end
+      it 'renders edit' do
+        expect(response).to render_template(:edit)
+      end
+
+      # How to test this
+      it 'shows an unsuccessful message' do
+        expect(flash[:notice]).to_not eq('You updated your account successfully.')
+      end
     end
   end
 end
