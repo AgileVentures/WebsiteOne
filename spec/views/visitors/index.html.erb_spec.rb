@@ -57,7 +57,7 @@ describe 'visitors/index.html.erb' do
       render
       expect(rendered).to have_link @event.name, event_path(@event)
       expect(rendered).to have_text [@event.name, 'in'].join(' ')
-      expect(rendered).to_not have_text '0 days'
+      expect(rendered).to_not have_text '-1 hours'
       expect(rendered).to have_text '23 hours'
       expect(rendered).to have_text '45 minutes'
     end
