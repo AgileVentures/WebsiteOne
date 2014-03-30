@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe RegistrationsController do
-  describe "#create" do
+  describe "POST create" do
     context 'successful save' do
       before(:each) do
         request.env["devise.mapping"] = Devise.mappings[:user]
@@ -29,6 +29,7 @@ describe RegistrationsController do
     context 'unsuccessful save' do
       before(:each) do
         request.env["devise.mapping"] = Devise.mappings[:user]
+        ActionMailer::Base.deliveries.clear
       end
 
       it 'does not email upon failure to register' do
@@ -55,6 +56,42 @@ describe RegistrationsController do
     end
   end
 
-  describe "#update" do
+  describe '#update' do
+    let(:valid_session) { {} }
+
+    before(:each) do
+      # stubbing out devise methods to simulate authenticated user
+      @user = double('user', id: 1, friendly_id: 'some-id')
+      request.env['warden'].stub :authenticate! => @user
+      controller.stub :current_user => @user
+
+      request.env["devise.mapping"] = Devise.mappings[:user]
+      User.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@user)
+      @user.stub(:skill_list=)
+    end
+
+    it 'assigns the requested project as @project' do
+      @user.should_receive(:update_attributes)
+      put :update, id: 'update', user: {display_hire_me: true}
+      expect(assigns(:user)).to eq(@user)
+    end
+
+    context 'successful update' do
+      before(:each) do
+        @user.stub(:update_attributes).and_return(true)
+        put :update, id: 'some-id', user: {display_hire_me: true}
+      end
+
+      it 'redirects to the user show page' do
+        expect(response).to redirect_to(users_show_path(@user))
+      end
+
+      it 'shows a success message' do
+        expect(flash[:notice]).to eq('You updated your account successfully.')
+      end
+    end
+
+    context 'unsuccessful save' do
+    end
   end
 end
