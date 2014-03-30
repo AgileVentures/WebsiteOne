@@ -82,7 +82,7 @@ end
 
 When /^I sign up without a password confirmation$/ do
   create_visitor
-  @visitor = @visitor.merge(:password_confirmation => "")
+  @visitor = @visitor.merge(:password_confirmation => '')
   sign_up
 end
 
@@ -168,7 +168,7 @@ Then /^I should see a missing password confirmation message$/ do
 end
 
 Then /^I should see a mismatched password message$/ do
-  page.should have_content "Password confirmation doesn't match "
+  page.should have_content "Password confirmation doesn't match"
 end
 
 Then /^I should see a signed out message$/ do

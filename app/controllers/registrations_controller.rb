@@ -2,7 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     session[:omniauth] = nil unless @user.new_record?
-    Mailer.send_welcome_message(@user).deliver unless @user.invalid?
+    Mailer.send_welcome_message(@user).deliver unless @user.new_record?
   end
 
   def update
@@ -15,10 +15,10 @@ class RegistrationsController < Devise::RegistrationsController
       skills = params[:user].delete "skill_list"
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
 
-      #if account_update_params[:password].blank?
-      #  account_update_params.delete('password')
-      #  account_update_params.delete('password_confirmation')
-      #end
+      if account_update_params[:password].blank?
+        account_update_params.delete('password')
+        account_update_params.delete('password_confirmation')
+      end
 
       # Bryan: creates a new but identical object
       @user = User.friendly.find(current_user.friendly_id)

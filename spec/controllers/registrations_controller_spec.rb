@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe RegistrationsController do
-  describe "POST create" do
+  describe 'POST create' do
     context 'successful save' do
       before(:each) do
-        request.env["devise.mapping"] = Devise.mappings[:user]
+        request.env['devise.mapping'] = Devise.mappings[:user]
         post :create, user: {email: 'random@random.com', password: 'randomrandom', password_confirmation: 'randomrandom'}
       end
 
@@ -28,7 +28,7 @@ describe RegistrationsController do
 
     context 'unsuccessful save' do
       before(:each) do
-        request.env["devise.mapping"] = Devise.mappings[:user]
+        request.env['devise.mapping'] = Devise.mappings[:user]
         ActionMailer::Base.deliveries.clear
       end
 
@@ -45,13 +45,12 @@ describe RegistrationsController do
       it 'has an active record error message in the user instance variable when registration fails due to email already being in db' do
         FactoryGirl.create :user
         post :create, user: {email: 'example@example.com', password: 'randomrandom', password_confirmation: 'randomrandom'}
-        expect(assigns(:user).errors.full_messages).to include "Email has already been taken"
+        expect(assigns(:user).errors.full_messages).to include 'Email has already been taken'
       end
 
-
       it 'has an active record error message in the user instance variable when registration fails due to non matching passwords' do
-        post :create, user: {email: 'example@example.com', password: 'randomrandom', password_confirmation: 'randomrando'}
-        expect(assigns(:user).errors.full_messages).to include("Password confirmation doesn't match Password")
+        post :create, user: { email: 'example123@example.com', password: 'randomrandom', password_confirmation: 'randomrando' }
+        expect(assigns(:user).errors.full_messages).to include "Password confirmation doesn't match Password"
       end
     end
   end
@@ -66,7 +65,7 @@ describe RegistrationsController do
       request.env['warden'].stub :authenticate! => @user
       controller.stub :current_user => @user
 
-      request.env["devise.mapping"] = Devise.mappings[:user]
+      request.env['devise.mapping'] = Devise.mappings[:user]
       User.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@user)
       @user.stub(:skill_list=)
     end
