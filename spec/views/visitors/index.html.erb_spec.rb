@@ -47,5 +47,20 @@ describe 'visitors/index.html.erb' do
       expect(rendered).to have_text '15 minutes'
     end
   end
+
+  context 'event is planned within 23h (testing display of -1 h) ' do
+    before :each do
+      Delorean.time_travel_to(Time.parse('2014-03-06 10:45:00 UTC'))
+    end
+
+    it 'should display countdown without -1' do
+      render
+      expect(rendered).to have_link @event.name, event_path(@event)
+      expect(rendered).to have_text [@event.name, 'in'].join(' ')
+      expect(rendered).to_not have_text '0 days'
+      expect(rendered).to have_text '23 hours'
+      expect(rendered).to have_text '45 minutes'
+    end
+  end
 end
 
