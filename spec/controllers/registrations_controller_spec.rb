@@ -48,9 +48,9 @@ describe RegistrationsController do
         expect(assigns(:user).errors.full_messages).to include "Email has already been taken"
       end
 
-      # Deal with it later
-      xit 'has an active record error message in the user instance variable when registration fails due to non matching passwords' do
-        post :create, 'user' => {'email' => 'example2@example.com', 'password' => 'pppppppp', 'password_confirmation' => 'aaaaaaaaaa'}
+
+      it 'has an active record error message in the user instance variable when registration fails due to non matching passwords' do
+        post :create, user: {email: 'example@example.com', password: 'randomrandom', password_confirmation: 'randomrando'}
         expect(assigns(:user).errors.full_messages).to include("Password confirmation doesn't match Password")
       end
     end
