@@ -5,6 +5,7 @@ describe 'layouts/application.html.erb' do
     @user = FactoryGirl.create(:user)
     view.stub(:current_user).and_return(@user)
   end
+
   it 'should include css & js files' do
     render
     rendered.should have_xpath("//link[contains(@href, '.css')]")
@@ -20,7 +21,7 @@ describe 'layouts/application.html.erb' do
   end
 
   it 'should not have div nested inside p' do
-    should_not have_selector("p>div")
+    should_not have_selector('p>div')
   end
 
   it 'should not have extra escaped html' do
@@ -47,7 +48,8 @@ describe 'layouts/application.html.erb' do
     rendered.should have_text ('AgileVentures - Crowdsourced Learning')
   end
 
-  xit 'should return 200 for all link visits' do
+  it 'should return 200 for all link visits' do
+    StaticPage.stub_chain(:friendly, :find).and_return(stub_model(StaticPage, title: 'A static page'))
     render
     rendered.within('div.navbar') do |header|
       links = header.all('a').map { |el| el[:href] }
@@ -76,6 +78,7 @@ describe 'layouts/application.html.erb' do
     before :each do
       view.stub(:user_signed_in?).and_return(true)
     end
+
     it 'should render navigation links' do
       render
       rendered.should have_css('a#user_info', :visible => true)
@@ -83,7 +86,6 @@ describe 'layouts/application.html.erb' do
       rendered.within('div.navbar') do |header|
         header.should_not have_link 'Log in', :href => new_user_session_path
         header.should_not have_link 'Sign up', :href => new_user_registration_path
-
       end
     end
 
@@ -102,6 +104,7 @@ describe 'layouts/application.html.erb' do
         expect(selection).to have_css('#contact_form')
       end
     end
+
     it 'shows info link' do
       render
       rendered.within('#footer') do |selection|
@@ -119,6 +122,7 @@ describe 'layouts/application.html.erb' do
       end
 
     end
+
     it 'shows required fields' do
       render
       rendered.within('#contact_form') do |selection|
@@ -127,6 +131,7 @@ describe 'layouts/application.html.erb' do
         expect(selection).to have_field('message')
       end
     end
+
     it 'shows Send message button ' do
       render
       rendered.within('#contact_form') do |selection|

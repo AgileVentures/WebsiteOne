@@ -9,6 +9,8 @@ class StaticPagesController < ApplicationController
     if @page.update_attributes(title: params[:content][:static_page_title][:value],
                                    body: params[:content][:static_page_body][:value])
       render text: '' # So mercury knows it is successful
+    else
+      render nothing: true
     end
   end
 
@@ -19,6 +21,6 @@ class StaticPagesController < ApplicationController
   private
 
   def get_page_id page
-    page.split("/").reject { |i| ["mercury_saved", "mercury_update"].include? i }.last
+    page.split('/').reject { |i| ['mercury_saved', 'mercury_update'].include? i }.last
   end
 end
