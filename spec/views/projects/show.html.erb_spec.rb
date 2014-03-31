@@ -42,7 +42,6 @@ describe 'projects/show.html.erb' do
     assign :documents, @documents
     assign :members, [@user]
     assign :videos, @videos
-    view.stub(:project_created_by).and_return(@created_by)
     @project.stub(:user).and_return(@user)
   end
 
