@@ -100,6 +100,79 @@ describe UsersController do
 
   describe 'send hire me button message' do
 
+    let(:mail) { ActionMailer::Base.deliveries }
 
+    before(:each) do
+      @user = mock_model(User, id: 500, email: 'middle.of.nowhere@home.com')
+      User.stub(:find).with(@user.id.to_s).and_return(@user)
+      request.env['HTTP_REFERER'] = 'back'
+      mail.clear
+    end
+
+    let(:valid_params) do
+      {
+          message_form: {
+              name: 'Thomas',
+              email: 'example@example.com',
+              message: 'This is a message just for you',
+              recipient_id: @user.id
+          }
+      }
+    end
+
+    context 'with valid parameters' do
+      before(:each) { post :hire_me_contact_form, valid_params }
+
+      it 'should redirect to the previous page' do
+        response.should redirect_to 'back'
+      end
+
+      it 'should respond with "Your message has been sent successfully!"' do
+        expect(flash[:notice]).to eq 'Your message has been sent successfully!'
+      end
+
+      it 'should send out an email to the user' do
+        expect(mail.count).to eq 1
+        mail.last.to.should include @user.email
+      end
+
+      it 'should respond with "Your message has not been sent!" if the message was not delivered successfully' do
+        Mailer.stub_chain(:hire_me_form, :deliver).and_return(false)
+        post :hire_me_contact_form, valid_params
+        flash[:alert].should eq 'Your message has not been sent!'
+      end
+    end
+
+    context 'with invalid parameters' do
+
+      before(:each) { post :hire_me_contact_form, message_form: { name: '', email: '', message: '' } }
+
+      it 'should redirect to the previous page' do
+        response.should redirect_to 'back'
+      end
+
+      it 'should respond with "Please fill in Name, Email and Message field"' do
+        flash[:alert].should eq 'Please fill in Name, Email and Message field'
+      end
+    end
+
+    context 'with empty parameters' do
+
+      it 'should not fail with empty params' do
+        post :hire_me_contact_form, { }
+        flash[:alert].should eq 'Please fill in Name, Email and Message field'
+      end
+
+      it 'should not fail with empty message_form' do
+        post :hire_me_contact_form, message_form: { }
+        flash[:alert].should eq 'Please fill in Name, Email and Message field'
+      end
+
+      it 'should not fail with no back path' do
+        request.env['HTTP_REFERER'] = nil
+        post :hire_me_contact_form, message_form: { name: '', email: '', message: '' }
+        flash[:alert].should eq 'Please fill in Name, Email and Message field'
+      end
+    end
   end
 end
