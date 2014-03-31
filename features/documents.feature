@@ -83,8 +83,7 @@ Feature: Manage Document
     Then I should be in the Mercury Editor
 
   @javascript
-  Scenario: Mercury editor shows Save and Cancel buttons, hides New Document button,
-  Save button works
+  Scenario: Mercury editor shows Save and Cancel buttons, hides New Document button, Save button works
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
@@ -92,8 +91,8 @@ Feature: Manage Document
     And I should see button "Cancel" in Mercury Editor
     And I should not see button "New document" in Mercury Editor
 
-    When I fill in the editable field "Title" with "My new title"
-    And I fill in the editable field "Body" with "This is my new body text"
+    When I fill in the editable field "Title" for "document" with "My new title"
+    And I fill in the editable field "Body" for "document" with "This is my new body text"
     And I click "Save" in Mercury Editor
     Then I should see "The document has been successfully updated."
     And I should be on the "Show" page for document "My new title"
@@ -105,7 +104,7 @@ Feature: Manage Document
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
-    When I fill in the editable field "Title" with "My new title"
+    When I fill in the editable field "Title" for "document" with "My new title"
     And I click "Cancel" in Mercury Editor
     Then I should be on the "Show" page for document "Howto"
     And I should see "Howto"
@@ -115,19 +114,6 @@ Feature: Manage Document
     Then I should not see "Edit"
     And I try to use the Mercury Editor to edit document "Documentation"
     Then I should see "You do not have the right privileges to complete action."
-
-  @javascript
-  Scenario: The Mercury Editor save button works
-    Given the document "Guides" has a child document with title "Howto"
-    And I am logged in
-    And I am using the Mercury Editor to edit document "Howto"
-    When I fill in the editable field "Title" with "My new title"
-    And I fill in the editable field "Body" with "This is my new body text"
-    And I click "Save" within Mercury Editor toolbar
-    Then I should see "The document has been successfully updated."
-    And I should be on the "Show" page for document "My new title"
-    And I should see "This is my new body text"
-#  Then I no longer need the Mercury Editor
 
   Scenario: The Mercury Editor should only work for the documents
     Given I am logged in

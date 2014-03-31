@@ -25,13 +25,13 @@ module CustomErrors
 
     case status
       when 404
-        render template: 'pages/not_found', layout: 'layouts/application', status: 404
+        render template: 'static_pages/not_found', layout: 'layouts/application', status: 404
 
       when 500
-        render template: 'pages/internal_error', layout: 'layouts/application', status: 500
+        render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500
 
       else
-        render template: 'pages/internal_error', layout: 'layouts/application', status: 500
+        render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500
     end
   end
 end

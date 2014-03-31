@@ -1,11 +1,9 @@
 WebsiteOne::Application.routes.draw do
-  get "users/index"
+  get 'users/index'
   root 'visitors#index'
   mount Mercury::Engine => '/'
 
   devise_for :users, :controllers => {:registrations => 'registrations', :users => 'index'}
-  get 'about_us' => 'high_voltage/pages#show', id: 'about_us'
-  get 'sponsors' => 'high_voltage/pages#show', id: 'sponsors'
 
   #get 'users/sign_out' => redirect('/404.html')
   #get 'users/password' => redirect('/404.html')
@@ -43,4 +41,8 @@ WebsiteOne::Application.routes.draw do
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete
   post 'mail_contact_form', to: 'visitors#send_contact_form'
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form'
+
+  put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update'
+  get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved'
+  get '*id', to: 'static_pages#show', as: 'static_page'
 end
