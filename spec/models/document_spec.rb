@@ -1,13 +1,6 @@
 require 'spec_helper'
 
 describe Document do
-
-  before(:all) do
-    class Document < ActiveRecord::Base
-      has_paper_trail
-    end
-  end
-
   before do
     @project = Project.create!(valid_attributes_for(:project))
     @document = @project.documents.create!(valid_attributes_for(:document))
