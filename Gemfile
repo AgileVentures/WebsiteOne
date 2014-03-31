@@ -38,6 +38,11 @@ gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button
 gem 'addressable'       # used for uri validation
 gem 'exception_notification'
 
+gem 'yui-compressor'
+gem 'compass-rails'
+gem 'rack-cache'
+gem 'sprockets-image_compressor'
+
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
@@ -65,9 +70,4 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'unicorn'
-end
-
-group :assets do
-  gem 'compass-rails'
-  # Add any compass extensions here
 end
