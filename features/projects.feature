@@ -5,13 +5,13 @@ Feature: Create and maintain projects
 
   Background:
     Given the following projects exist:
-      | title         | description             | status   |
-      | hello world   | greetings earthlings    | active   |
-      | hello mars    | greetings aliens        | inactive |
-      | hello jupiter | greetings jupiter folks | active   |
-      | hello mercury | greetings mercury folks | inactive |
-      | hello saturn  | greetings saturn folks  | active   |
-      | hello sun     | greetings sun folks     | active   |
+      | title         | description             | status   | github_url                                  | pivotaltracker_url                             |
+      | hello world   | greetings earthlings    | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/projects/742821 |
+      | hello mars    | greetings aliens        | inactive |                                             |                                                |
+      | hello jupiter | greetings jupiter folks | active   |                                             |                                                |
+      | hello mercury | greetings mercury folks | inactive |                                             |                                                |
+      | hello saturn  | greetings saturn folks  | active   |                                             |                                                |
+      | hello sun     | greetings sun folks     | active   |                                             |                                                |
     And there are no videos
 
 #  Scenarios for Index page
@@ -79,19 +79,24 @@ Feature: Create and maintain projects
     When I click the very stylish "New Project" button
     Then I should see "Creating a new Project"
     And I should see a form with:
-      | Field       |
-      | Title       |
-      | Description |
-      | Status      |
+      | Field               |
+      | Title               |
+      | Description         |
+      | Status              |
+      | GitHub link         |
+      | PivotalTracker link |
 
   Scenario: Saving a new project: success
     Given I am logged in
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
     When I fill in:
-      | Field       | Text            |
-      | Title       | Title New       |
-      | Description | Description New |
+      | Field               | Text                              |
+      | Title               | Title New                         |
+      | Description         | Description New                   |
+      | GitHub link         | http://www.github.com/abc         |
+      | PivotalTracker link | http://www.pivotaltracker.com/def |
+
     And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "Title New"
@@ -101,6 +106,9 @@ Feature: Create and maintain projects
       | Title New       |
       | Description New |
       | ACTIVE          |
+    And I should see a link to "Title New" on github
+    And I should see a link to "Title New" on Pivotal Tracker
+
 
   Scenario: Saving a new project: failure
     Given I am logged in
@@ -118,10 +126,12 @@ Feature: Create and maintain projects
     And I am on the "Projects" page
     When I click "hello saturn" within the List of Projects
     Then I should see:
-      | Text                   |
-      | hello saturn           |
-      | greetings saturn folks |
-      | ACTIVE                 |
+      | Text                         |
+      | hello saturn                 |
+      | greetings saturn folks       |
+      | ACTIVE                       |
+      | not linked to GitHub         |
+      | not linked to PivotalTracker |
     And I should see "Created"
 
   Scenario: Edit page has a return link
@@ -134,10 +144,14 @@ Feature: Create and maintain projects
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
+    And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
+    And I fill in "PivotalTracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see "Project was successfully updated."
     And I should see "Hello, Uranus!"
+    And I should see a link to "hello mars" on github
+    And I should see a link to "hello mars" on Pivotal Tracker
 
   Scenario: Saving a project: failure
     Given I am logged in
@@ -150,3 +164,8 @@ Feature: Create and maintain projects
     Given The project "hello world" has 5 members
     And I am on the "Show" page for project "hello world"
     Then I should see "Members (5)"
+
+  Scenario: Project show page has links to github and Pivotal Tracker
+    Given I am on the "Show" page for project "hello world"
+    And I should see a link to "hello world" on github
+    And I should see a link to "hello world" on Pivotal Tracker
