@@ -43,10 +43,17 @@ describe StaticPagesController do
   end
 
   describe 'POST mercury_update' do
+    before(:each) do
+      StaticPage.stub_chain(:friendly, :find).and_return(@page)
+    end
+
+    it 'assigns the requested page as @page' do
+      post :mercury_update, id: @page.slug, content: { static_page_title: { value: 'MyTitle' }, static_page_body: { value: 'MyBody' } }
+      assigns(:page).should eq(@page)
+    end
 
     context 'with valid params' do
       before(:each) do
-        StaticPage.stub_chain(:friendly, :find).and_return(@page)
         @page.should_receive(:update_attributes).with(title: 'MyTitle', body: 'MyBody').and_return true
         post :mercury_update, id: @page.slug, content: { static_page_title: { value: 'MyTitle' }, static_page_body: { value: 'MyBody' } }
       end
@@ -58,7 +65,6 @@ describe StaticPagesController do
 
     context 'with invalid params' do
       before(:each) do
-        StaticPage.stub_chain(:friendly, :find).and_return(@page)
         @page.should_receive(:update_attributes).and_return false
         post :mercury_update, id: @page.slug, content: { static_page_title: { value: '' }, static_page_body: { value: '' } }
       end
