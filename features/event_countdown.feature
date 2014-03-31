@@ -38,3 +38,14 @@ Feature: Events
       | 21     | hours    |
       | 45     | minutes  |
     And I should not see "0 days"
+
+  @time-travel-step
+  Scenario: Do not render '-1 hour'
+    Given the date is "2014/02/02 07:50:00 UTC"
+    And I am on the home page
+    Then I should see "Scrum"
+    And the next event should be in:
+      | period | interval |
+      | 23     | hours    |
+      | 10     | minutes  |
+    And I should not see "0 days"
