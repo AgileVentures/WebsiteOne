@@ -18,7 +18,6 @@ gem 'omniauth'
 gem 'omniauth-github', git: 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-gplus', git: 'git://github.com/samdunne/omniauth-gplus.git'
 gem 'font-awesome-rails'
-gem 'high_voltage'
 gem 'acts_as_tree', '~> 1.5.0'
 gem 'acts_as_follower'
 gem 'will_paginate-bootstrap'
@@ -38,6 +37,11 @@ gem 'squeel'
 gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??
 gem 'addressable'       # used for uri validation
 gem 'exception_notification'
+
+gem 'yui-compressor'
+gem 'compass-rails'
+gem 'rack-cache'
+gem 'sprockets-image_compressor'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -66,9 +70,4 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'unicorn'
-end
-
-group :assets do
-  gem 'compass-rails'
-  # Add any compass extensions here
 end

@@ -9,7 +9,7 @@ describe 'layouts/_sponsors' do
 
 	it 'should render the become a supporter button' do
 		render
-		rendered.should have_link 'Become a supporter', page_path('sponsors')
+		rendered.should have_link 'Become a supporter', static_page_path('Sponsors')
 	end		
 
 	it 'should render the Makers Academy banner' do

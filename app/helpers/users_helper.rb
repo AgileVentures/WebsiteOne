@@ -69,26 +69,22 @@ module Youtube
     end
 
     def project_videos(project, members)
-      return [] if members.empty?
-
       members_tags = members_tags(members)
-      return [] if members_tags.empty?
-
-      members_filter = escape_query_params(members_tags)
-
+      return [] if members_tags.blank?
       project_tags = project_tags(project)
-      project_tags_filter = escape_query_params(project_tags)
 
+      request = build_request(escape_query_params(members_tags), escape_query_params(project_tags))
+      response = get_response(request)
+      filter_response(response, project_tags, members_tags) if response
+    end
+
+    def build_request(members_filter, project_tags_filter)
       request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50'
       request += '&orderby=published'
       request += '&fields=entry(author(name),id,published,title,content,link)'
       #request += '&fields=entry[' + filter.join(' or ') + ']'
-
       request += '&q=(' + project_tags_filter.join('|') + ')'
       request += '/(' + members_filter.join('|') + ')'
-
-      response = get_response(request)
-      filter_response(response, project_tags, members_tags) if response
     end
 
     def project_tags(project)
@@ -100,6 +96,7 @@ module Youtube
     end
 
     def members_tags(members)
+      return [] if members.blank?
       members_tags = members.map { |user| youtube_user_name(user) if youtube_user_name(user) }.compact
       members_tags.map!(&:downcase)
       members_tags.uniq!
