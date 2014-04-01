@@ -110,7 +110,7 @@ Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (
   )
 end
 
-# Bryan: Redundant
+# Bryan: Redundant, does nothing
 #And(/^the following sub-documents exist:$/) do |table|
 #  table.hashes
 #end
