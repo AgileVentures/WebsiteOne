@@ -4,7 +4,7 @@ gem 'rails', '4.0.4'
 gem 'pg'  # PostgreSQL database support
 gem 'sass-rails', '~> 4.0.0' # Sass stylesheet language
 gem 'uglifier', '>= 1.3.0'   # Javascript compressor
-gem 'coffee-rails', '~> 4.0.0'  # Coffee-script support
+gem 'coffee-rails'  # Coffee-script support
 gem 'therubyracer', platforms: :ruby  # Google V8 javascript engine
 gem 'jquery-rails'  # Use jquery as the JavaScript library
 gem 'turbolinks' # Follow links faster
