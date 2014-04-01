@@ -182,6 +182,7 @@ Feature: Create and maintain projects
     And I fill in "GitHub link" with "https:/github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
+    And show me the page
     And I should not see a link to "hello mars" on github
     And I should see "You have to provide a valid url"
 
