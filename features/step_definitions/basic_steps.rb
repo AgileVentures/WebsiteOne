@@ -242,7 +242,7 @@ end
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
   actual_order = page.all('li.listings-item a').collect(&:text)
-  expected_order.should == actual_order
+  actual_order.should eq expected_order
 end
 
 
