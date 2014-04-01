@@ -66,7 +66,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-modal-rails (2.2.4)
       railties (>= 3.1)
-    bootstrap-sass (3.0.2.1)
+    bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     builder (3.1.4)
     capybara (2.2.1)
@@ -360,7 +360,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-modal-rails
-  bootstrap-sass (~> 3.0.2.0)
+  bootstrap-sass
   capybara
   capybara-webkit
   coderay
