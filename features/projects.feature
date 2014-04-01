@@ -181,19 +181,14 @@ Feature: Create and maintain projects
     And I am on the "Edit" page for project "hello mars"
     And I fill in "GitHub link" with "https:/github.com/google/instant-hangouts"
     And I click the "Submit" button
-    Then I should be on the "Show" page for project "hello mars"
-    And show me the page
-    And I should not see a link to "hello mars" on github
-    And I should see "You have to provide a valid url"
+    Then I should see "Project was not updated."
 
   Scenario: Reject PivotalTracker url update if invalid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "PivotalTracker link" with "https:/www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
-    Then I should be on the "Show" page for project "hello mars"
-    And I should not see a link to "hello mars" on Pivotal Tracker
-    And I should see "You have to provide a valid url"
+    Then I should see "Project was not updated."
 
   Scenario: Project show page renders a list of members
     Given The project "hello world" has 5 members
