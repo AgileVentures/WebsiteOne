@@ -18,11 +18,6 @@ Feature: Manage Document
       | title         | revisions  |
       | Guides        | 1          |
       | Documentation | 3          |
-    
-    And the following sub-documents exist:
-      | title   | body         | created_at          | project    |
-      | SubDoc1 | Blog One     | created 3 days ago  | hello mars |
-      | SubDoc2 | Another Blog | created 10 days ago | hello mars |
     And there are no videos
 
   Scenario: Render of list documents
@@ -71,6 +66,7 @@ Feature: Manage Document
     Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
     Given the document "Guides" has a sub-document with title "SubDoc2" created 10 days ago
     Given I am on the "Show" page for document "Guides"
+    And show me the page
     Then I should see the sub-documents in this order:
       | SubDoc1 |
       | SubDoc2 |

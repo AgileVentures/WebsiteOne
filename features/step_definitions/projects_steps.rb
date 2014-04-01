@@ -98,22 +98,23 @@ Given(/^I (?:am on|go to) project "([^"]*)"$/) do |project|
   visit(path_to('projects', project.id ))
 end
 
-Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (\d+) days ago$/) do |parent, child, arg3|
+Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (\d+) days ago$/) do |parent, child, days_ago|
   parent_doc = Document.find_by_title(parent)
   parent_doc.children.create!(
       {
           :project_id => parent_doc.project_id,
           :title => child,
-          :created_at => arg3,
+          :created_at => days_ago.to_i.days.ago,
           user_id: parent_doc.user_id
       }
   )
 end
 
+# Bryan: Redundant
+#And(/^the following sub-documents exist:$/) do |table|
+#  table.hashes
+#end
 
-And(/^the following sub-documents exist:$/) do |table|
-  table.hashes
-end
 Given(/^I should see a link to "(.*?)" on github$/) do |name|
   object = Project.find_by_title(name)
   step %Q{I should see link "#{object.github_url.split('/').last}"}
