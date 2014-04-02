@@ -115,13 +115,13 @@ end
 #  table.hashes
 #end
 
-Given(/^I should see a link to "(.*?)" on github$/) do |name|
+Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, name|
   object = Project.find_by_title(name)
-  step %Q{I should see link "#{object.github_url.split('/').last}"}
+  step %Q{I #{option} see link "#{object.github_url.split('/').last}"}
 end
 
-Given(/^I should see a link to "(.*?)" on Pivotal Tracker$/) do |name|
+Given(/^I (should not|should) see a link to "(.*?)" on Pivotal Tracker$/) do |option, name|
   object = Project.find_by_title(name)
-  step %Q{I should see link "#{object.title}"}
+  step %Q{I #{option} see link "#{object.title}"}
 end
 
