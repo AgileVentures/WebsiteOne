@@ -21,7 +21,7 @@ describe Event do
 
   it 'should be able to provide next_occurrence' do
     Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
-    @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', time_zone: 'UTC', end_time: '11:00:00')
+    @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', time_zone: 'UTC', end_time: '11:00:00', friendly_id: 'spec-scrum')
     Event.stub(:exists?).and_return true
     Event.stub(:where).and_return [@event]
     next_occurrence = Event.next_occurrence
