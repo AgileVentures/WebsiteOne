@@ -44,6 +44,7 @@
       <% if not @user.bio.blank? %>
           <div class="tab-pane fade in active" id="bio">
             <h4>About <%= @user.display_name %></h4>
+
             <p> <%= @user.bio %> </p>
           </div>
           <div class="tab-pane fade" id="projects">
@@ -125,3 +126,4 @@
           position: initial !important;
       }
   </style>
+</div>
