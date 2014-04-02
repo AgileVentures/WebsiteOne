@@ -11,6 +11,10 @@ describe Event do
     ENV['TZ'] = @default_tz
   end
 
+  it 'should respond to friendly_id' do
+    Event.new.should respond_to :friendly_id
+  end
+
   it 'should respond to "schedule" method' do
     Event.respond_to?('schedule')
   end
