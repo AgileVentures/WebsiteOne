@@ -15,11 +15,11 @@ old_event_count = Event.count
 puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
 
 while true
-  puts 'yes(y)/no(n):'
+  print 'yes(y)/no(n): '
   response = STDIN.gets.downcase.chomp
   if response == 'y' or response == 'yes'
     puts 'Clearing existing projects and documents'
-    [Project, Document, User, Article, Event].each(&:destroy_all)
+    [Project, Document, User, Article, Event].each(&:delete_all)
 
     pw = 'randomrandom'
     u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
