@@ -20,6 +20,16 @@ describe Project do
         project.status = ''
         expect(project.save).to be_false
       end
+
+      it 'invalid github url' do
+        project.github_url = 'https:/github.com/google/instant-hangouts'
+        expect(project.save).to be_false
+      end
+
+      it 'invalid pivotaltracker url' do
+        project.pivotaltracker_url = 'https:/www.pivotaltracker.com/s/projects/853345'
+        expect(project.save).to be_false
+      end
     end
   end
 end

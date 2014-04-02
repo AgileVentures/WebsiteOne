@@ -7,14 +7,14 @@ When /^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/ do |button|
   #sleep(0.1)
 end
 
-When(/^I fill in the editable field "([^"]*)" with "([^"]*)"$/) do |field, s|
+When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do |field, type, s|
   page.driver.within_frame('mercury_iframe') {
     field = field.downcase.singularize
     # This selector is specific to the mercury region used!
     if field == 'title'
-      find(:css, 'div#document_title>textarea').set(s)
+      find(:css, "div##{type}_title>textarea").set(s)
     elsif field == 'body'
-      page.execute_script("$('#document_body').text('#{s}')")
+      page.execute_script("$('##{type}_body').text('#{s}')")
       #find(:css, 'div#document_body').set(s)
     end
   }
