@@ -1,6 +1,5 @@
 <%= javascript_include_tag 'users' %>
-
-<div class="row" xmlns="http://www.w3.org/1999/html">
+<div class="row">
   <div class="col-md-5 col-sm-5">
     <div class="avatar-group">
       <img src="<%= gravatar_for(@user.email, size: 275) %>" class="thumbnail img-rounded media-object">
@@ -75,8 +74,6 @@
         </div>
       </div>
       </div>
-
-
     </div>
   </div>
   <div class="clear">
@@ -84,7 +81,6 @@
   </div>
   <div class="row">
     <div class="col-md-5 col-sm-5">
-
       <% unless @youtube_videos.blank? %>
           <h4>Programming sessions</h4>
           <table class="table table-bordered table-striped table-hover table-condensed">
@@ -113,7 +109,6 @@
     <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <%= render 'layouts/hire_me' %>
     </div>
-
   </div>
 
   <style>
@@ -126,4 +121,4 @@
           position: initial !important;
       }
   </style>
-</div>
+
