@@ -1,9 +1,10 @@
+require 'act_as_page'
+
 class Article < ActiveRecord::Base
-  extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  include ActAsPage
 
   belongs_to :user
-  validates :title, :content, :user_id, presence: true
+  validates :content, :user_id, presence: true
 
   acts_as_taggable
 
@@ -15,10 +16,5 @@ class Article < ActiveRecord::Base
     else
       "/articles/#{self.to_param}/#{action}"
     end
-  end
-
-  private
-  def slug_candidates
-    self.title
   end
 end

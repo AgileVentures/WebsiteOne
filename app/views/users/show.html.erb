@@ -30,7 +30,7 @@
   <div class="col-md-7 col-sm-7">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" style="margin-left: -25px; margin-right: -25px;">
-      <% if not (@bio.nil? || @bio.empty?) %>
+      <% if not @user.bio.blank? %>
           <li class="active"><a href="#bio" data-toggle="tab">Bio</a></li>
           <li><a href="#projects" data-toggle="tab">Projects</a></li>
       <% else %>
@@ -41,10 +41,11 @@
 
     <!-- Tab panes -->
     <div class="tab-content" style="margin-left: -25px; margin-right: -25px;">
-      <% if not (@bio.nil? || @bio.empty?) %>
+      <% if not @user.bio.blank? %>
           <div class="tab-pane fade in active" id="bio">
             <h4>About <%= @user.display_name %></h4>
-            <p> <%= @bio %> </p>
+
+            <p> <%= @user.bio %> </p>
           </div>
           <div class="tab-pane fade" id="projects">
       <% else %>
@@ -125,3 +126,4 @@
           position: initial !important;
       }
   </style>
+</div>

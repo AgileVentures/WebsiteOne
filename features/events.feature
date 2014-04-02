@@ -68,7 +68,6 @@ Feature: Events
     Then I should be on the event "Show" page for "Scrum"
     And I should see "You have to provide a valid hangout url"
 
-
   Scenario: Render Next Scrum info on landing page
     And I am on the home page
     Then I should see "Scrum"
