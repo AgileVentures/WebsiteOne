@@ -141,7 +141,12 @@ Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
   within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
 end
 
-Then /^I should see link "([^"]*)"$/ do |link|
+Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
+  unless negative
+    expect(page.has_link? link).to be_true
+  else
+    expect(page.has_link? link).to be_false
+  end
   page.should have_link link
 end
 
