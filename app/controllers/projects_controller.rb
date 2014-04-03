@@ -93,11 +93,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     # permit the mass assignments
-<<<<<<< HEAD
-    params.require(:project).permit(:title, :description, :created, :status, :user_id, :pivotaltracker_id)
-=======
-    params.require(:project).permit(:title, :description, :created, :status, :user_id, :github_url, :pivotaltracker_url)
->>>>>>> upstream/develop
+    params.require(:project).permit(:title, :description, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id)
   end
 
 end
