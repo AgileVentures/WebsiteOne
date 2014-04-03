@@ -94,21 +94,38 @@ describe 'projects/show.html.erb' do
       expect(rendered).to have_text 'No PivotalTracker Stories can be found for project Title 1'
     end
 
-    it 'renders a list of stories when Pivotal Tracker stories are found' do
-      story = double()
-      story.stub story_type: 'chore',
-                 estimate: 3,
-                 id: 1,
-                 name: 'My story',
-                 owned_by: { initials: 'my-initials' },
-                 current_state: 'active'
-      @stories = [ story ]
-      render
-      expect(rendered).to have_css 'i.fa.fa-gear.fa-lg'
-      expect(rendered).to have_css 'i.story_estimate', count: 3
-      expect(rendered).to have_text 'My story'
-      expect(rendered).to have_text 'my-initials'
-      expect(rendered).to have_text 'active'
+    context 'with Pivotal Tracker stories' do
+      before(:each) do
+        story = double()
+        story.stub story_type: 'chore',
+                   estimate: 3,
+                   id: 1,
+                   name: 'My story',
+                   owned_by: { initials: 'my-initials' },
+                   current_state: 'active'
+        @stories = [ story ]
+        render
+      end
+
+      it 'should render the appropriate story type icon' do
+        expect(rendered).to have_css 'i.fa.fa-gear.fa-lg'
+      end
+
+      it 'should render the correct story estimate' do
+        expect(rendered).to have_css 'i.story_estimate', count: 3
+      end
+
+      it 'should render the story title' do
+        expect(rendered).to have_text 'My story'
+      end
+
+      it 'should render the story owners initials' do
+        expect(rendered).to have_text 'my-initials'
+      end
+
+      it 'should render the current story state' do
+        expect(rendered).to have_text 'active'
+      end
     end
   end
 
