@@ -13,5 +13,6 @@ end
 Given(/The project has no stories on Pivotal Tracker/) do
   dummy = Object.new
   dummy.stub(stories: nil)
+  PivotalService.stub(one_project: nil)
   PivotalService.stub(iterations: dummy)
 end
