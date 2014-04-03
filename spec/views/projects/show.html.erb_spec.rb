@@ -42,8 +42,29 @@ describe 'projects/show.html.erb' do
     assign :documents, @documents
     assign :members, [@user]
     assign :videos, @videos
-    view.stub(:project_created_by).and_return(@created_by)
     @project.stub(:user).and_return(@user)
+  end
+
+  it "renders a link to the project's github page" do
+    @project.stub(:github_url).and_return("github.com/AgileVentures/myfriend")
+    render
+    expect(rendered).to have_link("#{@project.github_url.split('/').last}", :href => @project.github_url)
+  end
+
+  it "renders an unlinked message when project has no github link" do
+    render
+    expect(rendered).to have_text("not linked to GitHub")
+  end
+
+  it "renders a link to the project's Pivotal Tracker page" do
+    @project.stub(:pivotaltracker_url).and_return("www.pivotaltracker.com/s/projects/12345")
+    render
+    expect(rendered).to have_link("#{@project.title}", :href => @project.pivotaltracker_url)
+  end
+  
+  it "renders an unlinked message when project has no PivotalTracker link" do
+    render
+    expect(rendered).to have_text("not linked to PivotalTracker")
   end
 
   it 'renders project description' do

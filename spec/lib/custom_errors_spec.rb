@@ -26,7 +26,7 @@ describe CustomErrors, type: 'controller' do
     it 'should catch 404 errors' do
 
       get :raise_404
-      expect(response).to render_template 'pages/not_found'
+      expect(response).to render_template 'static_pages/not_found'
       expect(response.status).to eq 404
     end
   end
@@ -38,7 +38,7 @@ describe CustomErrors, type: 'controller' do
 
     it 'should catch 500 errors' do
       get :raise_500
-      expect(response).to render_template 'pages/internal_error'
+      expect(response).to render_template 'static_pages/internal_error'
       expect(response.status).to eq 500
     end
 
@@ -49,17 +49,17 @@ describe CustomErrors, type: 'controller' do
       get :raise_500
     end
 
-#     it 'should send an error notification to the admin' do
-#       ActionMailer::Base.deliveries.clear
-#       get :raise_500
-# 
-#       ActionMailer::Base.deliveries.size.should eq 1
-#       email = ActionMailer::Base.deliveries[0]
-#       expect(email.subject).to include 'ERROR'
-# 
-#       recipients = email.to
-#       expect(recipients.size).to eq 1
-#       expect(recipients[0]).to eq 'info@agileventures.org'
-#     end
+    it 'should send an error notification to the admin' do
+      ActionMailer::Base.deliveries.clear
+      get :raise_500
+
+      ActionMailer::Base.deliveries.size.should eq 1
+      email = ActionMailer::Base.deliveries[0]
+      expect(email.subject).to include 'ERROR'
+
+      recipients = email.to
+      expect(recipients.size).to eq 1
+      expect(recipients[0]).to eq 'info@agileventures.org'
+    end
   end
 end

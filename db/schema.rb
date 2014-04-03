@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317093616) do
+ActiveRecord::Schema.define(version: 20140402091353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,10 @@ ActiveRecord::Schema.define(version: 20140317093616) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
+    t.string   "slug"
   end
+
+  add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
 
   create_table "follows", force: true do |t|
     t.integer  "followable_id",                   null: false
@@ -91,11 +94,27 @@ ActiveRecord::Schema.define(version: 20140317093616) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
+<<<<<<< HEAD
     t.integer  "pivotaltracker_id"
+=======
+    t.string   "github_url"
+    t.string   "pivotaltracker_url"
+>>>>>>> upstream/develop
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "static_pages", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "parent_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -142,6 +161,7 @@ ActiveRecord::Schema.define(version: 20140317093616) do
     t.string   "youtube_user_name"
     t.string   "github_profile_url"
     t.boolean  "display_hire_me"
+    t.text     "bio"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge("user_id" => current_user.id))
+    @project = Project.new(project_params.merge('user_id' => current_user.id))
     if @project.save
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
@@ -93,7 +93,11 @@ class ProjectsController < ApplicationController
 
   def project_params
     # permit the mass assignments
+<<<<<<< HEAD
     params.require(:project).permit(:title, :description, :created, :status, :user_id, :pivotaltracker_id)
+=======
+    params.require(:project).permit(:title, :description, :created, :status, :user_id, :github_url, :pivotaltracker_url)
+>>>>>>> upstream/develop
   end
 
 end

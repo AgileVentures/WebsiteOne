@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   validates :title, :description, :status, presence: true
+  validates :github_url, :pivotaltracker_url , uri: true, :allow_blank => true
   acts_as_followable
   belongs_to :user
   has_many :documents

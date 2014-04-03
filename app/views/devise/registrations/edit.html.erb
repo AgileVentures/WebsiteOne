@@ -23,7 +23,6 @@
         <div style="margin-bottom: 7px;display:inline-flex"><%= f.label :display_hire_me %>
           <%= f.check_box :display_hire_me %>
         </div>
-
         <% supported_third_parties.each do |provider| %>
             <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
         <% end %>
@@ -36,8 +35,6 @@
               <% end %>
             </div>
         <% end %>
-
-
       </div>
       <div class="col-md-5 ">
         <div><%= f.label :first_name %>
@@ -54,8 +51,14 @@
           <div class="form-group">
             <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
           </div>
-
         </div>
+
+        <div><%= f.label :bio %>
+          <div class="form-group">
+            <%= f.text_area :bio, :autofocus => true, class: 'form-control', 'rows' => 10 %>
+          </div>
+        </div>
+
         <div><%= f.label :skills, 'Skills - (separate with comma)' %>
           <div id="skills" class="tag-list" style="margin-bottom: 10px;"></div>
           <%= f.text_field :skill_list, :hidden => true %>
@@ -69,7 +72,7 @@
             $(function () {
                 $('#skills').tags({
                     readOnly: false,
-                    tagClass: 'btn-agile',
+                    tagClass: 'add-btn-agile',
                     tagSize: 'md',
                     tagData: <%= raw resource.skill_list.to_json %>,
                     promptText: " "

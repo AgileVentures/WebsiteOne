@@ -14,6 +14,20 @@
   <div id="doc-overview">
     <h1><%= @project.title %></h1>
 
+    <% if @project.github_url.present? %>
+        <p><i class="fa fa-github-alt fa-lg"></i>
+          <%= link_to "#{@project.github_url.split('/').last} ", @project.github_url %>on GitHub</p>
+    <% else %>
+        <p><i class="fa fa-github-alt fa-lg"></i> not linked to GitHub</p>
+    <% end %>
+
+    <% if @project.pivotaltracker_url.present? %>
+        <p><i class="fa fa-gear fa-lg"></i>
+          <%= link_to "#{@project.title} ", @project.pivotaltracker_url %>on PivotalTracker</p>
+    <% else %>
+        <p><i class="fa fa-gear fa-lg"></i> not linked to PivotalTracker</p>
+    <% end %>
+
     <div class="doc-status-text">
       <div>Status: <strong style="font-style: normal;"><%= @project.status.upcase %></strong></div>
       <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %></div>
@@ -30,7 +44,7 @@
           <% if current_user.following?(@project) %>
               <li><%= custom_css_btn 'leave project', 'fa fa-users', unfollow_project_path(@project) %></li>
               <li>
-                <div id="HOA-placeholder" data-hoa-title="AgileVentures Pairing: <%= @project.title %> - <%= Time.now.utc.strftime('%d/%m/%Y %H00 %Z') %>"></div>
+                <div id="HOA-placeholder" data-hoa-title="<%= @project.title %> pairing:  %>"></div>
               </li>
           <% else %>
               <li><%= custom_css_btn 'join project', 'fa fa-users', follow_project_path(@project) %></li>
@@ -120,7 +134,6 @@
             </div>
         <% end %>
         </div>
-      </div>
   </div>
   <div class="tab-pane" id="activities_list">
     <ul class="listings">
@@ -153,3 +166,4 @@
   </div>
 
 </div>
+

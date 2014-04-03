@@ -8,7 +8,7 @@ module DeviseHelper
         <div class="alert alert-danger">
         <p>#{messages}</p>
         </div>
-      HTML
+    HTML
     html.html_safe
   end
 

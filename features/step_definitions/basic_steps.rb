@@ -30,8 +30,6 @@ def path_to(page_name, id = '')
       edit_user_registration_path(id)
     when 'foobar' then
       visit ("/#{page}")
-    when 'supporters' then
-      page_path('sponsors')
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -143,7 +141,12 @@ Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
   within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
 end
 
-Then /^I should see link "([^"]*)"$/ do |link|
+Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
+  unless negative
+    expect(page.has_link? link).to be_true
+  else
+    expect(page.has_link? link).to be_false
+  end
   page.should have_link link
 end
 
@@ -244,7 +247,7 @@ end
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
   actual_order = page.all('li.listings-item a').collect(&:text)
-  expected_order.should == actual_order
+  actual_order.should eq expected_order
 end
 
 
