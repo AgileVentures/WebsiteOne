@@ -131,38 +131,13 @@
             <h4 id="video_contents"><%= @videos.first[:content] %></h4>
             <iframe id="ytplayer" type="text/html" width="340" height="210"
                     src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
-            </div>
+
         <% end %>
-        </div>
+      </div>
+    </div>
   </div>
-  <div class="tab-pane" id="activities_list">
-    <ul class="listings">
-      <%- if @stories %>
-        <h2>Current</h2>
-        <table class="table table-bordered table-striped table-hover table-condensed">
-	  <tr>
-            <th>Story Type</th>
-	    <th>Points</th>
-            <th>Labels</th>
-            <th>Story ID</th>
-	    <th>Owner</th>
-	    <th>State</th>
-	  </tr>
-	  <%- @stories.each do |story| %>
-   	    <tr>
-	      <td><%= story.story_type %></td>
-	      <td><%= story.estimate %></td>
-	      <td><%= story.name %></td>
-	      <td><%= story.id %></td>
-	      <td><%= story.owned_by %></td>
-	      <td><%= story.current_state %></td>
-	    </tr>
-	  <% end %>
-        </table>
-      <% else %>
-        <p style="margin-top: 20px;">No PivotalTracker Stories can be found for project <strong><%= @project.title %></strong></p>
-      <% end %>
-    </ul>
+  <div class="tab-pane activity" id="activities_list">
+    <%= render 'activity' %>
   </div>
 
 </div>

@@ -1,0 +1,44 @@
+<%- if @stories %>
+  <h2>Current</h2>
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+      <th>Type</th>
+      <th>Points</th>
+      <th>Labels</th>
+      <th>State</th>
+    </tr>
+    <%- @stories.each do |story| %>
+    <tr>
+      <td>
+	<% case story.story_type when "chore" %>
+          <i class="fa fa-gear fa-lg"></i>
+	<% when "feature" %>
+          <i class="fa fa-star fa-lg"></i>
+	<% when "bug" %>
+          <i class="fa fa-bug fa-lg"></i>
+	<% when "release" %>
+          <i class="fa fa-flag-checkered fa-lg"></i>
+	<% end %>
+      </td>
+      <td>
+	<% if story.estimate > 0  %>
+	  <% story.estimate.times do %>
+            <i class="fa fa-minus fa-lg story_estimate"></i>
+	  <% end %>
+	<% end %>
+      <td>
+	<p class="story_name">
+	  <a href="https://www.pivotaltracker.com/story/show/<%= story.id %>">
+	  <%= story.name %>
+	</a>
+	  (<span><%= story.owned_by[:initials] if story.owned_by %></span>)
+	</p>
+      </td>
+      <td><%= story.current_state %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+<% else %>
+<p style="margin-top: 20px;">No PivotalTracker Stories can be found for project <strong><%= @project.title %></strong></p>
+<% end %>
