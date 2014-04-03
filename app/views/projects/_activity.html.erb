@@ -10,15 +10,15 @@
     <%- @stories.each do |story| %>
     <tr>
       <td>
-	<% case story.story_type when "chore" %>
+      <% case story.story_type when "chore" %>
           <i class="fa fa-gear fa-lg"></i>
-	<% when "feature" %>
+      <% when "feature" %>
           <i class="fa fa-star fa-lg"></i>
-	<% when "bug" %>
+      <% when "bug" %>
           <i class="fa fa-bug fa-lg"></i>
-	<% when "release" %>
+      <% when "release" %>
           <i class="fa fa-flag-checkered fa-lg"></i>
-	<% end %>
+      <% end %>
       </td>
       <td>
 	<% if story.estimate > 0  %>

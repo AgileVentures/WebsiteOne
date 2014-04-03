@@ -4,21 +4,20 @@ Feature: Adding pivotal tracker stories to projects
     I would like to display projects current sprint activities as they are set in Pivotal Tracker 
 
     Background:
-      Given Projet with pivitaltracker_id 982890 has some stories
-      And I have access to project pivitaltracker_id 982890 and his labels
-      And I have access to project pivitaltracker_id 982890 and his current
-      And I have access to project pivitaltracker_id 982890 and his stories
-      # And Projet with pivitaltracker_id 982890 has some stories in current
       # And I have access to project iteration with pivitaltracker_id 982890 in PivotalTracker
       And the following projects exist:
         | title        | description    | status | pivotaltracker_id |
         | WebsiteOne   | Agile Ventures | active |            982890 |
-        | LocalSupport | Local Support  | active |            742821 |
 
-
+    Scenario: When a project has no stories
+      Given The project has no stories on Pivotal Tracker
+      And I am on the "Show" page for project "WebsiteOne"
+      Then I click "Activity"
+      Then I should see "No PivotalTracker Stories can be found for project WebsiteOne"
 
     Scenario: Project Show Page Renders List of Pivotal Tracker Stories
-      Given I am on the "Show" page for project "WebsiteOne"
+      Given The project has some stories on Pivotal Tracker
+      And I am on the "Show" page for project "WebsiteOne"
       Then I click "Activity"
       Then I should see a "Current" table with:
         | column     |
@@ -28,19 +27,13 @@ Feature: Adding pivotal tracker stories to projects
         | State      |
       And I should see:
         | text                    |
-        |                         |
-        |                         |
         | Refactor cucumber steps |
         | accepted                |
       And I should see:
         | text                   |
-        |                        |
-        |                        |
         | Skills on user profile |
         | accepted               |
       And I should see:
         | text                   |
-        |                        |
-        |                        |
         | Pivotaltracker stories |
         | accepted               |

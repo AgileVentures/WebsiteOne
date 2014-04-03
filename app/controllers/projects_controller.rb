@@ -85,9 +85,8 @@ class ProjectsController < ApplicationController
   def get_current_stories
     PivotalService.set_token('1e90ef53f12fc327d3b5d8ee007cce39')
     if @project.pivotaltracker_id.present?
-      @projectpv    = PivotalService.one_project(@project.pivotaltracker_id, Scorer::Project.fields)
-      @iteration  = PivotalService.iterations(@project.pivotaltracker_id, 'current')
-      @stories   = @iteration.stories
+      @iteration = PivotalService.iterations(@project.pivotaltracker_id, 'current')
+      @stories = @iteration.stories
     end
   end
 

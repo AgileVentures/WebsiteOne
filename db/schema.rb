@@ -94,9 +94,9 @@ ActiveRecord::Schema.define(version: 20140402091353) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
-    t.integer  "pivotaltracker_id"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
+    t.integer  "pivotaltracker_id"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
@@ -149,7 +149,6 @@ ActiveRecord::Schema.define(version: 20140402091353) do
     t.string   "youtube_id"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
-    t.boolean  "display_resume"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"
