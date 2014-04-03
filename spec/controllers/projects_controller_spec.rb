@@ -6,6 +6,7 @@ describe ProjectsController do
                             :title => 'WebTwentyFive',
                             :description => 'My project description',
                             :status => 'Active',
+                            :pivotaltracker_id => '111111',
                             :friendly_id => 'my-project' } }
   let(:valid_session) { {} }
 
@@ -50,6 +51,10 @@ describe ProjectsController do
       @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
       @project.should_receive(:followers).and_return @more_users
       Youtube.stub(project_videos: 'videos')
+      PivotalService.stub(one_project: '') 
+      dummy = Object.new
+      dummy.stub(stories: "stories")
+      PivotalService.stub(iterations: dummy)
     end
 
     it 'assigns the requested project as @project' do
@@ -70,6 +75,11 @@ describe ProjectsController do
     it 'assigns the list of related YouTube videos in alphabetical order' do
       get :show, { id: @project.friendly_id }, valid_session
       expect(assigns(:videos)).to eq 'videos'
+    end
+
+    it 'assigns the list of related PivtalTracker stories' do
+      get :show, { id: @project.friendly_id }, valid_session
+      expect(assigns(:stories)).to eq 'stories'
     end
   end
 
