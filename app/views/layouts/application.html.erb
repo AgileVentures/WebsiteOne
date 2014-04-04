@@ -19,6 +19,7 @@
   <%= stylesheet_link_tag 'application', '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/meta_tags' %>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
   <%= analytics_init if Rails.env.production? %>
 
