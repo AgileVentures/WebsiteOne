@@ -51,7 +51,6 @@ module ApplicationHelper
   #  end
   #end
 
-
   def resource_name
     :user
   end
@@ -138,6 +137,6 @@ module ApplicationHelper
   end
 
   def default_meta_description
-    'Agile Ventures is a non-profit organization dedicated to crowdsourced learning and project development'
+    'AgileVentures is a non-profit organization dedicated to crowdsourced learning and project development'
   end
 end
