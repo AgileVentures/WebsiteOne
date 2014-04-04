@@ -5,13 +5,21 @@
 # files.
 
 require 'cucumber/rails'
+require 'cucumber/rspec/doubles'
+require 'capybara/poltergeist'
+require 'geocoder/lookups/base'
+require 'geocoder/results/freegeoip'
+require 'webmock/cucumber'
+require 'delorean'
+
+WebMock.disable_net_connect!(:allow_localhost => true)
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
 # Capybara.default_selector = :xpath
 
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :poltergeist
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how 
@@ -32,11 +40,13 @@ ActionController::Base.allow_rescue = false
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
-begin
-  DatabaseCleaner.strategy = :transaction
-rescue NameError
-  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-end
+
+# Bryan: This was not doing anything
+#begin
+#  DatabaseCleaner.strategy = :transaction
+#rescue NameError
+#  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+#end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
@@ -58,3 +68,21 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+Geocoder.configure(:ip_lookup => :test)
+Geocoder::Lookup::Test.add_stub(
+    '127.0.0.1', [
+    {
+        ip: '127.0.0.1',
+        country_code: 'SE',
+        country_name: 'Sweden',
+        region_code: '28',
+        region_name: 'Västra Götaland',
+        city: 'Alingsås',
+        zipcode: '44139',
+        latitude: 57.9333,
+        longitude: 12.5167,
+        metro_code: '',
+        areacode: ''
+    }.as_json
+]
+)

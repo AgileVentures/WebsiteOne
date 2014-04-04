@@ -1,0 +1,14 @@
+<%= content_for :content do %>
+    <aside class="col-sm-3">
+      <nav id="sidebar" role="complementary">
+        <%= render partial: 'layouts/sidebar', locals: { project: @project, document: @document } %>
+      </nav>
+      <%= render partial: 'layouts/sponsors' %>
+    </aside>
+    <div id="not-sidebar" class="col-sm-9 pull-right">
+      <div id="not-sidebar-content" class="pull-right">
+       <%= yield %>
+     </div>
+    </div>
+<% end %>
+<%= render template: 'layouts/application' %>

@@ -1,28 +1,29 @@
-<table id="projects">
-  <thead>
-  <legend>List of Projects</legend>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Status</th>
-    <th>Created</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @projects.each do |project| %>
-    <tr>
-      <td><%= project.title %></td>
-      <td><%= project.description %></td>
-      <td><%= project.status %></td>
-      <td><%= project.created_at %></td>
-      <td><%= link_to 'Show', project_path(project.id) , type: 'button', :class => 'btn btn-default'%></td>
-      <td><%= link_to 'Edit', edit_project_path(project.id) , type: 'button', :class => 'btn btn-default'%></td>
-      <td><%= link_to 'Destroy', project_path(project.id), type: 'button', class: 'btn btn-default', method: :delete %></td>
-    </tr>
-  <% end %>
-  </tbody>
+<% provide :title, 'Projects' %>
 
-</table>
-<% if user_signed_in? %>
-<%= link_to 'New Project', new_project_path, :type => 'button', :class => 'btn btn-default'%>
-<% end %>
+
+  <div id="doc-box">
+    <div id="doc-overview">
+      <h1>List of Projects</h1>
+    </div>
+    <div id="doc-side-panel">
+      <% if user_signed_in? %>
+        <ul>
+          <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+  <%= will_paginate @projects %>
+  <ul id="project-list" style="list-style: none; padding-left: 0;">
+    <% if @projects.empty? %>
+      <li>No projects were found, wait wha..?</li>
+    <% else %>
+      <% @projects.each do |project| %>
+        <li class="listing">
+          <%= render 'listing', project: project %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <%= will_paginate @projects %>
+
