@@ -91,11 +91,11 @@ Feature: Create and maintain projects
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
     When I fill in:
-      | Field               | Text                              |
-      | Title               | Title New                         |
-      | Description         | Description New                   |
-      | GitHub link         | http://www.github.com/abc         |
-      | PivotalTracker link | http://www.pivotaltracker.com/def |
+      | Field               | Text                                   |
+      | Title               | Title New                              |
+      | Description         | Description New                        |
+      | GitHub link         | http://www.github.com/abc              |
+      | PivotalTracker link | http://www.pivotaltracker.com/s/982890 |
 
     And I select "Status" to "Active"
     And I click the "Submit" button

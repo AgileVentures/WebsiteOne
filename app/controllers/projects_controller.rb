@@ -84,10 +84,16 @@ class ProjectsController < ApplicationController
 
   def get_current_stories
     PivotalService.set_token('1e90ef53f12fc327d3b5d8ee007cce39')
-    if @project.pivotaltracker_id.present?
-      @projectpv = PivotalService.one_project(@project.pivotaltracker_id, Scorer::Project.fields)
-      @iteration = PivotalService.iterations(@project.pivotaltracker_id, 'current')
-      @stories = @iteration.stories
+    if @project.pivotaltracker_url.present?
+      pivotaltracker_id = @project.pivotaltracker_url.split('/')[-1]
+      begin
+        @projectpv = PivotalService.one_project(pivotaltracker_id, Scorer::Project.fields)
+        @iteration = PivotalService.iterations(pivotaltracker_id, 'current')
+        @stories = @iteration.stories
+      rescue Exception => error
+        ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'an error occurred in Pivotal Tracker' })
+        @stories = nil
+      end
     end
   end
 
