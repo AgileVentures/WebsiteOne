@@ -65,4 +65,14 @@ describe ApplicationHelper do
       expect(valid_email?('invalid@invalid.i')).to be_false
     end
   end
+
+  describe '#shared_meta_keywords' do
+    it 'returns default keywords if there are no page specific keywords' do
+
+    end
+  end
+
+  describe '#default_meta_description' do
+
+  end
 end

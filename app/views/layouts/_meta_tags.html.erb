@@ -17,13 +17,13 @@
 <meta property="og:url" content="<%= request.original_url %>"/>
 <meta property="og:site_name" content="AgileVentures"/>
 <meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : default_meta_description %>">
-<meta property="og:image" content="<%= %>">
+<meta property="og:image" content="<%= image_path 'screenshot.png' %>">
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : 'AgileVentures' %>"/>
 <meta name="twitter:url" content="<%= request.original_url %>">
 <meta name="twitter:site" content="@AgileVentures">
-<meta name="twitter:image:src" content="<%= %>">
+<meta name="twitter:image:src" content="<%= image_path 'screenshot.png' %>">
 <% if content_for?(:twitter_creator) %>
   <meta name="twitter:creator" content="<%= yield(:twitter_creator) %>">
 <% end %>
