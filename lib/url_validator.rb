@@ -10,12 +10,12 @@ class UrlValidator < ActiveModel::Validator
     match = url.match(/^(?:https|http|)[:\/]*www\.pivotaltracker\.com\/s\/projects\/(\d+)$/i)
     if match.present?
       pv_id = match.captures[0]
-      # cleans up the URL
     elsif url =~ /^\d+$/
       pv_id = url
     end
 
     if pv_id.present?
+      # tidy up URL
       record.pivotaltracker_url = "https://www.pivotaltracker.com/s/projects/#{pv_id}"
     else
       record.errors[:base] << 'Invalid Pivotal Tracker URL'
