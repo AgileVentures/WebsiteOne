@@ -2,7 +2,10 @@ class VisitorsController < ApplicationController
   include ApplicationHelper
 
   def index
+    @projects_count = Project.count
+    @members_count = User.count
     @event = Event.next_occurrence
+    render layout: false
   end
 
   def send_contact_form

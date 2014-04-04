@@ -1,0 +1,43 @@
+@import 'variables';
+
+#nav {
+  width: 100%;
+  position: static;
+  top: -32px;
+  margin-bottom: 0px;
+}
+
+#nav.affix {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  -webkit-transition: all .6s ease-in-out;
+}
+
+header#main_header {
+  background: #F07F48;
+  height: 60px;
+  color: #000000;
+}
+
+header#main_header {
+  h1, h2, h3 a, a, a:hover {
+    color: #101010;
+    font-weight: 800;
+    text-decoration: none;
+  }
+}
+
+header#main_header h3 {
+  font-family: 'Kreon', serif;
+  background: #F07F48;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 34px;
+  padding: 12px 10px 6px 10px;
+}
+
+header#main_header .dropdown-menu {
+  background: #F07F48;
+  border-width: 0;
+}

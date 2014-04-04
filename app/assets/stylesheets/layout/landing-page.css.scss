@@ -1,0 +1,33 @@
+#top-content-wrapper {
+  height: 100%;
+}
+
+#top-content {
+  width: 100%;
+  min-height: 100%;
+  background: #2E2E2E;
+  color: white;
+
+  h1 {
+    font-size: 80px;
+    color: white;
+  }
+
+  h2 {
+    padding-left: 55px;
+    font-size: 35px;
+    color: white;
+  }
+}
+
+#top-content-left {
+  width: 70%;
+  padding: 30px;
+  margin: 0;
+}
+
+#top-content-right {
+  width: 30%;
+  padding: 30px;
+  margin: 0;
+}

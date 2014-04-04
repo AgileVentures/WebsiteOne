@@ -3,10 +3,9 @@
  *= require_self
  *= require font-awesome
  *= require_tree
+ *= require_directory ./layout
  */
 @import "bootstrap";
-
-
 
 .signin {
   h2 {

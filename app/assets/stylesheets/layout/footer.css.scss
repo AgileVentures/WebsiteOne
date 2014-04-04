@@ -1,0 +1,98 @@
+$footer-height: 400px;
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0;
+  margin-bottom: -$footer-height;
+  /* Pad bottom by footer height */
+  padding: 0 0 $footer-height;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: $footer-height;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  background-color: #252528;
+  color: #fff;
+  /* testimonials */
+  /* contact */
+  /* credits */
+  /* inner footer */
+}
+
+#footer > .container {
+
+}
+
+#footer p {
+  color: #f5f5f5;
+}
+
+#footer a {
+  color: #efefef;
+}
+
+#footer .contact {
+  text-align: right;
+}
+
+#footer .contact label{
+  color: #ffffff; }
+
+#footer .contact .footer_header {
+  text-align: left;
+  margin-top: -20px;
+  margin-left: 35px;
+}
+
+#footer .contact input[type="text"], #footer .contact textarea {
+  border: none;
+  background-color: #1f1f21;
+  color: #868687;
+  padding: 8px 20px;
+  border-radius: 3px;
+  font-size: 14px;
+  width: 95%;
+  -webkit-transition: background-color .2s linear;
+  -moz-transition: background-color .2s linear;
+  margin-bottom: 10px;
+}
+
+#footer .contact input[type="text"]:focus, #footer .contact textarea:focus {
+  border: none;
+  box-shadow: none;
+  background-color: #000;
+}
+
+#footer .contact input[type="text"]:moz-placeholder, #footer .contact textarea:moz-placeholder {
+  color: #868687;
+}
+
+#footer .contact input[type="text"]::-webkit-input-placeholder, #footer .contact textarea::-webkit-input-placeholder {
+  color: #868687;
+}
+
+#footer .contact input[type="text"]:-ms-input-placeholder, #footer .contact textarea:-ms-input-placeholder {
+  color: #868687;
+}
+
+#footer .contact input[type="submit"] {
+  background-color: #3e3e40;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  padding: 5px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  -webkit-transition: background-color .2s linear;
+  -moz-transition: background-color .2s linear;
+}
+
+#footer .contact input[type="submit"]:hover {
+  background-color: #2190DB;
+}
