@@ -1,0 +1,1578 @@
+[
+  {
+    "story_type": "chore",
+    "id": 67243926,
+    "owned_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "name": "Refactor cucumber steps",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67243926",
+    "description": "Remove duplication and improve feature step expressiveness"
+  },
+  {
+    "story_type": "bug",
+    "id": 65858684,
+    "owned_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "slugs should not be unique but they need to be consistent with the parent project ",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/65858684"
+  },
+  {
+    "story_type": "bug",
+    "id": 67380958,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "not clear that you need to press return to add separate skills",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67380958"
+  },
+  {
+    "story_type": "bug",
+    "id": 67380924,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "many skills and projects leads to overlap on content",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67380924",
+    "description": "See diagram: https://www.dropbox.com/s/rpw5e7y509ygpg0/Screenshot%202014-03-12%2010.51.38.png"
+  },
+  {
+    "story_type": "bug",
+    "id": 67265600,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1189696,
+      "name": "Yaro",
+      "kind": "person",
+      "initials": "YA",
+      "username": "yaro"
+    },
+    "name": "Skills on user profile",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67265600",
+    "description": "When I add a a skill to my profile, that skill is displayed on all member's profile, when I go to their profile pages"
+  },
+  {
+    "story_type": "bug",
+    "id": 67480006,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "name": "\"All Articles\" link should still be clickable when in an article's show page",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67480006"
+  },
+  {
+    "story_type": "bug",
+    "id": 67381296,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "name": "Event creation -- cancel button redirect path",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67381296",
+    "description": "Cancel button should redirect to the event index page"
+  },
+  {
+    "story_type": "bug",
+    "id": 67380946,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "updating profile redirects to site home page",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67380946",
+    "description": "should stay on current page"
+  },
+  {
+    "story_type": "feature",
+    "id": 67380812,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "name": "Give option to display hire me button",
+    "estimate": 1,
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67380812",
+    "description": "As a user\nSo that I may choose to advertise myself for hire\nI would like the option of hiding or displaying the \"hire me\" button on my account"
+  },
+  {
+    "story_type": "bug",
+    "id": 67620436,
+    "owned_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "name": "403 Forbidden when syncing YouTube account",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "accepted",
+    "url": "https://www.pivotaltracker.com/story/show/67620436"
+  },
+  {
+    "story_type": "chore",
+    "id": 65010108,
+    "owned_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Content migration from agileventures.org",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/65010108"
+  },
+  {
+    "story_type": "chore",
+    "id": 65007268,
+    "owned_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "comments": [
+      {
+        "id": 61890808,
+        "text": "Whats up with this @tansaku ?",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-12T08:02:14Z",
+        "story_id": 65007268,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-02-12T08:02:14Z"
+      }
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "photos including sam pairing for front page",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/65007268"
+  },
+  {
+    "story_type": "chore",
+    "id": 65356620,
+    "owned_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "comments": [
+      {
+        "id": 64031278,
+        "text": "I'm using Blitz on production",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-11T12:13:07Z",
+        "story_id": 65356620,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-03-11T12:13:07Z"
+      }
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Integrate loaderio for WSO",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/65356620",
+    "description": "As a site administrator\nIn order to see how the site is performing under pressure\nI want to be able to run load tests\nAnd I want to do it for free ;-)"
+  },
+  {
+    "story_type": "chore",
+    "id": 65561136,
+    "owned_by": {
+      "id": 1176564,
+      "name": "apelade",
+      "kind": "person",
+      "initials": "PM",
+      "username": "hrfeels"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "Migrate Google Site AutoGraders data to WebSiteOne",
+    "labels": [
+      {
+        "id": 7691424,
+        "name": "legacy data migration",
+        "updated_at": "2014-02-11T15:30:17Z",
+        "kind": "label",
+        "created_at": "2014-02-11T15:30:17Z",
+        "project_id": 982890
+      }
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/65561136"
+  },
+  {
+    "story_type": "chore",
+    "id": 65561206,
+    "owned_by": {
+      "id": 1182860,
+      "name": "PavelGimelberg",
+      "kind": "person",
+      "initials": "PA",
+      "username": "pavelgbg"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "Migrate Google Site PPScheduler data to WebsiteOne",
+    "labels": [
+      {
+        "id": 7691424,
+        "name": "legacy data migration",
+        "updated_at": "2014-02-11T15:30:17Z",
+        "kind": "label",
+        "created_at": "2014-02-11T15:30:17Z",
+        "project_id": 982890
+      }
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/65561206"
+  },
+  {
+    "story_type": "feature",
+    "id": 66035904,
+    "owned_by": {
+      "id": 1170834,
+      "name": "Jeff Thomas",
+      "kind": "person",
+      "initials": "JT",
+      "username": "coloradobum"
+    },
+    "comments": [
+      {
+        "id": 62918242,
+        "text": "pull from Bryan 'user_bio'",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-25T17:28:02Z",
+        "story_id": 66035904,
+        "person": {
+          "id": 1170834,
+          "name": "Jeff Thomas",
+          "initials": "JT",
+          "username": "coloradobum"
+        },
+        "created_at": "2014-02-25T17:28:02Z"
+      }
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Add 'Bio' section to User profile",
+    "estimate": 2,
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/66035904",
+    "description": "As a site user\nIn order to get to know other users better\nI would like to see a short bio of a user on his profile page"
+  },
+  {
+    "story_type": "feature",
+    "id": 66286674,
+    "owned_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "comments": [
+      {
+        "id": 62738424,
+        "text": "We can use this service with lat € long data: http://www.geonames.org/export/web-services.html#timezone\n",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-23T13:31:15Z",
+        "story_id": 66286674,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-02-23T13:31:15Z"
+      }
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Calculate and display Timezone",
+    "estimate": 1,
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/66286674",
+    "description": "As a site user\nIn order to better plan who I can collaborate with\nI would like to know other users timezones"
+  },
+  {
+    "story_type": "feature",
+    "id": 66288066,
+    "owned_by": {
+      "id": 1266178,
+      "name": "Yatish Mehta",
+      "kind": "person",
+      "initials": "YM",
+      "username": "yatish27"
+    },
+    "comments": [
+      {
+        "id": 62739356,
+        "text": "gem 'uri-handler'",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-23T15:50:18Z",
+        "story_id": 66288066,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-02-23T15:50:18Z"
+      },
+      {
+        "id": 63357410,
+        "text": "This relates to my story 64891298 GitHub commit count, we should collaborate on the projects table migration",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-03T14:51:10Z",
+        "story_id": 66288066,
+        "person": {
+          "id": 1179036,
+          "name": "Pete",
+          "initials": "PB",
+          "username": "petebouch"
+        },
+        "created_at": "2014-03-03T14:51:10Z"
+      },
+      {
+        "id": 63374758,
+        "text": "@petebouch Sure.Lets talk during pair up  ",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-03T17:10:10Z",
+        "story_id": 66288066,
+        "person": {
+          "id": 1266178,
+          "name": "Yatish Mehta",
+          "initials": "YM",
+          "username": "yatish27"
+        },
+        "created_at": "2014-03-03T17:10:10Z"
+      }
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Add Pivotal/GitHub link to Projects",
+    "estimate": 2,
+    "labels": [
+      {
+        "id": 7903928,
+        "name": "github",
+        "updated_at": "2014-03-08T22:06:22Z",
+        "kind": "label",
+        "created_at": "2014-03-08T22:06:22Z",
+        "project_id": 982890
+      },
+      {
+        "id": 7464516,
+        "name": "projects",
+        "updated_at": "2014-01-14T09:14:27Z",
+        "kind": "label",
+        "created_at": "2014-01-14T09:14:27Z",
+        "project_id": 982890
+      }
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/66288066",
+    "description": "As a site user\nIn order to have access to all projects resources\nI would like to see links to Projects Pivotal tracker and GitHub repository"
+  },
+  {
+    "story_type": "feature",
+    "id": 64891298,
+    "owned_by": {
+      "id": 1179036,
+      "name": "Pete",
+      "kind": "person",
+      "initials": "PB",
+      "username": "petebouch"
+    },
+    "comments": [
+      {
+        "id": 61036252,
+        "text": "A user can contribute to several AV projects. We should pull commit info from all AV-projects ad sum them all up and display as a value on users profile. Can be used for a ranking system. ;-)",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-01T17:18:58Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-02-01T17:18:58Z"
+      },
+      {
+        "id": 61038138,
+        "text": "Yes, however making large numbers of small commits could inflate your\r\nranking without adding much value to the projects.",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-01T20:42:19Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1179036,
+          "name": "Pete",
+          "initials": "PB",
+          "username": "petebouch"
+        },
+        "created_at": "2014-02-01T20:42:19Z"
+      },
+      {
+        "id": 61038476,
+        "text": "True, but faking success has a bitter taste.  ;-)",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-01T21:12:34Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-02-01T21:12:34Z"
+      },
+      {
+        "id": 61962828,
+        "text": "Add fields `github repo` to projects create/edit page?",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-12T20:58:44Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1189696,
+          "name": "Yaro",
+          "initials": "YA",
+          "username": "yaro"
+        },
+        "created_at": "2014-02-12T20:58:44Z"
+      },
+      {
+        "id": 62014372,
+        "text": "do we also want a separate contributors page for WSO specifically like we have here http://harrowcn.org.uk/contributors",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-13T10:46:08Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 8098,
+          "name": "Sam Joseph",
+          "initials": "SJ",
+          "username": "tansaku"
+        },
+        "created_at": "2014-02-13T10:46:08Z"
+      },
+      {
+        "id": 62014534,
+        "text": "We could. That would be nice.",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-13T10:48:10Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-02-13T10:48:10Z"
+      },
+      {
+        "id": 62014620,
+        "text": "That is a different story. Go you want to write it @Sam?",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-13T10:49:27Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-02-13T10:49:27Z"
+      },
+      {
+        "id": 62120122,
+        "text": "Research alternative GH API endpoints",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-14T10:35:42Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1179036,
+          "name": "Pete",
+          "initials": "PB",
+          "username": "petebouch"
+        },
+        "created_at": "2014-02-14T10:35:42Z"
+      },
+      {
+        "id": 62128032,
+        "text": "some work completed on this in user-commits branch",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-02-14T13:00:42Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1179036,
+          "name": "Pete",
+          "initials": "PB",
+          "username": "petebouch"
+        },
+        "created_at": "2014-02-14T13:00:42Z"
+      },
+      {
+        "id": 63874860,
+        "text": "@Pete, what's your status on this story?",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-08T22:09:37Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1189696,
+          "name": "Yaro",
+          "initials": "YA",
+          "username": "yaro"
+        },
+        "created_at": "2014-03-08T22:09:37Z"
+      },
+      {
+        "id": 63882866,
+        "text": "@petebouch Please research if there are any good gems we can use for this (see https://github.com/schacon/ruby-git and others) and how we can authorize our app with GitHub to be increase the amount of calls we can do. I want to avoid to make API calls directly if there is a possibility to avoid that. Less code to maintain and potentially faster implementation. Can we please discuss this in some upcoming scrum? ",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-09T12:59:11Z",
+        "story_id": 64891298,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-03-09T12:59:11Z"
+      }
+    ],
+    "requested_by": {
+      "id": 1179036,
+      "name": "Pete",
+      "kind": "person",
+      "initials": "PB",
+      "username": "petebouch"
+    },
+    "name": "Github commit count on profile page",
+    "estimate": 2,
+    "labels": [
+      {
+        "id": 7903928,
+        "name": "github",
+        "updated_at": "2014-03-08T22:06:22Z",
+        "kind": "label",
+        "created_at": "2014-03-08T22:06:22Z",
+        "project_id": 982890
+      },
+      {
+        "id": 7464532,
+        "name": "users",
+        "updated_at": "2014-01-14T09:15:33Z",
+        "kind": "label",
+        "created_at": "2014-01-14T09:15:33Z",
+        "project_id": 982890
+      }
+    ],
+    "tasks": [
+      {
+        "id": 20240660,
+        "updated_at": "2014-02-12T09:46:53Z",
+        "kind": "task",
+        "story_id": 64891298,
+        "complete": false,
+        "created_at": "2014-02-12T09:46:53Z",
+        "position": 1,
+        "description": "Need to store project github :owner and :repo in DB for each project"
+      },
+      {
+        "id": 20275518,
+        "updated_at": "2014-02-13T08:42:48Z",
+        "kind": "task",
+        "story_id": 64891298,
+        "complete": false,
+        "created_at": "2014-02-13T08:42:48Z",
+        "position": 2,
+        "description": "Add input fields for `github repo` to projects create/edit page"
+      }
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/64891298",
+    "description": "As a member of AV\nSo that I can find out what projects others are contributing to\nI should see the number of commits they have made to projects listed on their profile page."
+  },
+  {
+    "story_type": "feature",
+    "id": 63047384,
+    "owned_by": {
+      "id": 1177924,
+      "name": "Dima Sukhikh",
+      "kind": "person",
+      "initials": "DS",
+      "username": "coddeys"
+    },
+    "comments": [
+      {
+        "id": 64009002,
+        "text": "A Pivotal Tracker API gem that can be used to interface with the Pivotal Tracker API v5. https://github.com/atljeremy/pivotal-tracker-api",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-11T04:59:34Z",
+        "story_id": 63047384,
+        "person": {
+          "id": 1177924,
+          "name": "Dima Sukhikh",
+          "initials": "DS",
+          "username": "coddeys"
+        },
+        "created_at": "2014-03-11T04:59:34Z"
+      }
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Pivotaltracker stories",
+    "estimate": 3,
+    "labels": [
+      {
+        "id": 7464516,
+        "name": "projects",
+        "updated_at": "2014-01-14T09:14:27Z",
+        "kind": "label",
+        "created_at": "2014-01-14T09:14:27Z",
+        "project_id": 982890
+      }
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/63047384",
+    "description": "As a site owner\nSo that I can provide a better overview over project activities to site users\nI would like to display projects current sprint activities as they are set in Pivotal Tracker \n\nShow PT Stories on show projects view. https://github.com/jsmestad/pivotal-tracker"
+  },
+  {
+    "story_type": "bug",
+    "id": 66066822,
+    "owned_by": {
+      "id": 1176564,
+      "name": "apelade",
+      "kind": "person",
+      "initials": "PM",
+      "username": "hrfeels"
+    },
+    "comments": [
+      {
+        "id": 64711532,
+        "text": "ideally users should be converted to anonymous users rather than deleted in order to maintain all data",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-19T10:50:05Z",
+        "story_id": 66066822,
+        "person": {
+          "id": 8098,
+          "name": "Sam Joseph",
+          "initials": "SJ",
+          "username": "tansaku"
+        },
+        "created_at": "2014-03-19T10:50:05Z"
+      }
+    ],
+    "requested_by": {
+      "id": 1176564,
+      "name": "apelade",
+      "kind": "person",
+      "initials": "PM",
+      "username": "hrfeels"
+    },
+    "name": "orphan documents and tags",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/66066822",
+    "description": "Deleting a user who is the owner of documents causes 500 internal server error on project pages, could be the same for tags."
+  },
+  {
+    "story_type": "bug",
+    "id": 66864310,
+    "owned_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "comments": [
+      {
+        "id": 63476640,
+        "text": "2014-03-04T15:35:10.237730+00:00 app[web.1]: I, [2014-03-04T15:35:10.237624 #11]  INFO -- omniauth: (github) Callback phase initiated.\n2014-03-04T15:35:10.236540+00:00 app[web.1]: Started GET \"/auth/github/callback?code=05f96d40924a26be626f&state=b6326c02c9a6f3f519fd074670c093dc8957f42198f610b8\" for 72.222.141.62 at 2014-03-04 15:35:10 +0000\n2014-03-04T15:35:10.238470+00:00 app[web.1]: E, [2014-03-04T15:35:10.238381 #11] ERROR -- omniauth: (github) Authentication failure! csrf_detected: OmniAuth::Strategies::OAuth2::CallbackError, csrf_detected | CSRF detected\n2014-03-04T15:35:10.348139+00:00 app[web.1]: Processing by AuthenticationsController#failure as HTML\n2014-03-04T15:35:10.346342+00:00 app[web.1]: Started GET \"/auth/failure?message=csrf_detected&strategy=github\" for 72.222.141.62 at 2014-03-04 15:35:10 +0000\n2014-03-04T15:35:10.348371+00:00 app[web.1]:   Parameters: {\"message\"=>\"csrf_detected\", \"strategy\"=>\"github\"}\n2014-03-04T15:35:10.349802+00:00 app[web.1]: Redirected to http://agileventures.org/\n2014-03-04T15:35:10.350003+00:00 app[web.1]: Completed 302 Found in 2ms (ActiveRecord: 0.0ms)\n2014-03-04T15:35:10.439206+00:00 app[web.1]: Started GET \"/\" for 72.222.141.62 at 2014-03-04 15:35:10 +0000\n2014-03-04T15:35:10.440917+00:00 app[web.1]: Processing by VisitorsController#index as HTML\n2014-03-04T15:35:10.443757+00:00 app[web.1]:   Rendered visitors/index.html.erb within layouts/application (1.4ms)\n2014-03-04T15:35:10.445400+00:00 app[web.1]:   Rendered layouts/_flash.html.erb (0.1ms)\n2014-03-04T15:35:10.443056+00:00 app[web.1]:   Rendered layouts/_round_banners.html.erb (0.5ms)\n2014-03-04T15:35:10.445400+00:00 app[web.1]:   Rendered layouts/_navbar.html.erb (0.8ms)\n2014-03-04T15:35:10.446356+00:00 app[web.1]:   Rendered layouts/_contact_form.html.erb (0.6ms)\n2014-03-04T15:35:10.446600+00:00 app[web.1]: Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.0ms)\n2014-03-04T15:35:10.446356+00:00 app[web.1]:   Rendered layouts/_footer.html.erb (0.8ms)\n2014-03-04T15:34:21.151069+00:00 heroku[router]: at=info method=GET path=/auth/github/callback?code=05f96d40924a26be626f&state=b6326c02c9a6f3f519fd074670c093dc8957f42198f610b8 host=agileventures.org request_id=381e5eb8-03f6-4e77-93ef-d372b754d17e fwd=\"50.46.182.120\" dyno=web.1 connect=1ms service=81ms status=500 bytes=5435\n2014-03-04T15:35:23.305291+00:00 app[web.1]: E, [2014-03-04T15:35:23.305211 #8] ERROR -- omniauth: (github) Authentication failure! csrf_detected: OmniAuth::Strategies::OAuth2::CallbackError, csrf_detected | CSRF detected\n2014-03-04T15:35:23.304731+00:00 app[web.1]: I, [2014-03-04T15:35:23.304632 #8]  INFO -- omniauth: (github) Callback phase initiated.\n2014-03-04T15:35:23.304096+00:00 app[web.1]: Started GET \"/auth/github/callback?code=05f96d40924a26be626f&state=b6326c02c9a6f3f519fd074670c093dc8957f42198f610b8\" for 117.203.255.249 at 2014-03-04 15:35:23 +0000\n2014-03-04T15:35:23.317662+00:00 heroku[router]: at=info method=GET path=/auth/github/callback?code=05f96d40924a26be626f&state=b6326c02c9a6f3f519fd074670c093dc8957f42198f610b8 host=agileventures.org request_id=f0e87ed9-c5fa-4283-ae1c-b9e579f83793 fwd=\"117.203.255.249\" dyno=web.1 connect=12ms service=16ms status=302 bytes=736\n2014-03-04T15:35:24.527399+00:00 app[web.1]: Processing by AuthenticationsController#failure as HTML\n2014-03-04T15:35:24.529578+00:00 app[web.1]:   Parameters: {\"message\"=>\"csrf_detected\", \"strategy\"=>\"github\"}\n2014-03-04T15:35:24.523758+00:00 app[web.1]: Started GET \"/auth/failure?message=csrf_detected&strategy=github\" for 117.203.255.249 at 2014-03-04 15:35:24 +0000\n2014-03-04T15:35:24.535321+00:00 app[web.1]: Redirected to http://agileventures.org/\n2014-03-04T15:35:24.538550+00:00 app[web.1]: Completed 302 Found in 7ms (ActiveRecord: 1.9ms)",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-04T15:39:06Z",
+        "story_id": 66864310,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-03-04T15:39:06Z"
+      },
+      {
+        "id": 63574942,
+        "text": "fixed related error calling gsub on Nill:class in User#display_name",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-05T12:45:59Z",
+        "story_id": 66864310,
+        "person": {
+          "id": 1179036,
+          "name": "Pete",
+          "initials": "PB",
+          "username": "petebouch"
+        },
+        "created_at": "2014-03-05T12:45:59Z"
+      },
+      {
+        "id": 63978214,
+        "text": "@petebouch should we mark this one finished?",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-10T20:45:39Z",
+        "story_id": 66864310,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-03-10T20:45:39Z"
+      },
+      {
+        "id": 64021196,
+        "text": "@bryanyap did you find the root cause of the XSS protection errors?",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-11T09:51:25Z",
+        "story_id": 66864310,
+        "person": {
+          "id": 1179036,
+          "name": "Pete",
+          "initials": "PB",
+          "username": "petebouch"
+        },
+        "created_at": "2014-03-11T09:51:25Z"
+      }
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "500 error on github sign up",
+    "labels": [
+      {
+        "id": 7903928,
+        "name": "github",
+        "updated_at": "2014-03-08T22:06:22Z",
+        "kind": "label",
+        "created_at": "2014-03-08T22:06:22Z",
+        "project_id": 982890
+      }
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/66864310"
+  },
+  {
+    "story_type": "feature",
+    "id": 66322520,
+    "owned_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "comments": [
+      {
+        "id": 63915466,
+        "text": "I still see: \"GitHub profile: not linked\" on profile page. How about existing users - any solution for adding that attribute to existing profiles?",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-10T11:57:42Z",
+        "story_id": 66322520,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-03-10T11:57:42Z"
+      },
+      {
+        "id": 64441860,
+        "text": "Switching ownership due to no-show.",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-15T16:45:19Z",
+        "story_id": 66322520,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-03-15T16:45:19Z"
+      },
+      {
+        "id": 64441866,
+        "text": "This needs to be revisited if the methods are too complex. Can be done in a much simpler way. ",
+        "file_attachments": [
+
+        ],
+        "updated_at": "2014-03-15T16:46:12Z",
+        "story_id": 66322520,
+        "person": {
+          "id": 1104242,
+          "name": "Thomas Ochman",
+          "initials": "TO",
+          "username": "thomasochman"
+        },
+        "created_at": "2014-03-15T16:46:12Z"
+      }
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "add link to members github in profile page",
+    "estimate": 1,
+    "labels": [
+      {
+        "id": 7903928,
+        "name": "github",
+        "updated_at": "2014-03-08T22:06:22Z",
+        "kind": "label",
+        "created_at": "2014-03-08T22:06:22Z",
+        "project_id": 982890
+      },
+      {
+        "id": 7464532,
+        "name": "users",
+        "updated_at": "2014-01-14T09:15:33Z",
+        "kind": "label",
+        "created_at": "2014-01-14T09:15:33Z",
+        "project_id": 982890
+      }
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/66322520",
+    "description": "As a developer\nSo that I can check out other developers github profiles\nI want to be able to click through to github profiles from developers homepages"
+  },
+  {
+    "story_type": "chore",
+    "id": 65594598,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Enable gzip compression on heroku",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/65594598",
+    "description": "gem 'heroku-deflater'"
+  },
+  {
+    "story_type": "feature",
+    "id": 65110172,
+    "owned_by": {
+      "id": 1052993,
+      "name": "Marcelo Gobelli",
+      "kind": "person",
+      "initials": "MG",
+      "username": "marcelogobelli"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "email admin when errors occur",
+    "estimate": 1,
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/65110172",
+    "description": "should includes details or error message, stack trace and user id if the user was logged in\n\nmight also be nice to give user option to add message to the info sent to the admin"
+  },
+  {
+    "story_type": "chore",
+    "id": 67540480,
+    "owned_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "need to enable https security",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/67540480",
+    "description": "https://devcenter.heroku.com/articles/ssl-endpoint\n\nhttps://www.google.co.uk/search?q=nonprofit+ssl+certificate&oq=nonprofit+ssl+&aqs=chrome.1.69i57j0l3.4158j0j7&sourceid=chrome&espv=210&es_sm=119&ie=UTF-8"
+  },
+  {
+    "story_type": "chore",
+    "id": 66235364,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "name": "missing tests for registration contoller",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/66235364"
+  },
+  {
+    "story_type": "chore",
+    "id": 67621042,
+    "owned_by": {
+      "id": 1245806,
+      "name": "Daniel Mortensen",
+      "kind": "person",
+      "initials": "DM",
+      "username": "danielmortensen"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1245806,
+      "name": "Daniel Mortensen",
+      "kind": "person",
+      "initials": "DM",
+      "username": "danielmortensen"
+    },
+    "name": "Add Airpair to supporters sidebar",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/67621042"
+  },
+  {
+    "story_type": "feature",
+    "id": 66779110,
+    "owned_by": {
+      "id": 951101,
+      "name": "Sampriti Panda",
+      "kind": "person",
+      "initials": "SP",
+      "username": "sampritip"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 8098,
+      "name": "Sam Joseph",
+      "kind": "person",
+      "initials": "SJ",
+      "username": "tansaku"
+    },
+    "name": "make static pages editable by WYSYWIG",
+    "estimate": 3,
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "started",
+    "url": "https://www.pivotaltracker.com/story/show/66779110",
+    "description": "Sam recommends extracting Page class from Document and use that "
+  },
+  {
+    "story_type": "bug",
+    "id": 67265734,
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1189696,
+      "name": "Yaro",
+      "kind": "person",
+      "initials": "YA",
+      "username": "yaro"
+    },
+    "name": "User profile: update",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "unstarted",
+    "url": "https://www.pivotaltracker.com/story/show/67265734",
+    "description": "If I delete my email in my profiie and click Update -> Internal Server Error"
+  },
+  {
+    "story_type": "bug",
+    "id": 67604358,
+    "owned_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "name": "Videos are still shown after a user unsyncs his YouTube account",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "unstarted",
+    "url": "https://www.pivotaltracker.com/story/show/67604358",
+    "description": "Privacy infringement"
+  },
+  {
+    "story_type": "chore",
+    "id": 67382256,
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1219108,
+      "name": "Bryan Yap",
+      "kind": "person",
+      "initials": "BY",
+      "username": "bryanyap"
+    },
+    "name": "Update users show page UI",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "unstarted",
+    "url": "https://www.pivotaltracker.com/story/show/67382256"
+  },
+  {
+    "story_type": "bug",
+    "id": 67203928,
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Error on add link to members github in profile page ",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "unstarted",
+    "url": "https://www.pivotaltracker.com/story/show/67203928",
+    "description": "I still see: \"GitHub profile: not linked\" on profile page after relinking to GitHub"
+  },
+  {
+    "story_type": "chore",
+    "id": 65424812,
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1104242,
+      "name": "Thomas Ochman",
+      "kind": "person",
+      "initials": "TO",
+      "username": "thomasochman"
+    },
+    "name": "Investigate why regenerate_slugs is now working",
+    "labels": [
+
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "unstarted",
+    "url": "https://www.pivotaltracker.com/story/show/65424812"
+  },
+  {
+    "story_type": "feature",
+    "id": 65352190,
+    "comments": [
+
+    ],
+    "requested_by": {
+      "id": 1189696,
+      "name": "Yaro",
+      "kind": "person",
+      "initials": "YA",
+      "username": "yaro"
+    },
+    "name": "Make a Scrum button",
+    "estimate": 1,
+    "labels": [
+      {
+        "id": 7478060,
+        "name": "activities",
+        "updated_at": "2014-01-15T12:55:13Z",
+        "kind": "label",
+        "created_at": "2014-01-15T12:55:13Z",
+        "project_id": 982890
+      },
+      {
+        "id": 7674660,
+        "name": "youtube",
+        "updated_at": "2014-02-09T17:42:51Z",
+        "kind": "label",
+        "created_at": "2014-02-09T17:42:51Z",
+        "project_id": 982890
+      }
+    ],
+    "tasks": [
+
+    ],
+    "current_state": "unstarted",
+    "url": "https://www.pivotaltracker.com/story/show/65352190",
+    "description": "In order to create a scrum easily\nAs a user\nI want to have predefined buttons for setting a hangout with prepopulated descriptions"
+  }
+]

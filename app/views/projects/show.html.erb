@@ -58,9 +58,17 @@
 
 <ul class="nav nav-tabs">
   <li id="documents" class="active">
-    <a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a></li>
-  <li id="members"><a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a></li>
-  <li id="videos"><a href="#videos_list" data-toggle="tab"> Videos (<%= @videos.count %>)</a></li>
+    <a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a>
+  </li>
+  <li id="members">
+    <a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a>
+  </li>
+  <li id="videos">
+    <a href="#videos_list" data-toggle="tab"> Videos (<%= @videos.count %>)</a>
+  </li>
+  <li id="activities">
+    <a href="#activities_list" data-toggle="tab"> Activity</a>
+  </li>
 </ul>
 
 <!-- Tab panes -->
@@ -123,9 +131,14 @@
             <h4 id="video_contents"><%= @videos.first[:content] %></h4>
             <iframe id="ytplayer" type="text/html" width="340" height="210"
                     src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
-            </div>
+
         <% end %>
-        </div>
+      </div>
+    </div>
   </div>
+  <div class="tab-pane activity" id="activities_list">
+    <%= render 'activity' %>
+  </div>
+
 </div>
 
