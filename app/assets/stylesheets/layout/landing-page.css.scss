@@ -1,3 +1,7 @@
+@import "variables";
+
+$top-content-text-color: $theme-main;
+
 #top-content-wrapper {
   height: 100%;
 }
@@ -5,29 +9,36 @@
 #top-content {
   width: 100%;
   min-height: 100%;
-  background: #2E2E2E;
-  color: white;
+  background: $theme-dark;
+  color: $top-content-text-color;
 
   h1 {
     font-size: 80px;
-    color: white;
+    color: $top-content-text-color;
   }
 
   h2 {
     padding-left: 55px;
     font-size: 35px;
-    color: white;
+    color: $top-content-text-color;
   }
 }
 
 #top-content-left {
-  width: 70%;
+  display: inline-block;
+  width: 60%;
   padding: 30px;
   margin: 0;
 }
 
 #top-content-right {
+  display: inline-block;
   width: 30%;
   padding: 30px;
   margin: 0;
+}
+
+#top-content-list {
+  list-style: none;
+  font-size: 25px;
 }

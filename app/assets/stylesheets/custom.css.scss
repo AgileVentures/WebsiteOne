@@ -147,50 +147,6 @@ h1 {
   opacity: 0.8;
 }
 
-@media (min-width: 767px) {
-  .navbar-nav.nav-justified > li {
-    float: none;
-  }
-}
-
-.navbar-nav {
-  margin: 1px 1px;
-}
-
-/* customize nav style */
-.navbar-custom {
-  background-color: #2e2e2e;
-  font-weight: 700;
-  text-transform: uppercase;
-  border-width: 0;
-}
-
-.navbar-custom  .navbar-nav>li>a {
-  color: #ddd;
-}
-
-.navbar-custom  .navbar-nav li>a:hover, .navbar-nav li .open, .navbar-custom .navbar-nav .active a {
-  background-color: #000;
-}
-
-.navbar-custom .dropdown-menu {
-  right: 0;
-}
-
-.navbar-custom .navbar-nav>.dropdown>a .caret {
-  border-top-color: #999;
-  border-bottom-color: #999;
-}
-
-.navbar-collapse.in {
-  /*3.0.2 bug workaround*/
-  overflow-y: visible;
-}
-
-.navbar-toggle {
-  outline: 0;
-}
-
 .divider {
   height: 50px;
 }

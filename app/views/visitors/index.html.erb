@@ -15,10 +15,16 @@
       <h2>Crowdsourced Learning</h2>
     </div>
     <div id="top-content-right">
-      <ul>
-        <li><%= @projects_count %></li>
-        <li><%= @members_count %></li>
-        <li><%= @event %></li>
+      <ul id="top-content-list">
+        <li><%= @projects_text %></li>
+        <li><%= @members_text %></li>
+        <li>
+          <% if @event.present? %>
+            <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
+          <% else %>
+            No event found, create one <%= link_to 'here', events_path %>
+          <% end %>
+        </li>
       </ul>
     </div>
   </div>

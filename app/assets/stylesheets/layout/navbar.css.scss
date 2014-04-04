@@ -1,10 +1,59 @@
+@import 'mixins';
 @import 'variables';
+
+/* customize nav style */
+.navbar-custom {
+  background-color: $theme-dark;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-width: 0;
+}
+
+.navbar-custom  .navbar-nav>li>a {
+  color: $white;
+  background-color: $theme-main;
+  @include css-transition(color, 300ms, ease, 0s);
+  @include css-transition(background-color, 300ms, ease, 0s);
+
+  &:hover, &:active {
+    background-color: $white;
+    color: $theme-main;
+  }
+}
+
+.navbar-nav li .open, .navbar-custom .navbar-nav .active a {
+  background-color: $black;
+}
+
+.navbar-custom .dropdown-menu {
+  right: 0;
+}
+
+.navbar-custom .navbar-nav>.dropdown>a .caret {
+  border-top-color: #999;
+  border-bottom-color: #999;
+}
+
+.navbar-collapse.in {
+  /*3.0.2 bug workaround*/
+  overflow-y: visible;
+}
+
+.navbar-toggle {
+  outline: 0;
+}
+
+@media (min-width: 767px) {
+  .navbar-nav.nav-justified > li {
+    float: none;
+  }
+}
 
 #nav {
   width: 100%;
   position: static;
   top: -32px;
-  margin-bottom: 0px;
+  background: $theme-main;
 }
 
 #nav.affix {
@@ -15,7 +64,7 @@
 }
 
 header#main_header {
-  background: #F07F48;
+  background: $theme-main;
   height: 60px;
   color: #000000;
 }
@@ -30,14 +79,13 @@ header#main_header {
 
 header#main_header h3 {
   font-family: 'Kreon', serif;
-  background: #F07F48;
-  padding: 10px;
+  background: $theme-main;
   border-radius: 3px;
   font-size: 34px;
   padding: 12px 10px 6px 10px;
 }
 
 header#main_header .dropdown-menu {
-  background: #F07F48;
+  background: $theme-main;
   border-width: 0;
 }

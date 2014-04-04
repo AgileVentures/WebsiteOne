@@ -2,9 +2,22 @@ class VisitorsController < ApplicationController
   include ApplicationHelper
 
   def index
-    @projects_count = Project.count
-    @members_count = User.count
+    project_count = Project.count
+    if project_count > 0
+      @projects_text = "#{project_count} #{'Project'.pluralize(project_count)} to date"
+    else
+      @projects_text = 'Projects coming soon!'
+    end
+
+    members_count = User.count
+    if members_count > 0
+      @members_text = "#{members_count} #{'Agile Venturer'.pluralize(members_count)}"
+    else
+      @members_text = 'Nobody yet, be the first!'
+    end
+
     @event = Event.next_occurrence
+
     render layout: false
   end
 

@@ -1,23 +1,23 @@
 <header id="main_header" class="masthead">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2">
-        <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
+        <a class="navbar-brand" href="/"><img width="250px" src="<%= image_path('av-logo-inverse.png') %>"></a>
       </div>
       <% if user_signed_in? %>
-      <div class="col-lg-10 pull-right text-right" style="margin-top: 17px;">
-        <img src="<%= gravatar_for(current_user.email) %>" style="width: 30px; height: 30px; margin-right: 5px;" class="img-rounded">
-        <a id="user_info" href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user_details %></a>
-        <ul class="dropdown-menu text-left">
-          <li><%= link_to '<i class="glyphicon glyphicon-user"></i> My account'.html_safe, users_show_path(current_user) %> </li>
-          <li><%= link_to '<i class="glyphicon glyphicon-log-out"></i> Log out'.html_safe, destroy_user_session_path, :method => :delete %></li>
-        </ul>
-      </div>
-          <% else %>
-          <ul class="nav navbar-nav pull-right">
-            <li><%= link_to 'Log in', new_user_session_path %></li>
-            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        <div class="col-lg-10 pull-right text-right" style="margin-top: 17px;">
+          <img src="<%= gravatar_for(current_user.email) %>" style="width: 30px; height: 30px; margin-right: 5px;" class="img-rounded">
+          <a id="user_info" href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user_details %></a>
+          <ul class="dropdown-menu text-left">
+            <li><%= link_to '<i class="glyphicon glyphicon-user"></i> My account'.html_safe, users_show_path(current_user) %> </li>
+            <li><%= link_to '<i class="glyphicon glyphicon-log-out"></i> Log out'.html_safe, destroy_user_session_path, :method => :delete %></li>
           </ul>
+        </div>
+      <% else %>
+        <ul class="nav navbar-nav pull-right">
+          <li><%= link_to 'Log in', new_user_session_path %></li>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        </ul>
       <% end %>
     </div>
   </div>
