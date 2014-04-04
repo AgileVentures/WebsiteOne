@@ -1,20 +1,19 @@
 <% provide :title, 'Home' %>
 <!DOCTYPE html>
 <html>
-<head>
-  <%= render 'layouts/head' %>
-</head>
-<body>
+
+<%= render 'layouts/head' %>
+
+<body lang="en-GB">
 
 <div id="top-content-wrapper">
   <%= render 'layouts/navbar' %>
-
-  <div id="top-content">
-    <div id="top-content-left">
+  <div class="container-fluid" id="top-content">
+    <div class="col-sm-9" id="top-content-left">
       <h1>Agile Ventures</h1>
       <h2>Crowdsourced Learning</h2>
     </div>
-    <div id="top-content-right">
+    <div class="col-sm-3" id="top-content-right">
       <ul id="top-content-list">
         <li><%= @projects_text %></li>
         <li><%= @members_text %></li>
