@@ -132,4 +132,12 @@ module ApplicationHelper
     </a>
     HTML
   end
+
+  def shared_meta_keywords
+    'Agile Ventures, Pair Programming'
+  end
+
+  def default_meta_description
+    ''
+  end
 end

@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : default_meta_description %>">
+  <meta name="keywords" content="<%= "#{shared_meta_keywords}#{ content_for?(:keywords) ? ",#{yield(:keywords)}" : ''}" %>">
+  <% if content_for?(:author) %>
+    <meta name="author" content="<%= yield(:author) %>">
+  <% end %>
+  <% if content_for?(:robots) %>
+    <meta name="robots" content="<%= yield(:robots) %>">
+  <% end %>
   <title><%= content_for?(:title) ? [ yield(:title),  ' | AgileVentures - WebsiteOne'].join(' ') : 'AgileVentures - WebsiteOne' %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Lato:400,100,900' %>
@@ -17,20 +28,20 @@
 <div id="wrap">
   <section id="main" >
     <% if current_page? root_path %>
-        <%= yield %>
+      <%= yield %>
     <% elsif content_for?(:content) %>
       <div class="container" id="with-sidebar-container">
-          <%= yield(:content) %>
+        <%= yield(:content) %>
       </div>
     <% else %>
-        <div class="container">
-          <div class="col-lg-9">
-            <%= yield %>
-          </div>
-          <div class="col-lg-3">
-            <%= render 'layouts/sponsors' %>
-          </div>
+      <div class="container">
+        <div class="col-lg-9">
+          <%= yield %>
         </div>
+        <div class="col-lg-3">
+          <%= render 'layouts/sponsors' %>
+        </div>
+      </div>
     <% end %>
   </section>
   <div id="push"></div>
@@ -42,20 +53,20 @@
 
 
 <script>
-    /* highlight the top nav as scrolling occurs */
-    $('body').scrollspy({ target: '#nav' })
+  /* highlight the top nav as scrolling occurs */
+  $('body').scrollspy({ target: '#nav' })
 
-    /* smooth scrolling for scroll to top */
-    $('.scroll-top').click(function () {
-        $('body,html').animate({scrollTop: 0}, 1000);
-    })
+  /* smooth scrolling for scroll to top */
+  $('.scroll-top').click(function () {
+    $('body,html').animate({scrollTop: 0}, 1000);
+  })
 
-    /* smooth scrolling for nav sections */
-    $('#nav .navbar-nav li>a').click(function () {
-        var link = $(this).attr('href');
-        var posi = $(link).offset().top + 20;
-        $('body,html').animate({scrollTop: posi}, 700);
-    })
+  /* smooth scrolling for nav sections */
+  $('#nav .navbar-nav li>a').click(function () {
+    var link = $(this).attr('href');
+    var posi = $(link).offset().top + 20;
+    $('body,html').animate({scrollTop: posi}, 700);
+  })
 </script>
 
 </body>
