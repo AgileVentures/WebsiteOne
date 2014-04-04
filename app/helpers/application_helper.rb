@@ -51,7 +51,6 @@ module ApplicationHelper
   #  end
   #end
 
-
   def resource_name
     :user
   end
@@ -131,5 +130,13 @@ module ApplicationHelper
       </div>
     </a>
     HTML
+  end
+
+  def shared_meta_keywords
+    'AgileVentures, pair programming, crowdsourced learning'
+  end
+
+  def default_meta_description
+    'AgileVentures is a non-profit organization dedicated to crowdsourced learning and project development'
   end
 end
