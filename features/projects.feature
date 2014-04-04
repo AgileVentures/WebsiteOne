@@ -5,13 +5,13 @@ Feature: Create and maintain projects
 
   Background:
     Given the following projects exist:
-      | title         | description             | status   | github_url                                  | pivotaltracker_url                             |
-      | hello world   | greetings earthlings    | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/projects/742821 |
-      | hello mars    | greetings aliens        | inactive |                                             |                                                |
-      | hello jupiter | greetings jupiter folks | active   |                                             |                                                |
-      | hello mercury | greetings mercury folks | inactive |                                             |                                                |
-      | hello saturn  | greetings saturn folks  | active   |                                             |                                                |
-      | hello sun     | greetings sun folks     | active   |                                             |                                                |
+      | title         | description             | status   | github_url                                  | pivotaltracker_url                               |
+      | hello world   | greetings earthlings    | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
+      | hello mars    | greetings aliens        | inactive |                                             |                                                  |
+      | hello jupiter | greetings jupiter folks | active   |                                             |                                                  |
+      | hello mercury | greetings mercury folks | inactive |                                             |                                                  |
+      | hello saturn  | greetings saturn folks  | active   |                                             |                                                  |
+      | hello sun     | greetings sun folks     | active   |                                             |                                                  |
     And there are no videos
 
 #  Scenarios for Index page
@@ -91,11 +91,11 @@ Feature: Create and maintain projects
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
     When I fill in:
-      | Field               | Text                                   |
-      | Title               | Title New                              |
-      | Description         | Description New                        |
-      | GitHub link         | http://www.github.com/abc              |
-      | PivotalTracker link | http://www.pivotaltracker.com/s/982890 |
+      | Field               | Text                                            |
+      | Title               | Title New                                       |
+      | Description         | Description New                                 |
+      | GitHub link         | http://www.github.com/abc                       |
+      | PivotalTracker link | http://www.pivotaltracker.com/s/projects/982890 |
 
     And I select "Status" to "Active"
     And I click the "Submit" button
@@ -186,7 +186,7 @@ Feature: Create and maintain projects
   Scenario: Reject PivotalTracker url update if invalid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
-    And I fill in "PivotalTracker link" with "https:/www.pivotaltracker.com/s/projects/853345"
+    And I fill in "PivotalTracker link" with "https://www.youtube.com/"
     And I click the "Submit" button
     Then I should see "Project was not updated."
 

@@ -6,7 +6,7 @@ describe ProjectsController do
                             :title => 'WebTwentyFive',
                             :description => 'My project description',
                             :status => 'Active',
-                            :pivotaltracker_id => '111111',
+                            :pivotaltracker_url => 'https://www.pivotaltracker.com/s/projects/982890',
                             :friendly_id => 'my-project' } }
   let(:valid_session) { {} }
 
