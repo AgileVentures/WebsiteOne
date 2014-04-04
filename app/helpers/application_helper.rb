@@ -134,7 +134,7 @@ module ApplicationHelper
   end
 
   def shared_meta_keywords
-    'Agile Ventures, pair programming, crowdsourced learning'
+    'AgileVentures, pair programming, crowdsourced learning'
   end
 
   def default_meta_description
