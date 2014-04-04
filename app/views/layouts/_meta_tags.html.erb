@@ -1,31 +1,31 @@
-<meta name="keywords" content="your, tags"/>
-<meta name="description" content="150 words"/>
-<meta name="subject" content="your website's subject">
-<meta name="copyright"content="company name">
-<meta name="language" content="ES">
-<meta name="robots" content="index,follow" />
-<!--<meta name="revised" content="Sunday, July 18th, 2010, 5:15 pm" />-->
-<meta name="author" content="name, email@hotmail.com">
-<meta name="reply-to" content="email@hotmail.com">
-<meta name="owner" content="">
-<meta name="url" content="http://www.websiteaddrress.com">
-<meta name="identifier-URL" content="http://www.websiteaddress.com">
-<meta name="category" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="<%= "#{shared_meta_keywords}#{ content_for?(:keywords) ? ",#{yield(:keywords)}" : ''}" %>">
+<meta name="description" content="<%= content_for?(:description) ? yield(:description) : default_meta_description %>">
+<meta name="author" content="<%= content_for?(:author) ? yield(:author) : 'Agile Venturers' %>">
+<% if content_for?(:robots) %>
+  <meta name="robots" content="<%= yield(:robots) %>">
+<% end %>
 <meta name="coverage" content="Worldwide">
 <meta name="distribution" content="Global">
-<meta name="rating" content="General">
+<meta name="application-name" content="Agile Ventures Official Website">
 
-<meta name="og:title" content="The Rock"/>
-<meta name="og:type" content="movie"/>
-<meta name="og:url" content="http://www.imdb.com/title/tt0117500/"/>
-<meta name="og:image" content="http://ia.media-imdb.com/rock.jpg"/>
-<meta name="og:site_name" content="IMDb"/>
-<meta name="og:description" content="A group of U.S. Marines, under command of..."/>
-<meta name="og:email" content="me@example.com"/>
-<meta name="fb:page_id" content="43929265776" />
+<meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : 'Agile Ventures' %>"/>
+<meta property="og:type" content="<%= params[:controller] == 'articles' ? 'article' : 'website' %>"/>
+<meta name="og:url" content="<%= request.original_url %>"/>
+<meta name="og:site_name" content="Agile Ventures"/>
+<% if content_for?(:description) %>
+  <meta name="og:description" content="<%= yield(:description) %>"/>
+<% end %>
 
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta content="yes" name="apple-touch-fullscreen" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<!-- Need to figure out correct dimensions -->
-<meta name="viewport" content="width = 320, initial-scale = 2.3, user-scalable = no">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : 'Agile Ventures' %>"/>
+<meta name="twitter:url" content="<%= request.original_url %>">
+<meta name="twitter:site" content="@AgileVentures">
+<% if content_for?(:twitter_creator) %>
+  <meta name="twitter:creator" content="<%= yield(:twitter_creator) %>">
+<% end %>
+<% if content_for?(:description) %>
+  <meta name="twitter:description" content="<%= yield(:description) %>"/>
+<% end %>

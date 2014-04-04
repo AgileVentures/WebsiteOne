@@ -134,10 +134,10 @@ module ApplicationHelper
   end
 
   def shared_meta_keywords
-    'Agile Ventures, Pair Programming'
+    'Agile Ventures, pair programming, crowdsourced learning'
   end
 
   def default_meta_description
-    ''
+    'Agile Ventures is a non-profit organization dedicated to crowdsourced learning and project development'
   end
 end
