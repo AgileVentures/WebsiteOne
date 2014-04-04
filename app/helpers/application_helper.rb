@@ -132,4 +132,12 @@ module ApplicationHelper
     </a>
     HTML
   end
+
+  def active_if(condition)
+    condition ? 'active' : nil
+  end
+
+  def active_if_controller_is(controller_name)
+    active_if(params[:controller] == controller_name)
+  end
 end

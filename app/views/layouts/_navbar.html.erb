@@ -35,11 +35,11 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav nav-justified">
         <li><%= link_to 'About us', static_page_path('About Us') %></li>
-        <li><%= link_to 'Our projects', projects_path %></li>
-        <li><%= link_to 'Our members', users_index_path %></li>
+        <li><%= link_to 'Our projects', projects_path, class: active_if_controller_is('projects') %></li>
+        <li><%= link_to 'Our members', users_index_path, class: active_if_controller_is('users') %></li>
         <li><%= link_to 'Getting Started', static_page_path('Getting Started') %></li>
-        <li><%= link_to 'Articles', articles_path %></li>
-        <li><%= link_to 'Events', events_path %></li>
+        <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
+        <li><%= link_to 'Events', events_path, class: active_if_controller_is('events') %></li>
       </ul>
     </div>
   </div>
