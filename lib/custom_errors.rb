@@ -14,7 +14,6 @@ module CustomErrors
 
   # PRIVATE
   def render_error(status, error)
-    puts request.format
     raise error unless Rails.env.production?
 
     Rails.logger.error error.message
@@ -26,13 +25,13 @@ module CustomErrors
 
     case status
       when 404
-        render 'static_pages/not_found', layout: 'layouts/application', status: 404, format: [:html]
+        render 'static_pages/not_found', layout: 'layouts/application', status: 404, format: [:html, :png]
 
       when 500
-        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [:html]
+        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [:html, :png]
 
       else
-        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [:html]
+        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [:html, :png]
     end
   end
 end
