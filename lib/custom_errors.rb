@@ -14,6 +14,7 @@ module CustomErrors
 
   # PRIVATE
   def render_error(status, error)
+    puts request.format
     raise error unless Rails.env.production?
 
     Rails.logger.error error.message
@@ -23,15 +24,16 @@ module CustomErrors
       ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'was doing something wrong' })
     end
 
+    request_format = request.format.split('/').last
     case status
       when 404
-        render 'static_pages/not_found', layout: 'layouts/application', status: 404
+        render 'static_pages/not_found', layout: 'layouts/application', status: 404, format: [request_format]
 
       when 500
-        render 'static_pages/internal_error', layout: 'layouts/application', status: 500
+        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [request_format]
 
       else
-        render 'static_pages/internal_error', layout: 'layouts/application', status: 500
+        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [request_format]
     end
   end
 end
