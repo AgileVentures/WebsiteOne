@@ -24,16 +24,15 @@ module CustomErrors
       ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'was doing something wrong' })
     end
 
-    request_format = request.format.split('/').last
     case status
       when 404
-        render 'static_pages/not_found', layout: 'layouts/application', status: 404, format: [request_format]
+        render 'static_pages/not_found', layout: 'layouts/application', status: 404, format: [:html]
 
       when 500
-        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [request_format]
+        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [:html]
 
       else
-        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [request_format]
+        render 'static_pages/internal_error', layout: 'layouts/application', status: 500, format: [:html]
     end
   end
 end
