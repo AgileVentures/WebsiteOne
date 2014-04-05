@@ -23,6 +23,7 @@ describe 'projects/show.html.erb' do
                           status: 'Active',
                           user_id: @user.id,
                           created_at: Time.now,
+                          pivotaltracker_id: 11111,
                           tag_list: []
 
     @videos = [
@@ -61,7 +62,7 @@ describe 'projects/show.html.erb' do
     render
     expect(rendered).to have_link("#{@project.title}", :href => @project.pivotaltracker_url)
   end
-  
+
   it "renders an unlinked message when project has no PivotalTracker link" do
     render
     expect(rendered).to have_text("not linked to PivotalTracker")
@@ -87,12 +88,53 @@ describe 'projects/show.html.erb' do
     expect(rendered).to have_text @user.display_name, visible: false
   end
 
+  context 'Pivotal Tracker stories' do
+    it 'renders a message when no Pivotal Tracker stories are found' do
+      render
+      expect(rendered).to have_text 'No PivotalTracker Stories can be found for project Title 1'
+    end
+
+    context 'with Pivotal Tracker stories' do
+      before(:each) do
+        story = double()
+        story.stub story_type: 'chore',
+                   estimate: 3,
+                   id: 1,
+                   name: 'My story',
+                   owned_by: { initials: 'my-initials' },
+                   current_state: 'active'
+        @stories = [ story ]
+        render
+      end
+
+      it 'should render the appropriate story type icon' do
+        expect(rendered).to have_css 'i.fa.fa-gear.fa-lg'
+      end
+
+      it 'should render the correct story estimate' do
+        expect(rendered).to have_css 'i.story_estimate', count: 3
+      end
+
+      it 'should render the story title' do
+        expect(rendered).to have_text 'My story'
+      end
+
+      it 'should render the story owners initials' do
+        expect(rendered).to have_text 'my-initials'
+      end
+
+      it 'should render the current story state' do
+        expect(rendered).to have_text 'active'
+      end
+    end
+  end
+
   describe 'project videos' do
 
     it 'renders Videos tab with videos quantity' do
       render
       rendered.within('.nav-tabs') do |content|
-        expect(content.find(:css, 'li#videos').text).to eq(' Videos (2)')
+        expect(content.find(:css, 'li#videos').text).to match /Videos \(2\)/
       end
       expect(render).to have_selector('div.tab-pane#videos_list')
     end
