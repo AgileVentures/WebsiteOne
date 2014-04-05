@@ -8,6 +8,8 @@ module CustomErrors
                      AbstractController::ActionNotFound,
                      ActiveRecord::RecordNotFound,
                      with: ->(exception) { render_error 404, exception }
+
+    base.respond_to :html
   end
 
   private
@@ -26,12 +28,14 @@ module CustomErrors
     case status
       when 404
         respond_to do |format|
-          format.all { render template: 'static_pages/not_found', layout: 'layouts/application', status: 404 }
+          format.html { render template: 'static_pages/not_found', layout: 'layouts/application', status: 404 }
+          format.any { render template: 'static_pages/not_found', layout: 'layouts/application', status: 404 }
         end
 
       else
         respond_to do |format|
-          format.all { render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500 }
+          format.html { render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500 }
+          format.any { render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500 }
         end
     end
   end
