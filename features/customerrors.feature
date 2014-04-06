@@ -20,6 +20,21 @@ Feature:
     And the response status should be "404"
     And I should see "We're sorry, but we couldn't find the page you requested"
 
+  Scenario: 404 page when opening an non existant static page
+    When I visit "/about-ussssss"
+    And the page should be titled "404 - Page Not Found"
+    And the response status should be "404"
+    And I should see "We're sorry, but we couldn't find the page you requested"
+
+  Scenario: 404 page when opening an url with wrong format
+    Given the following pages exist
+      | title         | body                      |
+      | About Us      | Agile Ventures            |
+    When I visit "/about-us.png"
+    And the page should be titled "404 - Page Not Found"
+    And the response status should be "404"
+    And I should see "We're sorry, but we couldn't find the page you requested"
+
   Scenario: 500 page
     When I encounter an internal server error
     Then the page should be titled "500 Internal Error"

@@ -137,6 +137,11 @@ module ApplicationHelper
   end
 
   def default_meta_description
-    'AgileVentures is a non-profit organization dedicated to crowdsourced learning and project development'
+    @default_meta_description ||= '' +
+    'AgileVentures is a project incubator that stimulates and supports development of social innovations, ' +
+    'open source and free software. We are also a community for learning and personal development with members ' +
+    'from across the world with various levels of competence and experience in software development. We hold ' +
+    'scrum meetings and pair programming sessions every day with participants from all time zones and on all ' +
+    'levels. Come and join us.'
   end
 end
