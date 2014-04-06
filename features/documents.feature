@@ -128,7 +128,7 @@ Feature: Manage Document
     And I should see 4 revisions for "Guides"
 
   @javascript
-  Scenario: A user can insert and edit an image
+  Scenario: A user can insert an image
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
@@ -141,7 +141,7 @@ Feature: Manage Document
     Then the Mercury Editor modal window should not be visible
 
   @javascript
-  Scenario: A user can insert and edit an image
+  Scenario: Missing Image gets added when a user can inserts an invalid image
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
