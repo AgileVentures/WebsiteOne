@@ -26,6 +26,18 @@ Feature: As a site owner
       | Dave        |
     And I should see "5" user avatars
 
+  Scenario: testing invalid routes page
+    Given I am on the invalid routes page
+    Then I should see "All members"
+    And I should see:
+      | Test User   |
+      | Alice Jones |
+      | Bob Butcher |
+      | Croutch     |
+      | Dave        |
+    And I should see "5" user avatars
+
+
 
   # Bryan: Using offline stubs, it would be tedious to manually simulate all possible geo locations...
 #  Scenario: Show users location

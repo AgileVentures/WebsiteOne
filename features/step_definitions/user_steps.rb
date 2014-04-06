@@ -351,3 +351,8 @@ end
 Then(/^I should see the user's bio$/) do
   pending # express the regexp above with the code you wish you had
 end
+
+Given(/^I am on the invalid routes page$/) do
+  visit "users/index"
+end
+

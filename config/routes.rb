@@ -11,6 +11,7 @@ WebsiteOne::Application.routes.draw do
 
   get '/404', :to => 'errors#not_found'
   get '/internal_server_error', :to => 'errors#internal_error'
+  get 'users', :to => 'users#index'
 
   resources :projects do
     member do
