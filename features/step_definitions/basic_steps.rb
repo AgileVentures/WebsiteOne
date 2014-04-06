@@ -284,3 +284,8 @@ end
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
   page.should have_css "a[href='#{link}']", text: text
 end
+
+
+Then(/^I should see an image with source "([^"]*)"$/) do |source|
+  page.should have_css "img[src*=\"#{source}\"]"
+end
