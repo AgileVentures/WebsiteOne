@@ -126,27 +126,3 @@ Feature: Manage Document
     Given I am on the "Show" page for document "Documentation"
     Then I should see "Revisions"
     And I should see 4 revisions for "Guides"
-
-
-  @javascript
-  Scenario: A user can insert and edit an image
-    Given the document "Guides" has a child document with title "Howto"
-    And I am logged in
-    And I am using the Mercury Editor to edit document "Howto"
-    When I click on the "Insert Media" button
-    Then the modal window should be visible
-    And I should see "Insert Media (images and videos)" within the modal title
-    When I fill in "URL" with "/assets/mercury/temp-logo.png"
-    And press "Insert Media"
-    Then I should see an image with the markup "<img src='/assets/mercury/temp-logo.png'>"
-    And the modal window should not be visible
-
-#    When I make a selection for "img"
-#    And click on the "Insert Media" button
-#    Then the "media_image_url" field should contain "/assets/mercury/temp-logo.png"
-#
-#    When I fill in "URL" with "/assets/mercury/default-snippet.png"
-#    And press "Insert Media"
-#    Then the contents of the full region should be "this is <img src='/assets/mercury/default-snippet.png'> <b>content</b>"
-#
-
