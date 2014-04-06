@@ -126,3 +126,29 @@ Feature: Manage Document
     Given I am on the "Show" page for document "Documentation"
     Then I should see "Revisions"
     And I should see 4 revisions for "Guides"
+
+  @javascript
+  Scenario: A user can insert an image
+    Given the document "Guides" has a child document with title "Howto"
+    And I am logged in
+    And I am using the Mercury Editor to edit document "Howto"
+    And I am focused on the "document body" within the Mercury Editor
+    When I click on the "Insert Media" button within the Mercury Toolbar
+    Then the Mercury Editor modal window should be visible
+    When I fill in "URL" with "/assets/av-logo-inverse.png" within the Mercury Modal
+    And I click "Insert Media" within the Mercury Editor Modal
+    Then I should see an image with source "/assets/av-logo-inverse.png" within the Mercury Editor
+    Then the Mercury Editor modal window should not be visible
+
+  @javascript
+  Scenario: Missing Image gets added when a user can inserts an invalid image
+    Given the document "Guides" has a child document with title "Howto"
+    And I am logged in
+    And I am using the Mercury Editor to edit document "Howto"
+    And I am focused on the "document body" within the Mercury Editor
+    When I click on the "Insert Media" button within the Mercury Toolbar
+    Then the Mercury Editor modal window should be visible
+    When I fill in "URL" with "https://google.com/sodfjslkdfj.png" within the Mercury Modal
+    And I click "Insert Media" within the Mercury Editor Modal
+    Then I should see an image with source "/assets/mercury/missing-image.png" within the Mercury Editor
+    Then the Mercury Editor modal window should not be visible
