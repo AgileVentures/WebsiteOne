@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :get_current_stories, only: [:show]
   include DocumentsHelper
 
 #TODO YA Add controller specs for all the code
@@ -15,7 +16,6 @@ class ProjectsController < ApplicationController
     documents
     @members = @project.followers.reject { |member| !member.display_profile }
     @videos = Youtube.project_videos(@project, @members) if @project
-
   end
 
   def new
@@ -81,10 +81,25 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
+  def get_current_stories
+    PivotalService.set_token('1e90ef53f12fc327d3b5d8ee007cce39')
+    if @project.pivotaltracker_url.present?
+      pivotaltracker_id = @project.pivotaltracker_url.split('/')[-1]
+      begin
+        @projectpv = PivotalService.one_project(pivotaltracker_id, Scorer::Project.fields)
+        @iteration = PivotalService.iterations(pivotaltracker_id, 'current')
+        @stories = @iteration.stories
+      rescue Exception => error
+        # TODO deal with simple not found errors, should not send for all exceptions
+        ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'an error occurred in Pivotal Tracker' })
+        @stories = nil
+      end
+    end
+  end
 
   def project_params
     # permit the mass assignments
-    params.require(:project).permit(:title, :description, :created, :status, :user_id, :github_url, :pivotaltracker_url)
+    params.require(:project).permit(:title, :description, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id)
   end
 
 end

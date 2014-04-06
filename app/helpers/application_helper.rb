@@ -7,6 +7,50 @@ module ApplicationHelper
     "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
   end
 
+  def current_user_details
+    if current_user.present?
+      if current_user.first_name.present?
+        ([current_user.first_name, current_user.last_name].join(' '))
+      else
+        (current_user.email).split('@').first
+      end
+    else
+      'Something is wrong'
+    end
+  end
+
+  def user_details(id)
+    user = User.find_by_id(id)
+    if user.present?
+      if user.first_name.present?
+        ([user.first_name, user.last_name].join(' '))
+      else
+        (user.email).split('@').first
+      end
+    else
+      'Anonymous'
+    end
+  end
+
+  #def user_details(id)
+  #  user = User.find_by_id(id)
+  #  if user.present?
+  #    first = user.try(:first_name)
+  #    last = user.try(:last_name)
+  #    str = first.to_s + last.to_s
+  #    if first && last
+  #      [first, last].join(' ')
+  #    elsif !first && !last
+  #      # User has not filled in their profile
+  #      user.email.split('@').first
+  #    else
+  #      str
+  #    end
+  #  else
+  #    'Anonymous'
+  #  end
+  #end
+
   def resource_name
     :user
   end
@@ -94,5 +138,18 @@ module ApplicationHelper
 
   def active_if_controller_is(controller_name)
     active_if(params[:controller] == controller_name)
+  end
+
+  def shared_meta_keywords
+    'AgileVentures, pair programming, crowdsourced learning'
+  end
+
+  def default_meta_description
+    @default_meta_description ||= '' +
+    'AgileVentures is a project incubator that stimulates and supports development of social innovations, ' +
+    'open source and free software. We are also a community for learning and personal development with members ' +
+    'from across the world with various levels of competence and experience in software development. We hold ' +
+    'scrum meetings and pair programming sessions every day with participants from all time zones and on all ' +
+    'levels. Come and join us.'
   end
 end

@@ -11,7 +11,7 @@
 
 .navbar-custom  .navbar-nav>li>a {
   color: $white;
-  background-color: $theme-main;
+  background-color: $theme-dark;
   @include css-transition(color, 300ms, ease, 0s);
   @include css-transition(background-color, 300ms, ease, 0s);
   border-top-left-radius: 10px;
@@ -19,7 +19,7 @@
 
   &:hover, &:active, &.active {
     background-color: $white;
-    color: $theme-main;
+    color: $theme-dark;
   }
 }
 

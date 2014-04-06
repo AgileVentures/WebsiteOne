@@ -1,17 +1,5 @@
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <% if content_for?(:description) %>
-    <meta name="description" content="<%= yield(:description) %>">
-  <% end %>
-  <meta name="keywords" content="<%= "#{site_meta_keywords}#{ content_for?(:keywords) ? yield(:keywords) : ''}" %>">
-  <% if content_for?(:author) %>
-    <meta name="author" content="<%= yield(:author) %>">
-  <% end %>
-  <% if content_for?(:robots) %>
-    <meta name="robots" content="<%= yield(:robots) %>">
-  <% end %>
+  <%= render 'layouts/meta_tags' %>
   <title><%= content_for?(:title) ? [ yield(:title),  ' | AgileVentures - WebsiteOne'].join(' ') : 'AgileVentures - WebsiteOne' %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Lato:400,100,900' %>

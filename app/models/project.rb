@@ -1,9 +1,12 @@
+require 'url_validator'
+
 class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   validates :title, :description, :status, presence: true
-  validates :github_url, :pivotaltracker_url , uri: true, :allow_blank => true
+  validates_with UrlValidator
+  validates :github_url, uri: true, :allow_blank => true
   acts_as_followable
   belongs_to :user
   has_many :documents
@@ -29,3 +32,4 @@ class Project < ActiveRecord::Base
     end
   end
 end
+

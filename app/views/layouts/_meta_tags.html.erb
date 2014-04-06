@@ -1,0 +1,30 @@
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="<%= "#{shared_meta_keywords}#{ content_for?(:keywords) ? ",#{yield(:keywords)}" : ''}" %>">
+<meta name="description" content="<%= content_for?(:description) ? yield(:description) : default_meta_description %>">
+<meta name="author" content="<%= content_for?(:author) ? yield(:author) : 'AgileVentures volunteers and contributors' %>">
+<% if content_for?(:robots) %>
+  <meta name="robots" content="<%= yield(:robots) %>">
+<% end %>
+<meta name="copyright" content="AgileVentures Nonprofit Ltd.">
+<meta name="coverage" content="Worldwide">
+<meta name="distribution" content="Global">
+<meta name="application-name" content="AgileVentures Official Website">
+
+<meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : 'AgileVentures' %>"/>
+<meta property="og:type" content="<%= params[:controller] == 'articles' ? 'article' : 'website' %>"/>
+<meta property="og:url" content="<%= request.original_url %>"/>
+<meta property="og:site_name" content="AgileVentures"/>
+<meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : default_meta_description %>">
+<meta property="og:image" content="<%= image_url 'screenshot.png' %>">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : 'AgileVentures' %>"/>
+<meta name="twitter:url" content="<%= request.original_url %>">
+<meta name="twitter:site" content="@AgileVentures">
+<meta name="twitter:image:src" content="<%= image_url 'screenshot.png' %>">
+<% if content_for?(:twitter_creator) %>
+  <meta name="twitter:creator" content="<%= yield(:twitter_creator) %>">
+<% end %>
+<meta name="twitter:description" content="<%= content_for?(:description) ? yield(:description) : default_meta_description %>">
