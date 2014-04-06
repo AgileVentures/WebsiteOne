@@ -1,7 +1,3 @@
-require 'mercury/cucumber/step_definitions.rb'
-
-
-
 Given(/^the following documents exist:$/) do |table|
   table.hashes.each do |hash|
     if hash[:project].present?

@@ -7,8 +7,6 @@ module CustomErrors
                      ActionController::UnknownController,
                      AbstractController::ActionNotFound,
                      ActiveRecord::RecordNotFound,
-                     #Sampriti: It will be be too complex to handle missing templates on every action.
-                     ActionView::MissingTemplate,
                      with: ->(exception) { render_error 404, exception }
   end
 
