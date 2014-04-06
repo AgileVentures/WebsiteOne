@@ -54,3 +54,22 @@ When /I click "([^"]*)" in Mercury Editor/ do |button|
     click_link button
   }
 end
+
+When(/^I click on the "Insert Media" button$/) do
+  find(:css, '.mercury-primary-toolbar .mercury-insertMedia-button').click()
+end
+
+Then(/^the Mercury Editor modal window should (not |)be visible$/) do |visible|
+  page.should have_css '.mercury-modal', visible: visible.blank?
+end
+
+And(/^I am focused on the "([^"]*)"$/) do |item|
+  item.downcase!
+  case item
+    when 'document body'
+      page.execute_script '$("#document_body").focus();'
+
+    else
+      pending
+  end
+end
