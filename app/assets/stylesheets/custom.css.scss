@@ -61,6 +61,15 @@ a {
     color: $link-hover-color;
     text-decoration: none;
   }
+
+  &:link, &:visited {
+    text-decoration: none;
+  }
+
+  // bad for devices requiring focus!
+  &:focus {
+    outline: 0;
+  }
 }
 
 strong {
