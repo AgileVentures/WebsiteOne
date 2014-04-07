@@ -61,10 +61,6 @@ a {
     color: $link-hover-color;
     text-decoration: none;
   }
-
-  &:visited, &:link {
-    color: $link-color;
-  }
 }
 
 strong {

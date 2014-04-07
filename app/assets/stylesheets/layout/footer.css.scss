@@ -18,15 +18,10 @@ $footer-upper-section-height: 250px;
 /* Set the fixed height of the footer here */
 #footer {
   position: relative;
-  height: $footer-height;
   padding-top: 35px;
   padding-bottom: 20px;
   background-color: $theme-darker;
   color: $white;
-
-  #upper-section {
-    height: $footer-upper-section-height;
-  }
 
   p, h3 {
     color: $white;
@@ -55,62 +50,65 @@ $footer-upper-section-height: 250px;
   }
 }
 
-#footer .contact {
+@media (min-width: 768px) {
+  #footer {
+    height: $footer-height;
+
+    #upper-section {
+      height: $footer-upper-section-height;
+    }
+  }
+}
+
+// FOOTER CONTACT FORM
+
+.contact {
   text-align: right;
-}
 
-#footer .contact label{
-  color: #ffffff; }
+  label {
+    color: $white;
+  }
 
-#footer .contact .footer_header {
-  text-align: left;
-  margin-top: -20px;
-  margin-left: 35px;
-}
+  .footer_header {
+    text-align: left;
+    margin-top: -20px;
+    margin-left: 35px;
+  }
 
-#footer .contact input[type="text"], #footer .contact textarea {
-  border: none;
-  background-color: #1f1f21;
-  color: #868687;
-  padding: 8px 20px;
-  border-radius: 3px;
-  font-size: 14px;
-  width: 95%;
-  -webkit-transition: background-color .2s linear;
-  -moz-transition: background-color .2s linear;
-  margin-bottom: 10px;
-}
+  input[type="text"], textarea {
+    border: none;
+    background-color: #1f1f21;
+    color: #868687;
+    padding: 8px 20px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    width: 95%;
+    margin-bottom: 10px;
+    @include css-transition(background-color, 0.2s, linear, 0s);
 
-#footer .contact input[type="text"]:focus, #footer .contact textarea:focus {
-  border: none;
-  box-shadow: none;
-  background-color: #000;
-}
+    &:focus {
+      border: none;
+      box-shadow: none;
+      background-color: #000;
+    }
 
-#footer .contact input[type="text"]:moz-placeholder, #footer .contact textarea:moz-placeholder {
-  color: #868687;
-}
+    &:moz-placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder {
+      color: $white;
+    }
+  }
 
-#footer .contact input[type="text"]::-webkit-input-placeholder, #footer .contact textarea::-webkit-input-placeholder {
-  color: #868687;
-}
+  input[type="submit"] {
+    background-color: #3e3e40;
+    border: none;
+    color: $white;
+    border-radius: 4px;
+    padding: 5px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    @include css-transition(background-color, 0.2s, linear, 0s);
 
-#footer .contact input[type="text"]:-ms-input-placeholder, #footer .contact textarea:-ms-input-placeholder {
-  color: #868687;
-}
-
-#footer .contact input[type="submit"] {
-  background-color: #3e3e40;
-  border: none;
-  color: #fff;
-  border-radius: 4px;
-  padding: 5px 20px;
-  font-size: 14px;
-  font-weight: bold;
-  -webkit-transition: background-color .2s linear;
-  -moz-transition: background-color .2s linear;
-}
-
-#footer .contact input[type="submit"]:hover {
-  background-color: #2190DB;
+    &:hover {
+      background-color: #2190DB;
+    }
+  }
 }

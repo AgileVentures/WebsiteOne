@@ -1,14 +1,15 @@
 <div class="container">
   <div class="col-sm-7">
     <div id="upper-section" class="row">
-      <div class="col-sm-4">
+      <div class="col-xs-4">
         <ul>
           <h3>Learn More</h3>
           <li><%= link_to 'About us', static_page_path('About Us') %></li>
           <li><%= link_to 'Getting Started', static_page_path('Getting Started') %></li>
         </ul>
       </div>
-      <div class="col-sm-4">
+
+      <div class="col-xs-4">
         <ul>
           <h3>Social Media</h3>
           <li>
@@ -23,10 +24,17 @@
           </li>
         </ul>
       </div>
+
+      <div class="col-xs-4">
+        <ul>
+          <h3>Our Sponsors</h3>
+          <li><a href="http://www.makersacademy.com/" target="_blank">Makers Academy</a></li>
+        </ul>
+      </div>
     </div>
 
     <div class="row">
-      <h3><a href="#"><img src="<%= image_path('av-logo-inverse.png') %>"/></a></h3>
+      <h3><img src="<%= image_path('av-logo-inverse.png') %>"/></h3>
       <p>AgileVentures - Crowdsourced Learning</p>
     </div>
   </div>
