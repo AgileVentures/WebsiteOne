@@ -37,25 +37,19 @@ html, body {
   margin: 0 auto;
 }
 
-html,
-body {
+html, body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
   -webkit-font-smoothing: antialiased;
-  font: normal 14px arial, sans-serif;
+  font: normal 1em arial, sans-serif;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   color: $black;
 }
 
-h4 {
-  color: #000000;
-  line-height: 28px;
-}
-
-p, a {
-  line-height: 18px;
+p, a, ul, li {
+  line-height: 1.4em;
 }
 
 a, a:visited, a:link {

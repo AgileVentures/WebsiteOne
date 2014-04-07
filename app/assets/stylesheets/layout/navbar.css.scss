@@ -1,39 +1,41 @@
 @import 'mixins';
 @import 'variables';
 
-/* customize nav style */
-.navbar-custom {
+#nav {
+  width: 100%;
+  position: static;
+  top: -32px;
   background-color: $theme-dark;
   font-weight: 700;
   text-transform: uppercase;
   border-width: 0;
+  margin: 0;
 }
 
-.navbar-custom  .navbar-nav>li>a {
-  color: $white;
-  background-color: $theme-dark;
-  @include css-transition(color, 300ms, ease, 0s);
-  @include css-transition(background-color, 300ms, ease, 0s);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-
-  &:hover, &:active, &.active {
-    background-color: $white;
-    color: $theme-dark;
-  }
+#nav.affix {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  @include css-transition(all, 0.4s, ease-in-out, 0s);
 }
 
-.navbar-nav li .open, .navbar-custom .navbar-nav .active a {
-  background-color: $black;
-}
-
-.navbar-custom .dropdown-menu {
+#nav .dropdown-menu {
   right: 0;
 }
 
-.navbar-custom .navbar-nav>.dropdown>a .caret {
+#nav .navbar-nav>.dropdown>a .caret {
   border-top-color: #999;
   border-bottom-color: #999;
+}
+
+#nav .navbar-nav>li>a {
+  color: $white;
+  background-color: $theme-dark;
+  @include css-transition(background-color, 0.3s, ease, 0s);
+
+  &:hover, &:active, &.active {
+    background-color: $theme-darker;
+  }
 }
 
 .navbar-collapse.in {
@@ -51,43 +53,29 @@
   }
 }
 
-#nav {
-  width: 100%;
-  position: static;
-  top: -32px;
-  background: $theme-main;
-}
-
-#nav.affix {
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  -webkit-transition: all .6s ease-in-out;
-}
+// MASTHEAD
 
 header#main_header {
   background: $theme-main;
   height: 60px;
-  color: #000000;
-}
+  color: $white;
 
-header#main_header {
   h1, h2, h3 a, a, a:hover {
-    color: #101010;
+    color: $white;
     font-weight: 800;
     text-decoration: none;
   }
-}
 
-header#main_header h3 {
-  font-family: 'Kreon', serif;
-  background: $theme-main;
-  border-radius: 3px;
-  font-size: 34px;
-  padding: 12px 10px 6px 10px;
-}
+  h3 {
+    font-family: 'Kreon', serif;
+    background: $theme-main;
+    border-radius: 3px;
+    font-size: 34px;
+    padding: 12px 10px 6px 10px;
+  }
 
-header#main_header .dropdown-menu {
-  background: $theme-main;
-  border-width: 0;
+  .dropdown-menu {
+    background: $theme-main;
+    border-width: 0;
+  }
 }

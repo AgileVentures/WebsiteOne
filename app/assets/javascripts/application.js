@@ -138,7 +138,7 @@ $(function() {
     });
 
     $(window).scroll();
-  }
+  };
 
 
   $(document).on('page:fetch',   function() { NProgress.start(); });

@@ -8,7 +8,7 @@
 
 <div id="top-content-wrapper">
   <%= render 'layouts/navbar' %>
-  <div class="container-fluid" id="top-content">
+  <section class="container-fluid landing-page-section" id="top-content">
     <div class="col-sm-9" id="top-content-left">
       <h1>Agile Ventures</h1>
       <h2>Crowdsourced Learning</h2>
@@ -26,8 +26,45 @@
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 </div>
+
+<div class="container-fluid">
+  <section id="landing-projects" class="row landing-page-section">
+    <h2>Project Incubator</h2>
+    <p>
+      We take on projects of all shades, from helping charity to promoting education to developing cool
+      programming tools. We crowd-source our projects, our developers volunteer their time to projects
+      that interest them.
+    </p>
+  </section>
+
+  <section id="landing-developers" class="row landing-page-section">
+    <h2>Developers</h2>
+    <p>
+      Our developers come from diverse backgrounds: high school students, freelance developers, designers,
+      teachers, all coming together from different corners of the globe, to learn code and make a contribution
+      to society.
+    </p>
+  </section>
+
+  <section id="landing-community" class="row landing-page-section">
+    <h2>Community Driven Development</h2>
+    <p>
+      We have regular daily meetings (scrums) where our developers get together, share knowledge and help each
+      other out. We love pair programming, nobody works alone in this community.
+    </p>
+  </section>
+
+  <section id="landing-open-source" class="row landing-page-section">
+    <h2>Open Source</h2>
+    <p>
+      We love all things Open Source, we are fully transparent in our development process, we record videos of
+      all our meetings, our code is freely available on the web and our project status are publicly viewable.
+    </p>
+  </section>
+</div>
+
 <section id="footer">
   <%= render 'layouts/footer' %>
 </section>

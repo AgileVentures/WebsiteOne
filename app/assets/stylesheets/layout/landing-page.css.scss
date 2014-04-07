@@ -9,17 +9,15 @@ $top-content-text-color: $theme-main;
 #top-content {
   width: 100%;
   min-height: 100%;
-  background: $theme-dark;
+  background: $white;
   color: $top-content-text-color;
 
   h1 {
-    font-size: 80px;
     color: $top-content-text-color;
   }
 
   h2 {
     padding-left: 55px;
-    font-size: 35px;
     color: $top-content-text-color;
   }
 }
@@ -34,5 +32,8 @@ $top-content-text-color: $theme-main;
 
 #top-content-list {
   list-style: none;
-  font-size: 25px;
+}
+
+.landing-page-section {
+  font-size: 20px;
 }

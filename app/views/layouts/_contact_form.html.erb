@@ -8,7 +8,7 @@
       <%= label_tag :email %>
       <%= text_field_tag :email %>
       <%= label_tag :message %>
-      <%= text_area_tag :message %>
+      <%= text_area_tag :message, nil, style: 'resize: none' %>
       <div class="form-actions">
         <%= submit_tag 'Send message', id: 'send', :class => 'btn btn-primary' %>
       </div>
