@@ -18,7 +18,7 @@
     <section class="doc-preview listing">
       <header class="article-header">
         <h2><%= link_to a.title, article_path(a) %></h2>
-        <small>Created by <%= link_to a.user.display_name, users_show_path(a.user) %>, <%= time_ago_in_words(a.created_at) %> ago,
+        <small>Created by <%= link_to a.user.display_name, user_path(a.user) %>, <%= time_ago_in_words(a.created_at) %> ago,
           <% if a.tag_list.count > 0 %>
             tagged with <%= link_to_tags a.tag_list %>
           <% else %>

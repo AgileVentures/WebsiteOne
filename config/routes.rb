@@ -1,17 +1,8 @@
 WebsiteOne::Application.routes.draw do
-  get 'users/index'
   root 'visitors#index'
   mount Mercury::Engine => '/'
-
-  devise_for :users, :controllers => {:registrations => 'registrations', :users => 'index'}
-
-  #get 'users/sign_out' => redirect('/404.html')
-  #get 'users/password' => redirect('/404.html')
-  get 'users/:id', to: 'users#show', as: 'users_show'
-
-  get '/404', :to => 'errors#not_found'
-  get '/internal_server_error', :to => 'errors#internal_error'
-  get 'users', :to => 'users#index'
+  devise_for :users, :controllers => {:registrations => 'registrations'}
+  resources :users, :only => [:index, :show]
 
   resources :projects do
     member do
@@ -30,7 +21,6 @@ WebsiteOne::Application.routes.draw do
       patch :update_only_url
     end
   end
-
 
   post 'preview/article', to: 'articles#preview'
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles'

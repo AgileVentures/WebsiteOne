@@ -23,9 +23,9 @@ def path_to(page_name, id = '')
     when 'show' then
       project_path(id)
     when 'our members' then
-      users_index_path
+      users_path
     when 'user profile' then
-      users_show_path(id)
+      user_path(id)
     when 'my account' then
       edit_user_registration_path(id)
     when 'foobar' then
