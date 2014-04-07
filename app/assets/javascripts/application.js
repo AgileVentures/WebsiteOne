@@ -118,9 +118,8 @@ $(function() {
         main = $('#main'),
     // manually selected properties which will affect affix threshold height, if layout changes,
     // readjust as necessary
-        thresholdTop = header.height() + affixedNav.height(),
+        thresholdTop = header.height(),
         footer = $('#footer'),
-        headerHeight = header.height(),
         isAffixed = affixedNav.hasClass('affix');
 
     // Bryan: catch scroll events
@@ -131,7 +130,7 @@ $(function() {
         affixedNav.addClass('affix');
         header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
         isAffixed = true;
-      } else if (scrollTop < headerHeight && isAffixed) {
+      } else if (scrollTop < thresholdTop && isAffixed) {
         // remove affix if the scroll is below threshold
         affixedNav.removeClass('affix');
         header.css({ 'margin-bottom': 0 });
