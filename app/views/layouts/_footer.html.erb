@@ -4,7 +4,7 @@
       <div class="col-xs-4">
         <ul>
           <h3>Learn More</h3>
-          <li><%= link_to 'About us', static_page_path('About Us') %></li>
+          <li><%= link_to 'About Us', static_page_path('About Us') %></li>
           <li><%= link_to 'Getting Started', static_page_path('Getting Started') %></li>
         </ul>
       </div>
@@ -29,6 +29,9 @@
         <ul>
           <h3>Our Sponsors</h3>
           <li><a href="http://www.makersacademy.com/" target="_blank">Makers Academy</a></li>
+          <li>
+            <%= link_to 'Becoming a sponsor', static_page_path('Sponsors'), style: 'font-size: 0.9em;' %>
+          </li>
         </ul>
       </div>
     </div>

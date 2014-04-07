@@ -65,7 +65,6 @@ describe 'layouts/application.html.erb' do
     render
     #TODO Y replace href with project_path helper
     rendered.should have_link 'Our projects', :href => projects_path
-    rendered.should have_link 'About us', :href => static_page_path('About Us')
   end
 
   it 'should render a footer' do
@@ -122,46 +121,68 @@ describe 'layouts/application.html.erb' do
 
   end
 
-  describe 'contact_form' do
+  context 'within the site footer' do
+    before(:each) { render }
 
-    it 'renders a form' do
-      render
-      rendered.within('#footer') do |selection|
-        expect(selection).to have_css('#contact_form')
+    it 'should render a link to the "About Us" page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'About Us', :href => static_page_path('About Us')
       end
     end
 
-    it 'shows info link' do
-      render
-      rendered.within('#footer') do |selection|
-        expect(selection).to have_content('Send a traditional email to info@agileventures.org, or use the contact form.')
-        expect(selection).to have_link('info@agileventures.org')
+    it 'should render a link to the "Getting Started" page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Getting Started', :href => static_page_path('Getting Started')
       end
     end
 
-    it 'shows  required labels' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_text('Name')
-        expect(selection).to have_text('Email')
-        expect(selection).to have_text('Message')
-      end
-
-    end
-
-    it 'shows required fields' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_field('name')
-        expect(selection).to have_field('email')
-        expect(selection).to have_field('message')
+    it 'should render a link to the AgileVentures Facebook page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Facebook', href: 'https://www.facebook.com/agileventures'
       end
     end
 
-    it 'shows Send message button ' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_button('send')
+    it 'should render a link to the AgileVentures Twitter page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Twitter', href: 'https://twitter.com/AgileVentures'
+      end
+    end
+
+    context 'Contact Us form' do
+      it 'renders a form' do
+        rendered.within('#footer') do |selection|
+          expect(selection).to have_css('#contact_form')
+        end
+      end
+
+      it 'should render the email information' do
+        rendered.within('#footer') do |selection|
+          expect(selection).to have_content('Send a traditional email to info@agileventures.org, or use the contact form.')
+          expect(selection).to have_link 'info@agileventures.org', href: 'mailto:info@agileventures.org'
+        end
+      end
+
+      it 'shows  required labels' do
+        rendered.within('#contact_form') do |selection|
+          expect(selection).to have_text('Name')
+          expect(selection).to have_text('Email')
+          expect(selection).to have_text('Message')
+        end
+
+      end
+
+      it 'shows required fields' do
+        rendered.within('#contact_form') do |selection|
+          expect(selection).to have_field('name')
+          expect(selection).to have_field('email')
+          expect(selection).to have_field('message')
+        end
+      end
+
+      it 'shows Send message button ' do
+        rendered.within('#contact_form') do |selection|
+          expect(selection).to have_button('send')
+        end
       end
     end
   end
