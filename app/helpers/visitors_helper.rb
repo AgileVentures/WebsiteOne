@@ -10,7 +10,9 @@ module VisitorsHelper
     elsif days_left == 0
       "#{pluralize(hours_left, "hour")} #{pluralize(minutes_left, "minute")}"
     else
-      "#{pluralize(days_left, "day")} #{pluralize(hours_left, "hour")} #{pluralize(minutes_left, "minute")}"
+      ("#{pluralize(days_left, "day")} " unless days_left == 0).to_s +
+      ("#{pluralize(hours_left, "hour")} " unless hours_left == 0).to_s +
+      (pluralize(minutes_left, "minute"))
     end
   end
 end
