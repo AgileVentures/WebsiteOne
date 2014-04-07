@@ -40,6 +40,17 @@ Feature: Events
     And I should not see "0 days"
 
   @time-travel-step
+  Scenario: Do not render '0 hours'
+    Given the date is "2014/02/03 06:15:00 UTC"
+    And I am on the home page
+    Then I should see "Scrum"
+    And the next event should be in:
+      | period | interval |
+      | 45     | minutes  |
+    And I should not see "0 days"
+    And I should not see "0 hours"
+
+  @time-travel-step
   Scenario: Do not render '-1 hour'
     Given the date is "2014/02/02 07:50:00 UTC"
     And I am on the home page
@@ -49,3 +60,20 @@ Feature: Events
       | 23     | hours    |
       | 10     | minutes  |
     And I should not see "0 days"
+
+  @time-travel-step
+  Scenario: Proper Event Countdown Pluralization
+    Given the date is "2014/02/02 06:00:00 UTC"
+    And I am on the home page
+    Then I should see "1 day"
+    And I should not see "1 days"
+
+    Given the date is "2014/02/03 06:00:00 UTC"
+    And I am on the home page
+    Then I should see "1 hour"
+    And I should not see "1 hours"
+
+    Given the date is "2014/02/03 06:58:30 UTC"
+    And I am on the home page
+    Then I should see "1 minute"
+    And I should not see "1 minutes"
