@@ -5,7 +5,9 @@ module VisitorsHelper
     hours_left = time_to_next_event_instance[:hours]
     days_left = time_to_next_event_instance[:days]
 
-    if days_left == 0
+    if days_left == 0 and hours_left == 0
+      "#{minutes_left} minutes"
+    elsif days_left == 0
       "#{hours_left} hours #{minutes_left} minutes"
     else
       "#{days_left} days #{hours_left} hours #{minutes_left} minutes"
