@@ -1,6 +1,8 @@
+@import 'mixins';
 @import 'variables';
 
 $footer-height: 400px;
+$footer-upper-section-height: 250px;
 
 /* Wrapper for page content to push down footer */
 #wrap {
@@ -15,27 +17,42 @@ $footer-height: 400px;
 
 /* Set the fixed height of the footer here */
 #footer {
+  position: relative;
   height: $footer-height;
   padding-top: 35px;
   padding-bottom: 20px;
   background-color: $theme-darker;
   color: $white;
 
-  h3 {
+  #upper-section {
+    height: $footer-upper-section-height;
+  }
+
+  p, h3 {
     color: $white;
   }
-}
 
-#footer > .container {
+  a {
+    color: #cdcdcd;
 
-}
+    &:hover, &:active {
+      color: $theme-main;
 
-#footer p {
-  color: $white;
-}
+      &.facebook {
+        color: #3B5999;
+      }
 
-#footer a {
-  color: #efefef;
+      &.twitter {
+        color: #8EC1DA;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 #footer .contact {

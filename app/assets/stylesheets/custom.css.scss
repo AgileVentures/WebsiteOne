@@ -1,3 +1,4 @@
+@import "mixins";
 @import "variables";
 @import url(http://fonts.googleapis.com/css?family=Kreon:400,700);
 
@@ -52,13 +53,18 @@ p, a, ul, li {
   line-height: 1.4em;
 }
 
-a, a:visited, a:link {
+a {
   color: $link-color;
-}
+  @include css-transition(color, 0.3s, ease, 0s);
 
-a:hover, a:active {
-  color: $link-hover-color;
-  text-decoration: none;
+  &:hover, &:active {
+    color: $link-hover-color;
+    text-decoration: none;
+  }
+
+  &:visited, &:link {
+    color: $link-color;
+  }
 }
 
 strong {
