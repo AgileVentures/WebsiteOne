@@ -6,63 +6,94 @@
 
 <body lang="en-GB">
 
-<div id="top-content-wrapper">
-  <%= render 'layouts/navbar' %>
-  <section class="container-fluid landing-page-section" id="top-content">
-    <div class="col-sm-9" id="top-content-left">
-      <h1>Agile Ventures</h1>
-      <h2>Crowdsourced Learning</h2>
-    </div>
-    <div class="col-sm-3" id="top-content-right">
-      <ul id="top-content-list">
-        <li><%= @projects_text %></li>
-        <li><%= @members_text %></li>
-        <li>
-          <% if @event.present? %>
-            <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
-          <% else %>
-            No event found, create one <%= link_to 'here', events_path %>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </section>
-</div>
+<%= render 'layouts/navbar' %>
 
-<div class="container-fluid">
-  <section id="landing-projects" class="row landing-page-section">
-    <h2>Project Incubator</h2>
-    <p>
-      We take on projects of all shades, from helping charity to promoting education to developing cool
-      programming tools. We crowd-source our projects, our developers volunteer their time to projects
-      that interest them.
-    </p>
-  </section>
+<div class="container-fluid" style="padding: 0">
+  <ul id="section-list">
+    <li>
+      <section class="row landing-page-section" id="top-content">
+        <h1 class="row">Agile Ventures</h1>
+        <div class="row">
+          <div class="col-sm-8">
+            <ul id="top-content-list">
+              <li><a href="#landing-projects">Project Launch Pad</a></li>
+              <li><a href="#landing-learning">Crowdsourced Learning</a></li>
+              <li><a href="#landing-community">Community-Driven-Development</a></li>
+              <li><a href="#landing-open-source">Open Source at Heart</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-4">
+            <ul>
+              <li><%= @projects_text %></li>
+              <li><%= @members_text %></li>
+              <li>
+                <% if @event.present? %>
+                  <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
+                <% else %>
+                  No event found, create one <%= link_to 'here', events_path %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </li>
 
-  <section id="landing-developers" class="row landing-page-section">
-    <h2>Developers</h2>
-    <p>
-      Our developers come from diverse backgrounds: high school students, freelance developers, designers,
-      teachers, all coming together from different corners of the globe, to learn code and make a contribution
-      to society.
-    </p>
-  </section>
+    <li>
+      <section id="landing-projects" class="row landing-page-section">
+        <div class="col-sm-8 pull-right">
+          <h2>Project Launch Pad</h2>
+          <p>
+            AgileVentures is the perfect place to kick-start a project. Our system of openness and lack of hierarchy
+            means anybody can start a project. In fact, many of our current projects were initiated by our own
+            members!
+          </p>
+          <div class="landing-CTA">Get started with our <%= link_to 'Projects', projects_path %></div>
+        </div>
+      </section>
+    </li>
 
-  <section id="landing-community" class="row landing-page-section">
-    <h2>Community Driven Development</h2>
-    <p>
-      We have regular daily meetings (scrums) where our developers get together, share knowledge and help each
-      other out. We love pair programming, nobody works alone in this community.
-    </p>
-  </section>
+    <li>
+      <section id="landing-learning" class="row landing-page-section">
+        <div class="col-sm-8">
+          <h2>Crowdsourced Learning</h2>
+          <p>
+            By crowd-sourcing our projects, we attract developers from diverse backgrounds: students, freelancers,
+            designers, teachers, and many more from all corners of the globe. Our members are driven by their
+            passion to learn code and make a contribution to society.
+          </p>
+          <div class="landing-CTA">Check out our <%= link_to 'Members', users_index_path %></div>
+        </div>
+      </section>
+    </li>
 
-  <section id="landing-open-source" class="row landing-page-section">
-    <h2>Open Source</h2>
-    <p>
-      We love all things Open Source, we are fully transparent in our development process, we record videos of
-      all our meetings, our code is freely available on the web and our project status are publicly viewable.
-    </p>
-  </section>
+    <li>
+      <section id="landing-community" class="row landing-page-section">
+        <div class="col-sm-8 pull-right">
+          <h2>Community Driven Development</h2>
+          <p>
+            We have regular daily meetings (scrums) where our members get together, discuss projects, share
+            knowledge and plan programming sessions. We love pair programming, nobody works alone in this community!
+          </p>
+          <div class="landing-CTA">Find upcoming <%= link_to 'Events', events_path %></div>
+        </div>
+      </section>
+    </li>
+
+    <li>
+      <section id="landing-open-source" class="row landing-page-section">
+        <div class="col-sm-8">
+          <h2>Open Source</h2>
+          <p>
+            We love all things Open Source, we are fully transparent in our development process, we record videos
+            of all our meetings through Google+ Hangouts, our code is freely available on the web on GitHub and
+            our project plans are publicly viewable on Pivotal Tracker.
+          </p>
+          <div class="landing-CTA">Check us out on <a href="https://github.com/AgileVentures" target="_blank">GitHub</a></div>
+        </div>
+      </section>
+    </li>
+  </ul>
 </div>
 
 <section id="footer">
