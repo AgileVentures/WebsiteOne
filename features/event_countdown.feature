@@ -62,7 +62,7 @@ Feature: Events
     And I should not see "0 days"
 
   @time-travel-step
-  Scenario: Proper Event Countdown Pluralization
+  Scenario: Proper Event Countdown Pluralization (Singular)
     Given the date is "2014/02/02 06:00:00 UTC"
     And I am on the home page
     Then I should see "1 day"
@@ -77,3 +77,17 @@ Feature: Events
     And I am on the home page
     Then I should see "1 minute"
     And I should not see "1 minutes"
+
+  @time-travel-step
+  Scenario: Proper Event Countdown Pluralization (Plural)
+    Given the date is "2014/02/01 06:00:00 UTC"
+    And I am on the home page
+    Then I should see "2 days"
+
+    Given the date is "2014/02/03 05:00:00 UTC"
+    And I am on the home page
+    Then I should see "2 hours"
+
+    Given the date is "2014/02/03 06:57:30 UTC"
+    And I am on the home page
+    Then I should see "2 minutes"
