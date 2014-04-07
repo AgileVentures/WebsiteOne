@@ -85,11 +85,14 @@ $(function() {
       document.body.appendChild(css);
     }
 
-    window.setTimeout(function() {
-      $(".flash-div").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove();
-      });
-    }, 5000);
+    var flash = $('#flash-container');
+    if (flash.length > 0) {
+      window.setTimeout(function() {
+        flash.fadeTo(500, 0).slideUp(500, function(){
+          $(this).remove();
+        });
+      }, 5000);
+    }
 
     /**
      * Carousel collapse button, switches icons when the collapse/button icon is clicked and triggers sidebar
