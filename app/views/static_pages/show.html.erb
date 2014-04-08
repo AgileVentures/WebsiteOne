@@ -33,7 +33,7 @@
     <%= link_to 'Cancel', '', id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>
 <% end %>
 <br />
-<% unless @page.versions.empty? %>
+<% if @page.versions.count > 1 %>
     <a id="revisions-anchor" href=""><h4 style="display: inline-flex">Revisions</h4><i id="arrow" class="fa fa-arrow-down fa-lg" style="display:inline-flex;margin-left:5px;position:relative;top:2px;"></i></a>
     <div id="revisions" style="display:none;">
         <% @page.versions.each do |version| %>
