@@ -73,7 +73,7 @@ Feature: Events
     Then I should see "Scrum"
     And the next event should be in:
       | period | interval |
-      | 1      | days     |
+      | 1      | day     |
       | 21     | hours    |
       | 45     | minutes  |
 

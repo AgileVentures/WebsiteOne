@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 20140404100037) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
+    t.string   "github_owner"
+    t.string   "github_repo"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
   end
@@ -148,7 +150,6 @@ ActiveRecord::Schema.define(version: 20140404100037) do
     t.string   "youtube_id"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
-    t.boolean  "display_resume"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"
