@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include Youtube
+  include YoutubeHelper
 
   def index
     @users = User.where('display_profile = ?', true).order(:created_at)
