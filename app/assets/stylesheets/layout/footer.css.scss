@@ -76,20 +76,19 @@ $footer-upper-section-height: 250px;
   }
 
   input[type="text"], textarea {
-    border: none;
-    background-color: #1f1f21;
-    color: #868687;
+    background-color: $theme-darker;
+    color: $white;
     padding: 8px 20px;
     border-radius: 3px;
+    border: 1px solid $white;
     font-size: 0.8em;
     width: 95%;
     margin-bottom: 10px;
     @include css-transition(background-color, 0.2s, linear, 0s);
 
     &:focus {
-      border: none;
       box-shadow: none;
-      background-color: #000;
+      background-color: $theme-dark;
     }
 
     &:moz-placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder {
@@ -98,7 +97,7 @@ $footer-upper-section-height: 250px;
   }
 
   input[type="submit"] {
-    background-color: #3e3e40;
+    background-color: $theme-dark;
     border: none;
     color: $white;
     border-radius: 4px;

@@ -4,10 +4,13 @@
 
     <div id="account-controls" class="pull-right">
       <% if user_signed_in? %>
-        <img id="user-gravatar" src="<%= gravatar_for(current_user.email) %>" class="img-circle">
+        <a href="<%= users_show_path(current_user) %>">
+          <img id="user-gravatar" src="<%= gravatar_for(current_user.email) %>" class="img-circle">
+        </a>
         <div class="dropdown">
           <a href="#" id="account-dropdown" data-toggle="dropdown">
             <%= current_user_details %>
+            <span class="caret"></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="account-dropdown">
             <a href="<%= users_show_path(current_user) %>">

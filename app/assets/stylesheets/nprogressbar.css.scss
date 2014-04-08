@@ -1,4 +1,5 @@
 @import "mixins";
+@import "variables";
 
 /* Make clicks pass-through */
 #nprogress {
@@ -7,7 +8,7 @@
 }
 
 #nprogress .bar {
-  background: red;
+  background: $theme-secondary;
 
   position: fixed;
   z-index: 999999;
@@ -15,7 +16,7 @@
   left: 0;
 
   width: 100%;
-  height: 2px;
+  height: 3px;
 }
 
 /* Fancy blur effect */
@@ -25,7 +26,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  box-shadow: 0 0 15px $theme-secondary, 0 0 15px $theme-secondary;
   opacity: 1.0;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
@@ -45,19 +46,21 @@
 }
 
 #nprogress .spinner-icon {
-  width: 14px;
-  height: 14px;
-
-  border:  solid 2px transparent;
-  border-top-color:  #29d;
-  border-left-color: #29d;
-  border-radius: 10px;
-
-  -webkit-animation: nprogress-spinner 400ms linear infinite;
-  -moz-animation:    nprogress-spinner 400ms linear infinite;
-  -ms-animation:     nprogress-spinner 400ms linear infinite;
-  -o-animation:      nprogress-spinner 400ms linear infinite;
-  animation:         nprogress-spinner 400ms linear infinite;
+  display: none;
+  // Bryan: Hide spinner
+//  width: 14px;
+//  height: 14px;
+//
+//  border:  solid 2px transparent;
+//  border-top-color:  #29d;
+//  border-left-color: #29d;
+//  border-radius: 10px;
+//
+//  -webkit-animation: nprogress-spinner 400ms linear infinite;
+//  -moz-animation:    nprogress-spinner 400ms linear infinite;
+//  -ms-animation:     nprogress-spinner 400ms linear infinite;
+//  -o-animation:      nprogress-spinner 400ms linear infinite;
+//  animation:         nprogress-spinner 400ms linear infinite;
 }
 
 @-webkit-keyframes nprogress-spinner {
