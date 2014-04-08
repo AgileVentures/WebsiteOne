@@ -34,6 +34,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    users_show_path(resource)
+    user_path(resource)
   end
 end

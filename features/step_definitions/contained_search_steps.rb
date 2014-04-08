@@ -1,7 +1,7 @@
 # Bryan: already downcased
 def css_selector_for(container)
-  case container
-    when 'navigation bar' || 'navbar'
+  case container.downcase
+    when 'navigation bar', 'navbar'
       '#nav'
 
     when 'sidebar'
@@ -15,6 +15,12 @@ def css_selector_for(container)
 
     when 'modal dialog'
       '#modal-window'
+
+    when 'mercury toolbar', 'mercury editor toolbar'
+      '.mercury-toolbar-container'
+
+    when 'mercury modal', 'mercury editor modal'
+      '.mercury-modal'
 
     else
       pending

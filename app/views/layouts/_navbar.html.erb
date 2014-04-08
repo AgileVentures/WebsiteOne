@@ -9,7 +9,7 @@
         <img src="<%= gravatar_for(current_user.email) %>" style="width: 30px; height: 30px; margin-right: 5px;" class="img-rounded">
         <a id="user_info" href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user_details %></a>
         <ul class="dropdown-menu text-left">
-          <li><%= link_to '<i class="glyphicon glyphicon-user"></i> My account'.html_safe, users_show_path(current_user) %> </li>
+          <li><%= link_to '<i class="glyphicon glyphicon-user"></i> My account'.html_safe, user_path(current_user) %> </li>
           <li><%= link_to '<i class="glyphicon glyphicon-log-out"></i> Log out'.html_safe, destroy_user_session_path, :method => :delete %></li>
         </ul>
       </div>
@@ -36,7 +36,7 @@
       <ul class="nav navbar-nav nav-justified">
         <li><%= link_to 'About us', static_page_path('About Us') %></li>
         <li><%= link_to 'Our projects', projects_path %></li>
-        <li><%= link_to 'Our members', users_index_path %></li>
+        <li><%= link_to 'Our members', users_path %></li>
         <li><%= link_to 'Getting Started', static_page_path('Getting Started') %></li>
         <li><%= link_to 'Articles', articles_path %></li>
         <li><%= link_to 'Events', events_path %></li>
