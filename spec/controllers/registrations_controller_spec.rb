@@ -89,7 +89,7 @@ describe RegistrationsController do
       end
 
       it 'redirects to the user show page' do
-        expect(response).to redirect_to(users_show_path(@user))
+        expect(response).to redirect_to(user_path(@user))
       end
 
       it 'shows a success message' do

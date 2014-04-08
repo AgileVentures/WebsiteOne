@@ -3,7 +3,7 @@
     <h3><%= link_to project.title, project_path(project) %></h3>
     <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
       <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
-      <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, users_show_path(project.user) %></div>
+      <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, user_path(project.user) %></div>
     </div>
     <p><%= project.description.truncate(250, separator: ' ') %></p>
   </div>

@@ -5,10 +5,14 @@ module VisitorsHelper
     hours_left = time_to_next_event_instance[:hours]
     days_left = time_to_next_event_instance[:days]
 
-    if days_left == 0
-      "#{hours_left} hours #{minutes_left} minutes"
+    if days_left == 0 and hours_left == 0
+      pluralize(minutes_left, "minute")
+    elsif days_left == 0
+      "#{pluralize(hours_left, "hour")} #{pluralize(minutes_left, "minute")}"
     else
-      "#{days_left} days #{hours_left} hours #{minutes_left} minutes"
+      ("#{pluralize(days_left, "day")} " unless days_left == 0).to_s +
+      ("#{pluralize(hours_left, "hour")} " unless hours_left == 0).to_s +
+      (pluralize(minutes_left, "minute"))
     end
   end
 end
