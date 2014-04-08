@@ -171,7 +171,7 @@ describe AuthenticationsController do
       user.stub(:youtube_id=)
       user.stub(:save)
 
-      expect(Youtube).to receive(:channel_id)
+      expect(YoutubeHelper).to receive(:channel_id)
       get :create, provider: 'github'
     end
 
