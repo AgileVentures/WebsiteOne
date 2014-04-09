@@ -16,8 +16,8 @@ Feature: Static pages
     And I am on the "home" page
 
   Scenario: Render About Us page
-    Then I should see link "About us"
-    When I click "About us"
+    Then I should see link "About Us"
+    When I click "About Us"
     Then I should be on the static "About Us" page
     And I should see "About Us"
 

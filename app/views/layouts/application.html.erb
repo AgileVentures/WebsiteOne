@@ -7,22 +7,24 @@
 
 <div id="wrap">
   <%= render 'layouts/navbar' %>
-  <% if current_page? root_path %>
-    <%= yield %>
-  <% elsif content_for?(:content) %>
-    <div class="container" id="with-sidebar-container">
-      <%= yield(:content) %>
-    </div>
-  <% else %>
-    <div class="container">
-      <div class="col-lg-9">
-        <%= yield %>
+  <div id="main">
+    <% if current_page? root_path %>
+      <%= yield %>
+    <% elsif content_for?(:content) %>
+      <div class="container" id="with-sidebar-container">
+        <%= yield(:content) %>
       </div>
-      <div class="col-lg-3">
-        <%= render 'layouts/sponsors' %>
+    <% else %>
+      <div class="container">
+        <div class="col-lg-9">
+          <%= yield %>
+        </div>
+        <div class="col-lg-3">
+          <%= render 'layouts/sponsors' %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 <footer id="footer">

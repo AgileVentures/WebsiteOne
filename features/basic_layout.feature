@@ -13,20 +13,16 @@ Feature: Setting up basic page layout for site
     And I should see a main content area
     And I should see a footer area
 
-
   Scenario: Render navigation bar
     Then I should see a navigation bar
     And I should see link
-      | Our projects    |
-      | Our members     |
+      | Projects        |
+      | Members         |
       | Log in          |
       | Sign up         |
-      | Getting Started |
       | Articles        |
       | Events          |
 
   Scenario: Render footer
     And I should see "AgileVentures" in footer
     And I should see "Crowdsourced Learning" in footer
-
-
