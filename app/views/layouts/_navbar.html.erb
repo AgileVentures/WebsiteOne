@@ -61,5 +61,10 @@
       </div>
     </div>
   </div>
+  <% if @next_event %>
+    <div id="next-event" data-event-time="<%= @next_event.next_occurrence_time.to_datetime %>"
+         data-event-url="<%= event_path(@next_event) %>"
+         data-event-name="<%= @next_event.name %>"></div>
+  <% end %>
   <%= render 'layouts/flash' %>
 </div>

@@ -1,11 +1,16 @@
+@import "mixins";
 @import "variables";
 
-$top-content-text-color: $theme-main;
+$top-content-text-color: $theme-darker;
+
+div.section-well {
+  padding: 1em 2em;
+  border-radius: 25px;
+}
 
 #top-content {
   width: 100%;
   min-height: 100%;
-  background: $white;
   color: $top-content-text-color;
   font-size: 1.3em;
 
@@ -24,16 +29,6 @@ $top-content-text-color: $theme-main;
   }
 }
 
-ul#top-content-list {
-  padding-left: 1em;
-  li:nth-child(2n) {
-    padding-left: 2em;
-  }
-}
-
-$alt-color: $white;
-$alt-background: $theme-darker;
-
 ul#section-list {
   padding: 0;
   margin: 0;
@@ -47,11 +42,12 @@ ul#section-list {
       font-size: 2em;
     }
 
-    &:nth-child(2n) {
-      background: $alt-background;
-      color: $alt-color;
-      h2 {
-        color: $alt-color;
+    &:nth-child(2n+1) {
+      background: asset_url("bg-1-frosted.png") no-repeat center center fixed;
+      @include background-size(cover);
+
+      .section-well {
+        background-color: rgba(255, 255, 255, 0.8);
       }
     }
   }
@@ -59,7 +55,7 @@ ul#section-list {
 
 .landing-page-section {
   width: 100%;
-  padding: 1.5em;
+  padding: 1em;
   min-height: 500px;
 }
 

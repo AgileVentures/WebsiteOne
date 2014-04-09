@@ -142,6 +142,45 @@ $(function() {
     });
 
     $(window).scroll();
+
+    // Event Timer
+
+    var eventCountdown = $('#next-event');
+    if (eventCountdown.length > 0) {
+      var eventTime = Date.parse(eventCountdown.data('event-time')),
+          eventUrl = eventCountdown.data('event-url'),
+          eventName = eventCountdown.data('event-name'),
+          textToAppend = ' to <a href="' + eventUrl + '">' + eventName + '</a></p>';
+
+      function toFormattedString(num) {
+        return (num < 10) ? '0' + num : num.toString();
+      }
+
+      if (window.wsoUpdateCountdown) {
+        clearTimeout(window.wsoUpdateCountdown);
+      }
+
+      window.wsoUpdateCountdown = function() {
+        var timeToEvent = eventTime - new Date(),
+            seconds = Math.round(timeToEvent/1000) % 60,
+            mins = Math.round(timeToEvent/60000) % 60,
+            hours = Math.round(timeToEvent/3600000) % 24;
+
+        if (seconds < 0) {
+          eventCountdown.html('<a href="' + eventUrl + '">' + eventName + '</a> has started');
+        } else {
+          var tmp = '<p>';
+          if (hours > 0) {
+            tmp += toFormattedString(hours) + ':';
+          }
+
+          eventCountdown.html(tmp + toFormattedString(mins) + ':' + toFormattedString(seconds) + textToAppend);
+          setTimeout(window.wsoUpdateCountdown, 1000);
+        }
+      };
+
+      window.wsoUpdateCountdown();
+    }
   };
 
 

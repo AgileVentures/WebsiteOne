@@ -12,30 +12,28 @@
   <ul id="section-list">
     <li>
       <section class="row landing-page-section" id="top-content">
-        <div class="container">
-          <h1 class="row">Agile Ventures</h1>
-          <div class="row">
-            <div class="col-sm-8">
-              <ul id="top-content-list">
-                <li><a href="#landing-projects">Project Launch Pad</a></li>
-                <li><a href="#landing-learning">Crowdsourced Learning</a></li>
-                <li><a href="#landing-community">Community Driven Development</a></li>
-                <li><a href="#landing-open-source">Open Source at Heart</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-4">
-              <ul>
-                <li><%= @projects_text %></li>
-                <li><%= @members_text %></li>
-                <li>
-                  <% if @event.present? %>
-                    <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
-                  <% else %>
-                    No event found, create one <%= link_to 'here', events_path %>
-                  <% end %>
-                </li>
-              </ul>
-            </div>
+        <div class="section-well col-xs-12">
+          <div class="col-sm-8">
+            <h3>What are we?</h3>
+            <ul id="top-content-list">
+              <li><a href="#landing-projects">Project Launch Pad</a></li>
+              <li><a href="#landing-learning">Crowdsourced Learning</a></li>
+              <li><a href="#landing-community">Community Driven Development</a></li>
+              <li><a href="#landing-open-source">Open Source at Heart</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-4">
+            <ul>
+              <li><%= @projects_text %></li>
+              <li><%= @members_text %></li>
+              <li>
+                <% if @event.present? %>
+                  <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
+                <% else %>
+                  No event found, create one <%= link_to 'here', events_path %>
+                <% end %>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -44,7 +42,7 @@
     <li>
       <section id="landing-projects" class="row landing-page-section">
         <div class="container">
-          <div class="col-sm-8 pull-right">
+          <div class="section-well col-sm-8 pull-right">
             <h2>Project Launch Pad</h2>
             <p>
               AgileVentures is the perfect place to kick-start a project. Our system of openness and lack of hierarchy
@@ -60,7 +58,7 @@
     <li>
       <section id="landing-learning" class="row landing-page-section">
         <div class="container">
-          <div class="col-sm-8">
+          <div class="section-well col-sm-8">
             <h2>Crowdsourced Learning</h2>
             <p>
               By crowd-sourcing our projects, we attract developers from diverse backgrounds: students, freelancers,
@@ -76,7 +74,7 @@
     <li>
       <section id="landing-community" class="row landing-page-section">
         <div class="container">
-          <div class="col-sm-8 pull-right">
+          <div class="section-well col-sm-8 pull-right">
             <h2>Community Driven Development</h2>
             <p>
               We have regular daily meetings (scrums) where our members get together, discuss projects, share
@@ -91,7 +89,7 @@
     <li>
       <section id="landing-open-source" class="row landing-page-section">
         <div class="container">
-          <div class="col-sm-8">
+          <div class="section-well col-sm-8">
             <h2>Open Source at Heart</h2>
             <p>
               We love all things Open Source, we are fully transparent in our development process, we record videos

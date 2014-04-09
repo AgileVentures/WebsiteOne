@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
+  before_filter :get_next_event
+
   include CustomErrors
 
   def static_page_path(page)
@@ -26,4 +28,9 @@ class ApplicationController < ActionController::Base
     request.env['omniauth.origin'] || root_path
   end
 
+  private
+
+  def get_next_event
+    @next_event = Event.next_occurrence
+  end
 end
