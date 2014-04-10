@@ -36,8 +36,8 @@ $gravatar-size: 50px;
       vertical-align: text-bottom;
     }
 
-    @include css-transition(height, 0.3s, ease, 0s);
-    @include css-transition(padding, 0.3s, ease, 0s);
+    @include css-transition(height 0.3s ease 0s);
+    @include css-transition(padding 0.3s ease 0s);
   }
 
   #affix-nav-brand {
@@ -46,7 +46,7 @@ $gravatar-size: 50px;
 
     img {
       height: 0;
-      @include css-transition(height, 0.3s, ease, 0s);
+      @include css-transition(height 0.3s ease 0s);
     }
   }
 
@@ -77,7 +77,7 @@ $gravatar-size: 50px;
   .navbar-nav>li>a {
     color: $white;
     background-color: $theme-dark;
-    @include css-transition(background-color, 0.3s, ease, 0s);
+    @include css-transition(background-color 0.3s ease 0s);
 
     &:hover, &:active, &.active {
       background-color: $theme-darker;
@@ -139,7 +139,7 @@ header#main_header {
 
     li {
       padding: 15px;
-      @include css-transition(background-color, 0.3s, ease, 0s);
+      @include css-transition(background-color 0.3s ease 0s);
 
       &:hover {
         background: $link-hover-color;
@@ -155,7 +155,7 @@ header#main_header {
     #user-gravatar {
       width: $gravatar-size;
       height: $gravatar-size;
-      @include css-shadow(0, 0, 1px, 1px, $white);
+      @include css-shadow(0 0 1px 1px $white);
       display: inline-block;
     }
 

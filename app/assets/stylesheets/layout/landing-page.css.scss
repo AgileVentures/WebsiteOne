@@ -45,7 +45,7 @@ ul#section-list {
 
     &:nth-child(2n+1) {
       background: asset_url("bg-1-frosted.png") no-repeat center center fixed;
-      @include background-size(cover);
+      @include css-background-size(cover);
 
       .section-well {
         background-color: rgba(255, 255, 255, 0.8);
@@ -62,4 +62,9 @@ ul#section-list {
 
 .landing-CTA {
   font-size: 0.7em;
+}
+
+#landing-round-banners {
+
+
 }

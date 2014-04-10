@@ -86,7 +86,7 @@ $footer-upper-section-height: 270px;
     font-size: 0.8em;
     width: 95%;
     margin-bottom: 10px;
-    @include css-transition(background-color, 0.2s, linear, 0s);
+    @include css-transition(background-color 0.2s linear 0s);
 
     &:focus {
       box-shadow: none;
@@ -106,7 +106,7 @@ $footer-upper-section-height: 270px;
     padding: 5px 20px;
     font-size: 14px;
     font-weight: bold;
-    @include css-transition(background-color, 0.2s, linear, 0s);
+    @include css-transition(background-color 0.2s linear 0s);
 
     &:hover {
       background-color: #2190DB;

@@ -41,7 +41,7 @@ section.page-preview {
 }
 
 .page-option-text {
-  @include css-transition(max-width, 0.4s, ease, 0s);
+  @include css-transition(max-width 0.4s ease 0s);
   display: inline-block;
   vertical-align: middle;
   width: auto !important;
@@ -84,7 +84,7 @@ section.page-preview {
   color: $black;
   width: 100%;
   margin: 0;
-  @include css-transition(background, 0.3s, ease, 0s);
+  @include css-transition(background 0.3s ease 0s);
   position: relative;
 }
 
