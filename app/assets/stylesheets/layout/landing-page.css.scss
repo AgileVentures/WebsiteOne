@@ -4,9 +4,15 @@
 $top-content-text-color: $theme-darker;
 
 div.section-well {
-  padding: 1em 2em;
+  padding: 1em;
   border-radius: 25px;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  div.section-well {
+    padding: 1em 2em;
+  }
 }
 
 #top-content {
@@ -56,15 +62,16 @@ ul#section-list {
 
 .landing-page-section {
   width: 100%;
-  padding: 1em;
+  padding: 1em 0;
   min-height: 500px;
+}
+
+@media (min-width: 768px) {
+  .landing-page-section {
+    padding: 1em;
+  }
 }
 
 .landing-CTA {
   font-size: 0.7em;
-}
-
-#landing-round-banners {
-
-
 }

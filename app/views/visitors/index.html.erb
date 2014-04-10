@@ -14,27 +14,20 @@
       <section class="row landing-page-section" id="top-content">
         <div class="container">
           <div class="section-well col-xs-12">
-            <div class="col-sm-8">
-              <h3>What are we?</h3>
-              <ul id="top-content-list">
-                <li><a href="#landing-projects">Project Launch Pad</a></li>
-                <li><a href="#landing-learning">Crowdsourced Learning</a></li>
-                <li><a href="#landing-community">Community Driven Development</a></li>
-                <li><a href="#landing-open-source">Open Source at Heart</a></li>
-              </ul>
+            <div class="row">
+              <div class="col-sm-4">
+                <% if @projects_count > 0 %>
+                  <%= @projects_count %>
+                  <%= link_to 'project'.pluralize(@projects_count), projects_path %> to date
+                <% else %>
+                  No projects found, be the <%= link_to 'first', projects_path %>!
+                <% end %>
+              </div>
             </div>
-            <div class="col-sm-4">
-              <ul>
-                <li><%= @projects_text %></li>
-                <li><%= @members_text %></li>
-                <li>
-                  <% if @event.present? %>
-                    <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
-                  <% else %>
-                    No event found, create one <%= link_to 'here', events_path %>
-                  <% end %>
-                </li>
-              </ul>
+            <div class="row" style="text-align: center">
+              <% if @event.present? %>
+                <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
+              <% end %>
             </div>
           </div>
         </div>
@@ -77,7 +70,7 @@
       <section id="landing-community" class="row landing-page-section">
         <div class="container">
           <div class="section-well col-sm-8 pull-right">
-            <h2>Community Driven Development</h2>
+            <h2>Social Coding</h2>
             <p>
               We have regular daily meetings (scrums) where our members get together, discuss projects, share
               knowledge and plan programming sessions. We love pair programming, nobody works alone in this community!
