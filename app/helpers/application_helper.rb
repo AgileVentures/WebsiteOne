@@ -132,6 +132,25 @@ module ApplicationHelper
     HTML
   end
 
+  def awesome_text_field(f, object_name, options = {})
+    awesome_text_method(:text_field, f, object_name, options)
+  end
+
+  def awesome_text_area(f, object_name, options = {})
+    awesome_text_method(:text_area, f, object_name, options)
+  end
+
+  def awesome_text_method(method_name, f, object_name, options = {})
+    errors = f.object.errors.messages[object_name]
+    result = "<div class=\"form-group#{' has-error has-feedback' if errors.present?}\">"
+    result << f.label(object_name, options[:label_text], { class: 'control-label' }.merge(options[:label] || {}))
+    result << f.send(method_name, object_name, { class: 'form-control' }.merge(options))
+    result << "<span class=\"help-block control-label\">#{errors.join(', ')}</span>" if errors.present?
+    result << '</div>'
+    clean_html result
+  end
+  private :awesome_text_method
+
   def active_if(condition)
     condition ? 'active' : nil
   end

@@ -1,30 +1,34 @@
 <div class='row'>
-  <div class='col-sm-6'>
-    <%= form_for @project, :html => { :class => 'form-horizontal', :role => 'form' } do |f| %>
-        <div class='form-group'>
-          <%= f.label :title %>
-          <%= f.text_field :title, :class => 'form-control', placeholder: 'Name' %>
+  <div class='col-sm-8'>
+    <%= form_for @project, :html => { :role => 'form' } do |f| %>
+
+      <%= awesome_text_field f, :title, placeholder: 'Name' %>
+      <%= awesome_text_area f, :description, rows: 10, placeholder: 'Description' %>
+
+      <div class='form-group'>
+        <%= f.label :status %>
+        <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
+      </div>
+
+      <%= awesome_text_field f, :github_url, placeholder: 'https://github.com/projectname', label_text: 'GitHub link' %>
+      <%= awesome_text_field f, :pivotaltracker_url, label_text: 'PivotalTracker link', placeholder: 'https://www.pivotaltracker.com/s/projects/id' %>
+
+      <% if @project.new_record? %>
+        <div class="form-group">
+          <h3>New project checklist</h3>
+          <p>What to do next:</p>
+          <ul>
+            <li>Attend one of the scrums</li>
+            <li>Share the project with the members</li>
+            <li>Start a Hangout!</li>
+          </ul>
+          <p>Ready to kick things off?</p>
         </div>
-        <div class='form-group'>
-          <%= f.label :description %>
-          <%= f.text_area :description, :class => 'form-control',  'rows' => 10, placeholder: 'Description'%>
-        </div>
-        <div class='form-group'>
-          <%= f.label :status %>
-          <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
-        </div>
-        <div class='form-group'>
-          <%= f.label :github_url, "GitHub link" %>
-          <%= f.text_field :github_url, :class => 'form-control', placeholder: 'https://github.com/projectname' %>
-        </div>
-        <div class='form-group'>
-          <%= f.label :pivotaltracker_url, "PivotalTracker link" %>
-          <%= f.text_field :pivotaltracker_url, :class => 'form-control', placeholder: 'https://www.pivotaltracker.com/s/projects/id' %>
-        </div>
-        <div class='form-group'>
-          <%= link_to 'Back', (@project.id.nil? ? projects_path : project_path(@project)), :type => 'button', :class => 'btn btn-default'%>
-          <%= f.submit 'Submit', :class => 'btn btn-default' %>
-        </div>
+      <% end %>
+      <div class='form-group'>
+        <%= link_to 'Back', (@project.id.nil? ? projects_path : project_path(@project)), :type => 'button', :class => 'btn btn-default'%>
+        <%= f.submit 'Submit', :class => 'btn btn-default' %>
+      </div>
     <% end %>
   </div>
 </div>
