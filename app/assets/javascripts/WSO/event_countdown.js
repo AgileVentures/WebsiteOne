@@ -1,6 +1,6 @@
 //= require ./wso
 
-window.WSO.define('EventCountdown', (function() {
+WSO.define('EventCountdown', function() {
   var countdownClock, eventName, eventTime, eventUrl, textToAppend;
 
   function format(num) {
@@ -52,12 +52,4 @@ window.WSO.define('EventCountdown', (function() {
     format: format,
     countdownClock: countdownClock
   };
-})());
-
-$(function() {
-  if (!window.WSO.EventCountdown.registered) {
-    $(document).ready(window.WSO.EventCountdown.init);
-    $(document).on('page:load', window.WSO.EventCountdown.init);
-    window.WSO.EventCountdown.registered = true;
-  }
 });
