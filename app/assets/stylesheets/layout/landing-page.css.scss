@@ -5,7 +5,7 @@ $top-content-text-color: $theme-darker;
 
 div.section-well {
   padding: 1em;
-  border-radius: 25px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -46,6 +46,7 @@ ul#section-list {
     padding: 0;
 
     h2 {
+      margin-top: 0;
       font-size: 2em;
     }
 

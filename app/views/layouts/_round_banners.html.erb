@@ -1,6 +1,5 @@
 <!-- BEGIN LIST -->
 <ul class="box">
-  <h2>What are you waiting for?</h2>
   <!-- BEGIN LIST ELEMENT -->
   <li>
     <div class="circle">
@@ -77,6 +76,8 @@
     </div><!-- end div .circle -->
   </li>
   <!-- END LIST ELEMENT -->
-  <p>Lets code! <%= link_to 'Join us', new_user_registration_path %></p>
+  <% if @event.present? %>
+    <p><%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %></p>
+  <% end %>
 </ul>
 <!--END LIST -->

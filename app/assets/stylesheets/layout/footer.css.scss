@@ -82,11 +82,12 @@ $footer-upper-section-height: 270px;
   }
 
   input[type="text"], textarea {
-    background-color: $theme-darker;
+    background-color: $theme-dark;
     color: $white;
     padding: 8px 20px;
     border-radius: 3px;
-    border: 1px solid $white;
+    border-style: none;
+//    border: 1px solid $white;
     font-size: 0.8em;
     width: 100%;
     margin-bottom: 10px;
@@ -94,7 +95,7 @@ $footer-upper-section-height: 270px;
 
     &:focus {
       box-shadow: none;
-      background-color: $theme-dark;
+      background-color: #405669;
     }
 
     &:moz-placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder {

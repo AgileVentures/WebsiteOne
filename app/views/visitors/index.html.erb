@@ -13,22 +13,8 @@
     <li>
       <section class="row landing-page-section" id="top-content">
         <div class="container">
-          <div class="section-well col-xs-12">
-            <div class="row">
-              <div class="col-sm-4">
-                <% if @projects_count > 0 %>
-                  <%= @projects_count %>
-                  <%= link_to 'project'.pluralize(@projects_count), projects_path %> to date
-                <% else %>
-                  No projects found, be the <%= link_to 'first', projects_path %>!
-                <% end %>
-              </div>
-            </div>
-            <div class="row" style="text-align: center">
-              <% if @event.present? %>
-                <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
-              <% end %>
-            </div>
+          <div class="section-well">
+            <%= render 'layouts/round_banners' %>
           </div>
         </div>
       </section>
@@ -38,6 +24,7 @@
       <section id="landing-projects" class="row landing-page-section">
         <div class="container">
           <div class="section-well col-sm-8 pull-right">
+            <h3>We are a</h3>
             <h2>Project Launch Pad</h2>
             <p>
               AgileVentures is the perfect place to kick-start a project. Our system of openness and lack of hierarchy
@@ -54,6 +41,7 @@
       <section id="landing-learning" class="row landing-page-section">
         <div class="container">
           <div class="section-well col-sm-8">
+            <h3>We do</h3>
             <h2>Crowdsourced Learning</h2>
             <p>
               By crowd-sourcing our projects, we attract developers from diverse backgrounds: students, freelancers,
@@ -70,9 +58,10 @@
       <section id="landing-community" class="row landing-page-section">
         <div class="container">
           <div class="section-well col-sm-8 pull-right">
+            <h3>We practice</h3>
             <h2>Social Coding</h2>
             <p>
-              We have regular daily meetings (scrums) where our members get together, discuss projects, share
+              We have regular daily meetings (scrums) online where our members get together, discuss projects, share
               knowledge and plan programming sessions. We love pair programming, nobody works alone in this community!
             </p>
             <div class="landing-CTA">Find upcoming <%= link_to 'Events', events_path %></div>
@@ -85,7 +74,8 @@
       <section id="landing-open-source" class="row landing-page-section">
         <div class="container">
           <div class="section-well col-sm-8">
-            <h2>Open Source at Heart</h2>
+            <h3>We love</h3>
+            <h2>Open Source</h2>
             <p>
               We love all things Open Source, we are fully transparent in our development process, we record videos
               of all our meetings through Google+ Hangouts, our code is freely available on the web on GitHub and
@@ -93,14 +83,6 @@
             </p>
             <div class="landing-CTA">Check us out on <a href="https://github.com/AgileVentures" target="_blank">GitHub</a></div>
           </div>
-        </div>
-      </section>
-    </li>
-
-    <li>
-      <section id="landing-round-banners" class="row landing-page-section">
-        <div class="container">
-          <%= render 'layouts/round_banners' %>
         </div>
       </section>
     </li>
