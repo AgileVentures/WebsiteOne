@@ -12,28 +12,30 @@
   <ul id="section-list">
     <li>
       <section class="row landing-page-section" id="top-content">
-        <div class="section-well col-xs-12">
-          <div class="col-sm-8">
-            <h3>What are we?</h3>
-            <ul id="top-content-list">
-              <li><a href="#landing-projects">Project Launch Pad</a></li>
-              <li><a href="#landing-learning">Crowdsourced Learning</a></li>
-              <li><a href="#landing-community">Community Driven Development</a></li>
-              <li><a href="#landing-open-source">Open Source at Heart</a></li>
-            </ul>
-          </div>
-          <div class="col-sm-4">
-            <ul>
-              <li><%= @projects_text %></li>
-              <li><%= @members_text %></li>
-              <li>
-                <% if @event.present? %>
-                  <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
-                <% else %>
-                  No event found, create one <%= link_to 'here', events_path %>
-                <% end %>
-              </li>
-            </ul>
+        <div class="container">
+          <div class="section-well col-xs-12">
+            <div class="col-sm-8">
+              <h3>What are we?</h3>
+              <ul id="top-content-list">
+                <li><a href="#landing-projects">Project Launch Pad</a></li>
+                <li><a href="#landing-learning">Crowdsourced Learning</a></li>
+                <li><a href="#landing-community">Community Driven Development</a></li>
+                <li><a href="#landing-open-source">Open Source at Heart</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-4">
+              <ul>
+                <li><%= @projects_text %></li>
+                <li><%= @members_text %></li>
+                <li>
+                  <% if @event.present? %>
+                    <%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %>
+                  <% else %>
+                    No event found, create one <%= link_to 'here', events_path %>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>

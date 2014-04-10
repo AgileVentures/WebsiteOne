@@ -22,6 +22,7 @@
 //= require bootstrap-tokenfield.min
 //= require bootstrap-tags
 //= require bootstrap/modal
+//= require_directory ./WSO
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
@@ -115,17 +116,16 @@ $(function() {
         child.addClass(collapsedClass);
       }
     });
-
     var affixedNav = $('#nav'),
         header = $('#main_header'),
         main = $('#main'),
-    // manually selected properties which will affect affix threshold height, if layout changes,
-    // readjust as necessary
+// manually selected properties which will affect affix threshold height, if layout changes,
+// readjust as necessary
         thresholdTop = header.height(),
         footer = $('#footer'),
         isAffixed = affixedNav.hasClass('affix');
 
-    // Bryan: catch scroll events
+// Bryan: catch scroll events
     $(window).scroll(function() {
 
       var scrollTop = $(this).scrollTop();
@@ -142,53 +142,12 @@ $(function() {
     });
 
     $(window).scroll();
-
-    // Event Timer
-
-    var eventCountdown = $('#next-event');
-    if (eventCountdown.length > 0) {
-      var eventTime = Date.parse(eventCountdown.data('event-time')),
-          eventUrl = eventCountdown.data('event-url'),
-          eventName = eventCountdown.data('event-name'),
-          textToAppend = ' to <a href="' + eventUrl + '">' + eventName + '</a></p>';
-
-      function toFormattedString(num) {
-        return (num < 10) ? '0' + num : num.toString();
-      }
-
-      if (window.wsoUpdateCountdown) {
-        clearTimeout(window.wsoUpdateCountdown);
-      }
-
-      window.wsoUpdateCountdown = function() {
-        var timeToEvent = eventTime - new Date(),
-            timeInSeconds = Math.floor(timeToEvent/1000),
-            timeInMins = Math.floor(timeInSeconds/60),
-            timeInHours = Math.floor(timeInMins/60);
-
-        if (timeInSeconds <= 0) {
-          eventCountdown.html('<a href="' + eventUrl + '">' + eventName + '</a> has started');
-        } else {
-          var tmp = '<p>';
-          if (timeInHours > 0) {
-            tmp += toFormattedString(timeInHours) + ':';
-          }
-
-          eventCountdown.html(tmp + toFormattedString(timeInMins % 60) +
-                              ':' + toFormattedString(timeInSeconds % 60) +
-                              textToAppend);
-          setTimeout(window.wsoUpdateCountdown, 1000);
-        }
-      };
-
-      window.wsoUpdateCountdown();
-    }
   };
 
 
-  $(document).on('page:fetch',   function() { NProgress.start(); });
-  $(document).on('page:change',  function() { NProgress.done(); });
-  $(document).on('page:restore', function() { NProgress.remove(); });
+  $(document).on('page:fetch',   NProgress.start);
+  $(document).on('page:change',  NProgress.done);
+  $(document).on('page:restore', NProgress.remove);
 
   $(document).ready($.fn.BryanHATESTHIS);
   $(document).on('page:load', $.fn.BryanHATESTHIS);

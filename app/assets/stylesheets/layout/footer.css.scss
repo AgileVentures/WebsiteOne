@@ -1,8 +1,8 @@
 @import 'mixins';
 @import 'variables';
 
-$footer-height: 400px;
-$footer-upper-section-height: 250px;
+$footer-height: 420px;
+$footer-upper-section-height: 270px;
 
 /* Wrapper for page content to push down footer */
 #wrap {
@@ -22,6 +22,7 @@ $footer-upper-section-height: 250px;
   padding-bottom: 20px;
   background-color: $theme-darker;
   color: $white;
+  overflow: hidden;
 
   p, h3 {
     color: $white;
@@ -29,6 +30,7 @@ $footer-upper-section-height: 250px;
 
   a {
     color: #cdcdcd;
+    text-overflow: ellipsis;
 
     &:hover, &:active {
       color: $theme-main;
