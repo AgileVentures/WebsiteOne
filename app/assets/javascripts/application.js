@@ -162,19 +162,21 @@ $(function() {
 
       window.wsoUpdateCountdown = function() {
         var timeToEvent = eventTime - new Date(),
-            seconds = Math.round(timeToEvent/1000) % 60,
-            mins = Math.round(timeToEvent/60000) % 60,
-            hours = Math.round(timeToEvent/3600000) % 24;
+            timeInSeconds = Math.floor(timeToEvent/1000),
+            timeInMins = Math.floor(timeInSeconds/60),
+            timeInHours = Math.floor(timeInMins/60);
 
-        if (seconds < 0) {
+        if (timeInSeconds <= 0) {
           eventCountdown.html('<a href="' + eventUrl + '">' + eventName + '</a> has started');
         } else {
           var tmp = '<p>';
-          if (hours > 0) {
-            tmp += toFormattedString(hours) + ':';
+          if (timeInHours > 0) {
+            tmp += toFormattedString(timeInHours) + ':';
           }
 
-          eventCountdown.html(tmp + toFormattedString(mins) + ':' + toFormattedString(seconds) + textToAppend);
+          eventCountdown.html(tmp + toFormattedString(timeInMins % 60) +
+                              ':' + toFormattedString(timeInSeconds % 60) +
+                              textToAppend);
           setTimeout(window.wsoUpdateCountdown, 1000);
         }
       };

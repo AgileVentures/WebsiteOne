@@ -29,8 +29,8 @@ $gravatar-size: 50px;
     display: inline-block;
     vertical-align: top;
     font-weight: normal;
-    position: relative;
-    z-index: 0;
+    position: absolute;
+    top: $navbar-height;
 
     p {
       vertical-align: text-bottom;
