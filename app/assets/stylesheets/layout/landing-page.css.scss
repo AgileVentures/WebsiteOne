@@ -45,9 +45,13 @@ ul#section-list {
     margin: 0;
     padding: 0;
 
+    h3 {
+      margin-bottom: 0;
+    }
+
     h2 {
       margin-top: 0;
-      font-size: 2em;
+      font-size: 2.5em;
     }
 
     &:nth-child(2n+1) {

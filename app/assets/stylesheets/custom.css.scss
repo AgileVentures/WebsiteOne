@@ -1,6 +1,7 @@
 @import "mixins";
 @import "variables";
-@import url(http://fonts.googleapis.com/css?family=Kreon:400,700);
+//@import url(http://fonts.googleapis.com/css?family=Kreon:400,700);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
 
 /*  ---------------------------------------------------------------
     general style
@@ -42,7 +43,9 @@ html, body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
   -webkit-font-smoothing: antialiased;
-  font: normal 1em arial, sans-serif;
+//  font: normal 1em arial, sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
 }
 
 h1, h2, h3, h4 {
@@ -114,8 +117,15 @@ strong {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Kreon', serif;
   vertical-align: middle;
+
+  a {
+    color: $theme-lighter-dark;
+
+    &:hover, &:active {
+      color: $theme-darker;
+    }
+  }
 }
 
 h1 {
