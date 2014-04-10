@@ -28,16 +28,17 @@ window.WSO = window.WSO || (function() {
   }
 
   return {
-    init: init,
+    _init: init,
     define: define,
-    registered: false
+    _modules: modules,
+    _registered: false
   }
 })();
 
 $(function() {
-  if (!window.WSO.registered) {
-    $(document).ready(window.WSO.init);
-    $(document).on('page:load', window.WSO.init);
-    window.WSO.registered = true;
+  if (!window.WSO._registered) {
+    $(document).ready(window.WSO._init);
+    $(document).on('page:load', window.WSO._init);
+    window.WSO._registered = true;
   }
 });

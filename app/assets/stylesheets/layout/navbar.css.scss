@@ -4,7 +4,7 @@
 $header-height: 60px;
 $navbar-height: 50px;
 $small-logo-height: 26px;
-$gravatar-size: 50px;
+$gravatar-size: 45px;
 
 #nav {
   width: 100%;
@@ -21,7 +21,7 @@ $gravatar-size: 50px;
     background: $theme-dark;
     color: $white;
     padding: 10px 10px 0 10px;
-    border-bottom-right-radius: 15px;
+    border-bottom-right-radius: 10px;
     text-transform: none;
     font-size: 1em;
     overflow: hidden;
