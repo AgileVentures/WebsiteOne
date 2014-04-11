@@ -29,28 +29,10 @@ section.doc-preview {
   }
 }
 
-#doc-box {
-  height: auto;
-  width: 100%;
-  position: relative;
-}
-
-#doc-overview {
-  width: 70%;
+.doc-status-text {
   display: inline-block;
-  vertical-align: top;
-}
-
-#doc-side-panel {
-  font-size: 130%;
-  padding-top: 25px;
-  width: 20%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#doc-side-panel ul {
-  list-style: none;
+  font-size: 0.9em;
+  font-style: italic;
 }
 
 .listing {
@@ -70,12 +52,6 @@ section.doc-preview {
 .listings {
   list-style: none;
   padding-left: 0px;
-}
-
-.doc-status-text {
-  display: inline-block;
-  font-size: 0.9em;
-  font-style: italic;
 }
 
 #document_body {

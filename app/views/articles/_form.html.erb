@@ -1,3 +1,4 @@
+
 <%= form_for article do |f| %>
   <% errored = article.errors.messages[:title].present? %>
   <div class="form-group <%= 'has-error has-feedback' if errored %>">

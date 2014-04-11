@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+#hoa-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 #eventContainer {
     display: flex;
     flex-flow: row;

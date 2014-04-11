@@ -1,17 +1,18 @@
 <%= provide :title, 'Articles' %>
 
-<div id="doc-box">
-  <div id="doc-overview">
-    <h1><%= "#{params[:tag].present? ? params[:tag] : 'All'} "%>Articles</h1>
-  </div>
-  <div id="doc-side-panel">
-    <% if user_signed_in? %>
-      <ul>
-        <li><%= custom_css_btn 'new article', 'fa fa-plus', new_article_path(tag: params[:tag]) %></li>
-      </ul>
-    <% end %>
-  </div>
-</div>
+<h1><%= "#{params[:tag].present? ? params[:tag] : 'All'} "%>Articles</h1>
+<% if user_signed_in? %>
+  <ul class="user-controls">
+    <li><%= custom_css_btn 'new article', 'fa fa-plus', new_article_path(tag: params[:tag]) %></li>
+  </ul>
+<% end %>
+
+<% if @articles.count > 0 %>
+  <p>
+    Every article is written by a member of our community, to share information and knowledge that could be beneficial
+    to other members.
+  </p>
+<% end %>
 
 <div class="article-list">
   <% if @articles.count > 0 %>
