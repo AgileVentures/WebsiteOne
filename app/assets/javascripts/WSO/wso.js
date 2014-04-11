@@ -29,7 +29,6 @@ window.WSO = window.WSO || (function() {
   function init() {
     for (var i = 0; i < modules.length; i++) {
       window.WSO[modules[i]].init();
-      window.WSO[modules[i]]._firstInit = true;
     }
 
     window.WSO._newPageLoaded = false;

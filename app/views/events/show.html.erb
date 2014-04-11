@@ -17,9 +17,9 @@
         <% end %>
       </div>
       <div class="col-sm-4" style="margin-top: 10px">
-        <%= link_to 'Back', root_path, :class => 'btn btn-danger' %>
+        <%= link_to 'Back', root_path, :class => 'btn btn-default' %>
         <% if user_signed_in? %>
-          <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary' %>
+          <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-default' %>
           <div style="margin-top: 10px">
             <div id="HOA-placeholder" data-hoa-title="<%= @event.name %> - <%= current_occurrence_time(@event_schedule.first(1)) %>"></div>
           </div>

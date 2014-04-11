@@ -40,7 +40,7 @@ class EventsController < ApplicationController
       redirect_to event_path(@event)
     else
       flash[:notice] = @event.errors.full_messages.to_sentence
-      redirect_to new_event_path
+      render :new
     end
   end
 
