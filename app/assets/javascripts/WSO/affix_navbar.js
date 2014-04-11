@@ -25,6 +25,7 @@ WSO.define('AffixedNavbar', function() {
     thresholdTop = header.height();
     footer = $('#footer');
     isAffixed = affixedNav.hasClass('affix');
+    console.log('init');
 
     if (!isListening) {
       $(window).scroll(onScroll);
