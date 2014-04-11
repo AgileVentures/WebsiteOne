@@ -102,7 +102,9 @@
       </table>
     </div>
   <% else %>
-    <h4><%= user_display_name @user %> has no publicly viewable Youtube videos.</h4>
+    <div class="col-sm-12">
+      <p><%= @user.display_name %> has no publicly viewable Youtube videos.</p>
+    </div>
   <% end %>
   <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <%= render 'layouts/hire_me' %>

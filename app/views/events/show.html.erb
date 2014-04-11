@@ -37,7 +37,7 @@
       <p><strong>Hangout link</strong> (updated <%= time_ago_in_words @event.updated_at %> ago):
         <br/>
         <div id="hoa-link">
-          <%= link_to @event.url, @event.url, id: 'hoa-link' %>
+          <%= link_to @event.url, @event.url, id: 'hoa-link', target: '_blank' %>
         </div>
       </p>
     <% end %>
