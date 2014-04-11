@@ -29,6 +29,8 @@ WSO.define('EventCountdown', function() {
   }
 
   function init() {
+    clearTimeout(update);
+
     countdownClock = $('#next-event');
     if (countdownClock.length > 0) {
       eventTime = Date.parse(countdownClock.data('event-time'));
@@ -36,7 +38,6 @@ WSO.define('EventCountdown', function() {
       eventName = countdownClock.data('event-name');
       textToAppend = ' to <a href="' + eventUrl + '">' + eventName + '</a></p>';
 
-      clearTimeout(update);
       update();
     } else {
       eventName = null;
@@ -50,6 +51,6 @@ WSO.define('EventCountdown', function() {
     init: init,
     update: update,
     format: format,
-    countdownClock: countdownClock
+    getCountdownClock: function() { return countdownClock; }
   };
 });

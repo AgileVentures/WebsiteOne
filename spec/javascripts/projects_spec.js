@@ -1,4 +1,3 @@
-
 var gapi = (typeof gapi === "undefined") ? {
   hangout: {
     render: function() {
@@ -7,16 +6,21 @@ var gapi = (typeof gapi === "undefined") ? {
   }
 } : gapi;
 
-xdescribe('HOA button works with turbolinks', function () {
-  var placeholder, apiCall;
+describe('WebsiteOne Projects module', function () {
   beforeEach(function () {
+    this.apiCall = spyOn(gapi.hangout, 'render');
     setFixtures(sandbox({id: 'HOA-placeholder', 'data-hoa-title': 'HOA-title'}));
-    placeholder = $('#HOA-placeholder');
-    apiCall = spyOn(gapi.hangout, 'render');
+
+    reloadScript('projects.js');
+
     $(document).trigger('page:load');
   });
 
+  it('should define a new WSO module called "Projects"', function() {
+    expect(WSO.Projects).toBeDefined();
+  });
+
   it('scrolling causes heights to be calculated', function() {
-    expect(apiCall).toHaveBeenCalled();
+    expect(this.apiCall).toHaveBeenCalled();
   });
 });
