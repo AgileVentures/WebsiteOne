@@ -23,13 +23,13 @@
     <% end %>
     <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
     <% if @user.display_hire_me %>
-      <%= link_to 'Hire me', users_show_path(@user), {:remote => true, class: 'btn btn-primary btn-sm', 'data-toggle' => "modal", 'data-target' => '#modal-window'} %>
+      <%= link_to 'Hire me', user_path(@user), {:remote => true, class: 'btn btn-primary btn-sm', 'data-toggle' => "modal", 'data-target' => '#modal-window'} %>
     <% end %>
   </div>
   <div class="col-md-7 col-sm-7">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" style="margin-left: -25px; margin-right: -25px;">
-      <% if not @user.bio.blank? %>
+      <% if @user.bio.present? %>
         <li class="active"><a href="#bio" data-toggle="tab">Bio</a></li>
         <li><a href="#projects" data-toggle="tab">Projects</a></li>
       <% else %>
@@ -40,15 +40,15 @@
 
     <!-- Tab panes -->
     <div class="tab-content" style="margin-left: -25px; margin-right: -25px;">
-      <% if not @user.bio.blank? %>
+      <% if @user.bio.present? %>
         <div class="tab-pane fade in active" id="bio">
           <h4>About <%= @user.display_name %></h4>
 
           <p> <%= @user.bio %> </p>
         </div>
       <% end %>
-      <div class="tab-pane fade in<%= ' active' if @user.bio.blank? %>" id="projects">
-        <% unless @users_projects.empty? %>
+      <div class="tab-pane fade<%= ' in active' if @user.bio.blank? %>" id="projects">
+        <% if @users_projects.present? %>
           <div id="projects-show" class="tag-list bootstrap-tags bootstrap-3">
             <h4><%= @user.display_name %> contributes to following projects</h4>
             <% @users_projects.each do |project| %>
@@ -79,7 +79,7 @@
 </div>
 <div class="row">
   <div class="col-md-5 col-sm-5">
-    <% unless @youtube_videos.blank? %>
+    <% if @youtube_videos.present? %>
       <h4>Programming sessions</h4>
       <table class="table table-bordered table-striped table-hover table-condensed">
         <tr>
@@ -98,7 +98,7 @@
       <h4><%= user_display_name @user %> has no publicly viewable Youtube videos.</h4>
     <% end %>
   </div>
-  <% unless @youtube_videos.blank? %>
+  <% if @youtube_videos.present? %>
     <div class="col-md-7 col-sm-7">
       <td><h4 id="video_contents"><%= @youtube_videos.first[:content] %></h4></td>
       <iframe id="ytplayer" type="text/html" width="480" height="293" src="<%= video_embed_link(@youtube_videos.first) %>" frameborder="0"></iframe>

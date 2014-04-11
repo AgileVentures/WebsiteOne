@@ -26,6 +26,10 @@ Feature: As a site owner
       | Dave        |
     And I should see "5" user avatars
 
+
+
+
+
   # Bryan: Using offline stubs, it would be tedious to manually simulate all possible geo locations...
 #  Scenario: Show users location
 #    When I click "Our members"

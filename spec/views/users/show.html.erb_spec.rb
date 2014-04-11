@@ -95,7 +95,7 @@ describe "users/show.html.erb" do
     it 'should display an hire me button if it set to public' do
       @user.stub(display_hire_me: false)
       render
-      expect(rendered).not_to have_link('Hire me', href: users_show_path(@user))
+      expect(rendered).not_to have_link('Hire me', href: user_path(@user))
     end
 
   it 'should not display email if it is set to private' do
@@ -107,7 +107,7 @@ describe "users/show.html.erb" do
   it 'should display an hire me button if it set to private' do
     @user.stub(display_hire_me: false)
     render
-    expect(rendered).not_to have_link('Hire me', href: users_show_path(@user))
+    expect(rendered).not_to have_link('Hire me', href: user_path(@user))
   end
 end
 
