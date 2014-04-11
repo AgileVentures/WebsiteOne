@@ -4,7 +4,7 @@
 
     <div id="account-controls" class="pull-right">
       <% if user_signed_in? %>
-        <a href="<%= users_show_path(current_user) %>">
+        <a href="<%= user_path(current_user) %>">
           <img id="user-gravatar" src="<%= gravatar_for(current_user.email) %>" class="img-circle">
         </a>
         <div class="dropdown">
@@ -13,7 +13,7 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="account-dropdown">
-            <a href="<%= users_show_path(current_user) %>">
+            <a href="<%= user_path(current_user) %>">
               <li><i class="fa fa-user fa-custom-accounts"></i> My account</li>
             </a>
             <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
