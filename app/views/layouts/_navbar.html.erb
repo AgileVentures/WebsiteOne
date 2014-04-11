@@ -54,7 +54,7 @@
           <ul class="nav navbar-nav nav-justified">
             <li><%= link_to 'About', static_page_path('About Us'), class: (request.env['PATH_INFO'] == static_page_path('About Us')) ? 'Active' : ''%></li>
             <li><%= link_to 'Projects', projects_path, class: active_if_controller_is('projects') %></li>
-            <li><%= link_to 'Members', users_index_path, class: active_if_controller_is('users') %></li>
+            <li><%= link_to 'Members', users_path, class: active_if_controller_is('users') %></li>
             <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
             <li><%= link_to 'Events', events_path, class: active_if_controller_is('events') %></li>
           </ul>
