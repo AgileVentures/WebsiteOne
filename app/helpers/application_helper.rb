@@ -123,11 +123,8 @@ module ApplicationHelper
     end
     # Bryan: data-link-text attribute is used to find this element in the tests
     raw <<-HTML
-    <a href="#{path}"#{s} data-link-text="#{text.downcase}">
-      <div class="doc-option">
-        <div class="doc-option-icon"><i class="#{icon_class}"></i></div>
-        <div class="doc-option-text">#{text}</div>
-      </div>
+    <a href="#{path}"#{s} data-toggle="tooltip" data-placement="top" title="#{text}" class="btn btn-default btn-controls">
+      <i class="#{icon_class}"></i>
     </a>
     HTML
   end

@@ -1,13 +1,6 @@
 @import "variables";
 @import "mixins";
 
-.doc-option {
-  display: inline;
-  vertical-align: middle;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 section.doc-preview {
   padding: 5px 10px;
   height: auto;
@@ -36,28 +29,6 @@ section.doc-preview {
   }
 }
 
-.doc-option-icon {
-  display: inline-block;
-  background: #fff;
-  height: 100%;
-  vertical-align: middle;
-}
-
-.doc-option-text {
-  @include css-transition(max-width 0.4s ease 0s);
-  display: inline-block;
-  vertical-align: middle;
-  width: auto !important;
-  max-width: 0px;
-  height: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.doc-option:hover .doc-option-text {
-  max-width: 250px;
-}
-
 #doc-box {
   height: auto;
   width: 100%;
@@ -80,16 +51,6 @@ section.doc-preview {
 
 #doc-side-panel ul {
   list-style: none;
-}
-
-.user-controls {
-  list-style: none;
-  padding-left: 0;
-  font-size: 1.2em;
-
-  li {
-    display: inline-block;
-  }
 }
 
 .listing {
