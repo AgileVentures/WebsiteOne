@@ -1,5 +1,6 @@
+//= require ./wso
 
-WSO.define('CarouselCollapse', function() {
+WSO.define('AccordionCollapse', function() {
 
   var collapsedClass = 'fa-caret-down',
       expandedClass = 'fa-caret-right';

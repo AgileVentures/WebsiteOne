@@ -27,10 +27,10 @@
 }
 
 @mixin css-transform($args...) {
-  -webkit-transform: $args;
   -moz-transform: $args;
-  -ms-transform: $args;
+  -webkit-transform: $args;
   -o-transform: $args;
+  -ms-transform: $args;
   transform: $args;
 }
 

@@ -2,15 +2,6 @@ class VisitorsController < ApplicationController
   include ApplicationHelper
 
   def index
-    @projects_count = Project.count
-
-    @members_count = User.count
-    if @members_count > 0
-      @members_text = "#{@members_count} #{'Agile Venturer'.pluralize(@members_count)}"
-    else
-      @members_text = 'Nobody yet, be the first!'
-    end
-
     # disable countdown clock by setting @next_event to nil
     @event = @next_event
     @next_event = nil
