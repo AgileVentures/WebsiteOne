@@ -7,7 +7,7 @@ var gapi = (typeof gapi === "undefined") ? {
   }
 } : gapi;
 
-ddescribe('HOA button works with turbolinks', function () {
+xdescribe('HOA button works with turbolinks', function () {
   var placeholder, apiCall;
   beforeEach(function () {
     setFixtures(sandbox({id: 'HOA-placeholder', 'data-hoa-title': 'HOA-title'}));

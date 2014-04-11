@@ -18,12 +18,24 @@ window.WSO = window.WSO || (function() {
   function define(name, factory) {
     window.WSO[name] = window.WSO[name] || (function() {
       modules.push(name);
-      return factory();
+      var newModule = factory();
+
+      if (!window.WSO._newPageLoaded) {
+        newModule.init();
+      }
+
+      return newModule;
     })();
 
-    if (!window.WSO._newPageLoaded) {
-      window.WSO[name].init();
+    return window.WSO[name];
+  }
+
+  function clear() {
+    for (var i = 0; i < modules.length; i++) {
+      delete window.WSO[modules[i]];
     }
+
+    modules.length = 0;
   }
 
   function init() {
@@ -39,7 +51,8 @@ window.WSO = window.WSO || (function() {
     define: define,
     _modules: modules,
     _registered: false,
-    _newPageLoaded: newPageLoaded
+    _newPageLoaded: newPageLoaded,
+    _clear: clear
   }
 })();
 
