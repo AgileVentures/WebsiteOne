@@ -64,7 +64,7 @@ describe 'layouts/application.html.erb' do
   it 'should render links to site features' do
     render
     #TODO Y replace href with project_path helper
-    rendered.should have_link 'Our projects', :href => projects_path
+    rendered.should have_link 'Projects', :href => projects_path
   end
 
   it 'should render a footer' do
@@ -106,7 +106,7 @@ describe 'layouts/application.html.erb' do
 
     it 'should render navigation links' do
       render
-      rendered.should have_css('a#user_info', :visible => true)
+      rendered.should have_css('#user-gravatar', :visible => true)
       rendered.should have_link 'My account', :href => users_show_path(@user), :visible => false
       rendered.within('div.navbar') do |header|
         header.should_not have_link 'Log in', :href => new_user_session_path

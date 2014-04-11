@@ -1,9 +1,7 @@
-<% if user_signed_in? and current_user.following?(@project) %>
-  <script src="https://apis.google.com/js/platform.js"></script>
-<% end %>
+<% provide :title, @project.title %>
+<script src="https://apis.google.com/js/platform.js"></script>
 <%= javascript_include_tag 'projects' %>
 <%= javascript_include_tag 'users' %>
-<% provide :title, @project.title %>
 
 <div>
   <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
