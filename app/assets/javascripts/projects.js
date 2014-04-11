@@ -1,5 +1,6 @@
-$(function(){
-  function ready() {
+
+WSO.define('Projects', function() {
+  function init() {
     var hash = window.location.hash;
     hash && $(hash + 's a').tab('show');
     $('html,body').scrollTop($('body').scrollTop());
@@ -23,6 +24,7 @@ $(function(){
     }
   }
 
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
+  return {
+    init: init
+  }
 });

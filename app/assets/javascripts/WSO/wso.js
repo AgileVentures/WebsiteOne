@@ -12,28 +12,39 @@
  */
 
 window.WSO = window.WSO || (function() {
-  var modules = [];
+  var modules = [],
+      newPageLoaded = false;
 
   function define(name, factory) {
     window.WSO[name] = window.WSO[name] || (function() {
       modules.push(name);
       return factory();
     })();
+
+    if (!window.WSO._newPageLoaded) {
+      window.WSO[name].init();
+    }
   }
 
   function init() {
     for (var i = 0; i < modules.length; i++) {
       window.WSO[modules[i]].init();
+      window.WSO[modules[i]]._firstInit = true;
     }
+
+    window.WSO._newPageLoaded = false;
   }
 
   return {
     _init: init,
     define: define,
     _modules: modules,
-    _registered: false
+    _registered: false,
+    _newPageLoaded: newPageLoaded
   }
 })();
+
+window.WSO._newPageLoaded = true;
 
 $(function() {
   if (!window.WSO._registered) {
