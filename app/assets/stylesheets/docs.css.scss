@@ -9,28 +9,31 @@
 }
 
 section.doc-preview {
-  margin: 10px 0;
   padding: 5px 10px;
   height: auto;
   min-height: 20px;
   max-height: 250px;
   overflow: hidden;
   position: relative;
+
+  h3 {
+    margin: 0;
+  }
+
+  & > p {
+    margin-top: 1em;
+  }
 }
 
-.doc-preview-overview {
-  margin-right: 70px;
-  vertical-align: top;
-  display: inline-block;
-}
+.stats {
+  ul {
+    list-style: none;
+    padding-left: 0;
 
-.doc-preview-stats {
-  width: 60px;
-  padding: 5px;
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 20px;
+    li {
+      display: inline-block;
+    }
+  }
 }
 
 .doc-option-icon {
@@ -77,6 +80,16 @@ section.doc-preview {
 
 #doc-side-panel ul {
   list-style: none;
+}
+
+.user-controls {
+  list-style: none;
+  padding-left: 0;
+  font-size: 1.2em;
+
+  li {
+    display: inline-block;
+  }
 }
 
 .listing {

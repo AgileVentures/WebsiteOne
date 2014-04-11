@@ -1,16 +1,14 @@
 <section class="doc-preview">
-  <div class="doc-preview-overview">
-    <h3><%= link_to project.title, project_path(project) %></h3>
-    <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
-      <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
-      <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, users_show_path(project.user) %></div>
-    </div>
-    <p><%= project.description.truncate(250, separator: ' ') %></p>
-  </div>
-  <div class="doc-preview-stats">
-    <ul style="list-style: none; padding-left: 0;">
+  <h3><%= link_to project.title, project_path(project) %></h3>
+  <div class="stats">
+    <ul>
       <li><i class="fa fa-users"></i> <%= project.followers.count %></li>
       <li><i class="fa fa-file-text-o"></i> <%= project.documents.count %></li>
     </ul>
   </div>
+  <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
+    <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
+    <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, users_show_path(project.user) %></div>
+  </div>
+  <p><%= project.description.truncate(250, separator: ' ') %></p>
 </section>

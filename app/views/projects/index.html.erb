@@ -1,29 +1,22 @@
 <% provide :title, 'Projects' %>
 
-
-  <div id="doc-box">
-    <div id="doc-overview">
-      <h1>List of Projects</h1>
-    </div>
-    <div id="doc-side-panel">
-      <% if user_signed_in? %>
-        <ul>
-          <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
-        </ul>
-      <% end %>
-    </div>
-  </div>
-  <%= will_paginate @projects %>
-  <ul id="project-list" style="list-style: none; padding-left: 0;">
-    <% if @projects.empty? %>
-      <li>No projects were found, wait wha..?</li>
-    <% else %>
-      <% @projects.each do |project| %>
-        <li class="listing">
-          <%= render 'listing', project: project %>
-        </li>
-      <% end %>
-    <% end %>
+<h1>List of Projects</h1>
+<% if user_signed_in? %>
+  <ul class="user-controls">
+    <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
   </ul>
-  <%= will_paginate @projects %>
+<% end %>
+<%= will_paginate @projects %>
+<ul id="project-list" style="list-style: none; padding-left: 0;">
+  <% if @projects.empty? %>
+    <li>No projects were found, wait wha..?</li>
+  <% else %>
+    <% @projects.each do |project| %>
+      <li class="listing">
+        <%= render 'listing', project: project %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+<%= will_paginate @projects %>
 
