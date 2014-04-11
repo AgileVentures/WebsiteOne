@@ -19,7 +19,7 @@ Feature: As a site user
       | ruby  |
       | rails |
       | rspec |
-    When I click "Projects"
+    When I click "Projects" within the navbar
     Then I should not see:
       | title |
       | ruby  |

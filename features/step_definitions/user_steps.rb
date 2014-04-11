@@ -187,9 +187,19 @@ Then /^I should (not |)see my name$/ do |should|
   create_user
   # TODO Bryan: refactor to display_name
   if should == 'not '
-    page.should_not have_content([@user.first_name, @user.last_name].join(' '))
+    page.should_not have_content @user.display_name
   else
-    page.should have_content([@user.first_name, @user.last_name].join(' '))
+    page.should have_content @user.display_name
+  end
+end
+
+Then /^I should (not |)see my gravatar$/ do |should|
+  create_user
+  # TODO Bryan: refactor to display_name
+  if should == 'not '
+    page.should_not have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
+  else
+    page.should have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
   end
 end
 
@@ -218,7 +228,7 @@ When(/^I should see a list of all users$/) do
 end
 
 When(/^I click pulldown link "([^"]*)"$/) do |text|
-  page.find('#user_info').click
+  page.find(:css, '.dropdown .dropdown-menu.dropdown-menu-right .fa-user').click
   click_link_or_button text
 end
 
