@@ -16,10 +16,9 @@ Feature: Setting up basic page layout for site
   Scenario: Render navigation bar
     Then I should see a navigation bar
     And I should see link
+      | About Us        |
       | Projects        |
       | Members         |
-      | Log in          |
-      | Sign up         |
       | Articles        |
       | Events          |
 

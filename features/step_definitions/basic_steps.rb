@@ -224,7 +224,7 @@ end
 #end
 
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
-  find(:css, %Q{a[data-link-text="#{button.downcase}"]}).click()
+  find(:css, %Q{a[title="#{button.downcase}"]}).click()
 end
 
 Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, button|
