@@ -8,7 +8,9 @@
         <h3><%= @user.display_name %></h3>
       </div>
     </div>
-    <p><i class="fa fa-globe fa-lg"></i> <%= " #{@user.country}" if @user.country.present? %></p>
+    <% if @user.country.present? %>
+      <p><i class="fa fa-globe fa-lg"></i> <%= " #{@user.country}" if @user.country.present? %></p>
+    <% end %>
 
     <p><i class="fa fa-calendar-o fa-lg"></i> Member
       for <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>

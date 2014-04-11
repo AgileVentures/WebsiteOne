@@ -2,7 +2,7 @@
   <% if members.empty? %>
     <p style="margin-top: 20px;">No members in project <strong><%= @project.title %></strong></p>
   <% else %>
-    <h2>List of Project Members</h2>
+    <h2>Project Members</h2>
     <% members.each do |member| %>
       <li class="members-list-item">
         <a href="<%= users_show_path member %>" data-toggle="tooltip" data-placement="top" title="<%= member.display_name %>">
