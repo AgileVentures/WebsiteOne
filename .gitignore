@@ -51,3 +51,7 @@
 
 # Ignore Precompiled Assets
 public/assets/**
+
+# Plugin files
+.floo
+.flooignore
