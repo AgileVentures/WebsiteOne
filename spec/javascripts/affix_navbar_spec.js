@@ -1,5 +1,6 @@
 describe('Affixed Navbar', function () {
     var affixedNav, header, main, footer, height, scrollTop, scroll, hasClass;
+    var onScrollSpy;
     beforeEach(function () {
         setFixtures(sandbox({id: 'main_header'}));
         appendSetFixtures(sandbox({id: 'nav'}));
@@ -17,6 +18,7 @@ describe('Affixed Navbar', function () {
         scroll = spyOn($.prototype, 'scroll').and.callThrough();
 
         reloadScript('affix_navbar.js');
+        onScrollSpy = spyOn(WSO.AffixedNavbar, 'onScroll').and.callThrough();
         $(document).trigger('page:load');
     });
 
@@ -40,10 +42,8 @@ describe('Affixed Navbar', function () {
 
     describe('AffixedNavbar.onScroll', function() {
         it('scrolling causes onScroll to be triggered', function () {
-            var onScroll = spyOn(WSO.AffixedNavbar, 'onScroll');
-            WSO.AffixedNavbar.init()
             $(window).scroll();
-            expect(onScroll).toHaveBeenCalled();
+            expect(onScrollSpy).toHaveBeenCalled();
         });
     });
 
