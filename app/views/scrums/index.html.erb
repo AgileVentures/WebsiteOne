@@ -1,0 +1,13 @@
+<h1>List of previous scrums</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+  </tr>
+
+  <% @scrums.each do |scrum| %>
+      <tr>
+        <td><%= scrum.title %></td>
+      </tr>
+  <% end %>
+</table>

@@ -14,6 +14,10 @@ describe VisitorsController do
     expect(assigns(:event)).to eq event
   end
 
+
+
+
+
   describe '#send_contact_form' do
 
     before(:each) do
@@ -70,5 +74,12 @@ describe VisitorsController do
       post :send_contact_form, valid_params
       expect(ActionMailer::Base.deliveries[1].body).to include('Thank you for your feedback')
     end
+
   end
 end
+
+
+
+
+
+

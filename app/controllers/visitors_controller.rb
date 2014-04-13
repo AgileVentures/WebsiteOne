@@ -5,6 +5,9 @@ class VisitorsController < ApplicationController
     @event = Event.next_occurrence
   end
 
+
+
+
   def send_contact_form
     begin
       if params[:name].empty? or params[:message].empty?
