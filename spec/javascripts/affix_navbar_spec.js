@@ -32,12 +32,21 @@ describe('Affixed Navbar', function () {
         it('should check whether or not the navbar is already affixed', function() {
             expect(hasClass).toHaveBeenCalledWith('affix')
         });
+
+        it('should pass onScroll as a callback to scroll', function() {
+            expect(scroll).toHaveBeenCalledWith(WSO.AffixedNavbar.onScroll)
+        });
     });
-    it('scrolling causes heights to be calculated', function () {
-//        var onScroll = spyOn(WSO.AffixedNavbar, 'onScroll');
-        $(window).scroll();
-        expect(scrollTop).toHaveBeenCalled();
+
+    describe('AffixedNavbar.onScroll', function() {
+        it('scrolling causes onScroll to be triggered', function () {
+            var onScroll = spyOn(WSO.AffixedNavbar, 'onScroll');
+            WSO.AffixedNavbar.init()
+            $(window).scroll();
+            expect(onScroll).toHaveBeenCalled();
+        });
     });
+
     describe('scrolling down', function () {
         beforeEach(function () {
             scrollTop.and.callFake(function () {
@@ -56,12 +65,14 @@ describe('Affixed Navbar', function () {
             expect(header).toHaveCss({ 'margin-bottom': '55px' })
         });
     });
+
     describe('scrolling back up', function () {
         beforeEach(function () {
             affixedNav.addClass('affix');
             scrollTop.and.callFake(function () {
                 return 99
             });
+            WSO.AffixedNavbar.init();
             $(window).scroll();
         });
         it('un-affixes navbar from top', function () {
