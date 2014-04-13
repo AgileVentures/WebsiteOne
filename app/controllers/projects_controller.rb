@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+
   def create
     @project = Project.new(project_params.merge('user_id' => current_user.id))
     if @project.save

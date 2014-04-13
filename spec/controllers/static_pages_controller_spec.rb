@@ -76,6 +76,8 @@ describe StaticPagesController do
     end
   end
 
+
+
   describe 'GET mercury_saved' do
     before(:each) do
       get :mercury_saved, id: @page.slug
@@ -89,4 +91,10 @@ describe StaticPagesController do
       flash[:notice].should eq 'The page has been successfully updated.'
     end
   end
+
+
+
+
 end
+
+

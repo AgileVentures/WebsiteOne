@@ -48,4 +48,7 @@ describe "static_pages/show" do
       rendered.should have_content @page.title
     end
   end
+
+
 end
+

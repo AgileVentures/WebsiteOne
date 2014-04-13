@@ -59,4 +59,6 @@ describe StaticPage do
       expect(StaticPage.url_for_me('does not exist')).to eq 'does-not-exist'
     end
   end
+
+
 end
