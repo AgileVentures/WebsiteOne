@@ -1,4 +1,6 @@
 class YoutubeApi
+
+  #TODO: Refactor!
   def initialize(*args)
     if args.length == 1
       @user = args[0]
@@ -70,19 +72,18 @@ class YoutubeApi
   end
 
   def project_tags(project)
-    tags = project.tag_list
-    tags << project.title
-    tags.map!(&:downcase)
-    tags.uniq!
-    tags
+    project.tag_list.
+        push(project.title).
+        map(&:downcase).
+        uniq
   end
 
   def members_tags(members)
     return [] if members.blank?
-    members_tags = members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.compact
-    members_tags.map!(&:downcase)
-    members_tags.uniq!
-    members_tags
+    members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.
+        compact.
+        map(&:downcase).
+        uniq
   end
 
   def escape_query_params(params)
