@@ -89,7 +89,7 @@ class ProjectsController < ApplicationController
         @projectpv = PivotalService.one_project(pivotaltracker_id, Scorer::Project.fields)
         @iteration = PivotalService.iterations(pivotaltracker_id, 'current')
         @stories = @iteration.stories
-      rescue Exception => error
+      rescue => error
         # TODO deal with simple not found errors, should not send for all exceptions
         ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'an error occurred in Pivotal Tracker' })
         @stories = nil
