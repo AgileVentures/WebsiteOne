@@ -20,7 +20,7 @@ describe YoutubeApi do
     request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
 
     expect(api).to receive(:get_response).with(request_string)
-    api.new(user).user_videos
+    api.user_videos
   end
 
   it 'retrieves project videos from youtube filtering by tags and members' do
@@ -31,7 +31,7 @@ describe YoutubeApi do
     request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")}
 
     expect(api).to receive(:get_response).with(request_string)
-    api.new(project, members).project_videos
+    api.project_videos
   end
 
   it 'parses youtube response into an array of hashes' do
