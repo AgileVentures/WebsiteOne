@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
       'Anonymous'
     elsif name =~ /^\s*$/
       self.email_first_part
-    else 
+    else
       name
     end
   end
