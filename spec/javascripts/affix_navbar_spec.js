@@ -1,4 +1,4 @@
-describe('Affixed Navbar', function () {
+xdescribe('Affixed Navbar', function () {
     var affixedNav, header, main, footer, height, scrollTop, scroll, hasClass;
     var onScrollSpy;
     beforeEach(function () {

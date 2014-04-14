@@ -14,14 +14,44 @@ describe('Event Countdown', function() {
       'data-event-url': url,
       'data-event-name': name
     }));
+    this.countdownClock = $('#next-event');
+    this.data = spyOn(jQuery, 'data').and.callThrough();
+
 
     reloadScript('event_countdown.js');
-
+    this.update = spyOn(WSO.EventCountdown, 'update').and.callThrough();
+    this.clearTimeout = spyOn(window, 'clearTimeout').and.callThrough();
+    this.dateParse = spyOn(Date, 'parse').and.callThrough();
     $(document).trigger('page:load');
   });
 
   it('should define a new WSO module called "EventCountdown"', function() {
     expect(WSO.EventCountdown).toBeDefined();
+  });
+
+  describe('._init', function() {
+      it('should clear any current instance of setTimeout', function() {
+          expect(this.clearTimeout).toHaveBeenCalledWith(this.update)
+      });
+
+      describe('when the clock is present', function() {
+          it('parses the event time from the html', function() {
+              expect(this.data).toHaveBeenCalledWith('event-time');
+              expect(this.dateParse).toHaveBeenCalledWith(this.countdownClock.data)
+          });
+
+          it('parses the event url from the html', function() {
+              expect(this.data).toHaveBeenCalledWith('event-url');
+          });
+
+          it('parses the event name from the html', function() {
+              expect(this.data).toHaveBeenCalledWith('event-name');
+          });
+
+          it('calls update', function() {
+              expect(this.update).toHaveBeenCalled()
+          });
+      });
   });
 
   describe('the Countdown Clock', function() {

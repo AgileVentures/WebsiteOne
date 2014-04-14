@@ -6,7 +6,7 @@ var gapi = (typeof gapi === "undefined") ? {
   }
 } : gapi;
 
-describe('WebsiteOne Projects module', function () {
+xdescribe('WebsiteOne Projects module', function () {
   beforeEach(function () {
     this.apiCall = spyOn(gapi.hangout, 'render');
     setFixtures(sandbox({id: 'HOA-placeholder', 'data-hoa-title': 'HOA-title'}));
