@@ -62,7 +62,7 @@ describe UsersController do
               published: '01/01/2015'
           }
       ]
-      YoutubeHelper.stub(user_videos: @youtube_videos)
+      YoutubeApi.any_instance.stub(user_videos: @youtube_videos)
     end
 
     it 'assigns a user instance' do

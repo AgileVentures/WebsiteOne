@@ -36,6 +36,20 @@ class YoutubeApi
     filter_response(response, project_tags, members_tags) if response
   end
 
+  def parse_response(response)
+    begin
+      json = JSON.parse(response)
+
+      videos = json['feed']['entry']
+      return if videos.nil?
+
+      videos.map { |hash| beautify_youtube_response(hash) }
+    rescue JSON::JSONError
+      Rails.logger.warn('Attempted to decode invalid JSON')
+      nil
+    end
+  end
+
   private
 
   def followed_project_tags(user)
@@ -90,20 +104,6 @@ class YoutubeApi
       response = parse_response(open(URI.escape(request)).read)
       array.concat(response) if response
       array.sort_by! { |video| video[:published] }.reverse! unless array.empty?
-    end
-  end
-
-  def parse_response(response)
-    begin
-      json = JSON.parse(response)
-
-      videos = json['feed']['entry']
-      return if videos.nil?
-
-      videos.map { |hash| beautify_youtube_response(hash) }
-    rescue JSON::JSONError
-      Rails.logger.warn('Attempted to decode invalid JSON')
-      nil
     end
   end
 
