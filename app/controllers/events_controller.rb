@@ -25,15 +25,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    if params[:event][:event_date].empty?
-      params[:event][:event_date] = Date.today
-    end
-    if params[:event][:start_time].empty?
-      params[:event][:start_time] = Time.now
-    end
-    if params[:event][:end_time].empty?
-      params[:event][:end_time] = Time.now + 30.minutes
-    end
+    set_event_times
     @event = Event.new(event_params)
     if @event.save
       flash[:notice] = 'Event Created'
@@ -74,6 +66,17 @@ class EventsController < ApplicationController
     @event = Event.friendly.find(params[:id])
   end
 
+  def set_event_times
+    if params[:event][:event_date].empty?
+      params[:event][:event_date] = Date.today
+    end
+    if params[:event][:start_time].empty?
+      params[:event][:start_time] = Time.now
+    end
+    if params[:event][:end_time].empty?
+      params[:event][:end_time] = Time.now + 30.minutes
+    end
+  end
 
   def event_params
     params.require(:event).permit!

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404100037) do
+ActiveRecord::Schema.define(version: 20140414115046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140404100037) do
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
   add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
+  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140404100037) do
     t.string   "slug"
   end
 
+  add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree
   add_index "documents", ["slug", "user_id"], name: "index_documents_on_slug_and_user_id", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
@@ -124,6 +126,8 @@ ActiveRecord::Schema.define(version: 20140404100037) do
 
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
+  add_index "taggings", ["tagger_type"], name: "index_taggings_on_tagger_type", using: :btree
 
   create_table "tags", force: true do |t|
     t.string "name"
@@ -148,7 +152,6 @@ ActiveRecord::Schema.define(version: 20140404100037) do
     t.string   "youtube_id"
     t.string   "slug"
     t.boolean  "display_profile",        default: true
-    t.boolean  "display_resume"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"
