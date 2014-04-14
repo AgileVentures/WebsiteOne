@@ -4,6 +4,20 @@
   <tr>
     <th>Title</th>
   </tr>
+  <!-- Single button -->
+  <div class="btn-group" display="inline-block">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
+      Search Scrums <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#">US-Atlantic Scrum</a></li>
+      <li><a href="#">Europe Scrum</a></li>
+      <li><a href="#">US-Pacific Scrum</a></li>
+      <li><a href="#">Asia Scrum</a></li>
+      <li class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div>
 
   <% @scrums.each do |scrum| %>
       <tr>
