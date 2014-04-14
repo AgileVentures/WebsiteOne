@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  include YoutubeHelper
-
   def index
     @users = User.where('display_profile = ?', true).order(:created_at)
   end
@@ -32,7 +30,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'User has set his profile to private'
       redirect_to root_path
     else
-      @youtube_videos  = YoutubeHelper.user_videos(@user) if @user
+      @youtube_videos  = YoutubeApi.new(@user).user_videos if @user
     end
   end
 end
