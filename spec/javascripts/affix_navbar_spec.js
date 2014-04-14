@@ -35,7 +35,7 @@ describe('Affixed Navbar', function () {
             expect(hasClass).toHaveBeenCalledWith('affix')
         });
 
-        it('should pass onScroll as a callback to scroll', function() {
+        it('should register onScroll as a callback for $.prototype.scroll', function() {
             expect(scroll).toHaveBeenCalledWith(WSO.AffixedNavbar.onScroll)
         });
     });
@@ -45,41 +45,46 @@ describe('Affixed Navbar', function () {
             $(window).scroll();
             expect(onScrollSpy).toHaveBeenCalled();
         });
-    });
 
-    describe('scrolling down', function () {
-        beforeEach(function () {
-            scrollTop.and.callFake(function () {
-                return 150
-            });
-            var parseInt = spyOn(window, 'parseInt').and.callFake(function () {
-                return 5
-            });
+        it('calculates the vertical position of the window', function() {
             $(window).scroll();
+            expect(scrollTop).toHaveBeenCalled()
         });
-        it('affixes navbar to top', function () {
-            expect(affixedNav).toHaveClass('affix');
-        });
-        it('pads the margin bottom of the header appropriately', function () {
-            expect(parseInt).toHaveBeenCalled();
-            expect(header).toHaveCss({ 'margin-bottom': '55px' })
-        });
-    });
 
-    describe('scrolling back up', function () {
-        beforeEach(function () {
-            affixedNav.addClass('affix');
-            scrollTop.and.callFake(function () {
-                return 99
+        describe('scrolling down', function () {
+            beforeEach(function () {
+                scrollTop.and.callFake(function () {
+                    return 150
+                });
+                var parseInt = spyOn(window, 'parseInt').and.callFake(function () {
+                    return 5
+                });
+                $(window).scroll();
             });
-            WSO.AffixedNavbar.init();
-            $(window).scroll();
+            it('affixes navbar to top', function () {
+                expect(affixedNav).toHaveClass('affix');
+            });
+            it('pads the margin bottom of the header appropriately', function () {
+                expect(parseInt).toHaveBeenCalled();
+                expect(header).toHaveCss({ 'margin-bottom': '55px' })
+            });
         });
-        it('un-affixes navbar from top', function () {
-            expect(affixedNav).not.toHaveClass('affix');
-        });
-        it('sets the margin-bottom of the header back to zero', function () {
-            expect(header).toHaveCss({ 'margin-bottom': '0px' })
+
+        describe('scrolling back up', function () {
+            beforeEach(function () {
+                affixedNav.addClass('affix');
+                WSO.AffixedNavbar.init();
+                scrollTop.and.callFake(function () {
+                    return 49
+                });
+                $(window).scroll();
+            });
+            it('un-affixes navbar from top', function () {
+                expect(affixedNav).not.toHaveClass('affix');
+            });
+            it('sets the margin-bottom of the header back to zero', function () {
+                expect(header).toHaveCss({ 'margin-bottom': '0px' })
+            });
         });
     });
 });

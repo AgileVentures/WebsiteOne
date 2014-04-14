@@ -8,6 +8,7 @@ WSO.define('AffixedNavbar', function() {
 
     this.onScroll = function() {
       var scrollTop = $(this).scrollTop();
+        console.log([scrollTop, thresholdTop, isAffixed]);
       if (scrollTop > thresholdTop && !isAffixed) {
         affixedNav.addClass('affix');
         header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
@@ -18,7 +19,7 @@ WSO.define('AffixedNavbar', function() {
         header.css({ 'margin-bottom': 0 });
         isAffixed = false;
       }
-    }
+    };
 
     this.init = function() {
       affixedNav = $('#nav');
@@ -36,5 +37,5 @@ WSO.define('AffixedNavbar', function() {
     }
   }
 
-  return new AffixedNavbarInstance();
+  return new AffixedNavbar();
 });
