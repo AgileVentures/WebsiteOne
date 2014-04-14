@@ -11,16 +11,11 @@ class YoutubeApi
   end
 
   def user_videos
-    if user_id = @user.youtube_id
+    if @user.youtube_id
       tags = followed_project_tags(@user)
       return [] if tags.empty?
 
-      request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
-      request += '&fields=entry(author(name),id,published,title,content,link)'
-
-      #tags_filter = escape_query_params(tags)
-      #request += '&q=' + tags_filter.join('|')
-
+      request = build_request(:user)
       response = get_response(request)
       filter_response(response, tags, [YoutubeHelper.youtube_user_name(@user)]) if response
     end
@@ -31,7 +26,7 @@ class YoutubeApi
     return [] if members_tags.blank?
     project_tags = project_tags(@project)
 
-    request = build_request(escape_query_params(members_tags), escape_query_params(project_tags))
+    request = build_request(:project, escape_query_params(members_tags), escape_query_params(project_tags))
     response = get_response(request)
     filter_response(response, project_tags, members_tags) if response
   end
@@ -63,13 +58,15 @@ class YoutubeApi
     end
   end
 
-  def build_request(members_filter, project_tags_filter)
-    request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50'
-    request += '&orderby=published'
+  def build_request(type, members_filter=nil, project_tags_filter=nil)
+    call_type = (type == :project ? 'videos' : "users/#{@user.youtube_id}/uploads")
+    request = "http://gdata.youtube.com/feeds/api/#{call_type}?alt=json&max-results=50"
+    if type == :project
+      request += '&orderby=published'
+      request += '&q=(' + project_tags_filter.join('|') + ')'
+      request += '/(' + members_filter.join('|') + ')'
+    end
     request += '&fields=entry(author(name),id,published,title,content,link)'
-    #request += '&fields=entry[' + filter.join(' or ') + ']'
-    request += '&q=(' + project_tags_filter.join('|') + ')'
-    request += '/(' + members_filter.join('|') + ')'
   end
 
   def project_tags(project)

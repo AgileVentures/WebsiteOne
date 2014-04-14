@@ -28,7 +28,7 @@ describe YoutubeApi do
     members = [double(User, youtube_user_name: 'John Doe'), double(User, youtube_user_name: 'Ivan Petrov')]
     api = YoutubeApi.new(project, members)
 
-    request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")}
+    request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")&fields=entry(author(name),id,published,title,content,link)}
 
     expect(api).to receive(:get_response).with(request_string)
     api.project_videos
