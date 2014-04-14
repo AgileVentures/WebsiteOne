@@ -55,6 +55,7 @@ describe ProjectsController do
       dummy = Object.new
       dummy.stub(stories: "stories")
       PivotalService.stub(iterations: dummy)
+      @project.stub(pivotaltracker_url?: true)
     end
 
     it 'assigns the requested project as @project' do

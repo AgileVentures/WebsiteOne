@@ -83,7 +83,7 @@ class ProjectsController < ApplicationController
 
   def get_current_stories
     PivotalService.set_token('1e90ef53f12fc327d3b5d8ee007cce39')
-    if @project.pivotaltracker_url.present?
+    if @project.pivotaltracker_url?
       pivotaltracker_id = @project.pivotaltracker_url.split('/')[-1]
       begin
         @projectpv = PivotalService.one_project(pivotaltracker_id, Scorer::Project.fields)

@@ -8,11 +8,11 @@
         <h3><%= @user.display_name %></h3>
       </div>
     </div>
-    <p><i class="fa fa-globe fa-lg"></i><%= " #{@user.country}" if @user.country.present? %></p>
+    <p><i class="fa fa-globe fa-lg"></i><%= " #{@user.country}" if @user.country? %></p>
 
     <p><i class="fa fa-calendar-o fa-lg"></i> Member
       for <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
-    <% if @user.github_profile_url.present? %>
+    <% if @user.github_profile_url? %>
       <p><i class="fa fa-github-alt fa-lg"></i> GitHub
         profile <%= link_to "#{@user.github_profile_url.split('/').last}", @user.github_profile_url %></p>
     <% else %>
@@ -29,7 +29,7 @@
   <div class="col-md-7 col-sm-7">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" style="margin-left: -25px; margin-right: -25px;">
-      <% if @user.bio.present? %>
+      <% if @user.bio? %>
         <li class="active"><a href="#bio" data-toggle="tab">Bio</a></li>
         <li><a href="#projects" data-toggle="tab">Projects</a></li>
       <% else %>
@@ -40,14 +40,14 @@
 
     <!-- Tab panes -->
     <div class="tab-content" style="margin-left: -25px; margin-right: -25px;">
-      <% if @user.bio.present? %>
+      <% if @user.bio? %>
         <div class="tab-pane fade in active" id="bio">
           <h4>About <%= @user.display_name %></h4>
 
           <p> <%= @user.bio %> </p>
         </div>
       <% end %>
-      <div class="tab-pane fade<%= ' in active' if @user.bio.blank? %>" id="projects">
+      <div class="tab-pane fade<%= ' in active' if @user.bio? %>" id="projects">
         <% if @users_projects.present? %>
           <div id="projects-show" class="tag-list bootstrap-tags bootstrap-3">
             <h4><%= @user.display_name %> contributes to following projects</h4>

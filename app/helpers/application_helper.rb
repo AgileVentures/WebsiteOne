@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def current_user_details
     if current_user.present?
-      if current_user.first_name.present?
+      if current_user.first_name?
         ([current_user.first_name, current_user.last_name].join(' '))
       else
         (current_user.email).split('@').first
@@ -22,7 +22,7 @@ module ApplicationHelper
   def user_details(id)
     user = User.find_by_id(id)
     if user.present?
-      if user.first_name.present?
+      if user.first_name?
         ([user.first_name, user.last_name].join(' '))
       else
         (user.email).split('@').first

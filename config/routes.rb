@@ -24,7 +24,7 @@ WebsiteOne::Application.routes.draw do
 
   post 'preview/article', to: 'articles#preview',:format => false
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
-  resources :articles, :format => false
+  resources :articles, :except => [:destroy], :format => false
 
   get 'projects/:project_id/:id', to: 'documents#show',:format => false
   get '/auth/:provider/callback' => 'authentications#create', :format => false

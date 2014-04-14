@@ -18,6 +18,10 @@ describe "users/show.html.erb" do
                              github_profile_url: 'http://github.com/Eric',
                              bio: 'Lonesome Cowboy'
                       )
+    @user.stub(country?: true,
+               github_profile_url?: true,
+               bio?: true)
+
 		assign :user, @user
     assign :users_projects, @projects
     @youtube_videos = [
@@ -123,19 +127,19 @@ end
   end
 
   it 'renders no bio field' do
-    @user.stub(bio: nil)
+    @user.stub(bio?: false)
     assign :bio, @user.bio
     render
     expect(rendered).not_to have_text('Bio')
   end
 
-  it 'displays GitHub profile if it is linked' do
-    @user.stub(github_profile_url: nil)
+  it 'displays GitHub profile is not linked if it is not linked' do
+    @user.stub(github_profile_url?: false)
     render
     expect(rendered).to have_text('GitHub profile not linked')
   end
 
-  it 'displays GitHub profile is not linked if it is not linked' do
+  it 'displays GitHub profile if it is linked' do
     render
     expect(rendered).to have_link('Eric', href: 'http://github.com/Eric')
   end
