@@ -7,6 +7,12 @@ var gapi = (typeof gapi === "undefined") ? {
 } : gapi;
 
 describe('WebsiteOne Projects module', function () {
+
+  it('should create a WSO module called "Projects"', function() {
+    reloadScript('projects.js');
+    expect(window.WSO.Projects).toBeDefined();
+  });
+
   describe('using in-page links', function() {
     var tabCall, windowHashCall;
 
