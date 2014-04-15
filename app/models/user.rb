@@ -28,8 +28,6 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :articles
 
-
-
   acts_as_follower
 
   def apply_omniauth(omniauth)

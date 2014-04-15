@@ -10,9 +10,9 @@ class Event < ActiveRecord::Base
   validate :from_must_come_before_to
   attr_accessor :next_occurrence_time
 
-  RepeatsOptions = %w[never weekly]
-  RepeatEndsOptions = %w[never on]
-  DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
+  REPEATS_OPTIONS = %w[never weekly]
+  REPEAT_ENDS_OPTIONS = %w[never on]
+  DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
 
   def self.next_occurrence
     if Event.exists?
@@ -29,11 +29,11 @@ class Event < ActiveRecord::Base
 
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
-    self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DaysOfTheWeek).map { |r| 2**DaysOfTheWeek.index(r) }.inject(0, :+)
+    self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DAYS_OF_THE_WEEK).map { |r| 2**DAYS_OF_THE_WEEK.index(r) }.inject(0, :+)
   end
   def repeats_weekly_each_days_of_the_week
-    DaysOfTheWeek.reject do |r|
-      ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DaysOfTheWeek.index(r)).zero?
+    DAYS_OF_THE_WEEK.reject do |r|
+      ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DAYS_OF_THE_WEEK.index(r)).zero?
     end
   end
 
