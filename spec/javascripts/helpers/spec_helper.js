@@ -7,7 +7,7 @@ beforeEach(function() {
 
 function reloadScript(name) {
   jQuery.ajax({
-    url: $('script[src*="' + name + '"]').attr('src'),
+    url: $('script[src*="/' + name + '"]').attr('src'),
     success: function(src) { eval(src); },
     async: false
   });

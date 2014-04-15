@@ -1,4 +1,3 @@
-
 WSO.define('Projects', function() {
   return {
     init: function() {

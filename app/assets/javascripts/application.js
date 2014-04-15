@@ -26,10 +26,3 @@
 
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 
-$(function() {
-  $(document).on('page:fetch',   NProgress.start);
-  $(document).on('page:change',  NProgress.done);
-  $(document).on('page:restore', NProgress.remove);
-});
-
-
