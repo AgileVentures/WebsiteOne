@@ -1,18 +1,24 @@
-development: &dev
+production: &prod
   adapter: postgresql
   encoding: unicode
-  database: websiteone_development
+  database: websiteone_production
   pool: 5
   username: postgres
   password:
 
+development: &dev
+  <<: *prod
+  database: websiteone_development
+
+# development: &dev
+#   adapter: sqlite3
+#   database: db/development.sqlite3
+#   pool: 5
+#   timeout: 5000
+
 test: &test
   <<: *dev
   database: websiteone_test
-
-production:
-  <<: *dev
-  database: websiteone_production
 
 cucumber:
   <<: *test
