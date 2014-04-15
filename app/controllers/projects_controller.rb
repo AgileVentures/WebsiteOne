@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
       flash.now[:alert] = 'Project was not saved. Please check the input.'
-      render action: 'new'
+      render 'new'
     end
   end
 

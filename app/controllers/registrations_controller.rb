@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
   def update
     if params[:preview]
       resource.display_email = params[:user][:display_email] == '1'
-      render :action => 'edit'
+      render 'edit'
     else
       @user = User.friendly.find(current_user.friendly_id)
       @user.skill_list = params[:user].delete "skill_list" # Extracts skills from params
