@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe ConsoleMailer do
   describe "#newsletter" do
@@ -11,9 +11,9 @@ describe ConsoleMailer do
         subject: 'specific subject'
       } 
     }
+    
     let(:mail) { ConsoleMailer.newsletter(@user, valid_params) }
     
-
     it 'renders the headers' do
       mail.subject.should eq('specific subject')
       mail.to.should eq([@user.email])
