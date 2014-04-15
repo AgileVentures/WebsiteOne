@@ -1,6 +1,7 @@
 describe('Affixed Navbar', function () {
     var affixedNav, header, main, footer, height, scrollTop, scroll, hasClass;
     var onScrollSpy;
+
     beforeEach(function () {
         setFixtures(sandbox({id: 'main_header'}));
         appendSetFixtures(sandbox({id: 'nav'}));
@@ -50,10 +51,10 @@ describe('Affixed Navbar', function () {
     describe('scrolling down', function () {
         beforeEach(function () {
             scrollTop.and.callFake(function () {
-                return 150
+                return 150;
             });
             var parseInt = spyOn(window, 'parseInt').and.callFake(function () {
-                return 5
+                return 5;
             });
             $(window).scroll();
         });
@@ -70,14 +71,16 @@ describe('Affixed Navbar', function () {
         beforeEach(function () {
             affixedNav.addClass('affix');
             scrollTop.and.callFake(function () {
-                return 99
+                return 18;
             });
             WSO.AffixedNavbar.init();
             $(window).scroll();
         });
+
         it('un-affixes navbar from top', function () {
             expect(affixedNav).not.toHaveClass('affix');
         });
+
         it('sets the margin-bottom of the header back to zero', function () {
             expect(header).toHaveCss({ 'margin-bottom': '0px' })
         });

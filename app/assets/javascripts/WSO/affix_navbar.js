@@ -36,5 +36,5 @@ WSO.define('AffixedNavbar', function() {
     }
   }
 
-  return new AffixedNavbarInstance();
+  return new AffixedNavbar();
 });
