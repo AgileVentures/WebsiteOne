@@ -4,6 +4,7 @@
 $header-height: 60px;
 $navbar-height: 50px;
 $small-logo-height: 26px;
+$small-logo-width: 170px;
 $gravatar-size: 45px;
 
 #nav {
@@ -45,8 +46,8 @@ $gravatar-size: 45px;
     height: $small-logo-height;
 
     img {
-      height: 0;
-      @include css-transition(height 0.3s ease);
+      @include css-transition(all 0.3s ease);
+      @include css-transform(scale(0));
     }
   }
 
@@ -56,7 +57,7 @@ $gravatar-size: 45px;
     z-index: 1000;
 
     #affix-nav-brand img {
-      height: $small-logo-height;
+      @include css-transform(scale(1));
     }
 
     #next-event {
