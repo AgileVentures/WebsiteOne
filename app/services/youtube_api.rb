@@ -17,7 +17,7 @@ class YoutubeApi
       tags = followed_project_tags(@user)
       return [] if tags.empty?
 
-      request = build_request(:user)
+      request = build_request(:user, @user)
       response = get_response(request)
       filter_response(response, tags, [YoutubeHelper.youtube_user_name(@user)]) if response
     end
@@ -60,13 +60,13 @@ class YoutubeApi
     end
   end
 
-  def build_request(type, members_filter=nil, project_tags_filter=nil)
-    call_type = (type == :project ? 'videos' : "users/#{@user.youtube_id}/uploads")
+  def build_request(type, *args) # members_filter=nil, project_tags_filter=nil
+    call_type = (type == :project ? 'videos' : "users/#{args[0].youtube_id}/uploads")
     request = "http://gdata.youtube.com/feeds/api/#{call_type}?alt=json&max-results=50"
     if type == :project
       request += '&orderby=published'
-      request += '&q=(' + project_tags_filter.join('|') + ')'
-      request += '/(' + members_filter.join('|') + ')'
+      request += '&q=(' + args[1].join('|') + ')'
+      request += '/(' + args[0].join('|') + ')'
     end
     request += '&fields=entry(author(name),id,published,title,content,link)'
   end
