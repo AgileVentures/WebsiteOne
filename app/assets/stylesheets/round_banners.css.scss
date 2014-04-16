@@ -54,7 +54,7 @@
   border-radius: 100%;
   -webkit-box-shadow: 0 0 10px 0 #dbdbdb;
   box-shadow: 0 0 10px 0 #dbdbdb;
-  @include css-transition(all 0.3s ease-in-out 0s);
+  @include css-transition(all 0.3s ease-in-out);
 }
 
 /* =====[ MAIN LIST ]============================================================================== */
