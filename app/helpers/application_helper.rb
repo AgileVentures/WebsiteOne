@@ -22,34 +22,11 @@ module ApplicationHelper
   def user_details(id)
     user = User.find_by_id(id)
     if user.present?
-      if user.first_name.present?
-        ([user.first_name, user.last_name].join(' '))
-      else
-        (user.email).split('@').first
-      end
+      user.display_name
     else
       'Anonymous'
     end
   end
-
-  #def user_details(id)
-  #  user = User.find_by_id(id)
-  #  if user.present?
-  #    first = user.try(:first_name)
-  #    last = user.try(:last_name)
-  #    str = first.to_s + last.to_s
-  #    if first && last
-  #      [first, last].join(' ')
-  #    elsif !first && !last
-  #      # User has not filled in their profile
-  #      user.email.split('@').first
-  #    else
-  #      str
-  #    end
-  #  else
-  #    'Anonymous'
-  #  end
-  #end
 
   def resource_name
     :user

@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_next_event
 
+  include ApplicationHelper
   include CustomErrors
 
   protected
