@@ -51,4 +51,14 @@ describe YoutubeApi do
     titles = videos.map { |video| video[:title] }
     expect(titles.index('WebsiteOne - Pairing session - refactoring authentication controller')).to be < titles.index('Autograders - Pairing session')
   end
+
+  it 'logs json error and returns nil on parsing invalid json' do
+    JSON.stub(:parse).and_raise(JSON::JSONError)
+    Rails.logger.should_receive(:warn).with('Attempted to decode invalid JSON')
+    YoutubeApi.new(double(User)).parse_response('').should be_nil
+  end
+
+  it 'raises ArgumentError if initialized with invalid arguments' do
+    expect { YoutubeApi.new("invalid", "invalid", "invalid") }.to raise_error ArgumentError
+  end
 end
