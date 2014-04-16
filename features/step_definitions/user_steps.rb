@@ -281,6 +281,18 @@ When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
   end
 end
 
+
+When(/^I set ([^"]*) to be (true|false)?$/) do |value, option|
+  value = value.underscore
+  if option == 'true'
+    check("user_#{value}")
+  else
+    uncheck "user_#{value}"
+    find("input#user_#{value}").should_not be_checked
+  end
+end
+
+
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
   @user.update_attributes("display_#{value.underscore}".to_sym => (option == 'public'))
 end
@@ -353,3 +365,6 @@ Then(/^I should see the user's bio$/) do
 end
 
 
+When(/^My email receivings is set to false$/) do
+  @user.update_attribute(:receive_mailings, false)
+end
