@@ -8,7 +8,6 @@ WSO.define('AffixedNavbar', function() {
 
     this.onScroll = function() {
       var scrollTop = $(this).scrollTop();
-        console.log([scrollTop, thresholdTop, isAffixed]);
       if (scrollTop > thresholdTop && !isAffixed) {
         affixedNav.addClass('affix');
         header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
