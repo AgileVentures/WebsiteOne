@@ -55,6 +55,16 @@ module ApplicationHelper
     :user
   end
 
+  def static_page_path(page)
+    "/#{StaticPage.url_for_me(page)}"
+  end
+
+  def is_in_static_page?(static_page_name)
+    return params[:controller] == 'static_pages' &&
+      params[:action] == 'show' &&
+      params[:id] == StaticPage.url_for_me(static_page_name)
+  end
+
   def resource
     @resource ||= User.new
   end
