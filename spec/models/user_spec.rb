@@ -243,4 +243,16 @@ describe User do
     end
 
   end
+
+  describe 'email receival' do
+    it 'should have a receive_mailings method' do
+      user = User.new
+      user.should respond_to :receive_mailings
+    end
+
+    it 'should be set true by default' do
+      user = User.create(@attr)
+      user.receive_mailings.should be_true
+    end
+  end
 end
