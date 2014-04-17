@@ -1,4 +1,4 @@
-<%- if @stories %>
+<%- unless @stories.empty? %>
   <h2>Current</h2>
   <table class="table table-bordered table-striped table-hover table-condensed">
     <tr>

@@ -8,88 +8,85 @@
 <div class="col-lg-8 col-lg-offset-2">
   <%= form_for @event, html: {:class => 'form-vertical', :id => 'event-form'} do |f| %>
 
-      <div class='form-group'>
-        <%= f.label :name, :class => 'control-label' %>
-        <%= f.text_field :name, :class => 'form-control' %>
-      </div>
-      <div class='form-group'>
-        <%= f.label :category, :class => 'control-label' %>
-        <%= f.select :category, %w( Scrum PairProgramming ), {}, :class => 'form-control' %>
-      </div>
+    <%= awesome_text_field f, :name %>
 
-      <div class='form-group'>
-        <%= f.label :description %>
-        <%= f.text_area :description, :class => 'form-control', 'rows' => 10 %>
-      </div>
+    <div class='form-group'>
+      <%= f.label :category, :class => 'control-label' %>
+      <%= f.select :category, %w( Scrum PairProgramming ), {}, :class => 'form-control' %>
+    </div>
 
+    <%= awesome_text_area f, :description, rows: 10 %>
 
-      <div class="form-group event_date">
-        <%= f.label :event_date, :class => 'control-label' %>
-        <% if params[:event_date] %>
-            <%= f.text_field :event_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker', :value => "#{start_date}"} %>
-        <% else %>
-            <%= f.text_field :event_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker'} %>
-        <% end %>
-      </div>
-      <div class="form-group event_time">
-        <%= f.label :start_time, ["#{:start_time}".titleize, 'in UTC'].join(' '), :class => 'control-label' %>
-        <% if params[:start_date] %>
-            <%= f.text_field :start_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker', :value => "#{start_time}"} %>
-        <% else %>
-            <%= f.text_field :start_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} %>
-        <% end %>
-      </div>
-      <div class="form-group event_time" style='display: block;'>
-        <%= f.label :end_time, ["#{:end_time}".titleize, 'in UTC'].join(' '), :class => 'control-label'%>
-        <% if params[:start_date] %>
-            <%= f.text_field :end_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker', :value => "#{end_time}"} %>
+    <div class="form-group event_date">
+      <%= f.label :event_date, :class => 'control-label' %>
+      <% if params[:event_date] %>
+        <%= f.text_field :event_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker', :value => "#{start_date}"} %>
+      <% else %>
+        <%= f.text_field :event_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker'} %>
+      <% end %>
+    </div>
 
-        <% else %>
-            <%= f.text_field :end_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} %>
-        <% end %>
+    <div class="form-group event_time">
+      <%= f.label :start_time, ["#{:start_time}".titleize, 'in UTC'].join(' '), :class => 'control-label' %>
+      <% if params[:start_date] %>
+        <%= f.text_field :start_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker', :value => "#{start_time}"} %>
+      <% else %>
+        <%= f.text_field :start_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} %>
+      <% end %>
+    </div>
 
-      </div>
-      <div class="form-group">
-        <%= f.label :repeats, :class => 'control-label' %>
-        <%= f.select :repeats, Event::RepeatsOptions, {}, :default => 'never', :class => 'form-control' %>
-        <%= render partial: 'repeats_weekly_options', locals: {f: f} %>
-      </div>
+    <div class="form-group event_time" style='display: block;'>
+      <%= f.label :end_time, ["#{:end_time}".titleize, 'in UTC'].join(' '), :class => 'control-label'%>
+      <% if params[:start_date] %>
+        <%= f.text_field :end_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker', :value => "#{end_time}"} %>
 
-      <div class="form-group event_option" id="repeats_options">
-        <%= f.label :repeat_ends, :class => 'control-label' %>
-        <%= f.select :repeat_ends, Event::RepeatEndsOptions, {}, :class => 'form-control' %>
-      </div>
+      <% else %>
+        <%= f.text_field :end_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} %>
+      <% end %>
 
-      <div class="form-group">
-        <div id="event_repeat_ends_on">
-          <%= f.label :repeat_ends_on, :class => 'control-label' %>
-          <%= f.date_select :repeat_ends_on, {}, {style: 'width:auto;'} %>
-        </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :repeats, :class => 'control-label' %>
+      <%= f.select :repeats, Event::RepeatsOptions, {}, :default => 'never', :class => 'form-control' %>
+      <%= render partial: 'repeats_weekly_options', locals: {f: f} %>
+    </div>
+
+    <div class="form-group event_option" id="repeats_options">
+      <%= f.label :repeat_ends, :class => 'control-label' %>
+      <%= f.select :repeat_ends, Event::RepeatEndsOptions, {}, :class => 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <div id="event_repeat_ends_on">
+        <%= f.label :repeat_ends_on, :class => 'control-label' %>
+        <%= f.date_select :repeat_ends_on, {}, {style: 'width:auto;'} %>
       </div>
+    </div>
 
 
-      <div class="form-group">
-        <%= f.hidden_field :time_zone, :value => 'UTC'%>
-      </div>
+    <div class="form-group">
+      <%= f.hidden_field :time_zone, :value => 'UTC'%>
+    </div>
 
-      <div class="form-group">
-        <%= link_to 'Cancel', events_path, class: 'btn btn-default' %>
-        <%= f.submit 'Save', class: 'btn btn-default', data: {disable_with: 'Working...'} %>
-      </div>
+    <div class="form-group">
+      <%= link_to 'Cancel', events_path, class: 'btn btn-default' %>
+      <%= f.submit 'Save', class: 'btn btn-default', data: {disable_with: 'Working...'} %>
+    </div>
   <% end %>
 </div>
 
 <style>
 
-    #repeats_options {
-        display: none;
-    }
+  #repeats_options {
+    display: none;
+  }
 
-    #repeats_daily_options {
-        display: none;
-    }
+  #repeats_daily_options {
+    display: none;
+  }
 
-    #repeats_weekly_options {
-        display: none;
-    }
+  #repeats_weekly_options {
+    display: none;
+  }
 </style>

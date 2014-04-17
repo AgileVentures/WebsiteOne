@@ -1,29 +1,26 @@
 <% provide :title, 'Projects' %>
 
+<h1>List of Projects</h1>
+<% if user_signed_in? %>
+  <ul class="user-controls">
+    <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
+  </ul>
+<% end %>
 
-  <div id="doc-box">
-    <div id="doc-overview">
-      <h1>List of Projects</h1>
-    </div>
-    <div id="doc-side-panel">
-      <% if user_signed_in? %>
-        <ul>
-          <li><%= custom_css_btn 'new project', 'fa fa-plus', new_project_path %></li>
-        </ul>
-      <% end %>
-    </div>
-  </div>
+<% if @projects.empty? %>
+  <p>We have no projects right now&#8230;</p>
+<% else %>
+  <p>
+    To get involved in any of the projects, join one of the <%= link_to 'scrums', events_path %> and reach out to us,
+    or send us an email at <a href="mailto:info@agileventures.org">info@agileventures.org</a>.
+  </p>
   <%= will_paginate @projects %>
   <ul id="project-list" style="list-style: none; padding-left: 0;">
-    <% if @projects.empty? %>
-      <li>No projects were found, wait wha..?</li>
-    <% else %>
-      <% @projects.each do |project| %>
-        <li class="listing">
-          <%= render 'listing', project: project %>
-        </li>
-      <% end %>
+    <% @projects.each do |project| %>
+      <li class="listing">
+        <%= render 'listing', project: project %>
+      </li>
     <% end %>
   </ul>
   <%= will_paginate @projects %>
-
+<% end %>

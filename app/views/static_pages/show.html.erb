@@ -3,10 +3,10 @@
 <div id="ancestry">
   <strong><%= link_to 'Agile Ventures', root_path %></strong><i class="fa fa-angle-double-right"></i>
   <% @ancestry.each do |page| %>
-      <strong><%= link_to page, static_page_path(page) %></strong>
-      <% unless @ancestry.last == page %>
-          <i class="fa fa-angle-double-right"></i>
-      <% end %>
+    <strong><%= link_to page, static_page_path(page) %></strong>
+    <% unless @ancestry.last == page %>
+      <i class="fa fa-angle-double-right"></i>
+    <% end %>
   <% end %>
 </div>
 
@@ -18,10 +18,10 @@
   </div>
   <div id="page-side-panel">
     <% if user_signed_in? %>
-        <ul>
-          <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
-                                 data: {save_url: static_page_mercury_update_path(@page.slug)} %>
-        </ul>
+      <ul>
+        <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
+                               data: {save_url: static_page_mercury_update_path(@page.slug)} %>
+      </ul>
     <% end %>
   </div>
 </div>
@@ -29,24 +29,26 @@
 <div id="static_page_body" data-mercury="full" data-type="editable"><%= clean_html(@page.body) %></div>
 
 <% if user_signed_in? %>
-    <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
-    <%= link_to 'Cancel', '', id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>
+  <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
+  <%= link_to 'Cancel', '', id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>
 <% end %>
 <br />
-<% unless @page.versions.empty? %>
-    <a id="revisions-anchor" href=""><h4 style="display: inline-flex">Revisions</h4><i id="arrow" class="fa fa-arrow-down fa-lg" style="display:inline-flex;margin-left:5px;position:relative;top:2px;"></i></a>
-    <div id="revisions" style="display:none;">
-        <% @page.versions.each do |version| %>
-            <%= user_details(version.whodunnit.to_i) %>
-            <%= version.event %>d <b>"<%= @page.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago <br/>
-        <% end %>
+<% if @page.versions.count > 1 %>
+  <a id="revisions-anchor" href="javascript:void(0)"><h4 style="display: inline-flex;">Revisions</h4><i id="arrow" class="fa fa-arrow-down fa-lg" style="display:inline-flex;margin-left:5px;position:relative;top:2px;"></i></a>
+  <div style="margin-bottom: 20px">
+    <div id="revisions" style="display: none;">
+      <% @page.versions.each do |version| %>
+        <%= user_details(version.whodunnit.to_i) %>
+        <%= version.event %>d <b>"<%= @page.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago <br/>
+      <% end %>
     </div>
+  </div>
 <% end %>
 
 <script>
   $("#revisions-anchor").click(function(e){
-      e.preventDefault();
-      $("#revisions").toggle();
-      $("#arrow").toggleClass("fa-arrow-up").toggleClass("fa-arrow-down");
+    e.preventDefault();
+    $("#revisions").toggle();
+    $("#arrow").toggleClass("fa-arrow-up").toggleClass("fa-arrow-down");
   });
 </script>

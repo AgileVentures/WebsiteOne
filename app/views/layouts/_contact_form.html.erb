@@ -1,16 +1,15 @@
-  <h3 class="footer_header">
-    Contact us
-  </h3>
-  <p>Send a traditional email to <%= mail_to 'info@agileventures.org', 'info@agileventures.org' %>, or use the contact form. </p>
-  <%= form_tag('/mail_contact_form', id: 'contact_form', :class => 'form-horizontal contact', method: 'post') do %>
-      <%= label_tag :name %>
-      <%= text_field_tag :name %>
-      <%= label_tag :email %>
-      <%= text_field_tag :email %>
-      <%= label_tag :message %>
-      <%= text_area_tag :message %>
-      <div class="form-actions">
-        <%= submit_tag 'Send message', id: 'send', :class => 'btn btn-primary' %>
-      </div>
-  <% end %>
-
+<h3 class="footer_header">
+  Contact us
+</h3>
+<p>Send a traditional email to <%= mail_to 'info@agileventures.org', 'info@agileventures.org' %>, or use the contact form. </p>
+<%= form_tag('/mail_contact_form', id: 'contact_form', :class => 'form-horizontal contact', method: 'post') do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  <%= label_tag :message %>
+  <%= text_area_tag :message, nil, style: 'resize: none', rows: 2 %>
+  <div class="form-actions">
+    <%= submit_tag 'Send message', id: 'send', :class => 'btn btn-primary' %>
+  </div>
+<% end %>

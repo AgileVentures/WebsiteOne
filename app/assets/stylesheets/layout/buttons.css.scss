@@ -1,0 +1,18 @@
+@import "mixins";
+@import "variables";
+
+.btn-be-a-supporter {
+  background: #e10000;
+//  color: $black !important;
+  border: 1px solid lightgray;
+  opacity: 0.6;
+  @include css-transition(opacity 0.5s ease);
+//  @include css-transition(color 0.3s ease);
+//  @include css-transition(background-color 0.3s ease);
+
+  &:hover {
+    opacity: 1;
+//    background: rgba(240, 127, 72, 0.7);
+//    color: $theme-dark !important;
+  }
+}

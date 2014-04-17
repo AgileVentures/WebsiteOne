@@ -1,16 +1,26 @@
 <section class="doc-preview">
-  <div class="doc-preview-overview">
-    <h3><%= link_to project.title, project_path(project) %></h3>
-    <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
-      <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
-      <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, user_path(project.user) %></div>
-    </div>
-    <p><%= project.description.truncate(250, separator: ' ') %></p>
-  </div>
-  <div class="doc-preview-stats">
-    <ul style="list-style: none; padding-left: 0;">
-      <li><i class="fa fa-users"></i> <%= project.followers.count %></li>
-      <li><i class="fa fa-file-text-o"></i> <%= project.documents.count %></li>
+  <h3><%= link_to project.title, project_path(project) %></h3>
+  <div class="stats">
+    <ul>
+      <% follower_count = project.followers.count %>
+      <% if follower_count > 0 %>
+        <li data-toggle="tooltip" data-placement="top"
+            title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
+          <i class="fa fa-users"></i> <%= follower_count %>
+        </li>
+      <% end %>
+      <% documents_count = project.documents.count %>
+      <% if documents_count > 0 %>
+        <li data-toggle="tooltip" data-placement="top"
+            title="<%= documents_count %> related <%= 'document'.pluralize(documents_count) %>">
+          <i class="fa fa-file-text-o"></i> <%= documents_count %>
+        </li>
+      <% end %>
     </ul>
   </div>
+  <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
+    <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
+    <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, user_path(project.user) %></div>
+  </div>
+  <p><%= project.description.truncate(250, separator: ' ') %></p>
 </section>

@@ -30,7 +30,13 @@ describe "static_pages/show" do
     rendered.should have_content @page.body
   end
 
-  it 'should render page revisions history' do
+  it 'should not render page revisions history for new pages' do
+    render
+    rendered.should_not have_content 'Revisions'
+  end
+
+  it 'should render page revisions history for pages with more than 1 revisions' do
+    @page.stub(versions: [ @version, @version ])
     render
     rendered.should have_content 'Revisions'
   end

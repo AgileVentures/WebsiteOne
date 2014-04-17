@@ -92,9 +92,9 @@ class ProjectsController < ApplicationController
       rescue Exception => error
         # TODO deal with simple not found errors, should not send for all exceptions
         ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'an error occurred in Pivotal Tracker' })
-        @stories = nil
       end
     end
+    @stories ||= []
   end
 
   def project_params

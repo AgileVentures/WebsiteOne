@@ -4,39 +4,39 @@
   a curious about Pair Programming and Agile.
   <strong>Each event will have a link to an online Hangout prior to start time.</strong></p>
 <% if user_signed_in? %>
-    <div class="row">
-      <%= link_to 'New Event', new_event_path, :class => 'btn btn-primary pull-right' %>
-    </div>
+  <div class="row">
+    <%= link_to 'New Event', new_event_path, :class => 'btn btn-default pull-right' %>
+  </div>
 <% end %>
 <div class="eventContainer">
   <% @events.each_slice(2) do |slice| %>
-      <ul id="eventContainer" class="eventCards">
-        <% slice.each do |instance| %>
-            <% event = instance[:event] %>
-            <% time = instance[:time] %>
-            <% display_time = 'Starts at ' + event.start_time_with_timezone.strftime('%k:%M %Z') %>
-            <% display_month = time.strftime('%B') %>
-            <% display_date = time.strftime('%d') %>
+    <ul id="eventContainer" class="eventCards">
+      <% slice.each do |instance| %>
+        <% event = instance[:event] %>
+        <% time = instance[:time] %>
+        <% display_time = 'Starts at ' + event.start_time_with_timezone.strftime('%k:%M %Z') %>
+        <% display_month = time.strftime('%B') %>
+        <% display_date = time.strftime('%d') %>
 
-            <li class="card">
-              <div class="cardInner">
-                <div class="calendar">
-                  <span class="month"><%= display_month %></span>
-                  <span class="date"><%= display_date %></span>
-                </div>
-                <div class="boxEvent">
-                  <h2 class="eventTitle"><%= link_to event.name.truncate(30, separator: /\s/), event_path(event) %></h2>
+        <li class="card">
+          <div class="cardInner">
+            <div class="calendar">
+              <span class="month"><%= display_month %></span>
+              <span class="date"><%= display_date %></span>
+            </div>
+            <div class="boxEvent">
+              <h2 class="eventTitle"><%= link_to event.name.truncate(30, separator: /\s/), event_path(event) %></h2>
 
-                  <p class="eventText"><%= event.description.truncate(70, separator: /\s/) %></p>
+              <p class="eventText"><%= event.description.truncate(70, separator: /\s/) %></p>
 
-                  <p class="eventTime"><%= display_time %></p>
+              <p class="eventTime"><%= display_time %></p>
 
-                </div>
-                <b class="gradient"></b>
-              </div>
-            </li>
-        <% end %>
-      </ul>
+            </div>
+            <b class="gradient"></b>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
 </div>
 

@@ -1,113 +1,97 @@
 <% provide :title, 'Home' %>
+<!DOCTYPE html>
+<html>
 
-<!-- Begin page content -->
-<section class="bg-3" style="margin-top: -70px;">
-  <div class="container">
-    <div class="col-sm-12  text-center bg-5">
-      <%= render 'layouts/round_banners' %>
-      <% if @event.present? %>
-          <h2><%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %> </h2>
-      <% end %>
-    </div>
-  </div>
-</section>
-<div class="divider"></div>
-<div class="container">
-  <div class="col-sm-8 col-sm-offset-2 text-center">
-    <h1>Connect and Collaborate</h1>
+<%= render 'layouts/head' %>
 
-    <p class="text-center">
-      We hold pair programming sessions every day with participants from all time zones and on all levels. Bring your
-      own problem set or collaborate on one of our <%= link_to 'Open Source projects', projects_path %>. </p>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 col-xs-6">
-      <div class="view view-tenth">
-        <img class="img-responsive" src="<%= image_path('gpluspair.png') %>">
+<body lang="en-GB">
 
-        <div class="mask">
-          <h2>Pair Programming</h2>
+<%= render 'layouts/navbar' %>
 
-          <p>Join
-            our <%= link_to 'Google+ Pair Programming', 'https://plus.google.com/u/0/communities/100279740984094902927', :target => '_blank' %>
-            group and access tens of daily pair programming events</p>
-
-          <%= link_to 'Join now!', 'https://plus.google.com/u/0/communities/100279740984094902927', :class => 'btn btn-danger info-btn', :target => '_blank' %>
+<div id="main" class="container-fluid" style="padding: 0">
+  <ul id="section-list">
+    <li>
+      <section class="row landing-page-section" id="top-content">
+        <div class="container">
+          <div class="section-well">
+            <%= render 'layouts/round_banners' %>
+          </div>
         </div>
-      </div>
-    </div>
-    <!-- /.col-lg-4 -->
-    <div class="col-sm-6 col-xs-6">
-      <div class="view view-tenth">
-        <img class="img-responsive" src="<%= image_path('meetuppair.png') %>">
+      </section>
+    </li>
 
-        <div class="mask">
-          <h2>Join our Meetup group</h2>
-
-          <p>Meet friendly peers to connect, hack, and collaborate with. We meet virtually at least once a week</p>
-          <%= link_to 'Check it out', 'http://www.meetup.com/remote-pair-programming/', :class => 'btn btn-danger info-btn', :target => '_blank' %>
+    <li>
+      <section id="landing-projects" class="row landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8 pull-right">
+            <h3>We are a</h3>
+            <h2>Project Launch Pad</h2>
+            <p>
+              AgileVentures is the perfect place to kick-start a project. Our system of openness and lack of hierarchy
+              means anybody can start a project. In fact, many of our current projects were initiated by our own
+              members!
+            </p>
+            <div class="landing-CTA">Get started with our <%= link_to 'Projects', projects_path %></div>
+          </div>
         </div>
-      </div>
-    </div>
-    <!-- /.col-lg-4 -->
-  </div>
-  <div class="row">
-    <div class="col-sm-6 col-xs-6 col-lg-offset-3">
-      <div class="view view-tenth">
-        <img class="img-responsive" src="<%= image_path('projectexample.png') %>">
+      </section>
+    </li>
 
-        <div class="mask">
-          <h2>Community Projects</h2>
-
-          <p>Bring your own problem
-            set or collaborate on one of our <%= link_to 'Open Source projects', projects_path, :target => '_blank' %>
-            .</p>
-          <%= link_to 'Read more', projects_path, :class => 'btn btn-danger info-btn', :target => '_blank' %>
+    <li>
+      <section id="landing-learning" class="row landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8">
+            <h3>We promote</h3>
+            <h2>Crowdsourced Learning</h2>
+            <p>
+              By crowd-sourcing our projects, we attract developers from diverse backgrounds: students, freelancers,
+              designers, teachers, and many more from all corners of the globe. Our members are driven by their
+              passion to learn code and make a contribution to society.
+            </p>
+            <div class="landing-CTA">Check out our <%= link_to 'Members', users_path %></div>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </li>
 
-  </div>
+    <li>
+      <section id="landing-community" class="row landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8 pull-right">
+            <h3>We practice</h3>
+            <h2>Social Coding</h2>
+            <p>
+              We have regular daily meetings (scrums) online where our members get together, discuss projects, share
+              knowledge and plan programming sessions. We love pair programming, nobody works alone in this community!
+            </p>
+            <div class="landing-CTA">Find upcoming <%= link_to 'Events', events_path %></div>
+          </div>
+        </div>
+      </section>
+    </li>
+
+    <li>
+      <section id="landing-open-source" class="row landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8">
+            <h3>We love</h3>
+            <h2>Open Source</h2>
+            <p>
+              We love all things Open Source, we are fully transparent in our development process, we record videos
+              of all our meetings through Google+ Hangouts, our code is freely available on the web on GitHub and
+              our project plans are publicly viewable on Pivotal Tracker.
+            </p>
+            <div class="landing-CTA">Check us out on <a href="https://github.com/AgileVentures" target="_blank">GitHub</a></div>
+          </div>
+        </div>
+      </section>
+    </li>
+  </ul>
 </div>
-<div class="divider"></div>
-<section class="bg-2">
-  <div class="col-sm-10 col-sm-offset-1">
-    <div class="page-header opacity-light text-center">
-      <h1>Community Driven Development</h1>
-    </div>
-  </div>
-</section>
-<div class="divider"></div>
-<div class="container">
-  <div class="col-sm-8 col-sm-offset-2 text-center">
-    <div class="page-header opacity-dark text-center">
-      <h1><span class="txt-rotate fw700" data-period="2500" data-rotate='[ "Learn", "Code", "Grow" ]'></span> TOGETHER
-      </h1>
-    </div>
-    <div class="row">
-      <p class="text-center">
-        Want to pair program online and put some of that BDD and TDD into practise in real projects? We hold pair
-        programming sessions every day with participants from all time zones and on all levels. Bring your own problem
-        set or collaborate on one of our <%= link_to 'Open Source projects', projects_path %>.
-        <br/>
-        Learn new tricks and skills. Teach others and improve your communication ability. Get feedback and insight on
-        things you're making. Make new friends and enjoy hanging out with like minded people :)
-      </p>
-    </div>
-  </div>
-</div>
-<div class="divider"></div>
 
-<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $(document).mousemove(function (e) {
-            TweenLite.to($('.bg-2'),
-                    .5,
-                    { css: {
-                        'background-position': parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / 12) + "px, " + parseInt(event.pageX / 15) + "px " + parseInt(event.pageY / 15) + "px, " + parseInt(event.pageX / 30) + "px " + parseInt(event.pageY / 30) + "px"
-                    }
-                    });
-        });
-    });
-</script>
+<footer id="footer">
+  <%= render 'layouts/footer' %>
+</footer>
+
+</body>
+</html>

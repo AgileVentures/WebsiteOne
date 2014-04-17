@@ -77,7 +77,7 @@ describe EventsController do
       it 're-renders the events#new template' do
         Event.any_instance.stub(:save).and_return(false)
         post :create, event: invalid_attributes_for(:event)
-        expect(response).to redirect_to new_event_path
+        expect(response).to render_template :new
       end
     end
   end

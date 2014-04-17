@@ -1,5 +1,6 @@
 <!-- BEGIN LIST -->
 <ul class="box">
+  <h2 style="font-size: 2em">Let's code!</h2>
   <!-- BEGIN LIST ELEMENT -->
   <li>
     <div class="circle">
@@ -42,25 +43,6 @@
   <li>
     <div class="circle">
       <div class="front front-popular">
-        <div class="title color-3-font glyphicon glyphicon-tag"></div>
-        <div class="price color-3-font"><span class="total">GROW</span></div>
-        <div class="description">Use Agile methods</div>
-      </div><!-- end div .front -->
-      <div class="popular color-3-font glyphicon glyphicon-tag"></div>
-      <div class="back color-3-bg info">
-        <div class="title">Grow</div>
-        <div class="description">
-          <p>Build your agile arsenal</p>
-          <%= link_to 'Read more..', static_page_path('Remote Pair Programming'), class: 'btn btn-success' %>
-        </div><!-- end div .description -->
-      </div><!-- end div .back color-3-bg info -->
-    </div><!-- end div .circle -->
-  </li>
-  <!-- END LIST ELEMENT -->
-  <!-- BEGIN LIST ELEMENT -->
-  <li>
-    <div class="circle">
-      <div class="front front-popular">
         <div class="title color-4-font glyphicon glyphicon-time"></div>
         <div class="price color-4-font"><span class="total">PAIR</span></div>
         <div class="description">Work on projects</div>
@@ -76,6 +58,27 @@
     </div><!-- end div .circle -->
   </li>
   <!-- END LIST ELEMENT -->
-
+  <!-- BEGIN LIST ELEMENT -->
+  <li>
+    <div class="circle">
+      <div class="front front-popular">
+        <div class="title color-3-font glyphicon glyphicon-tag"></div>
+        <div class="price color-3-font"><span class="total">GROW</span></div>
+        <div class="description">Use Agile methods</div>
+      </div><!-- end div .front -->
+      <div class="popular color-3-font glyphicon glyphicon-tag"></div>
+      <div class="back color-3-bg info">
+        <div class="title">Grow</div>
+        <div class="description">
+          <p>Build your agile arsenal</p>
+          <%= link_to 'Read more..', static_page_path('Remote Pair Programming'), class: 'btn btn-success' %>
+        </div><!-- end div .description -->
+      </div><!-- end div .back color-3-bg info -->
+    </div><!-- end div .circle -->
+  </li>
+  <!-- END LIST ELEMENT -->
+  <% if @event.present? %>
+    <p><%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %></p>
+  <% end %>
 </ul>
 <!--END LIST -->

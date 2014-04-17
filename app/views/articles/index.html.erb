@@ -1,36 +1,41 @@
 <%= provide :title, 'Articles' %>
 
-<div id="doc-box">
-  <div id="doc-overview">
-    <h1><%= "#{params[:tag].present? ? params[:tag] : 'All'} "%>Articles</h1>
-  </div>
-  <div id="doc-side-panel">
-    <% if user_signed_in? %>
-      <ul>
-        <li><%= custom_css_btn 'new article', 'fa fa-plus', new_article_path(tag: params[:tag]) %></li>
-      </ul>
-    <% end %>
-  </div>
-</div>
+<h1><%= "#{params[:tag].present? ? params[:tag] : 'All'} "%>Articles</h1>
+<% if user_signed_in? %>
+  <ul class="user-controls">
+    <li><%= custom_css_btn 'new article', 'fa fa-plus', new_article_path(tag: params[:tag]) %></li>
+  </ul>
+<% end %>
+
+<% if @articles.count > 0 %>
+  <p>
+    Every article is written by a member of our community, to share information and knowledge that could be beneficial
+    to other members.
+  </p>
+<% end %>
 
 <div class="article-list">
-  <% @articles.each do |a| %>
-    <section class="doc-preview listing">
-      <header class="article-header">
-        <h2><%= link_to a.title, article_path(a) %></h2>
-        <small>Created by <%= link_to a.user.display_name, user_path(a.user) %>, <%= time_ago_in_words(a.created_at) %> ago,
-          <% if a.tag_list.count > 0 %>
-            tagged with <%= link_to_tags a.tag_list %>
-          <% else %>
-            not tagged with anything
-          <% end %>
-        </small>
-      </header>
-      <main class="md-preview"><%= markdown_preview a.content %></main>
-    </section>
-
-    <% if a.id != @articles.last.id %>
-      <div style="height: 5px; width: 70px; margin: 0 auto; background: #F07F48"></div>
+  <% if @articles.count > 0 %>
+    <% @articles.each do |a| %>
+      <section class="doc-preview listing">
+        <header class="article-header">
+          <h2><%= link_to a.title, article_path(a) %></h2>
+          <small>Created by <%= link_to a.user.display_name, user_path(a.user) %>, <%= time_ago_in_words(a.created_at) %> ago,
+            <% if a.tag_list.count > 0 %>
+              tagged with <%= link_to_tags a.tag_list %>
+            <% else %>
+              not tagged with anything
+            <% end %>
+          </small>
+        </header>
+        <main class="md-preview"><%= markdown_preview a.content %></main>
+      </section>
+    <% end %>
+  <% else %>
+    <% if params[:tag] %>
+      <p>No articles were found under this tag, be the first to write one!</p>
+    <% else %>
+      <p>No articles were found, be the first to write an article!</p>
     <% end %>
   <% end %>
 </div>
