@@ -15,4 +15,13 @@ describe Article do
   it 'should respond to friendly_id' do
     expect(article).to respond_to :friendly_id
   end
+
+  it 'should respond to upvotes' do
+    article.should respond_to :upvotes
+  end
+
+  it 'should respond to downvotes' do
+    article.should respond_to :downvotes
+  end
+
 end
