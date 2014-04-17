@@ -13,10 +13,10 @@ describe 'visitors/index.html.erb' do
     ENV['TZ'] = @default_tz
   end
 
-  it 'should render round banners' do
-    render
-    expect(rendered).to render_template(:partial => '_round_banners')
-  end
+  # it 'should render round banners' do
+  #   render
+  #   expect(rendered).to render_template(:partial => '_round_banners')
+  # end
 
   context 'event is planned for next day' do
     before :each do

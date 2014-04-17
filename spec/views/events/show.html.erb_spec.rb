@@ -10,6 +10,7 @@ describe 'events/show' do
                         event_date: 'Mon, 17 Feb 2013',
                         start_time: '2000-01-01 09:00:00 UTC',
                         end_time: '2000-01-01 09:30:00 UTC',
+                        updated_at: Time.now,
                         repeats: 'daily',
                         repeats_every_n_days: 1,
                         repeat_ends: 'never',
@@ -49,8 +50,8 @@ describe 'events/show' do
   it 'should display HOA url if url is set' do
     @event.url = 'http://google.com'
     render
-    rendered.should have_text 'Hangout link:'
-    rendered.should have_css('a#hoa-link')
+    rendered.should have_text 'Hangout link'
+    rendered.should have_css '#hoa-link'
     rendered.should have_link @event.url
   end
 

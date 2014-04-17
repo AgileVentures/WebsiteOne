@@ -1,0 +1,12 @@
+<head>
+  <%= render 'layouts/meta_tags' %>
+  <title><%= content_for?(:title) ? [ yield(:title),  ' | AgileVentures - WebsiteOne'].join(' ') : 'AgileVentures - WebsiteOne' %></title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,100,900' %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Ubuntu' %>
+  <%= stylesheet_link_tag '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <link rel="shortcut icon" href="/favicon.ico?v=2" />
+  <%= analytics_init if Rails.env.production? %>
+</head>

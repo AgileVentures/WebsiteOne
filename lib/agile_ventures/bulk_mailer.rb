@@ -66,7 +66,7 @@ module AgileVentures
         group.each do |user|
           ConsoleMailer.newsletter(user, {  heading: @heading, 
                                             content: @content,
-                                            subject: @subejct
+                                            subject: @subject
                                          }).deliver
           @num_sent += 1
           @used_addresses.push user.email

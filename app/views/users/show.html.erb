@@ -8,7 +8,9 @@
         <h3><%= @user.display_name %></h3>
       </div>
     </div>
-    <p><i class="fa fa-globe fa-lg"></i><%= " #{@user.country}" if @user.country.present? %></p>
+    <% if @user.country.present? %>
+      <p><i class="fa fa-globe fa-lg"></i> <%= " #{@user.country}" if @user.country.present? %></p>
+    <% end %>
 
     <p><i class="fa fa-calendar-o fa-lg"></i> Member
       for <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
@@ -78,8 +80,12 @@
   <hr/>
 </div>
 <div class="row">
-  <div class="col-md-5 col-sm-5">
-    <% if @youtube_videos.present? %>
+  <% unless @youtube_videos.blank? %>
+    <div class="col-sm-12">
+      <td><h4 id="video_contents"><%= @youtube_videos.first[:content] %></h4></td>
+      <iframe id="ytplayer" width="480" height="320" type="text/html" src="<%= video_embed_link(@youtube_videos.first) %>" frameborder="0"></iframe>
+    </div>
+    <div class="col-sm-12">
       <h4>Programming sessions</h4>
       <table class="table table-bordered table-striped table-hover table-condensed">
         <tr>
@@ -94,14 +100,10 @@
           </tr>
         <% end %>
       </table>
-    <% else %>
-      <h4><%= user_display_name @user %> has no publicly viewable Youtube videos.</h4>
-    <% end %>
-  </div>
-  <% if @youtube_videos.present? %>
-    <div class="col-md-7 col-sm-7">
-      <td><h4 id="video_contents"><%= @youtube_videos.first[:content] %></h4></td>
-      <iframe id="ytplayer" type="text/html" width="480" height="293" src="<%= video_embed_link(@youtube_videos.first) %>" frameborder="0"></iframe>
+    </div>
+  <% else %>
+    <div class="col-sm-12">
+      <p><%= @user.display_name %> has no publicly viewable Youtube videos.</p>
     </div>
   <% end %>
   <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

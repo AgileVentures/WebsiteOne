@@ -4,63 +4,57 @@
   <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
   <strong><%= link_to @project.title, project_path(@project) %></strong> <i class="fa fa-angle-double-right"></i>
   <% unless @document.root? %>
-      <strong><%= link_to @document.parent.title, project_document_path(@project, @document.parent) %></strong>
-      <i class="fa fa-angle-double-right"></i>
+    <strong><%= link_to @document.parent.title, project_document_path(@project, @document.parent) %></strong>
+    <i class="fa fa-angle-double-right"></i>
   <% end %>
   <strong><%= @document.title %></strong>
 </div>
 
-<div id="doc-box">
-  <div id="doc-overview">
-    <h1>
-      <div id="document_title" style="width: 100%;" data-mercury="simple" data-type="editable"><%= @document.title %></div>
-    </h1>
-    <div class="doc-status-text">
-      <div><%= metadata %></div>
-    </div>
-  </div>
-  <div id="doc-side-panel">
-    <% if user_signed_in? %>
-        <ul>
-          <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
-                                 data: {save_url: project_document_mercury_update_path(@project, @document)} %></li>
+<h1>
+  <div id="document_title" style="width: 100%;" data-mercury="simple" data-type="editable"><%= @document.title %></div>
+</h1>
+<% if user_signed_in? %>
+  <ul class="user-controls">
+    <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
+                           data: {save_url: project_document_mercury_update_path(@project, @document)} %></li>
 
-          <% if @document.root? %>
-              <li><%= custom_css_btn 'new sub-document', 'fa fa-files-o', new_project_document_path(project_id: @project.friendly_id, parent_id: @document.id), id: 'new_document_link' %></li>
-          <% end %>
-        </ul>
+    <% if @document.root? %>
+      <li><%= custom_css_btn 'new sub-document', 'fa fa-files-o', new_project_document_path(project_id: @project.friendly_id, parent_id: @document.id), id: 'new_document_link' %></li>
     <% end %>
-  </div>
+  </ul>
+<% end %>
+<div class="doc-status-text">
+  <div><%= metadata %></div>
 </div>
 
 
 <div id="document_body" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
 
 <% if user_signed_in? %>
-    <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
-    <%= link_to 'Cancel', '', id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>
+  <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
+  <%= link_to 'Cancel', '', id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>
 <% end %>
 <div class="small-divider"></div>
 <div>
-  <% unless @children.empty? %>
-      <% if @document.root? %>
-          <h2>Sub-documents</h2>
-      <% end %>
-      <ul class="listings">
-        <% @children.each do |child| %>
-            <li class="listings-item">
-              <strong><%= link_to child.title, project_document_path(@project, child) %></strong> -
-              <i>created by <%= child.user.display_name %> <%= time_ago_in_words(child.created_at) %> ago</i>
-            </li>
-        <% end %>
-      </ul>
+  <% if @document.versions.count > 1 %>
+    <h4>Revisions</h4>
+    <% @document.versions.each do |version| %>
+      <%= user_details(version.whodunnit.to_i) %>
+      <%= version.event %>d <b>"<%= @document.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago <br/>
+    <% end %>
   <% end %>
   <br/>
-  <% unless @document.versions.empty? %>
-      <h4>Revisions</h4>
-      <% @document.versions.each do |version| %>
-          <%= user_details(version.whodunnit.to_i) %>
-          <%= version.event %>d <b>"<%= @document.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago <br/>
+  <% unless @children.empty? %>
+    <% if @document.root? %>
+      <h2>Sub-documents</h2>
+    <% end %>
+    <ul class="listings">
+      <% @children.each do |child| %>
+        <li class="listings-item">
+          <strong><%= link_to child.title, project_document_path(@project, child) %></strong> -
+          <i>created by <%= child.user.display_name %> <%= time_ago_in_words(child.created_at) %> ago</i>
+        </li>
       <% end %>
+    </ul>
   <% end %>
 </div>

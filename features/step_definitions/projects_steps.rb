@@ -79,7 +79,7 @@ When(/^I am not a member of project "([^"]*)"$/) do |name|
 end
 
 Given(/^I am on the home page$/) do
-  visit "/"
+  visit root_path
 end
 
 Then(/^(.*) in the project members list$/) do |s|

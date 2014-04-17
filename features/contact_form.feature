@@ -11,7 +11,7 @@ Feature: Rendering contact us form
 
   Scenario: Rendering contact us form
     Then I should see a footer area
-    And I should see "Contact us" form in footer
+    And I should see "Contact us" form within the footer
     And I should see "Send a traditional email to info@agileventures.org, or use the contact form."
     And I should see link "info@agileventures.org"
 
