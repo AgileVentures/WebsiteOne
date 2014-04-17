@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '4.0.4'
-gem 'pg'  # PostgreSQL database support
 gem 'sass-rails', '~> 4.0.0' # Sass stylesheet language
 gem 'uglifier'  # Javascript compressor
 gem 'coffee-rails'  # Coffee-script support
@@ -59,9 +58,10 @@ group :test do
 end
 
 group :development, :test do
-  gem 'rspec-rails' #unit testing
-#TODO YA do we need it? It breaks Rubymine's debugging
-  gem 'debugger'  # Use debugger
+  gem 'pg' # PostgreSQL database support
+#  gem 'sqlite3' # sqlite3 database support
+  gem 'rspec-rails' # unit testing
+  gem 'debugger'  # Use debugger # TODO: YA do we need it? It breaks Rubymine's debugging
   gem 'jasmine' # framework for testing javascript
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser
@@ -69,6 +69,7 @@ group :development, :test do
 end
 
 group :production do
+  gem 'pg' # PostgreSQL database support
   gem 'rails_12factor'
   gem 'unicorn'
 end
