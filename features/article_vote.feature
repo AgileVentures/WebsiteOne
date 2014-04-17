@@ -5,7 +5,7 @@ Feature:
   And vote up or down an article
 
   Background:
-    Given the following articles exist:
+    Given the following articles with votes exist:
       | Title                    | Content                          | VoteValue          |
       | Ruby is on Fire          | Fire is fire and sunny           | 0	   		 |
       | Rails is not for trains  | Train `tracks` do not work       | 5                  |
@@ -13,7 +13,7 @@ Feature:
 
   Scenario: I should see the vote value of an article on the article show page
     Given I am on the "Show" page for article "Ruby is on Fire"
-    Then I should see a "vote value" of zero
+    Then I should see a "vote value" of "0"
 
   Scenario: I should see the link to Up Vote an article on the article show page
     Given I am logged in
