@@ -6,11 +6,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
-  include CustomErrors
+  before_filter :get_next_event
 
-  def static_page_path(page)
-    "/#{StaticPage.url_for_me(page)}"
-  end
+  include ApplicationHelper
+  include CustomErrors
 
   protected
   # overriding the devise sanitizer class to allow for custom fields to be permitted for mass assignment
@@ -26,4 +25,9 @@ class ApplicationController < ActionController::Base
     request.env['omniauth.origin'] || root_path
   end
 
+  private
+
+  def get_next_event
+    @next_event = Event.next_occurrence
+  end
 end

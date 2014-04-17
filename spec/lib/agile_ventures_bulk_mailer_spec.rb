@@ -32,6 +32,19 @@ describe AgileVentures::BulkMailer do
     bulk_mailer.run
     bulk_mailer.used_addresses.sort.should eq(User.all.map(&:email).sort)
   end
+
+  it 'creates and applies instance vars' do
+    bulk_mailer = AgileVentures::BulkMailer.new(@opts)
+    bulk_mailer.instance_variables.should include(:@heading &&
+                                                   :@content &&
+                                                   :@subject &&
+                                                   :@batch_size
+                                                   )
+    [:@heading, :@subject].each do |word|
+      bulk_mailer.instance_variable_get(word).should 
+      eq("my #{word.to_s.split('@')[-1]}")
+    end
+  end
   
   describe 'missing arguments' do
     it 'raises KeyError without :heading' do

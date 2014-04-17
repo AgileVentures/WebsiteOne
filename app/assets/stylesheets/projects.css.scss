@@ -1,16 +1,32 @@
+@import "variables";
+@import "mixins";
+
 .activity {
-    i {
-	margin:10px 0 0 5px;
+  i {
+    margin:10px 0 0 5px;
+  }
+  .story_name{
+    span {
+      color: #6BABA1;
     }
-    .story_name{
-	span {
-	    color: #6BABA1;
-	}
-    }
-    .story_estimate {
-	display: block;
-	margin: 0 0 0 5px;
-	padding: 0;
-	height: 7px;
-    }
+  }
+  .story_estimate {
+    display: block;
+    margin: 0 0 0 5px;
+    padding: 0;
+    height: 7px;
+  }
+}
+
+$avatar-size: 80px;
+.projects-user-avatar {
+  display: inline-block;
+  width: $avatar-size;
+  height: $avatar-size;
+  margin: 0;
+  border-radius: 5%;
+}
+
+.members-list-item {
+  display: inline-block;
 }

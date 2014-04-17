@@ -1,5 +1,6 @@
-$(function() {
-  function ready() {
+
+WSO.define('EventDatePicker', function() {
+  function init() {
     $( ".datepicker" ).datepicker({
       format: 'yyyy-mm-dd'
     });
@@ -41,6 +42,7 @@ $(function() {
     });
   }
 
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
+  return {
+    init: init
+  }
 });

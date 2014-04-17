@@ -1,95 +1,46 @@
 @import "variables";
 @import "mixins";
 
-.doc-option {
-  display: inline;
-  vertical-align: middle;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 section.doc-preview {
-  margin: 10px 0;
-  padding: 5px 10px;
+  padding: 5px 0;
   height: auto;
   min-height: 20px;
   max-height: 250px;
   overflow: hidden;
   position: relative;
+
+  h3 {
+    margin: 0;
+  }
+
+  & > p {
+    margin-top: 1em;
+  }
 }
 
-.doc-preview-overview {
-  margin-right: 70px;
-  vertical-align: top;
+.stats {
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+.doc-status-text {
   display: inline-block;
-}
-
-.doc-preview-stats {
-  width: 60px;
-  padding: 5px;
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 20px;
-}
-
-.doc-option-icon {
-  display: inline-block;
-  background: #fff;
-  height: 100%;
-  vertical-align: middle;
-}
-
-.doc-option-text {
-  @include css-transition(max-width, 0.4s, ease, 0s);
-  display: inline-block;
-  vertical-align: middle;
-  width: auto !important;
-  max-width: 0px;
-  height: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.doc-option:hover .doc-option-text {
-  max-width: 250px;
-}
-
-#doc-box {
-  height: auto;
-  width: 100%;
-  position: relative;
-}
-
-#doc-overview {
-  width: 70%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#doc-side-panel {
-  font-size: 130%;
-  padding-top: 25px;
-  width: 20%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#doc-side-panel ul {
-  list-style: none;
+  font-size: 0.9em;
+  font-style: italic;
 }
 
 .listing {
-  padding: 10px;
+  padding: 10px 0;
   color: $black;
   width: 100%;
   margin: 0;
-  @include css-transition(background, 0.3s, ease, 0s);
   position: relative;
-}
-
-.listing:hover {
-  background: $highlight-color;
 }
 
 .tab-content {
@@ -101,16 +52,6 @@ section.doc-preview {
 .listings {
   list-style: none;
   padding-left: 0px;
-}
-
-.listings-item {
-
-}
-
-.doc-status-text {
-  display: inline-block;
-  font-size: 0.9em;
-  font-style: italic;
 }
 
 #document_body {

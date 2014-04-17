@@ -17,22 +17,33 @@
         <% end %>
       </div>
       <div class="col-sm-4" style="margin-top: 10px">
-        <%= link_to 'Back', root_path, :class => 'btn btn-danger' %>
+        <%= link_to 'Back', root_path, :class => 'btn btn-default' %>
         <% if user_signed_in? %>
-          <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary' %>
-            <div style="margin-top: 10px">
+          <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-default' %>
+          <div style="margin-top: 10px">
             <div id="HOA-placeholder" data-hoa-title="<%= @event.name %> - <%= current_occurrence_time(@event_schedule.first(1)) %>"></div>
-            </div>
+          </div>
         <% end %>
       </div>
     </div>
   <% end %>
 
   <div class="col-lg-12">
+    <p>
+      <strong>Note</strong>: Hangout links must be updated manually, please be sure to check that the Hangout link is up to date before
+      following the link.
+    </p>
+    <% if @event.url.present? %>
+      <p><strong>Hangout link</strong> (updated <%= time_ago_in_words @event.updated_at %> ago):
+        <br/>
+        <div id="hoa-link">
+          <%= link_to @event.url, @event.url, id: 'hoa-link', target: '_blank' %>
+        </div>
+      </p>
+    <% end %>
     <% if user_signed_in? %>
       <% if @event.url.present? %>
-        Hangout link:  <%= link_to @event.url, @event.url, id: 'hoa-link' %>
-        - <button id="toggle-edit" class="btn btn-sm btn-default">Edit</button>
+        <button id="toggle-edit" class="btn btn-sm btn-default">Edit</button>
       <% else %>
         <button id="toggle-add" class="btn btn-sm btn-default">Add url</button>
       <% end %>
@@ -45,8 +56,6 @@
           <%= f.submit 'Save', class: 'btn btn-default', data: {disable_with: 'Working...'} %>
         </div>
       <% end %>
-    <% elsif @event.url.present? %>
-      Hangout link:  <%= link_to @event.url, @event.url, id: 'hoa-link' %>
     <% end %>
   </div>
 

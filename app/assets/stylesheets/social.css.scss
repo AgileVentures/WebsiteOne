@@ -1,3 +1,11 @@
+$fa-custom-icon-size: 1.1em;
+
+.fa-custom-social {
+  height: $fa-custom-icon-size;
+  width: $fa-custom-icon-size;
+  text-align: center;
+}
+
 .btn-social {
     position: relative;
     padding-left: 44px;

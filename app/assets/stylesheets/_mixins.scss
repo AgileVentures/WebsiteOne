@@ -1,15 +1,51 @@
 
-@mixin css-shadow($h-shadow, $v-shadow, $blur-dist, $spread, $color) {
-  -moz-box-shadow:    $h-shadow $v-shadow $blur-dist $spread $color;
-  -webkit-box-shadow: $h-shadow $v-shadow $blur-dist $spread $color;
-  box-shadow:         $h-shadow $v-shadow $blur-dist $spread $color;
+@mixin css-shadow($args...) {
+  -moz-box-shadow: $args;
+  -webkit-box-shadow: $args;
+  box-shadow: $args;
 }
 
-@mixin css-transition($property, $duration, $interpolation, $delay) {
-  -webkit-transition: $property $duration $interpolation $delay;
-  -moz-transition: $property $duration $interpolation $delay;
-  -o-transition: $property $duration $interpolation $delay;
-  transition: $property $duration $interpolation $delay;
+@mixin css-transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -o-transition: $args;
+  transition: $args;
 }
 
+@mixin css-background-size($args...) {
+  -webkit-background-size: $args;
+  -moz-background-size: $args;
+  -o-background-size: $args;
+  background-size: $args;
+}
 
+@mixin css-animation($args...) {
+  -webkit-animation: $args;
+  -moz-animation: $args;
+  -o-animation: $args;
+  animation: $args;
+}
+
+@mixin css-transform($args...) {
+  -webkit-transform: $args;
+  -moz-transform: $args;
+  -ms-transform: $args;
+  -o-transform: $args;
+  transform: $args;
+}
+
+// a big thanks to https://gist.github.com/ericam/1607696
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}

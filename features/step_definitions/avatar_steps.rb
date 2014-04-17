@@ -9,13 +9,14 @@ end
 
 Then /^I should see "([^"]*)" user avatars$/ do | arg |
   find('#all_members').tap do |section|
-    section.should have_xpath("//img[contains(@id, 'avatar')]", :count => arg)
+    section.should have_css 'a img.thumbnail', :count => arg
   end
 end
 
 When /^I click on the avatar for "(.*?)"$/ do | user |
   this_user = User.find_by_first_name(user) || User.find_by_email(user)
-  step %Q{I follow "avatar-#{this_user.id}"}
+  find(:css, 'a[href*="' + this_user.friendly_id + '"] img.thumbnail')
+  visit path_to('user profile', this_user)
 end
 
 And(/^I should see the avatar for "(.*?)"$/) do |user|

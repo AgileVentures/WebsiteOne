@@ -1,7 +1,7 @@
 module ArticlesHelper
   def clean_html(html)
-    raw sanitize html, tags: %w(h1 h2 h3 h4 h5 h6 b i ul ol li pre span iframe div img br blockquote p a em del strong code tr table thead th tbody td dl dd dt hr),
-                 attributes: %w(src alt target frameborder allowfullscreen style href class id lang title align height width border)
+    raw sanitize html, tags: %w(h1 h2 h3 h4 h5 h6 b i ul ol li pre span iframe div img br blockquote p a em del strong code tr table thead th tbody td dl dd dt hr input label textarea fieldset),
+                 attributes: %w(src alt target frameborder allowfullscreen style href class id lang title align height width border for placeholder name rows columns value)
   end
 
   def standard_tags

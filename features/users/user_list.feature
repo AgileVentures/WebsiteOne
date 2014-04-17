@@ -16,7 +16,7 @@ Feature: As a site owner
 # "50.78.167.161" # HOL Seattle, WA
 
   Scenario: Having All Users page
-    When I click "Our members"
+    When I click "Members" within the navbar
     Then I should be on the "our members" page
     And I should see:
       | Test User   |
@@ -25,10 +25,6 @@ Feature: As a site owner
       | Croutch     |
       | Dave        |
     And I should see "5" user avatars
-
-
-
-
 
   # Bryan: Using offline stubs, it would be tedious to manually simulate all possible geo locations...
 #  Scenario: Show users location

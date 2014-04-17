@@ -3,10 +3,13 @@
  *= require_self
  *= require font-awesome
  *= require_tree
+ *= require_directory ./layout
  */
 @import "bootstrap";
 
-
+#main {
+  padding-top: 3em;
+}
 
 .signin {
   h2 {

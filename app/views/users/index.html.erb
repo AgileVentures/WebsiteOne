@@ -2,21 +2,25 @@
 
 <div id="all_members">
   <h1>All members</h1>
-  <% @users.each_slice(3) do |slice| %>
+  <% if @users.empty? %>
+    <p>It is a lonely planet we live in&#8230;</p>
+  <% else %>
+    <p>Check out our awesome volunteers from all over the globe!</p>
+    <% @users.each_slice(3) do |slice| %>
       <ul id="user-container" class="media-list">
         <% slice.each do |user| %>
-            <li class="media-item user-item">
-              <a class="pull-left" id="<%= "avatar-#{user.id}" %>" href="<%= user_path user %>">
-                <img id="avatar" src="<%= gravatar_for(user.email) %>" class="thumbnail img-rounded media-object">
-              </a>
+          <li class="media-item user-item">
+            <a style="padding-left: 0 !important" class="pull-left" href="<%= user_path user %>">
+              <img src="<%= gravatar_for(user.email) %>" class="thumbnail img-rounded media-object">
+            </a>
 
-              <div class="media-body">
-                <h4 class="media-heading"><a href="<%= user_path user %>"><%= user.display_name %></a></h4>
-
-                <p style="margin-left: 8px;"><%= user.country if user.country.present? %></p>
-              </div>
-            </li>
+            <div class="media-body">
+              <p class="media-heading"><a href="<%= user_path user %>"><%= user.display_name %></a></p>
+              <p style="margin-left: 8px;"><%= user.country if user.country.present? %></p>
+            </div>
+          </li>
         <% end %>
       </ul>
+    <% end %>
   <% end %>
 </div>
