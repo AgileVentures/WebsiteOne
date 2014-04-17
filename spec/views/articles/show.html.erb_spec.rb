@@ -30,6 +30,12 @@ describe 'articles/show', type: :view do
       expect(rendered).not_to have_link('edit article')
     end
 
+    if 'should show article vote content' do
+        render
+        rendered.should have_content("Vote value: #{@article.votevalue}"
+# test for vote up/down links
+    end
+
   end
 
   context 'user is signed in' do

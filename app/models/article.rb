@@ -1,4 +1,5 @@
 require 'act_as_page'
+require 'acts_as_votable'
 
 class Article < ActiveRecord::Base
   include ActAsPage
@@ -7,6 +8,7 @@ class Article < ActiveRecord::Base
   validates :content, :user_id, presence: true
 
   acts_as_taggable
+  acts_as_votable
 
   # Bryan: Used to generate paths, used only in testing.
   # Might want to switch to rake generated paths in the future
