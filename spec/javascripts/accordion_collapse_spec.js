@@ -13,7 +13,6 @@ describe('AccordionCollapse module', function() {
 
   it('should change class when clicked once', function() {
     $('.collapse-button').click();
-    console.log($('.collapse-button :first-child'));
     expect($('.collapse-button :first-child').hasClass('fa-caret-right')).toBeTruthy();
   });
 

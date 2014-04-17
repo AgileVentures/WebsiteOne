@@ -1,11 +1,3 @@
-var gapi = (typeof gapi === "undefined") ? {
-  hangout: {
-    render: function() {
-      // dummy
-    }
-  }
-} : gapi;
-
 describe('WebsiteOne Projects module', function () {
 
   it('should create a WSO module called "Projects"', function() {
@@ -46,24 +38,56 @@ describe('WebsiteOne Projects module', function () {
   });
 
   describe('loading the HOA button', function() {
-    beforeEach(function () {
-      this.apiCall = spyOn(gapi.hangout, 'render');
-      setFixtures(sandbox({
-        id: 'HOA-placeholder',
-        'data-hoa-title': 'HOA-title'
-      }));
+    var hangout;
 
+    beforeEach(function() {
+      hangout = jasmine.createSpyObj('hangout', ['render'])
+      var executor = {
+        done: function(func) {
+          var gapi = { hangout: hangout };
+          eval('(' + func.toString() + ')()');
+        }
+      };
       reloadScript('projects.js');
 
-      $(document).trigger('page:load');
+      this.ajaxSpy = spyOn(jQuery, 'ajax').and.returnValue(executor);
     });
 
-    it('should define a new WSO module called "Projects"', function() {
-      expect(WSO.Projects).toBeDefined();
+    describe('without the HOA button present', function() {
+      beforeEach(function() {
+        $(document).trigger('page:load');
+      });
+
+      it('should not load the script when the HOA-placeholder is not present', function() {
+        expect(this.ajaxSpy).not.toHaveBeenCalled();
+      });
     });
 
-    it('scrolling causes heights to be calculated', function() {
-      expect(this.apiCall).toHaveBeenCalled();
+    describe('with the HOA button present', function() {
+      beforeEach(function () {
+        setFixtures(sandbox({
+          id: 'HOA-placeholder',
+          'data-hoa-title': 'HOA-title'
+        }));
+
+        $(document).trigger('page:load');
+      });
+
+      it('should define a new WSO module called "Projects"', function() {
+        expect(WSO.Projects).toBeDefined();
+      });
+
+      it('should call jQuery.ajax to get the google HOA script', function() {
+        expect(this.ajaxSpy).toHaveBeenCalledWith({
+          url: 'https://apis.google.com/js/platform.js',
+          dataType: 'script',
+          cache: true
+        });
+      });
+
+      it('should call the gapi.hangout.render function', function() {
+        expect(hangout.render).toHaveBeenCalled();
+      });
     });
   });
 });
