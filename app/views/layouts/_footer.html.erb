@@ -1,27 +1,48 @@
-<footer>
-  <div class="container">
-    <div class="row credits">
-      <div class="col-md-4">
-        <div class="row social">
-          <div class="col-md-12">
-            <a href="#">
-              <img src="<%= image_path('av-logo-inverse.png') %>">
-            </a>
-
-          </div>
-        </div>
-        <div class="row copyright">
-          <div class="col-md-12">
-            <p>AgileVentures - Crowdsourced Learning</p>
-
-
-          </div>
-        </div>
+<div class="container">
+  <div class="col-sm-7">
+    <div id="upper-section" class="row">
+      <div class="footer-info col-xs-6 col-sm-4">
+        <ul>
+          <h3>Learn More</h3>
+          <li><%= link_to 'About Us', static_page_path('About Us') %></li>
+          <li><%= link_to 'Getting Started', static_page_path('Getting Started') %></li>
+        </ul>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <%= render 'layouts/contact_form' %>
+
+      <div class="footer-info col-xs-6 col-sm-4">
+        <ul>
+          <h3>Social</h3>
+          <li>
+            <a class="facebook" href="https://www.facebook.com/agileventures" target="_blank" style="white-space: nowrap">
+              <i class="fa fa-facebook fa-custom-social"></i>&nbsp;Facebook
+            </a>
+          </li>
+          <li>
+            <a class="twitter" href="https://twitter.com/AgileVentures" target="_blank" style="white-space: nowrap">
+              <i class="fa fa-twitter fa-custom-social"></i>&nbsp;Twitter
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-info col-xs-12 col-sm-4">
+        <ul>
+          <h3>Our Sponsors</h3>
+          <li><a href="http://www.makersacademy.com/" target="_blank">Makers Academy</a></li>
+          <li>
+            <%= link_to 'Becoming a sponsor', static_page_path('Sponsors'), style: 'font-size: 0.9em;' %>
+          </li>
+        </ul>
       </div>
     </div>
+
+    <div class="row">
+      <h3><img src="<%= image_path('av-logo-inverse.png') %>"/></h3>
+      <p>AgileVentures - Crowdsourced Learning</p>
+    </div>
   </div>
-</footer>
+
+  <div class="col-sm-5">
+    <%= render 'layouts/contact_form' %>
+  </div>
+</div>

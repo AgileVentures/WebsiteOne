@@ -19,7 +19,7 @@ Feature: Create and maintain projects
 
   Scenario: List of projects in table layout
     Given  I am on the "home" page
-    When I follow "Our projects"
+    When I follow "Projects" within the navbar
     Then I should see "List of Projects"
     Then I should see:
       | Text   |
@@ -33,7 +33,7 @@ Feature: Create and maintain projects
 
   Scenario: See a list of current projects
     Given  I am on the "home" page
-    When I follow "Our projects"
+    When I follow "Projects" within the navbar
     Then I should see:
       | Text                    |
       | hello jupiter           |
@@ -55,7 +55,7 @@ Feature: Create and maintain projects
 
   Scenario: Alphabetically display pagination in "Our Projects" page
     Given I am on the "home" page
-    When I follow "Our projects"
+    When I follow "Projects" within the navbar
     Then I should see:
       | greetings aliens        |
       | greetings jupiter folks |

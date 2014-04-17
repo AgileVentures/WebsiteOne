@@ -1,0 +1,14 @@
+<ul class="listings">
+  <% if members.empty? %>
+    <p style="margin-top: 20px;">No members in project <strong><%= @project.title %></strong></p>
+  <% else %>
+    <h2>Project Members</h2>
+    <% members.each do |member| %>
+      <li class="members-list-item">
+        <a href="<%= user_path member %>" data-toggle="tooltip" data-placement="top" title="<%= member.display_name %>">
+          <img src="<%= gravatar_for(member.email) %>" class="projects-user-avatar">
+        </a>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

@@ -1,14 +1,20 @@
 <section class="article-full">
   <div id="doc-box">
     <h1><%= article.title %></h1>
-    <ul style="list-style: none">
+
+    <% if user_signed_in? and not article.new_record? %>
+      <ul class="user-controls">
+        <li>
+          <%= custom_css_btn 'edit article', 'fa fa-pencil-square-o', edit_article_path(article) %>
+        </li>
+      </ul>
+    <% end %>
+
+    <ul style="list-style: none; padding-left: 0">
       <li>Created on <%= article.created_at.strftime('%d %B %y') %> by <%= link_to author.display_name, user_path(author) %></li>
       <li>Last updated <%= time_ago_in_words(article.updated_at) %> ago</li>
       <li><%= link_to_tags(article.tag_list) %></li>
     </ul>
-    <% if user_signed_in? and not article.new_record? %>
-      <%= custom_css_btn 'edit article', 'fa fa-pencil-square-o', edit_article_path(article), style: 'font-size: 130%;' %>
-    <% end %>
   </div>
 
   <article><%= from_markdown article.content %></article>

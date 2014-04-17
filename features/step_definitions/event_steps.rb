@@ -1,5 +1,5 @@
 Given(/^I am on Events index page$/) do
-  visit('/events')
+  visit events_path
 end
 
 Given(/^following events exist:$/) do |table|
@@ -14,7 +14,7 @@ Then(/^I should be on the Events "([^"]*)" page$/) do |page|
       current_path.should eq events_path
 
     when 'create'
-      current_path.should eq new_event_path
+      current_path.should eq events_path
 
     else
       pending

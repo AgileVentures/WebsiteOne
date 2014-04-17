@@ -5,10 +5,11 @@
       </nav>
       <%= render partial: 'layouts/sponsors' %>
     </aside>
-    <div id="not-sidebar" class="col-sm-9 pull-right">
-      <div id="not-sidebar-content" class="pull-right">
+    <div id="not-sidebar" class="col-sm-9">
+      <div id="not-sidebar-content">
        <%= yield %>
      </div>
     </div>
 <% end %>
+
 <%= render template: 'layouts/application' %>

@@ -21,7 +21,7 @@ Background:
   And I click the very stylish "Join Project" button
   Then I should become a member of project "hello mars"
   And I should see "You just joined hello mars"
-  And I should see my name in the project members list
+  And I should see my gravatar in the project members list
 
 Scenario: Leave a project
   Given I am logged in
@@ -30,4 +30,4 @@ Scenario: Leave a project
   And I click the very stylish "Leave Project" button
   Then I should stop being a member of project "hello mars"
   And I should see "You are no longer a member of hello mars"
-  And I should not see my name in the project members list
+  And I should not see my gravatar in the project members list
