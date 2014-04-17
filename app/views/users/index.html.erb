@@ -16,7 +16,7 @@
 
             <div class="media-body">
               <p class="media-heading"><a href="<%= user_path user %>"><%= user.display_name %></a></p>
-              <p style="margin-left: 8px;"><%= user.country if user.country.present? %></p>
+              <p style="margin-left: 8px;"><%= user.country if user.country? %></p>
             </div>
           </li>
         <% end %>

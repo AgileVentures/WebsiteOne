@@ -8,8 +8,8 @@
         <h3><%= @user.display_name %></h3>
       </div>
     </div>
-    <% if @user.country.present? %>
-      <p><i class="fa fa-globe fa-lg"></i> <%= " #{@user.country}" if @user.country.present? %></p>
+    <% if @user.country? %>
+      <p><i class="fa fa-globe fa-lg"></i> <%= " #{@user.country}" if @user.country? %></p>
     <% end %>
 
     <p><i class="fa fa-calendar-o fa-lg"></i> Member

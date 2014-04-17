@@ -33,7 +33,7 @@
       <strong>Note</strong>: Hangout links must be updated manually, please be sure to check that the Hangout link is up to date before
       following the link.
     </p>
-    <% if @event.url.present? %>
+    <% if @event.url? %>
       <p><strong>Hangout link</strong> (updated <%= time_ago_in_words @event.updated_at %> ago):
         <br/>
         <div id="hoa-link">
@@ -42,7 +42,7 @@
       </p>
     <% end %>
     <% if user_signed_in? %>
-      <% if @event.url.present? %>
+      <% if @event.url? %>
         <button id="toggle-edit" class="btn btn-sm btn-default">Edit</button>
       <% else %>
         <button id="toggle-add" class="btn btn-sm btn-default">Add url</button>
