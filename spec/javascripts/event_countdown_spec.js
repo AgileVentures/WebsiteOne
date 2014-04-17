@@ -1,12 +1,10 @@
 describe('Event Countdown', function () {
 
-    var url, name, time;
+    var url, name;
 
     beforeEach(function () {
         url = 'https://coming.home';
         name = 'Homecoming';
-        var now = new Date();
-        time = new Date(now.getTime() + 60 * 60 * 1000);
 
         setFixtures(sandbox({
             id: 'next-event',
@@ -29,50 +27,108 @@ describe('Event Countdown', function () {
         expect(WSO.EventCountdown).toBeDefined();
     });
 
-    describe('init', function () {
+    describe('init()', function () {
         it('should clear any current instance of setTimeout', function () {
             expect(this.clearTimeout).toHaveBeenCalledWith(this.update)
         });
 
         describe('when the clock is present', function () {
+            it('parses the time into a date object', function () {
+                this.data.and.returnValue('fake date object');
+                WSO.EventCountdown.init();
+
+                expect(this.dateParse).toHaveBeenCalledWith('fake date object');
+            });
             it('parses the event time, url, and name from the html', function () {
                 this.data.calls.reset();
                 WSO.EventCountdown.init();
 
-                expect(this.dateParse).toHaveBeenCalledWith(this.countdownClock.data);
-                expect(this.data).toHaveBeenCalledWith(
-                    [jasmine.any(Object), "event-time"],
-                    [jasmine.any(Object), "event-url"],
-                    [jasmine.any(Object), "event-name"]
-                );
+                expect(this.data).toHaveBeenCalledWith(jasmine.any(Object), "event-time");
+                expect(this.data).toHaveBeenCalledWith(jasmine.any(Object), "event-url");
+                expect(this.data).toHaveBeenCalledWith(jasmine.any(Object), "event-name");
             });
 
-            it('calls update', function() {
+            it('calls update', function () {
+                this.update.calls.reset();
+                WSO.EventCountdown.init();
                 expect(this.update).toHaveBeenCalled()
             });
         });
         describe('when the clock is absent', function () {
-            it('test the effect of the null values elsewhere?');
+            it('does not bother parsing the DOM', function () {
+                this.data.calls.reset();
+                setFixtures(); // clears all html
+                WSO.EventCountdown.init();
+                expect(this.data).not.toHaveBeenCalled()
+            });
         });
     });
 
-    xdescribe('the Countdown Clock', function () {
+    describe('update(): it calculates the time to the event', function () {
+        var event, floor;
+
         beforeEach(function () {
-            this.clock = WSO.EventCountdown.getCountdownClock();
+            event = new Date;
+            event.setMinutes(event.getMinutes() + 30); // event in 30 mins
+            this.dateParse.and.returnValue(event);
+            WSO.EventCountdown.init();
+            floor = spyOn(Math, 'floor').and.callThrough();
+            WSO.EventCountdown.update();
+        });
+        it('in seconds', function () {
+            expect(floor.calls.argsFor([0])).toBeCloseTo(1800, 1);  // +/- 10%
         });
 
-        it('should find the countdown clock', function () {
-            expect(this.clock.length).toEqual(1);
+        it('in minutes', function () {
+            expect(floor.calls.argsFor([1])).toBeCloseTo(30, 1)
         });
 
-        it('should display a link to the event', function () {
-            expect(this.clock.find('a[href="' + url + '"]'));
+        it('in hours', function () {
+            expect(floor.calls.argsFor([2])).toBeCloseTo(0.5, 1)
         });
 
-        it('should have the link text set to the event name', function () {
-            expect(this.clock.find('a').text()).toMatch(new RegExp(name, 'i'));
+        it('displays hours in the countdown only if there are any', function () {
+            var regex = /^<p>\d{2}:\d{2}:\d{2}/;
+            expect(regex.test(this.countdownClock.html())).toBeFalsy();
+            event.setMinutes(event.getMinutes() + 60); // event in 90 mins
+            this.dateParse.and.returnValue(event);
+            WSO.EventCountdown.init();
+            WSO.EventCountdown.update();
+            expect(regex.test(this.countdownClock.html())).toBeTruthy()
         });
 
-        // TODO: write specs for checking event-time updates
+        it('otherwise only displays minutes and seconds in the countdown', function () {
+            var regex = /<p>\d{2}:\d{2} to <a href="https:\/\/coming\.home">Homecoming<\/a><\/p>/;
+            expect(regex.test(this.countdownClock.html())).toBeTruthy()
+        });
+
+        it('displays a banner after it has started', function () {
+            floor.and.returnValue(0);
+            WSO.EventCountdown.update();
+            expect(this.countdownClock.html()).toEqual('<a href="https://coming.home">Homecoming</a> has started')
+        });
+
+        it('recalculates the time every second unless the event has already started', function () {
+            var setTimeout = spyOn(window, 'setTimeout');
+            WSO.EventCountdown.update();
+            expect(setTimeout).toHaveBeenCalledWith(this.update, 1000);
+            floor.and.returnValue(0);
+            setTimeout.calls.reset();
+            WSO.EventCountdown.update();
+            expect(setTimeout).not.toHaveBeenCalled()
+        });
+
+    });
+
+    describe('format()', function() {
+        it('pads numbers less than 10 with a zero', function() {
+            expect(WSO.EventCountdown.format(9)).toEqual('09');
+            expect(WSO.EventCountdown.format(-2)).toEqual('0-2'); // LOL
+        });
+
+        it('converts type from number to string', function() {
+            expect(WSO.EventCountdown.format(9)).toEqual('09');
+            expect(WSO.EventCountdown.format(10)).toEqual('10')
+        });
     });
 });

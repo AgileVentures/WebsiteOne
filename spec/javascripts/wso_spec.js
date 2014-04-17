@@ -1,4 +1,4 @@
-describe('WebsiteOne module', function () {
+xdescribe('WebsiteOne module', function () {
     beforeEach(function () {
         WSO.define('__test__', function () {
             return jasmine.createSpyObj('factory', ['init'])
