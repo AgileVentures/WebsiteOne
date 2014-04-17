@@ -13,6 +13,10 @@ describe 'articles/show', type: :view do
 		   created_at: Time.now,
 		   updated_at: Time.now
 		   )
+    downvotes = [stub_model(ActsAsVotable::Vote),stub_model(ActsAsVotable::Vote)]
+    upvotes = [stub_model(ActsAsVotable::Vote)]
+    allow(@article).to recieve(:upvotes).and_return(upvotes)
+    allow(@article).to recieve(:downvotes).and_return(downvotes)
   end
 
   context 'user is not signed in' do
@@ -30,9 +34,9 @@ describe 'articles/show', type: :view do
       expect(rendered).not_to have_link('edit article')
     end
 
-    if 'should show article vote content' do
+    it 'should show article vote content' do
         render
-        rendered.should have_content("Vote value: #{@article.votevalue}"
+        rendered.should have_content("Vote value: #{@article.upvotes.size-@article.downvotes.size}")
 # test for vote up/down links
     end
 
@@ -48,6 +52,13 @@ describe 'articles/show', type: :view do
       render
       expect(rendered).to have_link('edit article')
     end
+
+    it 'renders the vote links' do
+      render
+      rendered.should have_link('Vote up')
+      rendered.should have_link('Vote down')
+    end
+
   end
 
   describe 'renders Disqus section' do
