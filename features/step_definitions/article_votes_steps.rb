@@ -17,6 +17,7 @@ Given(/^the following articles with votes exist:$/) do |table|
 end
 
 Then(/^I should see a Vote value of "(.*?)"$/) do |arg1|
+  page.should have_text 'Vote value ' + arg1
   pending # express the regexp above with the code you wish you had
 end
 
