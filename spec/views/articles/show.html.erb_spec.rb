@@ -32,6 +32,8 @@ describe 'articles/show', type: :view do
       expect(rendered).to have_content("Last updated #{time_ago_in_words(@article.updated_at)}")
       expect(rendered).to have_text(@article.tag_list.join(', '))
       expect(rendered).not_to have_link('edit article')
+      expect(rendered).not_to have_link('Vote up')
+      expect(rendered).not_to have_link('Vote down')
     end
 
     it 'should show article vote content' do
