@@ -13,28 +13,28 @@ Feature:
 
   Scenario: I should see the vote value of an article on the article show page
     Given I am on the "Show" page for article "Ruby is on Fire"
-    Then I should see a "vote value" of "0"
+    Then I should see a Vote value of "0"
 
   Scenario: I should see the link to Up Vote an article on the article show page
     Given I am logged in
     Given I am on the "Show" page for article "Ruby is on Fire"
-    Then I should see a link to "Up Vote"
+    Then I should see link "Up Vote"
 
   Scenario: I should see the link to Down Vote an article on the article show page
     Given I am logged in
     Given I am on the "Show" page for article "Ruby is on Fire"
-    Then I should see a link to "Down Vote"
+    Then I should see link "Down Vote"
 
   Scenario: I should be able to vote up an article
     Given I am logged in
     And I am on the "Show" page for article "Ruby is on Fire"
     When I click the "Up Vote" link
     Then I should be on the "Ruby is on Fire" page
-    And I should see a "Vote value" of "1"
+    And I should see a Vote value of "1"
 
   Scenario: I should be able to vote down an article
     Given I am logged in
     And I am on the "Show" page for article "JQuery cannot be queried"
     And I click the "Down Vote" link
     Then I should be on the "JQuery cannot be queried" page
-    And I should see a "Vote value" of -1
+    And I should see a Vote value of "-1"
