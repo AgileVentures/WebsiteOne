@@ -15,7 +15,9 @@ describe YoutubeApi do
 
   it 'sorts videos by published date' do
     response = File.read('spec/fixtures/youtube_user_response.json')
-    videos = parse_response(response)
+    request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
+    stub_request(:get, request_string).to_return(status: 200, body: response, headers: {})
+    videos = get_response(request_string)
     titles = videos.map { |video| video[:title] }
     expect(titles.index('WebsiteOne - Pairing session - refactoring authentication controller')).to be < titles.index('Autograders - Pairing session')
   end
