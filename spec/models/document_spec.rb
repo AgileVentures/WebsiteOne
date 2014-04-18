@@ -38,7 +38,7 @@ describe Document do
     end
   end
 
-  describe ".search" do
+  describe "::search" do
     before(:each) { 9.times { FactoryGirl.create(:document) } }
     after(:each) { Document.delete_all }
 
