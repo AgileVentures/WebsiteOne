@@ -1,38 +1,4 @@
-class YoutubeApi
-
-  #TODO: Refactor!
-  def initialize(*args)
-    if args.length == 1
-      @user = args[0]
-    elsif args.length == 2
-      @project = args[0]
-      @members = args[1]
-    else
-      raise ArgumentError
-    end
-  end
-
-  def user_videos
-    if @user.youtube_id
-      tags = followed_project_tags(@user)
-      return [] if tags.empty?
-
-      request = build_request(:user, @user)
-      response = get_response(request)
-      filter_response(response, tags, [YoutubeHelper.youtube_user_name(@user)]) if response
-    end
-  end
-
-  def project_videos
-    members_tags = members_tags(@members)
-    return [] if members_tags.blank?
-    project_tags = project_tags(@project)
-
-    request = build_request(:project, escape_query_params(members_tags), escape_query_params(project_tags))
-    response = get_response(request)
-    filter_response(response, project_tags, members_tags) if response
-  end
-
+module YoutubeApi
   def parse_response(response)
     begin
       json = JSON.parse(response)
@@ -46,8 +12,6 @@ class YoutubeApi
       nil
     end
   end
-
-  private
 
   def followed_project_tags(user)
     projects = user.following_by_type('Project')

@@ -48,9 +48,8 @@ describe ProjectsController do
       @project.stub(:tag_list).and_return [ 'WTF' ]
       Project.stub_chain(:friendly, :find).and_return @project
       @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
-      @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
-      @project.should_receive(:followers).and_return @more_users
-      YoutubeApi.any_instance.stub(project_videos: 'videos')
+      @project.should_receive(:members).and_return @users
+      @project.stub(videos: 'videos')
       PivotalService.stub(one_project: '') 
       dummy = Object.new
       dummy.stub(stories: "stories")
@@ -73,7 +72,7 @@ describe ProjectsController do
       assigns(:members).should eq @users
     end
 
-    it 'assigns the list of related YouTube videos in alphabetical order' do
+    it 'assigns the list of related YouTube videos' do
       get :show, { id: @project.friendly_id }, valid_session
       expect(assigns(:videos)).to eq 'videos'
     end

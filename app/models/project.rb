@@ -1,6 +1,7 @@
 require 'url_validator'
 
 class Project < ActiveRecord::Base
+  include YoutubeApi
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -16,6 +17,20 @@ class Project < ActiveRecord::Base
 
   def self.search(search, page)
     order('LOWER(title)').where('title LIKE ?', "%#{search}%").paginate(per_page: 5, page: page)
+  end
+
+  def members
+    followers.reject { |member| !member.display_profile }
+  end
+
+  def videos
+    members_tags = members_tags(members)
+    return [] if members_tags.blank?
+    project_tags = project_tags(self)
+
+    request = build_request(:project, escape_query_params(members_tags), escape_query_params(project_tags))
+    response = get_response(request)
+    filter_response(response, project_tags, members_tags) if response
   end
 
   # Bryan: Used to generate paths, used only in testing.

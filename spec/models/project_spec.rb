@@ -74,5 +74,38 @@ describe Project do
       Project.search(nil, nil).should eq Project.first 5
     end
   end
+
+  describe '#members' do
+    before do
+      @project = Project.new title: 'Title',
+                             description: 'Description',
+                             status: 'ACTIVE'
+    end
+    it 'should only return followers of the project' do
+      @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
+      @project.should_receive(:followers).and_return(@users)
+      expect(@project.members).to eq(@users)
+    end
+
+    it 'should only return with public profiles' do
+      @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
+      @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
+      @project.should_receive(:followers).and_return(@more_users)
+      expect(@project.members).to eq(@users)
+    end
+  end
+
+  describe '#videos' do
+    it 'retrieves project videos from youtube filtering by tags and members' do
+      project = FactoryGirl.create(:project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
+      members = [double(User, youtube_user_name: 'John Doe'), double(User, youtube_user_name: 'Ivan Petrov')]
+
+      request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")&fields=entry(author(name),id,published,title,content,link)}
+
+      expect(project).to receive(:get_response).with(request_string)
+      expect(project).to receive(:members).and_return(members)
+      project.videos
+    end
+  end
 end
 
