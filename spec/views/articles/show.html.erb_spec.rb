@@ -39,7 +39,8 @@ describe 'articles/show', type: :view do
     it 'should show article vote content' do
         render
         rendered.should have_content("Vote value: #{@article.upvotes.size-@article.downvotes.size}")
-# test for vote up/down links
+        rendered.should_not have_link('Vote up')
+        rendered.should_not have_link('Vote down')
     end
 
   end
@@ -59,6 +60,7 @@ describe 'articles/show', type: :view do
       render
       rendered.should have_link('Vote up')
       rendered.should have_link('Vote down')
+      rendered.should have_content("Vote value: #{@article.upvotes.size-@article.downvotes.size}")
     end
 
   end
