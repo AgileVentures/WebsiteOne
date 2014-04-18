@@ -36,7 +36,7 @@ describe 'articles/show', type: :view do
       expect(rendered).not_to have_link('Vote down')
     end
 
-    it 'should show article vote content' do
+    it 'should show article vote value' do
         render
         rendered.should have_content("Vote value: #{@article.upvotes.size-@article.downvotes.size}")
         rendered.should_not have_link('Vote up')
@@ -56,7 +56,7 @@ describe 'articles/show', type: :view do
       expect(rendered).to have_link('edit article')
     end
 
-    it 'renders the vote links' do
+    it 'renders the vote value and links' do
       render
       rendered.should have_link('Vote up')
       rendered.should have_link('Vote down')
