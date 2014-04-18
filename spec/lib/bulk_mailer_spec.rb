@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AgileVentures::BulkMailer do
+describe BulkMailer do
   before do
     2.times do 
       FactoryGirl.create(:user, email: "#{rand(1000)}@example.com")
