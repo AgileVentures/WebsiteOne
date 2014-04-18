@@ -35,5 +35,15 @@ describe YoutubeApi do
     followed_project_tags(user).should eq ["big regret", "boom", "bang", "big boom", "black hole", "scrum"]
   end
 
-
+  it 'filters the response by members and project tags' do
+   videos = [
+              {title: "WebsiteOne", author: "sampriti"},
+              {title: "WebsiteOne", author: "bryan"},
+              {title: "WebsiteOne", author: "thomas"},
+              {title: "LocalSupport", author: "sampriti"},
+              {title: "LocalSupport", author: "abagail"}
+            ]
+   result = filter_response(videos, ["WebsiteOne"], ["sampriti", "bryan"])
+   expect(result).to eq videos[0..1]
+  end
 end
