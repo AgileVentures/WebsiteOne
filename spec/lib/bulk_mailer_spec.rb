@@ -8,6 +8,10 @@ describe BulkMailer do
     @opts = { subject: 'my subject',
               heading: 'my heading',
               content: 'my multiline\ntext block' }
+    BulkMailer.any_instance.stub(:puts) # Added to prevent pollution of tests
+  end
+  after do
+    User.delete_all
   end
 
   it 'can be initialized' do
@@ -71,5 +75,29 @@ describe BulkMailer do
       end.to raise_error KeyError
     end
   end
-  
+
+
+  describe '::help' do
+    it 'show some advice how to initiate BulkMailer' do
+      help = "BulkMailer.new(heading: 'my_heading',
+                            subject: 'my subject',
+                            content: 'multiline text')\n
+              opts[:content]::  the content or body of the mailing\n
+              opts[:heading]::  a specific headline for the mailing\n
+              opts[:batch_size]:: the batch-size in which users are pulled off db\n
+              opts[:subject]::    the subject header of the mailing"
+      BulkMailer.should_receive(:puts).with(help)
+      BulkMailer.help
+    end
+  end
+
+  describe '#waiting_seconds' do
+    it 'should sleep for exactly 10 seconds and print a progress bar' do
+      Rails.stub(:env).and_return('development')
+      mailer = BulkMailer.new(@opts)
+      mailer.should_receive(:sleep).with(1).exactly(10).times
+      mailer.should_receive(:print).with('. ').exactly(10).times
+      mailer.send(:waiting_seconds)
+    end
+  end
 end
