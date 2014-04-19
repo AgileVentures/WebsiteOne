@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe BulkMailer do
   before do
-    2.times do 
-      FactoryGirl.create(:user, email: "#{rand(1000)}@example.com")
+    2.times do |i|
+      FactoryGirl.create(:user, email: "#{i}@example.com")
     end
     @opts = { subject: 'my subject',
               heading: 'my heading',
@@ -11,30 +11,30 @@ describe BulkMailer do
   end
 
   it 'can be initialized' do
-    bulk_mailer = AgileVentures::BulkMailer.new(@opts)
+    bulk_mailer = BulkMailer.new(@opts)
     bulk_mailer.should_not be_nil
   end
 
   it 'will return num sent mails' do
-    AgileVentures::BulkMailer.new(@opts).run.should eq(2)
+    BulkMailer.new(@opts).run.should eq(2)
   end
 
   it 'responds to #num_sent' do
-    AgileVentures::BulkMailer.new(@opts).should respond_to(:num_sent)
+    BulkMailer.new(@opts).should respond_to(:num_sent)
   end
 
   it 'responds to #used_addresses' do
-    AgileVentures::BulkMailer.new(@opts).should respond_to(:used_addresses)
+    BulkMailer.new(@opts).should respond_to(:used_addresses)
   end
 
   it 'returns email-addresses' do
-    bulk_mailer = AgileVentures::BulkMailer.new(@opts)
+    bulk_mailer = BulkMailer.new(@opts)
     bulk_mailer.run
     bulk_mailer.used_addresses.sort.should eq(User.all.map(&:email).sort)
   end
 
   it 'creates and applies instance vars' do
-    bulk_mailer = AgileVentures::BulkMailer.new(@opts)
+    bulk_mailer = BulkMailer.new(@opts)
     bulk_mailer.instance_variables.should include(:@heading &&
                                                    :@content &&
                                                    :@subject &&
@@ -45,17 +45,29 @@ describe BulkMailer do
       eq("my #{word.to_s.split('@')[-1]}")
     end
   end
+
+  it 'should send an exactly two emails' do
+    ActionMailer::Base.deliveries.clear
+    BulkMailer.new(@opts).run
+
+    ActionMailer::Base.deliveries.size.should eq 2
+    emails = ActionMailer::Base.deliveries
+    emails.each_with_index do |email, i|
+      expect(email.subject).to include 'my subject'
+      expect(email.to[0]).to eq "#{i}@example.com"
+    end
+  end
   
   describe 'missing arguments' do
     it 'raises KeyError without :heading' do
       expect do
-        AgileVentures::BulkMailer.new({content: 'foo'})
+        BulkMailer.new({content: 'foo'})
       end.to raise_error KeyError
     end
   
     it 'raises KeyError without :content' do
       expect do
-        AgileVentures::BulkMailer.new({heading: 'foo'})
+        BulkMailer.new({heading: 'foo'})
       end.to raise_error KeyError
     end
   end

@@ -15,9 +15,9 @@ class BulkMailer
   #
   # <b>then call with:</b>
   #
-  # <tt>bulk = AgileVentures::BulkMailer.new(heading: 'my concern',
-  #                               subject: 'special subject',
-  #                               content: content)</tt>
+  # <tt>bulk = BulkMailer.new(heading: 'my concern',
+  #                           subject: 'special subject',
+  #                           content: content)</tt>
   # <tt>bulk.run</tt>
   # every user with enabled mailing in settings will receive this mailing.
 
