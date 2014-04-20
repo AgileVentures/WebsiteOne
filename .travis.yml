@@ -18,10 +18,6 @@ script:
 - bundle exec rake spec
 - bundle exec rake jasmine:ci
 
-addons:
-  code_climate:
-    repo_token: 7d45ffb2dbf367f8158a6e65d4d50f8f0ac035c2027bdb33e2aaccb57d43ee91
-
 deploy:
   provider: heroku
   api_key:

@@ -1,6 +1,3 @@
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'coveralls'
 Coveralls.wear!('rails')
