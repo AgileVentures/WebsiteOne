@@ -44,6 +44,8 @@ gem 'compass-rails'
 gem 'rack-cache'
 gem 'sprockets-image_compressor'
 
+gem "codeclimate-test-reporter", group: :test, require: nil
+
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
@@ -56,7 +58,6 @@ group :test do
   gem 'zeus', '0.13.4.pre2' # rails preloading environment (the only ver that works with RubyMine)
   gem 'webmock' # mocking external net connections
   gem 'delorean'
-  gem "codeclimate-test-reporter", require: nil
 end
 
 group :development, :test do
