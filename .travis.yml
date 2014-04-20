@@ -15,7 +15,7 @@ before_script:
 
 script:
 - bundle exec rake cucumber
-- bundle exec rake spec
+- CODECLIMATE_REPO_TOKEN=7d45ffb2dbf367f8158a6e65d4d50f8f0ac035c2027bdb33e2aaccb57d43ee91 bundle exec rake spec
 - bundle exec rake jasmine:ci
 deploy:
   provider: heroku
