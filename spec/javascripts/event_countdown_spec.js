@@ -88,24 +88,24 @@ describe('Event Countdown', function () {
         });
 
         it('displays hours in the countdown only if there are any', function () {
-            var regex = /^<p>\d{2}:\d{2}:\d{2}/;
-            expect(regex.test(this.countdownClock.html())).toBeFalsy();
+            var regex = /^\d{2}:\d{2}:\d{2} /;
+            expect(regex.test(this.countdownClock.text())).toBeFalsy();
             event.setMinutes(event.getMinutes() + 60); // event in 90 mins
             this.dateParse.and.returnValue(event);
             WSO.EventCountdown.init();
             WSO.EventCountdown.update();
-            expect(regex.test(this.countdownClock.html())).toBeTruthy()
+            expect(regex.test(this.countdownClock.text())).toBeTruthy()
         });
 
         it('otherwise only displays minutes and seconds in the countdown', function () {
-            var regex = /<p>\d{2}:\d{2} to <a href="https:\/\/coming\.home">Homecoming<\/a><\/p>/;
-            expect(regex.test(this.countdownClock.html())).toBeTruthy()
+            var regex = /^\d{2}:\d{2} /;
+            expect(regex.test(this.countdownClock.text())).toBeTruthy()
         });
 
         it('displays a banner after it has started', function () {
             floor.and.returnValue(0);
             WSO.EventCountdown.update();
-            expect(this.countdownClock.html()).toEqual('<a href="https://coming.home">Homecoming</a> has started')
+            expect(this.countdownClock.text()).toEqual('Homecoming has started')
         });
 
         it('recalculates the time every second unless the event has already started', function () {
@@ -123,12 +123,13 @@ describe('Event Countdown', function () {
     describe('format()', function() {
         it('pads numbers less than 10 with a zero', function() {
             expect(WSO.EventCountdown.format(9)).toEqual('09');
-            expect(WSO.EventCountdown.format(-2)).toEqual('0-2'); // LOL
         });
 
         it('converts type from number to string', function() {
             expect(WSO.EventCountdown.format(9)).toEqual('09');
-            expect(WSO.EventCountdown.format(10)).toEqual('10')
+            expect(WSO.EventCountdown.format(10)).toEqual('10');
+            expect(WSO.EventCountdown.format(-2)).toEqual('-2'); // less bad at least
+
         });
     });
 });
