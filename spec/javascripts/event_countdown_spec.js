@@ -123,6 +123,7 @@ describe('Event Countdown', function () {
     describe('format()', function() {
         it('pads numbers less than 10 with a zero', function() {
             expect(WSO.EventCountdown.format(9)).toEqual('09');
+            expect(WSO.EventCountdown.format(0)).toEqual('00');
         });
 
         it('converts type from number to string', function() {

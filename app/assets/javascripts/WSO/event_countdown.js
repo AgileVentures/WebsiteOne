@@ -6,7 +6,7 @@ WSO.define('EventCountdown', function () {
         var countdownClock, eventName, eventTime, eventUrl, textToAppend;
 
         this.format = function(num) {
-            return (0 < num && num < 10) ? '0' + num : num.toString();
+            return (0 <= num && num < 10) ? '0' + num : num.toString();
         };
 
         this.update = function() {
