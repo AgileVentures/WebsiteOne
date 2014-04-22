@@ -1,6 +1,7 @@
 require 'spec_helper'
 include MercuryHelper
 
+
 describe 'documents/index' do
   before(:each) do
 	@documents = [        
