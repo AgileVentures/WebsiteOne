@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.1.1p76
+- 2.1.1
 
 # to enable javascript testing with X server and firefox
 before_install:
