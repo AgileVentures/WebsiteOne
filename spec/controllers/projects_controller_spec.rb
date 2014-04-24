@@ -81,6 +81,12 @@ describe ProjectsController do
       get :show, { id: @project.friendly_id }, valid_session
       expect(assigns(:stories)).to eq 'stories'
     end
+
+    it 'notifies ExceptionNotifier when error occurs in fetching of PivotalTracker stories' do
+      PivotalService.stub(:iterations).and_raise(StandardError)
+      ExceptionNotifier.should_receive(:notify_exception)
+      get :show, { id: @project.friendly_id }, valid_session
+    end
   end
 
   describe '#new' do
