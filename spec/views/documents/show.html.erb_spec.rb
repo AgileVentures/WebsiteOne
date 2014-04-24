@@ -79,5 +79,11 @@ describe "documents/show" do
       rendered.should have_content @document_child.title
       rendered.should have_content @document_child.body
     end
+
+    it 'renders icon for editing the sub-document' do
+      render
+      expect(rendered).to have_selector('li')
+    end
   end
 end
+
