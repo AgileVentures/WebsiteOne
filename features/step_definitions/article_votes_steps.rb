@@ -16,8 +16,12 @@ Given(/^the following articles with votes exist:$/) do |table|
 
 end
 
-Then(/^I should see a Vote value of "(.*?)"$/) do |arg1|
-  page.should have_text 'Vote value ' + arg1
+Then(/^I should see a Vote value of "(.*?)"$/) do |vote_value|
+  page.should have_text 'Vote value ' + vote_value
+  pending # express the regexp above with the code you wish you had
+end
+
+Given(/^I have( not)? voted "(.*?)" article "(.*?)"$/) do |negative, up_or_down, article|
   pending # express the regexp above with the code you wish you had
 end
 
