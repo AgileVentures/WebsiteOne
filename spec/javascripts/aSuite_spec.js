@@ -1,8 +1,9 @@
-describe("aTest", function() {
-    it ("checks for letter a", function(){
-       expect(a).toBe(true);
-    });
+describe("A suite is just a function", function() {
 
+    it("a test", function() {
+
+        expect(a).toBe(true);
+    });
 });
 
 

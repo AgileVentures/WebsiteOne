@@ -1,5 +1,5 @@
-describe("pinga", function() {
-    it("says pinga", function() {
-        expect(pinga()).toContain("ing");
+describe("ping", function() {
+    it("only shows ing", function() {
+        expect(ping()).toContain("ing");
     });
 });

@@ -1,3 +1,3 @@
-function pinga() {
+function ping() {
     return "ing";
 }
