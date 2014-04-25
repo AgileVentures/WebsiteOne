@@ -257,4 +257,84 @@ describe ProjectsController do
       end
     end
   end
+
+  describe '#follow' do
+    before do
+      @project = mock_model(Project, valid_attributes)
+      Project.stub_chain(:friendly, :find).and_return @project
+      controller.stub(:current_user).and_return(@user)
+    end
+
+    it 'assigns the requested project as @project' do
+      @user.should_receive(:follow)
+      get :follow, id: 'follow', project: {title: ''}
+      expect(assigns(:project)).to eq(@project)
+    end
+
+    context 'logged in' do
+      it 'current user should follow project' do
+        @user.should_receive(:follow).with(@project)
+        get :follow, id: 'follow', project: {title: ''}
+      end
+
+      it 'should redirect to project show page and show successful flash notice' do
+        @user.stub(:follow)
+        get :follow, id: 'follow', project: {title: ''}
+        expect(response).to redirect_to(project_path(@project))
+        expect(flash[:notice]).to eq "You just joined #{@project.title}."
+      end
+    end
+
+    context 'not logged in' do
+      before do
+        @user.stub(:follow)
+        controller.stub(current_user: nil)
+      end
+
+      it 'should show a flash notice saying user must be signed in' do
+        get :follow, id: 'follow', project: {title: ''}
+        expect(flash[:error]).to eq "You must <a href='/users/sign_in'>login</a> to follow #{@project.title}."
+      end
+    end
+  end
+
+  describe '#unfollow' do
+    before do
+      @project = mock_model(Project, valid_attributes)
+      Project.stub_chain(:friendly, :find).and_return @project
+      controller.stub(:current_user).and_return(@user)
+    end
+
+    it 'assigns the requested project as @project' do
+      @user.should_receive(:stop_following)
+      get :unfollow, id: 'unfollow', project: {title: ''}
+      expect(assigns(:project)).to eq(@project)
+    end
+
+    context 'logged in' do
+      it 'current user should unfollow project' do
+        @user.should_receive(:stop_following).with(@project)
+        get :unfollow, id: 'unfollow', project: {title: ''}
+      end
+
+      it 'should redirect to project show page and show successful flash notice' do
+        @user.stub(:stop_following)
+        get :unfollow, id: 'unfollow', project: {title: ''}
+        expect(response).to redirect_to(project_path(@project))
+        expect(flash[:notice]).to eq "You are no longer a member of #{@project.title}."
+      end
+    end
+
+    context 'not logged in' do
+      before do
+        @user.stub(:follow)
+        controller.stub(current_user: nil)
+      end
+
+      it 'should show a flash notice saying user must be signed in' do
+        get :unfollow, id: 'unfollow', project: {title: ''}
+        expect(flash[:error]).to eq "You must <a href='/users/sign_in'>login</a> to unfollow #{@project.title}."
+      end
+    end
+  end
 end
