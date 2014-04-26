@@ -24,5 +24,6 @@
 //= require bootstrap/modal
 //= require_directory ./WSO
 
+
 // Bryan: removed require_tree . because mercury causes problems if loaded on every page
 

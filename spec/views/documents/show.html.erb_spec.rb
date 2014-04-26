@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "documents/show" do
   before(:each) do
     @user = mock_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org', display_name: 'John Simpson')
-    @project = assign(:project, stub_model(Project, :id => 1, :title => "Project1", :created_at => Time.now))
+    @project = assign(:project, stub_model(Project, :id => 1, :title => "Project1", :friendly_id => "Cool-Project", :created_at => Time.now))
     @version = stub_model(PaperTrail::Version,
                           item_type: "Document",
                           event: "create",
@@ -66,6 +66,17 @@ describe "documents/show" do
       render
       rendered.should have_text 'Revisions'
     end
+
+    it 'should render a New Sub-document link' do
+      controller.stub(:user_signed_in?).and_return(true)
+      render
+      rendered.within('#new_document_link') do |link|
+        #puts 'hi'
+        #debugger
+        link.should have_css('i[class="fa fa-file-text-o"]')
+        #rendered.should have_link 'New Sub-document', :href => new_project_document_path(project_id: @project_id, parent_id: @document.id), id: 'new_document_link'
+      end
+    end
   end
 
   context 'document is a child' do
@@ -79,11 +90,12 @@ describe "documents/show" do
       rendered.should have_content @document_child.title
       rendered.should have_content @document_child.body
     end
-
-    it 'renders icon for editing the sub-document' do
-      render
-      expect(rendered).to have_selector('li')
-    end
   end
 end
+
+
+
+
+
+
 
