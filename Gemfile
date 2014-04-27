@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
-gem 'rails', '4.0.4'
+ruby '2.1.1'
+gem 'rails', '4.1.0'
+# Added after upgrade to rails 4.1
+gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.1'
+# End additions
+
 gem 'pg'  # PostgreSQL database support
 gem 'sass-rails', '~> 4.0.0' # Sass stylesheet language
 gem 'uglifier'  # Javascript compressor
@@ -33,7 +37,6 @@ gem 'bootstrap-modal-rails'
 gem 'paper_trail'  # version control for Document
 gem 'verbs'   # language and verbs - not used for now but I plan to use it in Events /Thomas
 gem 'ice_cube'     # used for Event
-gem 'squeel'
 gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
