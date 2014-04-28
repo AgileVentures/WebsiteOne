@@ -1,6 +1,6 @@
 require_relative '../../../app/services/events/creator'
+
 describe Events::Creator do 
-  
   let(:event_repository) { double(:event_repository, new:event) } 
   let(:service) { Events::Creator.new(event_repository) } 
 

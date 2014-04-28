@@ -38,8 +38,7 @@ class EventsController < ApplicationController
       @event = event
       flash[:notice] = @event.errors.full_messages.to_sentence
       render :new
-    end
-                                      )
+    end)
   end
 
   def update
