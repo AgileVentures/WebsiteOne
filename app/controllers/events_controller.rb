@@ -28,14 +28,18 @@ class EventsController < ApplicationController
     params[:event][:event_date] = EventDate.for(params[:event][:event_date])
     params[:event][:start_time] = StartTime.for(params[:event][:start_time])
     params[:event][:end_time] = EndTime.for(params[:event][:end_time])
-    @event = Event.new(event_params)
-    if @event.save
+    Events::Creator.new(Event).perform(event_params, 
+                                       on_success:->(event) do 
+      @event = event
       flash[:notice] = 'Event Created'
       redirect_to event_path(@event)
-    else
+    end, 
+    on_failure:->(event) do 
+      @event = event
       flash[:notice] = @event.errors.full_messages.to_sentence
       render :new
     end
+                                      )
   end
 
   def update
