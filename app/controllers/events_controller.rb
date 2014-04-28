@@ -25,7 +25,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    set_event_times
+    params[:event][:event_date] = EventDate.for(params[:event][:event_date])
+    params[:event][:start_time] = StartTime.for(params[:event][:start_time])
+    params[:event][:end_time] = EndTime.for(params[:event][:end_time])
     @event = Event.new(event_params)
     if @event.save
       flash[:notice] = 'Event Created'
@@ -81,6 +83,4 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit!
   end
-
-
 end

@@ -21,6 +21,7 @@ WebsiteOne::Application.routes.draw do
       patch :update_only_url
     end
   end
+  get '/verify/:id' => redirect {|params,request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}"}
 
   post 'preview/article', to: 'articles#preview',:format => false
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
