@@ -26,12 +26,4 @@ describe DocumentsHelper do
       metadata.should eq "Created 3 minutes ago by Sampriti Panda"
     end
   end
-
-  describe "#created_date" do
-    it 'returns time in correct format' do
-      @document = mock_model(Document, created_at: 14.years.ago)
-      created_date.should eq 'Created about 14 years ago'
-    end
-  end
-
 end
