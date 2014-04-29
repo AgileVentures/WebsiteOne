@@ -25,15 +25,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    if params[:event][:event_date].empty?
-      params[:event][:event_date] = Date.today
-    end
-    if params[:event][:start_time].empty?
-      params[:event][:start_time] = Time.now
-    end
-    if params[:event][:end_time].empty?
-      params[:event][:end_time] = Time.now + 30.minutes
-    end
+    params[:event][:event_date] = EventDate.for(params[:event][:event_date])
+    params[:event][:start_time] = StartTime.for(params[:event][:start_time])
+    params[:event][:end_time] = EndTime.for(params[:event][:end_time])
     @event = Event.new(event_params)
     if @event.save
       flash[:notice] = 'Event Created'
