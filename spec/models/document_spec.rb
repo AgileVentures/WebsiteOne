@@ -38,15 +38,6 @@ describe Document do
     end
   end
 
-  describe "::search" do
-    before(:each) { 9.times { FactoryGirl.create(:document) } }
-    after(:each) { Document.delete_all }
-
-    it 'returns paginated values' do
-      Document.search(nil, nil).should eq Document.first 5
-    end
-  end
-
   describe '#url_for_me' do
     it 'returns correct url for show action' do
       @document.url_for_me('show').should eq "/projects/#{@project.slug}/documents/#{@document.slug}"
