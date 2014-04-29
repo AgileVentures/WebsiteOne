@@ -22,18 +22,14 @@ describe DocumentsController do
     }.to raise_error ActiveRecord::RecordNotFound
   end
 
-  # Bryan: Deprecated path
-  #describe 'GET index' do
-  #  before(:each) { get :index, { project_id: document.friendly_id }, valid_session }
-  #
-  #  it 'assigns all documents as @documents' do
-  #    assigns(:documents).should eq([document])
-  #  end
-  #
-  #  it 'renders the index template' do
-  #    expect(response).to render_template 'index'
-  #  end
-  #end
+  describe 'GET index' do
+
+    it 'redirects to project index page' do
+      get :index, { project_id: document.project.id }, valid_session
+      expect(response).to redirect_to project_path document.project
+    end
+
+  end
 
   describe 'GET show' do
 
