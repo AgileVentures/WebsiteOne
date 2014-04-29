@@ -66,7 +66,7 @@ describe Project do
     end
   end
 
-  describe '#search' do
+  describe '::search' do
     before(:each) { 9.times { FactoryGirl.create(:project) } }
     after(:each) { Project.delete_all }
 
