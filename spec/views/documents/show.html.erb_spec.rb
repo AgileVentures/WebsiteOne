@@ -67,14 +67,19 @@ describe "documents/show" do
       rendered.should have_text 'Revisions'
     end
 
+    it 'should render an Edit link' do
+      controller.stub(:user_signed_in?).and_return(true)
+      render
+      rendered.within('#edit_link') do |link|
+        link.should have_css('i[class="fa fa-pencil-square-o"]')
+      end
+    end
+
     it 'should render a New Sub-document link' do
       controller.stub(:user_signed_in?).and_return(true)
       render
       rendered.within('#new_document_link') do |link|
-        #puts 'hi'
-        #debugger
         link.should have_css('i[class="fa fa-file-text-o"]')
-        #rendered.should have_link 'New Sub-document', :href => new_project_document_path(project_id: @project_id, parent_id: @document.id), id: 'new_document_link'
       end
     end
   end
