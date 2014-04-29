@@ -1,6 +1,6 @@
 module Events
   class Creator
-    def initialize(event_repository) 
+    def initialize(event_repository)
       @event_repository = event_repository
     end
 
