@@ -28,7 +28,7 @@ class EventsController < ApplicationController
     params[:event][:event_date] = EventDate.for(params[:event][:event_date])
     params[:event][:start_time] = StartTime.for(params[:event][:start_time])
     params[:event][:end_time] = EndTime.for(params[:event][:end_time])
-    Events::Creator.new(Event).perform(event_params,
+    EventCreatorService.new(Event).perform(event_params,
                                        on_success: ->(event) do
       @event = event
       flash[:notice] = 'Event Created'

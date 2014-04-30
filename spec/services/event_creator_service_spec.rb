@@ -1,7 +1,7 @@
-require_relative '../../../app/services/events/creator'
-describe Events::Creator do 
+require_relative '../../app/services/event_creator_service'
+describe EventCreatorService do 
   let(:event_repository) { double(:event_repository, new: event) }
-  let(:service) { Events::Creator.new(event_repository) }
+  let(:service) { EventCreatorService.new(event_repository) }
   let(:callback) do
     { on_success: ->(event) { 'success' },
       on_failure: ->(event) { 'failure' } }
