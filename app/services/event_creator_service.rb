@@ -3,12 +3,12 @@ class EventCreatorService
     @event_repository = event_repository
   end
 
-  def perform(event_params, on_success:raise, on_failure:raise)
+  def perform(event_params, success:raise, failure:raise)
     @event = @event_repository.new(event_params)
     if @event.save
-      on_success.call(@event)
+      success.call(@event)
     else
-      on_failure.call(@event)
+      failure.call(@event)
     end
   end
 end

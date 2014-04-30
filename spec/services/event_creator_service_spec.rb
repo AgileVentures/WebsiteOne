@@ -3,8 +3,8 @@ describe EventCreatorService do
   let(:event_repository) { double(:event_repository, new: event) }
   let(:service) { EventCreatorService.new(event_repository) }
   let(:callback) do
-    { on_success: ->(event) { 'success' },
-      on_failure: ->(event) { 'failure' } }
+    { success: ->(event) { 'success' },
+      failure: ->(event) { 'failure' } }
   end
 
   context 'on success creates an event' do
