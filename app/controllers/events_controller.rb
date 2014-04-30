@@ -73,7 +73,7 @@ class EventsController < ApplicationController
     params.require(:event).permit!
   end
 
-  def normalize_event_dates(event_params) 
+  def normalize_event_dates(event_params)
     event_params[:event_date] = EventDate.for(event_params[:event_date])
     event_params[:start_time] = StartTime.for(event_params[:start_time])
     event_params[:end_time] = EndTime.for(event_params[:end_time])

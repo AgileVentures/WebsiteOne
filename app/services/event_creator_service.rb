@@ -11,5 +11,4 @@ class EventCreatorService
       failure.call(@event)
     end
   end
-
 end
