@@ -18,10 +18,6 @@ src_files:
   - assets/jasmine-jquery.js
   - app/assets/javascripts/*.js
 
-
-
-
-
 # stylesheets
 #
 # Return an array of stylesheet filepaths relative to src_dir to include before jasmine specs.

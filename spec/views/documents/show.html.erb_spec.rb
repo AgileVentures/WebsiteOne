@@ -33,15 +33,7 @@ describe "documents/show" do
 
     view.stub(:created_by).and_return(@created_by)
   end
-  #
-  #it "renders attributes in <span>" do
-  #  render
-  #  rendered.should have_content('Title')
-  #  rendered.should have_content('MyText')
-  #end
 
-
-  
   context 'document is root' do
     before do
       assign :document, @document
@@ -97,10 +89,3 @@ describe "documents/show" do
     end
   end
 end
-
-
-
-
-
-
-
