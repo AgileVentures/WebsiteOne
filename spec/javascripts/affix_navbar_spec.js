@@ -46,6 +46,11 @@ describe('Affixed Navbar', function () {
             $(window).scroll();
             expect(onScrollSpy).toHaveBeenCalled();
         });
+
+        it('calculates the vertical position of the window', function() {
+            $(window).scroll();
+            expect(scrollTop).toHaveBeenCalled()
+        });
     });
 
     describe('scrolling down', function () {
