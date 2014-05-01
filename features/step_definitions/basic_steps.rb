@@ -147,7 +147,6 @@ Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
   else
     expect(page.has_link? link).to be_false
   end
-  page.should have_link link
 end
 
 Then /^I should see field "([^"]*)"$/ do |field|
