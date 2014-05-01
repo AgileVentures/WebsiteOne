@@ -25,17 +25,17 @@ class EventsController < ApplicationController
   end
 
   def create
-    params[:event][:event_date] = EventDate.for(params[:event][:event_date])
-    params[:event][:start_time] = StartTime.for(params[:event][:start_time])
-    params[:event][:end_time] = EndTime.for(params[:event][:end_time])
-    @event = Event.new(event_params)
-    if @event.save
+    EventCreatorService.new(Event).perform(normalize_event_dates(event_params),
+                                       success: ->(event) do
+      @event = event
       flash[:notice] = 'Event Created'
       redirect_to event_path(@event)
-    else
+    end,
+    failure: ->(event) do
+      @event = event
       flash[:notice] = @event.errors.full_messages.to_sentence
       render :new
-    end
+    end)
   end
 
   def update
@@ -73,5 +73,11 @@ class EventsController < ApplicationController
     params.require(:event).permit!
   end
 
+  def normalize_event_dates(event_params)
+    event_params[:event_date] = EventDate.for(event_params[:event_date])
+    event_params[:start_time] = StartTime.for(event_params[:start_time])
+    event_params[:end_time] = EndTime.for(event_params[:end_time])
+    event_params
+  end
 
 end
