@@ -18,7 +18,7 @@ WSO.define('AffixedNavbar', function() {
         header.css({ 'margin-bottom': 0 });
         isAffixed = false;
       }
-    }
+    };
 
     this.init = function() {
       affixedNav = $('#nav');
