@@ -114,7 +114,7 @@ describe Project do
                              description: 'Description',
                              status: 'ACTIVE'
     end
-    
+
     it 'returns correct url for show action' do
       @project.url_for_me('show').should eq "/projects/#{@project.slug}"
     end
