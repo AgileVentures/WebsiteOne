@@ -4,7 +4,7 @@
   <!---->
   <!-- Single button -->
   <div class="btn-group" display="inline-block">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
       Search Scrums <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
@@ -17,9 +17,13 @@
     </ul>
   </div>
 
-  <% @scrums.each do |scrum| %>
-      <tr>
-        <td><%= scrum.title %></td>
-      </tr>
-  <% end %>
-</table>
+  <div class="container">
+    <h1></h1>
+
+    <div id="player-wrapper"></div>
+    <% @scrums.each do |scrum| %>
+        <iframe width="250" height="250" src="//www.youtube.com/embed/<%= scrum %>" frameborder="14" allowfullscreen></iframe>
+    <% end %>
+  </div>
+ </table>
+
