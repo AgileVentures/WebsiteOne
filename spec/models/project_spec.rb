@@ -107,5 +107,22 @@ describe Project do
       project.videos
     end
   end
+
+  describe '#url_for_me' do
+    before(:each) do
+      @project = Project.new title: 'Title',
+                             description: 'Description',
+                             status: 'ACTIVE'
+    end
+    
+    it 'returns correct url for show action' do
+      @project.url_for_me('show').should eq "/projects/#{@project.slug}"
+    end
+
+    it 'returns correct url for other actions' do
+      @project.url_for_me('new').should eq "/projects/#{@project.slug}/new"
+    end
+  end
+
 end
 
