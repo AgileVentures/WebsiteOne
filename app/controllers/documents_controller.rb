@@ -2,7 +2,7 @@ class DocumentsController < ApplicationController
   layout 'with_sidebar'
   before_action :find_project
   before_action :set_document, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show, :create]
+  before_action :authenticate_user!, except: [:index, :show]
 
 
   # GET /documents
