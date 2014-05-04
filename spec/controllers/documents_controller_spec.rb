@@ -222,4 +222,22 @@ describe DocumentsController do
       flash[:notice].should eq 'The document has been successfully updated.'
     end
   end
+
+  # Private Methods
+
+  describe '#set_parent' do
+    before do
+      controller = DocumentsController.new
+    end
+    it 'should set parent when parent_id is present' do
+      controller.params[:parent_id] = @document.id
+      controller.instance_eval{set_parent} # Calling Private Methods
+      assigns(:parent).should eq @document
+    end
+
+    it 'should not set parent when parent_id is not present' do
+      controller.instance_eval{ set_parent } # Calling Private Methods
+      assigns(:parent).should eq nil
+    end
+  end
 end
