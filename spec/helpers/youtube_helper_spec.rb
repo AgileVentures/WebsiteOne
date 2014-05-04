@@ -28,4 +28,11 @@ describe YoutubeHelper do
     expect(JSON).to receive(:load).with('response').and_return(json)
     expect(YoutubeHelper.user_name(user)).to eq('Ivan Petrov')
   end
+
+  it 'saves and returns the youtube user name for an user' do
+    user =  FactoryGirl.create(:user)
+    YoutubeHelper.stub(:user_name).and_return('Frankie')
+    expect(YoutubeHelper.youtube_user_name(user)).to eq 'Frankie'
+    expect(user.youtube_user_name).to eq 'Frankie'
+  end
 end
