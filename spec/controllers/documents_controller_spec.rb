@@ -210,6 +210,16 @@ describe DocumentsController do
   end
 
   describe 'GET mercury_saved' do
+    before(:each) do
+      get :mercury_saved, project_id: @document.project.slug, document_id: @document.slug
+    end
 
+    it 'should redirect to the static_page_path' do
+      response.should redirect_to project_document_path(@document.project, @document)
+    end
+
+    it 'should display a flash message "The document has been successfully updated."' do
+      flash[:notice].should eq 'The document has been successfully updated.'
+    end
   end
 end
