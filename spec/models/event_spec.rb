@@ -169,4 +169,11 @@ describe Event do
       expect(@event.current_occurences.count).to eq 2
     end
   end
+
+  it 'should raise error if there are no repeats weekly each days of the week' do
+    @event = stub_model(Event)
+    @event.stub(repeats_weekly_each_days_of_the_week: [])
+    @event.errors.should_receive(:add).with(:base, 'You must have at least one repeats weekly each days of the week')
+    @event.instance_eval { must_have_at_least_one_repeats_weekly_each_days_of_the_week }
+  end
 end
