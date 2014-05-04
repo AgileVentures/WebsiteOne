@@ -174,4 +174,42 @@ describe DocumentsController do
       response.should redirect_to(project_documents_path(id))
     end
   end
+
+  describe 'PUT mercury_update' do
+    before(:each) do
+      Document.stub_chain(:friendly, :find).and_return(@document)
+    end
+
+    it 'assigns the requested document as @document' do
+      put :mercury_update, project_id: @document.project.slug, document_id: @document.slug, content: { document_title: { value: 'MyTitle' }, document_body: { value: 'MyBody' } }
+      assigns(:document).should eq(@document)
+    end
+
+    context 'with valid params' do
+      before(:each) do
+        @document.should_receive(:update_attributes).with(title: 'MyTitle', body: 'MyBody').and_return true
+        put :mercury_update, project_id: @document.project.slug, document_id: @document.slug, content: { document_title: { value: 'MyTitle' }, document_body: { value: 'MyBody' } }
+      end
+
+      it 'should render a blank string' do
+        response.body.should be_empty
+      end
+    end
+
+    context 'with invalid params' do
+      before(:each) do
+        @document.should_receive(:update_attributes).and_return false
+        put :mercury_update, project_id: @document.project.slug, document_id: @document.slug, content: { document_title: { value: '' }, document_body: { value: '' } }
+      end
+
+      it 'should not render anything' do
+        # render nothing actually renders a space
+        response.body.should eq ' '
+      end
+    end
+  end
+
+  describe 'GET mercury_saved' do
+
+  end
 end

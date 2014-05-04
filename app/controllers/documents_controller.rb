@@ -76,6 +76,8 @@ class DocumentsController < ApplicationController
     if @document.update_attributes(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
       render text: '' # So mercury knows it is successful
+    else
+      render nothing: true
     end
   end
 
