@@ -4,6 +4,7 @@ WSO.define('EventCountdown', function () {
 
     function EventCountdown() {
         var countdownClock, eventName, eventTime, eventUrl, textToAppend;
+        var self = this;
 
         this.format = function(num) {
             return (0 <= num && num < 10) ? '0' + num : num.toString();
@@ -20,18 +21,18 @@ WSO.define('EventCountdown', function () {
             } else {
                 var tmp = '<p>';
                 if (timeInHours > 0) {
-                    tmp += this.format(timeInHours) + ':';
+                    tmp += self.format(timeInHours) + ':';
                 }
 
-                countdownClock.html(tmp + this.format(timeInMins % 60) +
-                    ':' + this.format(timeInSeconds % 60) +
+                countdownClock.html(tmp + self.format(timeInMins % 60) +
+                    ':' + self.format(timeInSeconds % 60) +
                     textToAppend);
-                setTimeout(this.update, 1000);
+                setTimeout(self.update, 1000);
             }
         };
 
         this.init = function() {
-            clearTimeout(this.update);
+            clearTimeout(self.update);
 
             countdownClock = $('#next-event');
             if (countdownClock.length > 0) {
@@ -40,7 +41,7 @@ WSO.define('EventCountdown', function () {
                 eventName = countdownClock.data('event-name');
                 textToAppend = ' to <a href="' + eventUrl + '">' + eventName + '</a></p>';
 
-                this.update();
+                self.update();
             } else {
                 eventName = null;
                 eventTime = null;

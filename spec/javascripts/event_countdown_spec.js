@@ -75,6 +75,7 @@ describe('Event Countdown', function () {
             floor = spyOn(Math, 'floor').and.callThrough();
             WSO.EventCountdown.update();
         });
+
         it('in seconds', function () {
             expect(floor.calls.argsFor([0])).toBeCloseTo(1800, 1);  // +/- 10%
         });
@@ -118,6 +119,10 @@ describe('Event Countdown', function () {
             expect(setTimeout).not.toHaveBeenCalled()
         });
 
+        it('should still work calling it through the window object', function() {
+            // implicitly binds the call to the window object
+            expect(this.update).not.toThrow();
+        });
     });
 
     describe('format()', function() {
