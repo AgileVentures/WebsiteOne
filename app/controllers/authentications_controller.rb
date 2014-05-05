@@ -70,16 +70,14 @@ class AuthenticationsController < ApplicationController
   end
 
   def create_new_authentication_for_current_user(omniauth, path)
-    if auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-      if auth.save
-        # Bryan: TESTED
-        flash[:notice] = 'Authentication successful.'
-        redirect_to path
-      else
-        # Bryan: TESTED
-        flash[:alert] = 'Unable to create additional profiles.'
-        redirect_to @path
-      end
+    if current_user.create_new_authentication(omniauth[:provider], omniauth[:uid])
+      # Bryan: TESTED
+      flash[:notice] = 'Authentication successful.'
+      redirect_to path
+    else
+      # Bryan: TESTED
+      flash[:alert] = 'Unable to create additional profiles.'
+      redirect_to @path
     end
   end
 
@@ -119,12 +117,16 @@ class AuthenticationsController < ApplicationController
 
   def link_to_youtube
     user = current_user
-    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
+    if  token && !user.youtube_id
       user.youtube_id = Youtube.channel_id(token)
       user.save
     end
 
     redirect_to(request.env['omniauth.origin'] || root_path)
+  end
+
+  def token 
+    request.env['omniauth.auth']['credentials']['token']
   end
 
   def unlink_from_youtube
