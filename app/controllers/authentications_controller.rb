@@ -6,7 +6,7 @@ class AuthenticationsController < ApplicationController
       link_to_youtube and return
     end
 
-    @path = request.env['omniauth.origin'] || root_path
+    @path = build_path_for_create
 
     if authentication.present?
       attempt_login_with_auth(authentication, @path)
@@ -52,6 +52,10 @@ class AuthenticationsController < ApplicationController
 
 
   private
+
+  def build_path_for_create
+    request.env['omniauth.origin'] || root_path
+  end
 
   def omniauth_params_for_youtube
     request.env['omniauth.params']['youtube']
