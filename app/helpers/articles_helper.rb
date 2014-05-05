@@ -1,11 +1,24 @@
 module ArticlesHelper
   def clean_html(html)
-    raw sanitize html, tags: %w(h1 h2 h3 h4 h5 h6 b i ul ol li pre span iframe div img br blockquote p a em del strong code tr table thead th tbody td dl dd dt hr input label textarea fieldset),
-                 attributes: %w(src alt target frameborder allowfullscreen style href class id lang title align height width border for placeholder name rows columns value)
+    raw sanitize html,
+                 tags: %w(
+                   h1 h2 h3 h4 h5 h6 b i ul ol li pre span iframe div img br
+                   blockquote p a em del strong code tr table thead th tbody
+                   td dl dd dt hr input label textarea fieldset font sup sub
+                   u strike
+                 ),
+                 attributes: %w(
+                   src alt target frameborder allowfullscreen style href
+                   class id lang title align height width border for
+                   placeholder name rows columns value color background color
+                 )
   end
 
   def standard_tags
-    %w( Pair-Programming AgileVentures Ruby Rails Javascript jQuery Jasmine Cucumber RSpec Git Heroku )
+    %w(
+      Pair-Programming AgileVentures Ruby Rails Javascript jQuery Jasmine
+      Cucumber RSpec Git Heroku
+    )
   end
 
   def link_to_tags(tags)
