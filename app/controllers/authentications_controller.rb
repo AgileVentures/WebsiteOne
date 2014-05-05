@@ -2,7 +2,7 @@ class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
 
   def create
-    if request.env['omniauth.params']['youtube']
+    if omniauth_params_for_youtube
       link_to_youtube and return
     end
 
@@ -52,6 +52,10 @@ class AuthenticationsController < ApplicationController
 
 
   private
+
+  def omniauth_params_for_youtube
+    request.env['omniauth.params']['youtube']
+  end
 
   def authentication
     @authentication ||= Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
