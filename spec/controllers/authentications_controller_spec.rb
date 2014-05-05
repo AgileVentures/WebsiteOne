@@ -50,6 +50,15 @@ describe AuthenticationsController do
       get :destroy, id: 1
       expect(flash[:alert]).to eq 'Bad idea!'
     end
+
+    it 'should show failure message on failure of destroy authentication' do
+      @auths.should_receive(:count).and_return 0
+      @auth.should_receive(:destroy).and_return false
+      get :destroy, id: 1
+      expect(flash[:alert]).to eq 'Authentication method could not be removed.'
+    end
+
+
   end
 
   before(:each) do
