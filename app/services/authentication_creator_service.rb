@@ -1,17 +1,26 @@
 class AuthenticationCreatorService
-  def self.create 
+  def initialize(listener, authentication, current_user)
+    @listener = listener 
+    @authentication = authentication
+    @current_user = current_user
+  end
+
+  def create(omniauth, path)
     if authentication.present?
-      attempt_login_with_auth(authentication, @path)
+      listener.attempt_login_with_auth(authentication, path)
 
     elsif current_user
-      create_new_authentication_for_current_user(omniauth, @path)
+      listener.create_new_authentication_for_current_user(omniauth, path)
 
     else
-      create_new_user_with_authentication(omniauth)
+      listener.create_new_user_with_authentication(omniauth)
     end
 
     if current_user && omniauth['provider']=='github' && current_user.github_profile_url.blank?
-      link_github_profile
+      listener.link_github_profile
     end
   end
+
+  private 
+  attr_reader :listener, :authentication, :current_user
 end

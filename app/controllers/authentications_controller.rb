@@ -8,19 +8,8 @@ class AuthenticationsController < ApplicationController
 
     @path = build_path_for_create
 
-    if authentication.present?
-      attempt_login_with_auth(authentication, @path)
+    AuthenticationCreatorService.new(self, authentication, current_user).create(omniauth, @path)
 
-    elsif current_user
-      create_new_authentication_for_current_user(omniauth, @path)
-
-    else
-      create_new_user_with_authentication(omniauth)
-    end
-
-    if current_user && omniauth['provider']=='github' && current_user.github_profile_url.blank?
-      link_github_profile
-    end
   end
 
   def failure
@@ -50,25 +39,6 @@ class AuthenticationsController < ApplicationController
     redirect_to edit_user_registration_path(current_user)
   end
 
-
-  private
-
-  def build_path_for_create
-    request.env['omniauth.origin'] || root_path
-  end
-
-  def omniauth_params_for_youtube
-    request.env['omniauth.params']['youtube']
-  end
-
-  def authentication
-    @authentication ||= Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-  end
-
-  def omniauth
-    request.env['omniauth.auth']
-  end
-
   def link_github_profile
     omniauth = request.env['omniauth.auth']
 
@@ -87,23 +57,6 @@ class AuthenticationsController < ApplicationController
       flash[:alert] = 'Linking your GitHub profile has failed'
       Rails.logger.error user.errors.full_messages
     end
-  end
-
-  def link_to_youtube
-    user = current_user
-    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
-      user.youtube_id = Youtube.channel_id(token)
-      user.save
-    end
-
-    redirect_to(request.env['omniauth.origin'] || root_path)
-  end
-
-  def unlink_from_youtube
-    current_user.youtube_id = nil
-    current_user.save
-
-    redirect_to(params[:origin] || root_path)
   end
 
   def attempt_login_with_auth(authentication, path)
@@ -145,6 +98,42 @@ class AuthenticationsController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
+
+  private
+
+  def build_path_for_create
+    request.env['omniauth.origin'] || root_path
+  end
+
+  def omniauth_params_for_youtube
+    request.env['omniauth.params']['youtube']
+  end
+
+  def authentication
+    @authentication ||= Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+  end
+
+  def omniauth
+    request.env['omniauth.auth']
+  end
+
+  def link_to_youtube
+    user = current_user
+    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
+      user.youtube_id = Youtube.channel_id(token)
+      user.save
+    end
+
+    redirect_to(request.env['omniauth.origin'] || root_path)
+  end
+
+  def unlink_from_youtube
+    current_user.youtube_id = nil
+    current_user.save
+
+    redirect_to(params[:origin] || root_path)
+  end
+
 end
 
 
