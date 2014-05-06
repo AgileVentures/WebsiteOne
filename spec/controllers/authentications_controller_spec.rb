@@ -135,7 +135,7 @@ describe AuthenticationsController do
       end
 
       it 'should not accept multiple profiles from the same source' do
-        controller.current_user.should_receive(:create_new_authentication).and_return false
+        allow(@user).to receive(:create_new_authentication).and_return false
         get :create, provider: @provider
         expect(flash[:alert]).to eq 'Unable to create additional profiles.'
         expect(response).to redirect_to @path

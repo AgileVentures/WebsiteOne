@@ -9,7 +9,6 @@ class AuthenticationsController < ApplicationController
     @path = build_path_for_create
 
     AuthenticationCreatorService.new(self, authentication, current_user).create(omniauth, @path)
-
   end
 
   def failure
@@ -86,12 +85,12 @@ class AuthenticationsController < ApplicationController
     user.apply_omniauth(omniauth)
 
     if user.save
-      # Bryan: TESTED
+      # Bryan: tested
       Mailer.send_welcome_message(user).deliver
       flash[:notice] = 'Signed in successfully.'
       sign_in_and_redirect(:user, user)
     else
-      # Bryan: TESTED
+      # Bryan: tested
       session[:omniauth] = omniauth.except('extra')
       redirect_to new_user_registration_url
     end
