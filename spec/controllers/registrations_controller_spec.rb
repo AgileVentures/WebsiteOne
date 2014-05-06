@@ -55,7 +55,7 @@ describe RegistrationsController do
     end
   end
 
-  describe '#update' do
+  describe 'PUT update' do
     let(:valid_session) { {} }
 
 

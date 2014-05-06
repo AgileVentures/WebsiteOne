@@ -133,14 +133,3 @@ class AuthenticationsController < ApplicationController
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
