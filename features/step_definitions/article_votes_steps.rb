@@ -11,15 +11,15 @@ Given(/^the following articles with votes exist:$/) do |table|
     else
       article = default_test_author.articles.new hash
     end
+    article.save!
 
-    votes.to_i.abs.times {| n |
+    votes.to_i.abs.times do |n|
       # create a voter so that a vote can be cast
       user_email = 'avoter' + n.to_i.to_s + '@example.com'
       create_test_user(:email => user_email)
       u = User.find_by_email user_email
       votes.to_i >= 0 ? article.upvote_from( u ) : article.downvote_from( u )
-    }
-    article.save!
+    end
   end
 
 end

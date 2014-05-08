@@ -14,6 +14,8 @@ Feature:
   Scenario: I should see the vote value of an article on the article show page
     Given I am on the "Show" page for article "Ruby is on Fire"
     Then I should see a Vote value of "0"
+    Given I am on the "Show" page for article "Rails is not for trains"
+    Then I should see a Vote value of "5"
 
   Scenario: I should see the link to Up Vote an article on the article show page
     Given I am logged in
