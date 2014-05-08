@@ -16,8 +16,8 @@
       <li><%= link_to_tags(article.tag_list) %></li>
       <li>Vote value:&nbsp;<%= article.upvotes.size - article.downvotes.size %>
       <% if user_signed_in? and not article.new_record? %>
-         <%= link_to 'Vote up', vote_article_path(article, 'up', @current_user)%> | <%= link_to 'Vote down', vote_article_path(article, 'down',
-@current_user) %>
+        <%= link_to 'Vote up', vote_article_path(article, 'up', @current_user)%> 
+      | <%= link_to 'Vote down', vote_article_path(article, 'down', @current_user) %>
       <% end %>
       </li>
     </ul>
