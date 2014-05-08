@@ -15,9 +15,19 @@
       <li>Last updated <%= time_ago_in_words(article.updated_at) %> ago</li>
       <li><%= link_to_tags(article.tag_list) %></li>
       <li>Vote value:&nbsp;<%= article.upvotes.size - article.downvotes.size %>
+
       <% if user_signed_in? and not article.new_record? %>
-        <%= link_to 'Vote up', vote_article_path(article, 'up', @current_user)%> 
-      | <%= link_to 'Vote down', vote_article_path(article, 'down', @current_user) %>
+        <% visitor_has_voted = @current_user.voted_as_when_voted_for article %>
+        <% if visitor_has_voted == nil %>
+          <%= link_to 'Up Vote', vote_article_path(article, 'up', @current_user)%>
+        | <%= link_to 'Down Vote', vote_article_path(article, 'down', @current_user) %>
+        <% elsif visitor_has_voted == true %>
+          <%= link_to 'Cancel Up Vote', vote_article_path(article, 'cancelup', @current_user)%>
+        | <%= link_to 'Down Vote', vote_article_path(article, 'down', @current_user) %>
+        <% else %>
+          <%= link_to 'Up Vote', vote_article_path(article, 'up', @current_user)%>
+        | <%= link_to 'Cancel Down Vote', vote_article_path(article, 'canceldown', @current_user) %>
+        <% end %>
       <% end %>
       </li>
     </ul>
