@@ -80,6 +80,6 @@
   <% if @event.present? %>
     <p><%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %></p>
   <% end %>
-  <h2><%= link_to 'Archived Scrums', controller: 'scrums' %></h2>
+  <small><%= link_to 'Archived Scrums', controller: 'scrums' %></small>
 </ul>
 <!--END LIST -->
