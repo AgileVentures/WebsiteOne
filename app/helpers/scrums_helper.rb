@@ -4,6 +4,6 @@ module ScrumsHelper
   end
 
   def scrum_embed_link(video)
-    "http://www.youtube.com/embed/#{video[:id]}?enablejsapi=1"
+    "http://www.youtube.com/embed/#{video}?enablejsapi=1"
   end
 end
