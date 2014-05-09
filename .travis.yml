@@ -32,4 +32,6 @@ env:
   global:
     BUNDLE_ARCHIVE: travis-bundler-cache
     AWS_S3_BUCKET: WebsiteOne-Travis-BundlerCache
+env:
+  global:
     secure: DTUehBumf89mlPkAk4Z0XODI/hl36bauvLf3iNhe1/b0TyLv4Cnk2i6uYkuqWN4hSFsEzkBZMnrXCJQ5w9soVNybhAhjLfHVk8umpv9rVbPv7QsgwTns2E+qOemCDucZ5RyBT5DKX2AlmCZa7tqchBoxb+4TZXNJ4nQEAqJn9WM=
