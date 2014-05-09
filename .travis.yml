@@ -31,6 +31,8 @@ deploy:
 env:
   global:
     BUNDLE_ARCHIVE: travis-bundler-cache
+env:
+  global:
     AWS_S3_BUCKET: WebsiteOne-Travis-BundlerCache
 env:
   global:
