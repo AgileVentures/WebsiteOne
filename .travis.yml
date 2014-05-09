@@ -1,9 +1,9 @@
 language: ruby
 rvm:
 - 2.1.1
-bundler_args: --without development --path=~/.bundle
+bundler_args: "--without development --path=~/.bundle"
 before_install:
-- "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+- 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
 - gem install bundler bundle_cache
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
@@ -30,10 +30,5 @@ deploy:
   run: rake db:migrate
 env:
   global:
-    BUNDLE_ARCHIVE: travis-bundler-cache
-env:
-  global:
-    AWS_S3_BUCKET: WebsiteOne-Travis-BundlerCache
-env:
-  global:
-    secure: DTUehBumf89mlPkAk4Z0XODI/hl36bauvLf3iNhe1/b0TyLv4Cnk2i6uYkuqWN4hSFsEzkBZMnrXCJQ5w9soVNybhAhjLfHVk8umpv9rVbPv7QsgwTns2E+qOemCDucZ5RyBT5DKX2AlmCZa7tqchBoxb+4TZXNJ4nQEAqJn9WM=
+  - secure: DTUehBumf89mlPkAk4Z0XODI/hl36bauvLf3iNhe1/b0TyLv4Cnk2i6uYkuqWN4hSFsEzkBZMnrXCJQ5w9soVNybhAhjLfHVk8umpv9rVbPv7QsgwTns2E+qOemCDucZ5RyBT5DKX2AlmCZa7tqchBoxb+4TZXNJ4nQEAqJn9WM=
+  - secure: cb1p0Uo6a4lH//Oe2ZAPzhnpgtdFarvzrtgzfRtldacUibS32GK1yzR60qtJbSf2LuIOqvbWVrjEOcyQHlapBS9oISUVM1klxsSPXh0+R0VLkFsf71APNnY85aUWurAZRoHdhzpKag3mXVk+huTin/Eo+uTAwounPocvALFKqOc=
