@@ -1,33 +1,38 @@
 language: ruby
 rvm:
 - 2.1.1
-
-# to enable javascript testing with X server and firefox
+bundler_args: --without development --path=~/.bundle
 before_install:
-  - gem install bundler
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-
+- "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+- gem install bundler bundle_cache
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- bundle_cache_install
 before_script:
 - bundle exec rake db:create:all
 - bundle exec rake db:migrate
 - bundle exec rake db:test:prepare
-
 script:
 - bundle exec rake cucumber
 - bundle exec rake spec
 - bundle exec rake jasmine:ci
+after_script:
+- bundle_cache
 deploy:
   provider: heroku
   api_key:
     secure: qjGSUm5TSMjgarhzvBnZhNVyMcLCXpszb68D+aj9rKtNwHggz2dmCyqATr3Ynl38I193/QEaOUEarHguI7ABSW6SCmdAIoAEP/h7bbyOgLAYV9+ct/qhk8N4PdjnKUYUYZ9lsd5UcErMMgD03USQg3CeG1X1LwSX18jcScBHkss=
   strategy: git
   app:
-      develop: websiteone-develop
-      staging: websiteone-staging
-      master: websiteone-production
-  run: "rake db:migrate"
+    develop: websiteone-develop
+    staging: websiteone-staging
+    master: websiteone-production
+  run: rake db:migrate
 notifications:
   email:
-    - thomas@nocebo.se
-    - info@agileventures.org
+  - thomas@nocebo.se
+  - info@agileventures.org
+env:
+  global:
+    - BUNDLE_ARCHIVE=travis-bundler-cache AWS_S3_BUCKET=WebsiteOne-Travis-BundlerCache
+    secure: DTUehBumf89mlPkAk4Z0XODI/hl36bauvLf3iNhe1/b0TyLv4Cnk2i6uYkuqWN4hSFsEzkBZMnrXCJQ5w9soVNybhAhjLfHVk8umpv9rVbPv7QsgwTns2E+qOemCDucZ5RyBT5DKX2AlmCZa7tqchBoxb+4TZXNJ4nQEAqJn9WM=
