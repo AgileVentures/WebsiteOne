@@ -31,6 +31,15 @@ describe 'projects/show.html.erb' do
         { title: 'Second video', user: @user, published: '13/12/2013'.to_date, url: 'somewhere', id: '123', content: 'some text' }
     ]
 
+    story = double()
+    story.stub story_type: 'chore',
+               estimate: 3,
+               id: 1,
+               name: 'My story',
+               owned_by: { initials: 'my-initials' },
+               current_state: 'active'
+    @stories = [ story ]
+
     @documents = [@document]
     @documents.stub(:roots).and_return(@documents)
     @documents.stub(:count).and_return(1)
@@ -43,29 +52,30 @@ describe 'projects/show.html.erb' do
     assign :documents, @documents
     assign :members, [@user]
     assign :videos, @videos
+    assign :stories, @stories
     @project.stub(:user).and_return(@user)
   end
 
   it "renders a link to the project's github page" do
-    @project.stub(:github_url).and_return("github.com/AgileVentures/myfriend")
+    @project.stub(:github_url).and_return 'github.com/AgileVentures/myfriend'
     render
     expect(rendered).to have_link("#{@project.github_url.split('/').last}", :href => @project.github_url)
   end
 
-  it "renders an unlinked message when project has no github link" do
+  it 'renders an unlinked message when project has no github link' do
     render
-    expect(rendered).to have_text("not linked to GitHub")
+    expect(rendered).to have_text 'not linked to GitHub'
   end
 
   it "renders a link to the project's Pivotal Tracker page" do
-    @project.stub(:pivotaltracker_url).and_return("www.pivotaltracker.com/s/projects/12345")
+    @project.stub(:pivotaltracker_url).and_return 'www.pivotaltracker.com/s/projects/12345'
     render
     expect(rendered).to have_link("#{@project.title}", :href => @project.pivotaltracker_url)
   end
 
-  it "renders an unlinked message when project has no PivotalTracker link" do
+  it 'renders an unlinked message when project has no PivotalTracker link' do
     render
-    expect(rendered).to have_text("not linked to PivotalTracker")
+    expect(rendered).to have_text 'not linked to PivotalTracker'
   end
 
   it 'renders project description' do
@@ -90,20 +100,13 @@ describe 'projects/show.html.erb' do
 
   context 'Pivotal Tracker stories' do
     it 'renders a message when no Pivotal Tracker stories are found' do
+      assign :stories, []
       render
       expect(rendered).to have_text 'No PivotalTracker Stories can be found for project Title 1'
     end
 
     context 'with Pivotal Tracker stories' do
       before(:each) do
-        story = double()
-        story.stub story_type: 'chore',
-                   estimate: 3,
-                   id: 1,
-                   name: 'My story',
-                   owned_by: { initials: 'my-initials' },
-                   current_state: 'active'
-        @stories = [ story ]
         render
       end
 

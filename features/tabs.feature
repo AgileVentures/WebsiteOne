@@ -17,7 +17,7 @@ Feature: Add in-page links for projects show page to open the tabbed contents
     Then I should see "documents" tab is active
 
   Scenario: Share the link to members tab
-    When I click "Members"
+    When I click "Members" within the main content
     And I refresh the page
     Then I should see "members" tab is active
 

@@ -63,6 +63,12 @@
           <div id="skills" class="tag-list" style="margin-bottom: 10px;"></div>
           <%= f.text_field :skill_list, :hidden => true %>
         </div>
+        <div>
+          <%= f.label :receive_mailings %>
+          <div class='form-group'>
+            <%= f.check_box :receive_mailings %>
+          </div>
+        </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>

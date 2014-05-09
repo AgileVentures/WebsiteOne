@@ -1,26 +1,14 @@
+
 <%= form_for article do |f| %>
-  <% errored = article.errors.messages[:title].present? %>
-  <div class="form-group <%= 'has-error has-feedback' if errored %>">
-    <%= f.label :title, class: 'control-label' %>
-    <%= f.text_field :title, class: 'form-control' %>
-    <% if errored %>
-      <span class="help-block control-label"><%= article.errors.messages[:title].join(', ') %></span>
-    <% end %>
-  </div>
+
+  <%= awesome_text_field f, :title %>
 
   <div class="form-group">
     <label for="tag_list" class="control-label">Tags</label>
     <input type="text" class="form-control" id="article_tag_list" name="article[tag_list]" value="<%= article.tag_list.join(',') %>" />
   </div>
 
-  <% errored = article.errors.messages[:content].present? %>
-  <div class="form-group <%= 'has-error has-feedback' if errored %>">
-    <%= f.label :content, class: 'control-label' %>
-    <%= f.text_area :content, rows: 25, class: 'form-control md-edit' %>
-    <% if errored %>
-    <span class="help-block control-label"><%= article.errors.messages[:content].join(', ') %></span>
-    <% end %>
-  </div>
+  <%= awesome_text_area f, :content, rows: 25, class: 'form-control md-edit' %>
 
   <div class="form-group">
     <%= f.submit (article.new_record? ? 'Create' : 'Update'), class: 'btn btn-default' %>

@@ -1,0 +1,20 @@
+@import "variables";
+
+.user-controls {
+  list-style: none;
+  padding-left: 0;
+  font-size: 1.2em;
+
+  li {
+    display: inline-block;
+  }
+}
+
+.btn-controls {
+  color: $link-color !important;
+}
+
+.btn-hoa {
+  height: 30px;
+  vertical-align: middle;
+}

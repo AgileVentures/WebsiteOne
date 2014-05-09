@@ -1,49 +1,71 @@
 <header id="main_header" class="masthead">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-2">
-        <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
-      </div>
+    <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
+
+    <div id="account-controls" class="pull-right">
       <% if user_signed_in? %>
-      <div class="col-lg-10 pull-right text-right" style="margin-top: 17px;">
-        <img src="<%= gravatar_for(current_user.email) %>" style="width: 30px; height: 30px; margin-right: 5px;" class="img-rounded">
-        <a id="user_info" href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user_details %></a>
-        <ul class="dropdown-menu text-left">
-          <li><%= link_to '<i class="glyphicon glyphicon-user"></i> My account'.html_safe, user_path(current_user) %> </li>
-          <li><%= link_to '<i class="glyphicon glyphicon-log-out"></i> Log out'.html_safe, destroy_user_session_path, :method => :delete %></li>
-        </ul>
-      </div>
-          <% else %>
-          <ul class="nav navbar-nav pull-right">
-            <li><%= link_to 'Log in', new_user_session_path %></li>
-            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        <a href="<%= user_path(current_user) %>">
+          <img id="user-gravatar" src="<%= gravatar_for(current_user.email) %>" class="img-circle">
+        </a>
+        <div class="dropdown">
+          <a href="#" id="account-dropdown" data-toggle="dropdown">
+            <%= current_user_details %>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="account-dropdown">
+            <a href="<%= user_path(current_user) %>">
+              <li><i class="fa fa-user fa-custom-accounts"></i> My account</li>
+            </a>
+            <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
+              <li><i class="fa fa-sign-out fa-custom-accounts"></i> Log out</li>
+            </a>
           </ul>
+        </div>
+      <% else %>
+        <div id="login-signup">
+          <%= link_to 'Log in', new_user_session_path %>
+          <%= link_to 'Sign up', new_user_registration_path, id: 'signup' %>
+        </div>
       <% end %>
     </div>
   </div>
 </header>
-<!-- navbar -->
-<div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
+
+
+<div class="navbar navbar-inverse navbar-static-top" id="nav">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav nav-justified">
-        <li><%= link_to 'About us', static_page_path('About Us') %></li>
-        <li><%= link_to 'Our projects', projects_path %></li>
-        <li><%= link_to 'Our members', users_path %></li>
-        <li><%= link_to 'Getting Started', static_page_path('Getting Started') %></li>
-        <li><%= link_to 'Articles', articles_path %></li>
-        <li><%= link_to 'Events', events_path %></li>
-      </ul>
+    <div class="row">
+      <div class="col-xs-4 col-md-2">
+        <a id="affix-nav-brand" class="navbar-brand" href="<%= root_path %>">
+          <img src="<%= image_path('av-logo-inverse.png') %>">
+        </a>
+      </div>
+
+      <div class="col-xs-8 col-md-10">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav nav-justified">
+            <li><%= link_to 'About', static_page_path('About Us'), class: is_in_static_page?('About Us') ? 'active' : ''%></li>
+            <li><%= link_to 'Projects', projects_path, class: active_if_controller_is('projects') %></li>
+            <li><%= link_to 'Members', users_path, class: active_if_controller_is('users') %></li>
+            <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
+            <li><%= link_to 'Events', events_path, class: active_if_controller_is('events') %></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
+  <% if @next_event %>
+    <div id="next-event" data-event-time="<%= @next_event.next_occurrence_time.to_datetime %>"
+         data-event-url="<%= event_path(@next_event) %>"
+         data-event-name="<%= @next_event.name %>"></div>
+  <% end %>
+  <%= render 'layouts/flash' %>
 </div>
-<%= render 'layouts/flash' %>
-
-

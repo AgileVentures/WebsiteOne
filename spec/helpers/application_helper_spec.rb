@@ -96,7 +96,7 @@ describe ApplicationHelper do
     end
 
     it 'should render the text "this is a text"' do
-      @custom_btn_html.should have_text 'this is a text'
+      @custom_btn_html.should have_css '[title="this is a text"]'
     end
 
     it 'should render the icon classes "fa fa-icon"' do

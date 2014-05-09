@@ -1,0 +1,184 @@
+@import 'mixins';
+@import 'variables';
+
+$header-height: 60px;
+$navbar-height: 50px;
+$small-logo-height: 26px;
+$small-logo-width: 170px;
+$gravatar-size: 45px;
+
+#nav {
+  width: 100%;
+  height: $navbar-height;
+  background-color: $theme-dark;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-width: 0;
+  margin: 0;
+  z-index: 0;
+  position: relative;
+
+  #next-event {
+    background: $theme-dark;
+    color: $white;
+    padding: 10px 10px 0 10px;
+    border-bottom-right-radius: 10px;
+    text-transform: none;
+    font-size: 1em;
+    overflow: hidden;
+    opacity: 0.7;
+    display: inline-block;
+    vertical-align: top;
+    font-weight: normal;
+    position: absolute;
+    top: $navbar-height;
+
+    p {
+      vertical-align: text-bottom;
+    }
+
+    @include css-transition(height 0.3s ease);
+    @include css-transition(padding 0.3s ease);
+  }
+
+  #affix-nav-brand {
+    padding: 12px 15px;
+    height: $small-logo-height;
+
+    img {
+      @include css-transition(all 0.3s ease);
+      @include css-transform(scale(0));
+    }
+  }
+
+  &.affix {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+
+    #affix-nav-brand img {
+      @include css-transform(scale(1));
+    }
+
+    #next-event {
+      height: 0;
+      padding: 0;
+    }
+  }
+
+  .dropdown-menu {
+    right: 0;
+  }
+
+  .navbar-nav>.dropdown>a .caret {
+    border-top-color: #999;
+    border-bottom-color: #999;
+  }
+
+  .navbar-nav>li>a {
+    color: $white;
+    background-color: $theme-dark;
+    @include css-transition(background-color 0.3s ease);
+
+    &:hover, &:active, &.active {
+      background-color: $theme-darker;
+    }
+  }
+}
+
+.navbar-collapse.in {
+  /*3.0.2 bug workaround*/
+  overflow-y: visible;
+}
+
+.navbar-toggle {
+  outline: 0;
+}
+
+@media (min-width: 767px) {
+  .navbar-nav.nav-justified > li {
+    float: none;
+  }
+}
+
+// MASTHEAD
+
+header#main_header {
+  background: $theme-main;
+  height: $header-height;
+  color: $white;
+
+  h1, h2, h3 a, a, a:hover {
+    color: $white;
+//    font-weight: 800;
+  }
+
+  h3 {
+    font-family: 'Kreon', serif;
+    background: $theme-main;
+    border-radius: 3px;
+    font-size: 34px;
+    padding: 12px 10px 6px 10px;
+  }
+
+  .dropdown {
+    height: $header-height;
+    padding: 0 15px;
+
+    &.open > a {
+      color: $theme-darker;
+    }
+  }
+
+  .dropdown-menu {
+    background: $theme-main;
+    border-width: 0;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9em;
+
+    li {
+      padding: 15px;
+      @include css-transition(background-color 0.3s ease);
+
+      &:hover {
+        background: $link-hover-color;
+      }
+    }
+  }
+
+  #account-controls {
+    height: $header-height;
+    line-height: $header-height;
+    font-size: 1.2em;
+
+    #user-gravatar {
+      width: $gravatar-size;
+      height: $gravatar-size;
+      @include css-shadow(0 0 1px 1px $white);
+      display: inline-block;
+    }
+
+    $fa-custom-icon-size: 26px;
+    .fa-custom-accounts {
+      width: $fa-custom-icon-size;
+      height: $fa-custom-icon-size;
+      text-align: center;
+    }
+
+    .dropdown {
+      display: inline-block;
+    }
+  }
+
+  #login-signup a {
+    padding: 0 15px;
+    text-align: center;
+    border-radius: 0;
+
+    &:hover, &:active {
+      color: $theme-darker;
+    }
+  }
+}

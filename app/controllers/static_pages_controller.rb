@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_filter :authenticate_user!, except: [:show]
+
   def show
     @page = StaticPage.friendly.find(get_page_id(params[:id]))
     @ancestry = @page.self_and_ancestors.map(&:title).reverse

@@ -24,6 +24,8 @@ module WebsiteOne
     I18n.enforce_available_locales = false
 
     config.assets.enabled = true
+
+    config.autoload_paths += %W( #{config.root}/lib )
   end
 
 

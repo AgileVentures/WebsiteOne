@@ -1,0 +1,26 @@
+#flash-container {
+  position: relative;
+  height: 0;
+}
+
+#flash-display {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  font-size: 0.9em;
+  text-transform: none;
+  font-weight: normal;
+
+  .alert {
+    margin: 0;
+    border-radius: 0;
+    opacity: 0.8;
+  }
+}
+
+@media (min-width: 768px) {
+  #flash-display {
+    width: 40%;
+  }
+}

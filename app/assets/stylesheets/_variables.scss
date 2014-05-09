@@ -6,8 +6,16 @@ $sidebar-a-color: #777;
 $sidebar-a-hover-color: #000;
 $sidebar-a-bg-hover-color: #dfdfdf;
 
-$link-color: #F07F48;
-$link-hover-color: #b06137;
-$highlight-color: #F7EFEB;
+//$theme-main: #F07F48; ORIGINAL
+//$theme-main: #e67e22; CARROT
+$theme-main: #EE7335;
+$theme-secondary: #e74c3c;
+$theme-lighter-dark: #475D73;
+$theme-dark: #34495e;
+$theme-darker: #2c3e50;
+$white: #fff;
+$black: #54555a;
 
-$black: #4d4e53;
+$link-color: $theme-main;
+$link-hover-color: #d35400;
+$highlight-color: #F7EFEB;

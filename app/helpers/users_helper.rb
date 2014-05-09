@@ -2,21 +2,6 @@ require 'open-uri'
 
 module UsersHelper
 
-  def user_display_name user
-    first = user.try(:first_name)
-    last = user.try(:last_name)
-    str = first.to_s + last.to_s
-    if first && last
-      [first, last].join(' ')
-    elsif !first && !last
-      # User has not filled in their profile
-      user.email.split('@').first
-    else
-      str
-    end
-  end
-
-
   def link_to_youtube_button(origin_url)
     link_to raw('<i class="fa fa-youtube"></i> Sync with YouTube'),
             "/auth/gplus/?youtube=true&origin=#{CGI.escape origin_url}", class: 'btn btn-block btn-social btn-danger', type: 'button'

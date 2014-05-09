@@ -1,20 +1,21 @@
 Then(/^I(?:| should) see a navigation header$/) do
-  page.should have_selector('header.masthead')
+  page.should have_selector('.masthead')
 end
 
 Then(/^I should see a main content area$/) do
-  page.should have_selector('section#main')
+  page.should have_selector '#main'
 end
 
 Then(/^I should see a footer area$/) do
-  page.should have_selector('section#footer')
+  page.should have_selector '#footer'
 end
 
 Then(/^I should see a navigation bar$/) do
-    find ('div.navbar')
+    find '#nav'
 end
+
 When(/^I should see "([^"]*)" in footer$/) do |string|
-  within('section#footer') do
+  within('#footer') do
     page.should have_text string
   end
 end

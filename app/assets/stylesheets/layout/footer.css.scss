@@ -1,0 +1,120 @@
+@import 'mixins';
+@import 'variables';
+
+$footer-height: 450px;
+$footer-upper-section-height: 300px;
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 0 (-$footer-height) 0;
+  /* Pad bottom by footer height */
+  padding: 0 0 $footer-height 0;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  position: relative;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  background-color: $theme-darker;
+  color: $white;
+  overflow: hidden;
+
+  .footer-info {
+    padding: 0;
+  }
+
+  p, h3 {
+    color: $white;
+  }
+
+  a {
+    color: #cdcdcd;
+    text-overflow: ellipsis;
+
+    &:hover, &:active {
+      color: $theme-main;
+
+      &.facebook {
+        color: #458dd8;
+      }
+
+      &.twitter {
+        color: #8EC1DA;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  #footer {
+    height: $footer-height;
+
+    #upper-section {
+      height: $footer-upper-section-height;
+    }
+  }
+}
+
+// FOOTER CONTACT FORM
+
+.contact {
+  text-align: right;
+
+  label {
+    color: $white;
+  }
+
+  .footer_header {
+    text-align: left;
+    margin-top: -20px;
+    margin-left: 35px;
+  }
+
+  input[type="text"], textarea {
+    background-color: $theme-dark;
+    color: $white;
+    padding: 8px 20px;
+    border-radius: 3px;
+    border-style: none;
+//    border: 1px solid $white;
+    font-size: 0.8em;
+    width: 100%;
+    margin-bottom: 10px;
+    @include css-transition(background-color 0.2s linear 0s);
+
+    &:focus {
+      box-shadow: none;
+      background-color: #405669;
+    }
+
+    &:moz-placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder {
+      color: $white;
+    }
+  }
+
+  input[type="submit"] {
+    background-color: $theme-dark;
+    border: none;
+    color: $white;
+    border-radius: 4px;
+    padding: 5px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    @include css-transition(background-color 0.2s linear, 0s);
+
+    &:hover {
+      background-color: #405669;
+    }
+  }
+}

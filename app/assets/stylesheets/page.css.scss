@@ -41,7 +41,7 @@ section.page-preview {
 }
 
 .page-option-text {
-  @include css-transition(max-width, 0.4s, ease, 0s);
+  @include css-transition(max-width 0.4s ease 0s);
   display: inline-block;
   vertical-align: middle;
   width: auto !important;
@@ -79,32 +79,10 @@ section.page-preview {
   list-style: none;
 }
 
-.listing {
-  padding: 10px;
-  color: $black;
-  width: 100%;
-  margin: 0;
-  @include css-transition(background, 0.3s, ease, 0s);
-  position: relative;
-}
-
-.listing:hover {
-  background: $highlight-color;
-}
-
 .tab-content {
   padding: 0 15px 10px 15px;
   border: 1px solid #dddddd;
   border-top-color: transparent;
-}
-
-.listings {
-  list-style: none;
-  padding-left: 0px;
-}
-
-.listings-item {
-
 }
 
 .page-status-text {
