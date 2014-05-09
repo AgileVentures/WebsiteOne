@@ -56,7 +56,6 @@ describe "users/show.html.erb" do
   it 'renders list of youtube links and published dates if user has videos' do
     render
     @youtube_videos.each do |video|
-      debugger
       expect(rendered).to have_link(video[:title], :href => video[:url])
       expect(rendered).to have_text(video[:published])
     end
