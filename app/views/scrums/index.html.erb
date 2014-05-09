@@ -1,29 +1,42 @@
-<h1>List of previous scrums</h1>
 
-<table>
-  <!---->
-  <!-- Single button -->
-  <div class="btn-group" display="inline-block">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Search Scrums <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="#">US-Atlantic Scrum</a></li>
-      <li><a href="#">Europe Scrum</a></li>
-      <li><a href="#">US-Pacific Scrum</a></li>
-      <li><a href="#">Asia Scrum</a></li>
-      <li class="divider"></li>
-      <li><a href="#">Separated link</a></li>
-    </ul>
-  </div>
 
+<%= javascript_include_tag 'users' %>
+
+
+<div class="jumbotron">
   <div class="container">
-    <h1></h1>
+    <h1>Welcome to the Scrums Page</h1>
+    <p>Choose a Scrum to view.</p>
 
-    <div id="player-wrapper"></div>
-    <% @scrums.each do |scrum| %>
-        <iframe width="250" height="250" src="//www.youtube.com/embed/<%= scrum %>" frameborder="14" allowfullscreen></iframe>
-    <% end %>
   </div>
- </table>
+</div>
+
+
+<div class="row">
+  <div class="col-md-7 col-sm-7">
+    <td><h4 id="video_contents"><%= @scrums.first['content'] %></h4></td>
+    <iframe id="ytplayer" type="text/html" width="250" height="250" src="<%= scrum_embed_link @scrums.first %>" frameborder="0"></iframe>
+  </div>
+  <div class="col-md-5 col-sm-5">
+    <h4>Programming sessions</h4>
+    <table class="table table-bordered table-striped table-hover table-condensed">
+      <% @scrums.each do |video| %>
+          <tr>
+            <td><%= scrum_link(video) %></td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
