@@ -25,7 +25,7 @@
 //= require_self
 //= require_directory ./global-modules
 //= require_tree .
-//= stub mercury
+//= stub mercury_init
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code
