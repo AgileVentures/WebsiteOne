@@ -1,4 +1,4 @@
-WSO.runOnce("AnimatedPages", function() {
+WebsiteOne.runOnce("AnimatedPages", function() {
   function animatePageIn() {
     var mainAndFooter = $("#main, #footer");
     mainAndFooter.hide();

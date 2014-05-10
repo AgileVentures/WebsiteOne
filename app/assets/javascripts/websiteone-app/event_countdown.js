@@ -1,4 +1,4 @@
-WSO.define('EventCountdown', function () {
+WebsiteOne.define('EventCountdown', function () {
 
     function EventCountdown() {
         var countdownClock, eventName, eventTime, eventUrl, textToAppend;

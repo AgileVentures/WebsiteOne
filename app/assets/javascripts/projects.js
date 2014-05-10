@@ -1,4 +1,4 @@
-WSO.define('Projects', function() {
+WebsiteOne.define('Projects', function() {
   return {
     init: function() {
       var hash = window.location.hash;

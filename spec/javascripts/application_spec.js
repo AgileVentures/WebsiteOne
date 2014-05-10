@@ -1,32 +1,32 @@
 describe('WebsiteOne module', function () {
     beforeEach(function () {
-        WSO.define('__test__', function () {
+        WebsiteOne.define('__test__', function () {
             return jasmine.createSpyObj('factory', ['init'])
         });
-        this.module = WSO.__test__;
+        this.module = WebsiteOne.__test__;
     });
 
-    it('should define a new WSO module called "__test__"', function () {
+    it('should define a new WebsiteOne module called "__test__"', function () {
         expect(this.module).toBeDefined();
-        expect(WSO.__test__).toBeDefined();
+        expect(WebsiteOne.__test__).toBeDefined();
     });
 
-    describe('WSO.define', function () {
+    describe('WebsiteOne.define', function () {
         it('should have only one module defined (for testing)', function () {
-            expect(WSO._modules.length).toEqual(1);
+            expect(WebsiteOne._modules.length).toEqual(1);
         });
 
         it('should not create a new module when defined with a repeated name', function () {
-            WSO.define('__test__', function () {
+            WebsiteOne.define('__test__', function () {
                 return { init: function () {} };
             });
-            expect(WSO._modules.length).toEqual(1);
+            expect(WebsiteOne._modules.length).toEqual(1);
         });
 
         it('should not call the init method after redefining a module when _newPageLoaded is false', function () {
             var anotherFactory = jasmine.createSpyObj('another_factory', ['init']);
-            WSO._newPageLoaded = false;
-            WSO.define('__test__', function () {
+            WebsiteOne._newPageLoaded = false;
+            WebsiteOne.define('__test__', function () {
                 return anotherFactory
             });
             expect(anotherFactory.init).not.toHaveBeenCalled();
@@ -40,15 +40,15 @@ describe('WebsiteOne module', function () {
             });
 
             it('should not call the init method after defining a module', function () {
-                WSO.define('__another_test__', function () {
+                WebsiteOne.define('__another_test__', function () {
                     return anotherFactory;
                 });
                 expect(anotherFactory.init).not.toHaveBeenCalled();
             });
 
             it('should call the init method after defining a module when the _newPageLoaded is false', function () {
-                WSO._newPageLoaded = false;
-                WSO.define('__another_test__', function () {
+                WebsiteOne._newPageLoaded = false;
+                WebsiteOne.define('__another_test__', function () {
                     return anotherFactory;
                 });
                 expect(anotherFactory.init).toHaveBeenCalled();
@@ -56,13 +56,13 @@ describe('WebsiteOne module', function () {
         })
     });
 
-    describe('WSO._init', function () {
+    describe('WebsiteOne._init', function () {
         it('should call the init method for all modules defined', function () {
             var anotherFactory = jasmine.createSpyObj('another_factory', ['init']);
-            WSO.define('__another_test__', function () {
+            WebsiteOne.define('__another_test__', function () {
                 return anotherFactory;
             });
-            WSO._init();
+            WebsiteOne._init();
             expect(this.module.init).toHaveBeenCalled();
             expect(anotherFactory.init).toHaveBeenCalled();
         });
@@ -73,24 +73,24 @@ describe('WebsiteOne module', function () {
         });
     });
 
-    describe("WSO.runOnce", function() {
+    describe("WebsiteOne.runOnce", function() {
         it('should always run the callback exactly', function () {
             var spy = jasmine.createSpy();
-            WSO.runOnce("name", spy);
+            WebsiteOne.runOnce("name", spy);
             for (var i = 0; i < 10; i++) {
-              WSO._init();
+              WebsiteOne._init();
             }
             expect(spy.calls.count()).toEqual(1);
         });
     });
 
-    describe('WSO._clear', function () {
+    describe('WebsiteOne._clear', function () {
         it('removes all the modules', function() {
-            expect(WSO.__test__).toBeDefined();
-            expect(WSO._modules.length).toEqual(1);
-            WSO._clear();
-            expect(WSO.__test__).not.toBeDefined();
-            expect(WSO._modules.length).toEqual(0)
+            expect(WebsiteOne.__test__).toBeDefined();
+            expect(WebsiteOne._modules.length).toEqual(1);
+            WebsiteOne._clear();
+            expect(WebsiteOne.__test__).not.toBeDefined();
+            expect(WebsiteOne._modules.length).toEqual(0)
         });
     });
 });

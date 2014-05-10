@@ -25,37 +25,36 @@
 //= require_self
 //= require_directory ./websiteone-app
 
-// Bryan: removed require_tree . because mercury causes problems if loaded on every page
-
-// To deal with the headache of initializing JavaScripts with TurboLinks, I wrote this custom
-// module definer to handle initialization code
+// To deal with the headache of initializing JavaScripts with TurboLinks, I
+// wrote this custom module definer to handle initialization code
 //
 // modules can be defined using the following snippet:
 //
-// window.WSO.define('<Module Name>', function() {
+// window.WebsiteOne.define('<Module Name>', function() {
 //     return <Module Object>;
 // });
 //
-// The module's init method will automatically be called on TurboLink's page:load or document ready event
+// The module's init method will automatically be called on TurboLink's
+// page:load or document ready event
 
-window.WSO = window.WSO || (function() {
+window.WebsiteOne = window.WebsiteOne || (function() {
   var modules = [],
       newPageLoaded = false,
       runOnceCallbacks = {};
 
   function define(name, factory) {
-    window.WSO[name] = window.WSO[name] || (function() {
+    window.WebsiteOne[name] = window.WebsiteOne[name] || (function() {
       modules.push(name);
       var newModule = factory();
 
-      if (!window.WSO._newPageLoaded) {
+      if (!window.WebsiteOne._newPageLoaded) {
         newModule.init();
       }
 
       return newModule;
     })();
 
-    return window.WSO[name];
+    return window.WebsiteOne[name];
   }
 
   function runOnce(name, callback) {
@@ -67,7 +66,7 @@ window.WSO = window.WSO || (function() {
 
   function clear() {
     for (var i = 0; i < modules.length; i++) {
-      delete window.WSO[modules[i]];
+      delete window.WebsiteOne[modules[i]];
     }
 
     modules.length = 0;
@@ -75,7 +74,7 @@ window.WSO = window.WSO || (function() {
 
   function init() {
     for (var i = 0; i < modules.length; i++) {
-      window.WSO[modules[i]].init();
+      window.WebsiteOne[modules[i]].init();
     }
 
     for (var name in runOnceCallbacks) {
@@ -85,7 +84,7 @@ window.WSO = window.WSO || (function() {
       }
     }
 
-    window.WSO._newPageLoaded = false;
+    window.WebsiteOne._newPageLoaded = false;
   }
 
   return {
@@ -99,13 +98,13 @@ window.WSO = window.WSO || (function() {
   }
 })();
 
-window.WSO._newPageLoaded = true;
+window.WebsiteOne._newPageLoaded = true;
 
 $(function() {
-  if (!window.WSO._registered) {
-    $(document).ready(window.WSO._init);
-    $(document).on('page:load', window.WSO._init);
+  if (!window.WebsiteOne._registered) {
+    $(document).ready(window.WebsiteOne._init);
+    $(document).on('page:load', window.WebsiteOne._init);
 
-    window.WSO._registered = true;
+    window.WebsiteOne._registered = true;
   }
 });

@@ -1,4 +1,4 @@
-WSO.define('AffixedNavbar', function() {
+WebsiteOne.define('AffixedNavbar', function() {
 
   function AffixedNavbar() {
     var isAffixed, affixedNav, header, main, footer, thresholdTop,
