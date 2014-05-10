@@ -1,5 +1,4 @@
 <% provide :title, 'New Events' %>
-<%= javascript_include_tag 'event_datepicker', 'data-turbolinks-track' => true %>
 
 <% start_date = params[:event_date].to_datetime.strftime('%F') if params[:event_date] %>
 <% start_time = params[:start_time].to_datetime.strftime('%H:%M') if params[:event_date] %>

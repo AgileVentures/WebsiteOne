@@ -24,6 +24,8 @@
 //= require bootstrap/modal
 //= require_self
 //= require_directory ./global-modules
+//= require_tree .
+//= stub mercury
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code
