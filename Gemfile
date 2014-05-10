@@ -62,6 +62,10 @@ group :test do
   gem 'delorean'
 end
 
+group :development do
+  gem 'parallel_tests'
+end
+
 group :development, :test do
   gem 'rspec-rails' #unit testing
 #TODO YA do we need it? It breaks Rubymine's debugging

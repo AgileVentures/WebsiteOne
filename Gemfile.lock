@@ -228,6 +228,9 @@ GEM
     paper_trail (3.0.1)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
+    parallel (1.0.0)
+    parallel_tests (0.16.10)
+      parallel
     pg (0.17.1)
     phantomjs (1.9.7.0)
     pivotal-tracker-api (0.1.6)
@@ -400,6 +403,7 @@ DEPENDENCIES
   omniauth-github!
   omniauth-gplus!
   paper_trail
+  parallel_tests
   pg
   pivotal-tracker-api
   poltergeist
