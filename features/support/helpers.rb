@@ -1,11 +1,15 @@
 module Helpers
 
   def default_test_author
-    @default_test_author ||= User.create! first_name: 'Tester',
+    @default_test_author = User.find_by_email('testuser@agileventures.org')
+    if @default_test_author.nil?
+      @default_test_author = User.create! first_name: 'Tester',
                                           last_name: 'Man',
-                                          email: 'testing@test.agileventures.org',
+                                          email: 'testuser@agileventures.org',
                                           password: test_user_password,
                                           password_confirmation: test_user_password
+    end
+    @default_test_author
   end
 
   def test_ip_address

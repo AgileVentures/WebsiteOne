@@ -9,14 +9,13 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event_schedule = @event.current_occurences
-    #puts @event_schedule
+    @event_schedule = @event.next_occurrences
   end
 
   def index
     @events = []
     Event.all.each do |event|
-      @events << event.current_occurences
+      @events << event.next_occurrences
     end
     @events = @events.flatten.sort_by { |e| e[:time] }
   end
