@@ -17,7 +17,8 @@ WSO.define('EventCountdown', function () {
                 timeInHours = Math.floor(timeInMins / 60);
 
             if (timeInSeconds <= 0) {
-                countdownClock.html('<a href="' + eventUrl + '">' + eventName + '</a> has started');
+                countdownClock.html('<a href="' + eventUrl + '">' + eventName +
+                                    '</a> has started');
             } else {
                 var tmp = '<p>';
                 if (timeInHours > 0) {

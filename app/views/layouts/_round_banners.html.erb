@@ -78,7 +78,14 @@
   </li>
   <!-- END LIST ELEMENT -->
   <% if @event.present? %>
-    <p><%= link_to @event['name'], event_path(@event['id']) %> in <%= display_countdown(@event) %></p>
+    <p>
+      <%= link_to @event['name'], event_path(@event['id']) %>
+      <% if @event.next_occurrence_time.to_datetime < Time.now %>
+        has just started!
+      <% else %>
+        in <%= display_countdown(@event) %>
+      <% end %>
+    </p>
   <% end %>
 </ul>
 <!--END LIST -->

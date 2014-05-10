@@ -61,10 +61,9 @@ window.WSO._newPageLoaded = true;
 $(function() {
 
   function animatePageIn() {
-    $("#main").hide();
-    $("#footer").hide();
-    $("#main").fadeIn(300);
-    $("#footer").fadeIn(300);
+    var mainAndFooter = $("#main, #footer");
+    mainAndFooter.hide();
+    mainAndFooter.fadeIn(300);
   }
 
   if (!window.WSO._registered) {

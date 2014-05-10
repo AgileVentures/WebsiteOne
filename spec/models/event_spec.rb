@@ -19,15 +19,6 @@ describe Event do
     Event.respond_to?('schedule')
   end
 
-  it 'should be able to provide next_occurrence' do
-    Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
-    @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', time_zone: 'UTC', end_time: '11:00:00', friendly_id: 'spec-scrum')
-    Event.stub(:exists?).and_return true
-    Event.stub(:where).and_return [@event]
-    next_occurrence = Event.next_occurrence
-    expect(next_occurrence).to eq @event
-  end
-
   context 'return false on invalid inputs' do
     before do
       @event = FactoryGirl.create(:event)
@@ -155,7 +146,7 @@ describe Event do
                             end_time: '2000-01-01 17:00:00 UTC',
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
-                            repeats_weekly_each_days_of_the_week_mask: 96,
+                            repeats_weekly_each_days_of_the_week_mask: 0b1100000,
                             repeat_ends: 'never',
                             repeat_ends_on: 'Tue, 25 Jun 2013',
                             time_zone: 'Eastern Time (US & Canada)')
@@ -167,6 +158,79 @@ describe Event do
 
     it 'should return a list of events and occurence times' do
       expect(@event.current_occurences.count).to eq 2
+    end
+  end
+
+  describe 'Event#next_occurence' do
+    let(:event) do
+      stub_model(Event,
+                 name: 'Spec Scrum',
+                 event_date: '2014-03-07',
+                 start_time: '10:30:00',
+                 time_zone: 'UTC',
+                 end_time: '11:00:00',
+                 repeats: 'weekly',
+                 repeats_every_n_weeks: 1,
+                 repeats_weekly_each_days_of_the_week_mask: 0b1111111,
+                 repeat_ends: 'never',
+                 repeat_ends_on: 'Tue, 25 Jun 2015',
+                 friendly_id: 'spec-scrum')
+    end
+
+    let(:next_occurence_time) { event.next_occurence(timeAfter)[:time].time }
+
+    context 'without an input' do
+      let(:timeAfter) { Time.now }
+
+      it 'should return the next occurence of the event' do
+        Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
+        expect(next_occurence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
+      end
+
+      it 'should return the next occurence of the event' do
+        Delorean.time_travel_to(Time.parse('2014-03-08 09:27:00 UTC'))
+        expect(next_occurence_time).to eq(Time.parse('2014-03-08 10:30:00 UTC'))
+      end
+    end
+
+    context 'with an input' do
+      let(:timeAfter) { Time.parse('2014-03-13 09:59:13 UTC') }
+
+      it 'should return the next occurence of the event from a specific time' do
+        expect(next_occurence_time).to eq(Time.parse('2014-03-13 10:30:00 UTC'))
+      end
+    end
+  end
+
+  describe 'Event.next_event_occurence' do
+    let(:event) do
+      stub_model(Event,
+                 name: 'Spec Scrum',
+                 event_date: '2014-03-07',
+                 start_time: '10:30:00',
+                 time_zone: 'UTC',
+                 end_time: '11:00:00',
+                 friendly_id: 'spec-scrum')
+    end
+
+    before(:each) do
+      Event.stub(:exists?).and_return true
+      Event.stub(:where).and_return [ event ]
+    end
+
+    it 'should return the next event occurence' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
+      expect(Event.next_event_occurrence).to eq event
+    end
+
+    it 'should have a 15 minute buffer' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:44:59 UTC'))
+      expect(Event.next_event_occurrence).to eq event
+    end
+
+    it 'should not return events that occured more than 15 minutes ago' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:45:01 UTC'))
+      expect(Event.next_event_occurrence).to be_nil
     end
   end
 end
