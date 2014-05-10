@@ -1,5 +1,3 @@
-//= require ./wso
-
 WSO.define('FlashMessages', function() {
   return {
     init: function() {

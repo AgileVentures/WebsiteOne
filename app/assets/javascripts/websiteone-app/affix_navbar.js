@@ -1,5 +1,3 @@
-//= require ./wso
-
 WSO.define('AffixedNavbar', function() {
 
   function AffixedNavbar() {

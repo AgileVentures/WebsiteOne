@@ -1,5 +1,3 @@
-//= require ./wso
-
 WSO.define('AccordionCollapse', function() {
 
   var collapsedClass = 'fa-caret-down',

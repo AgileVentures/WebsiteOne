@@ -18,8 +18,9 @@ class Event < ActiveRecord::Base
     if Event.exists?
       @events = []
       Event.where(['category = ?', 'Scrum']).each do |event|
-        next_occurences = event.next_occurence(15.minutes.ago)
-        @events << next_occurences unless next_occurences.empty?
+        next_occurences = event.next_occurrences(after_time: 15.minutes.ago,
+                                                limit: 1)
+        @events << next_occurences.first unless next_occurences.empty?
       end
 
       return nil if @events.empty?
@@ -31,31 +32,25 @@ class Event < ActiveRecord::Base
     nil
   end
 
-  def current_occurences
+  def next_occurrences(options = {})
+    after_time = (options[:after_time] or Time.now)
+    limit = (options[:limit] or 100)
+
     [].tap do |occurences|
-      self.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
-        unless time <= DateTime.now
-          occurences << {
-              event: self,
-              time: time
-          }
+      occurrences_between(after_time.to_date,
+                          after_time.to_date + 10.days).each do |time|
+
+        unless time <= after_time
+          occurences << { event: self, time: time }
+
+          return occurences if occurences.count >= limit
         end
       end
     end
   end
 
-  def next_occurence(afterTime = Time.now)
-    schedule.occurrences_between(afterTime.to_date,
-                                 afterTime.to_date + 10.days).each do |time|
-      unless time <= afterTime
-        return {
-          event: self,
-          time: time
-        }
-      end
-    end
-
-    {}
+  def occurrences_between(start_time, end_time)
+    schedule.occurrences_between(start_time, end_time)
   end
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)

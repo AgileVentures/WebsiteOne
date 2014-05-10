@@ -1,5 +1,3 @@
-//= require ./wso
-
 WSO.define('EventCountdown', function () {
 
     function EventCountdown() {

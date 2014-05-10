@@ -73,6 +73,17 @@ describe('WebsiteOne module', function () {
         });
     });
 
+    describe("WSO.runOnce", function() {
+        it('should always run the callback exactly', function () {
+            var spy = jasmine.createSpy();
+            WSO.runOnce("name", spy);
+            for (var i = 0; i < 10; i++) {
+              WSO._init();
+            }
+            expect(spy.calls.count()).toEqual(1);
+        });
+    });
+
     describe('WSO._clear', function () {
         it('removes all the modules', function() {
             expect(WSO.__test__).toBeDefined();

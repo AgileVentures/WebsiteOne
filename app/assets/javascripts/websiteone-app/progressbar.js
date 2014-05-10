@@ -1,5 +1,3 @@
-//= require ./wso
-
 WSO.define('ProgressBar', function() {
   var firstTimeLoad = true;
   return {

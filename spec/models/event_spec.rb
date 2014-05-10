@@ -134,33 +134,6 @@ describe Event do
     end
   end
 
-  context 'Event occurences' do
-    before(:each) do
-      ENV['TZ'] = 'UTC'
-      Delorean.time_travel_to(Time.parse('Mon, 17 Jun 2013'))
-      @event = Event.create!(name: 'every weekend event',
-                            category: 'Scrum',
-                            description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
-                            repeats: 'weekly',
-                            repeats_every_n_weeks: 1,
-                            repeats_weekly_each_days_of_the_week_mask: 0b1100000,
-                            repeat_ends: 'never',
-                            repeat_ends_on: 'Tue, 25 Jun 2013',
-                            time_zone: 'Eastern Time (US & Canada)')
-    end
-
-    it 'should respond to current_occurences' do
-      @event.should respond_to :current_occurences
-    end
-
-    it 'should return a list of events and occurence times' do
-      expect(@event.current_occurences.count).to eq 2
-    end
-  end
-
   describe 'Event#next_occurence' do
     let(:event) do
       stub_model(Event,
@@ -177,27 +150,32 @@ describe Event do
                  friendly_id: 'spec-scrum')
     end
 
-    let(:next_occurence_time) { event.next_occurence(timeAfter)[:time].time }
+    let(:options) { {} }
+    let(:next_occurrences) { event.next_occurrences(options) }
+    let(:next_occurrence_time) { next_occurrences.first[:time].time }
 
-    context 'without an input' do
-      let(:timeAfter) { Time.now }
-
-      it 'should return the next occurence of the event' do
-        Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
-        expect(next_occurence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
-      end
-
-      it 'should return the next occurence of the event' do
-        Delorean.time_travel_to(Time.parse('2014-03-08 09:27:00 UTC'))
-        expect(next_occurence_time).to eq(Time.parse('2014-03-08 10:30:00 UTC'))
-      end
+    it 'should return the next occurence of the event' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
+      expect(next_occurrence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
     end
 
-    context 'with an input' do
-      let(:timeAfter) { Time.parse('2014-03-13 09:59:13 UTC') }
+    context 'with input arguments' do
+      context ':limit option' do
+        let(:options) { { limit: 2 } }
 
-      it 'should return the next occurence of the event from a specific time' do
-        expect(next_occurence_time).to eq(Time.parse('2014-03-13 10:30:00 UTC'))
+        it 'should limit the size of the output' do
+          Delorean.time_travel_to(Time.parse('2014-03-08 09:27:00 UTC'))
+          expect(next_occurrences.count).to eq(2)
+        end
+      end
+
+      context ':after_time option' do
+        let(:options) { { after_time: Time.parse('2014-03-09 9:27:00 UTC') } }
+
+        it 'should return only occurrences after a specific time' do
+          Delorean.time_travel_to(Time.parse('2014-03-05 09:27:00 UTC'))
+          expect(next_occurrence_time).to eq(Time.parse('2014-03-09 10:30:00 UTC'))
+        end
       end
     end
   end
