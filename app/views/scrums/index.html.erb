@@ -3,6 +3,7 @@
 <div class="jumbotron">
   <div class="container">
     <h1>Welcome to the Scrums Page</h1>
+
     <p>Choose a Scrum to view.</p>
 
   </div>
@@ -12,7 +13,7 @@
 <div class="row">
   <div class="col-md-7 col-sm-7">
     <td><h4 id="video_contents"><%= @scrums.first['content'] %></h4></td>
-    <iframe id="ytplayer" type="text/html" width="250" height="250" src="<%= scrum_embed_link @scrums.first %>" frameborder="0"></iframe>
+    <iframe id="ytplayer" type="text/html" width="250" height="250" src="<%= scrum_embed_link @scrums.first %>"></iframe>
   </div>
   <div class="col-md-5 col-sm-5">
     <h4>Programming sessions</h4>
@@ -26,6 +27,109 @@
   </div>
 </div>
 
+<div class="container">
+  <div class="page-header">
+    <h1 id="timeline">Scrums Timeline</h1>
+  </div>
+  <ul class="timeline">
+    <li>
+      <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title"><iframe id="ytplayer" type="text/html" width="30" height="30" src="<%= scrum_embed_link @scrums.first %>" frameborder="0"></iframe>   WSO youtube API with jon </h4>
+
+          <p>
+            <small class="text-muted"><i class="glyphicon glyphicon-time"></i>datetime</small>
+          </p>
+        </div>
+        <div class="timeline-body">
+          <p>This is a video with marcelo and jon discussing a feature on WebsiteOne.</p>
+        </div>
+      </div>
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">Agile Venture Atlantic Scrum</h4>
+        </div>
+        <div class="timeline-body">
+          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis</p>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
+        </div>
+        <div class="timeline-body">
+          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
+            paradis</p>
+        </div>
+      </div>
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
+        </div>
+        <div class="timeline-body">
+          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis</p>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-badge info"><i class="glyphicon glyphicon-floppy-disk"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
+        </div>
+        <div class="timeline-body">
+          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
+            paradis.</p>
+          <hr>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+              <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
+        </div>
+        <div class="timeline-body">
+          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
+            gostis.</p>
+        </div>
+      </div>
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge success"><i class="glyphicon glyphicon-thumbs-up"></i></div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
+        </div>
+        <div class="timeline-body">
+          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
+            paradis.</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
 
 
 
