@@ -18,8 +18,8 @@ class Event < ActiveRecord::Base
     if Event.exists?
       @events = []
       Event.where(['category = ?', 'Scrum']).each do |event|
-        next_occurences = event.next_occurrences(after_time: 15.minutes.ago,
-                                                limit: 1)
+        next_occurences = event.next_occurrences(start_time: 15.minutes.ago,
+                                                 limit: 1)
         @events << next_occurences.first unless next_occurences.empty?
       end
 
@@ -33,18 +33,15 @@ class Event < ActiveRecord::Base
   end
 
   def next_occurrences(options = {})
-    after_time = (options[:after_time] or Time.now)
+    start_time = (options[:start_time] or Time.now)
+    end_time = (options[:end_time] or start_time + 10.days)
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
-      occurrences_between(after_time.to_date,
-                          after_time.to_date + 10.days).each do |time|
+      occurrences_between(start_time, end_time).each do |time|
+        occurences << { event: self, time: time }
 
-        unless time <= after_time
-          occurences << { event: self, time: time }
-
-          return occurences if occurences.count >= limit
-        end
+        return occurences if occurences.count >= limit
       end
     end
   end

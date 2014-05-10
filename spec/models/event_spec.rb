@@ -169,8 +169,8 @@ describe Event do
         end
       end
 
-      context ':after_time option' do
-        let(:options) { { after_time: Time.parse('2014-03-09 9:27:00 UTC') } }
+      context ':start_time option' do
+        let(:options) { { start_time: Time.parse('2014-03-09 9:27:00 UTC') } }
 
         it 'should return only occurrences after a specific time' do
           Delorean.time_travel_to(Time.parse('2014-03-05 09:27:00 UTC'))
