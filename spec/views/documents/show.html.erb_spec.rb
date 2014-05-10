@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "documents/show" do
   before(:each) do
     @user = mock_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org', display_name: 'John Simpson')
-    @project = assign(:project, stub_model(Project, :id => 1, :title => "Project1", :friendly_id => "Cool-Project", :created_at => Time.now))
+    @project = assign(:project, stub_model(Project, id: 1 , title:  'Project1',
+                                           friendly_id:  'cool-project', created_at:  Time.now))
     @version = stub_model(PaperTrail::Version,
                           item_type: "Document",
                           event: "create",
