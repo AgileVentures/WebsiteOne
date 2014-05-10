@@ -59,9 +59,22 @@ window.WSO = window.WSO || (function() {
 window.WSO._newPageLoaded = true;
 
 $(function() {
+
+  function animatePageIn() {
+    $("#main").hide();
+    $("#footer").hide();
+    $("#main").fadeIn(300);
+    $("#footer").fadeIn(300);
+  }
+
   if (!window.WSO._registered) {
     $(document).ready(window.WSO._init);
     $(document).on('page:load', window.WSO._init);
+
+    // animate in pages
+    $(document).on('page:change', animatePageIn);
+    $(document).on('page:restore', animatePageIn);
+
     window.WSO._registered = true;
   }
 });
