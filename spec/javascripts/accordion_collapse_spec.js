@@ -8,7 +8,7 @@ describe('AccordionCollapse module', function() {
   });
 
   it('should create a module called "AccordionCollapse"', function() {
-    expect(window.WSO.AccordionCollapse).toBeDefined();
+    expect(WebsiteOne.AccordionCollapse).toBeDefined();
   });
 
   it('should change class when clicked once', function() {

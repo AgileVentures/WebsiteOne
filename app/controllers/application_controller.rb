@@ -28,6 +28,6 @@ class ApplicationController < ActionController::Base
   private
 
   def get_next_event
-    @next_event = Event.next_occurrence
+    @next_event = Event.next_event_occurrence
   end
 end

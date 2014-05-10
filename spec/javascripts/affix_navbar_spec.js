@@ -19,12 +19,12 @@ describe('Affixed Navbar', function () {
         scroll = spyOn($.prototype, 'scroll').and.callThrough();
 
         reloadScript('affix_navbar.js');
-        onScrollSpy = spyOn(WSO.AffixedNavbar, 'onScroll').and.callThrough();
+        onScrollSpy = spyOn(WebsiteOne.AffixedNavbar, 'onScroll').and.callThrough();
         $(document).trigger('page:load');
     });
 
-    it('should define a new WSO module called "AffixedNavbar"', function() {
-        expect(WSO.AffixedNavbar).toBeDefined();
+    it('should define a new WebsiteOne module called "AffixedNavbar"', function() {
+        expect(WebsiteOne.AffixedNavbar).toBeDefined();
     });
 
     describe('AffixedNavbar.init', function() {
@@ -37,7 +37,7 @@ describe('Affixed Navbar', function () {
         });
 
         it('should pass onScroll as a callback to scroll', function() {
-            expect(scroll).toHaveBeenCalledWith(WSO.AffixedNavbar.onScroll)
+            expect(scroll).toHaveBeenCalledWith(WebsiteOne.AffixedNavbar.onScroll)
         });
     });
 
@@ -78,7 +78,7 @@ describe('Affixed Navbar', function () {
             scrollTop.and.callFake(function () {
                 return 18;
             });
-            WSO.AffixedNavbar.init();
+            WebsiteOne.AffixedNavbar.init();
             $(window).scroll();
         });
 
