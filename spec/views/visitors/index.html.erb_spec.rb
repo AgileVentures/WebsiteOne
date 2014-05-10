@@ -71,7 +71,7 @@ describe 'visitors/index.html.erb' do
     it 'should <event> has just started!' do
       render
       expect(rendered).to have_link @event.name, event_path(@event)
-      expect(rendered).to have_text 'has just started'
+      expect(rendered).to have_text 'is live!'
     end
   end
 

@@ -81,7 +81,7 @@
     <p>
       <%= link_to @event['name'], event_path(@event['id']) %>
       <% if @event.next_occurrence_time.to_datetime < Time.now %>
-        has just started!
+        is live!
       <% else %>
         in <%= display_countdown(@event) %>
       <% end %>

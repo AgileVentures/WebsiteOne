@@ -18,7 +18,7 @@ WSO.define('EventCountdown', function () {
 
             if (timeInSeconds <= 0) {
                 countdownClock.html('<a href="' + eventUrl + '">' + eventName +
-                                    '</a> has started');
+                                    '</a> is live!');
             } else {
                 var tmp = '<p>';
                 if (timeInHours > 0) {

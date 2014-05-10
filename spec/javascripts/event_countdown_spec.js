@@ -33,8 +33,7 @@ describe('Event Countdown', function () {
         });
 
         describe('when the clock is present', function () {
-            it('parses the time into a date object', function () {
-                this.data.and.returnValue('fake date object');
+            it('parses the time into a date object', function () { this.data.and.returnValue('fake date object');
                 WSO.EventCountdown.init();
 
                 expect(this.dateParse).toHaveBeenCalledWith('fake date object');
@@ -106,7 +105,7 @@ describe('Event Countdown', function () {
         it('displays a banner after it has started', function () {
             floor.and.returnValue(0);
             WSO.EventCountdown.update();
-            expect(this.countdownClock.text()).toEqual('Homecoming has started')
+            expect(this.countdownClock.text()).toEqual('Homecoming is live!')
         });
 
         it('recalculates the time every second unless the event has already started', function () {
