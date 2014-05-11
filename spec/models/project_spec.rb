@@ -68,10 +68,9 @@ describe Project do
 
   describe '#search' do
     before(:each) { 9.times { FactoryGirl.create(:project) } }
-    after(:each) { Project.delete_all }
 
-    it 'returns paginated values' do
-      expect(Project.search(nil, nil).count).to eq(5)
+    it 'should return paginated projects with 5 per page' do
+      expect(Project.search(nil, nil).per_page).to eq(5)
     end
   end
 
