@@ -71,7 +71,7 @@ describe Project do
     after(:each) { Project.delete_all }
 
     it 'returns paginated values' do
-      Project.search(nil, nil).should eq Project.first 5
+      expect(Project.search(nil, nil).count).to eq(5)
     end
   end
 
