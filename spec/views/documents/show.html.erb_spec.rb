@@ -3,7 +3,8 @@ require 'spec_helper'
 describe "documents/show" do
   before(:each) do
     @user = mock_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org', display_name: 'John Simpson')
-    @project = assign(:project, stub_model(Project, :id => 1, :title => "Project1", :created_at => Time.now))
+    @project = assign(:project, stub_model(Project, id: 1 , title:  'Project1',
+                                           friendly_id:  'cool-project', created_at:  Time.now))
     @version = stub_model(PaperTrail::Version,
                           item_type: "Document",
                           event: "create",
@@ -33,15 +34,7 @@ describe "documents/show" do
 
     view.stub(:created_by).and_return(@created_by)
   end
-  #
-  #it "renders attributes in <span>" do
-  #  render
-  #  rendered.should have_content('Title')
-  #  rendered.should have_content('MyText')
-  #end
 
-
-  
   context 'document is root' do
     before do
       assign :document, @document
@@ -65,6 +58,22 @@ describe "documents/show" do
       @document.stub(versions: [ @version, @version ])
       render
       rendered.should have_text 'Revisions'
+    end
+
+    it 'should render an Edit link' do
+      controller.stub(:user_signed_in?).and_return(true)
+      render
+      rendered.within('#edit_link') do |link|
+        link.should have_css('i[class="fa fa-pencil-square-o"]')
+      end
+    end
+
+    it 'should render a New Sub-document link' do
+      controller.stub(:user_signed_in?).and_return(true)
+      render
+      rendered.within('#new_document_link') do |link|
+        link.should have_css('i[class="fa fa-file-text-o"]')
+      end
     end
   end
 

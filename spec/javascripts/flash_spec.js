@@ -1,4 +1,4 @@
-describe('WSO FlashMessages module', function() {
+describe('WebsiteOne FlashMessages module', function() {
   var timeoutSpy;
 
   beforeEach(function() {
@@ -10,8 +10,8 @@ describe('WSO FlashMessages module', function() {
     reloadScript('flash.js');
   });
 
-  it('should create a new WSO module called "FlashMessages"', function() {
-    expect(window.WSO.FlashMessages).toBeDefined();
+  it('should create a new WebsiteOne module called "FlashMessages"', function() {
+    expect(window.WebsiteOne.FlashMessages).toBeDefined();
   });
 
   describe('with a flash message in the page', function() {
