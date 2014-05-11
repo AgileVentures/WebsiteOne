@@ -1,8 +1,8 @@
 
 beforeEach(function() {
   // clears the WSO module's state
-  WSO._clear();
-  WSO._newPageLoaded = true;
+  WebsiteOne._clear();
+  WebsiteOne._newPageLoaded = true;
 });
 
 function reloadScript(name) {

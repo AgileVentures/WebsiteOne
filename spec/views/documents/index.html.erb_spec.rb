@@ -7,7 +7,6 @@ describe 'documents/index' do
 		stub_model(Document, :title => "Title",:body => "MyText", :project_id => 1 ),
     stub_model(Document, :title => "Title", :body => "MyText", :project_id => 2)
 		 ]
-
     assign(:documents, @documents)
     @dummy_project = FactoryGirl.create(:project)
     assign(:project, @dummy_project)
@@ -20,6 +19,7 @@ describe 'documents/index' do
       rendered.should have_content('MyText', :count => 2)
     end
   end
+
   context 'for signed in users' do
     before :each do
       view.stub(:user_signed_in?).and_return(true)
@@ -34,8 +34,8 @@ describe 'documents/index' do
       render
       rendered.should have_link 'New Document', :href => new_project_document_path(project_id: @dummy_project.id)
     end
-
   end
+
   context 'for not signed in users' do
     before :each do
       view.stub(:user_signed_in?).and_return(false)
@@ -50,6 +50,5 @@ describe 'documents/index' do
       render
       rendered.should_not have_link 'Destroy', :href => project_document_path(id: @documents[0].id, project_id: @project_id)
     end
-
   end
 end

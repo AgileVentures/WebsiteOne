@@ -19,15 +19,6 @@ describe Event do
     Event.respond_to?('schedule')
   end
 
-  it 'should be able to provide next_occurrence' do
-    Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
-    @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', time_zone: 'UTC', end_time: '11:00:00', friendly_id: 'spec-scrum')
-    Event.stub(:exists?).and_return true
-    Event.stub(:where).and_return [@event]
-    next_occurrence = Event.next_occurrence
-    expect(next_occurrence).to eq @event
-  end
-
   context 'return false on invalid inputs' do
     before do
       @event = FactoryGirl.create(:event)
@@ -143,30 +134,81 @@ describe Event do
     end
   end
 
-  context 'Event occurences' do
+  describe 'Event#next_occurence' do
+    let(:event) do
+      stub_model(Event,
+                 name: 'Spec Scrum',
+                 event_date: '2014-03-07',
+                 start_time: '10:30:00',
+                 time_zone: 'UTC',
+                 end_time: '11:00:00',
+                 repeats: 'weekly',
+                 repeats_every_n_weeks: 1,
+                 repeats_weekly_each_days_of_the_week_mask: 0b1111111,
+                 repeat_ends: 'never',
+                 repeat_ends_on: 'Tue, 25 Jun 2015',
+                 friendly_id: 'spec-scrum')
+    end
+
+    let(:options) { {} }
+    let(:next_occurrences) { event.next_occurrences(options) }
+    let(:next_occurrence_time) { next_occurrences.first[:time].time }
+
+    it 'should return the next occurence of the event' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
+      expect(next_occurrence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
+    end
+
+    context 'with input arguments' do
+      context ':limit option' do
+        let(:options) { { limit: 2 } }
+
+        it 'should limit the size of the output' do
+          Delorean.time_travel_to(Time.parse('2014-03-08 09:27:00 UTC'))
+          expect(next_occurrences.count).to eq(2)
+        end
+      end
+
+      context ':start_time option' do
+        let(:options) { { start_time: Time.parse('2014-03-09 9:27:00 UTC') } }
+
+        it 'should return only occurrences after a specific time' do
+          Delorean.time_travel_to(Time.parse('2014-03-05 09:27:00 UTC'))
+          expect(next_occurrence_time).to eq(Time.parse('2014-03-09 10:30:00 UTC'))
+        end
+      end
+    end
+  end
+
+  describe 'Event.next_event_occurence' do
+    let(:event) do
+      stub_model(Event,
+                 name: 'Spec Scrum',
+                 event_date: '2014-03-07',
+                 start_time: '10:30:00',
+                 time_zone: 'UTC',
+                 end_time: '11:00:00',
+                 friendly_id: 'spec-scrum')
+    end
+
     before(:each) do
-      ENV['TZ'] = 'UTC'
-      Delorean.time_travel_to(Time.parse('Mon, 17 Jun 2013'))
-      @event = Event.create!(name: 'every weekend event',
-                            category: 'Scrum',
-                            description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
-                            repeats: 'weekly',
-                            repeats_every_n_weeks: 1,
-                            repeats_weekly_each_days_of_the_week_mask: 96,
-                            repeat_ends: 'never',
-                            repeat_ends_on: 'Tue, 25 Jun 2013',
-                            time_zone: 'Eastern Time (US & Canada)')
+      Event.stub(:exists?).and_return true
+      Event.stub(:where).and_return [ event ]
     end
 
-    it 'should respond to current_occurences' do
-      @event.should respond_to :current_occurences
+    it 'should return the next event occurence' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
+      expect(Event.next_event_occurrence).to eq event
     end
 
-    it 'should return a list of events and occurence times' do
-      expect(@event.current_occurences.count).to eq 2
+    it 'should have a 15 minute buffer' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:44:59 UTC'))
+      expect(Event.next_event_occurrence).to eq event
+    end
+
+    it 'should not return events that occured more than 15 minutes ago' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:45:01 UTC'))
+      expect(Event.next_event_occurrence).to be_nil
     end
   end
 end

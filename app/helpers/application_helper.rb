@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def gravatar_for(email, options = {size: 80})
     hash = Digest::MD5::hexdigest(email.strip.downcase)
-    "http://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
+    "https://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
   end
 
   def current_user_details
@@ -81,7 +81,7 @@ module ApplicationHelper
 
     raw <<-HTML
     <div data-no-turbolink>
-      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'method="delete" ' if options[:delete]}href=#{path}>
+      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'method="delete" ' if options[:delete]}href="#{path}">
         <i class="fa fa-#{fa_icon[provider]}"></i> #{text} #{display_name[provider]}
       </a>
     </div>
