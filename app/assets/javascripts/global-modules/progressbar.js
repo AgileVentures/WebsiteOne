@@ -1,6 +1,4 @@
-//= require ./wso
-
-WSO.define('ProgressBar', function() {
+WebsiteOne.define('ProgressBar', function() {
   var firstTimeLoad = true;
   return {
     init: function() {

@@ -1,6 +1,4 @@
-//= require ./wso
-
-WSO.define('AccordionCollapse', function() {
+WebsiteOne.define('AccordionCollapse', function() {
 
   var collapsedClass = 'fa-caret-down',
       expandedClass = 'fa-caret-right';

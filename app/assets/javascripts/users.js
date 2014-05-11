@@ -1,5 +1,4 @@
-
-WSO.define('Users', function() {
+WebsiteOne.define('Users', function() {
   var player;
 
   function selectVideo(event) {

@@ -21,7 +21,7 @@ $gravatar-size: 45px;
   #next-event {
     background: $theme-dark;
     color: $white;
-    padding: 10px 10px 0 10px;
+    padding: 10px;
     border-bottom-right-radius: 10px;
     text-transform: none;
     font-size: 1em;
@@ -35,6 +35,7 @@ $gravatar-size: 45px;
 
     p {
       vertical-align: text-bottom;
+      margin: 0;
     }
 
     @include css-transition(height 0.3s ease);
