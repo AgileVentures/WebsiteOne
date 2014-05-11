@@ -17,6 +17,11 @@ script:
   - bundle exec rake jasmine:ci
   - bundle exec rake cucumber CUCUMBER_OPTS="-f progress"
 
+# downgrade git version to avoid deployment bug (keep till its fixed)
+before_install:
+  - sudo rm /etc/apt/sources.list.d/git-ppa-source.list
+  - sudo apt-get remove git && sudo apt-get remove git-man && sudo apt-get install git-man && sudo apt-get install git
+
 deploy:
   provider: heroku
   api_key:
