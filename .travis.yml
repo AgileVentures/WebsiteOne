@@ -35,3 +35,7 @@ env:
   - AWS_S3_SECRET: rRniLt7KEf9uUWO2w0Blc6DDU9O6t89CDz9DRU7X
   - BUNDLE_ARCHIVE: websiteone-bundler-cache
   - AWS_S3_BUCKET: AV-Travis-BundlerCache
+notifications:
+  email:
+    - thomas@nocebo.se
+    - info@agileventures.org
