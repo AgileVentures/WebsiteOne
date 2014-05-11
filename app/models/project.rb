@@ -13,9 +13,10 @@ class Project < ActiveRecord::Base
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-
   def self.search(search, page)
-    order('LOWER(title)').where('title LIKE ?', "%#{search}%").paginate(per_page: 5, page: page)
+    order('LOWER(title)')
+      .where('title LIKE ?', "%#{search}%")
+      .paginate(per_page: 5, page: page)
   end
 
   def self.all_tags
