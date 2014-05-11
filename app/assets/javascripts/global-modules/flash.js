@@ -1,6 +1,4 @@
-//= require ./wso
-
-WSO.define('FlashMessages', function() {
+WebsiteOne.define('FlashMessages', function() {
   return {
     init: function() {
       var flash = $('#flash-container');

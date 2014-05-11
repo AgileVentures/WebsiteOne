@@ -1,6 +1,4 @@
-//= require ./wso
-
-WSO.define('EventCountdown', function () {
+WebsiteOne.define('EventCountdown', function () {
 
     function EventCountdown() {
         var countdownClock, eventName, eventTime, eventUrl, textToAppend;
@@ -17,7 +15,8 @@ WSO.define('EventCountdown', function () {
                 timeInHours = Math.floor(timeInMins / 60);
 
             if (timeInSeconds <= 0) {
-                countdownClock.html('<a href="' + eventUrl + '">' + eventName + '</a> has started');
+                countdownClock.html('<a href="' + eventUrl + '">' + eventName +
+                                    '</a> is live!');
             } else {
                 var tmp = '<p>';
                 if (timeInHours > 0) {

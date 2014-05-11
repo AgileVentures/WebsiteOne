@@ -16,7 +16,7 @@ describe 'events/show' do
                         repeat_ends: 'never',
                         repeat_ends_on: 'Mon, 17 Jun 2014',
                         time_zone: 'Eastern Time (US & Canada)')
-    @event_schedule = @event.current_occurences
+    @event_schedule = @event.next_occurrences
     render
   end
 

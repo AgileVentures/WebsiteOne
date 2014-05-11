@@ -1,8 +1,8 @@
 describe('WebsiteOne Projects module', function () {
 
-  it('should create a WSO module called "Projects"', function() {
+  it('should create a WebsiteOne module called "Projects"', function() {
     reloadScript('projects.js');
-    expect(window.WSO.Projects).toBeDefined();
+    expect(window.WebsiteOne.Projects).toBeDefined();
   });
 
   describe('using in-page links', function() {
@@ -73,8 +73,8 @@ describe('WebsiteOne Projects module', function () {
         $(document).trigger('page:load');
       });
 
-      it('should define a new WSO module called "Projects"', function() {
-        expect(WSO.Projects).toBeDefined();
+      it('should define a new WebsiteOne module called "Projects"', function() {
+        expect(WebsiteOne.Projects).toBeDefined();
       });
 
       it('should call jQuery.ajax to get the google HOA script', function() {
