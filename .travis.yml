@@ -13,9 +13,9 @@ before_script:
   - bundle exec rake db:test:prepare
 
 env:
-  - TEST_SUITE="rake spec"
+  - TEST_SUITE="rake spec SPEC_OPTS='-f progress --order rand'"
   - TEST_SUITE="rake jasmine:ci"
-  - TEST_SUITE="rake cucumber"
+  - TEST_SUITE="rake cucumber CUCUMBER_OPTS='-f progress -r features/'"
 
 script: "bundle exec $TEST_SUITE"
 
