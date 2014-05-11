@@ -2,7 +2,6 @@ require 'pp'
 
 module AgileVentures
   class BulkMailer
-  
     attr_reader :num_sent
     attr_reader :used_addresses
 
@@ -39,8 +38,8 @@ module AgileVentures
     def run
       @num_sent = 0
       @used_addresses = []
-      puts "about to send: #{@heading}\n#{pp(@content)}"
-      opted_in_user_in_batches   
+      Rails.logger.info "about to send: #{@heading}\n#{pp(@content)}"
+      opted_in_user_in_batches
       @num_sent
     end
 

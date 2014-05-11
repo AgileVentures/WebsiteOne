@@ -1,6 +1,6 @@
 language: ruby
-rvm:
-- 2.1.1
+cache: bundler
+rvm: "2.1.1"
 
 # to enable javascript testing with X server and firefox
 before_install:
@@ -9,14 +9,18 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 
 before_script:
-- bundle exec rake db:create:all
-- bundle exec rake db:migrate
-- bundle exec rake db:test:prepare
+  - bundle exec rake db:create:all
+  - bundle exec rake parallel:create
+  - bundle exec rake db:migrate
+  - bundle exec rake parallel:prepare
 
-script:
-- bundle exec rake spec
-- bundle exec rake jasmine:ci
-- bundle exec rake cucumber
+env:
+  - TEST_SUITE=parallel:spec[4]
+  - TEST_SUITE=jasmine:ci
+  - TEST_SUITE=parallel:features[4]
+
+script: "bundle exec rake $TEST_SUITE"
+
 deploy:
   provider: heroku
   api_key:
@@ -27,6 +31,7 @@ deploy:
       staging: websiteone-staging
       master: websiteone-production
   run: "rake db:migrate"
+
 notifications:
   email:
     - thomas@nocebo.se

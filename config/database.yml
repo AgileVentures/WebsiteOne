@@ -8,7 +8,7 @@ development: &dev
 
 test: &test
   <<: *dev
-  database: websiteone_test
+  database: websiteone_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 production:
   <<: *dev
