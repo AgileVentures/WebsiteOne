@@ -12,15 +12,21 @@
 
 <div class="row">
   <div class="col-md-7 col-sm-7">
-    <td><h4 id="video_contents"><%= @scrums.first['content'] %></h4></td>
+    <td><h4 id="video_contents"><%= @scrums.first[:content] %></h4></td>
     <iframe id="ytplayer" type="text/html" width="250" height="250" src="<%= scrum_embed_link @scrums.first %>"></iframe>
   </div>
   <div class="col-md-5 col-sm-5">
-    <h4>Programming sessions</h4>
+    <h4>Agile Ventures</h4>
     <table class="table table-bordered table-striped table-hover table-condensed">
+      <tr>
+        <th>Title</th>
+      </tr>
       <% @scrums.each do |video| %>
           <tr>
-            <td><%= scrum_link(video) %></td>
+            <td><%= scrum_link(video) %>
+              <br/>
+              <small><%= video[:published].to_s(:db) %></small>
+            </td>
           </tr>
       <% end %>
     </table>
