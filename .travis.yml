@@ -12,12 +12,10 @@ before_script:
   - bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
 
-env:
-  - TEST_SUITE="rake spec SPEC_OPTS='-f progress --order rand'"
-  - TEST_SUITE="rake jasmine:ci"
-  - TEST_SUITE="rake cucumber CUCUMBER_OPTS='-f progress -r features/'"
-
-script: "bundle exec $TEST_SUITE"
+script:
+  - bundle exec rake spec SPEC_OPTS="-f progress"
+  - bundle exec rake jasmine:ci
+  - bundle exec rake cucumber CUCUMBER_OPTS="-f progress"
 
 deploy:
   provider: heroku
