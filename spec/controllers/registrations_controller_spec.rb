@@ -70,12 +70,6 @@ describe RegistrationsController do
       @user.stub(:skill_list=)
     end
 
-    it 'renders edit on preview' do
-      @user.stub(:display_email=)
-      put :update, id: 'update', preview: true, user: {email: ''}
-      expect(response).to render_template(:edit)
-    end
-
     it 'assigns the requested project as @project' do
       @user.should_receive(:update_attributes)
       put :update, id: 'update', user: {display_hire_me: true}
