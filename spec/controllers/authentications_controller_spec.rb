@@ -242,7 +242,7 @@ describe AuthenticationsController do
       user = stub_model(User, github_profile_url: nil)
       controller.stub(current_user: user)
       User.stub(find: user)
-      expect(user).to receive(:reloa)
+      expect(user).to receive(:reload)
       expect(user).to receive(:update_attributes).and_return true
 
       get :create, provider: 'github'
