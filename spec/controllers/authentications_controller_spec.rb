@@ -58,7 +58,19 @@ describe AuthenticationsController do
       expect(flash[:alert]).to eq 'Authentication method could not be removed.'
     end
 
+  end
 
+  # Sampriti: Had to extract out into a seperate block as there was no way to override
+  # or disable the should_receives in the other context.
+  context 'destroying authentications' do
+    it 'should show failure message when not authentications exist' do
+      @user = double(User, id: 1, friendly_id: 'my-id', encrypted_password: 'i-am-encrypted')
+      request.env['warden'].stub :authenticate! => @user
+      controller.stub :current_user => @user
+      @user.stub_chain(:authentications, :find).and_return nil
+      get :destroy, id: 2
+      expect(flash[:alert]).to eq 'Authentication method not found.'
+    end
   end
 
   before(:each) do
