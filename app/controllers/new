@@ -1,4 +1,4 @@
-class AuthenticationsController < ApplicationController
+
   before_action :authenticate_user!, only: [:destroy]
 
   def create
@@ -137,16 +137,4 @@ class AuthenticationsController < ApplicationController
 
     redirect_to(params[:origin] || root_path)
   end
-
-end
-
-
-
-
-
-
-
-
-
-
 

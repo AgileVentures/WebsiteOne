@@ -10,11 +10,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def show
-    @article = Article.friendly.find(params[:id])
-    @author = @article.user
-  end
-
   def new
     @article = Article.new
     @article.tag_list = [ params[:tag] ]

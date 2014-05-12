@@ -76,7 +76,7 @@ describe AuthenticationsController do
 
     context 'for new profiles' do
       before(:each) do
-        Authentication.should_receive(:find_by_provider_and_uid).and_return nil
+        allow(Authentication).to receive(:find_by_provider_and_uid) { nil }
         User.should_receive(:new).and_return(@user)
       end
 

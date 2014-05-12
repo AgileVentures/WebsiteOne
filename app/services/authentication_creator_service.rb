@@ -7,7 +7,6 @@ class AuthenticationCreatorService
 
   def create(omniauth, path)
     if authentication.present?
-      listener.attempt_login_with_auth(authentication, path)
 
     elsif current_user
       listener.create_new_authentication_for_current_user(omniauth, path)
