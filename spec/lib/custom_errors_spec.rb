@@ -9,10 +9,6 @@ describe CustomErrors, type: 'controller' do
       raise ActiveRecord::RecordNotFound
     end
 
-    def raise_422
-      raise ActiveRecord::RecordInvalid
-    end
-
     def raise_500
       raise Exception
     end
@@ -56,38 +52,6 @@ describe CustomErrors, type: 'controller' do
     it 'should send an error notification to the admin' do
       ActionMailer::Base.deliveries.clear
       get :raise_500
-
-      ActionMailer::Base.deliveries.size.should eq 1
-      email = ActionMailer::Base.deliveries[0]
-      expect(email.subject).to include 'ERROR'
-
-      recipients = email.to
-      expect(recipients.size).to eq 1
-      expect(recipients[0]).to eq 'info@agileventures.org'
-    end
-  end
-
-  context 'all other errors' do
-    before(:each) do
-      routes.draw { get 'raise_422' => 'anonymous#raise_422' }
-    end
-
-    it 'should catch 422 errors' do
-      get :raise_422
-      expect(response).to render_template 'static_pages/internal_error'
-      expect(response.status).to eq 500
-    end
-
-    it 'should be able to adjust log stack trace limit' do
-      dummy = Class.new
-      Rails.stub(logger: dummy)
-      dummy.should_receive(:error).exactly(7)
-      get :raise_422
-    end
-
-    it 'should send an error notification to the admin' do
-      ActionMailer::Base.deliveries.clear
-      get :raise_422
 
       ActionMailer::Base.deliveries.size.should eq 1
       email = ActionMailer::Base.deliveries[0]
