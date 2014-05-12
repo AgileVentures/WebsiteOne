@@ -6,6 +6,6 @@ describe StartTime do
   end
 
   it 'returns start time if start time is present' do
-    expect(StartTime.for(5.hours.from_now.to_s)).to eq 5.hours.from_now.to_s.to_s
+    expect(StartTime.for(5.hours.from_now.to_s)).to eq 5.hours.from_now.to_s
   end
 end
