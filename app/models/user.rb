@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def create_new_authentication(provider, uid)
-    authentications.build(provider:provider, uid:uid).save
+    authentications.create(provider:provider, uid:uid)
   end
 
 end
