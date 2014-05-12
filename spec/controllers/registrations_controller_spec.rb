@@ -106,4 +106,26 @@ describe RegistrationsController do
       end
     end
   end
+
+  # private methods
+
+  describe '#build_resource' do
+    context 'omniauth session' do
+      before do
+        session[:omniauth] = 'session'
+        @user = stub_model(User)
+        controller.instance_variable_set("@user", @user)
+        class Devise::RegistrationsController
+          def build_resource *args
+          end
+        end
+      end
+
+      it 'should apply omniauth on user and run validations' do
+        @user.should_receive(:apply_omniauth).with('session')
+        @user.should_receive(:valid?)
+        controller.instance_eval { build_resource }
+      end
+    end
+  end
 end
