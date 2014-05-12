@@ -77,7 +77,7 @@ describe AuthenticationsController do
     request.env['omniauth.auth'] = OmniAuth.config.mock_auth[@provider]
     request.env['omniauth.params'] = {}
   end
-
+``
   context 'for not signed in users' do
 
     before(:each) do
@@ -236,6 +236,16 @@ describe AuthenticationsController do
       expect(controller).to receive(:link_github_profile).and_call_original
       get :create, provider: 'github'
       expect(user.github_profile_url).to eq('http://github.com/test')
+    end
+
+    it 'reloads user on successful update' do
+      user = stub_model(User, github_profile_url: nil)
+      controller.stub(current_user: user)
+      User.stub(find: user)
+      expect(user).to receive(:reloa)
+      expect(user).to receive(:update_attributes).and_return true
+
+      get :create, provider: 'github'
     end
 
     it 'displays error message on failure' do
