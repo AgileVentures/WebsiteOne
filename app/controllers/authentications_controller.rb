@@ -68,19 +68,15 @@ class AuthenticationsController < ApplicationController
     end
   end
 
-  def attempt_login_with_auth(authentication, path)
-  end
-
   def create_new_authentication_for_current_user(omniauth, path)
-    if current_user.create_new_authentication(omniauth[:provider], omniauth[:uid])
-      # Bryan: TESTED
+    AuthenticationCreatorForCurrentUserService.new(current_user, path, omniauth[:provider], omniauth[:uid]).call(success: ->(path) do 
       flash[:notice] = 'Authentication successful.'
       redirect_to path
-    else
-      # Bryan: TESTED
+    end, 
+    failure: ->(path) do 
       flash[:alert] = 'Unable to create additional profiles.'
       redirect_to @path
-    end
+    end)
   end
 
   def create_new_user_with_authentication(omniauth)
