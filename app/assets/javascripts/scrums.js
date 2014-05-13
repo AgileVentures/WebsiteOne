@@ -4,25 +4,10 @@ var Scrum = {
   },
   select_video: function(event) {
     event.preventDefault();
-    player = $('#ytplayer').get(0);
-    player.src = 'http://www.youtube.com/v/' + this.id + '?version=3&enablejsapi=1';
-    $('#scrum_contents').text($(this).data('content'));
+    player = $(".modal-body iframe").get(0);
+    player.src = 'http://www.youtube.com/embed/' + this.id + '?enablejsapi=1';
+    $('#playerTitle').text($(this).data('content'));
   }
 
 }
 $(Scrum.setup);
-
-
-
-var player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-        height: '390',
-        width: '640',
-        videoId: 'M7lc1UVf-VE',
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-        }
-    });
-}
