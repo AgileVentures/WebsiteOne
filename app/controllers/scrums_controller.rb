@@ -3,7 +3,7 @@ class ScrumsController < ApplicationController
   def index
     #@scrums = Scrum.all
     client = YouTubeIt::Client.new(:dev_key => "AIzaSyAh0CZ-jWpREV-3WtQ-4thTW0T-qU6_zrc")
-    query = client.videos_by(:query => "agile ventures scrums")
+    query = client.videos_by(:query => "agile ventures scrums", :max_results => 10)
     @scrums = query.videos.map { |video| video_data(video) }
   end
 

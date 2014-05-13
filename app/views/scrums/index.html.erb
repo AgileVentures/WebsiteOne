@@ -10,26 +10,18 @@
 </div>
 
 
-<div class="row">
-  <div class="col-md-7 col-sm-7">
-    <td><h4 id="video_contents"><%= @scrums.first[:content] %></h4></td>
-    <iframe id="ytplayer" type="text/html" width="250" height="250" src="<%= scrum_embed_link @scrums.first %>"></iframe>
-  </div>
-  <div class="col-md-5 col-sm-5">
-    <h4>Agile Ventures</h4>
-    <table class="table table-bordered table-striped table-hover table-condensed">
-      <tr>
-        <th>Title</th>
-      </tr>
-      <% @scrums.each do |video| %>
-          <tr>
-            <td><%= scrum_link(video) %>
-              <br/>
-              <small><%= video[:published].to_s(:db) %></small>
-            </td>
-          </tr>
-      <% end %>
-    </table>
+<!-- Modal -->
+<div class="modal fade" id="player" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="playerTitle"><%= @scrums.first[:title] %></h4>
+      </div>
+      <div class="modal-body">
+        <iframe width="560" height="315" src="<%= scrum_embed_link @scrums.first %>" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -37,104 +29,40 @@
   <div class="page-header">
     <h1 id="timeline">Scrums Timeline</h1>
   </div>
-  <ul class="timeline">
-    <li>
-      <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
-      <div class="timeline-panel">
-        <div class="timeline-heading">
-          <h4 class="timeline-title"><iframe id="ytplayer" type="text/html" width="30" height="30" src="<%= scrum_embed_link @scrums.first %>" frameborder="0"></iframe>   WSO youtube API with jon </h4>
+  <% @scrums.each_slice(2) do |videos| %>
+      <ul class="timeline">
+        <li>
+          <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4 class="timeline-title">
+                <%= scrum_link videos.first %>
+                <%= videos.first[:title] %>
+              </h4>
 
-          <p>
-            <small class="text-muted"><i class="glyphicon glyphicon-time"></i>datetime</small>
-          </p>
-        </div>
-        <div class="timeline-body">
-          <p>This is a video with marcelo and jon discussing a feature on WebsiteOne.</p>
-        </div>
-      </div>
-    </li>
-    <li class="timeline-inverted">
-      <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
-      <div class="timeline-panel">
-        <div class="timeline-heading">
-          <h4 class="timeline-title">Agile Venture Atlantic Scrum</h4>
-        </div>
-        <div class="timeline-body">
-          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis</p>
-        </div>
-      </div>
-    </li>
-    <li>
-      <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
-      <div class="timeline-panel">
-        <div class="timeline-heading">
-          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-        </div>
-        <div class="timeline-body">
-          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
-            paradis</p>
-        </div>
-      </div>
-    </li>
-    <li class="timeline-inverted">
-      <div class="timeline-panel">
-        <div class="timeline-heading">
-          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-        </div>
-        <div class="timeline-body">
-          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis</p>
-        </div>
-      </div>
-    </li>
-    <li>
-      <div class="timeline-badge info"><i class="glyphicon glyphicon-floppy-disk"></i></div>
-      <div class="timeline-panel">
-        <div class="timeline-heading">
-          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-        </div>
-        <div class="timeline-body">
-          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
-            paradis.</p>
-          <hr>
-          <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-              <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
+              <p>
+                <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.first[:published].to_date %></small>
+              </p>
+            </div>
           </div>
-        </div>
-      </div>
-    </li>
-    <li>
-      <div class="timeline-panel">
-        <div class="timeline-heading">
-          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-        </div>
-        <div class="timeline-body">
-          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
-            gostis.</p>
-        </div>
-      </div>
-    </li>
-    <li class="timeline-inverted">
-      <div class="timeline-badge success"><i class="glyphicon glyphicon-thumbs-up"></i></div>
-      <div class="timeline-panel">
-        <div class="timeline-heading">
-          <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-        </div>
-        <div class="timeline-body">
-          <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
-            paradis.</p>
-        </div>
-      </div>
-    </li>
-  </ul>
+        </li>
+        <li class="timeline-inverted">
+          <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4 class="timeline-title">
+                <%= scrum_link videos.last %>
+                <%= videos.last[:title] %>
+              </h4>
+
+              <p>
+                <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.last[:published].to_s(:db) %></small>
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+  <% end %>
 </div>
 
 
