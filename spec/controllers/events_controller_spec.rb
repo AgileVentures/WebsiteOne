@@ -140,6 +140,22 @@ describe EventsController do
     end
   end
 
+  describe 'DELETE destroy' do
+    before(:each) do
+      controller.stub(:authenticate_user! => true)
+    end
+
+    it 'should destroy the object' do
+      Event.any_instance.should_receive :destroy
+      delete :destroy, id: @event.to_param
+    end
+
+    it 'should redirect to events index' do
+      delete :destroy, id: @event.to_param
+      expect(response).to redirect_to events_path
+    end
+  end
+
   describe 'PATCH update_only_url' do
     let(:valid_attributes) { { id: @event, event: { url: 'http://somewhere.net' } } }
 
