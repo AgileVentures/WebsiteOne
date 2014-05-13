@@ -6,7 +6,6 @@ class ScrumsController < ApplicationController
     query = client.videos_by(:query => "agile ventures scrums", :max_results => 20)
     #query = client.videos_by(:query => "agile ventures scrums", :max_results => 20, :order_by => :published)
     @scrums = query.videos.map { |video| video_data(video) }
-    debugger
     @scrums.sort! {|x,y| y[:published] <=> x[:published]}
   end
 
