@@ -260,11 +260,12 @@ describe User do
     it 'retrieves user videos from youtube' do
       user = FactoryGirl.create(:user, youtube_id: 'test_id', youtube_user_name: 'test_name')
       request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
+      WebMock.stub_request(:get, request_string).to_return(body: 'response')
 
-      user.should receive(:followed_project_tags).and_return(['scrum'])
-      user.should receive(:get_response).with(request_string).and_return([])
+      YoutubeApi.should receive(:followed_project_tags).and_return(['scrum'])
+      YoutubeApi.should receive(:get_response).with(request_string).and_return([])
       YoutubeHelper.should receive(:youtube_user_name).with(user).and_return('test-user')
-      user.should receive(:filter_response).with([], ['scrum'], ['test-user'])
+      YoutubeApi.should receive(:filter_response).with([], ['scrum'], ['test-user'])
       user.videos
     end
   end

@@ -1,4 +1,6 @@
 module YoutubeApi
+  extend self
+
   def parse_response(response)
     begin
       json = JSON.parse(response)

@@ -96,13 +96,17 @@ describe Project do
 
   describe '#videos' do
     it 'retrieves project videos from youtube filtering by tags and members' do
-      project = FactoryGirl.create(:project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
       members = [double(User, youtube_user_name: 'John Doe'), double(User, youtube_user_name: 'Ivan Petrov')]
-
+      project = FactoryGirl.create(:project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
+      project.stub(members: members)
       request_string = %q{http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&q=("big+regret"|boom|bang|"big+boom")/("john+doe"|"ivan+petrov")&fields=entry(author(name),id,published,title,content,link)}
+      WebMock.stub_request(:get, request_string).to_return(body: 'response')
 
-      expect(project).to receive(:get_response).with(request_string)
-      expect(project).to receive(:members).and_return(members)
+      expect(YoutubeApi).to receive(:members_tags).and_return(members.map(&:youtube_user_name))
+      expect(YoutubeApi).to receive(:project_tags).and_return(project.tag_list)
+      expect(YoutubeApi).to receive(:build_request).and_return(request_string)
+      expect(YoutubeApi).to receive(:get_response).with(request_string)
+
       project.videos
     end
   end

@@ -25,13 +25,13 @@ class Project < ActiveRecord::Base
   end
 
   def videos
-    members_tags = members_tags(members)
+    members_tags = YoutubeApi.members_tags(members)
     return [] if members_tags.blank?
-    project_tags = project_tags(self)
+    project_tags = YoutubeApi.project_tags(self)
 
-    request = build_request(:project, escape_query_params(members_tags), escape_query_params(project_tags))
-    response = get_response(request)
-    filter_response(response, project_tags, members_tags) if response
+    request = YoutubeApi.build_request(:project, YoutubeApi.escape_query_params(members_tags), YoutubeApi.escape_query_params(project_tags))
+    response = YoutubeApi.get_response(request)
+    YoutubeApi.filter_response(response, project_tags, members_tags) if response
   end
 
   # Bryan: Used to generate paths, used only in testing.

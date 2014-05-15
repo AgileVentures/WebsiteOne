@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :skills
 
   #after_create Mailer.send_welcome_mail()
-  include YoutubeApi
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
@@ -69,12 +69,12 @@ class User < ActiveRecord::Base
 
   def videos
     if youtube_id
-      tags = followed_project_tags(self)
+      tags = YoutubeApi.followed_project_tags(self)
       return [] if tags.empty?
 
-      request = build_request(:user, self)
-      response = get_response(request)
-      filter_response(response, tags, [YoutubeHelper.youtube_user_name(self)]) if response
+      request = YoutubeApi.build_request(:user, self)
+      response = YoutubeApi.get_response(request)
+      YoutubeApi.filter_response(response, tags, [YoutubeHelper.youtube_user_name(self)]) if response
     end
   end
 end
