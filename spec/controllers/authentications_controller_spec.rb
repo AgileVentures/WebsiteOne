@@ -76,7 +76,7 @@ describe AuthenticationsController do
 
     context 'for new profiles' do
       before(:each) do
-        Authentication.should_receive(:find_by_provider_and_uid).and_return nil
+        allow(Authentication).to receive(:find_by_provider_and_uid) { nil }
         User.should_receive(:new).and_return(@user)
       end
 
@@ -127,7 +127,7 @@ describe AuthenticationsController do
       it 'should be able to create other profiles' do
         other_auths = %w( Glitter Smoogle HitPub )
         other_auths.each do |p|
-          @auth.should_receive(:save).and_return true
+          controller.current_user.should_receive(:create_new_authentication).and_return true
           get :create, provider: p
           expect(flash[:notice]).to eq 'Authentication successful.'
           expect(response).to redirect_to @path
@@ -135,7 +135,7 @@ describe AuthenticationsController do
       end
 
       it 'should not accept multiple profiles from the same source' do
-        @auth.should_receive(:save).and_return false
+        allow(@user).to receive(:create_new_authentication).and_return false
         get :create, provider: @provider
         expect(flash[:alert]).to eq 'Unable to create additional profiles.'
         expect(response).to redirect_to @path

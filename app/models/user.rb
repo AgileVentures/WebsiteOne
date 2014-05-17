@@ -67,4 +67,9 @@ class User < ActiveRecord::Base
   def slug_candidates
     [ :display_name, :email_first_part ]
   end
+
+  def create_new_authentication(provider, uid)
+    authentications.create(provider:provider, uid:uid)
+  end
+
 end
