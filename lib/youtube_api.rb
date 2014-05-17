@@ -31,8 +31,8 @@ module YoutubeApi
     request = "http://gdata.youtube.com/feeds/api/#{call_type}?alt=json&max-results=50"
     if type == :project
       request += '&orderby=published'
-      request += '&q=(' + args[1].join('|') + ')'
-      request += '/(' + args[0].join('|') + ')'
+      request += '&q=(' + escape_query_params(args[1]).join('|') + ')'
+      request += '/(' + escape_query_params(args[0]).join('|') + ')'
     end
     request += '&fields=entry(author(name),id,published,title,content,link)'
   end

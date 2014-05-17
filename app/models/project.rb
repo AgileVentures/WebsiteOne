@@ -29,7 +29,7 @@ class Project < ActiveRecord::Base
     return [] if members_tags.blank?
     project_tags = YoutubeApi.project_tags(self)
 
-    request = YoutubeApi.build_request(:project, YoutubeApi.escape_query_params(members_tags), YoutubeApi.escape_query_params(project_tags))
+    request = YoutubeApi.build_request(:project, members_tags, project_tags)
     response = YoutubeApi.get_response(request)
     YoutubeApi.filter_response(response, project_tags, members_tags) if response
   end
