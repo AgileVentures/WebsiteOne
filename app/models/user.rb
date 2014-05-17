@@ -68,4 +68,10 @@ class User < ActiveRecord::Base
   def slug_candidates
     [ :display_name, :email_first_part ]
   end
+
+  def update_youtube_id_if(token)
+    if token.present? && !youtube_id
+      update_attributes(youtube_id:Youtube.channel_id(token))
+    end
+  end
 end

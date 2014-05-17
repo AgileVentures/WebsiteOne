@@ -224,4 +224,16 @@ describe User do
       user.receive_mailings.should be_true
     end
   end
+
+  describe '#update_youtube_id_if' do 
+    it 'update the youtube_id if the token is present and the youtube_id is not' do 
+      allow(Youtube).to receive(:channel_id) { 'token' } 
+      user = User.create(@attr) 
+      user.update_youtube_id_if('token')
+      user.reload 
+
+      expect(user.youtube_id).to eql('token')
+    end
+
+  end
 end

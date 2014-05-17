@@ -82,19 +82,10 @@ class AuthenticationsController < ApplicationController
   end
 
   def link_to_youtube
-    update_youtube_id_if_token
-
+    current_user.update_youtube_id_if(request.env['omniauth.auth']['credentials']['token'])
     redirect_to(request.env['omniauth.origin'] || root_path)
   end
 
-  def update_youtube_id_if_token
-    user = current_user
-
-    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
-      user.youtube_id = Youtube.channel_id(token)
-      user.save
-    end
-  end
 
   def unlink_from_youtube
     current_user.youtube_id = nil

@@ -160,26 +160,6 @@ describe AuthenticationsController do
       request.env['omniauth.origin'] = 'back_path'
     end
 
-    it 'calls #link_to_youtube' do
-      expect(controller).to receive(:link_to_youtube)
-      get :create, provider: 'github'
-    end
-    it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
-      request.env['omniauth.auth']['credentials']['token'] = 'token'
-      user = double(User, youtube_id: nil)
-      controller.stub(current_user: user)
-      user.stub(:youtube_id=)
-      user.stub(:save)
-
-      expect(Youtube).to receive(:channel_id)
-      get :create, provider: 'github'
-    end
-
-    it '#link_to_youtube: redirects back' do
-      get :create, provider: 'github'
-      expect(response).to redirect_to 'back_path'
-    end
-
     it 'calls #unlink from youtube' do
       controller.stub_chain(:current_user, :authentications, :find).and_return(double(User))
       controller.stub_chain(:current_user, :authentications, :count).and_return(1)
