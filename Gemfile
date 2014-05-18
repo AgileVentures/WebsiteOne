@@ -61,6 +61,7 @@ group :test do
   gem 'zeus', '0.13.4.pre2' # rails preloading environment (the only ver that works with RubyMine)
   gem 'webmock' # mocking external net connections
   gem 'delorean'
+  gem 'vcr'
 end
 
 group :development, :test do
