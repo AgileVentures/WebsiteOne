@@ -1,0 +1,987 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://gdata.youtube.com/feeds/api/videos?key=AIzaSyAh0CZ-jWpREV-3WtQ-4thTW0T-qU6_zrc&max-results=20&q=agile%20ventures%20scrums&start-index=1&v=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Gdata-User-Country:
+      - US
+      Content-Type:
+      - application/atom+xml; charset=UTF-8; type=feed
+      Expires:
+      - Sun, 18 May 2014 02:11:31 GMT
+      Date:
+      - Sun, 18 May 2014 02:11:31 GMT
+      Cache-Control:
+      - private, max-age=300, no-transform
+      Vary:
+      - "*"
+      Gdata-Version:
+      - '2.1'
+      Etag:
+      - W/"A0cNQHc7eSp7I2A9XRZTE0o."
+      Last-Modified:
+      - Sun, 18 May 2014 02:11:31 GMT
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 80:quic
+    body:
+      encoding: UTF-8
+      string: "<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom'
+        xmlns:media='http://search.yahoo.com/mrss/' xmlns:openSearch='http://a9.com/-/spec/opensearch/1.1/'
+        xmlns:gd='http://schemas.google.com/g/2005' xmlns:yt='http://gdata.youtube.com/schemas/2007'
+        gd:etag='W/&quot;A0cNQHc7eSp7I2A9XRZTE0o.&quot;'><id>tag:youtube.com,2008:videos</id><updated>2014-05-18T02:11:31.901Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><title>Videos
+        matching: agile ventures scrums</title><logo>http://www.gstatic.com/youtube/img/logo.png</logo><link
+        rel='alternate' type='text/html' href='http://www.youtube.com'/><link rel='http://schemas.google.com/g/2005#feed'
+        type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos?v=2'/><link
+        rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/batch?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos?q=agile+ventures+scrums&amp;start-index=1&amp;max-results=20&amp;v=2'/><link
+        rel='service' type='application/atomsvc+xml' href='http://gdata.youtube.com/feeds/api/videos?alt=atom-service&amp;v=2'/><link
+        rel='next' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos?q=agile+ventures+scrums&amp;start-index=21&amp;max-results=20&amp;v=2'/><author><name>YouTube</name><uri>http://www.youtube.com/</uri></author><generator
+        version='2.1' uri='http://gdata.youtube.com'>YouTube data API</generator><openSearch:totalResults>2026</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>20</openSearch:itemsPerPage><entry
+        gd:etag='W/&quot;CE4HSH47eCp7I2A9Wh9QEEw.&quot;'><id>tag:youtube.com,2008:video:3gjEhZVhJMQ</id><published>2014-02-21T20:02:19.000Z</published><updated>2014-02-21T20:02:19.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/3gjEhZVhJMQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=3gjEhZVhJMQ&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/3gjEhZVhJMQ/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/3gjEhZVhJMQ/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/3gjEhZVhJMQ/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=3gjEhZVhJMQ'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/wLfTdgVn3W_0I3sQD5vSLw?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/3gjEhZVhJMQ?v=2'/><author><name>marianmosley</name><uri>http://gdata.youtube.com/feeds/api/users/marianmosley</uri><yt:userId>wLfTdgVn3W_0I3sQD5vSLw</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/3gjEhZVhJMQ/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/3gjEhZVhJMQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='2792' yt:format='5'/><media:content url='rtsp://r7---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAnEJGGVhcQI3hMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='2792' yt:format='1'/><media:content
+        url='rtsp://r7---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAnEJGGVhcQI3hMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='2792' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='marianmosley'>marianmosley</media:credit><media:description
+        type='plain'>Agile Ventures Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=3gjEhZVhJMQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/3gjEhZVhJMQ/default.jpg' height='90' width='120'
+        time='00:23:16' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/3gjEhZVhJMQ/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/3gjEhZVhJMQ/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/3gjEhZVhJMQ/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/3gjEhZVhJMQ/1.jpg'
+        height='90' width='120' time='00:11:38' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/3gjEhZVhJMQ/2.jpg' height='90' width='120' time='00:23:16'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/3gjEhZVhJMQ/3.jpg'
+        height='90' width='120' time='00:34:54' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='2792'/><yt:uploaded>2014-02-21T20:02:19.000Z</yt:uploaded><yt:uploaderId>UCwLfTdgVn3W_0I3sQD5vSLw</yt:uploaderId><yt:videoid>3gjEhZVhJMQ</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;D0IGSX47eCp7I2A9Wh9RFUs.&quot;'><id>tag:youtube.com,2008:video:uR5t_gEz9UA</id><published>2014-02-16T15:45:28.000Z</published><updated>2014-02-16T15:45:28.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Daily Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/uR5t_gEz9UA?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=uR5t_gEz9UA&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/uR5t_gEz9UA/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/uR5t_gEz9UA/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/uR5t_gEz9UA/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=uR5t_gEz9UA'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/uR5t_gEz9UA?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/uR5t_gEz9UA/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/uR5t_gEz9UA?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1137' yt:format='5'/><media:content url='rtsp://r2---sn-p5qlsu7e.c.youtube.com/CkULENy73wIaPAlA9TMB_m0euRMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1137' yt:format='1'/><media:content
+        url='rtsp://r2---sn-p5qlsu7e.c.youtube.com/CkULENy73wIaPAlA9TMB_m0euRMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1137' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Daily Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=uR5t_gEz9UA&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/uR5t_gEz9UA/default.jpg' height='90' width='120'
+        time='00:09:28.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/uR5t_gEz9UA/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/uR5t_gEz9UA/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/uR5t_gEz9UA/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/uR5t_gEz9UA/1.jpg'
+        height='90' width='120' time='00:04:44.250' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/uR5t_gEz9UA/2.jpg' height='90' width='120' time='00:09:28.500'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/uR5t_gEz9UA/3.jpg'
+        height='90' width='120' time='00:14:12.750' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Daily Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1137'/><yt:uploaded>2014-02-16T15:45:28.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>uR5t_gEz9UA</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;CUYAR347eCp7I2A9Wh9TEEk.&quot;'><id>tag:youtube.com,2008:video:JEO64MI8i28</id><published>2014-01-18T11:05:46.000Z</published><updated>2014-01-18T11:05:46.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Euro Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/JEO64MI8i28?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=JEO64MI8i28&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/JEO64MI8i28/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/JEO64MI8i28/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/JEO64MI8i28/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=JEO64MI8i28'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/JEO64MI8i28?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/JEO64MI8i28/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/JEO64MI8i28?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='3202' yt:format='5'/><media:content url='rtsp://r5---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAlvizzC4LpDJBMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='3202' yt:format='1'/><media:content
+        url='rtsp://r5---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAlvizzC4LpDJBMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='3202' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Euro Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=JEO64MI8i28&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/JEO64MI8i28/default.jpg' height='90' width='120'
+        time='00:26:41' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/JEO64MI8i28/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/JEO64MI8i28/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/JEO64MI8i28/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/JEO64MI8i28/1.jpg'
+        height='90' width='120' time='00:13:20.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/JEO64MI8i28/2.jpg' height='90' width='120' time='00:26:41'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/JEO64MI8i28/3.jpg'
+        height='90' width='120' time='00:40:01.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Euro Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='3202'/><yt:uploaded>2014-01-18T11:05:46.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>JEO64MI8i28</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;AkADRn47eCp7I2A9Wh9SEks.&quot;'><id>tag:youtube.com,2008:video:RK6Obn6yB3Q</id><published>2014-02-01T15:32:57.000Z</published><updated>2014-02-01T15:32:57.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Daily Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/RK6Obn6yB3Q?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=RK6Obn6yB3Q&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/RK6Obn6yB3Q/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/RK6Obn6yB3Q/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/RK6Obn6yB3Q/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=RK6Obn6yB3Q'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/RK6Obn6yB3Q?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/RK6Obn6yB3Q/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/RK6Obn6yB3Q?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='414' yt:format='5'/><media:content url='rtsp://r4---sn-p5qlsu7k.c.youtube.com/CkULENy73wIaPAl0B7J-bo6uRBMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='414' yt:format='1'/><media:content
+        url='rtsp://r4---sn-p5qlsu7k.c.youtube.com/CkULENy73wIaPAl0B7J-bo6uRBMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='414' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Daily Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=RK6Obn6yB3Q&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/RK6Obn6yB3Q/default.jpg' height='90' width='120'
+        time='00:03:27' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/RK6Obn6yB3Q/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/RK6Obn6yB3Q/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/RK6Obn6yB3Q/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/RK6Obn6yB3Q/1.jpg'
+        height='90' width='120' time='00:01:43.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/RK6Obn6yB3Q/2.jpg' height='90' width='120' time='00:03:27'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/RK6Obn6yB3Q/3.jpg'
+        height='90' width='120' time='00:05:10.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Daily Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='414'/><yt:uploaded>2014-02-01T15:32:57.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>RK6Obn6yB3Q</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;DEENQn47eCp7I2A9Wh9SE04.&quot;'><id>tag:youtube.com,2008:video:0xPewS3myas</id><published>2014-02-02T10:24:53.000Z</published><updated>2014-02-02T10:24:53.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Euro Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/0xPewS3myas?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=0xPewS3myas&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/0xPewS3myas/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/0xPewS3myas/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/0xPewS3myas/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=0xPewS3myas'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/0xPewS3myas?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/0xPewS3myas/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/0xPewS3myas?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='762' yt:format='5'/><media:content url='rtsp://r5---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAmryeYtwd4T0xMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='762' yt:format='1'/><media:content
+        url='rtsp://r5---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAmryeYtwd4T0xMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='762' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Euro Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=0xPewS3myas&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/0xPewS3myas/default.jpg' height='90' width='120'
+        time='00:06:21' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/0xPewS3myas/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/0xPewS3myas/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/0xPewS3myas/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/0xPewS3myas/1.jpg'
+        height='90' width='120' time='00:03:10.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/0xPewS3myas/2.jpg' height='90' width='120' time='00:06:21'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/0xPewS3myas/3.jpg'
+        height='90' width='120' time='00:09:31.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Euro Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='762'/><yt:uploaded>2014-02-02T10:24:53.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>0xPewS3myas</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;DUQHQn47eCp7I2A9Wh5aGEU.&quot;'><id>tag:youtube.com,2008:video:LQA1J2E1naM</id><published>2014-01-16T15:48:53.000Z</published><updated>2014-01-16T15:48:53.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/LQA1J2E1naM?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=LQA1J2E1naM&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/LQA1J2E1naM/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/LQA1J2E1naM/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/LQA1J2E1naM/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=LQA1J2E1naM'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/QO0lH-BwDYWvfIS8FCfhQQ?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/LQA1J2E1naM?v=2'/><author><name>Jon
+        Mohrbacher</name><uri>http://gdata.youtube.com/feeds/api/users/QO0lH-BwDYWvfIS8FCfhQQ</uri><yt:userId>QO0lH-BwDYWvfIS8FCfhQQ</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/LQA1J2E1naM/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/LQA1J2E1naM?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1336' yt:format='5'/><media:content url='rtsp://r2---sn-p5qlsu7r.c.youtube.com/CkULENy73wIaPAmjnTVhJzUALRMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1336' yt:format='1'/><media:content
+        url='rtsp://r2---sn-p5qlsu7r.c.youtube.com/CkULENy73wIaPAmjnTVhJzUALRMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1336' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Jon Mohrbacher'>QO0lH-BwDYWvfIS8FCfhQQ</media:credit><media:description
+        type='plain'>Agile Ventures scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=LQA1J2E1naM&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/LQA1J2E1naM/default.jpg' height='90' width='120'
+        time='00:11:08' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/LQA1J2E1naM/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/LQA1J2E1naM/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/LQA1J2E1naM/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/LQA1J2E1naM/1.jpg'
+        height='90' width='120' time='00:05:34' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/LQA1J2E1naM/2.jpg' height='90' width='120' time='00:11:08'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/LQA1J2E1naM/3.jpg'
+        height='90' width='120' time='00:16:42' yt:name='end'/><media:title type='plain'>Agile
+        Ventures scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1336'/><yt:uploaded>2014-01-16T15:48:53.000Z</yt:uploaded><yt:uploaderId>UCQO0lH-BwDYWvfIS8FCfhQQ</yt:uploaderId><yt:videoid>LQA1J2E1naM</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;D0UBSH47eCp7I2A9Wh9TFU0.&quot;'><id>tag:youtube.com,2008:video:J6UCj18oXfs</id><published>2014-01-23T19:27:39.000Z</published><updated>2014-01-23T19:27:39.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/J6UCj18oXfs?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=J6UCj18oXfs&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/J6UCj18oXfs/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/J6UCj18oXfs/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/J6UCj18oXfs/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=J6UCj18oXfs'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/wLfTdgVn3W_0I3sQD5vSLw?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/J6UCj18oXfs?v=2'/><author><name>marianmosley</name><uri>http://gdata.youtube.com/feeds/api/users/marianmosley</uri><yt:userId>wLfTdgVn3W_0I3sQD5vSLw</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/J6UCj18oXfs/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/J6UCj18oXfs?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='872' yt:format='5'/><media:content url='rtsp://r6---sn-p5qlsu7e.c.youtube.com/CkULENy73wIaPAn7XShfjwKlJxMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='872' yt:format='1'/><media:content
+        url='rtsp://r6---sn-p5qlsu7e.c.youtube.com/CkULENy73wIaPAn7XShfjwKlJxMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='872' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='marianmosley'>marianmosley</media:credit><media:description
+        type='plain'/><media:keywords/><media:license type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=J6UCj18oXfs&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/J6UCj18oXfs/default.jpg' height='90' width='120'
+        time='00:07:16' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/J6UCj18oXfs/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/J6UCj18oXfs/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/J6UCj18oXfs/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/J6UCj18oXfs/1.jpg'
+        height='90' width='120' time='00:03:38' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/J6UCj18oXfs/2.jpg' height='90' width='120' time='00:07:16'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/J6UCj18oXfs/3.jpg'
+        height='90' width='120' time='00:10:54' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='872'/><yt:uploaded>2014-01-23T19:27:39.000Z</yt:uploaded><yt:uploaderId>UCwLfTdgVn3W_0I3sQD5vSLw</yt:uploaderId><yt:videoid>J6UCj18oXfs</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;CkAMSX47eCp7I2A9Wh9RFEs.&quot;'><id>tag:youtube.com,2008:video:HXYgGR79Oes</id><published>2014-02-15T10:39:48.000Z</published><updated>2014-02-15T10:39:48.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Euro Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/HXYgGR79Oes?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=HXYgGR79Oes&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/HXYgGR79Oes/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/HXYgGR79Oes/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/HXYgGR79Oes/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=HXYgGR79Oes'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/HXYgGR79Oes?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/HXYgGR79Oes/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/HXYgGR79Oes?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1808' yt:format='5'/><media:content url='rtsp://r4---sn-p5qlsu7r.c.youtube.com/CkULENy73wIaPAnrOf0eGSB2HRMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1808' yt:format='1'/><media:content
+        url='rtsp://r4---sn-p5qlsu7r.c.youtube.com/CkULENy73wIaPAnrOf0eGSB2HRMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1808' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Euro Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=HXYgGR79Oes&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/HXYgGR79Oes/default.jpg' height='90' width='120'
+        time='00:15:04' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/HXYgGR79Oes/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/HXYgGR79Oes/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/HXYgGR79Oes/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/HXYgGR79Oes/1.jpg'
+        height='90' width='120' time='00:07:32' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/HXYgGR79Oes/2.jpg' height='90' width='120' time='00:15:04'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/HXYgGR79Oes/3.jpg'
+        height='90' width='120' time='00:22:36' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Euro Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1808'/><yt:uploaded>2014-02-15T10:39:48.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>HXYgGR79Oes</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;DkACRn47eCp7I2A9Wh5aEkw.&quot;'><id>tag:youtube.com,2008:video:0_IkZ2y-zsw</id><published>2014-01-08T20:59:27.000Z</published><updated>2014-01-08T20:59:27.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/0_IkZ2y-zsw?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=0_IkZ2y-zsw&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/0_IkZ2y-zsw/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/0_IkZ2y-zsw/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/0_IkZ2y-zsw/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=0_IkZ2y-zsw'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/QO0lH-BwDYWvfIS8FCfhQQ?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/0_IkZ2y-zsw?v=2'/><author><name>Jon
+        Mohrbacher</name><uri>http://gdata.youtube.com/feeds/api/users/QO0lH-BwDYWvfIS8FCfhQQ</uri><yt:userId>QO0lH-BwDYWvfIS8FCfhQQ</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/0_IkZ2y-zsw/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/0_IkZ2y-zsw?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='14400' yt:format='5'/><media:content url='rtsp://r6---sn-p5qlsu7e.c.youtube.com/CkULENy73wIaPAnMzr5sZyTy0xMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='14400' yt:format='1'/><media:content
+        url='rtsp://r6---sn-p5qlsu7e.c.youtube.com/CkULENy73wIaPAnMzr5sZyTy0xMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='14400' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Jon Mohrbacher'>QO0lH-BwDYWvfIS8FCfhQQ</media:credit><media:description
+        type='plain'>Agile Ventures scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=0_IkZ2y-zsw&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/0_IkZ2y-zsw/default.jpg' height='90' width='120'
+        time='02:00:00' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/0_IkZ2y-zsw/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/0_IkZ2y-zsw/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/0_IkZ2y-zsw/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/0_IkZ2y-zsw/1.jpg'
+        height='90' width='120' time='01:00:00' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/0_IkZ2y-zsw/2.jpg' height='90' width='120' time='02:00:00'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/0_IkZ2y-zsw/3.jpg'
+        height='90' width='120' time='03:00:00' yt:name='end'/><media:title type='plain'>Agile
+        Ventures scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='14400'/><yt:uploaded>2014-01-08T20:59:27.000Z</yt:uploaded><yt:uploaderId>UCQO0lH-BwDYWvfIS8FCfhQQ</yt:uploaderId><yt:videoid>0_IkZ2y-zsw</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;C0INQH47eCp7I2A9Wh9WEUo.&quot;'><id>tag:youtube.com,2008:video:7xWK61twIfk</id><published>2014-03-18T19:39:51.000Z</published><updated>2014-03-18T19:39:51.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Atlantic Scrum -</title><content
+        type='application/x-shockwave-flash' src='http://www.youtube.com/v/7xWK61twIfk?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=7xWK61twIfk&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/7xWK61twIfk/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/7xWK61twIfk/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/7xWK61twIfk/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=7xWK61twIfk'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/wLfTdgVn3W_0I3sQD5vSLw?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/7xWK61twIfk?v=2'/><author><name>marianmosley</name><uri>http://gdata.youtube.com/feeds/api/users/marianmosley</uri><yt:userId>wLfTdgVn3W_0I3sQD5vSLw</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/7xWK61twIfk/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/7xWK61twIfk?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1206' yt:format='5'/><media:content url='rtsp://r6---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAn5IXBb64oV7xMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1206' yt:format='1'/><media:content
+        url='rtsp://r6---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAn5IXBb64oV7xMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1206' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='marianmosley'>marianmosley</media:credit><media:description
+        type='plain'>Agile Ventures Atlantic Scrum -</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=7xWK61twIfk&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/7xWK61twIfk/default.jpg' height='90' width='120'
+        time='00:10:03' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/7xWK61twIfk/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/7xWK61twIfk/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/7xWK61twIfk/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/7xWK61twIfk/1.jpg'
+        height='90' width='120' time='00:05:01.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/7xWK61twIfk/2.jpg' height='90' width='120' time='00:10:03'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/7xWK61twIfk/3.jpg'
+        height='90' width='120' time='00:15:04.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Atlantic Scrum -</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1206'/><yt:uploaded>2014-03-18T19:39:51.000Z</yt:uploaded><yt:uploaderId>UCwLfTdgVn3W_0I3sQD5vSLw</yt:uploaderId><yt:videoid>7xWK61twIfk</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;AkcASX47eCp7I2A9Wh9TEUk.&quot;'><id>tag:youtube.com,2008:video:yZIvL_4Dv94</id><published>2014-01-19T16:14:08.000Z</published><updated>2014-01-19T16:14:08.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures US Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/yZIvL_4Dv94?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=yZIvL_4Dv94&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/yZIvL_4Dv94/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/yZIvL_4Dv94/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/yZIvL_4Dv94/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=yZIvL_4Dv94'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/yZIvL_4Dv94?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/yZIvL_4Dv94/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/yZIvL_4Dv94?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='3151' yt:format='5'/><media:content url='rtsp://r4---sn-p5qlsu7s.c.youtube.com/CkULENy73wIaPAnevwP-Ly-SyRMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='3151' yt:format='1'/><media:content
+        url='rtsp://r4---sn-p5qlsu7s.c.youtube.com/CkULENy73wIaPAnevwP-Ly-SyRMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='3151' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures US Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=yZIvL_4Dv94&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/yZIvL_4Dv94/default.jpg' height='90' width='120'
+        time='00:26:15.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/yZIvL_4Dv94/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/yZIvL_4Dv94/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/yZIvL_4Dv94/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/yZIvL_4Dv94/1.jpg'
+        height='90' width='120' time='00:13:07.750' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/yZIvL_4Dv94/2.jpg' height='90' width='120' time='00:26:15.500'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/yZIvL_4Dv94/3.jpg'
+        height='90' width='120' time='00:39:23.250' yt:name='end'/><media:title type='plain'>Agile
+        Ventures US Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='3151'/><yt:uploaded>2014-01-19T16:14:08.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>yZIvL_4Dv94</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;CkAEQ347eCp7I2A9Wh9SGUs.&quot;'><id>tag:youtube.com,2008:video:SV-ngT1FbAQ</id><published>2014-02-09T15:45:02.000Z</published><updated>2014-02-09T15:45:02.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Daily Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/SV-ngT1FbAQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=SV-ngT1FbAQ&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/SV-ngT1FbAQ/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/SV-ngT1FbAQ/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/SV-ngT1FbAQ/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=SV-ngT1FbAQ'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/SV-ngT1FbAQ?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/SV-ngT1FbAQ/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/SV-ngT1FbAQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1266' yt:format='5'/><media:content url='rtsp://r4---sn-p5qlsu7z.c.youtube.com/CkULENy73wIaPAkEbEU9gadfSRMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1266' yt:format='1'/><media:content
+        url='rtsp://r4---sn-p5qlsu7z.c.youtube.com/CkULENy73wIaPAkEbEU9gadfSRMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1266' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Daily Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=SV-ngT1FbAQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/SV-ngT1FbAQ/default.jpg' height='90' width='120'
+        time='00:10:33' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/SV-ngT1FbAQ/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/SV-ngT1FbAQ/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/SV-ngT1FbAQ/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/SV-ngT1FbAQ/1.jpg'
+        height='90' width='120' time='00:05:16.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/SV-ngT1FbAQ/2.jpg' height='90' width='120' time='00:10:33'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/SV-ngT1FbAQ/3.jpg'
+        height='90' width='120' time='00:15:49.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Daily Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1266'/><yt:uploaded>2014-02-09T15:45:02.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>SV-ngT1FbAQ</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;DU8AQ347eCp7I2A9Wh9XGEQ.&quot;'><id>tag:youtube.com,2008:video:S-m0RMU_9G8</id><published>2014-03-15T15:37:22.000Z</published><updated>2014-03-15T15:37:22.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Daily Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/S-m0RMU_9G8?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=S-m0RMU_9G8&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/S-m0RMU_9G8/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/S-m0RMU_9G8/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/S-m0RMU_9G8/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=S-m0RMU_9G8'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/S-m0RMU_9G8?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/S-m0RMU_9G8/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/S-m0RMU_9G8?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='602' yt:format='5'/><media:content url='rtsp://r5---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAlv9D_FRLTpSxMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='602' yt:format='1'/><media:content
+        url='rtsp://r5---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAlv9D_FRLTpSxMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='602' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Daily Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=S-m0RMU_9G8&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/S-m0RMU_9G8/default.jpg' height='90' width='120'
+        time='00:05:01' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/S-m0RMU_9G8/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/S-m0RMU_9G8/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/S-m0RMU_9G8/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/S-m0RMU_9G8/1.jpg'
+        height='90' width='120' time='00:02:30.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/S-m0RMU_9G8/2.jpg' height='90' width='120' time='00:05:01'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/S-m0RMU_9G8/3.jpg'
+        height='90' width='120' time='00:07:31.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Daily Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='602'/><yt:uploaded>2014-03-15T15:37:22.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>S-m0RMU_9G8</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;DUUNQH47eCp7I2A9Wh9TEU8.&quot;'><id>tag:youtube.com,2008:video:yx3i8QpIQYw</id><published>2014-01-19T10:28:11.000Z</published><updated>2014-01-19T10:28:11.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Euro Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/yx3i8QpIQYw?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=yx3i8QpIQYw&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/yx3i8QpIQYw/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/yx3i8QpIQYw/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/yx3i8QpIQYw/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=yx3i8QpIQYw'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/yx3i8QpIQYw?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/yx3i8QpIQYw/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/yx3i8QpIQYw?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1322' yt:format='5'/><media:content url='rtsp://r5---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAmMQUgK8eIdyxMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1322' yt:format='1'/><media:content
+        url='rtsp://r5---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAmMQUgK8eIdyxMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1322' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Euro Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=yx3i8QpIQYw&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/yx3i8QpIQYw/default.jpg' height='90' width='120'
+        time='00:11:01' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/yx3i8QpIQYw/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/yx3i8QpIQYw/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/yx3i8QpIQYw/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/yx3i8QpIQYw/1.jpg'
+        height='90' width='120' time='00:05:30.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/yx3i8QpIQYw/2.jpg' height='90' width='120' time='00:11:01'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/yx3i8QpIQYw/3.jpg'
+        height='90' width='120' time='00:16:31.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Euro Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1322'/><yt:uploaded>2014-01-19T10:28:11.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>yx3i8QpIQYw</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;D0UAQX47eCp7I2A9Wh9TE04.&quot;'><id>tag:youtube.com,2008:video:QHcxNc1ZOVE</id><published>2014-01-21T20:14:00.000Z</published><updated>2014-01-21T20:14:00.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Scrum, 2000UTC</title><content
+        type='application/x-shockwave-flash' src='http://www.youtube.com/v/QHcxNc1ZOVE?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=QHcxNc1ZOVE&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/QHcxNc1ZOVE/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/QHcxNc1ZOVE/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/QHcxNc1ZOVE/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=QHcxNc1ZOVE'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/QO0lH-BwDYWvfIS8FCfhQQ?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/QHcxNc1ZOVE?v=2'/><author><name>Jon
+        Mohrbacher</name><uri>http://gdata.youtube.com/feeds/api/users/QO0lH-BwDYWvfIS8FCfhQQ</uri><yt:userId>QO0lH-BwDYWvfIS8FCfhQQ</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/QHcxNc1ZOVE/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/QHcxNc1ZOVE?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='565' yt:format='5'/><media:content url='rtsp://r1---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAlROVnNNTF3QBMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='565' yt:format='1'/><media:content
+        url='rtsp://r1---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAlROVnNNTF3QBMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='565' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Jon Mohrbacher'>QO0lH-BwDYWvfIS8FCfhQQ</media:credit><media:description
+        type='plain'>Agile Ventures Scrum, 2000UTC.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=QHcxNc1ZOVE&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/QHcxNc1ZOVE/default.jpg' height='90' width='120'
+        time='00:04:42.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/QHcxNc1ZOVE/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/QHcxNc1ZOVE/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/QHcxNc1ZOVE/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/QHcxNc1ZOVE/1.jpg'
+        height='90' width='120' time='00:02:21.250' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/QHcxNc1ZOVE/2.jpg' height='90' width='120' time='00:04:42.500'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/QHcxNc1ZOVE/3.jpg'
+        height='90' width='120' time='00:07:03.750' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Scrum, 2000UTC</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='565'/><yt:uploaded>2014-01-21T20:14:00.000Z</yt:uploaded><yt:uploaderId>UCQO0lH-BwDYWvfIS8FCfhQQ</yt:uploaderId><yt:videoid>QHcxNc1ZOVE</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;DUMNSX47eCp7I2A9Wh9bEUo.&quot;'><id>tag:youtube.com,2008:video:52M99GQYjKQ</id><published>2014-04-22T14:38:18.000Z</published><updated>2014-04-22T14:38:18.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Atlantic Scrum and Pair Hookup</title><content
+        type='application/x-shockwave-flash' src='http://www.youtube.com/v/52M99GQYjKQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=52M99GQYjKQ&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/52M99GQYjKQ/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/52M99GQYjKQ/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/52M99GQYjKQ/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=52M99GQYjKQ'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/PPo4ZnBWwQ75JqiI13VFNw?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/52M99GQYjKQ?v=2'/><author><name>Sam
+        Joseph</name><uri>http://gdata.youtube.com/feeds/api/users/aeurdstfaksf</uri><yt:userId>PPo4ZnBWwQ75JqiI13VFNw</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/52M99GQYjKQ/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/52M99GQYjKQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1107' yt:format='5'/><media:content url='rtsp://r8---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAmkjBhk9D1j5xMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1107' yt:format='1'/><media:content
+        url='rtsp://r8---sn-p5qlsu7d.c.youtube.com/CkULENy73wIaPAmkjBhk9D1j5xMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1107' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Sam Joseph'>aeurdstfaksf</media:credit><media:description
+        type='plain'>For discussion of, and pair programming on, http://agileventures.org
+        Everyone at every level always welcome!</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=52M99GQYjKQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/52M99GQYjKQ/default.jpg' height='90' width='120'
+        time='00:09:13.500' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/52M99GQYjKQ/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/52M99GQYjKQ/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/52M99GQYjKQ/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/52M99GQYjKQ/1.jpg'
+        height='90' width='120' time='00:04:36.750' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/52M99GQYjKQ/2.jpg' height='90' width='120' time='00:09:13.500'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/52M99GQYjKQ/3.jpg'
+        height='90' width='120' time='00:13:50.250' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Atlantic Scrum and Pair Hookup</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1107'/><yt:uploaded>2014-04-22T14:38:18.000Z</yt:uploaded><yt:uploaderId>UCPPo4ZnBWwQ75JqiI13VFNw</yt:uploaderId><yt:videoid>52M99GQYjKQ</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;CUIHQn47eCp7I2A9Wh9bEks.&quot;'><id>tag:youtube.com,2008:video:KdcNSYIX0JQ</id><published>2014-04-23T14:32:13.000Z</published><updated>2014-04-23T14:32:13.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Atlantic Scrum and Pair Hookup</title><content
+        type='application/x-shockwave-flash' src='http://www.youtube.com/v/KdcNSYIX0JQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=KdcNSYIX0JQ&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/KdcNSYIX0JQ/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/KdcNSYIX0JQ/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/KdcNSYIX0JQ/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=KdcNSYIX0JQ'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/PPo4ZnBWwQ75JqiI13VFNw?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/KdcNSYIX0JQ?v=2'/><author><name>Sam
+        Joseph</name><uri>http://gdata.youtube.com/feeds/api/users/aeurdstfaksf</uri><yt:userId>PPo4ZnBWwQ75JqiI13VFNw</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/KdcNSYIX0JQ/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/KdcNSYIX0JQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='586' yt:format='5'/><media:content url='rtsp://r6---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAmU0BeCSQ3XKRMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='586' yt:format='1'/><media:content
+        url='rtsp://r6---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAmU0BeCSQ3XKRMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='586' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Sam Joseph'>aeurdstfaksf</media:credit><media:description
+        type='plain'>For discussion of, and pair programming on, http://agileventures.org
+        Everyone at every level always welcome!</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=KdcNSYIX0JQ&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/KdcNSYIX0JQ/default.jpg' height='90' width='120'
+        time='00:04:53' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/KdcNSYIX0JQ/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/KdcNSYIX0JQ/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/KdcNSYIX0JQ/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/KdcNSYIX0JQ/1.jpg'
+        height='90' width='120' time='00:02:26.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/KdcNSYIX0JQ/2.jpg' height='90' width='120' time='00:04:53'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/KdcNSYIX0JQ/3.jpg'
+        height='90' width='120' time='00:07:19.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Atlantic Scrum and Pair Hookup</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='586'/><yt:uploaded>2014-04-23T14:32:13.000Z</yt:uploaded><yt:uploaderId>UCPPo4ZnBWwQ75JqiI13VFNw</yt:uploaderId><yt:videoid>KdcNSYIX0JQ</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;DEINR347eCp7I2A9Wh9UF0k.&quot;'><id>tag:youtube.com,2008:video:J5DkuTn9G8k</id><published>2014-04-17T14:56:36.000Z</published><updated>2014-04-17T14:56:36.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Atlantic Scrum and Pair Hookup</title><content
+        type='application/x-shockwave-flash' src='http://www.youtube.com/v/J5DkuTn9G8k?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=J5DkuTn9G8k&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/J5DkuTn9G8k/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/J5DkuTn9G8k/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/J5DkuTn9G8k/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=J5DkuTn9G8k'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/PPo4ZnBWwQ75JqiI13VFNw?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/J5DkuTn9G8k?v=2'/><author><name>Sam
+        Joseph</name><uri>http://gdata.youtube.com/feeds/api/users/aeurdstfaksf</uri><yt:userId>PPo4ZnBWwQ75JqiI13VFNw</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/J5DkuTn9G8k/comments?v=2'
+        countHint='0'/></gd:comments><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/J5DkuTn9G8k?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='856' yt:format='5'/><media:content url='rtsp://r4---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAnJG_05ueSQJxMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='856' yt:format='1'/><media:content
+        url='rtsp://r4---sn-p5qlsu76.c.youtube.com/CkULENy73wIaPAnJG_05ueSQJxMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='856' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Sam Joseph'>aeurdstfaksf</media:credit><media:description
+        type='plain'>For discussion of, and pair programming on, http://agileventures.org
+        Everyone at every level always welcome!</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=J5DkuTn9G8k&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/J5DkuTn9G8k/default.jpg' height='90' width='120'
+        time='00:07:08' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/J5DkuTn9G8k/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/J5DkuTn9G8k/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/J5DkuTn9G8k/1.jpg'
+        height='90' width='120' time='00:03:34' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/J5DkuTn9G8k/2.jpg' height='90' width='120' time='00:07:08'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/J5DkuTn9G8k/3.jpg'
+        height='90' width='120' time='00:10:42' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Atlantic Scrum and Pair Hookup</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='856'/><yt:uploaded>2014-04-17T14:56:36.000Z</yt:uploaded><yt:uploaderId>UCPPo4ZnBWwQ75JqiI13VFNw</yt:uploaderId><yt:videoid>J5DkuTn9G8k</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;CEQMRH47eCp7I2A9Wh9UGE4.&quot;'><id>tag:youtube.com,2008:video:TSwVCGbtaRc</id><published>2014-04-18T14:46:25.000Z</published><updated>2014-04-18T14:46:25.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Atlantic Scrum and Pair Hookup</title><content
+        type='application/x-shockwave-flash' src='http://www.youtube.com/v/TSwVCGbtaRc?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=TSwVCGbtaRc&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/TSwVCGbtaRc/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/TSwVCGbtaRc/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/TSwVCGbtaRc/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=TSwVCGbtaRc'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/PPo4ZnBWwQ75JqiI13VFNw?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/TSwVCGbtaRc?v=2'/><author><name>Sam
+        Joseph</name><uri>http://gdata.youtube.com/feeds/api/users/aeurdstfaksf</uri><yt:userId>PPo4ZnBWwQ75JqiI13VFNw</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/TSwVCGbtaRc/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/TSwVCGbtaRc?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1500' yt:format='5'/><media:content url='rtsp://r4---sn-p5qlsu7l.c.youtube.com/CkULENy73wIaPAkXae1mCBUsTRMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1500' yt:format='1'/><media:content
+        url='rtsp://r4---sn-p5qlsu7l.c.youtube.com/CkULENy73wIaPAkXae1mCBUsTRMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1500' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Sam Joseph'>aeurdstfaksf</media:credit><media:description
+        type='plain'>For discussion of, and pair programming on, http://agileventures.org
+        Everyone at every level always welcome!</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=TSwVCGbtaRc&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/TSwVCGbtaRc/default.jpg' height='90' width='120'
+        time='00:12:30' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/TSwVCGbtaRc/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/TSwVCGbtaRc/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/TSwVCGbtaRc/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/TSwVCGbtaRc/1.jpg'
+        height='90' width='120' time='00:06:15' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/TSwVCGbtaRc/2.jpg' height='90' width='120' time='00:12:30'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/TSwVCGbtaRc/3.jpg'
+        height='90' width='120' time='00:18:45' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Atlantic Scrum and Pair Hookup</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1500'/><yt:uploaded>2014-04-18T14:46:25.000Z</yt:uploaded><yt:uploaderId>UCPPo4ZnBWwQ75JqiI13VFNw</yt:uploaderId><yt:videoid>TSwVCGbtaRc</yt:videoid></media:group></entry><entry
+        gd:etag='W/&quot;A0MBQX47eCp7I2A9Wh9RFEo.&quot;'><id>tag:youtube.com,2008:video:gyxwGDItZDM</id><published>2014-02-15T15:50:50.000Z</published><updated>2014-02-15T15:50:50.000Z</updated><category
+        scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/><category
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Entertainment'
+        label='Entertainment'/><title>Agile Ventures Daily Scrum</title><content type='application/x-shockwave-flash'
+        src='http://www.youtube.com/v/gyxwGDItZDM?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'/><link
+        rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=gyxwGDItZDM&amp;feature=youtube_gdata'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.ratings' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/gyxwGDItZDM/ratings?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.complaints' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/gyxwGDItZDM/complaints?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/videos/gyxwGDItZDM/related?v=2'/><link
+        rel='http://gdata.youtube.com/schemas/2007#mobile' type='text/html' href='http://m.youtube.com/details?v=gyxwGDItZDM'/><link
+        rel='http://gdata.youtube.com/schemas/2007#uploader' type='application/atom+xml'
+        href='http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q?v=2'/><link
+        rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/gyxwGDItZDM?v=2'/><author><name>Pavel
+        Gimelberg</name><uri>http://gdata.youtube.com/feeds/api/users/EGV_WXdoIdga2AUQMCdd0Q</uri><yt:userId>EGV_WXdoIdga2AUQMCdd0Q</yt:userId></author><yt:accessControl
+        action='comment' permission='allowed'/><yt:accessControl action='commentVote'
+        permission='allowed'/><yt:accessControl action='videoRespond' permission='moderated'/><yt:accessControl
+        action='rate' permission='allowed'/><yt:accessControl action='embed' permission='allowed'/><yt:accessControl
+        action='list' permission='allowed'/><yt:accessControl action='autoPlay' permission='allowed'/><yt:accessControl
+        action='syndicate' permission='allowed'/><gd:comments><gd:feedLink rel='http://gdata.youtube.com/schemas/2007#comments'
+        href='http://gdata.youtube.com/feeds/api/videos/gyxwGDItZDM/comments?v=2'
+        countHint='0'/></gd:comments><yt:hd/><media:group><media:category label='Entertainment'
+        scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Entertainment</media:category><media:content
+        url='http://www.youtube.com/v/gyxwGDItZDM?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata'
+        type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full'
+        duration='1066' yt:format='5'/><media:content url='rtsp://r3---sn-p5qlsu7l.c.youtube.com/CkULENy73wIaPAkzZC0yGHAsgxMYDSANFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1066' yt:format='1'/><media:content
+        url='rtsp://r3---sn-p5qlsu7l.c.youtube.com/CkULENy73wIaPAkzZC0yGHAsgxMYESARFEgGUgZ2aWRlb3NyIQH6Sjexv9tfYfFqh4ekqBFxDvPB7EI6RNWvHdRsUJxg5gw=/0/0/0/video.3gp'
+        type='video/3gpp' medium='video' expression='full' duration='1066' yt:format='6'/><media:credit
+        role='uploader' scheme='urn:youtube' yt:display='Pavel Gimelberg'>EGV_WXdoIdga2AUQMCdd0Q</media:credit><media:description
+        type='plain'>Agile Ventures Daily Scrum.</media:description><media:keywords/><media:license
+        type='text/html' href='http://www.youtube.com/t/terms'>youtube</media:license><media:player
+        url='http://www.youtube.com/watch?v=gyxwGDItZDM&amp;feature=youtube_gdata_player'/><media:thumbnail
+        url='http://i.ytimg.com/vi/gyxwGDItZDM/default.jpg' height='90' width='120'
+        time='00:08:53' yt:name='default'/><media:thumbnail url='http://i.ytimg.com/vi/gyxwGDItZDM/mqdefault.jpg'
+        height='180' width='320' yt:name='mqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/gyxwGDItZDM/hqdefault.jpg'
+        height='360' width='480' yt:name='hqdefault'/><media:thumbnail url='http://i.ytimg.com/vi/gyxwGDItZDM/sddefault.jpg'
+        height='480' width='640' yt:name='sddefault'/><media:thumbnail url='http://i.ytimg.com/vi/gyxwGDItZDM/1.jpg'
+        height='90' width='120' time='00:04:26.500' yt:name='start'/><media:thumbnail
+        url='http://i.ytimg.com/vi/gyxwGDItZDM/2.jpg' height='90' width='120' time='00:08:53'
+        yt:name='middle'/><media:thumbnail url='http://i.ytimg.com/vi/gyxwGDItZDM/3.jpg'
+        height='90' width='120' time='00:13:19.500' yt:name='end'/><media:title type='plain'>Agile
+        Ventures Daily Scrum</media:title><yt:aspectRatio>widescreen</yt:aspectRatio><yt:duration
+        seconds='1066'/><yt:uploaded>2014-02-15T15:50:50.000Z</yt:uploaded><yt:uploaderId>UCEGV_WXdoIdga2AUQMCdd0Q</yt:uploaderId><yt:videoid>gyxwGDItZDM</yt:videoid></media:group></entry></feed>"
+    http_version: 
+  recorded_at: Sun, 18 May 2014 02:11:31 GMT
+recorded_with: VCR 2.9.0

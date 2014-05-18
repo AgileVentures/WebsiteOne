@@ -385,6 +385,7 @@ GEM
       rack
       raindrops (~> 0.7)
     utf8-cleaner (0.0.9)
+    vcr (2.9.0)
     verbs (2.1.4)
       activesupport (>= 2.3.4)
       i18n
@@ -486,6 +487,7 @@ DEPENDENCIES
   uglifier
   unicorn
   utf8-cleaner
+  vcr
   verbs
   webmock
   webrat

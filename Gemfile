@@ -62,6 +62,7 @@ group :test do
   gem 'zeus' # rails preloading environment
   gem 'webmock' # mocking external net connections
   gem 'delorean' # mocking Time in tests, aka time travelling
+  gem 'vcr'
 end
 
 group :development, :test do
