@@ -74,4 +74,8 @@ class User < ActiveRecord::Base
       update_attributes(youtube_id:Youtube.channel_id(token))
     end
   end
+  
+  def update_github_url(url) 
+    update_attributes(github_profile_url:url)
+  end
 end

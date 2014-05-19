@@ -188,14 +188,12 @@ describe AuthenticationsController do
       }
     end
     it 'links Github profile when authenticate with GitHub' do
-      user = stub_model(User, github_profile_url: nil)
+      user = stub_model(User, update_github_url: false)
       controller.stub(current_user: user)
-      User.stub(find: user)
-      user.stub(:reload)
 
       expect(controller).to receive(:link_github_profile).and_call_original
       get :create, provider: 'github'
-      expect(user.github_profile_url).to eq('http://github.com/test')
+      expect(flash.alert).to eq('Linking your Github profile has failed')
     end
   end
 end

@@ -236,4 +236,12 @@ describe User do
     end
 
   end
+
+  describe "#update_github_url" do 
+    it 'update the github profile url' do 
+      user = User.create(@attr) 
+      user.update_github_url('http://github.com/url')
+      expect(user.github_profile_url).to eql('http://github.com/url')
+    end
+  end
 end
