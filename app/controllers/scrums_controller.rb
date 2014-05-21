@@ -9,7 +9,7 @@ class ScrumsController < ApplicationController
     @scrums.sort! {|x,y| y[:published] <=> x[:published]}
   end
 
-  private
+
 
   def video_data(video)
     {
@@ -19,6 +19,8 @@ class ScrumsController < ApplicationController
         title: video.title,
         content: video.title,
         url: video.media_content[0].url
+
+
     }
   end
 end
