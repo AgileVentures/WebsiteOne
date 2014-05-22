@@ -1,5 +1,6 @@
 class ScrumsController < ApplicationController
 
+
   def index
     #@scrums = Scrum.all
     client = YouTubeIt::Client.new(:dev_key => "AIzaSyAh0CZ-jWpREV-3WtQ-4thTW0T-qU6_zrc")
@@ -8,6 +9,9 @@ class ScrumsController < ApplicationController
     @scrums = query.videos.map { |video| video_data(video) }
     @scrums.sort! {|x,y| y[:published] <=> x[:published]}
   end
+
+
+
 
 
 
