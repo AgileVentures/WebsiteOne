@@ -34,9 +34,11 @@ describe ScrumsController do
       end
 
       context 'the array of videos' do
-        subject { assigns :scrums }
+        subject { assigns(:scrums)}
 
-        it 'the last video has an older date than the first video'
+        it 'the last video has an older date than the first video'  do
+          expect(subject.last[:published]).to be < subject.first[:published]
+        end
       end
     end
   end
