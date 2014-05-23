@@ -8,5 +8,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
-  <%= analytics_init if Rails.env.production? %>
+  <% if ENV['ENABLE_GOOGLE_ANALTICS'] %>
+    <%= javascript_include_tag 'google-analytics', 'data-turbolinks-track' => true %>
+  <% end %>
 </head>

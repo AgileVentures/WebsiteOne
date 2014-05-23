@@ -168,7 +168,6 @@ GEM
     geocoder (1.2.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
-    google-analytics-rails (0.0.5)
     hashie (2.1.1)
     hike (1.2.3)
     i18n (0.6.9)
@@ -386,7 +385,6 @@ DEPENDENCIES
   font-awesome-rails
   friendly_id
   geocoder
-  google-analytics-rails
   ice_cube
   jasmine
   jasmine-jquery-rails
