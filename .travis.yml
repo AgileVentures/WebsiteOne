@@ -1,6 +1,8 @@
 language: ruby
 rvm: 2.1.1
+
 bundler_args: "--without development --path=~/.bundle"
+
 before_install:
 - sudo rm /etc/apt/sources.list.d/git-ppa-source.list
 - sudo apt-get remove git && sudo apt-get remove git-man && sudo apt-get install git-man
@@ -11,15 +13,19 @@ before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - bundle_cache_install
+
 before_script:
 - bundle exec rake db:create:all
 - bundle exec rake db:migrate
+
 script:
 - bundle exec rspec --format progress
 - bundle exec rake jasmine:ci
 - xvfb-run bundle exec cucumber --profile ci
+
 after_script:
 - bundle_cache
+
 deploy:
   provider: heroku
   api_key:
@@ -30,11 +36,13 @@ deploy:
     staging: websiteone-staging
     master: websiteone-production
   run: rake db:migrate
+
 env:
   global:
-  - BUNDLE_ARCHIVE: websiteone-bundler-cache
-  - AWS_S3_BUCKET: Travis-BundlerCache
   - secure: Vzl6rgYEC4y+gcUHiZ+7DBCb4BXhJK/7ytnXWSdsVQjngAyLNSFmCVWm4pTBVtQ2ORoBG6sPElV41Mmj7TlBxag+FsBGT0N7+sXJnQC7a+9F2fCSJHK8PL5ddOQHhD23QUO9j5I1g83nYIUvRagci8Sj6rWV8U6zNWD02dXWNow=
+  - BUNDLE_ARCHIVE=websiteone-bundler-cache
+  - AWS_S3_BUCKET=Travis-BundlerCache
+
 notifications:
   email:
   - thomas@nocebo.se
