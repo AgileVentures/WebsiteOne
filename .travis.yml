@@ -30,11 +30,11 @@ deploy:
     staging: websiteone-staging
     master: websiteone-production
   run: rake db:migrate
-env:
-  global:
-  - secure: LDGI3mEhHBAIeRB2x4fLhPTnNxhdVhfbqtvAZV3rI/Rf1VpcLzeuy91VNEcTLS+DgnQ64H99kdL7dzUdbDluOf9IAY1SSM6xiJtqoL/NDr6iLQNNmGuHASJdg+OVDKf520wnekRs11OgytA6neZSCBFD3HPAejFpuuTFHxh9SXU=
-  - secure: OMFG+ENTBLz0fXDabvqgwkGM75OhOx5R21eabm8bDJ/mpto7o/WrGiqTf5RmIToNbg05hPa6rs9C25soain96TKvIeKP/bjkgGneFWWKBtrOYlprkMkP496oRIA98QWUy+Rpl+13gFIZ4eyw0ozJHS6NLs+KgijhUnLLO7VOOuI=
 notifications:
   email:
   - thomas@nocebo.se
   - info@agileventures.org
+env:
+  global:
+  - secure: vNROsuELIsjNafzi+yZGOaZPTga85SJZr/qboL4F4SUQHbwkzN7+IbGkiRIV/mmJhMS2QSCuCeDKQy7pWglzqyHpd6LW79/uePcuodGiCZSqg1S8UmXbk49/ycxRuDtEqmmRKdQmuKItzTOreUPdQIiF+G5E51bZTS94d5voe4Q=
+  - secure: SjXBHD6PCi/WPiZKs7jUArW22OJ6cgIhJPIdCQGXxcjRbGzbVcdjH57peF4RLZB5ZmgnoXYOQhqko6CddBsw3QOEGzrVBV2NSE5ucIDM4K2tKsJAlnht+Tj0gMQc31X7IkbqL1blOa9/wg+Fj69nHreA2+zabxT3SHaGr7ffQLo=
