@@ -32,6 +32,4 @@ WebsiteOne::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
-
-  GA.tracker = 'UA-00000000-1'
 end
