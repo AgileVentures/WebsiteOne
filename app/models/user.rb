@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  acts_as_taggable_on :skills
+  acts_as_taggable_on :skills, :titles
 
   #after_create Mailer.send_welcome_mail()
   extend FriendlyId
@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
       'Anonymous'
     elsif name =~ /^\s*$/
       self.email_first_part
-    else 
+    else
       name
     end
   end

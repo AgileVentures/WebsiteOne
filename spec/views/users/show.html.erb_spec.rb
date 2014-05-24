@@ -9,15 +9,13 @@ describe "users/show.html.erb" do
         mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
         mock_model(Project, friendly_id: 'title-3', title: 'Title 3')
     ]
-	  @user = mock_model(User, id: 4,
-                             display_name: 'Eric Els',
-                             first_name: 'Eric',
-                             last_name: 'Els',
-                             email: 'eric@somemail.se',
-                             created_at: thirty_days_ago,
-                             github_profile_url: 'http://github.com/Eric',
-                             bio: 'Lonesome Cowboy'
-                      )
+    @user = FactoryGirl.build(:user,
+                              first_name: 'Eric',
+                              last_name: 'Els',
+                              email: 'eric@somemail.se',
+                              created_at: thirty_days_ago,
+                              github_profile_url: 'http://github.com/Eric',
+                              bio: 'Lonesome Cowboy')
 		assign :user, @user
     assign :users_projects, @projects
     @youtube_videos = [
@@ -66,11 +64,10 @@ describe "users/show.html.erb" do
   end
 
   it 'renders big user avatar' do
-    expect(view).to receive(:gravatar_for).with(@user.email ,size: 275).and_return('img_link')
     render
-    expect(rendered).to have_css('img')
-    expect(rendered).to have_xpath("//img[contains(@src, 'img_link')]")
+    expect(rendered).to have_css('img.thumbnail')
   end
+
   it 'renders user first and last names' do
   	render
   	expect(rendered).to have_content(@user.first_name)

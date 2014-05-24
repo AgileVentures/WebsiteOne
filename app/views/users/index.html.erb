@@ -9,16 +9,19 @@
     <% @users.each_slice(3) do |slice| %>
       <ul id="user-container" class="media-list">
         <% slice.each do |user| %>
-          <li class="media-item user-item">
-            <a style="padding-left: 0 !important" class="pull-left" href="<%= user_path user %>">
-              <img src="<%= gravatar_for(user.email) %>" class="thumbnail img-rounded media-object">
-            </a>
+          <% present user do |presenter| %>
+            <li class="media-item user-item">
+              <a style="padding-left: 0 !important" class="pull-left" href="<%= user_path(user) %>">
+                <img src="<%= presenter.gravatar_src %>" class="thumbnail img-rounded media-object">
+              </a>
 
-            <div class="media-body">
-              <p class="media-heading"><a href="<%= user_path user %>"><%= user.display_name %></a></p>
-              <p style="margin-left: 8px;"><%= user.country if user.country.present? %></p>
-            </div>
-          </li>
+              <div class="media-body">
+                <p class="media-heading"><a href="<%= user_path(user) %>"><%= presenter.display_name %></a></p>
+                <p style="margin-left: 8px;"><%= presenter.title_list %></p>
+                <p style="margin-left: 8px;"><%= presenter.country %></p>
+              </div>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     <% end %>

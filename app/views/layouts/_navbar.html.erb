@@ -4,23 +4,25 @@
 
     <div id="account-controls" class="pull-right">
       <% if user_signed_in? %>
-        <a href="<%= user_path(current_user) %>">
-          <img id="user-gravatar" src="<%= gravatar_for(current_user.email) %>" class="img-circle">
-        </a>
-        <div class="dropdown">
-          <a href="#" id="account-dropdown" data-toggle="dropdown">
-            <%= current_user_details %>
-            <span class="caret"></span>
+        <% present current_user do |presenter| %>
+          <a href="<%= user_path(current_user) %>">
+            <img id="user-gravatar" src="<%= presenter.gravatar_src %>" class="img-circle">
           </a>
-          <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="account-dropdown">
-            <a href="<%= user_path(current_user) %>">
-              <li><i class="fa fa-user fa-custom-accounts"></i> My account</li>
+          <div class="dropdown">
+            <a href="#" id="account-dropdown" data-toggle="dropdown">
+              <%= presenter.display_name %>
+              <span class="caret"></span>
             </a>
-            <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
-              <li><i class="fa fa-sign-out fa-custom-accounts"></i> Log out</li>
-            </a>
-          </ul>
-        </div>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="account-dropdown">
+              <a href="<%= user_path(current_user) %>">
+                <li><i class="fa fa-user fa-custom-accounts"></i> My account</li>
+              </a>
+              <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
+                <li><i class="fa fa-sign-out fa-custom-accounts"></i> Log out</li>
+              </a>
+            </ul>
+          </div>
+        <% end %>
       <% else %>
         <div id="login-signup">
           <%= link_to 'Log in', new_user_session_path %>
