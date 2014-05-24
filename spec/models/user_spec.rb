@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe User do
 
+  include_examples 'presentable'
+
   before do
     @attr = attributes_for(:user)
   end

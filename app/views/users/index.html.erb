@@ -11,14 +11,18 @@
         <% slice.each do |user| %>
           <% present user do |presenter| %>
             <li class="media-item user-item">
-              <a style="padding-left: 0 !important" class="pull-left" href="<%= user_path(user) %>">
+              <a class="pull-left" href="<%= user_path(user) %>">
                 <img src="<%= presenter.gravatar_src %>" class="thumbnail img-rounded media-object">
               </a>
 
-              <div class="media-body">
+              <div class="media-body index-summary">
                 <p class="media-heading"><a href="<%= user_path(user) %>"><%= presenter.display_name %></a></p>
-                <p style="margin-left: 8px;"><%= presenter.title_list %></p>
-                <p style="margin-left: 8px;"><%= presenter.country %></p>
+                <% if user.title_list.count > 0 %>
+                  <p><%= presenter.title_list %></p>
+                <% end %>
+                <% if user.country.present? %>
+                  <p><%= presenter.country %></p>
+                <% end %>
               </div>
             </li>
           <% end %>

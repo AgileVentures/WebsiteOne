@@ -13,6 +13,7 @@ describe "users/show.html.erb" do
                               first_name: 'Eric',
                               last_name: 'Els',
                               email: 'eric@somemail.se',
+                              title_list: 'Philanthropist',
                               created_at: thirty_days_ago,
                               github_profile_url: 'http://github.com/Eric',
                               bio: 'Lonesome Cowboy')
@@ -57,15 +58,16 @@ describe "users/show.html.erb" do
       expect(rendered).to have_text(video[:published])
     end
   end
+
   it 'renders "no available videos" if user has no videos' do
     assign(:youtube_videos, nil)
     render
     expect(rendered).to have_text('Eric Els has no publicly viewable Youtube videos.')
   end
 
-  it 'renders big user avatar' do
+  it 'should render the users gravatar image' do
     render
-    expect(rendered).to have_css('img.thumbnail')
+    expect(rendered).to have_css('img.thumbnail[src*=gravatar]')
   end
 
   it 'renders user first and last names' do
@@ -83,36 +85,37 @@ describe "users/show.html.erb" do
   end
 
   context 'profile privacy' do
+
     it 'should display email if it is set to public' do
-      @user.stub(display_email: true)
+      @user.display_email = true
       render
       expect(rendered).to have_link(@user.email)
     end
 
     it 'should display an hire me button if it set to public' do
-      @user.stub(display_hire_me: false)
+      @user.display_hire_me = true
+      render
+      expect(rendered).to have_link('Hire me', href: user_path(@user))
+    end
+
+    it 'should not display email if it is set to private' do
+      @user.display_email = false
+      render
+      expect(rendered).to_not have_link(@user.email)
+    end
+
+    it 'should display an hire me button if it set to private' do
+      @user.display_hire_me = false
       render
       expect(rendered).not_to have_link('Hire me', href: user_path(@user))
     end
-
-  it 'should not display email if it is set to private' do
-    @user.stub(display_email: false)
-    render
-    expect(rendered).to_not have_link(@user.email)
   end
-
-  it 'should display an hire me button if it set to private' do
-    @user.stub(display_hire_me: false)
-    render
-    expect(rendered).not_to have_link('Hire me', href: user_path(@user))
-  end
-end
 
   it 'should display Member for ..' do
     render
     expect(rendered).to have_text('Member for about 1 month')
   end
-  
+
   it 'renders a bio' do
     render
     expect(rendered).to have_text 'Bio'
@@ -120,14 +123,19 @@ end
   end
 
   it 'renders no bio field' do
-    @user.stub(bio: nil)
+    @user.bio = nil
     assign :bio, @user.bio
     render
     expect(rendered).not_to have_text('Bio')
   end
 
+  it 'renders the user title' do
+    render
+    expect(rendered).to have_text('Philanthropist')
+  end
+
   it 'displays GitHub profile if it is linked' do
-    @user.stub(github_profile_url: nil)
+    @user.github_profile_url = nil
     render
     expect(rendered).to have_text('GitHub profile not linked')
   end
@@ -138,17 +146,17 @@ end
   end
 
   context 'users own profile page' do
-    before :each do
+    before(:each) do
         @user_logged_in ||= FactoryGirl.create :user
         sign_in @user_logged_in # method from devise:TestHelpers
     end
+
     it 'displays an edit button if it is my profile' do
       render
       expect(rendered).to_not have_xpath("//a[contains(@type, 'button')]")
     end
-
-
   end
+
   it 'renders a tab view - nav-tabs' do
     render
     expect(rendered).to have_css('.nav-tabs')

@@ -1,13 +1,9 @@
 module Helpers
 
   def default_test_author
-    @default_test_author = User.find_by_email('testuser@agileventures.org')
+    @default_test_author ||= User.find_by_email('testuser@agileventures.org')
     if @default_test_author.nil?
-      @default_test_author = User.create! first_name: 'Tester',
-                                          last_name: 'Man',
-                                          email: 'testuser@agileventures.org',
-                                          password: test_user_password,
-                                          password_confirmation: test_user_password
+      @default_test_author = User.create!(default_test_user_details)
     end
     @default_test_author
   end
@@ -22,11 +18,13 @@ module Helpers
 
   def default_test_user_details
     {
-        email: Faker::Internet.email,
-        last_sign_in_ip: test_ip_address,
-        password: test_user_password,
-        password_confirmation: test_user_password,
-        display_profile: true
+      first_name: 'Tester',
+      last_name: 'Man',
+      email: 'testuser@agileventures.org',
+      last_sign_in_ip: test_ip_address,
+      password: test_user_password,
+      password_confirmation: test_user_password,
+      display_profile: true
     }
   end
 
@@ -45,10 +43,6 @@ module Helpers
     user.save!
   end
 
-  def find_user
-    @user ||= User.where(:email => @visitor[:email]).first
-  end
-
   def create_unconfirmed_user
     create_visitor
     delete_user
@@ -57,15 +51,14 @@ module Helpers
   end
 
   def create_user
-    create_visitor
-    delete_user
-    @user = FactoryGirl.create(:user, @visitor)
+    @user ||= FactoryGirl.create(:user, create_visitor)
     @current_user = @user
   end
 
   def delete_user
-    @user ||= User.where(:email => @visitor[:email]).first
-    @user.destroy unless @user.nil?
+    @user.destroy if @user
+    @user = nil
+    @current_user = nil
   end
 
   def sign_up
@@ -77,7 +70,6 @@ module Helpers
       fill_in 'user_password_confirmation', :with => @visitor[:password_confirmation]
       click_button 'Sign up'
     end
-    find_user
   end
 
   def sign_in

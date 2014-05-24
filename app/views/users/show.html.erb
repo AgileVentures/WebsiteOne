@@ -8,20 +8,27 @@
           <h3><%= presenter.display_name %></h3>
         </div>
       </div>
-      <% if @user.country.present? %>
+      <% if @user.title_list.count > 0 %>
+        <p><%= presenter.title_list %></p>
+      <% end %>
+      <% if presenter.country.present? %>
         <p><i class="fa fa-globe fa-lg"></i> <%= presenter.country %></p>
       <% end %>
 
-      <p><i class="fa fa-calendar-o fa-lg"></i> Member
-        for <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
-      <% if @user.github_profile_url.present? %>
-        <p><i class="fa fa-github-alt fa-lg"></i> GitHub
-          profile <%= link_to "#{@user.github_profile_url.split('/').last}", @user.github_profile_url %></p>
-      <% else %>
-        <p><i class="fa fa-github-alt fa-lg"></i> GitHub profile not linked</p>
-      <% end %>
+      <p>
+        <i class="fa fa-calendar-o fa-lg"></i>
+        Member for <%= presenter.object_age_in_words %>
+      </p>
+      <p>
+        <i class="fa fa-github-alt fa-lg"></i>
+        <% if presenter.github_profile_url.present? %>
+          GitHub profile <%= presenter.github_link %>
+        <% else %>
+          GitHub profile not linked
+        <% end %>
+      </p>
       <% if @user.display_email %>
-        <p><i class="fa fa-envelope fa-lg"></i> <%= mail_to @user.email, @user.email %></p>
+        <p><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></p>
       <% end %>
       <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
       <% if @user.display_hire_me %>
