@@ -1,10 +1,8 @@
 language: ruby
-rvm: 2.1.1
+rvm:
+- 2.1.1
 bundler_args: "--without development --path=~/.bundle"
 before_install:
-- sudo rm /etc/apt/sources.list.d/git-ppa-source.list
-- sudo apt-get remove git && sudo apt-get remove git-man && sudo apt-get install git-man
-  && sudo apt-get install git
 - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
 - gem install nokogiri -- --use-system-libraries
 - gem install bundler bundle_cache
@@ -14,10 +12,11 @@ before_install:
 before_script:
 - bundle exec rake db:create:all
 - bundle exec rake db:migrate
+- bundle exec rake db:test:prepare
 script:
-- bundle exec rspec --format progress
+- bundle exec rake spec
 - bundle exec rake jasmine:ci
-- xvfb-run bundle exec cucumber --profile ci
+- bundle exec rake cucumber
 after_script:
 - bundle_cache
 deploy:
@@ -30,11 +29,12 @@ deploy:
     staging: websiteone-staging
     master: websiteone-production
   run: rake db:migrate
+env:
+  global:
+  - BUNDLE_ARCHIVE: websiteone-bundler-cache
+  - AWS_S3_BUCKET: Travis-BundlerCache
+  - secure: NNGLgt2jxlaJ/4xKXvMEkQnoX0CJIZT0SelJp9VrNQGWMZR1vLH9oGdUlzA7WjMa8pLfLUP5NMKDT8XudxwrF6ulbCplnphiTKVf9/ahKVN9pXjwCYhD14liYWfE+lOpJm0zAhono8g2tcBXmIfDX8537UIDNBmQ6bcOvULoMco=
 notifications:
   email:
   - thomas@nocebo.se
   - info@agileventures.org
-env:
-  global:
-  - secure: vNROsuELIsjNafzi+yZGOaZPTga85SJZr/qboL4F4SUQHbwkzN7+IbGkiRIV/mmJhMS2QSCuCeDKQy7pWglzqyHpd6LW79/uePcuodGiCZSqg1S8UmXbk49/ycxRuDtEqmmRKdQmuKItzTOreUPdQIiF+G5E51bZTS94d5voe4Q=
-  - secure: SjXBHD6PCi/WPiZKs7jUArW22OJ6cgIhJPIdCQGXxcjRbGzbVcdjH57peF4RLZB5ZmgnoXYOQhqko6CddBsw3QOEGzrVBV2NSE5ucIDM4K2tKsJAlnht+Tj0gMQc31X7IkbqL1blOa9/wg+Fj69nHreA2+zabxT3SHaGr7ffQLo=
