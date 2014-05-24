@@ -31,11 +31,10 @@ deploy:
   run: rake db:migrate
 env:
   global:
-  - AWS_S3_KEY: AKIAJCI225UWTEQRCOMQ
-  - AWS_S3_SECRET: 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
   - BUNDLE_ARCHIVE: websiteone-bundler-cache
-  - AWS_S3_BUCKET: AV-Travis-BundlerCache
+  - AWS_S3_BUCKET: Travis-BundlerCache
+  - secure: NNGLgt2jxlaJ/4xKXvMEkQnoX0CJIZT0SelJp9VrNQGWMZR1vLH9oGdUlzA7WjMa8pLfLUP5NMKDT8XudxwrF6ulbCplnphiTKVf9/ahKVN9pXjwCYhD14liYWfE+lOpJm0zAhono8g2tcBXmIfDX8537UIDNBmQ6bcOvULoMco=
 notifications:
   email:
-    - thomas@nocebo.se
-    - info@agileventures.org
+  - thomas@nocebo.se
+  - info@agileventures.org
