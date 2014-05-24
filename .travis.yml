@@ -34,7 +34,7 @@ env:
   global:
   - BUNDLE_ARCHIVE: websiteone-bundler-cache
   - AWS_S3_BUCKET: Travis-BundlerCache
-  - secure: NNGLgt2jxlaJ/4xKXvMEkQnoX0CJIZT0SelJp9VrNQGWMZR1vLH9oGdUlzA7WjMa8pLfLUP5NMKDT8XudxwrF6ulbCplnphiTKVf9/ahKVN9pXjwCYhD14liYWfE+lOpJm0zAhono8g2tcBXmIfDX8537UIDNBmQ6bcOvULoMco=
+  - secure: HJk0aCVlLQz+1LoM5unQMozMQvd+/liOMV55E6LcRJ1yXvO4KDqIwgQ00aN0VocanbHHxn0mLU6uX5iAb1D1EEAKjUUix6iMUpu6qoM5s3x4STBn4RQFwomDFNloWvLoX94PO2BYL7ZlyH7Gpb3pL26w5K+QEI7t2iQeZYrMahk=
 notifications:
   email:
   - thomas@nocebo.se
