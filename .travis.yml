@@ -9,7 +9,8 @@ before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sudo rm /etc/apt/sources.list.d/git-ppa-source.list
-- sudo apt-get remove git && sudo apt-get remove git-man && sudo apt-get install git-man && sudo apt-get install git
+- sudo apt-get remove git && sudo apt-get remove git-man && sudo apt-get install git-man
+  && sudo apt-get install git
 - bundle_cache_install
 before_script:
 - bundle exec rake db:create:all
@@ -35,6 +36,7 @@ env:
   - BUNDLE_ARCHIVE: websiteone-bundler-cache
   - AWS_S3_BUCKET: Travis-BundlerCache
   - secure: Ex7uGwVQN9fnBFsWXHOVfdVxcUaGcKT5m2KecFuZUknJhAg5i1qWVBN6tEzQYensWBoRXKjwaAVYxb1NK34wDaCg94wJv66l2M0gIchMhtrn/xc2k0SWZqLrryFRiONahlt4dwqohzxzF5suDu/IlssxZWKX0MEZkIaOVkz7jGM=
+  - secure: cWwCHNVbHdLEe1UNpkOXdK4ubu/xqIuiwL+8RqkiLkPXWJbkYvKKQipO+XW8oih/NupyFT6uJ+bRHptqC0OVITlPl5X3C3iQ1C42xQAdiDqFnMKtGZsYyuuoJnbAMAKx+fd6J/S5hiCUZjqtQy95ow3qvdP10m6RJWfTQduxNZ4=
 notifications:
   email:
   - thomas@nocebo.se
