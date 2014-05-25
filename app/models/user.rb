@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
   after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip }
+  after_validation ->() { KarmaCalculator.new(self).perform }
 
   has_many :authentications, dependent: :destroy
   has_many :projects
