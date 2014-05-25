@@ -131,7 +131,6 @@ end
 
 ### THEN ###
 Then /^I should be signed in$/ do
-  find_user.should == @user
   page.should have_content "Log out"
   page.should_not have_content "Sign up"
   page.should_not have_content "Log in"
@@ -187,9 +186,9 @@ Then /^I should (not |)see my name$/ do |should|
   create_user
   # TODO Bryan: refactor to display_name
   if should == 'not '
-    page.should_not have_content @user.display_name
+    page.should_not have_content @user.presenter.display_name
   else
-    page.should have_content @user.display_name
+    page.should have_content @user.presenter.display_name
   end
 end
 

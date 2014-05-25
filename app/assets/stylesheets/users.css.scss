@@ -1,0 +1,19 @@
+@import "variables";
+
+.member-title {
+  font-size: 0.85em;
+  font-weight: bold;
+  color: $theme-darker;
+}
+
+.index-summary {
+  p {
+    margin-left: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    a {
+      padding-left: 0 !important;
+    }
+  }
+}
