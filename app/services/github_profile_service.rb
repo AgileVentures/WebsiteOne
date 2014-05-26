@@ -1,5 +1,4 @@
 module GithubProfileService
-  extend ProfileService
   extend self
 
   def call(current_user, omniauth, failure:raise) 
