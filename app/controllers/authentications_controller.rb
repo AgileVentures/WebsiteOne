@@ -10,7 +10,8 @@ class AuthenticationsController < ApplicationController
 
     if current_user.present?
       if authentication.present?
-        AttemptLoginWithAuthService.(current_user, @path, 
+        AttemptLoginWithAuthService.(current_user, authentication, 
+                                     @path, 
                                     success: ->(authentication){ 
           flash[:notice] = 'Signed in successfully.'
           sign_in_and_redirect(:user, authentication.user)
