@@ -336,12 +336,6 @@ Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   end
 end
 
-Then(/^(.*) in the members list$/) do |s|
-  page.within(:css, '#all_members') do
-    step s
-  end
-end
-
 Given(/^I visit (.*)'s profile page$/) do |name|
   user = User.find_by_first_name name
   visit user_path user

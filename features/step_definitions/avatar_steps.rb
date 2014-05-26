@@ -8,14 +8,12 @@ Then /^I should see "([^"]*)" avatars$/ do | arg |
 end
 
 Then /^I should see "([^"]*)" user avatars$/ do | arg |
-  find('#all_members').tap do |section|
-    section.should have_css 'a img.thumbnail', :count => arg
-  end
+  section.should have_css 'a img.thumbnail', :count => arg
 end
 
 When /^I click on the avatar for "(.*?)"$/ do | user |
   this_user = User.find_by_first_name(user) || User.find_by_email(user)
-  find(:css, 'a[href*="' + this_user.friendly_id + '"] img.thumbnail')
+  find(:css, 'a[href*="' + this_user.friendly_id + '"] img')
   visit path_to('user profile', this_user)
 end
 
