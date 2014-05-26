@@ -1,22 +1,6 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
-  describe '#gravatar_for' do
-
-    before(:each) do
-      @email = ' MyEmailAddress@example.com  '
-      @user_hash = '0bc83cb571cd1c50ba6f3e8a78ef1346' # hash calculated manually
-    end
-
-    it 'constructs a link to image at gravatar.com' do
-      regex = /^http[s]:\/\/.*gravatar.*#{@user_hash}/
-      expect(helper.gravatar_for(@email)).to match(regex)
-    end
-
-    it 'specifies image size' do
-      expect(helper.gravatar_for(@email, size: 200)).to match(/\?s=200&/)
-    end
-  end
 
   it '#date_format returns formatted date 1st Jan 2015' do
     expect(date_format(Date.new(2015,1,1))).to eq('1st Jan 2015')

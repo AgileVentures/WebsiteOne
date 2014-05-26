@@ -9,9 +9,10 @@
     <% end %>
   </div>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
+    <% present resource do |presenter| %>
       <div class="col-md-3 col-md-offset-1">
         <div style="display:inline-flex;">
-          <img src="<%= gravatar_for(resource.email) %>" class="thumbnail img-rounded" style=" margin-right: 10px;">
+          <img src="<%= presenter.gravatar_src %>" class="thumbnail img-rounded" style=" margin-right: 10px;">
           <%= link_to 'Change your avatar', 'http://en.gravatar.com/emails/' %>
         </div>
         <div style="margin-bottom: 7px;display:inline-flex"><%= f.label :display_profile %>
@@ -85,6 +86,7 @@
                 });
             });
         </script>
+    <% end %>
   <% end %>
 
 

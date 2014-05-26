@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  acts_as_taggable_on :skills
+  acts_as_taggable_on :skills, :titles
 
   #after_create Mailer.send_welcome_mail()
   extend FriendlyId
@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
   after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip }
+  after_validation ->() { KarmaCalculator.new(self).perform }
 
   has_many :authentications, dependent: :destroy
   has_many :projects
@@ -51,7 +52,7 @@ class User < ActiveRecord::Base
       'Anonymous'
     elsif name =~ /^\s*$/
       self.email_first_part
-    else 
+    else
       name
     end
   end
