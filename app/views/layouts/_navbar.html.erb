@@ -1,6 +1,6 @@
 <header id="main_header" class="masthead">
   <div class="container">
-    <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
+    <a class="navbar-brand" href="<%= root_path %>"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
 
     <div id="account-controls" class="pull-right">
       <% if user_signed_in? %>
@@ -37,13 +37,13 @@
 <div class="navbar navbar-inverse navbar-static-top" id="nav">
   <div class="container">
     <div class="row">
-      <div class="col-xs-4 col-md-2">
+      <div class="hidden-xs col-md-2">
         <a id="affix-nav-brand" class="navbar-brand" href="<%= root_path %>">
           <img src="<%= image_path('av-logo-inverse.png') %>">
         </a>
       </div>
 
-      <div class="col-xs-8 col-md-10">
+      <div class="col-xs-12 col-md-10">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
