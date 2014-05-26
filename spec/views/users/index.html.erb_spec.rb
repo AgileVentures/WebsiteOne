@@ -16,7 +16,7 @@ describe "users/index.html.erb" do
   it 'renders User name link with href' do
     render
     @users.each do |user|
-      expect(rendered).to have_xpath("//a[text()='#{user.first_name} #{user.last_name}' and contains(@href, '/users/#{user.slug}')]")
+      expect(rendered).to have_xpath("//a[contains(@href, '/users/#{user.slug}')]")
     end
   end
 end

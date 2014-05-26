@@ -1,12 +1,9 @@
 <div class="container">
-  <div class="col-md-8 col-md-offset-1">
-    <%= devise_error_messages_flash %>
-    <h2>Account details for <%= user_details(@user) %></h2>
-  </div>
-  <div class="row preview_box">
-    <% if params[:preview] %>
-        <%= render 'preview' %>
-    <% end %>
+  <div class="row">
+    <div class="col-xs-11 col-sm-offset-1 col-xs-offset-0">
+      <%= devise_error_messages_flash %>
+      <h2>Account details for <%= user_details(@user) %></h2>
+    </div>
   </div>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
     <% present resource do |presenter| %>
@@ -88,10 +85,6 @@
         </script>
     <% end %>
   <% end %>
-
-
-  <!--     <div><%= link_to 'Preview', '#',
-                            class: 'btn btn-primary btn-lg btn-block', id: 'preview' %></div> -->
 
   </div>
   <div class="col-md-3 col-md-offset-1">

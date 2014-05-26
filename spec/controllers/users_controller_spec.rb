@@ -81,15 +81,6 @@ describe UsersController do
     end
 
     context 'with followed projects' do
-      # Bryan: Empty before block?
-      #before :each do
-      #end
-
-      it 'assigns a list of project being followed' do
-        get 'show', id: @user.friendly_id
-        expect(assigns(:users_projects)).to eq(@projects)
-      end
-
       it 'it renders an error message when accessing a private profile' do
         @user.stub(display_profile: false)
         get 'show', id: @user.friendly_id

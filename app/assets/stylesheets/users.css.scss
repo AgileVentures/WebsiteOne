@@ -38,6 +38,8 @@
 }
 
 .user-summary {
+  overflow: hidden;
+
   h3 {
     margin: 10px 0;
   }
@@ -45,6 +47,11 @@
   ul {
     list-style: none;
     padding-left: 0;
+
+    li {
+      font-size: 0.95em;
+      white-space: nowrap;
+    }
   }
 }
 
@@ -54,10 +61,16 @@
   display: block;
   padding: 5px;
   margin: 3px 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 5px;
   @include css-transition(background-color 0.3s ease);
+  @include css-transition(border-color 0.3s ease);
 
   &:hover {
     background-color: $highlight-color;
+    border-color: $theme-main;
   }
 }
 
@@ -66,5 +79,108 @@
 
   &:hover {
     color: $theme-darker;
+    border-color: $theme-darker;
   }
 }
+
+.user-preview {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 5px;
+  @include css-transition(background-color 0.3s ease);
+  @include css-transition(border-color 0.3s ease);
+
+  &:hover {
+    background-color: $highlight-color;
+    border-color: $theme-main;
+  }
+
+  p {
+    color: $black;
+    padding-left: 0;
+
+    &.media-heading {
+      color: $theme-main;
+      font-size: 1.1em;
+    }
+  }
+}
+
+/* CSS for All USERS page */
+
+#user-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+$user-item-height: 100px;
+
+#user-container .user-item {
+  width: 33%;
+  height: $user-item-height;
+  margin-bottom: -10px !important;
+}
+
+#user-container .user-item h2, .user-item h4, .user-item p, .user-item a {
+  padding-left: 8px !important;
+}
+
+/* Responsive versions */
+@media (min-width: 768px) and (max-width: 979px) {
+  #user-container .user-item {
+    width: 50%;
+    height: $user-item-height;
+    margin-bottom: -20px !important;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+
+  #user-container .user-item {
+    width: 50%;
+    height: $user-item-height;
+    margin-bottom: -20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  #user-container .user-item {
+    width: 100%;
+    height: $user-item-height;
+    margin-bottom: -10px !important;
+  }
+}
+
+/* End of CSS for All USERS page */
+
+/* CSS for USER PROFILE page */
+
+.avatar-group .avatar-lower {
+  width: 330px;
+  margin-top: -70px;
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.avatar-group .avatar-lower h3 {
+  color: white;
+  text-shadow: 2px 1px 1px black;
+}
+
+.fa-large {
+  font-size: 28px;
+  margin-top: -10px;
+  margin-left: -5px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Responsive versions */
+
+/* End of CSS for USER PROFILE page */
