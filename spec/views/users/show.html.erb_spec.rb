@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "users/show.html.erb" do
-	before :each do
+  before :each do
     now = DateTime.now
     thirty_days_ago = (now - 33)
     @projects = [
@@ -16,9 +16,12 @@ describe "users/show.html.erb" do
                               title_list: 'Philanthropist',
                               created_at: thirty_days_ago,
                               github_profile_url: 'http://github.com/Eric',
+                              skill_list: [ 'Shooting', 'Hooting' ],
                               bio: 'Lonesome Cowboy')
-		assign :user, @user
-    assign :users_projects, @projects
+
+    @user.stub(:projects_joined) { @projects }
+
+    assign :user, @user
     @youtube_videos = [
         {
             url: "http://www.youtube.com/100",
@@ -37,10 +40,9 @@ describe "users/show.html.erb" do
         }
     ]
     assign :youtube_videos, @youtube_videos
-    assign :bio, @user.bio
     @skills = ["rails", "ruby", "rspec"]
     assign :skills, @skills
-	end
+  end
 
   it 'renders a table wih video links if there are videos' do
     render
@@ -71,9 +73,9 @@ describe "users/show.html.erb" do
   end
 
   it 'renders user first and last names' do
-  	render
-  	expect(rendered).to have_content(@user.first_name)
-  	expect(rendered).to have_content(@user.last_name)
+    render
+    expect(rendered).to have_content(@user.first_name)
+    expect(rendered).to have_content(@user.last_name)
   end
 
   it 'should not display an edit button if it is not my profile' do
@@ -116,31 +118,17 @@ describe "users/show.html.erb" do
     expect(rendered).to have_text('Member for about 1 month')
   end
 
-  it 'renders a bio' do
+  it 'should render the users bio' do
     render
-    expect(rendered).to have_text 'Bio'
-    expect(rendered).to have_text 'Lonesome Cowboy'
+    expect(rendered).to have_text('Lonesome Cowboy')
   end
 
-  it 'renders no bio field' do
-    @user.bio = nil
-    assign :bio, @user.bio
-    render
-    expect(rendered).not_to have_text('Bio')
-  end
-
-  it 'renders the user title' do
+  it 'should render the users title' do
     render
     expect(rendered).to have_text('Philanthropist')
   end
 
   it 'displays GitHub profile if it is linked' do
-    @user.github_profile_url = nil
-    render
-    expect(rendered).to have_text('GitHub profile not linked')
-  end
-
-  it 'displays GitHub profile is not linked if it is not linked' do
     render
     expect(rendered).to have_link('Eric', href: 'http://github.com/Eric')
   end
@@ -157,19 +145,8 @@ describe "users/show.html.erb" do
     end
   end
 
-  it 'renders a tab view - nav-tabs' do
-    render
-    expect(rendered).to have_css('.nav-tabs')
-  end
-
-  it 'renders a tab view - tab panes' do
-    render
-    expect(rendered).to have_css('.tab-content')
-  end
-
   it 'renders list of followed projects' do
     render
-    expect(rendered).to have_css('#projects-show')
     @projects.each do |project|
       expect(rendered).to have_link(project.title, href: project_path(project))
     end
@@ -177,6 +154,8 @@ describe "users/show.html.erb" do
 
   it 'renders list of user skills' do
     render
-    expect(rendered).to have_css('#skills-show')
+    @user.skill_list.each do |skill|
+      expect(rendered).to have_text(skill)
+    end
   end
 end

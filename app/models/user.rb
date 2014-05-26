@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     !authentications.where(provider: provider).empty?
   end
 
+  def projects_joined
+    following_by_type('Project')
+  end
+
   def display_name
     name = [ self.first_name, self.last_name ].join(' ').squish
     if (name == '' || name == nil) && (self.email == '' || self.email == nil)

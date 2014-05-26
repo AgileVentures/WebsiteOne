@@ -25,14 +25,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.friendly.find(params[:id])
-    @skills = @user.skill_list
-    @users_projects = @user.following_by_type('Project')
 
     if !@user.display_profile  && (current_user.try(&:id) != @user.id)
       flash[:notice] = 'User has set his profile to private'
       redirect_to root_path
-    else
-      @youtube_videos  = Youtube.user_videos(@user) if @user
+    elsif @user
+      @youtube_videos  = Youtube.user_videos(@user)
+      @youtube_videos = @youtube_videos.first(5) if @youtube_videos
     end
   end
 end

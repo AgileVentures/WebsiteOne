@@ -1,0 +1,48 @@
+<div class="col-sm-12 col-xs-6">
+  <img src="<%= presenter.gravatar_src(size: 200) %>"
+    class="thumbnail img-rounded media-object" alt=""/>
+</div>
+
+<div class="col-sm-12 col-xs-6 user-summary">
+  <ul>
+    <h3><%= presenter.display_name %></h3>
+    <% if presenter.object.title_list.count > 0 %>
+      <li><%= presenter.title_list %></li>
+    <% end %>
+    <% if presenter.country.present? %>
+      <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country %></li>
+    <% end %>
+
+    <li>
+      <i class="fa fa-calendar-o fa-lg"></i>
+      Member for <%= presenter.object_age_in_words %>
+    </li>
+
+    <% if presenter.github_profile_url.present? %>
+      <li>
+        <i class="fa fa-github-alt fa-lg"></i>
+        <%= presenter.github_link %>
+      </li>
+    <% end %>
+
+    <% if presenter.display_email %>
+      <li><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></li>
+    <% end %>
+
+    <% if presenter.display_hire_me %>
+      <li>
+        <%= link_to 'Hire me', user_path(presenter.user),
+          { remote: true, class: 'user-profile-btn',
+            data: { toggle: 'modal', target: '#modal-window'} } %>
+      </li>
+    <% end %>
+
+    <% if presenter.object.eql?(current_user) %>
+      <li>
+        <%= link_to 'Edit', edit_user_registration_path,
+          class: 'user-profile-btn user-restricted',
+          type: 'button' %>
+      </li>
+    <% end %>
+  </ul>
+</div>

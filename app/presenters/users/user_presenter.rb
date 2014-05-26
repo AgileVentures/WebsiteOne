@@ -2,8 +2,22 @@ require_relative '../base_presenter'
 
 class UserPresenter < BasePresenter
 
+  alias_method :user, :object
+
   def display_name
-    object.display_name
+    user.display_name
+  end
+
+  def has_skills?
+    !user.skill_list.blank?
+  end
+
+  def joined_projects?
+    !user.projects_joined.blank?
+  end
+
+  def has_bio?
+    !object.bio.blank?
   end
 
   def title_list
