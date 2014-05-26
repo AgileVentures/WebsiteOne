@@ -10,7 +10,7 @@ class AuthenticationsController < ApplicationController
 
     if current_user.present?
       if authentication.present?
-        AttemptLoginWithAuthService.(current_user, authentication, 
+        AttemptLoginWithAuthService.new(current_user, authentication).call( 
                                      @path, 
                                     success: ->(authentication){ 
           flash[:notice] = 'Signed in successfully.'
