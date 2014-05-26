@@ -2,23 +2,6 @@ module ApplicationHelper
 
   include ArticlesHelper
 
-  def gravatar_for(email, options = {size: 80})
-    hash = Digest::MD5::hexdigest(email.strip.downcase)
-    "https://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
-  end
-
-  def current_user_details
-    if current_user.present?
-      if current_user.first_name.present?
-        ([current_user.first_name, current_user.last_name].join(' '))
-      else
-        (current_user.email).split('@').first
-      end
-    else
-      'Something is wrong'
-    end
-  end
-
   def user_details(id)
     user = User.find_by_id(id)
     if user.present?
@@ -154,5 +137,9 @@ module ApplicationHelper
         'from across the world with various levels of competence and experience in software development. We hold ' +
         'scrum meetings and pair programming sessions every day with participants from all time zones and on all ' +
         'levels. Come and join us.'
+  end
+
+  def present(model)
+    yield(model.presenter)
   end
 end

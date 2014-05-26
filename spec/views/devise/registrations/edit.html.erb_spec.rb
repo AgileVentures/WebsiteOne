@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'devise/registrations/edit.html.erb' do
   before(:each) do
     #stubbing out devise methods
-    @user = User.new
+    @user = FactoryGirl.build(:user)
     @user.stub(:all_following).and_return([ stub_model(Project, title: 'Title 1'), stub_model(Project, title: 'Title 2') ])
     view.stub(:current_user).and_return(@user)
     view.stub(:resource).and_return(@user)
@@ -21,12 +21,9 @@ describe 'devise/registrations/edit.html.erb' do
   end
 
   it 'shows avatar image' do
-    view.stub(:gravatar_for).and_return('img_link')
     render
-    expect(rendered).to have_css('img')
-    expect(rendered).to have_xpath("//img[contains(@src, 'img_link')]")
+    expect(rendered).to have_css('img.thumbnail')
   end
-
 
   it 'shows required user fields' do
     render
