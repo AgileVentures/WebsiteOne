@@ -69,7 +69,7 @@ describe "users/show.html.erb" do
 
   it 'should render the users gravatar image' do
     render
-    expect(rendered).to have_css('img.thumbnail[src*=gravatar]')
+    expect(rendered).to have_css('img[src*=gravatar]')
   end
 
   it 'renders user first and last names' do

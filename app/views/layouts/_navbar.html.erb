@@ -6,7 +6,7 @@
       <% if user_signed_in? %>
         <% present current_user do |presenter| %>
           <a href="<%= user_path(current_user) %>">
-            <img id="user-gravatar" src="<%= presenter.gravatar_src %>" class="img-circle">
+            <%= presenter.gravatar_image(size: 80, id: 'user-gravatar', class: 'img-circle') %>
           </a>
           <div class="dropdown">
             <a href="#" id="account-dropdown" data-toggle="dropdown">

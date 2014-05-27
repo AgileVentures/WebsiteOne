@@ -32,7 +32,7 @@ Feature: As a site user
     Then "Display profile" should not be checked
     And I click "Update"
     And I am on the "Our members" page
-    Then I should not see "Bob Butcher"
+    Then I should not see "Bob Butcher" within the main content
 
   Scenario: Should be able to make my profile public again
     Given I am logged in as "Bob"

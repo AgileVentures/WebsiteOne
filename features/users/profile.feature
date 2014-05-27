@@ -43,7 +43,6 @@ Feature: As a user of the site
     Given user "Bob" follows projects:
       | title         | description             | status |
       | hello world   | greetings earthlings    | active |
-      # | hello mars    | greetings aliens        | inactive |
       | hello jupiter | greetings jupiter folks | active |
     When I click "Bob Butcher"
     Then I should be on the "user profile" page for "Bob"

@@ -29,6 +29,11 @@ class UserPresenter < BasePresenter
     "https://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
   end
 
+  def gravatar_image(options={size: 80})
+    image_tag(gravatar_src(options), width: options[:size], id: options[:id],
+              height: options[:size], alt: display_name, class: options[:class])
+  end
+
   def email_link(text=nil)
     link_to(object.email, (text or object.email))
   end

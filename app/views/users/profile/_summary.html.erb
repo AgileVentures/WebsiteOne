@@ -1,6 +1,6 @@
 <div class="col-md-12 col-sm-6 col-xs-12" style="padding: 0">
-  <img src="<%= presenter.gravatar_src(size: 200) %>"
-    class="thumbnail img-rounded media-object" alt=""/>
+  <%= presenter.gravatar_image(size: 200,
+                               class: "img-rounded media-object pull-left") %>
 </div>
 
 <div class="col-md-12 col-sm-6 col-xs-12 user-summary" style="padding: 0">
