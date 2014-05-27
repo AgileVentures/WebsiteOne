@@ -1,6 +1,2 @@
-class Scrum < ActiveRecord::Base
-
+class Scrum
 end
-
-
-
