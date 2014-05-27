@@ -10,14 +10,16 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
   include CustomErrors
-
+  
   protected
+
+  alias_method :old_devise_parameter_sanitizer, :devise_parameter_sanitizer
   # overriding the devise sanitizer class to allow for custom fields to be permitted for mass assignment
   def devise_parameter_sanitizer
     if resource_class == User
       User::ParameterSanitizer.new(User, :user, params)
     else
-      super
+      old_devise_parameter_sanitizer
     end
   end
 
