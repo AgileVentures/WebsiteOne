@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20140606204845) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "youtube_url"
   end
 
   create_table "static_pages", force: true do |t|

@@ -55,3 +55,10 @@ end
 After('@omniauth, @omniauth-with-email') do
   OmniAuth.config.test_mode = false
 end
+
+Before('@scrum_query') do
+  VCR.insert_cassette(
+    'spec/fixtures/cassettes/scrums_controller/videos_by_query.yml'
+  )
+end
+After('@scrum_query') { VCR.eject_cassette }
