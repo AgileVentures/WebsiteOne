@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe ScrumsController do
 
-  vcr_index = {cassette_name: 'scrums_controller/videos_by_query'}
+  vcr_index = {cassette_name: 'scrums_controller/videos_by_query',
+               record: :new_episodes}
   describe '#index', vcr: vcr_index do
     context '@scrums instance variable' do
       before { get :index }
