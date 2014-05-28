@@ -58,7 +58,7 @@ end
 
 Before('@scrum_query') do
   VCR.insert_cassette(
-    'spec/fixtures/cassettes/scrums_controller/videos_by_query.yml'
+    'scrums_controller/videos_by_query'
   )
 end
 After('@scrum_query') { VCR.eject_cassette }
