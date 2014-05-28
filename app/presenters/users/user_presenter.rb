@@ -16,10 +16,6 @@ class UserPresenter < BasePresenter
     !user.projects_joined.blank?
   end
 
-  def has_bio?
-    !object.bio.blank?
-  end
-
   def title_list
     "<span class=\"member-title\">#{object.title_list.join(', ')}</span>".html_safe
   end
