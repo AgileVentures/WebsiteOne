@@ -11,7 +11,7 @@ describe Scrum do
       expect(subject.videos.length).to eq 20
     end
   end
-  describe '#get_last_query_date'do
+  describe '#get_last_query_date' do
     context 'no scrums in database' do
       it 'should return the stored date and time of the last YouTubeIt API query' do
         expect(Scrum.get_last_query_date).to be_nil

@@ -1,5 +1,7 @@
 class Scrum
-  def get_last_query_date
+  def self.get_last_query_date
     nil
   end
+
+
 end
