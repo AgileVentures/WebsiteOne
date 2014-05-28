@@ -6,7 +6,7 @@
 <div class="col-md-12 col-sm-6 col-xs-12 user-summary" style="padding: 0">
   <ul>
     <h3><%= presenter.display_name %></h3>
-    <% if presenter.title_list.count > 0 %>
+    <% if presenter.has_title? %>
       <li><%= presenter.title_list %></li>
     <% end %>
     <% if presenter.country? %>

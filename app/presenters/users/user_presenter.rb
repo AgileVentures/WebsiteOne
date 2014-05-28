@@ -17,28 +17,34 @@ class UserPresenter < BasePresenter
   end
 
   def title_list
-    "<span class=\"member-title\">#{object.title_list.join(', ')}</span>".html_safe
+    content_tag(:span, user.title_list.join(', '), class: 'member-title')
   end
 
-  def gravatar_src(options={size: 80})
-    hash = Digest::MD5::hexdigest(object.email.strip.downcase)
+  def has_title?
+    user.title_list.count > 0
+  end
+
+  def gravatar_src(options={})
+    options = { size: 80 }.merge(options)
+    hash = Digest::MD5::hexdigest(user.email.strip.downcase)
     "https://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
   end
 
-  def gravatar_image(options={size: 80})
+  def gravatar_image(options={})
+    options = { size: 80 }.merge(options)
     image_tag(gravatar_src(options), width: options[:size], id: options[:id],
               height: options[:size], alt: display_name, class: options[:class])
   end
 
   def email_link(text=nil)
-    link_to(object.email, (text or object.email))
+    link_to(user.email, (text or user.email))
   end
 
   def github_username
-    object.github_profile_url.split('/').last if object.github_profile_url
+    user.github_profile_url.split('/').last if user.github_profile_url
   end
 
   def github_link
-    link_to(github_username, object.github_profile_url)
+    link_to(github_username, user.github_profile_url)
   end
 end
