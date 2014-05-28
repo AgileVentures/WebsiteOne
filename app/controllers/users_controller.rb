@@ -26,12 +26,17 @@ class UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
 
-    if !@user.display_profile  && (current_user.try(&:id) != @user.id)
+    if should_display_user?(@user)
+      @youtube_videos  = Youtube.user_videos(@user).try(:first, 5)
+    else
       flash[:notice] = 'User has set his profile to private'
       redirect_to root_path
-    elsif @user
-      @youtube_videos  = Youtube.user_videos(@user)
-      @youtube_videos = @youtube_videos.first(5) if @youtube_videos
     end
+  end
+
+  private
+
+  def should_display_user?(user)
+    user.display_profile || current_user == @user
   end
 end
