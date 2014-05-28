@@ -83,8 +83,7 @@ describe UsersController do
     context 'with followed projects' do
       it 'it renders an error message when accessing a private profile' do
         @user.stub(display_profile: false)
-        get 'show', id: @user.friendly_id
-        expect(response).to redirect_to root_path
+        expect{get 'show', id: @user.friendly_id}.to raise_error
       end
     end
   end

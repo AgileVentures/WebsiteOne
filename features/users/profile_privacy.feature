@@ -15,15 +15,11 @@ Feature: As a site user
     Then I should not see "Alice Jones"
     And I should see "Bob Butcher"
 
+  @allow-rescue
   Scenario: Visitor should not be able to access a private profile
     Given I am not logged in
     And I visit Alice's profile page
-    Then I should see "User has set his profile to private"
-
-  Scenario: A logged in user should not be able to access a private profile
-    Given I am logged in
-    And I visit Alice's profile page
-    Then I should see "User has set his profile to private"
+    Then I should not see "Alice Jones"
 
   Scenario: Should be able to make my profile private
     Given I am logged in as "Bob"

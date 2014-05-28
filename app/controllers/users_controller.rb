@@ -29,8 +29,7 @@ class UsersController < ApplicationController
     if should_display_user?(@user)
       @youtube_videos  = Youtube.user_videos(@user).try(:first, 5)
     else
-      flash[:notice] = 'User has set his profile to private'
-      redirect_to root_path
+      raise ActiveRecord::RecordNotFound.new("User has not exposed his profile publicly")
     end
   end
 
