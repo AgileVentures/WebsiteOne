@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   include Youtube
 
   def index
-    @users = User.where('display_profile = ?', true).order(:created_at)
+    @users = User.where(display_profile: true)
+      .order(:created_at)
+      .paginate(per_page: 30, page: params[:page])
   end
 
   def hire_me_contact_form

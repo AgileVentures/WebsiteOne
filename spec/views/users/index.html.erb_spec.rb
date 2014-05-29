@@ -4,6 +4,7 @@ describe "users/index.html.erb" do
   before(:each) do
     @users = []
     4.times { @users << FactoryGirl.build(:user) }
+    @users.stub(total_pages: 1)
   end
 
   it 'should display a list of users' do
@@ -18,5 +19,10 @@ describe "users/index.html.erb" do
     @users.each do |user|
       expect(rendered).to have_xpath("//a[contains(@href, '/users/#{user.slug}')]")
     end
+  end
+
+  it 'should be paginated' do
+    expect(@users).to receive(:total_pages)
+    render
   end
 end
