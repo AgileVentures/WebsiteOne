@@ -26,4 +26,8 @@ class UserPresenter < BasePresenter
   def github_link
     link_to(github_username, object.github_profile_url)
   end
+
+  def timezone 
+    TimezoneRetriever.for(user)
+  end
 end
