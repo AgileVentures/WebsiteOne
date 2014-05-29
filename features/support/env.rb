@@ -86,3 +86,4 @@ Geocoder::Lookup::Test.add_stub(
     }.as_json
 ]
 )
+WebMock.allow_net_connect!

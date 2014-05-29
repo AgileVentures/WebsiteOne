@@ -28,6 +28,6 @@ class UserPresenter < BasePresenter
   end
 
   def timezone 
-    TimezoneRetriever.for(user)
+    TimezoneRetrieverService.for(object)
   end
 end
