@@ -25,8 +25,6 @@ module WebsiteOne
 
     config.assets.enabled = true
 
-    config.autoload_paths += %W( #{config.root}/lib )
+    config.autoload_paths += Dir[Rails.root.join('app', '**/')]
   end
-
-
 end
