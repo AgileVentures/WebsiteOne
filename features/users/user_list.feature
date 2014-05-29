@@ -26,7 +26,7 @@ Feature: As a site owner
       | Croutch     |
       | Dave        |
     And I should see "5" user avatars
-    And I should see "European"
+    And I should see "Central European Summer Time, UTC+1"
 
   # Bryan: Using offline stubs, it would be tedious to manually simulate all possible geo locations...
 #  Scenario: Show users location
