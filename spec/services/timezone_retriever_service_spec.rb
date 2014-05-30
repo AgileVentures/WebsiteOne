@@ -24,11 +24,11 @@ describe TimezoneRetrieverService do
 
   context '.for' do
     it 'returns the timezone name for a given user' do
-      expect(described_class.for(user)).to include 'Central European Summer Time'
+      expect(described_class.for(user).name).to eql 'Central European Summer Time'
     end
 
     it 'returns utc offset in hours for a given user' do
-      expect(described_class.for(user)).to include 'UTC+1'
+      expect(described_class.for(user).offset).to eql 'UTC+1'
     end
   end
 
