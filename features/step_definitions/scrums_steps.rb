@@ -10,6 +10,21 @@ Then(/^I should see 20 scrums in descending order by published date:$/) do
   expect(dates.count).to eq(20)
   expect(dates.sort { |x,y| y <=> x }).to eq(dates)
 end
+Given(/^I play a video$/) do
+    pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should see a modal window with the video$/) do
+    pending # express the regexp above with the code you wish you had
+end
+
+When(/^I close the video window$/) do
+    pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the video should stop playing$/) do
+    pending # express the regexp above with the code you wish you had
+end
 
 #TODO: Marcelo: we will use below code to persist scrums to db
 
