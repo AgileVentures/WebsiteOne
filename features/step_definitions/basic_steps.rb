@@ -41,10 +41,6 @@ Given(/^I (?:visit|am on) the site$/) do
   visit root_path
 end
 
-Given(/^I visit "(.*?)"$/) do |path|
-  visit path
-end
-
 # WHEN steps
 When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
@@ -288,3 +284,12 @@ end
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
   page.should have_css "img[src*=\"#{source}\"]"
 end
+
+
+Then(/^I should see a timeline for the scrums$/) do
+  pending
+end
+
+
+
+
