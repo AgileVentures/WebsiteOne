@@ -12,10 +12,10 @@ Feature: Scrums Index
     Given I visit "/scrums/index" page
     And I play a video
     Then I should see a modal window with the video
-  
-  Scenario: Video should stop when window is closed
-    Given I visit "/scrums/index" page
-    And I play a video
-    Then I should see a modal window with the video
-    When I close the video window
-    Then the video should stop playing
+
+#  Scenario: Video should stop when window is closed
+#    Given I visit "/scrums/index" page
+#    And I play a video
+#    Then I should see a modal window with the video
+#    When I close the video window
+#    Then the video should stop playing
