@@ -11,10 +11,11 @@ Feature: As a site owner
       |            | Croutch   | c.croutch@enterprise.us |
       | Dave       |           | dave@dixons.me          |
     And I am logged in as user with email "brett@example.com", with password "12345678"
-#  "71.212.123.5" # ipd home (Denver,CO or Renton,WA)
-# "208.87.35.103" # websiteuk.com -- Nassau, Bahamas
-# "50.78.167.161" # HOL Seattle, WA
+    #  "71.212.123.5" # ipd home (Denver,CO or Renton,WA)
+    # "208.87.35.103" # websiteuk.com -- Nassau, Bahamas
+    # "50.78.167.161" # HOL Seattle, WA
 
+  @timezone_query
   Scenario: Having All Users page
     When I click "Members" within the navbar
     Then I should be on the "our members" page
@@ -25,6 +26,7 @@ Feature: As a site owner
       | Croutch     |
       | Dave        |
     And I should see "5" user avatars
+    And I should see "Central European Summer Time, UTC+1"
 
   # Bryan: Using offline stubs, it would be tedious to manually simulate all possible geo locations...
 #  Scenario: Show users location

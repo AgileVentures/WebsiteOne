@@ -1,0 +1,1823 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401329488
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 02:11:29 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 02:11:28 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401329488
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 02:11:29 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 02:11:29 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401329489
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 02:11:30 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 02:11:29 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401329489
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 02:11:30 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 02:11:29 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401329489
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 02:11:30 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 02:11:30 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381328
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:35:28 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:35:28 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381328
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:35:29 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:35:28 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381328
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:35:29 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:35:29 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381329
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:35:29 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:35:29 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381329
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:35:30 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:35:29 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381515
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:38:35 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:38:35 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381515
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:38:35 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:38:35 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381515
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:38:36 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:38:36 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381516
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:38:36 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:38:36 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401381516
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 29 May 2014 16:38:37 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Thu, 29 May 2014 16:38:36 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401408973
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:14 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:14 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401408974
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:14 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:14 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401408974
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:15 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:14 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401408974
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:15 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:15 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401408975
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:15 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:15 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401409012
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:53 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:53 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401409013
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:54 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:53 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401409013
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:54 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:54 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401409014
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:55 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:54 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401409014
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:16:55 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:16:55 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401410887
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:48:07 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:48:07 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401410887
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:48:08 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:48:07 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401410887
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:48:08 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:48:08 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401410888
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:48:08 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:48:08 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401410888
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:48:09 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:48:08 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401411204
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:53:25 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:53:25 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401411205
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:53:25 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:53:25 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401411205
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:53:26 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:53:25 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401411205
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:53:26 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:53:26 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/timezone/json?location=57.9333,12.5167&sensor=false&timestamp=1401411206
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 30 May 2014 00:53:27 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 443:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "dstOffset" : 3600,
+           "rawOffset" : 3600,
+           "status" : "OK",
+           "timeZoneId" : "Europe/Stockholm",
+           "timeZoneName" : "Central European Summer Time"
+        }
+    http_version: 
+  recorded_at: Fri, 30 May 2014 00:53:26 GMT
+recorded_with: VCR 2.9.2

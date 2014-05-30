@@ -51,3 +51,6 @@ end
 After('@omniauth, @omniauth-with-email') do
   OmniAuth.config.test_mode = false
 end
+
+Before('@timezone_query') { VCR.insert_cassette('timezones/query') }
+After('@timezone_query') { VCR.eject_cassette }
