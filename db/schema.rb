@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 20140606204845) do
     t.datetime "updated_at"
     t.string   "url"
     t.string   "slug"
-    t.string   "scrum_preview"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
