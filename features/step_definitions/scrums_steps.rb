@@ -5,10 +5,10 @@ Given(/^I visit "(.*?)" page$/) do |path|
 end
 
 
-Then(/^I should see 20 scrums in descending order by published date:$/) do |table|
-  expected_order = table.raw.flatten
-  actual_order = page.all('li.timeline-title').collect(&:text)
-  actual_order.should eq expected_order
+Then(/^I should see 20 scrums in descending order by published date:$/) do
+  dates = page.text.scan(/\d{4}-\d{2}-\d{2}/)
+  expect(dates.count).to eq(20)
+  expect(dates.sort { |x,y| y <=> x }).to eq(dates)
 end
 
 #TODO: Marcelo: we will use below code to persist scrums to db
