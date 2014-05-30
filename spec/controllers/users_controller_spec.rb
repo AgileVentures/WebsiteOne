@@ -2,30 +2,15 @@ require 'spec_helper'
 
 describe UsersController do
 
-  describe "GET 'index'" do
-    let(:proxy) { User }
-    before(:each) do
-      User.stub(where: proxy, order: proxy, paginate: proxy)
+  describe "GET index" do
+    it 'should return a status code of 200' do
+      expect(response.code).to eq('200')
     end
 
-    it 'should be paginated' do
-      expect(proxy).to receive(:paginate)
-      get 'index'
-    end
-
-    it 'should filter by the display_profile property' do
-      expect(proxy).to receive(:where).with(display_profile: true)
-      get 'index'
-    end
-
-    it 'should be ordered by the creation date' do
-      expect(proxy).to receive(:order).with(:created_at)
-      get 'index'
-    end
-
-    it 'should assign the result to @users' do
-      get 'index'
-      expect(assigns(:users)).to eq(proxy)
+    it 'should assign the results of the search to @users' do
+      user = FactoryGirl.create(:user)
+      get :index
+      expect(assigns(:users)).to include(user)
     end
   end
 
