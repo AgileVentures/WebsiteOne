@@ -101,12 +101,17 @@
   p {
     color: $black;
     padding-left: 0;
+    margin-bottom: 5px;
 
     &.media-heading {
       color: $theme-main;
       font-size: 1.1em;
     }
   }
+}
+
+.media-item {
+  height: 100px;
 }
 
 /* CSS for USER PROFILE page */
