@@ -15,13 +15,6 @@
                 <img src="<%= presenter.gravatar_src %>" class="thumbnail img-rounded media-object">
               </a>
 
-<<<<<<< HEAD
-            <div class="media-body">
-              <p class="media-heading"><a href="<%= user_path user %>"><%= user.display_name %></a></p>
-              <p style="margin-left: 8px;"><%= user.country if user.country? %></p>
-            </div>
-          </li>
-=======
               <div class="media-body index-summary">
                 <p class="media-heading"><a href="<%= user_path(user) %>"><%= presenter.display_name %></a></p>
                 <% if user.title_list.count > 0 %>
@@ -33,7 +26,6 @@
               </div>
             </li>
           <% end %>
->>>>>>> 63270596170813d287cd88600b30a7ffdc027261
         <% end %>
       </ul>
     <% end %>
