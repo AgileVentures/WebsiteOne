@@ -2,28 +2,48 @@ class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
 
   def create
+    @path = request.env['omniauth.origin'] || root_path
+
     if request.env['omniauth.params']['youtube']
       link_to_youtube and return
     end
 
-    omniauth = request.env['omniauth.auth']
-    authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+    if current_user.present?
+      if authentication.present?
+        AttemptLoginWithAuthService.new(current_user, authentication).call( 
+                                     @path, 
+                                    success: ->(authentication){ 
+          flash[:notice] = 'Signed in successfully.'
+          sign_in_and_redirect(:user, authentication.user)
+        }, 
+                                    failure: ->(path) {
+          flash[:alert] = 'Another account is already associated with these credentials!'
+          redirect_to path
+        })
 
-    @path = request.env['omniauth.origin'] || root_path
+      else
+        create_new_authentication_for_current_user(@path)
+        profile_service_factory.(current_user, omniauth, failure: ->(current_user, provider){
+          flash[:alert] = "Linking your #{provider} profile has failed"
+          Rails.logger.error current_user.errors.full_messages
+        })
 
-    if authentication.present?
-      attempt_login_with_auth(authentication, @path)
-
-    elsif current_user
-      create_new_authentication_for_current_user(omniauth, @path)
-
+      end
     else
-      create_new_user_with_authentication(omniauth)
+      create_new_user_with_authentication
     end
+  end
 
-    if current_user && omniauth['provider']=='github' && current_user.github_profile_url.blank?
-      link_github_profile
-    end
+  def profile_service_factory 
+    "#{omniauth.fetch('provider').capitalize}ProfileService".constantize
+  end
+
+  def omniauth 
+    @omniauth ||= request.env['omniauth.auth']
+  end
+
+  def authentication 
+    @authentication ||= Authentication.find_by_provider_and_uid(omniauth.fetch('provider'), omniauth.fetch('uid'))
   end
 
   def failure
@@ -56,35 +76,11 @@ class AuthenticationsController < ApplicationController
 
   private
 
-  def link_github_profile
-    omniauth = request.env['omniauth.auth']
-
-    url = ''
-    begin
-      url = omniauth['info']['urls']['GitHub']
-    rescue NoMethodError
-      return
-    end
-
-    user = User.find(current_user.id)
-    if user.update_attributes(github_profile_url: url)
-      # success
-      current_user.reload
-    else
-      flash[:alert] = 'Linking your GitHub profile has failed'
-      Rails.logger.error user.errors.full_messages
-    end
-  end
-
   def link_to_youtube
-    user = current_user
-    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
-      user.youtube_id = Youtube.channel_id(token)
-      user.save
-    end
-
+    current_user.update_youtube_id_if(request.env['omniauth.auth']['credentials']['token'])
     redirect_to(request.env['omniauth.origin'] || root_path)
   end
+
 
   def unlink_from_youtube
     current_user.youtube_id = nil
@@ -93,39 +89,33 @@ class AuthenticationsController < ApplicationController
     redirect_to(params[:origin] || root_path)
   end
 
-  def attempt_login_with_auth(authentication, path)
-    if current_user.present? and authentication.user != current_user
-      flash[:alert] = 'Another account is already associated with these credentials!'
+  def create_authentication_for_user
+    current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid']).save
+  end
+
+  def create_new_authentication_for_current_user(path)
+    if create_authentication_for_user
+      # Bryan: TESTED
+      flash[:notice] = 'Authentication successful.'
       redirect_to path
     else
-      flash[:notice] = 'Signed in successfully.'
-      sign_in_and_redirect(:user, authentication.user)
+      # Bryan: TESTED
+      flash[:alert] = 'Unable to create additional profiles.'
+      redirect_to @path
     end
   end
 
-  def create_new_authentication_for_current_user(omniauth, path)
-    if auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-      if auth.save
-        # Bryan: TESTED
-        flash[:notice] = 'Authentication successful.'
-        redirect_to path
-      else
-        # Bryan: TESTED
-        flash[:alert] = 'Unable to create additional profiles.'
-        redirect_to @path
-      end
-    end
-  end
-
-  def create_new_user_with_authentication(omniauth)
+  def create_new_user_with_authentication
     user = User.new
     user.apply_omniauth(omniauth)
 
+    # if this is a brand new user
     if user.save
       # Bryan: TESTED
       Mailer.send_welcome_message(user).deliver
       flash[:notice] = 'Signed in successfully.'
       sign_in_and_redirect(:user, user)
+    # if this is a returning user
     else
       # Bryan: TESTED
       session[:omniauth] = omniauth.except('extra')
