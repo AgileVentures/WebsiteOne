@@ -25,6 +25,7 @@ Feature: Static pages
   Scenario: See Sponsor Banners
     When I am on the "projects" page
     Then I should see sponsor banner for "Makers Academy"
+    Then I should see sponsor banner for "AirPair"
     And I should see sponsor banner for "Agile Ventures"
     And I should see link "Become a supporter"
 

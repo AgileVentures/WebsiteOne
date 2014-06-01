@@ -224,4 +224,30 @@ describe User do
       user.receive_mailings.should be_true
     end
   end
+
+  describe '.search' do
+    subject { User.search(params) }
+    let(:params) { { per_page: 1 } }
+
+    before(:each) do
+      FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
+      FactoryGirl.create(:user, first_name: 'Marley', created_at: 2.days.ago)
+      FactoryGirl.create(:user, first_name: 'Janice', display_profile: false)
+    end
+
+    it 'should return paginated results' do
+      expect(subject.size).to eq(1)
+    end
+
+    it 'should be ordered by creation date' do
+      expect(subject.first.first_name).to eq('Bob')
+    end
+
+    it 'should be filtered by the display_profile property' do
+      params.merge!(per_page: 100)
+      results = subject.map(&:first_name)
+      expect(results).to include('Marley')
+      expect(results).not_to include('Janice')
+    end
+  end
 end
