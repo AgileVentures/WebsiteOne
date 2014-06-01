@@ -183,3 +183,15 @@ header#main_header {
     }
   }
 }
+
+@media (max-width: 768px) {
+  #nav {
+    height: auto;
+
+    #next-event {
+      display: block;
+      position: static;
+      text-align: center;
+    }
+  }
+}

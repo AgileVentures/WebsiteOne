@@ -5,6 +5,7 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password 'changeme'
     password_confirmation 'changeme'
+    display_profile true
     slug { "#{first_name} #{last_name}".parameterize }
   end
 end

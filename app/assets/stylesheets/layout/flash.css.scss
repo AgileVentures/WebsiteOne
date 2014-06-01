@@ -7,7 +7,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 100%;
+  width: 40%;
   font-size: 0.9em;
   text-transform: none;
   font-weight: normal;
@@ -19,8 +19,13 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
+  #flash-container {
+    height: auto;
+  }
+
   #flash-display {
-    width: 40%;
+    position: static;
+    width: 100%;
   }
 }

@@ -17,7 +17,6 @@ describe 'devise/registrations/edit.html.erb' do
     expect(rendered).to have_text('First name')
     expect(rendered).to have_text('Last name')
     expect(rendered).to have_text('Email')
-    expect(rendered).to have_text('Unhappy?')
   end
 
   it 'shows avatar image' do
@@ -40,22 +39,11 @@ describe 'devise/registrations/edit.html.erb' do
 
   end
 
-  it 'shows Cancel my account button' do
-    render
-    expect(rendered).to have_button('Cancel my account')
-  end
-
   it 'shows Update button' do
     render
     expect(rendered).to have_button('Update')
 
   end
-
-  it 'shows Cancel my account button' do
-    render
-    expect(rendered).to have_button('Cancel my account')
-  end
-
 
   it 'should render a checkbox for the public email option' do
     render
