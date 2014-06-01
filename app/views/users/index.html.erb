@@ -11,7 +11,7 @@
   </div>
 
   <% unless @users.empty? %>
-    <ul class="media-list">
+    <ul class="media-list row">
       <% @users.each_slice(3) do |slice| %>
         <% slice.each do |user| %>
           <% present user do |presenter| %>
@@ -35,6 +35,8 @@
         <% end %>
       <% end %>
     </ul>
-    <%= will_paginate @users %>
+    <div class="row">
+      <%= will_paginate @users %>
+    </div>
   <% end %>
 </div>

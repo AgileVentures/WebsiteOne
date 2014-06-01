@@ -1,3 +1,8 @@
+@mixin css-border-radius($args...) {
+  -webkit-border-radius: $args;
+  -mox-border-radius: $args;
+  border-radius: $args;
+}
 
 @mixin css-shadow($args...) {
   -moz-box-shadow: $args;
