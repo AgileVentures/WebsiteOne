@@ -92,16 +92,10 @@
   width: 100%;
   padding: 10px;
   height: 100%;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  border-radius: 5px;
   @include css-transition(background-color 0.3s ease);
-  @include css-transition(border-color 0.3s ease);
 
   &:hover {
     background-color: $highlight-color;
-    border-color: $theme-main;
   }
 
   p {
