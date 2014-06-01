@@ -40,7 +40,7 @@ describe 'OmniAuth authentication' do
               click_link "#{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
-          page.should have_content('Authentication failed.')
+          page.should have_content('invalid_credentials')
         end
 
         it 'should not allow removal of profiles without passwords' do

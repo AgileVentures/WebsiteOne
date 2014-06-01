@@ -2,7 +2,9 @@ require 'action_view'
 
 class BasePresenter
 
-  include ActionView::Helpers::UrlHelper, ActionView::Helpers::DateHelper
+  include ActionView::Helpers::UrlHelper,
+    ActionView::Helpers::DateHelper,
+    ActionView::Helpers::AssetTagHelper
 
   attr_reader :object
 

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   include Youtube
 
   def index
-    @users = User.where('display_profile = ?', true).order(:created_at)
+    @users = User.search(params)
   end
 
   def hire_me_contact_form
@@ -25,14 +25,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.friendly.find(params[:id])
-    @skills = @user.skill_list
-    @users_projects = @user.following_by_type('Project')
 
-    if !@user.display_profile  && (current_user.try(&:id) != @user.id)
-      flash[:notice] = 'User has set his profile to private'
-      redirect_to root_path
+    if should_display_user?(@user)
+      @youtube_videos  = Youtube.user_videos(@user).try(:first, 5)
     else
-      @youtube_videos  = Youtube.user_videos(@user) if @user
+      raise ActiveRecord::RecordNotFound.new("User has not exposed his profile publicly")
     end
+  end
+
+  private
+
+  def should_display_user?(user)
+    user.display_profile || current_user == @user
   end
 end
