@@ -117,7 +117,7 @@ header#main_header {
   h3 {
     font-family: 'Kreon', serif;
     background: $theme-main;
-    border-radius: 3px;
+    @include css-border-radius(3px);
     font-size: 34px;
     padding: 12px 10px 6px 10px;
   }
@@ -134,7 +134,7 @@ header#main_header {
   .dropdown-menu {
     background: $theme-main;
     border-width: 0;
-    border-radius: 0;
+    @include css-border-radius(0);
     margin: 0;
     padding: 0;
     font-size: 0.9em;
@@ -176,7 +176,7 @@ header#main_header {
   #login-signup a {
     padding: 0 15px;
     text-align: center;
-    border-radius: 0;
+    @include css-border-radius(0);
 
     &:hover, &:active {
       color: $theme-darker;

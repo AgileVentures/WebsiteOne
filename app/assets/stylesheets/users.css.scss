@@ -73,17 +73,8 @@
   @include css-transition(border-color 0.3s ease);
 
   &:hover {
-    background-color: $highlight-color;
+    background-color: $light-bg-color;
     border-color: $theme-main;
-  }
-}
-
-.user-restricted {
-  color: $theme-lighter-dark;
-
-  &:hover {
-    color: $theme-darker;
-    border-color: $theme-darker;
   }
 }
 
@@ -92,10 +83,11 @@
   width: 100%;
   padding: 10px;
   height: 100%;
+  @include css-border-radius(10px);
   @include css-transition(background-color 0.3s ease);
 
   &:hover {
-    background-color: $highlight-color;
+    background-color: $light-bg-color;
   }
 
   p {
@@ -112,6 +104,7 @@
 
 .media-item {
   height: 100px;
+  margin-bottom: 30px;
 }
 
 /* CSS for USER PROFILE page */
