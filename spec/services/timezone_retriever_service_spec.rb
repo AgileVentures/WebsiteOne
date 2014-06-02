@@ -1,7 +1,6 @@
-#require_relative '../../app/services/timezone_retriever_service'
-#require 'active_support/all'
-#ENV["RAILS_ENV"] ||= 'test'
-require 'spec_helper'
+require_relative '../../app/services/timezone_retriever_service'
+require 'active_support/all'
+ENV["RAILS_ENV"] ||= 'test'
 
 describe TimezoneRetrieverService do
   context 'when the user has coords (happy path)' do

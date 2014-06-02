@@ -1,4 +1,4 @@
-if Rails.env == 'test'
+if ENV['RAILS_ENV'] == 'test'
   VCR.configure do |c|
     c.ignore_localhost = true
     c.default_cassette_options = {record: :once, match_requests_on: [:host]}
