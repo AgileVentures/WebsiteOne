@@ -15,7 +15,7 @@ Feature: As a site owner
     # "208.87.35.103" # websiteuk.com -- Nassau, Bahamas
     # "50.78.167.161" # HOL Seattle, WA
 
-  @timezone_query
+  @timezone_query_east
   Scenario: Having All Users page
     When I click "Members" within the navbar
     Then I should be on the "our members" page
