@@ -11,9 +11,12 @@ describe 'OmniAuth authentication' do
     @uid = '12345678'
     supported_auths.each do |provider, name|
       OmniAuth.config.mock_auth[provider.to_sym] = {
-          'provider'  => provider,
-          'uid'       => @uid,
-          'info'      => { 'email' => "#{name}@mock.com"}
+        'provider'  => provider,
+        'uid'       => @uid,
+        'info'      => {
+          'email' => "#{name}@mock.com",
+          'urls' => {'GitHub' => ''}
+        }
       }
     end
   end

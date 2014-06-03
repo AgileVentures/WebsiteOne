@@ -80,4 +80,10 @@ class User < ActiveRecord::Base
       .order(:created_at)
       .paginate(page: params[:page], per_page: params[:per_page])
   end
+
+  def update_youtube_id_if(token)
+    if token.present? && !youtube_id
+      update_attributes(youtube_id:Youtube.channel_id(token))
+    end
+  end
 end
