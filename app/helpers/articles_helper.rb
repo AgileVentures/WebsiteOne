@@ -25,10 +25,6 @@ module ArticlesHelper
     clean_html tags.map{ |tag| link_to tag, articles_path(tag: tag) }.join(', ')
   end
 
-  def vote_article_path(article, direction, user)
-    article_path(article) + '/vote/' + direction +'/user/' + user.id.to_s
-  end
-
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
       CodeRay.scan(code, language || :plaintext).div

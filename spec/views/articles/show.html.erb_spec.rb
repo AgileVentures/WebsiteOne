@@ -39,10 +39,9 @@ describe 'articles/show', type: :view do
     it 'should show article vote value' do
         render
         rendered.should have_content("Vote value: #{@article.upvotes.size-@article.downvotes.size}")
-        rendered.should_not have_link('Vote up')
-        rendered.should_not have_link('Vote down')
+        rendered.should_not have_link('Up Vote')
+        rendered.should_not have_link('Down Vote')
     end
-
   end
 
   context 'user is signed in' do
@@ -58,8 +57,8 @@ describe 'articles/show', type: :view do
 
     it 'renders the vote value and links' do
       render
-      rendered.should have_link('Vote up')
-      rendered.should have_link('Vote down')
+      rendered.should have_link('Up Vote')
+      rendered.should have_link('Down Vote')
       rendered.should have_content("Vote value: #{@article.upvotes.size-@article.downvotes.size}")
     end
 

@@ -57,6 +57,28 @@ class ArticlesController < ApplicationController
     @author = current_user
   end
 
+  # article voting
+  def upvote
+    @article = Article.friendly.find(params[:id])
+    @article.upvote_by current_user
+    flash[:notice] = "Successfully voted up the article \"#{@article.title}\""
+    redirect_to article_path(@article)
+  end
+
+  def downvote
+    @article = Article.friendly.find(params[:id])
+    @article.downvote_by current_user
+    flash[:notice] = "Successfully voted down the article \"#{@article.title}\""
+    redirect_to article_path(@article)
+  end
+
+  def cancelvote
+    @article = Article.friendly.find(params[:id])
+    @article.unvote_for current_user
+    flash[:notice] = "Cancelled vote for the article \"#{@article.title}\""
+    redirect_to article_path(@article)
+  end
+
   private
 
   def article_params
