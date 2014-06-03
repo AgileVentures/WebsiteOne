@@ -11,7 +11,7 @@ Feature: Scrums Index
   Scenario: Play button should bring up a modal YouTube player window
     Given I visit "/scrums/index" page
     And I play a video
-    Then I should see a modal window with the video
+
 
 #  Scenario: Video should stop when window is closed
 #    Given I visit "/scrums/index" page

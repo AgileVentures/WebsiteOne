@@ -13,14 +13,13 @@ end
 
 Given(/^I play a video$/) do
   playvideo = page.first(:xpath, "//h4[@class=\"timeline-title\"]/a[contains(@class,\"yt_link\")]")['href']
-
   click_link playvideo
 end
 
 
 
 Then(/^I should see a modal window with the video$/) do
-    pending # express the regexp above with the code you wish you had
+  pending
 end
 
 When(/^I close the video window$/) do
