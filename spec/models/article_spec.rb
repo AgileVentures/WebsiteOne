@@ -17,11 +17,11 @@ describe Article do
   end
 
   it 'should respond to upvotes' do
-    article.should respond_to :upvotes
+    article.should respond_to :get_upvotes
   end
 
   it 'should respond to downvotes' do
-    article.should respond_to :downvotes
+    article.should respond_to :get_downvotes
   end
 
 end

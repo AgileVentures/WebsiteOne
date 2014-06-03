@@ -15,8 +15,8 @@ describe 'articles/show', type: :view do
 		   )
     downvotes = [stub_model(ActsAsVotable::Vote),stub_model(ActsAsVotable::Vote)]
     upvotes = [stub_model(ActsAsVotable::Vote)]
-    allow(@article).to recieve(:upvotes).and_return(upvotes)
-    allow(@article).to recieve(:downvotes).and_return(downvotes)
+    allow(@article).to recieve(:get_upvotes).and_return(upvotes)
+    allow(@article).to recieve(:get_downvotes).and_return(downvotes)
   end
 
   context 'user is not signed in' do
@@ -38,7 +38,7 @@ describe 'articles/show', type: :view do
 
     it 'should show article vote value' do
         render
-        rendered.should have_content("Vote value: #{@article.upvotes.size-@article.downvotes.size}")
+        rendered.should have_content("Vote value: #{@article.get_upvotes.size-@article.get_downvotes.size}")
         rendered.should_not have_link('Up Vote')
         rendered.should_not have_link('Down Vote')
     end
@@ -59,7 +59,7 @@ describe 'articles/show', type: :view do
       render
       rendered.should have_link('Up Vote')
       rendered.should have_link('Down Vote')
-      rendered.should have_content("Vote value: #{@article.upvotes.size-@article.downvotes.size}")
+      rendered.should have_content("Vote value: #{@article.get_upvotes.size-@article.get_downvotes.size}")
     end
 
   end
