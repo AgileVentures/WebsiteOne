@@ -11,12 +11,9 @@ describe 'OmniAuth authentication' do
     @uid = '12345678'
     supported_auths.each do |provider, name|
       OmniAuth.config.mock_auth[provider.to_sym] = {
-        'provider'  => provider,
-        'uid'       => @uid,
-        'info'      => {
-          'email' => "#{name}@mock.com",
-          'urls' => {'GitHub' => ''}
-        }
+          'provider'  => provider,
+          'uid'       => @uid,
+          'info'      => { 'email' => "#{name}@mock.com"}
       }
     end
   end
@@ -43,7 +40,7 @@ describe 'OmniAuth authentication' do
               click_link "#{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
-          page.should have_content('invalid_credentials')
+          page.should have_content('Authentication failed.')
         end
 
         it 'should not allow removal of profiles without passwords' do
