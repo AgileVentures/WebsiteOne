@@ -11,12 +11,7 @@ Then(/^I should see 20 scrums in descending order by published date:$/) do
   expect(dates.sort { |x,y| y <=> x }).to eq(dates)
 end
 Given(/^I play a video$/) do
-  #http://www.youtube.com/v/Lj2aa65_KuA?version=3&f=videos&d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&app=youtube_gdata
-  debugger
-  elem = page.first(:xpath, "//h4[@class=\"timeline-title\"]/a[contains(@class,\"yt_link\")]")['id'] 
-  #//"http://www.youtube.com/embed/#{video[:id]}?enablejsapi=1"
-  page.click_link(elem)
-  puts 'lol'
+  page.first(:xpath, "//h4[@class=\"timeline-title\"]").click
 end
 
 Then(/^I should see a modal window with the video$/) do
