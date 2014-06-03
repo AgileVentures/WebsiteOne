@@ -18,6 +18,8 @@ end
 
 
 
+
+
 Then(/^I should see a modal window with the video$/) do
   pending
 end
