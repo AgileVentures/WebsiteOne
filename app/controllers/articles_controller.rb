@@ -74,7 +74,7 @@ class ArticlesController < ApplicationController
 
   def cancelvote
     @article = Article.friendly.find(params[:id])
-    @article.unvote_for current_user
+    @article.unvote_by current_user
     flash[:notice] = "Cancelled vote for the article \"#{@article.title}\""
     redirect_to article_path(@article)
   end

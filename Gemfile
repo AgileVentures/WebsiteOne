@@ -40,8 +40,8 @@ gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
+gem 'acts_as_votable', '~> 0.9.0'
 gem 'utf8-cleaner'
-gem 'acts_as_votable', '~> 0.8.0'
 
 gem 'yui-compressor'
 gem 'compass-rails'
