@@ -8,16 +8,20 @@ Feature: Scrums Index
     Given I visit "/scrums/index" page
     Then I should see 20 scrums in descending order by published date:
 
-  Scenario: Play button should bring up a modal YouTube player window
+  @javascript
+  Scenario: Clicking on the video should bring up a modal YouTube player window
     Given I visit "/scrums/index" page
-    Then I should see a modal window with title "AgileVenture"
-    And I click play to watch video
+    Then I should not see a modal window
+    And I click a scrum in timeline
+    Then I should see a modal window with title "AgileVenture EuroScrum and Pair Hookup and Open Pairing Session"
+    #And I click play to watch video
+
+  @javascript
+  Scenario: Closing an existing video and opening a new one should update the player
+   Given I am playing a video
+   When I stop the video
+   And I click a new video in timeline
+   Then the modal window should update to the selected video
 
 
 
-#  Scenario: Video should stop when window is closed
-#    Given I visit "/scrums/index" page
-#    And I play a video
-#    Then I should see a modal window with the video
-#    When I close the video window
-#    Then the video should stop playing
