@@ -18,7 +18,6 @@ Feature: Scrums Index
 
   @javascript
   Scenario: Closing an existing video and opening a new one should update the player
-   Given I am playing a video
    When I stop the video
    And I click a new video in timeline
    Then the modal window should update to the selected video
