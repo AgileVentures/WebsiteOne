@@ -8,7 +8,6 @@ module ScrumsHelper
         data: { content: video[:content], toggle: "modal", target: "#player" }
       }
     )
-    puts "lol"
   end
 
   def scrum_embed_link(video)
