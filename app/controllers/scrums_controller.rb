@@ -22,4 +22,6 @@ class ScrumsController < ApplicationController
         url: video.media_content[0].url
     }
   end
+
+
 end

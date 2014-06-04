@@ -12,18 +12,12 @@ Then(/^I should see 20 scrums in descending order by published date:$/) do
 end
 
 Given(/^I play a video$/) do
-<<<<<<< HEAD
-  playvideo = page.first(:xpath, "//h4[@class=\"timeline-title\"]/a[contains(@class,\"yt_link\")]")['href']
-  click_link playvideo
-=======
-  #http://www.youtube.com/v/Lj2aa65_KuA?version=3&f=videos&d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&app=youtube_gdata
-  debugger
-  elem = page.first(:xpath, "//h4[@class=\"timeline-title\"]/a[contains(@class,\"yt_link\")]")['id'] 
-  #//"http://www.youtube.com/embed/#{video[:id]}?enablejsapi=1"
-  page.click_link(elem)
-  puts 'lol'
->>>>>>> 6765e355a1925282fd40663c9e3ceee52f36ded2
+  #link = "http://www.youtube.com/v/Lj2aa65_KuA?version=3&f=videos&d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&app=youtube_gdata"
+  link = "http://www.youtube.com/v/KdcNSYIX0JQ?version=3&amp;f=videos&amp;d=AfpKN7G_219h8WqHh6SoEXEO88HsQjpE1a8d1GxQnGDm&amp;app=youtube_gdata"
+  visit(link)
 end
+
+
 
 
 
