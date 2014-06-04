@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
 
   acts_as_taggable_on :skills, :titles
 
-  #after_create Mailer.send_welcome_mail()
+  after_create :send_welcome_message
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
@@ -31,14 +32,7 @@ class User < ActiveRecord::Base
 
   self.per_page = 30
 
-
-
   acts_as_follower
-
-  def apply_omniauth(omniauth)
-    self.email = omniauth['info']['email'] if email.blank?
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-  end
 
   def password_required?
     (authentications.empty? || !password.blank?) && super
@@ -85,5 +79,9 @@ class User < ActiveRecord::Base
     if token.present? && !youtube_id
       update_attributes(youtube_id:Youtube.channel_id(token))
     end
+  end
+
+  def send_welcome_message
+    Mailer.send_welcome_message(self).deliver
   end
 end

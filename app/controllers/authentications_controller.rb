@@ -3,14 +3,10 @@ class AuthenticationsController < ApplicationController
   before_action :prevent_oauth_forgery, only: [:create]
 
   def create
-    if current_user
-      create_new_authentication_for_current_user(redirect_path)
+    if authentication.present?
+      login_with_oauth
     else
-      if authentication.present?
-        attempt_login_with_auth(redirect_path)
-      else
-        create_new_user_with_authentication
-      end
+      CreateAuthenticationService.new(omniauth, current_user || User.new)
     end
   end
 
@@ -90,56 +86,8 @@ class AuthenticationsController < ApplicationController
     redirect_to(params[:origin] || root_path)
   end
 
-  def attempt_login_with_auth(path)
+  def login_with_oauth
     flash[:notice] = 'Signed in successfully.'
     sign_in_and_redirect(:user, authentication.user)
   end
-
-  def create_authentication_for_user
-    current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid']).save
-  end
-
-  def create_new_authentication_for_current_user(path)
-    if create_authentication_for_user
-      # Bryan: TESTED
-      flash[:notice] = 'Authentication successful.'
-      redirect_to path
-    else
-      # Bryan: TESTED
-      flash[:alert] = 'Unable to create additional profiles.'
-      redirect_to redirect_path
-    end
-    if omniauth['provider']=='github' && current_user.github_profile_url.blank?
-      link_github_profile
-    elsif request.env['omniauth.params']['youtube']
-      link_to_youtube
-    end
-  end
-
-  def create_new_user_with_authentication
-    user = User.new
-    user.apply_omniauth(omniauth)
-
-    if user.save
-      # Bryan: TESTED
-      Mailer.send_welcome_message(user).deliver
-      flash[:notice] = 'Signed in successfully.'
-      sign_in_and_redirect(:user, user)
-    else
-      # Bryan: TESTED
-      session[:omniauth] = omniauth.except('extra')
-      redirect_to new_user_registration_url
-    end
-  end
 end
-
-
-
-
-
-
-
-
-
-
-
