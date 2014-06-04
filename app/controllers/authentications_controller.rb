@@ -1,14 +1,10 @@
 class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
+  before_action :prevent_oauth_forgery, only: [:create]
 
   def create
     if current_user
-      if authentication.present? and authentication.user != current_user
-        flash[:alert] = 'Another account is already associated with these credentials!'
-        redirect_to redirect_path
-      else
-        create_new_authentication_for_current_user(redirect_path)
-      end
+      create_new_authentication_for_current_user(redirect_path)
     else
       if authentication.present?
         attempt_login_with_auth(redirect_path)
@@ -16,24 +12,6 @@ class AuthenticationsController < ApplicationController
         create_new_user_with_authentication
       end
     end
-  end
-
-  def redirect_path
-    @path ||= request.env['omniauth.origin'] || root_path
-  end
-
-  def omniauth 
-    @omniauth ||= request.env['omniauth.auth']
-  end
-
-  def authentication 
-    @authentication ||= Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-  end
-
-  def failure
-    # Bryan: TESTED
-    flash[:alert] = 'Authentication failed.'
-    redirect_to root_path
   end
 
   def destroy
@@ -59,6 +37,28 @@ class AuthenticationsController < ApplicationController
 
 
   private
+
+  def forged_request?
+    (current_user && authentication) && authentication.user != current_user
+  end
+
+  def prevent_oauth_forgery
+    return unless forged_request?
+    flash[:alert] = 'Another account is already associated with these credentials!'
+    redirect_to redirect_path
+  end
+
+  def redirect_path
+    @path ||= request.env['omniauth.origin'] || root_path
+  end
+
+  def omniauth 
+    @omniauth ||= request.env['omniauth.auth']
+  end
+
+  def authentication 
+    @authentication ||= Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+  end
 
   def link_github_profile
     url = ''

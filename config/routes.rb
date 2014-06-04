@@ -29,7 +29,7 @@ WebsiteOne::Application.routes.draw do
 
   get 'projects/:project_id/:id', to: 'documents#show',:format => false
   get '/auth/:provider/callback' => 'authentications#create', :format => false
-  get '/auth/failure' => 'authentications#failure', :format => false
+  get '/auth/failure', to: redirect { |_, req| req.flash[:alert] = "Authentication failed."; '/' }
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
   post 'mail_contact_form', to: 'visitors#send_contact_form', :format => false
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
