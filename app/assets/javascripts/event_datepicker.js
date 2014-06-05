@@ -1,5 +1,4 @@
-
-WSO.define('EventDatePicker', function() {
+WebsiteOne.define('EventDatePicker', function() {
   function init() {
     $( ".datepicker" ).datepicker({
       format: 'yyyy-mm-dd'

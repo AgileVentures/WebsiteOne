@@ -17,14 +17,14 @@ describe('Event Countdown', function () {
 
 
         reloadScript('event_countdown.js');
-        this.update = spyOn(WSO.EventCountdown, 'update').and.callThrough();
+        this.update = spyOn(WebsiteOne.EventCountdown, 'update').and.callThrough();
         this.clearTimeout = spyOn(window, 'clearTimeout').and.callThrough();
         this.dateParse = spyOn(Date, 'parse').and.callThrough();
         $(document).trigger('page:load');
     });
 
-    it('should define a new WSO module called "EventCountdown"', function () {
-        expect(WSO.EventCountdown).toBeDefined();
+    it('should define a new WebsiteOne module called "EventCountdown"', function () {
+        expect(WebsiteOne.EventCountdown).toBeDefined();
     });
 
     describe('init()', function () {
@@ -33,15 +33,14 @@ describe('Event Countdown', function () {
         });
 
         describe('when the clock is present', function () {
-            it('parses the time into a date object', function () {
-                this.data.and.returnValue('fake date object');
-                WSO.EventCountdown.init();
+            it('parses the time into a date object', function () { this.data.and.returnValue('fake date object');
+                WebsiteOne.EventCountdown.init();
 
                 expect(this.dateParse).toHaveBeenCalledWith('fake date object');
             });
             it('parses the event time, url, and name from the html', function () {
                 this.data.calls.reset();
-                WSO.EventCountdown.init();
+                WebsiteOne.EventCountdown.init();
 
                 expect(this.data).toHaveBeenCalledWith(jasmine.any(Object), "event-time");
                 expect(this.data).toHaveBeenCalledWith(jasmine.any(Object), "event-url");
@@ -50,7 +49,7 @@ describe('Event Countdown', function () {
 
             it('calls update', function () {
                 this.update.calls.reset();
-                WSO.EventCountdown.init();
+                WebsiteOne.EventCountdown.init();
                 expect(this.update).toHaveBeenCalled()
             });
         });
@@ -58,7 +57,7 @@ describe('Event Countdown', function () {
             it('does not bother parsing the DOM', function () {
                 this.data.calls.reset();
                 setFixtures(); // clears all html
-                WSO.EventCountdown.init();
+                WebsiteOne.EventCountdown.init();
                 expect(this.data).not.toHaveBeenCalled()
             });
         });
@@ -71,9 +70,9 @@ describe('Event Countdown', function () {
             event = new Date;
             event.setMinutes(event.getMinutes() + 30); // event in 30 mins
             this.dateParse.and.returnValue(event);
-            WSO.EventCountdown.init();
+            WebsiteOne.EventCountdown.init();
             floor = spyOn(Math, 'floor').and.callThrough();
-            WSO.EventCountdown.update();
+            WebsiteOne.EventCountdown.update();
         });
 
         it('in seconds', function () {
@@ -93,8 +92,8 @@ describe('Event Countdown', function () {
             expect(regex.test(this.countdownClock.text())).toBeFalsy();
             event.setMinutes(event.getMinutes() + 60); // event in 90 mins
             this.dateParse.and.returnValue(event);
-            WSO.EventCountdown.init();
-            WSO.EventCountdown.update();
+            WebsiteOne.EventCountdown.init();
+            WebsiteOne.EventCountdown.update();
             expect(regex.test(this.countdownClock.text())).toBeTruthy()
         });
 
@@ -105,17 +104,17 @@ describe('Event Countdown', function () {
 
         it('displays a banner after it has started', function () {
             floor.and.returnValue(0);
-            WSO.EventCountdown.update();
-            expect(this.countdownClock.text()).toEqual('Homecoming has started')
+            WebsiteOne.EventCountdown.update();
+            expect(this.countdownClock.text()).toEqual('Homecoming is live!')
         });
 
         it('recalculates the time every second unless the event has already started', function () {
             var setTimeout = spyOn(window, 'setTimeout');
-            WSO.EventCountdown.update();
+            WebsiteOne.EventCountdown.update();
             expect(setTimeout).toHaveBeenCalledWith(this.update, 1000);
             floor.and.returnValue(0);
             setTimeout.calls.reset();
-            WSO.EventCountdown.update();
+            WebsiteOne.EventCountdown.update();
             expect(setTimeout).not.toHaveBeenCalled()
         });
 
@@ -127,14 +126,14 @@ describe('Event Countdown', function () {
 
     describe('format()', function() {
         it('pads numbers less than 10 with a zero', function() {
-            expect(WSO.EventCountdown.format(9)).toEqual('09');
-            expect(WSO.EventCountdown.format(0)).toEqual('00');
+            expect(WebsiteOne.EventCountdown.format(9)).toEqual('09');
+            expect(WebsiteOne.EventCountdown.format(0)).toEqual('00');
         });
 
         it('converts type from number to string', function() {
-            expect(WSO.EventCountdown.format(9)).toEqual('09');
-            expect(WSO.EventCountdown.format(10)).toEqual('10');
-            expect(WSO.EventCountdown.format(-2)).toEqual('-2'); // less bad at least
+            expect(WebsiteOne.EventCountdown.format(9)).toEqual('09');
+            expect(WebsiteOne.EventCountdown.format(10)).toEqual('10');
+            expect(WebsiteOne.EventCountdown.format(-2)).toEqual('-2'); // less bad at least
 
         });
     });

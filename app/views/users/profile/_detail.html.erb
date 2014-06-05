@@ -1,0 +1,30 @@
+<% if presenter.has_skills? %>
+  <section class="user-skills">
+    <h4>Skills & Technologies</h4>
+
+    <ul>
+      <% presenter.skill_list.each do |skill| %>
+        <li><%= skill %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<% if presenter.joined_projects? %>
+  <section class="user-projects">
+    <h4>Projects Involvement</h4>
+    <ul>
+      <% presenter.projects_joined.each do |project| %>
+        <li><%= link_to project.title, project_path(project) %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<% if presenter.bio? %>
+  <section class="user-bio">
+    <h4>About me</h4>
+
+    <p><%= simple_format(presenter.bio) %></p>
+  </section>
+<% end %>

@@ -131,7 +131,6 @@ end
 
 ### THEN ###
 Then /^I should be signed in$/ do
-  find_user.should == @user
   page.should have_content "Log out"
   page.should_not have_content "Sign up"
   page.should_not have_content "Log in"
@@ -187,9 +186,9 @@ Then /^I should (not |)see my name$/ do |should|
   create_user
   # TODO Bryan: refactor to display_name
   if should == 'not '
-    page.should_not have_content @user.display_name
+    page.should_not have_content @user.presenter.display_name
   else
-    page.should have_content @user.display_name
+    page.should have_content @user.presenter.display_name
   end
 end
 
@@ -334,12 +333,6 @@ Given(/^I am logged in as "([^"]*)"$/) do |first_name|
     fill_in 'user_email', :with => @user.email
     fill_in 'user_password', :with => test_user_password
     click_button 'Sign in'
-  end
-end
-
-Then(/^(.*) in the members list$/) do |s|
-  page.within(:css, '#all_members') do
-    step s
   end
 end
 

@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20140527204056) do
     t.boolean  "display_hire_me"
     t.text     "bio"
     t.boolean  "receive_mailings",       default: true
+    t.integer  "karma_points",           default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -1,26 +1,28 @@
 <header id="main_header" class="masthead">
   <div class="container">
-    <a class="navbar-brand" href="/"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
+    <a class="navbar-brand" href="<%= root_path %>"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
 
     <div id="account-controls" class="pull-right">
       <% if user_signed_in? %>
-        <a href="<%= user_path(current_user) %>">
-          <img id="user-gravatar" src="<%= gravatar_for(current_user.email) %>" class="img-circle">
-        </a>
-        <div class="dropdown">
-          <a href="#" id="account-dropdown" data-toggle="dropdown">
-            <%= current_user_details %>
-            <span class="caret"></span>
+        <% present current_user do |presenter| %>
+          <a href="<%= user_path(current_user) %>">
+            <%= presenter.gravatar_image(size: 80, id: 'user-gravatar', class: 'img-circle') %>
           </a>
-          <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="account-dropdown">
-            <a href="<%= user_path(current_user) %>">
-              <li><i class="fa fa-user fa-custom-accounts"></i> My account</li>
+          <div class="dropdown">
+            <a href="#" id="account-dropdown" data-toggle="dropdown">
+              <%= presenter.display_name %>
+              <span class="caret"></span>
             </a>
-            <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
-              <li><i class="fa fa-sign-out fa-custom-accounts"></i> Log out</li>
-            </a>
-          </ul>
-        </div>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="account-dropdown">
+              <a href="<%= user_path(current_user) %>">
+                <li><i class="fa fa-user fa-custom-accounts"></i> My account</li>
+              </a>
+              <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
+                <li><i class="fa fa-sign-out fa-custom-accounts"></i> Log out</li>
+              </a>
+            </ul>
+          </div>
+        <% end %>
       <% else %>
         <div id="login-signup">
           <%= link_to 'Log in', new_user_session_path %>
@@ -35,13 +37,13 @@
 <div class="navbar navbar-inverse navbar-static-top" id="nav">
   <div class="container">
     <div class="row">
-      <div class="col-xs-4 col-md-2">
+      <div class="hidden-xs col-sm-3 col-md-2">
         <a id="affix-nav-brand" class="navbar-brand" href="<%= root_path %>">
           <img src="<%= image_path('av-logo-inverse.png') %>">
         </a>
       </div>
 
-      <div class="col-xs-8 col-md-10">
+      <div class="col-xs-12 col-sm-9 col-md-10">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>

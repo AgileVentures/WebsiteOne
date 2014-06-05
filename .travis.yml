@@ -1,22 +1,27 @@
 language: ruby
-rvm:
-- 2.1.1
+rvm: "2.1.1"
 
 # to enable javascript testing with X server and firefox
 before_install:
+  - "echo 'gem: --no-document' > ~/.gemrc"
   - gem install bundler
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 
 before_script:
-- bundle exec rake db:create:all
-- bundle exec rake db:migrate
-- bundle exec rake db:test:prepare
+  - bundle exec rake db:create:all
+  - bundle exec rake db:migrate
 
 script:
-- bundle exec rake cucumber
-- bundle exec rake spec
-- bundle exec rake jasmine:ci
+  - bundle exec rspec --format progress
+  - bundle exec rake jasmine:ci
+  - xvfb-run bundle exec cucumber --profile ci
+
+# downgrade git version to avoid deployment bug (keep till its fixed)
+before_install:
+  - sudo rm /etc/apt/sources.list.d/git-ppa-source.list
+  - sudo apt-get remove git && sudo apt-get remove git-man && sudo apt-get install git-man && sudo apt-get install git
+
 deploy:
   provider: heroku
   api_key:
@@ -27,6 +32,7 @@ deploy:
       staging: websiteone-staging
       master: websiteone-production
   run: "rake db:migrate"
+
 notifications:
   email:
     - thomas@nocebo.se
