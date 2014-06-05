@@ -2,6 +2,7 @@ require_relative '../services/create_authentication_service.rb'
 
 class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
+  before_action :prevent_oauth_forgery, only: [:create], if: :forged_request?
 
   def create
     show and return if authentication.present?
@@ -30,15 +31,8 @@ class AuthenticationsController < ApplicationController
   end
 
   def show
-    raise 'WTF no auth?' unless authentication.present?
-
-    if fraudulent_login?
-      flash[:alert] = 'Another account is already associated with these credentials!'
-      redirect_to path
-    else
-      flash[:notice] = 'Signed in successfully.'
-      sign_in_and_redirect(:user, authentication.user)
-    end
+    flash[:notice] = 'Signed in successfully.'
+    sign_in_and_redirect(:user, authentication.user)
   end
 
   def destroy
@@ -65,7 +59,12 @@ class AuthenticationsController < ApplicationController
 
   private
 
-  def fraudulent_login?
+  def prevent_oauth_forgery
+    flash[:alert] = 'Another account is already associated with these credentials!'
+    redirect_to path
+  end
+
+  def forged_request?
     (authentication && current_user) && authentication.user != current_user
   end
 
