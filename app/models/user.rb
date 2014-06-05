@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   acts_as_taggable_on :skills, :titles
 
-  #after_create :send_welcome_message
+  after_create :send_welcome_message
 
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
