@@ -1,12 +1,43 @@
+require_relative '../services/create_authentication_service.rb'
+
 class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
-  before_action :prevent_oauth_forgery, only: [:create]
 
   def create
-    if authentication.present?
-      login_with_oauth
+    show and return if authentication.present?
+
+    if current_user.present?
+      CreateAuthentication.for(current_user, omniauth,
+                               success: ->(_){
+        flash[:notice] = 'Authentication successful.'
+        redirect_to oauth_path
+      },
+                               failure: ->{
+        flash[:alert] = 'Unable to create additional profiles.'
+        redirect_to oauth_path
+      })
     else
-      CreateAuthenticationService.new(omniauth, current_user || User.new)
+      CreateAuthentication.for(User.new, omniauth,
+                               success: ->(user){
+        flash[:notice] = 'Signed in successfully.'
+        sign_in_and_redirect(:user, user)
+      },
+                               failure: ->{
+        session[:omniauth] = omniauth.except('extra')
+        redirect_to new_user_registration_url
+      })
+    end
+  end
+
+  def show
+    raise 'WTF no auth?' unless authentication.present?
+
+    if fraudulent_login?
+      flash[:alert] = 'Another account is already associated with these credentials!'
+      redirect_to path
+    else
+      flash[:notice] = 'Signed in successfully.'
+      sign_in_and_redirect(:user, authentication.user)
     end
   end
 
@@ -34,25 +65,19 @@ class AuthenticationsController < ApplicationController
 
   private
 
-  def forged_request?
-    (current_user && authentication) && authentication.user != current_user
+  def fraudulent_login?
+    (authentication && current_user) && authentication.user != current_user
   end
 
-  def prevent_oauth_forgery
-    return unless forged_request?
-    flash[:alert] = 'Another account is already associated with these credentials!'
-    redirect_to redirect_path
+  def oauth_path
+    request.env['omniauth.origin'] || root_path
   end
 
-  def redirect_path
-    @path ||= request.env['omniauth.origin'] || root_path
-  end
-
-  def omniauth 
+  def omniauth
     @omniauth ||= request.env['omniauth.auth']
   end
 
-  def authentication 
+  def authentication
     @authentication ||= Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
   end
 
@@ -84,10 +109,5 @@ class AuthenticationsController < ApplicationController
     current_user.save
 
     redirect_to(params[:origin] || root_path)
-  end
-
-  def login_with_oauth
-    flash[:notice] = 'Signed in successfully.'
-    sign_in_and_redirect(:user, authentication.user)
   end
 end
