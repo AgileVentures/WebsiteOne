@@ -7,9 +7,17 @@ class AuthenticationsController < ApplicationController
   def create
     show and return if authentication.present?
 
+    user = current_user || User.new
+    if provider_is_youtube?
+      GplusPolicy.create(omniauth, user)
+      redirect_to oauth_path and return
+    else
+      GithubPolicy.create(omniauth, user)
+    end
+
     if current_user.present?
-      CreateAuthentication.for(current_user, omniauth,
-                               success: ->(_){
+      CreateAuthentication.for(user, omniauth, provider_is_youtube?,
+                               success: ->{
         flash[:notice] = 'Authentication successful.'
         redirect_to oauth_path
       },
@@ -18,13 +26,14 @@ class AuthenticationsController < ApplicationController
         redirect_to oauth_path
       })
     else
-      CreateAuthentication.for(User.new, omniauth,
-                               success: ->(user){
+      CreateAuthentication.for(user, omniauth, provider_is_youtube?,
+                               success: ->{
         flash[:notice] = 'Signed in successfully.'
         sign_in_and_redirect(:user, user)
       },
                                failure: ->{
         session[:omniauth] = omniauth.except('extra')
+        flash[:alert] = user.errors.full_messages.first
         redirect_to new_user_registration_url
       })
     end
@@ -59,6 +68,10 @@ class AuthenticationsController < ApplicationController
 
   private
 
+  def provider_is_youtube?
+    request.env['omniauth.params']['youtube'].present?
+  end
+
   def prevent_oauth_forgery
     flash[:alert] = 'Another account is already associated with these credentials!'
     redirect_to path
@@ -81,13 +94,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def link_github_profile
-    url = ''
-    begin
-      url = omniauth['info']['urls']['GitHub']
-    rescue NoMethodError
-      return
-    end
-
+    url = "https://github.com/#{omniauth['info']['nickname']}"
     user = User.find(current_user.id)
     if user.update_attributes(github_profile_url: url)
       # success

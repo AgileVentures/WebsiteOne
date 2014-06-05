@@ -2,12 +2,14 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     session[:omniauth] = nil unless @user.new_record?
+    Mailer.send_welcome_message(@user).deliver unless @user.new_record?
   end
 
   def update
     if params[:preview]
       resource.display_email = params[:user][:display_email] == '1'
       render :action => 'edit'
+    else
       @user = User.friendly.find(current_user.friendly_id)
       @user.skill_list = params[:user].delete "skill_list" # Extracts skills from params
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
