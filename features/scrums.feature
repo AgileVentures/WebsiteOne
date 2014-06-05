@@ -12,15 +12,16 @@ Feature: Scrums Index
   Scenario: Clicking on the video should bring up a modal YouTube player window
     Given I visit "/scrums/index" page
     Then I should not see a modal window
-    And I click a scrum in timeline
-    Then I should see a modal window with title "AgileVenture EuroScrum and Pair Hookup and Open Pairing Session"
-    #And I click play to watch video
+    And I click the first scrum in the timeline
+    Then I should see a modal window with the first scrum
 
   @javascript
   Scenario: Closing an existing video and opening a new one should update the player
-   When I stop the video
-   And I click a new video in timeline
-   Then the modal window should update to the selected video
-
+    Given I visit "/scrums/index" page
+    And I click the first scrum in the timeline
+    Then I should see a modal window with the first scrum
+    And I click the second scrum in the timeline
+    And I click the second scrum in the timeline
+    Then I should see a modal window with the second scrum
 
 
