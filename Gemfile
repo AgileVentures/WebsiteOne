@@ -69,6 +69,11 @@ group :development, :test do
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser
   gem 'binding_of_caller'  #online console and debugging in browser
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-cucumber', require: false
+  gem 'guard-livereload', require: false
+  gem 'irbtools', require: false
 end
 
 group :production do
