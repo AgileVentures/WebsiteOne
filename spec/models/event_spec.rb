@@ -108,32 +108,6 @@ describe Event do
     end
   end
 
-  context 'Event url' do
-    before (:each) do
-      @event = {name: 'one time event',
-               category: 'Scrum',
-               description: '',
-               event_date: 'Mon, 17 Jun 2013',
-               start_time: '2000-01-01 09:00:00 UTC',
-               end_time: '2000-01-01 17:00:00 UTC',
-               repeats: 'never',
-               repeats_every_n_weeks: nil,
-               repeat_ends: 'never',
-               repeat_ends_on: 'Mon, 17 Jun 2013',
-               time_zone: 'Eastern Time (US & Canada)'}
-    end
-
-    it 'should be set if valid' do
-      event = Event.create!(@event.merge(:url => 'http://google.com'))
-      expect(event.save).to be_true
-    end
-
-    it 'should be rejected if invalid' do
-      event = Event.create(@event.merge(:url => 'http:google.com'))
-      event.should have(1).error_on(:url)
-    end
-  end
-
   describe 'Event#next_occurence' do
     let(:event) do
       stub_model(Event,

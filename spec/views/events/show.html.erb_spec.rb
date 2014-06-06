@@ -47,30 +47,16 @@ describe 'events/show' do
     end
   end
 
-  it 'should display HOA url if url is set' do
-    @event.url = 'http://google.com'
+  it 'should display HOA url if url is present' do
+    @hangout_url = 'http://google.com'
     render
-    rendered.should have_text 'Hangout link'
-    rendered.should have_css '#hoa-link'
-    rendered.should have_link @event.url
+    expect(rendered).to have_css '#hoa-link'
+    expect(rendered).to have_link 'Click to join the the hangout', @event.url
   end
 
   it 'should not display HOA url if url is NIL' do
-    @event.url = nil
+    @hangout_url = nil
     render
-    rendered.should_not have_text 'Hangout link:'
-    rendered.should_not have_selector('a#hoa-link')
-  end
-
-  it 'logged in user should see Edit link' do
-    view.stub(:user_signed_in?).and_return(true)
-    render
-    rendered.should have_link 'Edit'
-  end
-
-  it 'logged in user should see add/edit url form' do
-    view.stub(:user_signed_in?).and_return(true)
-    render
-    rendered.should have_selector('form#event-form')
+    expect(rendered).not_to have_link 'Click to join the the hangout', @event.url
   end
 end
