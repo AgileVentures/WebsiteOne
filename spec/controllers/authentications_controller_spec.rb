@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AuthenticationsController do
+describe AuthenticationsController, pending: true do
 
   before(:each) do
     OmniAuth.config.mock_auth['agileventures'] = {
