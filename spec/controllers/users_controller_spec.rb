@@ -2,25 +2,15 @@ require 'spec_helper'
 
 describe UsersController do
 
-  describe "GET 'index'" do
-    before(:each) do
-      @users = [
-          double('User', country: 'some country'),
-          double('User', country: 'some country'),
-          double('User', country: 'some country'),
-          double('User', country: 'some country')
-      ]
-      User.stub_chain(:where, :order).and_return(@users)
+  describe "GET index" do
+    it 'should return a status code of 200' do
+      expect(response.code).to eq('200')
     end
 
-    it 'returns http success' do
-      get 'index'
-      expect(response).to render_template 'index'
-    end
-
-    it 'assigns all users' do
-      get 'index'
-      assigns(:users).should eq @users
+    it 'should assign the results of the search to @users' do
+      user = FactoryGirl.create(:user)
+      get :index
+      expect(assigns(:users)).to include(user)
     end
   end
 
@@ -81,19 +71,9 @@ describe UsersController do
     end
 
     context 'with followed projects' do
-      # Bryan: Empty before block?
-      #before :each do
-      #end
-
-      it 'assigns a list of project being followed' do
-        get 'show', id: @user.friendly_id
-        expect(assigns(:users_projects)).to eq(@projects)
-      end
-
       it 'it renders an error message when accessing a private profile' do
         @user.stub(display_profile: false)
-        get 'show', id: @user.friendly_id
-        expect(response).to redirect_to root_path
+        expect{get 'show', id: @user.friendly_id}.to raise_error
       end
     end
   end

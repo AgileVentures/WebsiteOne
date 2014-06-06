@@ -1,4 +1,4 @@
-describe('WSO ProgressBar module', function() {
+describe('WebsiteOne ProgressBar module', function() {
   var onSpy;
   beforeEach(function() {
     onSpy = spyOn($.fn, 'on');
@@ -6,8 +6,8 @@ describe('WSO ProgressBar module', function() {
     $(document).trigger('page:load');
   });
 
-  it('should create a new WSO module called "ProgressBar"', function() {
-    expect(window.WSO.ProgressBar).toBeDefined();
+  it('should create a new WebsiteOne module called "ProgressBar"', function() {
+    expect(window.WebsiteOne.ProgressBar).toBeDefined();
   });
 
   describe('jQuery on method arguments', function() {

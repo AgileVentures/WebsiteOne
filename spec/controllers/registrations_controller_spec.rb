@@ -41,23 +41,11 @@ describe RegistrationsController do
         post :create, user: {email: 'random2@random.com', password: 'randomrando', password_confirmation: 'randomrandom'}
         session[:omniauth].should eq nil
       end
-
-      it 'has an active record error message in the user instance variable when registration fails due to email already being in db' do
-        FactoryGirl.create :user
-        post :create, user: {email: 'example@example.com', password: 'randomrandom', password_confirmation: 'randomrandom'}
-        expect(assigns(:user).errors.full_messages).to include 'Email has already been taken'
-      end
-
-      it 'has an active record error message in the user instance variable when registration fails due to non matching passwords' do
-        post :create, user: { email: 'example123@example.com', password: 'randomrandom', password_confirmation: 'randomrando' }
-        expect(assigns(:user).errors.full_messages).to include "Password confirmation doesn't match Password"
-      end
     end
   end
 
   describe '#update' do
     let(:valid_session) { {} }
-
 
     before(:each) do
       # stubbing out devise methods to simulate authenticated user

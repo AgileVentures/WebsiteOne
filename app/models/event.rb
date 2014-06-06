@@ -14,23 +14,46 @@ class Event < ActiveRecord::Base
   RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
 
-  def self.next_occurrence
+  def self.next_event_occurrence
     if Event.exists?
       @events = []
       Event.where(['category = ?', 'Scrum']).each do |event|
-        @events << event.current_occurences
+        next_occurences = event.next_occurrences(start_time: 15.minutes.ago,
+                                                 limit: 1)
+        @events << next_occurences.first unless next_occurences.empty?
       end
-      @events = @events.flatten.sort_by { |e| e[:time] }
+
+      return nil if @events.empty?
+
+      @events = @events.sort_by { |e| e[:time] }
       @events[0][:event].next_occurrence_time = @events[0][:time]
       return @events[0][:event]
     end
     nil
   end
 
+  def next_occurrences(options = {})
+    start_time = (options[:start_time] or Time.now)
+    end_time = (options[:end_time] or start_time + 10.days)
+    limit = (options[:limit] or 100)
+
+    [].tap do |occurences|
+      occurrences_between(start_time, end_time).each do |time|
+        occurences << { event: self, time: time }
+
+        return occurences if occurences.count >= limit
+      end
+    end
+  end
+
+  def occurrences_between(start_time, end_time)
+    schedule.occurrences_between(start_time, end_time)
+  end
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
     self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DaysOfTheWeek).map { |r| 2**DaysOfTheWeek.index(r) }.inject(0, :+)
   end
+
   def repeats_weekly_each_days_of_the_week
     DaysOfTheWeek.reject do |r|
       ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DaysOfTheWeek.index(r)).zero?
@@ -65,19 +88,6 @@ class Event < ActiveRecord::Base
         s.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
     s
-  end
-
-  def current_occurences
-    [].tap do |occurences|
-      self.schedule.occurrences_between(Date.today, Date.today + 10.days).each do |time|
-        unless time <= DateTime.now
-          occurences << {
-              event: self,
-              time: time
-          }
-        end
-      end
-    end
   end
 
   def start_time_with_timezone

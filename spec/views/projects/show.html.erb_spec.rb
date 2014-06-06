@@ -2,13 +2,7 @@ require 'spec_helper'
 
 describe 'projects/show.html.erb' do
   before :each do
-    @user = mock_model User,
-                       id: 1,
-                       friendly_id: 'my-friend',
-                       first_name: 'John',
-                       last_name: 'Simpson',
-                       email: 'john@simpson.org',
-                       display_name: 'John Simpson'
+    @user = FactoryGirl.build(:user)
 
     @document = mock_model Document,
                            title: 'this is a document',

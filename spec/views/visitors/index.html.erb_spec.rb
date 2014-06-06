@@ -63,6 +63,18 @@ describe 'visitors/index.html.erb' do
     end
   end
 
+  context 'event has started less than 15 minutes ago' do
+    before :each do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:44:00 UTC'))
+    end
+
+    it 'should <event> has just started!' do
+      render
+      expect(rendered).to have_link @event.name, event_path(@event)
+      expect(rendered).to have_text 'is live!'
+    end
+  end
+
   context 'event is planned within 23h (testing display of -1 h) ' do
     before :each do
       Delorean.time_travel_to(Time.parse('2014-03-06 10:45:00 UTC'))
