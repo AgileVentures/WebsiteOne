@@ -20,6 +20,7 @@ Feature: Scrums Index
     Given I visit "/scrums/index" page
     And I click the first scrum in the timeline
     Then I should see a modal window with the first scrum
+    When I close the modal
     And I click the second scrum in the timeline
     Then I should see a modal window with the second scrum
 
