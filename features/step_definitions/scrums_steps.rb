@@ -12,14 +12,14 @@ Then(/^I should see 20 scrums in descending order by published date:$/) do
 end
 
 Then(/^I should see a modal window with the first scrum$/) do
-  page.evaluate_script("$('.modal').css('display')").should eq "block"
+  expect(page.find("#player")[:style]).to eq("display: block; ")
   title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[0]
   page.should have_selector('#playerTitle', text: title[0])
 end
 
 Then(/^I should see a modal window with the second scrum$/) do
-  page.evaluate_script("$('.modal').css('display')").should eq "block"
-  title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[1]
+  vid = page.body.gsub(/\n/,'').scan(/<a class=\"yt_link.*?id=\"(.*?)"/).flatten
+  expect(page.find("#player")[:style]).to eq("display: block; ")
   page.should have_selector('#playerTitle', text: title[0])
 end
 
@@ -40,20 +40,16 @@ When(/^I stop the video$/) do
 end
 
 When(/^I click the first scrum in the timeline$/) do
-  page.first(:css, "a.yt_link").click
+  title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[0]
+  vid = page.body.gsub(/\n/,'').scan(/<a class=\"yt_link.*?id=\"(.*?)"/).flatten
+  page.find(:xpath, "//a[@id=\"#{vid[0]}\"]").click
 end
 
 When(/^I click the second scrum in the timeline$/) do
-  page.all(:css, "a.yt_link")[1].trigger('click')
+  vid = page.body.gsub(/\n/,'').scan(/<a class=\"yt_link.*?id=\"(.*?)"/).flatten
+  page.find(:xpath, "//a[@id=\"#{vid[1]}\"]").trigger('click')
+  title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[1]
 end
-#TODO: Marcelo: we will use below code to persist scrums to db
-#Given /^the following scrums exist in the db:$/ do |table|
-#    table.hashes.each do |hash|
-#      Scrum.new(hash)
-#    end
-#end
-#When /^a request is made to "([^"]*)"$/ do |url|
-#  @response = Net::HTTP.get_response(URI.parse(url))
-#end
-
-
+When(/^I close the modal$/) do
+  page.find(:css,".close").click
+end
