@@ -3,13 +3,13 @@ Then /^I should see hangout button$/ do
   expect(src).to match /talkgadget.google.com/
 end
 
-Given /^the Hangout for event "([^"]*)" has been started$/ do |event|
+Given /^the Hangout for event "([^"]*)" has been started$/ do |name|
   event = Event.find_by_name(name)
   Video.create(video_id: event.id, hangout_url: 'http://test.hangout')
 end
 
-Then /^I should see a link to the hangout for the event "([^"]*)"$/ do |event|
+Then /^I should see a link "([^"]*)" for the event "([^"]*)"$/ do |link, name|
   event = Event.find_by_name(name)
   url = Video.find(event).hangout_url
-  expect(page).to have_link(name, href: url)
+  expect(page).to have_link(link, href: url)
 end
