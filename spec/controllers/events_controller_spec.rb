@@ -19,14 +19,24 @@ describe EventsController do
 
   describe 'GET show' do
     before(:each) do
-      get :show, {:id => event.to_param}, valid_session
     end
 
     it 'assigns the requested event as @event' do
+      get :show, {:id => event.to_param}, valid_session
       assigns(:event).should eq(event)
     end
 
+    it 'sets event hangout url' do
+      video = double(Video, hangout_url: 'http://hangout.test')
+      Video.stub(find_by_video_id: video)
+
+      get :show, {:id => event.to_param}, valid_session
+      
+      expect(assigns(:hangout_url)).to eq video.hangout_url
+    end
+
     it 'renders the show template' do
+      get :show, {:id => event.to_param}, valid_session
       expect(response).to render_template 'show'
     end
   end

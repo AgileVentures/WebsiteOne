@@ -10,6 +10,8 @@ class EventsController < ApplicationController
 
   def show
     @event_schedule = @event.next_occurrences
+    video  = Video.find_by_video_id(@event.id.to_s)
+    @hangout_url = video.hangout_url if video
   end
 
   def index

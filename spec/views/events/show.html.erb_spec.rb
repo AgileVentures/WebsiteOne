@@ -30,17 +30,14 @@ describe 'events/show' do
   end
 
   it 'should render the event name' do
-    render
     rendered.should have_text @event.name
   end
 
   it 'should render the event description' do
-    render
     rendered.should have_text @event.description
   end
 
   it 'should render dates and time for 5 upcoming events' do
-    render
     rendered.should have_text 'Upcoming schedule'
     @event_schedule.first(5).each do |e|
       rendered.should have_content nested_hash_value(e, :time).strftime('%F at %I:%M%p')
