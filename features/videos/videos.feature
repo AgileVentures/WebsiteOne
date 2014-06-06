@@ -19,6 +19,6 @@ Feature: Managing videos of scrums and PairProgramming sessions
     Then I should see hangout button
 
   Scenario: See the link to the Hangout of the event
-    Given I am on the show page for event "Scrum"
-    And the Hangout for event "Scrum" has been started
+    Given the Hangout for event "Scrum" has been started
+    And I am on the show page for event "Scrum"
     Then I should see a link "Click to join the hangout" for the event "Scrum"

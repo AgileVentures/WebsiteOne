@@ -48,12 +48,12 @@ describe 'events/show' do
     @hangout_url = 'http://google.com'
     render
     expect(rendered).to have_css '#hoa-link'
-    expect(rendered).to have_link 'Click to join the the hangout', @event.url
+    expect(rendered).to have_link 'Click to join the hangout', @hangout_url
   end
 
   it 'should not display HOA url if url is NIL' do
     @hangout_url = nil
     render
-    expect(rendered).not_to have_link 'Click to join the the hangout', @event.url
+    expect(rendered).not_to have_link 'Click to join the the hangout'
   end
 end

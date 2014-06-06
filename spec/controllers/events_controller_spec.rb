@@ -19,10 +19,10 @@ describe EventsController do
 
   describe 'GET show' do
     before(:each) do
+      get :show, {:id => event.to_param}, valid_session
     end
 
     it 'assigns the requested event as @event' do
-      get :show, {:id => event.to_param}, valid_session
       assigns(:event).should eq(event)
     end
 
@@ -36,7 +36,6 @@ describe EventsController do
     end
 
     it 'renders the show template' do
-      get :show, {:id => event.to_param}, valid_session
       expect(response).to render_template 'show'
     end
   end

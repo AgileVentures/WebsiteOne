@@ -29,7 +29,9 @@
 
   <div class="col-lg-12">
     <div id="hoa-link">
-      <%= link_to_unless @hangout_url, 'Click to join the the hangout', @hangout_url, id: 'hoa-link', target: '_blank' %>
+      <%if @hangout_url  %>
+        <%= link_to 'Click to join the hangout', @hangout_url, id: 'hoa-link', target: '_blank' %>
+    <% end  %>
     </div>
   </div>
 
