@@ -11,11 +11,11 @@ describe ScrumsController do
         subject { assigns(:scrums).first }
 
         it 'has an author' do
-          expect(subject[:author]).to eq 'Sam Joseph'
+          expect(subject[:author]).not_to be_empty
         end
 
         it 'has an id' do
-          expect(subject[:id]).to eq 'KdcNSYIX0JQ'
+          expect(subject[:id]).not_to be_empty
         end
 
         it 'has a published DateTime' do
@@ -23,7 +23,7 @@ describe ScrumsController do
         end
 
         it 'has a title' do
-          expect(subject[:title]).to eq 'Agile Ventures Atlantic Scrum and Pair Hookup'
+          expect(subject[:title]).not_to be_empty
         end
 
           #it 'has content (why is this the same as title?)'

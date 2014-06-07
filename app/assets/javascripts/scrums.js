@@ -1,6 +1,6 @@
 var Scrum = {
   setup: function () {
-    $('.yt_link').on('click', Scrum.select_video);
+    $('.scrum_yt_link').on('click', Scrum.select_video);
   },
   select_video: function(event) {
     event.preventDefault();
