@@ -23,7 +23,7 @@ Then(/^I should see a modal window with the first scrum$/) do
 end
 
 Then(/^I should see a modal window with the second scrum$/) do
-  vid = page.body.gsub(/\n/,'').scan(/<a class=\"yt_link.*?id=\"(.*?)"/).flatten
+  vid = page.body.gsub(/\n/,'').scan(/<a class=\"scrum_yt_link.*?id=\"(.*?)"/).flatten
   expect(page.find("#player")[:style]).to eq("display: block; ")
   page.should have_selector('#playerTitle', text: title[0])
 end
@@ -46,12 +46,12 @@ end
 
 When(/^I click the first scrum in the timeline$/) do
   title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[0]
-  vid = page.body.gsub(/\n/,'').scan(/<a class=\"yt_link.*?id=\"(.*?)"/).flatten
+  vid = page.body.gsub(/\n/,'').scan(/<a class=\"scrum_yt_link.*?id=\"(.*?)"/).flatten
   page.find(:xpath, "//a[@id=\"#{vid[0]}\"]").click
 end
 
 When(/^I click the second scrum in the timeline$/) do
-  vid = page.body.gsub(/\n/,'').scan(/<a class=\"yt_link.*?id=\"(.*?)"/).flatten
+  vid = page.body.gsub(/\n/,'').scan(/<a class=\"scrum_yt_link.*?id=\"(.*?)"/).flatten
   page.find(:xpath, "//a[@id=\"#{vid[1]}\"]").trigger('click')
   title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[1]
 end
