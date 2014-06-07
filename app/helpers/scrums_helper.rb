@@ -4,7 +4,7 @@ module ScrumsHelper
       raw('<span class="glyphicon glyphicon-play"></span>'),
       video[:url], {
         id: video[:id],
-        class: 'yt_link btn btn-default btn-danger btn-xs',
+        class: 'scrum_yt_link btn btn-default btn-danger btn-xs',
         data: { content: video[:content], toggle: "modal", target: "#player" }
       }
     )
