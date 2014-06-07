@@ -1,5 +1,4 @@
 WebsiteOne.define('Users', function() {
-
   var player;
 
   function selectVideo(event) {

@@ -42,7 +42,6 @@ gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
 gem 'youtube_it'
 gem 'utf8-cleaner'
-gem 'rake', '10.3.1'
 
 gem 'yui-compressor'
 gem 'compass-rails'
