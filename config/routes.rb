@@ -21,6 +21,7 @@ WebsiteOne::Application.routes.draw do
       patch :update_only_url
     end
   end
+  
   get '/verify/:id' => redirect {|params,request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}"}
 
   post 'preview/article', to: 'articles#preview',:format => false
@@ -28,14 +29,19 @@ WebsiteOne::Application.routes.draw do
   resources :articles, :format => false
 
   get 'projects/:project_id/:id', to: 'documents#show',:format => false
+
   get '/auth/:provider/callback' => 'authentications#create', :format => false
   get '/auth/failure' => 'authentications#failure', :format => false
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
+
   post 'mail_contact_form', to: 'visitors#send_contact_form', :format => false
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
+
+  get 'ho_service/:id', to: 'ho_service#update', as: 'ho_service_callback'
 
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
+
 end
 
