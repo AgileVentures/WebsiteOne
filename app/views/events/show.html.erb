@@ -1,5 +1,16 @@
 <% url = @event.url if @event.url %>
 <script src="https://apis.google.com/js/platform.js"></script>
+<div id="placeholder-div3"></div>
+<%= javascript_tag do  %>
+  gapi.hangout.render('placeholder-div3', {
+    'render': 'createhangout',
+    'topic': 'Test',
+    'hangout_type': 'onair',
+    'initial_apps': [{'app_id' : '227702023966', 'start_data' :'<%= @event.id %>', 'app_type' : 'ROOM_APP' }],
+    'widget_size': 175
+  });
+<% end %>
+
 <div class="col-lg-8 col-lg-offset-2">
 
   <h2><%= @event.name %></h2>
