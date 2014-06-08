@@ -11,6 +11,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | UTC       |
     And I am logged in
 
+  @ignore
   Scenario: Create a hangout for a scrum event
     Given I am on the show page for event "Scrum"
     Then I should see hangout button
@@ -18,7 +19,8 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Show hangout details
     Given the Hangout for event "Scrum" has been started with details:
       | Host         | Sam Joseph          |       |      |
-      | Youtube link | http://youtube.test |       |      |
+      | Hangout link | http://hangout.test |       |      |
+      | Youtube id   | 235REWi             |       |      |
       | Start time   | 10:00               |       |      |
       | Currently in | David               | Sam   |      |
       | Participants | Sam                 | David | Yaro |
