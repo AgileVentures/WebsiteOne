@@ -41,6 +41,10 @@ Given(/^I (?:visit|am on) the site$/) do
   visit root_path
 end
 
+Given(/^I visit "(.*?)"$/) do |path|
+  visit path
+end
+
 # WHEN steps
 When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
@@ -285,7 +289,6 @@ Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
   page.should have_css "a[href='#{link}']", text: text
 end
 
-
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
   Timeout::timeout(3.0) do
     until page.has_css? "img[src*=\"#{source}\"]" do
@@ -294,12 +297,3 @@ Then(/^I should see an image with source "([^"]*)"$/) do |source|
   end
   page.should have_css "img[src*=\"#{source}\"]"
 end
-
-
-Then(/^I should see a timeline for the scrums$/) do
-  pending
-end
-
-
-
-
