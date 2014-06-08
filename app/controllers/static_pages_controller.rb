@@ -20,9 +20,6 @@ class StaticPagesController < ApplicationController
     redirect_to static_page_path(get_page_id(params[:id])), notice: 'The page has been successfully updated.'
   end
 
-
-
-
   private
 
   def get_page_id page
