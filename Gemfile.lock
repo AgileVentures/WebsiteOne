@@ -67,6 +67,7 @@ GEM
       activerecord (>= 3.0.0)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    awesome_print (1.2.0)
     bcrypt (3.1.7)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
@@ -78,6 +79,9 @@ GEM
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
     builder (3.2.2)
+    byebug (2.7.0)
+      columnize (~> 0.3)
+      debugger-linecache (~> 1.2)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -101,6 +105,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     colored (1.2)
+    columnize (0.8.9)
     compass (0.12.6)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -129,6 +134,7 @@ GEM
       rails (>= 3.0.0)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
+    debugger-linecache (1.2.0)
     delorean (2.1.0)
       chronic
     devise (3.2.4)
@@ -232,6 +238,13 @@ GEM
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     polyglot (0.3.4)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    pry-byebug (1.3.2)
+      byebug (~> 2.7)
+      pry (~> 0.9.12)
     rack (1.5.2)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -294,6 +307,7 @@ GEM
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
+    slop (3.5.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -371,6 +385,7 @@ DEPENDENCIES
   acts_as_follower
   acts_as_tree
   addressable
+  awesome_print
   better_errors
   binding_of_caller
   bootstrap-modal-rails
@@ -410,6 +425,7 @@ DEPENDENCIES
   pivotal-tracker-api
   poltergeist
   polyamorous!
+  pry-byebug
   rack-cache
   rails (= 4.1.0)
   rails_12factor
