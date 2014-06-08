@@ -26,5 +26,10 @@ module WebsiteOne
     config.assets.enabled = true
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
+
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => '*'
+    }
   end
 end
