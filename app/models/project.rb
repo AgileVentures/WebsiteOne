@@ -1,7 +1,6 @@
 require 'url_validator'
 
 class Project < ActiveRecord::Base
-  include YoutubeApi
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -25,13 +24,7 @@ class Project < ActiveRecord::Base
   end
 
   def videos
-    members_tags = YoutubeApi.members_tags(members)
-    return [] if members_tags.blank?
-    project_tags = YoutubeApi.project_tags(self)
-
-    request = YoutubeApi.build_request(:project, members_tags, project_tags)
-    response = YoutubeApi.get_response(request)
-    YoutubeApi.filter_response(response, project_tags, members_tags) if response
+    YoutubeService.new(self).videos
   end
 
   # Bryan: Used to generate paths, used only in testing.

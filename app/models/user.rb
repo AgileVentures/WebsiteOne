@@ -69,13 +69,6 @@ class User < ActiveRecord::Base
   end
 
   def videos
-    if youtube_id
-      tags = YoutubeApi.followed_project_tags(self)
-      return [] if tags.empty?
-
-      request = YoutubeApi.build_request(:user, self)
-      response = YoutubeApi.get_response(request)
-      YoutubeApi.filter_response(response, tags, [YoutubeHelper.youtube_user_name(self)]) if response
-    end
+    YoutubeService.new(self).videos
   end
 end
