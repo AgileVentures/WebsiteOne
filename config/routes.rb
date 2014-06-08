@@ -16,7 +16,7 @@ WebsiteOne::Application.routes.draw do
       get :unfollow
     end
 
-  resources :documents, :format => false do
+    resources :documents, :format => false do
       put :mercury_update
       get :mercury_saved
     end
@@ -42,8 +42,6 @@ WebsiteOne::Application.routes.draw do
   post 'mail_contact_form', to: 'visitors#send_contact_form', :format => false
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
   get 'scrums/index' , :format => false
-  #get 'scrums/index', to: 'visitors/index', :format => false
-  #get 'visitors/index', to: 'scrums/index', :format => false
 
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false

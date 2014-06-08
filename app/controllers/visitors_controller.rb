@@ -9,9 +9,6 @@ class VisitorsController < ApplicationController
     render layout: false
   end
 
-
-
-
   def send_contact_form
     begin
       if params[:name].empty? or params[:message].empty?

@@ -136,10 +136,5 @@ describe 'visitors/index.html.erb' do
       end
     end
   end
-
-
 end
-
-
-
 
