@@ -1,4 +1,4 @@
 <%= provide :title, @article.title %>
 
 <%= render 'article', article: @article, author: @author %>
-<%= render partial: 'shared/disqus', locals: {id: 'article_' + @article.id.to_s, title: @article.title, url: article_path(@article, only_path: false)} %>
+<%= render_disqus_for(:article) %>

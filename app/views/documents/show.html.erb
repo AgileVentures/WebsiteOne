@@ -58,4 +58,4 @@
     </ul>
   <% end %>
 </div>
-<%= render partial: 'shared/disqus', locals: {id: 'document_' + @document.id.to_s, title: @document.title, url: project_document_path(@project, @document, only_path: false)} unless request.original_url =~ /mercury_frame=true/%>
+<%= render_disqus_for(:document) %>
