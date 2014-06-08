@@ -1,15 +1,5 @@
 <% url = @event.url if @event.url %>
 <script src="https://apis.google.com/js/platform.js"></script>
-<div id="placeholder-div3"></div>
-<%= javascript_tag do  %>
-  gapi.hangout.render('placeholder-div3', {
-    'render': 'createhangout',
-    'topic': 'Test',
-    'hangout_type': 'onair',
-    'initial_apps': [{'app_id' : '227702023966', 'start_data' :'<%= @event.id %>', 'app_type' : 'ROOM_APP' }],
-    'widget_size': 175
-  });
-<% end %>
 
 <div class="col-lg-8 col-lg-offset-2">
 
@@ -31,7 +21,11 @@
       <% if user_signed_in? %>
         <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-default' %>
       <div style="margin-top: 10px">
-        <div id="HOA-placeholder" data-hoa-title="<%= @event.name %> - <%= current_occurrence_time(@event_schedule.first(1)) %>"></div>
+        <%= render partial: 'shared/hangouts',
+          locals: {
+            id: @event.id,
+            topic: @event.name + ' - ' + current_occurrence_time(@event_schedule.first(1))
+                   } %>
       </div>
     <% end %>
     </div>
