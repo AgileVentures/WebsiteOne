@@ -11,7 +11,7 @@ describe "documents/show" do
                           whodunnit: @user.id,
                           object: nil,
                           created_at: "2014-02-25 11:50:56"
-    )
+                         )
     @document = stub_model(Document,
                            :user => @user,
                            :id => 1,
@@ -20,7 +20,7 @@ describe "documents/show" do
                            :project_id => 1 ,
                            :created_at => Time.now,
                            :versions => [@version]
-    )
+                          )
 
     @document_child = stub_model(Document,
                                  :user => @user,
@@ -30,7 +30,7 @@ describe "documents/show" do
                                  :parent_id => 1,
                                  :created_at => Time.now,
                                  :versions => [@version]
-    )
+                                )
 
     view.stub(:created_by).and_return(@created_by)
   end
@@ -87,6 +87,29 @@ describe "documents/show" do
       render
       rendered.should have_content @document_child.title
       rendered.should have_content @document_child.body
+    end
+
+    describe 'rendering Disqus' do
+      it 'renders Disqus_thread container' do
+        render
+        expect(rendered).to have_css("#disqus_thread")
+      end
+
+      it 'includes Disqus embed script with correct params' do
+        @document_child.update(id: 555)
+        render
+        expect(rendered).to include("disqus_shortname = '#{DISQUS_SHORTNAME}'")
+        expect(rendered).to include("disqus_title = 'Child Title'")
+        expect(rendered).to include("disqus_identifier = 'document_555'")
+        expect(rendered).to include("disqus_url = '#{project_document_path(@project, @document_child, only_path: false)}'")
+      end
+
+      it 'does not render Disqus when inside Mercury editor ' do
+        request = controller.request
+        request.stub(original_url: 'mercury_frame=true')
+        render
+        expect(rendered).not_to have_css("#disqus_thread")
+      end
     end
   end
 end

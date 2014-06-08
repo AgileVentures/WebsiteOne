@@ -5,6 +5,7 @@ describe 'articles/show' do
     @user = stub_model(User, display_name: 'Thomas')
     @author = @user
     @article =  stub_model(Article,
+                           :id => 555,
                            :title => "Ruby article",
                            :content => "My Ruby content",
                            :tag_list => ["Ruby", "Rails"],
@@ -38,6 +39,21 @@ describe 'articles/show' do
     it 'renders a edit button' do
       render
       rendered.should have_link('edit article')
+    end
+  end
+
+  describe 'rendering Disqus' do
+    it 'renders Disqus_thread container' do
+      render
+      expect(rendered).to have_css("#disqus_thread")
+    end
+
+    it 'includes Disqus embed script with correct params' do
+      render
+      expect(rendered).to include("disqus_shortname = '#{DISQUS_SHORTNAME}'")
+      expect(rendered).to include("disqus_title = 'Ruby article'")
+      expect(rendered).to include("disqus_identifier = 'article_555'")
+      expect(rendered).to include("disqus_url = '#{article_path(@article, only_path: false)}'")
     end
   end
 
