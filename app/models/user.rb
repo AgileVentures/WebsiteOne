@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :articles
 
+  self.per_page = 30
+
   acts_as_follower
 
   def apply_omniauth(omniauth)
@@ -43,6 +45,10 @@ class User < ActiveRecord::Base
 
   def has_auth(provider)
     !authentications.where(provider: provider).empty?
+  end
+
+  def projects_joined
+    following_by_type('Project')
   end
 
   def display_name
@@ -70,5 +76,11 @@ class User < ActiveRecord::Base
 
   def videos
     YoutubeService.new(self).videos
+  end
+
+  def self.search(params)
+    where(display_profile: true)
+      .order(:created_at)
+      .paginate(page: params[:page], per_page: params[:per_page])
   end
 end

@@ -28,7 +28,7 @@ class AuthenticationsController < ApplicationController
 
   def failure
     # Bryan: TESTED
-    flash[:alert] = 'Authentication failed.'
+    flash[:alert] = params[:message] || 'Authentication failed.'
     redirect_to root_path
   end
 

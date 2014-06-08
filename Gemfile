@@ -63,8 +63,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails' #unit testing
-#TODO YA do we need it? It breaks Rubymine's debugging
-  gem 'debugger'  # Use debugger
+  gem 'awesome_print' # plays well with pry
+  gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
   gem 'jasmine' # framework for testing javascript
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser
