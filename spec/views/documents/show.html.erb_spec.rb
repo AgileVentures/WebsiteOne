@@ -94,22 +94,6 @@ describe "documents/show" do
         render
         expect(rendered).to have_css("#disqus_thread")
       end
-
-      it 'includes Disqus embed script with correct params' do
-        @document_child.update(id: 555)
-        render
-        expect(rendered).to include("disqus_shortname = '#{DISQUS_SHORTNAME}'")
-        expect(rendered).to include("disqus_title = 'Child Title'")
-        expect(rendered).to include("disqus_identifier = 'document_555'")
-        expect(rendered).to include("disqus_url = '#{project_document_path(@project, @document_child, only_path: false)}'")
-      end
-
-      it 'does not render Disqus when inside Mercury editor ' do
-        request = controller.request
-        request.stub(original_url: 'mercury_frame=true')
-        render
-        expect(rendered).not_to have_css("#disqus_thread")
-      end
     end
   end
 end
