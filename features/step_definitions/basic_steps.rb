@@ -201,8 +201,14 @@ end
 
 Then(/^show me the page$/) do
   save_and_open_page
-  #puts page.body
 end
+
+Then /^save a screenshot of the page at "([^"]*)"$/ do |path|
+  #works with Poltergeist driver
+  sleep 1
+  page.save_screenshot(path, full: true)
+end
+
 When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
 end
