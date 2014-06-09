@@ -32,8 +32,8 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Start time        | 10:00       |       |       |
       | Currently in      | Sam         | David |       |
       | Participants      | Sam         | Yaro  | David |
-    # And I should see youtube recording at link "http://youtube.test"
-    # And I should see a link "Click to join the hangout" for the event "Scrum"
+    And I should see a youtube link "Click to watch" for the event "Scrum"
+    And I should see a hangout link "Click to join the hangout" for the event "Scrum"
     # And I should see a youtube player with hangout recording
     # But I should not see hangout button
   #

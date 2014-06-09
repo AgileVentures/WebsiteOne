@@ -1,12 +1,14 @@
 <div id="hangout_status">
   <table>
     <tbody>
-      <tr><td>Status</td><td></td></tr>
-      <tr><td>Host</td><td></td></tr>
-      <tr><td>Youtube recording</td><td></td></tr>
-      <tr><td>Start time</td><td></td></tr>
-      <tr><td>Currently in</td><td></td></tr>
-      <tr><td>Participants</td><td></td></tr>
+      <tr><td>Status</td><td><%= video.status %></td></tr>
+      <tr><td>Host</td><td><%= video.host  %></td></tr>
+      <tr><td>Youtube recording</td><td>
+          <%= link_to 'Click to watch', video.youtube_url if video.youtube_url %>
+      </td></tr>
+      <tr><td>Start time</td><td><%= video.created_at %></td></tr>
+      <tr><td>Currently in</td><td><%= video.currently_ins %></td></tr>
+      <tr><td>Participants</td><td><%= video.participantss %></td></tr>
     </tbody>
   </table>
   <%= link_to 'Click to join the hangout', video.hangout_url if video.live? %>

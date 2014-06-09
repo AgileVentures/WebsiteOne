@@ -48,13 +48,15 @@ describe 'events/show' do
     before(:each) do
       @video = double(Video, video_id: 375,
                              host: 'Superman',
+                             status: 'In progress',
                              hangout_url: 'http://hangout.test',
                              youtube_id: 'asd234',
                              created_at: '2014-06-10 10:30:00',
                              currently_in: %w(Sam Yaro),
                              participants: %w(Sam Yaro David),
                              started?: true,
-                             live?: true)
+                             live?: true,
+                             youtube_url: 'http://youtube.test')
       assign :video, @video
     end
 
@@ -70,18 +72,27 @@ describe 'events/show' do
       expect(rendered).not_to have_css("#hangout_status")
     end
 
-    it 'renders Hangout details' do
+    it 'renders Hangout details headings' do
       render
-      
+
       expect(rendered).to have_text('Status')
       expect(rendered).to have_text('Host')
       expect(rendered).to have_text('Youtube recording')
       expect(rendered).to have_text('Start time')
       expect(rendered).to have_text('Currently in')
       expect(rendered).to have_text('Participants')
-      expect(rendered).to have_link 'Click to join the hangout', @video.hangout_url
-      puts rendered
     end
 
+    it 'renders Hangout details values' do
+      render
+
+      expect(rendered).to have_text('In progress')
+      expect(rendered).to have_text('Superman')
+      expect(rendered).to have_text('10:30')
+      expect(rendered).to have_text('Sam Yaro')
+      expect(rendered).to have_text('Sam Yaro David')
+      expect(rendered).to have_link 'Click to join the hangout', @video.hangout_url
+      expect(rendered).to have_link 'Click to watch', @video.youtube_url
+    end
   end
 end

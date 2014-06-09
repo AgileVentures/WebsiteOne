@@ -6,12 +6,17 @@ end
 Given /^the Hangout for event "([^"]*)" has been started$/ do |name|
 end
 
-Then /^I should see a link "([^"]*)" for the event "([^"]*)"$/ do |link, name|
+Then /^I should see a hangout link "([^"]*)" for the event "([^"]*)"$/ do |link, name|
   event = Event.find_by_name(name)
   url = Video.find(event).hangout_url
   expect(page).to have_link(link, href: url)
 end
 
+Then /^I should see a youtube link "([^"]*)" for the event "([^"]*)"$/ do |link, name|
+  event = Event.find_by_name(name)
+  url = Video.find(event).youtube_url
+  expect(page).to have_link(link, href: url)
+end
 
 Then /^I should see hangout details:$/ do |table|
   table.raw.flatten.reject(&:blank?).each do |string|
