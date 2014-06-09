@@ -33,11 +33,7 @@
 <% end %>
 
   <div class="col-lg-12">
-    <div id="hoa-link">
-      <%if @hangout_url  %>
-        <%= link_to 'Click to join the hangout', @hangout_url, id: 'hoa-link', target: '_blank' %>
-    <% end  %>
-    </div>
+    <%= render partial: 'shared/hangout_status', locals: {video: @video} if @video && @video.started? %>
   </div>
 
 </div>

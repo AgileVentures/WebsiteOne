@@ -44,16 +44,44 @@ describe 'events/show' do
     end
   end
 
-  it 'should display HOA url if url is present' do
-    @hangout_url = 'http://google.com'
-    render
-    expect(rendered).to have_css '#hoa-link'
-    expect(rendered).to have_link 'Click to join the hangout', @hangout_url
-  end
+  describe 'Hangout status' do
+    before(:each) do
+      @video = double(Video, video_id: 375,
+                             host: 'Superman',
+                             hangout_url: 'http://hangout.test',
+                             youtube_id: 'asd234',
+                             created_at: '2014-06-10 10:30:00',
+                             currently_in: %w(Sam Yaro),
+                             participants: %w(Sam Yaro David),
+                             started?: true,
+                             live?: true)
+      assign :video, @video
+    end
 
-  it 'should not display HOA url if url is NIL' do
-    @hangout_url = nil
-    render
-    expect(rendered).not_to have_link 'Click to join the the hangout'
+    it 'renders Hangout status section if the hangout has started' do
+      render
+      expect(rendered).to have_css("#hangout_status")
+    end
+
+
+    it 'does not render Hangout status section if the hangout has not started' do
+      @video.stub(started?: false)
+      render
+      expect(rendered).not_to have_css("#hangout_status")
+    end
+
+    it 'renders Hangout details' do
+      render
+      
+      expect(rendered).to have_text('Status')
+      expect(rendered).to have_text('Host')
+      expect(rendered).to have_text('Youtube recording')
+      expect(rendered).to have_text('Start time')
+      expect(rendered).to have_text('Currently in')
+      expect(rendered).to have_text('Participants')
+      expect(rendered).to have_link 'Click to join the hangout', @video.hangout_url
+      puts rendered
+    end
+
   end
 end
