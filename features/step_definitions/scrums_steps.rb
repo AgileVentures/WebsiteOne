@@ -24,7 +24,7 @@ Then(/^I should see a modal window with the first scrum$/) do
 end
 
 Then(/^I should see a modal window with the second scrum$/) do
-  vid = page.body.gsub(/\n/,'').scan(/<a class=\"scrum_yt_link.*?id=\"(.*?)"/).flatten
+  title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[1]
   expect(page.find("#player")[:style]).to eq("display: block; ")
   page.should have_selector('#playerTitle', text: title[0])
 end
