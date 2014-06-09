@@ -1,6 +1,10 @@
 var Scrum = {
   setup: function () {
     $('.scrum_yt_link').on('click', Scrum.select_video);
+    $('.modal').on('hidden.bs.modal', function(event){
+        player = $(".modal-body iframe").get(0);
+        player.src = '';
+    });
   },
   select_video: function(event) {
     event.preventDefault();
