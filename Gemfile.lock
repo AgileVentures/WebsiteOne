@@ -276,7 +276,7 @@ GEM
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rspec-core (2.14.8)
+    rspec-core (2.14.7)
     rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.6)
@@ -430,6 +430,7 @@ DEPENDENCIES
   rails (= 4.1.0)
   rails_12factor
   redcarpet
+  rspec-core (= 2.14.7)
   rspec-rails
   sass-rails (~> 4.0.0)
   selenium-webdriver
