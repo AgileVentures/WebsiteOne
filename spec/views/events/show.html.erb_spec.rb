@@ -46,7 +46,7 @@ describe 'events/show' do
 
   describe 'Hangout status' do
     before(:each) do
-      @video = double(Video, video_id: 375,
+      @video = stub_model(Video, video_id: 375,
                              host: 'Superman',
                              status: 'In progress',
                              hangout_url: 'http://hangout.test',
@@ -55,8 +55,7 @@ describe 'events/show' do
                              currently_in: %w(Sam Yaro),
                              participants: %w(Sam Yaro David),
                              started?: true,
-                             live?: true,
-                             youtube_url: 'http://youtube.test')
+                             live?: true)
       assign :video, @video
     end
 
@@ -92,7 +91,7 @@ describe 'events/show' do
       expect(rendered).to have_text('Sam Yaro')
       expect(rendered).to have_text('Sam Yaro David')
       expect(rendered).to have_link 'Click to join the hangout', @video.hangout_url
-      expect(rendered).to have_link 'Click to watch', @video.youtube_url
+      expect(rendered).to have_link 'Click to watch', /@video.youtube_id/
     end
   end
 end

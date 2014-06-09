@@ -8,14 +8,14 @@ end
 
 Then /^I should see a hangout link "([^"]*)" for the event "([^"]*)"$/ do |link, name|
   event = Event.find_by_name(name)
-  url = Video.find(event).hangout_url
-  expect(page).to have_link(link, href: url)
+  expect(page).to have_link(link, href: 'http://hangout.test')
 end
 
 Then /^I should see a youtube link "([^"]*)" for the event "([^"]*)"$/ do |link, name|
   event = Event.find_by_name(name)
-  url = Video.find(event).youtube_url
-  expect(page).to have_link(link, href: url)
+  youtube_id = Video.find(event).youtube_id
+  href = "http://www.youtube.com/watch?v=#{youtube_id}&feature=youtube_gdata"
+  expect(page).to have_link(link, href: href)
 end
 
 Then /^I should see hangout details:$/ do |table|
@@ -23,7 +23,6 @@ Then /^I should see hangout details:$/ do |table|
     expect(page).to have_text(string)
   end
 end
-
 
 Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
   ho_details = table.transpose.hashes

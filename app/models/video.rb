@@ -11,7 +11,7 @@ class Video < ActiveRecord::Base
   end
 
   def youtube_url
-    'http://youtube.test/' + youtube_id.to_s if youtube_id
+    "http://www.youtube.com/watch?v=#{youtube_id}&feature=youtube_gdata" if youtube_id
   end
 
   def currently_ins
