@@ -77,17 +77,17 @@ describe('WebsiteOne Projects module', function () {
         expect(WebsiteOne.Projects).toBeDefined();
       });
 
-      it('should call jQuery.ajax to get the google HOA script', function() {
-        expect(this.ajaxSpy).toHaveBeenCalledWith({
-          url: 'https://apis.google.com/js/platform.js',
-          dataType: 'script',
-          cache: true
-        });
-      });
-
-      it('should call the gapi.hangout.render function', function() {
-        expect(hangout.render).toHaveBeenCalled();
-      });
+      // it('should call jQuery.ajax to get the google HOA script', function() {
+      //   expect(this.ajaxSpy).toHaveBeenCalledWith({
+      //     url: 'https://apis.google.com/js/platform.js',
+      //     dataType: 'script',
+      //     cache: true
+      //   });
+      // });
+      //
+      // it('should call the gapi.hangout.render function', function() {
+      //   expect(hangout.render).toHaveBeenCalled();
+      // });
     });
   });
 });
