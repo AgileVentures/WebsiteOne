@@ -65,6 +65,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails' #unit testing
+  gem 'rspec-core', '2.14.7' #unit testing
   gem 'awesome_print' # plays well with pry
   gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
   gem 'jasmine' # framework for testing javascript
