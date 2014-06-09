@@ -26,13 +26,13 @@ describe EventsController do
       assigns(:event).should eq(event)
     end
 
-    it 'sets event hangout url' do
-      video = double(Video, hangout_url: 'http://hangout.test')
+    it 'assigns assosciated video' do
+      video = double(Video)
       Video.stub(find_by_video_id: video)
 
       get :show, {:id => event.to_param}, valid_session
       
-      expect(assigns(:hangout_url)).to eq video.hangout_url
+      expect(assigns(:video)).to eq video
     end
 
     it 'renders the show template' do

@@ -123,6 +123,7 @@ end
 
 Then /^I should( not)? see:$/ do |negative, table|
   expectation = negative ? :should_not : :should
+#TODO change rows into raw and remove blanks
   table.rows.flatten.each do |string|
     page.send(expectation, have_text(string))
   end
