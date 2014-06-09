@@ -25,17 +25,17 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Currently in | David               | Sam   |      |
       | Participants | Sam                 | David | Yaro |
     When I am on the show page for event "Scrum"
-    Then I should see:
+    Then I should see hangout details:
       | Status            | In progress |       |       |
       | Host              | Sam Joseph  |       |       |
       | Youtube recording |             |       |       |
       | Start time        | 10:00       |       |       |
       | Currently in      | Sam         | David |       |
       | Participants      | Sam         | Yaro  | David |
-    And I should see youtube recording at link "http://youtube.test"
-    And I should see a link "Click to join the hangout" for the event "Scrum"
-    And I should see a youtube player with hangout recording
-    But I should not see hangout button
+    # And I should see youtube recording at link "http://youtube.test"
+    # And I should see a link "Click to join the hangout" for the event "Scrum"
+    # And I should see a youtube player with hangout recording
+    # But I should not see hangout button
   #
   # Scenario: Hide hangout details section
   #   Given the Hangout for event "Scrum" has not been started
