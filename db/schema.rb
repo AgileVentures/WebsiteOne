@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606204845) do
+ActiveRecord::Schema.define(version: 20140608222127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,11 @@ ActiveRecord::Schema.define(version: 20140606204845) do
     t.string   "hangout_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.string   "host"
+    t.string   "youtube_id"
+    t.text     "currently_in"
+    t.text     "participants"
   end
 
 end
