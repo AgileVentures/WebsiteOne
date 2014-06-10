@@ -6,7 +6,6 @@ class ScrumsController < ApplicationController
     query = client.videos_by(:query => "AtlanticScrum|AmericasScrum|EuroScrum Pair Hookup", 
                              :max_results => 20,
                              :order_by => :published)
-    #query = client.videos_by(:query => "agile ventures scrums", :max_results => 20, :order_by => :published)
     @scrums = query.videos.map { |video| video_data(video) }
   end
 

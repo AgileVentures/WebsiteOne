@@ -18,8 +18,8 @@ describe ScrumsController do
           expect(subject[:id]).not_to be_empty
         end
 
-        it 'has a published DateTime' do
-          expect(subject[:published]).to eq "2014-04-23".to_date
+        it 'has a published Date' do
+          expect(subject[:published]).to be_an_instance_of(Date)
         end
 
         it 'has a title' do
