@@ -26,6 +26,7 @@ gem 'acts_as_tree'
 gem 'acts_as_follower'
 gem 'will_paginate-bootstrap'
 gem 'coveralls', require: false # TODO Bryan: move to production group?
+gem 'google-analytics-rails'
 gem 'friendly_id'  # for more REST-ful routes, use human-readable IDs
 gem 'colored' # colorizing console
 gem 'redcarpet' # renders markdown
@@ -40,6 +41,7 @@ gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
+gem 'youtube_it'
 gem 'utf8-cleaner'
 gem 'youtube_it'
 gem 'rake', '10.3.1'
