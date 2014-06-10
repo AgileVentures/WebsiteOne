@@ -26,8 +26,6 @@ describe ScrumsController do
           expect(subject[:title]).not_to be_empty
         end
 
-          #it 'has content (why is this the same as title?)'
-          #cuz nobody enter content data so it takes the same name as the title?
         it 'has a url (use regex to assert this string is a URL)' do
           expect(subject[:url]).to match(/https?:\/\/[\S]+/)
         end
@@ -43,6 +41,3 @@ describe ScrumsController do
     end
   end
 end
-
-
-
