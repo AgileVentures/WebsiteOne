@@ -23,5 +23,3 @@ Feature: Scrums Index
     When I close the modal
     And I click the second scrum in the timeline
     Then I should see a modal window with the second scrum
-
-

@@ -40,7 +40,6 @@ gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
-gem 'youtube_it'
 gem 'utf8-cleaner'
 
 gem 'yui-compressor'
@@ -60,14 +59,13 @@ group :test do
   gem 'zeus', '0.13.4.pre2' # rails preloading environment (the only ver that works with RubyMine)
   gem 'webmock' # mocking external net connections
   gem 'delorean'
-  gem 'vcr'
 end
 
 group :development, :test do
   gem 'rspec-rails' #unit testing
-  gem 'rspec-core', '2.14.7' #unit testing
-  gem 'awesome_print' # plays well with pry
-  gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
+  gem 'rspec-core', '2.14.7'
+#TODO YA do we need it? It breaks Rubymine's debugging
+  gem 'debugger'  # Use debugger
   gem 'jasmine' # framework for testing javascript
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser
