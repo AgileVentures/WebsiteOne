@@ -5,19 +5,19 @@ Feature: Scrums Index
   I would like to be able to see a list of previous scrums
 
   Scenario: Scrums index page renders a timeline of scrums for users to view in descending order
-    Given I visit "/scrums/index" page
+    Given I visit "/scrums/index"
     Then I should see 20 scrums in descending order by published date:
 
   @javascript
   Scenario: Clicking on the video should bring up a modal YouTube player window
-    Given I visit "/scrums/index" page
+    Given I visit "/scrums/index"
     Then I should not see a modal window
     And I click the first scrum in the timeline
     Then I should see a modal window with the first scrum
 
   @javascript
   Scenario: Closing an existing video and opening a new one should update the player
-    Given I visit "/scrums/index" page
+    Given I visit "/scrums/index"
     And I click the first scrum in the timeline
     Then I should see a modal window with the first scrum
     When I close the modal

@@ -1,7 +1,3 @@
-Given(/^I visit "(.*?)" page$/) do |path|
-  visit path
-end
-
 Then(/^I should see a timeline for the scrums$/) do
   pending
 end
