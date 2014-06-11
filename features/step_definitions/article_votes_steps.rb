@@ -27,7 +27,7 @@ Given(/^the following articles with votes exist:$/) do |table|
 end
 
 Then(/^I should see a Vote value of "(.*?)"$/) do |vote_value|
-  page.should have_text 'Vote value: ' + vote_value
+  page.should have_text 'Votes: ' + vote_value
 end
 
 Given(/^I have voted "(.*?)" article "(.*?)"$/) do |up_or_down, article|
