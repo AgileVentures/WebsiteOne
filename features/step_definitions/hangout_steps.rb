@@ -1,5 +1,5 @@
 Then /^I should see hangout button$/ do
-  src = page.find(:css,'#HOA-placeholder iframe')['src']
+  src = page.find(:css,'#liveHOA-placeholder iframe')['src']
   expect(src).to match /talkgadget.google.com/
 end
 

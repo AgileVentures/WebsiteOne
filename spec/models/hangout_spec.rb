@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Hangout do
-  let(:hangout){ stub_model(hangout, event_id: '333') }
+  let(:hangout){ stub_model(Hangout, event_id: '333') }
 
   it '#started?' do
     hangout.hangout_url = 'test'
