@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606204845) do
+ActiveRecord::Schema.define(version: 20140611170200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,15 +28,21 @@ ActiveRecord::Schema.define(version: 20140606204845) do
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
   add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
 
-  create_table "authentications", force: true do |t|
-    t.integer  "user_id",    null: false
-    t.string   "provider",   null: false
-    t.string   "uid",        null: false
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "documents", force: true do |t|
     t.string   "title"
@@ -171,6 +177,8 @@ ActiveRecord::Schema.define(version: 20140606204845) do
     t.text     "bio"
     t.boolean  "receive_mailings",       default: true
     t.integer  "karma_points",           default: 0
+    t.string   "tz_name"
+    t.string   "tz_offset"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
   after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip }
   after_validation ->() { KarmaCalculator.new(self).perform }
 
-  has_many :authentications, dependent: :destroy
   has_many :projects
   has_many :documents
   has_many :articles
@@ -34,11 +33,6 @@ class User < ActiveRecord::Base
 
 
   acts_as_follower
-
-  def apply_omniauth(omniauth)
-    self.email = omniauth['info']['email'] if email.blank?
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-  end
 
   def password_required?
     (authentications.empty? || !password.blank?) && super
