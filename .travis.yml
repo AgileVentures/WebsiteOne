@@ -35,5 +35,5 @@ deploy:
 
 notifications:
   email:
-    - thomas@nocebo.se
-    - info@agileventures.org
+    # - thomas@nocebo.se
+    # - info@agileventures.org
