@@ -1,11 +1,9 @@
 class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_filter :authenticate_user!, except: [:index, :show]
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
+  before_action :set_project, except: [:index, :new, :create]
+  before_action :set_project_documents, only: :show
   before_action :get_current_stories, only: [:show]
-  include DocumentsHelper
-
-#TODO YA Add controller specs for all the code
 
   def index
     @projects = Project.search(params[:search], params[:page])
@@ -13,7 +11,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    documents
     @members = @project.members
     @videos = @project.videos if @project
   end
@@ -23,7 +20,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge('user_id' => current_user.id))
+    @project = current_user.projects.build(project_params)
     if @project.save
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
@@ -47,12 +44,12 @@ class ProjectsController < ApplicationController
 
 
   def destroy
-    #if @project.destroy
-    #  @notice = 'Project was successfully deleted.'
-    #else
-    #  @notice = 'Project was not successfully deleted.'
-    #end
-    #redirect_to projects_path, notice: @notice
+    if @project.destroy
+      @notice = 'Project was successfully deleted.'
+    else
+      @notice = 'Project was not successfully deleted.'
+    end
+    redirect_to projects_path, notice: @notice
   end
 
   def follow
@@ -78,6 +75,10 @@ class ProjectsController < ApplicationController
   private
   def set_project
     @project = Project.friendly.find(params[:id])
+  end
+
+  def set_project_documents
+    @documents = Document.where("project_id = ?", @project.id).order(:created_at)
   end
 
   def get_current_stories

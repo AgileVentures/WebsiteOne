@@ -2,8 +2,7 @@ class EventsController < ApplicationController
   #require 'delorean'
 
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
-
+  before_action :set_event, except: [:index, :new, :create]
   def new
     @event = Event.new
   end

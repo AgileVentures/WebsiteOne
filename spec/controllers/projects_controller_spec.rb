@@ -13,7 +13,8 @@ describe ProjectsController do
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
     # stubbing out devise methods to simulate authenticated user
-    @user = double('user', id: 1, friendly_id: 'some-id')
+    #@user = double('user', id: 1, friendly_id: 'some-id')
+    @user = FactoryGirl.build(:user, id: 1, slug: 'some-id')
     request.env['warden'].stub :authenticate! => @user
     controller.stub :current_user => @user
   end
@@ -107,8 +108,8 @@ describe ProjectsController do
               status: 'Status 1'
           }
       }
-      @project = mock_model(Project, friendly_id: 'some-project')
-      Project.stub(:new).and_return(@project)
+      @project = FactoryGirl.build(:project, @params[:project])
+      @user.stub_chain(:projects, :build).and_return(@project)
       controller.stub(:current_user).and_return(@user)
     end
 
@@ -137,9 +138,11 @@ describe ProjectsController do
       end
 
       it 'passes current_user id into new' do
-        Project.should_receive(:new).with({"title" => "Title 1", "description" => "Description 1", "status" => "Status 1", "user_id" => @user.id})
-        @project.stub(:save).and_return(true)
+        @user.projects.unstub(:build)
+        @user.unstub(:projects)
+
         post :create, @params
+        expect(assigns(:project).user_id).to eq @user.id
       end
     end
 

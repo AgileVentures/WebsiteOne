@@ -1,5 +1,3 @@
-require 'act_as_page'
-
 class Document < ActiveRecord::Base
   include ActAsPage
 

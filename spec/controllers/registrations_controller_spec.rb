@@ -49,13 +49,10 @@ describe RegistrationsController do
 
     before(:each) do
       # stubbing out devise methods to simulate authenticated user
-      @user = double('user', id: 1, friendly_id: 'some-id')
+      @user = FactoryGirl.build(:user)
       request.env['warden'].stub :authenticate! => @user
       controller.stub :current_user => @user
-
       request.env['devise.mapping'] = Devise.mappings[:user]
-      User.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@user)
-      @user.stub(:skill_list=)
     end
 
     it 'assigns the requested project as @project' do

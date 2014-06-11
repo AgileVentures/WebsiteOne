@@ -153,7 +153,7 @@ describe YoutubeService do
     it 'returns project tags for projects with project title and tags and a scrum tag' do
       project_1 = double(Project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
       project_2 = double(Project, title: 'Black hole', tag_list: [])
-      user = double(User, youtube_id: 'test_id', following_by_type: [project_1, project_2])
+      user = double(User, youtube_id: 'test_id', projects_joined: [project_1, project_2])
       service = subject.new(user)
       service.send(:followed_project_tags).should eq ["big regret", "boom", "bang", "big boom", "black hole", "scrum"]
     end

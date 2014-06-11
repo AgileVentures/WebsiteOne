@@ -37,9 +37,8 @@ class YoutubeService
   end
 
   def followed_project_tags
-    projects = @object.following_by_type('Project')
     [].tap do |tags|
-      projects.each do |project|
+      @object.projects_joined.each do |project|
         tags.concat(self.class.new(project).send(:project_tags))
       end
       tags << 'scrum'

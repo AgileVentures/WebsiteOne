@@ -9,6 +9,7 @@ module YoutubeHelper
   end
 
   #TODO YA add fallback is user_id not found
+  #TODO Doesn't seem to be used anywhere, could be removed
   def user_id(token)
     # API v2
     response = open("https://gdata.youtube.com/feeds/api/users/default?alt=json", 'Authorization' => "Bearer #{token}").read

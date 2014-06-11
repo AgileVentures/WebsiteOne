@@ -4,7 +4,7 @@ WebsiteOne::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false
 
-  resources :projects, :format => false do
+  resources :projects, except: :destroy, :format => false do
     member do
       get :follow
       get :unfollow
