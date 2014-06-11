@@ -14,19 +14,19 @@
       <li>Created on <%= article.created_at.strftime('%d %B %y') %> by <%= link_to author.display_name, user_path(author) %></li>
       <li>Last updated <%= time_ago_in_words(article.updated_at) %> ago</li>
       <li><%= link_to_tags(article.tag_list) %></li>
-      <li>Vote value:&nbsp;<%= article.get_upvotes.size - article.get_downvotes.size %>
+      <li>Votes:&nbsp;<span class="badge vote"><%= article.get_upvotes.size - article.get_downvotes.size %></span>
 
       <% if user_signed_in? and not article.new_record? %>
         <% visitor_has_voted = @current_user.voted_as_when_voted_for article %>
         <% if visitor_has_voted == nil %>
-          <%= link_to 'Up Vote', upvote_article_path(@article) %>
-        | <%= link_to 'Down Vote', downvote_article_path(@article) %>
+          <%= custom_css_btn 'Up Vote', 'fa fa-arrow-up', upvote_article_path(@article) %>
+          <%= custom_css_btn 'Down Vote', 'fa fa-arrow-down', downvote_article_path(@article) %>
         <% elsif visitor_has_voted == true %>
-          <%= link_to 'Cancel Up Vote', cancelvote_article_path(@article) %>
-        | <%= link_to 'Down Vote', downvote_article_path(@article) %>
+          <%= custom_css_btn 'Cancel Up Vote', 'fa fa-undo', cancelvote_article_path(@article) %>
+          <%= custom_css_btn 'Down Vote', 'fa fa-arrow-down', downvote_article_path(@article) %>
         <% else %>
-          <%= link_to 'Up Vote', upvote_article_path(@article) %>
-        | <%= link_to 'Cancel Down Vote', cancelvote_article_path(@article) %>
+          <%= custom_css_btn 'Up Vote', 'fa fa-arrow-up', upvote_article_path(@article) %>
+          <%= custom_css_btn 'Cancel Down Vote', 'fa fa-undo', cancelvote_article_path(@article) %>
         <% end %>
       <% end %>
       </li>
