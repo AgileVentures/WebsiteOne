@@ -1,7 +1,3 @@
-Then(/^I should see a timeline for the scrums$/) do
-  pending
-end
-
 Then(/^I should see 20 scrums in descending order by published date:$/) do
   dates = page.text.scan(/\d{4}-\d{2}-\d{2}/)
   clocks = page.all(:css, ".glyphicon-time")
@@ -28,18 +24,6 @@ end
 
 Then(/^I should not see a modal window$/) do
   page.evaluate_script("$('.modal').css('display')").should eq "none"
-end
-
-When(/^I close the video window$/) do
-    pending # express the regexp above with the code you wish you had
-end
-
-Then(/^the video should stop playing$/) do
-    pending # express the regexp above with the code you wish you had
-end
-
-When(/^I stop the video$/) do
-    pending # express the regexp above with the code you wish you had
 end
 
 When(/^I click the first scrum in the timeline$/) do
