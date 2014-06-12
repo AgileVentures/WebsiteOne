@@ -22,13 +22,11 @@ WebsiteOne::Application.configure do
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
 
-  GA.tracker = 'UA-47795185-1'
-
-
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  config.assets.compress = false
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

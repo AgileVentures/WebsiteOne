@@ -7,14 +7,14 @@ When /^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/ do |button|
   #sleep(0.1)
 end
 
-When(/^I fill in the editable field "([^"]*)" with "([^"]*)"$/) do |field, s|
+When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do |field, type, s|
   page.driver.within_frame('mercury_iframe') {
     field = field.downcase.singularize
     # This selector is specific to the mercury region used!
     if field == 'title'
-      find(:css, 'div#document_title>textarea').set(s)
+      find(:css, "div##{type}_title>textarea").set(s)
     elsif field == 'body'
-      page.execute_script("$('#document_body').text('#{s}')")
+      page.execute_script("$('##{type}_body').text('#{s}')")
       #find(:css, 'div#document_body').set(s)
     end
   }
@@ -53,4 +53,23 @@ When /I click "([^"]*)" in Mercury Editor/ do |button|
   page.driver.within_frame('mercury_iframe') {
     click_link button
   }
+end
+
+When(/^I click on the "Insert Media" button$/) do
+  find(:css, '.mercury-primary-toolbar .mercury-insertMedia-button').click()
+end
+
+Then(/^the Mercury Editor modal window should (not |)be visible$/) do |visible|
+  page.should have_css '.mercury-modal', visible: visible.blank?
+end
+
+And(/^I am focused on the "([^"]*)"$/) do |item|
+  item.downcase!
+  case item
+    when 'document body'
+      page.execute_script '$("#document_body").focus();'
+
+    else
+      pending
+  end
 end

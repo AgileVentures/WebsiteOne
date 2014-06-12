@@ -7,6 +7,13 @@ describe VisitorsController do
     expect(response).to render_template('index')
   end
 
+  it 'assigns event to next_occurrence' do
+    event = double(Event)
+    Event.should_receive(:next_event_occurrence).and_return(event)
+    get :index
+    expect(assigns(:event)).to eq event
+  end
+
   describe '#send_contact_form' do
 
     before(:each) do

@@ -1,0 +1,15 @@
+<% content_for :title, '404 - Page Not Found' %>
+<section id="404" style="padding-top: 50px;">
+  <div id="fof">
+    <div id="overlay"></div>
+    <canvas></canvas>
+    <div id="message">
+      <h3>404 - Page not found</h3>
+      <p>We're sorry, but we couldn't find the page you requested</p>
+    </div>
+  </div>
+
+  <p>Big thx to Hakim El Hattab for this effect.<%= link_to 'GitHub repo', 'https://github.com/hakimel/404', target: '_blank' %>  </p>
+</section>
+
+<%= javascript_include_tag '404', 'data-turbolinks-track' => true %>

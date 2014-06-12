@@ -44,7 +44,6 @@ Feature: As a site owner
     When I click "Sync with YouTube"
     And I go to my "profile" page
     Then I should see "Title"
-    #And I should see "Published"
     And I should see a list of my videos
     But I should not see "Sync with YouTube"
 
@@ -73,7 +72,7 @@ Feature: As a site owner
     Given my YouTube Channel ID with some videos in it
     And my YouTube channel is connected
     When I go to my "profile" page
-    Then I should see "PP on WSO" before "WebsiteOne - Pairing session"
+    Then I should see "WebsiteOne - Pairing session" before "PP WSO UserManagement"
 
   Scenario: show embedded youtube player with the first video
     Given my YouTube Channel ID with some videos in it

@@ -10,17 +10,9 @@ Feature: As a site user
       | Bob        | Butcher   | bobb112@hotmail.com    | ruby, c++          |
     And I am logged in as user with email "brett@example.com", with password "12345678"
 
-  @javascript
   Scenario: Viewing skills
     Given I am on "profile" page for user "Alice"
-    And I click "Skills"
     Then I should see:
-      | title |
-      | ruby  |
-      | rails |
-      | rspec |
-    When I click "Projects"
-    Then I should not see:
       | title |
       | ruby  |
       | rails |
@@ -32,9 +24,6 @@ Feature: As a site user
     And I add skills "c++,java,php"
     And I click "Update" button
     Given I go to my "profile" page
-    Then I should be on the "user profile" page for "brett@example.com"
-    When I click "Skills"
-  # And I should see skills "c++,java,php" on my profile
     And I should see:
       | title |
       | c++   |

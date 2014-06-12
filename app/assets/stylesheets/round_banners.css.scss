@@ -1,0 +1,241 @@
+@import "mixins";
+
+/* Round banners */
+
+/* =====[ GOOGLE FONT "LATO" ]============================================================================== */
+@import url(http://fonts.googleapis.com/css?family=Lato:400,100,900);
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+/* =====[ BODY ]============================================================================== */
+
+/* =====[ COLORS ]============================================================================== */
+
+.color-1-bg {
+  background: #6baba1 !important;
+}
+
+.color-1-font, .color1-price {
+  color: #6baba1 !important;
+}
+
+.color-2-bg {
+  background: #e0a32e !important;
+}
+
+.color-2-font, .color-2-price {
+  color: #e0a32e !important;
+}
+
+.color-3-bg {
+  background: #e7603b !important;
+}
+
+.color-3-font, .color-3-price {
+  color: #e7603b !important;
+}
+
+.color-4-bg {
+  background: #9ca780 !important;
+}
+
+.color-4-font, .color-4-price {
+  color: #9ca780 !important;
+}
+
+.front, .back {
+  font-family: Lato, sans-serif;
+  float: left;
+  width: 225px;
+  height: 225px;
+  background: #FFF;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-box-shadow: 0 0 10px 0 #dbdbdb;
+  box-shadow: 0 0 10px 0 #dbdbdb;
+  @include css-transition(all 0.3s ease-in-out);
+}
+
+/* =====[ MAIN LIST ]============================================================================== */
+
+.box {
+  list-style: none;
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+.box i {
+  padding-right: 5px;
+}
+
+.box > li {
+  width: 220px;
+  height: 220px;
+  display: inline-block;
+  margin: 8px;
+}
+
+/* =====[ FRONT ELEMENTS ]============================================================================== */
+
+.front > div {
+  text-align: center;
+  color: #60bad7;
+}
+
+.title {
+//  font-size: 28px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 25px 0px 17px;
+  font-size: 40px;
+}
+
+.price span {
+  font-weight: 900;
+  vertical-align: top;
+  margin-top: -15px;
+  display: inline-block;
+}
+
+.price .total {
+  font-size: 60px;
+  vertical-align: middle;
+}
+
+.currency, .end {
+  font-size: 40px;
+}
+
+.description {
+  text-align: center;
+}
+
+.front .description {
+  color: #9b9b9b !important;
+  font-size: 14px;
+  padding: 4px 45px 0;
+}
+
+/* =====[ BACK ELEMENTS ]============================================================================== */
+
+.back .title {
+  color: #FFF;
+}
+
+.back .description p {
+  font-size: 14px;
+}
+
+.back .description p ul {
+  width: 55%;
+  margin: auto;
+}
+
+.back .description p ul li {
+  color: #FFF !important;
+  text-align: left;
+  list-style: none;
+  line-height: 1.4;
+}
+
+.back p {
+  color: #FFF !important;
+  font-weight: bold;
+}
+
+.popular {
+  font-size: 30px;
+  color: #60bad7;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+/* =====[ CIRCLE ANIMATIONS ]============================================================================== */
+
+.circle {
+  border-radius: 150px;
+  -moz-border-radius: 150px;
+  -webkit-border-radius: 150px;
+  @include css-transition(all 1.8s ease-in-out);
+  position: absolute;
+}
+
+.info {
+  position: absolute;
+  border-radius: 150px;
+  -moz-border-radius: 150px;
+  -webkit-border-radius: 150px;
+  opacity: 0;
+  @include css-transform(scale(0) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg));
+  -webkit-backface-visibility: hidden;
+}
+
+.circle:hover .front {
+  @include css-transform(scale(1.1));
+  opacity: 1;
+}
+
+.circle:hover .info {
+  @include css-transform(scale(1) rotate(360deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg));
+  opacity: 1;
+}
+
+.circle:hover .front-popular {
+  border-radius: 10% 50% 50% 50% !important;
+}
+
+.circle:hover .popular {
+  opacity: 1;
+  @include css-animation(popularAnim 2s 1);
+}
+
+@include keyframes(popularAnim) {
+  from {
+    opacity: 0;
+    left: 40px;
+  }
+  to {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+.box > li {
+  *float: left;
+}
+
+.circle .back {
+  *display: none;
+}
+
+.circle .back {
+  z-index: 0;
+}
+
+.circle .front {
+  position: relative;
+  z-index: 1;
+}
+
+.circle:hover .back {
+  z-index: 1;
+}
+
+.circle:hover .front {
+  position: relative;
+  z-index: 0;
+}
+
+.circle:hover .back {
+  *display: inline;
+}
+
+.circle:hover .front {
+  *display: none;
+}

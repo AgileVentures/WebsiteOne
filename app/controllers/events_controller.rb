@@ -9,14 +9,13 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event_schedule = @event.current_occurences
-    #puts @event_schedule
+    @event_schedule = @event.next_occurrences
   end
 
   def index
     @events = []
     Event.all.each do |event|
-      @events << event.current_occurences
+      @events << event.next_occurrences
     end
     @events = @events.flatten.sort_by { |e| e[:time] }
   end
@@ -25,23 +24,17 @@ class EventsController < ApplicationController
   end
 
   def create
-    if params[:event][:event_date].empty?
-      params[:event][:event_date] = Date.today
-    end
-    if params[:event][:start_time].empty?
-      params[:event][:start_time] = Time.now
-    end
-    if params[:event][:end_time].empty?
-      params[:event][:end_time] = Time.now + 30.minutes
-    end
-    @event = Event.new(event_params)
-    if @event.save
+    EventCreatorService.new(Event).perform(normalize_event_dates(event_params),
+                                       success: ->(event) do
+      @event = event
       flash[:notice] = 'Event Created'
       redirect_to event_path(@event)
-    else
+    end,
+    failure: ->(event) do
+      @event = event
       flash[:notice] = @event.errors.full_messages.to_sentence
-      redirect_to new_event_path
-    end
+      render :new
+    end)
   end
 
   def update
@@ -71,7 +64,7 @@ class EventsController < ApplicationController
   private
 
   def set_event
-    @event = Event.find(params[:id])
+    @event = Event.friendly.find(params[:id])
   end
 
 
@@ -79,5 +72,11 @@ class EventsController < ApplicationController
     params.require(:event).permit!
   end
 
+  def normalize_event_dates(event_params)
+    event_params[:event_date] = EventDate.for(event_params[:event_date])
+    event_params[:start_time] = StartTime.for(event_params[:start_time])
+    event_params[:end_time] = EndTime.for(event_params[:end_time])
+    event_params
+  end
 
 end

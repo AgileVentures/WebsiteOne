@@ -39,7 +39,7 @@ Feature: See project related videos
 
   Scenario: show videos sorted by published date
     Given I am on the "Show" page for project "hello world"
-    Then I should see "PP on WSO" before "WebsiteOne - Pairing session"
+    Then I should see "WebsiteOne - Pairing session" before "PP on WSO"
 
   Scenario: show embedded youtube player with the first video
     Given I am on the "Show" page for project "hello world"

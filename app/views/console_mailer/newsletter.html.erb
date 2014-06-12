@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>
+      Hello <%= @user.display_name %>
+    </h1>
+    <h2>
+      <%= @heading %>
+    </h2>
+    <%= simple_format(@content) %>
+    <p>
+      <span>
+      You can stop receiving this newsletter by adjusting 
+      your settings at agileventures.org
+      </span>
+    </p>
+  </body>
+</html>

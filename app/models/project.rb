@@ -1,17 +1,22 @@
+require 'url_validator'
+
 class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   validates :title, :description, :status, presence: true
+  validates_with UrlValidator
+  validates :github_url, uri: true, :allow_blank => true
   acts_as_followable
   belongs_to :user
   has_many :documents
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-
   def self.search(search, page)
-    order('LOWER(title)').where('title LIKE ?', "%#{search}%").paginate(per_page: 5, page: page)
+    order('LOWER(title)')
+      .where('title LIKE ?', "%#{search}%")
+      .paginate(per_page: 5, page: page)
   end
 
   def self.all_tags
@@ -28,3 +33,4 @@ class Project < ActiveRecord::Base
     end
   end
 end
+

@@ -23,15 +23,13 @@ def path_to(page_name, id = '')
     when 'show' then
       project_path(id)
     when 'our members' then
-      users_index_path
+      users_path
     when 'user profile' then
-      users_show_path(id)
+      user_path(id)
     when 'my account' then
       edit_user_registration_path(id)
     when 'foobar' then
       visit ("/#{page}")
-    when 'supporters' then
-      page_path('sponsors')
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -143,8 +141,12 @@ Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
   within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
 end
 
-Then /^I should see link "([^"]*)"$/ do |link|
-  page.should have_link link
+Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
+  unless negative
+    expect(page.has_link? link).to be_true
+  else
+    expect(page.has_link? link).to be_false
+  end
 end
 
 Then /^I should see field "([^"]*)"$/ do |field|
@@ -221,14 +223,14 @@ end
 #end
 
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
-  find(:css, %Q{a[data-link-text="#{button.downcase}"]}).click()
+  find(:css, %Q{a[title="#{button.downcase}"]}).click()
 end
 
 Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, button|
   if should == 'not '
-    page.should_not have_css %Q{a[data-link-text="#{button.downcase}"]}
+    page.should_not have_css %Q{a[title="#{button.downcase}"]}
   else
-    page.should have_css %Q{a[data-link-text="#{button.downcase}"]}
+    page.should have_css %Q{a[title="#{button.downcase}"]}
   end
 end
 
@@ -244,7 +246,7 @@ end
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
   actual_order = page.all('li.listings-item a').collect(&:text)
-  expected_order.should == actual_order
+  actual_order.should eq expected_order
 end
 
 
@@ -280,4 +282,9 @@ end
 
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
   page.should have_css "a[href='#{link}']", text: text
+end
+
+
+Then(/^I should see an image with source "([^"]*)"$/) do |source|
+  page.should have_css "img[src*=\"#{source}\"]"
 end

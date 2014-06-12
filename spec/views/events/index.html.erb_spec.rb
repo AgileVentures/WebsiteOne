@@ -31,7 +31,7 @@ describe 'events/index' do
 
     @events = []
     [@event1, @event2].each do |event|
-      @events << event.current_occurences
+      @events << event.next_occurrences
     end
     @events.flatten!
     assign(:events, @events)

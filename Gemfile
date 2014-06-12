@@ -1,16 +1,20 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
-gem 'rails', '4.0.2'
+ruby '2.1.1'
+gem 'rails', '4.1.0'
+# Added after upgrade to rails 4.1
+gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.1'
+# End additions
+
 gem 'pg'  # PostgreSQL database support
 gem 'sass-rails', '~> 4.0.0' # Sass stylesheet language
-gem 'uglifier', '>= 1.3.0'   # Javascript compressor
-gem 'coffee-rails', '~> 4.0.0'  # Coffee-script support
+gem 'uglifier'  # Javascript compressor
+gem 'coffee-rails'  # Coffee-script support
 gem 'therubyracer', platforms: :ruby  # Google V8 javascript engine
 gem 'jquery-rails'  # Use jquery as the JavaScript library
 gem 'turbolinks' # Follow links faster
-gem 'jbuilder', '~> 1.2' # Json for declaring
+gem 'jbuilder' # Json for declaring
 gem 'devise' # Authentication local and 3rd party
-gem 'bootstrap-sass', '~> 3.0.2.0' # JS Bootstrap library support
+gem 'bootstrap-sass' # JS Bootstrap library support
 gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
 gem 'faker'
@@ -18,33 +22,37 @@ gem 'omniauth'
 gem 'omniauth-github', git: 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-gplus', git: 'git://github.com/samdunne/omniauth-gplus.git'
 gem 'font-awesome-rails'
-gem 'high_voltage'
-gem 'acts_as_tree', '~> 1.5.0'
+gem 'acts_as_tree'
 gem 'acts_as_follower'
 gem 'will_paginate-bootstrap'
 gem 'coveralls', require: false # TODO Bryan: move to production group?
-gem 'google-analytics-rails'
-gem 'friendly_id', '~> 5.0.0' # for more REST-ful routes, use human-readable IDs
+gem 'friendly_id'  # for more REST-ful routes, use human-readable IDs
 gem 'colored' # colorizing console
 gem 'redcarpet' # renders markdown
 gem 'coderay' # syntax highlighting for markdown code blocks
 gem 'acts-as-taggable-on' # Add tags to objects. Used on Projects
 gem 'geocoder' # geocoding
 gem 'bootstrap-modal-rails'
-gem 'paper_trail', '~> 3.0.0'   # version control for Document
+gem 'paper_trail'  # version control for Document
 gem 'verbs'   # language and verbs - not used for now but I plan to use it in Events /Thomas
 gem 'ice_cube'     # used for Event
-gem 'squeel'
 gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??
 gem 'addressable'       # used for uri validation
+gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
+gem 'utf8-cleaner'
+
+gem 'yui-compressor'
+gem 'compass-rails'
+gem 'rack-cache'
+gem 'sprockets-image_compressor'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
   gem 'capybara-webkit'  # Headless driver for capybara
   gem 'selenium-webdriver' # Headful driver for capybara
-  gem 'poltergeist', '1.5.0' # yet another headless driver for capybara
+  gem 'poltergeist'  # yet another headless driver for capybara
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
@@ -66,9 +74,4 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'unicorn'
-end
-
-group :assets do
-  gem 'compass-rails'
-  # Add any compass extensions here
 end

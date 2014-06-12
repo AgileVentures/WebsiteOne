@@ -2,13 +2,7 @@ require 'spec_helper'
 
 describe 'projects/show.html.erb' do
   before :each do
-    @user = mock_model User,
-                       id: 1,
-                       friendly_id: 'my-friend',
-                       first_name: 'John',
-                       last_name: 'Simpson',
-                       email: 'john@simpson.org',
-                       display_name: 'John Simpson'
+    @user = FactoryGirl.build(:user)
 
     @document = mock_model Document,
                            title: 'this is a document',
@@ -23,12 +17,22 @@ describe 'projects/show.html.erb' do
                           status: 'Active',
                           user_id: @user.id,
                           created_at: Time.now,
+                          pivotaltracker_id: 11111,
                           tag_list: []
 
     @videos = [
         { title: 'First video', user: @user, published: '12/12/2012'.to_date, url: 'somewhere', id: '123', content: 'some text' },
         { title: 'Second video', user: @user, published: '13/12/2013'.to_date, url: 'somewhere', id: '123', content: 'some text' }
     ]
+
+    story = double()
+    story.stub story_type: 'chore',
+               estimate: 3,
+               id: 1,
+               name: 'My story',
+               owned_by: { initials: 'my-initials' },
+               current_state: 'active'
+    @stories = [ story ]
 
     @documents = [@document]
     @documents.stub(:roots).and_return(@documents)
@@ -42,8 +46,30 @@ describe 'projects/show.html.erb' do
     assign :documents, @documents
     assign :members, [@user]
     assign :videos, @videos
-    view.stub(:project_created_by).and_return(@created_by)
+    assign :stories, @stories
     @project.stub(:user).and_return(@user)
+  end
+
+  it "renders a link to the project's github page" do
+    @project.stub(:github_url).and_return 'github.com/AgileVentures/myfriend'
+    render
+    expect(rendered).to have_link("#{@project.github_url.split('/').last}", :href => @project.github_url)
+  end
+
+  it 'renders an unlinked message when project has no github link' do
+    render
+    expect(rendered).to have_text 'not linked to GitHub'
+  end
+
+  it "renders a link to the project's Pivotal Tracker page" do
+    @project.stub(:pivotaltracker_url).and_return 'www.pivotaltracker.com/s/projects/12345'
+    render
+    expect(rendered).to have_link("#{@project.title}", :href => @project.pivotaltracker_url)
+  end
+
+  it 'renders an unlinked message when project has no PivotalTracker link' do
+    render
+    expect(rendered).to have_text 'not linked to PivotalTracker'
   end
 
   it 'renders project description' do
@@ -66,12 +92,46 @@ describe 'projects/show.html.erb' do
     expect(rendered).to have_text @user.display_name, visible: false
   end
 
+  context 'Pivotal Tracker stories' do
+    it 'renders a message when no Pivotal Tracker stories are found' do
+      assign :stories, []
+      render
+      expect(rendered).to have_text 'No PivotalTracker Stories can be found for project Title 1'
+    end
+
+    context 'with Pivotal Tracker stories' do
+      before(:each) do
+        render
+      end
+
+      it 'should render the appropriate story type icon' do
+        expect(rendered).to have_css 'i.fa.fa-gear.fa-lg'
+      end
+
+      it 'should render the correct story estimate' do
+        expect(rendered).to have_css 'i.story_estimate', count: 3
+      end
+
+      it 'should render the story title' do
+        expect(rendered).to have_text 'My story'
+      end
+
+      it 'should render the story owners initials' do
+        expect(rendered).to have_text 'my-initials'
+      end
+
+      it 'should render the current story state' do
+        expect(rendered).to have_text 'active'
+      end
+    end
+  end
+
   describe 'project videos' do
 
     it 'renders Videos tab with videos quantity' do
       render
       rendered.within('.nav-tabs') do |content|
-        expect(content.find(:css, 'li#videos').text).to eq(' Videos (2)')
+        expect(content.find(:css, 'li#videos').text).to match /Videos \(2\)/
       end
       expect(render).to have_selector('div.tab-pane#videos_list')
     end

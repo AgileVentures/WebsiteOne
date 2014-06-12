@@ -5,22 +5,41 @@ describe 'layouts/application.html.erb' do
     @user = FactoryGirl.create(:user)
     view.stub(:current_user).and_return(@user)
   end
+
+  context 'meta tags' do
+    all_selectors = %w(
+      meta[charset="utf-8"]
+      meta[http-equiv=X-UA-Compatible][content="IE=edge"]
+      meta[name="viewport"]
+      meta[name="keywords"]
+      meta[name="description"]
+      meta[name="author"]
+      meta[property="og:title"]
+      meta[property="og:type"]
+      meta[property="og:url"]
+      meta[property="og:description"]
+      meta[property="og:image"]
+      meta[name="twitter:card"]
+      meta[name="twitter:title"]
+      meta[name="twitter:description"]
+      meta[name="twitter:url"]
+    )
+    all_selectors.each do |css_selector|
+      it "should have selector #{css_selector}" do
+        render
+        rendered.should have_css css_selector, visible: false
+      end
+    end
+  end
+
   it 'should include css & js files' do
     render
     rendered.should have_xpath("//link[contains(@href, '.css')]")
     rendered.should have_xpath("//script[contains(@src, '.js')]")
   end
 
-  it 'should include the Google analytics script' do
-    dummy = Object.new
-    Rails.should_receive(:env).and_return(dummy)
-    dummy.should_receive(:production?).and_return(true)
-    render
-    rendered.should have_xpath("//script[text()[contains(.,#{GA.tracker})]]")
-  end
-
   it 'should not have div nested inside p' do
-    should_not have_selector("p>div")
+    should_not have_selector('p>div')
   end
 
   it 'should not have extra escaped html' do
@@ -37,8 +56,7 @@ describe 'layouts/application.html.erb' do
   it 'should render links to site features' do
     render
     #TODO Y replace href with project_path helper
-    rendered.should have_link 'Our projects', :href => projects_path
-    rendered.should have_link 'About us', :href => page_path('about-us')
+    rendered.should have_link 'Projects', :href => projects_path
   end
 
   it 'should render a footer' do
@@ -48,6 +66,7 @@ describe 'layouts/application.html.erb' do
   end
 
   it 'should return 200 for all link visits' do
+    StaticPage.stub_chain(:friendly, :find).and_return(stub_model(StaticPage, title: 'A static page'))
     render
     rendered.within('div.navbar') do |header|
       links = header.all('a').map { |el| el[:href] }
@@ -76,14 +95,14 @@ describe 'layouts/application.html.erb' do
     before :each do
       view.stub(:user_signed_in?).and_return(true)
     end
+
     it 'should render navigation links' do
       render
-      rendered.should have_css('a#user_info', :visible => true)
-      rendered.should have_link 'My account', :href => users_show_path(@user), :visible => false
+      rendered.should have_css('#user-gravatar', :visible => true)
+      rendered.should have_link 'My account', :href => user_path(@user), :visible => false
       rendered.within('div.navbar') do |header|
         header.should_not have_link 'Log in', :href => new_user_session_path
         header.should_not have_link 'Sign up', :href => new_user_registration_path
-
       end
     end
 
@@ -94,43 +113,68 @@ describe 'layouts/application.html.erb' do
 
   end
 
-  describe 'contact_form' do
+  context 'within the site footer' do
+    before(:each) { render }
 
-    it 'renders a form' do
-      render
-      rendered.within('#footer') do |selection|
-        expect(selection).to have_css('#contact_form')
-      end
-    end
-    it 'shows info link' do
-      render
-      rendered.within('#footer') do |selection|
-        expect(selection).to have_content('Send a traditional email to info@agileventures.org, or use the contact form.')
-        expect(selection).to have_link('info@agileventures.org')
+    it 'should render a link to the "About Us" page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'About Us', :href => static_page_path('About Us')
       end
     end
 
-    it 'shows  required labels' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_text('Name')
-        expect(selection).to have_text('Email')
-        expect(selection).to have_text('Message')
+    it 'should render a link to the "Getting Started" page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Getting Started', :href => static_page_path('Getting Started')
+      end
+    end
+
+    it 'should render a link to the AgileVentures Facebook page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Facebook', href: 'https://www.facebook.com/agileventures'
+      end
+    end
+
+    it 'should render a link to the AgileVentures Twitter page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Twitter', href: 'https://twitter.com/AgileVentures'
+      end
+    end
+
+    context 'Contact Us form' do
+      it 'renders a form' do
+        rendered.within('#footer') do |selection|
+          expect(selection).to have_css('#contact_form')
+        end
       end
 
-    end
-    it 'shows required fields' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_field('name')
-        expect(selection).to have_field('email')
-        expect(selection).to have_field('message')
+      it 'should render the email information' do
+        rendered.within('#footer') do |selection|
+          expect(selection).to have_content('Send a traditional email to info@agileventures.org, or use the contact form.')
+          expect(selection).to have_link 'info@agileventures.org', href: 'mailto:info@agileventures.org'
+        end
       end
-    end
-    it 'shows Send message button ' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_button('send')
+
+      it 'shows  required labels' do
+        rendered.within('#contact_form') do |selection|
+          expect(selection).to have_text('Name')
+          expect(selection).to have_text('Email')
+          expect(selection).to have_text('Message')
+        end
+
+      end
+
+      it 'shows required fields' do
+        rendered.within('#contact_form') do |selection|
+          expect(selection).to have_field('name')
+          expect(selection).to have_field('email')
+          expect(selection).to have_field('message')
+        end
+      end
+
+      it 'shows Send message button ' do
+        rendered.within('#contact_form') do |selection|
+          expect(selection).to have_button('send')
+        end
       end
     end
   end

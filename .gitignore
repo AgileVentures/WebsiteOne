@@ -50,4 +50,8 @@
 .ruby-gemset
 
 # Ignore Precompiled Assets
-# public/assets/**
+public/assets/**
+
+# Plugin files
+.floo
+.flooignore

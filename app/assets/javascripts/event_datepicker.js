@@ -1,5 +1,5 @@
-$(function() {
-  function ready() {
+WebsiteOne.define('EventDatePicker', function() {
+  function init() {
     $( ".datepicker" ).datepicker({
       format: 'yyyy-mm-dd'
     });
@@ -41,6 +41,7 @@ $(function() {
     });
   }
 
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
+  return {
+    init: init
+  }
 });

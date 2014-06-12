@@ -17,17 +17,18 @@ WebsiteOne::Application.configure do
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
-  # config.action_dispatch.rack_cache = true
+  config.action_dispatch.rack_cache = true
 
-  # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
+  config.static_cache_control = "public, max-age=31536000"
 
   # Compress JavaScripts and CSS.
+  config.assets.compress = true
   config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :yui
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -59,7 +60,7 @@ WebsiteOne::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( projects.js users.js bootstrap-datepicker.js bootstrap-tokenfield.min.js bootstrap-tags.js bootstrap-timepicker.min.js event_datepicker.js events.js 404.js )
+  config.assets.precompile += %w( mercury_init.js 404.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -100,7 +101,6 @@ WebsiteOne::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  GA.tracker = 'UA-47795185-1'
 
   # may be needed for integrating bootstrap with Heroku deployment
   #config.cache_classes = true

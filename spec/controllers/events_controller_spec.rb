@@ -6,7 +6,7 @@ describe EventsController do
 
   before :each do
     @event = FactoryGirl.create(:event)
-    @events = @event.current_occurences
+    @events = @event.next_occurrences
   end
 
   describe 'GET index' do
@@ -77,7 +77,7 @@ describe EventsController do
       it 're-renders the events#new template' do
         Event.any_instance.stub(:save).and_return(false)
         post :create, event: invalid_attributes_for(:event)
-        expect(response).to redirect_to new_event_path
+        expect(response).to render_template :new
       end
     end
   end

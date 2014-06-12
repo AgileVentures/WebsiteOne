@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319173130) do
+ActiveRecord::Schema.define(version: 20140525135633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,10 @@ ActiveRecord::Schema.define(version: 20140319173130) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
+    t.string   "slug"
   end
+
+  add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
 
   create_table "follows", force: true do |t|
     t.integer  "followable_id",                   null: false
@@ -91,10 +94,25 @@ ActiveRecord::Schema.define(version: 20140319173130) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
+    t.string   "github_owner"
+    t.string   "github_repo"
+    t.string   "github_url"
+    t.string   "pivotaltracker_url"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "static_pages", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "parent_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -106,12 +124,14 @@ ActiveRecord::Schema.define(version: 20140319173130) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
 
   create_table "tags", force: true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "taggings_count", default: 0
   end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",   null: false
@@ -141,6 +161,8 @@ ActiveRecord::Schema.define(version: 20140319173130) do
     t.string   "github_profile_url"
     t.boolean  "display_hire_me"
     t.text     "bio"
+    t.boolean  "receive_mailings",       default: true
+    t.integer  "karma_points",           default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -1,10 +1,15 @@
 require 'custom_errors.rb'
+require 'user_sanitizer'
 
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  helper_method :static_page_path
 
+  before_filter :get_next_event
+
+  include ApplicationHelper
   include CustomErrors
 
   protected
@@ -21,4 +26,9 @@ class ApplicationController < ActionController::Base
     request.env['omniauth.origin'] || root_path
   end
 
+  private
+
+  def get_next_event
+    @next_event = Event.next_event_occurrence
+  end
 end

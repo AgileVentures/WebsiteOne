@@ -82,7 +82,7 @@ end
 
 When /^I sign up without a password confirmation$/ do
   create_visitor
-  @visitor = @visitor.merge(:password_confirmation => "")
+  @visitor = @visitor.merge(:password_confirmation => '')
   sign_up
 end
 
@@ -131,7 +131,6 @@ end
 
 ### THEN ###
 Then /^I should be signed in$/ do
-  find_user.should == @user
   page.should have_content "Log out"
   page.should_not have_content "Sign up"
   page.should_not have_content "Log in"
@@ -168,7 +167,7 @@ Then /^I should see a missing password confirmation message$/ do
 end
 
 Then /^I should see a mismatched password message$/ do
-  page.should have_content "Password confirmation doesn't match "
+  page.should have_content "Password confirmation doesn't match"
 end
 
 Then /^I should see a signed out message$/ do
@@ -187,9 +186,19 @@ Then /^I should (not |)see my name$/ do |should|
   create_user
   # TODO Bryan: refactor to display_name
   if should == 'not '
-    page.should_not have_content([@user.first_name, @user.last_name].join(' '))
+    page.should_not have_content @user.presenter.display_name
   else
-    page.should have_content([@user.first_name, @user.last_name].join(' '))
+    page.should have_content @user.presenter.display_name
+  end
+end
+
+Then /^I should (not |)see my gravatar$/ do |should|
+  create_user
+  # TODO Bryan: refactor to display_name
+  if should == 'not '
+    page.should_not have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
+  else
+    page.should have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
   end
 end
 
@@ -218,7 +227,7 @@ When(/^I should see a list of all users$/) do
 end
 
 When(/^I click pulldown link "([^"]*)"$/) do |text|
-  page.find('#user_info').click
+  page.find(:css, '.dropdown .dropdown-menu.dropdown-menu-right .fa-user').click
   click_link_or_button text
 end
 
@@ -230,7 +239,7 @@ end
 Given(/^I (?:am on|go to) my "([^"]*)" page$/) do |page|
   page.downcase!
   if page == 'profile'
-    visit users_show_path(@user)
+    visit user_path(@user)
   elsif page == 'edit profile'
     visit edit_user_registration_path(@user)
   else
@@ -247,7 +256,7 @@ Given /^I am on "(.*?)" page for user "(.*?)"$/ do |page, user_name|
 
   case page
     when 'profile' then
-      visit users_show_path(user)
+      visit user_path(user)
     when page == 'edit profile'
       visit edit_user_registration_path(user)
   end
@@ -280,6 +289,18 @@ When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
     find("input#user_display_#{value}").should_not be_checked
   end
 end
+
+
+When(/^I set ([^"]*) to be (true|false)?$/) do |value, option|
+  value = value.underscore
+  if option == 'true'
+    check("user_#{value}")
+  else
+    uncheck "user_#{value}"
+    find("input#user_#{value}").should_not be_checked
+  end
+end
+
 
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
   @user.update_attributes("display_#{value.underscore}".to_sym => (option == 'public'))
@@ -315,15 +336,9 @@ Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   end
 end
 
-Then(/^(.*) in the members list$/) do |s|
-  page.within(:css, '#all_members') do
-    step s
-  end
-end
-
 Given(/^I visit (.*)'s profile page$/) do |name|
   user = User.find_by_first_name name
-  visit users_show_path user
+  visit user_path user
 end
 
 Given(/^I add skills "(.*)"/) do |skills|
@@ -350,4 +365,9 @@ end
 
 Then(/^I should see the user's bio$/) do
   pending # express the regexp above with the code you wish you had
+end
+
+
+When(/^My email receivings is set to false$/) do
+  @user.update_attribute(:receive_mailings, false)
 end
