@@ -6,10 +6,10 @@ Feature:
 
   Background:
     Given the following articles with votes exist:
-      | Title                    | Content                          | VoteValue          | UniqueValue |
-      | Ruby is on Fire          | Fire is fire and sunny           | 0	   		 | 1 |
-      | Rails is not for trains  | Train `tracks` do not work       | 5                  | 2 |
-      | JQuery cannot be queried | JQuery moves **towards** the ... | -1                 | 3 |
+      | Title                    | Content                          | VoteValue | UniqueValue |
+      | Ruby is on Fire          | Fire is fire and sunny           | 0         | 1           |
+      | Rails is not for trains  | Train `tracks` do not work       | 5         | 2           |
+      | JQuery cannot be queried | JQuery moves **towards** the ... | -1        | 3           |
 
 # Not logged in
 
@@ -106,3 +106,58 @@ Feature:
     And I click the "Up Vote" link
     Then I should be on the "Show" page for article "JQuery cannot be queried"
     And I should see a Vote value of "0"
+
+
+# Author voting for own article
+
+  Scenario: I should not be able to see vote links on my own article
+    #  clanglois: Following line Implies a log-in
+    Given I have authored article "Rubies are red"
+    And I am on the "Show" page for article "Rubies are red"
+    Then I should not see link "Up Vote"
+    And I should not see link "Down Vote"
+    And I should see a Vote value of "0"
+
+  Scenario: I should not be able to FORGE upvote on my own article
+    #  clanglois: Following line Implies a log-in
+    Given I have authored article "Rubies are red"
+    And I visit "/articles/rubies-are-red/upvote"
+    Then I should see a Vote value of "0"
+
+  Scenario: I should not be able to FORGE downvote on my own article
+    #  clanglois: Following line Implies a log-in
+    Given I have authored article "Rubies are red"
+    And I visit "/articles/rubies-are-red/downvote"
+    Then I should see a Vote value of "0"
+
+# Visiting User voting twice
+
+  Scenario: I should not be able to vote up twice on same article
+    Given I am logged in
+    And I have voted "up" article "Ruby is on Fire"
+    And I am on the "Show" page for article "Ruby is on Fire"
+    Then I should see a Vote value of "1"
+# 2nd vote
+    And I have voted "up" article "Ruby is on Fire"
+    Then I should be on the "Show" page for article "Ruby is on Fire"
+    And I should see a Vote value of "1"
+# Forge Down Vote url
+    And I visit "/articles/ruby-is-on-fire/upvote"
+    Then I should be on the "Show" page for article "Ruby is on Fire"
+    And I should see a Vote value of "1"
+
+
+  Scenario: I should not be able to vote down twice on same article
+    Given I am logged in
+    And I have voted "down" article "Ruby is on Fire"
+    And I am on the "Show" page for article "Ruby is on Fire"
+    Then I should see a Vote value of "-1"
+# 2nd vote
+    And I have voted "down" article "Ruby is on Fire"
+    Then I should be on the "Show" page for article "Ruby is on Fire"
+    And I should see a Vote value of "-1"
+# Forge Down Vote url
+    And I visit "/articles/ruby-is-on-fire/downvote"
+    Then I should be on the "Show" page for article "Ruby is on Fire"
+    And I should see a Vote value of "-1"
+
