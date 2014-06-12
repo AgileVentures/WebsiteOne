@@ -114,7 +114,7 @@ class String
       downcase
   end
 end
-
+World(ScrumsHelper)
 World(ApplicationHelper)
 World(Helpers)
 World(WithinHelpers)
