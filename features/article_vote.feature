@@ -6,10 +6,10 @@ Feature:
 
   Background:
     Given the following articles with votes exist:
-      | Title                    | Content                          | VoteValue | UniqueValue |
-      | Ruby is on Fire          | Fire is fire and sunny           | 0         | 1           |
-      | Rails is not for trains  | Train `tracks` do not work       | 5         | 2           |
-      | JQuery cannot be queried | JQuery moves **towards** the ... | -1        | 3           |
+      | Title                    | Content                          | VoteValue |
+      | Ruby is on Fire          | Fire is fire and sunny           | 0         |
+      | Rails is not for trains  | Train `tracks` do not work       | 5         |
+      | JQuery cannot be queried | JQuery moves **towards** the ... | -1        |
 
 # Not logged in
 
