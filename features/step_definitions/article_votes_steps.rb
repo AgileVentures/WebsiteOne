@@ -1,20 +1,18 @@
 Given(/^the following articles with votes exist:$/) do |table|
   table.hashes.each do |raw_hash|
     hash = {}
+    votes = raw_hash['VoteValue']
+    raw_hash.except! 'VoteValue'
+    unique_value = raw_hash['UniqueValue']
+    raw_hash.except! 'UniqueValue'
     raw_hash.each_pair { |k, v| hash[k.to_s.downcase.squish.gsub(/\s+/, '_')] = v }
-    votes = hash['votevalue']
-    hash.except! 'votevalue'
-    unique_value = hash['uniquevalue']
-    hash.except! 'uniquevalue'
-    if hash['author'].present?
-      u = User.find_by_first_name hash['author']
+    if hash['author'].present? && (u = User.find_by_first_name hash['author']) != nil
       hash.except! ('author')
       article = u.articles.new hash
     else
       article = default_test_author.articles.new hash
     end
     article.save!
-
     votes.to_i.abs.times do |n|
       # create a voter so that a vote can be cast
       user_email = 'avoter_' + unique_value + n.to_i.to_s + '@example.com'
@@ -45,3 +43,9 @@ Given(/^I have voted "(.*?)" article "(.*?)"$/) do |up_or_down, article|
 
 end
 
+Given(/^I have authored article "(.*?)"$/) do |title|
+  @user = default_test_author
+  step 'I am logged in with email "' + @user.email + '"'
+  @article = Article.find_by_title title
+  @article ||= @user.articles.create( {title: title, content: 'An Author vote test article.'} )
+end

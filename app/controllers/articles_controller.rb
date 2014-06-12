@@ -60,15 +60,25 @@ class ArticlesController < ApplicationController
   # article voting
   def upvote
     @article = Article.friendly.find(params[:id])
-    @article.upvote_by current_user
-    flash[:notice] = "Successfully voted up the article \"#{@article.title}\""
+
+    if @article.user_id == current_user.id then
+        flash[:error] = "Can not vote for your own article \"#{@article.title}\""
+    else
+        @article.upvote_by current_user
+        flash[:notice] = "Successfully voted up the article \"#{@article.title}\""
+    end
     redirect_to article_path(@article)
   end
 
   def downvote
     @article = Article.friendly.find(params[:id])
-    @article.downvote_by current_user
-    flash[:notice] = "Successfully voted down the article \"#{@article.title}\""
+
+    if @article.user_id == current_user.id then
+        flash[:error] = "Can not vote for your own article \"#{@article.title}\""
+    else
+      @article.downvote_by current_user
+      flash[:notice] = "Successfully voted down the article \"#{@article.title}\""
+    end
     redirect_to article_path(@article)
   end
 
