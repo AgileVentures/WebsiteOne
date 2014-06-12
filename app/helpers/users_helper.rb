@@ -165,8 +165,12 @@ module Youtube
     #TODO YA add this to youtube connection
     def youtube_user_name(user)
       unless user.youtube_user_name
-        user.youtube_user_name = user_name(user)
-        user.save
+        begin
+          user.youtube_user_name = user_name(user)
+          #user.save  # this is breaking everything sometimes - NEED BETTER FIX
+        rescue Exception => e
+          logger.fatal e
+        end
       end
       user.youtube_user_name
     end
