@@ -1,10 +1,10 @@
 Given(/^the following articles with votes exist:$/) do |table|
+  row_count = 0
   table.hashes.each do |raw_hash|
     hash = {}
+    row_count += 1
     votes = raw_hash['VoteValue']
     raw_hash.except! 'VoteValue'
-    unique_value = raw_hash['UniqueValue']
-    raw_hash.except! 'UniqueValue'
     raw_hash.each_pair { |k, v| hash[k.to_s.downcase.squish.gsub(/\s+/, '_')] = v }
     if hash['author'].present? && (u = User.find_by_first_name hash['author']) != nil
       hash.except! ('author')
@@ -15,7 +15,7 @@ Given(/^the following articles with votes exist:$/) do |table|
     article.save!
     votes.to_i.abs.times do |n|
       # create a voter so that a vote can be cast
-      user_email = 'avoter_' + unique_value + n.to_i.to_s + '@example.com'
+      user_email = 'avoter_' + row_count.to_s + n.to_i.to_s + '@example.com'
       create_test_user(:email => user_email)
       u = User.find_by_email user_email
       votes.to_i >= 0 ? article.upvote_from( u ) : article.downvote_from( u )
