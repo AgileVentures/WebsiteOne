@@ -167,7 +167,7 @@ module Youtube
       unless user.youtube_user_name
         begin
           user.youtube_user_name = user_name(user)
-          user.save
+          #user.save  # this is breaking everything sometimes - NEED BETTER FIX
         rescue Exception => e
           logger.fatal e
         end
