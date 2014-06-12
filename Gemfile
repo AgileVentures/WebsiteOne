@@ -45,6 +45,7 @@ gem 'rack-cache'
 gem 'sprockets-image_compressor'
 
 gem 'rails_config' # a gem to manage configuration files
+gem 'domp'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -82,3 +83,7 @@ group :production do
   gem 'rails_12factor'
   gem 'unicorn'
 end
+
+gem "omniauth"
+gem "omniauth-github"
+gem "omniauth-gplus"

@@ -34,11 +34,6 @@ WebsiteOne::Application.routes.draw do
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
 
   get 'projects/:project_id/:id', to: 'documents#show',:format => false
-
-  get '/auth/:provider/callback' => 'authentications#create', :format => false
-  get '/auth/failure' => 'authentications#failure', :format => false
-  get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
-
   post 'mail_contact_form', to: 'visitors#send_contact_form', :format => false
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
 

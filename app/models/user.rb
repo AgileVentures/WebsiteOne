@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
+
+  has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   #validates :first_name, :last_name, presence: true
   geocoded_by :last_sign_in_ip do |user, res|
@@ -30,16 +32,26 @@ class User < ActiveRecord::Base
 
   self.per_page = 30
 
-
-
   acts_as_follower
+
+
+
+  def self.create_from_omniauth(params)
+    attributes = {
+      email: params['info']['email'],
+      password: Devise.friendly_token
+    }
+
+    create(attributes)
+  end
 
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
 
   def has_auth(provider)
-    !authentications.where(provider: provider).empty?
+    provider_id = AuthenticationProvider.find_by_name(provider).id
+    !authentications.where(authentication_provider_id: provider_id).empty?
   end
 
   def projects_joined
