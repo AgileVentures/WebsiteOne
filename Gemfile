@@ -40,7 +40,7 @@ gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
-gem 'youtube_it'
+gem 'youtube_it' # ruby wrapper for youtube API
 gem 'utf8-cleaner'
 gem 'youtube_it'
 gem 'rake', '10.3.1'
@@ -64,7 +64,7 @@ group :test do
   gem 'zeus' # rails preloading environment
   gem 'webmock' # mocking external net connections
   gem 'delorean' # mocking Time in tests, aka time travelling
-  gem 'vcr'
+  gem 'vcr' # records and plays http interactions for testing
 end
 
 group :development, :test do
