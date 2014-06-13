@@ -43,14 +43,14 @@ class ProjectsController < ApplicationController
   end
 
 
-  def destroy
-    if @project.destroy
-      @notice = 'Project was successfully deleted.'
-    else
-      @notice = 'Project was not successfully deleted.'
-    end
-    redirect_to projects_path, notice: @notice
-  end
+  # def destroy
+  #   if @project.destroy
+  #     @notice = 'Project was successfully deleted.'
+  #   else
+  #     @notice = 'Project was not successfully deleted.'
+  #   end
+  #   redirect_to projects_path, notice: @notice
+  # end
 
   def follow
     if current_user

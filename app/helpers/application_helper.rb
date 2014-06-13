@@ -11,10 +11,6 @@ module ApplicationHelper
     end
   end
 
-  def resource_name
-    :user
-  end
-
   def static_page_path(page)
     "/#{StaticPage.url_for_me(page)}"
   end
@@ -23,10 +19,6 @@ module ApplicationHelper
     return params[:controller] == 'static_pages' &&
       params[:action] == 'show' &&
       params[:id] == StaticPage.url_for_me(static_page_name)
-  end
-
-  def resource
-    @resource ||= User.new
   end
 
   def devise_mapping

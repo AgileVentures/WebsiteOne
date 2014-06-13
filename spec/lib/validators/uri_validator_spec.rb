@@ -23,4 +23,10 @@ describe UriValidator do
       subject.errors.should have_key(:url)
     end
   end
+
+  it 'should be invalid for an unaccepted protocol' do
+    subject.url = 'smtp://www.google.com'
+    subject.valid?
+    subject.errors[:url].to_sentence.should eq "must begin with http or https"
+  end
 end

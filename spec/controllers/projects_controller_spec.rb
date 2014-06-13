@@ -14,7 +14,7 @@ describe ProjectsController do
   before :each do
     # stubbing out devise methods to simulate authenticated user
     #@user = double('user', id: 1, friendly_id: 'some-id')
-    @user = FactoryGirl.build(:user, id: 1, slug: 'some-id')
+    @user = FactoryGirl.create(:user, id: 1, slug: 'some-id')
     request.env['warden'].stub :authenticate! => @user
     controller.stub :current_user => @user
   end
@@ -108,60 +108,54 @@ describe ProjectsController do
               status: 'Status 1'
           }
       }
-      @project = FactoryGirl.build(:project, @params[:project])
-      @user.stub_chain(:projects, :build).and_return(@project)
       controller.stub(:current_user).and_return(@user)
     end
 
-    it 'assigns a newly created project as @project' do
-      @project.stub(:save)
-      post :create, @params
-      expect(assigns(:project)).to eq @project
-    end
-
     context 'successful save' do
-
-      it 'redirects to index' do
-        @project.stub(:save).and_return(true)
-
-        post :create, @params
-
-        expect(response).to redirect_to(project_path(@project))
+      it 'creates a new Project' do
+        expect {
+          post :create, @params
+        }.to change(Project, :count).by(1)
       end
-      it 'assigns successful message' do
-        @project.stub(:save).and_return(true)
 
+      it "assigns a newly created project as @project" do
         post :create, @params
+        assigns(:project).should be_a(Project)
+        assigns(:project).should be_persisted
+      end
 
-        #TODO YA add a show view_spec to check if flash is actually displayed
+      it "redirects to the created post" do
+        post :create, @params
+        response.should redirect_to(Project.last)
+      end
+
+      it 'assigns successful message' do
+        post :create, @params
         expect(flash[:notice]).to eq('Project was successfully created.')
       end
 
-      it 'passes current_user id into new' do
-        @user.projects.unstub(:build)
-        @user.unstub(:projects)
-
+      it 'it creates the project for the current_user' do
         post :create, @params
         expect(assigns(:project).user_id).to eq @user.id
       end
     end
 
     context 'unsuccessful save' do
-      it 'renders new template' do
-        @project.stub(:save).and_return(false)
-
+      it "assigns a newly created but unsaved project as @project" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        Project.any_instance.stub(:save).and_return(false)
         post :create, @params
-
-        expect(response).to render_template :new
+        assigns(:project).should be_a_new(Project)
       end
 
-      it 'assigns failure message' do
-        @project.stub(:save).and_return(false)
-
+      it "re-renders the 'new' template and assigns failure message" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        Project.any_instance.stub(:save).and_return(false)
         post :create, @params
-
+        response.should render_template("new")
         expect(flash[:alert]).to eql('Project was not saved. Please check the input.')
       end
+
     end
   end
 
