@@ -27,9 +27,7 @@ module CustomErrors
       when 404
         render template: 'static_pages/not_found', layout: 'layouts/application', status: 404, formats: [:html]
 
-      when 500
-        render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500, formats: [:html]
-
+      # 500 + other errors
       else
         render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500, formats: [:html]
     end
