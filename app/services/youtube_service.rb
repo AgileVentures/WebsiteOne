@@ -19,7 +19,7 @@ class YoutubeService
     return unless @object.youtube_id?
 
     response = get_response(build_request_for_user_videos)
-    filter_response(response, followed_project_tags, [YoutubeHelper.youtube_user_name(@object)])
+    filter_response(response, followed_project_tags, [@object.youtube_user_name])
   end
 
   def parse_response(response)
@@ -68,7 +68,7 @@ class YoutubeService
 
   def members_tags
     return [] if @object.members.blank?
-    @object.members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.
+    @object.members.map { |user| user.youtube_user_name }.
         compact.
         map(&:downcase).
         uniq

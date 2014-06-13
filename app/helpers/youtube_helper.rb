@@ -8,29 +8,11 @@ module YoutubeHelper
     json['items'].first['id']
   end
 
-  #TODO YA add fallback is user_id not found
-  #TODO Doesn't seem to be used anywhere, could be removed
-  def user_id(token)
-    # API v2
-    response = open("https://gdata.youtube.com/feeds/api/users/default?alt=json", 'Authorization' => "Bearer #{token}").read
-    json = JSON.load(response)
-    json['entry']['yt$username']['$t']
-  end
-
-  def user_name(user)
+  def youtube_user_name(user)
     # API v2
     return unless user.youtube_id
     response = open("https://gdata.youtube.com/feeds/api/users/#{user.youtube_id}?fields=title&alt=json").read
     json = JSON.load(response)
     json['entry']['title']['$t']
-  end
-
-  #TODO YA add this to youtube connection
-  def youtube_user_name(user)
-    unless user.youtube_user_name
-      user.youtube_user_name = user_name(user)
-      user.save
-    end
-    user.youtube_user_name
   end
 end

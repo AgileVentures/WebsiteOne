@@ -10,15 +10,6 @@ describe YoutubeHelper do
     expect(YoutubeHelper.channel_id('token')).to eq('id')
   end
 
-  it 'retrieves youtube user_id for logged in user' do
-    request_string = "https://gdata.youtube.com/feeds/api/users/default?alt=json"
-    WebMock.stub_request(:get, request_string).to_return(body: 'response')
-    json = { 'entry' => { 'yt$username' => { '$t' => 'id' } } }
-
-    expect(JSON).to receive(:load).with('response').and_return(json)
-    expect(YoutubeHelper.user_id('token')).to eq('id')
-  end
-
   it 'retrieves youtube user_name for a user' do
     user = double(User, youtube_id: 'test_id')
     request_string = "https://gdata.youtube.com/feeds/api/users/test_id?fields=title&alt=json"
@@ -26,13 +17,6 @@ describe YoutubeHelper do
     json = { 'entry' => { 'title' => { '$t' => 'Ivan Petrov' } } }
 
     expect(JSON).to receive(:load).with('response').and_return(json)
-    expect(YoutubeHelper.user_name(user)).to eq('Ivan Petrov')
-  end
-
-  it 'saves and returns the youtube user name for an user' do
-    user =  FactoryGirl.create(:user)
-    YoutubeHelper.stub(:user_name).and_return('Frankie')
-    expect(YoutubeHelper.youtube_user_name(user)).to eq 'Frankie'
-    expect(user.youtube_user_name).to eq 'Frankie'
+    expect(YoutubeHelper.youtube_user_name(user)).to eq('Ivan Petrov')
   end
 end
