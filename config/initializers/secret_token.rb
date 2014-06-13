@@ -10,4 +10,3 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 WebsiteOne::Application.config.secret_key_base = 'a2f102441c72b7998cb9c8e6671df591fbfb12ff848c8ffaedc5b680d0a4e56d4e2d4e643f8bac61f7a391ab0f8bcf84800a2e7b782df1903d16a20aabe8beb9'
-WebsiteOne::Application.config.youtube_api_key = 'AIzaSyAh0CZ-jWpREV-3WtQ-4thTW0T-qU6_zrc'

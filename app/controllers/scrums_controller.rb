@@ -1,8 +1,7 @@
 class ScrumsController < ApplicationController
 
   def index
-    #@scrums = Scrum.all
-    client = YouTubeIt::Client.new(:dev_key => Rails.application.secrets.youtube_api_key)
+    client = YouTubeIt::Client.new(:dev_key => ENV['YOUTUBE_KEY'])
     query = client.videos_by(:query => "AtlanticScrum|AmericasScrum|EuroScrum Pair Hookup", 
                              :order_by => :published,
                              :max_results => 20)
