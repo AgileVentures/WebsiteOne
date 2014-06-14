@@ -4,7 +4,7 @@ WebsiteOne::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false
 
-  resources :projects, :format => false do
+  resources :projects, except: :destroy, :format => false do
     member do
       get :follow
       get :unfollow
@@ -25,7 +25,7 @@ WebsiteOne::Application.routes.draw do
 
   post 'preview/article', to: 'articles#preview',:format => false
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
-  resources :articles, :format => false
+  resources :articles, :except => [:destroy], :format => false
 
   get 'projects/:project_id/:id', to: 'documents#show',:format => false
   get '/auth/:provider/callback' => 'authentications#create', :format => false

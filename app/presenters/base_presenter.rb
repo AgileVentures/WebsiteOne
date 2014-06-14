@@ -19,4 +19,8 @@ class BasePresenter
   def method_missing(method, *arguments, &block)
     object.send(method, *arguments, &block)
   end
+
+  def respond_to_missing?(method, include_private=false)
+    object.respond_to?(method)
+  end
 end

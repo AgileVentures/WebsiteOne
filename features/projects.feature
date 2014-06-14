@@ -13,6 +13,7 @@ Feature: Create and maintain projects
       | hello saturn  | greetings saturn folks  | active   |                                             |                                                  |
       | hello sun     | greetings sun folks     | active   |                                             |                                                  |
     And there are no videos
+    And The project has some stories on Pivotal Tracker
 
 #  Scenarios for Index page
 

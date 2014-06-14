@@ -1,11 +1,9 @@
 class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_filter :authenticate_user!, except: [:index, :show]
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, except: [:index, :new, :create]
+  before_action :set_project_documents, only: :show
   before_action :get_current_stories, only: [:show]
-  include DocumentsHelper
-
-#TODO YA Add controller specs for all the code
 
   def index
     @projects = Project.search(params[:search], params[:page])
@@ -13,9 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    documents
-    @members = @project.followers.reject { |member| !member.display_profile }
-    @videos = Youtube.project_videos(@project, @members) if @project
+    @videos = @project.videos if @project
   end
 
   def new
@@ -23,12 +19,12 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge('user_id' => current_user.id))
+    @project = current_user.projects.build(project_params)
     if @project.save
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
       flash.now[:alert] = 'Project was not saved. Please check the input.'
-      render action: 'new'
+      render 'new'
     end
   end
 
@@ -46,34 +42,23 @@ class ProjectsController < ApplicationController
   end
 
 
-  def destroy
-    #if @project.destroy
-    #  @notice = 'Project was successfully deleted.'
-    #else
-    #  @notice = 'Project was not successfully deleted.'
-    #end
-    #redirect_to projects_path, notice: @notice
-  end
+  # def destroy
+  #   if @project.destroy
+  #     @notice = 'Project was successfully deleted.'
+  #   else
+  #     @notice = 'Project was not successfully deleted.'
+  #   end
+  #   redirect_to projects_path, notice: @notice
+  # end
 
   def follow
-    set_project
-    if current_user
-      current_user.follow(@project)
-
-      redirect_to project_path(@project)
-      flash[:notice] = "You just joined #{@project.title}."
-    else
-      flash[:error] = "You must <a href='/users/sign_in'>login</a> to follow #{@project.title}.".html_safe
-    end
+    current_user.follow(@project)
+    redirect_to project_path(@project), notice: "You just joined #{@project.title}."
   end
 
   def unfollow
-    set_project
-
     current_user.stop_following(@project)
-
-    redirect_to project_path(@project)
-    flash[:notice] = "You are no longer a member of #{@project.title}."
+    redirect_to project_path(@project), notice: "You are no longer a member of #{@project.title}."
   end
 
   private
@@ -81,15 +66,19 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
+  def set_project_documents
+    @documents = Document.where("project_id = ?", @project.id).order(:created_at)
+  end
+
   def get_current_stories
     PivotalService.set_token('1e90ef53f12fc327d3b5d8ee007cce39')
-    if @project.pivotaltracker_url.present?
+    if @project.pivotaltracker_url?
       pivotaltracker_id = @project.pivotaltracker_url.split('/')[-1]
       begin
         @projectpv = PivotalService.one_project(pivotaltracker_id, Scorer::Project.fields)
         @iteration = PivotalService.iterations(pivotaltracker_id, 'current')
         @stories = @iteration.stories
-      rescue Exception => error
+      rescue => error
         # TODO deal with simple not found errors, should not send for all exceptions
         ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'an error occurred in Pivotal Tracker' })
       end

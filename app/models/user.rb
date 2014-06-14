@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :skills, :titles
 
   #after_create Mailer.send_welcome_mail()
+
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
@@ -30,8 +31,6 @@ class User < ActiveRecord::Base
   has_many :articles
 
   self.per_page = 30
-
-
 
   acts_as_follower
 
@@ -73,6 +72,10 @@ class User < ActiveRecord::Base
 
   def slug_candidates
     [ :display_name, :email_first_part ]
+  end
+
+  def videos
+    YoutubeService.new(self).videos
   end
 
   def self.search(params)

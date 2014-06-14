@@ -22,9 +22,7 @@
 
                 <div class="media-body index-summary">
                   <p class="media-heading"><%= presenter.display_name %></p>
-                  <% if presenter.has_title? %>
-                    <p><%= presenter.title_list %></p>
-                  <% end %>
+                  <p><%= presenter.title_list %></p>
                   <% if user.country? %>
                     <p><%= presenter.country %></p>
                   <% end %>

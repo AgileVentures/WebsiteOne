@@ -8,9 +8,5 @@ module LayoutHelper
       end
     end
   end
-
-  def show_layout_flash?
-    @layout_flash.nil? ? true : @layout_flash
-  end
 end
 

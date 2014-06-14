@@ -12,7 +12,6 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.friendly.find(params[:id])
-    @author = @article.user
   end
 
   def new
@@ -54,7 +53,7 @@ class ArticlesController < ApplicationController
     # fill with dummy data
     @article.created_at = Time.now
     @article.updated_at = Time.now
-    @author = current_user
+    @article.user = current_user
   end
 
   private

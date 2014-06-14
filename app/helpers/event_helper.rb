@@ -1,3 +1,5 @@
+require 'nested_key_extension'
+
 module EventHelper
   def cover_for(event)
     case event.category

@@ -78,8 +78,9 @@ class AuthenticationsController < ApplicationController
 
   def link_to_youtube
     user = current_user
-    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
-      user.youtube_id = Youtube.channel_id(token)
+    if (token = request.env['omniauth.auth']['credentials']['token']) && !(user.youtube_id || user.youtube_user_name)
+      user.youtube_id = YoutubeHelper.channel_id(token)
+      user.youtube_user_name = YoutubeHelper.youtube_user_name(user)
       user.save
     end
 
@@ -133,14 +134,3 @@ class AuthenticationsController < ApplicationController
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-

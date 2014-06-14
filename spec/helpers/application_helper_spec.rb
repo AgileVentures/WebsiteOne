@@ -85,4 +85,25 @@ describe ApplicationHelper do
       btn_html.should have_css '[method=delete]'
     end
   end
+
+  describe "#roots" do
+    it 'should fetch documents which are roots and belong to @project sorted by created at' do
+      project = FactoryGirl.create(:project)
+      project2 = FactoryGirl.create(:project)
+      FactoryGirl.create(:document, project_id: project.id, parent_id: nil)
+      FactoryGirl.create(:document, project_id: project.id, parent_id: nil)
+      FactoryGirl.create(:document, project_id: project.id, parent_id: 5)
+      FactoryGirl.create(:document, project_id: project2.id, parent_id: 3)
+      FactoryGirl.create(:document, project_id: project2.id, parent_id: nil)
+
+      helper.instance_variable_set("@project", project)
+      roots = helper.roots
+      roots.count.should eq 2
+      roots.each do |doc|
+        doc.parent_id.should be_nil
+        doc.project.should eq project
+      end
+      roots.first.created_at.should be < roots.last.created_at
+    end
+  end
 end

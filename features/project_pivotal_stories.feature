@@ -4,6 +4,9 @@ Feature: Adding pivotal tracker stories to projects
     I would like to display projects current sprint activities as they are set in Pivotal Tracker 
 
     Background:
+      Given I am logged in
+      And my YouTube Channel ID with some videos in it
+      And my YouTube channel is connected
       # And I have access to project iteration with pivitaltracker_id 982890 in PivotalTracker
       And the following projects exist:
         | title      | description    | status | pivotaltracker_url                               |

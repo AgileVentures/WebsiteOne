@@ -211,4 +211,31 @@ describe Event do
       expect(Event.next_event_occurrence).to be_nil
     end
   end
+
+  it 'should raise error if there are no repeats weekly each days of the week' do
+    @event = stub_model(Event)
+    @event.stub(repeats_weekly_each_days_of_the_week: [])
+    @event.errors.should_receive(:add).with(:base, 'You must have at least one repeats weekly each days of the week')
+    @event.instance_eval { must_have_at_least_one_repeats_weekly_each_days_of_the_week }
+  end
+
+  describe "#repeats_weekly_each_days_of_the_week=" do
+    it 'sets the repeats weekly mask' do
+      event = FactoryGirl.build(:event)
+      event.should_receive(:repeats_weekly_each_days_of_the_week_mask=)
+      event.repeats_weekly_each_days_of_the_week = ["monday", "tuesday", ""]
+    end
+
+    it "sets proper mask for all days of the week" do
+      event = FactoryGirl.build(:event)
+      event.repeats_weekly_each_days_of_the_week = %w[monday tuesday wednesday thursday friday saturday sunday]
+      event.repeats_weekly_each_days_of_the_week_mask.to_s(2).should eq "1111111"
+    end
+
+    it 'sets the correct mask for some days of the week' do
+      event = FactoryGirl.build(:event)
+      event.repeats_weekly_each_days_of_the_week = %w[monday wednesday friday saturday]
+      event.repeats_weekly_each_days_of_the_week_mask.to_s(2).should eq "110101"
+    end
+  end
 end

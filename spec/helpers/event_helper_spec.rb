@@ -13,6 +13,12 @@ describe EventHelper do
     expect(result).to match /event-scrum-cover\.png/
   end
 
+  it 'cover for other category' do
+    event = mock_model(Event, category: 'Other')
+    result = helper.cover_for(event)
+    expect(result).to eq ''
+  end
+
   it 'extract event ocurrence from hash' do
     ocurrence = Time.utc(2014,"mar",9,23,0,0)
     time = IceCube::Occurrence.new(ocurrence)

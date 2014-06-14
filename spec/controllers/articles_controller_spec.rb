@@ -60,7 +60,7 @@ describe ArticlesController do
 
     it 'should assign the requested article author to @author' do
       get :show, id: @article.friendly_id
-      assigns(:author).should eq @author
+      assigns(:article).user.should eq @author
     end
   end
 
@@ -217,10 +217,10 @@ describe ArticlesController do
     end
 
     it 'should assign default parameters to the preview article' do
-      @user = double('User')
+      @user = User.new
       controller.stub(:current_user).and_return(@user)
       patch :preview, @params
-      assigns(:author).should eq @user
+      assigns(:article).send(:user).should eq @user
       assigns(:article).send(:created_at).should_not be_nil
       assigns(:article).send(:updated_at).should_not be_nil
     end

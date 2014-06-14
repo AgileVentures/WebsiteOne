@@ -22,18 +22,14 @@ describe DocumentsController do
     }.to raise_error ActiveRecord::RecordNotFound
   end
 
-  # Bryan: Deprecated path
-  #describe 'GET index' do
-  #  before(:each) { get :index, { project_id: document.friendly_id }, valid_session }
-  #
-  #  it 'assigns all documents as @documents' do
-  #    assigns(:documents).should eq([document])
-  #  end
-  #
-  #  it 'renders the index template' do
-  #    expect(response).to render_template 'index'
-  #  end
-  #end
+  describe 'GET index' do
+
+    it 'redirects to project index page' do
+      get :index, { project_id: document.project.id }, valid_session
+      expect(response).to redirect_to project_path document.project
+    end
+
+  end
 
   describe 'GET show' do
 
@@ -176,6 +172,72 @@ describe DocumentsController do
       id = @document.project.id
       delete :destroy, {:id => @document.to_param, project_id: @document.project.friendly_id}, valid_session
       response.should redirect_to(project_documents_path(id))
+    end
+  end
+
+  describe 'PUT mercury_update' do
+    before(:each) do
+      Document.stub_chain(:friendly, :find).and_return(@document)
+    end
+
+    it 'assigns the requested document as @document' do
+      put :mercury_update, project_id: @document.project.slug, document_id: @document.slug, content: { document_title: { value: 'MyTitle' }, document_body: { value: 'MyBody' } }
+      assigns(:document).should eq(@document)
+    end
+
+    context 'with valid params' do
+      before(:each) do
+        @document.should_receive(:update_attributes).with(title: 'MyTitle', body: 'MyBody').and_return true
+        put :mercury_update, project_id: @document.project.slug, document_id: @document.slug, content: { document_title: { value: 'MyTitle' }, document_body: { value: 'MyBody' } }
+      end
+
+      it 'should render a blank string' do
+        response.body.should be_empty
+      end
+    end
+
+    context 'with invalid params' do
+      before(:each) do
+        @document.should_receive(:update_attributes).and_return false
+        put :mercury_update, project_id: @document.project.slug, document_id: @document.slug, content: { document_title: { value: '' }, document_body: { value: '' } }
+      end
+
+      it 'should not render anything' do
+        # render nothing actually renders a space
+        response.body.should eq ' '
+      end
+    end
+  end
+
+  describe 'GET mercury_saved' do
+    before(:each) do
+      get :mercury_saved, project_id: @document.project.slug, document_id: @document.slug
+    end
+
+    it 'should redirect to the static_page_path' do
+      response.should redirect_to project_document_path(@document.project, @document)
+    end
+
+    it 'should display a flash message "The document has been successfully updated."' do
+      flash[:notice].should eq 'The document has been successfully updated.'
+    end
+  end
+
+  # Private Methods
+
+  describe '#set_parent' do
+    before do
+      controller = DocumentsController.new
+    end
+    it 'should set parent when parent_id is present' do
+      controller.params[:parent_id] = @document.id
+      controller.instance_eval{set_parent} # Calling Private Methods
+      assigns(:parent).should eq @document
+    end
+
+    it 'should not set parent when parent_id is not present' do
+      controller.instance_eval{ set_parent } # Calling Private Methods
+      assigns(:parent).should eq nil
     end
   end
 end

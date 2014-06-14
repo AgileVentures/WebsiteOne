@@ -9,6 +9,10 @@ describe CustomErrors, type: 'controller' do
       raise ActiveRecord::RecordNotFound
     end
 
+    def raise_422
+      raise ActiveRecord::RecordInvalid, double(errors: [])
+    end
+
     def raise_500
       raise Exception
     end
@@ -62,4 +66,5 @@ describe CustomErrors, type: 'controller' do
       expect(recipients[0]).to eq 'info@agileventures.org'
     end
   end
+
 end

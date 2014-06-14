@@ -1,0 +1,18 @@
+module YoutubeHelper
+  extend self
+
+  def channel_id(token)
+    # API v3
+    response = open("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", 'Authorization' => "Bearer #{token}").read
+    json = JSON.load(response)
+    json['items'].first['id']
+  end
+
+  def youtube_user_name(user)
+    # API v2
+    return unless user.youtube_id
+    response = open("https://gdata.youtube.com/feeds/api/users/#{user.youtube_id}?fields=title&alt=json").read
+    json = JSON.load(response)
+    json['entry']['title']['$t']
+  end
+end

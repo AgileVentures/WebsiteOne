@@ -1,11 +1,9 @@
-require 'url_validator'
-
 class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   validates :title, :description, :status, presence: true
-  validates_with UrlValidator
+  validates_with PivotalTrackerUrlValidator
   validates :github_url, uri: true, :allow_blank => true
   acts_as_followable
   belongs_to :user
@@ -19,8 +17,12 @@ class Project < ActiveRecord::Base
       .paginate(per_page: 5, page: page)
   end
 
-  def self.all_tags
-    Project.tag_counts_on('tags').map{|tag| tag.name}
+  def members
+    followers.reject { |member| !member.display_profile }
+  end
+
+  def videos
+    YoutubeService.new(self).videos
   end
 
   # Bryan: Used to generate paths, used only in testing.

@@ -70,5 +70,11 @@ describe VisitorsController do
       post :send_contact_form, valid_params
       expect(ActionMailer::Base.deliveries[1].body).to include('Thank you for your feedback')
     end
+
+    it 'redirects to root path on RedirectBackError' do
+      Mailer.stub_chain(:contact_form, :deliver).and_raise(ActionController::RedirectBackError)
+      post :send_contact_form, valid_params
+      expect(response).to redirect_to(root_path)
+    end
   end
 end

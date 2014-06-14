@@ -50,13 +50,34 @@ describe AuthenticationsController do
       get :destroy, id: 1
       expect(flash[:alert]).to eq 'Bad idea!'
     end
+
+    it 'should show failure message on failure of destroy authentication' do
+      @auths.should_receive(:count).and_return 0
+      @auth.should_receive(:destroy).and_return false
+      get :destroy, id: 1
+      expect(flash[:alert]).to eq 'Authentication method could not be removed.'
+    end
+
+  end
+
+  # Sampriti: Had to extract out into a seperate block as there was no way to override
+  # or disable the should_receives in the other context.
+  context 'destroying authentications' do
+    it 'should show failure message when not authentications exist' do
+      @user = double(User, id: 1, friendly_id: 'my-id', encrypted_password: 'i-am-encrypted')
+      request.env['warden'].stub :authenticate! => @user
+      controller.stub :current_user => @user
+      @user.stub_chain(:authentications, :find).and_return nil
+      get :destroy, id: 2
+      expect(flash[:alert]).to eq 'Authentication method not found.'
+    end
   end
 
   before(:each) do
     request.env['omniauth.auth'] = OmniAuth.config.mock_auth[@provider]
     request.env['omniauth.params'] = {}
   end
-
+``
   context 'for not signed in users' do
 
     before(:each) do
@@ -164,14 +185,19 @@ describe AuthenticationsController do
       expect(controller).to receive(:link_to_youtube)
       get :create, provider: 'github'
     end
-    it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
-      request.env['omniauth.auth']['credentials']['token'] = 'token'
-      user = double(User, youtube_id: nil)
+
+    it '#link_to_youtube: gets channel_id and youtube_user_name if user is authenticated and does not have youtube_id or youtube_user_name' do
+	  request.env['omniauth.auth']['credentials']['token'] = 'token'
+      request.env['omniauth.params']['youtube'] = 'true'
+      user = double(User, youtube_id: nil, youtube_user_name: nil)
       controller.stub(current_user: user)
-      user.stub(:youtube_id=)
       user.stub(:save)
 
-      expect(Youtube).to receive(:channel_id)
+      expect(YoutubeHelper).to receive(:channel_id)
+	  expect(YoutubeHelper).to receive(:youtube_user_name)
+	  
+	  expect(user).to receive(:youtube_user_name=)
+	  expect(user).to receive(:youtube_id=)
       get :create, provider: 'github'
     end
 
@@ -211,11 +237,31 @@ describe AuthenticationsController do
       user = stub_model(User, github_profile_url: nil)
       controller.stub(current_user: user)
       User.stub(find: user)
-      user.stub(:reload)
 
       expect(controller).to receive(:link_github_profile).and_call_original
       get :create, provider: 'github'
       expect(user.github_profile_url).to eq('http://github.com/test')
+    end
+
+    it 'reloads user on successful update' do
+      user = stub_model(User, github_profile_url: nil)
+      controller.stub(current_user: user)
+      User.stub(find: user)
+      expect(user).to receive(:reload)
+      expect(user).to receive(:update_attributes).and_return true
+
+      get :create, provider: 'github'
+    end
+
+    it 'displays error message on failure' do
+      user = stub_model(User)
+      controller.stub(current_user: user)
+      User.stub(find: user)
+      expect(user).to receive(:update_attributes).and_return false
+
+      get :create, provider: 'github'
+
+      expect(flash[:alert]).to eq 'Linking your GitHub profile has failed'
     end
   end
 end

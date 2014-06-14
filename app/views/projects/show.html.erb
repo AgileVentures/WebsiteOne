@@ -23,14 +23,14 @@
     </ul>
   <% end %>
 
-  <% if @project.github_url.present? %>
+  <% if @project.github_url? %>
     <p><i class="fa fa-github-alt fa-lg"></i>
       <%= link_to "#{@project.github_url.split('/').last} ", @project.github_url %>on GitHub</p>
   <% else %>
     <p><i class="fa fa-github-alt fa-lg"></i> not linked to GitHub</p>
   <% end %>
 
-  <% if @project.pivotaltracker_url.present? %>
+  <% if @project.pivotaltracker_url? %>
     <p><i class="fa fa-gear fa-lg"></i>
       <%= link_to "#{@project.title} ", @project.pivotaltracker_url %>on PivotalTracker</p>
   <% else %>
@@ -52,7 +52,7 @@
     <a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a>
   </li>
   <li id="members">
-    <a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a>
+    <a href="#members_list" data-toggle="tab">Members (<%= @project.members.count %>)</a>
   </li>
   <li id="videos">
     <a href="#videos_list" data-toggle="tab">Videos (<%= @videos.count %>)</a>
@@ -82,7 +82,7 @@
     <% end %>
   </div>
   <div class="tab-pane" id="members_list">
-    <%= render 'members_list', members: @members %>
+    <%= render 'members_list', members: @project.members %>
   </div>
   <div class="tab-pane" id="videos_list">
     <div class="row">

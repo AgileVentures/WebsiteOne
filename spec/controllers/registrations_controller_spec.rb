@@ -44,24 +44,15 @@ describe RegistrationsController do
     end
   end
 
-  describe '#update' do
+  describe 'PUT update' do
     let(:valid_session) { {} }
 
     before(:each) do
       # stubbing out devise methods to simulate authenticated user
-      @user = double('user', id: 1, friendly_id: 'some-id')
+      @user = FactoryGirl.build(:user)
       request.env['warden'].stub :authenticate! => @user
       controller.stub :current_user => @user
-
       request.env['devise.mapping'] = Devise.mappings[:user]
-      User.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@user)
-      @user.stub(:skill_list=)
-    end
-
-    it 'renders edit on preview' do
-      @user.stub(:display_email=)
-      put :update, id: 'update', preview: true, user: {email: ''}
-      expect(response).to render_template(:edit)
     end
 
     it 'assigns the requested project as @project' do
@@ -100,4 +91,27 @@ describe RegistrationsController do
       end
     end
   end
+
+  # private methods
+
+  describe '#build_resource' do
+    context 'omniauth session' do
+      before do
+        session[:omniauth] = 'session'
+        @user = stub_model(User)
+        controller.instance_variable_set("@user", @user)
+        class Devise::RegistrationsController
+          def build_resource *args
+          end
+        end
+      end
+
+      it 'should apply omniauth on user and run validations' do
+        @user.should_receive(:apply_omniauth).with('session')
+        @user.should_receive(:valid?)
+        controller.instance_eval { build_resource }
+      end
+    end
+  end
 end
+
