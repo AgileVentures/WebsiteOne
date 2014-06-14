@@ -59,24 +59,41 @@ describe 'events/show' do
     rendered.should_not have_selector('a#hoa-link')
   end
 
-  it 'logged in user should see Edit link' do
-    view.stub(:user_signed_in?).and_return(true)
-    render
-    rendered.should have_link 'Edit'
-  end
-
-  it 'logged in user should see add/edit url form' do
-    view.stub(:user_signed_in?).and_return(true)
-    render
-    rendered.should have_selector('form#event-form')
-  end
-
-  describe 'Hangout status' do
+  describe 'Hangouts' do
     before(:each) do
       @hangout = stub_model(Hangout, event_id: 375,
-                             hangout_url: 'http://hangout.test',
-                             started?: true)
+                            hangout_url: 'http://hangout.test',
+                            started?: true)
       assign :hangout, @hangout
+    end
+
+    context 'user is signed in' do
+      before do
+        view.stub(user_signed_in?: true)
+        view.stub(topic: 'Topic')
+      end
+
+      it_behaves_like 'it has a hangout button' do
+        let(:topic_name){'Topic'}
+        let(:id){@event.id}
+      end
+
+      it 'renders Edit link' do
+        view.stub(:user_signed_in?).and_return(true)
+        render
+        rendered.should have_link 'Edit'
+      end
+
+      it 'renders add/edit url form' do
+        view.stub(:user_signed_in?).and_return(true)
+        render
+        rendered.should have_selector('form#event-form')
+      end
+
+    end
+
+    context 'user is not signed in' do
+      # TODO add examples
     end
 
     it 'renders Hangout status section if the hangout has started' do
@@ -91,10 +108,5 @@ describe 'events/show' do
       expect(rendered).not_to have_css("#hangout_status")
     end
 
-    it 'renders Hangout details values' do
-      render
-
-      expect(rendered).to have_link 'Click to join the hangout', @hangout.hangout_url
-    end
   end
 end
