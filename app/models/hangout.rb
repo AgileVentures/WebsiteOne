@@ -1,4 +1,6 @@
 class Hangout < ActiveRecord::Base
+  belongs_to :event
+
   def started?
     true if hangout_url
   end

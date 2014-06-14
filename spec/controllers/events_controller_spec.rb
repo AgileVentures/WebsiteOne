@@ -27,11 +27,9 @@ describe EventsController do
     end
 
     it 'assigns assosciated hangout' do
-      hangout = double(Hangout)
-      Hangout.stub(find_by_event_id: hangout)
+      hangout = Hangout.create(event_id: event.id)
 
       get :show, {:id => event.to_param}, valid_session
-      
       expect(assigns(:hangout)).to eq hangout
     end
 
