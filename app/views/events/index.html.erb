@@ -1,4 +1,7 @@
 <% provide :title, 'Events' %>
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'hangouts/hangout_button' %>
+<% end %>
 <h1>AgileVentures Events</h1>
 <p>We are hosting several events a day using Google Hangouts. Feel free to join in if you want to get involved or if you
   a curious about Pair Programming and Agile.
