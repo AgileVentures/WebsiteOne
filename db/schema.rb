@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20140606204845) do
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
   create_table "hangouts", force: true do |t|
-    t.string   "event_id"
+    t.integer  "event_id"
     t.string   "title"
     t.string   "hangout_url"
     t.datetime "created_at"
@@ -102,8 +102,6 @@ ActiveRecord::Schema.define(version: 20140606204845) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
-    t.string   "github_owner"
-    t.string   "github_repo"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
   end

@@ -7,7 +7,8 @@ WebsiteOne::Application.routes.draw do
   resources :users, :only => [:index, :show] , :format => false
 
   resources :articles, :format => false
-  resources :hangouts, :only => [:update], :format => false
+
+  match '/hangouts/:id' => 'hangouts#update', :via => [:put, :options], as: 'hangout'
 
   resources :projects, :format => false do
     member do

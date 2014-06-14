@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe HangoutsController do
 
+  before :each do
+    controller.stub(allowed?: true)
+  end
+
   describe '#update' do
     it 'creates a hangout if there is no hangout assosciated with the event' do
       event_id = '333'
@@ -17,15 +21,6 @@ describe HangoutsController do
       get :update, {id: '333', hangout_data: 'data'}
     end
 
-    it 'sets CORS headers' do
-      Hangout.any_instance.stub(update_hangout_data: true)
-      headers = { 'Access-Control-Allow-Origin' => '*',
-                  'Access-Control-Request-Method' => 'GET' }
-
-      get :update, {id: '333'}
-      expect(response.headers).to include(headers)
-    end
-
     it 'returns a success response if update is successful' do
       Hangout.any_instance.stub(update_hangout_data: true)
 
@@ -38,6 +33,28 @@ describe HangoutsController do
 
       get :update, {id: '333'}
       expect(response.body).to have_text('Failure')
+    end
+  end
+
+  describe 'CORS handling' do
+    it 'drops request if the origin is not allowed' do
+      controller.stub(allowed?: false)
+      get :update, {id: '333'}
+      expect(response.status).to eq(400)
+    end
+
+    it 'sets CORS headers' do
+      Hangout.any_instance.stub(update_hangout_data: true)
+      headers = { 'Access-Control-Allow-Origin' => '*',
+                  'Access-Control-Allow-Methods' => 'PUT' }
+
+      get :update, {id: '333'}
+      expect(response.headers).to include(headers)
+    end
+
+    it 'responses OK on preflight check' do
+      get :update, {id: '333'}
+      expect(response.status).to eq(200)
     end
   end
 
