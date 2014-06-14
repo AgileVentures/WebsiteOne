@@ -11,7 +11,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @members = @project.members
     @videos = @project.videos if @project
   end
 

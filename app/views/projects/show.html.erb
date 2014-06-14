@@ -52,7 +52,7 @@
     <a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a>
   </li>
   <li id="members">
-    <a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a>
+    <a href="#members_list" data-toggle="tab">Members (<%= @project.members.count %>)</a>
   </li>
   <li id="videos">
     <a href="#videos_list" data-toggle="tab">Videos (<%= @videos.count %>)</a>
@@ -82,7 +82,7 @@
     <% end %>
   </div>
   <div class="tab-pane" id="members_list">
-    <%= render 'members_list', members: @members %>
+    <%= render 'members_list', members: @project.members %>
   </div>
   <div class="tab-pane" id="videos_list">
     <div class="row">

@@ -44,10 +44,10 @@ describe 'projects/show.html.erb' do
     assign :project, @project
     assign :user, @user
     assign :documents, @documents
-    assign :members, [@user]
     assign :videos, @videos
     assign :stories, @stories
     @project.stub(:user).and_return(@user)
+    @project.stub(:members).and_return([@user])
     @project.stub(github_url?: false,
                   pivotaltracker_url?: false
     )
