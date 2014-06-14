@@ -1,14 +1,9 @@
-<div id="liveHOA-placeholder"></div>
-<%= javascript_tag do  %>
-  <% callback_url = "#{request.protocol}#{request.host_with_port}/ho_service/#{id.to_s}" %>
-  gapi.hangout.render('liveHOA-placeholder', {
-    'render': 'createhangout',
-    'topic': '<%= topic  %>',
-    'hangout_type': 'onair',
-    'initial_apps': [{'app_id' : '227702023966',
-                      'start_data' :'<%= callback_url %>',
-                      'app_type' : 'ROOM_APP' 
-                    }],
-    'widget_size': 150
-  });
+<div id="liveHOA-placeholder" 
+  data-topic='<%= topic %>' 
+  data-app-id='<%= Hangouts::SERVICE_APP_ID %>' 
+  data-callback-url='<%= hangout_url(id) %>'>
+  Waiting for hangouts to load..
+</div>
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'hangouts/hangout_button', 'data-turbolinks-eval' => true %>
 <% end %>
