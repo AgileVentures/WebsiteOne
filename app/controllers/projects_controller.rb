@@ -52,23 +52,13 @@ class ProjectsController < ApplicationController
   # end
 
   def follow
-    if current_user
-      current_user.follow(@project)
-      flash[:notice] = "You just joined #{@project.title}."
-    else
-      flash[:error] = "You must <a href='/users/sign_in'>login</a> to follow #{@project.title}.".html_safe
-    end
-    redirect_to project_path(@project)
+    current_user.follow(@project)
+    redirect_to project_path(@project), notice: "You just joined #{@project.title}."
   end
 
   def unfollow
-    if current_user
-      current_user.stop_following(@project)
-      flash[:notice] = "You are no longer a member of #{@project.title}."
-    else
-      flash[:error] = "You must <a href='/users/sign_in'>login</a> to unfollow #{@project.title}.".html_safe
-    end
-    redirect_to project_path(@project)
+    current_user.stop_following(@project)
+    redirect_to project_path(@project), notice: "You are no longer a member of #{@project.title}."
   end
 
   private

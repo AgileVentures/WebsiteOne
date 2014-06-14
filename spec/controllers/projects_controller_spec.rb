@@ -49,7 +49,6 @@ describe ProjectsController do
       @project.stub(:tag_list).and_return [ 'WTF' ]
       Project.stub_chain(:friendly, :find).and_return @project
       @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
-      @project.should_receive(:members).and_return @users
       @project.stub(videos: 'videos')
       PivotalService.stub(one_project: '') 
       dummy = Object.new
@@ -66,11 +65,6 @@ describe ProjectsController do
     it 'renders the show template' do
       get :show, {:id => @project.friendly_id}, valid_session
       expect(response).to render_template 'show'
-    end
-
-    it 'assigns the list of members with public profiles to @members' do
-      get :show, { id: @project.friendly_id }, valid_session
-      assigns(:members).should eq @users
     end
 
     it 'assigns the list of related YouTube videos' do
@@ -281,18 +275,6 @@ describe ProjectsController do
         expect(flash[:notice]).to eq "You just joined #{@project.title}."
       end
     end
-
-    context 'not logged in' do
-      before do
-        @user.stub(:follow)
-        controller.stub(current_user: nil)
-      end
-
-      it 'should show a flash notice saying user must be signed in' do
-        get :follow, id: 'follow', project: {title: ''}
-        expect(flash[:error]).to eq "You must <a href='/users/sign_in'>login</a> to follow #{@project.title}."
-      end
-    end
   end
 
   describe '#unfollow' do
@@ -319,18 +301,6 @@ describe ProjectsController do
         get :unfollow, id: 'unfollow', project: {title: ''}
         expect(response).to redirect_to(project_path(@project))
         expect(flash[:notice]).to eq "You are no longer a member of #{@project.title}."
-      end
-    end
-
-    context 'not logged in' do
-      before do
-        @user.stub(:follow)
-        controller.stub(current_user: nil)
-      end
-
-      it 'should show a flash notice saying user must be signed in' do
-        get :unfollow, id: 'unfollow', project: {title: ''}
-        expect(flash[:error]).to eq "You must <a href='/users/sign_in'>login</a> to unfollow #{@project.title}."
       end
     end
   end
