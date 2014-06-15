@@ -1,4 +1,3 @@
-require 'act_as_page'
 require 'acts_as_votable'
 
 class Article < ActiveRecord::Base
