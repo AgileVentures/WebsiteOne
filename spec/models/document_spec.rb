@@ -37,4 +37,32 @@ describe Document do
       expect(@document.project.nil?).to be_false
     end
   end
+
+  describe '#url_for_me' do
+    it 'returns correct url for show action' do
+      @document.url_for_me('show').should eq "/projects/#{@project.slug}/documents/#{@document.slug}"
+    end
+
+    it 'returns correct url for other actions' do
+      @document.url_for_me('new').should eq "/projects/#{@project.slug}/documents/#{@document.slug}/new"
+    end
+  end
+
+  describe '#slug_candidates' do
+    it 'returns correct slug candidates' do
+      @document.slug_candidates.should eq [ :title, [:title, :project_title] ]
+    end
+  end
+
+  describe '#project_title' do
+    it 'returns nil if project does not exists' do
+      @document.stub(:project_id)
+      @document.project_title.should be_nil
+    end
+
+    it 'returns project titles if project xists' do
+      @document.project_title.should eq @project.title
+    end
+  end
+
 end
