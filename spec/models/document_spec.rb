@@ -13,7 +13,7 @@ describe Document do
       @document.title = ''
       expect(@document.save).to be_false
     end
-    
+
     it 'blank project' do
       @document.project_id = nil
       expect(@document.save).to be_false
