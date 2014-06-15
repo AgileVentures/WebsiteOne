@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
   cattr_accessor :collection_time_past
 
   REPEATS_OPTIONS = %w[never weekly]
-  REPEATS_ENDS_OPTIONS = %w[never on]
+  REPEAT_ENDS_OPTIONS = %w[never on]
   DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
 
   def self.hookups
