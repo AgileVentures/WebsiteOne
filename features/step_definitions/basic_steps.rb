@@ -205,7 +205,6 @@ end
 
 Then /^save a screenshot of the page at "([^"]*)"$/ do |path|
   #works with Poltergeist driver
-  sleep 1
   page.save_screenshot(path, full: true)
 end
 
