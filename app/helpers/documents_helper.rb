@@ -19,5 +19,7 @@ module DocumentsHelper
     "Created #{time_ago_in_words(@document.created_at)} ago"
   end
 
-
+  def inside_mercury?
+    controller.request.original_url =~ /mercury_frame=true/
+  end
 end
