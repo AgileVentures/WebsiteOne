@@ -12,28 +12,24 @@ end
 
 Given /^document "([^"]+)" has comment "([^"]+)"$/ do |title, comment|
   # THIS STEP ASSUMES THE FOLLOWING:
-  # 1. A comment "#{comment}" has been manually entered for an article
-  # with id='#{test_id}'
-  
-  test_id = 51
-  document = Document.find_by_title(title)
-  document.update(id: test_id) if document  # set to the id of existing comment
+  # 1. A comment "#{comment}" has been manually entered for an document
+  # with title =  '#{title}'
 end
 
 Given /^article "([^"]+)" has comment "([^"]+)"$/ do |title, comment|
   # THIS STEP ASSUMES THE FOLLOWING:
   # 1. A comment "#{comment}" has been manually entered for an article
-  # with id='#{test_id}'
-  
-  test_id = 36
-  article = Article.find_by_title(title)
-  article.update(id: test_id) if article # set to the id of existing comment
+  # with title =  '#{title}'
 end
 
 Then /^(.*) in Disqus section$/ do |step|
-    page.driver.within_frame('dsq-2') { step(step) }
+  page.driver.within_frame('dsq-2') { step(step) }
 end
 
-When /^I wait (\d+) seconds for.+$/ do |time|
-  sleep(time.to_i)
+When /^I wait up to (\d+) seconds for Disqus comments to load$/ do |time|
+  Timeout::timeout(time.to_i) {
+    until page.has_css?('iframe#dsq-2') do
+      sleep(0.005)
+    end
+  }
 end
