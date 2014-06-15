@@ -26,6 +26,7 @@
 //= require_directory ./global-modules
 //= require_tree .
 //= stub mercury_init
+//= stub disqus
 //= stub google-analytics
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
