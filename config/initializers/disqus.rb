@@ -1,4 +1,4 @@
-Rails.application.config.middleware.use OmniAuth::Builder do
+module Disqus
   if Rails.env.development? || Rails.env.test?
     DISQUS_SHORTNAME  = 'agileventures-dev'
   else
