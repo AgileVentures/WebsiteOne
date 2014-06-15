@@ -1,5 +1,3 @@
-require 'validators/pivotal_tracker_url_validator'
-
 class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
