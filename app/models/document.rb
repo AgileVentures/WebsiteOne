@@ -6,13 +6,6 @@ class Document < ActiveRecord::Base
 
   validates :project_id, presence: true
 
-  #TODO: This is created by Marcelo for future use of pagination
-  def self.search(search, page)
-    paginate :per_page => 5, :page => page,
-             :conditions => ['title like ?', "%#{search}%"],
-             :order => 'project_id'
-  end
-
   # Bryan: Used to generate paths, used only in testing.
   # Might want to switch to rake generated paths in the future
   def url_for_me(action)
