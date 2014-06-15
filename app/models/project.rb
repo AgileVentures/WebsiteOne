@@ -1,11 +1,11 @@
-require 'url_validator'
+require 'validators/pivotal_tracker_url_validator'
 
 class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   validates :title, :description, :status, presence: true
-  validates_with UrlValidator
+  validates_with PivotalTrackerUrlValidator
   validates :github_url, uri: true, :allow_blank => true
 
   acts_as_followable
