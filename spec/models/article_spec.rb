@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Article do
 
-  let(:article) { Article.new }
+  let(:article) { Article.new slug: 'test-article' }
 
   it 'should respond to tag_list' do
     expect(article).to respond_to :tag_list
@@ -33,4 +33,13 @@ describe Article do
     expect(article).to respond_to :authored_by?
   end
 
+  describe '#url_for_me' do
+    it 'returns correct url for show action' do
+      article.url_for_me('show').should eq "/articles/#{article.slug}"
+    end
+
+    it 'returns correct url for other actions' do
+      article.url_for_me('new').should eq "/articles/#{article.slug}/new"
+    end
+  end
 end
