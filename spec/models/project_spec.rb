@@ -74,12 +74,19 @@ describe Project do
     end
   end
 
-  describe '#all_tags' do
-    it 'returns all project tags' do
-      FactoryGirl.create(:project_with_tags, tags: ['Tag_1', 'Tag_2'])
-      FactoryGirl.create(:project_with_tags, tags: ['Tag_2', 'Tag_3'])
+  describe '#url_for_me' do
+    before(:each) do
+      @project = Project.new title: 'Title',
+                             description: 'Description',
+                             status: 'ACTIVE'
+    end
 
-      expect(Project.all_tags).to include('Tag_1', 'Tag_2', 'Tag_3')
+    it 'returns correct url for show action' do
+      @project.url_for_me('show').should eq "/projects/#{@project.slug}"
+    end
+
+    it 'returns correct url for other actions' do
+      @project.url_for_me('new').should eq "/projects/#{@project.slug}/new"
     end
   end
 
@@ -110,4 +117,3 @@ describe Project do
     end
   end
 end
-
