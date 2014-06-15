@@ -6,6 +6,7 @@ describe 'articles/show' do
     @author = @user
     @article =  stub_model(Article,
                            :id => 555,
+                           :friendly_id => 'friendly_id',
                            :title => "Ruby article",
                            :content => "My Ruby content",
                            :tag_list => ["Ruby", "Rails"],
@@ -42,10 +43,9 @@ describe 'articles/show' do
     end
   end
 
-  describe 'rendering Disqus' do
-    it 'renders Disqus_thread container' do
-      render
-      expect(rendered).to have_css("#disqus_thread")
+  describe 'renders Disqus section' do
+    it_behaves_like 'commentable with Disqus' do
+      let(:entity) { @article }
     end
   end
 end
