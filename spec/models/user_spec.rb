@@ -75,12 +75,12 @@ describe User do
 
     it 'should require a password' do
       User.new(@attr.merge(:password => "", :password_confirmation => "")).
-          should_not be_valid
+        should_not be_valid
     end
 
     it 'should require a matching password confirmation' do
       User.new(@attr.merge(:password_confirmation => "invalid")).
-          should_not be_valid
+        should_not be_valid
     end
 
     it 'should reject short passwords' do
@@ -110,9 +110,9 @@ describe User do
   describe 'slug generation' do
     before(:each) do
       @user = User.new first_name: 'Candice',
-                       last_name: 'Clemens',
-                       email: 'candice@clemens.com',
-                       password: '1234567890'
+        last_name: 'Clemens',
+        email: 'candice@clemens.com',
+        password: '1234567890'
     end
 
     it 'should automatically generate a slug' do
@@ -146,46 +146,46 @@ describe User do
     before(:each) do
       Geocoder.configure(:ip_lookup => :test)
       Geocoder::Lookup::Test.add_stub(
-          '85.228.111.204', [
+        '85.228.111.204', [
           {
-              ip: '85.228.111.204',
-              country_code: 'SE',
-              country_name: 'Sweden',
-              region_code: '28',
-              region_name: 'Västra Götaland',
-              city: 'Alingsås',
-              zipcode: '44139',
-              latitude: 57.9333,
-              longitude: 12.5167,
-              metro_code: '',
-              areacode: ''
+            ip: '85.228.111.204',
+            country_code: 'SE',
+            country_name: 'Sweden',
+            region_code: '28',
+            region_name: 'Västra Götaland',
+            city: 'Alingsås',
+            zipcode: '44139',
+            latitude: 57.9333,
+            longitude: 12.5167,
+            metro_code: '',
+            areacode: ''
           }.as_json
-      ]
+        ]
       )
 
       Geocoder::Lookup::Test.add_stub(
-          '50.78.167.161', [
+        '50.78.167.161', [
           {
-              ip: '50.78.167.161',
-              country_code: 'US',
-              country_name: 'United States',
-              region_code: 'WA',
-              region_name: 'Washington',
-              city: 'Seattle',
-              zipcode: '',
-              latitude: 47.6062,
-              longitude: -122.3321,
-              metro_code: '819',
-              areacode: '206'
+            ip: '50.78.167.161',
+            country_code: 'US',
+            country_name: 'United States',
+            region_code: 'WA',
+            region_name: 'Washington',
+            city: 'Seattle',
+            zipcode: '',
+            latitude: 47.6062,
+            longitude: -122.3321,
+            metro_code: '819',
+            areacode: '206'
           }.as_json
-      ]
+        ]
       )
 
       @user = User.new first_name: 'Geo',
-                       last_name: 'Coder',
-                       email: 'candice@clemens.com',
-                       password: '1234567890',
-                       last_sign_in_ip: '85.228.111.204'
+        last_name: 'Coder',
+        email: 'candice@clemens.com',
+        password: '1234567890',
+        last_sign_in_ip: '85.228.111.204'
     end
 
     it 'should perform geocode' do
