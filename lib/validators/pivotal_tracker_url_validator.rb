@@ -1,4 +1,4 @@
-class UrlValidator < ActiveModel::Validator
+class PivotalTrackerUrlValidator < ActiveModel::Validator
   def validate(record)
     validate_pivotal_tracker_url(record) if record.pivotaltracker_url.present?
   end
