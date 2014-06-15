@@ -17,7 +17,7 @@ class UriValidator < ActiveModel::EachValidator
   end
 
   def allowed_protocols_humanized
-    allowed_protocols.to_sentence(:two_words_connector => 'or')
+    allowed_protocols.to_sentence(:two_words_connector => ' or ')
   end
 
   def allowed_protocols
