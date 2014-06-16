@@ -5,7 +5,7 @@ class HangoutsController < ApplicationController
   def update
     hangout = Hangout.find_or_create_by(event_id: params[:id])
 
-    if hangout && hangout.update_hangout_data(params)
+    if hangout.try!(:update_hangout_data, params)
       render text: 'Success'
     else
       render text: 'Failure'
@@ -28,7 +28,7 @@ class HangoutsController < ApplicationController
   end
 
   def set_cors_headers
-    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Origin'] = request.env['HTTP_ORIGIN']
     response.headers['Access-Control-Allow-Methods'] = 'PUT'
   end
 end

@@ -2,7 +2,7 @@ class Hangout < ActiveRecord::Base
   belongs_to :event
 
   def started?
-    true if hangout_url
+    true if hangout_url.present?
   end
 
   def update_hangout_data(params)
