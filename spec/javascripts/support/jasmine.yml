@@ -16,6 +16,7 @@ src_files:
   - assets/application.js
   - assets/projects.js
   - assets/jasmine-jquery.js
+  - assets/hangouts/hangout_button.js
 
 
 # stylesheets
