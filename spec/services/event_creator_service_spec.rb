@@ -1,3 +1,4 @@
+require 'active_support/all'
 require_relative '../../app/models/event_date'
 require_relative '../../app/models/start_time'
 require_relative '../../app/models/end_time'
