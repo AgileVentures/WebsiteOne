@@ -1,3 +1,4 @@
 <%= provide :title, @article.title %>
 
 <%= render 'article', article: @article, author: @author %>
+<%= render partial: 'disqus/disqus', locals: {entity: @article} %>
