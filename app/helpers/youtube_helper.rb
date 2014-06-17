@@ -1,6 +1,8 @@
 require 'open-uri'
 
 module YoutubeHelper
+  extend self
+  
   def channel_id(token)
     # API v3
     response = open("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", 'Authorization' => "Bearer #{token}").read
