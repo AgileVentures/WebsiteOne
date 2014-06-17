@@ -50,8 +50,8 @@ describe ProjectsController do
       @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
       @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
       @project.should_receive(:followers).and_return @more_users
-      Youtube.stub(project_videos: 'videos')
-      PivotalService.stub(one_project: '') 
+      YoutubeVideosService.any_instance.stub(project_videos: 'videos')
+      PivotalService.stub(one_project: '')
       dummy = Object.new
       dummy.stub(stories: "stories")
       PivotalService.stub(iterations: dummy)

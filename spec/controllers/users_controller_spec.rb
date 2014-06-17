@@ -52,7 +52,7 @@ describe UsersController do
               published: '01/01/2015'
           }
       ]
-      Youtube.stub(user_videos: @youtube_videos)
+      YoutubeVideosService.any_instance.stub(user_videos: @youtube_videos)
     end
 
     it 'assigns a user instance' do
