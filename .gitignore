@@ -58,3 +58,9 @@ public/assets/**
 
 # Zeus config
 zeus.json
+
+.pryrc
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml

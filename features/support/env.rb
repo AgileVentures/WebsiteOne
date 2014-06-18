@@ -91,3 +91,7 @@ Geocoder::Lookup::Test.add_stub(
     }.as_json
 ]
 )
+
+Before do
+  Settings.reload!
+end
