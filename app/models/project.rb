@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :documents
   has_many :hangouts
+  has_many :commit_counts
 
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags

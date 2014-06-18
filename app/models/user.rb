@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :articles
   has_many :hangouts
+  has_many :commit_counts 
 
   self.per_page = 30
 
