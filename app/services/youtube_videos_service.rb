@@ -1,6 +1,13 @@
 require 'open-uri'
 
 class YoutubeVideosService
+  def initialize(object)
+    @object = object
+  end
+
+  def videos
+    self.send("#{@object.class.to_s.downcase}_videos", @object)
+  end
 
   def user_videos(user)
     if user_id = user.youtube_id
@@ -10,15 +17,13 @@ class YoutubeVideosService
       request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
       request += '&fields=entry(author(name),id,published,title,content,link)'
 
-      #tags_filter = escape_query_params(tags)
-      #request += '&q=' + tags_filter.join('|')
-
       response = get_response(request)
       filter_response(response, tags, [YoutubeHelper.youtube_user_name(user)]) if response
     end
   end
 
-  def project_videos(project, members)
+  def project_videos(project)
+    members = project.members
     members_tags = members_tags(members)
     return [] if members_tags.blank?
     project_tags = project_tags(project)
