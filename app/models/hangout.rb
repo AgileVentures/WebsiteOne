@@ -5,7 +5,7 @@ class Hangout < ActiveRecord::Base
     hangout_url.present?
   end
 
-  strong parameters
+  # strong parameters
   def update_hangout_data(params)
     update(title: params[:title], hangout_url: params[:hangout_url])
   end
