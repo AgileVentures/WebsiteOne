@@ -34,6 +34,13 @@ class Project < ActiveRecord::Base
     followers.reject { |member| !member.display_profile }
   end
 
+  def members_youtube_tags
+    members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.
+      compact.
+      map(&:downcase).
+      uniq
+  end
+
   # Bryan: Used to generate paths, used only in testing.
   # Might want to switch to rake generated paths in the future
   def url_for_me(action)
