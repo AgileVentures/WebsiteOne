@@ -10,38 +10,38 @@ class YoutubeVideosService
   private
 
   def user_videos
-    if user_id = @object.youtube_id
-      request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
-      request += '&fields=entry(author(name),id,published,title,content,link)'
+    return unless @object.youtube_id
 
-      response = get_response(request)
-      filter_response(response, @object.followed_project_tags, [YoutubeHelper.youtube_user_name(@object)]) if response
-    end
+    response = get_response(build_request_for_user_videos)
+    filter_response(response, @object.followed_project_tags, [YoutubeHelper.youtube_user_name(@object)]) if response
   end
 
   def project_videos
-    request = build_request(escape_query_params(@object.members_youtube_tags), escape_query_params(@object.youtube_tags))
+    request = build_request_for_project_videos(@object.members_youtube_tags, @object.youtube_tags)
     response = get_response(request)
     filter_response(response, @object.youtube_tags, @object.members_youtube_tags) if response
   end
 
-  def build_request(members_filter, project_tags_filter)
-    request = 'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50'
-    request += '&orderby=published'
-    request += '&fields=entry(author(name),id,published,title,content,link)'
-    #request += '&fields=entry[' + filter.join(' or ') + ']'
-    request += '&q=(' + project_tags_filter.join('|') + ')'
-    request += '/(' + members_filter.join('|') + ')'
+  def build_request_for_user_videos
+    "http://gdata.youtube.com/feeds/api/users/#{@object.youtube_id}/uploads?alt=json&max-results=50" +
+     '&fields=entry(author(name),id,published,title,content,link)'
+  end
+
+  def build_request_for_project_videos(members_filter, project_tags_filter)
+    'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50' +
+    '&orderby=published&fields=entry(author(name),id,published,title,content,link)' +
+    '&q=' + escape_query_params(project_tags_filter) +
+    '/' + escape_query_params(members_filter)
   end
 
   def escape_query_params(params)
-    params.map do |param|
+    '(' + params.map do |param|
       if param.index(' ')
         '"' + param.gsub(' ', '+') + '"'
       else
         param
       end
-    end
+    end.join('|') + ')'
   end
 
   def get_response(request)
