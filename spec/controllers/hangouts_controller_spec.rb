@@ -4,6 +4,7 @@ describe HangoutsController do
 
   before :each do
     controller.stub(allowed?: true)
+    request.env['HTTP_ORIGIN'] = 'http://test.com'
   end
 
   describe '#update' do
@@ -45,7 +46,6 @@ describe HangoutsController do
 
     it 'sets CORS headers' do
       Hangout.any_instance.stub(update_hangout_data: true)
-      request.env['HTTP_ORIGIN'] = 'test.com'
       headers = { 'Access-Control-Allow-Origin' => 'test.com',
                   'Access-Control-Allow-Methods' => 'PUT' }
 

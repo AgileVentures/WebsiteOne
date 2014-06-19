@@ -28,7 +28,7 @@ class HangoutsController < ApplicationController
   end
 
   def set_cors_headers
-    response.headers['Access-Control-Allow-Origin'] = request.env['HTTP_ORIGIN']
+    response.headers['Access-Control-Allow-Origin'] = request.env['HTTP_ORIGIN'].gsub(/^.*\/\//,'')
     response.headers['Access-Control-Allow-Methods'] = 'PUT'
   end
 end
