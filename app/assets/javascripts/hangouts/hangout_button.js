@@ -1,34 +1,28 @@
-WebsiteOne.load_hangout_button = function() {
+WebsiteOne.define('HangoutButton', function() {
+  return {
+    init: function() {
+      var placeholder = 'liveHOA-placeholder',
+          hoa_placeholder = $('#' + placeholder);
 
-  var placeholder = 'liveHOA-placeholder',
-  hoa_placeholder = $('#' + placeholder);
+      if (hoa_placeholder.length > 0) {
+        WebsiteOne.loadHangouts(function() {
+          var topic = hoa_placeholder.data('topic'),
+          app_id = hoa_placeholder.data('app-id'),
+          callback_url = hoa_placeholder.data('callback-url');
 
-  if (typeof(gapi) != 'undefined' && hoa_placeholder.length >0) {
-    var topic = hoa_placeholder.data('topic'),
-    app_id = hoa_placeholder.data('app-id'),
-    callback_url = hoa_placeholder.data('callback-url');
-
-    var status = gapi.hangout.render(placeholder, {
-      render: 'createhangout',
-      topic: topic,
-      hangout_type: 'onair',
-      initial_apps: [{
-        app_id : app_id,
-        start_data :callback_url,
-        app_type : 'ROOM_APP'
-      }],
-      widget_size: 200
-    });
-  };
-};
-
-function load_gapi() {
-  if (typeof(gapi) == 'undefined') {
-    $.ajax({
-      url: 'https://apis.google.com/js/platform.js',
-      dataType: "script",
-      cache: true }).done(WebsiteOne.load_hangout_button);
-  };
-};
-
-load_gapi();
+          var status = gapi.hangout.render(placeholder, {
+            render: 'createhangout',
+            topic: topic,
+            hangout_type: 'onair',
+            initial_apps: [{
+              app_id: app_id,
+              start_data: callback_url,
+              app_type : 'ROOM_APP'
+            }],
+            widget_size: 200
+          });
+        });
+      };
+    }
+  }
+});

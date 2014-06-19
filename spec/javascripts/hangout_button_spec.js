@@ -1,6 +1,10 @@
 describe('WebsiteOne #load_hangout_button', function() {
+  var oldGapi;
 
   beforeEach(function () {
+    oldGapi = (typeof(gapi) === 'undefined') ? undefined : gapi;
+    reloadScript('hangout_button.js')
+
     setFixtures(sandbox({
       id: 'liveHOA-placeholder',
       'data-topic': 'Topic',
@@ -9,18 +13,21 @@ describe('WebsiteOne #load_hangout_button', function() {
     }));
 
     spyOn(jQuery, 'ajax');
-
     hangout = jasmine.createSpyObj('hangout', ['render']);
     gapi = { hangout: hangout };
   });
 
+  afterEach(function() {
+    gapi = oldGapi;
+  });
+
   describe('Hangout button render', function() {
-    it('attaches #load_hangout_button to WebsiteOne', function() {
-      expect(WebsiteOne.load_hangout_button).toBeDefined();
+    it('attaches #HangoutButton function to WebsiteOne global object on first visit to the page', function() {
+      expect(WebsiteOne.HangoutButton).toBeDefined();
     });
 
     it('renders hangout button with correct parameters', function() {
-      WebsiteOne.load_hangout_button();
+      WebsiteOne.HangoutButton.init();
 
       expect(hangout.render).toHaveBeenCalledWith( 'liveHOA-placeholder', {
         render: 'createhangout',
@@ -35,37 +42,11 @@ describe('WebsiteOne #load_hangout_button', function() {
       });
     });
 
-    it('does not render if api is not loaded', function() {
-      gapi = undefined;
-      expect(hangout.render).not.toHaveBeenCalled();
-    });
-
     it('does not render if placeholder div is not loaded', function() {
       setFixtures('');
+      WebsiteOne.HangoutButton.init();
       expect(hangout.render).not.toHaveBeenCalled();
     });
   });
 
-  describe('load hangout api', function() {
-
-    it('loads api library for hangouts', function() {
-      gapi = undefined;
-      jQuery.ajax.and.callThrough();
-
-      load_gapi();
-
-      expect(jQuery.ajax).toHaveBeenCalledWith({
-        url: 'https://apis.google.com/js/platform.js',
-        dataType: "script",
-        cache: true
-      });
-    });
-
-    it('does not load api library if it is already loaded', function() {
-      gapi = [];
-      load_gapi();
-      expect(jQuery.ajax).not.toHaveBeenCalled();
-    });
-  });
 });
-

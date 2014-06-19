@@ -1,10 +1,9 @@
 <% content_for :scripts do %>
   <%= javascript_include_tag 'hangouts/hangout_button' %>
 <% end %>
-<div id="liveHOA-placeholder" 
-  data-topic='<%= topic %>' 
-  data-app-id='<%= Hangouts::SERVICE_APP_ID %>' 
+<div id="liveHOA-placeholder"
+  data-topic='<%= topic %>'
+  data-app-id='<%= Hangouts::SERVICE_APP_ID %>'
   data-callback-url='<%= hangout_url(id) %>'>
-  Waiting for hangouts to load..
+  Please refresh the page to load the hangouts
 </div>
-<%= javascript_tag 'WebsiteOne.load_hangout_button();' %>

@@ -13,11 +13,7 @@ WebsiteOne.define('Projects', function() {
 
       var button = $('#HOA-placeholder');
       if (button.length > 0) {
-        $.ajax({
-            url: 'https://apis.google.com/js/platform.js',
-            dataType: "script",
-            cache: true
-        }).done(function () {
+        WebsiteOne.loadHangouts(function() {
           var button = $('#HOA-placeholder');
           if (button.length > 0 && typeof gapi !== "undefined") {
             gapi.hangout.render('HOA-placeholder', {
