@@ -20,9 +20,9 @@ class YoutubeVideosService
   end
 
   def project_videos
-    request = build_request(escape_query_params(members_tags), escape_query_params(@object.youtube_tags))
+    request = build_request(escape_query_params(@object.members_youtube_tags), escape_query_params(@object.youtube_tags))
     response = get_response(request)
-    filter_response(response, @object.youtube_tags, members_tags) if response
+    filter_response(response, @object.youtube_tags, @object.members_youtube_tags) if response
   end
 
   def build_request(members_filter, project_tags_filter)
@@ -32,14 +32,6 @@ class YoutubeVideosService
     #request += '&fields=entry[' + filter.join(' or ') + ']'
     request += '&q=(' + project_tags_filter.join('|') + ')'
     request += '/(' + members_filter.join('|') + ')'
-  end
-
-  def members_tags
-    return [] if @object.members.blank?
-    members_tags = @object.members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.compact
-    members_tags.map!(&:downcase)
-    members_tags.uniq!
-    members_tags
   end
 
   def escape_query_params(params)
