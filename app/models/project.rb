@@ -23,6 +23,13 @@ class Project < ActiveRecord::Base
     Project.tag_counts_on('tags').map{|tag| tag.name}
   end
 
+  def youtube_tags
+    tag_list.
+      push(title).
+      map(&:downcase).
+      uniq
+  end
+
   def members
     followers.reject { |member| !member.display_profile }
   end

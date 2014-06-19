@@ -11,34 +11,18 @@ class YoutubeVideosService
 
   def user_videos
     if user_id = @object.youtube_id
-      tags = followed_project_tags
-      return [] if tags.empty?
-
       request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
       request += '&fields=entry(author(name),id,published,title,content,link)'
 
       response = get_response(request)
-      filter_response(response, tags, [YoutubeHelper.youtube_user_name(@object)]) if response
+      filter_response(response, @object.followed_project_tags, [YoutubeHelper.youtube_user_name(@object)]) if response
     end
   end
 
   def project_videos
-    return [] if members_tags.blank?
-
-    request = build_request(escape_query_params(members_tags), escape_query_params(project_tags))
+    request = build_request(escape_query_params(members_tags), escape_query_params(@object.youtube_tags))
     response = get_response(request)
-    filter_response(response, project_tags, members_tags) if response
-  end
-
-  def followed_project_tags
-    projects = @object.projects_joined
-    [].tap do |tags|
-      projects.each do |project|
-        tags.concat(self.class.new(project).send(:project_tags))
-      end
-      tags << 'scrum'
-      tags.uniq!
-    end
+    filter_response(response, @object.youtube_tags, members_tags) if response
   end
 
   def build_request(members_filter, project_tags_filter)
@@ -48,14 +32,6 @@ class YoutubeVideosService
     #request += '&fields=entry[' + filter.join(' or ') + ']'
     request += '&q=(' + project_tags_filter.join('|') + ')'
     request += '/(' + members_filter.join('|') + ')'
-  end
-
-  def project_tags
-    tags = @object.tag_list
-    tags << @object.title
-    tags.map!(&:downcase)
-    tags.uniq!
-    tags
   end
 
   def members_tags

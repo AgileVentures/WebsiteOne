@@ -52,6 +52,13 @@ class User < ActiveRecord::Base
     following_by_type('Project')
   end
 
+  def followed_project_tags
+    projects_joined.
+      flat_map(&:youtube_tags).
+      push('scrum')
+  end
+
+
   def display_name
     name = [ self.first_name, self.last_name ].join(' ').squish
     if (name == '' || name == nil) && (self.email == '' || self.email == nil)
