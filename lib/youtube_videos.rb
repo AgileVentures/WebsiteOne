@@ -1,4 +1,8 @@
-class YoutubeVideosService
+class YoutubeVideos
+  def self.for(object)
+    new(object).videos
+  end
+
   def initialize(object)
     @object = object
   end
