@@ -26,6 +26,13 @@ describe EventsController do
       assigns(:event).should eq(event)
     end
 
+    it 'assigns assosciated hangout' do
+      hangout = Hangout.create(event_id: event.id)
+
+      get :show, {:id => event.to_param}, valid_session
+      expect(assigns(:hangout)).to eq hangout
+    end
+
     it 'renders the show template' do
       expect(response).to render_template 'show'
     end

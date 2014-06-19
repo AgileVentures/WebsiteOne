@@ -19,4 +19,8 @@ module EventHelper
 
     time.strftime("%F at %I:%M%p")
   end
+  
+  def topic(event, event_schedule)
+    "#{@event.name} - #{current_occurrence_time(event_schedule.first(1))}"
+  end
 end

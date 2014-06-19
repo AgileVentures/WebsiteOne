@@ -30,17 +30,14 @@ describe 'events/show' do
   end
 
   it 'should render the event name' do
-    render
     rendered.should have_text @event.name
   end
 
   it 'should render the event description' do
-    render
     rendered.should have_text @event.description
   end
 
   it 'should render dates and time for 5 upcoming events' do
-    render
     rendered.should have_text 'Upcoming schedule'
     @event_schedule.first(5).each do |e|
       rendered.should have_content nested_hash_value(e, :time).strftime('%F at %I:%M%p')
@@ -62,15 +59,54 @@ describe 'events/show' do
     rendered.should_not have_selector('a#hoa-link')
   end
 
-  it 'logged in user should see Edit link' do
-    view.stub(:user_signed_in?).and_return(true)
-    render
-    rendered.should have_link 'Edit'
-  end
+  describe 'Hangouts' do
+    before(:each) do
+      @hangout = stub_model(Hangout, event_id: 375,
+                            hangout_url: 'http://hangout.test',
+                            started?: true)
+      assign :hangout, @hangout
+    end
 
-  it 'logged in user should see add/edit url form' do
-    view.stub(:user_signed_in?).and_return(true)
-    render
-    rendered.should have_selector('form#event-form')
+    context 'user is signed in' do
+      before do
+        view.stub(user_signed_in?: true)
+        view.stub(topic: 'Topic')
+      end
+
+      it_behaves_like 'it has a hangout button' do
+        let(:topic_name){'Topic'}
+        let(:id){@event.id}
+      end
+
+      it 'renders Edit link' do
+        view.stub(:user_signed_in?).and_return(true)
+        render
+        rendered.should have_link 'Edit'
+      end
+
+      it 'renders add/edit url form' do
+        view.stub(:user_signed_in?).and_return(true)
+        render
+        rendered.should have_selector('form#event-form')
+      end
+
+    end
+
+    context 'user is not signed in' do
+      # TODO add examples
+    end
+
+    it 'renders Hangout status section if the hangout has started' do
+      render
+      expect(rendered).to have_css("#hangout_status")
+    end
+
+
+    it 'does not render Hangout status section if the hangout has not started' do
+      @hangout.stub(started?: false)
+      render
+      expect(rendered).not_to have_css("#hangout_status")
+    end
+
   end
 end

@@ -33,10 +33,8 @@ When(/^the next event should be in:$/) do |table|
 end
 
 Given(/^I am on the show page for event "([^"]*)"$/) do |name|
-  steps %Q{
-      Given I am on Events index page
-      And I click "#{name}"
-  }
+  event = Event.find_by_name(name)
+  visit event_path(event)
 end
 
 Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
