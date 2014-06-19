@@ -1,43 +1,40 @@
-require 'open-uri'
-
 class YoutubeVideosService
   def initialize(object)
     @object = object
   end
 
   def videos
-    self.send("#{@object.class.to_s.downcase}_videos", @object)
+    self.send("#{@object.class.to_s.downcase}_videos")
   end
 
-  def user_videos(user)
-    if user_id = user.youtube_id
-      tags = followed_project_tags(user)
+  private
+
+  def user_videos
+    if user_id = @object.youtube_id
+      tags = followed_project_tags
       return [] if tags.empty?
 
       request = "http://gdata.youtube.com/feeds/api/users/#{user_id}/uploads?alt=json&max-results=50"
       request += '&fields=entry(author(name),id,published,title,content,link)'
 
       response = get_response(request)
-      filter_response(response, tags, [YoutubeHelper.youtube_user_name(user)]) if response
+      filter_response(response, tags, [YoutubeHelper.youtube_user_name(@object)]) if response
     end
   end
 
-  def project_videos(project)
-    members = project.members
-    members_tags = members_tags(members)
+  def project_videos
     return [] if members_tags.blank?
-    project_tags = project_tags(project)
 
     request = build_request(escape_query_params(members_tags), escape_query_params(project_tags))
     response = get_response(request)
     filter_response(response, project_tags, members_tags) if response
   end
 
-  def followed_project_tags(user)
-    projects = user.following_by_type('Project')
+  def followed_project_tags
+    projects = @object.projects_joined
     [].tap do |tags|
       projects.each do |project|
-        tags.concat(project_tags(project))
+        tags.concat(self.class.new(project).send(:project_tags))
       end
       tags << 'scrum'
       tags.uniq!
@@ -53,17 +50,17 @@ class YoutubeVideosService
     request += '/(' + members_filter.join('|') + ')'
   end
 
-  def project_tags(project)
-    tags = project.tag_list
-    tags << project.title
+  def project_tags
+    tags = @object.tag_list
+    tags << @object.title
     tags.map!(&:downcase)
     tags.uniq!
     tags
   end
 
-  def members_tags(members)
-    return [] if members.blank?
-    members_tags = members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.compact
+  def members_tags
+    return [] if @object.members.blank?
+    members_tags = @object.members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.compact
     members_tags.map!(&:downcase)
     members_tags.uniq!
     members_tags
