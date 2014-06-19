@@ -23,6 +23,10 @@ class Project < ActiveRecord::Base
     Project.tag_counts_on('tags').map{|tag| tag.name}
   end
 
+  def members
+    followers.reject { |member| !member.display_profile }
+  end
+
   # Bryan: Used to generate paths, used only in testing.
   # Might want to switch to rake generated paths in the future
   def url_for_me(action)
@@ -33,4 +37,3 @@ class Project < ActiveRecord::Base
     end
   end
 end
-
