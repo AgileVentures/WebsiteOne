@@ -15,7 +15,7 @@ describe UsersController do
   end
 
   describe 'GET show' do
-    before :each do
+    before(:each) do
       @projects = [
           mock_model(Project, friendly_id: 'title-1', title: 'Title 1'),
           mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
@@ -35,44 +35,51 @@ describe UsersController do
       User.stub_chain(:friendly, :find).and_return(@user)
       @user.stub(:bio).and_return('test_bio')
 
-      @youtube_videos = [
+    end
+
+    context 'with a public profile' do
+      before(:each) do
+        @youtube_videos = [
           {
-              url: "http://www.youtube.com/100",
-              title: "Random",
-              published: '01/01/2015'
+            url: "http://www.youtube.com/100",
+            title: "Random",
+            published: '01/01/2015'
           },
           {
-              url: "http://www.youtube.com/340",
-              title: "Stuff",
-              published: '01/01/2015'
+            url: "http://www.youtube.com/340",
+            title: "Stuff",
+            published: '01/01/2015'
           },
           {
-              url: "http://www.youtube.com/2340",
-              title: "Here's something",
-              published: '01/01/2015'
+            url: "http://www.youtube.com/2340",
+            title: "Here's something",
+            published: '01/01/2015'
           }
-      ]
-      YoutubeVideosService.any_instance.stub(user_videos: @youtube_videos)
+        ]
+        expect(YoutubeVideos).to receive(:for).with(@user).and_return(@youtube_videos)
+
+        get 'show', id: @user.friendly_id
+      end
+
+      it 'assigns a user instance' do
+        expect(assigns(:user)).to eq(@user)
+      end
+
+      it 'assigns youtube videos' do
+        expect(assigns(:youtube_videos)).to eq(@youtube_videos)
+      end
+
+      it 'renders the show view' do
+        expect(response).to render_template :show
+      end
     end
 
-    it 'assigns a user instance' do
-      get 'show', id: @user.friendly_id
-      expect(assigns(:user)).to eq(@user)
-    end
-
-    it 'assigns youtube videos' do
-      get 'show', id: @user.friendly_id
-      expect(assigns(:youtube_videos)).to eq(@youtube_videos)
-    end
-
-    it 'renders the show view' do
-      get 'show', id: @user.friendly_id
-      expect(response).to render_template :show
-    end
-
-    context 'with followed projects' do
-      it 'it renders an error message when accessing a private profile' do
+    context 'with a private profile' do
+      before do
         @user.stub(display_profile: false)
+      end
+
+      it 'it renders an error message when accessing a private profile' do
         expect{get 'show', id: @user.friendly_id}.to raise_error
       end
     end
