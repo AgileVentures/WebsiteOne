@@ -29,7 +29,6 @@ src_files:
 #   - stylesheets/*.css
 #
 stylesheets:
-  - assets/application.css
   - assets/stylesheets/**/*.css
 
 # helpers
@@ -78,7 +77,7 @@ src_dir:
 #
 # spec_dir: spec/javascripts
 #
-spec_dir:
+spec_dir: spec/javascripts
 
 # spec_helper
 #
