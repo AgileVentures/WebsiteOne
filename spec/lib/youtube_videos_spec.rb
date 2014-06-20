@@ -59,5 +59,77 @@ describe YoutubeVideos do
     end
   end
   # Integration Tests End
+  
+  describe "#parse_response" do
+    it 'parses youtube response into an array of hashes' do
+      response = File.read('spec/fixtures/youtube_user_response.json')
+      hash = {:author => "John Doe",
+              :id => "3Hi41S5Tp54",
+              :published => 'Fri, 14 Feb 2014'.to_date,
+              :title => "WebsiteOne - Pairing session - refactoring authentication controller",
+              :content => "WebsiteOne - Pairing session - refactoring authentication controller",
+              :url => "http://www.youtube.com/watch?v=3Hi41S5Tp54&feature=youtube_gdata"}
+      expect(subject.send(:parse_response, response).first).to eq(hash)
+    end
+
+    it 'logs json error and returns nil on parsing invalid json' do
+      JSON.stub(:parse).and_raise(JSON::JSONError)
+      Rails.logger.should_receive(:warn).with('Attempted to decode invalid JSON')
+      subject.send(:parse_response, '').should be_nil
+    end
+  end
+
+  describe "#build_request_for_project_videos" do
+    it 'properly escapes the query params and returns correctly formatted URL' do
+      members_tags = ["john doe"]
+      projects_tags = ["wso", "websiteone"]
+      project = mock_model(Project, members_youtube_tags: members_tags, youtube_tags: projects_tags)
+      expected_string = "http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q=(wso|websiteone)/(\"john+doe\")"
+
+      expect(subject.send(:build_request_for_project_videos, project)).to eq expected_string
+    end
+  end
+
+  describe "#build_request_for_user_videos" do
+    it 'properly escapes the query params and returns correctly formatted URL' do
+      user = double(User, youtube_id: 'test_id')
+      expected_string =  'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
+
+      expect(subject.send(:build_request_for_user_videos, user)).to eq expected_string
+    end
+  end
+
+  describe "#escape_query_params" do
+    it 'escapes the params array to be used in youtube query' do
+      params = ['param1', 'param with spaces', 'param2']
+      expect(subject.send(:escape_query_params, params)).to eq "(param1|\"param+with+spaces\"|param2)"
+    end
+  end
+
+  describe "#get_response" do
+    it 'sorts videos by published date' do
+      response = File.read('spec/fixtures/youtube_user_response.json')
+      request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
+      stub_request(:get, request_string).to_return(status: 200, body: response, headers: {})
+
+      videos = subject.send(:get_response, request_string)
+      titles = videos.map { |video| video[:title] }
+      expect(titles.index('WebsiteOne - Pairing session - refactoring authentication controller')).to be < titles.index('Autograders - Pairing session')
+    end
+  end
+
+  describe "#filter_response" do
+    it 'filters the response by members and project tags' do
+      videos = [
+        {title: "WebsiteOne", author: "sampriti"},
+        {title: "WebsiteOne", author: "bryan"},
+        {title: "WebsiteOne", author: "thomas"},
+        {title: "LocalSupport", author: "sampriti"},
+        {title: "LocalSupport", author: "abagail"}
+      ]
+      result = subject.send(:filter_response, videos, ["WebsiteOne"], ["sampriti", "bryan"])
+      expect(result).to eq videos[0..1]
+    end
+  end
 end
 
