@@ -3,7 +3,7 @@ WebsiteOne::Application.routes.draw do
   
   root 'visitors#index'
 
-  devise_for :users, :controllers => {:registrations => 'registrations'}
+  devise_for :users, controllers: { omniauth_callbacks: 'user_authentications' , :registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false
 
   resources :articles, :format => false
