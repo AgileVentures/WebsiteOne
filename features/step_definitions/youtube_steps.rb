@@ -13,7 +13,7 @@ end
 
 
 Then /I should( not)? see a list of my videos/ do |negative|
-  correct_number = [ YoutubeVideos.new(User.new).send(:parse_response, @user_youtube_response).count, 5 ].min if @user_youtube_response
+  correct_number = [ YoutubeVideos.send(:parse_response, @user_youtube_response).count, 5 ].min if @user_youtube_response
   video_links = page.all(:css, '.yt_link')
   if negative
     expect(video_links).to have(0).items
