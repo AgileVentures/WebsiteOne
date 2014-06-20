@@ -8,6 +8,16 @@ After('@silence-output') do
   $stdout, $stderr = @old_stdout, @old_stderr
 end
 
+Before('@silence-omniauth') do
+  null = File.open('/tmp/null', 'w')
+  @old_logger = OmniAuth.config.logger
+  OmniAuth.config.logger = Logger.new(null)
+end
+
+After('@silence-omniauth') do
+  OmniAuth.config.logger = @old_logger
+end
+
 Before('@time-travel') do
   @default_tz = ENV['TZ']
   ENV['TZ'] = 'UTC'
