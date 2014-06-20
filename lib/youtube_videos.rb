@@ -20,16 +20,16 @@ module YoutubeVideos
     filter_response(response, object.youtube_tags, object.members_youtube_tags) if response
   end
 
-  def build_request_for_user_videos(object)
-    "http://gdata.youtube.com/feeds/api/users/#{object.youtube_id}/uploads?alt=json&max-results=50" +
+  def build_request_for_user_videos(user)
+    "http://gdata.youtube.com/feeds/api/users/#{user.youtube_id}/uploads?alt=json&max-results=50" +
      '&fields=entry(author(name),id,published,title,content,link)'
   end
 
-  def build_request_for_project_videos(object)
+  def build_request_for_project_videos(project)
     'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50' +
     '&orderby=published&fields=entry(author(name),id,published,title,content,link)' +
-    '&q=' + escape_query_params(object.youtube_tags) +
-    '/' + escape_query_params(object.members_youtube_tags)
+    '&q=' + escape_query_params(project.youtube_tags) +
+    '/' + escape_query_params(project.members_youtube_tags)
   end
 
   def escape_query_params(params)
