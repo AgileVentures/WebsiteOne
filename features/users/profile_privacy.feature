@@ -15,7 +15,7 @@ Feature: As a site user
     Then I should not see "Alice Jones"
     And I should see "Bob Butcher"
 
-  @allow-rescue
+  @allow-rescue @silence-output
   Scenario: Visitor should not be able to access a private profile
     Given I am not logged in
     And I visit Alice's profile page

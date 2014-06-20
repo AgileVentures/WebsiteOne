@@ -7,6 +7,9 @@ describe AgileVentures::BulkMailer do
     @opts = { subject: 'my subject',
               heading: 'my heading',
               content: 'my multiline\ntext block' }
+
+    $stdout.stub(:write) # to silence the output of console mailer
+                         # errors would still be output to $stderr
   end
 
   it 'can be initialized' do
