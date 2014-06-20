@@ -1,41 +1,35 @@
-class YoutubeVideos
-  def self.for(object)
-    new(object).videos
-  end
+module YoutubeVideos
+  extend self
 
-  def initialize(object)
-    @object = object
-  end
-
-  def videos
-    self.send("#{@object.class.to_s.downcase}_videos")
+  def for(object)
+    self.send("#{object.class.to_s.downcase}_videos", object)
   end
 
   private
 
-  def user_videos
-    return unless @object.youtube_id
+  def user_videos(object)
+    return unless object.youtube_id
 
-    response = get_response(build_request_for_user_videos)
-    filter_response(response, @object.followed_project_tags, [YoutubeHelper.youtube_user_name(@object)]) if response
+    response = get_response(build_request_for_user_videos(object))
+    filter_response(response, object.followed_project_tags, [YoutubeHelper.youtube_user_name(object)]) if response
   end
 
-  def project_videos
-    request = build_request_for_project_videos(@object.members_youtube_tags, @object.youtube_tags)
+  def project_videos(object)
+    request = build_request_for_project_videos(object)
     response = get_response(request)
-    filter_response(response, @object.youtube_tags, @object.members_youtube_tags) if response
+    filter_response(response, object.youtube_tags, object.members_youtube_tags) if response
   end
 
-  def build_request_for_user_videos
-    "http://gdata.youtube.com/feeds/api/users/#{@object.youtube_id}/uploads?alt=json&max-results=50" +
+  def build_request_for_user_videos(object)
+    "http://gdata.youtube.com/feeds/api/users/#{object.youtube_id}/uploads?alt=json&max-results=50" +
      '&fields=entry(author(name),id,published,title,content,link)'
   end
 
-  def build_request_for_project_videos(members_filter, project_tags_filter)
+  def build_request_for_project_videos(object)
     'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50' +
     '&orderby=published&fields=entry(author(name),id,published,title,content,link)' +
-    '&q=' + escape_query_params(project_tags_filter) +
-    '/' + escape_query_params(members_filter)
+    '&q=' + escape_query_params(object.members_youtube_tags) +
+    '/' + escape_query_params(object.youtube_tags)
   end
 
   def escape_query_params(params)
