@@ -28,8 +28,8 @@ module YoutubeVideos
   def build_request_for_project_videos(object)
     'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50' +
     '&orderby=published&fields=entry(author(name),id,published,title,content,link)' +
-    '&q=' + escape_query_params(object.members_youtube_tags) +
-    '/' + escape_query_params(object.youtube_tags)
+    '&q=' + escape_query_params(object.youtube_tags) +
+    '/' + escape_query_params(object.members_youtube_tags)
   end
 
   def escape_query_params(params)
