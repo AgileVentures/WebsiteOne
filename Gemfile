@@ -38,6 +38,9 @@ gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
 gem 'utf8-cleaner'
+gem "omniauth"
+gem "omniauth-github"
+gem "omniauth-gplus"
 
 gem 'yui-compressor'
 gem 'compass-rails'
@@ -45,7 +48,6 @@ gem 'rack-cache'
 gem 'sprockets-image_compressor'
 
 gem 'rails_config' # a gem to manage configuration files
-gem 'domp'
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -84,6 +86,3 @@ group :production do
   gem 'unicorn'
 end
 
-gem "omniauth"
-gem "omniauth-github"
-gem "omniauth-gplus"
