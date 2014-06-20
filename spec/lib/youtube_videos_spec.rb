@@ -3,7 +3,7 @@ require 'spec_helper'
 describe YoutubeVideos do
   subject { YoutubeVideos }
 
-  describe "::for" do
+  describe "for(object)" do
     it 'should call private method :user_videos is object is User' do
       expect(subject).to receive(:user_videos)
       subject.for(mock_model(User))
@@ -17,7 +17,7 @@ describe YoutubeVideos do
 
   # PRIVATE METHODS
   # Integration Tests Start
-  describe "::project_videos" do
+  describe "project_videos(object)" do
     it 'returns videos for project by project tags and following members who have youtube connected' do
       users = [
         FactoryGirl.create(:user, youtube_id: 'test_id', youtube_user_name: 'John Doe'),
@@ -39,7 +39,7 @@ describe YoutubeVideos do
     end
   end
 
-  describe "#user_videos" do
+  describe "user_videos(object)" do
     it 'returns videos for user sorted by published date and filtered by its projects' do
       project = FactoryGirl.create(:project, title: "WebsiteOne", tag_list: ["WSO"])
       project_2 = FactoryGirl.create(:project, title: "AutoGraders", tag_list: ["AutoGrader"])
@@ -60,7 +60,7 @@ describe YoutubeVideos do
   end
   # Integration Tests End
   
-  describe "#parse_response" do
+  describe "parse_response(json)" do
     it 'parses youtube response into an array of hashes' do
       response = File.read('spec/fixtures/youtube_user_response.json')
       hash = {:author => "John Doe",
@@ -79,7 +79,7 @@ describe YoutubeVideos do
     end
   end
 
-  describe "#build_request_for_project_videos" do
+  describe "build_request_for_project_videos(project)" do
     it 'properly escapes the query params and returns correctly formatted URL' do
       members_tags = ["john doe"]
       projects_tags = ["wso", "websiteone"]
@@ -90,7 +90,7 @@ describe YoutubeVideos do
     end
   end
 
-  describe "#build_request_for_user_videos" do
+  describe "build_request_for_user_videos(user)" do
     it 'properly escapes the query params and returns correctly formatted URL' do
       user = double(User, youtube_id: 'test_id')
       expected_string =  'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
@@ -99,14 +99,14 @@ describe YoutubeVideos do
     end
   end
 
-  describe "#escape_query_params" do
+  describe "escape_query_params(params)" do
     it 'escapes the params array to be used in youtube query' do
       params = ['param1', 'param with spaces', 'param2']
       expect(subject.send(:escape_query_params, params)).to eq "(param1|\"param+with+spaces\"|param2)"
     end
   end
 
-  describe "#get_response" do
+  describe "get_response(url)" do
     it 'sorts videos by published date' do
       response = File.read('spec/fixtures/youtube_user_response.json')
       request_string = 'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
@@ -118,7 +118,7 @@ describe YoutubeVideos do
     end
   end
 
-  describe "#filter_response" do
+  describe "filter_response(response, tags, members)" do
     it 'filters the response by members and project tags' do
       videos = [
         {title: "WebsiteOne", author: "sampriti"},
