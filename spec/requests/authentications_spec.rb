@@ -36,7 +36,7 @@ describe 'OmniAuth authentication' do
               click_link "#{name}"
             }.to change(User, :count).by(1)
           }.to change(UserAuthentication, :count).by(1)
-          page.should have_content('Signed in successfully.')
+          page.should have_content('Signed in successfully')
         end
 
         it 'should not work with invalid credentials' do
@@ -106,7 +106,6 @@ describe 'OmniAuth authentication' do
           supported_auths.each do |p, n|
             next if p == provider
             visit new_user_session_path
-            binding.pry
             click_link "#{name}"
             visit edit_user_registration_path(@user)
             expect {

@@ -17,7 +17,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       existing_user = current_user || User.where('email = ?', auth_params['info']['email']).first
 
       if authentication
-        sign_in_with_existing_authentication(authentication)
+        sign_in_with_existing_authentication(authentication.user)
       elsif existing_user
         create_authentication_and_sign_in(auth_params, existing_user, provider)
       else
@@ -25,14 +25,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     end
 
-    def sign_in_with_existing_authentication(authentication)
-      sign_in_and_redirect(:user, authentication.user)
+    def sign_in_with_existing_authentication(user)
+      sign_in(:user, user)
+      redirect_to root_path, notice: 'Signed in successfully'
     end
 
     def create_authentication_and_sign_in(auth_params, user, provider)
       UserAuthentication.create_from_omniauth(auth_params, user, provider)
-
-      sign_in_and_redirect(:user, user)
+      sign_in_with_existing_authentication(user)
     end
 
     def create_user_and_authentication_and_sign_in(auth_params, provider)
@@ -40,8 +40,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if user.valid?
         create_authentication_and_sign_in(auth_params, user, provider)
       else
-        flash[:error] = user.errors.full_messages.first
-        redirect_to new_user_registration_url
+        redirect_to new_user_registration_url, error: user.errors.full_messages.first
       end
     end
 end
