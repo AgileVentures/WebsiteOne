@@ -83,7 +83,7 @@ describe YoutubeVideos do
     it 'properly escapes the query params and returns correctly formatted URL' do
       members_tags = ["john doe"]
       projects_tags = ["wso", "websiteone"]
-      project = mock_model(Project, members_youtube_tags: members_tags, youtube_tags: projects_tags)
+      project = mock_model(Project, members_tags: members_tags, youtube_tags: projects_tags)
       expected_string = "http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q=(wso|websiteone)/(\"john+doe\")"
 
       expect(subject.send(:build_request_for_project_videos, project)).to eq expected_string

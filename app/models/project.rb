@@ -34,7 +34,7 @@ class Project < ActiveRecord::Base
     followers.reject { |member| !member.display_profile }
   end
 
-  def members_youtube_tags
+  def members_tags
     members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.
       compact.
       map(&:downcase).
