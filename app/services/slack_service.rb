@@ -5,8 +5,9 @@ class SlackService
   def self.post_hangout_notification(hangout)
     post '/hubot/hangouts-notify', {
       body: {
-        title: hangout.title,
-        link: hangout.hangout_url
+        title: hangout.event.name,
+        link: hangout.hangout_url,
+        type: hangout.event.category
       }
     }
   end
