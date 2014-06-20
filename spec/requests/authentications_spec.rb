@@ -8,12 +8,16 @@ describe 'OmniAuth authentication' do
   }
 
   before do
+    supported_auths.keys.each do |provider|
+      AuthenticationProvider.create(name: provider)
+    end
     @uid = '12345678'
     supported_auths.each do |provider, name|
       OmniAuth.config.mock_auth[provider.to_sym] = {
           'provider'  => provider,
           'uid'       => @uid,
-          'info'      => { 'email' => "#{name}@mock.com"}
+          'info'      => { 'email' => "#{name}@mock.com"},
+          'credentials' => {}
       }
     end
     OmniAuth.config.logger.level = Logger::FATAL
@@ -31,7 +35,7 @@ describe 'OmniAuth authentication' do
             expect {
               click_link "#{name}"
             }.to change(User, :count).by(1)
-          }.to change(Authentication, :count).by(1)
+          }.to change(UserAuthentication, :count).by(1)
           page.should have_content('Signed in successfully.')
         end
 
@@ -42,8 +46,8 @@ describe 'OmniAuth authentication' do
             expect {
               click_link "#{name}"
             }.to change(User, :count).by(0)
-          }.to change(Authentication, :count).by(0)
-          page.should have_content('invalid_credentials')
+          }.to change(UserAuthentication, :count).by(0)
+          page.should have_content("Could not authenticate you because \"Invalid credentials\"")
         end
 
         it 'should not allow removal of profiles without passwords' do
@@ -56,7 +60,7 @@ describe 'OmniAuth authentication' do
             expect {
               click_link "Remove #{name}"
             }.to change(User, :count).by(0)
-          }.to change(Authentication, :count).by(0)
+          }.to change(UserAuthentication, :count).by(0)
           page.should have_content 'Bad idea!'
         end
       end
@@ -69,7 +73,9 @@ describe 'OmniAuth authentication' do
 
       context "with a #{name} profile" do
         before do
-          @user.authentications.create!(provider: provider, uid: @uid)
+          auth_params = OmniAuth.config.mock_auth[provider.to_sym]
+          provider_obj = AuthenticationProvider.where(name: auth_params['provider']).first
+          UserAuthentication.create_from_omniauth(auth_params, @user, provider_obj)
         end
 
         it 'finds the right user if auth exists' do
@@ -79,7 +85,7 @@ describe 'OmniAuth authentication' do
             expect {
               click_link "#{name}"
             }.to change(User, :count).by(0)
-          }.to change(Authentication, :count).by(0)
+          }.to change(UserAuthentication, :count).by(0)
           page.should have_content('Signed in successfully.')
         end
 
@@ -92,7 +98,7 @@ describe 'OmniAuth authentication' do
             expect {
               click_link "Remove #{name}"
             }.to change(User, :count).by(0)
-          }.to change(Authentication, :count).by(-1)
+          }.to change(UserAuthentication, :count).by(-1)
           page.should have_content('Successfully removed profile.')
         end
 
@@ -100,10 +106,11 @@ describe 'OmniAuth authentication' do
           supported_auths.each do |p, n|
             next if p == provider
             visit new_user_session_path
+            binding.pry
             click_link "#{name}"
             visit edit_user_registration_path(@user)
             expect {
-              expect { click_link "#{n}" }.to change(Authentication, :count).by(1)
+              expect { click_link "#{n}" }.to change(UserAuthentication, :count).by(1)
             }.to change(User, :count).by(0)
           end
         end
@@ -115,7 +122,7 @@ describe 'OmniAuth authentication' do
               'provider'  => provider,
               'uid'       => "randomplus#{@uid}"
           }
-          visit "/auth/#{provider}"
+          visit "/users/auth/#{provider}"
           page.should have_content 'Unable to create additional profiles.'
         end
       end
