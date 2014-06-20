@@ -82,5 +82,21 @@ describe Project do
       expect(Project.all_tags).to include('Tag_1', 'Tag_2', 'Tag_3')
     end
   end
+
+  describe "#youtube_tags" do
+    it 'returns the tags for project including the project title' do
+      project = FactoryGirl.build(:project, title: "WebsiteOne", tag_list: ["WSO"])
+      expect(project.youtube_tags).to eq ["wso", "websiteone"]
+    end
+  end
+
+  describe "#members_tags" do
+    it 'returns the tags for project members with thier youtube user names' do
+      users = [double(User, youtube_user_name: 'test_id'), double(User, youtube_user_name: 'test_id_2')]
+      project = FactoryGirl.build(:project)
+      allow(project).to receive(:members).and_return(users)
+      expect(project.members_tags).to eq ["test_id", "test_id_2"]
+    end
+  end
 end
 

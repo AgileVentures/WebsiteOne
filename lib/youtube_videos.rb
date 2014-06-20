@@ -17,7 +17,7 @@ module YoutubeVideos
   def project_videos(object)
     request = build_request_for_project_videos(object)
     response = get_response(request)
-    filter_response(response, object.youtube_tags, object.members_youtube_tags) if response
+    filter_response(response, object.youtube_tags, object.members_tags) if response
   end
 
   def build_request_for_user_videos(user)
@@ -29,7 +29,7 @@ module YoutubeVideos
     'http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50' +
     '&orderby=published&fields=entry(author(name),id,published,title,content,link)' +
     '&q=' + escape_query_params(project.youtube_tags) +
-    '/' + escape_query_params(project.members_youtube_tags)
+    '/' + escape_query_params(project.members_tags)
   end
 
   def escape_query_params(params)
