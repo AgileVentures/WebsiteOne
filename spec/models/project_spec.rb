@@ -98,5 +98,16 @@ describe Project do
       expect(project.members_tags).to eq ["test_id", "test_id_2"]
     end
   end
+
+  describe "#members" do
+    it 'returns followers of the project who have a public profile' do
+      project = FactoryGirl.build(:project)
+      @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
+      @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
+      project.stub(followers: @more_users)
+
+      expect(project.members).to eq @users
+    end
+  end
 end
 
