@@ -38,5 +38,26 @@ describe YoutubeVideos do
       end
     end
   end
+
+  describe "#user_videos" do
+    it 'returns videos for user sorted by published date and filtered by its projects' do
+      project = FactoryGirl.create(:project, title: "WebsiteOne", tag_list: ["WSO"])
+      project_2 = FactoryGirl.create(:project, title: "AutoGraders", tag_list: ["AutoGrader"])
+      user = FactoryGirl.create(:user, youtube_id: 'test_id', youtube_user_name: 'John Doe')
+      user.stub(following_by_type: [project])
+      response = File.read('spec/fixtures/youtube_user_response.json')
+      request_string = "http://gdata.youtube.com/feeds/api/users/#{user.youtube_id}/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)"
+      stub_request(:get, request_string).to_return(status: 200, body: response, headers: {})
+
+      videos = subject.for(user)
+      videos.each do |video|
+        video[:title].should match(/(WebsiteOne|WSO)/i)
+        video[:title].should_not match(/(AutoGraders)/i)
+      end
+      videos_dates = videos.map { |v| v[:published] }
+      expect(videos_dates).to eq videos_dates.sort.reverse
+    end
+  end
+  # Integration Tests End
 end
 
