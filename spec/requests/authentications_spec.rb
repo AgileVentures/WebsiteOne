@@ -36,7 +36,7 @@ describe 'OmniAuth authentication' do
               click_link "#{name}"
             }.to change(User, :count).by(1)
           }.to change(UserAuthentication, :count).by(1)
-          page.should have_content('Signed in successfully')
+          page.should have_content('Signed in successfully.')
         end
 
         it 'should not work with invalid credentials' do
@@ -86,7 +86,7 @@ describe 'OmniAuth authentication' do
               click_link "#{name}"
             }.to change(User, :count).by(0)
           }.to change(UserAuthentication, :count).by(0)
-          page.should have_content('Signed in successfully')
+          page.should have_content('Signed in successfully.')
         end
 
         it 'should be removable for users with a password' do
@@ -99,7 +99,7 @@ describe 'OmniAuth authentication' do
               click_link "Remove #{name}"
             }.to change(User, :count).by(0)
           }.to change(UserAuthentication, :count).by(-1)
-          page.should have_content('Successfully removed profile')
+          page.should have_content('Successfully removed profile.')
         end
 
         it 'should be able to create other profiles' do
@@ -122,7 +122,7 @@ describe 'OmniAuth authentication' do
               'uid'       => "randomplus#{@uid}"
           }
           visit "/users/auth/#{provider}"
-          page.should have_content 'Unable to create additional profiles'
+          page.should have_content 'Unable to create additional profiles.'
         end
       end
     end

@@ -27,7 +27,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     def sign_in_with_existing_authentication(user)
       sign_in(:user, user)
-      redirect_to root_path, notice: 'Signed in successfully'
+      redirect_to root_path, notice: 'Signed in successfully.'
     end
 
     def create_authentication_and_sign_in(auth_params, user, provider)
