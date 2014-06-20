@@ -60,7 +60,7 @@ group :test do
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
   gem 'zeus' # rails preloading environment
   gem 'webmock' # mocking external net connections
-  gem 'delorean'
+  gem 'delorean' # mocking Time in tests, aka time travelling
 end
 
 group :development, :test do
@@ -74,6 +74,11 @@ group :development, :test do
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser
   gem 'binding_of_caller'  #online console and debugging in browser
+  gem 'guard' # autoruns rspec/cucumber/livereload/notify..on file change
+  gem 'guard-rspec' #plugins for Guard
+  gem 'guard-cucumber' #plugins for Guard
+  gem 'guard-livereload' #plugins for Guard
+  gem 'guard-jasmine' #plugins for Guard
 end
 
 group :production do
