@@ -17,6 +17,12 @@ class UserAuthenticationsController < Devise::OmniauthCallbacksController
     end
   end
 
+  def destroy
+    provider = AuthenticationProvider.find_by_name(params[:provider])
+    UserAuthentication.destroy_all(user_id: current_user.id, authentication_provider_id: provider.id)
+    redirect_to edit_user_registration_path, notice: 'Successfully removed profile.'
+  end
+
   private
 
   def sign_in_with_existing_authentication(user)
