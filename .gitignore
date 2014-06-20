@@ -55,3 +55,6 @@ public/assets/**
 # Plugin files
 .floo
 .flooignore
+
+# Zeus config
+zeus.json
