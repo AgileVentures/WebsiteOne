@@ -35,6 +35,8 @@ Before('@omniauth') do
       },
       'credentials' => {'token' => 'test_token'}
   }
+  AuthenticationProvider.create(name: 'github')
+  AuthenticationProvider.create(name: 'gplus')
 end
 
 Before('@omniauth-without-email') do
