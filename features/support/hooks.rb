@@ -1,3 +1,13 @@
+Before('@silence-output') do
+  null = File.open('/tmp/null', 'w')
+  @old_stdout, @old_stderr = $stdout, $stderr
+  $stdout, $stderr = null, null
+end
+
+After('@silence-output') do
+  $stdout, $stderr = @old_stdout, @old_stderr
+end
+
 Before('@time-travel') do
   @default_tz = ENV['TZ']
   ENV['TZ'] = 'UTC'

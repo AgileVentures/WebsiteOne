@@ -1,4 +1,4 @@
-@omniauth
+@omniauth @silence-output
 Feature: Connect to social sites
   As a registered user
   So that I can log in  easily

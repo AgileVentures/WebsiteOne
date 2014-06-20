@@ -16,6 +16,8 @@ describe 'OmniAuth authentication' do
           'info'      => { 'email' => "#{name}@mock.com"}
       }
     end
+    $stdout.stub(:write) # to silence the output of omniauth performing authentications
+                         # errors would still be output to $stderr
   end
 
   supported_auths.each do |provider, name|
