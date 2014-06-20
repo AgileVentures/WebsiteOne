@@ -346,7 +346,6 @@ Given(/^I add skills "(.*)"/) do |skills|
 end
 
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
-  debugger
   page.all(:css, "#skills-show span").collect { |e| e.text }.sort.should == skills.split(",").sort
 end
 
