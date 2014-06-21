@@ -164,14 +164,19 @@ describe AuthenticationsController do
       expect(controller).to receive(:link_to_youtube)
       get :create, provider: 'github'
     end
-    it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
+
+    it '#link_to_youtube: gets channel_id and youtube_user_name if user is authenticated and does not have youtube_id or youtube_user_name' do
       request.env['omniauth.auth']['credentials']['token'] = 'token'
-      user = double(User, youtube_id: nil)
+      request.env['omniauth.params']['youtube'] = 'true'
+      user = double(User, youtube_id: nil, youtube_user_name: nil)
       controller.stub(current_user: user)
-      user.stub(:youtube_id=)
       user.stub(:save)
 
       expect(YoutubeHelper).to receive(:channel_id)
+      expect(YoutubeHelper).to receive(:youtube_user_name)
+
+      expect(user).to receive(:youtube_user_name=)
+      expect(user).to receive(:youtube_id=)
       get :create, provider: 'github'
     end
 
