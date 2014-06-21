@@ -11,7 +11,7 @@ module YoutubeVideos
     return unless object.youtube_id
 
     response = get_response(build_request_for_user_videos(object))
-    filter_response(response, object.followed_project_tags, [YoutubeHelper.youtube_user_name(object)]) if response
+    filter_response(response, object.followed_project_tags, [object.youtube_user_name]) if response
   end
 
   def project_videos(object)
