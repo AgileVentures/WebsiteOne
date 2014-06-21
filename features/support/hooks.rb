@@ -1,5 +1,5 @@
 Before('@enable-custom-errors') do
-  Rails.env.stub(production?: true)
+  Features.enable(:custom_errors)
 end
 
 Before('@time-travel') do
