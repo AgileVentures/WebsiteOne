@@ -37,11 +37,14 @@ describe('projects', function () {
     });
   });
 
-  it('calls #renderHangoutButton', function() {
-    reloadScript('projects.js');
-    spyOn(WebsiteOne, 'renderHangoutButton');
+  describe('rendering hangout button', function() {
 
-    WebsiteOne.Projects.init();
-    expect(WebsiteOne.renderHangoutButton).toHaveBeenCalled();
+    it('calls #renderHangoutButton', function() {
+      reloadScript('projects.js');
+      spyOn(WebsiteOne, 'renderHangoutButton');
+
+      WebsiteOne.Projects.init();
+      expect(WebsiteOne.renderHangoutButton).toHaveBeenCalled();
+    });
   });
 });
