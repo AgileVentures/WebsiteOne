@@ -13,9 +13,6 @@ WebsiteOne::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -28,16 +25,6 @@ WebsiteOne::Application.configure do
   config.assets.debug = true
   config.assets.compress = false
 
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-
-  config.action_mailer.smtp_settings = {
-      :address              => 'smtp.gmail.com',
-      :port                 => 587,
-      :domain               => '',
-      :user_name            => 'wso.av.test@gmail.com',
-      :password             => 'Wso12345',
-      :authentication       => 'plain',
-      :enable_starttls_auto => true  }
 end

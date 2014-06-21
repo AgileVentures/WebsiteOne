@@ -1,0 +1,14 @@
+#   This file contains an example of local settings overrides which can be used
+#   to enable various features to test locally. Create a copy of this file and
+#   rename it to settings.local.yml to apply the local overrides.
+
+# enable the mailer by uncommetting the following and add your own smtp credentials
+# mailer:
+#   delivery_method: 'smtp'
+#   smtp_settings:
+#     port: 587
+#     user_name: 'user'
+#     password: 'password'
+#     address: 'address'
+#     domain: 'domain'
+#     authentication: 'auth'
