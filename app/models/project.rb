@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
   end
 
   def members_tags
-    members.map { |user| YoutubeHelper.youtube_user_name(user) if YoutubeHelper.youtube_user_name(user) }.
+    members.map(&:youtube_user_name).
       compact.
       map(&:downcase).
       uniq
