@@ -291,5 +291,10 @@ end
 
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
+  Timeout::timeout(3.0) do
+    until page.has_css? "img[src*=\"#{source}\"]" do
+      sleep(0.5)
+    end
+  end
   page.should have_css "img[src*=\"#{source}\"]"
 end
