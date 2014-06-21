@@ -78,6 +78,5 @@ class User < ActiveRecord::Base
   def self.search(params)
     where(display_profile: true)
       .order(:created_at)
-      .paginate(page: params[:page], per_page: params[:per_page])
   end
 end
