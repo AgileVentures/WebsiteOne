@@ -6,7 +6,6 @@
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Ubuntu' %>
   <%= stylesheet_link_tag '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= content_for?(:scripts) ? yield(:scripts) : '' %>
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
   <% if ENV['ENABLE_GOOGLE_ANALYTICS'] %>

@@ -26,9 +26,10 @@
 //= require_directory ./global-modules
 //= require_tree .
 //= stub mercury_init
-//= stub disqus
 //= stub google-analytics
-//= stub hangouts/hangout_button
+//= stub projects
+//= stub events
+//= stub disqus
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code

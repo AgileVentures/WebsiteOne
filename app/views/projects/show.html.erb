@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'projects' %>
 <% provide :title, @project.title %>
 
 <div>
@@ -15,7 +16,7 @@
       <% if current_user.following?(@project) %>
         <li><%= custom_css_btn 'leave project', 'fa fa-star', unfollow_project_path(@project) %></li>
         <li class="btn-hoa">
-          <div id="HOA-placeholder" data-hoa-title="<%= @project.title %> Pairing: "></div>
+          <div id="liveHOA-placeholder" data-topic="<%= @project.title %> Pairing: "></div>
         </li>
       <% else %>
         <li><%= custom_css_btn 'join project', 'fa fa-star-o', follow_project_path(@project) %></li>
