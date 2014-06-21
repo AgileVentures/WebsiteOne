@@ -11,22 +11,9 @@ WebsiteOne.define('Projects', function() {
         $('html,body').scrollTop($('body').scrollTop());
       });
 
-      var button = $('#HOA-placeholder');
-      if (button.length > 0) {
-        WebsiteOne.loadHangouts(function() {
-          var button = $('#HOA-placeholder');
-          if (button.length > 0 && typeof gapi !== "undefined") {
-            gapi.hangout.render('HOA-placeholder', {
-              'topic': button.data('hoa-title'),
-              'render': 'createhangout',
-              'hangout_type': 'onair',
-              'initial_apps': [
-                { 'app_type': 'ROOM_APP' }
-              ]
-            });
-          }
-        });
-      }
+      WebsiteOne.renderHangoutButton();
     }
   }
 });
+
+WebsiteOne.loadHangoutsApi();

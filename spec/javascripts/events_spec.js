@@ -1,7 +1,7 @@
 describe('events', function() {
 
-  it('loads api library for hangouts', function() {
-    expect(window.WebsiteOne.renderHangoutButton).toBeDefined();
+  it('defines Events module for WebsiteOne', function() {
+    expect(window.WebsiteOne.Events).toBeDefined();
   });
 
   it('calls #renderHangoutButton', function() {
