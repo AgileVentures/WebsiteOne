@@ -6,6 +6,7 @@ class HangoutsController < ApplicationController
     hangout = Hangout.find_or_create_by(event_id: params[:id])
 
     if hangout.try!(:update_hangout_data, params)
+      SlackService.post_hangout_notification(hangout)
       render text: 'Success'
     else
       render text: 'Failure'

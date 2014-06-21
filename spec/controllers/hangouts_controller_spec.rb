@@ -5,6 +5,7 @@ describe HangoutsController do
   before :each do
     controller.stub(allowed?: true)
     request.env['HTTP_ORIGIN'] = 'http://test.com'
+    SlackService.stub(:post_hangout_notification)
   end
 
   describe '#update' do
@@ -27,6 +28,13 @@ describe HangoutsController do
 
       get :update, {id: '333'}
       expect(response.body).to have_text('Success')
+    end
+
+    it 'calls the SlackService to post hangout notification on successful update' do
+      Hangout.any_instance.stub(update_hangout_data: true)
+      expect(SlackService).to receive(:post_hangout_notification).with(an_instance_of(Hangout))
+
+      get :update, {id: '333'}
     end
 
     it 'returns a failure response if update is unsuccessful' do
