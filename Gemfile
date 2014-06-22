@@ -47,6 +47,8 @@ gem 'compass-rails'
 gem 'rack-cache'
 gem 'sprockets-image_compressor'
 
+gem 'rails_config' # a gem to manage configuration files
+
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
@@ -56,19 +58,26 @@ group :test do
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs
-  gem 'zeus', '0.13.4.pre2' # rails preloading environment (the only ver that works with RubyMine)
+  gem 'zeus' # rails preloading environment
   gem 'webmock' # mocking external net connections
-  gem 'delorean'
+  gem 'delorean' # mocking Time in tests, aka time travelling
 end
 
 group :development, :test do
+  gem 'rspec', '<3.0' #locking down below ver 3.0.
   gem 'rspec-rails' #unit testing
-#TODO YA do we need it? It breaks Rubymine's debugging
-  gem 'debugger'  # Use debugger
+  gem 'awesome_print' # plays well with pry
+  gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
+  gem 'hirb' # formats ActiveRecord objects into table format in the console
+  gem 'pry-rails' # integrate pry with rails console
   gem 'jasmine' # framework for testing javascript
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser
   gem 'binding_of_caller'  #online console and debugging in browser
+  gem 'guard' # autoruns rspec/cucumber/livereload/notify..on file change
+  gem 'guard-rspec' #plugins for Guard
+  gem 'guard-cucumber' #plugins for Guard
+  gem 'guard-livereload' #plugins for Guard
 end
 
 group :production do

@@ -55,3 +55,15 @@ public/assets/**
 # Plugin files
 .floo
 .flooignore
+
+# Zeus config
+zeus.json
+
+.pryrc
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
+#
+# Guard config
+Guardfile

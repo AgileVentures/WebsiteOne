@@ -4,7 +4,7 @@ Coveralls.wear!('rails')
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
+# require 'rspec/autorun'
 require 'capybara/rspec'
 require 'webmock/rspec'
 
@@ -43,6 +43,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+    Settings.reload!
   end
 
   config.after(:each) do

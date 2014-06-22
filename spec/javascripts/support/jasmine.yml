@@ -10,11 +10,10 @@
 #   - lib/source2.js
 #   - dist/**/*.js
 #
-# I don't know how assets/ magically has access to the jasmine_jquery
-# file from the gem, something to do with the asset pipeline?
 src_files:
   - assets/application.js
   - assets/projects.js
+  - assets/events.js
   - assets/jasmine-jquery.js
 
 
@@ -30,7 +29,7 @@ src_files:
 #   - stylesheets/*.css
 #
 stylesheets:
-  - stylesheets/**/*.css
+  - assets/stylesheets/**/*.css
 
 # helpers
 #
@@ -114,4 +113,16 @@ boot_dir:
 #   - '**/*.js'
 #
 boot_files:
+
+# rack_options
+#
+# Extra options to be passed to the rack server
+# by default, Port and AccessLog are passed.
+#
+# This is an advanced options, and left empty by default
+#
+# EXAMPLE
+#
+# rack_options:
+#   server: 'thin'
 

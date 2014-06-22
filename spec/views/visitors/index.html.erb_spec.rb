@@ -25,6 +25,7 @@ describe 'visitors/index.html.erb' do
 
     it 'should display countdown' do
       render
+      p rendered.match(/in.*hour.*minute.*/)
       expect(rendered).to have_link @event.name, event_path(@event)
       expect(rendered).to have_text [@event.name, 'in'].join(' ')
       expect(rendered).to have_text '2 days'

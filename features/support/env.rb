@@ -21,7 +21,12 @@ WebMock.disable_net_connect!(:allow_localhost => true)
 
 Capybara.javascript_driver = :poltergeist
 
+Capybara.register_driver :poltergeist_debug do |app|
+  Capybara::Poltergeist::Driver.new(app, :inspector => true, :port => 3010)
+end
+
 # By default, any exception happening in your Rails application will bubble up
+#
 # to Cucumber so that your scenario will fail. This is a different from how 
 # your application behaves in the production environment, where an error page will 
 # be rendered instead.
@@ -86,3 +91,7 @@ Geocoder::Lookup::Test.add_stub(
     }.as_json
 ]
 )
+
+Before do
+  Settings.reload!
+end

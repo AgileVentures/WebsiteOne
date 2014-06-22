@@ -58,13 +58,8 @@ WebsiteOne::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Precompile additional assets.
-  # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( mercury_init.js 404.js )
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
@@ -79,14 +74,6 @@ WebsiteOne::Application.configure do
 
   #config.action_mailer.raise_delivery_errors = true
   #config.action_mailer.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-      :address        => 'smtp.sendgrid.net',
-      :port           => '587',
-      :authentication => :plain,
-      :user_name      => ENV['SENDGRID_USERNAME'],
-      :password       => ENV['SENDGRID_PASSWORD'],
-      :domain         => 'heroku.com'
-  }
   config.action_mailer.default_url_options = { :host => 'agileventures.org' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
@@ -105,6 +92,6 @@ WebsiteOne::Application.configure do
   # may be needed for integrating bootstrap with Heroku deployment
   #config.cache_classes = true
   #config.serve_static_assets = true
-  #config.assets.compile = true
+  config.assets.compile = false
   #config.assets.digest = true
 end
