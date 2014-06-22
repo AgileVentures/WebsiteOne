@@ -60,7 +60,7 @@ WebsiteOne::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-  config.assets.precompile += %w( mercury_init.js 404.js )
+  config.assets.precompile += %w( mercury_init.js 404.js projects.js events.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
