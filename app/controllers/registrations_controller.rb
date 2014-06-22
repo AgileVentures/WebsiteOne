@@ -25,8 +25,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def build_resource(*args)
-    super
+  def build_resource(hash=nil)
+    self.resource = User.new_with_session(hash || {}, session)
     if session[:omniauth]
       @user.apply_omniauth(session[:omniauth])
       @user.valid?

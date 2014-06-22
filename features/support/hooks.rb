@@ -1,3 +1,7 @@
+Before('@enable-custom-errors') do
+  Features.enable(:custom_errors)
+end
+
 Before('@time-travel') do
   @default_tz = ENV['TZ']
   ENV['TZ'] = 'UTC'

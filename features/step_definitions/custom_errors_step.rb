@@ -1,7 +1,3 @@
-Given(/^App is in production$/) do
-  Rails.env.stub(production?: true)
-end
-
 Then(/^the page should be titled "(.*?)"$/) do |title|
   page.source.should have_css("title", :text => title, :visible => false)
 end

@@ -1,4 +1,4 @@
-@allow-rescue
+@enable-custom-errors
 Feature:
   As a visitor
   In order to understand what happened when something goes wrong
