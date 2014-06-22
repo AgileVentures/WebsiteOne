@@ -102,4 +102,23 @@ describe('hangouts', function(){
       });
     });
   });
+
+  describe('Hangouts module for WebsiteOne', function() {
+
+    beforeEach(function() {
+      reloadScript('hangouts.js');
+    });
+
+    it('defines Hangouts module for WebsiteOne', function() {
+      expect(window.WebsiteOne.Hangouts).toBeDefined();
+    });
+
+    it('calls #renderHangoutButton', function() {
+      spyOn(WebsiteOne, 'renderHangoutButton');
+
+      WebsiteOne.Hangouts.init();
+      expect(WebsiteOne.renderHangoutButton).toHaveBeenCalled();
+    });
+
+  });
 });
