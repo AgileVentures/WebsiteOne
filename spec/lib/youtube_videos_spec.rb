@@ -16,7 +16,6 @@ describe YoutubeVideos do
   end
 
   # PRIVATE METHODS
-  # Integration Tests Start
   describe "project_videos(object)" do
     it 'returns videos for project by project tags and following members who have youtube connected' do
       users = [
@@ -58,7 +57,6 @@ describe YoutubeVideos do
       expect(videos_dates).to eq videos_dates.sort.reverse
     end
   end
-  # Integration Tests End
   
   describe "parse_response(json)" do
     it 'parses youtube response into an array of hashes' do
