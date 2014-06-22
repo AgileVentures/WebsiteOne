@@ -96,6 +96,6 @@ WebsiteOne::Application.configure do
   # may be needed for integrating bootstrap with Heroku deployment
   #config.cache_classes = true
   #config.serve_static_assets = true
-  #config.assets.compile = true
+  config.assets.compile = false
   #config.assets.digest = true
 end
