@@ -76,7 +76,7 @@ describe UsersController do
 
     context 'with a private profile' do
       before do
-        @user.stub(display_profile: false)
+        allow(@user).to receive(:display_profile).and_return(false)
       end
 
       it 'it renders an error message when accessing a private profile' do
