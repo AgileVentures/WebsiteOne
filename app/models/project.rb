@@ -24,10 +24,10 @@ class Project < ActiveRecord::Base
   end
 
   def youtube_tags
-    tag_list.
-      push(title).
-      map(&:downcase).
-      uniq
+    tag_list
+      .push(title)
+      .map(&:downcase)
+      .uniq
   end
 
   def members
@@ -35,10 +35,10 @@ class Project < ActiveRecord::Base
   end
 
   def members_tags
-    members.map(&:youtube_user_name).
-      compact.
-      map(&:downcase).
-      uniq
+    members.map(&:youtube_user_name)
+      .compact
+      .map(&:downcase)
+      .uniq
   end
 
   # Bryan: Used to generate paths, used only in testing.

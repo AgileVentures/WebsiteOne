@@ -53,9 +53,9 @@ class User < ActiveRecord::Base
   end
 
   def followed_project_tags
-    projects_joined.
-      flat_map(&:youtube_tags).
-      push('scrum')
+    projects_joined
+      .flat_map(&:youtube_tags)
+      .push('scrum')
   end
 
 
