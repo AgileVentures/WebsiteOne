@@ -58,3 +58,4 @@
     </ul>
   <% end %>
 </div>
+<%= render partial: 'disqus/disqus', locals: {entity: @document, project: @project} unless inside_mercury? %>

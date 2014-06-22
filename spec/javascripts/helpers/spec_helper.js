@@ -1,4 +1,3 @@
-
 beforeEach(function() {
   // clears the WSO module's state
   WebsiteOne._clear();
@@ -7,8 +6,10 @@ beforeEach(function() {
 
 function reloadScript(name) {
   jQuery.ajax({
+    async: false,
+    dataType: 'script',
+    type: 'GET',
     url: $('script[src*="/' + name + '"]').attr('src'),
-    success: function(src) { eval(src); },
-    async: false
+    success: function(src) { eval(src); }
   });
 }

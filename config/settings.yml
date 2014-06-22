@@ -1,0 +1,17 @@
+features:
+  custom_errors:
+    enabled: false
+    email_notifier:
+      email_prefix: '[ERROR] '
+      sender: '"Error Police" <error-police@agileventures.org>'
+      exception_recipients: ['info@agileventures.org']
+
+mailer:
+  delivery_method: 'test'
+  smtp_settings:
+    port: 587
+    user_name: 'user'
+    password: 'password'
+    address: 'address'
+    domain: 'domain'
+    authentication: 'auth'

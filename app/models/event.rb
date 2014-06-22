@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  has_one :hangout
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 

@@ -5,6 +5,8 @@ describe 'articles/show' do
     @user = stub_model(User, display_name: 'Thomas')
     @author = @user
     @article =  stub_model(Article,
+                           :id => 555,
+                           :friendly_id => 'friendly_id',
                            :title => "Ruby article",
                            :content => "My Ruby content",
                            :tag_list => ["Ruby", "Rails"],
@@ -41,4 +43,9 @@ describe 'articles/show' do
     end
   end
 
+  describe 'renders Disqus section' do
+    it_behaves_like 'commentable with Disqus' do
+      let(:entity) { @article }
+    end
+  end
 end

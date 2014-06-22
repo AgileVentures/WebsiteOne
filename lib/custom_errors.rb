@@ -12,9 +12,8 @@ module CustomErrors
 
   private
 
-  # PRIVATE
   def render_error(status, error)
-    raise error unless Rails.env.production?
+    raise error unless Features.enabled?(:custom_errors)
 
     Rails.logger.error error.message
     error.backtrace.each_with_index { |line, index| Rails.logger.error line; break if index >= 5 }

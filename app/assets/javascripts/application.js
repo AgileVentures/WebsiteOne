@@ -27,6 +27,9 @@
 //= require_tree .
 //= stub mercury_init
 //= stub google-analytics
+//= stub projects
+//= stub events
+//= stub disqus
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code

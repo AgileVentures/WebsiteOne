@@ -11,7 +11,7 @@ describe "documents/show" do
                           whodunnit: @user.id,
                           object: nil,
                           created_at: "2014-02-25 11:50:56"
-    )
+                         )
     @document = stub_model(Document,
                            :user => @user,
                            :id => 1,
@@ -19,8 +19,9 @@ describe "documents/show" do
                            :body => "Content",
                            :project_id => 1 ,
                            :created_at => Time.now,
-                           :versions => [@version]
-    )
+                           :versions => [@version],
+                           :friendly_id => 'friendly_id'
+                          )
 
     @document_child = stub_model(Document,
                                  :user => @user,
@@ -30,15 +31,15 @@ describe "documents/show" do
                                  :parent_id => 1,
                                  :created_at => Time.now,
                                  :versions => [@version]
-    )
+                                )
 
     view.stub(:created_by).and_return(@created_by)
+      assign :document, @document
+      assign :children, [ @document_child ]
   end
 
   context 'document is root' do
     before do
-      assign :document, @document
-      assign :children, [ @document_child ]
       @document_child.should_receive(:user).and_return(@user)
     end
 
@@ -87,6 +88,19 @@ describe "documents/show" do
       render
       rendered.should have_content @document_child.title
       rendered.should have_content @document_child.body
+    end
+  end
+
+  describe 'renders Disqus section' do
+
+    it_behaves_like 'commentable with Disqus' do
+      let(:entity) { @document }
+    end
+
+    it 'does not render Disqus when inside Mercury editor ' do
+      controller.request.stub(original_url: 'mercury_frame=true')
+      render
+      expect(rendered).not_to have_css("#disqus_thread")
     end
   end
 end
