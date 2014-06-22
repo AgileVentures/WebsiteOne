@@ -39,7 +39,7 @@ describe('hangouts', function(){
             initial_apps: [{
               app_id : 'id_1234',
               start_data :'http://test.com',
-              app_type : 'ROOM_APP'
+              app_type : 'LOCAL_APP'
             }],
             widget_size: 200
           });
