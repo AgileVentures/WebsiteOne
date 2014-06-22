@@ -33,3 +33,13 @@ WebsiteOne.loadHangoutsApi = function() {
     }).done(WebsiteOne.renderHangoutButton);
   }
 };
+
+WebsiteOne.define('Hangouts', function() {
+  return {
+    init: function() {
+      WebsiteOne.renderHangoutButton();
+    }
+  }
+});
+
+WebsiteOne.loadHangoutsApi();
