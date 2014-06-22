@@ -48,9 +48,9 @@ describe ProjectsController do
       @project.stub(:tag_list).and_return [ 'WTF' ]
       Project.stub_chain(:friendly, :find).and_return @project
       @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
-      @project.should_receive(:members).and_return @users
+      expect(@project).to receive(:members).and_return @users
       expect(YoutubeVideos).to receive(:for).with(@project).and_return('videos')
-      PivotalService.stub(one_project: '')
+      allow(PivotalService).to_receive(:one_project).and_return('')
       dummy = Object.new
       dummy.stub(stories: "stories")
       PivotalService.stub(iterations: dummy)

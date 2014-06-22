@@ -23,7 +23,7 @@ describe YoutubeVideos do
         FactoryGirl.create(:user, youtube_id: 'test_id_2', youtube_user_name: 'Sampriti Panda'),
       ]
       project = FactoryGirl.create(:project, title: "WebsiteOne", tag_list: ["WSO"])
-      project.stub(members: [users[0]])
+      allow(project).to_receive(:members).and_return([users[0]])
 
       response = File.read('spec/fixtures/youtube_user_filtered_response.json')
       request_string = 'http://gdata.youtube.com/feeds/api/videos?alt=json&fields=entry(author(name),id,published,title,content,link)&max-results=50&orderby=published&q=(wso|websiteone)/("john doe")'
@@ -43,7 +43,7 @@ describe YoutubeVideos do
       project = FactoryGirl.create(:project, title: "WebsiteOne", tag_list: ["WSO"])
       project_2 = FactoryGirl.create(:project, title: "AutoGraders", tag_list: ["AutoGrader"])
       user = FactoryGirl.create(:user, youtube_id: 'test_id', youtube_user_name: 'John Doe')
-      user.stub(following_by_type: [project])
+      allow(user).to receive(:following_by_type).and_return([project])
       response = File.read('spec/fixtures/youtube_user_response.json')
       request_string = "http://gdata.youtube.com/feeds/api/users/#{user.youtube_id}/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)"
       stub_request(:get, request_string).to_return(status: 200, body: response, headers: {})
@@ -71,7 +71,7 @@ describe YoutubeVideos do
     end
 
     it 'logs json error and returns nil on parsing invalid json' do
-      JSON.stub(:parse).and_raise(JSON::JSONError)
+      allow(JSON).to receive(:parse).and_raise(JSON::JSONError)
       Rails.logger.should_receive(:warn).with('Attempted to decode invalid JSON')
       subject.send(:parse_response, '').should be_nil
     end
