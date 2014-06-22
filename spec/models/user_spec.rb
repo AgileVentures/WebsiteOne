@@ -230,7 +230,7 @@ describe User do
       project_1 = FactoryGirl.build(:project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
       project_2 = FactoryGirl.build(:project, title: 'Black hole', tag_list: [])
       user = FactoryGirl.build(:user)
-      user.stub(projects_joined: [project_1, project_2])
+      allow(user).to receive(:projects_joined).and_return([project_1, project_2])
       expect(user.followed_project_tags).to eq ["big regret", "boom", "bang", "big boom", "black hole", "scrum"]
     end
   end

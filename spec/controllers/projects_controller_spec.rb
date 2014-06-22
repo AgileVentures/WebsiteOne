@@ -50,7 +50,7 @@ describe ProjectsController do
       @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
       expect(@project).to receive(:members).and_return @users
       expect(YoutubeVideos).to receive(:for).with(@project).and_return('videos')
-      allow(PivotalService).to_receive(:one_project).and_return('')
+      allow(PivotalService).to receive(:one_project).and_return('')
       dummy = Object.new
       dummy.stub(stories: "stories")
       PivotalService.stub(iterations: dummy)

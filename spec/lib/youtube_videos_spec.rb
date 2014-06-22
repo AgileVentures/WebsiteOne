@@ -23,7 +23,7 @@ describe YoutubeVideos do
         FactoryGirl.create(:user, youtube_id: 'test_id_2', youtube_user_name: 'Sampriti Panda'),
       ]
       project = FactoryGirl.create(:project, title: "WebsiteOne", tag_list: ["WSO"])
-      allow(project).to_receive(:members).and_return([users[0]])
+      allow(project).to receive(:members).and_return([users[0]])
 
       response = File.read('spec/fixtures/youtube_user_filtered_response.json')
       request_string = 'http://gdata.youtube.com/feeds/api/videos?alt=json&fields=entry(author(name),id,published,title,content,link)&max-results=50&orderby=published&q=(wso|websiteone)/("john doe")'
