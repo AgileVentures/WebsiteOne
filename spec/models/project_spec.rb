@@ -92,8 +92,8 @@ describe Project do
 
   describe "#members_tags" do
     it 'returns the tags for project members with thier youtube user names' do
-      users = [double(User, youtube_user_name: 'test_id'), double(User, youtube_user_name: 'test_id_2')]
-      project = FactoryGirl.build(:project)
+      users = [User.new(youtube_user_name: 'test_id'), User.new(youtube_user_name: 'test_id_2')]
+      project = Project.new
       allow(project).to receive(:members).and_return(users)
       expect(project.members_tags).to eq ["test_id", "test_id_2"]
     end
@@ -102,9 +102,9 @@ describe Project do
   describe "#members" do
     it 'returns followers of the project who have a public profile' do
       project = FactoryGirl.build(:project)
-      @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
-      @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
-      project.stub(followers: @more_users)
+      @users = [ User.new(slug: 'my-friendly-id', display_profile: true) ]
+      @more_users = @users + [ User.new(slug: 'another-friendly-id', display_profile: false)]
+      allow(project).to receive(:followers).and_return(@more_users)
 
       expect(project.members).to eq @users
     end
