@@ -2,7 +2,6 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     session[:omniauth] = nil unless @user.new_record?
-    Mailer.send_welcome_message(@user).deliver unless @user.new_record?
   end
 
   def update
@@ -24,14 +23,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   private
-
-  def build_resource(*args)
-    super
-    if session[:omniauth]
-      @user.apply_omniauth(session[:omniauth])
-      @user.valid?
-    end
-  end
 
   def after_update_path_for(resource)
     user_path(resource)

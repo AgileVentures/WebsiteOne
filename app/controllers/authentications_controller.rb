@@ -1,35 +1,47 @@
+require_relative '../services/create_authentication_service.rb'
+
 class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
+  before_action :prevent_oauth_forgery, only: [:create], if: :forged_request?
 
   def create
-    if request.env['omniauth.params']['youtube']
-      link_to_youtube and return
-    end
+    show and return if authentication.present?
 
-    omniauth = request.env['omniauth.auth']
-    authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-
-    @path = request.env['omniauth.origin'] || root_path
-
-    if authentication.present?
-      attempt_login_with_auth(authentication, @path)
-
-    elsif current_user
-      create_new_authentication_for_current_user(omniauth, @path)
-
+    user = current_user || User.new
+    if provider_is_youtube?
+      GplusPolicy.create(omniauth, user)
+      redirect_to oauth_path and return
     else
-      create_new_user_with_authentication(omniauth)
+      GithubPolicy.create(omniauth, user)
     end
 
-    if current_user && omniauth['provider']=='github' && current_user.github_profile_url.blank?
-      link_github_profile
+    if current_user.present?
+      CreateAuthentication.for(user, omniauth, provider_is_youtube?,
+                               success: ->{
+        flash[:notice] = 'Authentication successful.'
+        redirect_to oauth_path
+      },
+                               failure: ->{
+        flash[:alert] = 'Unable to create additional profiles.'
+        redirect_to oauth_path
+      })
+    else
+      CreateAuthentication.for(user, omniauth, provider_is_youtube?,
+                               success: ->{
+        flash[:notice] = 'Signed in successfully.'
+        sign_in_and_redirect(:user, user)
+      },
+                               failure: ->{
+        session[:omniauth] = omniauth.except('extra')
+        flash[:alert] = user.errors.full_messages.first
+        redirect_to new_user_registration_url
+      })
     end
   end
 
-  def failure
-    # Bryan: TESTED
-    flash[:alert] = params[:message] || 'Authentication failed.'
-    redirect_to root_path
+  def show
+    flash[:notice] = 'Signed in successfully.'
+    sign_in_and_redirect(:user, authentication.user)
   end
 
   def destroy
@@ -56,16 +68,33 @@ class AuthenticationsController < ApplicationController
 
   private
 
+  def provider_is_youtube?
+    request.env['omniauth.params']['youtube'].present?
+  end
+
+  def prevent_oauth_forgery
+    flash[:alert] = 'Another account is already associated with these credentials!'
+    redirect_to path
+  end
+
+  def forged_request?
+    (authentication && current_user) && authentication.user != current_user
+  end
+
+  def oauth_path
+    request.env['omniauth.origin'] || root_path
+  end
+
+  def omniauth
+    @omniauth ||= request.env['omniauth.auth']
+  end
+
+  def authentication
+    @authentication ||= Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+  end
+
   def link_github_profile
-    omniauth = request.env['omniauth.auth']
-
-    url = ''
-    begin
-      url = omniauth['info']['urls']['GitHub']
-    rescue NoMethodError
-      return
-    end
-
+    url = "https://github.com/#{omniauth['info']['nickname']}"
     user = User.find(current_user.id)
     if user.update_attributes(github_profile_url: url)
       # success
@@ -77,14 +106,9 @@ class AuthenticationsController < ApplicationController
   end
 
   def link_to_youtube
-    user = current_user
-    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
-      user.youtube_id = Youtube.channel_id(token)
-      user.save
-    end
-
-    redirect_to(request.env['omniauth.origin'] || root_path)
+    current_user.update_youtube_id_if(request.env['omniauth.auth']['credentials']['token'])
   end
+
 
   def unlink_from_youtube
     current_user.youtube_id = nil
@@ -92,55 +116,4 @@ class AuthenticationsController < ApplicationController
 
     redirect_to(params[:origin] || root_path)
   end
-
-  def attempt_login_with_auth(authentication, path)
-    if current_user.present? and authentication.user != current_user
-      flash[:alert] = 'Another account is already associated with these credentials!'
-      redirect_to path
-    else
-      flash[:notice] = 'Signed in successfully.'
-      sign_in_and_redirect(:user, authentication.user)
-    end
-  end
-
-  def create_new_authentication_for_current_user(omniauth, path)
-    if auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
-      if auth.save
-        # Bryan: TESTED
-        flash[:notice] = 'Authentication successful.'
-        redirect_to path
-      else
-        # Bryan: TESTED
-        flash[:alert] = 'Unable to create additional profiles.'
-        redirect_to @path
-      end
-    end
-  end
-
-  def create_new_user_with_authentication(omniauth)
-    user = User.new
-    user.apply_omniauth(omniauth)
-
-    if user.save
-      # Bryan: TESTED
-      Mailer.send_welcome_message(user).deliver
-      flash[:notice] = 'Signed in successfully.'
-      sign_in_and_redirect(:user, user)
-    else
-      # Bryan: TESTED
-      session[:omniauth] = omniauth.except('extra')
-      redirect_to new_user_registration_url
-    end
-  end
 end
-
-
-
-
-
-
-
-
-
-
-
