@@ -10,10 +10,6 @@ WebsiteOne.define('Projects', function() {
         window.location.hash = this.hash.replace("s_list", "");
         $('html,body').scrollTop($('body').scrollTop());
       });
-
-      WebsiteOne.renderHangoutButton();
     }
   }
 });
-
-WebsiteOne.loadHangoutsApi();
