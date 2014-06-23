@@ -14,6 +14,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Create a hangout for a scrum event
     Given I am on the show page for event "Scrum"
     Then I should see hangout button
+    And I should see button "Edit link"
 
 #  Scenario: Start the hangout
 #    Given I am on the show page for event "Scrum"
@@ -26,7 +27,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     When I am on the show page for event "Scrum"
     Then I should see Hangouts_Details_Section
     And I should see link "Click to join the hangout" with "http://hangout.test"
-    And I should see button "Edit link"
     And I should see "Title"
     And I should see "Type"
     And I should see "Daily scrum meeting"
