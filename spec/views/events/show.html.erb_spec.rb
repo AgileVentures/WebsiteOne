@@ -17,7 +17,7 @@ describe 'events/show' do
                         repeat_ends_on: 'Mon, 17 Jun 2014',
                         time_zone: 'Eastern Time (US & Canada)')
     @event_schedule = @event.next_occurrences
-    render
+    # render
   end
 
   after (:each) do
@@ -25,19 +25,23 @@ describe 'events/show' do
   end
 
   it 'should display event information' do
+    render
     rendered.should have_text 'EuroAsia Scrum'
     rendered.should have_text 'EuroAsia Scrum and Pair hookup'
   end
 
   it 'should render the event name' do
+    render
     rendered.should have_text @event.name
   end
 
   it 'should render the event description' do
+    render
     rendered.should have_text @event.description
   end
 
   it 'should render dates and time for 5 upcoming events' do
+    render
     rendered.should have_text 'Upcoming schedule'
     @event_schedule.first(5).each do |e|
       rendered.should have_content nested_hash_value(e, :time).strftime('%F at %I:%M%p')
@@ -64,6 +68,7 @@ describe 'events/show' do
       @hangout = stub_model(Hangout, event_id: 375,
                             hangout_url: 'http://hangout.test',
                             started?: true)
+      @event.url = @hangout.hangout_url
       assign :hangout, @hangout
     end
 
@@ -78,10 +83,10 @@ describe 'events/show' do
         let(:id){@event.id}
       end
 
-      it 'renders Edit link' do
+      it 'renders Edit event' do
         view.stub(:user_signed_in?).and_return(true)
         render
-        rendered.should have_link 'Edit link'
+        expect(rendered).to have_link 'Edit'
       end
 
       it 'renders add/edit url form' do
@@ -109,11 +114,44 @@ describe 'events/show' do
     end
 
   end
-  describe 'New_Hangouts' do
+  describe 'New_Hangouts with user signed in and hangout started' do
+    before(:each) do
+      @hangout = stub_model(Hangout, event_id: 375,
+                            hangout_url: 'http://google.com',
+                            started?: true)
+      assign :hangout, @hangout
+      @event.url = @hangout.hangout_url
+      view.stub(user_signed_in?: true)
+      view.stub(topic: 'Topic')
+    end
     it 'renders Hangout details section' do
       render
       expect(rendered).to have_css("#hangout_details")
     end
-
+    it 'renders Title' do
+      render
+      expect(rendered).to have_text 'Title'
+    end
+    it 'renders Type' do
+      render
+      expect(rendered).to have_text 'Type'
+    end
+    it 'renders Edit Link button' do
+      #@event.url.should_receive(present?).and_return(true)
+      render
+      expect(rendered).to have_button("Edit link")
+    end
+    it 'renders Restart HOA button' do
+      #@event.url.should_receive(present?).and_return(true)
+      render
+      expect(rendered).to have_button("Click to restart the hangout")
+    end
+    it 'does not show Hangout button if the hangout has started' do
+      view.stub(:user_signed_in?).and_return(true)
+      render
+      expect(rendered).to have_selector('#liveHOA-placeholder')
+      placeholder = page.find('#liveHOA-placeholder')
+      expect(placeholder['display']).to eq('none')
+    end
   end
 end
