@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe YoutubeHelper do
+describe YoutubeHelper, :type => :helper do
   it 'retrieves channel ID for logged in user' do
     request_string = "https://www.googleapis.com/youtube/v3/channels?part=id&mine=true"
     WebMock.stub_request(:get, request_string).to_return(body: 'response')
     json = { 'items' => [{ 'id' => 'id' }] }
 
-    expect(JSON).to receive(:load).with('response').and_return(json)
+    expect(JSON).to receive(:load).with('response') { json }
     expect(helper.channel_id('token')).to eq('id')
   end
 
@@ -16,7 +16,7 @@ describe YoutubeHelper do
     WebMock.stub_request(:get, request_string).to_return(body: 'response')
     json = { 'entry' => { 'title' => { '$t' => 'Ivan Petrov' } } }
 
-    expect(JSON).to receive(:load).with('response').and_return(json)
+    expect(JSON).to receive(:load).with('response') { json }
     expect(helper.youtube_user_name(user)).to eq('Ivan Petrov')
   end
 end
