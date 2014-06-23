@@ -29,6 +29,7 @@
     <%= render partial: 'hangouts/hangout_status', 
       locals: {hangout: @hangout} if @hangout && @hangout.started? %>
   </div>
+  <div id="hangout_details"></div>
   <div class="col-lg-12">
     <p><br/>
       <strong>Note</strong>: In case the above link does not work, please update the link manually.
@@ -43,7 +44,7 @@
   <% end %>
     <% if user_signed_in? %>
       <% if @event.url.present? %>
-      <button id="toggle-edit" class="btn btn-sm btn-default">Edit</button>
+      <button id="toggle-edit" class="btn btn-sm btn-default">Edit link</button>
   <% else %>
       <button id="toggle-add" class="btn btn-sm btn-default">Add url</button>
   <% end %>

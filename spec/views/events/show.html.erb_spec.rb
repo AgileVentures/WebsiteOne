@@ -81,7 +81,7 @@ describe 'events/show' do
       it 'renders Edit link' do
         view.stub(:user_signed_in?).and_return(true)
         render
-        rendered.should have_link 'Edit'
+        rendered.should have_link 'Edit link'
       end
 
       it 'renders add/edit url form' do
@@ -106,6 +106,13 @@ describe 'events/show' do
       @hangout.stub(started?: false)
       render
       expect(rendered).not_to have_css("#hangout_status")
+    end
+
+  end
+  describe 'New_Hangouts' do
+    it 'renders Hangout details section' do
+      render
+      expect(rendered).to have_css("#hangout_details")
     end
 
   end
