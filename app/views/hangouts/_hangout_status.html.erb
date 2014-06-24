@@ -1,3 +1,13 @@
-<div id="hangout_status">
+<div id="hangout_details">
+    <table>
+      <tr>
+        <td style="padding: 5px;">Title</td>
+        <td><%= @event.name %></td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">Category</td>
+      <td><%= @event.category %></td>
+  </tr>
+  </table>
   <%= link_to 'Click to join the hangout', @hangout.hangout_url %>
 </div>
