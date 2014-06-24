@@ -88,12 +88,18 @@ describe 'events/show' do
       context 'hangout has started' do
         it 'hides the Hangout button' do
           render
-          expect(rendered).not_to have_css('#hangout_button', :visible =>  true)
+          expect(rendered).not_to have_css('#hangout_button', visible: true)
         end
 
         it 'renders Restart HOA button' do
           render
           expect(rendered).to have_button("Click to restart the hangout")
+        end
+
+        it 'renders a warning message when restarting the hangout' do
+          render
+          expect(rendered).not_to have_css('#restart-warning', visible: true)
+          expect(rendered).to have_content("Restarting Hangout would update the details of the hangout currently associated with this event.")
         end
       end
     end
@@ -106,6 +112,7 @@ describe 'events/show' do
         before :each do
           @hangout.stub(started?: true)
         end
+
         it 'renders Hangout details section' do
           render
           expect(rendered).to have_selector("#hangout_details")
@@ -122,6 +129,7 @@ describe 'events/show' do
         before :each do
           @hangout.stub(started?: false)
         end
+
         it 'does not render Hangout details section' do
           render
           expect(rendered).not_to have_selector("#hangout_details")

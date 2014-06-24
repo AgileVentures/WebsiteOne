@@ -1,13 +1,13 @@
-<div id="hangout_details">
-    <table>
-      <tr>
-        <td style="padding: 5px;">Title</td>
-        <td><%= @event.name %></td>
-    </tr>
-    <tr>
-        <td style="padding: 5px;">Category</td>
-      <td><%= @event.category %></td>
+<table>
+  <tr>
+    <td style="padding: 5px;">Title</td>
+    <td><%= @event.name %></td>
   </tr>
-  </table>
-  <%= link_to 'Click to join the hangout', @hangout.hangout_url %>
-</div>
+  <tr>
+    <td style="padding: 5px;">Category</td>
+    <td><%= @event.category %></td>
+  </tr>
+</table>
+<p><%= link_to 'Click to join the hangout', @hangout.hangout_url %>
+Updated: <%= @hangout.try!(:updated_at) %></p>
+<p>Updated: <%= time_ago_in_words @hangout.updated_at if @hangout%> ago</p>

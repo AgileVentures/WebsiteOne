@@ -25,27 +25,23 @@
       <% end  %>
         <%= render partial: 'hangouts/hangout_button',
           locals: { id: @event.id, topic: topic(@event, @event_schedule) } %>
+      </div>
       <% end %>
-        </div>
         <button id="edit-link" class="btn btn-sm btn-default">Edit link</button>
-        <p>Updated: <%= @hangout.try!(:updated_at) %></p>
-        <p>Updated: <%= time_ago_in_words @hangout.updated_at if @hangout%> ago</p>
+        <button id="restart-hoa" class="btn btn-sm btn-default">Click to restart the hangout</button>
+        <div id="restart-warning" style="display:none;">Restarting Hangout would update the details of the hangout currently associated with this event.</div>
       </div>
     <% end %>
       <div class="col-lg-12" style="padding-left: inherit">
         <% if @hangout.try!(:started?)  %>
           <div id="hangout_details">
-          <%= render partial: 'hangouts/hangout_status', locals: {hangout: @hangout} %>
+          <%= render partial: 'hangouts/hangout_status', locals: {event: @event, hangout: @hangout} %>
         </div>
       <% end %>
       </div>
       <div class="col-lg-12">
         <% if user_signed_in? %>
-          <% if @event.url.present? %>
-          <button id="restart-hoa" class="btn btn-sm btn-default">Click to restart the hangout</button>
-      <% else %>
           <button id="toggle-add" class="btn btn-sm btn-default">Add url</button>
-      <% end %>
         <%= form_for @event, url: update_only_url_event_path(@event), html: {:class => 'form-vertical edit_url', :id => 'event-form'} do |f| %>
           <div class='form-group' style="margin-top: 10px">
           <%= f.label :url, :class => 'control-label' -%>
@@ -60,6 +56,17 @@
 
     </div>
 
+    <script>
+      $('#restart-hoa').click(function() {
+          $('#restart-hoa').text(function (i, text) {
+            return text === 'Cancel' ? 'Click to restart the hangout' : 'Cancel';
+            });
+          $('#restart-warning').toggle();
+          $('#hangout_button').toggle();
+          $('#hangout_details').toggle();
+          });
+
+    </script>
 
     <script>
       $('#toggle-edit, #toggle-add').click(function () {
