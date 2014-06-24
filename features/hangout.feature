@@ -16,6 +16,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Then I should see hangout button
     And I should see button "Edit link"
 
+  @ignore
   Scenario: Show hangout details
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
@@ -31,6 +32,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | 10:25:00            |
     And I should see link "Click to join the hangout" with "http://hangout.test"
 
+  @ignore
   Scenario: Show restart hangout
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
@@ -38,6 +40,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Then the hangout button should not be visible
     And I should see button "Click to restart the hangout"
 
+  @ignore
   @javascript
   Scenario: Restart hangout
     Given the Hangout for event "Scrum" has been started with details:
@@ -50,18 +53,18 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And the hangout button should be visible
     And I should not see Hangouts details section
     And I should not see "Click to restart the hangout"
-  #
-  #   When I click the "Cancel" button
-  #   Then I should see Hangouts details section
-  #   And I should see "Click to restart the hangout"
-  #
-  #  Scenario: Edit URL
-  #    Given the Hangout for event "Scrum" has been started with details:
-  #      | Hangout link | http://hangout.test |
-  #    And I am on the show page for event "Scrum"
-  #    When I click the "Edit link" button
-  #    Then I should see button "Cancel"
-  #
-  #    When I fill in "event_url" with "http://test.com"
-  #    And I click the "Save" button
-  #    Then I should see link "Click to join the Hangout" with "http://test.com"
+
+    When I click the "Cancel" button
+    Then I should see Hangouts details section
+    And I should see "Click to restart the hangout"
+    And the hangout button should not be visible
+
+  @javascript
+   Scenario: Edit URL
+     Given I am on the show page for event "Scrum"
+     When I click the "Edit hangout link manually" button
+     Then I should see button "Cancel"
+
+     When I fill in "hangout_url" with "http://test.com"
+     And I click the "Save" button
+     Then I should see link "Click to join the hangout" with "http://test.com"

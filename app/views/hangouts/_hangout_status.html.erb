@@ -1,13 +1,14 @@
 <table>
   <tr>
-    <td style="padding: 5px;">Title</td>
-    <td><%= @event.name %></td>
+    <td>Title</td>
+    <td><p>  </p></td>
+    <td style="padding-left: 10px;"><%= event.name %></td>
   </tr>
   <tr>
-    <td style="padding: 5px;">Category</td>
-    <td><%= @event.category %></td>
+    <td>Category</td>
+    <td><p>  </p></td>
+    <td style="padding-left: 10px;"><%= event.category %></td>
   </tr>
 </table>
-<p><%= link_to 'Click to join the hangout', @hangout.hangout_url %>
-Updated: <%= @hangout.try!(:updated_at) %></p>
-<p>Updated: <%= time_ago_in_words @hangout.updated_at if @hangout%> ago</p>
+<br>
+<p><%= link_to 'Click to join the hangout', hangout.hangout_url %>   Updated: <%= time_ago_in_words hangout.updated_at if hangout %> ago
