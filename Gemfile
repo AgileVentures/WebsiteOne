@@ -42,8 +42,6 @@ gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
 gem 'youtube_it' # ruby wrapper for youtube API
 gem 'utf8-cleaner'
-gem 'youtube_it'
-gem 'rake', '10.3.1'
 
 gem 'yui-compressor'
 gem 'compass-rails'
@@ -70,7 +68,6 @@ end
 group :development, :test do
   gem 'rspec', '<3.0' #locking down below ver 3.0.
   gem 'rspec-rails' #unit testing
-  gem 'rspec-core', '2.14.7' #lock version
   gem 'awesome_print' # plays well with pry
   gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
   gem 'hirb' # formats ActiveRecord objects into table format in the console
