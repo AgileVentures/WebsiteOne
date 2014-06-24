@@ -20,10 +20,12 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
   event = Event.find_by_name(event_name)
-  #event.hangout_url.should_receive(present?).and_return(TRUE)
-  ho = Hangout.create(event_id: event.id.to_s,
-               hangout_url: hangout['Hangout link'])
-  event.url = ho.hangout_url if ho.hangout_url.present?
+
+  Hangout.record_timestamps = false
+  Hangout.create(event_id: event.id.to_s,
+               hangout_url: hangout['Hangout link'],
+               updated_at: Time.parse(hangout['Started at']))
+  Hangout.record_timestamps = true
 end
 
 Then /^I should see restart button$/ do
@@ -32,7 +34,7 @@ Then /^I should see restart button$/ do
 end
 
 
-And(/^I should( not)? see Hangouts_Details_Section$/) do |negative|
+And(/^I should( not)? see Hangouts details section$/) do |negative|
   if negative
     expect(page).not_to have_css('#hangout_details')
   else
