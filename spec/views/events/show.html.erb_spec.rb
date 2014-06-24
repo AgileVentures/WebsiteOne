@@ -48,11 +48,11 @@ describe 'events/show' do
     end
   end
 
-    it 'renders Edit event for signed in user' do
-      view.stub(:user_signed_in?).and_return(true)
-      render
-      expect(rendered).to have_link 'Edit'
-    end
+  it 'renders Edit event for signed in user' do
+    view.stub(:user_signed_in?).and_return(true)
+    render
+    expect(rendered).to have_link 'Edit'
+  end
 
   describe 'Hangouts' do
     before(:each) do
@@ -76,10 +76,21 @@ describe 'events/show' do
       end
 
       it 'renders Edit link button' do
+        Time.stub(now: Time.parse('10:30:00'))
         render
-        expect(rendered).to have_button('Edit link')
+        expect(rendered).to have_button('Edit hangout link manually')
         expect(rendered).to have_content('Updated:')
-        expect(rendered).to have_content('10:25:00')
+        expect(rendered).to have_content('5 minutes')
+      end
+
+      it 'renders Edit link form' do
+        render
+        expect(rendered).not_to have_css('#form-edit-link', visible: true)
+
+        expect(rendered).to have_content("Enter the link for manually created hangout:")
+        expect(rendered).to have_field('hangout_url', visible: false)
+        expect(rendered).to have_button('Cancel', visible: false)
+        expect(rendered).to have_button('Save', visible: false)
       end
 
       context 'hangout has not started' do
