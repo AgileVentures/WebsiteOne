@@ -4,11 +4,10 @@ Then /^I should see hangout button$/ do
 end
 
 Then /^the hangout button should( not)? be visible$/ do |negative|
-  placeholder = page.find(:css,'#liveHOA-placeholder')
   if negative
-    expect(placeholder['display']).to eq('none')
+    expect(page).not_to have_css('#hangout_button', visible: true)
   else
-    expect(placeholder['display']).to eq('block')
+    expect(page).to have_css('#hangout_button')
   end
 end
 
@@ -24,13 +23,11 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   Hangout.record_timestamps = false
   Hangout.create(event_id: event.id.to_s,
                hangout_url: hangout['Hangout link'],
-               updated_at: Time.parse(hangout['Started at']))
+               updated_at: hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now)
   Hangout.record_timestamps = true
 end
 
 Then /^I should see restart button$/ do
-  src = page.find(:css,'#liveHOA-placeholder iframe')['src']
-  expect(src).to match /talkgadget.google.com/
 end
 
 

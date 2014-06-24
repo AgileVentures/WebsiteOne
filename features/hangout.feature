@@ -31,24 +31,25 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | 10:25:00            |
     And I should see link "Click to join the hangout" with "http://hangout.test"
 
-  # Scenario: Show restart hangout
-  #   Given the Hangout for event "Scrum" has been started with details:
-  #     | Hangout link | http://hangout.test |
-  #   When I am on the show page for event "Scrum"
-  #   Then the hangout button should not be visible
-  #   And I should see link "Click to restart the hangout"
-  #
-  # Scenario: Restart hangout
-  #   Given the Hangout for event "Scrum" has been started with details:
-  #     | Hangout link | http://hangout.test |
-  #   And I am on the show page for event "Scrum"
-  #   When I click "Click to restart the hangout"
-  #
-  #   Then I should see "Restarting Hangout would update the details of the hangout currently associated with this event."
-  #   And I should see button "Cancel"
-  #   And the hangout button should be visible
-  #   And I should not see Hangouts details section
-  #   And I should not see "Click to restart the hangout"
+  Scenario: Show restart hangout
+    Given the Hangout for event "Scrum" has been started with details:
+      | Hangout link | http://hangout.test |
+    When I am on the show page for event "Scrum"
+    Then the hangout button should not be visible
+    And I should see button "Click to restart the hangout"
+
+  @javascript
+  Scenario: Restart hangout
+    Given the Hangout for event "Scrum" has been started with details:
+      | Hangout link | http://hangout.test |
+    And I am on the show page for event "Scrum"
+    When I click "Click to restart the hangout"
+
+    Then I should see "Restarting Hangout would update the details of the hangout currently associated with this event."
+    And I should see button "Cancel"
+    And the hangout button should be visible
+    And I should not see Hangouts details section
+    And I should not see "Click to restart the hangout"
   #
   #   When I click the "Cancel" button
   #   Then I should see Hangouts details section
