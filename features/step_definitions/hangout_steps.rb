@@ -42,3 +42,8 @@ end
 Given /^the time now is "([^"]*)"$/ do |time|
   Time.stub(now: Time.parse(time))
 end
+
+
+Then /^I have Slack notifications enabled$/ do
+  stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify').to_return(status: 200)
+end

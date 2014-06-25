@@ -9,6 +9,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | name  | description         | category | event_date | start_time              | end_time                | repeats | time_zone |
       | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | UTC       |
     And I am logged in
+    And I have Slack notifications enabled
 
   @javascript 
   Scenario: Create a hangout for a scrum event
