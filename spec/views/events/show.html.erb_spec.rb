@@ -64,7 +64,7 @@ describe 'events/show' do
       assign :hangout, @hangout
     end
 
-    context 'for singed in users' do
+    context 'for signed in users' do
       before do
         view.stub(user_signed_in?: true)
         view.stub(topic: 'Topic')
@@ -94,6 +94,15 @@ describe 'events/show' do
       end
 
       context 'hangout has not started' do
+        it 'does not render Restart HOA button' do
+          render
+          expect(rendered).to have_css('#restart-hoa', visible: false)
+        end
+
+        it 'does not show a warning message when restarting the hangout' do
+          render
+          expect(rendered).to have_css('#restart-warning', visible: false)
+        end
       end
 
       context 'hangout has started' do
