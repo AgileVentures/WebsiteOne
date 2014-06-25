@@ -6,7 +6,8 @@ class HangoutsController < ApplicationController
     hangout = Hangout.find_or_create_by(event_id: params[:id])
 
     if hangout.try!(:update_hangout_data, params)
-      # SlackService.post_hangout_notification(hangout)
+      puts local_request?
+      SlackService.post_hangout_notification(hangout)
       redirect_to event_path(params[:id]) and return if local_request?
       render text: 'Success'
     else
@@ -30,6 +31,8 @@ class HangoutsController < ApplicationController
   end
 
   def local_request?
+    puts request.env['HTTP_ORIGIN']
+    puts request.env['HTTP_HOST']
     request.env['HTTP_ORIGIN'] =~ /#{request.env['HTTP_HOST']}/
   end
 
