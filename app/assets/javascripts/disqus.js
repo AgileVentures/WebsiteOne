@@ -1,8 +1,8 @@
-var disqus_div = $('#disqus_thread');
-var disqus_shortname = disqus_div.data('disqus-shortname');
-var disqus_identifier = disqus_div.data('disqus-identifier');
-var disqus_title = disqus_div.data('disqus-title');
-var disqus_url = disqus_div.data('disqus-url');
+var disqus_div = $('#disqus_thread'),
+    disqus_shortname = disqus_div.data('disqus-shortname'),
+    disqus_identifier = disqus_div.data('disqus-identifier'),
+    disqus_title = disqus_div.data('disqus-title'),
+    disqus_url = disqus_div.data('disqus-url');
 
 //DISQUS EMBED SCRIPT
 var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
