@@ -11,13 +11,13 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I am logged in
     And I have Slack notifications enabled
 
-  @javascript 
+  @javascript
   Scenario: Create a hangout for a scrum event
     Given I am on the show page for event "Scrum"
     Then I should see hangout button
     And I should see button "Edit hangout link manually"
 
-  
+
   Scenario: Show hangout details
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
@@ -34,7 +34,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | 5 minutes           |
     And I should see link "Click to join the hangout" with "http://hangout.test"
 
-  
+
   Scenario: Show restart hangout
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
@@ -42,7 +42,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Then the hangout button should not be visible
     And I should see button "Click to restart the hangout"
 
-  
+
   @javascript
   Scenario: Restart hangout
     Given the Hangout for event "Scrum" has been started with details:
@@ -62,6 +62,13 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And the hangout button should not be visible
 
   @javascript
+  Scenario: Cancel Edit URL
+    Given I am on the show page for event "Scrum"
+    When I click the "Edit hangout link manually" button
+    And I click the "btn-cancel" button
+    Then I should not see "Enter the link for manually created hangout:"
+
+  @javascript
    Scenario: Edit URL
      Given I am on the show page for event "Scrum"
      When I click the "Edit hangout link manually" button
@@ -70,3 +77,5 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
      When I fill in "hangout_url" with "http://test.com"
      And I click the "Save" button
      Then I should see link "Click to join the hangout" with "http://test.com"
+
+

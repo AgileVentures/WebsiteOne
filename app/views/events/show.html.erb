@@ -5,83 +5,87 @@
   <p><strong><%= @event.description %></strong></p>
 
   <% if @event.schedule.present? %>
-    <div class="row well well-sm" >
-      <div class="col-lg-5" style="margin-top: -10px">
-        <h4>Upcoming schedule</h4>
+      <div class="row well well-sm">
+        <div class="col-lg-5" style="margin-top: -10px">
+          <h4>Upcoming schedule</h4>
           <% @event_schedule.first(5).each do |e| %>
-            <%= current_occurrence_time(e) %>
-            <br/>
-          <% end %>
-      </div>
-
-      <% if user_signed_in? %>
-        <div class="col-lg-5" style="float: right; margin-top: 10px">
-          <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-default' %>
-        </div>
-
-    </div>
-  <div class="row well well-sm" >
-        <div class="row">
-        <div id="hangout_button" class="col-lg-5" style="padding: inherit; width: 200px; display:<%= @hangout.try!(:started?) ? 'none' : 'block' %>;">
-           <%= render partial: 'hangouts/hangout_button', locals: { id: @event.id, topic: topic(@event, @event_schedule) } %>
-        </div>
-        </div>
-
-        <div class="row">
-        <div id="restart-warning" style="display:none;">
-          <br>
-          Restarting Hangout would update the details of the hangout currently associated with this event.
-        </div>
-        </div>
-
-        <div class="row">
-        <div>
-          <br>
-          <button id="restart-hoa" class="btn btn-sm btn-default" style="width: 200px; display:<%= @hangout.try!(:started?) ? 'block' : 'none' %>;">Click to restart the hangout</button>
-        </div>
-        </div>
-
-        <div class="row">
-        <div>
-          <br>
-          <button id="btn-edit-link" class="btn btn-sm btn-default" style="width: 200px;">Edit hangout link manually</button>
-        </div>
-        </div>
-
-        <div>
-          <%= form_tag hangout_url(@event.id), method: :put, :class => 'form-vertical', :id => 'form-edit-link', :style => 'display: none;' do %>
-            <br>
-            <%= label_tag 'Enter the link for manually created hangout:' -%>
-            <%= text_field_tag 'hangout_url', @hangout.try!(:hangout_url) -%>
-            <button id="btn-cancel" class="btn btn-default">Cancel</button>
-            <%= submit_tag 'Save', class: 'btn btn-default' %>
+              <%= current_occurrence_time(e) %>
+              <br/>
           <% end %>
         </div>
-    <% end %>
-  </div>
 
-  <div class="row well well-sm" >
-    <% if @hangout.try!(:started?)  %>
-      <div id="hangout_details">
-        <%= render partial: 'hangouts/hangout_status', locals: {event: @event, hangout: @hangout} %>
-      </div>
-    <% end %>
-  </div>
+        <% if user_signed_in? %>
+            <div class="col-lg-5" style="float: right; margin-top: 10px">
+              <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-default' %>
+            </div>
+
+            </div>
+            <div class="row well well-sm">
+              <div class="row">
+                <div id="hangout_button" class="col-lg-5" style="padding: inherit; width: 200px; display:<%= @hangout.try!(:started?) ? 'none' : 'block' %>;">
+                  <%= render partial: 'hangouts/hangout_button', locals: {id: @event.id, topic: topic(@event, @event_schedule)} %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div id="restart-warning" style="display:none;">
+                  <br>
+                  Restarting Hangout would update the details of the hangout currently associated with this event.
+                </div>
+              </div>
+hangout_url
+              <div class="row">
+                <div>
+                  <br>
+                  <button id="restart-hoa" class="btn btn-sm btn-default" style="width: 200px; display:<%= @hangout.try!(:started?) ? 'block' : 'none' %>;">Click
+                    to restart the hangout
+                  </button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <br>
+                  <button id="btn-edit-link" class="btn btn-sm btn-default" style="width: 200px;">Edit hangout link
+                    manually
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <%= form_tag hangout_url(@event.id), method: :put, :class => 'form-vertical', :id => 'form-edit-link', :style => 'display: none;' do %>
+                    <br>
+                    <%= label_tag 'Enter the link for manually created hangout:' -%>
+                    <%= text_field_tag 'hangout_url', @hangout.try!(:hangout_url) -%>
+                    <button id="btn-cancel" class="btn btn-default">Cancel</button>
+                    <%= submit_tag 'Save', class: 'btn btn-default' %>
+                <% end %>
+              </div>
+        <% end %>
+        </div>
+
+        <div class="row well well-sm">
+          <% if @hangout.try!(:started?) %>
+              <div id="hangout_details">
+                <%= render partial: 'hangouts/hangout_status', locals: {event: @event, hangout: @hangout} %>
+              </div>
+          <% end %>
+        </div>
   <% end %>
 
-  </div>
+</div>
 
-  <script>
-    $('#restart-hoa').click(function() {
+<script>
+    $('#restart-hoa').click(function () {
         $('#restart-hoa').text(function (i, text) {
-          return text === 'Cancel' ? 'Click to restart the hangout' : 'Cancel';
-          });
+            return text === 'Cancel' ? 'Click to restart the hangout' : 'Cancel';
+        });
         $('#restart-warning').slideToggle();
         $('#hangout_button').slideToggle();
         $('#hangout_details').slideToggle();
-        });
-$('#btn-edit-link, #btn-cancel').click(function(e){
-    e.preventDefault();
-    $('#form-edit-link').slideToggle();
     });
-  </script>
+    $('#btn-edit-link, #btn-cancel').click(function (e) {
+        e.preventDefault();
+        $('#form-edit-link').slideToggle();
+    });
+</script>

@@ -94,14 +94,17 @@ describe 'events/show' do
       end
 
       context 'hangout has not started' do
+        before :each do
+          @hangout.stub(started?: false)
+        end
         it 'does not render Restart HOA button' do
           render
-          expect(rendered).to have_css('#restart-hoa', visible: false)
+          expect(rendered).not_to have_css('#restart-hoa', visible: true)
         end
 
         it 'does not show a warning message when restarting the hangout' do
           render
-          expect(rendered).to have_css('#restart-warning', visible: false)
+          expect(rendered).not_to have_css('#restart-warning', visible: true)
         end
       end
 
