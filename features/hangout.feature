@@ -10,17 +10,18 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | UTC       |
     And I am logged in
 
-  @javascript @ignore
+  @javascript 
   Scenario: Create a hangout for a scrum event
     Given I am on the show page for event "Scrum"
     Then I should see hangout button
-    And I should see button "Edit link"
+    And I should see button "Edit hangout link manually"
 
-  @ignore
+  
   Scenario: Show hangout details
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
       | Started at   | 10:25:00            |
+    And the time now is "10:30:00"
     When I am on the show page for event "Scrum"
     Then I should see Hangouts details section
     And I should see:
@@ -29,10 +30,10 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | Title               |
         | Daily scrum meeting |
         | Updated             |
-        | 10:25:00            |
+        | 5 minutes           |
     And I should see link "Click to join the hangout" with "http://hangout.test"
 
-  @ignore
+  
   Scenario: Show restart hangout
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
@@ -40,7 +41,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Then the hangout button should not be visible
     And I should see button "Click to restart the hangout"
 
-  @ignore
+  
   @javascript
   Scenario: Restart hangout
     Given the Hangout for event "Scrum" has been started with details:

@@ -38,3 +38,7 @@ And(/^I should( not)? see Hangouts details section$/) do |negative|
     expect(page).to have_css('#hangout_details')
   end
 end
+
+Given /^the time now is "([^"]*)"$/ do |time|
+  Time.stub(now: Time.parse(time))
+end
