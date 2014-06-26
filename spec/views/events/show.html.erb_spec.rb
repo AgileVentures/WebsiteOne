@@ -17,7 +17,6 @@ describe 'events/show', type: :view do
                         repeat_ends_on: 'Mon, 17 Jun 2014',
                         time_zone: 'Eastern Time (US & Canada)')
     @event_schedule = @event.next_occurrences
-    # render
   end
 
   after (:each) do
@@ -49,14 +48,14 @@ describe 'events/show', type: :view do
   end
 
   it 'renders Edit event for signed in user' do
-    view.stub(:user_signed_in?).and_return(true)
+    allow(view).to receive(:user_signed_in?).and_return(true)
     render
     expect(rendered).to have_link 'Edit'
   end
 
   describe 'Hangouts' do
     before(:each) do
-      @hangout = stub_model(Hangout, event_id: 375,
+      @hangout = double(Hangout, event_id: 375,
                             hangout_url: 'http://hangout.test',
                             updated_at: Time.parse('10:25:00'),
                             started?: true)
@@ -66,8 +65,8 @@ describe 'events/show', type: :view do
 
     context 'for signed in users' do
       before do
-        view.stub(user_signed_in?: true)
-        view.stub(topic: 'Topic')
+        allow(view).to receive(:user_signed_in?).and_return(true)
+        allow(view).to receive(:topic).and_return('Topic')
       end
 
       it_behaves_like 'it has a hangout button' do
@@ -76,7 +75,7 @@ describe 'events/show', type: :view do
       end
 
       it 'renders Edit link button' do
-        Time.stub(now: Time.parse('10:30:00'))
+        allow(Time).to receive(:now).and_return(Time.parse('10:30:00'))
         render
         expect(rendered).to have_button('Edit hangout link manually')
         expect(rendered).to have_content('Updated:')
@@ -95,7 +94,7 @@ describe 'events/show', type: :view do
 
       context 'hangout has not started' do
         before :each do
-          @hangout.stub(started?: false)
+          allow(@hangout).to receive(:started?).and_return(false)
         end
         it 'does not render Restart HOA button' do
           render
@@ -129,11 +128,11 @@ describe 'events/show', type: :view do
 
     context 'for all users' do
       before :each do
-        view.stub(user_signed_in?: false)
+        allow(view).to receive(:user_signed_in?).and_return(false)
       end
       context 'hangout has started' do
         before :each do
-          @hangout.stub(started?: true)
+          allow(@hangout).to receive(:started?).and_return(true)
         end
 
         it 'renders Hangout details section' do
@@ -150,7 +149,7 @@ describe 'events/show', type: :view do
 
       context 'hangout has not started' do
         before :each do
-          @hangout.stub(started?: false)
+          allow(@hangout).to receive(:started?).and_return(false)
         end
 
         it 'does not render Hangout details section' do

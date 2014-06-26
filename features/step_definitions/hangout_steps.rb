@@ -11,10 +11,6 @@ Then /^the hangout button should( not)? be visible$/ do |negative|
   end
 end
 
-Then /^I should see link "([^"]*)" with "([^"]*)"$/ do |link, url|
-  expect(page).to have_link(link, href: url)
-end
-
 Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
@@ -34,11 +30,6 @@ Then /^I should( not)? see Hangouts details section$/ do |negative|
     expect(page).to have_css('#hangout_details')
   end
 end
-
-Given /^the time now is "([^"]*)"$/ do |time|
-  Time.stub(now: Time.parse(time))
-end
-
 
 Then /^I have Slack notifications enabled$/ do
   stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify').to_return(status: 200)

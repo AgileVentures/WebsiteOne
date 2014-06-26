@@ -15,7 +15,5 @@ describe SlackService do
      assert_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify', times: 1) do |req|
        expect(req.body).to eq 'title=MockEvent&link=mock_url&type=PairProgramming'
      end
-
-     Features.slack_notifications.enabled = false
    end
 end

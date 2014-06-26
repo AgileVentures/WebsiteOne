@@ -2,7 +2,7 @@ module SlackService
   extend self
 
   def post_hangout_notification(hangout)
-    return if Features.slack_notifications.enabled == false
+    return unless Features.enabled?(:slack_notifications)
 
     uri = URI.parse "#{Slack::BOT_URL}/hubot/hangouts-notify"
     Net::HTTP.post_form uri, {
