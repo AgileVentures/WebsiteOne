@@ -16,3 +16,5 @@ mailer:
 
 disqus:
   shortname: 'agileventures'
+  api_key:  <%= ENV['DISQUS_API_KEY']  %>
+  secret_key:  <%= ENV['DISQUS_SECRET_KEY']  %>

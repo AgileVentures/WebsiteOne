@@ -4,6 +4,3 @@ features:
 
 mailer:
   delivery_method: 'test'
-
-disqus:
-  shortname: 'agileventures-dev'

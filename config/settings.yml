@@ -19,5 +19,6 @@ mailer:
     authentication: 'auth'
 
 disqus:
+  shortname: 'agileventures-dev'
   api_key:  'Mh9WLi09Ve752WaTu3xbfEpSXDHOluVNc2Cm8UnDVA5TTuKXUebEVq56cDlu0SBu'
   secret_key: 'bRtQeANt2qJQ9Y6CJZtA2I2g6dioHKDuPaX5US17JmRXmvMYcG69wZXeKaFmd8qJ'

@@ -3,6 +3,3 @@ features:
     enabled: false
   slack_notifications:
     enabled: false
-
-disqus:
-  shortname: 'agileventures-dev'
