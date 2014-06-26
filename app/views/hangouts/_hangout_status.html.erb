@@ -1,14 +1,20 @@
-<table>
-  <tr>
-    <td>Title</td>
-    <td><p>  </p></td>
-    <td style="padding-left: 10px;"><%= event.name %></td>
-  </tr>
-  <tr>
-    <td>Category</td>
-    <td><p>  </p></td>
-    <td style="padding-left: 10px;"><%= event.category %></td>
-  </tr>
-</table>
+<style>
+  .dl-horizontal dt{
+      text-align: left;
+      width: auto;
+      padding-right: 1em;
+  }
+
+  .dl-horizontal dd{
+      margin-left: 100px;
+  }
+</style>
+
+  <dl class="dl-horizontal">
+    <dt>Title</dt>
+    <dd><%= event.name %></dd>
+    <dt>Category</dt>
+    <dd><%= event.category %></dd>
+  </dl>
 <br>
-<p><%= link_to 'Click to join the hangout', hangout.hangout_url %>   Updated: <%= time_ago_in_words hangout.updated_at if hangout %> ago
+<p><%= link_to 'Click to join the hangout', hangout.hangout_url %>   Updated: <%= time_ago_in_words hangout.updated_at if hangout %> ago</p>

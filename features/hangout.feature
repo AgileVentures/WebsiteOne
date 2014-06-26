@@ -65,7 +65,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Cancel Edit URL
     Given I am on the show page for event "Scrum"
     When I click the "Edit hangout link manually" button
-    And I click the "btn-cancel" button
+    And I click the "Cancel" button
     Then I should not see "Enter the link for manually created hangout:"
 
   @javascript

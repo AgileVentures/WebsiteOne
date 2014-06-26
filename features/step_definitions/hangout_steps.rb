@@ -27,11 +27,7 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   Hangout.record_timestamps = true
 end
 
-Then /^I should see restart button$/ do
-end
-
-
-And(/^I should( not)? see Hangouts details section$/) do |negative|
+Then /^I should( not)? see Hangouts details section$/ do |negative|
   if negative
     expect(page).not_to have_css('#hangout_details')
   else

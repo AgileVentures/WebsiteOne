@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'events/show' do
+describe 'events/show', type: :view do
   before(:each) do
     ENV['TZ'] = 'UTC'
     Delorean.time_travel_to(Time.parse('Mon, 17 Feb 2013'))
@@ -26,25 +26,25 @@ describe 'events/show' do
 
   it 'should display event information' do
     render
-    rendered.should have_text 'EuroAsia Scrum'
-    rendered.should have_text 'EuroAsia Scrum and Pair hookup'
+    expect(rendered).to have_text('EuroAsia Scrum')
+    expect(rendered).to have_text('EuroAsia Scrum and Pair hookup')
   end
 
   it 'should render the event name' do
     render
-    rendered.should have_text @event.name
+    expect(rendered).to have_text(@event.name)
   end
 
   it 'should render the event description' do
     render
-    rendered.should have_text @event.description
+    expect(rendered).to have_text(@event.description)
   end
 
   it 'should render dates and time for 5 upcoming events' do
     render
-    rendered.should have_text 'Upcoming schedule'
+    expect(rendered).to have_text('Upcoming schedule')
     @event_schedule.first(5).each do |e|
-      rendered.should have_content nested_hash_value(e, :time).strftime('%F at %I:%M%p')
+      expect(rendered).to have_content(nested_hash_value(e, :time).strftime('%F at %I:%M%p'))
     end
   end
 

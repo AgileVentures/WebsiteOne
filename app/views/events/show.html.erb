@@ -33,7 +33,7 @@
                   Restarting Hangout would update the details of the hangout currently associated with this event.
                 </div>
               </div>
-hangout_url
+
               <div class="row">
                 <div>
                   <br>
@@ -64,13 +64,13 @@ hangout_url
         <% end %>
         </div>
 
-        <div class="row well well-sm">
           <% if @hangout.try!(:started?) %>
+            <div class="row well well-sm">
               <div id="hangout_details">
                 <%= render partial: 'hangouts/hangout_status', locals: {event: @event, hangout: @hangout} %>
               </div>
+            </div>
           <% end %>
-        </div>
   <% end %>
 
 </div>
@@ -78,7 +78,7 @@ hangout_url
 <script>
     $('#restart-hoa').click(function () {
         $('#restart-hoa').text(function (i, text) {
-            return text === 'Cancel' ? 'Click to restart the hangout' : 'Cancel';
+            return (text === 'Cancel') ? 'Click to restart the hangout' : 'Cancel';
         });
         $('#restart-warning').slideToggle();
         $('#hangout_button').slideToggle();
