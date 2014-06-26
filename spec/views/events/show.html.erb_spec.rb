@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'events/show' do
+describe 'events/show', type: :view do
   before(:each) do
     ENV['TZ'] = 'UTC'
     Delorean.time_travel_to(Time.parse('Mon, 17 Feb 2013'))
@@ -17,7 +17,6 @@ describe 'events/show' do
                         repeat_ends_on: 'Mon, 17 Jun 2014',
                         time_zone: 'Eastern Time (US & Canada)')
     @event_schedule = @event.next_occurrences
-    render
   end
 
   after (:each) do
@@ -25,52 +24,49 @@ describe 'events/show' do
   end
 
   it 'should display event information' do
-    rendered.should have_text 'EuroAsia Scrum'
-    rendered.should have_text 'EuroAsia Scrum and Pair hookup'
+    render
+    expect(rendered).to have_text('EuroAsia Scrum')
+    expect(rendered).to have_text('EuroAsia Scrum and Pair hookup')
   end
 
   it 'should render the event name' do
-    rendered.should have_text @event.name
+    render
+    expect(rendered).to have_text(@event.name)
   end
 
   it 'should render the event description' do
-    rendered.should have_text @event.description
+    render
+    expect(rendered).to have_text(@event.description)
   end
 
   it 'should render dates and time for 5 upcoming events' do
-    rendered.should have_text 'Upcoming schedule'
+    render
+    expect(rendered).to have_text('Upcoming schedule')
     @event_schedule.first(5).each do |e|
-      rendered.should have_content nested_hash_value(e, :time).strftime('%F at %I:%M%p')
+      expect(rendered).to have_content(nested_hash_value(e, :time).strftime('%F at %I:%M%p'))
     end
   end
 
-  it 'should display HOA url if url is set' do
-    @event.url = 'http://google.com'
+  it 'renders Edit event for signed in user' do
+    allow(view).to receive(:user_signed_in?).and_return(true)
     render
-    rendered.should have_text 'Hangout link'
-    rendered.should have_css '#hoa-link'
-    rendered.should have_link @event.url
-  end
-
-  it 'should not display HOA url if url is NIL' do
-    @event.url = nil
-    render
-    rendered.should_not have_text 'Hangout link:'
-    rendered.should_not have_selector('a#hoa-link')
+    expect(rendered).to have_link 'Edit'
   end
 
   describe 'Hangouts' do
     before(:each) do
-      @hangout = stub_model(Hangout, event_id: 375,
+      @hangout = double(Hangout, event_id: 375,
                             hangout_url: 'http://hangout.test',
+                            updated_at: Time.parse('10:25:00'),
                             started?: true)
+      @event.url = @hangout.hangout_url
       assign :hangout, @hangout
     end
 
-    context 'user is signed in' do
+    context 'for signed in users' do
       before do
-        view.stub(user_signed_in?: true)
-        view.stub(topic: 'Topic')
+        allow(view).to receive(:user_signed_in?).and_return(true)
+        allow(view).to receive(:topic).and_return('Topic')
       end
 
       it_behaves_like 'it has a hangout button' do
@@ -78,35 +74,90 @@ describe 'events/show' do
         let(:id){@event.id}
       end
 
-      it 'renders Edit link' do
-        view.stub(:user_signed_in?).and_return(true)
+      it 'renders Edit link button' do
+        allow(Time).to receive(:now).and_return(Time.parse('10:30:00'))
         render
-        rendered.should have_link 'Edit'
+        expect(rendered).to have_button('Edit hangout link manually')
+        expect(rendered).to have_content('Updated:')
+        expect(rendered).to have_content('5 minutes')
       end
 
-      it 'renders add/edit url form' do
-        view.stub(:user_signed_in?).and_return(true)
+      it 'renders Edit link form' do
         render
-        rendered.should have_selector('form#event-form')
+        expect(rendered).not_to have_css('#form-edit-link', visible: true)
+
+        expect(rendered).to have_content("Enter the link for manually created hangout:")
+        expect(rendered).to have_field('hangout_url', visible: false)
+        expect(rendered).to have_button('Cancel', visible: false)
+        expect(rendered).to have_button('Save', visible: false)
+      end
+
+      context 'hangout has not started' do
+        before :each do
+          allow(@hangout).to receive(:started?).and_return(false)
+        end
+        it 'does not render Restart HOA button' do
+          render
+          expect(rendered).not_to have_css('#restart-hoa', visible: true)
+        end
+
+        it 'does not show a warning message when restarting the hangout' do
+          render
+          expect(rendered).not_to have_css('#restart-warning', visible: true)
+        end
+      end
+
+      context 'hangout has started' do
+        it 'hides the Hangout button' do
+          render
+          expect(rendered).not_to have_css('#hangout_button', visible: true)
+        end
+
+        it 'renders Restart HOA button' do
+          render
+          expect(rendered).to have_button("Click to restart the hangout")
+        end
+
+        it 'renders a warning message when restarting the hangout' do
+          render
+          expect(rendered).not_to have_css('#restart-warning', visible: true)
+          expect(rendered).to have_content("Restarting Hangout would update the details of the hangout currently associated with this event.")
+        end
+      end
+    end
+
+    context 'for all users' do
+      before :each do
+        allow(view).to receive(:user_signed_in?).and_return(false)
+      end
+      context 'hangout has started' do
+        before :each do
+          allow(@hangout).to receive(:started?).and_return(true)
+        end
+
+        it 'renders Hangout details section' do
+          render
+          expect(rendered).to have_selector("#hangout_details")
+          expect(rendered).to have_content 'Title'
+          expect(rendered).to have_content 'EuroAsia Scrum'
+          expect(rendered).to have_content 'Category'
+          expect(rendered).to have_content 'Scrum'
+          expect(rendered).to have_link('Click to join the hangout', href: 'http://hangout.test')
+        end
+
+      end
+
+      context 'hangout has not started' do
+        before :each do
+          allow(@hangout).to receive(:started?).and_return(false)
+        end
+
+        it 'does not render Hangout details section' do
+          render
+          expect(rendered).not_to have_selector("#hangout_details")
+        end
       end
 
     end
-
-    context 'user is not signed in' do
-      # TODO add examples
-    end
-
-    it 'renders Hangout status section if the hangout has started' do
-      render
-      expect(rendered).to have_css("#hangout_status")
-    end
-
-
-    it 'does not render Hangout status section if the hangout has not started' do
-      @hangout.stub(started?: false)
-      render
-      expect(rendered).not_to have_css("#hangout_status")
-    end
-
   end
 end

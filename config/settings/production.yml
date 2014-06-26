@@ -1,6 +1,8 @@
 features:
   custom_errors:
     enabled: true
+  slack_notifications:
+    enabled: true
 
 mailer:
   delivery_method: 'smtp'
