@@ -1,11 +1,14 @@
-<div id="disqus_thread" 
-data-disqus-shortname='<%= Disqus::DISQUS_SHORTNAME %>' 
-data-disqus-identifier='<%= entity.friendly_id %>' 
-data-disqus-title='<%= entity.title %>' 
-data-disqus-url='<%= request.url %>'></div>
+<% if Features.enabled?(:disqus) %>
+  <%= get_disqus_sso(current_user).html_safe  %>
 
-<%= get_disqus_sso(current_user)  %>
-<%= javascript_include_tag 'disqus' %>
+  <div id="disqus_thread" 
+  data-disqus-shortname='<%= Settings.disqus.shortname %>' 
+  data-disqus-identifier='<%= entity.friendly_id %>' 
+  data-disqus-title='<%= entity.title %>' 
+  data-disqus-url='<%= request.url %>'></div>
 
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  <%= javascript_include_tag 'disqus' %>
+
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<% end %>
