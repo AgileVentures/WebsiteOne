@@ -6,20 +6,25 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-old_project_count = Project.count
-old_doc_count = Document.count
-old_user_count = User.count
-old_article_count = Article.count
-old_event_count = Event.count
+klasses = [ Project, Document, User, Article, Event ]
+old_counts = klasses.map(&:count)
+should_prompt = old_counts.min > 0
 
-puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
+if should_prompt
+  puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
+end
 
 while true
-  print 'yes(y)/no(n): '
-  response = STDIN.gets.downcase.chomp
-  if response == 'y' or response == 'yes'
+  if should_prompt
+    print 'yes(y)/no(n): '
+    response = STDIN.gets.downcase.chomp
+  else
+    response = 'y'
+  end
+
+  if response == 'y' || response == 'yes'
     puts 'Clearing existing projects and documents'
-    [Project, Document, User, Article, Event].each(&:delete_all)
+    klasses.each(&:delete_all)
 
     pw = 'randomrandom'
     u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
@@ -54,11 +59,12 @@ Solution: is something that requires absolutely minimal effort on their part to 
 
     puts 'Created default projects'
     break
-  elsif response == 'n' or response == 'no'
+  elsif response == 'n' || response == 'no'
     break
   end
 end
 
+u ||= User.last
 for i in (1..3)
   p = u.projects.create title: Faker::Lorem.words(3).join(' '), description: Faker::Lorem.paragraph, status: 'active', created_at: 1.month.ago
   for j in (1..3)
@@ -96,8 +102,10 @@ Event.create!( name: 'Seeded event',
                repeat_ends_on: 'Mon, 17 Jun 2013',
                time_zone: 'London')
 
-puts 'Project.count ' + old_project_count.to_s.bold.red + ' -> ' + Project.count.to_s.bold.green
-puts 'Document.count ' + old_doc_count.to_s.bold.red + ' -> ' + Document.count.to_s.bold.green
-puts 'User.count ' + old_user_count.to_s.bold.red + ' -> ' + User.count.to_s.bold.green
-puts 'Article.count ' + old_article_count.to_s.bold.red + ' -> ' + Article.count.to_s.bold.green
-puts 'Event.count ' + old_event_count.to_s.bold.red + ' -> ' + Event.count.to_s.bold.green
+if StaticPage.count == 0
+  Rake::Task['db:import_pages'].invoke
+end
+
+klasses.each_with_index do |klass, i|
+  puts "#{klass.name}.count " + old_counts[i].to_s.bold.red + ' -> ' + klass.count.to_s.bold.green
+end
