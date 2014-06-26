@@ -15,7 +15,7 @@ module DisqusHelper
     timestamp = Time.now.to_i
     sig = OpenSSL::HMAC.hexdigest('sha1', Settings.disqus.secret_key, '%s %s' % [message, timestamp])
 
-    return %Q(<script type="text/javascript">
+    return %Q(<script id="disqus-sso" type="text/javascript">
               var disqus_config = function() {
               this.page.remote_auth_s3 = '#{message} #{sig} #{timestamp}';
               this.page.api_key = '#{Settings.disqus.api_key}';
