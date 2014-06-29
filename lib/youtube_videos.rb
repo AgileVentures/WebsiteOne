@@ -8,16 +8,16 @@ module YoutubeVideos
   private
 
   def user_videos(object)
-    return unless object.youtube_id
+    return [] unless object.youtube_id
 
     response = get_response(build_request_for_user_videos(object))
-    filter_response(response, object.followed_project_tags, [object.youtube_user_name]) if response
+    filter_response(response, object.followed_project_tags, [object.youtube_user_name])
   end
 
   def project_videos(object)
     request = build_request_for_project_videos(object)
     response = get_response(request)
-    filter_response(response, object.youtube_tags, object.members_tags) if response
+    filter_response(response, object.youtube_tags, object.members_tags)
   end
 
   def build_request_for_user_videos(user)
@@ -45,25 +45,16 @@ module YoutubeVideos
 
   def get_response(request)
     [].tap do |array|
-      #TODO YA rescue BadRequest
       response = parse_response(open(URI.escape(request)).read)
-      array.concat(response) if response
-      array.sort_by! { |video| video[:published] }.reverse! unless array.empty?
+      array.concat(response)
+      array.sort_by! { |video| video[:published] }.reverse!
     end
   end
 
   def parse_response(response)
-    begin
-      json = JSON.parse(response)
-
-      videos = json['feed']['entry']
-      return if videos.nil?
-
-      videos.map { |hash| beautify_youtube_response(hash) }
-    rescue JSON::JSONError
-      Rails.logger.warn('Attempted to decode invalid JSON')
-      nil
-    end
+    json = JSON.load(response) || {}
+    videos = json.fetch('feed', {}).fetch('entry', [])
+    videos.map { |hash| beautify_youtube_response(hash) }
   end
 
   def filter_response(response, tags, members)

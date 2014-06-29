@@ -69,12 +69,6 @@ describe YoutubeVideos do
               :url => "http://www.youtube.com/watch?v=3Hi41S5Tp54&feature=youtube_gdata"}
       expect(subject.send(:parse_response, response).first).to eq(hash)
     end
-
-    it 'logs json error and returns nil on parsing invalid json' do
-      allow(JSON).to receive(:parse).and_raise(JSON::JSONError)
-      expect(Rails.logger).to receive(:warn).with('Attempted to decode invalid JSON')
-      expect(subject.send(:parse_response, '')).to be_nil
-    end
   end
 
   describe "build_request_for_project_videos(project)" do
