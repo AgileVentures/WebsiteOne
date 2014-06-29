@@ -49,6 +49,10 @@ gem 'sprockets-image_compressor'
 
 gem 'rails_config' # a gem to manage configuration files
 
+group :development do
+  gem 'letter_opener_web' # A web interface for browsing sent emails
+end
+
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
