@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
 
   def youtube_tags
     tag_list
+      .clone
       .push(title)
       .map(&:downcase)
       .uniq
