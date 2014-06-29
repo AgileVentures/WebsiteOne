@@ -4,7 +4,7 @@ describe Scrum do
 
   query = {cassette_name: 'scrums_controller/videos_by_query'}
   describe '#videos_by', vcr: query do
-    client = YouTubeIt::Client.new(:dev_key => "AIzaSyAh0CZ-jWpREV-3WtQ-4thTW0T-qU6_zrc")
+    client = YouTubeIt::Client.new(:dev_key => Youtube::YOUTUBE_KEY)
     subject { client.videos_by(:query => "Atlantic Scrum and Pair Hookup", :max_results => 20) }
 
     it 'queries the YouTubeIt API' do

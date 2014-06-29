@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include Youtube
+  include YoutubeHelper
 
   def index
     @users = User.search(params)
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
 
     if should_display_user?(@user)
-      @youtube_videos  = Youtube.user_videos(@user).try(:first, 5)
+      @youtube_videos  = YoutubeHelper.user_videos(@user).try(:first, 5)
     else
       raise ActiveRecord::RecordNotFound.new("User has not exposed his profile publicly")
     end
