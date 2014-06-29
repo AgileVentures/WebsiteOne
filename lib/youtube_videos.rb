@@ -33,13 +33,14 @@ module YoutubeVideos
   end
 
   def escape_query_params(params)
-    '(' + params.map do |param|
+    query_params = params.map do |param|
       if param.index(' ')
         '"' + param.gsub(' ', '+') + '"'
       else
         param
       end
-    end.join('|') + ')'
+    end
+    "(#{query_params.join('|')})"
   end
 
   def get_response(request)
