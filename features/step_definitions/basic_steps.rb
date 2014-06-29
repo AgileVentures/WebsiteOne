@@ -31,7 +31,7 @@ def path_to(page_name, id = '')
     when 'foobar' then
       visit ("/#{page}")
     when 'password reset' then
-      visit edit_user_password_path
+      visit new_user_password_path
     else
       raise('path to specified is not listed in #path_to')
   end
