@@ -150,6 +150,18 @@ module YoutubeHelper
       end
       user.youtube_user_name
     end
+    private
+
+    def self.video_data(video)
+      {
+          author: video.author.name,
+          id: video.video_id.scan(/tag:youtube.com,\d+:video:(.+)/).last.first,
+          published: video.published_at.to_date,
+          title: video.title,
+          content: video.title,
+          url: video.media_content[0].url
+      }
+    end
 
   end
 
