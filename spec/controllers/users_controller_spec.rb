@@ -17,10 +17,9 @@ describe UsersController do
   describe 'GET show' do
     before :each do
       @projects = [
-          mock_model(Project, friendly_id: 'title-1', title: 'Title 1'),
-          mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
-          mock_model(Project, friendly_id: 'title-3', title: 'Title 3')
-      ]
+          Project.new(slug: 'title-1', title: 'Title 1'),
+          Project.new(slug: 'title-2', title: 'Title 2'),
+          Project.new(slug: 'title-3', title: 'Title 3')]
 
       @user = double('User', id: 1,
                      first_name: 'Hermionie',
@@ -52,7 +51,7 @@ describe UsersController do
               published: '01/01/2015'
           }
       ]
-      Youtube.stub(user_videos: @youtube_videos)
+      YoutubeHelper.stub(user_videos: @youtube_videos)
     end
 
     it 'assigns a user instance' do

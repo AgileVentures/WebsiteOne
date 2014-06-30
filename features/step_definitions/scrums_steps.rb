@@ -9,16 +9,11 @@ Given(/^I play a video$/) do
   playvideo = page.first(:xpath, "//h4[@class=\"timeline-title\"]/a[contains(@class,\"yt_link\")]")['href']
   click_link playvideo
 end
-
-Then(/^I should see a modal window with the first scrum$/) do
+Then(/^I should see a modal window with the (first|second) scrum$/) do |ord|
+  ord_hash ={"first" => 0, "second" => 1}
   expect(page.find("#player")[:style]).to eq("display: block; ")
-  title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[0]
-  page.should have_selector('#playerTitle', text: title[0])
-end
 
-Then(/^I should see a modal window with the second scrum$/) do
-  title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[1]
-  expect(page.find("#player")[:style]).to eq("display: block; ")
+  title = page.body.gsub(/\n/,'').scan(/<\/span><\/a>\s*(.*?)\s*<\/h4>/)[ord_hash[ord]]
   page.should have_selector('#playerTitle', text: title[0])
 end
 

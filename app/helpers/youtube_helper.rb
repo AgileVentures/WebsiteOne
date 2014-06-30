@@ -58,7 +58,7 @@ module YoutubeHelper
 
     def self.members_tags(members)
       return [] if members.blank?
-      members_tags = members.map { |user| youtube_user_name(user) if youtube_user_name(user) }.compact
+      members_tags = members.map { |user| self.youtube_user_name(user) if youtube_user_name(user) }.compact
       members_tags.map!(&:downcase)
       members_tags.uniq!
       members_tags
@@ -145,7 +145,7 @@ module YoutubeHelper
           user.youtube_user_name = user_name(user)
           #user.save  # this is breaking everything sometimes - NEED BETTER FIX
         rescue Exception => e
-          logger.fatal e
+          Rails.logger.fatal e
         end
       end
       user.youtube_user_name
