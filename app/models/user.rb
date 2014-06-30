@@ -60,26 +60,25 @@ class User < ActiveRecord::Base
 
 
   def display_name
-    name = [ self.first_name, self.last_name ].join(' ').squish
-    if (name == '' || name == nil) && (self.email == '' || self.email == nil)
-      'Anonymous'
-    elsif name =~ /^\s*$/
-      self.email_first_part
-    else
-      name
-    end
+    full_name || email_designator || 'Anonymous'
+  end
+
+  def full_name
+    full_name = "#{first_name} #{last_name}".squish
+    full_name unless full_name.blank?
+  end
+
+  def email_designator
+    return if email.blank?
+    email.split('@').first
   end
 
   def should_generate_new_friendly_id?
     self.slug.nil? or ((self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?)
   end
 
-  def email_first_part
-    self.email.gsub(/@.*$/, '')
-  end
-
   def slug_candidates
-    [ :display_name, :email_first_part ]
+    [ :display_name, :email_designator ]
   end
 
   def self.search(params)
