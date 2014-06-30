@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
   def show
     documents
     @members = @project.members
-    @videos = YoutubeVideos.for(@project) if @project
+    @videos = YoutubeVideos.for(@project)
   end
 
   def new
