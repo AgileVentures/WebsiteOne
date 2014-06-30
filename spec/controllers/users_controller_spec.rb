@@ -15,7 +15,7 @@ describe UsersController do
   end
 
   describe 'GET show' do
-    before(:each) do
+    before do
       @projects = [
           mock_model(Project, friendly_id: 'title-1', title: 'Title 1'),
           mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
