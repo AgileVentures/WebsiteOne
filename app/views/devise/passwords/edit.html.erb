@@ -3,7 +3,6 @@
     <h2 class="text-center">Change your password</h2>
     <br />
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-      <%= devise_error_simple_message %>
       <fieldset>
         <%= f.hidden_field :reset_password_token %>
 
@@ -18,6 +17,7 @@
         <div class="form-group">
           <%= f.submit "Change my password", class: 'btn btn-primary btn-lg btn-block' %>
         </div>
+        <%= devise_error_simple_message %>
       </fieldset>
     <% end %>
   </div>
