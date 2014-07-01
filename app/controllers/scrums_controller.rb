@@ -7,7 +7,4 @@ include YoutubeHelper
                              :max_results => 20)
     @scrums = query.videos.map { |video| YoutubeHelper.video_data(video) }
   end
-
-
-
 end
