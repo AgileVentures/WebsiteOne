@@ -35,8 +35,8 @@ class Event < ActiveRecord::Base
   end
 
   def next_occurrences(options = {})
-    start_time = (options[:start_time] or 30.minutes.ago)
-    end_time = (options[:end_time] or start_time + 10.days)
+    start_time = StartTime.for(options[:start_time])
+    end_time = EndTime.for(options[:end_time], 10.days)
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
