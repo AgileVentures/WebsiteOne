@@ -95,13 +95,12 @@ describe 'OmniAuth authentication' do
           visit edit_user_registration_path
           page.should have_css "input[value='#{@user.email}']"
           save_and_open_page
-          require 'pry'; binding.pry
-          # expect {
-            # expect {
-            #   click_link "Remove #{name}"
-            # }.to change(User, :count).by(0)
-          # }.to change(UserAuthentication, :count).by(-1)
-          # page.should have_content('Successfully removed profile.')
+          expect {
+            expect {
+              click_link "Remove #{name}"
+            }.to change(User, :count).by(0)
+          }.to change(UserAuthentication, :count).by(-1)
+          page.should have_content('Successfully removed profile.')
         end
 
         it 'should be able to create other profiles' do

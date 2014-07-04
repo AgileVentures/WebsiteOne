@@ -1,6 +1,13 @@
 class UserAuthenticationsController < Devise::OmniauthCallbacksController
+  before_filter :youtube, if: -> { request_is_youtube? }
   def gplus; create;  end
   def github; create; end
+
+  def youtube
+    token = request.env['omniauth.auth']['credentials']['token']
+    current_user.update(youtube_id: Youtube.channel_id(token)) unless current_user.youtube_id?
+    redirect_to(request.env['omniauth.origin'] || root_path)
+  end
 
   def create
     auth_params = request.env["omniauth.auth"]
@@ -24,6 +31,10 @@ class UserAuthenticationsController < Devise::OmniauthCallbacksController
   end
 
   private
+
+  def request_is_youtube?
+    request.env['omniauth.params']['youtube']
+  end
 
   def sign_in_with_existing_authentication(user)
     sign_in(:user, user)

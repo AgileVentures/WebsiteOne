@@ -231,7 +231,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :github, 'e2ec6853e573588a381e', '5c4673f8f49fcb7c3f896b3d5e6a230bedd07cfa'
 
-  config.omniauth :gplus, '93078677782-mhhq9ebbmec4rr38adrucvmg3f3kra4d.apps.googleusercontent.com', 'L3KWw2Q4xYLvJE_gn-NL9ps3'
+  config.omniauth :gplus, '93078677782-mhhq9ebbmec4rr38adrucvmg3f3kra4d.apps.googleusercontent.com', 'L3KWw2Q4xYLvJE_gn-NL9ps3', scope: 'youtube,userinfo.email'
 
 
   # ==> Warden configuration
