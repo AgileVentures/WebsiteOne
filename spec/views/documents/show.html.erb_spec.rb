@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "documents/show" do
   before(:each) do
-    @user = mock_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org', display_name: 'John Simpson')
+    @user = stub_model(User, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org', display_name: 'John Simpson')
     @project = assign(:project, stub_model(Project, id: 1 , title:  'Project1',
                                            friendly_id:  'cool-project', created_at:  Time.now))
     @version = stub_model(PaperTrail::Version,
@@ -33,72 +33,83 @@ describe "documents/show" do
                                  :versions => [@version]
                                 )
 
-    view.stub(:created_by).and_return(@created_by)
-      assign :document, @document
-      assign :children, [ @document_child ]
+    allow(view).to receive(:created_by).and_return(@created_by)
+    assign :document, @document
+    assign :children, [ @document_child ]
+
+    allow(controller).to receive(:user_signed_in?).and_return(true)
+    allow(controller).to receive(:current_user).and_return(@user)
   end
 
   context 'document is root' do
     before do
-      @document_child.should_receive(:user).and_return(@user)
+      allow(@document_child).to receive(:user).and_return(@user)
     end
 
     it 'render content and child of root document' do
       render
-      rendered.should have_content @document.title
-      rendered.should have_content @document.body
-      rendered.should have_content @document_child.title
+      expect(rendered).to have_content @document.title
+      expect(rendered).to have_content @document.body
+      expect(rendered).to have_content @document_child.title
     end
 
     it 'should not render document revisions history for new documents' do
       render
-      rendered.should_not have_text 'Revisions'
+      expect(rendered).to_not have_text 'Revisions'
     end
 
     it 'should render document revisions history for documents with more than 1 revision' do
-      @document.stub(versions: [ @version, @version ])
+      allow(@document).to receive(:versions).and_return([ @version, @version ])
       render
-      rendered.should have_text 'Revisions'
+      expect(rendered).to have_text 'Revisions'
     end
 
-    it 'should render an Edit link' do
-      controller.stub(:user_signed_in?).and_return(true)
-      render
-      rendered.within('#edit_link') do |link|
-        link.should have_css('i[class="fa fa-pencil-square-o"]')
+    context 'user signed-in' do
+      before :each do
+        allow(controller).to receive(:user_signed_in?).and_return(true)
+      end
+      it 'should render an Edit link' do
+        render
+        rendered.within('#edit_link') do |link|
+          expect(link).to have_css('i[class="fa fa-pencil-square-o"]')
+        end
+      end
+
+      it 'should render a New Sub-document link' do
+        render
+        rendered.within('#new_document_link') do |link|
+          expect(link).to have_css('i[class="fa fa-file-text-o"]')
+        end
       end
     end
 
-    it 'should render a New Sub-document link' do
-      controller.stub(:user_signed_in?).and_return(true)
-      render
-      rendered.within('#new_document_link') do |link|
-        link.should have_css('i[class="fa fa-file-text-o"]')
+    context 'document is a child' do
+      before do
+        assign :document, @document_child
+        assign :children, []
+      end
+
+      it 'render content of document' do
+        render
+        expect(rendered).to have_content @document_child.title
+        expect(rendered).to have_content @document_child.body
       end
     end
   end
 
-  context 'document is a child' do
-    before do
-      assign :document, @document_child
-      assign :children, []
-    end
+  describe 'renders Disqus section', type: :view do
 
-    it 'render content of document' do
-      render
-      rendered.should have_content @document_child.title
-      rendered.should have_content @document_child.body
+    before :each do
+      allow(view).to receive(:current_user).and_return(@user)
+      allow(view).to receive(:user_signed_in?).and_return(true)
     end
-  end
-
-  describe 'renders Disqus section' do
 
     it_behaves_like 'commentable with Disqus' do
       let(:entity) { @document }
     end
 
     it 'does not render Disqus when inside Mercury editor ' do
-      controller.request.stub(original_url: 'mercury_frame=true')
+      allow(controller.request).to receive(:original_url).and_return('mercury_frame=true')
       render
       expect(rendered).not_to have_css("#disqus_thread")
     end

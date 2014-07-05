@@ -39,7 +39,7 @@ describe('hangouts', function(){
             initial_apps: [{
               app_id : 'id_1234',
               start_data :'http://test.com',
-              app_type : 'ROOM_APP'
+              app_type : 'LOCAL_APP'
             }],
             widget_size: 200
           });
@@ -101,5 +101,24 @@ describe('hangouts', function(){
         });
       });
     });
+  });
+
+  describe('Hangouts module for WebsiteOne', function() {
+
+    beforeEach(function() {
+      reloadScript('hangouts.js');
+    });
+
+    it('defines Hangouts module for WebsiteOne', function() {
+      expect(window.WebsiteOne.Hangouts).toBeDefined();
+    });
+
+    it('calls #renderHangoutButton', function() {
+      spyOn(WebsiteOne, 'renderHangoutButton');
+
+      WebsiteOne.Hangouts.init();
+      expect(WebsiteOne.renderHangoutButton).toHaveBeenCalled();
+    });
+
   });
 });

@@ -17,7 +17,7 @@ WebsiteOne.renderHangoutButton = function() {
         initial_apps: [{
           app_id: app_id,
           start_data: callback_url,
-          app_type : 'ROOM_APP'
+          app_type : 'LOCAL_APP'
         }],
         widget_size: 200
     });
@@ -33,3 +33,14 @@ WebsiteOne.loadHangoutsApi = function() {
     }).done(WebsiteOne.renderHangoutButton);
   }
 };
+
+WebsiteOne.define('Hangouts', function() {
+  return {
+    init: function() {
+      WebsiteOne.renderHangoutButton();
+    }
+  }
+});
+
+WebsiteOne.loadHangoutsApi();
+

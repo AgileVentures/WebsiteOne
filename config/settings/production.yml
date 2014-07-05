@@ -1,6 +1,8 @@
 features:
   custom_errors:
     enabled: true
+  slack_notifications:
+    enabled: true
 
 mailer:
   delivery_method: 'smtp'
@@ -11,3 +13,8 @@ mailer:
     address: 'smtp.sendgrid.net'
     domain: 'heroku.com'
     authentication: 'plain'
+
+disqus:
+  shortname: 'agileventures'
+  api_key:  <%= ENV['DISQUS_API_KEY']  %>
+  secret_key:  <%= ENV['DISQUS_SECRET_KEY']  %>

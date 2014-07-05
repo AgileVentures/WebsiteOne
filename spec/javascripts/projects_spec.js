@@ -36,15 +36,4 @@ describe('projects', function () {
       expect(tabCall).toHaveBeenCalledWith('show');
     });
   });
-
-  describe('rendering hangout button', function() {
-
-    it('calls #renderHangoutButton', function() {
-      reloadScript('projects.js');
-      spyOn(WebsiteOne, 'renderHangoutButton');
-
-      WebsiteOne.Projects.init();
-      expect(WebsiteOne.renderHangoutButton).toHaveBeenCalled();
-    });
-  });
 });

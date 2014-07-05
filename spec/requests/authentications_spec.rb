@@ -16,7 +16,10 @@ describe 'OmniAuth authentication' do
           'info'      => { 'email' => "#{name}@mock.com"}
       }
     end
+    OmniAuth.config.logger.level = Logger::FATAL
   end
+
+  after { OmniAuth.config.logger.level = Logger::DEBUG }
 
   supported_auths.each do |provider, name|
     context 'for unregistered users' do
