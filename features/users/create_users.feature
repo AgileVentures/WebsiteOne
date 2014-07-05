@@ -47,4 +47,9 @@ Feature: As a developer
     Given I am on the "registration" page
     When I click "GitHub"
     Then I should see "Email can't be blank"
-    
+
+  @omniauth-without-email
+  Scenario: User signs up with a Google+ account having no public email (sad path)
+    Given I am on the "registration" page
+    When I click "Google+"
+    Then I should see "Email can't be blank"

@@ -1,2 +1,6 @@
+features:
+  slack_notifications:
+    enabled: false
+
 mailer:
   delivery_method: 'test'

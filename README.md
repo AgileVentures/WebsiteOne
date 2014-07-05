@@ -47,5 +47,6 @@ Here are some ways *you* can contribute:
 * by closing [issues][pivotal]
 * by [reviewing code][code-climate]
 
-
+Eager to get started? Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/wiki/Project-Setup-%28New-Users%29)
+page
 

@@ -35,8 +35,6 @@ Feature: Events
     And I should see "Upcoming schedule"
     And I should see "2014-02-03 at 07:00AM"
     And I should not see "Edit"
-    And I should not see "Add url"
-    And I should see "Back"
 
   Scenario: Show an event when a user is logged in
     Given I am logged in
@@ -47,26 +45,6 @@ Feature: Events
     And I should see "Upcoming schedule"
     And I should see "2014-02-03 at 07:00AM"
     And I should see "Edit"
-    And I should see "Add url"
-    And I should see "Back"
-
-  Scenario: Update url if valid
-    Given I am logged in
-    Given I am on the show page for event "Scrum"
-    And I click "Add url" button
-    And I fill in "Url" with "http://google.com"
-    And I click "Save" button
-    Then I should be on the event "Show" page for "Scrum"
-    And I should see "Event URL has been updated"
-
-  Scenario: Reject url update if invalid
-    Given I am logged in
-    Given I am on the show page for event "Scrum"
-    And I click "Add url" button
-    And I fill in "Url" with "http:/google.com"
-    And I click "Save" button
-    Then I should be on the event "Show" page for "Scrum"
-    And I should see "You have to provide a valid hangout url"
 
   Scenario: Render Next Scrum info on landing page
     And I am on the home page
