@@ -15,8 +15,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Create a hangout for a scrum event
     Given I am on the show page for event "Scrum"
     Then I should see hangout button
-    And I should see button "Edit hangout link manually"
-
+    And I should see "Edit hangout link"
 
   Scenario: Show hangout details
     Given the Hangout for event "Scrum" has been started with details:
@@ -31,16 +30,24 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | Title               |
         | Daily scrum meeting |
         | Updated             |
-        | 5 minutes           |
-    And I should see link "Click to join the hangout" with "http://hangout.test"
+        | 5 minutes ago       |
+    And I should see link "http://hangout.test" with "http://hangout.test"
+
+  Scenario: Show Live join link
+    Given the Hangout for event "Scrum" has been started with details:
+      | Hangout link | http://hangout.test |
+    And the hangout event is live
+    When I am on the show page for event "Scrum"
+    Then I should see link "EVENT IS LIVE" with "http://hangout.test"
 
 
+  @javascript
   Scenario: Show restart hangout
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
     When I am on the show page for event "Scrum"
-    Then the hangout button should not be visible
-    And I should see button "Click to restart the hangout"
+    Then I should see "Restart hangout"
+    But the hangout button should not be visible
 
 
   @javascript
@@ -48,34 +55,28 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
     And I am on the show page for event "Scrum"
-    When I click "Click to restart the hangout"
 
+    When I click the link "Restart hangout"
     Then I should see "Restarting Hangout would update the details of the hangout currently associated with this event."
-    And I should see button "Cancel"
     And the hangout button should be visible
-    And I should not see Hangouts details section
-    And I should not see "Click to restart the hangout"
 
-    When I click the "Cancel" button
-    Then I should see Hangouts details section
-    And I should see "Click to restart the hangout"
-    And the hangout button should not be visible
-
-  @javascript
-  Scenario: Cancel Edit URL
-    Given I am on the show page for event "Scrum"
-    When I click the "Edit hangout link manually" button
-    And I click the "Cancel" button
-    Then I should not see "Enter the link for manually created hangout:"
+    When I click the button "Close"
+    Then the hangout button should not be visible
 
   @javascript
    Scenario: Edit URL
      Given I am on the show page for event "Scrum"
-     When I click the "Edit hangout link manually" button
+     When I click the link "Edit hangout link"
      Then I should see button "Cancel"
 
      When I fill in "hangout_url" with "http://test.com"
      And I click the "Save" button
-     Then I should see link "Click to join the hangout" with "http://test.com"
+     Then I should see link "http://test.com" with "http://test.com"
 
+  @javascript
+  Scenario: Cancel Edit URL
+    Given I am on the show page for event "Scrum"
+    When I click the link "Edit hangout link"
+    And I click the button "Close"
+    Then I should not see button "Save"
 
