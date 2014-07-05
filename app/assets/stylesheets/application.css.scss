@@ -204,6 +204,10 @@ label {
     background: transparent;
   }
 
+  .panel-body.warning {
+    padding: 5px; 
+  }
+
   .btn:focus {
     outline: none;
   }
@@ -234,8 +238,6 @@ label {
   .hangout-btn {
 
     height: 30px !important;
-    margin-top: 5px;
-    margin-bottom: 5px;
     padding: 0;
   }
 }

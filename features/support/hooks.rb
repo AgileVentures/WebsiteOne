@@ -1,3 +1,11 @@
+Before ('@javascript') do
+  Capybara.default_wait_time = 5
+end
+
+Before ('@javascript') do
+  Capybara.default_wait_time = 2
+end
+
 Before('@enable-custom-errors') do
   Features.enable(:custom_errors)
 end
