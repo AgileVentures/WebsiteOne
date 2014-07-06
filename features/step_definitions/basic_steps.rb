@@ -110,6 +110,10 @@ Given /^the time now is "([^"]*)"$/ do |time|
   Time.stub(now: Time.parse(time))
 end
 
+Given /^the date is "([^"]*)"$/ do |jump_date|
+  Delorean.time_travel_to(DateTime.parse(jump_date))
+end
+
 # THEN steps
 
 Then /^I should see link "([^"]*)" with "([^"]*)"$/ do |link, url|
