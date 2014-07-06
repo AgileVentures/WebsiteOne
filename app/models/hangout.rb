@@ -6,7 +6,7 @@ class Hangout < ActiveRecord::Base
   end
 
   def live?
-    true
+    hangout_url.present?
   end
 
   # strong parameters
