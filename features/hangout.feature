@@ -32,13 +32,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | 5 minutes ago       |
     And I should see link "http://hangout.test" with "http://hangout.test"
 
-  Scenario: Show Live join link
-    Given the Hangout for event "Scrum" has been started with details:
-      | Hangout link | http://hangout.test |
-    And the hangout event is live
-    When I am on the show page for event "Scrum"
-    Then I should see link "EVENT IS LIVE" with "http://hangout.test"
-
   @javascript
   Scenario: Show restart hangout
     Given the Hangout for event "Scrum" has been started with details:
@@ -79,11 +72,15 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Then I should not see button "Save"
 
   @time-travel-step
-  Scenario: Render Join live event link on landing page
+  Scenario: Render Join live event link
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
       | Started at   | 07:00:00            |
-    Given the date is "2014/02/03 07:10:00 UTC"
+    And the date is "2014/02/03 07:10:00 UTC"
+
     When I am on the home page
     Then I should see "Scrum is live!"
     And I should see link "Click to join!" with "http://hangout.test"
+
+    When I am on the show page for event "Scrum"
+    Then I should see link "EVENT IS LIVE" with "http://hangout.test"
