@@ -14,7 +14,7 @@ describe 'events/index', type: :view do
                          repeats_every_n_weeks: nil,
                          repeat_ends: 'never',
                          repeat_ends_on: 'Mon, 17 Jun 2014',
-                         time_zone: 'Eastern Time (US & Canada)')
+                         time_zone: 'UTC')
 
     @event2 = stub_model(Event, name: 'Daily Scrum',
                          category: 'Scrum',
@@ -50,8 +50,9 @@ describe 'events/index', type: :view do
     end
 
       it 'renders Started at for an event in progress' do
-        Delorean.time_travel_to(Time.parse('Mon, 17 Feb 2013 09:10:00'))
-        expect(rendered).to have_content("Started at 09:00")
+        allow(Time).to receive(:now).and_return(Time.parse('09:10:00'))
+        render
+        expect(rendered).to have_content("Started at 9:00")
       end
   end
 

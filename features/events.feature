@@ -35,7 +35,7 @@ Feature: Events
     Then I should see "Scrum"
     And I should see "Daily scrum meeting"
     And I should see "Upcoming schedule"
-    And I should see "2014-02-03 at 07:00AM"
+    And I should see "Monday, 3rd Feb at 07:00am (UTC)"
     And I should not see "Edit"
 
   Scenario: Show an event when a user is logged in
@@ -46,7 +46,7 @@ Feature: Events
     Then I should see "Scrum"
     And I should see "Daily scrum meeting"
     And I should see "Upcoming schedule"
-    And I should see "2014-02-03 at 07:00AM"
+    And I should see "Monday, 3rd Feb at 07:00am (UTC)"
     And I should see "Edit"
 
   Scenario: Render Next Scrum info on landing page

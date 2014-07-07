@@ -22,14 +22,14 @@
           <h4>Upcoming schedule</h4>
         </div>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-8">
             <% @event_schedule.first(5).each do |e| %>
                 <%= current_occurrence_time(e) %>
                 <br/>
             <% end %>
           </div>
         <% if user_signed_in? %>
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <%= link_to 'Edit schedule', edit_event_path(@event), :class => 'btn btn-info' %>
           </div>
         <% end  %>

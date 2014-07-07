@@ -1,4 +1,5 @@
 require 'spec_helper'
+include EventHelper
 
 describe 'events/show', type: :view do
   before(:each) do
@@ -43,7 +44,7 @@ describe 'events/show', type: :view do
     render
     expect(rendered).to have_text('Upcoming schedule')
     @event_schedule.first(5).each do |e|
-      expect(rendered).to have_content(nested_hash_value(e, :time).strftime('%F at %I:%M%p'))
+      expect(rendered).to have_content(current_occurrence_time(e))
     end
   end
 
