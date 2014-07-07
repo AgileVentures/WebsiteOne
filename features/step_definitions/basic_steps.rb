@@ -70,6 +70,10 @@ When(/^I click the "([^"]*)" link$/) do |button|
   click_link button
 end
 
+When(/^I click the (link|button) "([^"]*)"$/) do |selector ,text|
+  page.find(:css, 'a', text: /#{text}/, visible: true).trigger('click')
+end
+
 When(/^I follow "([^"]*)"$/) do |text|
   click_link text
 end
@@ -104,6 +108,10 @@ end
 
 Given /^the time now is "([^"]*)"$/ do |time|
   Time.stub(now: Time.parse(time))
+end
+
+Given /^the date is "([^"]*)"$/ do |jump_date|
+  Delorean.time_travel_to(DateTime.parse(jump_date))
 end
 
 # THEN steps

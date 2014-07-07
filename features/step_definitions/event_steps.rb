@@ -49,6 +49,3 @@ Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
 
   end
 end
-Given(/^the date is "([^"]*)"$/) do |jump_date|
-  Delorean.time_travel_to(Time.parse(jump_date))
-end
