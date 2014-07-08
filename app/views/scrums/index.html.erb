@@ -17,37 +17,8 @@
     </div>
   </div>
 </div>
-
+<ul class="timeline">
   <% @scrums.each_slice(2) do |videos| %>
-      <ul class="timeline">
-        <li>
-          <div class="timeline-badge"><i class="glyphicon glyphicon-film"></i></div>
-          <div class="timeline-panel" style="background-color: lemonchiffon; padding: 10px" >
-            <div class="timeline-heading">
-              <h4 class="timeline-title">
-                <%= scrum_link videos.first %>
-                <%= videos.first[:title] %>
-              </h4>
-              <p>
-                <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.first[:published].to_date %></small>
-              </p>
-            </div>
-          </div>
-        </li>
-        <li class="timeline-inverted">
-          <div class="timeline-badge warning"><i class="glyphicon glyphicon-film"></i></div>
-          <div class="timeline-panel" style="background-color: lemonchiffon; padding: 10px" >
-            <div class="timeline-heading">
-              <h4 class="timeline-title">
-                <%= scrum_link videos.last %>
-                <%= videos.last[:title] %>
-              </h4>
-
-              <p>
-                <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.last[:published].to_s(:db) %></small>
-              </p>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <%= render :partial => 'scrums/scrum', :locals => { :videos => videos }%>
   <% end %>
+</ul>
