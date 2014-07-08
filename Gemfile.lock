@@ -315,6 +315,10 @@ GEM
       rspec-core (~> 2.99.0)
       rspec-expectations (~> 2.99.0)
       rspec-mocks (~> 2.99.0)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-collection_matchers (1.0.0)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (2.99.0)
@@ -479,6 +483,7 @@ DEPENDENCIES
   rails_config
   redcarpet
   rspec (< 3.0)
+  rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 4.0.0)
   selenium-webdriver

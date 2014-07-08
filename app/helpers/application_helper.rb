@@ -1,6 +1,7 @@
 module ApplicationHelper
 
   include ArticlesHelper
+  include DisqusHelper
 
   def user_details(id)
     user = User.find_by_id(id)

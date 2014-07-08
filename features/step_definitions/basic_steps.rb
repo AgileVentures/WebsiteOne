@@ -104,8 +104,15 @@ When /^I accept the warning popup$/ do
   page.driver.browser.accept_js_confirms
 end
 
+Given /^the time now is "([^"]*)"$/ do |time|
+  Time.stub(now: Time.parse(time))
+end
 
 # THEN steps
+
+Then /^I should see link "([^"]*)" with "([^"]*)"$/ do |link, url|
+  expect(page).to have_link(link, href: url)
+end
 
 Then /^I should be on the "([^"]*)" page$/ do |page|
   expect(current_path).to eq path_to(page)

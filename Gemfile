@@ -67,6 +67,7 @@ end
 
 group :development, :test do
   gem 'rspec', '<3.0' #locking down below ver 3.0.
+  gem 'rspec-activemodel-mocks'
   gem 'rspec-rails' #unit testing
   gem 'awesome_print' # plays well with pry
   gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
