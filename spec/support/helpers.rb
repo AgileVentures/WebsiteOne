@@ -70,6 +70,9 @@ module Helpers
     end
   end
 
+  def view_spec_page
+    File.open('/tmp/test.html','w') { |file| file.write(rendered) }; `open '/tmp/test.html'`
+  end
 end
 
 RSpec::Matchers.define :have_default_cc_addresses do
