@@ -7,6 +7,8 @@ features:
       exception_recipients: ['info@agileventures.org']
   disqus:
     enabled: true
+  welcome_email:
+    enabled: true
 
 mailer:
   delivery_method: 'test'
