@@ -3,3 +3,5 @@ features:
     enabled: false
   slack_notifications:
     enabled: false
+  welcome_email:
+    enabled: false
