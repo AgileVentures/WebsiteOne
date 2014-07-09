@@ -134,7 +134,7 @@ describe Event do
     end
   end
 
-  describe 'Event#next_occurence' do
+  describe 'Event#next_occurences' do
     let(:event) do
       stub_model(Event,
                  name: 'Spec Scrum',
@@ -157,6 +157,16 @@ describe Event do
     it 'should return the next occurence of the event' do
       Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
       expect(next_occurrence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
+    end
+
+    it 'includes the event that has been started within the last 30 minutes' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:50:00 UTC'))
+      expect(next_occurrence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
+    end
+
+    it 'does not include the event that has been started within more than 30 minutes ago' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 11:01:00 UTC'))
+      expect(next_occurrence_time).to eq(Time.parse('2014-03-08 10:30:00 UTC'))
     end
 
     context 'with input arguments' do
