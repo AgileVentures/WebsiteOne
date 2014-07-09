@@ -70,6 +70,10 @@ When(/^I click the "([^"]*)" link$/) do |button|
   click_link button
 end
 
+When(/^I click the (link|button) "([^"]*)"$/) do |selector ,text|
+  page.find(:css, 'a', text: /#{text}/, visible: true).trigger('click')
+end
+
 When(/^I follow "([^"]*)"$/) do |text|
   click_link text
 end
