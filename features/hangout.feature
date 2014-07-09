@@ -80,3 +80,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
     When I am on the show page for event "Scrum"
     Then I should see link "EVENT IS LIVE" with "http://hangout.test"
+
+    When I am on the home page
+    Then I should see "Scrum is live!"
+    And I should see link "Click to join!" with "http://hangout.test"
