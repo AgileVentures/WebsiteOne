@@ -34,15 +34,19 @@ describe('WebsiteOne ProgressBar module', function() {
     });
 
     it('should attach NProgress.done to "page:change"', function() {
-      var call = onSpy.calls.all()[1];
-      expect(call.args[0]).toEqual('page:change');
-      expect(call.args[1]).toEqual(NProgress.done);
+      var relevantCalls = getCalls().filter(function(call) {
+        return call.eventName === 'page:change';
+      });
+      expect(relevantCalls.length).toEqual(1);
+      expect(relevantCalls[0].callback).toEqual(NProgress.done);
     });
 
     it('should attach NProgress.remove to "page:restore"', function() {
-      var call = onSpy.calls.all()[2];
-      expect(call.args[0]).toEqual('page:restore');
-      expect(call.args[1]).toEqual(NProgress.remove);
+      var relevantCalls = getCalls().filter(function(call) {
+        return call.eventName === 'page:restore';
+      });
+      expect(relevantCalls.length).toEqual(1);
+      expect(relevantCalls[0].callback).toEqual(NProgress.remove);
     });
   });
 });
