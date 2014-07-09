@@ -1,11 +1,10 @@
-/*!
-
- *= require_self
- *= require font-awesome
- *= require_tree
- *= require_directory ./layout
- */
 @import "bootstrap";
+@import "font-awesome";
+@import "variables";
+@import "mixins";
+
+@import "global/*";
+@import "layout/*";
 
 #main {
   padding-top: 3em;
@@ -137,5 +136,3 @@ label {
     margin-bottom: 10px !important;
   }
 }
-
-
