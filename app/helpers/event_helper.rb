@@ -17,7 +17,8 @@ module EventHelper
 
     return nil if time.nil?
 
-    time.strftime("%F at %I:%M%p")
+    event_date = time.strftime("%A, #{time.day.ordinalize} %b")
+    "#{event_date} at #{time.strftime("%I:%M%P")} (UTC)"
   end
   
   def topic(event, event_schedule)
