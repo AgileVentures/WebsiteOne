@@ -99,3 +99,9 @@ Feature: Events
     And I click the "Save" button
     Then I should be on the Events "Create" page
     And I should see "Name can't be blank"
+
+  Scenario: Show events which are in progress
+    Given the date is "2014/02/03 07:10:00 UTC"
+    And I am on Events index page
+    Then I should see "Scrum"
+    And I should see "Started at 7:00 UTC"
