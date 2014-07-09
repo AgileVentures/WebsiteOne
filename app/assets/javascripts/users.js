@@ -46,4 +46,3 @@ WebsiteOne.define('Users', function() {
     selectVideo: selectVideo
   }
 });
-
