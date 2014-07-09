@@ -1,8 +1,10 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
     super
-    session[:omniauth] = nil unless @user.new_record?
-    Mailer.send_welcome_message(@user).deliver unless @user.new_record?
+    unless @user.new_record?
+      session[:omniauth] = nil
+      Mailer.send_welcome_message(@user).deliver if Features.enabled?(:welcome_email)
+    end
   end
 
   def update
