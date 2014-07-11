@@ -71,7 +71,12 @@ module Helpers
   end
 
   def view_spec_page
-    File.open('/tmp/test.html','w') { |file| file.write(rendered) }; `open '/tmp/test.html'`
+    require 'launchy'
+    filename = "tmp/view_spec_render-#{Time.now.to_i}.html"
+    File.open(filename, 'w') { |file| file.write(rendered) }
+    Launchy.open filename
+  rescue LoadError
+    warn 'Sorry, you need to install launchy to open pages: `gem install launchy`'
   end
 end
 

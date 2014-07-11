@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :document do
     sequence(:title) {|n| "Title #{n}"}
     sequence(:body) {|n| "MyText #{n}"}
-    versions { [FactoryGirl.create(:version)] }
+    versions { [FactoryGirl.build_stubbed(:version)] }
     project
   end
 end

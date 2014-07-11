@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe 'documents/new', type: :view do
   before(:each) do
-    @project = FactoryGirl.create(:project)
+    @project = FactoryGirl.build_stubbed(:project)
     @document = assign(:document, Document.new)
   end
 
   context 'when user is signed in' do
     before do
-      view.stub(:user_signed_in?).and_return(true)
+      allow(view).to receive(:user_signed_in?).and_return(true)
     end
 
     it 'renders new document form' do
