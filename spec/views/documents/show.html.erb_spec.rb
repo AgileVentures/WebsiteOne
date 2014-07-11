@@ -2,13 +2,11 @@ require 'spec_helper'
 
 describe 'documents/show', type: :view do
 
-  subject(:show_page) { rendered }
-
-  let(:user) { FactoryGirl.create(:user) }
-  let(:project) { FactoryGirl.create(:project) }
-  let(:document) { FactoryGirl.create(:document, user: user) }
-  let(:version) { FactoryGirl.create(:version, whodunnit: user.id, item_id: document.id) }
-  let(:document_child) { FactoryGirl.create(:document, user: user, parent_id: document.id) }
+  let(:user) { FactoryGirl.build_stubbed(:user) }
+  let(:project) { FactoryGirl.build_stubbed(:project) }
+  let(:document) { FactoryGirl.build_stubbed(:document, user: user, project_id: project.id) }
+  let(:version) { FactoryGirl.build_stubbed(:version, whodunnit: user.id, item_id: document.id) }
+  let(:document_child) { FactoryGirl.build_stubbed(:document, user: user, parent: document, project_id: project.id) }
 
   before(:each) do
     assign :document, document
@@ -18,6 +16,8 @@ describe 'documents/show', type: :view do
 
     allow(controller).to receive(:user_signed_in?).and_return(true)
     allow(controller).to receive(:current_user).and_return(user)
+    allow(project).to receive(:friendly_id).and_return(project.title.parameterize)
+    allow(document).to receive(:friendly_id).and_return(document.title.parameterize)
   end
 
   context 'when document is root' do
@@ -42,15 +42,15 @@ describe 'documents/show', type: :view do
 
     context 'when user is signed-in' do
 
+      before { render }
+
       it 'should render an Edit link' do
-        render
         rendered.within('#edit_link') do |link|
           expect(link).to have_css('i[class="fa fa-pencil-square-o"]')
         end
       end
 
       it 'should render a New Sub-document link' do
-        render
         rendered.within('#new_document_link') do |link|
           expect(link).to have_css('i[class="fa fa-file-text-o"]')
         end
@@ -61,16 +61,15 @@ describe 'documents/show', type: :view do
       before do
         assign :document, document_child
         assign :children, []
+        render
       end
 
       it 'should render title and content of document' do
-        render
         expect(rendered).to have_content document_child.title
         expect(rendered).to have_content document_child.body
       end
 
       it 'should not render New Sub-document link' do
-        render
         expect(rendered).not_to have_css '#new_document_link'
       end
     end
