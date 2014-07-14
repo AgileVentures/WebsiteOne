@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   #after_create Mailer.send_welcome_mail()
   extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  friendly_id :display_name, use: :slugged
 
   validates :email, uniqueness: true
   after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip }
@@ -75,10 +75,6 @@ class User < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     self.slug.nil? or ((self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?)
-  end
-
-  def slug_candidates
-    [ :display_name, :email_designator ]
   end
 
   def self.search(params)

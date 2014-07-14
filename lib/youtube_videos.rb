@@ -2,7 +2,14 @@ module YoutubeVideos
   extend self
 
   def for(object)
-    self.send("#{object.class.to_s.downcase}_videos", object)
+    case object
+    when Project
+      project_videos(object)
+    when User
+      user_videos(object)
+    else
+      raise ArgumentError, 'Invalid type passed to the method'
+    end
   end
 
   private
@@ -55,6 +62,8 @@ module YoutubeVideos
     json = JSON.load(response) || {}
     videos = json.fetch('feed', {}).fetch('entry', [])
     videos.map { |hash| beautify_youtube_response(hash) }
+  rescue JSON::ParserError
+    raise $!, 'Invalid JSON returned from Youtube', $!.backtrace
   end
 
   def filter_response(response, tags, members)
