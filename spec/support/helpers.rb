@@ -71,3 +71,9 @@ module Helpers
   end
 
 end
+
+RSpec::Matchers.define :cc_sam do
+  match do |mail|
+    mail.cc && (mail.cc.include? 'sam@agileventures.org')
+  end
+end
