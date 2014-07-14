@@ -57,7 +57,7 @@ describe YoutubeVideos do
       expect(videos_dates).to eq videos_dates.sort.reverse
     end
   end
-  
+
   describe "parse_response(json)" do
     it 'parses youtube response into an array of hashes' do
       response = File.read('spec/fixtures/youtube_user_response.json')
@@ -68,6 +68,10 @@ describe YoutubeVideos do
               :content => "WebsiteOne - Pairing session - refactoring authentication controller",
               :url => "http://www.youtube.com/watch?v=3Hi41S5Tp54&feature=youtube_gdata"}
       expect(subject.send(:parse_response, response).first).to eq(hash)
+    end
+
+    it 're-raises error with proper message when invalid json is returned' do
+      expect { subject.send(:parse_response, '{') }.to raise_error(JSON::ParserError, 'Invalid JSON returned from Youtube')
     end
   end
 

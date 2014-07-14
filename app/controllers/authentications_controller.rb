@@ -84,7 +84,7 @@ class AuthenticationsController < ApplicationController
       current_user.save
     end
 
-    redirect_to(request.env['omniauth.origin'] || root_path)
+    redirect_to(request.env['omniauth.origin'] || edit_user_registration_path)
   end
 
   def unlink_from_youtube
