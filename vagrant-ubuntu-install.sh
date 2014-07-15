@@ -62,7 +62,7 @@ curl -L https://npmjs.org/install.sh | sudo sh
 # adds some important Rails dependencies
 # It is largely incompatible with Ubuntu 12.4 (precise) but the parts that are needed work
 wget https://github.com/AgileVentures/setup-scripts/raw/develop/scripts/rails_setup.sh
-HEADLESS=true WITH_PHANTOMJS=true REQUIRED_RUBY=2.1.11  source rails_setup.sh
+HEADLESS=true WITH_PHANTOMJS=true REQUIRED_RUBY=2.1.1 source rails_setup.sh
 
 cd /WebsiteOne
 
