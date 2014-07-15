@@ -221,8 +221,8 @@ describe ArticlesController do
       controller.stub(:current_user).and_return(@user)
       patch :preview, @params
       assigns(:author).should eq @user
-      expect(assigns(:article).send(:created_at)).to_not be_nil
-      expect(assigns(:article).send(:created_at)).to_not be_nil
+      expect(assigns(:article).created_at).to_not be_nil
+      expect(assigns(:article).created_at).to_not be_nil
     end
   end
 end
