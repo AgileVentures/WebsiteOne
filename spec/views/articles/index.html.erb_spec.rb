@@ -7,8 +7,8 @@ describe 'articles/index' do
     @user2 = build_stubbed(:user, first_name: 'Bryan')
 
     @articles = [
-      create(:article, title: 'Ruby article',   content: 'My Ruby content',   tag_list: ["Ruby", "Rails"],        user: @user1, created_at: Time.now),
-      create(:article, title: 'jQuery article', content: 'My jQuery Content', tag_list: ["Javascript", "jQuery"], user: @user2, created_at: Time.now)
+      build_stubbed(:article, title: 'Ruby article',   content: 'My Ruby content',   tag_list: ["Ruby", "Rails"],        user: @user1, created_at: Time.now),
+      build_stubbed(:article, title: 'jQuery article', content: 'My jQuery Content', tag_list: ["Javascript", "jQuery"], user: @user2, created_at: Time.now)
     ]
   end
 
