@@ -24,5 +24,4 @@ describe 'articles/index' do
       expect(article).to have_text('My jQuery Content')
     end
   end
-
 end
