@@ -29,7 +29,7 @@ describe ConsoleMailer do
     end
 
     it 'adds cc to sam' do
-      expect(mail).to cc_sam
+      expect(mail).to have_default_cc_addresses
     end
 
   end

@@ -72,7 +72,7 @@ module Helpers
 
 end
 
-RSpec::Matchers.define :cc_sam do
+RSpec::Matchers.define :have_default_cc_addresses do
   match do |mail|
     mail.cc && (mail.cc.include? 'support@agileventures.org')
   end
