@@ -74,6 +74,6 @@ end
 
 RSpec::Matchers.define :cc_sam do
   match do |mail|
-    mail.cc && (mail.cc.include? 'sam@agileventures.org')
+    mail.cc && (mail.cc.include? 'support@agileventures.org')
   end
 end
