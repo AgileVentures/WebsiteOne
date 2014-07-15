@@ -53,12 +53,15 @@
         </div>
 
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav nav-justified">
+          <ul class="nav navbar-nav">
             <li><%= link_to 'About', static_page_path('About Us'), class: is_in_static_page?('About Us') ? 'active' : ''%></li>
             <li><%= link_to 'Projects', projects_path, class: active_if_controller_is('projects') %></li>
             <li><%= link_to 'Members', users_path, class: active_if_controller_is('users') %></li>
             <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
             <li><%= link_to 'Events', events_path, class: active_if_controller_is('events') %></li>
+          </ul>
+          <ul class="nav navbar-nav" style="float: right;">
+            <li><%= link_to 'Getting started', static_page_path('Getting started'), class: is_in_static_page?('Getting started') ? 'active' : ''%></li>
           </ul>
         </div>
       </div>
