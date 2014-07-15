@@ -60,7 +60,7 @@ p, a, ul, li {
   line-height: 1.4em;
 }
 
-a {
+a, .link {
   color: $link-color;
   @include css-transition(color 0.3s ease);
 
