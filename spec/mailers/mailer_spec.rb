@@ -10,7 +10,7 @@ describe Mailer do
       expect(mail.to).to include('info@agileventures.org')
       expect(mail.subject).to include('WebsiteOne Contact Form')
       expect(mail.body.raw_source).to include('Love your site!')
-      expect(mail).to cc_sam
+      expect(mail).to have_default_cc_addresses
     end
     it 'forms a confirmation email for contact_form' do
       mail = Mailer.contact_form_confirmation(valid_params)
@@ -18,7 +18,7 @@ describe Mailer do
       expect(mail.to).to include('my@email.com')
       expect(mail.subject).to include('WebsiteOne Contact Form')
       expect(mail.body.raw_source).to include('Thank you for your feedback')
-      expect(mail).to cc_sam
+      expect(mail).to have_default_cc_addresses
     end
   end
 
@@ -37,7 +37,7 @@ describe Mailer do
       expect(mail.to).to include('candice@clemens.com')
       expect(mail.subject).to include('Welcome to AgileVentures.org')
       expect(mail.body.raw_source).to include('Thanks for joining our community! ')
-      expect(mail).to cc_sam
+      expect(mail).to have_default_cc_addresses
     end
   end
 
@@ -57,7 +57,7 @@ describe Mailer do
       expect(mail.to).to include('marcelo@whatever.com')
       expect(mail.subject).to include(['message from', valid_params[:name]].join(' '))
       expect(mail.body.raw_source).to include(valid_params[:message])
-      expect(mail).to cc_sam
+      expect(mail).to have_default_cc_addresses
     end
   end
 end
