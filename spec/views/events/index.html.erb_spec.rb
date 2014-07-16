@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe 'events/index', type: :view do
   before(:each) do
-    ENV['TZ'] = 'UTC'
     Delorean.time_travel_to(Time.parse('Mon, 17 Feb 2013'))
-    @event1 = stub_model(Event, name: 'EuroAsia Scrum',
+    @event1 = FactoryGirl.build_stubbed(:event, name: 'EuroAsia Scrum',
                          category: 'Scrum',
                          description: 'EuroAsia Scrum and Pair hookup',
                          event_date: 'Mon, 17 Feb 2013',
@@ -16,7 +15,7 @@ describe 'events/index', type: :view do
                          repeat_ends_on: 'Mon, 17 Jun 2014',
                          time_zone: 'UTC')
 
-    @event2 = stub_model(Event, name: 'Daily Scrum',
+    @event2 = FactoryGirl.build_stubbed(:event, name: 'Daily Scrum',
                          category: 'Scrum',
                          description: 'Daily Scrum and Pair hookup',
                          event_date: 'Mon, 17 Feb 2013',
@@ -31,10 +30,6 @@ describe 'events/index', type: :view do
 
     @events = [@event1.next_occurrences, @event2.next_occurrences]
     assign(:events, @events.flatten!)
-  end
-
-  after (:each) do
-    Delorean.back_to_the_present
   end
 
   context 'for signed in and not signed in users' do
