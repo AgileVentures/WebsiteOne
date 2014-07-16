@@ -2,7 +2,7 @@ class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
 
   def create
-    if request.env['omniauth.params']['youtube']
+    if request.env['omniauth.params']['youtube'] && current_user
       link_to_youtube and return
     end
 
