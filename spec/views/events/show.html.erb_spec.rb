@@ -3,25 +3,10 @@ include EventHelper
 
 describe 'events/show', type: :view do
   before(:each) do
-    ENV['TZ'] = 'UTC'
-    Delorean.time_travel_to(Time.parse('Mon, 17 Feb 2013'))
-    @event = stub_model(Event, name: 'EuroAsia Scrum',
-                        category: 'Scrum',
+    @event = FactoryGirl.build_stubbed(Event, name: 'EuroAsia Scrum',
                         description: 'EuroAsia Scrum and Pair hookup',
-                        event_date: 'Mon, 17 Feb 2013',
-                        start_time: '2000-01-01 09:00:00 UTC',
-                        end_time: '2000-01-01 09:30:00 UTC',
-                        updated_at: Time.now,
-                        repeats: 'daily',
-                        repeats_every_n_days: 1,
-                        repeat_ends: 'never',
-                        repeat_ends_on: 'Mon, 17 Jun 2014',
                         time_zone: 'Eastern Time (US & Canada)')
     @event_schedule = @event.next_occurrences
-  end
-
-  after (:each) do
-    Delorean.back_to_the_present
   end
 
   it 'should display event information' do
@@ -56,13 +41,14 @@ describe 'events/show', type: :view do
 
   describe 'Hangouts' do
     before(:each) do
-      @hangout = double(Hangout, event_id: 375,
+      @hangout = Hangout.new(event_id: 375,
                         hangout_url: 'http://hangout.test',
-                        updated_at: Time.parse('10:25:00'),
-                        started?: true,
-                        live?: true)
+                        updated_at: Time.parse('10:25:00'))
+
+      allow(@hangout).to receive(:started?).and_return true
+      allow(@hangout).to receive(:live?).and_return true
+
       @event.url = @hangout.hangout_url
-      assign :hangout, @hangout
     end
 
     context 'for signed in users' do
