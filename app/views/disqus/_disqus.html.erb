@@ -1,7 +1,7 @@
 <% if Features.enabled?(:disqus) %>
   <%= get_disqus_sso(current_user) if user_signed_in?%>
 
-  <div id="disqus_thread" 
+  <div id="disqus_thread"
   data-disqus-shortname='<%= Settings.disqus.shortname %>' 
   data-disqus-identifier='<%= entity.friendly_id %>' 
   data-disqus-title='<%= entity.title %>' 
