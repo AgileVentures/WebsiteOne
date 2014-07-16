@@ -60,7 +60,7 @@
             <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
             <li><%= link_to 'Events', events_path, class: active_if_controller_is('events') %></li>
           </ul>
-          <ul class="nav navbar-nav" style="float: right;">
+          <ul class="nav navbar-nav getting-started-nav">
             <li><%= link_to 'Getting started', static_page_path('Getting started'), class: is_in_static_page?('Getting started') ? 'active' : ''%></li>
           </ul>
         </div>
