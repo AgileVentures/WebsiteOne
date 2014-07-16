@@ -14,8 +14,9 @@
       <% slice.each do |instance| %>
         <% event = instance[:event] %>
         <% time = instance[:time] %>
-        <% display_time = time < Time.now ? 'Started at' : 'Starts at ' %>
-        <% display_time += event.start_time_with_timezone.strftime('%k:%M %Z') %>
+        <% prefix = time < Time.now ? 'Started at ' : 'Starts at ' %>
+        <% start_time = event.start_time_with_timezone.strftime('%k:%M %Z') %>
+        <% display_time = "#{prefix} #{start_time}" %>
         <% display_month = time.strftime('%B') %>
         <% display_date = time.strftime('%d') %>
 

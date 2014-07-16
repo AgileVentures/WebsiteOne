@@ -2,26 +2,13 @@ require 'spec_helper'
 
 def fix_time_at(time)
   fix_time = Time.parse(time)
-  Time.stub(now: fix_time)
+  allow(Time).to receive(:now).and_return(fix_time)
 end
 
 describe 'visitors/index.html.erb' do
   before :each do
-    @default_tz = ENV['TZ']
-    ENV['TZ'] = 'UTC'
     @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', next_occurrence_time: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
-    assign :event, @event
   end
-
-  after :each do
-    Delorean.back_to_the_present
-    ENV['TZ'] = @default_tz
-  end
-
-  # it 'should render round banners' do
-  #   render
-  #   expect(rendered).to render_template(:partial => '_round_banners')
-  # end
 
   context 'event is planned for next day' do
     before :each do
