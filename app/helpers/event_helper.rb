@@ -14,7 +14,6 @@ module EventHelper
 
   def current_occurrence_time(event)
     time = nested_hash_value(event, :time)
-
     return nil if time.nil?
 
     event_date = time.strftime("%A, #{time.day.ordinalize} %b")
