@@ -28,10 +28,12 @@
 </div>
 
 
-<div id="document_body" data-mercury="<%= @document.format == 'markdown'? 'markdown' : 'full' %>" data-type="editable">
-  <div>
-    <%= @document.format == 'markdown'? from_markdown(@document.body) : clean_html(@document.body) %>
-  </div>
+<div id="document_body_html" data-mercury="full" data-type="editable" class="<%= 'hidden' if @document.format == 'markdown' %>">
+    <%= inside_mercury? ? @document.body :  clean_html(@document.body) %>
+</div>
+<div id="document_body_md" data-mercury="markdown" data-type="editable" class="<%= 'hidden' unless @document.format == 'markdown' %>">
+    <%= inside_mercury? ? @document.body :  from_markdown(@document.body) %>
+</div>
 
 <% if user_signed_in? %>
   <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>

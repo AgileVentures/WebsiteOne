@@ -54,18 +54,42 @@ describe 'documents/show', type: :view do
       expect(rendered).to have_content document_child.title
     end
 
-    it 'sets Mercury editable region format to markdown' do
-      @document.format = 'markdown'
-      render
-      expect(rendered).to have_css('#document_body[data-mercury="markdown"]')
+    context 'document format is not Markdown' do
+      it 'shows html edit section' do
+        @document.format = ''
+        render
+        expect(rendered).to have_css('#document_body_html')
+        expect(rendered).to have_css('#document_body_md.hidden')
+      end
+
+      it 'renders html content' do
+        @document.body = '<b>Body Text</b>'
+        @document.format = 'markdown'
+        render
+        rendered.within('#document_body_md') do |section|
+          expect(section).to have_content('Body Text')
+          expect(section).not_to have_content('<b>Body Text</b>')
+        end
+      end
     end
 
-    it 'renders document in Markdown format' do
-      @document.body = '**Body Text**'
-      @document.format = 'markdown'
-      render
-      expect(rendered).to have_content('Body Text')
-      expect(rendered).not_to have_content('**Body Text**')
+    context 'document format is Markdown' do
+      it 'shows Markdown edit section' do
+        @document.format = 'markdown'
+        render
+        expect(rendered).to have_css('#document_body_html.hidden')
+        expect(rendered).to have_css('#document_body_md')
+      end
+
+      it 'renders Markdown content' do
+        @document.body = '**Body Text**'
+        @document.format = 'markdown'
+        render
+        rendered.within('#document_body_md') do |section|
+          expect(section).to have_content('Body Text')
+          expect(section).not_to have_content('**Body Text**')
+        end
+      end
     end
 
     it 'should not render document revisions history for new documents' do
