@@ -92,7 +92,6 @@ ActiveRecord::Schema.define(version: 20140716134701) do
     t.string   "hangout_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "category"
   end
 
   create_table "projects", force: true do |t|
@@ -103,6 +102,8 @@ ActiveRecord::Schema.define(version: 20140716134701) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
+    t.string   "github_owner"
+    t.string   "github_repo"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
   end
