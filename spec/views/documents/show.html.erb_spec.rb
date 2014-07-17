@@ -9,10 +9,36 @@ describe 'documents/show', type: :view do
   let(:document_child) { FactoryGirl.build_stubbed(:document, user: user, parent: document, project_id: project.id) }
 
   before(:each) do
-    assign :document, document
-    assign :project, project
-    assign :document_child, document_child
-    assign :children, [ document_child ]
+    @user = FactoryGirl.build_stubbed(:user, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org')
+    @project = Project.create(id: 1 , title:  'Project1', created_at:  Time.now)
+    @version = PaperTrail::Version.new( item_type: "Document",
+                                       event: "create",
+                                       whodunnit: @user.id,
+                                       object: nil,
+                                       created_at: "2014-02-25 11:50:56"
+                                      )
+    @document = FactoryGirl.build_stubbed(:document,
+                                          :user => @user,
+                                          :id => 1,
+                                          :title => "Title",
+                                          :body => "Content",
+                                          :project_id => 1 ,
+                                          :created_at => Time.now,
+                                          :versions => [@version],
+                                         )
+
+    @document_child = FactoryGirl.build_stubbed(:document,
+                                 :user => @user,
+                                 :title => "Child Title",
+                                 :body => "Child content",
+                                 :project_id => 1,
+                                 :parent_id => 1,
+                                 :created_at => Time.now,
+                                 :versions => [@version]
+                                )
+
+    allow(view).to receive(:created_by).and_return(@created_by)
+    assign :children, [ @document_child ]
 
     allow(controller).to receive(:user_signed_in?).and_return(true)
     allow(controller).to receive(:current_user).and_return(user)
@@ -20,16 +46,29 @@ describe 'documents/show', type: :view do
     allow(document).to receive(:friendly_id).and_return(document.title.parameterize)
   end
 
-  context 'when document is root' do
-
-    it 'should render title, content and child of root document' do
+  context 'document is root' do
+    it 'render content and child of root document' do
       render
       expect(rendered).to have_content document.title
       expect(rendered).to have_content document.body
       expect(rendered).to have_content document_child.title
     end
 
-    it 'should not render document revision history for new documents' do
+    it 'sets Mercury editable region format to markdown' do
+      @document.format = 'markdown'
+      render
+      expect(rendered).to have_css('#document_body[data-mercury="markdown"]')
+    end
+
+    it 'renders document in Markdown format' do
+      @document.body = '**Body Text**'
+      @document.format = 'markdown'
+      render
+      expect(rendered).to have_content('Body Text')
+      expect(rendered).not_to have_content('**Body Text**')
+    end
+
+    it 'should not render document revisions history for new documents' do
       render
       expect(rendered).to_not have_text 'Revisions'
     end
@@ -40,10 +79,7 @@ describe 'documents/show', type: :view do
       expect(rendered).to have_text 'Revisions'
     end
 
-    context 'when user is signed-in' do
-
-      before { render }
-
+    context 'user signed-in' do
       it 'should render an Edit link' do
         rendered.within('#edit_link') do |link|
           expect(link).to have_css('i[class="fa fa-pencil-square-o"]')
@@ -75,7 +111,7 @@ describe 'documents/show', type: :view do
     end
   end
 
-  describe 'rendering Disqus section', type: :view do
+  describe 'renders Disqus section', type: :view do
 
     it_behaves_like 'commentable with Disqus' do
       let(:entity) { document }
