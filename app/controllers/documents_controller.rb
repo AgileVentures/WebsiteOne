@@ -55,8 +55,12 @@ class DocumentsController < ApplicationController
 
   def mercury_update
     @document = Document.friendly.find(params[:document_id])
-    if @document.update_attributes(title: params[:content][:document_title][:value],
-                                   body: params[:content][:document_body][:value])
+
+    body_container = (@document.format == 'markdown') ? :document_body_md : :document_body_html
+    body = params[:content][body_container][:value]
+    title = params[:content][:document_title][:value]
+
+    if @document.update!(title: title, body: body)
       render text: '' # So mercury knows it is successful
     end
   end
