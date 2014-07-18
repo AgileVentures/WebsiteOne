@@ -71,3 +71,9 @@ module Helpers
   end
 
 end
+
+RSpec::Matchers.define :have_default_cc_addresses do
+  match do |mail|
+    mail.cc && (mail.cc.include? 'support@agileventures.org')
+  end
+end

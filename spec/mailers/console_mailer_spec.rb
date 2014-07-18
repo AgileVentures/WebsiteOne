@@ -28,6 +28,10 @@ describe ConsoleMailer do
       mail.body.encoded.should match('my multiline')
     end
 
+    it 'adds cc to sam' do
+      expect(mail).to have_default_cc_addresses
+    end
+
   end
 
 end
