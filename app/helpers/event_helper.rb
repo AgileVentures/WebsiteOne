@@ -12,12 +12,16 @@ module EventHelper
     end
   end
 
-  def current_occurrence_time(event)
+  def current_occurrence_time(event, data=false)
     time = nested_hash_value(event, :time)
     return nil if time.nil?
 
     event_date = time.strftime("%A, #{time.day.ordinalize} %b")
-    "#{event_date} at #{time.strftime("%I:%M%P")} (UTC)"
+    if data
+      "#{time.strftime("%F %I:%M %p")} UTC" # parseable by JS; for embedding as 'data' in HTML tags
+    else
+      "#{event_date} at #{time.strftime("%I:%M%P")} (UTC)" # user-friendly for direct display
+    end
   end
   
   def topic(event, event_schedule)
