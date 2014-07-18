@@ -1,10 +1,18 @@
 require 'spec_helper'
 
 describe 'articles/show', type: :view do
-  before(:each) do
+  before :each do
     @user = build_stubbed(:user, first_name: 'Thomas')
     @author = @user
-    @article = create(:article)
+    @article = build_stubbed(:article,
+              	   id: 555,
+		   slug: 'friendly_id',
+		   title: "Ruby article",
+		   tag_list: ["Ruby", "Rails"],
+		   user: @user,
+		   created_at: Time.now,
+		   updated_at: Time.now
+		   )
   end
 
   context 'user is not signed in' do
