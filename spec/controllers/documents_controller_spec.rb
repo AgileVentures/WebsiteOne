@@ -7,8 +7,8 @@ describe DocumentsController do
   let(:valid_session) { {} }
   let(:valid_attributes) do 
     { 'title' => 'MyString',
-    'body' => 'MyText',
-    'user_id' => "#{user.id}" }
+      'body' => 'MyText',
+      'user_id' => "#{user.id}" }
   end
 
   before(:each) do
@@ -120,38 +120,34 @@ describe DocumentsController do
   end
 
   describe '#mercury_update', type: :controller do
-    before do
-      @params = {"document_title"=>
-                      {"type"=>"simple", "value"=>"Title"},
-                    "document_body_html"=>
-                      {"type"=>"full", "value"=>"Html"},
-                    "document_body_md"=>
-                      {"type"=>"markdown", "value"=>"Markdown"} }
-    end
+      let(:document) { FactoryGirl.create(:document) }
+      let(:content) do
+        { "document_title"=> {type: 'simple', value: 'Title'},
+        "document_body"=> {type: '', value: 'Body text'} }
+      end
+      let(:params) do
+        { project_id: document.project.friendly_id,
+          document_id: document.id,
+          content: content }
+      end
 
     context 'document format is Markdown' do
       it 'updates attributes' do
-        @document = FactoryGirl.create(:document, format: 'markdown')
-        expect_any_instance_of(Document).
-              to receive(:update!).
-              with(hash_including(body: 'Markdown')).and_return(true)
+        content['document_body'][:type] = 'markdown'
+        expect_any_instance_of(Document).to receive(:update!).
+              with(title: 'Title', body: 'Body text', format: 'markdown').and_return(true)
 
-        post :mercury_update, {project_id: @document.project.friendly_id,
-                               document_id: @document.id,
-                               content: @params }, valid_session
+        post :mercury_update, params
       end
     end
 
     context 'document format is not Markdown' do
       it 'updates attributes' do
-        @document = FactoryGirl.create(:document, format: '')
-        expect_any_instance_of(Document).
-              to receive(:update!).
-              with(hash_including(body: 'Html')).and_return(true)
+        content['document_body'][:type] = 'full'
+        expect_any_instance_of(Document).to receive(:update!).
+              with(title: 'Title', body: 'Body text', format: 'full').and_return(true)
 
-        post :mercury_update, {project_id: @document.project.friendly_id,
-                               document_id: @document.id,
-                               content: @params }, valid_session
+        post :mercury_update, params
       end
     end
   end
