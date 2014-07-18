@@ -27,12 +27,12 @@
   <div><%= metadata %></div>
 </div>
 
-
-<div id="document_body_html" data-mercury="full" data-type="editable" class="<%= 'hidden' if @document.format == 'markdown' %>">
-    <%= inside_mercury? ? @document.body :  clean_html(@document.body) %>
-</div>
-<div id="document_body_md" data-mercury="markdown" data-type="editable" class="<%= 'hidden' unless @document.format == 'markdown' %>">
-    <%= inside_mercury? ? @document.body :  from_markdown(@document.body) %>
+<div id="document_body" data-mercury="<%= @document.format == 'markdown' ? 'markdown' : 'full' %>" data-type="editable" >
+  <% if inside_mercury? %>
+    <%= @document.format == 'markdown' ? @document.body : clean_html(@document.body) %>
+  <% else  %>
+    <%= @document.format == 'markdown' ? from_markdown(@document.body) : clean_html(@document.body) %>
+  <% end %>
 </div>
 
 <% if user_signed_in? %>

@@ -55,18 +55,12 @@ describe 'documents/show', type: :view do
     end
 
     context 'document format is not Markdown' do
-      it 'shows html edit section' do
-        @document.format = ''
-        render
-        expect(rendered).to have_css('#document_body_html')
-        expect(rendered).to have_css('#document_body_md.hidden')
-      end
-
       it 'renders html content' do
         @document.body = '<b>Body Text</b>'
-        @document.format = 'markdown'
+        @document.format = ''
         render
-        rendered.within('#document_body_md') do |section|
+        expect(rendered).to have_css("#document_body[data-mercury='full']")
+        rendered.within('#document_body') do |section|
           expect(section).to have_content('Body Text')
           expect(section).not_to have_content('<b>Body Text</b>')
         end
@@ -74,18 +68,12 @@ describe 'documents/show', type: :view do
     end
 
     context 'document format is Markdown' do
-      it 'shows Markdown edit section' do
-        @document.format = 'markdown'
-        render
-        expect(rendered).to have_css('#document_body_html.hidden')
-        expect(rendered).to have_css('#document_body_md')
-      end
-
       it 'renders Markdown content' do
         @document.body = '**Body Text**'
         @document.format = 'markdown'
         render
-        rendered.within('#document_body_md') do |section|
+        expect(rendered).to have_css("#document_body[data-mercury='markdown']")
+        rendered.within('#document_body') do |section|
           expect(section).to have_content('Body Text')
           expect(section).not_to have_content('**Body Text**')
         end
