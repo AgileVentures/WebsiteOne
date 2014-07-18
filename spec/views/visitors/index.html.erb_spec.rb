@@ -5,9 +5,14 @@ def fix_time_at(time)
   allow(Time).to receive(:now).and_return(fix_time)
 end
 
-describe 'visitors/index.html.erb' do
+describe 'visitors/index.html.erb', type: :view do
   before :each do
-    @event = stub_model(Event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00', next_occurrence_time: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
+    @event = FactoryGirl.build_stubbed(
+          :event, 
+          name: 'Spec Scrum', 
+          event_date: '2014-03-07', 
+          start_time: '10:30:00', 
+          next_occurrence_time: double(IceCube::Occurrence, to_datetime: DateTime.parse('2014-03-07 10:30:00 UTC')))
   end
 
   context 'event is planned for next day' do
@@ -58,6 +63,7 @@ describe 'visitors/index.html.erb' do
   context 'event has started less than 15 minutes ago' do
     before :each do
       fix_time_at('2014-03-07 10:44:00 UTC')
+      @event.hangout = Hangout.new(hangout_url: 'http://hangout.test')
     end
 
     it 'should <event> has just started!' do
@@ -124,4 +130,3 @@ describe 'visitors/index.html.erb' do
     end
   end
 end
-
