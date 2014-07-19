@@ -14,7 +14,7 @@
       <li><%= custom_css_btn 'new document', 'fa fa-file-text-o', new_project_document_path(project_id: @project.friendly_id) %></li>
       <% if current_user.following?(@project) %>
         <li><%= custom_css_btn 'leave project', 'fa fa-star', unfollow_project_path(@project) %></li>
-        <li class=hangout-btn>
+        <li class="hangout-btn">
             <%= render partial: 'hangouts/hangout_button', locals: {id: 'test_id', topic: @project.title} %>
         </li>
       <% else %>
