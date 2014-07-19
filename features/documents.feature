@@ -44,7 +44,6 @@ Feature: Manage Document
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
-    #???
     When I click the sidebar link "Guides"
     Then I should be on the "Show" page for document "Guides"
     And I should see "Guides"
@@ -154,7 +153,6 @@ Feature: Manage Document
     Then I should see an image with source "/assets/mercury/missing-image.png" within the Mercury Editor
     Then the Mercury Editor modal window should not be visible
 
-  @wip
   Scenario: Displaying the document with Markdown syntax
     Given I have document "Doc-1" for project "hello world" in "markdown" format with content:
     """

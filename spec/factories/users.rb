@@ -1,5 +1,3 @@
-FactoryGirl::SyntaxRunner.include(RSpec::Mocks::ExampleMethods)
-
 FactoryGirl.define do
   factory :user, aliases: [:whodunnit] do
     ignore do
@@ -16,9 +14,6 @@ FactoryGirl.define do
 
     after(:create) do |user, evaluator|
       create(:authentication, provider: 'gplus', uid: evaluator.gplus, user_id: user.id )
-    end
-    after(:build, :stub) do |user|
-      allow(user).to receive(:display_name).and_return("#{user.first_name} #{user.last_name}")
     end
   end
 end

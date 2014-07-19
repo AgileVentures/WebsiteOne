@@ -3,42 +3,16 @@ require 'spec_helper'
 describe 'documents/show', type: :view do
 
   let(:user) { FactoryGirl.build_stubbed(:user) }
-  let(:project) { FactoryGirl.build_stubbed(:project) }
-  let(:document) { FactoryGirl.build_stubbed(:document, user: user, project_id: project.id) }
+  let(:project) { FactoryGirl.create(:project) }
+  let(:document) { FactoryGirl.create(:document, user: user, project: project) }
   let(:version) { FactoryGirl.build_stubbed(:version, whodunnit: user.id, item_id: document.id) }
-  let(:document_child) { FactoryGirl.build_stubbed(:document, user: user, parent: document, project_id: project.id) }
+  let(:document_child) { FactoryGirl.build_stubbed(:document, user: user, parent: document, project: project) }
 
   before(:each) do
-    @user = FactoryGirl.build_stubbed(:user, id: 1, first_name: 'John', last_name: 'Simpson', email: 'john@simpson.org')
-    @project = Project.create(id: 1 , title:  'Project1', created_at:  Time.now)
-    @version = PaperTrail::Version.new( item_type: "Document",
-                                       event: "create",
-                                       whodunnit: @user.id,
-                                       object: nil,
-                                       created_at: "2014-02-25 11:50:56"
-                                      )
-    @document = FactoryGirl.build_stubbed(:document,
-                                          :user => @user,
-                                          :id => 1,
-                                          :title => "Title",
-                                          :body => "Content",
-                                          :project_id => 1 ,
-                                          :created_at => Time.now,
-                                          :versions => [@version],
-                                         )
-
-    @document_child = FactoryGirl.build_stubbed(:document,
-                                 :user => @user,
-                                 :title => "Child Title",
-                                 :body => "Child content",
-                                 :project_id => 1,
-                                 :parent_id => 1,
-                                 :created_at => Time.now,
-                                 :versions => [@version]
-                                )
-
-    allow(view).to receive(:created_by).and_return(@created_by)
-    assign :children, [ @document_child ]
+    assign :document, document
+    assign :project, project
+    assign :document_child, document_child
+    assign :children, [ document_child ]
 
     allow(controller).to receive(:user_signed_in?).and_return(true)
     allow(controller).to receive(:current_user).and_return(user)
@@ -56,8 +30,8 @@ describe 'documents/show', type: :view do
 
     context 'document format is not Markdown' do
       it 'renders html content' do
-        @document.body = '<b>Body Text</b>'
-        @document.format = ''
+        document.body = '<b>Body Text</b>'
+        document.format = ''
         render
         expect(rendered).to have_css("#document_body[data-mercury='full']")
         rendered.within('#document_body') do |section|
@@ -69,8 +43,8 @@ describe 'documents/show', type: :view do
 
     context 'document format is Markdown' do
       it 'renders Markdown content' do
-        @document.body = '**Body Text**'
-        @document.format = 'markdown'
+        document.body = '**Body Text**'
+        document.format = 'markdown'
         render
         expect(rendered).to have_css("#document_body[data-mercury='markdown']")
         rendered.within('#document_body') do |section|
@@ -92,6 +66,7 @@ describe 'documents/show', type: :view do
     end
 
     context 'user signed-in' do
+      before { render }
       it 'should render an Edit link' do
         rendered.within('#edit_link') do |link|
           expect(link).to have_css('i[class="fa fa-pencil-square-o"]')
@@ -123,7 +98,7 @@ describe 'documents/show', type: :view do
     end
   end
 
-  describe 'renders Disqus section', type: :view do
+  describe 'renders Disqus section' do
 
     it_behaves_like 'commentable with Disqus' do
       let(:entity) { document }
