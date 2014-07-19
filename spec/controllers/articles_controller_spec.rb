@@ -120,9 +120,9 @@ describe ArticlesController do
   describe 'POST create' do
     before(:each) do
       controller.stub(:authenticate_user!).and_return(true)
-      @article = double('Article', save: true, title: 'my title', friendly_id: 'friend')
+      @article = build(:article, title: 'my title', slug: 'friend')
       @user = double('User')
-      controller.stub(:current_user).and_return @user
+      allow(controller).to receive(:current_user).and_return(@user)
       @user.stub_chain('articles.build').and_return(@article)
     end
 
@@ -206,13 +206,9 @@ describe ArticlesController do
     it 'should assign a new article with the given parameters' do
       patch :preview, @params
       expect(assigns(:article)).to be_a(Article)
+     
       @params[:article].each_pair do |k, v|
-        # calls the method "k"
-        if k == :tag_list
-          expect(assigns(:article).send(k)).to eq [ v ]
-        else
-          expect(assigns(:article).send(k)).to eq v
-        end
+          expect(assigns(:article).send(k).to_s).to eq v
       end
     end
 
