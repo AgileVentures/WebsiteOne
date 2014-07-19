@@ -7,6 +7,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given following events exist:
       | name  | description         | category | event_date | start_time              | end_time                | repeats | time_zone |
       | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | UTC       |
+    And the following projects exist:
+      | title         | description             | status   |
+      | hello world   | greetings earthlings    | active   |
     And I am logged in
     And I have Slack notifications enabled
 
@@ -84,3 +87,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     When I am on the home page
     Then I should see "Scrum is live!"
     And I should see link "Click to join!" with "http://hangout.test"
+
+  @javascript
+  Scenario: Display hangout button on a project's page
+    Given I am a member of project "hello world"
+    And I am on the "Show" page for project "hello world"
+    Then I should see hangout button
