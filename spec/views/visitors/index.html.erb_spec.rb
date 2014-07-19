@@ -7,12 +7,8 @@ end
 
 describe 'visitors/index.html.erb', type: :view do
   before :each do
-    @event = FactoryGirl.build_stubbed(
-          :event, 
-          name: 'Spec Scrum', 
-          event_date: '2014-03-07', 
-          start_time: '10:30:00', 
-          next_occurrence_time: double(IceCube::Occurrence, to_datetime: DateTime.parse('2014-03-07 10:30:00 UTC')))
+    @event = FactoryGirl.build_stubbed(:event, name: 'Spec Scrum', event_date: '2014-03-07', start_time: '10:30:00',
+                                        next_occurrence_time: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
   end
 
   context 'event is planned for next day' do
@@ -70,6 +66,18 @@ describe 'visitors/index.html.erb', type: :view do
       render
       expect(rendered).to have_link @event.name, event_path(@event)
       expect(rendered).to have_text 'is live!'
+    end
+
+    it 'renders Join live event link if hangout is live' do
+      allow(@event.hangout).to receive(:live?).and_return(true)
+      render
+      expect(rendered).to have_link('Click to join!', href: 'http://hangout.test')
+    end
+
+    it 'does not render Join live event link if hangout is not live' do
+      allow(@event.hangout).to receive(:live?).and_return(false)
+      render
+      expect(rendered).not_to have_link('Click to join!', href: 'http://hangout.test')
     end
   end
 
