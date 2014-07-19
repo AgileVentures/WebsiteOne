@@ -19,10 +19,10 @@ describe YoutubeVideos do
   describe "project_videos(object)" do
     it 'returns videos for project by project tags and following members who have youtube connected' do
       users = [
-        FactoryGirl.create(:user, youtube_id: 'test_id', youtube_user_name: 'John Doe'),
-        FactoryGirl.create(:user, youtube_id: 'test_id_2', youtube_user_name: 'Sampriti Panda'),
+        build_stubbed(:user, youtube_id: 'test_id', youtube_user_name: 'John Doe'),
+        build_stubbed(:user, youtube_id: 'test_id_2', youtube_user_name: 'Sampriti Panda'),
       ]
-      project = FactoryGirl.create(:project, title: "WebsiteOne", tag_list: ["WSO"])
+      project = build_stubbed(:project, title: "WebsiteOne", tag_list: ["WSO"])
       allow(project).to receive(:members).and_return([users[0]])
 
       response = File.read('spec/fixtures/youtube_user_filtered_response.json')
@@ -40,9 +40,9 @@ describe YoutubeVideos do
 
   describe "user_videos(object)" do
     it 'returns videos for user sorted by published date and filtered by its projects' do
-      project = FactoryGirl.create(:project, title: "WebsiteOne", tag_list: ["WSO"])
-      project_2 = FactoryGirl.create(:project, title: "AutoGraders", tag_list: ["AutoGrader"])
-      user = FactoryGirl.create(:user, youtube_id: 'test_id', youtube_user_name: 'John Doe')
+      project = build_stubbed(:project, title: "WebsiteOne", tag_list: ["WSO"])
+      project_2 = build_stubbed(:project, title: "AutoGraders", tag_list: ["AutoGrader"])
+      user = build_stubbed(:user, youtube_id: 'test_id', youtube_user_name: 'John Doe')
       allow(user).to receive(:following_by_type).and_return([project])
       response = File.read('spec/fixtures/youtube_user_response.json')
       request_string = "http://gdata.youtube.com/feeds/api/users/#{user.youtube_id}/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)"
