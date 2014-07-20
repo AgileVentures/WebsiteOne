@@ -18,7 +18,7 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   event = Event.find_by_name(event_name)
 
   Hangout.record_timestamps = false
-  Hangout.create(event_id: event.id.to_s,
+  Hangout.create(uid: '123456', event_id: event.id.to_s,
                hangout_url: hangout['Hangout link'],
                updated_at: hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now)
   Hangout.record_timestamps = true
