@@ -10,11 +10,11 @@ describe HangoutsController do
 
   describe '#update' do
     it 'creates a hangout if there is no hangout assosciated with the event' do
-      event_id = '333'
+      hangout_id = '333'
 
-      get :update, {id: event_id}
+      get :update, {id: hangout_id}
 
-      hangout = Hangout.find_by_event_id(event_id)
+      hangout = Hangout.find_by_uid(hangout_id)
       expect(hangout).to be_valid
     end
 
