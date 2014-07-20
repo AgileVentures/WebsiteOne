@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   #after_create Mailer.send_welcome_mail()
   extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
+  friendly_id :display_name, use: :slugged
 
   validates :email, uniqueness: true
   after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip }
@@ -52,27 +52,29 @@ class User < ActiveRecord::Base
     following_by_type('Project')
   end
 
+  def followed_project_tags
+    projects_joined
+      .flat_map(&:youtube_tags)
+      .push('scrum')
+  end
+
+
   def display_name
-    name = [ self.first_name, self.last_name ].join(' ').squish
-    if (name == '' || name == nil) && (self.email == '' || self.email == nil)
-      'Anonymous'
-    elsif name =~ /^\s*$/
-      self.email_first_part
-    else
-      name
-    end
+    full_name || email_designator || 'Anonymous'
+  end
+
+  def full_name
+    full_name = "#{first_name} #{last_name}".squish
+    full_name unless full_name.blank?
+  end
+
+  def email_designator
+    return if email.blank?
+    email.split('@').first
   end
 
   def should_generate_new_friendly_id?
     self.slug.nil? or ((self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?)
-  end
-
-  def email_first_part
-    self.email.gsub(/@.*$/, '')
-  end
-
-  def slug_candidates
-    [ :display_name, :email_first_part ]
   end
 
   def self.search(params)

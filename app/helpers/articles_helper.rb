@@ -5,7 +5,7 @@ module ArticlesHelper
                    h1 h2 h3 h4 h5 h6 b i ul ol li pre span iframe div img br
                    blockquote p a em del strong code tr table thead th tbody
                    td dl dd dt hr input label textarea fieldset font sup sub
-                   u strike
+                   u strike details summary
                  ),
                  attributes: %w(
                    src alt target frameborder allowfullscreen style href

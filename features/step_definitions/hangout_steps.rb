@@ -4,10 +4,11 @@ Then /^I should see hangout button$/ do
 end
 
 Then /^the hangout button should( not)? be visible$/ do |negative|
+  section = page.find('#hangout-btn', visible: false)
   if negative
-    expect(page).not_to have_css('#hangout_button', visible: true)
+    expect(section).not_to be_visible
   else
-    expect(page).to have_css('#hangout_button')
+    expect(section).to be_visible
   end
 end
 
@@ -24,10 +25,11 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
 end
 
 Then /^I should( not)? see Hangouts details section$/ do |negative|
+  section = page.find('.hangout-details', visible: false)
   if negative
-    expect(page).not_to have_css('#hangout_details')
+    expect(section).not_to be_visible
   else
-    expect(page).to have_css('#hangout_details')
+    expect(section).to be_visible
   end
 end
 

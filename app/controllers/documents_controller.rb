@@ -25,10 +25,6 @@ class DocumentsController < ApplicationController
 
   end
 
-  # GET /documents/1/edit
-  def edit
-  end
-
   # POST /documents
   # POST /documents.json
   def create
@@ -44,20 +40,6 @@ class DocumentsController < ApplicationController
       end
     end
 
-  end
-
-  # PATCH/PUT /documents/1
-  # PATCH/PUT /documents/1.json
-  def update
-    respond_to do |format|
-      if @document.update(document_params)
-        format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /documents/1

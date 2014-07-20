@@ -1,18 +1,8 @@
 require 'spec_helper'
 
 describe Event do
-  before :each do
-    @default_tz = ENV['TZ']
-    ENV['TZ'] = 'UTC'
-  end
-
-  after :each do
-    Delorean.back_to_the_present
-    ENV['TZ'] = @default_tz
-  end
-
   it 'should respond to friendly_id' do
-    Event.new.should respond_to :friendly_id
+    expect(Event.new).to respond_to(:friendly_id)
   end
 
   it 'should respond to "schedule" method' do
@@ -25,17 +15,17 @@ describe Event do
     end
     it 'nil :name' do
       @event.name = ''
-      expect(@event.save).to be_false
+      expect(@event.save).to be_falsey
     end
 
     it 'nil :category' do
       @event.category = nil
-      expect(@event.save).to be_false
+      expect(@event.save).to be_falsey
     end
 
     it 'nil :repeats' do
       @event.repeats = nil
-      expect(@event.save).to be_false
+      expect(@event.save).to be_falsey
     end
   end
 
@@ -111,21 +101,21 @@ describe Event do
   context 'Event url' do
     before (:each) do
       @event = {name: 'one time event',
-               category: 'Scrum',
-               description: '',
-               event_date: 'Mon, 17 Jun 2013',
-               start_time: '2000-01-01 09:00:00 UTC',
-               end_time: '2000-01-01 17:00:00 UTC',
-               repeats: 'never',
-               repeats_every_n_weeks: nil,
-               repeat_ends: 'never',
-               repeat_ends_on: 'Mon, 17 Jun 2013',
-               time_zone: 'Eastern Time (US & Canada)'}
+                category: 'Scrum',
+                description: '',
+                event_date: 'Mon, 17 Jun 2013',
+                start_time: '2000-01-01 09:00:00 UTC',
+                end_time: '2000-01-01 17:00:00 UTC',
+                repeats: 'never',
+                repeats_every_n_weeks: nil,
+                repeat_ends: 'never',
+                repeat_ends_on: 'Mon, 17 Jun 2013',
+                time_zone: 'Eastern Time (US & Canada)'}
     end
 
     it 'should be set if valid' do
       event = Event.create!(@event.merge(:url => 'http://google.com'))
-      expect(event.save).to be_true
+      expect(event.save).to be_truthy
     end
 
     it 'should be rejected if invalid' do
@@ -134,29 +124,40 @@ describe Event do
     end
   end
 
-  describe 'Event#next_occurence' do
-    let(:event) do
-      stub_model(Event,
-                 name: 'Spec Scrum',
-                 event_date: '2014-03-07',
-                 start_time: '10:30:00',
-                 time_zone: 'UTC',
-                 end_time: '11:00:00',
-                 repeats: 'weekly',
-                 repeats_every_n_weeks: 1,
-                 repeats_weekly_each_days_of_the_week_mask: 0b1111111,
-                 repeat_ends: 'never',
-                 repeat_ends_on: 'Tue, 25 Jun 2015',
-                 friendly_id: 'spec-scrum')
+  describe 'Event#next_occurences' do
+    before do
+      @event = FactoryGirl.build_stubbed(Event,
+                                         name: 'Spec Scrum',
+                                         event_date: '2014-03-07',
+                                         start_time: '10:30:00',
+                                         time_zone: 'UTC',
+                                         end_time: '11:00:00')
+
+      allow(@event).to receive(:repeats).and_return('weekly')
+      allow(@event).to receive(:repeats_every_n_weeks).and_return(1)
+      allow(@event).to receive(:repeats_weekly_each_days_of_the_week_mask).and_return(0b1111111)
+      allow(@event).to receive(:repeat_ends).and_return('never')
+      allow(@event).to receive(:repeat_ends_on).and_return('Tue, 25 Jun 2015')
+      allow(@event).to receive(:friendly_id).and_return('spec-scrum')
     end
 
     let(:options) { {} }
-    let(:next_occurrences) { event.next_occurrences(options) }
+    let(:next_occurrences) { @event.next_occurrences(options) }
     let(:next_occurrence_time) { next_occurrences.first[:time].time }
 
     it 'should return the next occurence of the event' do
       Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
       expect(next_occurrence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
+    end
+
+    it 'includes the event that has been started within the last 30 minutes' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:50:00 UTC'))
+      expect(next_occurrence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
+    end
+
+    it 'does not include the event that has been started within more than 30 minutes ago' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 11:01:00 UTC'))
+      expect(next_occurrence_time).to eq(Time.parse('2014-03-08 10:30:00 UTC'))
     end
 
     context 'with input arguments' do
@@ -182,13 +183,11 @@ describe Event do
 
   describe 'Event.next_event_occurence' do
     let(:event) do
-      stub_model(Event,
-                 name: 'Spec Scrum',
-                 event_date: '2014-03-07',
-                 start_time: '10:30:00',
-                 time_zone: 'UTC',
-                 end_time: '11:00:00',
-                 friendly_id: 'spec-scrum')
+      Event.new(name: 'Spec Scrum',
+                event_date: '2014-03-07',
+                start_time: '10:30:00',
+                time_zone: 'UTC',
+                end_time: '11:00:00')
     end
 
     before(:each) do
