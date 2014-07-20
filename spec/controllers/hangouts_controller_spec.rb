@@ -11,7 +11,6 @@ describe HangoutsController do
   describe '#update' do
     it 'creates a hangout if there is no hangout assosciated with the event' do
       hangout_id = '333'
-
       get :update, {id: hangout_id}
 
       hangout = Hangout.find_by_uid(hangout_id)
@@ -42,6 +41,14 @@ describe HangoutsController do
 
       get :update, {id: '333'}
       expect(response.body).to have_text('Failure')
+    end
+
+    it 'redirects to event show page if the link was updated manually' do
+      allow(controller).to receive(:local_request?).and_return(true)
+      Hangout.any_instance.stub(update_hangout_data: true)
+
+      get :update, {id: '333', event_id: 50}
+      expect(response).to redirect_to(event_path(50))
     end
   end
 
