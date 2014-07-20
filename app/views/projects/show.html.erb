@@ -15,7 +15,7 @@
       <% if current_user.following?(@project) %>
         <li><%= custom_css_btn 'leave project', 'fa fa-star', unfollow_project_path(@project) %></li>
         <li class="hangout-btn">
-            <%= render partial: 'hangouts/hangout_button', locals: {id: 'test_id', topic: @project.title} %>
+          <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: '', event_id: '', category: 'PairProgramming', user: current_user, project: @project, topic: "PairProgramming on #{@project.title}"} %>
         </li>
       <% else %>
         <li><%= custom_css_btn 'join project', 'fa fa-star-o', follow_project_path(@project) %></li>
