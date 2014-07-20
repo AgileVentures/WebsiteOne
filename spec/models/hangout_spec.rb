@@ -40,16 +40,20 @@ describe Hangout do
 
   describe '#update_hangout_data' do
     let(:params) do
-      { title: 'Morning Rejoice',
+      { topic: 'Morning Rejoice',
+        event_id: '50',
         category: 'Scrum',
         hangout_url: 'http://hangout.test' }
     end
 
     it 'updates basic data' do
+      event = FactoryGirl.create(:event, id: 50)
       hangout.update_hangout_data(params)
 
-      expect(hangout.title).to eq 'Morning Rejoice'
-      expect(hangout.hangout_url).to eq 'http://hangout.test'
+      expect(hangout.title).to eq('Morning Rejoice')
+      expect(hangout.event).to eq(event)
+      expect(hangout.category).to eq('Scrum')
+      expect(hangout.hangout_url).to eq('http://hangout.test')
     end
 
   end
