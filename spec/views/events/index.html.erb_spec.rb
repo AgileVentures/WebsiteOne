@@ -45,7 +45,7 @@ describe 'events/index', type: :view do
     end
 
       it 'renders Started at for an event in progress' do
-        allow(Time).to receive(:now).and_return(Time.parse('09:10:00'))
+        allow(Time).to receive(:now).and_return(Time.parse('09:10:00 UTC'))
         render
         expect(rendered).to have_content("Started at 9:00")
       end
