@@ -217,11 +217,6 @@ GEM
     kgio (2.9.2)
     launchy (2.4.2)
       addressable (~> 2.3)
-    letter_opener (1.2.0)
-      launchy (~> 2.2)
-    letter_opener_web (1.2.1)
-      letter_opener (~> 1.0)
-      rails (>= 3.2)
     libv8 (3.16.14.3)
     listen (2.7.9)
       celluloid (>= 0.15.2)
@@ -458,7 +453,6 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   launchy
-  letter_opener_web
   mercury-rails!
   omniauth
   omniauth-github!
