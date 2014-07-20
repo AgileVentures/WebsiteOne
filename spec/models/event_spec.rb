@@ -9,6 +9,14 @@ describe Event do
     Event.respond_to?('schedule')
   end
 
+  it 'return the latest hangout' do
+    event = FactoryGirl.create(:event)
+    Hangout.create(id: 1, event_id: event.id)
+    Hangout.create(id: 2, event_id: event.id)
+
+    expect(event.last_hangout.id).to eq(2)
+  end
+
   context 'return false on invalid inputs' do
     before do
       @event = FactoryGirl.create(:event)

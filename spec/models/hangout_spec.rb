@@ -36,16 +36,19 @@ describe Hangout do
       allow(Time).to receive(:now).and_return(Time.parse('10:15:01'))
       expect(hangout.live?).to be_falsey
     end
-
   end
 
   describe '#update_hangout_data' do
     let(:params) do
-      { title: 'Scrum', hangout_url: 'http://hangout.test' }
+      { title: 'Morning Rejoice',
+        category: 'Scrum',
+        hangout_url: 'http://hangout.test' }
     end
 
     it 'updates basic data' do
       hangout.update_hangout_data(params)
+
+      expect(hangout.title).to eq 'Morning Rejoice'
       expect(hangout.hangout_url).to eq 'http://hangout.test'
     end
 
