@@ -171,6 +171,7 @@ describe 'projects/show.html.erb', type: :view do
     context 'user is a member of project' do
       before do
         allow(@user).to receive(:following?).and_return(true)
+        allow(view).to receive(:generate_event_id).and_return('546')
       end
 
       it 'render join project button' do
@@ -179,8 +180,12 @@ describe 'projects/show.html.erb', type: :view do
       end
 
       it_behaves_like 'it has a hangout button' do
-        let(:topic_name){@project.title}
-        let(:id){'test_id'}
+        let(:event_id){''}
+        let(:category){'PairProgramming'}
+        let(:hangout_id){''}
+        let(:user){@user}
+        let(:project){@project}
+        let(:topic_name){"PairProgramming on #{@project.title}"}
       end
 
     end
