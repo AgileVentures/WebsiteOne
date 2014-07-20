@@ -1,10 +1,6 @@
 WebsiteOne::Application.routes.draw do
   mount Mercury::Engine => '/'
 
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
-
   root 'visitors#index'
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
