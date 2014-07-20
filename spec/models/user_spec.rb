@@ -225,6 +225,16 @@ describe User do
     end
   end
 
+  describe "#followed_project_tags" do
+    it 'returns project tags for projects with project title and tags and a scrum tag' do
+      project_1 = build_stubbed(:project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
+      project_2 = build_stubbed(:project, title: 'Black hole', tag_list: [])
+      user = build_stubbed(:user)
+      allow(user).to receive(:projects_joined).and_return([project_1, project_2])
+      expect(user.followed_project_tags).to eq ["big regret", "boom", "bang", "big boom", "black hole", "scrum"]
+    end
+  end
+
   describe '.search' do
     subject { User.search(params) }
     let(:params) { Hash.new }

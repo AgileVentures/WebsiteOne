@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-describe ProjectsController do
+describe ProjectsController, :type => :controller do
 
   let(:valid_attributes) { {:id => 1,
                             :title => 'WebTwentyFive',
                             :description => 'My project description',
                             :status => 'Active',
                             :pivotaltracker_url => 'https://www.pivotaltracker.com/s/projects/982890',
-                            :friendly_id => 'my-project' } }
+                            :slug => 'my-project' } }
   let(:valid_session) { {} }
 
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
     # stubbing out devise methods to simulate authenticated user
-    @user = double('user', id: 1, friendly_id: 'some-id')
-    request.env['warden'].stub :authenticate! => @user
-    controller.stub :current_user => @user
+    @user = build_stubbed(User, id: 1, slug: 'some-id')
+    allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
+    allow(controller).to receive(:current_user).and_return(@user)
   end
 
   let(:user) { @user }
@@ -36,7 +36,7 @@ describe ProjectsController do
 
 
     it 'should assign variables to be rendered by view' do
-      Project.stub(:search).and_return('Carrier has arrived.')
+      allow(Project).to receive(:search).and_return('Carrier has arrived.')
       get :index
       expect(assigns(:projects)).to eq 'Carrier has arrived.'
     end
@@ -44,14 +44,13 @@ describe ProjectsController do
 
   describe '#show' do
     before(:each) do
-      @project = mock_model(Project, valid_attributes)
-      @project.stub(:tag_list).and_return [ 'WTF' ]
+      @project = build_stubbed(Project, valid_attributes)
+      allow(@project).to receive(:tag_list).and_return [ 'WSO' ]
       Project.stub_chain(:friendly, :find).and_return @project
-      @users = [ mock_model(User, friendly_id: 'my-friendly-id', display_profile: true) ]
-      @more_users = @users + [ mock_model(User, friendly_id: 'another-friendly-id', display_profile: false)]
-      @project.should_receive(:followers).and_return @more_users
-      Youtube.stub(project_videos: 'videos')
-      PivotalService.stub(one_project: '') 
+      @users = [ build_stubbed(User, slug: 'my-friendly-id', display_profile: true) ]
+      expect(@project).to receive(:members).and_return @users
+      expect(YoutubeVideos).to receive(:for).with(@project).and_return('videos')
+      allow(PivotalService).to receive(:one_project).and_return('')
       dummy = Object.new
       dummy.stub(stories: "stories")
       PivotalService.stub(iterations: dummy)
@@ -59,7 +58,7 @@ describe ProjectsController do
 
     it 'assigns the requested project as @project' do
       get :show, {:id => @project.friendly_id}, valid_session
-      assigns(:project).should eq(@project)
+      expect(assigns(:project)).to eq(@project)
     end
 
     it 'renders the show template' do
@@ -69,7 +68,7 @@ describe ProjectsController do
 
     it 'assigns the list of members with public profiles to @members' do
       get :show, { id: @project.friendly_id }, valid_session
-      assigns(:members).should eq @users
+      expect(assigns(:members)).to eq @users
     end
 
     it 'assigns the list of related YouTube videos in alphabetical order' do
@@ -86,7 +85,7 @@ describe ProjectsController do
   describe '#new' do
     it 'should render a new project page' do
       get :new
-      assigns(:project).should be_a_new(Project)
+      expect(assigns(:project)).to be_a_new(Project)
       expect(response).to render_template 'new'
     end
   end
@@ -102,12 +101,12 @@ describe ProjectsController do
           }
       }
       @project = mock_model(Project, friendly_id: 'some-project')
-      Project.stub(:new).and_return(@project)
-      controller.stub(:current_user).and_return(@user)
+      allow(Project).to receive(:new).and_return(@project)
+      allow(controller).to receive(:current_user).and_return(@user)
     end
 
     it 'assigns a newly created project as @project' do
-      @project.stub(:save)
+      allow(@project).to receive(:save)
       post :create, @params
       expect(assigns(:project)).to eq @project
     end
@@ -115,14 +114,14 @@ describe ProjectsController do
     context 'successful save' do
 
       it 'redirects to index' do
-        @project.stub(:save).and_return(true)
+        allow(@project).to receive(:save).and_return(true)
 
         post :create, @params
 
         expect(response).to redirect_to(project_path(@project))
       end
       it 'assigns successful message' do
-        @project.stub(:save).and_return(true)
+        allow(@project).to receive(:save).and_return(true)
 
         post :create, @params
 
@@ -131,15 +130,15 @@ describe ProjectsController do
       end
 
       it 'passes current_user id into new' do
-        Project.should_receive(:new).with({"title" => "Title 1", "description" => "Description 1", "status" => "Status 1", "user_id" => @user.id})
-        @project.stub(:save).and_return(true)
+        expect(Project).to receive(:new).with({"title" => "Title 1", "description" => "Description 1", "status" => "Status 1", "user_id" => @user.id})
+        allow(@project).to receive(:save).and_return(true)
         post :create, @params
       end
     end
 
     context 'unsuccessful save' do
       it 'renders new template' do
-        @project.stub(:save).and_return(false)
+        allow(@project).to receive(:save).and_return(false)
 
         post :create, @params
 
@@ -147,7 +146,7 @@ describe ProjectsController do
       end
 
       it 'assigns failure message' do
-        @project.stub(:save).and_return(false)
+        allow(@project).to receive(:save).and_return(false)
 
         post :create, @params
 
@@ -158,7 +157,7 @@ describe ProjectsController do
 
   describe '#edit' do
     before(:each) do
-      @project = double(Project)
+      @project = Project.new
       Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
       get :edit, id: 'some-random-thing'
     end
@@ -217,14 +216,14 @@ describe ProjectsController do
     end
 
     it 'assigns the requested project as @project' do
-      @project.should_receive(:update_attributes)
+      expect(@project).to receive(:update_attributes)
       put :update, id: 'update', project: {title: ''}
       expect(assigns(:project)).to eq(@project)
     end
 
     context 'successful update' do
       before(:each) do
-        @project.stub(:update_attributes).and_return(true)
+        allow(@project).to receive(:update_attributes).and_return(true)
         put :update, id: 'update', project: {title: ''}
       end
 
@@ -239,7 +238,7 @@ describe ProjectsController do
 
     context 'unsuccessful save' do
       before(:each) do
-        @project.stub(:update_attributes).and_return(false)
+        allow(@project).to receive(:update_attributes).and_return(false)
         put :update, id: 'update', project: {title: ''}
       end
       it 'renders edit' do
