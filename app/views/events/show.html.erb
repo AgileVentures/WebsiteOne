@@ -69,7 +69,7 @@
                 <div class="restart-section<%= ' in' unless @hangout.try!(:started?) %>">
                   <div class="panel-body">
                     <div id="hangout-btn" class="col-lg-5 hangout-btn">
-                      <%= render partial: 'hangouts/hangout_button', locals: {id: @event.id, topic: topic(@event, @event_schedule)} %>
+                      <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: (@hangout.try!(:started?) ? @hangout.uid : ''), event_id: @event.id, category: @event.category, user: current_user, project: '', topic: topic(@event, @event_schedule)} %>
                     </div>
                     <div class="hangout-btn"> &#8592; Event host will start the Hangout 
                         <button type="button" class="btn readme-link" data-container="body" data-toggle="popover" data-placement="right" 
@@ -95,7 +95,8 @@
 
                   <div class="edit-link-form">
                     <div class="panel-body">
-                      <%= form_tag hangout_url(@event.id), method: :put,  class: "form-horizontal", role: "form" %>
+                      <%= form_tag hangout_url(@hangout.try!(:started?) ? @hangout.uid : generate_hangout_id(current_user)), method: :put,  class: "form-horizontal", role: "form" %>
+                        <div style="hidden"><input name="event_id" type="hidden" value="<%= @event.id %>"></div>
                         <div class="form-group">
                           <label class="control-label sr-only" for="hangout-url">Hangout link</label>
                         </div>
@@ -122,7 +123,7 @@
           <% if @hangout.try!(:started?) %>
             <div class="hangouts-details-well">
               <section class="hangout-details">
-                <%= render partial: 'hangouts/hangout_status', locals: {event: @event, hangout: @hangout} %>
+                <%= render partial: 'hangouts/hangout_status', locals: {hangout: @hangout} %>
               </section>
             </div>
           <% end %>
