@@ -1,22 +1,33 @@
 WebsiteOne.renderHangoutButton = function() {
-  var placeholder = 'liveHOA-placeholder',
-      hoa_placeholder = $('#' + placeholder);
+  var placeholderId = 'liveHOA-placeholder',
+      hoaPlaceholder = $('#' + placeholderId);
 
   if ( typeof(gapi) !== 'undefined' && 
-       hoa_placeholder.length > 0 &&
-       $('#' + placeholder + ' iframe').length === 0 ) {
+       hoaPlaceholder.length > 0 &&
+       $('#' + placeholderId + ' iframe').length === 0 ) {
 
-    var topic = hoa_placeholder.data('topic'),
-        app_id = hoa_placeholder.data('app-id'),
-        callback_url = hoa_placeholder.data('callback-url');
+    var topic = hoaPlaceholder.data('topic'),
+        eventId = hoaPlaceholder.data('event-id'),
+        category = hoaPlaceholder.data('category'),
+        hangoutId = hoaPlaceholder.data('hangout-id'),
+        appId = hoaPlaceholder.data('app-id'),
+        callbackUrl = hoaPlaceholder.data('callback-url');
 
-    gapi.hangout.render(placeholder, {
+    var startData = JSON.stringify({
+      topic: topic,
+      eventId: eventId,
+      category: category,
+      hangoutId: hangoutId,
+      callbackUrl: callbackUrl
+    });
+
+    gapi.hangout.render(placeholderId, {
         render: 'createhangout',
         topic: topic,
         hangout_type: 'onair',
         initial_apps: [{
-          app_id: app_id,
-          start_data: callback_url,
+          app_id: appId,
+          start_data: startData,
           app_type : 'LOCAL_APP'
         }],
         widget_size: 200
@@ -43,4 +54,3 @@ WebsiteOne.define('Hangouts', function() {
 });
 
 WebsiteOne.loadHangoutsApi();
-
