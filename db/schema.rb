@@ -92,6 +92,8 @@ ActiveRecord::Schema.define(version: 20140716134701) do
     t.string   "hangout_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "uid"
+    t.string   "category"
   end
 
   create_table "projects", force: true do |t|
