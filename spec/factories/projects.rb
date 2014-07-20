@@ -3,6 +3,7 @@ FactoryGirl.define do
 
   factory :project do
     sequence(:title) {|n| "Title #{n}"}
+    sequence(:slug) {|n| "title-#{n}"}
     description "Warp fields stabilize."
     status "We feel your presence."
 
