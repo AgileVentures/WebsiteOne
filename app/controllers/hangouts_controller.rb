@@ -3,12 +3,12 @@ class HangoutsController < ApplicationController
   before_filter :cors_preflight_check
 
   def update
-    hangout = Hangout.find_or_create_by(event_id: params[:id])
+    hangout = Hangout.find_or_create_by(uid: params[:id])
 
     if hangout.try!(:update_hangout_data, params)
       SlackService.post_hangout_notification(hangout)
 
-      redirect_to event_path(params[:id]) and return if local_request?
+      redirect_to event_path(params[:event_id]) and return if local_request?
       render text: 'Success'
     else
       render text: 'Failure'
