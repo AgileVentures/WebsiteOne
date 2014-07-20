@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe YoutubeHelper, :type => :helper do
-  describe '::channel_id' do
+  describe '.channel_id' do
     before do
       request_string = "https://www.googleapis.com/youtube/v3/channels?part=id&mine=true"
       json = '{ "items": [{"id": "id"}] }'
@@ -18,7 +18,7 @@ describe YoutubeHelper, :type => :helper do
     end
   end
 
-  describe '::youtube_user_name' do
+  describe '.youtube_user_name' do
     let(:user) { User.new(youtube_id: 'test_id') }
 
     before do

@@ -77,9 +77,9 @@ describe YoutubeVideos do
 
   describe "build_request_for_project_videos(project)" do
     it 'properly escapes the query params and returns correctly formatted URL' do
-      members_tags = ["john doe"]
-      projects_tags = ["wso", "websiteone"]
-      project = double(Project, members_tags: members_tags, youtube_tags: projects_tags)
+      project = Project.new
+      allow(project).to receive(:members_tags).and_return(["john doe"])
+      allow(project).to receive(:youtube_tags).and_return(["wso", "websiteone"])
       expected_string = "http://gdata.youtube.com/feeds/api/videos?alt=json&max-results=50&orderby=published&fields=entry(author(name),id,published,title,content,link)&q=(wso|websiteone)/(\"john+doe\")"
 
       expect(subject.send(:build_request_for_project_videos, project)).to eq expected_string
@@ -88,7 +88,7 @@ describe YoutubeVideos do
 
   describe "build_request_for_user_videos(user)" do
     it 'properly escapes the query params and returns correctly formatted URL' do
-      user = double(User, youtube_id: 'test_id')
+      user = build_stubbed(User, youtube_id: 'test_id')
       expected_string =  'http://gdata.youtube.com/feeds/api/users/test_id/uploads?alt=json&max-results=50&fields=entry(author(name),id,published,title,content,link)'
 
       expect(subject.send(:build_request_for_user_videos, user)).to eq expected_string
