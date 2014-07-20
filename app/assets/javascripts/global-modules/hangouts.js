@@ -2,9 +2,9 @@ WebsiteOne.renderHangoutButton = function() {
   var placeholder = 'liveHOA-placeholder',
       hoa_placeholder = $('#' + placeholder);
 
-  if ( typeof(gapi) != 'undefined' && 
+  if ( typeof(gapi) !== 'undefined' && 
        hoa_placeholder.length > 0 &&
-       $('#' + placeholder + ' iframe').length == 0 ) {
+       $('#' + placeholder + ' iframe').length === 0 ) {
 
     var topic = hoa_placeholder.data('topic'),
         app_id = hoa_placeholder.data('app-id'),
@@ -21,7 +21,7 @@ WebsiteOne.renderHangoutButton = function() {
         }],
         widget_size: 200
     });
-  };
+  }
 };
 
 WebsiteOne.loadHangoutsApi = function() {
@@ -39,7 +39,7 @@ WebsiteOne.define('Hangouts', function() {
     init: function() {
       WebsiteOne.renderHangoutButton();
     }
-  }
+  };
 });
 
 WebsiteOne.loadHangoutsApi();

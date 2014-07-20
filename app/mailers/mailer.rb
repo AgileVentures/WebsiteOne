@@ -1,5 +1,5 @@
 class Mailer < ActionMailer::Base
-  default from: 'info@agileventures.org', reply_to: 'info@agileventures.org'
+  default from: 'info@agileventures.org', reply_to: 'info@agileventures.org', cc: 'support@agileventures.org'
 
   def contact_form(contact_form)
     @contact_form = contact_form
