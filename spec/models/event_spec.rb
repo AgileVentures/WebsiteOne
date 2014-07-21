@@ -37,7 +37,7 @@ describe Event do
     end
   end
 
-  context 'should create an event that ' do
+  context 'should create a scrum event that ' do
     it 'is scheduled for one occasion' do
       event = FactoryGirl.build_stubbed(Event,
                             name: 'one time event',
@@ -103,6 +103,78 @@ describe Event do
                             repeat_ends_on: 'Mon, 17 Jun 2013',
                             time_zone: 'UTC')
       expect(event.schedule.first(5)).to eq(['Mon, 17 Jun 2013 09:00:00 GMT +00:00', 'Mon, 24 Jun 2013 09:00:00 GMT +00:00', 'Mon, 01 Jul 2013 09:00:00 GMT +00:00', 'Mon, 08 Jul 2013 09:00:00 GMT +00:00', 'Mon, 15 Jul 2013 09:00:00 GMT +00:00'])
+    end
+
+    it 'should mark as active events which have started and have not ended' do
+      @event = FactoryGirl.build_stubbed(Event,
+                                        name: 'every Monday event',
+                                        category: 'Scrum',
+                                        description: '',
+                                        start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
+                                        duration: 600,
+                                        repeats: 'weekly',
+                                        repeats_every_n_weeks: 1,
+                                        repeats_weekly_each_days_of_the_week_mask: 1,
+                                        repeat_ends: 'never',
+                                        repeat_ends_on: 'Mon, 17 Jun 2013',
+                                        time_zone: 'UTC')
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:25:00 UTC')
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
+      expect(@event.live?).to be_truthy
+    end
+
+    it 'should mark as NOT live events which have ended' do
+      @event = FactoryGirl.build_stubbed(Event,
+                                         name: 'every Monday event',
+                                         category: 'Scrum',
+                                         description: '',
+                                         start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
+                                         duration: 600,
+                                         repeats: 'weekly',
+                                         repeats_every_n_weeks: 1,
+                                         repeats_weekly_each_days_of_the_week_mask: 1,
+                                         repeat_ends: 'never',
+                                         repeat_ends_on: 'Mon, 17 Jun 2013',
+                                         time_zone: 'UTC')
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:20:00 UTC')
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
+      expect(@event.live?).to be_falsey
+    end
+  end
+
+  context 'should create a hookup event that' do
+    before do
+      @event = FactoryGirl.build_stubbed(Event,
+                                         name: 'PP Monday event',
+                                         category: 'PairProgramming',
+                                         start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
+                                         duration: 90,
+                                         repeats: 'never',
+                                         time_zone: 'UTC')
+    end
+
+    it 'should expire events that ended' do
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:25:00 UTC')
+      allow(hangout).to receive(:started?).and_return(true)
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:31:00 UTC'))
+      expect(@event.live?).to be_falsey
+    end
+
+    it 'should mark as active events which have started and have not ended' do
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:25:00 UTC')
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
+      expect(@event.live?).to be_truthy
+    end
+
+    it 'should not be started if events have not started' do
+      hangout = @event.hangouts.create(hangout_url: nil,
+                                       updated_at: nil)
+      Delorean.time_travel_to(Time.parse('2014-06-17 9:30:00 UTC'))
+      expect(@event.live?).to be_falsey
     end
   end
 
