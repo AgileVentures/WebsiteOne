@@ -10,10 +10,6 @@ curl -sSL https://get.rvm.io | bash -s stable
 source /home/vagrant/.rvm/scripts/rvm
 rvm use --install 2.1.1
 
-#\curl -L https://get.rvm.io | bash -s stable  --ruby=1.9.3
-
-#source ~/.rvm/scripts/rvm
-
 sudo apt-get install -y libqtwebkit-dev
 gem install debugger-ruby_core_source
 
@@ -65,9 +61,6 @@ wget https://github.com/AgileVentures/setup-scripts/raw/develop/scripts/rails_se
 HEADLESS=true WITH_PHANTOMJS=true REQUIRED_RUBY=2.1.1 source rails_setup.sh
 
 cd /WebsiteOne
-
-#sudo apt-get install ruby-bundler
-#sudo apt-get -y install x-ttcidfont-conf <-- might fix some font errors?
 
 bundle install
 bundle exec rake db:setup
