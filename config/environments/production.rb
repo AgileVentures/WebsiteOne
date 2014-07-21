@@ -74,7 +74,6 @@ WebsiteOne::Application.configure do
 
   #config.action_mailer.raise_delivery_errors = true
   #config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'agileventures.org' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
