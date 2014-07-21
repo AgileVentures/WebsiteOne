@@ -45,7 +45,6 @@ WebsiteOne::Application.routes.draw do
   get '/auth/failure' => 'authentications#failure', :format => false
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
 
-  post 'mail_contact_form', to: 'visitors#send_contact_form', :format => false
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
 
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
