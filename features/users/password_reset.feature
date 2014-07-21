@@ -28,5 +28,5 @@ Feature: Password retrieval
   Scenario: Retrieve password for a non-existent user
     When I fill in "user_email" with "non-existent_user@example.com"
     And I click "Send me reset password instructions"
-    And I should see "Email not found"
+    And I should see "Email is not registered"
     And I should not receive an email
