@@ -31,9 +31,9 @@
         </div>
         <div class="row">
           <div class="col-lg-8">
-            <ul style="list-style: none; padding: 0">
+            <ul class="occurrence" style="list-style: none; padding: 0">
             <% @event_schedule.first(5).each do |e| %>
-                <li class="occurrence" data-event-time="<%= current_occurrence_time(e, true) %>">
+                <li data-event-time="<%= current_occurrence_time(e, 'js') %>">
                   <%= current_occurrence_time(e) %>
                 </li>
             <% end %>

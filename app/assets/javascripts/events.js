@@ -1,11 +1,11 @@
 $('.readme-link').popover({trigger: 'focus'});
-var eventTz = {
+WebsiteOne.eventTz = {
     addEventTz: function() {
-
-        $('li.occurrence').each(function() {
+        $('ul.occurrence').find('li').each(function() {
             var UTCTime = new Date($(this).data('event-time'));
+            console.log(UTCTime);
             if (!isNaN(UTCTime.getTime())) {
-                var localTime = eventTz.getLocalTime(UTCTime);
+                var localTime = WebsiteOne.eventTz.getLocalTime(UTCTime);
                 $(this).append(' / <p class="eventLocalTime">' + localTime + '</p>');
             }
         });
@@ -17,4 +17,4 @@ var eventTz = {
     }
 };
 
-$(eventTz.addEventTz);
+$(WebsiteOne.eventTz.addEventTz);
