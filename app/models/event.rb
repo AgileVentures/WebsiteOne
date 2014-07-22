@@ -9,7 +9,6 @@ class Event < ActiveRecord::Base
   validates :url, uri: true, :allow_blank => true
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
-  validate :from_must_come_before_to
   attr_accessor :next_occurrence_time
 
   RepeatsOptions = %w[never weekly]
@@ -91,6 +90,8 @@ class Event < ActiveRecord::Base
     end
     s
   end
+
+  tables
 
   def start_time_with_timezone
     DateTime.parse(start_time.strftime('%k:%M ')).in_time_zone(time_zone)
