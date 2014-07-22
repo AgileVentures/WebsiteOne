@@ -2,7 +2,7 @@
   <div id="doc-box">
     <h1><%= article.title %></h1>
 
-    <% if user_signed_in? and not article.new_record? %>
+    <% if user_signed_in? && (not article.new_record? ) %>
       <ul class="user-controls">
         <li>
           <%= custom_css_btn 'edit article', 'fa fa-pencil-square-o', edit_article_path(article) %>
@@ -14,8 +14,8 @@
       <li>Created on <%= article.created_at.strftime('%d %B %y') %> by <%= link_to author.display_name, user_path(author) %></li>
       <li>Last updated <%= time_ago_in_words(article.updated_at) %> ago</li>
       <li><%= link_to_tags(article.tag_list) %></li>
-      <li>Votes:&nbsp;<span class="badge vote"><%= article.get_upvotes.size - article.get_downvotes.size %></span>
-      <% if (user_signed_in? and not article.new_record?) and current_user.id != article.user_id %>
+      <li>Votes:&nbsp;<span class="badge vote"><%= article.vote_value %></span>
+      <% if (user_signed_in? && (not article.new_record? ) ) && (current_user.id != article.user_id) %>
         <% visitor_has_voted = current_user.voted_as_when_voted_for article %>
         <% if visitor_has_voted == nil %>
           <%= custom_css_btn 'Up Vote', 'fa fa-arrow-up vote_button', upvote_article_path(@article) %>

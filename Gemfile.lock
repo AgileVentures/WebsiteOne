@@ -63,7 +63,7 @@ GEM
     acts_as_follower (0.2.1)
     acts_as_tree (1.6.1)
       activerecord (>= 3.0.0)
-    acts_as_votable (0.9.0)
+    acts_as_votable (0.10.0)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
     awesome_print (1.2.0)
@@ -419,7 +419,7 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_follower
   acts_as_tree
-  acts_as_votable (~> 0.9.0)
+  acts_as_votable (~> 0.10.0)
   addressable
   awesome_print
   better_errors
