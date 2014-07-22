@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   layout 'articles_layout'
   before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :load_article, except: [:index, :new, :create, :preview ]
 
   def index
     if params[:tag].present?
@@ -11,7 +12,6 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.friendly.find(params[:id])
     @author = @article.user
   end
 
@@ -21,7 +21,6 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.friendly.find(params[:id])
   end
 
   def create
@@ -37,7 +36,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.friendly.find(params[:id])
 
     if @article.update_attributes(article_params)
       flash[:notice] = "Successfully updated the article \"#{@article.title}\""
@@ -59,33 +57,49 @@ class ArticlesController < ApplicationController
 
   # article voting
   def upvote
-    @article = Article.friendly.find(params[:id])
-
     if @article.user_id == current_user.id then
-        flash[:error] = "Can not vote for your own article \"#{@article.title}\""
+      flash[:error] = "Can not vote for your own article \"#{@article.title}\""
     else
-        @article.upvote_by current_user
+      @article.upvote_by current_user
+      case @article.vote_registered?
+      when true
         flash[:notice] = "Successfully voted up the article \"#{@article.title}\""
+      when false
+        flash[:error] = "You have already given this article an up vote"
+      when nil
+        flash[:error] = "Your vote was note registered"
+      end
     end
     redirect_to article_path(@article)
   end
 
   def downvote
-    @article = Article.friendly.find(params[:id])
-
     if @article.user_id == current_user.id then
         flash[:error] = "Can not vote for your own article \"#{@article.title}\""
     else
       @article.downvote_by current_user
-      flash[:notice] = "Successfully voted down the article \"#{@article.title}\""
+      case @article.vote_registered?
+      when true
+        flash[:notice] = "Successfully voted down the article \"#{@article.title}\""
+      when false
+        flash[:error] = "You have already given this article a down vote"
+      when nil
+        flash[:error] = "Your vote was not registered"
+      end
     end
     redirect_to article_path(@article)
   end
 
   def cancelvote
-    @article = Article.friendly.find(params[:id])
     @article.unvote_by current_user
-    flash[:notice] = "Cancelled vote for the article \"#{@article.title}\""
+    case @article.vote_registered?
+    when true
+      flash[:notice] = "Could not cancel your vote for the article \"#{@article.title}\""
+    when false
+      flash[:notice] = "Cancelled your vote for the article \"#{@article.title}\""
+    when nil
+      flash[:error] = "Can not cancel when you have not voted for this article"
+    end
     redirect_to article_path(@article)
   end
 
@@ -93,5 +107,9 @@ class ArticlesController < ApplicationController
 
   def article_params
     params[:article].permit(:title, :content, :tag_list)
+  end
+
+  def load_article
+    @article = Article.friendly.find(params[:id])
   end
 end

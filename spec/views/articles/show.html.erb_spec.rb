@@ -37,7 +37,7 @@ describe 'articles/show', type: :view do
 
     it 'should show article vote value' do
         render
-        expect(rendered).to have_content("Votes: #{@article.get_upvotes.size-@article.get_downvotes.size}")
+        expect(rendered).to have_content("Votes: #{@article.vote_value}")
         expect(rendered).not_to have_link('Up Vote')
         expect(rendered).not_to have_link('Down Vote')
     end
@@ -58,7 +58,7 @@ describe 'articles/show', type: :view do
       render
       expect(rendered).to have_link('Up Vote')
       expect(rendered).to have_link('Down Vote')
-      expect(rendered).to have_content("Votes: #{@article.get_upvotes.size-@article.get_downvotes.size}")
+      expect(rendered).to have_content("Votes: #{@article.vote_value}")
     end
 
   end
@@ -85,7 +85,7 @@ describe 'articles/show', type: :view do
 
       expect(rendered).not_to have_link('Up Vote')
       expect(rendered).not_to have_link('Down Vote')
-      expect(rendered).to have_content("Votes: #{@article.get_upvotes.size-@article.get_downvotes.size}")
+      expect(rendered).to have_content("Votes: #{@article.vote_value}")
     end
 
   end

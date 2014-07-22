@@ -21,27 +21,19 @@ Feature:
     Given I am on the "Show" page for article "JQuery cannot be queried"
     Then I should see a Vote value of "-1"
 
-  Scenario: I should not see the link to Up Vote an article on the article show page
+  Scenario: I should not see the links to Up/Down Vote an article on the article show page
     Given I am not logged in
     And I am on the "Show" page for article "Ruby is on Fire"
     Then I should not see link "Up Vote"
-
-  Scenario: I should not see the link to Down Vote an article on the article show page
-    Given I am not logged in
-    And I am on the "Show" page for article "Ruby is on Fire"
-    Then I should not see link "Down Vote"
+    And I should not see link "Down Vote"
 
 # Logged in
 
-  Scenario: I should see the link to Up Vote an article on the article show page
+  Scenario: I should see the links to Up/Down Vote an article on the article show page
     Given I am logged in
     And I am on the "Show" page for article "Ruby is on Fire"
     Then I should see link "Up Vote"
-
-  Scenario: I should see the link to Down Vote an article on the article show page
-    Given I am logged in
-    And I am on the "Show" page for article "Ruby is on Fire"
-    Then I should see link "Down Vote"
+    And I should see link "Down Vote"
 
 # voting should change vote value
 

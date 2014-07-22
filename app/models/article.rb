@@ -19,4 +19,8 @@ class Article < ActiveRecord::Base
       "/articles/#{self.to_param}/#{action}"
     end
   end
+
+  def vote_value
+    self.get_upvotes.size - self.get_downvotes.size
+  end
 end
