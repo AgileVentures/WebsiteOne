@@ -40,7 +40,7 @@ class Event < ActiveRecord::Base
 
     [].tap do |occurences|
       occurrences_between(start_time, end_time).each do |time|
-        occurences << { event: self, time: time }
+        occurences << {event: self, time: time}
 
         return occurences if occurences.count >= limit
       end
@@ -62,11 +62,11 @@ class Event < ActiveRecord::Base
   end
 
   def from
-      ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + start_time.seconds_since_midnight
+    ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + start_time.seconds_since_midnight
   end
 
   def to
-      ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + end_time.seconds_since_midnight
+    ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + end_time.seconds_since_midnight
   end
 
   def duration
@@ -85,13 +85,11 @@ class Event < ActiveRecord::Base
       when 'never'
         s.add_recurrence_time(starts_at)
       when 'weekly'
-        days = repeats_weekly_each_days_of_the_week.map {|d| d.to_sym }
+        days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
         s.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
     s
   end
-
-  tables
 
   def start_time_with_timezone
     DateTime.parse(start_time.strftime('%k:%M ')).in_time_zone(time_zone)
@@ -104,9 +102,4 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def from_must_come_before_to
-    if from > to
-      errors.add(:to_date, 'must come after the from date')
-    end
-  end
 end
