@@ -2,11 +2,10 @@ require 'spec_helper'
 
 describe 'articles/show', type: :view do
   before :each do
-    @user = build_stubbed(:user, first_name: 'Thomas')
-#    @author = stub_model(User, display_name: 'Shakespeare')
-    @author = build_stubbed(:user, first_name: 'William')
-    @article = build_stubbed(:article,
-                   id: 555,
+    @user = FactoryGirl.build_stubbed(:user, first_name: 'Thomas')
+    @author = FactoryGirl.build_stubbed(:user, first_name: 'William', last_name: 'Shakespeare')
+    @article = FactoryGirl.build_stubbed(:article,
+       id: 555,
        slug: 'friendly_id',
        title: "Ruby article",
        tag_list: ["Ruby", "Rails"],
@@ -14,8 +13,9 @@ describe 'articles/show', type: :view do
        created_at: Time.now,
        updated_at: Time.now
        )
-    downvotes = [stub_model(ActsAsVotable::Vote),stub_model(ActsAsVotable::Vote)]
-    upvotes = [stub_model(ActsAsVotable::Vote)]
+    downvotes = [ActsAsVotable::Vote.new,ActsAsVotable::Vote.new]
+    upvotes = [ActsAsVotable::Vote.new ]
+
     allow(@article).to receive(:get_upvotes).and_return(upvotes)
     allow(@article).to receive(:get_downvotes).and_return(downvotes)
   end
@@ -45,10 +45,8 @@ describe 'articles/show', type: :view do
 
   context 'user is signed in' do
     before :each do
-      allow(view).to receive(:current_user).and_return(stub_model(User))
+      allow(view).to receive(:current_user).and_return(@user)
       allow(view).to receive(:user_signed_in?).and_return(true)
-#      assign(:current_user, @user)
-
     end
 
     it 'renders a edit button' do
@@ -75,10 +73,6 @@ describe 'articles/show', type: :view do
     before :each do
       allow(view).to receive(:current_user).and_return(@author)
       allow(view).to receive(:user_signed_in?).and_return(true)
-      assign(:current_user, @author)
-#
-#      view.stub(:user_signed_in?).and_return(true)
-#      assign(:current_user, @author)
     end
 
     it 'renders a edit button' do
@@ -92,7 +86,6 @@ describe 'articles/show', type: :view do
       expect(rendered).not_to have_link('Up Vote')
       expect(rendered).not_to have_link('Down Vote')
       expect(rendered).to have_content("Votes: #{@article.get_upvotes.size-@article.get_downvotes.size}")
-
     end
 
   end
