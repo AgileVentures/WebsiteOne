@@ -1,20 +1,12 @@
 require 'spec_helper'
 
-describe Article do
+describe Article, :type => :model do
 
-  let(:article) { Article.new slug: 'test-article' }
+  subject { Article.new slug: 'test-article' }
 
-  it 'should respond to tag_list' do
-    expect(article).to respond_to :tag_list
-  end
-
-  it 'should respond to user' do
-    expect(article).to respond_to :user
-  end
-
-  it 'should respond to friendly_id' do
-    expect(article).to respond_to :friendly_id
-  end
+  it { is_expected.to respond_to :tag_list}
+  it { is_expected.to respond_to :user}
+  it { is_expected.to respond_to :friendly_id}
 
   it 'should respond to acts_as_votable methods' do
     expect(article).to respond_to :get_upvotes
@@ -35,11 +27,11 @@ describe Article do
 
   describe '#url_for_me' do
     it 'returns correct url for show action' do
-      article.url_for_me('show').should eq "/articles/#{article.slug}"
+      expect(subject.url_for_me('show')).to eq "/articles/test-article"
     end
 
     it 'returns correct url for other actions' do
-      article.url_for_me('new').should eq "/articles/#{article.slug}/new"
+      expect(subject.url_for_me('new')).to eq "/articles/test-article/new"
     end
   end
 end

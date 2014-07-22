@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   include ActAsPage
 
   belongs_to :user
-  validates :content, :user_id, presence: true
+  validates :content, :user, presence: true
 
   acts_as_taggable
   acts_as_votable
