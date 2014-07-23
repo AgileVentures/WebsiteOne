@@ -29,6 +29,17 @@ describe Event do
     end
   end
 
+  context 'return true on valid inputs' do
+    before do
+      @event = FactoryGirl.create(:event)
+    end
+    it 'should accept events that transpire overnight ' do
+      @event.start_time ='23:30:00 UTC'
+      @event.end_time = '00:30:00 UTC'
+      expect(@event.save).to be_truthy
+    end
+  end
+
   context 'should create an event that ' do
     it 'is scheduled for one occasion' do
       event = Event.create!(name: 'one time event',
