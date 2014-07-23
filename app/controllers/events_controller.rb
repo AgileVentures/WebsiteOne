@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
 
   def new
-    @event = Event.new
+    @event = Event.new(event_date: Time.now.utc, start_time: Time.now.utc, end_time: Time.now.utc + 1.hour)
   end
 
   def show
