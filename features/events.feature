@@ -125,7 +125,6 @@ Feature: Events
     And I should see "Event Created"
     And I should see "5:30"
     Given I am on the edit page for event "Whatever"
-    And I click the "Save" button
-    When I am on the show page for event "Whatever"
-    Then show me the page
+    When I click the "Save" button
+    Given I am on the show page for event "Whatever"
     Then I should see "5:30"
