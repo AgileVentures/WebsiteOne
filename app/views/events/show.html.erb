@@ -1,18 +1,26 @@
 <div class="col-lg-8 col-lg-offset-2">
 
-  <div class="event-name">
+  <div class="event-details">
       <h2><%= @event.name %></h2>
   </div>
+  <div class="event-details-well">
   <div class="event-details">
-    <div class="col-lg-6">
-      <small><%= @event.schedule %></small>
+    <div class="col-lg-8">
+      <small class="event-schedule"><%= @event.schedule %></small>
+    </div>
+    <div class="col-lg-4">
+      <% if @hangout.try!(:live?) %>
+        <a href="<%= @hangout.hangout_url %>" class="event-live-link">EVENT IS LIVE !<br/>CLICK TO JOIN</a>
+      <% else  %>
+        <a href="#" class="event-live-link disabled">LIVE SOON ...</a>
+      <% end  %>
+    </div>
+  </div>
+  <div class="event-details">
+    <div class="col-lg-12">
       <p><strong><%= @event.description %></strong></p>
     </div>
-    <% if @hangout.try!(:live?) %>
-    <div class="col-lg-6">
-      <a href="<%= @hangout.hangout_url %>" class="event-live-link">EVENT IS LIVE !<br/>CLICK TO JOIN</a>
-    </div>
-    <% end %>
+  </div>
   </div>
 
   <% if @event.schedule.present? %>
@@ -30,7 +38,7 @@
           </div>
         <% if user_signed_in? %>
           <div class="col-lg-4">
-            <%= link_to 'Edit schedule', edit_event_path(@event), :class => 'btn btn-info' %>
+            <%= link_to 'Edit schedule', edit_event_path(@event), :class => 'event-edit-schedule' %>
           </div>
         <% end  %>
         </div>
@@ -62,6 +70,15 @@
                   <div class="panel-body">
                     <div id="hangout-btn" class="col-lg-5 hangout-btn">
                       <%= render partial: 'hangouts/hangout_button', locals: {id: @event.id, topic: topic(@event, @event_schedule)} %>
+                    </div>
+                    <div class="hangout-btn"> &#8592; Event host will start the Hangout 
+                        <button type="button" class="btn readme-link" data-container="body" data-toggle="popover" data-placement="right" 
+                              data-content="The hangout is started by the event host at a scheduled time.
+                              If the time is due and hangout has not been started, you may start it yourself.
+                              By starting a hangout, you are becoming the host of the session, 
+                              the hangout link gets published on WebsiteOne and AgileVentures Slack channels
+                              and the session may be joined by other people and viewed publicly on Youtube.">
+                          read more</button>
                     </div>
                   </div>
                 </div>
@@ -110,5 +127,5 @@
             </div>
           <% end %>
   <% end %>
-
 </div>
+<%=javascript_include_tag 'events.js' %>
