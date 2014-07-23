@@ -70,4 +70,18 @@ module Helpers
     end
   end
 
+  def view_spec_page
+    require 'launchy'
+    filename = "tmp/view_spec_render-#{Time.now.to_i}.html"
+    File.open(filename, 'w') { |file| file.write(rendered) }
+    Launchy.open filename
+  rescue LoadError
+    warn 'Sorry, you need to install launchy to open pages: `gem install launchy`'
+  end
+end
+
+RSpec::Matchers.define :have_default_cc_addresses do
+  match do |mail|
+    mail.cc && (mail.cc.include? 'support@agileventures.org')
+  end
 end

@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-
-describe UsersHelper do
-end
-
 describe 'YoutubeHelper helpers' do
 
   it 'retrieves user videos from youtube' do
@@ -102,5 +98,4 @@ describe 'YoutubeHelper helpers' do
     link = 'http://www.youtube.com/embed/id_1?enablejsapi=1'
     expect(helper.video_embed_link(video)).to eq(link)
   end
-
 end

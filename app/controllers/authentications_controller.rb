@@ -3,7 +3,7 @@ class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
 
   def create
-    if request.env['omniauth.params']['youtube']
+    if request.env['omniauth.params']['youtube'] && current_user
       link_to_youtube and return
     end
 
@@ -78,13 +78,14 @@ class AuthenticationsController < ApplicationController
   end
 
   def link_to_youtube
-    user = current_user
-    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
-      user.youtube_id = YoutubeHelper.channel_id(token)
-      user.save
+    token = request.env['omniauth.auth']['credentials']['token']
+    if token
+      current_user.youtube_id = YoutubeHelper.channel_id(token) unless current_user.youtube_id
+      current_user.youtube_user_name = YoutubeHelper.youtube_user_name(current_user) unless current_user.youtube_user_name
+      current_user.save
     end
 
-    redirect_to(request.env['omniauth.origin'] || root_path)
+    redirect_to(request.env['omniauth.origin'] || edit_user_registration_path)
   end
 
   def unlink_from_youtube
@@ -134,14 +135,3 @@ class AuthenticationsController < ApplicationController
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-

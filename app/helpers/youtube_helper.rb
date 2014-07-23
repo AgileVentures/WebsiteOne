@@ -1,8 +1,27 @@
 
-#TODO YA move to a separate helper module and upgrade to v3
-module YoutubeHelper
+require 'open-uri'
 
-    def self.user_videos(user)
+module YoutubeHelper
+  extend self
+
+  def channel_id(token)
+    response = open("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", 'Authorization' => "Bearer #{token}").read
+    json = JSON.load(response)
+    json['items'].first['id']
+  rescue JSON::ParserError => err
+    raise err, 'Invalid JSON returned from Youtube', err.backtrace
+  end
+
+  def youtube_user_name(user)
+    return unless user.youtube_id
+    response = open("https://gdata.youtube.com/feeds/api/users/#{user.youtube_id}?fields=title&alt=json").read
+    json = JSON.load(response)
+    json['entry']['title']['$t']
+    rescue JSON::ParserError => err
+    raise err, 'Invalid JSON returned from Youtube', err.backtrace
+  end
+  
+  def self.user_videos(user)
       if user_id = user.youtube_id
         tags = followed_project_tags(user)
         return [] if tags.empty?
@@ -115,27 +134,12 @@ module YoutubeHelper
       }
     end
 
-    def self.channel_id(token)
-      # API v3
-      response = open("https://www.googleapis.com/youtube/v3/channels?part=id&mine=true", 'Authorization' => "Bearer #{token}").read
-      json = JSON.load(response)
-      json['items'].first['id']
-    end
-
     #TODO YA add fallback is user_id not found
     def self.user_id(token)
       # API v2
       response = open("https://gdata.youtube.com/feeds/api/users/default?alt=json", 'Authorization' => "Bearer #{token}").read
       json = JSON.load(response)
       json['entry']['yt$username']['$t']
-    end
-
-    def self.user_name(user)
-      # API v2
-      return unless user.youtube_id
-      response = open("https://gdata.youtube.com/feeds/api/users/#{user.youtube_id}?fields=title&alt=json").read
-      json = JSON.load(response)
-      json['entry']['title']['$t']
     end
 
     #TODO YA add this to youtube connection
@@ -164,4 +168,3 @@ module YoutubeHelper
     end
 
   end
-
