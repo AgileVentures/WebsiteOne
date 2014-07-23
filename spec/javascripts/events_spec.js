@@ -8,12 +8,20 @@ describe('Events', function () {
             </ul>');
         });
 
+        it('appends nothing if user is in UTC time zone', function () {
+            spyOn(Date.prototype, 'getTimezoneOffset').and.returnValue(0);
+            WebsiteOne.eventTz.addEventTz();
+            expect($('body').html()).not.toMatch(/<p class="eventLocalTime">/);
+        });
+
         it('appends local time if time format is correct', function () {
+            spyOn(Date.prototype, 'getTimezoneOffset').and.returnValue(-180);
             WebsiteOne.eventTz.addEventTz();
             expect($('#correct').html()).toMatch(/<p class="eventLocalTime">/);
         });
 
-        it('does not append anything if time format is incorrect', function () {
+        it('appends nothing if time format is incorrect', function () {
+            spyOn(Date.prototype, 'getTimezoneOffset').and.returnValue(-180);
             WebsiteOne.eventTz.addEventTz();
             expect($('#incorrect').html()).not.toMatch(/<p class="eventLocalTime">/);
         });

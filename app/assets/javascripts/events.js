@@ -1,14 +1,16 @@
 $('.readme-link').popover({trigger: 'focus'});
 WebsiteOne.eventTz = {
     addEventTz: function() {
-        $('ul.occurrence').find('li').each(function() {
-            var UTCTime = new Date($(this).data('event-time'));
-            console.log(UTCTime);
-            if (!isNaN(UTCTime.getTime())) {
-                var localTime = WebsiteOne.eventTz.getLocalTime(UTCTime);
-                $(this).append(' / <p class="eventLocalTime">' + localTime + '</p>');
-            }
-        });
+        if (new Date().getTimezoneOffset() != 0) {
+            $('ul.occurrence').find('li').each(function() {
+                var UTCTime = new Date($(this).data('event-time'));
+                console.log(UTCTime);
+                if (!isNaN(UTCTime.getTime())) {
+                    var localTime = WebsiteOne.eventTz.getLocalTime(UTCTime);
+                    $(this).append(' / <p class="eventLocalTime">' + localTime + '</p>');
+                }
+            });
+        }
     },
 
     getLocalTime: function(eventTime) {
