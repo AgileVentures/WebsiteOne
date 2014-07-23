@@ -109,3 +109,23 @@ Feature: Events
     And I am on Events index page
     Then I should see "Scrum"
     And I should see "Started at 7:00 UTC"
+
+  @time-travel-step
+  Scenario: Create a new event at present time,then edit and check the time
+    Given I am logged in
+    And I am on Events index page
+    And the date is "2014/02/03 17:30:00 UTC"
+    When I click "New Event"
+    And I fill in event field:
+      | name        | value          |
+      | Name        | Whatever       |
+      | Description | something else |
+    And I click the "Save" button
+    Then I should be on the event "Show" page for "Whatever"
+    And I should see "Event Created"
+    And I should see "5:30"
+    Given I am on the edit page for event "Whatever"
+    And I click the "Save" button
+    When I am on the show page for event "Whatever"
+    Then show me the page
+    Then I should see "5:30"
