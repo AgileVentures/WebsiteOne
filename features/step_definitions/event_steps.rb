@@ -48,12 +48,11 @@ Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
   case page
     when 'show'
       current_path.should eq event_path(event)
-
     else
       current_path.should eq eval("#{page}_event_path(event)")
-
   end
 end
+
 Given(/^the date is "([^"]*)"$/) do |jump_date|
   Delorean.time_travel_to(Time.parse(jump_date))
 end
