@@ -16,8 +16,8 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-    @members = @project.followers.reject { |member| !member.display_profile }
-    @videos = YoutubeHelper.project_videos(@project, @members) if @project
+    @members = @project.members
+    @videos = YoutubeVideos.for(@project)
   end
 
   def new

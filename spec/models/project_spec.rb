@@ -67,7 +67,7 @@ describe Project do
   end
 
   describe '#search' do
-    before(:each) { 9.times { FactoryGirl.create(:project) } }
+    before(:each) { 9.times { build_stubbed(:project) } }
 
     it 'should return paginated projects with 5 per page' do
       expect(Project.search(nil, nil).per_page).to eq(5)
@@ -80,6 +80,33 @@ describe Project do
       FactoryGirl.create(:project_with_tags, tags: ['Tag_2', 'Tag_3'])
 
       expect(Project.all_tags).to include('Tag_1', 'Tag_2', 'Tag_3')
+    end
+  end
+
+  describe "#youtube_tags" do
+    it 'returns the tags for project including the project title' do
+      project = build_stubbed(:project, title: "WebsiteOne", tag_list: ["WSO"])
+      expect(project.youtube_tags).to eq ["wso", "websiteone"]
+    end
+  end
+
+  describe "#members_tags" do
+    it 'returns the tags for project members with thier youtube user names' do
+      users = [User.new(youtube_user_name: 'test_id'), User.new(youtube_user_name: 'test_id_2')]
+      project = Project.new
+      allow(project).to receive(:members).and_return(users)
+      expect(project.members_tags).to eq ["test_id", "test_id_2"]
+    end
+  end
+
+  describe "#members" do
+    it 'returns followers of the project who have a public profile' do
+      project = build_stubbed(:project)
+      @users = [ User.new(slug: 'my-friendly-id', display_profile: true) ]
+      @more_users = @users + [ User.new(slug: 'another-friendly-id', display_profile: false)]
+      allow(project).to receive(:followers).and_return(@more_users)
+
+      expect(project.members).to eq @users
     end
   end
 end
