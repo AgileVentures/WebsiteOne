@@ -12,7 +12,7 @@ module EventHelper
     end
   end
 
-  def current_occurrence_time(event, js=false)
+  def current_occurrence_time(event, js: false)
     time = nested_hash_value(event, :time)
     return nil if time.nil?
 
