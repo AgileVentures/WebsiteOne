@@ -59,7 +59,7 @@ describe 'visitors/index.html.erb', type: :view do
   context 'event has started less than 15 minutes ago' do
     before :each do
       fix_time_at('2014-03-07 10:44:00 UTC')
-      @event.hangouts << Hangout.new(hangout_url: 'http://hangout.test')
+      @event.hangouts << FactoryGirl.build(:hangout, hangout_url: 'http://hangout.test')
     end
 
     it 'should <event> has just started!' do
@@ -69,7 +69,7 @@ describe 'visitors/index.html.erb', type: :view do
     end
 
     it 'renders Join live event link if hangout is live' do
-      allow(@event.hangouts).to receive(:live?).and_return(true)
+      allow_any_instance_of(Hangout).to receive(:live?).and_return(true)
       render
       expect(rendered).to have_link('Click to join!', href: 'http://hangout.test')
     end

@@ -94,11 +94,11 @@ describe 'projects/show.html.erb', type: :view do
         render
       end
 
-      it 'render the appropriate story type icon' do
+      it 'renders the appropriate story type icon' do
         expect(rendered).to have_css 'i.fa.fa-gear.fa-lg'
       end
 
-      it 'render the correct story estimate' do
+      it 'renders the correct story estimate' do
         expect(rendered).to have_css 'i.story_estimate', count: 3
       end
 
@@ -106,11 +106,11 @@ describe 'projects/show.html.erb', type: :view do
         expect(rendered).to have_text 'My story'
       end
 
-      it 'render the story owners initials' do
+      it 'renders the story owners initials' do
         expect(rendered).to have_text 'my-initials'
       end
 
-      it 'render the current story state' do
+      it 'renders the current story state' do
         expect(rendered).to have_text 'active'
       end
     end
