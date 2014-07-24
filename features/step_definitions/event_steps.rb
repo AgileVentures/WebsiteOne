@@ -56,3 +56,16 @@ end
 Given(/^the date is "([^"]*)"$/) do |jump_date|
   Delorean.time_travel_to(Time.parse(jump_date))
 end
+
+
+And(/^I fill in event year with "([^"]*)"$/) do |year|
+  select year, :from => "event_event_date_1i"
+end
+
+And(/^I fill in event month with "([^"]*)"$/) do |month|
+  select month, :from => "event_event_date__2i"
+end
+
+And(/^I fill in event day with "([^"]*)"$/) do |day|
+  select day, :from => "event_event_date_3i"
+end
