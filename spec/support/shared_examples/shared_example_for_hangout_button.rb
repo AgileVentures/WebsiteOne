@@ -12,7 +12,13 @@ shared_examples_for 'it has a hangout button' do
     }
   end
 
-  it 'renders hangout button with correct parameters' do
+  it 'renders hangout button with generated hangout id if provided id is empty' do
+    allow(view).to receive(:generate_hangout_id).and_return('123456')
+    render
+    expect(rendered).to have_selector('#liveHOA-placeholder', data_tags)
+  end
+
+  it 'renders hangout button with provided id if it is not empty' do
     allow(view).to receive(:generate_hangout_id).and_return('123456')
     render
     expect(rendered).to have_selector('#liveHOA-placeholder', data_tags)
