@@ -6,7 +6,7 @@ class HangoutsController < ApplicationController
     hangout = Hangout.find_or_create_by(uid: params[:id])
 
     if hangout.try!(:update_hangout_data, params)
-      SlackService.post_hangout_notification(hangout)
+      SlackService.post_hangout_notification(hangout) if params[:notify]
 
       redirect_to event_path(params[:event_id]) and return if local_request?
       render text: 'Success'
