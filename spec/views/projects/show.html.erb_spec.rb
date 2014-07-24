@@ -6,48 +6,42 @@ describe 'projects/show.html.erb', type: :view do
 
     @document = FactoryGirl.build_stubbed(:document,
                            title: 'this is a document',
+                           user: @user,
                            created_at: 1.month.ago)
 
     @project = FactoryGirl.build_stubbed(:project,
-                          id: 1,
                           title: 'Title 1',
                           description: 'Description 1',
                           status: 'Active',
-                          user_id: @user.id,
-                          created_at: Time.now,
-                          tag_list: [])
+                          user: @user,
+                          user_id: @user.id)
 
-    allow(@project).to receive(:friendly_id).and_return('my-friend-project')
-    allow(@project).to receive(:pivotaltracker_id).and_return('11111')
 
     @videos = [
-        { title: 'First video', user: @user, published: '12/12/2012'.to_date, url: 'somewhere', id: '123', content: 'some text' },
-        { title: 'Second video', user: @user, published: '13/12/2013'.to_date, url: 'somewhere', id: '123', content: 'some text' }
-    ]
+                { title: 'First video', user: @user, published: '12/12/2012'.to_date, 
+                    url: 'somewhere', id: '123', content: 'some text' },
+                { title: 'Second video', user: @user, published: '13/12/2013'.to_date, 
+                    url: 'somewhere', id: '123', content: 'some text' }
+              ]
 
-    story = double(story_type: 'chore',
+    @stories = [ double(story_type: 'chore',
                    estimate: 3,
                    id: 1,
                    name: 'My story',
                    owned_by: { initials: 'my-initials' },
                    current_state: 'active')
+               ]
 
-    @stories = [ story ]
     @documents = [@document]
+    allow(@documents).to receive(:roots).and_return(@documents)
+
     @created_by = ['by:', ([@user.first_name, @user.last_name].join(' '))].join(' ')
 
     assign :members, [@user]
-
-    allow(@documents).to receive(:roots).and_return(@documents)
-    allow(@documents).to receive(:count).and_return(1)
-    allow(@document).to receive(:children).and_return([])
-    allow(@document).to receive(:user).and_return(@user)
-    allow(@project).to receive(:user).and_return(@user)
-
   end
 
   it "renders a link to the project's github page" do
-    allow(@project).to receive(:github_url).and_return('github.com/AgileVentures/myfriend')
+    @project.github_url = 'github.com/AgileVentures/myfriend'
     render
     expect(rendered).to have_link("#{@project.github_url.split('/').last}", :href => @project.github_url)
   end
@@ -58,7 +52,7 @@ describe 'projects/show.html.erb', type: :view do
   end
 
   it "renders a link to the project's Pivotal Tracker page" do
-    allow(@project).to receive(:pivotaltracker_url).and_return('www.pivotaltracker.com/s/projects/12345')
+    @project.pivotaltracker_url =  'www.pivotaltracker.com/s/projects/12345'
     render
     expect(rendered).to have_link("#{@project.title}", :href => @project.pivotaltracker_url)
   end
@@ -108,7 +102,7 @@ describe 'projects/show.html.erb', type: :view do
         expect(rendered).to have_css 'i.story_estimate', count: 3
       end
 
-      it 'render the story title' do
+      it 'renders the story title' do
         expect(rendered).to have_text 'My story'
       end
 
@@ -183,7 +177,6 @@ describe 'projects/show.html.erb', type: :view do
         let(:event_id){''}
         let(:category){'PairProgramming'}
         let(:hangout_id){''}
-        let(:user){@user}
         let(:project){@project}
         let(:topic_name){"PairProgramming on #{@project.title}"}
       end
