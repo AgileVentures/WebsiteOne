@@ -12,6 +12,6 @@ class Hangout < ActiveRecord::Base
 
   def update_hangout_data(params)
     event = Event.find_by_id(params[:event_id])
-    update(title: params[:topic], event: event, category: params[:category], hangout_url: params[:hangout_url])
+    update(title: params[:topic], event: event, category: params[:category], hangout_url: params[:hangout_url], updated_at: Time.now)
   end
 end

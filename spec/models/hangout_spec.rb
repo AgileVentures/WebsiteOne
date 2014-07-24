@@ -48,12 +48,16 @@ describe Hangout do
 
     it 'updates basic data' do
       event = FactoryGirl.create(:event, id: 50)
+      current_time = Time.parse('10:02:00')
+      allow(Time).to receive(:now).and_return(current_time)
+
       hangout.update_hangout_data(params)
 
       expect(hangout.title).to eq('Morning Rejoice')
       expect(hangout.event).to eq(event)
       expect(hangout.category).to eq('Scrum')
       expect(hangout.hangout_url).to eq('http://hangout.test')
+      expect(hangout.updated_at.time).to eq(current_time)
     end
 
   end
