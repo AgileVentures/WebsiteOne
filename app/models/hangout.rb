@@ -3,11 +3,11 @@ class Hangout < ActiveRecord::Base
   default_scope { order('created_at') }
 
   def started?
-    hangout_url.present? && self.updated_at > 2.hours.ago
+    hangout_url.present?
   end
 
   def live?
-    hangout_url.present? && self.updated_at > 15.minutes.ago
+    hangout_url.present? && self.updated_at > 5.minutes.ago
   end
 
   def update_hangout_data(params)
