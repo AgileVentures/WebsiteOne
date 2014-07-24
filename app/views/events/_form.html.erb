@@ -28,6 +28,10 @@
         <%= f.time_select :end_time, ampm: true, :minute_step => 15 %>
       </div>
 
+      <!-- f.text_field :event_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker'} -->
+      <!-- f.text_field :start_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} -->
+      <!-- f.text_field :end_time, {:data => {:format => 'hh:mm'}, style: 'width:auto;', :class => 'form-control timepicker'} -->
+
       <div class="form-group">
         <%= f.label :repeats, :class => 'control-label' %>
         <%= f.select :repeats, Event::RepeatsOptions, {}, :default => 'never', :class => 'form-control' %>
