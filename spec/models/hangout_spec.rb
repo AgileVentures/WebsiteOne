@@ -17,23 +17,13 @@ describe Hangout do
   context 'hangout_url is present' do
     before { hangout.hangout_url = 'test' }
 
-    it 'reports started if the link is not older than 2 hours' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:59:59'))
-      expect(hangout.started?).to be_truthy
-    end
-
-    it 'reports not started if the link is older than 2 hours' do
-      allow(Time).to receive(:now).and_return(Time.parse('12:00:01'))
-      expect(hangout.started?).to be_falsey
-    end
-
     it 'reports live if the link is not older than 15 minutes' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:14:59'))
+      allow(Time).to receive(:now).and_return(Time.parse('10:04:59'))
       expect(hangout.live?).to be_truthy
     end
 
     it 'reports not live if the link is older than 15 minutes' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:15:01'))
+      allow(Time).to receive(:now).and_return(Time.parse('10:05:01'))
       expect(hangout.live?).to be_falsey
     end
   end

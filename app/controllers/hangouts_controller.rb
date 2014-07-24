@@ -9,9 +9,9 @@ class HangoutsController < ApplicationController
       SlackService.post_hangout_notification(hangout) if params[:notify]
 
       redirect_to event_path(params[:event_id]) and return if local_request?
-      render text: 'Success'
+      head :ok
     else
-      render text: 'Failure'
+      head :internal_server_error
     end
   end
 

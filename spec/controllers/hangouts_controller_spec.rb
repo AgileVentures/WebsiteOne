@@ -26,21 +26,21 @@ describe HangoutsController do
       Hangout.any_instance.stub(update_hangout_data: true)
 
       get :update, {id: '333'}
-      expect(response.body).to have_text('Success')
+      expect(response.status).to eq(200)
     end
 
     it 'calls the SlackService to post hangout notification on successful update' do
       Hangout.any_instance.stub(update_hangout_data: true)
       expect(SlackService).to receive(:post_hangout_notification).with(an_instance_of(Hangout))
 
-      get :update, {id: '333'}
+      get :update, {id: '333', notify: 'true'}
     end
 
     it 'returns a failure response if update is unsuccessful' do
       Hangout.any_instance.stub(update: false)
 
       get :update, {id: '333'}
-      expect(response.body).to have_text('Failure')
+      expect(response.status).to eq(500)
     end
 
     it 'redirects to event show page if the link was updated manually' do
