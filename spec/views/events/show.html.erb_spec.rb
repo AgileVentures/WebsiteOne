@@ -11,7 +11,7 @@ describe 'events/show', type: :view do
     allow(Time).to receive(:now).and_return(Time.parse('2014-03-07 23:30:00'))
     @event_schedule = @event.next_occurrences(end_time: Time.now + 40.days)
 
-    allow(view).to receive(:current_user).and_return(double(User, id: '55'))
+    allow(view).to receive(:current_user).and_return(FactoryGirl.build_stubbed(:user, id: '55'))
   end
 
   it 'should display event information' do
@@ -46,8 +46,9 @@ describe 'events/show', type: :view do
 
   describe 'Hangouts' do
     before(:each) do
-      @hangout = Hangout.new(uid: '123456',
-                         event_id: 375,
+      @hangout = FactoryGirl.build_stubbed(:hangout,
+                        uid: '123456',
+                        event_id: 375,
                         category: 'Scrum',
                         hangout_url: 'http://hangout.test',
                         updated_at: Time.parse('10:25:00'))
