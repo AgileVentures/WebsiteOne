@@ -1,9 +1,10 @@
 <div class='row'>
-  <div class='col-sm-8'>
+  <div class='col-sm-10'>
     <%= form_for @project, :html => { :role => 'form' } do |f| %>
 
       <%= awesome_text_field f, :title, placeholder: 'Name' %>
-      <%= awesome_text_area f, :description, rows: 10, placeholder: 'Description' %>
+      <%= awesome_text_area f, :description, rows: 15, placeholder: 'Description', class: 'tinymce' %>
+	  <%= tinymce %>
 
       <div class='form-group'>
         <%= f.label :status %>
