@@ -104,14 +104,15 @@ Feature: Events
     Then I should be on the Events "Create" page
     And I should see "Name can't be blank"
 
-  Scenario:  Show events which are in progress
+  Scenario: Show events which are in progress
     Given the date is "2014/02/03 07:10:00 UTC"
     And I am on Events index page
     Then I should see "Scrum"
     And I should see "Started at 7:00 UTC"
 
-  @time-travel-step
-  Scenario: Create a new event at present time,then edit and check the time
+  #This scenario below "should" have failed previously. I.e., this is what I do manually to recreate the bug.
+  #Unfortunately, it didn't 'fail' here in the cucumber test with the previous timepicker.  @time-travel-step
+  Scenario: Create a new PM event,then edit to force fields to be repopulated, save, and check the time again on the show page
     Given I am logged in
     And I am on Events index page
     And the date is "2014/02/03 17:30:00 UTC"
