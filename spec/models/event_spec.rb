@@ -42,9 +42,8 @@ describe Event do
       event = Event.create!(name: 'one time event',
                             category: 'Scrum',
                             description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            duration: 600,
                             repeats: 'never',
                             repeats_every_n_weeks: nil,
                             repeat_ends: 'never',
@@ -59,9 +58,8 @@ describe Event do
       event = Event.create!(name: 'every weekend event',
                             category: 'Scrum',
                             description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 96,
@@ -76,9 +74,8 @@ describe Event do
       event = Event.create!(name: 'every Sunday event',
                             category: 'Scrum',
                             description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 64,
@@ -93,9 +90,8 @@ describe Event do
       event = Event.create!(name: 'every Monday event',
                             category: 'Scrum',
                             description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 1,
@@ -111,9 +107,8 @@ describe Event do
       @event = {name: 'one time event',
                 category: 'Scrum',
                 description: '',
-                event_date: 'Mon, 17 Jun 2013',
-                start_time: '2000-01-01 09:00:00 UTC',
-                end_time: '2000-01-01 17:00:00 UTC',
+                start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                duration: 600,
                 repeats: 'never',
                 repeats_every_n_weeks: nil,
                 repeat_ends: 'never',
@@ -136,10 +131,9 @@ describe Event do
     before do
       @event = FactoryGirl.build_stubbed(Event,
                                          name: 'Spec Scrum',
-                                         event_date: '2014-03-07',
-                                         start_time: '10:30:00',
+                                         start_datetime: '2014-03-07 10:30:00 UTC',
                                          time_zone: 'UTC',
-                                         end_time: '11:00:00')
+                                         duration: 30)
 
       allow(@event).to receive(:repeats).and_return('weekly')
       allow(@event).to receive(:repeats_every_n_weeks).and_return(1)
@@ -192,10 +186,9 @@ describe Event do
   describe 'Event.next_event_occurence' do
     let(:event) do
       Event.new(name: 'Spec Scrum',
-                event_date: '2014-03-07',
-                start_time: '10:30:00',
+                start_datetime: '2014-03-07 10:30:00 UTC',
                 time_zone: 'UTC',
-                end_time: '11:00:00')
+                duration: 30)
     end
 
     before(:each) do
