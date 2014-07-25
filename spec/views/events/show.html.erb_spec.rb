@@ -11,7 +11,7 @@ describe 'events/show', type: :view do
     allow(Time).to receive(:now).and_return(Time.parse('2014-03-07 23:30:00'))
     @event_schedule = @event.next_occurrences(end_time: Time.now + 40.days)
 
-    allow(view).to receive(:current_user).and_return(FactoryGirl.build_stubbed(:user, id: '55'))
+    allow(view).to receive(:current_user).and_return(FactoryGirl.build_stubbed(:user))
   end
 
   it 'should display event information' do

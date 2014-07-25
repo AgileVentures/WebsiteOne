@@ -36,6 +36,13 @@ describe HangoutsController do
       get :update, {id: '333', notify: 'true'}
     end
 
+    it 'does not call the SlackService' do
+      allow_any_instance_of(Hangout).to receive(:update_hangout_data).and_return(true)
+      expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(Hangout))
+
+      get :update, {id: '333', notify: 'false'}
+    end
+
     it 'returns a failure response if update is unsuccessful' do
       Hangout.any_instance.stub(update: false)
 
@@ -45,7 +52,7 @@ describe HangoutsController do
 
     it 'redirects to event show page if the link was updated manually' do
       allow(controller).to receive(:local_request?).and_return(true)
-      Hangout.any_instance.stub(update_hangout_data: true)
+      allow_any_instance_of(Hangout).to receive(:update_hangout_data).and_return(true)
 
       get :update, {id: '333', event_id: 50}
       expect(response).to redirect_to(event_path(50))
