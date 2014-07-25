@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Hangout do
-  let(:event){ FactoryGirl.build_stubbed(:event, start_time: Time.parse('10:00:00')) }
+  let(:event){ FactoryGirl.build_stubbed(:event, start_datetime: Time.parse('2014-03-07 10:00:00 UTC')) }
   let(:hangout){Hangout.new(event_id: '333', event: event, updated_at: Time.parse('10:00:00')) }
 
   context 'hangout_url is not present' do

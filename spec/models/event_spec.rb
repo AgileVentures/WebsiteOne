@@ -42,7 +42,7 @@ describe Event do
       event = Event.create!(name: 'one time event',
                             category: 'Scrum',
                             description: '',
-                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 EDT',
                             duration: 600,
                             repeats: 'never',
                             repeats_every_n_weeks: nil,
@@ -58,7 +58,7 @@ describe Event do
       event = Event.create!(name: 'every weekend event',
                             category: 'Scrum',
                             description: '',
-                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 EDT',
                             duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
@@ -74,7 +74,7 @@ describe Event do
       event = Event.create!(name: 'every Sunday event',
                             category: 'Scrum',
                             description: '',
-                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 EDT',
                             duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
@@ -90,14 +90,14 @@ describe Event do
       event = Event.create!(name: 'every Monday event',
                             category: 'Scrum',
                             description: '',
-                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 GMT',
                             duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 1,
                             repeat_ends: 'never',
                             repeat_ends_on: 'Mon, 17 Jun 2013',
-                            time_zone: 'UTC')
+                            time_zone: 'GMT')
       expect(event.schedule.first(5)).to eq(['Mon, 17 Jun 2013 09:00:00 GMT +00:00', 'Mon, 24 Jun 2013 09:00:00 GMT +00:00', 'Mon, 01 Jul 2013 09:00:00 GMT +00:00', 'Mon, 08 Jul 2013 09:00:00 GMT +00:00', 'Mon, 15 Jul 2013 09:00:00 GMT +00:00'])
     end
   end
