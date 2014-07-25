@@ -1,10 +1,12 @@
 $('.readme-link').popover({trigger: 'focus'});
 WebsiteOne.eventTz = {
     addEventTz: function () {
+        $('body').append(new Date());
+        $('body').append(new Date().toLocaleString());
         var UTCTime;
         var localTime;
         if (new Date().getTimezoneOffset() !== 0) {
-            $('ul.occurrence').find('li').each(function () {
+            $('ul#occurrences').find('li').each(function () {
                 UTCTime = new Date($(this).data('event-time'));
                 if (!isNaN(UTCTime.getTime())) {
                     localTime = WebsiteOne.eventTz.getLocalTime(UTCTime);
