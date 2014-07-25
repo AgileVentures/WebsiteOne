@@ -6,7 +6,6 @@ WebsiteOne.eventTz = {
         if (new Date().getTimezoneOffset() !== 0) {
             $('ul.occurrence').find('li').each(function () {
                 UTCTime = new Date($(this).data('event-time'));
-                console.log(UTCTime);
                 if (!isNaN(UTCTime.getTime())) {
                     localTime = WebsiteOne.eventTz.getLocalTime(UTCTime);
                     $(this).append(' / <p class="eventLocalTime">' + localTime + '</p>');
