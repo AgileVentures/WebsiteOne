@@ -28,15 +28,15 @@ class Event < ActiveRecord::Base
   end
 
   def event_date
-    start_datetime.to_date
+    start_datetime    # to_date converted the timezone also to the server's time zone
   end
 
   def start_time
-    start_datetime.to_time
+   start_datetime   # to_date converted the timezone also to the server's time zone
   end
 
   def end_time
-    start_datetime + duration*60 #convert to seconds
+    (start_datetime + duration*60).utc  #convert to seconds
   end
 
   def self.next_event_occurrence
