@@ -2,12 +2,6 @@
   box-sizing: border-box;
 }
 
-.event-live-link {
-  color: #d35400;
-  font-size: large;
-  font-weight: bold;
-}
-
 #eventContainer {
   display: flex;
   flex-flow: row;
@@ -150,20 +144,34 @@
   border-bottom-right-radius: 4px;
 }
 
-.event-name {
+.event-details {
   @extend .row;
   margin: 0px;
-}
-
-.event-details {
-  @extend .event-name;
   margin-bottom: 10px;
 }
 
-.schedule-well, .hangouts-management-well, .hangouts-details-well {
+.event-details-well, .schedule-well, .hangouts-management-well, .hangouts-details-well {
   @extend .row;
   @extend .well;
   @extend .well-sm;
   margin-left: 0;
   margin-right: 0;
+}
+
+.event-live-link {
+  @extend .btn;
+  @extend .btn-success;
+  width: 130px;
+  white-space: normal;
+}
+
+.event-edit-schedule {
+  @extend .btn;
+  @extend .btn-info;
+  width: 130px;
+  white-space: normal;
+}
+
+.event-schedule {
+  vertical-align: middle;
 }
