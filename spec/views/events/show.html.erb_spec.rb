@@ -6,7 +6,8 @@ describe 'events/show', type: :view do
     @event = FactoryGirl.build_stubbed(Event, name: 'EuroAsia Scrum',
                         description: 'EuroAsia Scrum and Pair hookup',
                         time_zone: 'Eastern Time (US & Canada)')
-    @event_schedule = @event.next_occurrences
+    allow(Time).to receive(:now).and_return(Time.parse('2014-03-07 23:30:00'))
+    @event_schedule = @event.next_occurrences(end_time: Time.now + 40.days)
   end
 
   it 'should display event information' do
