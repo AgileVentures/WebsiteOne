@@ -2,7 +2,7 @@ Feature:
   As a developer
   So that I may see the ranking of articles
   I would like to see the vote count on an article 
-  And vote up or down an article
+  And ability to vote up or down an article
 
   Background:
     Given the following articles with votes exist:

@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   layout 'articles_layout'
   before_action :authenticate_user!, except: [ :index, :show ]
-  before_action :load_article, except: [:index, :new, :create, :preview ]
+  before_action :load_article, only: [:show, :edit, :update, :upvote, :downvote, :cancelvote]
 
   def index
     if params[:tag].present?
@@ -57,7 +57,7 @@ class ArticlesController < ApplicationController
 
   # article voting
   def upvote
-    if @article.user_id == current_user.id then
+    if @article.authored_by? current_user then
       flash[:error] = "Can not vote for your own article \"#{@article.title}\""
     else
       @article.upvote_by current_user
@@ -67,14 +67,14 @@ class ArticlesController < ApplicationController
       when false
         flash[:error] = "You have already given this article an up vote"
       when nil
-        flash[:error] = "Your vote was note registered"
+        flash[:error] = "Your vote was not registered"
       end
     end
     redirect_to article_path(@article)
   end
 
   def downvote
-    if @article.user_id == current_user.id then
+    if @article.authored_by? current_user then
         flash[:error] = "Can not vote for your own article \"#{@article.title}\""
     else
       @article.downvote_by current_user
