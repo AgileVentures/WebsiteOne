@@ -120,7 +120,7 @@ class Event < ActiveRecord::Base
   end
 
   def format_timepicker(datetime)
-    datetime.strftime('%I:%M %P')
+    !datetime.blank? ? datetime.strftime('%I:%M %P') : ''
   end
 
   private
