@@ -37,18 +37,22 @@ Given(/^I am on the show page for event "([^"]*)"$/) do |name|
   visit event_path(event)
 end
 
+Given(/^I am on the edit page for event "([^"]*)"$/) do |name|
+  event = Event.find_by_name(name)
+  visit edit_event_path(event)
+end
+
 Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
   event = Event.find_by_name(name)
   page.downcase!
   case page
     when 'show'
       current_path.should eq event_path(event)
-
     else
       current_path.should eq eval("#{page}_event_path(event)")
-
   end
 end
+
 Given(/^the date is "([^"]*)"$/) do |jump_date|
   Delorean.time_travel_to(Time.parse(jump_date))
 end

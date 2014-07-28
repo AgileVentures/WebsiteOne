@@ -109,3 +109,23 @@ Feature: Events
     And I am on Events index page
     Then I should see "Scrum"
     And I should see "Started at 7:00 UTC"
+
+  #This scenario below "should" have failed previously. I.e., this is what I do manually to recreate the bug.
+  #Unfortunately, it didn't 'fail' here in the cucumber test with the previous timepicker.  @time-travel-step
+  Scenario: Create a new PM event,then edit to force fields to be repopulated, save, and check the time again on the show page
+    Given I am logged in
+    And I am on Events index page
+    And the date is "2014/02/03 17:30:00 UTC"
+    When I click "New Event"
+    And I fill in event field:
+      | name        | value          |
+      | Name        | Whatever       |
+      | Description | something else |
+    And I click the "Save" button
+    Then I should be on the event "Show" page for "Whatever"
+    And I should see "Event Created"
+    And I should see "5:30"
+    Given I am on the edit page for event "Whatever"
+    When I click the "Save" button
+    Given I am on the show page for event "Whatever"
+    Then I should see "5:30"
