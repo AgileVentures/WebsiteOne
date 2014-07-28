@@ -34,8 +34,8 @@ describe 'events/new' do
         expect(form).to have_selector('input#event_name')
         expect(form).to have_selector('select#event_category')
         expect(form).to have_selector('textarea#event_description')
-        expect(form).to have_selector('input#event_event_date')
-        expect(form).to have_selector('input#event_start_time')
+        expect(form).to have_selector('input#start_date')
+        expect(form).to have_selector('input#start_time')
         expect(form).to have_selector('input#event_duration')
         expect(form).to have_selector('select#event_repeats') do |value|
           expect(value).to have_text('never')

@@ -17,20 +17,20 @@
     <%= awesome_text_area f, :description, rows: 10 %>
 
     <div class="form-group event_date">
-      <%= f.label :start_datetime, :class => 'control-label' %>
-      <% if params[:start_datetime] %>
-        <%= f.text_field :event_date, {:data => {:format => 'yyyy-MM-dd'}, style: 'width:auto;', :class => 'form-control datepicker', value: "#{start_date}"} %>
+      <%= label_tag 'start_date', 'Start Date', :class => 'control-label' %>
+      <% if params['start_date'] %>
+        <%= text_field_tag 'start_date', format_datepicker(start_date), style: 'width:auto;', :class => 'form-control datepicker' %>
       <% else %>
-        <%= f.text_field :event_date, {:data => {format: 'yyyy-MM-dd'}, style: 'width:auto;', class: 'form-control datepicker', value: @event.start_datetime.strftime('%Y-%m-%d')} %>
+        <%= text_field_tag 'start_date', format_datepicker(@event.start_datetime), style: 'width:auto;', class: 'form-control datepicker' %>
       <% end %>
     </div>
 
     <div class="form-group event_time">
-      <%= f.label :start_datetime, ["#{:start_time}".titleize, 'in UTC'].join(' '), :class => 'control-label' %>
-      <% if params[:start_datetime] %>
-        <%= f.text_field :start_time, {data: {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: @event.format_timepicker(start_time)} %>
+      <%= label_tag 'start_time', "Start Time in UTC", :class => 'control-label' %>
+      <% if params['start_time'] %>
+        <%= text_field_tag 'start_time', format_timepicker(start_time), style: 'width:auto;', class: 'form-control timepicker' %>
       <% else %>
-        <%= f.text_field :start_time, {data: {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: @event.format_timepicker(@event.start_datetime) } %>
+        <%= text_field_tag 'start_time', format_timepicker(@event.start_datetime), style: 'width:auto;', class: 'form-control timepicker' %>
       <% end %>
     </div>
 

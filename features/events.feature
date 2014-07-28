@@ -78,7 +78,7 @@ Feature: Events
     And I fill in event field:
       | name        | value             |
       | Name        | Daily Scrum       |
-      | Event date  | 2014-02-04        |
+      | Start Date  | 2014-02-04        |
       | Description | scrum description |
     And I select "Repeats" to "weekly"
     And I check "Monday"

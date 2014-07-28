@@ -25,6 +25,8 @@ class EventsController < ApplicationController
   end
 
   def create
+    concatenate_datetime(event_params, params)
+
     EventCreatorService.new(Event).perform(event_params,
                                        success: ->(event) do
       @event = event
@@ -39,6 +41,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    concatenate_datetime(event_params, params)
     if @event.update_attributes(event_params)
       flash[:notice] = 'Event Updated'
       redirect_to events_path
@@ -73,4 +76,7 @@ class EventsController < ApplicationController
     params.require(:event).permit!
   end
 
+  def concatenate_datetime(event_params, params)
+    event_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
+  end
 end
