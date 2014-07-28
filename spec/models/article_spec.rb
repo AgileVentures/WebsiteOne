@@ -16,32 +16,21 @@ describe Article do
     expect(article).to respond_to :friendly_id
   end
 
-  it 'should respond to get_upvotes' do
+  it 'should respond to acts_as_votable methods' do
     expect(article).to respond_to :get_upvotes
-  end
-
-  it 'should respond to get_downvotes' do
     expect(article).to respond_to :get_downvotes
+    expect(article).to respond_to :upvote_by
+    expect(article).to respond_to :downvote_by
+    expect(article).to respond_to :unvote_by
+    expect(article).to respond_to :vote_registered?
   end
 
   it 'should respond to vote_value' do
     expect(article).to respond_to :vote_value
   end
 
-  it 'should respond to upvote_by' do
-    expect(article).to respond_to :upvote_by
-  end
-
-  it 'should respond to downvote_by' do
-    expect(article).to respond_to :downvote_by
-  end
-
-  it 'should respond to unvote_by' do
-    expect(article).to respond_to :unvote_by
-  end
-
-  it 'should respond to vote_registered?' do
-    expect(article).to respond_to :vote_registered?
+  it 'should respond to authored_by?' do
+    expect(article).to respond_to :authored_by?
   end
 
 end
