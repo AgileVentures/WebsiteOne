@@ -28,18 +28,18 @@
       <div class="form-group event_time">
         <%= f.label :start_time, ["#{:start_time}".titleize, 'in UTC'].join(' '), :class => 'control-label' %>
         <% if params[:start_date] %>
-            <%= f.text_field :start_time, {data: {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: @event.format_timepicker("#{start_time}")} %>
+            <%= f.text_field :start_time, {data: {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: format_timepicker("#{start_time}")} %>
         <% else %>
-            <%= f.text_field :start_time, {data: {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: @event.format_timepicker(@event.start_time) } %>
+            <%= f.text_field :start_time, {data: {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: format_timepicker(@event.start_time) } %>
         <% end %>
       </div>
 
       <div class="form-group event_time" style='display: block;'>
         <%= f.label :end_time, ["#{:end_time}".titleize, 'in UTC'].join(' '), :class => 'control-label'%>
         <% if params[:start_date] %>
-            <%= f.text_field :end_time, {:data => {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: @event.format_timepicker("#{end_time}")} %>
+            <%= f.text_field :end_time, {:data => {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: format_timepicker("#{end_time}")} %>
         <% else %>
-            <%= f.text_field :end_time, {:data => {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: @event.format_timepicker(@event.end_time)}  %>
+            <%= f.text_field :end_time, {:data => {format: 'hh:mm'}, style: 'width:auto;', class: 'form-control timepicker', value: format_timepicker(@event.end_time)}  %>
         <% end %>
       </div>
 
