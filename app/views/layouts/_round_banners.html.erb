@@ -77,7 +77,6 @@
     </div><!-- end div .circle -->
   </li>
   <!-- END LIST ELEMENT -->
-  <% if @event.present? %>
     <p>
       <%= link_to @event['name'], event_path(@event['id']) %>
       <% if @event.next_occurrence_time.to_datetime < Time.now %>
@@ -86,7 +85,6 @@
         in <%= display_countdown(@event) %>
       <% end %>
     </p>
-  <% end %>
   <small><%= link_to 'View previous Scrums', controller: 'scrums' %></small>
   <%= render partial: 'layouts/event_link', locals: {event: @event} %>
 </ul>
