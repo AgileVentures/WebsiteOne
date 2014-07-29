@@ -79,8 +79,8 @@ describe EventsController do
         expect {
           post :create, invalid_attributes
         }.to_not change(Event, :count)
-        assigns(:event).should be_a_new(Event)
-        assigns(:event).should_not be_persisted
+        expect(assigns(:event)).to be_a_new(Event)
+        expect(assigns(:event)).not_to be_persisted
       end
 
       it 're-renders the events#new template' do

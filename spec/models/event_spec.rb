@@ -39,7 +39,8 @@ describe Event do
 
   context 'should create an event that ' do
     it 'is scheduled for one occasion' do
-      event = Event.create!(name: 'one time event',
+      event = FactoryGirl.build_stubbed(Event,
+                            name: 'one time event',
                             category: 'Scrum',
                             description: '',
                             start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
@@ -55,7 +56,8 @@ describe Event do
     end
 
     it 'is scheduled for every weekend' do
-      event = Event.create!(name: 'every weekend event',
+      event = FactoryGirl.build_stubbed(Event,
+                            name: 'every weekend event',
                             category: 'Scrum',
                             description: '',
                             start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
@@ -71,7 +73,8 @@ describe Event do
     end
 
     it 'is scheduled for every Sunday' do
-      event = Event.create!(name: 'every Sunday event',
+      event = FactoryGirl.build_stubbed(Event,
+                            name: 'every Sunday event',
                             category: 'Scrum',
                             description: '',
                             start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
@@ -87,7 +90,8 @@ describe Event do
     end
 
     it 'is scheduled for every Monday' do
-      event = Event.create!(name: 'every Monday event',
+      event = FactoryGirl.build_stubbed(Event,
+                            name: 'every Monday event',
                             category: 'Scrum',
                             description: '',
                             start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
