@@ -4,10 +4,14 @@ include EventHelper
 describe 'events/show', type: :view do
   before(:each) do
     @event = FactoryGirl.build_stubbed(Event, name: 'EuroAsia Scrum',
+                        category: 'Scrum',
                         description: 'EuroAsia Scrum and Pair hookup',
                         time_zone: 'Eastern Time (US & Canada)')
+
     allow(Time).to receive(:now).and_return(Time.parse('2014-03-07 23:30:00'))
     @event_schedule = @event.next_occurrences(end_time: Time.now + 40.days)
+
+    allow(view).to receive(:current_user).and_return(FactoryGirl.build_stubbed(:user))
   end
 
   it 'should display event information' do
@@ -42,12 +46,16 @@ describe 'events/show', type: :view do
 
   describe 'Hangouts' do
     before(:each) do
-      @hangout = Hangout.new(event_id: 375,
+      @hangout = FactoryGirl.build_stubbed(:hangout,
+                        uid: '123456',
+                        event_id: 375,
+                        category: 'Scrum',
                         hangout_url: 'http://hangout.test',
                         updated_at: Time.parse('10:25:00'))
 
       allow(@hangout).to receive(:started?).and_return true
       allow(@hangout).to receive(:live?).and_return true
+      allow(view).to receive(:generate_hangout_id).and_return('123456')
 
       @event.url = @hangout.hangout_url
     end
@@ -59,8 +67,12 @@ describe 'events/show', type: :view do
       end
 
       it_behaves_like 'it has a hangout button' do
+        let(:hangout_id){@hangout.uid}
+        let(:event_id){@event.id}
+        let(:category){@event.category}
+        let(:user){''}
+        let(:project){''}
         let(:topic_name){'Topic'}
-        let(:id){@event.id}
       end
 
       it 'renders Edit link' do

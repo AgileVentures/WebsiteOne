@@ -6,9 +6,7 @@ describe SlackService do
    it 'sends a post request to the agile-bot with the proper data' do
      Features.slack_notifications.enabled = true
      stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify')
-
-     event = Event.new(name: "MockEvent", category: "PairProgramming")
-     hangout = Hangout.new(hangout_url: "mock_url", event: event)
+     hangout = Hangout.new(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url")
 
      subject.post_hangout_notification(hangout)
 

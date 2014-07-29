@@ -10,11 +10,10 @@ describe HangoutsController do
 
   describe '#update' do
     it 'creates a hangout if there is no hangout assosciated with the event' do
-      event_id = '333'
+      hangout_id = '333'
+      get :update, {id: hangout_id}
 
-      get :update, {id: event_id}
-
-      hangout = Hangout.find_by_event_id(event_id)
+      hangout = Hangout.find_by_uid(hangout_id)
       expect(hangout).to be_valid
     end
 
@@ -27,21 +26,36 @@ describe HangoutsController do
       Hangout.any_instance.stub(update_hangout_data: true)
 
       get :update, {id: '333'}
-      expect(response.body).to have_text('Success')
+      expect(response.status).to eq(200)
     end
 
     it 'calls the SlackService to post hangout notification on successful update' do
       Hangout.any_instance.stub(update_hangout_data: true)
       expect(SlackService).to receive(:post_hangout_notification).with(an_instance_of(Hangout))
 
-      get :update, {id: '333'}
+      get :update, {id: '333', notify: 'true'}
+    end
+
+    it 'does not call the SlackService' do
+      allow_any_instance_of(Hangout).to receive(:update_hangout_data).and_return(true)
+      expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(Hangout))
+
+      get :update, {id: '333', notify: 'false'}
     end
 
     it 'returns a failure response if update is unsuccessful' do
       Hangout.any_instance.stub(update: false)
 
       get :update, {id: '333'}
-      expect(response.body).to have_text('Failure')
+      expect(response.status).to eq(500)
+    end
+
+    it 'redirects to event show page if the link was updated manually' do
+      allow(controller).to receive(:local_request?).and_return(true)
+      allow_any_instance_of(Hangout).to receive(:update_hangout_data).and_return(true)
+
+      get :update, {id: '333', event_id: 50}
+      expect(response).to redirect_to(event_path(50))
     end
   end
 
