@@ -1,5 +1,4 @@
 class AuthenticationsController < ApplicationController
-  include YoutubeHelper
   before_action :authenticate_user!, only: [:destroy]
 
   def create

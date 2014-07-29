@@ -1,5 +1,4 @@
 class ScrumsController < ApplicationController
-include YoutubeHelper
   def index
     client = YouTubeIt::Client.new(:dev_key => Youtube::YOUTUBE_KEY)
     query = client.videos_by(:query => "AtlanticScrum|AmericasScrum|EuroScrum Pair Hookup", 
