@@ -35,7 +35,7 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
   end
   describe 'up' do
     before do
-      sql= %Q{INSERT INTO events (end_time, event_date, start_time) VALUES (TIME'10:00', DATE'2013-06-17', TIME'11:00');}
+      sql= %Q{INSERT INTO events (name, category, repeats, start_time, event_date, end_time, time_zone) VALUES ('test', 'PairProgramming', 'never', TIME'10:00', DATE'2013-06-17', TIME'11:00', 'UTC');}
       ActiveRecord::Base.connection.execute(sql)
     end
     it 'refactors events time fields' do
@@ -43,7 +43,7 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
         EventCombineDateAndTimeFields.new.up
       }.to change { Event.columns }
       event_new = Event.first
-      expect(event_new.start_datetime).to eq('2013-06-17 10:00:00')
+      expect(event_new.start_datetime.to_datetime).to eq('2013-06-17 10:00:00'.to_datetime.utc)
       expect(event_new.duration).to eq(60)
     end
     after do
