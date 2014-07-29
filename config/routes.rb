@@ -6,7 +6,13 @@ WebsiteOne::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false
 
-  resources :articles, :format => false
+  resources :articles, :format => false do
+    member do
+      get :upvote
+      get :downvote
+      get :cancelvote
+    end
+  end
 
   match '/hangouts/:id' => 'hangouts#update', :via => [:put, :options], as: 'hangout'
 

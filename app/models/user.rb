@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   end
 
   acts_as_taggable_on :skills, :titles
+  acts_as_voter
 
   #after_create Mailer.send_welcome_mail()
   extend FriendlyId
