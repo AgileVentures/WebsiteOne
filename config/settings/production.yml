@@ -13,6 +13,7 @@ mailer:
     address: 'smtp.sendgrid.net'
     domain: 'heroku.com'
     authentication: 'plain'
+  url_host: 'agileventures.org'
 
 disqus:
   shortname: 'agileventures'

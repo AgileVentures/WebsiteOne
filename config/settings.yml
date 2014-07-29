@@ -19,6 +19,8 @@ mailer:
     address: 'address'
     domain: 'domain'
     authentication: 'auth'
+  url_host: 'localhost:3000'
+  devise_mailer_sender: 'info@agileventures.org'
 
 disqus:
   shortname: 'agileventures-dev'
