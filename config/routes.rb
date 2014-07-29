@@ -1,6 +1,6 @@
 WebsiteOne::Application.routes.draw do
   mount Mercury::Engine => '/'
-  
+
   root 'visitors#index'
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
