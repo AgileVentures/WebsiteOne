@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  has_one :hangout
+  has_many :hangouts
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -94,6 +94,10 @@ class Event < ActiveRecord::Base
 
   def start_time_with_timezone
     DateTime.parse(start_time.strftime('%k:%M ')).in_time_zone(time_zone)
+  end
+
+  def last_hangout
+    hangouts.last
   end
 
   private

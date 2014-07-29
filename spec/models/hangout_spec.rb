@@ -17,36 +17,37 @@ describe Hangout do
   context 'hangout_url is present' do
     before { hangout.hangout_url = 'test' }
 
-    it 'reports started if the link is not older than 2 hours' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:59:59'))
-      expect(hangout.started?).to be_truthy
-    end
-
-    it 'reports not started if the link is older than 2 hours' do
-      allow(Time).to receive(:now).and_return(Time.parse('12:00:01'))
-      expect(hangout.started?).to be_falsey
-    end
-
     it 'reports live if the link is not older than 15 minutes' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:14:59'))
+      allow(Time).to receive(:now).and_return(Time.parse('10:04:59'))
       expect(hangout.live?).to be_truthy
     end
 
     it 'reports not live if the link is older than 15 minutes' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:15:01'))
+      allow(Time).to receive(:now).and_return(Time.parse('10:05:01'))
       expect(hangout.live?).to be_falsey
     end
-
   end
 
   describe '#update_hangout_data' do
     let(:params) do
-      { title: 'Scrum', hangout_url: 'http://hangout.test' }
+      { topic: 'Morning Rejoice',
+        category: 'Scrum',
+        hangout_url: 'http://hangout.test' }
     end
 
     it 'updates basic data' do
+      event = FactoryGirl.create(:event)
+      params[:event_id] = event.id
+      current_time = Time.parse('10:02:00')
+      allow(Time).to receive(:now).and_return(current_time)
+
       hangout.update_hangout_data(params)
-      expect(hangout.hangout_url).to eq 'http://hangout.test'
+
+      expect(hangout.title).to eq('Morning Rejoice')
+      expect(hangout.event).to eq(event)
+      expect(hangout.category).to eq('Scrum')
+      expect(hangout.hangout_url).to eq('http://hangout.test')
+      expect(hangout.updated_at.time).to eq(current_time)
     end
 
   end

@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def show
     @event_schedule = @event.next_occurrences
-    @hangout = @event.hangout
+    @hangout = @event.last_hangout
   end
 
   def index
