@@ -10,33 +10,62 @@ class Event < ActiveRecord::Base
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
   attr_accessor :next_occurrence_time
+  attr_accessor :has_migrated_times
 
   RepeatsOptions = %w[never weekly]
   RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
+
+  def after_initialize
+    @has_migrated_times = TRUE
+  end
 # for safety...
   def event_date= (d)
-    raise "old schema error"
+    if has_migrated_times
+      raise "old schema error"
+    else
+      write_attribute(:event_date, d)
+    end
   end
 
   def start_time= (t)
-    raise "old schema error"
+    if has_migrated_times
+      raise "old schema error"
+    else
+      write_attribute(:start_time, t)
+    end
   end
 
   def end_time= (t)
-    raise "old schema error"
+    if has_migrated_times
+      raise "old schema error"
+    else
+      write_attribute(:end_time, t)
+    end
   end
 
   def event_date
-    start_datetime    # to_date converted the timezone also to the server's time zone
+    if has_migrated_times
+      start_datetime
+    else
+      read_attribute(:event_date)
+    end
   end
 
   def start_time
-   start_datetime   # to_date converted the timezone also to the server's time zone
+    if has_migrated_times
+      start_datetime
+    else
+      read_attribute(:start_time)
+    end
   end
 
   def end_time
-    (start_datetime + duration*60).utc  #convert to seconds
+    if has_migrated_times
+      (start_datetime + duration*60).utc
+    else
+      read_attribute(:end_time)
+    end
   end
 
   def self.next_event_occurrence

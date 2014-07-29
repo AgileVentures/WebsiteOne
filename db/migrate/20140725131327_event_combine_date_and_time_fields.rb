@@ -17,14 +17,14 @@ class EventCombineDateAndTimeFields < ActiveRecord::Migration
     Event.reset_column_information
 
     Event.all.each  { |event|
+      event.has_migrated_times = FALSE
       event.start_datetime = convert_start_datetime event
       event.duration = convert_duration event
       event.save
-    }
-
-    remove_column :events, :start_time, :time
-    remove_column :events, :event_date, :date
-    remove_column :events, :end_time, :time
+    }#
+  remove_column :events, :start_time, :time
+  remove_column :events, :event_date, :date
+  remove_column :events, :end_time, :time
   end
 
   def down
@@ -33,10 +33,11 @@ class EventCombineDateAndTimeFields < ActiveRecord::Migration
     add_column :events, :end_time, :time
     Event.reset_column_information
 
-    Event.all.each  { |event|
-      event.event_date = event.start_datetime
-      event.start_time = event.start_datetime
-      event.end_time = (event.start_datetime + duration * 60).utc
+    Event.all.each  { |event |
+      event.has_migrated_times  = TRUE
+      Event.write_attribute(:event_date,  event.start_datetime)
+      Event.write_attribute(:start_time, event.start_datetime)
+      Event.write_attribute(:end_time, (event.start_datetime + duration * 60).utc)
       event.save
     }
     remove_column :events, :start_datetime, :datetime
