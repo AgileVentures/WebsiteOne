@@ -120,10 +120,6 @@ class Event < ActiveRecord::Base
     hangouts.last
   end
 
-  def format_timepicker(datetime)
-    !datetime.blank? ? datetime.strftime('%I:%M %P') : ''
-  end
-
   private
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
