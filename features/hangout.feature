@@ -5,8 +5,8 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   Background:
     Given following events exist:
-      | name  | description         | category | event_date | start_time              | end_time                | repeats | time_zone |
-      | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | UTC       |
+  | name  | description         | category | start_datetime              | duration                | repeats | time_zone |
+  | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 07:00:00 UTC | 150 | never   | UTC       |
     And the following projects exist:
       | title         | description             | status   |
       | hello world   | greetings earthlings    | active   |
