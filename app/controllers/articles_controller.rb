@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
 
     if @article.save
-      flash[:notice] = "Successfully created the article \"#{@article.title}!\""
+      flash[:notice] = %Q{Successfully created the article "#{@article.title}!"}
       redirect_to article_path(@article)
     else
       flash.now[:alert] = @article.errors.full_messages.join(', ')
@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
   def update
 
     if @article.update_attributes(article_params)
-      flash[:notice] = "Successfully updated the article \"#{@article.title}\""
+      flash[:notice] = %Q{Successfully updated the article "#{@article.title}"}
       redirect_to article_path(@article)
     else
       flash.now[:alert] = @article.errors.full_messages.join(', ')
@@ -57,13 +57,13 @@ class ArticlesController < ApplicationController
 
   # article voting
   def upvote
-    if @article.authored_by? current_user then
-      flash[:error] = "Can not vote for your own article \"#{@article.title}\""
+    if @article.authored_by?(current_user) then
+      flash[:error] = %Q{Can not vote for your own article "#{@article.title}"}
     else
       @article.upvote_by current_user
       case @article.vote_registered?
       when true
-        flash[:notice] = "Successfully voted up the article \"#{@article.title}\""
+        flash[:notice] = %Q{Successfully voted up the article "#{@article.title}"}
       when false
         flash[:error] = "You have already given this article an up vote"
       when nil
@@ -74,13 +74,13 @@ class ArticlesController < ApplicationController
   end
 
   def downvote
-    if @article.authored_by? current_user then
-        flash[:error] = "Can not vote for your own article \"#{@article.title}\""
+    if @article.authored_by?(current_user) then
+      flash[:error] = %Q{Can not vote for your own article "#{@article.title}"}
     else
       @article.downvote_by current_user
       case @article.vote_registered?
       when true
-        flash[:notice] = "Successfully voted down the article \"#{@article.title}\""
+        flash[:notice] = %Q{Successfully voted down the article "#{@article.title}"}
       when false
         flash[:error] = "You have already given this article a down vote"
       when nil
@@ -94,9 +94,9 @@ class ArticlesController < ApplicationController
     @article.unvote_by current_user
     case @article.vote_registered?
     when true
-      flash[:notice] = "Could not cancel your vote for the article \"#{@article.title}\""
+      flash[:notice] = %Q{Could not cancel your vote for the article "#{@article.title}"}
     when false
-      flash[:notice] = "Cancelled your vote for the article \"#{@article.title}\""
+      flash[:notice] = %Q{Cancelled your vote for the article "#{@article.title}"}
     when nil
       flash[:error] = "Can not cancel when you have not voted for this article"
     end
