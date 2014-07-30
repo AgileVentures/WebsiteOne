@@ -1,5 +1,10 @@
 class Hangout < ActiveRecord::Base
   belongs_to :event
+  belongs_to :host, class_name: 'User'
+  belongs_to :project
+
+  serialize :participants
+
   default_scope { order('created_at') }
 
   def started?
