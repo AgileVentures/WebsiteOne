@@ -25,8 +25,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    concatenate_datetime(event_params, params)
-
     EventCreatorService.new(Event).perform(event_params,
                                        success: ->(event) do
       @event = event
@@ -41,7 +39,6 @@ class EventsController < ApplicationController
   end
 
   def update
-    concatenate_datetime(event_params, params)
     if @event.update_attributes(event_params)
       flash[:notice] = 'Event Updated'
       redirect_to events_path
@@ -73,11 +70,9 @@ class EventsController < ApplicationController
 
 
   def event_params
-    params.require(:event).permit!
+    temp_params = params.require(:event).permit!
+    temp_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
+    temp_params
   end
 
-  #yaro:I think it would be better to do this in the event_params filter.  event_times is called before update, so you might as well move the concatenate logic in there
-  def concatenate_datetime(event_params, params)
-    event_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
-  end
 end

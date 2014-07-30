@@ -34,6 +34,7 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
       }.to change { Event.columns }
       event_old = Event.first
       expect(event_old.read_attribute(:event_date).to_date).to eq('2013-06-17'.to_date)
+      # Postgres stores the time without the date, and when it comes out, the date is set to 2000-01-01.  This may change with different database.
       expect(event_old.read_attribute(:start_time).to_time.utc).to eq('2000-01-01 09:00:00 UTC'.to_time.utc)
       expect(event_old.read_attribute(:end_time).to_time.utc).to eq('2000-01-01 10:00:00 UTC'.to_time.utc)
     end
