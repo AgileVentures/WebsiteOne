@@ -1,33 +1,6 @@
 load 'spec/spec_helper.rb'
 load 'db/migrate/20140725131327_event_combine_date_and_time_fields.rb'
 
-# class Event < ActiveRecord::Base
-#
-#   def event_date= (d)
-#     raise "old schema error"
-#   end
-#
-#   def start_time= (t)
-#     raise "old schema error"
-#   end
-#
-#   def end_time= (t)
-#     raise "old schema error"
-#   end
-#
-#   def event_date
-#     start_datetime    # to_date converted the timezone also to the server's time zone
-#   end
-#
-#   def start_time
-#     start_datetime   # to_date converted the timezone also to the server's time zone
-#   end
-#
-#   def end_time
-#     (start_datetime + duration*60).utc  #convert to seconds
-#   end
-#   }
-
 describe 'EventCombineDateAndTimeFields', type: :migration do
   before do
     @my_migration_version = '20140725131327'
@@ -35,6 +8,7 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
   end
   describe 'up' do
     before do
+      EventCombineDateAndTimeFields.new.down
       sql= %Q{INSERT INTO events (name, category, repeats, start_time, event_date, end_time, time_zone) VALUES ('test', 'PairProgramming', 'never', TIME'10:00', DATE'2013-06-17', TIME'11:00', 'UTC');}
       ActiveRecord::Base.connection.execute(sql)
     end

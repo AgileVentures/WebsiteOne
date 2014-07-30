@@ -21,8 +21,8 @@ class EventCombineDateAndTimeFields < ActiveRecord::Migration
       event.start_datetime = convert_start_datetime event
       event.duration = convert_duration event
       event.save!
-    }#
-  remove_column :events, :start_time, :time
+    }
+    remove_column :events, :start_time, :time
   remove_column :events, :event_date, :date
   remove_column :events, :end_time, :time
   end
