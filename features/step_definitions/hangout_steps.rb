@@ -24,6 +24,18 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   Hangout.record_timestamps = true
 end
 
+Given /^the following hangouts exist:$/ do |table|
+  table.hashes.each do |hash|
+    FactoryGirl.create(:hangout, created_at: hash['Start time'],
+                                 event: Event.find_by_name(hash['Event']),
+                                 category: hash['Category'],
+                                 project: Project.find_by_title(hash['Project']),
+                                 title: hash['Title'],
+                                 host: User.find_by_first_name(hash['Host']))
+  end
+
+end
+
 Then /^I should( not)? see Hangouts details section$/ do |negative|
   section = page.find('.hangout-details', visible: false)
   if negative
