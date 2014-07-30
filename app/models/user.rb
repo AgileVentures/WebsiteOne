@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :documents
   has_many :articles
+  has_many :hangouts, foreign_key: 'host_id'
 
   self.per_page = 30
 

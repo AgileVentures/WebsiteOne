@@ -94,6 +94,19 @@ ActiveRecord::Schema.define(version: 20140725131327) do
     t.datetime "updated_at"
     t.string   "uid"
     t.string   "category"
+    t.integer  "project_id"
+    t.integer  "host_id"
+    t.string   "yt_video_id"
+    t.text     "participants"
+  end
+
+  create_table "hookups", force: true do |t|
+    t.string   "uid"
+    t.string   "title"
+    t.string   "category"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", force: true do |t|
