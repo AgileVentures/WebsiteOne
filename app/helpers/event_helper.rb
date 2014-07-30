@@ -23,4 +23,17 @@ module EventHelper
   def topic(event, event_schedule)
     "#{@event.name} - #{current_occurrence_time(event_schedule.first(1))}"
   end
+
+  def format_timepicker(datetime)
+    !datetime.blank? ? datetime.strftime('%I:%M %P') : ''
+  end
+
+  def format_datepicker(datetime)
+    !datetime.blank? ? datetime.strftime('%Y-%m-%d') : ''
+  end
+
+  def format_datetimepicker(datetime)
+    !datetime.blank? ? datetime.strftime('%Y-%m-%d %I:%M %P') : ''
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716134701) do
+ActiveRecord::Schema.define(version: 20140725131327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,9 +56,6 @@ ActiveRecord::Schema.define(version: 20140716134701) do
     t.string   "name"
     t.string   "category"
     t.text     "description"
-    t.date     "event_date",                                null: false
-    t.time     "start_time",                                null: false
-    t.time     "end_time",                                  null: false
     t.string   "repeats"
     t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
@@ -69,9 +66,12 @@ ActiveRecord::Schema.define(version: 20140716134701) do
     t.datetime "updated_at"
     t.string   "url"
     t.string   "slug"
+    t.datetime "start_datetime"
+    t.integer  "duration"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
+  add_index "events", ["start_datetime"], name: "index_events_on_start_datetime", using: :btree
 
   create_table "follows", force: true do |t|
     t.integer  "followable_id",                   null: false
@@ -104,8 +104,6 @@ ActiveRecord::Schema.define(version: 20140716134701) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
-    t.string   "github_owner"
-    t.string   "github_repo"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
   end
