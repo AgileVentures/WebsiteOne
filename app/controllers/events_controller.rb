@@ -76,6 +76,7 @@ class EventsController < ApplicationController
     params.require(:event).permit!
   end
 
+  #yaro:I think it would be better to do this in the event_params filter.  event_times is called before update, so you might as well move the concatenate logic in there
   def concatenate_datetime(event_params, params)
     event_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
   end
