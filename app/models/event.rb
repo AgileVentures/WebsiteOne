@@ -10,62 +10,34 @@ class Event < ActiveRecord::Base
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
   attr_accessor :next_occurrence_time
-  attr_accessor :in_datetime_migration
 
   RepeatsOptions = %w[never weekly]
   RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
 
-  def after_initialize
-    @in_datetime_migration = FALSE
-  end
 # for safety...
   def event_date= (d)
-    if !in_datetime_migration
       raise "old schema error"
-    else
-      write_attribute(:event_date, d)
-    end
   end
 
   def start_time= (t)
-    if !in_datetime_migration
       raise "old schema error"
-    else
-      write_attribute(:start_time, t)
-    end
   end
 
   def end_time= (t)
-    if !in_datetime_migration
       raise "old schema error"
-    else
-      write_attribute(:end_time, t)
-    end
   end
 
   def event_date
-    if !in_datetime_migration
       start_datetime
-    else
-      read_attribute(:event_date)
-    end
   end
 
   def start_time
-    if !in_datetime_migration
       start_datetime
-    else
-      read_attribute(:start_time)
-    end
   end
 
   def end_time
-    if !in_datetime_migration
       (start_datetime + duration*60).utc
-    else
-      read_attribute(:end_time)
-    end
   end
 
   def self.next_event_occurrence
