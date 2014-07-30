@@ -10,6 +10,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And the following projects exist:
       | title         | description             | status   |
       | hello world   | greetings earthlings    | active   |
+    And the following users exist
+      | first_name | last_name | email                  | password |
+      | Alice      | Jones     | alice@btinternet.co.uk | 12345678 |
     And there are no videos
     And I am logged in
     And I have Slack notifications enabled
@@ -94,3 +97,28 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given I am a member of project "hello world"
     And I am on the "Show" page for project "hello world"
     Then I should see hangout button
+
+  @wip
+  Scenario: Display current sessions that are live
+    Given the following hangouts exist:
+      | Start time | Event | Category        | Project     | Title        | Host  |
+      | 11:15      | Scrum | PairProgramming | hello world | HangoutsFlow | Alice |
+    When I go to the "hangouts" page
+    Then I should see:
+        | Started at |
+        | Event      |
+        | Category   |
+        | Project    |
+        | Title      |
+        | Host       |
+        | Join       |
+        | Watch      |
+    And I should see:
+        | 11:15           |
+        | Scrum           |
+        | PairProgramming |
+        | WebsiteOne      |
+        | HangoutsFlow    |
+        | Yaro            |
+    And I should see link "http://hangout.test" with "http://hangout.test"
+    And I should see link "http://youtube.test" with "http://youtube.test"
