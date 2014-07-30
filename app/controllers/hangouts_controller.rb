@@ -15,6 +15,10 @@ class HangoutsController < ApplicationController
     end
   end
 
+  def index
+    @hangouts = Hangout.all
+  end
+
   private
 
   def cors_preflight_check
@@ -31,7 +35,7 @@ class HangoutsController < ApplicationController
   end
 
   def local_request?
-    true if request.env['HTTP_REFERER'] =~ /#{request.env['HTTP_HOST']}/
+    request.remote_ip == '127.0.0.1'
   end
 
   def set_cors_headers
