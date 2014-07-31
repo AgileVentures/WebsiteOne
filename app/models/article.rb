@@ -24,7 +24,7 @@ class Article < ActiveRecord::Base
     self.get_upvotes.size - self.get_downvotes.size
   end
 
-  def authored_by? ( user )
+  def authored_by?(user)
     self.user_id == user.id
   end
 end
