@@ -6,9 +6,9 @@ Feature: Events
 
   Background:
     Given following events exist:
-      | name       | description             | category        | event_date | start_time              | end_time                | repeats | time_zone                  |
-      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | UTC                  |
-      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 | 2000-01-01 10:00:00 UTC | 2000-01-01 10:15:00 UTC | never   | UTC |
+      | name       | description             | category        | start_datetime              | duration                | repeats | time_zone                  |
+      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150 | never   | UTC                  |
+      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15 | never   | UTC |
 
   @time-travel-step
   Scenario: Show index of events
@@ -78,7 +78,7 @@ Feature: Events
     And I fill in event field:
       | name        | value             |
       | Name        | Daily Scrum       |
-      | Event date  | 2014-02-04        |
+      | Start Date  | 2014-02-04        |
       | Description | scrum description |
     And I select "Repeats" to "weekly"
     And I check "Monday"

@@ -6,7 +6,7 @@ require_relative '../../app/services/event_creator_service'
 describe EventCreatorService do
   let(:event_repository) { double(:event_repository, new: event) }
   let(:event_params) do
-    { name: 'event', end_time: '', start_time: '', event_date: '' }
+    { name: 'event', start_datetime: '', duration: '' }
   end
   let(:service) { EventCreatorService.new(event_repository) }
   let(:callback) do
