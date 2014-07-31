@@ -11,6 +11,7 @@
     <% end %>
     <% if presenter.country? %>
       <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country %></li>
+	  <li><i class="fa fa-clock-o fa-lg"></i> <%= NearestTimeZone.to(presenter.latitude, presenter.longitude) %></li>
     <% end %>
 
     <li>
