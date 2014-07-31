@@ -28,6 +28,12 @@ Feature: As a user of the site
     And I should see "AliceSky"
     And I should see "Member for"
 
+  @time-travel
+  Scenario: Having user timezone displayed in the profile
+    Given the date is "2014/02/01 09:15:00 UTC"
+    When I click on the avatar for "Alice"
+    Then I should see "Europe/Stockholm"
+
   Scenario: Having edit button on the profile page
     When I click on the avatar for "brett@example.com" within the main content
     Then I should be on the "user profile" page for "brett@example.com"

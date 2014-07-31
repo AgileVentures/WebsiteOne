@@ -65,6 +65,7 @@ GEM
       activerecord (>= 3.0.0)
     acts_as_votable (0.10.0)
     addressable (2.3.6)
+    andand (1.3.3)
     arel (5.0.1.20140414130214)
     awesome_print (1.2.0)
     bcrypt (3.1.7)
@@ -215,6 +216,7 @@ GEM
       turbolinks
     json (1.8.1)
     jwt (1.0.0)
+    kdtree (0.3)
     kgio (2.9.2)
     launchy (2.4.2)
       addressable (~> 2.3)
@@ -235,6 +237,10 @@ GEM
     multi_test (0.1.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    nearest_time_zone (0.0.2)
+      andand
+      kdtree
+      require_all
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     oauth2 (0.9.4)
@@ -309,6 +315,7 @@ GEM
       ffi (>= 0.5.0)
     redcarpet (3.1.2)
     ref (1.0.5)
+    require_all (1.3.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.99.0)
@@ -456,6 +463,7 @@ DEPENDENCIES
   jquery-turbolinks
   launchy
   mercury-rails!
+  nearest_time_zone
   omniauth
   omniauth-github!
   omniauth-gplus!
