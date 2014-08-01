@@ -1,8 +1,8 @@
 @import 'mixins';
 @import 'variables';
 
-$footer-height: 250px;
-$footer-upper-section-height: 300px;
+$footer-height: 350px;
+$footer-upper-section-height: 200px;
 
 /* Wrapper for page content to push down footer */
 #wrap {
@@ -68,6 +68,6 @@ $footer-upper-section-height: 300px;
 
 // FOOTER CONTACT FORM
 
-.footer-logo {
+.contact {
   text-align: right;
 }
