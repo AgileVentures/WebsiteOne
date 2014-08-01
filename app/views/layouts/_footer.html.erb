@@ -40,9 +40,17 @@
         </ul>
       </div>
     </div>
+
+    <div class="row">
+      <h3><img src="<%= image_path('av-logo-inverse.png') %>"/></h3>
+      <p>AgileVentures - Crowdsourced Learning</p>
+    </div>
   </div>
-  <div class="col-sm-5 footer-logo">
-    <h3><img src="<%= image_path('av-logo-inverse.png') %>"/></h3>
-    <p>AgileVentures - Crowdsourced Learning</p>
+
+  <div class="col-sm-5 contact">
+    <h3 class="footer_header">
+      Contact us
+    </h3>
+    <p>Send a traditional email to <%= mail_to 'info@agileventures.org', 'info@agileventures.org' %>.</p>
   </div>
 </div>
