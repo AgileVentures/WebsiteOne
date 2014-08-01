@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe StartTime do
-  it 'returns current time if start time is blank' do
-    expect(StartTime.for(nil).to_s).to eq Time.now.to_s
+  it 'returns 30 minutes ago if start time is blank' do
+    expect(StartTime.for(nil).to_s).to eq 30.minutes.ago.to_s
   end
 
   it 'returns start time if start time is present' do
