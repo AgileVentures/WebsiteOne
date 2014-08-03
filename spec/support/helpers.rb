@@ -20,9 +20,8 @@ module Helpers
     case symbol
       when :event
         {
-            event_date: 'Mon, 17 Jun 2013',
-            start_time: '2000-01-01 09:00:00 UTC',
-            end_time: '2000-01-01 2:00:00 UTC',
+            start_datetime: '17 Jun 2013 09:00:00 UTC',
+            duration: 300,
             repeats: 'never',
             repeats_every_n_weeks: nil,
             repeat_ends: 'never',
@@ -42,9 +41,8 @@ module Helpers
             name: 'one time event',
             category: 'Scrum',
             description: '',
-            event_date: 'Mon, 17 Jun 2013',
-            start_time: '2000-01-01 09:00:00 UTC',
-            end_time: '2000-01-01 17:00:00 UTC',
+            start_datetime: '17 Jun 2013 09:00:00 UTC',
+            duration: 600,
             repeats: 'never',
             repeats_every_n_weeks: nil,
             repeat_ends: 'never',

@@ -5,3 +5,6 @@ features:
     enabled: false
   welcome_email:
     enabled: false
+
+hangouts:
+  app_id: '10095526298'

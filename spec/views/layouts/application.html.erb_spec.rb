@@ -139,45 +139,6 @@ describe 'layouts/application.html.erb' do
         footer.should have_link 'Twitter', href: 'https://twitter.com/AgileVentures'
       end
     end
-
-    context 'Contact Us form' do
-      it 'renders a form' do
-        rendered.within('#footer') do |selection|
-          expect(selection).to have_css('#contact_form')
-        end
-      end
-
-      it 'should render the email information' do
-        rendered.within('#footer') do |selection|
-          expect(selection).to have_content('Send a traditional email to info@agileventures.org, or use the contact form.')
-          expect(selection).to have_link 'info@agileventures.org', href: 'mailto:info@agileventures.org'
-        end
-      end
-
-      it 'shows  required labels' do
-        rendered.within('#contact_form') do |selection|
-          expect(selection).to have_text('Name')
-          expect(selection).to have_text('Email')
-          expect(selection).to have_text('Message')
-        end
-
-      end
-
-      it 'shows required fields' do
-        rendered.within('#contact_form') do |selection|
-          expect(selection).to have_field('name')
-          expect(selection).to have_field('email')
-          expect(selection).to have_field('message')
-        end
-      end
-
-      it 'shows Send message button ' do
-        rendered.within('#contact_form') do |selection|
-          expect(selection).to have_button('send')
-        end
-      end
-    end
   end
-
 end
 
