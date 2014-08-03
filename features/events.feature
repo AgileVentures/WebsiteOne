@@ -49,6 +49,13 @@ Feature: Events
     And I should see "Monday, 3rd Feb at 07:00am (UTC)"
     And I should see "Edit"
 
+  @javascript
+  Scenario: Show an event's local time to a user outside of UTC
+    Given the date is "2014/02/01 07:15:00 EEST"
+    And I am on the show page for event "Scrum"
+    Then I should see "Monday, 3rd Feb at 07:00am (UTC)"
+    And I should see "Mon Feb 3 09:00:00 2014"
+
   Scenario: Render Next Scrum info on landing page
     Given the date is "2014/02/01 09:15:00 UTC"
     And I am on the home page
