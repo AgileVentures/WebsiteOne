@@ -19,8 +19,11 @@ describe('hangouts', function(){
         setFixtures(sandbox({
           id: 'liveHOA-placeholder',
           'data-topic': 'Topic',
+          'data-event-id': 'event_1234',
+          'data-category': 'category_1234',
+          'data-hangout-id': 'hangout_1234',
           'data-app-id': 'id_1234',
-          'data-callback-url': 'http://test.com'
+          'data-callback-url': 'http://test.com/hangout_id'
         }));
 
         hangout = jasmine.createSpyObj('hangout', ['render']);
@@ -31,6 +34,13 @@ describe('hangouts', function(){
 
         it('renders hangout button with correct parameters', function() {
           WebsiteOne.renderHangoutButton();
+          var startData = JSON.stringify({
+            topic: 'Topic',
+            eventId: 'event_1234',
+            category: 'category_1234',
+            hangoutId: 'hangout_1234',
+            callbackUrl: 'http://test.com/hangout_id'
+          });
 
           expect(hangout.render).toHaveBeenCalledWith( 'liveHOA-placeholder', {
             render: 'createhangout',
@@ -38,7 +48,7 @@ describe('hangouts', function(){
             hangout_type: 'onair',
             initial_apps: [{
               app_id : 'id_1234',
-              start_data :'http://test.com',
+              start_data : startData,
               app_type : 'LOCAL_APP'
             }],
             widget_size: 200

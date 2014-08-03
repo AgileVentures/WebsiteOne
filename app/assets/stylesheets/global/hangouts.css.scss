@@ -78,7 +78,16 @@
   .hangout-btn {
 
     height: 30px !important;
+    line-height: 30px;
     padding: 0;
+
+    .readme-link {
+      background: transparent;
+      color: #ee7335 !important;
+      display: inline-block;
+      vertical-align: initial;
+      padding: 0;
+    }
   }
 }
 
@@ -93,7 +102,13 @@
   }
 
   dd {
-    margin-left: 90px;
+    margin-left: 110px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
+}
+
+.popover-content {
+  font-size: small;
 }

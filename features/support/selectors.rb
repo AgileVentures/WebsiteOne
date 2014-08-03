@@ -28,8 +28,6 @@ module HtmlSelectorsHelpers
       # web steps:
       when "Account details"
         'form#edit_user'
-      when "Contact form"
-        'form#contact_form'
       when 'video description'
         '#video_contents'
       when 'player'
