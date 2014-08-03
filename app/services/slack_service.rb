@@ -6,9 +6,9 @@ module SlackService
 
     uri = URI.parse "#{Slack::BOT_URL}/hubot/hangouts-notify"
     Net::HTTP.post_form uri, {
-      title: hangout.event.name,
+      title: hangout.title,
       link: hangout.hangout_url,
-      type: hangout.event.category
+      type: hangout.category
     }
   end
 end

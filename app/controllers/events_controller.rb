@@ -5,12 +5,12 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
 
   def new
-    @event = Event.new
+    @event = Event.new(start_datetime: Time.now.utc, duration: 30)
   end
 
   def show
     @event_schedule = @event.next_occurrences
-    @hangout = @event.hangout
+    @hangout = @event.last_hangout
   end
 
   def index
@@ -70,7 +70,9 @@ class EventsController < ApplicationController
 
 
   def event_params
-    params.require(:event).permit!
+    temp_params = params.require(:event).permit!
+    temp_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
+    temp_params
   end
 
 end
