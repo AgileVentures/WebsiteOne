@@ -1,12 +1,18 @@
 WebsiteOne::Application.routes.draw do
   mount Mercury::Engine => '/'
-  
+
   root 'visitors#index'
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false
 
-  resources :articles, :format => false
+  resources :articles, :format => false do
+    member do
+      get :upvote
+      get :downvote
+      get :cancelvote
+    end
+  end
 
   match '/hangouts/:id' => 'hangouts#update', :via => [:put, :options], as: 'hangout'
 
@@ -39,7 +45,6 @@ WebsiteOne::Application.routes.draw do
   get '/auth/failure' => 'authentications#failure', :format => false
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
 
-  post 'mail_contact_form', to: 'visitors#send_contact_form', :format => false
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
 
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false

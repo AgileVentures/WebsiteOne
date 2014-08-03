@@ -1,20 +1,44 @@
 class Event < ActiveRecord::Base
-  has_one :hangout
+  has_many :hangouts
 
   extend FriendlyId
   friendly_id :name, use: :slugged
 
   include IceCube
-  validates :name, :event_date, :start_time, :end_time, :time_zone, :repeats, :category, presence: true
+  validates :name, :time_zone, :repeats, :category, :start_datetime, :duration, presence: true
   validates :url, uri: true, :allow_blank => true
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
-  validate :from_must_come_before_to
   attr_accessor :next_occurrence_time
 
   RepeatsOptions = %w[never weekly]
   RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
+
+# for safety...
+  def event_date= (d)
+      raise "old schema error"
+  end
+
+  def start_time= (t)
+      raise "old schema error"
+  end
+
+  def end_time= (t)
+      raise "old schema error"
+  end
+
+  def event_date
+      start_datetime
+  end
+
+  def start_time
+      start_datetime
+  end
+
+  def end_time
+      (start_datetime + duration*60).utc
+  end
 
   def self.next_event_occurrence
     if Event.exists?
@@ -35,13 +59,13 @@ class Event < ActiveRecord::Base
   end
 
   def next_occurrences(options = {})
-    start_time = (options[:start_time] or 30.minutes.ago)
-    end_time = (options[:end_time] or start_time + 10.days)
+    start_time = StartTime.for(options[:start_time])
+    end_time = EndTime.for(options[:end_time], 10.days)
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
       occurrences_between(start_time, end_time).each do |time|
-        occurences << { event: self, time: time }
+        occurences << {event: self, time: time}
 
         return occurences if occurences.count >= limit
       end
@@ -63,15 +87,11 @@ class Event < ActiveRecord::Base
   end
 
   def from
-      ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + start_time.seconds_since_midnight
+    ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + start_time.seconds_since_midnight
   end
 
   def to
-      ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + end_time.seconds_since_midnight
-  end
-
-  def duration
-    d = to - from - 1
+    ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + end_time.seconds_since_midnight
   end
 
   def schedule(starts_at = nil, ends_at = nil)
@@ -86,7 +106,7 @@ class Event < ActiveRecord::Base
       when 'never'
         s.add_recurrence_time(starts_at)
       when 'weekly'
-        days = repeats_weekly_each_days_of_the_week.map {|d| d.to_sym }
+        days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
         s.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
     s
@@ -96,6 +116,10 @@ class Event < ActiveRecord::Base
     DateTime.parse(start_time.strftime('%k:%M ')).in_time_zone(time_zone)
   end
 
+  def last_hangout
+    hangouts.last
+  end
+
   private
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
@@ -103,9 +127,4 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def from_must_come_before_to
-    if from > to
-      errors.add(:to_date, 'must come after the from date')
-    end
-  end
 end

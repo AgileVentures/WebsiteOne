@@ -5,8 +5,12 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   Background:
     Given following events exist:
-      | name  | description         | category | event_date | start_time              | end_time                | repeats | time_zone |
-      | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 | 2000-01-01 07:00:00 UTC | 2000-01-01 09:30:00 UTC | never   | UTC       |
+  | name  | description         | category | start_datetime              | duration                | repeats | time_zone |
+  | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 07:00:00 UTC | 150 | never   | UTC       |
+    And the following projects exist:
+      | title         | description             | status   |
+      | hello world   | greetings earthlings    | active   |
+    And there are no videos
     And I am logged in
     And I have Slack notifications enabled
 
@@ -20,7 +24,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
       | Started at   | 10:25:00            |
-    And the time now is "10:30:00"
+    And the time now is "10:29:00"
     When I am on the show page for event "Scrum"
     Then I should see Hangouts details section
     And I should see:
@@ -29,7 +33,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | Title               |
         | Daily scrum meeting |
         | Updated             |
-        | 5 minutes ago       |
+        | 4 minutes ago       |
     And I should see link "http://hangout.test" with "http://hangout.test"
 
   @javascript
@@ -73,7 +77,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   @time-travel-step
   Scenario: Render Join live event link
-    Given the date is "2014/02/03 07:05:00 UTC"
+    Given the date is "2014/02/03 07:04:00 UTC"
     And the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
       | Started at   | 07:00:00            |
@@ -84,3 +88,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     When I am on the home page
     Then I should see "Scrum is live!"
     And I should see link "Click to join!" with "http://hangout.test"
+
+  @javascript
+  Scenario: Display hangout button on a project's page
+    Given I am a member of project "hello world"
+    And I am on the "Show" page for project "hello world"
+    Then I should see hangout button
