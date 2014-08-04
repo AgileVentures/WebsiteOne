@@ -11,11 +11,7 @@ class Hangout < ActiveRecord::Base
   end
 
   def hookup?
-    event.hookup?
-  end
-
-  def scrum?
-    event.scrum?
+    category == "PairProgramming"
   end
 
   def expired?
