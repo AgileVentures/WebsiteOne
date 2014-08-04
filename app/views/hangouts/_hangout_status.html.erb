@@ -1,8 +1,8 @@
   <dl>
     <dt>Title</dt>
-    <dd><%= event.name %></dd>
+    <dd><%= hangout.title %></dd>
     <dt>Category</dt>
-    <dd><%= event.category %></dd>
+    <dd><%= hangout.category %></dd>
     <dt>Hangout link</dt>
     <dd><%= link_to hangout.hangout_url, hangout.hangout_url %>
     <dd><i>Updated: <%= time_ago_in_words hangout.updated_at if hangout %> ago</i></dd>
