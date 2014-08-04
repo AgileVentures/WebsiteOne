@@ -13,7 +13,7 @@ Given(/^following events exist with active hangouts:$/) do |table|
     event = Event.create!(hash)
     event.hangouts.create(hangout_url: 'x@x.com',
                           updated_at: 1.minute.ago,
-                          category: "PairProgramming",
+                          category: event.category,
                           title: event.name)
   end
 end

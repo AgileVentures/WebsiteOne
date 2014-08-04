@@ -17,24 +17,11 @@ Feature: Show Pending Hookups
       | Hookup 1       |
       | 07:00-09:30    |
       | Create Hangout |
-    And I should see "Pending Hookups" before "Hookup 1"
+    And I should see "Hookup 1" under "Pending Hookups"
 
-  Scenario: displaying pending hookup events but not pending scrums
-    Then I should see:
-      | Hookup 1       |
-      | 07:00-09:30    |
-      | Create Hangout |
-    And I should see "Pending Hookups" before "Hookup 1"
-    And I should not see "Scrum 0"
-
-  Scenario: display all non-expired events
+  Scenario: do not display expired events or scrums
     Given the time now is "2014-07-15 12:00:00 UTC"
-    Then I should see:
-      | Hookup 1       |
-      | 07:00-09:30    |
-      | Create Hangout |
-    And I should see "Pending Hookups" before "Hookup 1"
-    But I should not see "Hookup 0"
+    Then I should not see "Hookup 0"
     And I should not see "Scrum 0"
 
   Scenario: Create hangout
