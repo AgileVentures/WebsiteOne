@@ -319,10 +319,10 @@ Then(/^I should see an image with source "([^"]*)"$/) do |source|
 end
 
 Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, title_2|
-  unless negative
-    expect(page.body).to match(/#{title_2}.*#{title_1}/m)
-  else
+  if negative
     expect(page.body).not_to match(/#{title_2}.*#{title_1}/m)
+  else
+    expect(page.body).to match(/#{title_2}.*#{title_1}/m)
   end
 end
 
