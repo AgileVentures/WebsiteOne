@@ -31,7 +31,9 @@ def path_to(page_name, id = '')
     when 'scrums' then
       scrums_index_path
     when 'foobar' then
-      visit ("/#{page}")
+      "/#{page}"
+    when 'password reset' then
+      edit_user_password_path(id)
     else
       raise('path to specified is not listed in #path_to')
   end
