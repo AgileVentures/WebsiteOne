@@ -17,7 +17,12 @@ module EventHelper
     return nil if time.nil?
 
     event_date = time.strftime("%A, #{time.day.ordinalize} %b")
-    "#{event_date} at #{time.strftime("%I:%M%P")} (UTC)"
+    "#{event_date} at #{time.strftime("%I:%M%P (%Z)")}"
+  end
+
+  def current_occurrence_local_time(event)
+    time = nested_hash_value(event, :time)
+    time.nil? ? nil : local_time(time, '%b %e at %I:%M%P (%Z)')
   end
   
   def topic(event, event_schedule)
