@@ -11,12 +11,6 @@ describe "hookups/index", type: :view do
                                        id: 1)
     @pending_hookups = [@event_pending]
 
-    # @event_active = FactoryGirl.create(:event,
-    #                                    name: "Hookup active",
-    #                                    start_datetime: 'Mon, 1 Jan 2014 09:30:00 UTC',
-    #                                    duration: 60,
-    #                                    time_zone: "UTC",
-    #                                    category: "PairProgramming")
     @hangout_active = FactoryGirl.build(:hangout,
                                         hangout_url: 'x@x.com',
                                         updated_at: 'Mon, 1 Jan 2014 09:35:00 UTC',

@@ -15,9 +15,7 @@ Feature: Show Active Hookups
 
 
   Scenario: displaying existing active events, but not scrums
-    Then I should see "Hookup 0" under "Active Hookups"
-    And I should see "Hookup 1" under "Active Hookups"
-    And I should not see "Hookup 0" under "Pending Hookups"
-    And I should not see "Hookup 1" under "Pending Hookups"
+    Then I should see "Hookup 0" in table "active_hookups"
+    And I should see "Hookup 1" in table "active_hookups"
     And I should not see "Scrum 0"
 
