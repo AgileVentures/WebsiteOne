@@ -223,6 +223,8 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    local_time (1.0.0)
+      coffee-rails
     lumberjack (1.0.7)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -455,6 +457,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   launchy
+  local_time
   mercury-rails!
   omniauth
   omniauth-github!
