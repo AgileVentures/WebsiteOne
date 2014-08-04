@@ -326,3 +326,13 @@ Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, ti
   end
 end
 
+Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, table_name|
+  within ("table##{table_name}") do
+    if negative
+      expect(page.body).not_to have_content(/#{title}/m)
+    else
+      expect(page.body).to have_content(/#{title}/m)
+      end
+  end
+end
+

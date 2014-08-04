@@ -17,7 +17,7 @@ Feature: Show Pending Hookups
       | Hookup 1       |
       | 07:00-09:30    |
       | Create Hangout |
-    And I should see "Hookup 1" under "Pending Hookups"
+    And I should see "Hookup 1" in table "pending_hookups"
 
   Scenario: do not display expired events or scrums
     Given the time now is "2014-07-15 12:00:00 UTC"
