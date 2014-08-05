@@ -5,12 +5,16 @@ describe Hangout do
   let(:hangout){Hangout.new(event_id: '333', event: event, updated_at: Time.parse('10:00:00')) }
 
   context 'hangout_url is not present' do
-    it '#started? returns nil' do
+    it '#started? returns falsey' do
       expect(hangout.started?).to be_falsey
     end
 
-    it '#live? returns nil' do
+    it '#live? returns false' do
       expect(hangout.live?).to be_falsey
+    end
+
+    it '#expired? returns false' do
+      expect(hangout.expired?).to be_falsey
     end
   end
 
@@ -25,6 +29,11 @@ describe Hangout do
     it 'reports not live if the link is older than 15 minutes' do
       allow(Time).to receive(:now).and_return(Time.parse('10:05:01'))
       expect(hangout.live?).to be_falsey
+    end
+
+    it 'reports expired if the link is older than 15 minutes' do
+      allow(Time).to receive(:now).and_return(Time.parse('10:05:01'))
+      expect(hangout.expired?).to be_truthy
     end
   end
 
