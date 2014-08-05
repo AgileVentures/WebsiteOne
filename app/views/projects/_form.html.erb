@@ -4,7 +4,6 @@
 
       <%= awesome_text_field f, :title, placeholder: 'Name' %>
       <%= awesome_text_area f, :description, rows: 15, placeholder: 'Description', class: 'tinymce' %>
-	  <%= tinymce %>
 
       <div class='form-group'>
         <%= f.label :status %>
@@ -34,4 +33,4 @@
   </div>
 </div>
 
-
+<%= javascript_include_tag 'tinymce_init' %>

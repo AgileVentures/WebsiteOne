@@ -1,4 +1,3 @@
 //= require tinymce-jquery
-<%= require '' %>
 
-$(document).on('page:load', tinyMCE.init(<%= tinymce_configuration.to_javascript %>));
+$(document).on('page:load', tinyMCE.init(<%= TinyMCE::Rails.configuration.to_javascript %>));
