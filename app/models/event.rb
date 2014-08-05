@@ -15,17 +15,18 @@ class Event < ActiveRecord::Base
   RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
 
-# for safety...
-  def event_date= (d)
-      raise "old schema error"
+  def self.hookups
+    Event.where(category: "PairProgramming")
   end
 
-  def start_time= (t)
-      raise "old schema error"
-  end
-
-  def end_time= (t)
-      raise "old schema error"
+  def self.pending_hookups
+    pending = []
+    hookups.each do |h|
+      started = h.last_hangout && h.last_hangout.started?
+      expired_without_starting = !h.last_hangout && Time.now.utc > h.end_time
+      pending << h if !started && !expired_without_starting
+    end
+    pending
   end
 
   def event_date
@@ -38,6 +39,22 @@ class Event < ActiveRecord::Base
 
   def end_time
       (start_datetime + duration*60).utc
+  end
+
+  def end_date
+    if (end_time < start_time)
+      (event_date.to_datetime + 1.day).strftime('%Y-%m-%d')
+    else
+      event_date
+    end
+  end
+
+  def last_hangout
+    hangouts.last
+  end
+
+  def live?
+    last_hangout.try!(:live?)
   end
 
   def self.next_event_occurrence
@@ -116,8 +133,17 @@ class Event < ActiveRecord::Base
     DateTime.parse(start_time.strftime('%k:%M ')).in_time_zone(time_zone)
   end
 
-  def last_hangout
-    hangouts.last
+  #deprecated methods
+  def event_date= (d)
+    raise "old schema error"
+  end
+
+  def start_time= (t)
+    raise "old schema error"
+  end
+
+  def end_time= (t)
+    raise "old schema error"
   end
 
   private
