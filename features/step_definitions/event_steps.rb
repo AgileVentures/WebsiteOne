@@ -72,3 +72,13 @@ When(/^I follow "([^"]*)" for "([^"]*)" "([^"]*)"$/) do |linkid, table_name, hoo
   link = links[hookup_number.to_i - 1]
   link.click
 end
+
+Then /^I should( not)? see the Create Hookup form/ do |negative|
+  form = page.find('#form-hookup-create', visible: false)
+  if negative
+    expect(form).not_to be_visible
+  else
+    expect(form).to be_visible
+  end
+end
+

@@ -21,15 +21,39 @@ describe HookupsController, type: :controller do
   end
 
   context 'POST create_hookup with valid attributes' do
+    it 'redirects to hookups' do
+      post :create, valid_attributes_hookup
+      expect(response).to redirect_to :hookups
+    end
+
     it 'saves the new event in the database' do
       expect {
         post :create, valid_attributes_hookup
       }.to change(Event, :count).by(1)
     end
 
-    it 'redirects to hookups' do
+    it 'saves the new event with the correct title' do
       post :create, valid_attributes_hookup
-      expect(response).to redirect_to :hookups
+      @event = assigns(:event)
+      expect(@event.name).to eq(valid_attributes_hookup['title'])
+    end
+
+    it 'saves the new event with the correct duration' do
+      post :create, valid_attributes_hookup
+      @event = assigns(:event)
+      expect(@event.duration).to eq(valid_attributes_hookup['duration'])
+    end
+
+    it 'saves the new event with the correct datetime' do
+      post :create, valid_attributes_hookup
+      @event = assigns(:event)
+      datetime_in = Time.utc(valid_attributes_hookup['start_date'].to_date.year,
+                             valid_attributes_hookup['start_date'].to_date.month,
+                             valid_attributes_hookup['start_date'].to_date.day,
+                             valid_attributes_hookup['start_time'].to_time.hour,
+                             valid_attributes_hookup['start_time'].to_time.min,
+                             valid_attributes_hookup['start_time'].to_time.sec)
+      expect(@event.start_datetime).to eq(datetime_in)
     end
   end
 

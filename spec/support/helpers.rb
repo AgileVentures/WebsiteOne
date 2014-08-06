@@ -82,14 +82,12 @@ module Helpers
      start_date: '2020-07-17',
      start_time: '09:00',
      duration: 60,
-     time_zone: 'UTC'
     }.as_json
   end
 
   def invalid_attributes_hookup
     {start_time: '09:00',
      duration: 60,
-     time_zone: 'UTC'
     }.as_json
   end
 end

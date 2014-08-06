@@ -1,5 +1,7 @@
-<% start_date = params[:event_date].to_datetime.strftime('%F') if params[:event_date] %>
-<% start_time = params[:start_time].to_datetime.strftime('%H:%M') if params[:event_date] %>
+<% if params[:event_date] %>
+    <% start_date = params[:event_date].to_datetime.strftime('%F') %>
+<% end %>
+<% start_time = params[:start_time].to_datetime.strftime('%H:%M') if params[:start_time] %>
 <% duration = (params[:duration]) if params[:duration] %>
 <% if user_signed_in? %>
     <button id="btn-hookup-new">New Hookup</button>
@@ -9,7 +11,7 @@
       <%= form_tag({controller: "hookups", action: 'create'}, method: 'post', class: 'form-vertical', id: 'form-hookup-create', style: 'display: none') do %>
 
           <%= label_tag 'Descriptive Title', 'Descriptive Title', :class => 'control-label' %>
-          <%= text_area_tag 'title', '' %>
+          <%= text_area_tag 'title', '', id: 'title_field' %>
 
           <div class="form-group event_date">
             <%= label_tag 'start_date', 'Start Date', :class => 'control-label' %>
