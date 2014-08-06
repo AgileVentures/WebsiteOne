@@ -1,0 +1,9 @@
+menubar: false
+toolbar:
+  - bold italic underline | undo redo | cut copy paste | bullist numlist | link image |
+  - blockquote | styleselect | fontselect fontsizeselect | table | fullscreen
+plugins:
+  - link
+  - image
+  - table
+  - fullscreen
