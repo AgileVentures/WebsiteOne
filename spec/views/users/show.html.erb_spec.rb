@@ -78,6 +78,34 @@ describe "users/show.html.erb" do
     expect(rendered).to have_content(@user.last_name)
   end
 
+  describe 'geolocation' do
+    it 'does not show globe icon when no country is set' do
+      render
+      expect(rendered).not_to have_selector "i[class='fa fa-globe fa-lg']"
+    end
+
+    it 'shows user country when known' do
+      @user.country = 'Mozambique'
+      render
+      expect(rendered).to have_selector "i[class='fa fa-globe fa-lg']"
+      expect(rendered).to have_content @user.country
+    end
+
+    it 'does not show clock icon when user timezone cannot be determined' do
+      render
+      expect(rendered).not_to have_selector "i[class='fa fa-clock-o fa-lg']"
+    end
+
+    it 'shows user timezone when it can be determined' do
+      @user.latitude = 25.9500
+      @user.longitude = 32.5833
+      expect(NearestTimeZone).to receive(:to).with(@user.latitude, @user.longitude).and_return('Africa/Cairo')
+      render
+      expect(rendered).to have_selector "i[class='fa fa-clock-o fa-lg']"
+      expect(rendered).to have_content 'Africa/Cairo'
+    end
+  end
+
   it 'should not display an edit button if it is not my profile' do
     @user_logged_in ||= FactoryGirl.create :user
     sign_in @user_logged_in
