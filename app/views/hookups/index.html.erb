@@ -1,3 +1,48 @@
+<% start_date = params[:event_date].to_datetime.strftime('%F') if params[:event_date] %>
+<% start_time = params[:start_time].to_datetime.strftime('%H:%M') if params[:event_date] %>
+<% duration = (params[:duration]) if params[:duration] %>
+<% if user_signed_in? %>
+    <button id="btn-hookup-new">New Hookup</button>
+    <br>
+    <br>
+    <div >
+      <%= form_tag({controller: "hookups", action: 'create'}, method: 'post', class: 'form-vertical', id: 'form-hookup-create', style: 'display: none') do %>
+
+          <%= label_tag 'Descriptive Title', 'Descriptive Title', :class => 'control-label' %>
+          <%= text_area_tag 'title', '' %>
+
+          <div class="form-group event_date">
+            <%= label_tag 'start_date', 'Start Date', :class => 'control-label' %>
+            <% if params['start_date'] %>
+                <%= text_field_tag 'start_date', format_datepicker(start_date), style: 'width:auto;', :class => 'form-control datepicker' %>
+            <% else %>
+                <%= text_field_tag 'start_date', format_datepicker(Time.now.utc), style: 'width:auto;', class: 'form-control datepicker' %>
+            <% end %>
+          </div>
+
+          <div class="form-group event_time">
+            <%= label_tag 'start_time', "Start Time in UTC", :class => 'control-label' %>
+            <% if params['start_time'] %>
+                <%= text_field_tag 'start_time', format_timepicker(start_time), style: 'width:auto;', class: 'form-control timepicker' %>
+            <% else %>
+                <%= text_field_tag 'start_time', format_timepicker(Time.now.utc), style: 'width:auto;', class: 'form-control timepicker' %>
+            <% end %>
+          </div>
+
+          <div class="form-group event_time" style='display: block;'>
+            <%= label_tag :duration, "Duration (in minutes)", :class => 'control-label' %>
+            <% if params[:duration] %>
+                <%= number_field_tag 'duration', duration, { style: 'width:auto;', value: duration } %>
+            <% else %>
+                <%= number_field_tag 'duration', 60, { style: 'width:auto;', value: 60 } %>
+            <% end %>
+          </div>
+          <br>
+          <%= submit_tag "Create", class: 'btn btn-primary' %>
+          <button id="btn-cancel-new" class="btn btn-default">Cancel</button>
+      <% end %>
+    </div>
+<% end %>
 <h2>Active Hookups</h2>
 <% if @active_pp_hangouts.present? %>
     <table id="active_hookups" class='hookups_table'>

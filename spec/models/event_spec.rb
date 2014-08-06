@@ -178,6 +178,40 @@ describe Event do
     end
   end
 
+  context 'should create a hookup event that' do
+    before do
+      @event = FactoryGirl.build_stubbed(Event,
+                                         name: 'PP Monday event',
+                                         category: 'PairProgramming',
+                                         start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
+                                         duration: 90,
+                                         repeats: 'never',
+                                         time_zone: 'UTC')
+    end
+
+    it 'should expire events that ended' do
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:25:00 UTC')
+      allow(hangout).to receive(:started?).and_return(true)
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:31:00 UTC'))
+      expect(@event.live?).to be_falsey
+    end
+
+    it 'should mark as active events which have started and have not ended' do
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:25:00 UTC')
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
+      expect(@event.live?).to be_truthy
+    end
+
+    it 'should not be started if events have not started' do
+      hangout = @event.hangouts.create(hangout_url: nil,
+                                       updated_at: nil)
+      Delorean.time_travel_to(Time.parse('2014-06-17 9:30:00 UTC'))
+      expect(@event.live?).to be_falsey
+    end
+  end
+
   context 'Event url' do
     before (:each) do
       @event = {name: 'one time event',
