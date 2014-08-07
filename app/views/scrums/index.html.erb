@@ -18,8 +18,8 @@
   </div>
 </div>
 
+<ul class="timeline">
   <% @scrums.each_slice(2) do |videos| %>
-      <ul class="timeline">
         <li>
           <div class="timeline-badge"><i class="glyphicon glyphicon-film"></i></div>
           <div class="timeline-panel" style="background-color: lemonchiffon; padding: 10px" >
@@ -42,12 +42,11 @@
                 <%= scrum_link videos.last %>
                 <%= videos.last[:title] %>
               </h4>
-
               <p>
                 <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.last[:published].to_s(:db) %></small>
               </p>
             </div>
           </div>
         </li>
-      </ul>
   <% end %>
+  </ul>
