@@ -5,14 +5,17 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   Background:
     Given following events exist:
-  | name  | description         | category | start_datetime              | duration                | repeats | time_zone |
-  | Scrum | Daily scrum meeting | Scrum    | 2014/02/03 07:00:00 UTC | 150 | never   | UTC       |
+      | name          | description          | category      | start_datetime          | duration | repeats | time_zone |
+      | Scrum         | Daily scrum meeting  | Scrum         | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |
+      | Retrospective | Weekly retrospective | ClientMeeting | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |
     And the following projects exist:
-      | title         | description             | status   |
-      | hello world   | greetings earthlings    | active   |
+      | title       | description          | status |
+      | WebsiteOne  | greetings earthlings | active |
+      | Autograders | greetings earthlings | active |
     And the following users exist
       | first_name | last_name | email                  | password |
       | Alice      | Jones     | alice@btinternet.co.uk | 12345678 |
+      | Bob        | Anchous   | bob@btinternet.co.uk   | 12345678 |
     And there are no videos
     And I am logged in
     And I have Slack notifications enabled
@@ -101,24 +104,36 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   @wip
   Scenario: Display current sessions that are live
     Given the following hangouts exist:
-      | Start time | Event | Category        | Project     | Title        | Host  |
-      | 11:15      | Scrum | PairProgramming | hello world | HangoutsFlow | Alice |
+      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id |
+      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          |
+      | 12:00      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           |
+
     When I go to the "hangouts" page
     Then I should see:
-        | Started at |
-        | Event      |
-        | Category   |
-        | Project    |
-        | Title      |
-        | Host       |
-        | Join       |
-        | Watch      |
+        | Started at   |
+        | Title        |
+        | Project      |
+        | Host         |
+        | Join         |
+        | Watch        |
+        | Event        |
+        | Category     |
+        | Participants |
     And I should see:
         | 11:15           |
+        | HangoutsFlow    |
+        | WebsiteOne      |
+        | Alice           |
         | Scrum           |
         | PairProgramming |
-        | WebsiteOne      |
-        | HangoutsFlow    |
-        | Yaro            |
-    And I should see link "http://hangout.test" with "http://hangout.test"
-    And I should see link "http://youtube.test" with "http://youtube.test"
+    And I should see link "Join" with "http://hangout.test"
+    And I should see link "Watch" with "QWERT55"
+    And I should see:
+        | 12:00         |
+        | GithubClone   |
+        | Autograders   |
+        | Bob           |
+        | Retrospective |
+        | ClientMeeting |
+    And I should see link "Join" with "http://hangout.session"
+    And I should see link "Watch" with "TGI345"
