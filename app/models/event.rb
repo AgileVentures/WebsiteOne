@@ -78,7 +78,7 @@ class Event < ActiveRecord::Base
   def next_occurrences(options = {})
     start_datetime = StartTime.for(options[:start_time])
     final_datetime = EndTime.for(options[:end_time], 10.days)
-    final_datetime = repeat_ends_on if repeats != 'never'
+    final_datetime = [repeat_ends_on, start_datetime + 10.days].min if repeats != 'never'
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
