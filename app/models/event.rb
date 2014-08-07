@@ -76,12 +76,13 @@ class Event < ActiveRecord::Base
   end
 
   def next_occurrences(options = {})
-    start_time = StartTime.for(options[:start_time])
-    end_time = EndTime.for(options[:end_time], 10.days)
+    start_datetime = StartTime.for(options[:start_time])
+    final_datetime = EndTime.for(options[:end_time], 10.days)
+    final_datetime = repeat_ends_on if repeats != 'never'
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
-      occurrences_between(start_time, end_time).each do |time|
+      occurrences_between(start_datetime, final_datetime).each do |time|
         occurences << {event: self, time: time}
 
         return occurences if occurences.count >= limit
@@ -103,17 +104,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def from
-    ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + start_time.seconds_since_midnight
-  end
-
-  def to
-    ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + end_time.seconds_since_midnight
-  end
-
   def schedule(starts_at = nil, ends_at = nil)
-    starts_at ||= from
-    ends_at ||= to
+    starts_at ||= start_datetime
+    ends_at ||= end_time
     if duration > 0
       s = IceCube::Schedule.new(starts_at, :ends_time => ends_at, :duration => duration)
     else
