@@ -31,7 +31,9 @@ Given /^the following hangouts exist:$/ do |table|
                                  category: hash['Category'],
                                  project: Project.find_by_title(hash['Project']),
                                  title: hash['Title'],
-                                 host: User.find_by_first_name(hash['Host']))
+                                 host: User.find_by_first_name(hash['Host']),
+                                 hangout_url: hash['Hangout url'],
+                                 yt_video_id: hash['Youtube video id'])
   end
 
 end
