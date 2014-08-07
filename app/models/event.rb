@@ -146,6 +146,10 @@ class Event < ActiveRecord::Base
     raise "old schema error"
   end
 
+  def last_hangout
+    hangouts.first
+  end
+
   private
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?

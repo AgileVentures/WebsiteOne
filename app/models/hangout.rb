@@ -5,7 +5,7 @@ class Hangout < ActiveRecord::Base
 
   serialize :participants
 
-  default_scope { order('created_at') }
+  default_scope { order('created_at DESC') }
 
   def started?
     hangout_url.present?
