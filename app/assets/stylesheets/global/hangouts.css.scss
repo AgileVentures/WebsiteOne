@@ -1,3 +1,5 @@
+@import "../variables";
+
 .hangouts-management {
   @extend .panel-group;
   margin: 0px;
@@ -45,7 +47,7 @@
   }
 
   .panel-body.warning {
-    padding: 5px; 
+    padding: 5px;
   }
 
   .btn:focus {
@@ -83,7 +85,7 @@
 
     .readme-link {
       background: transparent;
-      color: #ee7335 !important;
+      color: $theme-main !important;
       display: inline-block;
       vertical-align: initial;
       padding: 0;
@@ -111,4 +113,101 @@
 
 .popover-content {
   font-size: small;
+}
+
+.live-hangouts {
+  $hg-color: lighten($theme-main, 35);
+  $hg-border: 1px solid gray;
+
+  font-size: smaller;
+
+  .fa {
+    height: auto;
+  }
+
+  .panel {
+    overflow: hidden;
+    border: $hg-border;
+    box-shadow: 1px 1px 10px 1px gray;
+  }
+
+  .panel-info {
+    font-weight: bold;
+    margin-bottom: 5px;
+
+    div {
+      line-height: 25px;
+    }
+  }
+
+  .btn-success {
+    font-size: smaller;
+    padding: 4px;
+    margin-left: 10px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: green;
+    }
+  }
+
+  .panel-default {
+    position: relative;
+    transition: all 0.5s;
+
+    &:hover {
+      transform: scale(1.05,1.05);
+      z-index: 1000;
+    }
+
+    .panel-heading {
+      a {
+        display: block;
+      }
+      &:hover {
+        background-color: $hg-color;
+      }
+    }
+  }
+
+  .panel-body {
+    border-top: $hg-border;
+    background-color: $hg-color;
+    padding: 3px;
+    margin: 0;
+  }
+
+  .container-fluid, .panel-heading {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .container-fluid {
+    text-align: left;
+    white-space: nowrap;
+
+    @media (min-width: 768px) {
+      white-space: normal;
+
+      .hg-align-right {
+        text-align: right;
+        direction: rtl;
+      }
+
+    }
+
+  }
+
+  .hg-toggle {
+    width: 20px;
+    padding-left: 5px;
+  }
+
+  .hg-avatar {
+    padding-top: 5px;
+  }
+
 }

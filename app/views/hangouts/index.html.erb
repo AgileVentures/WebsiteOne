@@ -1,26 +1,104 @@
-<table cellspacing='0'>
-  <thead>
-    <tr>
-      <th>Started at</th>
-      <th>Event</th>
-      <th>Category</th>
-      <th>Project</th>
-      <th>Title</th>
-      <th>Host</th>
-      <th>Join</th>
-      <th>Watch</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<% provide :title, 'Hangouts' %>
+<section class="live-hangouts">
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-info hidden-xs">
+      <div class="panel-heading">
+        <div class='container-fluid'>
+          <div class='row'>
+            <div class="col-sm-1 hg-toggle"></div>
+            <div class="col-sm-1 hg-align-right">Started</div>
+            <div class="col-sm-4"><span class="caret"></span> Title
+              <span><button id="btn-hg-toggle" type="button" class="btn btn-success">
+                  toggle all hangouts</button></span>
+            </div>
+            <div class="col-sm-4"><span class="caret"></span> Project</div>
+            <div class="col-sm-1">Host</div>
+            <div class="col-sm-1">Hangout</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% @hangouts.each_with_index do |hangout, index| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class='container-fluid'>
+            <div class='row'>
+              <div class="col-xs-1 col-sm-1 hg-toggle">
+                <a class="collapse-button" data-toggle="collapse" data-parent="#accordion" href="#<%= "collapse#{index}" %>">
+                  <%= fa_icon "caret-right" %></a>
+              </div>
+              <div class="col-xs-4 col-sm-1">
+                <a class="collapse-button hg-align-right" data-toggle="collapse" data-parent="#accordion" href="#<%= "collapse#{index}" %>">
+                  <%= hangout.created_at.to_s(:time) %></a>
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <a class="collapse-button" data-toggle="collapse" data-parent="#accordion" href="#<%= "collapse#{index}" %>">
+                  <%= hangout.title %></a>
+              </div>
+              <div class="col-xs-12 col-sm-4"><%= hangout.project.try!(:title) %></div>
+              <div class="col-xs-2 col-sm-1 hg-avatar">
+                <% if hangout.try!(:host) %>
+                  <% present hangout.host do |presenter| %>
+                    <a class="user-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" 
+                    data-title="<%= presenter.display_name  %>" 
+                    data-content="Member for: <br/>User rating: <br/>PP sessions:" 
+                    href="<%= user_path(hangout.host) %>">
+                    <%= presenter.gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle') %>
+                    </a>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="col-xs-2 col-sm-1">
+                <div class="row">
+                  <div><%= link_to 'Join', hangout.hangout_url %></div>
+                  <div><%= link_to 'Watch', "http://www.youtube.com/watch?v=#{hangout.yt_video_id}&feature=youtube_gdata" %></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="<%= "collapse#{index}" %>" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <div class='container-fluid'>
+              <div class='row'>
+                <div class='hidden-xs col-sm-1 hg-toggle'></div>
+                <div class='hidden-xs col-sm-1 hg-align-right'>
+                  <div class='row'> <b>Event</b></div>
+                  <div class='row'> <b>Category</b></div>
+                </div>
+                <div class='col-xs-12 col-sm-4'>
+                  <div class='row'> <%= hangout.event.try!(:name) %> </div>
+                  <div class='row'> <%= hangout.category %> </div>
+                </div>
+                <div class='hidden-xs col-sm-2'><b>Participants</b></div>
+                <div class='col-xs-12 col-sm-4 hg-avatar'>
+                  <% present hangout.host do |presenter| %>
+                    <a class="user-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" 
+                    data-title="<%= presenter.display_name  %>" 
+                    data-content="Member for: <br/>User rating: <br/>PP sessions:" 
+                    href="<%= user_path(hangout.host) %>">
+                    <%= presenter.gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle') %>
+                    </a>
+                    <a class="user-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" 
+                    data-title="<%= presenter.display_name  %>" 
+                    data-content="Member for: <br/>User rating: <br/>PP sessions:" 
+                    href="<%= user_path(hangout.host) %>">
+                    <%= presenter.gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle') %>
+                    </a>
+                    <a class="user-popover" data-html="true" data-container="body" data-toggle="popover" data-placement="right" 
+                    data-title="<%= presenter.display_name  %>" 
+                    data-content="Member for: <br/>User rating: <br/>PP sessions:" 
+                    href="<%= user_path(hangout.host) %>">
+                    <%= presenter.gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle') %>
+                    </a>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+<%=javascript_include_tag 'hangouts.js' %>
