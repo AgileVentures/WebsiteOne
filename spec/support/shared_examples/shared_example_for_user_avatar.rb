@@ -1,0 +1,32 @@
+shared_examples_for 'it has clickable user avatar with popover' do
+  before do
+    allow(view).to receive(:user_path).and_return('user_profile_path')
+    allow(user.presenter).to receive(:display_name).and_return('user_name')
+    allow(user.presenter).to receive(:gravatar_image).and_return('user_gravatar')
+  end
+
+  it 'rendres user avatar' do
+    render
+    expect(rendered).to have_text('user_gravatar')
+  end
+
+  it 'renders link to user profile' do
+    render
+    expect(rendered).to have_link('', href: 'user_profile_path')
+  end
+
+  it 'renders a popover with user details' do
+    data_tags = { 'class' => 'user-popover',
+                  'data-html' => 'true',
+                  'data-container' => 'body',
+                  'data-toggle' => 'popover',
+                  'data-placement' => 'right'}
+
+    popover_content = 'Member for: <br/>User rating: <br/>PP sessions:'
+    user_tags = { 'data-title' => 'user_name',
+                  'data-content' => popover_content }
+    render
+    expect(rendered).to have_selector('a', data_tags)
+    expect(rendered).to have_selector('a', user_tags)
+  end
+end
