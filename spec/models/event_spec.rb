@@ -270,12 +270,67 @@ describe Event do
     end
   end
 
+  describe 'Event#final_datetime_for_display' do
+    before do
+      @event = FactoryGirl.build_stubbed(Event,
+                                         name: 'Spec Scrum',
+                                         start_datetime: '2014-03-07 10:30:00 UTC',
+                                         duration: 30,
+                                         repeats: 'weekly',
+                                         repeats_every_n_weeks: 1,
+                                         repeats_weekly_each_days_of_the_week_mask: 0b1111111,
+                                         repeat_ends: true,
+                                         repeat_ends_on: '2015-6-25')
+    end
+
+    let(:options) { {} }
+    let(:next_occurrences) { @event.next_occurrences(options) }
+    let(:next_occurrence_time) { next_occurrences.first[:time].time }
+
+    it 'should return the repeat_ends_on datetime if that comes first and it is a repeating event and the ends_on datetime is less than 10 days away' do
+      Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
+      options[:end_time] = '2015-06-30 09:27:00 UTC'
+      expect(@event.final_datetime_for_display(options)).to eq(@event.repeat_ends_on.to_datetime)
+    end
+
+    it 'should return the options[:endtime] if that comes before repeat_ends_on' do
+      Delorean.time_travel_to(Time.parse('2015-06-15 09:27:00 UTC'))
+      options[:end_time] = '2015-06-20 09:27:00 UTC'
+      expect(@event.final_datetime_for_display(options)).to eq(options[:end_time].to_datetime)
+    end
+
+    it 'should return the repeat_ends_on datetime if there is no options[end_time] and the ends_on datetime is less than 10 days away' do
+      Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
+      expect(@event.final_datetime_for_display).to eq(@event.repeat_ends_on.to_datetime)
+    end
+
+    it 'should return the options[:endtime] if the event never ends and option[:endtime] is less than 10 days from now' do
+      @event.repeat_ends = false
+      @event.repeats = 'never'
+      Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
+      options[:end_time] = '2015-06-28 09:27:00 UTC'
+      expect(@event.final_datetime_for_display(options)).to eq(options[:end_time].to_datetime)
+    end
+
+
+    it 'should return 10 days from now if that is soonest of the options' do
+      Delorean.time_travel_to(Time.parse('2015-06-10 09:27:00 UTC'))
+      options[:end_time] = '2015-06-28 09:27:00 UTC'
+      ten_days_from_now = (Time.now + 10.days).utc.to_datetime
+      expect(@event.final_datetime_for_display(options).utc.to_datetime).to eq(ten_days_from_now)
+    end
+  end
+
   describe 'Event.next_event_occurence' do
     let(:event) do
-      Event.new(name: 'Spec Scrum',
-                start_datetime: '2014-03-07 10:30:00 UTC',
-                time_zone: 'UTC',
-                duration: 30)
+      Event.new(
+          name: 'Spec Scrum',
+          start_datetime: '2014-03-07 10:30:00 UTC',
+          category: 'Scrum',
+          duration: 30,
+          repeats: 'never',
+          repeat_ends: true,
+          repeat_ends_on: '')
     end
 
     before(:each) do

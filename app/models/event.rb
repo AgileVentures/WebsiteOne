@@ -60,11 +60,11 @@ class Event < ActiveRecord::Base
   def self.next_event_occurrence
     if Event.exists?
       @events = []
-      Event.where(['category = ?', 'Scrum']).each do |event|
-        next_occurences = event.next_occurrences(start_time: 15.minutes.ago,
-                                                 limit: 1)
-        @events << next_occurences.first unless next_occurences.empty?
-      end
+       Event.where(['category = ?', 'Scrum']).each do |event|
+          next_occurences = event.next_occurrences(start_time: 15.minutes.ago,
+                                                   limit: 1)
+          @events << next_occurences.first unless next_occurences.empty?
+        end
 
       return nil if @events.empty?
 
@@ -75,10 +75,17 @@ class Event < ActiveRecord::Base
     nil
   end
 
+  def final_datetime_for_display(options = {})
+    start_datetime_for_calculation = !options[:start_time].blank? ? options[:start_time] : Time.now
+    time_in_future = !options[:time_in_future].blank? ? options[:time_in_future] : 10.days
+    final_datetime = !options[:end_time].blank? ? [start_datetime_for_calculation + time_in_future, options[:end_time]].min : start_datetime_for_calculation + time_in_future
+    final_datetime = [repeat_ends_on.to_datetime, final_datetime].min if repeats != 'never' && repeat_ends == true
+    final_datetime.to_datetime.utc
+  end
+
   def next_occurrences(options = {})
-    start_datetime = StartTime.for(options[:start_time])
-    final_datetime = EndTime.for(options[:end_time], 10.days)
-    final_datetime = [repeat_ends_on, start_datetime + 10.days].min if repeats != 'never'
+    start_datetime = !options[:start_time].blank? ? options[:start_time] : 30.minutes.ago
+    final_datetime = final_datetime_for_display(options)
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
