@@ -317,7 +317,7 @@ describe Event do
       Delorean.time_travel_to(Time.parse('2015-06-10 09:27:00 UTC'))
       options[:end_time] = '2015-06-28 09:27:00 UTC'
       ten_days_from_now = (Time.now + 10.days).utc.to_datetime
-      expect(@event.final_datetime_for_display(options).utc.to_datetime).to eq(ten_days_from_now)
+      expect(@event.final_datetime_for_display(options).utc.to_datetime.to_s).to eql(ten_days_from_now.to_s)
     end
   end
 
