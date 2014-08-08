@@ -1,8 +1,10 @@
 <div id="liveHOA-placeholder"
   data-topic='<%= topic %>'
+  data-project='<%= project_id %>'
   data-event-id='<%= event_id.to_s %>'
   data-category='<%= category %>'
-  data-hangout-id='<%= hangout_id.present? ? hangout_id : generate_hangout_id(current_user, project) %>'
+  data-hangout-id='<%= hangout_id.present? ? hangout_id : generate_hangout_id(current_user, project_id) %>'
+  data-host-id='<%= current_user.id %>'
   data-app-id='<%= Settings.hangouts.app_id %>'
   data-callback-url='<%= hangout_url('id').gsub(/id$/, '') %>'>
   Please refresh the page to load the hangouts

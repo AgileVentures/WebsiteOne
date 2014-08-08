@@ -174,11 +174,11 @@ describe 'projects/show.html.erb', type: :view do
       end
 
       it_behaves_like 'it has a hangout button' do
+        let(:topic_name){"PairProgramming on #{@project.title}"}
+        let(:project_id){@project.id}
         let(:event_id){''}
         let(:category){'PairProgramming'}
         let(:hangout_id){''}
-        let(:project){@project}
-        let(:topic_name){"PairProgramming on #{@project.title}"}
       end
 
     end
