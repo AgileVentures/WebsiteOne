@@ -123,17 +123,15 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | 11:15           |
         | HangoutsFlow    |
         | WebsiteOne      |
-        | Alice           |
         | Scrum           |
         | PairProgramming |
     And I should see link "Join" with "http://hangout.test"
-    And I should see link "Watch" with "QWERT55"
+    And I should see link "Watch" with "http://www.youtube.com/watch?v=QWERT55&feature=youtube_gdata"
     And I should see:
         | 12:00         |
         | GithubClone   |
         | Autograders   |
-        | Bob           |
         | Retrospective |
         | ClientMeeting |
     And I should see link "Join" with "http://hangout.session"
-    And I should see link "Watch" with "TGI345"
+    And I should see link "Watch" with "http://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
