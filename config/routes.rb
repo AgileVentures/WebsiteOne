@@ -51,6 +51,8 @@ WebsiteOne::Application.routes.draw do
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false
 
+  resources :hookups
+
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
 end
 

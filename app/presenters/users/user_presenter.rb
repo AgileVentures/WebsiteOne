@@ -24,6 +24,10 @@ class UserPresenter < BasePresenter
     user.title_list.count > 0
   end
 
+  def timezone
+    NearestTimeZone.to(user.latitude, user.longitude)
+  end
+
   def gravatar_src(options={})
     options = { size: 80 }.merge(options)
     hash = Digest::MD5::hexdigest(user.email.strip.downcase)
