@@ -30,20 +30,43 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def black_listed_urls
+    %w(
+        /users/sign_in
+        /users/sign_up
+        /users/password/new
+        /users/confirmation
+        /users/sign_out
+    )
+  end
+
+  def black_listed_matches
+    %w(
+       \/users\/password\/edit.*
+    )
+  end
+
+  def black_listed_url?(blacklist)
+    blacklist.include? request.path
+  end
+
+  def black_listed_match?(blacklist)
+    blacklist.any?{|pattern| Regexp.new(pattern).match(request.path)}
+  end
+
+  def conventional_get_request?
+    request.get? && !request.xhr?
+  end	
+
   def get_next_event
     @next_event = Event.next_event_occurrence
   end
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
-    return unless request.get? 
-    if (request.path != "/users/sign_in" &&
-        request.path != "/users/sign_up" &&
-        request.path != "/users/password/new" &&
-        request.path !~ /\/users\/password\/edit.*/ &&
-        request.path != "/users/confirmation" &&
-        request.path != "/users/sign_out" &&
-        !request.xhr?) # don't store ajax calls
+    if conventional_get_request? && 
+       !black_listed_url?(black_listed_urls) && 
+       !black_listed_match?(black_listed_matches)
       session[:previous_url] = request.fullpath 
     end
   end
