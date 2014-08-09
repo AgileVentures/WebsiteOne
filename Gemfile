@@ -50,6 +50,7 @@ gem 'rack-cache'
 gem 'sprockets-image_compressor'
 
 gem 'rails_config' # a gem to manage configuration files
+gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

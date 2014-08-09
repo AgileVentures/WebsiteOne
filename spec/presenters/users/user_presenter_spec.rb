@@ -34,6 +34,17 @@ describe UserPresenter do
     end
   end
 
+  describe '#timezone' do
+    let(:user) { FactoryGirl.build_stubbed(:user) }
+
+    it 'should display timezone when it can be determined' do
+      user.latitude = 25.9500
+      user.longitude = 32.5833
+      expect(NearestTimeZone).to receive(:to).with(user.latitude, user.longitude).and_return('Africa/Cairo')
+      expect(subject.timezone).to eq 'Africa/Cairo'
+    end
+  end
+
   describe '#gravatar_for' do
     let(:email) { ' MyEmailAddress@example.com  ' }
     let(:user_hash) { '0bc83cb571cd1c50ba6f3e8a78ef1346' }

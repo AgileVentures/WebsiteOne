@@ -34,6 +34,8 @@ def path_to(page_name, id = '')
       "/#{page}"
     when 'password reset' then
       edit_user_password_path(id)
+    when 'hookups' then
+      hookups_path
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -157,15 +159,19 @@ Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
 end
 
 Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
-  unless negative
-    expect(page.has_link? link).to be_true
-  else
+  if negative
     expect(page.has_link? link).to be_false
+  else
+    expect(page.has_link? link).to be_true
   end
 end
 
-Then /^I should see field "([^"]*)"$/ do |field|
-  page.should have_field(field)
+Then /^I should( not)? see field "([^"]*)"$/ do |negative, field|
+  if negative
+    expect(page.has_field? field).to be_false
+  else
+    expect(page.has_field? field).to be_true
+  end
 end
 
 Then /^I should( not)? see buttons:$/ do |negative, table|
@@ -313,3 +319,22 @@ Then(/^I should see an image with source "([^"]*)"$/) do |source|
   end
   page.should have_css "img[src*=\"#{source}\"]"
 end
+
+Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, title_2|
+  if negative
+    expect(page.body).not_to match(/#{title_2}.*#{title_1}/m)
+  else
+    expect(page.body).to match(/#{title_2}.*#{title_1}/m)
+  end
+end
+
+Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, table_name|
+  within ("table##{table_name}") do
+    if negative
+      expect(page.body).not_to have_content(/#{title}/m)
+    else
+      expect(page.body).to have_content(/#{title}/m)
+      end
+  end
+end
+

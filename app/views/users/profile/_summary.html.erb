@@ -12,6 +12,9 @@
     <% if presenter.country? %>
       <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country %></li>
     <% end %>
+    <% if presenter.latitude? && presenter.longitude? %>
+      <li><i class="fa fa-clock-o fa-lg"></i> <%= presenter.timezone %></li>
+    <% end %>
 
     <li>
       <i class="fa fa-calendar-o fa-lg"></i>
