@@ -36,4 +36,21 @@ module EventHelper
     !datetime.blank? ? datetime.strftime('%Y-%m-%d %I:%M %P') : ''
   end
 
+  def start_time_with_timezone(event)
+    DateTime.parse(event.start_time.strftime('%k:%M ')).in_time_zone(event.time_zone)
+  end
+
+  def format_time_range(event)
+    start_time_format = event.start_time.strftime('%H:%M')
+    end_time_format = event.end_time.strftime('%H:%M')
+    "#{start_time_format}-#{end_time_format} UTC"
+  end
+
+  def format_time(datetime)
+    "#{datetime.strftime('%H:%M')} UTC"
+  end
+
+  def format_date(datetime)
+    datetime.strftime('%F')
+  end
 end
