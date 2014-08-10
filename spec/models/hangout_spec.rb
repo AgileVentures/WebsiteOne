@@ -39,7 +39,7 @@ describe Hangout do
 
   describe '#update_hangout_data' do
     let(:params) do
-      { topic: 'Morning Rejoice',
+      { title: 'Morning Rejoice',
         category: 'Scrum',
         hangout_url: 'http://hangout.test' }
     end
