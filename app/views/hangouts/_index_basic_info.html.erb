@@ -1,0 +1,26 @@
+<div class='container-fluid'>
+  <div class='row'>
+    <div class="col-xs-1 col-sm-1 hg-toggle">
+      <a class="collapse-button" data-toggle="collapse" data-parent="#accordion" href="#<%= "collapse#{index}" %>">
+        <%= fa_icon "caret-right" %></a>
+    </div>
+    <div class="col-xs-4 col-sm-1">
+      <a class="collapse-button hg-align-right" data-toggle="collapse" data-parent="#accordion" href="#<%= "collapse#{index}" %>">
+        <%= hangout.created_at %></a>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <a class="collapse-button" data-toggle="collapse" data-parent="#accordion" href="#<%= "collapse#{index}" %>">
+        <%= hangout.title %></a>
+    </div>
+    <div class="col-xs-12 col-sm-4"><%= hangout.project_name %></div>
+    <div class="col-xs-2 col-sm-1 hg-avatar">
+      <%= render partial: 'users/user_avatar', locals: { user: hangout.host } %>
+    </div>
+    <div class="col-xs-2 col-sm-1">
+      <div class="row">
+        <div><%= link_to 'Join', hangout.hangout_url %></div>
+        <div><%= link_to 'Watch', hangout.video_url %></div>
+      </div>
+    </div>
+  </div>
+</div>
