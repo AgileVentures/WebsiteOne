@@ -1,8 +1,7 @@
 require_relative '../base_presenter'
 
 class UserPresenter < BasePresenter
-
-  alias_method :user, :object
+  presents :user
 
   def display_name
     user.display_name
@@ -51,4 +50,20 @@ class UserPresenter < BasePresenter
   def github_link
     link_to(github_username, user.github_profile_url)
   end
+
+  def user_avatar_with_popover
+    %Q(
+      <a class="user-popover" 
+        data-html="true" 
+        data-container="body" 
+        data-toggle="popover" 
+        data-placement="right" 
+        data-title="#{display_name}" 
+        data-content="Member for: <br/>User rating: <br/>PP sessions:" 
+        href="#{url_helpers.user_path user}">
+        #{gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle')}
+      </a>
+    ).html_safe
+  end
+
 end
