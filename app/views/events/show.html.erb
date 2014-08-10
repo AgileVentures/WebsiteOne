@@ -31,10 +31,14 @@
         </div>
         <div class="row">
           <div class="col-lg-8">
+            <ul style="list-style: none; padding-left: 0">
             <% @event_schedule.first(5).each do |e| %>
-                <%= current_occurrence_time(e) %>
-                <br/>
+                <li>
+                  <%= current_occurrence_time(e) %> /
+                  <p style='padding-left: 1em'><%= current_occurrence_local_time(e) %></p>
+                </li>
             <% end %>
+            </ul>
           </div>
         <% if user_signed_in? %>
           <div class="col-lg-4">
