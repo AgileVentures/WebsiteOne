@@ -13,9 +13,10 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | WebsiteOne  | greetings earthlings | active |
       | Autograders | greetings earthlings | active |
     And the following users exist
-      | first_name | last_name | email                  | password |
-      | Alice      | Jones     | alice@btinternet.co.uk | 12345678 |
-      | Bob        | Anchous   | bob@btinternet.co.uk   | 12345678 |
+      | first_name | last_name | email                  | password | youtube_id |
+      | Alice      | Jones     | alice@btinternet.co.uk | 12345678 | yt_id_1    |
+      | Bob        | Anchous   | bob@btinternet.co.uk   | 12345678 | yt_id_2    |
+      | Jane       | Anchous   | jan@btinternet.co.uk   | 12345678 | yt_id_3    |
     And there are no videos
     And I am logged in
     And I have Slack notifications enabled
@@ -101,7 +102,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I am on the "Show" page for project "hello world"
     Then I should see hangout button
 
-  @wip
   Scenario: Display current sessions that are live
     Given the following hangouts exist:
       | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id |
@@ -135,3 +135,13 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | ClientMeeting |
     And I should see link "Join" with "http://hangout.session"
     And I should see link "Watch" with "http://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
+
+  @wip
+  Scenario: Display avatars of host an participants
+    Given the following hangouts exist:
+      | Start time | Title        | Host   | Participants |
+      | 11:15      | HangoutsFlow | Alice  | Jane, Bob    |
+    When I go to the "hangouts" page
+    Then I should see the avatar for "Alice"
+    And I should see the avatar for "Jane"
+    And I should see the avatar for "Bob"

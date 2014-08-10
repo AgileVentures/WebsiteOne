@@ -26,16 +26,29 @@ end
 
 Given /^the following hangouts exist:$/ do |table|
   table.hashes.each do |hash|
-    FactoryGirl.create(:hangout, created_at: hash['Start time'],
-                                 event: Event.find_by_name(hash['Event']),
-                                 category: hash['Category'],
-                                 project: Project.find_by_title(hash['Project']),
-                                 title: hash['Title'],
-                                 host: User.find_by_first_name(hash['Host']),
-                                 hangout_url: hash['Hangout url'],
-                                 yt_video_id: hash['Youtube video id'])
-  end
+    hangout = Hangout.create
+    params = { title: hash['Title'],
+               project_id: Project.find_by_title(hash['Project']).try!(:id),
+               event_id: Event.find_by_name(hash['Event']).try!(:id),
+               category: hash['Category'],
+               host_id: User.find_by_first_name(hash['Host']).try!(:id),
+               hangout_url: hash['Hangout url'],
+               yt_video_id: hash['Youtube video id']
+             }
 
+    if participants = hash['Participants']
+      participants = participants.split(',')
+
+      params[:participants] = participants.map do |participant|
+        name = participant.squish
+        { name: name,
+          gplus_id: User.find_by_first_name(name).youtube_id
+        }
+      end
+    end
+    hangout.update_hangout_data(params)
+    hangout.update(updated_at: hash['Start time'])
+  end
 end
 
 Then /^I should( not)? see Hangouts details section$/ do |negative|
