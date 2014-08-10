@@ -8,8 +8,8 @@ shared_examples_for 'it has a hangout button' do
 
   let(:data_tags) do
     {
-      'data-topic' => topic_name,
-      'data-project' => project_id.to_s.squish,
+      'data-title' => title,
+      'data-project-id' => project_id.to_s.squish,
       'data-event-id' => event_id.to_s.squish,
       'data-category' => category,
       'data-hangout-id' => '123456',
