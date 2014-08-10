@@ -3,18 +3,23 @@ require 'spec_helper'
 describe 'hangouts/index', type: :view do
   before do
     # TODO use FG list with associations
-    @hangout = FactoryGirl.build_stubbed(:hangout, created_at: '11:15',
-                                         event: FactoryGirl.build_stubbed(:event, name: 'Daily Meetup'),
-                                         category: 'PairProgramming',
-                                         project: FactoryGirl.build_stubbed(:project, title: 'WebsiteOne'),
-                                         title: 'Hangouts flow',
-                                         host: FactoryGirl.build_stubbed(:user, first_name: 'Yaro'),
-                                         hangout_url: 'http://hangout.test',
-                                         yt_video_id: 'TIG345',
-                                         participants: [
-                                                         FactoryGirl.build_stubbed(:user, first_name: 'Bob'),                                                      FactoryGirl.build_stubbed(:user, first_name: 'Bod'),
-                                                         FactoryGirl.build_stubbed(:user, first_name: 'Alice'),
-                                                       ])
+    @user_1 = FactoryGirl.create(:user, first_name: 'Yaro', youtube_id: 'youtube_id_1')
+    @user_2 = FactoryGirl.create(:user, first_name: 'Jon', youtube_id: 'youtube_id_2')
+    @user_3 = FactoryGirl.create(:user, first_name: 'Bob', youtube_id: 'youtube_id_3')
+
+    @hangout = FactoryGirl.build_stubbed(:hangout,
+                     created_at: '11:15',
+                     event: FactoryGirl.build_stubbed(:event, name: 'Daily Meetup'),
+                     category: 'PairProgramming',
+                     project: FactoryGirl.build_stubbed(:project, title: 'WebsiteOne'),
+                     title: 'Hangouts flow',
+                     host: @user_1,
+                     hangout_url: 'http://hangout.test',
+                     yt_video_id: 'TIG345',
+                     participants: [
+                        { name: 'Jon', gplus_id: 'youtube_id_2' },
+                        { name: 'Bob', gplus_id: 'youtube_id_3' }
+                                   ])
     @hangouts = [ @hangout ]
   end
 
@@ -27,7 +32,7 @@ describe 'hangouts/index', type: :view do
     expect(rendered).to have_text('Hangout')
   end
 
-  it 'renders hangouts main info' do
+  it 'renders hangouts basic info' do
     render
     expect(rendered).to have_text('11:15')
     expect(rendered).to have_text('Hangouts flow')
@@ -37,7 +42,7 @@ describe 'hangouts/index', type: :view do
   end
 
   it_behaves_like 'it has clickable user avatar with popover' do
-    let(:user){ @hangout.host }
+    let(:user){ @user_1 }
   end
 
   it 'renders hangout extra headings' do
@@ -57,11 +62,11 @@ describe 'hangouts/index', type: :view do
 
   describe 'renders participants avatars' do
     it_behaves_like 'it has clickable user avatar with popover' do
-      let(:user){ @hangout.participants.first }
+      let(:user){ @user_2 }
     end
 
     it_behaves_like 'it has clickable user avatar with popover' do
-      let(:user){ @hangout.participants.last }
+      let(:user){ @user_3 }
     end
   end
 end
