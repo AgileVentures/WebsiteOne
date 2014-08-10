@@ -5,6 +5,5 @@ class ScrumsController < ApplicationController
                              :order_by => :published,
                              :max_results => 20)
     @scrums = query.videos.map { |video| YoutubeHelper.video_data(video) }
-    puts "lol"
   end
 end
