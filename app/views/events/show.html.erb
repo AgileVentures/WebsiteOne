@@ -73,7 +73,7 @@
                 <div class="restart-section<%= ' in' unless @hangout.try!(:live?) %>">
                   <div class="panel-body">
                     <div id="hangout-btn" class="col-lg-5 hangout-btn">
-                      <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: (@hangout.try!(:live?) ? @hangout.uid : ''), event_id: @event.id, category: @event.category, project_id: '', topic: topic(@event, @event_schedule)} %>
+                      <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: (@hangout.try!(:live?) ? @hangout.uid : ''), event_id: @event.id, category: @event.category, project_id: '', title: topic(@event, @event_schedule)} %>
                     </div>
                     <div class="hangout-btn"> &#8592; Event host will start the Hangout 
                         <button type="button" class="btn readme-link" data-container="body" data-toggle="popover" data-placement="right" 

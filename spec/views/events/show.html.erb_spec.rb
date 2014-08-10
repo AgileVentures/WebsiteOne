@@ -69,7 +69,7 @@ describe 'events/show', type: :view do
       end
 
       it_behaves_like 'it has a hangout button' do
-        let(:topic_name){'Topic'}
+        let(:title){'Topic'}
         let(:project_id){''}
         let(:event_id){@event.id}
         let(:category){@event.category}

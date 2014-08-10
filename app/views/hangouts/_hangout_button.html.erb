@@ -1,6 +1,6 @@
 <div id="liveHOA-placeholder"
-  data-topic='<%= topic %>'
-  data-project='<%= project_id %>'
+  data-title='<%= title %>'
+  data-project-id='<%= project_id.to_s %>'
   data-event-id='<%= event_id.to_s %>'
   data-category='<%= category %>'
   data-hangout-id='<%= hangout_id.present? ? hangout_id : generate_hangout_id(current_user, project_id) %>'
