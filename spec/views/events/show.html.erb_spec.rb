@@ -1,5 +1,6 @@
 require 'spec_helper'
 include EventHelper
+include LocalTimeHelper
 
 describe 'events/show', type: :view do
   before(:each) do
@@ -35,6 +36,7 @@ describe 'events/show', type: :view do
     expect(rendered).to have_text('Upcoming schedule')
     @event_schedule.first(5).each do |e|
       expect(rendered).to have_content(current_occurrence_time(e))
+      expect(rendered).to have_content(sanitize current_occurrence_local_time(e))
     end
   end
 
