@@ -1,18 +1,17 @@
 shared_examples_for 'it has clickable user avatar with popover' do
   before do
-    allow(view).to receive(:user_path).and_return('user_profile_path')
-    allow(user.presenter).to receive(:display_name).and_return('user_name')
-    allow(user.presenter).to receive(:gravatar_image).and_return('user_gravatar')
+    allow_any_instance_of(UserPresenter).to receive(:display_name).and_return('user_name')
+    allow_any_instance_of(UserPresenter).to receive(:gravatar_image).and_return('user_gravatar')
   end
 
-  it 'rendres user avatar' do
+  it 'renders user avatar' do
     render
     expect(rendered).to have_text('user_gravatar')
   end
 
   it 'renders link to user profile' do
     render
-    expect(rendered).to have_link('', href: 'user_profile_path')
+    expect(rendered).to have_link('', href: user_path(user))
   end
 
   it 'renders a popover with user details' do
