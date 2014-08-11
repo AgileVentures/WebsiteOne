@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-    printf("project.user %s \n", @project.user.display_name)
+    #printf("project.user %s \n", @project.user.display_name)
     @members = @project.members
     @videos = YoutubeVideos.for(@project)
   end
@@ -82,6 +82,10 @@ class ProjectsController < ApplicationController
   private
   def set_project
     @project = Project.friendly.find(params[:id])
+    # Show method can get race condition at least in test env
+    # force load of association:
+    @project.respond_to? :user
+    @project
   end
 
   def get_current_stories
