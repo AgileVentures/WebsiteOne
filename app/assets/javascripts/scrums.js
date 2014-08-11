@@ -14,4 +14,4 @@ var Scrum = {
   }
 
 }
-$(document).on('ready page:load', Scrum.setup)
+$(Scrum.setup);
