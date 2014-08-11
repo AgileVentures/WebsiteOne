@@ -20,7 +20,6 @@ module YoutubeHelper
     raise err, 'Invalid JSON returned from Youtube', err.backtrace
   end
 
-
   def video_data(video)
     {
       author: video.author.name,
