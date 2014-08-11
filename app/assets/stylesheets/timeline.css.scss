@@ -41,14 +41,16 @@
 }
 
 .timeline > li > .timeline-panel {
+  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
   width: 46%;
   float: left;
   border: 1px solid #d4d4d4;
   border-radius: 2px;
   padding: 20px;
   position: relative;
-  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+  background-color: lemonchiffon;
+  padding: 10px
 }
 
 .timeline > li > .timeline-panel:before {
@@ -152,9 +154,9 @@
   }
 
   ul.timeline > li > .timeline-panel {
-    width: calc(100% - 90px);
     width: -moz-calc(100% - 90px);
     width: -webkit-calc(100% - 90px);
+    width: calc(100% - 90px);
   }
 
   ul.timeline > li > .timeline-badge {
