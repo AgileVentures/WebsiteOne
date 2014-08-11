@@ -140,18 +140,45 @@
     }
   }
 
-  .btn-success {
+  @mixin hg-btn($color) {
+    @extend .btn;
+    background-color: $color;
+
     font-size: smaller;
+
+    height: 2em;
     padding: 4px;
-    margin-left: 10px;
 
     &:focus {
       outline: none;
     }
 
     &:hover {
-      background-color: green;
+      background-color: lighten($color, 10%);
     }
+  }
+
+  .btn-hg-toggle {
+    @include hg-btn(green);
+    height: 25px;
+    margin-left: 10px;
+  }
+
+  .btn-hg-live {
+    @include hg-btn($theme-main);
+    height: 25px;
+    margin-left: 5px;
+  }
+
+  .btn-hg-join {
+    @include hg-btn(green);
+    width: 50px;
+  }
+
+  .btn-hg-watch {
+    @include hg-btn($theme-main);
+    width: 50px;
+    margin-top: 3px;
   }
 
   .panel-default {
@@ -171,6 +198,10 @@
         background-color: $hg-color;
       }
     }
+
+    .panel-heading.empty {
+        padding-left: 10px;
+      }
   }
 
   .panel-body {
@@ -207,7 +238,7 @@
   }
 
   .hg-avatar {
-    padding: 0;
+    padding: 0 0 0 15px;
   }
 
 }

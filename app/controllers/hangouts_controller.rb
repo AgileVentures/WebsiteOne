@@ -16,7 +16,7 @@ class HangoutsController < ApplicationController
   end
 
   def index
-    @hangouts = Hangout.all
+    @hangouts = params[:all] == 'true' ? Hangout.all : Hangout.live
   end
 
   private
@@ -36,6 +36,7 @@ class HangoutsController < ApplicationController
 
   def local_request?
     request.remote_ip == '127.0.0.1'
+    true
   end
 
   def set_cors_headers

@@ -3,8 +3,12 @@
     <div class="col-sm-1 hg-toggle"></div>
     <div class="col-sm-1 hg-align-right">Started</div>
     <div class="col-sm-4"><span class="caret"></span> Title
-      <span><button id="btn-hg-toggle" type="button" class="btn btn-success">
-          toggle all hangouts</button></span>
+      <span>
+          <button id="btn-hg-toggle" type="button" class="btn-hg-toggle">toggle all hangouts</button>
+      </span>
+      <span>
+        <%= link_to 'show all/live', hangouts_path(all: params[:all] == 'true' ? false : true), class: 'btn-hg-live' %>
+      </span>
     </div>
     <div class="col-sm-4"><span class="caret"></span> Project</div>
     <div class="col-sm-1">Host</div>
