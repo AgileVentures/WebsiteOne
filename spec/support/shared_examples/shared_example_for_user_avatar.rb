@@ -19,7 +19,7 @@ shared_examples_for 'it has clickable user avatar with popover' do
                   'data-html' => 'true',
                   'data-container' => 'body',
                   'data-toggle' => 'popover',
-                  'data-placement' => 'right'}
+                  'data-placement' => placement}
 
     popover_content = 'Member for: <br/>User rating: <br/>PP sessions:'
     user_tags = { 'data-title' => 'user_name',
