@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20140725131327) do
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
   create_table "hangouts", force: true do |t|
-    t.string   "event_id"
+    t.integer   "event_id"
     t.string   "title"
     t.string   "hangout_url"
     t.datetime "created_at"

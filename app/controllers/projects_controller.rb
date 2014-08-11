@@ -5,7 +5,6 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :get_current_stories, only: [:show]
   include DocumentsHelper
-  include YoutubeHelper
 
 #TODO YA Add controller specs for all the code
 
@@ -82,9 +81,6 @@ class ProjectsController < ApplicationController
   private
   def set_project
     @project = Project.friendly.find(params[:id])
-    # Show method can get race condition at least in test env
-    # force load of association:
-    @project.respond_to? :user
     @project
   end
 
