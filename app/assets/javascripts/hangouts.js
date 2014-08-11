@@ -5,6 +5,6 @@ $('#btn-hg-toggle').click(function (){
 });
 $('.panel-heading').click(function(){
   if($(event.toElement).prop('tagName') !== 'A'){
-    $(this).closest('.panel').find('.panel-collapse').toggleClass('in');
+    $(this).closest('.panel').find('.panel-collapse').slideToggle();
   }
 });
