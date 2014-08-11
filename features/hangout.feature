@@ -103,10 +103,11 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Then I should see hangout button
 
   Scenario: Display current sessions that are live
-    Given the following hangouts exist:
+    Given the date is "2014/02/01 11:10:00 UTC"
+    And the following hangouts exist:
       | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id |
       | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          |
-      | 12:00      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           |
+      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           |
 
     When I go to the "hangouts" page
     Then I should see:
@@ -128,7 +129,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I should see link "Join" with "http://hangout.test"
     And I should see link "Watch" with "http://www.youtube.com/watch?v=QWERT55&feature=youtube_gdata"
     And I should see:
-        | 12:00         |
+        | 11:11         |
         | GithubClone   |
         | Autograders   |
         | Retrospective |

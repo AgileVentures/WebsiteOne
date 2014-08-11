@@ -23,6 +23,12 @@ describe 'hangouts/index', type: :view do
     @hangouts = [ @hangout ]
   end
 
+  it 'renders toggle buttons' do
+    render
+    expect(rendered).to have_button('toggle summary')
+    expect(rendered).to have_link('show all/live')
+  end
+
   it 'renders table main headings' do
     render
     expect(rendered).to have_text('Started')
@@ -43,6 +49,7 @@ describe 'hangouts/index', type: :view do
 
   it_behaves_like 'it has clickable user avatar with popover' do
     let(:user){ @user_1 }
+    let(:placement){ 'top' }
   end
 
   it 'renders hangout extra headings' do
@@ -50,8 +57,6 @@ describe 'hangouts/index', type: :view do
     expect(rendered).to have_text('Event')
     expect(rendered).to have_text('Category')
     expect(rendered).to have_text('Participants')
-
-    expect(rendered).to have_button('toggle all hangouts')
   end
 
   it 'renders hangout extra info' do
@@ -63,10 +68,12 @@ describe 'hangouts/index', type: :view do
   describe 'renders participants avatars' do
     it_behaves_like 'it has clickable user avatar with popover' do
       let(:user){ @user_2 }
+      let(:placement){ 'bottom' }
     end
 
     it_behaves_like 'it has clickable user avatar with popover' do
       let(:user){ @user_3 }
+      let(:placement){ 'bottom' }
     end
   end
 end
