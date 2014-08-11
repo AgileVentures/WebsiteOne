@@ -20,11 +20,11 @@ Feature: Show Pending Hookups
     And I should see "Hookup 1" in table "pending_hookups"
 
   Scenario: do not display expired events or scrums
-    Given the time now is "2014-07-15 12:00:00 UTC"
+    Given the date is "2014-07-15 12:00:00 UTC"
     Then I should not see "Hookup 0"
     And I should not see "Scrum 0"
 
   Scenario: Create hangout
-    Given the time now is "2014-07-15 12:00:00 UTC"
+    Given the date is "2014-07-15 12:00:00 UTC"
     When I follow "start" for "pending_hookups" "0"
     Then I should be on the event "show" page for "Hookup 1"
