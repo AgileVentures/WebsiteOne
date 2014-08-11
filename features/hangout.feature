@@ -98,8 +98,8 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   @javascript
   Scenario: Display hangout button on a project's page
-    Given I am a member of project "hello world"
-    And I am on the "Show" page for project "hello world"
+    Given I am a member of project "WebsiteOne"
+    And I am on the "Show" page for project "WebsiteOne"
     Then I should see hangout button
 
   Scenario: Display current sessions that are live
@@ -136,7 +136,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I should see link "Join" with "http://hangout.session"
     And I should see link "Watch" with "http://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
 
-  @wip
   Scenario: Display avatars of host an participants
     Given the following hangouts exist:
       | Start time | Title        | Host   | Participants |
