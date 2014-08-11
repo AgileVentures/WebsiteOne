@@ -47,6 +47,7 @@ describe ProjectsController, :type => :controller do
       @project = build_stubbed(Project, valid_attributes)
       allow(@project).to receive(:tag_list).and_return [ 'WSO' ]
       Project.stub_chain(:friendly, :find).and_return @project
+      @project.stub_chain(:user, :display_name).and_return "Happy User"
       @users = [ build_stubbed(User, slug: 'my-friendly-id', display_profile: true) ]
       expect(@project).to receive(:members).and_return @users
       expect(YoutubeVideos).to receive(:for).with(@project).and_return('videos')
