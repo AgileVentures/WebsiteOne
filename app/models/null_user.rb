@@ -21,13 +21,13 @@ class NullUser
     @name
   end
 
-  def user_avatar_with_popover
+  def user_avatar_with_popover(options={})
     %Q(
       <a class="user-popover" 
         data-html="true" 
         data-container="body" 
         data-toggle="popover" 
-        data-placement="right" 
+        data-placement="#{options[:placement]}" 
         data-title="#{display_name}" 
         data-content="not registered" 
         href="#">

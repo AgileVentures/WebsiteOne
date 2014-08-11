@@ -12,11 +12,11 @@ class HangoutPresenter < BasePresenter
   end
 
   def project_name
-    hangout.project.try!(:title) || '-'
+    hangout.project ? link_to(hangout.project.title, url_helpers.project_path(hangout.project)) : '-'
   end
 
   def event_name
-    hangout.event.try!(:name) || '-'
+    hangout.event ? link_to(hangout.event.name, url_helpers.event_path(hangout.event)) : '-'
   end
 
   def host
