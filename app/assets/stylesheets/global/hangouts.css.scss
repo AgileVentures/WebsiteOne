@@ -123,6 +123,7 @@
 
   .fa {
     height: auto;
+    font-size: 1.5em;
   }
 
   .panel {
@@ -158,6 +159,11 @@
     }
   }
 
+  .hg-toggles {
+    @extend .pull-left;
+    margin-bottom: 10px;
+  }
+
   .btn-hg-toggle {
     @include hg-btn(green);
     height: 25px;
@@ -185,17 +191,10 @@
     position: relative;
     transition: all 0.5s;
 
-    &:hover {
-      transform: scale(1.05,1.05);
-      z-index: 1000;
-    }
-
     .panel-heading {
-      a {
-        display: block;
-      }
       &:hover {
         background-color: $hg-color;
+        cursor: pointer;
       }
     }
 

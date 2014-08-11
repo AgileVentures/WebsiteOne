@@ -1,15 +1,22 @@
 <% provide :title, 'Hangouts' %>
 <section class="live-hangouts">
+  <div class='container-fluid'>
+    <div class='row hg-toggles'>
+        <button id="btn-hg-toggle" type="button" class="btn-hg-toggle">toggle summary</button>
+        <%= link_to 'show all/live', hangouts_path(all: params[:all] == 'true' ? false : true), class: 'btn-hg-live' %>
+    </div>
+  </div>
   <div class="panel-group" id="accordion">
     <div class="panel panel-info hidden-xs">
       <div class="panel-heading">
-        <%= render partial: 'index_header'  %>
+        <%= render partial: 'index_header' %>
       </div>
     </div>
     <% if @hangouts.empty?  %>
       <div class="panel panel-default">
         <div class="panel-heading empty">
-          We are sorry, but it seems that there are no live sessions at this moment.  Please come back later.
+          We are sorry, but it seems that there are no live sessions at this moment.<br>
+          Please come back later or click 'Show all/live' button to browse older sessions.
         </div>
       </div>
     <% else  %>

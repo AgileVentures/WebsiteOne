@@ -12,7 +12,7 @@
     <div class='hidden-xs col-sm-2'><b>Participants</b></div>
     <div class='col-xs-12 col-sm-4 hg-avatar'>
       <% hangout.participants.each do |participant| %>
-          <%= render partial: 'users/user_avatar', locals: { user: participant } %>
+          <%= render partial: 'users/user_avatar', locals: { user: participant, placement: 'bottom' } %>
         <% end %>
     </div>
   </div>
