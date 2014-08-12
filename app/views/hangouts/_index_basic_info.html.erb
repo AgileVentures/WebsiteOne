@@ -6,7 +6,7 @@
     </div>
     <div class="col-xs-4 col-sm-1"> <%= hangout.created_at %> </div>
     <div class="col-xs-12 col-sm-4"> <%= hangout.title %> </div>
-    <div class="col-xs-12 col-sm-4"><%= hangout.project_name %></div>
+    <div class="col-xs-12 col-sm-4"><%= hangout.project %></div>
     <div class="col-xs-4 col-sm-1 hg-avatar">
       <%= render partial: 'users/user_avatar', locals: { user: hangout.host, placement: 'top' } %>
     </div>

@@ -1,26 +1,11 @@
 require 'spec_helper'
 
 describe 'hangouts/index', type: :view do
-  before do
-    # TODO use FG list with associations
-    @user_1 = FactoryGirl.create(:user, first_name: 'Yaro', youtube_id: 'youtube_id_1')
-    @user_2 = FactoryGirl.create(:user, first_name: 'Jon', youtube_id: 'youtube_id_2')
-    @user_3 = FactoryGirl.create(:user, first_name: 'Bob', youtube_id: 'youtube_id_3')
 
-    @hangout = FactoryGirl.build_stubbed(:hangout,
-                     created_at: '11:15',
-                     event: FactoryGirl.build_stubbed(:event, name: 'Daily Meetup'),
-                     category: 'PairProgramming',
-                     project: FactoryGirl.build_stubbed(:project, title: 'WebsiteOne'),
-                     title: 'Hangouts flow',
-                     host: @user_1,
-                     hangout_url: 'http://hangout.test',
-                     yt_video_id: 'TIG345',
-                     participants: [
-                        { name: 'Jon', gplus_id: 'youtube_id_2' },
-                        { name: 'Bob', gplus_id: 'youtube_id_3' }
-                                   ])
-    @hangouts = [ @hangout ]
+  let(:hangout){ FactoryGirl.build_stubbed(:hangout, created: '11:15') }
+
+  before do
+    @hangouts = [ hangout ]
   end
 
   it 'renders toggle buttons' do
@@ -42,14 +27,14 @@ describe 'hangouts/index', type: :view do
     render
     expect(rendered).to have_css('i.fa-caret-right')
     expect(rendered).to have_text('11:15')
-    expect(rendered).to have_text('Hangouts flow')
-    expect(rendered).to have_link('WebsiteOne', project_path(@hangout.project))
-    expect(rendered).to have_link('Join', href: 'http://hangout.test')
-    expect(rendered).to have_link('Watch', href: 'http://www.youtube.com/watch?v=TIG345&feature=youtube_gdata')
+    expect(rendered).to have_text(hangout.title)
+    expect(rendered).to have_link(hangout.project.title, project_path(hangout.project))
+    expect(rendered).to have_link('Join', href: hangout.hangout_url)
+    expect(rendered).to have_link('Watch', href: "http://www.youtube.com/watch?v=#{hangout.yt_video_id}&feature=youtube_gdata")
   end
 
   it_behaves_like 'it has clickable user avatar with popover' do
-    let(:user){ @user_1 }
+    let(:user){ hangout.presenter.host }
     let(:placement){ 'top' }
   end
 
@@ -62,18 +47,23 @@ describe 'hangouts/index', type: :view do
 
   it 'renders hangout extra info' do
     render
-    expect(rendered).to have_link('Daily Meetup', event_path(@hangout.event))
-    expect(rendered).to have_text('PairProgramming')
+    expect(rendered).to have_link(hangout.event.name, event_path(hangout.event))
+    expect(rendered).to have_text(hangout.category)
   end
 
   describe 'renders participants avatars' do
+    before do
+      FactoryGirl.create(:user, youtube_id: hangout.participants.first[:gplus_id])
+      FactoryGirl.create(:user, youtube_id: hangout.participants.last[:gplus_id])
+    end
+
     it_behaves_like 'it has clickable user avatar with popover' do
-      let(:user){ @user_2 }
+      let(:user){ hangout.presenter.participants.first }
       let(:placement){ 'bottom' }
     end
 
     it_behaves_like 'it has clickable user avatar with popover' do
-      let(:user){ @user_3 }
+      let(:user){ hangout.presenter.participants.last }
       let(:placement){ 'bottom' }
     end
   end
