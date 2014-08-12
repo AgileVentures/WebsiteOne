@@ -102,7 +102,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I am on the "Show" page for project "WebsiteOne"
     Then I should see hangout button
 
-  Scenario: Display current sessions that are live
+  Scenario: Display live sessions - basic info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
       | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id |
@@ -117,31 +117,38 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | Host         |
         | Join         |
         | Watch        |
-        | Event        |
-        | Category     |
-        | Participants |
     And I should see:
         | 11:15           |
         | HangoutsFlow    |
         | WebsiteOne      |
-        | Scrum           |
-        | PairProgramming |
+    And I should see the avatar for "Alice"
     And I should see link "Join" with "http://hangout.test"
     And I should see link "Watch" with "http://www.youtube.com/watch?v=QWERT55&feature=youtube_gdata"
+
     And I should see:
         | 11:11         |
         | GithubClone   |
         | Autograders   |
-        | Retrospective |
-        | ClientMeeting |
+    And I should see the avatar for "Bob"
     And I should see link "Join" with "http://hangout.session"
     And I should see link "Watch" with "http://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
 
-  Scenario: Display avatars of host an participants
-    Given the following hangouts exist:
-      | Start time | Title        | Host   | Participants |
-      | 11:15      | HangoutsFlow | Alice  | Jane, Bob    |
+  Scenario: Display live sessions - extra info
+    Given the date is "2014/02/01 11:10:00 UTC"
+    And the following hangouts exist:
+      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id | Participants |
+      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | Jane, Bob    |
+      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | Greg, Jake   |
+
     When I go to the "hangouts" page
-    Then I should see the avatar for "Alice"
+    Then I should see:
+        | Scrum           |
+        | PairProgramming |
     And I should see the avatar for "Jane"
     And I should see the avatar for "Bob"
+
+    And I should see:
+        | Retrospective |
+        | ClientMeeting |
+
+  Scenario: Display avatars of host an participants
