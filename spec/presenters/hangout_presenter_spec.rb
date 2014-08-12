@@ -1,0 +1,92 @@
+require 'spec_helper'
+
+describe HangoutPresenter do
+  let(:presenter){ HangoutPresenter.new(hangout) }
+
+  context 'all fields are present' do
+    let(:hangout){ FactoryGirl.build_stubbed(:hangout, created: '11:15') }
+
+    it 'displays created time' do
+      expect(presenter.created_at).to eq('11:15')
+    end
+
+    it 'displays title' do
+      expect(presenter.title).to eq(hangout.title)
+    end
+
+    it 'displays category' do
+      expect(presenter.category).to eq(hangout.category)
+    end
+
+    it 'displays project' do
+      expect(presenter.project).to match %Q(<a href="#{project_path(hangout.project)}")
+      expect(presenter.project).to match "#{hangout.project.title}"
+    end
+
+    it 'displays event' do
+      expect(presenter.event).to match %Q(<a href="#{event_path(hangout.event)}")
+      expect(presenter.event).to match "#{hangout.event.name}"
+    end
+
+    it 'returns host' do
+      expect(presenter.host).to eq(hangout.host)
+    end
+
+    it 'returns an array of participants' do
+      participant = FactoryGirl.create(:user, youtube_id: hangout.participants.first[:gplus_id])
+
+      expect(presenter.participants.count).to eq(2)
+      expect(presenter.participants.first).to eq(participant)
+    end
+
+    it 'returns video url' do
+      expect(presenter.video_url).to eq("http://www.youtube.com/watch?v=yt_video_id&feature=youtube_gdata")
+    end
+  end
+
+  context 'some fields are missing' do
+    let(:hangout){ FactoryGirl.build_stubbed(:hangout,
+                         title: nil,
+                         category: nil,
+                         project: nil,
+                         event: nil,
+                         host: nil,
+                         yt_video_id: nil,
+                         participants: nil) }
+
+    it 'displays title' do
+      expect(presenter.title).to eq('No title given')
+    end
+
+    it 'displays category' do
+      expect(presenter.category).to eq('-')
+    end
+
+    it 'displays project' do
+      expect(presenter.project).to eq('-')
+    end
+
+    it 'displays event' do
+      expect(presenter.event).to eq('-')
+    end
+
+    it 'returns host' do
+      expect(presenter.host.display_name).to eq('Anonymous')
+    end
+
+    it 'returns an array of participants' do
+      expect(presenter.participants).to eq([])
+    end
+
+    it 'returns an array with nullUser if participant gplus_id is not found' do
+      hangout.participants = [{ name: 'Bob', gplus_id: 'not_registered' }]
+      expect(presenter.participants.first.display_name).to eq('Bob')
+    end
+
+    it 'returns video url' do
+      expect(presenter.video_url).to eq('#')
+    end
+  end
+
+end
+

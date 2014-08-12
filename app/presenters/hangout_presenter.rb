@@ -1,5 +1,3 @@
-require_relative '../base_presenter'
-
 class HangoutPresenter < BasePresenter
   presents :hangout
 
@@ -11,11 +9,15 @@ class HangoutPresenter < BasePresenter
     hangout.title || 'No title given'
   end
 
-  def project_name
+  def category
+    hangout.category || '-'
+  end
+
+  def project
     hangout.project ? link_to(hangout.project.title, url_helpers.project_path(hangout.project)) : '-'
   end
 
-  def event_name
+  def event
     hangout.event ? link_to(hangout.event.name, url_helpers.event_path(hangout.event)) : '-'
   end
 
