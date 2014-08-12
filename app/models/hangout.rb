@@ -35,8 +35,7 @@ class Hangout < ActiveRecord::Base
            host: host,
            participants: params[:participants],
            hangout_url: params[:hangout_url],
-           yt_video_id: params[:yt_video_id],
-           updated_at: Time.now)
+           yt_video_id: params[:yt_video_id])
   end
 
   def self.active_hangouts

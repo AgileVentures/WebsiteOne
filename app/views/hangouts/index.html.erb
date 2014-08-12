@@ -3,7 +3,7 @@
   <div class='container-fluid'>
     <div class='row hg-toggles'>
         <button id="btn-hg-toggle" type="button" class="btn-hg-toggle">toggle summary</button>
-        <%= link_to 'show all/live', hangouts_path(all: params[:all] == 'true' ? false : true), class: 'btn-hg-live' %>
+        <%= link_to 'show all/live', params[:live] ? hangouts_path : hangouts_path(live: true), class: 'btn-hg-live' %>
     </div>
   </div>
   <div class="panel-group" id="accordion">
