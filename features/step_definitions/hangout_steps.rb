@@ -42,7 +42,7 @@ Given /^the following hangouts exist:$/ do |table|
       params[:participants] = participants.map do |participant|
         name = participant.squish
         { name: name,
-          gplus_id: User.find_by_first_name(name).youtube_id
+          gplus_id: User.find_by_first_name(name).try!(:youtube_id)
         }
       end
     end

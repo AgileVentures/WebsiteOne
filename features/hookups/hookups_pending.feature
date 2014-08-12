@@ -10,9 +10,9 @@ Feature: Show Pending Hookups
       | Hookup 0 | hookup meeting | PairProgramming | 2014/02/03 09:00:00 UTC | 90       | never   | UTC       |
       | Hookup 1 | hookup meeting | PairProgramming | 2015/02/03 07:00:00 UTC | 150      | never   | UTC       |
       | Scrum 0  | hookup meeting | Scrum           | 2015/02/03 07:00:00 UTC | 150      | never   | UTC       |
-    When I go to the "Hookups" page
 
   Scenario: displaying existing pending events
+    When I go to the "Hookups" page
     Then I should see:
       | Hookup 1       |
       | 07:00-09:30    |
@@ -21,10 +21,12 @@ Feature: Show Pending Hookups
 
   Scenario: do not display expired events or scrums
     Given the date is "2014-07-15 12:00:00 UTC"
+    When I go to the "Hookups" page
     Then I should not see "Hookup 0"
     And I should not see "Scrum 0"
 
   Scenario: Create hangout
     Given the date is "2014-07-15 12:00:00 UTC"
-    When I follow "start" for "pending_hookups" "0"
+    When I go to the "Hookups" page
+    And I follow "start" for "pending_hookups" "0"
     Then I should be on the event "show" page for "Hookup 1"
