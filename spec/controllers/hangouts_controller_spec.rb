@@ -8,6 +8,27 @@ describe HangoutsController do
     SlackService.stub(:post_hangout_notification)
   end
 
+  describe '#index' do
+    before do
+      FactoryGirl.create_list(:hangout, 3)
+      FactoryGirl.create_list(:hangout, 3, updated_at: 1.hour.ago)
+    end
+
+    context 'show all hangouts' do
+      it 'assigns all hangouts' do
+        get :index
+        expect(assigns(:hangouts).count).to eq(6)
+      end
+    end
+
+    context 'show only live hangouts' do
+      it 'assigns live hangouts' do
+        get :index, {live: true}
+        expect(assigns(:hangouts).count).to eq(3)
+      end
+    end
+  end
+
   describe '#update' do
     it 'creates a hangout if there is no hangout assosciated with the event' do
       hangout_id = '333'

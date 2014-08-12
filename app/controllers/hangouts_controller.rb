@@ -16,7 +16,7 @@ class HangoutsController < ApplicationController
   end
 
   def index
-    @hangouts = params[:all] == 'true' ? Hangout.all : Hangout.live
+    @hangouts = params[:live] ? Hangout.live : Hangout.all
   end
 
   private

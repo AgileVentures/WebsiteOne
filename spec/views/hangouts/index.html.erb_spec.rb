@@ -40,9 +40,10 @@ describe 'hangouts/index', type: :view do
 
   it 'renders hangouts basic info' do
     render
+    expect(rendered).to have_css('i.fa-caret-right')
     expect(rendered).to have_text('11:15')
     expect(rendered).to have_text('Hangouts flow')
-    expect(rendered).to have_text('WebsiteOne')
+    expect(rendered).to have_link('WebsiteOne', project_path(@hangout.project))
     expect(rendered).to have_link('Join', href: 'http://hangout.test')
     expect(rendered).to have_link('Watch', href: 'http://www.youtube.com/watch?v=TIG345&feature=youtube_gdata')
   end
@@ -61,7 +62,7 @@ describe 'hangouts/index', type: :view do
 
   it 'renders hangout extra info' do
     render
-    expect(rendered).to have_text('Daily Meetup')
+    expect(rendered).to have_link('Daily Meetup', event_path(@hangout.event))
     expect(rendered).to have_text('PairProgramming')
   end
 

@@ -133,6 +133,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I should see link "Join" with "http://hangout.session"
     And I should see link "Watch" with "http://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
 
+    @wip
   Scenario: Display live sessions - extra info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
@@ -141,6 +142,10 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | Greg, Jake   |
 
     When I go to the "hangouts" page
+    Then I should see:
+        | Event        |
+        | Category     |
+        | Participants |
     Then I should see:
         | Scrum           |
         | PairProgramming |
@@ -151,4 +156,5 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | Retrospective |
         | ClientMeeting |
 
+#TODO links, toggles, popovers, slides, caret
   Scenario: Display avatars of host an participants
