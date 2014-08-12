@@ -2,10 +2,9 @@ require 'spec_helper'
 
 describe UserPresenter do
   subject { UserPresenter.new(user) }
+  let(:user) { FactoryGirl.build_stubbed(:user, first_name: '', last_name: '', email: '') }
 
   describe '#display_name' do
-    let(:user) { User.new }
-
     it 'should display the first part of the email address when no name is given' do
       user.email = 'joe@blow.com'
       expect(subject.display_name).to eq 'joe'
@@ -35,8 +34,6 @@ describe UserPresenter do
   end
 
   describe '#timezone' do
-    let(:user) { FactoryGirl.build_stubbed(:user) }
-
     it 'should display timezone when it can be determined' do
       user.latitude = 25.9500
       user.longitude = 32.5833
@@ -58,5 +55,22 @@ describe UserPresenter do
     it 'should be able to specify image size' do
       expect(subject.gravatar_src(size: 200)).to match(/\?s=200&/)
     end
+  end
+
+  describe '#user_avatar_with_popover' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'renders a popover with user details' do
+      placement = 'right'
+      popover_content = 'Member for: <br/>User rating: <br/>PP sessions:'
+      user_tags = { 'data-title' => 'user_name',
+                  'data-content' => popover_content }
+
+      output = subject.user_avatar_with_popover({ placement: placement })
+
+      expect(output).to match(/data-placement="#{placement}"/)
+      expect(output).to match(/data-title="#{subject.display_name}"/)
+  end
+
   end
 end
