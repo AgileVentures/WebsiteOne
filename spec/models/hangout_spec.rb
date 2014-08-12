@@ -1,17 +1,21 @@
 require 'spec_helper'
 
 describe Hangout, type: :model do
-  let(:event){ FactoryGirl.build_stubbed(:event, start_datetime: Time.parse('2014-03-07 10:00:00 UTC')) }
-  let(:hangout){FactoryGirl.create(:hangout, event_id: '333', event: event, updated_at: Time.parse('10:00:00')) }
+  let(:event){ FactoryGirl.build_stubbed(:event) }
+  let(:hangout){ FactoryGirl.create(:hangout, updated: '10:00', hangout_url: nil) }
 
   describe 'default_scope' do
     it 'returns hangouts sorted by created_at DESC' do
       FactoryGirl.create_list(:hangout, 2)
-      expect(Hangout.all.first.created_at).to be > Hangout.all.last.created_at
+      expect(Hangout.all.first.created_at).to be >= Hangout.all.last.created_at
     end
   end
 
   context 'hangout_url is not present' do
+    before do
+      allow(Time).to receive(:now).and_return(Time.parse('01:00 UTC'))
+    end
+
     it '#started? returns falsey' do
       expect(hangout.started?).to be_falsey
     end
@@ -28,18 +32,18 @@ describe Hangout, type: :model do
   context 'hangout_url is present' do
     before { hangout.hangout_url = 'test' }
 
-    it 'reports live if the link is not older than 15 minutes' do
+    it 'reports live if the link is not older than 5 minutes' do
       allow(Time).to receive(:now).and_return(Time.parse('10:04:59'))
       expect(hangout.live?).to be_truthy
     end
 
-    it 'reports not live if the link is older than 15 minutes' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:05:01'))
+    it 'reports not live if the link is older than 5 minutes' do
+      allow(Time).to receive(:now).and_return(Time.parse('10:05:01 UTC'))
       expect(hangout.live?).to be_falsey
     end
 
-    it 'reports expired if the link is older than 15 minutes' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:05:01'))
+    it 'reports expired if the link is older than 5 minutes' do
+      allow(Time).to receive(:now).and_return(Time.parse('10:05:01 UTC'))
       expect(hangout.expired?).to be_truthy
     end
   end

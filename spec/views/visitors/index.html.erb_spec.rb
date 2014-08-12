@@ -59,7 +59,7 @@ describe 'visitors/index.html.erb', type: :view do
   context 'event has started less than 15 minutes ago' do
     before :each do
       fix_time_at('2014-03-07 10:44:00 UTC')
-      @event.hangouts << FactoryGirl.build(:hangout, hangout_url: 'http://hangout.test')
+      @event.hangouts << FactoryGirl.build(:hangout)
     end
 
     it 'should <event> has just started!' do

@@ -11,7 +11,7 @@ describe HangoutsController do
   describe '#index' do
     before do
       FactoryGirl.create_list(:hangout, 3)
-      FactoryGirl.create_list(:hangout, 3, updated_at: 1.hour.ago)
+      FactoryGirl.create_list(:hangout, 3, updated: 1.hour.ago)
     end
 
     context 'show all hangouts' do
