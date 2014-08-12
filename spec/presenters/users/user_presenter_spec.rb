@@ -61,16 +61,20 @@ describe UserPresenter do
     let(:user) { FactoryGirl.create(:user) }
 
     it 'renders a popover with user details' do
+      allow(subject).to receive(:display_name).and_return('user_name')
+      allow(subject).to receive(:gravatar_image).and_return('user_gravatar')
+
       placement = 'right'
       popover_content = 'Member for: <br/>User rating: <br/>PP sessions:'
-      user_tags = { 'data-title' => 'user_name',
-                  'data-content' => popover_content }
 
       output = subject.user_avatar_with_popover({ placement: placement })
 
+      expect(output).to match(/data-title="user_name"/)
       expect(output).to match(/data-placement="#{placement}"/)
-      expect(output).to match(/data-title="#{subject.display_name}"/)
-  end
+      expect(output).to match(/data-content="#{popover_content}"/)
+      expect(output).to match(/user_gravatar/)
+      expect(output).to match(/href="#{user_path user}"/)
+    end
 
   end
 end
