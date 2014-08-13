@@ -18,9 +18,11 @@ describe('hangouts', function(){
       beforeEach(function () {
         setFixtures(sandbox({
           id: 'liveHOA-placeholder',
-          'data-topic': 'Topic',
+          'data-title': 'Topic',
+          'data-project-id': 'project_1234',
           'data-event-id': 'event_1234',
           'data-category': 'category_1234',
+          'data-host-id': 'host_1234',
           'data-hangout-id': 'hangout_1234',
           'data-app-id': 'id_1234',
           'data-callback-url': 'http://test.com/hangout_id'
@@ -35,9 +37,11 @@ describe('hangouts', function(){
         it('renders hangout button with correct parameters', function() {
           WebsiteOne.renderHangoutButton();
           var startData = JSON.stringify({
-            topic: 'Topic',
+            title: 'Topic',
+            projectId: 'project_1234',
             eventId: 'event_1234',
             category: 'category_1234',
+            hostId: 'host_1234',
             hangoutId: 'hangout_1234',
             callbackUrl: 'http://test.com/hangout_id'
           });
