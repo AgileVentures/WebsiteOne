@@ -33,7 +33,7 @@ describe HangoutPresenter do
     end
 
     it 'returns an array of participants' do
-      participant = FactoryGirl.create(:user, youtube_id: hangout.participants.first[:gplus_id])
+      participant = FactoryGirl.create(:user, gplus: hangout.participants.first.last[:person][:id])
 
       expect(presenter.participants.count).to eq(2)
       expect(presenter.participants.first).to eq(participant)
@@ -79,7 +79,7 @@ describe HangoutPresenter do
     end
 
     it 'returns an array with nullUser if participant gplus_id is not found' do
-      hangout.participants = [{ name: 'Bob', gplus_id: 'not_registered' }]
+      hangout.participants = [ [ "0", { :person => { displayName: "Bob", id: "not_registered" } } ] ]
       expect(presenter.participants.first.display_name).to eq('Bob')
     end
 

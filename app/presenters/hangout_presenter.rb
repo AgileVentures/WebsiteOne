@@ -28,8 +28,11 @@ class HangoutPresenter < BasePresenter
   def participants
     if participants = hangout.participants
       participants.map do |participant|
-        User.find_by_youtube_id(participant[:gplus_id]) || NullUser.new(participant[:name])
-      end
+        person = participant.last[:person]
+        user = Authentication.find_by(provider: 'gplus', uid: person[:id]).try!(:user)
+        next if user == host
+        user || NullUser.new(person[:displayName])
+      end.compact
     else
       []
     end
