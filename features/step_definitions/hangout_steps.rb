@@ -41,9 +41,9 @@ Given /^the following hangouts exist:$/ do |table|
 
       params[:participants] = participants.map do |participant|
         name = participant.squish
-        { name: name,
-          gplus_id: User.find_by_first_name(name).try!(:youtube_id)
-        }
+        user = User.find_by_first_name(name)
+        gplus_id = user.authentications.find_by(provider: 'gplus').try!(:uid) if user.present?
+        [ "0", { :person => { displayName: "#{name}", id: gplus_id } } ]
       end
     end
     hangout.update_hangout_data(params)
