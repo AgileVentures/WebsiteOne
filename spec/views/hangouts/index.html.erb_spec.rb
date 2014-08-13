@@ -53,8 +53,8 @@ describe 'hangouts/index', type: :view do
 
   describe 'renders participants avatars' do
     before do
-      FactoryGirl.create(:user, youtube_id: hangout.participants.first[:gplus_id])
-      FactoryGirl.create(:user, youtube_id: hangout.participants.last[:gplus_id])
+      FactoryGirl.create(:user, gplus: hangout.participants.first.last[:person][:id])
+      FactoryGirl.create(:user)
     end
 
     it_behaves_like 'it has clickable user avatar with popover' do

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   sequence :participant do |n|
-    { name: "Participant_#{n}", gplus_id: "youtube_id_#{n}"}
+    [ "#{n}", { :person => { displayName: "Participant_#{n}", id: "youtube_id_#{n}" } } ]
   end
 
   factory :hangout do
