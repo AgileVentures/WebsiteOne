@@ -218,7 +218,7 @@ end
 
 Given /^the following users exist$/ do |table|
   table.hashes.each do |attributes|
-    create_test_user(attributes)
+    FactoryGirl.create(:user, attributes)
   end
 end
 When(/^I should see a list of all users$/) do

@@ -13,10 +13,10 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | WebsiteOne  | greetings earthlings | active |
       | Autograders | greetings earthlings | active |
     And the following users exist
-      | first_name | last_name | email                  | password | youtube_id |
-      | Alice      | Jones     | alice@btinternet.co.uk | 12345678 | yt_id_1    |
-      | Bob        | Anchous   | bob@btinternet.co.uk   | 12345678 | yt_id_2    |
-      | Jane       | Anchous   | jan@btinternet.co.uk   | 12345678 | yt_id_3    |
+      | first_name | last_name | email                  | password | gplus   |
+      | Alice      | Jones     | alice@btinternet.co.uk | 12345678 | yt_id_1 |
+      | Bob        | Anchous   | bob@btinternet.co.uk   | 12345678 | yt_id_2 |
+      | Jane       | Anchous   | jan@btinternet.co.uk   | 12345678 | yt_id_3 |
     And there are no videos
     And I am logged in
     And I have Slack notifications enabled
@@ -157,4 +157,3 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | ClientMeeting |
 
 #TODO links, toggles, popovers, slides, caret
-  Scenario: Display avatars of host an participants
