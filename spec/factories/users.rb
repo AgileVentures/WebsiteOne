@@ -7,8 +7,8 @@ FactoryGirl.define do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
-    password 'changeme'
-    password_confirmation { password } 
+    password '12345678'
+    password_confirmation { password }
     display_profile true
     slug { "#{first_name} #{last_name}".parameterize }
 

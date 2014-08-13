@@ -59,7 +59,7 @@ class UserPresenter < BasePresenter
         data-toggle="popover" 
         data-placement="#{options[:placement]}" 
         data-title="#{display_name}" 
-        data-content="Member for: <br/>User rating: <br/>PP sessions:" 
+        data-content="Member for: #{object_age_in_words} <br/>User rating: <br/>PP sessions:" 
         href="#{url_helpers.user_path user}">
         #{gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle')}
       </a>
