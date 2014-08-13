@@ -62,10 +62,11 @@ describe UserPresenter do
 
     it 'renders a popover with user details' do
       allow(subject).to receive(:display_name).and_return('user_name')
+      allow(subject).to receive(:object_age_in_words).and_return('11 days')
       allow(subject).to receive(:gravatar_image).and_return('user_gravatar')
 
       placement = 'right'
-      popover_content = 'Member for: <br/>User rating: <br/>PP sessions:'
+      popover_content = 'Member for: 11 days <br/>User rating: <br/>PP sessions:'
 
       output = subject.user_avatar_with_popover({ placement: placement })
 
