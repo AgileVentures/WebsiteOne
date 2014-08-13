@@ -30,15 +30,15 @@ class Event < ActiveRecord::Base
   end
 
   def event_date
-      start_datetime
+    start_datetime
   end
 
   def start_time
-      start_datetime
+    start_datetime
   end
 
   def end_time
-      (start_datetime + duration*60).utc
+    (start_datetime + duration*60).utc
   end
 
   def end_date
@@ -60,11 +60,11 @@ class Event < ActiveRecord::Base
   def self.next_event_occurrence
     if Event.exists?
       @events = []
-       Event.where(['category = ?', 'Scrum']).each do |event|
-          next_occurences = event.next_occurrences(start_time: 15.minutes.ago,
-                                                   limit: 1)
-          @events << next_occurences.first unless next_occurences.empty?
-        end
+      Event.where(['category = ?', 'Scrum']).each do |event|
+        next_occurences = event.next_occurrences(start_time: 15.minutes.ago,
+                                                 limit: 1)
+        @events << next_occurences.first unless next_occurences.empty?
+      end
 
       return nil if @events.empty?
 
@@ -75,22 +75,30 @@ class Event < ActiveRecord::Base
     nil
   end
 
+  def repeating_and_ends
+    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
+  end
+
+  # final_datetime_for_display returns the final datetime for a recurring or one-time event.
+  # If it's a repeating event with an end datetime (repeating_and_ends), then it will be the earliest of repeat_ends_on and the params endtime and the time_in_future from the start_time
+  # Otherwise, it's the earliest of the params endtime and the time_in_future from the start_time.
   def final_datetime_for_display(options = {})
-    start_datetime_for_calculation = !options[:start_time].blank? ? options[:start_time] : Time.now
-    time_in_future = !options[:time_in_future].blank? ? options[:time_in_future] : 10.days
-    final_datetime = !options[:end_time].blank? ? [start_datetime_for_calculation + time_in_future, options[:end_time]].min : start_datetime_for_calculation + time_in_future
-    final_datetime = [repeat_ends_on.to_datetime, final_datetime].min if repeats != 'never' && repeat_ends == true
+    start_datetime_for_calculation = options.fetch(:start_time, Time.now)
+    time_in_future = options.fetch(:time_in_future, 10.days)
+    end_datetime = options.fetch(:end_time, start_datetime_for_calculation + time_in_future)
+    final_datetime = [end_datetime, start_datetime_for_calculation + time_in_future].min
+    final_datetime = [final_datetime, repeat_ends_on.to_datetime].min if repeating_and_ends
     final_datetime.to_datetime.utc
   end
 
   def next_occurrences(options = {})
-    start_datetime = !options[:start_time].blank? ? options[:start_time] : 30.minutes.ago
+    start_datetime = options.fetch(:start_time, 30.minutes.ago)
     final_datetime = final_datetime_for_display(options)
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
       occurrences_between(start_datetime, final_datetime).each do |time|
-        occurences << {event: self, time: time}
+        occurences << { event: self, time: time }
 
         return occurences if occurences.count >= limit
       end
