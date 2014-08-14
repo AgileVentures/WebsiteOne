@@ -50,13 +50,6 @@ module Helpers
             time_zone: 'Eastern Time (US & Canada)'
         }.as_json
 
-      when :project
-        {
-            title: Faker::Company.catch_phrase,
-            description: Faker::Company.bs,
-            status: 'ACTIVE'
-        }.as_json
-
      else
         pending
     end
