@@ -15,10 +15,6 @@ describe Hangout, type: :model do
     it '#live? returns false' do
       expect(hangout.live?).to be_falsey
     end
-
-    it '#expired? returns false' do
-      expect(hangout.expired?).to be_falsey
-    end
   end
 
   context 'hangout_url is present' do
@@ -32,11 +28,6 @@ describe Hangout, type: :model do
     it 'reports not live if the link is older than 5 minutes' do
       allow(Time).to receive(:now).and_return(Time.parse('10:05:01 UTC'))
       expect(hangout.live?).to be_falsey
-    end
-
-    it 'reports expired if the link is older than 5 minutes' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:05:01 UTC'))
-      expect(hangout.expired?).to be_truthy
     end
   end
 
