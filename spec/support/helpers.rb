@@ -57,13 +57,7 @@ module Helpers
             status: 'ACTIVE'
         }.as_json
 
-      when :document, :static_page
-        {
-            title: Faker::Company.catch_phrase,
-            body: Faker::Company.bs
-        }.as_json
-
-      else
+     else
         pending
     end
   end

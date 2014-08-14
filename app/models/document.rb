@@ -4,7 +4,9 @@ class Document < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
-  validates :project_id, presence: true
+  validates_presence_of :title, :project
+
+  delegate :title, to: :project, prefix: true
 
   # Bryan: Used to generate paths, used only in testing.
   # Might want to switch to rake generated paths in the future
@@ -18,10 +20,5 @@ class Document < ActiveRecord::Base
 
   def slug_candidates
     [ :title, [:title, :project_title] ]
-  end
-
-  def project_title
-    return nil if project_id.nil?
-    project.title
   end
 end
