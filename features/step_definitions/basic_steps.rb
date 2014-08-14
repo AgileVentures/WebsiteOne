@@ -192,6 +192,10 @@ Then /^I should( not)? see button "([^"]*)"$/ do |negative, button|
   end
 end
 
+Then /^I should see disabled button "([^"]*)"$/ do |button|
+    expect(page.has_button?(button, {disabled: true})).to be_true
+end
+
 Then /^the "([^"]*)" field(?: within (.*))? should( not)? contain "([^"]*)"$/ do |field, parent, negative, value|
   with_scope(parent) do
     field = find_field(field)

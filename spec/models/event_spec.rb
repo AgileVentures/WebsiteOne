@@ -118,7 +118,7 @@ describe Event do
                                         repeat_ends: 'never',
                                         repeat_ends_on: 'Mon, 17 Jun 2013',
                                         time_zone: 'UTC')
-      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+      hangout = @event.hangouts.create(hangout_url: 'http://hangout.test',
                                        updated_at: '2014-06-17 10:25:00 UTC')
       Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
       expect(@event.live?).to be_truthy
@@ -137,7 +137,7 @@ describe Event do
                                          repeat_ends: 'never',
                                          repeat_ends_on: 'Mon, 17 Jun 2013',
                                          time_zone: 'UTC')
-      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+      hangout = @event.hangouts.create(hangout_url: 'http://hangout.test',
                                        updated_at: '2014-06-17 10:20:00 UTC')
       Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
       expect(@event.live?).to be_falsey
@@ -156,7 +156,7 @@ describe Event do
     end
 
     it 'should expire events that ended' do
-      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+      hangout = @event.hangouts.create(hangout_url: 'http://hangout.test',
                                        updated_at: '2014-06-17 10:25:00 UTC')
       allow(hangout).to receive(:started?).and_return(true)
       Delorean.time_travel_to(Time.parse('2014-06-17 10:31:00 UTC'))
@@ -164,7 +164,7 @@ describe Event do
     end
 
     it 'should mark as active events which have started and have not ended' do
-      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+      hangout = @event.hangouts.create(hangout_url: 'http://hangout.test',
                                        updated_at: '2014-06-17 10:25:00 UTC')
       Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
       expect(@event.live?).to be_truthy
@@ -190,7 +190,7 @@ describe Event do
     end
 
     it 'should expire events that ended' do
-      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+      hangout = @event.hangouts.create(hangout_url: 'http://hangout.test',
                                        updated_at: '2014-06-17 10:25:00 UTC')
       allow(hangout).to receive(:started?).and_return(true)
       Delorean.time_travel_to(Time.parse('2014-06-17 10:31:00 UTC'))
@@ -198,7 +198,7 @@ describe Event do
     end
 
     it 'should mark as active events which have started and have not ended' do
-      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+      hangout = @event.hangouts.create(hangout_url: 'http://hangout.test',
                                        updated_at: '2014-06-17 10:25:00 UTC')
       Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
       expect(@event.live?).to be_truthy

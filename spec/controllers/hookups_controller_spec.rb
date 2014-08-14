@@ -13,7 +13,7 @@ describe HookupsController, type: :controller do
 
   it 'assigns an active hookup for the view' do
     @event = FactoryGirl.create Event, category: "PairProgramming"
-    @hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+    @hangout = @event.hangouts.create(hangout_url: 'http://hangout.test',
                                       updated_at: 1.minute.ago,
                                       category: "PairProgramming")
     get :index
@@ -67,7 +67,7 @@ describe HookupsController, type: :controller do
       assigns(:event).should_not be_persisted
     end
 
-    it 're-renders the hookups' do
+    it 'redirect to hookups' do
       Event.any_instance.stub(:save).and_return(false)
       post :create, invalid_attributes_hookup
       expect(response).to redirect_to :hookups

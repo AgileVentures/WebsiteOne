@@ -5,22 +5,15 @@ class HookupsController < ApplicationController
   end
 
   def create
-    @event = Event.new
-    @event.name= params['title']
-    @event.repeats= 'never'
-    start_date = params[:start_date].blank? ? Date.today : params[:start_date].to_datetime
-    start_time = params[:start_time].blank? ? Time.now : params[:start_time].to_datetime
-    @event.start_datetime = Time.utc(
-        start_date.year,
-        start_date.month,
-        start_date.day,
-        start_time.hour,
-        start_time.min,
-        0)
-    @event.duration = params['duration'].to_i
-    @event.category= 'PairProgramming'
-    @event.description= "hookup"
-    @event.time_zone= 'UTC'
+    @event = Event.new(name: params['title'],
+                       repeats: 'never',
+                       duration: params['duration'].to_i,
+                       category: 'PairProgramming',
+                       description: "hookup",
+                       time_zone: 'UTC'
+
+    )
+    @event.start_datetime = @event.start_datetime_from_params(params)
     is_saved = @event.save
     if is_saved
       flash[:notice] = 'Event Created'

@@ -1,3 +1,4 @@
+@javascript
 Feature: Create Hookups
   In order to let other members know which hookups are available
   As a user
@@ -15,16 +16,6 @@ Feature: Create Hookups
   Scenario: button for a new pending event
     Then I should see button "New Hookup"
 
-  @javascript
-  Scenario: show labels for a new pending event (fields)
-    When I click "New Hookup" button
-    Then I should see:
-      | Descriptive Title |
-      | Start Date        |
-      | Start Time in UTC |
-      | Duration          |
-
-  @javascript
   Scenario: show fields for a new pending event (fields)
     When I click "New Hookup" button
     Then I should see field "title_field"
@@ -32,13 +23,12 @@ Feature: Create Hookups
     Then I should see field "start_time"
     Then I should see field "duration"
 
-  @javascript
   Scenario: show buttons for a new pending event (fields)
     When I click "New Hookup" button
     Then I should see button "Create"
     And I should see button "Cancel"
+    And I should see disabled button "New Hookup"
 
-  @javascript
   Scenario: hide fields for a new pending event (fields)
     When I click "New Hookup" button
     When I click "Cancel" button
@@ -52,21 +42,6 @@ Feature: Create Hookups
     And I should not see button "Cancel"
     And I should not see the Create Hookup form
 
-  @javascript
-  Scenario: hide fields for a new pending event II (fields)
-    When I click "New Hookup" button
-    When I click "New Hookup" button
-    Then I should not see:
-      | Descriptive Title |
-      | Start Time in UTC |
-    And I should not see field "title_field"
-    And I should not see field "start_date"
-    And I should not see field "start_time"
-    And I should not see field "duration"
-    And I should not see button "Cancel"
-    And I should not see the Create Hookup form
-
-  @javascript
   Scenario: try creating without title, then set title and create to use previous date/time
     Given the time now is "2014-07-15 12:00:00 UTC"
     When I click "New Hookup" button

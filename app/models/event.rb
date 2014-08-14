@@ -29,6 +29,18 @@ class Event < ActiveRecord::Base
     pending
   end
 
+  def start_datetime_from_params(params)
+    start_date = params[:start_date].blank? ? Date.today : params[:start_date].to_datetime
+    start_time = params[:start_time].blank? ? Time.now : params[:start_time].to_datetime
+    Time.utc(
+        start_date.year,
+        start_date.month,
+        start_date.day,
+        start_time.hour,
+        start_time.min,
+        0)
+  end
+
   def event_date
       start_datetime
   end
