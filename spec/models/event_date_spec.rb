@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EventDate do
+describe EventDate, :type => :model do
   it 'returns todays date if event_date is nil' do
     expect(EventDate.for(nil)).to eq Date.today
   end
