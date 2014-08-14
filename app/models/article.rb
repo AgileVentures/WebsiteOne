@@ -1,5 +1,3 @@
-require 'acts_as_votable'
-
 class Article < ActiveRecord::Base
   include ActAsPage
 
@@ -24,6 +22,6 @@ class Article < ActiveRecord::Base
   end
 
   def authored_by?(user)
-    self.user_id == user.id
+    self.user == user
   end
 end
