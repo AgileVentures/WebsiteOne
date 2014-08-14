@@ -1,71 +1,65 @@
 require 'spec_helper'
 
-describe 'projects/index.html.erb' do
-  before :each do
-    @user = stub_model(User, display_name: 'John Butcher')
-    @projects_collection = (1..9).map { |id|
-      stub_model(Project, {
-          id: id,
-          title: 'hello',
-          description: 'world',
-          status: 'one',
-          friendly_id: "project-#{id}",
-          created_at: '2014-01-23 23:39:15',
-          user: @user
-      }) }
-
-    @projects_collection.stub(:total_pages).and_return(2)
-    @projects_collection.stub(:current_page).and_return(1)
-    assign(:projects, @projects_collection)
+describe 'projects/index.html.erb', type: :view do
+  
+  let(:user) { FactoryGirl.build_stubbed(:user) }
+  let(:projects_collection) do 
+    (1..9).map do |id|
+      FactoryGirl.build_stubbed(:project, user: user)
+    end
   end
 
-  let(:projects_collection) { @projects_collection }
+  before do
+    allow(projects_collection).to receive(:total_pages).and_return(2)
+    allow(projects_collection).to receive(:current_page).and_return(1)
+    assign(:projects, projects_collection)
+    assign(:user, user)
+  end
 
   context 'pagination' do
-    it 'should render previous, next, and page numbers' do
+    it 'renders previous, next, and page numbers' do
       render
-      rendered.should have_content '← Previous 1 2 Next →'
+      expect(rendered).to have_content '← Previous 1 2 Next →'
     end
   end
 
   context 'for signed in and not signed in users' do
-    it 'should display a list of projects' do
+    it 'displays a list of projects' do
       render
-      rendered.should have_css('h1', :text => 'List of Projects')
-      rendered.should have_css 'ul#project-list'
+      expect(rendered).to have_css('h1', :text => 'List of Projects')
+      expect(rendered).to have_css 'ul#project-list'
     end
 
     # Bryan: removed tests for table
 
-    it 'should render a link' do
+    it 'renders a link' do
       render
-      project = projects_collection.first
       rendered.within('ul#project-list') do |list|
-        expect(list).to have_css %Q{a[href="#{project_path(projects_collection[0])}"]}, visible: true
+        expect(list).to have_css %Q{a[href="#{project_path(projects_collection.first)}"]}, visible: true
       end
     end
 
   end
 
   context 'user signed in' do
-    before :each do
-      view.stub(:user_signed_in?).and_return(true)
+    before do
+      allow(view).to receive(:user_signed_in?).and_return(true)
     end
 
-    it 'should render a create new project button' do
+    it 'renders a create new project button' do
       render
-      rendered.should have_css %Q{a[href="#{new_project_path}"]}, visible: true
+      expect(rendered).to have_css %Q{a[href="#{new_project_path}"]}, visible: true
     end
 
     # Bryan: removed edit button from index page, step no longer required
   end
 
   context 'user not signed in' do
-    before :each do
-      view.stub(:user_signed_in?).and_return(false)
+    before do
+      allow(view).to receive(:user_signed_in?).and_return(false)
     end
 
-    it 'should not render a create new project button' do
+    it 'doesn\'t render a create new project button' do
       render
       expect(rendered).not_to have_link('New Project', :href => new_project_path)
     end
