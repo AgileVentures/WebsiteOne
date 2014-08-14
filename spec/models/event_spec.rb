@@ -287,25 +287,25 @@ describe Event do
     it 'should return the repeat_ends_on datetime if that comes first and it is a repeating event and the ends_on datetime is less than 10 days away' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
       options[:end_time] = '2015-06-30 09:27:00 UTC'
-      expect(@event.final_datetime_for_display(options)).to eq(@event.repeat_ends_on.to_datetime)
+      expect(@event.final_datetime_in_collection(options)).to eq(@event.repeat_ends_on.to_datetime)
     end
 
     it 'should return the options[:endtime] if that comes before repeat_ends_on' do
       Delorean.time_travel_to(Time.parse('2015-06-15 09:27:00 UTC'))
       options[:end_time] = '2015-06-20 09:27:00 UTC'
-      expect(@event.final_datetime_for_display(options)).to eq(options[:end_time].to_datetime)
+      expect(@event.final_datetime_in_collection(options)).to eq(options[:end_time].to_datetime)
     end
 
     it 'should return the repeat_ends_on datetime if there is no options[end_time] and the ends_on datetime is less than 10 days away' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      expect(@event.final_datetime_for_display).to eq(@event.repeat_ends_on.to_datetime)
+      expect(@event.final_datetime_in_collection).to eq(@event.repeat_ends_on.to_datetime)
     end
 
     it 'should return 10 days from now if that is soonest of the options' do
       Delorean.time_travel_to(Time.parse('2015-06-10 09:27:00 UTC'))
       options[:end_time] = '2015-06-28 09:27:00 UTC'
       ten_days_from_now = (Time.now + 10.days).utc.to_datetime
-      expect(@event.final_datetime_for_display(options).utc.to_datetime.to_s).to eql(ten_days_from_now.to_s)
+      expect(@event.final_datetime_in_collection(options).utc.to_datetime.to_s).to eql(ten_days_from_now.to_s)
     end
   end
 
@@ -328,27 +328,27 @@ describe Event do
     it 'should return the options[:endtime] if that comes before 10 days from now' do
       Delorean.time_travel_to(Time.parse('2015-06-15 09:27:00 UTC'))
       options[:end_time] = '2015-06-20 09:27:00 UTC'
-      expect(@event.final_datetime_for_display(options)).to eq(options[:end_time].to_datetime)
+      expect(@event.final_datetime_in_collection(options)).to eq(options[:end_time].to_datetime)
     end
 
     it 'should return three days from now if there is no options[end_time]' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
       options[:time_in_future] = 3.days
-      expect(@event.final_datetime_for_display(options).to_datetime.to_s).to eq(3.days.from_now.to_datetime.to_s)
+      expect(@event.final_datetime_in_collection(options).to_datetime.to_s).to eq(3.days.from_now.to_datetime.to_s)
     end
 
     it 'should return the options[:endtime] if the event never ends and option[:endtime] is less than the time_in_future.from_now' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
       options[:end_time] = '2015-06-28 09:27:00 UTC'
       options[:time_in_future] = 7.days
-      expect(@event.final_datetime_for_display(options)).to eq(options[:end_time].to_datetime)
+      expect(@event.final_datetime_in_collection(options)).to eq(options[:end_time].to_datetime)
     end
 
     it 'should return 10 days from now if that is soonest of the options' do
       Delorean.time_travel_to(Time.parse('2015-06-10 09:27:00 UTC'))
       options[:end_time] = '2015-06-28 09:27:00 UTC'
       ten_days_from_now = (Time.now + 10.days).utc.to_datetime
-      expect(@event.final_datetime_for_display(options).utc.to_datetime.to_s).to eql(ten_days_from_now.to_s)
+      expect(@event.final_datetime_in_collection(options).utc.to_datetime.to_s).to eql(ten_days_from_now.to_s)
     end
   end
 

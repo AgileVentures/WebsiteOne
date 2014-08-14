@@ -57,6 +57,18 @@ class Event < ActiveRecord::Base
     last_hangout.try!(:live?)
   end
 
+  # final_datetime_in_collection returns the final datetime for a recurring or one-time event.
+  # If it's a repeating event with an end datetime (repeating_and_ends), then it will be the earliest of repeat_ends_on and the params endtime and the time_in_future from the start_time
+  # Otherwise, it's the earliest of the params endtime and the time_in_future from the start_time.
+  def final_datetime_in_collection(options = {})
+    start_datetime_for_calculation = options.fetch(:start_time, Time.now)
+    time_in_future = options.fetch(:time_in_future, 10.days)
+    end_datetime = options.fetch(:end_time, start_datetime_for_calculation + time_in_future)
+    final_datetime = [end_datetime, start_datetime_for_calculation + time_in_future].min
+    final_datetime = [final_datetime, repeat_ends_on.to_datetime].min if repeating_and_ends
+    final_datetime.to_datetime.utc
+  end
+
   def self.next_event_occurrence
     if Event.exists?
       @events = []
@@ -75,25 +87,9 @@ class Event < ActiveRecord::Base
     nil
   end
 
-  def repeating_and_ends
-    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
-  end
-
-  # final_datetime_for_display returns the final datetime for a recurring or one-time event.
-  # If it's a repeating event with an end datetime (repeating_and_ends), then it will be the earliest of repeat_ends_on and the params endtime and the time_in_future from the start_time
-  # Otherwise, it's the earliest of the params endtime and the time_in_future from the start_time.
-  def final_datetime_for_display(options = {})
-    start_datetime_for_calculation = options.fetch(:start_time, Time.now)
-    time_in_future = options.fetch(:time_in_future, 10.days)
-    end_datetime = options.fetch(:end_time, start_datetime_for_calculation + time_in_future)
-    final_datetime = [end_datetime, start_datetime_for_calculation + time_in_future].min
-    final_datetime = [final_datetime, repeat_ends_on.to_datetime].min if repeating_and_ends
-    final_datetime.to_datetime.utc
-  end
-
   def next_occurrences(options = {})
     start_datetime = options.fetch(:start_time, 30.minutes.ago)
-    final_datetime = final_datetime_for_display(options)
+    final_datetime = final_datetime_in_collection(options)
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
@@ -161,4 +157,7 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def repeating_and_ends
+    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
+  end
 end
