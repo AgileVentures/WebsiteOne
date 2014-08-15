@@ -1,148 +1,78 @@
 require 'spec_helper'
 
-describe User do
+describe User, :type => :model do
 
   include_examples 'presentable'
 
-  before do
-    @attr = attributes_for(:user)
+  subject { build_stubbed :user }
+
+  it 'should be invalid without email' do
+    expect(build_stubbed(:user, email: '')).to_not be_valid
   end
 
-  it 'should fail for a new user' do
-    new_user = User.new(@attr.merge first_name: nil, last_name: nil, email: nil)
-    new_user.save.should be_false
+  it 'should be invalid with an invalid email address' do
+    expect(build_stubbed(:user, email: 'user@foo,com')).to_not be_valid
   end
 
-  it 'should create a new instance given a valid attribute' do
-    expect(User.create(@attr)).to be_true
-  end
-
-  it 'should require an email address' do
-    no_email_user = User.new(@attr.merge(:email => ''))
-    no_email_user.should_not be_valid
-  end
-
-  it 'should not be valid when the email is nil' do
-    user = User.new @attr.merge(email: nil)
-    user.should_not be_valid
-  end
-
-  it 'should accept valid email addresses' do
-    addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.se]
-    addresses.each do |address|
-      valid_email_user = User.new(@attr.merge(:email => address))
-      valid_email_user.should be_valid
-    end
-  end
-
-  it 'should reject invalid email addresses' do
-    addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
-    addresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(:email => address))
-      invalid_email_user.should_not be_valid
-    end
+  it 'should be valid with all the correct attributes' do
+    expect(subject).to be_valid
   end
 
   it 'should reject duplicate email addresses' do
-    User.create!(@attr)
-    user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
+    user = FactoryGirl.create(:user)
+    expect(build_stubbed(:user, email: user.email)).not_to be_valid
   end
 
   it 'should reject email addresses identical up to case' do
-    upcased_email = @attr[:email].upcase
-    User.create!(@attr.merge(:email => upcased_email))
-    user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
+    upcased_email = subject.email.upcase
+    user = FactoryGirl.create(:user, email: upcased_email)
+    expect(build_stubbed(:user, email: subject.email)).not_to be_valid
   end
 
-  describe 'passwords' do
-
-    before(:each) do
-      @user = build(:user)
-    end
-
-    it 'should have a password attribute' do
-      @user.should respond_to(:password)
-    end
-
-    it 'should have a password confirmation attribute' do
-      @user.should respond_to(:password_confirmation)
-    end
+  it 'should be invalid without password' do
+    expect(build_stubbed(:user, password: '')).to_not be_valid
   end
 
-  describe 'password validations' do
-
-    it 'should require a password' do
-      User.new(@attr.merge(:password => "", :password_confirmation => "")).
-        should_not be_valid
-    end
-
-    it 'should require a matching password confirmation' do
-      User.new(@attr.merge(:password_confirmation => "invalid")).
-        should_not be_valid
-    end
-
-    it 'should reject short passwords' do
-      short = "a" * 5
-      hash = @attr.merge(:password => short, :password_confirmation => short)
-      User.new(hash).should_not be_valid
-    end
-
+  it 'should be invalid without matching password confirmation' do
+    expect(build_stubbed(:user, password_confirmation: 'invalid')).to_not be_valid
   end
 
-  describe 'password encryption' do
-
-    before(:each) do
-      @user = create(:user)
-    end
-
-    it 'should have an encrypted password attribute' do
-      @user.should respond_to(:encrypted_password)
-    end
-
-    it 'should set the encrypted password attribute' do
-      @user.encrypted_password.should_not be_blank
-    end
-
+  it 'should be invalid with short password' do
+    expect(build_stubbed(:user, password: 'aaa', password_confirmation: 'aaa')).to_not be_valid
   end
 
   describe 'slug generation' do
-    before(:each) do
-      @user = User.new first_name: 'Candice',
-        last_name: 'Clemens',
-        email: 'candice@clemens.com',
-        password: '1234567890'
-    end
-
+    subject {  FactoryGirl.build(:user, slug: nil) }
     it 'should automatically generate a slug' do
-      @user.save
-      expect(@user.slug).to_not eq nil
+      subject.save
+      expect(subject.slug).to_not eq nil
     end
 
     it 'should be manually adjustable' do
       slug = 'this-is-a-slug'
-      @user.slug = slug
-      @user.save
-      expect(User.find(@user.id).slug).to eq slug
+      subject.slug = slug
+      subject.save
+      expect(User.find(subject.id).slug).to eq slug
     end
 
     it 'should be remade when the display name changes' do
-      @user.save
-      slug = @user.slug
-      @user.update_attributes first_name: 'Shawn'
-      expect(@user.slug).to_not eq slug
+      subject.save
+      slug = subject.slug
+      subject.update_attributes first_name: 'Shawn'
+      expect(subject.slug).to_not eq slug
     end
 
     it 'should not be affected by multiple saves' do
-      @user.save
-      slug = @user.slug
-      @user.save
-      expect(@user.slug).to eq slug
+      subject.save
+      slug = subject.slug
+      subject.save
+      expect(subject.slug).to eq slug
     end
   end
 
   describe 'geocoding' do
+    subject { build(:user, last_sign_in_ip: '85.228.111.204') }
+
     before(:each) do
       Geocoder.configure(:ip_lookup => :test)
       Geocoder::Lookup::Test.add_stub(
@@ -181,57 +111,39 @@ describe User do
         ]
       )
 
-      @user = User.new first_name: 'Geo',
-        last_name: 'Coder',
-        email: 'candice@clemens.com',
-        password: '1234567890',
-        last_sign_in_ip: '85.228.111.204'
     end
 
     it 'should perform geocode' do
-      @user.save
-      expect(@user.latitude).to_not eq nil
-      expect(@user.longitude).to_not eq nil
-      expect(@user.city).to_not eq nil
-      expect(@user.country).to_not eq nil
+      subject.save
+      expect(subject.latitude).to_not eq nil
+      expect(subject.longitude).to_not eq nil
+      expect(subject.city).to_not eq nil
+      expect(subject.country).to_not eq nil
     end
 
     it 'should set user location' do
-      @user.save
-      expect(@user.latitude).to eq 57.9333
-      expect(@user.longitude).to eq 12.5167
-      expect(@user.city).to eq 'Alingsås'
-      expect(@user.country).to eq 'Sweden'
+      subject.save
+      expect(subject.latitude).to eq 57.9333
+      expect(subject.longitude).to eq 12.5167
+      expect(subject.city).to eq 'Alingsås'
+      expect(subject.country).to eq 'Sweden'
     end
 
     it 'should change location if ip changes' do
-      @user.save
-      @user.update_attributes last_sign_in_ip: '50.78.167.161'
-      expect(@user.city).to eq 'Seattle'
-      expect(@user.country).to eq 'United States'
+      subject.save
+      subject.update_attributes last_sign_in_ip: '50.78.167.161'
+      expect(subject.city).to eq 'Seattle'
+      expect(subject.country).to eq 'United States'
     end
 
-  end
-
-  describe 'email receival' do
-    it 'should have a receive_mailings method' do
-      user = User.new
-      user.should respond_to :receive_mailings
-    end
-
-    it 'should be set true by default' do
-      user = User.create(@attr)
-      user.receive_mailings.should be_true
-    end
   end
 
   describe "#followed_project_tags" do
     it 'returns project tags for projects with project title and tags and a scrum tag' do
       project_1 = build_stubbed(:project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
       project_2 = build_stubbed(:project, title: 'Black hole', tag_list: [])
-      user = build_stubbed(:user)
-      allow(user).to receive(:projects_joined).and_return([project_1, project_2])
-      expect(user.followed_project_tags).to eq ["big regret", "boom", "bang", "big boom", "black hole", "scrum"]
+      allow(subject).to receive(:following_projects).and_return([project_1, project_2])
+      expect(subject.followed_project_tags).to eq ["big regret", "boom", "bang", "big boom", "black hole", "scrum"]
     end
   end
 

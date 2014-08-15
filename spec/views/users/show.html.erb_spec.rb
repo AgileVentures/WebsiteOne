@@ -19,7 +19,8 @@ describe "users/show.html.erb" do
                               skill_list: [ 'Shooting', 'Hooting' ],
                               bio: 'Lonesome Cowboy')
 
-    @user.stub(:projects_joined) { @projects }
+    allow(@user).to receive(:following_projects).and_return(@projects)
+    allow(@user).to receive(:following_projects_count).and_return(2)
 
     assign :user, @user
     @youtube_videos = [
