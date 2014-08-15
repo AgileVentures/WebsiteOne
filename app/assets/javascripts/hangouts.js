@@ -8,10 +8,17 @@
     $('.live-hangouts .collapse').collapse('toggle');
   });
 
+  $('.btn-hg-join, .btn-hg-watch').click(function (){
+    event.stopPropagation();
+  });
+
+  $('.btn-hg-join.disable').unbind().click(function (){
+    event.preventDefault();
+    event.stopPropagation();
+  });
+
   $('.panel-heading').click(function(){
-    if($(event.toElement).prop('tagName') !== 'A'){
-      $(this).closest('.panel').find('.panel-collapse').slideToggle();
-      WebsiteOne.toggleCaret($(this).find('i.fa'));
-    }
+    $(this).closest('.panel').find('.panel-collapse').slideToggle();
+    WebsiteOne.toggleCaret($(this).find('i.fa'));
   });
 })();

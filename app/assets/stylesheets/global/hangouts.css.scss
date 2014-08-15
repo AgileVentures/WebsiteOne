@@ -181,6 +181,15 @@
     width: 50px;
   }
 
+  .btn-hg-join.disable {
+      background-color: grey;
+      box-shadow: none;
+      cursor: default;
+
+    &:hover {}
+
+    }
+
   .btn-hg-watch {
     @include hg-btn($theme-main);
     width: 50px;

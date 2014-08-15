@@ -5,7 +5,7 @@ describe 'hangouts/index', type: :view do
   let(:hangout){ FactoryGirl.build_stubbed(:hangout, created: '11:15') }
 
   before do
-    @hangouts = [ hangout ]
+    @hangouts = [ hangout, hangout ]
   end
 
   it 'renders toggle buttons' do
@@ -31,6 +31,12 @@ describe 'hangouts/index', type: :view do
     expect(rendered).to have_link(hangout.project.title, project_path(hangout.project))
     expect(rendered).to have_link('Join', href: hangout.hangout_url)
     expect(rendered).to have_link('Watch', href: "http://www.youtube.com/watch?v=#{hangout.yt_video_id}&feature=youtube_gdata")
+  end
+
+  it 'disables the join button if hangout is not live' do
+    allow_any_instance_of(Hangout).to receive(:live?).and_return(false)
+    render
+    expect(rendered).to have_css('.btn-hg-join.disable', count: @hangouts.count)
   end
 
   it_behaves_like 'it has clickable user avatar with popover' do

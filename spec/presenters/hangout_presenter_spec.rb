@@ -39,6 +39,11 @@ describe HangoutPresenter do
       expect(presenter.participants.first).to eq(participant)
     end
 
+    it 'do not show the host in the list of participants' do
+      participant = FactoryGirl.create(:user, gplus: hangout.participants.first.last[:person][:id])
+      expect(presenter.participants).not_to include(hangout.host)
+    end
+
     it 'returns video url' do
       expect(presenter.video_url).to eq("http://www.youtube.com/watch?v=yt_video_id&feature=youtube_gdata")
     end
