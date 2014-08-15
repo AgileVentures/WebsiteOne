@@ -30,15 +30,15 @@ class Event < ActiveRecord::Base
   end
 
   def event_date
-      start_datetime
+    start_datetime
   end
 
   def start_time
-      start_datetime
+    start_datetime
   end
 
   def end_time
-      (start_datetime + duration*60).utc
+    (start_datetime + duration*60).utc
   end
 
   def end_date
@@ -55,6 +55,18 @@ class Event < ActiveRecord::Base
 
   def live?
     last_hangout.try!(:live?)
+  end
+
+  # final_datetime_in_collection returns the final datetime for a recurring or one-time event.
+  # If it's a repeating event with an end datetime (repeating_and_ends), then it will be the earliest of repeat_ends_on and the params endtime and the time_in_future from the start_time
+  # Otherwise, it's the earliest of the params endtime and the time_in_future from the start_time.
+  def final_datetime_in_collection(options = {})
+    start_datetime_for_calculation = options.fetch(:start_time, Time.now)
+    time_in_future = options.fetch(:time_in_future, 10.days)
+    end_datetime = options.fetch(:end_time, start_datetime_for_calculation + time_in_future)
+    final_datetime = [end_datetime, start_datetime_for_calculation + time_in_future].min
+    final_datetime = [final_datetime, repeat_ends_on.to_datetime].min if repeating_and_ends
+    final_datetime.to_datetime.utc
   end
 
   def self.next_event_occurrence
@@ -76,13 +88,13 @@ class Event < ActiveRecord::Base
   end
 
   def next_occurrences(options = {})
-    start_time = StartTime.for(options[:start_time])
-    end_time = EndTime.for(options[:end_time], 10.days)
+    start_datetime = options.fetch(:start_time, 30.minutes.ago)
+    final_datetime = final_datetime_in_collection(options)
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
-      occurrences_between(start_time, end_time).each do |time|
-        occurences << {event: self, time: time}
+      occurrences_between(start_datetime, final_datetime).each do |time|
+        occurences << { event: self, time: time }
 
         return occurences if occurences.count >= limit
       end
@@ -90,7 +102,7 @@ class Event < ActiveRecord::Base
   end
 
   def occurrences_between(start_time, end_time)
-    schedule.occurrences_between(start_time, end_time)
+    schedule.occurrences_between(start_time.to_time, end_time.to_time)
   end
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
@@ -103,17 +115,9 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def from
-    ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + start_time.seconds_since_midnight
-  end
-
-  def to
-    ActiveSupport::TimeZone[time_zone].parse(event_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + end_time.seconds_since_midnight
-  end
-
   def schedule(starts_at = nil, ends_at = nil)
-    starts_at ||= from
-    ends_at ||= to
+    starts_at ||= start_datetime
+    ends_at ||= end_time
     if duration > 0
       s = IceCube::Schedule.new(starts_at, :ends_time => ends_at, :duration => duration)
     else
@@ -153,4 +157,7 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def repeating_and_ends
+    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
+  end
 end
