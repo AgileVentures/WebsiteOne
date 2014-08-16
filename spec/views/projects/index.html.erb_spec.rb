@@ -59,7 +59,7 @@ describe 'projects/index.html.erb', type: :view do
       allow(view).to receive(:user_signed_in?).and_return(false)
     end
 
-    it 'doesn\'t render a create new project button' do
+    it "doesn't render a create new project button" do
       render
       expect(rendered).not_to have_link('New Project', :href => new_project_path)
     end
