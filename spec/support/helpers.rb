@@ -16,45 +16,6 @@ module Helpers
     end
   end
 
-  def invalid_attributes_for(symbol)
-    case symbol
-      when :event
-        {
-            start_datetime: '17 Jun 2013 09:00:00 UTC',
-            duration: 300,
-            repeats: 'never',
-            repeats_every_n_weeks: nil,
-            repeat_ends: 'never',
-            repeat_ends_on: 'Mon, 17 Jun 2013',
-            time_zone: 'Eastern Time (US & Canada)'
-        }.as_json
-
-      else
-        pending
-    end
-  end
-
-  def valid_attributes_for(symbol)
-    case symbol
-      when :event
-        {
-            name: 'one time event',
-            category: 'Scrum',
-            description: '',
-            start_datetime: '17 Jun 2013 09:00:00 UTC',
-            duration: 600,
-            repeats: 'never',
-            repeats_every_n_weeks: nil,
-            repeat_ends: 'never',
-            repeat_ends_on: 'Mon, 17 Jun 2013',
-            time_zone: 'Eastern Time (US & Canada)'
-        }.as_json
-
-     else
-        pending
-    end
-  end
-
   def view_spec_page
     require 'launchy'
     filename = "tmp/view_spec_render-#{Time.now.to_i}.html"
