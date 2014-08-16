@@ -4,7 +4,7 @@ describe 'projects/index.html.erb', type: :view do
   
   let(:user) { FactoryGirl.build_stubbed(:user) }
   let(:projects_collection) do 
-    (1..9).map do |id|
+    (1..9).map do |id| 
       FactoryGirl.build_stubbed(:project, user: user)
     end
   end
