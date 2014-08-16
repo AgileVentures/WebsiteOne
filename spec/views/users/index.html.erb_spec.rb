@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe "users/index.html.erb", :type => :view do
   before(:each) do
-    @users = []
-    4.times { @users << FactoryGirl.build(:user) }
+    @users = FactoryGirl.build_list(:user, 4)
   end
 
   it 'should display a list of users' do
