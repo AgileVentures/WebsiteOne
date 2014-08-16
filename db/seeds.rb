@@ -92,15 +92,32 @@ end
 Event.create!( name: 'Seeded event',
                category: 'Scrum',
                description: 'Seeded content',
-               event_date: 'Mon, 17 Jun 2013',
-               start_time: '2000-01-01 09:00:00 UTC',
-               end_time: '2000-01-01 17:00:00 UTC',
+               # event_date: 'Mon, 17 Jun 2013',
+               # start_time: '2000-01-01 09:00:00 UTC',
+               # end_time: '2000-01-01 17:00:00 UTC',
+               start_datetime: 'Mon, 17 Jun 2014',
+               duration: 600,
                repeats: 'weekly',
                repeats_every_n_weeks: '1',
                repeats_weekly_each_days_of_the_week_mask: '31',
                repeat_ends: 'never',
-               repeat_ends_on: 'Mon, 17 Jun 2013',
-               time_zone: 'London')
+               repeat_ends_on: 'Mon, 17 Jun 2015',
+               time_zone: 'UTC')
+
+Event.create!( name: 'evening event',
+               category: 'Scrum',
+               description: 'Seeded content',
+               # event_date: 'Mon, 17 Jun 2013',
+               # start_time: '2000-01-01 09:00:00 UTC',
+               # end_time: '2000-01-01 17:00:00 UTC',
+               start_datetime: 'Mon, 17 Jun 2014 17:00:00 UTC',
+               duration: 600,
+               repeats: 'weekly',
+               repeats_every_n_weeks: '1',
+               repeats_weekly_each_days_of_the_week_mask: '31',
+               repeat_ends: 'never',
+               repeat_ends_on: 'Mon, 17 Jun 2015',
+               time_zone: 'UTC')
 
 if StaticPage.count == 0
   Rake::Task['db:import_pages'].invoke

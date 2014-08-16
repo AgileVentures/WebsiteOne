@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611223902) do
+ActiveRecord::Schema.define(version: 20140725131327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,6 @@ ActiveRecord::Schema.define(version: 20140611223902) do
     t.string   "name"
     t.string   "category"
     t.text     "description"
-    t.date     "event_date",                                null: false
-    t.time     "start_time",                                null: false
-    t.time     "end_time",                                  null: false
     t.string   "repeats"
     t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
@@ -67,9 +64,12 @@ ActiveRecord::Schema.define(version: 20140611223902) do
     t.datetime "updated_at"
     t.string   "url"
     t.string   "slug"
+    t.datetime "start_datetime"
+    t.integer  "duration"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
+  add_index "events", ["start_datetime"], name: "index_events_on_start_datetime", using: :btree
 
   create_table "follows", force: true do |t|
     t.integer  "followable_id",                   null: false
@@ -85,11 +85,13 @@ ActiveRecord::Schema.define(version: 20140611223902) do
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
   create_table "hangouts", force: true do |t|
-    t.integer  "event_id"
+    t.integer   "event_id"
     t.string   "title"
     t.string   "hangout_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "uid"
+    t.string   "category"
   end
 
   create_table "projects", force: true do |t|
@@ -100,14 +102,19 @@ ActiveRecord::Schema.define(version: 20140611223902) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
-    t.string   "github_owner"
-    t.string   "github_repo"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "scrums", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "youtube_url"
+  end
 
   create_table "static_pages", force: true do |t|
     t.string   "title"
@@ -199,5 +206,20 @@ ActiveRecord::Schema.define(version: 20140611223902) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end

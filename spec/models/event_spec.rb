@@ -1,22 +1,20 @@
 require 'spec_helper'
 
 describe Event do
-  before :each do
-    @default_tz = ENV['TZ']
-    ENV['TZ'] = 'UTC'
-  end
-
-  after :each do
-    Delorean.back_to_the_present
-    ENV['TZ'] = @default_tz
-  end
-
   it 'should respond to friendly_id' do
-    Event.new.should respond_to :friendly_id
+    expect(Event.new).to respond_to(:friendly_id)
   end
 
   it 'should respond to "schedule" method' do
     Event.respond_to?('schedule')
+  end
+
+  it 'return the latest hangout' do
+    event = FactoryGirl.create(:event)
+    Hangout.create(id: 1, event_id: event.id)
+    Hangout.create(id: 2, event_id: event.id)
+
+    expect(event.last_hangout.id).to eq(2)
   end
 
   context 'return false on invalid inputs' do
@@ -25,28 +23,28 @@ describe Event do
     end
     it 'nil :name' do
       @event.name = ''
-      expect(@event.save).to be_false
+      expect(@event.save).to be_falsey
     end
 
     it 'nil :category' do
       @event.category = nil
-      expect(@event.save).to be_false
+      expect(@event.save).to be_falsey
     end
 
     it 'nil :repeats' do
       @event.repeats = nil
-      expect(@event.save).to be_false
+      expect(@event.save).to be_falsey
     end
   end
 
-  context 'should create an event that ' do
+  context 'should create a scrum event that ' do
     it 'is scheduled for one occasion' do
-      event = Event.create!(name: 'one time event',
+      event = FactoryGirl.build_stubbed(Event,
+                            name: 'one time event',
                             category: 'Scrum',
                             description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            duration: 600,
                             repeats: 'never',
                             repeats_every_n_weeks: nil,
                             repeat_ends: 'never',
@@ -58,12 +56,12 @@ describe Event do
     end
 
     it 'is scheduled for every weekend' do
-      event = Event.create!(name: 'every weekend event',
+      event = FactoryGirl.build_stubbed(Event,
+                            name: 'every weekend event',
                             category: 'Scrum',
                             description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 96,
@@ -75,12 +73,12 @@ describe Event do
     end
 
     it 'is scheduled for every Sunday' do
-      event = Event.create!(name: 'every Sunday event',
+      event = FactoryGirl.build_stubbed(Event,
+                            name: 'every Sunday event',
                             category: 'Scrum',
                             description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 64,
@@ -92,12 +90,12 @@ describe Event do
     end
 
     it 'is scheduled for every Monday' do
-      event = Event.create!(name: 'every Monday event',
+      event = FactoryGirl.build_stubbed(Event,
+                            name: 'every Monday event',
                             category: 'Scrum',
                             description: '',
-                            event_date: 'Mon, 17 Jun 2013',
-                            start_time: '2000-01-01 09:00:00 UTC',
-                            end_time: '2000-01-01 17:00:00 UTC',
+                            start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                            duration: 600,
                             repeats: 'weekly',
                             repeats_every_n_weeks: 1,
                             repeats_weekly_each_days_of_the_week_mask: 1,
@@ -106,26 +104,97 @@ describe Event do
                             time_zone: 'UTC')
       expect(event.schedule.first(5)).to eq(['Mon, 17 Jun 2013 09:00:00 GMT +00:00', 'Mon, 24 Jun 2013 09:00:00 GMT +00:00', 'Mon, 01 Jul 2013 09:00:00 GMT +00:00', 'Mon, 08 Jul 2013 09:00:00 GMT +00:00', 'Mon, 15 Jul 2013 09:00:00 GMT +00:00'])
     end
+
+    it 'should mark as active events which have started and have not ended' do
+      @event = FactoryGirl.build_stubbed(Event,
+                                        name: 'every Monday event',
+                                        category: 'Scrum',
+                                        description: '',
+                                        start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
+                                        duration: 600,
+                                        repeats: 'weekly',
+                                        repeats_every_n_weeks: 1,
+                                        repeats_weekly_each_days_of_the_week_mask: 1,
+                                        repeat_ends: 'never',
+                                        repeat_ends_on: 'Mon, 17 Jun 2013',
+                                        time_zone: 'UTC')
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:25:00 UTC')
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
+      expect(@event.live?).to be_truthy
+    end
+
+    it 'should mark as NOT live events which have ended' do
+      @event = FactoryGirl.build_stubbed(Event,
+                                         name: 'every Monday event',
+                                         category: 'Scrum',
+                                         description: '',
+                                         start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
+                                         duration: 600,
+                                         repeats: 'weekly',
+                                         repeats_every_n_weeks: 1,
+                                         repeats_weekly_each_days_of_the_week_mask: 1,
+                                         repeat_ends: 'never',
+                                         repeat_ends_on: 'Mon, 17 Jun 2013',
+                                         time_zone: 'UTC')
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:20:00 UTC')
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
+      expect(@event.live?).to be_falsey
+    end
+  end
+
+  context 'should create a hookup event that' do
+    before do
+      @event = FactoryGirl.build_stubbed(Event,
+                                         name: 'PP Monday event',
+                                         category: 'PairProgramming',
+                                         start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
+                                         duration: 90,
+                                         repeats: 'never',
+                                         time_zone: 'UTC')
+    end
+
+    it 'should expire events that ended' do
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:25:00 UTC')
+      allow(hangout).to receive(:started?).and_return(true)
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:31:00 UTC'))
+      expect(@event.live?).to be_falsey
+    end
+
+    it 'should mark as active events which have started and have not ended' do
+      hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
+                                       updated_at: '2014-06-17 10:25:00 UTC')
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
+      expect(@event.live?).to be_truthy
+    end
+
+    it 'should not be started if events have not started' do
+      hangout = @event.hangouts.create(hangout_url: nil,
+                                       updated_at: nil)
+      Delorean.time_travel_to(Time.parse('2014-06-17 9:30:00 UTC'))
+      expect(@event.live?).to be_falsey
+    end
   end
 
   context 'Event url' do
     before (:each) do
       @event = {name: 'one time event',
-               category: 'Scrum',
-               description: '',
-               event_date: 'Mon, 17 Jun 2013',
-               start_time: '2000-01-01 09:00:00 UTC',
-               end_time: '2000-01-01 17:00:00 UTC',
-               repeats: 'never',
-               repeats_every_n_weeks: nil,
-               repeat_ends: 'never',
-               repeat_ends_on: 'Mon, 17 Jun 2013',
-               time_zone: 'Eastern Time (US & Canada)'}
+                category: 'Scrum',
+                description: '',
+                start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                duration: 600,
+                repeats: 'never',
+                repeats_every_n_weeks: nil,
+                repeat_ends: 'never',
+                repeat_ends_on: 'Mon, 17 Jun 2013',
+                time_zone: 'Eastern Time (US & Canada)'}
     end
 
     it 'should be set if valid' do
       event = Event.create!(@event.merge(:url => 'http://google.com'))
-      expect(event.save).to be_true
+      expect(event.save).to be_truthy
     end
 
     it 'should be rejected if invalid' do
@@ -134,29 +203,39 @@ describe Event do
     end
   end
 
-  describe 'Event#next_occurence' do
-    let(:event) do
-      stub_model(Event,
-                 name: 'Spec Scrum',
-                 event_date: '2014-03-07',
-                 start_time: '10:30:00',
-                 time_zone: 'UTC',
-                 end_time: '11:00:00',
-                 repeats: 'weekly',
-                 repeats_every_n_weeks: 1,
-                 repeats_weekly_each_days_of_the_week_mask: 0b1111111,
-                 repeat_ends: 'never',
-                 repeat_ends_on: 'Tue, 25 Jun 2015',
-                 friendly_id: 'spec-scrum')
+  describe 'Event#next_occurences' do
+    before do
+      @event = FactoryGirl.build_stubbed(Event,
+                                         name: 'Spec Scrum',
+                                         start_datetime: '2014-03-07 10:30:00 UTC',
+                                         time_zone: 'UTC',
+                                         duration: 30)
+
+      allow(@event).to receive(:repeats).and_return('weekly')
+      allow(@event).to receive(:repeats_every_n_weeks).and_return(1)
+      allow(@event).to receive(:repeats_weekly_each_days_of_the_week_mask).and_return(0b1111111)
+      allow(@event).to receive(:repeat_ends).and_return('never')
+      allow(@event).to receive(:repeat_ends_on).and_return('Tue, 25 Jun 2015')
+      allow(@event).to receive(:friendly_id).and_return('spec-scrum')
     end
 
     let(:options) { {} }
-    let(:next_occurrences) { event.next_occurrences(options) }
+    let(:next_occurrences) { @event.next_occurrences(options) }
     let(:next_occurrence_time) { next_occurrences.first[:time].time }
 
     it 'should return the next occurence of the event' do
       Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
       expect(next_occurrence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
+    end
+
+    it 'includes the event that has been started within the last 30 minutes' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:50:00 UTC'))
+      expect(next_occurrence_time).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
+    end
+
+    it 'does not include the event that has been started within more than 30 minutes ago' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 11:01:00 UTC'))
+      expect(next_occurrence_time).to eq(Time.parse('2014-03-08 10:30:00 UTC'))
     end
 
     context 'with input arguments' do
@@ -182,13 +261,10 @@ describe Event do
 
   describe 'Event.next_event_occurence' do
     let(:event) do
-      stub_model(Event,
-                 name: 'Spec Scrum',
-                 event_date: '2014-03-07',
-                 start_time: '10:30:00',
-                 time_zone: 'UTC',
-                 end_time: '11:00:00',
-                 friendly_id: 'spec-scrum')
+      Event.new(name: 'Spec Scrum',
+                start_datetime: '2014-03-07 10:30:00 UTC',
+                time_zone: 'UTC',
+                duration: 30)
     end
 
     before(:each) do

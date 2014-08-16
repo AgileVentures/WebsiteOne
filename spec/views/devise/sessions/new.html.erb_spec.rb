@@ -1,27 +1,36 @@
 require 'spec_helper'
 
-describe 'devise/sessions/new' do
+describe 'devise/sessions/new', :type => :view do
 
   before do
-    view.should_receive(:resource).at_least(1).times.and_return(User.new)
-    view.should_receive(:resource_name).at_least(1).times.and_return('user')
+    expect(view).to receive(:resource).at_least(1).times.and_return(User.new)
+    expect(view).to receive(:resource_name).at_least(1).times.and_return('user')
+    render
   end
 
   it 'renders the form to log in' do
-    render
     assert_select 'form[action=?][method=?]', user_session_path, 'post'  do
-      rendered.should have_css('input#user_email')
-      rendered.should have_css('input#user_password')
-      rendered.should have_css('input#user_remember_me')
-      rendered.should have_button('Sign in')
+      expect(rendered).to have_css('input#user_email')
+      expect(rendered).to have_css('input#user_password')
+      expect(rendered).to have_css('input#user_remember_me')
+      expect(rendered).to have_button('Sign in')
     end
   end
 
   it 'renders the social buttons' do
-    render
-    rendered.should have_css('.btn-github')
-    rendered.should have_link('GitHub', '/auth/github')
-    rendered.should have_css('.btn-gplus')
-    rendered.should have_link('Google+', '/auth/gplus')
+    expect(rendered).to have_css('.btn-github')
+    expect(rendered).to have_link('GitHub', '/auth/github')
+    expect(rendered).to have_css('.btn-gplus')
+    expect(rendered).to have_link('Google+', '/auth/gplus')
+  end
+
+  it 'expects the social buttons to have an origin url param for redirect' do
+    expect(rendered).to have_link('GitHub', '/auth/github?origin=')
+    expect(rendered).to have_link('Google+', '/auth/gplus?origin=')
+  end
+
+  it 'renders the forgot password and sign up link' do
+    expect(rendered).to have_link('Sign up', '/users/sign_up')
+    expect(rendered).to have_link('Forgot your password?', '/users/password/new')
   end
 end

@@ -4,11 +4,12 @@
   <div class="row">
     <% supported_third_parties.each do |provider| %>
         <div class="col-xs-6 col-sm-6 col-md-6">
-        <%= social_button provider, extra_class: 'btn-lg' %>
+        <%= social_button provider, url: session[:previous_url], extra_class: 'btn-lg' %>
         </div>
     <% end %>
   </div>
   <h4 class="text-center">Don't have an account? <%= link_to 'Sign up', new_registration_path(resource_name) %></h4>
+  <h4 class="text-center"><%= link_to "Forgot your password?", new_password_path(resource_name) %></h4>
 
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <fieldset>
@@ -27,11 +28,7 @@
           <%= f.submit 'Sign in', class: 'btn btn-primary btn-lg btn-block' %>
         </div>
         <%= devise_error_simple_message %>
-        <%= flash_messages layout_flash: false %>
       </fieldset>
   <% end %>
-
-
-  <%# render 'devise/shared/links' %>
 </div>
 </div>

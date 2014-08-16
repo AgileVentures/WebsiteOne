@@ -1,0 +1,52 @@
+<%= javascript_include_tag 'scrums' %>
+<div class="jumbotron">
+  <h1>Welcome to our Scrums Page</h1>
+  <h3>Choose a scrum to view</h3>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="player" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="playerTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="timeline">
+  <% @scrums.each_slice(2) do |videos| %>
+        <li>
+          <div class="timeline-badge"><i class="glyphicon glyphicon-film"></i></div>
+          <div class="timeline-panel" >
+            <div class="timeline-heading">
+              <h4 class="timeline-title">
+                <%= scrum_link videos.first %>
+                <%= videos.first[:title] %>
+              </h4>
+              <p>
+                <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.first[:published].to_date %></small>
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="timeline-inverted">
+          <div class="timeline-badge warning"><i class="glyphicon glyphicon-film"></i></div>
+          <div class="timeline-panel" >
+            <div class="timeline-heading">
+              <h4 class="timeline-title">
+                <%= scrum_link videos.last %>
+                <%= videos.last[:title] %>
+              </h4>
+              <p>
+                <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.last[:published].to_s(:db) %></small>
+              </p>
+            </div>
+          </div>
+        </li>
+  <% end %>
+  </ul>

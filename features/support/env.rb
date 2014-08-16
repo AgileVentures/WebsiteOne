@@ -3,6 +3,7 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
+ENV['CUCUMBER'] = 'cucumber'
 
 require 'cucumber/rails'
 require 'cucumber/rspec/doubles'
@@ -22,6 +23,7 @@ OmniAuth.config.logger.level = Logger::WARN
 # Capybara.default_selector = :xpath
 
 Capybara.javascript_driver = :poltergeist
+Capybara.default_wait_time = 5
 
 Capybara.register_driver :poltergeist_debug do |app|
   Capybara::Poltergeist::Driver.new(app, :inspector => true, :port => 3010)

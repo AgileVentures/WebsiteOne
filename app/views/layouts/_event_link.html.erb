@@ -1,0 +1,13 @@
+<% if event.present? %>
+  <p>
+    <%= link_to event['name'], event_path(event['id']) %>
+    <% if event.next_occurrence_time.to_datetime < Time.now %>
+      is live!
+      <% if event.last_hangout.try!(:live?) %>
+        <%= link_to 'Click to join!', event.last_hangout.hangout_url %>
+      <% end  %>
+    <% else %>
+      in <%= display_countdown(event) %>
+  <% end %>
+  </p>
+<% end %>
