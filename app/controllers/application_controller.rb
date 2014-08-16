@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
-  before_filter :get_next_event
+  before_filter :get_next_event, :store_location
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   include ApplicationHelper
@@ -25,12 +25,37 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || root_path
+    request.env['omniauth.origin'] || session[:previous_url] || root_path
   end
 
   private
 
+  def black_listed_urls
+    [ 
+         user_session_path,
+         new_user_registration_path,
+         new_user_password_path,
+         destroy_user_session_path,
+         "#{edit_user_password_path}.*"
+    ]
+  end
+
+  def black_listed_url?(blacklist)
+    blacklist.any?{ |pattern| request.path =~ %r(#{pattern})}
+  end
+
+  def conventional_get_request?
+    request.get? && !request.xhr?
+  end	
+
   def get_next_event
     @next_event = Event.next_event_occurrence
+  end
+
+  def store_location
+    # store last url - this is needed for post-login redirect to whatever the user last visited.
+    if conventional_get_request? && !black_listed_url?(black_listed_urls)  
+      session[:previous_url] = request.fullpath 
+    end
   end
 end
