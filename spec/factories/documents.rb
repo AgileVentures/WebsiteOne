@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :document do
     sequence(:title) {|n| "Title #{n}"}
     sequence(:body) {|n| "MyText #{n}"}
-    sequence(:slug) { title.parameterize }
+    slug { title.parameterize }
     versions { [FactoryGirl.build(:version)] }
     project
     user
