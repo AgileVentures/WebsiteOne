@@ -149,7 +149,7 @@ describe User, :type => :model do
 
   describe '.search' do
     subject { User.search(params) }
-    let(:params) { Hash.new }
+    let(:params) { {} }
 
     before(:each) do
       FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
