@@ -21,6 +21,4 @@ class PivotalTrackerUrlValidator < ActiveModel::Validator
       record.errors[:pivotaltracker_url] << 'Invalid Pivotal Tracker URL'
     end
   end
-
-  # TODO validate GitHub URL too
 end
