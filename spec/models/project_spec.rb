@@ -50,7 +50,7 @@ describe Project, :type => :model do
   end
 
   describe '#search' do
-    before(:each) { 9.times { build_stubbed(:project) } }
+    before(:each) { build_stubbed_list(:project, 9) }
 
     it 'should return paginated projects with 5 per page' do
       expect(Project.search(nil, nil).per_page).to eq(5)
