@@ -14,6 +14,8 @@ class Project < ActiveRecord::Base
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
+  scope :with_github_url, -> { where( "github_url <> ''" ) }
+
   def self.search(search, page)
     order('LOWER(title)')
       .where('title LIKE ?', "%#{search}%")
@@ -37,6 +39,10 @@ class Project < ActiveRecord::Base
       .compact
       .map(&:downcase)
       .uniq
+  end
+
+  def github_repo
+    /github.com\/(.+)/.match(github_url)[1]
   end
 
   # Bryan: Used to generate paths, used only in testing.
