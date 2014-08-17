@@ -42,7 +42,7 @@ class Project < ActiveRecord::Base
   end
 
   def github_repo
-    /github.com\/(.+)/.match(github_url)[1]
+    /github.com\/(.+)/.match(github_url)[1] if github_url
   end
 
   # Bryan: Used to generate paths, used only in testing.
