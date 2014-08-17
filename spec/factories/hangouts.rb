@@ -16,7 +16,7 @@ FactoryGirl.define do
 
     project
     event
-    association :host, factory: :user
+    user
 
     participants { [(generate :participant), (generate :participant)] }
 
