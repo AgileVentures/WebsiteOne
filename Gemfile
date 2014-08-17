@@ -18,9 +18,6 @@ gem 'bootstrap-sass' # JS Bootstrap library support
 gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
 gem 'faker'
-gem 'omniauth'
-gem 'omniauth-github', git: 'git://github.com/intridea/omniauth-github.git'
-gem 'omniauth-gplus', git: 'git://github.com/samdunne/omniauth-gplus.git'
 gem 'font-awesome-rails'
 gem 'acts_as_tree'
 gem 'acts_as_follower'
@@ -43,6 +40,9 @@ gem 'exception_notification'
 gem 'youtube_it' # ruby wrapper for youtube API
 gem 'acts_as_votable', '~> 0.10.0' #Allows WSO to track member's votes on votable objects (articles, comments, ...)
 gem 'utf8-cleaner'
+gem "omniauth"
+gem "omniauth-github"
+gem "omniauth-gplus"
 
 gem 'yui-compressor'
 gem 'compass-rails'
@@ -90,3 +90,4 @@ group :production do
   gem 'rails_12factor'
   gem 'unicorn'
 end
+

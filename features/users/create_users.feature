@@ -1,6 +1,7 @@
-Feature: As a developer
-  In order to be able to use the sites features
-  I want to register as a user
+Feature: Log in with email
+  As a _____ who is not logged in
+  So that I can log in
+  I want to use email to log in
   https://www.pivotaltracker.com/story/show/63047058
 
   Background:
@@ -35,21 +36,3 @@ Feature: As a developer
   Scenario: User signs up with mismatched password and confirmation
     When I sign up with a mismatched password confirmation
     Then I should see a mismatched password message
-
-  @omniauth
-  Scenario: User signs up with a GitHub account
-    Given I am on the "registration" page
-    When I click "GitHub"
-    Then I should see "Signed in successfully."
-
-  @omniauth-without-email
-  Scenario: User signs up with a GitHub account having no public email (sad path)
-    Given I am on the "registration" page
-    When I click "GitHub"
-    Then I should see "Email can't be blank"
-
-  @omniauth-without-email
-  Scenario: User signs up with a Google+ account having no public email (sad path)
-    Given I am on the "registration" page
-    When I click "Google+"
-    Then I should see "Email can't be blank"

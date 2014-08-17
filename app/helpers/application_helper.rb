@@ -60,12 +60,12 @@ module ApplicationHelper
 
     options[:url] ||= root_path
     text = options[:text] || (options[:delete] ? 'Remove' : '')
-    path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
-        "/auth/#{provider}#{"?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}" if options[:url].present?}"
+    path = options[:delete] ? user_omniauth_destroy_path(provider) :
+                              user_omniauth_authorize_path(provider)
 
     raw <<-HTML
     <div data-no-turbolink>
-      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'method="delete" ' if options[:delete]}href="#{path}">
+      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'data-method="delete" ' if options[:delete]}href="#{path}">
         <i class="fa fa-#{fa_icon[provider]}"></i> #{text} #{display_name[provider]}
       </a>
     </div>

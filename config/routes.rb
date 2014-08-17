@@ -3,7 +3,11 @@ WebsiteOne::Application.routes.draw do
 
   root 'visitors#index'
 
-  devise_for :users, :controllers => {:registrations => 'registrations'}
+  devise_for :users, controllers: { omniauth_callbacks: 'user_authentications' , :registrations => 'registrations'}
+  devise_scope :user do
+    delete '/users/auth/:provider', to: "user_authentications#destroy", as: :user_omniauth_destroy
+  end
+
   resources :users, :only => [:index, :show] , :format => false
 
   resources :articles, :format => false do
@@ -40,11 +44,6 @@ WebsiteOne::Application.routes.draw do
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
 
   get 'projects/:project_id/:id', to: 'documents#show',:format => false
-
-  get '/auth/:provider/callback' => 'authentications#create', :format => false
-  get '/auth/failure' => 'authentications#failure', :format => false
-  get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
-
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
   get 'scrums', to: 'scrums#index', as: 'scrums', :format => false
 
