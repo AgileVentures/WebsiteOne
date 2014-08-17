@@ -35,7 +35,14 @@ class UserPresenter < BasePresenter
 
   def gravatar_image(options={})
     options = { size: 80 }.merge(options)
-    image_tag(gravatar_src(options), width: options[:size], id: options[:id],
+
+    if options[:default]
+      gravatar_url = "https://www.gravatar.com/avatar/1&d=retro&f=y"
+    else
+      gravatar_url = gravatar_src(options)
+    end
+
+    image_tag(gravatar_url, width: options[:size], id: options[:id],
               height: options[:size], alt: display_name, class: options[:class])
   end
 
@@ -51,19 +58,8 @@ class UserPresenter < BasePresenter
     link_to(github_username, user.github_profile_url)
   end
 
-  def user_avatar_with_popover(options={})
-    %Q(
-      <a class="user-popover" 
-        data-html="true" 
-        data-container="body" 
-        data-toggle="popover" 
-        data-placement="#{options[:placement]}" 
-        data-title="#{display_name}" 
-        data-content="Member for: #{object_age_in_words} <br/>User rating: <br/>PP sessions:" 
-        href="#{url_helpers.user_path user}">
-        #{gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle')}
-      </a>
-    ).html_safe
+  def profile_link
+    user.is_a?(NullUser) ? '#' : url_helpers.user_path(user)
   end
 
 end
