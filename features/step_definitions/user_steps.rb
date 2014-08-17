@@ -25,6 +25,34 @@ Given /^I exist as a user$/ do
   create_user
 end
 
+Given /^I exist as a user without any authentication$/ do
+  create_user
+  expect(User.count).to eq 1
+  expect(UserAuthentication.count).to eq 0
+end
+
+Then /^I should have gained a "([^"]*)" authentication$/ do |authentication_name|
+  expect(User.count).to eq 1
+  expect(UserAuthentication.count).to eq 1
+
+  @user ||= User.first
+  authentication = UserAuthentication.first
+
+  expect(@user.authentications.count).to eq 1
+  expect(authentication.user).not_to be_nil
+
+  expect(
+    @user.authentications.first.authentication_provider.name
+  ).to eq authentication_name
+end
+
+Given /^I exist as a user with a "([^"]*)" authentication$/ do |authentication_name|
+  auth_params = OmniAuth.config.mock_auth[authentication_name.to_sym]
+  provider = AuthenticationProvider.find_by_name authentication_name
+
+  UserAuthentication.create_from_omniauth(auth_params, @user, provider)
+end
+
 Given /^I do not exist as a user$/ do
   create_visitor
   delete_user
