@@ -38,15 +38,15 @@ Then /^I should have gained a "([^"]*)" authentication$/ do |authentication_name
   authentication = @user.authentications.last
 
   expect(
-    authentication.authentication_provider.name
+    authentication.try(:authentication_provider).try(:name)
   ).to eq authentication_name
 end
 
 Given /^I exist as a user with a "([^"]*)" authentication$/ do |authentication_name|
   auth_params = OmniAuth.config.mock_auth[authentication_name.to_sym]
-  provider = AuthenticationProvider.find_by_name authentication_name
+  auth_request = OmniAuthRequest.new(auth_params)
 
-  UserAuthentication.create_from_omniauth(auth_params, @user, provider)
+  auth_request.create_authentication(@user)
 end
 
 Given /^I do not exist as a user$/ do

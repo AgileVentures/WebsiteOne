@@ -35,17 +35,6 @@ class User < ActiveRecord::Base
 
   acts_as_follower
 
-
-
-  def self.create_from_omniauth(params)
-    attributes = {
-      email: params['info']['email'],
-      password: Devise.friendly_token
-    }
-
-    create(attributes)
-  end
-
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end

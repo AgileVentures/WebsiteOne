@@ -1,58 +1,60 @@
+require_relative '../services/omniauth_request' #idk why i have to do this!
+
 class UserAuthenticationsController < Devise::OmniauthCallbacksController
-  before_filter :youtube, if: -> { request_is_youtube? }
-  def gplus; create;  end
-  def github; create; end
+  before_filter :parse_request
+
+  def parse_request
+    @auth_request = ::OmniAuthRequest.new(request.env['omniauth.auth'])
+    youtube if @auth_request.is_youtube?
+  end
 
   def youtube
-    token = request.env['omniauth.auth']['credentials']['token']
-    current_user.update(youtube_id: Youtube.channel_id(token)) unless current_user.youtube_id?
+    unless current_user.youtube_id?
+      youtube_id = Youtube.channel_id @auth_request.token
+      current_user.update(youtube_id: youtube_id)
+    end
     redirect_to(request.env['omniauth.origin'] || root_path)
   end
 
+  def gplus  ; create ; end
+  def github ; create ; end
+
   def create
-    auth_params = request.env["omniauth.auth"]
-    provider = AuthenticationProvider.where(name: auth_params['provider']).first
-
-    existing_authentication = provider.user_authentications.where(uid: auth_params["uid"]).first
-    existing_user = current_user || User.where('email = ?', auth_params['info']['email']).first
-
-    if existing_authentication
-      sign_in_with_existing_authentication(existing_authentication.user)
-    elsif existing_user
-      create_authentication_and_sign_in(auth_params, existing_user, provider)
+    if auth = @auth_request.existing_authentication
+      sign_in_with_existing_authentication(auth.user)
+    elsif user = current_user || @auth_request.existing_user
+      create_authentication_and_sign_in(user)
     else
-      create_user_and_authentication_and_sign_in(auth_params, provider)
+      create_user_and_authentication_and_sign_in
     end
   end
 
   def destroy
-    provider = AuthenticationProvider.find_by_name(params[:provider])
-    UserAuthentication.destroy_all(user_id: current_user.id, authentication_provider_id: provider.id)
+    UserAuthentication.destroy_all(
+      user_id: current_user.id,
+      authentication_provider_id: @auth_request.provider.id
+    )
     redirect_to edit_user_registration_path, notice: 'Successfully removed profile.'
   end
 
   private
 
-  def request_is_youtube?
-    request.env['omniauth.params']['youtube']
+  def create_user_and_authentication_and_sign_in
+    user = @auth_request.new_user
+    if user.valid?
+      create_authentication_and_sign_in(user)
+    else
+      redirect_to new_user_registration_url, alert: user.errors.full_messages.first
+    end
+  end
+
+  def create_authentication_and_sign_in(user)
+    @auth_request.create_authentication(user)
+    sign_in_with_existing_authentication(user)
   end
 
   def sign_in_with_existing_authentication(user)
     sign_in(:user, user)
     redirect_to root_path, notice: 'Signed in successfully.'
-  end
-
-  def create_authentication_and_sign_in(auth_params, user, provider)
-    UserAuthentication.create_from_omniauth(auth_params, user, provider)
-    sign_in_with_existing_authentication(user)
-  end
-
-  def create_user_and_authentication_and_sign_in(auth_params, provider)
-    user = User.create_from_omniauth(auth_params)
-    if user.valid?
-      create_authentication_and_sign_in(auth_params, user, provider)
-    else
-      redirect_to new_user_registration_url, alert: user.errors.full_messages.first
-    end
   end
 end
