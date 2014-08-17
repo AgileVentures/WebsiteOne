@@ -62,6 +62,24 @@ Scenario: Sign in with G+: user, authentication
   And I should have gained a "gplus" authentication
 
 @user-does-SSO
+Scenario: Signed in with G+: user, authentication with GitHub
+  Given I exist as a user with a "gplus" authentication
+  And I click "Google+"
+  And I go to the "my account" page
+  And I click "GitHub"
+  Then I should see "Signed in successfully."
+  And I should have gained a "github" authentication
+
+@user-does-SSO
+Scenario: Signed in with GitHub: user, authentication with G+
+  Given I exist as a user with a "github" authentication
+  And I click "GitHub"
+  And I go to the "my account" page
+  And I click "Google+"
+  Then I should see "Signed in successfully."
+  And I should have gained a "gplus" authentication
+
+@user-does-SSO
 Scenario: redirect to the last visited page after login with Google
   Given I exist as a user
   And I am not logged in

@@ -33,16 +33,12 @@ end
 
 Then /^I should have gained a "([^"]*)" authentication$/ do |authentication_name|
   expect(User.count).to eq 1
-  expect(UserAuthentication.count).to eq 1
 
   @user ||= User.first
-  authentication = UserAuthentication.first
-
-  expect(@user.authentications.count).to eq 1
-  expect(authentication.user).not_to be_nil
+  authentication = @user.authentications.last
 
   expect(
-    @user.authentications.first.authentication_provider.name
+    authentication.authentication_provider.name
   ).to eq authentication_name
 end
 
