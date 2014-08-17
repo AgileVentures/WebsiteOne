@@ -4,7 +4,7 @@ class CommitCount < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
 
-  validates :user, :project, presence: true
+  validates :user, :project, :commit_count, presence: true
 
   def self.update_commit_counts_for(project)
     contributors_json = fetch_contributor_data(project)
