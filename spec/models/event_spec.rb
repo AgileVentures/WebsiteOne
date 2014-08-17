@@ -11,10 +11,11 @@ describe Event do
 
   it 'return the latest hangout' do
     event = FactoryGirl.create(:event)
-    Hangout.create(id: 1, event_id: event.id)
-    Hangout.create(id: 2, event_id: event.id)
 
-    expect(event.last_hangout.id).to eq(2)
+    FactoryGirl.create(:hangout, event: event, title: 'first', created: Time.parse('10:00'))
+    FactoryGirl.create(:hangout, event: event, title: 'last', created: Time.parse('15:00'))
+
+    expect(event.last_hangout.title).to eq('last')
   end
 
   context 'return false on invalid inputs' do

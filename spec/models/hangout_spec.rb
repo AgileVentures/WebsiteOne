@@ -51,7 +51,7 @@ describe Hangout, type: :model do
   describe '#update_hangout_data' do
     let(:project){ FactoryGirl.create(:project) }
     let(:event){ FactoryGirl.create(:event) }
-    let(:host){ FactoryGirl.create(:user) }
+    let(:user){ FactoryGirl.create(:user) }
     let(:participant){ FactoryGirl.create(:user, youtube_id: 'yt_id_1') }
 
     let(:params) do
@@ -59,7 +59,7 @@ describe Hangout, type: :model do
         project_id: project.id,
         event_id: event.id,
         category: 'Bacon',
-        host_id: host.id,
+        host_id: user.id,
         participants: [{ name: participant.first_name, gplus_id: participant.youtube_id },
                        { name: 'Greg', gplus_id: 'unregistered_id' }],
         hangout_url: 'http://hangout.test',
@@ -77,7 +77,7 @@ describe Hangout, type: :model do
         expect(hangout.event).to eq(event)
         expect(hangout.category).to eq('Bacon')
 
-        expect(hangout.host).to eq(host)
+        expect(hangout.user).to eq(user)
         expect(hangout.participants).to eq(params[:participants])
 
         expect(hangout.hangout_url).to eq('http://hangout.test')
@@ -102,7 +102,7 @@ describe Hangout, type: :model do
         expect(hangout.event).to be_nil
         expect(hangout.category).to be_nil
 
-        expect(hangout.host).to be_nil
+        expect(hangout.user).to be_nil
         expect(hangout.participants).to be_empty
 
         expect(hangout.hangout_url).to eq('http://hangout.test')

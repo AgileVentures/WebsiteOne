@@ -1,11 +1,9 @@
 class Hangout < ActiveRecord::Base
   belongs_to :event
-  belongs_to :host, class_name: 'User'
+  belongs_to :user
   belongs_to :project
 
   serialize :participants
-
-  default_scope { order('created_at DESC') }
 
   def started?
     hangout_url.present?
@@ -26,13 +24,13 @@ class Hangout < ActiveRecord::Base
   def update_hangout_data(params)
     event = Event.find_by_id(params[:event_id])
     project = Project.find_by_id(params[:project_id])
-    host = User.find_by_id(params[:host_id])
+    user = User.find_by_id(params[:host_id])
 
     update(title: params[:title],
            project: project,
            event: event,
            category: params[:category],
-           host: host,
+           user: user,
            participants: params[:participants],
            hangout_url: params[:hangout_url],
            yt_video_id: params[:yt_video_id])
