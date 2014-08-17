@@ -4,17 +4,19 @@ class CommitCount < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
 
-  def self.update_commit_counts_for(project)
-    contributors_json = fetch_contributor_date(project)
-    contributors_json.each do |contributor|
+  validates :user, :project, presence: true
 
+  def self.update_commit_counts_for(project)
+    contributors_json = fetch_contributor_data(project)
+    contributors_json.map do |contributor|
+      user = User.find_by_github_username(contributor[:author][:login])
+      project.commit_counts.create(user: user, commit_count: contributor[:total]) if user
     end
   end
 
-  private 
+  private
 
-  def self.fetch_contributers(project)
-    repo = /github.com\/(.+)/.match(project.github_url)[0]
-    JSON.parse(open("https://api.github.com/repos/#{repo}/stats/contributors").read, symbolize_names: true)
+  def self.fetch_contributor_data(project)
+    JSON.parse(open("https://api.github.com/repos/#{project.github_repo}/stats/contributors").read, symbolize_names: true)
   end
 end

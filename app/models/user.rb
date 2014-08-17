@@ -74,4 +74,9 @@ class User < ActiveRecord::Base
     where(display_profile: true)
       .order(:created_at)
   end
+
+  def self.find_by_github_username(username)
+    github_url = "https://github.com/#{username}"
+    find_by(github_profile_url: github_url)
+  end
 end
