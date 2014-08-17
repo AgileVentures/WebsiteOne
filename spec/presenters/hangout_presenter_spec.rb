@@ -19,17 +19,17 @@ describe HangoutPresenter do
     end
 
     it 'displays project' do
-      expect(presenter.project).to match %Q(<a href="#{project_path(hangout.project)}")
-      expect(presenter.project).to match "#{hangout.project.title}"
+      expect(presenter.project_link).to match %Q(<a href="#{project_path(hangout.project)}")
+      expect(presenter.project_link).to match "#{hangout.project.title}"
     end
 
     it 'displays event' do
-      expect(presenter.event).to match %Q(<a href="#{event_path(hangout.event)}")
-      expect(presenter.event).to match "#{hangout.event.name}"
+      expect(presenter.event_link).to match %Q(<a href="#{event_path(hangout.event)}")
+      expect(presenter.event_link).to match "#{hangout.event.name}"
     end
 
     it 'returns host' do
-      expect(presenter.host).to eq(hangout.host)
+      expect(presenter.host).to eq(hangout.user)
     end
 
     it 'returns an array of participants' do
@@ -41,7 +41,7 @@ describe HangoutPresenter do
 
     it 'do not show the host in the list of participants' do
       participant = FactoryGirl.create(:user, gplus: hangout.participants.first.last[:person][:id])
-      expect(presenter.participants).not_to include(hangout.host)
+      expect(presenter.participants).not_to include(hangout.user)
     end
 
     it 'returns video url' do
@@ -55,7 +55,7 @@ describe HangoutPresenter do
                          category: nil,
                          project: nil,
                          event: nil,
-                         host: nil,
+                         user: nil,
                          yt_video_id: nil,
                          participants: nil) }
 
@@ -68,11 +68,11 @@ describe HangoutPresenter do
     end
 
     it 'displays project' do
-      expect(presenter.project).to eq('-')
+      expect(presenter.project_link).to eq('-')
     end
 
     it 'displays event' do
-      expect(presenter.event).to eq('-')
+      expect(presenter.event_link).to eq('-')
     end
 
     it 'returns host' do
