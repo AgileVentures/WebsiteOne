@@ -12,27 +12,13 @@ class Event < ActiveRecord::Base
   attr_accessor :next_occurrence_time_attr
 
   @@collection_time_future = 10.days
-  @@collection_time_past = 30.minutes
+  @@collection_time_past = 15.minutes
+  cattr_accessor :collection_time_future
+  cattr_accessor :collection_time_past
 
   RepeatsOptions = %w[never weekly]
   RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
-
-  def self.CollectionTimeFuture=(time_future)
-    @@collection_time_future = time_future
-  end
-
-  def self.CollectionTimeFuture
-    @@collection_time_future
-  end
-
-  def self.CollectionTimePast=(time_past)
-    @@collection_time_past = time_past
-  end
-
-  def self.CollectionTimePast
-    @@collection_time_past
-  end
 
   def self.hookups
     Event.where(category: "PairProgramming")
@@ -73,7 +59,7 @@ class Event < ActiveRecord::Base
   end
 
   def live?
-    last_hangout.present? ? last_hangout.live? : false
+    last_hangout.present? && last_hangout.live?
   end
 
   def final_datetime_for_collection(options = {})
@@ -108,7 +94,8 @@ class Event < ActiveRecord::Base
   end
 
   def next_occurrence_time_method(options = {})
-    !next_occurrences(options).empty? ? next_occurrences(options).first[:time].time : 0
+    next_occurrence_set = next_occurrences(options)
+    !next_occurrence_set.empty? ? next_occurrence_set.first[:time].time : 0
   end
 
   def next_occurrences(options = {})
