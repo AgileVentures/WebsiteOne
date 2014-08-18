@@ -5,7 +5,8 @@
   $('.user-popover').popover({trigger: 'hover'});
 
   $('#btn-hg-toggle').click(function (){
-    $('.live-hangouts .collapse').collapse('toggle');
+    $('.live-hangouts .collapse').slideToggle();
+    WebsiteOne.toggleCaret($('.panel').find('i.fa'));
   });
 
   $('.btn-hg-join, .btn-hg-watch').click(function (){

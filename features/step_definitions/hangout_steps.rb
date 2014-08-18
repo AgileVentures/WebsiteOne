@@ -15,39 +15,39 @@ end
 Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
+
+
+  start_time = hangout['Started at'] ? hangout['Started at'] : Time.now
   event = Event.find_by_name(event_name)
 
-  Hangout.record_timestamps = false
-  Hangout.create(uid: '123456', event_id: event.id.to_s,
+  FactoryGirl.create(:hangout, event: event,
                hangout_url: hangout['Hangout link'],
-               updated_at: hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now)
-  Hangout.record_timestamps = true
+               updated_at: start_time)
 end
 
 Given /^the following hangouts exist:$/ do |table|
   table.hashes.each do |hash|
-    hangout = Hangout.create
-    params = { title: hash['Title'],
-               project_id: Project.find_by_title(hash['Project']).try!(:id),
-               event_id: Event.find_by_name(hash['Event']).try!(:id),
-               category: hash['Category'],
-               host_id: User.find_by_first_name(hash['Host']).try!(:id),
-               hangout_url: hash['Hangout url'],
-               yt_video_id: hash['Youtube video id']
-             }
+    participants = hash['Participants'] || []
+    participants = participants.split(',')
 
-    if participants = hash['Participants']
-      participants = participants.split(',')
-
-      params[:participants] = participants.map do |participant|
-        name = participant.squish
-        user = User.find_by_first_name(name)
-        gplus_id = user.authentications.find_by(provider: 'gplus').try!(:uid) if user.present?
-        [ "0", { :person => { displayName: "#{name}", id: gplus_id } } ]
-      end
+    participants = participants.map do |participant|
+      break if participant.empty?
+      name = participant.squish
+      user = User.find_by_first_name(name)
+      gplus_id = user.authentications.find_by(provider: 'gplus').try!(:uid) if user.present?
+      [ "0", { :person => { displayName: "#{name}", id: gplus_id } } ]
     end
-    hangout.update_hangout_data(params)
-    hangout.update(updated_at: hash['Start time'])
+
+    hangout = FactoryGirl.create(:hangout,
+                 title: hash['Title'],
+                 project: Project.find_by_title(hash['Project']),
+                 event: Event.find_by_name(hash['Event']),
+                 category: hash['Category'],
+                 user: User.find_by_first_name(hash['Host']),
+                 hangout_url: hash['Hangout url'],
+                 participants: participants,
+                 yt_video_id: hash['Youtube video id'],
+                 updated_at: hash['Start time'])
   end
 end
 

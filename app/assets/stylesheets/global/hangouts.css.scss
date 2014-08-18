@@ -182,13 +182,13 @@
   }
 
   .btn-hg-join.disable {
-      background-color: grey;
-      box-shadow: none;
-      cursor: default;
+    background-color: grey;
+    box-shadow: none;
+    cursor: default;
 
     &:hover {}
 
-    }
+  }
 
   .btn-hg-watch {
     @include hg-btn($theme-main);
@@ -208,9 +208,15 @@
     }
 
     .panel-heading.empty {
-        padding-left: 10px;
-      }
+      padding-left: 10px;
+    }
   }
+
+  .panel-heading.hg-headings {
+    color: white;
+    background-color: $theme-dark;
+  }
+
 
   .panel-body {
     border-top: $hg-border;
