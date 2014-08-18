@@ -21,21 +21,6 @@ class Hangout < ActiveRecord::Base
     started? && !live?
   end
 
-  def update_hangout_data(params)
-    event = Event.find_by_id(params[:event_id])
-    project = Project.find_by_id(params[:project_id])
-    user = User.find_by_id(params[:host_id])
-
-    update(title: params[:title],
-           project: project,
-           event: event,
-           category: params[:category],
-           user: user,
-           participants: params[:participants],
-           hangout_url: params[:hangout_url],
-           yt_video_id: params[:yt_video_id])
-  end
-
   def self.active_hangouts
     select(&:live?)
   end
@@ -55,4 +40,5 @@ class Hangout < ActiveRecord::Base
   def start_datetime
     event != nil ? event.start_datetime : created_at
   end
+
 end
