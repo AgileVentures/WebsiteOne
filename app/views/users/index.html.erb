@@ -1,12 +1,11 @@
 <% provide :title, 'Members' %>
-
 <div class="row">
   <div class="col-xs-12">
     <h1>All members</h1>
     <% if @users.empty? %>
       <p>It is a lonely planet we live in&#8230;</p>
     <% else %>
-      <p>Check out our awesome volunteers from all over the globe!</p>
+      <p>Check out our <%= @users.count %> awesome volunteers from all over the globe!</p>
     <% end %>
   </div>
 
