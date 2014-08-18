@@ -186,14 +186,14 @@ describe Event do
       expect(@event.next_occurrence_time_method).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
     end
 
-    it 'includes the event that has been started within the last 30 minutes' do
-      Delorean.time_travel_to(Time.parse('2014-03-07 10:50:00 UTC'))
+    it 'includes the event that has been started within the last 15 minutes' do
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:44:00 UTC'))
       expect(@event.next_occurrence_time_method).to eq(Time.parse('2014-03-07 10:30:00 UTC'))
     end
 
-    it 'does not include the event that has been started within more than 30 minutes ago' do
+    it 'does not include the event that has been started within more than 15 minutes ago' do
       options = {}
-      Delorean.time_travel_to(Time.parse('2014-03-07 11:01:00 UTC'))
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:46:00 UTC'))
       expect(@event.next_occurrence_time_method).to eq(Time.parse('2014-03-08 10:30:00 UTC'))
     end
 
@@ -245,13 +245,14 @@ describe Event do
 
     it 'should return 30 minutes before now if start_time is not specified' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      expect(@event.start_datetime_for_collection.to_datetime.to_s).to eq((Time.now - Event.CollectionTimePast).utc.to_datetime.to_s)
+      expect(@event.start_datetime_for_collection.to_datetime.to_s).to eq((Time.now - Event.collection_time_past).utc.to_datetime.to_s)
     end
 
     it 'should return 60 minutes before now if start_time is not specified and CollectionTimePast=60' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      Event.CollectionTimePast=60
-      expect(@event.start_datetime_for_collection.to_datetime.to_s).to eq((Time.now - Event.CollectionTimePast).utc.to_datetime.to_s)
+      Event.collection_time_past=60.minutes
+      expect(@event.start_datetime_for_collection.to_datetime.to_s).to eq((Time.now - Event.collection_time_past).utc.to_datetime.to_s)
+      Event.collection_time_past=15.minutes
     end
   end
 
@@ -304,49 +305,48 @@ describe Event do
 
     it 'should return 10 days from now if there is no options[end_time]' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      Event.CollectionTimeFuture= 10.days   # 10 days is the default
+      Event.collection_time_future= 10.days # 10 days is the default
       expect(@event.final_datetime_for_collection().to_datetime.to_s).to eq(10.days.from_now.to_datetime.to_s)
     end
 
     it 'should return 3 days from now if there is no options[end_time] and COLLECTION_TIME_FUTURE is 3.days instead of 10.days' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      Event.CollectionTimeFuture= 3.days
+      Event.collection_time_future= 3.days
       expect(@event.final_datetime_for_collection().to_datetime.to_s).to eq(3.days.from_now.to_datetime.to_s)
+      Event.collection_time_future= 10.days # 10 days is the default
     end
   end
 
   describe 'Event.next_event_occurence' do
-    let(:event) do
-      Event.new(
-          name: 'Spec Scrum',
-          start_datetime: '2014-03-07 10:30:00 UTC',
-          category: 'Scrum',
-          duration: 30,
-          repeats: 'never',
-          repeat_ends: true,
-          repeat_ends_on: '')
-    end
-
-    before(:each) do
-      Event.stub(:exists?).and_return true
-      Event.stub(:where).and_return [ event ]
-    end
+    @event = FactoryGirl.build(Event,
+                               name: 'Spec Scrum one-time',
+                               start_datetime: '2014-03-07 10:30:00 UTC',
+                               duration: 30,
+                               repeats: 'never'
+    )
 
     it 'should return the next event occurence' do
       Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
-      expect(Event.next_event_occurrence).to eq event
+      expect(Event.next_event_occurrence).to eq @event
     end
 
-    it 'should have a 30 minute buffer' do
-      Event.CollectionTimePast=30.minutes   #30 minutes is the default
-      Delorean.time_travel_to(Time.parse('2014-03-07 10:59:59 UTC'))
-      expect(Event.next_event_occurrence).to eq event
+    it 'should return events that were schedule 15 minutes earlier or less' do
+      Event.collection_time_past=15.minutes #15 minutes is the default
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:44:59 UTC'))
+      expect(Event.next_event_occurrence).to eq @event
     end
 
-    it 'should not return events that were scheduled to start more than 30 minutes ago' do
-      Event.CollectionTimePast=30.minutes   #30 minutes is the default
-      Delorean.time_travel_to(Time.parse('2014-03-07 11:01:00 UTC'))
+    it 'should not return events that were scheduled to start more than 15 minutes ago' do
+      Event.collection_time_past=15.minutes #15 minutes is the default
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:45:01 UTC'))
       expect(Event.next_event_occurrence).to be_nil
+    end
+
+    it 'should return events that were schedule 30 minutes earlier or less if we change collection_time_past to 30.minutes' do
+      Event.collection_time_past=30.minutes #15 minutes is the default
+      Delorean.time_travel_to(Time.parse('2014-03-07 10:59:59 UTC'))
+      expect(Event.next_event_occurrence).to eq @event
+      Event.collection_time_past=15.minutes #15 minutes is the default
     end
   end
 end
