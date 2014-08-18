@@ -9,6 +9,7 @@ FactoryGirl.define do
       updated Time.now
     end
 
+    sequence(:uid) { |n| "uid_#{n}"}
     sequence(:title) { |n| "Hangout_#{n}"}
     sequence(:category) { |n| "Category_#{n}"}
     hangout_url "http://hangout.test"

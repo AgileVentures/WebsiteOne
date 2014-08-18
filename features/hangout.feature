@@ -31,7 +31,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the Hangout for event "Scrum" has been started with details:
       | Hangout link | http://hangout.test |
       | Started at   | 10:25:00            |
-    And the time now is "10:29:00"
+    And the time now is "10:29:00 UTC"
     When I am on the show page for event "Scrum"
     Then I should see Hangouts details section
     And I should see:
@@ -133,7 +133,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I should see link "Join" with "http://hangout.session"
     And I should see link "Watch" with "http://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
 
-    @wip
   Scenario: Display live sessions - extra info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
@@ -155,5 +154,3 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I should see:
         | Retrospective |
         | ClientMeeting |
-
-#TODO links, toggles, popovers, slides, caret

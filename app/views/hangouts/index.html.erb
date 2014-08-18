@@ -3,12 +3,12 @@
   <div class='container-fluid'>
     <div class='row hg-toggles'>
         <button id="btn-hg-toggle" type="button" class="btn-hg-toggle">toggle summary</button>
-        <%= link_to 'show all/live', params[:live] ? hangouts_path : hangouts_path(live: true), class: 'btn-hg-live' %>
+        <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn-hg-live' %>
     </div>
   </div>
   <div class="panel-group" id="accordion">
     <div class="panel panel-info hidden-xs">
-      <div class="panel-heading">
+      <div class="panel-heading hg-headings">
         <%= render partial: 'index_header' %>
       </div>
     </div>
