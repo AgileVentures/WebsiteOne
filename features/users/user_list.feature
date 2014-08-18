@@ -22,4 +22,5 @@ Feature: As a site owner
       | Croutch     |
       | Dave        |
     And I should see "5" user avatars within the main content
+    And I should see "Check out our 5 awesome volunteers from all over the globe!"
 
