@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "users/index.html.erb", :type => :view do
+  
   before(:each) do
     @users = FactoryGirl.build_list(:user, 4)
   end
