@@ -9,11 +9,30 @@ class Event < ActiveRecord::Base
   validates :url, uri: true, :allow_blank => true
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
-  attr_accessor :next_occurrence_time
+  attr_accessor :next_occurrence_time_attr
+
+  @@collection_time_future = 10.days
+  @@collection_time_past = 30.minutes
 
   RepeatsOptions = %w[never weekly]
   RepeatEndsOptions = %w[never on]
   DaysOfTheWeek = %w[monday tuesday wednesday thursday friday saturday sunday]
+
+  def self.CollectionTimeFuture=(time_future)
+    @@collection_time_future = time_future
+  end
+
+  def self.CollectionTimeFuture
+    @@collection_time_future
+  end
+
+  def self.CollectionTimePast=(time_past)
+    @@collection_time_past = time_past
+  end
+
+  def self.CollectionTimePast
+    @@collection_time_past
+  end
 
   def self.hookups
     Event.where(category: "PairProgramming")
@@ -54,26 +73,27 @@ class Event < ActiveRecord::Base
   end
 
   def live?
-    last_hangout.try!(:live?)
+    last_hangout.present? ? last_hangout.live? : false
   end
 
-  # final_datetime_in_collection returns the final datetime for a recurring or one-time event.
-  # If it's a repeating event with an end datetime (repeating_and_ends), then it will be the earliest of repeat_ends_on and the params endtime and the time_in_future from the start_time
-  # Otherwise, it's the earliest of the params endtime and the time_in_future from the start_time.
-  def final_datetime_in_collection(options = {})
-    start_datetime_for_calculation = options.fetch(:start_time, Time.now)
-    time_in_future = options.fetch(:time_in_future, 10.days)
-    end_datetime = options.fetch(:end_time, start_datetime_for_calculation + time_in_future)
-    final_datetime = [end_datetime, start_datetime_for_calculation + time_in_future].min
+  def final_datetime_for_collection(options = {})
+    final_datetime = options.fetch(:end_time, @@collection_time_future.from_now)
     final_datetime = [final_datetime, repeat_ends_on.to_datetime].min if repeating_and_ends
     final_datetime.to_datetime.utc
+  end
+
+  def start_datetime_for_collection(options = {})
+    first_datetime = options.fetch(:start_time, @@collection_time_past.ago)
+    first_datetime = [start_datetime, first_datetime.to_datetime].max
+    first_datetime.to_datetime.utc
   end
 
   def self.next_event_occurrence
     if Event.exists?
       @events = []
       Event.where(['category = ?', 'Scrum']).each do |event|
-        next_occurences = event.next_occurrences(start_time: 15.minutes.ago,
+        next_occurences = event.next_occurrences(start_time: @@collection_time_past.ago,
+                                                 end_time: @@collection_time_future.from_now,
                                                  limit: 1)
         @events << next_occurences.first unless next_occurences.empty?
       end
@@ -81,19 +101,23 @@ class Event < ActiveRecord::Base
       return nil if @events.empty?
 
       @events = @events.sort_by { |e| e[:time] }
-      @events[0][:event].next_occurrence_time = @events[0][:time]
+      @events[0][:event].next_occurrence_time_attr = @events[0][:time]
       return @events[0][:event]
     end
     nil
   end
 
+  def next_occurrence_time_method(options = {})
+    !next_occurrences(options).empty? ? next_occurrences(options).first[:time].time : 0
+  end
+
   def next_occurrences(options = {})
-    start_datetime = options.fetch(:start_time, 30.minutes.ago)
-    final_datetime = final_datetime_in_collection(options)
+    begin_datetime = start_datetime_for_collection(options)
+    final_datetime = final_datetime_for_collection(options)
     limit = (options[:limit] or 100)
 
     [].tap do |occurences|
-      occurrences_between(start_datetime, final_datetime).each do |time|
+      occurrences_between(begin_datetime, final_datetime).each do |time|
         occurences << { event: self, time: time }
 
         return occurences if occurences.count >= limit
