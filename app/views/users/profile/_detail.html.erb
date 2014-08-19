@@ -21,6 +21,17 @@
   </section>
 <% end %>
 
+<% if presenter.contributed? %>
+  <section class="user-contributions">
+    <h4>Contributions</h4>
+    <ul>
+      <% presenter.contributions.each do |commit_count| %>
+        <li><b><%= commit_count.project.title %></b> - <%= commit_count.commit_count %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
 <% if presenter.bio? %>
   <section class="user-bio">
     <h4>About me</h4>
