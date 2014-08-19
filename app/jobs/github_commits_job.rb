@@ -13,7 +13,7 @@ module GithubCommitsJob
     contributors = Octokit.contributor_stats(project.github_repo)
     contributors.map do |contributor|
       user = User.find_by_github_username(contributor.author.login)
-      commit_count = CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
+      CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total) if user
     end
   end
 end
