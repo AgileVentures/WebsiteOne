@@ -8,7 +8,7 @@ end
 describe 'visitors/index.html.erb', type: :view do
   before :each do
     @event = FactoryGirl.build_stubbed(:event, name: 'Spec Scrum', start_datetime: '2014-03-07 10:30:00',
-                                        next_occurrence_time: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
+                                        next_occurrence_time_attr: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
   end
 
   context 'event is planned for next day' do
