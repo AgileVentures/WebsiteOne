@@ -18,9 +18,11 @@ describe "users/show.html.erb" do
                               github_profile_url: 'http://github.com/Eric',
                               skill_list: [ 'Shooting', 'Hooting' ],
                               bio: 'Lonesome Cowboy')
+    @commit_counts = [build_stubbed(:commit_count, project: @projects.first, commit_count: 253)]
 
     allow(@user).to receive(:following_projects).and_return(@projects)
     allow(@user).to receive(:following_projects_count).and_return(2)
+    allow(@user).to receive(:commit_counts).and_return(@commit_counts)
 
     assign :user, @user
     @youtube_videos = [
@@ -172,6 +174,11 @@ describe "users/show.html.erb" do
       render
       expect(rendered).to_not have_xpath("//a[contains(@type, 'button')]")
     end
+  end
+
+  it 'renders a list of contributions made by user' do
+    render
+    expect(rendered).to have_text('Title 1 - 253')
   end
 
   it 'renders list of followed projects' do
