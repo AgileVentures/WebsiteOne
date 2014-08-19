@@ -18,4 +18,9 @@ describe CommitCount, type: :model do
   it 'should be invalid without commit_count' do
     expect(build_stubbed(:commit_count, commit_count: nil)).to_not be_valid
   end
+
+  it 'should be invalid with duplicate record (same user and same project)' do
+    commit_count = FactoryGirl.create(:commit_count)
+    expect(build(:commit_count, user: commit_count.user,  project: commit_count.project)).to_not be_valid
+  end
 end
