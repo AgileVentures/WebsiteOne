@@ -1,6 +1,9 @@
 class Hangout < ActiveRecord::Base
   belongs_to :event
-  default_scope { order('created_at') }
+  belongs_to :user
+  belongs_to :project
+
+  serialize :participants
 
   def started?
     hangout_url.present?
@@ -16,11 +19,6 @@ class Hangout < ActiveRecord::Base
 
   def expired?
     started? && !live?
-  end
-
-  def update_hangout_data(params)
-    event = Event.find_by_id(params[:event_id])
-    update(title: params[:topic], event: event, category: params[:category], hangout_url: params[:hangout_url], updated_at: Time.now)
   end
 
   def self.active_hangouts
@@ -42,4 +40,5 @@ class Hangout < ActiveRecord::Base
   def start_datetime
     event != nil ? event.start_datetime : created_at
   end
+
 end

@@ -1,21 +1,21 @@
 WebsiteOne.define('AccordionCollapse', function() {
 
-  var collapsedClass = 'fa-caret-down',
-      expandedClass = 'fa-caret-right';
+  WebsiteOne.toggleCaret = function(child) {
+    var collapsedClass = 'fa-caret-down';
+    var expandedClass = 'fa-caret-right';
+
+    if (child.hasClass(collapsedClass)) {
+      child.removeClass(collapsedClass); child.addClass(expandedClass);
+    } else if (child.hasClass(expandedClass)) {
+      child.removeClass(expandedClass); child.addClass(collapsedClass);
+    }
+  };
 
   return {
     init: function() {
-      // a hack to follow collapse animation, ideally should find the right animation callbacks
       $('.collapse-button').on('click', function() {
-        // TODO Bryan: This does not work properly if the user clicks too fast
-        var child = $(this).find('>:first-child');
-        if (child.hasClass(collapsedClass)) {
-          child.removeClass(collapsedClass);
-          child.addClass(expandedClass);
-        } else if (child.hasClass(expandedClass)) {
-          child.removeClass(expandedClass);
-          child.addClass(collapsedClass);
-        }
+        var child = $(this).find('i.fa');
+        WebsiteOne.toggleCaret(child);
       });
     }
   }

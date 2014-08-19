@@ -15,13 +15,40 @@ end
 Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
+
+
+  start_time = hangout['Started at'] ? hangout['Started at'] : Time.now
   event = Event.find_by_name(event_name)
 
-  Hangout.record_timestamps = false
-  Hangout.create(uid: '123456', event_id: event.id.to_s,
+  FactoryGirl.create(:hangout, event: event,
                hangout_url: hangout['Hangout link'],
-               updated_at: hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now)
-  Hangout.record_timestamps = true
+               updated_at: start_time)
+end
+
+Given /^the following hangouts exist:$/ do |table|
+  table.hashes.each do |hash|
+    participants = hash['Participants'] || []
+    participants = participants.split(',')
+
+    participants = participants.map do |participant|
+      break if participant.empty?
+      name = participant.squish
+      user = User.find_by_first_name(name)
+      gplus_id = user.authentications.find_by(provider: 'gplus').try!(:uid) if user.present?
+      [ "0", { :person => { displayName: "#{name}", id: gplus_id } } ]
+    end
+
+    hangout = FactoryGirl.create(:hangout,
+                 title: hash['Title'],
+                 project: Project.find_by_title(hash['Project']),
+                 event: Event.find_by_name(hash['Event']),
+                 category: hash['Category'],
+                 user: User.find_by_first_name(hash['Host']),
+                 hangout_url: hash['Hangout url'],
+                 participants: participants,
+                 yt_video_id: hash['Youtube video id'],
+                 updated_at: hash['Start time'])
+  end
 end
 
 Then /^I should( not)? see Hangouts details section$/ do |negative|

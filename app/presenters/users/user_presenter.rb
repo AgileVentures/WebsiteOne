@@ -1,8 +1,7 @@
 require_relative '../base_presenter'
 
 class UserPresenter < BasePresenter
-
-  alias_method :user, :object
+  presents :user
 
   def display_name
     user.display_name
@@ -36,7 +35,14 @@ class UserPresenter < BasePresenter
 
   def gravatar_image(options={})
     options = { size: 80 }.merge(options)
-    image_tag(gravatar_src(options), width: options[:size], id: options[:id],
+
+    if options[:default]
+      gravatar_url = "https://www.gravatar.com/avatar/1&d=retro&f=y"
+    else
+      gravatar_url = gravatar_src(options)
+    end
+
+    image_tag(gravatar_url, width: options[:size], id: options[:id],
               height: options[:size], alt: display_name, class: options[:class])
   end
 
@@ -51,4 +57,9 @@ class UserPresenter < BasePresenter
   def github_link
     link_to(github_username, user.github_profile_url)
   end
+
+  def profile_link
+    user.is_a?(NullUser) ? '#' : url_helpers.user_path(user)
+  end
+
 end
