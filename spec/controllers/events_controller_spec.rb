@@ -27,8 +27,7 @@ describe EventsController do
     end
 
     it 'assigns a hangout' do
-      hangout = FactoryGirl.create(:hangout, event_id: event.id)
-
+      hangout = FactoryGirl.create(:hangout, event: event)
       get :show, {:id => event.to_param}, valid_session
       expect(assigns(:hangout)).to eq(hangout)
     end

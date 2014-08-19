@@ -1,6 +1,6 @@
 describe('AccordionCollapse module', function() {
   beforeEach(function() {
-    setFixtures('<a class="collapse-button"><i class="fa-caret-down"></i></a>');
+    setFixtures('<a class="collapse-button"><i class="fa fa-caret-down"></i></a>');
 
     reloadScript('accordion_collapse.js');
 

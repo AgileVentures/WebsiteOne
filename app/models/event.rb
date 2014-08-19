@@ -49,10 +49,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def last_hangout
-    hangouts.last
-  end
-
   def live?
     last_hangout.try!(:live?)
   end
@@ -144,6 +140,11 @@ class Event < ActiveRecord::Base
 
   def end_time= (t)
     raise "old schema error"
+  end
+
+
+  def last_hangout
+    hangouts.order(:created_at).last
   end
 
   private

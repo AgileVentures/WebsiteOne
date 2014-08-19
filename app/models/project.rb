@@ -7,9 +7,12 @@ class Project < ActiveRecord::Base
   validates :title, :description, :status, presence: true
   validates_with UrlValidator
   validates :github_url, uri: true, :allow_blank => true
+
   acts_as_followable
+
   belongs_to :user
   has_many :documents
+  has_many :hangouts
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
