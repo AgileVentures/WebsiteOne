@@ -5,6 +5,7 @@ describe Event, :type => :model do
 
   it { is_expected.to respond_to :friendly_id }
   it { is_expected.to respond_to :schedule }
+  it { is_expected.to respond_to :live? }
 
   it 'is valid with all the correct parameters' do
     expect(subject).to be_valid
