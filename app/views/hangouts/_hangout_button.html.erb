@@ -1,11 +1,15 @@
+<% start_data = JSON.generate({
+    'title' => title,
+    'category' => category,
+    'projectId' => project_id.to_s,
+    'eventId' => event_id.to_s,
+    'hostId' => current_user.id,
+    'hangoutId' => hangout_id.present? ? hangout_id : generate_hangout_id(current_user, project_id),
+    'callbackUrl' => hangout_url('id').gsub(/id$/, '')
+  }) %>
+
 <div id="liveHOA-placeholder"
-  data-title='<%= title %>'
-  data-project-id='<%= project_id.to_s %>'
-  data-event-id='<%= event_id.to_s %>'
-  data-category='<%= category %>'
-  data-hangout-id='<%= hangout_id.present? ? hangout_id : generate_hangout_id(current_user, project_id) %>'
-  data-host-id='<%= current_user.id %>'
-  data-app-id='<%= Settings.hangouts.app_id %>'
-  data-callback-url='<%= hangout_url('id').gsub(/id$/, '') %>'>
+  data-start-data='<%= start_data %>'
+  data-app-id='<%= Settings.hangouts.app_id %>'>
   Please refresh the page to load the hangouts
 </div>
