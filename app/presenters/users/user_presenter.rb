@@ -12,7 +12,7 @@ class UserPresenter < BasePresenter
   end
 
   def joined_projects?
-    !user.projects_joined.blank?
+    user.following_projects_count > 0
   end
 
   def title_list

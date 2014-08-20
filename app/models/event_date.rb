@@ -1,8 +1,8 @@
-class EventDate 
-  def self.for(event_date) 
+class EventDate
+  def self.for(event_date)
     if event_date.blank?
       Date.today
-    else 
+    else
       event_date
     end
   end
