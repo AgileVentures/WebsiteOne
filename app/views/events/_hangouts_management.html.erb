@@ -1,4 +1,5 @@
 <% hangout_is_live = @hangout.try!(:live?) %>
+<%  if user_signed_in?  %>
   <div class="hangouts-management">
     <div class="restart-panel<%= ' in' if hangout_is_live %>">
       <div class="panel-heading">
@@ -70,6 +71,7 @@
 
     </div>
   </div>
+<% end %>
 
 <% if hangout_is_live %>
   <div class="hangouts-details-well">
