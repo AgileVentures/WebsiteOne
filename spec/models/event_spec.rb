@@ -1,40 +1,38 @@
 require 'spec_helper'
 
-describe Event do
-  it 'should respond to friendly_id' do
-    expect(Event.new).to respond_to(:friendly_id)
+describe Event, :type => :model do
+  subject { build_stubbed :event }
+
+  it { is_expected.to respond_to :friendly_id }
+  it { is_expected.to respond_to :schedule }
+  it { is_expected.to respond_to :live? }
+
+  it 'is valid with all the correct parameters' do
+    expect(subject).to be_valid
   end
 
-  it 'should respond to "schedule" method' do
-    Event.respond_to?('schedule')
+  it 'is invalid without name' do
+    expect(FactoryGirl.build(:event, name: nil)).to_not be_valid
   end
 
-  it 'return the latest hangout' do
-    event = FactoryGirl.create(:event)
-
-    FactoryGirl.create(:hangout, event: event, title: 'first', created: Time.parse('10:00'))
-    FactoryGirl.create(:hangout, event: event, title: 'last', created: Time.parse('15:00'))
-
-    expect(event.last_hangout.title).to eq('last')
+  it 'is invalid without category' do
+    expect(FactoryGirl.build(:event, category: nil)).to_not be_valid
   end
 
-  context 'return false on invalid inputs' do
-    before do
-      @event = FactoryGirl.create(:event)
-    end
-    it 'nil :name' do
-      @event.name = ''
-      expect(@event.save).to be_falsey
-    end
+  it 'is invalid without repeats' do
+    expect(FactoryGirl.build(:event, repeats: nil)).to_not be_valid
+  end
 
-    it 'nil :category' do
-      @event.category = nil
-      expect(@event.save).to be_falsey
-    end
+  it 'is invalid with invalid url' do
+    expect(FactoryGirl.build(:event, url: 'http:google.com')).to_not be_valid
+  end
 
-    it 'nil :repeats' do
-      @event.repeats = nil
-      expect(@event.save).to be_falsey
+  describe '#last_hangout' do
+    it 'returns the latest hangout' do
+      hangout1 = subject.hangouts.create
+      hangout2 = subject.hangouts.create(created_at: Date.yesterday, updated_at: Date.yesterday)
+
+      expect(subject.last_hangout).to eq(hangout1)
     end
   end
 
@@ -101,11 +99,6 @@ describe Event do
                                         time_zone: 'UTC')
       expect(event.schedule.first(5)).to eq(['Mon, 17 Jun 2013 09:00:00 GMT +00:00', 'Mon, 24 Jun 2013 09:00:00 GMT +00:00', 'Mon, 01 Jul 2013 09:00:00 GMT +00:00', 'Mon, 08 Jul 2013 09:00:00 GMT +00:00', 'Mon, 15 Jul 2013 09:00:00 GMT +00:00'])
     end
-
-    it 'handles live? requests' do
-      @event = FactoryGirl.build_stubbed(Event)
-      expect(@event).to respond_to(:live?)
-    end
   end
 
   context 'should create a hookup event that' do
@@ -124,14 +117,14 @@ describe Event do
                                        updated_at: '2014-06-17 10:25:00 UTC')
       allow(hangout).to receive(:started?).and_return(true)
       Delorean.time_travel_to(Time.parse('2014-06-17 10:31:00 UTC'))
-      expect(@event.live?).to be_falsey
+      expect(@event).to_not be_live
     end
 
     it 'should mark as active events which have started and have not ended' do
       hangout = @event.hangouts.create(hangout_url: 'anything@anything.com',
                                        updated_at: '2014-06-17 10:25:00 UTC')
       Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
-      expect(@event.live?).to be_truthy
+      expect(@event).to be_live
     end
 
     it 'should not be started if events have not started' do
@@ -167,7 +160,7 @@ describe Event do
     end
   end
 
-  describe 'Event#next_occurences' do
+  describe '#next_occurences' do
     before do
       @event = FactoryGirl.build_stubbed(Event,
                                          name: 'Spec Scrum',
