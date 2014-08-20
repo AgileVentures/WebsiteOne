@@ -1,3 +1,4 @@
+<% hangout_is_live = @hangout.try!(:live?) %>
 <div class="col-lg-8 col-lg-offset-2">
 
   <div class="event-details">
@@ -9,7 +10,7 @@
       <small class="event-schedule"><%= @event.schedule %></small>
     </div>
     <div class="col-lg-4">
-      <% if @hangout.try!(:live?) %>
+      <% if hangout_is_live %>
         <a href="<%= @hangout.hangout_url %>" class="event-live-link">EVENT IS LIVE !<br/>CLICK TO JOIN</a>
       <% else  %>
         <a href="#" class="event-live-link disabled">LIVE SOON ...</a>
