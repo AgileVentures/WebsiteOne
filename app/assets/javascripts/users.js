@@ -39,6 +39,29 @@ WebsiteOne.define('Users', function() {
     $('#edit_user').submit(function (event) {
         $("#user_skill_list").val($("#skills").tags().getTags().join(","));
     });
+
+    $('#users_filter_submit').on('click', function(e){
+      e.preventDefault();
+      var users_list = $('#users_list li');
+      var search_string = $('#users_filter').val();
+      if (search_string != '') {
+        filter_trough_users(users_list, search_string);
+      } else {
+        users_list.each(function(){
+          $(this).show();
+        });
+      }
+    });
+  }
+
+  function filter_trough_users(users, keyword){ 
+    users.each(function(){
+      if (!$(this).find('p').text().match(keyword)) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+    });
   }
 
   return {

@@ -1,9 +1,15 @@
 require 'spec_helper'
 
 describe "users/index.html.erb", :type => :view do
-  
   before(:each) do
     @users = FactoryGirl.build_list(:user, 4)
+  end
+
+  it 'should display user filter form' do
+    render
+    expect(rendered).to have_content('Filter users')
+    expect(rendered).to have_css("#users_filter")
+    expect(rendered).to have_selector('input', value: 'Submit')
   end
 
   it 'should display a list of users' do

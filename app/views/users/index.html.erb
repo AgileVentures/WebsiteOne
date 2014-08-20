@@ -10,7 +10,14 @@
   </div>
 
   <% unless @users.empty? %>
-    <ul class="media-list row">
+    <div class="col-xs-12">
+      <form action="/users/filter" method="get" id="users_filter_form">
+        <p>Filter users</p>
+        <input type="text" id="users_filter" name="users_filter"/>
+        <input type="submit" value="Submit" id="users_filter_submit" />
+      </form>
+    </div>
+    <ul class="media-list row" id="users_list">
       <% @users.each_slice(3) do |slice| %>
         <% slice.each do |user| %>
           <% present user do |presenter| %>
