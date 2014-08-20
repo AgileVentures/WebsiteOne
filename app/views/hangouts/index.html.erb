@@ -12,7 +12,7 @@
         <%= render 'index_header' %>
       </div>
     </div>
-    <% if @hangouts.empty?  %>
+    <% if @hangouts.empty? %>
       <div class="panel panel-default">
         <div class="panel-heading empty">
           We are sorry, but it seems that there are no live sessions at this moment.<br>
@@ -20,20 +20,9 @@
         </div>
       </div>
     <% else  %>
-      <% @hangouts.each_with_index do |hangout, index| %>
-        <% present hangout do |hangout_presenter| %>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <%= render partial: 'index_basic_info', locals: { hangout: hangout_presenter, index: index}  %>
-            </div>
-            <div id="<%= "collapse#{index}" %>" class="panel-collapse collapse">
-              <div class="panel-body">
-                <%= render partial: 'index_extra_info', locals: { hangout: hangout_presenter }  %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+      <div id='hg-container'>
+        <%= render 'hangouts' %>
+      </div>
     <% end %>
   </div>
 </section>

@@ -17,6 +17,7 @@ class HangoutsController < ApplicationController
 
   def index
     @hangouts = (params[:live] == 'true') ? Hangout.live : Hangout.latest
+    render partial: 'hangouts' and return if request.xhr?
   end
 
   private
