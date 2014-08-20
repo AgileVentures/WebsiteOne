@@ -1,4 +1,3 @@
-<% hangout_is_live = @hangout.try!(:live?) %>
 <div class="col-lg-8 col-lg-offset-2">
   <div class="event-details">
     <h2><%= @event.name %></h2>
@@ -9,7 +8,7 @@
         <small class="event-schedule"><%= @event.schedule %></small>
       </div>
       <div class="col-lg-4">
-        <% if hangout_is_live %>
+        <% if @hangout.try!(:live?) %>
           <a href="<%= @hangout.hangout_url %>" class="event-live-link">EVENT IS LIVE !<br/>CLICK TO JOIN</a>
         <% else  %>
           <a href="#" class="event-live-link disabled">LIVE SOON ...</a>
@@ -49,7 +48,7 @@
   <% end %>
 
   <div id="hg-management" class="hangouts-management-well">
-    <%= render partial: 'hangouts_management', locals: { hangout_is_live: hangout_is_live } if user_signed_in? %>
+    <%= render partial: 'hangouts_management' %>
   </div>
 </div>
 <%=javascript_include_tag 'events.js' %>
