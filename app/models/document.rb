@@ -1,5 +1,6 @@
 class Document < ActiveRecord::Base
   include ActAsPage
+  include UserNullable
 
   belongs_to :project
   belongs_to :user
