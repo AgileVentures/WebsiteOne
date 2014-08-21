@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Authentication do
+describe Authentication, :type => :model do
   before do
     @user = FactoryGirl.create(:user)
     @auth = @user.authentications.create!(provider: 'github', uid: '12345')
@@ -14,16 +14,16 @@ describe Authentication do
 
   it 'must have an associated provider' do
     @auth.provider = nil
-    expect(@auth.save).to be_false
+    expect(@auth).to_not be_valid
   end
 
   it 'must have an associated UID' do
     @auth.uid = nil
-    expect(@auth.save).to be_false
+    expect(@auth).to_not be_valid
   end
 
   it 'must have a unique user-provider combination' do
     auth = @user.authentications.build(provider: 'github', uid: '098766')
-    expect(auth.save).to be_false
+    expect(auth).to_not be_valid
   end
 end

@@ -40,6 +40,7 @@ gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
+gem 'youtube_it' # ruby wrapper for youtube API
 gem 'acts_as_votable', '~> 0.10.0' #Allows WSO to track member's votes on votable objects (articles, comments, ...)
 gem 'utf8-cleaner'
 
@@ -47,6 +48,7 @@ gem 'yui-compressor'
 gem 'compass-rails'
 gem 'rack-cache'
 gem 'sprockets-image_compressor'
+gem 'local_time'
 
 gem 'rails_config' # a gem to manage configuration files
 gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
@@ -63,6 +65,7 @@ group :test do
   gem 'zeus' # rails preloading environment
   gem 'webmock' # mocking external net connections
   gem 'delorean' # mocking Time in tests, aka time travelling
+  gem 'vcr' # records and plays http interactions for testing
 end
 
 group :development, :test do
@@ -87,3 +90,4 @@ group :production do
   gem 'rails_12factor'
   gem 'unicorn'
 end
+

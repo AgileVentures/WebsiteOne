@@ -1,0 +1,12 @@
+<% present user do |user_presenter| %>
+  <a class="user-popover" 
+     data-html="true" 
+     data-container="body" 
+     data-toggle="popover" 
+     data-placement="<%= placement %>" 
+     data-title="<%= user_presenter.display_name %>" 
+     data-content="Member for: <%= user_presenter.object_age_in_words %><br/>User rating: <br/>PP sessions:" 
+     href="<%= user_presenter.profile_link %>">
+     <%= user_presenter.gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle') %>
+  </a>
+<% end %>
