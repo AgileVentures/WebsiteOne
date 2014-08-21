@@ -5,7 +5,7 @@ Feature: As a site user
   Background:
     Given I am on the "home" page
     And the following users exist
-      | first_name | last_name | email                  | skills             |
+      | first_name | last_name | email                  | skill_list         |
       | Alice      | Jones     | alicejones@hotmail.com | ruby, rails, rspec |
       | Bob        | Butcher   | bobb112@hotmail.com    | ruby, c++          |
     And I am logged in as user with email "brett@example.com", with password "12345678"

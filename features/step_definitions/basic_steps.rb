@@ -28,6 +28,10 @@ def path_to(page_name, id = '')
       user_path(id)
     when 'my account' then
       edit_user_registration_path(id)
+    when 'scrums' then
+      scrums_index_path
+    when 'hangouts' then
+      hangouts_path
     when 'foobar' then
       "/#{page}"
     when 'password reset' then
