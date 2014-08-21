@@ -40,7 +40,7 @@ WebsiteOne.define('Users', function() {
         $("#user_skill_list").val($("#skills").tags().getTags().join(","));
     });
 
-    $('#users_filter_submit').on('click', function(e){
+    $('#users_filter_form').on('submit', function(e){
       e.preventDefault();
       var users_list = $('#users_list li');
       var search_string = $('#users_filter').val();
