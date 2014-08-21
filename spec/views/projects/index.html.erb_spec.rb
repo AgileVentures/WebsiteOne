@@ -8,6 +8,7 @@ describe 'projects/index.html.erb', type: :view do
   before do
     allow(projects_collection).to receive(:total_pages).and_return(2)
     allow(projects_collection).to receive(:current_page).and_return(1)
+
     assign(:projects, projects_collection)
     assign(:user, user)
   end

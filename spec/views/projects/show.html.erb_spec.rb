@@ -5,7 +5,7 @@ describe 'projects/show.html.erb', type: :view do
   let(:user) { FactoryGirl.build_stubbed(:user) }
   let(:document) { FactoryGirl.build_stubbed(:document, user: user) }
   let(:documents) { [document] }
-  let(:project) { FactoryGirl.build_stubbed(:project, user: user, user_id: user.id) }
+  let(:project) { FactoryGirl.build_stubbed(:project, user: user) }
   let(:created_by) { ['by:', ([user.first_name, user.last_name].join(' '))].join(' ') }
   let(:videos) do
     [
@@ -174,8 +174,8 @@ describe 'projects/show.html.erb', type: :view do
       end
 
       it_behaves_like 'it has a hangout button' do
-        let(:title){"PairProgramming on #{@project.title}"}
-        let(:project_id){@project.id}
+        let(:title){"PairProgramming on #{project.title}"}
+        let(:project_id){project.id}
         let(:event_id){''}
         let(:category){'PairProgramming'}
         let(:hangout_id){''}
