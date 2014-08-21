@@ -13,7 +13,7 @@ describe StaticPagesController, :type => :controller do
   let(:valid_session) { {} }
 
   before(:each) do
-    request.env['warden'].stub :authenticate! => user
+    allow(request.env['warden']).to receive(:authenticate!).and_return(user)
     allow(controller).to receive(:current_user) { user }
   end
 
