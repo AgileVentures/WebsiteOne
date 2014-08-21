@@ -40,10 +40,12 @@ WebsiteOne.define('Users', function() {
         $("#user_skill_list").val($("#skills").tags().getTags().join(","));
     });
 
-    $('#users_filter_form').on('submit', function(e){
+    $('#UsersFilterForm').on('submit', function(e){
       e.preventDefault();
-      var users_list = $('#users_list li');
-      var search_string = $('#users_filter').val();
+      var users_list = $('#UsersList li');
+      var search_string = $('#UsersFilter').val();
+      console.log(users_list);
+      console.log(search_string);
       if (search_string != '') {
         filter_trough_users(users_list, search_string);
       } else {
