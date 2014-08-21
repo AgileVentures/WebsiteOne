@@ -3,11 +3,7 @@ require 'spec_helper'
 describe 'projects/index.html.erb', type: :view do
   
   let(:user) { FactoryGirl.build_stubbed(:user) }
-  let(:projects_collection) do 
-    (1..9).map do |id| 
-      FactoryGirl.build_stubbed(:project, user: user)
-    end
-  end
+  let(:projects_collection) { FactoryGirl.create_list(:project, 9, user: user) }
 
   before do
     allow(projects_collection).to receive(:total_pages).and_return(2)
