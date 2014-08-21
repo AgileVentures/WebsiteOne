@@ -11,13 +11,13 @@
 
   <% unless @users.empty? %>
     <div class="col-xs-12">
-      <form action="/users/filter" method="get" id="users_filter_form">
-        <p>Filter users</p>
-        <input type="text" id="users_filter" name="users_filter"/>
-        <input type="submit" value="Submit" id="users_filter_submit" />
+      <form id="UsersFilterForm">
+        <label>Filter users</label>
+        <input type="text" id="UsersFilter" name="UsersFilter"/>
+        <input type="submit" value="Submit" id="UsersFilterSubmit" />
       </form>
     </div>
-    <ul class="media-list row" id="users_list">
+    <ul class="media-list row" id="UsersList">
       <% @users.each_slice(3) do |slice| %>
         <% slice.each do |user| %>
           <% present user do |presenter| %>

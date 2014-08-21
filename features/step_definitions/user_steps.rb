@@ -130,8 +130,8 @@ When /^I look at the list of users$/ do
 end
 
 When /^I filter users for "(.*?)"$/ do |first_name|
-  fill_in :users_filter, :with => first_name
-  click_link_or_button :users_filter_submit 
+  fill_in :UsersFilter, :with => first_name
+  click_link_or_button :UsersFilterSubmit
 end
 
 ### THEN ###
