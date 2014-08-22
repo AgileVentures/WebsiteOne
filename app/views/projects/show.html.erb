@@ -42,7 +42,7 @@
     <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %></div>
   </div>
   <div class="small-divider"></div>
-  <p><strong><%= @project.description %></strong></p>
+  <p><%= clean_html @project.description %></p>
 </div>
 
 <div class="small-divider"></div>
