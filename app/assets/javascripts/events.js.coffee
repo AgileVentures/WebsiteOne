@@ -1,11 +1,23 @@
-$('.readme-link').popover {trigger: 'focus'}
+do @EventsUtils = ->
 
-refreshHangoutsManagement = ->
-  $.get window.location.href, (data)->
-    if data.match('hangouts-details-well')
+  @ajaxRequest = =>
+    if window.location.href is @href
+      $.get href, @updateHangoutsData
+    else
+      clearInterval @intervalId
+
+  @updateHangoutsData = (data)=>
+    if data.match 'hangouts-details-well'
+      clearInterval @intervalId
+
       $('#hg-management').html data
-      WebsiteOne.renderHangoutButton()
       $('.readme-link').popover {trigger: 'focus'}
-      clearInterval(intervalId)
+      WebsiteOne.renderHangoutButton()
 
-intervalId = setInterval(refreshHangoutsManagement, 10000);
+  @init = =>
+    @href = window.location.href
+    @intervalId = setInterval @ajaxRequest, 10000
+    $('.readme-link').popover {trigger: 'focus'}
+
+  @init()
+  return true
