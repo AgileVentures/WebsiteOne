@@ -38,6 +38,8 @@ def path_to(page_name, id = '')
       edit_user_password_path(id)
     when 'hookups' then
       hookups_path
+    when 'dashboard' then
+      '/dashboard' 
     else
       raise('path to specified is not listed in #path_to')
   end
