@@ -9,7 +9,6 @@ describe "users/index.html.erb", :type => :view do
     render
     expect(rendered).to have_content('Filter users')
     expect(rendered).to have_css("#UsersFilter")
-    expect(rendered).to have_selector('input', value: 'Submit')
   end
 
   it 'should display a list of users' do
