@@ -40,12 +40,10 @@ WebsiteOne.define('Users', function() {
         $("#user_skill_list").val($("#skills").tags().getTags().join(","));
     });
 
-    $('#UsersFilterForm').on('submit', function(e){
+    $('#UsersFilter').on('keyup', function(e){
       e.preventDefault();
+      var search_string = $('#UsersFilter').val().toLowerCase();
       var users_list = $('#UsersList li');
-      var search_string = $('#UsersFilter').val();
-      console.log(users_list);
-      console.log(search_string);
       if (search_string != '') {
         filter_trough_users(users_list, search_string);
       } else {
@@ -58,7 +56,7 @@ WebsiteOne.define('Users', function() {
 
   function filter_trough_users(users, keyword){ 
     users.each(function(){
-      if (!$(this).find('p').text().match(keyword)) {
+      if (!$(this).find('p').text().toLowerCase().match(keyword)) {
         $(this).hide();
       } else {
         $(this).show();
