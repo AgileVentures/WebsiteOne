@@ -1,8 +1,8 @@
-do @EventsUtils = ->
+@EventsUtils = ->
 
   @ajaxRequest = =>
     if window.location.href is @href
-      $.get href, @updateHangoutsData
+      $.get @href, @updateHangoutsData
     else
       clearInterval @intervalId
 
@@ -19,5 +19,6 @@ do @EventsUtils = ->
     @intervalId = setInterval @ajaxRequest, 10000
     $('.readme-link').popover {trigger: 'focus'}
 
-  @init()
   return true
+
+(new @EventsUtils).init()
