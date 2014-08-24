@@ -4,15 +4,12 @@ describe 'RefreshEventHangout', ->
     setFixtures sandbox({ id: 'hg-management' })
 
   it 'calls refresh every 10 sec', ->
+    spyOn window, 'setInterval'
     spyOn @app, 'ajaxRequest'
-    jasmine.clock().install()
 
     @app.init()
+    expect(window.setInterval).toHaveBeenCalledWith(@app.ajaxRequest, 10000)
 
-    jasmine.clock().tick(10001)
-    jasmine.clock().tick(10001)
-
-    expect(@app.ajaxRequest.calls.count()).toEqual(2)
 
   it 'replaces hg-management section', ->
     spyOn WebsiteOne, 'renderHangoutButton'

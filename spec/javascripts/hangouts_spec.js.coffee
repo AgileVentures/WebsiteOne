@@ -4,15 +4,11 @@ describe 'RefreshHangouts', ->
     @app = new window.HangoutsUtils()
 
   it 'calls refresh every 10 sec', ->
+    spyOn window, 'setInterval'
     spyOn @app, 'ajaxRequest'
-    jasmine.clock().install()
 
     @app.init()
-
-    jasmine.clock().tick(10001)
-    jasmine.clock().tick(10001)
-
-    expect(@app.ajaxRequest.calls.count()).toEqual(2)
+    expect(window.setInterval).toHaveBeenCalledWith(@app.ajaxRequest, 10000)
 
   it 'replaces hg-management section if data has updated', ->
     spyOn @app, 'bindEvents'

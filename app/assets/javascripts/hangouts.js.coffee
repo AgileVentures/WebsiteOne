@@ -1,4 +1,4 @@
-do @HangoutsUtils = ->
+@HangoutsUtils = ->
 
   @bindEvents = ->
     $('#collapse0').slideDown()
@@ -28,15 +28,18 @@ do @HangoutsUtils = ->
   @updateHangoutsData = (data)=>
     data = data.trim()
     if data isnt @container
-      $('#hg-container').html data if @container
-      @container = data
-      @bindEvents()
+      if @container
+        $('#hg-container').html data
+        @bindEvents()
 
-  @ajaxRequest = ->
+      @container = data
+
+  @ajaxRequest = =>
     if window.location.href is @href
-      $.get href, @updateHangoutsData
+      $.get @href, @updateHangoutsData
     else
       clearInterval @intervalId
 
-  @init()
   return true
+
+(new @HangoutsUtils).init()
