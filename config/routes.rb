@@ -1,6 +1,4 @@
 WebsiteOne::Application.routes.draw do
-  get 'statistics/index'
-
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
@@ -58,7 +56,7 @@ WebsiteOne::Application.routes.draw do
 
   resources :hookups
 
-  get '/dashboard', to: 'statistics#index', :format => false
+  get '/dashboard', to: 'dashboard#index'
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
 
 end

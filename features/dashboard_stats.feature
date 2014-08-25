@@ -6,31 +6,34 @@ Feature: Display Statistics
 
   Background:
   Given the following articles exist:
-    | Title                    | Content                   | Tag List           |
-    | Ruby is on Fire          | Fire is fire and sunny    | Ruby, Rails        |
-    | Rails is not for trains  | Train tracks do not work  | Rails              |
-    | JQuery cannot be queried | JQuery is javascript      | Javascript, JQuery |
+    | Title     | Content |
+    | Article 1 | -       |
+    | Article 2 | -       |
+    | Article 2 | -       |
 
   Given the following projects exist:
-    | title         | description             | status   | github_url                                  | pivotaltracker_url                               |
-    | hello world   | greetings earthlings    | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
-    | hello mars    | greetings aliens        | inactive |                                             |                                                  |
-    | hello jupiter | greetings jupiter folks | active   |                                             |                                                  |
-    | hello mercury | greetings mercury folks | inactive |                                             |                                                  |
-    | hello saturn  | greetings saturn folks  | active   |                                             |                                                  |
-    | hello sun     | greetings sun folks     | active   |                                             |                                                  |
-    And there are no videos
+    | title     | description | status |
+    | Project 1 | -           | -      |
+    | Project 2 | -           | -      |
+    | Project 4 | -           | -      |
+    | Project 5 | -           | -      |
+    | Project 6 | -           | -      |
+    | Project 6 | -           | -      |
 
   Given the following users exist
     | first_name | last_name | email                   |
     | Alice      | Jones     | alice@btinternet.co.uk  |
     | Bob        | Butcher   | bobb112@hotmail.com     |
+    #
+    # keep test setup to minimum, i.e. only instantiate the necessary properties
 
   Scenario: 
     Given I am on the "home" page
-    Then I should see link "Statistics"
-    When I click "Statistics"
+    Then I should see link "Dashboard"
+    When I click "Dashboard"
     Then I should be on the "Dashboard" page
+    #a step should be generic, i.e. can be used no matter what the setup is
+    #this can be done by passing arguments into the step
     And I should see "AgileVentures Activity and Statistics"
     And I should see informative statistics about AgileVentures "articles"
     And I should see informative statistics about AgileVentures "projects"
