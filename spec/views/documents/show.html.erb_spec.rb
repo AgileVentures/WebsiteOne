@@ -55,6 +55,18 @@ describe 'documents/show', type: :view do
           expect(link).to have_css('i[class="fa fa-file-text-o"]')
         end
       end
+
+      it 'renders a Change secion link' do
+        rendered.within("#change_parent_link") do |link|
+          expect(link).to have_css('i[class="fa fa-cogs"]')
+        end
+      end
+
+      it 'renders a Change section popup when the link is clicked' do
+        allow(view).to receive(:params).and_return(:change_parent => '1')
+        render
+        expect(rendered).to have_css('div[class="modal-dialog"]')
+      end
     end
 
     context 'when document is a child' do
@@ -87,4 +99,23 @@ describe 'documents/show', type: :view do
       expect(rendered).not_to have_css('#disqus_thread')
     end
   end
+
+  context 'when user is not logged in' do
+    before :each do
+      view.stub(:user_signed_in?).and_return(false)
+    end
+
+    it 'does not render an Edit link' do
+      expect(rendered).not_to have_css('i[class="fa fa-pencil-square-o"]')
+    end
+
+    it 'does not render a New Sub-document link' do
+      expect(rendered).not_to have_css('i[class="fa fa-file-text-o"]')
+    end
+
+    it 'does not render a Change Section link' do
+      expect(rendered).not_to have_css('i[class="fa fa-cogs"]')
+    end
+  end
+
 end
