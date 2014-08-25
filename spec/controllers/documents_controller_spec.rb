@@ -62,6 +62,16 @@ describe DocumentsController do
         }.to raise_error ActiveRecord::RecordNotFound
       end
     end
+
+    context 'changes document parent' do
+      let(:categories) { FactoryGirl.create_list(:document, 2, project_id: document.project_id) }
+      before :each do
+        get :show, {:id => document.to_param, project_id: document.project.friendly_id, change_parent: '1'}
+      end
+      it 'assigns the available categories to @categories' do
+        expect(assigns(:categories)).to  match_array categories
+      end
+    end
   end
 
   describe 'GET new' do
