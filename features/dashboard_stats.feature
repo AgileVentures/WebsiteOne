@@ -12,13 +12,13 @@ Feature: Display Statistics
     | Article 2 | -       |
 
   Given the following projects exist:
-    | title     | description | status |
-    | Project 1 | -           | -      |
-    | Project 2 | -           | -      |
-    | Project 4 | -           | -      |
-    | Project 5 | -           | -      |
-    | Project 6 | -           | -      |
-    | Project 6 | -           | -      |
+    | title     | description | status   |
+    | Project 1 | -           | active   |
+    | Project 2 | -           | active   |
+    | Project 4 | -           | active   |
+    | Project 5 | -           | active   |
+    | Project 6 | -           | inactive |
+    | Project 6 | -           | inactive |
 
   Given the following users exist
     | first_name | last_name | email                   |
@@ -35,6 +35,6 @@ Feature: Display Statistics
     #a step should be generic, i.e. can be used no matter what the setup is
     #this can be done by passing arguments into the step
     And I should see "AgileVentures Activity and Statistics"
-    And I should see informative statistics about AgileVentures "articles"
-    And I should see informative statistics about AgileVentures "projects"
-    And I should see informative statistics about AgileVentures "users"
+    And I should see "3 Articles Published"
+    And I should see "4 Active Projects"
+    And I should see "3 AgileVentures Members"
