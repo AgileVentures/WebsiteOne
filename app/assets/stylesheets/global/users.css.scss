@@ -19,6 +19,12 @@
   }
 }
 
+.users-filter {
+  @extend .pull-right;
+  margin-top: 40px;
+}
+
+
 .user-cancel-account {
   margin-top: 50px;
 }
