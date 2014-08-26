@@ -11,7 +11,7 @@ Feature: Display Statistics
     | Article 2 | -       |
     | Article 2 | -       |
 
-  Given the following projects exist:
+  And the following projects exist:
     | title     | description | status   |
     | Project 1 | -           | active   |
     | Project 2 | -           | active   |
@@ -20,12 +20,15 @@ Feature: Display Statistics
     | Project 6 | -           | inactive |
     | Project 6 | -           | inactive |
 
-  Given the following users exist
+  And the following users exist
     | first_name | last_name | email                   |
     | Alice      | Jones     | alice@btinternet.co.uk  |
     | Bob        | Butcher   | bobb112@hotmail.com     |
-    #
-    # keep test setup to minimum, i.e. only instantiate the necessary properties
+
+  And the following documents exist:
+    | title | project |
+    | Document 1 | Project 1 |
+    | Document 2 | Project 2 |
 
   Scenario: 
     Given I am on the "home" page
@@ -38,3 +41,4 @@ Feature: Display Statistics
     And I should see "3 Articles Published"
     And I should see "4 Active Projects"
     And I should see "3 AgileVentures Members"
+    And I should see "2 Documents Created"

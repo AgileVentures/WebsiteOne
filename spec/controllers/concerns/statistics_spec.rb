@@ -23,5 +23,10 @@ describe 'StatisticsConcern' do
       FactoryGirl.create_list(:user, 5)
       expect(fake_controller.get_stats_for(:members)).to eq({ count: 5})
     end
+
+    it "gets stats for documents" do
+      FactoryGirl.create_list(:document, 5)
+      expect(fake_controller.get_stats_for(:documents)).to eq({ count: 5})
+    end
   end
 end
