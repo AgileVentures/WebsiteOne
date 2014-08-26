@@ -10,6 +10,8 @@ module Statistics
         stats[:count] = Project.where(status: "active").length
       when :members then
         stats[:count] = User.count
+      when :documents then
+        stats[:count] = Document.count
       end
     end
   end
