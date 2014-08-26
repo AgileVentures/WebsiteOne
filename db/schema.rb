@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140730123120) do
     t.integer  "parent_id"
     t.integer  "user_id"
     t.string   "slug"
+    t.string   "format",     default: "html"
   end
 
   add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree

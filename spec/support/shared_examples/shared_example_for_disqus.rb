@@ -1,5 +1,5 @@
 shared_examples 'commentable with Disqus' do
-  let(:data_tags) { 
+  let(:data_tags) {
     data_tags = {
       'data-disqus-shortname' => Settings.disqus.shortname,
       'data-disqus-identifier' => entity.friendly_id,
@@ -13,6 +13,7 @@ shared_examples 'commentable with Disqus' do
   end
 
   it 'renders Disqus_thread with parameters for Document' do
+    # allow(entity).to receive(:friendly_id).and_return(entity.title)
     render
     expect(rendered).to have_selector('#disqus_thread', data_tags)
   end

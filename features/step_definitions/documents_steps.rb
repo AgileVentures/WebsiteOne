@@ -26,6 +26,12 @@ Given(/^the following revisions exist$/) do |table|
   end
 end
 
+Given /^I have document "([^"]*)" for project "([^"]*)" in "([^"]*)" format with content:$/ do |doc_name, project, doc_format, content|
+  project = Project.find_by_title(project)
+  FactoryGirl.create(:document, project: project, title: doc_name, format: doc_format, body: content)
+  
+end
+
 When(/^I click the "([^"]*)" button for document "([^"]*)"$/) do |button, document_name|
   document = Document.find_by_title(document_name)
   if document

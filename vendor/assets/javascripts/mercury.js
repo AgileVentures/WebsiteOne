@@ -94,6 +94,7 @@ window.Mercury = {
       primary: {
         save:                  ['Save', 'Save this page'],
         preview:               ['Preview', 'Preview this page', { toggle: true, mode: true }],
+        contentFormat:         ['HTML', 'Select format HTML/Markdown', { toggle: true }],
         sep1:                  ' ',
         undoredo:              {
           undo:                ['Undo', 'Undo your last action'],

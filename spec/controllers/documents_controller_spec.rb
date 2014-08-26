@@ -3,12 +3,14 @@ require 'spec_helper'
 describe DocumentsController do
   let(:user) { @user }
   let(:document) { @document }
-  let(:valid_attributes) { {
-      'title' => 'MyString',
-      'body' => 'MyText',
-      'user_id' => "#{user.id}"
-  } }
+
   let(:valid_session) { {} }
+  let(:valid_attributes) do 
+    { 'title' => 'MyString',
+      'body' => 'MyText',
+      'user_id' => "#{user.id}" }
+  end
+
   before(:each) do
     @user = FactoryGirl.create(:user)
     request.env['warden'].stub :authenticate! => user
@@ -22,20 +24,7 @@ describe DocumentsController do
     }.to raise_error ActiveRecord::RecordNotFound
   end
 
-  # Bryan: Deprecated path
-  #describe 'GET index' do
-  #  before(:each) { get :index, { project_id: document.friendly_id }, valid_session }
-  #
-  #  it 'assigns all documents as @documents' do
-  #    assigns(:documents).should eq([document])
-  #  end
-  #
-  #  it 'renders the index template' do
-  #    expect(response).to render_template 'index'
-  #  end
-  #end
-
-  describe 'GET show' do
+  describe 'GET show', type: :controller do
 
     context 'with a single project' do
       before(:each) do
@@ -64,7 +53,7 @@ describe DocumentsController do
     end
   end
 
-  describe 'GET new' do
+  describe 'GET new', type: :controller do
     before(:each) { get :new, {project_id: document.project.friendly_id}, valid_session }
 
     it 'assigns a new document as @document' do
@@ -76,7 +65,7 @@ describe DocumentsController do
     end
   end
 
-  describe 'POST create' do
+  describe 'POST create', type: :controller do
     describe 'with valid params' do
       it 'creates a new Document' do
         expect {
@@ -114,7 +103,7 @@ describe DocumentsController do
     end
   end
 
-  describe 'DELETE destroy' do
+  describe 'DELETE destroy', type: :controller do
     before(:each) { @document = FactoryGirl.create(:document) }
 
     it 'destroys the requested document' do
@@ -127,6 +116,39 @@ describe DocumentsController do
       id = @document.project.id
       delete :destroy, {:id => @document.to_param, project_id: @document.project.friendly_id}, valid_session
       response.should redirect_to(project_documents_path(id))
+    end
+  end
+
+  describe '#mercury_update', type: :controller do
+      let(:document) { FactoryGirl.create(:document) }
+      let(:content) do
+        { "document_title"=> {type: 'simple', value: 'Title'},
+        "document_body"=> {type: '', value: 'Body text'} }
+      end
+      let(:params) do
+        { project_id: document.project.friendly_id,
+          document_id: document.id,
+          content: content }
+      end
+
+    context 'document format is Markdown' do
+      it 'updates attributes' do
+        content['document_body'][:type] = 'markdown'
+        expect_any_instance_of(Document).to receive(:update!).
+              with(title: 'Title', body: 'Body text', format: 'markdown').and_return(true)
+
+        post :mercury_update, params
+      end
+    end
+
+    context 'document format is not Markdown' do
+      it 'updates attributes' do
+        content['document_body'][:type] = 'full'
+        expect_any_instance_of(Document).to receive(:update!).
+              with(title: 'Title', body: 'Body text', format: 'full').and_return(true)
+
+        post :mercury_update, params
+      end
     end
   end
 end

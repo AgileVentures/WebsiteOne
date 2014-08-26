@@ -44,7 +44,6 @@ Feature: Manage Document
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
-  #???
     When I click the sidebar link "Guides"
     Then I should be on the "Show" page for document "Guides"
     And I should see "Guides"
@@ -60,7 +59,7 @@ Feature: Manage Document
     Then I should be on the "Show" page for document "Howto"
     And I should see "Guides"
 
-#NOTE: below scenario is for children's documents of documents, not projects'
+  #NOTE: below scenario is for children's documents of documents, not projects'
 
   Scenario: Documents children should be sorted by create date (newest first)
     Given the document "Guides" has a sub-document with title "SubDoc1" created 3 days ago
@@ -79,6 +78,7 @@ Feature: Manage Document
 
   @javascript
   Scenario: Mercury editor shows Save and Cancel buttons, hides New Document button, Save button works
+
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
@@ -152,3 +152,22 @@ Feature: Manage Document
     And I click "Insert Media" within the Mercury Editor Modal
     Then I should see an image with source "/assets/mercury/missing-image.png" within the Mercury Editor
     Then the Mercury Editor modal window should not be visible
+
+  Scenario: Displaying the document with Markdown syntax
+    Given I have document "Doc-1" for project "hello world" in "markdown" format with content:
+    """
+    **Adipisicing nobis**
+
+    #omnis recusandae!
+    ##Aperiam tenetur dignissimos veniam.
+    """
+    When I go to the "Show" page for document "Doc-1"
+    Then I should see:
+      | Adipisicing nobis                   |
+      | omnis recusandae!                   |
+      | Aperiam tenetur dignissimos veniam. |
+    But I should not see:
+      | **Adipisicing nobis**                 |
+      | #omnis recusandae!                    |
+      | ##Aperiam tenetur dignissimos veniam. |
+

@@ -3,10 +3,10 @@ require 'spec_helper'
 describe 'documents/show', type: :view do
 
   let(:user) { FactoryGirl.build_stubbed(:user) }
-  let(:project) { FactoryGirl.build_stubbed(:project) }
-  let(:document) { FactoryGirl.build_stubbed(:document, user: user, project_id: project.id) }
+  let(:project) { FactoryGirl.create(:project) }
+  let(:document) { FactoryGirl.create(:document, user: user, project: project) }
   let(:version) { FactoryGirl.build_stubbed(:version, whodunnit: user.id, item_id: document.id) }
-  let(:document_child) { FactoryGirl.build_stubbed(:document, user: user, parent: document, project_id: project.id) }
+  let(:document_child) { FactoryGirl.build_stubbed(:document, user: user, parent: document, project: project) }
 
   before(:each) do
     assign :document, document
@@ -20,16 +20,41 @@ describe 'documents/show', type: :view do
     allow(document).to receive(:friendly_id).and_return(document.title.parameterize)
   end
 
-  context 'when document is root' do
-
-    it 'should render title, content and child of root document' do
+  context 'document is root' do
+    it 'render content and child of root document' do
       render
       expect(rendered).to have_content document.title
       expect(rendered).to have_content document.body
       expect(rendered).to have_content document_child.title
     end
 
-    it 'should not render document revision history for new documents' do
+    context 'document format is not Markdown' do
+      it 'renders html content' do
+        document.body = '<b>Body Text</b>'
+        document.format = ''
+        render
+        expect(rendered).to have_css("#document_body[data-mercury='full']")
+        rendered.within('#document_body') do |section|
+          expect(section).to have_content('Body Text')
+          expect(section).not_to have_content('<b>Body Text</b>')
+        end
+      end
+    end
+
+    context 'document format is Markdown' do
+      it 'renders Markdown content' do
+        document.body = '**Body Text**'
+        document.format = 'markdown'
+        render
+        expect(rendered).to have_css("#document_body[data-mercury='markdown']")
+        rendered.within('#document_body') do |section|
+          expect(section).to have_content('Body Text')
+          expect(section).not_to have_content('**Body Text**')
+        end
+      end
+    end
+
+    it 'should not render document revisions history for new documents' do
       render
       expect(rendered).to_not have_text 'Revisions'
     end
@@ -40,10 +65,8 @@ describe 'documents/show', type: :view do
       expect(rendered).to have_text 'Revisions'
     end
 
-    context 'when user is signed-in' do
-
+    context 'user signed-in' do
       before { render }
-
       it 'should render an Edit link' do
         rendered.within('#edit_link') do |link|
           expect(link).to have_css('i[class="fa fa-pencil-square-o"]')
@@ -75,7 +98,7 @@ describe 'documents/show', type: :view do
     end
   end
 
-  describe 'rendering Disqus section', type: :view do
+  describe 'renders Disqus section' do
 
     it_behaves_like 'commentable with Disqus' do
       let(:entity) { document }
