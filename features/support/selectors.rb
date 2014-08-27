@@ -32,6 +32,8 @@ module HtmlSelectorsHelpers
         '#video_contents'
       when 'player'
         '#ytplayer'
+      when 'Modal window'
+        '.modal-body'
       when /^"(.+)"$/
         $1
 

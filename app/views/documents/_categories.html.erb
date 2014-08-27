@@ -11,7 +11,7 @@
           <% elsif category.parent_id == @document.id %>
             <% next %>
         <% else %>
-          <li><%= link_to category.title, project_document_path(@project, @document, new_parent_id: category.id) %></li>
+          <li><%= link_to category.title, project_document_path(@project, @document, new_parent_id: category.id), :method => :put %></li>
         <% end %>
       <% end %>
     </ul>

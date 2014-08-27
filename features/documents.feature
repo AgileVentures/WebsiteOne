@@ -165,9 +165,9 @@ Feature: Manage Document
    When I click the very stylish "Change section" button
    Then I should see "Select new section for the document"
    And I should see "Guides"
-   And I should see "PullRequest" within ".modal-body"
-   And I should not see "Documentation" within ".modal-body"
-   And I should not see "Howto" within ".modal-body"
+   And I should see "PullRequest" in "Modal window"
+   And I should not see "Documentation" in "Modal window"
+   And I should not see "Howto" in "Modal window"
    When I click "PullRequest"
    Then I should see "You have successfully moved Howto to the PullRequest section"
    And I should see "PullRequest"

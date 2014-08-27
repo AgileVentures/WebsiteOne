@@ -16,7 +16,11 @@ class DocumentsController < ApplicationController
   # GET /documents/1.json
   def show
     @children = @document.children.order(created_at: :desc)
+  end
+
+  def update
     change_document_parent(params[:new_parent_id]) if params[:new_parent_id]
+    redirect_to project_document_path
   end
 
   def get_doc_categories
@@ -90,8 +94,8 @@ class DocumentsController < ApplicationController
     @document.parent_id = new_parent_id
     if @document.save
       new_parent = Document.find(new_parent_id)
+      flash[:notice] = "You have successfully moved #{@document.title} to the #{new_parent.title} section."
     end
-    flash[:notice] = "You have successfully moved #{@document.title} to the #{new_parent.title} section."
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
