@@ -8,7 +8,7 @@ describe "users/index.html.erb", :type => :view do
   it 'should display user filter form' do
     render
     expect(rendered).to have_content('Filter users')
-    expect(rendered).to have_css("#UsersFilter")
+    expect(rendered).to have_css("#user-filter")
   end
 
   it 'should display a list of users' do
