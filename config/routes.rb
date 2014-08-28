@@ -48,7 +48,6 @@ WebsiteOne::Application.routes.draw do
 
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
   get 'scrums', to: 'scrums#index', as: 'scrums', :format => false
-  get 'sections', to: 'documents#get_doc_categories', as: 'sections', :format => false
 
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false
