@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   layout 'with_sidebar'
   before_action :find_project
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :get_doc_categories]
+  before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
 
@@ -16,6 +16,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1.json
   def show
     @children = @document.children.order(created_at: :desc)
+    get_doc_categories and return if params[:categories]
   end
 
   def update
@@ -24,7 +25,7 @@ class DocumentsController < ApplicationController
   end
 
   def get_doc_categories
-    @categories = Document.where("project_id = ? AND id != ?", @project, @document)
+    @categories = Document.where("project_id = ? AND id != ?", @project.id, @document.id)
     render partial: "categories"
   end
 
@@ -91,7 +92,7 @@ class DocumentsController < ApplicationController
   end
 
   def change_document_parent(new_parent_id)
-    @document.parent_id = new_parent_id
+    @document.parent_id = new_parent_id if new_parent_id != @document.parent_id
     if @document.save
       new_parent = Document.find(new_parent_id)
       flash[:notice] = "You have successfully moved #{@document.title} to the #{new_parent.title} section."

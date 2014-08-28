@@ -62,14 +62,47 @@ describe DocumentsController do
         }.to raise_error ActiveRecord::RecordNotFound
       end
     end
+  end
 
+  describe 'UPDATE show' do
     context 'changes document parent' do
-      let(:categories) { FactoryGirl.create_list(:document, 2, project_id: document.project_id) }
-      before :each do
-        get :show, {:id => document.to_param, project_id: document.project.friendly_id, change_parent: '1'}
+      let(:categories) do 
+        [
+        FactoryGirl.create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: "Title-1"),
+        FactoryGirl.create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: "Title-2")
+        ]
       end
+      let(:params) { {:id => categories.first.to_param, project_id: document.project.friendly_id, categories: 'true'} }
+
       it 'assigns the available categories to @categories' do
+        get :show, params.merge({id: document.to_param})
         expect(assigns(:categories)).to  match_array categories
+      end
+
+      it 'calls the get_doc_categories function' do
+        expect(controller).to receive(:get_doc_categories)
+        get :show, params
+      end
+
+      it 'renders the categories partial' do
+        get :show, params
+        expect(response).to render_template(:partial => '_categories')
+      end
+
+      it 'calls change_document_parent with the right param' do
+        expect(controller).to receive(:change_document_parent).with("555")
+        get :update, params.merge({ new_parent_id:'555' })
+      end
+
+      it 'changes the document parent_id' do
+        get :update, params.merge({ new_parent_id:'556' })
+        categories.first.parent_id = 556
+        expect(assigns(:document)).to eq(categories.first)
+      end
+
+      it 'assigns flash message after changing parent_id' do
+        get :update, params.merge({ new_parent_id:'556' })
+        expect(flash[:notice]).to eq("You have successfully moved Title-1 to the Title-2 section.")
       end
     end
   end
