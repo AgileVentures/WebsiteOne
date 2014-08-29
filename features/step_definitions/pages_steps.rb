@@ -47,6 +47,10 @@ And(/^the following sub-pages exist:$/) do |table|
   end
 end
 
+When(/^I should not see any revisions$/) do
+  expect(page).to have_css('#revisions', :visible => false)
+end
+
 Given(/^the page "([^"]*)" has a child page with title "([^"]*)"$/) do |parent, child|
   parent_page = StaticPage.find_by_title(parent)
   StaticPage.create!(

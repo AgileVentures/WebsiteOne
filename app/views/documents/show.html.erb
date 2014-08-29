@@ -37,7 +37,7 @@
 <div class="small-divider"></div>
 <div>
   <% if @document.versions.count > 1 %>
-    <h4>Revisions</h4>
+    <a id="revisions-anchor" href="javascript: void(0)"><h4>Revisions</h4></a>
     <% @document.versions.each do |version| %>
       <%= user_details(version.whodunnit.to_i) %>
       <%= version.event %>d <b>"<%= @document.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago <br/>
@@ -59,3 +59,4 @@
   <% end %>
 </div>
 <%= render partial: 'disqus/disqus', locals: {entity: @document, project: @project} unless inside_mercury? %>
+<div id="revisions" style="display: block;">"Some revisions have been done lately."</div>
