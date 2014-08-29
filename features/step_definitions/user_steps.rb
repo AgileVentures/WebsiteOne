@@ -129,6 +129,11 @@ When /^I look at the list of users$/ do
   visit '/'
 end
 
+When /^I filter users for "(.*?)"$/ do |first_name|
+  fill_in "user-filter", :with => first_name
+  #click_link_or_button :UsersFilterSubmit
+end
+
 ### THEN ###
 Then /^I should be signed in$/ do
   page.should have_content "Log out"
