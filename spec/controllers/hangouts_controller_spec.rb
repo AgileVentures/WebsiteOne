@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe HangoutsController do
-
   let(:params) { {id: '333', host_id: 'host', title: 'title'} }
 
   before do
