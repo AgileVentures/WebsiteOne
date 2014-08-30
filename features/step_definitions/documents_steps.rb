@@ -50,4 +50,9 @@ end
 When(/^I should see ([^"]*) revisions for "([^"]*)"$/) do |revisions, document|
   doc = Document.find_by_title(document)
   expect doc.versions.count == revisions
+  expect(page).to have_xpath('//div[@id="revisions"]/b', count: revisions)
+end
+
+When(/^I should not see any revisions$/) do
+  expect(page).not_to have_css('#revisions')
 end
