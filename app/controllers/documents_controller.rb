@@ -25,7 +25,7 @@ class DocumentsController < ApplicationController
   end
 
   def get_doc_categories
-    @categories = Document.where("project_id = ? AND id != ?", @project.id, @document.id)
+    @categories = @project.documents.where(parent_id: nil)
     render partial: "categories"
   end
 
@@ -92,7 +92,7 @@ class DocumentsController < ApplicationController
   end
 
   def change_document_parent(new_parent_id)
-    @document.parent_id = new_parent_id if new_parent_id != @document.parent_id
+    @document.parent_id = new_parent_id
     if @document.save
       new_parent = Document.find(new_parent_id)
       flash[:notice] = "You have successfully moved #{@document.title} to the #{new_parent.title} section."
