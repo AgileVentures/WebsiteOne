@@ -3,24 +3,28 @@ require 'spec_helper'
 describe CommitCount, type: :model do
   subject { build_stubbed :commit_count }
 
-  it 'should be valid with all the correct attributes' do
+  it 'should have a valid factory' do
     expect(subject).to be_valid
   end
 
-  it 'should be invalid without user' do
-    expect(build_stubbed(:commit_count, user: nil)).to_not be_valid
+  context 'without a user' do
+    before { subject.user = nil }
+    it { is_expected.to_not be_valid }
   end
 
-  it 'should be invalid without project' do
-    expect(build_stubbed(:commit_count, project: nil)).to_not be_valid
+  context 'without a project' do
+    before { subject.project = nil }
+    it { is_expected.to_not be_valid }
   end
 
-  it 'should be invalid without commit_count' do
-    expect(build_stubbed(:commit_count, commit_count: nil)).to_not be_valid
+  context 'without a commit count' do
+    before { subject.commit_count = nil }
+    it { is_expected.to_not be_valid }
   end
 
-  it 'should be invalid with duplicate record (same user and same project)' do
-    commit_count = FactoryGirl.create(:commit_count)
-    expect(build(:commit_count, user: commit_count.user,  project: commit_count.project)).to_not be_valid
+  context 'with a duplicate record having same user and project' do
+    let(:duplicate_record) { FactoryGirl.create(:commit_count) }
+    subject { build(:commit_count,  duplicate_record.attributes)}
+    it { is_expected.to_not be_valid }
   end
 end
