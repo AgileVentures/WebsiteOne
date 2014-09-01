@@ -21,6 +21,7 @@ describe('RefreshHangouts', function() {
 
   it('does not replace hg-management section if data has not updated', function() {
     spyOn(this.app, 'bindEvents');
+    this.app.container = 'new data';
     this.app.updateHangoutsData('new data');
     expect($('#hg-container').text()).toEqual('');
   });
