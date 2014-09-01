@@ -7,15 +7,17 @@ shared_examples_for 'it has a hangout button' do
   end
 
   let(:data_tags) do
+    start_data =  JSON.generate({
+      'title' => title,
+      'category' => category,
+      'projectId' => project_id.to_s.squish,
+      'eventId' => event_id.to_s.squish,
+      'hostId' => 'user_1',
+      'hangoutId' => '123456',
+      'callbackUrl' => hangout_url('id').gsub(/id$/, '') })
     {
-      'data-title' => title,
-      'data-project-id' => project_id.to_s.squish,
-      'data-event-id' => event_id.to_s.squish,
-      'data-category' => category,
-      'data-hangout-id' => '123456',
-      'data-host-id' => 'user_1',
-      'data-app-id' => Settings.hangouts.app_id,
-      'data-callback-url' => hangout_url('id').gsub(/id$/, '')
+      'data-start-data' => start_data,
+      'data-app-id' => Settings.hangouts.app_id
     }
   end
 
