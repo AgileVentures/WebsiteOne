@@ -70,12 +70,26 @@ end
 When(/^I am a member of project "([^"]*)"$/) do |name|
   step %Q{I should become a member of project "#{name}"}
 end
+
+When(/^"(.*)" is a member of project "([^"]*)"$/) do |name, project|
+  user = User.find_by_first_name(name)
+  object = Project.find_by_title(project)
+  user.follow(object)
+end
+
 Then(/^I should stop being a member of project "([^"]*)"$/) do |name|
   object = Project.find_by_title(name)
   @user.stop_following(object)
 end
+
 When(/^I am not a member of project "([^"]*)"$/) do |name|
   step %Q{I should stop being a member of project "#{name}"}
+end
+
+When(/^"(.*)" is not a member of project "([^"]*)"$/) do |name, project|
+  user = User.find_by_first_name(name)
+  object = Project.find_by_title(project)
+  user.stop_following(object)
 end
 
 Given(/^I am on the home page$/) do

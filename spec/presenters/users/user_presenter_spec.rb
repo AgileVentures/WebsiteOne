@@ -57,4 +57,18 @@ describe UserPresenter do
     end
   end
 
+  describe '#contributors' do
+    let(:user) { create(:user) }
+    let(:commit_counts) { create_list(:commit_count, 2, user: user) }
+
+    before do
+      user.follow commit_counts.first.project
+    end
+
+    it 'should only return commit counts for the projects that the user follows' do
+      expect(subject.contributions).to eq([commit_counts[0]])
+    end
+
+  end
+
 end
