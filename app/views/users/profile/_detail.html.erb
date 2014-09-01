@@ -26,7 +26,7 @@
     <h4>Contributions</h4>
     <ul>
       <% presenter.contributions.each do |commit_count| %>
-        <li><b><%= commit_count.project.title %></b> - <%= commit_count.commit_count %></li>
+        <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b> - <%= commit_count.commit_count %></li>
       <% end %>
     </ul>
   </section>

@@ -24,6 +24,7 @@ describe "users/show.html.erb" do
     allow(@user).to receive(:following_projects_count).and_return(2)
     allow(@user).to receive(:commit_counts).and_return(@commit_counts)
     allow(@user).to receive(:following?).and_return(true)
+    allow(@commit_counts.first.project).to receive(:contribution_url).and_return('test_url')
 
     assign :user, @user
     @youtube_videos = [
@@ -180,6 +181,7 @@ describe "users/show.html.erb" do
   it 'renders a list of contributions made by user' do
     render
     expect(rendered).to have_text('Title 1 - 253')
+    expect(rendered).to have_link('Title', href: 'test_url')
   end
 
   it 'renders list of followed projects' do

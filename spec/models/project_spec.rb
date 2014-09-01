@@ -103,4 +103,11 @@ describe Project, :type => :model do
       expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
     end
   end
+
+  describe "#contribution_url" do
+    it 'returns the url for the project github contribution page' do
+      allow(subject).to receive(:github_repo).and_return('test/test')
+      expect(subject.contribution_url).to eq "https://github.com/test/test/graphs/contributors"
+    end
+  end
 end

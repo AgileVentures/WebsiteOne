@@ -45,6 +45,10 @@ class Project < ActiveRecord::Base
     /github.com\/(.+)/.match(github_url)[1] if github_url
   end
 
+  def contribution_url
+    "https://github.com/#{github_repo}/graphs/contributors"
+  end
+
   # Bryan: Used to generate paths, used only in testing.
   # Might want to switch to rake generated paths in the future
   def url_for_me(action)
