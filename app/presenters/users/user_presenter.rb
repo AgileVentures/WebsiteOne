@@ -20,7 +20,9 @@ class UserPresenter < BasePresenter
   end
 
   def contributions
-    user.commit_counts
+    user.commit_counts.select do |commit_count|
+      commit_count.user.following? commit_count.project
+    end
   end
 
   def title_list

@@ -12,6 +12,8 @@ Feature: Displaying GitHub contribution statistics for user
       | Bryan      | Yap       | test@test.com          | https://github.com/yggie   |
       | Thomas     | Ochman    | tochman@hotmail.com    |                            |
     And I fetch the GitHub contribution statistics
+    And "Bryan" is a member of project "WebsiteOne"
+    And "Thomas" is a member of project "WebsiteOne"
 
   Scenario: Displays commit counts on user profile page
     Given I am on "profile" page for user "Bryan"
@@ -20,5 +22,11 @@ Feature: Displaying GitHub contribution statistics for user
 
   Scenario: Does not display commit counts for user without github profile url
     Given I am on "profile" page for user "Thomas"
+    Then I should not see "Contributions"
+    And I should not see "WebsiteOne - 316"
+
+  Scenario: Does not display commit counts for projects not followed by a user
+    Given I am on "profile" page for user "Thomas"
+    And "Thomas" is not a member of project "WebsiteOne"
     Then I should not see "Contributions"
     And I should not see "WebsiteOne - 316"
