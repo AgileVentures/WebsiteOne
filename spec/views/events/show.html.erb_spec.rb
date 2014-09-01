@@ -53,7 +53,7 @@ describe 'events/show', type: :view do
                         event_id: 375,
                         category: 'Scrum',
                         hangout_url: 'http://hangout.test',
-                        updated_at: Time.parse('10:25:00'))
+                        updated: Time.parse('10:25:00'))
 
       allow(@hangout).to receive(:started?).and_return true
       allow(@hangout).to receive(:live?).and_return true
@@ -131,7 +131,7 @@ describe 'events/show', type: :view do
 
       context 'hangout has started' do
         before :each do
-          allow(Time).to receive(:now).and_return(Time.parse('10:30:00'))
+          allow(Time).to receive(:now).and_return(Time.parse('10:29 UTC'))
           allow(@hangout).to receive(:started?).and_return(true)
           allow(@hangout).to receive(:live?).and_return(true)
         end
@@ -145,7 +145,7 @@ describe 'events/show', type: :view do
           expect(rendered).to have_content('Hangout link')
           expect(rendered).to have_link('http://hangout.test', href: 'http://hangout.test')
           expect(rendered).to have_content('Updated:')
-          expect(rendered).to have_content('5 minutes')
+          expect(rendered).to have_content('4 minutes')
         end
 
         it 'renders Join link if hangout is live' do
