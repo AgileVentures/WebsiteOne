@@ -33,27 +33,29 @@ this.HangoutsUtils = function() {
     });
   };
 
-  this.updateHangoutsData = function(data) {
-    var _this = this;
-    data = data.trim();
+  this.updateHangoutsData = (function(_this) {
+    return function(data) {
+      data = data.trim();
 
-    if (data !== _this.container) {
-      if (_this.container) {
-        $('#hg-container').html(data);
-        _this.bindEvents();
+      if (data !== _this.container) {
+        if (_this.container) {
+          $('#hg-container').html(data);
+          _this.bindEvents();
+        }
+        _this.container = data;
       }
-      _this.container = data;
-    }
-  };
+    };
+  })(this);
 
-  this.ajaxRequest = function() {
-    var _this = this;
-    if (window.location.href === _this.href) {
-      $.get(_this.href, _this.updateHangoutsData);
-    } else {
-      clearInterval(_this.intervalId);
-    }
-  };
+  this.ajaxRequest = (function(_this) {
+    return function() {
+      if (window.location.href === _this.href) {
+        $.get(_this.href, _this.updateHangoutsData);
+      } else {
+        clearInterval(_this.intervalId);
+      }
+    };
+  })(this);
 };
 
 (new this.HangoutsUtils).init();
