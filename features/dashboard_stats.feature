@@ -2,7 +2,6 @@ Feature: Display Statistics
   As a project maintainer
   In order to attract more users to AgileVentures
   I would like to present some attractive statistics to new visitors of WSO
-  https://www.pivotaltracker.com/story/show/64726524
 
   Background:
   Given the following articles exist:
@@ -35,8 +34,6 @@ Feature: Display Statistics
     Then I should see link "Dashboard"
     When I click "Dashboard"
     Then I should be on the "Dashboard" page
-    #a step should be generic, i.e. can be used no matter what the setup is
-    #this can be done by passing arguments into the step
     And I should see "AgileVentures Activity and Statistics"
     And I should see "3 Articles Published"
     And I should see "4 Active Projects"
