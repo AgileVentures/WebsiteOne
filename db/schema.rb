@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20140730123120) do
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
   add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
-  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -38,6 +37,15 @@ ActiveRecord::Schema.define(version: 20140730123120) do
   end
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
+
+  create_table "commit_counts", force: true do |t|
+    t.integer "commit_count"
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
+  add_index "commit_counts", ["project_id"], name: "index_commit_counts_on_project_id", using: :btree
+  add_index "commit_counts", ["user_id"], name: "index_commit_counts_on_user_id", using: :btree
 
   create_table "documents", force: true do |t|
     t.string   "title"
@@ -50,7 +58,6 @@ ActiveRecord::Schema.define(version: 20140730123120) do
     t.string   "slug"
   end
 
-  add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree
   add_index "documents", ["slug", "user_id"], name: "index_documents_on_slug_and_user_id", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
@@ -139,8 +146,6 @@ ActiveRecord::Schema.define(version: 20140730123120) do
   end
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
-  add_index "taggings", ["tagger_type"], name: "index_taggings_on_tagger_type", using: :btree
 
   create_table "tags", force: true do |t|
     t.string  "name"

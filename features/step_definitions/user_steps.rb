@@ -375,3 +375,7 @@ end
 When(/^My email receivings is set to false$/) do
   @user.update_attribute(:receive_mailings, false)
 end
+
+Given(/^I fetch the GitHub contribution statistics$/) do
+  GithubCommitsJob.run
+end

@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :articles
   has_many :hangouts
+  has_many :commit_counts 
 
   self.per_page = 30
 
@@ -72,5 +73,10 @@ class User < ActiveRecord::Base
   def self.search(params)
     where(display_profile: true)
       .order(:created_at)
+  end
+
+  def self.find_by_github_username(username)
+    github_url = "https://github.com/#{username}"
+    find_by(github_profile_url: github_url)
   end
 end

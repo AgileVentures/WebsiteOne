@@ -15,6 +15,16 @@ class UserPresenter < BasePresenter
     user.following_projects_count > 0
   end
 
+  def contributed?
+    contributions.count > 0
+  end
+
+  def contributions
+    user.commit_counts.select do |commit_count|
+      commit_count.user.following? commit_count.project
+    end
+  end
+
   def title_list
     content_tag(:span, user.title_list.join(', '), class: 'member-title')
   end

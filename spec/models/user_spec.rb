@@ -167,4 +167,16 @@ describe User, :type => :model do
       expect(results).not_to include('Janice')
     end
   end
+
+  describe '.find_by_github_username' do
+    it 'returns the user if it exists' do
+      user_with_github = FactoryGirl.create(:user, github_profile_url: 'https://github.com/sampritipanda')
+      user_without_github = FactoryGirl.create(:user, github_profile_url: nil)
+      expect(User.find_by_github_username('sampritipanda')).to eq user_with_github
+    end
+
+    it 'returns nil if no user exists' do
+      expect(User.find_by_github_username('unknown-guy')).to be_nil
+    end
+  end
 end
