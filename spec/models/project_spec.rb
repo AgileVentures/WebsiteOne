@@ -91,4 +91,23 @@ describe Project, :type => :model do
       expect(subject.members).to eq @users
     end
   end
+
+  describe "#github_repo" do
+    it 'returns nil if github url does not exist' do
+      project = build_stubbed(:project, github_url: nil)
+      expect(project.github_repo).to be_nil
+    end
+
+    it 'returns the proper repo name if github url exists' do
+      project = build_stubbed(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne')
+      expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
+    end
+  end
+
+  describe "#contribution_url" do
+    it 'returns the url for the project github contribution page' do
+      allow(subject).to receive(:github_repo).and_return('test/test')
+      expect(subject.contribution_url).to eq "https://github.com/test/test/graphs/contributors"
+    end
+  end
 end
