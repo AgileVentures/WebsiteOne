@@ -130,10 +130,6 @@ Feature: Manage Document
     When I click "Revisions"
     And I should see 4 revisions for "Guides"
 
-
-
-
-
   @javascript
   Scenario: A user can insert an image
     Given the document "Guides" has a child document with title "Howto"
