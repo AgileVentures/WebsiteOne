@@ -53,6 +53,6 @@ When(/^I should see ([^"]*) revisions for "([^"]*)"$/) do |revisions, document|
   expect(page).to have_xpath('//div[@id="revisions"]/b', count: revisions)
 end
 
-# When(/^I should not see any revisions$/) do
-#   expect(page).not_to have_css('#revisions')
-# end
+When(/^I should not see any revisions$/) do
+  expect(page).not_to have_css('#revisions')
+end
