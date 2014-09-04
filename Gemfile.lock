@@ -243,6 +243,7 @@ GEM
       andand
       kdtree
       require_all
+    newrelic_rpm (3.9.3.241)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     oauth (0.4.7)
@@ -485,6 +486,7 @@ DEPENDENCIES
   local_time
   mercury-rails!
   nearest_time_zone
+  newrelic_rpm
   octokit
   omniauth
   omniauth-github!
