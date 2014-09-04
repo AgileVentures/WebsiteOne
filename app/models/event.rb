@@ -126,9 +126,9 @@ class Event < ActiveRecord::Base
     starts_at ||= start_datetime
     ends_at ||= end_time
     if duration > 0
-      s = IceCube::Schedule.new(starts_at, :ends_time => ends_at, :duration => duration)
+      s = IceCube::Schedule.new(starts_at, :end_time => ends_at, :duration => duration)
     else
-      s = IceCube::Schedule.new(starts_at, :ends_time => ends_at)
+      s = IceCube::Schedule.new(starts_at, :end_time => ends_at)
     end
     case repeats
       when 'never'
