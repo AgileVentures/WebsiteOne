@@ -53,7 +53,7 @@ describe 'events/show', type: :view do
                         event_id: 375,
                         category: 'Scrum',
                         hangout_url: 'http://hangout.test',
-                        updated: Time.parse('10:25:00'))
+                        updated: Time.parse('10:25:00 UTC'))
 
       allow(@hangout).to receive(:started?).and_return true
       allow(@hangout).to receive(:live?).and_return true
