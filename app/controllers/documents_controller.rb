@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   layout 'with_sidebar'
   before_action :find_project
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :get_doc_categories, :update_parent_id]
   before_action :authenticate_user!, except: [:index, :show]
 
 
@@ -16,10 +16,9 @@ class DocumentsController < ApplicationController
   # GET /documents/1.json
   def show
     @children = @document.children.order(created_at: :desc)
-    get_doc_categories and return if params[:categories]
   end
 
-  def update
+  def update_parent_id
     change_document_parent(params[:new_parent_id]) if params[:new_parent_id]
     redirect_to project_document_path
   end
@@ -96,6 +95,8 @@ class DocumentsController < ApplicationController
     if @document.save
       new_parent = Document.find(new_parent_id)
       flash[:notice] = "You have successfully moved #{@document.title} to the #{new_parent.title} section."
+    else
+      flash[:error] = "There was a problem changing the #{@document.title} to the #{new_parent.title} section."
     end
   end
 
