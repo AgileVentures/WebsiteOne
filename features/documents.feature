@@ -167,10 +167,7 @@ Feature: Manage Document
    And I am on the "Show" page for document "Howto"
    When I click the very stylish "Change section" button
    Then I should see "Select new section for the document"
-   And I should not see "Guides" in "Modal window"
-   And I should not see "PullRequest" in "Modal window"
-   And I should not see "Documentation" in "Modal window"
-   And I should not see "Howto" in "Modal window"
+   And I should see "Decisions" in "Modal window"
    When I click "Decisions" in "Modal window"
    Then I should see "You have successfully moved Howto to the Decisions section"
-   And I should see "Decisions"
+   And I should see "Decisions" in "The Breadcrumb"

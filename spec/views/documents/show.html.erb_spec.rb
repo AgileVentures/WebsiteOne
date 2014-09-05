@@ -56,7 +56,7 @@ describe 'documents/show', type: :view do
         end
       end
 
-      it 'renders a Change secion link' do
+      it 'renders a Change section link' do
         rendered.within("#change_parent_link") do |link|
           expect(link).to have_css('i[class="fa fa-cogs"]')
         end
@@ -102,7 +102,7 @@ describe 'documents/show', type: :view do
 
   context 'when user is not logged in' do
     before :each do
-      view.stub(:user_signed_in?).and_return(false)
+      allow(view).to receive(:user_signed_in?).and_return(false)
     end
 
     it 'does not render an Edit link' do

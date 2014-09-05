@@ -34,6 +34,8 @@ module HtmlSelectorsHelpers
         '#ytplayer'
       when 'Modal window'
         '.modal-body'
+      when 'The Breadcrumb'
+        '#not-sidebar-content'
       when /^"(.+)"$/
         $1
 

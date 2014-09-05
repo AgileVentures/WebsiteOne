@@ -9,6 +9,14 @@ describe DocumentsController do
       'user_id' => "#{user.id}"
   } }
   let(:valid_session) { {} }
+  let(:categories) do 
+    [
+    FactoryGirl.create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: "Title-1"),
+    FactoryGirl.create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: "Title-2")
+    ]
+  end
+  let(:params) { {:id => categories.first.to_param, project_id: document.project.friendly_id, categories: 'true'} }
+
   before(:each) do
     @user = FactoryGirl.create(:user)
     request.env['warden'].stub :authenticate! => user
@@ -64,47 +72,41 @@ describe DocumentsController do
     end
   end
 
-  describe 'UPDATE show' do
-    context 'changes document parent' do
-      let(:categories) do 
-        [
-        FactoryGirl.create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: "Title-1"),
-        FactoryGirl.create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: "Title-2")
-        ]
-      end
-      let(:params) { {:id => categories.first.to_param, project_id: document.project.friendly_id, categories: 'true'} }
-
-      it 'assigns the available categories to @categories' do
-        get :show, params.merge({id: document.to_param})
-        extended_categories = categories.push(document)
-        expect(assigns(:categories)).to  match_array extended_categories
-      end
-
-      it 'calls the get_doc_categories function' do
-        expect(controller).to receive(:get_doc_categories)
-        get :show, params
-      end
-
+  describe 'get_doc_categories' do
+    context 'it has categories to show' do
       it 'renders the categories partial' do
-        get :show, params
+        get :get_doc_categories, params
         expect(response).to render_template(:partial => '_categories')
       end
 
-      it 'calls change_document_parent with the right param' do
-        expect(controller).to receive(:change_document_parent).with("555")
-        get :update, params.merge({ new_parent_id:'555' })
-      end
+      #it 'calls the get_doc_categories function' do
+        #expect(controller).to receive(:get_doc_categories)
+        #get :show, params
+      #end
 
-      it 'changes the document parent_id' do
-        get :update, params.merge({ new_parent_id:'556' })
-        categories.first.parent_id = 556
-        expect(assigns(:document)).to eq(categories.first)
+      it 'assigns the available categories to @categories' do
+        get :get_doc_categories, params.merge({id: document.to_param})
+        extended_categories = categories.push(document)
+        expect(assigns(:categories)).to  match_array extended_categories
       end
+    end
+  end
 
-      it 'assigns flash message after changing parent_id' do
-        get :update, params.merge({ new_parent_id:'556' })
-        expect(flash[:notice]).to eq("You have successfully moved Title-1 to the Title-2 section.")
-      end
+  describe 'change_document_parent' do
+    it 'calls change_document_parent with the right param' do
+      expect(controller).to receive(:change_document_parent).with("555")
+      get :update_parent_id, params.merge({ new_parent_id:'555' })
+    end
+
+    it 'changes the document parent_id' do
+      get :update_parent_id, params.merge({ new_parent_id:'556' })
+      categories.first.parent_id = 556
+      expect(assigns(:document)).to eq(categories.first)
+    end
+
+    it 'assigns flash message after changing parent_id' do
+      get :update_parent_id, params.merge({ new_parent_id:'556' })
+      expect(flash[:notice]).to eq("You have successfully moved Title-1 to the Title-2 section.")
     end
   end
 

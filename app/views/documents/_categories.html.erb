@@ -9,7 +9,7 @@
         <% if category.id == @document.id or category.id == @document.parent_id %>
           <% next %>
         <% else %>
-          <li><%= link_to category.title, project_document_path(@project, @document, new_parent_id: category.id), :method => :put %></li>
+          <li><%= link_to category.title, update_document_parent_id_path(@project, @document, new_parent_id: category.id), :method => :put %></li>
         <% end %>
       <% end %>
     </ul>
