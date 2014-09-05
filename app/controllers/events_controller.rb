@@ -28,7 +28,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    EventCreatorService.new(Event).perform(event_params,
+    EventCreatorService.new(Event).perform(Event.transform_params(params),
                                        success: ->(event) do
       @event = event
       flash[:notice] = 'Event Created'
@@ -42,7 +42,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.update_attributes(event_params)
+    if @event.update_attributes(Event.transform_params(params),)
       flash[:notice] = 'Event Updated'
       redirect_to events_path
     else
@@ -70,12 +70,4 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.friendly.find(params[:id])
   end
-
-
-  def event_params
-    temp_params = params.require(:event).permit!
-    temp_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
-    temp_params
-  end
-
 end

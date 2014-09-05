@@ -47,12 +47,16 @@ class Event < ActiveRecord::Base
     start_datetime
   end
 
-  def end_time
+  def series_end_time
+    repeat_ends ? repeat_ends_on.to_datetime : nil
+  end
+
+  def instance_end_time
     (start_datetime + duration*60).utc
   end
 
   def end_date
-    if (end_time < start_time)
+    if (series_end_time < start_time)
       (event_date.to_datetime + 1.day).strftime('%Y-%m-%d')
     else
       event_date
@@ -129,7 +133,7 @@ class Event < ActiveRecord::Base
 
   def schedule(starts_at = nil, ends_at = nil)
     starts_at ||= start_datetime
-    ends_at ||= end_time
+    ends_at ||= series_end_time
     if duration > 0
       s = IceCube::Schedule.new(starts_at, :end_time => ends_at, :duration => duration)
     else
