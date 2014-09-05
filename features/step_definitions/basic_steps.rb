@@ -322,6 +322,16 @@ Then(/^I should see an image with source "([^"]*)"$/) do |source|
   page.should have_css "img[src*=\"#{source}\"]"
 end
 
+Then(/^I should see an video with source "([^"]*)"$/) do |source|
+  Timeout::timeout(3.0) do
+    until page.has_selector? "iframe[src*=\"#{source}\"]" do
+      sleep(0.5)
+    end
+  end
+  #page.should have_selector 'iframe', src: source
+  page.should have_selector "iframe[src*=\"#{source}\"]"
+end
+
 Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, title_2|
   if negative
     expect(page.body).not_to match(/#{title_2}.*#{title_1}/m)

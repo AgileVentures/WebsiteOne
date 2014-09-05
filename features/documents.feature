@@ -155,3 +155,20 @@ Feature: Manage Document
     And I click "Insert Media" within the Mercury Editor Modal
     Then I should see an image with source "/assets/mercury/missing-image.png" within the Mercury Editor
     Then the Mercury Editor modal window should not be visible
+
+
+  @javascript
+  Scenario: Insert media model accepts full url youtube links
+    Given I am logged in
+    And I am using the Mercury Editor to edit document "Guides"
+    And I am focused on the "document body" within the Mercury Editor
+    And I click on the "Insert Media" button within the Mercury Toolbar
+    And I fill in "YouTube URL" with "https://www.youtube.com/watch?v=vwyaWGO_eEA" within the Mercury Editor Modal
+    And I click "Insert Media" within the Mercury Editor Modal
+    Then the Mercury Editor modal window should not be visible
+    And I should see an video with source "http://www.youtube.com/embed/vwyaWGO_eEA?wmode=transparent" within the Mercury Editor
+
+
+
+      #Then I should not see "is invalid" within the Mercury Modal
+
