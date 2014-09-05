@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:title) {|n| "Title #{n}"}
     content Faker::Lorem.paragraph(1)
     tag_list [ 'Ruby' ]
-    sequence(:slug) {|n| "friendly_id_#{n}" }
+    slug { title.parameterize }
     user
   end
 end
