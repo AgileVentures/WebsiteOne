@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
     pending = []
     hookups.each do |h|
       started = h.last_hangout && h.last_hangout.started?
-      expired_without_starting = !h.last_hangout && Time.now.utc > h.end_time
+      expired_without_starting = !h.last_hangout && Time.now.utc > h.instance_end_time 
       pending << h if !started && !expired_without_starting
     end
     pending
@@ -48,7 +48,7 @@ class Event < ActiveRecord::Base
   end
 
   def series_end_time
-    repeat_ends ? repeat_ends_on.to_datetime : nil
+    repeat_ends ? repeat_ends_on.to_time : nil
   end
 
   def instance_end_time
@@ -100,7 +100,7 @@ class Event < ActiveRecord::Base
 
   def next_occurrence_time_method(options = {})
     next_occurrence_set = next_occurrences(options)
-    !next_occurrence_set.empty? ? next_occurrence_set.first[:time].time : 0
+    !next_occurrence_set.empty? ? next_occurrence_set.first[:time] : 0
   end
 
   def next_occurrences(options = {})
@@ -131,22 +131,16 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def schedule(starts_at = nil, ends_at = nil)
-    starts_at ||= start_datetime
-    ends_at ||= series_end_time
-    if duration > 0
-      s = IceCube::Schedule.new(starts_at, :end_time => ends_at, :duration => duration)
-    else
-      s = IceCube::Schedule.new(starts_at, :end_time => ends_at)
-    end
+  def schedule()
+    sched = series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
     case repeats
       when 'never'
-        s.add_recurrence_time(starts_at)
+        sched.add_recurrence_time(start_datetime)
       when 'weekly'
         days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
-        s.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
+        sched.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
-    s
+    sched
   end
 
   def self.transform_params(params)
