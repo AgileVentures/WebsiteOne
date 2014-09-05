@@ -89,6 +89,7 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'unicorn'
+  gem 'unicorn' # Unicorn web server
+  gem 'newrelic_rpm' # New Relic analytics
 end
 
