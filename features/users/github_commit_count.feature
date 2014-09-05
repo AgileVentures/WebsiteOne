@@ -1,3 +1,4 @@
+@github_query
 Feature: Displaying GitHub contribution statistics for user
   As a member of AV
   So that I can find out what projects others are contributing to
