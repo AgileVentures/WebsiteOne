@@ -18,6 +18,6 @@ module SlackService
 
   def avatar_url(user)
     hash = Digest::MD5::hexdigest(user.email.strip.downcase)
-    "https://www.gravatar.com/avatar/#{hash}"
+    "https://www.gravatar.com/avatar/#{hash}?d=retro"
   end
 end
