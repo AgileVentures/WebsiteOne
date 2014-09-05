@@ -6,6 +6,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new(start_datetime: Time.now.utc, duration: 30)
+    @event.set_repeat_ends_string
   end
 
   def show
@@ -23,6 +24,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event.set_repeat_ends_string
   end
 
   def create

@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
   attr_accessor :next_occurrence_time_attr
+  attr_accessor :repeat_ends_string
 
   @@collection_time_future = 10.days
   @@collection_time_past = 15.minutes
@@ -19,6 +20,10 @@ class Event < ActiveRecord::Base
   REPEATS_OPTIONS = %w[never weekly]
   REPEAT_ENDS_OPTIONS = %w[never on]
   DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
+
+  def set_repeat_ends_string
+    @repeat_ends_string = repeat_ends ? "on" : "never"
+  end
 
   def self.hookups
     Event.where(category: "PairProgramming")
@@ -138,6 +143,16 @@ class Event < ActiveRecord::Base
         s.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
     s
+  end
+
+  def self.transform_params(params)
+    event_params = params.require(:event).permit!
+    if (params['start_date'].present? && params['start_time'].present?)
+             event_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
+           end
+    event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
+    event_params[:repeat_ends_on]= "#{params[:repeat_ends_on]} UTC"
+    event_params
   end
 
   def start_time_with_timezone
