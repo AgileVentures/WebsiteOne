@@ -92,21 +92,39 @@ describe DocumentsController do
     end
   end
 
-  describe 'change_document_parent' do
-    it 'calls change_document_parent with the right param' do
-      expect(controller).to receive(:change_document_parent).with("555")
-      get :update_parent_id, params.merge({ new_parent_id:'555' })
+  describe 'PUT update_document_parent_id/' do
+    let(:do_post) { post :update_parent_id, params.merge({ new_parent_id: parent_id }) }
+    let(:current_document) { Document.find_by_id(categories.first.id) }
+
+    context 'with a valid parent id' do
+      let(:parent) { Document.find_by_id(categories.last.id) }
+      let(:parent_id) { parent.id.to_s }
+
+      it 'changes the document parent id' do
+        do_post
+        expect(current_document.parent_id).to eq(parent.id)
+      end
+
+      it 'assigns flash message after changing parent_id' do
+        do_post
+        expect(flash[:notice]).to eq('You have successfully moved Title-1 to the Title-2 section.')
+      end
     end
 
-    it 'changes the document parent_id' do
-      get :update_parent_id, params.merge({ new_parent_id:'556' })
-      categories.first.parent_id = 556
-      expect(assigns(:document)).to eq(categories.first)
-    end
+    context 'with an invalid parent id' do
+      let(:parent_id) { 'invalid_id' }
 
-    it 'assigns flash message after changing parent_id' do
-      get :update_parent_id, params.merge({ new_parent_id:'556' })
-      expect(flash[:notice]).to eq("You have successfully moved Title-1 to the Title-2 section.")
+      it 'does not change the document parent id' do
+        old_parent_id = current_document.parent_id
+        do_post
+        current_document.reload
+        expect(current_document.parent_id).to eq(old_parent_id)
+      end
+
+      it 'renders a flash error message' do
+        do_post
+        expect(flash[:error]).to eq('Could not find the new parent document')
+      end
     end
   end
 
