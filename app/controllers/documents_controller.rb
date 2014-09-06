@@ -92,11 +92,15 @@ class DocumentsController < ApplicationController
 
   def change_document_parent(new_parent_id)
     @document.parent_id = new_parent_id
-    if @document.save
-      new_parent = Document.find(new_parent_id)
-      flash[:notice] = "You have successfully moved #{@document.title} to the #{new_parent.title} section."
-    else
-      flash[:error] = "There was a problem changing the #{@document.title} to the #{new_parent.title} section."
+    begin
+      if @document.save
+        new_parent = Document.find(new_parent_id)
+        flash[:notice] = "You have successfully moved #{@document.title} to the #{new_parent.title} section."
+      else
+        flash[:error] = "There was a problem changing the #{@document.title} to the new section."
+      end
+    rescue
+      flash[:error] = "Some unexpected problem occured."
     end
   end
 
