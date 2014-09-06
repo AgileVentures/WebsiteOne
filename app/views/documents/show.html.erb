@@ -37,11 +37,15 @@
 <div class="small-divider"></div>
 <div>
   <% if @document.versions.count > 1 %>
-    <h4>Revisions</h4>
-    <% @document.versions.each do |version| %>
-      <%= user_details(version.whodunnit.to_i) %>
-      <%= version.event %>d <b>"<%= @document.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago <br/>
-    <% end %>
+    <a id="revisions-anchor" href="#" h4 style="display: inline-flex;">Revisions</h4><i id="arrow" class="fa fa-arrow-down fa-lg" style="display:inline-flex;margin-left:5px;position:relative;top:2px;"></i></a>
+    <div style="margin-bottom: 20px">
+      <div id="revisions" style="display: none;">
+      <% @document.versions.each do |version| %>
+        <%= user_details(version.whodunnit.to_i) %>
+        <%= version.event %>d <b>"<%= @document.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago<br/>
+      <% end %>
+      </div>
+    </div>
   <% end %>
   <br/>
   <% unless @children.empty? %>
