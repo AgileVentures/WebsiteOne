@@ -163,12 +163,21 @@ Feature: Manage Document
     And I am using the Mercury Editor to edit document "Guides"
     And I am focused on the "document body" within the Mercury Editor
     And I click on the "Insert Media" button within the Mercury Toolbar
-    And I fill in "YouTube URL" with "https://www.youtube.com/watch?v=vwyaWGO_eEA" within the Mercury Editor Modal
+    And I fill in "YouTube URL" with "https://www.youtube.com/watch?v=foo" within the Mercury Editor Modal
     And I click "Insert Media" within the Mercury Editor Modal
     Then the Mercury Editor modal window should not be visible
-    And I should see an video with source "http://www.youtube.com/embed/vwyaWGO_eEA?wmode=transparent" within the Mercury Editor
+    And I should see an video with source "http://www.youtube.com/embed/foo?wmode=transparent" within the Mercury Editor
+
+  @javascript
+  Scenario: Insert media model rejects badly formatted youtube links
+    Given I am logged in
+    And I am using the Mercury Editor to edit document "Guides"
+    And I am focused on the "document body" within the Mercury Editor
+    And I click on the "Insert Media" button within the Mercury Toolbar
+    And I fill in "YouTube URL" with "https://www.youtube.io/watch?v=foo" within the Mercury Editor Modal
+    And I click "Insert Media" within the Mercury Editor Modal
+    Then I should see "is invalid" within the Mercury Modal
+    And the Mercury Editor modal window should be visible
 
 
-
-      #Then I should not see "is invalid" within the Mercury Modal
 
