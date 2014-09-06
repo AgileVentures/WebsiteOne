@@ -86,6 +86,13 @@ When(/^I follow "([^"]*)"$/) do |text|
   click_link text
 end
 
+When(/^I dropdown the "([^"]*)" menu$/) do |text|
+  within ('.navbar') do
+    click_link text
+  end
+
+end
+
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in field, :with => value

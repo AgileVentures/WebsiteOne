@@ -58,7 +58,17 @@
             <li><%= link_to 'Projects', projects_path, class: active_if_controller_is('projects') %></li>
             <li><%= link_to 'Members', users_path, class: active_if_controller_is('users') %></li>
             <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
-            <li><%= link_to 'Events', events_path, class: active_if_controller_is('events') %></li>
+            <li class="dropdown">
+              <a href="#" id="events-dropdown" data-toggle="dropdown">Events<span class="caret"></span></a>
+              <ul class="dropdown-menu" style="width: 200px !important;">
+                <a href="<%= events_path %>">
+                  <li><i class="fa fa-calendar-o"></i>Upcoming events</li>
+                </a>
+                <a href="<%= scrums_path %>">
+                  <li><i class="fa fa-play"></i>Past scrums</li>
+                </a>
+              </ul>
+            </li>
             <li><%= link_to 'Getting started', static_page_path('Getting started'), class: "#{is_in_static_page?('Getting started') ? 'active' : ''}" %></li>
           </ul>
         </div>
