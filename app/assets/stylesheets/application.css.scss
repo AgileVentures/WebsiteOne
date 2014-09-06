@@ -7,3 +7,21 @@
 @import "timeline";
 @import "global/*";
 @import "layout/*";
+
+.row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.project-aside {
+	margin-top: 43px;
+	padding: 0 15px 10px 15px;
+	border: 1px solid #dddddd;
+	margin-left: -1px;
+}
