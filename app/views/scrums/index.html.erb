@@ -1,7 +1,9 @@
 <%= javascript_include_tag 'scrums' %>
-<div class="jumbotron">
-  <h1>Welcome to our Scrums Page</h1>
-  <h3>Choose a scrum to view</h3>
+<div class="row">
+  <div class="col-xs-12 col-sm-10">
+    <h1>Previous scrums</h1>
+    <p>We have regular daily meetings (scrums) online where our members get together, discuss projects, share knowledge and plan programming sessions. </p>
+  </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="player" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -20,31 +22,27 @@
 
 <ul class="timeline">
   <% @scrums.each_slice(2) do |videos| %>
-        <li>
-          <div class="timeline-badge"><i class="glyphicon glyphicon-film"></i></div>
+        <li class="arrow-left">
+          <div class="timeline-badge"><i class="fa fa-film"></i></div>
           <div class="timeline-panel" >
             <div class="timeline-heading">
               <h4 class="timeline-title">
                 <%= scrum_link videos.first %>
                 <%= videos.first[:title] %>
               </h4>
-              <p>
-                <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.first[:published].to_date %></small>
-              </p>
+                <small class="text-white"><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:published].to_date %></small>
             </div>
           </div>
         </li>
-        <li class="timeline-inverted">
-          <div class="timeline-badge warning"><i class="glyphicon glyphicon-film"></i></div>
+        <li class="timeline-inverted arrow-right">
+          <div class="timeline-badge warning"><i class="fa fa-film"></i></div>
           <div class="timeline-panel" >
             <div class="timeline-heading">
               <h4 class="timeline-title">
                 <%= scrum_link videos.last %>
                 <%= videos.last[:title] %>
               </h4>
-              <p>
-                <small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= videos.last[:published].to_s(:db) %></small>
-              </p>
+                <small class="text-white"><i class="fa fa-clock-o"></i><%= videos.last[:published].to_s(:db) %></small>
             </div>
           </div>
         </li>
