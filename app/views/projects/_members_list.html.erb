@@ -8,7 +8,7 @@
         <li class="members-list-item">
           <a href="<%= user_path(member) %>" data-toggle="tooltip"
             data-placement="top" title="<%= presenter.display_name %>">
-            <img src="<%= presenter.gravatar_src %>" class="projects-user-avatar">
+            <%= presenter.gravatar_image(class: 'projects-user-avatar') %>
           </a>
         </li>
       <% end %>

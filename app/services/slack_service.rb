@@ -8,7 +8,9 @@ module SlackService
     Net::HTTP.post_form uri, {
       title: hangout.title,
       link: hangout.hangout_url,
-      type: hangout.category
+      type: hangout.category,
+      host_name: hangout.user.display_name,
+      host_avatar: hangout.user.gravatar_url
     }
   end
 end
