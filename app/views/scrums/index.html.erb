@@ -28,7 +28,7 @@
             <div class="timeline-heading">
               <h4 class="timeline-title">
                 <%= scrum_link videos.first %>
-                <%= videos.first[:title] %>
+
               </h4>
                 <small class="text-white"><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:published].to_date %></small>
             </div>
@@ -40,7 +40,6 @@
             <div class="timeline-heading">
               <h4 class="timeline-title">
                 <%= scrum_link videos.last %>
-                <%= videos.last[:title] %>
               </h4>
                 <small class="text-white"><i class="fa fa-clock-o"></i><%= videos.last[:published].to_s(:db) %></small>
             </div>
