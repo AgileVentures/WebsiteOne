@@ -6,7 +6,7 @@ module DisqusHelper
         id: user.id,
         username: user.display_name,
         email: user.email,
-        avatar: presenter.gravatar_src,
+        avatar: presenter.gravatar_url,
         url: user_url(user)
       }.to_json
     end
