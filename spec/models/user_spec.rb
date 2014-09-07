@@ -147,6 +147,21 @@ describe User, :type => :model do
     end
   end
 
+  describe '#gravatar_url' do
+    let(:email) { ' MyEmailAddress@example.com  ' }
+    let(:user_hash) { '0bc83cb571cd1c50ba6f3e8a78ef1346' }
+    let(:user) { User.new(email: email) }
+
+    it 'should construct a link to the image at gravatar.com' do
+      regex = /^http[s]:\/\/.*gravatar.*#{user_hash}/
+        expect(user.gravatar_url).to match(regex)
+    end
+
+    it 'should be able to specify image size' do
+      expect(user.gravatar_url(size: 200)).to match(/\?s=200&/)
+    end
+  end
+
   describe '.search' do
     subject { User.search(params) }
     let(:params) { {} }

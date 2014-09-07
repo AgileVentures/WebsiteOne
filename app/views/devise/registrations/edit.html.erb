@@ -8,7 +8,7 @@
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
     <% present resource do |presenter| %>
       <div class="col-md-3 col-md-offset-1">
-        <img src="<%= presenter.gravatar_src(size: 120) %>" class="thumbnail img-rounded" style=" margin-right: 10px;">
+        <%= presenter.gravatar_image(size: 120, class: 'thumbnail img-rounded', style: 'margin-right: 10px') %>
         <%= link_to 'Change your avatar', 'http://en.gravatar.com/emails/', target: '_blank' %>
         <div class="checkbox">
           <%= f.label :display_profile, "#{f.check_box(:display_profile)} Make profile public".html_safe %>
