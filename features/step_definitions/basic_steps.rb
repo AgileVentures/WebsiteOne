@@ -323,13 +323,10 @@ Then(/^I should see an image with source "([^"]*)"$/) do |source|
 end
 
 Then(/^I should see an video with source "([^"]*)"$/) do |source|
-  Timeout::timeout(3.0) do
-    until page.has_selector? "iframe[src*=\"#{source}\"]" do
-      sleep(0.5)
-    end
+  until page.has_css? "iframe[src*=\"#{source}\"]" do
+    sleep(0.5)
   end
-  #page.should have_selector 'iframe', src: source
-  page.should have_selector "iframe[src*=\"#{source}\"]"
+  expect(page).to have_css "iframe[src*=\"#{source}\"]"
 end
 
 Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, title_2|
