@@ -26,11 +26,8 @@
           <div class="timeline-badge"><i class="fa fa-film"></i></div>
           <div class="timeline-panel" >
             <div class="timeline-heading">
-              <h4 class="timeline-title">
                 <%= scrum_link videos.first %>
-
-              </h4>
-                <small class="text-white"><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:published].to_date %></small>
+                <p><small><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:published].to_date %></small></p>
             </div>
           </div>
         </li>
@@ -38,10 +35,8 @@
           <div class="timeline-badge warning"><i class="fa fa-film"></i></div>
           <div class="timeline-panel" >
             <div class="timeline-heading">
-              <h4 class="timeline-title">
                 <%= scrum_link videos.last %>
-              </h4>
-                <small class="text-white"><i class="fa fa-clock-o"></i><%= videos.last[:published].to_s(:db) %></small>
+                <p><small><i class="fa fa-clock-o"></i><%= videos.last[:published].to_s(:db) %></small></p>
             </div>
           </div>
         </li>
