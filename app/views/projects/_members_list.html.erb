@@ -3,7 +3,7 @@
   <% if members.empty? %>
     <p>No members in project <strong><%= @project.title %></strong></p>
   <% else %>
-    <ul class="media-list row">
+    <ul class="media-list">
     <% members.first(5).each do |member| %>
       <% present member do |presenter| %>
         <li class="media-item">
