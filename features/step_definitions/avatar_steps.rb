@@ -24,5 +24,5 @@ end
 And(/^I should see the avatar for "(.*?)" at( least)? (\d*?) px$/) do |user, greater_than, size|
   this_user = User.find_by_first_name(user)
   # TODO check for size: > size if greater_than is set
-  expect(page).to have_xpath("//img[contains(@src, '#{this_user.presenter.gravatar_src(size: size)}')]")
+  expect(page).to have_xpath("//img[contains(@src, '#{this_user.gravatar_url(size: size)}')]")
 end
