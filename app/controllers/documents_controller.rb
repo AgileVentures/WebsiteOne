@@ -91,17 +91,13 @@ class DocumentsController < ApplicationController
   end
 
   def change_document_parent(new_parent_id)
-    @document.parent_id = new_parent_id
-    begin
-      if @document.save
-        new_parent = Document.find(new_parent_id)
-        flash[:notice] = "You have successfully moved #{@document.title} to the #{new_parent.title} section."
-      else
-        flash[:error] = "There was a problem changing the #{@document.title} to the new section."
-      end
-    rescue
-      flash[:error] = "Some unexpected problem occured."
-    end
+    valid_category = Document.find_by_id(new_parent_id)
+    if valid_category
+      @document.parent_id = valid_category.id
+      flash[:notice] = "You have successfully moved #{@document.title} to the #{valid_category.title} section." if @document.save
+    else
+      flash[:error] = "Could not find the new parent document"
+		end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
