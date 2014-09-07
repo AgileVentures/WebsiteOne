@@ -13,11 +13,11 @@
           <% if current_user.following?(@project) %>
             <% # custom_css_btn 'edit', 'fa fa-pencil-square-o', edit_project_path(@project) %>
             <%= link_to 'Edit Project Details', edit_project_path(@project) %>
-            <ul>
-              <li class="hangout-btn">
+            
+              <div class="hangout-btn pull-right">
                 <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>
-              </li>
-            </ul>
+              </div>
+            
             <hr>
           <% end %>
         <% end %>
@@ -28,7 +28,13 @@
 
 <div class="project-main">
   <div class="row">
-    <div class="project-main col-md-8">
+    
+    <div class="col-md-4 project-sidebar pull-right" role="complementary">
+      <%= render 'highlight_box', members: @members %>
+      <%= render 'members_list',  members: @members %>
+    </div>
+
+    <div class="project-main col-md-8 pull-left">
       <ul class="nav nav-tabs">
         <li id="pitch" class="active">
           <a href="#pitch_content" data-toggle="tab">Home</a>
@@ -111,12 +117,11 @@
         <div class="tab-pane" id="videos_list">
           <div class="row">
             <% if @videos.empty? %>
-              <p style="margin-top: 20px;">No videos in project <strong><%= @project.title %></strong></p>
+              <p>No videos in project <strong><%= @project.title %></strong></p>
             <% else %>
               <div class="col-sm-12">
                 <h4 id="video_contents"><%= @videos.first[:content] %></h4>
-                <iframe id="ytplayer" type="text/html" width="480" height="320"
-                        src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
+                <iframe id="ytplayer" type="text/html" width="480" height="320" src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
               </div>
               <div class="col-sm-12">
                 <h2>List of Project videos</h2>
@@ -142,39 +147,6 @@
           <%= render 'activity' %>
         </div>
       </div>
-    </div>
-    <div class="project-aside col-md-4">
-      <div class="project-highlight-box">
-        <div class="doc-status-text">
-          Status: <%= @project.status.upcase %><br>
-          <%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %>
-        </div>
-
-        <% if @project.github_url.present? %>
-          <p><i class="fa fa-github-alt fa-lg"></i>
-            <%= link_to "#{@project.github_url.split('/').last} ", @project.github_url %>on GitHub</p>
-        <% else %>
-          <p><i class="fa fa-github-alt fa-lg"></i> not linked to GitHub</p>
-        <% end %>
-
-        <% if @project.pivotaltracker_url.present? %>
-          <p><i class="fa fa-gear fa-lg"></i>
-            <%= link_to "#{@project.title} ", @project.pivotaltracker_url %>on PivotalTracker</p>
-        <% else %>
-          <p><i class="fa fa-gear fa-lg"></i> not linked to PivotalTracker</p>
-        <% end %>
-        
-        <% if user_signed_in? && current_user.following?(@project) %>
-            <%= custom_css_btn 'leave project', 'fa fa-star', unfollow_project_path(@project) %>
-          <% else %>
-          <div class="btn-join">
-            <%= custom_css_btn 'join project', 'fa fa-star-o', follow_project_path(@project) %>
-          </div>
-        <% end %>
-      </div>
-
-      <div><%= render 'members_list', members: @members %></div>
-
     </div>
   </div>
 </div>
