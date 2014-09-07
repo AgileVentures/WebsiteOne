@@ -1,7 +1,7 @@
 module ScrumsHelper
   def scrum_link(video)
     link_to(
-      raw('<i class="fa fa-bg fa-play" style="color: white;"></i>') + video[:title],
+      raw('<i class="fa fa-bg fa-play"></i>') + video[:title],
       video[:url], {
         id: video[:id],
         class: 'scrum_yt_link',
