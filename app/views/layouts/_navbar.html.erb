@@ -60,12 +60,12 @@
             <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
             <li class="dropdown">
               <a href="#" id="events-dropdown" data-toggle="dropdown">Events<span class="caret"></span></a>
-              <ul class="dropdown-menu" style="width: 200px !important;">
-                <a href="<%= events_path %>">
-                  <li><i class="fa fa-calendar-o"></i>Upcoming events</li>
+              <ul class="dropdown-menu custom_menu">
+                <a class="custom_menu_link" href="<%= events_path %>">
+                  <li><i class="fa fa-calendar-o custom_menu_item"></i>Upcoming events</li>
                 </a>
-                <a href="<%= scrums_path %>">
-                  <li><i class="fa fa-play"></i>Past scrums</li>
+                <a class="custom_menu_link" href="<%= scrums_path %>">
+                  <li><i class="fa fa-play custom_menu_item"></i>Past scrums</li>
                 </a>
               </ul>
             </li>
