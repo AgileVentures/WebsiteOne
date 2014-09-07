@@ -30,15 +30,11 @@ $avatar-size: 32px;
 .members-list-item {
   display: inline-block;
 }
-
-.project-aside {
+.project-sidebar {
   // mainly overrides in this section :(
   margin-top: 43px;
   padding: 0 15px 10px 15px;
 
-  .highlight-box {
-
-  }
   .media-body {
     display: inline;
   }
@@ -65,6 +61,22 @@ $avatar-size: 32px;
   }
 }
 
-.project-highlight-box { // replace with bootstrap well?
-  border: 1px solid #dddddd;
+.highlight-box { // replace with bootstrap well?
+  // border: 1px solid #dddddd;
+}
+.widget-title {
+  font-size: 1em;
+  font-weight: 700;
+  span {
+    font-weight: 400;
+  }
+}
+.btn-join {
+  background-color: #15ab94; // #15ab94, #f89403
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 700;
+  &:hover {
+    background-color: darken(#15ab94, 7%)
+  }
 }
