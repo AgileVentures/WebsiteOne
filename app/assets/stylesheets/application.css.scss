@@ -7,3 +7,18 @@
 @import "timeline";
 @import "global/*";
 @import "layout/*";
+
+.custom_menu {
+  width: 200px !important;
+  background-color: #34495e !important;
+}
+
+.custom_menu_item {
+  margin-left: 10px;
+  margin-top: 10px;
+  color: white !important;
+}
+
+.custom_menu_link {
+  color: white !important;
+}
