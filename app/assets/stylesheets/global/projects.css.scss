@@ -1,6 +1,8 @@
 @import "variables";
 @import "mixins";
-
+* {
+  outline: 1px dotted;
+}
 .activity {
   i {
     margin:10px 0 0 5px;
