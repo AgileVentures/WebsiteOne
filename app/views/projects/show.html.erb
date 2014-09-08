@@ -13,7 +13,8 @@
           <% if current_user.following?(@project) %>
             <% # custom_css_btn 'edit', 'fa fa-pencil-square-o', edit_project_path(@project) %>
             <%= link_to 'Edit Project Details', edit_project_path(@project) %>
-            
+            <% # custom_css_btn 'leave project', 'fa fa-star', unfollow_project_path(@project) %>
+            <a href="<%= unfollow_project_path(@project) %>" data-toggle="tooltip" data-placement="top" title="leave project">Leave Project</a>  
               <div class="hangout-btn pull-right">
                 <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>
               </div>
@@ -31,6 +32,7 @@
     
     <div class="project-sidebar col-xs-12 col-md-4 col-md-push-8" role="complementary">
       <%= render 'highlight_box', members: @members %>
+      <%= render 'connections' %>
       <%= render 'members_list',  members: @members %>
     </div>
 
@@ -144,4 +146,3 @@
     </div>
   </div>
 </div>
-

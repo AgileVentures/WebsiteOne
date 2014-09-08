@@ -2,28 +2,11 @@
   
   <p>Project status: <%= @project.status.upcase %></p>
   <p class="doc-status-text"><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %></p>
-  
-
-  <% if @project.github_url.present? %>
-    <p><i class="fa fa-github-alt fa-lg"></i>
-      <span class="small"><%= link_to "#{@project.github_url.split('/').last} ", @project.github_url %>on GitHub</span></p>
-  <% else %>
-    <p><i class="fa fa-github-alt fa-lg"></i> <span class="small">not linked to GitHub</span></p>
-  <% end %>
-
-  <% if @project.pivotaltracker_url.present? %>
-    <p><i class="fa fa-gear fa-lg"></i>
-      <span class="small"><%= link_to "#{@project.title} ", @project.pivotaltracker_url %>on PivotalTracker</span></p>
-  <% else %>
-    <p><i class="fa fa-gear fa-lg"></i> <span class="small">not linked to PivotalTracker</span></p>
-  <% end %>
 
   <% if user_signed_in? && current_user.following?(@project) %>
-      <% # custom_css_btn 'leave project', 'fa fa-star', unfollow_project_path(@project) %>
-      <a href="<%= unfollow_project_path(@project) %>" data-toggle="tooltip" data-placement="top" title="leave project">Leave Project</a>
-    <% else %>
-      <% # custom_css_btn 'join project', 'fa fa-star-o', follow_project_path(@project) %>
-      <a href="<%= follow_project_path(@project) %>" data-toggle="tooltip" data-placement="top" title="join project" class="btn btn-block btn-join">Join this Project</a>
+  <% else %>
+    <% # custom_css_btn 'join project', 'fa fa-star-o', follow_project_path(@project) %>
+    <a href="<%= follow_project_path(@project) %>" data-toggle="tooltip" data-placement="top" title="join project" class="btn btn-block btn-join">Join this Project</a>
   <% end %>
 
 </div>
