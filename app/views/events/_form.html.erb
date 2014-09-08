@@ -1,7 +1,9 @@
 <% provide :title, 'New Events' %>
 
-<% start_date = params.fetch(:start_date, @event.start_datetime).to_date %>
-<% start_time = params.fetch(:start_time,  @event.start_datetime).to_time %>
+<% start_datetime = params.fetch(:start_date, @event.start_datetime) %>
+<% start_datetime = Time.now if start_datetime.nil? %>
+<% start_date = start_datetime.to_date %>
+<% start_time = start_datetime.to_time %>
 <% duration = params.fetch(:duration, @event.duration) %>
 
 <div class="col-lg-8 col-lg-offset-2">
