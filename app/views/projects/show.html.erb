@@ -53,41 +53,37 @@
       <!-- Tab panes -->
       <div class="tab-content" style="background: #fff;">
         <div class="tab-pane active" id="pitch_content">
-          <div class="row">
-            <div class="col-md-12">
-              <img src="http://singularityhub.com/wp-content/uploads/2009/12/robot-cowboy-simon-dominic-brewer.jpg"
-              style="width:100%;max-width:100%;margin-top:1em;margin-bottom:1em;">
-              <p>
-                <b>Video games have come a long way</b> from the days of the beep: full orchestras, surround sound, interactive music and large teams of people collaborating to bring you an amazing experience. Help us to document and share the historical changes in video game sound from the beep through to today.
-              </p>
-              <p>
-                <b>Relive the moments of your childhood</b>, and hear the stories behind the songs and sounds of your favourite games from the people who created them.&nbsp;
-              </p>
-              <p>
-                Help us to <b>give the composers and sound designers</b> throughout game history a chance to tell their own stories, to share the truly amazing things that they achieved.
-              </p>
-              <p>
-                I've devoted over a decade of my life to documenting and sharing information about video game sound. I've published four books about game sound. I've played thousands of games and obsessed over the tiniest details in the technology. Now, I'd like to go out and "hand over the mic" to those people who worked on the games, and give them an opportunity to speak, to tell you in their own words about what they did and why. And <b>to give you</b> a glimpse of the fascinating stories I've heard that lurk behind your favourite games. It's time we gave these men and women the credit they deserve.
-              </p>
-              <p><b>We're going to be covering:</b></p>
-              <p><b>Beep aims to be a 90-minute film, with lots of DVD-extras thrown in, and will include:</b></p>
-              <ul>
-                <li>interviews with as many great people as we can get to on 3 continents</li>
-                <li>a complete history of the game sound from the Victorian mechanical arcades, pinball, and the arcades through to today's orchestral performances and full surround soundtracks</li>
-                <li>
-                the psychology of game sound
-                </li>
-                <li>behind the scenes making-of footage for sound effects, voice and music</li>
-                <li>chiptunes and current uses of game sound technology outside games<br>
-                </li>
-                <li>the tools and techniques used to compose the music and sound <br>
-                </li>
-                <li>bonus material: You'll hear tips on how to get into the industry, and a tribute to Ryu Umemoto, with an interview with his friend Audun Sorlie<br>
-                </li>
-              </ul>
-              <p>Much of what doesn't make it into the film <b>will be shared</b> <b>with our backers</b> on our website, so if you have a favourite composer, you can watch the whole interview! Entire interviews will also be transcribed in the accompanying book, so you can read the whole story.</p>
-            </div>
-          </div>
+          <img src="http://singularityhub.com/wp-content/uploads/2009/12/robot-cowboy-simon-dominic-brewer.jpg"
+          style="width:100%;max-width:100%;margin-top:1em;margin-bottom:1em;">
+          <p>
+            <b>Video games have come a long way</b> from the days of the beep: full orchestras, surround sound, interactive music and large teams of people collaborating to bring you an amazing experience. Help us to document and share the historical changes in video game sound from the beep through to today.
+          </p>
+          <p>
+            <b>Relive the moments of your childhood</b>, and hear the stories behind the songs and sounds of your favourite games from the people who created them.&nbsp;
+          </p>
+          <p>
+            Help us to <b>give the composers and sound designers</b> throughout game history a chance to tell their own stories, to share the truly amazing things that they achieved.
+          </p>
+          <p>
+            I've devoted over a decade of my life to documenting and sharing information about video game sound. I've published four books about game sound. I've played thousands of games and obsessed over the tiniest details in the technology. Now, I'd like to go out and "hand over the mic" to those people who worked on the games, and give them an opportunity to speak, to tell you in their own words about what they did and why. And <b>to give you</b> a glimpse of the fascinating stories I've heard that lurk behind your favourite games. It's time we gave these men and women the credit they deserve.
+          </p>
+          <p><b>We're going to be covering:</b></p>
+          <p><b>Beep aims to be a 90-minute film, with lots of DVD-extras thrown in, and will include:</b></p>
+          <ul>
+            <li>interviews with as many great people as we can get to on 3 continents</li>
+            <li>a complete history of the game sound from the Victorian mechanical arcades, pinball, and the arcades through to today's orchestral performances and full surround soundtracks</li>
+            <li>
+            the psychology of game sound
+            </li>
+            <li>behind the scenes making-of footage for sound effects, voice and music</li>
+            <li>chiptunes and current uses of game sound technology outside games<br>
+            </li>
+            <li>the tools and techniques used to compose the music and sound <br>
+            </li>
+            <li>bonus material: You'll hear tips on how to get into the industry, and a tribute to Ryu Umemoto, with an interview with his friend Audun Sorlie<br>
+            </li>
+          </ul>
+          <p>Much of what doesn't make it into the film <b>will be shared</b> <b>with our backers</b> on our website, so if you have a favourite composer, you can watch the whole interview! Entire interviews will also be transcribed in the accompanying book, so you can read the whole story.</p>
         </div>
         <div class="tab-pane" id="documents_list">
           <% if user_signed_in? %>
@@ -115,7 +111,6 @@
           <% end %>
         </div>
         <div class="tab-pane" id="videos_list">
-          <div class="row">
             <% if @videos.empty? %>
               <p>No videos in project <strong><%= @project.title %></strong></p>
             <% else %>
@@ -139,7 +134,6 @@
                     </tr>
                   <% end %>
                 </table>
-              </div>
             <% end %>
           </div>
         </div>
