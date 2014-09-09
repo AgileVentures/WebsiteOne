@@ -7,7 +7,7 @@ module Statistics
       when :articles then
         stats[:count] = Article.count
       when :projects then
-        stats[:count] = Project.where(status: "active").length
+        stats[:count] = Project.where("lower(status) = ?", "active").length
       when :members then
         stats[:count] = User.count
       when :documents then
