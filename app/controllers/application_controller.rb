@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
-  before_filter :get_next_event, :store_location
+  before_filter :get_next_scrum, :store_location
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   include ApplicationHelper
@@ -48,8 +48,8 @@ class ApplicationController < ActionController::Base
     request.get? && !request.xhr?
   end	
 
-  def get_next_event
-    @next_event = Event.next_event_occurrence
+  def get_next_scrum
+    @next_event = Event.next_scrum_occurrence
   end
 
   def store_location
