@@ -245,6 +245,17 @@ Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
 
+Then(/^I should( not)? see the supporter content/) do |negative|
+  unless negative
+    find(:css, 'div#sponsorsBar').should be_visible
+    #expect(page).to have_css 'div#sponsorsBar', visible: true
+  else
+    #find(:css, 'div#sponsorsBar').should_not be_visible
+    expect(page).to_not have_css '#sponsorsBar'
+  end
+
+end
+
 #Then(/^I should see "(.*?)"$/) do |string|
 #  #expect(page).to have_content(string)
 #  page.should have_content(string)
@@ -340,3 +351,17 @@ Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, t
   end
 end
 
+
+Given(/^I am on a (.*)/) do |device|
+  case device
+    when 'desktop'
+      agent = 'Poltergeist'
+    when 'tablet'
+      agent = 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10'
+    when 'smartphone'
+      agent = 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7'
+    else
+      pending
+  end
+  page.driver.headers = { 'User-Agent' => agent }
+end
