@@ -1,0 +1,44 @@
+<h2>Active Hookups</h2>
+<% if @active_pp_hangouts.present? %>
+    <table id="active_hookups" class='hookups_table'>
+      <tr>
+        <th>Title</th>
+        <th>Start Date</th>
+        <th>Start Time</th>
+        <th>Actions</th>
+      </tr>
+      <% @active_pp_hangouts.each do |hangout| %>
+          <tr>
+            <td><%= hangout.title %></td>
+            <td><%= format_date(hangout.start_datetime) %></td>
+            <td><%= format_time(hangout.start_datetime) %></td>
+            <td id="join">
+              <%= link_to 'Join', hangout.hangout_url %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+<h2>Pending Hookups</h2>
+<% if @pending_hookups.present? %>
+    <table id="pending_hookups" class='hookups_table'>
+      <tr>
+        <th>Title</th>
+        <th>Start Date</th>
+        <th>Time range</th>
+        <th>Actions</th>
+      </tr>
+      <% @pending_hookups.each do |hookup| %>
+          <tr>
+            <td><%= hookup.name %></td>
+            <td><%= format_date(hookup.start_datetime) %></td>
+            <td><%= format_time_range(hookup) %></td>
+            <% if user_signed_in? %>
+                <td id="start">
+                  <%= link_to 'Create Hangout', event_path(hookup) %>
+                </td>
+            <% end %>
+          </tr>
+      <% end %>
+    </table>
+<% end %>

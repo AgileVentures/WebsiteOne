@@ -9,6 +9,14 @@ describe DocumentsController do
       'user_id' => "#{user.id}"
   } }
   let(:valid_session) { {} }
+  let(:categories) do 
+    [
+    FactoryGirl.create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: "Title-1"),
+    FactoryGirl.create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: "Title-2")
+    ]
+  end
+  let(:params) { {:id => categories.first.to_param, project_id: document.project.friendly_id, categories: 'true'} }
+
   before(:each) do
     @user = FactoryGirl.create(:user)
     request.env['warden'].stub :authenticate! => user
@@ -60,6 +68,62 @@ describe DocumentsController do
         expect {
           get :show, { id: document.to_param, project_id: @document_2.project.friendly_id }
         }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
+
+  describe 'get_doc_categories' do
+    context 'it has categories to show' do
+      it 'renders the categories partial' do
+        get :get_doc_categories, params
+        expect(response).to render_template(:partial => '_categories')
+      end
+
+      #it 'calls the get_doc_categories function' do
+        #expect(controller).to receive(:get_doc_categories)
+        #get :show, params
+      #end
+
+      it 'assigns the available categories to @categories' do
+        get :get_doc_categories, params.merge({id: document.to_param})
+        extended_categories = categories.push(document)
+        expect(assigns(:categories)).to  match_array extended_categories
+      end
+    end
+  end
+
+  describe 'PUT update_document_parent_id/' do
+    let(:do_post) { post :update_parent_id, params.merge({ new_parent_id: parent_id }) }
+    let(:current_document) { Document.find_by_id(categories.first.id) }
+
+    context 'with a valid parent id' do
+      let(:parent) { Document.find_by_id(categories.last.id) }
+      let(:parent_id) { parent.id.to_s }
+
+      it 'changes the document parent id' do
+        do_post
+        expect(current_document.parent_id).to eq(parent.id)
+      end
+
+      it 'assigns flash message after changing parent_id' do
+        do_post
+        expect(flash[:notice]).to eq('You have successfully moved Title-1 to the Title-2 section.')
+      end
+    end
+
+    context 'with an invalid parent id' do
+      let(:parent_id) { 'invalid_id' }
+
+      it 'does not change the document parent id' do
+        old_parent_id = current_document.parent_id
+        do_post
+        current_document.reload
+        expect(current_document.parent_id).to eq(old_parent_id)
+      end
+
+      it 'renders a flash error message' do
+        do_post
+        expect(flash[:error]).to eq('Could not find the new parent document')
       end
     end
   end

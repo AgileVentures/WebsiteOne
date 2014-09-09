@@ -165,9 +165,7 @@ describe AuthenticationsController do
           request.env['omniauth.auth']['credentials']['token'] = 'token'
           allow(user).to receive(:youtube_user_name).and_return('test_user_name')
           allow(YoutubeHelper).to receive(:channel_id).and_return('test_id')
-
           get :create, provider: 'gplus'
-
           expect(user.youtube_id).to eq('test_id')
         end
 

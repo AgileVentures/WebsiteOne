@@ -58,7 +58,17 @@
             <li><%= link_to 'Projects', projects_path, class: active_if_controller_is('projects') %></li>
             <li><%= link_to 'Members', users_path, class: active_if_controller_is('users') %></li>
             <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
-            <li><%= link_to 'Events', events_path, class: active_if_controller_is('events') %></li>
+            <li class="dropdown">
+              <a href="#" id="events-dropdown" data-toggle="dropdown">Events<span class="caret"></span></a>
+              <ul class="dropdown-menu custom_menu">
+                <a class="custom_menu_link" href="<%= events_path %>">
+                  <li><i class="fa fa-calendar-o custom_menu_item"></i>Upcoming events</li>
+                </a>
+                <a class="custom_menu_link" href="<%= scrums_path %>">
+                  <li><i class="fa fa-play custom_menu_item"></i>Past scrums</li>
+                </a>
+              </ul>
+            </li>
             <li><%= link_to 'Getting started', static_page_path('Getting started'), class: "#{is_in_static_page?('Getting started') ? 'active' : ''}" %></li>
           </ul>
         </div>
@@ -66,7 +76,7 @@
     </div>
   </div>
   <% if @next_event %>
-    <div id="next-event" data-event-time="<%= @next_event.next_occurrence_time.to_datetime %>"
+    <div id="next-event" data-event-time="<%= @next_event.next_occurrence_time_attr.to_datetime %>"
          data-event-url="<%= event_path(@next_event) %>"
          data-event-name="<%= @next_event.name %>"></div>
   <% end %>
