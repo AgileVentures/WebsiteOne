@@ -56,6 +56,8 @@ WebsiteOne::Application.routes.draw do
 
   resources :hookups
 
+  get '/dashboard', to: 'dashboard#index'
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
+
 end
 

@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
   attr_accessor :next_occurrence_time_attr
+  attr_accessor :repeat_ends_string
 
   @@collection_time_future = 10.days
   @@collection_time_past = 15.minutes
@@ -20,6 +21,10 @@ class Event < ActiveRecord::Base
   REPEAT_ENDS_OPTIONS = %w[never on]
   DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
 
+  def set_repeat_ends_string
+    @repeat_ends_string = repeat_ends ? "on" : "never"
+  end
+
   def self.hookups
     Event.where(category: "PairProgramming")
   end
@@ -28,7 +33,7 @@ class Event < ActiveRecord::Base
     pending = []
     hookups.each do |h|
       started = h.last_hangout && h.last_hangout.started?
-      expired_without_starting = !h.last_hangout && Time.now.utc > h.end_time
+      expired_without_starting = !h.last_hangout && Time.now.utc > h.instance_end_time 
       pending << h if !started && !expired_without_starting
     end
     pending
@@ -42,12 +47,16 @@ class Event < ActiveRecord::Base
     start_datetime
   end
 
-  def end_time
+  def series_end_time
+    repeat_ends ? repeat_ends_on.to_time : nil
+  end
+
+  def instance_end_time
     (start_datetime + duration*60).utc
   end
 
   def end_date
-    if (end_time < start_time)
+    if (series_end_time < start_time)
       (event_date.to_datetime + 1.day).strftime('%Y-%m-%d')
     else
       event_date
@@ -91,7 +100,7 @@ class Event < ActiveRecord::Base
 
   def next_occurrence_time_method(options = {})
     next_occurrence_set = next_occurrences(options)
-    !next_occurrence_set.empty? ? next_occurrence_set.first[:time].time : 0
+    !next_occurrence_set.empty? ? next_occurrence_set.first[:time] : 0
   end
 
   def next_occurrences(options = {})
@@ -122,22 +131,26 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def schedule(starts_at = nil, ends_at = nil)
-    starts_at ||= start_datetime
-    ends_at ||= end_time
-    if duration > 0
-      s = IceCube::Schedule.new(starts_at, :ends_time => ends_at, :duration => duration)
-    else
-      s = IceCube::Schedule.new(starts_at, :ends_time => ends_at)
-    end
+  def schedule()
+    sched = series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
     case repeats
       when 'never'
-        s.add_recurrence_time(starts_at)
+        sched.add_recurrence_time(start_datetime)
       when 'weekly'
         days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
-        s.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
+        sched.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
-    s
+    sched
+  end
+
+  def self.transform_params(params)
+    event_params = params.require(:event).permit!
+    if (params['start_date'].present? && params['start_time'].present?)
+      event_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
+    end
+    event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
+    event_params[:repeat_ends_on]= "#{params[:repeat_ends_on]} UTC"
+    event_params
   end
 
   def start_time_with_timezone

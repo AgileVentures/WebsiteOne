@@ -72,11 +72,7 @@ After('@github_query') { VCR.eject_cassette }
 
 
 Before('@poltergeist') do
-  require 'capybara/poltergeist'
   Capybara.javascript_driver = :poltergeist
-end
-After('@poltergeist') do
-  Capybara.javascript_driver = :rack_test
 end
 
 Before('@tablet') do
@@ -89,4 +85,8 @@ Before('@smartphone') do
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app, window_size: [640, 640])
   end
+end
+
+After('@poltergeist', '@tablet', '@smartphone') do
+  Capybara.javascript_driver = :rack_test
 end
