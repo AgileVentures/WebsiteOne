@@ -36,7 +36,7 @@ guard 'rspec', cmd: 'rspec', bundler: false, all_after_pass: false do
 end
 
 # guard 'cucumber', all_on_start: false, all_after_pass: false, command_prefix: 'zeus', bundler: false, cli: '--tags ~@ignore --no-profile --color --format pretty --strict' do
-guard 'cucumber', all_on_start: false, all_after_pass: false, bundler: false, cli: '--tags ~@ignore --no-profile --color --format pretty --strict' do
+guard 'cucumber', all_on_start: false, all_after_pass: false, bundler: false, focus_on: '@wip', cli: '--tags ~@ignore --no-profile --color --format pretty --strict' do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$})          { 'features' }
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }

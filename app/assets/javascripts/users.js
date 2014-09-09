@@ -16,28 +16,45 @@ WebsiteOne.define('Users', function() {
     $('.yt_link').on('click', selectVideo);
 
     $('#skills').tags({
-        readOnly: false,
-        tagClass: 'add-btn-agile',
-        tagSize: 'md',
-        tagData: $('#skills').data("skill-list"),
-        promptText: " "
+      readOnly: false,
+      tagClass: 'add-btn-agile',
+      tagSize: 'md',
+      tagData: $('#skills').data("skill-list"),
+      promptText: " "
     });
 
     $('#skills').bind("keydown keypress", function (e) {
-        var code = e.keyCode || e.which;
-        if (code == 9 || code == 44) {
-            e.preventDefault();
-            $("#skills").tags().addTag($('input.tags-input').val().replace(",", ""));
-            $('input.tags-input').val("");
-        }
-        // Sampriti: Let bootstrap-tags handle Enter event
-        else if (code == 13) {
-            e.preventDefault();
-        }
+      var code = e.keyCode || e.which;
+      if (code == 9 || code == 44) {
+        e.preventDefault();
+        $("#skills").tags().addTag($('input.tags-input').val().replace(",", ""));
+        $('input.tags-input').val("");
+      }
+      // Sampriti: Let bootstrap-tags handle Enter event
+      else if (code == 13) {
+        e.preventDefault();
+      }
     });
 
     $('#edit_user').submit(function (event) {
-        $("#user_skill_list").val($("#skills").tags().getTags().join(","));
+      $("#user_skill_list").val($("#skills").tags().getTags().join(","));
+    });
+
+    $('#user-filter').on('keydown', function(e){
+      if(e.keyCode == 13) e.preventDefault();
+    });
+
+
+    $('#user-filter').on('keyup', function(e){
+      e.preventDefault();
+
+      var searchString = $(this).val().trim().toLowerCase();
+      var users= $('.media-list li');
+
+      filtered = $(users).filter(function() {
+        return $(this).text().toLowerCase().match(searchString);
+      }).show();
+      $(users).not(filtered).hide();
     });
   }
 

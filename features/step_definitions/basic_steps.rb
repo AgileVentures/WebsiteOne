@@ -28,10 +28,18 @@ def path_to(page_name, id = '')
       user_path(id)
     when 'my account' then
       edit_user_registration_path(id)
+    when 'scrums' then
+      scrums_index_path
+    when 'hangouts' then
+      hangouts_path
     when 'foobar' then
       "/#{page}"
     when 'password reset' then
       edit_user_password_path(id)
+    when 'hookups' then
+      hookups_path
+    when 'dashboard' then
+      '/dashboard' 
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -78,6 +86,13 @@ end
 
 When(/^I follow "([^"]*)"$/) do |text|
   click_link text
+end
+
+When(/^I dropdown the "([^"]*)" menu$/) do |text|
+  within ('.navbar') do
+    click_link text
+  end
+
 end
 
 
@@ -155,15 +170,19 @@ Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
 end
 
 Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
-  unless negative
-    expect(page.has_link? link).to be_true
-  else
+  if negative
     expect(page.has_link? link).to be_false
+  else
+    expect(page.has_link? link).to be_true
   end
 end
 
-Then /^I should see field "([^"]*)"$/ do |field|
-  page.should have_field(field)
+Then /^I should( not)? see field "([^"]*)"$/ do |negative, field|
+  if negative
+    expect(page.has_field? field).to be_false
+  else
+    expect(page.has_field? field).to be_true
+  end
 end
 
 Then /^I should( not)? see buttons:$/ do |negative, table|
@@ -201,7 +220,7 @@ Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, con
   expect(current_path).to eq url_for_title(action: action, controller: controller, title: title)
 end
 
-Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
+Given(/^I (?:am on|go to) the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
   visit url_for_title(action: action, controller: controller, title: title)
 end
 
@@ -299,15 +318,33 @@ When(/^I refresh the page$/) do
 end
 
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-  page.should have_css "a[href='#{link}']", text: text
+  expect(page).to have_css "a[href='#{link}']", text: text
 end
 
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
-  Timeout::timeout(3.0) do
-    until page.has_css? "img[src*=\"#{source}\"]" do
-      sleep(0.5)
-    end
-  end
-  page.should have_css "img[src*=\"#{source}\"]"
+  expect(page).to have_css "img[src*=\"#{source}\"]"
 end
+
+Then(/^I should see an video with source "([^"]*)"$/) do |source|
+  expect(page).to have_css "iframe[src*=\"#{source}\"]"
+end
+
+Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, title_2|
+  if negative
+    expect(page.body).not_to match(/#{title_2}.*#{title_1}/m)
+  else
+    expect(page.body).to match(/#{title_2}.*#{title_1}/m)
+  end
+end
+
+Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, table_name|
+  within ("table##{table_name}") do
+    if negative
+      expect(page.body).not_to have_content(/#{title}/m)
+    else
+      expect(page.body).to have_content(/#{title}/m)
+      end
+  end
+end
+

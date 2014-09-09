@@ -1,4 +1,4 @@
-class UrlValidator < ActiveModel::Validator
+class PivotalTrackerUrlValidator < ActiveModel::Validator
   def validate(record)
     validate_pivotal_tracker_url(record) if record.pivotaltracker_url.present?
   end
@@ -18,9 +18,7 @@ class UrlValidator < ActiveModel::Validator
       # tidy up URL
       record.pivotaltracker_url = "https://www.pivotaltracker.com/s/projects/#{pv_id}"
     else
-      record.errors[:base] << 'Invalid Pivotal Tracker URL'
+      record.errors[:pivotaltracker_url] << 'Invalid Pivotal Tracker URL'
     end
   end
-
-  # TODO validate GitHub URL too
 end

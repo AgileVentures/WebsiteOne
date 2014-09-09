@@ -18,8 +18,13 @@ describe "users/show.html.erb" do
                               github_profile_url: 'http://github.com/Eric',
                               skill_list: [ 'Shooting', 'Hooting' ],
                               bio: 'Lonesome Cowboy')
+    @commit_counts = [build_stubbed(:commit_count, project: @projects.first, user: @user, commit_count: 253)]
 
-    @user.stub(:projects_joined) { @projects }
+    allow(@user).to receive(:following_projects).and_return(@projects)
+    allow(@user).to receive(:following_projects_count).and_return(2)
+    allow(@user).to receive(:commit_counts).and_return(@commit_counts)
+    allow(@user).to receive(:following?).and_return(true)
+    allow(@commit_counts.first.project).to receive(:contribution_url).and_return('test_url')
 
     assign :user, @user
     @youtube_videos = [
@@ -76,6 +81,34 @@ describe "users/show.html.erb" do
     render
     expect(rendered).to have_content(@user.first_name)
     expect(rendered).to have_content(@user.last_name)
+  end
+
+  describe 'geolocation' do
+    it 'does not show globe icon when no country is set' do
+      render
+      expect(rendered).not_to have_selector "i[class='fa fa-globe fa-lg']"
+    end
+
+    it 'shows user country when known' do
+      @user.country = 'Mozambique'
+      render
+      expect(rendered).to have_selector "i[class='fa fa-globe fa-lg']"
+      expect(rendered).to have_content @user.country
+    end
+
+    it 'does not show clock icon when user timezone cannot be determined' do
+      render
+      expect(rendered).not_to have_selector "i[class='fa fa-clock-o fa-lg']"
+    end
+
+    it 'shows user timezone when it can be determined' do
+      @user.latitude = 25.9500
+      @user.longitude = 32.5833
+      expect(NearestTimeZone).to receive(:to).with(@user.latitude, @user.longitude).and_return('Africa/Cairo')
+      render
+      expect(rendered).to have_selector "i[class='fa fa-clock-o fa-lg']"
+      expect(rendered).to have_content 'Africa/Cairo'
+    end
   end
 
   it 'should not display an edit button if it is not my profile' do
@@ -143,6 +176,12 @@ describe "users/show.html.erb" do
       render
       expect(rendered).to_not have_xpath("//a[contains(@type, 'button')]")
     end
+  end
+
+  it 'renders a list of contributions made by user' do
+    render
+    expect(rendered).to have_text('Title 1 - 253')
+    expect(rendered).to have_link('Title', href: 'test_url')
   end
 
   it 'renders list of followed projects' do
