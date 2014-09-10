@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe 'hangouts/index', type: :view do
 
-  let(:hangout){ FactoryGirl.build_stubbed(:hangout, created: '11:15') }
+  let(:hangout){ FactoryGirl.build_stubbed(:hangout,
+                                           created: '2014/05/12 11:15',
+                                           updated: '2014/05/12 11:35') }
 
   before do
     @hangouts = [ hangout, hangout ]
@@ -26,7 +28,7 @@ describe 'hangouts/index', type: :view do
   it 'renders hangouts basic info' do
     render
     expect(rendered).to have_css('i.fa-caret-right')
-    expect(rendered).to have_text('11:15')
+    expect(rendered).to have_text('11:15 12/05')
     expect(rendered).to have_text(hangout.title)
     expect(rendered).to have_link(hangout.project.title, project_path(hangout.project))
     expect(rendered).to have_link('Join', href: hangout.hangout_url)
@@ -49,12 +51,14 @@ describe 'hangouts/index', type: :view do
     expect(rendered).to have_text('Event')
     expect(rendered).to have_text('Category')
     expect(rendered).to have_text('Participants')
+    expect(rendered).to have_text('Duration')
   end
 
   it 'renders hangout extra info' do
     render
     expect(rendered).to have_link(hangout.event.name, event_path(hangout.event))
     expect(rendered).to have_text(hangout.category)
+    expect(rendered).to have_text('20 min')
   end
 
   describe 'renders participants avatars' do

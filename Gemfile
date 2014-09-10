@@ -52,6 +52,7 @@ gem 'local_time'
 
 gem 'rails_config' # a gem to manage configuration files
 gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
+gem 'octokit' # Ruby wrapper for the GitHub API
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -88,6 +89,7 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'unicorn'
+  gem 'unicorn' # Unicorn web server
+  gem 'newrelic_rpm' # New Relic analytics
 end
 

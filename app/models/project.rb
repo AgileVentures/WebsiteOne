@@ -9,9 +9,12 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :documents
   has_many :hangouts
+  has_many :commit_counts
 
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
+
+  scope :with_github_url, -> { where.not(github_url: '') }
 
   def self.search(search, page)
     order('LOWER(title)')
@@ -36,6 +39,14 @@ class Project < ActiveRecord::Base
       .compact
       .map(&:downcase)
       .uniq
+  end
+
+  def github_repo
+    /github.com\/(.+)/.match(github_url)[1] if github_url
+  end
+
+  def contribution_url
+    "https://github.com/#{github_repo}/graphs/contributors"
   end
 
   # Bryan: Used to generate paths, used only in testing.

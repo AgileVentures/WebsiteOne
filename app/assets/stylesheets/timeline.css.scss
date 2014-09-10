@@ -41,16 +41,16 @@
 }
 
 .timeline > li > .timeline-panel {
-  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
   width: 46%;
   float: left;
-  border: 1px solid #d4d4d4;
+  border: 1px solid rgba(240, 127, 72, 1);
   border-radius: 2px;
   padding: 20px;
   position: relative;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-  background-color: lemonchiffon;
-  padding: 10px
+  background-color: white;
+  padding: 12px;
+  margin-left: -10px;
+  margin-right: -10px;
 }
 
 .timeline > li > .timeline-panel:before {
@@ -59,8 +59,8 @@
   right: -15px;
   display: inline-block;
   border-top: 15px solid transparent;
-  border-left: 15px solid #ccc;
-  border-right: 0 solid #ccc;
+  border-left: 15px solid rgba(240, 127, 72, 1);
+  border-right: 0 solid rgba(240, 127, 72, 1);
   border-bottom: 15px solid transparent;
   content: " ";
 }
@@ -71,8 +71,8 @@
   right: -14px;
   display: inline-block;
   border-top: 14px solid transparent;
-  border-left: 14px solid #fff;
-  border-right: 0 solid #fff;
+  border-left: 15px solid rgba(240, 127, 72, 1);
+  border-right: 0 solid rgba(240, 127, 72, 1);
   border-bottom: 14px solid transparent;
   content: " ";
 }
@@ -112,6 +112,9 @@
   border-right-width: 14px;
   left: -14px;
   right: auto;
+}
+ .text-white {
+  color: white;
 }
 
 .timeline-badge.primary {

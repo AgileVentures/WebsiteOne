@@ -15,6 +15,16 @@ class UserPresenter < BasePresenter
     user.following_projects_count > 0
   end
 
+  def contributed?
+    contributions.count > 0
+  end
+
+  def contributions
+    user.commit_counts.select do |commit_count|
+      commit_count.user.following? commit_count.project
+    end
+  end
+
   def title_list
     content_tag(:span, user.title_list.join(', '), class: 'member-title')
   end
@@ -27,23 +37,15 @@ class UserPresenter < BasePresenter
     NearestTimeZone.to(user.latitude, user.longitude)
   end
 
-  def gravatar_src(options={})
-    options = { size: 80 }.merge(options)
-    hash = Digest::MD5::hexdigest(user.email.strip.downcase)
-    "https://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
-  end
-
   def gravatar_image(options={})
-    options = { size: 80 }.merge(options)
-
     if options[:default]
       gravatar_url = "https://www.gravatar.com/avatar/1&d=retro&f=y"
     else
-      gravatar_url = gravatar_src(options)
+      gravatar_url = user.gravatar_url(options)
     end
 
     image_tag(gravatar_url, width: options[:size], id: options[:id],
-              height: options[:size], alt: display_name, class: options[:class])
+              height: options[:size], alt: display_name, class: options[:class], style: options[:style])
   end
 
   def email_link(text=nil)

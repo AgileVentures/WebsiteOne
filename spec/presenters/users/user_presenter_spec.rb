@@ -42,19 +42,18 @@ describe UserPresenter do
     end
   end
 
-  describe '#gravatar_for' do
-    let(:email) { ' MyEmailAddress@example.com  ' }
-    let(:user_hash) { '0bc83cb571cd1c50ba6f3e8a78ef1346' }
-    let(:user) { User.new(email: email) }
+  describe '#contributors' do
+    let(:user) { create(:user) }
+    let(:commit_counts) { create_list(:commit_count, 2, user: user) }
 
-    it 'should construct a link to the image at gravatar.com' do
-      regex = /^http[s]:\/\/.*gravatar.*#{user_hash}/
-        expect(subject.gravatar_src).to match(regex)
+    before do
+      user.follow commit_counts.first.project
     end
 
-    it 'should be able to specify image size' do
-      expect(subject.gravatar_src(size: 200)).to match(/\?s=200&/)
+    it 'should only return commit counts for the projects that the user follows' do
+      expect(subject.contributions).to eq([commit_counts[0]])
     end
+
   end
 
 end

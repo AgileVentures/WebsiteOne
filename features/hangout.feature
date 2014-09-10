@@ -105,9 +105,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Display live sessions - basic info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
-      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id |
-      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          |
-      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           |
+      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id | End time |
+      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    |
+      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    |
 
     When I go to the "hangouts" page
     Then I should see:
@@ -119,6 +119,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
         | Watch        |
     And I should see:
         | 11:15           |
+        | 01/02           |
         | HangoutsFlow    |
         | WebsiteOne      |
     And I should see the avatar for "Alice"
@@ -127,6 +128,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
     And I should see:
         | 11:11         |
+        | 01/02         |
         | GithubClone   |
         | Autograders   |
     And I should see the avatar for "Bob"
@@ -136,21 +138,24 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Display live sessions - extra info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
-      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id | Participants |
-      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | Jane, Bob    |
-      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | Greg, Jake   |
+      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id | Participants | End time |
+      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | Jane, Bob    | 11:25    |
+      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | Greg, Jake   | 12:42    |
 
     When I go to the "hangouts" page
     Then I should see:
         | Event        |
         | Category     |
         | Participants |
+        | Duration     |
     Then I should see:
         | Scrum           |
         | PairProgramming |
+        | 10 min          |
     And I should see the avatar for "Jane"
     And I should see the avatar for "Bob"
 
     And I should see:
         | Retrospective |
         | ClientMeeting |
+        | about 2 hours |

@@ -13,6 +13,7 @@
 src_files:
   - assets/application.js
   - assets/projects.js
+  - assets/hangouts.js
   - assets/events.js
   - assets/jasmine-jquery.js
 
@@ -56,6 +57,7 @@ helpers:
 #
 spec_files:
   - '**/*[sS]pec.js'
+  - '**/*[sS]pec.js.coffee'
 
 # src_dir
 #

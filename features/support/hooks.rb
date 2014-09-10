@@ -62,3 +62,10 @@ Before('@scrum_query') do
   )
 end
 After('@scrum_query') { VCR.eject_cassette }
+
+Before('@github_query') do
+  VCR.insert_cassette(
+    'github_commit_count/websiteone_stats'
+  )
+end
+After('@github_query') { VCR.eject_cassette }

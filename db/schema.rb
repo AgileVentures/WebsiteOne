@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20140730123120) do
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
+  create_table "commit_counts", force: true do |t|
+    t.integer "commit_count"
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
+  add_index "commit_counts", ["project_id"], name: "index_commit_counts_on_project_id", using: :btree
+  add_index "commit_counts", ["user_id"], name: "index_commit_counts_on_user_id", using: :btree
+
   create_table "documents", force: true do |t|
     t.string   "title"
     t.text     "body"
