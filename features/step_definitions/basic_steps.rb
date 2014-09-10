@@ -270,14 +270,6 @@ Then(/^I should( not)? see the round banners/) do |negative|
   end
 end
 
-Then(/^I should( not)? see the Event countdown/) do |negative|
-  unless negative
-    expect(page).to have_css '#next-event', visible: true
-  else
-    expect(page).to_not have_css '#next-event'
-  end
-end
-
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
   find(:css, %Q{a[title="#{button.downcase}"]}).click()
 end
