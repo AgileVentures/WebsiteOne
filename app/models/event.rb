@@ -158,10 +158,10 @@ class Event < ActiveRecord::Base
       _next_occurrences = next_occurrences(limit: 2)
       self.start_datetime = (_next_occurrences.size > 1) ? _next_occurrences[1][:time] : timedate + 1.day
     elsif timedate >= Time.now
-      @exclusions ||= []
-      @exclusions << timedate
+      self.exclusions ||= []
+      self.exclusions << timedate
     end
-    save
+    save!
   end
 
   def schedule()
@@ -173,8 +173,8 @@ class Event < ActiveRecord::Base
         days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
         sched.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
-    @exclusions ||= []
-    @exclusions.each do |ex|
+    self.exclusions ||= []
+    self.exclusions.each do |ex|
       sched.add_exception_time(ex)
     end
     sched
