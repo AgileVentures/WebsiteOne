@@ -59,6 +59,13 @@ describe Event, :type => :model do
       expect(@event.start_datetime).to eq('Sun, 23 Jun 2013 09:00:00 UTC +00:00')
       expect(@event.schedule.first(4)).to eq(['Sun, 23 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
+    it 'event exclusions should be persistent' do
+      Delorean.time_travel_to(Time.parse('2013-06-16 09:27:00 UTC'))
+      @event.remove_from_schedule(Time.parse('2013-6-23 09:00:00 UTC'))
+
+      event = Event.find_by(name: 'Spec Scrum')
+      expect(event.schedule.first(4)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
+    end
   end
 
 
