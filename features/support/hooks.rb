@@ -75,10 +75,6 @@ Before('@poltergeist') do
   Capybara.javascript_driver = :poltergeist
 end
 
-After('@poltergeist') do
-  Capybara.javascript_driver = :rack_test
-end
-
 Before('@desktop') {page.driver.resize(1228, 768)}
 
 Before('@tablet') {page.driver.resize(768, 768)}
@@ -86,3 +82,7 @@ Before('@tablet') {page.driver.resize(768, 768)}
 Before('@smartphone') {page.driver.resize(640, 640)}
 
 After('@desktop', '@tablet', '@smartphone') {page.driver.resize(1600, 1200)}
+
+After('@poltergeist', '@desktop', '@tablet', '@smartphone') do
+  Capybara.javascript_driver = :rack_test
+end
