@@ -37,8 +37,8 @@ Feature: Setting up basic page layout for site
     And I should see "Contact us" in footer
 
 
-  @poltergeist
-  Scenario: Render Sponsors if visited on a desktop computer
+  @poltergeist @desktop
+  Scenario: Show Sponsors on desktop computer
     Given I am on a desktop
     And I am on Events index page
     Then I should see the supporter content
@@ -55,6 +55,12 @@ Feature: Setting up basic page layout for site
     And I am on Events index page
     Then I should not see the supporter content
 
+  @poltergeist @desktop
+  Scenario: Show Round banners on desktop computer
+    Given I am on a tablet
+    And I visit the site
+    Then I should see the round banners
+
   @poltergeist @tablet
   Scenario: Hide Round banners from Tablets
     Given I am on a tablet
@@ -67,14 +73,3 @@ Feature: Setting up basic page layout for site
     And I visit the site
     Then I should not see the round banners
 
-  @poltergeist @tablet
-  Scenario: Hide Countdown from Tablets
-    Given I am on a tablet
-    And I am on Events index page
-    Then I should not see the supporter content
-
-  @poltergeist @smartphone
-  Scenario: Hide Countdown from Smartphones
-    Given I am on a smartphone
-    And I am on Events index page
-    Then I should not see the supporter content
