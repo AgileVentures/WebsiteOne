@@ -6,11 +6,13 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new(start_datetime: Time.now.utc, duration: 30)
+    @event.set_repeat_ends_string
   end
 
   def show
     @event_schedule = @event.next_occurrences
     @hangout = @event.last_hangout
+    render partial: 'hangouts_management' if request.xhr?
   end
 
   def index
@@ -22,10 +24,11 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event.set_repeat_ends_string
   end
 
   def create
-    EventCreatorService.new(Event).perform(event_params,
+    EventCreatorService.new(Event).perform(Event.transform_params(params),
                                        success: ->(event) do
       @event = event
       flash[:notice] = 'Event Created'
@@ -39,11 +42,16 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.update_attributes(event_params)
+    begin
+      updated = @event.update_attributes(Event.transform_params(params))
+    rescue
+      attr_error = "attributes invalid"
+    end
+    if updated
       flash[:notice] = 'Event Updated'
       redirect_to events_path
     else
-      flash[:alert] = ['Failed to update event:', @event.errors.full_messages].join(' ')
+      flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
       redirect_to edit_event_path(@event)
     end
   end
@@ -67,12 +75,4 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.friendly.find(params[:id])
   end
-
-
-  def event_params
-    temp_params = params.require(:event).permit!
-    temp_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
-    temp_params
-  end
-
 end

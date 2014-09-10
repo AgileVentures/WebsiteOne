@@ -2,7 +2,7 @@ class HangoutPresenter < BasePresenter
   presents :hangout
 
   def created_at
-    hangout.created_at.to_s(:time)
+    hangout.created_at.strftime('%H:%M %d/%m')
   end
 
   def title
@@ -35,6 +35,10 @@ class HangoutPresenter < BasePresenter
     else
       '#'
     end
+  end
+
+  def duration
+    distance_of_time_in_words(hangout.duration)
   end
 
   private

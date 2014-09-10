@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :documents
   has_many :articles
   has_many :hangouts
+  has_many :commit_counts 
 
   self.per_page = 30
 
@@ -69,8 +70,22 @@ class User < ActiveRecord::Base
     self.slug.nil? or ((self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?)
   end
 
+  def gravatar_url(options={})
+    hash = Digest::MD5::hexdigest(email.strip.downcase)
+    if options[:size]
+      "https://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
+    else
+      "https://www.gravatar.com/avatar/#{hash}?d=retro"
+    end
+  end
+
   def self.search(params)
     where(display_profile: true)
       .order(:created_at)
+  end
+
+  def self.find_by_github_username(username)
+    github_url = "https://github.com/#{username}"
+    find_by(github_profile_url: github_url)
   end
 end
