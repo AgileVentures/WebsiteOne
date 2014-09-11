@@ -254,10 +254,21 @@ Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
 
-#Then(/^I should see "(.*?)"$/) do |string|
-#  #expect(page).to have_content(string)
-#  page.should have_content(string)
-#end
+Then(/^I should( not)? see the supporter content/) do |negative|
+  unless negative
+    expect(page).to have_css 'div#sponsorsBar', visible: true
+  else
+    expect(page).to_not have_css '#sponsorsBar'
+  end
+end
+
+Then(/^I should( not)? see the round banners/) do |negative|
+  unless negative
+    expect(page).to have_css '.circle', visible: true
+  else
+    expect(page).to_not have_css '.circle'
+  end
+end
 
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
   find(:css, %Q{a[title="#{button.downcase}"]}).click()
@@ -270,15 +281,6 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
     page.should have_css %Q{a[title="#{button.downcase}"]}
   end
 end
-
-#Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
-#  page.should have_text string
-#end
-#
-#
-#And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
-#  page.should have_text string
-#end
 
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
@@ -301,7 +303,6 @@ Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
   end
 end
 
-
 Then /^I should see a "([^"]*)" table with:$/ do |name, table|
   expect(page).to have_text(name)
   table.rows.flatten.each do |heading|
@@ -320,7 +321,6 @@ end
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
   expect(page).to have_css "a[href='#{link}']", text: text
 end
-
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
   expect(page).to have_css "img[src*=\"#{source}\"]"
@@ -348,3 +348,16 @@ Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, t
   end
 end
 
+Given(/^I am on a (.*)/) do |device|
+  case device
+    when 'desktop'
+      agent = 'Poltergeist'
+    when 'tablet'
+      agent = 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10'
+    when 'smartphone'
+      agent = 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7'
+    else
+      pending
+  end
+  page.driver.headers = { 'User-Agent' => agent }
+end
