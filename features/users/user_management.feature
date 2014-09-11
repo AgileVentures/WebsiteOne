@@ -4,9 +4,8 @@ Feature: Create and maintain projects
   And I would like to be able to edit change my credentials
 
   Background:
-    Given I am logged in as user with email "current@email.com", with password "12345678"
+    Given I am logged in as user with name "Bob", email "current@email.com", with password "12345678"
     And I am on the "home" page
-
 
   Scenario: Having My account page
     Given I am on my "Edit Profile" page
@@ -57,3 +56,14 @@ Feature: Create and maintain projects
     And my profile should be updated with my GH username
     When I am on "profile" page for user "me"
     Then I should see a link "tochman" to "https://github.com/tochman"
+
+  Scenario: Deleting my profile
+    Given the following projects exist:
+      | title       | description          | status   | author |
+      | hello world | greetings earthlings | active   | Bob    |
+    And the following documents exist:
+      | title         | body             | project     |
+      | Documentation | My documentation | hello world |
+    When I delete my profile
+    And I am on the "Show" page for project "hello world"
+    Then I should see "by Anonymous"
