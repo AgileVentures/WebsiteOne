@@ -21,7 +21,7 @@ describe Hangout, type: :model do
     before { hangout.hangout_url = 'test' }
 
     it 'reports live if the link is not older than 5 minutes' do
-      allow(Time).to receive(:now).and_return(Time.parse('10:04:59 UTC'))
+      allow(Time).to receive(:now).and_return(Time.mktime('10:04:59'))
       expect(hangout.live?).to be_truthy
     end
 

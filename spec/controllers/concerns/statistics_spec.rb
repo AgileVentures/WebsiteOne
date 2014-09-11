@@ -13,11 +13,18 @@ describe 'StatisticsConcern' do
     expect(@fake_controller.get_stats_for(:articles)).to eq({ count: 5})
   end
     
-  it "gets stats for projects" do
-    FactoryGirl.create_list(:project, 5, status: 'active')
-    FactoryGirl.create_list(:project, 3, status: 'disactivated')
-    expect(@fake_controller.get_stats_for(:projects)).to eq({ count: 5})
-  end
+  describe "gets stats for projects" do
+    it "and only counts active projects " do
+      FactoryGirl.create_list(:project, 5, status: 'active')
+      FactoryGirl.create_list(:project, 3, status: 'disactivated')
+      expect(@fake_controller.get_stats_for(:projects)).to eq({ count: 5})
+    end
+
+    it "with mixed case status" do
+      FactoryGirl.create_list(:project, 5, status: 'ACTive')
+      expect(@fake_controller.get_stats_for(:projects)).to eq({ count: 5})
+    end
+  end 
 
   it "gets stats for members" do
     FactoryGirl.create_list(:user, 5)

@@ -7,6 +7,7 @@ class Project < ActiveRecord::Base
   validates :github_url, uri: true, :allow_blank => true
 
   belongs_to :user
+  include UserNullable
   has_many :documents
   has_many :hangouts
   has_many :commit_counts
