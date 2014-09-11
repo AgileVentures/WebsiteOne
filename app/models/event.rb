@@ -88,9 +88,9 @@ class Event < ActiveRecord::Base
     next_occurrence.present? ? next_occurrence[:time] : nil
   end
 
-  def self.next_scrum_occurrence(begin_time = COLLECTION_TIME_PAST.ago)
+  def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
     _events = []
-    Event.where(['category = ?', 'Scrum']).each do |event|
+    Event.where(['category = ?', event_type]).each do |event|
       _occurrence = event.next_event_occurrence_with_time(begin_time)
       _events << _occurrence if _occurrence.present?
     end
