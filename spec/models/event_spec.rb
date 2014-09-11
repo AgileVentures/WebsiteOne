@@ -341,23 +341,23 @@ describe Event, :type => :model do
 
     it 'should return the next event occurence' do
       Delorean.time_travel_to(Time.parse('2014-03-07 09:27:00 UTC'))
-      expect(Event.next_scrum_occurrence).to eq @event
+      expect(Event.next_occurrence(:scrum)).to eq @event
     end
 
     it 'should return events that were schedule 15 minutes earlier or less' do
       #15 minutes is the default for COLLECTION_TIME_PAST
       Delorean.time_travel_to(Time.parse('2014-03-07 10:44:59 UTC'))
-      expect(Event.next_scrum_occurrence).to eq @event
+      expect(Event.next_occurrence(:scrum)).to eq @event
     end
 
     it 'should not return events that were scheduled to start more than 15 minutes ago' do
       Delorean.time_travel_to(Time.parse('2014-03-07 10:45:01 UTC'))
-      expect(Event.next_scrum_occurrence).to be_nil
+      expect(Event.next_occurrence(:scrum)).to be_nil
     end
 
     it 'should return events that were schedule 30 minutes earlier or less if we change collection_time_past to 30.minutes' do
       Delorean.time_travel_to(Time.parse('2014-03-07 10:59:59 UTC'))
-      expect(Event.next_scrum_occurrence(30.minutes.ago)).to eq @event
+      expect(Event.next_occurrence(:scrum, 30.minutes.ago)).to eq @event
     end
   end
 end

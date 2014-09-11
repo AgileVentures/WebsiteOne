@@ -9,7 +9,7 @@ describe VisitorsController do
 
   it 'assigns event to next_occurrence' do
     event = double(Event)
-    Event.should_receive(:next_scrum_occurrence).and_return(event)
+    Event.should_receive(:next_occurrence).with(:Scrum).and_return(event)
     get :index
     expect(assigns(:event)).to eq event
   end
