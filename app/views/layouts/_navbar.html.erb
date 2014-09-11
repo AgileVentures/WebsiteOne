@@ -76,7 +76,7 @@
     </div>
   </div>
   <% if @next_event %>
-    <div id="next-event" data-event-time="<%= @next_event.next_occurrence_time_attr.to_datetime %>"
+    <div class="hidden-sm hidden-xs hidden-md" id="next-event" data-event-time="<%= @next_event.next_occurrence_time_attr.to_datetime %>"
          data-event-url="<%= event_path(@next_event) %>"
          data-event-name="<%= @next_event.name %>"></div>
   <% end %>
