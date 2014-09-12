@@ -55,3 +55,34 @@ end
 After('@omniauth, @omniauth-with-email') do
   OmniAuth.config.test_mode = false
 end
+
+Before('@scrum_query') do
+  VCR.insert_cassette(
+    'scrums_controller/videos_by_query'
+  )
+end
+After('@scrum_query') { VCR.eject_cassette }
+
+Before('@github_query') do
+  VCR.insert_cassette(
+    'github_commit_count/websiteone_stats'
+  )
+end
+After('@github_query') { VCR.eject_cassette }
+
+
+Before('@poltergeist') do
+  Capybara.javascript_driver = :poltergeist
+end
+
+Before('@desktop') {page.driver.resize(1228, 768)}
+
+Before('@tablet') {page.driver.resize(768, 768)}
+
+Before('@smartphone') {page.driver.resize(640, 640)}
+
+After('@desktop', '@tablet', '@smartphone') {page.driver.resize(1600, 1200)}
+
+After('@poltergeist', '@desktop', '@tablet', '@smartphone') do
+  Capybara.javascript_driver = :rack_test
+end

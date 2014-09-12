@@ -1,132 +1,54 @@
 <div class="col-lg-8 col-lg-offset-2">
-
   <div class="event-details">
-      <h2><%= @event.name %></h2>
+    <h2><%= @event.name %></h2>
   </div>
   <div class="event-details-well">
-  <div class="event-details">
-    <div class="col-lg-8">
-      <small class="event-schedule"><%= @event.schedule %></small>
+    <div class="event-details">
+      <div class="col-lg-8">
+        <small class="event-schedule"><%= @event.schedule %></small>
+      </div>
+      <div class="col-lg-4">
+        <% if @hangout.try!(:live?) %>
+          <a href="<%= @hangout.hangout_url %>" class="event-live-link">EVENT IS LIVE !<br/>CLICK TO JOIN</a>
+        <% else  %>
+          <a href="#" class="event-live-link disabled">LIVE SOON ...</a>
+        <% end  %>
+      </div>
     </div>
-    <div class="col-lg-4">
-      <% if @hangout.try!(:live?) %>
-        <a href="<%= @hangout.hangout_url %>" class="event-live-link">EVENT IS LIVE !<br/>CLICK TO JOIN</a>
-      <% else  %>
-        <a href="#" class="event-live-link disabled">LIVE SOON ...</a>
-      <% end  %>
+    <div class="event-details">
+      <div class="col-lg-12">
+        <p><strong><%= @event.description %></strong></p>
+      </div>
     </div>
-  </div>
-  <div class="event-details">
-    <div class="col-lg-12">
-      <p><strong><%= @event.description %></strong></p>
-    </div>
-  </div>
   </div>
 
   <% if @event.schedule.present? %>
-
-      <div class="schedule-well">
-        <div class="row">
-          <h4>Upcoming schedule</h4>
-        </div>
-        <div class="row">
-          <div class="col-lg-8">
+    <div class="schedule-well">
+      <div class="row">
+        <h4>Upcoming schedule</h4>
+      </div>
+      <div class="row">
+        <div class="col-lg-8">
+          <ul style="list-style: none; padding-left: 0">
             <% @event_schedule.first(5).each do |e| %>
-                <%= current_occurrence_time(e) %>
-                <br/>
+              <li>
+                <%= current_occurrence_time(e) %> /
+                <p style='padding-left: 1em'><%= current_occurrence_local_time(e) %></p>
+              </li>
             <% end %>
-          </div>
+          </ul>
+        </div>
         <% if user_signed_in? %>
           <div class="col-lg-4">
             <%= link_to 'Edit schedule', edit_event_path(@event), :class => 'event-edit-schedule' %>
           </div>
         <% end  %>
-        </div>
+      </div>
     </div>
-
-          <% if user_signed_in? %>
-            <div class="hangouts-management-well">
-
-              <div class="hangouts-management">
-
-                <div class="restart-panel<%= ' in' if @hangout.try!(:live?) %>">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a class="collapse-button" data-toggle="collapse" data-target=".restart-section">
-                        <%= fa_icon "caret-right", text: "Restart hangout" %>
-                        <button type="button" class="panel-close-button restart-section"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                      </a>
-                    </h4>
-                  </div>
-
-                  <div class="restart-section">
-                    <div class="panel-body warning">
-                      <strong>Restarting Hangout would update the details of the hangout currently associated with this event.</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="restart-section<%= ' in' unless @hangout.try!(:live?) %>">
-                  <div class="panel-body">
-                    <div id="hangout-btn" class="col-lg-5 hangout-btn">
-                      <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: (@hangout.try!(:live?) ? @hangout.uid : ''), event_id: @event.id, category: @event.category, project: '', topic: topic(@event, @event_schedule)} %>
-                    </div>
-                    <div class="hangout-btn"> &#8592; Event host will start the Hangout 
-                        <button type="button" class="btn readme-link" data-container="body" data-toggle="popover" data-placement="right" 
-                              data-content="The hangout is started by the event host at a scheduled time.
-                              If the time is due and hangout has not been started, you may start it yourself.
-                              By starting a hangout, you are becoming the host of the session, 
-                              the hangout link gets published on WebsiteOne and AgileVentures Slack channels
-                              and the session may be joined by other people and viewed publicly on Youtube.">
-                          read more</button>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="edit-link-panel">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a class="collapse-button" data-toggle="collapse" data-target=".edit-link-form">
-                        <%= fa_icon "caret-right", text: "Edit hangout link" %>
-                        <button type="button" class="panel-close-button edit-link-form"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                      </a>
-                    </h4>
-                  </div>
-
-                  <div class="edit-link-form">
-                    <div class="panel-body">
-                      <%= form_tag hangout_url(@hangout.try!(:live?) ? @hangout.uid : generate_hangout_id(current_user)), method: :put,  class: "form-horizontal", role: "form" %>
-                        <div style="hidden"><input name="event_id" type="hidden" value="<%= @event.id %>"></div>
-                        <div class="form-group">
-                          <label class="control-label sr-only" for="hangout-url">Hangout link</label>
-                        </div>
-                        <div class="form-group">
-                          <div class="col-sm-8">
-                            <input type="url" required class="form-control" name="hangout_url" placeholder="Copy and paste the hangout link in here.." value="<%= @hangout.try!(:hangout_url) if @hangout.try!(:started?) %>">
-                          </div>
-                          <div class="col-sm-2">
-                            <button type="button" class="form-control btn-default" data-toggle="collapse" data-target=".edit-link-panel">Cancel</button>
-                          </div>
-                          <div class="col-sm-2">
-                          <input type="submit" class="form-control btn-primary" value="Save"/>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-          </div>
-        <% end %>
-
-          <% if @hangout.try!(:live?) %>
-            <div class="hangouts-details-well">
-              <section class="hangout-details">
-                <%= render partial: 'hangouts/hangout_status', locals: {hangout: @hangout} %>
-              </section>
-            </div>
-          <% end %>
   <% end %>
+
+  <div id="hg-management" class="hangouts-management-well">
+    <%= render partial: 'hangouts_management' %>
+  </div>
 </div>
 <%=javascript_include_tag 'events.js' %>

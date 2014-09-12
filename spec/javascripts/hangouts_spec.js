@@ -1,134 +1,36 @@
-describe('hangouts', function(){
-
-  describe('#renderHangoutButton', function() {
-
-    var oldGapi;
-
-    beforeEach(function () {
-      oldGapi = (typeof(gapi) === 'undefined') ? undefined : gapi;
-      gapi = undefined;
-    });
-
-    afterEach(function() {
-      gapi = oldGapi;
-    });
-
-    describe('WebsiteOne #renderHangoutButton', function() {
-
-      beforeEach(function () {
-        setFixtures(sandbox({
-          id: 'liveHOA-placeholder',
-          'data-topic': 'Topic',
-          'data-event-id': 'event_1234',
-          'data-category': 'category_1234',
-          'data-hangout-id': 'hangout_1234',
-          'data-app-id': 'id_1234',
-          'data-callback-url': 'http://test.com/hangout_id'
-        }));
-
-        hangout = jasmine.createSpyObj('hangout', ['render']);
-        gapi = { hangout: hangout };
-      });
-
-      describe('renders hangout button', function() {
-
-        it('renders hangout button with correct parameters', function() {
-          WebsiteOne.renderHangoutButton();
-          var startData = JSON.stringify({
-            topic: 'Topic',
-            eventId: 'event_1234',
-            category: 'category_1234',
-            hangoutId: 'hangout_1234',
-            callbackUrl: 'http://test.com/hangout_id'
-          });
-
-          expect(hangout.render).toHaveBeenCalledWith( 'liveHOA-placeholder', {
-            render: 'createhangout',
-            topic: 'Topic',
-            hangout_type: 'onair',
-            initial_apps: [{
-              app_id : 'id_1234',
-              start_data : startData,
-              app_type : 'LOCAL_APP'
-            }],
-            widget_size: 200
-          });
-        });
-      });
-
-      it('does not render hangout button', function() {
-        it('if placeholder div is not loaded', function() {
-          setFixtures('');
-          WebsiteOne.renderHangoutButton();
-          expect(hangout.render).not.toHaveBeenCalled();
-        });
-
-        it('if hangouts api is not loaded', function() {
-          gapi = undefined;
-          WebsiteOne.renderHangoutButton();
-          expect(hangout.render).not.toHaveBeenCalled();
-        });
-
-        it('if hangout button has been already rendered', function() {
-          $('#liveHOA-placeholder').html('<iframe></iframe>')
-          WebsiteOne.renderHangoutButton();
-          expect(hangout.render).not.toHaveBeenCalled();
-        });
-      });
-    });
-
-    describe('#loadHangoutsApi', function() {
-
-      beforeEach(function () {
-        spyOn(jQuery, 'ajax').and.returnValue(
-          { done: function(callback) { callback(); } }
-        );
-      });
-
-      describe('hangouts api is not yet loaded', function() {
-        it('loads api library for hangouts', function() {
-          WebsiteOne.loadHangoutsApi();
-
-          expect(jQuery.ajax).toHaveBeenCalledWith({
-            url: 'https://apis.google.com/js/platform.js',
-            dataType: "script",
-            cache: true
-          });
-        });
-
-        it('renders HangoutButton on api load', function() {
-          spyOn(WebsiteOne, 'renderHangoutButton');
-          WebsiteOne.loadHangoutsApi();
-          expect(WebsiteOne.renderHangoutButton).toHaveBeenCalled();
-        });
-      });
-
-      describe('hangouts api is not yet loaded', function() {
-        it('does not load api library if it is already loaded', function() {
-          gapi = [];
-          WebsiteOne.loadHangoutsApi();
-          expect(jQuery.ajax).not.toHaveBeenCalled();
-        });
-      });
-    });
+describe('RefreshHangouts', function() {
+  beforeEach(function() {
+    setFixtures(sandbox({ id: 'hg-container' }));
+    this.app = new window.HangoutsUtils();
   });
 
-  describe('Hangouts module for WebsiteOne', function() {
-
-    beforeEach(function() {
-      reloadScript('hangouts.js');
-    });
-
-    it('defines Hangouts module for WebsiteOne', function() {
-      expect(window.WebsiteOne.Hangouts).toBeDefined();
-    });
-
-    it('calls #renderHangoutButton', function() {
-      spyOn(WebsiteOne, 'renderHangoutButton');
-
-      WebsiteOne.Hangouts.init();
-      expect(WebsiteOne.renderHangoutButton).toHaveBeenCalled();
-    });
-
+  it('calls refresh every 10 sec', function() {
+    spyOn(window, 'setInterval');
+    spyOn(this.app, 'ajaxRequest');
+    this.app.init();
+    expect(window.setInterval).toHaveBeenCalledWith(this.app.ajaxRequest, 10000);
   });
+
+  it('replaces hg-management section if data has updated', function() {
+    spyOn(this.app, 'bindEvents');
+    this.app.container = 'old data';
+    this.app.updateHangoutsData('new data');
+    expect($('#hg-container').text()).toEqual('new data');
+    expect(this.app.bindEvents).toHaveBeenCalled();
+  });
+
+  it('does not replace hg-management section if data has not updated', function() {
+    spyOn(this.app, 'bindEvents');
+    this.app.container = 'new data';
+    this.app.updateHangoutsData('new data');
+    expect($('#hg-container').text()).toEqual('');
+  });
+
+  it('clears refresh repeat if href changes', function() {
+    spyOn(window, 'clearInterval');
+    this.app.href = 'new_href';
+    this.app.ajaxRequest();
+    expect(window.clearInterval).toHaveBeenCalledWith(this.app.intervalId);
+  });
+
 });

@@ -5,9 +5,9 @@ Feature: As a user of the site
   Background:
     Given I am on the "home" page
     And the following users exist
-      | first_name | last_name | email                  | github_profile_url         |
-      | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky |
-      | Bob        | Butcher   | bobb112@hotmail.com    |                            |
+      | first_name | last_name | email                  | github_profile_url         | last_sign_in_ip |
+      | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |
+      | Bob        | Butcher   | bobb112@hotmail.com    |                            |                 |
     And the following projects exist:
       | title         | description             | status   |
       | hello world   | greetings earthlings    | active   |
@@ -27,6 +27,7 @@ Feature: As a user of the site
     And I should see "Sweden"
     And I should see "AliceSky"
     And I should see "Member for"
+    And I should see "Europe/Stockholm"
 
   Scenario: Having edit button on the profile page
     When I click on the avatar for "brett@example.com" within the main content

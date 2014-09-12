@@ -1,11 +1,9 @@
-require 'act_as_page'
-require 'acts_as_votable'
-
 class Article < ActiveRecord::Base
   include ActAsPage
+  include UserNullable
 
   belongs_to :user
-  validates :content, :user_id, presence: true
+  validates :content, :user, presence: true
 
   acts_as_taggable
   acts_as_votable
@@ -25,6 +23,6 @@ class Article < ActiveRecord::Base
   end
 
   def authored_by?(user)
-    self.user_id == user.id
+    self.user == user
   end
 end

@@ -18,7 +18,7 @@ Feature: As a site user
     And I am on my "Edit Profile" page
     Then "Receive mailings" should be checked
 
-  @javascript    
+  @javascript
   Scenario: A logged in user should be able to toggle mail receival
     Given I am logged in as "Bob"
     And I am on my "Edit Profile" page
@@ -27,6 +27,5 @@ Feature: As a site user
     And I am on my "Profile" page 
     And I click "Edit" 
     Then "Receive mailings" should not be checked
-    
 
 

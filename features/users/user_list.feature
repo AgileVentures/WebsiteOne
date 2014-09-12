@@ -1,3 +1,4 @@
+@javascript
 Feature: As a site owner
   So I can make collaboration among registered users easier
   I would like to display a index of users with links to user profiles
@@ -22,4 +23,13 @@ Feature: As a site owner
       | Croutch     |
       | Dave        |
     And I should see "5" user avatars within the main content
+    And I should see "Check out our 5 awesome volunteers from all over the globe!"
+
+  Scenario: Filtering trough users by typing first name in the field 
+    When I click "Members" within the navbar
+    And I filter users for "Alice"
+    Then I should see "Alice"
+    And I should not see "Bob"
+    And I should not see "Test"
+
 
