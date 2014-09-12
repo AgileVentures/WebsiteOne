@@ -24,7 +24,7 @@ this.HangoutsUtils = function() {
   this.init = function() {
     var _this = this;
     _this.href = window.location.href;
-    _this.intervalId = setInterval(_this.ajaxRequest, 10000);
+    /**_this.intervalId = setInterval(_this.ajaxRequest, 10000); */
     _this.bindEvents();
 
     $('#btn-hg-toggle').click(function() {
