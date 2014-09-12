@@ -47,7 +47,7 @@ module EventHelper
 
   def format_time_range(event)
     start_time_format = event.start_time.strftime('%H:%M')
-    end_time_format = event.end_time.strftime('%H:%M')
+    end_time_format = event.instance_end_time.strftime('%H:%M')
     "#{start_time_format}-#{end_time_format} UTC"
   end
 
