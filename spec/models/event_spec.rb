@@ -48,21 +48,23 @@ describe Event, :type => :model do
                                  repeat_ends: true,
                                  repeat_ends_on: '2014-03-08')
     end
+
     it 'should remove an event instance when requested and date found' do
       Delorean.time_travel_to(Time.parse('2013-06-16 09:27:00 UTC'))
       @event.remove_from_schedule(Time.parse('2013-6-23 09:00:00 UTC'))
       expect(@event.schedule.first(4)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
+
     it 'should move the start date forward when the event instance to be removed is the first in the series' do
       Delorean.time_travel_to(Time.parse('2013-06-16 09:27:00 UTC'))
       @event.remove_from_schedule(Time.parse('2013-6-22 09:00:00 UTC'))
       expect(@event.start_datetime).to eq('Sun, 23 Jun 2013 09:00:00 UTC +00:00')
       expect(@event.schedule.first(4)).to eq(['Sun, 23 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
+
     it 'event exclusions should be persistent' do
       Delorean.time_travel_to(Time.parse('2013-06-16 09:27:00 UTC'))
       @event.remove_from_schedule(Time.parse('2013-6-23 09:00:00 UTC'))
-
       event = Event.find_by(name: 'Spec Scrum')
       expect(event.schedule.first(4)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
@@ -171,16 +173,16 @@ describe Event, :type => :model do
 
   context 'Event url' do
     before (:each) do
-      @event = {name: 'one time event',
-                category: 'Scrum',
-                description: '',
-                start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
-                duration: 600,
-                repeats: 'never',
-                repeats_every_n_weeks: nil,
-                repeat_ends: 'never',
-                repeat_ends_on: 'Mon, 17 Jun 2013',
-                time_zone: 'Eastern Time (US & Canada)'}
+      @event = { name: 'one time event',
+                 category: 'Scrum',
+                 description: '',
+                 start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                 duration: 600,
+                 repeats: 'never',
+                 repeats_every_n_weeks: nil,
+                 repeat_ends: 'never',
+                 repeat_ends_on: 'Mon, 17 Jun 2013',
+                 time_zone: 'Eastern Time (US & Canada)' }
     end
 
     it 'should be set if valid' do
@@ -191,6 +193,41 @@ describe Event, :type => :model do
     it 'should be rejected if invalid' do
       event = Event.create(@event.merge(:url => 'http:google.com'))
       expect(event.errors[:url].size).to eq(1)
+    end
+  end
+
+  describe '#next_event_occurrence_with_time' do
+    before(:each) do
+      @event = FactoryGirl.build(Event,
+                                 name: 'Spec Scrum',
+                                 start_datetime: 'Mon, 10 Jun 2013 09:00:00 UTC',
+                                 duration: 30,
+                                 repeats: 'weekly',
+                                 repeats_every_n_weeks: 1,
+                                 repeats_weekly_each_days_of_the_week_mask: 0b1000000,
+                                 repeat_ends: true,
+                                 repeafix gemfile, changes to schema.t_ends_on: '2013-07-01')
+    end
+
+    it 'should return the first event instance with its time in basic case' do
+      Delorean.time_travel_to(Time.parse('2013-06-15 09:27:00 UTC'))
+      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-16 09:00:00 UTC')
+    end
+
+    it 'should return nil if the series has expired' do
+      Delorean.time_travel_to(Time.parse('2013-07-15 09:27:00 UTC'))
+      expect(@event.next_event_occurrence_with_time).to be_nil
+    end
+
+    it 'should return the second event instance when the start time is moved forward' do
+      Delorean.time_travel_to(Time.parse('2013-06-20 09:27:00 UTC'))
+      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-23 09:00:00 UTC')
+    end
+
+    it 'should return the second event instance with its time when the first is deleted' do
+      Delorean.time_travel_to(Time.parse('2013-06-15 09:27:00 UTC'))
+      @event.remove_from_schedule(Time.parse('2013-6-16 09:00:00 UTC'))
+      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-23 09:00:00 UTC')
     end
   end
 
@@ -266,7 +303,7 @@ describe Event, :type => :model do
 
     it 'should return the start_time if it is specified' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      options = {start_time: '2015-06-20 09:27:00 UTC'}
+      options = { start_time: '2015-06-20 09:27:00 UTC' }
       expect(@event.start_datetime_for_collection(options)).to eq(options[:start_time])
     end
 
@@ -290,13 +327,13 @@ describe Event, :type => :model do
 
     it 'should return the repeat_ends_on datetime if that comes first' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      options = {end_time: '2015-06-30 09:27:00 UTC'}
+      options = { end_time: '2015-06-30 09:27:00 UTC' }
       expect(@event.final_datetime_for_collection(options)).to eq(@event.repeat_ends_on.to_datetime)
     end
 
     it 'should return the options[:endtime] if that comes before repeat_ends_on' do
       Delorean.time_travel_to(Time.parse('2015-06-15 09:27:00 UTC'))
-      options = {end_time: '2015-06-20 09:27:00 UTC'}
+      options = { end_time: '2015-06-20 09:27:00 UTC' }
       expect(@event.final_datetime_for_collection(options)).to eq(options[:end_time].to_datetime)
     end
 
@@ -319,7 +356,7 @@ describe Event, :type => :model do
 
     it 'should return the options[:endtime] when specified' do
       Delorean.time_travel_to(Time.parse('2015-06-15 09:27:00 UTC'))
-      options = {end_time: '2015-06-20 09:27:00 UTC'}
+      options = { end_time: '2015-06-20 09:27:00 UTC' }
       expect(@event.final_datetime_for_collection(options)).to eq(options[:end_time].to_datetime)
     end
 

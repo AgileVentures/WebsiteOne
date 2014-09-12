@@ -89,50 +89,46 @@ class Event < ActiveRecord::Base
   end
 
   def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
-    _events = []
-    Event.where(['category = ?', event_type]).each do |event|
-      _occurrence = event.next_event_occurrence_with_time(begin_time)
-      _events << _occurrence if _occurrence.present?
-    end
-    return nil if _events.empty?
-    _events = _events.sort_by { |e| e[:time] }
-    _events[0][:event].next_occurrence_time_attr = _events[0][:time]
-    return _events[0][:event]
+    events_with_times = []
+    events_with_times = Event.where(category: event_type).map { |event|
+      event.next_event_occurrence_with_time(begin_time).compact
+    }
+    return nil if events_with_times.empty?
+    events_with_times = events_with_times.sort_by { |e| e[:time] }
+    events_with_times[0][:event].next_occurrence_time_attr = events_with_times[0][:time]
+    return events_with_times[0][:event]
   end
 
-  #looks into the future for the next event occurrence, just in case some have been excluded
+  # The IceCube Schedule's occurrences_between method requires a time range as input to find the next time
+  # Most of the time, the next instance will be within the next weeek.do
+  # But some event instances may have been excluded, so there's not guarantee that the next time for an event will be within the next week, or even the next month
+  # To cover these cases, the while loop looks farther and farther into the future for the next event occurrence, just in case there are many exclusions.
   def next_event_occurrence_with_time(start = Time.now)
     begin_datetime = start_datetime_for_collection(start_time: start)
     final_datetime = repeating_and_ends? ? repeat_ends_on : 10.years.from_now
     n_days = 8
     end_datetime = n_days.days.from_now
-    _event = nil
-    while _event.nil? and end_datetime < final_datetime
-      _event = next_event_occurrence_with_time_inner(start, final_datetime)
+    event = nil
+    while event.nil? and end_datetime < final_datetime
+      event = next_event_occurrence_with_time_inner(start, final_datetime)
       n_days *= 2
       end_datetime = n_days.days.from_now
     end
-    _event
+    event
   end
 
   def next_event_occurrence_with_time_inner(start_time, end_time)
-    _occurrences = occurrences_between(start_time, end_time)
-    if _occurrences.present?
-      { event: self, time: _occurrences.first.start_time }
-    else
-      nil
-    end
+    occurrences = occurrences_between(start_time, end_time)
+    { event: self, time: occurrences.first.start_time } if occurrences.present?
   end
 
   def next_occurrences(options = {})
     begin_datetime = start_datetime_for_collection(options)
     final_datetime = final_datetime_for_collection(options)
     limit = options.fetch(:limit, 100)
-
     [].tap do |occurences|
       occurrences_between(begin_datetime, final_datetime).each do |time|
         occurences << { event: self, time: time }
-
         return occurences if occurences.count >= limit
       end
     end
