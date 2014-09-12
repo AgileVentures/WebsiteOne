@@ -4,12 +4,12 @@
       setFixtures(sandbox({ id: 'hg-management' }));
     });
 
-    it('calls refresh every 10 sec', function() {
+    /**it('calls refresh every 10 sec', function() {
       spyOn(window, 'setInterval');
       spyOn(this.app, 'ajaxRequest');
       this.app.init();
       expect(window.setInterval).toHaveBeenCalledWith(this.app.ajaxRequest, 10000);
-    });
+    });*/
 
     it('replaces hg-management section', function() {
       spyOn(WebsiteOne, 'renderHangoutButton');
