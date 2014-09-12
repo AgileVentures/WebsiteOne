@@ -66,6 +66,7 @@ describe 'projects/show.html.erb', type: :view do
     render
     expect(rendered).to have_text project.title
     expect(rendered).to have_text project.description
+    expect(rendered).to have_text project.pitch
     expect(rendered).to have_text project.status.upcase
     expect(rendered).to have_text user.display_name
   end
