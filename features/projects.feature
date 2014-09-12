@@ -5,13 +5,13 @@ Feature: Create and maintain projects
 
   Background:
     Given the following projects exist:
-      | title         | description             | status   | github_url                                  | pivotaltracker_url                               |
-      | hello world   | greetings earthlings    | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
-      | hello mars    | greetings aliens        | inactive |                                             |                                                  |
-      | hello jupiter | greetings jupiter folks | active   |                                             |                                                  |
-      | hello mercury | greetings mercury folks | inactive |                                             |                                                  |
-      | hello saturn  | greetings saturn folks  | active   |                                             |                                                  |
-      | hello sun     | greetings sun folks     | active   |                                             |                                                  |
+      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |
+      | hello world   | greetings earthlings    |             | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
+      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  |
+      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  |
+      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  |
+      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |
     And there are no videos
 
 #  Scenarios for Index page
@@ -129,6 +129,7 @@ Feature: Create and maintain projects
       | Text                         |
       | hello saturn                 |
       | greetings saturn folks       |
+      | My pitch...                  |
       | ACTIVE                       |
       | not linked to GitHub         |
       | not linked to PivotalTracker |
