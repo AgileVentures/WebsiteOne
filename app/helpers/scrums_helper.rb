@@ -1,11 +1,11 @@
 module ScrumsHelper
   def scrum_link(video)
     link_to(
-      raw('<span class="glyphicon glyphicon-play"></span>'),
+      raw('<i class="fa fa-bg fa-play"></i>') + video[:title],
       video[:url], {
         id: video[:id],
-        class: 'scrum_yt_link btn btn-default btn-danger btn-xs',
-        data: { content: video[:content], toggle: "modal", target: "#player" }
+        class: 'scrum_yt_link',
+        data: { content: video[:content], toggle: 'modal', target: '#player' }
       }
     )
   end

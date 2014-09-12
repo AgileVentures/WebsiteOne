@@ -2,8 +2,8 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
 
-Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
+Given /^I am logged in as user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |name, email, password|
+  @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
@@ -378,4 +378,8 @@ end
 
 Given(/^I fetch the GitHub contribution statistics$/) do
   GithubCommitsJob.run
+end
+
+When(/^I delete my profile$/) do 
+  @user.delete
 end

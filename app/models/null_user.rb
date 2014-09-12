@@ -1,11 +1,11 @@
 class NullUser < User
 
-  def initialize(name)
-    super({ first_name: name, created_at: Time.now })
+  def persisted?
+    false 
   end
 
-  def save
-    raise 'The UserNull instance should not be persisted'
+  def initialize(name)
+    super({ first_name: name, created_at: Time.now })
   end
 
   def presenter
