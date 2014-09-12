@@ -1,3 +1,5 @@
+@import "../variables";
+
 .hangouts-management {
   @extend .panel-group;
   margin: 0px;
@@ -45,7 +47,7 @@
   }
 
   .panel-body.warning {
-    padding: 5px; 
+    padding: 5px;
   }
 
   .btn:focus {
@@ -83,7 +85,7 @@
 
     .readme-link {
       background: transparent;
-      color: #ee7335 !important;
+      color: $theme-main !important;
       display: inline-block;
       vertical-align: initial;
       padding: 0;
@@ -111,4 +113,147 @@
 
 .popover-content {
   font-size: small;
+}
+
+.live-hangouts {
+  $hg-color: lighten($theme-main, 35);
+  $hg-border: 1px solid gray;
+
+  font-size: smaller;
+
+  .fa {
+    height: auto;
+    font-size: 1.5em;
+  }
+
+  .panel {
+    overflow: hidden;
+    border: $hg-border;
+  }
+
+  .panel-info {
+    font-weight: bold;
+    margin-bottom: 5px;
+
+    div {
+      line-height: 25px;
+    }
+  }
+
+  @mixin hg-btn($color) {
+    @extend .btn;
+    background-color: $color;
+
+    font-size: smaller;
+
+    height: 2em;
+    padding: 4px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: lighten($color, 10%);
+    }
+  }
+
+  .hg-toggles {
+    @extend .pull-left;
+    margin-bottom: 10px;
+  }
+
+  .btn-hg-toggle {
+    @include hg-btn(green);
+    height: 25px;
+    margin-left: 10px;
+  }
+
+  .btn-hg-live {
+    @include hg-btn($theme-main);
+    height: 25px;
+    margin-left: 5px;
+  }
+
+  .btn-hg-join {
+    @include hg-btn(green);
+    width: 50px;
+  }
+
+  .btn-hg-join.disable {
+    background-color: grey;
+    box-shadow: none;
+    cursor: default;
+
+    &:hover {}
+
+  }
+
+  .btn-hg-watch {
+    @include hg-btn($theme-main);
+    width: 50px;
+    margin-top: 3px;
+  }
+
+  .panel-default {
+    position: relative;
+    transition: all 0.5s;
+
+    .panel-heading {
+      &:hover {
+        background-color: $hg-color;
+        border-color: $hg-color;
+        box-shadow: none;
+        cursor: pointer;
+      }
+    }
+
+    .panel-heading.empty {
+      padding-left: 10px;
+    }
+  }
+
+  .panel-heading.hg-headings {
+    color: white;
+    background-color: $theme-dark;
+  }
+
+
+  .panel-body {
+    border-top: $hg-border;
+    background-color: $hg-color;
+    padding: 5px;
+    margin: 0;
+  }
+
+  .container-fluid, .panel-heading {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .container-fluid {
+    text-align: left;
+    white-space: nowrap;
+
+    @media (min-width: 768px) {
+      white-space: normal;
+
+      .hg-align-right {
+        text-align: right;
+        direction: rtl;
+      }
+
+    }
+
+  }
+
+  .hg-toggle {
+    width: 20px;
+    padding-left: 5px;
+  }
+
+  .hg-avatar {
+    padding: 0 0 0 15px;
+  }
+
 }

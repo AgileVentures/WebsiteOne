@@ -6,27 +6,14 @@ WebsiteOne.renderHangoutButton = function() {
        hoaPlaceholder.length > 0 &&
        $('#' + placeholderId + ' iframe').length === 0 ) {
 
-    var topic = hoaPlaceholder.data('topic'),
-        eventId = hoaPlaceholder.data('event-id'),
-        category = hoaPlaceholder.data('category'),
-        hangoutId = hoaPlaceholder.data('hangout-id'),
-        appId = hoaPlaceholder.data('app-id'),
-        callbackUrl = hoaPlaceholder.data('callback-url');
-
-    var startData = JSON.stringify({
-      topic: topic,
-      eventId: eventId,
-      category: category,
-      hangoutId: hangoutId,
-      callbackUrl: callbackUrl
-    });
+    var startData = hoaPlaceholder.data('start-data');
 
     gapi.hangout.render(placeholderId, {
         render: 'createhangout',
-        topic: topic,
+        topic: startData.title,
         hangout_type: 'onair',
         initial_apps: [{
-          app_id: appId,
+          app_id: hoaPlaceholder.data('app-id'),
           start_data: startData,
           app_type : 'LOCAL_APP'
         }],

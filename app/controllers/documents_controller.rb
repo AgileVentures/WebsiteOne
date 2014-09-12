@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   layout 'with_sidebar'
   before_action :find_project
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :get_doc_categories, :update_parent_id]
   before_action :authenticate_user!, except: [:index, :show]
 
 
@@ -16,6 +16,16 @@ class DocumentsController < ApplicationController
   # GET /documents/1.json
   def show
     @children = @document.children.order(created_at: :desc)
+  end
+
+  def update_parent_id
+    change_document_parent(params[:new_parent_id]) if params[:new_parent_id]
+    redirect_to project_document_path
+  end
+
+  def get_doc_categories
+    @categories = @project.documents.where(parent_id: nil)
+    render partial: "categories"
   end
 
   # GET /documents/new
@@ -80,6 +90,15 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def change_document_parent(new_parent_id)
+    valid_category = Document.find_by_id(new_parent_id)
+    if valid_category
+      @document.parent_id = valid_category.id
+      flash[:notice] = "You have successfully moved #{@document.title} to the #{valid_category.title} section." if @document.save
+    else
+      flash[:error] = "Could not find the new parent document"
+		end
+  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def document_params

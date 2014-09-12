@@ -52,27 +52,9 @@ describe 'events/new' do
           expect(fieldset).to have_selector('input#event_repeats_every_n_weeks', :type => 'hidden')
           expect(fieldset).to have_selector('input#event_repeats_weekly_each_days_of_the_week_', :type => 'hidden')
         end
-        expect(form).to have_selector('select#event_repeat_ends') do |value|
+        expect(form).to have_selector('select#event_repeat_ends_string') do |value|
           expect(value).to have_text('never')
           expect(value).to have_text('on')
-        end
-        expect(form).to have_selector('div#event_repeat_ends_on') do |date_select|
-          expect(date_select).to have_selector('select#event_repeat_ends_on_1i') do |year|
-            expect(year).to have_text('2014')
-            expect(year).to have_text('2013')
-            expect(year).to have_text('2013')
-          end
-          expect(date_select).to have_selector('select#event_repeat_ends_on_2i') do |month|
-            expect(month).to have_text('January')
-            expect(month).to have_text('February')
-            expect(month).to have_text('March')
-            expect(month).to have_text('April')
-          end
-          expect(date_select).to have_selector('select#event_repeat_ends_on_3i') do |day|
-            expect(day).to have_text('1')
-            expect(day).to have_text('2')
-            expect(day).to have_text('13')
-          end
         end
         expect(form).to have_link('Cancel', '/')
         expect(form).to have_selector('input.btn-default', value: 'Save')

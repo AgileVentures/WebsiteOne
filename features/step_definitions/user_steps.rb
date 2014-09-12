@@ -2,8 +2,8 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
 
-Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
+Given /^I am logged in as user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |name, email, password|
+  @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
@@ -129,6 +129,11 @@ When /^I look at the list of users$/ do
   visit '/'
 end
 
+When /^I filter users for "(.*?)"$/ do |first_name|
+  fill_in "user-filter", :with => first_name
+  #click_link_or_button :UsersFilterSubmit
+end
+
 ### THEN ###
 Then /^I should be signed in$/ do
   page.should have_content "Log out"
@@ -218,7 +223,7 @@ end
 
 Given /^the following users exist$/ do |table|
   table.hashes.each do |attributes|
-    create_test_user(attributes)
+    FactoryGirl.create(:user, attributes)
   end
 end
 When(/^I should see a list of all users$/) do
@@ -369,4 +374,12 @@ end
 
 When(/^My email receivings is set to false$/) do
   @user.update_attribute(:receive_mailings, false)
+end
+
+Given(/^I fetch the GitHub contribution statistics$/) do
+  GithubCommitsJob.run
+end
+
+When(/^I delete my profile$/) do 
+  @user.delete
 end

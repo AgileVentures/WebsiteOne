@@ -14,8 +14,19 @@
   <section class="user-projects">
     <h4>Projects Involvement</h4>
     <ul>
-      <% presenter.projects_joined.each do |project| %>
+      <% presenter.following_projects.each do |project| %>
         <li><%= link_to project.title, project_path(project) %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<% if presenter.contributed? %>
+  <section class="user-contributions">
+    <h4>Contributions</h4>
+    <ul>
+      <% presenter.contributions.each do |commit_count| %>
+        <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b> - <%= commit_count.commit_count %></li>
       <% end %>
     </ul>
   </section>

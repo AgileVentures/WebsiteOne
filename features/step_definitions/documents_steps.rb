@@ -47,7 +47,16 @@ When(/^I click the sidebar link "([^"]*)"$/) do |link|
   end
 end
 
+When(/^I click "([^"]*)" in "([^"]*)"$/) do |link, scope|
+  within(selector_for(scope)) { step %Q{I click "#{link}"} }
+end
+
 When(/^I should see ([^"]*) revisions for "([^"]*)"$/) do |revisions, document|
   doc = Document.find_by_title(document)
   expect doc.versions.count == revisions
+  expect(page).to have_xpath('//div[@id="revisions"]/b', count: revisions)
+end
+
+When(/^I should not see any revisions$/) do
+  expect(page).not_to have_css('#revisions')
 end

@@ -86,7 +86,8 @@ Feature: Events
     And I click the "Save" button
     Then I should see "Event Created"
     Then I should be on the event "Show" page for "Daily Scrum"
-    When I click "Events" within the navigation bar
+    When I dropdown the "Events" menu
+    And I click "Upcoming events"
     And I should see multiple "Scrum" events
 
   Scenario: Don't save with empty name

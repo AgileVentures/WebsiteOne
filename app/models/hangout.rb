@@ -1,17 +1,34 @@
 class Hangout < ActiveRecord::Base
   belongs_to :event
-  default_scope { order('created_at') }
+  belongs_to :user
+  include UserNullable
+  belongs_to :project
+
+  serialize :participants
+
+  scope :started, -> { where.not(hangout_url: nil) }
+  scope :live, -> { where('updated_at > ?', 5.minutes.ago).order('created_at DESC') }
+  scope :latest, -> { order('created_at DESC') }
+  scope :pp_hangouts, -> { where(category: 'PairProgramming') }
 
   def started?
-    hangout_url.present?
+    hangout_url?
   end
 
   def live?
-    hangout_url.present? && self.updated_at > 5.minutes.ago
+    started? && updated_at > 5.minutes.ago
   end
 
-  def update_hangout_data(params)
-    event = Event.find_by_id(params[:event_id])
-    update(title: params[:topic], event: event, category: params[:category], hangout_url: params[:hangout_url], updated_at: Time.now)
+  def duration
+    updated_at - created_at
   end
+
+  def self.active_hangouts
+    select(&:live?)
+  end
+
+  def start_datetime
+    event != nil ? event.start_datetime : created_at
+  end
+
 end

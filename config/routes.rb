@@ -15,6 +15,7 @@ WebsiteOne::Application.routes.draw do
   end
 
   match '/hangouts/:id' => 'hangouts#update', :via => [:put, :options], as: 'hangout'
+  match '/hangouts' => 'hangouts#index', :via => [:get], as: 'hangouts'
 
   resources :projects, :format => false do
     member do
@@ -46,10 +47,17 @@ WebsiteOne::Application.routes.draw do
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
 
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
+  get 'scrums', to: 'scrums#index', as: 'scrums', :format => false
 
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false
+  get 'sections', to: 'documents#get_doc_categories', as: 'project_document_sections', :format => false
+  put 'update_document_parent_id/:project_id/:id', to: 'documents#update_parent_id', as: 'update_document_parent_id', :format => false
 
+  resources :hookups
+
+  get '/dashboard', to: 'dashboard#index'
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
+
 end
 
