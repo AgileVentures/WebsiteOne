@@ -4,7 +4,7 @@
       <p>No members in project <strong><%= @project.title %></strong></p>
   <% else %>
       <ul class="media-list">
-        <% members.first(5).each do |member| %>
+        <% members.first(5).reverse.each do |member| %>
             <% present member do |presenter| %>
                 <li class="media-item">
                   <a class="user-preview" href="<%= user_path(member) %>" data-toggle="tooltip"
