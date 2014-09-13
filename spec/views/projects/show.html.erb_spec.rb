@@ -197,7 +197,17 @@ describe 'projects/show.html.erb', type: :view do
         allow(view).to receive(:generate_event_id).and_return('546')
       end
 
-      it 'render join project button' do
+      it 'render a project actions dropdown' do
+        render
+        expect(rendered).to have_css('button#actions-dropdown', text: 'Project Actions')
+        rendered.within('ul.list-inline') do |content|
+          expect(content).to have_css('a', text: 'Edit Project Details')
+          expect(content).to have_css('a', text: 'Create new document')
+          expect(content).to have_css('a', text: 'Leave Project')
+        end
+      end
+
+      it 'render leave project link' do
         render
         expect(rendered).to have_css %Q{a[href="#{unfollow_project_path(project)}"]}, visible: true
       end
@@ -215,7 +225,7 @@ describe 'projects/show.html.erb', type: :view do
     end
 
     context 'user is not a member of project' do
-      it 'render leave project button' do
+      it 'render join project button' do
         allow(user).to receive(:following?).and_return(false)
         render
         expect(rendered).to have_css %Q{a[href="#{follow_project_path(project)}"]}, visible: true
