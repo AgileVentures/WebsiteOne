@@ -129,14 +129,17 @@ describe 'projects/show.html.erb', type: :view do
 
     it 'renders a table wih videos' do
       render
-      rendered.within('div#videos_list table') do |content|
-        expect(content).to have_text('Video', 'Host', 'Published')
+      rendered.within('div.tab-pane#videos_list') do |content|
+        expect(content).to have_css('table')
+        expect(content).to have_text('Video')
+        expect(content).to have_text('Host')
+        expect(content).to have_text('Published')
       end
     end
 
     it 'renders an embedded player' do
       render
-      rendered.within('div#videos_list') do |content|
+      rendered.within('div.tab-pane#videos_list') do |content|
         expect(content).to have_css('iframe#ytplayer')
       end
     end
