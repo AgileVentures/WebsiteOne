@@ -8,20 +8,32 @@
       <h1><%= @project.title %></h1>
       <p><%= clean_html @project.description %></p>
       <hr>
+
       <div class="project-edit">
-        <% if user_signed_in? %>
-          <% if current_user.following?(@project) %>
-            <% # custom_css_btn 'edit', 'fa fa-pencil-square-o', edit_project_path(@project) %>
-            <%= link_to 'Edit Project Details', edit_project_path(@project) %>
-            <% # custom_css_btn 'leave project', 'fa fa-star', unfollow_project_path(@project) %>
-            <a href="<%= unfollow_project_path(@project) %>" data-toggle="tooltip" data-placement="top" title="leave project">Leave Project</a>  
-            <div class="hangout-btn pull-right">
-              <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>
-            </div>
-            <hr>
-          <% end %>
+      <% if user_signed_in? %>
+        <% if current_user.following?(@project) %>
+        <ul class="list-inline">
+          <li class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+              Project Actions
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a></li>
+            </ul>
+          </li>
+          <li class="hangout-btn">
+            <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>
+          </li>
+        </ul>
+        <hr>
         <% end %>
+      <% end %>
       </div>
+
     </div>
   </div>
 </div>
@@ -62,14 +74,6 @@
           <% end %>
         </div>
         <div class="tab-pane" id="documents_list">
-          <% if user_signed_in? %>
-            <ul class="user-controls">
-              <li><%= custom_css_btn 'new document', 'fa fa-file-text-o', new_project_document_path(project_id: @project.friendly_id) %></li>
-              <% if current_user.following?(@project) %>
-                
-              <% end %>
-            </ul>
-          <% end %>
           <%= render 'documents_list' %>
         </div>
         <div class="tab-pane" id="videos_list">
