@@ -6,7 +6,7 @@
   <% if user_signed_in? && current_user.following?(@project) %>
   <% else %>
     <% # custom_css_btn 'join project', 'fa fa-star-o', follow_project_path(@project) %>
-    <a href="<%= follow_project_path(@project) %>" data-toggle="tooltip" data-placement="top" title="join project" class="btn btn-block btn-join">Join this Project</a>
+    <a href="<%= follow_project_path(@project) %>" data-toggle="tooltip" data-placement="top" title="join project" class="btn btn-block btn-join">Join Project</a>
   <% end %>
 
 </div>
