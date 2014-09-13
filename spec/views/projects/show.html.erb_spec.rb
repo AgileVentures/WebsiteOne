@@ -101,12 +101,10 @@ describe 'projects/show.html.erb', type: :view do
 
   it 'renders a modal with full members list' do
     render
-    print page.html
-    rendered.within('#members-list') do |content|
-      find(:link, 'View full list').click
-      #expect(content).to have_css('a', text: 'View full list').click
-    end
     expect(rendered).to have_css '#members-modal'
+    rendered.within('#members-modal') do |content|
+      expect(content).to have_css 'li.media-item', count: 10
+    end
   end
 
 
