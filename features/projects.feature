@@ -192,9 +192,10 @@ Feature: Create and maintain projects
     Then I should see "Project was not updated."
 
   Scenario: Project show page renders a list of members
-    Given The project "hello world" has 5 members
+    Given The project "hello world" has 10 members
     And I am on the "Show" page for project "hello world"
-    Then I should see "Members (5)"
+    Then I should see "Members (10)"
+    But I should see 5 member avatars
 
   Scenario: Project show page has links to github and Pivotal Tracker
     Given I am on the "Show" page for project "hello world"

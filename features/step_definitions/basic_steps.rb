@@ -288,21 +288,6 @@ Then(/^I should see the sub-documents in this order:$/) do |table|
   actual_order.should eq expected_order
 end
 
-
-Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
-  project = Project.find_by_title(title)
-  case item.downcase.pluralize
-    when 'members'
-      (1..num.to_i).each do
-        u = User.create(email: Faker::Internet.email, password: '1234567890')
-        u.follow(project)
-      end
-
-    else
-      pending
-  end
-end
-
 Then /^I should see a "([^"]*)" table with:$/ do |name, table|
   expect(page).to have_text(name)
   table.rows.flatten.each do |heading|
