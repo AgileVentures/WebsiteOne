@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140913021637) do
+ActiveRecord::Schema.define(version: 20140913183322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20140913021637) do
     t.string   "slug"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
-    t.string   "pitch"
+    t.text     "pitch"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
