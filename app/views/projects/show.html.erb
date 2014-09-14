@@ -50,16 +50,16 @@
     <div class="project-main col-xs-12 col-md-8 col-md-pull-4">
       <ul class="nav nav-tabs nav-justified">
         <li id="pitch" class="active">
-          <a href="#pitch_content" data-toggle="tab">Home</a>
+          <a href="#pitch_content" data-toggle="tab" data-hash="home">Home</a>
         </li>
         <li id="documents">
-          <a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a>
+          <a href="#documents_list" data-toggle="tab" data-hash="document">Documents (<%= @documents.roots.count %>)</a>
         </li>
         <li id="videos">
-          <a href="#videos_list" data-toggle="tab">Videos (<%= @videos.count %>)</a>
+          <a href="#videos_list" data-toggle="tab" data-hash="video">Videos (<%= @videos.count %>)</a>
         </li>
         <li id="activities">
-          <a href="#activities_list" data-toggle="tab">Activity (<%= @stories.count %>)</a>
+          <a href="#activities_list" data-toggle="tab" data-hash="activity">Activity (<%= @stories.count %>)</a>
         </li>
       </ul>
 
