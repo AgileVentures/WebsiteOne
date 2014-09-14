@@ -30,7 +30,8 @@ Feature: Manage Document
   Scenario: Create a new document
     Given I am logged in
     Given I am on the "Show" page for project "hello world"
-    When I click the very stylish "New Document" button
+    When I click the "Join Project" button
+    And I click the "Create new document" button
     And I fill in "Title" with "New doc title"
     And I click "Submit"
     Then I should see "Document was successfully created."
@@ -38,7 +39,8 @@ Feature: Manage Document
   Scenario: Create a new document page should have a back button
     Given I am logged in
     Given I am on the "Show" page for project "hello world"
-    When I click the very stylish "New Document" button
+    When I click the "Join Project" button
+    And I click the "Create new document" button
     And I click "Back"
     Then I should be on the "Show" page for project "hello world"
 
