@@ -1,7 +1,10 @@
 WebsiteOne::Application.routes.draw do
+  get 'activities/index'
+
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
+  resources :activities
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false

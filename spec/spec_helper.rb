@@ -7,6 +7,9 @@ require 'rspec/rails'
 # require 'rspec/autorun'
 require 'capybara/rspec'
 require 'webmock/rspec'
+require 'public_activity/testing'
+
+PublicActivity.enabled = true
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

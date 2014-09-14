@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params.merge('user_id' => current_user.id))
     if @project.save
+      @project.create_activity :create, owner: current_user
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
       flash.now[:alert] = 'Project was not saved. Please check the input.'
@@ -39,6 +40,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update_attributes(project_params)
+      @project.create_activity :update, owner: current_user
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else
       # TODO change this to notify for invalid params

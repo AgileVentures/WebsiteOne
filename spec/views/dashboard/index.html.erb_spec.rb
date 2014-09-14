@@ -9,6 +9,12 @@ describe 'dashboard/index.html.erb', type: :view do
     @stats = :stats
   end
 
+  it 'displays a tab view' do
+    render
+    expect(rendered).to have_css('ul#tabs')
+
+  end
+
   it 'displays statistics correctly' do
     render
     expect(rendered).to have_content('10 Articles Published')

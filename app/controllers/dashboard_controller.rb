@@ -3,6 +3,7 @@ class DashboardController < ApplicationController
 
   def index
     @stats = get_stats
+    @activities = PublicActivity::Activity.order("created_at desc").where(owner_type: "User")
   end
 
   private
