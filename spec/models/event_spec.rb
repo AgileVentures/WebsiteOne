@@ -206,7 +206,7 @@ describe Event, :type => :model do
                                  repeats_every_n_weeks: 1,
                                  repeats_weekly_each_days_of_the_week_mask: 0b1000000,
                                  repeat_ends: true,
-                                 repeafix gemfile, changes to schema.t_ends_on: '2013-07-01')
+                                 repeat_ends_on: '2013-07-01')
     end
 
     it 'should return the first event instance with its time in basic case' do
