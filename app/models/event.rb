@@ -91,8 +91,8 @@ class Event < ActiveRecord::Base
   def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
     events_with_times = []
     events_with_times = Event.where(category: event_type).map { |event|
-      event.next_event_occurrence_with_time(begin_time).compact
-    }
+      event.next_event_occurrence_with_time(begin_time)
+    }.compact
     return nil if events_with_times.empty?
     events_with_times = events_with_times.sort_by { |e| e[:time] }
     events_with_times[0][:event].next_occurrence_time_attr = events_with_times[0][:time]
