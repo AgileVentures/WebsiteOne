@@ -27,6 +27,7 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
 
     if @article.save
+      @article.create_activity :create, owner: current_user
       flash[:notice] = %Q{Successfully created the article "#{@article.title}!"}
       redirect_to article_path(@article)
     else
@@ -38,6 +39,7 @@ class ArticlesController < ApplicationController
   def update
 
     if @article.update_attributes(article_params)
+      @article.create_activity :update, owner: current_user
       flash[:notice] = %Q{Successfully updated the article "#{@article.title}"}
       redirect_to article_path(@article)
     else

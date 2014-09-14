@@ -5,6 +5,10 @@ describe Document, :type => :model do
 
   it { is_expected.to be_versioned }
 
+  it 'has public-activity enabled' do
+    expect(subject.public_activity_enabled?).to eq true
+  end
+
   it 'is valid with proper attributes' do
     expect(FactoryGirl.build(:document)).to be_valid
   end
