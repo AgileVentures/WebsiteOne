@@ -3,15 +3,15 @@ Then(/^I should see a activity feed$/) do
 end
 
 And(/^activities exists$/) do
-  PublicActivity::Activity.stub(id: 2,
-                                trackable_id: 15,
-                                trackable_type: 'Document',
-                                owner_id: 1,
-                                owner_type: 'User',
-                                key: 'document.create',
-                                parameters: {},
-                                recipient_id: nil,
-                                recipient_type: nil,
-                                created_at: '2014-09-14 15:02:34',
-                                updated_at: '2014-09-14 15:02:34')
+ pending
+end
+
+And(/^I edit article "([^"]*)"$/) do |article|
+  steps %Q{
+    And I am on the "Show" page for article "#{article}"
+    And I click the very stylish "Edit article" button
+    Then I should be on the "Edit" page for article "#{article}"
+    And I fill in "Content" with "**New content** ``New Markdown``"
+    And I click the "Update" button
+}
 end

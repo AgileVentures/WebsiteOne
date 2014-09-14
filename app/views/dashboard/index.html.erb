@@ -7,21 +7,31 @@
   <div id="tab-content" class="tab-content" style="background: #fff;">
     <div class="tab-pane active" id="statistics">
       <h3>Statistics</h3>
+
       <div>
-        <p><%= @stats[:articles][:count]  %> Articles Published</p>
-        <p><%= @stats[:projects][:count]  %> Active Projects</p>
-        <p><%= @stats[:members][:count]   %> AgileVentures Members</p>
+        <p><%= @stats[:articles][:count] %> Articles Published</p>
+
+        <p><%= @stats[:projects][:count] %> Active Projects</p>
+
+        <p><%= @stats[:members][:count] %> AgileVentures Members</p>
+
         <p><%= @stats[:documents][:count] %> Documents Created</p>
       </div>
     </div>
     <div class="tab-pane" id="activity-feed">
 
       <h3>Recent activities</h3>
+
       <div id="feed">
-        <% @activities.each do |activity| %>
-            <div class="activity">
-              <%= render_activity activity %>
-            </div>
+        <% if @activities %>
+            <% @activities.each do |activity| %>
+                <div class="activity">
+                  <%= render_activity activity %>
+                </div>
+                <hr>
+            <% end %>
+        <% else %>
+            <p>No public activity</p>
         <% end %>
       </div>
 
@@ -36,7 +46,7 @@
     $('#tabs a').click(function (e) {
         var scrollHeight = $(document).scrollTop();
         $(this).tab('show');
-        setTimeout(function() {
+        setTimeout(function () {
             $(window).scrollTop(scrollHeight);
         }, 5);
     });
