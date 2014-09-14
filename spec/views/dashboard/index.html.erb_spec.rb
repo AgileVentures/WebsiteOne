@@ -12,7 +12,6 @@ describe 'dashboard/index.html.erb', type: :view do
   it 'displays a tab view' do
     render
     expect(rendered).to have_css('ul#tabs')
-
   end
 
   it 'displays statistics correctly' do

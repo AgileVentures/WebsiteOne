@@ -12,7 +12,8 @@
     <div class="row">
       <%= link_to activity.owner.display_name, activity.owner if activity.owner %> created a <strong>document</strong>:
       <% if activity.trackable %>
-          <%= link_to activity.trackable.title, activity.trackable.url_for_me('show') %>.
+          <%= link_to activity.trackable.title, activity.trackable.url_for_me('show') %>
+          on the <%= activity.trackable.project.title %> project.
       <% else %>
           .
       <% end %>

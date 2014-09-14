@@ -1,3 +1,4 @@
+
 Feature: Display Public Activity
   As a user
   In order to get a better overview of what is going on
@@ -15,8 +16,17 @@ Feature: Display Public Activity
     Given I am logged in
     And I edit article "Ruby is on Fire"
 
+  @javascript
   Scenario: Navigate to activity feed
     Given I am on the "Dashboard" page
     And I click the "Activity feed" link
     Then I should see "activity-feed" tab is active
     And I should see a activity feed
+    Then I should see "Anders Persson edited the article: Ruby is on Fire."
+
+  #@javascript
+  #Scenario: Render activity
+  #  Given the "activity-feed" tab is active
+
+
+

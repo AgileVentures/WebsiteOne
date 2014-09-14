@@ -29,8 +29,6 @@ Feature: Display Statistics
       | Document 1 | Project 1 |
       | Document 2 | Project 2 |
 
-    And activities exists
-
   Scenario:
     Given I am on the "home" page
     Then I should see link "Dashboard"

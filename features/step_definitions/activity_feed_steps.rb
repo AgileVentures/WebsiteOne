@@ -15,3 +15,7 @@ And(/^I edit article "([^"]*)"$/) do |article|
     And I click the "Update" button
 }
 end
+
+Given(/^the "activity\-feed" tab is active$/) do |tab|
+  steps %Q{"Then I should see "#{tab}" tab is active"}
+end
