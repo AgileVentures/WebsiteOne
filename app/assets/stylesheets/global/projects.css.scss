@@ -18,7 +18,7 @@
   }
 }
 
-$avatar-size: 80px;
+$avatar-size: 32px;
 .projects-user-avatar {
   display: inline-block;
   width: $avatar-size;
@@ -29,4 +29,57 @@ $avatar-size: 80px;
 
 .members-list-item {
   display: inline-block;
+}
+.project-sidebar {
+  // mainly overrides in this section :(
+  margin-top: 43px;
+  padding: 0 15px 10px 15px;
+
+  .media-body {
+    display: inline;
+  }
+  .media-heading {
+    display: inline;
+  }
+  .media-item {
+    margin-bottom: 0;
+    height: auto;
+  }
+  .user-preview {
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+    -webkit-border-radius: 0;
+    -mox-border-radius: 0;
+    border-radius: 0;
+    &:hover {
+      background: none;
+    }
+    p.media-heading { // overriding is painful because other rules are far too specific
+      font-size: 15px;
+    }
+  }
+}
+
+.highlight-box { // replace with bootstrap well?
+  // border: 1px solid #dddddd;
+}
+.widget-title {
+  font-size: 1em;
+  font-weight: 700;
+  span {
+    font-weight: 400;
+  }
+}
+.btn-join {
+  background-color: #15ab94; // #15ab94, #f89403
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 700;
+  &:hover {
+    background-color: darken(#15ab94, 7%)
+  }
+}
+.tab-pane {
+  padding: 1em 15px;
 }
