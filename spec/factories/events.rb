@@ -8,7 +8,7 @@ FactoryGirl.define do
     repeats 'weekly'
     repeats_every_n_weeks '1'
     repeats_weekly_each_days_of_the_week_mask '64'
-    repeat_ends 'on'
+    repeat_ends_string 'on'
     repeat_ends_on '2015-03-31'
     time_zone 'UTC'
   end
