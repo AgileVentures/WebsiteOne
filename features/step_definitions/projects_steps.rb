@@ -139,3 +139,23 @@ Given(/^I (should not|should) see a link to "(.*?)" on Pivotal Tracker$/) do |op
   step %Q{I #{option} see link "#{object.title}"}
 end
 
+Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
+  project = Project.find_by_title(title)
+  case item.downcase.pluralize
+    when 'members'
+      (1..num.to_i).each do
+        u = User.create(email: Faker::Internet.email, password: '1234567890')
+        u.follow(project)
+      end
+    else
+      pending
+  end
+end
+
+Then(/^I should see (\d+) member avatars$/) do |count|
+  within ('#members-list') do
+    expect(page).to have_css '.user-preview', count: count
+  end
+
+end
+

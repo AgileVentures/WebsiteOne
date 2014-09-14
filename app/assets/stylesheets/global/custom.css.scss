@@ -31,7 +31,6 @@ html, body {
 
   /* The html and body elements cannot have any padding or margin. */
   -webkit-font-smoothing: antialiased;
-  //  font: normal 1em arial, sans-serif;
   font-family: 'Ubuntu', sans-serif;
   font-size: 16px;
 }
@@ -103,11 +102,6 @@ strong {
 .vote_button {
   width: 12px;
   height: 12px;
-}
-
-.row {
-  margin-left: 0px;
-  margin-right: 0px;
 }
 
 /* Custom page CSS

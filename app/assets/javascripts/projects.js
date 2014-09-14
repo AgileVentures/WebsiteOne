@@ -1,15 +1,21 @@
 WebsiteOne.define('Projects', function() {
   return {
     init: function() {
+
       var hash = window.location.hash;
-      if (hash) $(hash + 's a').tab('show');
-      $('html,body').scrollTop($('body').scrollTop());
+
+      if (hash) { 
+        $('a[data-hash="'+hash.replace('#','')+'"]').tab('show');
+      } 
 
       $('.nav-tabs a').click(function (e) {
+        setHash($(this).data('hash'));
         $(this).tab('show');
-        window.location.hash = this.hash.replace("s_list", "");
-        $('html,body').scrollTop($('body').scrollTop());
       });
+
+      var setHash = function(newHash) {
+        window.location.hash = newHash;
+      };
     }
   }
 });
