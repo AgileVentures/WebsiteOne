@@ -104,6 +104,8 @@ describe ProjectsController, :type => :controller do
       @project = mock_model(Project, friendly_id: 'some-project')
       allow(Project).to receive(:new).and_return(@project)
       allow(controller).to receive(:current_user).and_return(@user)
+      allow(@project).to receive(:create_activity)
+
     end
 
     it 'assigns a newly created project as @project' do
@@ -213,6 +215,7 @@ describe ProjectsController, :type => :controller do
   describe '#update' do
     before(:each) do
       @project = mock_model(Project)
+      allow(@project).to receive(:create_activity)
       Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
     end
 
