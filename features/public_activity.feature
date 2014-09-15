@@ -21,6 +21,7 @@ Feature: Display Public Activity
     And I edit article "Ruby is on Fire"
     And I create a document named "A New Guide to the Galaxy"
     And I create a project named "Build NCC-1701 Enterprise"
+    And I create a hangout named "foobar"
 
   Scenario: Navigate to activity feed
     Given I am on the "Dashboard" page
@@ -33,4 +34,4 @@ Feature: Display Public Activity
     Then I should see "Anders Persson edited the article: Ruby is on Fire."
     Then I should see "Anders Persson created a document: A New Guide to the Galaxy on the Hello Galaxy project."
     Then I should see "Anders Persson created a new project: Build NCC-1701 Enterprise."
-
+    Then I should see "Anders Persson created a new hangout."
