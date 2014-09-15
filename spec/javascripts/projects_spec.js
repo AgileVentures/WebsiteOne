@@ -21,7 +21,7 @@ describe('projects', function () {
       window.location.hash = "";
     });
 
-    it('should not call jQuery tab("show") when the window has is not present', function() {
+    it('should not call jQuery tab("show") when the window hash is not present', function() {
       expect(tabCall).not.toHaveBeenCalled();
     });
 

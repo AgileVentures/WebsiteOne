@@ -5,6 +5,7 @@ FactoryGirl.define do
     sequence(:title) {|n| "Title #{n}"}
     sequence(:slug) {|n| "title-#{n}"}
     description "Warp fields stabilize."
+    pitch "'I AM the greatest!' - M. Ali"
     status "We feel your presence."
 
     factory :project_with_tags do
