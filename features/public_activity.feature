@@ -1,4 +1,3 @@
-
 Feature: Display Public Activity
   As a user
   In order to get a better overview of what is going on
@@ -9,12 +8,18 @@ Feature: Display Public Activity
   I would like to see an activity feed
 
   Background:
+    Given the following projects exist:
+      | title        | description           | status |
+      | Hello Galaxy | Greetings earthlings! | active |
+
     Given the following articles exist:
-      | Title                    | Content                          | Tag List           |
-      | Ruby is on Fire          | Fire is fire and sunny           | Ruby, Rails        |
+      | Title           | Content                | Tag List    |
+      | Ruby is on Fire | Fire is fire and sunny | Ruby, Rails |
 
     Given I am logged in
     And I edit article "Ruby is on Fire"
+    And I create a document named "A New Guide to the Galaxy"
+    And I create a project named "Build NCC Enterprise"
 
   @javascript
   Scenario: Navigate to activity feed
@@ -22,11 +27,12 @@ Feature: Display Public Activity
     And I click the "Activity feed" link
     Then I should see "activity-feed" tab is active
     And I should see a activity feed
+
+
+  @javascript
+  Scenario: Render activity
+    Given I watch the Activity feed
     Then I should see "Anders Persson edited the article: Ruby is on Fire."
-
-  #@javascript
-  #Scenario: Render activity
-  #  Given the "activity-feed" tab is active
-
-
+    Then I should see "Anders Persson created a document: A New Guide to the Galaxy on the Hello Galaxy project."
+    Then I should see "Anders Persson created a new project: Build NCC Enterprise."
 

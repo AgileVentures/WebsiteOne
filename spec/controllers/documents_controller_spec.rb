@@ -22,6 +22,8 @@ describe DocumentsController do
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user
     @document = FactoryGirl.create(:document)
+    allow(@document).to receive(:create_activity)
+
   end
 
   it 'should raise an error if no project was found' do

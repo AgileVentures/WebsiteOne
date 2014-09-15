@@ -123,6 +123,7 @@ describe ArticlesController do
       @article = build(:article, title: 'my title', slug: 'friend')
       @user = double('User')
       allow(controller).to receive(:current_user).and_return(@user)
+      allow(@article).to receive(:create_activity)
       @user.stub_chain('articles.build').and_return(@article)
     end
 
@@ -162,6 +163,7 @@ describe ArticlesController do
       @article = double('Article', title: 'my title', friendly_id: 'friend')
       @article.stub(:update_attributes).and_return(true)
       Article.stub_chain('friendly.find').and_return(@article)
+      allow(@article).to receive(:create_activity)
     end
 
     let (:valid_update_params) { valid_params.merge(id: @article.friendly_id) }
