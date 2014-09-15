@@ -10,6 +10,7 @@ describe Article, :type => :model do
   it { is_expected.to respond_to :friendly_id}
   it { is_expected.to respond_to :vote_value}
   it { is_expected.to respond_to :authored_by?}
+  it { is_expected.to respond_to :create_activity }
 
   it 'has public-activity enabled' do
     expect(subject.public_activity_enabled?).to eq true

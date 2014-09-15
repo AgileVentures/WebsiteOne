@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20140914202645) do
     t.string   "slug"
     t.datetime "start_datetime"
     t.integer  "duration"
+    t.text     "exclusions"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
@@ -136,8 +137,6 @@ ActiveRecord::Schema.define(version: 20140914202645) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "slug"
-    t.string   "github_owner"
-    t.string   "github_repo"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
     t.text     "pitch"
