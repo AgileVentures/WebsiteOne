@@ -19,7 +19,8 @@ end
 And(/^I create a document named "([^"]*)"$/) do |document|
   steps %Q{ Given I am on the "Show" page for project "Hello Galaxy"
             And I click the "Join Project" button
-            And I click the "Create new document" button
+            And I click "Project Actions"
+            And I click "Create new document"
             And I fill in "Title" with "#{document}"
             And I click "Submit"
 }
