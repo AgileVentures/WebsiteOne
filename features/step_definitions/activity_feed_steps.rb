@@ -18,7 +18,8 @@ end
 
 And(/^I create a document named "([^"]*)"$/) do |document|
   steps %Q{ Given I am on the "Show" page for project "Hello Galaxy"
-            When I click the very stylish "New Document" button
+            And I click the "Join Project" button
+            And I click the "Create new document" button
             And I fill in "Title" with "#{document}"
             And I click "Submit"
 }
@@ -27,7 +28,7 @@ end
 And(/^I create a project named "([^"]*)"$/) do |project|
   steps %Q{
     And I am on the "Projects" page
-    When I click the very stylish "New Project" button
+    And I click the very stylish "New Project" button
     When I fill in:
       | Field               | Text                                            |
       | Title               | #{project}                                      |
