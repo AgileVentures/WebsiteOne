@@ -6,6 +6,7 @@ describe ProjectsController, :type => :controller do
                             :title => 'WebTwentyFive',
                             :description => 'My project description',
                             :status => 'Active',
+                            :pitch => 'My project pitch ...',
                             :pivotaltracker_url => 'https://www.pivotaltracker.com/s/projects/982890',
                             :slug => 'my-project' } }
   let(:valid_session) { {} }

@@ -1,0 +1,11 @@
+<div class="highlight-box">
+  
+  <p>Project status: <%= @project.status.upcase %></p>
+  <p class="doc-status-text"><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %></p>
+
+  <% if user_signed_in? && current_user.following?(@project) %>
+  <% else %>
+    <a href="<%= follow_project_path(@project) %>" data-toggle="tooltip" data-placement="top" title="join project" class="btn btn-block btn-join">Join Project</a>
+  <% end %>
+
+</div>
