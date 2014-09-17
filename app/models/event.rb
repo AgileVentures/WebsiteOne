@@ -103,13 +103,14 @@ class Event < ActiveRecord::Base
   # Most of the time, the next instance will be within the next weeek.do
   # But some event instances may have been excluded, so there's not guarantee that the next time for an event will be within the next week, or even the next month
   # To cover these cases, the while loop looks farther and farther into the future for the next event occurrence, just in case there are many exclusions.
-  def next_event_occurrence_with_time(start = Time.now)
+  def next_event_occurrence_with_time(start = Time.now, final= 2.months.from_now)
     begin_datetime = start_datetime_for_collection(start_time: start)
-    final_datetime = repeating_and_ends? ? repeat_ends_on : 10.years.from_now
+    final_datetime = repeating_and_ends? ? repeat_ends_on : final
     n_days = 8
     end_datetime = n_days.days.from_now
     event = nil
-    while event.nil? and end_datetime < final_datetime
+    return next_event_occurrence_with_time_inner(start, final_datetime) if self.repeats == 'never'
+    while event.nil? && end_datetime < final_datetime
       event = next_event_occurrence_with_time_inner(start, final_datetime)
       n_days *= 2
       end_datetime = n_days.days.from_now
