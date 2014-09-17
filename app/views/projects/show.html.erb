@@ -26,7 +26,7 @@
             </ul>
           </li>
           <li class="hangout-btn">
-            <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>
+            <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>
           </li>
         </ul>
         <hr>
