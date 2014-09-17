@@ -14,8 +14,8 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
-  match '/hangouts/:id' => 'hangouts#update', :via => [:put, :options], as: 'hangout'
-  match '/hangouts' => 'hangouts#index', :via => [:get], as: 'hangouts'
+  match '/hangouts/:id' => 'event_instances#update', :via => [:put, :options], as: 'hangout'
+  match '/hangouts' => 'event_instances#index', :via => [:get], as: 'hangouts'
 
   resources :projects, :format => false do
     member do

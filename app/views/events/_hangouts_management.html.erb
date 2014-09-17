@@ -21,7 +21,7 @@
     <div class="restart-section<%= ' in' unless hangout_is_live %>">
       <div class="panel-body">
         <div id="hangout-btn" class="col-lg-5 hangout-btn">
-          <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: (hangout_is_live ? @hangout.uid : ''), event_id: @event.id, category: @event.category, project_id: '', title: topic(@event, @event_schedule)} %>
+          <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: (hangout_is_live ? @hangout.uid : ''), event_id: @event.id, category: @event.category, project_id: '', title: topic(@event, @event_schedule)} %>
         </div>
         <div class="hangout-btn"> &#8592; Event host will start the Hangout 
             <button type="button" class="btn readme-link" data-container="body" data-toggle="popover" data-placement="right" 
@@ -47,7 +47,7 @@
 
       <div class="edit-link-form">
         <div class="panel-body">
-          <%= form_tag hangout_url(hangout_is_live ? @hangout.uid : generate_hangout_id(current_user)), method: :put,  class: "form-horizontal", role: "form" %>
+          <%= form_tag hangout_url(hangout_is_live ? @hangout.uid : generate_event_instance_id(current_user)), method: :put,  class: "form-horizontal", role: "form" %>
             <div style="hidden"><input name="title" type="hidden" value="<%= topic(@event, @event_schedule) %>"></div>
             <div style="hidden"><input name="host_id" type="hidden" value="<%= current_user.id %>"></div>
             <div style="hidden"><input name="event_id" type="hidden" value="<%= @event.id %>"></div>
@@ -76,7 +76,7 @@
 <% if hangout_is_live %>
   <div class="hangouts-details-well">
     <section class="hangout-details">
-      <%= render partial: 'hangouts/hangout_status', locals: {hangout: @hangout} %>
+      <%= render partial: 'event_instances/hangout_status', locals: {hangout: @hangout} %>
     </section>
   </div>
 <% end %>
