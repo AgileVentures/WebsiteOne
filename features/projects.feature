@@ -5,13 +5,13 @@ Feature: Create and maintain projects
 
   Background:
     Given the following projects exist:
-      | title         | description             | status   | github_url                                  | pivotaltracker_url                               |
-      | hello world   | greetings earthlings    | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
-      | hello mars    | greetings aliens        | inactive |                                             |                                                  |
-      | hello jupiter | greetings jupiter folks | active   |                                             |                                                  |
-      | hello mercury | greetings mercury folks | inactive |                                             |                                                  |
-      | hello saturn  | greetings saturn folks  | active   |                                             |                                                  |
-      | hello sun     | greetings sun folks     | active   |                                             |                                                  |
+      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |
+      | hello world   | greetings earthlings    |             | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
+      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  |
+      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  |
+      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  |
+      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |
     And there are no videos
 
 #  Scenarios for Index page
@@ -129,6 +129,7 @@ Feature: Create and maintain projects
       | Text                         |
       | hello saturn                 |
       | greetings saturn folks       |
+      | My pitch...                  |
       | ACTIVE                       |
       | not linked to GitHub         |
       | not linked to PivotalTracker |
@@ -191,9 +192,10 @@ Feature: Create and maintain projects
     Then I should see "Project was not updated."
 
   Scenario: Project show page renders a list of members
-    Given The project "hello world" has 5 members
+    Given The project "hello world" has 10 members
     And I am on the "Show" page for project "hello world"
-    Then I should see "Members (5)"
+    Then I should see "Members (10)"
+    But I should see 5 member avatars
 
   Scenario: Project show page has links to github and Pivotal Tracker
     Given I am on the "Show" page for project "hello world"
