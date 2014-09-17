@@ -13,7 +13,7 @@
 src_files:
   - assets/application.js
   - assets/projects.js
-  - assets/event_instances.jsces.js
+  - assets/event_instances.js
   - assets/events.js
   - assets/jasmine-jquery.js
 

@@ -57,7 +57,7 @@ describe 'events/show', type: :view do
 
       allow(@hangout).to receive(:started?).and_return true
       allow(@hangout).to receive(:live?).and_return true
-      allow(view).to receive(:generate_event_instancet_id).and_return('123456')
+      allow(view).to receive(:generate_event_instance_id).and_return('123456')
 
       @event.url = @hangout.hangout_url
     end

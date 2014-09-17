@@ -1,7 +1,7 @@
 describe('RefreshHangouts', function() {
   beforeEach(function() {
     setFixtures(sandbox({ id: 'hg-container' }));
-    this.app = new window.HangoutsUtils();
+    this.app = new window.EventInstancesUtils();
   });
 
   /**it('calls refresh every 10 sec', function() {
