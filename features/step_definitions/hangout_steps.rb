@@ -38,7 +38,7 @@ Given /^the following hangouts exist:$/ do |table|
       [ "0", { :person => { displayName: "#{name}", id: gplus_id } } ]
     end
 
-    hangout = FactoryGirl.create(:event_instance,
+    event_instance = FactoryGirl.create(:event_instance,
                  title: hash['Title'],
                  project: Project.find_by_title(hash['Project']),
                  event: Event.find_by_name(hash['Event']),
