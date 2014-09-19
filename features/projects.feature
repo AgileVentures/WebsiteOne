@@ -161,6 +161,12 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
+  Scenario: Has a link to edit pitch content using the Mercury Editor
+    Given I am logged in
+    And I am on the "Show" page for project "hello mars"
+    When I click the "Edit Pitch" button
+    Then I should be in the Mercury Editor
+
   Scenario: Update GitHub url if valid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
