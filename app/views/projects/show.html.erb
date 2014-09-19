@@ -18,7 +18,6 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
               <li role="presentation" class="divider"></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a></li>
@@ -40,8 +39,7 @@
 <div class="project-main">
   <div class="row">
 
-    <%= link_to "Edit Pitch", mercury_edit_path, id: 'edit_link', data: {save_url: project_mercury_update_path(@project)} %>
-
+    <%= link_to "Edit Pitch", '/editor'+ request.path, id: 'edit_link', data: { save_url: mercury_update_project_path(@project) } %>
     <div class="project-sidebar col-xs-12 col-md-4 col-md-push-8" role="complementary">
       <%= render 'highlight_box', members: @members %>
       <%= render 'connections' %>
@@ -66,7 +64,7 @@
 
       <!-- Tab panes -->
       <div class="tab-content" style="background: #fff;">
-        <div class="tab-pane active" id="pitch_content">
+        <div class="tab-pane active" id="pitch_content" data-mercury="full">
 	  <div class="mercury-region" data-type="editable">
             <% unless @project.pitch.nil? %>
               <%= @project.pitch %>
