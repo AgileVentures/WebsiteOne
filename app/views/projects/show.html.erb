@@ -1,5 +1,4 @@
 <% provide :title, @project.title %>
-
 <div class="project-title">
   <div class="row">
     <div class="col-xs-12">
@@ -40,7 +39,9 @@
 
 <div class="project-main">
   <div class="row">
-    
+
+    <%= link_to "Edit Pitch", mercury_edit_path, id: 'edit_link', data: {save_url: project_mercury_update_path(@project)} %>
+
     <div class="project-sidebar col-xs-12 col-md-4 col-md-push-8" role="complementary">
       <%= render 'highlight_box', members: @members %>
       <%= render 'connections' %>
@@ -66,12 +67,14 @@
       <!-- Tab panes -->
       <div class="tab-content" style="background: #fff;">
         <div class="tab-pane active" id="pitch_content">
-          <% unless @project.pitch.nil? %>
-          <%= @project.pitch %>
-          <% else %>
-          <p><b>Project content missing :(</b></p>
-          <p>A compelling pitch can make your project <a href="https://www.kickstarter.com/discover/categories/technology?ref=discover_index">more appealing</a> to potential collaborators. Please edit project details to add pitch content.</p>
-          <% end %>
+	  <div class="mercury-region" data-type="editable">
+            <% unless @project.pitch.nil? %>
+              <%= @project.pitch %>
+            <% else %>
+              <p><b>Project content missing :(</b></p>
+              <p>A compelling pitch can make your project <a href="https://www.kickstarter.com/discover/categories/technology?ref=discover_index">more appealing</a> to potential collaborators. Please edit project details to add pitch content.</p>
+            <% end %>
+	  </div>
         </div>
         <div class="tab-pane" id="documents_list">
           <%= render 'documents_list' %>
