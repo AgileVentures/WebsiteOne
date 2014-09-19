@@ -1,5 +1,4 @@
 WebsiteOne::Application.routes.draw do
-  get 'activities/index'
 
   mount Mercury::Engine => '/'
 

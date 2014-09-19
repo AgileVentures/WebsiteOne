@@ -215,7 +215,7 @@ describe ProjectsController, :type => :controller do
 
   describe '#update' do
     before(:each) do
-      @project = mock_model(Project)
+      @project = FactoryGirl.create(:project)
       allow(@project).to receive(:create_activity)
       Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
     end
@@ -230,6 +230,10 @@ describe ProjectsController, :type => :controller do
       before(:each) do
         allow(@project).to receive(:update_attributes).and_return(true)
         put :update, id: 'update', project: {title: ''}
+      end
+
+      it 'receives :create_activity' do
+        expect(@project).to receive(:create_activity).with(:update, {owner: @user })
       end
 
       it 'redirects to the project' do
