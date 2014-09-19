@@ -47,6 +47,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def mercury_update
+    project = Project.find(params[:id])
+    # project.save!
+    render text: ""
+  end
 
   def destroy
     #if @project.destroy
