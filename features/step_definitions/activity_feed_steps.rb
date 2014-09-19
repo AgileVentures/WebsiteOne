@@ -2,10 +2,6 @@ Then(/^I should see a activity feed$/) do
   expect(page).to have_css('div#feed')
 end
 
-And(/^activities exists$/) do
-  pending
-end
-
 And(/^I edit article "([^"]*)"$/) do |article|
   steps %Q{
     And I am on the "Show" page for article "#{article}"
@@ -49,7 +45,7 @@ And(/^I create a hangout named "([^"]*)"$/) do |hangout|
 }
 end
 
-Given(/^I watch the Activity feed$/) do
+Given(/^Given I am on the Activity feed$/) do
   steps %Q{
     Given I am on the "Dashboard" page
     And I click the "Activity feed" link
