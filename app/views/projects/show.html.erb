@@ -64,8 +64,8 @@
 
       <!-- Tab panes -->
       <div class="tab-content" style="background: #fff;">
-        <div class="tab-pane active" id="pitch_content" data-mercury="full">
-	  <div class="mercury-region" data-type="editable">
+        <div class="tab-pane active" id="pitch_content">
+	  <div class="mercury-region" data-mercury="full" contenteditable="true">
             <% unless @project.pitch.nil? %>
               <%= @project.pitch %>
             <% else %>
