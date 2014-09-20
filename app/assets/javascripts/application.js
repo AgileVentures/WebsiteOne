@@ -25,7 +25,7 @@
 //= require_self
 //= require_directory ./global-modules
 //= require_tree .
-//= require mercury_init
+//= stub mercury_init
 //= stub google-analytics
 //= stub disqus
 //= stub events
