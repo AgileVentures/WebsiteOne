@@ -168,6 +168,20 @@ Feature: Create and maintain projects
     When I click the "Edit Pitch" button
     Then I should be in the Mercury Editor
 
+  @javascript
+  Scenario: Mercury editor shows Save and Cancel buttons, Save button works
+    Given I am logged in
+    And I am using the Mercury Editor to edit project "hello mars"
+    Then I should see button "Save" in Mercury Editor
+    And I should see button "Cancel" in Mercury Editor
+
+    When I fill in the editable field "Pitch" for "project" with "This is my exciting marketing content"
+    And I click "Save" in Mercury Editor
+    Then I should see "The project has been successfully updated."
+    And I should be on the "Show" page for project "hello mars"
+    And I should see "This is my exciting marketing content"
+
+
   Scenario: The Mercury Editor cannot be accessed by non-logged in users
     Given I am on the "Show" page for project "hello mars"
     Then I should not see "Edit Pitch"
