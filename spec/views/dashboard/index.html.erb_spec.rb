@@ -6,7 +6,6 @@ describe 'dashboard/index.html.erb', type: :view do
                     projects:{count:5},
                     members:{count:100},
                     documents:{count:40}})
-    @stats = :stats
   end
 
   it 'displays a tab view' do
