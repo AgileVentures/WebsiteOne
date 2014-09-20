@@ -161,11 +161,18 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
-  Scenario: Has a link to edit pitch content using the Mercury Editor
+  Scenario: Editing project pitch content with the Mercury Editor
     Given I am logged in
     And I am on the "Show" page for project "hello mars"
+    And I click the "Join Project" button
     When I click the "Edit Pitch" button
     Then I should be in the Mercury Editor
+
+  Scenario: The Mercury Editor cannot be accessed by non-logged in users
+    Given I am on the "Show" page for project "hello mars"
+    Then I should not see "Edit Pitch"
+    And I try to use the Mercury Editor to edit project "hello mars"
+    Then I should see "You do not have the right privileges to complete action."
 
   Scenario: Update GitHub url if valid
     Given I am logged in
