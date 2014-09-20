@@ -161,12 +161,24 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
-  Scenario: Editing project pitch content with the Mercury Editor
+  Scenario: Launching Mercury editor 
     Given I am logged in
     And I am on the "Show" page for project "hello mars"
     And I click the "Join Project" button
     When I click the "Edit Pitch" button
     Then I should be in the Mercury Editor
+
+  @javascript
+  Scenario: Editing Pitch content with Mercury Editor 
+    Given I am logged in
+    And I am on the "Show" page for project "hello mars"
+    And I click the "Join Project" button
+    And I am using the Mercury Editor to edit project "hello mars"
+    When I fill in the editable field "Pitch" for "project" with "This is my exciting marketing content"
+    And I click "Save" within Mercury Editor toolbar
+    Then I should see "The project has been successfully updated."
+    And I should be on the "Show" page for project "hello mars"
+    And I should see "This is my exciting marketing content"
 
   Scenario: The Mercury Editor cannot be accessed by non-logged in users
     Given I am on the "Show" page for project "hello mars"
