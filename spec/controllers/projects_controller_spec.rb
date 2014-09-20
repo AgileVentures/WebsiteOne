@@ -116,19 +116,19 @@ describe ProjectsController, :type => :controller do
     end
 
     context 'successful save' do
-
-      it 'redirects to index' do
+      before(:each) do
         allow(@project).to receive(:save).and_return(true)
-
         post :create, @params
-
+      end
+      it 'redirects to index' do
         expect(response).to redirect_to(project_path(@project))
       end
+
+      it 'received :create_activity with :create' do
+        expect(@project).to have_received(:create_activity).with(:create, { owner: @user })
+      end
+
       it 'assigns successful message' do
-        allow(@project).to receive(:save).and_return(true)
-
-        post :create, @params
-
         #TODO YA add a show view_spec to check if flash is actually displayed
         expect(flash[:notice]).to eq('Project was successfully created.')
       end
@@ -232,8 +232,8 @@ describe ProjectsController, :type => :controller do
         put :update, id: 'update', project: {title: ''}
       end
 
-      it 'receives :create_activity' do
-        expect(@project).to receive(:create_activity).with(:update, {owner: @user })
+      it 'received :create_activity with :update' do
+        expect(@project).to have_received(:create_activity).with(:update, {owner: @user })
       end
 
       it 'redirects to the project' do

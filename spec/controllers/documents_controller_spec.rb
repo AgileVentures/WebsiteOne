@@ -23,7 +23,6 @@ describe DocumentsController do
     controller.stub :current_user => user
     @document = FactoryGirl.create(:document)
     allow(@document).to receive(:create_activity)
-
   end
 
   it 'should raise an error if no project was found' do
@@ -140,6 +139,7 @@ describe DocumentsController do
     it 'renders the new template' do
       expect(response).to render_template 'new'
     end
+
   end
 
   describe 'POST create' do
