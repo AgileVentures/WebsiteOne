@@ -25,6 +25,10 @@ Then(/^I should be in the Mercury Editor$/) do
 end
 
 When(/^I (try to use|am using) the Mercury Editor to edit ([^"]*) "([^"]*)"$/) do |opt, model, title|
+  if opt == "am using" && model == "project"
+    visit "#{url_for_title(action: 'follow', controller: 'project', title: title)}"
+  end
+
   visit "/editor#{url_for_title(action: 'show', controller: model, title: title)}"
 end
 
