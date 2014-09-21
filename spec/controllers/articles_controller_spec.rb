@@ -147,6 +147,11 @@ describe ArticlesController do
       expect(response).to redirect_to article_path(@article)
     end
 
+    it 'should receive :create_activity with :create' do
+      post :create, valid_params
+      expect(@article).to have_received(:create_activity).with(:create, {owner: @user})
+    end
+
     it 'should render the new template with error messages if unsuccessful' do
       expect(@article).to receive(:save).and_return(false)
       error_message = 'error!'
@@ -171,6 +176,11 @@ describe ArticlesController do
     it 'should require authentication' do
       expect(controller).to receive(:authenticate_user!)
       post :update, valid_update_params
+    end
+
+    it 'should receive :create_activity with :update' do
+      post :update, valid_update_params
+      expect(@article).to have_received(:create_activity).with(:update, {owner: @user})
     end
 
     it 'should redirect the user back to the show page with a flash message on success' do
