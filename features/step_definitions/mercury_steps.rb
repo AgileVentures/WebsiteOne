@@ -15,7 +15,8 @@ When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do
       find(:css, "div##{type}_title>textarea").set(s)
     elsif field == 'body'
       page.execute_script("$('##{type}_body').text('#{s}')")
-      #find(:css, 'div#document_body').set(s)
+    elsif field == 'pitch'
+      find(:css, "#pitch_content").set(s)
     end
   }
 end
@@ -25,14 +26,9 @@ Then(/^I should be in the Mercury Editor$/) do
 end
 
 When(/^I (try to use|am using) the Mercury Editor to edit ([^"]*) "([^"]*)"$/) do |opt, model, title|
-  if opt == "am using" && model == "project"
-    visit "#{url_for_title(action: 'follow', controller: 'project', title: title)}"
-  end
-
   visit "/editor#{url_for_title(action: 'show', controller: model, title: title)}"
 end
 
-# Bryan: not completely reliable but works for the time being
 Then(/^I should see the editable field "([^"]*)"$/) do |field|
   find(:css, "div#document_#{field.downcase.singularize}")
 end
