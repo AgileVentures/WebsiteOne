@@ -32,7 +32,8 @@ module Helpers
     @visitor ||= { :email => 'example@example.com',
                    :password => 'changemesomeday',
                    :password_confirmation => 'changemesomeday',
-                   :slug => 'slug-ma'}
+                   :slug => 'slug-ma',
+                   :country => 'Sweden'}
   end
 
   def create_test_user(options = {})
@@ -84,6 +85,8 @@ module Helpers
   def all_users
     @all_users = User.all
   end
+
+
 end
 
 module WithinHelpers
@@ -114,8 +117,21 @@ class String
       downcase
   end
 end
+
+module WaitForAjax
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_wait_time) do
+      loop until finished_all_ajax_requests?
+    end
+  end
+
+  def finished_all_ajax_requests?
+    page.evaluate_script('jQuery.active').zero?
+  end
+end
 World(ScrumsHelper)
 World(ApplicationHelper)
 World(Helpers)
 World(WithinHelpers)
+World(WaitForAjax)
 World(ActionView::Helpers)

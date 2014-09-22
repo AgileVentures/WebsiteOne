@@ -12,11 +12,8 @@
                     <%= presenter.gravatar_image(class: 'projects-user-avatar') %>
                     <div class="media-body index-summary">
                       <p class="media-heading"><%= presenter.display_name %></p>
-                      <% if presenter.has_title? %>
-                          <p><%= presenter.title_list %></p>
-                      <% end %>
                       <% if member.country? %>
-                          <p><%= presenter.country %></p>
+                          <small><%= presenter.country %></small>
                       <% end %>
                     </div>
                   </a>
@@ -46,11 +43,8 @@
                       <%= presenter.gravatar_image(class: 'projects-user-avatar') %>
                       <div class="media-body index-summary">
                         <p class="media-heading"><%= presenter.display_name %></p>
-                        <% if presenter.has_title? %>
-                            <p><%= presenter.title_list %></p>
-                        <% end %>
                         <% if member.country? %>
-                            <p><%= presenter.country %></p>
+                            <small><%= presenter.country %></small>
                         <% end %>
                       </div>
                     </a>
