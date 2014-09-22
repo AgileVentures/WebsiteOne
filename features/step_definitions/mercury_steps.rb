@@ -5,6 +5,7 @@ When /^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/ do |button|
   page.execute_script("$('.#{selector_for[button.downcase]}').click()")
   #puts 'sleep(0.1)'
   #sleep(0.1)
+  wait_for_ajax
 end
 
 When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do |field, type, s|
@@ -16,7 +17,7 @@ When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do
     elsif field == 'body'
       page.execute_script("$('##{type}_body').text('#{s}')")
     elsif field == 'pitch'
-      find(:css, "#pitch_content").set(s)
+      find(:css, '#pitch_content').set(s)
     end
   }
 end
