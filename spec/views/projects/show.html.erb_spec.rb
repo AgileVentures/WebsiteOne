@@ -202,6 +202,7 @@ describe 'projects/show.html.erb', type: :view do
         expect(rendered).to have_css('button#actions-dropdown', text: 'Project Actions')
         rendered.within('ul.list-inline') do |content|
           expect(content).to have_css('a', text: 'Edit Project Details')
+          expect(content).to have_css('a', text: 'Edit Pitch');
           expect(content).to have_css('a', text: 'Create new document')
           expect(content).to have_css('a', text: 'Leave Project')
         end
@@ -229,6 +230,14 @@ describe 'projects/show.html.erb', type: :view do
         allow(user).to receive(:following?).and_return(false)
         render
         expect(rendered).to have_css %Q{a[href="#{follow_project_path(project)}"]}, visible: true
+      end
+    end
+
+    context "mercury editor is active" do
+      it 'does not render "Edit Pitch" link when inside Mercury editor' do
+        allow(controller.request).to receive(:original_url).and_return('mercury_frame=true')
+        render
+        expect(rendered).not_to have_css('a', text: 'Edit Pitch')
       end
     end
   end
