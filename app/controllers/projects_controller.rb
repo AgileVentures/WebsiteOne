@@ -49,6 +49,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def mercury_update
+    project = Project.find(params[:id])
+    project.pitch = params[:content][:pitch_content][:value]
+# need to build in a condition here
+    project.save!
+    render text: ""
+  end
+
+  def mercury_saved
+    @project = Project.find_by_slug(params[:id])
+    redirect_to project_path(@project), notice: 'The project has been successfully updated.'
+  end
 
   def destroy
     #if @project.destroy

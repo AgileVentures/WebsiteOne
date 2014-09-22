@@ -1,4 +1,4 @@
-this.HangoutsUtils = function() {
+this.EventInstancesUtils = function() {
   this.bindEvents = function() {
     $('#collapse0').slideDown();
     WebsiteOne.toggleCaret($('#collapse0').closest('.panel').find('i.fa'));
@@ -58,4 +58,4 @@ this.HangoutsUtils = function() {
   })(this);
 };
 
-(new this.HangoutsUtils).init();
+(new this.EventInstancesUtils).init();

@@ -11,7 +11,7 @@ describe "hookups/index", type: :view do
                                        id: 1)
     @pending_hookups = [event_pending]
 
-    hangout_active = FactoryGirl.build(:hangout,
+    hangout_active = FactoryGirl.build(:event_instance,
                                         hangout_url: 'x@x.com',
                                         updated: 'Mon, 1 Jan 2014 09:35:00',
                                         created: 'Mon, 1 Jan 2014 09:30:00',

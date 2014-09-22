@@ -29,7 +29,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   Scenario: Show hangout details
     Given the Hangout for event "Scrum" has been started with details:
-      | Hangout link | http://hangout.test |
+      | EventInstance link | http://hangout.test |
       | Started at   | 10:25:00            |
     And the time now is "10:29:00 UTC"
     When I am on the show page for event "Scrum"
@@ -46,7 +46,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   @javascript
   Scenario: Show restart hangout
     Given the Hangout for event "Scrum" has been started with details:
-      | Hangout link | http://hangout.test |
+      | EventInstance link | http://hangout.test |
     When I am on the show page for event "Scrum"
     Then I should see "Restart hangout"
     But the hangout button should not be visible
@@ -55,7 +55,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   @javascript
   Scenario: Restart hangout
     Given the Hangout for event "Scrum" has been started with details:
-      | Hangout link | http://hangout.test |
+      | EventInstance link | http://hangout.test |
     And I am on the show page for event "Scrum"
 
     When I click the link "Restart hangout"
@@ -86,7 +86,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Render Join live event link
     Given the date is "2014/02/03 07:04:00 UTC"
     And the Hangout for event "Scrum" has been started with details:
-      | Hangout link | http://hangout.test |
+      | EventInstance link | http://hangout.test |
       | Started at   | 07:00:00            |
 
     When I am on the show page for event "Scrum"
@@ -105,11 +105,11 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Display live sessions - basic info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
-      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id | End time |
+      | Start time | Title        | Project     | Event         | Category        | Host  | EventInstance url            | Youtube video id | End time |
       | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    |
       | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    |
 
-    When I go to the "hangouts" page
+    When I visit "/hangouts"
     Then I should see:
         | Started at   |
         | Title        |
@@ -142,7 +142,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | Jane, Bob    | 11:25    |
       | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | Greg, Jake   | 12:42    |
 
-    When I go to the "hangouts" page
+    When I visit "/hangouts"
     Then I should see:
         | Event        |
         | Category     |

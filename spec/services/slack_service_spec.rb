@@ -8,7 +8,7 @@ describe SlackService do
      stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify')
      user = User.new email: 'random@random.com'
      gravatar = CGI.escape 'https://www.gravatar.com/avatar/47548e7f026bc689ba743b2af2d391ee?d=retro'
-     hangout = Hangout.new(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user)
+     hangout = EventInstance.new(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user)
 
      subject.post_hangout_notification(hangout)
 
