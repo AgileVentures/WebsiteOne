@@ -217,8 +217,8 @@ describe 'projects/show.html.erb', type: :view do
         let(:project_id) { project.id }
         let(:event_id) { '' }
         let(:category) { 'PairProgramming' }
-        let(:hangout_id) { '' }
-        let(:hangout_project) { project }
+        let(:event_instance) { '' }
+        let(:event_instance_project) { project }
         let(:topic_name) { "PairProgramming on #{project.title}" }
       end
 

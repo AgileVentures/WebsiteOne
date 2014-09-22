@@ -48,7 +48,7 @@ describe 'events/show', type: :view do
 
   describe 'Hangouts' do
     before(:each) do
-      @hangout = FactoryGirl.build_stubbed(:hangout,
+      @hangout = FactoryGirl.build_stubbed(:event_instance,
                         uid: '123456',
                         event_id: 375,
                         category: 'Scrum',
@@ -57,7 +57,7 @@ describe 'events/show', type: :view do
 
       allow(@hangout).to receive(:started?).and_return true
       allow(@hangout).to receive(:live?).and_return true
-      allow(view).to receive(:generate_hangout_id).and_return('123456')
+      allow(view).to receive(:generate_event_instance_id).and_return('123456')
 
       @event.url = @hangout.hangout_url
     end
@@ -73,7 +73,7 @@ describe 'events/show', type: :view do
         let(:project_id){''}
         let(:event_id){@event.id}
         let(:category){@event.category}
-        let(:hangout_id){@hangout.uid}
+        let(:event_instance_id){@hangout.uid}
       end
 
       it 'renders Edit link' do

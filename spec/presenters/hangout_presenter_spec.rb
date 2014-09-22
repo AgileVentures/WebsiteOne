@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe HangoutPresenter do
-  let(:presenter){ HangoutPresenter.new(hangout) }
+describe EventInstancePresenter do
+  let(:presenter){ EventInstancePresenter.new(hangout) }
 
   context 'all fields are present' do
-    let(:hangout){ FactoryGirl.build_stubbed(:hangout, created: '1979-10-14 11:15 UTC') }
+    let(:hangout){ FactoryGirl.build_stubbed(:event_instance, created: '1979-10-14 11:15 UTC') }
 
     it 'displays created time' do
       expect(presenter.created_at).to eq('11:15 14/10')
@@ -50,7 +50,7 @@ describe HangoutPresenter do
   end
 
   context 'some fields are missing' do
-    let(:hangout){ FactoryGirl.build_stubbed(:hangout,
+    let(:hangout){ FactoryGirl.build_stubbed(:event_instance,
                          title: nil,
                          category: nil,
                          project: nil,
