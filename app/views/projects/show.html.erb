@@ -68,7 +68,7 @@
         <div class="tab-pane active">
 	  <div id="pitch_content" class="mercury-region" data-mercury="full" contenteditable="true">
             <% unless @project.pitch.nil? %>
-              <%= @project.pitch %>
+              <%= @project.pitch.html_safe %>
             <% else %>
               <p><b>Project content missing :(</b></p>
               <p>A compelling pitch can make your project <a href="https://www.kickstarter.com/discover/categories/technology?ref=discover_index">more appealing</a> to potential collaborators. Please edit project details to add pitch content.</p>
