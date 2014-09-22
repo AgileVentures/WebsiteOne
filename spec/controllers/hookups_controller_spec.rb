@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe HookupsController, type: :controller do
   let(:event){ FactoryGirl.create(:event, category: 'PairProgramming') }
-  let(:hangout){ FactoryGirl.create(:hangout, event: event, category: 'PairProgramming', hangout_url: nil) }
+  let(:hangout){ FactoryGirl.create(:event_instance, event: event, category: 'PairProgramming', hangout_url: nil) }
 
   it 'assigns a pending hookup to the view' do
     allow_any_instance_of(Event).to receive(:last_hangout).and_return(hangout)
