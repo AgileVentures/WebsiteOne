@@ -11,7 +11,7 @@ module Mercury
     end
    
     def valid_mercury_path?
-      return true if is_project_edit_path? || is_documents_edit_path? || is_static_pages_edit_path? 
+      is_project_edit_path? || is_documents_edit_path? || is_static_pages_edit_path? 
     end
  
     def is_project_edit_path?
