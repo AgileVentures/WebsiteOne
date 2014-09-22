@@ -1,5 +1,4 @@
 <% provide :title, @project.title %>
-
 <div class="project-title">
   <div class="row">
     <div class="col-xs-12">
@@ -19,7 +18,8 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
+              <li role="presentation"><%= link_to "Edit Pitch", '/editor'+ request.path, role: 'menuitem', id: 'edit_link', data: { save_url: mercury_update_project_path(@project.id) } %></li>
+	      <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
               <li role="presentation" class="divider"></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a></li>
@@ -40,7 +40,7 @@
 
 <div class="project-main">
   <div class="row">
-    
+
     <div class="project-sidebar col-xs-12 col-md-4 col-md-push-8" role="complementary">
       <%= render 'highlight_box', members: @members %>
       <%= render 'connections' %>
@@ -65,13 +65,15 @@
 
       <!-- Tab panes -->
       <div class="tab-content" style="background: #fff;">
-        <div class="tab-pane active" id="pitch_content">
-          <% unless @project.pitch.nil? %>
-          <%= @project.pitch %>
-          <% else %>
-          <p><b>Project content missing :(</b></p>
-          <p>A compelling pitch can make your project <a href="https://www.kickstarter.com/discover/categories/technology?ref=discover_index">more appealing</a> to potential collaborators. Please edit project details to add pitch content.</p>
-          <% end %>
+        <div class="tab-pane active">
+	  <div id="pitch_content" class="mercury-region" data-mercury="full" contenteditable="true">
+            <% unless @project.pitch.nil? %>
+              <%= @project.pitch.html_safe %>
+            <% else %>
+              <p><b>Project content missing :(</b></p>
+              <p>A compelling pitch can make your project <a href="https://www.kickstarter.com/discover/categories/technology?ref=discover_index">more appealing</a> to potential collaborators. Please edit project details to add pitch content.</p>
+            <% end %>
+	  </div>
         </div>
         <div class="tab-pane" id="documents_list">
           <%= render 'documents_list' %>
