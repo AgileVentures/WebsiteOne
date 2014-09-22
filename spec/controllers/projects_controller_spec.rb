@@ -28,7 +28,6 @@ describe ProjectsController, :type => :controller do
   #  end
   #end
 
-
   describe '#index' do
     it 'should render index page for projects' do
       get :index

@@ -21,6 +21,8 @@ WebsiteOne::Application.routes.draw do
     member do
       get :follow
       get :unfollow
+      put :mercury_update
+      get :mercury_saved
     end
 
   resources :documents, except: [:edit, :update], :format => false do
