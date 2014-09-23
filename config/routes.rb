@@ -1,7 +1,9 @@
 WebsiteOne::Application.routes.draw do
+
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
+  resources :activities
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false
@@ -25,7 +27,7 @@ WebsiteOne::Application.routes.draw do
       get :mercury_saved
     end
 
-  resources :documents, except: [:edit, :update], :format => false do
+    resources :documents, except: [:edit, :update], :format => false do
       put :mercury_update
       get :mercury_saved
     end

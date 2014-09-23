@@ -22,6 +22,7 @@ describe DocumentsController do
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user
     @document = FactoryGirl.create(:document)
+    allow(@document).to receive(:create_activity)
   end
 
   it 'should raise an error if no project was found' do
@@ -29,19 +30,6 @@ describe DocumentsController do
       get :show, { id: @document.id, project_id: @document.project.id + 3 }, valid_session
     }.to raise_error ActiveRecord::RecordNotFound
   end
-
-  # Bryan: Deprecated path
-  #describe 'GET index' do
-  #  before(:each) { get :index, { project_id: document.friendly_id }, valid_session }
-  #
-  #  it 'assigns all documents as @documents' do
-  #    assigns(:documents).should eq([document])
-  #  end
-  #
-  #  it 'renders the index template' do
-  #    expect(response).to render_template 'index'
-  #  end
-  #end
 
   describe 'GET show' do
 
@@ -78,11 +66,6 @@ describe DocumentsController do
         get :get_doc_categories, params
         expect(response).to render_template(:partial => '_categories')
       end
-
-      #it 'calls the get_doc_categories function' do
-        #expect(controller).to receive(:get_doc_categories)
-        #get :show, params
-      #end
 
       it 'assigns the available categories to @categories' do
         get :get_doc_categories, params.merge({id: document.to_param})
@@ -138,6 +121,7 @@ describe DocumentsController do
     it 'renders the new template' do
       expect(response).to render_template 'new'
     end
+
   end
 
   describe 'POST create' do
@@ -157,6 +141,12 @@ describe DocumentsController do
       it 'redirects to the created document' do
         post :create, {project_id: document.project.friendly_id, :document => valid_attributes}, valid_session
         expect(response).to redirect_to project_document_path(Document.last.project, Document.last)
+      end
+
+      it 'creates a document create activity' do
+        expect {
+          post :create, {project_id: document.project.friendly_id, :document => valid_attributes}
+        }.to change(PublicActivity::Activity, :count).by 1
       end
     end
 
@@ -191,6 +181,49 @@ describe DocumentsController do
       id = @document.project.id
       delete :destroy, {:id => @document.to_param, project_id: @document.project.friendly_id}, valid_session
       response.should redirect_to(project_documents_path(id))
+    end
+  end
+
+  describe 'POST mercury_update' do
+    before(:each) do
+      Document.stub_chain(:friendly, :find)
+        .with(@document.friendly_id).and_return(document)
+    end
+
+    context 'with valid params' do
+      let(:params) do
+        {
+          project_id: @document.project.friendly_id,
+          document_id: @document.friendly_id,
+          content: {
+            document_title: { value: 'my title' },
+            document_body: { value: 'document body' }
+          }
+        }
+      end
+
+      before(:each) do
+        allow(document).to receive(:create_activity)
+        allow(document).to receive(:update_attributes)
+          .and_return(true)
+      end
+
+      it 'should render an empty string' do
+        put :mercury_update, params
+        expect(response.body).to be_empty
+      end
+
+      it 'should update the document with the new title and body' do
+        put :mercury_update, params
+        expect(document).to have_received(:update_attributes)
+          .with({ title: 'my title', body: 'document body' })
+      end
+
+      it 'should create a document update activity' do
+        put :mercury_update, params
+        expect(document).to have_received(:create_activity)
+          .with(:update, owner: user)
+      end
     end
   end
 end

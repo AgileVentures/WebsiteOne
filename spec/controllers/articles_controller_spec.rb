@@ -123,6 +123,7 @@ describe ArticlesController do
       @article = build(:article, title: 'my title', slug: 'friend')
       @user = double('User')
       allow(controller).to receive(:current_user).and_return(@user)
+      allow(@article).to receive(:create_activity)
       @user.stub_chain('articles.build').and_return(@article)
     end
 
@@ -146,6 +147,11 @@ describe ArticlesController do
       expect(response).to redirect_to article_path(@article)
     end
 
+    it 'should receive :create_activity with :create' do
+      post :create, valid_params
+      expect(@article).to have_received(:create_activity).with(:create, {owner: @user})
+    end
+
     it 'should render the new template with error messages if unsuccessful' do
       expect(@article).to receive(:save).and_return(false)
       error_message = 'error!'
@@ -162,6 +168,7 @@ describe ArticlesController do
       @article = double('Article', title: 'my title', friendly_id: 'friend')
       @article.stub(:update_attributes).and_return(true)
       Article.stub_chain('friendly.find').and_return(@article)
+      allow(@article).to receive(:create_activity)
     end
 
     let (:valid_update_params) { valid_params.merge(id: @article.friendly_id) }
@@ -169,6 +176,11 @@ describe ArticlesController do
     it 'should require authentication' do
       expect(controller).to receive(:authenticate_user!)
       post :update, valid_update_params
+    end
+
+    it 'should receive :create_activity with :update' do
+      post :update, valid_update_params
+      expect(@article).to have_received(:create_activity).with(:update, {owner: @user})
     end
 
     it 'should redirect the user back to the show page with a flash message on success' do
