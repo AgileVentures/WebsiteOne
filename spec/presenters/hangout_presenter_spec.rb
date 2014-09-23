@@ -7,7 +7,7 @@ describe EventInstancePresenter do
     let(:hangout){ FactoryGirl.build_stubbed(:event_instance, created: '1979-10-14 11:15 UTC') }
 
     it 'displays created time' do
-      expect(presenter.created_at).to eq('11:15 14/10')
+      expect(presenter.started_at).to eq('11:15 14/10')
     end
 
     it 'displays title' do

@@ -30,7 +30,7 @@ describe Event, :type => :model do
   describe '#last_hangout' do
     it 'returns the latest hangout' do
       hangout1 = subject.event_instances.create
-      hangout2 = subject.event_instances.create(created_at: Date.yesterday, updated_at: Date.yesterday)
+      hangout2 = subject.event_instances.create(start: Date.yesterday, heartbeat: Date.yesterday)
 
       expect(subject.last_hangout).to eq(hangout1)
     end
@@ -150,7 +150,7 @@ describe Event, :type => :model do
 
     it 'should expire events that ended' do
       hangout = @event.event_instances.create(hangout_url: 'anything@anything.com',
-                                       updated_at: '2014-06-17 10:25:00 UTC')
+                                              heartbeat: '2014-06-17 10:25:00 UTC')
       allow(hangout).to receive(:started?).and_return(true)
       Delorean.time_travel_to(Time.parse('2014-06-17 10:31:00 UTC'))
       expect(@event).to_not be_live
@@ -158,14 +158,14 @@ describe Event, :type => :model do
 
     it 'should mark as active events which have started and have not ended' do
       hangout = @event.event_instances.create(hangout_url: 'anything@anything.com',
-                                       updated_at: '2014-06-17 10:25:00 UTC')
+                                       heartbeat: '2014-06-17 10:25:00 UTC')
       Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
       expect(@event).to be_live
     end
 
     it 'should not be started if events have not started' do
       hangout = @event.event_instances.create(hangout_url: nil,
-                                       updated_at: nil)
+                                              heartbeat: nil)
       Delorean.time_travel_to(Time.parse('2014-06-17 9:30:00 UTC'))
       expect(@event.live?).to be_falsey
     end

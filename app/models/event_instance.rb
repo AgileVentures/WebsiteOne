@@ -7,20 +7,24 @@ class EventInstance < ActiveRecord::Base
   serialize :participants
 
   scope :started, -> { where.not(hangout_url: nil) }
-  scope :live, -> { where('updated_at > ?', 5.minutes.ago).order('created_at DESC') }
+  scope :live, -> { where('heartbeat > ?', 5.minutes.ago).order('created_at DESC') }
   scope :latest, -> { order('created_at DESC') }
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
+
+  def self.started_after(past_limit)
+    EventInstance.where('start_planned > ?', past_limit).latest
+  end
 
   def started?
     hangout_url?
   end
 
   def live?
-    started? && updated_at > 5.minutes.ago
+    started? && heartbeat.present? && heartbeat > 5.minutes.ago
   end
 
   def duration
-    updated_at - created_at
+    heartbeat - start
   end
 
   def self.active_hangouts
@@ -28,7 +32,10 @@ class EventInstance < ActiveRecord::Base
   end
 
   def start_datetime
-    event != nil ? event.start_datetime : created_at
+    start || start_planned
   end
 
+  def remove_from_template(start_time = start_planned)
+    event.remove_from_schedule(start_time)
+  end
 end

@@ -17,12 +17,14 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   hangout = ho_details[0]
 
 
-  start_time = hangout['Started at'] ? hangout['Started at'] : Time.now
+  start_time = hangout['Start'] ? hangout['Start'] : Time.now
+  heartbeat = hangout['Heartbeat'] ? hangout['Heartbeat'] : Time.now
   event = Event.find_by_name(event_name)
 
   FactoryGirl.create(:event_instance, event: event,
                hangout_url: hangout['EventInstance link'],
-               updated_at: start_time)
+               start: start_time,
+               heartbeat:heartbeat)
 end
 
 Given /^the following hangouts exist:$/ do |table|
@@ -47,8 +49,8 @@ Given /^the following hangouts exist:$/ do |table|
                  hangout_url: hash['EventInstance url'],
                  participants: participants,
                  yt_video_id: hash['Youtube video id'],
-                 created: hash['Start time'],
-                 updated: hash['End time'])
+                 start: hash['Start time'],
+                 heartbeat: hash['End time'])
   end
 end
 

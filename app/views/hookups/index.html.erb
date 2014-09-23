@@ -10,8 +10,8 @@
       <% @active_pp_hangouts.each do |hangout| %>
           <tr>
             <td><%= hangout.title %></td>
-            <td><%= format_date(hangout.start_datetime) %></td>
-            <td><%= format_time(hangout.start_datetime) %></td>
+            <td><%= format_date(hangout.start? ? hangout.start : hangout.start_planned) %></td>
+            <td><%= format_time(hangout.start? ? hangout.start : hangout.start_planned) %></td>
             <td id="join">
               <%= link_to 'Join', hangout.hangout_url %>
             </td>

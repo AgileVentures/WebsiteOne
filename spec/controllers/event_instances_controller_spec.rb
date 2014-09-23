@@ -11,7 +11,7 @@ describe EventInstancesController do
 
   describe '#index' do
     before do
-      FactoryGirl.create_list(:event_instance, 3)
+      FactoryGirl.create_list(:event_instance, 3, updated: 1.minute.ago)
       FactoryGirl.create_list(:event_instance, 3, updated: 1.hour.ago)
     end
 
@@ -75,16 +75,10 @@ describe EventInstancesController do
     end
 
     context 'required parametes are missing' do
-      it 'raises exception on missing host_id' do
-        params[:host_id] = nil
-        expect{ get :update, params }.to raise_error(ActionController::ParameterMissing)
-      end
-
       it 'raises exception on missing title' do
         params[:title] = nil
-        expect{ get :update, params }.to raise_error(ActionController::ParameterMissing)
+        expect{ put :update, params }.to raise_error(ActionController::ParameterMissing)
       end
-
     end
   end
 

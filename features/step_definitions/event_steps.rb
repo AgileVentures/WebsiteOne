@@ -12,7 +12,8 @@ Given(/^following events exist with active hangouts:$/) do |table|
   table.hashes.each do |hash|
     event = Event.create!(hash)
     event.event_instances.create(hangout_url: 'x@x.com',
-                          updated_at: 1.minute.ago,
+                                 heartbeat: 1.minute.ago,
+                                 start_planned: event.start_datetime,
                           category: event.category,
                           title: event.name)
   end
