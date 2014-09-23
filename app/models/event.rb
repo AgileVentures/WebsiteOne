@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  has_many :hangouts
+  has_many :event_instances
   serialize :exclusions
 
   extend FriendlyId
@@ -191,7 +191,7 @@ class Event < ActiveRecord::Base
   end
 
   def last_hangout
-    hangouts.order(:created_at).last
+    event_instances.order(:created_at).last
   end
 
   private

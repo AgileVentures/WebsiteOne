@@ -41,6 +41,7 @@ class DocumentsController < ApplicationController
     @document = @project.documents.build(document_params.merge(user_id: current_user.id))
     respond_to do |format|
       if @document.save
+       @document.create_activity :create, owner: current_user
         format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully created.' }
         format.json { render action: 'show', status: :created, location: @document }
       else
@@ -67,6 +68,7 @@ class DocumentsController < ApplicationController
     @document = Document.friendly.find(params[:document_id])
     if @document.update_attributes(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
+      @document.create_activity :update, owner: current_user
       render text: '' # So mercury knows it is successful
     end
   end

@@ -20,8 +20,8 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   start_time = hangout['Started at'] ? hangout['Started at'] : Time.now
   event = Event.find_by_name(event_name)
 
-  FactoryGirl.create(:hangout, event: event,
-               hangout_url: hangout['Hangout link'],
+  FactoryGirl.create(:event_instance, event: event,
+               hangout_url: hangout['EventInstance link'],
                updated_at: start_time)
 end
 
@@ -38,13 +38,13 @@ Given /^the following hangouts exist:$/ do |table|
       [ "0", { :person => { displayName: "#{name}", id: gplus_id } } ]
     end
 
-    hangout = FactoryGirl.create(:hangout,
+    event_instance = FactoryGirl.create(:event_instance,
                  title: hash['Title'],
                  project: Project.find_by_title(hash['Project']),
                  event: Event.find_by_name(hash['Event']),
                  category: hash['Category'],
                  user: User.find_by_first_name(hash['Host']),
-                 hangout_url: hash['Hangout url'],
+                 hangout_url: hash['EventInstance url'],
                  participants: participants,
                  yt_video_id: hash['Youtube video id'],
                  created: hash['Start time'],
