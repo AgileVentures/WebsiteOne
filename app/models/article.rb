@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   include ActAsPage
   include UserNullable
+  include PublicActivity::Common
 
   belongs_to :user
   validates :content, :user, presence: true
