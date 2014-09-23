@@ -1,4 +1,4 @@
-class Hangout < ActiveRecord::Base
+class EventInstance < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
   include UserNullable

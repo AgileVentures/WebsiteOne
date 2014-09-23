@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params.merge('user_id' => current_user.id))
     if @project.save
+      @project.create_activity :create, owner: current_user
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
       flash.now[:alert] = 'Project was not saved. Please check the input.'
@@ -39,6 +40,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update_attributes(project_params)
+      @project.create_activity :update, owner: current_user
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else
       # TODO change this to notify for invalid params
@@ -47,6 +49,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def mercury_update
+    project = Project.find(params[:id])
+    project.pitch = params[:content][:pitch_content][:value]
+# need to build in a condition here
+    project.save!
+    render text: ""
+  end
+
+  def mercury_saved
+    @project = Project.find_by_slug(params[:id])
+    redirect_to project_path(@project), notice: 'The project has been successfully updated.'
+  end
 
   def destroy
     #if @project.destroy

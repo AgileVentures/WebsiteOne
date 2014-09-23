@@ -4,6 +4,11 @@ describe Document, :type => :model do
   subject { FactoryGirl.build_stubbed(:document) }
 
   it { is_expected.to be_versioned }
+  it { is_expected.to respond_to :create_activity }
+
+  it 'has public-activity enabled' do
+    expect(subject.public_activity_enabled?).to eq true
+  end
 
   it 'is valid with proper attributes' do
     expect(FactoryGirl.build(:document)).to be_valid

@@ -120,9 +120,6 @@ Feature: Manage Document
     Given I am on the "Projects" page
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
-    Given I am on the "Show" page for project "hello world"
-    When I try to edit the page
-    Then I should see "You do not have the right privileges to complete action."
 
   @javascript
   Scenario: Document should have a history of changes 

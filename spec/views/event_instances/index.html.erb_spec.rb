@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'hangouts/index', type: :view do
+describe 'event_instances/index', type: :view do
 
-  let(:hangout){ FactoryGirl.build_stubbed(:hangout,
+  let(:hangout){ FactoryGirl.build_stubbed(:event_instance,
                                            created: '2014/05/12 11:15',
                                            updated: '2014/05/12 11:35') }
 
   before do
-    @hangouts = [ hangout, hangout ]
+    @event_instances = [ hangout, hangout ]
   end
 
   it 'renders toggle buttons' do
@@ -36,9 +36,9 @@ describe 'hangouts/index', type: :view do
   end
 
   it 'disables the join button if hangout is not live' do
-    allow_any_instance_of(Hangout).to receive(:live?).and_return(false)
+    allow_any_instance_of(EventInstance).to receive(:live?).and_return(false)
     render
-    expect(rendered).to have_css('.btn-hg-join.disable', count: @hangouts.count)
+    expect(rendered).to have_css('.btn-hg-join.disable', count: @event_instances.count)
   end
 
   it_behaves_like 'it has clickable user avatar with popover' do
