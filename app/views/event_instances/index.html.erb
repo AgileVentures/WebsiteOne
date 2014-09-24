@@ -12,7 +12,7 @@
         <%= render 'index_header' %>
       </div>
     </div>
-    <% if @hangouts.empty? %>
+    <% if @event_instances.empty? %>
       <div class="panel panel-default">
         <div class="panel-heading empty">
           We are sorry, but it seems that there are no live sessions at this moment.<br>
@@ -26,4 +26,4 @@
     <% end %>
   </div>
 </section>
-<%=javascript_include_tag 'hangouts.js' %>
+<%=javascript_include_tag 'event_instances.js' %>

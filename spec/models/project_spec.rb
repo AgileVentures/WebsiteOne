@@ -3,6 +3,11 @@ require 'spec_helper'
 describe Project, :type => :model do
   context '#save' do
     subject { build_stubbed(:project) }
+    it { is_expected.to respond_to :create_activity }
+
+    it 'has public-activity enabled' do
+      expect(subject.public_activity_enabled?).to eq true
+    end
 
     it 'should be a valid with all the correct attributes' do
       expect(subject).to be_valid
