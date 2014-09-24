@@ -1,12 +1,41 @@
 <%= provide :title, "Dashboard" %>
 <div id="page-box">
-  <div id="page-overview">
-    <h1>AgileVentures Activity and Statistics</h1>
-  </div>
-  <div>
-    <p><%= @stats[:articles][:count]  %> Articles Published</p>
-    <p><%= @stats[:projects][:count]  %> Active Projects</p>
-    <p><%= @stats[:members][:count]   %> AgileVentures Members</p>
-    <p><%= @stats[:documents][:count] %> Documents Created</p>
+  <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+    <li class="active"><a href="#statistics" data-toggle="tab">Site statistics</a></li>
+    <li><a href="#activity-feed" data-toggle="tab">Activity feed</a></li>
+  </ul>
+  <div id="tab-content" class="tab-content" style="background: #fff;">
+    <div class="tab-pane active" id="statistics">
+      <h3>Statistics</h3>
+
+      <div>
+        <p><%= @stats[:articles][:count] %> Articles Published</p>
+
+        <p><%= @stats[:projects][:count] %> Active Projects</p>
+
+        <p><%= @stats[:members][:count] %> AgileVentures Members</p>
+
+        <p><%= @stats[:documents][:count] %> Documents Created</p>
+      </div>
+    </div>
+    <div class="tab-pane" id="activity-feed">
+
+      <h3>Recent activities</h3>
+
+      <div id="feed">
+        <% if @activities %>
+            <% @activities.each do |activity| %>
+                <div class="activity">
+                  <%= render_activity activity %>
+                </div>
+                <hr>
+            <% end %>
+        <% else %>
+            <p>No public activity</p>
+        <% end %>
+      </div>
+
+    </div>
+
   </div>
 </div>

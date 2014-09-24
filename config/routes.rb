@@ -1,7 +1,9 @@
 WebsiteOne::Application.routes.draw do
+
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
+  resources :activities
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false
@@ -14,18 +16,18 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
-  match '/hangouts/:id' => 'hangouts#update', :via => [:put, :options], as: 'hangout'
-  match '/hangouts' => 'hangouts#index', :via => [:get], as: 'hangouts'
+  match '/hangouts/:id' => 'event_instances#update', :via => [:put, :options], as: 'hangout'
+  match '/hangouts' => 'event_instances#index', :via => [:get], as: 'hangouts'
 
   resources :projects, :format => false do
     member do
-      get :follow
-      get :unfollow
       put :mercury_update
       get :mercury_saved
+      get :follow
+      get :unfollow
     end
 
-  resources :documents, except: [:edit, :update], :format => false do
+    resources :documents, except: [:edit, :update], :format => false do
       put :mercury_update
       get :mercury_saved
     end
@@ -36,6 +38,9 @@ WebsiteOne::Application.routes.draw do
       patch :update_only_url
     end
   end
+
+  #put 'projects/:id/mercury_update', to: 'project#mercury_update', as: 'mercury_update_project', :format => false
+  #get 'projects/:id/mercury_saved', to: 'projects#mercury_saved', as: 'mercury_saved_project', :format => false
 
   get '/verify/:id' => redirect {|params,request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}"}
 

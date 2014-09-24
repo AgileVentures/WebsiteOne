@@ -3,7 +3,7 @@ FactoryGirl.define do
     [ "#{n}", { :person => { displayName: "Participant_#{n}", id: "youtube_id_#{n}" } } ]
   end
 
-  factory :hangout do
+  factory :event_instance do
     ignore do
       created Time.now
       updated Time.now

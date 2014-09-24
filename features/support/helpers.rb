@@ -29,7 +29,9 @@ module Helpers
   end
 
   def create_visitor
-    @visitor ||= { :email => 'example@example.com',
+    @visitor ||= { :first_name => 'Anders',
+                   :last_name => 'Persson',
+                   :email => 'example@example.com',
                    :password => 'changemesomeday',
                    :password_confirmation => 'changemesomeday',
                    :slug => 'slug-ma',

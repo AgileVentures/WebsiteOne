@@ -32,21 +32,18 @@
                     </ul>
                   </li>
                   <li class="hangout-btn">
-                    <%= render partial: 'hangouts/hangout_button', locals: {hangout_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>
-                  </li>
+                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>                  </li>
                 </ul>
                 <hr>
             <% end %>
         <% end %>
       </div>
-
     </div>
   </div>
 </div>
 
 <div class="project-main">
   <div class="row">
-
     <div class="project-sidebar col-xs-12 col-md-4 col-md-push-8" role="complementary">
       <%= render 'highlight_box', members: @members %>
       <%= render 'connections' %>
