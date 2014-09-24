@@ -12,7 +12,6 @@ class EventsController < ApplicationController
   def show
     @event_schedule = @event.next_occurrences
     @hangout = @event.last_hangout
-    render partial: 'hangouts_management' if request.xhr?
   end
 
   def index

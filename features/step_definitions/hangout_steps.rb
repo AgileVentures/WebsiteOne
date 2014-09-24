@@ -47,8 +47,7 @@ Given /^the following hangouts exist:$/ do |table|
                  hangout_url: hash['Hangout url'],
                  participants: participants,
                  yt_video_id: hash['Youtube video id'],
-                 created: hash['Start time'],
-                 updated: hash['End time'])
+                 updated_at: hash['Start time'])
   end
 end
 

@@ -4,10 +4,10 @@ describe HangoutPresenter do
   let(:presenter){ HangoutPresenter.new(hangout) }
 
   context 'all fields are present' do
-    let(:hangout){ FactoryGirl.build_stubbed(:hangout, created: '11:15 14-10-1979') }
+    let(:hangout){ FactoryGirl.build_stubbed(:hangout, created: '11:15') }
 
     it 'displays created time' do
-      expect(presenter.created_at).to eq('11:15 14/10')
+      expect(presenter.created_at).to eq('11:15')
     end
 
     it 'displays title' do

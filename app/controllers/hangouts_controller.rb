@@ -8,7 +8,7 @@ class HangoutsController < ApplicationController
     if hangout.try!(:update, hangout_params)
       SlackService.post_hangout_notification(hangout) if params[:notify] == 'true'
 
-      redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
+      redirect_to event_path(params[:event_id]) and return if local_request?
       head :ok
     else
       head :internal_server_error
@@ -16,8 +16,7 @@ class HangoutsController < ApplicationController
   end
 
   def index
-    @hangouts = (params[:live] == 'true') ? Hangout.live : Hangout.latest
-    render partial: 'hangouts' if request.xhr?
+    @hangouts = (params[:live] == 'true') ? Hangout.live : Hangout.all
   end
 
   private

@@ -129,6 +129,7 @@
   .panel {
     overflow: hidden;
     border: $hg-border;
+    box-shadow: 1px 1px 10px 1px gray;
   }
 
   .panel-info {
@@ -202,8 +203,6 @@
     .panel-heading {
       &:hover {
         background-color: $hg-color;
-        border-color: $hg-color;
-        box-shadow: none;
         cursor: pointer;
       }
     }
