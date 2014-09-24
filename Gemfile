@@ -75,9 +75,9 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails' #unit testing
   gem 'awesome_print' # plays well with pry
-  gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
+  #gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
   gem 'hirb' # formats ActiveRecord objects into table format in the console
-  gem 'pry-rails' # integrate pry with rails console
+  #gem 'pry-rails' # integrate pry with rails console
   gem 'jasmine' # framework for testing javascript
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser

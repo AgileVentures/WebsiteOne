@@ -3,17 +3,13 @@ class EventInstancesController < ApplicationController
   before_filter :cors_preflight_check, except: [:index]
 
   def update
-    is_created = false
-    begin
-      event_instance = EventInstance.find_by(uid: params[:id])
-      if !event_instance.present?
-        event_instance = EventInstance.create(event_instance_params_new_from_gh)
-        is_created = event_instance.present?
-      else
-        is_updated = event_instance.update_attributes(event_instance_params_update_from_gh)
-      end
-    rescue
-      attr_error = "Invalid hangout attributes."
+    is_created = is_updated = false
+    event_instance = EventInstance.find_by(uid: params[:id])
+    if !event_instance.present?
+      event_instance = EventInstance.create(event_instance_params_new_from_gh)
+      is_created = event_instance.present?
+    else
+      is_updated = event_instance.update_attributes(event_instance_params_update_from_gh)
     end
     if is_created || is_updated
       SlackService.post_hangout_notification(event_instance) if params[:notify] == 'true' && is_created
@@ -41,7 +37,7 @@ class EventInstancesController < ApplicationController
   def allowed?
     allowed_sites = %w(a-hangout-opensocial.googleusercontent.com)
     origin = request.env['HTTP_ORIGIN']
-    allowed_sites.any?{ |url| origin =~ /#{url}/ }
+    allowed_sites.any? { |url| origin =~ /#{url}/ }
   end
 
   def local_request?
@@ -58,8 +54,8 @@ class EventInstancesController < ApplicationController
     params.require(:title)
     ActionController::Parameters.new(
         title: params[:title],
-        project_id: params[:projectId],
-        event_id: params[:eventId],
+        project_id: params[:project_id],
+        event_id: params[:event_id],
         category: params[:category],
         user_id: params[:hostId],
         participants: params[:participants],
@@ -71,6 +67,7 @@ class EventInstancesController < ApplicationController
         start_planned: Time.now
     ).permit!
   end
+
   # this is called from the callback from Google Hangouts when updating an existing event_instance
   def event_instance_params_update_from_gh
     params.require(:title)
