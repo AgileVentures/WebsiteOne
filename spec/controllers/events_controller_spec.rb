@@ -26,10 +26,10 @@ describe EventsController do
       assigns(:event).should eq(event)
     end
 
-    it 'assigns a event instance' do
-      event_instance = FactoryGirl.create(:event_instance, event: event)
+    it 'assigns a hangout' do
+      hangout = FactoryGirl.create(:hangout, event: event)
       get :show, {:id => event.to_param}, valid_session
-      expect(assigns(:hangout)).to eq(event_instance)
+      expect(assigns(:hangout)).to eq(hangout)
     end
 
     it 'renders the show template' do

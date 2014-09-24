@@ -1,36 +1,36 @@
-class EventInstancePresenter < BasePresenter
-  presents :event_instance
+class HangoutPresenter < BasePresenter
+  presents :hangout
 
   def created_at
-    event_instance.created_at.strftime('%H:%M %d/%m')
+    hangout.created_at.strftime('%H:%M %d/%m')
   end
 
   def title
-    event_instance.title || 'No title given'
+    hangout.title || 'No title given'
   end
 
   def category
-    event_instance.category || '-'
+    hangout.category || '-'
   end
 
   def project_link
-    event_instance.project ? link_to(event_instance.project.title, url_helpers.project_path(event_instance.project)) : '-'
+    hangout.project ? link_to(hangout.project.title, url_helpers.project_path(hangout.project)) : '-'
   end
 
   def event_link
-    event_instance.event ? link_to(event_instance.event.name, url_helpers.event_path(event_instance.event)) : '-'
+    hangout.event ? link_to(hangout.event.name, url_helpers.event_path(hangout.event)) : '-'
   end
 
   def host
-    event_instance.user || NullUser.new('Anonymous')
+    hangout.user || NullUser.new('Anonymous')
   end
 
   def participants
-    map_to_users(event_instance.participants)
+    map_to_users(hangout.participants)
   end
 
   def video_url
-    if id = event_instance.yt_video_id
+    if id = hangout.yt_video_id
       "http://www.youtube.com/watch?v=#{id}&feature=youtube_gdata".html_safe
     else
       '#'
@@ -38,7 +38,7 @@ class EventInstancePresenter < BasePresenter
   end
 
   def duration
-    distance_of_time_in_words(event_instance.duration)
+    distance_of_time_in_words(hangout.duration)
   end
 
   private
