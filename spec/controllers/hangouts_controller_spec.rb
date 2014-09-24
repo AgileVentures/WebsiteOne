@@ -31,6 +31,7 @@ describe HangoutsController do
   end
 
   describe '#update' do
+
     before do
       allow_any_instance_of(Hangout).to receive(:update).and_return('true')
     end
