@@ -304,15 +304,16 @@ When(/^I refresh the page$/) do
 end
 
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-  expect(page).to have_css "a[href='#{link}']", text: text
+  page.should have_css "a[href='#{link}']", text: text
 end
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
-  expect(page).to have_css "img[src*=\"#{source}\"]"
-end
-
-Then(/^I should see an video with source "([^"]*)"$/) do |source|
-  expect(page).to have_css "iframe[src*=\"#{source}\"]"
+  Timeout::timeout(3.0) do
+    until page.has_css? "img[src*=\"#{source}\"]" do
+      sleep(0.5)
+    end
+  end
+  page.should have_css "img[src*=\"#{source}\"]"
 end
 
 Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, title_2|
