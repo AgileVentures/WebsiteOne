@@ -1,11 +1,10 @@
 require 'spec_helper'
 
-describe 'projects/edit.html.erb', type: :view do
-  
-  let(:project) { FactoryGirl.build_stubbed(:project)}
-  
-  before do
-    assign(:project, project)
+describe 'projects/edit.html.erb' do
+  before :each do
+    @project = Project.create(id: 1, title: "Title 1", description: "Description 1", status: "Status 1")
+
+    assign(:project, @project)
   end
 
   it 'renders project form labels' do
@@ -30,12 +29,12 @@ describe 'projects/edit.html.erb', type: :view do
 
   it 'renders Submit button' do
     render
-    expect(rendered).to have_button('Submit')
+    rendered.should have_button('Submit')
   end
 
   it 'renders Back button' do
     render
-    expect(rendered).to have_link('Back', :href => project_path(project))
+    rendered.should have_link('Back', :href => project_path(@project))
   end
 
 end

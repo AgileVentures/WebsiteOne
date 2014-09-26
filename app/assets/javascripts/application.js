@@ -29,8 +29,6 @@
 //= stub google-analytics
 //= stub disqus
 //= stub events
-//= stub event_instances
-//= require local_time
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code

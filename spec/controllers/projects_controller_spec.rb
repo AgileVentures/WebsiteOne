@@ -6,7 +6,6 @@ describe ProjectsController, :type => :controller do
                             :title => 'WebTwentyFive',
                             :description => 'My project description',
                             :status => 'Active',
-                            :pitch => 'My project pitch ...',
                             :pivotaltracker_url => 'https://www.pivotaltracker.com/s/projects/982890',
                             :slug => 'my-project' } }
   let(:valid_session) { {} }
@@ -28,6 +27,7 @@ describe ProjectsController, :type => :controller do
   #  end
   #end
 
+
   describe '#index' do
     it 'should render index page for projects' do
       get :index
@@ -47,7 +47,6 @@ describe ProjectsController, :type => :controller do
       @project = build_stubbed(Project, valid_attributes)
       allow(@project).to receive(:tag_list).and_return [ 'WSO' ]
       Project.stub_chain(:friendly, :find).and_return @project
-      @project.stub_chain(:user, :display_name).and_return "Happy User"
       @users = [ build_stubbed(User, slug: 'my-friendly-id', display_profile: true) ]
       expect(@project).to receive(:members).and_return @users
       expect(YoutubeVideos).to receive(:for).with(@project).and_return('videos')
@@ -104,8 +103,6 @@ describe ProjectsController, :type => :controller do
       @project = mock_model(Project, friendly_id: 'some-project')
       allow(Project).to receive(:new).and_return(@project)
       allow(controller).to receive(:current_user).and_return(@user)
-      allow(@project).to receive(:create_activity)
-
     end
 
     it 'assigns a newly created project as @project' do
@@ -115,19 +112,19 @@ describe ProjectsController, :type => :controller do
     end
 
     context 'successful save' do
-      before(:each) do
-        allow(@project).to receive(:save).and_return(true)
-        post :create, @params
-      end
+
       it 'redirects to index' do
+        allow(@project).to receive(:save).and_return(true)
+
+        post :create, @params
+
         expect(response).to redirect_to(project_path(@project))
       end
-
-      it 'received :create_activity with :create' do
-        expect(@project).to have_received(:create_activity).with(:create, { owner: @user })
-      end
-
       it 'assigns successful message' do
+        allow(@project).to receive(:save).and_return(true)
+
+        post :create, @params
+
         #TODO YA add a show view_spec to check if flash is actually displayed
         expect(flash[:notice]).to eq('Project was successfully created.')
       end
@@ -214,8 +211,7 @@ describe ProjectsController, :type => :controller do
 
   describe '#update' do
     before(:each) do
-      @project = FactoryGirl.create(:project)
-      allow(@project).to receive(:create_activity)
+      @project = mock_model(Project)
       Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
     end
 
@@ -229,10 +225,6 @@ describe ProjectsController, :type => :controller do
       before(:each) do
         allow(@project).to receive(:update_attributes).and_return(true)
         put :update, id: 'update', project: {title: ''}
-      end
-
-      it 'received :create_activity with :update' do
-        expect(@project).to have_received(:create_activity).with(:update, {owner: @user })
       end
 
       it 'redirects to the project' do

@@ -1,15 +1,5 @@
 describe('WebsiteOne ProgressBar module', function() {
   var onSpy;
-
-  function getCalls() {
-    return onSpy.calls.all().map(function(call) {
-      return {
-        eventName: call.args[0],
-        callback: call.args[1]
-      };
-    });
-  }
-
   beforeEach(function() {
     onSpy = spyOn($.fn, 'on');
     reloadScript('progressbar.js');
@@ -26,27 +16,26 @@ describe('WebsiteOne ProgressBar module', function() {
     });
 
     it('should attach NProgress.start to "page:fetch"', function() {
-      var relevantCalls = getCalls().filter(function(call) {
-        return call.eventName === 'page:fetch';
-      });
-      expect(relevantCalls.length).toEqual(1);
-      expect(relevantCalls[0].callback).toEqual(NProgress.start);
+      var call = onSpy.calls.all()[0];
+      expect(call.args[0]).toEqual('page:fetch');
+      expect(call.args[1]).toEqual(NProgress.start);
     });
 
     it('should attach NProgress.done to "page:change"', function() {
-      var relevantCalls = getCalls().filter(function(call) {
-        return call.eventName === 'page:change';
-      });
-      expect(relevantCalls.length).toEqual(1);
-      expect(relevantCalls[0].callback).toEqual(NProgress.done);
+      var call = onSpy.calls.all()[1];
+      expect(call.args[0]).toEqual('page:change');
+      expect(call.args[1]).toEqual(NProgress.done);
     });
 
     it('should attach NProgress.remove to "page:restore"', function() {
-      var relevantCalls = getCalls().filter(function(call) {
-        return call.eventName === 'page:restore';
-      });
-      expect(relevantCalls.length).toEqual(1);
-      expect(relevantCalls[0].callback).toEqual(NProgress.remove);
+      var call = onSpy.calls.all()[2];
+      expect(call.args[0]).toEqual('page:restore');
+      expect(call.args[1]).toEqual(NProgress.remove);
     });
+  });
+
+  it('should not trigger the event registration more than once', function() {
+    $(document).trigger('page:load');
+    expect(onSpy.calls.count()).toEqual(3);
   });
 });

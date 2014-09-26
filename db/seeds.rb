@@ -102,7 +102,7 @@ Event.create!( name: 'Seeded event',
                repeats_weekly_each_days_of_the_week_mask: '31',
                repeat_ends: 'never',
                repeat_ends_on: 'Mon, 17 Jun 2015',
-               time_zone: 'UTC')
+               time_zone: 'London')
 
 Event.create!( name: 'evening event',
                category: 'Scrum',
@@ -117,7 +117,7 @@ Event.create!( name: 'evening event',
                repeats_weekly_each_days_of_the_week_mask: '31',
                repeat_ends: 'never',
                repeat_ends_on: 'Mon, 17 Jun 2015',
-               time_zone: 'UTC')
+               time_zone: 'London')
 
 if StaticPage.count == 0
   Rake::Task['db:import_pages'].invoke

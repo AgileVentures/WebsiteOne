@@ -26,10 +26,11 @@ describe EventsController do
       assigns(:event).should eq(event)
     end
 
-    it 'assigns a event instance' do
-      event_instance = FactoryGirl.create(:event_instance, event: event)
+    it 'assigns a hangout' do
+      hangout = FactoryGirl.create(:hangout, event_id: event.id)
+
       get :show, {:id => event.to_param}, valid_session
-      expect(assigns(:hangout)).to eq(event_instance)
+      expect(assigns(:hangout)).to eq(hangout)
     end
 
     it 'renders the show template' do
@@ -53,8 +54,8 @@ describe EventsController do
   end
 
   describe 'POST create' do
-    let(:valid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event), start_date: '17 Jun 2013', start_time: '09:00:00 UTC' } }
-    let(:invalid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event, name: nil), start_date: '', start_time: '' } }
+    let(:valid_attributes) { { id: @event, event: valid_attributes_for(:event), start_date: '17 Jun 2013', start_time: '09:00:00 UTC' } }
+    let(:invalid_attributes) { { id: @event, event: invalid_attributes_for(:event), start_date: '', start_time: '' } }
     before :each do
       @controller.stub(:authenticate_user!).and_return(true)
     end
@@ -84,7 +85,7 @@ describe EventsController do
 
       it 're-renders the events#new template' do
         Event.any_instance.stub(:save).and_return(false)
-        post :create, event: FactoryGirl.attributes_for(:event, name: nil)
+        post :create, event: invalid_attributes_for(:event)
         expect(response).to render_template :new
       end
     end
@@ -108,7 +109,7 @@ describe EventsController do
   end
 
   describe 'POST update' do
-    let(:valid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event, name: 'New Event'), start_date: '17 Jun 2013', start_time: '09:00:00 UTC' } }
+    let(:valid_attributes) { { id: @event, event: valid_attributes_for(:event), start_date: '17 Jun 2013', start_time: '09:00:00 UTC' } }
 
 
     before(:each) do

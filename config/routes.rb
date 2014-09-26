@@ -1,9 +1,7 @@
 WebsiteOne::Application.routes.draw do
-
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
-  resources :activities
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false
@@ -16,18 +14,15 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
-  match '/hangouts/:id' => 'event_instances#update', :via => [:put, :options], as: 'hangout'
-  match '/hangouts' => 'event_instances#index', :via => [:get], as: 'hangouts'
+  match '/hangouts/:id' => 'hangouts#update', :via => [:put, :options], as: 'hangout'
 
   resources :projects, :format => false do
     member do
       get :follow
       get :unfollow
-      put :mercury_update
-      get :mercury_saved
     end
 
-    resources :documents, except: [:edit, :update], :format => false do
+  resources :documents, except: [:edit, :update], :format => false do
       put :mercury_update
       get :mercury_saved
     end
@@ -51,17 +46,10 @@ WebsiteOne::Application.routes.draw do
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
 
   post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
-  get 'scrums', to: 'scrums#index', as: 'scrums', :format => false
 
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false
-  get 'sections', to: 'documents#get_doc_categories', as: 'project_document_sections', :format => false
-  put 'update_document_parent_id/:project_id/:id', to: 'documents#update_parent_id', as: 'update_document_parent_id', :format => false
 
-  resources :hookups
-
-  get '/dashboard', to: 'dashboard#index'
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
-
 end
 

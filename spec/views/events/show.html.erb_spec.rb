@@ -1,6 +1,5 @@
 require 'spec_helper'
 include EventHelper
-include LocalTimeHelper
 
 describe 'events/show', type: :view do
   before(:each) do
@@ -9,7 +8,7 @@ describe 'events/show', type: :view do
                         description: 'EuroAsia Scrum and Pair hookup',
                         time_zone: 'Eastern Time (US & Canada)')
 
-    allow(Time).to receive(:now).and_return(Time.parse('2014-03-07 23:30:00 UTC'))
+    allow(Time).to receive(:now).and_return(Time.parse('2014-03-07 23:30:00'))
     @event_schedule = @event.next_occurrences(end_time: Time.now + 40.days)
 
     allow(view).to receive(:current_user).and_return(FactoryGirl.build_stubbed(:user))
@@ -36,7 +35,6 @@ describe 'events/show', type: :view do
     expect(rendered).to have_text('Upcoming schedule')
     @event_schedule.first(5).each do |e|
       expect(rendered).to have_content(current_occurrence_time(e))
-      expect(rendered).to have_content(sanitize current_occurrence_local_time(e))
     end
   end
 
@@ -48,16 +46,16 @@ describe 'events/show', type: :view do
 
   describe 'Hangouts' do
     before(:each) do
-      @hangout = FactoryGirl.build_stubbed(:event_instance,
+      @hangout = FactoryGirl.build_stubbed(:hangout,
                         uid: '123456',
                         event_id: 375,
                         category: 'Scrum',
                         hangout_url: 'http://hangout.test',
-                        updated: Time.parse('10:25:00 UTC'))
+                        updated_at: Time.parse('10:25:00'))
 
       allow(@hangout).to receive(:started?).and_return true
       allow(@hangout).to receive(:live?).and_return true
-      allow(view).to receive(:generate_event_instance_id).and_return('123456')
+      allow(view).to receive(:generate_hangout_id).and_return('123456')
 
       @event.url = @hangout.hangout_url
     end
@@ -69,11 +67,12 @@ describe 'events/show', type: :view do
       end
 
       it_behaves_like 'it has a hangout button' do
-        let(:title){'Topic'}
-        let(:project_id){''}
+        let(:hangout_id){@hangout.uid}
         let(:event_id){@event.id}
         let(:category){@event.category}
-        let(:event_instance_id){@hangout.uid}
+        let(:user){''}
+        let(:project){''}
+        let(:topic_name){'Topic'}
       end
 
       it 'renders Edit link' do
@@ -131,7 +130,7 @@ describe 'events/show', type: :view do
 
       context 'hangout has started' do
         before :each do
-          allow(Time).to receive(:now).and_return(Time.parse('10:29 UTC'))
+          allow(Time).to receive(:now).and_return(Time.parse('10:30:00'))
           allow(@hangout).to receive(:started?).and_return(true)
           allow(@hangout).to receive(:live?).and_return(true)
         end
@@ -145,7 +144,7 @@ describe 'events/show', type: :view do
           expect(rendered).to have_content('Hangout link')
           expect(rendered).to have_link('http://hangout.test', href: 'http://hangout.test')
           expect(rendered).to have_content('Updated:')
-          expect(rendered).to have_content('4 minutes')
+          expect(rendered).to have_content('5 minutes')
         end
 
         it 'renders Join link if hangout is live' do

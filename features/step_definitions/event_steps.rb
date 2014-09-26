@@ -8,22 +8,6 @@ Given(/^following events exist:$/) do |table|
   end
 end
 
-Given(/^following events exist with active hangouts:$/) do |table|
-  table.hashes.each do |hash|
-    event = Event.create!(hash)
-    event.event_instances.create(hangout_url: 'x@x.com',
-                          updated_at: 1.minute.ago,
-                          category: event.category,
-                          title: event.name)
-  end
-end
-
-Given(/^following hangouts exist:$/) do |table|
-  table.hashes.each do |hash|
-    EventInstance.create!(hash)
-  end
-end
-
 Then(/^I should be on the Events "([^"]*)" page$/) do |page|
   case page.downcase
     when 'index'
@@ -31,6 +15,7 @@ Then(/^I should be on the Events "([^"]*)" page$/) do |page|
 
     when 'create'
       current_path.should eq events_path
+
     else
       pending
   end
@@ -58,17 +43,12 @@ Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
   case page
     when 'show'
       current_path.should eq event_path(event)
+
     else
       current_path.should eq eval("#{page}_event_path(event)")
+
   end
 end
-
 Given(/^the date is "([^"]*)"$/) do |jump_date|
   Delorean.time_travel_to(Time.parse(jump_date))
-end
-
-When(/^I follow "([^"]*)" for "([^"]*)" "([^"]*)"$/) do |linkid, table_name, hookup_number|
-  links = page.all(:css, "table##{table_name} td##{linkid} a")
-  link = links[hookup_number.to_i - 1]
-  link.click
 end

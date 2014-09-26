@@ -11,27 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917070939) do
+ActiveRecord::Schema.define(version: 20140725131327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "activities", force: true do |t|
-    t.integer  "trackable_id"
-    t.string   "trackable_type"
-    t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "key"
-    t.text     "parameters"
-    t.integer  "recipient_id"
-    t.string   "recipient_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
-  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
-  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -44,7 +27,6 @@ ActiveRecord::Schema.define(version: 20140917070939) do
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
   add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
-  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -55,15 +37,6 @@ ActiveRecord::Schema.define(version: 20140917070939) do
   end
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
-
-  create_table "commit_counts", force: true do |t|
-    t.integer "commit_count"
-    t.integer "project_id"
-    t.integer "user_id"
-  end
-
-  add_index "commit_counts", ["project_id"], name: "index_commit_counts_on_project_id", using: :btree
-  add_index "commit_counts", ["user_id"], name: "index_commit_counts_on_user_id", using: :btree
 
   create_table "documents", force: true do |t|
     t.string   "title"
@@ -76,23 +49,8 @@ ActiveRecord::Schema.define(version: 20140917070939) do
     t.string   "slug"
   end
 
-  add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree
   add_index "documents", ["slug", "user_id"], name: "index_documents_on_slug_and_user_id", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
-
-  create_table "event_instances", force: true do |t|
-    t.integer  "event_id"
-    t.string   "title"
-    t.string   "hangout_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "uid"
-    t.string   "category"
-    t.integer  "project_id"
-    t.integer  "user_id"
-    t.string   "yt_video_id"
-    t.text     "participants"
-  end
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -110,7 +68,6 @@ ActiveRecord::Schema.define(version: 20140917070939) do
     t.string   "slug"
     t.datetime "start_datetime"
     t.integer  "duration"
-    t.text     "exclusions"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
@@ -129,6 +86,16 @@ ActiveRecord::Schema.define(version: 20140917070939) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
+  create_table "hangouts", force: true do |t|
+    t.integer  "event_id"
+    t.string   "title"
+    t.string   "hangout_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "uid"
+    t.string   "category"
+  end
+
   create_table "projects", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -139,7 +106,6 @@ ActiveRecord::Schema.define(version: 20140917070939) do
     t.string   "slug"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
-    t.text     "pitch"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
@@ -167,8 +133,6 @@ ActiveRecord::Schema.define(version: 20140917070939) do
   end
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
-  add_index "taggings", ["tagger_type"], name: "index_taggings_on_tagger_type", using: :btree
 
   create_table "tags", force: true do |t|
     t.string  "name"

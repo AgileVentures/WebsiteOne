@@ -1,13 +1,12 @@
 require 'custom_errors.rb'
 
 class ApplicationController < ActionController::Base
-  include YoutubeHelper
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
-  before_filter :get_next_scrum, :store_location
+  before_filter :get_next_event
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   include ApplicationHelper
@@ -25,37 +24,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || session[:previous_url] || root_path
+    request.env['omniauth.origin'] || root_path
   end
 
   private
 
-  def black_listed_urls
-    [ 
-         user_session_path,
-         new_user_registration_path,
-         new_user_password_path,
-         destroy_user_session_path,
-         "#{edit_user_password_path}.*"
-    ]
-  end
-
-  def black_listed_url?(blacklist)
-    blacklist.any?{ |pattern| request.path =~ %r(#{pattern})}
-  end
-
-  def conventional_get_request?
-    request.get? && !request.xhr?
-  end	
-
-  def get_next_scrum
-    @next_event = Event.next_occurrence(:Scrum)
-  end
-
-  def store_location
-    # store last url - this is needed for post-login redirect to whatever the user last visited.
-    if conventional_get_request? && !black_listed_url?(black_listed_urls)  
-      session[:previous_url] = request.fullpath 
-    end
+  def get_next_event
+    @next_event = Event.next_event_occurrence
   end
 end

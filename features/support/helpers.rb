@@ -1,7 +1,7 @@
 module Helpers
 
   def default_test_author
-    @default_test_author ||= User.find_by_email(default_test_user_details[:email])
+    @default_test_author ||= User.find_by_email('testuser@agileventures.org')
     if @default_test_author.nil?
       @default_test_author = User.create!(default_test_user_details)
     end
@@ -19,7 +19,7 @@ module Helpers
   def default_test_user_details
     {
       first_name: 'Tester',
-      last_name: 'Person',
+      last_name: 'Man',
       email: 'testuser@agileventures.org',
       last_sign_in_ip: test_ip_address,
       password: test_user_password,
@@ -29,9 +29,7 @@ module Helpers
   end
 
   def create_visitor
-    @visitor ||= { :first_name => 'Anders',
-                   :last_name => 'Persson',
-                   :email => 'example@example.com',
+    @visitor ||= { :email => 'example@example.com',
                    :password => 'changemesomeday',
                    :password_confirmation => 'changemesomeday',
                    :slug => 'slug-ma'}
@@ -116,7 +114,7 @@ class String
       downcase
   end
 end
-World(ScrumsHelper)
+
 World(ApplicationHelper)
 World(Helpers)
 World(WithinHelpers)

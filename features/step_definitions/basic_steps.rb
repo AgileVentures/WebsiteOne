@@ -28,18 +28,10 @@ def path_to(page_name, id = '')
       user_path(id)
     when 'my account' then
       edit_user_registration_path(id)
-    when 'scrums' then
-      scrums_index_path
-    when 'event_instances' then
-      hangouts_path
     when 'foobar' then
       "/#{page}"
     when 'password reset' then
       edit_user_password_path(id)
-    when 'hookups' then
-      hookups_path
-    when 'dashboard' then
-      '/dashboard' 
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -86,13 +78,6 @@ end
 
 When(/^I follow "([^"]*)"$/) do |text|
   click_link text
-end
-
-When(/^I dropdown the "([^"]*)" menu$/) do |text|
-  within ('.navbar') do
-    click_link text
-  end
-
 end
 
 
@@ -170,19 +155,15 @@ Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
 end
 
 Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
-  if negative
-    expect(page.has_link? link).to be_false
-  else
+  unless negative
     expect(page.has_link? link).to be_true
+  else
+    expect(page.has_link? link).to be_false
   end
 end
 
-Then /^I should( not)? see field "([^"]*)"$/ do |negative, field|
-  if negative
-    expect(page.has_field? field).to be_false
-  else
-    expect(page.has_field? field).to be_true
-  end
+Then /^I should see field "([^"]*)"$/ do |field|
+  page.should have_field(field)
 end
 
 Then /^I should( not)? see buttons:$/ do |negative, table|
@@ -220,7 +201,7 @@ Then(/^I should be on the "([^"]*)" page for ([^"]*) "([^"]*)"/) do |action, con
   expect(current_path).to eq url_for_title(action: action, controller: controller, title: title)
 end
 
-Given(/^I (?:am on|go to) the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
+Given(/^I am on the "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |action, controller, title|
   visit url_for_title(action: action, controller: controller, title: title)
 end
 
@@ -254,21 +235,10 @@ Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
 
-Then(/^I should( not)? see the supporter content/) do |negative|
-  unless negative
-    expect(page).to have_css 'div#sponsorsBar', visible: true
-  else
-    expect(page).to_not have_css '#sponsorsBar'
-  end
-end
-
-Then(/^I should( not)? see the round banners/) do |negative|
-  unless negative
-    expect(page).to have_css '.circle', visible: true
-  else
-    expect(page).to_not have_css '.circle'
-  end
-end
+#Then(/^I should see "(.*?)"$/) do |string|
+#  #expect(page).to have_content(string)
+#  page.should have_content(string)
+#end
 
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
   find(:css, %Q{a[title="#{button.downcase}"]}).click()
@@ -282,11 +252,36 @@ Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, butt
   end
 end
 
+#Then(/^I should see "([^"]*)" created_by marcelo (\d+) days ago first$/) do |string, arg|
+#  page.should have_text string
+#end
+#
+#
+#And(/^I should see "([^"]*)" created_by thomas (\d+) days ago second$/) do |string, arg|
+#  page.should have_text string
+#end
+
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
   actual_order = page.all('li.listings-item a').collect(&:text)
   actual_order.should eq expected_order
 end
+
+
+Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
+  project = Project.find_by_title(title)
+  case item.downcase.pluralize
+    when 'members'
+      (1..num.to_i).each do
+        u = User.create(email: Faker::Internet.email, password: '1234567890')
+        u.follow(project)
+      end
+
+    else
+      pending
+  end
+end
+
 
 Then /^I should see a "([^"]*)" table with:$/ do |name, table|
   expect(page).to have_text(name)
@@ -304,45 +299,15 @@ When(/^I refresh the page$/) do
 end
 
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-  expect(page).to have_css "a[href='#{link}']", text: text
+  page.should have_css "a[href='#{link}']", text: text
 end
+
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
-  expect(page).to have_css "img[src*=\"#{source}\"]"
-end
-
-Then(/^I should see an video with source "([^"]*)"$/) do |source|
-  expect(page).to have_css "iframe[src*=\"#{source}\"]"
-end
-
-Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, title_2|
-  if negative
-    expect(page.body).not_to match(/#{title_2}.*#{title_1}/m)
-  else
-    expect(page.body).to match(/#{title_2}.*#{title_1}/m)
+  Timeout::timeout(3.0) do
+    until page.has_css? "img[src*=\"#{source}\"]" do
+      sleep(0.5)
+    end
   end
-end
-
-Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, table_name|
-  within ("table##{table_name}") do
-    if negative
-      expect(page.body).not_to have_content(/#{title}/m)
-    else
-      expect(page.body).to have_content(/#{title}/m)
-      end
-  end
-end
-
-Given(/^I am on a (.*)/) do |device|
-  case device
-    when 'desktop'
-      agent = 'Poltergeist'
-    when 'tablet'
-      agent = 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10'
-    when 'smartphone'
-      agent = 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7'
-    else
-      pending
-  end
-  page.driver.headers = { 'User-Agent' => agent }
+  page.should have_css "img[src*=\"#{source}\"]"
 end
