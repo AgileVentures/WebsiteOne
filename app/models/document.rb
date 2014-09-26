@@ -1,6 +1,7 @@
 class Document < ActiveRecord::Base
   include ActAsPage
   include UserNullable
+  include PublicActivity::Common
 
   belongs_to :project
   belongs_to :user

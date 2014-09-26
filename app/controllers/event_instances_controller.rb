@@ -1,12 +1,12 @@
-class HangoutsController < ApplicationController
+class EventInstancesController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :cors_preflight_check, except: [:index]
 
   def update
-    hangout = Hangout.find_or_create_by(uid: params[:id])
+    event_instance = EventInstance.find_or_create_by(uid: params[:id])
 
-    if hangout.try!(:update, hangout_params)
-      SlackService.post_hangout_notification(hangout) if params[:notify] == 'true'
+    if event_instance.try!(:update, hangout_params)
+      SlackService.post_hangout_notification(event_instance) if params[:notify] == 'true'
 
       redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
       head :ok
@@ -16,7 +16,7 @@ class HangoutsController < ApplicationController
   end
 
   def index
-    @hangouts = (params[:live] == 'true') ? Hangout.live : Hangout.latest
+    @event_instances = (params[:live] == 'true') ? EventInstance.live : EventInstance.latest
     render partial: 'hangouts' if request.xhr?
   end
 

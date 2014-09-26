@@ -4,7 +4,7 @@
     'projectId' => project_id.to_s,
     'eventId' => event_id.to_s,
     'hostId' => current_user.id,
-    'hangoutId' => hangout_id.present? ? hangout_id : generate_hangout_id(current_user, project_id),
+    'hangoutId' => event_instance_id.present? ? event_instance_id : generate_event_instance_id(current_user, project_id),
     'callbackUrl' => hangout_url('id').gsub(/id$/, '')
   }) %>
 

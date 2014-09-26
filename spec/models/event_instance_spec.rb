@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Hangout, type: :model do
-  let(:hangout){ FactoryGirl.create(:hangout, updated: '10:00 UTC', hangout_url: nil) }
+describe EventInstance, type: :model do
+  let(:hangout){ FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil) }
 
   context 'hangout_url is not present' do
     before do

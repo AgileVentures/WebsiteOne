@@ -5,13 +5,13 @@ Feature: Create and maintain projects
 
   Background:
     Given the following projects exist:
-      | title         | description             | status   | github_url                                  | pivotaltracker_url                               |
-      | hello world   | greetings earthlings    | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
-      | hello mars    | greetings aliens        | inactive |                                             |                                                  |
-      | hello jupiter | greetings jupiter folks | active   |                                             |                                                  |
-      | hello mercury | greetings mercury folks | inactive |                                             |                                                  |
-      | hello saturn  | greetings saturn folks  | active   |                                             |                                                  |
-      | hello sun     | greetings sun folks     | active   |                                             |                                                  |
+      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |
+      | hello world   | greetings earthlings    |             | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
+      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  |
+      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  |
+      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  |
+      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |
     And there are no videos
 
 #  Scenarios for Index page
@@ -129,6 +129,7 @@ Feature: Create and maintain projects
       | Text                         |
       | hello saturn                 |
       | greetings saturn folks       |
+      | My pitch...                  |
       | ACTIVE                       |
       | not linked to GitHub         |
       | not linked to PivotalTracker |
@@ -159,6 +160,31 @@ Feature: Create and maintain projects
     When I fill in "Title" with ""
     And I click the "Submit" button
     Then I should see "Project was not updated."
+
+  Scenario: Launching Mercury editor 
+    Given I am logged in
+    And I am on the "Show" page for project "hello mars"
+    And I click the "Join Project" button
+    When I click the "Edit Pitch" button
+    Then I should be in the Mercury Editor
+
+  @javascript
+  Scenario: Editing Pitch content with Mercury Editor 
+    Given I am logged in
+    And I am on the "Show" page for project "hello mars"
+    And I click the "Join Project" button
+    And I am using the Mercury Editor to edit project "hello mars"
+    When I fill in the editable field "Pitch" for "project" with "This is my exciting marketing content"
+    And I click "Save" within Mercury Editor toolbar
+    Then I should see "The project has been successfully updated."
+    And I should be on the "Show" page for project "hello mars"
+    And I should see "This is my exciting marketing content"
+
+  Scenario: The Mercury Editor cannot be accessed by non-logged in users
+    Given I am on the "Show" page for project "hello mars"
+    Then I should not see "Edit Pitch"
+    And I try to use the Mercury Editor to edit project "hello mars"
+    Then I should see "You do not have the right privileges to complete action."
 
   Scenario: Update GitHub url if valid
     Given I am logged in
@@ -191,9 +217,10 @@ Feature: Create and maintain projects
     Then I should see "Project was not updated."
 
   Scenario: Project show page renders a list of members
-    Given The project "hello world" has 5 members
+    Given The project "hello world" has 10 members
     And I am on the "Show" page for project "hello world"
-    Then I should see "Members (5)"
+    Then I should see "Members (10)"
+    But I should see 5 member avatars
 
   Scenario: Project show page has links to github and Pivotal Tracker
     Given I am on the "Show" page for project "hello world"

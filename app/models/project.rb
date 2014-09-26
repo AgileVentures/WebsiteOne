@@ -8,8 +8,9 @@ class Project < ActiveRecord::Base
 
   belongs_to :user
   include UserNullable
+  include PublicActivity::Common
   has_many :documents
-  has_many :hangouts
+  has_many :event_instances
   has_many :commit_counts
 
   acts_as_followable
