@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe HangoutsController do
+describe EventInstancesController do
   let(:params) { {id: '333', host_id: 'host', title: 'title'} }
 
   before do
@@ -11,39 +11,38 @@ describe HangoutsController do
 
   describe '#index' do
     before do
-      FactoryGirl.create_list(:hangout, 3)
-      FactoryGirl.create_list(:hangout, 3, updated: 1.hour.ago)
+      FactoryGirl.create_list(:event_instance, 3)
+      FactoryGirl.create_list(:event_instance, 3, updated: 1.hour.ago)
     end
 
-    context 'show all hangouts' do
+    context 'show all hangouts/event-instances' do
       it 'assigns all hangouts' do
         get :index
-        expect(assigns(:hangouts).count).to eq(6)
+        expect(assigns(:event_instances).count).to eq(6)
       end
     end
 
-    context 'show only live hangouts' do
+    context 'show only live hangouts/event-instances' do
       it 'assigns live hangouts' do
         get :index, {live: 'true'}
-        expect(assigns(:hangouts).count).to eq(3)
+        expect(assigns(:event_instances).count).to eq(3)
       end
     end
   end
 
   describe '#update' do
-
     before do
-      allow_any_instance_of(Hangout).to receive(:update).and_return('true')
+      allow_any_instance_of(EventInstance).to receive(:update).and_return('true')
     end
 
     it 'creates a hangout if there is no hangout assosciated with the event' do
       get :update, params
-      hangout = Hangout.find_by_uid('333')
+      hangout = EventInstance.find_by_uid('333')
       expect(hangout).to be_valid
     end
 
     it 'updates a hangout if it is present' do
-      expect_any_instance_of(Hangout).to receive(:update)
+      expect_any_instance_of(EventInstance).to receive(:update)
       get :update, params
     end
 
@@ -53,18 +52,18 @@ describe HangoutsController do
     end
 
     it 'calls the SlackService to post hangout notification on successful update' do
-      expect(SlackService).to receive(:post_hangout_notification).with(an_instance_of(Hangout))
+      expect(SlackService).to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
       get :update, params.merge(notify: 'true')
     end
 
     it 'does not call the SlackService' do
-      allow_any_instance_of(Hangout).to receive(:update).and_return(false)
-      expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(Hangout))
+      allow_any_instance_of(EventInstance).to receive(:update).and_return(false)
+      expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
       get :update, params.merge(notify: 'false')
     end
 
     it 'returns a failure response if update is unsuccessful' do
-      allow_any_instance_of(Hangout).to receive(:update).and_return(false)
+      allow_any_instance_of(EventInstance).to receive(:update).and_return(false)
       get :update, params
       expect(response.status).to eq(500)
     end

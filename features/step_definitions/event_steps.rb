@@ -11,7 +11,7 @@ end
 Given(/^following events exist with active hangouts:$/) do |table|
   table.hashes.each do |hash|
     event = Event.create!(hash)
-    event.hangouts.create(hangout_url: 'x@x.com',
+    event.event_instances.create(hangout_url: 'x@x.com',
                           updated_at: 1.minute.ago,
                           category: event.category,
                           title: event.name)
@@ -20,7 +20,7 @@ end
 
 Given(/^following hangouts exist:$/) do |table|
   table.hashes.each do |hash|
-    Hangout.create!(hash)
+    EventInstance.create!(hash)
   end
 end
 
