@@ -21,10 +21,10 @@ WebsiteOne::Application.routes.draw do
 
   resources :projects, :format => false do
     member do
-      get :follow
-      get :unfollow
       put :mercury_update
       get :mercury_saved
+      get :follow
+      get :unfollow
     end
 
     resources :documents, except: [:edit, :update], :format => false do
@@ -38,6 +38,9 @@ WebsiteOne::Application.routes.draw do
       patch :update_only_url
     end
   end
+
+  #put 'projects/:id/mercury_update', to: 'project#mercury_update', as: 'mercury_update_project', :format => false
+  #get 'projects/:id/mercury_saved', to: 'projects#mercury_saved', as: 'mercury_saved_project', :format => false
 
   get '/verify/:id' => redirect {|params,request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}"}
 
