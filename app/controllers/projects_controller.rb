@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params.merge('user_id' => current_user.id))
     if @project.save
-      @project.create_activity :create, owner: current_user
+      add_to_feed(:create)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
       flash.now[:alert] = 'Project was not saved. Please check the input.'
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update_attributes(project_params)
-      @project.create_activity :update, owner: current_user
+      add_to_feed(:update)
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else
       # TODO change this to notify for invalid params
@@ -51,13 +51,9 @@ class ProjectsController < ApplicationController
 
   def mercury_update
     set_project
-    #@project = Project.find(params[:id])
     @project.update_attributes(pitch: params[:content][:pitch_content][:value])
-    #@project.pitch = params[:content][:pitch_content][:value]
-    binding.pry
-# need to build in a condition here
-    #@project.save!
-    render text: ""
+    add_to_feed(:update)
+    render text: ''
   end
 
   def mercury_saved
@@ -78,7 +74,6 @@ class ProjectsController < ApplicationController
     set_project
     if current_user
       current_user.follow(@project)
-
       redirect_to project_path(@project)
       flash[:notice] = "You just joined #{@project.title}."
     else
@@ -88,9 +83,7 @@ class ProjectsController < ApplicationController
 
   def unfollow
     set_project
-
     current_user.stop_following(@project)
-
     redirect_to project_path(@project)
     flash[:notice] = "You are no longer a member of #{@project.title}."
   end
@@ -99,6 +92,10 @@ class ProjectsController < ApplicationController
   def set_project
     @project = Project.friendly.find(params[:id])
     @project
+  end
+
+  def add_to_feed(action)
+    @project.create_activity action, owner: current_user
   end
 
   def get_current_stories
@@ -118,8 +115,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    # permit the mass assignments
-    params.require(:project).permit(:title, :description, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id)
+    params.require(:project).permit(:title, :description, :pitch, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id)
   end
-
 end

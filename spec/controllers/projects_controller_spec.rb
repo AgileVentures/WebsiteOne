@@ -232,7 +232,8 @@ describe ProjectsController, :type => :controller do
       end
 
       it 'received :create_activity with :update' do
-        expect(@project).to have_received(:create_activity).with(:update, {owner: @user })
+        expect(@project).to have_received(:create_activity)
+                            .with(:update, {owner: @user })
       end
 
       it 'redirects to the project' do
@@ -261,28 +262,33 @@ describe ProjectsController, :type => :controller do
     context 'pitch update with Mercury' do
       @project = FactoryGirl.create(:project)
       let(:params) do
-            {content:
-                 {pitch_content:
-                      {value: 'Codealia believes in diversity and we aspire to'},
-                 project: @project}
-            }
+            {:id=>@project,
+             :content=>
+                 {:pitch_content=>{:value=>"my new pitch"},
+                  }}
       end
+      let(:project) { @project }
+
       before(:each) do
         allow(@project).to receive(:update_attributes).and_return(true)
+        allow(project).to receive(:create_activity)
+        put :mercury_update, params
+
       end
 
       it 'should render an empty string' do
-        put :mercury_update, params
         expect(response.body).to be_empty
       end
 
 
       it 'should update the project pitch with the content' do
-        #binding.pry
-        #put mercury_update_project_path, params
-        put :mercury_update, params
-        expect(@project).to have_received(:update_attributes)
+        expect(project).to have_received(:update_attributes)
                             .with(pitch: 'my new pitch')
+      end
+
+      it 'received :create_activity with :update' do
+        expect(project).to have_received(:create_activity)
+                            .with(:update, owner: @user)
       end
     end
   end

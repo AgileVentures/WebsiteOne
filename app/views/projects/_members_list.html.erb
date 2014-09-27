@@ -11,10 +11,12 @@
                      data-placement="top" title="<%= presenter.display_name %>">
                     <%= presenter.gravatar_image(class: 'projects-user-avatar') %>
                     <div class="media-body index-summary">
-                      <p class="media-heading"><%= presenter.display_name %></p>
-                      <% if member.country? %>
-                          <small><%= presenter.country %></small>
-                      <% end %>
+                      <div style="display: inline-flex;">
+                        <p class="media-heading"><%= presenter.display_name %></p>
+                        <% if member.country? %>
+                        <p><small>(<%= presenter.country %>)</small></p>
+                        <% end %>
+                      </div>
                     </div>
                   </a>
                 </li>
@@ -42,10 +44,12 @@
                        data-placement="top" title="<%= presenter.display_name %>">
                       <%= presenter.gravatar_image(class: 'projects-user-avatar') %>
                       <div class="media-body index-summary">
-                        <p class="media-heading"><%= presenter.display_name %></p>
-                        <% if member.country? %>
-                            <small><%= presenter.country %></small>
-                        <% end %>
+                        <div style="display: inline-flex;">
+                          <p class="media-heading"><%= presenter.display_name %></p>
+                          <% if member.country? %>
+                              <p><small>(<%= presenter.country %>)</small></p>
+                          <% end %>
+                        </div>
                       </div>
                     </a>
                   </li>
