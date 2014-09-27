@@ -164,6 +164,13 @@ Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
   end
 end
 
+Then /^I should( not)? see a flash "([^"]*)"$/ do |negative, string|
+  unless negative
+    expect(page).to have_css '.alert', text: string
+  else
+    expect(page).to_not have_css '.alert', text: string
+  end
+end
 
 Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
   within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }

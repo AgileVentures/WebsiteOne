@@ -76,7 +76,7 @@ for i in (1..3)
 end
 
 for i in (1..5)
-  u = User.create first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: Faker::Lorem.characters(10)
+  u = User.create first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: Faker::Lorem.characters(10), country: Faker::Address.country
   Project.all.sample(3).each do |p|
     u.follow p
   end
