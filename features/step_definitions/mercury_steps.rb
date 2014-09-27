@@ -3,8 +3,6 @@ When /^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/ do |button|
       'save' => 'mercury-save-button'
   }
   page.execute_script("$('.#{selector_for[button.downcase]}').click()")
-  #puts 'sleep(0.1)'
-  #sleep(0.1)
   wait_for_ajax
 end
 
