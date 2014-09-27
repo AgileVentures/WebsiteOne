@@ -41,7 +41,7 @@ describe 'projects/show.html.erb', type: :view do
     assign :stories, stories
   end
 
-  it "renders a link to the project's github page" do
+  it 'renders a link to the project\'s github page' do
     project.github_url = 'github.com/AgileVentures/myfriend'
     render
     expect(rendered).to have_link("#{project.github_url.split('/').last}", :href => project.github_url)
@@ -52,7 +52,7 @@ describe 'projects/show.html.erb', type: :view do
     expect(rendered).to have_text 'not linked to GitHub'
   end
 
-  it "renders a link to the project's Pivotal Tracker page" do
+  it 'renders a link to the project\'s Pivotal Tracker page' do
     project.pivotaltracker_url = 'www.pivotaltracker.com/s/projects/12345'
     render
     expect(rendered).to have_link("#{project.title}", :href => project.pivotaltracker_url)
@@ -107,6 +107,26 @@ describe 'projects/show.html.erb', type: :view do
     end
   end
 
+  context 'Project pitch tab' do
+    before(:each) do
+      render
+    end
+
+    context 'the project pitch is present' do
+
+      it 'renders pitch' do
+        expect(rendered).to have_text '\'I AM the greatest!\' - M. Ali'
+      end
+    end
+
+    context 'the project pitch is not set' do
+      let(:project) { FactoryGirl.build_stubbed(:project, user: user, pitch: nil) }
+
+      it 'renders default message if no pitch is present' do
+        expect(rendered).to have_text 'Project content missing :( A compelling pitch can make your project more appealing to potential collaborators. Please edit project details to add pitch content.'
+      end
+    end
+  end
 
   context 'Pivotal Tracker stories' do
     it 'renders a message when no Pivotal Tracker stories are found' do
@@ -202,7 +222,7 @@ describe 'projects/show.html.erb', type: :view do
         expect(rendered).to have_css('button#actions-dropdown', text: 'Project Actions')
         rendered.within('ul.list-inline') do |content|
           expect(content).to have_css('a', text: 'Edit Project Details')
-          expect(content).to have_css('a', text: 'Edit Pitch');
+          expect(content).to have_css('a', text: 'Edit Project Pitch')
           expect(content).to have_css('a', text: 'Create new document')
           expect(content).to have_css('a', text: 'Leave Project')
         end
