@@ -159,3 +159,11 @@ Then(/^I should see (\d+) member avatars$/) do |count|
 
 end
 
+
+Given(/^I am allowed to edit pitch for project "([^"]*)"$/) do |project|
+  step %Q{
+    Given I am logged in
+    And I am on the "Show" page for project "#{project}"
+    And I click the "Join Project" button
+       }
+end
