@@ -229,6 +229,18 @@ describe Event, :type => :model do
       @event.remove_from_schedule(Time.parse('2013-6-16 09:00:00 UTC'))
       expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-23 09:00:00 UTC')
     end
+
+    it 'should return the event instance when it is not recurring and the event occurs in the future' do
+      @event.update_attribute(:repeats, 'never')
+      Delorean.time_travel_to(Time.parse('2013-06-05 09:27:00 UTC'))
+      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-10 09:00:00 UTC')
+    end
+
+    it 'should not return the event instance when it is not recurring' do
+      @event.update_attribute(:repeats, 'never')
+      Delorean.time_travel_to(Time.parse('2013-06-15 09:27:00 UTC'))
+      expect(@event.next_event_occurrence_with_time).to be_nil
+    end
   end
 
   describe '#next_occurences' do
