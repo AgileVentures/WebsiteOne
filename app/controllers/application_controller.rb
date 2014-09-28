@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   private
 
   def black_listed_urls
-    [ 
+    @@black_listed_urls ||= [
          user_session_path,
          new_user_registration_path,
          new_user_password_path,
@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
-    if conventional_get_request? && !black_listed_url?(black_listed_urls)  
+    if conventional_get_request? && !black_listed_url?(black_listed_urls)
       session[:previous_url] = request.fullpath 
     end
   end
