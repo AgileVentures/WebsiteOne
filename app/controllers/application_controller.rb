@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
-  before_filter :get_next_scrum, :store_location
+  before_filter :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   include ApplicationHelper
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   end
 
   def conventional_get_request?
-    request.get? && !request.xhr?
+    request.get?
   end	
 
   def get_next_scrum
