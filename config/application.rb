@@ -30,7 +30,7 @@ module WebsiteOne
 
     # Precompile additional assets.
     # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-    config.assets.precompile += %w( mercury_init.js 404.js projects.js events.js google-analytics.js disqus.js hangouts.js )
+    config.assets.precompile += %w( mercury_init.js 404.js projects.js events.js google-analytics.js disqus.js event_instances.js )
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
   end
