@@ -6,6 +6,8 @@ describe User, :type => :model do
 
   subject { build_stubbed :user }
 
+  it { is_expected.to respond_to :status }
+
   it 'should be invalid without email' do
     expect(build_stubbed(:user, email: '')).to_not be_valid
   end

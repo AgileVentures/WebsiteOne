@@ -1,5 +1,11 @@
 WebsiteOne::Application.routes.draw do
 
+  get 'statuses/index'
+
+  get 'statuses/show'
+
+  get 'statuses/create'
+
   mount Mercury::Engine => '/'
 
   root 'visitors#index'

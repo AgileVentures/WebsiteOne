@@ -39,3 +39,11 @@
     <p><%= simple_format(presenter.bio) %></p>
   </section>
 <% end %>
+
+<% if presenter.status? %>
+    <section class="user-bio">
+      <h4>Status</h4>
+
+      <p><%= simple_format(presenter.status) %></p>
+    </section>
+<% end %>
