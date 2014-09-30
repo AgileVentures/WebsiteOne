@@ -64,4 +64,12 @@ class UserPresenter < BasePresenter
     user.is_a?(NullUser) ? '#' : url_helpers.user_path(user)
   end
 
+  def status
+    content_tag(:span, user.status.last[:status])
+  end
+
+  def status?
+    user.status.count > 0
+  end
+
 end
