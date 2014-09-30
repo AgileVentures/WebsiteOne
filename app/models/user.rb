@@ -90,4 +90,8 @@ class User < ActiveRecord::Base
     find_by(github_profile_url: github_url)
   end
 
+  def online?
+    updated_at > 10.minutes.ago
+  end
+
 end
