@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'users/index.html.erb', :type => :view do
   before(:each) do
     @users = FactoryGirl.build_list(:user, 4, updated_at: '2013-09-30 05:00:00 UTC')
-    allow(@user).to receive(:following?).and_return(false)
+    #allow(@user).to receive(:following?)
   end
 
   it 'should display user filter form' do
@@ -38,7 +38,7 @@ describe 'users/index.html.erb', :type => :view do
     end
   end
 
-  context 'there are users online' do
+  context 'display user status' do
 
     before(:each) do
       @users_online = FactoryGirl.create_list(:user, 4, updated_at: '2014-09-30 05:00:00 UTC')
@@ -50,17 +50,22 @@ describe 'users/index.html.erb', :type => :view do
       Delorean.back_to_the_present
     end
 
-    it 'display green dot if users are online' do
+    it 'display green dot for online users' do
       Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
       render
       expect(rendered).to have_css('img[src*="/assets/green-dot.png"]')
     end
 
-    it 'do not display green dot if users are online' do
+    it 'there should be 4 green dots' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
+      render
+      expect(rendered).to have_css('img[src*="/assets/green-dot.png"]', count: 4)
+    end
+
+    it 'do not display green dot for offline users' do
       Delorean.time_travel_to(Time.parse('2014-09-30 05:19:00 UTC'))
       render
       expect(rendered).to_not have_css('img[src*="/assets/green-dot.png"]')
     end
-
   end
 end

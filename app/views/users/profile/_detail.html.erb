@@ -35,15 +35,13 @@
 <% if presenter.bio? %>
   <section class="user-bio">
     <h4>About me</h4>
-
-    <p><%= simple_format(presenter.bio) %></p>
+    <%= simple_format(presenter.bio) %>
   </section>
 <% end %>
 
-<% if presenter.status? %>
-    <section class="user-bio">
+<% if @user.online? & presenter.status? %>
+    <section class="user-status">
       <h4>Status</h4>
-
-      <p><%= simple_format(presenter.status) %></p>
+     <%= simple_format(presenter.status) %>
     </section>
 <% end %>
