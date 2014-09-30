@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       u.permit(:first_name, :last_name, :email, :bio, :password,
                :password_confirmation, :current_password,
                :display_email, :display_profile, :display_hire_me,
-               :receive_mailings)
+               :receive_mailings, status_attributes: [:status, :user_id])
     end
   end
 

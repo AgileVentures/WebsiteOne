@@ -23,12 +23,21 @@ class UsersController < ApplicationController
 
   def show
     @user = User.friendly.find(params[:id])
-
+    @status = Status.where(user_id: @user.id)
     if should_display_user?(@user)
       @youtube_videos  = YoutubeVideos.for(@user).first(5)
     else
       raise ActiveRecord::RecordNotFound.new("User has not exposed his profile publicly")
     end
+  end
+
+  def add_status
+    if @user.status.create(params[:status])
+      flash[:notice] = 'Your status has been set'
+    else
+      flash[:alert] = 'Something went wrong...'
+    end
+    redirect_to session[:previous_url]
   end
 
   private
@@ -37,12 +46,4 @@ class UsersController < ApplicationController
     user.display_profile || current_user == @user
   end
 
-  def add_status
-    if @user.status.update_attributes(params[:status])
-      flash[:notice] = 'Your status have been set'
-    else
-      flash[:alert] = 'Something went wrong...'
-    end
-    redirect_to session[:previous_url]
-  end
 end
