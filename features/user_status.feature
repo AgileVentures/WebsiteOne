@@ -36,8 +36,10 @@ Feature: User status
     And I visit Bob's profile page
     Then I should not see "I'm offline"
 
-
+  @javascript
   Scenario: Set status
     Given I am logged in as user with name "Thomas", email "thomas@agileventures.org", with password "qwerty1234"
     And I am on my "Profile" page
-    Then I should see link "Add current status" with "add_status_user_path"
+    And I click "Set status"
+    Then show me the page
+    Then I should see a modal

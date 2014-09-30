@@ -1,11 +1,5 @@
 WebsiteOne::Application.routes.draw do
 
-  get 'statuses/index'
-
-  get 'statuses/show'
-
-  get 'statuses/create'
-
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
@@ -13,9 +7,7 @@ WebsiteOne::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false do
-    member do
-      patch :add_status
-    end
+    resources :status
   end
 
   resources :articles, :format => false do
