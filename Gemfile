@@ -5,6 +5,7 @@ gem 'rails', '4.1.0'
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.1'
 # End additions
 
+gem 'puma' # Puma web server
 gem 'pg'  # PostgreSQL database support
 gem 'sass-rails', '~> 4.0.0' # Sass stylesheet language
 gem 'uglifier'  # Javascript compressor
@@ -35,7 +36,7 @@ gem 'geocoder' # geocoding
 gem 'bootstrap-modal-rails'
 gem 'paper_trail'  # version control for Document
 gem 'verbs'   # language and verbs - not used for now but I plan to use it in Events /Thomas
-gem 'ice_cube'     # used for Event
+gem 'ice_cube', '0.11.1'     # used to generate event schedules, locked to last known version not to have memory leaks
 gem 'jquery-turbolinks'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
@@ -49,8 +50,9 @@ gem 'yui-compressor'
 gem 'compass-rails'
 gem 'rack-cache'
 gem 'sprockets-image_compressor'
-gem 'local_time'
+gem 'rack-timeout'
 
+gem 'local_time'
 gem 'rails_config' # a gem to manage configuration files
 gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
 gem 'octokit' # Ruby wrapper for the GitHub API
@@ -90,7 +92,6 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'unicorn' # Unicorn web server
   gem 'newrelic_rpm' # New Relic analytics
 end
 
