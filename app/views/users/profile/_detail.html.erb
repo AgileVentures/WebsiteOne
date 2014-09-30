@@ -59,8 +59,7 @@
         <h4 class="modal-title">Set status</h4>
       </div>
       <div class="modal-body">
-        <%= form_for @status do |f| %>
-            <% binding.pry %>
+        <%= form_for @user, url: add_status_user_path do |f| %>
             <%= f.fields_for :status do |ff| %>
                 <%= ff.label :status %>
                 <%= ff.text_field :status %>
