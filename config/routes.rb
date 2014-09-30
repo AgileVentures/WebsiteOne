@@ -12,7 +12,11 @@ WebsiteOne::Application.routes.draw do
   resources :activities
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
-  resources :users, :only => [:index, :show] , :format => false
+  resources :users, :only => [:index, :show] , :format => false do
+    member do
+      patch :add_status
+    end
+  end
 
   resources :articles, :format => false do
     member do
@@ -45,8 +49,6 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
-  #put 'projects/:id/mercury_update', to: 'project#mercury_update', as: 'mercury_update_project', :format => false
-  #get 'projects/:id/mercury_saved', to: 'projects#mercury_saved', as: 'mercury_saved_project', :format => false
 
   get '/verify/:id' => redirect {|params,request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}"}
 

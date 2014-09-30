@@ -10,6 +10,7 @@ Feature: User status
       | first_name | last_name | email                  | updated_at               |
       | Alice      | Jones     | alicejones@hotmail.com | 2014-09-30 05:09:00 UTC' |
       | Bob        | Butcher   | bobb112@hotmail.com    | 2014-09-30 04:00:00 UTC' |
+
     And the following statuses have been set
       | status         | user  |
       | I want to pair | Alice |
@@ -34,3 +35,9 @@ Feature: User status
     Given the date is "2014-09-30 05:15:00 UTC"
     And I visit Bob's profile page
     Then I should not see "I'm offline"
+
+
+  Scenario: Set status
+    Given I am logged in as user with name "Thomas", email "thomas@agileventures.org", with password "qwerty1234"
+    And I am on my "Profile" page
+    Then I should see link "Add current status" with "add_status_user_path"
