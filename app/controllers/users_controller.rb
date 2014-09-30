@@ -36,4 +36,13 @@ class UsersController < ApplicationController
   def should_display_user?(user)
     user.display_profile || current_user == @user
   end
+
+  def add_status
+    if @user.status.update_attributes(params[:status])
+      flash[:notice] = 'Your status have been set'
+    else
+      flash[:alert] = 'Something went wrong...'
+    end
+    redirect_to session[:previous_url]
+  end
 end
