@@ -7,6 +7,7 @@ describe User, :type => :model do
   subject { build_stubbed :user }
 
   it { is_expected.to respond_to :status }
+  it { is_expected.to respond_to :online? }
 
   it 'should be invalid without email' do
     expect(build_stubbed(:user, email: '')).to_not be_valid
@@ -140,7 +141,7 @@ describe User, :type => :model do
 
   end
 
-  describe "#followed_project_tags" do
+  describe '#followed_project_tags' do
     it 'returns project tags for projects with project title and tags and a scrum tag' do
       project_1 = build_stubbed(:project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
       project_2 = build_stubbed(:project, title: 'Black hole', tag_list: [])
@@ -194,6 +195,29 @@ describe User, :type => :model do
 
     it 'returns nil if no user exists' do
       expect(User.find_by_github_username('unknown-guy')).to be_nil
+    end
+  end
+
+  describe 'user online?' do
+
+    let(:user) { @user }
+
+    before(:each) do
+      @user = FactoryGirl.create(:user, updated_at: '2014-09-30 05:00:00 UTC')
+    end
+
+    after(:each) do
+      Delorean.back_to_the_present
+    end
+
+    it 'returns true if touched in last 10 minuters' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
+      expect(user.online?).to eq true
+    end
+
+    it 'returns false if touched more then 10 minutes ago' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:12:00 UTC'))
+      expect(user.online?).to eq false
     end
   end
 end

@@ -1,14 +1,15 @@
 require 'spec_helper'
 
-describe "users/index.html.erb", :type => :view do
+describe 'users/index.html.erb', :type => :view do
   before(:each) do
-    @users = FactoryGirl.build_list(:user, 4)
+    @users = FactoryGirl.build_list(:user, 4, updated_at: '2013-09-30 05:00:00 UTC')
+    allow(@user).to receive(:following?).and_return(false)
   end
 
   it 'should display user filter form' do
     render
     expect(rendered).to have_content('Filter users')
-    expect(rendered).to have_css("#user-filter")
+    expect(rendered).to have_css('#user-filter')
   end
 
   it 'should display a list of users' do
@@ -35,5 +36,31 @@ describe "users/index.html.erb", :type => :view do
       render
       expect(rendered).to have_content('It is a lonely planet we live in')
     end
+  end
+
+  context 'there are users online' do
+
+    before(:each) do
+      @users_online = FactoryGirl.create_list(:user, 4, updated_at: '2014-09-30 05:00:00 UTC')
+      @users_offline = FactoryGirl.create_list(:user, 4, updated_at: '2014-09-30 04:00:00 UTC')
+      @users = [@users_online, @users_offline].flatten
+    end
+
+    after(:each) do
+      Delorean.back_to_the_present
+    end
+
+    it 'display green dot if users are online' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
+      render
+      expect(rendered).to have_css('img[src*="/assets/green-dot.png"]')
+    end
+
+    it 'do not display green dot if users are online' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:19:00 UTC'))
+      render
+      expect(rendered).to_not have_css('img[src*="/assets/green-dot.png"]')
+    end
+
   end
 end

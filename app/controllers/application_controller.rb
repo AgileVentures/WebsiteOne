@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
+  after_filter :user_activity
 
   include ApplicationHelper
   include CustomErrors
@@ -52,4 +53,9 @@ class ApplicationController < ActionController::Base
       session[:previous_url] = request.fullpath
     end
   end
+
+  def user_activity
+    current_user.try :touch
+  end
+
 end
