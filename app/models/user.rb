@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
   has_many :commit_counts
   has_many :status, :foreign_key => 'user_id', :class_name => 'Status'
 
+  accepts_nested_attributes_for :status
+
   self.per_page = 30
 
   def apply_omniauth(omniauth)
