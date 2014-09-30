@@ -59,12 +59,13 @@
         <h4 class="modal-title">Set status</h4>
       </div>
       <div class="modal-body">
-        <%= form_for @user do |f| %>
-          <%= f.has_many :status do |ff| %>
-            <%= ff.label :status %>
-            <%= ff.text_field :status %>
-          <% end %>
-          <%= f.submit %>
+        <%= form_for @status do |f| %>
+            <% binding.pry %>
+            <%= f.fields_for :status do |ff| %>
+                <%= ff.label :status %>
+                <%= ff.text_field :status %>
+            <% end %>
+            <%= f.submit %>
         <% end %>
       </div>
       <div class="modal-footer">

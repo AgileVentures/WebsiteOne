@@ -3,6 +3,12 @@ class UsersController < ApplicationController
     @users = User.search(params)
   end
 
+  def new
+    @user.status.create
+    super
+
+  end
+
   def hire_me_contact_form
     message_params = params['message_form']
     request.env['HTTP_REFERER'] ||= root_path
@@ -23,7 +29,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.friendly.find(params[:id])
-    @status = Status.where(user_id: @user.id)
+
     if should_display_user?(@user)
       @youtube_videos  = YoutubeVideos.for(@user).first(5)
     else
@@ -45,5 +51,13 @@ class UsersController < ApplicationController
   def should_display_user?(user)
     user.display_profile || current_user == @user
   end
+
+  def safe_params
+    safe_attributes = [
+        status_attributes: [:status, :user_id]
+    ]
+    params.require(:status).permit(*safe_attributes)
+  end
+
 
 end
