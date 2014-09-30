@@ -4,9 +4,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user.status.create
-    super
-
+    @user = User.new
+    @user.status.build
   end
 
   def hire_me_contact_form
@@ -38,7 +37,9 @@ class UsersController < ApplicationController
   end
 
   def add_status
-    if @user.status.create(params[:status])
+    @user = User.friendly.find(params[:id])
+    binding.pry
+    if @user.status.create(attributes={status: (params[:user][:status_attributes]['0'][:status])})
       flash[:notice] = 'Your status has been set'
     else
       flash[:alert] = 'Something went wrong...'
