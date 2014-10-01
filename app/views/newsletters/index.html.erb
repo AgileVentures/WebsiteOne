@@ -1,0 +1,29 @@
+<h1>Listing newsletters</h1>
+
+<table class='table table-striped table-hover'>
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Title</th>
+      <th>Sent at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @newsletters.each do |newsletter| %>
+      <tr class=<%= 'warning' unless newsletter.was_sent? %>>
+        <td><%= truncate(newsletter.subject, length: 20 ) %></td>
+        <td><%= truncate(newsletter.title, length: 20) %></td>
+        <td><%= l(newsletter.sent_at, format: :short) if newsletter.sent_at %></td>
+        <td><%= link_to 'Show', newsletter %></td>
+        <td><%= link_to 'Edit', edit_newsletter_path(newsletter) if privileged_visitor? %></td>
+        <td><%= link_to 'Destroy', newsletter, method: :delete, data: { confirm: 'Are you sure?' } if privileged_visitor? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Newsletter', new_newsletter_path if privileged_visitor? %>

@@ -4,6 +4,7 @@ WebsiteOne::Application.routes.draw do
 
   root 'visitors#index'
   resources :activities
+  resources :newsletters
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false do

@@ -45,6 +45,16 @@ describe User, :type => :model do
     expect(build_stubbed(:user, password: 'aaa', password_confirmation: 'aaa')).to_not be_valid
   end
 
+  it 'should respond to is_privileged?' do
+    expect(FactoryGirl.build(:user)).to respond_to(:is_privileged?)
+  end
+
+  describe 'scopes' do
+    it '#mail_receiver' do
+      expect(User).to respond_to(:mail_receiver)
+    end
+  end
+
   describe 'slug generation' do
     subject {  FactoryGirl.build(:user, slug: nil) }
     it 'should automatically generate a slug' do
