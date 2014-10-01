@@ -1,8 +1,14 @@
-<% @options = ['Ready to pair', 'At work', 'Sleeping at my keyboard'] %>
+<% @options = ['Ready to pair',
+               'Doing code review',
+               'Plz, do NOT disturb',
+               'Just hanging out...',
+               'Waiting for next scrum...',
+               'At work',
+               'Sleeping at my keyboard'] %>
+
 <% if presenter.has_skills? %>
     <section class="user-skills">
       <h4>Skills & Technologies</h4>
-
       <ul>
         <% presenter.skill_list.each do |skill| %>
             <li><%= skill %></li>
