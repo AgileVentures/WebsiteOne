@@ -151,7 +151,9 @@ describe UsersController, :type => :controller do
   end
 
   describe 'PATCH add_status_user' do
-    let(:valid_attributes) { {user: {status: 'Sleeping at my keyboard'}} }
+    let(:user) { @user }
+    #let(:valid_attributes) { {FactoryGirl.attributes_for(:status)} }
+    let(:valid_attributes) { {action: 'add_status', controller: 'users', user:{status: 'Sleeping at my keyboard'}, id: @user.friendly_id} }
     let(:invalid_attributes) { {user: {status: '???'}} }
 
     before(:each) do
@@ -161,19 +163,22 @@ describe UsersController, :type => :controller do
 
     it 'should require user to be signed in' do
       controller.should_receive(:authenticate_user!)
-      patch :add_user_status, valid_attributes
+      patch :add_status, valid_attributes
     end
 
     it 'should redirect to user show page' do
-      expect(response).to redirect_to ....
+      #expect(response).to redirect_to ....
     end
 
     it 'should render a successful flash message' do
+      patch :add_status, valid_attributes
       expect(flash[:notice]).to eq 'Your status has been set'
     end
 
     it 'should render a failure flash message' do
-      patch :add_user_status, invalid_attributes
+      binding.pry
+
+      patch :add_status, valid_attributes
       expect(flash[:alert]).to eq 'Something went wrong...'
     end
 
