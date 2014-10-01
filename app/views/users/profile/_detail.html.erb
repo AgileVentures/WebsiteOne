@@ -51,16 +51,16 @@
           <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">Set status</h4>
       </div>
-      <div class="modal-body">
-        <%= form_for @user, url: add_status_user_path,  role: 'form' do |f| %>
-            <%= f.label :status, style: 'display: none;' %>
-            <%= f.select :status, @options, {}, :class => 'form-control' %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= f.submit class: 'btn btn-primary' %>
-        <% end %>
-      </div>
+      <%= form_for @user, url: add_status_user_path,  role: 'form' do |f| %>
+        <div class="modal-body">
+          <%= f.label :status, style: 'display: none;' %>
+          <%= f.select :status, @options, {}, :class => 'form-control' %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
