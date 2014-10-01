@@ -47,5 +47,15 @@
           type: 'button' %>
       </li>
     <% end %>
+    <li>
+      <% if @user.online? & presenter.status? %>
+
+          <i class="fa fa-github-alt fa-lg"></i> <%=presenter.status %>
+      <% end %>
+
+      <% if @user == current_user %>
+          <p><%= link_to('Set status', '#', data: {toggle: 'modal', target: '#myModal'}) %></p>
+      <% end %>
+    </li>
   </ul>
 </div>

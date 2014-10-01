@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController, :type => :controller do
 
-  describe "GET index" do
+  describe 'GET index' do
     it 'should return a status code of 200' do
       expect(response.code).to eq('200')
     end
@@ -149,4 +149,34 @@ describe UsersController, :type => :controller do
       end
     end
   end
+
+  describe 'PATCH add_status_user' do
+    let(:valid_attributes) { {user: {status: 'Sleeping at my keyboard'}} }
+    let(:invalid_attributes) { {user: {status: '???'}} }
+
+    before(:each) do
+      @user = build_stubbed(User)
+      controller.stub(:authenticate_user! => true)
+    end
+
+    it 'should require user to be signed in' do
+      controller.should_receive(:authenticate_user!)
+      patch :add_user_status, valid_attributes
+    end
+
+    it 'should redirect to user show page' do
+      expect(response).to redirect_to ....
+    end
+
+    it 'should render a successful flash message' do
+      expect(flash[:notice]).to eq 'Your status has been set'
+    end
+
+    it 'should render a failure flash message' do
+      patch :add_user_status, invalid_attributes
+      expect(flash[:alert]).to eq 'Something went wrong...'
+    end
+
+  end
+
 end

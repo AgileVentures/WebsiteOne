@@ -1,75 +1,65 @@
+<% @options = ['Ready to pair', 'At work', 'Sleeping at my keyboard'] %>
 <% if presenter.has_skills? %>
-  <section class="user-skills">
-    <h4>Skills & Technologies</h4>
+    <section class="user-skills">
+      <h4>Skills & Technologies</h4>
 
-    <ul>
-      <% presenter.skill_list.each do |skill| %>
-        <li><%= skill %></li>
-      <% end %>
-    </ul>
-  </section>
-<% end %>
-
-<% if presenter.joined_projects? %>
-  <section class="user-projects">
-    <h4>Projects Involvement</h4>
-    <ul>
-      <% presenter.following_projects.each do |project| %>
-        <li><%= link_to project.title, project_path(project) %></li>
-      <% end %>
-    </ul>
-  </section>
-<% end %>
-
-<% if presenter.contributed? %>
-  <section class="user-contributions">
-    <h4>Contributions</h4>
-    <ul>
-      <% presenter.contributions.each do |commit_count| %>
-        <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b> - <%= commit_count.commit_count %></li>
-      <% end %>
-    </ul>
-  </section>
-<% end %>
-
-<% if presenter.bio? %>
-  <section class="user-bio">
-    <h4>About me</h4>
-    <%= simple_format(presenter.bio) %>
-  </section>
-<% end %>
-
-<% if @user.online? & presenter.status? %>
-    <section class="user-status">
-      <h4>Status</h4>
-     <%= simple_format(presenter.status) %>
+      <ul>
+        <% presenter.skill_list.each do |skill| %>
+            <li><%= skill %></li>
+        <% end %>
+      </ul>
     </section>
 <% end %>
 
-<% if @user == current_user %>
-    <%= link_to("Set status", "#", data: {toggle: 'modal', target: '#myModal'}) %>
+<% if presenter.joined_projects? %>
+    <section class="user-projects">
+      <h4>Projects Involvement</h4>
+      <ul>
+        <% presenter.following_projects.each do |project| %>
+            <li><%= link_to project.title, project_path(project) %></li>
+        <% end %>
+      </ul>
+    </section>
 <% end %>
+
+<% if presenter.contributed? %>
+    <section class="user-contributions">
+      <h4>Contributions</h4>
+      <ul>
+        <% presenter.contributions.each do |commit_count| %>
+            <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b>
+              - <%= commit_count.commit_count %></li>
+        <% end %>
+      </ul>
+    </section>
+<% end %>
+
+<% if presenter.bio? %>
+    <section class="user-bio">
+      <h4>About me</h4>
+      <%= simple_format(presenter.bio) %>
+    </section>
+<% end %>
+
 <!-- modal start -->
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">Set status</h4>
       </div>
       <div class="modal-body">
-        <%= form_for @user, url: add_status_user_path do |f| %>
-            <%= f.fields_for :status do |ff| %>
-                <%= ff.label :status %>
-                <%= ff.text_field :status %>
-            <% end %>
-            <%= f.submit %>
-        <% end %>
+        <%= form_for @user, url: add_status_user_path,  role: 'form' do |f| %>
+            <%= f.label :status, style: 'display: none;' %>
+            <%= f.select :status, @options, {}, :class => 'form-control' %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <%= f.submit class: 'btn btn-primary' %>
+        <% end %>
       </div>
     </div>
   </div>

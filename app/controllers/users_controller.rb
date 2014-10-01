@@ -28,18 +28,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.friendly.find(params[:id])
-
     if should_display_user?(@user)
-      @youtube_videos  = YoutubeVideos.for(@user).first(5)
+      @youtube_videos = YoutubeVideos.for(@user).first(5)
     else
-      raise ActiveRecord::RecordNotFound.new("User has not exposed his profile publicly")
+      raise ActiveRecord::RecordNotFound.new('User has not exposed his profile publicly')
     end
   end
 
   def add_status
     @user = User.friendly.find(params[:id])
     binding.pry
-    if @user.status.create(attributes={status: (params[:user][:status_attributes]['0'][:status])})
+    if @user.status.create(attributes={status: (params[:user][:status]), user_id: @user})
       flash[:notice] = 'Your status has been set'
     else
       flash[:alert] = 'Something went wrong...'
@@ -51,13 +50,6 @@ class UsersController < ApplicationController
 
   def should_display_user?(user)
     user.display_profile || current_user == @user
-  end
-
-  def safe_params
-    safe_attributes = [
-        status_attributes: [:status, :user_id]
-    ]
-    params.require(:status).permit(*safe_attributes)
   end
 
 
