@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def add_status
     @user = User.friendly.find(params[:id])
-    binding.pry
+    # binding.pry
     if @user.status.create(attributes={status: (params[:user][:status]), user_id: @user})
       flash[:notice] = 'Your status has been set'
     else
