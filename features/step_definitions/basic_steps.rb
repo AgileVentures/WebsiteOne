@@ -40,6 +40,10 @@ def path_to(page_name, id = '')
       hookups_path
     when 'dashboard' then
       '/dashboard' 
+    when 'new newsletter' then
+      new_newsletter_path
+    when 'newsletters index' then
+      newsletters_path
     else
       raise('path to specified is not listed in #path_to')
   end

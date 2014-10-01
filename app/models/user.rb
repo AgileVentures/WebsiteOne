@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   has_many :status
 
   accepts_nested_attributes_for :status
+  scope     :mail_receiver, -> { where(receive_mailings: true) }
 
   self.per_page = 30
 
@@ -83,6 +84,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_privileged?
+    Settings.privileged_users.include?(email)
+  end
+  
   def self.search(params)
     where(display_profile: true)
       .order(:created_at)
@@ -102,5 +107,4 @@ class User < ActiveRecord::Base
   def send_slack_invite
     SlackInviteJob.new.async.perform(email)
   end
-
 end
