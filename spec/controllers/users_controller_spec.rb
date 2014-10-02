@@ -152,34 +152,36 @@ describe UsersController, :type => :controller do
 
   describe 'PATCH add_status_user' do
     let(:user) { @user }
-    let(:valid_attributes) { {user:{status: 'Sleeping at my keyboard', user_id: @user.friendly_id}, id: @user.friendly_id} }
-
+    let(:valid_attributes) { {status: 'Sleeping at my keyboard', user_id: @user.friendly_id} }
 
     before(:each) do
       @user = FactoryGirl.create(:user)
-      #controller.stub(:authenticate_user! => true)
       allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
     end
 
-    it 'should require user to be signed in' do
-      patch :add_status, valid_attributes
-      expect(request.env['warden']).to have_received(:authenticate!)
+    context 'with valid attributes' do
+      before(:each) do
+        patch :add_status, id: @user, user: valid_attributes
+      end
+
+      it 'should require user to be signed in' do
+        expect(request.env['warden']).to have_received(:authenticate!)
+      end
+
+      it 'should redirect to user show page' do
+        expect(response).to redirect_to user_path(@user)
+      end
+
+      it 'should render a successful flash message' do
+        expect(flash[:notice]).to eq 'Your status has been set'
+      end
     end
 
-    it 'should redirect to user show page' do
-      expect(response).to redirect_to user_path(@user)
+    context 'with invalid attributes' do
+      it 'should render a failure flash message' do
+        patch :add_status, id: @user, user: { }
+        expect(flash[:alert]).to eq 'Something went wrong...'
+      end
     end
-
-    it 'should render a successful flash message' do
-      patch :add_status, valid_attributes
-      expect(flash[:notice]).to eq 'Your status has been set'
-    end
-
-    it 'should render a failure flash message' do
-      patch :add_status, {user:{status: nil, user_id: @user.friendly_id}, id: @user.friendly_id}
-      expect(flash[:alert]).to eq 'Something went wrong...'
-    end
-
   end
-
 end
