@@ -130,6 +130,23 @@ describe UsersController, :type => :controller do
       end
     end
 
+    context 'with spam trap field filled out' do
+
+      before(:each) { post :hire_me_contact_form, message_form: { name: 'Thomas', email: 'example@example.com', message: 'spam', fellforit: 'I am a spammer!',  recipient_id: @user.id } }
+
+      it 'should redirect to the home page' do
+        expect(response).to redirect_to root_path
+      end 
+
+      it 'should not send an email' do
+        expect(mail.count).to eq 0
+      end
+
+      it 'should respond with "Form not submitted. Are you human?' do
+        expect(flash[:notice]).to eq 'Form not submitted. Are you human?'
+      end
+    end
+
     context 'with empty parameters' do
 
       it 'should not fail with empty params' do
