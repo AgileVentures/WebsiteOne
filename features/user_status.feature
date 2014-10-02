@@ -41,5 +41,7 @@ Feature: User status
     Given I am logged in as user with name "Thomas", email "thomas@agileventures.org", with password "qwerty1234"
     And I am on my "Profile" page
     And I click "Set status"
-    Then show me the page
-    Then I should see a modal
+    And I select "user_status" to "Ready to pair"
+    And I click "Update User"
+    Then I should see "Ready to pair"
+    
