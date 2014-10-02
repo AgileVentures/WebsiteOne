@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "users/show.html.erb" do
+describe 'users/show.html.erb' do
   before :each do
     now = DateTime.now
     thirty_days_ago = (now - 33)
@@ -27,7 +27,8 @@ describe "users/show.html.erb" do
     allow(@user).to receive(:following_projects_count).and_return(2)
     allow(@user).to receive(:commit_counts).and_return(@commit_counts)
     allow(@user).to receive(:following?).and_return(true)
-    allow(@user).to receive(:status).and_return(@status)
+    allow(@user).to receive(:status?).and_return(true)
+    allow(@user).to receive(:status).and_return(@user.status)
     allow(@commit_counts.first.project).to receive(:contribution_url).and_return('test_url')
 
     assign :user, @user
@@ -96,13 +97,13 @@ describe "users/show.html.erb" do
     it 'shows user country when known' do
       @user.country = 'Mozambique'
       render
-      expect(rendered).to have_selector "i[class='fa fa-globe fa-lg']"
+      expect(rendered).to have_selector 'i[class="fa fa-globe fa-lg"]'
       expect(rendered).to have_content @user.country
     end
 
     it 'does not show clock icon when user timezone cannot be determined' do
       render
-      expect(rendered).not_to have_selector "i[class='fa fa-clock-o fa-lg']"
+      expect(rendered).not_to have_selector 'i[class="fa fa-clock-o fa-lg"]'
     end
 
     it 'shows user timezone when it can be determined' do
@@ -110,7 +111,7 @@ describe "users/show.html.erb" do
       @user.longitude = 32.5833
       expect(NearestTimeZone).to receive(:to).with(@user.latitude, @user.longitude).and_return('Africa/Cairo')
       render
-      expect(rendered).to have_selector "i[class='fa fa-clock-o fa-lg']"
+      expect(rendered).to have_selector 'i[class="fa fa-clock-o fa-lg"]'
       expect(rendered).to have_content 'Africa/Cairo'
     end
   end
