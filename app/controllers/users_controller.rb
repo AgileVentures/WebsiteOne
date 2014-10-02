@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_filter :get_user, only: [:show, :add_status]
+
   def index
     @users = User.search(params)
   end
@@ -27,7 +30,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.friendly.find(params[:id])
     if should_display_user?(@user)
       @youtube_videos = YoutubeVideos.for(@user).first(5)
     else
@@ -36,14 +38,12 @@ class UsersController < ApplicationController
   end
 
   def add_status
-    @user = User.friendly.find(params[:id])
-    binding.pry
     if @user.status.create(attributes={status: (params[:user][:status]), user_id: @user})
       flash[:notice] = 'Your status has been set'
     else
       flash[:alert] = 'Something went wrong...'
     end
-    redirect_to session[:previous_url]
+    redirect_to :back
   end
 
   private
@@ -52,5 +52,8 @@ class UsersController < ApplicationController
     user.display_profile || current_user == @user
   end
 
+  def get_user
+    @user = User.friendly.find(params[:id])
+  end
 
 end

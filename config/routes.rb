@@ -70,3 +70,6 @@ WebsiteOne::Application.routes.draw do
 
 end
 
+
+
+
