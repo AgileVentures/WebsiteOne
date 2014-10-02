@@ -1,9 +1,10 @@
 GIT
-  remote: git://github.com/samdunne/omniauth-gplus.git
-  revision: 299971969829f46bae6795265dec2962d49f1ae0
+  remote: git://github.com/activerecord-hackery/polyamorous.git
+  revision: 0fa15a3fb2d1b6193018231bc8e19847cc90bfc4
+  branch: rails-4.1
   specs:
-    omniauth-gplus (2.0.1)
-      omniauth-oauth2 (~> 1.1)
+    polyamorous (0.6.4)
+      activerecord (>= 3.0)
 
 GIT
   remote: git://github.com/intridea/omniauth-github.git
@@ -22,12 +23,11 @@ GIT
       railties (>= 3.0)
 
 GIT
-  remote: git://github.com/activerecord-hackery/polyamorous.git
-  revision: 0fa15a3fb2d1b6193018231bc8e19847cc90bfc4
-  branch: rails-4.1
+  remote: git://github.com/samdunne/omniauth-gplus.git
+  revision: 299971969829f46bae6795265dec2962d49f1ae0
   specs:
-    polyamorous (0.6.4)
-      activerecord (>= 3.0)
+    omniauth-gplus (2.0.1)
+      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: https://rubygems.org/

@@ -150,9 +150,12 @@ this.Mercury.modalHandlers.insertMedia = {
                     frameborder: 0,
                     allowfullscreen: 'true'
                 });
+
+                wrapper = jQuery('<div>', { class: 'video-container' });
+                value.appendTo(wrapper);
                 return Mercury.trigger('action', {
                     action: 'insertHTML',
-                    value: value
+                    value: wrapper
                 });
             case 'vimeo_url':
                 url = this.element.find('#media_vimeo_url').val();
