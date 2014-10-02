@@ -25,6 +25,7 @@ describe 'users/index.html.erb', :type => :view do
       expect(rendered).to have_xpath("//a[contains(@href, '/users/#{user.slug}')]")
     end
   end
+
   context 'renders the users count in the sentence above' do
     it 'has valid users count' do
       render
