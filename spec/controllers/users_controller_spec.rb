@@ -159,12 +159,11 @@ describe UsersController, :type => :controller do
       @user = FactoryGirl.create(:user)
       #controller.stub(:authenticate_user! => true)
       allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
-
     end
 
     it 'should require user to be signed in' do
-      controller.should_receive(:authenticate_user!)
       patch :add_status, valid_attributes
+      expect(request.env['warden']).to have_received(:authenticate!)
     end
 
     it 'should redirect to user show page' do
