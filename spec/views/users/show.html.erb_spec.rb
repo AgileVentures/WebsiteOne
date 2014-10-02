@@ -9,7 +9,7 @@ describe "users/show.html.erb" do
         mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
         mock_model(Project, friendly_id: 'title-3', title: 'Title 3')
     ]
-    @user = FactoryGirl.build(:user,
+    @user = FactoryGirl.create(:user,
                               first_name: 'Eric',
                               last_name: 'Els',
                               email: 'eric@somemail.se',
@@ -18,12 +18,16 @@ describe "users/show.html.erb" do
                               github_profile_url: 'http://github.com/Eric',
                               skill_list: [ 'Shooting', 'Hooting' ],
                               bio: 'Lonesome Cowboy')
+
+    @user.status.create(attributes = FactoryGirl.attributes_for(:status))
+
     @commit_counts = [build_stubbed(:commit_count, project: @projects.first, user: @user, commit_count: 253)]
 
     allow(@user).to receive(:following_projects).and_return(@projects)
     allow(@user).to receive(:following_projects_count).and_return(2)
     allow(@user).to receive(:commit_counts).and_return(@commit_counts)
     allow(@user).to receive(:following?).and_return(true)
+    allow(@user).to receive(:status).and_return(@status)
     allow(@commit_counts.first.project).to receive(:contribution_url).and_return('test_url')
 
     assign :user, @user
