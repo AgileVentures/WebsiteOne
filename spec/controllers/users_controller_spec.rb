@@ -153,7 +153,7 @@ describe UsersController, :type => :controller do
   describe 'PATCH add_status_user' do
     let(:user) { @user }
     #let(:valid_attributes) { {FactoryGirl.attributes_for(:status)} }
-    let(:valid_attributes) { {action: 'add_status', controller: 'users', user:{status: 'Sleeping at my keyboard'}, id: @user.friendly_id} }
+    let(:valid_attributes) { {action: 'add_status', controller: 'users', user:{status: 'Sleeping at my keyboard', user_id: @user.friendly_id}, id: @user.friendly_id} }
     let(:invalid_attributes) { {user: {status: '???'}} }
 
     before(:each) do
