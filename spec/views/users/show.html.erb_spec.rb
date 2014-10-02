@@ -87,10 +87,15 @@ describe 'users/show.html.erb' do
     expect(rendered).to have_content(@user.last_name)
   end
 
+  it 'renders user status' do
+    render
+    expect(rendered).to have_content(@user.status.last[:status])
+  end
+
   describe 'geolocation' do
     it 'does not show globe icon when no country is set' do
       render
-      expect(rendered).not_to have_selector "i[class='fa fa-globe fa-lg']"
+      expect(rendered).not_to have_selector 'i[class="fa fa-globe fa-lg"]'
     end
 
     it 'shows user country when known' do

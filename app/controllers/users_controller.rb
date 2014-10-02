@@ -39,13 +39,16 @@ class UsersController < ApplicationController
   end
 
   def add_status
-    if @user.status.create(attributes={status: (params[:user][:status]), user_id: @user})
+    unless params.nil? || params[:user][:status].blank? || params[:id].blank?
+      @user.status.create(attributes={status: (params[:user][:status]), user_id: @user})
       flash[:notice] = 'Your status has been set'
+      redirect_to user_path(@user)
     else
       flash[:alert] = 'Something went wrong...'
+      render :show
     end
-    redirect_to :back
   end
+
 
   private
 
@@ -56,5 +59,4 @@ class UsersController < ApplicationController
   def get_user
     @user = User.friendly.find(params[:id])
   end
-
 end
