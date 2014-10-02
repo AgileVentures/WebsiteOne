@@ -16,6 +16,9 @@
           <div class='form-group'>
             <%= f.text_area :message, :id => "f-message", :class => 'form-control', placeholder: 'Message', 'rows' => 5 %>
           </div>
+          <div class='form-group'>
+            <%= f.text_field :fellforit, :id => "f-fellforit", :class => 'form-control', placeholder: 'How can we help you?' %>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <%= f.submit 'Send message', id: 'send', :class => 'btn btn-primary' %>

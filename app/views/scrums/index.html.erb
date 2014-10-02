@@ -2,7 +2,9 @@
 <div class="row">
   <div class="col-xs-12 col-sm-10">
     <h1>Previous scrums</h1>
-    <p>We have regular daily meetings (scrums) online where our members get together, discuss projects, share knowledge and plan programming sessions. </p>
+
+    <p>We have regular daily meetings (scrums) online where our members get together, discuss projects, share knowledge
+      and plan programming sessions. </p>
   </div>
 </div>
 <!-- Modal -->
@@ -14,7 +16,9 @@
         <h4 class="modal-title" id="playerTitle"></h4>
       </div>
       <div class="modal-body">
-        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        <div class="video-container">
+          <iframe width="560" height="315" src="" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -22,23 +26,27 @@
 
 <ul class="timeline">
   <% @scrums.each_slice(2) do |videos| %>
-        <li class="arrow-left">
-          <div class="timeline-badge"><i class="fa fa-film"></i></div>
-          <div class="timeline-panel" >
-            <div class="timeline-heading">
-                <%= scrum_link videos.first %>
-                <p><small><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:published].to_date %></small></p>
-            </div>
+      <li class="arrow-left">
+        <div class="timeline-badge"><i class="fa fa-film"></i></div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <%= scrum_link videos.first %>
+            <p>
+              <small><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:published].to_date %></small>
+            </p>
           </div>
-        </li>
-        <li class="timeline-inverted arrow-right">
-          <div class="timeline-badge warning"><i class="fa fa-film"></i></div>
-          <div class="timeline-panel" >
-            <div class="timeline-heading">
-                <%= scrum_link videos.last %>
-                <p><small><i class="fa fa-clock-o"></i><%= videos.last[:published].to_s(:db) %></small></p>
-            </div>
+        </div>
+      </li>
+      <li class="timeline-inverted arrow-right">
+        <div class="timeline-badge warning"><i class="fa fa-film"></i></div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <%= scrum_link videos.last %>
+            <p>
+              <small><i class="fa fa-clock-o"></i><%= videos.last[:published].to_s(:db) %></small>
+            </p>
           </div>
-        </li>
+        </div>
+      </li>
   <% end %>
-  </ul>
+</ul>
