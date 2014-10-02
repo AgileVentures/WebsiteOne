@@ -28,7 +28,6 @@ describe 'users/show.html.erb' do
     allow(@user).to receive(:commit_counts).and_return(@commit_counts)
     allow(@user).to receive(:following?).and_return(true)
     allow(@user).to receive(:status?).and_return(true)
-    allow(@user).to receive(:status).and_return(@user.status)
     allow(@commit_counts.first.project).to receive(:contribution_url).and_return('test_url')
 
     assign :user, @user

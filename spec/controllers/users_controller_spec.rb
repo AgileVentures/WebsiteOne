@@ -152,13 +152,14 @@ describe UsersController, :type => :controller do
 
   describe 'PATCH add_status_user' do
     let(:user) { @user }
-    #let(:valid_attributes) { {FactoryGirl.attributes_for(:status)} }
-    let(:valid_attributes) { {action: 'add_status', controller: 'users', user:{status: 'Sleeping at my keyboard', user_id: @user.friendly_id}, id: @user.friendly_id} }
-    let(:invalid_attributes) { {user: {status: '???'}} }
+    let(:valid_attributes) { {user:{status: 'Sleeping at my keyboard', user_id: @user.friendly_id}, id: @user.friendly_id} }
+
 
     before(:each) do
-      @user = build_stubbed(User)
-      controller.stub(:authenticate_user! => true)
+      @user = FactoryGirl.create(:user)
+      #controller.stub(:authenticate_user! => true)
+      allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
+
     end
 
     it 'should require user to be signed in' do
@@ -167,7 +168,7 @@ describe UsersController, :type => :controller do
     end
 
     it 'should redirect to user show page' do
-      #expect(response).to redirect_to ....
+      expect(response).to redirect_to user_path(@user)
     end
 
     it 'should render a successful flash message' do
@@ -176,9 +177,7 @@ describe UsersController, :type => :controller do
     end
 
     it 'should render a failure flash message' do
-      binding.pry
-
-      patch :add_status, valid_attributes
+      patch :add_status, {user:{status: nil, user_id: @user.friendly_id}, id: @user.friendly_id}
       expect(flash[:alert]).to eq 'Something went wrong...'
     end
 
