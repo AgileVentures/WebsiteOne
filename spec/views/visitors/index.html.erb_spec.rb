@@ -11,6 +11,41 @@ describe 'visitors/index.html.erb', type: :view do
                                         next_occurrence_time_attr: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
   end
 
+  describe 'should display content/elements from partials' do
+    before(:each) do
+      render
+    end
+
+    it {expect(rendered).to render_template(partial: 'layouts/_meta_tags')}
+    it {expect(rendered).to render_template(partial: 'layouts/_head')}
+    it {expect(rendered).to render_template(partial: 'layouts/_flash')}
+    it {expect(rendered).to render_template(partial: 'layouts/_navbar')}
+    it {expect(rendered).to render_template(partial: 'layouts/_event_link')}
+    it {expect(rendered).to render_template(partial: 'layouts/_round_banners')}
+    it {expect(rendered).to render_template(partial: 'layouts/_footer')}
+
+  end
+
+  describe 'should link to topic pages from round banners' do
+    before(:each) do
+      render
+    end
+
+    it 'link to Learn' do
+      expect(rendered).to have_link 'Read more..', static_page_path('Learn')
+    end
+    it 'link to Code' do
+      expect(rendered).to have_link 'Read more..', static_page_path('Code')
+    end
+    it 'link to Pair' do
+      expect(rendered).to have_link 'Read more..', static_page_path('Pair')
+    end
+    it 'link to Grow' do
+      expect(rendered).to have_link 'Read more..', static_page_path('Grow')
+    end
+  end
+
+
   context 'event is planned for next day' do
     before :each do
       fix_time_at('2014-03-05 09:15:00 UTC')

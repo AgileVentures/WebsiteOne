@@ -12,7 +12,8 @@ class UsersController < ApplicationController
         message_params['email'].blank? or
         message_params['message'].blank?
       redirect_to :back, alert: 'Please fill in Name, Email and Message field'
-
+    elsif !message_params['fellforit'].blank?
+      redirect_to :root, notice: 'Form not submitted. Are you human?'
     elsif Mailer.hire_me_form(User.find(message_params['recipient_id']), message_params).deliver
       redirect_to :back, notice: 'Your message has been sent successfully!'
 

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Event, :type => :model do
+  before(:each) do
+    ENV['TZ'] = 'UTC'
+  end
+
   subject { build_stubbed :event }
 
   it { is_expected.to respond_to :friendly_id }
