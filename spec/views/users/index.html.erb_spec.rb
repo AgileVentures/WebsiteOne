@@ -45,6 +45,8 @@ describe 'users/index.html.erb', :type => :view do
       @users_online = FactoryGirl.create_list(:user, 4, updated_at: '2014-09-30 05:00:00 UTC')
       @users_offline = FactoryGirl.create_list(:user, 4, updated_at: '2014-09-30 04:00:00 UTC')
       @users = [@users_online, @users_offline].flatten
+      user = @users_online.first
+      user.status.create(attributes = FactoryGirl.attributes_for(:status))
     end
 
     after(:each) do
@@ -67,6 +69,15 @@ describe 'users/index.html.erb', :type => :view do
       Delorean.time_travel_to(Time.parse('2014-09-30 05:19:00 UTC'))
       render
       expect(rendered).to_not have_css('img[src*="/assets/green-dot.png"]')
+    end
+
+    it 'displays the user\'s status with a speech bubble' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
+      render
+      rendered.within('div#user-status') do |status|
+        expect(status).to have_content("\"My status\"")
+        expect(status).to have_css(".glyphicon-comment")
+      end
     end
   end
 end
