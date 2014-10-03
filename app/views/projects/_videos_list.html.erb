@@ -1,7 +1,10 @@
 <% unless @videos.empty? %>
     <div class="col-sm-12">
       <h4 id="video_contents"><%= @videos.first[:content] %></h4>
-      <iframe id="ytplayer" type="text/html" width="480" height="320" src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
+
+      <div class="video-container">
+        <iframe id="ytplayer" type="text/html" width="480" height="320" src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
+      </div>
     </div>
     <div class="col-sm-12">
       <h2>List of Project videos</h2>
@@ -19,7 +22,7 @@
             </tr>
         <% end %>
       </table>
-      </div>
+    </div>
 <% else %>
     <p>No videos in project <strong><%= @project.title %></strong></p>
 <% end %>
