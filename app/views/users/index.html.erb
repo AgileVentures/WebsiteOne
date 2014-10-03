@@ -38,11 +38,13 @@
                           <% if user.country? %>
                               <p><%= presenter.country %></p>
                           <% end %>
-                          <% if user.online? & presenter.status? %>
-                              <p><%= presenter.status %></p>
-                          <% end %>
                         </div>
                       </a>
+                      <% if user.online? & presenter.status? %>
+                        <div class="user-status" id="user-status">
+                          <span style= "margin-right: 5px;"class="glyphicon glyphicon-comment"></span>"<%= presenter.status %>"
+                        </div>
+                      <% end %>
                     </li>
                 <% end %>
             <% end %>
