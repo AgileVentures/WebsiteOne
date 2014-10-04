@@ -19,7 +19,7 @@ Feature: User status
   @time-travel-step
   Scenario: I should see a users status on index page if user is online
     Given the date is "2014-09-30 05:15:00 UTC"
-    And I visit "/users"
+    And I am on the "members" page
     And I should see "2" user avatars within the main content
     And I should see "I want to pair"
     And I should not see "I'm offline"

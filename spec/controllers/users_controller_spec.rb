@@ -168,17 +168,17 @@ describe UsersController, :type => :controller do
   end
 
   describe 'PATCH add_status_user' do
-    let(:user) { @user }
-    let(:valid_attributes) { {status: 'Sleeping at my keyboard', user_id: @user.friendly_id} }
+    let(:user) { FactoryGirl.create(:user) }
+    let(:valid_attributes) { {status: 'Sleeping at my keyboard', user_id: user.friendly_id} }
 
     before(:each) do
-      @user = FactoryGirl.create(:user)
-      allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
+      #@user = FactoryGirl.create(:user)
+      allow(request.env['warden']).to receive(:authenticate!).and_return(user)
     end
 
     context 'with valid attributes' do
       before(:each) do
-        patch :add_status, id: @user, user: valid_attributes
+        patch :add_status, id: user, user: valid_attributes
       end
 
       it 'should require user to be signed in' do
@@ -186,7 +186,7 @@ describe UsersController, :type => :controller do
       end
 
       it 'should redirect to user show page' do
-        expect(response).to redirect_to user_path(@user)
+        expect(response).to redirect_to user_path(user)
       end
 
       it 'should render a successful flash message' do
@@ -196,7 +196,7 @@ describe UsersController, :type => :controller do
 
     context 'with invalid attributes' do
       it 'should render a failure flash message' do
-        patch :add_status, id: @user, user: { }
+        patch :add_status, id: user, user: { }
         expect(flash[:alert]).to eq 'Something went wrong...'
       end
     end

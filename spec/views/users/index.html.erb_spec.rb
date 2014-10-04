@@ -3,7 +3,6 @@ require 'spec_helper'
 describe 'users/index.html.erb', :type => :view do
   before(:each) do
     @users = FactoryGirl.build_list(:user, 4, updated_at: '2013-09-30 05:00:00 UTC')
-    #allow(@user).to receive(:following?)
   end
 
   it 'should display user filter form' do
