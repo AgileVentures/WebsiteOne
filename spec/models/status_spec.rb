@@ -4,9 +4,10 @@ describe Status do
   let(:user) { FactoryGirl.create(:user) }
   subject { FactoryGirl.create(:status, status: 'Spec by Rspec', user: user) }
 
-  it 'should belong to user' do
-    expect(subject).to belong_to(:user)
-  end
+  it { is_expected.to belong_to(:user)}
+  it { is_expected.to validate_presence_of :status}
+  it { is_expected.to validate_presence_of :user_id}
+
 
   it 'should have valid factory' do
     expect(FactoryGirl.create(:status)).to be_valid

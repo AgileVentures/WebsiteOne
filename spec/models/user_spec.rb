@@ -8,6 +8,7 @@ describe User, :type => :model do
 
   it { is_expected.to respond_to :status }
   it { is_expected.to respond_to :online? }
+  it { is_expected.to accept_nested_attributes_for :status}
 
   it 'should be invalid without email' do
     expect(build_stubbed(:user, email: '')).to_not be_valid
