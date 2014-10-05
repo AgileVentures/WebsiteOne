@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController, :type => :controller do
 
-  describe 'GET index' do
+  describe '#index' do
     it 'should return a status code of 200' do
       expect(response.code).to eq('200')
     end
@@ -14,7 +14,17 @@ describe UsersController, :type => :controller do
     end
   end
 
-  describe 'GET show' do
+  describe '#new' do
+    before do
+      @user = User.new
+    end
+
+    it 'new creates a User object" 'do
+      expect(@user).to be_an_instance_of User
+    end
+  end
+
+  describe '#show' do
     before do
       @projects = build_stubbed_list(Project, 3) 
       @user = build_stubbed(User)
@@ -172,7 +182,6 @@ describe UsersController, :type => :controller do
     let(:valid_attributes) { {status: 'Sleeping at my keyboard', user_id: user.friendly_id} }
 
     before(:each) do
-      #@user = FactoryGirl.create(:user)
       allow(request.env['warden']).to receive(:authenticate!).and_return(user)
     end
 
