@@ -29,7 +29,8 @@
           <% if resource.youtube_id %>
               <%= unlink_from_youtube_button(request.original_url) %>
           <% else %>
-              <%= link_to_youtube_button(request.original_url) %>
+            <%= link_to_youtube_button(request.original_url) %>
+            <p class='help-block'>You need to have set-up a youtube channel. A youtube account is not enough</p>
           <% end %>
         </div>
       </div>
