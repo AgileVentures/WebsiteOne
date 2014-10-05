@@ -77,7 +77,7 @@ describe UsersController, :type => :controller do
     let(:mail) { ActionMailer::Base.deliveries }
 
     before(:each) do
-      @user = build_stubbed(User) 
+      @user = build_stubbed(User, display_hire_me: true)
       allow(User).to receive(:find).with(@user.id.to_s).and_return(@user)
       request.env['HTTP_REFERER'] = 'back'
       mail.clear
