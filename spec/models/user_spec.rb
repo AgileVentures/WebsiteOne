@@ -6,8 +6,8 @@ describe User, :type => :model do
 
   subject { build_stubbed :user }
 
-  it { is_expected.to respond_to :status }
-  it { is_expected.to respond_to :online? }
+  it { is_expected.to have_one(:status) }
+
   it { is_expected.to accept_nested_attributes_for :status}
 
   it 'should be invalid without email' do
