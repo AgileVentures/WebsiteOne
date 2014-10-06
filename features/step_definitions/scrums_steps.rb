@@ -39,5 +39,4 @@ end
 
 Then(/^I should see a modal$/) do
   expect(page.find("#myModal")[:style]).to eq("display: block; ")
-  # page.evaluate_script("$('.modal').css('display')").should eq "block"
 end

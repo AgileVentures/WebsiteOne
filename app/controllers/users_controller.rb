@@ -40,8 +40,8 @@ class UsersController < ApplicationController
   end
 
   def add_status
-    unless params.nil? || params[:user][:status].blank? || params[:id].blank?
-      @user.status.create(attributes={status: (params[:user][:status]), user_id: @user})
+    unless params[:user][:status].blank?
+      @user.status.create({status: (params[:user][:status]), user_id: @user})
       flash[:notice] = 'Your status has been set'
       redirect_to user_path(@user)
     else

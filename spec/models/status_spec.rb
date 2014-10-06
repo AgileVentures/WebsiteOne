@@ -2,7 +2,16 @@ require 'spec_helper'
 
 describe Status do
   let(:user) { FactoryGirl.create(:user) }
-  subject { Status.new status: 'Spec by Rspec', user: user }
+  subject { FactoryGirl.create(:status, status: 'Spec by Rspec', user: user) }
+
+  it { is_expected.to belong_to(:user)}
+  it { is_expected.to validate_presence_of :status}
+  it { is_expected.to validate_presence_of :user_id}
+
+
+  it 'should have valid factory' do
+    expect(FactoryGirl.create(:status)).to be_valid
+  end
 
   it 'assigns user_id to status' do
     expect(subject[:user_id]).to eql(user.id)
