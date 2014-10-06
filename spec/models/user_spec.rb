@@ -6,7 +6,7 @@ describe User, :type => :model do
 
   subject { build_stubbed :user }
 
-  it { is_expected.to have_one(:status) }
+  it { is_expected.to have_many(:status) }
 
   it { is_expected.to accept_nested_attributes_for :status}
 
