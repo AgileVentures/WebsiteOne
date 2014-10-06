@@ -92,6 +92,15 @@ describe 'users/show.html.erb' do
     expect(rendered).to have_content(@user.status.last[:status])
   end
 
+  it "prompts user to update their status" do
+    render
+    # binding.pry
+    # within "div.modal-footer" do |footer|
+      # expect(rendered).to have_selector("input[type='submit'][value='Update status'")
+    expect(rendered).to have_selector("input", type: 'submit', value: 'Update status')
+    # end
+  end
+
   describe 'geolocation' do
     it 'does not show globe icon when no country is set' do
       render
