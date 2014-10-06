@@ -77,7 +77,7 @@ describe UsersController, :type => :controller do
     let(:mail) { ActionMailer::Base.deliveries }
 
     before(:each) do
-      @user = build_stubbed(User) 
+      @user = build_stubbed(User, display_hire_me: true)
       allow(User).to receive(:find).with(@user.id.to_s).and_return(@user)
       request.env['HTTP_REFERER'] = 'back'
       mail.clear
@@ -144,6 +144,25 @@ describe UsersController, :type => :controller do
 
       it 'should respond with "Form not submitted. Are you human?' do
         expect(flash[:notice]).to eq 'Form not submitted. Are you human?'
+      end
+    end
+
+    context 'when recipent has disabled hire me functionality' do
+      before(:each) do
+        allow(@user).to receive(:display_hire_me).and_return(false)
+        post :hire_me_contact_form, message_form: { name: 'Thomas', email: 'example@example.com', message: 'test', recipient_id: @user.id }
+      end
+
+      it 'should redirect to the previous page' do
+        expect(response).to redirect_to 'back'
+      end
+
+      it 'should respond with appropriate error message' do
+        expect(flash[:alert]).to eq 'User has disabled hire me button'
+      end
+
+      it 'should not send an email' do
+        expect(mail.count).to eq 0
       end
     end
 
