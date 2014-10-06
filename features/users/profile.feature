@@ -20,7 +20,6 @@ Feature: As a user of the site
     And I am on the "Our members" page
 
   Scenario: Having user profile page
-    #Then show me the page
     When I click on the avatar for "Alice"
     Then I should be on the "user profile" page for "Alice"
     And I should see the avatar for "Alice" at 200 px

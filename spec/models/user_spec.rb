@@ -8,6 +8,7 @@ describe User, :type => :model do
 
   it { is_expected.to respond_to :status }
   it { is_expected.to respond_to :online? }
+  it { is_expected.to accept_nested_attributes_for :status}
 
   it 'should be invalid without email' do
     expect(build_stubbed(:user, email: '')).to_not be_valid
@@ -210,9 +211,9 @@ describe User, :type => :model do
       Delorean.back_to_the_present
     end
 
-    it 'returns true if touched in last 10 minuters' do
+    it 'returns true if touched in last 10 minutes' do
       Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
-      expect(user.online?).to eq true
+      expect(user).to be_online
     end
 
     it 'returns false if touched more then 10 minutes ago' do

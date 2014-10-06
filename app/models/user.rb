@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :event_instances
   has_many :commit_counts
-  has_many :status, :foreign_key => 'user_id', :class_name => 'Status'
+  has_many :status
 
   accepts_nested_attributes_for :status
 
