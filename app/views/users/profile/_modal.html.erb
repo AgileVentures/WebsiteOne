@@ -1,5 +1,4 @@
 <!-- modal start -->
-
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -11,7 +10,7 @@
       <%= form_for @user, url: add_status_user_path(@user),  role: 'form' do |f| %>
           <div class="modal-body">
             <%= f.label :status, style: 'display: none;' %>
-            <%= f.select :status, @options, {}, :class => 'form-control' %>
+            <%= f.select :status, Status::OPTIONS, {}, :class => 'form-control' %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -21,3 +20,4 @@
     </div>
   </div>
 </div>
+<!-- modal end -->
