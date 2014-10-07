@@ -7,7 +7,7 @@ describe SlackInviteJob do
      stub_request(:post, 'https://agileventures.slack.com/api/users.admin.invite').
        to_return(body: '{"ok": true}')
      email = 'random@random.com'
-     Slack::AUTH_TOKEN = 'test'
+     stub_const('Slack::AUTH_TOKEN', 'test')
 
      response = subject.perform(email)
 
