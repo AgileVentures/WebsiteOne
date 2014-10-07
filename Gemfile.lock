@@ -148,6 +148,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.4)
+    domain_name (0.5.21)
+      unf (>= 0.0.5, < 1.0.0)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -195,6 +197,8 @@ GEM
     hashie (2.1.2)
     hike (1.2.3)
     hirb (0.7.2)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
     ice_cube (0.11.1)
@@ -230,6 +234,15 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mechanize (2.7.2)
+      domain_name (~> 0.5, >= 0.5.1)
+      http-cookie (~> 1.0.0)
+      mime-types (~> 1.17, >= 1.17.2)
+      net-http-digest_auth (~> 1.1, >= 1.1.1)
+      net-http-persistent (~> 2.5, >= 2.5.2)
+      nokogiri (~> 1.4)
+      ntlm-http (~> 0.1, >= 0.1.1)
+      webrobots (>= 0.0.9, < 0.2)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.6.0)
@@ -242,9 +255,12 @@ GEM
       andand
       kdtree
       require_all
+    net-http-digest_auth (1.4)
+    net-http-persistent (2.9.4)
     newrelic_rpm (3.9.3.241)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
+    ntlm-http (0.1.1)
     oauth (0.4.7)
     oauth2 (0.9.4)
       faraday (>= 0.8, < 0.10)
@@ -409,6 +425,9 @@ GEM
     uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
     utf8-cleaner (0.0.9)
     vcr (2.9.2)
     verbs (2.1.4)
@@ -423,6 +442,7 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    webrobots (0.1.1)
     websocket (1.0.7)
     websocket-driver (0.3.3)
     will_paginate (3.0.5)
@@ -488,6 +508,7 @@ DEPENDENCIES
   jquery-turbolinks
   launchy
   local_time
+  mechanize
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
