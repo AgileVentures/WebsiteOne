@@ -11,7 +11,7 @@ describe EventInstancesController do
 
   describe '#index' do
     before do
-      FactoryGirl.create_list(:event_instance, 3)
+      FactoryGirl.create_list(:event_instance, 3, updated: 1.minute.ago)
       FactoryGirl.create_list(:event_instance, 3, updated: 1.hour.ago)
     end
 
@@ -32,17 +32,18 @@ describe EventInstancesController do
 
   describe '#update' do
     before do
-      allow_any_instance_of(EventInstance).to receive(:update).and_return('true')
+      allow_any_instance_of(EventInstance).to receive(:update_attributes).and_return('true')
     end
 
-    it 'creates a hangout if there is no hangout assosciated with the event' do
+    it 'creates a hangout if there is no hangout associated with the event' do
       get :update, params
       hangout = EventInstance.find_by_uid('333')
       expect(hangout).to be_valid
     end
 
-    it 'updates a hangout if it is present' do
-      expect_any_instance_of(EventInstance).to receive(:update)
+    it 'attempts to update a hangout if it exists' do
+      FactoryGirl.create(:event_instance, uid: '333')
+      expect_any_instance_of(EventInstance).to receive(:update_attributes)
       get :update, params
     end
 
@@ -57,13 +58,14 @@ describe EventInstancesController do
     end
 
     it 'does not call the SlackService' do
-      allow_any_instance_of(EventInstance).to receive(:update).and_return(false)
+      allow_any_instance_of(EventInstance).to receive(:update_attributes).and_return(false)
       expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
       get :update, params.merge(notify: 'false')
     end
 
     it 'returns a failure response if update is unsuccessful' do
-      allow_any_instance_of(EventInstance).to receive(:update).and_return(false)
+      allow_any_instance_of(EventInstance).to receive(:update_attributes).and_return(false)
+      allow(EventInstance).to receive(:create).and_return(nil)
       get :update, params
       expect(response.status).to eq(500)
     end
@@ -74,17 +76,11 @@ describe EventInstancesController do
       expect(response).to redirect_to(event_path(50))
     end
 
-    context 'required parametes are missing' do
-      it 'raises exception on missing host_id' do
-        params[:host_id] = nil
-        expect{ get :update, params }.to raise_error(ActionController::ParameterMissing)
-      end
-
+    context 'required parameters are missing' do
       it 'raises exception on missing title' do
         params[:title] = nil
-        expect{ get :update, params }.to raise_error(ActionController::ParameterMissing)
+        expect{ put :update, params }.to raise_error(ActionController::ParameterMissing)
       end
-
     end
   end
 

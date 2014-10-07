@@ -21,7 +21,7 @@ FactoryGirl.define do
 
     participants { [(generate :participant), (generate :participant)] }
 
-    created_at { Time.parse("#{created} UTC")}
-    updated_at { Time.parse("#{updated} UTC")}
+    start { Time.parse("#{created} UTC")}
+    heartbeat { Time.parse("#{updated} UTC")}
   end
 end

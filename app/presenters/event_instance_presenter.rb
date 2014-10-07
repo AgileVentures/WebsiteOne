@@ -1,8 +1,8 @@
 class EventInstancePresenter < BasePresenter
   presents :event_instance
 
-  def created_at
-    event_instance.created_at.strftime('%H:%M %d/%m')
+  def started_at
+    event_instance.start.strftime('%H:%M %d/%m')
   end
 
   def title
@@ -38,7 +38,7 @@ class EventInstancePresenter < BasePresenter
   end
 
   def duration
-    distance_of_time_in_words(event_instance.duration)
+    event_instance.heartbeat.present? ? distance_of_time_in_words(event_instance.heartbeat - event_instance.start) : distance_of_time_in_words(event_instance.duration_planned)
   end
 
   private

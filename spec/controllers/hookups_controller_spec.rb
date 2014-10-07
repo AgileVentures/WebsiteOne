@@ -13,7 +13,7 @@ describe HookupsController, type: :controller do
   end
 
   it 'assigns an active hookup for the view' do
-    hangout.update(updated_at: 1.minute.ago, hangout_url: 'http://hangout.test')
+    hangout.update(heartbeat: 1.minute.ago, hangout_url: 'http://hangout.test')
 
     get :index
     expect(assigns(:active_pp_hangouts)[0]).to eq(hangout)
