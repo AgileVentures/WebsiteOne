@@ -61,8 +61,13 @@ describe UserPresenter do
     before(:each) do
       @status = FactoryGirl.create_list(:status, 3, status: Faker::Lorem.sentence(3), user: user)
     end
+
     it 'should have a status' do
       expect(subject.status).to eq("<span>#{@status[2][:status]}</span>")
+    end
+
+    it 'status should be html_safe' do
+      expect(subject.status).to be_html_safe
     end
 
     it 'status? should be true' do
