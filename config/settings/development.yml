@@ -1,8 +1,11 @@
 features:
   custom_errors:
     enabled: false
-  slack_notifications:
-    enabled: false
+  slack:
+    notifications:
+      enabled: false
+    invites:
+      enabled: false
   welcome_email:
     enabled: false
 
