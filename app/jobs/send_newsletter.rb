@@ -30,11 +30,6 @@ module SendNewsletter
       @users = users.limit(Newsletter.chunk_size)
     end
 
-    def select_receiver
-      puts "selecting recipients"
-
-    end
-
     # returnes last user processed
     #
     def process_recipients
@@ -52,7 +47,7 @@ module SendNewsletter
                                         last_user_id: last_user.id,
                                         sent_at: Time.now )
       else
-        @newsletter.update_attribute(:last_user_id, last_user.id)
+        @newsletter.update(last_user_ids:, last_user.id)
       end
     end
   end
