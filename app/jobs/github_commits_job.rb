@@ -21,6 +21,7 @@ module GithubCommitsJob
     loop do
       contributors = Octokit.contributor_stats(repo)
       return contributors unless contributors.nil?
+      Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
       sleep 3
     end
   end
