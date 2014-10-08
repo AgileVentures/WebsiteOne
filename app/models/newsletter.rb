@@ -7,15 +7,13 @@ class Newsletter < ActiveRecord::Base
                     where('do_send = ? AND was_sent = ? AND last_user_id > ?', true, false, 0) 
                   }
 
-  cattr_reader    :send_as
-  cattr_reader    :chunk_size
-
   # sent via sendGrid - there is a limit 200 mailings/day
   # so we can not send it at once but have to split in chunks
   # to be send out by heroku scheduler
   #
-  @@send_as    = Settings.newsletter.send_as   
-  @@chunk_size = Settings.newsletter.chunk_size 
+  SEND_AS    = Settings.newsletter.send_as
+  CHUNK_SIZE = Settings.newsletter.chunk_size
+
 
   private
 
@@ -31,7 +29,7 @@ class Newsletter < ActiveRecord::Base
   end
 
   def instantly_sendable?
-    do_send == true && was_sent == false && self.send_as == :instant
+    do_send == true && was_sent == false && SEND_AS == :instant
   end
 
   def init_last_user_id

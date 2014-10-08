@@ -27,7 +27,7 @@ module SendNewsletter
     def setup_potential_recipients
       users = User.mail_receiver.order('id ASC').where('id >?', @newsletter.last_user_id)
       @total_recipients = users.size
-      @users = users.limit(Newsletter.chunk_size)
+      @users = users.limit(Newsletter::CHUNK_SIZE)
     end
 
     # returnes last user processed
@@ -42,12 +42,12 @@ module SendNewsletter
     end
 
     def clean_up(last_user)
-      if @total_recipients <= Newsletter.chunk_size
+      if @total_recipients <= Newsletter::CHUNK_SIZE
         @newsletter.update_attributes(  was_sent: true,
                                         last_user_id: last_user.id,
                                         sent_at: Time.now )
       else
-        @newsletter.update(last_user_ids:, last_user.id)
+        @newsletter.update(last_user_id: last_user.id)
       end
     end
   end
