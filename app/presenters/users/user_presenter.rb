@@ -73,7 +73,7 @@ class UserPresenter < BasePresenter
   end
   
   def can_create_newsletter?
-    Settings.privileged_users.include?(user.email)
+    user.is_privileged?
   end
 
 end
