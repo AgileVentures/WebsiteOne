@@ -11,7 +11,6 @@ describe "newsletters/edit" do
   it "renders the edit newsletter form" do
     render
 
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form[action=?][method=?]", newsletter_path(@newsletter), "post" do
       assert_select "input#newsletter_title[name=?]", "newsletter[title]"
       assert_select "textarea#newsletter_body[name=?]", "newsletter[body]"
