@@ -7,7 +7,7 @@ gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.
 
 gem 'puma' # Puma web server
 gem 'pg'  # PostgreSQL database support
-gem 'sass-rails', '~> 4.0.0' # Sass stylesheet language
+gem 'sass-rails', '~> 4.0.2' # Sass stylesheet language
 gem 'uglifier'  # Javascript compressor
 gem 'coffee-rails'  # Coffee-script support
 gem 'therubyracer', platforms: :ruby  # Google V8 javascript engine
@@ -20,8 +20,8 @@ gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
 gem 'faker'
 gem 'omniauth'
-gem 'omniauth-github', git: 'git://github.com/intridea/omniauth-github.git'
-gem 'omniauth-gplus', git: 'git://github.com/samdunne/omniauth-gplus.git'
+gem 'omniauth-github', github: 'intridea/omniauth-github'
+gem 'omniauth-gplus', github: 'samdunne/omniauth-gplus'
 gem 'font-awesome-rails'
 gem 'acts_as_tree'
 gem 'acts_as_follower'
