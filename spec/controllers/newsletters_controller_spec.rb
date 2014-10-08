@@ -17,11 +17,18 @@ describe NewslettersController do
       controller.stub :current_user =>  @user
     end
 
+    describe "authorization" do
+      it 'check_privileged' do
+        get :new, {}, valid_session
+        expect(controller.current_user.email).to be_in(Settings.privileged_users)
+      end
+    end
+
     describe "GET index" do
       it "assigns all newsletters as @newsletters" do
         newsletter = FactoryGirl.create(:newsletter) 
         get :index, {}, valid_session
-        assigns(:newsletters).should eq([newsletter])
+        expect(assigns(:newsletters)).to eq([newsletter])
       end
     end
 
@@ -29,22 +36,23 @@ describe NewslettersController do
       it "assigns the requested newsletter as @newsletter" do
         newsletter = FactoryGirl.create(:newsletter)
         get :show, {:id => newsletter.to_param}, valid_session
-        assigns(:newsletter).should eq(newsletter)
+        expect(assigns(:newsletter)).to eq(newsletter)
       end
     end
 
     describe "GET new" do
       it "assigns a new newsletter as @newsletter" do
         get :new, {}, valid_session
-        assigns(:newsletter).should be_a_new(Newsletter)
+        expect(assigns(:newsletter)).to be_a_new(Newsletter)
       end
+
     end
 
     describe "GET edit" do
       it "assigns the requested newsletter as @newsletter" do
         newsletter = FactoryGirl.create(:newsletter) 
         get :edit, {:id => newsletter.to_param}, valid_session
-        assigns(:newsletter).should eq(newsletter)
+        expect(assigns(:newsletter)).to eq(newsletter)
       end
     end
 
@@ -58,13 +66,13 @@ describe NewslettersController do
 
         it "assigns a newly created newsletter as @newsletter" do
           post :create, {:newsletter => valid_attributes}, valid_session
-          assigns(:newsletter).should be_a(Newsletter)
-          assigns(:newsletter).should be_persisted
+          expect(assigns(:newsletter)).to be_a(Newsletter)
+          expect(assigns(:newsletter)).to be_persisted
         end
 
         it "redirects to the created newsletter" do
           post :create, {:newsletter => valid_attributes}, valid_session
-          response.should redirect_to(Newsletter.last)
+          expect(response).to redirect_to(Newsletter.last)
         end
       end
 
@@ -72,13 +80,13 @@ describe NewslettersController do
         it "assigns a newly created but unsaved newsletter as @newsletter" do
           Newsletter.any_instance.stub(:save).and_return(false)
           post :create, {:newsletter => { "title" => "invalid value" }}, valid_session
-          assigns(:newsletter).should be_a_new(Newsletter)
+          expect(assigns(:newsletter)).to be_a_new(Newsletter)
         end
 
         it "re-renders the 'new' template" do
           Newsletter.any_instance.stub(:save).and_return(false)
           post :create, {:newsletter => { "title" => "invalid value" }}, valid_session
-          response.should render_template("new")
+          expect(response).to render_template("new")
         end
       end
     end
@@ -94,13 +102,13 @@ describe NewslettersController do
         it "assigns the requested newsletter as @newsletter" do
           newsletter = FactoryGirl.create(:newsletter) 
           put :update, {:id => newsletter.to_param, :newsletter => valid_attributes}, valid_session
-          assigns(:newsletter).should eq(newsletter)
+          expect(assigns(:newsletter)).to eq(newsletter)
         end
 
         it "redirects to the newsletter" do
           newsletter = FactoryGirl.create(:newsletter) 
           put :update, {:id => newsletter.to_param, :newsletter => valid_attributes}, valid_session
-          response.should redirect_to(newsletter)
+          expect(response).to redirect_to(newsletter)
         end
       end
 
@@ -109,14 +117,14 @@ describe NewslettersController do
           newsletter = FactoryGirl.create(:newsletter) 
           Newsletter.any_instance.stub(:save).and_return(false)
           put :update, {:id => newsletter.to_param, :newsletter => { "title" => "invalid value" }}, valid_session
-          assigns(:newsletter).should eq(newsletter)
+          expect(assigns(:newsletter)).to eq(newsletter)
         end
 
         it "re-renders the 'edit' template" do
           newsletter = FactoryGirl.create(:newsletter) 
           Newsletter.any_instance.stub(:save).and_return(false)
           put :update, {:id => newsletter.to_param, :newsletter => { "title" => "invalid value" }}, valid_session
-          response.should render_template("edit")
+          expect(response).to render_template("edit")
         end
       end
     end
@@ -132,7 +140,7 @@ describe NewslettersController do
       it "redirects to the newsletters list" do
         newsletter = FactoryGirl.create(:newsletter) 
         delete :destroy, {:id => newsletter.to_param}, valid_session
-        response.should redirect_to(newsletters_url( only_path: true))
+        expect(response).to redirect_to(newsletters_url( only_path: true))
       end
     end
 
@@ -145,7 +153,13 @@ describe NewslettersController do
       request.env['warden'].stub :authenticate => @user
       controller.stub :current_user =>  @user
     end
-    
+   
+    describe 'authorization' do
+      it 'check_privilged' do
+        get :new, {}, valid_session
+        expect(controller.current_user.email).not_to be_in(Settings.privileged_users)
+      end
+    end
     describe "GET new" do
       it "renders status 403" do
         get :new, {}, valid_session
