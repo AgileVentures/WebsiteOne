@@ -103,7 +103,7 @@ GEM
       json
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    childprocess (0.5.3)
+    childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     chunky_png (1.3.1)
@@ -118,10 +118,10 @@ GEM
     coffee-script-source (1.8.0)
     colored (1.2)
     columnize (0.8.9)
-    compass (0.12.7)
+    compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
-      sass (~> 3.2.19)
+      sass (~> 3.1)
     compass-rails (2.0.0)
       compass (>= 0.12.2)
     coveralls (0.7.1)
@@ -149,10 +149,11 @@ GEM
     debugger-linecache (1.2.0)
     delorean (2.1.0)
       chronic
-    devise (3.3.0)
+    devise (3.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
+      responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
@@ -166,7 +167,7 @@ GEM
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
-    excon (0.39.6)
+    excon (0.40.0)
     execjs (2.2.1)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -219,7 +220,7 @@ GEM
       rake
     jasmine-core (2.0.2)
     jasmine-jquery-rails (2.0.3)
-    jbuilder (2.1.3)
+    jbuilder (2.2.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -346,6 +347,8 @@ GEM
     redcarpet (3.1.2)
     ref (1.0.5)
     require_all (1.3.2)
+    responders (1.1.1)
+      railties (>= 3.2, < 4.2)
     rest-client (1.6.8)
       mime-types (~> 1.16)
       rdoc (>= 2.4.2)
@@ -374,7 +377,7 @@ GEM
       rspec-mocks (~> 2.99.0)
     rubyzip (1.1.6)
     safe_yaml (1.0.4)
-    sass (3.2.19)
+    sass (3.2.0)
     sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.0)
@@ -419,7 +422,7 @@ GEM
     timers (4.0.1)
       hitimes
     tins (1.3.3)
-    turbolinks (2.3.0)
+    turbolinks (2.4.0)
       coffee-rails
     twitter (5.11.0)
       addressable (~> 2.3)
@@ -453,7 +456,7 @@ GEM
       rack (>= 1.0)
       rack-test (>= 0.5.3)
     websocket (1.2.1)
-    websocket-driver (0.3.4)
+    websocket-driver (0.3.5)
     will_paginate (3.0.7)
     will_paginate-bootstrap (1.0.1)
       will_paginate (>= 3.0.3)
@@ -545,7 +548,7 @@ DEPENDENCIES
   rspec (< 3.0)
   rspec-activemodel-mocks
   rspec-rails
-  sass-rails (~> 4.0.0)
+  sass-rails (~> 4.0.2)
   selenium-webdriver
   shoulda-matchers
   sucker_punch
