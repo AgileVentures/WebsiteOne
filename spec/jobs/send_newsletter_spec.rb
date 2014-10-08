@@ -4,18 +4,18 @@ describe SendNewsletter do
 
   describe 'processes' do
     before :each do
-      Newsletter.class_variable_set('@@chunk_size', 5 ) # by default at 180 - but too much overhead in specs
-      # make sure it takes 2 runs - a.k.a more user than chunk_size
-      FactoryGirl.create_list(:user, Newsletter::chunk_size + Newsletter::chunk_size/2)
+      Newsletter.const_set('CHUNK_SIZE', 5 ) # by default at 180 - but too much overhead in specs
+      # make sure it takes 2 runs - a.k.a more user than CHUNK_SIZE
+      FactoryGirl.create_list(:user, Newsletter::CHUNK_SIZE + Newsletter::CHUNK_SIZE/2)
       @newsletter = FactoryGirl.create(:newsletter, do_send: true)
     end
 
     after :all do
-      Newsletter.class_variable_set('@@chunk_size', 180 ) # reset to default
+      Newsletter.const_set('CHUNK_SIZE', 180 ) # reset to default
     end
 
     it 'specified chunk-size' do
-      expect { SendNewsletter.run }.to change { ActionMailer::Base.deliveries.count }.by( Newsletter::chunk_size )
+      expect { SendNewsletter.run }.to change { ActionMailer::Base.deliveries.count }.by( Newsletter::CHUNK_SIZE )
       @newsletter.reload
     end
 

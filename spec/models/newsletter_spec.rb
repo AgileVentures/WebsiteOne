@@ -21,16 +21,16 @@ describe Newsletter do
 
   describe "class variables" do
     before do
-      Newsletter.class_variable_set('@@chunk_size', Settings.newsletter.chunk_size)
-      Newsletter.class_variable_set('@@send_as', Settings.newsletter.send_as)
+      Newsletter.const_set('CHUNK_SIZE', Settings.newsletter.chunk_size)
+      Newsletter.const_set('SEND_AS', Settings.newsletter.send_as)
     end
 
     it 'configures as scheduler_job' do
-      expect(Newsletter.send_as).to eq(:scheduler_job)
+      expect(Newsletter::SEND_AS).to eq(:scheduler_job)
     end
 
     it 'configures 180 recipients per run' do
-      expect(Newsletter.chunk_size).to eq(180)
+      expect(Newsletter::CHUNK_SIZE).to eq(180)
     end
   end
 
@@ -39,12 +39,12 @@ describe Newsletter do
       receiver_users = FactoryGirl.create_list(:user, 2, receive_mailings: true)
       non_receiver_users = FactoryGirl.create_list(:user, 2, receive_mailings: false)
       @newsletter = FactoryGirl.create(:newsletter)
-      Newsletter.class_variable_set('@@send_as', :instant)
+      Newsletter.const_set('SEND_AS', :instant)
     end
 
     after :all do
-      Newsletter.class_variable_set('@@chunk_size', 180)
-      Newsletter.class_variable_set('@@send_as', :scheduler_job)
+      Newsletter.const_set('CHUNK_SIZE', 180)
+      Newsletter.const_set('SEND_AS', :scheduler_job)
     end
 
     it 'after do_send is set to true' do
