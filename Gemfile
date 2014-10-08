@@ -7,7 +7,7 @@ gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.
 
 gem 'puma' # Puma web server
 gem 'pg'  # PostgreSQL database support
-gem 'sass-rails', '~> 4.0.2' # Sass stylesheet language
+gem 'sass-rails', '~> 4.0.3' # Sass stylesheet language
 gem 'uglifier'  # Javascript compressor
 gem 'coffee-rails'  # Coffee-script support
 gem 'therubyracer', platforms: :ruby  # Google V8 javascript engine
