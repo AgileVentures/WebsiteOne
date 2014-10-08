@@ -49,6 +49,7 @@ class ApplicationController < ActionController::Base
       destroy_user_session_path,
       "#{edit_user_password_path}.*"
     ]
+    paths.each { |path| path.gsub!(/\A\//, '') }
 
     paths.any?{ |path| request.path =~ %r(#{path})}
   end
