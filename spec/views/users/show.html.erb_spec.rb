@@ -129,7 +129,7 @@ describe 'users/show.html.erb' do
 
   it 'renders a table wih video links if there are videos' do
     render
-    expect(render).to have_text('Title', 'Published')
+    expect(render).to have_text('Title')
   end
 
   it 'renders an embedded player' do
