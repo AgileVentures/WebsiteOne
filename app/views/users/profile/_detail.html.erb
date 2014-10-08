@@ -20,15 +20,6 @@
     </section>
 <% end %>
 
-<% if presenter.can_create_newsletter? %>
-  <section class='user-tasks'>
-    <h4>Enhanced Tasks</h4>
-    <ul>
-      <li><%= link_to "New Newsletter", new_newsletter_path %></li>
-    </ul>
-  </section>
-<% end %>
-
 <% if presenter.contributed? %>
     <section class="user-contributions">
       <h4>Contributions</h4>
