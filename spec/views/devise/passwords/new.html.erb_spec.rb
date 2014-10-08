@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'devise/passwords/new', type: :view do
   before do
     expect(view).to receive(:resource).at_least(1).times.and_return(User.new)
-    expect(view).to receive(:resource_name).at_least(1).times.and_return('user')
+    expect(view).to receive(:resource_name).at_least(1).times.and_return(:user)
     render
   end
 
