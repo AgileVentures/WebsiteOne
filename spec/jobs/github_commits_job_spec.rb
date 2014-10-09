@@ -5,7 +5,7 @@ describe GithubCommitsJob do
 
   describe '.job', vcr: vcr_index do
     before do
-      @project = FactoryGirl.create(:project, github_url: 'http://github.com/AgileVentures/WebsiteOne')
+      @project = FactoryGirl.create(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne')
       @project_without_url = FactoryGirl.create(:project)
       @users = [
         FactoryGirl.create(:user, github_profile_url: 'https://github.com/yggie'),
