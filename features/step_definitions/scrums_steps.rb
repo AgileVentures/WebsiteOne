@@ -12,7 +12,7 @@ end
 
 Then(/^I should see a modal window with the (first|second) scrum$/) do |ord|
   ord_hash ={"first" => 0, "second" => 1}
-  expect(page.find("#player")[:style]).to eq("display: block; ")
+  expect(page.find("#scrumVideo")[:style]).to include("display: block;")
   title = page.body.gsub(/\n/,'').scan(/<\/i>\s*(.*?)\s*<\/a>/)[ord_hash[ord]]
   expect(page).to have_selector("#playerTitle", text: title[1])
 end
