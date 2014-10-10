@@ -56,6 +56,7 @@ gem 'local_time'
 gem 'rails_config' # a gem to manage configuration files
 gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
 gem 'octokit' # Ruby wrapper for the GitHub API
+gem 'sucker_punch' # Single Process Ruby asynchronous processing library
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

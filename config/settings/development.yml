@@ -1,10 +1,13 @@
 features:
   custom_errors:
     enabled: false
-  slack_notifications:
-    enabled: false
+  slack:
+    notifications:
+      enabled: false
+    invites:
+      enabled: false
   welcome_email:
     enabled: false
 
 hangouts:
-  app_id: '10095526298'
+  app_id: '331105831845'
