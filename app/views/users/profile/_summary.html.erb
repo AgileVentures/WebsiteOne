@@ -7,13 +7,13 @@
   <ul>
     <h3><%= presenter.display_name %></h3>
     <% if presenter.has_title? %>
-      <li><%= presenter.title_list %></li>
+        <li><%= presenter.title_list %></li>
     <% end %>
     <% if presenter.country? %>
-      <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country %></li>
+        <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country %></li>
     <% end %>
     <% if presenter.latitude? && presenter.longitude? %>
-      <li><i class="fa fa-clock-o fa-lg"></i> <%= presenter.timezone %></li>
+        <li><i class="fa fa-clock-o fa-lg"></i> <%= presenter.timezone %></li>
     <% end %>
 
     <li>
@@ -22,30 +22,41 @@
     </li>
 
     <% if presenter.github_profile_url? %>
-      <li>
-        <i class="fa fa-github-alt fa-lg"></i>
-        <%= presenter.github_link %>
-      </li>
+        <li>
+          <i class="fa fa-github-alt fa-lg"></i>
+          <%= presenter.github_link %>
+        </li>
     <% end %>
 
     <% if presenter.display_email %>
-      <li><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></li>
+        <li><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></li>
+    <% end %>
+
+    <% if @user.online? & presenter.status? %>
+        <li><span class="glyphicon glyphicon-comment"> </span> "<%= presenter.status %>" </li>
     <% end %>
 
     <% if presenter.display_hire_me %>
-      <li>
-        <%= link_to 'Hire me', user_path(presenter.user),
-          { remote: true, class: 'user-profile-btn',
-            data: { toggle: 'modal', target: '#modal-window'} } %>
-      </li>
+        <li>
+          <%= link_to 'Hire me', user_path(presenter.user),
+                      {remote: true, class: 'user-profile-btn',
+                       data: {toggle: 'modal', target: '#modal-window'}} %>
+        </li>
     <% end %>
 
     <% if presenter.object.eql?(current_user) %>
-      <li>
-        <%= link_to 'Edit', edit_user_registration_path,
-          class: 'user-profile-btn',
-          type: 'button' %>
-      </li>
+        <li>
+          <%= link_to 'Edit', edit_user_registration_path,
+                      class: 'user-profile-btn',
+                      type: 'button' %>
+        </li>
+        <li>
+          <p><%= link_to 'Set status', '#',
+                         data: {toggle: 'modal',
+                                target: '#myModal'},
+                         class: 'user-profile-btn',
+                         type: 'button' %></p>
+        </li>
     <% end %>
   </ul>
 </div>

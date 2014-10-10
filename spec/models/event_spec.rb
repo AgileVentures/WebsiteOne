@@ -5,6 +5,10 @@ describe Event, :type => :model do
     ENV['TZ'] = 'UTC'
   end
 
+  after(:each) do
+    Delorean.back_to_the_present
+  end
+
   subject { build_stubbed :event }
 
   it { is_expected.to respond_to :friendly_id }

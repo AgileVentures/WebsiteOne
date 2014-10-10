@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "users/show.html.erb" do
+describe 'users/show.html.erb' do
   before :each do
     now = DateTime.now
     thirty_days_ago = (now - 33)
@@ -9,7 +9,7 @@ describe "users/show.html.erb" do
         mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
         mock_model(Project, friendly_id: 'title-3', title: 'Title 3')
     ]
-    @user = FactoryGirl.build(:user,
+    @user = FactoryGirl.create(:user,
                               first_name: 'Eric',
                               last_name: 'Els',
                               email: 'eric@somemail.se',
@@ -18,12 +18,16 @@ describe "users/show.html.erb" do
                               github_profile_url: 'http://github.com/Eric',
                               skill_list: [ 'Shooting', 'Hooting' ],
                               bio: 'Lonesome Cowboy')
+
+    @user.status.create(attributes = FactoryGirl.attributes_for(:status))
+
     @commit_counts = [build_stubbed(:commit_count, project: @projects.first, user: @user, commit_count: 253)]
 
     allow(@user).to receive(:following_projects).and_return(@projects)
     allow(@user).to receive(:following_projects_count).and_return(2)
     allow(@user).to receive(:commit_counts).and_return(@commit_counts)
     allow(@user).to receive(:following?).and_return(true)
+    allow(@user).to receive(:status?).and_return(true)
     allow(@commit_counts.first.project).to receive(:contribution_url).and_return('test_url')
 
     assign :user, @user
@@ -83,22 +87,36 @@ describe "users/show.html.erb" do
     expect(rendered).to have_content(@user.last_name)
   end
 
+  it 'renders user status' do
+    render
+    expect(rendered).to have_content(@user.status.last[:status])
+  end
+
+  it "prompts user to update their status" do
+    render
+    # binding.pry
+    # within "div.modal-footer" do |footer|
+      # expect(rendered).to have_selector("input[type='submit'][value='Update status'")
+    expect(rendered).to have_selector("input", type: 'submit', value: 'Update status')
+    # end
+  end
+
   describe 'geolocation' do
     it 'does not show globe icon when no country is set' do
       render
-      expect(rendered).not_to have_selector "i[class='fa fa-globe fa-lg']"
+      expect(rendered).not_to have_selector 'i[class="fa fa-globe fa-lg"]'
     end
 
     it 'shows user country when known' do
       @user.country = 'Mozambique'
       render
-      expect(rendered).to have_selector "i[class='fa fa-globe fa-lg']"
+      expect(rendered).to have_selector 'i[class="fa fa-globe fa-lg"]'
       expect(rendered).to have_content @user.country
     end
 
     it 'does not show clock icon when user timezone cannot be determined' do
       render
-      expect(rendered).not_to have_selector "i[class='fa fa-clock-o fa-lg']"
+      expect(rendered).not_to have_selector 'i[class="fa fa-clock-o fa-lg"]'
     end
 
     it 'shows user timezone when it can be determined' do
@@ -106,7 +124,7 @@ describe "users/show.html.erb" do
       @user.longitude = 32.5833
       expect(NearestTimeZone).to receive(:to).with(@user.latitude, @user.longitude).and_return('Africa/Cairo')
       render
-      expect(rendered).to have_selector "i[class='fa fa-clock-o fa-lg']"
+      expect(rendered).to have_selector 'i[class="fa fa-clock-o fa-lg"]'
       expect(rendered).to have_content 'Africa/Cairo'
     end
   end

@@ -369,6 +369,8 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     simple_oauth (0.2.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
@@ -515,6 +517,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.0)
   selenium-webdriver
+  shoulda-matchers
   sprockets-image_compressor
   sucker_punch
   therubyracer

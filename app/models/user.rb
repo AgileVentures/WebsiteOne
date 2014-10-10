@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :event_instances
   has_many :commit_counts
+  has_many :status
+
+  accepts_nested_attributes_for :status
 
   self.per_page = 30
 
@@ -90,9 +93,14 @@ class User < ActiveRecord::Base
     find_by(github_profile_url: github_url)
   end
 
+  def online?
+    updated_at > 10.minutes.ago
+  end
+
   private
 
   def send_slack_invite
     SlackInviteJob.new.async.perform(email)
   end
+
 end

@@ -53,7 +53,25 @@ describe UserPresenter do
     it 'should only return commit counts for the projects that the user follows' do
       expect(subject.contributions).to eq([commit_counts[0]])
     end
-
   end
 
+  describe 'user status' do
+    let(:user) { FactoryGirl.create(:user) }
+
+    before(:each) do
+      @status = FactoryGirl.create_list(:status, 3, status: Faker::Lorem.sentence(3), user: user)
+    end
+
+    it 'should have a status' do
+      expect(subject.status).to eq("<span>#{@status[2][:status]}</span>")
+    end
+
+    it 'status should be html_safe' do
+      expect(subject.status).to be_html_safe
+    end
+
+    it 'status? should be true' do
+      expect(subject.status?).to eq true
+    end
+  end
 end
