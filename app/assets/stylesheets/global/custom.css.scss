@@ -25,6 +25,8 @@ general style
 html, body {
   width: 100%;
   height: 100%;
+  /* keep scrollbar present all the time */
+  min-height: 101%;
   background-color: $off-white;
 
   /* The html and body elements cannot have any padding or margin. */
