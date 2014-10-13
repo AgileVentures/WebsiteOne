@@ -13,11 +13,18 @@ describe GithubCommitsJob do
         FactoryGirl.create(:user, github_profile_url: nil)
       ]
       GithubCommitsJob.run
+      @project.reload
+      @project_without_url.reload
     end
 
     it 'stores commit counts only for projects that have a github_url' do
       expect(@project.commit_counts.count).to be > 1
       expect(@project_without_url.commit_counts.count).to eq 0
+    end
+
+    it 'stores total commit count only for projects that have a github_url' do
+      expect(@project.commit_count).to be > 1
+      expect(@project_without_url.commit_count).to eq 0
     end
 
     it 'stores commit counts only for users that have a github_profile_url' do
@@ -30,6 +37,10 @@ describe GithubCommitsJob do
     it 'stores correct commit counts by user and project' do
       expect(CommitCount.find_by!(project: @project, user: @users[0]).commit_count).to eq 388
       expect(CommitCount.find_by!(project: @project, user: @users[1]).commit_count).to eq 316
+    end
+
+    it 'stores correct total commit count for projects' do
+      expect(@project.commit_count).to eq 2795
     end
   end
 end
