@@ -220,7 +220,7 @@ ActiveRecord::Schema.define(version: 20150308085307) do
     t.boolean  "display_profile",        default: true
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "country"
+    t.string   "country_name"
     t.string   "city"
     t.string   "region"
     t.string   "youtube_user_name"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20150308085307) do
     t.text     "bio"
     t.boolean  "receive_mailings",       default: true
     t.integer  "karma_points",           default: 0
+    t.string   "country_code"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
