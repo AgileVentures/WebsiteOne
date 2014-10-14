@@ -6,7 +6,7 @@ Feature: Create and maintain projects
   Background:
     Given the following projects exist:
       | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |
-      | hello world   | greetings earthlings    |             | active   | https://github.com/agileventures/helloworld | https://www.pivotaltracker.com/s/projects/742821 |
+      | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 |
       | hello mars    | greetings aliens        |             | inactive |                                             |                                                  |
       | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  |
       | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  |
@@ -41,6 +41,18 @@ Feature: Create and maintain projects
       | hello mars              |
       | greetings aliens        |
       | INACTIVE                |
+
+  @github_query
+  Scenario: See total github commit count for projects
+    Given  I am on the "home" page
+    And I fetch the GitHub contribution statistics
+    When I follow "Projects" within the navbar
+    And I go to the next page
+    Then I should see:
+      | Text                    |
+      | hello world             |
+      | ACTIVE                  |
+      | 2795                    |
 
   Scenario: Show New Project button if user is logged in
     When I am logged in

@@ -10,9 +10,10 @@ before_script:
   - bundle exec rake db:migrate
 
 script:
-  - bundle exec rspec --format progress
+  #- bundle exec rspec --format progress
   - bundle exec rake jasmine:ci
-  - bundle exec cucumber --profile ci
+  #- bundle exec cucumber --profile ci
+  - bundle exec rake test_with_coveralls
 
 # downgrade git version to avoid deployment bug (keep till its fixed)
 before_install:

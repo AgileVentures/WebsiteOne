@@ -1,6 +1,11 @@
 features:
-  slack_notifications:
-    enabled: false
+  slack:
+    notifications:
+      enabled: false
+    invites:
+      enabled: false
 
 mailer:
   delivery_method: 'test'
+
+privileged_users: ['chesa@example.com', 'random@random.com'] 
