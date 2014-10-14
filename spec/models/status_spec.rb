@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Status do
   let(:user) { FactoryGirl.create(:user) }
-  subject { FactoryGirl.create(:status, status: 'Spec by Rspec', user: user) }
+  subject { FactoryGirl.create(:status, user: user) }
 
   it { is_expected.to belong_to(:user)}
   it { is_expected.to validate_presence_of :status}
@@ -27,6 +27,10 @@ describe Status do
 
   it 'should be invalid without user_id' do
     expect(build_stubbed :status, user: nil).to_not be_valid
+  end
+
+  it 'should be invalid with unpredicted content' do
+    expect(build_stubbed :status, status: 'wtf?').to_not be_valid
   end
 
 end
