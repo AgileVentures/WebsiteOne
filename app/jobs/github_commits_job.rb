@@ -1,15 +1,24 @@
+require 'nokogiri'
+
 module GithubCommitsJob
   extend self
 
   def run
     Project.with_github_url.each do |project|
-      update_commit_counts_for(project)
+      update_total_commit_count_for(project)
+      update_user_commit_counts_for(project)
     end
   end
 
   private
 
-  def update_commit_counts_for(project)
+  def update_total_commit_count_for(project)
+    doc = Nokogiri::HTML(open(project.github_url))
+    commit_count = doc.at_css('li.commits .num').text.strip.gsub(',', '').to_i
+    project.update(commit_count: commit_count)
+  end
+
+  def update_user_commit_counts_for(project)
     contributors = get_contributor_stats(project.github_repo)
     contributors.map do |contributor|
       user = User.find_by_github_username(contributor.author.login)
