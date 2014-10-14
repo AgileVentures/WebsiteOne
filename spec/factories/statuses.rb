@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :status do
-    status 'My status'
+    status { Status::OPTIONS[rand(Status::OPTIONS.length)] }
     user
   end
 end
