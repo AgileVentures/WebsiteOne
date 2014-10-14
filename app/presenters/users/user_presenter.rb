@@ -71,5 +71,9 @@ class UserPresenter < BasePresenter
   def status?
     user.status.count > 0
   end
+  
+  def can_create_newsletter?
+    user.is_privileged?
+  end
 
 end

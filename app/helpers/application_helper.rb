@@ -16,6 +16,10 @@ module ApplicationHelper
     :user
   end
 
+  def privileged_visitor?
+    current_user && current_user.is_privileged?
+  end
+
   def static_page_path(page)
     "/#{StaticPage.url_for_me(page)}"
   end

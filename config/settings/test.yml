@@ -7,3 +7,5 @@ features:
 
 mailer:
   delivery_method: 'test'
+
+privileged_users: ['chesa@example.com', 'random@random.com'] 
