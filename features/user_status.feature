@@ -12,23 +12,23 @@ Feature: User status
       | Bob        | Butcher   | bobb112@hotmail.com    | 2014-09-30 04:00:00 UTC' |
 
     And the following statuses have been set
-      | status         | user  |
-      | I want to pair | Alice |
-      | I'm offline    | Bob   |
+      | status            | user  |
+      | Ready to pair     | Alice |
+      | Doing code review | Bob   |
 
   @time-travel-step
   Scenario: I should see a users status on index page if user is online
     Given the date is "2014-09-30 05:15:00 UTC"
     And I visit "/users"
     And I should see "2" user avatars within the main content
-    And I should see "I want to pair"
+    And I should see "Ready to pair"
     And I should not see "I'm offline"
 
   @time-travel-step
   Scenario: I should see a users status on his profile page if user is online
     Given the date is "2014-09-30 05:15:00 UTC"
     Given I visit Alice's profile page
-    Then I should see "I want to pair"
+    Then I should see "Ready to pair"
 
   @time-travel-step
   Scenario: I should not see a users status on his profile page if user is offline
