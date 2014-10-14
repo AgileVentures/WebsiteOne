@@ -59,7 +59,9 @@ describe UserPresenter do
     let(:user) { FactoryGirl.create(:user) }
 
     before(:each) do
-      @status = FactoryGirl.create_list(:status, 3, status: Faker::Lorem.sentence(3), user: user)
+      @status = FactoryGirl.create_list(:status, 3, 
+                                        status: Status::OPTIONS[rand(Status::OPTIONS.length)], 
+                                        user: user)
     end
 
     it 'should have a status' do
