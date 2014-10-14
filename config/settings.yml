@@ -22,6 +22,14 @@ mailer:
   url_host: 'localhost:3000'
   devise_mailer_sender: 'info@agileventures.org'
 
+# newsletter send_as: (:instant | :scheduler_job)
+# does what it looks like
+newsletter:
+  send_as: :scheduler_job
+  chunk_size: 180
+
+privileged_users: ['chesa@example.com', 'random@random.com'] 
+
 disqus:
   shortname: 'agileventures-dev'
   api_key:  'Mh9WLi09Ve752WaTu3xbfEpSXDHOluVNc2Cm8UnDVA5TTuKXUebEVq56cDlu0SBu'

@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
+  after_filter :user_activity
 
   include ApplicationHelper
   include CustomErrors
@@ -20,12 +21,22 @@ class ApplicationController < ActionController::Base
       u.permit(:first_name, :last_name, :email, :bio, :password,
                :password_confirmation, :current_password,
                :display_email, :display_profile, :display_hire_me,
-               :receive_mailings)
+               :receive_mailings, :status)
     end
   end
 
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || session[:previous_url] || root_path
+  end
+
+  # see Settings.yml for privileged user
+  # 
+  def check_privileged
+    raise ::AgileVentures::AccessDenied.new(current_user, request) unless current_user.is_privileged?
+  end
+
+  rescue_from ::AgileVentures::AccessDenied do |exception|
+    render file: "#{Rails.root}/public/403.html", status: 403, layout: false
   end
 
   private
@@ -52,4 +63,9 @@ class ApplicationController < ActionController::Base
       session[:previous_url] = request.fullpath
     end
   end
+
+  def user_activity
+    current_user.try :touch
+  end
+
 end

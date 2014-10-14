@@ -226,6 +226,14 @@ Given /^the following users exist$/ do |table|
     FactoryGirl.create(:user, attributes)
   end
 end
+
+Given /^the following statuses have been set$/ do |table|
+  table.hashes.each do |attributes|
+    user = User.find_by_first_name(attributes[:user])
+    FactoryGirl.create(:status, status: attributes[:status], user_id: user.id)
+  end
+end
+
 When(/^I should see a list of all users$/) do
   #this is up to refactoring. Just a quick fix to get things rolling /Thomas
   page.should have_content 'All users'

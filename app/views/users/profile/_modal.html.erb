@@ -1,0 +1,23 @@
+<!-- modal start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Set status</h4>
+      </div>
+      <%= form_for @user, url: add_status_user_path(@user),  role: 'form' do |f| %>
+          <div class="modal-body">
+            <%= f.label :status, style: 'display: none;' %>
+            <%= f.select :status, Status::OPTIONS, {}, :class => 'form-control' %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit 'Update status', class: 'btn btn-primary' %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- modal end -->
