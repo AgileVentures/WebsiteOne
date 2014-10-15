@@ -36,6 +36,13 @@ describe 'projects/index.html.erb', type: :view do
       end
     end
 
+    it 'renders the commit count for projects that have a commit count' do
+      allow(projects_collection.first).to receive(:commit_count).and_return(1000)
+      render
+      rendered.within('ul#project-list') do |list|
+        expect(list).to have_css('li[title="1000 commits"]')
+      end
+    end
   end
 
   context 'user signed in' do

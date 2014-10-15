@@ -12,4 +12,10 @@ class Mailer < ActionMailer::Base
     subject = ['message from', @form[:name]].join(' ')
     mail(to: @user.email, reply_to: @form[:email], from: @form[:email], subject: subject)
   end
+
+  def send_newsletter(user, newsletter)
+    @user = user
+    @newsletter = newsletter
+    mail(to: user.email, subject: newsletter.subject)
+  end
 end

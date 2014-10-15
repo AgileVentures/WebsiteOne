@@ -4,7 +4,7 @@ describe SlackService do
    subject { SlackService }
 
    it 'sends a post request to the agile-bot with the proper data' do
-     Features.slack_notifications.enabled = true
+     Features.slack.notifications.enabled = true
      stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify')
      user = User.new email: 'random@random.com'
      gravatar = CGI.escape 'https://www.gravatar.com/avatar/47548e7f026bc689ba743b2af2d391ee?d=retro'

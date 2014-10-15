@@ -1,41 +1,40 @@
 <% if presenter.has_skills? %>
-  <section class="user-skills">
-    <h4>Skills & Technologies</h4>
-
-    <ul>
-      <% presenter.skill_list.each do |skill| %>
-        <li><%= skill %></li>
-      <% end %>
-    </ul>
-  </section>
+    <section class="user-skills">
+      <h4>Skills & Technologies</h4>
+      <ul>
+        <% presenter.skill_list.each do |skill| %>
+            <li><%= skill %></li>
+        <% end %>
+      </ul>
+    </section>
 <% end %>
 
 <% if presenter.joined_projects? %>
-  <section class="user-projects">
-    <h4>Projects Involvement</h4>
-    <ul>
-      <% presenter.following_projects.each do |project| %>
-        <li><%= link_to project.title, project_path(project) %></li>
-      <% end %>
-    </ul>
-  </section>
+    <section class="user-projects">
+      <h4>Projects Involvement</h4>
+      <ul>
+        <% presenter.following_projects.each do |project| %>
+            <li><%= link_to project.title, project_path(project) %></li>
+        <% end %>
+      </ul>
+    </section>
 <% end %>
 
 <% if presenter.contributed? %>
-  <section class="user-contributions">
-    <h4>Contributions</h4>
-    <ul>
-      <% presenter.contributions.each do |commit_count| %>
-        <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b> - <%= commit_count.commit_count %></li>
-      <% end %>
-    </ul>
-  </section>
+    <section class="user-contributions">
+      <h4>Contributions</h4>
+      <ul>
+        <% presenter.contributions.each do |commit_count| %>
+            <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b>
+              - <%= commit_count.commit_count %></li>
+        <% end %>
+      </ul>
+    </section>
 <% end %>
 
 <% if presenter.bio? %>
-  <section class="user-bio">
-    <h4>About me</h4>
-
-    <p><%= simple_format(presenter.bio) %></p>
-  </section>
+    <section class="user-bio">
+      <h4>About me</h4>
+      <%= simple_format(presenter.bio) %>
+    </section>
 <% end %>
