@@ -16,6 +16,13 @@
           <i class="fa fa-file-text-o"></i> <%= documents_count %>
         </li>
       <% end %>
+      <% commit_count = project.commit_count %>
+      <% if commit_count > 0 %>
+        <li data-toggle="tooltip" data-placement="top"
+            title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
+          <i class="fa fa-github-alt"></i> <%= commit_count %>
+        </li>
+      <% end %>
     </ul>
   </div>
   <div style="display: inline-block; font-size: 1.0em; font-style: italic;">

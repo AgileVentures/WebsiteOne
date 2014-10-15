@@ -1,8 +1,11 @@
 features:
   custom_errors:
     enabled: true
-  slack_notifications:
-    enabled: true
+  slack:
+    notifications:
+      enabled: true
+    invites:
+      enabled: true
 
 mailer:
   delivery_method: 'smtp'
