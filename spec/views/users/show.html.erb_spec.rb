@@ -71,14 +71,13 @@ describe 'users/show.html.erb' do
       allow(@user).to receive(:skill_list).and_return([])
       render
       rendered.within('ul#tabs') do |section|
-        expect(section).to_not have_link 'Skills', href: '#skills'
+        expect(section).to_not have_link 'Skills', href: '#user-skills'
       end
     end
 
     it 'do not render tab Projects if user has no :following_projects_count' do
       allow(@user).to receive(:following_projects_count).and_return 0
       render
-      binding.pry
       rendered.within('ul#tabs') do |section|
         expect(section).to_not have_link 'Projects', href: '#projects'
       end
