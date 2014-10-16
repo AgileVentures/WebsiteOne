@@ -3,7 +3,7 @@
       <li class="active"><a href="#about" data-toggle="tab">About</a></li>
   <% end %>
   <% if presenter.has_skills? %>
-      <li><a href="#skills" data-toggle="tab">Skills</a></li>
+      <li><a href="#user-skills" data-toggle="tab">Skills</a></li>
   <% end %>
   <% if presenter.joined_projects? %>
       <li><a href="#projects" data-toggle="tab">Projects</a></li>
@@ -22,19 +22,19 @@
       </div>
   <% end %>
   <% if presenter.has_skills? %>
-      <div class="tab-pane active" id="skills">
+      <div class="tab-pane" id="user-skills">
         <section class="user-skills">
           <h4>Skills & Technologies</h4>
           <ul>
             <% presenter.skill_list.each do |skill| %>
-                <li><%= skill %></li>
+                <li class="label add-btn-agile"><%= skill %></li>
             <% end %>
           </ul>
         </section>
       </div>
   <% end %>
   <% if presenter.joined_projects? %>
-      <div class="tab-pane active" id="projects">
+      <div class="tab-pane" id="projects">
         <section class="user-projects">
           <h4>Projects Involvement</h4>
           <ul>
