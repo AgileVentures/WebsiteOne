@@ -44,9 +44,9 @@
         </li>
     <% end %>
 
-    <% if presenter.can_create_newsletter? %>
+    <% if presenter.object.eql?(current_user) & presenter.can_create_newsletter? %>
       <li>
-        <%= link_to "New Newsletter", new_newsletter_path, class: 'user-profile-btn' %>
+        <%= link_to 'New Newsletter', new_newsletter_path, class: 'user-profile-btn' %>
       </li>
     <% end %>
 
