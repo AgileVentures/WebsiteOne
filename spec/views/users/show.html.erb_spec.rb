@@ -9,7 +9,7 @@ describe 'users/show.html.erb' do
         mock_model(Project, friendly_id: 'title-2', title: 'Title 2'),
         mock_model(Project, friendly_id: 'title-3', title: 'Title 3')
     ]
-    @user = FactoryGirl.build(:user,
+    @user = FactoryGirl.create(:user,
                               first_name: 'Eric',
                               last_name: 'Els',
                               email: 'eric@somemail.se',
@@ -68,9 +68,8 @@ describe 'users/show.html.erb' do
     end
 
     it 'do not render tab Skills if user has no :skill_list' do
-      allow(@user).to receive(:has_skills?).and_return nil
+      allow(@user).to receive(:skill_list).and_return([])
       render
-      binding.pry
       rendered.within('ul#tabs') do |section|
         expect(section).to_not have_link 'Skills', href: '#skills'
       end
@@ -86,9 +85,8 @@ describe 'users/show.html.erb' do
     end
 
     it 'do not render tab Activity if user has no :commit_count' do
-      allow(@user).to receive(:contributed?).and_return false
+      allow(@user).to receive(:commit_counts).and_return []
       render
-      binding.pry
       rendered.within('ul#tabs') do |section|
         expect(section).to_not have_link 'Activity', href: '#activity'
       end
