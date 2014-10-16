@@ -76,7 +76,7 @@ describe 'users/show.html.erb' do
     end
 
     it 'do not render tab Projects if user has no :following_projects_count' do
-      allow(@user).to receive(:joined_projects?).and_return false
+      allow(@user).to receive(:following_projects_count).and_return 0
       render
       binding.pry
       rendered.within('ul#tabs') do |section|
