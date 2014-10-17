@@ -9,16 +9,16 @@ describe ApplicationHelper do
 
   describe '#valid_email?' do
     it 'returns true if email is valid' do
-      expect(valid_email?('valid@valid.com')).to be_true
+      expect(valid_email?('valid@valid.com')).to be_truthy
     end
 
     it 'returns false if email is invalid' do
-      expect(valid_email?('invalid')).to be_false
-      expect(valid_email?('invalid@')).to be_false
-      expect(valid_email?('invalid@invalid')).to be_false
-      expect(valid_email?('invalid@invalid.')).to be_false
-      expect(valid_email?('invalid@.invalid')).to be_false
-      expect(valid_email?('invalid@invalid.i')).to be_false
+      expect(valid_email?('invalid')).to be_falsey
+      expect(valid_email?('invalid@')).to be_falsey
+      expect(valid_email?('invalid@invalid')).to be_falsey
+      expect(valid_email?('invalid@invalid.')).to be_falsey
+      expect(valid_email?('invalid@.invalid')).to be_falsey
+      expect(valid_email?('invalid@invalid.i')).to be_falsey
     end
   end
 
