@@ -29,17 +29,17 @@ module Helpers
   end
 
   def create_visitor
-    @visitor ||= { :first_name => 'Anders',
-                   :last_name => 'Persson',
-                   :email => 'example@example.com',
-                   :password => 'changemesomeday',
-                   :password_confirmation => 'changemesomeday',
-                   :slug => 'slug-ma',
-                   :country => 'Sweden'}
+    @visitor ||= { first_name: 'Anders',
+                   last_name: 'Persson',
+                   email: 'example@example.com',
+                   password: 'changemesomeday',
+                   password_confirmation: 'changemesomeday',
+                   slug: 'slug-ma',
+                   country_name: 'Sweden'}
   end
 
   def create_test_user(options = {})
-    skills = options.delete "skills"
+    skills = options.delete 'skills'
     options = default_test_user_details.merge options
     user = User.new(options)
     user.skill_list = skills
