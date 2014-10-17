@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout 'layouts/user_profile_layout', only: [:show]
 
   before_filter :get_user, only: [:show, :add_status]
   before_filter :authenticate_user!, only: [:add_status]
