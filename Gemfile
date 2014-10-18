@@ -97,3 +97,4 @@ group :production do
   gem 'newrelic_rpm' # New Relic analytics
 end
 
+gem "bullet", :group => "development"
