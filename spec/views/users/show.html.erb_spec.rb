@@ -225,12 +225,12 @@ describe 'users/show.html.erb' do
         sign_in @user_logged_in # method from devise:TestHelpers
     end
 
-    it 'not displays an edit button if it is my profile' do
+    it 'does not display an edit button if it is not my profile' do
       render
       expect(rendered).to_not have_xpath("//a[contains(@type, 'button')]")
     end
 
-    it 'displays an edit butten if it is my profile' do
+    it 'displays an edit button if it is my profile' do
       assign(:user, @user_logged_in)
       render
       expect(rendered).to have_xpath("//a[contains(@type, 'button')]")
@@ -247,18 +247,17 @@ describe 'users/show.html.erb' do
     before(:each) do
       @other = FactoryGirl.create(:user)
       @user = FactoryGirl.create(:user, email:'random@random.com')
-      sign_in @user
+      assign(:user, @user)
     end
 
     it 'displays New Newsletter link if it is my profile and I am privileged' do
-      # binding.pry
-      assign(:user, @user)
+      sign_in @user
       render
       expect(rendered).to have_link 'New Newsletter'
     end
 
-    it 'does not display newsletter link' do
-      assign(:user, @other)
+    it 'does not display newsletter link if it not my profile even though user is privileged' do
+      sign_in @other
       render
       expect(rendered).to_not have_link 'New Newsletter'
     end
