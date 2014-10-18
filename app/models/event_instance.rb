@@ -1,4 +1,7 @@
 class EventInstance < ActiveRecord::Base
+
+  include Twitterable
+
   belongs_to :event
   belongs_to :user
   include UserNullable
@@ -10,6 +13,8 @@ class EventInstance < ActiveRecord::Base
   scope :live, -> { where('updated_at > ?', 5.minutes.ago).order('created_at DESC') }
   scope :latest, -> { order('created_at DESC') }
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
+
+  before_save :generate_twitter_tweet           # or could be on: :update 
 
   def started?
     hangout_url?
@@ -29,6 +34,16 @@ class EventInstance < ActiveRecord::Base
 
   def start_datetime
     event != nil ? event.start_datetime : created_at
+  end
+
+  private
+
+  # before_save - hook and this one could be placed in module Twitterable
+  def generate_twitter_tweet
+    if changed_attributes.include?(:hangout_url)
+      puts "now twittering...!"
+      #tweet_hangout_notification(hangout_url)  # provided by module Twitterable
+    end
   end
 
 end
