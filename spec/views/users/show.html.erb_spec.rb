@@ -243,7 +243,7 @@ describe 'users/show.html.erb' do
     end
   end
 
-  context '' do
+  context 'New Newsletter button' do
     before(:each) do
       @other = FactoryGirl.create(:user)
       @user = FactoryGirl.create(:user, email:'random@random.com')
