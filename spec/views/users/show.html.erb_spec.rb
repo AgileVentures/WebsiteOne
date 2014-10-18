@@ -229,6 +229,30 @@ describe 'users/show.html.erb' do
       render
       expect(rendered).to_not have_xpath("//a[contains(@type, 'button')]")
     end
+
+
+
+    it 'does not display New Newsletter link if it is my profile and I am not privileged' do
+      allow(@user).to receive(:is_privileged?).and_return(false)
+      render
+      expect(rendered).to_not have_link 'New Newsletter'
+    end
+  end
+
+  context '' do
+    before(:each) do
+      @user = FactoryGirl.create(:user, email:'random@random.com')
+      # allow(@user).to receive(:privileged_visitor?).and_return(true)
+      sign_in @user
+      allow(@user).to receive(:is_privileged?).and_return(true)
+    end
+
+    it 'displays New Newsletter link if it is my profile and I am privileged' do
+      # binding.pry
+
+      render
+      expect(rendered).to have_link 'New Newsletter'
+    end
   end
 
   it 'renders a list of contributions made by user' do
