@@ -4,7 +4,7 @@ module DocumentsHelper
   end
 
   def documents
-    @documents = Document.where("project_id = ?", @project.id).order(:created_at)
+    @documents = Document.where("project_id = ?", @project.id).order(:created_at).includes(:user)
   end
 
   def metadata
