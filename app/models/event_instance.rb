@@ -42,7 +42,7 @@ class EventInstance < ActiveRecord::Base
   def generate_twitter_tweet
     if changed_attributes.include?(:hangout_url)
       puts "now twittering...!"
-      #tweet_hangout_notification(hangout_url)  # provided by module Twitterable
+      #tweet_hangout_notification(self)  # provided by module Twitterable
     end
   end
 
