@@ -39,10 +39,11 @@ module ApplicationHelper
   end
 
   def current_projects
-    Project.order(created_at: :desc)
+    Project.order(created_at: :desc).includes(:documents)
   end
 
   def roots
+    binding.pry
     @roots = Document.roots.where('project_id = ?', @project.id).order(:created_at)
   end
 
