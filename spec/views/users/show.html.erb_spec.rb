@@ -241,6 +241,12 @@ describe 'users/show.html.erb' do
       render
       expect(rendered).to_not have_link 'New Newsletter'
     end
+
+    it 'does not display New Newsletter link if I am privileged and it is not my profile' do
+      allow(@user).to receive(:is_privileged?).and_return(false)
+      render
+      expect(rendered).to_not have_link 'New Newsletter'
+    end
   end
 
   context 'New Newsletter button' do
