@@ -14,7 +14,7 @@ class EventInstance < ActiveRecord::Base
   scope :latest, -> { order('created_at DESC') }
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
 
-  before_save :generate_twitter_tweet           # or could be on: :update 
+  before_save :generate_twitter_tweet
 
   def started?
     hangout_url?
@@ -41,9 +41,16 @@ class EventInstance < ActiveRecord::Base
   # before_save - hook and this one could be placed in module Twitterable
   def generate_twitter_tweet
     if changed_attributes.include?(:hangout_url)
-      puts "now twittering...!"
       #tweet_hangout_notification(self)  # provided by module Twitterable
+			tweet_hangout_notification
+			#update_attributes(:tweeted)		 
     end
+  end
+
+	def tweet_hangout_notification
+    message = "#{hangout_url}"
+		puts "sdfdsff about to tweet: " << message 
+    # tweet(message)
   end
 
 end

@@ -29,6 +29,9 @@ describe EventInstance, type: :model do
       allow(Time).to receive(:now).and_return(Time.parse('10:05:01 UTC'))
       expect(hangout.live?).to be_falsey
     end
+
+    xit 'tweets about it'
+    xit 'tweets again if hangout url changes'
   end
 
 end
