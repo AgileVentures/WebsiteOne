@@ -11,17 +11,18 @@ describe 'TwitterConcern' do
     end
 
     it "should create a twitter client object" do
-        expect(@fake_model).to respond_to(:tweet_hangout_notification)
-        #expect(@fake_model.create_twitter_client).to be_a(Twitter::REST::Client)
+      expect(@fake_model.is_valid_twitter_client?).to be_truthy
     end
 
-    # ripped it bcause twitter client is not exposed anymore
-    #it "consumer key should be defined" do
-    #    twitter_client = @fake_model.create_twitter_client
-    #
-    #    expect(twitter_client.consumer_key).to eq('kdshflkdskflh')
-    #end
+    # we need to move this over to the event or event_instance models as this is not a cross-cutting concern
+    it 'should tweet hangout notification' do
+        expect(@fake_model).to respond_to(:tweet_hangout_notification)
+    end
 
-    # test ability of concern to do posts.
-      # stub api
+    # we need tests to cover this as should be a responsibility of the concern
+    it "consumer key should be defined" do
+        twitter_client = @fake_model.twitter_client
+        expect(twitter_client.consumer_key).to_not be_nil
+    end
+
 end
