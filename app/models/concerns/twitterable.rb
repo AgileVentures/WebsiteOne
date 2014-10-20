@@ -1,6 +1,7 @@
 module Twitterable
 
   def tweet(message)
+    return unless Features.twitter.hangout_notifications.enabled = true
     check_response twitter_client.update(message)
   end
 
@@ -13,6 +14,7 @@ module Twitterable
   end
 
   # private
+  # still need to figure our the public vs private thing...
 
   def twitter_client
     twitter_client ||= Twitter::REST::Client.new do |config|
@@ -25,6 +27,7 @@ module Twitterable
 
   def check_response(response)
     if response.kind_of?(Twitter::Tweet)
+      # we should probably change this to return the response itself, which should be 'truthy'
       true
     else
       Rails.logger.error "Twitterable: Could not update twitter status"
