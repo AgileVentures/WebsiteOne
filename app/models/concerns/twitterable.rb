@@ -5,7 +5,7 @@ module Twitterable
     check_response twitter_client.update(message)
   end
 
-  def is_valid_twitter_client?
+  def can_tweet?
     begin
       twitter_client.is_a? Twitter::REST::Client
     rescue
