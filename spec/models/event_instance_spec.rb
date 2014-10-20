@@ -29,13 +29,38 @@ describe EventInstance, type: :model do
       allow(Time).to receive(:now).and_return(Time.parse('10:05:01 UTC'))
       expect(hangout.live?).to be_falsey
     end
-
-    xit 'tweets about it'
-    xit 'tweets again if hangout url changes'
+    
+    it 'tweets hangout notification' do
+      expect(hangout).to receive(:generate_twitter_tweet)
+      hangout.save
+    end
   end
 
-  it 'should tweet hangout notification' do
-    expect(@fake_model).to respond_to(:tweet_hangout_notification)
-  end
+  context 'event_instance is changed' do
+    before do
+      @hangout_with_url = FactoryGirl.create(:event_instance, 
+                                             hangout_url: 'http://example.com')
+    end
 
+    let(:other_hangout) { @hangout_with_url }
+    it 'checks twitter client' do
+      expect(other_hangout.can_tweet?).to be_truthy
+    end
+
+    context 'hangout_url changes' do
+      before { other_hangout.hangout_url = 'http://foo.example.com' }
+      it 'tweets again' do
+        expect(other_hangout).to receive(:tweet_hangout_notification)
+        other_hangout.save
+      end
+    end
+    
+    context 'hangout_url not changed' do
+      before { other_hangout.title = 'changed' }
+      it 'will trigger no tweet' do
+        expect(other_hangout).not_to receive(:tweet_hangout_notification)
+        other_hangout.save
+      end
+    end
+  end
 end
