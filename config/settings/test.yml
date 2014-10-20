@@ -4,6 +4,9 @@ features:
       enabled: false
     invites:
       enabled: false
+  twitter:
+    hangout_notifications:
+      enabled: false
 
 mailer:
   delivery_method: 'test'
@@ -11,7 +14,7 @@ mailer:
 privileged_users: 'chesa@example.com, random@random.com' 
 
 twitter:
-  consumer_key: ""
-  consumer_secret: "YOUR_CONSUMER_SECRET"
-  access_token: "YOUR_ACCESS_TOKEN"
-  access_token_secret: "YOUR_ACCESS_SECRET"
+  consumer_key:        nil
+  consumer_secret:     nil
+  access_token:        nil
+  access_token_secret: nil
