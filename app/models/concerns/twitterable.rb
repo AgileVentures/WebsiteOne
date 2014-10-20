@@ -12,7 +12,7 @@ module Twitterable
     end
   end
 
-  private
+  # private
 
   def twitter_client
     twitter_client ||= Twitter::REST::Client.new do |config|
@@ -27,7 +27,7 @@ module Twitterable
     if response.kind_of?(Twitter::Tweet)
       true
     else
-      Rails.logger.error("Twitterable: Could not update twitter status")
+      Rails.logger.error "Twitterable: Could not update twitter status"
       false
     end
   end

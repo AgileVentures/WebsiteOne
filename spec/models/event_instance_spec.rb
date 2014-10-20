@@ -34,4 +34,8 @@ describe EventInstance, type: :model do
     xit 'tweets again if hangout url changes'
   end
 
+  it 'should tweet hangout notification' do
+    expect(@fake_model).to respond_to(:tweet_hangout_notification)
+  end
+
 end

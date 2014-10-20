@@ -14,7 +14,7 @@ class EventInstance < ActiveRecord::Base
   scope :latest, -> { order('created_at DESC') }
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
 
-  before_save :generate_twitter_tweet
+  after_save :generate_twitter_tweet if :started?
 
   def started?
     hangout_url?
@@ -38,19 +38,19 @@ class EventInstance < ActiveRecord::Base
 
   private
 
-  # before_save - hook and this one could be placed in module Twitterable
   def generate_twitter_tweet
     if changed_attributes.include?(:hangout_url)
-      #tweet_hangout_notification(self)  # provided by module Twitterable
-			tweet_hangout_notification
-			#update_attributes(:tweeted)		 
+      tweet_hangout_notification
     end
   end
 
-	def tweet_hangout_notification
-    message = "#{hangout_url}"
-		puts "sdfdsff about to tweet: " << message 
-    # tweet(message)
+  def tweet_hangout_notification
+    message = "Pair programming on Agile Ventures #{hangout_url} #pairwithme"
+    begin
+      tweet(message)
+    rescue
+      Rails.logger.error "Hangout notification tweet not sent. Please check Twitter settings."
+    end
   end
 
 end
