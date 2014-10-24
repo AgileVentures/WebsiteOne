@@ -177,6 +177,8 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
@@ -500,6 +502,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   faker
+  font-awesome-rails
   friendly_id
   geocoder
   guard
