@@ -30,7 +30,7 @@ Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5
 
 Capybara.register_driver :poltergeist_debug do |app|
-  Capybara::Poltergeist::Driver.new(app, :inspector => true, :port => 3010)
+  Capybara::Poltergeist::Driver.new(app, :inspector => true, :port => 3010, :timeout => 10)
 end
 
 # By default, any exception happening in your Rails application will bubble up
