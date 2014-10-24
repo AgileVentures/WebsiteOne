@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user, aliases: [:whodunnit] do
-    ignore do
+    transient do
       gplus 'gplus_id'
     end
 
