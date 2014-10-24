@@ -21,8 +21,6 @@
 //= require typeahead
 //= require bootstrap-tokenfield.min
 //= require bootstrap-tags
-//= require bootstrap-modal
-//= require bootstrap-modalmanager
 //= require_self
 //= require_directory ./global-modules
 //= require_tree .

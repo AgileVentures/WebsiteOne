@@ -75,8 +75,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-modal-rails (2.2.5)
-      railties (>= 3.1)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     buftok (0.2.0)
@@ -179,8 +177,6 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
-    font-awesome-rails (4.2.0.0)
-      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
@@ -486,7 +482,6 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  bootstrap-modal-rails
   bootstrap-sass
   bullet
   capybara
@@ -505,7 +500,6 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   faker
-  font-awesome-rails
   friendly_id
   geocoder
   guard

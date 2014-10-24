@@ -22,7 +22,6 @@ gem 'faker'
 gem 'omniauth'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'omniauth-gplus', github: 'samdunne/omniauth-gplus'
-gem 'font-awesome-rails'
 gem 'acts_as_tree'
 gem 'acts_as_follower'
 gem 'will_paginate-bootstrap'
@@ -33,7 +32,6 @@ gem 'redcarpet' # renders markdown
 gem 'coderay' # syntax highlighting for markdown code blocks
 gem 'acts-as-taggable-on' # Add tags to objects. Used on Projects
 gem 'geocoder' # geocoding
-gem 'bootstrap-modal-rails'
 gem 'paper_trail'  # version control for Document
 gem 'verbs'   # language and verbs - not used for now but I plan to use it in Events /Thomas
 gem 'ice_cube', '0.11.1'     # used to generate event schedules, locked to last known version not to have memory leaks
