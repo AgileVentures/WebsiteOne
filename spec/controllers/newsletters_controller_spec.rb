@@ -20,7 +20,7 @@ describe NewslettersController do
     describe "authorization" do
       it 'check_privileged' do
         get :new, {}, valid_session
-        expect(controller.current_user.email).to be_in(Settings.privileged_users)
+        expect(controller.current_user.email).to be_in(Settings.privileged_users.split(','))
       end
     end
 
@@ -157,7 +157,7 @@ describe NewslettersController do
     describe 'authorization' do
       it 'check_privilged' do
         get :new, {}, valid_session
-        expect(controller.current_user.email).not_to be_in(Settings.privileged_users)
+        expect(controller.current_user.email).not_to be_in(Settings.privileged_users.split(','))
       end
     end
     describe "GET new" do

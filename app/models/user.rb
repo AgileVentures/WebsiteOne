@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   end
 
   def is_privileged?
-    Settings.privileged_users.include?(email)
+    Settings.privileged_users.split(',').include?(email)
   end
   
   def self.search(params)
