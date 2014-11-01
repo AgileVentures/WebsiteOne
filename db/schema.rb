@@ -129,6 +129,18 @@ ActiveRecord::Schema.define(version: 20141007192312) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
+  create_table "newsletters", force: true do |t|
+    t.string   "title",                        null: false
+    t.string   "subject",                      null: false
+    t.text     "body",                         null: false
+    t.boolean  "do_send",      default: false
+    t.boolean  "was_sent",     default: false
+    t.integer  "last_user_id", default: 0
+    t.datetime "sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -158,7 +170,7 @@ ActiveRecord::Schema.define(version: 20141007192312) do
   add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
 
   create_table "statuses", force: true do |t|
-    t.text     "status"
+    t.string   "status"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
