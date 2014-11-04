@@ -3,8 +3,6 @@ class UsersController < ApplicationController
   before_filter :get_user, only: [:show, :add_status]
   before_filter :authenticate_user!, only: [:add_status]
 
-  EMAIL_REGEXP = /^(("[^\f\n\r\t\v\b]+[\s\w\(\),:;<>\[\]@\\!\#$%&'"*+\/=?^`{|}~-]+")|([\w!\#$%&'*+\/=?^`{|}~-]+(?:\.[\w!\#$%&'*+\/=?^`{|}~-]+)*))@((((\w+\-+)|(\w+\.))*\w{1,}\.[a-zA-Z]{2,6})|([a-zA-Z]{2,6}))$/
-
   def index
     @users = User.search(params)
   end
@@ -25,7 +23,7 @@ class UsersController < ApplicationController
       redirect_to :back, alert: 'Please fill in Name, Email and Message field'
     elsif !User.find(message_params['recipient_id']).display_hire_me
       redirect_to :back, alert: 'User has disabled hire me button'
-    elsif !EMAIL_REGEXP.match(message_params['email'])
+    elsif !Devise.email_regexp.match(message_params['email'])
       redirect_to :back, alert: 'Please give a valid email address'
     elsif !message_params['fellforit'].blank?
       redirect_to :root, notice: 'Form not submitted. Are you human?'
