@@ -29,7 +29,7 @@ describe EventInstance, type: :model do
       allow(Time).to receive(:now).and_return(Time.parse('10:05:01 UTC'))
       expect(hangout.live?).to be_falsey
     end
-    
+
     it 'tweets hangout notification' do
       expect(hangout).to receive(:generate_twitter_tweet)
       hangout.save
@@ -54,7 +54,7 @@ describe EventInstance, type: :model do
         other_hangout.save
       end
     end
-    
+
     context 'hangout_url not changed' do
       before { other_hangout.title = 'changed' }
       it 'will trigger no tweet' do
