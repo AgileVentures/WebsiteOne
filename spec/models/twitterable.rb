@@ -13,7 +13,7 @@ describe 'TwitterConcern' do
     end
 
     it "should create a twitter client object" do
-      expect(@fake_model.is_valid_twitter_client?).to be_truthy
+      expect(@fake_model.can_tweet?).to be_truthy
     end
 
     it "consumer key should be defined" do
@@ -22,7 +22,8 @@ describe 'TwitterConcern' do
     end
 
     it 'sends a post request to the twitter api' do
-      stub_request(:post, /api\.twitter\.com/).to_return(:status => 200, :body => '{ "id": 243145735212777472, "text": "hello world" }')
+      binding.pry
+      # stub_request(:post, /api\.twitter\.com/).to_return(:status => 200, :body => '{ "id": 243145735212777472, "text": "hello world" }')
 
       response = @fake_model.tweet('hello world')
 
