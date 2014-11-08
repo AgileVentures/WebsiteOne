@@ -9,9 +9,6 @@ features:
     enabled: true
   welcome_email:
     enabled: true
-  twitter:
-    hangout_notifications:
-      enabled: true 
 
 mailer:
   delivery_method: 'test'
@@ -45,8 +42,7 @@ hangouts:
   app_id: '227702023966'
 
 twitter:
-  consumer_key:        nil 
-  consumer_secret:     nil 
-  access_token:        nil 
+  consumer_key:        nil
+  consumer_secret:     nil
+  access_token:        nil
   access_token_secret: nil
-
