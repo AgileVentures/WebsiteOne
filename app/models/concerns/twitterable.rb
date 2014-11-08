@@ -1,7 +1,6 @@
 module Twitterable
 
   def tweet(message)
-    # return unless Features.twitter.hangout_notifications.enabled = true
     check_response twitter_client.update(message)
   end
 
@@ -12,9 +11,6 @@ module Twitterable
       return false
     end
   end
-
-  # private
-  # still need to figure our the public vs private thing...
 
   def twitter_client
     twitter_client ||= Twitter::REST::Client.new do |config|
