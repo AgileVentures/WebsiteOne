@@ -9,3 +9,9 @@ mailer:
   delivery_method: 'test'
 
 privileged_users: 'chesa@example.com, random@random.com' 
+
+twitter:
+  consumer_key: ""
+  consumer_secret: "YOUR_CONSUMER_SECRET"
+  access_token: "YOUR_ACCESS_TOKEN"
+  access_token_secret: "YOUR_ACCESS_SECRET"
