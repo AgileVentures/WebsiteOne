@@ -4,7 +4,7 @@ require 'twitterable'
 describe 'TwitterConcern' do
 
     before :all do
-      Features.twitter.hangout_notifications.enabled = true 
+      Features.twitter.hangout_notifications.enabled = true
       class FakeModel
         include ActiveModel::Model
         include Twitterable
@@ -22,8 +22,7 @@ describe 'TwitterConcern' do
     end
 
     it 'sends a post request to the twitter api' do
-      binding.pry
-      # stub_request(:post, /api\.twitter\.com/).to_return(:status => 200, :body => '{ "id": 243145735212777472, "text": "hello world" }')
+      stub_request(:post, /api\.twitter\.com/).to_return(:status => 200, :body => '{ "id": 243145735212777472, "text": "hello world" }')
 
       response = @fake_model.tweet('hello world')
 
