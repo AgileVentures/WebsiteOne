@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 20141007192312) do
   add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
 
   create_table "statuses", force: true do |t|
-    t.text     "status"
+    t.string   "status"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

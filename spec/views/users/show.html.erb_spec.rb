@@ -16,7 +16,7 @@ describe 'users/show.html.erb' do
                               title_list: 'Philanthropist',
                               created_at: thirty_days_ago,
                               github_profile_url: 'http://github.com/Eric',
-                              skill_list: [ 'Shooting', 'Hooting' ],
+                              skill_list: %w(Shooting Hooting),
                               bio: 'Lonesome Cowboy')
 
     @user.status.build(attributes = FactoryGirl.attributes_for(:status))
@@ -49,7 +49,7 @@ describe 'users/show.html.erb' do
         }
     ]
     assign :youtube_videos, @youtube_videos
-    @skills = ["rails", "ruby", "rspec"]
+    @skills = %w(rails ruby rspec)
     assign :skills, @skills
   end
 
@@ -59,11 +59,11 @@ describe 'users/show.html.erb' do
       expect(rendered).to have_css('ul#tabs')
     end
 
-    it 'do not render tab About if user has no :bio' do
+    it 'render default bio if User has not provided one' do
       allow(@user).to receive(:bio?).and_return false
       render
-      rendered.within('ul#tabs') do |section|
-        expect(section).to_not have_link 'About', href: '#about'
+      rendered.within('section.user-bio') do |section|
+        expect(section).to have_css 'p', text: 'This member has not written his bio yet...'
       end
     end
 
