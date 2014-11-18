@@ -10,13 +10,13 @@
 <% end %>
 <div class="eventContainer">
   <% @events.each_slice(2) do |slice| %>
-    <ul id="eventContainer" class="eventCards">
+    <ul id="eventContainer" class="eventCards"> 
       <% slice.each do |instance| %>
         <% event = instance[:event] %>
         <% time = instance[:time] %>
         <% prefix = time < Time.now ? 'Started at ' : 'Starts at ' %>
         <% start_time = event.start_time_with_timezone.strftime('%k:%M %Z') %>
-        <% display_time = "#{prefix} #{start_time}" %>
+        <% display_time = "#{prefix} #{start_time}" %> 
         <% display_month = time.strftime('%B') %>
         <% display_date = time.strftime('%d') %>
 
@@ -32,6 +32,8 @@
               <p class="eventText"><%= event.description.truncate(70, separator: /\s/) %></p>
 
               <p class="eventTime"><%= display_time %></p>
+              <%= binding.pry %>
+              <p class="eventTime"> LOCAL:<%= current_occurrence_time(event) %></p>
 
             </div>
             <b class="gradient"></b>

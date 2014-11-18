@@ -33,7 +33,8 @@
             <% @event_schedule.first(5).each do |e| %>
               <li>
                 <%= current_occurrence_time(e) %> /
-                <p style='padding-left: 1em'><%= current_occurrence_local_time(e) %></p>
+                <%= binding.pry %>
+                <p style='padding-left: 1em'>LOCALTIME<%= current_occurrence_local_time(e) %></p>
               </li>
             <% end %>
           </ul>
