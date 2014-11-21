@@ -14,7 +14,7 @@ class EventInstance < ActiveRecord::Base
   scope :latest, -> { order('created_at DESC') }
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
 
-  after_save :generate_twitter_tweet if :started?
+  after_save :tweet_hangout_notification if :started? && :hangout_changed?
 
   def started?
     hangout_url?
@@ -38,16 +38,16 @@ class EventInstance < ActiveRecord::Base
 
   private
 
-  def generate_twitter_tweet
-    if changed_attributes.include?(:hangout_url)
-      tweet_hangout_notification
-    end
+  # TODO need test to cover this method
+  def hangout_changed?
+    true if changed_attributes.include?(:hangout_url)
   end
 
+  # need test to cover this method
   def tweet_hangout_notification
     message = "Pair programming on Agile Ventures #{hangout_url} #pairwithme"
     begin
-      tweet(message)
+      Twitterable.tweet(message)
     rescue
       Rails.logger.error "Hangout notification tweet not sent. Please check Twitter settings."
     end
