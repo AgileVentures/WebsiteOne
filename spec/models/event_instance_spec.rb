@@ -43,9 +43,6 @@ describe EventInstance, type: :model do
     end
 
     let(:other_hangout) { @hangout_with_url }
-    it 'checks twitter client' do
-      expect(other_hangout.can_tweet?).to be_truthy
-    end
 
     context 'hangout_url changes' do
       before { other_hangout.hangout_url = 'http://foo.example.com' }
