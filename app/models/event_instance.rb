@@ -1,7 +1,5 @@
 class EventInstance < ActiveRecord::Base
 
-  include Twitterable
-
   belongs_to :event
   belongs_to :user
   include UserNullable
