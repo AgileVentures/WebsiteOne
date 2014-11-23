@@ -9,6 +9,9 @@ features:
     enabled: true
   welcome_email:
     enabled: true
+  twitter:
+    notifications:
+      enabled: false
 
 mailer:
   delivery_method: 'test'

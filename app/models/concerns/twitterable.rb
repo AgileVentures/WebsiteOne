@@ -1,16 +1,14 @@
 module Twitterable
 
   def self.tweet(message)
-    check_response twitter_client.update(message)
-  end
-
-  def self.can_tweet?
-    begin
-      twitter_client.is_a? Twitter::REST::Client
-    rescue
-      return false
+    if Settings.features.twitter.notifications.enabled == true
+      check_response twitter_client.update(message)
+    else
+      false
     end
   end
+
+  private
 
   def self.twitter_client
     @twitter_client ||= Twitter::REST::Client.new do |config|

@@ -46,7 +46,7 @@ describe EventInstance, type: :model do
 
     context 'hangout_url changes' do
       before { other_hangout.hangout_url = 'http://foo.example.com' }
-      it 'tweets again' do
+      it 'tweets hangout notification again' do
         expect(other_hangout).to receive(:tweet_hangout_notification)
         other_hangout.save
       end
@@ -54,7 +54,7 @@ describe EventInstance, type: :model do
 
     context 'hangout_url not changed' do
       before { other_hangout.title = 'changed' }
-      it 'will trigger no tweet' do
+      it 'does not tweet hangout notification' do
         expect(other_hangout).not_to receive(:tweet_hangout_notification)
         other_hangout.save
       end

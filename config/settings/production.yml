@@ -6,6 +6,9 @@ features:
       enabled: true
     invites:
       enabled: true
+  twitter:
+    notifications:
+      enabled: true
 
 mailer:
   delivery_method: 'smtp'
