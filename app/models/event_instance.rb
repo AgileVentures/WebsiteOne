@@ -14,7 +14,7 @@ class EventInstance < ActiveRecord::Base
   scope :latest, -> { order('created_at DESC') }
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
 
-  after_save :tweet_hangout_notification if :started? && :hangout_changed?
+  after_save "tweet_hangout_notification if (started? && hangout_url_changed?)"
 
   def started?
     hangout_url?
@@ -38,12 +38,6 @@ class EventInstance < ActiveRecord::Base
 
   private
 
-  # TODO need test to cover this method
-  def hangout_changed?
-    true if changed_attributes.include?(:hangout_url)
-  end
-
-  # need test to cover this method
   def tweet_hangout_notification
     message = "Pair programming on Agile Ventures #{hangout_url} #pairwithme"
     begin

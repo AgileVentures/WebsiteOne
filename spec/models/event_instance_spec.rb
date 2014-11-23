@@ -31,7 +31,7 @@ describe EventInstance, type: :model do
     end
 
     it 'tweets hangout notification' do
-      expect(hangout).to receive(:generate_twitter_tweet)
+      expect(hangout).to receive(:tweet_hangout_notification)
       hangout.save
     end
   end
