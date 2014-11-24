@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007192312) do
+ActiveRecord::Schema.define(version: 20141119002743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20141007192312) do
     t.string   "pivotaltracker_url"
     t.text     "pitch"
     t.integer  "commit_count",       default: 0
+    t.string   "image_url"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree

@@ -5,9 +5,17 @@
       <strong><%= link_to 'Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
       <strong><%= @project.title %></strong>
 
+      <div class="row"> <div class="col-xs-2">
+        <%= image_tag @project.image_url, class: "img-responsive" %>
+        
+
+      </div>
+      <div class="col-xs-10">
       <h1><%= @project.title %></h1>
 
-      <p><%= clean_html @project.description %></p>
+      
+      </div><p><%= clean_html @project.description %></p>
+      </div>
       <hr>
 
       <div class="project-edit">
