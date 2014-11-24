@@ -1,4 +1,5 @@
 <section class="doc-preview">
+
   <div class="row"> <div class="col-xs-3"><%= image_tag project.image_url, class: "img-responsive" %></div>
   <div class="col-xs-9">
         
@@ -33,7 +34,9 @@
       <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, user_path(project.user) %></div>
     </div>
 </div>
+<div class="container-fluid">
 <div class="row"> <div class="col-xs-0"></div><div class="col-xs-12">
   <p><%= project.description.truncate(250, separator: ' ') %></p>
 </div></div>
+</div>
 </section>
