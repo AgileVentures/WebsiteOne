@@ -129,14 +129,28 @@ describe UsersController, :type => :controller do
 
     context 'with invalid parameters' do
 
-      before(:each) { post :hire_me_contact_form, message_form: { name: '', email: '', message: '' } }
+      context 'empty form fields' do
+        before(:each) { post :hire_me_contact_form, message_form: { name: '', email: '', message: '' } }
 
-      it 'should redirect to the previous page' do
-        expect(response).to redirect_to 'back'
+        it 'should redirect to the previous page' do
+          expect(response).to redirect_to 'back'
+        end
+
+        it 'should respond with "Please fill in Name, Email and Message field"' do
+          expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
+        end
       end
 
-      it 'should respond with "Please fill in Name, Email and Message field"' do
-        expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
+      context 'invalid email address' do
+        before(:each) { post :hire_me_contact_form, message_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you', recipient_id: @user.id } }
+
+        it 'should redirect to the previous page' do
+          expect(response).to redirect_to 'back'
+        end
+
+        it 'should respond with "Please give a valid email address"' do
+          expect(flash[:alert]).to eq 'Please give a valid email address'
+        end
       end
     end
 

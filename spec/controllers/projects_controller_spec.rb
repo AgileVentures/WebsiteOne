@@ -36,9 +36,11 @@ describe ProjectsController, :type => :controller do
 
 
     it 'should assign variables to be rendered by view' do
-      allow(Project).to receive(:search).and_return('Carrier has arrived.')
+      @project = mock_model(Project, title: 'Carrier has arrived.')
+      allow(Project).to receive(:search).and_return(@project)
+      @project.stub(:includes).and_return(@project)
       get :index
-      expect(assigns(:projects)).to eq 'Carrier has arrived.'
+      expect(assigns(:projects).title).to eq 'Carrier has arrived.'
     end
   end
 

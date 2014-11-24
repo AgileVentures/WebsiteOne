@@ -79,6 +79,9 @@ GEM
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
     builder (3.2.2)
+    bullet (4.9.0)
+      activesupport
+      uniform_notifier (~> 1.6.0)
     byebug (2.7.0)
       columnize (~> 0.3)
       debugger-linecache (~> 1.2)
@@ -411,6 +414,7 @@ GEM
     uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    uniform_notifier (1.6.1)
     utf8-cleaner (0.0.9)
     vcr (2.9.2)
     verbs (2.1.4)
@@ -460,6 +464,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-modal-rails
   bootstrap-sass
+  bullet
   capybara
   capybara-webkit
   coderay
