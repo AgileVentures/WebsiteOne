@@ -44,7 +44,7 @@
         </li>
     <% end %>
 
-    <% if presenter.can_create_newsletter? %>
+    <% if presenter.can_create_newsletter? && privileged_visitor? %>
       <li>
         <%= link_to "New Newsletter", new_newsletter_path, class: 'user-profile-btn' %>
       </li>
