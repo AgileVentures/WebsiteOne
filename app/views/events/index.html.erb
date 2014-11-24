@@ -10,7 +10,7 @@
 <% end %>
 <div class="eventContainer">
   <% @events.each_slice(2) do |slice| %>
-    <ul id="eventContainer" class="eventCards"> 
+    <ul id="eventContainer" class="eventCards">
       <% slice.each do |instance| %>
         <% event = instance[:event] %>
         <% time = instance[:time] %>
@@ -32,8 +32,7 @@
               <p class="eventText"><%= event.description.truncate(70, separator: /\s/) %></p>
 
               <p class="eventTime"><%= display_time %></p>
-              <%= binding.pry %>
-              <p class="eventTime"> LOCAL:<%= current_occurrence_time(event) %></p>
+              <p class="eventTime"> <%= current_occurrence_local_time(event) %></p>
 
             </div>
             <b class="gradient"></b>
