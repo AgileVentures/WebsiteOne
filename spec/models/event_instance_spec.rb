@@ -34,6 +34,11 @@ describe EventInstance, type: :model do
       expect(hangout).to receive(:tweet_hangout_notification)
       hangout.save
     end
+
+    it 'calls the TwitterService' do
+      expect(TwitterService).to receive(:tweet)
+      hangout.save
+    end
   end
 
   context 'event_instance is changed' do

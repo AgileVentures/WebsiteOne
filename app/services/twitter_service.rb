@@ -1,4 +1,4 @@
-module Twitterable
+module TwitterService
 
   def self.tweet(message)
     if Settings.features.twitter.notifications.enabled == true
