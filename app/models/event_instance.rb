@@ -38,7 +38,7 @@ class EventInstance < ActiveRecord::Base
 
   def tweet_hangout_notification
     begin
-      Twitterable.tweet("Pair programming on Agile Ventures #{hangout_url} #pairwithme")
+      TwitterService.tweet("Pair programming on Agile Ventures #{hangout_url} #pairwithme")
     rescue
       Rails.logger.error "Hangout notification tweet not sent. Please check Twitter settings."
     end
