@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'twitterable'
+require 'twitter_service'
 
-describe 'TwitterConcern' do
+describe 'TwitterService' do
     before :each do
       Settings.features.twitter.notifications.enabled = true
       stub_request(:post, /api\.twitter\.com/).to_return(:status => 200, :body => '{ "id": 243145735212777472, "text": "hello world" }')
