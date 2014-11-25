@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   validates :title, :description, :status, presence: true
   validates_with PivotalTrackerUrlValidator
   validates :github_url, uri: true, :allow_blank => true
+  validates :image_url, uri: true, :allow_blank => true
 
   belongs_to :user
   include UserNullable
