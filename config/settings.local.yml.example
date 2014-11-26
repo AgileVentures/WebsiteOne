@@ -12,3 +12,6 @@
 #     address: 'address'
 #     domain: 'domain'
 #     authentication: 'auth'
+
+github:
+  auth_token: 'xxxxxxxx'

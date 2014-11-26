@@ -1,4 +1,4 @@
-require 'nokogiri'
+require 'octokit'
 
 module GithubCommitsJob
   extend self
@@ -11,17 +11,21 @@ module GithubCommitsJob
     end
   end
 
+  
   private
 
   def update_total_commit_count_for(project)
-    begin
-      doc = Nokogiri::HTML(open(project.github_url))
-      commit_count = doc.at_css('li.commits .num').text.strip.gsub(',', '').to_i
-      project.update(commit_count: commit_count)
+    repo_commits = Array.new
+
+    authenticate
+    @client.contributors("#{project.github_repo_user_name}/#{project.github_repo_name}", true, per_page: 100).each do |contrib|
       puts "Got what I came for from #{project.github_url}".green
     rescue Exception
-      puts "I refuse to fail or be stopped by #{project.github_url}!".red
+      repo_commits << contrib.contributions
     end
+
+    commit_count = repo_commits.reduce(:+)
+    project.update(commit_count: commit_count)
   end
 
   def update_user_commit_counts_for(project)
@@ -45,19 +49,19 @@ module GithubCommitsJob
   end
 
   def get_contributor_stats(repo)
-    begin
-      loop do
-        contributors = Octokit.contributor_stats(repo)
-        return contributors unless contributors.nil?
-        Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
-        sleep 3
+    loop do
+      authenticate
+      contributors = @client.contributor_stats(repo)
+      return contributors unless contributors.nil?
+      Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
+      sleep 3
       end
     rescue Exception
       puts "Could not get the contributors for for #{repo}!".red
     end
   end
 
-  def update_protocol(project)
-    project.update(github_url: project.github_url.sub('http://', 'https://'))
+  def authenticate
+    @client ||= Octokit::Client.new(:access_token => Settings.github.auth_token)
   end
 end
