@@ -11,3 +11,5 @@ features:
 
 hangouts:
   app_id: '10095526298'
+# comma separated list
+privileged_users: "random@random.com"

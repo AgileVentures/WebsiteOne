@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    @projects = Project.search(params[:search], params[:page])
+    @projects = Project.search(params[:search], params[:page]).includes(:user)
     render layout: 'with_sidebar_sponsor_right'
   end
 

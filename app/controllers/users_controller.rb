@@ -23,6 +23,8 @@ class UsersController < ApplicationController
       redirect_to :back, alert: 'Please fill in Name, Email and Message field'
     elsif !User.find(message_params['recipient_id']).display_hire_me
       redirect_to :back, alert: 'User has disabled hire me button'
+    elsif !Devise.email_regexp.match(message_params['email'])
+      redirect_to :back, alert: 'Please give a valid email address'
     elsif !message_params['fellforit'].blank?
       redirect_to :root, notice: 'Form not submitted. Are you human?'
     elsif Mailer.hire_me_form(User.find(message_params['recipient_id']), message_params).deliver
