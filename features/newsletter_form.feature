@@ -26,7 +26,10 @@ Feature: Newsletter form
     Given I am logged in as "Noob"
     And I am on my "Profile" page
     Then I should not see link "New Newsletter"
-    
+
+  Scenario: There is no link displayed for Chesa if logged out 
+    Given I am on "Profile" page for user "Chesa"
+    Then I should not see link "New Newsletter"
 
   Scenario: Noob visits Newsletter index page
     Given I am logged in as "Noob"

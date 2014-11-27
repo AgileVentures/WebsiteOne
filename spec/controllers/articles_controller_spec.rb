@@ -22,6 +22,7 @@ describe ArticlesController do
 
     it 'should assign all articles to @articles' do
       expect(Article).to receive(:order).and_return(@articles)
+      @articles.stub(:includes).and_return(@articles)
       get :index
       expect(assigns(:articles)).to eq @articles
     end
@@ -29,6 +30,7 @@ describe ArticlesController do
     it 'should be able to filter by tags' do
       expect(Article).to receive(:tagged_with).with('Ruby')
       Article.stub_chain("tagged_with.order").and_return(@ruby_rails_articles)
+      @ruby_rails_articles.stub(:includes).and_return(@ruby_rails_articles)
       get :index, tag: 'Ruby'
       expect(assigns(:articles)).to eq @ruby_rails_articles
     end
