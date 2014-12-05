@@ -5,22 +5,22 @@ class ImageUrlValidator < ActiveModel::Validator
 
   private
 
-  def validate_pivotal_tracker_url(record)
-    image_url = record.image_url
-    validates_format_of :image, :with => %r{\.(png|jpg|jpeg)$}i, :message => "whatever"
+  def validate_image_url(record)
+    #image_url = record.image_url
+    #validates_format_of :image, :with => %r{\.(png|jpg|jpeg)$}i, :message => "whatever"
 
-    match = url.match(/^(?:https|http|)[:\/]*www\.pivotaltracker\.com\/s\/projects\/(\d+)$/i)
-    if match.present?
-      pv_id = match.captures[0]
-    elsif url =~ /^\d+$/
-      pv_id = url
-    end
+    match = image_url.match(/^(?:https|http|)[:\/]*www\.#{}\/s\/projects\/(\d+)$/i)
+    # if match.present?
+    #   pv_id = match.captures[0]
+    # elsif url =~ /^\d+$/
+    #   pv_id = url
+    # end
 
-    if pv_id.present?
-      # tidy up URL
-      record.pivotaltracker_url = "https://www.pivotaltracker.com/s/projects/#{pv_id}"
-    else
-      record.errors[:pivotaltracker_url] << 'Invalid Pivotal Tracker URL'
-    end
+    # if pv_id.present?
+    #   # tidy up URL
+    #   record.pivotaltracker_url = "https://www.pivotaltracker.com/s/projects/#{pv_id}"
+    # else
+    #   record.errors[:pivotaltracker_url] << 'Invalid Pivotal Tracker URL'
+    # end
   end
 end
