@@ -9,6 +9,6 @@ class ImageUrlValidator < ActiveModel::Validator
   private
 
   def is_whitelisted?(url)
-    IMAGE_HOST_WHITELIST.include? {|image_host| url.match(/#{image_host}/i) }
+    IMAGE_HOST_WHITELIST.include? url
   end
 end
