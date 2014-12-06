@@ -2,15 +2,25 @@
 Feature: As a site owner
   So I can make collaboration among registered users easier
   I would like to display a index of users with links to user profiles
+  And allow users to search for other users using a variety of criterias
 
   Background:
     Given I am on the "home" page
-    And the following users exist
-      | first_name | last_name | email                   |
-      | Alice      | Jones     | alice@btinternet.co.uk  |
-      | Bob        | Butcher   | bobb112@hotmail.com     |
-      |            | Croutch   | c.croutch@enterprise.us |
-      | Dave       |           | dave@dixons.me          |
+    And the following projects exist:
+      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |
+      | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 |
+      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  |
+      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  |
+      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  |
+      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |
+    And there are no videos
+    And the following active users exist
+      | first_name | last_name | email                   | projects     |
+      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  |
+      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  |
+      |            | Croutch   | c.croutch@enterprise.us | hello saturn |
+      | Dave       |           | dave@dixons.me          | hello sun    |
     And I am logged in as user with email "brett@example.com", with password "12345678"
 
   Scenario: Having All Users page
@@ -32,4 +42,10 @@ Feature: As a site owner
     And I should not see "Bob"
     And I should not see "Test"
 
-
+  Scenario: Searching by project involvement
+    Given I am on the "Members" page
+    When I filter projects for "hello world"
+    Then I should see "Alice"
+    And I should see "Bob"
+    And I should not see "Gary"
+    And I should not see "Dave"
