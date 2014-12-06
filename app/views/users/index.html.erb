@@ -9,12 +9,20 @@
     <% end %>
   </div>
   <div class="col-sm-4">
-    <form class="form-inline users-filter" role="form">
+    <%= form_tag(users_path, method: "get", class: "form-inline users-filter") do %>
+      <%= select_tag 'Project Filter', options_for_select([ "hello world", "hello saturn" ]) %>
       <div class="form-group">
         <label class="sr-only" for="user-filter">Filter users</label>
         <input type="text" class="form-control" id="user-filter" placeholder="filter users..">
       </div>
-    </form>
+      <%= submit_tag 'submit' %>
+    <% end %>
+    <!--<form class="form-inline users-filter" role="form">
+      <div class="form-group">
+        <label class="sr-only" for="user-filter">Filter users</label>
+        <input type="text" class="form-control" id="user-filter" placeholder="filter users..">
+      </div>
+    </form>-->
   </div>
 </div>
 <div class="row">
