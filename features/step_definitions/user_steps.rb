@@ -405,3 +405,15 @@ end
 When(/^I delete my profile$/) do
   @user.delete
 end
+
+When(/^I filter projects for "(.*?)"$/) do |project|
+  steps %Q{
+    When I select "#{project}" from the project's list
+    And I click "submit"
+  }
+end
+
+When(/^I select "(.*?)" from the project's list$/) do |project|
+  page.select(project, :from => 'Project Filter')
+end
+

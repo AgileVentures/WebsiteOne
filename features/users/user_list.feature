@@ -43,7 +43,7 @@ Feature: As a site owner
     And I should not see "Test"
 
   Scenario: Searching by project involvement
-    Given I am on the "Members" page
+    Given I am on the "our members" page
     When I filter projects for "hello world"
     Then I should see "Alice"
     And I should see "Bob"
