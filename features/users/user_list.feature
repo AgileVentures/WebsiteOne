@@ -47,5 +47,5 @@ Feature: As a site owner
     When I filter projects for "hello world"
     Then I should see "Alice"
     And I should see "Bob"
-    And I should not see "Gary"
+    And I should not see "Croutch"
     And I should not see "Dave"
