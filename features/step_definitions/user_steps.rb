@@ -227,6 +227,14 @@ Given /^the following users exist$/ do |table|
   end
 end
 
+Given /^the following active users exist$/ do |table|
+  table.hashes.each do |attributes|
+    p = Project.find_by(title: attributes['projects'])
+    u = FactoryGirl.create(:user, first_name: attributes['first_name'], last_name: attributes['last_name'], email: attributes['email'])
+    u.follow p
+  end
+end
+
 Given /^the following statuses have been set$/ do |table|
   table.hashes.each do |attributes|
     user = User.find_by_first_name(attributes[:user])
