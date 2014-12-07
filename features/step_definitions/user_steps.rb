@@ -414,6 +414,6 @@ When(/^I filter projects for "(.*?)"$/) do |project|
 end
 
 When(/^I select "(.*?)" from the project's list$/) do |project|
-  page.select(project, :from => 'Project Filter')
+  page.select(project, from: 'project_filter')
 end
 
