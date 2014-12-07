@@ -5,6 +5,28 @@ describe 'users/index.html.erb', :type => :view do
     @users = FactoryGirl.build_list(:user, 4, updated_at: '2013-09-30 05:00:00 UTC')
   end
 
+  context 'advanced filtering' do
+    before(:each) do
+      @projects_list = FactoryGirl.build_stubbed_list(:project, 4)
+      assign(:projects, @projects_list)
+    end
+
+    it 'should display an advanced filter form' do
+      render
+
+      expect(rendered).to have_content('Advanced search')
+      expect(rendered).to have_css('.filters-users-advanced')
+    end
+
+    it 'projects select is populated with project titles' do
+      render
+
+      project_titles_list = @projects_list.map {|p| p.title}
+      expect(rendered).to have_select('Project_Filter', :with_options => project_titles_list)
+    end
+
+  end
+
   it 'should display user filter form' do
     render
     expect(rendered).to have_content('Filter users')
