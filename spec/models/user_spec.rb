@@ -177,23 +177,51 @@ describe User, :type => :model do
   end
 
   describe '.search' do
-    subject { User.search(params) }
     let(:params) { {} }
 
-    before(:each) do
-      FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
-      FactoryGirl.create(:user, first_name: 'Marley', created_at: 2.days.ago)
-      FactoryGirl.create(:user, first_name: 'Janice', display_profile: false)
+    context 'has filters' do
+      before(:each) do
+        @user1 = FactoryGirl.create(:user)
+        @user2 = FactoryGirl.create(:user)
+        @project = FactoryGirl.create(:project)
+      end
+
+      it 'filters users for project' do
+        @user1.follow @project
+        @user2.stop_following @project
+        params['project_filter'] = @project.id
+
+        results = User.search(params)
+
+        expect(results).to include(@user1)
+        expect(results).not_to include(@user2)
+      end
+
+      it 'does not raise error when project_filter is empty' do
+        params['project_filter'] = ''
+
+        expect{ User.search(params) }.to_not raise_error
+      end
     end
 
-    it 'should be ordered by creation date' do
-      expect(subject.first.first_name).to eq('Bob')
-    end
+    context 'no filters' do
+      subject { User.search(params) }
 
-    it 'should be filtered by the display_profile property' do
-      results = subject.map(&:first_name)
-      expect(results).to include('Marley')
-      expect(results).not_to include('Janice')
+      before(:each) do
+        FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
+        FactoryGirl.create(:user, first_name: 'Marley', created_at: 2.days.ago)
+        FactoryGirl.create(:user, first_name: 'Janice', display_profile: false)
+      end
+
+      it 'should be ordered by creation date' do
+        expect(subject.first.first_name).to eq('Bob')
+      end
+
+      it 'should be filtered by the display_profile property' do
+        results = subject.map(&:first_name)
+        expect(results).to include('Marley')
+        expect(results).not_to include('Janice')
+      end
     end
   end
 
