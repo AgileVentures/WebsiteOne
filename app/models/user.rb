@@ -87,10 +87,18 @@ class User < ActiveRecord::Base
   def is_privileged?
     Settings.privileged_users.split(',').include?(email)
   end
-  
+
   def self.search(params)
-    where(display_profile: true)
-      .order(:created_at)
+    # TODO this code is not tested
+    # NOTE maybe we create a filters hash ie., { filters: { project_filter: 6, another_filter: "foo"}
+    # to make it easier to detect if a given search has filtering parameters set?
+    if params['project_filter']
+      Project.find(params['project_filter']).followers
+    else
+      # NOTE maybe we return a paginated list when no filtering criteria?
+      where(display_profile: true)
+        .order(:created_at)
+    end
   end
 
   def self.find_by_github_username(username)
