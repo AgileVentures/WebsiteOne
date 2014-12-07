@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'users/index.html.erb', :type => :view do
   before(:each) do
     @users = FactoryGirl.build_list(:user, 4, updated_at: '2013-09-30 05:00:00 UTC')
+    assign(:projects, [])
   end
 
   context 'advanced filtering' do
@@ -22,7 +23,7 @@ describe 'users/index.html.erb', :type => :view do
       render
 
       project_titles_list = @projects_list.map {|p| p.title}
-      expect(rendered).to have_select('Project_Filter', :with_options => project_titles_list)
+      expect(rendered).to have_select(:project_filter, :with_options => project_titles_list)
     end
 
   end
