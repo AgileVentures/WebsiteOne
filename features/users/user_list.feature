@@ -42,7 +42,7 @@ Feature: As a site owner
     And I should not see "Bob"
     And I should not see "Test"
 
-  Scenario: Searching by project involvement
+  Scenario: Filtering by project involvement
     Given I am on the "our members" page
     When I filter projects for "hello world"
     Then I should see "Alice"

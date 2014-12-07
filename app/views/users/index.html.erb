@@ -9,8 +9,10 @@
     <% end %>
   </div>
   <div class="col-sm-4">
-    <%= form_tag(users_path, method: "get", class: "form-inline users-filter") do %>
-      <%= select_tag 'Project Filter', options_for_select([ "hello world", "hello saturn" ]) %>
+    <h2>Advanced search</h2>
+    <%= form_tag(users_path, method: "get", class: "form-inline filters-users-advanced") do %>
+      <% projects = Project.all #temporary, for dev only %>
+      <%= select_tag 'Project Filter', options_from_collection_for_select(projects, 'id', 'title') %>
       <div class="form-group">
         <label class="sr-only" for="user-filter">Filter users</label>
         <input type="text" class="form-control" id="user-filter" placeholder="filter users..">
