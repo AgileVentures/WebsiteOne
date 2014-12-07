@@ -89,13 +89,12 @@ class User < ActiveRecord::Base
   end
 
   def self.search(params)
-    # TODO this code is not tested
     # NOTE maybe we create a filters hash ie., { filters: { project_filter: 6, another_filter: "foo"}
     # to make it easier to detect if a given search has filtering parameters set?
-    if params['project_filter']
+    if !params['project_filter'].blank?
       Project.find(params['project_filter']).followers
     else
-      # NOTE maybe we return a paginated list when no filtering criteria?
+      # NOTE return paginated list when no filtering criteria?
       where(display_profile: true)
         .order(:created_at)
     end
