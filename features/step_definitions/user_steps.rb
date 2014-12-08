@@ -406,6 +406,8 @@ When(/^I delete my profile$/) do
   @user.delete
 end
 
+# NOTE search steps below
+
 When(/^I filter projects for "(.*?)"$/) do |project|
   steps %Q{
     When I select "#{project}" from the project's list
@@ -417,3 +419,14 @@ When(/^I select "(.*?)" from the project's list$/) do |project|
   page.select(project, from: 'project_filter')
 end
 
+When(/^I select "(.*?)" from Timezone Filter$/) do |time_zone_selection|
+  page.select(time_zone_selection, from: 'timezone_filter')
+end
+
+Then(/^I should only see users in my timezone$/) do
+    pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should only see users near my timezone$/) do
+    pending # express the regexp above with the code you wish you had
+end
