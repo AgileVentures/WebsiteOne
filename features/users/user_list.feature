@@ -16,11 +16,11 @@ Feature: As a site owner
       | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |
     And there are no videos
     And the following active users exist
-      | first_name | last_name | email                   | projects     |
-      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  |
-      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  |
-      |            | Croutch   | c.croutch@enterprise.us | hello saturn |
-      | Dave       |           | dave@dixons.me          | hello sun    |
+      | first_name | last_name | email                   | projects     | timezone          |
+      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | Europe/Stockholm  |
+      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  | Europe/Stockholm  |
+      |            | Croutch   | c.croutch@enterprise.us | hello saturn | Asia/Kolkata      |
+      | Dave       |           | dave@dixons.me          | hello sun    | Asia/Kolkata      |
     And I am logged in as user with email "brett@example.com", with password "12345678"
 
   Scenario: Having All Users page
@@ -49,3 +49,13 @@ Feature: As a site owner
     And I should see "Bob"
     And I should not see "Croutch"
     And I should not see "Dave"
+
+  Scenario: Find users in my timezone
+    Given I am on the "our members" page
+    When I select "My Timezone" from Timezone Filter
+    Then I should only see users in my timezone
+
+  Scenario: Find users in or close to my timezone
+    Given I am on the "our members" page
+    When I select "Near My Timezone" from Timezone Filter
+    Then I should only see users near my timezone
