@@ -1,10 +1,15 @@
 require 'spec_helper'
 
-include RegistrationsHelper
+describe RegistrationsHelper do
+  describe '#display_email?' do
+    it 'should be true when set true' do
+      session[:display_email] = true
+      expect(display_email?).to be_truthy
+    end
 
-describe RegistrationsHelper, :type => :controller do
-  it 'display email' do
-  	session[:display_email] = "myname@myname.com"
-    session[:display_email].should eq "myname@myname.com"
+    it 'should be false when false' do
+      session[:display_email] = false
+      expect(display_email?).to be_falsey
+    end
   end
 end
