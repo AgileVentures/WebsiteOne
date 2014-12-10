@@ -70,11 +70,49 @@ describe Newsletter do
   describe 'does not instantely send in scheduler_job mode' do
     before :each do
       @newsletter = FactoryGirl.build(:newsletter)
+      @receiver_users = FactoryGirl.create_list(:user, 5, receive_mailings: true)
+      @non_receiver_users = FactoryGirl.create_list(:user, 5, receive_mailings: false)
+      Newsletter.const_set('CHUNK_SIZE', 100)
+      Newsletter.const_set('SEND_AS', :scheduler_job)
     end
 
     it 'awaits scheduler' do
       @newsletter.do_send = true
       expect{ @newsletter.save!}.to change{ ActionMailer::Base.deliveries.count}.by(0)
+    end
+
+    after :all do
+      Newsletter.const_set('CHUNK_SIZE', 180)
+      Newsletter.const_set('SEND_AS', :scheduler_job)
+    end
+
+    it 'after do_send is set to true in this schedulized mode' do
+      Newsletter.const_set('SEND_AS', :instant)
+      @newsletter.do_send = true
+      expect{ @newsletter.save! }.to change{ ActionMailer::Base.deliveries.count }.by(5)
+    end
+
+    it 'updates sent_at with Time in this schedulised mode' do
+      Newsletter.const_set('SEND_AS', :instant)
+      @newsletter.do_send = true
+      @newsletter.save!
+      @newsletter.reload
+      @newsletter.sent_at.should be_a(Time)
+    end
+
+    it 'updates was_sent to true in this schedulised mode' do
+      Newsletter.const_set('SEND_AS', :instant)
+      @newsletter.do_send = true
+      @newsletter.save!
+      @newsletter.reload
+      expect(@newsletter.was_sent).to eq(true)
+    end
+    it 'update the last_user_id in this mode' do
+      Newsletter.const_set('SEND_AS', :instant)
+      @newsletter.do_send = true
+      @newsletter.save!
+      @newsletter.reload
+      expect(@newsletter.last_user_id).to eq(@receiver_users[4].id)
     end
   end
 end
