@@ -24,7 +24,7 @@ describe KarmaCalculator do
       expect(karma_points).to be > 0
     end
     
-    it 'should assign correct karma points to old users' do
+    it 'should assign correct karma points to members more than 1 month old' do
       user.skill_list = ['Ruby']
       user.github_profile_url = 'https://github.com/example'
       user.youtube_user_name = 'MyExample'
