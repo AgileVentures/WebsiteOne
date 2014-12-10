@@ -523,6 +523,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   selenium-webdriver
   shoulda-matchers
+  simplecov
   sprockets-image_compressor
   sucker_punch
   therubyracer
