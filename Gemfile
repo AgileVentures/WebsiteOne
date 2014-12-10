@@ -58,6 +58,8 @@ gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitu
 gem 'octokit' # Ruby wrapper for the GitHub API
 gem 'sucker_punch' # Single Process Ruby asynchronous processing library
 
+gem 'twitter', '~> 5.11.0' # twitter api wrapper
+
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
