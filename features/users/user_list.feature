@@ -21,17 +21,17 @@ Feature: As a site owner
       | Bob        | Butcher   | bobb112@hotmail.com     | hello world  | Europe/Stockholm  |
       |            | Croutch   | c.croutch@enterprise.us | hello saturn | Asia/Kolkata      |
       | Dave       |           | dave@dixons.me          | hello sun    | Asia/Kolkata      |
-    And I am logged in as user with email "brett@example.com", with password "12345678"
+    And I am logged in as "Tester"
 
   Scenario: Having All Users page
     When I click "Members" within the navbar
     Then I should be on the "our members" page
     And I should see:
-      | Test User   |
-      | Alice Jones |
-      | Bob Butcher |
-      | Croutch     |
-      | Dave        |
+      | Tester Person |
+      | Alice Jones   |
+      | Bob Butcher   |
+      | Croutch       |
+      | Dave          |
     And I should see "5" user avatars within the main content
     And I should see "Check out our 5 awesome volunteers from all over the globe!"
 
@@ -40,7 +40,8 @@ Feature: As a site owner
     And I filter users for "Alice"
     Then I should see "Alice"
     And I should not see "Bob"
-    And I should not see "Test"
+    And I should not see "Croutch"
+    And I should not see "Dave"
 
   Scenario: Filtering by project involvement
     Given I am on the "our members" page
