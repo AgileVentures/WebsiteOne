@@ -23,4 +23,5 @@ describe VisitorsHelper do
       expect(helper.display_countdown(@event)).to eq '1 hour 15 minutes'
     end
   end
+
 end
