@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe LayoutHelper, :type => :helper do
 
-	describe '#show_layout_flash?' do
+  describe '#show_layout_flash?' do
     subject { show_layout_flash? }
 
     context 'without a layout flash' do
@@ -14,10 +14,10 @@ describe LayoutHelper, :type => :helper do
       before { @layout_flash = 'layout flash' }
       it { is_expected.to be_truthy }
     end
-	end
+  end
 
 # Not complete, need to rethink this whole portion
-	describe '#flash_messages' do
+  describe '#flash_messages' do
 
     context 'without :layout_flash set' do
       let(:opts){ Hash.new }
@@ -36,5 +36,5 @@ describe LayoutHelper, :type => :helper do
         expect(@layout_flash).to eq(opts[:layout_flash])
       end
     end
-	end
+  end
 end
