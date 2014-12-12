@@ -17,6 +17,17 @@ describe ImageUrlValidator do
     expect(subject).to be_valid
   end
 
+  it 'should reject non-URLs' do
+    subject.image_url = 'smile.txt'
+    expect(subject).to be_invalid
+  end
+
+
+  it 'should reject an invalid file format' do
+    subject.image_url = 'http://www.facebook.com'
+    expect(subject).to be_invalid
+  end
+
   ['http://github.com/AgileVentures/WebsiteOne','<>hi'].each do |invalid_url|
     it "#{invalid_url.inspect} is an invalid url" do
       subject.image_url = invalid_url
