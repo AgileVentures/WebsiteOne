@@ -40,11 +40,12 @@ class User < ActiveRecord::Base
   scope :project_filter, -> (project_id) {
     joins(:follows)
     .where(
-      "\"follows\".\"blocked\" = 'f' 
-      AND \"follows\".\"followable_id\" = ? 
-      AND \"follows\".\"followable_type\" = 'Project' 
-      AND \"follows\".\"follower_type\" = 'User'",
-      project_id
+      follows: {
+        blocked: false,
+        followable_id: project_id,
+        followable_type: 'Project',
+        follower_type: 'User'
+      }
     )
   }
   scope :allow_to_display, -> { where(display_profile: true) }
