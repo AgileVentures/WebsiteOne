@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Filterable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -34,7 +36,19 @@ class User < ActiveRecord::Base
   has_many :status
 
   accepts_nested_attributes_for :status
-  scope     :mail_receiver, -> { where(receive_mailings: true) }
+  scope :mail_receiver, -> { where(receive_mailings: true) }
+  scope :project_filter, -> (project_id) {
+    joins(:follows)
+    .where(
+      "\"follows\".\"blocked\" = 'f' 
+      AND \"follows\".\"followable_id\" = ? 
+      AND \"follows\".\"followable_type\" = 'Project' 
+      AND \"follows\".\"follower_type\" = 'User'",
+      project_id
+    )
+  }
+  scope :allow_to_display, -> { where(display_profile: true) }
+  scope :by_create, -> { order(:created_at) }
 
   self.per_page = 30
 
@@ -86,18 +100,6 @@ class User < ActiveRecord::Base
 
   def is_privileged?
     Settings.privileged_users.split(',').include?(email)
-  end
-
-  def self.search(params)
-    # NOTE maybe we create a filters hash ie., { filters: { project_filter: 6, another_filter: "foo"}
-    # to make it easier to detect if a given search has filtering parameters set?
-    if !params['project_filter'].blank?
-      Project.find(params['project_filter']).followers
-    else
-      # NOTE return paginated list when no filtering criteria?
-      where(display_profile: true)
-        .order(:created_at)
-    end
   end
 
   def self.find_by_github_username(username)

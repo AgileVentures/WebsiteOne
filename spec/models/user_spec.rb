@@ -176,7 +176,7 @@ describe User, :type => :model do
     end
   end
 
-  describe '.search' do
+  describe '.filter' do
     let(:params) { {} }
 
     context 'has filters' do
@@ -191,8 +191,8 @@ describe User, :type => :model do
         @user2.stop_following @project
         params['project_filter'] = @project.id
 
-        results = User.search(params)
-
+        results = User.filter(params.slice('project_filter')).allow_to_display
+        
         expect(results).to include(@user1)
         expect(results).not_to include(@user2)
       end
@@ -200,12 +200,12 @@ describe User, :type => :model do
       it 'does not raise error when project_filter is empty' do
         params['project_filter'] = ''
 
-        expect{ User.search(params) }.to_not raise_error
+        expect{ User.filter(params.slice('project_filter')).allow_to_display }.to_not raise_error
       end
     end
 
     context 'no filters' do
-      subject { User.search(params) }
+      subject { User.filter(params.slice('project_filter')).allow_to_display }
 
       before(:each) do
         FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
