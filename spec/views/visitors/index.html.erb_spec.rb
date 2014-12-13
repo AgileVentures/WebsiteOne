@@ -91,6 +91,18 @@ describe 'visitors/index.html.erb', type: :view do
     end
   end
 
+  context 'event will start less than 1 minute' do
+    before :each do
+      fix_time_at('2014-03-07 10:29:01 UTC')
+    end
+
+    it 'should <event> about to start' do
+      render
+      expect(rendered).to have_link @event.name, event_path(@event)
+      expect(rendered).to have_text 'about to start...'
+    end
+  end
+
   context 'event has started less than 15 minutes ago' do
     before :each do
       fix_time_at('2014-03-07 10:44:00 UTC')
