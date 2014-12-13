@@ -2,10 +2,10 @@
 <div class="row">
   <div class="col-xs-12 col-sm-8">
     <h1>All members</h1>
-    <% if @users.empty? %>
+    <% if @users_count == 0 %>
         <p>It is a lonely planet we live in&#8230;</p>
     <% else %>
-        <p>Check out our <%= @users.count %> awesome volunteers from all over the globe!</p>
+        <p>Check out our <%= @users_count %> awesome volunteers from all over the globe!</p>
     <% end %>
   </div>
   <div class="col-sm-4">
@@ -13,11 +13,11 @@
     <%= form_tag(users_path, method: "get", class: "form-inline filters-users-advanced") do %>
       <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), { prompt: 'Select a project' } %>
       <%= select_tag :timezone_filter, options_for_select(['My Timezone', 'Near My Timezone'], params[:timezone_filter]), { prompt: 'Select a timezone' } %>
+      <%= submit_tag 'submit' %>
       <div class="form-group">
         <label class="sr-only" for="user-filter">Filter users</label>
         <input type="text" class="form-control" id="user-filter" placeholder="filter users..">
       </div>
-      <%= submit_tag 'submit' %>
     <% end %>
     <!--<form class="form-inline users-filter" role="form">
       <div class="form-group">
