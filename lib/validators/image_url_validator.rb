@@ -4,12 +4,14 @@ class ImageUrlValidator < ActiveModel::Validator
   IMAGE_HOST_WHITELIST = %w(bluemelon.com deviantart.com facebook.com flickr.com freeimagehosting.net imagebam.com imageshack.com imagevenue.com imgur.com instagram postimage.org photobucket.com picasa.com shutterfly.com slickpic.com snapfish.com smugmug.com tinypic.com twitpic.com webshots.com weheartit.com zenfolio.com)
 
   def validate(record)
-    validation_regex = %r{\.(png|jpg|jpeg)$}i
-    if validation_regex.match(record.image_url) == nil
-      record.errors[:image_url] = 'Invalid format. Image must be png, jpg, or jpeg.'
-    end
-
+    
     if record.image_url.present?
+
+      validation_regex = %r{\.(png|jpg|jpeg)$}i
+      if validation_regex.match(record.image_url) == nil
+        record.errors[:image_url] = 'Invalid format. Image must be png, jpg, or jpeg.'
+      end
+
       unless is_whitelisted?(record.image_url) 
         record.errors[:image_url] = 'Invalid image url. Image provider not found in provider whitelist.'
       end
