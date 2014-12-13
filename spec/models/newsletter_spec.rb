@@ -40,6 +40,7 @@ describe Newsletter do
       non_receiver_users = FactoryGirl.create_list(:user, 2, receive_mailings: false)
       @newsletter = FactoryGirl.create(:newsletter)
       Newsletter.const_set('SEND_AS', :instant)
+      @newsletter.do_send=true
     end
 
     after :all do
@@ -48,21 +49,16 @@ describe Newsletter do
     end
 
     it 'after do_send is set to true' do
-      @newsletter.do_send = true
       expect{ @newsletter.save! }.to change{ ActionMailer::Base.deliveries.count }.by(2)
     end
 
     it 'updates sent_at with Time' do
-      @newsletter.do_send = true
       @newsletter.save
-      @newsletter.reload 
-      @newsletter.sent_at.should be_a(Time)
+      expect(@newsletter.sent_at).to be_a_kind_of(Time)
     end
 
     it 'updates was_sent to true' do
-      @newsletter.do_send = true
       @newsletter.save
-      @newsletter.reload
       expect(@newsletter.was_sent).to eq(true)
     end
   end
@@ -70,49 +66,44 @@ describe Newsletter do
   describe 'does not instantely send in scheduler_job mode' do
     before :each do
       @newsletter = FactoryGirl.build(:newsletter)
-      @receiver_users = FactoryGirl.create_list(:user, 5, receive_mailings: true)
+      @receiver_users = FactoryGirl.create_list(:user, 120, receive_mailings: true)
       @non_receiver_users = FactoryGirl.create_list(:user, 5, receive_mailings: false)
+      @newsletter.do_send = true
+      @newsletter.was_sent=false;
       Newsletter.const_set('CHUNK_SIZE', 100)
       Newsletter.const_set('SEND_AS', :scheduler_job)
     end
 
     it 'awaits scheduler' do
-      @newsletter.do_send = true
+      expect(@newsletter.do_send).to eq(true)
+      expect(@newsletter.was_sent).to eq(false)
+      expect(@newsletter.last_user_id).to eq(0)
       expect{ @newsletter.save!}.to change{ ActionMailer::Base.deliveries.count}.by(0)
     end
 
     after :all do
       Newsletter.const_set('CHUNK_SIZE', 180)
-      Newsletter.const_set('SEND_AS', :scheduler_job)
     end
 
     it 'after do_send is set to true in this schedulized mode' do
-      Newsletter.const_set('SEND_AS', :instant)
-      @newsletter.do_send = true
-      expect{ @newsletter.save! }.to change{ ActionMailer::Base.deliveries.count }.by(5)
+      stub_const("Newsletter::SEND_AS",:instant)
+      expect{ @newsletter.save! }.to change{ ActionMailer::Base.deliveries.count }.by(120)
     end
 
     it 'updates sent_at with Time in this schedulised mode' do
-      Newsletter.const_set('SEND_AS', :instant)
-      @newsletter.do_send = true
+      stub_const("Newsletter::SEND_AS",:instant)
       @newsletter.save!
-      @newsletter.reload
-      @newsletter.sent_at.should be_a(Time)
+      expect(@newsletter.sent_at).to be_a_kind_of(Time)
     end
 
     it 'updates was_sent to true in this schedulised mode' do
-      Newsletter.const_set('SEND_AS', :instant)
-      @newsletter.do_send = true
+      stub_const("Newsletter::SEND_AS",:instant)
       @newsletter.save!
-      @newsletter.reload
       expect(@newsletter.was_sent).to eq(true)
     end
     it 'update the last_user_id in this mode' do
-      Newsletter.const_set('SEND_AS', :instant)
-      @newsletter.do_send = true
-      @newsletter.save!
-      @newsletter.reload
-      expect(@newsletter.last_user_id).to eq(@receiver_users[4].id)
+      stub_const("Newsletter::SEND_AS",:instant)
+      expect{@newsletter.save!}.to change{@newsletter.last_user_id}.by(@receiver_users[119].id)
     end
   end
 end
