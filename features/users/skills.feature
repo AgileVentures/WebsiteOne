@@ -23,7 +23,8 @@ Feature: As a site user
     Given I am on my "edit profile" page
     And I add skills "c++,java,php"
     And I click "Update" button
-    Given I go to my "profile" page
+    And I go to my "profile" page
+    And I click "Skills"
     And I should see:
       | title |
       | c++   |
