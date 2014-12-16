@@ -1,4 +1,4 @@
-class ImageUrlV1 < ActiveRecord::Migration
+class AddImageUrlToProjects < ActiveRecord::Migration
   def change
   	add_column :projects, :image_url, :string
   end
