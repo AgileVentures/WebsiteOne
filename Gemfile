@@ -92,6 +92,8 @@ group :development, :test do
   gem 'guard-rspec' #plugins for Guard
   gem 'guard-cucumber' #plugins for Guard
   gem 'guard-livereload' #plugins for Guard
+  gem 'knapsack'
+
 end
 
 group :production do
