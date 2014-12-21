@@ -224,7 +224,6 @@ GEM
     json (1.8.1)
     jwt (1.0.0)
     kdtree (0.3)
-    knapsack (1.0.1)
     launchy (2.4.2)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
@@ -512,7 +511,6 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-turbolinks
-  knapsack
   launchy
   local_time
   mercury-rails!
