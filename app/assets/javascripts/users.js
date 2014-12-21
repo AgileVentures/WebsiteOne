@@ -66,7 +66,7 @@ WebsiteOne.define('Users', function () {
     }
 
     return {
-        init: init,
-        selectVideo: selectVideo
+      init: init,
+      selectVideo: selectVideo
     }
 });
