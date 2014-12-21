@@ -19,16 +19,29 @@ We are proudly using Agile methods and Ruby on Rails as the framework to deliver
 
 The principal organization behind this project is AGILEVENTURES NONPROFIT LTD., a nonprofit organization registered in the UK, company number: 08929160
 
+
+ Service                 |  Status      |
+|------------------------ | ----------------- |
+| *Test coeverage*         |                  |
+| Coveralls                |  [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.png)](https://coveralls.io/r/AgileVentures/WebsiteOne)    |
+| *Continuous integration* |    |
+| Travis CI (master)       | [![Build Status](https://travis-ci.org/AgileVentures/WebsiteOne.png?branch=master)](https://travis-ci.org/AgileVentures/WebsiteOne)|
+| Travis CI (develop)      | [![Build Status](https://travis-ci.org/AgileVentures/WebsiteOne.png?branch=develop)](https://travis-ci.org/AgileVentures/WebsiteOne)  |
+| *Dependencies*          |         |
+| Gemnasium               |[![Dependency Status](https://gemnasium.com/AgileVentures/WebsiteOne.png)](https://gemnasium.com/AgileVentures/WebsiteOne)  |
+| Code quality            |         |
+| CodeClimate             | [![CodeClimate](https://codeclimate.com/github/AgileVentures/WebsiteOne.png)](https://codeclimate.com/github/AgileVentures/WebsiteOne) |
+|*Deploys*                |         |
+| DevelopServer           | [websiteone-develop.herokuapp.com](http://websiteone-develop.herokuapp.com/) |
+| StagingServer           |[websiteone-staging.herokuapp.com](http://websiteone-staging.herokuapp.com/)  |
+| ProductionServer        | [agileventures.org][application]  |
+|Project management       |         |
+|Pivotal Tracker          |[WebsiteOne][pivotal]|
+
 ## Dependencies
 
 The tests requires `phantomjs` to run the cucumber tests, refer to the [Poltergeist](https://github.com/jonleighton/poltergeist)
 
-[![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.png)](https://coveralls.io/r/AgileVentures/WebsiteOne)
-
-
-Master: [![Build Status](https://travis-ci.org/AgileVentures/WebsiteOne.png?branch=master)](https://travis-ci.org/AgileVentures/WebsiteOne) [![Code Climate](https://codeclimate.com/github/AgileVentures/WebsiteOne.png)](https://codeclimate.com/github/AgileVentures/WebsiteOne)
-
-Develop: [![Build Status](https://travis-ci.org/AgileVentures/WebsiteOne.png?branch=develop)](https://travis-ci.org/AgileVentures/WebsiteOne) [![Dependency Status](https://gemnasium.com/AgileVentures/WebsiteOne.png)](https://gemnasium.com/AgileVentures/WebsiteOne)
 
 
 ## <a name="contributing"></a>Contributing
