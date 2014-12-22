@@ -27,7 +27,7 @@ WebsiteOne.define('Users', function () {
             var code = e.keyCode || e.which;
             if (code == 9 || code == 44) {
                 e.preventDefault();
-                $("#skills").tags().addTag($('input.tags-input').val().replace(",", ""));
+                $("#skills").tags().addTag($("input.tags-input").val().replace(",", ""));
                 $('input.tags-input').val("");
             }
             // Sampriti: Let bootstrap-tags handle Enter event
@@ -67,6 +67,6 @@ WebsiteOne.define('Users', function () {
 
     return {
       init: init,
-      selectVideo: selectVideo
+        selectVideo: selectVideo
     }
 });
