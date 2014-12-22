@@ -74,6 +74,8 @@ group :test do
   gem 'delorean' # mocking Time in tests, aka time travelling
   gem 'vcr' # records and plays http interactions for testing
   gem 'shoulda-matchers', require: false #simplifies tests of common Rails functionality
+
+  gem 'capybara-screenshot'
 end
 
 group :development, :test do

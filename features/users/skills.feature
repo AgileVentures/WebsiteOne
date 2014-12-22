@@ -21,9 +21,10 @@ Feature: As a site user
   @javascript
   Scenario: Adding skills to profile
     Given I am on my "edit profile" page
-    And I add skills "c++,java,php"
+    And I add skill "c++, java, php"
     And I click "Update" button
-    And I go to my "profile" page
+    Then I should be on my "profile" page
+    And I should see "About" tab is active
     And I click "Skills"
     And I should see:
       | title |

@@ -249,7 +249,7 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   expect(current_path).to eq path_to(page, this_user)
 end
 
-Given(/^I (?:am on|go to) my "([^"]*)" page$/) do |page|
+Given(/^I (?:am on|go to|should be on) my "([^"]*)" page$/) do |page|
   page.downcase!
   if page == 'profile'
     visit user_path(@user)
@@ -354,8 +354,10 @@ Given(/^I visit (.*)'s profile page$/) do |name|
   visit user_path user
 end
 
-Given(/^I add skills "(.*)"/) do |skills|
-  skills.split(",").each { |s| page.execute_script "$('#skills').tags().addTag('#{s}')"}
+Given(/^I add (?:skill|skills) "(.*)"/) do |skills|
+  @user.skill_list.add(skills, parse: true)
+  @user.save
+  @user.reload
 end
 
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
@@ -388,6 +390,6 @@ Given(/^I fetch the GitHub contribution statistics$/) do
   GithubCommitsJob.run
 end
 
-When(/^I delete my profile$/) do 
+When(/^I delete my profile$/) do
   @user.delete
 end
