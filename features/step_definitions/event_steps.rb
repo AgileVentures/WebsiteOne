@@ -9,12 +9,16 @@ Given(/^following events exist:$/) do |table|
 end
 
 Given(/^following events exist with active hangouts:$/) do |table|
+  project = Project.all.first
   table.hashes.each do |hash|
     event = Event.create!(hash)
     event.event_instances.create(hangout_url: 'x@x.com',
                           updated_at: 1.minute.ago,
                           category: event.category,
-                          title: event.name)
+                          title: event.name,
+                          project_id: project.id
+                                )
+
   end
 end
 
