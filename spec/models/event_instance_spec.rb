@@ -30,15 +30,46 @@ describe EventInstance, type: :model do
       expect(hangout.live?).to be_falsey
     end
 
-    it 'tweets hangout notification' do
+    it 'calls tweet hangout notification' do
       expect(hangout).to receive(:tweet_hangout_notification)
       hangout.save
     end
+  end
+
+  context 'event category is recognized' do
+    before { hangout.hangout_url = 'test' }
 
     it 'calls the TwitterService' do
+      hangout.category = 'Scrum'
+
       expect(TwitterService).to receive(:tweet)
-      hangout.save
     end
+
+    it 'project title is included in a pair programming tweet' do
+      hangout.category = 'PairProgramming'
+
+      expect(TwitterService).to receive(:tweet).with(/#{hangout.project.title}/ ) {:success}
+    end
+
+    after(:each) { hangout.save }
+  end
+
+  context 'event category is not recognized' do
+    before { hangout.hangout_url = 'test' }
+
+    it 'does not call TwitterService' do
+      hangout.category = 'arbitrary-category'
+
+      expect(TwitterService).to_not receive(:tweet)
+    end
+
+    it 'raises an error' do
+      hangout.category = 'arbitrary-category'
+
+      expect(Rails.logger).to receive(:error)
+    end
+
+    after(:each) { hangout.save }
   end
 
   context 'event_instance is changed' do
@@ -51,7 +82,8 @@ describe EventInstance, type: :model do
 
     context 'hangout_url changes' do
       before { other_hangout.hangout_url = 'http://foo.example.com' }
-      it 'tweets hangout notification again' do
+
+      it 'calls tweet_hangout_notification again' do
         expect(other_hangout).to receive(:tweet_hangout_notification)
         other_hangout.save
       end
@@ -59,7 +91,8 @@ describe EventInstance, type: :model do
 
     context 'hangout_url not changed' do
       before { other_hangout.title = 'changed' }
-      it 'does not tweet hangout notification' do
+
+      it 'does not call tweet_hangout_notification' do
         expect(other_hangout).not_to receive(:tweet_hangout_notification)
         other_hangout.save
       end
