@@ -18,13 +18,12 @@ Feature: As a site user
       | rails |
       | rspec |
 
-  @javascript
   Scenario: Adding skills to profile
     Given I am on my "edit profile" page
     And I add skill "c++, java, php"
     And I click "Update" button
     Then I should be on my "profile" page
-    And I should see "About" tab is active
+    And I should see "About" tab set to active
     And I click "Skills"
     And I should see:
       | title |

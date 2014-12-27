@@ -60,7 +60,7 @@ describe 'users/show.html.erb' do
     end
 
     context 'user with profile attributes' do
-      it 'render default bio if User has provided one' do
+      it 'render bio if User has provided one' do
         allow(@user).to receive(:bio?).and_return true
         render
         rendered.within('section.user-bio') do |section|
