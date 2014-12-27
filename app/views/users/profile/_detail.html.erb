@@ -1,7 +1,6 @@
 <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-  <% if presenter.bio? %>
-      <li class="active"><a href="#about" data-toggle="tab">About</a></li>
-  <% end %>
+
+  <li class="active"><a href="#about" data-toggle="tab">About</a></li>
   <% if presenter.has_skills? %>
       <li><a href="#user-skills" data-toggle="tab">Skills</a></li>
   <% end %>
@@ -13,14 +12,18 @@
   <% end %>
 </ul>
 <div id="tab-content" class="tab-content" style="background: #fff;">
-  <% if presenter.bio? %>
-      <div class="tab-pane active" id="about">
-        <section class="user-bio">
-          <h4>About me</h4>
+
+  <div class="tab-pane active" id="about">
+    <section class="user-bio">
+      <h4>About me</h4>
+      <% if presenter.bio? %>
           <%= simple_format(presenter.bio) %>
-        </section>
-      </div>
-  <% end %>
+      <% else %>
+          <p>This member has not written his bio yet...</p>
+      <% end %>
+    </section>
+  </div>
+
   <% if presenter.has_skills? %>
       <div class="tab-pane" id="user-skills">
         <section class="user-skills">
@@ -36,7 +39,7 @@
   <% if presenter.joined_projects? %>
       <div class="tab-pane" id="projects">
         <section class="user-projects">
-          <h4>Projects Involvement</h4>
+          <h4>Project Involvement</h4>
           <ul>
             <% presenter.following_projects.each do |project| %>
                 <li><%= link_to project.title, project_path(project) %></li>
@@ -59,7 +62,6 @@
       </div>
   <% end %>
 </div>
-
 
 
 
