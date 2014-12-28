@@ -354,10 +354,14 @@ Given(/^I visit (.*)'s profile page$/) do |name|
   visit user_path user
 end
 
-Given(/^I add (?:skill|skills) "(.*)"/) do |skills|
+Given(/^I (?:have|add) (?:skill|skills) "(.*)"/) do |skills|
   @user.skill_list.add(skills, parse: true)
   @user.save
   @user.reload
+end
+
+Given(/^I add a new skill: "(.*)"/) do |skills|
+  skills.split(",").each { |s| page.execute_script "$('#skills').tags().addTag('#{s}')"}
 end
 
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
