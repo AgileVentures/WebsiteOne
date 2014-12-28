@@ -14,11 +14,11 @@ Feature: Add in-page links for projects show page to open the tabbed contents
     When I am on the "Show" page for project "hello world"
     And I click "Documents"
     And I refresh the page
-    Then I should see "documents" tab is active
+    Then I should see a "documents" tab set to active
 
   Scenario: Share the link to videos tab
     When I am on the "Show" page for project "hello world"
     And I click "Videos"
     And I refresh the page
-    Then I should see "videos" tab is active
+    Then I should see a "videos" tab set to active
 
