@@ -16,7 +16,7 @@ describe 'users/show.html.erb' do
                               title_list: 'Philanthropist',
                               created_at: thirty_days_ago,
                               github_profile_url: 'http://github.com/Eric',
-                              skill_list: [ 'Shooting', 'Hooting' ],
+                              skill_list: %w(Shooting Hooting),
                               bio: 'Lonesome Cowboy')
 
     @user.status.build(attributes = FactoryGirl.attributes_for(:status))
@@ -49,7 +49,7 @@ describe 'users/show.html.erb' do
         }
     ]
     assign :youtube_videos, @youtube_videos
-    @skills = ["rails", "ruby", "rspec"]
+    @skills = %w(rails ruby rspec)
     assign :skills, @skills
   end
 
@@ -60,7 +60,7 @@ describe 'users/show.html.erb' do
     end
 
     context 'user with profile attributes' do
-      it 'render bio if User has provided one' do
+      it 'render default bio if User has provided one' do
         allow(@user).to receive(:bio?).and_return true
         render
         rendered.within('section.user-bio') do |section|
