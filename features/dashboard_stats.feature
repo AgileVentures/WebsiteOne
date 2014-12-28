@@ -35,7 +35,7 @@ Feature: Display Statistics
     When I click "Dashboard"
     Then I should be on the "Dashboard" page
     And I click the "Site statistics" link
-    Then I should see "statistics" tab is active
+    Then I should see a "statistics" tab set to active
     And I should see "Statistics"
     And I should see "3 Articles Published"
     And I should see "4 Active Projects"
