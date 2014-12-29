@@ -37,39 +37,43 @@ describe EventInstance, type: :model do
   end
 
   context 'event category is recognized' do
-    before { hangout.hangout_url = 'test' }
+    before do
+      hangout.hangout_url = 'test'
+    end
 
     it 'calls the TwitterService' do
       hangout.category = 'Scrum'
 
       expect(TwitterService).to receive(:tweet)
+      hangout.save
     end
 
     it 'project title is included in a pair programming tweet' do
       hangout.category = 'PairProgramming'
 
       expect(TwitterService).to receive(:tweet).with(/#{hangout.project.title}/ ) {:success}
+      hangout.save
     end
-
-    after(:each) { hangout.save }
   end
 
   context 'event category is not recognized' do
-    before { hangout.hangout_url = 'test' }
+    before do
+      hangout.hangout_url = 'test'
+    end
 
     it 'does not call TwitterService' do
       hangout.category = 'arbitrary-category'
 
       expect(TwitterService).to_not receive(:tweet)
+      hangout.save
     end
 
     it 'raises an error' do
       hangout.category = 'arbitrary-category'
 
       expect(Rails.logger).to receive(:error)
+      hangout.save
     end
-
-    after(:each) { hangout.save }
   end
 
   context 'event_instance is changed' do
