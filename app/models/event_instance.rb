@@ -39,7 +39,7 @@ class EventInstance < ActiveRecord::Base
   def tweet_hangout_notification
     case self.category
     when 'Scrum'
-      TwitterService.tweet("Scrum #{hangout_url} #scrum, #distributedteam")
+      TwitterService.tweet("#Scrum meeting with our #distributedteam is live on #{hangout_url} Join in and learn about our #opensource #projects!")
     when 'PairProgramming'
       TwitterService.tweet("Pair programming on #{self.project.title} #{hangout_url} #pairwithme, #distributedteam")
     else
