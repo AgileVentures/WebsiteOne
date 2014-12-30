@@ -9,7 +9,7 @@ describe Event, :type => :model do
     Delorean.back_to_the_present
   end
 
-  subject { build_stubbed :event }
+  subject(:event) { build_stubbed :event }
 
   it { is_expected.to respond_to :friendly_id }
   it { is_expected.to respond_to :schedule }
@@ -415,6 +415,17 @@ describe Event, :type => :model do
     it 'should return events that were schedule 30 minutes earlier or less if we change collection_time_past to 30.minutes' do
       Delorean.time_travel_to(Time.parse('2014-03-07 10:59:59 UTC'))
       expect(Event.next_occurrence(:scrum, 30.minutes.ago)).to eq @event
+    end
+  end
+
+  describe '#recent_hangouts' do
+    before(:each) do
+      event.event_instances.create(created_at: 2.days.ago, updated_at: Date.yesterday)
+      @recent_hangout = event.event_instances.create(created_at: Date.yesterday, updated_at: Date.yesterday)
+    end
+
+    it 'returns only the hangouts created between yesterday and today' do
+      expect(event.recent_hangouts.to_a).to match_array([@recent_hangout])
     end
   end
 end

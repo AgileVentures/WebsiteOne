@@ -195,6 +195,12 @@ class Event < ActiveRecord::Base
     event_instances.order(:created_at).last
   end
 
+  def recent_hangouts
+    event_instances
+      .where('created_at BETWEEN ? AND ?', 1.days.ago.beginning_of_day, DateTime.now.end_of_day)
+      .order(created_at: :desc)
+  end
+
   private
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
