@@ -9,7 +9,7 @@ Feature: Show Active Hookups
     Given the following projects exist:
       | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |
       | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 |
-    And following events exist with active hangouts:
+    And following events exist for project "hello world" with active hangouts:
       | name     | description    | category        | start_datetime          | duration | repeats | time_zone |
       | Hookup 0 | hookup meeting | PairProgramming | 2014/02/03 09:00:00 UTC | 90       | never   | UTC       |
       | Hookup 1 | hookup meeting | PairProgramming | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |
