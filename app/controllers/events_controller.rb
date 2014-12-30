@@ -1,7 +1,5 @@
 
 class EventsController < ApplicationController
-  #require 'delorean'
-
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
 
@@ -12,7 +10,7 @@ class EventsController < ApplicationController
 
   def show
     @event_schedule = @event.next_occurrences
-    @hangout = @event.last_hangout
+    @recent_hangout = @event.recent_hangouts.first
     render partial: 'hangouts_management' if request.xhr?
   end
 
