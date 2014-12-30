@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'end_time'
+require 'start_time'
 
 describe EndTime, :type => :model do
   it 'returns default start time for event + 30 mins if end time is blank' do

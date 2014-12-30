@@ -1,7 +1,7 @@
 require 'active_support/all'
 require_relative '../../app/models/event_date'
-require_relative '../../app/models/start_time'
-require_relative '../../app/models/end_time'
+require_relative '../../lib/start_time'
+require_relative '../../lib/end_time'
 require_relative '../../app/services/event_creator_service'
 describe EventCreatorService do
   let(:event_repository) { double(:event_repository, new: event) }

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'start_time'
 
 describe StartTime, :type => :model do
   it 'returns 30 minutes ago if start time is blank' do
