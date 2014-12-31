@@ -8,10 +8,12 @@ Feature: As a site user
       | first_name | last_name | email                  | skill_list         |
       | Alice      | Jones     | alicejones@hotmail.com | ruby, rails, rspec |
       | Bob        | Butcher   | bobb112@hotmail.com    | ruby, c++          |
-    And I am logged in as user with email "brett@example.com", with password "12345678"
+    And I am logged in as user with name "Thomas", email "brett@example.com", with password "12345678"
 
   Scenario: Viewing skills
     Given I am on "profile" page for user "Alice"
+    And I should see a "About" tab set to active
+    And when I click "Skills"
     Then I should see:
       | title |
       | ruby  |
@@ -20,12 +22,25 @@ Feature: As a site user
 
   @javascript
   Scenario: Adding skills to profile
-    Given I am on my "edit profile" page
-    And I add skills "c++,java,php"
-    And I click "Update" button
-    Given I go to my "profile" page
-    And I should see:
+    Given I have skills "c++, java, php"
+    And I am on my "profile" page
+    And I should see a "About" tab set to active
+    And when I click "Skills"
+    Then I should see:
       | title |
       | c++   |
       | java  |
       | php   |
+    Given I click "Edit"
+    And I add a new skill: "cucumber"
+    And I click "Update" button
+    Then I should be on my "profile" page
+    And when I click "Skills"
+    Then I should see:
+      | title    |
+      | c++      |
+      | java     |
+      | php      |
+      | cucumber |
+
+

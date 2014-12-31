@@ -22,7 +22,7 @@ Feature: As a user of the site
   Scenario: Having user profile page
     When I click on the avatar for "Alice"
     Then I should be on the "user profile" page for "Alice"
-    And I should see the avatar for "Alice" at 200 px
+    And I should see the avatar for "Alice" at 250 px
     And I should see "Alice Jones"
     And I should see "Sweden"
     And I should see "AliceSky"
