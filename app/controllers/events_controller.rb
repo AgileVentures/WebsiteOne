@@ -1,5 +1,3 @@
-require 'start_time'
-require 'end_time'
 
 class EventsController < ApplicationController
   #require 'delorean'
