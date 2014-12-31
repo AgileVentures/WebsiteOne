@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'start_time'
 
-describe StartTime, :type => :model do
+describe StartTime do
   it 'returns 30 minutes ago if start time is blank' do
     expect(StartTime.for(nil).to_i).to eq 30.minutes.ago.to_i
   end
