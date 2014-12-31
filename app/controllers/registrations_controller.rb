@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  layout 'layouts/user_profile_layout', only: [:edit]
   def create
     super
     unless @user.new_record?
