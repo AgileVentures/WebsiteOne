@@ -56,7 +56,7 @@
         <div><%= f.label :skills, 'Skills - (separate with comma)' %>
           <div id="skills" class="tag-list" style="margin-bottom: 10px;"
             data-skill-list="<%= resource.skill_list.to_json %>"></div>
-            <%= f.text_field :skill_list, :hidden => true %>
+            <%= f.text_field :skill_list, hidden: true  %>
         </div>
 
         <div><%= f.label :bio %>

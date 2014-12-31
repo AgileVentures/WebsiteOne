@@ -37,6 +37,13 @@ class EventInstance < ActiveRecord::Base
   private
 
   def tweet_hangout_notification
-    TwitterService.tweet("Pair programming on Agile Ventures #{hangout_url} #pairwithme")
+    case self.category
+    when 'Scrum'
+      TwitterService.tweet("#Scrum meeting with our #distributedteam is live on #{hangout_url} Join in and learn about our #opensource #projects!")
+    when 'PairProgramming'
+      TwitterService.tweet("Pair programming on #{self.project.title} #{hangout_url} #pairwithme, #distributedteam")
+    else
+      Rails.logger.error "''#{self.category}'' is not a recognized event category for Twitter notifications. Must be one of: 'Scrum', 'PairProgramming'"
+    end
   end
 end

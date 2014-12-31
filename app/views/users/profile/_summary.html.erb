@@ -1,6 +1,6 @@
 <div class="col-md-12 col-sm-6 col-xs-12" style="padding: 0">
-  <%= presenter.gravatar_image(size: 200,
-                               class: "img-rounded media-object pull-left") %>
+  <%= presenter.gravatar_image(size: 250,
+                               class: 'img-rounded media-object pull-left') %>
 </div>
 
 <div class="col-md-12 col-sm-6 col-xs-12 user-summary" style="padding: 0">
@@ -46,7 +46,7 @@
 
     <% if presenter.can_create_newsletter? && privileged_visitor? %>
       <li>
-        <%= link_to "New Newsletter", new_newsletter_path, class: 'user-profile-btn' %>
+        <%= link_to 'New Newsletter', new_newsletter_path, class: 'user-profile-btn' %>
       </li>
     <% end %>
 
