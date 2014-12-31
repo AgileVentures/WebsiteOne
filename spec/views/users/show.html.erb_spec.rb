@@ -16,10 +16,10 @@ describe 'users/show.html.erb' do
                               title_list: 'Philanthropist',
                               created_at: thirty_days_ago,
                               github_profile_url: 'http://github.com/Eric',
-                              skill_list: [ 'Shooting', 'Hooting' ],
+                              skill_list: %w(Shooting Hooting),
                               bio: 'Lonesome Cowboy')
 
-    @user.status.create(attributes = FactoryGirl.attributes_for(:status))
+    @user.status.build(attributes = FactoryGirl.attributes_for(:status))
 
     @commit_counts = [build_stubbed(:commit_count, project: @projects.first, user: @user, commit_count: 253)]
 
@@ -49,8 +49,82 @@ describe 'users/show.html.erb' do
         }
     ]
     assign :youtube_videos, @youtube_videos
-    @skills = ["rails", "ruby", "rspec"]
+    @skills = %w(rails ruby rspec)
     assign :skills, @skills
+  end
+
+  describe 'user information tabs' do
+    it 'renders a tab view' do
+      render
+      expect(rendered).to have_css('ul#tabs')
+    end
+
+    context 'user with profile attributes' do
+      it 'render default bio if User has provided one' do
+        allow(@user).to receive(:bio?).and_return true
+        render
+        rendered.within('section.user-bio') do |section|
+          expect(section).to have_text 'Lonesome Cowboy'
+        end
+      end
+
+      it 'render tab Skills if user has :skill_list' do
+        render
+        rendered.within('ul#tabs') do |section|
+          expect(section).to have_link 'Skills', href: '#user-skills'
+        end
+      end
+
+      it 'render tab Projects if user has :following_projects_count' do
+        allow(@user).to receive(:following_projects_count).and_return 1
+        render
+        rendered.within('ul#tabs') do |section|
+          expect(section).to have_link 'Projects', href: '#projects'
+        end
+      end
+
+      it 'render tab Activity if user has :commit_count' do
+        render
+        rendered.within('ul#tabs') do |section|
+          expect(section).to have_link 'Activity', href: '#activity'
+        end
+      end
+    end
+
+    context 'user with empty attributes' do
+
+      it 'render default bio if User has not provided one' do
+        allow(@user).to receive(:bio?).and_return false
+        render
+        rendered.within('section.user-bio') do |section|
+          expect(section).to have_text 'This member has not written his bio yet...'
+        end
+      end
+
+      it 'do not render tab Skills if user has no :skill_list' do
+        allow(@user).to receive(:skill_list).and_return([])
+        render
+        rendered.within('ul#tabs') do |section|
+          expect(section).to_not have_link 'Skills', href: '#user-skills'
+        end
+      end
+
+      it 'do not render tab Projects if user has no :following_projects_count' do
+        allow(@user).to receive(:following_projects_count).and_return 0
+        render
+        rendered.within('ul#tabs') do |section|
+          expect(section).to_not have_link 'Projects', href: '#projects'
+        end
+      end
+
+      it 'do not render tab Activity if user has no :commit_count' do
+        allow(@user).to receive(:commit_counts).and_return []
+        render
+        rendered.within('ul#tabs') do |section|
+          expect(section).to_not have_link 'Activity', href: '#activity'
+        end
+      end
+    end
   end
 
   it 'renders a table wih video links if there are videos' do
@@ -92,13 +166,9 @@ describe 'users/show.html.erb' do
     expect(rendered).to have_content(@user.status.last[:status])
   end
 
-  it "prompts user to update their status" do
+  it 'prompts user to update their status' do
     render
-    # binding.pry
-    # within "div.modal-footer" do |footer|
-      # expect(rendered).to have_selector("input[type='submit'][value='Update status'")
-    expect(rendered).to have_selector("input", type: 'submit', value: 'Update status')
-    # end
+    expect(rendered).to have_selector('input', type: 'submit', value: 'Update status')
   end
 
   describe 'geolocation' do

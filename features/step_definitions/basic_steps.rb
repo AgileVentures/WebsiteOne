@@ -68,7 +68,7 @@ When(/^I go to the path "(.*?)"$/) do |page|
   visit path_to(page)
 end
 
-When(/^I click "([^"]*)"$/) do |text|
+When(/^(?:when I|I) click "([^"]*)"$/) do |text|
   click_link_or_button text
 end
 
