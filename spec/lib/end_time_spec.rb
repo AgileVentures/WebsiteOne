@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'end_time'
 require 'start_time'
 
-describe EndTime, :type => :model do
+describe EndTime do
   it 'returns default start time for event + 30 mins if end time is blank' do
     allow(StartTime).to receive(:for).with(nil).and_return(Time.now)
     expect(EndTime.for(nil).to_i).to eq (Time.now + 30.minutes).to_i
