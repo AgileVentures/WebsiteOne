@@ -22,7 +22,7 @@ The principal organization behind this project is AGILEVENTURES NONPROFIT LTD., 
 
  Service                 |  Status      |
 |------------------------ | ----------------- |
-| *Test coeverage*         |                  |
+| *Test coverage*         |                  |
 | Coveralls                |  [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.png)](https://coveralls.io/r/AgileVentures/WebsiteOne)    |
 | *Continuous integration* |    |
 | Semaphore CI (master)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/318335/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
@@ -36,7 +36,7 @@ The principal organization behind this project is AGILEVENTURES NONPROFIT LTD., 
 | DevelopServer           | [websiteone-develop.herokuapp.com](http://websiteone-develop.herokuapp.com/) |
 | StagingServer           |[websiteone-staging.herokuapp.com](http://websiteone-staging.herokuapp.com/)  |
 | ProductionServer        | [agileventures.org][application]  |
-|Project management       |         |
+|*Project management*       |         |
 |Pivotal Tracker          |[WebsiteOne][pivotal]|
 
 ## Dependencies
