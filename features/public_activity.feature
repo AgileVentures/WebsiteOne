@@ -25,7 +25,7 @@ Feature: Display Public Activity
   Scenario: Navigate to activity feed
     Given I am on the "Dashboard" page
     And I click the "Activity feed" link
-    Then I should see "activity-feed" tab is active
+    Then I should see a "activity-feed" tab set to active
     And I should see a activity feed
 
   Scenario: Render activity
