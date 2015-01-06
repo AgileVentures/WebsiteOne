@@ -16,7 +16,7 @@
         <% time = instance[:time] %>
         <% prefix = time < Time.now ? 'Started at ' : 'Starts at ' %>
         <% start_time = event.start_time_with_timezone.strftime('%k:%M %Z') %>
-        <% display_time = "#{prefix} #{start_time}" %> 
+        <% display_time = "#{prefix} #{start_time}" %>
         <% display_month = time.strftime('%B') %>
         <% display_date = time.strftime('%d') %>
 
