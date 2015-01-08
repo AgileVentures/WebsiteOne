@@ -3,6 +3,7 @@
     <%= form_for @project, :html => { :role => 'form' } do |f| %>
 
       <%= awesome_text_field f, :title, placeholder: 'Name' %>
+      <%= awesome_text_field f, :image_url, placeholder: 'Paste a link to your image here' %>
       <%= awesome_text_area f, :description, rows: 10, placeholder: 'Description' %>
 
       <div class='form-group'>
