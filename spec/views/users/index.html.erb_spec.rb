@@ -9,6 +9,7 @@ describe 'users/index.html.erb', :type => :view do
 
   context 'advanced filtering' do
     before(:each) do
+      @current_user = @users.first
       @projects_list = FactoryGirl.build_stubbed_list(:project, 4)
       assign(:projects, @projects_list)
     end
@@ -27,6 +28,12 @@ describe 'users/index.html.erb', :type => :view do
       expect(rendered).to have_select(:project_filter, :with_options => project_titles_list)
     end
 
+    it 'timezone select is populated with titles' do
+      render
+
+      expect(rendered).to have_content('Close To My Timezone Area')
+      expect(rendered).to have_content('Wider Timezone Area')
+    end
   end
 
   it 'should display user filter form' do
