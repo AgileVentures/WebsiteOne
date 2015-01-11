@@ -16,11 +16,11 @@ Feature: As a site owner
       | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |
     And there are no videos
     And the following active users exist
-      | first_name | last_name | email                   | projects     | timezone          |
-      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | Europe/Stockholm  |
-      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  | Europe/Stockholm  |
-      |            | Croutch   | c.croutch@enterprise.us | hello saturn | Asia/Kolkata      |
-      | Dave       |           | dave@dixons.me          | hello sun    | Asia/Kolkata      |
+      | first_name | last_name | email                   | projects     | latitude | longitude | country    |
+      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | 59.33    | 18.06     | Stockholm  |
+      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  | 59.33    | 18.06     | Stockholm  |
+      |            | Croutch   | c.croutch@enterprise.us | hello saturn | -29.15   | 27.74     | Leshoto    |
+      | Dave       |           | dave@dixons.me          | hello sun    | 22.57    | 88.36     | Kolkata    |
     And I am logged in as "Tester"
 
   Scenario: Having All Users page
@@ -45,18 +45,24 @@ Feature: As a site owner
 
   Scenario: Filtering by project involvement
     Given I am on the "our members" page
-    When I filter projects for "hello world"
+    When I filter "projects" for "hello world"
     Then I should see "Alice"
     And I should see "Bob"
     And I should not see "Croutch"
     And I should not see "Dave"
 
-  Scenario: Find users in my timezone
+  Scenario: Find users close to my timezone area
     Given I am on the "our members" page
-    When I select "My Timezone" from Timezone Filter
-    Then I should only see users in my timezone
+    When I filter "timezones" for "Close To My Timezone Area"
+    Then I should see "Alice"
+    And I should see "Bob"
+    And I should not see "Croutch"
+    And I should not see "Dave"
 
-  Scenario: Find users in or close to my timezone
+  Scenario: Find users close and wider timezone area
     Given I am on the "our members" page
-    When I select "Near My Timezone" from Timezone Filter
-    Then I should only see users near my timezone
+    When I filter "timezones" for "Wider Timezone Area"
+    Then I should see "Alice"
+    And I should see "Bob"
+    And I should see "Croutch"
+    And I should not see "Dave"

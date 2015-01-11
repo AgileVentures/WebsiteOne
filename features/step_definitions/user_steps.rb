@@ -230,7 +230,15 @@ end
 Given /^the following active users exist$/ do |table|
   table.hashes.each do |attributes|
     p = Project.find_by(title: attributes['projects'])
-    u = FactoryGirl.create(:user, first_name: attributes['first_name'], last_name: attributes['last_name'], email: attributes['email'])
+    u = FactoryGirl.create(
+      :user,
+      first_name: attributes['first_name'],
+      last_name: attributes['last_name'],
+      email: attributes['email'],
+      latitude: attributes['latitude'],
+      longitude: attributes['longitude'],
+      country: attributes['country']
+    )
     u.follow p
   end
 end
@@ -408,25 +416,20 @@ end
 
 # NOTE search steps below
 
-When(/^I filter projects for "(.*?)"$/) do |project|
+When(/^I filter "(.*?)" for "(.*?)"$/) do |list_name, selected_from_list|
   steps %Q{
-    When I select "#{project}" from the project's list
+    When I select "#{selected_from_list}" from the "#{list_name}" list
     And I click "submit"
   }
 end
 
-When(/^I select "(.*?)" from the project's list$/) do |project|
-  page.select(project, from: 'project_filter')
-end
-
-When(/^I select "(.*?)" from Timezone Filter$/) do |time_zone_selection|
-  page.select(time_zone_selection, from: 'timezone_filter')
-end
-
-Then(/^I should only see users in my timezone$/) do
-    pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should only see users near my timezone$/) do
-    pending # express the regexp above with the code you wish you had
+When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_name|
+  case list_name
+  when 'projects'
+    filter = 'project_filter'
+  when 'timezones'
+    filter = 'timezone_select'
+  end
+    
+  page.select(selected_from_list, from: filter)
 end
