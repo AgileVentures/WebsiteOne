@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     count_timezone_degrees
-    @users = User.filter(params.slice(:project_filter, :timezone_filter)).allow_to_display.by_create
+    @users = User.filter(params.slice(:project_filter, :timezone_filter, :online)).allow_to_display.by_create
     @users_count = User.allow_to_display.count
     @projects = Project.all
   end
