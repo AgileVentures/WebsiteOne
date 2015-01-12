@@ -237,7 +237,8 @@ Given /^the following active users exist$/ do |table|
       email: attributes['email'],
       latitude: attributes['latitude'],
       longitude: attributes['longitude'],
-      country: attributes['country']
+      country: attributes['country'],
+      updated_at: attributes['updated_at']
     )
     u.follow p
   end
@@ -429,7 +430,9 @@ When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_na
     filter = 'project_filter'
   when 'timezones'
     filter = 'timezone_select'
+  when 'online status'
+    filter = 'online'
   end
-    
+
   page.select(selected_from_list, from: filter)
 end
