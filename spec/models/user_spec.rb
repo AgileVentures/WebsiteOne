@@ -191,7 +191,7 @@ describe User, :type => :model do
         @user2.stop_following @project
         params['project_filter'] = @project.id
 
-        results = User.filter(params.slice('project_filter')).allow_to_display
+        results = User.filter(params).allow_to_display
         
         expect(results).to include(@user1)
         expect(results).not_to include(@user2)
@@ -205,7 +205,7 @@ describe User, :type => :model do
         it 'filters user1 when choose Close To My Timezone Area' do
           params['timezone_filter'] = [@current_user.longitude - 7.5, @current_user.longitude + 7.5]
 
-          results = User.filter(params.slice('timezone_filter')).allow_to_display
+          results = User.filter(params).allow_to_display
         
           expect(results).to include(@user1)
           expect(results).not_to include(@user2)
@@ -214,7 +214,7 @@ describe User, :type => :model do
         it 'filters both users when choose Wider Timezone Area' do
           params['timezone_filter'] = [@current_user.longitude - 22.5, @current_user.longitude + 22.5]
 
-          results = User.filter(params.slice('timezone_filter')).allow_to_display
+          results = User.filter(params).allow_to_display
         
           expect(results).to include(@user1)
           expect(results).to include(@user2)
@@ -225,12 +225,12 @@ describe User, :type => :model do
         params['project_filter'] = ''
         params['timezone_filter'] = ''
 
-        expect{ User.filter(params.slice('project_filter', 'timezone_filter')).allow_to_display }.to_not raise_error
+        expect{ User.filter(params).allow_to_display }.to_not raise_error
       end
     end
 
     context 'no filters' do
-      subject { User.filter(params.slice('project_filter')).allow_to_display }
+      subject { User.filter(params).allow_to_display }
 
       before(:each) do
         FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
@@ -238,11 +238,11 @@ describe User, :type => :model do
         FactoryGirl.create(:user, first_name: 'Janice', display_profile: false)
       end
 
-      it 'should be ordered by creation date' do
+      it 'ordered by creation date' do
         expect(subject.first.first_name).to eq('Bob')
       end
 
-      it 'should be filtered by the display_profile property' do
+      it 'filtered by the display_profile property' do
         results = subject.map(&:first_name)
         expect(results).to include('Marley')
         expect(results).not_to include('Janice')

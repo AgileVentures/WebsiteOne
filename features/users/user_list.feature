@@ -7,20 +7,20 @@ Feature: As a site owner
   Background:
     Given I am on the "home" page
     And the following projects exist:
-      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |
-      | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 |
-      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  |
-      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  |
-      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  |
-      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  |
-      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |
+      | title         | description             | status   |
+      | hello world   | greetings earthlings    | active   |
+      | hello mars    | greetings aliens        | inactive |
+      | hello jupiter | greetings jupiter folks | active   |
+      | hello mercury | greetings mercury folks | inactive |
+      | hello saturn  | greetings saturn folks  | active   |
+      | hello sun     | greetings sun folks     | active   |
     And there are no videos
     And the following active users exist
-      | first_name | last_name | email                   | projects     | latitude | longitude | country    | updated_at    |
-      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | 59.33    | 18.06     | Stockholm  | 1.minute.ago  |
-      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  | 59.33    | 18.06     | Stockholm  | 5.minutes.ago |
-      |            | Croutch   | c.croutch@enterprise.us | hello saturn | -29.15   | 27.74     | Leshoto    | 1.hour.ago    |
-      | Dave       |           | dave@dixons.me          | hello sun    | 22.57    | 88.36     | Kolkata    | 3.days.ago    |
+      | first_name | last_name | email                   | projects     | latitude | longitude | updated_at    |
+      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | 59.33    | 18.06     | 1.minute.ago  |
+      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  | 59.33    | 18.06     | 5.minutes.ago |
+      |            | Croutch   | c.croutch@enterprise.us | hello saturn | -29.15   | 27.74     | 1.hour.ago    |
+      | Dave       |           | dave@dixons.me          | hello sun    | 22.57    | 88.36     | 3.days.ago    |
     And I am logged in as "Tester"
 
   Scenario: Having All Users page
@@ -39,38 +39,46 @@ Feature: As a site owner
     When I click "Members" within the navbar
     And I filter users for "Alice"
     Then I should see "Alice"
-    And I should not see "Bob"
-    And I should not see "Croutch"
-    And I should not see "Dave"
+    And I should not see:
+    | Bob     |
+    | Croutch |
+    | Dave    |
 
   Scenario: Filtering by project involvement
     Given I am on the "our members" page
     When I filter "projects" for "hello world"
-    Then I should see "Alice"
-    And I should see "Bob"
-    And I should not see "Croutch"
-    And I should not see "Dave"
+    Then I should see:
+    | Alice |
+    | Bob   |
+    And I should not see:
+    | Croutch |
+    | Dave    |
 
   Scenario: Find users close to my timezone area
     Given I am on the "our members" page
     When I filter "timezones" for "Close To My Timezone Area"
-    Then I should see "Alice"
-    And I should see "Bob"
-    And I should not see "Croutch"
-    And I should not see "Dave"
+    Then I should see:
+    | Alice |
+    | Bob   |
+    And I should not see:
+    | Croutch |
+    | Dave    |
 
   Scenario: Find users close and wider timezone area
     Given I am on the "our members" page
     When I filter "timezones" for "Wider Timezone Area"
-    Then I should see "Alice"
-    And I should see "Bob"
-    And I should see "Croutch"
+    Then I should see:
+    | Alice   |
+    | Bob     |
+    | Croutch |
     And I should not see "Dave"
 
   Scenario: Find users who have been online recently
     Given I am on the "our members" page
     When I filter "online status" for "Recently Online"
-    Then I should see "Alice"
-    And I should see "Bob"
-    And I should not see "Croutch"
-    And I should not see "Dave"
+    Then I should see:
+    | Alice |
+    | Bob   |
+    And I should not see:
+    | Croutch |
+    | Dave    |

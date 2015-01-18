@@ -13,7 +13,7 @@
       <h2>Advanced search</h2>
       <%= form_tag(users_path, method: "get", class: "form-inline filters-users-advanced") do %>
         <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), { prompt: 'Select a project' } %>
-        <%= select_tag :timezone_select, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_select]), { prompt: 'Select a timezone' } %>
+        <%= select_tag :timezone_filter, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_filter]), { prompt: 'Select a timezone' } %>
         <%= select_tag :online, options_for_select(['Recently Online'], params[:online]), { prompt: 'Select an online status' } %>
         <%= submit_tag 'submit' %>
       <% end %>

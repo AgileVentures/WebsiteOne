@@ -425,13 +425,13 @@ When(/^I filter "(.*?)" for "(.*?)"$/) do |list_name, selected_from_list|
 end
 
 When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_name|
-  case list_name
+  filter = case list_name
   when 'projects'
-    filter = 'project_filter'
+    'project_filter'
   when 'timezones'
-    filter = 'timezone_select'
+    'timezone_filter'
   when 'online status'
-    filter = 'online'
+    'online'
   end
 
   page.select(selected_from_list, from: filter)

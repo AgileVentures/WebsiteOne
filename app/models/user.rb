@@ -49,11 +49,11 @@ class User < ActiveRecord::Base
     )
   }
   scope :timezone_filter, -> (degrees) {
-    where("longitude BETWEEN ? AND ?", degrees[0], degrees[1])
+    where("users.longitude BETWEEN ? AND ?", degrees[0], degrees[1])
   }
   scope :allow_to_display, -> { where(display_profile: true) }
   scope :by_create, -> { order(:created_at) }
-  scope :online, -> (argument) { where("updated_at > ?", 10.minutes.ago) }
+  scope :online, -> (argument) { where("users.updated_at > ?", 10.minutes.ago) }
 
   self.per_page = 30
 
