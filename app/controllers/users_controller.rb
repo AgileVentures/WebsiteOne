@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    count_timezone_degrees
-    @users = User.filter(params.slice(:project_filter, :timezone_filter, :online)).allow_to_display.by_create
+    @users = User.filter(set_filter_params).allow_to_display.by_create
     @users_count = User.allow_to_display.count
     @projects = Project.all
   end
@@ -69,15 +68,20 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
   end
 
-  def count_timezone_degrees
-    unless params[:timezone_select].blank?
-      if @current_user && @current_user.longitude
-        lng = @current_user.longitude
-        case params[:timezone_select]
+  def set_filter_params
+    filter_params = params.slice(:project_filter, :timezone_filter, :online)
+    set_timezone_degree_range(filter_params)
+    filter_params
+  end
+
+  def set_timezone_degree_range(filter_params)
+    unless filter_params[:timezone_filter].blank?
+      if lng = @current_user.try(:longitude)
+        case filter_params[:timezone_filter]
         when 'Close To My Timezone Area'
-          params[:timezone_filter] = [lng - 7.5, lng + 7.5]
+          filter_params[:timezone_filter] = [lng - 7.5, lng + 7.5]
         when 'Wider Timezone Area'
-          params[:timezone_filter] = [lng - 22.5, lng + 22.5]
+          filter_params[:timezone_filter] = [lng - 22.5, lng + 22.5]
         end
       else
         redirect_to :back, alert: "Can't determine your location!"
