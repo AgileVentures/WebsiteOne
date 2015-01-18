@@ -17,10 +17,10 @@ Feature: As a site owner
     And there are no videos
     And the following active users exist
       | first_name | last_name | email                   | projects     | latitude | longitude | updated_at    |
-      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | 59.33    | 18.06     | 1.minute.ago  |
-      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  | 59.33    | 18.06     | 5.minutes.ago |
-      |            | Croutch   | c.croutch@enterprise.us | hello saturn | -29.15   | 27.74     | 1.hour.ago    |
-      | Dave       |           | dave@dixons.me          | hello sun    | 22.57    | 88.36     | 3.days.ago    |
+      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | 59.33    | 18.06     | 1 minute ago  |
+      | Bob        | Butcher   | bobb112@hotmail.com     | hello world  | 59.33    | 18.06     | 5 minutes ago |
+      |            | Croutch   | c.croutch@enterprise.us | hello saturn | -29.15   | 27.74     | 1 hour ago    |
+      | Dave       |           | dave@dixons.me          | hello sun    | 22.57    | 88.36     | 3 days ago    |
     And I am logged in as "Tester"
 
   Scenario: Having All Users page

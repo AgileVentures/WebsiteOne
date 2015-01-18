@@ -230,16 +230,16 @@ end
 Given /^the following active users exist$/ do |table|
   table.hashes.each do |attributes|
     p = Project.find_by(title: attributes['projects'])
+    Delorean.time_travel_to(attributes['updated_at']) if attributes['updated_at']
     u = FactoryGirl.create(
       :user,
       first_name: attributes['first_name'],
       last_name: attributes['last_name'],
       email: attributes['email'],
       latitude: attributes['latitude'],
-      longitude: attributes['longitude'],
-      country: attributes['country'],
-      updated_at: attributes['updated_at']
+      longitude: attributes['longitude']
     )
+    Delorean.back_to_the_present if attributes['updated_at']
     u.follow p
   end
 end
@@ -433,6 +433,6 @@ When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_na
   when 'online status'
     'online'
   end
-
+  
   page.select(selected_from_list, from: filter)
 end
