@@ -59,6 +59,7 @@ gem 'octokit' # Ruby wrapper for the GitHub API
 gem 'sucker_punch' # Single Process Ruby asynchronous processing library
 
 gem 'twitter', '~> 5.11.0' # twitter api wrapper
+gem 'chosen-rails' # jquery select menus
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber

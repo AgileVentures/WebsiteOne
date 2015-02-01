@@ -63,6 +63,8 @@ WebsiteOne.define('Users', function () {
             }).show();
             $(users).not(filtered).hide();
         });
+
+      $(".chosen-select").chosen();
     }
 
     return {
