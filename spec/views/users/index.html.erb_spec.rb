@@ -17,7 +17,7 @@ describe 'users/index.html.erb', :type => :view do
     it 'should display an advanced filter form' do
       render
 
-      expect(rendered).to have_content('Advanced search')
+      expect(rendered).to have_content('Filter users by')
       expect(rendered).to have_css('.filters-users-advanced')
     end
 
