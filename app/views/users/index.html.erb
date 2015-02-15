@@ -8,17 +8,16 @@
         <p>Check out our <%= @users_count %> awesome volunteers from all over the globe!</p>
     <% end %>
   </div>
-  <div class="col-sm-12 well">
-    <% if @current_user %>
+  <% if @current_user %>
+    <div class="col-sm-12 well">
       <p>Filter users by</p>
       <%= form_tag(users_path, method: "get", class: "form-inline filters-users-advanced") do %>
-        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), { prompt: 'Project involvement...' } %>
-        <%= select_tag :timezone_filter, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_filter]), { prompt: 'Time zone...' } %>
-        <%= check_box_tag :online, params[:online], false, { onchange: "this.form.submit()" }  %> Recently Online
-        <%= submit_tag 'submit' %>
+        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), { onchange: "this.form.submit()", prompt: 'Project involvement...' } %>
+        <%= select_tag :timezone_filter, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_filter]), { onchange: "this.form.submit()", prompt: 'Time zone...' } %>
+        <%= check_box_tag :online, params[:online], (true if !params[:online].nil?), { onchange: "this.form.submit()" }  %> Recently Online
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
 <div class="row">
   <div class="col-sm-12">
