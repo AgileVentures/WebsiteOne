@@ -11,10 +11,11 @@
   <% if @current_user %>
     <div class="col-sm-12 well">
       <p>Filter users by</p>
-      <%= form_tag(users_path, method: "get", class: "form-inline filters-users-advanced") do %>
-        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), { onchange: "this.form.submit()", prompt: 'Project involvement...' } %>
-        <%= select_tag :timezone_filter, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_filter]), { onchange: "this.form.submit()", prompt: 'Time zone...' } %>
-        <%= check_box_tag :online, params[:online], (true if !params[:online].nil?), { onchange: "this.form.submit()" }  %> Recently Online
+      <%= form_tag(users_path, remote: true, method: "get", class: "form-inline filters-users-advanced") do %>
+        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {  prompt: 'Project involvement...' } %>
+        <%= select_tag :timezone_filter, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_filter]), { prompt: 'Time zone...' } %>
+        <%= check_box_tag :online, params[:online], (true if !params[:online].nil?) %> Recently Online
+        <%= submit_tag 'submit' %>
       <% end %>
     </div>
   <% end %>
@@ -32,38 +33,10 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-  <% unless @users.empty? %>
+    <% unless @users.empty? %>
       <ul class="media-list row" id="UsersList">
-        <% @users.each_slice(3) do |slice| %>
-            <% slice.each do |user| %>
-                <% present user do |presenter| %>
-                    <li class="media-item col-md-4 col-sm-6 col-xs-12">
-                      <a class="user-preview" href="<%= user_path(user) %>">
-                        <%= presenter.gravatar_image(size: 80,
-                                                     class: 'img-rounded media-object pull-left') %>
-                        <div class="media-body index-summary">
-                          <p class="media-heading"><%= presenter.display_name %>
-                            <% if user.online? %>
-                                <%= image_tag('green-dot.png', size: '10x10', alt: 'Online!') %>
-                            <% end %></p>
-                          <% if presenter.has_title? %>
-                              <p><%= presenter.title_list %></p>
-                          <% end %>
-                          <% if user.country? %>
-                              <p><%= presenter.country %></p>
-                          <% end %>
-                        </div>
-                      </a>
-                      <% if user.online? & presenter.status? %>
-                        <div class="user-status" id="user-status">
-                          <span style= "margin-right: 5px;"class="glyphicon glyphicon-comment"></span>"<%= presenter.status %>"
-                        </div>
-                      <% end %>
-                    </li>
-                <% end %>
-            <% end %>
-        <% end %>
+        <%= render 'user_list' %>
       </ul>
-  <% end %>
+    <% end %>
   </div>
 </div>
