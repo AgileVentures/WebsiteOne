@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   layout 'layouts/user_profile_layout', only: [:show]
 
+  skip_before_filter :verify_authenticity_token, :only => [:index, :show]
+
   before_filter :get_user, only: [:show, :add_status]
   before_filter :authenticate_user!, only: [:add_status]
 
@@ -8,6 +10,11 @@ class UsersController < ApplicationController
     @users = User.filter(set_filter_params).allow_to_display.by_create
     @users_count = User.allow_to_display.count
     @projects = Project.all
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def new
