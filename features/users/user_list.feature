@@ -75,7 +75,8 @@ Feature: As a site owner
 
   Scenario: Find users who have been online recently
     Given I am on the "our members" page
-    When I filter "online status" for "Recently Online"
+    When I check "online"
+    When I click the "submit" button
     Then I should see:
     | Alice |
     | Bob   |
