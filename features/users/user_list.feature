@@ -54,9 +54,9 @@ Feature: As a site owner
     | Croutch |
     | Dave    |
 
-  Scenario: Find users close to my timezone area
+  Scenario: Find users in my timezone
     Given I am on the "our members" page
-    When I filter "timezones" for "Close To My Timezone Area"
+    When I filter "timezones" for "In My Timezone"
     Then I should see:
     | Alice |
     | Bob   |
@@ -64,9 +64,9 @@ Feature: As a site owner
     | Croutch |
     | Dave    |
 
-  Scenario: Find users close and wider timezone area
+  Scenario: Find users within 2 timezones
     Given I am on the "our members" page
-    When I filter "timezones" for "Wider Timezone Area"
+    When I filter "timezones" for "Members Within 2 Timezones"
     Then I should see:
     | Alice   |
     | Bob     |

@@ -181,8 +181,8 @@ describe User, :type => :model do
 
     context 'has filters' do
       before(:each) do
-        @user1 = FactoryGirl.create(:user, longitude: 19.15)
-        @user2 = FactoryGirl.create(:user, longitude: 27.74)
+        @user1 = FactoryGirl.create(:user, latitude: 59.33, longitude: 18.06)
+        @user2 = FactoryGirl.create(:user, latitude: -29.15, longitude: 27.74)
         @project = FactoryGirl.create(:project)
       end
 
@@ -199,11 +199,11 @@ describe User, :type => :model do
 
       context 'filters users for timezone area' do
         before(:each) do
-          @current_user = FactoryGirl.create(:user, longitude: 19.15)
+          @current_user = FactoryGirl.create(:user, timezone_offset: 3600)
         end
         
-        it 'filters user1 when choose Close To My Timezone Area' do
-          params['timezone_filter'] = [@current_user.longitude - 7.5, @current_user.longitude + 7.5]
+        it 'filters user1 when choose In My Timezone' do
+          params['timezone_filter'] = [@current_user.timezone_offset, @current_user.timezone_offset]
 
           results = User.filter(params).allow_to_display
         
@@ -211,8 +211,8 @@ describe User, :type => :model do
           expect(results).not_to include(@user2)
         end
 
-        it 'filters both users when choose Wider Timezone Area' do
-          params['timezone_filter'] = [@current_user.longitude - 22.5, @current_user.longitude + 22.5]
+        it 'filters both users when choose Members Within 2 Timezones' do
+          params['timezone_filter'] = [@current_user.timezone_offset - 3600, @current_user.timezone_offset + 3600]
 
           results = User.filter(params).allow_to_display
         

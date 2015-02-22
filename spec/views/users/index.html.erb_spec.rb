@@ -31,8 +31,8 @@ describe 'users/index.html.erb', :type => :view do
     it 'timezone select is populated with titles' do
       render
 
-      expect(rendered).to have_content('Close To My Timezone Area')
-      expect(rendered).to have_content('Wider Timezone Area')
+      expect(rendered).to have_content('In My Timezone')
+      expect(rendered).to have_content('Members Within 2 Timezones')
     end
   end
 
