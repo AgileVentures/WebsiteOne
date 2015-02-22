@@ -77,18 +77,18 @@ class UsersController < ApplicationController
 
   def set_filter_params
     filter_params = params.slice(:project_filter, :timezone_filter, :online)
-    set_timezone_degree_range(filter_params)
+    set_timezone_offset_range(filter_params)
     filter_params
   end
 
-  def set_timezone_degree_range(filter_params)
+  def set_timezone_offset_range(filter_params)
     unless filter_params[:timezone_filter].blank?
-      if lng = @current_user.try(:longitude)
+      if offset = @current_user.try(:timezone_offset)
         case filter_params[:timezone_filter]
-        when 'Close To My Timezone Area'
-          filter_params[:timezone_filter] = [lng - 7.5, lng + 7.5]
-        when 'Wider Timezone Area'
-          filter_params[:timezone_filter] = [lng - 22.5, lng + 22.5]
+        when 'In My Timezone'
+          filter_params[:timezone_filter] = [offset, offset]
+        when 'Members Within 2 Timezones'
+          filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
         end
       else
         redirect_to :back, alert: "Can't determine your location!"

@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :display_name, use: :slugged
 
+  before_save :generate_timezone_offset
+
   after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip_changed? }
   after_validation -> { KarmaCalculator.new(self).perform }
   after_create :send_slack_invite, if: -> { Features.slack.invites.enabled }
@@ -48,8 +50,8 @@ class User < ActiveRecord::Base
       }
     )
   }
-  scope :timezone_filter, -> (degrees) {
-    where("users.longitude BETWEEN ? AND ?", degrees[0], degrees[1])
+  scope :timezone_filter, -> (offset) {
+    where("users.timezone_offset BETWEEN ? AND ?", offset[0], offset[1])
   }
   scope :allow_to_display, -> { where(display_profile: true) }
   scope :by_create, -> { order(:created_at) }
@@ -120,5 +122,11 @@ class User < ActiveRecord::Base
 
   def send_slack_invite
     SlackInviteJob.new.async.perform(email)
+  end
+
+  def generate_timezone_offset
+    if self.latitude && self.longitude
+      self.timezone_offset = ActiveSupport::TimeZone.new(NearestTimeZone.to(self.latitude, self.longitude)).utc_offset
+    end
   end
 end
