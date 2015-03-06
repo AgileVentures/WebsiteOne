@@ -10,6 +10,12 @@ klasses = [ Project, Document, User, Article, Event ]
 old_counts = klasses.map(&:count)
 should_prompt = old_counts.min > 0
 
+def get_country
+  country = File.readlines(Rails.root + 'spec/fixtures/country_codes.txt').sample
+  code, name = country.chomp.split('|')
+  @country = {country_name: name, country_code: code}
+end
+
 if should_prompt
   puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
 end
@@ -75,8 +81,9 @@ for i in (1..3)
   end
 end
 
-for i in (1..5)
-  u = User.create first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: Faker::Lorem.characters(10), country: Faker::Address.country
+for i in (1..300)
+  get_country
+  u = User.create first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: Faker::Lorem.characters(10), country_name: @country[:country_name], country_code: @country[:country_code]
   Project.all.sample(3).each do |p|
     u.follow p
   end

@@ -60,6 +60,8 @@ gem 'sucker_punch' # Single Process Ruby asynchronous processing library
 
 gem 'twitter', '~> 5.11.0' # twitter api wrapper
 
+gem 'jvectormap-rails', '~> 1.0.0' #jVectorMap for the Rails asset pipeline
+
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
