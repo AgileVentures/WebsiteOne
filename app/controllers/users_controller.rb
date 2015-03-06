@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    @users = User.search(params)
+    #@users = User.search(params)
+    @users = User.all
   end
 
   def new

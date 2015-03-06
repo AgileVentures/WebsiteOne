@@ -8,15 +8,31 @@
     <div class="tab-pane active" id="statistics">
       <h3>Statistics</h3>
 
-      <div>
-        <p><%= @stats[:articles][:count] %> Articles Published</p>
+      <div class="row three-button-row">
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+            <%= link_to "#{@stats[:articles][:count]} Articles Published", "#", class: 'btn btn-primary btn-lg btn-block', title: "articles" %> </div>
 
-        <p><%= @stats[:projects][:count] %> Active Projects</p>
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+            <%= link_to "#{@stats[:projects][:count]} Active Projects", "#", class: 'btn btn-primary btn-lg btn-block', title: "projects" %></div>
 
-        <p><%= @stats[:members][:count] %> AgileVentures Members</p>
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+            <%= link_to "#{@stats[:documents][:count]} Documents Created", "#", class: 'btn btn-primary btn-lg btn-block', title: "documents" %></div>
 
-        <p><%= @stats[:documents][:count] %> Documents Created</p>
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+            <%= link_to "#{@stats[:pairing_minutes][:value]} Pair Programming Minutes", "#", class: 'btn btn-primary btn-lg btn-block', title: "pair-minutes" %></div>
+
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+            <%= link_to "#{@stats[:scrum_minutes][:value]} Scrum Minutes", "#", class: 'btn btn-primary btn-lg btn-block', title: "scrum-minutes" %></div>
+      
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+            <%= link_to "#{@stats[:members][:count]} AgileVentures Members", "#", class: 'btn btn-primary btn-lg btn-block', title: "members" %></div>
       </div>
+
+
+      <div id="info-box"><h3>User statistics</h3></div>
+      <div id="map" style="width: 100%; height: 500px; min-height: 500px;"></div>
+
+
     </div>
     <div class="tab-pane" id="activity-feed">
 
@@ -39,3 +55,66 @@
 
   </div>
 </div>
+
+<script src="http://code.highcharts.com/maps/highmaps.js"></script>
+<script src="http://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="http://code.highcharts.com/mapdata/custom/world.js"></script>
+<script>
+
+    // Import user data
+    // Have a look at http://stackoverflow.com/a/13446192/1354994
+
+    var usrData = <%= raw User.highchart_data %>;
+    var defaultText = '<h3>User statistics</h3>'
+
+
+    $(function(){
+        $('#info-box').html(defaultText);
+        $('#map').vectorMap({
+            map: 'world_mill_en',
+            backgroundColor: 'transparent',
+            zoomOnScroll: false,
+            panOnDrag: true,
+            regionStyle: {
+                initial: {
+                    fill: '#FFF5E6',
+                    "fill-opacity": 1,
+                    stroke: 'solid',
+                    "stroke-width": 2,
+                    "stroke-opacity": 1
+                },
+                hover: {
+                    "fill-opacity": 0.8,
+                    cursor: 'pointer'
+                },
+                selected: {
+                    fill: 'yellow'
+                },
+                selectedHover: {
+                }
+            },
+            series: {
+                regions: [{
+                    values: usrData,
+                    scale: ['#FFE0B2', '#FF9900'],
+                    normalizeFunction: 'polynomial'
+                }]
+            },
+            onRegionLabelShow: function(e, el, code){
+                if( usrData[code] > 0 ){
+                    $('#info-box').html('<h3>We have '+usrData[code]+' users in ' + el.html()+'</h3>');
+                } else {
+                    $('#info-box').html('<h3>No users in ' + el.html()+'</h3>');
+                }
+                console.log(el.html()+' (Users: '+usrData[code]+')');
+                //el.html(el.html()+' (Users: '+usrData[code]+')');
+
+            },
+            onRegionOut: function(event, code) {
+                //console.log(map.getRegionName(code));
+                $('#info-box').html(defaultText);
+            }
+        });
+    });
+</script>
+
