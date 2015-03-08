@@ -6,33 +6,29 @@
   </ul>
   <div id="tab-content" class="tab-content" style="background: #fff;">
     <div class="tab-pane active" id="statistics">
+      <div id="info-box"><h3>User statistics</h3></div>
+      <div id="map" style="width: 100%; height: 500px; min-height: 500px;"></div>
       <h3>Statistics</h3>
 
       <div class="row three-button-row">
         <div class='co-lg-4 col-md-4 col-sm-4'>
-            <%= link_to "#{@stats[:articles][:count]} Articles Published", "#", class: 'btn btn-primary btn-lg btn-block', title: "articles" %> </div>
+            <%= link_to "#{@stats[:articles][:count]} Articles", "#", class: 'btn btn-primary btn-lg btn-block', title: "articles" %> </div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
-            <%= link_to "#{@stats[:projects][:count]} Active Projects", "#", class: 'btn btn-primary btn-lg btn-block', title: "projects" %></div>
+            <%= link_to "#{@stats[:projects][:count]} Projects", "#", class: 'btn btn-primary btn-lg btn-block', title: "projects" %></div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
-            <%= link_to "#{@stats[:documents][:count]} Documents Created", "#", class: 'btn btn-primary btn-lg btn-block', title: "documents" %></div>
+            <%= link_to "#{@stats[:documents][:count]} Documents", "#", class: 'btn btn-primary btn-lg btn-block', title: "documents" %></div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
-            <%= link_to "#{@stats[:pairing_minutes][:value]} Pair Programming Minutes", "#", class: 'btn btn-primary btn-lg btn-block', title: "pair-minutes" %></div>
+            <%= link_to "#{@stats[:pairing_minutes][:value]} PairProgramming Minutes", "#", class: 'btn btn-primary btn-lg btn-block', title: "pair-minutes" %></div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
             <%= link_to "#{@stats[:scrum_minutes][:value]} Scrum Minutes", "#", class: 'btn btn-primary btn-lg btn-block', title: "scrum-minutes" %></div>
       
         <div class='co-lg-4 col-md-4 col-sm-4'>
-            <%= link_to "#{@stats[:members][:count]} AgileVentures Members", "#", class: 'btn btn-primary btn-lg btn-block', title: "members" %></div>
+            <%= link_to "#{@stats[:members][:count]} Members", "#", class: 'btn btn-primary btn-lg btn-block', title: "members" %></div>
       </div>
-
-
-      <div id="info-box"><h3>User statistics</h3></div>
-      <div id="map" style="width: 100%; height: 500px; min-height: 500px;"></div>
-
-
     </div>
     <div class="tab-pane" id="activity-feed">
 
