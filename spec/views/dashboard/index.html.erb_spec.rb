@@ -40,7 +40,7 @@ describe 'dashboard/index.html.erb', type: :view do
     it {expect(@users.count).to eq 20}
 
     it 'renders map', js: true do
-      expect(rendered).to 
+      expect(rendered).to
     end
 
 
