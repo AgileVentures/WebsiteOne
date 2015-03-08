@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe 'dashboard/index.html.erb', type: :view do
   before :each do
-    assign(:stats, {articles:{count:10},
-                    projects:{count:5},
-                    members:{count:100},
-                    documents:{count:40},
-                    pairing_minutes:{value:300},
-                    scrum_minutes:{value:200},
-    })
+    assign(:stats, {articles: {count: 10},
+                    projects: {count: 5},
+                    members: {count: 100},
+                    documents: {count: 40},
+                    pairing_minutes: {value: 300},
+                    scrum_minutes: {value: 200},
+                 })
 
 
     render
@@ -20,15 +20,14 @@ describe 'dashboard/index.html.erb', type: :view do
   end
 
   describe 'displays statistics: ' do
-    it {expect(rendered).to have_content('10 Articles Published')}
-    it {expect(rendered).to have_content('5 Active Projects')}
-    it {expect(rendered).to have_content('100 AgileVentures Members')}
-    it {expect(rendered).to have_content('40 Documents Created')}
-    it {expect(rendered).to have_text('300 Pair Programming Minutes')}
-    it {expect(rendered).to have_content('200 Scrum Minutes')}
+    it { expect(rendered).to include('10 Articles') }
+    it { expect(rendered).to include('5 Projects') }
+    it { expect(rendered).to include('100 Members') }
+    it { expect(rendered).to include('40 Documents') }
+    it { expect(rendered).to include('300 PairProgramming Minutes') }
+    it { expect(rendered).to include('200 Scrum Minutes') }
   end
-
-  describe 'populate and render map of users' do
+  describe 'render and populate map of users' do
 
     before(:each) do
       @users = []
@@ -38,11 +37,16 @@ describe 'dashboard/index.html.erb', type: :view do
       end
       render
     end
+    it {expect(@users.count).to eq 20}
 
-    it 'should assign built users to @users' do
-      expect(@users.count).to eq 20
+    it 'renders map', js: true do
+      expect(rendered).to 
     end
 
+
+
+
   end
+
 
 end
