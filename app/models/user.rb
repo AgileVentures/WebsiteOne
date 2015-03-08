@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   end
   
   def self.search(params)
-    where(params, display_profile: true)
+    where(display_profile: true)
       .order(:created_at)
   end
 
