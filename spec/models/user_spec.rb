@@ -170,13 +170,13 @@ describe User, :type => :model do
   end
 
   describe '.search' do
-    subject { User.search(params) }
     let(:params) { {} }
+    subject { User.search(params) }
 
     before(:each) do
       FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
       FactoryGirl.create(:user, first_name: 'Marley', created_at: 2.days.ago)
-      FactoryGirl.create(:user, first_name: 'Janice', display_profile: false)
+      FactoryGirl.create(:user, first_name: 'Janice', created_at: 5.days.ago, display_profile: false)
     end
 
     it 'should be ordered by creation date' do
@@ -185,7 +185,7 @@ describe User, :type => :model do
 
     it 'should be filtered by the display_profile property' do
       results = subject.map(&:first_name)
-      expect(results).to include('Marley')
+      expect(results).to match_array %w(Marley Bob)
       expect(results).not_to include('Janice')
     end
   end
