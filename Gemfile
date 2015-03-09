@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.1.5'
 gem 'rails', '4.1.0'
 # Added after upgrade to rails 4.1
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.1'
