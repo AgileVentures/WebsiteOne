@@ -103,14 +103,11 @@ class User < ActiveRecord::Base
     updated_at > 10.minutes.ago
   end
 
-  def self.highchart_data
+  def self.map_data
     users = User.group(:country_code).count
     clean = proc{ |k,v| !k.nil? ? Hash === v ? v.delete_if(&clean) : false : true }
     users.delete_if(&clean)
     users.to_json
-    #users.inject([]) do |array, (k, v)|
-    #  array + (k ? [{ccode: k, value: v}] : [])
-    #end
   end
 
   private
