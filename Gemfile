@@ -49,7 +49,7 @@ gem 'public_activity' #Create activity feed
 gem 'yui-compressor'
 gem 'compass-rails'
 gem 'rack-cache'
-gem 'sprockets-image_compressor'
+gem 'sprockets-image_compressor', '~> 0.2.4'
 #gem 'sprockets-webp'
 gem 'rack-timeout'
 gem 'eventmachine', '~> 1.0.7'
