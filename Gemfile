@@ -50,6 +50,7 @@ gem 'yui-compressor'
 gem 'compass-rails'
 gem 'rack-cache'
 gem 'sprockets-image_compressor'
+gem 'sprockets-webp'
 gem 'rack-timeout'
 
 gem 'local_time'
