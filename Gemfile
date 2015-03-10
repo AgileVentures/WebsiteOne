@@ -50,8 +50,9 @@ gem 'yui-compressor'
 gem 'compass-rails'
 gem 'rack-cache'
 gem 'sprockets-image_compressor'
-gem 'sprockets-webp'
+#gem 'sprockets-webp'
 gem 'rack-timeout'
+gem 'eventmachine', '~> 1.0.7'
 
 gem 'local_time'
 gem 'rails_config' # a gem to manage configuration files
