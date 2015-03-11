@@ -8,17 +8,18 @@
         <p>Check out our <%= @users_count %> awesome volunteers from all over the globe!</p>
     <% end %>
   </div>
-  <% if @current_user %>
-    <div class="col-sm-12 well">
-      <p>Filter users by</p>
-      <%= form_tag(users_path, remote: true, method: "get", class: "form-inline filters-users-advanced") do %>
-        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {  prompt: 'Project involvement...' } %>
-        <%= select_tag :timezone_filter, options_for_select(['In My Timezone', 'Members Within 2 Timezones'], params[:timezone_filter]), { prompt: 'Time zone...' } %>
+  <div class="col-sm-12 well">
+    <p>Filter users by</p>
+    <%= form_tag(users_path, remote: true, method: "get", class: "form-inline filters-users-advanced") do %>
+        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {prompt: 'Project involvement...', class: 'form-control'} %>
+        <% if @current_user.latitude %>
+            <%= select_tag :timezone_filter, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_filter]), {prompt: 'Time zone...', class: 'form-control'} %>
+        <% end %>
         <%= check_box_tag :online, params[:online], (true if !params[:online].nil?) %> Recently Online
-        <%= submit_tag 'submit' %>
-      <% end %>
-    </div>
-  <% end %>
+        <%= submit_tag 'Search', class: 'btn btn-default' %>
+    <% end %>
+  </div>
+
 </div>
 <div class="row">
   <div class="col-sm-12">
@@ -34,9 +35,9 @@
 <div class="row">
   <div class="col-sm-12">
     <% unless @users.empty? %>
-      <ul class="media-list row" id="UsersList">
-        <%= render 'user_list' %>
-      </ul>
+        <ul class="media-list row" id="UsersList">
+          <%= render 'user_list' %>
+        </ul>
     <% end %>
   </div>
 </div>
