@@ -29,14 +29,15 @@ module GithubCommitsJob
     if contributors
       contributors.map do |contributor|
         begin
+          user = User.find_by_github_username(contributor.author.login)
           if user
             CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
-            puts "Got what I came for from #{user.display_name}".green
+            puts "#{user.display_name} stats are okay".green
           else
-            puts "Something is Wrooong!".yellow
+            puts 'Something is Wrooong!'.yellow
           end
         rescue Exception
-          puts "I refuse to fail or be stopped by #{user.display_name}!".red
+          puts "#{user.display_name} will not stop me!".red
         end
       end
     end
