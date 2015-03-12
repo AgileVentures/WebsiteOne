@@ -5,6 +5,7 @@ module GithubCommitsJob
 
   def run
     Project.with_github_url.each do |project|
+      update_protocol(project)
       update_total_commit_count_for(project)
       update_user_commit_counts_for(project)
     end
@@ -13,26 +14,45 @@ module GithubCommitsJob
   private
 
   def update_total_commit_count_for(project)
-    update_protocol(project)
-    doc = Nokogiri::HTML(open(project.github_url))
-    commit_count = doc.at_css('li.commits .num').text.strip.gsub(',', '').to_i
-    project.update(commit_count: commit_count)
+    begin
+      doc = Nokogiri::HTML(open(project.github_url))
+      commit_count = doc.at_css('li.commits .num').text.strip.gsub(',', '').to_i
+      project.update(commit_count: commit_count)
+      puts "Got what I came for from #{project.github_url}".green
+    rescue Exception
+      puts "I refuse to fail or be stopped by #{project.github_url}!".red
+    end
   end
 
   def update_user_commit_counts_for(project)
     contributors = get_contributor_stats(project.github_repo)
-    contributors.map do |contributor|
-      user = User.find_by_github_username(contributor.author.login)
-      CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total) if user
+    if contributors
+      contributors.map do |contributor|
+        begin
+          if user
+            CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
+            puts "Got what I came for from #{user.display_name}".green
+          else
+            puts "Something is Wrooong!".yellow
+          end
+        rescue Exception
+          puts "I refuse to fail or be stopped by #{user.display_name}!".red
+        end
+      end
     end
+
   end
 
   def get_contributor_stats(repo)
-    loop do
-      contributors = Octokit.contributor_stats(repo)
-      return contributors unless contributors.nil?
-      Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
-      sleep 3
+    begin
+      loop do
+        contributors = Octokit.contributor_stats(repo)
+        return contributors unless contributors.nil?
+        Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
+        sleep 3
+      end
+    rescue Exception
+      puts "Could not get the contributors for for #{repo}!".red
     end
   end
 
