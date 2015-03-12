@@ -71,7 +71,7 @@ describe EventInstance, type: :model do
                                 "2" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
                                         "hasCamera" => "true", "hasAppEnabled" => "true",
                                         "isBroadcaster" => "true", "isInBroadcast" => "true",
-                                        "displayIndex" => "2", "person" => 
+                                        "displayIndex" => "2", "person" =>
                                             {"id" => "xxx", "displayName" => "John Doe",
                                              "image" => {"url" => ".../s96-c/photo.jpg"}, "fa" => "false"},
                                         "locale" => "en", "fa" => "false"}}
