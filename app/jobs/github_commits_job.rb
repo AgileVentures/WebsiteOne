@@ -13,6 +13,7 @@ module GithubCommitsJob
   private
 
   def update_total_commit_count_for(project)
+    update_protocol(project)
     doc = Nokogiri::HTML(open(project.github_url))
     commit_count = doc.at_css('li.commits .num').text.strip.gsub(',', '').to_i
     project.update(commit_count: commit_count)
@@ -33,5 +34,9 @@ module GithubCommitsJob
       Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
       sleep 3
     end
+  end
+
+  def update_protocol(project)
+    project.update(github_url: project.github_url.sub('http://', 'https://'))
   end
 end
