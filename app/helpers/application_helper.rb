@@ -39,7 +39,7 @@ module ApplicationHelper
   end
 
   def current_projects
-    Project.order(created_at: :desc)
+    Project.order(commit_count: :desc)
   end
 
   def roots
