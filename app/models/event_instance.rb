@@ -13,6 +13,7 @@ class EventInstance < ActiveRecord::Base
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
 
   after_save "tweet_hangout_notification if (started? && hangout_url_changed?)"
+  after_save "tweet_yt_link if yt_video_id_changed?"
 
   def started?
     hangout_url?
@@ -38,12 +39,22 @@ class EventInstance < ActiveRecord::Base
 
   def tweet_hangout_notification
     case self.category
-    when 'Scrum'
-      TwitterService.tweet("#Scrum meeting with our #distributedteam is live on #{hangout_url} Join in and learn about our #opensource #projects!")
-    when 'PairProgramming'
-      TwitterService.tweet("Pair programming on #{self.project.title} #{hangout_url} #pairwithme, #distributedteam")
-    else
-      Rails.logger.error "''#{self.category}'' is not a recognized event category for Twitter notifications. Must be one of: 'Scrum', 'PairProgramming'"
+      when 'Scrum'
+        TwitterService.tweet("#Scrum meeting with our #distributedteam is live on #{hangout_url} Join in and learn about our #opensource #projects!")
+      when 'PairProgramming'
+        TwitterService.tweet("Pair programming on #{self.project.title} #{hangout_url} #pairwithme, #distributedteam")
+      else
+        Rails.logger.error "''#{self.category}'' is not a recognized event category for Twitter notifications. Must be one of: 'Scrum', 'PairProgramming'"
+    end
+  end
+
+  def tweet_yt_link
+    case self.category
+      when 'Scrum'
+        TwitterService.tweet("Did you miss our #scrum? You can catch the recording at youtu.be/#{self.yt_video_id} #opensource #distributedteam")
+      when 'PairProgramming'
+        broadcaster = self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' }
+        TwitterService.tweet("#{broadcaster} just finished #PairProgramming on #{self.project.title} You can catch the recording at youtu.be/#{self.yt_video_id} #opensource #pairwithme")
     end
   end
 end
