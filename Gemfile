@@ -98,6 +98,7 @@ group :development, :test do
   gem 'guard-rspec' #plugins for Guard
   gem 'guard-cucumber' #plugins for Guard
   gem 'guard-livereload' #plugins for Guard
+  gem 'bullet'
 
 end
 
@@ -106,4 +107,3 @@ group :production do
   gem 'newrelic_rpm' # New Relic analytics
 end
 
-gem "bullet", :group => "development"

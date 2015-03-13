@@ -13,32 +13,63 @@
 
       <div class="row three-button-row">
         <div class='co-lg-4 col-md-4 col-sm-4'>
-          <%= link_to "#{@stats[:articles][:count]} Articles", articles_path, class: 'btn btn-primary btn-lg btn-block', title: 'articles' %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">Articles</div>
+            <div class="panel-body"><h1 class="text-center"><%= "#{@stats[:articles][:count]}" %></h1>
+            </div>
+          </div>
+          <%#= link_to "#{@stats[:articles][:count]} Articles", articles_path, class: 'btn btn-primary btn-lg btn-block', title: 'articles' %>
         </div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
-          <%= link_to "#{@stats[:projects][:count]} Projects", projects_path, class: 'btn btn-primary btn-lg btn-block', title: 'projects' %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">Projects</div>
+            <div class="panel-body"><h1 class="text-center"><%= "#{@stats[:projects][:count]}" %></h1>
+            </div>
+          </div>
+          <%#= link_to "#{@stats[:projects][:count]} Projects", projects_path, class: 'btn btn-primary btn-lg btn-block', title: 'projects' %>
         </div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
-          <%= link_to "#{@stats[:documents][:count]} Documents", projects_path, class: 'btn btn-primary btn-lg btn-block', title: 'documents' %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">Documents</div>
+            <div class="panel-body"><h1 class="text-center"> <%= "#{@stats[:documents][:count]}" %></h1>
+            </div>
+          </div>
+          <%#= link_to "#{@stats[:documents][:count]} Documents", projects_path, class: 'btn btn-primary btn-lg btn-block', title: 'documents' %>
         </div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
-          <%= link_to "#{@stats[:pairing_minutes][:value]} PairProgramming Minutes", '#', class: 'btn btn-primary btn-lg btn-block', title: 'pair-minutes' %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">PairProgramming Minutes</div>
+            <div class="panel-body"><h1 class="text-center"> <%= "#{@stats[:pairing_minutes][:value]}" %></h1>
+            </div>
+          </div>
+          <%#= link_to "#{@stats[:pairing_minutes][:value]} PairProgramming Minutes", '#', class: 'btn btn-primary btn-lg btn-block', title: 'pair-minutes' %>
         </div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
-          <%= link_to "#{@stats[:scrum_minutes][:value]} Scrum Minutes", '#', class: 'btn btn-primary btn-lg btn-block', title: 'scrum-minutes' %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">Scrum Minutes</div>
+            <div class="panel-body"><h1 class="text-center"> <%= "#{@stats[:scrum_minutes][:value]}" %></h1>
+            </div>
+          </div>
+          <%#= link_to "#{@stats[:scrum_minutes][:value]} Scrum Minutes", '#', class: 'btn btn-primary btn-lg btn-block', title: 'scrum-minutes' %>
         </div>
 
         <div class='co-lg-4 col-md-4 col-sm-4'>
-          <%= link_to "#{@stats[:members][:count]} Members", users_path, class: 'btn btn-primary btn-lg btn-block', title: 'members' %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">Members</div>
+            <div class="panel-body"><h1 class="text-center"> <%= "#{@stats[:members][:count]}" %></h1>
+            </div>
+          </div>
+          <%#= link_to "#{@stats[:members][:count]} Members", users_path, class: 'btn btn-primary btn-lg btn-block', title: 'members' %>
         </div>
       </div>
     </div>
     <div class="tab-pane" id="activity-feed">
-'    <h3>Recent activities</h3>
+      ' <h3>Recent activities</h3>
+
       <div id="feed">
         <% if @activities %>
             <% @activities.each do |activity| %>

@@ -167,7 +167,17 @@ h1 {
 }
 
 .panel {
-  border-width: 0;
+  border-width: 1;
+}
+
+.panel-primary {
+  border-color: #FFE0B2;
+}
+
+.panel-primary > .panel-heading {
+  color: white;
+  background-color: #FF9900;
+  border-color: #FF9900;
 }
 
 @media (max-width: 768px) {
