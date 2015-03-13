@@ -93,8 +93,7 @@ describe User, :type => :model do
         '85.228.111.204', [
           {
             ip: '85.228.111.204',
-            country_code: 'SE',
-            country_name: 'Sweden',
+            country: 'Sweden',
             region_code: '28',
             region_name: 'Västra Götaland',
             city: 'Alingsås',
@@ -111,8 +110,7 @@ describe User, :type => :model do
         '50.78.167.161', [
           {
             ip: '50.78.167.161',
-            country_code: 'US',
-            country_name: 'United States',
+            country: 'United States',
             region_code: 'WA',
             region_name: 'Washington',
             city: 'Seattle',
