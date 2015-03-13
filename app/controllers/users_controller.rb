@@ -1,11 +1,20 @@
 class UsersController < ApplicationController
   layout 'layouts/user_profile_layout', only: [:show]
 
+  skip_before_filter :verify_authenticity_token, :only => [:index, :show]
+
   before_filter :get_user, only: [:show, :add_status]
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    @users = User.search(params)
+    @users = User.filter(set_filter_params).allow_to_display.by_create
+    @users_count = User.allow_to_display.count
+    @projects = Project.all
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def new
@@ -64,5 +73,26 @@ class UsersController < ApplicationController
 
   def get_user
     @user = User.friendly.find(params[:id])
+  end
+
+  def set_filter_params
+    filter_params = params.slice(:project_filter, :timezone_filter, :online)
+    set_timezone_offset_range(filter_params)
+    filter_params
+  end
+
+  def set_timezone_offset_range(filter_params)
+    unless filter_params[:timezone_filter].blank?
+      if offset = @current_user.try(:timezone_offset)
+        case filter_params[:timezone_filter]
+        when 'In My Timezone'
+          filter_params[:timezone_filter] = [offset, offset]
+        when 'Members Within 2 Timezones'
+          filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
+        end
+      else
+        redirect_to :back, alert: "Can't determine your location!"
+      end
+    end
   end
 end

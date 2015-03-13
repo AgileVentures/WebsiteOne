@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20150308085307) do
     t.text     "bio"
     t.boolean  "receive_mailings",       default: true
     t.integer  "karma_points",           default: 0
+    t.integer  "timezone_offset"
     t.string   "country_code"
   end
 

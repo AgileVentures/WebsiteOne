@@ -8,6 +8,7 @@ require 'shoulda/matchers'
 # require 'rspec/autorun'
 require 'capybara/rspec'
 require 'webmock/rspec'
+require 'capybara-screenshot/rspec'
 require 'public_activity/testing'
 
 PublicActivity.enabled = true
@@ -21,6 +22,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 OmniAuth.config.test_mode = true
+Capybara.javascript_driver = :webkit
 
 RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers

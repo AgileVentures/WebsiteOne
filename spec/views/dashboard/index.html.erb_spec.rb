@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'dashboard/index.html.erb', type: :view do
+describe 'dashboard/index.html.erb', type: :view, js: true do
   before :each do
     assign(:stats, {articles: {count: 10},
                     projects: {count: 5},
@@ -39,14 +39,12 @@ describe 'dashboard/index.html.erb', type: :view do
     end
     it {expect(@users.count).to eq 20}
 
-    it 'renders map', js: true do
-      expect(rendered).to
+    it 'includes map legend' do
+      expect(rendered).to have_css 'div#info-box', text: 'User statistics'
     end
 
-
-
-
+    it 'includes map' do
+      expect(rendered).to have_css 'div#map'
+    end
   end
-
-
 end
