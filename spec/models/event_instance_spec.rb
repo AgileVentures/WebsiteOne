@@ -91,6 +91,15 @@ describe EventInstance, type: :model do
 
   end
 
+  context 'yt_video_id is NOT present' do
+    before { hangout.yt_video_id = nil }
+
+    it 'does not call TwitterService' do
+      expect(TwitterService).to_not receive(:tweet)
+      hangout.save
+    end
+  end
+
   context 'event category is recognized' do
     before do
       hangout.hangout_url = 'test'
