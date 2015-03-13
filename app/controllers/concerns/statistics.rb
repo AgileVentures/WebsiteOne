@@ -21,7 +21,6 @@ module Statistics
   end
 
   def calculate_duration(category)
-    binding.pry
     EventInstance.where(category: category).map(&:duration).sum
   end
 end
