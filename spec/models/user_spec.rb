@@ -176,24 +176,77 @@ describe User, :type => :model do
     end
   end
 
-  describe '.search' do
-    subject { User.search(params) }
+  describe '.filter' do
     let(:params) { {} }
 
-    before(:each) do
-      FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
-      FactoryGirl.create(:user, first_name: 'Marley', created_at: 2.days.ago)
-      FactoryGirl.create(:user, first_name: 'Janice', display_profile: false)
+    context 'has filters' do
+      before(:each) do
+        @user1 = FactoryGirl.create(:user, latitude: 59.33, longitude: 18.06)
+        @user2 = FactoryGirl.create(:user, latitude: -29.15, longitude: 27.74)
+        @project = FactoryGirl.create(:project)
+      end
+
+      it 'filters users for project' do
+        @user1.follow @project
+        @user2.stop_following @project
+        params['project_filter'] = @project.id
+
+        results = User.filter(params).allow_to_display
+        
+        expect(results).to include(@user1)
+        expect(results).not_to include(@user2)
+      end
+
+      context 'filters users for timezone area' do
+        before(:each) do
+          @current_user = FactoryGirl.create(:user, timezone_offset: 3600)
+        end
+        
+        it 'filters user1 when choose In My Timezone' do
+          params['timezone_filter'] = [@current_user.timezone_offset, @current_user.timezone_offset]
+
+          results = User.filter(params).allow_to_display
+        
+          expect(results).to include(@user1)
+          expect(results).not_to include(@user2)
+        end
+
+        it 'filters both users when choose Members Within 2 Timezones' do
+          params['timezone_filter'] = [@current_user.timezone_offset - 3600, @current_user.timezone_offset + 3600]
+
+          results = User.filter(params).allow_to_display
+        
+          expect(results).to include(@user1)
+          expect(results).to include(@user2)
+        end
+      end
+
+      it 'does not raise error when filters are empty' do
+        params['project_filter'] = ''
+        params['timezone_filter'] = ''
+
+        expect{ User.filter(params).allow_to_display }.to_not raise_error
+      end
     end
 
-    it 'should be ordered by creation date' do
-      expect(subject.first.first_name).to eq('Bob')
-    end
+    context 'no filters' do
+      subject { User.filter(params).allow_to_display }
 
-    it 'should be filtered by the display_profile property' do
-      results = subject.map(&:first_name)
-      expect(results).to include('Marley')
-      expect(results).not_to include('Janice')
+      before(:each) do
+        FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
+        FactoryGirl.create(:user, first_name: 'Marley', created_at: 2.days.ago)
+        FactoryGirl.create(:user, first_name: 'Janice', display_profile: false)
+      end
+
+      it 'ordered by creation date' do
+        expect(subject.first.first_name).to eq('Bob')
+      end
+
+      it 'filtered by the display_profile property' do
+        results = subject.map(&:first_name)
+        expect(results).to include('Marley')
+        expect(results).not_to include('Janice')
+      end
     end
   end
 

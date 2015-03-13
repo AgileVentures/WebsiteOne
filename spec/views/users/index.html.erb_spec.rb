@@ -3,6 +3,37 @@ require 'spec_helper'
 describe 'users/index.html.erb', :type => :view do
   before(:each) do
     @users = FactoryGirl.build_list(:user, 4, updated_at: '2013-09-30 05:00:00 UTC')
+    @users_count = @users.count
+    assign(:projects, [])
+  end
+
+  context 'advanced filtering' do
+    before(:each) do
+      @current_user = @users.first
+      @projects_list = FactoryGirl.build_stubbed_list(:project, 4)
+      assign(:projects, @projects_list)
+    end
+
+    it 'should display an advanced filter form' do
+      render
+
+      expect(rendered).to have_content('Filter users by')
+      expect(rendered).to have_css('.filters-users-advanced')
+    end
+
+    it 'projects select is populated with project titles' do
+      render
+
+      project_titles_list = @projects_list.map {|p| p.title}
+      expect(rendered).to have_select(:project_filter, :with_options => project_titles_list)
+    end
+
+    it 'timezone select is populated with titles' do
+      render
+
+      expect(rendered).to have_content('In My Timezone')
+      expect(rendered).to have_content('Members Within 2 Timezones')
+    end
   end
 
   it 'should display user filter form' do
@@ -28,11 +59,11 @@ describe 'users/index.html.erb', :type => :view do
   context 'renders the users count in the sentence above' do
     it 'has valid users count' do
       render
-      expect(rendered).to have_content("Check out our #{@users.count} awesome volunteers from all over the globe!")
+      expect(rendered).to have_content("Check out our #{@users_count} awesome volunteers from all over the globe!")
     end
 
     it 'shows different sentence if invalid users count' do
-      @users = []
+      @users_count = 0
       render
       expect(rendered).to have_content('It is a lonely planet we live in')
     end

@@ -1,0 +1,29 @@
+<% @users.each_slice(3) do |slice| %>
+    <% slice.each do |user| %>
+        <% present user do |presenter| %>
+            <li class="media-item col-md-4 col-sm-6 col-xs-12">
+              <a class="user-preview" href="<%= user_path(user) %>">
+                <%= presenter.gravatar_image(size: 80,
+                                             class: 'img-rounded media-object pull-left') %>
+                <div class="media-body index-summary">
+                  <p class="media-heading"><%= presenter.display_name %>
+                    <% if user.online? %>
+                        <%= image_tag('green-dot.png', size: '10x10', alt: 'Online!') %>
+                    <% end %></p>
+                  <% if presenter.has_title? %>
+                      <p><%= presenter.title_list %></p>
+                  <% end %>
+                  <% if user.country_name %>
+                      <p><%= presenter.country_name %></p>
+                  <% end %>
+                </div>
+              </a>
+              <% if user.online? & presenter.status? %>
+                <div class="user-status" id="user-status">
+                  <span style= "margin-right: 5px;"class="glyphicon glyphicon-comment"></span>"<%= presenter.status %>"
+                </div>
+              <% end %>
+            </li>
+        <% end %>
+    <% end %>
+<% end %>
