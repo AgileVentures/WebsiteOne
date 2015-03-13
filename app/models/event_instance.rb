@@ -51,10 +51,13 @@ class EventInstance < ActiveRecord::Base
   def tweet_yt_link
     case self.category
       when 'Scrum'
-        TwitterService.tweet("Did you miss our #scrum? You can catch the recording at youtu.be/#{self.yt_video_id} #opensource #distributedteam")
+        TwitterService.tweet("#{broadcaster} just hosted an online #scrum using ##googlehangouts Missed it? Catch the recording at youtu.be/#{event.yt_video_id} #opensource")
       when 'PairProgramming'
-        broadcaster = self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' }
         TwitterService.tweet("#{broadcaster} just finished #PairProgramming on #{self.project.title} You can catch the recording at youtu.be/#{self.yt_video_id} #opensource #pairwithme")
     end
+  end
+
+  def broadcaster
+    self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' }
   end
 end
