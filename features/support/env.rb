@@ -86,8 +86,7 @@ Geocoder::Lookup::Test.add_stub(
     '127.0.0.1', [
     {
         ip: '127.0.0.1',
-        country_code: 'SE',
-        country_name: 'Sweden',
+        country: 'Sweden',
         region_code: '28',
         region_name: 'Västra Götaland',
         city: 'Alingsås',
