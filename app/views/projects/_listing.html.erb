@@ -2,7 +2,7 @@
 
   <div class="row"> 
     <% if project.image_url %>
-      <div class="col-xs-3"><%= image_tag project.image_url, class: "img-responsive" %>
+      <div class="col-xs-3"><%= image_tag project.image_url, class: 'img-responsive' %>
       </div>
       <% end %>
     <div class="col-xs-9">
@@ -24,8 +24,9 @@
               <i class="fa fa-file-text-o"></i> <%= documents_count %>
             </li>
           <% end %>
+
           <% commit_count = project.commit_count %>
-          <% if commit_count > 0 %>
+          <% unless commit_count.nil? %>
             <li data-toggle="tooltip" data-placement="top"
                 title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
               <i class="fa fa-github-alt"></i> <%= commit_count %>
