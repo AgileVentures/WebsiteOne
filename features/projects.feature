@@ -5,13 +5,17 @@ Feature: Create and maintain projects
 
   Background:
     Given the following projects exist:
-      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |
-      | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 |
-      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  |
-      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  |
-      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  |
-      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  |
-      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |
+      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count |
+      | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         |
+      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  | 2000         |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  | 2000         |
+      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  | 1900         |
+      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  | 1900         |
+      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |              |
+      | hello venus   | greetings venus folks   |             | active   |                                             |                                                  |              |
+      | hello terra   | greetings terra folks   |             | active   |                                             |                                                  |              |
+      | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         |
+
     And there are no videos
 
 #  Scenarios for Index page
@@ -35,24 +39,16 @@ Feature: Create and maintain projects
     When I follow "Projects" within the navbar
     Then I should see:
       | Text                    |
+      | hello world             |
+      | greetings earthlings    |
       | hello jupiter           |
       | greetings jupiter folks |
+      | hello saturn            |
+      | greetings saturn folks  |
       | ACTIVE                  |
-      | hello mars              |
-      | greetings aliens        |
-      | INACTIVE                |
-
-  @github_query
-  Scenario: See total github commit count for projects
-    Given  I am on the "home" page
-    And I fetch the GitHub contribution statistics
-    When I follow "Projects" within the navbar
-    And I go to the next page
-    Then I should see:
-      | Text                    |
-      | hello world             |
-      | ACTIVE                  |
-      | 2795                    |
+    And I should not see:
+      | Text     |
+      | INACTIVE |
 
   Scenario: Show New Project button if user is logged in
     When I am logged in
@@ -64,24 +60,25 @@ Feature: Create and maintain projects
     When I am on the "projects" page
     Then I should not see the very stylish "New Project" button
 
-  Scenario: Alphabetically display pagination in "Our Projects" page
-    Given I am on the "home" page
-    When I follow "Projects" within the navbar
-    Then I should see:
-      | greetings aliens        |
-      | greetings jupiter folks |
-      | greetings mercury folks |
-      | greetings saturn folks  |
-      | greetings sun folks     |
-    And I should not see "greetings earthlings"
-    When I go to the next page
-    Then I should not see:
-      | greetings aliens        |
-      | greetings jupiter folks |
-      | greetings mercury folks |
-      | greetings saturn folks  |
-      | greetings sun folks     |
-    And I should see "greetings earthlings"
+# This scenario is no longer valid after we added ordering by status and commit count
+#  Scenario: Alphabetically display pagination in "Our Projects" page
+#    Given I am on the "home" page
+#    When I follow "Projects" within the navbar
+#    Then I should see:
+#      | greetings aliens        |
+#      | greetings jupiter folks |
+#      | greetings mercury folks |
+#      | greetings saturn folks  |
+#      | greetings sun folks     |
+#    And I should not see "greetings earthlings"
+#    When I go to the next page
+#    Then I should not see:
+#      | greetings aliens        |
+#      | greetings jupiter folks |
+#      | greetings mercury folks |
+#      | greetings saturn folks  |
+#      | greetings sun folks     |
+#    And I should see "greetings earthlings"
 
 #  Scenarios for NEW page
 
@@ -173,7 +170,7 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
-  Scenario: Launching Mercury editor 
+  Scenario: Launching Mercury editor
     Given I am logged in
     And I am on the "Show" page for project "hello mars"
     And I click the "Join Project" button

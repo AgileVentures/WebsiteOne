@@ -1,55 +1,43 @@
 <% provide :title, 'Members' %>
 <div class="row">
-  <div class="col-xs-12 col-sm-8">
-    <h1>All members</h1>
-    <% if @users.empty? %>
+  <div class="col-xs-12 col-sm-12">
+    <h1>Members Directory</h1>
+    <% if @users_count == 0 %>
         <p>It is a lonely planet we live in&#8230;</p>
     <% else %>
-        <p>Check out our <%= @users.count %> awesome volunteers from all over the globe!</p>
+        <p>Check out our <%= @users_count %> awesome volunteers from all over the globe!</p>
     <% end %>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-12 well">
+    <p>Filter users by</p>
+    <%= form_tag(users_path, remote: true, method: "get", class: "form-inline filters-users-advanced") do %>
+        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {prompt: 'Project involvement...', class: 'form-control'} %>
+        <% if @current_user && @current_user.latitude %>
+            <%= select_tag :timezone_filter, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_filter]), {prompt: 'Time zone...', class: 'form-control'} %>
+        <% end %>
+        <%= check_box_tag :online, params[:online], (true if !params[:online].nil?) %> Recently Online
+        <%= submit_tag 'Search', class: 'btn btn-default' %>
+    <% end %>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-sm-12">
     <form class="form-inline users-filter" role="form">
-      <div class="form-group">
+      <div class="form-group inner-addon left-addon">
         <label class="sr-only" for="user-filter">Filter users</label>
-        <input type="text" class="form-control" id="user-filter" placeholder="filter users..">
+        <i class="fa fa-search"></i>
+        <input type="text" class="form-control" id="user-filter" placeholder="Search members...">
       </div>
     </form>
   </div>
 </div>
 <div class="row">
-  <% unless @users.empty? %>
-      <ul class="media-list row" id="UsersList">
-        <% @users.each_slice(3) do |slice| %>
-            <% slice.each do |user| %>
-                <% present user do |presenter| %>
-                    <li class="media-item col-md-4 col-sm-6 col-xs-12">
-                      <a class="user-preview" href="<%= user_path(user) %>">
-                        <%= presenter.gravatar_image(size: 80,
-                                                     class: 'img-rounded media-object pull-left') %>
-                        <div class="media-body index-summary">
-                          <p class="media-heading"><%= presenter.display_name %>
-                            <% if user.online? %>
-                                <%= image_tag('green-dot.png', size: '10x10', alt: 'Online!') %>
-                            <% end %></p>
-                          <% if presenter.has_title? %>
-                              <p><%= presenter.title_list %></p>
-                          <% end %>
-                          <% if user.country_name? %>
-                              <p><%= presenter.country_name %></p>
-                          <% end %>
-                        </div>
-                      </a>
-                      <% if user.online? & presenter.status? %>
-                          <div class="user-status" id="user-status">
-                            <span style="margin-right: 5px;" class="glyphicon glyphicon-comment"></span>"<%= presenter.status %>
-                            "
-                          </div>
-                      <% end %>
-                    </li>
-                <% end %>
-            <% end %>
-        <% end %>
-      </ul>
-  <% end %>
+  <div class="col-sm-12">
+    <% unless @users.empty? %>
+        <ul class="media-list row" id="UsersList">
+          <%= render 'user_list' %>
+        </ul>
+    <% end %>
+  </div>
 </div>

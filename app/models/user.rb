@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Filterable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -22,6 +24,8 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :display_name, use: :slugged
 
+  before_save :generate_timezone_offset
+
   after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip_changed? }
   after_validation -> { KarmaCalculator.new(self).perform }
   after_create :send_slack_invite, if: -> { Features.slack.invites.enabled }
@@ -35,7 +39,24 @@ class User < ActiveRecord::Base
   has_many :status
 
   accepts_nested_attributes_for :status
-  scope     :mail_receiver, -> { where(receive_mailings: true) }
+  scope :mail_receiver, -> { where(receive_mailings: true) }
+  scope :project_filter, -> (project_id) {
+    joins(:follows)
+    .where(
+      follows: {
+        blocked: false,
+        followable_id: project_id,
+        followable_type: 'Project',
+        follower_type: 'User'
+      }
+    )
+  }
+  scope :timezone_filter, -> (offset) {
+    where("users.timezone_offset BETWEEN ? AND ?", offset[0], offset[1])
+  }
+  scope :allow_to_display, -> { where(display_profile: true) }
+  scope :by_create, -> { order(:created_at) }
+  scope :online, -> (argument) { where("users.updated_at > ?", 10.minutes.ago) }
 
   self.per_page = 30
 
@@ -88,11 +109,6 @@ class User < ActiveRecord::Base
   def is_privileged?
     Settings.privileged_users.split(',').include?(email)
   end
-  
-  def self.search(params)
-    where(display_profile: true)
-      .order(:created_at)
-  end
 
   def self.find_by_github_username(username)
     github_url = "https://github.com/#{username}"
@@ -114,5 +130,11 @@ class User < ActiveRecord::Base
 
   def send_slack_invite
     SlackInviteJob.new.async.perform(email)
+  end
+
+  def generate_timezone_offset
+    if self.latitude && self.longitude
+      self.timezone_offset = ActiveSupport::TimeZone.new(NearestTimeZone.to(self.latitude, self.longitude)).utc_offset
+    end
   end
 end
