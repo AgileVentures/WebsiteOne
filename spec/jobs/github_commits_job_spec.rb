@@ -6,6 +6,7 @@ describe GithubCommitsJob do
   describe '.job', vcr: vcr_index do
     before do
       @project = FactoryGirl.create(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne')
+      @project_with_wrong_protocol = FactoryGirl.create(:project, github_url: 'http://github.com/AgileVentures/WebsiteOne')
       @project_without_url = FactoryGirl.create(:project)
       @users = [
         FactoryGirl.create(:user, github_profile_url: 'https://github.com/yggie'),
@@ -14,7 +15,12 @@ describe GithubCommitsJob do
       ]
       GithubCommitsJob.run
       @project.reload
+      @project_with_wrong_protocol.reload
       @project_without_url.reload
+    end
+
+    it 'changes the protocol to https' do
+      expect(@project_with_wrong_protocol.github_url).to include('https://')
     end
 
     it 'stores commit counts only for projects that have a github_url' do

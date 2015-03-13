@@ -32,6 +32,7 @@
               <p class="eventText"><%= event.description.truncate(70, separator: /\s/) %></p>
 
               <p class="eventTime"><%= display_time %></p>
+              <p class="eventTime"> <%= current_occurrence_local_time(event) %></p>
 
             </div>
             <b class="gradient"></b>
