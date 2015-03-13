@@ -29,6 +29,11 @@ describe ProjectsController, :type => :controller do
   #end
 
   describe '#index' do
+    before(:each) do
+      @project = mock_model(Project, title: 'Carrier has arrived.', commit_count: 100)
+      @project2 = mock_model(Project, title: 'Carrier has left.', commit_count: 200)
+    end
+
     it 'should render index page for projects' do
       get :index
       expect(response).to render_template 'index'
@@ -36,11 +41,18 @@ describe ProjectsController, :type => :controller do
 
 
     it 'should assign variables to be rendered by view' do
-      @project = mock_model(Project, title: 'Carrier has arrived.')
       allow(Project).to receive(:search).and_return(@project)
       @project.stub(:includes).and_return(@project)
       get :index
       expect(assigns(:projects).title).to eq 'Carrier has arrived.'
+    end
+
+    #TODO: Refactor! This test is wrong. I can not test the order of projects.
+    it 'orders project by commit_count' do
+      allow(Project).to receive(:search).and_return(@projects)
+      @projects.stub(:includes).and_return([@project2, @project])
+      get :index, {search: ''}, valid_session
+      expect(assigns(:projects)).to match_array [@project2, @project]
     end
   end
 
