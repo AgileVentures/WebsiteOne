@@ -24,7 +24,10 @@ module Helpers
       last_sign_in_ip: test_ip_address,
       password: test_user_password,
       password_confirmation: test_user_password,
-      display_profile: true
+      display_profile: true,
+      latitude: 59.33,
+      longitude: 18.06,
+      country: 'Stockholm'
     }
   end
 

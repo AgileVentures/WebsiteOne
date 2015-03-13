@@ -9,7 +9,8 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    @projects = Project.search(params[:search], params[:page]).includes(:user)
+    @projects = Project.order('status ASC').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
+    #binding.pry
     render layout: 'with_sidebar_sponsor_right'
   end
 
@@ -115,6 +116,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :pitch, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id)
+    params.require(:project).permit(:title, :description, :pitch, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id, :image_url)
   end
 end

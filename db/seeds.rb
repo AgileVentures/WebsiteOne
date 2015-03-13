@@ -32,21 +32,25 @@ while true
 
     u.projects.create! :title => 'Autograder',
                        :description => 'Autograder for the EdX CS169.x SaaS course',
-                       :status => 'Active'
+                       :status => 'Active',
+                       commit_count: 200
 
     u.projects.create! :title => 'WebsiteOne',
                        :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
-                       :status => 'Active'
+                       :status => 'Active',
+                       commit_count: 190
 
     u.projects.create! :title => 'LocalSupport',
                        :description => 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
 Our customer is the non-profit organization Voluntary Action Harrow.
 The mission is to support members of the public searching for support groups for things like helping care for an elderly or sick relative; and also to help charities and non-profits find each other and network.',
-                       :status => 'Active'
+                       :status => 'Active',
+                       commit_count: 100
 
     u.projects.create! :title => 'EduChat',
                        :description => 'Supporting real time synchronous chat in online classes',
-                       :status => 'Active'
+                       :status => 'Inactive',
+                       commit_count: 100
 
     u.projects.create! :title => 'PP Scheduler',
                        :description => "Problem: Lots of people want to pair, but they don't know when each other are available
