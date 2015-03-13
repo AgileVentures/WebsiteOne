@@ -13,10 +13,15 @@ module Statistics
       when :documents then
         stats[:count] = Document.count
       when :pairing_minutes then
-        stats[:count] = EventInstance.where(category: "PairProgramming").map(&:duration).sum
+        stats[:value] = calculate_duration('PairProgramming')
       when :scrum_minutes then
-        stats[:count] = EventInstance.where(category: "Scrum").map(&:duration).sum
+        stats[:value] = calculate_duration('Scrum')
       end
     end
+  end
+
+  def calculate_duration(category)
+    binding.pry
+    EventInstance.where(category: category).map(&:duration).sum
   end
 end
