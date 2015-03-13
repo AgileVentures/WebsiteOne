@@ -420,7 +420,7 @@ end
 When(/^I filter "(.*?)" for "(.*?)"$/) do |list_name, selected_from_list|
   steps %Q{
     When I select "#{selected_from_list}" from the "#{list_name}" list
-    And I click "submit"
+    And I click "Search"
   }
 end
 

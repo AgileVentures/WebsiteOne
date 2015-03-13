@@ -29,10 +29,11 @@ describe 'users/index.html.erb', :type => :view do
     end
 
     it 'timezone select is populated with titles' do
+      @current_user.update_attributes(longitude: 58.33, latitude: 18.30)
       render
 
-      expect(rendered).to have_content('In My Timezone')
-      expect(rendered).to have_content('Members Within 2 Timezones')
+      expect(rendered).to have_content('Close To My Timezone Area')
+      expect(rendered).to have_content('Wider Timezone Area')
     end
   end
 
