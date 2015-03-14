@@ -12,7 +12,7 @@ namespace :db do
       # (and exist) or the timezone_offset column is empty
       ##
       user.save
-      puts user.full_name.bold.blue + " timezone offset updated"
+      puts user.display_name.bold.blue + " timezone offset updated"
     end
     puts "Update has been completed".green
   end
