@@ -5,9 +5,20 @@
       <strong><%= link_to 'Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
       <strong><%= @project.title %></strong>
 
-      <h1><%= @project.title %></h1>
-
-      <p><%= clean_html @project.description %></p>
+      <div class="row"> 
+        <% if @project.image_url %>
+          <div class="col-xs-2">
+            <%= image_tag @project.image_url, class: "img-responsive" %>
+          </div>
+        <% end %>
+        <div class="col-xs-10">
+          <h1><%= @project.title %></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12"><p> <%= clean_html @project.description %></p>
+        </div>
+      </div>
       <hr>
 
       <div class="project-edit">
@@ -92,3 +103,4 @@
     </div>
   </div>
 </div>
+
