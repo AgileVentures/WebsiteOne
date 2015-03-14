@@ -37,7 +37,7 @@ Feature: Display Statistics
     And I click the "Site statistics" link
     Then I should see a "statistics" tab set to active
     And I should see "Statistics"
-    And I should see "3 Articles"
-    And I should see "4 Projects"
-    And I should see "3 Members"
-    And I should see "2 Documents"
+    And stats for "Projects" should be "4"
+    And stats for "Articles" should be "3"
+    And stats for "Members" should be "3"
+    And stats for "Documents" should be "2"

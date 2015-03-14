@@ -27,7 +27,7 @@ module Helpers
       display_profile: true,
       latitude: 59.33,
       longitude: 18.06,
-      country: 'Stockholm'
+      country_name: 'Stockholm'
     }
   end
 
