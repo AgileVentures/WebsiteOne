@@ -89,6 +89,8 @@ class UsersController < ApplicationController
           filter_params[:timezone_filter] = [offset, offset]
         when 'Wider Timezone Area'
           filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
+        else
+          filter_params.delete(:timezone_filter)
         end
       else
         redirect_to :back, alert: "Can't determine your location!"
