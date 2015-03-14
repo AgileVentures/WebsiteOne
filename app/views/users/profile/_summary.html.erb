@@ -13,7 +13,7 @@
       <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country_name %></li>
     <% end %>
     <% if presenter.latitude? && presenter.longitude? %>
-      <li><i class="fa fa-clock-o fa-lg"></i> <%= presenter.timezone %></li>
+        <li><i class="fa fa-clock-o fa-lg"></i> <%= presenter.timezone %> (UTC<%= presenter.timezone_formatted_offset %>)</li>
     <% end %>
 
     <li>
