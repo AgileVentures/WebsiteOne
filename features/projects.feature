@@ -185,7 +185,6 @@ Feature: Create and maintain projects
     And I click the "Join Project" button
     And I am using the Mercury Editor to edit project "hello mars"
     When I fill in the editable field "Pitch" for "project" with "This is my exciting marketing content"
-    Then show me the page
     And I click "Save" within Mercury Editor toolbar
     And I should be on the "Show" page for project "hello mars"
     Then I should see a flash "The project has been successfully updated."
