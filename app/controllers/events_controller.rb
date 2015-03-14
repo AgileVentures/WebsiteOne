@@ -1,3 +1,4 @@
+
 class EventsController < ApplicationController
   #require 'delorean'
 
