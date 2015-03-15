@@ -21,8 +21,8 @@ describe Newsletter do
 
   describe "class variables" do
     before do
-      Newsletter.const_set('CHUNK_SIZE', Settings.newsletter.chunk_size)
-      Newsletter.const_set('SEND_AS', Settings.newsletter.send_as)
+     stub_const("Newsletter::CHUNK_SIZE",Settings.newsletter.chunk_size)
+     stub_const("Newsletter::SEND_AS",Settings.newsletter.send_as)
     end
 
     it 'configures as scheduler_job' do
@@ -39,30 +39,21 @@ describe Newsletter do
       receiver_users = FactoryGirl.create_list(:user, 2, receive_mailings: true)
       non_receiver_users = FactoryGirl.create_list(:user, 2, receive_mailings: false)
       @newsletter = FactoryGirl.create(:newsletter)
-      Newsletter.const_set('SEND_AS', :instant)
-    end
-
-    after :all do
-      Newsletter.const_set('CHUNK_SIZE', 180)
-      Newsletter.const_set('SEND_AS', :scheduler_job)
+      stub_const("Newsletter::SEND_AS",:instant)
+      @newsletter.do_send=true
     end
 
     it 'after do_send is set to true' do
-      @newsletter.do_send = true
       expect{ @newsletter.save! }.to change{ ActionMailer::Base.deliveries.count }.by(2)
     end
 
     it 'updates sent_at with Time' do
-      @newsletter.do_send = true
       @newsletter.save
-      @newsletter.reload 
-      @newsletter.sent_at.should be_a(Time)
+      expect(@newsletter.sent_at).to be_a_kind_of(Time)
     end
 
     it 'updates was_sent to true' do
-      @newsletter.do_send = true
       @newsletter.save
-      @newsletter.reload
       expect(@newsletter.was_sent).to eq(true)
     end
   end
@@ -70,11 +61,40 @@ describe Newsletter do
   describe 'does not instantely send in scheduler_job mode' do
     before :each do
       @newsletter = FactoryGirl.build(:newsletter)
+      @receiver_users = FactoryGirl.create_list(:user, 5, receive_mailings: true)
+      @non_receiver_users = FactoryGirl.create_list(:user, 5, receive_mailings: false)
+      @newsletter.do_send = true
+      @newsletter.was_sent=false;
+      stub_const("Newsletter::CHUNK_SIZE",100)
+      stub_const("Newsletter::SEND_AS",:scheduler_job)
     end
 
     it 'awaits scheduler' do
-      @newsletter.do_send = true
+      expect(@newsletter.do_send).to eq(true)
+      expect(@newsletter.was_sent).to eq(false)
+      expect(@newsletter.last_user_id).to eq(0)
       expect{ @newsletter.save!}.to change{ ActionMailer::Base.deliveries.count}.by(0)
+    end
+
+    it 'after do_send is set to true in this schedulized mode' do
+      stub_const("Newsletter::SEND_AS",:instant)
+      expect{ @newsletter.save! }.to change{ ActionMailer::Base.deliveries.count }.by(5)
+    end
+
+    it 'updates sent_at with Time in this schedulised mode' do
+      stub_const("Newsletter::SEND_AS",:instant)
+      @newsletter.save!
+      expect(@newsletter.sent_at).to be_a_kind_of(Time)
+    end
+
+    it 'updates was_sent to true in this schedulised mode' do
+      stub_const("Newsletter::SEND_AS",:instant)
+      @newsletter.save!
+      expect(@newsletter.was_sent).to eq(true)
+    end
+    it 'update the last_user_id in this mode' do
+      stub_const("Newsletter::SEND_AS",:instant)
+      expect{@newsletter.save!}.to change{@newsletter.last_user_id}.by(@receiver_users[4].id)
     end
   end
 end
