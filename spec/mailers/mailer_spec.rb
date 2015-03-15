@@ -39,4 +39,24 @@ describe Mailer do
       expect(mail).to have_default_cc_addresses
     end
   end
+
+describe Mailer do
+  describe '#send_newsletter' do
+    before(:each) do
+      @user = User.new first_name: 'Email',
+                       last_name: 'Sender',
+                       email: 'candice@clemens.com',
+                       password: '1234567890'
+    end
+
+    it 'should send newsletter' do
+      mail = Mailer.send_newsletter(@user)
+      expect(mail.from).to include('info@agileventures.org')
+      expect(mail.reply_to).to include('info@agileventures.org')
+      expect(mail.to).to include('candice@clemens.com')
+      expect(mail.subject).to include(valid_params[:newsletter.subject])
+      expect(mail.body.raw_source).to include(valid_params[:newsletter])
+      expect(mail).to have_default_cc_addresses
+    end
+  end
 end
