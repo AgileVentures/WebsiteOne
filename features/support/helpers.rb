@@ -27,22 +27,22 @@ module Helpers
       display_profile: true,
       latitude: 59.33,
       longitude: 18.06,
-      country: 'Stockholm'
+      country_name: 'Stockholm'
     }
   end
 
   def create_visitor
-    @visitor ||= { :first_name => 'Anders',
-                   :last_name => 'Persson',
-                   :email => 'example@example.com',
-                   :password => 'changemesomeday',
-                   :password_confirmation => 'changemesomeday',
-                   :slug => 'slug-ma',
-                   :country => 'Sweden'}
+    @visitor ||= { first_name: 'Anders',
+                   last_name: 'Persson',
+                   email: 'example@example.com',
+                   password: 'changemesomeday',
+                   password_confirmation: 'changemesomeday',
+                   slug: 'slug-ma',
+                   country_name: 'Sweden'}
   end
 
   def create_test_user(options = {})
-    skills = options.delete "skills"
+    skills = options.delete 'skills'
     options = default_test_user_details.merge options
     user = User.new(options)
     user.skill_list = skills
@@ -134,6 +134,7 @@ module WaitForAjax
     page.evaluate_script('jQuery.active').zero?
   end
 end
+
 World(ScrumsHelper)
 World(ApplicationHelper)
 World(Helpers)

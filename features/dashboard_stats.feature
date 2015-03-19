@@ -37,7 +37,7 @@ Feature: Display Statistics
     And I click the "Site statistics" link
     Then I should see a "statistics" tab set to active
     And I should see "Statistics"
-    And I should see "3 Articles Published"
-    And I should see "4 Active Projects"
-    And I should see "3 AgileVentures Members"
-    And I should see "2 Documents Created"
+    And stats for "Projects" should be "4"
+    And stats for "Articles" should be "3"
+    And stats for "Members" should be "3"
+    And stats for "Documents" should be "2"
