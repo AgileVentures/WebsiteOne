@@ -24,6 +24,13 @@ module Helpers
   rescue LoadError
     warn 'Sorry, you need to install launchy to open pages: `gem install launchy`'
   end
+
+  def get_country
+    country = File.readlines(Rails.root + 'spec/fixtures/country_codes.txt').sample
+    code, name = country.chomp.split('|')
+    @country = {country_name: name, country_code: code}
+  end
+
 end
 
 RSpec::Matchers.define :have_default_cc_addresses do
