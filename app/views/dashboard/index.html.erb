@@ -11,7 +11,7 @@
       <div id="map" style="width: 100%; height: 500px; min-height: 500px;"></div>
       <h3>Statistics</h3>
 
-      <div class="row three-button-row">
+      <div class="row">
         <div class='co-lg-4 col-md-4 col-sm-4'>
           <div class="panel panel-primary" id="articles">
             <div class="panel-heading">Articles</div>
@@ -78,55 +78,8 @@
     </div>
   </div>
 </div>
+
 <script>
     var usrData = <%= raw User.map_data %>;
-    var defaultText = '<h3>User statistics</h3>'
-    $(function () {
-        $('#info-box').html(defaultText);
-        $('#map').vectorMap({
-            map: 'world_mill_en',
-            backgroundColor: 'transparent',
-            zoomOnScroll: false,
-            panOnDrag: true,
-            regionStyle: {
-                initial: {
-                    fill: '#FFF5E6',
-                    "fill-opacity": 1,
-                    stroke: 'solid',
-                    "stroke-width": 2,
-                    "stroke-opacity": 1
-                },
-                hover: {
-                    "fill-opacity": 0.8,
-                    cursor: 'pointer'
-                },
-                selected: {
-                    fill: 'yellow'
-                },
-                selectedHover: {}
-            },
-            series: {
-                regions: [{
-                    values: usrData,
-                    scale: ['#FFE0B2', '#FF9900'],
-                    normalizeFunction: 'polynomial'
-                }]
-            },
-            onRegionLabelShow: function (e, el, code) {
-                if (usrData[code] > 0) {
-                    $('#info-box').html('<h3>We have ' + usrData[code] + ' users in ' + el.html() + '</h3>');
-                } else {
-                    $('#info-box').html('<h3>No users in ' + el.html() + '</h3>');
-                }
-                console.log(el.html() + ' (Users: ' + usrData[code] + ')');
-                //el.html(el.html()+' (Users: '+usrData[code]+')');
-
-            },
-            onRegionOut: function (event, code) {
-                //console.log(map.getRegionName(code));
-                $('#info-box').html(defaultText);
-            }
-        });
-    });
 </script>
 

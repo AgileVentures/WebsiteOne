@@ -25,7 +25,6 @@ module Helpers
     warn 'Sorry, you need to install launchy to open pages: `gem install launchy`'
   end
 
-  #Used to assign a country and country_code to User
   def get_country
     country = File.readlines(Rails.root + 'spec/fixtures/country_codes.txt').sample
     code, name = country.chomp.split('|')
