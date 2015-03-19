@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.3'
+ruby '2.2.1'
 gem 'rails', '4.1.6'
 # Added after upgrade to rails 4.1
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.1'
@@ -80,9 +80,10 @@ group :test do
 end
 
 group :development, :test do
-  gem 'rspec', '<3.0' #locking down below ver 3.0.
+  gem 'rspec'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails' #unit testing
+  gem 'rspec-html-matchers'
   gem 'awesome_print' # plays well with pry
   gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
   gem 'hirb' # formats ActiveRecord objects into table format in the console
@@ -91,12 +92,11 @@ group :development, :test do
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser
   gem 'binding_of_caller'  #online console and debugging in browser
-  gem 'guard' # autoruns rspec/cucumber/livereload/notify..on file change
-  gem 'guard-rspec' #plugins for Guard
-  gem 'guard-cucumber' #plugins for Guard
-  gem 'guard-livereload' #plugins for Guard
-  gem 'bullet'
-
+  # gem 'guard' # autoruns rspec/cucumber/livereload/notify..on file change
+  # gem 'guard-rspec' #plugins for Guard
+  # gem 'guard-cucumber' #plugins for Guard
+  # gem 'guard-livereload' #plugins for Guard
+  #
 end
 
 group :production do

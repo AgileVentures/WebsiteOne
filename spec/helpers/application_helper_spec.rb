@@ -42,7 +42,7 @@ describe ApplicationHelper do
 
   describe '#default_meta_description' do
     it 'should include the words AgileVentures' do
-      expect(helper.default_meta_description).to contain 'AgileVentures'
+      expect(helper.default_meta_description).to include 'AgileVentures'
     end
   end
 

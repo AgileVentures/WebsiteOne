@@ -9,7 +9,7 @@ describe 'devise/passwords/edit', type: :view do
 
   it 'renders the form to register' do
     assert_select 'form[action=?][method=?]', user_password_path, 'post'  do
-      expect(rendered).to have_selector('input[name=_method]', value: 'put')
+      expect(rendered).to have_tag('input', name: '_method', value: 'put')
       expect(rendered).to have_css('input#user_password')
       expect(rendered).to have_css('input#user_password_confirmation')
       expect(rendered).to have_button('Change my password')

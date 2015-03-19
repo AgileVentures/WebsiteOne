@@ -76,7 +76,7 @@ describe 'projects/index.html.erb', type: :view do
       render
       rendered.within('ul#project-list') do |rendered_date|
         correct_date = time_ago_in_words(projects_collection.sample(1).first.created_at)
-        expect(rendered_date.text).to contain(correct_date)
+        expect(rendered_date.text).to include(correct_date)
       end
     end
   end
