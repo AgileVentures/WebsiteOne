@@ -9,10 +9,6 @@ describe 'dashboard/index.html.erb', type: :view, js: true do
                     pairing_minutes: {value: 300},
                     scrum_minutes: {value: 200},
                  })
-
-
-
-
   end
 
   it 'displays a tab view' do
@@ -58,11 +54,9 @@ describe 'dashboard/index.html.erb', type: :view, js: true do
         expect(section).to have_css 'div.panel-body', text: '200'
       end
     end
-
   end
 
   describe 'render and populate map of users' do
-
     before(:each) do
       @users = []
       (0..19).each do
@@ -71,6 +65,7 @@ describe 'dashboard/index.html.erb', type: :view, js: true do
       end
       render
     end
+    
     it {expect(@users.count).to eq 20}
 
     it 'includes map legend' do
