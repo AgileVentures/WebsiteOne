@@ -65,7 +65,7 @@ describe 'dashboard/index.html.erb', type: :view, js: true do
       end
       render
     end
-    
+
     it {expect(@users.count).to eq 20}
 
     it 'includes map legend' do
