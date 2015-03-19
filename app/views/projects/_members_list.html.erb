@@ -13,8 +13,8 @@
                     <div class="media-body index-summary">
                       <div style="display: inline-flex;">
                         <p class="media-heading"><%= presenter.display_name %></p>
-                        <% if member.country? %>
-                        <p><small>(<%= presenter.country %>)</small></p>
+                        <% if member.country_name? %>
+                        <p><small>(<%= presenter.country_name %>)</small></p>
                         <% end %>
                       </div>
                     </div>
@@ -46,8 +46,8 @@
                       <div class="media-body index-summary">
                         <div style="display: inline-flex;">
                           <p class="media-heading"><%= presenter.display_name %></p>
-                          <% if member.country? %>
-                              <p><small>(<%= presenter.country %>)</small></p>
+                          <% if member.country_name? %>
+                              <p><small>(<%= presenter.country_name %>)</small></p>
                           <% end %>
                         </div>
                       </div>
