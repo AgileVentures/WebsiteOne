@@ -214,7 +214,7 @@ Given /^the sign in form is visible$/ do
 end
 
 Then /^my account should be deleted$/ do
-  expect(User.find_by_id(@user)).to be_false
+  expect(User.find_by_id(@user)).to be_falsey
 end
 
 Given(/^The database is clean$/) do
@@ -306,7 +306,7 @@ end
 
 Then(/^My email should be public$/) do
   user = User.find(@user.id)
-  expect(user.display_email).to be_true
+  expect(user.display_email).to be_truthy
 end
 
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
