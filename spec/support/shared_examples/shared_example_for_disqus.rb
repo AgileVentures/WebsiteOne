@@ -14,13 +14,13 @@ shared_examples 'commentable with Disqus' do
 
   it 'renders Disqus_thread with parameters for Document' do
     render
-    expect(rendered).to have_selector('#disqus_thread', data_tags)
+    expect(rendered).to have_tag('div#disqus_thread', data_tags)
   end
 
   it 'embeds single-sign-on script if user is logged in' do
     allow(view).to receive(:current_user).and_return(stub_model(User))
     allow(view).to receive(:user_signed_in?).and_return(true)
     render
-    expect(rendered).to have_selector('script#disqus-sso')
+    expect(rendered).to have_tag('script', id: 'disqus-sso')
   end
 end
