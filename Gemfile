@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.1.5'
 gem 'rails', '4.1.0'
 # Added after upgrade to rails 4.1
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.1'
@@ -49,16 +49,18 @@ gem 'public_activity' #Create activity feed
 gem 'yui-compressor'
 gem 'compass-rails'
 gem 'rack-cache'
-gem 'sprockets-image_compressor'
+#gem 'sprockets-image_compressor', '~> 0.2.4'
+#gem 'sprockets-webp'
 gem 'rack-timeout'
+gem 'eventmachine', '~> 1.0.7'
 
 gem 'local_time'
 gem 'rails_config' # a gem to manage configuration files
 gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
 gem 'octokit' # Ruby wrapper for the GitHub API
 gem 'sucker_punch' # Single Process Ruby asynchronous processing library
-
 gem 'twitter', '~> 5.11.0' # twitter api wrapper
+gem 'jvectormap-rails', '~> 1.0.0' #jVectorMap for the Rails asset pipeline
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -94,6 +96,7 @@ group :development, :test do
   gem 'guard-rspec' #plugins for Guard
   gem 'guard-cucumber' #plugins for Guard
   gem 'guard-livereload' #plugins for Guard
+  gem 'bullet'
 
 end
 
@@ -102,4 +105,3 @@ group :production do
   gem 'newrelic_rpm' # New Relic analytics
 end
 
-gem "bullet", :group => "development"
