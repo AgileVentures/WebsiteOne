@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208124239) do
+ActiveRecord::Schema.define(version: 20150308085307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,6 +188,7 @@ ActiveRecord::Schema.define(version: 20150208124239) do
   end
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
   add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
   add_index "taggings", ["tagger_type"], name: "index_taggings_on_tagger_type", using: :btree
 
@@ -219,7 +220,7 @@ ActiveRecord::Schema.define(version: 20150208124239) do
     t.boolean  "display_profile",        default: true
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "country"
+    t.string   "country_name"
     t.string   "city"
     t.string   "region"
     t.string   "youtube_user_name"
@@ -229,6 +230,7 @@ ActiveRecord::Schema.define(version: 20150208124239) do
     t.boolean  "receive_mailings",       default: true
     t.integer  "karma_points",           default: 0
     t.integer  "timezone_offset"
+    t.string   "country_code"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

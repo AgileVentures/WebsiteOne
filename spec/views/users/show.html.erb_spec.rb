@@ -178,10 +178,10 @@ describe 'users/show.html.erb' do
     end
 
     it 'shows user country when known' do
-      @user.country = 'Mozambique'
+      @user.country_name = 'Mozambique'
       render
       expect(rendered).to have_selector 'i[class="fa fa-globe fa-lg"]'
-      expect(rendered).to have_content @user.country
+      expect(rendered).to have_content @user.country_name
     end
 
     it 'does not show clock icon when user timezone cannot be determined' do

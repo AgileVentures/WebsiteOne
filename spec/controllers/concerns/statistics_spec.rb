@@ -5,6 +5,7 @@ describe 'StatisticsConcern' do
     class FakeController < ActionController::Base
       include Statistics
     end
+    @time = Time.now
     @fake_controller = FakeController.new
   end
 
@@ -34,6 +35,23 @@ describe 'StatisticsConcern' do
   it "gets stats for documents" do
     FactoryGirl.create_list(:document, 5)
     expect(@fake_controller.get_stats_for(:documents)).to eq({ count: 5})
+  end
+
+  it 'get stats for pair programming minutes' do
+    FactoryGirl.create_list(:event_instance, 5,
+                            category: 'PairProgramming',
+                            created_at: @time,
+                            updated_at: (@time + 10*60) )
+    expect(@fake_controller.get_stats_for(:pairing_minutes)).to eq({ value: 50})
+
+  end
+
+  it 'get stats for pair scrum minutes' do
+    FactoryGirl.create_list(:event_instance, 5,
+                            category: 'Scrum',
+                            created_at: @time,
+                            updated_at: (@time + 10*60) )
+    expect(@fake_controller.get_stats_for(:scrum_minutes)).to eq({ value: 50})
   end
 
   after :all do

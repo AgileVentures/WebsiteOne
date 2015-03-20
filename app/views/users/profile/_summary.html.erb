@@ -7,10 +7,10 @@
   <ul>
     <h3><%= presenter.display_name %></h3>
     <% if presenter.has_title? %>
-        <li><%= presenter.title_list %></li>
+      <li><%= presenter.title_list %></li>
     <% end %>
-    <% if presenter.country? %>
-        <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country %></li>
+    <% if presenter.country_name? %>
+      <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country_name %></li>
     <% end %>
     <% if presenter.latitude? && presenter.longitude? %>
         <li><i class="fa fa-clock-o fa-lg"></i> <%= presenter.timezone %> (UTC<%= presenter.timezone_formatted_offset %>)</li>
@@ -22,14 +22,14 @@
     </li>
 
     <% if presenter.github_profile_url? %>
-        <li>
-          <i class="fa fa-github-alt fa-lg"></i>
-          <%= presenter.github_link %>
-        </li>
+      <li>
+        <i class="fa fa-github-alt fa-lg"></i>
+        <%= presenter.github_link %>
+      </li>
     <% end %>
 
     <% if presenter.display_email %>
-        <li><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></li>
+      <li><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></li>
     <% end %>
 
     <% if @user.online? & presenter.status? %>

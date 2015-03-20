@@ -6,13 +6,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  geocoded_by :last_sign_in_ip do |user, res|
-    if geo = res.first
+  geocoded_by :last_sign_in_ip do |user, results|
+    if geo = results.first
       user.latitude = geo.data['latitude']
       user.longitude = geo.data['longitude']
       user.city = geo.data['city']
       user.region = geo.data['region_name']
-      user.country = geo.data['country_name']
+      user.country_name = geo.data['country_name']
+      user.country_code = geo.data['country_code']
     end
   end
 
@@ -116,6 +117,13 @@ class User < ActiveRecord::Base
 
   def online?
     updated_at > 10.minutes.ago
+  end
+
+  def self.map_data
+    users = User.group(:country_code).count
+    clean = proc{ |k,v| !k.nil? ? Hash === v ? v.delete_if(&clean) : false : true }
+    users.delete_if(&clean)
+    users.to_json
   end
 
   private

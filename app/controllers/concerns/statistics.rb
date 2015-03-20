@@ -12,7 +12,15 @@ module Statistics
         stats[:count] = User.count
       when :documents then
         stats[:count] = Document.count
+      when :pairing_minutes then
+        stats[:value] = calculate_duration('PairProgramming')
+      when :scrum_minutes then
+        stats[:value] = calculate_duration('Scrum')
       end
     end
+  end
+
+  def calculate_duration(category)
+    EventInstance.where(category: category).map(&:duration).sum.to_i/60
   end
 end
