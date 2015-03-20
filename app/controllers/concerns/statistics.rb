@@ -21,6 +21,6 @@ module Statistics
   end
 
   def calculate_duration(category)
-    EventInstance.where(category: category).map(&:duration).sum
+    EventInstance.where(category: category).map(&:duration).sum.to_i/60
   end
 end
