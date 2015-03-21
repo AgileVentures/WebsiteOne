@@ -42,6 +42,15 @@ describe UserPresenter do
     end
   end
 
+  describe '#timezone_formatted_offset' do
+    it 'should display timezone formatted offset when it can be determined' do
+      user.latitude = 25.9500
+      user.longitude = 32.5833
+      expect(ActiveSupport::TimeZone.new(subject.timezone)).to receive(:formatted_offset).and_return('+02:00')
+      expect(subject.timezone_formatted_offset).to eq '+02:00'
+    end
+  end
+
   describe '#contributors' do
     let(:user) { create(:user) }
     let(:commit_counts) { create_list(:commit_count, 2, user: user) }

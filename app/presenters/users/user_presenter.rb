@@ -25,6 +25,11 @@ class UserPresenter < BasePresenter
     end
   end
 
+  def country
+    user.country_name
+  end
+  alias :country? :country
+
   def title_list
     content_tag(:span, user.title_list.join(', '), class: 'member-title')
   end
@@ -35,6 +40,10 @@ class UserPresenter < BasePresenter
 
   def timezone
     NearestTimeZone.to(user.latitude, user.longitude)
+  end
+
+  def timezone_formatted_offset
+    ActiveSupport::TimeZone.new(timezone).formatted_offset
   end
 
   def gravatar_image(options={})
