@@ -10,6 +10,10 @@ describe User, :type => :model do
 
   it { is_expected.to accept_nested_attributes_for :status }
 
+  it 'should have valid factory' do
+    expect(FactoryGirl.create(:user)).to be_valid
+  end
+
   it 'should be invalid without email' do
     expect(build_stubbed(:user, email: '')).to_not be_valid
   end
@@ -132,7 +136,8 @@ describe User, :type => :model do
       expect(subject.latitude).to_not eq nil
       expect(subject.longitude).to_not eq nil
       expect(subject.city).to_not eq nil
-      expect(subject.country).to_not eq nil
+      expect(subject.country_name).to_not eq nil
+      expect(subject.country_code).to_not eq nil
     end
 
     it 'should set user location' do
@@ -140,14 +145,16 @@ describe User, :type => :model do
       expect(subject.latitude).to eq 57.9333
       expect(subject.longitude).to eq 12.5167
       expect(subject.city).to eq 'Alingsås'
-      expect(subject.country).to eq 'Sweden'
+      expect(subject.country_name).to eq 'Sweden'
+      expect(subject.country_code).to eq 'SE'
     end
 
     it 'should change location if ip changes' do
       subject.save
       subject.update_attributes last_sign_in_ip: '50.78.167.161'
       expect(subject.city).to eq 'Seattle'
-      expect(subject.country).to eq 'United States'
+      expect(subject.country_name).to eq 'United States'
+      expect(subject.country_code).to eq 'US'
     end
 
   end
@@ -248,40 +255,41 @@ describe User, :type => :model do
         expect(results).not_to include('Janice')
       end
     end
-  end
 
-  describe '.find_by_github_username' do
-    it 'returns the user if it exists' do
-      user_with_github = FactoryGirl.create(:user, github_profile_url: 'https://github.com/sampritipanda')
-      user_without_github = FactoryGirl.create(:user, github_profile_url: nil)
-      expect(User.find_by_github_username('sampritipanda')).to eq user_with_github
+    describe '.find_by_github_username' do
+      it 'returns the user if it exists' do
+        user_with_github = FactoryGirl.create(:user, github_profile_url: 'https://github.com/sampritipanda')
+        user_without_github = FactoryGirl.create(:user, github_profile_url: nil)
+        expect(User.find_by_github_username('sampritipanda')).to eq user_with_github
+      end
+
+      it 'returns nil if no user exists' do
+        expect(User.find_by_github_username('unknown-guy')).to be_nil
+      end
     end
 
-    it 'returns nil if no user exists' do
-      expect(User.find_by_github_username('unknown-guy')).to be_nil
-    end
-  end
+    describe 'user online?' do
 
-  describe 'user online?' do
+      let(:user) { @user }
 
-    let(:user) { @user }
+      before(:each) do
+        @user = FactoryGirl.create(:user, updated_at: '2014-09-30 05:00:00 UTC')
+      end
 
-    before(:each) do
-      @user = FactoryGirl.create(:user, updated_at: '2014-09-30 05:00:00 UTC')
-    end
+      after(:each) do
+        Delorean.back_to_the_present
+      end
 
-    after(:each) do
-      Delorean.back_to_the_present
-    end
+      it 'returns true if touched in last 10 minutes' do
+        Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
+        expect(user).to be_online
+      end
 
-    it 'returns true if touched in last 10 minutes' do
-      Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
-      expect(user).to be_online
-    end
-
-    it 'returns false if touched more then 10 minutes ago' do
-      Delorean.time_travel_to(Time.parse('2014-09-30 05:12:00 UTC'))
-      expect(user.online?).to eq false
+      it 'returns false if touched more then 10 minutes ago' do
+        Delorean.time_travel_to(Time.parse('2014-09-30 05:12:00 UTC'))
+        expect(user.online?).to eq false
+      end
     end
   end
 end
+

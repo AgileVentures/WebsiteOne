@@ -178,10 +178,10 @@ describe 'users/show.html.erb' do
     end
 
     it 'shows user country when known' do
-      @user.country = 'Mozambique'
+      @user.country_name = 'Mozambique'
       render
       expect(rendered).to have_selector 'i[class="fa fa-globe fa-lg"]'
-      expect(rendered).to have_content @user.country
+      expect(rendered).to have_content @user.country_name
     end
 
     it 'does not show clock icon when user timezone cannot be determined' do
@@ -192,10 +192,11 @@ describe 'users/show.html.erb' do
     it 'shows user timezone when it can be determined' do
       @user.latitude = 25.9500
       @user.longitude = 32.5833
+      allow(@user.presenter).to receive(:timezone_formatted_offset).and_return('+02:00')
       expect(NearestTimeZone).to receive(:to).with(@user.latitude, @user.longitude).and_return('Africa/Cairo')
       render
       expect(rendered).to have_selector 'i[class="fa fa-clock-o fa-lg"]'
-      expect(rendered).to have_content 'Africa/Cairo'
+      expect(rendered).to have_content 'Africa/Cairo (UTC+02:00)'
     end
   end
 
