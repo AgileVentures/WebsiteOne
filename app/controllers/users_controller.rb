@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     unless filter_params[:timezone_filter].blank?
       if offset = @current_user.try(:timezone_offset)
         case filter_params[:timezone_filter]
-        when 'Close To My Timezone Area'
+        when 'In My Timezone'
           filter_params[:timezone_filter] = [offset, offset]
         when 'Wider Timezone Area'
           filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
