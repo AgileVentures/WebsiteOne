@@ -92,11 +92,11 @@ group :development, :test do
   gem 'jasmine-jquery-rails' # framework for testing javascript
   gem 'better_errors' # nice output of rails errors in browser
   gem 'binding_of_caller'  #online console and debugging in browser
-  # gem 'guard' # autoruns rspec/cucumber/livereload/notify..on file change
-  # gem 'guard-rspec' #plugins for Guard
-  # gem 'guard-cucumber' #plugins for Guard
-  # gem 'guard-livereload' #plugins for Guard
-  #
+  gem 'guard' # autoruns rspec/cucumber/livereload/notify..on file change
+  gem 'guard-rspec' #plugins for Guard
+  gem 'guard-cucumber' #plugins for Guard
+  gem 'guard-livereload' #plugins for Guard
+  gem 'bullet'
 end
 
 group :production do
