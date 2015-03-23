@@ -13,7 +13,7 @@
     <%= form_tag(users_path, remote: true, method: "get", class: "form-inline filters-users-advanced") do %>
         <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {prompt: 'Project involvement...', class: 'form-control'} %>
         <% if @current_user && @current_user.latitude %>
-            <%= select_tag :timezone_filter, options_for_select(['Close To My Timezone Area', 'Wider Timezone Area'], params[:timezone_filter]), {prompt: 'Time zone...', class: 'form-control'} %>
+            <%= select_tag :timezone_filter, options_for_select(['In My Timezone', 'Wider Timezone Area'], params[:timezone_filter]), {prompt: 'Time zone...', class: 'form-control'} %>
         <% end %>
         <%= check_box_tag :online, params[:online], (true if !params[:online].nil?) %> Recently Online
         <%= submit_tag 'Search', class: 'btn btn-default' %>
