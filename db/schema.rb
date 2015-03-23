@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318132607) do
+ActiveRecord::Schema.define(version: 20150308085307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,8 +229,8 @@ ActiveRecord::Schema.define(version: 20150318132607) do
     t.text     "bio"
     t.boolean  "receive_mailings",       default: true
     t.integer  "karma_points",           default: 0
-    t.integer  "timezone_offset"
     t.string   "country_code"
+    t.integer  "timezone_offset"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
