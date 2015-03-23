@@ -56,7 +56,7 @@ Feature: As a site owner
 
   Scenario: Find users in my timezone
     Given I am on the "our members" page
-    When I filter "timezones" for "Close To My Timezone Area"
+    When I filter "timezones" for "In My Timezone"
     Then I should see:
     | Alice |
     | Bob   |
