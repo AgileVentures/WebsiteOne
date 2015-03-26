@@ -297,7 +297,7 @@ GEM
     phantomjs (1.9.8.0)
     pivotal-tracker-api (0.1.9)
       rest-client (~> 1.7)
-    poltergeist (1.6.0)
+    poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
@@ -546,7 +546,7 @@ DEPENDENCIES
   paper_trail
   pg
   pivotal-tracker-api
-  poltergeist
+  poltergeist (~> 1.5.1)
   polyamorous!
   pry-byebug
   pry-rails
