@@ -26,12 +26,12 @@ OmniAuth.config.logger.level = Logger::WARN
 # selectors in your step definitions to use the XPath syntax.
 # Capybara.default_selector = :xpath
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :webkit
 Capybara.default_wait_time = 5
 
-Capybara.register_driver :poltergeist_debug do |app|
-  Capybara::Poltergeist::Driver.new(app, :inspector => true, :port => 3010, :timeout => 10)
-end
+# Capybara.register_driver :poltergeist_debug do |app|
+#   Capybara::Poltergeist::Driver.new(app, :inspector => true, :port => 3010, :timeout => 10)
+# end
 
 # By default, any exception happening in your Rails application will bubble up
 #
