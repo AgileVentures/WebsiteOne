@@ -8,9 +8,15 @@ Feature: Advanced Site Search
     Given I visit the site
 
   Scenario: Load basic design elements
-    Then I should see a navigation header with a search bar
-    And I should see a 'Search' button
-    
-  Scenario: Show search results for 'Website One'
+    Then I should see a navigation header
+    And I should see a form "Search" with:
+      | Field    |            |
+      | criteria |            |
+
+  Scenario: Show search results for 'WebsiteOne'
+    Given I am on the home page
+    And I fill in "Search":
+      | Field    | Text       |
+      | criteria | WebsiteOne |
+    When I click the "Search" button
     Then I should see a results page
-    And I should see a list of clickable links
