@@ -55,6 +55,7 @@ describe 'layouts/application.html.erb' do
 
   it 'should render a search form' do
     render
+    #within div.navbar do
     rendered.should have_selector('form#search')
     # expect(rendered).to have_selector('form#search')
   end
