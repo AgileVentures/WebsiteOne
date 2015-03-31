@@ -10,8 +10,8 @@ Feature: Advanced Site Search
   Scenario: Load basic design elements
     Then I should see a navigation header
     And I should see a form "Search" with:
-      | Field    |            |
-      | criteria |            |
+      | Field    |
+      | criteria |
 
   Scenario: Show search results for 'WebsiteOne'
     Given I am on the home page
