@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-    printf("project.user %s \n", @project.user.display_name)
+    #printf("project.user %s \n", @project.user.display_name)
     @members = @project.members
     @videos = YoutubeVideos.for(@project)
   end
