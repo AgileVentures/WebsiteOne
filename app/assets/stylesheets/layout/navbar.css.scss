@@ -149,6 +149,43 @@ header#main_header {
     }
   }
 
+  #google-search {
+    display: inline-block;
+    width: 350px;
+    height: $header-height;
+
+    a.gs-title {
+      color: $theme-lighter-dark;
+    }
+    input.gsc-input {
+      @include box-sizing(content-box);
+      width: auto;
+      color: $theme-dark;
+    }
+    .gsc-control-cse-en,
+    .cse .gsc-control-cse {
+      @include box-sizing(content-box);
+      height: $header-height;
+      width: auto;
+      padding: 0px;
+      border: none;
+      background-color: $theme-main;
+    }
+    .gsc-input-box {
+      @include box-sizing(content-box);
+      height: 32px;
+    }
+    .gsc-search-button,
+    .gsc-search-button-v2 {
+      @include box-sizing(content-box);
+      width: 16px;
+      height: 16px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+  }
+
   #account-controls {
     height: $header-height;
     line-height: $header-height;
