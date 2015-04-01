@@ -68,7 +68,7 @@ class EventInstance < ActiveRecord::Base
       uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
       Net::HTTP.get(uri)
     else
-      false
+      'Video not found'
     end
   end
 end
