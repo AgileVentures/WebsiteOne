@@ -23,7 +23,7 @@ The principal organization behind this project is AGILEVENTURES NONPROFIT LTD., 
  Service                 |  Status      |
 |------------------------ | ----------------- |
 | *Test coverage*         |                  |
-| Coveralls                |  [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.png)](https://coveralls.io/r/AgileVentures/WebsiteOne)    |
+| Coveralls                |  [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.svg?branch=develop)](https://coveralls.io/r/AgileVentures/WebsiteOne?branch=develop)   |
 | *Continuous integration* |    |
 | Semaphore CI (master)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/318335/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
 | Semaphore CI (staging)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/317640/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
