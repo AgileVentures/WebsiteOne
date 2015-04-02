@@ -26,7 +26,7 @@ Feature: Static pages
     When I am on the "projects" page
     Then I should see sponsor banner for "Makers Academy"
     Then I should see sponsor banner for "AirPair"
-    And I should see sponsor banner for "Agile Ventures"
+    And I should see sponsor banner for "RubyMine"
     And I should see link "Become a supporter"
 
   Scenario: Render Sponsors page
