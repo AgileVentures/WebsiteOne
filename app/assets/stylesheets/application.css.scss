@@ -65,8 +65,3 @@
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
-
-.gsc-results-wrapper-overlay,
-.gsc-results-wrapper-visible {
-  @include box-sizing(content-box);
-}
