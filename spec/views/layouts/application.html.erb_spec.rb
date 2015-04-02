@@ -55,9 +55,9 @@ describe 'layouts/application.html.erb' do
 
   it 'should render a search toggle' do
     render
-    within 'div.navbar' do
-      expect(rendered).to have_selector('a#google_search')
-    end
+    # within 'div.navbar' do
+    expect(rendered).to have_selector('a#google_search')
+    # end
   end
 
   it 'should render links to site features' do
