@@ -10,6 +10,7 @@ WebsiteOne
 
 
 #### A website for [Agile Ventures][application] - a platform for online collaboration and crowdsourced project development.
+<a href='https://pledgie.com/campaigns/28766'><img alt='Click here to lend your support to: Help us #CodeForGood and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/28766.png?skin_name=chrome' border='0' ></a>
 <!--[![AgileVentures WebsiteOne](http://img.youtube.com/vi/kjDehcx6Igk/0.jpg)](http://www.youtube.com/watch?v=kjDehcx6Igk)-->
 
 
