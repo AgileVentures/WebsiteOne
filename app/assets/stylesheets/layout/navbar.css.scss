@@ -179,6 +179,9 @@ header#main_header {
     }
     .gsc-input-box {
       @include box-sizing(content-box);
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
       height: 32px;
     }
     .gsc-search-button,
@@ -188,6 +191,9 @@ header#main_header {
       height: 16px;
       padding-top: 8px;
       padding-bottom: 8px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
     }
     // Google Search results
     .gsc-result {
