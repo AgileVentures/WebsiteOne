@@ -8,8 +8,7 @@ Feature: Advanced Site Search
     Given I visit the site
 
   Scenario: Performing a Basic Site Search
-    Then I should see a see a Search Toggle button
-    And when I click the button
+    When I click the Search Toggle button
     Then a search form should appear
     And when I search for 'WebsiteOne'
     And I click 'Submit'
