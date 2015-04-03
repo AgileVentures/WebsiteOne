@@ -149,7 +149,7 @@ header#main_header {
     }
   }
 
-  #google-search {
+  #google_search_wrapper {
     display: inline-block;
     width: 350px;
     height: $header-height;
@@ -213,7 +213,7 @@ header#main_header {
   }
 
   @media screen and (max-width: 900px) {
-    #google-search {
+    #google_search_wrapper {
       display: none;
     }
   }
