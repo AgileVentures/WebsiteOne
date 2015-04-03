@@ -8,7 +8,11 @@ Then(/^a search form should appear$/) do
 end
 
 Then(/^when I search for 'WebsiteOne'$/) do
-  pending # express the regexp above with the code you wish you had
+#  page.find(:css, 'div#google_search_wrapper', visible: true)
+#  fill_in id='gsc-i-id1', :with=> 'WebsiteOne'
+ within ('form.gsc-search-box') do
+    fill_in 'gsc-i-id1', with: 'WebsiteOne'
+  end
 end
 
 Then(/^I click 'Submit'$/) do
@@ -18,3 +22,5 @@ end
 Then(/^I should see the search results overlay$/) do
   pending # express the regexp above with the code you wish you had
 end
+
+
