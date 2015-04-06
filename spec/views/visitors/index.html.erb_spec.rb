@@ -185,43 +185,26 @@ describe 'visitors/index.html.erb', type: :view do
     end
   end
 
-  describe 'user messages' do
+  describe 'application messages' do
     context 'on initial application load' do
-      before(:each) do
-        ApplicationController.class_variable_set(:@@message_status, false)
-      end
       it 'displays flash with message' do
-        expect(ApplicationController.class_variable_get(:@@message_status)).to eq false
+        flash[:info] = 'This is a message'
         render
-        expect(flash[:info]).to include /support our fundraising/i
         rendered.within('div#flash-display') do |section|
-          binding.pry
           expect(section).to have_css 'div#flash_info'
+          expect(section).to have_text /this is a message/i
         end
-
       end
     end
 
     context 'on continuous application use' do
-      before(:each) do
-        ApplicationController.class_variable_set(:@@message_status, true)
-      end
       it 'does not display flash with message' do
-        #sanity check
-        expect(ApplicationController.class_variable_get(:@@message_status)).to eq true
+        expect(flash[:info]).to eq nil
         render
         rendered.within 'div#flash-display' do |section|
           expect(section).to_not have_css 'div#flash_info'
         end
       end
-    end
-  end
-
-  describe 'layouts/application' do
-    it "renders flash notices" do
-      flash[:notice] = "This is a notice!"
-      render
-      response.should contain "This is a notice!"
     end
   end
 end
