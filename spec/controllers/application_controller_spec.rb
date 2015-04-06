@@ -37,7 +37,7 @@ describe ApplicationController do
     end
   end
 
-  describe 'global user messagesmessagees' do
+  describe 'global user messages' do
     it { is_expected.to use_before_filter(:display_promo_flash) }
 
     it 'should set @@message_status to false at application load' do

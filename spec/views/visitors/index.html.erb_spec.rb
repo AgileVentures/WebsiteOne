@@ -8,7 +8,7 @@ end
 describe 'visitors/index.html.erb', type: :view do
   before :each do
     @event = FactoryGirl.build_stubbed(:event, name: 'Spec Scrum', start_datetime: '2014-03-07 10:30:00',
-                                        next_occurrence_time_attr: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
+                                       next_occurrence_time_attr: double(IceCube::Occurrence, to_datetime: DateTime.parse('2014-03-07 10:30:00 UTC')))
   end
 
   describe 'should display content/elements from partials' do
@@ -16,13 +16,13 @@ describe 'visitors/index.html.erb', type: :view do
       render
     end
 
-    it {expect(rendered).to render_template(partial: 'layouts/_meta_tags')}
-    it {expect(rendered).to render_template(partial: 'layouts/_head')}
-    it {expect(rendered).to render_template(partial: 'layouts/_flash')}
-    it {expect(rendered).to render_template(partial: 'layouts/_navbar')}
-    it {expect(rendered).to render_template(partial: 'layouts/_event_link')}
-    it {expect(rendered).to render_template(partial: 'layouts/_round_banners')}
-    it {expect(rendered).to render_template(partial: 'layouts/_footer')}
+    it { expect(rendered).to render_template(partial: 'layouts/_meta_tags') }
+    it { expect(rendered).to render_template(partial: 'layouts/_head') }
+    it { expect(rendered).to render_template(partial: 'layouts/_flash') }
+    it { expect(rendered).to render_template(partial: 'layouts/_navbar') }
+    it { expect(rendered).to render_template(partial: 'layouts/_event_link') }
+    it { expect(rendered).to render_template(partial: 'layouts/_round_banners') }
+    it { expect(rendered).to render_template(partial: 'layouts/_footer') }
 
   end
 
@@ -182,6 +182,46 @@ describe 'visitors/index.html.erb', type: :view do
         render
         expect(rendered).to have_text '5 minutes'
       end
+    end
+  end
+
+  describe 'user messages' do
+    context 'on initial application load' do
+      before(:each) do
+        ApplicationController.class_variable_set(:@@message_status, false)
+      end
+      it 'displays flash with message' do
+        expect(ApplicationController.class_variable_get(:@@message_status)).to eq false
+        render
+        expect(flash[:info]).to include /support our fundraising/i
+        rendered.within('div#flash-display') do |section|
+          binding.pry
+          expect(section).to have_css 'div#flash_info'
+        end
+
+      end
+    end
+
+    context 'on continuous application use' do
+      before(:each) do
+        ApplicationController.class_variable_set(:@@message_status, true)
+      end
+      it 'does not display flash with message' do
+        #sanity check
+        expect(ApplicationController.class_variable_get(:@@message_status)).to eq true
+        render
+        rendered.within 'div#flash-display' do |section|
+          expect(section).to_not have_css 'div#flash_info'
+        end
+      end
+    end
+  end
+
+  describe 'layouts/application' do
+    it "renders flash notices" do
+      flash[:notice] = "This is a notice!"
+      render
+      response.should contain "This is a notice!"
     end
   end
 end
