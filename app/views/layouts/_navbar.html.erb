@@ -2,23 +2,6 @@
   <div class="container">
     <a class="navbar-brand" href="<%= root_path %>"><img src="<%= image_path('av-logo-inverse.png') %>"></a>
 
-    <!-- With overlay -->
-    <div id="google_search_wrapper">
-      <script>
-        (function() {
-          var cx = '013004698248256241028:fzuo22ktbbo';
-          var gcse = document.createElement('script');
-          gcse.type = 'text/javascript';
-          gcse.async = true;
-          gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-              '//www.google.com/cse/cse.js?cx=' + cx;
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(gcse, s);
-        })();
-      </script>
-      <gcse:search></gcse:search>
-    </div>
-
     <div id="account-controls" class="pull-right">
       <% if user_signed_in? %>
         <% present current_user do |presenter| %>
@@ -87,7 +70,25 @@
               </ul>
             </li>
             <li><%= link_to 'Getting started', static_page_path('Getting started'), class: "#{is_in_static_page?('Getting started') ? 'active' : ''}" %></li>
-            <li><a id="google_search" href="#"></a></li>
+
+            <li class="dropdown" id="google-search-dropdown">
+              <a href="#" id="google_search" data-toggle="dropdown"><i class="fa fa-search"></i></a>
+              <ul class="dropdown-menu" id="google_search_wrapper">
+                <script>
+                  (function() {
+                    var cx = '013004698248256241028:fzuo22ktbbo';
+                    var gcse = document.createElement('script');
+                    gcse.type = 'text/javascript';
+                    gcse.async = true;
+                    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                        '//www.google.com/cse/cse.js?cx=' + cx;
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(gcse, s);
+                  })();
+                </script>
+                <gcse:search></gcse:search>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
