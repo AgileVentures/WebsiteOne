@@ -41,6 +41,7 @@ describe ApplicationController do
     it { is_expected.to use_before_filter(:display_promo_flash) }
 
     it 'should set @@message_status to false at application load' do
+      #request.reset_session
       expect(
           ApplicationController.class_variable_get(:@@message_status)
       ).to eq false
