@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    @users = User.filter(set_filter_params).allow_to_display.by_create
+    @users = User.includes(:status, :titles).filter(set_filter_params).allow_to_display.by_create
     @users_count = User.allow_to_display.count
     @projects = Project.all
 
