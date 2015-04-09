@@ -3,7 +3,7 @@
 <h1><%= "#{params[:tag].present? ? params[:tag] : 'All'} "%>Articles</h1>
 <% if user_signed_in? %>
   <ul class="user-controls">
-    <li><%= custom_css_btn 'new article', 'fa fa-plus', new_article_path(tag: params[:tag]) %></li>
+    <li><%= custom_css_btn 'new article', 'fa-2x fa fa-plus', new_article_path(tag: params[:tag]) %></li>
   </ul>
 <% end %>
 
