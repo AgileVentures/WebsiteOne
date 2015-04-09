@@ -6,10 +6,8 @@ Feature: Advanced Site Search
 
   Background:
     Given I visit the site
+    Then I should not see the search form
 
   Scenario: Performing a Basic Site Search
     When I click the Search Toggle button
-    Then a search form should appear
-    And when I search for 'WebsiteOne'
-    And I click 'Submit'
-    Then I should see the search results overlay
+    Then I should see the search form
