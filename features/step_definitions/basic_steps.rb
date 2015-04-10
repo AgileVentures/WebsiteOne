@@ -39,7 +39,7 @@ def path_to(page_name, id = '')
     when 'hookups' then
       hookups_path
     when 'dashboard' then
-      '/dashboard' 
+      '/dashboard'
     when 'new newsletter' then
       new_newsletter_path
     when 'newsletters index' then
