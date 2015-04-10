@@ -36,6 +36,8 @@ module HtmlSelectorsHelpers
         '.modal-body'
       when 'The Breadcrumb'
         '#not-sidebar-content'
+      when "Search"
+        'form#search'
       when /^"(.+)"$/
         $1
 
