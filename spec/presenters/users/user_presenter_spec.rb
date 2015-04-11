@@ -68,9 +68,10 @@ describe UserPresenter do
     let(:user) { FactoryGirl.create(:user) }
 
     before(:each) do
-      @status = FactoryGirl.create_list(:status, 3, 
-                                        status: Status::OPTIONS[rand(Status::OPTIONS.length)], 
+      @status = FactoryGirl.create_list(:status, 3,
+                                        status: Status::OPTIONS[rand(Status::OPTIONS.length)],
                                         user: user)
+      user.reload
     end
 
     it 'should have a status' do
