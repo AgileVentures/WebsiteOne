@@ -1,8 +1,8 @@
 Then(/^I should( not)? see the search form$/) do |negative|
   if negative
-    expect(page).to have_css '#google_search_wrapper', visible: false
+    expect(page).to have_css '#google-search-wrapper', visible: false
   else
-    expect(page).to have_css '#google_search_wrapper', visible: true
+    expect(page).to have_css '#google-search-wrapper', visible: true
   end
 end
 
