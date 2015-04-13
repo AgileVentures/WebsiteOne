@@ -19,7 +19,7 @@
   <div id="page-side-panel">
     <% if user_signed_in? %>
       <ul>
-        <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
+        <li><%= custom_css_btn 'edit', 'fa-2x fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
                                data: {save_url: static_page_mercury_update_path(@page.slug)} %>
       </ul>
     <% end %>
