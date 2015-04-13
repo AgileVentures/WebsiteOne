@@ -5,7 +5,7 @@
     <% if user_signed_in? && !article.new_record?  %>
       <ul class="user-controls">
         <li>
-          <%= custom_css_btn 'edit article', 'fa fa-pencil-square-o', edit_article_path(article) %>
+          <%= custom_css_btn 'edit article', 'fa-2x fa fa-pencil-square-o', edit_article_path(article) %>
         </li>
       </ul>
     <% end %>
