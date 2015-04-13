@@ -6,7 +6,7 @@ $(document).ready(function() {
             $('#nav').css('z-index', 1000);
         } else {
             $('#google_search i').removeClass('fa-times').addClass('fa-search');
-            $('#nav').css('z-index', 0);
+            $('#nav').css('z-index', 10);
         }
 
         $('#google-search-wrapper').fadeToggle(200, function() {
