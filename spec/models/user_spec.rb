@@ -10,6 +10,8 @@ describe User, :type => :model do
 
   it { is_expected.to accept_nested_attributes_for :status }
 
+  it { is_expected.to respond_to :status_count }
+
   it 'should have valid factory' do
     expect(FactoryGirl.create(:user)).to be_valid
   end
