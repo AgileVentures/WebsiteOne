@@ -11,7 +11,7 @@
         <% if @hangout.try!(:live?) %>
           <a href="<%= @hangout.hangout_url %>" class="event-live-link">EVENT IS LIVE !<br/>CLICK TO JOIN</a>
         <% else  %>
-          <a href="#" class="event-live-link disabled">NOT YET LIVE ...</a>
+          <a href="#">NOT YET LIVE ...</a>
         <% end  %>
       </div>
     </div>
