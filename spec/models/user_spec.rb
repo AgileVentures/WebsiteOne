@@ -326,6 +326,10 @@ describe User, :type => :model do
     it 'returns false if all are complete' do
       expect(user.incomplete?).to be_falsey
     end
+
+    it 'returns true with nil values' do
+      expect(User.new.incomplete?).to be_truthy
+    end
   end
 end
 
