@@ -127,7 +127,7 @@ class User < ActiveRecord::Base
   end
 
   def incomplete?
-    bio.empty? || skills.empty? || first_name.empty? || last_name.empty?
+    bio.try(:empty?) || skills.try(:empty?) || first_name.try(:empty?) || last_name.try(:empty?)
   end
 
   private
