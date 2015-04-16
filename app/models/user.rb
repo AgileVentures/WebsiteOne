@@ -126,6 +126,10 @@ class User < ActiveRecord::Base
     users.to_json
   end
 
+  def incomplete?
+    bio.empty? || skills.empty? || first_name.empty? || last_name.empty?
+  end
+
   private
 
   def send_slack_invite
