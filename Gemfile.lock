@@ -236,7 +236,7 @@ GEM
     kdtree (0.3)
     launchy (2.4.2)
       addressable (~> 2.3)
-    libv8 (3.16.14.3)
+    libv8 (3.16.14.7)
     listen (2.7.9)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -414,7 +414,7 @@ GEM
       celluloid (~> 0.15.2)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
-    therubyracer (0.12.1)
+    therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
@@ -469,7 +469,6 @@ GEM
     xpath (2.0.0)
       nokogiri (~> 1.3)
     youtube_it (2.1.1)
-      builder
       builder
       faraday
       faraday (>= 0.7.3)
