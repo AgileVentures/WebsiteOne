@@ -23,8 +23,8 @@
 
       <div class="project-edit">
         <% if user_signed_in? %>
+            <ul class="list-inline">
             <% if current_user.following?(@project) %>
-                <ul class="list-inline">
                   <li class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
                       Project Actions
@@ -42,11 +42,11 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="hangout-btn">
-                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>                  </li>
+            <% end %>
+                <li class="hangout-btn">
+                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}", following_project: current_user.following?(@project) } %></li>
                 </ul>
                 <hr>
-            <% end %>
         <% end %>
       </div>
     </div>
