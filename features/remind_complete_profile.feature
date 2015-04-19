@@ -8,7 +8,7 @@ Feature: Remind User complete profile
     Given I exist as a user
     And I have an incoplete profile
     When I sign in with valid credentials
-    Then I should see "Please, complete your profile"
+    Then I should see "We've noticed that your profile is incomplete."
     And I should see link "Take me to my profile page"
     And I should see button "Continue using the site"
 
@@ -29,14 +29,14 @@ Feature: Remind User complete profile
   Scenario: User has complete profile from home page
     Given I exist as a user
     When I sign in with valid credentials
-    Then I should not see "Please, complete your profile"
+    Then I should not see "We've noticed that your profile is incomplete."
 
   Scenario: User has incomplete profile not from home page
     Given I exist as a user
     And I have an incoplete profile
     And I visit "projects"
     When I sign in with valid credentials
-    Then I should see "Please, complete your profile"
+    Then I should see "We've noticed that your profile is incomplete."
     And I should see link "Take me to my profile page"
     And I should see button "Continue using the site"
 
@@ -44,5 +44,5 @@ Feature: Remind User complete profile
     Given I exist as a user
     And I visit "projects"
     When I sign in with valid credentials
-    Then I should not see "Please, complete your profile"
+    Then I should not see "We've noticed that your profile is incomplete."
 
