@@ -17,6 +17,7 @@ class EventInstancesController < ApplicationController
 
   def index
     relation = (params[:live] == 'true') ? EventInstance.live : EventInstance.latest
+    relation = relation.includes(:project, :event, :user)
     @event_instances = relation.paginate(:page => params[:page])
   end
 
