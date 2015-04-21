@@ -23,6 +23,7 @@
       <div id='hg-container'>
         <%= render 'hangouts' %>
       </div>
+      <%= will_paginate @event_instances, page_links: false %>
     <% end %>
   </div>
 </section>
