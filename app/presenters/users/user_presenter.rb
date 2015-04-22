@@ -85,4 +85,9 @@ class UserPresenter < BasePresenter
     user.is_privileged?
   end
 
+  def blank_fields
+    %w{first_name last_name skills bio}
+      .select { |field| user.send(field).blank? }
+      .map(&:humanize).to_sentence
+  end
 end

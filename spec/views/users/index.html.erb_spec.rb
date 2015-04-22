@@ -79,6 +79,7 @@ describe 'users/index.html.erb', :type => :view do
       user = @users_online.first
       @status_text = Status::OPTIONS[rand(Status::OPTIONS.length)]
       user.status.create(attributes = FactoryGirl.attributes_for(:status, status: @status_text))
+      user.reload
     end
 
     after(:each) do

@@ -27,7 +27,9 @@ module Helpers
       display_profile: true,
       latitude: 59.33,
       longitude: 18.06,
-      country_name: 'Stockholm'
+      country_name: 'Stockholm',
+      bio: 'Full time Tester',
+      skill_list: 'Test'
     }
   end
 

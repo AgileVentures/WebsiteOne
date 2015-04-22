@@ -63,6 +63,8 @@ WebsiteOne.define('Users', function () {
             }).show();
             $(users).not(filtered).hide();
         });
+
+        $('#require_users_profile').modal({show: true});
     }
 
     return {

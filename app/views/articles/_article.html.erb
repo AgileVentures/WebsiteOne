@@ -5,7 +5,7 @@
     <% if user_signed_in? && !article.new_record?  %>
       <ul class="user-controls">
         <li>
-          <%= custom_css_btn 'edit article', 'fa fa-pencil-square-o', edit_article_path(article) %>
+          <%= custom_css_btn 'edit article', 'fa-2x fa fa-pencil-square-o', edit_article_path(article) %>
         </li>
       </ul>
     <% end %>
@@ -18,14 +18,14 @@
       <% if (user_signed_in? && !article.new_record? ) && !article.authored_by?(current_user) %>
         <% visitor_has_voted = current_user.voted_as_when_voted_for article %>
         <% if visitor_has_voted == nil %>
-          <%= custom_css_btn 'Up Vote', 'fa fa-arrow-up vote_button', upvote_article_path(@article) %>
-          <%= custom_css_btn 'Down Vote', 'fa fa-arrow-down vote_button', downvote_article_path(@article) %>
+          <%= custom_css_btn 'Up Vote', 'fa fa-thumbs-o-up vote_button', upvote_article_path(@article) %>
+          <%= custom_css_btn 'Down Vote', 'fa fa-thumbs-o-down vote_button', downvote_article_path(@article) %>
         <% elsif visitor_has_voted == true %>
-          <%= custom_css_btn 'Cancel Up Vote', 'fa fa-undo vote_button', cancelvote_article_path(@article) %>
-          <%= custom_css_btn 'Down Vote', 'fa fa-arrow-down vote_button', downvote_article_path(@article) %>
+          <%= custom_css_btn 'Cancel Up Vote', 'fa fa-thumbs-up vote_button', cancelvote_article_path(@article) %>
+          <%= custom_css_btn 'Down Vote', 'fa fa-thumbs-o-down vote_button', downvote_article_path(@article) %>
         <% else %>
-          <%= custom_css_btn 'Up Vote', 'fa fa-arrow-up vote_button', upvote_article_path(@article) %>
-          <%= custom_css_btn 'Cancel Down Vote', 'fa fa-undo vote_button', cancelvote_article_path(@article) %>
+          <%= custom_css_btn 'Up Vote', 'fa fa-thumbs-o-up vote_button', upvote_article_path(@article) %>
+          <%= custom_css_btn 'Cancel Down Vote', 'fa fa-thumbs-down vote_button', cancelvote_article_path(@article) %>
         <% end %>
       <% end %>
       </li>
