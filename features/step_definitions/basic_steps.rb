@@ -10,6 +10,8 @@ def path_to(page_name, id = '')
       root_path
     when 'registration' then
       new_user_registration_path
+    when 'edit registration' then
+      edit_user_registration_path
     when 'sign in' then
       new_user_session_path
     when 'projects' then
