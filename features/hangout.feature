@@ -168,11 +168,19 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I should not see "No more hangouts"
 
   @javascript
-  Scenario: Infinite scroll on hangouts scroll down 2 times
+  Scenario: Infinite scroll on hangouts second page
     Given 70 hangouts exists
     When I visit "/hangouts"
     And I scroll to bottom of page
-    And I scroll to bottom of page
+    Then I should see 60 hangouts
+    And I should see link "Next"
+    And I should not see "No more hangouts"
+
+  @javascript
+  Scenario: Infinite scroll on hangouts scroll down 2 times
+    Given 70 hangouts exists
+    When I visit "/hangouts"
+    And I scroll to bottom of page 2 times
     Then I should see 70 hangouts
     And I should not see link "Next"
     And I should see "No more hangouts"

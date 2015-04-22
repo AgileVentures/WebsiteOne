@@ -77,3 +77,7 @@ When(/^I scroll to bottom of page$/) do
   page.evaluate_script("window.scrollTo(0, $(document).height());")
   sleep 2
 end
+
+When(/^I scroll to bottom of page (\d+) times$/) do |count|
+  count.to_i.times { step "I scroll to bottom of page" }
+end
