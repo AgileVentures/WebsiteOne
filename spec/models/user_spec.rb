@@ -10,6 +10,8 @@ describe User, :type => :model do
 
   it { is_expected.to accept_nested_attributes_for :status }
 
+  it { is_expected.to respond_to :status_count }
+
   it 'should have valid factory' do
     expect(FactoryGirl.create(:user)).to be_valid
   end
@@ -289,6 +291,44 @@ describe User, :type => :model do
         Delorean.time_travel_to(Time.parse('2014-09-30 05:12:00 UTC'))
         expect(user.online?).to eq false
       end
+    end
+  end
+
+  describe 'incomplete profile' do
+
+    let(:user) { @user }
+
+    before(:each) do
+      @user = FactoryGirl.create(:user, updated_at: '2014-09-30 05:00:00 UTC')
+    end
+
+    it 'returns true if bio empty' do
+      user.bio = ''
+      expect(user.incomplete?).to be_truthy
+    end
+
+    it 'returns true if skills empty' do
+      user.skill_list = ''
+      user.save
+      expect(user.incomplete?).to be_truthy
+    end
+
+    it 'returns true if first_name empty' do
+      user.first_name = ''
+      expect(user.incomplete?).to be_truthy
+    end
+
+    it 'returns true if skills empty' do
+      user.last_name = ''
+      expect(user.incomplete?).to be_truthy
+    end
+
+    it 'returns false if all are complete' do
+      expect(user.incomplete?).to be_falsey
+    end
+
+    it 'returns true with nil values' do
+      expect(User.new.incomplete?).to be_truthy
     end
   end
 end
