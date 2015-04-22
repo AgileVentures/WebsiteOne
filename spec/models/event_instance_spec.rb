@@ -79,7 +79,7 @@ describe EventInstance, type: :model do
       end
       it 'includes hosts name ' do
         expect(@broadcaster).to eq 'John Doe'
-        expect(TwitterService).to receive(:tweet).with(/#{@broadcaster}/) { :success }
+        expect(TwitterService).to receive(:tweet).with(/#{@broadcaster.split[0]}/) { :success }
         hangout.save
       end
 
@@ -93,6 +93,15 @@ describe EventInstance, type: :model do
 
   context 'yt_video_id is NOT present' do
     before { hangout.yt_video_id = nil }
+
+    it 'does not call TwitterService' do
+      expect(TwitterService).to_not receive(:tweet)
+      hangout.save
+    end
+  end
+
+  context 'yt_video_id is an empty string' do
+    before { hangout.yt_video_id = '' }
 
     it 'does not call TwitterService' do
       expect(TwitterService).to_not receive(:tweet)

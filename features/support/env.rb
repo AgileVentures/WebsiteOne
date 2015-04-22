@@ -29,14 +29,19 @@ OmniAuth.config.logger.level = Logger::WARN
 Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5
 
+options = {
+  inspector: true,
+  port: 3010
+}
+
 Capybara.register_driver :poltergeist_debug do |app|
-  Capybara::Poltergeist::Driver.new(app, :inspector => true, :port => 3010)
+  Capybara::Poltergeist::Driver.new app, options
 end
 
 # By default, any exception happening in your Rails application will bubble up
 #
-# to Cucumber so that your scenario will fail. This is a different from how 
-# your application behaves in the production environment, where an error page will 
+# to Cucumber so that your scenario will fail. This is a different from how
+# your application behaves in the production environment, where an error page will
 # be rendered instead.
 #
 # Sometimes we want to override this default behaviour and allow Rails to rescue
