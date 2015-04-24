@@ -86,4 +86,29 @@ describe UserPresenter do
       expect(subject.status?).to eq true
     end
   end
+
+  describe 'empty profile fields' do
+    let!(:user) { FactoryGirl.create(:user) }
+
+    it 'should return a list of all fields if they are nil' do
+      user.first_name = user.last_name = user.bio = nil
+      user.skill_list = nil
+      user.save
+      user.reload
+      expect(subject.blank_fields).to eq('First name, Last name, Skills, and Bio')
+    end
+
+    it 'should return a list of all fields if they are empty' do
+      user.first_name = user.last_name = user.bio = ''
+      user.skill_list = ''
+      user.save
+      user.reload
+      expect(subject.blank_fields).to eq('First name, Last name, Skills, and Bio')
+    end
+
+    it 'should return only empty fields' do
+      user.last_name = user.bio = ''
+      expect(subject.blank_fields).to eq('Last name and Bio')
+    end
+  end
 end
