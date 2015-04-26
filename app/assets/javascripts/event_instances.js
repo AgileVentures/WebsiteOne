@@ -1,8 +1,5 @@
 this.EventInstancesUtils = function() {
   this.bindEvents = function() {
-    $('#collapse0').slideDown();
-    WebsiteOne.toggleCaret($('#collapse0').closest('.panel').find('i.fa'));
-
     $('.user-popover').popover({
       trigger: 'hover'
     });
