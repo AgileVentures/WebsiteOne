@@ -1,9 +1,9 @@
 <% provide :title, 'Hangouts' %>
 <section class="live-hangouts">
-  <div class='container-fluid'>
+  <div class='col-lg-12'>
     <div class='row hg-toggles'>
-        <button id="btn-hg-toggle" type="button" class="btn-hg-toggle">toggle summary</button>
-        <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn-hg-live' %>
+        <button id="btn-hg-toggle" type="button" class="btn btn-default">toggle summary</button>
+        <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn btn-default' %>
     </div>
   </div>
   <div class="panel-group" id="accordion">
