@@ -1,9 +1,5 @@
 this.EventInstancesUtils = function() {
   this.bindEvents = function() {
-    $('.user-popover').popover({
-      trigger: 'hover'
-    });
-
     $('.btn-hg-join, .btn-hg-watch').click(function() {
       event.stopPropagation();
     });
