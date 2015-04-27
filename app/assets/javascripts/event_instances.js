@@ -1,12 +1,5 @@
 this.EventInstancesUtils = function() {
   this.bindEvents = function() {
-    $('#collapse0').slideDown();
-    WebsiteOne.toggleCaret($('#collapse0').closest('.panel').find('i.fa'));
-
-    $('.user-popover').popover({
-      trigger: 'hover'
-    });
-
     $('.btn-hg-join, .btn-hg-watch').click(function() {
       event.stopPropagation();
     });
@@ -31,6 +24,17 @@ this.EventInstancesUtils = function() {
       $('.live-hangouts .collapse').slideToggle();
       WebsiteOne.toggleCaret($('.panel').find('i.fa'));
     });
+
+    if ($('#hg-container + .pagination').length) {
+      $(window).scroll(function() {
+        var url = $('.pagination a[rel="next"]').attr('href');
+        if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 450) {
+          $('.pagination').text("Please Wait...");
+          return $.getScript(url);
+        }
+      });
+      return $(window).scroll();
+    }
   };
 
   this.updateHangoutsData = (function(_this) {
