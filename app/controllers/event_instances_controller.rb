@@ -16,8 +16,9 @@ class EventInstancesController < ApplicationController
   end
 
   def index
-    @event_instances = (params[:live] == 'true') ? EventInstance.live : EventInstance.latest
-    render partial: 'hangouts' if request.xhr?
+    relation = (params[:live] == 'true') ? EventInstance.live : EventInstance.latest
+    relation = relation.includes(:project, :event, :user)
+    @event_instances = relation.paginate(:page => params[:page])
   end
 
   private

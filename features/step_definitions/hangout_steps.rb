@@ -64,3 +64,16 @@ end
 Then /^I have Slack notifications enabled$/ do
   stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify').to_return(status: 200)
 end
+
+Given(/^(\d+) hangouts exists$/) do |count|
+  count.to_i.times { FactoryGirl.create :event_instance }
+end
+
+Then(/^I should see (\d+) hangouts$/) do |count|
+  expect(page).to have_content("Hangout_", count: count.to_i)
+end
+
+When(/^I scroll to bottom of page$/) do
+  page.evaluate_script("window.scrollTo(0, $(document).height());")
+  sleep 2
+end
