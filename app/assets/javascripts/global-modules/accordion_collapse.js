@@ -5,9 +5,9 @@ WebsiteOne.define('AccordionCollapse', function() {
     var expandedClass = 'fa-caret-right';
 
     if (child.hasClass(collapsedClass)) {
-      child.removeClass(collapsedClass); child.addClass(expandedClass);
+      child.removeClass(collapsedClass).addClass(expandedClass);
     } else if (child.hasClass(expandedClass)) {
-      child.removeClass(expandedClass); child.addClass(collapsedClass);
+      child.removeClass(expandedClass).addClass(collapsedClass);
     }
   };
 
