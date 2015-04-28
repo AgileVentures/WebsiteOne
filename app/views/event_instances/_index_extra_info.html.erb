@@ -4,19 +4,17 @@
     <div class='hidden-xs col-sm-1 hg-align-right'>
       <div class='row'><b>Event</b></div>
       <div class='row'><b>Category</b></div>
-      <div class='row'> </div>
       <div class='row'>Duration</div>
     </div>
     <div class='col-xs-12 col-sm-4'>
-      <div class='row'> <%= hangout.event_link %> </div>
-      <div class='row'> <%= hangout.category %> </div>
-      <div class='row'></div>
-      <div class='row'> <%= hangout.duration %> </div>
+      <div class='row'>&nbsp;&nbsp;<%= hangout.event_link %> </div>
+      <div class='row'>&nbsp;&nbsp;<%= hangout.category %> </div>
+      <div class='row'>&nbsp;&nbsp;<%= hangout.duration %> </div>
     </div>
     <div class='hidden-xs col-sm-2'><b>Participants</b></div>
     <div class='col-xs-12 col-sm-4 hg-avatar'>
       <% hangout.participants.each do |participant| %>
-          <%= render partial: 'users/user_avatar', locals: { user: participant, placement: 'bottom' } %>
+        <%= render 'users/user_avatar', user: participant %>
       <% end %>
     </div>
   </div>
