@@ -236,3 +236,9 @@ Feature: Create and maintain projects
     Given I am on the "Show" page for project "hello world"
     And I should see a link to "hello world" on github
     And I should see a link to "hello world" on Pivotal Tracker
+
+  Scenario: Project show page has hangout button for users that not follow the project
+    Given I am logged in
+    And I am on the "Show" page for project "hello world"
+    When I click "Start Live Hangout" button
+    Then I should see "You should join this project before you can start the hangouts"
