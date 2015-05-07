@@ -9,7 +9,7 @@ this.EventInstancesUtils = function() {
       event.stopPropagation();
     });
 
-    return $('.panel-heading').click(function() {
+    return $('#hg-container').on('click', '.panel-heading', function() {
       $(this).closest('.panel').find('.panel-collapse').slideToggle();
       WebsiteOne.toggleCaret($(this).find('i.fa'));
     });

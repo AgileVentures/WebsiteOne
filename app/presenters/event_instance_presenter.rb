@@ -47,10 +47,15 @@ class EventInstancePresenter < BasePresenter
     participants ||= []
 
     participants.map do |participant|
-      person = participant.last[:person]
-      user = Authentication.find_by(provider: 'gplus', uid: person[:id]).try!(:user)
-      next if user == host
-      user || NullUser.new(person[:displayName])
+      begin
+        person = participant.last[:person]
+        user = Authentication.find_by(provider: 'gplus', uid: person[:id]).try!(:user)
+        next if user == host
+        user || NullUser.new(person[:displayName])
+      rescue NoMethodError
+        Rails.logger.error "Exception at event_instance_presenter#map_to_users"
+        nil
+      end
     end.compact
   end
 

@@ -88,6 +88,11 @@ describe EventInstancePresenter do
       expect(presenter.participants.first.display_name).to eq('Bob')
     end
 
+    it "don't throw an exception when have nil person at participants" do
+      hangout.participants = [ [ "0", { :person => nil } ] ]
+      expect(presenter.participants).to be_empty
+    end
+
     it 'returns video url' do
       expect(presenter.video_url).to eq('#')
     end
