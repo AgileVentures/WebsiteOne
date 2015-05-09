@@ -40,12 +40,24 @@ describe EventInstancePresenter do
     end
 
     it 'do not show the host in the list of participants' do
-      participant = FactoryGirl.create(:user, gplus: hangout.participants.first.last[:person][:id])
+      FactoryGirl.create(:user, gplus: hangout.participants.first.last[:person][:id])
       expect(presenter.participants).not_to include(hangout.user)
     end
 
     it 'returns video url' do
-      expect(presenter.video_url).to eq("http://www.youtube.com/watch?v=yt_video_id&feature=youtube_gdata")
+      expect(presenter.video_url).to eq("http://www.youtube.com/watch?v=#{presenter.yt_video_id}&feature=youtube_gdata")
+    end
+
+    it 'returns a link to video' do
+      expect(presenter.video_link).to include(
+        'class="yt_link"', "data-content=\"#{presenter.title}\"",
+        "href=\"#{presenter.video_url}\"", "id=\"#{presenter.yt_video_id}\""
+      )
+    end
+
+    it 'returns a link to youtube player' do
+      link = "http://www.youtube.com/embed/#{presenter.yt_video_id}?enablejsapi=1"
+      expect(presenter.video_embed_link).to eq(link)
     end
   end
 
@@ -95,6 +107,14 @@ describe EventInstancePresenter do
 
     it 'returns video url' do
       expect(presenter.video_url).to eq('#')
+    end
+
+    it 'returns a link to video' do
+      expect(presenter.video_link).to be_nil
+    end
+
+    it 'returns a link to youtube player' do
+      expect(presenter.video_embed_link).to be_nil
     end
   end
 
