@@ -31,24 +31,10 @@ describe 'users/show.html.erb' do
     allow(@commit_counts.first.project).to receive(:contribution_url).and_return('test_url')
 
     assign :user, @user
-    @youtube_videos = [
-        {
-            url: "http://www.youtube.com/100",
-            title: "Random",
-            published: '01/02/2015'.to_date
-        },
-        {
-            url: "http://www.youtube.com/340",
-            title: "Stuff",
-            published: '01/03/2015'.to_date
-        },
-        {
-            url: "http://www.youtube.com/2340",
-            title: "Here's something",
-            published: '01/04/2015'.to_date
-        }
-    ]
-    assign :youtube_videos, @youtube_videos
+    @event_instances = 2.times.map do
+      FactoryGirl.build_stubbed(:event_instance, user: @user)
+    end
+    assign :event_instances, @event_instances
     @skills = %w(rails ruby rspec)
     assign :skills, @skills
   end
@@ -138,14 +124,15 @@ describe 'users/show.html.erb' do
 
   it 'renders list of youtube links and published dates if user has videos' do
     render
-    @youtube_videos.each do |video|
-      expect(rendered).to have_link(video[:title], :href => video[:url])
-      expect(rendered).to have_text(video[:published])
+    @event_instances.each do |video|
+      href = "http://www.youtube.com/watch?v=#{video.yt_video_id}&feature=youtube_gdata"
+      expect(rendered).to have_link(video.title, :href => href)
+      expect(rendered).to have_text(video.created_at.strftime('%H:%M %d/%m'))
     end
   end
 
   it 'renders "no available videos" if user has no videos' do
-    assign(:youtube_videos, nil)
+    assign(:event_instances, nil)
     render
     expect(rendered).to have_text('Eric Els has no publicly viewable Youtube videos.')
   end

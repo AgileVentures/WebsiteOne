@@ -27,18 +27,8 @@ Feature: As a site owner
     When I go to my "edit profile" page
     Then I should see "Disconnect YouTube"
 
-  Scenario: Do not show 'link your channel' message if not my page
-    Given I am on "profile" page for user "Alice"
-    And user "Alice" has YouTube Channel not connected
-    Then I should not see "Sync with YouTube"
-
-  Scenario: Do not show 'unlink your channel' message if not my page
-    Given I am on "profile" page for user "Alice"
-    And user "Alice" has YouTube Channel connected
-    Then I should not see "Sync with YouTube"
-
   Scenario: Link my Youtube channel to my account
-    Given my YouTube Channel ID with some videos in it
+    Given I have some videos on project "hello world"
     But my YouTube Channel is not connected
     And I am on my "edit profile" page
     When I click "Sync with YouTube"
@@ -48,51 +38,41 @@ Feature: As a site owner
     But I should not see "Sync with YouTube"
 
   Scenario: Unlink my Youtube channel
-    Given my YouTube Channel ID with some videos in it
+    Given I have some videos on project "hello world"
     And my YouTube channel is connected
     And I am on my "edit profile" page
     When I click "Disconnect YouTube"
     And I go to my "profile" page
-    Then I should see "has no publicly viewable Youtube videos"
 
   Scenario: Show 'no videos' message if there no videos
-    Given my YouTube Channel ID with no videos in it
-    And my YouTube channel is connected
+    Given my YouTube channel is connected
     When I go to my "profile" page
     Then I should not see a list of my videos
     And I should see "has no publicly viewable Youtube videos"
 
   Scenario: show first video's description in the player's heading
-    Given my YouTube Channel ID with some videos in it
+    Given I have some videos on project "hello world"
     And my YouTube channel is connected
     When I go to my "profile" page
-    Then I should see "WebsiteOne - Pairing session - refactoring authentication controller" in "video description"
+    Then I should see "PP on hello world - feature: 2" in "video description"
 
-  Scenario: show videos sorted by published date
-    Given my YouTube Channel ID with some videos in it
+  Scenario: show videos sorted by descending published date
+    Given I have some videos on project "hello world"
     And my YouTube channel is connected
     When I go to my "profile" page
-    Then I should see "WebsiteOne - Pairing session" before "PP WSO UserManagement"
+    Then I should see "PP on hello world - feature: 2" before "PP on hello world - feature: 1"
 
   Scenario: show embedded youtube player with the first video
-    Given my YouTube Channel ID with some videos in it
+    Given I have some videos on project "hello world"
     And my YouTube channel is connected
     When I go to my "profile" page
-    And I should see video "WebsiteOne - Pairing session - refactoring authentication controller" in "player"
-
-  Scenario: only show videos that include followed project tags in their title
-    Given my YouTube Channel ID with some videos in it
-    And I am not a member of project "hello mars"
-    And my YouTube channel is connected
-    When I go to my "profile" page
-    Then I should see "WebsiteOne - Pairing session"
-    But I should not see "Autograders"
+    And I should see video "PP on hello world - feature: 2" in "player"
 
   @javascript
   Scenario: Selecting videos from the list
-    And my YouTube Channel ID with some videos in it
+    Given I have some videos on project "hello world"
     And my YouTube channel is connected
     And I am on my "profile" page
-    When I click "Autograders - Pairing session"
-    Then I should see "Working in HW repo" in "video description"
-    And I should see video "Autograders - Pairing session" in "player"
+    When I click "PP on hello world - feature: 1"
+    Then I should see "PP on hello world - feature: 1" in "video description"
+    And I should see video "PP on hello world - feature: 1" in "player"
