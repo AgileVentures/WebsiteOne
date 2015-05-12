@@ -41,6 +41,18 @@ class EventInstancePresenter < BasePresenter
     distance_of_time_in_words(event_instance.duration)
   end
 
+  def video_link
+    if yt_video_id.present?
+      link_to title, video_url, id: yt_video_id, class: 'yt_link', data: { content: title }
+    end
+  end
+
+  def video_embed_link
+    if yt_video_id.present?
+      "http://www.youtube.com/embed/#{yt_video_id}?enablejsapi=1"
+    end
+  end
+
   private
 
   def map_to_users(participants)
@@ -58,5 +70,4 @@ class EventInstancePresenter < BasePresenter
       end
     end.compact
   end
-
 end
