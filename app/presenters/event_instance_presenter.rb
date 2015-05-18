@@ -41,17 +41,33 @@ class EventInstancePresenter < BasePresenter
     distance_of_time_in_words(event_instance.duration)
   end
 
+  def video_link
+    if yt_video_id.present?
+      link_to title, video_url, id: yt_video_id, class: 'yt_link', data: { content: title }
+    end
+  end
+
+  def video_embed_link
+    if yt_video_id.present?
+      "http://www.youtube.com/embed/#{yt_video_id}?enablejsapi=1"
+    end
+  end
+
   private
 
   def map_to_users(participants)
     participants ||= []
 
     participants.map do |participant|
-      person = participant.last[:person]
-      user = Authentication.find_by(provider: 'gplus', uid: person[:id]).try!(:user)
-      next if user == host
-      user || NullUser.new(person[:displayName])
+      begin
+        person = participant.last[:person]
+        user = Authentication.find_by(provider: 'gplus', uid: person[:id]).try!(:user)
+        next if user == host
+        user || NullUser.new(person[:displayName])
+      rescue NoMethodError
+        Rails.logger.error "Exception at event_instance_presenter#map_to_users"
+        nil
+      end
     end.compact
   end
-
 end
