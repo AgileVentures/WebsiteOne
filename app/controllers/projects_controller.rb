@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  
+
   layout 'with_sidebar'
   before_filter :authenticate_user!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
@@ -16,9 +16,9 @@ class ProjectsController < ApplicationController
 
   def show
     documents
-    #printf("project.user %s \n", @project.user.display_name)
     @members = @project.members
-    @videos = YoutubeVideos.for(@project)
+    @event_instances = EventInstance.where(project_id: @project.id)
+      .order(:created_at)
   end
 
   def new
@@ -92,7 +92,6 @@ class ProjectsController < ApplicationController
   private
   def set_project
     @project = Project.friendly.find(params[:id])
-    @project
   end
 
   def add_to_feed(action)
