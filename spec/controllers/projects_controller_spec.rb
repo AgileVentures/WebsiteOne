@@ -21,13 +21,6 @@ describe ProjectsController, :type => :controller do
 
   let(:user) { @user }
 
-  #describe "pagination" do
-  #  it "should paginate the feed" do
-  #    visit root_path
-  #    page.should have_selector("div.pagination")
-  #  end
-  #end
-
   describe '#index' do
     before(:each) do
       @project = mock_model(Project, title: 'Carrier has arrived.', commit_count: 100)
@@ -64,7 +57,9 @@ describe ProjectsController, :type => :controller do
       @project.stub_chain(:user, :display_name).and_return "Happy User"
       @users = [ build_stubbed(User, slug: 'my-friendly-id', display_profile: true) ]
       expect(@project).to receive(:members).and_return @users
-      expect(YoutubeVideos).to receive(:for).with(@project).and_return('videos')
+      object = double('object')
+      expect(EventInstance).to receive(:where).with(project_id: @project.id).and_return(object)
+      expect(object).to receive(:order).with(:created_at).and_return('videos')
       allow(PivotalService).to receive(:one_project).and_return('')
       dummy = Object.new
       dummy.stub(stories: "stories")
@@ -88,7 +83,7 @@ describe ProjectsController, :type => :controller do
 
     it 'assigns the list of related YouTube videos in alphabetical order' do
       get :show, { id: @project.friendly_id }, valid_session
-      expect(assigns(:videos)).to eq 'videos'
+      expect(assigns(:event_instances)).to eq 'videos'
     end
 
     it 'assigns the list of related PivtalTracker stories' do

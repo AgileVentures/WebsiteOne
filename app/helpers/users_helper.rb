@@ -10,13 +10,5 @@ module UsersHelper
     link_to raw('<i class="fa fa-youtube"></i> Disconnect YouTube'),
             "/auth/destroy/youtube?origin=#{CGI.escape origin_url}", class: 'btn btn-block btn-social btn-danger', type: 'button'
   end
-
-  def video_link(video)
-    link_to video[:title], video[:url], id: video[:id], class: 'yt_link', data: { content: video[:content] }
-  end
-
-  def video_embed_link(video)
-    "http://www.youtube.com/embed/#{video[:id]}?enablejsapi=1"
-  end
 end
 
