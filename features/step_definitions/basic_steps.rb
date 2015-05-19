@@ -308,6 +308,10 @@ Then /^I should see a "([^"]*)" table with:$/ do |name, table|
   end
 end
 
+Then(/^I should see (\d+) rows with text "(.*?)" in a table$/) do |count, text|
+  expect(page).to have_css('table tr', text: text, count: count)
+end
+
 Then(/^I check "([^"]*)"$/) do |item|
   check item
 end
