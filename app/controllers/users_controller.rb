@@ -47,7 +47,8 @@ class UsersController < ApplicationController
 
   def show
     if should_display_user?(@user)
-      @youtube_videos = YoutubeVideos.for(@user).first(5)
+      @event_instances = EventInstance.where(user_id: @user.id)
+        .order(created_at: :desc).limit(5)
     else
       raise ActiveRecord::RecordNotFound.new('User has not exposed his profile publicly')
     end
