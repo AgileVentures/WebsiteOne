@@ -9,6 +9,7 @@ describe 'projects/show.html.erb', type: :view do
   let(:project) { FactoryGirl.build_stubbed(:project, user: user) }
   let(:created_by) { ['by:', ([user.first_name, user.last_name].join(' '))].join(' ') }
   let(:event_instances) { 2.times.map { FactoryGirl.build_stubbed(:event_instance, user: user) } }
+  let(:event_instances_count) { 2 }
 
   let(:stories) do
     [
@@ -31,6 +32,7 @@ describe 'projects/show.html.erb', type: :view do
     assign :documents, documents
     assign :created_by, created_by
     assign :event_instances, event_instances
+    assign :event_instances_count, event_instances_count
     assign :stories, stories
   end
 
