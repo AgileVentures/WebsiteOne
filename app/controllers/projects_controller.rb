@@ -17,8 +17,9 @@ class ProjectsController < ApplicationController
   def show
     documents
     @members = @project.members
-    @event_instances = EventInstance.where(project_id: @project.id)
-      .order(:created_at)
+    relation = EventInstance.where(project_id: @project.id)
+    @event_instances_count = relation.count
+    @event_instances = relation.order(created_at: :desc).limit(25)
   end
 
   def new
