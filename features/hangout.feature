@@ -31,7 +31,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
       | Started at         | 10:25:00            |
-    And the time now is "10:29:00 UTC"
+    And the time now is "10:26:00 UTC"
     When I am on the show page for event "Scrum"
     Then I should see Hangouts details section
     And I should see:
@@ -40,7 +40,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Title               |
       | Daily scrum meeting |
       | Updated             |
-      | 4 minutes ago       |
+      | 1 minute ago        |
     And I should see link "http://hangout.test" with "http://hangout.test"
 
   @javascript
@@ -84,7 +84,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   @time-travel-step
   Scenario: Render Join live event link
-    Given the date is "2014/02/03 07:04:00 UTC"
+    Given the date is "2014/02/03 07:01:00 UTC"
     And the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
       | Started at         | 07:00:00            |
