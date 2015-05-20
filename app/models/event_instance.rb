@@ -21,7 +21,7 @@ class EventInstance < ActiveRecord::Base
   end
 
   def live?
-    started? && updated_at > 5.minutes.ago
+    started? && hoa_status != 'finished' && updated_at > 2.minutes.ago
   end
 
   def duration
