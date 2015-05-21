@@ -197,20 +197,20 @@ describe EventInstance, type: :model do
   end
 
   context 'validation: dont update after finished' do
-    it 'should not be valid' do
+    it 'when hoa_status is "finished" should not be updated' do
       hangout.hangout_url = 'test'
       hangout.hoa_status = 'finished'
       hangout.save
       hangout.reload
-      expect(hangout).not_to be_valid
+      expect(hangout.update(hoa_status: 'finished')).to be_falsey
     end
 
-    it 'should be valid if status is not finished' do
+    it 'when hoa_status is not "finished" it is updated' do
       hangout.hangout_url = 'test'
       hangout.hoa_status = 'broadcasting'
       hangout.save
       hangout.reload
-      expect(hangout).to be_valid
+      expect(hangout.update(hoa_status: 'finished')).to be_truthy
     end
   end
 end
