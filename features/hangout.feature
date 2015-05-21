@@ -30,7 +30,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Show hangout details
     Given the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
-      | Started at         | 10:25:00            |
+      | Started at         | 10:25:00 UTC        |
     And the time now is "10:26:00 UTC"
     When I am on the show page for event "Scrum"
     Then I should see Hangouts details section
@@ -87,7 +87,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the date is "2014/02/03 07:01:00 UTC"
     And the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
-      | Started at         | 07:00:00            |
+      | Started at         | 07:00:00 UTC        |
 
     When I am on the show page for event "Scrum"
     Then I should see link "EVENT IS LIVE" with "http://hangout.test"
