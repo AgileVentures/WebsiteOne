@@ -67,3 +67,6 @@ config/environments/*.local.yml
 #
 # Guard config
 Guardfile
+
+.vagrant/
+tags

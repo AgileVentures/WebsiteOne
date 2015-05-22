@@ -15,7 +15,7 @@ $gravatar-size: 35px;
   text-transform: uppercase;
   border-width: 0;
   margin: 0;
-  z-index: 0;
+  z-index: 999;
   position: relative;
 
   #next-event {
@@ -55,7 +55,6 @@ $gravatar-size: 35px;
   &.affix {
     position: fixed;
     top: 0;
-    z-index: 1000;
 
     #affix-nav-brand img {
       @include css-transform(scale(1));
