@@ -27,6 +27,7 @@ Feature: Setting up basic page layout for site
     When I dropdown the "Events" menu
     Then I should see a link "Upcoming events" to "/events"
     And I should see a link "Past scrums" to "/scrums"
+    And I should see a link "Past events" to "/hangouts"
 
   Scenario: Render footer
     And I should see "AgileVentures" in footer
@@ -35,7 +36,6 @@ Feature: Setting up basic page layout for site
     And I should see "Social" in footer
     And I should see "Our Sponsors" in footer
     And I should see "Contact us" in footer
-
 
   @poltergeist @desktop
   Scenario: Show Sponsors on desktop computer

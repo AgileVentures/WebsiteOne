@@ -1,0 +1,20 @@
+<div id="require_users_profile" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <% present current_user do |presenter| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Incomplete Profile</h4>
+        </div>
+        <div class="modal-body">
+          <p class="well well-lg">Welcome <strong><%= presenter.display_name %></strong>, We've noticed that your profile is incomplete. How about adding <strong><%= presenter.blank_fields %></strong> so other members can get to know you better?</p>
+
+        </div>
+        <div class="modal-footer" class="form-inline">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Continue using the site</button>
+          <%= link_to 'Take me to my profile page', edit_user_registration_url, class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

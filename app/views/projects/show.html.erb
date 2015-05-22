@@ -23,8 +23,8 @@
 20150308085307
       <div class="project-edit">
         <% if user_signed_in? %>
+            <ul class="list-inline">
             <% if current_user.following?(@project) %>
-                <ul class="list-inline">
                   <li class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
                       Project Actions
@@ -42,10 +42,34 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="hangout-btn">
-                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %>                  </li>
+                <li class="hangout-btn">
+                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %></li>
                 </ul>
                 <hr>
+            <% else %>
+                <div>
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                    Start Live Hangout
+                  </button>
+                </div>
+                <hr>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Info</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>You should join this project before you can start the hangouts</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             <% end %>
         <% end %>
       </div>
@@ -70,7 +94,7 @@
           <a href="#documents_list" data-toggle="tab" data-hash="document">Documents (<%= @documents.roots.count %>)</a>
         </li>
         <li id="videos">
-          <a href="#videos_list" data-toggle="tab" data-hash="video">Videos (<%= @videos.count %>)</a>
+          <a href="#videos_list" data-toggle="tab" data-hash="video">Videos (<%= @event_instances_count %>)</a>
         </li>
         <li id="activities">
           <a href="#activities_list" data-toggle="tab" data-hash="activity">Activity (<%= @stories.count %>)</a>

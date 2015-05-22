@@ -10,6 +10,8 @@ def path_to(page_name, id = '')
       root_path
     when 'registration' then
       new_user_registration_path
+    when 'edit registration' then
+      edit_user_registration_path
     when 'sign in' then
       new_user_session_path
     when 'projects' then
@@ -304,6 +306,10 @@ Then /^I should see a "([^"]*)" table with:$/ do |name, table|
   table.rows.flatten.each do |heading|
     expect(page).to have_css('table th', :text => heading)
   end
+end
+
+Then(/^I should see (\d+) rows with text "(.*?)" in a table$/) do |count, text|
+  expect(page).to have_css('table tr', text: text, count: count)
 end
 
 Then(/^I check "([^"]*)"$/) do |item|
