@@ -2,9 +2,12 @@
 
   <div class="row"> 
     <% if project.image_url.present? %>
-      <div class="col-xs-12"><%= image_tag project.image_url, class: 'img-responsive' %>
+      <div class="col-xs-12">
+        <%= image_tag project.image_url, class: 'img-responsive' %>
       </div>
-      <% end %>
+    <% end %>
+  </div>
+  <div class="row"> 
     <div class="col-xs-9">
           
       <h3><%= link_to project.title, project_path(project) %></h3>
