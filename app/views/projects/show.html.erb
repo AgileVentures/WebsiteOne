@@ -6,8 +6,8 @@
       <strong><%= @project.title %></strong>
 
       <div class="row"> 
-        <% if @project.image_url %>
-          <div class="col-xs-2">
+        <% if @project.image_url.present? %>
+          <div class="col-xs-12">
             <%= image_tag @project.image_url, class: "img-responsive" %>
           </div>
         <% end %>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <hr>
-
+20150308085307
       <div class="project-edit">
         <% if user_signed_in? %>
             <% if current_user.following?(@project) %>
