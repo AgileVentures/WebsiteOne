@@ -34,3 +34,5 @@ twitter:
   access_token: <%= ENV["TWITTER_ACCESS_TOKEN"] %>
   access_token_secret: <%= ENV["TWITTER_TOKEN_SECRET"] %>
 
+github:
+  auth_token: <%= ENV["GITHUB_AUTH_TOKEN"]

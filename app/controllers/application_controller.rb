@@ -1,6 +1,7 @@
 require 'custom_errors.rb'
 
 class ApplicationController < ActionController::Base
+  @@message_status = false
   include YoutubeHelper
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -10,6 +11,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_filter :user_activity
+  before_action :display_promo_flash
 
   include ApplicationHelper
   include CustomErrors
@@ -66,6 +68,21 @@ class ApplicationController < ActionController::Base
 
   def user_activity
     current_user.try :touch
+  end
+
+  def display_promo_flash
+    message = "<h4>Support our fundraising campaign on Pledgie.org</h4><p>If you make a <a href='http://pledgie.com/campaigns/28766'>donation</a> - great! " +
+        "If not - do share this link with your network <a href='http://pledgie.com/campaigns/28766'>pledgie.com/campaigns/28766</a>  </p>"
+    flash.now[:info] = message.html_safe unless @@message_status
+    @@message_status = true
+  end
+
+
+  def message_status
+    session[:message_status] = params[:status] if params[:status]
+    puts params[:status].red if params[:status]
+    return true
+
   end
 
 end
