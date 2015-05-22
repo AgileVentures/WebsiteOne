@@ -1,8 +1,8 @@
 <section class="doc-preview">
 
   <div class="row"> 
-    <% if project.image_url %>
-      <div class="col-xs-3"><%= image_tag project.image_url, class: 'img-responsive' %>
+    <% if project.image_url.present? %>
+      <div class="col-xs-12"><%= image_tag project.image_url, class: 'img-responsive' %>
       </div>
       <% end %>
     <div class="col-xs-9">
