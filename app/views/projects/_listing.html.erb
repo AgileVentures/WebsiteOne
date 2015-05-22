@@ -7,10 +7,13 @@
       </div>
     <% end %>
   </div>
+  <div class="row">
+      <div class="col-xs-12">  
+        <h3><%= link_to project.title, project_path(project) %></h3>
+      </div>
+  </div>
   <div class="row"> 
-    <div class="col-xs-9">
-          
-      <h3><%= link_to project.title, project_path(project) %></h3>
+    <div class="col-xs-9">     
       <div class="stats">
         <ul>
           <% follower_count = project.followers.count %>
