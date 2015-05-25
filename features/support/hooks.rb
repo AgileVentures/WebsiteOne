@@ -84,5 +84,5 @@ Before('@smartphone') {page.driver.resize(640, 640)}
 After('@desktop', '@tablet', '@smartphone') {page.driver.resize(1600, 1200)}
 
 After('@poltergeist', '@desktop', '@tablet', '@smartphone') do
-  Capybara.javascript_driver = :webkit
+  Capybara.javascript_driver = :rack_test
 end
