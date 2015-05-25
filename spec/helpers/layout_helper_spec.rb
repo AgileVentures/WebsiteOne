@@ -42,7 +42,7 @@ describe LayoutHelper, :type => :helper do
       subject(:output) { flash_messages(opts) }
 
       it 'will have flash message' do
-        expect(output).to contain(flash[:notice])
+        expect(output).to include(flash[:notice])
       end
       it 'will have div with id for each flash' do
         expect(output).to have_selector("div#flash_notice")

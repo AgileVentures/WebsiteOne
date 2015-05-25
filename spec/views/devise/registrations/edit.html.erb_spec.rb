@@ -5,10 +5,10 @@ describe 'devise/registrations/edit.html.erb' do
     #stubbing out devise methods
     @user = FactoryGirl.build(:user)
     @user.stub(:all_following).and_return([ stub_model(Project, title: 'Title 1'), stub_model(Project, title: 'Title 2') ])
-    view.stub(:current_user).and_return(@user)
-    view.stub(:resource).and_return(@user)
-    view.stub(:resource_name).and_return('user')
-    view.stub(:devise_mapping).and_return(Devise.mappings[:user])
+    allow(view).to receive(:current_user).and_return(@user)
+    allow(view).to receive(:resource).and_return(@user)
+    allow(view).to receive(:resource_name).and_return(:user)
+    allow(view).to receive(:devise_mapping).and_return(Devise.mappings[:user])
   end
 
   it 'shows required labels' do
