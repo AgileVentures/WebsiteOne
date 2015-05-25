@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
+ruby '2.2.2'
 gem 'rails', '4.1.6'
 # Added after upgrade to rails 4.1
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.1'
@@ -50,7 +50,6 @@ gem 'compass-rails'
 gem 'rack-cache'
 #gem 'sprockets-image_compressor', '~> 0.2.4'
 #gem 'sprockets-webp'
-gem 'rack-timeout'
 gem 'eventmachine', '~> 1.0.7'
 
 gem 'local_time'
@@ -97,6 +96,10 @@ group :development, :test do
   gem 'guard-cucumber' #plugins for Guard
   gem 'guard-livereload' #plugins for Guard
   gem 'bullet'
+end
+
+group :development, :staging, :production do
+  gem 'rack-timeout'
 end
 
 group :production do
