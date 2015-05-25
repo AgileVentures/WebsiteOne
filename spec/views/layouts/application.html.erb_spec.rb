@@ -53,6 +53,11 @@ describe 'layouts/application.html.erb' do
     rendered.should have_selector('div.navbar')
   end
 
+  it 'should render a search toggle' do
+    render
+    expect(rendered).to have_selector('a#google_search')
+  end
+
   it 'should render links to site features' do
     render
     #TODO Y replace href with project_path helper
@@ -141,4 +146,3 @@ describe 'layouts/application.html.erb' do
     end
   end
 end
-

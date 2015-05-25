@@ -1,0 +1,6 @@
+$('#hg-container').append('<%= j render "hangouts" %>');
+<% if @event_instances.total_pages == @event_instances.current_page %>
+  $('.pagination').replaceWith('<br />No more hangouts');
+<% else %>
+  $('.pagination').replaceWith('<%= j (will_paginate @event_instances, page_links: false)  %>');
+<% end %>

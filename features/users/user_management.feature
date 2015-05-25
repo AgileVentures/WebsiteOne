@@ -39,15 +39,6 @@ Feature: Create and maintain projects
     When I click the "Update" button
     Then I should see "Email can't be blank"
 
-  #   @javascript @webkit
-  #   Scenario: Cancel my account
-  #     Given I am on my "Edit Profile" page
-  #     When I click "Cancel my account"
-  #     And I accept the warning popup
-  #     Then I should be on the "home" page
-  #     And I should see "Your account was successfully cancelled."
-  #     And my account should be deleted
-
   @omniauth
   Scenario: Link my GitHub profile link to my profile
     Given I have a GitHub profile with username "tochman"

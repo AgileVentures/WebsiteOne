@@ -1,4 +1,5 @@
 module DocumentsHelper
+  # Not used anywhere
   def clean_html_summary(html)
     sanitize(html.gsub(/<[^>]*>/, ' '), tags: [], attributes: []).truncate(250, separator: ' ')
   end
@@ -15,6 +16,7 @@ module DocumentsHelper
     end
   end
 
+  # Not used
   def created_date
     "Created #{time_ago_in_words(@document.created_at)} ago"
   end

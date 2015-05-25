@@ -46,19 +46,20 @@ describe 'documents/show', type: :view do
 
       it 'should render an Edit link' do
         rendered.within('#edit_link') do |link|
-          expect(link).to have_css('i[class="fa fa-pencil-square-o"]')
+          expect(link).to have_css('i.fa-pencil-square-o')
         end
       end
 
       it 'should render a New Sub-document link' do
         rendered.within('#new_document_link') do |link|
-          expect(link).to have_css('i[class="fa fa-file-text-o"]')
+          expect(link).to have_css('i.fa-file-text-o')
         end
       end
 
       it 'renders a Change section link' do
         rendered.within("#change_parent_link") do |link|
-          expect(link).to have_css('i[class="fa fa-cogs"]')
+
+          expect(link).to have_css('i.fa-cogs')
         end
       end
 

@@ -59,7 +59,7 @@
             <li><%= link_to 'Members', users_path, class: active_if_controller_is('users') %></li>
             <li><%= link_to 'Articles', articles_path, class: active_if_controller_is('articles') %></li>
             <li class="dropdown">
-              <a href="#" id="events-dropdown" data-toggle="dropdown">Events<span class="caret"></span></a>
+              <a href="#" id="events-dropdown" data-toggle="dropdown">Events <span class="caret"></span></a>
               <ul class="dropdown-menu custom_menu">
                 <a class="custom_menu_link" href="<%= events_path %>">
                   <li><i class="fa fa-calendar-o custom_menu_item"></i>Upcoming events</li>
@@ -67,9 +67,33 @@
                 <a class="custom_menu_link" href="<%= scrums_path %>">
                   <li><i class="fa fa-play custom_menu_item"></i>Past scrums</li>
                 </a>
+                <a class="custom_menu_link" href="<%= hangouts_path %>">
+                  <li><i class="fa fa-bookmark-o custom_menu_item"></i>Past events</li>
+                </a>
               </ul>
             </li>
             <li><%= link_to 'Getting started', static_page_path('Getting started'), class: "#{is_in_static_page?('Getting started') ? 'active' : ''}" %></li>
+
+            <li class="dropdown" id="google-search-dropdown">
+              <a href="#" id="google_search" data-toggle="dropdown"><i class="fa fa-search"></i></a>
+              <ul class="dropdown-menu" id="google-search-wrapper">
+                <% if Rails.env != 'test' %>
+                  <script>
+                    (function() {
+                      var cx = '013004698248256241028:fzuo22ktbbo';
+                      var gcse = document.createElement('script');
+                      gcse.type = 'text/javascript';
+                      gcse.async = true;
+                      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                          '//www.google.com/cse/cse.js?cx=' + cx;
+                      var s = document.getElementsByTagName('script')[0];
+                      s.parentNode.insertBefore(gcse, s);
+                    })();
+                  </script>
+                <% end %>
+                <gcse:search></gcse:search>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

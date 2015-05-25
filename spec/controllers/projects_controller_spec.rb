@@ -21,13 +21,6 @@ describe ProjectsController, :type => :controller do
 
   let(:user) { @user }
 
-  #describe "pagination" do
-  #  it "should paginate the feed" do
-  #    visit root_path
-  #    page.should have_selector("div.pagination")
-  #  end
-  #end
-
   describe '#index' do
     before(:each) do
       @project = mock_model(Project, title: 'Carrier has arrived.', commit_count: 100)
@@ -64,7 +57,12 @@ describe ProjectsController, :type => :controller do
       @project.stub_chain(:user, :display_name).and_return "Happy User"
       @users = [ build_stubbed(User, slug: 'my-friendly-id', display_profile: true) ]
       expect(@project).to receive(:members).and_return @users
-      expect(YoutubeVideos).to receive(:for).with(@project).and_return('videos')
+      event_instances = double('event_instances')
+      ordered_event_instances = double('ordered_event_instances')
+      expect(EventInstance).to receive(:where).with(project_id: @project.id).and_return(event_instances)
+      expect(event_instances).to receive(:order).with(created_at: :desc).and_return(ordered_event_instances)
+      expect(event_instances).to receive(:count).and_return('count')
+      expect(ordered_event_instances).to receive(:limit).with(25).and_return('videos')
       allow(PivotalService).to receive(:one_project).and_return('')
       dummy = Object.new
       dummy.stub(stories: "stories")
@@ -86,9 +84,14 @@ describe ProjectsController, :type => :controller do
       expect(assigns(:members)).to eq @users
     end
 
-    it 'assigns the list of related YouTube videos in alphabetical order' do
+    it 'assigns the list of related YouTube videos in created_at descending order' do
       get :show, { id: @project.friendly_id }, valid_session
-      expect(assigns(:videos)).to eq 'videos'
+      expect(assigns(:event_instances)).to eq 'videos'
+    end
+
+    it 'assigns the count of related YouTube videos' do
+      get :show, { id: @project.friendly_id }, valid_session
+      expect(assigns(:event_instances_count)).to eq 'count'
     end
 
     it 'assigns the list of related PivtalTracker stories' do

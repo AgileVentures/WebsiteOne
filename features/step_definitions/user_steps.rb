@@ -433,6 +433,11 @@ When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_na
   when 'online status'
     'online'
   end
-  
+
   page.select(selected_from_list, from: filter)
+end
+
+Given(/^I have an incoplete profile$/) do
+  @user.bio = ''
+  @user.save
 end

@@ -111,15 +111,11 @@
   }
 }
 
-.popover-content {
-  font-size: small;
-}
-
 .live-hangouts {
   $hg-color: lighten($theme-main, 35);
   $hg-border: 1px solid gray;
 
-  font-size: smaller;
+  font-size: small;
 
   .fa {
     height: auto;
@@ -161,18 +157,6 @@
   .hg-toggles {
     @extend .pull-left;
     margin-bottom: 10px;
-  }
-
-  .btn-hg-toggle {
-    @include hg-btn(green);
-    height: 25px;
-    margin-left: 10px;
-  }
-
-  .btn-hg-live {
-    @include hg-btn($theme-main);
-    height: 25px;
-    margin-left: 5px;
   }
 
   .btn-hg-join {
