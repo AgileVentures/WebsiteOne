@@ -83,6 +83,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails' #unit testing
   gem 'rspec-html-matchers'
+  gem 'simplecov'
   gem 'awesome_print' # plays well with pry
   gem 'pry-byebug' # a version of pry and debugger compatible with Ruby >2.0.0
   gem 'hirb' # formats ActiveRecord objects into table format in the console
