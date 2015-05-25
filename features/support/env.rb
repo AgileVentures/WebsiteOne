@@ -26,7 +26,7 @@ OmniAuth.config.logger.level = Logger::WARN
 # selectors in your step definitions to use the XPath syntax.
 # Capybara.default_selector = :xpath
 
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5
 
 options = {
