@@ -1,11 +1,12 @@
 <% provide :title, 'Hangouts' %>
 <section class="live-hangouts">
-  <div class='container-fluid'>
+  <div class='col-lg-12'>
     <div class='row hg-toggles'>
-        <button id="btn-hg-toggle" type="button" class="btn-hg-toggle">toggle summary</button>
-        <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn-hg-live' %>
+        <button id="btn-hg-toggle" type="button" class="btn btn-default">toggle summary</button>
+        <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn btn-default' %>
     </div>
   </div>
+  <div class="clearfix"></div>
   <div class="panel-group" id="accordion">
     <div class="panel panel-info hidden-xs">
       <div class="panel-heading hg-headings">
@@ -23,6 +24,7 @@
       <div id='hg-container'>
         <%= render 'hangouts' %>
       </div>
+      <%= will_paginate @event_instances, page_links: false %>
     <% end %>
   </div>
 </section>

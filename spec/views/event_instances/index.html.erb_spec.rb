@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe 'event_instances/index', type: :view do
 
-  let(:hangout){ FactoryGirl.build_stubbed(:event_instance,
-                                           created: '2014/05/12 11:15',
-                                           updated: '2014/05/12 11:35') }
-
   before do
-    @event_instances = [ hangout, hangout ]
+    2.times { FactoryGirl.create(:event_instance,
+                                 created: '2014/05/12 11:15',
+                                 updated: '2014/05/12 11:35') }
+    @event_instances = EventInstance.all.paginate(page: nil)
   end
 
   it 'renders toggle buttons' do
@@ -27,6 +26,7 @@ describe 'event_instances/index', type: :view do
 
   it 'renders hangouts basic info' do
     render
+    hangout = @event_instances.first
     expect(rendered).to have_css('i.fa-caret-right')
     expect(rendered).to have_text('11:15 12/05')
     expect(rendered).to have_text(hangout.title)
@@ -42,7 +42,7 @@ describe 'event_instances/index', type: :view do
   end
 
   it_behaves_like 'it has clickable user avatar with popover' do
-    let(:user){ hangout.presenter.host }
+    let(:user){ @event_instances.first.presenter.host }
     let(:placement){ 'top' }
   end
 
@@ -56,6 +56,7 @@ describe 'event_instances/index', type: :view do
 
   it 'renders hangout extra info' do
     render
+    hangout = @event_instances.first
     expect(rendered).to have_link(hangout.event.name, event_path(hangout.event))
     expect(rendered).to have_text(hangout.category)
     expect(rendered).to have_text('20 min')
@@ -63,17 +64,17 @@ describe 'event_instances/index', type: :view do
 
   describe 'renders participants avatars' do
     before do
-      FactoryGirl.create(:user, gplus: hangout.participants.first.last[:person][:id])
+      FactoryGirl.create(:user, gplus: @event_instances.first.participants.first.last[:person][:id])
       FactoryGirl.create(:user)
     end
 
     it_behaves_like 'it has clickable user avatar with popover' do
-      let(:user){ hangout.presenter.participants.first }
+      let(:user){ @event_instances.first.presenter.participants.first }
       let(:placement){ 'bottom' }
     end
 
     it_behaves_like 'it has clickable user avatar with popover' do
-      let(:user){ hangout.presenter.participants.last }
+      let(:user){ @event_instances.first.presenter.participants.last }
       let(:placement){ 'bottom' }
     end
   end

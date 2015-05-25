@@ -1,5 +1,5 @@
 class Status < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: :status_count
 
 
   OPTIONS = ['Ready to pair',

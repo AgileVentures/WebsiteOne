@@ -2,8 +2,8 @@
 <%= provide :title, 'Dashboard' %>
 <div id="page-box">
   <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-    <li class="active"><a href="#statistics" data-toggle="tab">Site statistics</a></li>
-    <li><a href="#activity-feed" data-toggle="tab">Activity feed</a></li>
+    <li class="active"><a href="#statistics" data-toggle="tab" data-hash="statistics">Site statistics</a></li>
+    <li><a href="#activity-feed" data-toggle="tab" data-hash="activity-feed">Activity feed</a></li>
   </ul>
   <div id="tab-content" class="tab-content" style="background: #fff;">
     <div class="tab-pane active" id="statistics">
@@ -109,7 +109,7 @@
             series: {
                 regions: [{
                     values: usrData,
-                    scale: ['#FFE0B2', '#FF9900'],
+                    scale: ['#f38c54', '#ec6909'],
                     normalizeFunction: 'polynomial'
                 }]
             },

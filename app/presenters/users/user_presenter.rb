@@ -31,11 +31,11 @@ class UserPresenter < BasePresenter
   alias :country? :country
 
   def title_list
-    content_tag(:span, user.title_list.join(', '), class: 'member-title')
+    content_tag(:span, user.titles.map(&:name).join(', '), class: 'member-title')
   end
 
   def has_title?
-    user.title_list.count > 0
+    user.titles.size > 0
   end
 
   def timezone
@@ -78,11 +78,16 @@ class UserPresenter < BasePresenter
   end
 
   def status?
-    user.status.count > 0
+    user.status.size > 0
   end
-  
+
   def can_create_newsletter?
     user.is_privileged?
   end
 
+  def blank_fields
+    %w{first_name last_name skills bio}
+      .select { |field| user.send(field).blank? }
+      .map(&:humanize).to_sentence
+  end
 end

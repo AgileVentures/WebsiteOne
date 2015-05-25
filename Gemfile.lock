@@ -517,7 +517,7 @@ DEPENDENCIES
   coffee-rails
   colored
   compass-rails
-  coveralls
+  coveralls (~> 0.7.9)
   cucumber-rails
   database_cleaner
   delorean

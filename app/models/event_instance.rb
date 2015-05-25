@@ -1,4 +1,5 @@
 class EventInstance < ActiveRecord::Base
+  self.per_page = 30
 
   belongs_to :event
   belongs_to :user
@@ -52,9 +53,9 @@ class EventInstance < ActiveRecord::Base
     unless valid_recording(self.yt_video_id) == 'Video not found'
       case self.category
         when 'Scrum'
-          TwitterService.tweet("#{broadcaster} just hosted an online #scrum using #googlehangouts Missed it? Catch the recording at youtu.be/#{self.yt_video_id} #opensource")
+          TwitterService.tweet("#{broadcaster.split[0]} just hosted an online #scrum using #googlehangouts Missed it? Catch the recording at youtu.be/#{self.yt_video_id} #CodeForGood #opensource")
         when 'PairProgramming'
-          TwitterService.tweet("#{broadcaster} just finished #PairProgramming on #{self.project.title} You can catch the recording at youtu.be/#{self.yt_video_id} #opensource #pairwithme")
+          TwitterService.tweet("#{broadcaster.split[0]} just finished #PairProgramming on #{self.project.title} You can catch the recording at youtu.be/#{self.yt_video_id} #CodeForGood #pairwithme")
       end
     end
   end
@@ -62,9 +63,13 @@ class EventInstance < ActiveRecord::Base
   def broadcaster
     self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' }
   end
-  
+
   def valid_recording(code)
-    uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
-    Net::HTTP.get(uri)
+    unless code == ''
+      uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
+      Net::HTTP.get(uri)
+    else
+      'Video not found'
+    end
   end
 end

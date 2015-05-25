@@ -6,10 +6,11 @@ WebsiteOne
 [code-climate]: https://codeclimate.com/github/AgileVentures/WebsiteOne
 [support]: http://www.agileventures.org/
 [about-us]: http://www.agileventures.org/about-us
-[members]: http://www.agileventures.org/users/index
+[members]: http://www.agileventures.org/users
 
 
 #### A website for [Agile Ventures][application] - a platform for online collaboration and crowdsourced project development.
+<a href='https://pledgie.com/campaigns/28766'><img alt='Click here to lend your support to: Help us #CodeForGood and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/28766.png?skin_name=chrome' border='0' ></a>
 <!--[![AgileVentures WebsiteOne](http://img.youtube.com/vi/kjDehcx6Igk/0.jpg)](http://www.youtube.com/watch?v=kjDehcx6Igk)-->
 
 
@@ -23,7 +24,7 @@ The principal organization behind this project is AGILEVENTURES NONPROFIT LTD., 
  Service                 |  Status      |
 |------------------------ | ----------------- |
 | *Test coverage*         |                  |
-| Coveralls                |  [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.png)](https://coveralls.io/r/AgileVentures/WebsiteOne)    |
+| Coveralls                |  [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.svg?branch=develop)](https://coveralls.io/r/AgileVentures/WebsiteOne?branch=develop)   |
 | *Continuous integration* |    |
 | Semaphore CI (master)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/318335/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
 | Semaphore CI (staging)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/317640/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
