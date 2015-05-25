@@ -50,6 +50,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.include Devise::TestHelpers, :type => :helper
   config.include Devise::TestHelpers, :type => :view
+  config.include RSpecHtmlMatchers
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
@@ -83,4 +84,6 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   #config.order = "random"
+
+  config.infer_spec_type_from_file_location!
 end

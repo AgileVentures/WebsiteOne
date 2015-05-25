@@ -32,7 +32,7 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
                       <li role="presentation">
                         <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
-                      <li role="presentation"><%= link_to 'Edit Project Pitch', '/editor'+ request.path, role: 'menuitem', id: 'edit_link', data: {save_url: mercury_update_project_path(@project.id)} %></li>
+                      <li role="presentation"><%= link_to 'Edit Project Pitch', '/editor/' + request.path, role: 'menuitem', id: 'edit_link', data: {save_url: mercury_update_project_path(@project.id)} %></li>
                       <li role="presentation">
                         <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
                       <li role="presentation" class="divider"></li>

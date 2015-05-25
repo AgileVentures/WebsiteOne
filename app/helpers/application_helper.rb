@@ -62,10 +62,10 @@ module ApplicationHelper
         'gplus' => 'google-plus'
     }
 
-    options[:url] ||= root_path
+    options[:url] = root_path unless options[:url].present?
     text = options[:text] || (options[:delete] ? 'Remove' : '')
     path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
-        "/auth/#{provider}#{"?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}" if options[:url].present?}"
+        "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}"
 
     raw <<-HTML
     <div data-no-turbolink>

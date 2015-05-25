@@ -40,9 +40,9 @@ Then /^I should( not)? see button "([^"]*)" in Mercury Editor$/ do |negative, bu
   button = 'new_document_link' if button == 'New document'
   page.driver.within_frame('mercury_iframe') {
     unless negative
-      expect(has_link? button).to be_true
+      expect(has_link? button).to be_truthy
     else
-      expect(has_link? button).to be_false
+      expect(has_link? button).to be_falsey
     end
   }
 end

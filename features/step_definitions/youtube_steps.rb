@@ -10,9 +10,9 @@ Then /I should( not)? see a list of my videos/ do |negative|
   correct_number = [ EventInstance.where(user: @current_user).count, 5 ].min
   video_links = page.all(:css, '.yt_link')
   if negative
-    expect(video_links).to have(0).items
+    expect(video_links.size).to eq(0)
   else
-    expect(video_links).to have(correct_number).items
+    expect(video_links.size).to eq(correct_number)
   end
 end
 
