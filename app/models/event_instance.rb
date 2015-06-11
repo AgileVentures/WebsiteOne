@@ -16,12 +16,14 @@ class EventInstance < ActiveRecord::Base
   after_save "tweet_hangout_notification if (started? && hangout_url_changed?)"
   after_save "tweet_yt_link if yt_video_id_changed?"
 
+  validate :dont_update_after_finished, on: :update
+
   def started?
     hangout_url?
   end
 
   def live?
-    started? && updated_at > 5.minutes.ago
+    started? && hoa_status != 'finished' && updated_at > 2.minutes.ago
   end
 
   def duration
@@ -70,6 +72,12 @@ class EventInstance < ActiveRecord::Base
       Net::HTTP.get(uri)
     else
       'Video not found'
+    end
+  end
+
+  def dont_update_after_finished
+    if hoa_status_was == 'finished'
+      self.errors.add :base, "Can't update a finished event"
     end
   end
 end
