@@ -1,13 +1,19 @@
 <section class="doc-preview">
 
   <div class="row"> 
-    <% if project.image_url %>
-      <div class="col-xs-3"><%= image_tag project.image_url, class: 'img-responsive' %>
+    <% if project.image_url.present? %>
+      <div class="col-xs-12">
+        <%= image_tag project.image_url, class: 'img-responsive' %>
       </div>
-      <% end %>
-    <div class="col-xs-9">
-          
-      <h3><%= link_to project.title, project_path(project) %></h3>
+    <% end %>
+  </div>
+  <div class="row">
+      <div class="col-xs-12">  
+        <h3><%= link_to project.title, project_path(project) %></h3>
+      </div>
+  </div>
+  <div class="row"> 
+    <div class="col-xs-9">     
       <div class="stats">
         <ul>
           <% follower_count = project.followers.count %>

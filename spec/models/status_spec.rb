@@ -4,7 +4,7 @@ describe Status do
   let(:user) { FactoryGirl.create(:user) }
   subject { FactoryGirl.create(:status, user: user) }
 
-  it { is_expected.to belong_to(:user)}
+  it { is_expected.to belong_to(:user).counter_cache(:status_count)}
   it { is_expected.to validate_presence_of :status}
   it { is_expected.to validate_presence_of :user_id}
 

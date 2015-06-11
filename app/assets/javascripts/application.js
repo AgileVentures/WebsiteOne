@@ -12,8 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require jquery.turbolinks
 //= require bootstrap
 //= require nprogressbar
 //= require bootstrap-datepicker
@@ -21,7 +19,6 @@
 //= require typeahead
 //= require bootstrap-tokenfield.min
 //= require bootstrap-tags
-//= require bootstrap/modal
 //= require_self
 //= require_directory ./global-modules
 //= require_tree .

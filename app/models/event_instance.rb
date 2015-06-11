@@ -1,4 +1,5 @@
 class EventInstance < ActiveRecord::Base
+  self.per_page = 30
 
   belongs_to :event
   belongs_to :user

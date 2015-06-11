@@ -34,8 +34,8 @@ describe 'layouts/application.html.erb' do
 
   it 'should include css & js files' do
     render
-    rendered.should have_xpath("//link[contains(@href, '.css')]")
-    rendered.should have_xpath("//script[contains(@src, '.js')]")
+    rendered.should have_tag('link', href: /\.css/)
+    rendered.should have_tag('script', href: /\.js/)
   end
 
   it 'should not have div nested inside p' do
@@ -51,6 +51,11 @@ describe 'layouts/application.html.erb' do
   it 'should render a navbar' do
     render
     rendered.should have_selector('div.navbar')
+  end
+
+  it 'should render a search toggle' do
+    render
+    expect(rendered).to have_selector('a#google_search')
   end
 
   it 'should render links to site features' do
@@ -141,4 +146,3 @@ describe 'layouts/application.html.erb' do
     end
   end
 end
-
