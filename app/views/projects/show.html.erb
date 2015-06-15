@@ -6,8 +6,8 @@
       <strong><%= @project.title %></strong>
 
       <div class="row"> 
-        <% if @project.image_url %>
-          <div class="col-xs-2">
+        <% if @project.image_url.present? %>
+          <div class="col-xs-12">
             <%= image_tag @project.image_url, class: "img-responsive" %>
           </div>
         <% end %>
@@ -20,7 +20,6 @@
         </div>
       </div>
       <hr>
-
       <div class="project-edit">
         <% if user_signed_in? %>
             <ul class="list-inline">
@@ -33,7 +32,7 @@
                     <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
                       <li role="presentation">
                         <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
-                      <li role="presentation"><%= link_to 'Edit Project Pitch', '/editor'+ request.path, role: 'menuitem', id: 'edit_link', data: {save_url: mercury_update_project_path(@project.id)} %></li>
+                      <li role="presentation"><%= link_to 'Edit Project Pitch', '/editor/' + request.path, role: 'menuitem', id: 'edit_link', data: {save_url: mercury_update_project_path(@project.id)} %></li>
                       <li role="presentation">
                         <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
                       <li role="presentation" class="divider"></li>
@@ -42,11 +41,35 @@
                       </li>
                     </ul>
                   </li>
-            <% end %>
                 <li class="hangout-btn">
-                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}", following_project: current_user.following?(@project) } %></li>
+                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %></li>
                 </ul>
                 <hr>
+            <% else %>
+                <div>
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                    Start Live Hangout
+                  </button>
+                </div>
+                <hr>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Info</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>You should join this project before you can start the hangouts</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
         <% end %>
       </div>
     </div>
@@ -70,7 +93,7 @@
           <a href="#documents_list" data-toggle="tab" data-hash="document">Documents (<%= @documents.roots.count %>)</a>
         </li>
         <li id="videos">
-          <a href="#videos_list" data-toggle="tab" data-hash="video">Videos (<%= @videos.count %>)</a>
+          <a href="#videos_list" data-toggle="tab" data-hash="video">Videos (<%= @event_instances_count %>)</a>
         </li>
         <li id="activities">
           <a href="#activities_list" data-toggle="tab" data-hash="activity">Activity (<%= @stories.count %>)</a>
@@ -103,4 +126,3 @@
     </div>
   </div>
 </div>
-

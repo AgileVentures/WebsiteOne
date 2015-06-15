@@ -7,7 +7,7 @@ FactoryGirl.define do
   end
 
   factory :event_instance do
-    ignore do
+    transient do
       created Time.now
       updated Time.now
     end
@@ -16,7 +16,7 @@ FactoryGirl.define do
     sequence(:title) { |n| "Hangout_#{n}"}
     sequence(:category) { |n| "Category_#{n}"}
     hangout_url "http://hangout.test"
-    yt_video_id "yt_video_id"
+    sequence(:yt_video_id) { |n| "yt_video_id_#{n}"}
 
     project
     event

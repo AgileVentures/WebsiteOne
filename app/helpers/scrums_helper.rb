@@ -5,7 +5,7 @@ module ScrumsHelper
       video[:url], {
         id: video[:id],
         class: 'scrum_yt_link',
-        data: { content: video[:content], toggle: 'modal', target: '#player' }
+        data: { content: video[:content], toggle: 'modal', target: '#scrumVideo' }
       }
     )
   end
