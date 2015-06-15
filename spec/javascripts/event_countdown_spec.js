@@ -42,9 +42,9 @@ describe('Event Countdown', function () {
                 this.data.calls.reset();
                 WebsiteOne.EventCountdown.init();
 
-                expect(this.data).toHaveBeenCalledWith(jasmine.any(Object), "event-time");
-                expect(this.data).toHaveBeenCalledWith(jasmine.any(Object), "event-url");
-                expect(this.data).toHaveBeenCalledWith(jasmine.any(Object), "event-name");
+                expect(this.data).toHaveBeenCalledWith(this.countdownClock[0], "event-time");
+                expect(this.data).toHaveBeenCalledWith(this.countdownClock[0], "event-url");
+                expect(this.data).toHaveBeenCalledWith(this.countdownClock[0], "event-name");
             });
 
             it('calls update', function () {

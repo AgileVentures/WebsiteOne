@@ -1,40 +1,15 @@
-<% if following_project %>
-  <% start_data = JSON.generate({
-    'title' => title,
-    'category' => category,
-    'projectId' => project_id.to_s,
-    'eventId' => event_id.to_s,
-    'hostId' => current_user.id,
-    'hangoutId' => event_instance_id.present? ? event_instance_id : generate_event_instance_id(current_user, project_id),
-    'callbackUrl' => hangout_url('id').gsub(/id$/, '')
-  }) %>
+<% start_data = JSON.generate({
+  'title' => title,
+  'category' => category,
+  'projectId' => project_id.to_s,
+  'eventId' => event_id.to_s,
+  'hostId' => current_user.id,
+  'hangoutId' => event_instance_id.present? ? event_instance_id : generate_event_instance_id(current_user, project_id),
+  'callbackUrl' => hangout_url('id').sub(/id$/, '').sub(/^#{request.scheme}:/, '')
+}) %>
 
-  <div id="liveHOA-placeholder"
-    data-start-data='<%= start_data %>'
-    data-app-id='<%= Settings.hangouts.app_id %>'>
-    Please refresh the page to load the hangouts
-  </div>
-<% else %>
-    <div id="liveHOA-placeholder">
-    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
-      <span>Start Live Hangout</span>
-    </button>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Info</h4>
-        </div>
-        <div class="modal-body">
-          <p>You should join this project before you can start the hangouts</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
+<div id="liveHOA-placeholder"
+  data-start-data='<%= start_data %>'
+  data-app-id='<%= Settings.hangouts.app_id %>'>
+  Please refresh the page to load the hangouts
+</div>

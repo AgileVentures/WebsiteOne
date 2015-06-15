@@ -184,35 +184,35 @@ end
 
 Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
   if negative
-    expect(page.has_link? link).to be_false
+    expect(page.has_link? link).to be_falsey
   else
-    expect(page.has_link? link).to be_true
+    expect(page.has_link? link).to be_truthy
   end
 end
 
 Then /^I should( not)? see field "([^"]*)"$/ do |negative, field|
   if negative
-    expect(page.has_field? field).to be_false
+    expect(page.has_field? field).to be_falsey
   else
-    expect(page.has_field? field).to be_true
+    expect(page.has_field? field).to be_truthy
   end
 end
 
 Then /^I should( not)? see buttons:$/ do |negative, table|
   table.rows.flatten.each do |button|
     unless negative
-      expect(page.has_link_or_button? button).to be_true
+      expect(page.has_link_or_button? button).to be_truthy
     else
-      expect(page.has_link_or_button? button).to be_false
+      expect(page.has_link_or_button? button).to be_falsey
     end
   end
 end
 
 Then /^I should( not)? see button "([^"]*)"$/ do |negative, button|
   unless negative
-    expect(page.has_link_or_button? button).to be_true
+    expect(page.has_link_or_button? button).to be_truthy
   else
-    expect(page.has_link_or_button? button).to be_false
+    expect(page.has_link_or_button? button).to be_falsey
   end
 end
 
@@ -306,6 +306,10 @@ Then /^I should see a "([^"]*)" table with:$/ do |name, table|
   table.rows.flatten.each do |heading|
     expect(page).to have_css('table th', :text => heading)
   end
+end
+
+Then(/^I should see (\d+) rows with text "(.*?)" in a table$/) do |count, text|
+  expect(page).to have_css('table tr', text: text, count: count)
 end
 
 Then(/^I check "([^"]*)"$/) do |item|

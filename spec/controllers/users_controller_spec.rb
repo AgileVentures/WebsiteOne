@@ -36,24 +36,11 @@ describe UsersController, :type => :controller do
 
     context 'with a public profile' do
       before(:each) do
-        @youtube_videos = [
-          {
-            url: "http://www.youtube.com/100",
-            title: "Random",
-            published: '01/01/2015'
-          },
-          {
-            url: "http://www.youtube.com/340",
-            title: "Stuff",
-            published: '01/01/2015'
-          },
-          {
-            url: "http://www.youtube.com/2340",
-            title: "Here's something",
-            published: '01/01/2015'
-          }
-        ]
-        expect(YoutubeVideos).to receive(:for).with(@user).and_return(@youtube_videos)
+        object = double('object')
+        expect(EventInstance).to receive(:where).with(user_id: @user.id).and_return(object)
+        object2 = double('object2')
+        expect(object).to receive(:order).with(created_at: :desc).and_return(object2)
+        expect(object2).to receive(:limit).with(5).and_return('videos')
 
         get 'show', id: @user.friendly_id
       end
@@ -63,7 +50,7 @@ describe UsersController, :type => :controller do
       end
 
       it 'assigns youtube videos' do
-        expect(assigns(:youtube_videos)).to eq(@youtube_videos)
+        expect(assigns(:event_instances)).to eq('videos')
       end
 
       it 'renders the show view' do

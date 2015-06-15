@@ -14,7 +14,7 @@ shared_examples_for 'it has a hangout button' do
       'eventId' => event_id.to_s.squish,
       'hostId' => 'user_1',
       'hangoutId' => '123456',
-      'callbackUrl' => hangout_url('id').gsub(/id$/, '') })
+      'callbackUrl' => hangout_url('id').sub(/id$/, '').sub('http:','') })
     {
       'data-start-data' => start_data,
       'data-app-id' => Settings.hangouts.app_id
@@ -23,11 +23,11 @@ shared_examples_for 'it has a hangout button' do
 
   it 'renders hangout button with generated hangout id if provided id is empty' do
     render
-    expect(rendered).to have_selector('#liveHOA-placeholder', data_tags)
+    expect(rendered).to have_tag('div#liveHOA-placeholder', data_tags)
   end
 
   it 'renders hangout button with provided id if it is not empty' do
     render
-    expect(rendered).to have_selector('#liveHOA-placeholder', data_tags)
+    expect(rendered).to have_tag('div#liveHOA-placeholder', data_tags)
   end
 end
