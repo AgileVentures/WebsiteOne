@@ -40,7 +40,7 @@ gem 'jquery-turbolinks', '2.0.2'    #fix for turbolink problem we had with the H
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
-gem 'youtube_it' # ruby wrapper for youtube API
+gem 'google-api-client', '>0.7'
 gem 'acts_as_votable', '~> 0.10.0' #Allows WSO to track member's votes on votable objects (articles, comments, ...)
 gem 'utf8-cleaner'
 gem 'public_activity' #Create activity feed
