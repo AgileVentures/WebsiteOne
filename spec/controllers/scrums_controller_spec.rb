@@ -15,6 +15,7 @@ describe ScrumsController do
         subject { assigns(:scrums) }
 
         it 'the last video has an older date than the first video' do
+          binding.pry
           expect(subject.last.created_at).to be < subject.first.created_at
         end
 
