@@ -8,7 +8,7 @@
   </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="player" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="scrumVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -32,7 +32,7 @@
           <div class="timeline-heading">
             <%= scrum_link videos.first %>
             <p>
-              <small><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:published].to_date %></small>
+              <small><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:created_at].to_date %></small>
             </p>
           </div>
         </div>
@@ -43,7 +43,7 @@
           <div class="timeline-heading">
             <%= scrum_link videos.last %>
             <p>
-              <small><i class="fa fa-clock-o"></i><%= videos.last[:published].to_s(:db) %></small>
+              <small><i class="fa fa-clock-o"></i><%= videos.last[:created_at].to_date %></small>
             </p>
           </div>
         </div>
