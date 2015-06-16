@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '4.1.6'
 # Added after upgrade to rails 4.1
-gem 'polyamorous', github: 'activerecord-hackery/polyamorous', branch: 'rails-4.1'
+gem 'polyamorous', git: 'git://github.com/activerecord-hackery/polyamorous.git', branch: 'rails-4.1'
 # End additions
 
 gem 'puma' # Puma web server
@@ -17,11 +17,11 @@ gem 'jbuilder' # Json for declaring
 gem 'devise', '~> 3.5.1' # Authentication local and 3rd party
 gem 'bootstrap-sass' # JS Bootstrap library support
 gem 'factory_girl_rails'
-gem 'mercury-rails', github: 'jejacks0n/mercury'
+gem 'mercury-rails', git: 'git://github.com/jejacks0n/mercury.git'
 gem 'faker'
 gem 'omniauth'
-gem 'omniauth-github', '~> 1.1.2'
-gem 'omniauth-gplus', '~> 2.0.1'
+gem 'omniauth-github', git: 'git://github.com/intridea/omniauth-github.git'
+gem 'omniauth-gplus', git: 'git://github.com/samdunne/omniauth-gplus.git'
 gem 'font-awesome-rails'
 gem 'acts_as_tree'
 gem 'acts_as_follower'
