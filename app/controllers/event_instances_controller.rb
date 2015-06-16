@@ -57,8 +57,7 @@ class EventInstancesController < ApplicationController
       user_id: params[:host_id],
       participants: params[:participants],
       hangout_url: params[:hangout_url],
-      yt_video_id: params[:yt_video_id],
-      hoa_status: params[:hoa_status]
-    ).permit!
+      yt_video_id: params[:yt_video_id]).permit!
+
   end
 end
