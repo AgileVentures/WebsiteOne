@@ -7,7 +7,7 @@ FactoryGirl.define do
   end
 
   factory :event_instance do
-    ignore do
+    transient do
       created Time.now
       updated Time.now
     end
