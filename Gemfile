@@ -14,7 +14,7 @@ gem 'therubyracer', platforms: :ruby  # Google V8 javascript engine
 gem 'jquery-rails'  # Use jquery as the JavaScript library
 gem 'turbolinks' # Follow links faster
 gem 'jbuilder' # Json for declaring
-gem 'devise' # Authentication local and 3rd party
+gem 'devise', '~> 3.5.1' # Authentication local and 3rd party
 gem 'bootstrap-sass' # JS Bootstrap library support
 gem 'factory_girl_rails'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
@@ -40,7 +40,7 @@ gem 'jquery-turbolinks', '2.0.2'    #fix for turbolink problem we had with the H
 gem 'addressable'       # used for uri validation
 gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
 gem 'exception_notification'
-gem 'youtube_it' # ruby wrapper for youtube API
+gem 'google-api-client', '>0.7'
 gem 'acts_as_votable', '~> 0.10.0' #Allows WSO to track member's votes on votable objects (articles, comments, ...)
 gem 'utf8-cleaner'
 gem 'public_activity' #Create activity feed
