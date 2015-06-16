@@ -3,12 +3,12 @@ features:
     enabled: true
   slack:
     notifications:
-      enabled: <%= ENV['SLACK_NOTIFICATIONS_ENABLED'] %>
+      enabled: true
     invites:
       enabled: true
   twitter:
     notifications:
-      enabled: <%= ENV['TWITTER_NOTIFICATIONS_ENABLED'] %>
+      enabled: true
 
 mailer:
   delivery_method: 'smtp'

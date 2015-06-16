@@ -42,7 +42,7 @@ disqus:
   secret_key: 'bRtQeANt2qJQ9Y6CJZtA2I2g6dioHKDuPaX5US17JmRXmvMYcG69wZXeKaFmd8qJ'
 
 hangouts:
-  app_id: <%= ENV['HANGOUTS_APP_ID'] %>
+  app_id: '227702023966'
 
 twitter:
   consumer_key:        nil
