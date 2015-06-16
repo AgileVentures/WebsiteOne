@@ -57,11 +57,12 @@ After('@omniauth, @omniauth-with-email') do
 end
 
 Before('@scrum_query') do
-  VCR.insert_cassette(
-    'scrums_controller/videos_by_query'
-  )
+  FactoryGirl.create_list(:event_instance, 25, category: 'Scrum', created_at: rand(1.months).seconds.ago, project_id: nil)
+    #VCR.insert_cassette(
+  #  'scrums_controller/videos_by_query'
+  #)
 end
-After('@scrum_query') { VCR.eject_cassette }
+After('@scrum_query') {EventInstance.destroy_all }
 
 Before('@github_query') do
   VCR.insert_cassette(
