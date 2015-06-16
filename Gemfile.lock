@@ -581,6 +581,7 @@ DEPENDENCIES
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
+  nokogiri (~> 1.6.6.2)
   octokit
   omniauth
   omniauth-github!
