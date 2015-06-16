@@ -115,7 +115,7 @@ describe 'users/show.html.erb' do
 
   it 'renders a table wih video links if there are videos' do
     render
-    expect(render).to have_text('Title', 'Published')
+    expect(render).to have_text('Title')
   end
 
   it 'renders an embedded player' do
@@ -155,7 +155,7 @@ describe 'users/show.html.erb' do
 
   it 'prompts user to update their status' do
     render
-    expect(rendered).to have_selector('input', type: 'submit', value: 'Update status')
+    expect(rendered).to have_tag('input', type: 'submit', value: 'Update status')
   end
 
   describe 'geolocation' do

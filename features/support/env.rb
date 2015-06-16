@@ -31,7 +31,8 @@ Capybara.default_wait_time = 5
 
 options = {
   inspector: true,
-  port: 3010
+  port: 3010,
+  timeout: 10
 }
 
 Capybara.register_driver :poltergeist_debug do |app|
