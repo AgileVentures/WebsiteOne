@@ -161,7 +161,7 @@ GEM
     debug_inspector (0.0.2)
     delorean (2.1.0)
       chronic
-    devise (3.5.0)
+    devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -555,7 +555,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   delorean
-  devise
+  devise (~> 3.5.1)
   eventmachine (~> 1.0.7)
   exception_notification
   factory_girl_rails

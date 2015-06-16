@@ -62,6 +62,8 @@ Before('@scrum_query') do
   #  'scrums_controller/videos_by_query'
   #)
 end
+
+
 After('@scrum_query') {EventInstance.destroy_all }
 
 Before('@github_query') do
