@@ -7,27 +7,12 @@ GIT
       activerecord (>= 3.0)
 
 GIT
-  remote: git://github.com/intridea/omniauth-github.git
-  revision: 45f2fc73d6d06f30863adac0e6aa112bcaaadf67
-  specs:
-    omniauth-github (1.1.2)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (>= 1.1.1, < 2.0)
-
-GIT
   remote: git://github.com/jejacks0n/mercury.git
   revision: 1cc637b0bccea19085f824d2881c6513ed5ee8ae
   specs:
     mercury-rails (0.9.0)
       coffee-rails (>= 3.2.2)
       railties (>= 3.0)
-
-GIT
-  remote: git://github.com/samdunne/omniauth-gplus.git
-  revision: 3217887692a4aaf9fd5d401bf830883202b6915b
-  specs:
-    omniauth-gplus (2.0.1)
-      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -324,6 +309,11 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
+    omniauth-github (1.1.2)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-gplus (2.0.1)
+      omniauth-oauth2 (~> 1.1)
     omniauth-oauth2 (1.3.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
@@ -584,8 +574,8 @@ DEPENDENCIES
   nokogiri (~> 1.6.6.2)
   octokit
   omniauth
-  omniauth-github!
-  omniauth-gplus!
+  omniauth-github (~> 1.1.2)
+  omniauth-gplus (~> 2.0.1)
   paper_trail
   pg
   pivotal-tracker-api
