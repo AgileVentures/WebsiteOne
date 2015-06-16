@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/activerecord-hackery/polyamorous.git
-  revision: 0fa15a3fb2d1b6193018231bc8e19847cc90bfc4
-  branch: rails-4.1
-  specs:
-    polyamorous (0.6.4)
-      activerecord (>= 3.0)
-
-GIT
   remote: git://github.com/jejacks0n/mercury.git
   revision: 1cc637b0bccea19085f824d2881c6513ed5ee8ae
   specs:
@@ -330,6 +322,8 @@ GEM
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
+    polyamorous (1.2.0)
+      activerecord (>= 3.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -580,7 +574,7 @@ DEPENDENCIES
   pg
   pivotal-tracker-api
   poltergeist (~> 1.5.1)
-  polyamorous!
+  polyamorous (~> 1.2.0)
   pry-byebug
   pry-rails
   public_activity
