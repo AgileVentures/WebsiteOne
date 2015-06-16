@@ -1,5 +1,5 @@
-Guard.options[:clear] = true
-Guard.options[:notify] = false
+clearing :on
+notification :off
 
 guard 'livereload' do
   watch(%r{app/views/.+\.(erb|haml|slim)$})

@@ -48,9 +48,9 @@
       <div class="edit-link-form">
         <div class="panel-body">
           <%= form_tag hangout_url(hangout_is_live ? @hangout.uid : generate_event_instance_id(current_user)), method: :put,  class: "form-horizontal", role: "form" %>
-            <div style="hidden"><input name="title" type="hidden" value="<%= topic(@event, @event_schedule) %>"></div>
-            <div style="hidden"><input name="host_id" type="hidden" value="<%= current_user.id %>"></div>
-            <div style="hidden"><input name="event_id" type="hidden" value="<%= @event.id %>"></div>
+            <div><input name="title" type="hidden" value="<%= topic(@event, @event_schedule) %>"></div>
+            <div><input name="host_id" type="hidden" value="<%= current_user.id %>"></div>
+            <div><input name="event_id" type="hidden" value="<%= @event.id %>"></div>
             <div class="form-group">
               <label class="control-label sr-only" for="hangout-url">Hangout link</label>
             </div>
