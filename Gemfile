@@ -44,6 +44,7 @@ gem 'google-api-client', '>0.7'
 gem 'acts_as_votable', '~> 0.10.0' #Allows WSO to track member's votes on votable objects (articles, comments, ...)
 gem 'utf8-cleaner'
 gem 'public_activity' #Create activity feed
+gem 'nokogiri', '~> 1.6.6.2'
 
 gem 'yui-compressor'
 gem 'compass-rails'
