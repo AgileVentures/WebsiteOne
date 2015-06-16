@@ -2,40 +2,28 @@ require 'spec_helper'
 
 describe ScrumsController do
 
-  vcr_index = {cassette_name: 'scrums_controller/videos_by_query'}
-  describe '#index', vcr: vcr_index do
+  let!(:scrum) { FactoryGirl.create(:event_instance, category: 'Scrum', created_at: DateTime.now) }
+  let!(:scrum2) { FactoryGirl.create(:event_instance, category: 'Scrum', created_at: DateTime.now.at_beginning_of_day) }
+  let!(:hangout) { FactoryGirl.create(:event_instance, category: 'PairProgramming') }
+
+  describe '#index' do
     context '@scrums instance variable' do
       before { get :index }
 
-      context 'one video' do
-        subject { assigns(:scrums).first }
-
-        it 'has an author' do
-          expect(subject[:author]).not_to be_empty
-        end
-
-        it 'has an id' do
-          expect(subject[:id]).not_to be_empty
-        end
-
-        it 'has a published Date' do
-          expect(subject[:published]).to be_an_instance_of(Date)
-        end
-
-        it 'has a title' do
-          expect(subject[:title]).not_to be_empty
-        end
-
-        it 'has a url (use regex to assert this string is a URL)' do
-          expect(subject[:url]).to match(/https?:\/\/[\S]+/)
-        end
-      end
 
       context 'the array of videos' do
-        subject {assigns(:scrums)}
+        subject { assigns(:scrums) }
 
-        it 'the last video has an older date than the first video'  do
-          expect(subject.last[:published]).to be < subject.first[:published]
+        it 'the last video has an older date than the first video' do
+          expect(subject.last.created_at).to be < subject.first.created_at
+        end
+
+        it 'includes instances with category Scrum' do
+          expect(subject).to include scrum, scrum2
+        end
+
+        it 'does not includes instances with category PairProgramming' do
+          expect(subject).to_not include hangout
         end
       end
     end
