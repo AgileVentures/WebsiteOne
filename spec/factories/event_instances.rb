@@ -16,7 +16,8 @@ FactoryGirl.define do
     sequence(:title) { |n| "Hangout_#{n}"}
     sequence(:category) { |n| "Category_#{n}"}
     hangout_url "http://hangout.test"
-    sequence(:yt_video_id) { |n| "yt_video_id_#{n}"}
+    yt_video_id 'gCQmvCkLCe8'
+    #sequence(:yt_video_id) { |n| "yt_video_id_#{n}"}
 
     project
     event
