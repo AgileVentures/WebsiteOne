@@ -17,7 +17,7 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   hangout = ho_details[0]
 
 
-  start_time = hangout['Started at'] ? hangout['Started at'] : Time.now
+  start_time = hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now
   event = Event.find_by_name(event_name)
 
   FactoryGirl.create(:event_instance, event: event,
