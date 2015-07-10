@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410173625) do
+ActiveRecord::Schema.define(version: 20150520184236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20150410173625) do
     t.integer  "user_id"
     t.string   "yt_video_id"
     t.text     "participants"
+    t.string   "hoa_status"
   end
 
   create_table "events", force: true do |t|
