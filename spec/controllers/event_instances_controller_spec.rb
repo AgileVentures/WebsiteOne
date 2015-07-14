@@ -56,8 +56,13 @@ describe EventInstancesController do
       get :update, params.merge(notify: 'true')
     end
 
-    it 'does not call the SlackService' do
+    it 'does not call the SlackService if not update' do
       allow_any_instance_of(EventInstance).to receive(:update).and_return(false)
+      expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
+      get :update, params.merge(notify: 'true')
+    end
+
+    it 'does not call the SlackService if not notify' do
       expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
       get :update, params.merge(notify: 'false')
     end
@@ -72,6 +77,16 @@ describe EventInstancesController do
       allow(controller).to receive(:local_request?).and_return(true)
       get :update, params.merge(event_id: '50')
       expect(response).to redirect_to(event_path(50))
+    end
+
+    it 'update EventInstance with permited params' do
+      upd_params = {
+        "title"=>"title", "project_id"=>"project_id", "event_id"=>"event_id",
+        "category"=>"category", "user_id"=>"host", "participants"=>"one, two",
+        "hangout_url"=>"test_url", "yt_video_id"=>"video", "hoa_status"=>"started"
+      }
+      expect_any_instance_of(EventInstance).to receive(:update).with(upd_params)
+      get :update, params.merge(upd_params)
     end
 
     context 'required parametes are missing' do
