@@ -49,8 +49,6 @@ $avatar-size: 32px;
     height: auto;
     overflow: hidden;
     padding: 0;
-    -webkit-border-radius: 0;
-    -mox-border-radius: 0;
     border-radius: 0;
     &:hover {
       background: none;
@@ -62,7 +60,9 @@ $avatar-size: 32px;
 }
 
 .highlight-box { // replace with bootstrap well?
-  // border: 1px solid #dddddd;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
 }
 .widget-title {
   font-size: 1em;
