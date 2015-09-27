@@ -1,0 +1,23 @@
+<div class="container" >
+  <div class="col-md-1" style="width: 4% !important;">
+    <i class="fa fa-2x fa-plus"></i>
+  </div>
+  <div class="col-md-1" style="width: 4% !important;">
+    <%= image_tag activity.owner.gravatar_url, width: '30', height: '30', style: 'margin-bottom: -26px;', class: 'img-circle hidden-xs hidden-sm' %>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <small><%= time_ago_in_words(activity.created_at) %> ago</small>
+    </div>
+    <div class="row">
+      <%= link_to activity.owner.display_name, activity.owner if activity.owner %> created a <strong>document</strong>:
+      <% if activity.trackable %>
+          <%= link_to activity.trackable.title, activity.trackable.url_for_me('show') %>
+          on the <%= activity.trackable.project.title %> project.
+      <% else %>
+          .
+      <% end %>
+    </div>
+  </div>
+</div>
+

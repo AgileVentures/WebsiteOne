@@ -1,0 +1,140 @@
+@import "variables";
+@import "mixins";
+
+.member-title {
+  font-size: 0.85em;
+  font-weight: bold;
+  color: $theme-darker;
+}
+
+.index-summary {
+  p {
+    margin-left: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    a {
+      padding-left: 0 !important;
+    }
+  }
+}
+
+.users-filter { }
+
+.user-cancel-account {
+  margin-top: 50px;
+}
+
+.user-skills {
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      display: inline-block;
+      padding-right: 1.5em;
+    }
+  }
+
+  margin-bottom: 30px;
+}
+
+.user-projects {
+  @extend .user-skills;
+}
+
+.user-summary {
+  overflow: hidden;
+
+  h3 {
+    margin: 10px 0;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      font-size: 0.95em;
+      white-space: nowrap;
+    }
+  }
+}
+
+.user-profile-btn {
+  width: 100%;
+  vertical-align: middle;
+  display: block;
+  padding: 5px;
+  margin: 3px 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 5px;
+  @include css-transition(background-color 0.3s ease);
+  @include css-transition(border-color 0.3s ease);
+
+  &:hover {
+    background-color: $light-bg-color;
+    border-color: $theme-main;
+  }
+}
+
+.user-preview {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+  @include css-border-radius(10px);
+  @include css-transition(background-color 0.3s ease);
+
+  &:hover {
+    background-color: $light-bg-color;
+  }
+
+  p {
+    color: $black;
+    padding-left: 0;
+    margin-bottom: 5px;
+
+    &.media-heading {
+      color: $theme-main;
+      font-size: 1.1em;
+    }
+  }
+}
+
+.media-item {
+  height: 100px;
+  margin-bottom: 30px;
+}
+
+/* CSS for USER PROFILE page */
+
+.avatar-group .avatar-lower {
+  width: 330px;
+  margin-top: -70px;
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.avatar-group .avatar-lower h3 {
+  color: white;
+  text-shadow: 2px 1px 1px black;
+}
+
+.fa-large {
+  font-size: 28px;
+  margin-top: -10px;
+  margin-left: -5px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+#f-fellforit {
+  display: none;
+}
+
+/* Responsive versions */
+
+/* End of CSS for USER PROFILE page */

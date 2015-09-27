@@ -1,38 +1,36 @@
 <%= content_for :content do %>
-  
-      <div class="col-sm-3">
-        <aside id="sidebar" >
-          <nav role="complementary">
-            <h3>Articles by tags</h3>
-            <ul>
-              <li>
-                <% if params[:tag]  || (params[:controller] == 'articles' && params[:action] == 'show') %>
-                  <%= link_to 'All Articles', articles_path %>
-                <% else %>
-                  <p class="sidebar-selected">All Articles</p>
-                <% end %>
-              </li>
-              <% standard_tags.each do |tag| %>
-                <li>
-                  <% if params[:tag] == tag %>
-                    <p class="sidebar-selected"><%= tag %></p>
-                  <% else %>
-                    <%= link_to tag, articles_path(tag: tag) %>
-                  <% end %>
-                </li>
+
+  <div class="col-sm-3">
+    <aside id="sidebar" >
+      <nav role="complementary">
+        <h3>Articles by tags</h3>
+        <ul>
+          <li>
+            <% if params[:tag]  || (params[:controller] == 'articles' && params[:action] == 'show') %>
+              <%= link_to 'All Articles', articles_path %>
+            <% else %>
+              <p class="sidebar-selected">All Articles</p>
+            <% end %>
+          </li>
+          <% standard_tags.each do |tag| %>
+            <li>
+              <% if params[:tag] == tag %>
+                <p class="sidebar-selected"><%= tag %></p>
+              <% else %>
+                <%= link_to tag, articles_path(tag: tag) %>
               <% end %>
-            </ul>
-          </nav>
-        </aside>
-      </div>
-    <div id="not-sidebar" class="col-sm-6">
-      <div id="not-sidebar-content">
-        <%= yield %>
-      </div>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </aside>
+    <%= render partial: 'layouts/sponsors' %>
+  </div>
+  <div id="not-sidebar" class="col-sm-8">
+    <div id="not-sidebar-content">
+      <%= yield %>
     </div>
-    <div class="col-sm-3 pull-right">
-      <%= render partial: 'layouts/sponsors' %>
-    </div>
-  
+  </div>
+
 <% end %>
 <%= render template: 'layouts/application' %>

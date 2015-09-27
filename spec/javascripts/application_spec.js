@@ -1,54 +1,96 @@
-describe('Affixed Navbar', function () {
-    var affixedNav, header, main, footer, height, scrollTop;
+describe('WebsiteOne module', function () {
     beforeEach(function () {
-        setFixtures(sandbox({id: 'main_header'}));
-        appendSetFixtures(sandbox({id: 'nav'}));
-        appendSetFixtures(sandbox({id: 'main'}));
-        appendSetFixtures(sandbox({id: 'footer'}));
-        affixedNav = $('#nav');
-        header = $('#main_header');
-        main = $('#main');
-        footer = $('#footer');
-        height = spyOn($.prototype, 'height').and.callFake(function () {
-            return 50
+        WebsiteOne.define('__test__', function () {
+            return jasmine.createSpyObj('factory', ['init'])
         });
-        scrollTop = spyOn($.prototype, 'scrollTop');
-        $.fn.BryanHATESTHIS()
+        this.module = WebsiteOne.__test__;
     });
-   it('scrolling causes heights to be calculated', function() {
-        expect(height).toHaveBeenCalled();
-        $(window).scroll();
-        expect(scrollTop).toHaveBeenCalled();
+
+    it('should define a new WebsiteOne module called "__test__"', function () {
+        expect(this.module).toBeDefined();
+        expect(WebsiteOne.__test__).toBeDefined();
     });
-    describe('scrolling down', function () {
-        beforeEach(function () {
-            scrollTop.and.callFake(function () {
-                return 150
+
+    describe('WebsiteOne.define', function () {
+        it('should have only one module defined (for testing)', function () {
+            expect(WebsiteOne._modules.length).toEqual(1);
+        });
+
+        it('should not create a new module when defined with a repeated name', function () {
+            WebsiteOne.define('__test__', function () {
+                return { init: function () {} };
             });
-            var parseInt = spyOn(window, 'parseInt').and.callFake(function () {
-                return 5
+            expect(WebsiteOne._modules.length).toEqual(1);
+        });
+
+        it('should not call the init method after redefining a module when _newPageLoaded is false', function () {
+            var anotherFactory = jasmine.createSpyObj('another_factory', ['init']);
+            WebsiteOne._newPageLoaded = false;
+            WebsiteOne.define('__test__', function () {
+                return anotherFactory
             });
-            $(window).scroll();
+            expect(anotherFactory.init).not.toHaveBeenCalled();
+            expect(this.module.init).not.toHaveBeenCalled();
         });
-        it('affixes navbar to top', function() {
-            expect(affixedNav).toHaveClass('affix');
+
+        describe('adding a new module', function () {
+            var anotherFactory;
+            beforeEach(function () {
+                anotherFactory = jasmine.createSpyObj('another_factory', ['init']);
+            });
+
+            it('should not call the init method after defining a module', function () {
+                WebsiteOne.define('__another_test__', function () {
+                    return anotherFactory;
+                });
+                expect(anotherFactory.init).not.toHaveBeenCalled();
+            });
+
+            it('should call the init method after defining a module when the _newPageLoaded is false', function () {
+                WebsiteOne._newPageLoaded = false;
+                WebsiteOne.define('__another_test__', function () {
+                    return anotherFactory;
+                });
+                expect(anotherFactory.init).toHaveBeenCalled();
+            });
+        })
+    });
+
+    describe('WebsiteOne._init', function () {
+        it('should call the init method for all modules defined', function () {
+            var anotherFactory = jasmine.createSpyObj('another_factory', ['init']);
+            WebsiteOne.define('__another_test__', function () {
+                return anotherFactory;
+            });
+            WebsiteOne._init();
+            expect(this.module.init).toHaveBeenCalled();
+            expect(anotherFactory.init).toHaveBeenCalled();
         });
-        it('pads the margin bottom of the header appropriately', function () {
-            expect(parseInt).toHaveBeenCalled();
-            expect(header).toHaveCss({ 'margin-bottom': '55px' })
+
+        it('should be called on the page:load event', function () {
+            $(document).trigger('page:load');
+            expect(this.module.init).toHaveBeenCalled();
         });
     });
-    describe('scrolling back up', function() {
-        beforeEach(function() {
-            affixedNav.addClass('affix');
-            scrollTop.and.callFake(function() { return 99 });
-            $(window).scroll();
+
+    describe("WebsiteOne.runOnce", function() {
+        it('should always run the callback exactly', function () {
+            var spy = jasmine.createSpy();
+            WebsiteOne.runOnce("name", spy);
+            for (var i = 0; i < 10; i++) {
+              WebsiteOne._init();
+            }
+            expect(spy.calls.count()).toEqual(1);
         });
-        it('un-affixes navbar from top', function() {
-            expect(affixedNav).not.toHaveClass('affix');
-        });
-        it('sets the margin-bottom of the header back to zero', function() {
-            expect(header).toHaveCss({ 'margin-bottom': '0px' })
+    });
+
+    describe('WebsiteOne._clear', function () {
+        it('removes all the modules', function() {
+            expect(WebsiteOne.__test__).toBeDefined();
+            expect(WebsiteOne._modules.length).toEqual(1);
+            WebsiteOne._clear();
+            expect(WebsiteOne.__test__).not.toBeDefined();
+            expect(WebsiteOne._modules.length).toEqual(0)
         });
     });
 });

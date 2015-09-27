@@ -1,0 +1,105 @@
+#main {
+  padding-top: 3em;
+}
+
+.signin {
+  h2 {
+    margin-top: 0;
+  }
+  form {
+    margin-bottom: 20px;
+  }
+  .glyphicon {
+    top: 0;
+  }
+}
+
+#devise .custom-label {
+  margin-left: 5px;
+  margin-top: 3px;
+  position: absolute;
+  color: black;
+}
+
+.alert {
+  margin-top: 5px;
+}
+
+label {
+  margin-right: 0.5em;
+  display: block
+}
+
+#event-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#event-container .event-item {
+  width: 33.3%;
+  /*height: 150px;*/
+  margin: 5px, 15px, 5px, 5px;
+}
+
+#event-container .event-item p, .event-item a, .event-item small {
+  padding-left: 8px !important;
+  line-height: 14px;
+}
+
+#event-container .event-item h4 {
+  padding-left: 0px !important;
+}
+
+#event-container .event-item img {
+  margin-left: 8px !important;
+  width: 250px;
+}
+
+.add-btn-agile {
+  color: #FFF;
+  background-color: #F07F48;
+  border-color: #EEA236;
+}
+
+.btn-agile {
+  color: #FFF;
+  background-color: #F07F48;
+  border-color: #EEA236;
+  line-height: 35px !important;
+}
+
+
+.btn-agile a {
+  color: #FFF !important;
+  opacity: 1 !important;
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #event-container .git-item {
+    width: 50%;
+    height: 150px;
+    margin-bottom: 10px !important;
+  }
+}
+
+@media (max-width: 767px) {
+
+  #event-container .event-item {
+    width: 50%;
+    height: 150px;
+    margin-bottom: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  #event-container .event-item {
+    width: 50%;
+    height: 150px;
+    margin-bottom: 10px !important;
+  }
+}
+
+.nav-justified a {
+  white-space: nowrap;
+}

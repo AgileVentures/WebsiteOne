@@ -1,18 +1,17 @@
-<section id="devise">
-  <div class="col-md-4 col-md-offset-4 form-frame signin">
-    <h2>Forgot your password?</h2>
+<div class="container">
+  <div class="col-md-5 col-md-offset-2">
+    <h2 class="text-center">Forgot your password?</h2>
+    <br />
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-        <%= form_group_for f, :email, label: false do %>
-            <div class="input-group ">
-              <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
-              <span class="input-group-addon glyphicon glyphicon-user"></span>
-            </div>
-        <% end %>
-        <div><%= f.submit "Send me reset password instructions", class: 'btn btn-primary btn-block' %></div>
-
+      <fieldset>
+        <div class="form-group">
+          <%= f.email_field :email, class: 'form-control', placeholder: 'Enter email' %>
+        </div>
+        <div class='form-group'>
+          <%= f.submit "Send me reset password instructions", class: 'btn btn-primary btn-block' %>
+        </div>
+        <%= devise_error_simple_message %>
+      </fieldset>
     <% end %>
-    <%= flash_messages layout_flash: false %>
-
-    <%= render "devise/shared/links" %>
   </div>
-</section>
+</div>

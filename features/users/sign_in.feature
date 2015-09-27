@@ -27,3 +27,11 @@ Feature: Sign in
     |credential|
     |password  |
     |email     |
+
+  Scenario: redirect to the last visited page after login
+    Given I exist as a user
+    And I am not logged in
+    And I am on Events index page
+    When I sign in with valid credentials
+    Then I should be on the Events "Index" page
+

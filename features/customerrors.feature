@@ -1,4 +1,4 @@
-@allow-rescue
+@enable-custom-errors
 Feature:
   As a visitor
   In order to understand what happened when something goes wrong
@@ -6,7 +6,7 @@ Feature:
   https://www.pivotaltracker.com/s/projects/982890/stories/64956494
 
   Background:
-    Given App is in production
+    Given Feature "Custom Errors" is enabled
 
   Scenario: 404 page when visiting an invalid URL
     When I visit "/foobar"

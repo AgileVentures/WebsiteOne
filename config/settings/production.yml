@@ -1,0 +1,36 @@
+features:
+  custom_errors:
+    enabled: true
+  slack:
+    notifications:
+      enabled: <%= ENV['SLACK_NOTIFICATIONS_ENABLED'] %>
+    invites:
+      enabled: true
+  twitter:
+    notifications:
+      enabled: <%= ENV['TWITTER_NOTIFICATIONS_ENABLED'] %>
+
+mailer:
+  delivery_method: 'smtp'
+  smtp_settings:
+    port: 587
+    user_name: <%= ENV['SENDGRID_USERNAME'] %>
+    password: <%= ENV['SENDGRID_PASSWORD'] %>
+    address: 'smtp.sendgrid.net'
+    domain: 'heroku.com'
+    authentication: 'plain'
+  url_host: 'agileventures.org'
+
+disqus:
+  shortname: 'agileventures'
+  api_key:  <%= ENV['DISQUS_API_KEY']  %>
+  secret_key:  <%= ENV['DISQUS_SECRET_KEY']  %>
+
+privileged_users: <%= ENV["PRIVILEGED_USERS"] %>
+
+twitter:
+  consumer_key: <%= ENV["TWITTER_CONSUMER_KEY"] %>
+  consumer_secret: <%= ENV["TWITTER_CONSUMER_SECRET"] %>
+  access_token: <%= ENV["TWITTER_ACCESS_TOKEN"] %>
+  access_token_secret: <%= ENV["TWITTER_TOKEN_SECRET"] %>
+

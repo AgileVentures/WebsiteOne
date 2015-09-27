@@ -2,8 +2,8 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
 
-Given /^I am logged in as user with email "([^"]*)", with password "([^"]*)"$/ do |email, password|
-  @user = FactoryGirl.create(:user, email: email, password: password, password_confirmation: password)
+Given /^I am logged in as user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |name, email, password|
+  @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
@@ -129,9 +129,13 @@ When /^I look at the list of users$/ do
   visit '/'
 end
 
+When /^I filter users for "(.*?)"$/ do |first_name|
+  fill_in "user-filter", :with => first_name
+  #click_link_or_button :UsersFilterSubmit
+end
+
 ### THEN ###
 Then /^I should be signed in$/ do
-  find_user.should == @user
   page.should have_content "Log out"
   page.should_not have_content "Sign up"
   page.should_not have_content "Log in"
@@ -187,9 +191,19 @@ Then /^I should (not |)see my name$/ do |should|
   create_user
   # TODO Bryan: refactor to display_name
   if should == 'not '
-    page.should_not have_content([@user.first_name, @user.last_name].join(' '))
+    page.should_not have_content @user.presenter.display_name
   else
-    page.should have_content([@user.first_name, @user.last_name].join(' '))
+    page.should have_content @user.presenter.display_name
+  end
+end
+
+Then /^I should (not |)see my gravatar$/ do |should|
+  create_user
+  # TODO Bryan: refactor to display_name
+  if should == 'not '
+    page.should_not have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
+  else
+    page.should have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
   end
 end
 
@@ -200,7 +214,7 @@ Given /^the sign in form is visible$/ do
 end
 
 Then /^my account should be deleted$/ do
-  expect(User.find_by_id(@user)).to be_false
+  expect(User.find_by_id(@user)).to be_falsey
 end
 
 Given(/^The database is clean$/) do
@@ -209,16 +223,41 @@ end
 
 Given /^the following users exist$/ do |table|
   table.hashes.each do |attributes|
-    create_test_user(attributes)
+    FactoryGirl.create(:user, attributes)
   end
 end
+
+Given /^the following active users exist$/ do |table|
+  table.hashes.each do |attributes|
+    p = Project.find_by(title: attributes['projects'])
+    Delorean.time_travel_to(attributes['updated_at']) if attributes['updated_at']
+    u = FactoryGirl.create(
+      :user,
+      first_name: attributes['first_name'],
+      last_name: attributes['last_name'],
+      email: attributes['email'],
+      latitude: attributes['latitude'],
+      longitude: attributes['longitude']
+    )
+    Delorean.back_to_the_present if attributes['updated_at']
+    u.follow p
+  end
+end
+
+Given /^the following statuses have been set$/ do |table|
+  table.hashes.each do |attributes|
+    user = User.find_by_first_name(attributes[:user])
+    FactoryGirl.create(:status, status: attributes[:status], user_id: user.id)
+  end
+end
+
 When(/^I should see a list of all users$/) do
   #this is up to refactoring. Just a quick fix to get things rolling /Thomas
   page.should have_content 'All users'
 end
 
 When(/^I click pulldown link "([^"]*)"$/) do |text|
-  page.find('#user_info').click
+  page.find(:css, '.dropdown .dropdown-menu.dropdown-menu-right .fa-user').click
   click_link_or_button text
 end
 
@@ -227,7 +266,7 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   expect(current_path).to eq path_to(page, this_user)
 end
 
-Given(/^I (?:am on|go to) my "([^"]*)" page$/) do |page|
+Given(/^I (?:am on|go to|should be on) my "([^"]*)" page$/) do |page|
   page.downcase!
   if page == 'profile'
     visit user_path(@user)
@@ -267,7 +306,7 @@ end
 
 Then(/^My email should be public$/) do
   user = User.find(@user.id)
-  expect(user.display_email).to be_true
+  expect(user.display_email).to be_truthy
 end
 
 When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
@@ -327,23 +366,22 @@ Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   end
 end
 
-Then(/^(.*) in the members list$/) do |s|
-  page.within(:css, '#all_members') do
-    step s
-  end
-end
-
 Given(/^I visit (.*)'s profile page$/) do |name|
   user = User.find_by_first_name name
   visit user_path user
 end
 
-Given(/^I add skills "(.*)"/) do |skills|
+Given(/^I (?:have|add) (?:skill|skills) "(.*)"/) do |skills|
+  @user.skill_list.add(skills, parse: true)
+  @user.save
+  @user.reload
+end
+
+Given(/^I add a new skill: "(.*)"/) do |skills|
   skills.split(",").each { |s| page.execute_script "$('#skills').tags().addTag('#{s}')"}
 end
 
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
-  debugger
   page.all(:css, "#skills-show span").collect { |e| e.text }.sort.should == skills.split(",").sort
 end
 
@@ -367,4 +405,39 @@ end
 
 When(/^My email receivings is set to false$/) do
   @user.update_attribute(:receive_mailings, false)
+end
+
+Given(/^I fetch the GitHub contribution statistics$/) do
+  GithubCommitsJob.run
+end
+
+When(/^I delete my profile$/) do
+  @user.delete
+end
+
+# NOTE search steps below
+
+When(/^I filter "(.*?)" for "(.*?)"$/) do |list_name, selected_from_list|
+  steps %Q{
+    When I select "#{selected_from_list}" from the "#{list_name}" list
+    And I click "Search"
+  }
+end
+
+When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_name|
+  filter = case list_name
+  when 'projects'
+    'project_filter'
+  when 'timezones'
+    'timezone_filter'
+  when 'online status'
+    'online'
+  end
+
+  page.select(selected_from_list, from: filter)
+end
+
+Given(/^I have an incoplete profile$/) do
+  @user.bio = ''
+  @user.save
 end

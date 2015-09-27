@@ -1,0 +1,52 @@
+<%= javascript_include_tag 'scrums' %>
+<div class="row">
+  <div class="col-xs-12 col-sm-10">
+    <h1>Previous scrums</h1>
+
+    <p>We have regular daily meetings (scrums) online where our members get together, discuss projects, share knowledge
+      and plan programming sessions. </p>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="scrumVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="playerTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="video-container">
+          <iframe width="560" height="315" src="" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="timeline">
+  <% @scrums.each_slice(2) do |videos| %>
+      <li class="arrow-left">
+        <div class="timeline-badge"><i class="fa fa-film"></i></div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <%= scrum_link videos.first %>
+            <p>
+              <small><i class="fa fa-clock-o">&nbsp</i><%= videos.first[:created_at].to_date %></small>
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="timeline-inverted arrow-right">
+        <div class="timeline-badge warning"><i class="fa fa-film"></i></div>
+        <div class="timeline-panel">
+          <div class="timeline-heading">
+            <%= scrum_link videos.last %>
+            <p>
+              <small><i class="fa fa-clock-o"></i><%= videos.last[:created_at].to_date %></small>
+            </p>
+          </div>
+        </div>
+      </li>
+  <% end %>
+</ul>

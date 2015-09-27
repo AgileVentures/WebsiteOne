@@ -1,40 +1,40 @@
 require 'spec_helper'
 
-describe Document do
-  before do
-    @project = Project.create!(valid_attributes_for(:project))
-    @document = @project.documents.create!(valid_attributes_for(:document))
+describe Document, :type => :model do
+  subject { FactoryGirl.build_stubbed(:document) }
+
+  it { is_expected.to be_versioned }
+  it { is_expected.to respond_to :create_activity }
+
+  it 'has public-activity enabled' do
+    expect(subject.public_activity_enabled?).to eq true
   end
 
-  it { should be_versioned }
+  it 'is valid with proper attributes' do
+    expect(FactoryGirl.build(:document)).to be_valid
+  end
 
-  context 'return false on invalid inputs' do
-    it 'blank Title' do
-      @document.title = ''
-      expect(@document.save).to be_false
+  it 'is invalid without title' do
+    expect(FactoryGirl.build(:document, title: '')).to_not be_valid
+  end
+
+  it 'is invalid without project' do
+    expect(FactoryGirl.build(:document, project: nil)).to_not be_valid
+  end
+
+  describe '#url_for_me' do
+    it 'returns correct url for show action' do
+      expect(subject.url_for_me('show')).to eq "/projects/#{subject.project.slug}/documents/#{subject.slug}"
     end
-    
-    it 'blank project' do
-      @document.project_id = nil
-      expect(@document.save).to be_false
+
+    it 'returns correct url for other actions' do
+      expect(subject.url_for_me('new')).to eq "/projects/#{subject.project.slug}/documents/#{subject.slug}/new"
     end
   end
 
-  # TODO Bryan: this scenario cannot be implemented with the current gem
-  #it 'should allow friendly IDs to be shared between projects' do
-  #  project = Project.create! valid_attributes_for(:project)
-  #  doc = project.documents.create! title: @document.title
-  #  expect(doc.friendly_id).to eq @document.friendly_id
-  #end
-
-  it 'should NOT allow friendly IDs to be shared within a project' do
-    doc = Document.create(title: @document.title, project_id: @document.project_id)
-    expect(doc.friendly_id).to_not eq @document.friendly_id
-  end
-
-  context 'return true on correct inputs' do
-    it 'belongs to project' do
-      expect(@document.project.nil?).to be_false
+  describe '#slug_candidates' do
+    it 'returns correct slug candidates' do
+      expect(subject.slug_candidates).to eq [ :title, [:title, :project_title] ]
     end
   end
 end

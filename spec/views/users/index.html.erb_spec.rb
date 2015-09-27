@@ -1,11 +1,46 @@
 require 'spec_helper'
 
-describe "users/index.html.erb" do
-  before :each do
-    @users = [mock_model(User, :display_name => 'Bill Black', id: 1, :first_name => 'Bill', :last_name => 'Black', :email => 'bb123@somemail.com'),
-              mock_model(User, :display_name => 'Charles Cyan', id: 2, :first_name => 'Charles', :last_name => 'Cyan', :email => 'cos@somemail.com'),
-              mock_model(User, :display_name => 'Dave Devlish', id: 3, :first_name => 'Dave', :last_name => 'Devlish', :email => 'dave@me.com'),
-              mock_model(User, :display_name => 'Eric Ectost', id: 4, :first_name => 'Eric', :last_name => 'Ectost', :email => 'eric@somemail.se')]
+describe 'users/index.html.erb', :type => :view do
+  before(:each) do
+    @users = FactoryGirl.build_list(:user, 4, updated_at: '2013-09-30 05:00:00 UTC')
+    @users_count = @users.count
+    assign(:projects, [])
+  end
+
+  context 'advanced filtering' do
+    before(:each) do
+      @current_user = @users.first
+      @projects_list = FactoryGirl.build_stubbed_list(:project, 4)
+      assign(:projects, @projects_list)
+    end
+
+    it 'should display an advanced filter form' do
+      render
+
+      expect(rendered).to have_content('Filter users by')
+      expect(rendered).to have_css('.filters-users-advanced')
+    end
+
+    it 'projects select is populated with project titles' do
+      render
+
+      project_titles_list = @projects_list.map {|p| p.title}
+      expect(rendered).to have_select(:project_filter, :with_options => project_titles_list)
+    end
+
+    it 'timezone select is populated with titles' do
+      @current_user.update_attributes(longitude: 58.33, latitude: 18.30)
+      render
+
+      expect(rendered).to have_content('In My Timezone')
+      expect(rendered).to have_content('Wider Timezone Area')
+    end
+  end
+
+  it 'should display user filter form' do
+    render
+    expect(rendered).to have_content('Filter users')
+    expect(rendered).to have_css('#user-filter')
   end
 
   it 'should display a list of users' do
@@ -15,39 +50,67 @@ describe "users/index.html.erb" do
     end
   end
 
-  context 'when a user has no first or last name' do
-    
-    it 'should display only the last name' do
-      @users.first.stub(:first_name).and_return(nil)
-      render
-
-      expect(rendered).to have_content(@users.first.last_name)
-    end
-
-    it 'should display only the first name' do
-      @users.first.stub(:last_name).and_return(nil)
-      render
-
-      expect(rendered).to have_content(@users.first.first_name)
-    end
-  end
-
-  it 'renders avatar link with id: avatar-user.id' do
-    render
-
-    expect(rendered).to have_link('avatar-1')
-    expect(rendered).to have_link('avatar-2')
-  end
-
-  it 'renders avatar-link with href' do
-    render
-    expect(rendered).to have_xpath("//a[@id='avatar-1' and contains(@href, '/users/1')]")
-    expect(rendered).to have_xpath("//a[@id='avatar-2' and contains(@href, '/users/2')]")
-  end
-
   it 'renders User name link with href' do
     render
-    expect(rendered).to have_xpath("//a[text()='Bill Black' and contains(@href, '/users/1')]")
-    expect(rendered).to have_xpath("//a[text()='Charles Cyan' and contains(@href, '/users/2')]")
+    @users.each do |user|
+      expect(rendered).to have_xpath("//a[contains(@href, '/users/#{user.slug}')]")
+    end
+  end
+
+  context 'renders the users count in the sentence above' do
+    it 'has valid users count' do
+      render
+      expect(rendered).to have_content("Check out our #{@users_count} awesome volunteers from all over the globe!")
+    end
+
+    it 'shows different sentence if invalid users count' do
+      @users_count = 0
+      render
+      expect(rendered).to have_content('It is a lonely planet we live in')
+    end
+  end
+
+  context 'display user status' do
+
+    before(:each) do
+      @users_online = FactoryGirl.create_list(:user, 4, updated_at: '2014-09-30 05:00:00 UTC')
+      @users_offline = FactoryGirl.create_list(:user, 4, updated_at: '2014-09-30 04:00:00 UTC')
+      @users = [@users_online, @users_offline].flatten
+      user = @users_online.first
+      @status_text = Status::OPTIONS[rand(Status::OPTIONS.length)]
+      user.status.create(attributes = FactoryGirl.attributes_for(:status, status: @status_text))
+      user.reload
+    end
+
+    after(:each) do
+      Delorean.back_to_the_present
+    end
+
+    it 'display green dot for online users' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
+      render
+      expect(rendered).to have_css('img[src*="/assets/green-dot.png"]')
+    end
+
+    it 'there should be 4 green dots' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
+      render
+      expect(rendered).to have_css('img[src*="/assets/green-dot.png"]', count: 4)
+    end
+
+    it 'do not display green dot for offline users' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:19:00 UTC'))
+      render
+      expect(rendered).to_not have_css('img[src*="/assets/green-dot.png"]')
+    end
+
+    it 'displays the user\'s status with a speech bubble' do
+      Delorean.time_travel_to(Time.parse('2014-09-30 05:09:00 UTC'))
+      render
+      rendered.within('div#user-status') do |status|
+        expect(status).to have_content(@status_text)
+        expect(status).to have_css(".glyphicon-comment")
+      end
+    end
   end
 end

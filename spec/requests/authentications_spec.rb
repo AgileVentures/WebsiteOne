@@ -16,7 +16,10 @@ describe 'OmniAuth authentication' do
           'info'      => { 'email' => "#{name}@mock.com"}
       }
     end
+    OmniAuth.config.logger.level = Logger::FATAL
   end
+
+  after { OmniAuth.config.logger.level = Logger::DEBUG }
 
   supported_auths.each do |provider, name|
     context 'for unregistered users' do
@@ -40,7 +43,7 @@ describe 'OmniAuth authentication' do
               click_link "#{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
-          page.should have_content('Authentication failed.')
+          page.should have_content('invalid_credentials')
         end
 
         it 'should not allow removal of profiles without passwords' do

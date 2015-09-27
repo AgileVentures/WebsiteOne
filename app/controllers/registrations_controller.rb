@@ -1,8 +1,11 @@
 class RegistrationsController < Devise::RegistrationsController
+  layout 'layouts/user_profile_layout', only: [:edit]
   def create
     super
-    session[:omniauth] = nil unless @user.new_record?
-    Mailer.send_welcome_message(@user).deliver unless @user.new_record?
+    unless @user.new_record?
+      session[:omniauth] = nil
+      Mailer.send_welcome_message(@user).deliver if Features.enabled?(:welcome_email)
+    end
   end
 
   def update
@@ -25,8 +28,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def build_resource(*args)
-    super
+  def build_resource(hash=nil)
+    self.resource = User.new_with_session(hash || {}, session)
     if session[:omniauth]
       @user.apply_omniauth(session[:omniauth])
       @user.valid?

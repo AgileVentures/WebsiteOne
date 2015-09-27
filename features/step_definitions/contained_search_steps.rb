@@ -10,6 +10,9 @@ def css_selector_for(container)
     when 'main content'
       '#main'
 
+    when 'footer'
+      '#footer'
+
     when 'list of projects'
       '#project-list'
 

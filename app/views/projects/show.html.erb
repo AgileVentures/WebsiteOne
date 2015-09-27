@@ -1,141 +1,128 @@
-<%= javascript_include_tag 'projects' %>
-<%= javascript_include_tag 'users' %>
 <% provide :title, @project.title %>
+<div class="project-title">
+  <div class="row">
+    <div class="col-xs-12">
+      <strong><%= link_to 'Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
+      <strong><%= @project.title %></strong>
 
-<div>
-  <strong><%= link_to 'List of Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
-  <strong><%= @project.title %></strong>
+      <div class="row"> 
+        <% if @project.image_url.present? %>
+          <div class="col-xs-12">
+            <%= image_tag @project.image_url, class: "img-responsive" %>
+          </div>
+        <% end %>
+        <div class="col-xs-10">
+          <h1><%= @project.title %></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12"><p> <%= clean_html @project.description %></p>
+        </div>
+      </div>
+      <hr>
+      <div class="project-edit">
+        <% if user_signed_in? %>
+            <ul class="list-inline">
+            <% if current_user.following?(@project) %>
+                  <li class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
+                      Project Actions
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
+                      <li role="presentation"><%= link_to 'Edit Project Pitch', '/editor/' + request.path, role: 'menuitem', id: 'edit_link', data: {save_url: mercury_update_project_path(@project.id)} %></li>
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
+                      <li role="presentation" class="divider"></li>
+                      <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a>
+                      </li>
+                    </ul>
+                  </li>
+                <li class="hangout-btn">
+                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %></li>
+                </ul>
+                <hr>
+            <% else %>
+                <div>
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                    Start Live Hangout
+                  </button>
+                </div>
+                <hr>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Info</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>You should join this project before you can start the hangouts</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div id="doc-box">
-  <div id="doc-overview">
-    <h1><%= @project.title %></h1>
-
-    <% if @project.github_url.present? %>
-        <p><i class="fa fa-github-alt fa-lg"></i>
-          <%= link_to "#{@project.github_url.split('/').last} ", @project.github_url %>on GitHub</p>
-    <% else %>
-        <p><i class="fa fa-github-alt fa-lg"></i> not linked to GitHub</p>
-    <% end %>
-
-    <% if @project.pivotaltracker_url.present? %>
-        <p><i class="fa fa-gear fa-lg"></i>
-          <%= link_to "#{@project.title} ", @project.pivotaltracker_url %>on PivotalTracker</p>
-    <% else %>
-        <p><i class="fa fa-gear fa-lg"></i> not linked to PivotalTracker</p>
-    <% end %>
-
-    <div class="doc-status-text">
-      <div>Status: <strong style="font-style: normal;"><%= @project.status.upcase %></strong></div>
-      <div><%= "Created #{time_ago_in_words(@project.created_at)} ago" %> by <%= @project.user.display_name %></div>
+<div class="project-main">
+  <div class="row">
+    <div class="project-sidebar col-xs-12 col-md-4 col-md-push-8" role="complementary">
+      <%= render 'highlight_box', members: @members %>
+      <%= render 'connections' %>
+      <%= render 'members_list', members: @members %>
     </div>
-    <div class="small-divider"></div>
-    <p><strong><%= @project.description %></strong></p>
 
-  </div>
-  <div id="doc-side-panel">
-    <% if user_signed_in? %>
-        <ul>
-          <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o', edit_project_path(@project) %></li>
-          <li><%= custom_css_btn 'new document', 'fa fa-file-text-o', new_project_document_path(project_id: @project.friendly_id) %></li>
-          <% if current_user.following?(@project) %>
-              <li><%= custom_css_btn 'leave project', 'fa fa-users', unfollow_project_path(@project) %></li>
-              <li>
-                <div id="HOA-placeholder" data-hoa-title="<%= @project.title %> Pairing: "></div>
-              </li>
+    <div class="project-main col-xs-12 col-md-8 col-md-pull-4">
+      <ul class="nav nav-tabs nav-justified">
+        <li id="pitch" class="active">
+          <a href="#pitch_content" data-toggle="tab" data-hash="home">About</a>
+        </li>
+        <li id="documents">
+          <a href="#documents_list" data-toggle="tab" data-hash="document">Documents (<%= @documents.roots.count %>)</a>
+        </li>
+        <li id="videos">
+          <a href="#videos_list" data-toggle="tab" data-hash="video">Videos (<%= @event_instances_count %>)</a>
+        </li>
+        <li id="activities">
+          <a href="#activities_list" data-toggle="tab" data-hash="activity">Activity (<%= @stories.count %>)</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content" style="background: #fff;">
+        <div id="pitch_content" class="mercury-region tab-pane active" data-mercury="full">
+          <% unless @project.pitch.nil? %>
+              <%= @project.pitch.html_safe %>
           <% else %>
-              <li><%= custom_css_btn 'join project', 'fa fa-users', follow_project_path(@project) %></li>
+              <p><b>Project content missing :(</b></p>
+
+              <p>A compelling pitch can make your project
+                <a href="https://www.kickstarter.com/discover/categories/technology?ref=discover_index">more
+                  appealing</a> to potential collaborators. Please edit project details to add pitch content.</p>
           <% end %>
-        </ul>
-    <% end %>
-  </div>
-</div>
-
-<div class="small-divider"></div>
-
-<ul class="nav nav-tabs">
-  <li id="documents" class="active">
-    <a href="#documents_list" data-toggle="tab">Documents (<%= @documents.roots.count %>)</a>
-  </li>
-  <li id="members">
-    <a href="#members_list" data-toggle="tab">Members (<%= @members.count %>)</a>
-  </li>
-  <li id="videos">
-    <a href="#videos_list" data-toggle="tab"> Videos (<%= @videos.count %>)</a>
-  </li>
-  <li id="activities">
-    <a href="#activities_list" data-toggle="tab"> Activity</a>
-  </li>
-</ul>
-
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane active" id="documents_list">
-    <% unless @documents.empty? %>
-        <h2>Related documents</h2>
-        <ul class="listings">
-          <% @documents.roots.each do |d| %>
-              <li class="listings-item">
-                <% num_children = d.children.count %>
-                <strong><%= link_to d.title, project_document_path(@project, d) %></strong> <%= "(#{num_children})" if num_children > 0 %>
-                -
-                <i>created by <%= d.user.display_name %> <%= time_ago_in_words(d.created_at) %> ago</i>
-              </li>
-          <% end %>
-        </ul>
-    <% else %>
-        <p style="margin-top: 20px;">No documents can be found for project <strong><%= @project.title %></strong></p>
-    <% end %>
-  </div>
-  <div class="tab-pane" id="members_list">
-    <ul class="listings">
-      <% if @members.empty? %>
-          <p style="margin-top: 20px;">No members in project <strong><%= @project.title %></strong></p>
-      <% else %>
-          <h2>List of Project Members</h2>
-          <% @members.each do |member| %>
-              <li class="listings-item"><strong><%= link_to member.display_name, user_path(member) %></strong>
-              </li>
-          <% end %>
-      <% end %>
-    </ul>
-  </div>
-  <div class="tab-pane" id="videos_list">
-    <div class="row">
-      <div class="col-md-6">
-        <% if @videos.empty? %>
-            <p style="margin-top: 20px;">No videos in project <strong><%= @project.title %></strong></p>
-        <% else %>
-            <h2>List of Project videos</h2>
-            <table class="table table-bordered table-striped table-hover table-condensed" style="margin-left: -15px; width: 100%;">
-              <tr>
-                <th>Video</th>
-                <th style="width: 80px;">Host</th>
-                <th style="width: 80px;">Published</th>
-              </tr>
-              <% @videos.each do |video| %>
-                  <tr style="font-size: 85%">
-                    <td><%= video_link(video) %></td>
-                    <td><%= video[:author] %></td>
-                    <td><%= video[:published].to_s(:db) %></td>
-                  </tr>
-              <% end %>
-            </table>
-        <% end %>
-      </div>
-      <div class="col-md-6">
-        <% unless @videos.empty? %>
-            <h4 id="video_contents"><%= @videos.first[:content] %></h4>
-            <iframe id="ytplayer" type="text/html" width="340" height="210"
-                    src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
-
-        <% end %>
+        </div>
+        <div class="tab-pane" id="documents_list">
+          <%= render 'documents_list' %>
+        </div>
+        <div class="tab-pane" id="videos_list">
+          <%= render 'videos_list' %>
+        </div>
+        <div class="tab-pane activity" id="activities_list">
+          <%= render 'activity' %>
+        </div>
       </div>
     </div>
   </div>
-  <div class="tab-pane activity" id="activities_list">
-    <%= render 'activity' %>
-  </div>
-
 </div>
-

@@ -1,0 +1,12 @@
+<% present hangout do |presenter| %>
+  <dl>
+    <dt>Title</dt>
+    <dd><%= presenter.title %></dd>
+    <dt>Category</dt>
+    <dd><%= presenter.category %></dd>
+    <dt>Hangout link</dt>
+    <dd><%= link_to presenter.hangout_url, presenter.hangout_url %>
+    <dd><i>Updated: <%= time_ago_in_words hangout.updated_at %> ago</i></dd>
+    </dd>
+  </dl>
+<% end %>

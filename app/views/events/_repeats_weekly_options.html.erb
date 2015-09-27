@@ -2,7 +2,7 @@
   <div class="control-group">
     <label class="control-label">Each</label>
     <div class="controls">
-      <% Event::DaysOfTheWeek.each do |day_of_the_week| %>
+      <% Event::DAYS_OF_THE_WEEK.each do |day_of_the_week| %>
           <%= label_tag "event_repeats_weekly_each_days_of_the_week_#{day_of_the_week}", day_of_the_week.humanize, :class => 'checkbox inline' do %>
               <%= check_box_tag "event[repeats_weekly_each_days_of_the_week][#{day_of_the_week}]", day_of_the_week, f.object.repeats_weekly_each_days_of_the_week.include?(day_of_the_week), {:name => "event[repeats_weekly_each_days_of_the_week][]"} %>
               <%= day_of_the_week.humanize %>

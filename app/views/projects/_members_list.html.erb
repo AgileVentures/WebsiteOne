@@ -1,0 +1,62 @@
+<aside id="members-list" class="sidebar-widget">
+  <h1 class="widget-title">Members <span>(<%= @members.count %>)</span></h1>
+  <% if members.empty? %>
+      <p>No members in project <strong><%= @project.title %></strong></p>
+  <% else %>
+      <ul class="media-list">
+        <% members.first(5).reverse.each do |member| %>
+            <% present member do |presenter| %>
+                <li class="media-item">
+                  <a class="user-preview" href="<%= user_path(member) %>" data-toggle="tooltip"
+                     data-placement="top" title="<%= presenter.display_name %>">
+                    <%= presenter.gravatar_image(class: 'projects-user-avatar') %>
+                    <div class="media-body index-summary">
+                      <div style="display: inline-flex;">
+                        <p class="media-heading"><%= presenter.display_name %></p>
+                        <% if member.country_name? %>
+                        <p><small>(<%= presenter.country_name %>)</small></p>
+                        <% end %>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+            <% end %>
+        <% end %>
+      </ul>
+      <a href="#" data-target="#members-modal" data-toggle="modal">View full list</a>
+  <% end %>
+</aside>
+
+<!-- Modal -->
+<div class="modal fade" id="members-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">The <%= @project.title %> team</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="media-list">
+          <% members.each do |member| %>
+              <% present member do |presenter| %>
+                  <li class="media-item">
+                    <a class="user-preview" href="<%= user_path(member) %>" data-toggle="tooltip"
+                       data-placement="top" title="<%= presenter.display_name %>">
+                      <%= presenter.gravatar_image(class: 'projects-user-avatar') %>
+                      <div class="media-body index-summary">
+                        <div style="display: inline-flex;">
+                          <p class="media-heading"><%= presenter.display_name %></p>
+                          <% if member.country_name? %>
+                              <p><small>(<%= presenter.country_name %>)</small></p>
+                          <% end %>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+              <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

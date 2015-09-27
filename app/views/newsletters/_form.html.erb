@@ -1,0 +1,39 @@
+<%= form_for(@newsletter) do |f| %>
+  <% if @newsletter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@newsletter.errors.count, "error") %> prohibited this newsletter from being saved:</h2>
+
+      <ul>
+      <% @newsletter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='form-group'>
+    <%= f.label :subject %>
+    <%= f.text_field :subject, class: 'form-control', required: true, placeholder: 'the subject as described in RFC 2822' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', required: true, placeholder: 'A friendly Title' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, rows: 25,  class: 'form-control', required: true, placeholder: 'Here your content - right now just simple_format' %>
+  </div>
+  <% unless @newsletter.was_sent %>
+    <div class='form-group'>
+      <%= f.label :do_send do %>
+        <%= f.check_box :do_send %> &nbsp; Start send this Newsletter now
+      <% end %>
+      <p class='help-text'>
+        When you check this check-box, the newsletter will be sent immediately after save - otherwise its kind of a draft...
+      </p>
+    </div>
+  <% end %>
+  <div class="form-actions">
+    <%= f.submit "#{@newsletter.new_record? ? 'Create' : 'Update'}", class: 'btn btn-primary'%>
+  </div>
+<% end %>

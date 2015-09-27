@@ -1,0 +1,28 @@
+<% unless @event_instances.empty? %>
+  <% present @event_instances.first do |presenter| %>
+    <h4 id="video_contents"><%= presenter.title %></h4>
+    <div class="video-container">
+      <iframe id="ytplayer" type="text/html" width="480" height="320" src="<%= presenter.video_embed_link %>" frameborder="0"></iframe>
+    </div>
+  <% end %>
+  <br />
+  <h2>Latest Project videos</h2>
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+      <th>Video</th>
+      <th style="width: 80px;">Host</th>
+      <th style="width: 80px;">Published</th>
+    </tr>
+    <% @event_instances.each do |event_instance| %>
+      <% present event_instance do |presenter| %>
+        <tr style="font-size: 85%">
+          <td><%= presenter.video_link %></td>
+          <td><%= UserPresenter.new(presenter.user).display_name %></td>
+          <td><%= presenter.created_at %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+<% else %>
+  <p>No videos in project <strong><%= @project.title %></strong></p>
+<% end %>

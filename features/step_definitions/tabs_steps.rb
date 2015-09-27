@@ -1,12 +1,3 @@
-#When(/^I should copy current url$/) do
-#  @uri = current_url
-#  puts @uri
-#end
-#
-#Then(/^I should open new browser past copies url$/) do
-#  visit @uri
-#end
-
-Then(/^I should see "(.*?)" tab is active$/) do |tab|
-    page.should have_css "##{tab}.active"
+Then(/^I should see a "(.*?)" tab (?:set to|is) (.*?)$/) do |tab, state|
+  expect(page).to have_css "##{tab.downcase}.#{state}"
 end

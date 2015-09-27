@@ -6,7 +6,7 @@ describe EventsController do
 
   before :each do
     @event = FactoryGirl.create(:event)
-    @events = @event.current_occurences
+    @events = @event.next_occurrences
   end
 
   describe 'GET index' do
@@ -24,6 +24,12 @@ describe EventsController do
 
     it 'assigns the requested event as @event' do
       assigns(:event).should eq(event)
+    end
+
+    it 'assigns a event instance' do
+      event_instance = FactoryGirl.create(:event_instance, event: event)
+      get :show, {:id => event.to_param}, valid_session
+      expect(assigns(:hangout)).to eq(event_instance)
     end
 
     it 'renders the show template' do
@@ -47,6 +53,8 @@ describe EventsController do
   end
 
   describe 'POST create' do
+    let(:valid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event), start_date: '17 Jun 2013', start_time: '09:00:00 UTC' } }
+    let(:invalid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event, name: nil), start_date: '', start_time: '' } }
     before :each do
       @controller.stub(:authenticate_user!).and_return(true)
     end
@@ -54,12 +62,12 @@ describe EventsController do
     context 'with valid attributes' do
       it 'saves the new event in the database' do
         expect {
-          post :create, event: valid_attributes_for(:event)
+          post :create, valid_attributes
         }.to change(Event, :count).by(1)
       end
 
       it 'redirects to events#show' do
-        post :create, event: valid_attributes_for(:event)
+        post :create, valid_attributes
         expect(response).to redirect_to event_path(controller.instance_variable_get('@event'))
       end
     end
@@ -68,16 +76,16 @@ describe EventsController do
       it 'does not save the new subject in the database' do
         #Event.any_instance.stub(:save).and_return(false)
         expect {
-          post :create, event: invalid_attributes_for(:event)
+          post :create, invalid_attributes
         }.to_not change(Event, :count)
-        assigns(:event).should be_a_new(Event)
-        assigns(:event).should_not be_persisted
+        expect(assigns(:event)).to be_a_new(Event)
+        expect(assigns(:event)).not_to be_persisted
       end
 
       it 're-renders the events#new template' do
         Event.any_instance.stub(:save).and_return(false)
-        post :create, event: invalid_attributes_for(:event)
-        expect(response).to redirect_to new_event_path
+        post :create, event: FactoryGirl.attributes_for(:event, name: nil)
+        expect(response).to render_template :new
       end
     end
   end
@@ -100,7 +108,8 @@ describe EventsController do
   end
 
   describe 'POST update' do
-    let(:valid_attributes) { { id: @event, event: valid_attributes_for(:event) } }
+    let(:valid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event, name: 'New Event'), start_date: '17 Jun 2013', start_time: '09:00:00 UTC' } }
+
 
     before(:each) do
       controller.stub(:authenticate_user! => true)
@@ -113,7 +122,8 @@ describe EventsController do
 
     context 'with valid params' do
       before(:each) do
-        post :update, valid_attributes
+
+            post :update, valid_attributes
       end
 
       it 'should redirected to the index page' do

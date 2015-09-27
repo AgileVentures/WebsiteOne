@@ -1,0 +1,103 @@
+@import "variables";
+@import "mixins";
+
+.page-option {
+  display: inline;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+section.page-preview {
+  margin: 10px 0;
+  padding: 5px 10px;
+  height: auto;
+  min-height: 20px;
+  max-height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.page-preview-overview {
+  margin-right: 70px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.page-preview-stats {
+  width: 60px;
+  padding: 5px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+
+.page-option-icon {
+  display: inline-block;
+  background: #fff;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.page-option-text {
+  @include css-transition(max-width 0.4s ease 0s);
+  display: inline-block;
+  vertical-align: middle;
+  width: auto !important;
+  max-width: 0px;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.page-option:hover .page-option-text {
+  max-width: 250px;
+}
+
+#page-box {
+  height: auto;
+  width: 100%;
+  position: relative;
+}
+
+#page-overview {
+  width: 80%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#page-side-panel {
+  font-size: 130%;
+  padding-top: 25px;
+  width: 10%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#page-side-panel ul {
+  list-style: none;
+}
+
+.tab-content {
+  // padding: 0 15px 10px 15px;
+  border: 1px solid #dddddd;
+  border-top-color: transparent;
+}
+
+.page-status-text {
+  display: inline-block;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+#static_page_body {
+  width: 100%;
+  padding: 10px 5px;
+  margin: 15px 0;
+}
+
+#static_page_title .mercury-textarea {
+  width: 125%;
+}
+

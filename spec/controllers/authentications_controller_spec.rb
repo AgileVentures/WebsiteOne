@@ -144,57 +144,60 @@ describe AuthenticationsController do
   end
 
   describe 'youtube authentication' do
-    before(:each) do
-      controller.stub(authenticate_user!: true)
+    context 'youtube request' do
+      before do
+        request.env['omniauth.params']['youtube'] = true
+        request.env['omniauth.auth']['credentials'] = {}
+      end
 
-      request.env['omniauth.auth'] = {
-          'provider' => 'agileventures',
-          'uid' => '12345678',
-          'info' => {'email' => 'foo@agileventures.org'},
-          'credentials' => {}
-      }
+      context 'user is signed-in' do
+        let(:user) { FactoryGirl.create(:user) }
+        before do
+          allow(controller).to receive(:current_user).and_return(user)
+        end
 
-      request.env['omniauth.params'] = {}
-      request.env['omniauth.params']['youtube'] = true
+        it 'links to youtube' do
+          expect(controller).to receive(:link_to_youtube).and_call_original
+          get :create, provider: 'gplus'
+        end
 
-      request.env['omniauth.origin'] = 'back_path'
+        it 'updates users youtube_id if it does not exist' do
+          request.env['omniauth.auth']['credentials']['token'] = 'token'
+          allow(user).to receive(:youtube_user_name).and_return('test_user_name')
+          allow(YoutubeHelper).to receive(:channel_id).and_return('test_id')
+          get :create, provider: 'gplus'
+          expect(user.youtube_id).to eq('test_id')
+        end
+
+        it 'updates users youtube_user_name if it does not exist' do
+          request.env['omniauth.auth']['credentials']['token'] = 'token'
+          allow(user).to receive(:youtube_id).and_return('test_id')
+          allow(YoutubeHelper).to receive(:youtube_user_name).and_return('test_user_name')
+
+          get :create, provider: 'gplus'
+
+          expect(user.youtube_user_name).to eq('test_user_name')
+        end
+      end
+
+      context 'user is not signed-in' do
+        it 'does not link to youtube' do
+          allow(controller).to receive(:current_user)
+          expect(controller).to_not receive(:link_to_youtube)
+
+          get :create, provider: 'gplus'
+        end
+      end
     end
 
-    it 'calls #link_to_youtube' do
-      expect(controller).to receive(:link_to_youtube)
-      get :create, provider: 'github'
-    end
-    it '#link_to_youtube: gets channel_id if user is authenticated and does not have youtube_id' do
-      request.env['omniauth.auth']['credentials']['token'] = 'token'
-      user = double(User, youtube_id: nil)
-      controller.stub(current_user: user)
-      user.stub(:youtube_id=)
-      user.stub(:save)
+    context 'non-youtube request' do
+      it 'does not link to youtube' do
+        request.env['omniauth.params']['youtube'] = nil
 
-      expect(Youtube).to receive(:channel_id)
-      get :create, provider: 'github'
-    end
+        expect(controller).to_not receive(:link_to_youtube)
 
-    it '#link_to_youtube: redirects back' do
-      get :create, provider: 'github'
-      expect(response).to redirect_to 'back_path'
-    end
-
-    it 'calls #unlink from youtube' do
-      controller.stub_chain(:current_user, :authentications, :find).and_return(double(User))
-      controller.stub_chain(:current_user, :authentications, :count).and_return(1)
-      controller.stub_chain(:current_user, :encrypted_password).and_return(nil)
-      expect(controller).to receive(:unlink_from_youtube)
-      get :destroy, id: 'youtube'
-    end
-
-    it '#unlink_from_youtube' do
-      user = stub_model(User, youtube_id: '12345')
-      controller.stub(current_user: user)
-
-      get :destroy, id: 'youtube', origin: 'back_path'
-      expect(user.youtube_id).to be_nil
-      expect(response).to redirect_to 'back_path'
+        get :create, provider: 'gplus'
+      end
     end
   end
 
@@ -219,4 +222,3 @@ describe AuthenticationsController do
     end
   end
 end
-

@@ -1,0 +1,10 @@
+<%= content_for :content do %>
+
+    <div id="not-sidebar" class="col-sm-11">
+      <div id="not-sidebar-content">
+        <%= yield %>
+      </div>
+    </div>
+
+<% end %>
+<%= render template: 'layouts/application' %>

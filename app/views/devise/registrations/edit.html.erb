@@ -1,40 +1,38 @@
 <div class="container">
-  <div class="col-md-8 col-md-offset-1">
-    <%= devise_error_messages_flash %>
-    <h2>Account details for <%= user_details(@user) %></h2>
-  </div>
-  <div class="row preview_box">
-    <% if params[:preview] %>
-        <%= render 'preview' %>
-    <% end %>
+  <div class="row">
+    <div class="col-xs-11 col-sm-offset-1 col-xs-offset-0">
+      <%= devise_error_messages_flash %>
+      <h2>Account details for <%= user_details(@user) %></h2>
+    </div>
   </div>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
+    <% present resource do |presenter| %>
       <div class="col-md-3 col-md-offset-1">
-        <div style="display:inline-flex;">
-          <img src="<%= gravatar_for(resource.email) %>" class="thumbnail img-rounded" style=" margin-right: 10px;">
-          <%= link_to 'Change your avatar', 'http://en.gravatar.com/emails/' %>
+        <%= presenter.gravatar_image(size: 120, class: 'thumbnail img-rounded', style: 'margin-right: 10px') %>
+        <%= link_to 'Change your avatar', 'http://en.gravatar.com/emails/', target: '_blank' %>
+        <div class="checkbox">
+          <%= f.label :display_profile, "#{f.check_box(:display_profile)} Make profile public".html_safe %>
         </div>
-        <div style="margin-bottom: 7px;display:inline-flex"><%= f.label :display_profile %>
-          <%= f.check_box :display_profile %>
+        <div class="checkbox">
+          <%= f.label :display_email, "#{f.check_box(:display_email)} Make email public".html_safe %>
         </div>
-        <div style="margin-bottom: 7px;display:inline-flex"><%= f.label :display_email %>
-          <%= f.check_box :display_email %>
+        <div class="checkbox">
+          <%= f.label :display_hire_me, "#{f.check_box(:display_hire_me)} Show hire me button".html_safe %>
         </div>
-        <div style="margin-bottom: 7px;display:inline-flex"><%= f.label :display_hire_me %>
-          <%= f.check_box :display_hire_me %>
+        <div class="checkbox">
+          <%= f.label :receive_mailings, "#{f.check_box(:receive_mailings)} Receive site emails".html_safe %>
         </div>
         <% supported_third_parties.each do |provider| %>
             <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
         <% end %>
-        <% if @user.eql?(current_user) %>
-            <div style="margin-top: 10px;">
-              <% if @user.youtube_id %>
-                  <%= unlink_from_youtube_button(request.original_url) %>
-              <% else %>
-                  <%= link_to_youtube_button(request.original_url) %>
-              <% end %>
-            </div>
-        <% end %>
+        <div style="margin-top: 10px;">
+          <% if resource.youtube_id %>
+              <%= unlink_from_youtube_button(request.original_url) %>
+          <% else %>
+            <%= link_to_youtube_button(request.original_url) %>
+            <p class='help-block'>You need to have set-up a youtube channel. A youtube account is not enough</p>
+          <% end %>
+        </div>
       </div>
       <div class="col-md-5 ">
         <div><%= f.label :first_name %>
@@ -42,15 +40,23 @@
             <%= f.text_field :first_name, :autofocus => true, class: 'form-control' %>
           </div>
         </div>
+
         <div><%= f.label :last_name %>
           <div class="form-group">
             <%= f.text_field :last_name, :autofocus => true, class: 'form-control' %>
           </div>
         </div>
+
         <div><%= f.label :email %>
           <div class="form-group">
             <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
           </div>
+        </div>
+
+        <div><%= f.label :skills, 'Skills - (separate with comma)' %>
+          <div id="skills" class="tag-list" style="margin-bottom: 10px;"
+            data-skill-list="<%= resource.skill_list.to_json %>"></div>
+            <%= f.text_field :skill_list, hidden: true  %>
         </div>
 
         <div><%= f.label :bio %>
@@ -58,68 +64,29 @@
             <%= f.text_area :bio, :autofocus => true, class: 'form-control', 'rows' => 10 %>
           </div>
         </div>
-
-        <div><%= f.label :skills, 'Skills - (separate with comma)' %>
-          <div id="skills" class="tag-list" style="margin-bottom: 10px;"></div>
-          <%= f.text_field :skill_list, :hidden => true %>
-        </div>
-        <div>
-          <%= f.label :receive_mailings %>
-          <div class='form-group'>
-            <%= f.check_box :receive_mailings %>
-          </div>
-        </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-        <div><%= link_to 'Cancel', :back, :class => 'btn btn-default' %> <%= f.submit 'Update', class: 'btn btn-primary' %>
+
+        <div>
+          <%= link_to 'Cancel', user_path(presenter.user), :class => 'btn btn-default' %>
+          <%= f.submit 'Update', class: 'btn btn-primary' %>
         </div>
-        <script>
-            $(function () {
-                $('#skills').tags({
-                    readOnly: false,
-                    tagClass: 'add-btn-agile',
-                    tagSize: 'md',
-                    tagData: <%= raw resource.skill_list.to_json %>,
-                    promptText: " "
-                });
-            });
-        </script>
+      </div>
+    <% end %>
   <% end %>
-
-
-  <!--     <div><%= link_to 'Preview', '#',
-                            class: 'btn btn-primary btn-lg btn-block', id: 'preview' %></div> -->
-
+  <!-- HIDDEN TILL ORPHAN DOCUMENTS CAN BE RESOLVED
+  <hr />
+  <div class="row">
+    <div class="col-md-5 col-md-offset-4 user-cancel-account">
+      <h4>Danger Zone</h4>
+      <p>Unhappy? You will be sorely missed...</p>
+      <%= button_to 'Cancel my account', registration_path(resource_name),
+                    :data => {:confirm => 'Are you sure?'}, :method => :delete,
+                    :class => 'btn btn-danger btn-small' %>
+      </div>
   </div>
-  <div class="col-md-3 col-md-offset-1">
-    <strong>Cancel account</strong>
-    <p>Unhappy? You will be sorely missed...</p>
-    <%= button_to 'Cancel my account', registration_path(resource_name),
-                  :data => {:confirm => 'Are you sure?'}, :method => :delete,
-                  :class => 'btn btn-danger btn-block' %>
-  </div>
-
-
-  <script>
-      $('#skills').bind("keydown keypress", function (e) {
-          var code = e.keyCode || e.which;
-          if (code == 9 || code == 44) {
-              e.preventDefault();
-              $("#skills").tags().addTag($('input.tags-input').val().replace(",", ""));
-              $('input.tags-input').val("");
-          }
-          // Sampriti: Let bootstrap-tags handle Enter event
-          else if (code == 13) {
-              e.preventDefault();
-          }
-      });
-
-      $('#edit_user').submit(function (event) {
-          $("#user_skill_list").val($("#skills").tags().getTags().join(","));
-      });
-  </script>
-
+  -->
   <style>
       .tag a {
           line-height: 15px;

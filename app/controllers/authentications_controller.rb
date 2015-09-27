@@ -2,7 +2,7 @@ class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
 
   def create
-    if request.env['omniauth.params']['youtube']
+    if request.env['omniauth.params']['youtube'] && current_user
       link_to_youtube and return
     end
 
@@ -28,7 +28,7 @@ class AuthenticationsController < ApplicationController
 
   def failure
     # Bryan: TESTED
-    flash[:alert] = 'Authentication failed.'
+    flash[:alert] = params[:message] || 'Authentication failed.'
     redirect_to root_path
   end
 
@@ -77,13 +77,14 @@ class AuthenticationsController < ApplicationController
   end
 
   def link_to_youtube
-    user = current_user
-    if (token = request.env['omniauth.auth']['credentials']['token']) && !user.youtube_id
-      user.youtube_id = Youtube.channel_id(token)
-      user.save
+    token = request.env['omniauth.auth']['credentials']['token']
+    if token
+      current_user.youtube_id = YoutubeHelper.channel_id(token) unless current_user.youtube_id
+      current_user.youtube_user_name = YoutubeHelper.youtube_user_name(current_user) unless current_user.youtube_user_name
+      current_user.save
     end
 
-    redirect_to(request.env['omniauth.origin'] || root_path)
+    redirect_to(request.env['omniauth.origin'] || edit_user_registration_path)
   end
 
   def unlink_from_youtube
@@ -123,7 +124,7 @@ class AuthenticationsController < ApplicationController
 
     if user.save
       # Bryan: TESTED
-      Mailer.send_welcome_message(user).deliver
+      Mailer.send_welcome_message(user).deliver if Features.enabled?(:welcome_email)
       flash[:notice] = 'Signed in successfully.'
       sign_in_and_redirect(:user, user)
     else
@@ -133,14 +134,3 @@ class AuthenticationsController < ApplicationController
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-

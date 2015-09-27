@@ -1,0 +1,4 @@
+<% present user do |user_presenter| %>
+  <% user_image = user_presenter.gravatar_image(size: 40, id: 'user-gravatar', class: 'img-circle') %>
+  <%= link_to user_image, user_presenter.profile_link, title: user_presenter.display_name %>
+<% end %>

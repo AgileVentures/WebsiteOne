@@ -1,78 +1,54 @@
-<% url = @event.url if @event.url %>
-<script src="https://apis.google.com/js/platform.js"></script>
-<%= javascript_include_tag 'projects' %>
 <div class="col-lg-8 col-lg-offset-2">
-
-  <h2><%= @event.name %></h2>
-  <small><%= @event.schedule %></small>
-  <p><strong><%= @event.description %></strong></p>
+  <div class="event-details">
+    <h2><%= @event.name %></h2>
+  </div>
+  <div class="event-details-well">
+    <div class="event-details">
+      <div class="col-lg-8">
+        <small class="event-schedule"><%= @event.schedule %></small>
+      </div>
+      <div class="col-lg-4">
+        <% if @hangout.try!(:live?) %>
+          <a href="<%= @hangout.hangout_url %>" class="event-live-link">EVENT IS LIVE !<br/>CLICK TO JOIN</a>
+        <% else  %>
+          <a href="#">NOT YET LIVE ...</a>
+        <% end  %>
+      </div>
+    </div>
+    <div class="event-details">
+      <div class="col-lg-12">
+        <p><strong><%= @event.description %></strong></p>
+      </div>
+    </div>
+  </div>
 
   <% if @event.schedule.present? %>
-    <div class="row well well-sm" >
-      <div class="col-lg-8" style="margin-top: -10px">
-        <h4>Upcoming schedule</h4>
-        <% @event_schedule.first(5).each do |e| %>
-          <%= current_occurrence_time(e) %>
-          <br/>
-        <% end %>
+    <div class="schedule-well">
+      <div class="row">
+        <h4 style="margin: 15px;">Upcoming schedule</h4>
       </div>
-      <div class="col-sm-4" style="margin-top: 10px">
-        <%= link_to 'Back', root_path, :class => 'btn btn-danger' %>
+      <div class="row">
+        <div class="col-lg-8">
+          <ul style="list-style: none; padding-left: 0">
+            <% @event_schedule.first(5).each do |e| %>
+              <li>
+                <%= current_occurrence_time(e) %> /
+                <p style='padding-left: 1em'><%= current_occurrence_local_time(e) %></p>
+              </li>
+            <% end %>
+          </ul>
+        </div>
         <% if user_signed_in? %>
-          <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-primary' %>
-            <div style="margin-top: 10px">
-            <div id="HOA-placeholder" data-hoa-title="<%= @event.name %> - <%= current_occurrence_time(@event_schedule.first(1)) %>"></div>
-            </div>
-        <% end %>
+          <div class="col-lg-4">
+            <%= link_to 'Edit schedule', edit_event_path(@event), :class => 'event-edit-schedule' %>
+          </div>
+        <% end  %>
       </div>
     </div>
   <% end %>
 
-  <div class="col-lg-12">
-    <% if user_signed_in? %>
-      <% if @event.url.present? %>
-        Hangout link:  <%= link_to @event.url, @event.url, id: 'hoa-link' %>
-        - <button id="toggle-edit" class="btn btn-sm btn-default">Edit</button>
-      <% else %>
-        <button id="toggle-add" class="btn btn-sm btn-default">Add url</button>
-      <% end %>
-      <%= form_for @event, url: update_only_url_event_path(@event), html: {:class => 'form-vertical edit_url', :id => 'event-form'} do |f| %>
-        <div class='form-group' style="margin-top: 10px">
-          <%= f.label :url, :class => 'control-label' -%>
-          <%= f.text_field :url, :class => 'form-control', :value => "#{url}" -%>
-        </div>
-        <div class='form-group'>
-          <%= f.submit 'Save', class: 'btn btn-default', data: {disable_with: 'Working...'} %>
-        </div>
-      <% end %>
-    <% elsif @event.url.present? %>
-      Hangout link:  <%= link_to @event.url, @event.url, id: 'hoa-link' %>
-    <% end %>
+  <div id="hg-management" class="hangouts-management-well">
+    <%= render partial: 'hangouts_management' %>
   </div>
-
 </div>
-
-
-<script>
-  $('#toggle-edit, #toggle-add').click(function () {
-    $('#event-form').toggle();
-    $('#toggle-edit').text(function (i, text) {
-      return text === "Edit" ? "Cancel" : "Edit";
-    })
-    $('#toggle-add').text(function (i, text) {
-      return text === "Add url" ? "Cancel" : "Add url";
-    })
-  });
-</script>
-
-<style>
-
-  .edit_url {
-    display: none;
-  }
-
-  #link_url {
-  }
-
-
-</style>
+<%=javascript_include_tag 'events.js' %>

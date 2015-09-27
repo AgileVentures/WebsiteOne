@@ -1,0 +1,27 @@
+// Place all the styles related to the Articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+@import "mixins";
+
+section.article-full {
+  margin: 0;
+  padding: 0;
+}
+
+header.article-header {
+}
+
+textarea.md-edit {
+  font-family: monospace;
+  resize: none;
+}
+
+.md-preview {
+  overflow: hidden;
+}
+.vote {
+  background-color: $theme-main;
+}
+

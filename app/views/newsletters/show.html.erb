@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<% if @newsletter.was_sent %>
+  <p>
+    <strong>Sent at:</strong>
+    <%= l( @newsletter.sent_at )%>
+  </p>
+<% end %>
+<p>
+  <strong>Subject:</strong>
+  <%= @newsletter.subject %>
+</p> 
+<p>
+  <strong>Title:</strong>
+  <%= @newsletter.title %>
+</p>
+<p>
+  <strong>Body:</strong>
+  <%= simple_format @newsletter.body %>
+</p>
+
+<% if privileged_visitor? %>
+<div class='form-actions'>
+  <%= form_for(@newsletter) do |f| %>
+    <%= f.hidden_field :do_send, value: true %>
+    <%= f.submit 'Send Newsletter Now', data: { confirm: 'This will send out the Newsletter now...'}, class: 'btn btn-primary' %>
+  <% end unless @newsletter.was_sent? %>
+</div>
+<% end %>
+<%= link_to 'Edit', edit_newsletter_path(@newsletter) if privileged_visitor? %> |
+<%= link_to 'Back', newsletters_path %>

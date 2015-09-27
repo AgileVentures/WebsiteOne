@@ -34,16 +34,8 @@ describe 'layouts/application.html.erb' do
 
   it 'should include css & js files' do
     render
-    rendered.should have_xpath("//link[contains(@href, '.css')]")
-    rendered.should have_xpath("//script[contains(@src, '.js')]")
-  end
-
-  it 'should include the Google analytics script' do
-    dummy = Object.new
-    Rails.should_receive(:env).and_return(dummy)
-    dummy.should_receive(:production?).and_return(true)
-    render
-    rendered.should have_xpath("//script[text()[contains(.,#{GA.tracker})]]")
+    rendered.should have_tag('link', href: /\.css/)
+    rendered.should have_tag('script', href: /\.js/)
   end
 
   it 'should not have div nested inside p' do
@@ -61,11 +53,15 @@ describe 'layouts/application.html.erb' do
     rendered.should have_selector('div.navbar')
   end
 
+  it 'should render a search toggle' do
+    render
+    expect(rendered).to have_selector('a#google_search')
+  end
+
   it 'should render links to site features' do
     render
     #TODO Y replace href with project_path helper
-    rendered.should have_link 'Our projects', :href => projects_path
-    rendered.should have_link 'About us', :href => static_page_path('About Us')
+    rendered.should have_link 'Projects', :href => projects_path
   end
 
   it 'should render a footer' do
@@ -107,7 +103,7 @@ describe 'layouts/application.html.erb' do
 
     it 'should render navigation links' do
       render
-      rendered.should have_css('a#user_info', :visible => true)
+      rendered.should have_css('#user-gravatar', :visible => true)
       rendered.should have_link 'My account', :href => user_path(@user), :visible => false
       rendered.within('div.navbar') do |header|
         header.should_not have_link 'Log in', :href => new_user_session_path
@@ -122,49 +118,31 @@ describe 'layouts/application.html.erb' do
 
   end
 
-  describe 'contact_form' do
+  context 'within the site footer' do
+    before(:each) { render }
 
-    it 'renders a form' do
-      render
-      rendered.within('#footer') do |selection|
-        expect(selection).to have_css('#contact_form')
+    it 'should render a link to the "About Us" page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'About Us', :href => static_page_path('About Us')
       end
     end
 
-    it 'shows info link' do
-      render
-      rendered.within('#footer') do |selection|
-        expect(selection).to have_content('Send a traditional email to info@agileventures.org, or use the contact form.')
-        expect(selection).to have_link('info@agileventures.org')
+    it 'should render a link to the "Getting Started" page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Getting Started', :href => static_page_path('Getting Started')
       end
     end
 
-    it 'shows  required labels' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_text('Name')
-        expect(selection).to have_text('Email')
-        expect(selection).to have_text('Message')
-      end
-
-    end
-
-    it 'shows required fields' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_field('name')
-        expect(selection).to have_field('email')
-        expect(selection).to have_field('message')
+    it 'should render a link to the AgileVentures Facebook page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Facebook', href: 'https://www.facebook.com/agileventures'
       end
     end
 
-    it 'shows Send message button ' do
-      render
-      rendered.within('#contact_form') do |selection|
-        expect(selection).to have_button('send')
+    it 'should render a link to the AgileVentures Twitter page' do
+      rendered.within('#footer') do |footer|
+        footer.should have_link 'Twitter', href: 'https://twitter.com/AgileVentures'
       end
     end
   end
-
 end
-

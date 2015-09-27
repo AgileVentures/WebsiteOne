@@ -1,0 +1,68 @@
+<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+
+  <li class="active"><a href="#about" data-toggle="tab">About</a></li>
+  <% if presenter.has_skills? %>
+      <li><a href="#user-skills" data-toggle="tab">Skills</a></li>
+  <% end %>
+  <% if presenter.joined_projects? %>
+      <li><a href="#projects" data-toggle="tab">Projects</a></li>
+  <% end %>
+  <% if presenter.contributed? %>
+      <li><a href="#activity" data-toggle="tab">Activity</a></li>
+  <% end %>
+</ul>
+<div id="tab-content" class="tab-content" style="background: #fff;">
+
+  <div class="tab-pane active" id="about">
+    <section class="user-bio">
+      <h4>About me</h4>
+      <% if presenter.bio? %>
+          <%= simple_format(presenter.bio) %>
+      <% else %>
+          <p>This member has not written his bio yet...</p>
+      <% end %>
+    </section>
+  </div>
+
+  <% if presenter.has_skills? %>
+      <div class="tab-pane" id="user-skills">
+        <section class="user-skills">
+          <h4>Skills & Technologies</h4>
+          <ul>
+            <% presenter.skill_list.each do |skill| %>
+                <li class="label add-btn-agile"><%= skill %></li>
+            <% end %>
+          </ul>
+        </section>
+      </div>
+  <% end %>
+  <% if presenter.joined_projects? %>
+      <div class="tab-pane" id="projects">
+        <section class="user-projects">
+          <h4>Project Involvement</h4>
+          <ul>
+            <% presenter.following_projects.each do |project| %>
+                <li><%= link_to project.title, project_path(project) %></li>
+            <% end %>
+          </ul>
+        </section>
+      </div>
+  <% end %>
+  <% if presenter.contributed? %>
+      <div class="tab-pane" id="activity">
+        <section class="user-contributions">
+          <h4>Contributions</h4>
+          <ul>
+            <% presenter.contributions.each do |commit_count| %>
+                <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b>
+                  - <%= commit_count.commit_count %> commits</li>
+            <% end %>
+          </ul>
+        </section>
+      </div>
+  <% end %>
+</div>
+
+
+
+

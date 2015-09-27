@@ -1,0 +1,133 @@
+<% content_for(:description) { 'AgileVentuers members are scattered all over the world. The common denominator is the will to learn and contribute to good causes.' } %>
+<%= provide :title, 'Dashboard' %>
+<div id="page-box">
+  <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+    <li class="active"><a href="#statistics" data-toggle="tab" data-hash="statistics">Site statistics</a></li>
+    <li><a href="#activity-feed" data-toggle="tab" data-hash="activity-feed">Activity feed</a></li>
+  </ul>
+  <div id="tab-content" class="tab-content" style="background: #fff;">
+    <div class="tab-pane active" id="statistics">
+      <div id="info-box"><h3>User statistics</h3></div>
+      <div id="map" style="width: 100%; height: 500px; min-height: 500px;"></div>
+      <h3>Statistics</h3>
+
+      <div class="row">
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+          <div class="panel panel-primary" id="articles">
+            <div class="panel-heading">Articles</div>
+            <div class="panel-body"><h1 class="text-center"><%= "#{@stats[:articles][:count]}" %></h1>
+            </div>
+          </div>
+        </div>
+
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+          <div class="panel panel-primary" id="projects">
+            <div class="panel-heading">Projects</div>
+            <div class="panel-body"><h1 class="text-center"><%= "#{@stats[:projects][:count]}" %></h1>
+            </div>
+          </div>
+        </div>
+
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+          <div class="panel panel-primary" id="documents">
+            <div class="panel-heading">Documents</div>
+            <div class="panel-body"><h1 class="text-center"><%= "#{@stats[:documents][:count]}" %></h1>
+            </div>
+          </div>
+        </div>
+
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+          <div class="panel panel-primary" id="pair-programming-minutes">
+            <div class="panel-heading">PairProgramming Minutes</div>
+            <div class="panel-body"><h1 class="text-center"><%= "#{@stats[:pairing_minutes][:value]}" %></h1>
+            </div>
+          </div>
+        </div>
+
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+          <div class="panel panel-primary" id="scrum-minutes">
+            <div class="panel-heading">Scrum Minutes</div>
+            <div class="panel-body"><h1 class="text-center"><%= "#{@stats[:scrum_minutes][:value]}" %></h1>
+            </div>
+          </div>
+        </div>
+
+        <div class='co-lg-4 col-md-4 col-sm-4'>
+          <div class="panel panel-primary" id="members">
+            <div class="panel-heading">Members</div>
+            <div class="panel-body"><h1 class="text-center"> <%= "#{@stats[:members][:count]}" %></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="activity-feed">
+      <h3>Recent activities</h3>
+      <div id="feed">
+        <% if @activities %>
+            <% @activities.each do |activity| %>
+                <div class="activity">
+                  <%= render_activity activity %>
+                </div>
+                <hr>
+            <% end %>
+        <% else %>
+            <p>No public activity</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var usrData = <%= raw User.map_data %>;
+    var defaultText = '<h3>User statistics</h3>'
+    $(function () {
+        $('#info-box').html(defaultText);
+        $('#map').vectorMap({
+            map: 'world_mill_en',
+            backgroundColor: 'transparent',
+            zoomOnScroll: false,
+            panOnDrag: true,
+            regionStyle: {
+                initial: {
+                    fill: '#FFF5E6',
+                    "fill-opacity": 1,
+                    stroke: 'solid',
+                    "stroke-width": 2,
+                    "stroke-opacity": 1
+                },
+                hover: {
+                    "fill-opacity": 0.8,
+                    cursor: 'pointer'
+                },
+                selected: {
+                    fill: 'yellow'
+                },
+                selectedHover: {}
+            },
+            series: {
+                regions: [{
+                    values: usrData,
+                    scale: ['#f38c54', '#ec6909'],
+                    normalizeFunction: 'polynomial'
+                }]
+            },
+            onRegionLabelShow: function (e, el, code) {
+                if (usrData[code] > 0) {
+                    $('#info-box').html('<h3>We have ' + usrData[code] + ' users in ' + el.html() + '</h3>');
+                } else {
+                    $('#info-box').html('<h3>No users in ' + el.html() + '</h3>');
+                }
+                console.log(el.html() + ' (Users: ' + usrData[code] + ')');
+                //el.html(el.html()+' (Users: '+usrData[code]+')');
+
+            },
+            onRegionOut: function (event, code) {
+                //console.log(map.getRegionName(code));
+                $('#info-box').html(defaultText);
+            }
+        });
+    });
+</script>
+

@@ -1,3 +1,4 @@
+
 class EventsController < ApplicationController
   #require 'delorean'
 
@@ -5,51 +6,53 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
 
   def new
-    @event = Event.new
+    @event = Event.new(start_datetime: Time.now.utc, duration: 30)
+    @event.set_repeat_ends_string
   end
 
   def show
-    @event_schedule = @event.current_occurences
-    #puts @event_schedule
+    @event_schedule = @event.next_occurrences
+    @hangout = @event.last_hangout
+    render partial: 'hangouts_management' if request.xhr?
   end
 
   def index
     @events = []
     Event.all.each do |event|
-      @events << event.current_occurences
+      @events << event.next_occurrences
     end
     @events = @events.flatten.sort_by { |e| e[:time] }
   end
 
   def edit
+    @event.set_repeat_ends_string
   end
 
   def create
-    if params[:event][:event_date].empty?
-      params[:event][:event_date] = Date.today
-    end
-    if params[:event][:start_time].empty?
-      params[:event][:start_time] = Time.now
-    end
-    if params[:event][:end_time].empty?
-      params[:event][:end_time] = Time.now + 30.minutes
-    end
-    @event = Event.new(event_params)
-    if @event.save
+    EventCreatorService.new(Event).perform(Event.transform_params(params),
+                                       success: ->(event) do
+      @event = event
       flash[:notice] = 'Event Created'
       redirect_to event_path(@event)
-    else
+    end,
+    failure: ->(event) do
+      @event = event
       flash[:notice] = @event.errors.full_messages.to_sentence
-      redirect_to new_event_path
-    end
+      render :new
+    end)
   end
 
   def update
-    if @event.update_attributes(event_params)
+    begin
+      updated = @event.update_attributes(Event.transform_params(params))
+    rescue
+      attr_error = "attributes invalid"
+    end
+    if updated
       flash[:notice] = 'Event Updated'
       redirect_to events_path
     else
-      flash[:alert] = ['Failed to update event:', @event.errors.full_messages].join(' ')
+      flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
       redirect_to edit_event_path(@event)
     end
   end
@@ -73,11 +76,4 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.friendly.find(params[:id])
   end
-
-
-  def event_params
-    params.require(:event).permit!
-  end
-
-
 end

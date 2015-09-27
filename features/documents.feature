@@ -30,7 +30,8 @@ Feature: Manage Document
   Scenario: Create a new document
     Given I am logged in
     Given I am on the "Show" page for project "hello world"
-    When I click the very stylish "New Document" button
+    When I click the "Join Project" button
+    And I click the "Create new document" button
     And I fill in "Title" with "New doc title"
     And I click "Submit"
     Then I should see "Document was successfully created."
@@ -38,7 +39,8 @@ Feature: Manage Document
   Scenario: Create a new document page should have a back button
     Given I am logged in
     Given I am on the "Show" page for project "hello world"
-    When I click the very stylish "New Document" button
+    When I click the "Join Project" button
+    And I click the "Create new document" button
     And I click "Back"
     Then I should be on the "Show" page for project "hello world"
 
@@ -118,13 +120,13 @@ Feature: Manage Document
     Given I am on the "Projects" page
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
-    Given I am on the "Show" page for project "hello world"
-    When I try to edit the page
-    Then I should see "You do not have the right privileges to complete action."
 
+  @javascript
   Scenario: Document should have a history of changes 
     Given I am on the "Show" page for document "Documentation"
     Then I should see "Revisions"
+    And I should not see any revisions
+    When I click "Revisions"
     And I should see 4 revisions for "Guides"
 
   @javascript
@@ -152,3 +154,41 @@ Feature: Manage Document
     And I click "Insert Media" within the Mercury Editor Modal
     Then I should see an image with source "/assets/mercury/missing-image.png" within the Mercury Editor
     Then the Mercury Editor modal window should not be visible
+
+  @javascript
+  Scenario: Insert media model accepts full url youtube links
+    Given I am logged in
+    And I am using the Mercury Editor to edit document "Guides"
+    And I am focused on the "document body" within the Mercury Editor
+    And I click on the "Insert Media" button within the Mercury Toolbar
+    And I fill in "YouTube URL" with "https://www.youtube.com/watch?v=foo" within the Mercury Editor Modal
+    And I click "Insert Media" within the Mercury Editor Modal
+    Then the Mercury Editor modal window should not be visible
+    And I should see an video with source "http://www.youtube.com/embed/foo?wmode=transparent" within the Mercury Editor
+
+  @javascript
+  Scenario: Insert media model rejects badly formatted youtube links
+    Given I am logged in
+    And I am using the Mercury Editor to edit document "Guides"
+    And I am focused on the "document body" within the Mercury Editor
+    And I click on the "Insert Media" button within the Mercury Toolbar
+    And I fill in "YouTube URL" with "https://www.youtube.io/watch?v=foo" within the Mercury Editor Modal
+    And I click "Insert Media" within the Mercury Editor Modal
+    Then I should see "is invalid" within the Mercury Modal
+    And the Mercury Editor modal window should be visible
+
+  @javascript
+  Scenario: A logged in user could change a document's parent section
+   Given I am logged in
+   And the following documents exist:
+      | title         | body             | project     |
+      | Decisions     | Examplehere      | hello mars  |
+   And the document "Guides" has a child document with title "Howto"
+   And the document "Guides" has a child document with title "PullRequest"
+   And I am on the "Show" page for document "Howto"
+   When I click the very stylish "Change section" button
+   Then I should see "Select new section for the document"
+   And I should see "Decisions" in "Modal window"
+   When I click "Decisions" in "Modal window"
+   Then I should see "You have successfully moved Howto to the Decisions section"
+   And I should see "Decisions" in "The Breadcrumb"

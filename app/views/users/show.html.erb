@@ -1,121 +1,24 @@
-<%= javascript_include_tag 'users' %>
-<div class="row">
-  <div class="col-md-5 col-sm-5">
-    <div class="avatar-group">
-      <img src="<%= gravatar_for(@user.email, size: 275) %>" class="thumbnail img-rounded media-object">
-
-      <div class="avatar-lower">
-        <h3><%= @user.display_name %></h3>
-      </div>
+<% present @user do |presenter| %>
+  <div class="row">
+    <div class="col-md-4 col-xs-12">
+      <%= render 'users/profile/summary', presenter: presenter %>
     </div>
-    <p><i class="fa fa-globe fa-lg"></i><%= " #{@user.country}" if @user.country.present? %></p>
 
-    <p><i class="fa fa-calendar-o fa-lg"></i> Member
-      for <%= distance_of_time_in_words(@user.created_at.to_date, Date.current) %> </p>
-    <% if @user.github_profile_url.present? %>
-      <p><i class="fa fa-github-alt fa-lg"></i> GitHub
-        profile <%= link_to "#{@user.github_profile_url.split('/').last}", @user.github_profile_url %></p>
-    <% else %>
-      <p><i class="fa fa-github-alt fa-lg"></i> GitHub profile not linked</p>
-    <% end %>
-    <% if @user.display_email %>
-      <p><i class="fa fa-envelope fa-lg"></i> <%= mail_to @user.email, @user.email %></p>
-    <% end %>
-    <%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-primary btn-sm', type: 'button' if @user.eql?(current_user) %>
-    <% if @user.display_hire_me %>
-      <%= link_to 'Hire me', user_path(@user), {:remote => true, class: 'btn btn-primary btn-sm', 'data-toggle' => "modal", 'data-target' => '#modal-window'} %>
-    <% end %>
-  </div>
-  <div class="col-md-7 col-sm-7">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" style="margin-left: -25px; margin-right: -25px;">
-      <% if @user.bio.present? %>
-        <li class="active"><a href="#bio" data-toggle="tab">Bio</a></li>
-        <li><a href="#projects" data-toggle="tab">Projects</a></li>
-      <% else %>
-        <li class="active"><a href="#projects" data-toggle="tab">Projects</a></li>
-      <% end %>
-      <li><a href="#skills" data-toggle="tab">Skills</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content" style="margin-left: -25px; margin-right: -25px;">
-      <% if @user.bio.present? %>
-        <div class="tab-pane fade in active" id="bio">
-          <h4>About <%= @user.display_name %></h4>
-
-          <p> <%= @user.bio %> </p>
-        </div>
-      <% end %>
-      <div class="tab-pane fade<%= ' in active' if @user.bio.blank? %>" id="projects">
-        <% if @users_projects.present? %>
-          <div id="projects-show" class="tag-list bootstrap-tags bootstrap-3">
-            <h4><%= @user.display_name %> contributes to following projects</h4>
-            <% @users_projects.each do |project| %>
-              <span class="tag label btn-agile md"><%= link_to project.title, project_path(project) %></span>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div class="tab-pane fade" id="skills">
-        <div id="skills-show" class="tag-list bootstrap-tags bootstrap-3">
-          <h4>Skills & Technologies</h4>
-
-          <% if @skills.empty? %>
-            No Skills
-          <% else %>
-            <% @skills.each do |skill| %>
-              <span class="tag label btn-agile md"><%= skill %></span>
-            <% end %>
-          <% end %>
-
-        </div>
-      </div>
+    <div class="col-md-8 col-xs-12">
+      <%= render 'users/profile/detail', presenter: presenter %>
     </div>
   </div>
-</div>
-<div class="clear">
-  <hr/>
-</div>
-<div class="row">
-  <div class="col-md-5 col-sm-5">
-    <% if @youtube_videos.present? %>
-      <h4>Programming sessions</h4>
-      <table class="table table-bordered table-striped table-hover table-condensed">
-        <tr>
-          <th>Title</th>
-        </tr>
-        <% @youtube_videos.each do |video| %>
-          <tr>
-            <td><%= video_link(video) %>
-              <br/>
-              <small><%= video[:published].to_s(:db) %></small>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    <% else %>
-      <h4><%= user_display_name @user %> has no publicly viewable Youtube videos.</h4>
-    <% end %>
+  <div class="clear">
+    <hr/>
   </div>
-  <% if @youtube_videos.present? %>
-    <div class="col-md-7 col-sm-7">
-      <td><h4 id="video_contents"><%= @youtube_videos.first[:content] %></h4></td>
-      <iframe id="ytplayer" type="text/html" width="480" height="293" src="<%= video_embed_link(@youtube_videos.first) %>" frameborder="0"></iframe>
-    </div>
-  <% end %>
+  <div class="row">
+    <%= render 'users/profile/videos', videos: @event_instances, presenter: presenter %>
+  </div>
+
   <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <%= render 'layouts/hire_me' %>
   </div>
-</div>
+<% end %>
 
-<style>
-  .tag {
-    margin-bottom: 0.4em !important;
-    float: none !important;
-  }
+<%= render 'users/profile/modal' %>
 
-  .tags {
-    position: initial !important;
-  }
-</style>

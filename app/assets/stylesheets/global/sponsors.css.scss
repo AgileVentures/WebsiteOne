@@ -1,0 +1,82 @@
+#sponsorsBar {
+    padding: 20px 0;
+}
+#sponsorsBar .seeAllSponsorLink {
+    display: inline-block;
+    font-size: 12px;
+    padding-top: 4px;
+    text-decoration: underline;
+}
+#sponsorsBar .docLink {
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: none;
+}
+#sponsorsBar .sponsorsTier.empty {
+    opacity: 0.2;
+}
+#sponsorsBar .sponsorsTier#heroes {
+    border-top: 0;
+    margin-top: 80px;
+}
+#sponsorsBar .sponsorsTier#heroes img {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    margin: 0 0 10px 10px;
+    width: 48px;
+}
+#sponsorsBar .sponsorsTier h3 {
+    margin-top: 0;
+    position: relative;
+}
+#sponsorsBar .sponsorsTier h3 .docLink {
+    position: absolute;
+    right: 0;
+    bottom: 4px;
+}
+#sponsorsBar .sponsorsTier ul {
+    list-style-type: none;
+    padding: 0;
+}
+#sponsorsBar .sponsorsTier ul li ~ li {
+    margin-top: 10px;
+}
+#sponsorsBar .sponsorsTier ul.textSponsors li {
+    font-size: 12px;
+}
+#sponsorsBar .sponsorsTier ul.textSponsors strong {
+    display: block;
+}
+#sponsorsBar .sponsorsTier p {
+    font-size: 12px;
+    line-height: 1.5;
+}
+#sponsorsBar .sponsorsTier p a {
+    color: #b94947;
+    font-weight: bold;
+    text-decoration: underline;
+}
+#sponsorsBar .sponsorsTier img {
+    display: table-cell;
+    vertical-align: middle;
+    max-width: 100%;
+}
+#sponsorsBar .sponsorsTier input[type="email"] {
+    font-size: 12px;
+    width: 130px;
+}
+#sponsorsBar .sponsorsTier .sponsorStandinMedal {
+    display: table-cell;
+    vertical-align: middle;
+}
+#sponsorsBar .sponsorsTier.silver .sponsorStandinMedal {
+    background: #354a57;
+    height: 80px;
+}
+#sponsorsBar .sponsorsTier ~ .sponsorsTier {
+    padding-top: 15px;
+}
+#ourSponsors {
+  text-align: center;
+}

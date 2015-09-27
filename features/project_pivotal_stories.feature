@@ -5,10 +5,10 @@ Feature: Adding pivotal tracker stories to projects
 
     Background:
       # And I have access to project iteration with pivitaltracker_id 982890 in PivotalTracker
-      And the following projects exist:
+      Given the following projects exist:
         | title      | description    | status | pivotaltracker_url                               |
         | WebsiteOne | Agile Ventures | active | https://www.pivotaltracker.com/s/projects/982890 |
-
+      And there are no videos
 
 
     Scenario: When a project has no stories

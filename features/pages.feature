@@ -16,8 +16,8 @@ Feature: Static pages
     And I am on the "home" page
 
   Scenario: Render About Us page
-    Then I should see link "About us"
-    When I click "About us"
+    Then I should see link "About Us"
+    When I click "About Us"
     Then I should be on the static "About Us" page
     And I should see "About Us"
 
@@ -25,7 +25,8 @@ Feature: Static pages
   Scenario: See Sponsor Banners
     When I am on the "projects" page
     Then I should see sponsor banner for "Makers Academy"
-    And I should see sponsor banner for "Agile Ventures"
+    Then I should see sponsor banner for "AirPair"
+    And I should see sponsor banner for "RubyMine"
     And I should see link "Become a supporter"
 
   Scenario: Render Sponsors page

@@ -1,22 +1,43 @@
 <% provide :title, 'Members' %>
-
-<div id="all_members">
-  <h1>All members</h1>
-  <% @users.each_slice(3) do |slice| %>
-      <ul id="user-container" class="media-list">
-        <% slice.each do |user| %>
-            <li class="media-item user-item">
-              <a class="pull-left" id="<%= "avatar-#{user.id}" %>" href="<%= user_path user %>">
-                <img id="avatar" src="<%= gravatar_for(user.email) %>" class="thumbnail img-rounded media-object">
-              </a>
-
-              <div class="media-body">
-                <h4 class="media-heading"><a href="<%= user_path user %>"><%= user.display_name %></a></h4>
-
-                <p style="margin-left: 8px;"><%= user.country if user.country.present? %></p>
-              </div>
-            </li>
+<div class="row">
+  <div class="col-xs-12 col-sm-12">
+    <h1>Members Directory</h1>
+    <% if @users_count == 0 %>
+        <p>It is a lonely planet we live in&#8230;</p>
+    <% else %>
+        <p>Check out our <%= @users_count %> awesome volunteers from all over the globe!</p>
+    <% end %>
+  </div>
+  <div class="col-sm-12 well">
+    <p>Filter users by</p>
+    <%= form_tag(users_path, remote: true, method: "get", class: "form-inline filters-users-advanced") do %>
+        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {prompt: 'Project involvement...', class: 'form-control'} %>
+        <% if @current_user && @current_user.latitude %>
+            <%= select_tag :timezone_filter, options_for_select(['In My Timezone', 'Wider Timezone Area'], params[:timezone_filter]), {prompt: 'Time zone...', class: 'form-control'} %>
         <% end %>
-      </ul>
-  <% end %>
+        <%= check_box_tag :online, params[:online], (true if !params[:online].nil?) %> Recently Online
+        <%= submit_tag 'Search', class: 'btn btn-default' %>
+    <% end %>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <form class="form-inline users-filter" role="form">
+      <div class="form-group inner-addon left-addon">
+        <label class="sr-only" for="user-filter">Filter users</label>
+        <i class="fa fa-search"></i>
+        <input type="text" class="form-control" id="user-filter" placeholder="Search members...">
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <% unless @users.empty? %>
+        <ul class="media-list row" id="UsersList">
+          <%= render 'user_list' %>
+        </ul>
+    <% end %>
+  </div>
 </div>

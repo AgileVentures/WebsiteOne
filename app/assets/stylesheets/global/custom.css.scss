@@ -1,0 +1,406 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
+/*  ---------------------------------------------------------------
+general style
+--------------------------------------------------------------- */
+
+/* apply a natural box layout model to all elements  - http://www.paulirish.com/2012/box-sizing-border-box-ftw/*/
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: 0;
+}
+
+::-moz-focus-inner {
+  padding: 0;
+  border: 0
+}
+
+/* ! removes focus line */
+
+html, body {
+  width: 100%;
+  height: 100%;
+  /* keep scrollbar present all the time */
+  min-height: 101%;
+  background-color: $off-white;
+
+  /* The html and body elements cannot have any padding or margin. */
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
+}
+
+#main {
+  padding-bottom: 40px;
+  padding-top: 70px;
+}
+
+/*  END - general style */
+
+/* style for Cube Portfolio wrapper*/
+.wrapper {
+  width: 96%;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+  color: $black;
+}
+
+p, a, ul, li {
+  line-height: 1.4em;
+}
+
+a {
+  color: $link-color;
+  @include css-transition(color 0.3s ease);
+
+  &:hover, &:active {
+    color: $link-hover-color;
+    text-decoration: none;
+  }
+
+  &:link, &:visited {
+    text-decoration: none;
+  }
+
+  // bad for devices requiring focus!
+  &:focus {
+    outline: 0;
+  }
+}
+
+strong {
+  color: $black;
+}
+
+.btn {
+  color: white !important;
+}
+
+.btn-default {
+  color: #000000 !important;
+}
+
+.btn-edit {
+  font-size: 50%;
+  margin-left: 15px;
+  text-transform: lowercase;
+}
+
+.fa {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  text-align: center;
+}
+.vote_button {
+  width: 12px;
+  height: 12px;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+
+.container .credit {
+  margin: 20px 0;
+}
+
+h1, h2, h3, h4 {
+  vertical-align: middle;
+
+  a {
+    color: $theme-lighter-dark;
+
+    &:hover, &:active {
+      color: $theme-darker;
+    }
+  }
+}
+
+h1 {
+  font-size: 50px;
+}
+
+.opacity-dark {
+  padding: 20px;
+  background-color: rgba(5, 5, 5, .8);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.opacity-light h1 {
+  color: rgba(52, 73, 94, 1.0);
+}
+
+.opacity-light {
+  padding: 20px;
+  background-color: rgba(192, 192, 192, .4);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.opacity-light h1 {
+  color: #000000;
+}
+
+.divider {
+  height: 50px;
+}
+
+.small-divider {
+  height: 25px;
+}
+
+.panel {
+  border-width: 1;
+}
+
+.panel-primary {
+  border-color: #FFE0B2;
+}
+
+.panel-primary > .panel-heading {
+  color: white;
+  background-color: #FF9900;
+  border-color: #FF9900;
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 95px;
+  }
+}
+
+#map-canvas {
+  width: 100%;
+  height: 300px;
+  margin: 0;
+  padding: 15px;
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 0;
+  right: 6%;
+  z-index: 100;
+  background: #F07F48;
+  font-size: 24px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.scroll-top a:link, .scroll-top a:visited {
+  color: #222;
+}
+
+
+/* Portfolio css */
+
+.view p {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  position: relative;
+  color: #fff;
+  padding: 10px 20px 10px;
+  text-align: center;
+}
+
+.view-tenth p {
+  color: #333;
+  -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
+
+.view {
+  z-index: 9;
+  cursor: default;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  margin-bottom: 30px;
+  box-shadow: 0 0 3px #ddd;
+}
+
+.view .mask, .view .content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+.view img {
+  display: block;
+  position: relative;
+}
+
+.view-tenth img {
+  left: 10px;
+  margin-left: -10px;
+  position: relative;
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  -o-transition: all 0.6s ease-in-out;
+  -ms-transition: all 0.6s ease-in-out;
+  transition: all 0.6s ease-in-out;
+}
+
+.view-tenth:hover > img {
+  -webkit-transform: scale(2) rotate(10deg);
+  -moz-transform: scale(2) rotate(10deg);
+  -o-transform: scale(2) rotate(10deg);
+  -ms-transform: scale(2) rotate(10deg);
+  transform: scale(2) rotate(10deg);
+  -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+  opacity: 0.3;
+}
+
+.view h2 {
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  font-size: 22px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  margin: 20px 0 0 0;
+  text-shadow: none;
+}
+
+.view-tenth h2 {
+  color: #333;
+  margin: 20px 40px 0;
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.view-tenth a.info-btn {
+  -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
+
+.view-tenth:hover h2,
+.view-tenth:hover p,
+.view-tenth:hover a.info-btn {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+/* 404 theme */
+
+#fof {
+  margin: 20px 0 120px;
+  text-align: center;
+}
+
+#fof div {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  background: #000;
+}
+
+#fof canvas,
+#fof img {
+  position: relative;
+  width: 960px;
+  height: 480px;
+  margin-bottom: 20px;
+  z-index: 1;
+
+  background: #000;
+}
+
+// Bryan: corrections to twitter-typeahead
+.tokenfield .twitter-typeahead input.tt-hint {
+  padding: 6px 5px;
+  overflow: none;
+  height: auto;
+}
+
+.tokenfield .twitter-typeahead input.token-input {
+  padding-left: 5px;
+}
+
+.tokenfield div.token {
+  margin-top: 6px;
+}
+
+.navbar-brand-div {
+  padding-left: 0;
+}
+.navbar-static-top {
+  @media (max-width: 768px) {
+    .navbar-header button {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 300px) {
+    .navbar-brand {
+      display: none;
+    }
+  }
+}

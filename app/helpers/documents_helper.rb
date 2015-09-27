@@ -1,10 +1,11 @@
 module DocumentsHelper
+  # Not used anywhere
   def clean_html_summary(html)
     sanitize(html.gsub(/<[^>]*>/, ' '), tags: [], attributes: []).truncate(250, separator: ' ')
   end
 
   def documents
-    @documents = Document.where("project_id = ?", @project.id).order(:created_at)
+    @documents = Document.where("project_id = ?", @project.id).order(:created_at).includes(:user)
   end
 
   def metadata
@@ -15,9 +16,12 @@ module DocumentsHelper
     end
   end
 
+  # Not used
   def created_date
     "Created #{time_ago_in_words(@document.created_at)} ago"
   end
 
-
+  def inside_mercury?
+    controller.request.original_url =~ /mercury_frame=true/
+  end
 end

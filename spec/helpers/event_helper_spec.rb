@@ -19,6 +19,6 @@ describe EventHelper do
     event = mock_model(Event, name: 'DailyScrum', category: 'Scrum')
     nested_value = {:event => event, :time => time}
     result = helper.current_occurrence_time(nested_value)
-    expect(result).to match '2014-03-09 at 11:00PM'
+    expect(result).to match /Sunday, 9th Mar at 11:00pm \(UTC\)/
   end
 end

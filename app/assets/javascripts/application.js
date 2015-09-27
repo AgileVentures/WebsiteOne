@@ -12,8 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require jquery.turbolinks
 //= require bootstrap
 //= require nprogressbar
 //= require bootstrap-datepicker
@@ -21,132 +19,98 @@
 //= require typeahead
 //= require bootstrap-tokenfield.min
 //= require bootstrap-tags
-//= require bootstrap/modal
+//= require_self
+//= require_directory ./global-modules
+//= require_tree .
+//= stub mercury_init
+//= stub google-analytics
+//= stub disqus
+//= stub events
+//= stub event_instances
+//= require local_time
+//= require jvectormap
+//= require jvectormap/maps/world_mill_en
 
-// Bryan: removed require_tree . because mercury causes problems if loaded on every page
+// To deal with the headache of initializing JavaScripts with TurboLinks, I
+// wrote this custom module definer to handle initialization code
+//
+// modules can be defined using the following snippet:
+//
+// window.WebsiteOne.define('<Module Name>', function() {
+//     return <Module Object>;
+// });
+//
+// The module's init method will automatically be called on TurboLink's
+// page:load or document ready event
 
-$(function() {
-  $.fn.BryanHATESTHIS = function () {
-    // Bryan: run these functions only in the home page
-    if (window.location.pathname === '/') {
-      var TxtRotate = function(el, toRotate, period) {
-        this.toRotate = toRotate;
-        this.el = el;
-        this.loopNum = 0;
-        this.period = parseInt(period, 10) || 2000;
-        this.txt = '';
-        this.tick();
-        this.isDeleting = false;
-      };
+window.WebsiteOne = window.WebsiteOne || (function() {
+  var modules = [],
+      newPageLoaded = false,
+      runOnceCallbacks = {};
 
-      TxtRotate.prototype.tick = function() {
-        var i = this.loopNum % this.toRotate.length;
-        var fullTxt = this.toRotate[i];
+  function define(name, factory) {
+    window.WebsiteOne[name] = window.WebsiteOne[name] || (function() {
+      modules.push(name);
+      var newModule = factory();
 
-        if (this.isDeleting) {
-          this.txt = fullTxt.substring(0, this.txt.length - 1);
-        } else {
-          this.txt = fullTxt.substring(0, this.txt.length + 1);
-        }
-
-        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
-
-        var that = this;
-        var delta = 300 - Math.random() * 100;
-
-        if (this.isDeleting) { delta /= 2; }
-
-        if (!this.isDeleting && this.txt === fullTxt) {
-          delta = this.period;
-          this.isDeleting = true;
-        } else if (this.isDeleting && this.txt === '') {
-          this.isDeleting = false;
-          this.loopNum++;
-          delta = 500;
-        }
-
-        setTimeout(function() {
-          that.tick();
-        }, delta);
-      };
-
-      var elements = document.getElementsByClassName('txt-rotate');
-      for (var i=0; i<elements.length; i++) {
-        var toRotate = elements[i].getAttribute('data-rotate');
-        var period = elements[i].getAttribute('data-period');
-        if (toRotate) {
-          new TxtRotate(elements[i], JSON.parse(toRotate), period);
-        }
+      if (!window.WebsiteOne._newPageLoaded) {
+        newModule.init();
       }
-      // INJECT CSS
-      var css = document.createElement("style");
-      css.type = "text/css";
-      css.innerHTML = ".txt-rotate > .wrap";
-      document.body.appendChild(css);
-    }
 
-    window.setTimeout(function() {
-      $(".flash-div").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove();
-      });
-    }, 5000);
+      return newModule;
+    })();
 
-    /**
-     * Carousel collapse button, switches icons when the collapse/button icon is clicked and triggers sidebar
-     * checking event. It listens to click events with CSS class 'collapse-button'
-     *
-     * To change the icons, alter collapsedClass and expandedClass to append the appropriate CSS classes
-     */
-
-    var collapsedClass = 'fa-caret-down',
-        expandedClass = 'fa-caret-right';
-    // a hack to follow collapse animation, ideally should find the right animation callbacks
-    $('.collapse-button').on('click', function() {
-      // TODO Bryan: This does not work properly if the user clicks too fast
-      var child = $(this).find('>:first-child');
-      if (child.hasClass(collapsedClass)) {
-        child.removeClass(collapsedClass);
-        child.addClass(expandedClass);
-      } else if (child.hasClass(expandedClass)) {
-        child.removeClass(expandedClass);
-        child.addClass(collapsedClass);
-      }
-    });
-
-    var affixedNav = $('#nav'),
-        header = $('#main_header'),
-        main = $('#main'),
-    // manually selected properties which will affect affix threshold height, if layout changes,
-    // readjust as necessary
-        thresholdTop = header.height() + affixedNav.height(),
-        footer = $('#footer');
-
-    // Bryan: catch scroll events
-    $(window).scroll(function() {
-
-      if ($(this).scrollTop() > thresholdTop) {
-        // add affix behaviour if scroll is above threshold
-        if (!affixedNav.hasClass('affix')) {
-          affixedNav.addClass('affix');
-          header.css({ 'margin-bottom': affixedNav.height() + parseInt(affixedNav.css('margin-bottom'))});
-        }
-      } else if (affixedNav.hasClass('affix')) {
-        // remove affix if the scroll is below threshold
-        affixedNav.removeClass('affix');
-        header.css({ 'margin-bottom': 0 });
-      }
-    });
-
-    $(window).scroll();
+    return window.WebsiteOne[name];
   }
 
+  function runOnce(name, callback) {
+    runOnceCallbacks[name] = runOnceCallbacks[name] || {
+      callback: callback,
+      executed: false
+    }
+  }
 
-  $(document).on('page:fetch',   function() { NProgress.start(); });
-  $(document).on('page:change',  function() { NProgress.done(); });
-  $(document).on('page:restore', function() { NProgress.remove(); });
+  function clear() {
+    for (var i = 0; i < modules.length; i++) {
+      delete window.WebsiteOne[modules[i]];
+    }
 
-  $(document).ready($.fn.BryanHATESTHIS);
-  $(document).on('page:load', $.fn.BryanHATESTHIS);
+    modules.length = 0;
+  }
+
+  function init() {
+    for (var i = 0; i < modules.length; i++) {
+      window.WebsiteOne[modules[i]].init();
+    }
+
+    for (var name in runOnceCallbacks) {
+      if (!runOnceCallbacks[name].executed) {
+        runOnceCallbacks[name].callback();
+        runOnceCallbacks[name].executed = true;
+      }
+    }
+
+    window.WebsiteOne._newPageLoaded = false;
+  }
+
+  return {
+    _init: init,
+    define: define,
+    runOnce: runOnce,
+    _modules: modules,
+    _registered: false,
+    _newPageLoaded: newPageLoaded,
+    _clear: clear
+  }
+})();
+
+window.WebsiteOne._newPageLoaded = true;
+
+$(function() {
+  if (!window.WebsiteOne._registered) {
+    $(document).ready(window.WebsiteOne._init);
+    $(document).on('page:load', window.WebsiteOne._init);
+
+    window.WebsiteOne._registered = true;
+  }
 });
-
-

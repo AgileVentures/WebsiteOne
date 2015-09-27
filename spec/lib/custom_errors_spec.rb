@@ -15,7 +15,7 @@ describe CustomErrors, type: 'controller' do
   end
 
   before(:each) do
-    Rails.stub_chain(:env, :production?).and_return(true)
+    Features.custom_errors.enabled = true
   end
 
   context '404 errors' do

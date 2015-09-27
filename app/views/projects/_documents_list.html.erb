@@ -1,0 +1,15 @@
+<% unless @documents.empty? %>
+  <h2>Related documents</h2>
+  <ul class="listings">
+    <% @documents.roots.each do |d| %>
+      <li class="listings-item">
+        <% num_children = d.children.count %>
+        <strong><%= link_to d.title, project_document_path(@project, d) %></strong> <%= "(#{num_children})" if num_children > 0 %>
+        -
+        <i>created by <%= d.user.display_name %> <%= time_ago_in_words(d.created_at) %> ago</i>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No documents can be found for project <strong><%= @project.title %></strong></p>
+<% end %>

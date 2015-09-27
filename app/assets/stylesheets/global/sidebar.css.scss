@@ -1,0 +1,63 @@
+@import "variables";
+@import "mixins";
+
+#not-sidebar-content {
+  width: 100%;
+  height: 100%;
+  padding: 15px 0;
+}
+
+#sidebar {
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+  background: $light-bg-color;
+}
+
+#sidebar * {
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar span {
+  font-size: 120%;
+}
+
+#sidebar h3 {
+  padding: 15px 0 5px 0;
+  font-size: 130%;
+  width: 100%;
+  text-align: center;
+}
+
+#sidebar .collapse-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: -22px;
+}
+
+#sidebar ul {
+  list-style: none;
+  padding-left: 18px;
+}
+
+#sidebar ul ul {
+  padding-left: 20px;
+}
+
+#sidebar li {
+  font-size: 15px;
+  width: 100%;
+  padding: 3px 10px;
+}
+
+#sidebar .focused {
+  color: $link-hover-color;
+  font-weight: bold;
+}
+
+.sidebar-selected {
+  display: inline;
+  color: $link-hover-color;
+  font-weight: bold;
+}

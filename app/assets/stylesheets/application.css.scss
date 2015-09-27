@@ -1,138 +1,68 @@
-/*!
-
- *= require_self
- *= require font-awesome
- *= require_tree
- */
+@import "compass/css3";
+@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+@import "variables";
+@import "mixins";
 
+@import "main";
+@import "timeline";
+@import "global/*";
+@import "layout/*";
 
-
-.signin {
-  h2 {
-    margin-top: 0;
-  }
-  form {
-    margin-bottom: 20px;
-  }
-  .glyphicon {
-    top: 0;
-  }
+.custom_menu {
+  width: 200px !important;
+  background-color: #34495e !important;
 }
 
-#devise .custom-label {
-  margin-left: 5px;
-  margin-top: 3px;
+.custom_menu_item {
+  margin-left: 10px;
+  margin-top: 10px;
+  color: white !important;
+}
+
+.custom_menu_link {
+  color: white !important;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
   position: absolute;
-  color: black;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
 
-.alert {
-  margin-top: 5px;
+.user-status {
+	margin-left: 10px;
+	margin-top: -5px;
+	color: #54555a;
 }
 
-label {
-  margin-right: 0.5em;
-  display: block
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
 }
 
-
-
-.bg-3 {
-  background: url('bg1-db4d48709782e1e17ea9b9f2c41da4a1.jpg') no-repeat center center fixed;
-  /*background: #f16251; */
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
 }
 
-.bg-1 {
-  background: url('http://www.ilikewallpaper.net/ipad-air-wallpapers/download/8253/Dark-Pattern-ipad-4-wallpaper-ilikewallpaper_com_1024.jpg') no-repeat center center fixed;
-  /*background: #f16251;*/
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
+/* align icon */
+.left-addon .fa { left:  0px; }
+.right-addon .fa { right: 0px; }
 
-.bg-2 {
-  background: url(http://mymaplist.com/img/parallax/back.png);
-  background-color: #444;
-  background: url(http://mymaplist.com/img/parallax/pinlayer2.png), url(http://mymaplist.com/img/parallax/pinlayer1.png), url(http://mymaplist.com/img/parallax/back.png);
-  padding-top: 100px;
-  /*background: #ffcc33; */
-
-}
-
-#event-container {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-#event-container .event-item {
-  width: 33.3%;
-  /*height: 150px;*/
-  margin: 5px, 15px, 5px, 5px;
-}
-
-#event-container .event-item p, .event-item a, .event-item small {
-  padding-left: 8px !important;
-  line-height: 14px;
-}
-
-#event-container .event-item h4 {
-  padding-left: 0px !important;
-}
-
-#event-container .event-item img {
-  margin-left: 8px !important;
-  width: 250px;
-}
-
-.add-btn-agile {
-  color: #FFF;
-  background-color: #F07F48;
-  border-color: #EEA236;
-}
-
-.btn-agile {
-  color: #FFF;
-  background-color: #F07F48;
-  border-color: #EEA236;
-  line-height: 35px !important;
-}
-
-
-.btn-agile a {
-  color: #FFF !important;
-  opacity: 1 !important;
-}
-
-@media (min-width: 768px) and (max-width: 979px) {
-  #event-container .git-item {
-    width: 50%;
-    height: 150px;
-    margin-bottom: 10px !important;
-  }
-}
-
-@media (max-width: 767px) {
-
-  #event-container .event-item {
-    width: 50%;
-    height: 150px;
-    margin-bottom: 10px !important;
-  }
-}
-
-@media (max-width: 480px) {
-
-  #event-container .event-item {
-    width: 50%;
-    height: 150px;
-    margin-bottom: 10px !important;
-  }
-}
-
-
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }

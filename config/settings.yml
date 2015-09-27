@@ -1,0 +1,51 @@
+features:
+  custom_errors:
+    enabled: false
+    email_notifier:
+      email_prefix: '[ERROR] '
+      sender: '"Error Police" <error-police@agileventures.org>'
+      exception_recipients: ['info@agileventures.org']
+  disqus:
+    enabled: true
+  welcome_email:
+    enabled: true
+  twitter:
+    notifications:
+      enabled: false
+
+mailer:
+  delivery_method: 'test'
+  smtp_settings:
+    port: 587
+    user_name: 'user'
+    password: 'password'
+    address: 'address'
+    domain: 'domain'
+    authentication: 'auth'
+  url_host: 'localhost:3000'
+  devise_mailer_sender: 'info@agileventures.org'
+
+# newsletter send_as: (:instant | :scheduler_job)
+# does what it looks like
+newsletter:
+  send_as: :scheduler_job
+  chunk_size: 180
+
+# as of implementation of gem rails_config arrays
+# wont work on heroku when passed as ENV
+# so for now we take emails divided by ','
+privileged_users: ""
+
+disqus:
+  shortname: 'agileventures-dev'
+  api_key:  'Mh9WLi09Ve752WaTu3xbfEpSXDHOluVNc2Cm8UnDVA5TTuKXUebEVq56cDlu0SBu'
+  secret_key: 'bRtQeANt2qJQ9Y6CJZtA2I2g6dioHKDuPaX5US17JmRXmvMYcG69wZXeKaFmd8qJ'
+
+hangouts:
+  app_id: <%= ENV['HANGOUTS_APP_ID'] %>
+
+twitter:
+  consumer_key:        nil
+  consumer_secret:     nil
+  access_token:        nil
+  access_token_secret: nil

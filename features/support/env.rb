@@ -3,10 +3,15 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
+require 'coveralls'
+Coveralls.wear_merged! 'rails'
+
+ENV['CUCUMBER'] = 'cucumber'
 
 require 'cucumber/rails'
 require 'cucumber/rspec/doubles'
 require 'capybara/poltergeist'
+require 'capybara-screenshot/cucumber'
 require 'geocoder/lookups/base'
 require 'geocoder/results/freegeoip'
 require 'webmock/cucumber'
@@ -14,16 +19,30 @@ require 'delorean'
 
 WebMock.disable_net_connect!(:allow_localhost => true)
 
+OmniAuth.config.logger.level = Logger::WARN
+
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
 # Capybara.default_selector = :xpath
 
 Capybara.javascript_driver = :poltergeist
+Capybara.default_wait_time = 5
+
+options = {
+  inspector: true,
+  port: 3010,
+  timeout: 10
+}
+
+Capybara.register_driver :poltergeist_debug do |app|
+  Capybara::Poltergeist::Driver.new app, options
+end
 
 # By default, any exception happening in your Rails application will bubble up
-# to Cucumber so that your scenario will fail. This is a different from how 
-# your application behaves in the production environment, where an error page will 
+#
+# to Cucumber so that your scenario will fail. This is a different from how
+# your application behaves in the production environment, where an error page will
 # be rendered instead.
 #
 # Sometimes we want to override this default behaviour and allow Rails to rescue
@@ -71,18 +90,22 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 Geocoder.configure(:ip_lookup => :test)
 Geocoder::Lookup::Test.add_stub(
     '127.0.0.1', [
-    {
-        ip: '127.0.0.1',
-        country_code: 'SE',
-        country_name: 'Sweden',
-        region_code: '28',
-        region_name: 'Västra Götaland',
-        city: 'Alingsås',
-        zipcode: '44139',
-        latitude: 57.9333,
-        longitude: 12.5167,
-        metro_code: '',
-        areacode: ''
-    }.as_json
-]
+                   {
+                       ip: '127.0.0.1',
+                       country_code: 'SE',
+                       country_name: 'Sweden',
+                       region_code: '28',
+                       region_name: 'Västra Götaland',
+                       city: 'Alingsås',
+                       zipcode: '44139',
+                       latitude: 57.9333,
+                       longitude: 12.5167,
+                       metro_code: '',
+                       areacode: ''
+                   }.as_json
+               ]
 )
+
+Before do
+  Settings.reload!
+end

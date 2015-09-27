@@ -1,7 +1,8 @@
 <!-- BEGIN LIST -->
 <ul class="box">
+  <h2 style="font-size: 2em"><a href="/getting-started">Let's code!</a></h2>
   <!-- BEGIN LIST ELEMENT -->
-  <li>
+  <li class="hidden-sm hidden-xs hidden-md">
     <div class="circle">
       <div class="front front-popular">
         <div class="title color-1-font glyphicon glyphicon-star"></div>
@@ -13,14 +14,14 @@
         <div class="title">Learn</div>
         <div class="description">
           <p>Super charge your learning by collaborating with others</p>
-          <%= link_to 'Read more..', static_page_path('Remote Pair Programming'), class: 'btn btn-danger' %>
+          <%= link_to 'Read more..', static_page_path('Learn'), class: 'btn btn-danger' %>
         </div><!-- end div .description -->
       </div><!-- end div .back color-1-bg info -->
     </div><!-- end div .circle -->
   </li>
   <!-- END LIST ELEMENT -->
   <!-- BEGIN LIST ELEMENT -->
-  <li>
+  <li class="hidden-sm hidden-xs hidden-md">
     <div class="circle">
       <div class="front front-popular">
         <div class="title color-2-font glyphicon glyphicon-user"></div>
@@ -32,33 +33,14 @@
         <div class="title">Code</div>
         <div class="description">
           <p>Develop your team skills</p>
-          <%= link_to 'Read more..', static_page_path('Remote Pair Programming'), class: 'btn btn-primary' %>
+          <%= link_to 'Read more..', static_page_path('Code'), class: 'btn btn-primary' %>
         </div><!-- end div .description -->
       </div><!-- end div .back color-1-bg info -->
     </div><!-- end div .circle -->
   </li>
   <!-- END LIST ELEMENT -->
   <!-- BEGIN LIST ELEMENT -->
-  <li>
-    <div class="circle">
-      <div class="front front-popular">
-        <div class="title color-3-font glyphicon glyphicon-tag"></div>
-        <div class="price color-3-font"><span class="total">GROW</span></div>
-        <div class="description">Use Agile methods</div>
-      </div><!-- end div .front -->
-      <div class="popular color-3-font glyphicon glyphicon-tag"></div>
-      <div class="back color-3-bg info">
-        <div class="title">Grow</div>
-        <div class="description">
-          <p>Build your agile arsenal</p>
-          <%= link_to 'Read more..', static_page_path('Remote Pair Programming'), class: 'btn btn-success' %>
-        </div><!-- end div .description -->
-      </div><!-- end div .back color-3-bg info -->
-    </div><!-- end div .circle -->
-  </li>
-  <!-- END LIST ELEMENT -->
-  <!-- BEGIN LIST ELEMENT -->
-  <li>
+  <li class="hidden-sm hidden-xs hidden-md">
     <div class="circle">
       <div class="front front-popular">
         <div class="title color-4-font glyphicon glyphicon-time"></div>
@@ -70,12 +52,31 @@
         <div class="title">Pair</div>
         <div class="description">
           <p>Remote Pairing FTW!</p>
-          <%= link_to 'Read more..', static_page_path('Remote Pair Programming'), class: 'btn btn-warning' %>
+          <%= link_to 'Read more..', static_page_path('Pair'), class: 'btn btn-warning' %>
         </div><!-- end div .description -->
       </div><!-- end div .back color-4-bg info -->
     </div><!-- end div .circle -->
   </li>
   <!-- END LIST ELEMENT -->
-
+  <!-- BEGIN LIST ELEMENT -->
+  <li class="hidden-sm hidden-xs hidden-md">
+    <div class="circle">
+      <div class="front front-popular">
+        <div class="title color-3-font glyphicon glyphicon-tag"></div>
+        <div class="price color-3-font"><span class="total">GROW</span></div>
+        <div class="description">Use Agile methods</div>
+      </div><!-- end div .front -->
+      <div class="popular color-3-font glyphicon glyphicon-tag"></div>
+      <div class="back color-3-bg info">
+        <div class="title">Grow</div>
+        <div class="description">
+          <p>Build your agile arsenal</p>
+          <%= link_to 'Read more..', static_page_path('Grow'), class: 'btn btn-success' %>
+        </div><!-- end div .description -->
+      </div><!-- end div .back color-3-bg info -->
+    </div><!-- end div .circle -->
+  </li>
+  <!-- END LIST ELEMENT -->
+  <%= render partial: 'layouts/event_link', locals: {event: @event} %>
 </ul>
 <!--END LIST -->

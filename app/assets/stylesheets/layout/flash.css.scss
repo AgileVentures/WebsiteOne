@@ -1,0 +1,33 @@
+@import "mixins";
+
+#flash-container {
+  position: relative;
+  height: 0;
+}
+
+#flash-display {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  font-size: 0.9em;
+  text-transform: none;
+  font-weight: normal;
+
+  .alert {
+    margin: 0;
+    @include css-border-radius(0);
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 768px) {
+  #flash-container {
+    height: auto;
+  }
+
+  #flash-display {
+    position: static;
+    width: 100%;
+  }
+}

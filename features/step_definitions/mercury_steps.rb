@@ -3,8 +3,7 @@ When /^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/ do |button|
       'save' => 'mercury-save-button'
   }
   page.execute_script("$('.#{selector_for[button.downcase]}').click()")
-  #puts 'sleep(0.1)'
-  #sleep(0.1)
+  wait_for_ajax
 end
 
 When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do |field, type, s|
@@ -15,7 +14,8 @@ When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do
       find(:css, "div##{type}_title>textarea").set(s)
     elsif field == 'body'
       page.execute_script("$('##{type}_body').text('#{s}')")
-      #find(:css, 'div#document_body').set(s)
+    elsif field == 'pitch'
+      find(:css, '#pitch_content').set(s)
     end
   }
 end
@@ -28,7 +28,6 @@ When(/^I (try to use|am using) the Mercury Editor to edit ([^"]*) "([^"]*)"$/) d
   visit "/editor#{url_for_title(action: 'show', controller: model, title: title)}"
 end
 
-# Bryan: not completely reliable but works for the time being
 Then(/^I should see the editable field "([^"]*)"$/) do |field|
   find(:css, "div#document_#{field.downcase.singularize}")
 end
@@ -41,9 +40,9 @@ Then /^I should( not)? see button "([^"]*)" in Mercury Editor$/ do |negative, bu
   button = 'new_document_link' if button == 'New document'
   page.driver.within_frame('mercury_iframe') {
     unless negative
-      expect(has_link? button).to be_true
+      expect(has_link? button).to be_truthy
     else
-      expect(has_link? button).to be_false
+      expect(has_link? button).to be_falsey
     end
   }
 end

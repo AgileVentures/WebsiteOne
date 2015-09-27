@@ -11,12 +11,7 @@ Background:
 
 Scenario: View user's bio details
   When I visit Alice's profile page
-  Then I should see "Bio"
-  And I should see "Lives on a farm with many sheep and goats."
-
-Scenario: User does not have a bio.
-  When I visit Bob's profile page
-  Then I should not see "Bio"
+  Then I should see "Lives on a farm with many sheep and goats."
 
 @javascript
 Scenario: Add bio content to profile

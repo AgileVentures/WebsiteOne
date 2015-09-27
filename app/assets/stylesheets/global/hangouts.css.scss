@@ -1,0 +1,243 @@
+@import "../variables";
+
+.hangouts-management {
+  @extend .panel-group;
+  margin: 0px;
+
+  .restart-panel, .edit-link-panel {
+    @extend .panel;
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+  }
+
+  .restart-panel {
+    @extend .panel-danger;
+    @extend .collapse;
+  }
+
+  .edit-link-panel {
+    @extend .panel-info;
+    margin-top: 5px;
+  }
+
+  .panel-heading {
+    margin: 0px;
+    padding: 5px;
+    border-top: none;
+  }
+
+  .panel-title {
+    font-size: small;
+    padding-right: 5px;
+  }
+
+  .panel-close-button {
+    @extend .close;
+    @extend .collapse;
+    color: inherit;
+  }
+
+  .panel-body {
+    padding: 0px;
+    margin-top: 5px;
+    font-size: small;
+    border-top: none !important;
+    background: transparent;
+  }
+
+  .panel-body.warning {
+    padding: 5px;
+  }
+
+  .btn:focus {
+    outline: none;
+  }
+
+  .restart-section, .edit-link-form {
+    @extend .panel-collapse;
+    @extend .collapse;
+  }
+
+  .collapse-button {
+    cursor: pointer;
+  }
+
+  .form-horizontal .form-group {
+    margin: 0px;
+  }
+
+  .form-group div[class*="col-"] {
+    padding: 2px;
+  }
+
+  .form-control {
+    width: 100%;
+    height: 30px;
+    font-weight: normal;
+  }
+
+  .hangout-btn {
+
+    height: 30px !important;
+    line-height: 30px;
+    padding: 0;
+
+    .readme-link {
+      background: transparent;
+      color: $theme-main !important;
+      display: inline-block;
+      vertical-align: initial;
+      padding: 0;
+    }
+  }
+}
+
+.hangout-details {
+  dl {
+    margin: 0;
+    font-size: small;
+  }
+
+  dt {
+    float: left;
+  }
+
+  dd {
+    margin-left: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.live-hangouts {
+  $hg-color: lighten($theme-main, 35);
+  $hg-border: 1px solid gray;
+
+  font-size: small;
+
+  .fa {
+    height: auto;
+    font-size: 1.5em;
+  }
+
+  .panel {
+    overflow: hidden;
+    border: $hg-border;
+  }
+
+  .panel-info {
+    font-weight: bold;
+    margin-bottom: 5px;
+
+    div {
+      line-height: 25px;
+    }
+  }
+
+  @mixin hg-btn($color) {
+    @extend .btn;
+    background-color: $color;
+
+    font-size: smaller;
+
+    height: 2em;
+    padding: 4px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: lighten($color, 10%);
+    }
+  }
+
+  .hg-toggles {
+    @extend .pull-left;
+    margin-bottom: 10px;
+  }
+
+  .btn-hg-join {
+    @include hg-btn(green);
+    width: 50px;
+  }
+
+  .btn-hg-join.disable {
+    background-color: grey;
+    box-shadow: none;
+    cursor: default;
+
+    &:hover {}
+
+  }
+
+  .btn-hg-watch {
+    @include hg-btn($theme-main);
+    width: 50px;
+    margin-top: 3px;
+  }
+
+  .panel-default {
+    position: relative;
+    transition: all 0.5s;
+
+    .panel-heading {
+      &:hover {
+        background-color: $hg-color;
+        border-color: $hg-color;
+        box-shadow: none;
+        cursor: pointer;
+      }
+    }
+
+    .panel-heading.empty {
+      padding-left: 10px;
+    }
+  }
+
+  .panel-heading.hg-headings {
+    color: white;
+    background-color: $theme-dark;
+  }
+
+
+  .panel-body {
+    border-top: $hg-border;
+    background-color: $hg-color;
+    padding: 5px;
+    margin: 0;
+  }
+
+  .container-fluid, .panel-heading {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .container-fluid {
+    text-align: left;
+    white-space: nowrap;
+
+    @media (min-width: 768px) {
+      white-space: normal;
+
+      .hg-align-right {
+        text-align: right;
+        direction: rtl;
+      }
+
+    }
+
+  }
+
+  .hg-toggle {
+    width: 20px;
+    padding-left: 5px;
+  }
+
+  .hg-avatar {
+    padding: 0 0 0 15px;
+  }
+
+}

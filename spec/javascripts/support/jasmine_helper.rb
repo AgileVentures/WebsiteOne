@@ -13,6 +13,11 @@
 module Jasmine
   class Config
     require 'webmock'
-    WebMock.allow_net_connect!
+    WebMock.disable_net_connect!(:allow_localhost => true)
   end
 end
+
+#Example: prevent PhantomJS auto install, uses PhantomJS already on your path.
+#Jasmine.configure do |config|
+#   config.prevent_phantomjs_auto_install = true
+#end

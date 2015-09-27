@@ -1,17 +1,17 @@
 class ArticlesController < ApplicationController
   layout 'articles_layout'
   before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :load_article, only: [:show, :edit, :update, :upvote, :downvote, :cancelvote]
 
   def index
     if params[:tag].present?
-      @articles = Article.tagged_with(params[:tag]).order('created_at DESC')
+      @articles = Article.tagged_with(params[:tag]).order('created_at DESC').includes(:user)
     else
-      @articles = Article.order('created_at DESC')
+      @articles = Article.order('created_at DESC').includes(:user)
     end
   end
 
   def show
-    @article = Article.friendly.find(params[:id])
     @author = @article.user
   end
 
@@ -21,14 +21,14 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.friendly.find(params[:id])
   end
 
   def create
     @article = current_user.articles.build(article_params)
 
     if @article.save
-      flash[:notice] = "Successfully created the article \"#{@article.title}!\""
+      @article.create_activity :create, owner: current_user
+      flash[:notice] = %Q{Successfully created the article "#{@article.title}!"}
       redirect_to article_path(@article)
     else
       flash.now[:alert] = @article.errors.full_messages.join(', ')
@@ -37,10 +37,10 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.friendly.find(params[:id])
 
     if @article.update_attributes(article_params)
-      flash[:notice] = "Successfully updated the article \"#{@article.title}\""
+      @article.create_activity :update, owner: current_user
+      flash[:notice] = %Q{Successfully updated the article "#{@article.title}"}
       redirect_to article_path(@article)
     else
       flash.now[:alert] = @article.errors.full_messages.join(', ')
@@ -57,9 +57,61 @@ class ArticlesController < ApplicationController
     @author = current_user
   end
 
+  # article voting
+  def upvote
+    if @article.authored_by?(current_user) then
+      flash[:error] = %Q{Can not vote for your own article "#{@article.title}"}
+    else
+      @article.upvote_by current_user
+      case @article.vote_registered?
+      when true
+        flash[:notice] = %Q{Successfully voted up the article "#{@article.title}"}
+      when false
+        flash[:error] = "You have already given this article an up vote"
+      when nil
+        flash[:error] = "Your vote was not registered"
+      end
+    end
+    redirect_to article_path(@article)
+  end
+
+  def downvote
+    if @article.authored_by?(current_user) then
+      flash[:error] = %Q{Can not vote for your own article "#{@article.title}"}
+    else
+      @article.downvote_by current_user
+      case @article.vote_registered?
+      when true
+        flash[:notice] = %Q{Successfully voted down the article "#{@article.title}"}
+      when false
+        flash[:error] = "You have already given this article a down vote"
+      when nil
+        flash[:error] = "Your vote was not registered"
+      end
+    end
+    redirect_to article_path(@article)
+  end
+
+  def cancelvote
+    @article.unvote_by current_user
+    case @article.vote_registered?
+    when true
+      flash[:notice] = %Q{Could not cancel your vote for the article "#{@article.title}"}
+    when false
+      flash[:notice] = %Q{Cancelled your vote for the article "#{@article.title}"}
+    when nil
+      flash[:error] = "Can not cancel when you have not voted for this article"
+    end
+    redirect_to article_path(@article)
+  end
+
   private
 
   def article_params
     params[:article].permit(:title, :content, :tag_list)
+  end
+
+  def load_article
+    @article = Article.friendly.find(params[:id])
   end
 end

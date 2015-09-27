@@ -6,10 +6,11 @@ WebsiteOne
 [code-climate]: https://codeclimate.com/github/AgileVentures/WebsiteOne
 [support]: http://www.agileventures.org/
 [about-us]: http://www.agileventures.org/about-us
-[members]: http://www.agileventures.org/users/index
+[members]: http://www.agileventures.org/users
 
 
 #### A website for [Agile Ventures][application] - a platform for online collaboration and crowdsourced project development.
+<a href='https://pledgie.com/campaigns/28766'><img alt='Click here to lend your support to: Help us #CodeForGood and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/28766.png?skin_name=chrome' border='0' ></a>
 <!--[![AgileVentures WebsiteOne](http://img.youtube.com/vi/kjDehcx6Igk/0.jpg)](http://www.youtube.com/watch?v=kjDehcx6Igk)-->
 
 
@@ -19,16 +20,30 @@ We are proudly using Agile methods and Ruby on Rails as the framework to deliver
 
 The principal organization behind this project is AGILEVENTURES NONPROFIT LTD., a nonprofit organization registered in the UK, company number: 08929160
 
+
+ Service                 |  Status      |
+|------------------------ | ----------------- |
+| *Test coverage*         |                  |
+| Coveralls                |  [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.svg?branch=develop)](https://coveralls.io/r/AgileVentures/WebsiteOne?branch=develop)   |
+| *Continuous integration* |    |
+| Semaphore CI (master)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/318335/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
+| Semaphore CI (staging)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/317640/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
+| Semaphore CI (develop)      | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/292874/badge.png)](https://semaphoreapp.com/agileventures/websiteone)  |
+| *Dependencies*          |         |
+| Gemnasium               |[![Dependency Status](https://gemnasium.com/AgileVentures/WebsiteOne.png)](https://gemnasium.com/AgileVentures/WebsiteOne)  |
+| Code quality            |         |
+| CodeClimate             | [![CodeClimate](https://codeclimate.com/github/AgileVentures/WebsiteOne.png)](https://codeclimate.com/github/AgileVentures/WebsiteOne) |
+|*Deploys*                |         |
+| DevelopServer           | [websiteone-develop.herokuapp.com](http://websiteone-develop.herokuapp.com/) |
+| StagingServer           |[websiteone-staging.herokuapp.com](http://websiteone-staging.herokuapp.com/)  |
+| ProductionServer        | [agileventures.org][application]  |
+|*Project management*       |         |
+|Pivotal Tracker          |[WebsiteOne][pivotal]|
+
 ## Dependencies
 
 The tests requires `phantomjs` to run the cucumber tests, refer to the [Poltergeist](https://github.com/jonleighton/poltergeist)
 
-[![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.png)](https://coveralls.io/r/AgileVentures/WebsiteOne)
-
-
-Master: [![Build Status](https://travis-ci.org/AgileVentures/WebsiteOne.png?branch=master)](https://travis-ci.org/AgileVentures/WebsiteOne) [![Code Climate](https://codeclimate.com/github/AgileVentures/WebsiteOne.png)](https://codeclimate.com/github/AgileVentures/WebsiteOne)
-
-Develop: [![Build Status](https://travis-ci.org/AgileVentures/WebsiteOne.png?branch=develop)](https://travis-ci.org/AgileVentures/WebsiteOne) [![Dependency Status](https://gemnasium.com/AgileVentures/WebsiteOne.png)](https://gemnasium.com/AgileVentures/WebsiteOne)
 
 
 ## <a name="contributing"></a>Contributing
@@ -47,5 +62,6 @@ Here are some ways *you* can contribute:
 * by closing [issues][pivotal]
 * by [reviewing code][code-climate]
 
-
+Eager to get started? Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/wiki/Project-Setup-%28New-Users%29)
+page
 

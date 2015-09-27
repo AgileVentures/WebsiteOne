@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414125301) do
+ActiveRecord::Schema.define(version: 20150520184236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: true do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -27,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140414125301) do
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
   add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
+  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id",    null: false
@@ -37,6 +55,15 @@ ActiveRecord::Schema.define(version: 20140414125301) do
   end
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
+
+  create_table "commit_counts", force: true do |t|
+    t.integer "commit_count"
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
+  add_index "commit_counts", ["project_id"], name: "index_commit_counts_on_project_id", using: :btree
+  add_index "commit_counts", ["user_id"], name: "index_commit_counts_on_user_id", using: :btree
 
   create_table "documents", force: true do |t|
     t.string   "title"
@@ -49,16 +76,29 @@ ActiveRecord::Schema.define(version: 20140414125301) do
     t.string   "slug"
   end
 
+  add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree
   add_index "documents", ["slug", "user_id"], name: "index_documents_on_slug_and_user_id", unique: true, using: :btree
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "event_instances", force: true do |t|
+    t.integer  "event_id"
+    t.string   "title"
+    t.string   "hangout_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "uid"
+    t.string   "category"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "yt_video_id"
+    t.text     "participants"
+    t.string   "hoa_status"
+  end
 
   create_table "events", force: true do |t|
     t.string   "name"
     t.string   "category"
     t.text     "description"
-    t.date     "event_date",                                null: false
-    t.time     "start_time",                                null: false
-    t.time     "end_time",                                  null: false
     t.string   "repeats"
     t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
@@ -69,9 +109,13 @@ ActiveRecord::Schema.define(version: 20140414125301) do
     t.datetime "updated_at"
     t.string   "url"
     t.string   "slug"
+    t.datetime "start_datetime"
+    t.integer  "duration"
+    t.text     "exclusions"
   end
 
   add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
+  add_index "events", ["start_datetime"], name: "index_events_on_start_datetime", using: :btree
 
   create_table "follows", force: true do |t|
     t.integer  "followable_id",                   null: false
@@ -86,6 +130,18 @@ ActiveRecord::Schema.define(version: 20140414125301) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
+  create_table "newsletters", force: true do |t|
+    t.string   "title",                        null: false
+    t.string   "subject",                      null: false
+    t.text     "body",                         null: false
+    t.boolean  "do_send",      default: false
+    t.boolean  "was_sent",     default: false
+    t.integer  "last_user_id", default: 0
+    t.datetime "sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -96,6 +152,9 @@ ActiveRecord::Schema.define(version: 20140414125301) do
     t.string   "slug"
     t.string   "github_url"
     t.string   "pivotaltracker_url"
+    t.text     "pitch"
+    t.integer  "commit_count",       default: 0
+    t.string   "image_url"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
@@ -112,6 +171,13 @@ ActiveRecord::Schema.define(version: 20140414125301) do
 
   add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
 
+  create_table "statuses", force: true do |t|
+    t.string   "status"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -122,12 +188,17 @@ ActiveRecord::Schema.define(version: 20140414125301) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
+  add_index "taggings", ["tagger_type"], name: "index_taggings_on_tagger_type", using: :btree
 
   create_table "tags", force: true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "taggings_count", default: 0
   end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",   null: false
@@ -150,7 +221,7 @@ ActiveRecord::Schema.define(version: 20140414125301) do
     t.boolean  "display_profile",        default: true
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "country"
+    t.string   "country_name"
     t.string   "city"
     t.string   "region"
     t.string   "youtube_user_name"
@@ -158,6 +229,10 @@ ActiveRecord::Schema.define(version: 20140414125301) do
     t.boolean  "display_hire_me"
     t.text     "bio"
     t.boolean  "receive_mailings",       default: true
+    t.integer  "karma_points",           default: 0
+    t.string   "country_code"
+    t.integer  "timezone_offset"
+    t.integer  "status_count",           default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -174,5 +249,20 @@ ActiveRecord::Schema.define(version: 20140414125301) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end

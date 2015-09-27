@@ -1,6 +1,6 @@
 module VisitorsHelper
   def display_countdown(event)
-    time_to_next_event_instance = Time.now.to_datetime.distance_to(event.next_occurrence_time.to_datetime)
+    time_to_next_event_instance = Time.now.to_datetime.distance_to(event.next_occurrence_time_attr.to_datetime)
     minutes_left = time_to_next_event_instance[:minutes]
     hours_left = time_to_next_event_instance[:hours]
     days_left = time_to_next_event_instance[:days]

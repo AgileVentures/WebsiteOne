@@ -1,7 +1,5 @@
 require 'exception_notification/rails'
 
-
-
 ExceptionNotification.configure do |config|
   # Ignore additional exception types.
   # ActiveRecord::RecordNotFound, AbstractController::ActionNotFound and ActionController::RoutingError are already added.
@@ -16,13 +14,7 @@ ExceptionNotification.configure do |config|
   # Notifiers =================================================================
 
   # Email notifier sends notifications by email.
-  if Rails.env.test? or ENV['ENABLE_NOTIFICATIONS']
-    config.add_notifier :email, {
-        :email_prefix         => "[ERROR] ",
-        :sender_address       => %{"Error Police" <errorPolice@agileventures.org>},
-        :exception_recipients => %w{info@agileventures.org}
-    }
-  end
+  config.add_notifier :email, Features.custom_errors.email_notifier.to_hash
 
   # Campfire notifier sends notifications to your Campfire room. Requires 'tinder' gem.
   # config.add_notifier :campfire, {

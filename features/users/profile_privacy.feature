@@ -15,15 +15,11 @@ Feature: As a site user
     Then I should not see "Alice Jones"
     And I should see "Bob Butcher"
 
+  @enable-custom-errors
   Scenario: Visitor should not be able to access a private profile
     Given I am not logged in
     And I visit Alice's profile page
-    Then I should see "User has set his profile to private"
-
-  Scenario: A logged in user should not be able to access a private profile
-    Given I am logged in
-    And I visit Alice's profile page
-    Then I should see "User has set his profile to private"
+    Then I should not see "Alice Jones"
 
   Scenario: Should be able to make my profile private
     Given I am logged in as "Bob"
@@ -32,7 +28,7 @@ Feature: As a site user
     Then "Display profile" should not be checked
     And I click "Update"
     And I am on the "Our members" page
-    Then I should not see "Bob Butcher" in the members list
+    Then I should not see "Bob Butcher" within the main content
 
   Scenario: Should be able to make my profile public again
     Given I am logged in as "Bob"

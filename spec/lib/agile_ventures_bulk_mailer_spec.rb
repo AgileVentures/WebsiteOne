@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 describe AgileVentures::BulkMailer do
-  before do
-    2.times do 
-      FactoryGirl.create(:user, email: "#{rand(1000)}@example.com")
-    end
+  before(:each) do
+    2.times { FactoryGirl.create(:user) }
+
     @opts = { subject: 'my subject',
               heading: 'my heading',
               content: 'my multiline\ntext block' }

@@ -9,7 +9,3 @@ Feature: Add current_user options to navbar
     And I see a navigation header
     Then I should see my name
     And I should see "1" avatars
-
-
-
-

@@ -1,4 +1,4 @@
-<%- if @stories %>
+<%- unless @stories.empty? %>
   <h2>Current</h2>
   <table class="table table-bordered table-striped table-hover table-condensed">
     <tr>
@@ -40,5 +40,5 @@
   </table>
 </div>
 <% else %>
-<p style="margin-top: 20px;">No PivotalTracker Stories can be found for project <strong><%= @project.title %></strong></p>
+<p>No PivotalTracker Stories can be found for project <strong><%= @project.title %></strong></p>
 <% end %>

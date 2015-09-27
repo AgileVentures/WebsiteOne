@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h4 class="modal-title" id="modalTitle">Select new section for the document</h4>
+</div>
+<div class="modal-body" style="overflow: auto;">
+  <% if @categories %>
+    <ul style="list-style: none outside none; padding-left:18px;">
+      <% @categories.each do |category| %>
+        <% if category.id == @document.id or category.id == @document.parent_id %>
+          <% next %>
+        <% else %>
+          <li><%= link_to category.title, update_document_parent_id_path(@project, @document, new_parent_id: category.id), :method => :put %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
