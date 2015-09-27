@@ -59,11 +59,13 @@ $avatar-size: 32px;
   }
 }
 
-.highlight-box { // replace with bootstrap well?
+.projects-sidebar-group {
+  background: #fff;
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 10px;
 }
+
 .widget-title {
   font-size: 1em;
   font-weight: 700;
