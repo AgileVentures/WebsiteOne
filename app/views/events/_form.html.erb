@@ -7,50 +7,50 @@
 <% duration = params.fetch(:duration, @event.duration) %>
 
 <div class="col-lg-8 col-lg-offset-2">
-  <%= form_for @event, html: { :class => 'form-vertical', :id => 'event-form' } do |f| %>
+  <%= form_for @event, html: { class: 'form-vertical', id: 'event-form' } do |f| %>
 
       <%= awesome_text_field f, :name %>
 
       <div class='form-group'>
-        <%= f.label :category, :class => 'control-label' %>
-        <%= f.select :category, %w( Scrum PairProgramming ), {}, :class => 'form-control' %>
+        <%= f.label :category, class: 'control-label' %>
+        <%= f.select :category, %w( PairProgramming Scrum ), {}, class: 'form-control' %>
       </div>
 
       <%= awesome_text_area f, :description, rows: 10 %>
 
       <div class="form-group event_date">
-        <%= label_tag 'start_date', 'Start Date', :class => 'control-label' %>
-        <%= text_field_tag 'start_date', format_datepicker(start_date), style: 'width:auto;', :class => 'form-control datepicker' %>
+        <%= label_tag 'start_date', 'Start Date', class: 'control-label' %>
+        <%= text_field_tag 'start_date', format_datepicker(start_date), style: 'width:auto;', class: 'form-control datepicker' %>
       </div>
 
       <div class="form-group event_time">
-        <%= label_tag 'start_time', "Start Time in UTC", :class => 'control-label' %>
+        <%= label_tag 'start_time', 'Start Time in UTC', class: 'control-label' %>
         <%= text_field_tag 'start_time', format_timepicker(start_time), style: 'width:auto;', class: 'form-control timepicker' %>
       </div>
 
       <div class="form-group event_time" style='display: block;'>
-        <%= f.label :duration, "#{:duration}".titleize, :class => 'control-label' %>
+        <%= f.label :duration, "#{:duration}".titleize, class: 'control-label' %>
         <%= f.number_field :duration, { style: 'width:auto;', value: duration } %>
       </div>
 
       <div class="form-group">
         <%= f.label :repeats, :class => 'control-label' %>
-        <%= f.select :repeats, Event::REPEATS_OPTIONS, {}, :default => 'never', :class => 'form-control' %>
+        <%= f.select :repeats, Event::REPEATS_OPTIONS, {}, :default => 'never', class: 'form-control' %>
         <%= render partial: 'repeats_weekly_options', locals: { f: f } %>
       </div>
 
       <div class="form-group event_option" id="repeats_options">
         <%= f.label :repeat_ends, :class => 'control-label' %>
-        <%= f.select :repeat_ends_string, Event::REPEAT_ENDS_OPTIONS, {}, :class => 'form-control' %>
+        <%= f.select :repeat_ends_string, Event::REPEAT_ENDS_OPTIONS, {}, class: 'form-control' %>
       </div>
 
       <div class="form-group repeat_ends_on">
-        <%= label_tag 'repeat_ends_on_label', "End Time in UTC", :class => 'control-label', id: 'repeat_ends_on_label' %>
+        <%= label_tag 'repeat_ends_on_label', 'End Time in UTC', class: 'control-label', id: 'repeat_ends_on_label' %>
         <%= text_field_tag 'repeat_ends_on', format_datepicker(@event.repeat_ends_on), style: 'width:auto;', class: 'form-control datepicker' %>
       </div>
 
       <div class="form-group">
-        <%= f.hidden_field :time_zone, :value => 'UTC' %>
+        <%= f.hidden_field :time_zone, value: 'UTC' %>
       </div>
 
       <div class="form-group">
