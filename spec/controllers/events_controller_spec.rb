@@ -12,8 +12,8 @@ describe EventsController do
   describe 'GET index' do
     it 'should render "index"' do
       get :index
-      assigns(:events).should eq(@events)
-      response.should render_template :index
+      expect(assigns(:events)).to eq @events
+      expect(response).to render_template :index
     end
   end
 
@@ -23,7 +23,7 @@ describe EventsController do
     end
 
     it 'assigns the requested event as @event' do
-      assigns(:event).should eq(event)
+      expect(assigns(:event)).to eq(event)
     end
 
     it 'assigns a event instance' do
@@ -44,7 +44,7 @@ describe EventsController do
     end
 
     it 'assigns a new event as @event' do
-      assigns(:event).should be_a_new(Event)
+      expect(assigns(:event)).to be_a_new Event
     end
 
     it 'renders the new template' do
@@ -53,8 +53,9 @@ describe EventsController do
   end
 
   describe 'POST create' do
-    let(:valid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event), start_date: '17 Jun 2013', start_time: '09:00:00 UTC' } }
-    let(:invalid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event, name: nil), start_date: '', start_time: '' } }
+    let(:valid_attributes) { {id: @event, event: FactoryGirl.attributes_for(:event), start_date: '17 Jun 2013', start_time: '09:00:00 UTC'} }
+    let(:invalid_attributes) { {id: @event, event: FactoryGirl.attributes_for(:event, name: nil), start_date: '', start_time: ''} }
+
     before :each do
       @controller.stub(:authenticate_user!).and_return(true)
     end
@@ -108,7 +109,7 @@ describe EventsController do
   end
 
   describe 'POST update' do
-    let(:valid_attributes) { { id: @event, event: FactoryGirl.attributes_for(:event, name: 'New Event'), start_date: '17 Jun 2013', start_time: '09:00:00 UTC' } }
+    let(:valid_attributes) { {id: @event, event: FactoryGirl.attributes_for(:event, name: 'New Event'), start_date: '17 Jun 2013', start_time: '09:00:00 UTC'} }
 
 
     before(:each) do
@@ -122,8 +123,7 @@ describe EventsController do
 
     context 'with valid params' do
       before(:each) do
-
-            post :update, valid_attributes
+        post :update, valid_attributes
       end
 
       it 'should redirected to the index page' do
@@ -137,7 +137,7 @@ describe EventsController do
 
     context 'with invalid params' do
       before(:each) do
-        post :update, id: @event, event: { name: nil }.as_json
+        post :update, id: @event, event: {name: nil}.as_json
       end
 
       it 'should redirect to the event edit page' do
@@ -151,7 +151,7 @@ describe EventsController do
   end
 
   describe 'PATCH update_only_url' do
-    let(:valid_attributes) { { id: @event, event: { url: 'http://somewhere.net' } } }
+    let(:valid_attributes) { {id: @event, event: {url: 'http://somewhere.net'}} }
 
     before(:each) do
       controller.stub(:authenticate_user! => true)
@@ -178,7 +178,7 @@ describe EventsController do
 
     context 'with an invalid url' do
       before(:each) do
-        patch :update_only_url, id: @event, event: { url: 'not-a-real-url' }
+        patch :update_only_url, id: @event, event: {url: 'not-a-real-url'}
       end
 
       it 'should redirect to the event show page' do
