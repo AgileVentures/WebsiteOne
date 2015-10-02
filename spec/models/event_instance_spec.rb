@@ -32,11 +32,6 @@ describe EventInstance, type: :model do
       allow(Time).to receive(:now).and_return(Time.parse('10:02:01 UTC'))
       expect(hangout.live?).to be_falsey
     end
-
-    it 'calls tweet hangout notification' do
-      expect(hangout).to receive(:tweet_hangout_notification)
-      hangout.save
-    end
   end
 
   context 'hangout_url is present and hoa_status is finished' do
