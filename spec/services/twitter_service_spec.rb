@@ -8,31 +8,35 @@ describe 'TwitterService' do
     end
 
     let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil, yt_video_id: nil) }
+    let(:hangout_participants) do
+        {"0" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
+              "hasCamera" => "true", "hasAppEnabled" => "false",
+              'isBroadcaster' => "false", "isInBroadcast" => "true",
+              "displayIndex" => "0", "person" =>
+                 {"id" => "xxx", "displayName" => "Foo Bar",
+                  "image" => {"url" => ".../s96-c/photo.jpg"},
+                  "fa" => "false"}, "locale" => "en", "fa" => "false"},
+         "1" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
+              "hasCamera" => "true", "hasAppEnabled" => "false",
+              "isBroadcaster" => "false", "isInBroadcast" => "true",
+              "displayIndex" => "1", "person" =>
+                 {"id" => "xxx", "displayName" => "Bar Foo",
+                  "image" => {"url" => ".../s96-c/photo.jpg"},
+                  "fa" => "false"}, "locale" => "en", "fa" => "false"},
+         "2" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
+              "hasCamera" => "true", "hasAppEnabled" => "true",
+              "isBroadcaster" => "true", "isInBroadcast" => "true",
+               "displayIndex" => "2", "person" =>
+                 {"id" => "xxx", "displayName" => "John Doe",
+                  "image" => {"url" => ".../s96-c/photo.jpg"}, "fa" => "false"},
+                  "locale" => "en", "fa" => "false"}}
+
+    end
 
     context 'pair programming tweet' do
       before(:each) do
         hangout.category = 'PairProgramming'
-        hangout.participants = {"0" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
-                                        "hasCamera" => "true", "hasAppEnabled" => "false",
-                                        'isBroadcaster' => "false", "isInBroadcast" => "true",
-                                        "displayIndex" => "0", "person" =>
-                                            {"id" => "xxx", "displayName" => "Foo Bar",
-                                             "image" => {"url" => ".../s96-c/photo.jpg"},
-                                             "fa" => "false"}, "locale" => "en", "fa" => "false"},
-                                "1" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
-                                        "hasCamera" => "true", "hasAppEnabled" => "false",
-                                        "isBroadcaster" => "false", "isInBroadcast" => "true",
-                                        "displayIndex" => "1", "person" =>
-                                            {"id" => "xxx", "displayName" => "Bar Foo",
-                                             "image" => {"url" => ".../s96-c/photo.jpg"},
-                                             "fa" => "false"}, "locale" => "en", "fa" => "false"},
-                                "2" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
-                                        "hasCamera" => "true", "hasAppEnabled" => "true",
-                                        "isBroadcaster" => "true", "isInBroadcast" => "true",
-                                        "displayIndex" => "2", "person" =>
-                                            {"id" => "xxx", "displayName" => "John Doe",
-                                             "image" => {"url" => ".../s96-c/photo.jpg"}, "fa" => "false"},
-                                        "locale" => "en", "fa" => "false"}}
+        hangout.participants = hangout_participants
       end
 
       context 'with project' do
@@ -69,28 +73,9 @@ describe 'TwitterService' do
     context 'scrum notification' do
       before(:each) do
         hangout.category = 'Scrum'
-        hangout.participants = {"0" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
-                                        "hasCamera" => "true", "hasAppEnabled" => "false",
-                                        'isBroadcaster' => "false", "isInBroadcast" => "true",
-                                        "displayIndex" => "0", "person" =>
-                                            {"id" => "xxx", "displayName" => "Foo Bar",
-                                             "image" => {"url" => ".../s96-c/photo.jpg"},
-                                             "fa" => "false"}, "locale" => "en", "fa" => "false"},
-                                "1" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
-                                        "hasCamera" => "true", "hasAppEnabled" => "false",
-                                        "isBroadcaster" => "false", "isInBroadcast" => "true",
-                                        "displayIndex" => "1", "person" =>
-                                            {"id" => "xxx", "displayName" => "Bar Foo",
-                                             "image" => {"url" => ".../s96-c/photo.jpg"},
-                                             "fa" => "false"}, "locale" => "en", "fa" => "false"},
-                                "2" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
-                                        "hasCamera" => "true", "hasAppEnabled" => "true",
-                                        "isBroadcaster" => "true", "isInBroadcast" => "true",
-                                        "displayIndex" => "2", "person" =>
-                                            {"id" => "xxx", "displayName" => "John Doe",
-                                             "image" => {"url" => ".../s96-c/photo.jpg"}, "fa" => "false"},
-                                        "locale" => "en", "fa" => "false"}}
+        hangout.participants = hangout_participants
       end
+
       it 'posts twitter notification' do
         hangout.hangout_url = 'new_hangout_url'
         expect(TwitterService).to receive(:tweet).with(/#{hangout.hangout_url}/) { :success }
