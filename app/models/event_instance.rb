@@ -13,9 +13,6 @@ class EventInstance < ActiveRecord::Base
   scope :latest, -> { order('created_at DESC') }
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
 
-  after_save "tweet_hangout_notification if (started? && hangout_url_changed?)"
-  after_save "tweet_yt_link if yt_video_id_changed?"
-
   validate :dont_update_after_finished, on: :update
 
   def started?
@@ -38,42 +35,11 @@ class EventInstance < ActiveRecord::Base
     event != nil ? event.start_datetime : created_at
   end
 
-  private
-
-  def tweet_hangout_notification
-    case self.category
-      when 'Scrum'
-        TwitterService.tweet("#Scrum meeting with our #distributedteam is live on #{hangout_url} Join in and learn about our #opensource #projects!")
-      when 'PairProgramming'
-        TwitterService.tweet("Pair programming on #{self.project.title} #{hangout_url} #pairwithme, #distributedteam")
-      else
-        Rails.logger.error "''#{self.category}'' is not a recognized event category for Twitter notifications. Must be one of: 'Scrum', 'PairProgramming'"
-    end
-  end
-
-  def tweet_yt_link
-    unless valid_recording(self.yt_video_id) == 'Video not found'
-      case self.category
-        when 'Scrum'
-          TwitterService.tweet("#{broadcaster.split[0]} just hosted an online #scrum using #googlehangouts Missed it? Catch the recording at youtu.be/#{self.yt_video_id} #CodeForGood #opensource")
-        when 'PairProgramming'
-          TwitterService.tweet("#{broadcaster.split[0]} just finished #PairProgramming on #{self.project.title} You can catch the recording at youtu.be/#{self.yt_video_id} #CodeForGood #pairwithme")
-      end
-    end
-  end
-
   def broadcaster
     self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' }
   end
 
-  def valid_recording(code)
-    unless code == ''
-      uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
-      Net::HTTP.get(uri)
-    else
-      'Video not found'
-    end
-  end
+  private
 
   def dont_update_after_finished
     if hoa_status_was == 'finished'
