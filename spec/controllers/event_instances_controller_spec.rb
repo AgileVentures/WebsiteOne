@@ -6,6 +6,8 @@ describe EventInstancesController do
   before do
     allow(controller).to receive(:allowed?).and_return(true)
     allow(SlackService).to receive(:post_hangout_notification)
+    allow(TwitterService).to receive(:tweet_hangout_notification)
+    allow(TwitterService).to receive(:tweet_yt_link)
     request.env['HTTP_ORIGIN'] = 'http://test.com'
   end
 
@@ -51,20 +53,56 @@ describe EventInstancesController do
       expect(response.status).to eq(200)
     end
 
-    it 'calls the SlackService to post hangout notification on successful update' do
-      expect(SlackService).to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
-      get :update, params.merge(notify: 'true')
+    context 'slack notification' do
+      it 'calls the SlackService to post hangout notification on successful update' do
+        expect(SlackService).to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
+        get :update, params.merge(notify: 'true')
+      end
+
+      it 'does not call the SlackService if not update' do
+        allow_any_instance_of(EventInstance).to receive(:update).and_return(false)
+        expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
+        get :update, params.merge(notify: 'true')
+      end
+
+      it 'does not call the SlackService if not notify' do
+        expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
+        get :update, params.merge(notify: 'false')
+      end
     end
 
-    it 'does not call the SlackService if not update' do
-      allow_any_instance_of(EventInstance).to receive(:update).and_return(false)
-      expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
-      get :update, params.merge(notify: 'true')
-    end
+    context 'twitter notification' do
+      it 'calls the TwitterService to tweet yt_link if yt_video_id is changed' do
+        expect(TwitterService).to receive(:tweet_yt_link).with(an_instance_of(EventInstance))
+        expect_any_instance_of(EventInstance).to receive(:yt_video_id_changed?).and_return(true)
+        get :update, params.merge(yt_video_id: 'new_video_id')
+      end
 
-    it 'does not call the SlackService if not notify' do
-      expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
-      get :update, params.merge(notify: 'false')
+      it 'does not calls the TwitterService to tweet yt_link if yt_video_id is not changed' do
+        expect(TwitterService).not_to receive(:tweet_yt_link).with(an_instance_of(EventInstance))
+        expect_any_instance_of(EventInstance).to receive(:yt_video_id_changed?).and_return(false)
+        get :update, params
+      end
+
+      it 'calls the TwitterService to tweet notification if event has started and hangout url changed' do
+        expect(TwitterService).to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
+        expect_any_instance_of(EventInstance).to receive(:hangout_url_changed?).and_return(true)
+        expect_any_instance_of(EventInstance).to receive(:started?).and_return(true)
+        get :update, params.merge(hangout_url: 'new_hangout_url')
+      end
+
+      it 'does not call the TwitterService to tweet notification if event has not started' do
+        expect(TwitterService).not_to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
+        expect_any_instance_of(EventInstance).to receive(:started?).and_return(false)
+        get :update, params.merge(hangout_url: 'new_hangout_url')
+      end
+
+      it 'does not call the TwitterService to tweet notification if event hangout url has not changed' do
+        expect(TwitterService).not_to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
+        expect_any_instance_of(EventInstance).to receive(:hangout_url_changed?).and_return(false)
+        expect_any_instance_of(EventInstance).to receive(:started?).and_return(true)
+        get :update, params.merge(hangout_url: 'new_hangout_url')
+      end
     end
 
     it 'returns a failure response if update is unsuccessful' do
