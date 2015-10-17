@@ -13,4 +13,17 @@ module SlackService
       host_avatar: hangout.user.gravatar_url
     }
   end
+
+  def post_yt_link(hangout)
+    return unless Features.slack.notifications.enabled
+
+    uri = URI.parse "#{Slack::BOT_URL}/hubot/hangouts-video-notify"
+    Net::HTTP.post_form uri, {
+      title: hangout.title,
+      video: hangout.hangout_url,
+      type: hangout.category,
+      host_name: hangout.user.display_name,
+      host_avatar: hangout.user.gravatar_url
+    }
+  end
 end
