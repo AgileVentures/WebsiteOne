@@ -69,6 +69,19 @@ describe EventInstancesController do
         expect(SlackService).not_to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
         get :update, params.merge(notify: 'false')
       end
+
+      it 'calls the SlackService to post yt_link if yt_video_id is changed' do
+        expect(SlackService).to receive(:post_yt_link).with(an_instance_of(EventInstance))
+        expect_any_instance_of(EventInstance).to receive(:yt_video_id_changed?).and_return(true)
+        get :update, params.merge(yt_video_id: 'new_video_id')
+      end
+
+      it 'does not calls the SlackService to post yt_link if yt_video_id is not changed' do
+        expect(SlackService).not_to receive(:post_yt_link).with(an_instance_of(EventInstance))
+        expect_any_instance_of(EventInstance).to receive(:yt_video_id_changed?).and_return(false)
+        get :update, params
+      end
+
     end
 
     context 'twitter notification' do
