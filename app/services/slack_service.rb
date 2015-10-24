@@ -20,7 +20,7 @@ module SlackService
     uri = URI.parse "#{Slack::BOT_URL}/hubot/hangouts-video-notify"
     Net::HTTP.post_form uri, {
       title: hangout.title,
-      video: hangout.hangout_url,
+      video: "https://youtu.be/#{hangout.yt_video_id}",
       type: hangout.category,
       host_name: hangout.user.display_name,
       host_avatar: hangout.user.gravatar_url
