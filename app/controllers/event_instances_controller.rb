@@ -9,13 +9,13 @@ class EventInstancesController < ApplicationController
     yt_video_id_changed = event_instance.yt_video_id != hangout_params[:yt_video_id]
 
     if event_instance.try!(:update, hangout_params)
-      SlackService.post_hangout_notification(event_instance) if params[:notify] == 'true'
-      TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed
-
-      if yt_video_id_changed then
+      if params[:notify] == 'true' then
+        SlackService.post_hangout_notification(event_instance)
         SlackService.post_yt_link(event_instance)
-        TwitterService.tweet_yt_link(event_instance)
       end
+
+      TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed
+      TwitterService.tweet_yt_link(event_instance) if yt_video_id_changed
 
       redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
       head :ok
