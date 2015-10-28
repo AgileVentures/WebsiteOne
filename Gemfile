@@ -6,6 +6,7 @@ gem 'polyamorous', '~> 1.2.0'
 # End additions
 
 gem 'puma' # Puma web server
+gem 'airbrake'
 gem 'pg'  # PostgreSQL database support
 gem 'sass-rails' # Sass stylesheet language
 gem 'uglifier'  # Javascript compressor
@@ -107,4 +108,3 @@ group :production do
   gem 'rails_12factor'
   gem 'newrelic_rpm' # New Relic analytics
 end
-
