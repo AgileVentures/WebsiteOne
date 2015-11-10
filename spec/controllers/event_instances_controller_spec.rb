@@ -101,19 +101,19 @@ describe EventInstancesController do
 
       it 'calls the TwitterService to tweet notification if event has started and hangout url changed' do
         expect(TwitterService).to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
-        expect_any_instance_of(EventInstance).to receive(:started?).and_return(true)
+        expect_any_instance_of(EventInstance).to receive(:started?).at_least(:once).and_return(true)
         get :update, params.merge(hangout_url: 'new_hangout_url')
       end
 
       it 'does not call the TwitterService to tweet notification if event has not started' do
         expect(TwitterService).not_to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
-        expect_any_instance_of(EventInstance).to receive(:started?).and_return(false)
+        expect_any_instance_of(EventInstance).to receive(:started?).at_least(:once).and_return(false)
         get :update, params.merge(hangout_url: 'new_hangout_url')
       end
 
       it 'does not call the TwitterService to tweet notification if event hangout url has not changed' do
         expect(TwitterService).not_to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
-        expect_any_instance_of(EventInstance).to receive(:started?).and_return(true)
+        expect_any_instance_of(EventInstance).to receive(:started?).at_least(:once).and_return(true)
         get :update, params
       end
     end
