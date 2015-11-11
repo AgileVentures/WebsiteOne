@@ -56,7 +56,8 @@ describe EventInstancesController do
     context 'slack notification' do
       it 'calls the SlackService to post hangout notification on successful update' do
         expect(SlackService).to receive(:post_hangout_notification).with(an_instance_of(EventInstance))
-        get :update, params.merge(notify: 'true')
+        expect_any_instance_of(EventInstance).to receive(:hangout_url?).at_least(:once).and_return(true)
+        get :update, params.merge(notify: 'true', hangout_url: 'test_url')
       end
 
       it 'does not call the SlackService if not update' do
@@ -72,7 +73,8 @@ describe EventInstancesController do
 
       it 'calls the SlackService to post yt_link on successful update' do
         expect(SlackService).to receive(:post_yt_link).with(an_instance_of(EventInstance))
-        get :update, params.merge(notify: 'true')
+        expect_any_instance_of(EventInstance).to receive(:yt_video_id?).at_least(:once).and_return(true)
+        get :update, params.merge(notify: 'true', yt_video_id: 'test')
       end
 
       it 'does not call the SlackService to post yt_link if not update' do
