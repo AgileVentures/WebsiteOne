@@ -100,17 +100,21 @@ class UsersController < ApplicationController
       filter_params
     end
 
+    def set_timezone_filter(filter_params)
+      case filter_params[:timezone_filter]
+      when 'In My Timezone'
+        filter_params[:timezone_filter] = [offset, offset]
+      when 'Wider Timezone Area'
+        filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
+      else
+        filter_params.delete(:timezone_filter)
+      end
+    end
+
     def set_timezone_offset_range(filter_params)
-      unless filter_params[:timezone_filter].blank?
+      if filter_params[:timezone_filter].present?
         if offset = @current_user.try(:timezone_offset)
-          case filter_params[:timezone_filter]
-          when 'In My Timezone'
-            filter_params[:timezone_filter] = [offset, offset]
-          when 'Wider Timezone Area'
-            filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
-          else
-            filter_params.delete(:timezone_filter)
-          end
+          set_timezone_filter(filter_params)
         else
           redirect_to :back, alert: "Can't determine your location!"
         end
