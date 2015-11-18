@@ -81,7 +81,7 @@ class EventsController < ApplicationController
 
   private
 
-  def set_event
-    @event = Event.friendly.find(params[:id])
-  end
+    def set_event
+      @event = Event.friendly.find(params[:id])
+    end
 end
