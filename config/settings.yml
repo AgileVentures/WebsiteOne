@@ -43,6 +43,7 @@ disqus:
 
 hangouts:
   app_id: <%= ENV['HANGOUTS_APP_ID'] %>
+  ssl_host: <%= ENV['SSL_HOST'] %>
 
 twitter:
   consumer_key:        nil

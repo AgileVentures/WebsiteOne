@@ -5,7 +5,7 @@
   'eventId' => event_id.to_s,
   'hostId' => current_user.id,
   'hangoutId' => event_instance_id.present? ? event_instance_id : generate_event_instance_id(current_user, project_id),
-  'callbackUrl' => hangout_url('id').gsub(/id$/, '').sub(/^#{request.scheme}:/, '')
+  'callbackUrl' => url_for(controller: :event_instances, action: :update, id: 'id', protocol: 'https', host: (Settings.hangouts.ssl_host || root_url[0..-2])).gsub(/id$/, '')
 }) %>
 
 <div id="liveHOA-placeholder"
