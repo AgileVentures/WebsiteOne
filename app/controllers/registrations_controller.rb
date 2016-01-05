@@ -2,16 +2,18 @@ class RegistrationsController < Devise::RegistrationsController
   layout 'layouts/user_profile_layout', only: [:edit]
 
   def new
-    disable_sign_up
+    disable_sign_up if Rails.env.production?
+    super
   end
 
   def create
-    disable_sign_up
-    # super
-    # unless @user.new_record?
-    #   session[:omniauth] = nil
-    #   Mailer.send_welcome_message(@user).deliver if Features.enabled?(:welcome_email)
-    # end
+    disable_sign_up if Rails.env.production?
+
+    super
+    unless @user.new_record?
+      session[:omniauth] = nil
+      Mailer.send_welcome_message(@user).deliver if Features.enabled?(:welcome_email)
+    end
   end
 
   def update
