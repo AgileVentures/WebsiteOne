@@ -1,14 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   layout 'layouts/user_profile_layout', only: [:edit]
 
-  def new
-    disable_sign_up if Rails.env.production?
-    super
-  end
-
   def create
-    disable_sign_up if Rails.env.production?
-
     super
     unless @user.new_record?
       session[:omniauth] = nil
@@ -46,10 +39,5 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     user_path(resource)
-  end
-
-  def disable_sign_up
-    flash[:info] = 'Registrations are closed for now, but please check back soon'
-    redirect_to root_path
   end
 end
