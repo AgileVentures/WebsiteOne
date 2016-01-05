@@ -1,11 +1,17 @@
 class RegistrationsController < Devise::RegistrationsController
   layout 'layouts/user_profile_layout', only: [:edit]
+
+  def new
+    disable_sign_up
+  end
+
   def create
-    super
-    unless @user.new_record?
-      session[:omniauth] = nil
-      Mailer.send_welcome_message(@user).deliver if Features.enabled?(:welcome_email)
-    end
+    disable_sign_up
+    # super
+    # unless @user.new_record?
+    #   session[:omniauth] = nil
+    #   Mailer.send_welcome_message(@user).deliver if Features.enabled?(:welcome_email)
+    # end
   end
 
   def update
@@ -38,5 +44,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     user_path(resource)
+  end
+
+  def disable_sign_up
+    flash[:info] = 'Registrations are closed for now, but please check back soon'
+    redirect_to root_path
   end
 end
