@@ -28,6 +28,7 @@ Feature: Events
     Then I should see "AgileVentures Events"
     And I should see link "New Event"
 
+
   Scenario: Show an event when a user is not logged in
     Given the date is "2014/02/01 09:15:00 UTC"
     And I am on Events index page
@@ -108,6 +109,7 @@ Feature: Events
     Then I should be on the Events "Create" page
     And I should see "Name can't be blank"
 
+    @javascript
   Scenario: Show events which are in progress
     Given the date is "2014/02/03 07:10:00 UTC"
     And I am on Events index page
