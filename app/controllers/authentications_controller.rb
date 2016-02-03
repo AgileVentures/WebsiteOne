@@ -2,10 +2,6 @@ class AuthenticationsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
 
   def create
-    if request.env['omniauth.params']['youtube'] && current_user
-      link_to_youtube and return
-    end
-
     omniauth = request.env['omniauth.auth']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
 
@@ -33,10 +29,6 @@ class AuthenticationsController < ApplicationController
   end
 
   def destroy
-    if params[:id]=='youtube'
-      unlink_from_youtube and return
-    end
-
     @authentication = current_user.authentications.find(params[:id])
     if @authentication
       if current_user.authentications.count == 1 and current_user.encrypted_password.blank?
@@ -74,24 +66,6 @@ class AuthenticationsController < ApplicationController
       flash[:alert] = 'Linking your GitHub profile has failed'
       Rails.logger.error user.errors.full_messages
     end
-  end
-
-  def link_to_youtube
-    token = request.env['omniauth.auth']['credentials']['token']
-    if token
-      current_user.youtube_id = YoutubeHelper.channel_id(token) unless current_user.youtube_id
-      current_user.youtube_user_name = YoutubeHelper.youtube_user_name(current_user) unless current_user.youtube_user_name
-      current_user.save
-    end
-
-    redirect_to(request.env['omniauth.origin'] || edit_user_registration_path)
-  end
-
-  def unlink_from_youtube
-    current_user.youtube_id = nil
-    current_user.save
-
-    redirect_to(params[:origin] || root_path)
   end
 
   def attempt_login_with_auth(authentication, path)

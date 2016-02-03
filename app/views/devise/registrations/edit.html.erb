@@ -25,14 +25,6 @@
         <% supported_third_parties.each do |provider| %>
             <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
         <% end %>
-        <div style="margin-top: 10px;">
-          <% if resource.youtube_id %>
-              <%= unlink_from_youtube_button(request.original_url) %>
-          <% else %>
-            <%= link_to_youtube_button(request.original_url) %>
-            <p class='help-block'>You need to have set-up a youtube channel. A youtube account is not enough</p>
-          <% end %>
-        </div>
       </div>
       <div class="col-md-5 ">
         <div><%= f.label :first_name %>
