@@ -143,64 +143,6 @@ describe AuthenticationsController do
     end
   end
 
-  describe 'youtube authentication' do
-    context 'youtube request' do
-      before do
-        request.env['omniauth.params']['youtube'] = true
-        request.env['omniauth.auth']['credentials'] = {}
-      end
-
-      context 'user is signed-in' do
-        let(:user) { FactoryGirl.create(:user) }
-        before do
-          allow(controller).to receive(:current_user).and_return(user)
-        end
-
-        it 'links to youtube' do
-          expect(controller).to receive(:link_to_youtube).and_call_original
-          get :create, provider: 'gplus'
-        end
-
-        it 'updates users youtube_id if it does not exist' do
-          request.env['omniauth.auth']['credentials']['token'] = 'token'
-          allow(user).to receive(:youtube_user_name).and_return('test_user_name')
-          allow(YoutubeHelper).to receive(:channel_id).and_return('test_id')
-          get :create, provider: 'gplus'
-          expect(user.youtube_id).to eq('test_id')
-        end
-
-        it 'updates users youtube_user_name if it does not exist' do
-          request.env['omniauth.auth']['credentials']['token'] = 'token'
-          allow(user).to receive(:youtube_id).and_return('test_id')
-          allow(YoutubeHelper).to receive(:youtube_user_name).and_return('test_user_name')
-
-          get :create, provider: 'gplus'
-
-          expect(user.youtube_user_name).to eq('test_user_name')
-        end
-      end
-
-      context 'user is not signed-in' do
-        it 'does not link to youtube' do
-          allow(controller).to receive(:current_user)
-          expect(controller).to_not receive(:link_to_youtube)
-
-          get :create, provider: 'gplus'
-        end
-      end
-    end
-
-    context 'non-youtube request' do
-      it 'does not link to youtube' do
-        request.env['omniauth.params']['youtube'] = nil
-
-        expect(controller).to_not receive(:link_to_youtube)
-
-        get :create, provider: 'gplus'
-      end
-    end
-  end
-
   describe 'Github profile link' do
     before(:each) do
       controller.stub(authenticate_user!: true)

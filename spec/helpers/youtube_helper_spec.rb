@@ -36,14 +36,4 @@ describe YoutubeHelper, :type => :helper do
        expect { helper.youtube_user_name(user) }.to raise_error(JSON::ParserError, 'Invalid JSON returned from Youtube')
      end
    end
-
-  it 'creates a "link to youtube" button' do
-    link = '/auth/gplus/?youtube=true&amp;origin=video_url'
-    expect(helper.link_to_youtube_button('video_url')).to include(link)
-  end
-
-  it 'creates an "unlink from youtube" button' do
-    link = '/auth/destroy/youtube?origin=video_url'
-    expect(helper.unlink_from_youtube_button('video_url')).to include(link)
-  end
 end
