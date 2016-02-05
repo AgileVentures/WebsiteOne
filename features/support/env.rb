@@ -28,15 +28,22 @@ OmniAuth.config.logger.level = Logger::WARN
 
 Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5
-
-options = {
+test_options = {
+  timeout: 5,
+  phantomjs_options:['--ignore-ssl-errors=yes'], #--load_images=no might be useful
+  port: 3010
+}
+debug_options = {
   inspector: true,
   port: 3010,
   timeout: 10
 }
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new app,test_options
+end
 
 Capybara.register_driver :poltergeist_debug do |app|
-  Capybara::Poltergeist::Driver.new app, options
+  Capybara::Poltergeist::Driver.new app, debug_options
 end
 
 # By default, any exception happening in your Rails application will bubble up
