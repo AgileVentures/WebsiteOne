@@ -17,11 +17,19 @@ class EventsController < ApplicationController
   end
 
   def index
+=begin
     @events = []
     Event.all.each do |event|
       @events << event.next_occurrences
     end
+
     @events = @events.flatten.sort_by { |e| e[:time] }
+=end
+
+    @events = Event.all
+                .reduce([]) {|acc, evt| acc << evt.next_occurrences}
+                .flatten
+                .sort_by {|e| e[:time]}
   end
 
   def edit
@@ -73,7 +81,7 @@ class EventsController < ApplicationController
 
   private
 
-  def set_event
-    @event = Event.friendly.find(params[:id])
-  end
+    def set_event
+      @event = Event.friendly.find(params[:id])
+    end
 end

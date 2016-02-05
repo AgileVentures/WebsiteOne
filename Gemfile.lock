@@ -77,9 +77,6 @@ GEM
     capybara-screenshot (1.0.9)
       capybara (>= 1.0, < 3)
       launchy
-    capybara-webkit (1.5.1)
-      capybara (>= 2.3.0, < 2.5.0)
-      json
     celluloid (0.16.0)
       timers (~> 4.0.0)
     childprocess (0.5.6)
@@ -499,7 +496,6 @@ DEPENDENCIES
   bullet
   capybara
   capybara-screenshot
-  capybara-webkit
   coderay
   coffee-rails
   colored

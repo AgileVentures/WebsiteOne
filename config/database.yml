@@ -4,7 +4,7 @@ development: &dev
   database: websiteone_development
   pool: 20
   username: postgres
-  password:
+  password: 
 
 test: &test
   <<: *dev

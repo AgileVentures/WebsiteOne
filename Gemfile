@@ -63,7 +63,7 @@ gem 'jvectormap-rails', '~> 1.0.0' #jVectorMap for the Rails asset pipeline
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
-  gem 'capybara-webkit'  # Headless driver for capybara
+#  gem 'capybara-webkit'  # Headless driver for capybara
   gem 'selenium-webdriver' # Headful driver for capybara
   gem 'poltergeist', '~> 1.5.1'  # yet another headless driver for capybara
   gem 'webrat'  # Another Headless driver for capybara

@@ -26,11 +26,8 @@ class UsersController < ApplicationController
     message_params = params['message_form']
     request.env['HTTP_REFERER'] ||= root_path
 
-    if message_params.nil? or
-        message_params['name'].blank? or
-        message_params['email'].blank? or
-        message_params['message'].blank?
-      redirect_to :back, alert: 'Please fill in Name, Email and Message field'
+    if is_form_data_valid?
+        redirect_to :back, alert: 'Please fill in Name, Email and Message field'
     elsif !User.find(message_params['recipient_id']).display_hire_me
       redirect_to :back, alert: 'User has disabled hire me button'
     elsif !Devise.email_regexp.match(message_params['email'])
@@ -39,7 +36,6 @@ class UsersController < ApplicationController
       redirect_to :root, notice: 'Form not submitted. Are you human?'
     elsif Mailer.hire_me_form(User.find(message_params['recipient_id']), message_params).deliver
       redirect_to :back, notice: 'Your message has been sent successfully!'
-
     else
       redirect_to :back, alert: 'Your message has not been sent!'
     end
@@ -65,37 +61,63 @@ class UsersController < ApplicationController
     end
   end
 
-
   private
 
-  def should_display_user?(user)
-    user.display_profile || current_user == @user
-  end
+    def is_form_data_valid?
 
-  def get_user
-    @user = User.friendly.find(params[:id])
-  end
-
-  def set_filter_params
-    filter_params = params.slice(:project_filter, :timezone_filter, :online)
-    set_timezone_offset_range(filter_params)
-    filter_params
-  end
-
-  def set_timezone_offset_range(filter_params)
-    unless filter_params[:timezone_filter].blank?
-      if offset = @current_user.try(:timezone_offset)
-        case filter_params[:timezone_filter]
-        when 'In My Timezone'
-          filter_params[:timezone_filter] = [offset, offset]
-        when 'Wider Timezone Area'
-          filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
-        else
-          filter_params.delete(:timezone_filter)
-        end
+      message_params = params['message_form']
+=begin
+      if message_params.nil? or message_params['name'].blank? or message_params['email'].blank? or message_params['message'].blank?
+        true
       else
-        redirect_to :back, alert: "Can't determine your location!"
+        false
+      end
+
+      attr_names = %w(name email message)
+      return true if message_params.nil?
+      return true if attr_names.any? {|name| message_params[name].blank?}
+      false
+=end
+
+      # field names we need to check
+      field_names = %w(name email message)
+
+      # 'params['message_form']' is absent or any of required fields, then form data is invalid
+      (message_params.nil? or field_names.any? { |field_name| message_params[field_name].blank? }) ? true : false
+    end
+
+    def should_display_user?(user)
+      user.display_profile || current_user == @user
+    end
+
+    def get_user
+      @user = User.friendly.find(params[:id])
+    end
+
+    def set_filter_params
+      filter_params = params.slice(:project_filter, :timezone_filter, :online)
+      set_timezone_offset_range(filter_params)
+      filter_params
+    end
+
+    def set_timezone_filter(filter_params)
+      case filter_params[:timezone_filter]
+      when 'In My Timezone'
+        filter_params[:timezone_filter] = [offset, offset]
+      when 'Wider Timezone Area'
+        filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
+      else
+        filter_params.delete(:timezone_filter)
       end
     end
-  end
+
+    def set_timezone_offset_range(filter_params)
+      if filter_params[:timezone_filter].present?
+        if offset = @current_user.try(:timezone_offset)
+          set_timezone_filter(filter_params)
+        else
+          redirect_to :back, alert: "Can't determine your location!"
+        end
+      end
+    end
 end
