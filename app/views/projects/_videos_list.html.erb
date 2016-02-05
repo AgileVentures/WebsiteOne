@@ -1,28 +1,28 @@
-<% unless @videos.empty? %>
-    <div class="col-sm-12">
-      <h4 id="video_contents"><%= @videos.first[:content] %></h4>
-
-      <div class="video-container">
-        <iframe id="ytplayer" type="text/html" width="480" height="320" src="<%= video_embed_link(@videos.first) %>" frameborder="0"></iframe>
-      </div>
+<% unless @event_instances.empty? %>
+  <% present @event_instances.first do |presenter| %>
+    <h4 id="video_contents"><%= presenter.title %></h4>
+    <div class="video-container">
+      <iframe id="ytplayer" type="text/html" width="480" height="320" src="<%= presenter.video_embed_link %>" frameborder="0"></iframe>
     </div>
-    <div class="col-sm-12">
-      <h2>List of Project videos</h2>
-      <table class="table table-bordered table-striped table-hover table-condensed" style="margin-left: -15px; width: 100%;">
-        <tr>
-          <th>Video</th>
-          <th style="width: 80px;">Host</th>
-          <th style="width: 80px;">Published</th>
+  <% end %>
+  <br />
+  <h2>Latest Project videos</h2>
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+      <th>Video</th>
+      <th style="width: 80px;">Host</th>
+      <th style="width: 80px;">Published</th>
+    </tr>
+    <% @event_instances.each do |event_instance| %>
+      <% present event_instance do |presenter| %>
+        <tr style="font-size: 85%">
+          <td><%= presenter.video_link %></td>
+          <td><%= UserPresenter.new(presenter.user).display_name %></td>
+          <td><%= presenter.created_at %></td>
         </tr>
-        <% @videos.each do |video| %>
-            <tr style="font-size: 85%">
-              <td><%= video_link(video) %></td>
-              <td><%= video[:author] %></td>
-              <td><%= video[:published].to_s(:db) %></td>
-            </tr>
-        <% end %>
-      </table>
-    </div>
+      <% end %>
+    <% end %>
+  </table>
 <% else %>
-    <p>No videos in project <strong><%= @project.title %></strong></p>
+  <p>No videos in project <strong><%= @project.title %></strong></p>
 <% end %>

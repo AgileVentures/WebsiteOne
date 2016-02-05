@@ -9,7 +9,7 @@ FactoryGirl.define do
     status "We feel your presence."
 
     factory :project_with_tags do
-      ignore do
+      transient do
         tags { [generate(:tag), generate(:tag)] }
       end
 

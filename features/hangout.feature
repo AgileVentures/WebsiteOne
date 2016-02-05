@@ -30,8 +30,8 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Show hangout details
     Given the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
-      | Started at         | 10:25:00            |
-    And the time now is "10:29:00 UTC"
+      | Started at         | 10:25:00 UTC        |
+    And the time now is "10:26:00 UTC"
     When I am on the show page for event "Scrum"
     Then I should see Hangouts details section
     And I should see:
@@ -40,7 +40,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Title               |
       | Daily scrum meeting |
       | Updated             |
-      | 4 minutes ago       |
+      | 1 minute ago        |
     And I should see link "http://hangout.test" with "http://hangout.test"
 
   @javascript
@@ -84,10 +84,10 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   @time-travel-step
   Scenario: Render Join live event link
-    Given the date is "2014/02/03 07:04:00 UTC"
+    Given the date is "2014/02/03 07:01:00 UTC"
     And the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
-      | Started at         | 07:00:00            |
+      | Started at         | 07:00:00 UTC        |
 
     When I am on the show page for event "Scrum"
     Then I should see link "EVENT IS LIVE" with "http://hangout.test"
@@ -158,3 +158,14 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Retrospective |
       | ClientMeeting |
       | about 2 hours |
+
+  @javascript
+  Scenario: Infinite scroll on hangouts scroll down until no more hangouts
+    Given 70 hangouts exists
+    When I visit "/hangouts"
+    Then I should see 30 hangouts
+    And I scroll to bottom of page
+    Then I should see 60 hangouts
+    And I scroll to bottom of page
+    Then I should see 70 hangouts
+    And I should see "No more hangouts"

@@ -8,14 +8,8 @@ describe 'projects/show.html.erb', type: :view do
   let(:documents) { [document] }
   let(:project) { FactoryGirl.build_stubbed(:project, user: user) }
   let(:created_by) { ['by:', ([user.first_name, user.last_name].join(' '))].join(' ') }
-  let(:videos) do
-    [
-        {title: 'First video', user: user, published: '12/12/2012'.to_date,
-         url: 'somewhere', id: '123', content: 'some text'},
-        {title: 'Second video', user: user, published: '13/12/2013'.to_date,
-         url: 'somewhere', id: '123', content: 'some text'}
-    ]
-  end
+  let(:event_instances) { 2.times.map { FactoryGirl.build_stubbed(:event_instance, user: user) } }
+  let(:event_instances_count) { 2 }
 
   let(:stories) do
     [
@@ -37,7 +31,8 @@ describe 'projects/show.html.erb', type: :view do
     assign :project, project
     assign :documents, documents
     assign :created_by, created_by
-    assign :videos, videos
+    assign :event_instances, event_instances
+    assign :event_instances_count, event_instances_count
     assign :stories, stories
   end
 
@@ -191,15 +186,16 @@ describe 'projects/show.html.erb', type: :view do
 
     it 'renders list of youtube links and published dates if user has videos' do
       render
-      videos.each do |video|
-        expect(rendered).to have_link(video[:title], :href => video[:url])
-        expect(rendered).to have_text(video[:user].first_name)
-        expect(rendered).to have_text(video[:published])
+      event_instances.each do |video|
+        href = "http://www.youtube.com/watch?v=#{video.yt_video_id}&feature=youtube_gdata"
+        expect(rendered).to have_link(video.title, :href => href)
+        expect(rendered).to have_text(video.user.first_name)
+        expect(rendered).to have_text(video.created_at.strftime('%H:%M %d/%m'))
       end
     end
 
     it 'renders "no available videos" if user has no videos' do
-      assign(:videos, [])
+      assign(:event_instances, [])
       render
       expect(rendered).to have_text("No videos in project #{project.title}")
     end

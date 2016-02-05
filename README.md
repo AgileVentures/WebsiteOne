@@ -6,7 +6,7 @@ WebsiteOne
 [code-climate]: https://codeclimate.com/github/AgileVentures/WebsiteOne
 [support]: http://www.agileventures.org/
 [about-us]: http://www.agileventures.org/about-us
-[members]: http://www.agileventures.org/users/index
+[members]: http://www.agileventures.org/users
 
 
 #### A website for [Agile Ventures][application] - a platform for online collaboration and crowdsourced project development.

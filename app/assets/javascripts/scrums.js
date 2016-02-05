@@ -1,16 +1,16 @@
 var Scrum = {
   setup: function () {
     $('.scrum_yt_link').on('click', Scrum.select_video);
-    $('.modal').on('hidden.bs.modal', function(event){
-        player = $(".modal-body iframe").get(0);
+    $('#scrumVideo').on('hidden.bs.modal', function(event){
+        player = $("#scrumVideo .modal-body iframe").get(0);
         player.src = '';
     });
   },
   select_video: function(event) {
     event.preventDefault();
-    player = $(".modal-body iframe").get(0);
-    player.src = 'http://www.youtube.com/embed/' + this.id + '?enablejsapi=1';
-    $('#playerTitle').text($(this).data('content'));
+    player = $("#scrumVideo .modal-body iframe").get(0);
+    player.src = 'http://www.youtube.com/embed/' + $(this).data('source') + '?enablejsapi=1';
+    $('#scrumVideo #playerTitle').text($(this).data('content'));
   }
 
 }

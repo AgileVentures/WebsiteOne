@@ -1,8 +1,10 @@
 class AddStatusCountToUsers < ActiveRecord::Migration
   def up
     add_column :users, :status_count, :integer, default: 0
+
+    User.reset_column_information
     User.all.each do |user|
-      user.update_attribute :status_count, user.status.count
+      User.reset_counters user.id, :status
     end
   end
 
