@@ -16,9 +16,9 @@ Feature: Events
     And I am on Events index page
     Then I should see "AgileVentures Events"
     And I should see "Scrum"
-    And I should see "Starts at 7:00 UTC"
+    And I should see "Starts at 7:00 AM (UTC)"
     And I should see "PP Session"
-    And I should see "Starts at 10:00 UTC"
+    And I should see "Starts at 10:00 AM (UTC)"
     #And I should see "GMT"
     #And I should see "EDT"
 
@@ -114,4 +114,4 @@ Feature: Events
     Given the date is "2014/02/03 07:10:00 UTC"
     And I am on Events index page
     Then I should see "Scrum"
-    And I should see "Started at 7:00 UTC"
+    And I should see "Started at 7:00 AM (UTC)"
