@@ -3,6 +3,7 @@ module SlackService
 
   def post_hangout_notification(hangout)
     return unless Features.slack.notifications.enabled
+    return if hangout.hangout_url.blank?
 
     uri = URI.parse "#{Slack::BOT_URL}/hubot/hangouts-notify"
     Net::HTTP.post_form uri, {
@@ -16,6 +17,7 @@ module SlackService
 
   def post_yt_link(hangout)
     return unless Features.slack.notifications.enabled
+    return if hangout.yt_video_id.blank?
 
     uri = URI.parse "#{Slack::BOT_URL}/hubot/hangouts-video-notify"
     Net::HTTP.post_form uri, {

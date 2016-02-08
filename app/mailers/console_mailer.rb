@@ -1,5 +1,4 @@
 class ConsoleMailer < ActionMailer::Base
-  add_template_helper(UsersHelper)
 
   default from: 'info@agileventures.org', reply_to: 'info@agileventures.org', cc: 'support@agileventures.org'
 
