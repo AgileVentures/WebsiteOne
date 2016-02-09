@@ -74,7 +74,7 @@ label {
   opacity: 1 !important;
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
+@media (min-width: $screen-sm) and (max-width: $screen-md) {
   #event-container .git-item {
     width: 50%;
     height: 150px;
@@ -82,8 +82,7 @@ label {
   }
 }
 
-@media (max-width: 767px) {
-
+@media (max-width: $screen-sm - 1px) {
   #event-container .event-item {
     width: 50%;
     height: 150px;
@@ -91,7 +90,7 @@ label {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $screen-xs) {
 
   #event-container .event-item {
     width: 50%;
