@@ -21,4 +21,10 @@ describe EventHelper do
     result = helper.current_occurrence_time(nested_value)
     expect(result).to match /Sunday, 9th Mar at 11:00pm \(UTC\)/
   end
+
+  it 'should wrap the current event time with a time tag when calling format_local_time' do
+    datetime = Time.utc(2014,"mar",9,23,0,0)
+    result = helper.format_local_time(datetime)
+    expect(result).to match /<time data-format="%l:%M %p \(%Z\)" data-local="time" datetime="2014-03-09T23:00:00Z">11:00 PM \(UTC\)<\/time>/
+  end
 end
