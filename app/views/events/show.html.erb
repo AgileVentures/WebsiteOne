@@ -4,58 +4,54 @@
   </div>
 </div>
 
-<hr />
+<hr/>
+
 <div class="row">
   <div class="col-xs-6">
     <p>Event type: <%= @event.category %></p>
   </div>
-
   <div class="col-xs-6">
-    <div class="dropdown dropdown-beside-HOA pull-right">
-      <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
-        Event Actions
-        <span class="caret"></span>
-      </button>
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
+      <div class="dropdown dropdown-beside-HOA pull-right">
+        <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
+          Event Actions
+          <span class="caret"></span>
+        </button>
+
         <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
           <li role="presentation">
             <%= link_to 'Edit Event Details', edit_event_path(@event), role: 'menuitem', tabindex: '-1' %>
           </li>
         </ul>
-      <% end %>
-    </div>
+      </div>
 
-    <div class="btn-HOA pull-right">
-      <% if user_signed_in? %>
+      <div class="btn-HOA pull-right">
         <% hangout_uid = (@recent_hangout && @recent_hangout.live?) ? @recent_hangout.uid : '' %>
         <%= render partial: 'event_instances/hangout_button', locals: {
-          event_instance_id: hangout_uid,
-          event_id: @event.id,
-          category: @event.category,
-          project_id: '',
-          title: topic(@event, @event_schedule)
-        } %>
-      <% end %>
-    </div>
+                                                                event_instance_id: hangout_uid,
+                                                                event_id: @event.id,
+                                                                category: @event.category,
+                                                                project_id: '',
+                                                                title: topic(@event, @event_schedule)
+                                                            } %>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<hr />
+<hr/>
 
 <div class="row">
   <% if @event.next_event_occurrence_with_time %>
     <div class="col-xs-12 col-sm-6">
       <h4>Next scheduled event:</h4>
-
       <div class="calendar-block">
         <i class="fa fa-calendar"></i>
-
         <div class="calendar-text">
-          <%= @event.next_event_occurrence_with_time[:time].strftime('%A, %B %d, %Y') %><br />
+          <%= @event.next_event_occurrence_with_time[:time].strftime('%A, %B %d, %Y') %><br/>
           <%= @event.next_event_occurrence_with_time[:time].strftime('%l:%M %p') %> -
           <%= @event.instance_end_time.strftime('%l:%M %p') %>
-
-          <% if @event.schedule.recurrence_rules.map{ |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
+          <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
             <p class="help-block">Occurs weekly at the specified times</p>
           <% end %>
         </div>
@@ -67,18 +63,19 @@
     <% if @recent_hangout && @recent_hangout.live? %>
       <div class="event-notice">
         This event is now live!
-        <br />
+        <br/>
         <%= link_to 'Join now', @recent_hangout.hangout_url %>
       </div>
     <% end %>
   </div>
 </div>
 
-<hr />
+<hr/>
 
 <div class="row">
   <div class="col-xs-12">
     <p><%= @event.description %></p>
+
     <p><%= link_to 'Learn more about Scrums', static_page_path('Getting started') %></p>
   </div>
 </div>
