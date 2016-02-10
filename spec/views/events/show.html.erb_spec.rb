@@ -11,23 +11,19 @@ describe 'events/show', type: :view do
 
     allow(Time).to receive(:now).and_return(Time.parse('2014-03-07 23:30:00 UTC'))
     @event_schedule = @event.next_occurrences(end_time: Time.now + 40.days)
-
-    allow(view).to receive(:current_user).and_return(FactoryGirl.build_stubbed(:user))
+    render
   end
 
   it 'should display event information' do
-    render
     expect(rendered).to have_text('EuroAsia Scrum')
     expect(rendered).to have_text('EuroAsia Scrum and Pair hookup')
   end
 
   it 'should render the event name' do
-    render
     expect(rendered).to have_text(@event.name)
   end
 
   it 'should render the event description' do
-    render
     expect(rendered).to have_text(@event.description)
   end
 
