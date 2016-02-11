@@ -237,7 +237,7 @@ GEM
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    local_time (1.0.2)
+    local_time (1.0.3)
       coffee-rails
     lumberjack (1.0.9)
     mail (2.6.3)
@@ -529,7 +529,7 @@ DEPENDENCIES
   jquery-turbolinks (= 2.0.2)
   jvectormap-rails (~> 1.0.0)
   launchy
-  local_time
+  local_time (~> 1.0.3)
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
@@ -574,3 +574,6 @@ DEPENDENCIES
   will_paginate-bootstrap
   yui-compressor
   zeus
+
+BUNDLED WITH
+   1.11.2
