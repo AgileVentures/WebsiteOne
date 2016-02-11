@@ -150,44 +150,4 @@ describe EventsController do
     end
   end
 
-  describe 'PATCH update_only_url' do
-    let(:valid_attributes) { {id: @event, event: {url: 'http://somewhere.net'}} }
-
-    before(:each) do
-      controller.stub(:authenticate_user! => true)
-    end
-
-    it 'should require user to be signed in' do
-      controller.should_receive(:authenticate_user!)
-      patch :update_only_url, valid_attributes
-    end
-
-    context 'with a valid url' do
-      before(:each) do
-        patch :update_only_url, valid_attributes
-      end
-
-      it 'should redirect to event show page' do
-        expect(response).to redirect_to event_path(@event)
-      end
-
-      it 'should render a successful flash message' do
-        expect(flash[:notice]).to eq 'Event URL has been updated'
-      end
-    end
-
-    context 'with an invalid url' do
-      before(:each) do
-        patch :update_only_url, id: @event, event: {url: 'not-a-real-url'}
-      end
-
-      it 'should redirect to the event show page' do
-        expect(response).to redirect_to event_path(@event)
-      end
-
-      it 'should render a failure flash message' do
-        expect(flash[:alert]).to eq 'You have to provide a valid hangout url'
-      end
-    end
-  end
 end

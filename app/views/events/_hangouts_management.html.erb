@@ -1,0 +1,82 @@
+<% hangout_is_live = @hangout.try!(:live?) %>
+<%  if user_signed_in?  %>
+  <div class="hangouts-management">
+    <div class="restart-panel<%= ' in' if hangout_is_live %>">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="collapse-button" data-toggle="collapse" data-target=".restart-section">
+            <%= fa_icon 'caret-right', text: 'Restart hangout' %>
+            <button type="button" class="panel-close-button restart-section"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          </a>
+        </h4>
+      </div>
+
+      <div class="restart-section">
+        <div class="panel-body warning">
+          <strong>Restarting Hangout would update the details of the hangout currently associated with this event.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="restart-section<%= ' in' unless hangout_is_live %>">
+      <div class="panel-body">
+        <div id="hangout-btn" class="col-lg-5 hangout-btn">
+          <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: (hangout_is_live ? @hangout.uid : ''), event_id: @event.id, category: @event.category, project_id: '', title: topic(@event, @event_schedule)} %>
+        </div>
+        <div class="hangout-btn"> &#8592; Event host will start the Hangout 
+            <button type="button" class="btn readme-link" data-container="body" data-toggle="popover" data-placement="right" 
+                  data-content="The hangout is started by the event host at a scheduled time.
+                  If the time is due and hangout has not been started, you may start it yourself.
+                  By starting a hangout, you are becoming the host of the session, 
+                  the hangout link gets published on WebsiteOne and AgileVentures Slack channels
+                  and the session may be joined by other people and viewed publicly on Youtube.">
+              read more</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="edit-link-panel">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="collapse-button" data-toggle="collapse" data-target=".edit-link-form">
+            <%= fa_icon 'caret-right', text: 'Edit hangout link' %>
+            <button type="button" class="panel-close-button edit-link-form"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          </a>
+        </h4>
+      </div>
+
+      <div class="edit-link-form">
+        <div class="panel-body">
+          <%= form_tag hangout_url(hangout_is_live ? @hangout.uid : generate_event_instance_id(current_user)), method: :put,  class: "form-horizontal", role: "form" %>
+            <div><input name="title" type="hidden" value="<%= topic(@event, @event_schedule) %>"></div>
+            <div><input name="host_id" type="hidden" value="<%= current_user.id %>"></div>
+            <div><input name="event_id" type="hidden" value="<%= @event.id %>"></div>
+            <div class="form-group">
+              <label class="control-label sr-only" for="hangout-url">Hangout link</label>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-8">
+                <input type="url" required class="form-control" name="hangout_url" placeholder="Copy and paste the hangout link in here.." value="<%= @hangout.try!(:hangout_url) if @hangout.try!(:started?) %>">
+              </div>
+              <div class="col-sm-2">
+                <button type="button" class="form-control btn-default" data-toggle="collapse" data-target=".edit-link-panel">Cancel</button>
+              </div>
+              <div class="col-sm-2">
+              <input type="submit" class="form-control btn-primary" value="Save"/>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>
+
+<% if hangout_is_live %>
+  <div class="hangouts-details-well">
+    <section class="hangout-details">
+      <%= render partial: 'event_instances/hangout_status', locals: {hangout: @hangout} %>
+    </section>
+  </div>
+<% end %>
