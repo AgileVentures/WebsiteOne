@@ -1,1 +1,1 @@
-@freeranger - Update the RubyMine logo
+2016-02-11 @freeranger - Updated the RubyMine logo
