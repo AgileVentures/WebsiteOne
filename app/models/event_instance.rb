@@ -43,7 +43,7 @@ class EventInstance < ActiveRecord::Base
 
   def dont_update_after_finished
     if hoa_status_was == 'finished'
-      self.errors.add :base, "Can't update a finished event"
+      self.errors.add :base, 'Can\'t update a finished event'
     end
   end
 end
