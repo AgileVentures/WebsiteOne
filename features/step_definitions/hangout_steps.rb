@@ -53,7 +53,7 @@ Given /^the following hangouts exist:$/ do |table|
 end
 
 Then /^I should( not)? see Hangouts details section$/ do |negative|
-  section = page.find('.hangout-details', visible: false)
+  section = page.find('#hangout-details', visible: false)
   if negative
     expect(section).not_to be_visible
   else

@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
     <h1><%= @event.name %></h1>
+    <p><%= @event.description %></p>
   </div>
 </div>
 
@@ -41,7 +42,7 @@
 
 <hr/>
 
-<div class="row">
+<div class="row" id="hangout-details">
   <% if @event.next_event_occurrence_with_time %>
     <div class="col-xs-12 col-sm-6">
       <h4>Next scheduled event:</h4>
@@ -74,8 +75,6 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <p><%= @event.description %></p>
-
     <p><%= link_to 'Learn more about Scrums', static_page_path('Getting started') %></p>
   </div>
 </div>
