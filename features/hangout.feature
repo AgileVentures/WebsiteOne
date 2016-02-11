@@ -65,23 +65,22 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 #    When I click the button "Close"
 #    Then the hangout button should not be visible
 #
-#  @javascript
-#  Scenario: Edit URL
-#    Given I am on the show page for event "Scrum"
-#    When I click the link "Edit hangout link"
-#    Then I should see button "Cancel"
-#
-#    When I fill in "hangout_url" with "http://test.com"
-#    And I click the "Save" button
-#    Then I should see link "http://test.com" with "http://test.com"
-#
+  @javascript
+  Scenario: Edit URL
+    Given I am on the show page for event "Scrum"
+    And I click "Event Actions" button
+    And I click the "Edit hangout link" link
+    And I fill in "hangout_url" with "http://test.com"
+    And I click on Save button
+    Then I should see link "Join now" with "http://test.com"
+ #   And I should see "Event URL has been updated"
+
 #  @javascript
 #  Scenario: Cancel Edit URL
 #    Given I am on the show page for event "Scrum"
-#    When I click the link "Edit hangout link"
 #    And I click the button "Close"
 #    Then I should not see button "Save"
-#
+
 #  @time-travel-step
 #  Scenario: Render Join live event link
 #    Given the date is "2014/02/03 07:01:00 UTC"
