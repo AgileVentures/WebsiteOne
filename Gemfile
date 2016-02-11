@@ -52,7 +52,7 @@ gem 'rack-cache'
 #gem 'sprockets-webp'
 gem 'eventmachine', '~> 1.0.7'
 
-gem 'local_time'
+gem 'local_time', '~> 1.0.3'
 gem 'rails_config' # a gem to manage configuration files
 gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
 gem 'octokit' # Ruby wrapper for the GitHub API
