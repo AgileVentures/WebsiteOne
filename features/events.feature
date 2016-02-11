@@ -6,9 +6,9 @@ Feature: Events
 
   Background:
     Given following events exist:
-      | name       | description             | category        | start_datetime              | duration                | repeats | time_zone                  |
-      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150 | never   | UTC                  |
-      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15 | never   | UTC |
+      | name       | description             | category        | start_datetime          | duration | repeats | time_zone |
+      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |
+      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | UTC       |
 
   @time-travel-step
   Scenario: Show index of events
@@ -16,19 +16,16 @@ Feature: Events
     And I am on Events index page
     Then I should see "AgileVentures Events"
     And I should see "Scrum"
-    And I should see "Starts at 7:00 AM (UTC)"
+    And I should see "Starts at 07:00 - Ends at 09:30 (UTC)"
     And I should see "PP Session"
-    And I should see "Starts at 10:00 AM (UTC)"
-    #And I should see "GMT"
-    #And I should see "EDT"
+    And I should see "Starts at 10:00 - Ends at 10:15 (UTC)"
 
   Scenario: Show index of events with a New Event button for logged in user
     Given I am logged in
     Given I am on Events index page
     Then I should see "AgileVentures Events"
     And I should see link "New Event"
-
-
+    
   Scenario: Show an event when a user is not logged in
     Given the date is "2014/02/01 09:15:00 UTC"
     And I am on Events index page
@@ -56,7 +53,7 @@ Feature: Events
     Then I should see "Scrum"
     And the next event should be in:
       | period | interval |
-      | 1      | day     |
+      | 1      | day      |
       | 21     | hours    |
       | 45     | minutes  |
 
@@ -68,8 +65,8 @@ Feature: Events
       | name        | value          |
       | Name        | Whatever       |
       | Description | something else |
-      | Start Date  | 2014-02-04        |
-      | Start Time  | 09:00        |
+      | Start Date  | 2014-02-04     |
+      | Start Time  | 09:00          |
     And I click the "Save" button
     Then I should see "Event Created"
     Then I should be on the event "Show" page for "Whatever"
@@ -82,7 +79,7 @@ Feature: Events
       | name        | value             |
       | Name        | Daily Scrum       |
       | Start Date  | 2014-02-04        |
-      | Start Time  | 09:00        |
+      | Start Time  | 09:00             |
       | Description | scrum description |
     And I select "Repeats" to "weekly"
     And I check "Monday"
@@ -109,9 +106,14 @@ Feature: Events
     Then I should be on the Events "Create" page
     And I should see "Name can't be blank"
 
-    @javascript
+  @javascript
   Scenario: Show events which are in progress
-    Given the date is "2014/02/03 07:10:00 UTC"
+    Given the date is "2014/02/03 07:01:00 UTC"
+    And the Hangout for event "Scrum" has been started with details:
+      | EventInstance link | http://hangout.test |
+      | Started at         | 07:00:00 UTC        |
     And I am on Events index page
     Then I should see "Scrum"
-    And I should see "Started at 7:00 AM (UTC)"
+    And I should see "Started at 07:00 - Ends at 09:30 (UTC)"
+    And I should see "This event is now live!"
+    And I should see link "Join now" with "http://hangout.test"
