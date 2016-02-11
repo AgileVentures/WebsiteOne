@@ -44,7 +44,7 @@ class EventsController < ApplicationController
     begin
       updated = @event.update_attributes(Event.transform_params(params))
     rescue
-      attr_error = "attributes invalid"
+      attr_error = 'attributes invalid'
     end
     if updated
       flash[:notice] = 'Event Updated'
@@ -53,15 +53,6 @@ class EventsController < ApplicationController
       flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
       redirect_to edit_event_path(@event)
     end
-  end
-
-  def update_only_url
-    if @event.update_attributes(params[:event].permit(:url))
-      flash[:notice] = 'Event URL has been updated'
-    else
-      flash[:alert] = 'You have to provide a valid hangout url'
-    end
-    redirect_to event_path(@event)
   end
 
   def destroy

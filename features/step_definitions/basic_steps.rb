@@ -78,6 +78,10 @@ When(/^I click the "([^"]*)" button$/) do |button|
   click_link_or_button button
 end
 
+When(/^I click on Save button$/) do
+  find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
+end
+
 When(/^I click "([^"]*)" button$/) do |button|
   click_button button
 end
