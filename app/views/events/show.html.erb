@@ -95,7 +95,7 @@
             <input type="url" required class="form-control" name="hangout_url" placeholder="Copy and paste the hangout link in here.." value="<%= @recent_hangout.try!(:started?) ? @recent_hangout.try!(:hangout_url) : ''%>">
           </div>
           <div class="col-sm-2">
-            <button type="button" class="form-control btn-default" data-toggle="collapse" data-target="#edit-link-form">Cancel</button>
+            <button type="button" class="form-control btn-default" data-toggle="collapse" data-target="#edit-link-form" id="hoa_link_cancel">Cancel</button>
           </div>
           <div class="col-sm-2">
             <input type="submit" class="form-control btn-primary" value="Save" id="hoa_link_save"/>
