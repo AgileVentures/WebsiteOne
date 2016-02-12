@@ -289,7 +289,7 @@ GEM
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
     pg (0.18.2)
-    phantomjs (1.9.8.0)
+    phantomjs (2.1.1.0)
     pivotal-tracker-api (0.1.9)
       rest-client (~> 1.7)
     poltergeist (1.9.0)
