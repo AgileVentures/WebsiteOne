@@ -22,24 +22,35 @@ WebMock.disable_net_connect!(:allow_localhost => true)
 OmniAuth.config.logger.level = Logger::WARN
 
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist_ignore_ssl
 Capybara.default_wait_time = 5
 test_options = {
-    timeout: 20,
+    timeout: 5,
     phantomjs_options:['--ignore-ssl-errors=yes'],
-    port: 3010
+    port: 3010,
+    phantomjs: Phantomjs.path
 }
 debug_options = {
     inspector: true,
+    phantomjs_options:['--ignore-ssl-errors=yes'],
     port: 3010,
-    timeout: 10
+    timeout: 10,
+    phantomjs: Phantomjs.path
 }
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new app,test_options
+Capybara.register_driver :poltergeist_ignore_ssl do |app|
+  Capybara::Poltergeist::Driver.new app, test_options
 end
 
 Capybara.register_driver :poltergeist_debug do |app|
   Capybara::Poltergeist::Driver.new app, debug_options
+end
+
+Before('@ignore_ssl_errors') do
+  Capybara.current_driver = :ignore_ssl_errors
+end
+
+After('@ignore_ssl_errors') do
+  Capybara.use_default_driver
 end
 
 ActionController::Base.allow_rescue = false
