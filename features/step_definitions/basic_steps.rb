@@ -363,3 +363,14 @@ Given(/^I am on a (.*)/) do |device|
   end
   page.driver.headers = { 'User-Agent' => agent }
 end
+
+
+Then(/^I should( not)? see a flash with "([^"]*)"$/) do |negative, text|
+  within 'div#flash-container' do
+    if negative
+      expect(page).to_not have_css 'h4', text: text
+    else
+      expect(page).to have_css 'h4', text: text
+    end
+  end
+end

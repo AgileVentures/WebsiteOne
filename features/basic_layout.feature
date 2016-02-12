@@ -8,6 +8,12 @@ Feature: Setting up basic page layout for site
   Background:
     Given I visit the site
 
+  @javascript
+  Scenario: Fundraising flash is displayed once
+    Then I should see a flash with "Support our fundraising campaign on Pledgie.org"
+    When I follow "Projects" within the navbar
+    And I should not see a flash with "Support our fundraising campaign on Pledgie.org"
+
   Scenario: Load basic design elements
     Then I should see a navigation header
     And I should see a main content area
