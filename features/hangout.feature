@@ -74,8 +74,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   @javascript
   Scenario: Edit Hangout URL
     Given I am on the show page for event "Scrum"
-    And I click "Event Actions" button
-    And I click the "Edit hangout link" link
+    #And I click "Event Actions" button
+    #And I click the "Edit hangout link" link
+    And I open the Edit URL controls
     And I fill in "hangout_url" with "http://test.com"
     And I click on the Save button
     Then I should see link "Join now" with "http://test.com"
@@ -83,8 +84,8 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   @javascript
   Scenario: Cancel Edit Hangout URL
     Given I am on the show page for event "Scrum"
-    And I click "Event Actions"
-    And I click the "Edit hangout link" link
+    And I open the Edit URL controls
+    Then I should see the Edit URL controls
     And I click on the Cancel button
     Then I should not see the Edit URL controls
 
