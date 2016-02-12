@@ -50,3 +50,6 @@ twitter:
   consumer_secret:     nil
   access_token:        nil
   access_token_secret: nil
+
+github:
+  auth_token: <%= ENV["GITHUB_AUTH_TOKEN"]
