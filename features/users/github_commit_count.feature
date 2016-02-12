@@ -19,7 +19,7 @@ Feature: Displaying GitHub contribution statistics for user
   Scenario: Displays commit counts on user profile page
     Given I am on "profile" page for user "Bryan"
     Then I should see "Contributions"
-    And I should see "WebsiteOne - 388"
+    And I should see "WebsiteOne - 394"
 
   Scenario: Does not display commit counts for user without github profile url
     Given I am on "profile" page for user "Thomas"
