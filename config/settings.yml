@@ -52,4 +52,4 @@ twitter:
   access_token_secret: nil
 
 github:
-  auth_token: <%= ENV["GITHUB_AUTH_TOKEN"]
+  auth_token: <%= ENV["GITHUB_AUTH_TOKEN"] %>
