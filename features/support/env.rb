@@ -26,13 +26,11 @@ Capybara.default_wait_time = 5
 
 test_options = {
   timeout: 20,
-  phantomjs_options: ['--ignore-ssl-errors=yes'],
-  port: 3001
+  phantomjs_options: ['--ignore-ssl-errors=yes']
 }
 
 debug_options = {
   inspector: true,
-  port: 3002,
   timeout: 10
 }
 
@@ -42,14 +40,6 @@ end
 
 Capybara.register_driver :poltergeist_debug do |app|
   Capybara::Poltergeist::Driver.new app, debug_options
-end
-
-Before('@ignore_ssl_errors') do
-  Capybara.current_driver = :ignore_ssl_errors
-end
-
-After('@ignore_ssl_errors') do
-  Capybara.use_default_driver
 end
 
 ActionController::Base.allow_rescue = false
