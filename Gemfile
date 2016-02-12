@@ -65,8 +65,7 @@ group :test do
   gem 'cucumber-rails', :require => false # Cucmber features
   gem 'capybara-webkit'  # Headless driver for capybara
   gem 'selenium-webdriver' # Headful driver for capybara
-  gem 'poltergeist'  # yet another headless driver for capybara
-  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'poltergeist', '~> 1.5.1'  # yet another headless driver for capybara
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs

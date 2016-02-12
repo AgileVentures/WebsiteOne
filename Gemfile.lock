@@ -245,10 +245,10 @@ GEM
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
-    mime-types (2.99)
+    mime-types (2.5)
     mini_portile (0.6.2)
     minitest (5.6.1)
-    multi_json (1.11.2)
+    multi_json (1.11.0)
     multi_test (0.1.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -260,7 +260,7 @@ GEM
     nenv (0.2.0)
     netrc (0.10.3)
     newrelic_rpm (3.12.0.288)
-    nokogiri (1.6.6.4)
+    nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     notiffany (0.0.6)
       nenv (~> 0.1)
@@ -289,10 +289,10 @@ GEM
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
     pg (0.18.2)
-    phantomjs (2.1.1.0)
+    phantomjs (1.9.8.0)
     pivotal-tracker-api (0.1.9)
       rest-client (~> 1.7)
-    poltergeist (1.9.0)
+    poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
@@ -315,7 +315,7 @@ GEM
       railties (>= 3.0.0)
     puma (2.11.3)
       rack (>= 1.1, < 2.0)
-    rack (1.5.5)
+    rack (1.5.3)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-test (0.6.3)
@@ -470,7 +470,7 @@ GEM
       rack (>= 1.0)
       rack-test (>= 0.5.3)
     websocket (1.2.2)
-    websocket-driver (0.6.3)
+    websocket-driver (0.5.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     will_paginate (3.0.7)
@@ -540,9 +540,8 @@ DEPENDENCIES
   omniauth-gplus (~> 2.0.1)
   paper_trail
   pg
-  phantomjs
   pivotal-tracker-api
-  poltergeist
+  poltergeist (~> 1.5.1)
   polyamorous (~> 1.2.0)
   pry-byebug
   pry-rails
