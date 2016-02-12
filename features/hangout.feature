@@ -27,21 +27,27 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 #    Then I should see hangout button
 #    And I should see "Edit hangout link"
 
-#  Scenario: Show hangout details
-#    Given the Hangout for event "Scrum" has been started with details:
-#      | EventInstance link | http://hangout.test |
-#      | Started at         | 10:25:00 UTC        |
-#    And the time now is "10:26:00 UTC"
-#    When I am on the show page for event "Scrum"
-#    Then I should see Hangouts details section
-#    And I should see:
-#      | Category            |
-#      | Scrum               |
-#      | Title               |
-#      | Daily scrum meeting |
-#      | Updated             |
-#      | 1 minute ago        |
-#    And I should see link "http://hangout.test" with "http://hangout.test"
+  @time-travel-step
+  Scenario: Show event details
+    Given the date is "2014/02/03 06:50:00 UTC"
+    When I am on the show page for event "Scrum"
+    Then I should see:
+      | Scrum               |
+      | Scrum               |
+      | Daily scrum meeting |
+      | 7:00 AM - 9:30 AM   |
+
+  Scenario: Show hangout details for live event
+    Given the Hangout for event "Scrum" has been started with details:
+      | EventInstance link | http://hangout.test |
+      | Started at         | 10:25:00 UTC        |
+    And the time now is "10:26:00 UTC"
+    When I am on the show page for event "Scrum"
+    Then I should see:
+      | Scrum               |
+      | Scrum               |
+      | Daily scrum meeting |
+    And I should see link "Join now" with "http://hangout.test"
 #
 #  @javascript
 #  Scenario: Show restart hangout
@@ -66,34 +72,35 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 #    Then the hangout button should not be visible
 #
   @javascript
-  Scenario: Edit URL
+  Scenario: Edit Hangout URL
     Given I am on the show page for event "Scrum"
     And I click "Event Actions" button
     And I click the "Edit hangout link" link
     And I fill in "hangout_url" with "http://test.com"
-    And I click on Save button
+    And I click on the Save button
     Then I should see link "Join now" with "http://test.com"
- #   And I should see "Event URL has been updated"
 
-#  @javascript
-#  Scenario: Cancel Edit URL
-#    Given I am on the show page for event "Scrum"
-#    And I click the button "Close"
-#    Then I should not see button "Save"
+  @javascript
+  Scenario: Cancel Edit Hangout URL
+    Given I am on the show page for event "Scrum"
+    And I click "Event Actions"
+    And I click the "Edit hangout link" link
+    And I click on the Cancel button
+    Then I should not see the Edit URL controls
 
-#  @time-travel-step
-#  Scenario: Render Join live event link
-#    Given the date is "2014/02/03 07:01:00 UTC"
-#    And the Hangout for event "Scrum" has been started with details:
-#      | EventInstance link | http://hangout.test |
-#      | Started at         | 07:00:00 UTC        |
-#
-#    When I am on the show page for event "Scrum"
-#    Then I should see link "EVENT IS LIVE" with "http://hangout.test"
-#
-#    When I am on the home page
-#    Then I should see "Scrum is live!"
-#    And I should see link "Click to join!" with "http://hangout.test"
+  @time-travel-step
+  Scenario: Render Join live event link
+    Given the date is "2014/02/03 07:01:00 UTC"
+    And the Hangout for event "Scrum" has been started with details:
+      | EventInstance link | http://hangout.test |
+      | Started at         | 07:00:00 UTC        |
+
+    When I am on the show page for event "Scrum"
+    Then I should see link "Join now" with "http://hangout.test"
+
+    When I am on the home page
+    Then I should see "Scrum is live!"
+    And I should see link "Click to join!" with "http://hangout.test"
 
   @javascript
   Scenario: Display hangout button on a project's page
@@ -104,17 +111,17 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Display live sessions - basic info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
-      | Start time | Title        | Project     | Event         | Category        | Host  | EventInstance url      | Youtube video id | End time |Participants|
-      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    |Alice, Bob  |
-      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    |Alice, Bob  |
+      | Start time | Title        | Project     | Event         | Category        | Host  | EventInstance url      | Youtube video id | End time | Participants |
+      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    | Alice, Bob   |
+      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    | Alice, Bob   |
     When I visit "/hangouts"
     Then I should see:
 
-      | Title      |
-      | Project    |
-      | Host       |
-      | Join       |
-      | Watch      |
+      | Title   |
+      | Project |
+      | Host    |
+      | Join    |
+      | Watch   |
     And I should see:
       | 11:15        |
       | 01/02        |

@@ -78,8 +78,23 @@ When(/^I click the "([^"]*)" button$/) do |button|
   click_link_or_button button
 end
 
-When(/^I click on Save button$/) do
+When(/^I click on the Save button/) do
   find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
+end
+
+When(/^I click on the Cancel button/) do
+  page.find(:css, %q{button[id="hoa_link_cancel"]}).trigger('click')
+  #find(:css, %q{button[id="hoa_link_cancel"]}).trigger('click')
+  #page.execute_script(%q($("#hoa_link_cancel").trigger("click");))
+  #Timeout.timeout(10) do
+   # loop until page.evaluate_script('jQuery.active').zero?
+  #end
+end
+
+Then(/^I should not see the Edit URL controls/) do
+  page.save_and_open_screenshot
+  #expect(page).to have_css 'div[id="edit-link-form"]'
+  expect(page).to have_css 'div[#edit-link-form.collapsed]'
 end
 
 When(/^I click "([^"]*)" button$/) do |button|
@@ -367,3 +382,5 @@ Given(/^I am on a (.*)/) do |device|
   end
   page.driver.headers = { 'User-Agent' => agent }
 end
+
+
