@@ -8,7 +8,7 @@ end
 describe 'visitors/index.html.erb', type: :view do
   before :each do
     @event = FactoryGirl.build_stubbed(:event, name: 'Spec Scrum', start_datetime: '2014-03-07 10:30:00',
-                                        next_occurrence_time_attr: double(IceCube::Occurrence, to_datetime:DateTime.parse('2014-03-07 10:30:00 UTC')))
+                                       next_occurrence_time_attr: double(IceCube::Occurrence, to_datetime: DateTime.parse('2014-03-07 10:30:00 UTC')))
   end
 
   describe 'should display content/elements from partials' do
@@ -16,13 +16,13 @@ describe 'visitors/index.html.erb', type: :view do
       render
     end
 
-    it {expect(rendered).to render_template(partial: 'layouts/_meta_tags')}
-    it {expect(rendered).to render_template(partial: 'layouts/_head')}
-    it {expect(rendered).to render_template(partial: 'layouts/_flash')}
-    it {expect(rendered).to render_template(partial: 'layouts/_navbar')}
-    it {expect(rendered).to render_template(partial: 'layouts/_event_link')}
-    it {expect(rendered).to render_template(partial: 'layouts/_round_banners')}
-    it {expect(rendered).to render_template(partial: 'layouts/_footer')}
+    it { expect(rendered).to render_template(partial: 'layouts/_meta_tags') }
+    it { expect(rendered).to render_template(partial: 'layouts/_head') }
+    it { expect(rendered).to render_template(partial: 'layouts/_flash') }
+    it { expect(rendered).to render_template(partial: 'layouts/_navbar') }
+    it { expect(rendered).to render_template(partial: 'layouts/_event_link') }
+    it { expect(rendered).to render_template(partial: 'layouts/_round_banners') }
+    it { expect(rendered).to render_template(partial: 'layouts/_footer') }
 
   end
 
@@ -181,6 +181,29 @@ describe 'visitors/index.html.erb', type: :view do
         fix_time_at('2014-03-07 10:25:00 UTC')
         render
         expect(rendered).to have_text '5 minutes'
+      end
+    end
+  end
+
+  describe 'application messages' do
+    context 'on initial application load' do
+      it 'displays flash with message' do
+        flash[:info] = 'This is a message'
+        render
+        rendered.within('div#flash-display') do |section|
+          expect(section).to have_css 'div#flash_info'
+          expect(section).to have_text /this is a message/i
+        end
+      end
+    end
+
+    context 'on continuous application use' do
+      it 'does not display flash with message' do
+        expect(flash[:info]).to eq nil
+        render
+        rendered.within 'div#flash-display' do |section|
+          expect(section).to_not have_css 'div#flash_info'
+        end
       end
     end
   end

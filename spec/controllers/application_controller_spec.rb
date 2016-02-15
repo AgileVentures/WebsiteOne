@@ -19,7 +19,10 @@ describe ApplicationController do
     end 
     def edit_password
       render :text => ""
-    end 
+    end
+    def root
+      render :text => ""
+    end
   end
 
   before do
@@ -30,8 +33,29 @@ describe ApplicationController do
       get "/users/password/new" => "anonymous#new_password", :as => :new_user_password
       get "/users/sign_out" => "anonymous#signout", :as => :destroy_user_session
       get "/users/password/edit" => "anonymous#edit_password", :as => :edit_user_password
+      get '/home' => 'anonymous#root', as: :root
     end
   end
+
+  describe 'global user messages' do
+    it { is_expected.to use_before_filter(:display_promo_flash) }
+
+    it 'should set @@message_status to false at application load' do
+      #request.reset_session
+      expect(
+          ApplicationController.class_variable_get(:@@message_status)
+      ).to eq false
+    end
+
+    it 'should set @@message_status to true after before_action' do
+      get :root
+      expect(
+          ApplicationController.class_variable_get(:@@message_status)
+      ).to eq true
+    end
+  end
+
+
 
   describe "store a location if not a blacklisted url" do
     it "should store the path in the session if a get request" do
