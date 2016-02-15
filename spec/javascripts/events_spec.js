@@ -26,22 +26,5 @@ describe('RefreshEventHangout', function () {
         this.app.ajaxRequest();
         expect(window.clearInterval).toHaveBeenCalledWith(this.app.intervalId);
     });
-
-    //We are not loading the right fixture so these two test will not pass. Blocked by not knowing this files structure
-    xit('toggles Edit HOA URL menu item test', function () {
-        var element = $("li[role='edit_hoa_link']");
-        element.trigger('click');
-        var link = element.children("a");
-        expect(link).toHaveText('Hide edit controls');
-    });
-
-    xit('toggles Edit HOA URL menu item test', function () {
-        $("#edit-link-form").collapse('show');
-        $('#hoa_link_cancel').trigger('click');
-        var link = $("li[role='edit_hoa_link']").children("a");
-        expect(link).toHaveText('Edit hangout link');
-        expect($("edit-link-form")).toHaveClass('in');
-    });
-
-
+    
 });
