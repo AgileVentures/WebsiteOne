@@ -23,20 +23,21 @@ describe 'events/index', type: :view do
                          repeats_every_n_weeks: 1,
                          repeat_ends: 'never',
                          repeat_ends_on: 'Mon, 17 Jun 2014',
-                         time_zone: 'Eastern Time (US & Canada)')
+                         time_zone: 'UTC')
 
 
     @events = [@event1.next_occurrences, @event2.next_occurrences]
     assign(:events, @events.flatten!)
   end
 
+  @javascript
   context 'for signed in and not signed in users' do
     it 'renders a list of events' do
       render
       rendered.should have_text 'AgileVentures Events'
       @events.each do |event|
         event = event[:event]
-        event_time = event.start_time_with_timezone.strftime('%k:%M %Z')
+        event_time = event.start_time_with_timezone.strftime('%-I:%M %p (%Z)')
         expect(rendered).to have_link(event.name, :href => event_path(event))
         expect(rendered).to have_content("Starts at #{event_time}")
       end
