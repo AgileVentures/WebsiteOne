@@ -10,18 +10,17 @@ module GithubCommitsJob
     end
   end
 
-
   private
 
   def update_total_commit_count_for(project)
-    repo_commits = Array.new
-
-    client.contributors("#{project.github_repo_name}/#{project.github_repo_user_name}", true, per_page: 100).each do |contrib|
-      repo_commits << contrib.contributions
+    commit_count = client.contributors(github_url(project), true, per_page: 100).reduce(0) do |memo, contrib|
+      memo += contrib.contributions
     end
-
-    commit_count = repo_commits.reduce(:+)
     project.update(commit_count: commit_count)
+  end
+
+  def github_url(project)
+    "#{project.github_repo_name}/#{project.github_repo_user_name}"
   end
 
   def update_user_commit_counts_for(project)
@@ -31,12 +30,11 @@ module GithubCommitsJob
       begin
         user = User.find_by_github_username(contributor.author.login)
 
-        if user
-          CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
-          Rails.logger.info "#{user.display_name} stats are okay"
-        else
-          Rails.logger.warn "#{contributor.author.login} could not be found in the database"
-        end
+        Rails.logger.warn "#{contributor.author.login} could not be found in the database" unless user
+
+        CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
+        Rails.logger.info "#{user.display_name} stats are okay"
+
       rescue Exception
         Rails.logger.error "#{contributor.author.login} caused an error, but that will not stop me!"
       end
