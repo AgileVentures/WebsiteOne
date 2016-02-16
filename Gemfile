@@ -52,7 +52,7 @@ gem 'rack-cache'
 #gem 'sprockets-webp'
 gem 'eventmachine', '~> 1.0.7'
 
-gem 'local_time'
+gem 'local_time', '~> 1.0.3'
 gem 'rails_config' # a gem to manage configuration files
 gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
 gem 'octokit' # Ruby wrapper for the GitHub API
@@ -65,7 +65,8 @@ group :test do
   gem 'cucumber-rails', :require => false # Cucmber features
   gem 'capybara-webkit'  # Headless driver for capybara
   gem 'selenium-webdriver' # Headful driver for capybara
-  gem 'poltergeist', '~> 1.5.1'  # yet another headless driver for capybara
+  gem 'poltergeist'  # yet another headless driver for capybara
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'webrat'  # Another Headless driver for capybara
   gem 'launchy' # Opens capybara response in your browser on save_and_open_page
   gem 'database_cleaner'  # Provides strategies for cleaning up the test db after test runs

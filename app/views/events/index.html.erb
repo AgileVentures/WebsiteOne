@@ -15,7 +15,7 @@
         <% event = instance[:event] %>
         <% time = instance[:time] %>
         <% prefix = time < Time.now ? 'Started at ' : 'Starts at ' %>
-        <% start_time = event.start_time_with_timezone.strftime('%k:%M %Z') %>
+        <% start_time = format_local_time(time) %>
         <% display_time = "#{prefix} #{start_time}" %>
         <% display_month = time.strftime('%B') %>
         <% display_date = time.strftime('%d') %>
@@ -31,8 +31,7 @@
 
               <p class="eventText"><%= event.description.truncate(70, separator: /\s/) %></p>
 
-              <p class="eventTime"><%= display_time %></p>
-              <p class="eventTime"> <%= current_occurrence_local_time(event) %></p>
+              <p class="eventTime"><%=raw display_time %></p>
 
             </div>
             <b class="gradient"></b>

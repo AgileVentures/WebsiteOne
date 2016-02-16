@@ -58,4 +58,8 @@ module EventHelper
   def format_date(datetime)
     datetime.strftime('%F')
   end
+
+  def format_local_time(datetime)
+    local_time(datetime,'%l:%M %p (%Z)')
+  end
 end
