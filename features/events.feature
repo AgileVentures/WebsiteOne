@@ -25,18 +25,20 @@ Feature: Events
     Given I am on Events index page
     Then I should see "AgileVentures Events"
     And I should see link "New Event"
-    
-  Scenario: Show an event when a user is not logged in
+
+  Scenario: Show an planned event when a user is not logged in
     Given the date is "2014/02/01 09:15:00 UTC"
     And I am on Events index page
     And I click "Scrum"
     Then I should see "Scrum"
     And I should see "Daily scrum meeting"
     And I should see "Next scheduled event"
-    And I should see "Monday, February 03, 2014 7:00 AM - 9:30 AM"
+    And I should see "Monday, February 03, 2014"
+    And I should see "Starts at 07:00 - Ends at 09:30 (UTC)"
     And I should not see "Edit"
+    And I should not see "Event Actions"
 
-  Scenario: Show an event when a user is logged in
+  Scenario: Show an planned event when a user is logged in
     Given I am logged in
     And the date is "2014/02/01 09:15:00 UTC"
     And I am on Events index page
@@ -44,8 +46,24 @@ Feature: Events
     Then I should see "Scrum"
     And I should see "Daily scrum meeting"
     And I should see "Next scheduled event"
-    And I should see "Monday, February 03, 2014 7:00 AM - 9:30 AM"
+    And I should see "Monday, February 03, 2014"
+    And I should see "Starts at 07:00 - Ends at 09:30 (UTC)"
     And I should see "Edit"
+
+  @time-travel-step
+  Scenario: Show an in progress event
+    Given I am logged in
+    And the date is "2014/02/03 07:15:00 UTC"
+    And the Hangout for event "Scrum" has been started with details:
+      | EventInstance link | http://hangout.test |
+      | Started at         | 07:00:00 UTC        |
+    And I am on Events index page
+    And I click "Scrum"
+    Then I should see "Scrum"
+    And I should see "Daily scrum meeting"
+    And I should not see "Starts at 07:00 - Ends at 09:30 (UTC)"
+    And I should see "This event is now live!"
+    And I should see "Join now!"
 
   Scenario: Render Next Scrum info on landing page
     Given the date is "2014/02/01 09:15:00 UTC"

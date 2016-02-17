@@ -56,8 +56,8 @@
 
         <div class="calendar-text">
           <%= @event.next_event_occurrence_with_time[:time].strftime('%A, %B %d, %Y') %><br/>
-          <%= @event.next_event_occurrence_with_time[:time].strftime('%l:%M %p') %> -
-          <%= @event.instance_end_time.strftime('%l:%M %p') %>
+          <%= raw show_local_time_range(@event) %> <br/>
+          <small><%= raw show_time_range(@event)  %></small>
           <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
             <p class="help-block">Occurs weekly at the specified times</p>
           <% end %>
