@@ -125,7 +125,7 @@ Feature: Events
     And I should see "Name can't be blank"
 
   @javascript
-  Scenario: Show events which are in progress
+  Scenario: Show events information
     Given the date is "2014/02/03 07:01:00 UTC"
     And the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
@@ -135,3 +135,5 @@ Feature: Events
     And I should see "Started at 07:00 - Ends at 09:30 (UTC)"
     And I should see "This event is now live!"
     And I should see link "Join now" with "http://hangout.test"
+    Then I should see "PP Session"
+    And I should see "Starts at 10:00 - Ends at 10:15 (UTC)"

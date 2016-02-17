@@ -72,14 +72,14 @@ module EventHelper
   def show_time_range(event)
     start_time_format = event.start_time.strftime('%H:%M')
     end_time_format = event.instance_end_time.strftime('%H:%M')
-    "#{start_prefix(event.start_time)}#{start_time_format}  -  #{end_prefix(event.instance_end_time)} #{end_time_format} #{event.start_time.strftime('(%Z)')}"
+    "#{start_prefix(event.start_time)}#{start_time_format}  -  #{end_prefix(event.instance_end_time)}#{end_time_format} #{event.start_time.strftime('(%Z)')}"
   end
 
   def start_prefix(time)
-    time < Time.now ? 'Started at ' : 'Starts at '
+    DateTime.now < time.to_datetime ?  'Starts at ' : 'Started at '
   end
 
   def end_prefix(time)
-    time > Time.now ? 'Ends at ' : 'Ended at '
+    DateTime.now < time.to_datetime ? 'Ends at ' : 'Ended at '
   end
 end
