@@ -32,10 +32,10 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the date is "2014/02/03 06:50:00 UTC"
     When I am on the show page for event "Scrum"
     Then I should see:
-      | Scrum               |
-      | Scrum               |
-      | Daily scrum meeting |
-      | 7:00 AM - 9:30 AM   |
+      | Scrum                                 |
+      | Scrum                                 |
+      | Daily scrum meeting                   |
+      | Starts at 07:00 - Ends at 09:30 (UTC) |
 
   Scenario: Show hangout details for live event
     Given the Hangout for event "Scrum" has been started with details:
