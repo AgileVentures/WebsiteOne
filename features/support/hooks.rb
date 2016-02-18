@@ -89,3 +89,7 @@ After('@desktop', '@tablet', '@smartphone') {page.driver.resize(1600, 1200)}
 After('@poltergeist', '@desktop', '@tablet', '@smartphone') do
   Capybara.javascript_driver = :rack_test
 end
+
+Before('@mercury_step') do
+  Capybara.javascript_driver = :poltergeist_debug
+end
