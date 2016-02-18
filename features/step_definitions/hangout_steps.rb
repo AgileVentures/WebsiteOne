@@ -1,5 +1,5 @@
 Then /^I should see hangout button$/ do
-  src = page.find(:css,'#liveHOA-placeholder iframe')['src']
+  src = page.find(:css, '#liveHOA-placeholder iframe')['src']
   expect(src).to match /talkgadget.google.com/
 end
 
@@ -20,9 +20,13 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   start_time = hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now
   event = Event.find_by_name(event_name)
 
-  FactoryGirl.create(:event_instance, event: event,
-               hangout_url: hangout['EventInstance link'],
-               updated_at: start_time)
+  FactoryGirl.create(:event_instance,
+                     event: event,
+                     hangout_url: hangout['EventInstance link'],
+                     created: start_time,
+                     updated_at: start_time,
+                     hoa_status: 'live')
+
 end
 
 Given /^the following hangouts exist:$/ do |table|
@@ -35,25 +39,25 @@ Given /^the following hangouts exist:$/ do |table|
       name = participant.squish
       user = User.find_by_first_name(name)
       gplus_id = user.authentications.find_by(provider: 'gplus').try!(:uid) if user.present?
-      [ "0", { :person => { displayName: "#{name}", id: gplus_id } } ]
+      ["0", {:person => {displayName: "#{name}", id: gplus_id}}]
     end
 
-    event_instance = FactoryGirl.create(:event_instance,
-                 title: hash['Title'],
-                 project: Project.find_by_title(hash['Project']),
-                 event: Event.find_by_name(hash['Event']),
-                 category: hash['Category'],
-                 user: User.find_by_first_name(hash['Host']),
-                 hangout_url: hash['EventInstance url'],
-                 participants: participants,
-                 yt_video_id: hash['Youtube video id'],
-                 created: hash['Start time'],
-                 updated: hash['End time'])
+    FactoryGirl.create(:event_instance,
+                       title: hash['Title'],
+                       project: Project.find_by_title(hash['Project']),
+                       event: Event.find_by_name(hash['Event']),
+                       category: hash['Category'],
+                       user: User.find_by_first_name(hash['Host']),
+                       hangout_url: hash['EventInstance url'],
+                       participants: participants,
+                       yt_video_id: hash['Youtube video id'],
+                       created: hash['Start time'],
+                       updated: hash['End time'])
   end
 end
 
 Then /^I should( not)? see Hangouts details section$/ do |negative|
-  section = page.find('.hangout-details', visible: false)
+  section = page.find('#hangout-details', visible: false)
   if negative
     expect(section).not_to be_visible
   else

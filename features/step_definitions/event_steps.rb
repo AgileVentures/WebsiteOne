@@ -1,5 +1,10 @@
-Given(/^I am on Events index page$/) do
-  visit events_path
+Given(/^I am on ([^"]*) index page$/) do |page|
+  case page.downcase
+    when 'events'
+      visit events_path
+    when 'projects'
+      visit projects_path
+  end
 end
 
 Given(/^following events exist:$/) do |table|
@@ -14,11 +19,11 @@ Given(/^following events exist for project "([^"]*)" with active hangouts:$/) do
   table.hashes.each do |hash|
     event = Event.create!(hash)
     event.event_instances.create(hangout_url: 'x@x.com',
-                          updated_at: 1.minute.ago,
-                          category: event.category,
-                          title: event.name,
-                          project_id: project.id
-                                )
+                                 updated_at: 1.minute.ago,
+                                 category: event.category,
+                                 title: event.name,
+                                 project_id: project.id
+    )
 
   end
 end

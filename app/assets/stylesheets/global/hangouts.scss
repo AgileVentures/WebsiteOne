@@ -54,7 +54,7 @@
     outline: none;
   }
 
-  .restart-section, .edit-link-form {
+  #edit-link-form {
     @extend .panel-collapse;
     @extend .collapse;
   }
