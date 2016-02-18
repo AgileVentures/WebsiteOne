@@ -19,7 +19,7 @@ git checkout -b 799_add_contributing_md
 
 Please ensure that each commit in your pull request makes a single coherent change and that the overall pull request only includes commits related to the specific GitHub issue that the pull request is addressing.  This helps the project managers understand the PRs and merge them more quickly.
 
-Whatever you are working on, or however far you get please do open a "Work in Progress" (WIP) [pull request](https://help.github.com/articles/creating-a-pull-request/) so that others in the team can comment on your approach.  Even if you hate your horrible code :-) please throw it up there and we'll help guide your code to fit in with the rest of the project.
+Whatever you are working on, or however far you get please do open a "Work in Progress" (WIP) [pull request](https://help.github.com/articles/creating-a-pull-request/) (just prepend your PR title with "[WIP]" ) so that others in the team can comment on your approach.  Even if you hate your horrible code :-) please throw it up there and we'll help guide your code to fit in with the rest of the project.
 
 
 Before you make a pull request it is a great idea to sync again to the upstream develop branch to reduce the chance that there will be any merge conflicts arising from other PRs that have been merged to develop since you started work:
@@ -28,13 +28,24 @@ Before you make a pull request it is a great idea to sync again to the upstream 
 git pull upstream develop
 ```
 
-In your pull request description please include the following text:
+In your pull request description please include a sensible description of your code and a tag `fixes #<issue-id>` e.g. :
 
 ```
+This PR adds a CONTRIBUTING.md file and a docs directory
+
 fixes #799
 ```
 
 which will associate the pull request with the issue in the Waffle board.
+
+Pull Request Review
+-------------------
+
+Currently @tansaku and @diraulo are pairing on the project management of WebSiteOne.  The project managers will review your pull request as soon as possible.  The project managers can merge unilaterally if necessary, but in general both project managers will need to sign off on a pull request before it is merged.
+
+The project managers will review the pull request for coherence with the specified feature or bug fix, and give feedback on code quality, user experience, documentation and git style.  Please respond to comments from the project managers with explanation, or further commits to your pull request in order to get merged in as quickly as possible.
+
+To maximize flexibility add the project managers as collaborators to your WebSiteOne fork in order to allow them to help you fix your pull request, but this is not required.
 
 Code Style
 -------------
