@@ -18,9 +18,9 @@ module GithubCommitsJob
       doc = Nokogiri::HTML(open(project.github_url))
       commit_count = doc.at_css('li.commits .num').text.strip.gsub(',', '').to_i
       project.update(commit_count: commit_count)
-      puts "Got what I came for from #{project.github_url}".green
+      #puts "Got what I came for from #{project.github_url}".green
     rescue Exception
-      puts "I refuse to fail or be stopped by #{project.github_url}!".red
+      #puts "I refuse to fail or be stopped by #{project.github_url}!".red
     end
   end
 
@@ -32,12 +32,12 @@ module GithubCommitsJob
           user = User.find_by_github_username(contributor.author.login)
           if user
             CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
-            puts "#{user.display_name} stats are okay".green
+            #puts "#{user.display_name} stats are okay".green
           else
-            puts 'Something is Wrooong!'.yellow
+            #puts 'Something is Wrooong!'.yellow
           end
         rescue Exception
-          puts "#{user.display_name} will not stop me!".red
+          #puts "#{user.display_name} will not stop me!".red
         end
       end
     end
@@ -53,7 +53,7 @@ module GithubCommitsJob
         sleep 3
       end
     rescue Exception
-      puts "Could not get the contributors for for #{repo}!".red
+      #puts "Could not get the contributors for for #{repo}!".red
     end
   end
 

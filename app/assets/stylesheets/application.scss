@@ -2,13 +2,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+
 @import "variables";
 @import "mixins";
 
 @import "main";
-@import "timeline";
 @import "global/*";
 @import "layout/*";
+
+@import "components/dropdown";
+@import "components/calendar-date";
 
 .custom_menu {
   width: 200px !important;

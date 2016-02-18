@@ -10,7 +10,6 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.order('status ASC').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
-    #binding.pry
     render layout: 'with_sidebar_sponsor_right'
   end
 
