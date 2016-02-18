@@ -21,7 +21,14 @@ Please ensure that each commit in your pull request makes a single coherent chan
 
 Whatever you are working on, or however far you get please do open a "Work in Progress" (WIP) [pull request](https://help.github.com/articles/creating-a-pull-request/) so that others in the team can comment on your approach.  Even if you hate your horrible code :-) please throw it up there and we'll help guide your code to fit in with the rest of the project.
 
-In your pull request description please include the following text, :
+
+Before you make a pull request it is a great idea to sync again to the upstream develop branch to reduce the chance that there will be any merge conflicts arising from other PRs that have been merged to develop since you started work:
+
+```
+git pull upstream develop
+```
+
+In your pull request description please include the following text:
 
 ```
 fixes #799
