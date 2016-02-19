@@ -38,7 +38,7 @@ The principal organization behind this project is AgileVentures., a UK based cha
 | StagingServer           |[websiteone-staging.herokuapp.com](http://websiteone-staging.herokuapp.com/)  |
 | ProductionServer        | [agileventures.org][application]  |
 |*Project management*       |         |
-|Pivotal Tracker          |[WebsiteOne][pivotal]|
+|Waffle          |[WebsiteOne][waffle]|
 
 ## Dependencies
 
