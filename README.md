@@ -1,7 +1,7 @@
 WebsiteOne
 ==========
 [oo-sw]: http://opensource.org/osd
-[pivotal]: https://www.pivotaltracker.com/s/projects/982890 
+[waffle]: https://waffle.io/AgileVentures/WebsiteOne
 [application]: http://www.agileventures.org/
 [code-climate]: https://codeclimate.com/github/AgileVentures/WebsiteOne
 [support]: http://www.agileventures.org/
@@ -18,7 +18,7 @@ Agile Ventures is a non-profit organization dedicated to crowdsourced learning a
 
 We are proudly using Agile methods and Ruby on Rails as the framework to deliver well tested and solid software.
 
-The principal organization behind this project is AGILEVENTURES NONPROFIT LTD., a nonprofit organization registered in the UK, company number: 08929160
+The principal organization behind this project is AgileVentures., a UK based charity.
 
 
  Service                 |  Status      |
@@ -54,14 +54,16 @@ improve this project.
 Here are some ways *you* can contribute:
 
 * by using the [application][application]
-* by [reporting][pivotal] bugs
-* by [suggesting new features][pivotal]
+* by [reporting][waffle] bugs
+* by [suggesting new features][waffle]
 * by writing code (**no patch is too small**: fix typos, add comments, clean up
   inconsistent whitespace)
-* by [refactoring][pivotal] code
-* by closing [issues][pivotal]
+* by [refactoring][waffle] code
+* by closing [issues][waffle]
 * by [reviewing code][code-climate]
 
 Eager to get started? Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/wiki/Project-Setup-%28New-Users%29)
 page
+
+Please also see our [contribution guidelines](CONTRIBUTIONS.md)
 
