@@ -1,11 +1,10 @@
-require 'nokogiri'
+require 'octokit'
 
 module GithubCommitsJob
   extend self
 
   def run
     Project.with_github_url.each do |project|
-      update_protocol(project)
       update_total_commit_count_for(project)
       update_user_commit_counts_for(project)
     end
@@ -14,50 +13,44 @@ module GithubCommitsJob
   private
 
   def update_total_commit_count_for(project)
-    begin
-      doc = Nokogiri::HTML(open(project.github_url))
-      commit_count = doc.at_css('li.commits .num').text.strip.gsub(',', '').to_i
-      project.update(commit_count: commit_count)
-      #puts "Got what I came for from #{project.github_url}".green
-    rescue Exception
-      #puts "I refuse to fail or be stopped by #{project.github_url}!".red
+    commit_count = client.contributors(github_url(project), true, per_page: 100).reduce(0) do |memo, contrib|
+      memo += contrib.contributions
     end
+    project.update(commit_count: commit_count)
+  end
+
+  def github_url(project)
+    "#{project.github_repo_name}/#{project.github_repo_user_name}"
   end
 
   def update_user_commit_counts_for(project)
     contributors = get_contributor_stats(project.github_repo)
-    if contributors
-      contributors.map do |contributor|
-        begin
-          user = User.find_by_github_username(contributor.author.login)
-          if user
-            CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
-            #puts "#{user.display_name} stats are okay".green
-          else
-            #puts 'Something is Wrooong!'.yellow
-          end
-        rescue Exception
-          #puts "#{user.display_name} will not stop me!".red
-        end
+
+    contributors.map do |contributor|
+      begin
+        user = User.find_by_github_username(contributor.author.login)
+
+        Rails.logger.warn "#{contributor.author.login} could not be found in the database" unless user
+
+        CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
+        Rails.logger.info "#{user.display_name} stats are okay"
+
+      rescue Exception
+        Rails.logger.error "#{contributor.author.login} caused an error, but that will not stop me!"
       end
     end
-
   end
 
   def get_contributor_stats(repo)
-    begin
-      loop do
-        contributors = Octokit.contributor_stats(repo)
-        return contributors unless contributors.nil?
-        Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
-        sleep 3
-      end
-    rescue Exception
-      #puts "Could not get the contributors for for #{repo}!".red
+    loop do
+      contributors = client.contributor_stats(repo)
+      return contributors unless contributors.nil?
+      Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
+      sleep 3
     end
   end
 
-  def update_protocol(project)
-    project.update(github_url: project.github_url.sub('http://', 'https://'))
+  def client
+    @client ||= Octokit::Client.new(:access_token => Settings.github.auth_token)
   end
 end
