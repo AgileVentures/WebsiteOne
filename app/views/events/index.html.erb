@@ -5,39 +5,47 @@
   <strong>Each event will have a link to an online Hangout prior to start time.</strong></p>
 <% if user_signed_in? %>
   <div class="row">
-    <%= link_to 'New Event', new_event_path, :class => 'btn btn-default pull-right' %>
+    <%= link_to 'New Event', new_event_path, class: 'btn btn-default pull-right' %>
   </div>
 <% end %>
+
 <div class="eventContainer">
   <% @events.each_slice(2) do |slice| %>
-    <ul id="eventContainer" class="eventCards">
-      <% slice.each do |instance| %>
-        <% event = instance[:event] %>
-        <% time = instance[:time] %>
-        <% prefix = time < Time.now ? 'Started at ' : 'Starts at ' %>
-        <% start_time = format_local_time(time) %>
-        <% display_time = "#{prefix} #{start_time}" %>
-        <% display_month = time.strftime('%B') %>
-        <% display_date = time.strftime('%d') %>
+    <% slice.each do |instance| %>
+      <% event = instance[:event] %>
+      <% recent_hangout = event.recent_hangouts.first %>
+      <div class="row" id="details">
+        <h2><%= link_to event.name.truncate(50, separator: /\s/), event_path(event) %></h2>
 
-        <li class="card">
-          <div class="cardInner">
-            <div class="calendar">
-              <span class="month"><%= display_month %></span>
-              <span class="date"><%= display_date %></span>
-            </div>
-            <div class="boxEvent">
-              <h2 class="eventTitle"><%= link_to event.name.truncate(30, separator: /\s/), event_path(event) %></h2>
+        <p><%= event.description.truncate(140, separator: /\s/) %></p>
 
-              <p class="eventText"><%= event.description.truncate(70, separator: /\s/) %></p>
+        <div class="col-lg-6 col-xs-12 col-sm-6">
+          <div class="calendar-block">
+            <i class="fa fa-calendar"></i>
 
-              <p class="eventTime"><%=raw display_time %></p>
+            <div class="calendar-text">
+              <span class="month"><%= instance[:time].strftime('%A, %B %d, %Y') %></span>
+              <br/>
+              <span><%= raw show_local_time_range(event) %></span>
+              <br/>
+                <span>
+                  <small><%= raw show_time_range(event) %></small>
+                </span>
 
             </div>
-            <b class="gradient"></b>
           </div>
-        </li>
-      <% end %>
-    </ul>
+        </div>
+        <div class="col-lg-6  col-xs-12 col-sm-6">
+          <% if recent_hangout && recent_hangout.live? %>
+            <div class="event-notice pull-right">
+              This event is now live!
+              <br/>
+              <%= link_to 'Join now', recent_hangout.hangout_url, class: 'btn btn-default pull-right' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
+

@@ -42,17 +42,23 @@ Feature: Setting up basic page layout for site
     Given I am on a desktop
     And I am on Events index page
     Then I should see the supporter content
+    And I am on Projects index page
+    Then I should see the supporter content
 
   @poltergeist @tablet
   Scenario: Hide Sponsors from Tablets
     Given I am on a tablet
     And I am on Events index page
     Then I should not see the supporter content
+    And I am on Projects index page
+    Then I should not see the supporter content
 
   @poltergeist @smartphone
   Scenario: Hide Sponsors from Smartphones
     Given I am on a smartphone
     And I am on Events index page
+    Then I should not see the supporter content
+    And I am on Projects index page
     Then I should not see the supporter content
 
   @poltergeist @desktop

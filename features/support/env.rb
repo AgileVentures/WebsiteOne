@@ -17,27 +17,24 @@ require 'geocoder/results/freegeoip'
 require 'webmock/cucumber'
 require 'delorean'
 
-WebMock.disable_net_connect!(:allow_localhost => true)
+WebMock.disable_net_connect!(allow_localhost: true)
 
 OmniAuth.config.logger.level = Logger::WARN
 
-
-Capybara.javascript_driver = :poltergeist_ignore_ssl
+Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5
+
 test_options = {
-    timeout: 5,
-    phantomjs_options:['--ignore-ssl-errors=yes'],
-    port: 3010,
-    phantomjs: Phantomjs.path
+  timeout: 20,
+  phantomjs_options: ['--ignore-ssl-errors=yes']
 }
+
 debug_options = {
-    inspector: true,
-    phantomjs_options:['--ignore-ssl-errors=yes'],
-    port: 3010,
-    timeout: 10,
-    phantomjs: Phantomjs.path
+  inspector: true,
+  timeout: 10
 }
-Capybara.register_driver :poltergeist_ignore_ssl do |app|
+
+Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new app, test_options
 end
 
@@ -45,35 +42,27 @@ Capybara.register_driver :poltergeist_debug do |app|
   Capybara::Poltergeist::Driver.new app, debug_options
 end
 
-Before('@ignore_ssl_errors') do
-  Capybara.current_driver = :ignore_ssl_errors
-end
-
-After('@ignore_ssl_errors') do
-  Capybara.use_default_driver
-end
-
 ActionController::Base.allow_rescue = false
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-Geocoder.configure(:ip_lookup => :test)
+Geocoder.configure(ip_lookup: :test)
 Geocoder::Lookup::Test.add_stub(
-    '127.0.0.1', [
-                   {
-                       ip: '127.0.0.1',
-                       country_code: 'SE',
-                       country_name: 'Sweden',
-                       region_code: '28',
-                       region_name: 'Västra Götaland',
-                       city: 'Alingsås',
-                       zipcode: '44139',
-                       latitude: 57.9333,
-                       longitude: 12.5167,
-                       metro_code: '',
-                       areacode: ''
-                   }.as_json
-               ]
+  '127.0.0.1', [
+    {
+      ip: '127.0.0.1',
+      country_code: 'SE',
+      country_name: 'Sweden',
+      region_code: '28',
+      region_name: 'Västra Götaland',
+      city: 'Alingsås',
+      zipcode: '44139',
+      latitude: 57.9333,
+      longitude: 12.5167,
+      metro_code: '',
+      areacode: ''
+    }.as_json
+  ]
 )
 
 Before do
