@@ -26,7 +26,7 @@ module EventHelper
   end
   
   def topic(event, event_schedule)
-    "#{@event.name} - #{current_occurrence_time(event_schedule.first(1))}"
+    "#{event.name} - #{current_occurrence_time(event_schedule.first(1))}"
   end
 
   def format_timepicker(datetime)
@@ -48,7 +48,7 @@ module EventHelper
   def format_time_range(event)
     start_time_format = event.start_time.strftime('%H:%M')
     end_time_format = event.instance_end_time.strftime('%H:%M')
-    "#{start_time_format}-#{end_time_format} UTC"
+    "#{start_time_format}-#{end_time_format} #{event.start_time.strftime('(%Z)')}"
   end
 
   def format_time(datetime)
@@ -61,5 +61,25 @@ module EventHelper
 
   def format_local_time(datetime)
     local_time(datetime,'%l:%M %p (%Z)')
+  end
+
+  def show_local_time_range(event)
+    start_time_format = local_time(event.start_time,'%H:%M')
+    end_time_format = local_time(event.instance_end_time,'%H:%M')
+    "#{start_prefix(event.start_time)}#{start_time_format} - #{end_prefix(event.instance_end_time)}#{end_time_format} #{local_time(event.start_time,'(%Z)')}"
+  end
+
+  def show_time_range(event)
+    start_time_format = event.start_time.strftime('%H:%M')
+    end_time_format = event.instance_end_time.strftime('%H:%M')
+    "#{start_prefix(event.start_time)}#{start_time_format}  -  #{end_prefix(event.instance_end_time)}#{end_time_format} #{event.start_time.strftime('(%Z)')}"
+  end
+
+  def start_prefix(time)
+    DateTime.now < time.to_datetime ?  'Starts at ' : 'Started at '
+  end
+
+  def end_prefix(time)
+    DateTime.now < time.to_datetime ? 'Ends at ' : 'Ended at '
   end
 end

@@ -25,62 +25,45 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Create a hangout for a scrum event
     Given I am on the show page for event "Scrum"
     Then I should see hangout button
-    And I should see "Edit hangout link"
 
-  Scenario: Show hangout details
+
+  @time-travel-step
+  Scenario: Show event details
+    Given the date is "2014/02/03 06:50:00 UTC"
+    When I am on the show page for event "Scrum"
+    Then I should see:
+      | Scrum                                 |
+      | Scrum                                 |
+      | Daily scrum meeting                   |
+      | Starts at 07:00 - Ends at 09:30 (UTC) |
+
+  Scenario: Show hangout details for live event
     Given the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
       | Started at         | 10:25:00 UTC        |
     And the time now is "10:26:00 UTC"
     When I am on the show page for event "Scrum"
-    Then I should see Hangouts details section
-    And I should see:
-      | Category            |
+    Then I should see:
       | Scrum               |
-      | Title               |
+      | Scrum               |
       | Daily scrum meeting |
-      | Updated             |
-      | 1 minute ago        |
-    And I should see link "http://hangout.test" with "http://hangout.test"
+    And I should see link "Join now" with "http://hangout.test"
 
   @javascript
-  Scenario: Show restart hangout
-    Given the Hangout for event "Scrum" has been started with details:
-      | EventInstance link | http://hangout.test |
-    When I am on the show page for event "Scrum"
-    Then I should see "Restart hangout"
-    But the hangout button should not be visible
-
-
-  @javascript
-  Scenario: Restart hangout
-    Given the Hangout for event "Scrum" has been started with details:
-      | EventInstance link | http://hangout.test |
-    And I am on the show page for event "Scrum"
-
-    When I click the link "Restart hangout"
-    Then I should see "Restarting Hangout would update the details of the hangout currently associated with this event."
-    And the hangout button should be visible
-
-    When I click the button "Close"
-    Then the hangout button should not be visible
-
-  @javascript
-  Scenario: Edit URL
+  Scenario: Edit Hangout URL
     Given I am on the show page for event "Scrum"
-    When I click the link "Edit hangout link"
-    Then I should see button "Cancel"
-
-    When I fill in "hangout_url" with "http://test.com"
-    And I click the "Save" button
-    Then I should see link "http://test.com" with "http://test.com"
+    And I open the Edit URL controls
+    And I fill in "hangout_url" with "http://test.com"
+    And I click on the Save button
+    Then I should see link "Join now" with "http://test.com"
 
   @javascript
-  Scenario: Cancel Edit URL
+  Scenario: Cancel Edit Hangout URL
     Given I am on the show page for event "Scrum"
-    When I click the link "Edit hangout link"
-    And I click the button "Close"
-    Then I should not see button "Save"
+    And I open the Edit URL controls
+    Then I should see the Edit URL controls
+    And I click on the Cancel button
+    Then I should not see the Edit URL controls
 
   @time-travel-step
   Scenario: Render Join live event link
@@ -90,7 +73,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Started at         | 07:00:00 UTC        |
 
     When I am on the show page for event "Scrum"
-    Then I should see link "EVENT IS LIVE" with "http://hangout.test"
+    Then I should see link "Join now" with "http://hangout.test"
 
     When I am on the home page
     Then I should see "Scrum is live!"
@@ -105,17 +88,17 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Display live sessions - basic info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
-      | Start time | Title        | Project     | Event         | Category        | Host  | EventInstance url      | Youtube video id | End time |Participants|
-      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    |Alice, Bob  |
-      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    |Alice, Bob  |
+      | Start time | Title        | Project     | Event         | Category        | Host  | EventInstance url      | Youtube video id | End time | Participants |
+      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    | Alice, Bob   |
+      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    | Alice, Bob   |
     When I visit "/hangouts"
     Then I should see:
 
-      | Title      |
-      | Project    |
-      | Host       |
-      | Join       |
-      | Watch      |
+      | Title   |
+      | Project |
+      | Host    |
+      | Join    |
+      | Watch   |
     And I should see:
       | 11:15        |
       | 01/02        |
