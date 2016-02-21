@@ -15,5 +15,3 @@ namespace :brakeman do
     exit Brakeman::Warnings_Found_Exit_Code unless result.filtered_warnings.empty?
   end
 end
-
-task default: 'brakeman:run'
