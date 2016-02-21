@@ -1,1 +1,1 @@
-@freeranger - Update the RubyMine logo
+@freeranger - #817 - Add security auditing to the CI builds
