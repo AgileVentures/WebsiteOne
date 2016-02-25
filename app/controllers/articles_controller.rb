@@ -105,6 +105,11 @@ class ArticlesController < ApplicationController
     redirect_to article_path(@article)
   end
 
+  def new_untested_method
+    @random_var = "test"
+    @user_3589u = User.all.first(5)
+  end
+
   private
 
   def article_params
