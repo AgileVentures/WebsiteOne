@@ -44,7 +44,7 @@ Discuss any errors with the team.
 
 ## Troubleshooting
 
-You can find some solutions [on this page](https://github.com/AgileVentures/WebsiteOne/wiki/Development-environment-set-up)
+You can find some solutions [on this page](development_environment_set_up.md)
 
 
 [Note: Originally at https://github.com/AgileVentures/WebsiteOne/wiki/Project-Setup-%28New-Users%29]
