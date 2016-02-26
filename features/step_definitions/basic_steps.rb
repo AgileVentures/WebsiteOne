@@ -260,7 +260,7 @@ end
 Then(/^I should( not be able to)? see a link to "([^"]*)" page for ([^"]*) "([^"]*)"$/) do |invisible, action, controller, title|
   page.has_link?(action, href: url_for_title(action: action, controller: controller, title: title))
   unless invisible
-    page.should have_text title, visible: false
+    expect(page).to have_selector(:link_or_button, text: title, visible: false)
   end
 end
 
