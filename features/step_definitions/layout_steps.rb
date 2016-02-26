@@ -44,5 +44,5 @@ end
 
 
 Then(/^I should see a modal window with a form "([^"]*)"$/) do |arg|
-  page.should have_content(arg, visible: true)
+  page.should have_content(arg)
 end
