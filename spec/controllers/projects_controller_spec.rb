@@ -42,6 +42,7 @@ describe ProjectsController, :type => :controller do
 
     #TODO: Refactor! This test is wrong. I can not test the order of projects.
     it 'orders project by commit_count' do
+      allow_message_expectations_on_nil
       allow(Project).to receive(:search).and_return(@projects)
       @projects.stub(:includes).and_return([@project2, @project])
       get :index, {search: ''}, valid_session
