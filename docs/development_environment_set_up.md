@@ -1,24 +1,4 @@
-### Initial set up - Getting started
-   * Log in to your GitHub account at ```http://github.com```
-   * Got to ```https://github.com/AgileVentures/WebsiteOne``` and click the **Fork** button up in the left corner. That will fork the repo to your GitHub account.
-   * Open your terminal and navigate to the folder where you want to store the WebsiteOne project.
-   * Clone the project from your GitHub account to your local machine using ```git clone https://github.com/YOUR_GITHUB_USERNAME/WebsiteOne```
-   * Remember that the current codebase is the **develop** branch. Use ```git checkout develop```
-   * Run ```bundle install```
-   * Run ```rake db:migrate```
-   * Fire up the rails server with ```rails s```
-   * Open your browser and navigate to: ```localhost:3000```
-   * **If everything is okay with your set up, you should now see the WebsiteOne site in your browser.**
-
-### Installation script (outdated)
-
-If you are on a Linux system you can execute a script that makes sure that you have all the necessary software installed on your system. The script also clones the WebsiteOne project and runs all the steps needed to set up the development environment for you.
-
-See the following [install script](https://gist.github.com/apelade/8203553)
-
-**NOTE**: A new experimental script can be found [here](https://github.com/AgileVentures/WebsiteOne/blob/develop/script/setup.sh), it comes bundled with the project, however it does not include the setup for PostgreSQL. If you have trouble using this script, please reach out to us on Slack or submit an issue on [this project](https://github.com/AgileVentures/setup-scripts).
-
-### Installation issues (TBD)
+### Installation issues
 
 ## PostgreSQL
 Install the pg gem. You’ll need to include the following options to set your path and DDainclude the needed headers:
@@ -96,3 +76,5 @@ brew install v8
 gem install therubyracer
 gem install libv8 -v '3.16.14.3' -- --with-system-v8
 ```
+
+[Note: this document used to be at https://github.com/AgileVentures/WebsiteOne/wiki/Development-environment-set-up]

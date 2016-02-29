@@ -1,6 +1,12 @@
 ## Step 1: Basic Project Setup
 
-A great guide to starting off the project can be found [here](http://www.agileventures.org/articles/project-setup-new-users) (use https://github.com/AgileVentures/WebsiteOne as the project URL).
+If you haven't yet done the following:
+
+* Registered on Github
+* Installed `git`
+* [Forked](https://help.github.com/articles/fork-a-repo/) the WebSiteOne project
+
+and are unsure how to do so then please see this [general guide to getting set up with an AgileVentures project](http://www.agileventures.org/articles/project-setup-new-users) (use https://github.com/AgileVentures/WebsiteOne as the project URL).
 
 ## Step 2: Run the setup script
 
@@ -9,7 +15,7 @@ Get the project dependencies by running these 2 commands in a bash shell termina
     wget https://github.com/AgileVentures/setup-scripts/raw/develop/scripts/rails_setup.sh
     WITH_PHANTOMJS=true REQUIRED_RUBY=2.2.2  source rails_setup.sh
 
-This script works best with Ubuntu 14.04 (Trusty Tahr) and Mac OS X 10.9 Mavericks, but please contribute installation instructions for other platforms.
+This script works best with Ubuntu 14.04 (Trusty Tahr) and Mac OS X 10.9 Mavericks, but please contribute installation instructions for other platforms and improvements at https://github.com/AgileVentures/setup-scripts.
 
 **Note:** On OSX El Capitan and above, you may get this error:
 
@@ -47,4 +53,4 @@ Discuss any errors with the team.
 You can find some solutions [on this page](development_environment_set_up.md)
 
 
-[Note: Originally at https://github.com/AgileVentures/WebsiteOne/wiki/Project-Setup-%28New-Users%29]
+[Note: This page originally at https://github.com/AgileVentures/WebsiteOne/wiki/Project-Setup-%28New-Users%29]
