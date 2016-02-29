@@ -1,6 +1,8 @@
 Development Process
 ------------------
 
+Please see [the project setup guide](docs/project_setup.md) to get set up with the project for development.
+
 Our default working branch is `develop`.  We do work by creating branches off `develop` for new features and bugfixes.  Any feature should include appropriate Cucumber acceptance tests and RSpec unit tests.  We try to avoid view and controller specs, and focus purely on unit tests at the model and service level where possible.  A bugfix may include an acceptance test depending on where the bug occurred, but fixing a bug should start with the creation of a test that replicates the bug, so that any bugfix submission will include an appropriate test as well as the fix itself.
 
 Each developer will usually work with a [fork](https://help.github.com/articles/fork-a-repo/) of the [main repository on Agile Ventures](https://github.com/AgileVentures/WebSiteOne). Before starting work on a new feature or bugfix, please ensure you have [synced your fork to upstream/develop](https://help.github.com/articles/syncing-a-fork/):
@@ -37,6 +39,8 @@ fixes #799
 ```
 
 which will associate the pull request with the issue in the Waffle board.
+
+See also [more details on submitting pull requests](how_to_submit_a_pull_request_on_github.md).
 
 Pull Request Review
 -------------------

@@ -42,18 +42,18 @@ Or, if you visit your repo shortly after pushing the branch, there will be a pro
 
 ![Compare and pull request](https://dl.dropboxusercontent.com/u/20922989/Screen%20Shot%202014-08-09%20at%2011.25.32%20AM.png)
 
-6) Fill out the description with a link to the Pivotal Tracker story & a brief description of what you've done and create the pull request.
+6) Fill out the description including "fixes #123" (replacing 123 with the id of the GitHub issue you've been working on) & a brief description of what you've done and create the pull request.
 
-7) Your branch's last commit will now be tested automatically by Travis CI. Keep an eye on the result, which typically takes less than 15 minutes to appear:
+7) Your branch's last commit will now be tested automatically by [Semaphore CI.](semaphoreci.com) Keep an eye on the result, which typically takes less than 15 minutes to appear:
 
-![passed](https://dl.dropboxusercontent.com/u/20922989/Screen%20Shot%202014-08-09%20at%201.08.40%20AM.png)
+![passed](https://www.dropbox.com/s/2iiock65a9szf5w/Screenshot%202016-02-29%2011.50.59.png?dl=1)
 
  This is good,
 
-![failed](https://dl.dropboxusercontent.com/u/20922989/Screen%20Shot%202014-08-09%20at%201.09.08%20AM.png)
+![failed](https://www.dropbox.com/s/7ru2bcjjdnffp8s/Screenshot%202016-02-29%2011.49.33.png?dl=1)
 
- while this means that you probably have some work to do. Click on the red cross to be taken to Travis CI where you can scroll through the tests to see the failure(s).
+ while this means that you probably have some work to do. Click on the red cross to be taken to [Semaphore CI.](semaphoreci.com) where you can scroll through the tests to see the failure(s).
 
 8) If your build passed, wait for code review comments, make necessary changes to your code, and repeat the process starting from Step 1 as many times as necessary.
 
-_Once your pull request has been accepted and merged into the application's code base, don't forget to mark the Pivotal Tracker story as 'Finished'._
+_Once your pull request has been accepted and merged into the application's code base, the related GitHub issue will automatically be closed if you correctly add the appropriate sentence to the description, e.g. 'fixes #123'._
