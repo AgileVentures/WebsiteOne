@@ -26,12 +26,14 @@ Capybara.default_wait_time = 5
 
 test_options = {
   timeout: 20,
-  phantomjs_options: ['--ignore-ssl-errors=yes']
+  phantomjs_options: ['--ignore-ssl-errors=yes'],
+  phantomjs: Phantomjs.path
 }
 
 debug_options = {
   inspector: true,
-  timeout: 10
+  timeout: 10,
+  phantomjs: Phantomjs.path
 }
 
 Capybara.register_driver :poltergeist do |app|

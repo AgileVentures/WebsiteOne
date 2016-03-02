@@ -18,7 +18,7 @@ Agile Ventures is a non-profit organization dedicated to crowdsourced learning a
 
 We are proudly using Agile methods and Ruby on Rails as the framework to deliver well tested and solid software.
 
-The principal organization behind this project is AgileVentures., a UK based charity.
+The principal organization behind this project is AgileVentures, a UK based charity.
 
 
  Service                 |  Status      |
@@ -65,5 +65,5 @@ Here are some ways *you* can contribute:
 Eager to get started? Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/wiki/Project-Setup-%28New-Users%29)
 page
 
-Please also see our [contribution guidelines](CONTRIBUTIONS.md)
+Please also see our [contribution guidelines](CONTRIBUTING.md)
 
