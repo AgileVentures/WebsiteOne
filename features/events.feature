@@ -34,7 +34,7 @@ Feature: Events
     And I should see "Daily scrum meeting"
     And I should see "Next scheduled event"
     And I should see "Monday, February 03, 2014"
-    And I should see "Starts at 07:00 - Ends at 09:30 (UTC)"
+    And I should see "07:00-09:30 (UTC)"
     And I should not see "Edit"
     And I should not see "Event Actions"
 
@@ -47,7 +47,7 @@ Feature: Events
     And I should see "Daily scrum meeting"
     And I should see "Next scheduled event"
     And I should see "Monday, February 03, 2014"
-    And I should see "Starts at 07:00 - Ends at 09:30 (UTC)"
+    And I should see "07:00-09:30 (UTC)"
     And I should see "Edit"
 
 
