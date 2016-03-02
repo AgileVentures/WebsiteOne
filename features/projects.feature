@@ -95,28 +95,30 @@ Feature: Create and maintain projects
       | GitHub link         |
       | PivotalTracker link |
 
-  Scenario: Saving a new project: success
+  Scenario Outline: Saving a new project: success
     Given I am logged in
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
-    When I fill in:
-      | Field               | Text                                            |
-      | Title               | Title New                                       |
-      | Description         | Description New                                 |
-      | GitHub link         | http://www.github.com/abc                       |
-      | PivotalTracker link | http://www.pivotaltracker.com/s/projects/982890 |
-
+    When I fill in "Title" with "<title>"
+    And I fill in "Description" with "<description>"
+    And I fill in "GitHub link" with "<gh_link>"
+    And I fill in "PivotalTracker link" with "<pt_link>"
     And I select "Status" to "Active"
     And I click the "Submit" button
-    Then I should be on the "Show" page for project "Title New"
+    Then I should be on the "Show" page for project "<title>"
     And I should see "Project was successfully created."
     And I should see:
       | Text            |
-      | Title New       |
-      | Description New |
+      | <title>         |
+      | <description>   |
       | ACTIVE          |
-    And I should see a link to "Title New" on github
-    And I should see a link to "Title New" on Pivotal Tracker
+    And I should see a link to "<title>" on github
+    And I should see a link to "<title>" on Pivotal Tracker
+
+    Examples:
+      | title     | description     | gh_link                   | pt_link                                         |
+      | Title Old | Description Old | http://www.github.com/old | http://www.pivotaltracker.com/s/projects/982890 |
+      | Title New | Description New | http://www.github.com/new | http://www.pivotaltracker.com/n/projects/982890 |
 
 
   Scenario: Saving a new project: failure

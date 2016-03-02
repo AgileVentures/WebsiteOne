@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Project, :type => :model do
+describe Project, type: :model do
   context '#save' do
     subject { build_stubbed(:project) }
     it { is_expected.to respond_to :create_activity }
@@ -33,7 +33,7 @@ describe Project, :type => :model do
       expect(subject).to_not be_valid
     end
 
-    it "should not accept invalid Pivotal Tracker URL" do
+    it 'should not accept invalid Pivotal Tracker URL' do
       subject.pivotaltracker_url = 'https://www.pivotaltracker.com/s/../../912312'
       expect(subject).to_not be_valid
     end
@@ -42,15 +42,20 @@ describe Project, :type => :model do
       it 'should correct mistakes in pivotal tracker url' do
         subject.pivotaltracker_url = 'www.pivotaltracker.com/s/projects/1234'
         expect(subject).to be_valid
-        expect(subject.pivotaltracker_url).to eq 'https://www.pivotaltracker.com/s/projects/1234'
+        expect(subject.pivotaltracker_url).to eq 'https://www.pivotaltracker.com/n/projects/1234'
       end
 
       it 'should accept the subject id and convert that into a valid URL' do
         subject.pivotaltracker_url = '1234'
         expect(subject).to be_valid
-        expect(subject.pivotaltracker_url).to eq 'https://www.pivotaltracker.com/s/projects/1234'
+        expect(subject.pivotaltracker_url).to eq 'https://www.pivotaltracker.com/n/projects/1234'
       end
 
+      it 'should accept new pivotal traker url format' do
+        subject.pivotaltracker_url = 'www.pivotaltracker.com/n/projects/1234'
+        expect(subject).to be_valid
+        expect(subject.pivotaltracker_url).to eq 'https://www.pivotaltracker.com/n/projects/1234'
+      end
     end
   end
 
