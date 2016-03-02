@@ -118,6 +118,29 @@ Feature: Create and maintain projects
     And I should see a link to "Title New" on github
     And I should see a link to "Title New" on Pivotal Tracker
 
+  Scenario: Saving a new project with new PivotalTracker link format: success
+    Given I am logged in
+    And I am on the "Projects" page
+    When I click the very stylish "New Project" button
+    When I fill in:
+      | Field               | Text                                            |
+      | Title               | Title New                                       |
+      | Description         | Description New                                 |
+      | GitHub link         | http://www.github.com/abc                       |
+      | PivotalTracker link | http://www.pivotaltracker.com/n/projects/982890 |
+
+    And I select "Status" to "Active"
+    And I click the "Submit" button
+    Then I should be on the "Show" page for project "Title New"
+    And I should see "Project was successfully created."
+    And I should see:
+      | Text            |
+      | Title New       |
+      | Description New |
+      | ACTIVE          |
+    And I should see a link to "Title New" on github
+    And I should see a link to "Title New" on Pivotal Tracker
+
 
   Scenario: Saving a new project: failure
     Given I am logged in
