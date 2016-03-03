@@ -1,10 +1,10 @@
 Then(/^I should see "([^"]*)" table$/) do |legend|
-  page.should have_css 'h1', text: legend
+  expect(page).to have_css 'h1', text: legend
 end
 
 When(/^I should see column "([^"]*)"$/) do |column|
   within('table#projects thead') do
-    page.should have_css('th', :text => column)
+    expect(page).to have_css('th', :text => column)
   end
 end
 
@@ -32,8 +32,8 @@ end
 Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
   case form_purpose
     when 'creating a new project'
-      page.should have_text form_purpose
-      page.should have_css('form#new_project')
+      expect(page).to have_text form_purpose
+      expect(page).to have_css('form#new_project')
 
     else
       pending
