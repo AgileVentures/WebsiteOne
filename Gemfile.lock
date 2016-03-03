@@ -128,6 +128,7 @@ GEM
       compass (~> 1.0.0)
       sass-rails (<= 5.0.1)
       sprockets (< 2.13)
+    constant-redefinition (1.1.0)
     coveralls (0.7.12)
       multi_json (~> 1.10)
       rest-client (>= 1.6.8, < 2)
@@ -536,6 +537,7 @@ DEPENDENCIES
   coffee-rails
   colored
   compass-rails
+  constant-redefinition
   coveralls (~> 0.7.9)
   cucumber-rails
   database_cleaner

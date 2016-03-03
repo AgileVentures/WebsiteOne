@@ -70,7 +70,7 @@ describe 'projects/show.html.erb', type: :view do
   it 'renders a list of related documents' do
     render
     expect(rendered).to have_text 'Documents (1)'
-    expect(rendered).to have_text document.title, visible: true
+    expect(rendered).to have_text document.title
   end
 
   it 'renders first 5 members in sidebar' do
