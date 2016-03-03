@@ -35,7 +35,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Scrum                                 |
       | Scrum                                 |
       | Daily scrum meeting                   |
-      | Starts at 07:00 - Ends at 09:30 (UTC) |
+      | 07:00-09:30 (UTC) |
 
   Scenario: Show hangout details for live event
     Given the Hangout for event "Scrum" has been started with details:
