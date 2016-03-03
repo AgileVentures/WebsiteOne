@@ -11,37 +11,36 @@ describe AgileVentures::BulkMailer do
 
   it 'can be initialized' do
     bulk_mailer = AgileVentures::BulkMailer.new(@opts)
-    bulk_mailer.should_not be_nil
+    expect(bulk_mailer).to_not be_nil
   end
 
   it 'will return num sent mails' do
-    AgileVentures::BulkMailer.new(@opts).run.should eq(2)
+    expect(AgileVentures::BulkMailer.new(@opts).run).to eq(2)
   end
 
   it 'responds to #num_sent' do
-    AgileVentures::BulkMailer.new(@opts).should respond_to(:num_sent)
+    expect(AgileVentures::BulkMailer.new(@opts)).to respond_to(:num_sent)
   end
 
   it 'responds to #used_addresses' do
-    AgileVentures::BulkMailer.new(@opts).should respond_to(:used_addresses)
+    expect(AgileVentures::BulkMailer.new(@opts)).to respond_to(:used_addresses)
   end
 
   it 'returns email-addresses' do
     bulk_mailer = AgileVentures::BulkMailer.new(@opts)
     bulk_mailer.run
-    bulk_mailer.used_addresses.sort.should eq(User.all.map(&:email).sort)
+    expect(bulk_mailer.used_addresses.sort).to eq(User.all.map(&:email).sort)
   end
 
   it 'creates and applies instance vars' do
     bulk_mailer = AgileVentures::BulkMailer.new(@opts)
-    bulk_mailer.instance_variables.should include(:@heading &&
+    expect(bulk_mailer.instance_variables).to include(:@heading &&
                                                    :@content &&
                                                    :@subject &&
                                                    :@batch_size
                                                    )
     [:@heading, :@subject].each do |word|
-      bulk_mailer.instance_variable_get(word).should 
-      eq("my #{word.to_s.split('@')[-1]}")
+      expect(bulk_mailer.instance_variable_get(word)).to eq("my #{word.to_s.split('@')[-1]}")
     end
   end
   

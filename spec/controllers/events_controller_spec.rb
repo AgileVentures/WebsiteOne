@@ -117,7 +117,7 @@ describe EventsController do
     end
 
     it 'should require the user to be signed in' do
-      controller.should_receive(:authenticate_user!)
+      expect(controller).to receive(:authenticate_user!)
       post :update, valid_attributes
     end
 

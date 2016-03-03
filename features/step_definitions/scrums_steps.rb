@@ -18,7 +18,7 @@ Then(/^I should see a modal window with the (first|second) scrum$/) do |ord|
 end
 
 Then(/^I should not see a modal window$/) do
-  page.evaluate_script("$('.modal').css('display')").should eq "none"
+  expect(page.evaluate_script("$('.modal').css('display')")).to eq "none"
 end
 
 When(/^I click the first scrum in the timeline$/) do
