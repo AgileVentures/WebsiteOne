@@ -45,7 +45,10 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
-  config.mock_with :rspec
+  config.mock_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+
   config.include Helpers
   config.include Devise::TestHelpers, :type => :controller
   config.include Devise::TestHelpers, :type => :helper
