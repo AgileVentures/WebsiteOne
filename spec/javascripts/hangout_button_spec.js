@@ -48,7 +48,7 @@ describe('hangouts', function(){
               start_data : startData,
               app_type : 'LOCAL_APP'
             }],
-            widget_size: 200
+            widget_size: 72
           });
         });
       });

@@ -1,98 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-#eventContainer {
-  display: flex;
-  flex-flow: row;
-
-}
-
-.eventCards {
-  max-width: 100%;
-  padding: 0;
-  list-style: none;
-}
-
-.card {
-  padding: 5px;
-  border: 1px solid #d5d5d5;
-  max-width: 48% !important;
-  height: 200px;
-  margin: 10px;
-  @include css-border-radius(5px);
-  background: white;
-  opacity: 0.8;
-  @include css-transition(opacity 0.2s ease-in-out);
-}
-
-.card:hover {
-  opacity: 1;
-}
-
-.cardInner {
-  position: relative;
-  padding: 5px;
-  height: 100%;
-  @include css-border-radius(1px);
-  border: 1px solid #d5d5d5;
-}
-
-.cardInner:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.cardInner .boxEvent {
-  margin-top: -15px;
-  width: 70%;
-  position: relative;
-  z-index: 3;
-  display: inline-block;
-  height: 100px;
-
-}
-
-.cardInner b {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFF07F48', endColorstr='#FF000000');
-  background-image: -moz-linear-gradient(top, rgba(240, 127, 72, 0.95) 85%, rgba(240, 127, 72, 1) 100%);
-  background-image: -o-linear-gradient(top, rgba(240, 127, 72, 0.95) 85%, rgba(240, 127, 72, 1) 100%);
-  background-image: -webkit-linear-gradient(top, rgba(240, 127, 72, 0.95) 85%, rgba(240, 127, 72, 1) 100%);
-  background-image: linear-gradient(to bottom, rgba(240, 127, 72, 0.95) 85%, rgba(240, 127, 72, 1) 100%);
-  @include css-border-radius(1px);
-}
-
-.eventTitle a {
-  color: white;
-
-  &:hover, &:active {
-    color: lightgray;
-  }
-}
-
-.eventText {
-  display: inline-block;
-  line-height: 14px;
-  color: $white;
-  z-index: 3;
-  width: 100%;
-}
-
-.eventTime {
-  display: inline-block;
-  font-weight: bold;
-  line-height: 12px;
-  color: white;
-  width: 100%;
-}
-
 .calendar, .eventTitle {
   float: left;
 }
@@ -158,13 +63,6 @@
   margin-right: 0;
 }
 
-.event-live-link {
-  @extend .btn;
-  @extend .btn-success;
-  width: 130px;
-  white-space: normal;
-}
-
 .event-edit-schedule {
   @extend .btn;
   @extend .btn-info;
@@ -172,6 +70,39 @@
   white-space: normal;
 }
 
+.event-live-link {
+  @extend .btn;
+  @extend .btn-success;
+  width: 130px;
+  white-space: normal;
+}
+
+.event-row {
+  @extend .row;
+  border: 1px solid darkslategray;
+  margin: 10px 25px 10px 25px;
+  border-radius: 8px;
+  padding: 0px 25px 10px 25px;
+}
+
+.event-notice {
+  border: 1px solid $theme-main;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 12px 0px 0px 0px;
+
+  a {
+    text-transform: uppercase;
+  }
+}
+
 .event-schedule {
   vertical-align: middle;
+}
+
+.event-title {
+  padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  font-size: x-large;
 }

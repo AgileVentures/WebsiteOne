@@ -4,40 +4,38 @@
   a curious about Pair Programming and Agile.
   <strong>Each event will have a link to an online Hangout prior to start time.</strong></p>
 <% if user_signed_in? %>
-  <div class="row">
-    <%= link_to 'New Event', new_event_path, :class => 'btn btn-default pull-right' %>
-  </div>
+    <div class="row">
+      <%= link_to 'New Event', new_event_path, class: 'btn btn-default pull-right' %>
+    </div>
 <% end %>
+
 <div class="eventContainer">
   <% @events.each_slice(2) do |slice| %>
-    <ul id="eventContainer" class="eventCards">
       <% slice.each do |instance| %>
-        <% event = instance[:event] %>
-        <% time = instance[:time] %>
-        <% prefix = time < Time.now ? 'Started at ' : 'Starts at ' %>
-        <% start_time = format_local_time(time) %>
-        <% display_time = "#{prefix} #{start_time}" %>
-        <% display_month = time.strftime('%B') %>
-        <% display_date = time.strftime('%d') %>
-
-        <li class="card">
-          <div class="cardInner">
-            <div class="calendar">
-              <span class="month"><%= display_month %></span>
-              <span class="date"><%= display_date %></span>
+          <% event = instance[:event] %>
+          <% recent_hangout = event.recent_hangouts.first %>
+          <div class="event-row" id="details">
+            <div class="row">
+              <div class="col-lg-9 col-xs-12 col-sm-9">
+                <div class="event-title"><%= link_to event.name.truncate(50, separator: /\s/), event_path(event) %></div>
+              </div>
+              <div class="col-lg-3 col-xs-12 col-sm-3">
+                <% if recent_hangout && recent_hangout.live? %>
+                    <div class="event-notice pull-right">
+                      <%= link_to 'Event live! Join now', recent_hangout.hangout_url, class: 'btn btn-default pull-right' %>
+                    </div>
+                <% end %>
+              </div>
             </div>
-            <div class="boxEvent">
-              <h2 class="eventTitle"><%= link_to event.name.truncate(30, separator: /\s/), event_path(event) %></h2>
-
-              <p class="eventText"><%= event.description.truncate(70, separator: /\s/) %></p>
-
-              <p class="eventTime"><%=raw display_time %></p>
-
+            <div class="col-lg-4 col-xs-12 col-sm-4">
+              <i class="fa fa-calendar"></i><span class="month"><%= instance[:time].strftime('%a, %b %d, %Y') %></span><br/>
+              <i class="fa fa-clock-o"></i><span><%= raw local_time(event.start_time, '%H:%M') %>-<%= raw local_time(event.instance_end_time, '%H:%M (%Z)') %></span>
             </div>
-            <b class="gradient"></b>
+            <div class="col-lg-8 col-xs-12 col-sm-8">
+              <p><%= event.description.truncate(120, separator: /\s/) %></p>
+            </div>
           </div>
-        </li>
       <% end %>
-    </ul>
   <% end %>
 </div>
+

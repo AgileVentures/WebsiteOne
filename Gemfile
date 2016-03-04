@@ -98,6 +98,8 @@ group :development, :test do
   gem 'guard-cucumber' #plugins for Guard
   gem 'guard-livereload' #plugins for Guard
   gem 'bullet'
+  gem "brakeman", :require => false # detects security vunerabilities in rails apps
+  gem "bundler-audit", :require => false # scans the Gemfile.lock and reports if there are any gems which need to be updated to fix known security issues
 end
 
 group :development, :staging, :production do
