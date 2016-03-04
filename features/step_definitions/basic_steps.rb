@@ -383,5 +383,3 @@ Given(/^I am on a (.*)/) do |device|
   end
   page.driver.headers = { 'User-Agent' => agent }
 end
-
-
