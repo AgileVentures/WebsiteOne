@@ -135,6 +135,11 @@
   display: none;
 }
 
+@media (max-width: $screen-sm-min - 1px) {
+  .float-xs-none {
+    float:none;
+  }
+}
 /* Responsive versions */
 
 /* End of CSS for USER PROFILE page */

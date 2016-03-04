@@ -258,7 +258,7 @@ end
 
 When(/^I click pulldown link "([^"]*)"$/) do |text|
   page.find(:css, '.dropdown .dropdown-menu.dropdown-menu-right .fa-user').click
-  click_link_or_button text
+  first(:link, text).click
 end
 
 Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
