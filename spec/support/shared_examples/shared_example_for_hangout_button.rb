@@ -2,6 +2,7 @@ include ProjectsHelper
 
 shared_examples_for 'it has a hangout button' do
   before do
+    allow_message_expectations_on_nil
     allow(view).to receive(:generate_event_instance_id).and_return('123456')
     allow(view.current_user).to receive(:id).and_return('user_1')
   end

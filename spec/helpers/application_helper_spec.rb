@@ -73,7 +73,7 @@ describe ApplicationHelper do
       @user = stub_model(User)
       @user.stub_chain(:authentications, :where, :first, :id).and_return(100)
       helper.stub(current_user: @user)
-    end
+   end
 
     it 'should render the correct provider' do
       btn_html = helper.social_button 'github'
