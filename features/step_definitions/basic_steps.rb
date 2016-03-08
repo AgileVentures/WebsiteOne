@@ -78,6 +78,26 @@ When(/^I click the "([^"]*)" button$/) do |button|
   click_link_or_button button
 end
 
+When(/^I open the Edit URL controls/) do
+  page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
+end
+
+When(/^I click on the Save button/) do
+  page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
+end
+
+When(/^I click on the Cancel button/) do
+  page.find(:css, %q{button[id="hoa_link_cancel"]}).trigger('click')
+end
+
+Then(/^I should see the Edit URL controls/) do
+  expect(page).to have_css 'div#edit-link-form.collapse.in'
+end
+
+Then(/^I should not see the Edit URL controls/) do
+  expect(page).to have_css 'div#edit-link-form[style*="height: 0px"]'
+end
+
 When(/^I click "([^"]*)" button$/) do |button|
   click_button button
 end

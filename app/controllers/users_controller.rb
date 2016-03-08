@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => [:index, :show]
 
-  before_filter :get_user, only: [:show, :add_status]
+  before_action :get_user, only: [:show, :add_status]
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
