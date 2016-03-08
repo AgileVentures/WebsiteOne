@@ -60,6 +60,9 @@ gem 'sucker_punch' # Single Process Ruby asynchronous processing library
 gem 'twitter', '~> 5.11.0' # twitter api wrapper
 gem 'jvectormap-rails', '~> 1.0.0' #jVectorMap for the Rails asset pipeline
 
+gem 'active_model-errors_details'
+
+
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
   gem 'cucumber-rails', :require => false # Cucmber features
@@ -100,6 +103,7 @@ group :development, :test do
   gem 'bullet'
   gem "brakeman", :require => false # detects security vunerabilities in rails apps
   gem "bundler-audit", :require => false # scans the Gemfile.lock and reports if there are any gems which need to be updated to fix known security issues
+  gem 'constant-redefinition'
 end
 
 group :development, :staging, :production do

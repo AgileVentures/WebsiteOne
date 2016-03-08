@@ -7,6 +7,8 @@ features:
   twitter:
     hangout_notifications:
       enabled: false
+  email_registrations:
+    enabled: true
 
 mailer:
   delivery_method: 'test'
