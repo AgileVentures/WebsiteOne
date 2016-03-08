@@ -63,7 +63,10 @@ class User < ActiveRecord::Base
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+    @omniauth_provider = omniauth['provider']
   end
+
+
 
   def password_required?
     (authentications.empty? || !password.blank?) && super
@@ -139,6 +142,15 @@ class User < ActiveRecord::Base
   def generate_timezone_offset
     if self.latitude && self.longitude
       self.timezone_offset = ActiveSupport::TimeZone.new(NearestTimeZone.to(self.latitude, self.longitude)).utc_offset
+    end
+  end
+
+  validate :email_absence
+
+  def email_absence
+    if email.blank? and not @omniauth_provider.nil?
+      errors.delete(:email)
+      errors.add(:base, "Your #{@omniauth_provider.capitalize} account needs to have a public email address for sign up")
     end
   end
 end

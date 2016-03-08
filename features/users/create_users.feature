@@ -46,10 +46,10 @@ Feature: As a developer
   Scenario: User signs up with a GitHub account having no public email (sad path)
     Given I am on the "registration" page
     When I click "GitHub"
-    Then I should see "Email can't be blank"
+    Then I should see "Your Github account needs to have a public email address for sign up"
 
   @omniauth-without-email
   Scenario: User signs up with a Google+ account having no public email (sad path)
     Given I am on the "registration" page
     When I click "Google+"
-    Then I should see "Email can't be blank"
+    Then I should see "Your Gplus account needs to have a public email address for sign up"
