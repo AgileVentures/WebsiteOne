@@ -13,8 +13,8 @@
   <h4 class="text-center">Already a member? <%= link_to "Sign in", new_session_path(resource_name) %></h4>
   <h4 class="text-center"><%= link_to "Forgot your password?", new_password_path(resource_name) %></h4>
 
-  <% if Rails.env.production? %>
-    <p><small>Email Registrations are temporarily disabled.</small></p>
+  <% unless Features.email_registrations.enabled %>
+    <p><small>Email Registrations are temporarily disabled.  Please sign up via Github or G+ above.</small></p>
   <% else %>
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
         <fieldset>
