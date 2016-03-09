@@ -348,6 +348,10 @@ Then(/^I should see an image with source "([^"]*)"$/) do |source|
   expect(page).to have_css "img[src*=\"#{source}\"]"
 end
 
+Then(/^I should see the github icon$/) do
+  expect(page).to have_css '.fa-github-alt'
+end
+
 Then(/^I should see an video with source "([^"]*)"$/) do |source|
   expect(page).to have_css "iframe[src*=\"#{source}\"]"
 end
