@@ -1,3 +1,7 @@
+Then(/^I debug$/) do
+  require 'byebug'; byebug
+end
+
 def url_for_title(options)
   controller = options[:controller]
   eval("#{controller.capitalize.singularize}.find_by_title('#{options[:title]}').url_for_me(options[:action].downcase)")
