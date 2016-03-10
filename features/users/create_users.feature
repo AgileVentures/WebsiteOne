@@ -47,6 +47,7 @@ Feature: As a developer
     Given I am on the "registration" page
     When I click "GitHub"
     Then I should see "Your Github account needs to have a public email address for sign up"
+    Then I should see the github icon
 
   @omniauth-without-email
   Scenario: User signs up with a Google+ account having no public email (sad path)
