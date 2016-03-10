@@ -1,4 +1,6 @@
 this.EventsUtils = function () {
+
+
     this.ajaxRequest = function () {
         var _this = this;
         if (window.location.href === _this.href) {
@@ -48,6 +50,11 @@ this.EventsUtils = function () {
     };
 };
 
-(new this.EventsUtils).init();
-
-
+$( document ).ready(function() {
+    $('.event-row').css('cursor', 'pointer');
+    $('.event-row').on('click', function(event){
+        var clicked_row = $(this);
+        var href = clicked_row.find('.event-title a')[0].href;
+        window.location.href = href;
+    });
+});
