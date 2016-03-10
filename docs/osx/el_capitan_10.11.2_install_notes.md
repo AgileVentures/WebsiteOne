@@ -1,6 +1,8 @@
 WebSiteOne install
 ————————
 
+:warning: These are notes from @tansaku. Use [the project setup guide](docs/project_setup.md) to setup your own environment. Refer to these notes if you encounter issues mentioned below where solutions are not covered in the project setup guide. :warning:
+
 Fresh 10.11.2 (El Capitan) OSX
 
 1) Using git for the first time prompted installing developer tools
