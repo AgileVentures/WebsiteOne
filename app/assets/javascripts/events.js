@@ -5,7 +5,7 @@ var browserAdapter = {
 };
 
 var events = {
-    bodyClickable : function () {
+    makeRowBodyClickable : function () {
         $('.event-row').css('cursor', 'pointer');
         $('.event-row').on('click', function (event) {
             var clicked_row = $(this);
@@ -16,5 +16,5 @@ var events = {
 }
 
 $(document).ready(function () {
-    events.bodyClickable();
+    events.makeRowBodyClickable();
 });

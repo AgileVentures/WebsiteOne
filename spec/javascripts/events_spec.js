@@ -8,7 +8,7 @@ describe('Events', function () {
                     '</div>'+
                     '</div>'+
                     '</div>');
-        events.bodyClickable();
+        events.makeRowBodyClickable();
     });
 
     it('is clickable anywhere in the row', function () {
