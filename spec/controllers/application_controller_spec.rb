@@ -60,27 +60,22 @@ describe ApplicationController do
   describe "do not store a location if a blacklisted url" do
     it "doesn't accept sign in path" do
       get :new
-      puts "The user session path is #{user_session_path}"
       expect(session[:previous_url]).to be_nil
     end 
     it "doesn't accept sign up path" do
       get :new_user
-      puts "The user session path is #{user_session_path}"
       expect(session[:previous_url]).to be_nil
     end 
     it "doesn't accept new user password path" do
       get :new_password
-      puts "The user session path is #{user_session_path}"
       expect(session[:previous_url]).to be_nil
     end 
     it "doesn't accept sign in" do
       get :signout
-      puts "The user session path is #{user_session_path}"
       expect(session[:previous_url]).to be_nil
     end 
     it "doesn't accept sign in" do
       get :edit_password
-      puts "The user session path is #{user_session_path}"
       expect(session[:previous_url]).to be_nil
     end 
   end
