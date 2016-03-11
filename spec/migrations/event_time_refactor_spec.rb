@@ -1,9 +1,13 @@
 require 'spec_helper'
 load 'db/migrate/20140725131327_event_combine_date_and_time_fields.rb'
 
+ActiveRecord::Migration.verbose = false
+
 describe 'EventCombineDateAndTimeFields', type: :migration do
   describe 'up' do
     before do
+      ActiveRecord::Migration.verbose = false
+
       EventCombineDateAndTimeFields.new.down
       sql= %Q{INSERT INTO events (name, category, repeats, start_time, event_date, end_time, time_zone) VALUES ('test', 'PairProgramming', 'never', TIME'10:00', DATE'2013-06-17', TIME'11:00', 'UTC');}
       ActiveRecord::Base.connection.execute(sql)

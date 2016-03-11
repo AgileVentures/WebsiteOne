@@ -12,6 +12,8 @@ features:
   twitter:
     notifications:
       enabled: false
+  email_registrations:
+    enabled: false
 
 mailer:
   delivery_method: 'test'

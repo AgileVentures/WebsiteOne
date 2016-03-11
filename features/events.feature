@@ -16,9 +16,9 @@ Feature: Events
     And I am on Events index page
     Then I should see "AgileVentures Events"
     And I should see "Scrum"
-    And I should see "Starts at 07:00 - Ends at 09:30 (UTC)"
+    And I should see "07:00-09:30 (UTC)"
     And I should see "PP Session"
-    And I should see "Starts at 10:00 - Ends at 10:15 (UTC)"
+    And I should see "10:00-10:15 (UTC)"
 
   Scenario: Show index of events with a New Event button for logged in user
     Given I am logged in
@@ -34,7 +34,7 @@ Feature: Events
     And I should see "Daily scrum meeting"
     And I should see "Next scheduled event"
     And I should see "Monday, February 03, 2014"
-    And I should see "Starts at 07:00 - Ends at 09:30 (UTC)"
+    And I should see "07:00-09:30 (UTC)"
     And I should not see "Edit"
     And I should not see "Event Actions"
 
@@ -47,7 +47,7 @@ Feature: Events
     And I should see "Daily scrum meeting"
     And I should see "Next scheduled event"
     And I should see "Monday, February 03, 2014"
-    And I should see "Starts at 07:00 - Ends at 09:30 (UTC)"
+    And I should see "07:00-09:30 (UTC)"
     And I should see "Edit"
 
 
@@ -132,8 +132,14 @@ Feature: Events
       | Started at         | 07:00:00 UTC        |
     And I am on Events index page
     Then I should see "Scrum"
-    And I should see "Started at 07:00 - Ends at 09:30 (UTC)"
-    And I should see "This event is now live!"
-    And I should see link "Join now" with "http://hangout.test"
+    And I should see "07:00-09:30 (UTC)"
+    And I should see link "Event live! Join now" with "http://hangout.test"
     Then I should see "PP Session"
-    And I should see "Starts at 10:00 - Ends at 10:15 (UTC)"
+    And I should see "10:00-10:15 (UTC)"
+
+  @javascript
+  Scenario: Body of event is clickable
+    Given the date is "2014/02/01 09:15:00 UTC"
+    And I am on Events index page
+    And I click on the event body for the event named "Scrum"
+    Then I should be on the event "show" page for "Scrum"

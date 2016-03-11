@@ -348,6 +348,10 @@ Then(/^I should see an image with source "([^"]*)"$/) do |source|
   expect(page).to have_css "img[src*=\"#{source}\"]"
 end
 
+Then(/^I should see the "(.*)" icon$/) do |provider|
+  expect(page).to have_css ".fa-#{provider}"
+end
+
 Then(/^I should see an video with source "([^"]*)"$/) do |source|
   expect(page).to have_css "iframe[src*=\"#{source}\"]"
 end
@@ -383,5 +387,3 @@ Given(/^I am on a (.*)/) do |device|
   end
   page.driver.headers = { 'User-Agent' => agent }
 end
-
-

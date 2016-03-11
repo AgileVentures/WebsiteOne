@@ -7,16 +7,16 @@ class PivotalTrackerUrlValidator < ActiveModel::Validator
 
   def validate_pivotal_tracker_url(record)
     url = record.pivotaltracker_url
-    match = url.match(/^(?:https|http|)[:\/]*www\.pivotaltracker\.com\/s\/projects\/(\d+)$/i)
+    match = url.match(/^(?:https|http|)[:\/]*www\.pivotaltracker\.com\/(s|n)\/projects\/(\d+)$/i)
     if match.present?
-      pv_id = match.captures[0]
+      pv_id = match.captures[1]
     elsif url =~ /^\d+$/
       pv_id = url
     end
 
     if pv_id.present?
       # tidy up URL
-      record.pivotaltracker_url = "https://www.pivotaltracker.com/s/projects/#{pv_id}"
+      record.pivotaltracker_url = "https://www.pivotaltracker.com/n/projects/#{pv_id}"
     else
       record.errors[:pivotaltracker_url] << 'Invalid Pivotal Tracker URL'
     end
