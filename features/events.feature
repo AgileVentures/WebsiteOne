@@ -136,3 +136,10 @@ Feature: Events
     And I should see link "Event live! Join now" with "http://hangout.test"
     Then I should see "PP Session"
     And I should see "10:00-10:15 (UTC)"
+
+  @javascript
+  Scenario: Body of event is clickable
+    Given the date is "2014/02/01 09:15:00 UTC"
+    And I am on Events index page
+    And I click on the event body for the event named "Scrum"
+    Then I should be on the event "show" page for "Scrum"
