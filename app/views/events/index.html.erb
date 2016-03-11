@@ -14,7 +14,7 @@
       <% slice.each do |instance| %>
           <% event = instance[:event] %>
           <% recent_hangout = event.recent_hangouts.first %>
-          <div class="event-row" id="details">
+          <div class="event-row" id="details_<%= event.id %>">
             <div class="row">
               <div class="col-lg-9 col-xs-12 col-sm-9">
                 <div class="event-title"><%= link_to event.name.truncate(50, separator: /\s/), event_path(event) %></div>
