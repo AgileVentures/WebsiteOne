@@ -48,6 +48,7 @@ Feature: As a developer
     When I click "GitHub"
     Then I should see "Your Github account needs to have a public email address for sign up"
     Then I should see the github icon
+    And I should not see "Password can't be blank"
 
   @omniauth-without-email
   Scenario: User signs up with a Google+ account having no public email (sad path)
