@@ -149,6 +149,7 @@ class User < ActiveRecord::Base
 
   def email_absence
     if email.blank? and not @omniauth_provider.nil?
+      errors.delete(:password)
       errors.delete(:email)
       errors.add(:base, "Your #{@omniauth_provider.capitalize} account needs to have a public email address for sign up")
     end
