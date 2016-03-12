@@ -1,30 +1,20 @@
-describe('RefreshEventHangout', function () {
+describe('Events', function () {
+
     beforeEach(function () {
-        this.app = new window.EventsUtils();
-        setFixtures(sandbox({id: 'hg-management'}));
+        setFixtures('<div class="event-row" id="details_1">'+
+                    '<div class="row">'+
+                    '<div class="col-lg-9 col-xs-12 col-sm-9">'+
+                    '<div class="event-title"><a href="event_loc">Awesome Event</a></div>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>');
+        events.makeRowBodyClickable();
     });
 
-    /**it('calls refresh every 10 sec', function() {
-      spyOn(window, 'setInterval');
-      spyOn(this.app, 'ajaxRequest');
-      this.app.init();
-      expect(window.setInterval).toHaveBeenCalledWith(this.app.ajaxRequest, 10000);
-    });*/
-
-    it('replaces hg-management section', function () {
-        spyOn(WebsiteOne, 'renderHangoutButton');
-        spyOn(window, 'clearInterval');
-        this.app.updateHangoutsData('hangouts-details-well');
-        expect(window.clearInterval).toHaveBeenCalledWith(this.app.intervalId);
-        expect($('#hg-management').text()).toEqual('hangouts-details-well');
-        expect(WebsiteOne.renderHangoutButton).toHaveBeenCalled();
+    it('is clickable anywhere in the row', function () {
+        var spy = spyOn(browserAdapter, 'jumpTo');
+        $('.event-row').first().trigger('click');
+        expect(spy).toHaveBeenCalledWith('http://' + window.location.host + '/event_loc');
     });
 
-    it('clears refresh repeat if href changes', function () {
-        spyOn(window, 'clearInterval');
-        this.app.href = 'new_href';
-        this.app.ajaxRequest();
-        expect(window.clearInterval).toHaveBeenCalledWith(this.app.intervalId);
-    });
-    
 });
