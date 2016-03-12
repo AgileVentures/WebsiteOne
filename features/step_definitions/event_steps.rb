@@ -7,6 +7,12 @@ Given(/^I am on ([^"]*) index page$/) do |page|
   end
 end
 
+
+Given(/^I click on the event body for the event named "(.*?)"$/) do |name|
+  e = Event.find_by(name: name)
+  page.find(:css, "#details_#{e.id}").click
+end
+
 Given(/^following events exist:$/) do |table|
   table.hashes.each do |hash|
     Event.create!(hash)

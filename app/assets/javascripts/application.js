@@ -25,7 +25,7 @@
 //= stub mercury_init
 //= stub google-analytics
 //= stub disqus
-//= stub events
+//= require events
 //= stub event_instances
 //= require local_time
 //= require jvectormap
