@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
 
   def new
-    @event = Event.new(start_datetime: Time.now.utc, duration: 30)
+    @event = Event.new(new_params)
     @event.set_repeat_ends_string
     @projects = Project.all
   end
@@ -67,5 +67,9 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.friendly.find(params[:id])
+  end
+
+  def new_params
+    params.permit(:name, :category).merge(start_datetime: Time.now.utc, duration: 30)
   end
 end
