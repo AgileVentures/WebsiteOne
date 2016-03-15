@@ -22,7 +22,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 OmniAuth.config.logger.level = Logger::WARN
 
 Capybara.javascript_driver = :poltergeist
-Capybara.default_wait_time = 5
+Capybara.default_max_wait_time = 5
 
 test_options = {
   timeout: 20,
