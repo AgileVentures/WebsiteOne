@@ -1,0 +1,51 @@
+{
+  "name": "WebsiteOne",
+  "description": "A website for AgileVentures",
+  "scripts": {
+  },
+  "env": {
+    "BUILDPACK_URL": {
+      "required": true
+    },
+    "ENABLE_NOTIFICATIONS": {
+      "required": true
+    },
+    "GITHUB_KEY": {
+      "required": true
+    },
+    "GITHUB_SECRET": {
+      "required": true
+    },
+    "GPLUS_KEY": {
+      "required": true
+    },
+    "GPLUS_SECRET": {
+      "required": true
+    },
+    "HANGOUTS_APP_ID": {
+      "required": true
+    },
+    "SLACK_AUTH_TOKEN": {
+      "required": true
+    },
+    "SLACK_NOTIFICATIONS_ENABLED": {
+      "required": true
+    },
+    "SSL_HOST": {
+      "required": true
+    },
+    "TWITTER_NOTIFICATIONS_ENABLED": {
+      "required": true
+    }
+  },
+  "addons": [
+    "airbrake",
+    "sendgrid",
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-ruby"
+    }
+  ]
+}
