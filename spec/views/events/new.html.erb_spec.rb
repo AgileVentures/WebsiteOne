@@ -12,7 +12,7 @@ describe 'events/new' do
     before :each do
       view.stub(:authenticate_user!).and_return(true)
     #  #@controller.view_context.stub(:authenticate_user!).and_return(false)
-    #  view.should_receive(:user_signed_in?).and_return(false)
+    #  expect(view).to receive(:user_signed_in?).and_return(false)
     end
 
     xit 'should redirect to sign in and render a flash error' do
@@ -24,7 +24,7 @@ describe 'events/new' do
   context 'user is signed in' do
     before :each do
       #@controller.view_context.stub(:authenticate_user!).and_return(true)
-      #view.should_receive(:current_user).and_return(mock(:user))
+      #expect(view_.to receive(:current_user).and_return(mock(:user))
     end
 
     it 'should display form with all form elements' do

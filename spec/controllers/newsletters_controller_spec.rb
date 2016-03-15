@@ -94,8 +94,8 @@ describe NewslettersController do
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested newsletter" do
-          newsletter = FactoryGirl.create(:newsletter) 
-          Newsletter.any_instance.should_receive(:update).with({ "title" => "MyString" })
+          newsletter = FactoryGirl.create(:newsletter)
+          expect_any_instance_of(Newsletter).to receive(:update).with({ "title" => "MyString" })
           put :update, {:id => newsletter.to_param, :newsletter => { "title" => "MyString" }}, valid_session
         end
 
