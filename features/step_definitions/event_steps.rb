@@ -43,10 +43,10 @@ end
 Then(/^I should be on the Events "([^"]*)" page$/) do |page|
   case page.downcase
     when 'index'
-      current_path.should eq events_path
+      expect(current_path).to eq events_path
 
     when 'create'
-      current_path.should eq events_path
+      expect(current_path).to eq events_path
     else
       pending
   end
@@ -54,12 +54,12 @@ end
 
 Then(/^I should see multiple "([^"]*)" events$/) do |event|
   #puts Time.now
-  page.all(:css, 'a', text: event, visible: false).count.should be > 1
+  expect(page.all(:css, 'a', text: event, visible: false).count).to be > 1
 end
 
 When(/^the next event should be in:$/) do |table|
   table.rows.each do |period, interval|
-    page.should have_content([period, interval].join(' '))
+    expect(page).to have_content([period, interval].join(' '))
   end
 end
 
@@ -73,9 +73,9 @@ Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
   page.downcase!
   case page
     when 'show'
-      current_path.should eq event_path(event)
+      expect(current_path).to eq event_path(event)
     else
-      current_path.should eq eval("#{page}_event_path(event)")
+      expect(current_path).to eq eval("#{page}_event_path(event)")
   end
 end
 
