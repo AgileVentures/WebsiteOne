@@ -21,7 +21,8 @@ end
 
 Then(/^I should see a preview containing:$/) do |table|
   content = table.raw.flatten
-  page.within_window(page.driver.window_handles.last) do
+  preview_window = windows.last
+  page.within_window preview_window do
     content.each do |text|
       page.should have_text text
     end
