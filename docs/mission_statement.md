@@ -1,19 +1,21 @@
-## [WebsiteOne](http://agileventures.org/)
+# [WebsiteOne](http://agileventures.org/)
+
 ## Mission statement
-#### To provide a platform for online collaboration and crowdsourced project development.
+#### To provide a coordination point for new members hoping to join existing teams, start new projects and connect with charitable causes.
 
 ## Main features
-(for user stories please visit [WebsiteOne on waffle.io](https://waffle.io/AgileVentures/WebsiteOne))
-- Build up and manage a user base
-- Spread AgileVentures mission statement (marketing)
-- Tools for project management
-- Tools for online collaboration
+- Help users join standups
+- Help users take part in pair programming  (e.g. from [edX Agile Development using Ruby on Rails](https://www.edx.org/course/agile-development-using-ruby-rails-uc-berkeleyx-cs169-1x) course)
+- Help users get involved in a project
+- Support out users in achieving their learning and project goals
+- Spread AgileVentures mission statement
 
 ### Get involved
 To get involved please contact Sam Joseph <sam@agileventures.org> or Thomas Ochman <thomas@agileventures.org>
 
 ### Resources
-##### To get to know the different bits and pieces of the project, please acquaint yourself with it by using the following resources:
-- Visit [Agile Ventures site](http://agileventures.org)
-- Visit [WebsiteOne on waffle.io](https://waffle.io/AgileVentures/WebsiteOne)
-- Visit [Staging & developers servers](https://github.com/AgileVentures/WebsiteOne/wiki/Current-staging-servers)
+- [Agile Ventures site](http://agileventures.org)
+- [WebsiteOne on waffle.io](https://waffle.io/AgileVentures/WebsiteOne)
+- [Staging & developers servers](https://github.com/AgileVentures/WebsiteOne/wiki/Current-staging-servers)
+- [Expanded Mission Statement](expanded_mission_statement.md)
+
