@@ -136,64 +136,64 @@ end
 
 ### THEN ###
 Then /^I should be signed in$/ do
-  page.should have_content "Log out"
-  page.should_not have_content "Sign up"
-  page.should_not have_content "Log in"
+  expect(page).to have_content "Log out"
+  expect(page).to_not have_content "Sign up"
+  expect(page).to_not have_content "Log in"
 end
 
 Then /^I should be signed out$/ do
-  page.should have_content "Sign up"
-  page.should have_content "Log in"
-  page.should_not have_content "Log out"
+  expect(page).to have_content "Sign up"
+  expect(page).to have_content "Log in"
+  expect(page).to_not have_content "Log out"
 end
 
 Then /^I see an unconfirmed account message$/ do
-  page.should have_content "You have to confirm your account before continuing."
+  expect(page).to have_content "You have to confirm your account before continuing."
 end
 
 Then /^I see a successful sign in message$/ do
-  page.should have_content "Signed in successfully."
+  expect(page).to have_content "Signed in successfully."
 end
 
 Then /^I should see a successful sign up message$/ do
-  page.should have_content "Welcome! You have signed up successfully."
+  expect(page).to have_content "Welcome! You have signed up successfully."
 end
 
 Then /^I should see an invalid email message$/ do
-  page.should have_content "Email is invalid"
+  expect(page).to have_content "Email is invalid"
 end
 
 Then /^I should see a missing password message$/ do
-  page.should have_content "Password can't be blank"
+  expect(page).to have_content "Password can't be blank"
 end
 
 Then /^I should see a missing password confirmation message$/ do
-  page.should have_content "Password confirmation doesn't match"
+  expect(page).to have_content "Password confirmation doesn't match"
 end
 
 Then /^I should see a mismatched password message$/ do
-  page.should have_content "Password confirmation doesn't match"
+  expect(page).to have_content "Password confirmation doesn't match"
 end
 
 Then /^I should see a signed out message$/ do
-  page.should have_content "Signed out successfully."
+  expect(page).to have_content "Signed out successfully."
 end
 
 Then /^I see an invalid login message$/ do
-  page.should have_content "Invalid email or password."
+  expect(page).to have_content "Invalid email or password."
 end
 
 Then /^I should see an account edited message$/ do
-  page.should have_content "You updated your account successfully."
+  expect(page).to have_content "You updated your account successfully."
 end
 
 Then /^I should (not |)see my name$/ do |should|
   create_user
   # TODO Bryan: refactor to display_name
   if should == 'not '
-    page.should_not have_content @user.presenter.display_name
+    expect(page).to_not have_content @user.presenter.display_name
   else
-    page.should have_content @user.presenter.display_name
+    expect(page).to have_content @user.presenter.display_name
   end
 end
 
@@ -201,9 +201,9 @@ Then /^I should (not |)see my gravatar$/ do |should|
   create_user
   # TODO Bryan: refactor to display_name
   if should == 'not '
-    page.should_not have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
+    expect(page).to_not have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
   else
-    page.should have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
+    expect(page).to have_css 'a[href="' + user_path(@user) + '"] img.projects-user-avatar'
   end
 end
 
@@ -253,7 +253,7 @@ end
 
 When(/^I should see a list of all users$/) do
   #this is up to refactoring. Just a quick fix to get things rolling /Thomas
-  page.should have_content 'All users'
+  expect(page).to have_content 'All users'
 end
 
 When(/^I click pulldown link "([^"]*)"$/) do |text|
@@ -294,9 +294,9 @@ end
 
 Then(/^I (should not|should)? see my email$/) do |option|
   if option == "should"
-    page.should have_content @user.email
+    expect(page).to have_content @user.email
   else
-    page.should_not have_content @user.email
+    expect(page).to_not have_content @user.email
   end
 end
 
@@ -316,7 +316,7 @@ When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
   else
     #uncheck "Display #{value}"
     find("input#user_display_#{value}").set(false)
-    find("input#user_display_#{value}").should_not be_checked
+    expect(find("input#user_display_#{value}")).to_not be_checked
   end
 end
 
@@ -327,7 +327,7 @@ When(/^I set ([^"]*) to be (true|false)?$/) do |value, option|
     check("user_#{value}")
   else
     uncheck "user_#{value}"
-    find("input#user_#{value}").should_not be_checked
+    expect(find("input#user_#{value}")).to_not be_checked
   end
 end
 
@@ -343,9 +343,9 @@ end
 
 Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
   if option == 'should'
-    page.find(:css, "input#user_#{name.underscore}").should be_checked
+    expect(page.find(:css, "input#user_#{name.underscore}")).to be_checked
   else
-    page.find(:css, "input#user_#{name.underscore}").should_not be_checked
+    expect(page.find(:css, "input#user_#{name.underscore}")).to_not be_checked
   end
 end
 
@@ -382,7 +382,7 @@ Given(/^I add a new skill: "(.*)"/) do |skills|
 end
 
 Then(/^I should see skills "(.*)" on my profile/) do |skills|
-  page.all(:css, "#skills-show span").collect { |e| e.text }.sort.should == skills.split(",").sort
+  expect(page.all(:css, "#skills-show span").collect { |e| e.text }.sort).to == skills.split(",").sort
 end
 
 And(/^I have a GitHub profile with username "([^"]*)"$/) do |username|

@@ -45,7 +45,7 @@ describe CustomErrors, type: 'controller' do
     it 'should be able to adjust log stack trace limit' do
       dummy = Class.new
       Rails.stub(logger: dummy)
-      dummy.should_receive(:error).exactly(7)
+      expect(dummy).to receive(:error).exactly(7)
       get :raise_500
     end
 
@@ -53,7 +53,7 @@ describe CustomErrors, type: 'controller' do
       ActionMailer::Base.deliveries.clear
       get :raise_500
 
-      ActionMailer::Base.deliveries.size.should eq 1
+      expect(ActionMailer::Base.deliveries.size).to eq 1
       email = ActionMailer::Base.deliveries[0]
       expect(email.subject).to include 'ERROR'
 
