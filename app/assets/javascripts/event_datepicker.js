@@ -20,6 +20,8 @@ var EventScheduler = {
             case 'weekly':
                 $('#repeats_options').show();
                 $('#repeats_weekly_options').show();
+                $('.event_option').show();
+                EventScheduler.toggle_repeat_ends_on();
                 break;
         }
     },
