@@ -1,4 +1,4 @@
-var EventScheduler = {
+var eventDatepicker = {
     init: function () {
         $('.datepicker').datepicker({
             format: 'yyyy-mm-dd'
@@ -21,7 +21,7 @@ var EventScheduler = {
                 $('#repeats_options').show();
                 $('#repeats_weekly_options').show();
                 $('.event_option').show();
-                EventScheduler.toggle_repeat_ends_on();
+                eventDatepicker.toggle_repeat_ends_on();
                 break;
         }
     },
@@ -40,5 +40,5 @@ var EventScheduler = {
     }
 }
 $(document).on('ready page:load', function () {
-    EventScheduler.init();
+    eventDatepicker.init();
 });
