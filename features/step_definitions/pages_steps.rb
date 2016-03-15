@@ -58,14 +58,14 @@ Given(/^the page "([^"]*)" has a child page with title "([^"]*)"$/) do |parent, 
 end
 
 Then(/^the current page url should be "([^"]*)"$/) do |url|
-  current_path.should == "/#{url}"
+  expect(current_path).to eq "/#{url}"
 end
 
 Then(/^I should see ancestry "([^"]*)"$/) do |str|
   ancestry = str.split(" >> ")
   within("#ancestry") do
     ancestry.each do |a|
-      page.should have_content a
+      expect(page).to have_content a
     end
   end
 end

@@ -39,7 +39,7 @@ describe DocumentsController do
       end
 
       it 'assigns the requested document as @document' do
-        assigns(:document).should eq(document)
+        expect(assigns(:document)).to eq(document)
       end
 
       it 'renders the show template' do
@@ -115,7 +115,7 @@ describe DocumentsController do
     before(:each) { get :new, {project_id: document.project.friendly_id}, valid_session }
 
     it 'assigns a new document as @document' do
-      assigns(:document).should be_a_new(Document)
+      expect(assigns(:document)).to be_a_new(Document)
     end
 
     it 'renders the new template' do
@@ -134,8 +134,8 @@ describe DocumentsController do
 
       it 'assigns a newly created document as @document' do
         post :create, {project_id: document.project.friendly_id, :document => valid_attributes}, valid_session
-        assigns(:document).should be_a(Document)
-        assigns(:document).should be_persisted
+        expect(assigns(:document)).to be_a(Document)
+        expect(assigns(:document)).to be_persisted
       end
 
       it 'redirects to the created document' do
@@ -155,8 +155,8 @@ describe DocumentsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Document.any_instance.stub(:save).and_return(false)
         post :create, {project_id: document.project.friendly_id, :document => { title: 'invalid value' }}, valid_session
-        assigns(:document).should be_a_new(Document)
-        assigns(:document).should_not be_persisted
+        expect(assigns(:document)).to be_a_new(Document)
+        expect(assigns(:document)).to_not be_persisted
       end
 
       it 're-renders the new template' do
@@ -180,7 +180,7 @@ describe DocumentsController do
     it 'redirects to the documents list' do
       id = @document.project.id
       delete :destroy, {:id => @document.to_param, project_id: @document.project.friendly_id}, valid_session
-      response.should redirect_to(project_documents_path(id))
+      expect(response).to redirect_to(project_documents_path(id))
     end
   end
 

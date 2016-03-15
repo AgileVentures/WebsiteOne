@@ -59,7 +59,7 @@ When(/^I click on the "Insert Media" button$/) do
 end
 
 Then(/^the Mercury Editor modal window should (not |)be visible$/) do |visible|
-  page.should have_css '.mercury-modal', visible: visible.blank?
+  expect(page).to have_css '.mercury-modal', visible: visible.blank?
 end
 
 And(/^I am focused on the "([^"]*)"$/) do |item|
