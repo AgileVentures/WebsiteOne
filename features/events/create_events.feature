@@ -34,8 +34,8 @@ Feature: Events
     And I click the "Save" button
     Then I should see "Repeat ends on can't be blank"
     And I fill in event field:
-      | name           | value      |
-      | repeat_ends_on | 2014-03-04 |
+      | name     | value      |
+      | End Date | 2014-03-04 |
     And I click on the "repeat_ends_on" div
     And I click the "Save" button
     Then I should see "Event Created"
