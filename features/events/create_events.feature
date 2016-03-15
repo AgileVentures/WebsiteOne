@@ -8,6 +8,7 @@ Feature: Events
     And I am on Events index page
     When I click "New Event"
 
+  @javascript
   Scenario: Create a new event
     Given I fill in event field:
       | name        | value          |
@@ -15,6 +16,8 @@ Feature: Events
       | Description | something else |
       | Start Date  | 2014-02-04     |
       | Start Time  | 09:00          |
+    And I should not see "End Date"
+    And I click on the "event_date" div
     And I click the "Save" button
     Then I should see "Event Created"
     Then I should be on the event "Show" page for "Whatever"

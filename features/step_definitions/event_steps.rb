@@ -95,5 +95,5 @@ end
 
 
 And(/^I click on the "([^"]*)" div$/) do |arg|
-  find('div.repeat_ends_on').click
+  find("div.#{arg}").click
 end
