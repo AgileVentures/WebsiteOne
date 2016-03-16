@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new(start_datetime: Time.now.utc, duration: 30)
     @event.set_repeat_ends_string
+    @projects = Project.all
   end
 
   def show
@@ -24,6 +25,7 @@ class EventsController < ApplicationController
 
   def edit
     @event.set_repeat_ends_string
+    @projects = Project.all
   end
 
   def create
@@ -36,6 +38,7 @@ class EventsController < ApplicationController
     failure: ->(event) do
       @event = event
       flash[:notice] = @event.errors.full_messages.to_sentence
+      @projects = Project.all
       render :new
     end)
   end
