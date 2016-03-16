@@ -5,6 +5,10 @@ Feature: Events
 
   Background:
     Given I am logged in
+    And the following projects exist:
+      | title | description          | pitch | status | commit_count |
+      | EdX   | greetings earthlings |       | active | 2795         |
+      | WSO   | greetings earthlings |       | active | 2795         |
     And I am on Events index page
     When I click "New Event"
 
@@ -16,11 +20,26 @@ Feature: Events
       | Description | something else |
       | Start Date  | 2014-02-04     |
       | Start Time  | 09:00          |
+    And I select "EdX" from the project dropdown
     And I should not see "End Date"
     And I click on the "event_date" div
     And I click the "Save" button
     Then I should see "Event Created"
     Then I should be on the event "Show" page for "Whatever"
+    And the event named "Whatever" is associated with "EdX"
+
+  Scenario: Create a new event for a different project
+    Given I fill in event field:
+      | name        | value          |
+      | Name        | Whatever       |
+      | Description | something else |
+      | Start Date  | 2014-02-04     |
+      | Start Time  | 09:00          |
+    And I select "WSO" from the project dropdown
+    And I click the "Save" button
+    Then I should see "Event Created"
+    Then I should be on the event "Show" page for "Whatever"
+    And the event named "Whatever" is associated with "WSO"
 
   @javascript
   Scenario: Creating a repeating event requires an end date

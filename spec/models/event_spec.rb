@@ -11,6 +11,7 @@ describe Event, :type => :model do
 
   subject(:event) { build_stubbed :event }
 
+  it { is_expected.to respond_to :project_id }
   it { is_expected.to respond_to :friendly_id }
   it { is_expected.to respond_to :schedule }
   it { is_expected.to respond_to :live? }
