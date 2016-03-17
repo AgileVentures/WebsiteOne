@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   has_many :event_instances
+  belongs_to :project
   serialize :exclusions
 
   extend FriendlyId
