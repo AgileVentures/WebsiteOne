@@ -246,9 +246,9 @@ Then /^the "([^"]*)" field(?: within (.*))? should( not)? contain "([^"]*)"$/ do
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
     field_value ||= ''
     unless negative
-      field_value.should =~ /#{value}/
+      expect(field_value).to match(/#{value}/)
     else
-      field_value.should_not =~ /#{value}/
+      expect(field_value).to_not match(/#{value}/)
     end
   end
 end
@@ -283,7 +283,7 @@ end
 
 When(/^I should see a selector with options$/) do |table|
   table.rows.flatten.each do |option|
-    page.should have_select(:options => [option])
+    expect(page).to have_select(:options => [option])
   end
 end
 
@@ -313,16 +313,16 @@ end
 
 Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, button|
   if should == 'not '
-    page.should_not have_css %Q{a[title="#{button.downcase}"]}
+    expect(page).to_not have_css %Q{a[title="#{button.downcase}"]}
   else
-    page.should have_css %Q{a[title="#{button.downcase}"]}
+    expect(page).to have_css %Q{a[title="#{button.downcase}"]}
   end
 end
 
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
   actual_order = page.all('li.listings-item a').collect(&:text)
-  actual_order.should eq expected_order
+  expect(actual_order).to eq expected_order
 end
 
 Then /^I should see a "([^"]*)" table with:$/ do |name, table|
