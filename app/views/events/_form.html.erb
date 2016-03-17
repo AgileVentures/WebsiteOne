@@ -45,7 +45,7 @@
       </div>
 
       <div class="form-group event_option" id="repeats_options">
-        <%= f.label :repeat_ends, class: 'control-label' %>
+        <%= label_tag 'event_repeat_ends_string', 'Repeat ends', class: 'control-label'%>
         <%= f.select :repeat_ends_string, Event::REPEAT_ENDS_OPTIONS, {}, class: 'form-control' %>
       </div>
 
