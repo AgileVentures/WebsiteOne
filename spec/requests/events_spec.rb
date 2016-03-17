@@ -4,6 +4,7 @@ describe 'Events' do
 
   let(:user){ User.create!(email: 'something_else@email.com', password: '123456789')}
 
+
   before { login }
 
   it 'allows prepopulation of form with name' do
@@ -14,6 +15,12 @@ describe 'Events' do
   it 'allows prepopulation of form with category' do
     visit new_event_path(category: 'Scrum')
     expect(page).to have_select('Category', selected: 'Scrum')
+  end
+
+  it 'allows prepopulation of form with project' do
+    FactoryGirl.create(:project, title: 'edX', slug: 'edx')
+    visit new_event_path(project: 'edx')
+    expect(page).to have_select('Project', selected: 'edX')
   end
 
   def login
