@@ -4,7 +4,6 @@ describe 'Events' do
 
   let(:user){ User.create!(email: 'something_else@email.com', password: '123456789')}
 
-
   before { login }
 
   it 'allows prepopulation of form with name' do

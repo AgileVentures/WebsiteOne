@@ -74,3 +74,4 @@ class EventsController < ApplicationController
     params.permit(:name, :category, :project_id).merge(start_datetime: Time.now.utc, duration: 30)
   end
 end
+
