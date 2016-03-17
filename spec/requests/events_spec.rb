@@ -16,6 +16,12 @@ describe 'Events' do
     expect(page).to have_select('Category', selected: 'Scrum')
   end
 
+  it 'allows prepopulation of form with project' do
+    FactoryGirl.create(:project, title: 'edX', slug: 'edx')
+    visit new_event_path(project: 'edx')
+    expect(page).to have_select('Project', selected: 'edX')
+  end
+
   def login
     visit new_user_session_path
     fill_in 'user_email', with: user.email
