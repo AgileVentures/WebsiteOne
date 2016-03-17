@@ -26,26 +26,26 @@ describe "static_pages/show" do
 
   it 'render page content' do
     render
-    rendered.should have_content @page.title
-    rendered.should have_content @page.body
+    expect(rendered).to have_content @page.title
+    expect(rendered).to have_content @page.body
   end
 
   it 'should not render page revisions history for new pages' do
     render
-    rendered.should_not have_content 'Revisions'
+    expect(rendered).to_not have_content 'Revisions'
   end
 
   it 'should render page revisions history for pages with more than 1 revisions' do
     @page.stub(versions: [ @version, @version ])
     render
-    rendered.should have_content 'Revisions'
+    expect(rendered).to have_content 'Revisions'
   end
 
   it 'renders correct ancestry for static page' do
     render
     rendered.within("#ancestry") do
-      rendered.should have_content "Agile Ventures"
-      rendered.should have_content @page.title
+      expect(rendered).to have_content "Agile Ventures"
+      expect(rendered).to have_content @page.title
     end
   end
 end

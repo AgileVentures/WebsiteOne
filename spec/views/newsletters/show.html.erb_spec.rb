@@ -10,7 +10,7 @@ describe "newsletters/show" do
 
   it "renders attributes in <p>" do
     render
-    rendered.should match(/Title/)
-    rendered.should match(/My Subject/)
+    expect(rendered).to match /Title/
+    expect(rendered).to match /My Subject/
   end
 end
