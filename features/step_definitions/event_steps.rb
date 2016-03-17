@@ -1,3 +1,7 @@
+Then(/^the event is set to end sometime$/) do
+  expect(page).to have_select('event_repeat_ends_string', selected: 'on')
+end
+
 Given(/^I am on ([^"]*) index page$/) do |page|
   case page.downcase
     when 'events'
@@ -87,4 +91,9 @@ When(/^I follow "([^"]*)" for "([^"]*)" "([^"]*)"$/) do |linkid, table_name, hoo
   links = page.all(:css, "table##{table_name} td##{linkid} a")
   link = links[hookup_number.to_i - 1]
   link.click
+end
+
+
+And(/^I click on the "([^"]*)" div$/) do |arg|
+  find('div.repeat_ends_on').click
 end
