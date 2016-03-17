@@ -97,3 +97,12 @@ end
 And(/^I click on the "([^"]*)" div$/) do |arg|
   find("div.#{arg}").click
 end
+
+And(/^I select "([^"]*)" from the project dropdown$/) do |project_name|
+  page.select project_name, from: "Project"
+end
+
+And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, project_title|
+  event = Event.find_by(name: event_name)
+  expect(event.project.title).to eq project_title
+end
