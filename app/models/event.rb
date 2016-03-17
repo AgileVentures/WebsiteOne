@@ -19,11 +19,11 @@ class Event < ActiveRecord::Base
   COLLECTION_TIME_PAST = 15.minutes
 
   REPEATS_OPTIONS = %w[never weekly]
-  REPEAT_ENDS_OPTIONS = %w[never on]
+  REPEAT_ENDS_OPTIONS = %w[on never]
   DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
 
   def set_repeat_ends_string
-    @repeat_ends_string = repeat_ends ? "never" : "on"
+    @repeat_ends_string = repeat_ends ? "on" : "never"
   end
 
   def self.hookups

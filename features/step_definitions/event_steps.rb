@@ -1,3 +1,13 @@
+Given(/^I visit the edit page for the event named "(.*?)"$/) do |event_name|
+  visit edit_event_path(Event.find_by(name: event_name))
+end
+
+Then(/^the "(.*?)" selector should be set to "(.*?)"$/) do |selector, value|
+  #note: expect(page).to have_select(selector, selected: "on") passes right now which encodes the error
+  #delete this after finishing this feature
+  expect(page).to have_select(selector, selected: value)
+end
+
 Then(/^the event is set to end sometime$/) do
   expect(page).to have_select('event_repeat_ends_string', selected: 'on')
 end
