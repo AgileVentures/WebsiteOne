@@ -401,8 +401,6 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_config (0.99.0)
-      config (>= 1.0.0.beta1)
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (4.2.6)
@@ -582,6 +580,7 @@ DEPENDENCIES
   coffee-rails
   colored
   compass-rails
+  config
   constant-redefinition
   coveralls (~> 0.7.9)
   cucumber-rails
@@ -632,7 +631,6 @@ DEPENDENCIES
   rack-timeout
   rails (= 4.2.6)
   rails_12factor
-  rails_config
   redcarpet
   rspec
   rspec-activemodel-mocks
