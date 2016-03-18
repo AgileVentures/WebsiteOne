@@ -17,7 +17,7 @@ gem 'jbuilder' # Json for declaring
 gem 'devise', '~> 3.5.1' # Authentication local and 3rd party
 gem 'bootstrap-sass' # JS Bootstrap library support
 gem 'factory_girl_rails'
-gem 'mercury-rails', github: 'jejacks0n/mercury'
+gem 'mercury-rails', git: 'https://github.com/jejacks0n/mercury.git'
 gem 'faker'
 gem 'omniauth'
 gem 'omniauth-github', '~> 1.1.2'
