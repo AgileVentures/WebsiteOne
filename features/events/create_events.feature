@@ -43,6 +43,7 @@ Feature: Events
 
   @javascript
   Scenario: Creating a repeating event requires an end date
+    Given the date is "2014-02-01"
     Given I fill in event field:
       | name        | value         |
       | Name        | Daily Standup |
