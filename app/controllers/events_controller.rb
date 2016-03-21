@@ -4,8 +4,9 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
 
   def new
-    @event = Event.new(start_datetime: Time.now.utc, duration: 30)
+    @event = Event.new(new_params)
     @event.set_repeat_ends_string
+    @projects = Project.all
   end
 
   def show
@@ -24,6 +25,7 @@ class EventsController < ApplicationController
 
   def edit
     @event.set_repeat_ends_string
+    @projects = Project.all
   end
 
   def create
@@ -36,6 +38,7 @@ class EventsController < ApplicationController
     failure: ->(event) do
       @event = event
       flash[:notice] = @event.errors.full_messages.to_sentence
+      @projects = Project.all
       render :new
     end)
   end
@@ -65,4 +68,10 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.friendly.find(params[:id])
   end
+
+  def new_params
+    params[:project_id] = Project.friendly.find(params[:project]).id.to_s if params[:project]
+    params.permit(:name, :category, :project_id).merge(start_datetime: Time.now.utc, duration: 30, repeat_ends: true)
+  end
 end
+
