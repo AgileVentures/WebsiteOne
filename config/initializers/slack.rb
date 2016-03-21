@@ -1,4 +1,4 @@
 module Slack
-  BOT_URL = 'https://agile-bot.herokuapp.com'
+  BOT_URL = Settings.agile_bot_url
   AUTH_TOKEN = ENV['SLACK_AUTH_TOKEN']
 end

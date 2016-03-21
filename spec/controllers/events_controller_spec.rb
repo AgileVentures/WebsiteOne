@@ -53,7 +53,8 @@ describe EventsController do
   end
 
   describe 'POST create' do
-    let(:valid_attributes) { {id: @event, event: FactoryGirl.attributes_for(:event), start_date: '17 Jun 2013', start_time: '09:00:00 UTC'} }
+    let(:valid_attributes) { {id: @event, event: FactoryGirl.attributes_for(:event).except(:repeat_ends_on),
+        repeat_ends_on: FactoryGirl.attributes_for(:event)[:repeat_ends_on],start_date: '17 Jun 2013', start_time: '09:00:00 UTC'} }
     let(:invalid_attributes) { {id: @event, event: FactoryGirl.attributes_for(:event, name: nil), start_date: '', start_time: ''} }
 
     before :each do
@@ -109,7 +110,9 @@ describe EventsController do
   end
 
   describe 'POST update' do
-    let(:valid_attributes) { {id: @event, event: FactoryGirl.attributes_for(:event, name: 'New Event'), start_date: '17 Jun 2013', start_time: '09:00:00 UTC'} }
+    let(:valid_attributes) { {id: @event, event: FactoryGirl.attributes_for(:event, name: 'New Event').except(:repeat_ends_on),
+                              repeat_ends_on: FactoryGirl.attributes_for(:event, name: "New Event")[:repeat_ends_on],
+                              start_date: '17 Jun 2013', start_time: '09:00:00 UTC'} }
 
 
     before(:each) do
@@ -117,7 +120,7 @@ describe EventsController do
     end
 
     it 'should require the user to be signed in' do
-      controller.should_receive(:authenticate_user!)
+      expect(controller).to receive(:authenticate_user!)
       post :update, valid_attributes
     end
 
