@@ -1,0 +1,31 @@
+---
+:scope: 
+:url: https://www.gravatar.com/avatar/f2a7cfcda90cfa650d3e3e7a465dfd20?s=80&d=retro
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Accept-Ranges: bytes
+  Access-Control-Allow-Origin: "*"
+  Cache-Control: max-age=300
+  Content-Type: image/png
+  Date: Tue, 22 Mar 2016 13:29:31 GMT
+  Expires: Tue, 22 Mar 2016 13:34:31 GMT
+  Last-Modified: Wed, 11 Jan 1984 08:00:00 GMT
+  Link: <https://www.gravatar.com/avatar/f2a7cfcda90cfa650d3e3e7a465dfd20?s=80&d=retro>;
+    rel="canonical"
+  Server: ECS (lcy/1D12)
+  Source-Age: '0'
+  Via: 1.1 varnish
+  X-Cache: HIT
+  X-Varnish: '2210270373'
+  Content-Length: '273'
+  Connection: close
+:content: !binary |-
+  iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAIAAAABc2X6AAAA2ElEQVR4nO3b
+  sQ3CUAwAUQJMwzjswQaU6VOwBzOywHdhyRbR+V4ZJMjJxZcDbMfjdll57c/l
+  9c/7u7z+L9n7vHbezBkZTGcwncF0BtMZTGcwncF0W7QPZ0V7aZWqPXzchA2m
+  M5jOYLqycziSPZ+7n3uPm7DBdAbTGUxnMJ3BdAbTGUx3j16oes6c3W+7P3fc
+  hA2mM5jOYLrwHK7S/b1x1rgJG0xnMJ3BdAbTGUxnMJ3BdOl9OHreW/V/4+z7
+  ZPftcRM2mM5gOoPp2n8vfTbjJmwwncF0BtP9AND1H9YSCbqtAAAAAElFTkSu
+  QmCC
