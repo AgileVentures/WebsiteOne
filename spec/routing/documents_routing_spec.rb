@@ -5,31 +5,31 @@ describe DocumentsController do
 
     # TODO write route tests
     #it "routes to #index" do
-    #  get("/documents").should route_to("documents#index")
+    #  expect(get("/documents")).to route_to("documents#index")
     #end
     #
     #it "routes to #new" do
-    #  get("/documents/new").should route_to("documents#new")
+    #  expect(get("/documents/new")).to route_to("documents#new")
     #end
     #
     #it "routes to #show" do
-    #  get("/documents/1").should route_to("documents#show", :id => "1")
+    #  expect(get("/documents/1")).to route_to("documents#show", :id => "1")
     #end
     #
     #it "routes to #edit" do
-    #  get("/documents/1/edit").should route_to("documents#edit", :id => "1")
+    #  expect(get("/documents/1/edit")).to route_to("documents#edit", :id => "1")
     #end
     #
     #it "routes to #create" do
-    #  post("/documents").should route_to("documents#create")
+    #  expect(post("/documents")).to route_to("documents#create")
     #end
     #
     #it "routes to #update" do
-    #  put("/documents/1").should route_to("documents#update", :id => "1")
+    #  expect(put("/documents/1")).to route_to("documents#update", :id => "1")
     #end
     #
     #it "routes to #destroy" do
-    #  delete("/documents/1").should route_to("documents#destroy", :id => "1")
+    #  expect(delete("/documents/1")).to route_to("documents#destroy", :id => "1")
     #end
 
   end

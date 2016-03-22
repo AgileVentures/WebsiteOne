@@ -3,7 +3,7 @@ module Helpers
   # Used to mimic the same method available in feature testing
   # ex.
   #   rendered.within('section#header') do |header|
-  #     header.should have_link 'Log Out'
+  #     expect(header).to have_link 'Log Out'
   #   end
   # String.class_eval used instead of class String because the latter loads this as a constant, not a method!
   # Some insight to difference here: http://stackoverflow.com/a/10339348/2197402

@@ -26,13 +26,13 @@ describe 'OmniAuth authentication' do
       context "with a #{name} profile" do
         it 'should work with valid credentials' do
           visit new_user_session_path
-          page.should have_content "#{name}"
+          expect(page).to have_content "#{name}"
           expect {
             expect {
               click_link "#{name}"
             }.to change(User, :count).by(1)
           }.to change(Authentication, :count).by(1)
-          page.should have_content('Signed in successfully.')
+          expect(page).to have_content('Signed in successfully.')
         end
 
         it 'should not work with invalid credentials' do
@@ -43,7 +43,7 @@ describe 'OmniAuth authentication' do
               click_link "#{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
-          page.should have_content('invalid_credentials')
+          expect(page).to have_content('invalid_credentials')
         end
 
         it 'should not allow removal of profiles without passwords' do
@@ -57,7 +57,7 @@ describe 'OmniAuth authentication' do
               click_link "Remove #{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
-          page.should have_content 'Bad idea!'
+          expect(page).to have_content 'Bad idea!'
         end
       end
     end
@@ -74,26 +74,26 @@ describe 'OmniAuth authentication' do
 
         it 'finds the right user if auth exists' do
           visit new_user_session_path
-          page.should have_content "#{name}"
+          expect(page).to have_content "#{name}"
           expect {
             expect {
               click_link "#{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
-          page.should have_content('Signed in successfully.')
+          expect(page).to have_content('Signed in successfully.')
         end
 
         it 'should be removable for users with a password' do
           visit new_user_session_path
           click_link "#{name}"
           visit edit_user_registration_path(@user)
-          page.should have_css "input[value='#{@user.email}']"
+          expect(page).to have_css "input[value='#{@user.email}']"
           expect {
             expect {
               click_link "Remove #{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(-1)
-          page.should have_content('Successfully removed profile.')
+          expect(page).to have_content('Successfully removed profile.')
         end
 
         it 'should be able to create other profiles' do
@@ -116,7 +116,7 @@ describe 'OmniAuth authentication' do
               'uid'       => "randomplus#{@uid}"
           }
           visit "/auth/#{provider}"
-          page.should have_content 'Unable to create additional profiles.'
+          expect(page).to have_content 'Unable to create additional profiles.'
         end
       end
     end

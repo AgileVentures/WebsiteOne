@@ -11,7 +11,8 @@ module SlackService
       link: hangout.hangout_url,
       type: hangout.category,
       host_name: hangout.user.display_name,
-      host_avatar: hangout.user.gravatar_url
+      host_avatar: hangout.user.gravatar_url,
+      project: hangout.project.try(:slug)
     }
   end
 
