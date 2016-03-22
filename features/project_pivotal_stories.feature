@@ -1,7 +1,7 @@
 Feature: Adding pivotal tracker stories to projects
     As a site owner
     So that I can provide a better overview over project activities to site users
-    I would like to display projects current sprint activities as they are set in Pivotal Tracker 
+    I would like to display projects current sprint activities as they are set in Pivotal Tracker
 
     Background:
       # And I have access to project iteration with pivitaltracker_id 982890 in PivotalTracker
@@ -21,6 +21,7 @@ Feature: Adding pivotal tracker stories to projects
       Given The project has some stories on Pivotal Tracker
       And I am on the "Show" page for project "WebsiteOne"
       Then I click "Activity"
+      # Then show me the page
       Then I should see a "Current" table with:
         | column     |
         | Type       |

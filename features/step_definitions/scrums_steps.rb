@@ -22,6 +22,7 @@ Then(/^I should not see a modal window$/) do
 end
 
 When(/^I click the first scrum in the timeline$/) do
+  # binding.pry
   title = page.body.gsub(/\n/,'').scan(/<\/i>\s*(.*?)\s*<\/a>/)[0]
   vid = page.body.gsub(/\n/,'').scan(/<a class=\"scrum_yt_link.*?id=\"(.*?)"/).flatten
   page.find(:xpath, "//a[@id=\"#{vid[0]}\"]").click
