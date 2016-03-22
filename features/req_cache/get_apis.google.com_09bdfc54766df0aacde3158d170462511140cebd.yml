@@ -1,0 +1,25 @@
+---
+:scope: 
+:url: https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en_GB.mi-54RH9O4Y.O/m=hangout/exm=auth/rt=j/sv=1/d=1/ed=1/am=AQ/rs=AGLTcCPZBgOkMRa3-00a3pm0y8joiQxISw/cb=gapi.loaded_1
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Content-Type: text/javascript; charset=UTF-8
+  Date: Tue, 22 Mar 2016 05:42:10 GMT
+  Expires: Wed, 22 Mar 2017 05:42:10 GMT
+  Last-Modified: Sat, 19 Mar 2016 09:51:23 GMT
+  X-Content-Type-Options: nosniff
+  Server: sffe
+  Content-Length: '116'
+  X-XSS-Protection: 1; mode=block
+  Cache-Control: public, max-age=31536000
+  Age: '27842'
+  Alternate-Protocol: 443:quic,p=1
+  Alt-Svc: quic=":443"; ma=2592000; v="31,30,29,28,27,26,25"
+  Connection: close
+:content: |
+  /* JS */ gapi.loaded_1(function(_){var window=this;
+  _.iC({0:"hangout",3:{onhangoutcreated:!0}});
+  });
+  // Google Inc.
