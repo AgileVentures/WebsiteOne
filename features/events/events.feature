@@ -75,40 +75,6 @@ Feature: Events
       | 21     | hours    |
       | 45     | minutes  |
 
-  Scenario: Create a new event
-    Given I am logged in
-    And I am on Events index page
-    When I click "New Event"
-    And I fill in event field:
-      | name        | value          |
-      | Name        | Whatever       |
-      | Description | something else |
-      | Start Date  | 2014-02-04     |
-      | Start Time  | 09:00          |
-    And I click the "Save" button
-    Then I should see "Event Created"
-    Then I should be on the event "Show" page for "Whatever"
-
-  Scenario: Creating a repeating event
-    Given I am logged in
-    And I am on Events index page
-    When I click "New Event"
-    And I fill in event field:
-      | name        | value             |
-      | Name        | Daily Scrum       |
-      | Start Date  | 2014-02-04        |
-      | Start Time  | 09:00             |
-      | Description | scrum description |
-    And I select "Repeats" to "weekly"
-    And I check "Monday"
-    And I check "Thursday"
-    And I click the "Save" button
-    Then I should see "Event Created"
-    Then I should be on the event "Show" page for "Daily Scrum"
-    When I dropdown the "Events" menu
-    And I click "Upcoming events"
-    And I should see multiple "Scrum" events
-
   Scenario: Don't save with empty name
     Given I am logged in
     And I am on Events index page

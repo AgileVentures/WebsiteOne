@@ -2,20 +2,20 @@ require 'spec_helper'
 
 describe Newsletter do
   it 'has a valid factory' do
-    FactoryGirl.build(:newsletter).should be_valid
+    expect(FactoryGirl.build(:newsletter)).to be_valid
   end
 
   describe "is invalid" do
     it 'when subejct is empty' do
-      FactoryGirl.build(:newsletter, subject: nil).should_not be_valid
+      expect(FactoryGirl.build(:newsletter, subject: nil)).to_not be_valid
     end
 
     it 'when title is emtpy' do
-      FactoryGirl.build(:newsletter, title: nil).should_not be_valid
+      expect(FactoryGirl.build(:newsletter, title: nil)).to_not be_valid
     end
 
     it 'when body is empty' do
-      FactoryGirl.build(:newsletter, body: nil).should_not be_valid
+      expect(FactoryGirl.build(:newsletter, body: nil)).to_not be_valid
     end
   end
 
@@ -56,7 +56,7 @@ describe Newsletter do
       @newsletter.do_send = true
       @newsletter.save
       @newsletter.reload 
-      @newsletter.sent_at.should be_a(Time)
+      expect(@newsletter.sent_at).to be_a(Time)
     end
 
     it 'updates was_sent to true' do

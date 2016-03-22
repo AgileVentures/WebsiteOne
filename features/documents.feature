@@ -46,12 +46,10 @@ Feature: Manage Document
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
-  #???
     When I click the sidebar link "Guides"
     Then I should be on the "Show" page for document "Guides"
     And I should see "Guides"
     And I should see "New content 0"
-    And I should see a link to "Edit" page for document "Guides"
 
 
   Scenario: A document can have children
