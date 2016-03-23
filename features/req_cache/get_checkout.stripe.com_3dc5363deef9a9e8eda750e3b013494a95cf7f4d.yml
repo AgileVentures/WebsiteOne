@@ -1,0 +1,25 @@
+---
+:scope: 
+:url: https://checkout.stripe.com/api/counter?sample=1&keys=open.inner&prefix=checkout.client
+:body: ''
+:status: 204
+:method: get
+:headers:
+  Server: nginx
+  Cache-Control: private, max-age=0
+  Content-Security-Policy: 'default-src ''self''; connect-src ''self'' https://api.stripe.com
+    wss://verificator.stripe.com wss://verificator-main.stripe.com https://*.stripecdn.com;
+    script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
+    https://stripecdn.com https://api.stripe.com https://maps.googleapis.com https://maps.gstatic.com;
+    style-src ''self'' ''unsafe-inline'' https://cloud.typography.com https://*.stripecdn.com;
+    frame-src ''self'' stripecheckout: bitcoin:; img-src * data:; font-src ''none'';
+    media-src ''none''; object-src ''none'''
+  Strict-Transport-Security: max-age=31556926; includeSubDomains
+  Accept-Ranges: bytes
+  Date: Wed, 23 Mar 2016 16:07:57 GMT
+  Via: 1.1 varnish
+  Connection: close
+  X-Served-By: cache-lcy1131-LCY
+  X-Cache: MISS
+  X-Cache-Hits: '0'
+:content: ''

@@ -33,9 +33,26 @@ Billy.configure do |c|
                      'http://www.google-analytics.com/collect',
                      'http://www.google-analytics.com/r/collect',
                      'http://www.google-analytics.com/__utm.gif',
+                     'https://api.stripe.com/v1/tokens',
+                     'https://talkgadget.google.com/talkgadget/_/widget',
+                     'https://referrer.disqus.com/juggler/event.js',
+                     'https://q.stripe.com/',
+                     'https://js.stripe.com/v2/',
+                     'http://disqus.com/embed/comments/',
+                     'https://checkout.stripe.com/api/bootstrap',
+                     'https://checkout.stripe.com/api/counter',
+                     'https://accounts.google.com/o/oauth2/postmessageRelay',
+                     'https://api.mixpanel.com/track/',
+                     'https://checkout.stripe.com/api/outer/manhattan',
+                     'https://checkout.stripe.com/api/account/lookup',
+                     'https://checkout.stripe.com/',
+                     'https://checkout.stripe.com/v3/zLFRiPN3qLIm2QDkJZxBw.html',
+                     'https://checkout.stripe.com/v3/data/locales/en_gb-TXHkb1MWMa7xOQfCZf1DFA.json',
   ]
   c.persist_cache = true
   c.cache_path = 'features/req_cache/'
+  c.dynamic_jsonp = true
+  c.dynamic_jsonp_keys = ["callback"]
 end
 Billy.proxy.reset_cache
 

@@ -1,4 +1,4 @@
-@javascript
+@javascript @vcr
 Feature:As a site admin
   So that users can pay for premium services
   I would like to be able to charge them money
