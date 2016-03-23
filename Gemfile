@@ -79,9 +79,9 @@ group :test do
   gem 'webmock' # mocking external net connections
   gem 'delorean' # mocking Time in tests, aka time travelling
   gem 'vcr' # records and plays http interactions for testing
-  gem 'shoulda-matchers', require: false #simplifies tests of common Rails functionality
-
-  gem 'capybara-screenshot'
+  gem 'shoulda-matchers', require: false # simplifies tests of common Rails functionality
+  gem 'capybara-screenshot' # creates screenshots from capybara failures
+  gem 'puffing-billy' # sandboxes network connections from javascript browser tests
 end
 
 group :development, :test do
