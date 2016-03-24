@@ -91,5 +91,6 @@ After('@poltergeist', '@desktop', '@tablet', '@smartphone') do
 end
 
 Before('@mercury_step') do
-  Capybara.javascript_driver = :poltergeist_debug
+  Capybara.javascript_driver = :poltergeist_billy_debug
 end
+
