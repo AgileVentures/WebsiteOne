@@ -132,6 +132,7 @@ GEM
       sass-rails (<= 5.0.1)
       sprockets (< 2.13)
     constant-redefinition (1.1.0)
+    cookiejar (0.3.0)
     coveralls (0.7.12)
       multi_json (~> 1.10)
       rest-client (>= 1.6.8, < 2)
@@ -167,12 +168,23 @@ GEM
     docile (1.1.5)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
+    em-http-request (1.1.3)
+      addressable (>= 2.3.4)
+      cookiejar (<= 0.3.0)
+      em-socksify (>= 0.3)
+      eventmachine (>= 1.0.3)
+      http_parser.rb (>= 0.6.0)
+    em-socksify (0.3.1)
+      eventmachine (>= 1.0.0.beta.4)
+    em-synchrony (1.0.4)
+      eventmachine (>= 1.0.0.beta.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.0.7)
+    eventmachine_httpserver (0.2.1)
     exception_notification (4.1.0)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
@@ -336,6 +348,14 @@ GEM
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
+    puffing-billy (0.6.2)
+      addressable
+      em-http-request (~> 1.1.0)
+      em-synchrony
+      eventmachine (~> 1.0.4)
+      eventmachine_httpserver
+      http_parser.rb (~> 0.6.0)
+      multi_json
     puma (2.11.3)
       rack (>= 1.1, < 2.0)
     rack (1.5.5)
@@ -585,6 +605,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
+  puffing-billy
   puma
   rack-cache
   rack-timeout

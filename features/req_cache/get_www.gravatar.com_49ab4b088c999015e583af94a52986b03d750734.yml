@@ -1,0 +1,42 @@
+---
+:scope: 
+:url: https://www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8?s=250&d=retro
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Accept-Ranges: bytes
+  Access-Control-Allow-Origin: "*"
+  Cache-Control: max-age=300
+  Content-Type: image/png
+  Date: Tue, 22 Mar 2016 13:26:40 GMT
+  Expires: Tue, 22 Mar 2016 13:31:40 GMT
+  Last-Modified: Wed, 11 Jan 1984 08:00:00 GMT
+  Link: <https://www.gravatar.com/avatar/23463b99b62a72f26ed677cc556c44e8?s=250&d=retro>;
+    rel="canonical"
+  Server: nginx
+  Source-Age: '3757'
+  Via: 1.1 varnish-v4
+  X-Varnish: 17305311 911411077
+  Content-Length: '847'
+  Connection: close
+:content: !binary |-
+  iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6CAIAAAAHjs1qAAADFklEQVR4nO3c
+  sW0CQRRFUa9FNBmluhJK2dLIiJ05RtYXjLjnFDBa0NUP33Guyxc0fL/7A+B1
+  5E6I3AmROyFyJ0TuhMidELkTIndC5E6I3AmROyFyJ0TuhMidELkTIndC5E6I
+  3AmROyFyJ0TuhMidELkTsumm0v3nMfXU9bamnvp4H/+3u+6EyJ0QuRMid0Lk
+  TojcCZE7IXInRO6EyJ0QuRMid0LkTojcCZE7IXInRO6EyJ0QuRMid0LkTojc
+  CZE7IXIn5DjXpstKUwangj7enltIg1x3QuROiNwJkTshcidE7oTInRC5EyJ3
+  QuROiNwJkTshcidE7oTInRC5EyJ3QuROiNwJkTshcidE7oTInRC5EyJ3QuRO
+  iNwJkTshcidE7oTInRC5EyJ3QuROiNwJkTshcidE7oTInRC5EyJ3QuROiNwJ
+  kTshcidE7oTInRC5EyJ3Qo5zXd79DfAirjshcidE7oTInRC5EyJ3QuROiNwJ
+  kTshcidE7oTInRC5EyJ3QuROiNwJkTshcidE7oTInRC5EyJ3QuROiNwJmdxU
+  uv88pp663tbUU3t+1aA9f+CeX+W6EyJ3QuROiNwJkTshcidE7oTInRC5EyJ3
+  QuROiNwJkTshcidE7oTInRC5EyJ3QuROiNwJkTshcidE7oTInZDjXGPLSoNL
+  OvDHrBL8h9wJkTshcidE7oTInRC5EyJ3QuROiNwJkTshcidE7oTInRC5EyJ3
+  QuROiNwJkTshcidE7oTInRC5EyJ3QsY2lQoG930GWbN6nutOiNwJkTshcidE
+  7oTInRC5EyJ3QuROiNwJkTshcidE7oTInRC5EyJ3QuROiNwJkTshcidE7oTI
+  nRC5EyJ3Qo5zWVZ61p4DRnuOPe3JdSdE7oTInRC5EyJ3QuROiNwJkTshcidE
+  7oTInRC5EyJ3QuROiNwJkTshcidE7oTInRC5EyJ3QuROiNwJkTshZpUIcd0J
+  kTshcidE7oTInRC5EyJ3QuROiNwJkTshcidE7oTInRC5EyJ3QuROiNwJkTsh
+  cidE7oTInRC5EyJ3QuROyC/myyRjKh7UEQAAAABJRU5ErkJggg==
