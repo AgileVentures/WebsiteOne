@@ -120,7 +120,7 @@ Feature: Manage Document
     Then I should see "You do not have the right privileges to complete action."
 
   @javascript
-  Scenario: Document should have a history of changes 
+  Scenario: Document should have a history of changes
     Given I am on the "Show" page for document "Documentation"
     Then I should see "Revisions"
     And I should not see any revisions
