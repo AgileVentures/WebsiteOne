@@ -1,0 +1,15 @@
+---
+:scope: 
+:url: https://referrer.disqus.com/juggler/telemetry/lounge_dynamic.gif?embed=NaN&frame=648&asset=62&render=33&total=832&frame_rtt=0
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Server: nginx
+  Content-Type: image/gif
+  Last-Modified: Mon, 28 Sep 1970 06:00:00 GMT
+  Content-Length: '43'
+  Date: Mon, 28 Mar 2016 01:23:12 GMT
+  Connection: close
+:content: !binary |-
+  R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==
