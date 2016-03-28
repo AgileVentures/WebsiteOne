@@ -6,7 +6,7 @@ describe StaticPage, :type => :model do
   it { is_expected.to be_versioned }
 
   it 'should be valid with all the correct attributes' do
-     expect(subject).to be_valid
+    expect(subject).to be_valid
   end
 
   it 'should be invalid without title' do

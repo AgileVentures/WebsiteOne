@@ -19,6 +19,7 @@ require 'capybara/rspec'
 require 'webmock/rspec'
 require 'capybara-screenshot/rspec'
 require 'public_activity/testing'
+require 'paper_trail/frameworks/rspec'
 
 PublicActivity.enabled = true
 
@@ -89,4 +90,11 @@ RSpec.configure do |config|
   #config.order = "random"
 
   config.infer_spec_type_from_file_location!
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
 end

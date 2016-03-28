@@ -141,7 +141,7 @@ Devise.setup do |config|
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
   # config.email_regexp = /\A[^@]+@[^@]+\z/
-  # 
+  #
   # This regex is try to follow the standard. (This is not support IP address in domain part)
   config.email_regexp = /\A(("[^\f\n\r\t\v\b]+[\s\w\(\),:;<>\[\]@\\!\#$%&'"*+\/=?^`{|}~-]+")|([\w!\#$%&'*+\/=?^`{|}~-]+(?:\.[\w!\#$%&'*+\/=?^`{|}~-]+)*))@((((\w+\-+)|(\w+\.))*\w{1,}\.[a-zA-Z]{2,6})|([a-zA-Z]{2,6}))\z/
 

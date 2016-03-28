@@ -15,7 +15,7 @@ module WebsiteOne
 
     config.action_mailer.delivery_method = Settings.mailer.delivery_method.to_sym
     config.action_mailer.smtp_settings = Settings.mailer.smtp_settings.to_hash
-    config.action_mailer.default_url_options = { :host => Settings.mailer.url_host }
+    config.action_mailer.default_url_options = { host: Settings.mailer.url_host }
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

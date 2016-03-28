@@ -1,0 +1,14 @@
+---
+:scope: 
+:url: https://referrer.disqus.com/juggler/event.js?experiment=network_default_hidden&variant=fallthrough&product=embed&thread=2755338146&thread_id=2755338146&forum=agileventures-dev&forum_id=3053135&zone=thread&version=85ba7336856f5be9db0e468752c2dad5&page_url=http%3A%2F%2F127.0.0.1%3A54482%2Fprojects%2Fhello-mars%2Fdocuments%2Fhowto&service=dynamic&verb=view&object_type=product&object_id=embed&extra_data=%7B%22color_scheme%22%3A%22light%22%2C%22anchor_color%22%3A%22rgb(238%2C115%2C53)%22%2C%22typeface%22%3A%22sans-serif%22%2C%22width%22%3A675%7D&event=activity&imp=8feiie61kisu92&prev_imp=&section=default&area=n%2Fa
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Server: nginx
+  Content-Type: application/javascript
+  Date: Mon, 28 Mar 2016 01:23:22 GMT
+  Connection: close
+  Vary: Accept-Encoding
+:content: |
+  (function () {return {resp: "OK"};})();
