@@ -36,7 +36,7 @@
                                                                       event_instance_id: hangout_uid,
                                                                       event_id: @event.id,
                                                                       category: @event.category,
-                                                                      project_id: '',
+                                                                      project_id: @event.project_id,
                                                                       title: topic(@event, @event_schedule)
                                                               } %>
         </div>
@@ -52,7 +52,7 @@
         <h4>Next scheduled event:</h4>
 
           <div class="calendar-text">
-            <i class="fa fa-calendar"></i><span class="month"><%= @event.start_time.strftime('%A, %B %d, %Y') %></span><br/>
+            <i class="fa fa-calendar"></i><span class="month"><%=  @event.next_event_occurrence_with_time[:time].strftime('%A, %B %d, %Y') %></span><br/>
             <i class="fa fa-clock-o"></i><span><%= raw local_time(@event.start_time, '%H:%M') %>-<%= raw local_time(@event.instance_end_time, '%H:%M (%Z)') %></span><br/>
             <small><i class="fa fa-clock-o"></i><span><%= raw @event.start_time.strftime('%H:%M')%>-<%= raw raw @event.instance_end_time.strftime('%H:%M') %> (UTC)</span></small>
             <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>

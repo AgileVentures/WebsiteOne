@@ -16,31 +16,50 @@ require 'geocoder/lookups/base'
 require 'geocoder/results/freegeoip'
 require 'webmock/cucumber'
 require 'delorean'
+require 'billy/cucumber'
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
 OmniAuth.config.logger.level = Logger::WARN
 
-Capybara.javascript_driver = :poltergeist
-Capybara.default_wait_time = 5
+Capybara.javascript_driver = :poltergeist_billy
+
+Billy.configure do |c|
+  c.cache = true
+  c.ignore_params = ['http://maps.googleapis.com/maps/gen_204',
+                     'http://maps.googleapis.com/maps/api/js/AuthenticationService.Authenticate',
+                     'http://csi.gstatic.com/csi',
+                     'http://maps.gstatic.com/mapfiles/openhand_8_8.cur',
+                     'http://www.google-analytics.com/collect',
+                     'http://www.google-analytics.com/r/collect',
+                     'http://www.google-analytics.com/__utm.gif',
+  ]
+  c.persist_cache = true
+  c.cache_path = 'features/req_cache/'
+end
+Billy.proxy.reset_cache
+
+
+Capybara.default_max_wait_time = 5
 
 test_options = {
-  timeout: 20,
-  phantomjs_options: ['--ignore-ssl-errors=yes'],
-  phantomjs: Phantomjs.path
+    timeout: 20,
+    phantomjs_options: ['--ignore-ssl-errors=yes', "--proxy=#{Billy.proxy.host}:#{Billy.proxy.port}"],
+    phantomjs: Phantomjs.path
 }
 
 debug_options = {
-  inspector: true,
-  timeout: 10,
-  phantomjs: Phantomjs.path
+    inspector: true,
+    timeout: 10,
+    phantomjs_options: ["--proxy=#{Billy.proxy.host}:#{Billy.proxy.port}"],
+    phantomjs: Phantomjs.path
 }
 
-Capybara.register_driver :poltergeist do |app|
+Capybara.register_driver :poltergeist_billy do |app|
   Capybara::Poltergeist::Driver.new app, test_options
 end
 
-Capybara.register_driver :poltergeist_debug do |app|
+Capybara.register_driver :poltergeist_billy_debug do |app|
   Capybara::Poltergeist::Driver.new app, debug_options
 end
 
@@ -50,21 +69,21 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Geocoder.configure(ip_lookup: :test)
 Geocoder::Lookup::Test.add_stub(
-  '127.0.0.1', [
+    '127.0.0.1', [
     {
-      ip: '127.0.0.1',
-      country_code: 'SE',
-      country_name: 'Sweden',
-      region_code: '28',
-      region_name: 'Västra Götaland',
-      city: 'Alingsås',
-      zipcode: '44139',
-      latitude: 57.9333,
-      longitude: 12.5167,
-      metro_code: '',
-      areacode: ''
+        ip: '127.0.0.1',
+        country_code: 'SE',
+        country_name: 'Sweden',
+        region_code: '28',
+        region_name: 'Västra Götaland',
+        city: 'Alingsås',
+        zipcode: '44139',
+        latitude: 57.9333,
+        longitude: 12.5167,
+        metro_code: '',
+        areacode: ''
     }.as_json
-  ]
+]
 )
 
 Before do

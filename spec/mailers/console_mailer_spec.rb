@@ -15,17 +15,17 @@ describe ConsoleMailer do
     let(:mail) { ConsoleMailer.newsletter(@user, valid_params) }
     
     it 'renders the headers' do
-      mail.subject.should eq('specific subject')
-      mail.to.should eq([@user.email])
-      mail.from.should eq(['info@agileventures.org'])
+      expect(mail.subject).to eq('specific subject')
+      expect(mail.to).to eq([@user.email])
+      expect(mail.from).to eq(['info@agileventures.org'])
     end
 
     it 'renders the heading' do
-      mail.body.encoded.should match('my heading')
+      expect(mail.body.encoded).to match('my heading')
     end
 
     it 'renders the body' do
-      mail.body.encoded.should match('my multiline')
+      expect(mail.body.encoded).to match('my multiline')
     end
 
     it 'adds cc to sam' do

@@ -38,7 +38,7 @@ When(/^I click the "([^"]*)" button for document "([^"]*)"$/) do |button, docume
 end
 
 When(/^I should not see the document "([^"]*)"$/) do |title|
-  page.should have_text title, visible: false
+  expect(page).not_to have_selector('title', text: title)
 end
 
 When(/^I click the sidebar link "([^"]*)"$/) do |link|

@@ -15,14 +15,14 @@ describe EventCreatorService do
   context 'on success creates an event' do
     let(:event) { double(:event, save: true) }
     it 'should display a success message' do
-      service.perform(event_params, callback).should == 'success'
+      expect(service.perform(event_params, callback)).to eq 'success'
     end
   end
 
   context 'on failure display error message' do
     let(:event) { double(:event, save: false) }
     it 'should display a failure message' do
-      service.perform(event_params, callback).should == 'failure'
+      expect(service.perform(event_params, callback)).to eq 'failure'
     end
   end
 end
