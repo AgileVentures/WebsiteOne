@@ -55,6 +55,7 @@ Billy.configure do |c|
                      'https://referrer.disqus.com/juggler/event.gif',
                      'https://talkgadget.google.com/talkgadget/_/widget',
                      'http://www.google-analytics.com/r/__utm.gif',
+                     'https://disqus.com/home/preload',
 
 
   ]
