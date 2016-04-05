@@ -31,7 +31,7 @@ end
 
 Given(/^following events exist:$/) do |table|
   table.hashes.each do |hash|
-    hash['project_id'] = Project.find_by(title: hash['project']) if hash['project']
+    hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
     hash.delete('project')
     Event.create!(hash)
   end
