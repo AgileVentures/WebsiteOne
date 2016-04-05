@@ -6,6 +6,8 @@ WebsiteOne::Application.routes.draw do
   resources :activities
   resources :newsletters
 
+  resources :charges
+
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false do
     member do
