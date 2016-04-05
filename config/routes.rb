@@ -36,6 +36,8 @@ WebsiteOne::Application.routes.draw do
       put :mercury_update
       get :mercury_saved
     end
+
+    resources :events, only: [:index]
   end
 
   resources :events, :format => false do

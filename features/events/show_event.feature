@@ -19,16 +19,6 @@ Feature: Events
     And I am on the show page for event "Test"
     Then I should not see "2014"
     And I should see "Monday, February 01, 2016"
-    
-  @time-travel-step
-  Scenario: Show index of events
-    Given the date is "2014/02/01 09:15:00 UTC"
-    And I am on Events index page
-    Then I should see "AgileVentures Events"
-    And I should see "Scrum"
-    And I should see "07:00-09:30 (UTC)"
-    And I should see "PP Session"
-    And I should see "10:00-10:15 (UTC)"
 
   Scenario: Show index of events with a New Event button for logged in user
     Given I am logged in
