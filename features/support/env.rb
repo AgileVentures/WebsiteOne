@@ -48,6 +48,16 @@ Billy.configure do |c|
                      'https://checkout.stripe.com/',
                      'https://checkout.stripe.com/v3/zLFRiPN3qLIm2QDkJZxBw.html',
                      'https://checkout.stripe.com/v3/data/locales/en_gb-TXHkb1MWMa7xOQfCZf1DFA.json',
+                     'http://a.disquscdn.com/uploads/users/20073/6166/avatar92.jpg',
+                     'https://accounts.google.com/o/oauth2/postmessageRelay',
+                     'http://disqus.com/api/3.0/embed/threadDetails.json',
+                     'https://referrer.disqus.com/juggler/event.js',
+                     'https://referrer.disqus.com/juggler/event.gif',
+                     'https://talkgadget.google.com/talkgadget/_/widget',
+                     'http://www.google-analytics.com/r/__utm.gif',
+                     'https://disqus.com/home/preload',
+
+
   ]
   c.persist_cache = true
   c.cache_path = 'features/req_cache/'
