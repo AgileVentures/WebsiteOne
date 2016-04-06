@@ -47,11 +47,12 @@ describe SlackService do
 
     it 'sends a post request to the agile-bot with the proper data' do
       hangout.yt_video_id = 'mock_url'
+      hangout.project = Project.create( slug: 'localsupport')
 
       subject.post_yt_link(hangout)
 
       assert_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify', times: 1) do |req|
-        expect(req.body).to eq "title=MockEvent&video=https%3A%2F%2Fyoutu.be%2Fmock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}"
+        expect(req.body).to eq "title=MockEvent&video=https%3A%2F%2Fyoutu.be%2Fmock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}&project=localsupport"
       end
     end
 
