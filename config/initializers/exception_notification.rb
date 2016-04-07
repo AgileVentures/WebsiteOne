@@ -14,7 +14,8 @@ ExceptionNotification.configure do |config|
   # Notifiers =================================================================
 
   # Email notifier sends notifications by email.
-  config.add_notifier :email, Features.custom_errors.email_notifier.to_hash
+  notifier = config.add_notifier :email, Features.custom_errors.email_notifier.to_hash
+  notifier.deliver_with = :deliver
 
   # Campfire notifier sends notifications to your Campfire room. Requires 'tinder' gem.
   # config.add_notifier :campfire, {

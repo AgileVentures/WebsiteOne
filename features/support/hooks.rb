@@ -57,7 +57,8 @@ After('@omniauth, @omniauth-with-email') do
 end
 
 Before('@scrum_query') do
-  FactoryGirl.create_list(:event_instance, 25, category: 'Scrum', created_at: rand(1.months).seconds.ago, project_id: nil)
+  month_in_seconds = 1.month.seconds.to_i
+  FactoryGirl.create_list(:event_instance, 25, category: 'Scrum', created_at: rand(month_in_seconds).seconds.ago, project_id: nil)
     #VCR.insert_cassette(
   #  'scrums_controller/videos_by_query'
   #)
@@ -73,9 +74,8 @@ Before('@github_query') do
 end
 After('@github_query') { VCR.eject_cassette }
 
-
-Before('@poltergeist') do
-  Capybara.javascript_driver = :poltergeist
+Around('@poltergeist') do |_scenario, block|
+  execute_with_driver(block, :poltergeist)
 end
 
 Before('@desktop') {page.driver.resize(1228, 768)}
@@ -86,11 +86,14 @@ Before('@smartphone') {page.driver.resize(640, 640)}
 
 After('@desktop', '@tablet', '@smartphone') {page.driver.resize(1600, 1200)}
 
-After('@poltergeist', '@desktop', '@tablet', '@smartphone') do
-  Capybara.javascript_driver = :rack_test
+Around('@mercury_step') do |_scenario, block|
+  execute_with_driver(block, :poltergeist_billy_debug)
 end
 
-Before('@mercury_step') do
-  Capybara.javascript_driver = :poltergeist_billy_debug
+def execute_with_driver(block, driver)
+  original_driver = Capybara.javascript_driver
+  Capybara.javascript_driver = driver
+  block.call
+  Capybara.javascript_driver = original_driver
 end
 
