@@ -33,6 +33,7 @@ Billy.configure do |c|
                      'http://www.google-analytics.com/collect',
                      'http://www.google-analytics.com/r/collect',
                      'http://www.google-analytics.com/__utm.gif',
+                     'https://ssl.google-analytics.com/__utm.gif',
                      'https://api.stripe.com/v1/tokens',
                      'https://talkgadget.google.com/talkgadget/_/widget',
                      'https://referrer.disqus.com/juggler/event.js',
