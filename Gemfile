@@ -106,6 +106,7 @@ group :development, :test do
   gem "brakeman", :require => false # detects security vunerabilities in rails apps
   gem "bundler-audit", :require => false # scans the Gemfile.lock and reports if there are any gems which need to be updated to fix known security issues
   gem 'constant-redefinition'
+  gem 'dotenv-rails'
 end
 
 group :development, :staging, :production do
