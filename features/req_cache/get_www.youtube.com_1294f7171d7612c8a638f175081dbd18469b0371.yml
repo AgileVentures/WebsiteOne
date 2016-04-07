@@ -1,0 +1,18 @@
+---
+:scope: 
+:url: http://www.youtube.com/embed/yt_video_id_7?enablejsapi=1
+:body: ''
+:status: 301
+:method: get
+:headers:
+  Date: Thu, 07 Apr 2016 09:00:54 GMT
+  Server: gwiseguy/2.0
+  Location: https://www.youtube.com/embed/yt_video_id_7?enablejsapi=1
+  X-XSS-Protection: 1; mode=block; report=https://www.google.com/appserve/security-bugs/log/youtube
+  X-Content-Type-Options: nosniff
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: no-cache
+  Expires: Tue, 27 Apr 1971 19:44:06 EST
+  Content-Length: '0'
+  Connection: close
+:content: ''

@@ -15,7 +15,7 @@ Feature: Scrums Index
     And I click the first scrum in the timeline
     Then I should see a modal window with the first scrum
 
-  @javascript
+  @javascript @vcr
   Scenario: Closing an existing video and opening a new one should update the player
     Given I visit "/scrums"
     And I click the first scrum in the timeline
