@@ -7,3 +7,7 @@ end
 
 
 After('@scrum_query') {EventInstance.destroy_all }
+
+Before('@javascript') do
+  Capybara.current_driver = :selenium_billy
+end

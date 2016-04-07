@@ -193,7 +193,7 @@ GEM
       http_parser.rb (~> 0.6.0)
     equalizer (0.0.11)
     erubis (2.7.0)
-    eventmachine (1.0.7)
+    eventmachine (1.0.9.1)
     eventmachine_httpserver (0.2.1)
     exception_notification (4.1.0)
       actionmailer (>= 3.0.4)
@@ -520,7 +520,7 @@ GEM
     unf_ext (0.0.7.1)
     uniform_notifier (1.9.0)
     utf8-cleaner (0.0.9)
-    vcr (2.9.3)
+    vcr (3.0.1)
     verbs (2.1.4)
       activesupport (>= 2.3.4)
       i18n

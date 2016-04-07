@@ -1,4 +1,4 @@
-@scrum_query
+@scrum_query @vcr
 Feature: Scrums Index
   As a developer
   So that I can get up to speed on Agile Ventures
