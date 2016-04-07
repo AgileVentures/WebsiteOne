@@ -18,6 +18,8 @@ Given(/^I am on ([^"]*) index page$/) do |page|
       visit events_path
     when 'projects'
       visit projects_path
+    else
+      visit project_events_path(Project.find_by(title: "cs169"))
   end
 end
 
@@ -29,6 +31,8 @@ end
 
 Given(/^following events exist:$/) do |table|
   table.hashes.each do |hash|
+    hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
+    hash.delete('project')
     Event.create!(hash)
   end
 end
