@@ -7,8 +7,8 @@ Feature: Events
     Given I am logged in
     And the following projects exist:
       | title | description          | pitch | status | commit_count |
-      | EdX   | greetings earthlings |       | active | 2795         |
       | WSO   | greetings earthlings |       | active | 2795         |
+      | EdX   | greetings earthlings |       | active | 2795         |
     And I am on Events index page
     When I click "New Event"
 
@@ -27,6 +27,9 @@ Feature: Events
     Then I should see "Event Created"
     Then I should be on the event "Show" page for "Whatever"
     And the event named "Whatever" is associated with "EdX"
+
+  Scenario: Projects should be orderd alphabetically
+    Then I should see "EdX" before "WSO"
 
   Scenario: Create a new event for a different project
     Given I fill in event field:
