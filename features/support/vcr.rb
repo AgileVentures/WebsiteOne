@@ -7,4 +7,5 @@ end
 
 VCR.cucumber_tags do |t|
   t.tag '@vcr', use_scenario_name: true
+  # could mux this to @javascript? or just add @vcr at the top of every feature?
 end
