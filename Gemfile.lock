@@ -253,12 +253,12 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     ice_cube (0.11.1)
-    jasmine (2.3.0)
-      jasmine-core (~> 2.3)
+    jasmine (2.4.0)
+      jasmine-core (~> 2.4)
       phantomjs
       rack (>= 1.2.1)
       rake
-    jasmine-core (2.3.4)
+    jasmine-core (2.4.1)
     jasmine-jquery-rails (2.0.3)
     jbuilder (2.2.16)
       activesupport (>= 3.0.0, < 5)
