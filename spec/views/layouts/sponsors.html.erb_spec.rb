@@ -12,10 +12,10 @@ describe 'layouts/_sponsors' do
 		expect(rendered).to have_link 'Become a supporter', static_page_path('Sponsors')
 	end
 
-	it 'should render the Makers Academy banner' do
+	it 'should render the Craft Academy banner' do
 		render
-		expect(response.body).to have_link('', href: "http://www.makersacademy.com/")
-		expect(response.body).to have_selector('a.sponsorMedal img[src*="makers"]')
+		expect(response.body).to have_link('', href: "http://craftacademy.se/international")
+		expect(response.body).to have_selector('a.sponsorMedal img[src*="craft"]')
   end
 
 	it 'should render the airpair banner' do
