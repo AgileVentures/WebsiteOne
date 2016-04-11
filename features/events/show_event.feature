@@ -11,14 +11,14 @@ Feature: Events
       | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | UTC       |
 
   @time-travel-step
-  Scenario: Show index of events
-    Given the date is "2014/02/01 09:15:00 UTC"
-    And I am on Events index page
-    Then I should see "AgileVentures Events"
-    And I should see "Scrum"
-    And I should see "07:00-09:30 (UTC)"
-    And I should see "PP Session"
-    And I should see "10:00-10:15 (UTC)"
+  Scenario: Date on show page is accurate
+    Given following events exist:
+      | name | description | category | start_datetime          | duration | repeats | time_zone | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
+      | Test | Test        | Scrum    | 2014/02/07 08:00:00 UTC | 15       | weekly  | UTC       | 15                                        |  1                    |
+    And the date is "2016/02/01"
+    And I am on the show page for event "Test"
+    Then I should not see "2014"
+    And I should see "Monday, February 01, 2016"
 
   Scenario: Show index of events with a New Event button for logged in user
     Given I am logged in

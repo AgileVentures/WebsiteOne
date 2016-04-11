@@ -1,0 +1,18 @@
+---
+:scope: 
+:url: http://www.youtube.com/v/yt_video_id_215?version=3&enablejsapi=1
+:body: ''
+:status: 301
+:method: get
+:headers:
+  Date: Tue, 22 Mar 2016 13:30:07 GMT
+  Server: gwiseguy/2.0
+  X-XSS-Protection: 1; mode=block; report=https://www.google.com/appserve/security-bugs/log/youtube
+  Location: https://www.youtube.com/v/yt_video_id_215?version=3&enablejsapi=1
+  Content-Length: '0'
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: no-cache
+  Expires: Tue, 27 Apr 1971 19:44:06 EST
+  X-Content-Type-Options: nosniff
+  Connection: close
+:content: ''

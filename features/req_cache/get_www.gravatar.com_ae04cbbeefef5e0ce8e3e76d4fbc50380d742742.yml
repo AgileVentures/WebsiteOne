@@ -1,0 +1,34 @@
+---
+:scope: 
+:url: https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=120&d=retro
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Accept-Ranges: bytes
+  Access-Control-Allow-Origin: "*"
+  Cache-Control: max-age=300
+  Content-Type: image/png
+  Date: Tue, 22 Mar 2016 13:30:05 GMT
+  Expires: Tue, 22 Mar 2016 13:35:05 GMT
+  Last-Modified: Tue, 23 Mar 2010 23:51:21 GMT
+  Link: <https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=120&d=retro>;
+    rel="canonical"
+  Server: ECS (lcy/1D57)
+  Source-Age: '0'
+  Via: 1.1 varnish
+  X-Cache: HIT
+  X-Varnish: '665767602'
+  Content-Length: '441'
+  Connection: close
+:content: !binary |-
+  iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAIAAAC2BqGFAAABgElEQVR4nO3c
+  sXHCQBBAUcvjeoiI6YFWXIgrc0+QE12wfrox/xUgjj8b7Zx03C73j/y9z7MP
+  8C4KjRQaKTRSaKTQSKGRQiOFRgqNFBr5OvsAr75/j5Hn/FwfI8+Z0kQjhUYK
+  jRQaKTRSaKTQSKGRQiOFRgqNbLfr2G1HMaWJRgqNFBopNFJopNBIoZFCI4VG
+  Co0UGqG7jpU7G1O7DvlbK5popNBIoZFCI4VGCo0UGik0Umik0Eihke3udUy9
+  w7KbJhopNFJopNBIoZFCI4VGCo0UGik0Umhkadex2x0Jaeq/N9FIoZFCI4VG
+  Co0UGik0Umik0EihkUIjY/c6dvum6Mp55B2SJhopNFJopNBIoZFCI4VGCo0U
+  Gik0UmhkbNexsqPYbf8wdeYVTTRSaKTQSKGRQiOFRgqNFBopNFJopNAI/V7H
+  f33PZUUTjRQaKTRSaKTQSKGRQiOFRgqNFBopNHLcLvezz/AWmmik0EihkUIj
+  hUYKjRQaKTRSaKTQSKGRJx7YIvfCO4zZAAAAAElFTkSuQmCC
