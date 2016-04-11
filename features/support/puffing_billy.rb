@@ -15,10 +15,14 @@ Billy.configure do |c|
                      "https://referrer.disqus.com/juggler/event.gif",
                      "http://disqus.com/api/3.0/discovery/listRelated.json",
                      "http://www.google-analytics.com/r/__utm.gif",
-                     "http://disqus.com/api/3.0/timelines/getUnreadCount.json"
+                     "http://disqus.com/api/3.0/timelines/getUnreadCount.json",
+                     "https://ssl.google-analytics.com/__utm.gif",
 
   ]
-  c.merge_cached_responses_whitelist = [/www\.google\-analytics\.com/]
+  c.merge_cached_responses_whitelist = [
+      /google\-analytics/,
+      /disquscdn/
+  ]
   c.persist_cache = true
   c.non_successful_cache_disabled = false
   c.cache_path = 'features/support/fixtures/req_cache/'
