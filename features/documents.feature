@@ -1,3 +1,4 @@
+@vcr
 Feature: Manage Document
   As a project member
   So that I can share my work related to a project

@@ -1,0 +1,43 @@
+---
+:scope: 
+:url: https://a.disquscdn.com/next/61d33ded/home/css/hovercards.css
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Server: nginx
+  Content-Type: text/css; charset=utf-8
+  Last-Modified: Wed, 06 Apr 2016 21:41:53 GMT
+  ETag: '"570582a1-e0d"'
+  Expires: Fri, 06 May 2016 22:27:36 GMT
+  Cache-Control: max-age=2592000
+  Timing-Allow-Origin: "*"
+  Fastly-Debug-Digest: f0fbe4525adf21a354fd226d34d3771b4c4ad96142bce763610348244f90eaa2
+  Content-Length: '3597'
+  Accept-Ranges: bytes
+  Date: Thu, 07 Apr 2016 11:23:26 GMT
+  Connection: close
+  Vary: Accept-Encoding
+:content: '.upvoters-outer:after,.upvoters-outer:before{background-repeat:repeat-x;background-color:rgba(255,255,255,0);content:"";display:block;height:10px;position:absolute;left:0;right:0;z-index:1000;border-radius:5px}.upvoters-outer:before{top:0;background-image:linear-gradient(to
+  bottom,#fff,rgba(255,255,255,0));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=''#ffffffff'',
+  endColorstr=''#00ffffff'', GradientType=0)}.upvoters-outer:after{bottom:0;background-image:linear-gradient(to
+  bottom,rgba(255,255,255,0),#fff);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=''#00ffffff'',
+  endColorstr=''#ffffffff'', GradientType=0)}.upvoters-outer .upvoters.tooltip{max-height:400px;width:213px;padding-right:0;padding-bottom:0;position:relative}.upvoters-outer
+  .upvoters.tooltip .scroll-measure{overflow:hidden;margin-top:-15px;padding-top:15px;font-weight:400;font-style:normal;font-size:15px}.upvoters-outer
+  .upvoters.tooltip .user{margin:0 0 8px;padding:0;height:30px;position:relative;float:left;color:#768187;color:rgba(29,47,58,.6)}.upvoters-outer
+  .upvoters.tooltip .user .avatar{display:block;position:relative;top:0!important;left:0;float:left}.upvoters-outer
+  .upvoters.tooltip .user .avatar img{width:30px;height:30px;min-width:30px!important;min-height:30px!important}.upvoters-outer
+  .upvoters.tooltip .user .username{width:144px;padding:5px 0 0 8px;line-height:1.2em;display:block;font-weight:500;text-overflow:ellipsis;white-space:nowrap;color:inherit;float:left;overflow:hidden}.upvoters-outer
+  .upvoters.tooltip .user .username:hover{color:#000}@-webkit-keyframes new-upvoter-insertion{0%{opacity:0;margin-top:-50px}50%{margin-top:0}100%{opacity:1;margin-top:0}}@keyframes
+  new-upvoter-insertion{0%{opacity:0;margin-top:-50px}50%{margin-top:0}100%{opacity:1;margin-top:0}}.upvoters-outer
+  .upvoters.tooltip .highlight{-webkit-animation-name:new-upvoter-insertion;animation-name:new-upvoter-insertion;-webkit-animation-duration:.75s;animation-duration:.75s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-delay:0;animation-delay:0}@-webkit-keyframes
+  new-upvoter-guest{0%{color:inherit}100%{color:#768187;color:rgba(29,47,58,.6)}}@keyframes
+  new-upvoter-guest{0%{color:inherit}100%{color:#768187;color:rgba(29,47,58,.6)}}.upvoters-outer
+  .upvoters.tooltip li[data-role=guest].highlight{-webkit-animation-name:new-upvoter-guest;animation-name:new-upvoter-guest;-webkit-animation-duration:1.25s;animation-duration:1.25s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-delay:0;animation-delay:0}.tooltip-outer{z-index:1000;position:absolute;top:-20px;left:40px;height:initial}.tooltip-outer
+  .tooltip{opacity:1;position:relative;background:#fff;overflow:auto;width:290px;border-radius:5px;border:3px
+  solid #c2c9d4;padding:8px 8px 0;color:#7f8d99}.tooltip-outer .tooltip-point{width:70px;height:16px;overflow:hidden;position:absolute;margin-left:-35px;z-index:1050}.tooltip-outer
+  .tooltip-point:after{box-shadow:0 0 0 3px #c2c9d4;transform:rotate(45deg)}.tooltip-outer
+  .tooltip-point:after,.tooltip-outer .tooltip-point:before{content:"";position:absolute;background:#FFF;left:20px;top:-20px;width:25px;height:25px;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg)}.tooltip-outer
+  .tooltip-point:before{box-shadow:0 0 0 3px #fff;transform:rotate(45deg)}.tooltip-outer
+  div.point-position-bl{left:41px;bottom:-13px}.tooltip-outer div.point-position-tl{left:41px;top:-13px}.tooltip-outer
+  div.point-position-tl:after,.tooltip-outer div.point-position-tl:before{top:9px}'
