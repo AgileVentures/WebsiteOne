@@ -1,0 +1,28 @@
+---
+:scope: 
+:url: https://www.gravatar.com/avatar/2fe130e635a376d645059fe011298517?s=40&d=retro
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Accept-Ranges: bytes
+  Access-Control-Allow-Origin: "*"
+  Cache-Control: max-age=300
+  Content-Type: image/png
+  Date: Thu, 07 Apr 2016 15:17:30 GMT
+  Expires: Thu, 07 Apr 2016 15:22:30 GMT
+  Last-Modified: Wed, 11 Jan 1984 08:00:00 GMT
+  Link: <https://www.gravatar.com/avatar/2fe130e635a376d645059fe011298517?s=40&d=retro>;
+    rel="canonical"
+  Server: nginx
+  Source-Age: '0'
+  Via: 1.1 varnish
+  X-Varnish: '2601854662'
+  Content-Length: '190'
+  Connection: close
+:content: !binary |-
+  iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAAhUlEQVRYhWP0
+  EotlGAjANCC2jkiLWXBJzC6YDWenTkglyVBi9I68oB4wixlH8/GwtxhnPkYG
+  xORLUvP9yAvqoZOPkeMSGZBano+8oB4c+Zha8UeMOSMvqAdHHCMD5PigpKzG
+  Fd8jL6gHR1mNKz6oBUbz8YAAovIxJWA0Hw+4xaN9p+FvMQBydSgH9l3PXwAA
+  AABJRU5ErkJggg==

@@ -6,12 +6,6 @@ describe User, :type => :model do
 
   subject { build_stubbed :user }
 
-  it { is_expected.to have_many(:status) }
-
-  it { is_expected.to accept_nested_attributes_for :status }
-
-  it { is_expected.to respond_to :status_count }
-
   it 'should have valid factory' do
     expect(FactoryGirl.create(:user)).to be_valid
   end
@@ -35,7 +29,7 @@ describe User, :type => :model do
 
   it 'should reject email addresses identical up to case' do
     upcased_email = subject.email.upcase
-    user = FactoryGirl.create(:user, email: upcased_email)
+    _existing_user = FactoryGirl.create(:user, email: upcased_email)
     expect(build_stubbed(:user, email: subject.email)).not_to be_valid
   end
 

@@ -34,5 +34,5 @@ Then(/^I should see a modal$/) do
 end
 
 Given(/^that there are (\d+) past scrums$/) do |number|
-  FactoryGirl.create_list(:event_instance, number.to_i, category: 'Scrum', created_at: rand(1.months).seconds.ago, project_id: nil)
+  FactoryGirl.create_list(:event_instance, number.to_i, category: 'Scrum', created_at: rand(1.month.to_i).seconds.ago, project_id: nil)
 end
