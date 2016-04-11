@@ -86,7 +86,6 @@ Feature: Manage Document
     Then I should see button "Save" in Mercury Editor
     And I should see button "Cancel" in Mercury Editor
     And I should not see button "New document" in Mercury Editor
-
     When I fill in the editable field "Title" for "document" with "My new title"
     And I fill in the editable field "Body" for "document" with "This is my new body text"
     And I click "Save" in Mercury Editor
