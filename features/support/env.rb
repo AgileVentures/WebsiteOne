@@ -56,9 +56,15 @@ Billy.configure do |c|
                      'https://talkgadget.google.com/talkgadget/_/widget',
                      'http://www.google-analytics.com/r/__utm.gif',
                      'https://disqus.com/home/preload',
+                     'https://www.youtube.com/embed/yt_video_id_6',
+                     'http://www.youtube.com/embed/yt_video_id_6',
+                     'https://www.youtube.com/embed/yt_video_id_7',
+                     'http://www.youtube.com/embed/yt_video_id_7',
 
 
   ]
+  c.merge_cached_responses_whitelist = [],
+  c.non_successful_cache_disabled = false,
   c.persist_cache = true
   c.cache_path = 'features/req_cache/'
   c.dynamic_jsonp = true
