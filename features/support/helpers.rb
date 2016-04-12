@@ -78,7 +78,32 @@ module Helpers
   end
 end
 
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+
+  def has_link_or_button?(page, name)
+    page.has_link?(name) || page.has_button?(name)
+  end
+end
+
+module WaitForAjax
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      loop until finished_all_ajax_requests?
+    end
+  end
+
+  def finished_all_ajax_requests?
+    page.evaluate_script('jQuery.active').zero?
+  end
+end
+
 World(Helpers)
+World(WithinHelpers)
+World(WaitForAjax)
+
 
 class Capybara::Result
   def second

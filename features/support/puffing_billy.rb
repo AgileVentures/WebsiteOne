@@ -17,11 +17,12 @@ Billy.configure do |c|
                      "http://www.google-analytics.com/r/__utm.gif",
                      "http://disqus.com/api/3.0/timelines/getUnreadCount.json",
                      "https://ssl.google-analytics.com/__utm.gif",
-
+                     "https://accounts.google.com/o/oauth2/postmessageRelay",
+                     "https://talkgadget.google.com/talkgadget/_/widget",
   ]
   c.merge_cached_responses_whitelist = [
       /google\-analytics/,
-      /disquscdn/
+      /disquscdn/,
   ]
   c.persist_cache = true
   c.non_successful_cache_disabled = false
