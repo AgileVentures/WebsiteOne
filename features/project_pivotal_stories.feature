@@ -10,7 +10,7 @@ Feature: Adding pivotal tracker stories to projects
         | title      | description    | status | pivotaltracker_url                               |
         | WebsiteOne | Agile Ventures | active | https://www.pivotaltracker.com/s/projects/982890 |
       And there are no videos
-      
+
     Scenario: When a project has no stories
       Given The project has no stories on Pivotal Tracker
       And I am on the "Show" page for project "WebsiteOne"
