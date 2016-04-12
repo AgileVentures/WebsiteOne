@@ -19,6 +19,19 @@ Billy.configure do |c|
                      "https://ssl.google-analytics.com/__utm.gif",
                      "https://accounts.google.com/o/oauth2/postmessageRelay",
                      "https://talkgadget.google.com/talkgadget/_/widget",
+                     'https://api.stripe.com/v1/tokens',
+                     'https://q.stripe.com/',
+                     'https://js.stripe.com/v2/',
+                     'https://checkout.stripe.com/api/bootstrap',
+                     'https://checkout.stripe.com/api/counter',
+                     'https://api.mixpanel.com/track/',
+                     'https://checkout.stripe.com/api/outer/manhattan',
+                     'https://checkout.stripe.com/api/account/lookup',
+                     'https://checkout.stripe.com/',
+                     'https://checkout.stripe.com/v3/zLFRiPN3qLIm2QDkJZxBw.html',
+                     'https://checkout.stripe.com/v3/data/locales/en_gb-TXHkb1MWMa7xOQfCZf1DFA.json',
+                     'http://a.disquscdn.com/uploads/users/20073/6166/avatar92.jpg',
+                     'https://checkout.stripe.com/v3/HciOQ9KeXgLe2kL0jWvVCg.html',
   ]
   c.merge_cached_responses_whitelist = [
       /google\-analytics/,
@@ -28,3 +41,4 @@ Billy.configure do |c|
   c.non_successful_cache_disabled = false
   c.cache_path = 'features/support/fixtures/req_cache/'
 end
+
