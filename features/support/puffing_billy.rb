@@ -36,6 +36,7 @@ Billy.configure do |c|
   c.merge_cached_responses_whitelist = [
       /google\-analytics/,
       /disquscdn/,
+      /www\.gravatar\.com/,
   ]
   c.persist_cache = true
   c.non_successful_cache_disabled = false
