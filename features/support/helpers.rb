@@ -111,6 +111,14 @@ class Capybara::Result
   end
 end
 
+module Capybara
+  class Session
+    def has_link_or_button?(name)
+      has_link?(name) || has_button?(name)
+    end
+  end
+end
+
 class String
   def underscore
     self.gsub(/::/, '/').
