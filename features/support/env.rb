@@ -9,6 +9,7 @@ require 'capybara/poltergeist'
 require 'billy/cucumber'
 require 'cucumber/rspec/doubles'
 require 'webmock/cucumber'
+require 'capybara-screenshot/cucumber'
 
 
 # Capybara defaults to CSS3 selectors rather than XPath.
