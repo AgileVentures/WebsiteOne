@@ -37,6 +37,7 @@ Billy.configure do |c|
       /google\-analytics/,
       /disquscdn/,
       /www\.gravatar\.com/,
+      /youtube\.com\/embed\/yt_video_id/,
   ]
   c.persist_cache = true
   c.non_successful_cache_disabled = false
