@@ -8,7 +8,7 @@ Feature: As a site user
       | first_name  | last_name   | email                   | display_profile |
       | Alice       | Jones       | alice@btinternet.co.uk  |     false       |
       | Bob         | Butcher     | bobb112@hotmail.com     |     true        |
-    
+
   Scenario: User profile should be public by default
     Given I am not logged in
     And I am on the "Our members" page
