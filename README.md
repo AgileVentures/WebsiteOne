@@ -62,7 +62,7 @@ Here are some ways *you* can contribute:
 * by closing [issues][waffle]
 * by [reviewing code][code-climate]
 
-Eager to get started? Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/wiki/Project-Setup-%28New-Users%29)
+Eager to get started? Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)
 page
 
 Please also see our [contribution guidelines](CONTRIBUTING.md)
