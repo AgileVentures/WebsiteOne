@@ -5,6 +5,6 @@ Feature:As a site admin
 
   Scenario: Charge a user
     Given I visit "/charges/new"
-    And I click "Pay with Card"
+    When I click "Pay with Card"
     And I fill in appropriate card details
-    And I should see "Thanks, you paid $5.00!"
+    Then I should see "Thanks, you paid $5.00!"

@@ -64,7 +64,7 @@ describe UsersController, :type => :controller do
       end
 
       it 'it renders an error message when accessing a private profile' do
-        expect{get 'show', id: @user.friendly_id}.to raise_error
+        expect{get 'show', id: @user.friendly_id}.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

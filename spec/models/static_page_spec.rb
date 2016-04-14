@@ -3,7 +3,9 @@ require 'spec_helper'
 describe StaticPage, :type => :model do
   subject { FactoryGirl.create(:static_page) }
 
-  it { is_expected.to be_versioned }
+  it 'is versioned' do
+    expect(Document.ancestors).to include(PaperTrail::Model)
+  end
 
   it 'should be valid with all the correct attributes' do
      expect(subject).to be_valid

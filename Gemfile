@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+
+ruby '2.3.0'
+
 gem 'rails', '4.1.6'
 # Added after upgrade to rails 4.1
 gem 'polyamorous', '~> 1.2.0'
@@ -38,7 +40,7 @@ gem 'verbs'   # language and verbs - not used for now but I plan to use it in Ev
 gem 'ice_cube', '0.11.1'     # used to generate event schedules, locked to last known version not to have memory leaks
 gem 'jquery-turbolinks', '2.0.2'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??
 gem 'addressable'       # used for uri validation
-gem 'pivotal-tracker-api' # used for Pivotal Tracker API v5
+gem 'pivotal-tracker-api', '0.1.9' # used for Pivotal Tracker API v5
 gem 'exception_notification'
 gem 'acts_as_votable', '~> 0.10.0' #Allows WSO to track member's votes on votable objects (articles, comments, ...)
 gem 'utf8-cleaner'
@@ -53,7 +55,7 @@ gem 'rack-cache'
 gem 'eventmachine', '~> 1.0.7'
 
 gem 'local_time', '~> 1.0.3'
-gem 'rails_config' # a gem to manage configuration files
+gem 'config' # a gem to manage configuration files
 gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
 gem 'octokit' # Ruby wrapper for the GitHub API
 gem 'sucker_punch' # Single Process Ruby asynchronous processing library
