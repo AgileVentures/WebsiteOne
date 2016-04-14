@@ -62,6 +62,8 @@ gem 'jvectormap-rails', '~> 1.0.0' #jVectorMap for the Rails asset pipeline
 
 gem 'active_model-errors_details'
 
+gem 'stripe'
+
 
 group :test do
   gem 'capybara' # Simulates user actions for cucumber
@@ -77,9 +79,9 @@ group :test do
   gem 'webmock' # mocking external net connections
   gem 'delorean' # mocking Time in tests, aka time travelling
   gem 'vcr' # records and plays http interactions for testing
-  gem 'shoulda-matchers', require: false #simplifies tests of common Rails functionality
-
-  gem 'capybara-screenshot'
+  gem 'shoulda-matchers', require: false # simplifies tests of common Rails functionality
+  gem 'capybara-screenshot' # creates screenshots from capybara failures
+  gem 'puffing-billy' # sandboxes network connections from javascript browser tests
 end
 
 group :development, :test do
@@ -104,6 +106,7 @@ group :development, :test do
   gem "brakeman", :require => false # detects security vunerabilities in rails apps
   gem "bundler-audit", :require => false # scans the Gemfile.lock and reports if there are any gems which need to be updated to fix known security issues
   gem 'constant-redefinition'
+  gem 'dotenv-rails'
 end
 
 group :development, :staging, :production do

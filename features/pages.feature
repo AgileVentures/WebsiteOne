@@ -24,7 +24,7 @@ Feature: Static pages
   # Sponsors and Guides scenarios not really needed. To be removed later.
   Scenario: See Sponsor Banners
     When I am on the "projects" page
-    Then I should see sponsor banner for "Makers Academy"
+    Then I should see sponsor banner for "Craft Academy"
     Then I should see sponsor banner for "AirPair"
     And I should see sponsor banner for "RubyMine"
     And I should see link "Become a supporter"
