@@ -16,11 +16,11 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = []
-    Event.all.each do |event|
-      @events << event.next_occurrences
-    end
-    @events = @events.flatten.sort_by { |e| e[:time] }
+    project = Project.friendly.find(params[:project_id]) if params[:project_id]
+    all_events = project ? Event.where(project_id: project) : Event.all
+    @events = all_events.inject([]) do |memo, event|
+      memo << event.next_occurrences
+    end.flatten.sort_by { |e| e[:time] }
   end
 
   def edit

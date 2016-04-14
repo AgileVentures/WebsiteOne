@@ -6,6 +6,8 @@ WebsiteOne::Application.routes.draw do
   resources :activities
   resources :newsletters
 
+  resources :charges
+
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show] , :format => false do
     member do
@@ -36,6 +38,8 @@ WebsiteOne::Application.routes.draw do
       put :mercury_update
       get :mercury_saved
     end
+
+    resources :events, only: [:index]
   end
 
   resources :events, :format => false do
