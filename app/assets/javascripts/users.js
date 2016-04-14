@@ -12,6 +12,12 @@ WebsiteOne.define('Users', function () {
         }, 300);
     }
 
+    function enableBootstrapTooltipsOnNonTouchDevices() {
+        if (!('ontouchstart' in document.documentElement)) {
+            $('[data-toggle="tooltip"]').tooltip({delay: { "show": 500, "hide": 100 }});
+        }
+    }
+
     function init() {
         $('.yt_link').on('click', selectVideo);
 
@@ -65,6 +71,8 @@ WebsiteOne.define('Users', function () {
         });
 
         $('#require_users_profile').modal({show: true});
+
+        enableBootstrapTooltipsOnNonTouchDevices();
     }
 
     return {
