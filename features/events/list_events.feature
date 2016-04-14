@@ -30,5 +30,6 @@ Feature: List Events
   Scenario: Choose which project events to display
     And I am on events index page
     And I select "cs169" from the project dropdown
+    And I click "Filter!" button
     Then I should not see "Standup"
     And I should see "PP Session"
