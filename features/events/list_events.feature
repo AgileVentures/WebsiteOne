@@ -1,3 +1,4 @@
+@vcr
 Feature: List Events
   As a site user
   So I can find events relevant to me

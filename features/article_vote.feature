@@ -1,7 +1,8 @@
+@vcr
 Feature:
   As a developer
   So that I may see the ranking of articles
-  I would like to see the vote count on an article 
+  I would like to see the vote count on an article
   And ability to vote up or down an article
 
   Background:
@@ -152,4 +153,3 @@ Feature:
     And I visit "/articles/ruby-is-on-fire/downvote"
     Then I should be on the "Show" page for article "Ruby is on Fire"
     And I should see a Vote value of "-1"
-

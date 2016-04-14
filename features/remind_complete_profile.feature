@@ -1,3 +1,4 @@
+@vcr
 Feature: Remind User complete profile
   As site admin
   In order to increase the quality of our users database
@@ -45,4 +46,3 @@ Feature: Remind User complete profile
     And I visit "projects"
     When I sign in with valid credentials
     Then I should not see "We've noticed that your profile is incomplete."
-

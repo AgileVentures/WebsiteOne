@@ -1,3 +1,4 @@
+@vcr
 Feature: Static pages
   As the site administrator
   So that I can get information across to sites visitors

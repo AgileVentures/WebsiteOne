@@ -1,3 +1,4 @@
+@vcr
 Feature: Events
   As a site user
   In order to be able to plan activities
