@@ -70,3 +70,4 @@ Guardfile
 
 .vagrant/
 tags
+.byebug_history

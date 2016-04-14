@@ -374,7 +374,7 @@ Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, t
       expect(page.body).not_to have_content(/#{title}/m)
     else
       expect(page.body).to have_content(/#{title}/m)
-      end
+    end
   end
 end
 

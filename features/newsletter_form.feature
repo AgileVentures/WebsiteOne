@@ -1,3 +1,4 @@
+@vcr
 Feature: Newsletter form
   As a specific user
   So that I may create a new newsletter
@@ -8,7 +9,7 @@ Feature: Newsletter form
   #
   Background:
     Given the following users exist
-      | first_name  | last_name | email               | 
+      | first_name  | last_name | email               |
       | Chesa       | Boudin    | chesa@example.com   |
       | Noob        | Nobody    | nobody@example.com  |
 
@@ -27,7 +28,7 @@ Feature: Newsletter form
     And I am on my "Profile" page
     Then I should not see link "New Newsletter"
 
-  Scenario: There is no link displayed for Chesa if logged out 
+  Scenario: There is no link displayed for Chesa if logged out
     Given I am on "Profile" page for user "Chesa"
     Then I should not see link "New Newsletter"
 
@@ -69,4 +70,3 @@ Feature: Newsletter form
     Given I am logged in as "Noob"
     When I go to the "new newsletter" page
     Then I should see "Access rejected"
-

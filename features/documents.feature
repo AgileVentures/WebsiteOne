@@ -1,3 +1,4 @@
+@vcr
 Feature: Manage Document
   As a project member
   So that I can share my work related to a project
@@ -85,7 +86,6 @@ Feature: Manage Document
     Then I should see button "Save" in Mercury Editor
     And I should see button "Cancel" in Mercury Editor
     And I should not see button "New document" in Mercury Editor
-
     When I fill in the editable field "Title" for "document" with "My new title"
     And I fill in the editable field "Body" for "document" with "This is my new body text"
     And I click "Save" in Mercury Editor
@@ -95,7 +95,6 @@ Feature: Manage Document
 
   @javascript
   Scenario: Mercury editor Cancel button works
-
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
@@ -120,7 +119,7 @@ Feature: Manage Document
     Then I should see "You do not have the right privileges to complete action."
 
   @javascript
-  Scenario: Document should have a history of changes 
+  Scenario: Document should have a history of changes
     Given I am on the "Show" page for document "Documentation"
     Then I should see "Revisions"
     And I should not see any revisions
@@ -177,16 +176,16 @@ Feature: Manage Document
 
   @javascript
   Scenario: A logged in user could change a document's parent section
-   Given I am logged in
-   And the following documents exist:
+    Given I am logged in
+    And the following documents exist:
       | title         | body             | project     |
       | Decisions     | Examplehere      | hello mars  |
-   And the document "Guides" has a child document with title "Howto"
-   And the document "Guides" has a child document with title "PullRequest"
-   And I am on the "Show" page for document "Howto"
-   When I click the very stylish "Change section" button
-   Then I should see "Select new section for the document"
-   And I should see "Decisions" in "Modal window"
-   When I click "Decisions" in "Modal window"
-   Then I should see "You have successfully moved Howto to the Decisions section"
-   And I should see "Decisions" in "The Breadcrumb"
+    And the document "Guides" has a child document with title "Howto"
+    And the document "Guides" has a child document with title "PullRequest"
+    And I am on the "Show" page for document "Howto"
+    When I click the very stylish "Change section" button
+    Then I should see "Select new section for the document"
+    And I should see "Decisions" in "Modal window"
+    When I click "Decisions" in "Modal window"
+    Then I should see "You have successfully moved Howto to the Decisions section"
+    And I should see "Decisions" in "The Breadcrumb"

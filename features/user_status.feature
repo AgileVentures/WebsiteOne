@@ -1,3 +1,4 @@
+@vcr
 Feature: User status
   As site administrator
   In order to simplify interactions between users
@@ -44,4 +45,3 @@ Feature: User status
     And I select "user_status" to "Ready to pair"
     And I click "Update status"
     Then I should see "Ready to pair"
-    

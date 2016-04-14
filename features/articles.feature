@@ -1,3 +1,4 @@
+@vcr
 Feature:
   As a developer
   So that I may share or retrieve knowledge between the AgileVentures group

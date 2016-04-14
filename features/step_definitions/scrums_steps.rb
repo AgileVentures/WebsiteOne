@@ -21,16 +21,8 @@ Then(/^I should not see a modal window$/) do
   expect(page.evaluate_script("$('.modal').css('display')")).to eq "none"
 end
 
-When(/^I click the first scrum in the timeline$/) do
-  title = page.body.gsub(/\n/,'').scan(/<\/i>\s*(.*?)\s*<\/a>/)[0]
-  vid = page.body.gsub(/\n/,'').scan(/<a class=\"scrum_yt_link.*?id=\"(.*?)"/).flatten
-  page.find(:xpath, "//a[@id=\"#{vid[0]}\"]").click
-end
-
-When(/^I click the second scrum in the timeline$/) do
-  vid = page.body.gsub(/\n/,'').scan(/<a class=\"scrum_yt_link.*?id=\"(.*?)"/).flatten
-  page.find(:xpath, "//a[@id=\"#{vid[1]}\"]").trigger('click')
-  title = page.body.gsub(/\n/,'').scan(/<\/i>\s*(.*?)\s*<\/a>/)[1]
+When(/^I click the (first|second) scrum in the timeline$/) do |ordinal|
+  page.all(:css, "a.scrum_yt_link").send(ordinal.to_sym).click
 end
 
 When(/^I close the modal$/) do
@@ -39,4 +31,8 @@ end
 
 Then(/^I should see a modal$/) do
   expect(page.find("#myModal")[:style]).to eq("display: block; ")
+end
+
+Given(/^that there are (\d+) past scrums$/) do |number|
+  FactoryGirl.create_list(:event_instance, number.to_i, category: 'Scrum', created_at: rand(1.months).seconds.ago, project_id: nil)
 end
