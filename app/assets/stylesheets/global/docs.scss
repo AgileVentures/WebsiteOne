@@ -41,6 +41,9 @@ section.doc-preview {
   width: 100%;
   margin: 0;
   position: relative;
+  @media (max-width: $screen-sm-min - 1px) {
+    padding:0px;
+  }
 }
 
 .tab-content {
