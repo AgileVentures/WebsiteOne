@@ -27,6 +27,7 @@ end
 
 When(/^I close the modal$/) do
   page.find(:css,'.close').click
+  expect(page).not_to have_css('.close')
 end
 
 Then(/^I should see a modal$/) do
