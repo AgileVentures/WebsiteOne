@@ -2,6 +2,10 @@ Then(/^I debug$/) do
   require 'byebug'; byebug
 end
 
+Then(/^I JS debug$/) do
+  page.driver.debug
+end
+
 def url_for_title(options)
   controller = options[:controller]
   eval("#{controller.capitalize.singularize}.find_by_title('#{options[:title]}').url_for_me(options[:action].downcase)")
@@ -338,6 +342,10 @@ end
 
 Then(/^I check "([^"]*)"$/) do |item|
   check item
+end
+
+Then(/^I check by value "([^"]*)"$/) do |value|
+  find(:css, "input[value='#{value}']").set(true)
 end
 
 When(/^I refresh the page$/) do
