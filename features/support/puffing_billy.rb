@@ -32,6 +32,7 @@ Billy.configure do |c|
                      'https://checkout.stripe.com/v3/data/locales/en_gb-TXHkb1MWMa7xOQfCZf1DFA.json',
                      'http://a.disquscdn.com/uploads/users/20073/6166/avatar92.jpg',
                      'https://checkout.stripe.com/v3/HciOQ9KeXgLe2kL0jWvVCg.html',
+                     'http://csi.gstatic.com/csi',
   ]
   c.merge_cached_responses_whitelist = [
       /google\-analytics/,
