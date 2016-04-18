@@ -120,3 +120,7 @@ And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, 
   event = Event.find_by(name: event_name)
   expect(event.project.title).to eq project_title
 end
+
+And(/^the timezone is set$/) do
+  ENV['TZ'] = "Europe/London"
+end
