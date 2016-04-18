@@ -12,7 +12,7 @@
         <%= submit_tag "Filter by Project", {:class => 'btn btn-default'} %>
       </div>
       <div class="col-lg-65 col-xs-12 col-sm-6">
-        <%= select_tag :project_id, options_from_collection_for_select(@projects.sort, "id", "title", @project.try(:id).try(:to_s)), prompt: "All", class: 'form-control' %>
+        <%= select_tag :project_id, options_from_collection_for_select(@projects.sort_by(&:title), "id", "title", @project.try(:id).try(:to_s)), prompt: "All", class: 'form-control' %>
       </div>
       <div class="col-lg-2 col-xs-12 col-sm-2">
       </div>

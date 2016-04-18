@@ -29,7 +29,7 @@ Feature: Events
     Then I should be on the event "Show" page for "Whatever"
     And the event named "Whatever" is associated with "EdX"
 
-  Scenario: Projects should be orderd alphabetically
+  Scenario: Projects should be ordered alphabetically
     Then I should see "EdX" before "WSO"
 
   Scenario: Create a new event for a different project
