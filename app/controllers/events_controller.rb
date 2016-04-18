@@ -16,8 +16,8 @@ class EventsController < ApplicationController
   end
 
   def index
-    project = Project.friendly.find(params[:project_id]) if params[:project_id]
-    all_events = project ? Event.where(project_id: project) : Event.all
+    @project = Project.friendly.find(params[:project_id]) if params[:project_id]
+    all_events = @project ? Event.where(project_id: @project) : Event.all
     @projects = Project.all
     @events = all_events.inject([]) do |memo, event|
       memo << event.next_occurrences

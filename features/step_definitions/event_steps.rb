@@ -120,3 +120,8 @@ And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, 
   event = Event.find_by(name: event_name)
   expect(event.project.title).to eq project_title
 end
+
+And(/^"([^"]*)" is selected in the project dropdown$/) do |project_slug|
+  project_id = Project.friendly.find(project_slug).id
+  expect(find("#project_id").value).to eq project_id.to_s
+end

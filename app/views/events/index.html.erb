@@ -5,7 +5,7 @@
   <strong>Each event will have a link to an online Hangout prior to start time.</strong></p>
 <%= form_tag(events_path, :id => "events_search", :method => "get") do %>
     <%= label_tag :project_id, "Project", class: 'control-label' %>
-    <%= select_tag :project_id, options_from_collection_for_select(@projects.sort, "id", "title"), class: 'form-control' %>
+    <%= select_tag :project_id, options_from_collection_for_select(@projects.sort, "id", "title", @project.try(:id).try(:to_s)), class: 'form-control' %>
     <%= submit_tag "Filter!", {:class => 'btn btn-info'} %>
 <% end %>
 

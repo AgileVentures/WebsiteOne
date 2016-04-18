@@ -7,6 +7,7 @@ Feature: List Events
   Background:
     Given the following projects exist:
       | title | description          | pitch | status |
+      | auto  |  blah                |       | active |
       | cs169 | greetings earthlings |       | active |
     Given following events exist:
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project |
@@ -33,3 +34,4 @@ Feature: List Events
     And I click "Filter!" button
     Then I should not see "Standup"
     And I should see "PP Session"
+    And "cs169" is selected in the project dropdown
