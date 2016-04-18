@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @project = Project.friendly.find(params[:project_id]) if params[:project_id]
+    @project = Project.friendly.find(params[:project_id]) unless params[:project_id].blank?
     all_events = @project ? Event.where(project_id: @project) : Event.all
     @projects = Project.all
     @events = all_events.inject([]) do |memo, event|

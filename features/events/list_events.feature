@@ -17,6 +17,9 @@ Feature: List Events
 
   Scenario: Show index of events
     And I am on Events index page
+    Then "All" is selected in the project dropdown
+    And I select "All" from the project dropdown
+    And I click "Filter by Project" button
     Then I should see "AgileVentures Events"
     And I should see "Standup"
     And I should see "07:00-09:30 (UTC)"
@@ -31,7 +34,7 @@ Feature: List Events
   Scenario: Choose which project events to display
     And I am on events index page
     And I select "cs169" from the project dropdown
-    And I click "Filter!" button
+    And I click "Filter by Project" button
     Then I should not see "Standup"
     And I should see "PP Session"
     And "cs169" is selected in the project dropdown

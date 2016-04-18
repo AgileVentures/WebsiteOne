@@ -1,18 +1,28 @@
 <% provide :title, 'Events' %>
-<h1>AgileVentures Events</h1>
+<h1>AgileVentures Events <%= link_to 'New Event', new_event_path, class: 'btn btn-default pull-right' %></h1>
 <p>We are hosting several events a day using Google Hangouts. Feel free to join in if you want to get involved or if you
   a curious about Pair Programming and Agile.
   <strong>Each event will have a link to an online Hangout prior to start time.</strong></p>
+
 <%= form_tag(events_path, :id => "events_search", :method => "get") do %>
-    <%= label_tag :project_id, "Project", class: 'control-label' %>
-    <%= select_tag :project_id, options_from_collection_for_select(@projects.sort, "id", "title", @project.try(:id).try(:to_s)), class: 'form-control' %>
-    <%= submit_tag "Filter!", {:class => 'btn btn-info'} %>
+    <div class="row">
+      <div class="col-lg-2 col-xs-12 col-sm-2">
+      </div>
+      <div class="col-lg-2 col-xs-12 col-sm-2">
+        <%= submit_tag "Filter by Project", {:class => 'btn btn-default'} %>
+      </div>
+      <div class="col-lg-65 col-xs-12 col-sm-6">
+        <%= select_tag :project_id, options_from_collection_for_select(@projects.sort, "id", "title", @project.try(:id).try(:to_s)), prompt: "All", class: 'form-control' %>
+      </div>
+      <div class="col-lg-2 col-xs-12 col-sm-2">
+      </div>
+    </div>
 <% end %>
 
 <% if user_signed_in? %>
     <div class="row">
-      <%= link_to 'New Event', new_event_path, class: 'btn btn-default pull-right' %>
-    </div>
+
+</div>
 <% end %>
 
 <div class="eventContainer">
