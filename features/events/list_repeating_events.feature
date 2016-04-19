@@ -16,7 +16,7 @@ Feature: List Events
   @javascript
   Scenario: Show correct timezone
     Given the date is "2016/05/01 09:15:00 UTC"
-    And the timezone is set
+    And the browser is in "Europe/London" and the server is in UTC
     And I am on events index page
     Then I should see "Standup"
     And I should see "08:00-10:30 (BST)"

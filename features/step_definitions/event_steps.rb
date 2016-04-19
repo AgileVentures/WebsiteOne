@@ -121,6 +121,8 @@ And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, 
   expect(event.project.title).to eq project_title
 end
 
-And(/^the timezone is set$/) do
-  ENV['TZ'] = "Europe/London"
+Given(/^the browser is in "([^"]*)" and the server is in UTC$/) do |tz|
+  ENV['TZ'] = tz
+  visit root_path
+  ENV['TZ'] = 'UTC'
 end
