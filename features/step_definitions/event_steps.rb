@@ -124,5 +124,6 @@ end
 Given(/^the browser is in "([^"]*)" and the server is in UTC$/) do |tz|
   ENV['TZ'] = tz
   visit root_path
+  sleep(5)
   ENV['TZ'] = 'UTC'
 end
