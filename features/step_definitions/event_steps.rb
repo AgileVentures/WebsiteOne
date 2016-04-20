@@ -127,3 +127,7 @@ Given(/^the browser is in "([^"]*)" and the server is in UTC$/) do |tz|
   sleep(5)
   ENV['TZ'] = 'UTC'
 end
+
+And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
+  expect(page).to have_css "time[datetime='#{datetime}']"
+end
