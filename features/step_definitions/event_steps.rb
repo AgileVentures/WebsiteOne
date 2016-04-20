@@ -52,12 +52,6 @@ Given(/^following events exist for project "([^"]*)" with active hangouts:$/) do
   end
 end
 
-Given(/^following hangouts exist:$/) do |table|
-  table.hashes.each do |hash|
-    EventInstance.create!(hash)
-  end
-end
-
 Then(/^I should be on the Events "([^"]*)" page$/) do |page|
   case page.downcase
     when 'index'
