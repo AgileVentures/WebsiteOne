@@ -62,11 +62,7 @@ class EventsController < ApplicationController
   private
 
   def specified_project
-    @project = Project.friendly.find(params[:project_id]) if project_specified?
-  end
-
-  def project_specified?
-    not params[:project_id].blank?
+    @project = Project.friendly.find(params[:project_id]) unless params[:project_id].blank?
   end
 
   def list_all_upcoming_events_with_repeats_by(project = nil)

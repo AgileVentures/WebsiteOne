@@ -4,12 +4,12 @@
   a curious about Pair Programming and Agile.
   <strong>Each event will have a link to an online Hangout prior to start time.</strong></p>
 
-<%= form_tag(events_path, :id => "events_search", :method => "get", :class => "form-inline text-center") do %>
-    <div class="form-group">
-      <%= submit_tag "Filter by Project", {:class => 'btn btn-default'} %>
-    </div>
+<%= form_tag(events_path, :id => "events_search", :method => "get", :class => "form-inline text-left") do %>
     <div class="form-group">
       <%= select_tag :project_id, options_from_collection_for_select(@projects.sort_by(&:title), "id", "title", @project.try(:id).try(:to_s)), prompt: "All", class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag "Filter by Project", {:class => 'btn btn-default'} %>
     </div>
 <% end %>
 
