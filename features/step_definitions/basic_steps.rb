@@ -2,6 +2,10 @@ Then(/^I debug$/) do
   require 'byebug'; byebug
 end
 
+Then(/^I JS debug$/) do
+  page.driver.debug
+end
+
 def url_for_title(options)
   controller = options[:controller]
   eval("#{controller.capitalize.singularize}.find_by_title('#{options[:title]}').url_for_me(options[:action].downcase)")
@@ -340,6 +344,10 @@ Then(/^I check "([^"]*)"$/) do |item|
   check item
 end
 
+Then(/^I check by value "([^"]*)"$/) do |value|
+  find(:css, "input[value='#{value}']").set(true)
+end
+
 When(/^I refresh the page$/) do
   visit current_url
 end
@@ -374,7 +382,7 @@ Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, t
       expect(page.body).not_to have_content(/#{title}/m)
     else
       expect(page.body).to have_content(/#{title}/m)
-      end
+    end
   end
 end
 

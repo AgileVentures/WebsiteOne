@@ -12,15 +12,12 @@ Then /^I (am|should be) on the static "([^"]*)" page$/ do |option, page|
   case option
     when 'am'
       visit static_page_path(page)
-
     when 'should be'
       expect(current_path).to eq static_page_path(page)
-
     else
       pending
   end
 end
-
 When(/^I (try to use|am using) the Mercury Editor to edit static "([^"]*)" page$/) do |opt, title|
   visit "/editor#{static_page_path(title)}"
 end

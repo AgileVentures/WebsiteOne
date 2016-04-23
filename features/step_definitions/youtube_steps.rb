@@ -53,7 +53,7 @@ Given(/^the project "(.*?)" has (\d+) videos of user "(.*?)"$/) do |project_titl
   user ||= FactoryGirl.create :user, first_name: names[0], last_name: names[1]
   count.to_i.times do |n|
     FactoryGirl.create :event_instance, title: "PP on #{project_title} - feature: #{n}",
-      project: project, user: user, created_at: Time.new('2014', '04', '15').utc.beginning_of_day + n.minutes
+                       project: project, user: user, created_at: Time.new('2014', '04', '15').utc.beginning_of_day + n.minutes
   end
 end
 

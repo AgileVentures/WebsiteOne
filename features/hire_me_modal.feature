@@ -1,4 +1,4 @@
-@javascript
+@javascript @vcr
 Feature: As a member of the Agile Ventures team
   To provide employment opportunities to team members
   We want to provide a "Hire Me" button for visitors to be able to contact members

@@ -1,3 +1,4 @@
+@vcr
 Feature: Setting up basic page layout for site
   As a user
   So that I can navigate the site
@@ -37,7 +38,7 @@ Feature: Setting up basic page layout for site
     And I should see "Our Sponsors" in footer
     And I should see "Contact us" in footer
 
-  @poltergeist @desktop
+  @javascript @desktop
   Scenario: Show Sponsors on desktop computer
     Given I am on a desktop
     And I am on Events index page
@@ -45,7 +46,7 @@ Feature: Setting up basic page layout for site
     And I am on Projects index page
     Then I should see the supporter content
 
-  @poltergeist @tablet
+  @javascript @tablet
   Scenario: Hide Sponsors from Tablets
     Given I am on a tablet
     And I am on Events index page
@@ -53,7 +54,7 @@ Feature: Setting up basic page layout for site
     And I am on Projects index page
     Then I should not see the supporter content
 
-  @poltergeist @smartphone
+  @javascript @smartphone
   Scenario: Hide Sponsors from Smartphones
     Given I am on a smartphone
     And I am on Events index page
@@ -61,21 +62,20 @@ Feature: Setting up basic page layout for site
     And I am on Projects index page
     Then I should not see the supporter content
 
-  @poltergeist @desktop
+  @javascript @desktop
   Scenario: Show Round banners on desktop computer
     Given I am on a tablet
     And I visit the site
     Then I should see the round banners
 
-  @poltergeist @tablet
+  @javascript @tablet
   Scenario: Hide Round banners from Tablets
     Given I am on a tablet
     And I visit the site
     Then I should not see the round banners
 
-  @poltergeist @smartphone
+  @javascript @smartphone
   Scenario: Hide Round banners from Smartphones
     Given I am on a smartphone
     And I visit the site
     Then I should not see the round banners
-
