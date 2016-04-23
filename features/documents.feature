@@ -152,7 +152,7 @@ Feature: Manage Document
     Then I should see an image with source "/assets/mercury/missing-image.png" within the Mercury Editor
     Then the Mercury Editor modal window should not be visible
 
-  @javascript
+  @javascript @intermittent-ci-js-fail
   Scenario: Insert media model accepts full url youtube links
     Given I am logged in
     And I am using the Mercury Editor to edit document "Guides"
@@ -165,7 +165,7 @@ Feature: Manage Document
     Then the Mercury Editor modal window should not be visible
     And I should see an video with source "http://www.youtube.com/embed/foo?wmode=transparent" within the Mercury Editor
 
-  @javascript
+  @javascript @intermittent-ci-js-fail
   Scenario: Insert media model rejects badly formatted youtube links
     Given I am logged in
     And I am using the Mercury Editor to edit document "Guides"
