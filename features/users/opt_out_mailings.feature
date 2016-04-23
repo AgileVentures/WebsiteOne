@@ -1,3 +1,4 @@
+@vcr
 Feature: As a site user
   In order to opt-out of mailings
   I want to be able to toggle email retrieval settings
@@ -22,10 +23,8 @@ Feature: As a site user
   Scenario: A logged in user should be able to toggle mail receival
     Given I am logged in as "Bob"
     And I am on my "Edit Profile" page
-    When I set Receive mailings to be false 
+    When I set Receive mailings to be false
     And I click "Update"
-    And I am on my "Profile" page 
-    And I click "Edit" 
+    And I am on my "Profile" page
+    And I click "Edit"
     Then "Receive mailings" should not be checked
-
-

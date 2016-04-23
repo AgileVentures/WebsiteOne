@@ -1,4 +1,4 @@
-@javascript
+@javascript @vcr
 Feature: Events
   As a site user
   In order to be able to update planned activities

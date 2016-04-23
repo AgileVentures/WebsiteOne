@@ -1,3 +1,4 @@
+@vcr
 Feature: As a user of the site
   In order to get to know other users
   I want to be able to view a user profile page with information about the user.
@@ -51,5 +52,4 @@ Feature: As a user of the site
       | title         |
       | hello world   |
       | hello jupiter |
-
 

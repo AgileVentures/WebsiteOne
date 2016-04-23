@@ -6,7 +6,7 @@
                 <%= presenter.gravatar_image(size: 80,
                                              class: 'img-rounded media-object pull-left') %>
                 <div class="media-body index-summary">
-                  <p class="media-heading"><%= presenter.display_name %>
+                  <p class="media-heading" data-toggle="tooltip" title="<%= presenter.display_name %>"><%= presenter.display_name %>
                     <% if user.online? %>
                         <%= image_tag('green-dot.png', size: '10x10', alt: 'Online!') %>
                     <% end %></p>
@@ -14,7 +14,7 @@
                       <p><%= presenter.title_list %></p>
                   <% end %>
                   <% if user.country_name %>
-                      <p><%= presenter.country_name %></p>
+                      <p data-toggle="tooltip" title="<%= presenter.country_name %>"><%= presenter.country_name %></p>
                   <% end %>
                 </div>
               </a>

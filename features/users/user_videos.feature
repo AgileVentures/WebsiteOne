@@ -1,3 +1,4 @@
+@vcr
 Feature: As a site user
   In order to know the videos started by a member
   I would like to see these videos at the member profile
