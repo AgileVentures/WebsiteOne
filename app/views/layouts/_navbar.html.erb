@@ -94,13 +94,13 @@
             </li>
 
             <% if user_signed_in? %>
-                <li class="hidden-sm">
-                  <a class="hidden-sm" href="<%= user_path(current_user) %>">
+                <li class="visible-xs">
+                  <a href="<%= user_path(current_user) %>">
                     <i class="fa fa-user fa-custom-accounts"></i> My account
                   </a>
                 </li>
-                <li class="hidden-sm">
-                    <a class="hidden-sm" href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
+                <li class="visible-xs">
+                    <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
                       <i class="fa fa-sign-out fa-custom-accounts"></i> Log out
                     </a>
                 </li>
