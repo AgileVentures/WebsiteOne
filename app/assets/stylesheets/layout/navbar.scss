@@ -98,9 +98,12 @@ $gravatar-size: 35px;
 
 .navbar-toggle {
   outline: 0;
+  @media (max-width: $screen-sm-min - 1px) {
+    background-color: $theme-main;
+  }
 }
 
-@media (min-width: 767px) {
+@media (min-width: $screen-sm-min - 1px) {
   .navbar-nav.nav-justified > li {
     float: none;
   }
@@ -112,6 +115,10 @@ header#main_header {
   background: $theme-main;
   height: $header-height;
   color: $white;
+
+  @media (max-width: $screen-sm-min - 1px) {
+    margin-bottom:0px !important;
+  }
 
   h1, h2, h3 a, a, a:hover {
     color: $white;
@@ -177,6 +184,16 @@ header#main_header {
     }
   }
 
+  .navbar-inverse, .navbar-toggle:hover {
+    margin-left:5px;
+    margin-top:8px;
+    background-color: $theme-main;
+  }
+
+  .navbar-toggle, .navbar-toggle:active {
+    background-color: $theme-main;
+  }
+
   #login-signup a {
     @include css-border-radius(0);
     padding: 0 15px;
@@ -189,7 +206,7 @@ header#main_header {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: $screen-sm-min) {
   #nav {
     height: auto;
 

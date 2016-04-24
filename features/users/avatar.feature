@@ -1,3 +1,4 @@
+@vcr
 Feature:  In order to make my personal avatar visible to other users
   As a registered user
   I want to link my avatar image to my account

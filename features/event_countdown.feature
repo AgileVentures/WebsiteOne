@@ -1,3 +1,4 @@
+@vcr
 Feature: Events
   As the site administrator
   In order to help my members plan their time

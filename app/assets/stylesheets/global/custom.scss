@@ -38,6 +38,17 @@ html, body {
 #main {
   padding-bottom: 40px;
   padding-top: 70px;
+
+  @media (max-width: $screen-lg-min - 1px) {
+      padding-top:0px;
+  }
+}
+
+@media (max-width: 978px) {
+  #main {
+    padding-bottom: 5px;
+    padding-top: 10px;
+  }
 }
 
 /*  END - general style */
@@ -131,6 +142,13 @@ h1, h2, h3, h4 {
 h1 {
   font-size: 50px;
 }
+
+@media (max-width: 978px) {
+  h1 {
+    font-size: 36px;
+  }
+}
+
 
 .opacity-dark {
   padding: 20px;

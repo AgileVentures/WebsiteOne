@@ -35,8 +35,12 @@ Then re-try the rails_setup.sh line above and you should be good to go on to the
 ## Step 4: Update the database
 
     bundle exec rake db:setup
+    
+## Step 5: Request the .env file
+    
+    ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in
 
-## Step 5: Run the tests
+## Step 6: Run the tests
 
     bundle exec rake spec
     bundle exec rake jasmine:ci
@@ -44,7 +48,7 @@ Then re-try the rails_setup.sh line above and you should be good to go on to the
 
 Discuss any errors with the team.
 
-## Step 6. Start the server
+## Step 7. Start the server
 
     bundle exec rails s
 

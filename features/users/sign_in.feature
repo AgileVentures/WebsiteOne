@@ -1,3 +1,4 @@
+@vcr
 Feature: Sign in
   As an existing User
   So that I can use the systems all functions
@@ -23,10 +24,10 @@ Feature: Sign in
     When I sign in with a wrong <credential>
     Then I see an invalid login message
     And I should be signed out
-  Examples:
-    |credential|
-    |password  |
-    |email     |
+    Examples:
+      |credential|
+      |password  |
+      |email     |
 
   Scenario: redirect to the last visited page after login
     Given I exist as a user
@@ -34,4 +35,3 @@ Feature: Sign in
     And I am on Events index page
     When I sign in with valid credentials
     Then I should be on the Events "Index" page
-

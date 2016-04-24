@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://referrer.disqus.com/juggler/stat.gif?event=failed_embed.server.module_load_error.lounge_bundle
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Referer:
+      - http://127.0.0.1:56601/projects/hello-world/documents/documentation
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Accept:
+      - "*/*"
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - referrer.disqus.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - image/gif
+      Last-Modified:
+      - Mon, 28 Sep 1970 06:00:00 GMT
+      Content-Length:
+      - '43'
+      Date:
+      - Mon, 11 Apr 2016 15:17:16 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==
+    http_version: 
+  recorded_at: Mon, 11 Apr 2016 15:17:17 GMT
+- request:
+    method: get
+    uri: https://referrer.disqus.com/juggler/stat.gif?event=failed_embed.server.module_load_error.common_bundle
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Referer:
+      - http://127.0.0.1:56601/projects/hello-world/documents/documentation
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Accept:
+      - "*/*"
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - referrer.disqus.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - image/gif
+      Last-Modified:
+      - Mon, 28 Sep 1970 06:00:00 GMT
+      Content-Length:
+      - '43'
+      Date:
+      - Mon, 11 Apr 2016 15:17:16 GMT
+      Connection:
+      - close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==
+    http_version: 
+  recorded_at: Mon, 11 Apr 2016 15:17:17 GMT
+recorded_with: VCR 3.0.1
