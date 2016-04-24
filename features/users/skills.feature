@@ -1,3 +1,4 @@
+@vcr
 Feature: As a site user
   In order to find a user with a relevant skill
   I would like to see a users self assessed skills set
@@ -42,5 +43,3 @@ Feature: As a site user
       | java     |
       | php      |
       | cucumber |
-
-

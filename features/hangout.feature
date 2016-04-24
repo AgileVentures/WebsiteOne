@@ -1,3 +1,4 @@
+@vcr
 Feature: Managing hangouts of scrums and PairProgramming sessions
   In order to manage hangouts of scrums and PP sessions  easily
   As a site user

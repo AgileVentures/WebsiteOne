@@ -1,4 +1,4 @@
-@javascript
+@javascript @vcr
 Feature: As a site owner
   So I can make collaboration among registered users easier
   I would like to display a index of users with links to user profiles
@@ -35,42 +35,42 @@ Feature: As a site owner
     And I should see "5" user avatars within the main content
     And I should see "Check out our 5 awesome volunteers from all over the globe!"
 
-  Scenario: Filtering trough users by typing first name in the field 
+  Scenario: Filtering trough users by typing first name in the field
     When I click "Members" within the navbar
     And I filter users for "Alice"
     Then I should see "Alice"
     And I should not see:
-    | Bob     |
-    | Croutch |
-    | Dave    |
+      | Bob     |
+      | Croutch |
+      | Dave    |
 
   Scenario: Filtering by project involvement
     Given I am on the "our members" page
     When I filter "projects" for "hello world"
     Then I should see:
-    | Alice |
-    | Bob   |
+      | Alice |
+      | Bob   |
     And I should not see:
-    | Croutch |
-    | Dave    |
+      | Croutch |
+      | Dave    |
 
   Scenario: Find users in my timezone
     Given I am on the "our members" page
     When I filter "timezones" for "In My Timezone"
     Then I should see:
-    | Alice |
-    | Bob   |
+      | Alice |
+      | Bob   |
     And I should not see:
-    | Croutch |
-    | Dave    |
+      | Croutch |
+      | Dave    |
 
   Scenario: Find users within 2 timezones
     Given I am on the "our members" page
     When I filter "timezones" for "Wider Timezone Area"
     Then I should see:
-    | Alice   |
-    | Bob     |
-    | Croutch |
+      | Alice   |
+      | Bob     |
+      | Croutch |
     And I should not see "Dave"
 
   Scenario: Find users who have been online recently
@@ -78,8 +78,8 @@ Feature: As a site owner
     When I check "online"
     When I click the "Search" button
     Then I should see:
-    | Alice |
-    | Bob   |
+      | Alice |
+      | Bob   |
     And I should not see:
-    | Croutch |
-    | Dave    |
+      | Croutch |
+      | Dave    |

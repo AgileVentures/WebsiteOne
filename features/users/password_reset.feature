@@ -1,3 +1,4 @@
+@vcr
 Feature: Password retrieval
   As an existing User
   So that I can recover a lost password

@@ -1,4 +1,4 @@
-@enable-custom-errors
+@vcr
 Feature:
   As a visitor
   In order to understand what happened when something goes wrong

@@ -232,12 +232,12 @@ Given /^the following active users exist$/ do |table|
     p = Project.find_by(title: attributes['projects'])
     Delorean.time_travel_to(attributes['updated_at']) if attributes['updated_at']
     u = FactoryGirl.create(
-      :user,
-      first_name: attributes['first_name'],
-      last_name: attributes['last_name'],
-      email: attributes['email'],
-      latitude: attributes['latitude'],
-      longitude: attributes['longitude']
+        :user,
+        first_name: attributes['first_name'],
+        last_name: attributes['last_name'],
+        email: attributes['email'],
+        latitude: attributes['latitude'],
+        longitude: attributes['longitude']
     )
     Delorean.back_to_the_present if attributes['updated_at']
     u.follow p
@@ -258,7 +258,7 @@ end
 
 When(/^I click pulldown link "([^"]*)"$/) do |text|
   page.find(:css, '.dropdown .dropdown-menu.dropdown-menu-right .fa-user').click
-  click_link_or_button text
+  first(:link, text).click
 end
 
 Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
@@ -426,18 +426,18 @@ end
 
 When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_name|
   filter = case list_name
-  when 'projects'
-    'project_filter'
-  when 'timezones'
-    'timezone_filter'
-  when 'online status'
-    'online'
-  end
+             when 'projects'
+               'project_filter'
+             when 'timezones'
+               'timezone_filter'
+             when 'online status'
+               'online'
+           end
 
   page.select(selected_from_list, from: filter)
 end
 
-Given(/^I have an incoplete profile$/) do
+Given(/^I have an incomplete profile$/) do
   @user.bio = ''
   @user.save
 end

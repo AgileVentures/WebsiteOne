@@ -11,7 +11,7 @@ Then(/^I should see a footer area$/) do
 end
 
 Then(/^I should see a navigation bar$/) do
-    find '#nav'
+  find '#nav'
 end
 
 When(/^I should see "([^"]*)" in footer$/) do |string|
