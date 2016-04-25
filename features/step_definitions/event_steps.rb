@@ -112,8 +112,11 @@ And(/^I click on the "([^"]*)" div$/) do |arg|
   find("div.#{arg}").click
 end
 
+And(/^I select "([^"]*)" from the event project dropdown$/) do |project_name|
+  page.select project_name, from: "event_project_id"
+end
 And(/^I select "([^"]*)" from the project dropdown$/) do |project_name|
-  page.select project_name, from: "Project"
+  page.select project_name, from: "project_id"
 end
 
 And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, project_title|
@@ -130,4 +133,9 @@ end
 
 And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
   expect(page).to have_css "time[datetime='#{datetime}']"
+end
+
+And(/^"([^"]*)" is selected in the project dropdown$/) do |project_slug|
+  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
+  expect(find("#project_id").value).to eq project_id.to_s
 end
