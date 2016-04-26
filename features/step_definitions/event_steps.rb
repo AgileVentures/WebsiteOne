@@ -124,6 +124,17 @@ And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, 
   expect(event.project.title).to eq project_title
 end
 
+Given(/^the browser is in "([^"]*)" and the server is in UTC$/) do |tz|
+  ENV['TZ'] = tz
+  visit root_path
+  sleep(5)
+  ENV['TZ'] = 'UTC'
+end
+
+And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
+  expect(page).to have_css "time[datetime='#{datetime}']"
+end
+
 And(/^"([^"]*)" is selected in the project dropdown$/) do |project_slug|
   project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
   expect(find("#project_id").value).to eq project_id.to_s
