@@ -74,10 +74,10 @@ echo "websiteone" > .ruby-gemset
 You can use gemset name of your own choice.
 
 
-## Install bundle
+## Install bundler
 Just to be safe, install bundle gem first. Otherwise `bundle install` may fail.
 ```
-gem install bundle
+gem install bundler
 ```
 
 ## Install all gems
