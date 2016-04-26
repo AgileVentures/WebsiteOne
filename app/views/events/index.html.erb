@@ -1,12 +1,22 @@
 <% provide :title, 'Events' %>
-<h1>AgileVentures Events</h1>
+<h1>AgileVentures Events <%= link_to 'New Event', new_event_path, class: 'btn btn-default pull-right' %></h1>
 <p>We are hosting several events a day using Google Hangouts. Feel free to join in if you want to get involved or if you
   a curious about Pair Programming and Agile.
   <strong>Each event will have a link to an online Hangout prior to start time.</strong></p>
+
+<%= form_tag(events_path, :id => "events_search", :method => "get", :class => "form-inline text-left") do %>
+    <div class="form-group">
+      <%= select_tag :project_id, options_from_collection_for_select(@projects.sort_by(&:title), "id", "title", @project.try(:id).try(:to_s)), prompt: "All", class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag "Filter by Project", {:class => 'btn btn-default'} %>
+    </div>
+<% end %>
+
 <% if user_signed_in? %>
     <div class="row">
-      <%= link_to 'New Event', new_event_path, class: 'btn btn-default pull-right' %>
-    </div>
+
+</div>
 <% end %>
 
 <div class="eventContainer">
@@ -29,7 +39,7 @@
             </div>
             <div class="col-lg-4 col-xs-12 col-sm-4">
               <i class="fa fa-calendar"></i><span class="month"><%= instance[:time].strftime('%a, %b %d, %Y') %></span><br/>
-              <i class="fa fa-clock-o"></i><span><%= raw local_time(event.start_time, '%H:%M') %>-<%= raw local_time(event.instance_end_time, '%H:%M (%Z)') %></span>
+              <i class="fa fa-clock-o"></i><span><%= raw local_time(instance[:time], '%H:%M') %>-<%= raw local_time(instance[:time]+event.duration*60, '%H:%M (%Z)') %></span>
             </div>
             <div class="col-lg-8 col-xs-12 col-sm-8">
               <p><%= event.description.truncate(120, separator: /\s/) %></p>
