@@ -58,7 +58,12 @@ describe EventHelper do
 
   describe 'time ranges' do
     let(:current_time) { Time.utc(2016, 2, 9, 19, 0, 0) }
-    let(:event) { double(:event, start_time: current_time, instance_end_time: current_time + 15.minutes) }
+    let(:event) do
+      double(:event,
+             start_time: current_time,
+             duration: 15.minutes,
+             instance_end_time: current_time + 15.minutes)
+    end
 
     before { Delorean.time_travel_to(current_time - 15.minutes) }
 
@@ -72,15 +77,12 @@ describe EventHelper do
 
     it 'returns a local time range' do
       expected_result = \
-      "Starts at <time data-format=\"%H:%M\" data-local=\"time\""\
-      " datetime=\"2016-02-09T19:00:00Z\">19:00</time> - Ends at "\
-      "<time data-format=\"%H:%M\" data-local=\"time\" "\
-      "datetime=\"2016-02-09T19:15:00Z\">19:15</time> "\
-      "<time data-format=\"(%Z)\" data-local=\"time\" "\
-      "datetime=\"2016-02-09T19:00:00Z\">(UTC)</time>"
+        '<time data-format="%H:%M" data-local="time" datetime="2016-02-09T19:00:00Z">' \
+        '19:00</time>-<time data-format="%H:%M (%Z)" data-local="time" datetime=' \
+        '"2016-02-10T10:00:00Z">10:00 (UTC)</time>'
 
-      actual_result = helper.show_local_time_range(event)
-      expect(expected_result).to eql actual_result
+      actual_result = helper.show_local_time_range(current_time, event.duration)
+      expect(actual_result).to eql expected_result
     end
   end
 end
