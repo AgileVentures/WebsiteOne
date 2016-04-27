@@ -5,11 +5,6 @@ Then(/^I should see 20 scrums in descending order by published date:$/) do
   expect(dates.sort { |x,y| y <=> x }).to eq(dates)
 end
 
-Given(/^I play a video$/) do
-  playvideo = page.first(:xpath, "//h4[@class=\"timeline-title\"]/a[contains(@class,\"yt_link\")]")['href']
-  click_link playvideo
-end
-
 Then(/^I should see a modal window with the (first|second) scrum$/) do |ord|
   ord_hash ={"first" => 0, "second" => 1}
   expect(page.find("#scrumVideo")[:style]).to include("display: block;")
@@ -28,10 +23,6 @@ end
 When(/^I close the modal$/) do
   page.find(:css,'.close').click
   expect(page).not_to have_css('.close')
-end
-
-Then(/^I should see a modal$/) do
-  expect(page.find("#myModal")[:style]).to eq("display: block; ")
 end
 
 Given(/^that there are (\d+) past scrums$/) do |number|

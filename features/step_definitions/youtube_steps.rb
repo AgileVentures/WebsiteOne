@@ -2,10 +2,6 @@ Given /my YouTube channel is connected/ do
   step 'user "me" has YouTube Channel connected'
 end
 
-Given /^my YouTube Channel is not connected/ do
-  step 'user "me" has YouTube Channel not connected'
-end
-
 Then /I should( not)? see a list of my videos/ do |negative|
   correct_number = [ EventInstance.where(user: @current_user).count, 5 ].min
   video_links = page.all(:css, '.yt_link')
@@ -21,15 +17,6 @@ Given /^user "([^"]*)" has YouTube Channel connected/ do |user|
   user.youtube_id = 'test_id'
   user.youtube_user_name = 'John Doe'
   user.save!
-end
-
-Given /^user "([^"]*)" has YouTube Channel not connected/ do |user|
-  user = (user == 'me') ? @current_user : User.find_by_first_name(user)
-  user.youtube_id = nil
-  user.save!
-
-  stub_request(:get, /youtube.*title/).to_return(body: '{"entry":{"title":{"$t":"John Doe"}}}')
-  stub_request(:get, /googleapis/).to_return(body: '{ "items": [{"id": "test_id"}]}')
 end
 
 Then /^I should see video "([^"]*)" in "player"$/ do |name|
