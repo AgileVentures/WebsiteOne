@@ -2,17 +2,6 @@ Then(/^I should see "([^"]*)" table$/) do |legend|
   expect(page).to have_css 'h1', text: legend
 end
 
-When(/^I should see column "([^"]*)"$/) do |column|
-  within('table#projects thead') do
-    expect(page).to have_css('th', :text => column)
-  end
-end
-
-When(/^There are projects in the database$/) do
-  Project.create(title: "Title 1", description: "Description 1", status: "Status 1")
-  Project.create(title: "Title 2", description: "Description 2", status: "Status 2")
-end
-
 Given(/^the following projects exist:$/) do |table|
   #TODO YA rewrite with factoryGirl
   table.hashes.each do |hash|
@@ -26,28 +15,6 @@ Given(/^the following projects exist:$/) do |table|
       project.tag_list.add(hash[:tags], parse: true)
     end
     project.save!
-  end
-end
-
-Then /^I should see a form for "([^"]*)"$/ do |form_purpose|
-  case form_purpose
-    when 'creating a new project'
-      expect(page).to have_text form_purpose
-      expect(page).to have_css('form#new_project')
-
-    else
-      pending
-  end
-end
-
-When(/^I click the "([^"]*)" button for project "([^"]*)"$/) do |button, project_name|
-  project = Project.find_by_title(project_name)
-  if project
-    within("tr##{project.id}") do
-      click_link_or_button button
-    end
-  else
-    visit path_to(button, 'non-existent')
   end
 end
 
@@ -94,22 +61,6 @@ end
 
 Given(/^I am on the home page$/) do
   visit root_path
-end
-
-Then(/^(.*) in the project members list$/) do |s|
-  within(:css, '#members_list') do
-    step s
-  end
-end
-
-When(/^I go to the next page$/) do
-  first(:css, 'a', text: 'Next').click()
-end
-
-Given(/^I (?:am on|go to) project "([^"]*)"$/) do |project|
-  project.downcase!
-  project = Project.find_by_title(project)
-  visit(path_to('projects', project.id ))
 end
 
 Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (\d+) days ago$/) do |parent, child, days_ago|
@@ -159,11 +110,3 @@ Then(/^I should see (\d+) member avatars$/) do |count|
 
 end
 
-
-Given(/^I am allowed to edit pitch for project "([^"]*)"$/) do |project|
-  step %Q{
-    Given I am logged in
-    And I am on the "Show" page for project "#{project}"
-    And I click the "Join Project" button
-       }
-end

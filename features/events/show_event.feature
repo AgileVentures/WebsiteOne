@@ -7,15 +7,22 @@ Feature: Events
 
   Background:
     Given following events exist:
-      | name       | description             | category        | start_datetime          | duration | repeats | time_zone |
-      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |
-      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | UTC       |
+      | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
+      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
+      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | UTC       |         |                                           |                       |
+      | Standup    | Daily standup meeting   | Scrum           | 2014/02/03 07:00:00 UTC | 150      | weekly  | UTC       |         | 15                                        | 1                     |
+
+  Scenario: Show correct timezone
+    Given the date is "2016/05/01 09:15:00 UTC"
+    And I am on the show page for event "Standup"
+    Then I should see "Standup"
+    And the local time element should be set to "2016-05-02T07:00:00Z"
 
   @time-travel-step
   Scenario: Date on show page is accurate
     Given following events exist:
       | name | description | category | start_datetime          | duration | repeats | time_zone | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
-      | Test | Test        | Scrum    | 2014/02/07 08:00:00 UTC | 15       | weekly  | UTC       | 15                                        |  1                    |
+      | Test | Test        | Scrum    | 2014/02/07 08:00:00 UTC | 15       | weekly  | UTC       | 15                                        | 1                     |
     And the date is "2016/02/01"
     And I am on the show page for event "Test"
     Then I should not see "2014"

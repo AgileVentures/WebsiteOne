@@ -37,13 +37,6 @@ When(/^I should see ([^"]*) revisions for the page "([^"]*)"$/) do |revisions, d
   expect page.versions.count == revisions
 end
 
-And(/^the following sub-pages exist:$/) do |table|
-  table.hashes.each do |hash|
-    parent = StaticPage.find_by_title(hash[:parent]) || StaticPage.find(hash[:parent])
-    StaticPage.create!(title: hash[:title], body: hash[:body], parent_id: parent.id)
-  end
-end
-
 Given(/^the page "([^"]*)" has a child page with title "([^"]*)"$/) do |parent, child|
   parent_page = StaticPage.find_by_title(parent)
   StaticPage.create!(
