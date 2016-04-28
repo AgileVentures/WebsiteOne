@@ -28,10 +28,6 @@ When(/^I (try to use|am using) the Mercury Editor to edit ([^"]*) "([^"]*)"$/) d
   visit "/editor#{url_for_title(action: 'show', controller: model, title: title)}"
 end
 
-Then(/^I should see the editable field "([^"]*)"$/) do |field|
-  find(:css, "div#document_#{field.downcase.singularize}")
-end
-
 When(/^I try to edit the page$/) do
   visit '/editor' + current_path
 end

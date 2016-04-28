@@ -52,12 +52,6 @@ Given(/^following events exist for project "([^"]*)" with active hangouts:$/) do
   end
 end
 
-Given(/^following hangouts exist:$/) do |table|
-  table.hashes.each do |hash|
-    EventInstance.create!(hash)
-  end
-end
-
 Then(/^I should be on the Events "([^"]*)" page$/) do |page|
   case page.downcase
     when 'index'
@@ -122,6 +116,17 @@ end
 And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, project_title|
   event = Event.find_by(name: event_name)
   expect(event.project.title).to eq project_title
+end
+
+Given(/^the browser is in "([^"]*)" and the server is in UTC$/) do |tz|
+  ENV['TZ'] = tz
+  visit root_path
+  sleep(5)
+  ENV['TZ'] = 'UTC'
+end
+
+And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
+  expect(page).to have_css "time[datetime='#{datetime}']"
 end
 
 And(/^"([^"]*)" is selected in the project dropdown$/) do |project_slug|

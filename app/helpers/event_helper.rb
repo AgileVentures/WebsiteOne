@@ -63,10 +63,10 @@ module EventHelper
     local_time(datetime,'%l:%M %p (%Z)')
   end
 
-  def show_local_time_range(event)
-    start_time_format = local_time(event.start_time,'%H:%M')
-    end_time_format = local_time(event.instance_end_time,'%H:%M')
-    "#{start_prefix(event.start_time)}#{start_time_format} - #{end_prefix(event.instance_end_time)}#{end_time_format} #{local_time(event.start_time,'(%Z)')}"
+  def show_local_time_range(time, duration)
+    start_time = local_time(time, '%H:%M')
+    end_time = local_time(time+duration*60, '%H:%M (%Z)')
+    "#{start_time}-#{end_time}"
   end
 
   def show_time_range(event)

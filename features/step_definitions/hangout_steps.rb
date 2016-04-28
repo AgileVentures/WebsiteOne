@@ -3,15 +3,6 @@ Then /^I should see hangout button$/ do
   expect(src).to match /talkgadget.google.com/
 end
 
-Then /^the hangout button should( not)? be visible$/ do |negative|
-  section = page.find('#hangout-btn', visible: false)
-  if negative
-    expect(section).not_to be_visible
-  else
-    expect(section).to be_visible
-  end
-end
-
 Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
@@ -53,15 +44,6 @@ Given /^the following hangouts exist:$/ do |table|
                        yt_video_id: hash['Youtube video id'],
                        created: hash['Start time'],
                        updated: hash['End time'])
-  end
-end
-
-Then /^I should( not)? see Hangouts details section$/ do |negative|
-  section = page.find('#hangout-details', visible: false)
-  if negative
-    expect(section).not_to be_visible
-  else
-    expect(section).to be_visible
   end
 end
 

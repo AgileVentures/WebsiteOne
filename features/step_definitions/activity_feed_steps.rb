@@ -37,14 +37,6 @@ And(/^I create a project named "([^"]*)"$/) do |project|
 }
 end
 
-And(/^I create a hangout named "([^"]*)"$/) do |hangout|
-  steps %Q{
-    And I am on the "Show" page for project "Hello Galaxy"
-    And I click the "Join Project" button
-    And I click the "Start a Hangout On Air" button
-}
-end
-
 Given(/^Given I am on the Activity feed$/) do
   steps %Q{
     Given I am on the "Dashboard" page
