@@ -1,11 +1,3 @@
-Then(/^I debug$/) do
-  require 'byebug'; byebug
-end
-
-Then(/^I JS debug$/) do
-  page.driver.debug
-end
-
 def url_for_title(options)
   controller = options[:controller]
   eval("#{controller.capitalize.singularize}.find_by_title('#{options[:title]}').url_for_me(options[:action].downcase)")
@@ -74,10 +66,6 @@ When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
 end
 
-When(/^I go to the path "(.*?)"$/) do |page|
-  visit path_to(page)
-end
-
 When(/^(?:when I|I) click "([^"]*)"$/) do |text|
   click_link_or_button text
 end
@@ -114,10 +102,6 @@ When(/^I click the "([^"]*)" link$/) do |button|
   click_link button
 end
 
-When(/^I click the (link|button) "([^"]*)"$/) do |selector ,text|
-  page.find(:css, 'a', text: /#{text}/, visible: true).trigger('click')
-end
-
 When(/^I follow "([^"]*)"$/) do |text|
   click_link text
 end
@@ -152,11 +136,6 @@ When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
   end
 end
 
-When /^I accept the warning popup$/ do
-  # works only with webkit javascript drivers
-  page.driver.browser.accept_js_confirms
-end
-
 Given /^the time now is "([^"]*)"$/ do |time|
   Time.stub(now: Time.parse(time))
 end
@@ -168,10 +147,6 @@ Then /^I should see link "([^"]*)" with "([^"]*)"$/ do |link, url|
 end
 
 Then /^I should be on the "([^"]*)" page$/ do |page|
-  expect(current_path).to eq path_to(page)
-end
-
-Then /^I am redirected to the "([^"]*)" page$/ do |page|
   expect(current_path).to eq path_to(page)
 end
 
@@ -218,24 +193,6 @@ Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
   end
 end
 
-Then /^I should( not)? see field "([^"]*)"$/ do |negative, field|
-  if negative
-    expect(page.has_field? field).to be_falsey
-  else
-    expect(page.has_field? field).to be_truthy
-  end
-end
-
-Then /^I should( not)? see buttons:$/ do |negative, table|
-  table.rows.flatten.each do |button|
-    unless negative
-      expect(page.has_link_or_button? button).to be_truthy
-    else
-      expect(page.has_link_or_button? button).to be_falsey
-    end
-  end
-end
-
 Then /^I should( not)? see button "([^"]*)"$/ do |negative, button|
   unless negative
     expect(page.has_link_or_button? button).to be_truthy
@@ -272,23 +229,8 @@ Then(/^I should( not be able to)? see a link to "([^"]*)" page for ([^"]*) "([^"
   end
 end
 
-Then(/^show me the page$/) do
-  save_and_open_page
-end
-
-Then /^save a screenshot of the page at "([^"]*)"$/ do |path|
-  #works with Poltergeist driver
-  page.save_screenshot(path, full: true)
-end
-
 When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
-end
-
-When(/^I should see a selector with options$/) do |table|
-  table.rows.flatten.each do |option|
-    expect(page).to have_select(:options => [option])
-  end
 end
 
 Then(/^I should see the sidebar$/) do
@@ -366,14 +308,6 @@ end
 
 Then(/^I should see an video with source "([^"]*)"$/) do |source|
   expect(page).to have_css "iframe[src*=\"#{source}\"]"
-end
-
-Then /^I should( not)? see "([^"]*)" under "([^"]*)"$/ do |negative, title_1, title_2|
-  if negative
-    expect(page.body).not_to match(/#{title_2}.*#{title_1}/m)
-  else
-    expect(page.body).to match(/#{title_2}.*#{title_1}/m)
-  end
 end
 
 Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, table_name|

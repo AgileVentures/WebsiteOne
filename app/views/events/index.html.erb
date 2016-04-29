@@ -39,7 +39,7 @@
             </div>
             <div class="col-lg-4 col-xs-12 col-sm-4">
               <i class="fa fa-calendar"></i><span class="month"><%= instance[:time].strftime('%a, %b %d, %Y') %></span><br/>
-              <i class="fa fa-clock-o"></i><span><%= raw local_time(event.start_time, '%H:%M') %>-<%= raw local_time(event.instance_end_time, '%H:%M (%Z)') %></span>
+              <i class="fa fa-clock-o"></i><span><%= raw show_local_time_range(instance[:time], event.duration) %></span>
             </div>
             <div class="col-lg-8 col-xs-12 col-sm-8">
               <p><%= event.description.truncate(120, separator: /\s/) %></p>
