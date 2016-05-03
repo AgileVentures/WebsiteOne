@@ -276,7 +276,7 @@ GEM
     kdtree (0.3)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.7)
+    libv8 (3.16.14.13)
     listen (2.10.0)
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
