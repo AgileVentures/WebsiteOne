@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
+  # before_filter :set_paper_trail_whodunnit
   before_filter :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_filter :user_activity
@@ -30,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   # see Settings.yml for privileged user
-  # 
+  #
   def check_privileged
     raise ::AgileVentures::AccessDenied.new(current_user, request) unless current_user.is_privileged?
   end

@@ -41,5 +41,7 @@ module WebsiteOne
     )
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

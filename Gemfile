@@ -33,7 +33,7 @@ gem 'redcarpet' # renders markdown
 gem 'coderay' # syntax highlighting for markdown code blocks
 gem 'acts-as-taggable-on' # Add tags to objects. Used on Projects
 gem 'geocoder' # geocoding
-gem 'paper_trail'  # version control for Document
+gem 'paper_trail', '4.0.0' # version control for Document
 gem 'verbs'   # language and verbs - not used for now but I plan to use it in Events /Thomas
 gem 'ice_cube', '0.11.1'     # used to generate event schedules, locked to last known version not to have memory leaks
 gem 'jquery-turbolinks', '2.0.2'    #fix for turbolink problem we had with the HOA button and jQuery not loading ??

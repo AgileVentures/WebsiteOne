@@ -26,7 +26,7 @@ describe UsersController, :type => :controller do
 
   describe '#show' do
     before do
-      @projects = build_stubbed_list(Project, 3) 
+      @projects = build_stubbed_list(Project, 3)
       @user = build_stubbed(User)
       allow(@user).to receive(:following_by_type).and_return(@projects)
       allow(@user).to receive(:skill_list).and_return([])
@@ -108,7 +108,7 @@ describe UsersController, :type => :controller do
       end
 
       it 'should respond with "Your message has not been sent!" if the message was not delivered successfully' do
-        Mailer.stub_chain(:hire_me_form, :deliver).and_return(false)
+        Mailer.stub_chain(:hire_me_form, :deliver_now).and_return(false)
         post :hire_me_contact_form, valid_params
         expect(flash[:alert]).to eq 'Your message has not been sent!'
       end
@@ -147,7 +147,7 @@ describe UsersController, :type => :controller do
 
       it 'should redirect to the home page' do
         expect(response).to redirect_to root_path
-      end 
+      end
 
       it 'should not send an email' do
         expect(mail.count).to eq 0

@@ -340,7 +340,7 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paper_trail (5.0.0)
+    paper_trail (4.0.0)
       activerecord (>= 3.0, < 6.0)
       activesupport (>= 3.0, < 6.0)
       request_store (~> 1.1)
@@ -625,7 +625,7 @@ DEPENDENCIES
   omniauth
   omniauth-github (~> 1.1.2)
   omniauth-gplus (~> 2.0.1)
-  paper_trail
+  paper_trail (= 4.0.0)
   pg
   phantomjs
   pivotal-tracker-api (= 0.1.9)
