@@ -5,7 +5,7 @@
   background: #e10000;
   border: 1px solid lightgray;
   opacity: 0.6;
-  width:205px;
+  width: 215px;
   @include css-transition(opacity 0.5s ease);
   &:hover {
     opacity: 1;
