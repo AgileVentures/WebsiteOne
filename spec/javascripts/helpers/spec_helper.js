@@ -9,7 +9,8 @@ function reloadScript(name) {
     async: false,
     dataType: 'script',
     type: 'GET',
-    url: $('script[src*="/' + name + '"]').attr('src'),
-    success: function(src) { eval(src); }
+    // NOTE: replace is necessary in the new Jasmine... as of 2.4.1!
+    url: $('script[src*="/' + name.replace('.js', '.self.js') + '"]').attr('src'),
+    success: function (src) { eval(src); }
   });
 }
