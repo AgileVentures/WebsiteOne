@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+ruby '2.3.0'
 gem 'rails', '4.1.6'
 # Added after upgrade to rails 4.1
 gem 'polyamorous', '~> 1.2.0'
