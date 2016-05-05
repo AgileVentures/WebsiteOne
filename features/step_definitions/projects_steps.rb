@@ -110,3 +110,13 @@ Then(/^I should see (\d+) member avatars$/) do |count|
 
 end
 
+Then(/^I Should see projects with following details:$/) do |table|
+  # table is a Cucumber::Core::Ast::DataTable
+   projects = table.hashes
+   projects.each do | project | 
+      updated_project = Project.find_by_title(project["title"])
+      expect(updated_project.commit_count).to eq(project["commit_count"].to_i)
+   end
+   
+end
+
