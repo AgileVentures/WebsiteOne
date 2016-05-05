@@ -5,17 +5,17 @@ class RegistrationsController < Devise::RegistrationsController
     super
     unless @user.new_record?
       session[:omniauth] = nil
-      Mailer.send_welcome_message(@user).deliver if Features.enabled?(:welcome_email)
+      Mailer.send_welcome_message(@user).deliver_now if Features.enabled?(:welcome_email)
     end
   end
 
   def update
     if params[:preview]
       resource.display_email = params[:user][:display_email] == '1'
-      render :action => 'edit'
+      render action: 'edit'
     else
       @user = User.friendly.find(current_user.friendly_id)
-      @user.skill_list = params[:user].delete "skill_list" # Extracts skills from params
+      @user.skill_list = params[:user].delete 'skill_list' # Extracts skills from params
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
 
       if @user.update_attributes(account_update_params)
@@ -29,7 +29,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def build_resource(hash=nil)
+  def build_resource(hash = nil)
     self.resource = User.new_with_session(hash || {}, session)
     if session[:omniauth]
       @user.apply_omniauth(session[:omniauth])
