@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   # see Settings.yml for privileged user
-  # 
+  #
   def check_privileged
     raise ::AgileVentures::AccessDenied.new(current_user, request) unless current_user.is_privileged?
   end

@@ -35,7 +35,7 @@ module SendNewsletter
     def process_recipients
       last_user = nil
       @users.each do |user|
-        Mailer.send_newsletter(user, @newsletter).deliver
+        Mailer.send_newsletter(user, @newsletter).deliver_now
         last_user = user
       end
       last_user
