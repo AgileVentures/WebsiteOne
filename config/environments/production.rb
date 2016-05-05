@@ -19,7 +19,7 @@ WebsiteOne::Application.configure do
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
   config.action_dispatch.rack_cache = true
 
-  config.serve_static_assets = true
+  config.serve_static_files = true
   config.static_cache_control = "public, max-age=31536000"
 
   # Compress JavaScripts and CSS.
@@ -89,8 +89,7 @@ WebsiteOne::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # may be needed for integrating bootstrap with Heroku deployment
-  #config.cache_classes = true
-  #config.serve_static_assets = true
+  # config.cache_classes = true
   config.assets.compile = false
   #config.assets.digest = true
 end
