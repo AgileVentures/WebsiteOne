@@ -81,7 +81,7 @@ describe AuthenticationsController do
       end
 
       it 'should create a new user for non-existing profiles' do
-        Mailer.stub_chain :send_welcome_message, :deliver
+        Mailer.stub_chain :send_welcome_message, :deliver_now
         expect(@user).to receive(:save).and_return(true)
         expect(controller).to receive(:sign_in_and_redirect) do
           controller.redirect_to root_path
