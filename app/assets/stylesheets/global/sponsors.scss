@@ -28,6 +28,7 @@
 }
 #sponsorsBar .sponsorsTier h3 {
     margin-top: 0;
+    padding-left: 40px;
     position: relative;
 }
 #sponsorsBar .sponsorsTier h3 .docLink {
@@ -37,7 +38,6 @@
 }
 #sponsorsBar .sponsorsTier ul {
     list-style-type: none;
-    padding: 0;
 }
 #sponsorsBar .sponsorsTier ul li ~ li {
     margin-top: 10px;

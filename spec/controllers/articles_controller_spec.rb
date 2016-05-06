@@ -123,7 +123,7 @@ describe ArticlesController do
     before(:each) do
       controller.stub(:authenticate_user!).and_return(true)
       @article = build(:article, title: 'my title', slug: 'friend')
-      @user = double('User')
+      @user = double('User', id: 1)
       allow(controller).to receive(:current_user).and_return(@user)
       allow(@article).to receive(:create_activity)
       @user.stub_chain('articles.build').and_return(@article)
@@ -220,17 +220,17 @@ describe ArticlesController do
     it 'should assign a new article with the given parameters' do
       patch :preview, @params
       expect(assigns(:article)).to be_a(Article)
-     
+
       @params[:article].each_pair do |k, v|
           expect(assigns(:article).send(k).to_s).to eq v
       end
     end
 
     it 'should assign default parameters to the preview article' do
-      @user = double('User')
+      @user = double('User', id: 1)
       controller.stub(:current_user).and_return(@user)
       patch :preview, @params
-      assigns(:author).should eq @user
+      expect(assigns(:author)).to eq @user
       expect(assigns(:article).created_at).to_not be_nil
       expect(assigns(:article).created_at).to_not be_nil
     end

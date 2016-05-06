@@ -52,19 +52,19 @@ describe ApplicationHelper do
     end
 
     it 'should render the text "this is a text"' do
-      @custom_btn_html.should have_css '[title="this is a text"]'
+      expect(@custom_btn_html).to have_css '[title="this is a text"]'
     end
 
     it 'should render the icon classes "fa fa-icon"' do
-      @custom_btn_html.should have_css '.fa.fa-icon'
+      expect(@custom_btn_html).to have_css '.fa.fa-icon'
     end
 
     it 'should have a link to the root path' do
-      @custom_btn_html.should have_link '', href: root_path
+      expect(@custom_btn_html).to have_link '', href: root_path
     end
 
     it 'should have the id="my-id" and class="btn-random"' do
-      @custom_btn_html.should have_css '#my-id.btn-random'
+      expect(@custom_btn_html).to have_css '#my-id.btn-random'
     end
   end
 
@@ -77,12 +77,12 @@ describe ApplicationHelper do
 
     it 'should render the correct provider' do
       btn_html = helper.social_button 'github'
-      btn_html.should have_css '.btn-github'
+      expect(btn_html).to have_css '.btn-github'
     end
 
     it 'should render the delete method if the option is specified' do
       btn_html = helper.social_button 'gplus', delete: true
-      btn_html.should have_css '[method=delete]'
+      expect(btn_html).to have_css '[method=delete]'
     end
   end
 end

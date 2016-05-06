@@ -30,7 +30,7 @@ describe DeviseHelper do
       sentence = "There are 2 errors"
       helper.stub_chain(:resource, :errors, :count).and_return @messages.size
       helper.stub_chain(:resource, :class, :model_name, :human).and_return "devise"
-      I18n.should_receive(:t).and_return sentence
+      expect(I18n).to receive(:t).and_return sentence
       result = helper.devise_error_messages_flash
       expect(result).to have_text (sentence)
       expect(result).to have_css ('.alert.alert-danger')

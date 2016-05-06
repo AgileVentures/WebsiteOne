@@ -1,5 +1,4 @@
 module Helpers
-
   def default_test_author
     @default_test_author ||= User.find_by_email(default_test_user_details[:email])
     if @default_test_author.nil?
@@ -18,18 +17,18 @@ module Helpers
 
   def default_test_user_details
     {
-      first_name: 'Tester',
-      last_name: 'Person',
-      email: 'testuser@agileventures.org',
-      last_sign_in_ip: test_ip_address,
-      password: test_user_password,
-      password_confirmation: test_user_password,
-      display_profile: true,
-      latitude: 59.33,
-      longitude: 18.06,
-      country_name: 'Stockholm',
-      bio: 'Full time Tester',
-      skill_list: 'Test'
+        first_name: 'Tester',
+        last_name: 'Person',
+        email: 'testuser@agileventures.org',
+        last_sign_in_ip: test_ip_address,
+        password: test_user_password,
+        password_confirmation: test_user_password,
+        display_profile: true,
+        latitude: 59.33,
+        longitude: 18.06,
+        country_name: 'Stockholm',
+        bio: 'Full time Tester',
+        skill_list: 'Test'
     }
   end
 
@@ -41,21 +40,6 @@ module Helpers
                    password_confirmation: 'changemesomeday',
                    slug: 'slug-ma',
                    country_name: 'Sweden'}
-  end
-
-  def create_test_user(options = {})
-    skills = options.delete 'skills'
-    options = default_test_user_details.merge options
-    user = User.new(options)
-    user.skill_list = skills
-    user.save!
-  end
-
-  def create_unconfirmed_user
-    create_visitor
-    delete_user
-    sign_up
-    visit destroy_user_session_path
   end
 
   def create_user
@@ -92,8 +76,6 @@ module Helpers
   def all_users
     @all_users = User.all
   end
-
-
 end
 
 module WithinHelpers
@@ -106,6 +88,28 @@ module WithinHelpers
   end
 end
 
+module WaitForAjax
+  def wait_for_ajax
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      loop until finished_all_ajax_requests?
+    end
+  end
+
+  def finished_all_ajax_requests?
+    page.evaluate_script('jQuery.active').zero?
+  end
+end
+
+World(Helpers)
+World(WithinHelpers)
+World(WaitForAjax)
+
+
+class Capybara::Result
+  def second
+    self[1]
+  end
+end
 
 module Capybara
   class Session
@@ -118,28 +122,9 @@ end
 class String
   def underscore
     self.gsub(/::/, '/').
-      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-      gsub(/([a-z\d])([A-Z])/,'\1_\2').
-      tr("- ", "_").
-      downcase
+        gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+        gsub(/([a-z\d])([A-Z])/,'\1_\2').
+        tr("- ", "_").
+        downcase
   end
 end
-
-module WaitForAjax
-  def wait_for_ajax
-    Timeout.timeout(Capybara.default_wait_time) do
-      loop until finished_all_ajax_requests?
-    end
-  end
-
-  def finished_all_ajax_requests?
-    page.evaluate_script('jQuery.active').zero?
-  end
-end
-
-World(ScrumsHelper)
-World(ApplicationHelper)
-World(Helpers)
-World(WithinHelpers)
-World(WaitForAjax)
-World(ActionView::Helpers)

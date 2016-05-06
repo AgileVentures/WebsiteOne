@@ -1,3 +1,4 @@
+@vcr
 Feature: Create and maintain projects
   As a member of AgileVentures
   So that I can participate in AgileVentures activities
@@ -180,7 +181,7 @@ Feature: Create and maintain projects
     And I click "Edit Project Pitch"
     Then I should be in the Mercury Editor
 
-  @mercury_step @javascript
+  @javascript
   Scenario: Editing Pitch content with Mercury Editor
     Given I am logged in
     And I am on the "Show" page for project "hello mars"

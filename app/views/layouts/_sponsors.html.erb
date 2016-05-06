@@ -3,9 +3,9 @@
     <h3>Supporters</h3>
     <ul>
       <li>
-        <a href="http://www.makersacademy.com/" target='new' class="sponsorMedal">
+        <a href="http://craftacademy.se/international" target='new' class="sponsorMedal">
           <div class="sponsorStandinMedal">
-            <img alt="Makers Academy" src="<%= image_path('sponsors/makers_sidebar.png') %>">
+            <img alt="Craft Academy" src="<%= image_path('sponsors/craft_banner_2.png') %>">
           </div>
         </a>
       </li>
@@ -18,57 +18,16 @@
       </li>
       <li>
         <a href="http://www.jetbrains.com/ruby/specials/rubymine/ruby_and_rails_ide.jsp" class="sponsorMedal">
-          <div class="sponsorStandinMedal" style="display:inline-block">
+          <div class="sponsorStandinMedal">
             <img alt="RubyMine 8" src="<%= image_path('sponsors/RubyMine_sidebar.png') %>">
           </div>
         </a>
       </li>
-    </ul>
-  </div>
-  <!--div class="silver sponsorsTier text-center">
-    <h3>Friends</h3>
-    <ul>
       <li>
-        <a href="#" class="sponsorMedal"><div class="sponsorStandinMedal">
-          <img alt="sponsor text" src="http://placehold.it/205x80">
-        </div>
-        </a></li>
+        <span class="sponsorStandinMedal" id='ourSponsors'>
+          <%= link_to 'Become a supporter', static_page_path('Sponsors'), class: 'btn btn-be-a-supporter'%>
+        </span>
+      </li>
     </ul>
-  </div-->
-
-  <div class="sponsorsTier" id='ourSponsors'>
-    <%= link_to 'Become a supporter', static_page_path('Sponsors'), class: 'btn btn-be-a-supporter'%>
   </div>
-  <!-- <div id="heroes" class="sponsorsTier text-center">
-    <h3>AV Heroes</h3>
-    <div>
-      <a href="#" target="_blank"><img alt="Park Hyunwoo" src="https://secure.gravatar.com/avatar/8495265d0f883004d3be2f81a73ad1ce" title="Park Hyunwoo">
-      </a><a href="#" target="_blank"><img alt="Zach Latta" src="https://secure.gravatar.com/avatar/77e1379370e8946b08b05c90df6f9de8" title="Zach Latta">
-    </a><a href="#" target="_blank"><img alt="Will Scott" src="https://secure.gravatar.com/avatar/0cd1738d6f880285b11edd5393ad1cce" title="Will Scott">
-    </a><a href="#" target="_blank"><img alt="honishi" src="https://secure.gravatar.com/avatar/db7a1868aec5714cbc01c4ac28256b60" title="honishi">
-    </a><a href="#" target="_blank"><img alt="Tim Perry" src="https://secure.gravatar.com/avatar/8a1aabc40d859fcb786eb4d28b95d299" title="Tim Perry">
-    </a><a href="#" target="_blank"><img alt="Greg &quot;GothAck&quot; Miell" src="https://secure.gravatar.com/avatar/8b04edff0ba087252f4aa1078028fcec" title="Greg &quot;GothAck&quot; Miell">
-    </a><a href="#" target="_blank"><img alt="Mirco Macrelli" src="https://secure.gravatar.com/avatar/4dde7dfca462232fc7db68013005dc3e" title="Mirco Macrelli">
-    </a><a href="#" target="_blank"><img alt="Jordi Massaguer Pla" src="https://secure.gravatar.com/avatar/1a524c04b46e9c51e76b68c605f2d8ea" title="Jordi Massaguer Pla">
-    </a><a href="#" target="_blank"><img alt="Peter Souter" src="https://secure.gravatar.com/avatar/b93b8e30afdedfaae41d81f412b9085e" title="Peter Souter">
-    </a><a href="#" target="_blank"><img alt="Brian &quot;Burrito&quot; Bommarito" src="https://secure.gravatar.com/avatar/8ff4d396931193d246e235ffc1e187b0" title="Brian &quot;Burrito&quot; Bommarito">
-    </a><a href="#" target="_blank"><img alt="korczis" src="https://secure.gravatar.com/avatar/792e5bf6794ad809b7302f8563bd65a6" title="korczis">
-    </a><a href="#" target="_blank"><img alt="Stéfan van der Walt" src="https://secure.gravatar.com/avatar/80ad07939cb51d68fae9a8320982384a" title="Stéfan van der Walt">
-    </a><a href="#" target="_blank"><img alt="dddaisuke" src="https://secure.gravatar.com/avatar/248c57c2dcbecb120baadd4c0c93bff5" title="dddaisuke">
-    </a><a href="#" target="_blank"><img alt="Despo Pentara" src="https://secure.gravatar.com/avatar/e3878aec479ca4b3214d60d14c10b724" title="Despo Pentara">
-    </a><a href="#" target="_blank"><img alt="Julien" src="https://secure.gravatar.com/avatar/540c1337afa518e538c9ab5607ab12ee" title="Julien">
-    </a><a href="#" target="_blank"><img alt="Manuel Möhlmann" src="https://secure.gravatar.com/avatar/466cfbc1a81ede5cf706290cd96ac837" title="Manuel Möhlmann">
-    </a><a href="#" target="_blank"><img alt="Luigi R. Viggiano" src="https://secure.gravatar.com/avatar/e70dc4bc7989b5ccb9bce716ed504690" title="Luigi R. Viggiano">
-    </a><a href="#" target="_blank"><img alt="Camille Baldock" src="https://secure.gravatar.com/avatar/92fce0908fb759d85e1e738aea9445c7" title="Camille Baldock">
-    </a><a href="#" target="_blank"><img alt="Quinn Slack" src="https://secure.gravatar.com/avatar/82e6d653f5d672df81fc43c6a9178360" title="Quinn Slack">
-    </a><a href="#" target="_blank"><img alt="Alexis Metaireau" src="https://secure.gravatar.com/avatar/1b3ec4d4db1722e0459151ff9fd054f2" title="Alexis Metaireau">
-    </a><a href="#" target="_blank"><img alt="Stefan Foulis" src="https://secure.gravatar.com/avatar/d3476956052910612c2c92966d05f9e7" title="Stefan Foulis">
-    </a><a href="#" target="_blank"><img alt="Fantomas42" src="https://secure.gravatar.com/avatar/8422c08336b1fd4bfa2983d5ba0352ba" title="Fantomas42">
-    </a><a href="#" target="_blank"><img alt="Erik Michaels-Ober" src="https://secure.gravatar.com/avatar/1f74b13f1e5c6c69cb5d7fbaabb1e2cb" title="Erik Michaels-Ober">
-    </a></div>
-  </div> -->
-  <!-- <div class="sponsorsTier">
-    <%= link_to 'All heroes', static_page_path('Sponsors'), id: 'ourHeroes'  %>
-    <%= link_to 'Become a hero', static_page_path('Sponsors'), id: 'ourHeroes', class: 'btn btn-danger btn-small', type: 'button'  %>
-  </div> -->
 </div>

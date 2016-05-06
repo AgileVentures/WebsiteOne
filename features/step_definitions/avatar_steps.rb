@@ -1,5 +1,5 @@
 Then /^I should see my avatar image$/ do
-  page.should have_xpath("//img[contains(@src, '#{@avatar_link}')]")
+  expect(page).to have_xpath("//img[contains(@src, '#{@avatar_link}')]")
 end
 
 Then /^I should see "([^"]*)" avatars$/ do | arg |

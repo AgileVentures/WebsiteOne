@@ -1,11 +1,11 @@
-
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
 
   def new
-    @event = Event.new(start_datetime: Time.now.utc, duration: 30)
+    @event = Event.new(new_params)
     @event.set_repeat_ends_string
+    @projects = Project.all
   end
 
   def show
@@ -15,29 +15,28 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = []
-    Event.all.each do |event|
-      @events << event.next_occurrences
-    end
-    @events = @events.flatten.sort_by { |e| e[:time] }
+    @projects = Project.all
+    list_all_upcoming_events_with_repeats_by(specified_project)
   end
 
   def edit
     @event.set_repeat_ends_string
+    @projects = Project.all
   end
 
   def create
     EventCreatorService.new(Event).perform(Event.transform_params(params),
-                                       success: ->(event) do
-      @event = event
-      flash[:notice] = 'Event Created'
-      redirect_to event_path(@event)
-    end,
-    failure: ->(event) do
-      @event = event
-      flash[:notice] = @event.errors.full_messages.to_sentence
-      render :new
-    end)
+                                           success: ->(event) do
+                                             @event = event
+                                             flash[:notice] = 'Event Created'
+                                             redirect_to event_path(@event)
+                                           end,
+                                           failure: ->(event) do
+                                             @event = event
+                                             flash[:notice] = @event.errors.full_messages.to_sentence
+                                             @projects = Project.all
+                                             render :new
+                                           end)
   end
 
   def update
@@ -62,7 +61,28 @@ class EventsController < ApplicationController
 
   private
 
+  def specified_project
+    @project = Project.friendly.find(params[:project_id]) unless params[:project_id].blank?
+  end
+
+  def list_all_upcoming_events_with_repeats_by(project = nil)
+    base_events = project.nil? ? Event.all : Event.where(project_id: project)
+    @events = list_upcoming_events_chronologically_with_repeats(base_events)
+  end
+
+  def list_upcoming_events_chronologically_with_repeats(base_events)
+    base_events.inject([]) do |memo, event|
+      memo << event.next_occurrences
+    end.flatten.sort_by { |e| e[:time] }
+  end
+
   def set_event
     @event = Event.friendly.find(params[:id])
   end
+
+  def new_params
+    params[:project_id] = Project.friendly.find(params[:project]).id.to_s if params[:project]
+    params.permit(:name, :category, :project_id).merge(start_datetime: Time.now.utc, duration: 30, repeat_ends: true)
+  end
 end
+

@@ -1,4 +1,4 @@
-@omniauth @silence-omniauth
+@omniauth @silence-omniauth @vcr
 Feature: Connect to social sites
   As a registered user
   So that I can log in  easily
@@ -31,4 +31,3 @@ Scenario: redirect to the last visited page after login with Github
   And I visit "/users/sign_in"
   When I click "GitHub"
   Then I should be on the Events "Index" page
-

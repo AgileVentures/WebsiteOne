@@ -27,12 +27,12 @@ Given(/^I have voted "(.*?)" article "(.*?)"$/) do |up_or_down, article|
   @article = Article.find_by_title( article )
 
   case up_or_down.downcase
-  when 'up'
-    @article.upvote_by @current_user
-  when 'down'
-    @article.downvote_by @current_user
-  else
-    raise 'unkown vote type'
+    when 'up'
+      @article.upvote_by @current_user
+    when 'down'
+      @article.downvote_by @current_user
+    else
+      raise 'unkown vote type'
   end
 
 end
@@ -43,4 +43,3 @@ Given(/^I have authored article "(.*?)"$/) do |title|
   @article = Article.find_by_title title
   @article ||= @user.articles.create( {title: title, content: 'An Author vote test article.'} )
 end
-

@@ -39,7 +39,7 @@ describe RegistrationsController do
 
       it 'sets omniauth session to nil' do
         post :create, user: {email: 'random2@random.com', password: 'randomrando', password_confirmation: 'randomrandom'}
-        session[:omniauth].should eq nil
+        expect(session[:omniauth]).to eq nil
       end
     end
   end
@@ -65,7 +65,7 @@ describe RegistrationsController do
     end
 
     it 'assigns the requested project as @project' do
-      @user.should_receive(:update_attributes)
+      expect(@user).to receive(:update_attributes)
       put :update, id: 'update', user: {display_hire_me: true}
       expect(assigns(:user)).to eq(@user)
     end

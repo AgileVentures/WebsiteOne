@@ -1,3 +1,4 @@
+@vcr
 Feature: See project related videos
   As a member of AgileVentures
   So that I can see all the videos related to a project

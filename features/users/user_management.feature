@@ -1,3 +1,4 @@
+@vcr
 Feature: Create and maintain projects
   In order to manage my account settings
   As I user I would like to have a "My account" page

@@ -7,6 +7,8 @@ features:
   twitter:
     hangout_notifications:
       enabled: false
+  email_registrations:
+    enabled: true
 
 mailer:
   delivery_method: 'test'
@@ -18,3 +20,5 @@ twitter:
   consumer_secret:     nil
   access_token:        nil
   access_token_secret: nil
+
+agile_bot_url: https://agile-bot.herokuapp.com

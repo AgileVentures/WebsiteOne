@@ -1,3 +1,4 @@
+@vcr
 @javascript
 Feature: Display Public Activity
   As a user

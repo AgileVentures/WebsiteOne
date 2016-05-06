@@ -12,6 +12,8 @@ features:
   twitter:
     notifications:
       enabled: false
+  email_registrations:
+    enabled: false
 
 mailer:
   delivery_method: 'test'
@@ -53,3 +55,5 @@ twitter:
 
 github:
   auth_token: <%= ENV["GITHUB_AUTH_TOKEN"] %>
+
+agile_bot_url: <%= ENV['AGILE_BOT_URL'] %>

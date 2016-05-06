@@ -1,3 +1,4 @@
+@vcr
 Feature: Manage Document
   As a project member
   So that I can share my work related to a project
@@ -46,12 +47,10 @@ Feature: Manage Document
 
   Scenario: Show a document
     Given I am on the "Show" page for project "hello mars"
-  #???
     When I click the sidebar link "Guides"
     Then I should be on the "Show" page for document "Guides"
     And I should see "Guides"
     And I should see "New content 0"
-    And I should see a link to "Edit" page for document "Guides"
 
 
   Scenario: A document can have children
@@ -87,7 +86,6 @@ Feature: Manage Document
     Then I should see button "Save" in Mercury Editor
     And I should see button "Cancel" in Mercury Editor
     And I should not see button "New document" in Mercury Editor
-
     When I fill in the editable field "Title" for "document" with "My new title"
     And I fill in the editable field "Body" for "document" with "This is my new body text"
     And I click "Save" in Mercury Editor
@@ -97,7 +95,6 @@ Feature: Manage Document
 
   @javascript
   Scenario: Mercury editor Cancel button works
-
     Given the document "Guides" has a child document with title "Howto"
     And I am logged in
     And I am using the Mercury Editor to edit document "Howto"
@@ -122,7 +119,7 @@ Feature: Manage Document
     Then I should see "You do not have the right privileges to complete action."
 
   @javascript
-  Scenario: Document should have a history of changes 
+  Scenario: Document should have a history of changes
     Given I am on the "Show" page for document "Documentation"
     Then I should see "Revisions"
     And I should not see any revisions
@@ -155,40 +152,44 @@ Feature: Manage Document
     Then I should see an image with source "/assets/mercury/missing-image.png" within the Mercury Editor
     Then the Mercury Editor modal window should not be visible
 
-  @javascript
+  @javascript @intermittent-ci-js-fail
   Scenario: Insert media model accepts full url youtube links
     Given I am logged in
     And I am using the Mercury Editor to edit document "Guides"
     And I am focused on the "document body" within the Mercury Editor
     And I click on the "Insert Media" button within the Mercury Toolbar
+    And I check by value "youtube_url"
     And I fill in "YouTube URL" with "https://www.youtube.com/watch?v=foo" within the Mercury Editor Modal
+    And I check by value "youtube_url"
     And I click "Insert Media" within the Mercury Editor Modal
     Then the Mercury Editor modal window should not be visible
     And I should see an video with source "http://www.youtube.com/embed/foo?wmode=transparent" within the Mercury Editor
 
-  @javascript
+  @javascript @intermittent-ci-js-fail
   Scenario: Insert media model rejects badly formatted youtube links
     Given I am logged in
     And I am using the Mercury Editor to edit document "Guides"
     And I am focused on the "document body" within the Mercury Editor
     And I click on the "Insert Media" button within the Mercury Toolbar
+    And I check by value "youtube_url"
     And I fill in "YouTube URL" with "https://www.youtube.io/watch?v=foo" within the Mercury Editor Modal
+    And I check by value "youtube_url"
     And I click "Insert Media" within the Mercury Editor Modal
     Then I should see "is invalid" within the Mercury Modal
     And the Mercury Editor modal window should be visible
 
   @javascript
   Scenario: A logged in user could change a document's parent section
-   Given I am logged in
-   And the following documents exist:
+    Given I am logged in
+    And the following documents exist:
       | title         | body             | project     |
       | Decisions     | Examplehere      | hello mars  |
-   And the document "Guides" has a child document with title "Howto"
-   And the document "Guides" has a child document with title "PullRequest"
-   And I am on the "Show" page for document "Howto"
-   When I click the very stylish "Change section" button
-   Then I should see "Select new section for the document"
-   And I should see "Decisions" in "Modal window"
-   When I click "Decisions" in "Modal window"
-   Then I should see "You have successfully moved Howto to the Decisions section"
-   And I should see "Decisions" in "The Breadcrumb"
+    And the document "Guides" has a child document with title "Howto"
+    And the document "Guides" has a child document with title "PullRequest"
+    And I am on the "Show" page for document "Howto"
+    When I click the very stylish "Change section" button
+    Then I should see "Select new section for the document"
+    And I should see "Decisions" in "Modal window"
+    When I click "Decisions" in "Modal window"
+    Then I should see "You have successfully moved Howto to the Decisions section"
+    And I should see "Decisions" in "The Breadcrumb"
