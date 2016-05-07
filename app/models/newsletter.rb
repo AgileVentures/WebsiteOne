@@ -3,8 +3,8 @@ class Newsletter < ActiveRecord::Base
   after_save      :send_mailings, if: :instantly_sendable?
   before_create   :init_last_user_id
   scope           :unsent, -> { where(do_send: true, was_sent: false) }
-  scope           :in_process, -> { 
-                    where('do_send = ? AND was_sent = ? AND last_user_id > ?', true, false, 0) 
+  scope           :in_process, -> {
+                    where('do_send = ? AND was_sent = ? AND last_user_id > ?', true, false, 0)
                   }
 
   # sent via sendGrid - there is a limit 200 mailings/day
@@ -21,7 +21,7 @@ class Newsletter < ActiveRecord::Base
     _last_user = nil
     User.mail_receiver.order('id ASC').find_in_batches(batch_size: 100).each do |group|
       group.each do |user|
-        Mailer.send_newsletter(user, self).deliver
+        Mailer.send_newsletter(user, self).deliver_now
         _last_user = user
       end
     end
@@ -35,5 +35,4 @@ class Newsletter < ActiveRecord::Base
   def init_last_user_id
     self.last_user_id = 0
   end
-
 end
