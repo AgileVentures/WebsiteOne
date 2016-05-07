@@ -98,7 +98,7 @@ class AuthenticationsController < ApplicationController
 
     if user.save
       # Bryan: TESTED
-      Mailer.send_welcome_message(user).deliver if Features.enabled?(:welcome_email)
+      Mailer.send_welcome_message(user).deliver_now if Features.enabled?(:welcome_email)
       flash[:notice] = 'Signed in successfully.'
       sign_in_and_redirect(:user, user)
     else
