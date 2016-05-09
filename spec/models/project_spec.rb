@@ -35,7 +35,7 @@ describe Project, type: :model do
 
     it 'should throw error for incomplete github url' do
       subject.github_url = 'https://github.com/edx'
-      expect{ subject.github_repo_name }.to raise_error
+      expect{ subject.github_repo_name }.to raise_error(NoMethodError, "undefined method `[]' for nil:NilClass")
     end
 
     it 'should not accept invalid Pivotal Tracker URL' do

@@ -110,7 +110,7 @@ Then(/^I should see (\d+) member avatars$/) do |count|
 
 end
 
-Then(/^I Should see projects with following details:$/) do |table|
+Then(/^I should see projects with following details:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
    projects = table.hashes
    projects.each do | project | 
