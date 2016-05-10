@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe StaticPagesController, :type => :controller do
-  
+
   let(:user) { FactoryGirl.build_stubbed(:user) }
   let(:page) { FactoryGirl.create(:static_page) }
   let(:valid_attributes) do
@@ -72,7 +72,7 @@ describe StaticPagesController, :type => :controller do
 
       it 'should not render anything' do
         # render nothing actually renders a space
-        expect(response.body).to eq ' '
+        expect(response.body).to be_empty
       end
     end
   end
