@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe User, type: :model do
   include_examples 'presentable'
+  before do
+    b = class_double(SlackInviteJob).as_stubbed_const(:transfer_nested_constants => true)
+    allow(b).to receive(:perform_async)
+  end
 
   subject { build_stubbed :user }
 

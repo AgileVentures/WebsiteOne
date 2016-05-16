@@ -399,4 +399,1543 @@ http_interactions:
         <script>yt.setConfig({'EVENT_ID': "Xi4OV9qPOZbWcej9mYAB",'ENABLE_CAST_API': true,'MDX_ENABLE_CASTV2': true,'ENABLE_JS_API': true,'POST_MESSAGE_ORIGIN': "*",'BG_P': "VwazpEGygMY3CrcYA12utTFL2FeIVzTFzITz0n8HEXXfUHhr9KkrRV6Wnm8ub5VEBaNgOXer0ViDY3nYSD6auaw7zibQaNyQyIKsPaaOfUsAYOWBUXHMNVLk0XiwqW6yXpe\/dBX4BGvmMxQyqanq+r6LdNGUQNDqfGkPxaVH6+UJlw7tYIcO284eUkj3Forl2GBeDVK+iNzW5j+l0Aen7eEGOi\/R03xnON0lT8PkgoQ4R93keGrEWXFtVTdFzWN3uYhOjamO9pe9WEFpr0TKUErPmqupi2adQxjwPY3Ql761eBUwcFtw7UC0qaHBNQ1PYx\/wppzzSPMXf0VZ2NvT6adNapzgndu1+uTn\/etIrP\/BzdDQwpohHZdGeCyT8dBPP54x3PKqadIx+N2mzJvn9pwMS\/Om9sCqxMMhzaO003UfBsa+0Vh0MrhOc\/3YHFqTwqLOw\/u44SyqIGHsFUb9eA11ddaYz6PbT6Tup72nbAXNtq3VcrGUxkwLAor\/rWORpQ9TU9dstE3TYbqvIY8ZSpZq5dEuUeSZVwHhTWs3Q04Q4+23YtBf6auT2rw1yKWJidMMTvmp9ge4Kd+xcUuH0S\/y1K6laA\/SFRRTQ5J3v453SuFcw4I2NlDunmyITffIz+MySTNZCYkArf60k2Nf1tHl7nlLFC3cpiheWk4fMSb1G+12joNVz56Oupe2YePCVMJ\/1HGGQ9X8lL5lvVHiET3bp8f4AF3EP7QpT47DB0K6r7YFK7oWlvs\/5im0fbdnOTFnBviClKrM8JuBt3CMMSKxG7CHJ\/zSl0UyxS72OrU8TN5f33jE0nEAT4UsYK973bGpLUo5AFpoigxu3+cRxRjUqfldSro7YsFc09O0rxzSnh6EmBaOiKS+4w9JXoqqAGs6Ji8g8Qjl1HqEJb4Q9fNpJVwvxC2N\/BWO96SO\/+1MAjyrkIEDcYg7jMQcz22lfkG5PdxLET+oniEHfl7JXzcRabLEKJHIZNIIzUvvsEvxbo7VVpn0t91w8xJgFX65FQ7Gj8TclnjGk6SCxKG3fQ45B2SRoQ\/v9Tr6DrVEdoiWv9uQQUNyq+5ud\/JxmKOg+6JOvhPPwrgCEPa5+ZszCQgjZAq4zFICozgJ9jcq6525VqfjQHpBsGnK87XysJac6Fb5k0ehJvwKn0fb5Q3VOvAFPAFm2OYRaVMSXUYAo\/wQeHLLDJtGcj7hFng2+zNb\/rLse6wOhFOK2C6FU5ubqfIzMErhHJuuH4JNB\/7QADf7NX0wE\/yqfV7R6sFJzxAvPaW+ov5EKTnatFDAiaBUHfQVbY23cx08LAWW6gpN1Z\/b3\/kIW+hUOpbjt+aUUxcJq1jDskPOVx\/Otit+QeCLXDUYqRh4oVY5\/+AGhtAt85zK0xaMBWTfVvvpiOY0+VK+2i801CasxZ8kQCce9HuA4bX9Mugy9Rea7SUjaZ2WH9FbdcfFEftTJ0CMScuC5PbrPqfalh4SdtcOqOTCQBjXvCUfZ1+dBWj2LcsPq\/BLlTS5GHQkMxAQnXtMQxzhm0IAJFFocP3ajrk38iFKoIe+Y\/h4bWDlCChd0baFaCf3EeiR\/I\/ncgL3GNHkt+fZWi3Rmh5PXzHam0lCQfRdK9Fz0Wra+tYSpNsA1SBZFBvgRsmKHz7FF\/fj2zmlYAtlclJh+hePoRPxoxVyxTdMN0Umxg+ErlobNkDoIjqJNU6OrBP+axd\/o+cO9d38m3HpKlbKNo+Jh1yB6agFRAOrHLXIRQd8MUePfMXMt\/baEyGNrFxFhfZnzdvpX5FmAdQoiABMYa4zv9BmQTQwyDHTI+M3IWPaGvbC\/hFfuIGS8qQN6mC9E9WnNBfdGsp36RMNjFS2\/9GxdH3FoMVAE7HM9L3E+haPbO3NbOp3cv+P4lh6Vadz2zxbHNIO3k6R37YtSy1bc60r8RLDAvhBasrj\/OS0DeBT+hvYuWiBgeB+nqT70Gjpnmg3HrqLZ262SejA4ScH04\/VNHGWss19zIj4vtfZuSgZ6jVv5yacuhGYslvULsQuf6dR6DB\/VGFCvehhCXaUllnTYUXXASAptJWghYFfdPdIefE\/DkiGHdD6hYQRUqhJy5jPsCA3+HBzAJiToe79mpJc7stBRw\/hAbZzqKj489HSuxNZw1FITZRMKwtUZ92QCfBiNniChaaWWs4bvv3iRwLfWBcRCGv0bvEvGwV4w9VW8IfB9Y+lnS0g7bQ48nHEEygAxhhAtpmt6eNuQJBch01kf2qIMmbCAltoeLGKPrVcDyyFZZ0\/Nd0UzkqdpGdfo7nXS780VUqVAPzBDHRhV+cR5vhavHa3LtnhJrhbBkGqPgkmZdHuorW2umAny3AX9P0Tn55E9swIOORLUkPR+107xs9lDnIhhomxwXLG8jVfX0w\/NOWjj+Us1L8+jI6YGmbHBQk61Hp\/+sUPrpAerx2+wAmTVYxqCFTaTu+S64vXLJuZN2Io\/AGpEm7S+4d1D5PvRpvE1foM7zWhzY7JzxCYaSnMpUKSX5KndiN0QeFrvKB1wQG0AX0wDle\/26GPP3LGW92D6J9+UPgD5tccU08uzX7vLbucITcAUYYFfXNbG3V2XOSTfsIBeXw8Ld+bBASwn0RxJPZbZkup+OodA1gqLnrCnJ38YQw+sMkuYslOt9uKhZCvY0KrFbw7BHucYI\/d6DqCSx4KzsL\/ufDISpLPxdMOb3GiQdB79nwr462KXfmxb1LmkMc0AolE73bb0TX11z+UfrBW8JAjm2RxTe8fcfC+khAWL3fviP3knVNLbQBM6X3i+AVXtjs2QwNWz\/hmCV94w+DvO7SE2DZPHnP2VNvN176tzEbwk6Hru2Z57n4Q4iVT8VLXJRc4QjpmePTmYWxxR8HmHY\/DrF4Dpgdt7Ti5ER1bmR\/y9r3LfH\/m+E\/CYm6qBWxUPQ1h37L6ZGHYf5lP\/DX57npKf1zauOQ5wI70zj38BNv9wctlpFShjG2rarsLTNiRuOz+akONjpf9pEXHOLsQ28ZDj6A2yfVN8Z6Tqg7ybyj2b033opvRfVydoH3edplGZ4Cd1Cj+OSkRlSLtcg5D4OiP7danIYO6pz1NZsT9gfIjPgPXKBxKd\/JF0BQsYTv+e6e0QaxhHI4Pj4f24QnWHWXRPdxBkbu5g17kJX8\/l\/3aEMrZh6UzzVfCfWDt9lC2l+Nye6MefLHXPNgCHa+Ec7RBo43vfjvJVcDDtU8Bg6rs9rE8bDDnQtSTOJ1VND+8CVMwKZXUDphDZjKHel8i4szuk\/qkco7Vq3D9bdsSKi5t+ydfUr4gsKOFOgj8k6OGAW2GlML077RQ1lr9MhEL7NBh5u0ViQFEuKBp7FcER6dj1OUU46hOTM6GCGVIjX8JMG8tInj1LrZEJ1oEEql6QEYiUMYQiOCHNlJ91cvUd\/S9td4xl\/5OV22T+9r5x9VOXSe\/2qEx3142i5WpMH4AVIx6lnt8LVbYAWi4LojboflOLRenSUOY\/ua1HUUs2WM8Q2RdOArUNeKYkqi4iyFnG6D1UcX0KIELmFaCqy9E\/kSb2KC9j0uJW\/BAaq8KWwc1r95VU9GqyDmc+L0PLs32u\/eywgumdJ7b8T9CGdWmhLi4fiiFcdVaShZFH6cUGNrYKxMs3hzVM7qtIuR8KSkxx9011DQNIAPPIwwyAIotp+WASPr4sqFC8YzZXghj5+uqO29PtFhhUvW9USFN1WZv7uPsJjAzbT+BSufTE6bldKMJtRObjj2B+YvfUuCHwTaBhAn3EEXBPii\/FVwmCEUMNAzMqg7UZpzsxqaIlbNDVCG9A6e87dDNXQSDcXiCO8mSPP9vdqtnJiHS\/9UXNR+9M5UooEhucq\/F+WICo\/10k0YA5GecY4RGdM7PfPGcNBQnsc5redzQ75AfjwHeF68MI1YvUO2knwXlruL6X4mWqbs42fR11Y3zdYNQFOsb2JQekM+qjC8h3Sik\/QKzDG0+ZbdB4iRTYeA6bZiLIy67oOxE1zv6x34i\/3b3LR7u7EyKH1z97X\/8MXPszZT5NKenVwK5EGnFWMFU5K3jEK5Gy71Nohc\/xZUb01LjtLf0eZ5N5tmwCQWRsnDemFoWsiJB6uU\/GZuIoJkdJ+jUvklwxIBFQskIGAslfLh26bDHUQZBZVJurhFrs\/lt4VKsqUPH4ZTx\/QpFUElXxo7wwkVwZTVerxGYslvma8e0dtCeVL\/ob\/w3KKAreYOVUyuyUF4pab6G2YKzmgTVe6s3MrFbZXOQfI9yc7co1h0ziCQdAnticwbBeFGHebZwowubn5SdBHK\/4EI0AtF7utjRz8LTUDWaSStMJWGEWVb4bVlrV5N0XDuTyvQZERB+54P3x2jUjXVR8Gl4lm8119jM31Dho7kBugmeVCIof\/ZglAXQlILgtt4DvQhAJCPLiNmCR+teZe+tNDKM2GoJiMNkSl0yRNFiYXT4o4ge1mPw8COvjMagxIDQeQw8IQOrWuHRvGh5QwrEzh2eJEPItWkH70CNNwYUC6hzhVrJUSSLTMcgf6jKYveLkoUM4m65dBAInvomaTBjqmgXJEoIZUjLW6xgP5crrXINGIoyf7nb\/SSsYuwtzx2wtaO1Cdwo94WYTjwXAYLtutYCWQPZONahqvOLmwv1BKp4dq8+HY1J8Aev1eHKsYqAMNDnmy8\/tburGVIg+MAcFRFReI6L\/kaK6Bfs10y64hmGZdeJ0jWh4i5xKeiKPuY2Wcn+QaExIj0wfQm4N6VPWk9AX8mYYLoxISF2gkfy+6LKLe+BTckkpMa4tBhXdU4zhKsa+spHRl0MqNiT3gvyNvGgEqI6O3pcHh90TzQtGqonbJllm1ApTojm4T7j6FZckvyMCw+MMnO4U7QEu4s1EvzcgG+XWYNSAPvkp4u5GXhz7ze42UO1+tB\/2Sdbv98fwCB2bbPwkvaFqh8i09\/xrZUyaSowOWs7dA5392uJyTB3bGQSItSGwqwA8PsaN42hXZGeT6EhwQEHaSYkVusqSUXLzqgbyH+\/AI01blTxgz0oUxx2pzBF27LTYQqWuda5+6IYYOG5xGZ7sIyYY26r20ixfynX6w8Qrpk3Ioc01Vo\/QbCYCNjppbbw21mnpxiVffEoW7dEtRH+F1GYeQS1b0kU4EDuEXYsL5y3ESvUJitGvxgc1UZZAIIOJirl0Is7kpbmHAO3Mok2RD+bvQBbjwODDJviISRq4EU0Rn5XkELkk7RaMfZR50X5TCJHGIkxDXtCTjIU217b0YGKLZmivXzzTHazLhpG+XcesiWAldOGsab2N7QqToRMpFIBfMvKdDTDRFaObfehCUoCgupZGHDYSVWq0MAmZC8c7zflA5M6XD5YlK1v6vthJ0tQYPd8n6tOUOT9PVW4ij5Ap9OD+mhuPLQhX1TVwDcpREfg75XhiueLP8OZQxe9m\/Vgi05W0AnLSk89uvU8ymmPjPnzQBXbsL5kEBzHA3cgL\/W9ZG8B292apOUZSNQjFofOae2z1h\/f\/4CRDIVf3NFtQd3OggVKR7yaOZpvNEBKNvn0YLHZri3SYTR\/RIJtYKr78UGyIvup2EfNg5MIOyxbzbW1781kw5duFgQOEICMg53deyJjVDrbulkHy9gej6lC0sEEBlC1D3CMvQm7qGr21SxvNUYwb3Ep6gtNU4DU33wBSJytkPhVteTbZmXG6bwmmVXRvWLJ97wl94\/c5FertKZq4O8jIY\/+haKWpZa4O1jobCNaUOEIS21XSeseiFfNtR1I3DdwzbEgY7zFTTkhsZvKp6DGcNQ2qbs2l96zMSWKto\/+xZnKun5kmVKbtNtz4MDRQgAxnnDq1FfcnYXRTs6YB4mvb4F1vUQAQpMK9rHatOHnRIL3wW2uDtz9RmEWBO1QX9dtWMF80TKn743\/Gy7x4eJKXBMR3WAM9LkMdQcc4o\/JYiUhF16Wxg3QDUS6NACSD0PFVvV527xuvgl0FadkFcNnIiQMcSJXTRLBPJJ7uPavhQroAn9CxqYsEOeiZoPNAdGByro6u\/qX0C9Nu2ZfcmLJB4EymnJjLiuNyEWCrxnQOZqbAj84SbSNVLRFgxV2wzme85hel+9x8dlUueFmzWoFTD0+5WQJxFrMqJqPbWNLvjtE44bbLhfEmR9BSu7sT6k3fY7zybG9an2lpmLBPE+olPEQDNcKEDtEu+OpoGJ+ZXzSA2thPK0NaJ8Dgs2KlpZk4M93H5f1pXdLPl+ybj7CLEQ135tYFU9kyY2Ff5gxSZ1e6MQqUIn5pT+saPjxLJTEKq6NwG793MGCkF\/AeOS5rq8L3yASR\/ulj+Fllx1XNWrpd0xDaweg+Xs1vfeY8H4xUQ6i3uNYlnTigojbLGjttLE7G55XmH7woi1UZ7l0IBfIJe2cgjTY5G01N\/wssQ9un5E8aKhFCK37EEqUEOdoWD+WjLwes5\/yGEfCmluIwYI2Rs9HNSOs6B1FK9CB4p01QvRvTCe2VtejXyfxrI+WLml5RQrtpjR7WflCvR0pLq12vSqHOqduEbUkSbbsXfu6UJI\/6PSIyjuvf37fxTNw\/EaUe3geIOPljn2PefHHSwCQUIK\/KxdbkvgRiAPp8mw8XiayDDZAQIgD3VJgMh9\/QAJAZwrLLmbu5JNwB10SCeQUrj4N7FjPDqgGSBvezzhqfaNcZ\/Ag8HrtrUW8d1ZU4q1T4JsYay7XhQjn1P1paxd7g79rtQ38hv47enR\/jIvgAzbfSiQeyjC2wdkdHByD6iuket\/5qxtFkNSrDiR1PdWnlxveQAM6JnIvn3Y2xNZ7BD01dWhwtYpCTCynR8elzQ\/ykK5ZCZSvO7ZBZqSnSTOz\/SNcTgEQqAtnBU\/55GICjv8gdEKmdPTMW769YYhq8P05sDRlJxui6gd3s8LoH9OYsJGXEUnW\/TiqBUkb5\/aBefsAR3cGZ298EnVd3ScZGb4hlSKcrC7CBYi+y67hOXTa4xpiNdiCumMtfyJRrPO1k1ifSdcUl5qIO3PIH8Z0YTQ3lXcU3pTzlPfWephEU07kWh11ZkNGxYA1ZYevSBlvk6mJZXc=",'BG_IU': "\/\/www.google.com\/js\/bg\/j6SDDiQit5YY48GNgPpnCluJgoNCzbKlh5o6eVjReZI.js",'XSRF_TOKEN': 'QUFFLUhqbUQxQld2QU0tNEFmRDUxNWN2a3MwaENmNFItd3xBQ3Jtc0tsdmhwWWU3c19Fb0FaQzJJN1Q1YjhnUmRBYTRMU2xGQUtmNDhycnJKMGtIbHB5UV9HQ2huWFRwY0w4NmhqcE5yOTJ2ZXJoMHVrTVZZSWpWMGVTZmZnVDJuRng0ZC1RbmJueDlGb29LQVFMN0ZKbThsOVRvOE5LT0tQZFpDQmQ2SVBkU2Z4dzUtbjQzR25BcGdtNEt3N1lkM0UzZ3c=','XSRF_FIELD_NAME': 'session_token','EURL': "http:\/\/127.0.0.1:59454\/scrums",'REVERSE_MOBIUS_PERCENT': 100});yt.setConfig('PLAYER_CONFIG', {"url_v8":"https:\/\/s.ytimg.com\/yts\/swfbin\/player-vflW5kYKi\/cps.swf","url_v9as2":"https:\/\/s.ytimg.com\/yts\/swfbin\/player-vflW5kYKi\/cps.swf","sts":16898,"attrs":{"height":"100%","id":"video-player","width":"100%"},"params":{"wmode":"opaque","allowfullscreen":"true","allowscriptaccess":"always","bgcolor":"#000000"},"assets":{"js":"\/\/s.ytimg.com\/yts\/jsbin\/player-en_GB-vflw7lih2\/base.js","css":"\/\/s.ytimg.com\/yts\/cssbin\/www-player-vflcvf41W.css"},"messages":{"player_fallback":["Adobe Flash Player or an HTML5-supported browser is required for video playback. \u003ca href=\"http:\/\/get.adobe.com\/flashplayer\/\"\u003eGet the latest Flash Player \u003c\/a\u003e \u003ca href=\"\/html5\"\u003eLearn more about upgrading to an HTML5 browser\u003c\/a\u003e"]},"url":"https:\/\/s.ytimg.com\/yts\/swfbin\/player-vflW5kYKi\/watch_as3.swf","html5":false,"args":{"hl":"en_GB","fflags":"enable_yt_music_lp=true\u0026legacy_poster_behavior=true\u0026dash_html5_refresh_mapping_min_buffer=0\u0026teaser_on_button_hover=false\u0026yto_enable_watch_offer_module=true\u0026april_fools_watch_redirect_enabled=false\u0026legacy_autoplay_flag=true\u0026april_fools_search_enabled=false\u0026native_controls_assume_media_volume=true\u0026enable_stereo3d_ie_firefox_opera=true\u0026shopping_card_icon_with_teaser=true\u0026enable_probabilistic_show_skip_as_nonskip=false\u0026player_scaling_360p_to_720p=false\u0026april_fools_country_blacklist=element:'AE',element:'AF',element:'AR',element:'BH',element:'CL',element:'CU',element:'DZ',element:'EG',element:'ID',element:'IQ',element:'IR',element:'JO',element:'JP',element:'KP',element:'KR',element:'KW',element:'LB',element:'LY',element:'MA',element:'MY',element:'OM',element:'PE',element:'PK',element:'PS',element:'QA',element:'SA',element:'SY',element:'TH',element:'TN',element:'TW',element:'YE'\u0026html5_deadzone_multiplier=1.0\u0026enable_ad_video_end_renderers=false\u0026shopping_card_icon_without_teaser=true\u0026hover_card_for_video_card_teaser=false\u0026high_res_timestamps=true\u0026generate_shopping_companions_on_desktop=false\u0026html5_force_play_on_suspend_event=false\u0026sidebar_renderers=true\u0026video_wall_pagination=false\u0026html5_nonfatal_invalid_state=true\u0026drawer_peek=false\u0026html5_enable_aac_51_clear=false\u0026always_request_animation_frame=false\u0026dynamic_ad_break_seek_threshold_sec=0\u0026use_cougar_ads_ui=false\u0026mweb_cougar=false\u0026html5_live_disable_dg_pacing=true\u0026html5_bandwidth_window_size=0\u0026html5_tight_max_buffer_allowed_bandwidth_stddevs=0.0\u0026yto_feature_hub_channel=false\u0026april_fools_landing_page_redirect_url=\/playlist?list=PLbpi6ZahtOH4TalzBzHHczrUgJL7vsDdG\u0026yto_enable_unlimited_landing_page_yto_features=true\u0026html5_strip_emsg_lite=true\u0026html5_force_play_on_suspend_event_limited=false\u0026fix_afc_mpu_api_stats_ads=true\u0026video_wall_storyboards_mouse_x=false\u0026html5_manifestless_always=false\u0026dash_html5_refresh_mapping_interval=0\u0026tv_player_heartbeats=true\u0026fill_endscreen_moving_thumbnails=false\u0026kids_enable_latam_lp=true\u0026enable_probabilistic_show_nonskip_as_skip=false\u0026cards_drawer_auto_open_offset=-10000\u0026cards_drawer_auto_open=false\u0026enable_0s_skip_for_surveys=false\u0026disable_monetization_on_indisplay_playbacks=false\u0026yto_enable_ytr_promo_refresh_assets=true\u0026html5_use_server_bandwidth_estimate=false\u0026html5_streaming_xhr=false\u0026html5_firefox_always_vp9=false\u0026april_fools_enabled=true\u0026enable_why_this_ad_for_desktop=false\u0026html5_live_only_stick_to_head=true\u0026endscreen_204_logging=false\u0026html5_clear_on_invalid_state=true\u0026ad_video_end_disable_auto_open_drawer=false\u0026log_teaser_hover=false\u0026april_fools_watch_related_enabled=false\u0026enable_html5_spherical_direction_logging=true\u0026cards_drawer_auto_open_duration=-1\u0026html5_live_nonzero_first_segment_start_time=false\u0026use_html5_ad_break_renderer_for_web_gaming=false\u0026ui_logging=false\u0026enable_dynamic_ad_break=false\u0026enable_ad_video_end_renderers_gaia=false\u0026use_html5_ad_break_renderer_for_mweb=false\u0026april_fools_watch_player_button_enabled=false\u0026related_menu=false\u0026shopping_card_icon_always_visible=false\u0026use_fake_html5_ad_renderer=false\u0026moving_thumbnails_autonav=false\u0026desktop_block_progress_events_after_ad_skip=false\u0026april_fools_360_video_id_list=8awqtaD3LAI:PkiImnukZAw,98LoiMZ59Jw:M3l6mM3qVzk,MX0D4oZwCsA:F_nBHsBZusc,1v1RR8vCbnI:aOLTUYTkCCU,NMbM-ERy2Lk:ClgB_hmSMoM,KK67kaMWN-8:BiuEOSQU-WU,hmQN95ROBcI:jTiYCw6OhZE,2vcJibyBRAM:nh3jD2Oddmg,FcN08Tg3PWw:V47pFY9K4eg,1ZLN9AzxVa8:wmi_ve62hu0\u0026ad_info_icon_in_card=false\u0026product_listing_ads_cards_drawer_auto_open=true\u0026html5_crossorigin_video=false\u0026use_smaller_session_tempdata_cookie_name=true\u0026log_it_display_tree=true\u0026shopping_card_icon_hover_blue=true\u0026autonav_notifications=false\u0026april_fools_hero_video_id=DPEJB-FCItk\u0026hover_card_on_button_hover=false\u0026video_wall_moving_thumbnails_autoplay=false\u0026mweb_cougar_big_controls=false\u0026html5_keep_dash_mpd_origin=false\u0026html5_dash_mpd_version=4\u0026shopping_card_badge_enabled=false\u0026enable_instream_ad_badge=false\u0026dynamic_ad_break_pause_threshold_sec=0\u0026combined_teaser_link=false\u0026enable_spherical3d_firefox_opera=false\u0026dash_html5_timeouts_before_metadata=false\u0026html5_retry_get_video_info=false\u0026html5_playing_event_buffer_underrun=true\u0026merge_button_with_teaser=false\u0026new_ended_replay=false\u0026html5_strip_emsg=true\u0026video_wall_moving_thumbnails_hover=false\u0026html5_use_tight_max_buffer_depth=false\u0026video_wall_redesign=false\u0026gaming_i18n=true\u0026video_wall_moving_thumbnails_first=false\u0026big_buffers_for_anchovy=false\u0026html5_request_sizing_multiplier=0.8\u0026doubleclick_gpt_retagging=false\u0026desktop_send_instream_ad_complete_ping=false\u0026disable_fetching_previous_nonadjacent_midrolls=false\u0026live_chunk_readahead=3\u0026better_mobile_in_player=false\u0026use_html5_ad_break_renderer=false\u0026fix_backfill_mpu_api_stats_ads=false\u0026flex_theater_mode=false\u0026log_backfill_requests=true\u0026launch_new_wallet_api=true\u0026ios_path_probe_enabled=true\u0026playready_on_borg=false\u0026html5_multicam=true\u0026enable_spherical3d_ie=true\u0026enable_audio_cast=true\u0026use_html5_ad_break_renderer_for_embed=false\u0026cleanup_text_overlay_spam_signals=false\u0026white_noise_with_interval=false\u0026probability_to_change_skip=0.0\u0026tote_otf_inline_hls_manifests=true\u0026disable_new_pause_state3=true\u0026html5_always_underrun_on_empty_buffer=false\u0026remove_survey_nota_line=false\u0026html5_tight_max_buffer_allowed_impaired_time=0.0\u0026edge_nonprefixed_eme=false","cver":"1.20160412","fexp":"9405982,9407016,9416126,9416891,9419451,9420452,9421353,9422596,9425065,9426926,9427261,9427414,9427891,9427902,9428398,9429947,9431136,9431862,9432684,9433192,9433273,9433729,9433999","innertube_context_client_version":"1.20160412","c":"WEB","rel":"1","watch_xlb":"https:\/\/s.ytimg.com\/yts\/xlbbin\/watch-strings-en_GB-vflw8XgBR.xlb","is_html5_mobile_device":false,"host_language":"en-GB","enablejsapi":"1","cbr":"Safari","innertube_api_version":"v1","ssl":"1","eventid":"Xi4OV9qPOZbWcej9mYAB","adformat":null,"gapi_hint_params":"m;\/_\/scs\/abc-static\/_\/js\/k=gapi.gapi.en.1MqgDU3zZ20.O\/m=__features__\/rt=j\/d=1\/rs=AHpOoo_KZf1llAl4VsToQWFFf6-n5A3H0g","cos":"Macintosh","el":"embedded","innertube_api_key":"AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8","player_error_log_fraction":"1.0","apiary_host_firstparty":"","apiary_host":"","cr":"GB"},"min_version":"8.0.0"});writeEmbed();</script><script>ytcsi.setSpan('st', 20);yt.setConfig({'CSI_LOG_WITH_YT': false,'CSI_SERVICE_NAME': "youtube",'TIMING_ACTION': "",'TIMING_INFO': {"yt_spf":0,"cver":"1.20160412","e":"9405982,9407016,9416126,9416891,9419451,9420452,9421353,9422596,9425065,9426926,9427261,9427414,9427891,9427902,9428398,9429947,9431136,9431862,9432684,9433192,9433273,9433729,9433999","c":"WEB","yt_li":0,"yt_lt":"cold","ei":"Xi4OV9qPOZbWcej9mYAB","yt_err":0}});</script><noscript><div class="player-unavailable"><h1 class="message">An error occurred.</h1><div class="submessage">Unable to execute JavaScript.</div></div></noscript></body></html>
     http_version: 
   recorded_at: Sat, 01 Feb 2014 11:10:30 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=francisco.muller%40grimesjohnston.biz&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:06 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 51c76241371dfc20d25094a51b4759eb.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - oW5SCV0bIt0HFAlfK-9L6MQ2-HqUzvbE3yTBp4kSeFtcA19MB2LOYg==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=alexane.kling%40jakubowskigraham.net&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:06 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 978c00aff85cbe1b9a35711178037d78.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - d-bBGD9s_hZJvpERBX-d2Qa9q5BofJDT5xft5-fr58eb1WUycV7e9A==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=jadon%40zulauf.co&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:06 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 4ddddf0243e9305f37605c71001e5dd7.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - btklTfXIN0vLSA2p7oVaIqZpnoI2VqtglrRBObj0g84q4IoH_sF8aQ==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=gudrun.beier%40skileslind.net&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 d3617d950023ee8165fc850d9a6b0b97.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - hC0NGXIzcTY8rFoIkNqQXdXon1O2xWzQM6fNIaXVekbrZFe3_Wr5Xg==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=beverly_kohler%40fahey.net&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 253721461f577318527fb5be095b5061.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - I1W6i60RPbYEhSV8SSMpX3PqFsJHXmMJlM-sjvuUlQ1KedHMaQ0ttw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=ila_klein%40ruel.co&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 aa9a6b87feabe1a30d21428a24c1a7d8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - rFKdfQUc57uZNaYrCdI_mogJ6OGOJkBx75QBS_QKEfCTaSbHkJ5L7g==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=judy_klocko%40roberts.io&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 5cb08f1fdb064b6046c3b17fe92559f8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - imeRR22DubVq_uukgFbiQe2rpwZlkK-VbdB-Kusc_LGFh-xxkrOK9w==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=emilia%40walker.net&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 d5da2738774b6f83465e13845679d084.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - ms8V6YT_IV9OlOsa7gUmHLf3FRwoCJsd7vuY8o5CQ3zOugt7iQVj0g==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=keven%40bode.co&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 d5da2738774b6f83465e13845679d084.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - Eqchke6dc0sfx1Q334jNvxVmEXO_4jzB1n0b-dgG0e6MuD8wWJcyMg==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=ozzie%40feest.co&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 beac5709ceeeaf96d399084af8eedb9c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - PJ02pOoJtwhkDULIldaAZThUoanyNfzxtN97DVwQphGIX5x4lEoy_w==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:31 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=keith%40oconnell.co&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 78ae32a88b9156d6c12be8f261f1c1b8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - HxwjAvifb0x32Qf0yw_3Ww7xmb7wt1uKjrpa89ULRuhX6UcTHF0EBw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=rosanna.homenick%40gleason.biz&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 e223f938e1f7716ebc7a1a8faefd0900.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - o9f-McZpfMDdai9ZovB8nzKE4N6Jq5rTTU0SD1YVASLxLA44zera0g==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=claudia%40corwin.io&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 41d0ea27e141b983263dc5529dcc1ea5.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - LNb4b0G0SQh2omoSbI_CpEZ_Y2E303fIHQjU3H54gDRk8jgpGsSuWw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=rusty%40ondrickawisozk.info&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 3fd5c92e1c5215f08f0dbd6059f21be4.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 8_Jx3YZYx1C_boO6VrfofF2g8A5mnrQJrNcdrWYBz9c2qH_IeMYKYA==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=caria%40bogan.net&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 297c8f2009751defb602ccb6903651b4.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - qma6TXuaDIRF-yU4iI1VGRUEf67NXfsFbAGGrfyrS3g8cMvizHV3lQ==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=oda.hyatt%40rolfson.org&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 6acd4ebf1a0179dd8e00eb58764e453a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - kgErOMA5p8YZ7F2RePUwIVS_kmd-xM_WeIR_1qC_QuqboyvzM9GhNQ==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=emilio%40stokeswilliamson.biz&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 af0026eff6aa67e35633804eadacfc60.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - FbWkuBnC00IdlpJD4AsnCN2RzOI61bLgATGLp1_yVno5DGYaJuk59Q==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=izabella%40feeneykirlin.biz&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:07 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 f4d64c05ae609f6aae2932e779b2944b.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - kkECx6ME6D67umcDx3U7jFdHw0BlVi2tIiZXa8vGsN3YnzAeQEqR9Q==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=vicky_cormier%40douglas.name&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 297c8f2009751defb602ccb6903651b4.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - m62nDKcGbyfnZZyEIqx-WB9HckvuS6wc2vloWzzfGX8S3Pq1rSYpsg==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=gaston_swaniawski%40connelly.co&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 297c8f2009751defb602ccb6903651b4.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - jbAHJ7ikjbWgwQIFPBChI-r3PJ1O04QGstif5cC_mD2WKNuyVlZZaA==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=bruce_kreiger%40frami.co&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 8711b93d28346282ff974ed89f414c44.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - CWJ4gB6aLOjoFNTBcVtogUzgcLjlwvlSwf1MHzpv8sgyvtIsJl6BvA==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=hoyt.wunsch%40gradyjohnson.io&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 0579f4eba24bbe8abed6a0529591ab2d.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - ZCSLrcRG57d2SE9-qQRKM7V45RHAIugIbRO6Mhcx3eFiw6nNlGyMMQ==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=otho_leffler%40pouros.name&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 18772750c53de4892d3834f606911fc0.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - y8MtZVAjEY7560XuJ1KPiZ0afci8sVjk0nRZ7j_T6dzDm8CsUaSm-w==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=leta.windler%40gleichner.name&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 fd885dc16612d4e9d70f328fd0542052.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - xz59kqB2DUojK-0BIVFP83cUUAhWKs-85sMRhU-kO1KYsxQKMfeIZw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=abbie_kerluke%40kihn.co&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 cde3f82ccfe8eac099061a113f6434eb.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - dSm93_0JMp6MtGLpwDxzqOnkIbS1XqSJX6tfXHqKq6BKwikTAtkg2w==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:32 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=terrell_roberts%40raynor.name&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 e223f938e1f7716ebc7a1a8faefd0900.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - tg1lyT98JIcBqzeyshZtJixbOngpMExu5Mt4yiXi_30cpDfv55kZhA==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:33 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=anna_heidenreich%40littleshanahan.biz&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:21:08 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 978c00aff85cbe1b9a35711178037d78.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - yFXpuXkg0oreLfIQxcvzygFE6DPlpucLUdjmsot1kxENaBerBRb9yA==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:33 GMT
 recorded_with: VCR 3.0.1

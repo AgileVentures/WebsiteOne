@@ -3,7 +3,7 @@ features:
     notifications:
       enabled: false
     invites:
-      enabled: false
+      enabled: true
   twitter:
     hangout_notifications:
       enabled: false
