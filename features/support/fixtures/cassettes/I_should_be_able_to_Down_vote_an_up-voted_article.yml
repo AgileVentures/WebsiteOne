@@ -1,0 +1,516 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=avoter_14%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:19:16 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 6a92abdb70a2bb8aa8219da02812b826.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - wuaoaJj8y4GUtHtY7psSKEtSgLK8i3xTyELbtHxzwjdqQZSdStIhqQ==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:19:16 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=avoter_20%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:19:16 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 3bf6d1ce86527891472e08bb57b7abe0.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 0lBiueZdjn10K78f2UvqH2zS6qm4U0r-7xYu_Ru9DLIUKfsf1VmKaA==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:19:16 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=example%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:19:16 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 91e54ea7c5cc54f4a3500c72b19a2a23.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - oMf6a42dlRneHufVonohJHLRqhSaL_8415GRi_c0yHANFa1kBZJPUA==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:19:16 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=testuser%40agileventures.org&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:19:16 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 316430958c7664ce84a9544466b4155f.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - RMg1Mp9BxBcwCRhYjV4MJ7uhMQ8NA4kgklOdbagR1bY0k294rIjz7g==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:19:16 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=avoter_10%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:19:16 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 d3617d950023ee8165fc850d9a6b0b97.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - vSUjxH8E1jEDF_kq2HIX9xEU6y7G7S8_1tlQ0ZVfHqJbyjSah7Gdbw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:19:16 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=avoter_11%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:19:16 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 73388dc3c76783aef93703e1dfb340e2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - oS_eXBF7N5WyxwIfwCkG0Gh76rOXlZkTMx2pw7yJS4ORvlOT1FzzyQ==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:19:16 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=avoter_13%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:19:16 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 253721461f577318527fb5be095b5061.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - YIthpQD_P_kw7VTA-kPZUuojExhM12_94r0KmDk5hhI-8xK1vksoRw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:19:17 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=avoter_12%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:34:22 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 6516f52a94629c649ba7aed438a3e8bf.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - JQOl0QCl2JOQ6Wjh6JWpqFRUwvKvIx4MRTKzGD9ek7o5FWS2jwAtdw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:34:22 GMT
+- request:
+    method: post
+    uri: https://agileventures.slack.com/api/users.admin.invite
+    body:
+      encoding: US-ASCII
+      string: email=avoter_13%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - agileventures.slack.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Date:
+      - Mon, 16 May 2016 15:34:22 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - client
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 599cec68a88e27b10f404ff4c80a9166.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - POGvipcWZ7Ho3bPXQjYKiu8enG_e2D9UAS0X8Lrhf2SXvmy15XD0WQ==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Mon, 16 May 2016 15:34:22 GMT
+recorded_with: VCR 3.0.1

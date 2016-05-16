@@ -1,5 +1,6 @@
 @vcr
-Feature: As a developer
+Feature: Sign Up
+  As a developer
   In order to be able to use the sites features
   I want to register as a user
   https://www.pivotaltracker.com/story/show/63047058
