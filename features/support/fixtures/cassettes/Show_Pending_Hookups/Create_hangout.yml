@@ -5,7 +5,7 @@ http_interactions:
     uri: https://agileventures.slack.com/api/users.admin.invite
     body:
       encoding: US-ASCII
-      string: email=user%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+      string: email=example%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -33,7 +33,7 @@ http_interactions:
       Content-Security-Policy:
       - referrer no-referrer;
       Date:
-      - Mon, 16 May 2016 15:18:42 GMT
+      - Mon, 16 May 2016 15:35:54 GMT
       Server:
       - Apache
       Strict-Transport-Security:
@@ -49,20 +49,20 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 6a6df28ba724cd2b086b92e42724bedf.cloudfront.net (CloudFront)
+      - 1.1 dd12e7e803f596deb3908675a4e017be.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - fV7Kmk33FDfc60ApKqc8fv1H0aod99HlmkFLotlYJKCUTOaoxC39Gw==
+      - lRxufYgQwfwFKoFiBLHG37aATHU0X4X7E_zUwbfmSGLuzlA6h8njmg==
     body:
       encoding: ASCII-8BIT
       string: '{"ok":false,"error":"not_authed"}'
     http_version: 
-  recorded_at: Mon, 16 May 2016 15:18:42 GMT
+  recorded_at: Tue, 15 Jul 2014 12:00:00 GMT
 - request:
     method: post
     uri: https://agileventures.slack.com/api/users.admin.invite
     body:
       encoding: US-ASCII
-      string: email=thomas%40agileventures.org&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
+      string: email=example%40example.com&channels=C02G8J689%2CC0285CSUH%2CC02AA0ARR&token
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -90,7 +90,7 @@ http_interactions:
       Content-Security-Policy:
       - referrer no-referrer;
       Date:
-      - Mon, 16 May 2016 15:21:15 GMT
+      - Mon, 16 May 2016 15:44:16 GMT
       Server:
       - Apache
       Strict-Transport-Security:
@@ -106,12 +106,12 @@ http_interactions:
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 a8623b1ea6a727cf5b0f8a0b166400a4.cloudfront.net (CloudFront)
+      - 1.1 869e5e7d0e2d2b4d75b3c3dd7c98f773.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - icdGofvnUhsl7-JXPJwK1CbDXNqrGFgaZuljFt9vkIroPOd9MaIPjQ==
+      - dLxw6CfNvWgx-EwAKHFQtYBTP5qbE6x7QQJSrRYQeQzepKBTsfxlZQ==
     body:
       encoding: ASCII-8BIT
       string: '{"ok":false,"error":"not_authed"}'
     http_version: 
-  recorded_at: Mon, 16 May 2016 15:21:16 GMT
+  recorded_at: Tue, 15 Jul 2014 12:00:00 GMT
 recorded_with: VCR 3.0.1
