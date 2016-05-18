@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
   private
 
   def send_slack_invite
-    SlackInviteJob.new.async.perform(email)
+    SlackInviteJob.perform_async(email)
   end
 
   def generate_timezone_offset
