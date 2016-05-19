@@ -4,13 +4,12 @@ class ChargesController < ApplicationController
   end
 
   def create
-    # Amount in cents
-    @amount = 1000
+    @plan = params[:plan]
 
     customer = Stripe::Customer.create(
         email:  params[:stripeEmail],
         source: params[:stripeToken],
-        plan:  'premium'
+        plan:   @plan
     )
 
     # charge = Stripe::Charge.create(
