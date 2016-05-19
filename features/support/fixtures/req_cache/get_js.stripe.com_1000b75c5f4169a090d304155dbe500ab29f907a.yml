@@ -7,21 +7,25 @@
 :headers:
   Server: nginx
   Content-Type: application/x-javascript
-  Last-Modified: Wed, 30 Mar 2016 18:27:41 GMT
-  Etag: '"56fc1a9d-b76d"'
+  Last-Modified: Wed, 18 May 2016 18:04:03 GMT
+  ETag: '"573cae93-b79b"'
+  Strict-Transport-Security: max-age=31556926; includeSubDomains
   Cache-Control: public, max-age=300
-  Via: 1.1 varnish, 1.1 varnish
+  Timing-Allow-Origin: "*"
+  Via:
+  - 1.1 varnish
+  - 1.1 varnish
   Fastly-Debug-Digest: fab7c732e334802a39a635c63e878ed85f1b68ec2ea2492e47b40bf8e9075173
-  Content-Length: '46957'
+  Content-Length: '47003'
   Accept-Ranges: bytes
-  Date: Tue, 12 Apr 2016 14:32:28 GMT
-  Age: '145'
+  Date: Thu, 19 May 2016 14:54:05 GMT
+  Age: '147'
   Connection: close
-  X-Served-By: cache-sea1927-SEA, cache-atl6238-ATL
+  X-Served-By: cache-sea1925-SEA, cache-lhr6331-LHR
   X-Cache: HIT, HIT
-  X-Cache-Hits: 19, 4
+  X-Cache-Hits: 2, 1
   Vary: Accept-Encoding
-:content: "/*! stripe-js 30-03-2016 */\n(function(){var a,b,c,d,e,f,g,h,i,j={}.hasOwnProperty,k=function(a,b){function
+:content: "/*! stripe-js 18-05-2016 */\n(function(){var a,b,c,d,e,f,g,h,i,j={}.hasOwnProperty,k=function(a,b){function
   c(){this.constructor=a}for(var d in b)j.call(b,d)&&(a[d]=b[d]);return c.prototype=b.prototype,a.prototype=new
   c,a.__super__=b.prototype,a};if(g=\"https://js.stripe.com\",c=\"https://js.stripe.com\",d=!!/stripe\\.com$/.test(\"undefined\"!=typeof
   window&&null!==window?window.location.host:void 0),b=\"console\"in window&&\"warn\"in
@@ -74,9 +78,9 @@
   Error(\"Stripe.js iframe transport used for non-card request\")}},a}(),this.Stripe.token=function(){function
   a(){}return a.validate=function(a,b){if(!a)throw b+\" required\";if(\"object\"!=typeof
   a)throw b+\" invalid\"},a.formatData=function(a,b){var c,d,e;Stripe.utils.isElement(a)&&(a=Stripe.utils.paramsFromForm(a,b));for(c
-  in a)d=a[c],null==d&&delete a[c];return Stripe.utils.underscoreKeys(a),\"string\"==typeof
-  a.exp&&(e=Stripe.utils.parseExpString(a.exp),a.exp_month=e[0],a.exp_year=e[1],delete
-  a.exp),a},a.create=function(a,b){var c,d;return a.key||(a.key=Stripe.key||Stripe.publishableKey),Stripe.utils.validateKey(a.key),d=function(){switch(!1){case
+  in a)d=a[c],null==d&&delete a[c];if(Stripe.utils.underscoreKeys(a),\"string\"==typeof
+  a.exp){try{e=Stripe.utils.parseExpString(a.exp),a.exp_month=e[0],a.exp_year=e[1]}catch(f){a.exp_month=0,a.exp_year=0}delete
+  a.exp}return a},a.create=function(a,b){var c,d;return a.key||(a.key=Stripe.key||Stripe.publishableKey),Stripe.utils.validateKey(a.key),d=function(){switch(!1){case
   null==a.card:return\"card\";case null==a.bank_account:return\"bank_account\";case
   null==a.pii:return\"pii\";default:return\"unknown\"}}(),c={url:\"\"+Stripe.endpoint+\"/tokens\",data:a,method:\"POST\",headers:{},success:function(a,c){return\"function\"==typeof
   b?b(c,a):void 0},complete:Stripe.complete(b,\"A network error has occurred, and
@@ -128,7 +132,7 @@
   data from Stripe. Please try again.\"),timeout:4e4})},b.poll=function(a,b,c){return
   this._initPoll(a),this._poll(a,function(a){return function(c,d){return a.get(c,b,d)}}(this),function(a){return
   function(b,c){return a._activePolls[b].source_status!==c.status?(a._activePolls[b].source_status=c.status,!0):!1}}(this),function(a,b){return!1},c)},b.cancelPoll=function(a){return
-  this._cancelPoll(a)},b}(this.Stripe._poller),a=[\"createToken\",\"getToken\",\"cardType\",\"validateExpiry\",\"validateCVC\",\"validateCardNumber\"];for(h=0,i=a.length;i>h;h++)e=a[h],this.Stripe[e]=this.Stripe.card[e];this.Stripe.stripejs_ua=\"stripe.js/127787e\",\"undefined\"!=typeof
+  this._cancelPoll(a)},b}(this.Stripe._poller),a=[\"createToken\",\"getToken\",\"cardType\",\"validateExpiry\",\"validateCVC\",\"validateCardNumber\"];for(h=0,i=a.length;i>h;h++)e=a[h],this.Stripe[e]=this.Stripe.card[e];this.Stripe.stripejs_ua=\"stripe.js/732b68a\",\"undefined\"!=typeof
   module&&null!==module&&(module.exports=this.Stripe),\"function\"==typeof define&&define(\"stripe\",[],function(a){return
   function(){return a.Stripe}}(this))}).call(this),function(){this.Stripe.isDoubleLoaded||function(a){function
   b(a,e){function f(a){if(f[a]!==q)return f[a];var b;if(\"bug-string-char-index\"==a)b=\"a\"!=\"a\"[0];else
@@ -237,7 +241,7 @@
   \"+a,c||k),d&&d()}catch(e){b.onInternalError&&b.onInternalError.call(b,\"CallerWindowError\")}},destroy:function(){A(a,\"message\",f),h&&(i=null,h.parentNode.removeChild(h),h=null)},onDOMReady:function(){if(k=m(b.remote),b.isHost){var
   e=function(c){c.data==b.channel+\"-ready\"&&(i=\"postMessage\"in h.contentWindow?h.contentWindow:h.contentWindow.document,A(a,\"message\",e),z(a,\"message\",f),d(function(){g.up.callback(!0)},0))};z(a,\"message\",e),q(b.props,{src:o(b.remote,{xdm_e:m(c.href),xdm_c:b.channel,xdm_p:1}),name:I+b.channel+\"_provider\"}),h=s(b)}else
   z(a,\"message\",f),i=\"postMessage\"in a.parent?a.parent:a.parent.document,i.postMessage(b.channel+\"-ready\",k),d(function(){g.up.callback(!0)},0)},init:function(){j(g.onDOMReady,g)}}},H.stack.QueueBehavior=function(a){function
-  b(){if(a.remove&&0===h.length)return void v(c);if(!i&&0!==h.length&&!g){\ni=!0;var
+  b(){if(a.remove&&0===h.length)return void v(c);\nif(!i&&0!==h.length&&!g){i=!0;var
   e=h.shift();c.down.outgoing(e.data,e.origin,function(a){i=!1,e.callback&&d(function(){e.callback(a)},0),b()})}}var
   c,g,h=[],i=!0,j=\"\",k=0,l=!1,m=!1;return c={init:function(){p(a)&&(a={}),a.maxLength&&(k=a.maxLength,m=!0),a.lazy?l=!0:c.down.init()},callback:function(a){i=!1;var
   d=c.up;b(),d.callback(a)},incoming:function(b,d){if(m){var f=b.indexOf(\"_\"),g=parseInt(b.substring(0,f),10);j+=b.substring(f+1),0===g&&(a.encode&&(j=e(j)),c.up.incoming(j,d),j=\"\")}else
@@ -267,7 +271,7 @@
   year such as `01-17` or `2015 / 05` For more info, see https://stripe.com/docs/stripe.js\")},\"string\"!=typeof
   a&&g(),f=a.split(/[\\.\\-\\/\\s]+/g),2!==f.length&&g(),b=i=0,j=f.length;j>i;b=++i)e=f[b],d=parseInt(e),isNaN(d)&&g(\"\"+f+\"
   is not a number. \"),1>d&&g(\"\"+d+\" is less than one. \"),f[b]=d;return f[0]>12?(h=f[0],c=f[1]):(c=f[0],h=f[1]),c>12&&g(\"Month
-  must be a number 1-12, not \"+c),100>h&&(h+=2e3),[c,h]},b}())}.call(this),function(){var
+  must be a number 1-12, not \"+c+\". \"),100>h&&(h+=2e3),[c,h]},b}())}.call(this),function(){var
   a,b=[].slice;a=(new Date).getTime(),this.Stripe.isDoubleLoaded||(this.Stripe.ajaxJSONP=function(c){var
   d,e,f,g,h,i,j;return null==c&&(c={}),f=\"sjsonp\"+ ++a,i=document.createElement(\"script\"),e=null,d=function(a){var
   b;return null==a&&(a=\"abort\"),clearTimeout(e),null!=(b=i.parentNode)&&b.removeChild(i),f

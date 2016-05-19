@@ -1,9 +1,10 @@
 @javascript @vcr
-Feature:As a site admin
+Feature: Charge Users Money
+  As a site admin
   So that users can pay for premium services
-  I would like to be able to charge them money
+  I would like to be able to sign them up for a recurring plan
 
-  Scenario: Charge a user
+  Scenario: Sign up for premium membership
     Given I visit "/charges/new"
     And I click "Sign Me Up!"
     And I fill in appropriate card details
