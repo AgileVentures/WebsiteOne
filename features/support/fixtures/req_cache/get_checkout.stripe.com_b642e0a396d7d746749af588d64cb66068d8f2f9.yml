@@ -1,15 +1,18 @@
 ---
 :scope: 
-:url: https://checkout.stripe.com/v3/HciOQ9KeXgLe2kL0jWvVCg.html?distinct_id=36daf206-d2d7-0ee6-15e0-7728500cbddd
+:url: https://checkout.stripe.com/v3/yiWszEIcz0H0K2eT1bmgQ.html?distinct_id=fb02a7a2-5941-2659-395f-6791feb677c2
 :body: ''
 :status: 200
 :method: get
 :headers:
   Server: nginx
   Content-Type: text/html
-  Last-Modified: Tue, 05 Apr 2016 22:04:30 GMT
-  ETag: '"5704366e-2bc8"'
-  Cache-Control: no-cache
+  Last-Modified: Tue, 26 Apr 2016 17:30:56 GMT
+  ETag: '"571fa5d0-2bc8"'
+  Cache-Control: no-cache, no-store, private, must-revalidate, max-age=0, max-stale=0,
+    post-check=0, pre-check=0
+  Pragma: no-cache
+  Expires: '0'
   Content-Security-Policy: 'default-src ''self''; connect-src ''self'' https://api.stripe.com
     wss://verificator.stripe.com wss://verificator-main.stripe.com https://*.stripecdn.com;
     script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
@@ -21,13 +24,13 @@
   Via:
   - 1.1 varnish
   - 1.1 varnish
-  Fastly-Debug-Digest: 2e7eb27e1d74e3368ad4c28417b226287d64374997d191fc6e237d02c20b6659
+  Fastly-Debug-Digest: 57ed82bf31fba24021915a2e9f91f00f99b466c9453882cdae02456d65bdcb25
   Content-Length: '11208'
   Accept-Ranges: bytes
-  Date: Tue, 12 Apr 2016 14:40:34 GMT
+  Date: Thu, 19 May 2016 14:58:46 GMT
   Age: '0'
   Connection: close
-  X-Served-By: cache-sea1922-SEA, cache-atl6223-ATL
+  X-Served-By: cache-sea1922-SEA, cache-lcy1126-LCY
   X-Cache: MISS, MISS
   X-Cache-Hits: 0, 0
   Vary: Accept-Encoding
@@ -156,6 +159,6 @@
   \       \"stripeURL\": \"https://api.stripe.com/v1\",\n        \"mixpanelKey\":
   \"d7513b16d5649171f045ecd9a0de5c1b\",\n        \"appController\": \"inner/controllers/app\"\n
   \     }\n    </script>\n    <link rel=\"stylesheet\" href=\"https://b.stripecdn.com/checkout/v3/checkout/inner-vuBXw6Y0cpOJ9eKnSw5g.css\">\n
-  \   <script src=\"https://js.stripe.com/v2/\"></script>\n    <script src=\"https://b.stripecdn.com/checkout/v3/checkout/inner-INlvwfBk6HXCKrJcAFzxYA.js\"></script>\n
+  \   <script src=\"https://js.stripe.com/v2/\"></script>\n    <script src=\"https://b.stripecdn.com/checkout/v3/checkout/inner-960iGyxK2kNpSrsLj2Miiw.js\"></script>\n
   \   <script src=\"https://b.stripecdn.com/checkout/v3/checkout/loader/web-aWvmuK9C7KCgPdX8R04yQ.js\"></script>\n
   \ </body>\n</html>\n"

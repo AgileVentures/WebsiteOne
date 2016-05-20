@@ -10,16 +10,18 @@
   Expires: Thu, 31 Dec 2037 23:55:55 GMT
   Cache-Control: max-age=315360000, public
   Strict-Transport-Security: max-age=31556926; includeSubDomains
-  Via: 1.1 varnish, 1.1 varnish
+  Via:
+  - 1.1 varnish
+  - 1.1 varnish
   Fastly-Debug-Digest: b91416b81575347e40b360ca64aa9ca3c6e1a3db9b156bff21947cdc47563839
   Content-Length: '3605'
   Accept-Ranges: bytes
-  Date: Tue, 12 Apr 2016 14:33:46 GMT
-  Age: '888054'
+  Date: Thu, 19 May 2016 14:54:06 GMT
+  Age: '3914780'
   Connection: close
-  X-Served-By: cache-sea1927-SEA, cache-jfk1036-JFK
+  X-Served-By: cache-sea1925-SEA, cache-lhr6339-LHR
   X-Cache: HIT, HIT
-  X-Cache-Hits: 1, 3710
+  X-Cache-Hits: 1, 2931
   Vary: Origin
 :content: !binary |-
   iVBORw0KGgoAAAANSUhEUgAAADIAAAAZCAQAAADZXbXPAAAKQWlDQ1BJQ0Mg
