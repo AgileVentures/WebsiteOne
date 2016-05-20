@@ -1,13 +1,25 @@
 <%= form_tag charges_path do %>
     <article>
+      <h1>Agile Ventures Premium Membership</h1>
+      <br/>
+      <p>
+        Agile Ventures Premium Membership gives the following benefits
+      <ul>
+        <li>Voting rights in the official Agile Ventures UK Charity general meetings</li>
+        <li>Priority pull request code review (professional code review within 48 hours)</li>
+        <li>Eligibility to work on priority and paid projects</li>
+      </ul>
+        <a href='/premium'>Further details</a>
+      </p>
+      <label class="amount">
+        <span>The price for Premium Membership is £10.00/Month</span>
+      </label>
       <% if flash[:error].present? %>
           <div id="error_explanation">
             <p><%= flash[:error] %></p>
           </div>
       <% end %>
-      <label class="amount">
-        <span>Amount: £10.00</span>
-      </label>
+      <br/>
     </article>
 
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -15,5 +27,7 @@
             data-description="A month's subscription"
             data-amount="1000"
             data-currency="GBP"
-            data-locale="auto"></script>
+            data-locale="auto"
+            data-name="Premium Membership"
+            data-label="Sign Me Up!"></script>
 <% end %>
