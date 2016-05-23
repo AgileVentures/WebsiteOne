@@ -32,10 +32,10 @@ Feature: Sidebar navigation
 
   Scenario: Sidebar always shows the relevant information
     Given I am logged in
-    And I am on the "Show" page for document "Howto"
+    And I am on the "Show" page for document "Howto 2"
     Then I should see a link to "Show" page for project "hello world" within the sidebar
     And I should see a link to "Show" page for document "Howto" within the sidebar
     And I should see a link to "Show" page for document "Documentation" within the sidebar
     And I should see a link to "Show" page for project "hello mars" within the sidebar
-    And I should not be able to see a link to "Show" page for document "Another doc" within the sidebar
+    And I should see a link to "Show" page for document "Another doc" within the sidebar
     And I should not be able to see a link to "Show" page for document "Howto 2" within the sidebar
