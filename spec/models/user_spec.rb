@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe User, type: :model do
   include_examples 'presentable'
-
+  before do
+    Features.slack.invites.enabled = true
+    slack_invite_job = class_double(SlackInviteJob).as_stubbed_const(transfer_nested_constants: true)
+    allow(slack_invite_job).to receive(:perform_async).at_least(1).times
+  end
   subject { build_stubbed :user }
 
   it { is_expected.to have_many(:status) }

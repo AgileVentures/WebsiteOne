@@ -18,9 +18,9 @@ describe 'layouts/_sponsors' do
 		expect(response.body).to have_selector('a.sponsorMedal img[src*="craft"]')
   end
 
-	it 'should render the airpair banner' do
+	it 'should render the mentive banner' do
 		render
-		expect(response.body).to have_link('', href: "http://www.airpair.com/")
-		expect(response.body).to have_selector('a.sponsorMedal img[src*="sponsors/airpair"]')
+		expect(response.body).to have_link('', href: "http://www.mentive.co/topics/?utm_campaign=coursepage&utm_medium=banner&utm_source=agileventures")
+		expect(response.body).to have_selector('a.sponsorMedal img[src*="sponsors/mentive"]')
 	end
 end
