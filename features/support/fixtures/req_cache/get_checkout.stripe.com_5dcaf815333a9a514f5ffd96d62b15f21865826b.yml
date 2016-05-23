@@ -1,15 +1,18 @@
 ---
 :scope: 
-:url: https://checkout.stripe.com/v3/images/flags/US.png
+:url: https://checkout.stripe.com/v3/images/flags/GB.png
 :body: ''
 :status: 200
 :method: get
 :headers:
   Server: nginx
   Content-Type: image/png
-  Last-Modified: Tue, 05 Apr 2016 22:03:05 GMT
-  Etag: '"57043619-c87"'
-  Cache-Control: no-cache
+  Last-Modified: Tue, 26 Apr 2016 17:29:55 GMT
+  ETag: '"571fa593-da4"'
+  Cache-Control: no-cache, no-store, private, must-revalidate, max-age=0, max-stale=0,
+    post-check=0, pre-check=0
+  Pragma: no-cache
+  Expires: '0'
   Content-Security-Policy: 'default-src ''self''; connect-src ''self'' https://api.stripe.com
     wss://verificator.stripe.com wss://verificator-main.stripe.com https://*.stripecdn.com;
     script-src ''self'' ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
@@ -18,14 +21,16 @@
     frame-src ''self'' stripecheckout: bitcoin:; img-src * data:; font-src ''none'';
     media-src ''none''; object-src ''none'''
   Strict-Transport-Security: max-age=31556926; includeSubDomains
-  Via: 1.1 varnish, 1.1 varnish
-  Fastly-Debug-Digest: 280ff3d561252faeb8ffd927bae413ca7f0944c4b060e8e2e22912240e602094
-  Content-Length: '3207'
+  Via:
+  - 1.1 varnish
+  - 1.1 varnish
+  Fastly-Debug-Digest: 3809fbd0af0152ce5a20c037403b21217de853f1d88b025baec03664e15f5593
+  Content-Length: '3492'
   Accept-Ranges: bytes
-  Date: Tue, 12 Apr 2016 14:33:46 GMT
+  Date: Thu, 19 May 2016 14:54:06 GMT
   Age: '0'
   Connection: close
-  X-Served-By: cache-sea1926-SEA, cache-jfk1025-JFK
+  X-Served-By: cache-sea1922-SEA, cache-lhr6321-LHR
   X-Cache: MISS, MISS
   X-Cache-Hits: 0, 0
   Vary: Accept-Encoding
@@ -89,16 +94,22 @@
   7OOiJwpPKp6qP6391fjXZqm99Oyg12DPs4hnj4a4Qy//lfmvT8MFz6nPK0a0
   RupHrUfPjPmM3Xqx9MXwy4yX0+OFvyn+tveV0auffnf7vWdiycTwa9HrmT9K
   3qi+OfrW9m3nZOjk03dp76anit6rvj/2gf2h+2P0x5Hp7E/4T5WfjT93fAn8
-  8ngmbWbm3/eE8/syOll+AAAA/1BMVEX///8AAAAAAAAAAAAAAAAAAAAAAACs
-  P0qsP0pAQ5DKd4J2dna6urqgoKCSkpKEhIR5eXl5eXlra2tsbGy3HypOVaLb
-  e4NYW6QbJIgcJIklLY4vN5M5QZhDS51FMoROVKNXXadYXqhobbBobrFpbrFx
-  drVxd7V6f7mCh76Lj8KLj8OprNKqrdOsCQ+sCRCvDBSytdeztte2Fh62Fh+5
-  vNu6HSe6vdvAw97BKzXHyeLIO0bIyuLOTFbUPErUPUvXSljXS1jXY2zaWGXa
-  WWbccXvccnvdZ3LdZ3PddX7f39/gdX/gdoDjg4zkhI3m5ubo6Ojp6enr6+vt
-  7e3v7+/w8PDHoL1gAAAAGHRSTlMAAQIDBhMWcXJzfsbO5+jr7u/z8/j5+fwp
-  hA84AAAA0klEQVQY022Q2wsBURDGz7fjthf35PYqeSMlHiT5syVlPUhK+SN4
-  XC3nLKI92mWtrJmnmfnN9zUDBoD9hJQSSGU0CckgG34PErTlFyjF5jFvFazc
-  offh3akDqulZ20vRDngmhQmqVs7+4NAPDTy+ounC4IYQHeb5+Dv2ClQuOOot
-  eVWtQcjPBKj01ky0Qn2+BhkTFok5B/X08J5AX2xA6XGUX5xAXZ297sUXvwXl
-  hlF+aYM62qcMdsB3UNRR/Be/mxcgka67ge6LV/b8Bhb79//HEzJBVznEpQqo
-  AAAAAElFTkSuQmCC
+  8ngmbWbm3/eE8/syOll+AAABwlBMVEX///8AAAAAAAAAAAAAAAAAAAAAAABb
+  bpddbZgFGVAFGFEFHmQMJGhccqJdcqJjeKZkeKYGHmQGH2QGH2UQM4IRNIIU
+  LG4ZO4YaMnIaPIcbMnMhOHciQooiQ4snPnwoP30tS5AuRYE1S4U2TIY8UotC
+  WI9JX5RQZZhQZZlXa51XbJ5gd6tjeq1keKZkeKdleadtg7JziLV9kLp+kbt/
+  k76Km8KQoceRoseYp8mZqMm4w9m5w9q7Dh27Dh68Dh7FFCnFFSnGzuHHFSrH
+  FivHz+HJFy3LGC7LUmXOGTHOGjHPGjLPGjPQmKjQxtbQx9bRmajR1+bSVGnS
+  2OfS2efTHDbTJ0HUHTfVHTjV2+nWHjjW3OnYHzrYHzvYztvY3uvZc4jZz9zZ
+  2+faIDzaID3ac4na3+vbN1PcIT7cJkLcjJ7dSGLdSGPdjJ/dw9HeIkDeI0He
+  4+3fK0nf4+7g5e/i5vDj5/DkLEvkXHLkXHPlJkblJkflSWPmME/mSWPpMVHp
+  7fPqKUvqVnDsmKbtWHLuWHLumqnum6ryna3y3+Xzna3z9fn09fn13+X24Ob2
+  9/r3+Pv49/n4+fv5+vz65Oj8/P39/v7cQxYLAAAAEXRSTlMAAQIDBhMWUVJd
+  Xu7u7u7u7jowD+cAAAEzSURBVBgZXcE7TkJBAAXQe4eBB/6IKEiihtIYLWyM
+  sbJzAyYWxsY9uAo34SaMhaWtHaEwJCbQ+CPwEAQfj5m5Bu04hyCJOZLIKF8L
+  JoAiZiiilaSWuevi03MArjpA+RbI7Bz2b6aGm5PO7mXOO/XiWM5HF3udZJsW
+  WhvE6dngIUwAXzhd7o+WSh4Zs9qsrn+nhYPw4UN5T9+TUu8uiQ10vmFKK3bq
+  kzR1PruybqrngoV6hCjAGfRFiIJgEV7wJ5gpmgBMMBAs9ApQhIrCUARFBFj4
+  Y/xrCEfEnzYs/H1l30dJBA+E4LKpaXw6ZMziyRre1apv9IGFxyTTLSxuNccW
+  Lhv/RPXP6TAIo+5XXHvLrQZYjdu57tsISBwxdq7drVbaY5F5kw8mgCIoYibR
+  D2FJzJHcL4wJnupXpbfcAAAAAElFTkSuQmCC
