@@ -12,6 +12,7 @@ Feature: Events
       | EdX   | greetings earthlings |       | active | 2795         |
     And I am on Events index page
     When I click "New Event"
+    Given the date is "2014/02/01 09:15:00 UTC"
 
   @javascript
   Scenario: Create a new event

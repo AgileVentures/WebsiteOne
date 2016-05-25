@@ -182,7 +182,8 @@ class Event < ActiveRecord::Base
   def self.transform_params(params)
     event_params = params.require(:event).permit!
     if (params['start_date'].present? && params['start_time'].present?)
-      event_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
+      Time.zone = params["start_time_tz"]["time_zone"]
+      event_params[:start_datetime] = Time.zone.parse(params["start_date"]+" " + params["start_time"]).utc
     end
     event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
     event_params[:repeat_ends_on]= params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
