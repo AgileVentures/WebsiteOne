@@ -29,6 +29,20 @@ Feature: Events
     Then I should be on the event "Show" page for "Whatever"
     And the event named "Whatever" is associated with "EdX"
 
+  @javascript
+  Scenario: Create a new event in a non-UTC timezone
+    Given I fill in event field:
+      | name        | value          |
+      | Name        | Whatever       |
+      | Description | something else |
+      | Start Date  | 2014-02-04     |
+      | Start Time  | 09:00          |
+    And I select "Hawaii" from the time zone dropdown
+    And I click the "Save" button
+    Then I should see "Event Created"
+    And I should be on the event "Show" page for "Whatever"
+    And I should see "19:00-19:30 (UTC)"
+
   Scenario: Projects should be ordered alphabetically
     Then I should see "EdX" before "WSO"
 
