@@ -7,6 +7,13 @@
   padding: 15px 0;
 }
 
+@media (max-width: $screen-sm-min - 1px) {
+  #not-sidebar-content h1 {
+    margin:0px;
+    padding-top:0px;
+  }
+}
+
 #sidebar {
   padding: 10px;
   margin-top: 20px;

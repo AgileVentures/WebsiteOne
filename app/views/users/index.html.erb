@@ -1,6 +1,6 @@
 <% provide :title, 'Members' %>
 <div class="row">
-  <div class="col-xs-12 col-sm-12">
+  <div class="col-xs-12 col-sm-12 float-xs-none">
     <h1>Members Directory</h1>
     <% if @users_count == 0 %>
         <p>It is a lonely planet we live in&#8230;</p>
@@ -11,12 +11,20 @@
   <div class="col-sm-12 well">
     <p>Filter users by</p>
     <%= form_tag(users_path, remote: true, method: "get", class: "form-inline filters-users-advanced") do %>
-        <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {prompt: 'Project involvement...', class: 'form-control'} %>
-        <% if @current_user && @current_user.latitude %>
-            <%= select_tag :timezone_filter, options_for_select(['In My Timezone', 'Wider Timezone Area'], params[:timezone_filter]), {prompt: 'Time zone...', class: 'form-control'} %>
-        <% end %>
-        <%= check_box_tag :online, params[:online], (true if !params[:online].nil?) %> Recently Online
-        <%= submit_tag 'Search', class: 'btn btn-default' %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+          <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {prompt: 'Project involvement...', class: 'form-control'} %>
+          </div>
+          <% if @current_user && @current_user.latitude %>
+              <div class="col-xs-12 col-sm-4">
+                <%= select_tag :timezone_filter, options_for_select(['In My Timezone', 'Wider Timezone Area'], params[:timezone_filter]), {prompt: 'Time zone...', class: 'form-control'} %>
+              </div>
+          <% end %>
+          <div class="col-xs-12 col-sm-4">
+            <%= check_box_tag :online, params[:online], (true if !params[:online].nil?) %> Recently Online
+            <%= submit_tag 'Search', class: 'btn btn-default' %>
+          </div>
+        </div
     <% end %>
   </div>
 

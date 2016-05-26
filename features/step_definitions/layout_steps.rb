@@ -11,7 +11,7 @@ Then(/^I should see a footer area$/) do
 end
 
 Then(/^I should see a navigation bar$/) do
-    find '#nav'
+  find '#nav'
 end
 
 When(/^I should see "([^"]*)" in footer$/) do |string|
@@ -25,23 +25,6 @@ Then /^I should see link$/ do |table|
     expect(page).to have_link link
   end
 end
-
-When(/^the page should include ([^"]*) for ([^"]*)$/) do |tag, content|
-  case tag
-    when 'script'then
-      case content
-        when 'Google Analytics' then expect(page).to have_xpath("//script[text()[contains(.,'UA-xxxxxx-x')]]", visible: false)
-      end
-    when 'css' then expect(page).to have_xpath("//link[contains(@href, '#{content}')]", visible: false)
-    when 'js' then expect(page).to have_xpath("//script[contains(@src, '#{content}')]", visible: false)
-
-  end
-end
-
-Then /^I should see the tracking code$/ do
-  expect(page).to have_xpath("//script[text()[contains(.,#{GA.tracker})]]", visible: false)
-end
-
 
 Then(/^I should see a modal window with a form "([^"]*)"$/) do |arg|
   expect(page).to have_content(arg)

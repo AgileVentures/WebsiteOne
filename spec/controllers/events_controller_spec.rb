@@ -129,8 +129,8 @@ describe EventsController do
         post :update, valid_attributes
       end
 
-      it 'should redirected to the index page' do
-        expect(response).to redirect_to events_path
+      it 'should redirected to the show page' do
+        expect(response).to redirect_to event_path(@event)
       end
 
       it 'should render a success flash message' do

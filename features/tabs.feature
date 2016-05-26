@@ -1,9 +1,9 @@
-@javascript
+@vcr @javascript
 Feature: Add in-page links for projects show page to open the tabbed contents
   As a user
   So that I may share a link directly to a tabbed page
   I would like the url to reflect the current tab contents in the page
- 
+
   Background:
     Given the following projects exist:
       | title         | description             | status   |
@@ -21,4 +21,3 @@ Feature: Add in-page links for projects show page to open the tabbed contents
     And I click "Videos"
     And I refresh the page
     Then I should see a "videos" tab set to active
-

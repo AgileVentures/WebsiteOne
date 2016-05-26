@@ -1,4 +1,3 @@
-
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
@@ -16,11 +15,8 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = []
-    Event.all.each do |event|
-      @events << event.next_occurrences
-    end
-    @events = @events.flatten.sort_by { |e| e[:time] }
+    @projects = Project.all
+    list_all_upcoming_events_with_repeats_by(specified_project)
   end
 
   def edit
@@ -30,17 +26,17 @@ class EventsController < ApplicationController
 
   def create
     EventCreatorService.new(Event).perform(Event.transform_params(params),
-                                       success: ->(event) do
-      @event = event
-      flash[:notice] = 'Event Created'
-      redirect_to event_path(@event)
-    end,
-    failure: ->(event) do
-      @event = event
-      flash[:notice] = @event.errors.full_messages.to_sentence
-      @projects = Project.all
-      render :new
-    end)
+                                           success: ->(event) do
+                                             @event = event
+                                             flash[:notice] = 'Event Created'
+                                             redirect_to event_path(@event)
+                                           end,
+                                           failure: ->(event) do
+                                             @event = event
+                                             flash[:notice] = @event.errors.full_messages.to_sentence
+                                             @projects = Project.all
+                                             render :new
+                                           end)
   end
 
   def update
@@ -51,7 +47,7 @@ class EventsController < ApplicationController
     end
     if updated
       flash[:notice] = 'Event Updated'
-      redirect_to events_path
+      redirect_to event_path(@event)
     else
       flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
       redirect_to edit_event_path(@event)
@@ -64,6 +60,21 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def specified_project
+    @project = Project.friendly.find(params[:project_id]) unless params[:project_id].blank?
+  end
+
+  def list_all_upcoming_events_with_repeats_by(project = nil)
+    base_events = project.nil? ? Event.all : Event.where(project_id: project)
+    @events = list_upcoming_events_chronologically_with_repeats(base_events)
+  end
+
+  def list_upcoming_events_chronologically_with_repeats(base_events)
+    base_events.inject([]) do |memo, event|
+      memo << event.next_occurrences
+    end.flatten.sort_by { |e| e[:time] }
+  end
 
   def set_event
     @event = Event.friendly.find(params[:id])

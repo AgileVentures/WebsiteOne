@@ -1,3 +1,4 @@
+@vcr
 Feature: Advanced Site Search
   As a site user
   In order to find relevant information in Documents, Projects, Articles, etc

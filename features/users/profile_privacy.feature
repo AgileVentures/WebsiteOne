@@ -1,3 +1,4 @@
+@vcr
 Feature: As a site user
   To protect my privacy
   I want to decide if which part of my profile should be made public
@@ -8,16 +9,15 @@ Feature: As a site user
       | Alice       | Jones       | alice@btinternet.co.uk  |     false       |
       | Bob         | Butcher     | bobb112@hotmail.com     |     true        |
 
-
   Scenario: User profile should be public by default
     Given I am not logged in
     And I am on the "Our members" page
     Then I should not see "Alice Jones"
     And I should see "Bob Butcher"
 
-  @enable-custom-errors
   Scenario: Visitor should not be able to access a private profile
-    Given I am not logged in
+    Given Feature "Custom Errors" is enabled
+    And I am not logged in
     And I visit Alice's profile page
     Then I should not see "Alice Jones"
 

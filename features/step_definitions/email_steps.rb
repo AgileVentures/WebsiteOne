@@ -18,14 +18,9 @@ end
 
 Given(/^I click on the retrieve password link in the last email$/) do
   password_reset_link = ActionMailer::Base.deliveries.last.body.match(
-    /<a href=\"(.+)\">Change my password<\/a>/
+      /<a href=\"(.+)\">Change my password<\/a>/
   )[1]
 
   visit password_reset_link
-end
-
-Then /^I should be on the password reset page for "(.+)"$/ do |user|
-  user = User.find_by_email(user) || User.find_by_slug(user)
-  expect(current_path).to eq edit_user_password_path(user)
 end
 

@@ -1,4 +1,4 @@
-@github_query
+@vcr
 Feature: Displaying GitHub contribution statistics for user
   As a member of AV
   So that I can find out what projects others are contributing to
@@ -19,7 +19,7 @@ Feature: Displaying GitHub contribution statistics for user
   Scenario: Displays commit counts on user profile page
     Given I am on "profile" page for user "Bryan"
     Then I should see "Contributions"
-    And I should see "WebsiteOne - 394"
+    And I should see "WebsiteOne - 396"
 
   Scenario: Does not display commit counts for user without github profile url
     Given I am on "profile" page for user "Thomas"

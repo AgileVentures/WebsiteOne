@@ -8,6 +8,10 @@ Bundler.require(:default, Rails.env)
 
 module WebsiteOne
   class Application < Rails::Application
+    # necessary to make Settings available
+    Bundler.require(*Rails.groups)
+    Config::Integration::Rails::Railtie.preload
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -15,12 +19,12 @@ module WebsiteOne
 
     config.action_mailer.delivery_method = Settings.mailer.delivery_method.to_sym
     config.action_mailer.smtp_settings = Settings.mailer.smtp_settings.to_hash
-    config.action_mailer.default_url_options = { :host => Settings.mailer.url_host }
+    config.action_mailer.default_url_options = { host: Settings.mailer.url_host }
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     #config.time_zone = 'Central Time (US & Canada)'
-    ENV['TZ']='UTC'
+    ENV['TZ'] = 'UTC'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -31,8 +35,13 @@ module WebsiteOne
 
     # Precompile additional assets.
     # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-    config.assets.precompile += %w( mercury_init.js 404.js projects.js events.js google-analytics.js disqus.js event_instances.js )
+    config.assets.precompile += %w(
+      mercury_init.js 404.js projects.js events.js google-analytics.js
+      disqus.js event_instances.js scrums.js
+    )
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

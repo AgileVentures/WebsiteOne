@@ -1,9 +1,12 @@
 require 'spec_helper'
 
-describe User, :type => :model do
-
+describe User, type: :model do
   include_examples 'presentable'
-
+  before do
+    Features.slack.invites.enabled = true
+    slack_invite_job = class_double(SlackInviteJob).as_stubbed_const(transfer_nested_constants: true)
+    allow(slack_invite_job).to receive(:perform_async).at_least(1).times
+  end
   subject { build_stubbed :user }
 
   it { is_expected.to have_many(:status) }
@@ -30,13 +33,13 @@ describe User, :type => :model do
 
   it 'should reject duplicate email addresses' do
     user = FactoryGirl.create(:user)
-    expect(build_stubbed(:user, email: user.email)).not_to be_valid
+    expect(build_stubbed(:user, email: user.email)).to_not be_valid
   end
 
   it 'should reject email addresses identical up to case' do
     upcased_email = subject.email.upcase
-    user = FactoryGirl.create(:user, email: upcased_email)
-    expect(build_stubbed(:user, email: subject.email)).not_to be_valid
+    _existing_user = FactoryGirl.create(:user, email: upcased_email)
+    expect(build_stubbed(:user, email: subject.email)).to_not be_valid
   end
 
   it 'should be invalid without password' do
@@ -332,4 +335,3 @@ describe User, :type => :model do
     end
   end
 end
-

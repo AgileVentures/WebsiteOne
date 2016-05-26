@@ -1,4 +1,4 @@
-@javascript
+@javascript @vcr
 Feature: Events
   As a site user
   In order to be able to update planned activities
@@ -31,6 +31,6 @@ Feature: Events
     And I visit the edit page for the event named "Daily Standup"
     And I select "Repeat ends" to "never"
     And I click the "Save" button
-    Then I should be on the Events "index" page
+    Then I should be on the event "Show" page for "Daily Standup"
     And I visit the edit page for the event named "Daily Standup"
     Then the "Repeat ends" selector should be set to "never"
