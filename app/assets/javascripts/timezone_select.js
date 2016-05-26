@@ -3,7 +3,7 @@ jQuery.fn.selectTimeZone = function() {
     var $el = $(this[0]); // our element
 
     var date = new Date();
-    var offsetFromGMT = /\+\d\d/.exec(date)[0];
+    var offsetFromGMT = /(\+|\-)\d\d/.exec(date)[0];
 
     offsetFromGMT = '\\' + offsetFromGMT;
 
