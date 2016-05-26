@@ -2,12 +2,7 @@ jQuery.fn.selectTimeZone = function() {
 
     var $el = $(this[0]); // our element
 
-    var date = new Date();
-    var match = /((\+|\-)\d\d)(\d\d)/.exec(date);
-
-    offsetFromGMT = '\\' + match[1] + ':' + match[3];
-
-    var regEx = new RegExp(offsetFromGMT); // create a RegExp object with our pattern
+    var regEx = new RegExp(jstz.determine().name()); // create a RegExp object with our pattern
 
     $('option', $el).each(function(index, option) { // loop through all the options in our element
 
@@ -21,5 +16,5 @@ jQuery.fn.selectTimeZone = function() {
 }
 
 $(document).on('ready page:load', function () {
-    $('#start_time_tz_time_zone').selectTimeZone();
+    $('#start_time_tz').selectTimeZone();
 });
