@@ -28,10 +28,10 @@ normalize_date_time = function(date, time) {
     var year = date_matches[1];
     var day = date_matches[3];
     var month = date_matches[2];
-    time_matches = time.match(/(\d+):(\d\d) (PM|AM)/);
+    time_matches = time.match(/(\d+):(\d\d) (PM|pm|AM|am)/);
     var minutes = time_matches[2];
     var hour = time_matches[1];
-    if (time_matches[3] == "PM") {
+    if (time_matches[3] == "PM" || time_matches[3]=="pm") {
         hour = parseInt(hour) + 12 + "";
     }
     normalized_date = new Date()
@@ -66,8 +66,13 @@ jQuery.fn.selectTimeZone = function(converter) {
     $('#start_time').val(local_date_time.time);
 }
 
-$(document).on('ready page:load', function () {
-    if ($("#start_time_tz").length) {
-        $('#start_time_tz').selectTimeZone(convert_date_time_to_local);
+var timezone_select = {
+    on_ready: function () {
+        if ($("#start_time_tz").length) {
+            $('#start_time_tz').selectTimeZone(convert_date_time_to_local);
+        }
     }
+};
+$(document).on('ready page:load', function () {
+    timezone_select.on_ready();
 });
