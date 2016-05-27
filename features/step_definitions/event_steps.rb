@@ -115,7 +115,7 @@ And(/^I select "([^"]*)" from the project dropdown$/) do |project_name|
 end
 
 Given(/^I select "([^"]*)" from the time zone dropdown$/) do |timezone|
-  page.select timezone, from: "start_time_tz_time_zone"
+  page.select timezone, from: "start_time_tz"
 end
 
 And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, project_title|

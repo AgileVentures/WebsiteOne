@@ -9,7 +9,7 @@ jQuery.fn.selectTimeZone = function() {
         var $option = $(option); // cache a jQuery object for the option
         //console.log($option.html());
         if($option.html().match(regEx)) { // check if our regex matches the html(text) inside the option
-            $option.attr({selected: 'true'}); // select the option
+            $option.prop({selected: 'true'}); // select the option
             return false; // stop the loop—we're all done here
         }
     });
