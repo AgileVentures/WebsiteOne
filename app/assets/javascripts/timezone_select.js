@@ -6,7 +6,7 @@ convert_date_time_to_local = function(date,time){
     local_day = (local_day < 10)? "0"+local_day:""+local_day;
     local_month = normalized_date.getMonth();
     local_month = (local_month<10)?"0"+local_month:""+local_month;
-    local_date = normalized_date_time.getFullYear()+ "-"+local_day+"-"+local_month;
+    local_date = normalized_date_time.getFullYear()+ "-"+local_month+"-"+local_day;
 
     local_hours = normalized_date_time.getHours() % 12;
     local_hours = (local_hours < 10) ? ("0"+local_hours):""+local_hours;
@@ -26,9 +26,9 @@ convert_date_time_to_local = function(date,time){
 normalize_date_time = function(date, time) {
     date_matches = date.match(/(\d\d\d\d)-(\d\d)-(\d\d)/);
     var year = date_matches[1];
-    var day = date_matches[2];
-    var month = date_matches[3];
-    time_matches = time.match(/(\d\d):(\d\d) (PM|AM)/);
+    var day = date_matches[3];
+    var month = date_matches[2];
+    time_matches = time.match(/(\d+):(\d\d) (PM|AM)/);
     var minutes = time_matches[2];
     var hour = time_matches[1];
     if (time_matches[3] == "PM") {
@@ -67,5 +67,7 @@ jQuery.fn.selectTimeZone = function(converter) {
 }
 
 $(document).on('ready page:load', function () {
-    $('#start_time_tz').selectTimeZone(convert_date_time_to_local);
+    if ($("#start_time_tz").length) {
+        $('#start_time_tz').selectTimeZone(convert_date_time_to_local);
+    }
 });
