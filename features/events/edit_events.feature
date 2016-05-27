@@ -5,15 +5,16 @@ Feature: Events
   I would like to edit events
 
   Background:
-    Given I am logged in
+    Given the date is "2014/02/01 09:15:00 UTC"
+    And I am logged in
     And I am on Events index page
-    When I click "New Event"
-    And I select "Repeats" to "weekly"
-    And I check "Monday"
-    And I check "Thursday"
-    Given I fill in event field:
-      | name        | value         |
-      | Name        | Daily Standup |
+      When I click "New Event"
+      And I select "Repeats" to "weekly"
+      And I check "Monday"
+      And I check "Thursday"
+      Given I fill in event field:
+        | name        | value         |
+        | Name        | Daily Standup |
       | Start Date  | 2014-02-04    |
       | Start Time  | 09:00         |
       | Description | we stand up   |
@@ -32,5 +33,6 @@ Feature: Events
     And I select "Repeat ends" to "never"
     And I click the "Save" button
     Then I should be on the event "Show" page for "Daily Standup"
+    And I should see "09:00-09:30 (UTC)"
     And I visit the edit page for the event named "Daily Standup"
     Then the "Repeat ends" selector should be set to "never"
