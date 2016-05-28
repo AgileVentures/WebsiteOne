@@ -2,33 +2,12 @@ convert_date_time_to_local = function(date,time){
 
     var normalized_date_time = normalize_date_time(date, time);
 
-    var local_hours = normalized_date_time.hours() % 12;
-    local_hours = (local_hours < 10) ? ("0"+local_hours):""+local_hours;
-
-    var local_pm = " AM";
-    if(normalized_date_time.hours()>11){
-        local_pm = " PM";
-    }
-
-    var local_minutes = normalized_date_time.minutes();
-    local_minutes = (local_minutes<10)?("0"+local_minutes):""+local_minutes;
-
-    var local_time = local_hours+":"+local_minutes+local_pm;
-    return {date: normalized_date_time.format("YYYY-MM-DD"), time: local_time};
+    return {date: normalized_date_time.format("YYYY-MM-DD"), time: normalized_date_time.format("hh:mm A")};
 }
 
 normalize_date_time = function(date, time) {
-    var date_matches = date.match(/(\d\d\d\d)-(\d\d)-(\d\d)/);
-    var year = date_matches[1];
-    var day = date_matches[3];
-    var month = date_matches[2];
-    var time_matches = time.match(/(\d+):(\d\d) (PM|pm|AM|am)/);
-    var minutes = time_matches[2];
-    var hour = time_matches[1];
-    if (time_matches[3] == "PM" || time_matches[3]=="pm") {
-        hour = parseInt(hour) + 12 + "";
-    }
-    var normalized_date = moment.utc([year, month-1, day, hour, minutes, 0])
+
+    var normalized_date = moment.utc(date +" " + time, "YYYY-MM-DD hh:mm a")
     return normalized_date.tz(jstz.determine().name());
 }
 
