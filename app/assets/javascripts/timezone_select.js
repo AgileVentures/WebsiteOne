@@ -1,47 +1,42 @@
 convert_date_time_to_local = function(date,time){
 
-    normalized_date_time = normalize_date_time(date, time);
+    var normalized_date_time = normalize_date_time(date, time);
+		debugger
 
-    local_day = normalized_date.getDate();
+    var local_day = normalized_date_time.day();
     local_day = (local_day < 10)? "0"+local_day:""+local_day;
-    local_month = normalized_date.getMonth();
+    var local_month = normalized_date_time.month();
     local_month = (local_month<10)?"0"+local_month:""+local_month;
-    local_date = normalized_date_time.getFullYear()+ "-"+local_month+"-"+local_day;
+    var local_date = normalized_date_time.year()+ "-"+local_month+"-"+local_day;
 
-    local_hours = normalized_date_time.getHours() % 12;
+    var local_hours = normalized_date_time.hours() % 12;
     local_hours = (local_hours < 10) ? ("0"+local_hours):""+local_hours;
 
-    local_pm = " AM";
-    if(normalized_date_time.getHours()>11){
+    var local_pm = " AM";
+    if(normalized_date_time.hours()>11){
         local_pm = " PM";
     }
 
-    local_minutes = normalized_date_time.getMinutes();
+    var local_minutes = normalized_date_time.minutes();
     local_minutes = (local_minutes<10)?("0"+local_minutes):""+local_minutes;
 
-    local_time = local_hours+":"+local_minutes+local_pm;
+    var local_time = local_hours+":"+local_minutes+local_pm;
     return {date: local_date, time: local_time};
 }
 
 normalize_date_time = function(date, time) {
-    date_matches = date.match(/(\d\d\d\d)-(\d\d)-(\d\d)/);
+    var date_matches = date.match(/(\d\d\d\d)-(\d\d)-(\d\d)/);
     var year = date_matches[1];
     var day = date_matches[3];
     var month = date_matches[2];
-    time_matches = time.match(/(\d+):(\d\d) (PM|pm|AM|am)/);
+    var time_matches = time.match(/(\d+):(\d\d) (PM|pm|AM|am)/);
     var minutes = time_matches[2];
     var hour = time_matches[1];
     if (time_matches[3] == "PM" || time_matches[3]=="pm") {
         hour = parseInt(hour) + 12 + "";
     }
-    normalized_date = new Date()
-    normalized_date.setUTCFullYear(year);
-    normalized_date.setUTCDate(day);
-    normalized_date.setUTCMonth(month);
-    normalized_date.setUTCHours(hour);
-    normalized_date.setUTCMinutes(minutes);
-    normalized_date.setUTCSeconds(0);
-    return normalized_date;
+    var normalized_date = moment.utc([year, month-1, day, hour, minutes, 0])
+    return normalized_date.tz(jstz.determine().name()).hours();
 }
 
 jQuery.fn.selectTimeZone = function(converter) {
