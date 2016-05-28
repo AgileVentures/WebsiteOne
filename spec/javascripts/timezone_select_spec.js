@@ -23,10 +23,16 @@ describe('timezone_select', function () {
         expect($("#start_time_tz").val()).toEqual("Capybara/GreenSwamp");
     });
 
-    it('adjusts the date and time properly', function () {
-				spyOn(jstz,'determine').and.returnValue({name: function(){return "Europe/London"}});
+    it('adjusts the time properly', function () {
+        spyOn(jstz,'determine').and.returnValue({name: function(){return "Europe/London"}});
         timezone_select.on_ready();
         expect($('#start_time').val()).toEqual('11:27 PM');
+    });
+
+    it('adjusts the date properly', function () {
+        spyOn(jstz,'determine').and.returnValue({name: function(){return "Europe/Kiev"}});
+        timezone_select.on_ready();
+        expect($('#start_date').val()).toEqual('2016-05-28');
     });
 
 });
