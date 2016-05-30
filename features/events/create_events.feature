@@ -29,6 +29,7 @@ Feature: Events
     Then I should see "Event Created"
     Then I should be on the event "Show" page for "Whatever"
     And the event named "Whatever" is associated with "EdX"
+    And I should see "09:00-09:30 (UTC)"
 
   @javascript
   Scenario: Create a new event in a non-UTC timezone

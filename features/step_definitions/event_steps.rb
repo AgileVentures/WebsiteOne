@@ -138,3 +138,7 @@ And(/^"([^"]*)" is selected in the project dropdown$/) do |project_slug|
   project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
   expect(find("#project_id").value).to eq project_id.to_s
 end
+
+And(/^the start time is "([^"]*)"$/) do |start_time|
+  expect(find("#start_time").value).to eq start_time
+end

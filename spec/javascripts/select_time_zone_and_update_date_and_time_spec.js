@@ -1,4 +1,4 @@
-describe('timezone_select', function () {
+describe('selectTimeZoneAndUpdateDateAndTime', function () {
 
     beforeEach(function () {
         setFixtures('<div>'+
@@ -11,7 +11,7 @@ describe('timezone_select', function () {
             '<select id="start_time_tz">' +
             '<option value="World/Someplace" selected="selected">World/Someplace</option>'+
             '<option value="Capybara/GreenSwamp">Capybara/GreenSwamp</option>'+
-            '<option value="DisneyWorld/Alladin">DisneyWorld/Alladin</option>'+
+            '<option value="DisneyWorld/Aladdin">DisneyWorld/Aladdin</option>'+
             '</select>'+
             '</div>');
     });
@@ -19,19 +19,19 @@ describe('timezone_select', function () {
     it('sets the timezone properly', function () {
         spyOn(jstz,'determine').and.returnValue({name: function(){return "Capybara/GreenSwamp"}});
         expect($("#start_time_tz").val()).toEqual("World/Someplace");
-        timezone_select.on_ready();
+        handleUserTimeZone();
         expect($("#start_time_tz").val()).toEqual("Capybara/GreenSwamp");
     });
 
     it('adjusts the time properly', function () {
         spyOn(jstz,'determine').and.returnValue({name: function(){return "Europe/London"}});
-        timezone_select.on_ready();
+        handleUserTimeZone();
         expect($('#start_time').val()).toEqual('11:27 PM');
     });
 
     it('adjusts the date properly', function () {
         spyOn(jstz,'determine').and.returnValue({name: function(){return "Europe/Kiev"}});
-        timezone_select.on_ready();
+        handleUserTimeZone();
         expect($('#start_date').val()).toEqual('2016-05-28');
     });
 
