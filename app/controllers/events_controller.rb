@@ -70,9 +70,13 @@ class EventsController < ApplicationController
   end
 
   def create_start_date_time(event_params)
-    return if !params['start_date'].present? || !params['start_time'].present?
+    return unless date_and_time_present?
     tz = TZInfo::Timezone.get(params['start_time_tz'])
     event_params[:start_datetime] = tz.local_to_utc(DateTime.parse(params['start_date']+ ' ' + params['start_time']))
+  end
+
+  def date_and_time_present?
+    params['start_date'].present? and params['start_time'].present?
   end
 
   def specified_project
