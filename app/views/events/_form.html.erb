@@ -27,10 +27,10 @@
         <%= label_tag 'start_date', 'Start Date', class: 'control-label' %>
         <%= text_field_tag 'start_date', format_datepicker(start_date), style: 'width:auto;', class: 'form-control datepicker' %>
       </div>
-
       <div class="form-group event_time">
-        <%= label_tag 'start_time', 'Start Time in UTC', class: 'control-label' %>
+        <%= label_tag 'start_time', 'Start Time', class: 'control-label' %>
         <%= text_field_tag 'start_time', format_timepicker(start_time), style: 'width:auto;', class: 'form-control timepicker' %>
+        <%= select_tag 'start_time_tz', options_from_collection_for_select( TZInfo::Timezone.all, 'identifier', 'identifier', 'UTC'), { class: 'form-control', style: 'width:auto;' } %>
       </div>
 
       <div class="form-group">
@@ -45,7 +45,7 @@
       </div>
 
       <div class="form-group event_option" id="repeats_options">
-        <%= label_tag 'event_repeat_ends_string', 'Repeat ends', class: 'control-label'%>
+        <%= label_tag 'event_repeat_ends_string', 'Repeat ends', class: 'control-label' %>
         <%= f.select :repeat_ends_string, Event::REPEAT_ENDS_OPTIONS, {}, class: 'form-control' %>
       </div>
 
