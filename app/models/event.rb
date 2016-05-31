@@ -179,16 +179,6 @@ class Event < ActiveRecord::Base
     sched
   end
 
-  def self.transform_params(params)
-    event_params = params.require(:event).permit!
-    if (params['start_date'].present? && params['start_time'].present?)
-      event_params[:start_datetime] = "#{params['start_date']} #{params['start_time']} UTC"
-    end
-    event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
-    event_params[:repeat_ends_on]= params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
-    event_params
-  end
-
   def start_time_with_timezone
     DateTime.parse(start_time.strftime('%k:%M ')).in_time_zone(time_zone)
   end

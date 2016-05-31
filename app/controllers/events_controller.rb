@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    EventCreatorService.new(Event).perform(Event.transform_params(params),
+    EventCreatorService.new(Event).perform(transform_params,
                                            success: ->(event) do
                                              @event = event
                                              flash[:notice] = 'Event Created'
@@ -41,13 +41,13 @@ class EventsController < ApplicationController
 
   def update
     begin
-      updated = @event.update_attributes(Event.transform_params(params))
+      updated = @event.update_attributes(transform_params)
     rescue
       attr_error = 'attributes invalid'
     end
     if updated
       flash[:notice] = 'Event Updated'
-      redirect_to events_path
+      redirect_to event_path(@event)
     else
       flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
       redirect_to edit_event_path(@event)
@@ -60,6 +60,24 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def transform_params
+    event_params = params.require(:event).permit!
+    create_start_date_time(event_params)
+    event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
+    event_params[:repeat_ends_on]= params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
+    event_params
+  end
+
+  def create_start_date_time(event_params)
+    return unless date_and_time_present?
+    tz = TZInfo::Timezone.get(params['start_time_tz'])
+    event_params[:start_datetime] = tz.local_to_utc(DateTime.parse(params['start_date']+ ' ' + params['start_time']))
+  end
+
+  def date_and_time_present?
+    params['start_date'].present? and params['start_time'].present?
+  end
 
   def specified_project
     @project = Project.friendly.find(params[:project_id]) unless params[:project_id].blank?
