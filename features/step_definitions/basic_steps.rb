@@ -53,6 +53,11 @@ end
 
 # GIVEN steps
 
+
+Then(/^show me the page$/) do
+  save_and_open_page
+end
+
 Given(/^I (?:visit|am on) the site$/) do
   visit root_path
 end
