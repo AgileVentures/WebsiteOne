@@ -109,8 +109,13 @@ end
 And(/^I select "([^"]*)" from the event project dropdown$/) do |project_name|
   page.select project_name, from: "event_project_id"
 end
+
 And(/^I select "([^"]*)" from the project dropdown$/) do |project_name|
   page.select project_name, from: "project_id"
+end
+
+Given(/^I select "([^"]*)" from the time zone dropdown$/) do |timezone|
+  page.select timezone, from: "start_time_tz"
 end
 
 And(/^the event named "([^"]*)" is associated with "([^"]*)"$/) do |event_name, project_title|
@@ -132,4 +137,8 @@ end
 And(/^"([^"]*)" is selected in the project dropdown$/) do |project_slug|
   project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
   expect(find("#project_id").value).to eq project_id.to_s
+end
+
+And(/^the start time is "([^"]*)"$/) do |start_time|
+  expect(find("#start_time").value).to eq start_time
 end
