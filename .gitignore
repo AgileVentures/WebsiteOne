@@ -74,3 +74,4 @@ tags
 
 # testing cache
 /features/support/fixtures/req_cache
+/features/support/fixtures/cassettes
