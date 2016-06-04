@@ -71,3 +71,6 @@ Guardfile
 .vagrant/
 tags
 .byebug_history
+
+# testing cache
+/features/support/fixtures/req_cache
