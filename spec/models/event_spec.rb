@@ -16,24 +16,26 @@ describe Event, :type => :model do
   it { is_expected.to respond_to :schedule }
   it { is_expected.to respond_to :live? }
 
-  it 'is valid with all the correct parameters' do
-    expect(subject).to be_valid
-  end
+  describe 'validations' do 
+    it 'is valid with all the correct parameters' do
+      expect(subject).to be_valid
+    end
 
-  it 'is invalid without name' do
-    expect(FactoryGirl.build(:event, name: nil)).to_not be_valid
-  end
+    it 'is invalid without name' do
+      expect(FactoryGirl.build(:event, name: nil)).to_not be_valid
+    end
 
-  it 'is invalid without category' do
-    expect(FactoryGirl.build(:event, category: nil)).to_not be_valid
-  end
+    it 'is invalid without category' do
+      expect(FactoryGirl.build(:event, category: nil)).to_not be_valid
+    end
 
-  it 'is invalid without repeats' do
-    expect(FactoryGirl.build(:event, repeats: nil)).to_not be_valid
-  end
+    it 'is invalid without repeats' do
+      expect(FactoryGirl.build(:event, repeats: nil)).to_not be_valid
+    end
 
-  it 'is invalid with invalid url' do
-    expect(FactoryGirl.build(:event, url: 'http:google.com')).to_not be_valid
+    it 'is invalid with invalid url' do
+      expect(FactoryGirl.build(:event, url: 'http:google.com')).to_not be_valid
+    end
   end
 
   describe '#last_hangout' do
