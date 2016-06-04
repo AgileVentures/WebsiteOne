@@ -188,9 +188,7 @@ class Event < ActiveRecord::Base
   end
 
   def recent_hangouts
-    event_instances
-      .where('created_at BETWEEN ? AND ?', 1.days.ago.beginning_of_day, DateTime.now.end_of_day)
-      .order(created_at: :desc)
+    event_instances.recent.latest
   end
 
   private
