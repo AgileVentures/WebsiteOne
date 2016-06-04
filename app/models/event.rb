@@ -184,7 +184,7 @@ class Event < ActiveRecord::Base
   end
 
   def last_hangout
-    event_instances.most_recent
+    event_instances.latest.first
   end
 
   def recent_hangouts
