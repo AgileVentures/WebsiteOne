@@ -14,7 +14,6 @@ class EventInstance < ActiveRecord::Base
   scope :pp_hangouts,   -> { where(category: 'PairProgramming') }
   scope :recent,        -> { where('created_at BETWEEN ? AND ?', 1.days.ago.beginning_of_day, DateTime.now.end_of_day) }
   scope :oldest,        -> { order('created_at ASC') }
-  scope :most_recent,   -> { latest.first }
 
   validate :dont_update_after_finished, on: :update
 
