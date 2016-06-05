@@ -165,25 +165,9 @@ class Event < ActiveRecord::Base
 
   def schedule
     scheduler = define_scheduler
-    case repeats
-      when 'never'
-        scheduler.add_recurrence_time(start_datetime)
-      when 'weekly'
-        days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
-        scheduler.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
-    end
-    self.exclusions ||= []
-    self.exclusions.each do |ex|
-      scheduler.add_exception_time(ex)
-    end
+    set_scheduler_type(scheduler)
+    add_exception_periods(scheduler)
     scheduler
-  end
-
-  def define_scheduler
-    # series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
-
-    return IceCube::Schedule.new(start_datetime)                                  unless repeat_ends?
-    return IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends?
   end
 
   def start_time_with_timezone
@@ -199,18 +183,39 @@ class Event < ActiveRecord::Base
   end
 
   private
-  def must_have_at_least_one_repeats_weekly_each_days_of_the_week
-    msg = 'You must have at least one repeats weekly each days of the week'
-    add_error_message(type: :base, msg: msg)  if repeats_weekly_each_days_of_the_week.empty?
-  end
+    def add_exception_periods(scheduler)
+      self.exclusions ||= []
+      self.exclusions.each {|ex| scheduler.add_exception_time(ex) }
+    end
 
-  def add_error_message(args)
-    errors.add(args[:type], args[:msg])
-  end
+    def set_scheduler_type(scheduler)
+      type            = repeats
+      days            = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
+      schedule_rule   = IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
 
-  def repeating_and_ends?
-    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
-  end
+      return scheduler.add_recurrence_time(start_datetime) if type == 'never'
+      return scheduler.add_recurrence_rule(schedule_rule)  if type == 'weekly'
+    end
+
+    def define_scheduler
+      # series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
+
+      return IceCube::Schedule.new(start_datetime)                                  unless repeat_ends?
+      return IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends?
+    end
+
+    def must_have_at_least_one_repeats_weekly_each_days_of_the_week
+      msg = 'You must have at least one repeats weekly each days of the week'
+      add_error_message(type: :base, msg: msg)  if repeats_weekly_each_days_of_the_week.empty?
+    end
+
+    def add_error_message(args)
+      errors.add(args[:type], args[:msg])
+    end
+
+    def repeating_and_ends?
+      repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
+    end
 end
 
 
