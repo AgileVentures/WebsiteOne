@@ -22,12 +22,10 @@ class Event < ActiveRecord::Base
   REPEAT_ENDS_OPTIONS       = %w[on never]
   DAYS_OF_THE_WEEK          = %w[monday tuesday wednesday thursday friday saturday sunday]
 
+  scope :hookups, -> { where(category: 'PairProgramming') }
+
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? "on" : "never"
-  end
-
-  def self.hookups
-    Event.where(category: "PairProgramming")
   end
 
   def self.pending_hookups
@@ -57,7 +55,7 @@ class Event < ActiveRecord::Base
   end
 
   def instance_end_time
-    (start_datetime + duration*60).utc
+    (start_datetime + duration * 60).utc
   end
 
   def end_date
