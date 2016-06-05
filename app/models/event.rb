@@ -33,11 +33,15 @@ class Event < ActiveRecord::Base
   def self.pending_hookups
     pending = []
     hookups.each do |h|
-      started = h.last_hangout && h.last_hangout.started?
-      expired_without_starting = !h.last_hangout && Time.now.utc > h.instance_end_time
+      started                   = is_last_event_started?
+      expired_without_starting  = !h.last_hangout && Time.now.utc > h.instance_end_time
       pending << h if !started && !expired_without_starting
     end
     pending
+  end
+
+  def is_last_event_started?
+    h.last_hangout && h.last_hangout.started?
   end
 
   def event_date
@@ -141,8 +145,12 @@ class Event < ActiveRecord::Base
     schedule.occurrences_between(start_time.to_time, end_time.to_time)
   end
 
-  def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
-    self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DAYS_OF_THE_WEEK).map { |r| 2**DAYS_OF_THE_WEEK.index(r) }.inject(0, :+)
+  def repeats_weekly_each_days_of_the_week=(value)
+    computed_value = (value & DAYS_OF_THE_WEEK).map do |r| 
+      2 ** DAYS_OF_THE_WEEK.index(r) 
+    end.inject(0, :+)
+
+    self.repeats_weekly_each_days_of_the_week_mask = computed_value
   end
 
   def repeats_weekly_each_days_of_the_week
