@@ -193,13 +193,11 @@ class Event < ActiveRecord::Base
       days            = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
       schedule_rule   = IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
 
-      return scheduler.add_recurrence_time(start_datetime) if type == 'never'
-      return scheduler.add_recurrence_rule(schedule_rule)  if type == 'weekly'
+      return scheduler.add_recurrence_time(start_datetime)    if type == 'never'
+      return scheduler.add_recurrence_rule(schedule_rule)     if type == 'weekly'
     end
 
     def define_scheduler
-      # series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
-
       return IceCube::Schedule.new(start_datetime)                                  unless repeat_ends?
       return IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends?
     end
