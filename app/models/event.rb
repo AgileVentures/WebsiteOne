@@ -15,12 +15,12 @@ class Event < ActiveRecord::Base
   attr_accessor :next_occurrence_time_attr
   attr_accessor :repeat_ends_string
 
-  COLLECTION_TIME_FUTURE = 10.days
-  COLLECTION_TIME_PAST = 15.minutes
+  COLLECTION_TIME_FUTURE    = 10.days
+  COLLECTION_TIME_PAST      = 15.minutes
 
-  REPEATS_OPTIONS = %w[never weekly]
-  REPEAT_ENDS_OPTIONS = %w[on never]
-  DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
+  REPEATS_OPTIONS           = %w[never weekly]
+  REPEAT_ENDS_OPTIONS       = %w[on never]
+  DAYS_OF_THE_WEEK          = %w[monday tuesday wednesday thursday friday saturday sunday]
 
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? "on" : "never"
@@ -192,13 +192,14 @@ class Event < ActiveRecord::Base
   end
 
   private
-  def must_have_at_least_one_repeats_weekly_each_days_of_the_week
-    if repeats_weekly_each_days_of_the_week.empty?
-      errors.add(:base, 'You must have at least one repeats weekly each days of the week')
-    end
-  end
 
-  def repeating_and_ends?
-    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
-  end
+    def must_have_at_least_one_repeats_weekly_each_days_of_the_week
+      if repeats_weekly_each_days_of_the_week.empty?
+        errors.add(:base, 'You must have at least one repeats weekly each days of the week')
+      end
+    end
+
+    def repeating_and_ends?
+      repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
+    end
 end
