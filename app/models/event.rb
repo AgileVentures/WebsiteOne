@@ -29,17 +29,9 @@ class Event < ActiveRecord::Base
   end
 
   def self.pending_hookups
-    pending = []
-    hookups.each do |h|
-      started                   = is_last_event_started?
-      expired_without_starting  = !h.last_hangout && Time.now.utc > h.instance_end_time
-      pending << h if !started && !expired_without_starting
+    hookups.select do |hookup|
+      last_event_not_started? && hookup.not_yet_started?
     end
-    pending
-  end
-
-  def is_last_event_started?
-    h.last_hangout && h.last_hangout.started?
   end
 
   def event_date
@@ -113,12 +105,18 @@ class Event < ActiveRecord::Base
     n_days = 8
     end_datetime = n_days.days.from_now
     event = nil
-    return next_event_occurrence_with_time_inner(start, final_datetime) if self.repeats == 'never'
-    while event.nil? && end_datetime < final_datetime
-      event = next_event_occurrence_with_time_inner(start, final_datetime)
-      n_days *= 2
-      end_datetime = n_days.days.from_now
+
+    if repeats == 'never'
+      # return next_event_occurrence_with_time_inner(start, final_datetime) if self.repeats == 'never'
+      return next_event_occurrence_with_time_inner(start, final_datetime)
+    else 
+      while event.nil? && end_datetime < final_datetime
+        event = next_event_occurrence_with_time_inner(start, final_datetime)
+        n_days *= 2
+        end_datetime = n_days.days.from_now
+      end  
     end
+    
     event
   end
 
@@ -221,6 +219,23 @@ class Event < ActiveRecord::Base
     def repeating_and_ends?
       repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
     end
+
+    def not_yet_started?
+      not expired_without_starting?
+    end
+
+    def expired_without_starting?
+      last_hangout && Time.now.utc > instance_end_time
+    end
+
+    def last_event_started?
+      last_hangout && last_hangout.started?
+    end
+
+    def last_event_not_started?
+      not last_event_started?
+    end
+
 end
 
 
