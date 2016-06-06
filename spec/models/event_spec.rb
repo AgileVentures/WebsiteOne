@@ -60,10 +60,12 @@ describe Event, :type => :model do
                                  repeat_ends_on: '2014-03-08')
     end
 
-    it 'should remove an event instance when requested and date found' do
+    it 'removes an event instance when requested and date found' do
       Delorean.time_travel_to(Time.parse('2013-06-16 09:27:00 UTC'))
       @event.remove_from_schedule(Time.parse('2013-6-23 09:00:00 UTC'))
-      expect(@event.schedule.first(4)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
+      @result = @event.schedule.first(4).map {|val| val.start_time }
+      # expect(@event.schedule.first(4)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
+      expect(@result).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
 
     it 'should move the start date forward when the event instance to be removed is the first in the series' do

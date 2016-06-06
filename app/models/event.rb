@@ -1,17 +1,16 @@
 class Event < ActiveRecord::Base
-  has_many :event_instances
-  belongs_to :project
-  serialize :exclusions
+  has_many    :event_instances
+  belongs_to  :project
+  serialize   :exclusions
 
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  include IceCube
   validates :name, :time_zone, :repeats, :category, :start_datetime, :duration, presence: true
   validates :url, uri: true, :allow_blank => true
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
   validates :repeat_ends_on, :presence => true, :allow_blank => false, :if => lambda{ |e| e.repeats == 'weekly' and e.repeat_ends_string == 'on'}
-  validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
+  validate  :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
   attr_accessor :next_occurrence_time_attr
   attr_accessor :repeat_ends_string
 
@@ -40,8 +39,18 @@ class Event < ActiveRecord::Base
     start_datetime
   end
 
-  def series_end_time
-    repeat_ends_on.to_time    if repeat_ends && repeat_ends_on.present? 
+  def repeats_weekly_each_days_of_the_week=(value)
+    computed_value = (value & DAYS_OF_THE_WEEK).map do |r| 
+      2 ** DAYS_OF_THE_WEEK.index(r) 
+    end.inject(0, :+)
+
+    self.repeats_weekly_each_days_of_the_week_mask = computed_value
+  end
+
+  def repeats_weekly_each_days_of_the_week
+    DAYS_OF_THE_WEEK.reject do |r|
+      ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DAYS_OF_THE_WEEK.index(r)).zero?
+    end
   end
 
   def end_date
@@ -111,7 +120,6 @@ class Event < ActiveRecord::Base
     event = nil
 
     if repeats == 'never'
-      # return next_event_occurrence_with_time_inner(start, final_datetime) if self.repeats == 'never'
       return next_event_occurrence_with_time_inner(start, final_datetime)
     else 
       while event.nil? && end_datetime < final_datetime
@@ -145,20 +153,6 @@ class Event < ActiveRecord::Base
     schedule.occurrences_between(start_time.to_time, end_time.to_time)
   end
 
-  def repeats_weekly_each_days_of_the_week=(value)
-    computed_value = (value & DAYS_OF_THE_WEEK).map do |r| 
-      2 ** DAYS_OF_THE_WEEK.index(r) 
-    end.inject(0, :+)
-
-    self.repeats_weekly_each_days_of_the_week_mask = computed_value
-  end
-
-  def repeats_weekly_each_days_of_the_week
-    DAYS_OF_THE_WEEK.reject do |r|
-      ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DAYS_OF_THE_WEEK.index(r)).zero?
-    end
-  end
-
   def remove_from_schedule(timedate)
     # best if schedule is serialized into the events record...  and an attribute.
     if timedate >= Time.now && timedate == next_occurrence_time_method
@@ -169,13 +163,6 @@ class Event < ActiveRecord::Base
       self.exclusions << timedate
     end
     save!
-  end
-
-  def schedule
-    scheduler = define_scheduler
-    set_scheduler_type(scheduler)
-    add_exception_periods(scheduler)
-    scheduler
   end
 
   def start_time_with_timezone
@@ -207,30 +194,15 @@ class Event < ActiveRecord::Base
     estimated_end_time.utc
   end
 
+  def schedule
+    Scheduler.new(self)
+  end
+
   private
-
-    def add_exception_periods(scheduler)
-      self.exclusions ||= []
-      self.exclusions.each {|ex| scheduler.add_exception_time(ex) }
-    end
-
-    def set_scheduler_type(scheduler)
-      type            = repeats
-      days            = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
-      schedule_rule   = IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
-
-      return scheduler.add_recurrence_time(start_datetime)    if type == 'never'
-      return scheduler.add_recurrence_rule(schedule_rule)     if type == 'weekly'
-    end
-
-    def define_scheduler
-      return IceCube::Schedule.new(start_datetime)                                  unless repeat_ends?
-      return IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends?
-    end
 
     def must_have_at_least_one_repeats_weekly_each_days_of_the_week
       msg = 'You must have at least one repeats weekly each days of the week'
-      add_error_message(type: :base, msg: msg)  if repeats_weekly_each_days_of_the_week.empty?
+      add_error_message(type: :base, msg: msg)  if schedule.repeats_weekly_each_days_of_the_week.empty?
     end
 
     def add_error_message(args)
@@ -252,11 +224,44 @@ class Event < ActiveRecord::Base
 end
 
 
-class Scheduler 
+class Scheduler < IceCube::Schedule
+  include IceCube
   extend Forwardable
-  delegate [] => :@event
+
+  delegate [:start_datetime, 
+            :repeat_ends?,
+            :repeats_weekly_each_days_of_the_week,
+            :repeat_ends_on,
+            :repeats_every_n_weeks, 
+            :repeats] => :@event
+
+  attr_reader :event
 
   def initialize(event)
     @event = event
+    super(start_datetime)                                 unless repeat_ends?
+    super(start_datetime, :end_time => series_end_time)   if repeat_ends?
+    
+    set_scheduler_type
+    add_exception_periods
   end
+
+  def series_end_time
+    repeat_ends_on.to_time    if repeat_ends? && repeat_ends_on.present? 
+  end
+
+  private 
+    def set_scheduler_type
+      days            = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
+      schedule_rule   = IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
+
+      self.add_recurrence_time(start_datetime)    if repeats == 'never'
+      self.add_recurrence_rule(schedule_rule)     if repeats == 'weekly'
+    end
+
+    def add_exception_periods
+      event.exclusions ||= []
+      event.exclusions.each {|ex| self.add_exception_time(ex) }
+    end
 end
+
