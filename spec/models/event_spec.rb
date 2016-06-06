@@ -390,7 +390,7 @@ describe Event, :type => :model do
     end
   end
 
-  describe 'Event.next_event_occurence' do
+  describe 'Event.next_occurrence' do
     @event = FactoryGirl.build(Event,
                                category: 'Scrum',
                                name: 'Spec Scrum one-time',

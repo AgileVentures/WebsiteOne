@@ -78,15 +78,25 @@ class Event < ActiveRecord::Base
     next_occurrence.present? ? next_occurrence[:time] : nil
   end
 
-  def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
-    events_with_times = []
-    events_with_times = Event.where(category: event_type).map { |event|
+  def self.next_occurrence(event_type, begin_time=COLLECTION_TIME_PAST.ago)
+    events_with_times = select_events_with_time(event_type: event_type, begin_time: begin_time)
+
+    if events_with_times.empty?
+      return nil 
+    else
+      events_with_times = events_with_times.sort_by { |e| e[:time] }
+      events_with_times[0][:event].next_occurrence_time_attr = events_with_times[0][:time]
+      return events_with_times[0][:event]
+    end
+  end
+
+  def self.select_events_with_time(args)
+    event_type  = args.fetch(:event_type)
+    begin_time  = args.fetch(:begin_time)
+
+    Event.where(category: event_type).map do |event|
       event.next_event_occurrence_with_time(begin_time)
-    }.compact
-    return nil if events_with_times.empty?
-    events_with_times = events_with_times.sort_by { |e| e[:time] }
-    events_with_times[0][:event].next_occurrence_time_attr = events_with_times[0][:time]
-    return events_with_times[0][:event]
+    end.compact
   end
 
   # The IceCube Schedule's occurrences_between method requires a time range as input to find the next time
