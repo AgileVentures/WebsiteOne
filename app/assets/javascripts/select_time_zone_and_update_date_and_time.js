@@ -1,11 +1,11 @@
 jQuery.fn.selectTimeZoneAndUpdateDateAndTime = function () {
 
     var setLocalDateAndTime = function () {
-        var date = $('#start_date').val();
+        var date = $('#next_date').val();
         var time = $('#start_time').val();
         var normalized_date_time = moment.utc(date + " " + time, "YYYY-MM-DD hh:mm a");
         var local_date_time = normalized_date_time.tz(jstz.determine().name());
-        $('#start_date').val(local_date_time.format("YYYY-MM-DD"));
+        //$('#start_date').val(local_date_time.format("YYYY-MM-DD"));
         $('#start_time').val(local_date_time.format("hh:mm A"));
     };
 
