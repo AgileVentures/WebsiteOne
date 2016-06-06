@@ -29,9 +29,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.pending_hookups
-    hookups.select do |hookup|
-      last_event_not_started? && hookup.not_yet_started?
-    end
+    hookups.select {|hookup| hookup.pending? }
   end
 
   def event_date
@@ -44,10 +42,6 @@ class Event < ActiveRecord::Base
 
   def series_end_time
     repeat_ends_on.to_time    if repeat_ends && repeat_ends_on.present? 
-  end
-
-  def instance_end_time
-    (start_datetime + duration * 60).utc
   end
 
   def end_date
@@ -186,6 +180,23 @@ class Event < ActiveRecord::Base
     event_instances.recent.latest
   end
 
+  def expired?
+    Time.now.utc > instance_end_time
+  end
+
+  def pending?
+    not expired?
+  end
+
+  def expired_without_starting?
+    last_hangout && expired?
+  end
+
+  def instance_end_time
+    estimated_end_time = start_datetime + (duration * 60)
+    estimated_end_time.utc
+  end
+
   private
 
     def add_exception_periods(scheduler)
@@ -218,14 +229,6 @@ class Event < ActiveRecord::Base
 
     def repeating_and_ends?
       repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
-    end
-
-    def not_yet_started?
-      not expired_without_starting?
-    end
-
-    def expired_without_starting?
-      last_hangout && Time.now.utc > instance_end_time
     end
 
     def last_event_started?
