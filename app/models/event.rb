@@ -28,20 +28,26 @@ class Event < ActiveRecord::Base
 
   scope :hookups,   -> { where(category: "PairProgramming") }
 
-=begin
-  def self.hookups
-    Event.where(category: "PairProgramming")
-  end
-=end  
-
   def self.pending_hookups
     pending = []
     hookups.each do |h|
-      started = h.last_hangout && h.last_hangout.started?
-      expired_without_starting = !h.last_hangout && Time.now.utc > h.instance_end_time
+      started                     = h.last_started?
+      expired_without_starting    = h.expired_without_starting?
       pending << h if !started && !expired_without_starting
     end
     pending
+  end
+
+  def last_started?
+    last_hangout && last_hangout.started?
+  end
+
+  def expired_without_starting?
+    not last_hangout && expired?
+  end
+
+  def expired?
+    Time.now.utc > instance_end_time
   end
 
   def event_date

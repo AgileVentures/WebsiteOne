@@ -434,7 +434,7 @@ describe Event, :type => :model do
     end
   end
 
-  describe "Pending hookups selection" do 
+  xdescribe "Pending hookups selection" do 
     describe 'Correct events considered to be pending' do 
 
       before(:each) do 
