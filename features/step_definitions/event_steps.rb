@@ -151,3 +151,33 @@ Then(/^the user is in "([^"]*)" timezone$/) do |zone|
   page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{zone}' } } };")
   page.execute_script('handleUserTimeZone();')
 end
+
+Given(/^daylight savings are in effect now$/) do
+  Delorean.time_travel_to(Time.parse('2015/06/14 09:15:00 UTC'))
+end
+
+And(/^the user is in "([^"]*)"$/) do |zone|
+  @zone = zone
+end
+
+And(/^edits an event with start date in standard time$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+  visit edit_event_path(@event)
+  page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{@zone}' } } };")
+  page.execute_script('handleUserTimeZone();')
+  @start_date = find("#start_date").value
+  @start_time = find("#start_time").value
+end
+
+When(/^they save without making any changes$/) do
+  click_link_or_button 'Save'
+end
+
+Then(/^the event date and time should be unchanged$/) do
+  expect(current_path).to eq event_path(@event)
+  visit edit_event_path(@event)
+  page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{@zone}' } } };")
+  page.execute_script('handleUserTimeZone();')
+  expect(find("#start_date").value).to eq @start_date
+  expect(find("#start_time").value).to eq @start_time
+end
