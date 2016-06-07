@@ -86,3 +86,15 @@ Feature: Events
     When I dropdown the "Events" menu
     And I click "Upcoming events"
     And I should see multiple "Standup" events
+
+
+
+# dimensions
+
+#     * start date (future, past)
+#     * operation (creating, editing)
+#     * timezone user is in (one of many - choose representative set)
+#     * daylight savings difference between next event and start event (true, false)
+#     * repeating event (true, false)
+#       * repeated event already terminated
+#     * will combination of timezone and date lead to change in date field (true, false)

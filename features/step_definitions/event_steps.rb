@@ -142,3 +142,12 @@ end
 And(/^the start time is "([^"]*)"$/) do |start_time|
   expect(find("#start_time").value).to eq start_time
 end
+
+And(/^the start date is "([^"]*)"$/) do |start_date|
+  expect(find("#start_date").value).to eq start_date
+end
+
+Then(/^the user is in "([^"]*)" timezone$/) do |zone|
+  page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{zone}' } } };")
+  page.execute_script('handleUserTimeZone();')
+end
