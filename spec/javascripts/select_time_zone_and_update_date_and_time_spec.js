@@ -3,6 +3,7 @@ describe('selectTimeZoneAndUpdateDateAndTime', function () {
     beforeEach(function () {
         setFixtures('<div>'+
             '<input type="text" name="start_date" id="start_date" value="2016-05-27" style="width:auto;" class="form-control datepicker">'+
+            '<input type="hidden" name="next_date" id="next_date" value="2016-05-27" style="width:auto;" class="form-control datepicker">'+
             '</div>'+
             '<div>'+
             '<input type="text" name="start_time" id="start_time" value="10:27 pm" style="width:auto;" class="form-control timepicker">'+
