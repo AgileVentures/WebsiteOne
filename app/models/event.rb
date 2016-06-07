@@ -32,10 +32,6 @@ class Event < ActiveRecord::Base
     hookups.select {|hookup| hookup.pending? } 
   end
 
-  def event_date
-    start_datetime
-  end
-
   def start_time
     start_datetime
   end
@@ -49,11 +45,8 @@ class Event < ActiveRecord::Base
   end
 
   def end_date
-    if (series_end_time < start_time)
-      (event_date.to_datetime + 1.day).strftime('%Y-%m-%d')
-    else
-      event_date
-    end
+    return next_day_from_start_time if (series_end_time < start_time)
+    start_time
   end
 
   def live?
@@ -216,6 +209,10 @@ class Event < ActiveRecord::Base
       if repeats_weekly_each_days_of_the_week.empty?
         errors.add(:base, 'You must have at least one repeats weekly each days of the week')
       end
+    end
+
+    def next_day_from_start_time
+      (start_time.to_datetime + 1.day).strftime('%Y-%m-%d')
     end
 
     def repeating_and_ends?
