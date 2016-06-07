@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
     @repeat_ends_string = repeat_ends ? "on" : "never"
   end
 
-  scope :hookups,   -> { where(category: "PairProgramming") }
+  scope :hookups, -> { where(category: "PairProgramming") }
 
   def self.pending_hookups
     hookups.select {|hookup| hookup.pending? }
@@ -87,14 +87,13 @@ class Event < ActiveRecord::Base
   end
 
   def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
-    events_with_times = []
-    events_with_times = Event.where(category: event_type).map { |event|
-      event.next_event_occurrence_with_time(begin_time)
-    }.compact
-    return nil if events_with_times.empty?
-    events_with_times = events_with_times.sort_by { |e| e[:time] }
-    events_with_times[0][:event].next_occurrence_time_attr = events_with_times[0][:time]
-    return events_with_times[0][:event]
+    events_with_times = select_events_with_time(event_type: event_type, begin_time: begin_time)
+
+    unless events_with_times.empty? 
+      events_with_times = events_with_times.sort_by { |e| e[:time] }
+      events_with_times[0][:event].next_occurrence_time_attr = events_with_times[0][:time]
+      events_with_times[0][:event]
+    end    
   end
 
   # The IceCube Schedule's occurrences_between method requires a time range as input to find the next time
@@ -188,6 +187,15 @@ class Event < ActiveRecord::Base
   end
 
   private
+    def self.select_events_with_time(args)
+      event_type  = args.fetch(:event_type)
+      begin_time  = args.fetch(:begin_time)
+
+      Event.where(category: event_type).map do |event|
+        event.next_event_occurrence_with_time(begin_time)
+      end.compact
+    end
+
     def must_have_at_least_one_repeats_weekly_each_days_of_the_week
       if repeats_weekly_each_days_of_the_week.empty?
         errors.add(:base, 'You must have at least one repeats weekly each days of the week')
