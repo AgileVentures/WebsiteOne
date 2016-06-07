@@ -147,8 +147,8 @@ class Event < ActiveRecord::Base
     save!
   end
 
-  def schedule()
-    sched = series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
+  def schedule
+    sched = create_schedule
     case repeats
       when 'never'
         sched.add_recurrence_time(start_datetime)
@@ -161,6 +161,11 @@ class Event < ActiveRecord::Base
       sched.add_exception_time(ex)
     end
     sched
+  end
+
+  def create_schedule
+    return IceCube::Schedule.new(start_datetime)                                  unless repeat_ends
+    return IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends
   end
 
   def start_time_with_timezone
