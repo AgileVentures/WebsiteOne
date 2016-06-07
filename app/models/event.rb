@@ -15,12 +15,12 @@ class Event < ActiveRecord::Base
   attr_accessor :next_occurrence_time_attr
   attr_accessor :repeat_ends_string
 
-  COLLECTION_TIME_FUTURE = 10.days
-  COLLECTION_TIME_PAST = 15.minutes
+  COLLECTION_TIME_FUTURE    = 10.days
+  COLLECTION_TIME_PAST      = 15.minutes
 
-  REPEATS_OPTIONS = %w[never weekly]
-  REPEAT_ENDS_OPTIONS = %w[on never]
-  DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
+  REPEATS_OPTIONS           = %w[never weekly]
+  REPEAT_ENDS_OPTIONS       = %w[on never]
+  DAYS_OF_THE_WEEK          = %w[monday tuesday wednesday thursday friday saturday sunday]
 
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? "on" : "never"
@@ -34,26 +34,6 @@ class Event < ActiveRecord::Base
 
   def pending?
     last_not_started? && not_expired_without_starting?
-  end
-
-  def last_not_started?
-    !last_started?
-  end
-
-  def last_started?
-    last_hangout && last_hangout.started?
-  end
-
-  def not_expired_without_starting?
-    not expired_without_starting?
-  end
-
-  def expired_without_starting?
-    not last_hangout && expired?
-  end
-
-  def expired?
-    Time.now.utc > instance_end_time
   end
 
   def event_date
@@ -208,13 +188,33 @@ class Event < ActiveRecord::Base
   end
 
   private
-  def must_have_at_least_one_repeats_weekly_each_days_of_the_week
-    if repeats_weekly_each_days_of_the_week.empty?
-      errors.add(:base, 'You must have at least one repeats weekly each days of the week')
+    def must_have_at_least_one_repeats_weekly_each_days_of_the_week
+      if repeats_weekly_each_days_of_the_week.empty?
+        errors.add(:base, 'You must have at least one repeats weekly each days of the week')
+      end
     end
-  end
 
-  def repeating_and_ends?
-    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
-  end
+    def repeating_and_ends?
+      repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
+    end
+
+    def last_not_started?
+      !last_started?
+    end
+
+    def last_started?
+      last_hangout && last_hangout.started?
+    end
+
+    def not_expired_without_starting?
+      not expired_without_starting?
+    end
+
+    def expired_without_starting?
+      not last_hangout && expired?
+    end
+
+    def expired?
+      Time.now.utc > instance_end_time
+    end
 end
