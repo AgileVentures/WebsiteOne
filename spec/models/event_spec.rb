@@ -433,35 +433,4 @@ describe Event, :type => :model do
       expect(event.recent_hangouts.to_a).to match_array([@recent_hangout])
     end
   end
-
-  xdescribe "Pending hookups selection" do 
-    describe 'Correct events considered to be pending' do 
-
-      before(:each) do 
-        @event_1 = FactoryGirl.create(Event, 
-                                      category: 'PairProgramming',
-                                      name: 'WSO hookup',
-                                      start_datetime: '2016-06-06 16:00:00 UTC',
-                                      duration: 30,
-                                      repeats: 'never')
-
-        @event_2 = FactoryGirl.create(Event, 
-                                      category: 'PairProgramming',
-                                      name: 'WSO hookup main event',
-                                      start_datetime: '2016-06-06 17:30:00 UTC',
-                                      duration: 45,
-                                      repeats: 'never')
-      end
-
-      it 'returns correct number of pending hookups' do 
-        Delorean.time_travel_to(Time.parse('2016-06-06 17:00:00 UTC'))
-        expect(Event.pending_hookups.count).to eq(1)
-      end
-
-      it 'returns correct hookup' do 
-        Delorean.time_travel_to(Time.parse('2016-06-06 17:00:00 UTC'))
-        expect(Event.pending_hookups.first.name).to eq('WSO hookup main event')
-      end
-    end
-  end
 end
