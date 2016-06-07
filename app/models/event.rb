@@ -29,11 +29,7 @@ class Event < ActiveRecord::Base
   scope :hookups, -> { where(category: "PairProgramming") }
 
   def self.pending_hookups
-    hookups.select {|hookup| hookup.pending? }
-  end
-
-  def pending?
-    last_not_started? && not_expired_without_starting?
+    hookups.select {|hookup| hookup.pending? } 
   end
 
   def event_date
@@ -186,6 +182,26 @@ class Event < ActiveRecord::Base
     event_instances.recent.latest
   end
 
+  def pending?
+    last_not_started? && not_expired_without_starting?
+  end
+
+  def last_started?
+    last_hangout && last_hangout.started?
+  end
+
+  def not_expired_without_starting?
+    not expired_without_starting?
+  end
+
+  def expired_without_starting?
+    !last_hangout && expired?
+  end
+
+  def last_not_started?
+    !last_started?
+  end
+
   private
     def self.select_events_with_time(args)
       event_type  = args.fetch(:event_type)
@@ -204,22 +220,6 @@ class Event < ActiveRecord::Base
 
     def repeating_and_ends?
       repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
-    end
-
-    def last_not_started?
-      !last_started?
-    end
-
-    def last_started?
-      last_hangout && last_hangout.started?
-    end
-
-    def not_expired_without_starting?
-      not expired_without_starting?
-    end
-
-    def expired_without_starting?
-      not last_hangout && expired?
     end
 
     def expired?
