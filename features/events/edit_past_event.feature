@@ -1,11 +1,11 @@
 @javascript @vcr
-Feature: Events
+Feature: Editing an event with start date in the past
   As a site user
-  In order to be able to update planned activities
-  I would like to edit events
+  In order to be able to update existing activities
+  I would like to edit event details
 
   Background:
-    Given the date is "2014/02/01 09:15:00 UTC"
+    Given the date is "2016/02/01 09:15:00 UTC"
     And I am logged in
     And I am on Events index page
     When I click "New Event"
@@ -18,7 +18,7 @@ Feature: Events
       | Start Date  | 2014-02-04    |
       | Start Time  | 09:00         |
       | Description | we stand up   |
-      | End Date    | 2014-03-04    |
+      | End Date    | 2016-03-04    |
     Then the event is set to end sometime
     And I click on the "repeat_ends_on" div
     And I click the "Save" button
@@ -46,3 +46,27 @@ Feature: Events
     And I visit the edit page for the event named "Daily Standup"
     Then the start time is "07:00 PM"
 
+  Scenario: User in non-UTC timezone edits an existing event, with no
+    And I visit the edit page for the event named "Daily Standup"
+    And the user is in "US/Hawaii" timezone
+    Then the start time is "11:00 PM"
+    Then the start date is "2014-02-03"
+    And I click the "Save" button
+    Then I should be on the event "Show" page for "Daily Standup"
+    And I should see "09:00-09:30 (UTC)"
+    And I visit the edit page for the event named "Daily Standup"
+    Then the start time is "09:00 AM"
+    And the start date is "2014-02-04"
+
+  Scenario: User in non-UTC timezone Edits an existing event, with no changes, and daylight savings involved
+    Given the date is "2015/06/14 09:15:00 UTC"
+    And I visit the edit page for the event named "Daily Standup"
+    And the user is in "Europe/London" timezone
+    Then the start time is "10:00 AM"
+    Then the start date is "2014-02-04"
+    And I click the "Save" button
+    Then I should be on the event "Show" page for "Daily Standup"
+    And I should see "09:00-09:30 (UTC)"
+    And I visit the edit page for the event named "Daily Standup"
+    Then the start time is "09:00 AM"
+    And the start date is "2014-02-04"
