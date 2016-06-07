@@ -9,8 +9,8 @@ class EventCreatorService
     @event = @event_repository.new(prepared_params)
     save_result = @event.save
 
-    success.call(@event)    if save_result
-    failure.call(@event)    unless save_result
+    return success.call(@event)    if save_result
+    return failure.call(@event)    unless save_result
   end
 
   private 

@@ -71,10 +71,19 @@ class EventsController < ApplicationController
     event_params
   end
 
+  # next_date and start_date are in the same dst or non-dst
+  # next_date in dst and start_date in non-dst ==> get an hour back
+  # next_date in non-dst and start_date in dst ==> ???
+
   def create_start_date_time(event_params)
     return unless date_and_time_present?
     tz = TZInfo::Timezone.get(params['start_time_tz'])
-    event_params[:start_datetime] = tz.local_to_utc(DateTime.parse(params['start_date']+ ' ' + params['start_time']))
+    event_params[:start_datetime] = next_date_offset(tz).to_utc(DateTime.parse(params['start_date']+ ' ' + params['start_time']))
+  end
+
+  def next_date_offset(tz)
+    next_date_time = DateTime.parse(params['next_date'] + ' ' + params['start_time'])
+    tz.period_for_utc(next_date_time).offset
   end
 
   def date_and_time_present?
