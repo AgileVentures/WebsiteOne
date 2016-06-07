@@ -26,9 +26,13 @@ class Event < ActiveRecord::Base
     @repeat_ends_string = repeat_ends ? "on" : "never"
   end
 
+  scope :hookups,   -> { where(category: "PairProgramming") }
+
+=begin
   def self.hookups
     Event.where(category: "PairProgramming")
   end
+=end  
 
   def self.pending_hookups
     pending = []
