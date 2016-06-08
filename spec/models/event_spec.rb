@@ -114,7 +114,12 @@ describe Event, :type => :model do
                                         repeat_ends: 'never',
                                         repeat_ends_on: 'Tue, 25 Jun 2013',
                                         time_zone: 'Eastern Time (US & Canada)')
-      expect(event.schedule.first(5)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sun, 23 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
+      expect(event.schedule.first(5)).to eq([
+        'Sat, 22 Jun 2013 09:00:00 UTC +00:00', 
+        'Sun, 23 Jun 2013 09:00:00 UTC +00:00', 
+        'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 
+        'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 
+        'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
 
     it 'is scheduled for every Sunday' do
