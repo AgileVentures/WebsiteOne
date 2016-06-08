@@ -69,22 +69,14 @@ $ bundle exec rake db:setup
 
 Discuss any errors with the team.
 
-12) remove the rack timeout in  config/initializers/timeout.rb 
-
-```ruby
-unless Rails.env.test?
-#   Rack::Timeout.timeout = 20  # seconds
-end
-```
-
-13) add some seed data
+12) add some seed data
 
     $ rake db:seed
 
-14) Start the server
+13) Start the server
 
     bundle exec rails s -b $IP -p $PORT
     
-15) View the running site 
+14) View the running site 
 
     http://<c9_workspace_name>.<your_c9_user_name>.c9users.io/
