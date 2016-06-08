@@ -147,7 +147,7 @@ class Event < ActiveRecord::Base
     save!
   end
 
-  # SCHEDULE BEGIN
+  # SCHEDULE SETUP BEGIN
   def schedule
     create_schedule
     define_repeats
@@ -180,7 +180,7 @@ class Event < ActiveRecord::Base
   def days_interval
     repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
   end
-  # SCHEDULE END
+  # SCHEDULE SETUP END
 
   def start_time_with_timezone
     DateTime.parse(start_time.strftime('%k:%M ')).in_time_zone(time_zone)
