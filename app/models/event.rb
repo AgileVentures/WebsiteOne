@@ -147,19 +147,16 @@ class Event < ActiveRecord::Base
     save!
   end
 
-
   # SCHEDULE BEGIN
   def schedule
-    @schedule = create_schedule
+    create_schedule
     define_repeats
     add_exclusions_to_schedule
-    
-    @schedule
   end
 
   def create_schedule
-    return IceCube::Schedule.new(start_datetime)                                  unless repeat_ends
-    return IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends
+    @schedule = IceCube::Schedule.new(start_datetime)                                  unless repeat_ends
+    @schedule = IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends
   end
 
   def define_repeats
@@ -177,6 +174,7 @@ class Event < ActiveRecord::Base
     self.exclusions.each do |ex|
       @schedule.add_exception_time(ex)
     end
+    @schedule
   end
 
   def days_interval
@@ -221,6 +219,10 @@ class Event < ActiveRecord::Base
       event_type  = args.fetch(:event_type)
       begin_time  = args.fetch(:begin_time)
 
+      find_category_next_occurences(event_type, begin_time)
+    end
+
+    def self.find_category_next_occurences(event_type, begin_time)
       Event.where(category: event_type).map do |event|
         event.next_event_occurrence_with_time(begin_time)
       end.compact
@@ -246,58 +248,5 @@ class Event < ActiveRecord::Base
 
     def repeats_end_present?
       repeat_ends && repeat_ends_on.present? 
-    end
-end
-
-def Schedule
-  extend  Forwardable
-  include IceCube
-
-  delegate [
-    :start_datetime, 
-    :series_end_time, 
-    :repeat_ends, 
-    :repeats,
-    :repeats_weekly_each_days_of_the_week,
-    :repeats_every_n_weeks
-    ] => :@event
-
-  attr_reader :schedule
-  def initialize(event)
-    @event    = event
-    @schedule = create_schedule  
-    setup_repeats
-    setup_exclusions
-  end
-
-  private 
-    def create_schedule
-      return IceCube::Schedule.new(start_datetime)                                  unless repeat_ends
-      return IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends
-    end
-
-    def setup_repeats
-      setup_recurrences     if repeats == 'never'
-      setup_rules           if repeats == 'weekly'
-    end
-
-    def setup_recurrences
-      schedule.add_recurrence_time(start_datetime)
-    end 
-
-    def setup_rules
-      rule = IceCube::Rule.weekly(repeats_every_n_weeks).day(days_interval)
-      schedule.add_recurrence_rule rule
-    end
-
-    def setup_exclusions
-      event.exclusions ||= []
-      event.exclusions.each do |ex|
-        schedule.add_exception_time(ex)
-      end
-    end
-
-    def days_interval
-      repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
     end
 end
