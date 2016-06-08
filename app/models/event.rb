@@ -155,8 +155,8 @@ class Event < ActiveRecord::Base
   end
 
   def create_schedule
-    @schedule = IceCube::Schedule.new(start_datetime)                                  unless repeat_ends
-    @schedule = IceCube::Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends
+    @schedule = Schedule.new(start_datetime)                                  unless repeat_ends
+    @schedule = Schedule.new(start_datetime, :end_time => series_end_time)    if repeat_ends
   end
 
   def define_repeats
@@ -165,7 +165,7 @@ class Event < ActiveRecord::Base
   end
 
   def add_recurrence_rules
-    rule = IceCube::Rule.weekly(repeats_every_n_weeks).day(*days_interval)
+    rule = Rule.weekly(repeats_every_n_weeks).day(*days_interval)
     @schedule.add_recurrence_rule rule
   end
 
