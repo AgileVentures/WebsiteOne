@@ -72,7 +72,8 @@ class Event < ActiveRecord::Base
 
   def next_occurrence_time_method(start = Time.now)
     next_occurrence = next_event_occurrence_with_time(start)
-    next_occurrence.present? ? next_occurrence[:time] : nil
+    # next_occurrence.present? ? next_occurrence[:time] : nil
+    next_occurrence[:time] if next_occurrence.present?
   end
 
   def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
@@ -95,16 +96,16 @@ class Event < ActiveRecord::Base
     n_days = 8
     end_datetime = n_days.days.from_now
     event = nil
-    return next_event_occurrence_with_time_inner(start, final_datetime) if self.repeats == 'never'
+    return next_occurrence_with_time(start, final_datetime) if self.repeats == 'never'
     while event.nil? && end_datetime < final_datetime
-      event = next_event_occurrence_with_time_inner(start, final_datetime)
+      event = next_occurrence_with_time(start, final_datetime)
       n_days *= 2
       end_datetime = n_days.days.from_now
     end
     event
   end
 
-  def next_event_occurrence_with_time_inner(start_time, end_time)
+  def next_occurrence_with_time(start_time, end_time)
     occurrences = occurrences_between(start_time, end_time)
     { event: self, time: occurrences.first.start_time } if occurrences.present?
   end
