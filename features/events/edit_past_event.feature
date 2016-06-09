@@ -47,23 +47,12 @@ Feature: Editing an event with start date in the past
     Then the start time is "07:00 PM"
 
   Scenario: User in non-UTC timezone edits an existing event, with no changes
-    Given the user is in "US/Hawaii"
+    Given an existing event
+    And the user is in "US/Hawaii"
     Then the user should see the date and time adjusted for their timezone in the edit form
     And they save without making any changes
     When the user is in "Etc/UTC"
     Then the user should see the date and time adjusted for their timezone in the edit form
-
-  Scenario: User in non-UTC timezone edits an existing event, with no changes
-    And I visit the edit page for the event named "Daily Standup"
-    And the user is in "US/Hawaii" timezone
-    Then the start time is "11:00 PM"
-    Then the start date is "2014-02-03"
-    And I click the "Save" button
-    Then I should be on the event "Show" page for "Daily Standup"
-    And I should see "09:00-09:30 (UTC)"
-    And I visit the edit page for the event named "Daily Standup"
-    Then the start time is "09:00 AM"
-    And the start date is "2014-02-04"
 
   Scenario: User in non-UTC timezone saves an existing event with no changes, during daylight savings
     Given daylight savings are in effect now

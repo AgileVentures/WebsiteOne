@@ -171,7 +171,6 @@ And(/^edits an event with start date in standard time$/) do
 end
 
 When(/^they save without making any changes$/) do
-  expect(@form_tz).to eq(@zone)
   click_link_or_button 'Save'
 end
 
@@ -203,7 +202,6 @@ Given(/^daylight savings are in effect and it is now past the end date for the e
 end
 
 Then(/^the user should see the date and time adjusted for their timezone in the edit form$/) do
-  @event = Event.find_by(name: 'Daily Standup')
   visit edit_event_path(@event)
   page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{@zone}' } } };")
   page.execute_script('handleUserTimeZone();')
@@ -214,4 +212,8 @@ Then(/^the user should see the date and time adjusted for their timezone in the 
   expect(@form_tz).to eq(@zone)
   expect(@start_date).to eq tz.utc_to_local(@event.start_datetime).to_date.strftime("%Y-%m-%d")
   expect(@start_time).to eq  tz.utc_to_local(@event.start_datetime).to_time.strftime("%I:%M %p")
+end
+
+Given(/^an existing event$/) do
+  @event = Event.find_by(name: 'Daily Standup')
 end
