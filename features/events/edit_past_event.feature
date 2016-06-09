@@ -37,6 +37,15 @@ Feature: Editing an event with start date in the past
     And I visit the edit page for the event named "Daily Standup"
     Then the "Repeat ends" selector should be set to "never"
 
+  Scenario: User in non-UTC timezone edits and overrides the timezone of an existing event, and has no side-effects for user in UTC timezone
+    Given an existing event
+    And the user is in "US/Hawaii"
+    Then the user should see the date and time adjusted for their timezone in the edit form
+    And I select "Japan" from the time zone dropdown
+    And they save without making any changes
+    When the user is in "Etc/UTC"
+    Then the user should see the date and time adjusted for their timezone and updated by 19 hours in the edit form
+
   Scenario: Edit an existing event to be in a different time zone
     And I visit the edit page for the event named "Daily Standup"
     And I select "Hawaii" from the time zone dropdown
