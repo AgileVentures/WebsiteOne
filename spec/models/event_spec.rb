@@ -214,7 +214,7 @@ describe Event, :type => :model do
     end
   end
 
-  describe '#next_event_occurrence_with_time' do
+  describe 'Event#next_event_occurrence_with_time' do
     before(:each) do
       @event = FactoryGirl.build(Event,
                                  name: 'Spec Scrum',
@@ -239,19 +239,19 @@ describe Event, :type => :model do
 
     it 'should return the second event instance when the start time is moved forward' do
       Delorean.time_travel_to(Time.parse('2013-06-20 09:27:00 UTC'))
-      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-23 09:00:00 UTC')
+      expect(@event.next_event_occurrence_with_time.time).to eq('2013-06-23 09:00:00 UTC')
     end
 
     it 'should return the second event instance with its time when the first is deleted' do
       Delorean.time_travel_to(Time.parse('2013-06-15 09:27:00 UTC'))
       @event.remove_from_schedule(Time.parse('2013-6-16 09:00:00 UTC'))
-      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-23 09:00:00 UTC')
+      expect(@event.next_event_occurrence_with_time.time).to eq('2013-06-23 09:00:00 UTC')
     end
 
     it 'should return the event instance when it is not recurring and the event occurs in the future' do
       @event.update_attribute(:repeats, 'never')
       Delorean.time_travel_to(Time.parse('2013-06-05 09:27:00 UTC'))
-      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-10 09:00:00 UTC')
+      expect(@event.next_event_occurrence_with_time.time).to eq('2013-06-10 09:00:00 UTC')
     end
 
     it 'should not return the event instance when it is not recurring' do

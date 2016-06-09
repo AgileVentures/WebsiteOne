@@ -53,38 +53,35 @@ class Event < ActiveRecord::Base
     last_hangout.present? && last_hangout.live?
   end
 
-  def start_datetime_for_collection(options = {})
-    start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
-    lower_bound   = [start_datetime, start_time.to_datetime].max
-    lower_bound.to_datetime.utc
-  end
-
-  def final_datetime_for_collection(options = {})
-    if repeating_and_ends? && options[:end_time].present?
-      final_datetime = [options[:end_time], repeat_ends_on.to_datetime].min
-    elsif repeating_and_ends?
-      final_datetime = repeat_ends_on.to_datetime
-    else
-      final_datetime = options[:end_time]
-    end
-    final_datetime ? final_datetime.to_datetime.utc : COLLECTION_TIME_FUTURE.from_now
-  end
-
   def next_occurrence_time_method(start = Time.now)
-    next_occurrence = next_event_occurrence_with_time(start)
-    # next_occurrence.present? ? next_occurrence[:time] : nil
-    next_occurrence[:time] if next_occurrence.present?
+    next_occurrence         = next_event_occurrence_with_time(start)
+    next_occurrence.time    if next_occurrence.present?
   end
 
   def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
     events_with_times = select_events_with_time(event_type: event_type, begin_time: begin_time)
 
-    unless events_with_times.empty? 
-      events_with_times = events_with_times.sort_by { |e| e[:time] }
-      events_with_times[0][:event].next_occurrence_time_attr = events_with_times[0][:time]
-      events_with_times[0][:event]
+    unless events_with_times.empty?
+      events_with_times = events_with_times.sort {|e1, e2| e1.time <=> e2.time }
+      events_with_times.first.event.next_occurrence_time_attr = events_with_times.first.time
+      events_with_times.first.event
     end    
   end
+
+  def self.select_events_with_time(args)
+    event_type  = args.fetch(:event_type)
+    begin_time  = args.fetch(:begin_time)
+
+    find_category_next_occurences(event_type, begin_time)
+  end
+
+  def self.find_category_next_occurences(event_type, begin_time)
+    Event.where(category: event_type).map do |event|
+      event.next_event_occurrence_with_time(begin_time)
+    end.compact
+  end
+
+  # Event#next_event_occurrence_with_time BEGIN
 
   # The IceCube Schedule's occurrences_between method requires a time range as input to find the next time
   # Most of the time, the next instance will be within the next weeek.
@@ -92,9 +89,9 @@ class Event < ActiveRecord::Base
   # that the next time for an event will be within the next week, or even the next month
   # To cover these cases, the while loop looks farther and farther into the future 
   # for the next event occurrence, just in case there are many exclusions.
-  def next_event_occurrence_with_time(start_time = Time.now, final_time= 2.months.from_now)
-    begin_datetime = start_datetime_for_collection(start_time: start_time)
-    final_datetime = repeating_and_ends? ? repeat_ends_on : final_time
+  def next_event_occurrence_with_time(start_time = Time.now, final_time=2.months.from_now)
+    begin_datetime    = start_datetime_for_collection(start_time: start_time)
+    final_datetime    = repeating_and_ends? ? repeat_ends_on : final_time
 
     return closest_event(start_time, final_datetime)    if     repeats == 'never'
     return distant_event(start_time, final_datetime)    unless repeats == 'never'
@@ -120,7 +117,25 @@ class Event < ActiveRecord::Base
 
   def next_occurrence_with_time(start_time, end_time)
     occurrences = occurrences_between(start_time, end_time)
-    { event: self, time: occurrences.first.start_time } if occurrences.present?
+    EventOccurrence.new(self, occurrences.first.start_time)  if occurrences.present?
+  end
+  # Event#next_event_occurrence_with_time END
+
+  def start_datetime_for_collection(options = {})
+    start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
+    lower_bound   = [start_datetime, start_time.to_datetime].max
+    lower_bound.to_datetime.utc
+  end
+
+  def final_datetime_for_collection(options = {})
+    if repeating_and_ends? && options[:end_time].present?
+      final_datetime = [options[:end_time], repeat_ends_on.to_datetime].min
+    elsif repeating_and_ends?
+      final_datetime = repeat_ends_on.to_datetime
+    else
+      final_datetime = options[:end_time]
+    end
+    final_datetime ? final_datetime.to_datetime.utc : COLLECTION_TIME_FUTURE.from_now
   end
 
   def next_occurrences(options = {})
@@ -235,19 +250,6 @@ class Event < ActiveRecord::Base
   end
 
   private
-    def self.select_events_with_time(args)
-      event_type  = args.fetch(:event_type)
-      begin_time  = args.fetch(:begin_time)
-
-      find_category_next_occurences(event_type, begin_time)
-    end
-
-    def self.find_category_next_occurences(event_type, begin_time)
-      Event.where(category: event_type).map do |event|
-        event.next_event_occurrence_with_time(begin_time)
-      end.compact
-    end
-
     def must_have_at_least_one_repeats_weekly_each_days_of_the_week
       if repeats_weekly_each_days_of_the_week.empty?
         errors.add(:base, 'You must have at least one repeats weekly each days of the week')
@@ -270,3 +272,6 @@ class Event < ActiveRecord::Base
       repeat_ends && repeat_ends_on.present? 
     end
 end
+
+EventOccurrence = Struct.new(:event, :time)
+
