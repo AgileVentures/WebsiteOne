@@ -65,9 +65,9 @@ class Event < ActiveRecord::Base
   end
 
   def start_datetime_for_collection(options = {})
-    first_datetime = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
-    first_datetime = [start_datetime, first_datetime.to_datetime].max
-    first_datetime.to_datetime.utc
+    start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
+    lower_bound   = [start_datetime, start_time.to_datetime].max
+    lower_bound.to_datetime.utc
   end
 
   def next_occurrence_time_method(start = Time.now)
