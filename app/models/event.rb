@@ -22,40 +22,11 @@ class Event < ActiveRecord::Base
   REPEAT_ENDS_OPTIONS       = %w[on never]
   DAYS_OF_THE_WEEK          = %w[monday tuesday wednesday thursday friday saturday sunday]
 
-  def set_repeat_ends_string
-    @repeat_ends_string = repeat_ends ? "on" : "never"
-  end
-
   scope :hookups, -> { where(category: "PairProgramming") }
 
+  # CLASS METHODS BEGIN
   def self.pending_hookups
     hookups.select {|hookup| hookup.pending? } 
-  end
-
-  def start_time
-    start_datetime
-  end
-
-  def series_end_time
-    repeat_ends_on.to_time if repeats_end_present?
-  end
-
-  def instance_end_time
-    (start_datetime + duration*60).utc
-  end
-
-  def end_date
-    return next_day_from_start_time if (series_end_time < start_time)
-    start_time
-  end
-
-  def live?
-    last_hangout.present? && last_hangout.live?
-  end
-
-  def next_occurrence_time_method(start = Time.now)
-    next_occurrence         = next_event_occurrence_with_time(start)
-    next_occurrence.time    if next_occurrence.present?
   end
 
   def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
@@ -79,6 +50,12 @@ class Event < ActiveRecord::Base
     Event.where(category: event_type).map do |event|
       event.next_event_occurrence_with_time(begin_time)
     end.compact
+  end
+  # CLASS METHODS END
+
+  def next_occurrence_time_method(start = Time.now)
+    next_occurrence         = next_event_occurrence_with_time(start)
+    next_occurrence.time    if next_occurrence.present?
   end
 
   # Event#next_event_occurrence_with_time BEGIN
@@ -121,6 +98,7 @@ class Event < ActiveRecord::Base
   end
   # Event#next_event_occurrence_with_time END
 
+  # NEXT OCCURRENCES RELATED BEGIN
   def start_datetime_for_collection(options = {})
     start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
     lower_bound   = [start_datetime, start_time.to_datetime].max
@@ -155,21 +133,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def occurrences_between(start_time, end_time)
-    schedule.occurrences_between(start_time.to_time, end_time.to_time)
-  end
-
-  def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
-    result = (repeats_weekly_each_days_of_the_week & DAYS_OF_THE_WEEK).map { |r| 2**DAYS_OF_THE_WEEK.index(r) }.inject(0, :+)
-    self.repeats_weekly_each_days_of_the_week_mask = result
-  end
-
-  def repeats_weekly_each_days_of_the_week
-    DAYS_OF_THE_WEEK.reject do |r|
-      ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DAYS_OF_THE_WEEK.index(r)).zero?
-    end
-  end
-
   def remove_from_schedule(timedate)
     # best if schedule is serialized into the events record...  and an attribute.
     if timedate >= Time.now && timedate == next_occurrence_time_method
@@ -181,6 +144,26 @@ class Event < ActiveRecord::Base
     end
     save!
   end
+  # NEXT OCCURRENCES RELATED END
+
+  # ABSTRACTION ABOVE 'SCHEDULE' BEGIN
+  def occurrences_between(start_time, end_time)
+    schedule.occurrences_between(start_time.to_time, end_time.to_time)
+  end
+  # ABSTRACTION ABOVE 'SCHEDULE' END
+
+  # HELPERS BEGIN 
+  def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
+    result = (repeats_weekly_each_days_of_the_week & DAYS_OF_THE_WEEK).map { |r| 2**DAYS_OF_THE_WEEK.index(r) }.inject(0, :+)
+    self.repeats_weekly_each_days_of_the_week_mask = result
+  end
+
+  def repeats_weekly_each_days_of_the_week
+    DAYS_OF_THE_WEEK.reject do |r|
+      ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DAYS_OF_THE_WEEK.index(r)).zero?
+    end
+  end
+  # HELPERS END
 
   # SCHEDULE SETUP BEGIN
   def schedule
@@ -247,6 +230,31 @@ class Event < ActiveRecord::Base
 
   def last_not_started?
     !last_started?
+  end
+
+  def start_time
+    start_datetime
+  end
+
+  def series_end_time
+    repeat_ends_on.to_time if repeats_end_present?
+  end
+
+  def instance_end_time
+    (start_datetime + duration*60).utc
+  end
+
+  def end_date
+    return next_day_from_start_time if (series_end_time < start_time)
+    start_time
+  end
+
+  def live?
+    last_hangout.present? && last_hangout.live?
+  end
+
+  def set_repeat_ends_string
+    @repeat_ends_string = repeat_ends ? "on" : "never"
   end
 
   private
