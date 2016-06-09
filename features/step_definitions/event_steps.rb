@@ -181,3 +181,16 @@ Then(/^the event date and time should be unchanged$/) do
   expect(find("#start_date").value).to eq @start_date
   expect(find("#start_time").value).to eq @start_time
 end
+
+
+Given(/^it is now past the end date for the event$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+  Delorean.time_travel_to(@event.repeat_ends_on + 1.day)
+end
+
+And(/^they edit and save the event without making any changes$/) do
+  visit edit_event_path(@event)
+  @start_date = find("#start_date").value
+  @start_time = find("#start_time").value
+  click_link_or_button 'Save'
+end
