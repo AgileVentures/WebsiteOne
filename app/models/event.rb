@@ -53,6 +53,12 @@ class Event < ActiveRecord::Base
     last_hangout.present? && last_hangout.live?
   end
 
+  def start_datetime_for_collection(options = {})
+    start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
+    lower_bound   = [start_datetime, start_time.to_datetime].max
+    lower_bound.to_datetime.utc
+  end
+
   def final_datetime_for_collection(options = {})
     if repeating_and_ends? && options[:end_time].present?
       final_datetime = [options[:end_time], repeat_ends_on.to_datetime].min
@@ -62,12 +68,6 @@ class Event < ActiveRecord::Base
       final_datetime = options[:end_time]
     end
     final_datetime ? final_datetime.to_datetime.utc : COLLECTION_TIME_FUTURE.from_now
-  end
-
-  def start_datetime_for_collection(options = {})
-    start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
-    lower_bound   = [start_datetime, start_time.to_datetime].max
-    lower_bound.to_datetime.utc
   end
 
   def next_occurrence_time_method(start = Time.now)
@@ -110,14 +110,19 @@ class Event < ActiveRecord::Base
   end
 
   def next_occurrences(options = {})
-    begin_datetime = start_datetime_for_collection(options)
-    final_datetime = final_datetime_for_collection(options)
-    limit = options.fetch(:limit, 100)
-    [].tap do |occurences|
-      occurrences_between(begin_datetime, final_datetime).each do |time|
-        occurences << { event: self, time: time }
-        return occurences if occurences.count >= limit
-      end
+    begin_datetime    = start_datetime_for_collection(options)
+    final_datetime    = final_datetime_for_collection(options)
+    limit             = options.fetch(:limit, 100)
+    result            = []
+    
+    all_occurrences_for(begin_datetime, final_datetime, limit) {|evt| result << evt }
+    result
+  end
+
+  def all_occurrences_for(start_time, end_time, limit, &block)
+    occurrences_between(start_time, end_time).each_with_index do |time, index|
+      block.call({ event: self, time: time })
+      break if index + 1 >= limit
     end
   end
 
@@ -126,7 +131,8 @@ class Event < ActiveRecord::Base
   end
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
-    self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DAYS_OF_THE_WEEK).map { |r| 2**DAYS_OF_THE_WEEK.index(r) }.inject(0, :+)
+    result = (repeats_weekly_each_days_of_the_week & DAYS_OF_THE_WEEK).map { |r| 2**DAYS_OF_THE_WEEK.index(r) }.inject(0, :+)
+    self.repeats_weekly_each_days_of_the_week_mask = result
   end
 
   def repeats_weekly_each_days_of_the_week
