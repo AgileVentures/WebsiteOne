@@ -92,9 +92,9 @@ class Event < ActiveRecord::Base
   # that the next time for an event will be within the next week, or even the next month
   # To cover these cases, the while loop looks farther and farther into the future 
   # for the next event occurrence, just in case there are many exclusions.
-  def next_event_occurrence_with_time(start_time = Time.now, final= 2.months.from_now)
+  def next_event_occurrence_with_time(start_time = Time.now, final_time= 2.months.from_now)
     begin_datetime = start_datetime_for_collection(start_time: start_time)
-    final_datetime = repeating_and_ends? ? repeat_ends_on : final
+    final_datetime = repeating_and_ends? ? repeat_ends_on : final_time
 
     return closest_event(start_time, final_datetime)    if     repeats == 'never'
     return distant_event(start_time, final_datetime)    unless repeats == 'never'
@@ -109,7 +109,8 @@ class Event < ActiveRecord::Base
     n_days        = 8
     end_datetime  = n_days.days.from_now
     
-    while event.nil? && end_datetime < end_time
+    while end_datetime < end_time
+      break unless event.nil?
       event         = next_occurrence_with_time(start_time, end_time)
       n_days        *= 2
       end_datetime  = n_days.days.from_now
