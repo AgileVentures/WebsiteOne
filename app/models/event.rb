@@ -87,20 +87,32 @@ class Event < ActiveRecord::Base
   end
 
   # The IceCube Schedule's occurrences_between method requires a time range as input to find the next time
-  # Most of the time, the next instance will be within the next weeek.do
-  # But some event instances may have been excluded, so there's not guarantee that the next time for an event will be within the next week, or even the next month
-  # To cover these cases, the while loop looks farther and farther into the future for the next event occurrence, just in case there are many exclusions.
-  def next_event_occurrence_with_time(start = Time.now, final= 2.months.from_now)
-    begin_datetime = start_datetime_for_collection(start_time: start)
+  # Most of the time, the next instance will be within the next weeek.
+  # But some event instances may have been excluded, so there's not guarantee 
+  # that the next time for an event will be within the next week, or even the next month
+  # To cover these cases, the while loop looks farther and farther into the future 
+  # for the next event occurrence, just in case there are many exclusions.
+  def next_event_occurrence_with_time(start_time = Time.now, final= 2.months.from_now)
+    begin_datetime = start_datetime_for_collection(start_time: start_time)
     final_datetime = repeating_and_ends? ? repeat_ends_on : final
-    n_days = 8
-    end_datetime = n_days.days.from_now
-    event = nil
-    return next_occurrence_with_time(start, final_datetime) if self.repeats == 'never'
-    while event.nil? && end_datetime < final_datetime
-      event = next_occurrence_with_time(start, final_datetime)
-      n_days *= 2
-      end_datetime = n_days.days.from_now
+
+    return closest_event(start_time, final_datetime)    if     repeats == 'never'
+    return distant_event(start_time, final_datetime)    unless repeats == 'never'
+  end
+
+  def closest_event(start_time, end_time)
+    next_occurrence_with_time(start_time, end_time)
+  end
+
+  def distant_event(start_time, end_time)
+    event         = nil
+    n_days        = 8
+    end_datetime  = n_days.days.from_now
+    
+    while event.nil? && end_datetime < end_time
+      event         = next_occurrence_with_time(start_time, end_time)
+      n_days        *= 2
+      end_datetime  = n_days.days.from_now
     end
     event
   end
