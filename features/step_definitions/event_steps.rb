@@ -171,6 +171,7 @@ And(/^edits an event with start date in standard time$/) do
 end
 
 When(/^they save without making any changes$/) do
+  expect(@form_tz).to eq(@zone)
   click_link_or_button 'Save'
 end
 
@@ -199,4 +200,18 @@ end
 Given(/^daylight savings are in effect and it is now past the end date for the event$/) do
   @event = Event.find_by(name: 'Daily Standup')
   Delorean.time_travel_to(@event.repeat_ends_on.change(month: 6) + 1.year)
+end
+
+Then(/^the user should see the date and time adjusted for their timezone in the edit form$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+  visit edit_event_path(@event)
+  page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{@zone}' } } };")
+  page.execute_script('handleUserTimeZone();')
+  @start_date = find("#start_date").value
+  @start_time = find("#start_time").value
+  @form_tz = find("#start_time_tz").value
+  tz = TZInfo::Timezone.get(@zone)
+  expect(@form_tz).to eq(@zone)
+  expect(@start_date).to eq tz.utc_to_local(@event.start_datetime).to_date.strftime("%Y-%m-%d")
+  expect(@start_time).to eq  tz.utc_to_local(@event.start_datetime).to_time.strftime("%I:%M %p")
 end
