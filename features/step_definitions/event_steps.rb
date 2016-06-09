@@ -152,6 +152,7 @@ Then(/^the user is in "([^"]*)" timezone$/) do |zone|
   page.execute_script('handleUserTimeZone();')
 end
 
+# would like this to be more robust
 Given(/^daylight savings are in effect now$/) do
   Delorean.time_travel_to(Time.parse('2015/06/14 09:15:00 UTC'))
 end
@@ -182,7 +183,6 @@ Then(/^the event date and time should be unchanged$/) do
   expect(find("#start_time").value).to eq @start_time
 end
 
-
 Given(/^it is now past the end date for the event$/) do
   @event = Event.find_by(name: 'Daily Standup')
   Delorean.time_travel_to(@event.repeat_ends_on + 1.day)
@@ -193,4 +193,10 @@ And(/^they edit and save the event without making any changes$/) do
   @start_date = find("#start_date").value
   @start_time = find("#start_time").value
   click_link_or_button 'Save'
+end
+
+# would love to split this in two so we can re-use for two other scenarios
+Given(/^daylight savings are in effect and it is now past the end date for the event$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+  Delorean.time_travel_to(@event.repeat_ends_on.change(month: 6) + 1.year)
 end
