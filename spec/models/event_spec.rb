@@ -229,7 +229,7 @@ describe Event, :type => :model do
 
     it 'should return the first event instance with its time in basic case' do
       Delorean.time_travel_to(Time.parse('2013-06-15 09:27:00 UTC'))
-      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-16 09:00:00 UTC')
+      expect(@event.next_event_occurrence_with_time.time).to eq('2013-06-16 09:00:00 UTC')
     end
 
     it 'should return nil if the series has expired' do
