@@ -42,13 +42,16 @@ class Event < ActiveRecord::Base
   end
 
   # NEXT OCCURRENCES RELATED BEGIN
-  def all_occurrences_for(start_time, end_time, limit, &block)
-    occurrences_between(start_time, end_time).each_with_index do |time, index|
-      block.call({ event: self, time: time })
-      break if index + 1 >= limit
-    end
+  def next_occurrences(options = {})
+    begin_datetime    = start_datetime_for_collection(options)
+    final_datetime    = final_datetime_for_collection(options)
+    limit             = options.fetch(:limit, 100)
+    result            = []
+    
+    all_occurrences_for(begin_datetime, final_datetime, limit) {|evt| result << evt }
+    result
   end
-  
+
   def start_datetime_for_collection(options = {})
     start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
     lower_bound   = [start_datetime, start_time.to_datetime].max
@@ -66,15 +69,13 @@ class Event < ActiveRecord::Base
     final_datetime ? final_datetime.to_datetime.utc : COLLECTION_TIME_FUTURE.from_now
   end
 
-  def next_occurrences(options = {})
-    begin_datetime    = start_datetime_for_collection(options)
-    final_datetime    = final_datetime_for_collection(options)
-    limit             = options.fetch(:limit, 100)
-    result            = []
-    
-    all_occurrences_for(begin_datetime, final_datetime, limit) {|evt| result << evt }
-    result
+  def all_occurrences_for(start_time, end_time, limit, &block)
+    occurrences_between(start_time, end_time).each_with_index do |time, index|
+      block.call({ event: self, time: time })
+      break if index + 1 >= limit
+    end
   end
+  # NEXT OCCURRENCES RELATED END
 
   def remove_from_schedule(timedate)
     # best if schedule is serialized into the events record...  and an attribute.
@@ -87,7 +88,6 @@ class Event < ActiveRecord::Base
     end
     save!
   end
-  # NEXT OCCURRENCES RELATED END
 
   # LAYER OF ABSTRACTION ABOVE 'SCHEDULE' BEGIN
   def occurrences_between(start_time, end_time)
