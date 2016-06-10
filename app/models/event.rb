@@ -1,7 +1,12 @@
+require 'forwardable'
+
 class Event < ActiveRecord::Base
   has_many :event_instances
   belongs_to :project
   serialize :exclusions
+
+  extend SingleForwardable
+  def_delegators :OccurrenceManager, :next_occurrence
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -29,6 +34,7 @@ class Event < ActiveRecord::Base
     hookups.select {|hookup| hookup.pending? } 
   end
 
+=begin
   def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
     events_with_times = select_events_with_time(event_type: event_type, begin_time: begin_time)
 
@@ -52,6 +58,7 @@ class Event < ActiveRecord::Base
     end.compact
   end
   # CLASS METHODS END
+=end
 
   def next_occurrence_time_method(start = Time.now)
     next_occurrence         = next_event_occurrence_with_time(start)
@@ -98,6 +105,13 @@ class Event < ActiveRecord::Base
   end
   # Event#next_event_occurrence_with_time END
 
+  def all_occurrences_for(start_time, end_time, limit, &block)
+    occurrences_between(start_time, end_time).each_with_index do |time, index|
+      block.call({ event: self, time: time })
+      break if index + 1 >= limit
+    end
+  end
+
   # NEXT OCCURRENCES RELATED BEGIN
   def start_datetime_for_collection(options = {})
     start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
@@ -124,13 +138,6 @@ class Event < ActiveRecord::Base
     
     all_occurrences_for(begin_datetime, final_datetime, limit) {|evt| result << evt }
     result
-  end
-
-  def all_occurrences_for(start_time, end_time, limit, &block)
-    occurrences_between(start_time, end_time).each_with_index do |time, index|
-      block.call({ event: self, time: time })
-      break if index + 1 >= limit
-    end
   end
 
   def remove_from_schedule(timedate)
@@ -282,4 +289,31 @@ class Event < ActiveRecord::Base
 end
 
 EventOccurrence = Struct.new(:event, :time)
+
+class OccurrenceManager
+  COLLECTION_TIME_PAST      = 15.minutes
+
+  def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
+    events_with_times = select_events_with_time(event_type: event_type, begin_time: begin_time)
+
+    unless events_with_times.empty?
+      events_with_times = events_with_times.sort {|e1, e2| e1.time <=> e2.time }
+      events_with_times.first.event.next_occurrence_time_attr = events_with_times.first.time
+      events_with_times.first.event
+    end    
+  end
+
+  def self.select_events_with_time(args)
+    event_type  = args.fetch(:event_type)
+    begin_time  = args.fetch(:begin_time)
+
+    find_category_next_occurences(event_type, begin_time)
+  end
+
+  def self.find_category_next_occurences(event_type, begin_time)
+    Event.where(category: event_type).map do |event|
+      event.next_event_occurrence_with_time(begin_time)
+    end.compact
+  end
+end
 
