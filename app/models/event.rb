@@ -13,7 +13,10 @@ class Event < ActiveRecord::Base
   extend Forwardable
   delegate [
     :next_event_occurrence_with_time,
-    :next_occurrence_time_method
+    :next_occurrence_time_method,
+    :next_occurrences,
+    :final_datetime_for_collection,
+    :start_datetime_for_collection
     ] => :occurrence_manager
 
   extend FriendlyId
@@ -40,42 +43,6 @@ class Event < ActiveRecord::Base
   def self.pending_hookups
     hookups.select {|hookup| hookup.pending? } 
   end
-
-  # NEXT OCCURRENCES RELATED BEGIN
-  def next_occurrences(options = {})
-    begin_datetime    = start_datetime_for_collection(options)
-    final_datetime    = final_datetime_for_collection(options)
-    limit             = options.fetch(:limit, 100)
-    result            = []
-    
-    all_occurrences_for(begin_datetime, final_datetime, limit) {|evt| result << evt }
-    result
-  end
-
-  def start_datetime_for_collection(options = {})
-    start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
-    lower_bound   = [start_datetime, start_time.to_datetime].max
-    lower_bound.to_datetime.utc
-  end
-
-  def final_datetime_for_collection(options = {})
-    if repeating_and_ends? && options[:end_time].present?
-      final_datetime = [options[:end_time], repeat_ends_on.to_datetime].min
-    elsif repeating_and_ends?
-      final_datetime = repeat_ends_on.to_datetime
-    else
-      final_datetime = options[:end_time]
-    end
-    final_datetime ? final_datetime.to_datetime.utc : COLLECTION_TIME_FUTURE.from_now
-  end
-
-  def all_occurrences_for(start_time, end_time, limit, &block)
-    occurrences_between(start_time, end_time).each_with_index do |time, index|
-      block.call({ event: self, time: time })
-      break if index + 1 >= limit
-    end
-  end
-  # NEXT OCCURRENCES RELATED END
 
   def remove_from_schedule(timedate)
     # best if schedule is serialized into the events record...  and an attribute.

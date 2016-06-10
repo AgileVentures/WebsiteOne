@@ -9,13 +9,15 @@ class OccurrenceManager
     :occurrences_between
     ] => :@event
 
-  COLLECTION_TIME_PAST = 15.minutes
+  COLLECTION_TIME_PAST    = 15.minutes
+  COLLECTION_TIME_FUTURE  = 10.days
 
   attr_reader :event
   def initialize(event)
     @event = event
   end
 
+  # CLASS METHODS BEGIN
   def self.next_occurrence(event_type, begin_time = COLLECTION_TIME_PAST.ago)
     events_with_times = select_events_with_time(event_type: event_type, begin_time: begin_time)
 
@@ -38,7 +40,45 @@ class OccurrenceManager
       event.next_event_occurrence_with_time(begin_time)
     end.compact
   end
+  # CLASS METHODS END
 
+  # NEXT OCCURRENCES RELATED BEGIN
+  def next_occurrences(options = {})
+    begin_datetime    = start_datetime_for_collection(options)
+    final_datetime    = final_datetime_for_collection(options)
+    limit             = options.fetch(:limit, 100)
+    result            = []
+    
+    all_occurrences_for(begin_datetime, final_datetime, limit) {|evt| result << evt }
+    result
+  end
+
+  def start_datetime_for_collection(options = {})
+    start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
+    lower_bound   = [start_datetime, start_time.to_datetime].max
+    lower_bound.to_datetime.utc
+  end
+
+  def final_datetime_for_collection(options = {})
+    if repeating_and_ends? && options[:end_time].present?
+      final_datetime = [options[:end_time], repeat_ends_on.to_datetime].min
+    elsif repeating_and_ends?
+      final_datetime = repeat_ends_on.to_datetime
+    else
+      final_datetime = options[:end_time]
+    end
+    final_datetime ? final_datetime.to_datetime.utc : COLLECTION_TIME_FUTURE.from_now
+  end
+
+  def all_occurrences_for(start_time, end_time, limit, &block)
+    occurrences_between(start_time, end_time).each_with_index do |time, index|
+      block.call({ event: event, time: time })
+      break if index + 1 >= limit
+    end
+  end
+  # NEXT OCCURRENCES RELATED END
+
+  # NEXT OCCURRENCE RELATED BEGIN
   def next_occurrence_time_method(start = Time.now)
     next_occurrence         = next_event_occurrence_with_time(start)
     next_occurrence.time    if next_occurrence.present?
@@ -56,14 +96,9 @@ class OccurrenceManager
     occurrences = occurrences_between(start_time, end_time)
     EventOccurrence.new(event, occurrences.first.start_time)  if occurrences.present?
   end
+  # NEXT OCCURRENCE RELATED END
 
-  private 
-    def start_datetime_for_collection(options = {})
-      start_time    = options.fetch(:start_time, COLLECTION_TIME_PAST.ago)
-      lower_bound   = [start_datetime, start_time.to_datetime].max
-      lower_bound.to_datetime.utc
-    end
-
+  private   
     def closest_event(start_time, end_time)
       next_occurrence_with_time(start_time, end_time)
     end
