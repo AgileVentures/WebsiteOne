@@ -47,9 +47,11 @@ Feature: As a developer
   Scenario: User signs up with a GitHub account having no public email (sad path)
     Given I am on the "registration" page
     When I click "GitHub"
-    Then I should see "Your Github account needs to have a public email address for sign up"
+    Then I should see "Your Github account needs to have a public email address for sign up. Click here for instructions."
     Then I should see the "github-alt" icon
     And I should not see "Password can't be blank"
+    And I click the "Click here for instructions" link
+    Then I should be on ""
 
   @omniauth-without-email
   Scenario: User signs up with a Google+ account having no public email (sad path)
