@@ -30,7 +30,6 @@
 //= require local_time
 //= require jvectormap
 //= require jvectormap/maps/world_mill_en
-//= require jstz.min
 //= require moment.min
 //= require moment-timezone-with-data-2010-2020
 
