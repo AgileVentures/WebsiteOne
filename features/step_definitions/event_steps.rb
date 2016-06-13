@@ -147,11 +147,6 @@ And(/^the start date is "([^"]*)"$/) do |start_date|
   expect(find("#start_date").value).to eq start_date
 end
 
-Then(/^the user is in "([^"]*)" timezone$/) do |zone|
-  page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{zone}' } } };")
-  page.execute_script('handleUserTimeZone();')
-end
-
 # would like this to be more robust
 Given(/^daylight savings are in effect now$/) do
   Delorean.time_travel_to(Time.parse('2015/06/14 09:15:00 UTC'))
@@ -161,11 +156,20 @@ And(/^the user is in "([^"]*)"$/) do |zone|
   @zone = zone
 end
 
-And(/^edits an event with start date in standard time$/) do
-  @event = Event.find_by(name: 'Daily Standup')
+# must visit edit event page to ensure form is loaded
+# before we fix zone as per instance variable set in above step
+# and then rerun the handleUserTimeZone js method that is run
+# on page load.  We use this approach because we cannot find a
+# reliable way of setting Capybara timezone that will work on CI
+def stub_user_browser_to_specific_timezone
   visit edit_event_path(@event)
   page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{@zone}' } } };")
   page.execute_script('handleUserTimeZone();')
+end
+
+And(/^edits an event with start date in standard time$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+  stub_user_browser_to_specific_timezone
   @start_date = find("#start_date").value
   @start_time = find("#start_time").value
 end
@@ -176,9 +180,7 @@ end
 
 Then(/^the event date and time should be unchanged$/) do
   expect(current_path).to eq event_path(@event)
-  visit edit_event_path(@event)
-  page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{@zone}' } } };")
-  page.execute_script('handleUserTimeZone();')
+  stub_user_browser_to_specific_timezone
   expect(find("#start_date").value).to eq @start_date
   expect(find("#start_time").value).to eq @start_time
 end
@@ -202,9 +204,7 @@ Given(/^daylight savings are in effect and it is now past the end date for the e
 end
 
 Then(/^the user should see the date and time adjusted for their timezone in the edit form$/) do
-  visit edit_event_path(@event)
-  page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{@zone}' } } };")
-  page.execute_script('handleUserTimeZone();')
+  stub_user_browser_to_specific_timezone
   @start_date = find("#start_date").value
   @start_time = find("#start_time").value
   @form_tz = find("#start_time_tz").value
@@ -216,4 +216,15 @@ end
 
 Given(/^an existing event$/) do
   @event = Event.find_by(name: 'Daily Standup')
+end
+
+Then(/^the user should see the date and time adjusted for their timezone and updated by (\d+) hours in the edit form$/) do |hours|
+  stub_user_browser_to_specific_timezone
+  @start_date = find("#start_date").value
+  @start_time = find("#start_time").value
+  @form_tz = find("#start_time_tz").value
+  tz = TZInfo::Timezone.get(@zone)
+  expect(@form_tz).to eq(@zone)
+  expect(@start_time).to eq  tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_time.strftime("%I:%M %p")
+  expect(@start_date).to eq tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_date.strftime("%Y-%m-%d")
 end
