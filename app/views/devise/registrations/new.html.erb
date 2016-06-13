@@ -4,8 +4,13 @@
   <% if resource.password_required? %>
       <div class="row">
         <% supported_third_parties.each do |provider| %>
-            <div class="col-xs-6 col-sm-6 col-md-6">
-              <%= social_button provider, extra_class: 'btn-lg' %>
+            <% if provider == 'gplus'%>
+                <div class="col-xs-0 col-sm-0 col-md-0" style = "display: none;">
+            <%else%>
+                <div class="col-xs-3 col-sm-3 col-md-3"></div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+            <%end%>
+            <%= social_button provider, extra_class: 'btn-lg' %>
             </div>
         <% end %>
       </div>
@@ -14,7 +19,7 @@
   <h4 class="text-center"><%= link_to "Forgot your password?", new_password_path(resource_name) %></h4>
 
   <% unless Features.email_registrations.enabled %>
-    <p><small>Email Registrations are temporarily disabled.  Please sign up via Github or G+ above.</small></p>
+    <p><small>Email Registrations are temporarily disabled.  Please sign up via Github above.</small></p>
   <% else %>
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
         <fieldset>
