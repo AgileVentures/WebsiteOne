@@ -70,7 +70,7 @@ Feature: Editing an event with start date in the past
 
   Scenario: User in UTC timezone edits an existing event, with no changes, that repeats but with end date in the past
     Given it is now past the end date for the event
-    And the user is in "UTC"
+    And the user is in "Etc/UTC"
     And they edit and save the event without making any changes
     Then the event date and time should be unchanged
 

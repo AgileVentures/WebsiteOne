@@ -163,8 +163,11 @@ end
 # reliable way of setting Capybara timezone that will work on CI
 def stub_user_browser_to_specific_timezone
   visit edit_event_path(@event)
-  page.execute_script("jstz.determine = function(){ return { name: function(){ return '#{@zone}' } } };")
+  page.execute_script("detectUserTimeZone = function(){return '#{@zone}'};")
   page.execute_script('handleUserTimeZone();')
+  @form_tz = find("#start_time_tz").value
+  @tz = TZInfo::Timezone.get(@zone)
+  expect(@form_tz).to eq(@zone)
 end
 
 And(/^edits an event with start date in standard time$/) do
@@ -207,11 +210,8 @@ Then(/^the user should see the date and time adjusted for their timezone in the 
   stub_user_browser_to_specific_timezone
   @start_date = find("#start_date").value
   @start_time = find("#start_time").value
-  @form_tz = find("#start_time_tz").value
-  tz = TZInfo::Timezone.get(@zone)
-  expect(@form_tz).to eq(@zone)
-  expect(@start_date).to eq tz.utc_to_local(@event.start_datetime).to_date.strftime("%Y-%m-%d")
-  expect(@start_time).to eq  tz.utc_to_local(@event.start_datetime).to_time.strftime("%I:%M %p")
+  expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime).to_date.strftime("%Y-%m-%d")
+  expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime).to_time.strftime("%I:%M %p")
 end
 
 Given(/^an existing event$/) do
@@ -222,9 +222,6 @@ Then(/^the user should see the date and time adjusted for their timezone and upd
   stub_user_browser_to_specific_timezone
   @start_date = find("#start_date").value
   @start_time = find("#start_time").value
-  @form_tz = find("#start_time_tz").value
-  tz = TZInfo::Timezone.get(@zone)
-  expect(@form_tz).to eq(@zone)
-  expect(@start_time).to eq  tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_time.strftime("%I:%M %p")
-  expect(@start_date).to eq tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_date.strftime("%Y-%m-%d")
+  expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_time.strftime("%I:%M %p")
+  expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_date.strftime("%Y-%m-%d")
 end
