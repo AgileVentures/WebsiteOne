@@ -1,4 +1,4 @@
-describe('selectTimeZoneAndUpdateDateAndTime', function () {
+describe('editEventForm', function () {
 
     beforeEach(function () {
         setFixtures('<div>'+
@@ -18,21 +18,21 @@ describe('selectTimeZoneAndUpdateDateAndTime', function () {
     });
 
     it('sets the timezone properly', function () {
-        spyOn(tzUtilities,'detectUserTimeZone').and.returnValue('Capybara/GreenSwamp');
+        spyOn(timeZoneUtilities,'detectUserTimeZone').and.returnValue('Capybara/GreenSwamp');
         expect($("#start_time_tz").val()).toEqual("World/Someplace");
-        handleUserTimeZone();
+        editEventForm.handleUserTimeZone();
         expect($("#start_time_tz").val()).toEqual("Capybara/GreenSwamp");
     });
 
     it('adjusts the time properly', function () {
-        spyOn(tzUtilities,'detectUserTimeZone').and.returnValue('Europe/London');
-        handleUserTimeZone();
+        spyOn(timeZoneUtilities,'detectUserTimeZone').and.returnValue('Europe/London');
+        editEventForm.handleUserTimeZone();
         expect($('#start_time').val()).toEqual('11:27 PM');
     });
 
     it('adjusts the date properly', function () {
-        spyOn(tzUtilities,'detectUserTimeZone').and.returnValue('Europe/Kiev');
-        handleUserTimeZone();
+        spyOn(timeZoneUtilities,'detectUserTimeZone').and.returnValue('Europe/Kiev');
+        editEventForm.handleUserTimeZone();
         expect($('#start_date').val()).toEqual('2016-05-28');
     });
 

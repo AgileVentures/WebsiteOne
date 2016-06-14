@@ -17,4 +17,6 @@ var events = {
 
 $(document).ready(function () {
     events.makeRowBodyClickable();
+    editEventForm.handleUserTimeZone();
+    showEvent.showUserTimeZone();
 });
