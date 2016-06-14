@@ -20,8 +20,8 @@ describe 'devise/registrations/new', :type => :view do
   it 'renders the social buttons' do
     expect(rendered).to have_css('.btn-github')
     expect(rendered).to have_link('GitHub', '/auth/github')
-    expect(rendered).to have_css('.btn-gplus')
-    expect(rendered).to have_link('Google+', '/auth/gplus')
+    #expect(rendered).to have_css('.btn-gplus') disabled during g+ failures
+    #expect(rendered).to have_link('Google+', '/auth/gplus')
   end
 
   it 'renders the forgot password and sign in link' do
