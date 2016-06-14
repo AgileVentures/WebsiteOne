@@ -53,7 +53,7 @@
 
           <div class="calendar-text">
             <i class="fa fa-calendar"></i><span class="month"><%=  @event.next_event_occurrence_with_time[:time].strftime('%A, %B %d, %Y') %></span><br/>
-            <i class="fa fa-clock-o"></i><span><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %> Europe/London</span><br/>
+            <i class="fa fa-clock-o"></i><span id='local_time'><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
             <small><i class="fa fa-clock-o"></i><span><%= raw @event.start_time.strftime('%H:%M')%>-<%= raw @event.instance_end_time.strftime('%H:%M') %> (UTC)</span></small>
             <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
                 <p class="help-block">Occurs weekly at the specified times</p>

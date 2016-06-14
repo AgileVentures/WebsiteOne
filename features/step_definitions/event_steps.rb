@@ -225,3 +225,11 @@ Then(/^the user should see the date and time adjusted for their timezone and upd
   expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_time.strftime("%I:%M %p")
   expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_date.strftime("%Y-%m-%d")
 end
+
+
+When(/^they view the event "([^"]*)"$/) do |event_name|
+  @event = Event.find_by(name: event_name)
+  visit event_path(@event)
+  page.execute_script("detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script('showUserTimeZone();')
+end

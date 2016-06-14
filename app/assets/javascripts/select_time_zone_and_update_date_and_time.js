@@ -34,6 +34,12 @@ var detectUserTimeZone = function(){
     return moment.tz.guess();
 };
 
+var showUserTimeZone = function(){
+    if ($("#local_time").length) {
+        $('#local_time').append("&nbsp;"+detectUserTimeZone());
+    }
+};
+
 var handleUserTimeZone = function () {
     if ($("#start_time_tz").length) {
         $('#start_time_tz').selectTimeZoneAndUpdateDateAndTime();
@@ -42,4 +48,5 @@ var handleUserTimeZone = function () {
 
 $(document).on('ready page:load', function () {
     handleUserTimeZone();
+    showUserTimeZone();
 });
