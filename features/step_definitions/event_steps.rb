@@ -163,7 +163,7 @@ end
 # reliable way of setting Capybara timezone that will work on CI
 def stub_user_browser_to_specific_timezone
   visit edit_event_path(@event)
-  page.execute_script("detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script("tzUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
   page.execute_script('handleUserTimeZone();')
   @form_tz = find("#start_time_tz").value
   @tz = TZInfo::Timezone.get(@zone)
@@ -230,6 +230,6 @@ end
 When(/^they view the event "([^"]*)"$/) do |event_name|
   @event = Event.find_by(name: event_name)
   visit event_path(@event)
-  page.execute_script("detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script("tzUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
   page.execute_script('showUserTimeZone();')
 end

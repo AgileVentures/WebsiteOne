@@ -6,8 +6,8 @@ jQuery.fn.selectTimeZoneAndUpdateDateAndTime = function () {
         var time = $('#start_time').val();
         var normalized_next_date_time = moment.utc(next_date + " " + time, "YYYY-MM-DD hh:mm a");
         var normalized_start_date_time = moment.utc(start_date + " " + time, "YYYY-MM-DD hh:mm a");
-        var local_next_date_time = normalized_next_date_time.tz(detectUserTimeZone());
-        var local_start_date_time = normalized_start_date_time.tz(detectUserTimeZone());
+        var local_next_date_time = normalized_next_date_time.tz(tzUtilities.detectUserTimeZone());
+        var local_start_date_time = normalized_start_date_time.tz(tzUtilities.detectUserTimeZone());
         $('#start_date').val(local_start_date_time.format("YYYY-MM-DD"));
         $('#start_time').val(local_next_date_time.format("hh:mm A"));
     };
@@ -16,7 +16,7 @@ jQuery.fn.selectTimeZoneAndUpdateDateAndTime = function () {
 
     var $el = $(this[0]); // our element
 
-    var regEx = new RegExp(detectUserTimeZone()); // create a RegExp object with our pattern
+    var regEx = new RegExp(tzUtilities.detectUserTimeZone()); // create a RegExp object with our pattern
 
     $('option', $el).each(function (index, option) { // loop through all the options in our element
 
@@ -29,14 +29,15 @@ jQuery.fn.selectTimeZoneAndUpdateDateAndTime = function () {
     });
 
 };
-
-var detectUserTimeZone = function(){
-    return moment.tz.guess();
-};
+var tzUtilities = {
+    detectUserTimeZone : function () {
+        return moment.tz.guess();
+    }
+}
 
 var showUserTimeZone = function(){
     if ($("#local_time").length) {
-        $('#local_time').append("&nbsp;"+detectUserTimeZone());
+        $('#local_time').append("&nbsp;"+tzUtilities.detectUserTimeZone());
     }
 };
 

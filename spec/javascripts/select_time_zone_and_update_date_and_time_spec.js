@@ -18,20 +18,20 @@ describe('selectTimeZoneAndUpdateDateAndTime', function () {
     });
 
     it('sets the timezone properly', function () {
-        detectUserTimeZone = function(){return "Capybara/GreenSwamp"};
+        spyOn(tzUtilities,'detectUserTimeZone').and.returnValue('Capybara/GreenSwamp');
         expect($("#start_time_tz").val()).toEqual("World/Someplace");
         handleUserTimeZone();
         expect($("#start_time_tz").val()).toEqual("Capybara/GreenSwamp");
     });
 
     it('adjusts the time properly', function () {
-        detectUserTimeZone = function(){return "Europe/London"};
+        spyOn(tzUtilities,'detectUserTimeZone').and.returnValue('Europe/London');
         handleUserTimeZone();
         expect($('#start_time').val()).toEqual('11:27 PM');
     });
 
     it('adjusts the date properly', function () {
-        detectUserTimeZone = function(){return "Europe/Kiev"};
+        spyOn(tzUtilities,'detectUserTimeZone').and.returnValue('Europe/Kiev');
         handleUserTimeZone();
         expect($('#start_date').val()).toEqual('2016-05-28');
     });
