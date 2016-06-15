@@ -1,9 +1,8 @@
 class ChargesController < ApplicationController
 
   def new
-    plan_template = 'premium'
-    plan_template = 'premiumplus' if params[:plan] == 'premiumplus'
-    render plan_template
+    render 'premiumplus' and return if premiumplus?
+    render 'premium'
   end
 
   def create
@@ -25,6 +24,12 @@ class ChargesController < ApplicationController
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
+  end
+
+  private
+
+  def premiumplus?
+    params[:plan] == 'premiumplus'
   end
 
 end
