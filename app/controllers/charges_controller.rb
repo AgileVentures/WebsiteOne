@@ -1,6 +1,9 @@
 class ChargesController < ApplicationController
 
   def new
+    plan_template = 'premium'
+    plan_template = 'premiumplus' if params[:plan] == 'premiumplus'
+    render plan_template
   end
 
   def create
@@ -25,3 +28,8 @@ class ChargesController < ApplicationController
   end
 
 end
+
+
+# /subscriptions/new?plan=premium
+
+# plan/premium/subscriptions/new
