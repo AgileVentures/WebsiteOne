@@ -28,8 +28,3 @@ class ChargesController < ApplicationController
   end
 
 end
-
-
-# /subscriptions/new?plan=premium
-
-# plan/premium/subscriptions/new
