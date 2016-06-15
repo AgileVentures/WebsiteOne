@@ -1,1 +1,5 @@
-<h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium Member!</h2>
+<% if @plan == 'premium' %>
+    <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium Member!</h2>
+<% else %>
+    <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium PLUS Member!</h2>
+<% end %>

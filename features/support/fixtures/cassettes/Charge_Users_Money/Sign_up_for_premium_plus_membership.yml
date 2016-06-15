@@ -1,0 +1,66 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: email=random%40morerandom.com&plan=premiumplus&source=tok_18CsXM4cJkXFgrlCVkIe8qNC
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.41.0
+      Authorization:
+      - Bearer sk_test_4O7CTmoS1jwlDAX3z1abLYWm
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.41.0","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin15","engine":"ruby","publisher":"stripe","uname":"Darwin
+        Samuels-MBP.home 15.5.0 Darwin Kernel Version 15.5.0: Tue Apr 19 18:36:36
+        PDT 2016; root:xnu-3248.50.21~8/RELEASE_X86_64 x86_64","hostname":"Samuels-MBP.home"}'
+      Content-Length:
+      - '82'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 19 May 2016 15:38:19 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '151'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_8TqvKiOu9Rr3h3
+      Stripe-Version:
+      - '2014-06-17'
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "error": {
+            "type": "invalid_request_error",
+            "message": "You cannot use a Stripe token more than once: tok_18CsXM4cJkXFgrlCVkIe8qNC."
+          }
+        }
+    http_version: 
+  recorded_at: Thu, 19 May 2016 15:38:20 GMT
+recorded_with: VCR 3.0.1
