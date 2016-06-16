@@ -25,18 +25,20 @@ class EventsController < ApplicationController
   end
 
   def create
-    EventCreatorService.new(Event).perform(transform_params,
-                                           success: ->(event) do
-                                             @event = event
-                                             flash[:notice] = 'Event Created'
-                                             redirect_to event_path(@event)
-                                           end,
-                                           failure: ->(event) do
-                                             @event = event
-                                             flash[:notice] = @event.errors.full_messages.to_sentence
-                                             @projects = Project.all
-                                             render :new
-                                           end)
+    success = ->(event) {
+       @event = event
+       flash[:notice] = 'Event Created'
+       redirect_to event_path(@event)
+    }
+
+    failure = ->(event) {
+      @event = event
+      flash[:notice] = @event.errors.full_messages.to_sentence
+      @projects = Project.all
+      render :new
+    }
+
+    EventCreatorService.new(Event).perform(transform_params, success: success, failure: failure)
   end
 
   def update

@@ -16,24 +16,26 @@ describe Event, :type => :model do
   it { is_expected.to respond_to :schedule }
   it { is_expected.to respond_to :live? }
 
-  it 'is valid with all the correct parameters' do
-    expect(subject).to be_valid
-  end
+  describe 'validations' do 
+    it 'is valid with all the correct parameters' do
+      expect(subject).to be_valid
+    end
 
-  it 'is invalid without name' do
-    expect(FactoryGirl.build(:event, name: nil)).to_not be_valid
-  end
+    it 'is invalid without name' do
+      expect(FactoryGirl.build(:event, name: nil)).to_not be_valid
+    end
 
-  it 'is invalid without category' do
-    expect(FactoryGirl.build(:event, category: nil)).to_not be_valid
-  end
+    it 'is invalid without category' do
+      expect(FactoryGirl.build(:event, category: nil)).to_not be_valid
+    end
 
-  it 'is invalid without repeats' do
-    expect(FactoryGirl.build(:event, repeats: nil)).to_not be_valid
-  end
+    it 'is invalid without repeats' do
+      expect(FactoryGirl.build(:event, repeats: nil)).to_not be_valid
+    end
 
-  it 'is invalid with invalid url' do
-    expect(FactoryGirl.build(:event, url: 'http:google.com')).to_not be_valid
+    it 'is invalid with invalid url' do
+      expect(FactoryGirl.build(:event, url: 'http:google.com')).to_not be_valid
+    end
   end
 
   describe '#last_hangout' do
@@ -58,10 +60,12 @@ describe Event, :type => :model do
                                  repeat_ends_on: '2014-03-08')
     end
 
-    it 'should remove an event instance when requested and date found' do
+    it 'removes an event instance when requested and date found' do
       Delorean.time_travel_to(Time.parse('2013-06-16 09:27:00 UTC'))
       @event.remove_from_schedule(Time.parse('2013-6-23 09:00:00 UTC'))
-      expect(@event.schedule.first(4)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
+      @result = @event.schedule.first(4).map {|val| val.start_time }
+      # expect(@event.schedule.first(4)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
+      expect(@result).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
 
     it 'should move the start date forward when the event instance to be removed is the first in the series' do
@@ -110,7 +114,12 @@ describe Event, :type => :model do
                                         repeat_ends: 'never',
                                         repeat_ends_on: 'Tue, 25 Jun 2013',
                                         time_zone: 'Eastern Time (US & Canada)')
-      expect(event.schedule.first(5)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sun, 23 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
+      expect(event.schedule.first(5)).to eq([
+        'Sat, 22 Jun 2013 09:00:00 UTC +00:00', 
+        'Sun, 23 Jun 2013 09:00:00 UTC +00:00', 
+        'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 
+        'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 
+        'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
 
     it 'is scheduled for every Sunday' do
@@ -205,7 +214,7 @@ describe Event, :type => :model do
     end
   end
 
-  describe '#next_event_occurrence_with_time' do
+  describe 'Event#next_event_occurrence_with_time' do
     before(:each) do
       @event = FactoryGirl.build(Event,
                                  name: 'Spec Scrum',
@@ -220,7 +229,7 @@ describe Event, :type => :model do
 
     it 'should return the first event instance with its time in basic case' do
       Delorean.time_travel_to(Time.parse('2013-06-15 09:27:00 UTC'))
-      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-16 09:00:00 UTC')
+      expect(@event.next_event_occurrence_with_time.time).to eq('2013-06-16 09:00:00 UTC')
     end
 
     it 'should return nil if the series has expired' do
@@ -230,19 +239,19 @@ describe Event, :type => :model do
 
     it 'should return the second event instance when the start time is moved forward' do
       Delorean.time_travel_to(Time.parse('2013-06-20 09:27:00 UTC'))
-      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-23 09:00:00 UTC')
+      expect(@event.next_event_occurrence_with_time.time).to eq('2013-06-23 09:00:00 UTC')
     end
 
     it 'should return the second event instance with its time when the first is deleted' do
       Delorean.time_travel_to(Time.parse('2013-06-15 09:27:00 UTC'))
       @event.remove_from_schedule(Time.parse('2013-6-16 09:00:00 UTC'))
-      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-23 09:00:00 UTC')
+      expect(@event.next_event_occurrence_with_time.time).to eq('2013-06-23 09:00:00 UTC')
     end
 
     it 'should return the event instance when it is not recurring and the event occurs in the future' do
       @event.update_attribute(:repeats, 'never')
       Delorean.time_travel_to(Time.parse('2013-06-05 09:27:00 UTC'))
-      expect(@event.next_event_occurrence_with_time[:time]).to eq('2013-06-10 09:00:00 UTC')
+      expect(@event.next_event_occurrence_with_time.time).to eq('2013-06-10 09:00:00 UTC')
     end
 
     it 'should not return the event instance when it is not recurring' do
@@ -388,7 +397,7 @@ describe Event, :type => :model do
     end
   end
 
-  describe 'Event.next_event_occurence' do
+  describe 'Event.next_occurrence' do
     @event = FactoryGirl.build(Event,
                                category: 'Scrum',
                                name: 'Spec Scrum one-time',

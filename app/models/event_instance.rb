@@ -8,10 +8,12 @@ class EventInstance < ActiveRecord::Base
 
   serialize :participants
 
-  scope :started, -> { where.not(hangout_url: nil) }
-  scope :live, -> { where('updated_at > ?', 5.minutes.ago).order('created_at DESC') }
-  scope :latest, -> { order('created_at DESC') }
-  scope :pp_hangouts, -> { where(category: 'PairProgramming') }
+  scope :started,       -> { where.not(hangout_url: nil) }
+  scope :live,          -> { where('updated_at > ?', 5.minutes.ago).order('created_at DESC') }
+  scope :latest,        -> { order('created_at DESC') }
+  scope :pp_hangouts,   -> { where(category: 'PairProgramming') }
+  scope :recent,        -> { where('created_at BETWEEN ? AND ?', 1.days.ago.beginning_of_day, DateTime.now.end_of_day) }
+  scope :oldest,        -> { order('created_at ASC') }
 
   validate :dont_update_after_finished, on: :update
 
@@ -41,9 +43,7 @@ class EventInstance < ActiveRecord::Base
 
   private
 
-  def dont_update_after_finished
-    if hoa_status_was == 'finished'
-      self.errors.add :base, 'Can\'t update a finished event'
+    def dont_update_after_finished
+      self.errors.add :base, 'Can\'t update a finished event' if hoa_status_was == 'finished'
     end
-  end
 end
