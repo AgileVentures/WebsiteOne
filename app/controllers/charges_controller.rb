@@ -1,16 +1,17 @@
 class ChargesController < ApplicationController
 
   def new
+    render 'premiumplus' and return if premiumplus?
+    render 'premium'
   end
 
   def create
-    # Amount in cents
-    @amount = 1000
+    @plan = params[:plan]
 
     customer = Stripe::Customer.create(
         email:  params[:stripeEmail],
         source: params[:stripeToken],
-        plan:  'premium'
+        plan:   @plan
     )
 
     # charge = Stripe::Charge.create(
@@ -23,6 +24,12 @@ class ChargesController < ApplicationController
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
+  end
+
+  private
+
+  def premiumplus?
+    params[:plan] == 'premiumplus'
   end
 
 end
