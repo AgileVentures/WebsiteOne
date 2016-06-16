@@ -97,6 +97,10 @@ When /^I filter users for "(.*?)"$/ do |first_name|
   #click_link_or_button :UsersFilterSubmit
 end
 
+When /^I sign up with GitHub$/ do
+  click_link_or_button 'GitHub'
+end
+
 ### THEN ###
 Then /^I should be signed in$/ do
   expect(page).to have_content "Log out"
@@ -150,6 +154,10 @@ Then /^I should (not |)see my name$/ do |should|
   else
     expect(page).to have_content @user.presenter.display_name
   end
+end
+
+Then /^I should see link for instructions to sign up$/ do
+  expect(page).to have_link('Click here for instructions', href: /github.com\/AgileVentures\/WebsiteOne\/tree\/develop\/docs\/solutions_for_signup_issues.md/)
 end
 
 Given /^the following users exist$/ do |table|
