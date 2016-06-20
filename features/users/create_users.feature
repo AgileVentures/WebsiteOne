@@ -43,6 +43,11 @@ Feature: As a developer
     When I click "GitHub"
     Then I should see "Signed in successfully."
 
+  Scenario: User signs up with a GitHub account
+    Given I am on the "registration" page
+    When I click "Google+"
+    Then I should see "Signed in successfully."
+
   @omniauth-without-email
   Scenario: User signs up with a GitHub account having no public email (sad path)
     Given I am on the "registration" page
@@ -52,10 +57,10 @@ Feature: As a developer
     And I should not see "Password can't be blank"
 
   #removed g+ signup while it appearas broken
-  #@omniauth-without-email
-  #Scenario: User signs up with a Google+ account having no public email (sad path)
-  #  Given I am on the "registration" page
-  #  When I click "Google+"
-  #  Then I should see the "google-plus" icon
-  #  Then I should see "Your Gplus account needs to have a public email address for sign up"
-  #  And I should not see "Password can't be blank"
+  @omniauth-without-email
+  Scenario: User signs up with a Google+ account having no public email (sad path)
+    Given I am on the "registration" page
+    When I click "Google+"
+    Then I should see the "google-plus" icon
+    Then I should see "Your Gplus account needs to have a public email address for sign up"
+    And I should not see "Password can't be blank"
