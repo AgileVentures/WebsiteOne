@@ -163,8 +163,8 @@ end
 # reliable way of setting Capybara timezone that will work on CI
 def stub_user_browser_to_specific_timezone
   visit edit_event_path(@event)
-  page.execute_script("detectUserTimeZone = function(){return '#{@zone}'};")
-  page.execute_script('handleUserTimeZone();')
+  page.execute_script("timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script('editEventForm.handleUserTimeZone();')
   @form_tz = find("#start_time_tz").value
   @tz = TZInfo::Timezone.get(@zone)
   expect(@form_tz).to eq(@zone)
@@ -184,8 +184,8 @@ end
 Then(/^the event date and time should be unchanged$/) do
   expect(current_path).to eq event_path(@event)
   stub_user_browser_to_specific_timezone
-  expect(find("#start_date").value).to eq @start_date
-  expect(find("#start_time").value).to eq @start_time
+  expect(find("#start_date").value).to match @start_date
+  expect(find("#start_time").value).to match @start_time
 end
 
 Given(/^it is now past the end date for the event$/) do
@@ -224,4 +224,11 @@ Then(/^the user should see the date and time adjusted for their timezone and upd
   @start_time = find("#start_time").value
   expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_time.strftime("%I:%M %p")
   expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_date.strftime("%Y-%m-%d")
+end
+
+When(/^they view the event "([^"]*)"$/) do |event_name|
+  @event = Event.find_by(name: event_name)
+  visit event_path(@event)
+  page.execute_script("timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script('showEvent.showUserTimeZone();')
 end
