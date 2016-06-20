@@ -24,3 +24,5 @@ debug_options = {
     inspector: true,
     js_errors: true,
 }
+
+Capybara.save_and_open_page_path = 'tmp/capybara'

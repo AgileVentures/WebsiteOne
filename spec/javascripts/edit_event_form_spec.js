@@ -31,6 +31,7 @@ describe('editEventForm', function () {
     });
 
     it('adjusts the date properly', function () {
+
         spyOn(timeZoneUtilities,'detectUserTimeZone').and.returnValue('Europe/Kiev');
         editEventForm.handleUserTimeZone();
         expect($('#start_date').val()).toEqual('2016-05-28');
