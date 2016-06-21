@@ -130,14 +130,26 @@ Given(/^the browser is in "([^"]*)" and the server is in UTC$/) do |tz|
   ENV['TZ'] = 'UTC'
 end
 
-And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
-  expect(page).to have_css "time[datetime='#{datetime}']"
+And(/^the local date element should be set to "([^"]*)"$/) do |datetime|
+  expect(page).to have_css %Q{time[datetime="#{datetime}"][data-format="%A, %B %d, %Y"]}
 end
+
+And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
+  expect(page).to have_css %Q{time[datetime="#{datetime}"][data-format="%H:%M"]}
+end
+
 
 And(/^"([^"]*)" is selected in the project dropdown$/) do |project_slug|
   project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
   expect(find("#project_id").value).to eq project_id.to_s
 end
+
+
+And(/^"([^"]*)" is selected in the event project dropdown$/) do |project_slug|
+  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
+  expect(find("#event_project_id").value).to eq project_id.to_s
+end
+
 
 And(/^the start time is "([^"]*)"$/) do |start_time|
   expect(find("#start_time").value).to eq start_time
