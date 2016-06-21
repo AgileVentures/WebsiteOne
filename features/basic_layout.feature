@@ -20,7 +20,7 @@ Feature: Setting up basic page layout for site
       | About Us        |
       | Projects        |
       | Members         |
-      | Articles        |
+      | Premium         |
       | Events          |
       | Getting started |
 
