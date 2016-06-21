@@ -109,6 +109,7 @@ class EventsController < ApplicationController
 
   def new_params
     params[:project_id] = Project.friendly.find(params[:project]).id.to_s if params[:project]
+    params[:project_id] = Project.find_by(title: "CS169").try(:id) unless params[:project_id]
     params.permit(:name, :category, :project_id).merge(start_datetime: Time.now.utc, duration: 30, repeat_ends: true)
   end
 end
