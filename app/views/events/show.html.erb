@@ -52,7 +52,7 @@
         <h4>Next scheduled event:</h4>
 
           <div class="calendar-text">
-            <i class="fa fa-calendar"></i><span class="month"><%=  @event.next_event_occurrence_with_time[:time].strftime('%A, %B %d, %Y') %></span><br/>
+            <i class="fa fa-calendar"></i><span class="month"><%=  local_time(@event.next_event_occurrence_with_time[:time],'%A, %B %d, %Y') %></span><br/>
             <i class="fa fa-clock-o"></i><span id='local_time'><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
             <small><i class="fa fa-clock-o"></i><span><%= raw @event.start_time.strftime('%H:%M')%>-<%= raw @event.instance_end_time.strftime('%H:%M') %> (UTC)</span></small>
             <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
@@ -108,5 +108,3 @@
     <p><%= link_to 'Learn more about Scrums', static_page_path('Getting started') %></p>
   </div>
 </div>
-
-<%= javascript_include_tag 'events.js' %>
