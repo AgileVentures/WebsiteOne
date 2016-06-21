@@ -33,10 +33,10 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the date is "2014/02/03 06:50:00 UTC"
     When I am on the show page for event "Scrum"
     Then I should see:
-      | Scrum                                 |
-      | Scrum                                 |
-      | Daily scrum meeting                   |
-      | 07:00-09:30 (UTC) |
+      | Scrum               |
+      | Scrum               |
+      | Daily scrum meeting |
+      | 07:00-09:30 (UTC)   |
 
   Scenario: Show hangout details for live event
     Given the Hangout for event "Scrum" has been started with details:
@@ -49,6 +49,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Scrum               |
       | Daily scrum meeting |
     And I should see link "Join now" with "http://hangout.test"
+    And I should not see hangout button
 
   @javascript
   Scenario: Edit Hangout URL
