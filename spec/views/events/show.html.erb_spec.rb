@@ -37,8 +37,8 @@ describe 'events/show', type: :view do
                         hangout_url: 'http://hangout.test',
                         updated: Time.parse('10:25:00 UTC'))
 
-      allow(@recent_hangout).to receive(:started?).and_return true
-      allow(@recent_hangout).to receive(:live?).and_return true
+      allow(@recent_hangout).to receive(:started?).and_return false
+      allow(@recent_hangout).to receive(:live?).and_return false
       allow(view).to receive(:generate_event_instance_id).and_return('123456')
 
       @event.url = @recent_hangout.hangout_url

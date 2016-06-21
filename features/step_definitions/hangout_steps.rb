@@ -1,6 +1,10 @@
-Then /^I should see hangout button$/ do
-  src = page.find(:css, '#liveHOA-placeholder iframe')['src']
-  expect(src).to match /talkgadget.google.com/
+Then /^I should (not )?see hangout button$/ do |absent|
+  if absent
+    expect(page).not_to have_css '#liveHOA-placeholder'
+  else
+    src = page.find(:css, '#liveHOA-placeholder iframe')['src']
+    expect(src).to match /talkgadget.google.com/
+  end
 end
 
 Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
