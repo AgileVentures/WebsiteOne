@@ -10,9 +10,18 @@ Feature: Events
       | title | description          | pitch | status | commit_count |
       | WSO   | greetings earthlings |       | active | 2795         |
       | EdX   | greetings earthlings |       | active | 2795         |
+      | AAA   | for roadists         |       | active |              |
     And I am on Events index page
     When I click "New Event"
     Given the date is "2014/02/01 09:15:00 UTC"
+
+  Scenario: New event defaults to cs169 project when it exists
+    Given the following projects exist:
+    |title | description | pitch | status | commit_count|
+    |CS169 | stuff       |       | active |  5000       |
+    And I am on Events index page
+    When I click "New Event"
+    Then "cs169" is selected in the event project dropdown
 
   @javascript
   Scenario: Create a new event
