@@ -36,6 +36,17 @@ describe Event, :type => :model do
     expect(FactoryGirl.build(:event, url: 'http:google.com')).to_not be_valid
   end
 
+  describe "#less_than_ten_till_start?" do
+    before(:each){Delorean.time_travel_to '2014-03-07 23:30:00 UTC'}
+    context 'less than ten till' do
+      subject(:event){build_stubbed :event, start_datetime: '2014-03-07 23:35:00 UTC'}
+      it{expect(event.less_than_ten_till_start?).to be true}
+    end
+    context 'more than ten till' do
+      subject(:event){build_stubbed :event, start_datetime: '2014-03-07 23:50:00 UTC'}
+      it{expect(event.less_than_ten_till_start?).to be false}
+    end
+  end
   describe '#last_hangout' do
     it 'returns the latest hangout' do
       hangout1 = subject.event_instances.create
