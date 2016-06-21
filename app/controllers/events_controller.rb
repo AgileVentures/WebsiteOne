@@ -6,6 +6,7 @@ class EventsController < ApplicationController
     @event = Event.new(new_params)
     @event.set_repeat_ends_string
     @projects = Project.all
+    @default_project_id = Project.find_by(title: "CS169").try(:id)
   end
 
   def show
