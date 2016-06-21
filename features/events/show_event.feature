@@ -12,13 +12,14 @@ Feature: Events
       | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | UTC       |         |                                           |                       |
       | Standup    | Daily standup meeting   | Scrum           | 2014/02/03 07:00:00 UTC | 150      | weekly  | UTC       |         | 15                                        | 1                     |
 
+
   @javascript
-  Scenario Outline: Show correct timezone and user location
+  Scenario Outline: Show correct time, date, timezone and user location
     Given the date is "2016/05/01 09:15:00 UTC"
     And the user is in "<zone>"
     When they view the event "Standup"
-#    And I am on the show page for event "Standup"
     Then I should see "Standup"
+    And the local date element should be set to "2016-05-02T07:00:00Z"
     And the local time element should be set to "2016-05-02T07:00:00Z"
     And I should see "<zone>"
     Examples:
