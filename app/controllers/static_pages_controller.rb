@@ -2,6 +2,7 @@ class StaticPagesController < ApplicationController
   before_filter :authenticate_user!, except: [:show]
 
   def show
+    return false if redirect_email_blunder
     @page = StaticPage.friendly.find(get_page_id(params[:id]))
     @ancestry = @page.self_and_ancestors.map(&:title).reverse
   end
@@ -24,5 +25,11 @@ class StaticPagesController < ApplicationController
 
   def get_page_id page
     page.split('/').reject { |i| ['mercury_saved', 'mercury_update'].include? i }.last
+  end
+
+  def redirect_email_blunder
+    if params[:id] == "premiumplus  "
+      redirect_to(static_page_path("premiumplus")) and return true
+    end
   end
 end
