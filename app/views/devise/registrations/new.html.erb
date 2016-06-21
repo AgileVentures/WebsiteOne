@@ -4,13 +4,8 @@
   <% if resource.password_required? %>
       <div class="row">
         <% supported_third_parties.each do |provider| %>
-            <% if provider == 'gplus'%>
-                <div class="col-xs-0 col-sm-0 col-md-0" style = "display: none;">
-            <%else%>
-                <div class="col-xs-3 col-sm-3 col-md-3"></div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-            <%end%>
-            <%= social_button provider, extra_class: 'btn-lg' %>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+              <%= social_button provider, extra_class: 'btn-lg' %>
             </div>
         <% end %>
       </div>
