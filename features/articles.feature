@@ -11,11 +11,11 @@ Feature:
       | Rails is not for trains  | Train `tracks` do not work       | Rails              |
       | JQuery cannot be queried | JQuery moves **towards** the ... | Javascript, JQuery |
 
-  Scenario: There should be a link to the articles page on the navbar
-    Given I am on the home page
-    Then I should see "Articles" within the navigation bar
-    When I click "Articles" within the navigation bar
-    Then I should be on the "Articles" page
+#  Scenario: There should be a link to the articles page on the navbar
+#    Given I am on the home page
+#    Then I should see "Articles" within the navigation bar
+#    When I click "Articles" within the navigation bar
+#    Then I should be on the "Articles" page
 
   Scenario: There should be a list of articles on the index page
     Given I am on the "Articles" page
