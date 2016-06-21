@@ -20,4 +20,5 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  error_messages:
+    public_email: "Your %{provider} account needs to have a public email address for sign up. <a href='https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/solutions_for_signup_issues.md'>Click here for instructions</a>."

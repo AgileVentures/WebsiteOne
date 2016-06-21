@@ -4,6 +4,19 @@ Feature: Charge Users Money
   So that users can pay for premium services
   I would like to be able to sign them up for a recurring plan
 
+  Background:
+    Given the following pages exist
+      | title           | body                    |
+      | About Us        | Agile Ventures          |
+      | Pricing         | wonga                   |
+      | Getting Started | Remote Pair Programming |
+
+  Scenario: There should be a link to the premium page on the navbar
+    Given I am on the home page
+    Then I should see "PREMIUM" within the navigation bar
+    When I click "Premium" within the navigation bar
+    Then I should be on the static "Pricing" page
+
   Scenario: Sign up for premium membership
     Given I visit "/charges/new"
     And I should not see "Sign Me Up For Premium Plus!"
