@@ -9,6 +9,8 @@ class EventInstancesController < ApplicationController
     yt_video_id_changed = event_instance.yt_video_id != hangout_params[:yt_video_id]
     slack_notify = params[:notify] == 'true'
 
+    event_instance.update(hangout_params)
+
     if event_instance.try!(:update, hangout_params)
       SlackService.post_hangout_notification(event_instance) if (slack_notify && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed)
       SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed

@@ -3,6 +3,19 @@ require 'spec_helper'
 describe EventInstance, type: :model do
   let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil) }
 
+
+  context '#updated_within_last_two_minutes?' do
+    it 'should return false when updated_at is more than two minutes ago' do
+      allow(Time).to receive(:now).and_return(Time.mktime('10:02:59'))
+      expect(hangout).to be_updated_within_last_two_minutes
+    end
+
+    it 'should return true when updated_at is less than two minutes ago' do
+      allow(Time).to receive(:now).and_return(Time.mktime('10:01:59'))
+      expect(hangout).to be_updated_within_last_two_minutes
+    end
+  end
+
   context 'hangout_url is not present' do
     before do
       allow(Time).to receive(:now).and_return(Time.parse('01:00 UTC'))
