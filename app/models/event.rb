@@ -195,6 +195,8 @@ class Event < ActiveRecord::Base
 
   def less_than_ten_till_start?
     Time.now > next_event_occurrence_with_time[:time] - 10.minutes
+  rescue
+    false
   end
 
   private
