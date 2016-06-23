@@ -267,11 +267,7 @@ end
 
 And(/^that the HangoutConnection has pinged to indicate the event start$/) do
   participants = {"0"=>{"id"=>"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=>"true", "hasCamera"=>"true", "hasAppEnabled"=>"true", "isBroadcaster"=>"true", "isInBroadcast"=>"true", "displayIndex"=>"0", "person"=>{"id"=>"108533475599002820142", "displayName"=>"Alejandro Babio", "image"=>{"url"=>"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=>"false"}, "locale"=>"en", "na"=>"false"}}
-  EventInstancesController.class_eval %Q{
-    def cors_preflight_check
-      true
-    end
-  }
+  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
   put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
                                participants: participants, hangout_url: 'http://hangout.test',
                                hoa_status: 'live', project_id: '1', category: 'Scrum',
@@ -287,17 +283,21 @@ And(/^after three (more )?minutes$/) do |ignore|
   Delorean.time_travel_to '3 minutes from now'
 end
 
+And(/^after one (more )?minute$/) do |ignore|
+  Delorean.time_travel_to '1 minute from now'
+end
+
 When(/^the HangoutConnection pings to indicate the event is ongoing$/) do
   event_instance = @event.event_instances.first
-  #header 'HTTP-ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
-  EventInstancesController.class_eval %Q{
-    def cors_preflight_check
-      true
-    end
-  }
+  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
   put "/hangouts/#{event_instance.uid}", {title: event_instance.title, host_id: event_instance.user_id, event_id: @event.id,
                                           participants: event_instance.participants, hangout_url: event_instance.hangout_url,
                                           hoa_status: 'live', project_id: event_instance.project_id, category: event_instance.category,
                                           yt_video_id: event_instance.yt_video_id}
 
+end
+
+Then(/^the event should be dead$/) do
+  visit event_path(@event)
+  expect(page).not_to have_content('This event is now live!')
 end
