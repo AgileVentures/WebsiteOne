@@ -49,6 +49,19 @@ Feature: Live Events
       | Daily scrum meeting |
     And I should not see "This event is now live!"
 
+
+  Scenario: Ongoing ping from HangoutConnection app keeps event alive
+    Given an event "Scrum"
+    And that the HangoutConnection has pinged to indicate the event start
+    Then the event should be live
+    And after three minutes
+    When the HangoutConnection pings to indicate the event is ongoing
+    Then the event should still be live
+    And after three more minutes
+    When the HangoutConnection pings to indicate the event is ongoing
+    Then the event should still be live
+
+
   Scenario: Show event shows as live after event hangout has gone live, and received ping from Connect app
     And the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |

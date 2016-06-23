@@ -256,6 +256,43 @@ And(/^the connect app ping WSO concerning the event named "([^"]*)"$/) do |name|
   }
   put "/hangouts/#{event_instance.uid}", {title: event_instance.title, host_id: event_instance.user_id, event_id: event.id,
                                           participants: event_instance.participants, hangout_url: event_instance.hangout_url,
-                                          hoa_status: 'live',project_id: event_instance.project_id, category: event_instance.category,
+                                          hoa_status: 'live', project_id: event_instance.project_id, category: event_instance.category,
                                           yt_video_id: event_instance.yt_video_id}
+end
+
+Given(/^an event "([^"]*)"$/) do |event_name|
+  @event = Event.find_by_name(event_name)
+  @google_id = '123456789'
+end
+
+And(/^that the HangoutConnection has pinged to indicate the event start$/) do
+  participants = '{"person"=>{"displayName"=>"Participant_1", "id"=>"youtube_id_1", "isBroadcaster"=>"false"}}'
+  put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
+                               participants: participants, hangout_url: 'http://hangout.test',
+                               hoa_status: 'live', project_id: '1', category: 'Scrum',
+                               yt_video_id: '11'}
+end
+
+Then(/^the event should (still )?be live$/) do |ignore|
+  visit event_path(@event)
+  expect(page).to have_content('This event is now live!')
+end
+
+And(/^after three (more )?minutes$/) do |ignore|
+  Delorean.time_travel_to '3 minutes from now'
+end
+
+When(/^the HangoutConnection pings to indicate the event is ongoing$/) do
+  event_instance = @event.event_instances.first
+  #header 'HTTP-ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
+  EventInstancesController.class_eval %Q{
+    def cors_preflight_check
+      true
+    end
+  }
+  put "/hangouts/#{event_instance.uid}", {title: event_instance.title, host_id: event_instance.user_id, event_id: event.id,
+                                          participants: event_instance.participants, hangout_url: event_instance.hangout_url,
+                                          hoa_status: 'live', project_id: event_instance.project_id, category: event_instance.category,
+                                          yt_video_id: event_instance.yt_video_id}
+
 end
