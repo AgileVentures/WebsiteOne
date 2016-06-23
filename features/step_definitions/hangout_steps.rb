@@ -2,6 +2,7 @@ Then /^I should (not )?see hangout button$/ do |absent|
   if absent
     expect(page).not_to have_css '#liveHOA-placeholder'
   else
+    expect(page).to have_css "#liveHOA-placeholder"
     src = page.find(:css, '#liveHOA-placeholder iframe')['src']
     expect(src).to match /talkgadget.google.com/
   end

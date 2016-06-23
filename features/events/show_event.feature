@@ -14,6 +14,21 @@ Feature: Events
 
 
   @javascript
+  Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time
+    Given the date is "<date>"
+    And I am logged in
+    And I am on the show page for event "Standup"
+    Then I <assertion> see hangout button
+    Examples:
+      | date                    | assertion  |
+      | 2014/02/03 06:55:00 UTC | should     |
+      | 2014/02/03 06:49:00 UTC | should not |
+      | 2014/02/03 09:40:00 UTC | should not |
+      | 2014/02/04 06:55:00 UTC | should     |
+      | 2014/02/04 06:49:00 UTC | should not |
+      | 2014/02/04 09:40:00 UTC | should not |
+
+  @javascript
   Scenario Outline: Show correct time, date, timezone and user location
     Given the date is "2016/05/01 09:15:00 UTC"
     And the user is in "<zone>"
@@ -80,7 +95,6 @@ Feature: Events
       | Daily scrum meeting |
     And I should see "This event is now live!"
     And I should see link "Join now" with "http://hangout.test"
-
 
   Scenario: Render Next Scrum info on landing page
     Given the date is "2014/02/01 09:15:00 UTC"
