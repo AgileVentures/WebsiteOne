@@ -56,6 +56,14 @@ Feature: Live Events
       | Updated at         | 7:00:00 UTC         |
       | user_id            | 15                  |
     And the time now is "7:03:00 UTC"
+    When I am on the show page for event "Scrum"
+    And I should not see "This event is now live!"
+    And the connect app ping WSO concerning the event named "Scrum"
+    When I am on the show page for event "Scrum"
+    And I should see "This event is now live!"
+    And the time now is "7:06:00 UTC"
+    When I am on the show page for event "Scrum"
+    And I should not see "This event is now live!"
     And the connect app ping WSO concerning the event named "Scrum"
     When I am on the show page for event "Scrum"
     And I should see "This event is now live!"
