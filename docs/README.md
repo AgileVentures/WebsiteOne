@@ -7,7 +7,7 @@
     * Project wishlist
 
 ### Project workflow
-* Project coordination outline
+* [Project coordination outline](project_coordination_outline.md)
 * Code style and conventions
     * Rails Asset Pipeline
     * Create tags for project
