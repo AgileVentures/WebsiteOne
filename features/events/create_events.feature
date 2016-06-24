@@ -10,9 +10,18 @@ Feature: Events
       | title | description          | pitch | status | commit_count |
       | WSO   | greetings earthlings |       | active | 2795         |
       | EdX   | greetings earthlings |       | active | 2795         |
+      | AAA   | for roadists         |       | active |              |
     And I am on Events index page
     When I click "New Event"
     Given the date is "2014/02/01 09:15:00 UTC"
+
+  Scenario: New event defaults to cs169 project when it exists
+    Given the following projects exist:
+    |title | description | pitch | status | commit_count|
+    |CS169 | stuff       |       | active |  5000       |
+    And I am on Events index page
+    When I click "New Event"
+    Then "cs169" is selected in the event project dropdown
 
   @javascript
   Scenario: Create a new event
@@ -86,3 +95,15 @@ Feature: Events
     When I dropdown the "Events" menu
     And I click "Upcoming events"
     And I should see multiple "Standup" events
+
+
+
+# dimensions
+
+#     * start date (future, past)
+#     * operation (creating, editing)
+#     * timezone user is in (one of many - choose representative set)
+#     * daylight savings difference between next event and start event (true, false)
+#     * repeating event (true, false)
+#       * repeated event already terminated
+#     * will combination of timezone and date lead to change in date field (true, false)

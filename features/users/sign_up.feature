@@ -1,4 +1,4 @@
-@vcr
+#@vcr
 Feature: As a developer
   In order to be able to use the sites features
   I want to register as a user
@@ -43,14 +43,19 @@ Feature: As a developer
     When I click "GitHub"
     Then I should see "Signed in successfully."
 
+  @omniauth
+  Scenario: User signs up with a Google+ account
+    Given I am on the "registration" page
+    When I click "Google+"
+    Then I should see "Signed in successfully."
+
   @omniauth-without-email
   Scenario: User signs up with a GitHub account having no public email (sad path)
     Given I am on the "registration" page
-    When I click "GitHub"
-    Then I should see "Your Github account needs to have a public email address for sign up"
-    Then I should see the "github-alt" icon
-    And I should not see "Password can't be blank"
+    When I sign up with GitHub
+    Then I should see link for instructions to sign up
 
+  #removed g+ signup while it appearas broken
   @omniauth-without-email
   Scenario: User signs up with a Google+ account having no public email (sad path)
     Given I am on the "registration" page

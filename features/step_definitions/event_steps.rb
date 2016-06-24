@@ -130,15 +130,117 @@ Given(/^the browser is in "([^"]*)" and the server is in UTC$/) do |tz|
   ENV['TZ'] = 'UTC'
 end
 
-And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
-  expect(page).to have_css "time[datetime='#{datetime}']"
+And(/^the local date element should be set to "([^"]*)"$/) do |datetime|
+  expect(page).to have_css %Q{time[datetime="#{datetime}"][data-format="%A, %B %d, %Y"]}
 end
+
+And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
+  expect(page).to have_css %Q{time[datetime="#{datetime}"][data-format="%H:%M"]}
+end
+
 
 And(/^"([^"]*)" is selected in the project dropdown$/) do |project_slug|
   project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
   expect(find("#project_id").value).to eq project_id.to_s
 end
 
+
+And(/^"([^"]*)" is selected in the event project dropdown$/) do |project_slug|
+  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
+  expect(find("#event_project_id").value).to eq project_id.to_s
+end
+
+
 And(/^the start time is "([^"]*)"$/) do |start_time|
   expect(find("#start_time").value).to eq start_time
+end
+
+And(/^the start date is "([^"]*)"$/) do |start_date|
+  expect(find("#start_date").value).to eq start_date
+end
+
+# would like this to be more robust
+Given(/^daylight savings are in effect now$/) do
+  Delorean.time_travel_to(Time.parse('2015/06/14 09:15:00 UTC'))
+end
+
+And(/^the user is in "([^"]*)"$/) do |zone|
+  @zone = zone
+end
+
+# must visit edit event page to ensure form is loaded
+# before we fix zone as per instance variable set in above step
+# and then rerun the handleUserTimeZone js method that is run
+# on page load.  We use this approach because we cannot find a
+# reliable way of setting Capybara timezone that will work on CI
+def stub_user_browser_to_specific_timezone
+  visit edit_event_path(@event)
+  page.execute_script("timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script('editEventForm.handleUserTimeZone();')
+  @form_tz = find("#start_time_tz").value
+  @tz = TZInfo::Timezone.get(@zone)
+  expect(@form_tz).to eq(@zone)
+end
+
+And(/^edits an event with start date in standard time$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+  stub_user_browser_to_specific_timezone
+  @start_date = find("#start_date").value
+  @start_time = find("#start_time").value
+end
+
+When(/^they save without making any changes$/) do
+  click_link_or_button 'Save'
+end
+
+Then(/^the event date and time should be unchanged$/) do
+  expect(current_path).to eq event_path(@event)
+  stub_user_browser_to_specific_timezone
+  expect(find("#start_date").value).to match @start_date
+  expect(find("#start_time").value).to match @start_time
+end
+
+Given(/^it is now past the end date for the event$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+  Delorean.time_travel_to(@event.repeat_ends_on + 1.day)
+end
+
+And(/^they edit and save the event without making any changes$/) do
+  visit edit_event_path(@event)
+  @start_date = find("#start_date").value
+  @start_time = find("#start_time").value
+  click_link_or_button 'Save'
+end
+
+# would love to split this in two so we can re-use for two other scenarios
+Given(/^daylight savings are in effect and it is now past the end date for the event$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+  Delorean.time_travel_to(@event.repeat_ends_on.change(month: 6) + 1.year)
+end
+
+Then(/^the user should see the date and time adjusted for their timezone in the edit form$/) do
+  stub_user_browser_to_specific_timezone
+  @start_date = find("#start_date").value
+  @start_time = find("#start_time").value
+  expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime).to_date.strftime("%Y-%m-%d")
+  expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime).to_time.strftime("%I:%M %p")
+end
+
+Given(/^an existing event$/) do
+  @event = Event.find_by(name: 'Daily Standup')
+end
+
+Then(/^the user should see the date and time adjusted for their timezone and updated by (\d+) hours in the edit form$/) do |hours|
+  stub_user_browser_to_specific_timezone
+  @start_date = find("#start_date").value
+  @start_time = find("#start_time").value
+  expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_time.strftime("%I:%M %p")
+  expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_date.strftime("%Y-%m-%d")
+end
+
+When(/^they view the event "([^"]*)"$/) do |event_name|
+  @event = Event.find_by(name: event_name)
+  visit event_path(@event)
+  page.execute_script("timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script('showEvent.showUserTimeZone();')
 end

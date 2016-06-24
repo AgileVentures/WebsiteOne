@@ -17,5 +17,8 @@
 ### Getting involved
 * Development environment set up
 
+### Issues
+* [Signup Issues (GitHub)](solutions_for_signup_issues.md)
+
 ### Literature and reference
 * Thoughts on integrating Pair Programming with BDD and TDD

@@ -31,14 +31,16 @@
         </div>
 
         <div class="btn-HOA pull-right">
-          <% hangout_uid = (@recent_hangout && @recent_hangout.live?) ? @recent_hangout.uid : '' %>
-          <%= render partial: 'event_instances/hangout_button', locals: {
-                                                                      event_instance_id: hangout_uid,
-                                                                      event_id: @event.id,
-                                                                      category: @event.category,
-                                                                      project_id: @event.project_id,
-                                                                      title: topic(@event, @event_schedule)
-                                                              } %>
+          <% if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
+            <% hangout_uid = (@recent_hangout && @recent_hangout.live?) ? @recent_hangout.uid : '' %>
+            <%= render partial: 'event_instances/hangout_button', locals: {
+                                                                        event_instance_id: hangout_uid,
+                                                                        event_id: @event.id,
+                                                                        category: @event.category,
+                                                                        project_id: @event.project_id,
+                                                                        title: topic(@event, @event_schedule)
+                                                                } %>
+          <% end %>
         </div>
     <% end %>
   </div>
@@ -52,8 +54,8 @@
         <h4>Next scheduled event:</h4>
 
           <div class="calendar-text">
-            <i class="fa fa-calendar"></i><span class="month"><%=  @event.next_event_occurrence_with_time[:time].strftime('%A, %B %d, %Y') %></span><br/>
-            <i class="fa fa-clock-o"></i><span><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
+            <i class="fa fa-calendar"></i><span class="month"><%=  local_time(@event.next_event_occurrence_with_time[:time],'%A, %B %d, %Y') %></span><br/>
+            <i class="fa fa-clock-o"></i><span id='local_time'><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
             <small><i class="fa fa-clock-o"></i><span><%= raw @event.start_time.strftime('%H:%M')%>-<%= raw @event.instance_end_time.strftime('%H:%M') %> (UTC)</span></small>
             <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
                 <p class="help-block">Occurs weekly at the specified times</p>
@@ -63,7 +65,7 @@
   <% end %>
 
   <div class="col-xs-12 col-sm-6">
-    <% if @recent_hangout && @recent_hangout.live? %>
+    <% if @recent_hangout.try :live? %>
         <div class="event-notice">
           This event is now live!
           <br/>
@@ -108,5 +110,3 @@
     <p><%= link_to 'Learn more about Scrums', static_page_path('Getting started') %></p>
   </div>
 </div>
-
-<%= javascript_include_tag 'events.js' %>

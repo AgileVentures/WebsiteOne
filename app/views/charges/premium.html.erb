@@ -1,16 +1,8 @@
-<%= form_tag charges_path do %>
+<%= form_tag charges_path(plan: 'premium') do %>
     <article>
       <h1>Agile Ventures Premium Membership</h1>
       <br/>
-      <p>
-        Agile Ventures Premium Membership gives the following benefits
-      <ul>
-        <li>Access to AgileVentures' private JobHunter channel</li>
-        <li>Priority pull request code review (professional code review within 48 hours)</li>
-        <li>Eligibility to work on priority and paid projects</li>
-        <li>Supports Agile Ventures mission to support charities and increase worldwide access to learning resources</li>
-      </ul>
-        <a href='/premium'>Further details</a>
+      <a href='/premium'>Further details</a>
       </p>
       <label class="amount">
         <span>The price for Premium Membership is £10.00/Month</span>
@@ -30,5 +22,6 @@
             data-currency="GBP"
             data-locale="auto"
             data-name="Premium Membership"
-            data-label="Sign Me Up!"></script>
+            data-label="Sign Me Up For Premium!"></script>
+
 <% end %>

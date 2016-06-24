@@ -26,7 +26,9 @@
       <div class="form-group event_date">
         <%= label_tag 'start_date', 'Start Date', class: 'control-label' %>
         <%= text_field_tag 'start_date', format_datepicker(start_date), style: 'width:auto;', class: 'form-control datepicker' %>
+        <%= hidden_field_tag 'next_date', @event.next_event_occurrence_with_time() ? format_datepicker(@event.next_event_occurrence_with_time()[:time]) : format_datepicker(DateTime.now) %>
       </div>
+
       <div class="form-group event_time">
         <%= label_tag 'start_time', 'Start Time', class: 'control-label' %>
         <%= text_field_tag 'start_time', format_timepicker(start_time), style: 'width:auto;', class: 'form-control timepicker' %>
