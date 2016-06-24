@@ -1,5 +1,5 @@
 @vcr
-Feature: Events
+Feature: Show Events
   As a site user
   In order to be able to plan activities
   I would like to see event CRUD functionality
@@ -81,20 +81,6 @@ Feature: Events
     And I should see "Monday, February 03, 2014"
     And I should see "07:00-09:30 (UTC)"
     And I should see "Edit"
-
-
-  Scenario: Show info about event in progress
-    And the Hangout for event "Scrum" has been started with details:
-      | EventInstance link | http://hangout.test |
-      | Started at         | 7:00:00 UTC         |
-    And the time now is "7:01:00 UTC"
-    When I am on the show page for event "Scrum"
-    Then I should see:
-      | Scrum               |
-      | Scrum               |
-      | Daily scrum meeting |
-    And I should see "This event is now live!"
-    And I should see link "Join now" with "http://hangout.test"
 
   Scenario: Render Next Scrum info on landing page
     Given the date is "2014/02/01 09:15:00 UTC"

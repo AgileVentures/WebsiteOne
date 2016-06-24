@@ -19,8 +19,12 @@ class EventInstance < ActiveRecord::Base
     hangout_url?
   end
 
+  def updated_within_last_two_minutes?
+    updated_at > 2.minutes.ago
+  end
+
   def live?
-    started? && hoa_status != 'finished' && updated_at > 2.minutes.ago
+    started? && hoa_status != 'finished' && updated_within_last_two_minutes?
   end
 
   def duration
