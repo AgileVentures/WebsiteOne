@@ -81,7 +81,7 @@ Feature: Show Events
     And I should see "Monday, February 03, 2014"
     And I should see "07:00-09:30 (UTC)"
     And I should see "Edit"
-
+    
   Scenario: Render Next Scrum info on landing page
     Given the date is "2014/02/01 09:15:00 UTC"
     And I am on the home page
