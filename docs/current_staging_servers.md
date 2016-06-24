@@ -10,6 +10,11 @@ Deploys with Travis CI Continuous Deployment.
 * [Yaro Heroku WSO](http://yaro.herokuapp.com/) -- [GitHub repo](https://github.com/AgileVentures/WebsiteOne)
 * [Bill Heroku WSO](http://billwso.herokuapp.com/)  
     * **CSS styling missing** required rails_12factor gem which handles asset handling
+* Daniel: http://websiteone-sponsors.herokuapp.com/
+* Sampriti: http://websiteone-sampriti.herokuapp.com/
+* Pete http://pete-wso.herokuapp.com/
+* Bryan http://websiteone-bryan.herokuapp.co
+* Marcelo: http://websiteone-marcelo.herokuapp.com/
 
 
 ### Issues
