@@ -8,7 +8,7 @@
 
 ### Project workflow
 * [Project coordination outline](project_coordination_outline.md)
-* Code style and conventions
+* [Code style and conventions](code_style_conventions.md)
     * Rails Asset Pipeline
     * Create tags for project
     * Adding title to page view
