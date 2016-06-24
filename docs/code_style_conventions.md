@@ -1,3 +1,9 @@
+Sub-documents   
+   * [[Rails Asset Pipeline]]
+   * [[Create tags for project]]
+   * [[Adding title to page view]]
+
+
 <font size="2" color="green"><ul>
 <li>In order to keep the code style consistent across the project</li>
      <li> As a project maintainer</li>
