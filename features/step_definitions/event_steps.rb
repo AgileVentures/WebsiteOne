@@ -245,21 +245,6 @@ When(/^they view the event "([^"]*)"$/) do |event_name|
   page.execute_script('showEvent.showUserTimeZone();')
 end
 
-And(/^the connect app ping WSO concerning the event named "([^"]*)"$/) do |name|
-  event = Event.find_by(name: name)
-  event_instance = event.event_instances.first
-  #header 'HTTP-ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
-  EventInstancesController.class_eval %Q{
-    def cors_preflight_check
-      true
-    end
-  }
-  put "/hangouts/#{event_instance.uid}", {title: event_instance.title, host_id: event_instance.user_id, event_id: event.id,
-                                          participants: event_instance.participants, hangout_url: event_instance.hangout_url,
-                                          hoa_status: 'live', project_id: event_instance.project_id, category: event_instance.category,
-                                          yt_video_id: event_instance.yt_video_id}
-end
-
 Given(/^an event "([^"]*)"$/) do |event_name|
   @event = Event.find_by_name(event_name)
   @google_id = '123456789'
