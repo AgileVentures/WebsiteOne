@@ -12,7 +12,7 @@
     * [[Rails Asset Pipeline]]
     * [[Create tags for project]]
     * [[Adding title to page view]]
-* Current staging servers
+* [[Current staging servers]]
 
 ### Getting involved
 * Development environment set up
