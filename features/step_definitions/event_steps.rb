@@ -292,7 +292,6 @@ Given(/^the event "([^"]*)"$/) do |name|
 end
 
 Then(/^they should see the icon of the creator of the event$/) do
-  byebug
   expect(page).to have_xpath("//a[@href='#{user_path(@event.creator)}']/img[contains(@src, 'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?s=80&d=retro')]")
 end
 
