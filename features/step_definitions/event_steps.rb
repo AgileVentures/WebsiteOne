@@ -296,7 +296,7 @@ Then(/^they should see the icon of the creator of the event$/) do
 end
 
 Then(/^they should see a link to the creator of the event$/) do
-  expect(page).to have_link(@event.creator.first_name, href: users_path(@event.creator))
+  expect(page).to have_link(@event.creator.display_name, href: user_path(@event.creator))
 end
 
 Given(/^that "([^"]*)" created the "([^"]*)" event$/) do |first_name, event_name|
