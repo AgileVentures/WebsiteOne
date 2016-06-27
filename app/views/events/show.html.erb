@@ -68,7 +68,9 @@
       </div>
       <div class="col-xs-12 col-sm-2">
         <div class="row text-center">
-          <%= @event.creator.presenter.gravatar_image(size: 80, id: 'user-gravatar', class: 'img-circle') %>
+          <a href="#{user_path(@event.creator)}">
+            <%= @event.creator.presenter.gravatar_image(size: 80, id: 'user-gravatar', class: 'img-circle') %>
+          </a>
         </div>
         <div class="row text-center">
           created by:
