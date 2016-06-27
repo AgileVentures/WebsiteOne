@@ -142,6 +142,7 @@ When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
 end
 
 Given /^the time now is "([^"]*)"$/ do |time|
+  # use delorean
   Time.stub(now: Time.parse(time))
 end
 
