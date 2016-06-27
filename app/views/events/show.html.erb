@@ -64,7 +64,19 @@
       </div>
   <% end %>
   <% if @event.creator %>
-      <%= link_to @event.creator.display_name, user_path(@event.creator), style: "display: inline-block; float: right;" %>
+      <div class="col-xs-12 col-sm-4">
+      </div>
+      <div class="col-xs-12 col-sm-2">
+        <div class="row text-center">
+          <%= @event.creator.presenter.gravatar_image(size: 80, id: 'user-gravatar', class: 'img-circle') %>
+        </div>
+        <div class="row text-center">
+          created by:
+        </div>
+        <div class="row text-center">
+          <%= link_to @event.creator.display_name, user_path(@event.creator) %>
+        </div>
+      </div>
   <% end %>
 
   <div class="col-xs-12 col-sm-6">

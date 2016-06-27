@@ -7,8 +7,8 @@ Feature: Show Events
 
   Background:
     Given the following users exist
-      | first_name | last_name | email                   | latitude | longitude | updated_at    |
-      | Alice      | Jones     | alice@btinternet.co.uk  | 59.33    | 18.06     | 1 minute ago  |
+      | first_name | last_name | email                      | latitude | longitude | updated_at   |
+      | Alice      | Jones     | MyEmailAddress@example.com | 59.33    | 18.06     | 1 minute ago |
     Given following events exist:
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
       | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
@@ -22,6 +22,7 @@ Feature: Show Events
     Given the date is "2016/05/01 09:15:00 UTC"
     And they view the event "Standup"
     Then they should see a link to the creator of the event
+    Then they should see the icon of the creator of the event
 
   @javascript
   Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time
