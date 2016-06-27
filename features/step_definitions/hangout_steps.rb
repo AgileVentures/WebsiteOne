@@ -2,6 +2,7 @@ Then /^I should (not )?see hangout button$/ do |absent|
   if absent
     expect(page).not_to have_css '#liveHOA-placeholder'
   else
+    expect(page).to have_css "#liveHOA-placeholder"
     src = page.find(:css, '#liveHOA-placeholder iframe')['src']
     expect(src).to match /talkgadget.google.com/
   end
@@ -13,13 +14,13 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
 
 
   start_time = hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now
+  update_time = hangout['Updated at'] ? Time.parse(hangout['Updated at']) : start_time
   event = Event.find_by_name(event_name)
-
   FactoryGirl.create(:event_instance,
-                     event: event,
+                     event_id: event.id,
                      hangout_url: hangout['EventInstance link'],
                      created: start_time,
-                     updated_at: start_time,
+                     updated_at: update_time,
                      hoa_status: 'live')
 
 end

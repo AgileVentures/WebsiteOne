@@ -24,9 +24,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   @javascript
   Scenario: Create a hangout for a scrum event
+    Given the date is "2014/02/03 06:55:00 UTC"
     Given I am on the show page for event "Scrum"
     Then I should see hangout button
-
 
   @time-travel-step
   Scenario: Show event details

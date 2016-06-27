@@ -31,7 +31,7 @@
         </div>
 
         <div class="btn-HOA pull-right">
-          <% unless @recent_hangout.try :live? %>
+          <% if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
             <% hangout_uid = (@recent_hangout && @recent_hangout.live?) ? @recent_hangout.uid : '' %>
             <%= render partial: 'event_instances/hangout_button', locals: {
                                                                         event_instance_id: hangout_uid,

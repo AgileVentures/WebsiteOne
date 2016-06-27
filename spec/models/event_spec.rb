@@ -36,6 +36,39 @@ describe Event, :type => :model do
     expect(FactoryGirl.build(:event, url: 'http:google.com')).to_not be_valid
   end
 
+  describe "#less_than_ten_till_start?" do
+
+    before(:each) { Delorean.time_travel_to '2014-03-16 23:30:00 UTC' }
+
+    context 'event starts five minutes from now' do
+      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:35:00 UTC' }
+      it 'returns true' do
+        expect(event).to be_less_than_ten_till_start
+      end
+    end
+
+    context 'event starts 20 minutes from now' do
+      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:50:00 UTC' }
+      it 'returns false' do
+        expect(event).not_to be_less_than_ten_till_start
+      end
+    end
+
+    context 'event finished 10 minutes ago' do
+      subject(:event) { build_stubbed :event, start_datetime: '2014-03-16 23:10:00 UTC', duration: '10' }
+      it 'returns false' do
+        expect(event).not_to be_less_than_ten_till_start
+      end
+    end
+
+    context 'event sequence has been terminated' do
+      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:50:00 UTC', repeat_ends_on: '2014-03-10' }
+      it 'returns false' do
+        expect(event).not_to be_less_than_ten_till_start
+      end
+    end
+  end
+
   describe '#last_hangout' do
     it 'returns the latest hangout' do
       hangout1 = subject.event_instances.create
@@ -159,7 +192,7 @@ describe Event, :type => :model do
 
     it 'should expire events that ended' do
       hangout = @event.event_instances.create(hangout_url: 'anything@anything.com',
-                                       updated_at: '2014-06-17 10:25:00 UTC')
+                                              updated_at: '2014-06-17 10:25:00 UTC')
       allow(hangout).to receive(:started?).and_return(true)
       Delorean.time_travel_to(Time.parse('2014-06-17 10:31:00 UTC'))
       expect(@event).to_not be_live
@@ -167,14 +200,14 @@ describe Event, :type => :model do
 
     it 'should mark as active events which have started and have not ended' do
       hangout = @event.event_instances.create(hangout_url: 'anything@anything.com',
-                                       updated_at: '2014-06-17 10:25:00 UTC')
+                                              updated_at: '2014-06-17 10:25:00 UTC')
       Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
       expect(@event).to be_live
     end
 
     it 'should not be started if events have not started' do
       hangout = @event.event_instances.create(hangout_url: nil,
-                                       updated_at: nil)
+                                              updated_at: nil)
       Delorean.time_travel_to(Time.parse('2014-06-17 9:30:00 UTC'))
       expect(@event.live?).to be_falsey
     end
@@ -182,16 +215,16 @@ describe Event, :type => :model do
 
   context 'Event url' do
     before (:each) do
-      @event = { name: 'one time event',
-                 category: 'Scrum',
-                 description: '',
-                 start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
-                 duration: 600,
-                 repeats: 'never',
-                 repeats_every_n_weeks: nil,
-                 repeat_ends: 'never',
-                 repeat_ends_on: 'Mon, 17 Jun 2013',
-                 time_zone: 'Eastern Time (US & Canada)' }
+      @event = {name: 'one time event',
+                category: 'Scrum',
+                description: '',
+                start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
+                duration: 600,
+                repeats: 'never',
+                repeats_every_n_weeks: nil,
+                repeat_ends: 'never',
+                repeat_ends_on: 'Mon, 17 Jun 2013',
+                time_zone: 'Eastern Time (US & Canada)'}
     end
 
     it 'should be set if valid' do
@@ -298,7 +331,7 @@ describe Event, :type => :model do
       context ':limit option' do
 
         it 'should limit the size of the output' do
-          options = { limit: 2 }
+          options = {limit: 2}
           Delorean.time_travel_to(Time.parse('2014-03-08 09:27:00 UTC'))
           expect(@event.next_occurrences(options).count).to eq(2)
         end
@@ -324,7 +357,7 @@ describe Event, :type => :model do
 
     it 'should return the start_time if it is specified' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      options = { start_time: '2015-06-20 09:27:00 UTC' }
+      options = {start_time: '2015-06-20 09:27:00 UTC'}
       expect(@event.start_datetime_for_collection(options)).to eq(options[:start_time])
     end
 
@@ -348,13 +381,13 @@ describe Event, :type => :model do
 
     it 'should return the repeat_ends_on datetime if that comes first' do
       Delorean.time_travel_to(Time.parse('2015-06-23 09:27:00 UTC'))
-      options = { end_time: '2015-06-30 09:27:00 UTC' }
+      options = {end_time: '2015-06-30 09:27:00 UTC'}
       expect(@event.final_datetime_for_collection(options)).to eq(@event.repeat_ends_on.to_datetime)
     end
 
     it 'should return the options[:endtime] if that comes before repeat_ends_on' do
       Delorean.time_travel_to(Time.parse('2015-06-15 09:27:00 UTC'))
-      options = { end_time: '2015-06-20 09:27:00 UTC' }
+      options = {end_time: '2015-06-20 09:27:00 UTC'}
       expect(@event.final_datetime_for_collection(options)).to eq(options[:end_time].to_datetime)
     end
 
@@ -377,7 +410,7 @@ describe Event, :type => :model do
 
     it 'should return the options[:endtime] when specified' do
       Delorean.time_travel_to(Time.parse('2015-06-15 09:27:00 UTC'))
-      options = { end_time: '2015-06-20 09:27:00 UTC' }
+      options = {end_time: '2015-06-20 09:27:00 UTC'}
       expect(@event.final_datetime_for_collection(options)).to eq(options[:end_time].to_datetime)
     end
 
