@@ -286,3 +286,11 @@ Then(/^the event should be dead$/) do
   visit event_path(@event)
   expect(page).not_to have_content('This event is now live!')
 end
+
+Given(/^the event "([^"]*)"$/) do |name|
+  @event = Event.find_by(name: name)
+end
+
+Then(/^they should see the icon of the creator of the event$/) do
+  pending
+end
