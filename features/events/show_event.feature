@@ -18,10 +18,10 @@ Feature: Show Events
 
   @javascript
   Scenario: Event show page shows creator's icon and links to creator's profile
-    Given the event "Standup"
-    And the date is "2016/05/01 09:15:00 UTC"
+    Given that "Alice" created the "Standup" event
+    Given the date is "2016/05/01 09:15:00 UTC"
     And they view the event "Standup"
-    Then they should see the icon of the creator of the event
+    Then they should see a link to the creator of the event
 
   @javascript
   Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time

@@ -60,6 +60,9 @@
             <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
                 <p class="help-block">Occurs weekly at the specified times</p>
             <% end %>
+            <% if @event.creator %>
+              <%= link_to @event.creator.first_name, users_path(@event.creator) %>
+            <% end %>
           </div>
       </div>
   <% end %>
