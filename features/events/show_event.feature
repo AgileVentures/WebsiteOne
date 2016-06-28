@@ -14,13 +14,14 @@ Feature: Show Events
 
 
   @javascript
-  Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time
+  Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time, and while event is running
     Given the date is "<date>"
     And I am logged in
     And I am on the show page for event "Standup"
     Then I <assertion> see hangout button
     Examples:
       | date                    | assertion  |
+      | 2014/02/03 07:55:00 UTC | should     |
       | 2014/02/03 06:55:00 UTC | should     |
       | 2014/02/03 06:49:00 UTC | should not |
       | 2014/02/03 09:40:00 UTC | should not |
