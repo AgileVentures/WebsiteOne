@@ -27,6 +27,10 @@ Feature: List Events
     And I should see "07:00-09:30 (UTC)"
     And I should see "PP Session"
     And I should see "10:00-10:15 (UTC)"
+    And the local date element should be set to "2014-02-03T07:00:00Z"
+    And the local time element should be set to "2014-02-03T07:00:00Z"
+    And the local date element should be set to "2014-02-07T10:00:00Z"
+    And the local time element should be set to "2014-02-07T10:00:00Z"
 
   Scenario: Projects should be ordered alphabetically
     Given I am on Events index page
@@ -44,3 +48,4 @@ Feature: List Events
     Then I should not see "Standup"
     And I should see "PP Session"
     And "cs169" is selected in the project dropdown
+
