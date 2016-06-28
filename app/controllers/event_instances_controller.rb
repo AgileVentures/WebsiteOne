@@ -5,12 +5,13 @@ class EventInstancesController < ApplicationController
   def update
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
 
-    hangout_url_changed = event_instance.hangout_url != hangout_params[:hangout_url]
-    yt_video_id_changed = event_instance.yt_video_id != hangout_params[:yt_video_id]
+    ho_params = hangout_params(event_instance)
+    hangout_url_changed = event_instance.hangout_url != ho_params[:hangout_url]
+    yt_video_id_changed = event_instance.yt_video_id != ho_params[:yt_video_id]
     slack_notify = params[:notify] == 'true'
     # event_instance.update(hangout_params)
 
-    if event_instance.try!(:update, hangout_params)
+    if event_instance.try!(:update, ho_params)
       SlackService.post_hangout_notification(event_instance) if (slack_notify && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed)
       SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed
 
@@ -54,7 +55,7 @@ class EventInstancesController < ApplicationController
     response.headers['Access-Control-Allow-Methods'] = 'PUT'
   end
 
-  def hangout_params
+  def hangout_params(event_instance)
     params.require(:host_id)
     params.require(:title)
 
@@ -64,11 +65,21 @@ class EventInstancesController < ApplicationController
       event_id: params[:event_id],
       category: params[:category],
       user_id: params[:host_id],
-      participants: params[:participants],
+      participants: merge_participants(event_instance.participants,params[:participants]),
       hangout_url: params[:hangout_url],
       yt_video_id: params[:yt_video_id],
       hoa_status: params[:hoa_status],
       updated_at: Time.now
     ).permit!
+  end
+
+  def merge_participants(existing_participants,new_participants)
+    return new_participants unless existing_participants
+    new_participants.each do |_,v|
+      unless existing_participants.values.any?{|struc| struc['person']['id'] == v['person']['id']}
+        existing_participants[existing_participants.length.to_s] = v
+      end
+    end
+    return existing_participants
   end
 end
