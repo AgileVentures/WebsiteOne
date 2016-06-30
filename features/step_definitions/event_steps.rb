@@ -134,6 +134,10 @@ And(/^the local date element should be set to "([^"]*)"$/) do |datetime|
   expect(page).to have_css %Q{time[datetime="#{datetime}"][data-format="%A, %B %d, %Y"]}
 end
 
+And(/^the short local date element should be set to "([^"]*)"$/) do |datetime|
+  expect(page).to have_css %Q{time[datetime="#{datetime}"][data-format="%a, %b %d, %Y"]}
+end
+
 And(/^the local time element should be set to "([^"]*)"$/) do |datetime|
   expect(page).to have_css %Q{time[datetime="#{datetime}"][data-format="%H:%M"]}
 end
