@@ -17,7 +17,6 @@ Feature: Show Events
 
 
   @javascript
-<<<<<<< HEAD
   Scenario: Event show page shows creator's icon and links to creator's profile
     Given that "Alice" created the "Standup" event
     Given the date is "2016/05/01 09:15:00 UTC"
