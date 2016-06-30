@@ -21,7 +21,6 @@ class EventsController < ApplicationController
 
   def edit
     @event.set_repeat_ends_string
-    @event.repeats_weekly_each_days_of_the_week_mask = params["repeats_weekly_each_days_of_the_week_mask"].to_i if params["repeats_weekly_each_days_of_the_week_mask"]
     @projects = Project.all
   end
 
@@ -51,7 +50,8 @@ class EventsController < ApplicationController
       redirect_to event_path(@event)
     else
       flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
-      redirect_to edit_event_path(@event)+"?repeats_weekly_each_days_of_the_week_mask=#{@event.repeats_weekly_each_days_of_the_week_mask}"
+      @projects = Project.all
+      render 'edit'
     end
   end
 
