@@ -290,3 +290,21 @@ Then(/^the event should be dead$/) do
   visit event_path(@event)
   expect(page).not_to have_content('This event is now live!')
 end
+
+Given(/^the event "([^"]*)"$/) do |name|
+  @event = Event.find_by(name: name)
+end
+
+Then(/^they should see the icon of the creator of the event$/) do
+  expect(page).to have_xpath("//a[@href='#{user_path(@event.creator)}']/img[contains(@src, 'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?s=80&d=retro')]")
+end
+
+Then(/^they should see a link to the creator of the event$/) do
+  expect(page).to have_link(@event.creator.display_name, href: user_path(@event.creator))
+end
+
+Given(/^that "([^"]*)" created the "([^"]*)" event$/) do |first_name, event_name|
+  @event = Event.find_by(name: event_name)
+  @event.creator = User.find_by(first_name: first_name)
+  @event.save
+end

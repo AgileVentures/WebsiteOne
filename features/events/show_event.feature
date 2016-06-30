@@ -6,12 +6,23 @@ Feature: Show Events
   Pivotal Tracker:  https://www.pivotaltracker.com/story/show/66655876
 
   Background:
+    Given the following users exist
+      | first_name | last_name | email                      | latitude | longitude | updated_at   |
+      | Alice      | Jones     | MyEmailAddress@example.com | 59.33    | 18.06     | 1 minute ago |
     Given following events exist:
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
       | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
       | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | UTC       |         |                                           |                       |
       | Standup    | Daily standup meeting   | Scrum           | 2014/02/03 07:00:00 UTC | 150      | weekly  | UTC       |         | 15                                        | 1                     |
 
+
+  @javascript
+  Scenario: Event show page shows creator's icon and links to creator's profile
+    Given that "Alice" created the "Standup" event
+    Given the date is "2016/05/01 09:15:00 UTC"
+    And they view the event "Standup"
+    Then they should see a link to the creator of the event
+    Then they should see the icon of the creator of the event
 
   @javascript
   Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time, and while event is running

@@ -36,9 +36,11 @@ Feature: Events
     And I click on the "event_date" div
     And I click the "Save" button
     Then I should see "Event Created"
+    Given the event "Whatever"
     Then I should be on the event "Show" page for "Whatever"
     And the event named "Whatever" is associated with "EdX"
     And I should see "09:00-09:30 (UTC)"
+    Then they should see a link to the creator of the event
 
   @javascript
   Scenario: Create a new event in a non-UTC timezone
