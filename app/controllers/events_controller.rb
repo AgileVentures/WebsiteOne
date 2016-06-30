@@ -62,7 +62,7 @@ class EventsController < ApplicationController
   private
 
   def transform_params
-    event_params = params.require(:event).permit!
+    event_params = params.merge(event: params[:event].merge({creator_id: current_user.id})).require(:event).permit!
     create_start_date_time(event_params)
     event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
     event_params[:repeat_ends_on]= params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""

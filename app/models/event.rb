@@ -3,6 +3,8 @@ class Event < ActiveRecord::Base
   belongs_to :project
   serialize :exclusions
 
+  belongs_to :creator, class_name: 'User'
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 
