@@ -55,6 +55,13 @@ describe Event, :type => :model do
       end
     end
 
+    context 'event started five minutes ago and has not ended' do
+      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:25:00 UTC' , duration: '10'}
+      it 'returns true' do
+        expect(event).to be_less_than_ten_till_start
+      end
+    end
+
     context 'event finished 10 minutes ago' do
       subject(:event) { build_stubbed :event, start_datetime: '2014-03-16 23:10:00 UTC', duration: '10' }
       it 'returns false' do
