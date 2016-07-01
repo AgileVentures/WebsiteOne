@@ -595,4 +595,117 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Sat, 01 Feb 2014 11:10:20 GMT
+- request:
+    method: get
+    uri: http://www.youtube.com/v/yt_video_id_128?enablejsapi=1&version=3
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Referer:
+      - http://127.0.0.1:59813/projects/hello-world
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Cookie:
+      - VISITOR_INFO1_LIVE=r70aW7nFY9M; YSC=2vDN7Ns4GFM; PREF=f1=50000000
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - www.youtube.com
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      X-Xss-Protection:
+      - 1; mode=block; report=https://www.google.com/appserve/security-bugs/log/youtube
+      Location:
+      - https://www.youtube.com/v/yt_video_id_128?version=3&enablejsapi=1
+      Expires:
+      - Tue, 27 Apr 1971 19:44:06 EST
+      Content-Length:
+      - '0'
+      Cache-Control:
+      - no-cache
+      X-Content-Type-Options:
+      - nosniff
+      Date:
+      - Thu, 23 Jun 2016 13:24:19 GMT
+      Server:
+      - YouTubeFrontEnd
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:12 GMT
+- request:
+    method: get
+    uri: https://www.youtube.com/v/yt_video_id_128?enablejsapi=1&version=3
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Referer:
+      - http://127.0.0.1:59813/projects/hello-world
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Cookie:
+      - VISITOR_INFO1_LIVE=r70aW7nFY9M; YSC=2vDN7Ns4GFM; PREF=f1=50000000
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - www.youtube.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Cache-Control:
+      - no-cache
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block; report=https://www.google.com/appserve/security-bugs/log/youtube
+      Strict-Transport-Security:
+      - max-age=31536000
+      P3p:
+      - CP="This is not a P3P policy! See http://support.google.com/accounts/answer/151657?hl=en-GB
+        for more info."
+      Expires:
+      - Tue, 27 Apr 1971 19:44:06 EST
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 23 Jun 2016 13:24:19 GMT
+      Server:
+      - YouTubeFrontEnd
+      Set-Cookie:
+      - GPS=1; path=/; domain=.youtube.com; expires=Thu, 23-Jun-2016 13:54:19 GMT
+      Alternate-Protocol:
+      - 443:quic
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="34,33,32,31,30,29,28,27,26,25"
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 15 Jul 2014 12:00:12 GMT
 recorded_with: VCR 3.0.1

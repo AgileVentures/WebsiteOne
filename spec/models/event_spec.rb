@@ -15,6 +15,7 @@ describe Event, :type => :model do
   it { is_expected.to respond_to :friendly_id }
   it { is_expected.to respond_to :schedule }
   it { is_expected.to respond_to :live? }
+  it { should belong_to :creator }
 
   it 'is valid with all the correct parameters' do
     expect(subject).to be_valid
@@ -51,6 +52,13 @@ describe Event, :type => :model do
       subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:50:00 UTC' }
       it 'returns false' do
         expect(event).not_to be_less_than_ten_till_start
+      end
+    end
+
+    context 'event started five minutes ago and has not ended' do
+      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:25:00 UTC' , duration: '10'}
+      it 'returns true' do
+        expect(event).to be_less_than_ten_till_start
       end
     end
 
