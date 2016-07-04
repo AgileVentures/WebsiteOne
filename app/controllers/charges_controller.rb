@@ -30,7 +30,7 @@ class ChargesController < ApplicationController
   def send_acknowledgement_email
     Mailer.send(acknowledgement_email_template, params[:stripeEmail]).deliver_now
   end
-  
+
   def acknowledgement_email_template
     "send_premium#{premiumplus? ? '_plus' : ''}_payment_complete".to_sym
   end
