@@ -308,3 +308,8 @@ Given(/^that "([^"]*)" created the "([^"]*)" event$/) do |first_name, event_name
   @event.creator = User.find_by(first_name: first_name)
   @event.save
 end
+
+And(/^The box for "([\w]+)" should be checked$/) do |day|
+  box = page.find("#event_repeats_weekly_each_days_of_the_week_#{day.downcase}")
+  expect(box).to be_checked
+end
