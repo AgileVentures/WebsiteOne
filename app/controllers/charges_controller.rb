@@ -14,12 +14,7 @@ class ChargesController < ApplicationController
         plan:   @plan
     )
 
-    # charge = Stripe::Charge.create(
-    #     :customer    => customer.id,
-    #     :amount      => @amount,
-    #     :description => 'Rails Stripe customer',
-    #     :currency    => 'gbp'
-    # )
+    send_acknowledgement_email
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
@@ -32,4 +27,11 @@ class ChargesController < ApplicationController
     params[:plan] == 'premiumplus'
   end
 
+  def send_acknowledgement_email
+    Mailer.send(acknowledgement_email_template, params[:stripeEmail]).deliver_now
+  end
+  
+  def acknowledgement_email_template
+    "send_premium#{premiumplus? ? '_plus' : ''}_payment_complete".to_sym
+  end
 end

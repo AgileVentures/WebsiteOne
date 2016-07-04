@@ -1,6 +1,32 @@
 require 'spec_helper'
 
 describe Mailer do
+
+  describe 'send_premium_payment_complete_message' do
+    it 'sends payment complete message' do
+      mail = Mailer.send_premium_payment_complete('candice@clemens.com')
+      expect(mail.from).to include('info@agileventures.org')
+      expect(mail.reply_to).to include('info@agileventures.org')
+      expect(mail.to).to include('candice@clemens.com')
+      expect(mail.subject).to include('Welcome to AgileVentures Premium')
+      expect(mail.body.raw_source).to include('Thanks for signing up for AgileVentures Premium!')
+      expect(mail).to have_default_cc_addresses
+    end
+  end
+
+  describe 'send_premium_plus_payment_complete_message' do
+    it 'sends payment complete message' do
+      mail = Mailer.send_premium_plus_payment_complete('candice@clemens.com')
+      expect(mail.from).to include('info@agileventures.org')
+      expect(mail.reply_to).to include('info@agileventures.org')
+      expect(mail.to).to include('candice@clemens.com')
+      expect(mail.subject).to include('Welcome to AgileVentures Premium PLUS')
+      expect(mail.body.raw_source).to include('Thanks for signing up for AgileVentures Premium PLUS!')
+      expect(mail).to have_default_cc_addresses
+    end
+  end
+
+
   describe '#send_welcome_message' do
     before(:each) do
       @user = User.new first_name: 'Email',
