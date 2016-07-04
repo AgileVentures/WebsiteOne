@@ -133,10 +133,13 @@ describe EventInstancesController do
     end
 
     it 'update EventInstance with permited params' do
+      allow(Time).to receive(:now).and_return DateTime.parse('2016-06-23 13:57:37.073318243')
+
       upd_params = {
         "title"=>"title", "project_id"=>"project_id", "event_id"=>"event_id",
         "category"=>"category", "user_id"=>"host", "participants"=>"one, two",
-        "hangout_url"=>"test_url", "yt_video_id"=>"video", "hoa_status"=>"started"
+        "hangout_url"=>"test_url", "yt_video_id"=>"video", "hoa_status"=>"started",
+        "updated_at"=>Time.now
       }
       expect_any_instance_of(EventInstance).to receive(:update).with(upd_params)
       get :update, params.merge(upd_params)

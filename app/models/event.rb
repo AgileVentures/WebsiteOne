@@ -3,6 +3,8 @@ class Event < ActiveRecord::Base
   belongs_to :project
   serialize :exclusions
 
+  belongs_to :creator, class_name: 'User'
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -194,12 +196,30 @@ class Event < ActiveRecord::Base
   end
 
   def less_than_ten_till_start?
+    return true if within_current_event_duration?
     Time.now > next_event_occurrence_with_time[:time] - 10.minutes
   rescue
     false
   end
 
   private
+
+  def within_current_event_duration?
+    after_current_start_time? and before_current_end_time?
+  end
+
+  def before_current_end_time?
+    Time.now < (schedule.previous_occurrence(Time.now) + duration*60)
+  rescue
+    false
+  end
+
+  def after_current_start_time?
+    Time.now > schedule.previous_occurrence(Time.now)
+  rescue
+    false
+  end
+
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
       errors.add(:base, 'You must have at least one repeats weekly each days of the week')
