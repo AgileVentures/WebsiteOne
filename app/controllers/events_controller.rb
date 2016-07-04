@@ -50,7 +50,8 @@ class EventsController < ApplicationController
       redirect_to event_path(@event)
     else
       flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
-      redirect_to edit_event_path(@event)
+      @projects = Project.all
+      render 'edit'
     end
   end
 
