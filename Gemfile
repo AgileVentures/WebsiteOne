@@ -5,6 +5,7 @@ gem 'rails', '4.2.6'
 gem 'polyamorous', '~> 1.2.0'
 # End additions
 
+gem 'code_climate_badges', git: 'https://github.com/AgileVentures/codeclimate_badges'
 gem 'puma' # Puma web server
 gem 'pg'  # PostgreSQL database support
 gem 'sass-rails' # Sass stylesheet language
