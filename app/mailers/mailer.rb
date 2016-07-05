@@ -1,6 +1,14 @@
 class Mailer < ActionMailer::Base
   default from: 'info@agileventures.org', reply_to: 'info@agileventures.org', cc: 'support@agileventures.org'
 
+  def send_premium_payment_complete(email)
+    mail(to: email, subject: 'Welcome to AgileVentures Premium')
+  end
+
+  def send_premium_plus_payment_complete(email)
+    mail(to: email, subject: 'Welcome to AgileVentures Premium PLUS')
+  end
+
   def send_welcome_message(user)
     @user = user
     mail(to: user.email, subject: 'Welcome to AgileVentures.org')
