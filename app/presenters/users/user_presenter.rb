@@ -53,8 +53,8 @@ class UserPresenter < BasePresenter
       gravatar_url = user.gravatar_url(options)
     end
 
-    image_tag(gravatar_url, width: options[:size], id: options[:id],
-              height: options[:size], alt: display_name, class: options[:class], style: options[:style])
+      image_tag(gravatar_url, width: options[:size], id: options[:id],
+                height: options[:size], alt: display_name, class: options[:class], style: options[:style])
   end
 
   def email_link(text=nil)
