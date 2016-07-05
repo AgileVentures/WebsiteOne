@@ -120,3 +120,8 @@ Then(/^I should see projects with following details:$/) do |table|
    
 end
 
+Then(/^I should see a GPA of "([^"]*)" for "([^"]*)"$/) do |gpa, project_name|
+  within('ul#project-list') do
+    expect(page).to have_css("li[title=\"#{gpa} CodeClimate GPA\"]")
+  end
+end
