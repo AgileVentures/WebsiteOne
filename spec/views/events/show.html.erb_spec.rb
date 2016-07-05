@@ -59,12 +59,11 @@ describe 'events/show', type: :view do
     context 'for signed in users' do
       before do
         allow(view).to receive(:user_signed_in?).and_return(true)
-        allow(view).to receive(:topic).and_return('Topic')
         allow(Time).to receive(:now).and_return(Time.parse('2014-03-09 23:30:00 UTC'))
       end
 
       it_behaves_like 'it has a hangout button' do
-        let(:title) { 'Topic' }
+        let(:title) { 'EuroAsia Scrum' }
         let(:project_id) { @event.project_id }
         let(:event_id) { @event.id }
         let(:category) { @event.category }
