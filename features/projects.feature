@@ -222,13 +222,6 @@ Feature: Create and maintain projects
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
-  Scenario: Reject PivotalTracker url update if invalid
-    Given I am logged in
-    And I am on the "Edit" page for project "hello mars"
-    And I fill in "PivotalTracker link" with "https://www.youtube.com/"
-    And I click the "Submit" button
-    Then I should see "Project was not updated."
-
   Scenario: Project show page renders a list of members
     Given The project "hello world" has 10 members
     And I am on the "Show" page for project "hello world"
