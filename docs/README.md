@@ -12,13 +12,14 @@
     * [[Rails Asset Pipeline]]
     * [[Create tags for project]]
     * [[Adding title to page view]]
-* Current staging servers
+* [[Current staging servers]]
+
 
 ### Getting involved
-* Development environment set up
+* [[Development environment set up]]
 
 ### Issues
 * [Signup Issues (GitHub)](solutions_for_signup_issues.md)
 
 ### Literature and reference
-* Thoughts on integrating Pair Programming with BDD and TDD
+* [[Thoughts on integrating Pair Programming with BDD and TDD]]
