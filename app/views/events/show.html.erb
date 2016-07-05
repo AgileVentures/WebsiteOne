@@ -38,7 +38,7 @@
                                                                         event_id: @event.id,
                                                                         category: @event.category,
                                                                         project_id: @event.project_id,
-                                                                        title: topic(@event, @event_schedule)
+                                                                        title: @event.name
                                                                 } %>
           <% end %>
         </div>
@@ -61,6 +61,21 @@
                 <p class="help-block">Occurs weekly at the specified times</p>
             <% end %>
           </div>
+      </div>
+  <% end %>
+  <% if @event.creator %>
+      <div class="col-xs-12 col-sm-4">
+      </div>
+      <div class="col-xs-12 col-sm-2">
+        <div class="row text-center">
+          <%= link_to @event.creator.presenter.gravatar_image(size: 80, id: 'user-gravatar', class: 'img-circle'), user_path(@event.creator) %>
+        </div>
+        <div class="row text-center">
+          created by:
+        </div>
+        <div class="row text-center">
+          <%= link_to @event.creator.display_name, user_path(@event.creator) %>
+        </div>
       </div>
   <% end %>
 
