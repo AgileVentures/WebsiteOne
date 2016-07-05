@@ -21,12 +21,14 @@ Feature: Charge Users Money
     Given I visit "/charges/new"
     And I should not see "Sign Me Up For Premium Plus!"
     And I click "Sign Me Up For Premium!"
-    And I fill in appropriate card details for premium
-    And I should see "Thanks, you're now an AgileVentures Premium Member!"
+    When I fill in appropriate card details for premium
+    Then I should see "Thanks, you're now an AgileVentures Premium Member!"
+    And The user should receive a "Welcome to AgileVentures Premium" email
 
   Scenario: Sign up for premium membership
     Given I visit "/charges/new?plan=premiumplus"
     And I should not see "Sign Me Up For Premium!"
     And I click "Sign Me Up For Premium Plus!"
-    And I fill in appropriate card details for premium plus
-    And I should see "Thanks, you're now an AgileVentures Premium PLUS Member!"
+    When I fill in appropriate card details for premium plus
+    Then I should see "Thanks, you're now an AgileVentures Premium PLUS Member!"
+    And The user should receive a "Welcome to AgileVentures Premium PLUS" email
