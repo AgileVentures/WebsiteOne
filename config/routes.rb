@@ -50,6 +50,7 @@ WebsiteOne::Application.routes.draw do
 
 
   get '/mentors' => 'users#index', defaults: {title: 'Mentor'}
+  get '/premium_members' => 'users#index', defaults: {title: 'Premium'}
 
   get '/verify/:id' => redirect { |params, request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}" }
 
