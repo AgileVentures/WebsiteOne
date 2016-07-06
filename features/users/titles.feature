@@ -15,9 +15,13 @@ Feature: list users by title
     Given I am on the mentors page
     Then I should see "Alice Jones"
     And I should not see "Bob Butcher"
+    And I should see "Mentors Directory"
+    And I should see "Check out our 1 awesome mentor from all over the globe"
 
   Scenario: see premium and premium plus members
     Given I am on the premiums page
     Then I should see "Bob Butcher"
     And I should see "John Jenkins"
     And I should not see "Alice Jones"
+    And I should see "Premium Members Directory"
+    And I should see "Check out our 2 awesome premium members from all over the globe"

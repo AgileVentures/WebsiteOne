@@ -12,8 +12,10 @@ class UsersController < ApplicationController
                  .filter(set_filter_params)
                  .allow_to_display
                  .by_create
-    @users_count = User.allow_to_display.count
+    @users_count = @users.count
     @projects = Project.all
+    @user_type = params[:title].blank? ? 'Volunteer' : params[:title]
+    @user_type = 'Premium Member' if params[:title] == 'Premium'
 
     respond_to do |format|
       format.js
