@@ -9,7 +9,7 @@ WebsiteOne::Application.routes.draw do
   resources :charges
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
-  resources :users, :only => [:index, :show] , :format => false do
+  resources :users, :only => [:index, :show], :format => false do
     member do
       patch :add_status
     end
@@ -49,18 +49,20 @@ WebsiteOne::Application.routes.draw do
   end
 
 
-  get '/verify/:id' => redirect {|params,request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}"}
+  get '/mentors' => 'users#index', defaults: {title: 'Mentor'}
 
-  post 'preview/article', to: 'articles#preview',:format => false
+  get '/verify/:id' => redirect { |params, request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}" }
+
+  post 'preview/article', to: 'articles#preview', :format => false
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
 
-  get 'projects/:project_id/:id', to: 'documents#show',:format => false
+  get 'projects/:project_id/:id', to: 'documents#show', :format => false
 
   get '/auth/:provider/callback' => 'authentications#create', :format => false
   get '/auth/failure' => 'authentications#failure', :format => false
   get '/auth/destroy/:id', to: 'authentications#destroy', via: :delete, :format => false
 
-  post 'mail_hire_me_form', to: 'users#hire_me_contact_form' , :format => false
+  post 'mail_hire_me_form', to: 'users#hire_me_contact_form', :format => false
   get 'scrums', to: 'scrums#index', as: 'scrums', :format => false
 
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false

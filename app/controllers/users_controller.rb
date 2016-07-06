@@ -7,7 +7,11 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    @users = User.includes(:status, :titles).filter(set_filter_params).allow_to_display.by_create
+    @users = User.filter_if_title(params[:title])
+                 .includes(:status, :titles)
+                 .filter(set_filter_params)
+                 .allow_to_display
+                 .by_create
     @users_count = User.allow_to_display.count
     @projects = Project.all
 
@@ -48,7 +52,7 @@ class UsersController < ApplicationController
   def show
     if should_display_user?(@user)
       @event_instances = EventInstance.where(user_id: @user.id)
-        .order(created_at: :desc).limit(5)
+                             .order(created_at: :desc).limit(5)
     else
       raise ActiveRecord::RecordNotFound.new('User has not exposed his profile publicly')
     end
@@ -86,12 +90,12 @@ class UsersController < ApplicationController
     unless filter_params[:timezone_filter].blank?
       if offset = @current_user.try(:timezone_offset)
         case filter_params[:timezone_filter]
-        when 'In My Timezone'
-          filter_params[:timezone_filter] = [offset, offset]
-        when 'Wider Timezone Area'
-          filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
-        else
-          filter_params.delete(:timezone_filter)
+          when 'In My Timezone'
+            filter_params[:timezone_filter] = [offset, offset]
+          when 'Wider Timezone Area'
+            filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
+          else
+            filter_params.delete(:timezone_filter)
         end
       else
         redirect_to :back, alert: "Can't determine your location!"
