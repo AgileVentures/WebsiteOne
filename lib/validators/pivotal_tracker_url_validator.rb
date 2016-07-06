@@ -25,6 +25,8 @@ class PivotalTrackerUrlValidator < ActiveModel::Validator
   def is_pivotal_tracker_url?(record)
     url = record.pivotaltracker_url
     match = url.match(/pivotaltracker/)
-    not match.nil?
+    pv_id = url =~ /^\d+$/
+
+    not match.nil? or pv_id
   end
 end
