@@ -94,7 +94,7 @@ Feature: Create and maintain projects
       | Description         |
       | Status              |
       | GitHub link         |
-      | PivotalTracker link |
+      | Issue Tracker link |
 
   Scenario Outline: Saving a new project: success
     Given I am logged in
@@ -103,7 +103,7 @@ Feature: Create and maintain projects
     When I fill in "Title" with "<title>"
     And I fill in "Description" with "<description>"
     And I fill in "GitHub link" with "<gh_link>"
-    And I fill in "PivotalTracker link" with "<pt_link>"
+    And I fill in "Issue Tracker link" with "<pt_link>"
     And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "<title>"
@@ -158,7 +158,7 @@ Feature: Create and maintain projects
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
-    And I fill in "PivotalTracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a flash "Project was successfully updated."
@@ -210,7 +210,7 @@ Feature: Create and maintain projects
   Scenario: Update Pivotal Tracker url if valid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
-    And I fill in "PivotalTracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on Pivotal Tracker
