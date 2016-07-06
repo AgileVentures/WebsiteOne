@@ -1,11 +1,11 @@
 <% provide :title, 'Members' %>
 <div class="row">
   <div class="col-xs-12 col-sm-12 float-xs-none">
-    <h1><%= @user_type.pluralize %> Directory</h1>
+    <h1><%= @user_type.try(:pluralize) %> Directory</h1>
     <% if @users_count == 0 %>
         <p>It is a lonely planet we live in&#8230;</p>
     <% else %>
-        <p>Check out our <%= @users_count %> awesome <%= @user_type.pluralize(@users_count).downcase %> from all over the globe!</p>
+        <p>Check out our <%= @users_count %> awesome <%= @user_type.try(:pluralize, @users_count).try(:downcase) %> from all over the globe!</p>
     <% end %>
   </div>
   <div class="col-sm-12 well">
