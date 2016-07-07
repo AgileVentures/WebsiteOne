@@ -26,6 +26,10 @@ class Project < ActiveRecord::Base
       .paginate(per_page: 5, page: page)
   end
 
+  def gpa
+    CodeClimateBadges.new("github/#{github_repo}").gpa
+  end
+
   def youtube_tags
     tag_list
       .clone
@@ -46,7 +50,7 @@ class Project < ActiveRecord::Base
   end
 
   def github_repo
-    /github.com\/(.+)/.match(github_url)[1] if github_url
+    /github.com\/(.+)/.match(github_url)[1] unless github_url.blank?
   end
 
   def github_repo_name
