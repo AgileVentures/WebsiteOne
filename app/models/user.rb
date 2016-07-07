@@ -60,13 +60,16 @@ class User < ActiveRecord::Base
 
   self.per_page = 30
 
+  def self.filter_if_title title
+    return User.all if title.blank?
+    User.tagged_with(title)
+  end
+
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid']) unless email.blank?
     @omniauth_provider = omniauth['provider']
   end
-
-
 
   def password_required?
     (authentications.empty? || !password.blank?) && super

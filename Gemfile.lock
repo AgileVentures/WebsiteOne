@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/AgileVentures/codeclimate_badges
+  revision: 62c57cba814a4ce58a4c74413fb14df3296922a2
+  specs:
+    code_climate_badges (0.0.0)
+      httparty
+
+GIT
   remote: https://github.com/jejacks0n/mercury.git
   revision: 1cc637b0bccea19085f824d2881c6513ed5ee8ae
   specs:
@@ -259,6 +266,9 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     ice_cube (0.11.1)
     jasmine (2.4.0)
@@ -584,6 +594,7 @@ DEPENDENCIES
   capybara
   capybara-screenshot
   capybara-webkit
+  code_climate_badges!
   coderay
   coffee-rails
   colored

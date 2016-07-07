@@ -299,11 +299,7 @@ describe User, type: :model do
 
   describe 'incomplete profile' do
 
-    let(:user) { @user }
-
-    before(:each) do
-      @user = FactoryGirl.create(:user, updated_at: '2014-09-30 05:00:00 UTC')
-    end
+    let(:user) { FactoryGirl.create(:user, updated_at: '2014-09-30 05:00:00 UTC') }
 
     it 'returns true if bio empty' do
       user.bio = ''
@@ -332,6 +328,27 @@ describe User, type: :model do
 
     it 'returns true with nil values' do
       expect(User.new.incomplete?).to be_truthy
+    end
+  end
+
+  describe '.filter_if_title' do
+    let!(:mentor) { FactoryGirl.create(:user, title_list: 'Mentor') }
+    let!(:user) { FactoryGirl.create(:user, title_list: 'Premium') }
+
+    it 'returns mentors' do
+      expect(User.filter_if_title('Mentor')).to include mentor
+    end
+
+    it 'does not return non-mentors' do
+      expect(User.filter_if_title('Mentor')).not_to include user
+    end
+
+    it 'returns all users if title is empty string' do
+      expect(User.filter_if_title('')).to include mentor, user
+    end
+
+    it 'returns all users if title is nil' do
+      expect(User.filter_if_title(nil)).to include mentor, user
     end
   end
 end
