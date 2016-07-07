@@ -59,6 +59,7 @@ describe 'users/index.html.erb', :type => :view do
 
   context 'renders the users count in the sentence above' do
     it 'has valid users count' do
+      @user_type = 'Volunteer'
       render
       expect(rendered).to have_content("Check out our #{@users_count} awesome volunteers from all over the globe!")
     end
