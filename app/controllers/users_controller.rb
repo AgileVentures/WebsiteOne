@@ -11,7 +11,7 @@ class UsersController < ApplicationController
                  .includes(:status, :titles)
                  .filter(set_filter_params)
                  .allow_to_display
-                 .by_create
+                 .order(karma_points: :desc)
     @users_count = @users.count
     @projects = Project.all
     @user_type = params[:title].blank? ? 'Volunteer' : params[:title]

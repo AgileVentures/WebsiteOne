@@ -11,6 +11,7 @@ class KarmaCalculator
     return if user.created_at.blank? || user_age_in_months < 1
 
     user.karma_points = membership_length + profile_completeness + activity
+    # better to have time in pairing sessions, code contributed (related to quality), issues, ...
   end
 
   private
