@@ -125,4 +125,14 @@ describe Project, type: :model do
       expect(subject.contribution_url).to eq "https://github.com/test/test/graphs/contributors"
     end
   end
+
+  describe '#codeclimate_gpa' do
+
+    subject(:project) { build_stubbed(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne') }
+
+    it 'returns the CodeClimate GPA' do
+      expect(CodeClimateBadges).to receive_message_chain(:new, :gpa).and_return('3.4')
+      expect(project.gpa).to eq '3.4'
+    end
+  end
 end
