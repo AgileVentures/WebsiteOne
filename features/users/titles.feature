@@ -11,6 +11,7 @@ Feature: list users by title
       | Alice      | Jones     | alicejones@hotmail.com | Mentor          |
       | Bob        | Butcher   | bobb112@hotmail.com    | Premium         |
       | John       | Jenkins   | john@hotmail.com       | Premium, Plus   |
+
   Scenario: see mentors
     Given I am on the mentors page
     Then I should see "Alice Jones"
