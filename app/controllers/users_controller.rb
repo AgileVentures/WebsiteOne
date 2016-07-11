@@ -7,8 +7,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    @users = User.filter_if_title(params[:title])
-                 .includes(:status, :titles)
+    @users = User.includes(:status, :titles)
                  .filter(set_filter_params)
                  .allow_to_display
                  .by_create
@@ -83,7 +82,7 @@ class UsersController < ApplicationController
   end
 
   def set_filter_params
-    filter_params = params.slice(:project_filter, :timezone_filter, :online)
+    filter_params = params.slice(:project_filter, :timezone_filter, :online, :title)
     set_timezone_offset_range(filter_params)
     filter_params
   end
