@@ -40,5 +40,9 @@
   </table>
 </div>
 <% else %>
+<%   if @is_non_pt_issue_tracker %>
+<p>Stories are not supported for issue tracker type used by project <strong><%= @project.title %></strong></p>
+<%     else %>
 <p>No PivotalTracker Stories can be found for project <strong><%= @project.title %></strong></p>
+<%   end %>
 <% end %>

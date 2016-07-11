@@ -20,11 +20,4 @@ describe PivotalTrackerUrlValidator do
     end
   end
 
-  ['http://github.com/AgileVentures/WebsiteOne', '<>hi'].each do |invalid_url|
-    it "#{invalid_url.inspect} is an invalid url" do
-      subject.pivotaltracker_url = invalid_url
-      subject.valid?
-      expect(subject.errors).to have_key(:pivotaltracker_url)
-    end
-  end
 end
