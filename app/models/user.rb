@@ -57,6 +57,7 @@ class User < ActiveRecord::Base
   scope :allow_to_display, -> { where(display_profile: true) }
   scope :by_create, -> { order(:created_at) }
   scope :online, -> (argument) { where("users.updated_at > ?", 10.minutes.ago) }
+  scope :title, -> (title) { tagged_with(title) }
 
   self.per_page = 30
 
