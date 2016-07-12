@@ -9,7 +9,7 @@ Feature: Display Projects
       | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count |
       | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         |
       | hello mars    | greetings aliens        |             | inactive |                                             |                                                  | 2000         |
-      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  | 2000         |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         |
       | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  | 1900         |
       | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  | 1900         |
       | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |              |

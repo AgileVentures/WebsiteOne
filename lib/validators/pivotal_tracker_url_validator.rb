@@ -1,6 +1,6 @@
 class PivotalTrackerUrlValidator < ActiveModel::Validator
   def validate(record)
-    validate_pivotal_tracker_url(record) if record.pivotaltracker_url.present?
+    validate_pivotal_tracker_url(record) if record.pivotaltracker_url.present? and is_pivotal_tracker_url?(record)
   end
 
   private
@@ -20,5 +20,13 @@ class PivotalTrackerUrlValidator < ActiveModel::Validator
     else
       record.errors[:pivotaltracker_url] << 'Invalid Pivotal Tracker URL'
     end
+  end
+  
+  def is_pivotal_tracker_url?(record)
+    url = record.pivotaltracker_url
+    match = url.match(/pivotaltracker/)
+    pv_id = url =~ /^\d+$/
+
+    not match.nil? or pv_id
   end
 end
