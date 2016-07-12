@@ -14,7 +14,7 @@ describe 'projects/edit.html.erb', type: :view do
     expect(rendered).to have_text('Title')
     expect(rendered).to have_text('Description')
     expect(rendered).to have_text('GitHub link')
-    expect(rendered).to have_text('PivotalTracker link')
+    expect(rendered).to have_text('Issue Tracker link')
     expect(rendered).to have_text('Status')
   end
 
@@ -24,7 +24,7 @@ describe 'projects/edit.html.erb', type: :view do
     expect(rendered).to have_field('Title')
     expect(rendered).to have_field('Description')
     expect(rendered).to have_field('GitHub link')
-    expect(rendered).to have_field('PivotalTracker link')
+    expect(rendered).to have_field('Issue Tracker link')
     expect(rendered).to have_field('Status')
   end
 
