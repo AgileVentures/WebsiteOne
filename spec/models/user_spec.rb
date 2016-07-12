@@ -331,24 +331,4 @@ describe User, type: :model do
     end
   end
 
-  describe '.filter_if_title' do
-    let!(:mentor) { FactoryGirl.create(:user, title_list: 'Mentor') }
-    let!(:user) { FactoryGirl.create(:user, title_list: 'Premium') }
-
-    it 'returns mentors' do
-      expect(User.filter_if_title('Mentor')).to include mentor
-    end
-
-    it 'does not return non-mentors' do
-      expect(User.filter_if_title('Mentor')).not_to include user
-    end
-
-    it 'returns all users if title is empty string' do
-      expect(User.filter_if_title('')).to include mentor, user
-    end
-
-    it 'returns all users if title is nil' do
-      expect(User.filter_if_title(nil)).to include mentor, user
-    end
-  end
 end

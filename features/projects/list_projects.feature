@@ -9,7 +9,7 @@ Feature: Browse and create projects
       | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count |
       | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         |
       | hello mars    | greetings aliens        |             | inactive |                                             |                                                  | 2000         |
-      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  | 2000         |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         |
       | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  | 1900         |
       | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  | 1900         |
       | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |              |
@@ -97,7 +97,7 @@ Feature: Browse and create projects
       | Description         |
       | Status              |
       | GitHub link         |
-      | PivotalTracker link |
+      | Issue Tracker link |
 
   Scenario Outline: Saving a new project: success
     Given I am logged in
@@ -106,7 +106,7 @@ Feature: Browse and create projects
     When I fill in "Title" with "<title>"
     And I fill in "Description" with "<description>"
     And I fill in "GitHub link" with "<gh_link>"
-    And I fill in "PivotalTracker link" with "<pt_link>"
+    And I fill in "Issue Tracker link" with "<pt_link>"
     And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "<title>"
