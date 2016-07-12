@@ -3,7 +3,7 @@
         <% present user do |presenter| %>
             <li class="media-item col-md-4 col-sm-6 col-xs-12">
               <a class="user-preview" href="<%= user_path(user) %>">
-                <%= presenter.gravatar_image(size: 80,
+                <%= presenter.gravatar_image(size: 100,
                                              class: 'img-rounded media-object pull-left') %>
                 <div class="media-body index-summary">
                   <p class="media-heading" data-toggle="tooltip" title="<%= presenter.display_name %>"><%= presenter.display_name %>
