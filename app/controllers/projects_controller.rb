@@ -100,6 +100,7 @@ class ProjectsController < ApplicationController
 
   def get_current_stories
     PivotalService.set_token('1e90ef53f12fc327d3b5d8ee007cce39')
+    @is_non_pt_issue_tracker = false
     if @project.pivotaltracker_url.present?
       pivotaltracker_id = @project.pivotaltracker_url.split('/')[-1]
       begin
@@ -109,6 +110,7 @@ class ProjectsController < ApplicationController
       rescue Exception => error
         # TODO deal with simple not found errors, should not send for all exceptions
         ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'an error occurred in Pivotal Tracker' })
+        @is_non_pt_issue_tracker = true
       end
     end
     @stories ||= []
