@@ -9,7 +9,7 @@ Feature: Edit Project
       | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count |
       | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         |
       | hello mars    | greetings aliens        |             | inactive |                                             |                                                  | 2000         |
-      | hello jupiter | greetings jupiter folks |             | active   |                                             |                                                  | 2000         |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         |
       | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  | 1900         |
       | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  | 1900         |
       | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |              |
@@ -31,7 +31,7 @@ Feature: Edit Project
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
-    And I fill in "PivotalTracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a flash "Project was successfully updated."
@@ -80,10 +80,10 @@ Feature: Edit Project
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on github
 
-  Scenario: Update Pivotal Tracker url if valid
+  Scenario: Update Issue Tracker url if valid pivotal tracker link
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
-    And I fill in "PivotalTracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on Pivotal Tracker
@@ -92,12 +92,5 @@ Feature: Edit Project
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "GitHub link" with "https:/github.com/google/instant-hangouts"
-    And I click the "Submit" button
-    Then I should see "Project was not updated."
-
-  Scenario: Reject PivotalTracker url update if invalid
-    Given I am logged in
-    And I am on the "Edit" page for project "hello mars"
-    And I fill in "PivotalTracker link" with "https://www.youtube.com/"
     And I click the "Submit" button
     Then I should see "Project was not updated."
