@@ -145,6 +145,11 @@
     float:none;
   }
 }
+@media (min-width: $screen-sm){
+  select#project_filter{
+    width: 100%;
+  }
+}
 /* Responsive versions */
 
 /* End of CSS for USER PROFILE page */
