@@ -137,6 +137,14 @@ class User < ActiveRecord::Base
     bio.blank? || skills.blank? || first_name.blank? || last_name.blank?
   end
 
+  def commit_count_total
+    commit_counts.inject(0) { |memo, c| memo += c.commit_count }
+  end
+
+  def number_hangouts_started_with_more_than_one_participant
+    event_instances.select { |h| h.participants != nil && h.participants.count > 1 }.count
+  end
+
   private
 
   def send_slack_invite

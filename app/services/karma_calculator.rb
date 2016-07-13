@@ -10,7 +10,7 @@ class KarmaCalculator
     user.karma_points = 0
     return if user.created_at.blank? || user_age_in_months < 1
 
-    user.karma_points = membership_length + profile_completeness + activity + number_pairing_sessions + number_github_contributions
+    user.karma_points = membership_length + profile_completeness + activity + number_hangouts_started_with_more_than_one_participant + number_github_contributions
     # better to have time in pairing sessions, code contributed (related to quality), issues, ...
   end
 
@@ -33,11 +33,11 @@ class KarmaCalculator
   end
 
   def number_github_contributions
-    user.commit_counts.inject(0){|memo,c| memo += c.commit_count}
+    user.commit_count_total
   end
 
-  def number_pairing_sessions
-    user.event_instances.select { |h| h.participants != nil && h.participants.count > 1 }.count
+  def number_hangouts_started_with_more_than_one_participant
+    user.number_hangouts_started_with_more_than_one_participant
   end
 
   def activity # 6

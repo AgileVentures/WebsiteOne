@@ -1,7 +1,7 @@
 @vcr
 Feature: Activities View
   As a site user
-  In order to find a users activities
+  In order to know how someone has contributed to the community
   I would like to see a users activities feed
 
   Background:
@@ -20,7 +20,7 @@ Feature: Activities View
   @javascript
   Scenario: See how commits contribute to Karma
     Given I am on "profile" page for user "Alice"
-    And I should see a "About" tab set to active
-    And when I click "Activity"
+    When I click "Activity"
     Then I should see "WebsiteTwo - 500 commits"
-    And I should see "Contributions - 500 total commits x 1 - 500 karma"
+    And I should see "Contributions (GitHub) - 500 total commits x 1 - 500"
+    And I should see "Contributions (Hangouts Hosted) - 0 total hangouts x 1 - 0"
