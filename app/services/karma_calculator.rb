@@ -21,13 +21,7 @@ class KarmaCalculator
   end
 
   def profile_completeness # 10
-    awarded = 0
-    awarded += 2 if user.skill_list.present?
-    awarded += 2 if user.github_profile_url.present?
-    awarded += 2 if user.youtube_user_name.present?
-    awarded += 2 if user.bio.present?
-    awarded += 1 if user.first_name.present?
-    awarded += 1 if user.last_name.present?
+    awarded = user.profile_completeness
     awarded += user.authentications.count * 100
     return awarded
   end

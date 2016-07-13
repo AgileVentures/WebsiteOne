@@ -18,9 +18,11 @@ Feature: Activities View
     And I am logged in as user with name "Thomas", email "brett@example.com", with password "12345678"
 
   @javascript
-  Scenario: See how commits contribute to Karma
+  Scenario: See how commits,hangouts hosted contribute to Karma
     Given I am on "profile" page for user "Alice"
     When I click "Activity"
     Then I should see "WebsiteTwo - 500 commits"
     And I should see "Contributions (GitHub) - 500 total commits x 1 - 500"
     And I should see "Contributions (Hangouts Hosted) - 0 total hangouts x 1 - 0"
+    And I should see "Contributions (Authentications) - 1 authentications x 100 - 100"
+    And I should see "Contributions (Profile Completeness) - 6 out of 10"

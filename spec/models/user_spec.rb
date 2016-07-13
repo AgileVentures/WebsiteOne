@@ -371,4 +371,11 @@ describe User, type: :model do
 
   end
 
+  describe '#profile_completeness' do
+    subject(:user){FactoryGirl.create(:user)}
+    it 'calculates profile completeness' do
+      expect(user.profile_completeness).to eq 6
+    end
+  end
+
 end

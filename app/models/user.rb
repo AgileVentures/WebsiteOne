@@ -113,6 +113,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def profile_completeness
+    awarded = 0
+    awarded += 2 if skill_list.present?
+    awarded += 2 if github_profile_url.present?
+    awarded += 2 if youtube_user_name.present?
+    awarded += 2 if bio.present?
+    awarded += 1 if first_name.present?
+    awarded += 1 if last_name.present?
+    return awarded
+  end
   def is_privileged?
     Settings.privileged_users.split(',').include?(email)
   end
