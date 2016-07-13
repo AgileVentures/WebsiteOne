@@ -51,7 +51,7 @@
   <% if presenter.contributed? %>
       <div class="tab-pane" id="activity">
         <section class="user-contributions">
-          <h4>Contributions</h4>
+          <h4>Contributions - <%= presenter.user.commit_counts.reduce(0){|memo,obj| memo+= obj.commit_count}%> total commits x 1 - <%=presenter.user.commit_counts.reduce(0){|memo,obj| memo+= obj.commit_count}%> karma </h4>
           <ul>
             <% presenter.contributions.each do |commit_count| %>
                 <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b>
