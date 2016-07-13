@@ -26,3 +26,5 @@ Feature: Activities View
     And I should see "Contributions (Hangouts Hosted) - 0 total hangouts x 1 - 0"
     And I should see "Contributions (Authentications) - 1 authentications x 100 - 100"
     And I should see "Contributions (Profile Completeness) - 6 out of 10"
+    And I should see "Contributions (Membership Length) - 0 out of 6"
+    And I should see "Contributions (Sign In Activity) - 0 out of 6"

@@ -331,51 +331,69 @@ describe User, type: :model do
     end
   end
 
-  describe '#commit_count_total' do
+  context 'karma' do
 
-    subject(:user) { FactoryGirl.create(:user) }
+    describe '#commit_count_total' do
 
-    let!(:commit_count) { FactoryGirl.create(:commit_count, user: user, commit_count: 369) }
+      subject(:user) { FactoryGirl.create(:user) }
 
-    context 'single commit count' do
-      it 'returns totals commits over all projects' do
-        expect(user.commit_count_total).to eq 369
+      let!(:commit_count) { FactoryGirl.create(:commit_count, user: user, commit_count: 369) }
+
+      context 'single commit count' do
+        it 'returns totals commits over all projects' do
+          expect(user.commit_count_total).to eq 369
+        end
+      end
+
+      context 'multiple commit count' do
+        let!(:commit_count_2) { FactoryGirl.create(:commit_count, user: user, commit_count: 123) }
+        it 'returns totals commits over all projects' do
+          expect(user.commit_count_total).to eq 492
+        end
       end
     end
 
-    context 'multiple commit count' do
-      let!(:commit_count_2) { FactoryGirl.create(:commit_count, user: user, commit_count: 123) }
-      it 'returns totals commits over all projects' do
-        expect(user.commit_count_total).to eq 492
+    describe '#number_hangouts_started_with_more_than_one_participant' do
+
+      subject(:user) { FactoryGirl.create(:user) }
+
+      let!(:event_instance) { FactoryGirl.create(:event_instance, user: user) }
+      context 'single event instance' do
+        it 'returns total number of hangouts started with more than one participant' do
+          expect(user.number_hangouts_started_with_more_than_one_participant).to eq 1
+        end
+      end
+
+      context 'two event instances' do
+        let!(:event_instance2) { FactoryGirl.create(:event_instance, user: user) }
+        it 'returns total number of hangouts started with more than one participant' do
+          expect(user.number_hangouts_started_with_more_than_one_participant).to eq 2
+        end
+      end
+
+    end
+
+    describe '#profile_completeness' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'calculates profile completeness' do
+        expect(user.profile_completeness).to eq 6
       end
     end
-  end
 
-  describe '#number_hangouts_started_with_more_than_one_participant' do
-
-    subject(:user) { FactoryGirl.create(:user) }
-
-    let!(:event_instance) { FactoryGirl.create(:event_instance, user: user) }
-    context 'single event instance' do
-      it 'returns total number of hangouts started with more than one participant' do
-        expect(user.number_hangouts_started_with_more_than_one_participant).to eq 1
+    describe '#activity' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'calculates sign in activity' do
+        expect(user.activity).to eq 0
       end
     end
 
-    context 'two event instances' do
-      let!(:event_instance2) { FactoryGirl.create(:event_instance, user: user) }
-      it 'returns total number of hangouts started with more than one participant' do
-        expect(user.number_hangouts_started_with_more_than_one_participant).to eq 2
+    describe '#membership_length' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'calculates membership length' do
+        expect(user.membership_length).to eq 0
       end
     end
 
-  end
-
-  describe '#profile_completeness' do
-    subject(:user){FactoryGirl.create(:user)}
-    it 'calculates profile completeness' do
-      expect(user.profile_completeness).to eq 6
-    end
   end
 
 end

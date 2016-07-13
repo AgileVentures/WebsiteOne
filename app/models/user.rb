@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   before_save :generate_timezone_offset
 
-  after_validation :geocode, if: ->(obj){ obj.last_sign_in_ip_changed? }
+  after_validation :geocode, if: ->(obj) { obj.last_sign_in_ip_changed? }
   after_validation -> { KarmaCalculator.new(self).perform }
   after_create :send_slack_invite, if: -> { Features.slack.invites.enabled }
 
@@ -42,14 +42,14 @@ class User < ActiveRecord::Base
   scope :mail_receiver, -> { where(receive_mailings: true) }
   scope :project_filter, -> (project_id) {
     joins(:follows)
-    .where(
-      follows: {
-        blocked: false,
-        followable_id: project_id,
-        followable_type: 'Project',
-        follower_type: 'User'
-      }
-    )
+        .where(
+            follows: {
+                blocked: false,
+                followable_id: project_id,
+                followable_type: 'Project',
+                follower_type: 'User'
+            }
+        )
   }
   scope :timezone_filter, -> (offset) {
     where("users.timezone_offset BETWEEN ? AND ?", offset[0], offset[1])
@@ -82,8 +82,8 @@ class User < ActiveRecord::Base
 
   def followed_project_tags
     following_projects
-      .flat_map(&:youtube_tags)
-      .push('scrum')
+        .flat_map(&:youtube_tags)
+        .push('scrum')
   end
 
   def display_name
@@ -123,6 +123,7 @@ class User < ActiveRecord::Base
     awarded += 1 if last_name.present?
     return awarded
   end
+
   def is_privileged?
     Settings.privileged_users.split(',').include?(email)
   end
@@ -138,7 +139,7 @@ class User < ActiveRecord::Base
 
   def self.map_data
     users = User.group(:country_code).count
-    clean = proc{ |k,v| !k.nil? ? Hash === v ? v.delete_if(&clean) : false : true }
+    clean = proc { |k, v| !k.nil? ? Hash === v ? v.delete_if(&clean) : false : true }
     users.delete_if(&clean)
     users.to_json
   end
@@ -155,7 +156,19 @@ class User < ActiveRecord::Base
     event_instances.select { |h| h.participants != nil && h.participants.count > 1 }.count
   end
 
+  def activity
+    2 * [[(sign_in_count - 2), 0].max, 3].min
+  end
+
+  def membership_length
+    1 * [user_age_in_months.to_i, 6].min
+  end
+
   private
+
+  def user_age_in_months
+    (DateTime.current - created_at.to_datetime).to_i / 30
+  end
 
   def send_slack_invite
     SlackInviteJob.perform_async(email)
@@ -173,7 +186,7 @@ class User < ActiveRecord::Base
     if email.blank? and not @omniauth_provider.nil?
       errors.delete(:password)
       errors.delete(:email)
-      errors.add(:base,  I18n.t('error_messages.public_email', provider: @omniauth_provider.capitalize))
+      errors.add(:base, I18n.t('error_messages.public_email', provider: @omniauth_provider.capitalize))
     end
   end
 end
