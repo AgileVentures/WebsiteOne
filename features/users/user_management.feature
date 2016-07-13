@@ -59,3 +59,13 @@ Feature: Create and maintain projects
     When I delete my profile
     And I am on the "Show" page for project "hello world"
     Then I should see "by Anonymous"
+
+  @omniauth
+  Scenario: Unlink my github link from my profile
+    Given I have a GitHub profile with username "tochman"
+    And I have authentication enabled with my github username
+    And I am on my "Edit Profile" page
+    When I click "Remove Github"
+    And my profile should be remove my GH username
+    When I am on "profile" page for user "me"
+    Then I should not see a link "tochman" to "https://github.com/tochman"
