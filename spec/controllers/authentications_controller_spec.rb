@@ -33,13 +33,17 @@ describe AuthenticationsController do
     end
 
     it 'should require authentication' do
+      User.stub(find: @user)
       expect(controller).to receive(:authenticate_user!)
+      expect(@user).to receive(:update_attributes)
       get :destroy, id: 1
     end
 
     it 'should be removable for users with a password' do
+      User.stub(find: @user)
       expect(@auths).to receive(:count).and_return 2
       expect(@auth).to receive(:destroy).and_return true
+      expect(@user).to receive(:update_attributes).and_return true
       get :destroy, id: 1
       expect(flash[:notice]).to eq 'Successfully removed profile.'
     end
