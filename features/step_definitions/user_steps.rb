@@ -323,6 +323,7 @@ And(/^I have authentication enabled with my github username$/) do
 end
 
 Then(/^I should not have github_profile_url set in my profile$/) do
+  @user.reload
   expect(@user.github_profile_url).to be_nil
 end
 
