@@ -35,7 +35,12 @@ class AuthenticationsController < ApplicationController
         # Bryan: TESTED
         flash[:alert] = 'Bad idea!'
       elsif @authentication.destroy
-        flash[:notice] = 'Successfully removed profile.'
+	user = User.find(current_user.id)
+	if user.update_attributes(github_profile_url: nil)
+          flash[:notice] = 'Successfully removed profile.'
+	else
+          flash[:notice] = 'Github profile url could not be removed.'
+	end
       else
         flash[:alert] = 'Authentication method could not be removed.'
       end
