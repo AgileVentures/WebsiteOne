@@ -65,7 +65,6 @@ Feature: Create and maintain projects
     Given I have a GitHub profile with username "tochman"
     And I have authentication enabled with my github username
     And I am on my "Edit Profile" page
-    When I click "Remove Github"
-    And my profile should be remove my GH username
-    When I am on "profile" page for user "me"
-    Then I should not see a link "tochman" to "https://github.com/tochman"
+    When I click "Remove GitHub"
+    Then I should not have github_profile_url set in my profile
+    And I should not have any authentications by my github username

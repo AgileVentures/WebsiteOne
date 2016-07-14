@@ -322,6 +322,15 @@ And(/^I have authentication enabled with my github username$/) do
   @authentication.save
 end
 
+Then(/^I should not have github_profile_url set in my profile$/) do
+  expect(@user.github_profile_url).to be_nil
+end
+
+Then(/^I should not have any authentications by my github username$/) do
+  expect(@user.authentications.find_by(provider: "github")).to be_nil
+end
+
+
 Given(/^I fetch the GitHub contribution statistics$/) do
   GithubCommitsJob.run
 end
