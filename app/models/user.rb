@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   end
 
   def commit_count_total
-    commit_counts.inject(0) { |memo, c| memo += c.commit_count }
+    commit_counts.sum :commit_count
   end
 
   def number_hangouts_started_with_more_than_one_participant
