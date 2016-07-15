@@ -27,4 +27,5 @@ describe CommitCount, type: :model do
     subject { build(:commit_count,  duplicate_record.attributes)}
     it { is_expected.to_not be_valid }
   end
+
 end
