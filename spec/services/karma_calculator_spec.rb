@@ -14,12 +14,8 @@ describe KarmaCalculator do
   end
 
   describe 'for old members' do
-    it 'should assign 0 karma points to members less than 1 month old' do
-      user.created_at = 29.days.ago
-      expect(karma_points).to eq(0)
-    end
 
-    it 'should assign karma points to members more than 1 month old' do
+    it 'should assign karma points to members' do
       user.created_at = 31.days.ago
       expect(karma_points).to be > 0
     end

@@ -100,38 +100,38 @@ describe User, type: :model do
       Geocoder.configure(:ip_lookup => :test)
       Geocoder::Lookup::Test.add_stub(
           '85.228.111.204', [
-                              {
-                                  ip: '85.228.111.204',
-                                  country_code: 'SE',
-                                  country_name: 'Sweden',
-                                  region_code: '28',
-                                  region_name: 'Västra Götaland',
-                                  city: 'Alingsås',
-                                  zipcode: '44139',
-                                  latitude: 57.9333,
-                                  longitude: 12.5167,
-                                  metro_code: '',
-                                  areacode: ''
-                              }.as_json
-                          ]
+          {
+              ip: '85.228.111.204',
+              country_code: 'SE',
+              country_name: 'Sweden',
+              region_code: '28',
+              region_name: 'Västra Götaland',
+              city: 'Alingsås',
+              zipcode: '44139',
+              latitude: 57.9333,
+              longitude: 12.5167,
+              metro_code: '',
+              areacode: ''
+          }.as_json
+      ]
       )
 
       Geocoder::Lookup::Test.add_stub(
           '50.78.167.161', [
-                             {
-                                 ip: '50.78.167.161',
-                                 country_code: 'US',
-                                 country_name: 'United States',
-                                 region_code: 'WA',
-                                 region_name: 'Washington',
-                                 city: 'Seattle',
-                                 zipcode: '',
-                                 latitude: 47.6062,
-                                 longitude: -122.3321,
-                                 metro_code: '819',
-                                 areacode: '206'
-                             }.as_json
-                         ]
+          {
+              ip: '50.78.167.161',
+              country_code: 'US',
+              country_name: 'United States',
+              region_code: 'WA',
+              region_name: 'Washington',
+              city: 'Seattle',
+              zipcode: '',
+              latitude: 47.6062,
+              longitude: -122.3321,
+              metro_code: '819',
+              areacode: '206'
+          }.as_json
+      ]
       )
 
     end
@@ -329,6 +329,71 @@ describe User, type: :model do
     it 'returns true with nil values' do
       expect(User.new.incomplete?).to be_truthy
     end
+  end
+
+  context 'karma' do
+
+    describe '#commit_count_total' do
+
+      subject(:user) { FactoryGirl.create(:user) }
+
+      let!(:commit_count) { FactoryGirl.create(:commit_count, user: user, commit_count: 369) }
+
+      context 'single commit count' do
+        it 'returns totals commits over all projects' do
+          expect(user.commit_count_total).to eq 369
+        end
+      end
+
+      context 'multiple commit count' do
+        let!(:commit_count_2) { FactoryGirl.create(:commit_count, user: user, commit_count: 123) }
+        it 'returns totals commits over all projects' do
+          expect(user.commit_count_total).to eq 492
+        end
+      end
+    end
+
+    describe '#number_hangouts_started_with_more_than_one_participant' do
+
+      subject(:user) { FactoryGirl.create(:user) }
+
+      let!(:event_instance) { FactoryGirl.create(:event_instance, user: user) }
+      context 'single event instance' do
+        it 'returns total number of hangouts started with more than one participant' do
+          expect(user.number_hangouts_started_with_more_than_one_participant).to eq 1
+        end
+      end
+
+      context 'two event instances' do
+        let!(:event_instance2) { FactoryGirl.create(:event_instance, user: user) }
+        it 'returns total number of hangouts started with more than one participant' do
+          expect(user.number_hangouts_started_with_more_than_one_participant).to eq 2
+        end
+      end
+
+    end
+
+    describe '#profile_completeness' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'calculates profile completeness' do
+        expect(user.profile_completeness).to eq 6
+      end
+    end
+
+    describe '#activity' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'calculates sign in activity' do
+        expect(user.activity).to eq 0
+      end
+    end
+
+    describe '#membership_length' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'calculates membership length' do
+        expect(user.membership_length).to eq 0
+      end
+    end
+
   end
 
 end
