@@ -51,13 +51,28 @@
   <% if presenter.contributed? %>
       <div class="tab-pane" id="activity">
         <section class="user-contributions">
-          <h4>Contributions</h4>
+          <h4>Contributions (GitHub) - <%= presenter.user.commit_count_total %> total commits x 1 - <%=presenter.user.commit_count_total %><i class="fa fa-fire"></i></h4>
           <ul>
             <% presenter.contributions.each do |commit_count| %>
                 <li><b><%= link_to commit_count.project.title, commit_count.project.contribution_url %></b>
                   - <%= commit_count.commit_count %> commits</li>
             <% end %>
           </ul>
+        </section>
+        <section class="user-contributions">
+          <h4>Contributions (Hangouts Hosted) - <%= presenter.user.number_hangouts_started_with_more_than_one_participant %> total hangouts x 1 - <%= presenter.user.number_hangouts_started_with_more_than_one_participant %><i class="fa fa-fire"></i></h4>
+        </section>
+        <section class="user-contributions">
+          <h4>Contributions (Authentications) - <%= presenter.user.authentications.count %> authentications x 100 - <%= presenter.user.authentications.count * 100 %><i class="fa fa-fire"></i></h4>
+        </section>
+        <section class="user-contributions">
+          <h4>Contributions (Profile Completeness) - <%= presenter.user.profile_completeness %> out of 10<i class="fa fa-fire"></i></h4>
+        </section>
+        <section class="user-contributions">
+          <h4>Contributions (Membership Length) - <%= presenter.user.membership_length %> out of 6<i class="fa fa-fire"></i></h4>
+        </section>
+        <section class="user-contributions">
+          <h4>Contributions (Sign In Activity) - <%= presenter.user.activity %> out of 6<i class="fa fa-fire"></i></h4>
         </section>
       </div>
   <% end %>
