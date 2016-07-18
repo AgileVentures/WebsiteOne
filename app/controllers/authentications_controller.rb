@@ -33,7 +33,7 @@ class AuthenticationsController < ApplicationController
     if @authentication
       if current_user.authentications.count == 1 and current_user.encrypted_password.blank?
         # Bryan: TESTED
-        flash[:alert] = 'Bad idea!'
+        flash[:alert] = 'Failed to unlink GitHub. Please use another provider for login or reset password.'
       elsif @authentication.destroy
 	user = User.find(current_user.id)
 	if user.update_attributes(github_profile_url: nil)

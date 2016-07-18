@@ -332,7 +332,7 @@ Then(/^I should not have any authentications by my github username$/) do
 end
 
 Then(/^I should see GitHub account unlinking failed message$/) do
-  expect(page).to have_content "Bad idea!"
+  expect(page).to have_content "Failed to unlink GitHub. Please use another provider for login or reset password."
 end
 
 Given(/^I fetch the GitHub contribution statistics$/) do
