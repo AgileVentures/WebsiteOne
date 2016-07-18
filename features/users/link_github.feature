@@ -26,3 +26,15 @@ Feature: Linking and unlinking of github account
     And I should not have github_profile_url set in my profile
     When I am on "profile" page for user "me"
     Then I should not see a link "tochman" to "https://github.com/tochman"
+
+
+
+  @omniauth
+  Scenario: Unlink my GitHub profile link from my profile with no backup login strategy: failure
+    Given I am on the "Sign in" page
+    When I click "GitHub"
+    Then I should see "Signed in successfully."
+    And I am on my "Edit Profile" page
+    When I click "Remove GitHub"
+    Then I should see GitHub account unlinking failed message
+

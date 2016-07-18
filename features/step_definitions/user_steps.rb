@@ -331,6 +331,9 @@ Then(/^I should not have any authentications by my github username$/) do
   expect(@user.authentications.find_by(provider: "github")).to be_nil
 end
 
+Then(/^I should see GitHub account unlinking failed message$/) do
+  expect(page).to have_content "Bad idea!"
+end
 
 Given(/^I fetch the GitHub contribution statistics$/) do
   GithubCommitsJob.run
