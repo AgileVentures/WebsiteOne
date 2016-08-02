@@ -48,7 +48,7 @@ describe AuthenticationsController do
       expect(@auths).to receive(:count).and_return 1
       expect(@user).to receive(:encrypted_password).and_return nil
       get :destroy, id: 1
-      expect(flash[:alert]).to eq 'Bad idea!'
+      expect(flash[:alert]).to eq 'Failed to unlink GitHub. Please use another provider for login or reset password.'
     end
   end
 
