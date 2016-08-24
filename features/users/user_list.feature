@@ -1,5 +1,6 @@
 @javascript @vcr
-Feature: As a site owner
+Feature: List Users
+  As a site owner
   So I can make collaboration among registered users easier
   I would like to display a index of users with links to user profiles
   And allow users to search for other users using a variety of criterias
@@ -34,6 +35,11 @@ Feature: As a site owner
       | Dave          |
     And I should see "5" user avatars within the main content
     And I should see "Check out our 5 awesome volunteers from all over the globe!"
+
+  Scenario: Paginate the User list
+    Given there are an extra 15 users
+    And I am on the members page
+    Then I should see "15" user avatars within the main content
 
   Scenario: Filtering trough users by typing first name in the field
     When I click "Members" within the navbar
