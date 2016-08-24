@@ -40,8 +40,9 @@ Feature: List Users
     Given there are an extra 15 users
     And I am on the members page
     Then I should see "15" user avatars within the main content
-    And I click on page "2" of users
-    And I should see "5" user avatars
+    And I should see "Check out our 20 awesome volunteers from all over the globe!"
+    When I click on page "2" of users
+    And I should see "5" user avatars within the main content
 
   Scenario: Filtering trough users by typing first name in the field
     When I click "Members" within the navbar
