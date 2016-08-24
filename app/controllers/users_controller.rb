@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    @users = User.includes(:status, :titles)
+    @users = User.page(1).per(15).includes(:status, :titles)
                  .filter(set_filter_params)
                  .allow_to_display
                  .order(karma_points: :desc)

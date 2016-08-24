@@ -357,3 +357,7 @@ end
 And(/^I am on the members page$/) do
   visit '/users'
 end
+
+And(/^I click on page "([^"]*)" of users$/) do |page|
+  click_link page
+end
