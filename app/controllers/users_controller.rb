@@ -7,11 +7,12 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    @users = User.page(params[:page]).per(15).includes(:status, :titles)
+    @users = User.page(params[:page]).per(15)
+                 .includes(:status, :titles)
                  .filter(set_filter_params)
                  .allow_to_display
                  .order(karma_points: :desc)
-    @users_count = @users.count
+    @users_count = @users.total_count
     @projects = Project.all
     @user_type = params[:title].blank? ? 'Volunteer' : params[:title]
     @user_type = 'Premium Member' if params[:title] == 'Premium'
