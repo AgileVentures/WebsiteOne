@@ -44,14 +44,14 @@ Feature: List Users
     When I click on page "2" of users
     And I should see "5" user avatars within the main content
 
-  Scenario: Filtering trough users by typing first name in the field
-    When I click "Members" within the navbar
-    And I filter users for "Alice"
-    Then I should see "Alice"
-    And I should not see:
-      | Bob     |
-      | Croutch |
-      | Dave    |
+#  Scenario: Filtering trough users by typing first name in the field
+#    When I click "Members" within the navbar
+#    And I filter users for "Alice"
+#    Then I should see "Alice"
+#    And I should not see:
+#      | Bob     |
+#      | Croutch |
+#      | Dave    |
 
   Scenario: Filtering by project involvement
     Given I am on the "our members" page
