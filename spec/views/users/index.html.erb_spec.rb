@@ -37,14 +37,6 @@ describe 'users/index.html.erb', :type => :view do
       expect(rendered).to have_content('Wider Timezone Area')
     end
   end
-  # the following no longer works with pagination
-  # need to remove entirely, or re-work
-  #
-  # it 'should display user filter form' do
-  #   render
-  #   expect(rendered).to have_content('Filter users')
-  #   expect(rendered).to have_css('#user-filter')
-  # end
 
   it 'should display a list of users' do
     render

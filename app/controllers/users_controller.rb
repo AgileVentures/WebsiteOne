@@ -7,11 +7,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
-    @users = User.page(params[:page]).per(15)
-                 .includes(:status, :titles)
-                 .filter(set_filter_params)
-                 .allow_to_display
-                 .order(karma_points: :desc)
+    @users = users
     @users_count = @users.total_count
     @projects = Project.all
     @user_type = params[:title].blank? ? 'Volunteer' : params[:title]
@@ -73,6 +69,14 @@ class UsersController < ApplicationController
 
 
   private
+
+  def users
+    User.page(params[:page]).per(15)
+        .includes(:status, :titles)
+        .filter(set_filter_params)
+        .allow_to_display
+        .order(karma_points: :desc)
+  end
 
   def should_display_user?(user)
     user.display_profile || current_user == @user
