@@ -292,6 +292,9 @@ GEM
     jvectormap-rails (1.0.1)
       railties (>= 3.1, < 5.0)
     jwt (1.5.1)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kdtree (0.3)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -626,6 +629,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks (= 2.0.2)
   jvectormap-rails (~> 1.0.0)
+  kaminari
   launchy
   local_time (~> 1.0.3)
   mercury-rails!

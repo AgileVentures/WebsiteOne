@@ -349,3 +349,15 @@ Given(/^I have an incomplete profile$/) do
   @user.bio = ''
   @user.save
 end
+
+Given(/^there are an extra (\d+) users$/) do |number|
+  number.to_i.times { FactoryGirl.create(:user) }
+end
+
+And(/^I am on the members page$/) do
+  visit '/users'
+end
+
+And(/^I click on page "([^"]*)" of users$/) do |page|
+  click_link page
+end
