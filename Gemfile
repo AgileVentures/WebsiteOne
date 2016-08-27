@@ -65,6 +65,7 @@ gem 'jvectormap-rails', '~> 1.0.0' #jVectorMap for the Rails asset pipeline
 gem 'active_model-errors_details'
 
 gem 'stripe'
+gem 'kaminari'
 
 
 group :test do

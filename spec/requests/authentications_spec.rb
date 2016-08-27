@@ -57,7 +57,7 @@ describe 'OmniAuth authentication' do
               click_link "Remove #{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
-          expect(page).to have_content 'Bad idea!'
+          expect(page).to have_content 'Failed to unlink GitHub. Please use another provider for login or reset password.'
         end
       end
     end
