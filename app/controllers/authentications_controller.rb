@@ -30,22 +30,18 @@ class AuthenticationsController < ApplicationController
 
   def destroy
     @authentication = current_user.authentications.find(params[:id])
-    if @authentication
-      if current_user.authentications.count == 1 and current_user.encrypted_password.blank?
-        # Bryan: TESTED
-        flash[:alert] = 'Failed to unlink GitHub. Please use another provider for login or reset password.'
-      elsif @authentication.destroy
-	user = User.find(current_user.id)
-	if user.update_attributes(github_profile_url: nil)
-          flash[:notice] = 'Successfully removed profile.'
-	else
-          flash[:notice] = 'Github profile url could not be removed.'
-	end
+    if @authentication and current_user.authentications.count == 1 and current_user.encrypted_password.blank?
+      # Bryan: TESTED
+      flash[:alert] = 'Failed to unlink GitHub. Please use another provider for login or reset password.'
+    elsif @authentication and @authentication.destroy
+      user = User.find(current_user.id)
+      if user.update_attributes(github_profile_url: nil)
+        flash[:notice] = 'Successfully removed profile.'
       else
-        flash[:alert] = 'Authentication method could not be removed.'
+        flash[:notice] = 'Github profile url could not be removed.'
       end
     else
-      flash[:alert] = 'Authentication method not found.'
+      flash[:alert] = 'Authentication method could not be removed.'
     end
     redirect_to edit_user_registration_path(current_user)
   end
