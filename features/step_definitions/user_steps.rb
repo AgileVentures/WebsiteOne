@@ -315,6 +315,26 @@ When(/^my profile should be updated with my GH username$/) do
   expect(@user.github_profile_url).to eq @github_profile_url
 end
 
+And(/^I have authentication enabled with my github username$/) do
+  @user.github_profile_url = @github_profile_url
+  @user.save
+  @authentication = FactoryGirl.create(:authentication, user_id: @user.id, provider: "github", uid: 42672)
+  @authentication.save
+end
+
+Then(/^I should not have github_profile_url set in my profile$/) do
+  @user.reload
+  expect(@user.github_profile_url).to be_nil
+end
+
+Then(/^I should not have any authentications by my github username$/) do
+  expect(@user.authentications.find_by(provider: "github")).to be_nil
+end
+
+Then(/^I should see GitHub account unlinking failed message$/) do
+  expect(page).to have_content "Failed to unlink GitHub. Please use another provider for login or reset password."
+end
+
 Given(/^I fetch the GitHub contribution statistics$/) do
   GithubCommitsJob.run
 end
