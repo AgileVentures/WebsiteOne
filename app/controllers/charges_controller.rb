@@ -27,7 +27,8 @@ class ChargesController < ApplicationController
 
   def update
     byebug
-    customer = Stripe::Customer.retrieve(current_user.stripe_customer) # _token?
+    stripe_customer_token = 'cus_8l47KNxEp3qMB8' # current_user.stripe_customer
+    customer = Stripe::Customer.retrieve(stripe_customer_token) # _token?
     # customer.source = params[:stripeToken]
     # customer.save
     card = customer.cards.create(card: params[:stripeToken])
