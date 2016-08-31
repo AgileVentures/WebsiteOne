@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20160831131548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -219,8 +218,8 @@ ActiveRecord::Schema.define(version: 20160831131548) do
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
     t.boolean  "display_email"
-    t.string   "slug",                   limit: 255
     t.string   "youtube_id",             limit: 255
+    t.string   "slug",                   limit: 255
     t.boolean  "display_profile",                    default: true
     t.float    "latitude"
     t.float    "longitude"
@@ -233,8 +232,8 @@ ActiveRecord::Schema.define(version: 20160831131548) do
     t.text     "bio"
     t.boolean  "receive_mailings",                   default: true
     t.integer  "karma_points",                       default: 0
-    t.integer  "timezone_offset"
     t.string   "country_code",           limit: 255
+    t.integer  "timezone_offset"
     t.integer  "status_count",                       default: 0
     t.string   "stripe_customer"
   end

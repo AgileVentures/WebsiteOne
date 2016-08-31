@@ -1,7 +1,9 @@
-Given(/^I fill in appropriate card details for premium$/) do
+Given(/^I fill in appropriate card details for premium(?: for user with email "([^"]*)")?$/) do |email|
   stripe_iframe = all('iframe[name=stripe_checkout_app]').last
+  byebug
+  email = email.present? ? email : 'random@morerandom.com'
   Capybara.within_frame stripe_iframe do
-    fill_in 'Email', with: 'random@morerandom.com'
+    fill_in 'Email', with: email
     fill_in 'Card number', with: '4242 4242 4242 4242'
     fill_in 'CVC', with: '123'
     fill_in 'cc-exp', with: "12/2019"
@@ -10,7 +12,7 @@ Given(/^I fill in appropriate card details for premium$/) do
   sleep(3)
 end
 
-Given(/^I fill in appropriate card details for premium plus$/) do
+Given(/^I fill in appropriate card details for premium plus$/) do |email|
   stripe_iframe = all('iframe[name=stripe_checkout_app]').last
   Capybara.within_frame stripe_iframe do
     fill_in 'Email', with: 'random@morerandom.com'

@@ -19,7 +19,7 @@ Billy.configure do |c|
                      "https://ssl.google-analytics.com/__utm.gif",
                      "https://accounts.google.com/o/oauth2/postmessageRelay",
                      "https://talkgadget.google.com/talkgadget/_/widget",
-                     'https://api.stripe.com/v1/tokens',
+                     #'https://api.stripe.com/v1/tokens',
                      'https://q.stripe.com/',
                      'https://js.stripe.com/v2/',
                      'https://checkout.stripe.com/api/bootstrap',
