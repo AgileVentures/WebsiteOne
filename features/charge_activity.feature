@@ -25,7 +25,7 @@ Feature: Charge Users Money
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"
     And The user should receive a "Welcome to AgileVentures Premium" email
 
-  Scenario: Sign up for premium membership
+  Scenario: Sign up for premium plus membership
     Given I visit "/charges/new?plan=premiumplus"
     And I should not see "Sign Me Up For Premium!"
     And I click "Sign Me Up For Premium Plus!"

@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627134611) do
+ActiveRecord::Schema.define(version: 20160831131548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -218,8 +219,8 @@ ActiveRecord::Schema.define(version: 20160627134611) do
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
     t.boolean  "display_email"
-    t.string   "youtube_id",             limit: 255
     t.string   "slug",                   limit: 255
+    t.string   "youtube_id",             limit: 255
     t.boolean  "display_profile",                    default: true
     t.float    "latitude"
     t.float    "longitude"
@@ -232,9 +233,10 @@ ActiveRecord::Schema.define(version: 20160627134611) do
     t.text     "bio"
     t.boolean  "receive_mailings",                   default: true
     t.integer  "karma_points",                       default: 0
-    t.string   "country_code",           limit: 255
     t.integer  "timezone_offset"
+    t.string   "country_code",           limit: 255
     t.integer  "status_count",                       default: 0
+    t.string   "stripe_customer"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

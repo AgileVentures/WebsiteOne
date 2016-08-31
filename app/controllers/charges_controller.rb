@@ -5,20 +5,39 @@ class ChargesController < ApplicationController
     render 'premium'
   end
 
+  def edit
+  end
+
   def create
     @plan = params[:plan]
 
     customer = Stripe::Customer.create(
-        email:  params[:stripeEmail],
+        email: params[:stripeEmail],
         source: params[:stripeToken],
-        plan:   @plan
+        plan: @plan
     )
+    byebug
 
     send_acknowledgement_email
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
+  end
+
+  def update
+    byebug
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer) # _token?
+    # customer.source = params[:stripeToken]
+    # customer.save
+    card = customer.cards.create(card: params[:stripeToken])
+    card.save
+    customer.default_card = card.id
+    customer.save
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while updating card info: #{e.message}"
+    errors.add :base, "#{e.message}"
+    false
   end
 
   private

@@ -1,0 +1,13 @@
+<%= form_tag charge_path('tansaku'), method: :put do %>
+  <script
+  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+  data-name="Agile Ventures"
+  data-panel-label="Update Card Details"
+  data-label="Update Card Details"
+  data-allow-remember-me=false
+  data-locale="auto">
+  </script>
+<% end %>
+
+<!--data-image="/path/to/your/logo.png"-->
