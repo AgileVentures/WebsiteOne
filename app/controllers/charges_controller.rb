@@ -16,7 +16,7 @@ class ChargesController < ApplicationController
         source: params[:stripeToken],
         plan: @plan
     )
-    byebug
+    # byebug
 
     send_acknowledgement_email
 
@@ -26,7 +26,7 @@ class ChargesController < ApplicationController
   end
 
   def update
-    byebug
+    # byebug
     stripe_customer_token = 'cus_8l47KNxEp3qMB8' # current_user.stripe_customer
     customer = Stripe::Customer.retrieve(stripe_customer_token) # _token?
     # customer.source = params[:stripeToken]
