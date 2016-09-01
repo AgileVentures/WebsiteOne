@@ -1,5 +1,7 @@
 class ChargesController < ApplicationController
 
+  before_filter :authenticate_user!, only: [:edit, :update]
+
   def new
     render 'premiumplus' and return if premiumplus?
     render 'premium'
@@ -16,7 +18,6 @@ class ChargesController < ApplicationController
         source: params[:stripeToken],
         plan: @plan
     )
-    # byebug
 
     send_acknowledgement_email
 
@@ -27,15 +28,12 @@ class ChargesController < ApplicationController
 
   def update
     customer = Stripe::Customer.retrieve(current_user.stripe_customer) # _token?
-    # customer.source = params[:stripeToken]
-    # customer.save
     card = customer.cards.create(card: params[:stripeToken])
     card.save
     customer.default_card = card.id
     customer.save
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while updating card info: #{e.message}"
-    #errors.add :base, "#{e.message}"
     false
   end
 

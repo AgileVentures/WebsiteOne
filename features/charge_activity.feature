@@ -1,4 +1,4 @@
-@javascript @vcr
+@javascript @vcr @billy_directories
 Feature: Charge Users Money
   As a site admin
   So that users can pay for premium services
@@ -40,4 +40,7 @@ Feature: Charge Users Money
     And I click "Update Card Details"
     When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"
     Then I should see "Your card details have been successfully updated"
-    
+
+  Scenario: User cannot change card details if not logged in
+    Given I visit "charges/tansaku/edit"
+    Then I should be on the "sign in" page
