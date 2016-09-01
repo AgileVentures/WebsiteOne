@@ -1,13 +1,13 @@
 ---
 :scope: 
-:url: https://checkout.stripe.com/api/outer/manhattan?key=pk_test_4O7CBxlnqMFgw0BAmpKmOjTn&__originals=%5Bobject%20Object%5D&description=A%20month's%20subscription&amount=1000&currency=GBP&locale=auto&name=Premium%20Membership&label=Sign%20Me%20Up%20For%20Premium!&buttonIntegration=true
+:url: https://checkout.stripe.com/api/outer/manhattan?key=pk_test_4O7CBxlnqMFgw0BAmpKmOjTn&__originals=%5Bobject%20Object%5D&name=Agile%20Ventures&panelLabel=Update%20Card%20Details&label=Update%20Card%20Details&allowRememberMe=false&locale=auto&buttonIntegration=true
 :body: ''
 :status: 200
 :method: get
 :headers:
   Server: nginx
   Content-Type: application/json
-  Access-Control-Allow-Origin: http://127.0.0.1:55662
+  Access-Control-Allow-Origin: http://127.0.0.1:60034
   Cache-Control: no-cache, no-store, private, must-revalidate, max-age=0, max-stale=0,
     post-check=0, pre-check=0
   Pragma: no-cache
@@ -22,13 +22,13 @@
   Strict-Transport-Security: max-age=31556926; includeSubDomains
   Content-Length: '16'
   Accept-Ranges: bytes
-  Date: Thu, 01 Sep 2016 14:12:47 GMT
+  Date: Thu, 01 Sep 2016 14:45:27 GMT
   Via: 1.1 varnish
   Connection: close
-  X-Served-By: cache-lcy1121-LCY
+  X-Served-By: cache-iad2623-IAD
   X-Cache: MISS
   X-Cache-Hits: '0'
-  X-Timer: S1472739167.315481,VS0,VE157
+  X-Timer: S1472741127.859322,VS0,VE100
 :content: '{"is_on":false}
 
 '

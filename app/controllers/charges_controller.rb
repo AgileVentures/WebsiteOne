@@ -26,9 +26,7 @@ class ChargesController < ApplicationController
   end
 
   def update
-    # byebug
-    stripe_customer_token = 'cus_8l47KNxEp3qMB8' # current_user.stripe_customer
-    customer = Stripe::Customer.retrieve(stripe_customer_token) # _token?
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer) # _token?
     # customer.source = params[:stripeToken]
     # customer.save
     card = customer.cards.create(card: params[:stripeToken])
@@ -37,7 +35,7 @@ class ChargesController < ApplicationController
     customer.save
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while updating card info: #{e.message}"
-    errors.add :base, "#{e.message}"
+    #errors.add :base, "#{e.message}"
     false
   end
 

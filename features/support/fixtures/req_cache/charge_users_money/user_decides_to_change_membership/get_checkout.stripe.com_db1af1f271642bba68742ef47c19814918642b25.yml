@@ -1,6 +1,6 @@
 ---
 :scope: 
-:url: https://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html?distinct_id=ae86b60d-2440-ad16-8a06-8e5f657f83e7
+:url: https://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html?distinct_id=33292ae0-ee96-727c-db94-6494092db24f
 :body: ''
 :status: 200
 :method: get
@@ -21,16 +21,16 @@
   Via:
   - 1.1 varnish
   - 1.1 varnish
-  Fastly-Debug-Digest: e6074b9f930f99f78b12b64bc127df8bc9a5b0e13c8eef6108bca1074c812f0f
+  Fastly-Debug-Digest: 5f053495605e885ef7cb207af6e1ca1184804477d8336e21712062c6de68ca98
   Content-Length: '11209'
   Accept-Ranges: bytes
-  Date: Thu, 01 Sep 2016 14:14:05 GMT
+  Date: Thu, 01 Sep 2016 14:45:28 GMT
   Age: '0'
   Connection: close
-  X-Served-By: cache-sea1925-SEA, cache-lhr6334-LHR
+  X-Served-By: cache-sea1924-SEA, cache-iad2624-IAD
   X-Cache: MISS, MISS
   X-Cache-Hits: 0, 0
-  X-Timer: S1472739245.402422,VS0,VE143
+  X-Timer: S1472741128.064155,VS0,VE73
   Vary: Accept-Encoding
 :content: "<!DOCTYPE html>\n<html dir=\"ltr\">\n  <head>\n    <meta charset=\"utf-8\">\n
   \   <title>Stripe Checkout</title>\n    <meta name=\"viewport\" content=\"user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1\">\n

@@ -16,13 +16,13 @@
   Fastly-Debug-Digest: 7e88a15829497890958e88be5559da8a2d30b2464f61c03b22553dd998779340
   Content-Length: '196764'
   Accept-Ranges: bytes
-  Date: Thu, 01 Sep 2016 14:12:47 GMT
-  Age: '2483515'
+  Date: Thu, 01 Sep 2016 14:45:28 GMT
+  Age: '3699388'
   Connection: close
-  X-Served-By: cache-sea1921-SEA, cache-lcy1122-LCY
+  X-Served-By: cache-sea1927-SEA, cache-iad2136-IAD
   X-Cache: HIT, HIT
   X-Cache-Hits: 1, 1
-  X-Timer: S1472739167.843080,VS0,VE0
+  X-Timer: S1472741128.279732,VS0,VE0
   Vary: Accept-Encoding, Origin
 :content: '.preloader{overflow:hidden;position:absolute;left:-9999px;top:-9999px;height:1px;width:1px}.desktop
   .preloader{background:url("https://b.stripecdn.com/checkout/v3/images/arrows-boaRCE0nxn24ZdeMxdCWTw.png"),url("https://b.stripecdn.com/checkout/v3/images/arrows_focus-Bs7dsRARcu9kmD1TXxjoDA.png"),url("https://b.stripecdn.com/checkout/v3/images/backArrow-FfWsVSMBFssJOu9t4wCfKw.png"),url("https://b.stripecdn.com/checkout/v3/images/badges/stripe-enyrqMtDOCgqEPSAWJlbg.png"),url("https://b.stripecdn.com/checkout/v3/images/cards/amex-rCwsUgG9VyC8v8BdohM3Rw.png"),url("https://b.stripecdn.com/checkout/v3/images/cards/diners-rzdCy07VGt8190Sl9Vt7ag.png"),url("https://b.stripecdn.com/checkout/v3/images/cards/discover-GhYYu271VuO3llRQeCQA.png"),url("https://b.stripecdn.com/checkout/v3/images/cards/jcb-oXQoEoicpg7Sh8tItANTpg.png"),url("https://b.stripecdn.com/checkout/v3/images/cards/mastercard-HVnFbrioF3RgUWZV0DcA.png"),url("https://b.stripecdn.com/checkout/v3/images/cards/visa-PN8VNASAyUCxB1J1kpg1fQ.png"),url("https://b.stripecdn.com/checkout/v3/images/checkbox-checkmark-sJufd3vtgUUj1aewNBursQ.png"),url("https://b.stripecdn.com/checkout/v3/images/checkbox-sHAICSKij5uZfwyaILUQZA.png"),url("https://b.stripecdn.com/checkout/v3/images/close-gbN3V5bjbhRxDClwGYFQ.png"),url("https://b.stripecdn.com/checkout/v3/images/downArrow-hhdX0GF31wl8OKkoryKZg.png"),url("https://b.stripecdn.com/checkout/v3/images/icon-border-Uz9anqiDNVCgXMysAAWGQ.png"),url("https://b.stripecdn.com/checkout/v3/images/iconContinue-BVf4xzVdpFV4nfKLGU3TiA.png"),url("https://b.stripecdn.com/checkout/v3/images/iconInfo-y6Q3Nbm7edVjK4jkR4K9Q.png"),url("https://b.stripecdn.com/checkout/v3/images/linkArrow-iCj3tVUbMNauUNAV1Xcfg.png"),url("https://b.stripecdn.com/checkout/v3/images/placeholderQrCode-qzPRMtNIytZMKq0CtXxFLA.png"),url("https://b.stripecdn.com/checkout/v3/images/placeholders/black-dots-Slnufsf6VAuXQtzp4HP5A.png"),url("https://b.stripecdn.com/checkout/v3/images/placeholders/cvc-dots-four-FIpc0GQ3Sk848cSVK4ogAw.png"),url("https://b.stripecdn.com/checkout/v3/images/placeholders/cvc-dots-three-RzT3D4hkZ8H1i988jHFxg.png"),url("https://b.stripecdn.com/checkout/v3/images/popoverArrow-TXFP5CcKnZqGNPdHD87tg.png"),url("https://b.stripecdn.com/checkout/v3/images/popoverArrowReversed-sLrCfPT6MZeUZEQ2128Rg.png"),url("https://b.stripecdn.com/checkout/v3/images/qrCode-rai703qQiVfdsK8URsfqEQ.png"),url("https://b.stripecdn.com/checkout/v3/images/segmentedControlAlipay-NVaQPACQ2BBIC7UQo7SiZg.png"),url("https://b.stripecdn.com/checkout/v3/images/segmentedControlAlipayZH-4FGF2zlXOmz1NHyRNhBw.png"),url("https://b.stripecdn.com/checkout/v3/images/segmentedControlAlipayActive-2eQ8hrjlkr5EQg6J0h795g.png"),url("https://b.stripecdn.com/checkout/v3/images/segmentedControlAlipayActiveZH-FYtgmj2PmY2eIqiNWebg.png")}@media

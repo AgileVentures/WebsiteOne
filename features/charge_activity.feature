@@ -34,10 +34,10 @@ Feature: Charge Users Money
     And The user should receive a "Welcome to AgileVentures Premium PLUS" email
 
   Scenario: User decides to change membership
-    Given I visit "/charges/new"
-    And I should not see "Sign Me Up For Premium Plus!"
-    And I click "Sign Me Up For Premium!"
-    When I fill in appropriate card details for premium for user with email "tansaku+stripe@gmail.com"
-    Then I should see "Thanks, you're now an AgileVentures Premium Member!"
-    Given I am logged in as user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
+    Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
+    And I visit "charges/tansaku/edit"
+    Then I should see "Update Card Details"
+    And I click "Update Card Details"
+    When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"
+    Then I should see "Your card details have been successfully updated"
     

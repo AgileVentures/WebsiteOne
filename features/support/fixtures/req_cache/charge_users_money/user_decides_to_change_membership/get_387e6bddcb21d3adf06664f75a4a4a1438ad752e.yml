@@ -6,7 +6,7 @@
 :method: get
 :headers:
   Server: nginx
-  Date: Thu, 01 Sep 2016 14:12:55 GMT
+  Date: Thu, 01 Sep 2016 14:45:27 GMT
   Content-Type: image/jpeg
   Content-Length: '3771'
   Connection: close
@@ -15,11 +15,11 @@
     rel="canonical"
   Content-Disposition: inline; filename="9249736dae1898d537770886061c06f9.jpeg"
   Access-Control-Allow-Origin: "*"
-  X-nc: HIT lhr 2
+  X-nc: HIT dca 3
   Accept-Ranges: bytes
-  Expires: Thu, 01 Sep 2016 14:17:55 GMT
+  Expires: Thu, 01 Sep 2016 14:50:27 GMT
   Cache-Control: max-age=300
-  Source-Age: '108884'
+  Source-Age: '59'
 :content: !binary |-
   /9j/4AAQSkZJRgABAQAAAQABAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4w
   ICh1c2luZyBJSkcgSlBFRyB2ODApLCBxdWFsaXR5ID0gOTAK/9sAQwADAgID

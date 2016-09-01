@@ -24,13 +24,13 @@
   Fastly-Debug-Digest: c9157b3cb858bc8968651aaea245e7ceefd916e0b6e6caa6a5aeb671bc00010b
   Content-Length: '3751'
   Accept-Ranges: bytes
-  Date: Thu, 01 Sep 2016 14:12:47 GMT
+  Date: Thu, 01 Sep 2016 14:45:27 GMT
   Age: '0'
   Connection: close
-  X-Served-By: cache-sea1922-SEA, cache-lcy1133-LCY
-  X-Cache: HIT, MISS
-  X-Cache-Hits: 1, 0
-  X-Timer: S1472739167.315611,VS0,VE208
+  X-Served-By: cache-sea1921-SEA, cache-iad2122-IAD
+  X-Cache: HIT, HIT
+  X-Cache-Hits: 1, 1
+  X-Timer: S1472741127.855636,VS0,VE77
   Vary: Accept-Encoding
 :content: .stripe-button-el{overflow:hidden;display:inline-block;visibility:visible
   !important;background-image:-webkit-linear-gradient(#28a0e5,#015e94);background-image:-moz-linear-gradient(#28a0e5,#015e94);background-image:-ms-linear-gradient(#28a0e5,#015e94);background-image:-o-linear-gradient(#28a0e5,#015e94);background-image:-webkit-linear-gradient(#28a0e5,#015e94);background-image:-moz-linear-gradient(#28a0e5,#015e94);background-image:-ms-linear-gradient(#28a0e5,#015e94);background-image:-o-linear-gradient(#28a0e5,#015e94);background-image:linear-gradient(#28a0e5,#015e94);-webkit-font-smoothing:antialiased;border:0;padding:1px;text-decoration:none;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;border-radius:5px;-webkit-box-shadow:0

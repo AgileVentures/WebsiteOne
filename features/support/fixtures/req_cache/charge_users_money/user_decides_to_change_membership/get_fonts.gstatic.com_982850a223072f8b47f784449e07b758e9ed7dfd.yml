@@ -9,14 +9,14 @@
   Content-Type: font/ttf
   Access-Control-Allow-Origin: "*"
   Timing-Allow-Origin: "*"
-  Date: Tue, 09 Aug 2016 16:00:55 GMT
-  Expires: Wed, 09 Aug 2017 16:00:55 GMT
+  Date: Mon, 08 Aug 2016 16:06:40 GMT
+  Expires: Tue, 08 Aug 2017 16:06:40 GMT
   Last-Modified: Thu, 18 Feb 2016 02:45:23 GMT
   X-Content-Type-Options: nosniff
   Server: sffe
   X-XSS-Protection: 1; mode=block
   Cache-Control: public, max-age=31536000
-  Age: '1980712'
+  Age: '2068726'
   Alternate-Protocol: 443:quic
   Alt-Svc: quic=":443"; ma=2592000; v="36,35,34,33,32,31,30"
   Accept-Ranges: none

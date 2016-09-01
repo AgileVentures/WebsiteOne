@@ -16,13 +16,13 @@
   Fastly-Debug-Digest: 8654d54bd2aa14062f111cd1aa0c30d03c299ce597812f5edec5666db8a7c3f3
   Content-Length: '2159'
   Accept-Ranges: bytes
-  Date: Thu, 01 Sep 2016 14:12:48 GMT
-  Age: '4113774'
+  Date: Thu, 01 Sep 2016 14:45:28 GMT
+  Age: '985692'
   Connection: close
-  X-Served-By: cache-sea1925-SEA, cache-lcy1132-LCY
+  X-Served-By: cache-sea1922-SEA, cache-iad2641-IAD
   X-Cache: HIT, HIT
-  X-Cache-Hits: 1, 901
-  X-Timer: S1472739168.233354,VS0,VE0
+  X-Cache-Hits: 1, 1686
+  X-Timer: S1472741128.998207,VS0,VE0
   Vary: Origin
 :content: !binary |-
   iVBORw0KGgoAAAANSUhEUgAAAHsAAAAeCAQAAACm96kdAAAINklEQVRYw+VZ
