@@ -1,4 +1,4 @@
-<%= form_tag charge_path('tansaku'), method: :put do %>
+<%= form_tag charge_path(current_user.slug), method: :put do %>
   <script
   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
   data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
@@ -9,5 +9,3 @@
   data-locale="auto">
   </script>
 <% end %>
-
-<!--data-image="/path/to/your/logo.png"-->
