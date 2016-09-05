@@ -33,13 +33,17 @@ describe AuthenticationsController do
     end
 
     it 'should require authentication' do
+      User.stub(find: @user)
       expect(controller).to receive(:authenticate_user!)
+      expect(@user).to receive(:update_attributes)
       get :destroy, id: 1
     end
 
     it 'should be removable for users with a password' do
+      User.stub(find: @user)
       expect(@auths).to receive(:count).and_return 2
       expect(@auth).to receive(:destroy).and_return true
+      expect(@user).to receive(:update_attributes).and_return true
       get :destroy, id: 1
       expect(flash[:notice]).to eq 'Successfully removed profile.'
     end
@@ -161,6 +165,24 @@ describe AuthenticationsController do
       expect(controller).to receive(:link_github_profile).and_call_original
       get :create, provider: 'github'
       expect(user.github_profile_url).to eq('http://github.com/test')
+    end
+
+    it 'unlinks Github profile when Github profile is removed by user' do
+      @user = stub_model(User, github_profile_url: "http://github.com/test", encrypted_password: "i-am-encrypted")
+      controller.stub(current_user: @user)
+      @auth = double(Authentication, user: @user)
+      @auths = [@auth]
+
+      User.stub(find: @user)
+      expect(@user).to receive(:authentications).at_least(1).and_return @auths
+      expect(@auths).to receive(:find).and_return @auth
+
+      expect(@auths).to receive(:count).and_return 2
+      expect(@auth).to receive(:destroy).and_return true
+
+      expect(controller).to receive(:destroy).and_call_original
+      get :destroy, id: @user.id
+      expect(@user.github_profile_url).to be_nil
     end
   end
 end
