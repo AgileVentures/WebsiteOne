@@ -28,11 +28,13 @@ Billy.configure do |c|
                      'https://checkout.stripe.com/api/outer/manhattan',
                      'https://checkout.stripe.com/api/account/lookup',
                      'https://checkout.stripe.com/',
-                     'https://checkout.stripe.com/v3/zLFRiPN3qLIm2QDkJZxBw.html',
+                     'https://checkout.stripe.com/v3/',
                      'https://checkout.stripe.com/v3/data/locales/en_gb-TXHkb1MWMa7xOQfCZf1DFA.json',
+                     'https://checkout.stripe.com/v3/data/locales/en_us-tZLon0RoQY0knbOURjQ.json',
+                     'https://checkout.stripe.com/v3/data/locales/en_gb-LkmkoD88BacHIqnX4OXm6w.json',
                      'http://a.disquscdn.com/uploads/users/20073/6166/avatar92.jpg',
-                     'https://checkout.stripe.com/v3/HciOQ9KeXgLe2kL0jWvVCg.html',
-                     'https://checkout.stripe.com/v3/yiWszEIcz0H0K2eT1bmgQ.html',
+                     'https://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html',
+                     'http://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html',
                      'http://csi.gstatic.com/csi',
                      'https://csi.gstatic.com/csi',
   ]
@@ -43,7 +45,17 @@ Billy.configure do |c|
       /youtube\.com\/embed\/yt_video_id/,
   ]
   c.persist_cache = true
-  c.non_successful_cache_disabled = false
   c.cache_path = 'features/support/fixtures/req_cache/'
+  c.non_successful_cache_disabled = false
+end
+
+Before('@billy_directories') do |scenario, block|
+  Billy.configure do |c|
+    feature_name = scenario.feature.name.underscore
+    scenario_name = scenario.name.underscore
+    c.cache_path = "features/support/fixtures/req_cache/#{feature_name}/"
+    Dir.mkdir(Billy.config.cache_path) unless File.exist?(Billy.config.cache_path)
+    c.cache_path = "features/support/fixtures/req_cache/#{feature_name}/#{scenario_name}/"
+  end
 end
 
