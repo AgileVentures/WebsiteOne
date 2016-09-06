@@ -2,8 +2,8 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
 
-Given /^I am logged in as user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |name, email, password|
-  @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
+Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
+  @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password, stripe_customer: premium ? 'cus_8l47KNxEp3qMB8' : nil)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
