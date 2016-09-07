@@ -27,8 +27,8 @@ gem 'font-awesome-rails'
 gem 'acts_as_tree'
 gem 'acts_as_follower'
 gem 'will_paginate-bootstrap'
-gem 'coveralls', '~> 0.7.9', require: false # measure test coverage
-gem 'friendly_id'  # for more REST-ful routes, use human-readable IDs
+gem 'coveralls', require: false # measure test coverage
+gem 'friendly_id' # for more REST-ful routes, use human-readable IDs
 gem 'colored' # colorizing console
 gem 'redcarpet' # renders markdown
 gem 'coderay' # syntax highlighting for markdown code blocks
