@@ -40,6 +40,14 @@ Feature: Charge Users Money
     When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"
     Then I should see "Your card details have been successfully updated"
 
+  Scenario: User changes card details, but encounters error
+    Given I am logged in as user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
+    And I visit "charges/tansaku/edit"
+    And I click "Update Card Details"
+    When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"
+    Then I should not see "Your card details have been successfully updated"
+    And I should see "Something has gone wrong with changing your card details.  Please email support@agileventures.org"
+
   Scenario: User cannot change card details if not logged in
     Given I visit "charges/tansaku/edit"
     Then I should be on the "sign in" page

@@ -34,6 +34,7 @@ class ChargesController < ApplicationController
     customer.save
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while updating card info: #{e.message}"
+    @error = true
     false
   end
 

@@ -1,1 +1,5 @@
-<h2>Your card details have been successfully updated</h2>
+<% unless @error%>
+    <h2>Your card details have been successfully updated</h2>
+<%else%>
+    <h2>Something has gone wrong with changing your card details.  Please email support@agileventures.org</h2>
+<%end%>
