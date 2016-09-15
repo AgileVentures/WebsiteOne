@@ -8,6 +8,12 @@ class SlackInviteJob
       channels: 'C02G8J689,C0285CSUH,C02AA0ARR',
       token: Slack::AUTH_TOKEN
     })
-    JSON.parse response.body
+    json_response = JSON.parse response.body
+  # rescue
+  #   # should alert admin
+  # ensure
+  #   if json_response.nil? or !json_response['ok']
+  #     # alert admin
+  #   end
   end
 end
