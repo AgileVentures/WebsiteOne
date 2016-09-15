@@ -18,11 +18,12 @@ describe SlackInviteJob do
   end
 
   it 'when attempt errors we should notify admin' do
-    expect(AdminMailer).to receive(:failed_to_invite_user_to_slack)
+    email = 'random@random.com'
+    error = StandardError.new 'boom!'
+    expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, error)
 
     stub_request(:post, 'https://agileventures.slack.com/api/users.admin.invite').
-        and_raise('boom!')
-    email = 'random@random.com'
+        and_raise(error)
     stub_const('Slack::AUTH_TOKEN', 'test')
 
     response = subject.perform(email)
@@ -30,11 +31,11 @@ describe SlackInviteJob do
   end
 
   it 'when slack response not ok should notify admin' do
-    expect(AdminMailer).to receive(:failed_to_invite_user_to_slack)
+    email = 'random@random.com'
+    expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email,nil)
 
     stub_request(:post, 'https://agileventures.slack.com/api/users.admin.invite').
         to_return(body: '{"ok": false}')
-    email = 'random@random.com'
     stub_const('Slack::AUTH_TOKEN', 'test')
 
     response = subject.perform(email)
