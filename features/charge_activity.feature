@@ -33,12 +33,20 @@ Feature: Charge Users Money
     Then I should see "Thanks, you're now an AgileVentures Premium PLUS Member!"
     And The user should receive a "Welcome to AgileVentures Premium PLUS" email
 
-  Scenario: User decides to change membership
+  Scenario: User decides to change card details
     Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
     And I visit "charges/tansaku/edit"
     And I click "Update Card Details"
     When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"
     Then I should see "Your card details have been successfully updated"
+
+  Scenario: User changes card details, but encounters error
+    Given I am logged in as user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
+    And I visit "charges/tansaku/edit"
+    And I click "Update Card Details"
+    When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"
+    Then I should not see "Your card details have been successfully updated"
+    And I should see "something has gone wrong with changing your card details."
 
   Scenario: User cannot change card details if not logged in
     Given I visit "charges/tansaku/edit"
