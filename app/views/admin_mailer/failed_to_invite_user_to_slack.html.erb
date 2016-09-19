@@ -2,5 +2,5 @@ Slack invite failed for user with email <%= @email%>, with the following error
 
 <%= @error %>
 
-<%= @error.backtrace.join("\n\t") %>
+<%= @error.backtrace.join("\n\t") if @error %>
 
