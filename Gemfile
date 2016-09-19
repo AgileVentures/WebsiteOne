@@ -56,7 +56,7 @@ gem 'eventmachine', '~> 1.0.7'
 
 gem 'local_time', '~> 1.0.3'
 gem 'config' # a gem to manage configuration files
-gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
+#gem 'nearest_time_zone' # find the name of a timezone for a latitude and longitude without relying on a web service
 gem 'octokit' # Ruby wrapper for the GitHub API
 gem 'sucker_punch' # Single Process Ruby asynchronous processing library
 gem 'twitter', '~> 5.11.0' # twitter api wrapper
@@ -110,6 +110,7 @@ group :development, :test do
   gem "bundler-audit", :require => false # scans the Gemfile.lock and reports if there are any gems which need to be updated to fix known security issues
   gem 'constant-redefinition'
   gem 'dotenv-rails'
+  gem 'derailed'
 end
 
 group :development, :staging, :production do

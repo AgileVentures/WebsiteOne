@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :display_name, use: :slugged
 
-  before_save :generate_timezone_offset
+  #before_save :generate_timezone_offset
 
   after_validation :geocode, if: ->(obj) { obj.last_sign_in_ip_changed? }
   after_validation -> { KarmaCalculator.new(self).perform }
@@ -174,11 +174,11 @@ class User < ActiveRecord::Base
     SlackInviteJob.perform_async(email)
   end
 
-  def generate_timezone_offset
-    if self.latitude && self.longitude
-      self.timezone_offset = ActiveSupport::TimeZone.new(NearestTimeZone.to(self.latitude, self.longitude)).utc_offset
-    end
-  end
+  # def generate_timezone_offset
+  #   if self.latitude && self.longitude
+  #     self.timezone_offset = ActiveSupport::TimeZone.new(NearestTimeZone.to(self.latitude, self.longitude)).utc_offset
+  #   end
+  # end
 
   validate :email_absence
 
