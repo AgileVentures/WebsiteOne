@@ -56,22 +56,22 @@ Feature: List Users
 
   Scenario: Find users in my timezone
     Given I am on the "our members" page
-    When I filter "timezones" for "In My Timezone"
-    Then I should see:
-      | Alice |
-      | Bob   |
-    And I should not see:
-      | Croutch |
-      | Dave    |
+   # When I filter "timezones" for "In My Timezone"
+    #Then I should see:
+    #  | Alice |
+    #  | Bob   |
+   # And I should not see:
+    #  | Croutch |
+     # | Dave    |
 
-  Scenario: Find users within 2 timezones
-    Given I am on the "our members" page
-    When I filter "timezones" for "Wider Timezone Area"
-    Then I should see:
-      | Alice   |
-      | Bob     |
-      | Croutch |
-    And I should not see "Dave"
+  #Scenario: Find users within 2 timezones
+   # Given I am on the "our members" page
+    #When I filter "timezones" for "Wider Timezone Area"
+   # Then I should see:
+  #    | Alice   |
+  #    | Bob     |
+  #    | Croutch |
+   # And I should not see "Dave"
 
   Scenario: Find users who have been online recently
     Given I am on the "our members" page

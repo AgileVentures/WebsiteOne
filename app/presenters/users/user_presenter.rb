@@ -39,11 +39,11 @@ class UserPresenter < BasePresenter
   end
 
   def timezone
-    NearestTimeZone.to(user.latitude, user.longitude)
+    #NearestTimeZone.to(user.latitude, user.longitude)
   end
 
   def timezone_formatted_offset
-    ActiveSupport::TimeZone.new(timezone).formatted_offset
+    #ActiveSupport::TimeZone.new(timezone).formatted_offset
   end
 
   def gravatar_image(options={})

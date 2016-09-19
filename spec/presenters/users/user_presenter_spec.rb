@@ -34,7 +34,7 @@ describe UserPresenter do
   end
 
   describe '#timezone' do
-    it 'should display timezone when it can be determined' do
+    xit 'should display timezone when it can be determined' do
       user.latitude = 25.9500
       user.longitude = 32.5833
       expect(NearestTimeZone).to receive(:to).with(user.latitude, user.longitude).and_return('Africa/Cairo')
@@ -43,7 +43,7 @@ describe UserPresenter do
   end
 
   describe '#timezone_formatted_offset' do
-    it 'should display timezone formatted offset when it can be determined' do
+    xit 'should display timezone formatted offset when it can be determined' do
       user.latitude = 25.9500
       user.longitude = 32.5833
       expect(ActiveSupport::TimeZone.new(subject.timezone)).to receive(:formatted_offset).and_return('+02:00')
