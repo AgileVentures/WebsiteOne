@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'spec_helper'
 
 RSpec.describe AdminMailer, type: :mailer do
   pending "add some examples to (or delete) #{__FILE__}"
