@@ -34,7 +34,7 @@ describe SlackInviteJob do
 
     it 'includes information about user and error' do
       allow(AdminMailer).to receive_message_chain(:failed_to_invite_user_to_slack, :deliver_later)
-      expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, error)
+      expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, error, nil)
       subject.perform(email)
     end
   end
@@ -43,7 +43,7 @@ describe SlackInviteJob do
   context 'when slack response not ok should notify admin' do
     before do
       stub_request(:post, SlackInviteJob::SLACK_INVITE_URL)
-          .to_return(body: '{"ok": false}')
+          .to_return(body: '{"ok": false, "error": "already invited"}')
     end
 
     it 'sends the email later' do
@@ -53,7 +53,7 @@ describe SlackInviteJob do
 
     it 'includes information about user and error' do
       allow(AdminMailer).to receive_message_chain(:failed_to_invite_user_to_slack, :deliver_later)
-      expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, nil)
+      expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, nil, "already invited")
       subject.perform(email)
     end
   end
