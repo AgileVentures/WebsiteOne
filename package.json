@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/AgileVentures/WebsiteOne#readme",
   "dependencies": {
+    "bootstrap-datepicker": "^1.4.0",
     "copyfiles": "^1.0.0",
     "moment": "^2.13.0",
     "moment-timezone": "^0.5.4"
