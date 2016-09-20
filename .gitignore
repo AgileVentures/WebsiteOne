@@ -78,3 +78,4 @@ vendor/assets/javascripts/moment.min.js
 vendor/assets/javascripts/moment-timezone-with-data-2010-2020.js
 vendor/assets/javascripts/bootstrap-datepicker.js
 vendor/assets/javascripts/bootstrap-timepicker.min.js
+vendor/assets/javascripts/typeahead.jquery.js
