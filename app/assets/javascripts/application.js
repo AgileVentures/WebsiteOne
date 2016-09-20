@@ -15,7 +15,7 @@
 //= require bootstrap
 //= require nprogressbar
 //= require bootstrap-datepicker
-//= require bootstrap-timepicker
+//= require bootstrap-timepicker.min
 //= require typeahead
 //= require bootstrap-tokenfield.min
 //= require bootstrap-tags
