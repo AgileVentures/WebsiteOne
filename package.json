@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "preinstall": "npm install bower",
+    "preinstall": "npm install -g bower",
     "postinstall": "scripts/copy_javascript_dependencies.js"
   },
   "repository": {
