@@ -71,3 +71,8 @@ Guardfile
 .vagrant/
 tags
 .byebug_history
+
+node_modules/*
+
+vendor/assets/javascripts/moment.min.js
+vendor/assets/javascripts/moment-timezone-with-data-2010-2020.js

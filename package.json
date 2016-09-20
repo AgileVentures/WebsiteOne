@@ -1,0 +1,27 @@
+{
+  "name": "websiteone",
+  "version": "1.0.0",
+  "description": "A website for AgileVentures",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "postinstall": "scripts/copy_javascript_dependencies.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AgileVentures/WebsiteOne.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AgileVentures/WebsiteOne/issues"
+  },
+  "homepage": "https://github.com/AgileVentures/WebsiteOne#readme",
+  "dependencies": {
+    "copyfiles": "^1.0.0",
+    "moment": "^2.13.0",
+    "moment-timezone": "^0.5.4"
+  }
+}
