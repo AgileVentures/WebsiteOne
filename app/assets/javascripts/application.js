@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require nprogressbar
+//= require nprogress
 //= require bootstrap-datepicker
 //= require bootstrap-timepicker.min
 //= require typeahead.jquery
