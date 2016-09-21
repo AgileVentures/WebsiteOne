@@ -373,6 +373,14 @@ describe User, type: :model do
 
     end
 
+
+    describe '#hangouts_attended_with_more_than_one_participant' do
+      subject(:user) {FactoryGirl.create(:user, hangouts_attended_with_more_than_one_participant: 1)}
+      it 'returns 1' do
+        expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
+      end
+    end
+
     describe '#profile_completeness' do
       subject(:user) { FactoryGirl.create(:user) }
       it 'calculates profile completeness' do

@@ -13,9 +13,11 @@ FactoryGirl.define do
     slug { "#{first_name} #{last_name}".parameterize }
     bio { Faker::Lorem.sentence }
     skill_list { Faker::Lorem.words(4) }
+    karma{ Karma.new}
 
     after(:create) do |user, evaluator|
       create(:authentication, provider: 'gplus', uid: evaluator.gplus, user_id: user.id )
     end
   end
+
 end
