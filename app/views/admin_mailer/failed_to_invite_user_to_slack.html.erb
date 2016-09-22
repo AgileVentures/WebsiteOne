@@ -1,0 +1,19 @@
+Slack invite failed for user with email <%= @email %>
+
+<% if @slack_error_message %>
+    <h2>Slack Error Message:</h2>
+
+    <p><%= @slack_error_message %></p>
+<% end %>
+
+<% if @error_message %>
+    <h2>Error Message:</h2>
+
+    <p><%= @error_message %></p>
+<% end %>
+
+<% if @backtrace %>
+    <h2>BackTrace:</h2>
+
+    <p><%= @backtrace %></p>
+<% end %>
