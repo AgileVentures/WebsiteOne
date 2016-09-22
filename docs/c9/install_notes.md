@@ -40,43 +40,59 @@ $ gem install bundle
 $ bundle install
 ```
 
-8) Configure the pre-installed postgreSQL. Check which version is installed with ls /etc/postgresql/. If the version is not 9.3, the sed commands must be edited to reflect the current version.
+8) install javascript dependencies (ensure bower is installed `npm install bower`)
 
-    # Change conf files to map your user to postgres user
-    sudo sed -i 's/local[ ]*all[ ]*postgres[ ]*peer/local all postgres peer map=basic/' /etc/postgresql/9.3/main/pg_hba.conf
-    sudo sed -i "$ a\basic $USER postgres" /etc/postgresql/9.3/main/pg_ident.conf
-    # Start the service
-    sudo service postgresql start
-    # Make the default database template encoded in unicode
-    psql -U postgres -c "update pg_database set encoding = 6, datcollate = 'C', datctype = 'C' where datname = 'template1';"
-    sudo /etc/init.d/postgresql restart
+```
+$ npm install
+```
 
-9) initialize the db
+9) Configure the pre-installed postgreSQL. Check which version is installed with ls /etc/postgresql/. If the version is not 9.3, the sed commands must be edited to reflect the current version.
+
+```
+# Change conf files to map your user to postgres user
+$ sudo sed -i 's/local[ ]*all[ ]*postgres[ ]*peer/local all postgres peer map=basic/' /etc/postgresql/9.3/main/pg_hba.conf
+$ sudo sed -i "$ a\basic $USER postgres" /etc/postgresql/9.3/main/pg_ident.conf
+    
+# Start the service
+$ sudo service postgresql start
+
+# Make the default database template encoded in unicode
+$ psql -U postgres -c "update pg_database set encoding = 6, datcollate = 'C', datctype = 'C' where datname = 'template1';"
+$ sudo /etc/init.d/postgresql restart
+```
+
+10) initialize the db
 
 ```
 $ bundle exec rake db:setup
 ```
 
-10) Request the .env file
+11) Request the .env file
     
     ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in
 
-11) Run the tests
+12) Run the tests
 
-    bundle exec rake spec
-    bundle exec rake jasmine:ci
-    bundle exec rake cucumber
+```
+$ bundle exec rake spec
+$ bundle exec rake jasmine:ci
+$ bundle exec rake cucumber
+```
 
 Discuss any errors with the team.
 
-12) add some seed data
+13) add some seed data
 
-    $ rake db:seed
+```
+$ rake db:seed
+```
 
-13) Start the server
+14) Start the server
 
-    bundle exec rails s -b $IP -p $PORT
+```
+$ bundle exec rails s -b $IP -p $PORT
+```
     
-14) View the running site 
+15) View the running site 
 
     http://<c9_workspace_name>.<your_c9_user_name>.c9users.io/

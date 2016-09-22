@@ -85,6 +85,12 @@ gem install bundler
 bundle install
 ```
 
+## Install all javascript dependencies
+```
+npm install bower
+npm install
+```
+
 ## Database config changes
 Postgres database is intially in **peer** authentication mode. Change it to **trust** mode for **postgres** user
 
