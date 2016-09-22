@@ -35,6 +35,7 @@ class KarmaCalculator
   end
 
   def hangouts_attended_with_more_than_one_participant
+    # byebug
     gplus_auth = user.authentications.select { |a| a.provider == 'gplus' }
     gplus_id = gplus_auth.try(:first).try(:uid)
     # byebug
