@@ -8,7 +8,7 @@ Feature: Activities View
     Given I am on the "home" page
     And the following users exist
       | first_name | last_name | email                  | skill_list         | hangouts_attended_with_more_than_one_participant |
-      | Alice      | Jones     | alicejones@hotmail.com | ruby, rails, rspec |  0                                               |
+      | Alice      | Jones     | alicejones@hotmail.com | ruby, rails, rspec |  1                                               |
     And the following projects exist:
       | title      | description        | github_url                                  | status | commit_count |
       | WebsiteTwo | awesome autograder | https://github.com/AgileVentures/WebsiteTwo | active | 1            |
@@ -24,7 +24,7 @@ Feature: Activities View
     Then I should see "WebsiteTwo - 500 commits"
     And I should see "Contributions (GitHub) - 500 total commits x 1 - 500"
     And I should see "Contributions (Hangouts Hosted) - 0 total hangouts x 1 - 0"
-    And I should see "Contributions (Hangouts Attended) - 0 total hangouts x 1 - 0"
+    And I should see "Contributions (Hangouts Attended) - 1 total hangouts x 1 - 1"
     And I should see "Contributions (Authentications) - 1 authentications x 100 - 100"
     And I should see "Contributions (Profile Completeness) - 6 out of 10"
     And I should see "Contributions (Membership Length) - 0 out of 6"

@@ -10,7 +10,7 @@ class KarmaCalculator
     user.karma_points = 0
     return if user.created_at.blank?
 
-    user.karma_points = membership_length + profile_completeness + activity + number_hangouts_started_with_more_than_one_participant + number_github_contributions
+    user.karma_points = membership_length + profile_completeness + activity + number_hangouts_started_with_more_than_one_participant + number_github_contributions + hangouts_attended_with_more_than_one_participant
     # better to have time in pairing sessions, code contributed (related to quality), issues, ...
   end
 
@@ -32,6 +32,17 @@ class KarmaCalculator
 
   def number_hangouts_started_with_more_than_one_participant
     user.number_hangouts_started_with_more_than_one_participant
+  end
+
+  def hangouts_attended_with_more_than_one_participant
+    gplus_id = user.authentications.select { |a| a.provider == 'gplus' }
+    return unless gplus_id
+    count = EventInstance.all.select do |i|
+      !i.participants.nil? && i.participants.values.count > 1 && i.participants.values.any? do |p|
+        p['person']['id'] == gplus_id
+      end
+    end.count
+    user.hangouts_attended_with_more_than_one_participant = count
   end
 
   def activity # 6

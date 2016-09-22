@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   def_delegator :karma, :hangouts_attended_with_more_than_one_participant=
   def_delegator :karma, :hangouts_attended_with_more_than_one_participant
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

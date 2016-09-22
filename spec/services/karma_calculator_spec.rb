@@ -3,7 +3,7 @@ require 'spec_helper'
 describe KarmaCalculator do
   subject { KarmaCalculator.new(user) }
   let(:user) { FactoryGirl.build(:user) }
-  let(:karma_points) { subject.perform; user.karma_points }
+  let!(:karma_points) { subject.perform; user.karma_points }
 
   describe 'for new members' do
     let(:user) { FactoryGirl.build(:user, created_at: nil) }
@@ -13,11 +13,28 @@ describe KarmaCalculator do
     end
   end
 
-  describe 'for old members' do
+  context 'for existing members' do
+    let(:user) { FactoryGirl.build(:user, created_at: 31.days.ago) }
 
-    it 'should assign karma points to members' do
-      user.created_at = 31.days.ago
-      expect(karma_points).to be > 0
+    describe 'for old members' do
+
+      it 'should assign karma points to members' do
+        expect(karma_points).to be > 0
+      end
     end
+
+    describe 'for members attending hangouts' do
+      before do
+        FactoryGirl.build(:event_instance)
+      end
+      let(:user) { FactoryGirl.create(:user, created_at: 31.days.ago) }
+
+      it 'gives points for hangout participation' do
+        user
+        # byebug
+        expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
+      end
+    end
+
   end
 end
