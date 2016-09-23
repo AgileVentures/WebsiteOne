@@ -152,6 +152,10 @@ ActiveRecord::Schema.define(version: 20160921152810) do
     t.datetime "updated_at"
   end
 
+  create_table "payment_sources", force: :cascade do |t|
+    t.integer "subscription_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -189,8 +193,10 @@ ActiveRecord::Schema.define(version: 20160921152810) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.string  "type"
-    t.integer "user_id"
+    t.string   "type"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.integer  "user_id"
   end
 
   create_table "taggings", force: :cascade do |t|
