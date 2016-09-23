@@ -35,15 +35,23 @@ class KarmaCalculator
   end
 
   def hangouts_attended_with_more_than_one_participant
+    id = gplus_id
+    return 0 unless id
+    hangouts_attended = calculate_hangouts_attended_with_more_than_one_participant(id)
+    user.hangouts_attended_with_more_than_one_participant = hangouts_attended
+  end
+
+  def gplus_id
     gplus_auth = user.authentications.select { |a| a.provider == 'gplus' }
-    gplus_id = gplus_auth.try(:first).try(:uid)
-    return 0 unless gplus_id
-    count = EventInstance.all.select do |i|
+    gplus_auth.try(:first).try(:uid)
+  end
+
+  def calculate_hangouts_attended_with_more_than_one_participant(id)
+    EventInstance.all.select do |i|
       !i.participants.nil? && i.participants.values.count > 1 && i.participants.values.any? do |p|
-        p['person']['id'] == gplus_id
+        p['person']['id'] == id
       end
     end.count
-    user.hangouts_attended_with_more_than_one_participant = count
   end
 
   def activity # 6
