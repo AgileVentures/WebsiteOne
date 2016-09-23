@@ -188,6 +188,10 @@ ActiveRecord::Schema.define(version: 20160921152810) do
     t.datetime "updated_at"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "user_id"
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
