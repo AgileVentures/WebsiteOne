@@ -3,13 +3,13 @@ require 'spec_helper'
 shared_examples 'a subscription' do
   it { should belong_to :user }
 
-  it {should have_one :payment_source}
+  it { should have_one :payment_source }
 
   it 'has the correct type' do
     expect(subject.type).to eq type
   end
 
-  it {should validate_presence_of :started_at}
+  it { should validate_presence_of :started_at }
 
   it 'has ended_at' do
     expect(subject.ended_at).to be_nil

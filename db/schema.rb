@@ -153,6 +153,8 @@ ActiveRecord::Schema.define(version: 20160921152810) do
   end
 
   create_table "payment_sources", force: :cascade do |t|
+    t.string  "type"
+    t.string  "identifier"
     t.integer "subscription_id"
   end
 
