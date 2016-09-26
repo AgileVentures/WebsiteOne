@@ -504,6 +504,9 @@ GEM
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
     slop (3.6.0)
+    spring (1.7.2)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -665,6 +668,8 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simplecov
+  spring
+  spring-commands-rspec
   sprockets-rails (= 2.3.3)
   stripe
   sucker_punch
