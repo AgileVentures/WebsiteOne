@@ -55,7 +55,7 @@ Feature: As a developer
     When I sign up with GitHub
     Then I should see link for instructions to sign up
 
-  #removed g+ signup while it appearas broken
+  #removed g+ signup while it appears broken
   @omniauth-without-email
   Scenario: User signs up with a Google+ account having no public email (sad path)
     Given I am on the "registration" page
