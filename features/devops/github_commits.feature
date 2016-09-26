@@ -13,7 +13,7 @@ Feature: Update github stats of all projects
       | LocalSupport | Scheduler queue     | https://github.com/AgileVentures/LocalSupport | active   | 1            |
 
    Scenario: Update github commit count of all projects with valid github_url
-      When I run rake task "fetch_github_commits"
+      When I run the rake task for fetching github commits
       Then I should see projects with following details:
       | title        | status   | commit_count |
       | WebsiteTwo   | active   | 94           |
