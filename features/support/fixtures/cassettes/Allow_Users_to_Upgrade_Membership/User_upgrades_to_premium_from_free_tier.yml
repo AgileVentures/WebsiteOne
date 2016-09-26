@@ -28099,4 +28099,1308 @@ http_interactions:
         \ </body>\n</html>\n"
     http_version: 
   recorded_at: Mon, 26 Sep 2016 14:12:55 GMT
+- request:
+    method: get
+    uri: https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=252b24ea-3037-029c-5522-1132705de636
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Referer:
+      - http://127.0.0.1:51818/users/slug-ma
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - checkout.stripe.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - text/html
+      Last-Modified:
+      - Mon, 19 Sep 2016 19:14:20 GMT
+      Etag:
+      - '"57e0390c-2bc9"'
+      Cache-Control:
+      - no-cache
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' https://api.stripe.com wss://verificator.stripe.com
+        wss://verificator-main.stripe.com https://*.stripecdn.com; script-src ''self''
+        ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
+        https://stripecdn.com https://api.stripe.com https://maps.googleapis.com https://maps.gstatic.com;
+        style-src ''self'' ''unsafe-inline'' https://cloud.typography.com https://*.stripecdn.com;
+        frame-src ''self'' stripecheckout: bitcoin:; img-src * data:; font-src ''none'';
+        media-src ''none''; object-src ''none'';'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      Fastly-Debug-Digest:
+      - 5e13ad25fef375bee8474036393994fc95dc49b03fe1c5b11f28ab80059d7239
+      Content-Length:
+      - '11209'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 26 Sep 2016 14:23:49 GMT
+      Age:
+      - '0'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-sea1920-SEA, cache-iad2621-IAD
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1474899829.746501,VS0,VE82
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html dir=\"ltr\">\n  <head>\n    <meta charset=\"utf-8\">\n
+        \   <title>Stripe Checkout</title>\n    <meta name=\"viewport\" content=\"user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1\">\n
+        \   <script src=\"https://b.stripecdn.com/checkout/v3/checkout/loader/error-gBG1B6Sg0av2O1DXMbNTqA.js\"></script>\n
+        \ </head>\n  <body>\n    \n<style type=\"text/css\">\n  .stripeInitialSpinner
+        {\n    position: absolute;\n    top: 35%;\n    left: 50%;\n    margin-left:
+        -14px;\n    width: 28px;\n    height: 28px;\n    z-index: 1000;\n\n    -webkit-animation:
+        fadeIn 0.25s ease-in 1 forwards;\n    -webkit-transition: opacity 0.25s ease-in-out;\n
+        \   -moz-animation: fadeIn 0.25s ease-in 1 forwards;\n    -moz-transition:
+        opacity 0.25s ease-in-out;\n    animation: fadeIn 0.25s ease-in 1 forwards;\n
+        \   transition: opacity 0.25s ease-in-out;\n  }\n\n  @-webkit-keyframes fadeIn
+        {\n    from {opacity:0;} to {opacity:1;}\n  }\n  @-moz-keyframes fadeIn {\n
+        \   from {opacity:0;} to {opacity:1;}\n  }\n  @keyframes fadeIn {\n    from
+        {opacity:0;} to {opacity:1;}\n  }\n\n  .stripeInitialSpinner.hidden {\n    opacity:
+        0 !important;\n  }\n\n  .stripeInitialSpinner > span {\n    background: #050507;\n
+        \   left: 12px;\n    width: 4px;\n    height: 8px;\n    position: absolute;\n
+        \   border-radius: 2px;\n    -webkit-transform-origin: 50% 100%;\n    transform-origin:
+        50% 100%;\n  }\n\n      span.stripeInitialSpinnerFade0 {\n        -webkit-transform:
+        rotate(-45.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade0 {\n        -moz-transform:
+        rotate(-45.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade0 {\n        transform:
+        rotate(-45.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        -webkit-transform:
+        rotate(0.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        -moz-transform:
+        rotate(0.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        transform:
+        rotate(0.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        -webkit-transform:
+        rotate(45.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        -moz-transform:
+        rotate(45.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        transform:
+        rotate(45.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        -webkit-transform:
+        rotate(90.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        -moz-transform:
+        rotate(90.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        transform:
+        rotate(90.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        -webkit-transform:
+        rotate(135.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        -moz-transform:
+        rotate(135.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        transform:
+        rotate(135.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        -webkit-transform:
+        rotate(180.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        -moz-transform:
+        rotate(180.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        transform:
+        rotate(180.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        -webkit-transform:
+        rotate(225.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        -moz-transform:
+        rotate(225.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        transform:
+        rotate(225.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        -webkit-transform:
+        rotate(270.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        -moz-transform:
+        rotate(270.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        transform:
+        rotate(270.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n\n</style>\n<div id=\"stripeSpinner\" class='stripeInitialSpinner'>\n
+        \   <span class=\"stripeInitialSpinnerFade0\"></span>\n    <span class=\"stripeInitialSpinnerFade1\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade2\"></span>\n    <span class=\"stripeInitialSpinnerFade3\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade4\"></span>\n    <span class=\"stripeInitialSpinnerFade5\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade6\"></span>\n    <span class=\"stripeInitialSpinnerFade7\"></span>\n</div>\n\n
+        \   <style type=\"text/css\">\n  body.stripeLoadError {\n    background: rgba(255,
+        255, 255, 0.75);\n  }\n  body.stripeLoadError .stripeErrorMessage {\n    display:
+        block;\n  }\n  body.stripeInFrame .stripeErrorMessageFrame {\n    display:
+        block;\n  }\n  body.stripeInFrame.stripeLoadError #stripeSpinner {\n    display:
+        none;\n  }\n\n  .stripeErrorMessage {\n    display: none;\n    position: absolute;\n
+        \   top: 160px;\n    left: 20px;\n    right: 20px;\n    font-family: \"HelveticaNeueMedium\",
+        \"HelveticaNeue-Medium\", \"Helvetica Neue Medium\", \"HelveticaNeue\", \"Helvetica
+        Neue\", Helvetica, Arial;\n    font-size: 13px;\n    color: #050507;\n    text-align:
+        center;\n  }\n  .stripeErrorMessageFrame {\n    display: none;\n  }\n</style>\n<div
+        class=\"stripeErrorMessage\">\n  <p>\n    Sorry, there was a problem loading
+        Checkout.<br>\n    If this persists, please try a different browser.\n  </p>\n
+        \ <p class=\"stripeErrorMessageFrame\">\n    <small>This message will automatically
+        close in 5 seconds.</small>\n  </p>\n</div>\n\n    <script type=\"application/json\"
+        id=\"StripeCheckoutConfig\">\n      {\n        \"sentryURL\": \"https://4e1e572dc6dc445ea955329cd5bb6329@errors.stripe.com/11\",\n
+        \       \"stripeURL\": \"https://api.stripe.com/v1\",\n        \"mixpanelKey\":
+        \"d7513b16d5649171f045ecd9a0de5c1b\",\n        \"appController\": \"inner/controllers/app\"\n
+        \     }\n    </script>\n    <link rel=\"stylesheet\" href=\"https://b.stripecdn.com/checkout/v3/checkout/inner-7hgyRXpfeORWEFLMNQwI6A.css\">\n
+        \   <script src=\"https://js.stripe.com/v2/\"></script>\n    <script src=\"https://b.stripecdn.com/checkout/v3/checkout/inner-8f31tzKaEhyDwJaJtj9qw.js\"></script>\n
+        \   <script src=\"https://b.stripecdn.com/checkout/v3/checkout/loader/web-aWvmuK9C7KCgPdX8R04yQ.js\"></script>\n
+        \ </body>\n</html>\n"
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:23:49 GMT
+- request:
+    method: get
+    uri: https://api.mixpanel.com/track/?data=eyJldmVudCI6ImNoZWNrb3V0Lm9wZW4iLCJwcm9wZXJ0aWVzIjp7InRva2VuIjoiZDc1MTNiMTZkNTY0OTE3MWYwNDVlY2Q5YTBkZTVjMWIiLCJ1c2VyQWdlbnQiOiJNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCkgQXBwbGVXZWJLaXQvNTM4LjEgKEtIVE1MLCBsaWtlIEdlY2tvKSBQaGFudG9tSlMvMi4xLjEgU2FmYXJpLzUzOC4xIiwiZGlzdGluY3RfaWQiOiIyNTJiMjRlYS0zMDM3LTAyOWMtNTUyMi0xMTMyNzA1ZGU2MzYiLCJldmVudElkIjoiMDhkOTEyNWQtYmUxZi0wMmQ3LWI1MWUtNjIxNDIxNjJmN2VhIiwic3QtdmFyaWFudC10cmFjaW5nIjoiZXhjbHVkZWQiLCJzdC12YXJpYW50LXJlbWVtYmVyTWUiOiJleGNsdWRlZCIsInN0LXZhcmlhbnQtY291bnRyeSI6ImV4Y2x1ZGVkIiwic3QtdmFyaWFudC1qc3VuaXQiOiJiYXoiLCJzdC1hY2NvdW50cy1lbmFibGVkIjp0cnVlLCJzdC1yZW1lbWJlci1tZS1lbmFibGVkIjp0cnVlLCJzdC1yZW1lbWJlci1tZS1jaGVja2VkIjpmYWxzZSwic3QtYWNjb3VudC1jcmVhdGVkIjpmYWxzZSwic3QtbG9nZ2VkLWluIjpmYWxzZSwic3QtdWktdHlwZSI6ImRlc2t0b3AiLCJzdC1sb2NhbGUiOiJlbi1VUyIsInN0LXVpLWludGVncmF0aW9uIjoiaWZyYW1lIiwib3B0aW9uLXJlZmVycmVyIjoiIiwib3B0aW9uLXVybCI6Imh0dHA6Ly8xMjcuMC4wLjE6NTE4MTgvdXNlcnMvc2x1Zy1tYSIsIm9wdGlvbi10aW1lTG9hZGVkIjoxNDc0ODk5ODI5LCJvcHRpb24ta2V5IjoicGtfdGVzdF80TzdDQnhsbnFNRmd3MEJBbXBLbU9qVG4iLCJvcHRpb24tX19vcmlnaW5hbHMiOnsia2V5IjoiZGF0YS1rZXkiLCJkZXNjcmlwdGlvbiI6ImRhdGEtZGVzY3JpcHRpb24iLCJhbW91bnQiOiJkYXRhLWFtb3VudCIsImN1cnJlbmN5IjoiZGF0YS1jdXJyZW5jeSIsImxvY2FsZSI6ImRhdGEtbG9jYWxlIiwibmFtZSI6ImRhdGEtbmFtZSIsImxhYmVsIjoiZGF0YS1sYWJlbCJ9LCJvcHRpb24tZGVzY3JpcHRpb24iOiJBIG1vbnRoJ3Mgc3Vic2NyaXB0aW9uIiwib3B0aW9uLWFtb3VudCI6MTAwMCwib3B0aW9uLWN1cnJlbmN5IjoiR0JQIiwib3B0aW9uLWxvY2FsZSI6ImVuLVVTIiwib3B0aW9uLW5hbWUiOiJQcmVtaXVtIE1lbWJlcnNoaXAiLCJvcHRpb24tbGFiZWwiOiJVcGdyYWRlIHRvIFByZW1pdW0iLCJvcHRpb24tYnV0dG9uSW50ZWdyYXRpb24iOnRydWUsIm9wdGlvbi1zdXBwb3J0c1Rva2VuQ2FsbGJhY2siOmZhbHNlLCJoIjo3NjgsInciOjEwMjR9fQ==&img=1&ip=1
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Referer:
+      - https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=252b24ea-3037-029c-5522-1132705de636
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Accept:
+      - "*/*"
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - api.mixpanel.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.11.2
+      Date:
+      - Mon, 26 Sep 2016 14:23:51 GMT
+      Content-Type:
+      - image/gif
+      Content-Length:
+      - '43'
+      Connection:
+      - close
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - no-cache, no-store
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        R0lGODlhAQABAJAAAP///wAAACH5BAUQAAAALAAAAAABAAEAAAICBAEAOw==
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:23:51 GMT
+- request:
+    method: get
+    uri: https://api.mixpanel.com/track/?data=eyJldmVudCI6ImNoZWNrb3V0LnN1Ym1pdCIsInByb3BlcnRpZXMiOnsidG9rZW4iOiJkNzUxM2IxNmQ1NjQ5MTcxZjA0NWVjZDlhMGRlNWMxYiIsInVzZXJBZ2VudCI6Ik1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYKSBBcHBsZVdlYktpdC81MzguMSAoS0hUTUwsIGxpa2UgR2Vja28pIFBoYW50b21KUy8yLjEuMSBTYWZhcmkvNTM4LjEiLCJkaXN0aW5jdF9pZCI6IjI1MmIyNGVhLTMwMzctMDI5Yy01NTIyLTExMzI3MDVkZTYzNiIsImV2ZW50SWQiOiI4Yzc3MGZjMC03MWZkLWRmZGUtOTY3Ny1lNjA1ODZmMzFjYWMiLCJzdC12YXJpYW50LXRyYWNpbmciOiJleGNsdWRlZCIsInN0LXZhcmlhbnQtcmVtZW1iZXJNZSI6ImV4Y2x1ZGVkIiwic3QtdmFyaWFudC1jb3VudHJ5IjoiZXhjbHVkZWQiLCJzdC12YXJpYW50LWpzdW5pdCI6ImJheiIsInN0LWFjY291bnRzLWVuYWJsZWQiOnRydWUsInN0LXJlbWVtYmVyLW1lLWVuYWJsZWQiOnRydWUsInN0LXJlbWVtYmVyLW1lLWNoZWNrZWQiOmZhbHNlLCJzdC1hY2NvdW50LWNyZWF0ZWQiOmZhbHNlLCJzdC1sb2dnZWQtaW4iOmZhbHNlLCJzdC11aS10eXBlIjoiZGVza3RvcCIsInN0LWxvY2FsZSI6ImVuLVVTIiwic3QtdWktaW50ZWdyYXRpb24iOiJpZnJhbWUiLCJvcHRpb24tcmVmZXJyZXIiOiIiLCJvcHRpb24tdXJsIjoiaHR0cDovLzEyNy4wLjAuMTo1MTgxOC91c2Vycy9zbHVnLW1hIiwib3B0aW9uLXRpbWVMb2FkZWQiOjE0NzQ4OTk4MjksIm9wdGlvbi1rZXkiOiJwa190ZXN0XzRPN0NCeGxucU1GZ3cwQkFtcEttT2pUbiIsIm9wdGlvbi1fX29yaWdpbmFscyI6eyJrZXkiOiJkYXRhLWtleSIsImRlc2NyaXB0aW9uIjoiZGF0YS1kZXNjcmlwdGlvbiIsImFtb3VudCI6ImRhdGEtYW1vdW50IiwiY3VycmVuY3kiOiJkYXRhLWN1cnJlbmN5IiwibG9jYWxlIjoiZGF0YS1sb2NhbGUiLCJuYW1lIjoiZGF0YS1uYW1lIiwibGFiZWwiOiJkYXRhLWxhYmVsIn0sIm9wdGlvbi1kZXNjcmlwdGlvbiI6IkEgbW9udGgncyBzdWJzY3JpcHRpb24iLCJvcHRpb24tYW1vdW50IjoxMDAwLCJvcHRpb24tY3VycmVuY3kiOiJHQlAiLCJvcHRpb24tbG9jYWxlIjoiZW4tVVMiLCJvcHRpb24tbmFtZSI6IlByZW1pdW0gTWVtYmVyc2hpcCIsIm9wdGlvbi1sYWJlbCI6IlVwZ3JhZGUgdG8gUHJlbWl1bSIsIm9wdGlvbi1idXR0b25JbnRlZ3JhdGlvbiI6dHJ1ZSwib3B0aW9uLXN1cHBvcnRzVG9rZW5DYWxsYmFjayI6ZmFsc2UsImgiOjc2OCwidyI6MTAyNH19&img=1&ip=1
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Referer:
+      - https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=252b24ea-3037-029c-5522-1132705de636
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Accept:
+      - "*/*"
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - api.mixpanel.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.11.2
+      Date:
+      - Mon, 26 Sep 2016 14:23:51 GMT
+      Content-Type:
+      - image/gif
+      Content-Length:
+      - '43'
+      Connection:
+      - close
+      Vary:
+      - Accept-Encoding
+      Cache-Control:
+      - no-cache, no-store
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        R0lGODlhAQABAJAAAP///wAAACH5BAUQAAAALAAAAAABAAEAAAICBAEAOw==
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:23:51 GMT
+- request:
+    method: get
+    uri: https://checkout.stripe.com/api/counter?counter=open.inner&key=pk_test_4O7CBxlnqMFgw0BAmpKmOjTn
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Referer:
+      - https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=252b24ea-3037-029c-5522-1132705de636
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Accept:
+      - "*/*"
+      Cookie:
+      - checkout-test-session=0826a5a6-020b-45b5-871d-9696c9213084; last-used-checkout-name=Premium%20Membership;
+        cid=6e9a8f79-9645-4396-a438-edc68f6f3296
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - checkout.stripe.com
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Server:
+      - nginx
+      Cache-Control:
+      - no-cache, no-store, private, must-revalidate, max-age=0, max-stale=0, post-check=0,
+        pre-check=0
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' https://api.stripe.com wss://verificator.stripe.com
+        wss://verificator-main.stripe.com https://*.stripecdn.com; script-src ''self''
+        ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
+        https://stripecdn.com https://api.stripe.com https://maps.googleapis.com https://maps.gstatic.com;
+        style-src ''self'' ''unsafe-inline'' https://cloud.typography.com https://*.stripecdn.com;
+        frame-src ''self'' stripecheckout: bitcoin:; img-src * data:; font-src ''none'';
+        media-src ''none''; object-src ''none'';'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 26 Sep 2016 14:23:51 GMT
+      Via:
+      - 1.1 varnish
+      Connection:
+      - close
+      X-Served-By:
+      - cache-iad2138-IAD
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1474899831.373322,VS0,VE94
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:23:51 GMT
+- request:
+    method: get
+    uri: https://checkout.stripe.com/v3/images/flags/US.png
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Referer:
+      - https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=252b24ea-3037-029c-5522-1132705de636
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Accept:
+      - "*/*"
+      Cookie:
+      - cookiesEnabled=0.4803868858143687; checkout-test-session=0826a5a6-020b-45b5-871d-9696c9213084;
+        last-used-checkout-name=Premium%20Membership; cid=6e9a8f79-9645-4396-a438-edc68f6f3296
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - checkout.stripe.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - image/png
+      Last-Modified:
+      - Mon, 19 Sep 2016 19:12:55 GMT
+      Etag:
+      - '"57e038b7-c87"'
+      Cache-Control:
+      - no-cache
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' https://api.stripe.com wss://verificator.stripe.com
+        wss://verificator-main.stripe.com https://*.stripecdn.com; script-src ''self''
+        ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
+        https://stripecdn.com https://api.stripe.com https://maps.googleapis.com https://maps.gstatic.com;
+        style-src ''self'' ''unsafe-inline'' https://cloud.typography.com https://*.stripecdn.com;
+        frame-src ''self'' stripecheckout: bitcoin:; img-src * data:; font-src ''none'';
+        media-src ''none''; object-src ''none'';'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      Fastly-Debug-Digest:
+      - b6e7115ed84e7404ae6554871caaeac29c81df99fc4d0549fcce35d8d875c46f
+      Content-Length:
+      - '3207'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 26 Sep 2016 14:23:51 GMT
+      Age:
+      - '0'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-sea1921-SEA, cache-iad2642-IAD
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1474899831.391578,VS0,VE81
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        iVBORw0KGgoAAAANSUhEUgAAABcAAAARCAMAAAABrcePAAAKQWlDQ1BJQ0Mg
+        UHJvZmlsZQAASA2dlndUU9kWh8+9N73QEiIgJfQaegkg0jtIFQRRiUmAUAKG
+        hCZ2RAVGFBEpVmRUwAFHhyJjRRQLg4Ji1wnyEFDGwVFEReXdjGsJ7601896a
+        /cdZ39nnt9fZZ+9917oAUPyCBMJ0WAGANKFYFO7rwVwSE8vE9wIYEAEOWAHA
+        4WZmBEf4RALU/L09mZmoSMaz9u4ugGS72yy/UCZz1v9/kSI3QyQGAApF1TY8
+        fiYX5QKUU7PFGTL/BMr0lSkyhjEyFqEJoqwi48SvbPan5iu7yZiXJuShGlnO
+        Gbw0noy7UN6aJeGjjAShXJgl4GejfAdlvVRJmgDl9yjT0/icTAAwFJlfzOcm
+        oWyJMkUUGe6J8gIACJTEObxyDov5OWieAHimZ+SKBIlJYqYR15hp5ejIZvrx
+        s1P5YjErlMNN4Yh4TM/0tAyOMBeAr2+WRQElWW2ZaJHtrRzt7VnW5mj5v9nf
+        Hn5T/T3IevtV8Sbsz55BjJ5Z32zsrC+9FgD2JFqbHbO+lVUAtG0GQOXhrE/v
+        IADyBQC03pzzHoZsXpLE4gwnC4vs7GxzAZ9rLivoN/ufgm/Kv4Y595nL7vtW
+        O6YXP4EjSRUzZUXlpqemS0TMzAwOl89k/fcQ/+PAOWnNycMsnJ/AF/GF6FVR
+        6JQJhIlou4U8gViQLmQKhH/V4X8YNicHGX6daxRodV8AfYU5ULhJB8hvPQBD
+        IwMkbj96An3rWxAxCsi+vGitka9zjzJ6/uf6Hwtcim7hTEEiU+b2DI9kciWi
+        LBmj34RswQISkAd0oAo0gS4wAixgDRyAM3AD3iAAhIBIEAOWAy5IAmlABLJB
+        PtgACkEx2AF2g2pwANSBetAEToI2cAZcBFfADXALDIBHQAqGwUswAd6BaQiC
+        8BAVokGqkBakD5lC1hAbWgh5Q0FQOBQDxUOJkBCSQPnQJqgYKoOqoUNQPfQj
+        dBq6CF2D+qAH0CA0Bv0BfYQRmALTYQ3YALaA2bA7HAhHwsvgRHgVnAcXwNvh
+        SrgWPg63whfhG/AALIVfwpMIQMgIA9FGWAgb8URCkFgkAREha5EipAKpRZqQ
+        DqQbuY1IkXHkAwaHoWGYGBbGGeOHWYzhYlZh1mJKMNWYY5hWTBfmNmYQM4H5
+        gqVi1bGmWCesP3YJNhGbjS3EVmCPYFuwl7ED2GHsOxwOx8AZ4hxwfrgYXDJu
+        Na4Etw/XjLuA68MN4SbxeLwq3hTvgg/Bc/BifCG+Cn8cfx7fjx/GvyeQCVoE
+        a4IPIZYgJGwkVBAaCOcI/YQRwjRRgahPdCKGEHnEXGIpsY7YQbxJHCZOkxRJ
+        hiQXUiQpmbSBVElqIl0mPSa9IZPJOmRHchhZQF5PriSfIF8lD5I/UJQoJhRP
+        ShxFQtlOOUq5QHlAeUOlUg2obtRYqpi6nVpPvUR9Sn0vR5Mzl/OX48mtk6uR
+        a5Xrl3slT5TXl3eXXy6fJ18hf0r+pvy4AlHBQMFTgaOwVqFG4bTCPYVJRZqi
+        lWKIYppiiWKD4jXFUSW8koGStxJPqUDpsNIlpSEaQtOledK4tE20Otpl2jAd
+        Rzek+9OT6cX0H+i99AllJWVb5SjlHOUa5bPKUgbCMGD4M1IZpYyTjLuMj/M0
+        5rnP48/bNq9pXv+8KZX5Km4qfJUilWaVAZWPqkxVb9UU1Z2qbapP1DBqJmph
+        atlq+9Uuq43Pp893ns+dXzT/5PyH6rC6iXq4+mr1w+o96pMamhq+GhkaVRqX
+        NMY1GZpumsma5ZrnNMe0aFoLtQRa5VrntV4wlZnuzFRmJbOLOaGtru2nLdE+
+        pN2rPa1jqLNYZ6NOs84TXZIuWzdBt1y3U3dCT0svWC9fr1HvoT5Rn62fpL9H
+        v1t/ysDQINpgi0GbwaihiqG/YZ5ho+FjI6qRq9Eqo1qjO8Y4Y7ZxivE+41sm
+        sImdSZJJjclNU9jU3lRgus+0zwxr5mgmNKs1u8eisNxZWaxG1qA5wzzIfKN5
+        m/krCz2LWIudFt0WXyztLFMt6ywfWSlZBVhttOqw+sPaxJprXWN9x4Zq42Oz
+        zqbd5rWtqS3fdr/tfTuaXbDdFrtOu8/2DvYi+yb7MQc9h3iHvQ732HR2KLuE
+        fdUR6+jhuM7xjOMHJ3snsdNJp9+dWc4pzg3OowsMF/AX1C0YctFx4bgccpEu
+        ZC6MX3hwodRV25XjWuv6zE3Xjed2xG3E3dg92f24+ysPSw+RR4vHlKeT5xrP
+        C16Il69XkVevt5L3Yu9q76c+Oj6JPo0+E752vqt9L/hh/QL9dvrd89fw5/rX
+        +08EOASsCegKpARGBFYHPgsyCRIFdQTDwQHBu4IfL9JfJFzUFgJC/EN2hTwJ
+        NQxdFfpzGC4sNKwm7Hm4VXh+eHcELWJFREPEu0iPyNLIR4uNFksWd0bJR8VF
+        1UdNRXtFl0VLl1gsWbPkRoxajCCmPRYfGxV7JHZyqffS3UuH4+ziCuPuLjNc
+        lrPs2nK15anLz66QX8FZcSoeGx8d3xD/iRPCqeVMrvRfuXflBNeTu4f7kufG
+        K+eN8V34ZfyRBJeEsoTRRJfEXYljSa5JFUnjAk9BteB1sl/ygeSplJCUoykz
+        qdGpzWmEtPi000IlYYqwK10zPSe9L8M0ozBDuspp1e5VE6JA0ZFMKHNZZruY
+        jv5M9UiMJJslg1kLs2qy3mdHZZ/KUcwR5vTkmuRuyx3J88n7fjVmNXd1Z752
+        /ob8wTXuaw6thdauXNu5Tnddwbrh9b7rj20gbUjZ8MtGy41lG99uit7UUaBR
+        sL5gaLPv5sZCuUJR4b0tzlsObMVsFWzt3WazrWrblyJe0fViy+KK4k8l3JLr
+        31l9V/ndzPaE7b2l9qX7d+B2CHfc3em681iZYlle2dCu4F2t5czyovK3u1fs
+        vlZhW3FgD2mPZI+0MqiyvUqvakfVp+qk6oEaj5rmvep7t+2d2sfb17/fbX/T
+        AY0DxQc+HhQcvH/I91BrrUFtxWHc4azDz+ui6rq/Z39ff0TtSPGRz0eFR6XH
+        wo911TvU1zeoN5Q2wo2SxrHjccdv/eD1Q3sTq+lQM6O5+AQ4ITnx4sf4H++e
+        DDzZeYp9qukn/Z/2ttBailqh1tzWibakNml7THvf6YDTnR3OHS0/m/989Iz2
+        mZqzymdLz5HOFZybOZ93fvJCxoXxi4kXhzpXdD66tOTSna6wrt7LgZevXvG5
+        cqnbvfv8VZerZ645XTt9nX297Yb9jdYeu56WX+x+aem172296XCz/ZbjrY6+
+        BX3n+l37L972un3ljv+dGwOLBvruLr57/17cPel93v3RB6kPXj/Mejj9aP1j
+        7OOiJwpPKp6qP6391fjXZqm99Oyg12DPs4hnj4a4Qy//lfmvT8MFz6nPK0a0
+        RupHrUfPjPmM3Xqx9MXwy4yX0+OFvyn+tveV0auffnf7vWdiycTwa9HrmT9K
+        3qi+OfrW9m3nZOjk03dp76anit6rvj/2gf2h+2P0x5Hp7E/4T5WfjT93fAn8
+        8ngmbWbm3/eE8/syOll+AAAA/1BMVEX///8AAAAAAAAAAAAAAAAAAAAAAACs
+        P0qsP0pAQ5DKd4J2dna6urqgoKCSkpKEhIR5eXl5eXlra2tsbGy3HypOVaLb
+        e4NYW6QbJIgcJIklLY4vN5M5QZhDS51FMoROVKNXXadYXqhobbBobrFpbrFx
+        drVxd7V6f7mCh76Lj8KLj8OprNKqrdOsCQ+sCRCvDBSytdeztte2Fh62Fh+5
+        vNu6HSe6vdvAw97BKzXHyeLIO0bIyuLOTFbUPErUPUvXSljXS1jXY2zaWGXa
+        WWbccXvccnvdZ3LdZ3PddX7f39/gdX/gdoDjg4zkhI3m5ubo6Ojp6enr6+vt
+        7e3v7+/w8PDHoL1gAAAAGHRSTlMAAQIDBhMWcXJzfsbO5+jr7u/z8/j5+fwp
+        hA84AAAA0klEQVQY022Q2wsBURDGz7fjthf35PYqeSMlHiT5syVlPUhK+SN4
+        XC3nLKI92mWtrJmnmfnN9zUDBoD9hJQSSGU0CckgG34PErTlFyjF5jFvFazc
+        offh3akDqulZ20vRDngmhQmqVs7+4NAPDTy+ounC4IYQHeb5+Dv2ClQuOOot
+        eVWtQcjPBKj01ky0Qn2+BhkTFok5B/X08J5AX2xA6XGUX5xAXZ297sUXvwXl
+        hlF+aYM62qcMdsB3UNRR/Be/mxcgka67ge6LV/b8Bhb79//HEzJBVznEpQqo
+        AAAAAElFTkSuQmCC
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:23:51 GMT
+- request:
+    method: get
+    uri: https://checkout.stripe.com/api/account/lookup?email=random@morerandom.com&key=pk_test_4O7CBxlnqMFgw0BAmpKmOjTn&locale=en-US&send=false
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Rack-Session:
+      - 0826a5a6-020b-45b5-871d-9696c9213084
+      Accept:
+      - application/json, text/javascript, */*; q=0.01
+      X-Requested-With:
+      - XMLHttpRequest
+      Referer:
+      - https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=252b24ea-3037-029c-5522-1132705de636
+      X-Csrf-Token:
+      - V-krGtLGHj7ZeV53Az07sa-Xn34=
+      Stripe-Checkout-Test-Session:
+      - 0826a5a6-020b-45b5-871d-9696c9213084
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Cookie:
+      - checkout-test-session=0826a5a6-020b-45b5-871d-9696c9213084; last-used-checkout-name=Premium%20Membership;
+        cid=6e9a8f79-9645-4396-a438-edc68f6f3296
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - checkout.stripe.com
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Server:
+      - nginx
+      Cache-Control:
+      - no-cache, no-store, private, must-revalidate, max-age=0, max-stale=0, post-check=0,
+        pre-check=0
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' https://api.stripe.com wss://verificator.stripe.com
+        wss://verificator-main.stripe.com https://*.stripecdn.com; script-src ''self''
+        ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
+        https://stripecdn.com https://api.stripe.com https://maps.googleapis.com https://maps.gstatic.com;
+        style-src ''self'' ''unsafe-inline'' https://cloud.typography.com https://*.stripecdn.com;
+        frame-src ''self'' stripecheckout: bitcoin:; img-src * data:; font-src ''none'';
+        media-src ''none''; object-src ''none'';'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 26 Sep 2016 14:23:51 GMT
+      Via:
+      - 1.1 varnish
+      Connection:
+      - close
+      X-Served-By:
+      - cache-iad2139-IAD
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1474899831.426808,VS0,VE92
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:23:51 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/tokens
+    body:
+      encoding: UTF-8
+      string: email=random%40morerandom.com&validation_type=card&payment_user_agent=Stripe+Checkout+v3+(stripe.js%2F6ea8d55)&user_agent=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&device_id=6e9a8f79-9645-4396-a438-edc68f6f3296&referrer=http%3A%2F%2F127.0.0.1%3A51818%2Fusers%2Fslug-ma&time_checkout_opened=1474899830&time_checkout_loaded=1474899830&card[number]=4242+4242+4242+4242&card[cvc]=123&card[exp_month]=12&card[exp_year]=2019&card[name]=random%40morerandom.com&key=pk_test_4O7CBxlnqMFgw0BAmpKmOjTn
+    headers:
+      Accept:
+      - application/json
+      Referer:
+      - https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=252b24ea-3037-029c-5522-1132705de636
+      Origin:
+      - https://checkout.stripe.com
+      Accept-Language:
+      - en-US
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Content-Length:
+      - '567'
+      Connection:
+      - Keep-Alive
+      Host:
+      - api.stripe.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 26 Sep 2016 14:23:52 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '853'
+      Connection:
+      - close
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - https://checkout.stripe.com
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9GX5DQMuU8ZR90
+      Stripe-Version:
+      - '2014-06-17'
+      Timing-Allow-Origin:
+      - https://checkout.stripe.com
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_18y01M4cJkXFgrlCrLGtprw9",
+          "object": "token",
+          "card": {
+            "id": "card_18y01L4cJkXFgrlCZYY5t8Nq",
+            "object": "card",
+            "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_zip_check": null,
+            "brand": "Visa",
+            "country": "US",
+            "cvc_check": "pass",
+            "dynamic_last4": null,
+            "exp_month": 12,
+            "exp_year": 2019,
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": {},
+            "name": "random@morerandom.com",
+            "tokenization_method": null,
+            "fingerprint": "fyjaaQ5NnzaXnYRE",
+            "customer": null
+          },
+          "client_ip": "100.11.244.36",
+          "created": 1474899832,
+          "email": "random@morerandom.com",
+          "livemode": false,
+          "type": "card",
+          "used": false
+        }
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:23:52 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: email=random%40morerandom.com&plan=premium&source=tok_18y01M4cJkXFgrlCrLGtprw9
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.41.0
+      Authorization:
+      - Bearer sk_test_4O7CTmoS1jwlDAX3z1abLYWm
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.41.0","lang":"ruby","lang_version":"2.3.0 p0 (2015-12-25)","platform":"x86_64-darwin14","engine":"ruby","publisher":"stripe","uname":"Darwin
+        Michaels-MBP.home 14.5.0 Darwin Kernel Version 14.5.0: Mon Aug 29 21:14:16
+        PDT 2016; root:xnu-2782.50.6~1/RELEASE_X86_64 x86_64","hostname":"Michaels-MBP.home"}'
+      Content-Length:
+      - '78'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 26 Sep 2016 14:23:55 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '3490'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_9GX5quz5xzQpKC
+      Stripe-Version:
+      - '2014-06-17'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "cus_9GX5F1ig9LkpXb",
+          "object": "customer",
+          "account_balance": 0,
+          "cards": {
+            "object": "list",
+            "data": [
+              {
+                "id": "card_18y01L4cJkXFgrlCZYY5t8Nq",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_9GX5F1ig9LkpXb",
+                "cvc_check": "pass",
+                "dynamic_last4": null,
+                "exp_month": 12,
+                "exp_year": 2019,
+                "fingerprint": "fyjaaQ5NnzaXnYRE",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {},
+                "name": "random@morerandom.com",
+                "tokenization_method": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/customers/cus_9GX5F1ig9LkpXb/cards"
+          },
+          "created": 1474899835,
+          "currency": "gbp",
+          "default_card": "card_18y01L4cJkXFgrlCZYY5t8Nq",
+          "default_source": "card_18y01L4cJkXFgrlCZYY5t8Nq",
+          "delinquent": false,
+          "description": null,
+          "discount": null,
+          "email": "random@morerandom.com",
+          "livemode": false,
+          "metadata": {},
+          "shipping": null,
+          "sources": {
+            "object": "list",
+            "data": [
+              {
+                "id": "card_18y01L4cJkXFgrlCZYY5t8Nq",
+                "object": "card",
+                "address_city": null,
+                "address_country": null,
+                "address_line1": null,
+                "address_line1_check": null,
+                "address_line2": null,
+                "address_state": null,
+                "address_zip": null,
+                "address_zip_check": null,
+                "brand": "Visa",
+                "country": "US",
+                "customer": "cus_9GX5F1ig9LkpXb",
+                "cvc_check": "pass",
+                "dynamic_last4": null,
+                "exp_month": 12,
+                "exp_year": 2019,
+                "fingerprint": "fyjaaQ5NnzaXnYRE",
+                "funding": "credit",
+                "last4": "4242",
+                "metadata": {},
+                "name": "random@morerandom.com",
+                "tokenization_method": null
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/customers/cus_9GX5F1ig9LkpXb/sources"
+          },
+          "subscriptions": {
+            "object": "list",
+            "data": [
+              {
+                "id": "sub_9GX5FF8oO1pJCk",
+                "object": "subscription",
+                "application_fee_percent": null,
+                "cancel_at_period_end": false,
+                "canceled_at": null,
+                "created": 1474899835,
+                "current_period_end": 1475504635,
+                "current_period_start": 1474899835,
+                "customer": "cus_9GX5F1ig9LkpXb",
+                "discount": null,
+                "ended_at": null,
+                "livemode": false,
+                "metadata": {},
+                "plan": {
+                  "id": "premium",
+                  "object": "plan",
+                  "amount": 1000,
+                  "created": 1463668361,
+                  "currency": "gbp",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "name": "AV Premium",
+                  "statement_descriptor": "AGILE VENTURES PREMIUM",
+                  "trial_period_days": 7,
+                  "statement_description": "AGILE VENTURES PREMIUM"
+                },
+                "quantity": 1,
+                "start": 1474899835,
+                "status": "trialing",
+                "tax_percent": null,
+                "trial_end": 1475504635,
+                "trial_start": 1474899835
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/customers/cus_9GX5F1ig9LkpXb/subscriptions"
+          }
+        }
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:23:55 GMT
+- request:
+    method: get
+    uri: https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=2a35f11c-8a83-911a-ecdf-dc4412be6d88
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Referer:
+      - http://127.0.0.1:51992/users/slug-ma
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - checkout.stripe.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - text/html
+      Last-Modified:
+      - Mon, 19 Sep 2016 19:14:20 GMT
+      Etag:
+      - '"57e0390c-2bc9"'
+      Cache-Control:
+      - no-cache
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' https://api.stripe.com wss://verificator.stripe.com
+        wss://verificator-main.stripe.com https://*.stripecdn.com; script-src ''self''
+        ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
+        https://stripecdn.com https://api.stripe.com https://maps.googleapis.com https://maps.gstatic.com;
+        style-src ''self'' ''unsafe-inline'' https://cloud.typography.com https://*.stripecdn.com;
+        frame-src ''self'' stripecheckout: bitcoin:; img-src * data:; font-src ''none'';
+        media-src ''none''; object-src ''none'';'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      Fastly-Debug-Digest:
+      - 10565b37f1a4b92ae08bcb9d1aa1ed93febb4605eed3787368c47ec714f307a2
+      Content-Length:
+      - '11209'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 26 Sep 2016 14:25:25 GMT
+      Age:
+      - '0'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-sea1920-SEA, cache-iad2633-IAD
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1474899925.368459,VS0,VE81
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html dir=\"ltr\">\n  <head>\n    <meta charset=\"utf-8\">\n
+        \   <title>Stripe Checkout</title>\n    <meta name=\"viewport\" content=\"user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1\">\n
+        \   <script src=\"https://b.stripecdn.com/checkout/v3/checkout/loader/error-gBG1B6Sg0av2O1DXMbNTqA.js\"></script>\n
+        \ </head>\n  <body>\n    \n<style type=\"text/css\">\n  .stripeInitialSpinner
+        {\n    position: absolute;\n    top: 35%;\n    left: 50%;\n    margin-left:
+        -14px;\n    width: 28px;\n    height: 28px;\n    z-index: 1000;\n\n    -webkit-animation:
+        fadeIn 0.25s ease-in 1 forwards;\n    -webkit-transition: opacity 0.25s ease-in-out;\n
+        \   -moz-animation: fadeIn 0.25s ease-in 1 forwards;\n    -moz-transition:
+        opacity 0.25s ease-in-out;\n    animation: fadeIn 0.25s ease-in 1 forwards;\n
+        \   transition: opacity 0.25s ease-in-out;\n  }\n\n  @-webkit-keyframes fadeIn
+        {\n    from {opacity:0;} to {opacity:1;}\n  }\n  @-moz-keyframes fadeIn {\n
+        \   from {opacity:0;} to {opacity:1;}\n  }\n  @keyframes fadeIn {\n    from
+        {opacity:0;} to {opacity:1;}\n  }\n\n  .stripeInitialSpinner.hidden {\n    opacity:
+        0 !important;\n  }\n\n  .stripeInitialSpinner > span {\n    background: #050507;\n
+        \   left: 12px;\n    width: 4px;\n    height: 8px;\n    position: absolute;\n
+        \   border-radius: 2px;\n    -webkit-transform-origin: 50% 100%;\n    transform-origin:
+        50% 100%;\n  }\n\n      span.stripeInitialSpinnerFade0 {\n        -webkit-transform:
+        rotate(-45.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade0 {\n        -moz-transform:
+        rotate(-45.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade0 {\n        transform:
+        rotate(-45.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        -webkit-transform:
+        rotate(0.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        -moz-transform:
+        rotate(0.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        transform:
+        rotate(0.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        -webkit-transform:
+        rotate(45.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        -moz-transform:
+        rotate(45.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        transform:
+        rotate(45.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        -webkit-transform:
+        rotate(90.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        -moz-transform:
+        rotate(90.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        transform:
+        rotate(90.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        -webkit-transform:
+        rotate(135.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        -moz-transform:
+        rotate(135.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        transform:
+        rotate(135.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        -webkit-transform:
+        rotate(180.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        -moz-transform:
+        rotate(180.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        transform:
+        rotate(180.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        -webkit-transform:
+        rotate(225.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        -moz-transform:
+        rotate(225.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        transform:
+        rotate(225.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        -webkit-transform:
+        rotate(270.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        -moz-transform:
+        rotate(270.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        transform:
+        rotate(270.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n\n</style>\n<div id=\"stripeSpinner\" class='stripeInitialSpinner'>\n
+        \   <span class=\"stripeInitialSpinnerFade0\"></span>\n    <span class=\"stripeInitialSpinnerFade1\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade2\"></span>\n    <span class=\"stripeInitialSpinnerFade3\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade4\"></span>\n    <span class=\"stripeInitialSpinnerFade5\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade6\"></span>\n    <span class=\"stripeInitialSpinnerFade7\"></span>\n</div>\n\n
+        \   <style type=\"text/css\">\n  body.stripeLoadError {\n    background: rgba(255,
+        255, 255, 0.75);\n  }\n  body.stripeLoadError .stripeErrorMessage {\n    display:
+        block;\n  }\n  body.stripeInFrame .stripeErrorMessageFrame {\n    display:
+        block;\n  }\n  body.stripeInFrame.stripeLoadError #stripeSpinner {\n    display:
+        none;\n  }\n\n  .stripeErrorMessage {\n    display: none;\n    position: absolute;\n
+        \   top: 160px;\n    left: 20px;\n    right: 20px;\n    font-family: \"HelveticaNeueMedium\",
+        \"HelveticaNeue-Medium\", \"Helvetica Neue Medium\", \"HelveticaNeue\", \"Helvetica
+        Neue\", Helvetica, Arial;\n    font-size: 13px;\n    color: #050507;\n    text-align:
+        center;\n  }\n  .stripeErrorMessageFrame {\n    display: none;\n  }\n</style>\n<div
+        class=\"stripeErrorMessage\">\n  <p>\n    Sorry, there was a problem loading
+        Checkout.<br>\n    If this persists, please try a different browser.\n  </p>\n
+        \ <p class=\"stripeErrorMessageFrame\">\n    <small>This message will automatically
+        close in 5 seconds.</small>\n  </p>\n</div>\n\n    <script type=\"application/json\"
+        id=\"StripeCheckoutConfig\">\n      {\n        \"sentryURL\": \"https://4e1e572dc6dc445ea955329cd5bb6329@errors.stripe.com/11\",\n
+        \       \"stripeURL\": \"https://api.stripe.com/v1\",\n        \"mixpanelKey\":
+        \"d7513b16d5649171f045ecd9a0de5c1b\",\n        \"appController\": \"inner/controllers/app\"\n
+        \     }\n    </script>\n    <link rel=\"stylesheet\" href=\"https://b.stripecdn.com/checkout/v3/checkout/inner-7hgyRXpfeORWEFLMNQwI6A.css\">\n
+        \   <script src=\"https://js.stripe.com/v2/\"></script>\n    <script src=\"https://b.stripecdn.com/checkout/v3/checkout/inner-8f31tzKaEhyDwJaJtj9qw.js\"></script>\n
+        \   <script src=\"https://b.stripecdn.com/checkout/v3/checkout/loader/web-aWvmuK9C7KCgPdX8R04yQ.js\"></script>\n
+        \ </body>\n</html>\n"
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:25:25 GMT
+- request:
+    method: get
+    uri: https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=905a5f87-1f56-5723-cfd7-5acc6cbc59ff
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Referer:
+      - http://127.0.0.1:51992/users/slug-ma
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Cookie:
+      - cookiesEnabled=0.30694457655772567; checkout-test-session=0826a5a6-020b-45b5-871d-9696c9213084;
+        last-used-checkout-name=Premium%20Membership; cid=64a7cb3a-5d2f-4376-bf7e-c99005c15b72
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - checkout.stripe.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - text/html
+      Last-Modified:
+      - Mon, 19 Sep 2016 19:14:20 GMT
+      Etag:
+      - '"57e0390c-2bc9"'
+      Cache-Control:
+      - no-cache
+      Content-Security-Policy:
+      - 'default-src ''self''; connect-src ''self'' https://api.stripe.com wss://verificator.stripe.com
+        wss://verificator-main.stripe.com https://*.stripecdn.com; script-src ''self''
+        ''unsafe-inline'' ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com
+        https://stripecdn.com https://api.stripe.com https://maps.googleapis.com https://maps.gstatic.com;
+        style-src ''self'' ''unsafe-inline'' https://cloud.typography.com https://*.stripecdn.com;
+        frame-src ''self'' stripecheckout: bitcoin:; img-src * data:; font-src ''none'';
+        media-src ''none''; object-src ''none'';'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      Fastly-Debug-Digest:
+      - ededf6106c709a1f25cddf3e737d9eb8401823e4d0a693c825c829ac080c7ee3
+      Content-Length:
+      - '11209'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 26 Sep 2016 14:25:29 GMT
+      Age:
+      - '0'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-sea1924-SEA, cache-iad2144-IAD
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1474899929.761893,VS0,VE82
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n<html dir=\"ltr\">\n  <head>\n    <meta charset=\"utf-8\">\n
+        \   <title>Stripe Checkout</title>\n    <meta name=\"viewport\" content=\"user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1\">\n
+        \   <script src=\"https://b.stripecdn.com/checkout/v3/checkout/loader/error-gBG1B6Sg0av2O1DXMbNTqA.js\"></script>\n
+        \ </head>\n  <body>\n    \n<style type=\"text/css\">\n  .stripeInitialSpinner
+        {\n    position: absolute;\n    top: 35%;\n    left: 50%;\n    margin-left:
+        -14px;\n    width: 28px;\n    height: 28px;\n    z-index: 1000;\n\n    -webkit-animation:
+        fadeIn 0.25s ease-in 1 forwards;\n    -webkit-transition: opacity 0.25s ease-in-out;\n
+        \   -moz-animation: fadeIn 0.25s ease-in 1 forwards;\n    -moz-transition:
+        opacity 0.25s ease-in-out;\n    animation: fadeIn 0.25s ease-in 1 forwards;\n
+        \   transition: opacity 0.25s ease-in-out;\n  }\n\n  @-webkit-keyframes fadeIn
+        {\n    from {opacity:0;} to {opacity:1;}\n  }\n  @-moz-keyframes fadeIn {\n
+        \   from {opacity:0;} to {opacity:1;}\n  }\n  @keyframes fadeIn {\n    from
+        {opacity:0;} to {opacity:1;}\n  }\n\n  .stripeInitialSpinner.hidden {\n    opacity:
+        0 !important;\n  }\n\n  .stripeInitialSpinner > span {\n    background: #050507;\n
+        \   left: 12px;\n    width: 4px;\n    height: 8px;\n    position: absolute;\n
+        \   border-radius: 2px;\n    -webkit-transform-origin: 50% 100%;\n    transform-origin:
+        50% 100%;\n  }\n\n      span.stripeInitialSpinnerFade0 {\n        -webkit-transform:
+        rotate(-45.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade0 {\n        -moz-transform:
+        rotate(-45.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade0 {\n        transform:
+        rotate(-45.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade0
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade0
+        {\n        0% {opacity:0;}\n        25% { opacity:1; }\n        0%,100% {
+        opacity:0.0000 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        -webkit-transform:
+        rotate(0.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        -moz-transform:
+        rotate(0.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade1 {\n        transform:
+        rotate(0.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade1
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade1
+        {\n        11% {opacity:0;}\n        36% { opacity:1; }\n        0%,100% {
+        opacity:0.1250 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        -webkit-transform:
+        rotate(45.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        -moz-transform:
+        rotate(45.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade2 {\n        transform:
+        rotate(45.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade2
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade2
+        {\n        21% {opacity:0;}\n        46% { opacity:1; }\n        0%,100% {
+        opacity:0.2500 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        -webkit-transform:
+        rotate(90.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        -moz-transform:
+        rotate(90.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade3 {\n        transform:
+        rotate(90.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade3
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade3
+        {\n        32% {opacity:0;}\n        57% { opacity:1; }\n        0%,100% {
+        opacity:0.3750 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        -webkit-transform:
+        rotate(135.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        -moz-transform:
+        rotate(135.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade4 {\n        transform:
+        rotate(135.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade4
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade4
+        {\n        43% {opacity:0;}\n        68% { opacity:1; }\n        0%,100% {
+        opacity:0.5000 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        -webkit-transform:
+        rotate(180.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        -moz-transform:
+        rotate(180.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade5 {\n        transform:
+        rotate(180.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade5
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade5
+        {\n        54% {opacity:0;}\n        79% { opacity:1; }\n        0%,100% {
+        opacity:0.6250 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        -webkit-transform:
+        rotate(225.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        -moz-transform:
+        rotate(225.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade6 {\n        transform:
+        rotate(225.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade6
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade6
+        {\n        64% {opacity:0;}\n        89% { opacity:1; }\n        0%,100% {
+        opacity:0.7500 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        -webkit-transform:
+        rotate(270.0deg) translateY(16px);\n        -webkit-animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @-webkit-keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        -moz-transform:
+        rotate(270.0deg) translateY(16px);\n        -moz-animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @-moz-keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n      span.stripeInitialSpinnerFade7 {\n        transform:
+        rotate(270.0deg) translateY(16px);\n        animation: stripeInitialSpinnerFade7
+        .8s linear infinite;\n      }\n      @keyframes stripeInitialSpinnerFade7
+        {\n        75% {opacity:0;}\n        100% { opacity:1; }\n        0%,100%
+        { opacity:0.8750 }\n      }\n\n</style>\n<div id=\"stripeSpinner\" class='stripeInitialSpinner'>\n
+        \   <span class=\"stripeInitialSpinnerFade0\"></span>\n    <span class=\"stripeInitialSpinnerFade1\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade2\"></span>\n    <span class=\"stripeInitialSpinnerFade3\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade4\"></span>\n    <span class=\"stripeInitialSpinnerFade5\"></span>\n
+        \   <span class=\"stripeInitialSpinnerFade6\"></span>\n    <span class=\"stripeInitialSpinnerFade7\"></span>\n</div>\n\n
+        \   <style type=\"text/css\">\n  body.stripeLoadError {\n    background: rgba(255,
+        255, 255, 0.75);\n  }\n  body.stripeLoadError .stripeErrorMessage {\n    display:
+        block;\n  }\n  body.stripeInFrame .stripeErrorMessageFrame {\n    display:
+        block;\n  }\n  body.stripeInFrame.stripeLoadError #stripeSpinner {\n    display:
+        none;\n  }\n\n  .stripeErrorMessage {\n    display: none;\n    position: absolute;\n
+        \   top: 160px;\n    left: 20px;\n    right: 20px;\n    font-family: \"HelveticaNeueMedium\",
+        \"HelveticaNeue-Medium\", \"Helvetica Neue Medium\", \"HelveticaNeue\", \"Helvetica
+        Neue\", Helvetica, Arial;\n    font-size: 13px;\n    color: #050507;\n    text-align:
+        center;\n  }\n  .stripeErrorMessageFrame {\n    display: none;\n  }\n</style>\n<div
+        class=\"stripeErrorMessage\">\n  <p>\n    Sorry, there was a problem loading
+        Checkout.<br>\n    If this persists, please try a different browser.\n  </p>\n
+        \ <p class=\"stripeErrorMessageFrame\">\n    <small>This message will automatically
+        close in 5 seconds.</small>\n  </p>\n</div>\n\n    <script type=\"application/json\"
+        id=\"StripeCheckoutConfig\">\n      {\n        \"sentryURL\": \"https://4e1e572dc6dc445ea955329cd5bb6329@errors.stripe.com/11\",\n
+        \       \"stripeURL\": \"https://api.stripe.com/v1\",\n        \"mixpanelKey\":
+        \"d7513b16d5649171f045ecd9a0de5c1b\",\n        \"appController\": \"inner/controllers/app\"\n
+        \     }\n    </script>\n    <link rel=\"stylesheet\" href=\"https://b.stripecdn.com/checkout/v3/checkout/inner-7hgyRXpfeORWEFLMNQwI6A.css\">\n
+        \   <script src=\"https://js.stripe.com/v2/\"></script>\n    <script src=\"https://b.stripecdn.com/checkout/v3/checkout/inner-8f31tzKaEhyDwJaJtj9qw.js\"></script>\n
+        \   <script src=\"https://b.stripecdn.com/checkout/v3/checkout/loader/web-aWvmuK9C7KCgPdX8R04yQ.js\"></script>\n
+        \ </body>\n</html>\n"
+    http_version: 
+  recorded_at: Mon, 26 Sep 2016 14:25:29 GMT
 recorded_with: VCR 3.0.1

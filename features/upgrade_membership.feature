@@ -17,6 +17,7 @@ Feature: Allow Users to Upgrade Membership
     And I click "Upgrade to Premium"
     When I fill in appropriate card details for premium
     Then I should see "Premium Member"
+    Given I am on my profile page
     Then I should not see "PremiumPlus Member"
     Then I should not see "Basic Member"
 
