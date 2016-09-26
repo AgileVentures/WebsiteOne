@@ -1,3 +1,4 @@
+@javascript @vcr @billy_directories
 Feature: Allow Users to Upgrade Membership
   As a site admin
   So that users can pay for better premium services
@@ -14,6 +15,7 @@ Feature: Allow Users to Upgrade Membership
     Given I am logged in
     And I am on my profile page
     And I click "Upgrade to Premium"
+    When I fill in appropriate card details for premium
     Then I should see "Premium Member"
     Then I should not see "PremiumPlus Member"
     Then I should not see "Basic Member"
