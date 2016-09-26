@@ -59,3 +59,12 @@ end
 After('@omniauth, @omniauth-with-email') do
   OmniAuth.config.test_mode = false
 end
+
+Before('@rake') do |scenario|
+  unless $rake
+    require 'rake'
+    Rake.application.rake_require "tasks/scheduler"
+    Rake::Task.define_task(:environment)
+    $rake = Rake::Task
+  end
+end
