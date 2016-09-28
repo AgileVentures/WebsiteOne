@@ -73,6 +73,11 @@ class User < ActiveRecord::Base
     User.tagged_with(title)
   end
 
+  def membership_type
+    return "Basic" unless stripe_customer
+    "Premium"
+  end
+
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid']) unless email.blank?

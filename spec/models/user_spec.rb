@@ -402,6 +402,19 @@ describe User, type: :model do
       end
     end
 
+    describe '#membership_type' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'returns membership type' do
+        expect(user.membership_type).to eq 'Basic'
+      end
+      context 'premium member' do
+        subject(:user){FactoryGirl.create(:user, stripe_customer: "sdfdfds")}
+        it 'returns premium' do
+          expect(user.membership_type).to eq 'Premium'
+        end
+      end
+    end
+
   end
 
 end
