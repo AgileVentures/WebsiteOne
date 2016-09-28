@@ -10,11 +10,15 @@ class KarmaCalculator
     user.karma.total = 0
     return if user.created_at.blank?
 
-    user.karma.total = membership_length + profile_completeness + activity + number_hangouts_started_with_more_than_one_participant + number_github_contributions + hangouts_attended_with_more_than_one_participant
+    user.karma.total = sum_elements
     # better to have time in pairing sessions, code contributed (related to quality), issues, ...
   end
 
   private
+
+  def sum_elements
+    membership_length + profile_completeness + activity + number_hangouts_started_with_more_than_one_participant + number_github_contributions + hangouts_attended_with_more_than_one_participant
+  end
 
   def membership_length # 6
     user.membership_length
