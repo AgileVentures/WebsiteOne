@@ -415,6 +415,19 @@ describe User, type: :model do
       end
     end
 
+    describe '#karma_total' do
+      subject(:user){FactoryGirl.create(:user)}
+      it 'returns 0' do
+        expect(user.karma_total).to eq 0
+      end
+      describe 'non zero karma total' do
+        subject(:user){FactoryGirl.build(:user, karma: FactoryGirl.create(:karma, total: 50))}
+        it 'returns 50' do
+          expect(user.karma_total).to eq 50
+        end
+      end
+    end
+
   end
 
 end

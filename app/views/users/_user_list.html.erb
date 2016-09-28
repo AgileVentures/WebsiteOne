@@ -16,7 +16,7 @@
                   <% if user.country_name %>
                       <p data-toggle="tooltip" title="<%= presenter.country_name %>"><%= presenter.country_name %></p>
                   <% end %>
-                      <p class="small"><i class="fa fa-fire"></i><%= presenter.karma.total %></p>
+                      <p class="small"><i class="fa fa-fire"></i><%= presenter.karma_total %></p>
                 </div>
               </a>
               <% if user.online? & presenter.status? %>
