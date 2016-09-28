@@ -13,6 +13,8 @@ class EventInstance < ActiveRecord::Base
   scope :latest, -> { order('created_at DESC') }
   scope :pp_hangouts, -> { where(category: 'PairProgramming') }
 
+  has_many :hangout_participants_snapshots
+
   validate :dont_update_after_finished, on: :update
 
   def started?

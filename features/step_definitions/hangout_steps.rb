@@ -72,5 +72,5 @@ end
 
 And(/^there should be three snapshots$/) do
   @hangout.reload
-  expect(@hangout.hangout_participant_snapshots.count).to eq 3
+  expect(@hangout.hangout_participants_snapshots.count).to eq 3
 end
