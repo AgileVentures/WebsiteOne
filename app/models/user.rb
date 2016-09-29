@@ -73,6 +73,11 @@ class User < ActiveRecord::Base
     User.tagged_with(title)
   end
 
+  def membership_type
+    return "Basic" unless stripe_customer
+    "Premium"
+  end
+
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid']) unless email.blank?
@@ -169,6 +174,11 @@ class User < ActiveRecord::Base
 
   def membership_length
     1 * [user_age_in_months.to_i, 6].min
+  end
+
+  def karma_total
+    return karma.total if karma
+    0
   end
 
   private
