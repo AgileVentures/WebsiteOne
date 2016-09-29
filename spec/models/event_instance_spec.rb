@@ -83,9 +83,16 @@ describe EventInstance, type: :model do
   end
 
   context 'associated hangout_participant_snapshots' do
-    let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil, hangout_participants_snapshots: [HangoutParticipantsSnapshot.new]) }
+    let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil,
+                                       hangout_participants_snapshots_attributes: [{participants: "blah"}]) }
     it 'should do stuff' do
       expect(hangout.hangout_participants_snapshots.count).to eq 1
     end
+
+    it 'should add more hangout snapshots when updated' do
+      hangout.update(hangout_participants_snapshots_attributes: [{participants: "stuff"}])
+      expect(hangout.hangout_participants_snapshots.count).to eq 2
+    end
   end
+
 end
