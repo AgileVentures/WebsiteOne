@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   has_many :status
 
   has_one :karma
+  after_save :build_karma, if: -> { karma.nil? }
 
   accepts_nested_attributes_for :status
   scope :mail_receiver, -> { where(receive_mailings: true) }
