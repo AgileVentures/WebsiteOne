@@ -402,6 +402,32 @@ describe User, type: :model do
       end
     end
 
+    describe '#membership_type' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'returns membership type' do
+        expect(user.membership_type).to eq 'Basic'
+      end
+      context 'premium member' do
+        subject(:user){FactoryGirl.create(:user, stripe_customer: "sdfdfds")}
+        it 'returns premium' do
+          expect(user.membership_type).to eq 'Premium'
+        end
+      end
+    end
+
+    describe '#karma_total' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'returns 0 when user initially created' do
+        expect(user.karma_total).to eq 0
+      end
+      context 'once associated karma object is created' do
+        subject(:user) { FactoryGirl.build(:user, karma: FactoryGirl.create(:karma, total: 50)) }
+        it 'returns non zero' do
+          expect(user.karma_total).to eq 50
+        end
+      end
+    end
+
   end
 
 end
