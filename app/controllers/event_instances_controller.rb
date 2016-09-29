@@ -55,6 +55,7 @@ class EventInstancesController < ApplicationController
   end
 
   def hangout_params(event_instance)
+    # byebug
     params.require(:host_id)
     params.require(:title)
 
@@ -64,6 +65,7 @@ class EventInstancesController < ApplicationController
         event_id: params[:event_id],
         category: params[:category],
         user_id: params[:host_id],
+        hangout_participants_snapshots_attributes: [{participants: params[:participants]}],
         participants: merge_participants(event_instance.participants, params[:participants]),
         hangout_url: params[:hangout_url],
         yt_video_id: params[:yt_video_id],
