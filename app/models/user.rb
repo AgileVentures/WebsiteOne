@@ -176,6 +176,11 @@ class User < ActiveRecord::Base
     1 * [user_age_in_months.to_i, 6].min
   end
 
+  def karma_total
+    return karma.total if karma
+    0
+  end
+
   private
 
   def user_age_in_months
