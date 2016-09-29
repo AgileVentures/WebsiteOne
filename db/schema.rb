@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921152810) do
+ActiveRecord::Schema.define(version: 20160928134250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20160921152810) do
 
   create_table "karmas", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "karma",                                            default: 0
+    t.integer  "total",                                            default: 0
     t.integer  "hangouts_attended_with_more_than_one_participant", default: 0
     t.datetime "created_at",                                                   null: false
     t.datetime "updated_at",                                                   null: false
@@ -150,6 +150,12 @@ ActiveRecord::Schema.define(version: 20160921152810) do
     t.datetime "sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "payment_sources", force: :cascade do |t|
+    t.string  "type"
+    t.string  "identifier"
+    t.integer "subscription_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -186,6 +192,13 @@ ActiveRecord::Schema.define(version: 20160921152810) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "type"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.integer  "user_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -239,7 +252,6 @@ ActiveRecord::Schema.define(version: 20160921152810) do
     t.boolean  "display_hire_me"
     t.text     "bio"
     t.boolean  "receive_mailings",       default: true
-    t.integer  "karma_points",           default: 0
     t.string   "country_code"
     t.integer  "timezone_offset"
     t.integer  "status_count",           default: 0

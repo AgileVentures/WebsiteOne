@@ -19,6 +19,8 @@ class ChargesController < ApplicationController
         plan: @plan
     )
 
+    update_user_to_premium(customer)
+
     send_acknowledgement_email
 
   rescue Stripe::CardError => e
@@ -38,6 +40,12 @@ class ChargesController < ApplicationController
   end
 
   private
+
+  def update_user_to_premium(stripe_customer)
+    return unless current_user
+    current_user.stripe_customer = stripe_customer.id
+    current_user.save
+  end
 
   def premiumplus?
     params[:plan] == 'premiumplus'
