@@ -5,7 +5,7 @@ class EventInstancesController < ApplicationController
   def update
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
 
-    event_instance_params = transform_params(event_instance)
+    event_instance_params = check_and_transform_params(event_instance)
     hangout_url_changed = event_instance.hangout_url != event_instance_params[:hangout_url]
     yt_video_id_changed = event_instance.yt_video_id != event_instance_params[:yt_video_id]
     slack_notify = params[:notify] == 'true'
@@ -54,10 +54,14 @@ class EventInstancesController < ApplicationController
     response.headers['Access-Control-Allow-Methods'] = 'PUT'
   end
 
-  def transform_params(event_instance)
+  def check_and_transform_params(event_instance)
     params.require(:host_id)
     params.require(:title)
 
+    transform_params(event_instance)
+  end
+
+  def transform_params(event_instance)
     ActionController::Parameters.new(
         title: params[:title],
         project_id: params[:project_id],
