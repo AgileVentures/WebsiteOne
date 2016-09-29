@@ -72,10 +72,10 @@ class UsersController < ApplicationController
 
   def users
     User.page(params[:page]).per(15)
-        .includes(:status, :titles)
+        .includes(:status, :titles, :karma)
         .filter(set_filter_params)
         .allow_to_display
-        .order(karma_points: :desc)
+        .order("karmas.total DESC")
   end
 
   def should_display_user?(user)
