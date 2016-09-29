@@ -70,18 +70,7 @@
     <% if current_user && current_user == presenter.user %>
         <li><%= current_user.membership_type %> Member</li>
         <% unless current_user.membership_type == 'Premium' %>
-            <li><%= form_tag charges_path(plan: 'premium') do %>
-                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                          data-description="A month's subscription"
-                          data-amount="1000"
-                          data-currency="GBP"
-                          data-locale="en-US"
-                          data-name="Premium Membership"
-                          data-label="Upgrade to Premium"></script>
-
-              <% end %>
-            </li>
+            <li><%= render 'users/profile/premium_upgrade' %></li>
         <% end %>
     <% end %>
   </ul>
