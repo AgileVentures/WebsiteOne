@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   has_many :status
 
   has_one :karma
+  has_one :subscription
 
   accepts_nested_attributes_for :status
   scope :mail_receiver, -> { where(receive_mailings: true) }
@@ -74,10 +75,8 @@ class User < ActiveRecord::Base
   end
 
   def membership_type
-    return "Basic" unless stripe_customer
-    plan = Stripe::Customer.retrieve(stripe_customer).subscriptions.first.plan.id
-    return "Premium" if plan == "premium"
-    "Premium Plus"
+    return "Basic" unless subscription
+    subscription.class.to_s
   end
 
   def apply_omniauth(omniauth)
