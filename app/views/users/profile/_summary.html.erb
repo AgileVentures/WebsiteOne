@@ -69,10 +69,11 @@
     <% end %>
     <% if current_user && current_user == presenter.user %>
         <li><%= current_user.membership_type %> Member</li>
-        <% unless current_user.membership_type == 'Premium' %>
-            <li><%= render 'users/profile/premium_upgrade' %></li>
+        <% if current_user.membership_type == 'Premium' %>
+          <li><%= render 'users/profile/premium_plus_upgrade' %></li>
+        <% elsif current_user.membership_type == 'Basic' %>
+          <li><%= render 'users/profile/premium_upgrade' %></li>
         <% end %>
     <% end %>
   </ul>
-
 </div>
