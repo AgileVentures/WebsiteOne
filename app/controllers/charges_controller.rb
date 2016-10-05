@@ -10,6 +10,13 @@ class ChargesController < ApplicationController
   def edit
   end
 
+  def upgrade
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer)
+    subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
+    subscription.plan = "premiumplus"
+    subscription.save
+  end
+
   def create
     @plan = params[:plan]
 

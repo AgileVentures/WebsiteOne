@@ -41,8 +41,7 @@ Feature: Allow Users to Upgrade Membership
     Given I am logged in as a premium user with name "John", email "john@john.com", with password "asdf1234"
     And I am on my profile page
     And I click "Upgrade to Premium Plus"
-    When I fill in appropriate card details for premium plus
-    Then I should see "Premium Plus Member"
+    Then I should see "Premium PLUS Member"
     Given I am on my profile page
     Then I should see "Premium Plus Member"
     Then I should not see "Basic Member"

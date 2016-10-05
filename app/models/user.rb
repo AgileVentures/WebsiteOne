@@ -75,7 +75,9 @@ class User < ActiveRecord::Base
 
   def membership_type
     return "Basic" unless stripe_customer
-    "Premium"
+    plan = Stripe::Customer.retrieve(stripe_customer).subscriptions.first.plan.id
+    return "Premium" if plan == "premium"
+    "Premium Plus"
   end
 
   def apply_omniauth(omniauth)

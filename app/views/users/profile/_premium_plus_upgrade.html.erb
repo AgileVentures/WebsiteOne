@@ -1,1 +1,3 @@
-<button class="stripe-button">Upgrade to Premium Plus</button>
+<%= form_tag charges_upgrade_path, method: "put" do %>
+    <%= submit_tag "Upgrade to Premium Plus", class:"stripe-button"%>
+<% end %>

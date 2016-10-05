@@ -68,6 +68,7 @@
         </li>
     <% end %>
     <% if current_user && current_user == presenter.user %>
+        <%byebug%>
         <li><%= current_user.membership_type %> Member</li>
         <% if current_user.membership_type == 'Premium' %>
           <li><%= render 'users/profile/premium_plus_upgrade' %></li>
