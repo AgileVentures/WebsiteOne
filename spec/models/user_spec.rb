@@ -412,8 +412,9 @@ describe User, type: :model do
       end
 
       context 'premium member' do
-        let(:subscription) { FactoryGirl.create(:subscription, type: "Premium") }
-        subject(:user) { FactoryGirl.create(:user, subscription: subscription) }
+        subject(:user) { FactoryGirl.create(:user) }
+        let!(:premium) { FactoryGirl.create(:subscription, user: user) }
+
         it 'returns premium' do
           expect(user.membership_type).to eq 'Premium'
         end

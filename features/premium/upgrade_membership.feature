@@ -43,7 +43,7 @@ Feature: Allow Users to Upgrade Membership
     And I click "Upgrade to Premium Plus"
     Then I should see "Premium PLUS Member"
     Given I am on my profile page
-    Then I should see "Premium Plus Member"
+    Then I should see "PremiumPlus Member"
     Then I should not see "Basic Member"
     And I should not see "Premium Member"
     And I should not see "Upgrade to Premium"

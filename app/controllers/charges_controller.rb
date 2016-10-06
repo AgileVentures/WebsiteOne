@@ -11,7 +11,9 @@ class ChargesController < ApplicationController
   end
 
   def upgrade
-    customer = Stripe::Customer.retrieve(current_user.stripe_customer)
+    current_user.subscription.type = 'PremiumPlus'
+    current_user.save
+    customer = Stripe::Customer.retrieve(current_user.subscription.payment_source.identifier)
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
     subscription.plan = "premiumplus"
     subscription.save

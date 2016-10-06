@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   has_many :status
 
   has_one :karma
-  has_one :subscription
+  has_one :subscription, autosave: true
 
   accepts_nested_attributes_for :status
   scope :mail_receiver, -> { where(receive_mailings: true) }
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
 
   def membership_type
     return "Basic" unless subscription
-    subscription.class.to_s
+    subscription.type
   end
 
   def apply_omniauth(omniauth)
