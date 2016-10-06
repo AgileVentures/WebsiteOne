@@ -38,7 +38,7 @@ class ChargesController < ApplicationController
   end
 
   def update
-    customer = Stripe::Customer.retrieve(current_user.stripe_customer) # _token?
+    customer = Stripe::Customer.retrieve(current_user.subscription.payment_source.identifier) # _token?
     card = customer.cards.create(card: params[:stripeToken])
     card.save
     customer.default_card = card.id
@@ -52,7 +52,9 @@ class ChargesController < ApplicationController
 
   def update_user_to_premium(stripe_customer)
     return unless current_user
-    current_user.stripe_customer = stripe_customer.id
+    current_user.subscription = Premium.new(started_at: Time.now)
+    current_user.subscription.payment_source = PaymentSource::Stripe.new(identifier: stripe_customer.id)
+    # current_user.stripe_customer = stripe_customer.id
     current_user.save
   end
 
