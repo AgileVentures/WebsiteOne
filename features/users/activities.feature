@@ -9,6 +9,7 @@ Feature: Activities View
     And the following users exist
       | first_name | last_name | email                  | skill_list         | hangouts_attended_with_more_than_one_participant |
       | Alice      | Jones     | alicejones@hotmail.com | ruby, rails, rspec |  1                                               |
+      | John       | Doe       | john@doe.com           | ruby, rails, rspec |  nil                                             |
     And the following projects exist:
       | title      | description        | github_url                                  | status | commit_count |
       | WebsiteTwo | awesome autograder | https://github.com/AgileVentures/WebsiteTwo | active | 1            |
@@ -29,3 +30,9 @@ Feature: Activities View
     And I should see "Contributions (Profile Completeness) - 6 out of 10"
     And I should see "Contributions (Membership Length) - 0 out of 6"
     And I should see "Contributions (Sign In Activity) - 0 out of 6"
+
+  @javascript
+  Scenario: Use karma link to see user profile activity
+    Given I am on the members page
+    When I click Karma link for "Alice"
+    Then I should see "WebsiteTwo - 500 commits"

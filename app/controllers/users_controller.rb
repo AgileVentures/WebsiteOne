@@ -51,6 +51,7 @@ class UsersController < ApplicationController
     if should_display_user?(@user)
       @event_instances = EventInstance.where(user_id: @user.id)
                              .order(created_at: :desc).limit(5)
+      set_activity_tab(params[:tab])
     else
       raise ActiveRecord::RecordNotFound.new('User has not exposed his profile publicly')
     end
@@ -105,6 +106,16 @@ class UsersController < ApplicationController
         end
       else
         redirect_to :back, alert: "Can't determine your location!"
+      end
+    end
+  end
+
+  def set_activity_tab(param)
+    if param.present?
+      @param_tab = param
+      unless UserPresenter.new(@user).contributed?
+        @param_tab = nil
+        flash.now[:notice] = 'User does not have activity log'
       end
     end
   end

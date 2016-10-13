@@ -42,19 +42,52 @@ describe UsersController, :type => :controller do
         expect(object).to receive(:order).with(created_at: :desc).and_return(object2)
         expect(object2).to receive(:limit).with(5).and_return('videos')
 
-        get 'show', id: @user.friendly_id
       end
 
       it 'assigns a user instance' do
+        get 'show', id: @user.friendly_id
+
         expect(assigns(:user)).to eq(@user)
       end
 
       it 'assigns youtube videos' do
+        get 'show', id: @user.friendly_id
+
         expect(assigns(:event_instances)).to eq('videos')
       end
 
       it 'renders the show view' do
+        get 'show', id: @user.friendly_id
+
         expect(response).to render_template :show
+      end
+
+      context 'user without contribution' do
+        it 'display a flash notice when use link to activity tab' do
+          get 'show', id: @user.friendly_id, tab: 'activity'
+
+          expect(flash[:notice]).to eq('User does not have activity log')
+        end
+
+        it 'assign param_tab to nil' do
+          contributed_user = double(contributed?: false)
+          allow(UserPresenter).to receive(:new).with(@user).and_return(contributed_user)
+
+          get 'show', id: @user.friendly_id, tab: 'activity'
+
+          expect(assigns(:param_tab)).to eq(nil)
+        end
+      end
+
+      context 'user with contribution' do
+        it 'assing param_tab variable when use link to activity tab' do
+          contributed_user = double(contributed?: true)
+          allow(UserPresenter).to receive(:new).with(@user).and_return(contributed_user)
+
+          get 'show', id: @user.friendly_id, tab: 'activity'
+
+          expect(assigns(:param_tab)).to eq('activity')
+        end
       end
     end
 
