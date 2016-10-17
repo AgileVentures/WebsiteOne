@@ -111,12 +111,11 @@ class UsersController < ApplicationController
   end
 
   def set_activity_tab(param)
-    if param.present?
-      @param_tab = param
-      unless UserPresenter.new(@user).contributed?
-        @param_tab = nil
-        flash.now[:notice] = 'User does not have activity log'
-      end
+    return unless param.present?
+    @param_tab = param
+    unless UserPresenter.new(@user).contributed?
+      @param_tab = nil
+      flash.now[:notice] = 'User does not have activity log'
     end
   end
 end
