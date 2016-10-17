@@ -1,5 +1,4 @@
 <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-
   <li class="active"><a href="#about" data-toggle="tab">About</a></li>
   <% if presenter.has_skills? %>
       <li><a href="#user-skills" data-toggle="tab">Skills</a></li>
@@ -61,6 +60,9 @@
         </section>
         <section class="user-contributions">
           <h4>Contributions (Hangouts Hosted) - <%= presenter.user.number_hangouts_started_with_more_than_one_participant %> total hangouts x 1 - <%= presenter.user.number_hangouts_started_with_more_than_one_participant %><i class="fa fa-fire"></i></h4>
+        </section>
+        <section class="user-contributions">
+          <h4>Contributions (Hangouts Attended) - <%= presenter.user.hangouts_attended_with_more_than_one_participant %> total hangouts x 1 - <%= presenter.user.hangouts_attended_with_more_than_one_participant %><i class="fa fa-fire"></i></h4>
         </section>
         <section class="user-contributions">
           <h4>Contributions (Authentications) - <%= presenter.user.authentications.count %> authentications x 100 - <%= presenter.user.authentications.count * 100 %><i class="fa fa-fire"></i></h4>

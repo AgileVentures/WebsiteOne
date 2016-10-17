@@ -7,13 +7,15 @@
   <ul>
     <h3><%= presenter.display_name %></h3>
     <% if presenter.has_title? %>
-      <li><%= presenter.title_list %></li>
+        <li><%= presenter.title_list %></li>
     <% end %>
     <% if presenter.country_name? %>
-      <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country_name %></li>
+        <li><i class="fa fa-globe fa-lg"></i> <%= presenter.country_name %></li>
     <% end %>
     <% if presenter.latitude? && presenter.longitude? %>
-        <li><i class="fa fa-clock-o fa-lg"></i> <%= presenter.timezone %> (UTC<%= presenter.timezone_formatted_offset %>)</li>
+        <li><i class="fa fa-clock-o fa-lg"></i> <%= presenter.timezone %>
+          (UTC<%= presenter.timezone_formatted_offset %>)
+        </li>
     <% end %>
 
     <li>
@@ -22,21 +24,22 @@
     </li>
 
     <% if presenter.github_profile_url? %>
-      <li>
-        <i class="fa fa-github-alt fa-lg"></i>
-        <%= presenter.github_link %>
-      </li>
+        <li>
+          <i class="fa fa-github-alt fa-lg"></i>
+          <%= presenter.github_link %>
+        </li>
     <% end %>
 
     <% if presenter.display_email %>
-      <li><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></li>
+        <li><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></li>
     <% end %>
 
     <% if @user.online? & presenter.status? %>
-        <li><span class="glyphicon glyphicon-comment"> </span> "<%= presenter.status %>" </li>
+        <li><span class="glyphicon glyphicon-comment"> </span> "<%= presenter.status %>"
+        </li>
     <% end %>
 
-    <% if presenter.display_hire_me %>
+    <% if presenter.display_hire_me && current_user != presenter.user %>
         <li>
           <%= link_to 'Hire me', user_path(presenter.user),
                       {remote: true, class: 'user-profile-btn',
@@ -45,9 +48,9 @@
     <% end %>
 
     <% if presenter.can_create_newsletter? && privileged_visitor? %>
-      <li>
-        <%= link_to 'New Newsletter', new_newsletter_path, class: 'user-profile-btn' %>
-      </li>
+        <li>
+          <%= link_to 'New Newsletter', new_newsletter_path, class: 'user-profile-btn' %>
+        </li>
     <% end %>
 
     <% if presenter.object.eql?(current_user) %>
@@ -64,5 +67,23 @@
                          type: 'button' %></p>
         </li>
     <% end %>
+    <% if current_user && current_user == presenter.user %>
+        <li><%= current_user.membership_type %> Member</li>
+        <% unless current_user.membership_type == 'Premium' %>
+            <li><%= form_tag charges_path(plan: 'premium') do %>
+                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                          data-description="A month's subscription"
+                          data-amount="1000"
+                          data-currency="GBP"
+                          data-locale="en-US"
+                          data-name="Premium Membership"
+                          data-label="Upgrade to Premium"></script>
+
+              <% end %>
+            </li>
+        <% end %>
+    <% end %>
   </ul>
+
 </div>

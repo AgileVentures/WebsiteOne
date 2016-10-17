@@ -60,8 +60,8 @@ class EventInstancePresenter < BasePresenter
 
     participants.map do |participant|
       begin
-        person = participant.last[:person]
-        user = Authentication.find_by(provider: 'gplus', uid: person[:id]).try!(:user)
+        person = participant.last['person']
+        user = Authentication.find_by(provider: 'gplus', uid: person['id']).try!(:user)
         next if user == host
         user || NullUser.new(person[:displayName])
       rescue NoMethodError
