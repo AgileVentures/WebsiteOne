@@ -32,7 +32,13 @@ Feature: Activities View
     And I should see "Contributions (Sign In Activity) - 0 out of 6"
 
   @javascript
-  Scenario: Use karma link to see user profile activity
+  Scenario: use karma link to display user profile activity if there is contributions
     Given I am on the members page
     When I click Karma link for "Alice"
     Then I should see "WebsiteTwo - 500 commits"
+
+  @javascript
+  Scenario: use karma link display a flash message if there is no contributions
+    Given I am on the members page
+    When I click Karma link for "John"
+    Then I should see a flash "User does not have activity log"
