@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928134250) do
+ActiveRecord::Schema.define(version: 20160928152822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,11 @@ ActiveRecord::Schema.define(version: 20160928134250) do
 
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
+
+  create_table "hangout_participants_snapshots", force: :cascade do |t|
+    t.integer "event_instance_id"
+    t.text    "participants"
+  end
 
   create_table "karmas", force: :cascade do |t|
     t.integer  "user_id"

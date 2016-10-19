@@ -436,4 +436,18 @@ describe User, type: :model do
 
   end
 
+  context 'creating user' do
+    it 'should not be possible to save a user with nil Karma' do
+      user = User.new({ email: 'doh@doh.com', password: '12345678' })
+      user.save!
+      expect(user.karma).not_to be_nil
+    end
+    it 'should not override existing karma' do
+      user = User.new({ email: 'doh@doh.com', password: '12345678' })
+      user.karma = Karma.new(total: 50)
+      user.save!
+      expect(user.karma.total).to eq 50
+    end
+  end
+
 end

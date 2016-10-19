@@ -5,12 +5,12 @@ class EventInstancesController < ApplicationController
   def update
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
 
-    ho_params = hangout_params(event_instance)
-    hangout_url_changed = event_instance.hangout_url != ho_params[:hangout_url]
-    yt_video_id_changed = event_instance.yt_video_id != ho_params[:yt_video_id]
+    event_instance_params = check_and_transform_params(event_instance)
+    hangout_url_changed = event_instance.hangout_url != event_instance_params[:hangout_url]
+    yt_video_id_changed = event_instance.yt_video_id != event_instance_params[:yt_video_id]
     slack_notify = params[:notify] == 'true'
 
-    if event_instance.try!(:update, ho_params)
+    if event_instance.try!(:update, event_instance_params)
       SlackService.post_hangout_notification(event_instance) if (slack_notify && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed)
       SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed
 
@@ -54,16 +54,21 @@ class EventInstancesController < ApplicationController
     response.headers['Access-Control-Allow-Methods'] = 'PUT'
   end
 
-  def hangout_params(event_instance)
+  def check_and_transform_params(event_instance)
     params.require(:host_id)
     params.require(:title)
 
+    transform_params(event_instance)
+  end
+
+  def transform_params(event_instance)
     ActionController::Parameters.new(
         title: params[:title],
         project_id: params[:project_id],
         event_id: params[:event_id],
         category: params[:category],
         user_id: params[:host_id],
+        hangout_participants_snapshots_attributes: [{participants: params[:participants]}],
         participants: merge_participants(event_instance.participants, params[:participants]),
         hangout_url: params[:hangout_url],
         yt_video_id: params[:yt_video_id],
