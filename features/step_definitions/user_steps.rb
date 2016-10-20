@@ -385,3 +385,9 @@ end
 And(/^I click on page "([^"]*)" of users$/) do |page|
   click_link page
 end
+
+When(/^I click Karma link for "([^"]*)"$/) do |user_name|
+  user = User.find_by_first_name(user_name)
+  link = user_path(user)
+  page.find(:css, %Q{a[href="#{link}?tab=activity"]}).trigger('click')
+end
