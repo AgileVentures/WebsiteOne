@@ -62,7 +62,8 @@
   },
   "addons": [
     "sendgrid",
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "airbrake"
   ],
   "formation": {
     "web": {
