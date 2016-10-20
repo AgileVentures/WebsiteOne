@@ -90,4 +90,8 @@ class UserPresenter < BasePresenter
       .select { |field| user.send(field).blank? }
       .map(&:humanize).to_sentence
   end
+
+  def user_same_as? other_user
+    user == other_user
+  end
 end
