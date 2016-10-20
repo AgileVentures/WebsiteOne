@@ -40,7 +40,6 @@
     }
   },
   "addons": [
-    "airbrake",
     "sendgrid",
     "heroku-postgresql"
   ],
