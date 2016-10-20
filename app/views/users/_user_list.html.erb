@@ -2,28 +2,35 @@
     <% slice.each do |user| %>
         <% present user do |presenter| %>
             <li class="media-item col-md-4 col-sm-6 col-xs-12">
-              <a class="user-preview" href="<%= user_path(user) %>">
-                <%= presenter.gravatar_image(size: 100,
-                                             class: 'img-rounded media-object pull-left') %>
+              <div class="user-preview">
+                <a href="<%= user_path(user) %>">
+                  <%= presenter.gravatar_image(size: 100,
+                                               class: 'img-rounded media-object pull-left') %>
+                </a>
                 <div class="media-body index-summary">
-                  <p class="media-heading" data-toggle="tooltip" title="<%= presenter.display_name %>"><%= presenter.display_name %>
-                    <% if user.online? %>
+                  <a href="<%= user_path(user) %>">
+                    <p class="media-heading" data-toggle="tooltip" title="<%= presenter.display_name %>"><%= presenter.display_name %>
+                      <% if user.online? %>
                         <%= image_tag('green-dot.png', size: '10x10', alt: 'Online!') %>
-                    <% end %></p>
+                      <% end %>
+                    </p>
+                  </a>
                   <% if presenter.has_title? %>
-                      <p><%= presenter.title_list %></p>
+                    <p><%= presenter.title_list %></p>
                   <% end %>
                   <% if user.country_name %>
-                      <p data-toggle="tooltip" title="<%= presenter.country_name %>"><%= presenter.country_name %></p>
+                    <p data-toggle="tooltip" title="<%= presenter.country_name %>"><%= presenter.country_name %></p>
                   <% end %>
-                      <p class="small"><i class="fa fa-fire"></i><%= presenter.karma_total %></p>
+                  <%= link_to user_path(user, {tab: "activity"}) do %>
+                    <p class="small media-heading"><i class="fa fa-fire"></i><%= presenter.karma_total %></p>
+                  <% end %>
                 </div>
-              </a>
               <% if user.online? & presenter.status? %>
                 <div class="user-status" id="user-status">
                   <span style= "margin-right: 5px;"class="glyphicon glyphicon-comment"></span>"<%= presenter.status %>"
                 </div>
               <% end %>
+              </div>
             </li>
         <% end %>
     <% end %>

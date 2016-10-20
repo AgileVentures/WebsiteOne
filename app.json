@@ -5,6 +5,15 @@
     "postdeploy": "bundle exec rake db:setup"
   },
   "env": {
+    "AGILE_BOT_URL": {
+      "required": true
+    },
+    "AIRBRAKE_API_KEY": {
+      "required": true
+    },
+    "AIRBRAKE_PROJECT_ID": {
+      "required": true
+    },
     "BUILDPACK_URL": {
       "required": true
     },
@@ -24,6 +33,18 @@
       "required": true
     },
     "HANGOUTS_APP_ID": {
+      "required": true
+    },
+    "MAX_THREADS": {
+      "required": true
+    },
+    "PUMA_WORKERS": {
+      "required": true
+    },
+    "SENDGRID_PASSWORD": {
+      "required": true
+    },
+    "SENDGRID_USERNAME": {
       "required": true
     },
     "SLACK_AUTH_TOKEN": {

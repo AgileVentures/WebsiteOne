@@ -16,7 +16,7 @@
 
 
 ### Getting involved
-* [[Development environment set up]]
+* [Development environment set up](project_setup.md)
 
 ### Issues
 * [Signup Issues (GitHub)](solutions_for_signup_issues.md)
