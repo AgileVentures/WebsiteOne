@@ -68,12 +68,6 @@
     "heroku-postgresql",
     "airbrake"
   ],
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "Free"
-    }
-  },
   "buildpacks": [
     {
       "url": "https://github.com/heroku/heroku-buildpack-nodejs"
