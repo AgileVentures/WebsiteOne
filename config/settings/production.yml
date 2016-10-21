@@ -5,7 +5,7 @@ features:
     notifications:
       enabled: <%= ENV['SLACK_NOTIFICATIONS_ENABLED'] %>
     invites:
-      enabled: true
+      enabled: <%= ENV['SLACK_INVITES_ENABLED'] %>
   twitter:
     notifications:
       enabled: <%= ENV['TWITTER_NOTIFICATIONS_ENABLED'] %>
