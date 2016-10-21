@@ -137,7 +137,8 @@ describe EventInstancesController do
 
       upd_params = {
         "title"=>"title", "project_id"=>"project_id", "event_id"=>"event_id",
-        "category"=>"category", "user_id"=>"host", "participants"=>"one, two",
+        "category"=>"category", "user_id"=>"host","participants"=>"one, two",
+        "hangout_participants_snapshots_attributes"=>[{"participants"=>"one, two"}],
         "hangout_url"=>"test_url", "yt_video_id"=>"video", "hoa_status"=>"started",
         "updated_at"=>Time.now
       }

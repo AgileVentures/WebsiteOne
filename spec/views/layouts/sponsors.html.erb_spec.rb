@@ -14,7 +14,7 @@ describe 'layouts/_sponsors' do
 
 	it 'should render the Craft Academy banner' do
 		render
-		expect(response.body).to have_link('', href: "http://craftacademy.se/international")
+		expect(response.body).to have_link('', href: "http://craftacademy.se/english")
 		expect(response.body).to have_selector('a.sponsorMedal img[src*="craft"]')
   end
 
