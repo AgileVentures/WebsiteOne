@@ -68,3 +68,8 @@ When(/^I scroll to bottom of page$/) do
   page.evaluate_script("window.scrollTo(0, $(document).height());")
   sleep 2
 end
+
+And(/^there should be three snapshots$/) do
+  @hangout.reload
+  expect(@hangout.hangout_participants_snapshots.count).to eq 3
+end

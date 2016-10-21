@@ -39,7 +39,7 @@
         </li>
     <% end %>
 
-    <% if presenter.display_hire_me %>
+    <% if presenter.display_hire_me && current_user != presenter.user %>
         <li>
           <%= link_to 'Hire me', user_path(presenter.user),
                       {remote: true, class: 'user-profile-btn',

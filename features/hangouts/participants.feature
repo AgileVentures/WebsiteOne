@@ -25,4 +25,5 @@ Feature: Seeing participants of past and current hangouts
     Given that another person joins the hangout
     Then the hangout participants should be updated
     When one person leaves and another joins
-    Then the hangout participants should still include everyone who ever joined
+    Then there should be three snapshots
+    And the hangout participants should still include everyone who ever joined
