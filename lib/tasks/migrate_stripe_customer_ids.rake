@@ -4,9 +4,8 @@ namespace :db do
   task :migrate_stripe => :environment do
     User.all.each do |user|
       if user.stripe_customer
-        user.subscription = Premium.new(started_at: Time.now) # not ideal but can set manually later
-        user.subscription.payment_source = PaymentSource::Stripe.new(identifier: user.stripe_customer)
-        user.save
+        # setting time as now not ideal but can set manually later
+        UpgradeUserToPremium.with(user, Time.now, user.stripe_customer)
         Logger.new(STDOUT).info user.display_name.bold.blue + " stripe customer id migrated"
       end
     end

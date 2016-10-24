@@ -52,10 +52,7 @@ class ChargesController < ApplicationController
 
   def update_user_to_premium(stripe_customer)
     return unless current_user
-    current_user.subscription = Premium.new(started_at: Time.now)
-    current_user.subscription.payment_source = PaymentSource::Stripe.new(identifier: stripe_customer.id)
-    # current_user.stripe_customer = stripe_customer.id
-    current_user.save
+    UpgradeUserToPremium.with(current_user, Time.now, stripe_customer.id)
   end
 
   def premiumplus?
