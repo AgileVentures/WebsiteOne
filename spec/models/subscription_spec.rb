@@ -14,6 +14,8 @@ shared_examples 'a subscription' do
   it 'has ended_at' do
     expect(subject.ended_at).to be_nil
   end
+
+  it { should delegate_method(:identifier).to(:payment_source) }
 end
 
 describe Subscription, type: :model do

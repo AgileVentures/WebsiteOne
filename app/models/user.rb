@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
 
   has_one :subscription, autosave: true
 
+  def stripe_customer_id # ultimately replacing the field stripe_customer
+    subscription.identifier
+  end
+
   has_one :karma
   after_save :build_karma, if: -> { karma.nil? }
 

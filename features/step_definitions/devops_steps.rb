@@ -11,7 +11,6 @@ When(/^I run the rake task for migrating stripe$/) do
 end
 
 Then(/^"([^"]*)" shoud have "([^"]*)" in their subscription$/) do |email, stripe_id|
-  expect(PaymentSource::Stripe.find_by_identifier(stripe_id)).not_to be_nil
   user = User.find_by_email(email)
-  expect(user.subscription.payment_source.identifier).to eq stripe_id
+  expect(user.stripe_customer_id).to eq stripe_id
 end

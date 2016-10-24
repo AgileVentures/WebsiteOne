@@ -13,7 +13,7 @@ class ChargesController < ApplicationController
   def upgrade
     current_user.subscription.type = 'PremiumPlus'
     current_user.save
-    customer = Stripe::Customer.retrieve(current_user.subscription.payment_source.identifier)
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
     subscription.plan = "premiumplus"
     subscription.save
@@ -38,7 +38,7 @@ class ChargesController < ApplicationController
   end
 
   def update
-    customer = Stripe::Customer.retrieve(current_user.subscription.payment_source.identifier) # _token?
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
     card = customer.cards.create(card: params[:stripeToken])
     card.save
     customer.default_card = card.id

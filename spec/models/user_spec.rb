@@ -450,4 +450,16 @@ describe User, type: :model do
     end
   end
 
+  context 'look up stripe id from subscription' do
+    let(:subscription) { mock_model(Subscription, save: true) }
+    before { allow(subscription).to receive(:[]=) }
+
+    it 'asks subscription for identifier' do
+      expect(subscription).to receive :identifier
+      subject.subscription = subscription
+      subject.stripe_customer_id
+    end
+
+  end
+
 end
