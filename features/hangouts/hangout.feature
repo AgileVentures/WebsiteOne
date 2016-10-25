@@ -6,9 +6,14 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   Background:
     Given following events exist:
-      | name          | description          | category      | start_datetime          | duration | repeats | time_zone |
-      | Scrum         | Daily scrum meeting  | Scrum         | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |
-      | Retrospective | Weekly retrospective | ClientMeeting | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |
+      | name          | description          | category      | start_datetime          | duration | repeats | time_zone | repeats_every_n_weeks | repeats_weekly_each_days_of_the_week_mask |
+      | Scrum         | Daily scrum meeting  | Scrum         | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |                       |                                           |
+      | Repeat Scrum  | Daily scrum meeting  | Scrum         | 2014/02/03 07:00:00 UTC | 150      | weekly  | UTC       | 1                     | 15                                        |
+      | Retrospective | Weekly retrospective | ClientMeeting | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |                       |                                           |
+    And the following hangouts exist:
+      | Start time          | Title        | Project    | Category | Event        | EventInstance url   | Youtube video id | End time            |
+      | 2012-02-04 07:00:00 | HangoutsFlow | WebsiteOne | Scrum    | Repeat Scrum | http://hangout.test | QWERT55          | 2014-02-04 07:02:00 |
+      | 2014-02-05 07:00:00 | HangoutsFlow | WebsiteOne | Scrum    | Repeat Scrum | http://hangout.test | QWERT55          | 2014-02-05 07:03:00 |
     And the following projects exist:
       | title       | description          | status |
       | WebsiteOne  | greetings earthlings | active |
@@ -58,6 +63,15 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I fill in "hangout_url" with "http://test.com"
     And I click on the Save button
     Then I should see link "Join now" with "http://test.com"
+
+  @javascript
+  Scenario: Edit Hangout URL on repeating event
+    Given the time now is "2014-02-05 07:30:00"
+    And I am on the show page for event "Repeat Scrum"
+    And I open the Edit URL controls
+    And I fill in "hangout_url" with "https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
+    And I click on the Save button
+    Then I should see link "Join now" with "https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
 
   @javascript
   Scenario: Cancel Edit Hangout URL

@@ -462,11 +462,11 @@ describe Event, :type => :model do
 
   describe '#recent_hangouts' do
     before(:each) do
-      event.event_instances.create(created_at: 2.days.ago, updated_at: Date.yesterday)
+      event.event_instances.create(updated_at: 2.days.ago, created_at: Date.yesterday)
       @recent_hangout = event.event_instances.create(created_at: Date.yesterday, updated_at: Date.yesterday)
     end
 
-    it 'returns only the hangouts created between yesterday and today' do
+    it 'returns only the hangouts updated between yesterday and today' do
       expect(event.recent_hangouts.to_a).to match_array([@recent_hangout])
     end
   end
