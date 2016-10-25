@@ -3,7 +3,11 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
 end
 
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
-  @current_user = @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password, stripe_customer: premium ? 'cus_8l47KNxEp3qMB8' : nil)
+
+  @current_user = @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
+  subscription = Premium.create(user: @user, started_at: Time.now)
+  payment_source = PaymentSource::Stripe.create(identifier: 'cus_8l47KNxEp3qMB8', subscription: subscription )
+
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email

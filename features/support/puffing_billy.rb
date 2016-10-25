@@ -35,6 +35,8 @@ Billy.configure do |c|
                      'http://a.disquscdn.com/uploads/users/20073/6166/avatar92.jpg',
                      'https://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html',
                      'http://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html',
+                     'https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html',
+                     'http://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html',
                      'http://csi.gstatic.com/csi',
                      'https://csi.gstatic.com/csi',
   ]

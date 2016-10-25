@@ -63,7 +63,8 @@ end
 Before('@rake') do |scenario|
   unless $rake
     require 'rake'
-    Rake.application.rake_require "tasks/scheduler"
+    Rake.application.rake_require 'tasks/scheduler'
+    Rake.application.rake_require 'tasks/migrate_stripe_customer_ids'
     Rake::Task.define_task(:environment)
     $rake = Rake::Task
   end
