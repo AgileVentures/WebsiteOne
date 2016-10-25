@@ -43,6 +43,12 @@ class User < ActiveRecord::Base
   has_many :commit_counts
   has_many :status
 
+  has_one :subscription, autosave: true
+
+  def stripe_customer_id # ultimately replacing the field stripe_customer
+    subscription.identifier
+  end
+
   has_one :karma
   after_save :build_karma, if: -> { karma.nil? }
 
@@ -75,8 +81,8 @@ class User < ActiveRecord::Base
   end
 
   def membership_type
-    return "Basic" unless stripe_customer
-    "Premium"
+    return "Basic" unless subscription
+    subscription.type
   end
 
   def apply_omniauth(omniauth)
