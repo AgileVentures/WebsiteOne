@@ -39,7 +39,7 @@
         </li>
     <% end %>
 
-    <% if presenter.display_hire_me && current_user != presenter.user %>
+    <% if presenter.display_hire_me?(current_user) %>
         <li>
           <%= link_to 'Hire me', user_path(presenter.user),
                       {remote: true, class: 'user-profile-btn',
@@ -67,7 +67,7 @@
                          type: 'button' %></p>
         </li>
     <% end %>
-    <% if current_user && current_user == presenter.user %>
+    <% if presenter.user_same_as?(current_user) %>
         <li><%= current_user.membership_type %> Member</li>
         <% unless current_user.membership_type == 'Premium' %>
             <li><%= form_tag charges_path(plan: 'premium') do %>

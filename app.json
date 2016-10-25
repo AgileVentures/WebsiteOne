@@ -1,7 +1,7 @@
 {
   "name": "WebsiteOne",
   "description": "A website for AgileVentures",
-  "scripts": {
+  "scripts":{
     "postdeploy": "bundle exec rake db:setup"
   },
   "env": {
@@ -53,6 +53,9 @@
     "SLACK_NOTIFICATIONS_ENABLED": {
       "required": true
     },
+    "SLACK_INVITES_ENABLED": {
+      "required": true
+    },
     "SSL_HOST": {
       "required": true
     },
@@ -61,16 +64,10 @@
     }
   },
   "addons": [
-    "airbrake",
     "sendgrid",
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "airbrake"
   ],
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "Free"
-    }
-  },
   "buildpacks": [
     {
       "url": "https://github.com/heroku/heroku-buildpack-nodejs"
