@@ -56,6 +56,12 @@
     "SLACK_INVITES_ENABLED": {
       "required": true
     },
+    "STRIPE_PUBLISHABLE_KEY": {
+      "required": true
+    },
+    "STRIPE_SECRET_KEY": {
+      "required": true
+    },
     "SSL_HOST": {
       "required": true
     },
