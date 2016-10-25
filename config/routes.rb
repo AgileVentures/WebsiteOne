@@ -6,6 +6,7 @@ WebsiteOne::Application.routes.draw do
   resources :activities
   resources :newsletters
 
+  match '/charges/upgrade' => 'charges#upgrade', :via => [:put]
   resources :charges
 
   devise_for :users, :controllers => {:registrations => 'registrations'}

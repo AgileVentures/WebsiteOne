@@ -9,6 +9,8 @@ describe User, type: :model do
   end
   subject { build_stubbed :user }
 
+  it { should have_one :subscription }
+
   it { is_expected.to have_many(:status) }
 
   it { is_expected.to accept_nested_attributes_for :status }
@@ -404,11 +406,15 @@ describe User, type: :model do
 
     describe '#membership_type' do
       subject(:user) { FactoryGirl.create(:user) }
+
       it 'returns membership type' do
         expect(user.membership_type).to eq 'Basic'
       end
+
       context 'premium member' do
-        subject(:user){FactoryGirl.create(:user, stripe_customer: "sdfdfds")}
+        subject(:user) { FactoryGirl.create(:user) }
+        let!(:premium) { FactoryGirl.create(:subscription, user: user) }
+
         it 'returns premium' do
           expect(user.membership_type).to eq 'Premium'
         end
@@ -442,6 +448,18 @@ describe User, type: :model do
       user.save!
       expect(user.karma.total).to eq 50
     end
+  end
+
+  context 'look up stripe id from subscription' do
+    let(:subscription) { mock_model(Subscription, save: true) }
+    before { allow(subscription).to receive(:[]=) }
+
+    it 'asks subscription for identifier' do
+      expect(subscription).to receive :identifier
+      subject.subscription = subscription
+      subject.stripe_customer_id
+    end
+
   end
 
 end

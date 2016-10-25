@@ -1,0 +1,2 @@
+class PremiumPlus < Subscription
+end
