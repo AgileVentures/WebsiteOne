@@ -62,6 +62,7 @@ class ChargesController < ApplicationController
   end
 
   def plan_class
+    return PremiumF2F if params[:plan] == 'premiumf2f'
     plan_name.camelcase.constantize
   end
 
