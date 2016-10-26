@@ -25,6 +25,22 @@ Feature: Charge Users Money
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"
     And The user should receive a "Welcome to AgileVentures Premium" email
 
+  Scenario: Sign up for premium mob membership
+    Given I visit "/charges/new?plan=premiummob"
+    And I should not see "Sign Me Up For Premium!"
+    And I click "Sign Me Up For Premium Mob!"
+    When I fill in appropriate card details for premium mob
+    Then I should see "Thanks, you're now an AgileVentures Premium MOB Member!"
+    And The user should receive a "Welcome to AgileVentures Premium MOB" email
+
+  Scenario: Sign up for premium f2f membership
+    Given I visit "/charges/new?plan=premiumf2f"
+    And I should not see "Sign Me Up For Premium!"
+    And I click "Sign Me Up For Premium F2F!"
+    When I fill in appropriate card details for premium f2f
+    Then I should see "Thanks, you're now an AgileVentures Premium F2F Member!"
+    And The user should receive a "Welcome to AgileVentures Premium F2F" email
+
   Scenario: Sign up for premium plus membership
     Given I visit "/charges/new?plan=premiumplus"
     And I should not see "Sign Me Up For Premium!"

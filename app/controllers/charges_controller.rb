@@ -3,6 +3,8 @@ class ChargesController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update]
 
   def new
+    render 'premiummob' and return if premiummob?
+    render 'premiumf2f' and return if premiumf2f?
     render 'premiumplus' and return if premiumplus?
     render 'premium'
   end
@@ -52,7 +54,29 @@ class ChargesController < ApplicationController
 
   def update_user_to_premium(stripe_customer)
     return unless current_user
-    UpgradeUserToPremium.with(current_user, Time.now, stripe_customer.id)
+    UpgradeUserToPremium.with(current_user, Time.now, stripe_customer.id, PaymentSource::Stripe, plan_class)
+  end
+
+  def plan_name
+    return 'premium_mob' if params[:plan] == 'premiummob'
+    return 'premium_f2f' if params[:plan] == 'premiumf2f'
+    return 'premium_plus' if params[:plan] == 'premiumplus'
+    'premium'
+  end
+
+  def plan_class
+    return PremiumMob if params[:plan] == 'premiummob'
+    return PremiumF2F if params[:plan] == 'premiumf2f'
+    return PremiumPlus if params[:plan] == 'premiumplus'
+    Premium
+  end
+
+  def premiummob?
+    params[:plan] == 'premiummob'
+  end
+
+  def premiumf2f?
+    params[:plan] == 'premiumf2f'
   end
 
   def premiumplus?
@@ -64,6 +88,6 @@ class ChargesController < ApplicationController
   end
 
   def acknowledgement_email_template
-    "send_premium#{premiumplus? ? '_plus' : ''}_payment_complete".to_sym
+    "send_#{plan_name}_payment_complete".to_sym
   end
 end
