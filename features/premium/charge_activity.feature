@@ -17,6 +17,8 @@ Feature: Charge Users Money
     When I click "Premium" within the navigation bar
     Then I should be on the static "Pricing" page
 
+  # following four could be converted to scenario outline
+
   Scenario: Sign up for premium membership
     Given I visit "/charges/new"
     And I should not see "Sign Me Up For Premium Plus!"

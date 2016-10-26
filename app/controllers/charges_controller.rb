@@ -3,10 +3,7 @@ class ChargesController < ApplicationController
   before_filter :authenticate_user!, only: [:edit, :update]
 
   def new
-    render 'premiummob' and return if premiummob?
-    render 'premiumf2f' and return if premiumf2f?
-    render 'premiumplus' and return if premiumplus?
-    render 'premium'
+    render plan_name
   end
 
   def edit
@@ -65,22 +62,7 @@ class ChargesController < ApplicationController
   end
 
   def plan_class
-    return PremiumMob if params[:plan] == 'premiummob'
-    return PremiumF2F if params[:plan] == 'premiumf2f'
-    return PremiumPlus if params[:plan] == 'premiumplus'
-    Premium
-  end
-
-  def premiummob?
-    params[:plan] == 'premiummob'
-  end
-
-  def premiumf2f?
-    params[:plan] == 'premiumf2f'
-  end
-
-  def premiumplus?
-    params[:plan] == 'premiumplus'
+    plan_name.camelcase.constantize
   end
 
   def send_acknowledgement_email
