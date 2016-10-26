@@ -1,10 +1,19 @@
 {
   "name": "WebsiteOne",
   "description": "A website for AgileVentures",
-  "scripts": {
+  "scripts":{
     "postdeploy": "bundle exec rake db:setup"
   },
   "env": {
+    "AGILE_BOT_URL": {
+      "required": true
+    },
+    "AIRBRAKE_API_KEY": {
+      "required": true
+    },
+    "AIRBRAKE_PROJECT_ID": {
+      "required": true
+    },
     "BUILDPACK_URL": {
       "required": true
     },
@@ -26,10 +35,31 @@
     "HANGOUTS_APP_ID": {
       "required": true
     },
+    "MAX_THREADS": {
+      "required": true
+    },
+    "PUMA_WORKERS": {
+      "required": true
+    },
+    "SENDGRID_PASSWORD": {
+      "required": true
+    },
+    "SENDGRID_USERNAME": {
+      "required": true
+    },
     "SLACK_AUTH_TOKEN": {
       "required": true
     },
     "SLACK_NOTIFICATIONS_ENABLED": {
+      "required": true
+    },
+    "SLACK_INVITES_ENABLED": {
+      "required": true
+    },
+    "STRIPE_PUBLISHABLE_KEY": {
+      "required": true
+    },
+    "STRIPE_SECRET_KEY": {
       "required": true
     },
     "SSL_HOST": {
@@ -40,11 +70,14 @@
     }
   },
   "addons": [
-    "airbrake",
     "sendgrid",
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "airbrake"
   ],
   "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    },
     {
       "url": "https://github.com/heroku/heroku-buildpack-ruby"
     }

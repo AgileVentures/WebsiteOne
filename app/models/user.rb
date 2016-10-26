@@ -1,6 +1,11 @@
 class User < ActiveRecord::Base
   include Filterable
 
+  extend Forwardable
+
+  def_delegator :karma, :hangouts_attended_with_more_than_one_participant=
+  def_delegator :karma, :hangouts_attended_with_more_than_one_participant
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -27,7 +32,7 @@ class User < ActiveRecord::Base
   before_save :generate_timezone_offset
 
   after_validation :geocode, if: ->(obj) { obj.last_sign_in_ip_changed? }
-  after_validation -> { KarmaCalculator.new(self).perform }
+  # after_validation -> { KarmaCalculator.new(self).perform }
   after_create :send_slack_invite, if: -> { Features.slack.invites.enabled }
 
   has_many :authentications, dependent: :destroy
@@ -37,6 +42,15 @@ class User < ActiveRecord::Base
   has_many :event_instances
   has_many :commit_counts
   has_many :status
+
+  has_one :subscription, autosave: true
+
+  def stripe_customer_id # ultimately replacing the field stripe_customer
+    subscription.identifier
+  end
+
+  has_one :karma
+  after_save :build_karma, if: -> { karma.nil? }
 
   accepts_nested_attributes_for :status
   scope :mail_receiver, -> { where(receive_mailings: true) }
@@ -64,6 +78,11 @@ class User < ActiveRecord::Base
   def self.filter_if_title title
     return User.all if title.blank?
     User.tagged_with(title)
+  end
+
+  def membership_type
+    return "Basic" unless subscription
+    subscription.type
   end
 
   def apply_omniauth(omniauth)
@@ -162,6 +181,11 @@ class User < ActiveRecord::Base
 
   def membership_length
     1 * [user_age_in_months.to_i, 6].min
+  end
+
+  def karma_total
+    return karma.total if karma
+    0
   end
 
   private

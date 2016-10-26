@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831131548) do
+ActiveRecord::Schema.define(version: 20160928152822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -132,6 +133,19 @@ ActiveRecord::Schema.define(version: 20160831131548) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
+  create_table "hangout_participants_snapshots", force: :cascade do |t|
+    t.integer "event_instance_id"
+    t.text    "participants"
+  end
+
+  create_table "karmas", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "total",                                            default: 0
+    t.integer  "hangouts_attended_with_more_than_one_participant", default: 0
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
+  end
+
   create_table "newsletters", force: :cascade do |t|
     t.string   "title",        limit: 255,                 null: false
     t.string   "subject",      limit: 255,                 null: false
@@ -142,6 +156,12 @@ ActiveRecord::Schema.define(version: 20160831131548) do
     t.datetime "sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "payment_sources", force: :cascade do |t|
+    t.string  "type"
+    t.string  "identifier"
+    t.integer "subscription_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -178,6 +198,13 @@ ActiveRecord::Schema.define(version: 20160831131548) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "type"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.integer  "user_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -218,8 +245,8 @@ ActiveRecord::Schema.define(version: 20160831131548) do
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
     t.boolean  "display_email"
-    t.string   "youtube_id",             limit: 255
     t.string   "slug",                   limit: 255
+    t.string   "youtube_id",             limit: 255
     t.boolean  "display_profile",                    default: true
     t.float    "latitude"
     t.float    "longitude"
@@ -231,9 +258,8 @@ ActiveRecord::Schema.define(version: 20160831131548) do
     t.boolean  "display_hire_me"
     t.text     "bio"
     t.boolean  "receive_mailings",                   default: true
-    t.integer  "karma_points",                       default: 0
-    t.string   "country_code",           limit: 255
     t.integer  "timezone_offset"
+    t.string   "country_code",           limit: 255
     t.integer  "status_count",                       default: 0
     t.string   "stripe_customer"
   end

@@ -51,6 +51,7 @@ class UsersController < ApplicationController
     if should_display_user?(@user)
       @event_instances = EventInstance.where(user_id: @user.id)
                              .order(created_at: :desc).limit(5)
+      set_activity_tab(params[:tab])
     else
       raise ActiveRecord::RecordNotFound.new('User has not exposed his profile publicly')
     end
@@ -72,10 +73,10 @@ class UsersController < ApplicationController
 
   def users
     User.page(params[:page]).per(15)
-        .includes(:status, :titles)
+        .includes(:status, :titles, :karma)
         .filter(set_filter_params)
         .allow_to_display
-        .order(karma_points: :desc)
+        .order("karmas.total DESC")
   end
 
   def should_display_user?(user)
@@ -106,6 +107,15 @@ class UsersController < ApplicationController
       else
         redirect_to :back, alert: "Can't determine your location!"
       end
+    end
+  end
+
+  def set_activity_tab(param)
+    return unless param.present?
+    @param_tab = param
+    unless UserPresenter.new(@user).contributed?
+      @param_tab = nil
+      flash.now[:notice] = 'User does not have activity log'
     end
   end
 end

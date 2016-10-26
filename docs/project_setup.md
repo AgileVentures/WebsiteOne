@@ -8,14 +8,11 @@ If you haven't yet done the following:
 
 and are unsure how to do so then please see this [general guide to getting set up with an AgileVentures project](http://www.agileventures.org/articles/project-setup-new-users) (use https://github.com/AgileVentures/WebsiteOne as the project URL).
 
-## Step 2: Run the setup script
+## Step 2: Clone the code locally
 
 Get the project dependencies by running these 2 commands in a bash shell terminal
 
-    wget https://github.com/AgileVentures/setup-scripts/raw/develop/scripts/rails_setup.sh
-    WITH_PHANTOMJS=true REQUIRED_RUBY=2.2.2  source rails_setup.sh
-
-This script works best with Ubuntu 14.04 (Trusty Tahr) and Mac OS X 10.9 Mavericks, but please contribute installation instructions for other platforms and improvements at https://github.com/AgileVentures/setup-scripts.
+    git clone https://github.com/<your-github-name>/WebsiteOne
 
 **Note:** On OSX El Capitan and above, you may get this error:
 
@@ -31,16 +28,20 @@ Then re-try the rails_setup.sh line above and you should be good to go on to the
 ## Step 3: Install the gems
 
     bundle install
+    
+## Step 4: Install javascript dependencies (ensure bower is installed `npm install bower`)
 
-## Step 4: Update the database
+    npm install  
+
+## Step 5: Update the database
 
     bundle exec rake db:setup
     
-## Step 5: Request the .env file
+## Step 6: Request the .env file
     
     ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in
 
-## Step 6: Run the tests
+## Step 7: Run the tests
 
     bundle exec rake spec
     bundle exec rake jasmine:ci
@@ -48,7 +49,7 @@ Then re-try the rails_setup.sh line above and you should be good to go on to the
 
 Discuss any errors with the team.
 
-## Step 7. Start the server
+## Step 8. Start the server
 
     bundle exec rails s
 

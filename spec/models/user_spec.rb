@@ -9,6 +9,8 @@ describe User, type: :model do
   end
   subject { build_stubbed :user }
 
+  it { should have_one :subscription }
+
   it { is_expected.to have_many(:status) }
 
   it { is_expected.to accept_nested_attributes_for :status }
@@ -373,6 +375,14 @@ describe User, type: :model do
 
     end
 
+
+    describe '#hangouts_attended_with_more_than_one_participant' do
+      subject(:user) {FactoryGirl.create(:user, hangouts_attended_with_more_than_one_participant: 1)}
+      it 'returns 1' do
+        expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
+      end
+    end
+
     describe '#profile_completeness' do
       subject(:user) { FactoryGirl.create(:user) }
       it 'calculates profile completeness' do
@@ -392,6 +402,62 @@ describe User, type: :model do
       it 'calculates membership length' do
         expect(user.membership_length).to eq 0
       end
+    end
+
+    describe '#membership_type' do
+      subject(:user) { FactoryGirl.create(:user) }
+
+      it 'returns membership type' do
+        expect(user.membership_type).to eq 'Basic'
+      end
+
+      context 'premium member' do
+        subject(:user) { FactoryGirl.create(:user) }
+        let!(:premium) { FactoryGirl.create(:subscription, user: user) }
+
+        it 'returns premium' do
+          expect(user.membership_type).to eq 'Premium'
+        end
+      end
+    end
+
+    describe '#karma_total' do
+      subject(:user) { FactoryGirl.create(:user) }
+      it 'returns 0 when user initially created' do
+        expect(user.karma_total).to eq 0
+      end
+      context 'once associated karma object is created' do
+        subject(:user) { FactoryGirl.build(:user, karma: FactoryGirl.create(:karma, total: 50)) }
+        it 'returns non zero' do
+          expect(user.karma_total).to eq 50
+        end
+      end
+    end
+
+  end
+
+  context 'creating user' do
+    it 'should not be possible to save a user with nil Karma' do
+      user = User.new({ email: 'doh@doh.com', password: '12345678' })
+      user.save!
+      expect(user.karma).not_to be_nil
+    end
+    it 'should not override existing karma' do
+      user = User.new({ email: 'doh@doh.com', password: '12345678' })
+      user.karma = Karma.new(total: 50)
+      user.save!
+      expect(user.karma.total).to eq 50
+    end
+  end
+
+  context 'look up stripe id from subscription' do
+    let(:subscription) { mock_model(Subscription, save: true) }
+    before { allow(subscription).to receive(:[]=) }
+
+    it 'asks subscription for identifier' do
+      expect(subscription).to receive :identifier
+      subject.subscription = subscription
+      subject.stripe_customer_id
     end
 
   end

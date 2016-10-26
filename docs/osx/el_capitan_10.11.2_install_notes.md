@@ -1,7 +1,7 @@
 WebSiteOne install
 ————————
 
-:warning: These are notes from @tansaku. Use [the project setup guide](docs/project_setup.md) to setup your own environment. Refer to these notes if you encounter issues mentioned below where solutions are not covered in the project setup guide. :warning:
+:warning: These are notes from @tansaku. Use [the project setup guide](../project_setup.md) to setup your own environment. Refer to these notes if you encounter issues mentioned below where solutions are not covered in the project setup guide. :warning:
 
 Fresh 10.11.2 (El Capitan) OSX
 
@@ -50,23 +50,30 @@ gem install bundle
 bundle
 ```
 
-9) various fails (event machine, pg, puma) - matching what is in the [setup](../project_setup.md):
+9) install javascript dependencies
+
+```
+npm bower install
+npm install
+```
+
+10) various fails (event machine, pg, puma) - matching what is in the [setup](../project_setup.md):
 
 ```
 brew link openssl --force
 ```
 
-10. fixed em and puma, but pg no - need to install postgres
+11) fixed em and puma, but pg no - need to install postgres
 
 http://postgresapp.com/
 
-11. psql not yet working from command line, but that seemed to sort gem
+12) psql not yet working from command line, but that seemed to sort gem
 
-12. capybara install failed - needed qt5: 
+13) capybara install failed - needed qt5: 
 
 https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
 
-13. more capybara issues:
+14) more capybara issues:
 
 ```
 Installing capybara-webkit 1.5.1 with native extensions
@@ -79,7 +86,7 @@ Project ERROR: Xcode not set up properly. You may need to confirm the license ag
 
 install Xcode via the App Store got bundle completed
 
-14. needed the following after db:setup
+15) needed the following after db:setup
 
 ```
 bin/rake db:migrate RAILS_ENV=test

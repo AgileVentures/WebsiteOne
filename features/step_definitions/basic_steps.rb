@@ -72,7 +72,7 @@ When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
 end
 
 When(/^(?:when I|I) click "([^"]*)"$/) do |text|
-  click_link_or_button text
+  click_link_or_button(text, match: :first)
 end
 
 When(/^I click the "([^"]*)" button$/) do |button|

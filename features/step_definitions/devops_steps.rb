@@ -1,10 +1,16 @@
-When(/^I run rake task "([^"]*)"$/) do |arg1|
-  # Write code here that turns the phrase above into concrete actions
-   require "rake"
-   @rake = Rake::Application.new
-   Rake.application = @rake
-   Rake::Task.define_task(:environment)
-   Rake.application.rake_require "tasks/scheduler"
-   @rake['fetch_github_commits'].invoke
+When(/^I run the rake task for calculating karma points$/) do
+  $rake['karma_calculator'].execute
 end
 
+When(/^I run the rake task for fetching github commits$/) do
+  $rake['fetch_github_commits'].execute
+end
+
+When(/^I run the rake task for migrating stripe$/) do
+  $rake['db:migrate_stripe'].execute
+end
+
+Then(/^"([^"]*)" shoud have "([^"]*)" in their subscription$/) do |email, stripe_id|
+  user = User.find_by_email(email)
+  expect(user.stripe_customer_id).to eq stripe_id
+end

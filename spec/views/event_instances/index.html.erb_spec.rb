@@ -64,7 +64,7 @@ describe 'event_instances/index', type: :view do
 
   describe 'renders participants avatars' do
     before do
-      FactoryGirl.create(:user, gplus: @event_instances.first.participants.first.last[:person][:id])
+      FactoryGirl.create(:user, gplus: @event_instances.first.participants.first.last['person']['id'])
       FactoryGirl.create(:user)
     end
 

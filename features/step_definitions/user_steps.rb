@@ -3,7 +3,11 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
 end
 
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
-  @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password, stripe_customer: premium ? 'cus_8l47KNxEp3qMB8' : nil)
+
+  @current_user = @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
+  subscription = Premium.create(user: @user, started_at: Time.now)
+  payment_source = PaymentSource::Stripe.create(identifier: 'cus_8l47KNxEp3qMB8', subscription: subscription )
+
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => email
@@ -296,6 +300,10 @@ Given(/^I visit (.*)'s profile page$/) do |name|
   visit user_path user
 end
 
+Given(/^I am on my profile page$/) do
+  visit user_path @current_user
+end
+
 Given(/^I (?:have|add) (?:skill|skills) "(.*)"/) do |skills|
   @user.skill_list.add(skills, parse: true)
   @user.save
@@ -380,4 +388,10 @@ end
 
 And(/^I click on page "([^"]*)" of users$/) do |page|
   click_link page
+end
+
+When(/^I click Karma link for "([^"]*)"$/) do |user_name|
+  user = User.find_by_first_name(user_name)
+  link = user_path(user)
+  page.find(:css, %Q{a[href="#{link}?tab=activity"]}).trigger('click')
 end
