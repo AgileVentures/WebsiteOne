@@ -191,8 +191,8 @@ class Event < ActiveRecord::Base
 
   def recent_hangouts
     event_instances
-      .where('created_at BETWEEN ? AND ?', 1.days.ago.beginning_of_day, DateTime.now.end_of_day)
-      .order(created_at: :desc)
+      .where('updated_at BETWEEN ? AND ?', 1.days.ago.beginning_of_day, DateTime.now.end_of_day)
+      .order(updated_at: :desc)
   end
 
   def less_than_ten_till_start?
