@@ -28,6 +28,16 @@ describe Premium, type: :model do
   it_behaves_like 'a subscription'
 end
 
+describe PremiumMob, type: :model do
+  let(:type) { 'PremiumMob' }
+  it_behaves_like 'a subscription'
+end
+
+describe PremiumF2F, type: :model do
+  let(:type) { 'PremiumF2F' }
+  it_behaves_like 'a subscription'
+end
+
 describe PremiumPlus, type: :model do
   let(:type) { 'PremiumPlus' }
   it_behaves_like 'a subscription'

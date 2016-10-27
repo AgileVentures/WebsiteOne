@@ -397,6 +397,7 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.4.2)
+    railroady (1.5.1)
     rails (4.2.6)
       actionmailer (= 4.2.6)
       actionpack (= 4.2.6)
@@ -654,6 +655,7 @@ DEPENDENCIES
   puma
   rack-cache
   rack-timeout
+  railroady
   rails (= 4.2.6)
   rails_12factor
   redcarpet
