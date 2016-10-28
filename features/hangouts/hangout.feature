@@ -57,23 +57,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I should not see hangout button
 
   @javascript
-  Scenario: Edit Hangout URL
-    Given I am on the show page for event "Scrum"
-    And I open the Edit URL controls
-    And I fill in "hangout_url" with "http://test.com"
-    And I click on the Save button
-    Then I should see link "Join now" with "http://test.com"
-
-  @javascript
-  Scenario: Edit Hangout URL on repeating event
-    Given the time now is "2014-02-05 07:30:00"
-    And I am on the show page for event "Repeat Scrum"
-    And I open the Edit URL controls
-    And I fill in "hangout_url" with "https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
-    And I click on the Save button
-    Then I should see link "Join now" with "https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
-
-  @javascript
   Scenario: Cancel Edit Hangout URL
     Given I am on the show page for event "Scrum"
     And I open the Edit URL controls
