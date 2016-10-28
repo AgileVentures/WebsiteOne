@@ -211,15 +211,11 @@ class Event < ActiveRecord::Base
   def before_current_end_time?
     Time.now < (schedule.previous_occurrence(Time.now) + duration*60)
   rescue
-    Time.now < (schedule.all_occurrences.first + duration*60)
-  rescue
     false
   end
 
   def after_current_start_time?
     Time.now > schedule.previous_occurrence(Time.now)
-  rescue
-    Time.now > schedule.all_occurrences.first
   rescue
     false
   end
