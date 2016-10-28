@@ -3,6 +3,11 @@ require 'spec_helper'
 describe EventInstance, type: :model do
   let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil) }
 
+  it 'has url_set_directly default to false' do
+    expect(hangout.url_set_directly).to be_falsey
+  end
+
+  it { should delegate_method(:within_current_event_duration?).to(:event) }
 
   context '#updated_within_last_two_minutes?' do
     it 'should return false when updated_at is more than two minutes ago' do
@@ -45,6 +50,15 @@ describe EventInstance, type: :model do
       allow(Time).to receive(:now).and_return(Time.parse('10:02:01 UTC'))
       expect(hangout.live?).to be_falsey
     end
+
+    context 'url manually overridden' do
+      before { hangout.url_set_directly = true }
+      it 'reports live if the link is older than 2 minutes, and event duration not expired' do
+        allow(hangout).to receive(:within_current_event_duration?).and_return(true)
+        allow(Time).to receive(:now).and_return(Time.parse('10:02:01 UTC'))
+        expect(hangout.live?).to be_truthy
+      end
+    end
   end
 
   context 'hangout_url is present and hoa_status is finished' do
@@ -62,6 +76,7 @@ describe EventInstance, type: :model do
       allow(Time).to receive(:now).and_return(Time.parse('10:02:01 UTC'))
       expect(hangout.live?).to be_falsey
     end
+
   end
 
   context 'validation: dont update after finished' do

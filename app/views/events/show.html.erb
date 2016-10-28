@@ -98,6 +98,7 @@
             <%= hidden_field_tag 'title', topic(@event, @event_schedule) %>
             <%= hidden_field_tag 'host_id', current_user.id %>
             <%= hidden_field_tag 'event_id', @event.id %>
+            <%= hidden_field_tag 'url_set_directly', true %>
 
             <div class="form-group">
               <label class="control-label sr-only" for="hangout-url">Manually modify Hangout link</label>

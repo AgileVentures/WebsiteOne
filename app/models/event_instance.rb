@@ -2,6 +2,8 @@ class EventInstance < ActiveRecord::Base
   self.per_page = 30
 
   belongs_to :event
+  delegate :within_current_event_duration?, to: :event
+
   belongs_to :user
   include UserNullable
   belongs_to :project
@@ -27,7 +29,7 @@ class EventInstance < ActiveRecord::Base
   end
 
   def live?
-    started? && hoa_status != 'finished' && updated_within_last_two_minutes?
+    started? && hoa_status != 'finished' && (updated_within_last_two_minutes? || manually_updated_event_not_finished?)
   end
 
   def duration
@@ -47,6 +49,10 @@ class EventInstance < ActiveRecord::Base
   end
 
   private
+
+  def manually_updated_event_not_finished?
+    url_set_directly && within_current_event_duration?
+  end
 
   def dont_update_after_finished
     if hoa_status_was == 'finished'

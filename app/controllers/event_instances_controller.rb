@@ -73,6 +73,7 @@ class EventInstancesController < ApplicationController
         hangout_url: params[:hangout_url],
         yt_video_id: params[:yt_video_id],
         hoa_status: params[:hoa_status],
+        url_set_directly: params[:url_set_directly],
         updated_at: Time.now
     ).permit!
   end
