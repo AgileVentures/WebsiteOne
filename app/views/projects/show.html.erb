@@ -5,7 +5,7 @@
       <strong><%= link_to 'Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
       <strong><%= @project.title %></strong>
 
-      <div class="row"> 
+      <div class="row">
         <% if @project.image_url.present? %>
           <div class="col-xs-12">
             <%= image_tag @project.image_url, class: "img-responsive" %>
@@ -104,7 +104,7 @@
       <div class="tab-content" style="background: #fff;">
         <div id="pitch_content" class="mercury-region tab-pane active" data-mercury="full">
           <% unless @project.pitch.nil? %>
-              <%= @project.pitch.html_safe %>
+              <%= sanitize @project.pitch %>
           <% else %>
               <p><b>Project content missing :(</b></p>
 

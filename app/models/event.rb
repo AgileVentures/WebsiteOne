@@ -202,11 +202,11 @@ class Event < ActiveRecord::Base
     false
   end
 
-  private
-
   def within_current_event_duration?
     after_current_start_time? and before_current_end_time?
   end
+
+  private
 
   def before_current_end_time?
     Time.now < (schedule.previous_occurrence(Time.now) + duration*60)

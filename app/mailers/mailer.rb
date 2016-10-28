@@ -5,6 +5,14 @@ class Mailer < ActionMailer::Base
     mail(to: email, subject: 'Welcome to AgileVentures Premium')
   end
 
+  def send_premium_f2f_payment_complete(email)
+    mail(to: email, subject: 'Welcome to AgileVentures Premium F2F')
+  end
+
+  def send_premium_mob_payment_complete(email)
+    mail(to: email, subject: 'Welcome to AgileVentures Premium MOB')
+  end
+
   def send_premium_plus_payment_complete(email)
     mail(to: email, subject: 'Welcome to AgileVentures Premium PLUS')
   end
