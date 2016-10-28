@@ -1,0 +1,2 @@
+class PremiumMob < Subscription
+end

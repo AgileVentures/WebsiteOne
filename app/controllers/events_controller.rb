@@ -63,11 +63,23 @@ class EventsController < ApplicationController
   private
 
   def transform_params
-    event_params = params.merge(event: params[:event].merge({creator_id: current_user.id})).require(:event).permit!
+    event_params = whitelist_event_params
     create_start_date_time(event_params)
     event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
-    event_params[:repeat_ends_on]= params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
+    event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
     event_params
+  end
+
+  def whitelist_event_params
+    permitted = [
+      :name, :category, :project_id, :description, :duration, :repeats,
+      :repeats_every_n_weeks, :repeat_ends_string, :time_zone, :creator_id,
+      :start_datetime, :repeat_ends, :repeat_ends_on
+    ]
+
+    params.merge(event: params[:event].merge(creator_id: current_user.id))
+          .require(:event)
+          .permit(permitted, repeats_weekly_each_days_of_the_week: [])
   end
 
   # next_date and start_date are in the same dst or non-dst
@@ -114,4 +126,3 @@ class EventsController < ApplicationController
     params.permit(:name, :category, :project_id).merge(start_datetime: Time.now.utc, duration: 30, repeat_ends: true)
   end
 end
-

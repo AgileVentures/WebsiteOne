@@ -140,7 +140,7 @@ describe EventInstancesController do
         "category"=>"category", "user_id"=>"host","participants"=>"one, two",
         "hangout_participants_snapshots_attributes"=>[{"participants"=>"one, two"}],
         "hangout_url"=>"test_url", "yt_video_id"=>"video", "hoa_status"=>"started",
-        "updated_at"=>Time.now
+        "url_set_directly"=>nil, "updated_at"=>Time.now
       }
       expect_any_instance_of(EventInstance).to receive(:update).with(upd_params)
       get :update, params.merge(upd_params)

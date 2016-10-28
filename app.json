@@ -41,6 +41,9 @@
     "PUMA_WORKERS": {
       "required": true
     },
+    "SECRET_KEY_BASE": {
+      "required": true
+    },
     "SENDGRID_PASSWORD": {
       "required": true
     },
