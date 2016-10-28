@@ -1,3 +1,13 @@
+Given(/^I navigate to the show page for event "([^"]*)"$/) do |name|
+  event = Event.find_by_name(name)
+  visit event_path(event)
+end
+
+Then(/^I jump to one minute before the end of the event at "([^"]*)"/) do |jump_date|
+  Delorean.time_travel_to(Time.parse(jump_date))
+end
+
+
 Then /^I should (not )?see hangout button$/ do |absent|
   if absent
     expect(page).not_to have_css '#liveHOA-placeholder'

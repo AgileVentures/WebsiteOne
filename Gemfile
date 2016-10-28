@@ -110,6 +110,7 @@ group :development, :test do
   gem "bundler-audit", :require => false # scans the Gemfile.lock and reports if there are any gems which need to be updated to fix known security issues
   gem 'constant-redefinition'
   gem 'dotenv-rails'
+  gem 'railroady'
 end
 
 group :development, :staging, :production do

@@ -80,7 +80,7 @@
 </div>
 
 <script>
-    var usrData = <%= raw User.map_data %>;
+    var usrData = <%= sanitize User.map_data %>;
     var defaultText = '<h3>User statistics</h3>'
     $(function () {
         $('#info-box').html(defaultText);
@@ -130,4 +130,3 @@
         });
     });
 </script>
-
