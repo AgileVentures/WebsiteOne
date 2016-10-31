@@ -6,6 +6,9 @@ class ChargesController < ApplicationController
     render plan_name
   end
 
+  def paypal
+  end
+
   def edit
   end
 
