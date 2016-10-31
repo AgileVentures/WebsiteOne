@@ -31,3 +31,7 @@ def submit_card_details_for_button_with(text, email='random@morerandom.com')
   end
   sleep(3)
 end
+
+Then(/^I should see a paypal form$/) do
+  expect(page).to have_xpath("//form[@action='https://www.paypal.com/cgi-bin/webscr']")
+end
