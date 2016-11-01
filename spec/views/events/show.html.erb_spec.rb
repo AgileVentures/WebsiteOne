@@ -6,7 +6,7 @@ describe 'events/show', type: :view do
   before(:each) do
     @event = FactoryGirl.build_stubbed(Event, name: 'EuroAsia Scrum',
                                        category: 'Scrum',
-                                       description: 'EuroAsia Scrum and Pair hookup',
+                                       description: 'EuroAsia Scrum and Pair hookup http://lin.ky/',
                                        time_zone: 'Eastern Time (US & Canada)',
                                        project_id: 1)
 
@@ -24,8 +24,9 @@ describe 'events/show', type: :view do
     expect(rendered).to have_text(@event.name)
   end
 
-  it 'should render the event description' do
-    expect(rendered).to have_text(@event.description)
+  it 'should render the event description, with links hyperlinked' do
+    expect(rendered).to have_link('http://lin.ky')
+    expect(rendered).to have_content('EuroAsia Scrum and Pair hookup http://lin.ky')
   end
 
   describe 'Hangouts' do

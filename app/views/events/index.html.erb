@@ -23,17 +23,19 @@
   <% @events.each_slice(2) do |slice| %>
       <% slice.each do |instance| %>
           <% event = instance[:event] %>
-          <% recent_hangout = event.recent_hangouts.first %>
           <div class="event-row" id="details_<%= event.id %>">
             <div class="row">
               <div class="col-lg-9 col-xs-12 col-sm-9">
                 <div class="event-title"><%= link_to event.name.truncate(50, separator: /\s/), event_path(event) %></div>
               </div>
               <div class="col-lg-3 col-xs-12 col-sm-3">
-                <% if recent_hangout && recent_hangout.live? %>
-                    <div class="event-notice pull-right">
-                      <%= link_to 'Event live! Join now', recent_hangout.hangout_url, class: 'btn btn-default pull-right' %>
-                    </div>
+                <% if instance[:time].today?%>
+                  <% recent_hangout = event.recent_hangouts.first %>
+                  <% if recent_hangout && recent_hangout.live? %>
+                      <div class="event-notice pull-right">
+                        <%= link_to 'Event live! Join now', recent_hangout.hangout_url, class: 'btn btn-default pull-right' %>
+                      </div>
+                  <% end %>
                 <% end %>
               </div>
             </div>
