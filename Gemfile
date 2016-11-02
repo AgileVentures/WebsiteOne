@@ -45,6 +45,7 @@ gem 'acts_as_votable', '~> 0.10.0' #Allows WSO to track member's votes on votabl
 gem 'utf8-cleaner'
 gem 'public_activity' #Create activity feed
 gem 'nokogiri', '~> 1.6.7.2'
+gem 'rails_autolink', '~>1.1.6'
 
 gem 'yui-compressor'
 gem 'compass-rails'
