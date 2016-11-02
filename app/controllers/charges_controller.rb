@@ -22,6 +22,7 @@ class ChargesController < ApplicationController
   end
 
   def create
+    @user = User.find_by_slug(params[:user])
     @plan = params[:plan]
 
     customer = Stripe::Customer.create(
@@ -30,7 +31,7 @@ class ChargesController < ApplicationController
         plan: @plan
     )
 
-    update_user_to_premium(customer)
+    update_user_to_premium(customer, @user)
 
     send_acknowledgement_email
 
@@ -52,9 +53,10 @@ class ChargesController < ApplicationController
 
   private
 
-  def update_user_to_premium(stripe_customer)
-    return unless current_user
-    UpgradeUserToPremium.with(current_user, Time.now, stripe_customer.id, PaymentSource::Stripe, plan_class)
+  def update_user_to_premium(stripe_customer, user_for_update)
+    user_for_update ||= current_user
+    return unless user_for_update
+    UpgradeUserToPremium.with(user_for_update, Time.now, stripe_customer.id, PaymentSource::Stripe, plan_class)
   end
 
   def plan_name

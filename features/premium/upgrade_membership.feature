@@ -19,7 +19,7 @@ Feature: Allow Users to Upgrade Membership
   Scenario: User is on free tier and looking at other persons profile page
     Given I am logged in
     And I visit Alice's profile page
-    Then I should not see "Basic Member"
+    Then I should see "Basic Member"
     And I should not see "Premium Member"
     And I should not see "Premium Plus Member"
     And I should not see "Upgrade to Premium"

@@ -1,14 +1,31 @@
-<% if @plan == 'premium' %>
-    <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium Member!</h2>
-    <p>You're seven day free trial has now started.  Your card will not be charged until seven days have passed.</p>
-    <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium membership benefits.</p>
-<% elsif @plan == 'premiummob'%>
-    <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium MOB Member!</h2>
-    <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium mob membership benefits.</p>
-<% elsif @plan == 'premiumf2f'%>
-    <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium F2F Member!</h2>
-    <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium f2f membership benefits.</p>
+<% if @user.present? && current_user != @user %>
+    <% if @plan == 'premium' %>
+        <h2 id='payment_complete'>Thanks, you have sponsored <%= @user.display_name %> as a Premium Member!</h2>
+        <p>You're seven day free trial has now started.  Your card will not be charged until seven days have passed.</p>
+        <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium membership benefits.</p>
+    <% elsif @plan == 'premiummob'%>
+        <h2 id='payment_complete'>Thanks, you have sponsored <%= @user.display_name %> as a Premium MOB Member!</h2>
+        <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium mob membership benefits.</p>
+    <% elsif @plan == 'premiumf2f'%>
+        <h2 id='payment_complete'>Thanks, you have sponsored <%= @user.display_name %> as a Premium F2F Member!</h2>
+        <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium f2f membership benefits.</p>
+    <% else %>
+        <h2 id='payment_complete'>Thanks, you have sponsored <%= @user.display_name %> as a Premium PLUS Member!</h2>
+        <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium plus membership benefits.</p>
+    <% end %>
 <% else %>
-    <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium PLUS Member!</h2>
-    <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium plus membership benefits.</p>
+    <% if @plan == 'premium' %>
+        <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium Member!</h2>
+        <p>You're seven day free trial has now started.  Your card will not be charged until seven days have passed.</p>
+        <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium membership benefits.</p>
+    <% elsif @plan == 'premiummob'%>
+        <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium MOB Member!</h2>
+        <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium mob membership benefits.</p>
+    <% elsif @plan == 'premiumf2f'%>
+        <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium F2F Member!</h2>
+        <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium f2f membership benefits.</p>
+    <% else %>
+        <h2 id='payment_complete'>Thanks, you're now an AgileVentures Premium PLUS Member!</h2>
+        <p>An AgileVentures mentor will be in touch shortly to help you receive all of your premium plus membership benefits.</p>
+    <% end %>
 <% end %>
