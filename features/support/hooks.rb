@@ -1,3 +1,35 @@
+# Before('@poltergeist_no_billy') do
+#   Capybara.javascript_driver = :ignore_ssl_errors
+#   Capybara.current_driver = Capybara.javascript_driver
+#   # @original_javascript_driver = Capybara.javascript_driver
+# end
+
+# After('@poltergeist_no_billy') do
+#   Capybara.javascript_driver =  @original_javascript_driver
+#
+
+After '@javascript' do
+  Capybara.send('session_pool').each do |_, session|
+    next unless session.driver.is_a?(Capybara::Poltergeist::Driver)
+    session.driver.restart
+  end
+end
+
+Before '@stripe_javascript' do
+  Capybara.javascript_driver = :poltergeist
+  Capybara.current_driver = Capybara.javascript_driver
+  StripeMock.start
+end
+
+After '@stripe_javascript' do
+  Capybara.javascript_driver = :poltergeist_billy
+  StripeMock.stop
+  Capybara.send('session_pool').each do |_, session|
+    next unless session.driver.is_a?(Capybara::Poltergeist::Driver)
+    session.driver.restart
+  end
+end
+
 Before('@desktop') { page.driver.resize(1228, 768) }
 
 Before('@tablet') { page.driver.resize(768, 768) }

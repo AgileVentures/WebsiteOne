@@ -27,7 +27,7 @@ class ChargesController < ApplicationController
 
     customer = Stripe::Customer.create(
         email: params[:stripeEmail],
-        source: params[:stripeToken],
+        source: stripe_token(params),
         plan: @plan
     )
 
@@ -52,6 +52,13 @@ class ChargesController < ApplicationController
   end
 
   private
+  def stripe_token(params)
+    Rails.env.test? ? generate_test_token : params[:stripeToken]
+  end
+
+  def generate_test_token
+    StripeMock.create_test_helper.generate_card_token
+  end
 
   def update_user_to_premium(stripe_customer, user_for_update)
     user_for_update ||= current_user

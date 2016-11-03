@@ -1,10 +1,13 @@
-@javascript @vcr @billy_directories
+@stripe_javascript @javascript
 Feature: Allow Users to Sponsor other members
   As a user
   So that I can help someone else get premium services
   I would like to be able to pay for their premium service
 
   Background:
+    Given the following plans exist
+      | name    | id      |
+      | Premium | premium |
     Given the following users exist
       | first_name | last_name | email                  | github_profile_url         | last_sign_in_ip |
       | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |
