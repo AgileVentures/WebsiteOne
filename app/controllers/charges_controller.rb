@@ -42,7 +42,7 @@ class ChargesController < ApplicationController
 
   def update
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
-    card = customer.cards.create(card: params[:stripeToken])
+    card = customer.sources.create(card: stripe_token(params))
     card.save
     customer.default_card = card.id
     customer.save

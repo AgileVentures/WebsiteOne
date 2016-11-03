@@ -19,6 +19,7 @@ Before '@stripe_javascript' do
   Capybara.javascript_driver = :poltergeist
   Capybara.current_driver = Capybara.javascript_driver
   StripeMock.start
+  @stripe_test_helper = StripeMock.create_test_helper
 end
 
 After '@stripe_javascript' do

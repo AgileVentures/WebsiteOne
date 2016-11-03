@@ -6,7 +6,13 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
 
   @current_user = @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
   subscription = Premium.create(user: @user, started_at: Time.now)
-  payment_source = PaymentSource::Stripe.create(identifier: 'cus_8l47KNxEp3qMB8', subscription: subscription )
+  # byebug
+  customer = Stripe::Customer.create({
+                                         email: email,
+                                         source: @stripe_test_helper.generate_card_token
+                                     })
+  customer.subscriptions.create(plan: 'premium')
+  payment_source = PaymentSource::Stripe.create(identifier: customer.id, subscription: subscription )
 
   visit new_user_session_path
   within ('#main') do
