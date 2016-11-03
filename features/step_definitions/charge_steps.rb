@@ -37,5 +37,7 @@ Then(/^I should see a paypal form$/) do
 end
 
 Given(/^the following plans exist$/) do |table|
-  StripeMock.create_test_helper.create_plan(:id => 'premium', :amount => 1000)
+  table.hashes.each do |hash|
+    StripeMock.create_test_helper.create_plan(hash)
+  end
 end

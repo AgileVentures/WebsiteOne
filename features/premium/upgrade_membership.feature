@@ -1,11 +1,15 @@
-@javascript @vcr @billy_directories
+@stripe_javascript @javascript
 Feature: Allow Users to Upgrade Membership
   As a site admin
   So that users can pay for better premium services
   I would like to be able to upsell them
 
   Background:
-    Given the following users exist
+    Given the following plans exist
+      | name    | id      |
+      | Premium | premium |
+      | PremiumPlus | premiumplus |
+    And the following users exist
       | first_name | last_name | email                  | github_profile_url         | last_sign_in_ip |
       | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |
 

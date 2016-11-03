@@ -1,11 +1,17 @@
-@javascript @vcr @billy_directories
+@stripe_javascript @javascript
 Feature: Charge Users Money
   As a site admin
   So that users can pay for premium services
   I would like to be able to sign them up for a recurring plan
 
   Background:
-    Given the following pages exist
+    Given the following plans exist
+      | name        | id          |
+      | Premium     | premium     |
+      | PremiumMob  | premiummob  |
+      | PremiumF2F  | premiumf2f  |
+      | PremiumPlus | premiumplus |
+    And the following pages exist
       | title           | body                    |
       | About Us        | Agile Ventures          |
       | Pricing         | wonga                   |
