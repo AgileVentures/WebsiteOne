@@ -46,7 +46,7 @@ class ChargesController < ApplicationController
     card.save
     customer.default_card = card.id
     customer.save
-  rescue Stripe::InvalidRequestError => e
+  rescue Stripe::InvalidRequestError, NoMethodError => e
     logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
     @error = true
   end
