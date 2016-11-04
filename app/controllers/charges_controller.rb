@@ -24,7 +24,7 @@ class ChargesController < ApplicationController
   def create
     @user = User.find_by_slug(params[:user])
     @plan = Plan.new params[:plan]
-    @sponsored_user = @user.present? && current_user != @user
+    @sponsored_user = sponsored_user?
 
     customer = Stripe::Customer.create(
         email: params[:stripeEmail],
@@ -53,6 +53,11 @@ class ChargesController < ApplicationController
   end
 
   private
+
+  def sponsored_user?
+    @user.present? && current_user != @user
+  end
+
   def stripe_token(params)
     Rails.env.test? ? generate_test_token : params[:stripeToken]
   end
