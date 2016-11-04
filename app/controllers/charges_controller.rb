@@ -23,12 +23,13 @@ class ChargesController < ApplicationController
 
   def create
     @user = User.find_by_slug(params[:user])
-    @plan = params[:plan]
+    @plan = Plan.new params[:plan]
+    @sponsored_user = @user.present? && current_user != @user
 
     customer = Stripe::Customer.create(
         email: params[:stripeEmail],
         source: stripe_token(params),
-        plan: @plan
+        plan: @plan.plan_id
     )
 
     update_user_to_premium(customer, @user)
@@ -85,4 +86,29 @@ class ChargesController < ApplicationController
   def acknowledgement_email_template
     "send_#{plan_name}_payment_complete".to_sym
   end
+end
+
+class Plan
+  attr_reader :plan_id
+
+  def initialize(plan_id)
+    @plan_id = plan_id
+  end
+
+  def to_s
+    PLANS[plan_id]
+  end
+
+  def free_trial?
+    plan_id == 'premium'
+  end
+
+  private
+
+  PLANS = {
+      'premium' => 'Premium',
+      'premiummob' => 'Premium Mob',
+      'premiumf2f' => 'Premium F2F',
+      'premiumplus' => 'Premium Plus'
+  }
 end
