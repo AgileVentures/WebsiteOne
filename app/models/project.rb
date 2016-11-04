@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :title, use: [:slugged, :history]
 
   validates :title, :description, :status, presence: true
   validates_with PivotalTrackerUrlValidator
@@ -73,5 +73,12 @@ class Project < ActiveRecord::Base
     else
       "/projects/#{to_param}/#{action}"
     end
+  end
+
+  private
+
+  def should_generate_new_friendly_id?
+    # Used by the friendly_id gem
+    changes.include?(:title)
   end
 end
