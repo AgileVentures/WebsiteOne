@@ -43,6 +43,19 @@ describe Project, type: :model do
       expect(subject).to_not be_valid
     end
 
+    context "Updating friendly ids" do
+      let(:project) { create(:project, title: 'Old news') }
+      before { project.update(title: 'New and seksay title') }
+
+      it "should regenerate the project's friendly id when the title changes" do
+        expect(project.friendly_id).to eq 'new-and-seksay-title'
+      end
+
+      it "should still be able to find the project by its old id" do
+        expect(Project.friendly.find('old-news')).to eq project
+      end
+    end
+
     context 'Pivotal Tracker URL' do
       it 'should correct mistakes in pivotal tracker url' do
         subject.pivotaltracker_url = 'www.pivotaltracker.com/s/projects/1234'
