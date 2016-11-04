@@ -26,14 +26,7 @@ class ChargesController < ApplicationController
     @plan = Plan.new params[:plan]
     @sponsored_user = sponsored_user?
 
-    customer = Stripe::Customer.create(
-        email: params[:stripeEmail],
-        source: stripe_token(params),
-        plan: @plan.plan_id
-    )
-
-    update_user_to_premium(customer, @user)
-
+    update_user_to_premium(create_customer, @user)
     send_acknowledgement_email
 
   rescue Stripe::CardError => e
@@ -53,6 +46,14 @@ class ChargesController < ApplicationController
   end
 
   private
+
+  def create_customer
+    Stripe::Customer.create(
+        email: params[:stripeEmail],
+        source: stripe_token(params),
+        plan: @plan.plan_id
+    )
+  end
 
   def sponsored_user?
     @user.present? && current_user != @user
