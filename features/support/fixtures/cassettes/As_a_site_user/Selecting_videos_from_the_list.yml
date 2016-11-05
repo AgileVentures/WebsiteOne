@@ -4119,4 +4119,66 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Wed, 06 Jul 2016 14:04:48 GMT
+- request:
+    method: get
+    uri: https://checkout.stripe.com/v3/yiWszEIcz0H0K2eT1bmgQ.html?distinct_id=bbb87d97-e7ec-bcaa-fb6f-657b1237de36
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Referer:
+      - http://127.0.0.1:49883/users/slug-ma
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - checkout.stripe.com
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Server:
+      - nginx
+      Content-Type:
+      - text/plain
+      Cache-Control:
+      - no-cache, no-store, private, must-revalidate, max-age=0, max-stale=0, post-check=0,
+        pre-check=0
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      Fastly-Debug-Digest:
+      - 3398723702a18305f94630f1fd7a98dcea5d05b0c618a045042a9d44c7e1d9de
+      Content-Length:
+      - '9'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 04 Nov 2016 17:39:50 GMT
+      Connection:
+      - close
+      X-Served-By:
+      - cache-sea1926-SEA, cache-lcy1126-LCY
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Timer:
+      - S1478281190.503919,VS0,VE148
+    body:
+      encoding: UTF-8
+      string: Forbidden
+    http_version: 
+  recorded_at: Fri, 04 Nov 2016 17:39:50 GMT
 recorded_with: VCR 3.0.1
