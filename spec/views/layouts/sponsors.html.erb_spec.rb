@@ -1,4 +1,5 @@
 require 'spec_helper'
+# Can we delete this file? It seems to duplicate features/pages.feature
 
 describe 'layouts/_sponsors' do
 	it 'should render the sponsors sidebar' do

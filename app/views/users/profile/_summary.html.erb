@@ -67,13 +67,11 @@
                          type: 'button' %></p>
         </li>
     <% end %>
-    <% if presenter.user_same_as?(current_user) %>
-        <li><%= current_user.membership_type %> Member</li>
-        <% if current_user.membership_type == 'Premium' %>
-          <li><%= render 'users/profile/premium_plus_upgrade' %></li>
-        <% elsif current_user.membership_type == 'Basic' %>
-          <li><%= render 'users/profile/premium_upgrade' %></li>
-        <% end %>
-    <% end %>
+      <li><%= presenter.user.membership_type %> Member</li>
+      <% if presenter.user.membership_type == 'Premium' %>
+        <li><%= render 'users/profile/premium_plus_upgrade' %></li>
+      <% elsif presenter.user.membership_type == 'Basic' %>
+        <li><%= render 'users/profile/premium_upgrade', presenter: presenter %></li>
+      <% end %>
   </ul>
 </div>

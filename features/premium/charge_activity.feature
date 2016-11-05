@@ -1,11 +1,17 @@
-@javascript @vcr @billy_directories
+@stripe_javascript @javascript
 Feature: Charge Users Money
   As a site admin
   So that users can pay for premium services
   I would like to be able to sign them up for a recurring plan
 
   Background:
-    Given the following pages exist
+    Given the following plans exist
+      | name        | id          |
+      | Premium     | premium     |
+      | PremiumMob  | premiummob  |
+      | PremiumF2F  | premiumf2f  |
+      | PremiumPlus | premiumplus |
+    And the following pages exist
       | title           | body                    |
       | About Us        | Agile Ventures          |
       | Pricing         | wonga                   |
@@ -32,8 +38,8 @@ Feature: Charge Users Money
     And I should not see "Sign Me Up For Premium!"
     And I click "Sign Me Up For Premium Mob!"
     When I fill in appropriate card details for premium mob
-    Then I should see "Thanks, you're now an AgileVentures Premium MOB Member!"
-    And The user should receive a "Welcome to AgileVentures Premium MOB" email
+    Then I should see "Thanks, you're now an AgileVentures Premium Mob Member!"
+    And The user should receive a "Welcome to AgileVentures Premium Mob" email
 
   Scenario: Sign up for premium f2f membership
     Given I visit "/charges/new?plan=premiumf2f"
@@ -48,8 +54,8 @@ Feature: Charge Users Money
     And I should not see "Sign Me Up For Premium!"
     And I click "Sign Me Up For Premium Plus!"
     When I fill in appropriate card details for premium plus
-    Then I should see "Thanks, you're now an AgileVentures Premium PLUS Member!"
-    And The user should receive a "Welcome to AgileVentures Premium PLUS" email
+    Then I should see "Thanks, you're now an AgileVentures Premium Plus Member!"
+    And The user should receive a "Welcome to AgileVentures Premium Plus" email
 
   Scenario: User decides to change card details
     Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"

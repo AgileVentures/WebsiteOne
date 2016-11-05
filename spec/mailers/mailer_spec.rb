@@ -20,8 +20,8 @@ describe Mailer do
       expect(mail.from).to include('info@agileventures.org')
       expect(mail.reply_to).to include('info@agileventures.org')
       expect(mail.to).to include('candice@clemens.com')
-      expect(mail.subject).to include('Welcome to AgileVentures Premium PLUS')
-      expect(mail.body.raw_source).to include('Thanks for signing up for AgileVentures Premium PLUS!')
+      expect(mail.subject).to include('Welcome to AgileVentures Premium Plus')
+      expect(mail.body.raw_source).to include('Thanks for signing up for AgileVentures Premium Plus!')
       expect(mail).to have_default_cc_addresses
     end
   end

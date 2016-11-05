@@ -22,16 +22,11 @@ class ChargesController < ApplicationController
   end
 
   def create
-    @plan = params[:plan]
+    @user = User.find_by_slug(params[:user])
+    @plan = Plan.new params[:plan]
+    @sponsored_user = sponsored_user?
 
-    customer = Stripe::Customer.create(
-        email: params[:stripeEmail],
-        source: params[:stripeToken],
-        plan: @plan
-    )
-
-    update_user_to_premium(customer)
-
+    update_user_to_premium(create_customer, @user)
     send_acknowledgement_email
 
   rescue Stripe::CardError => e
@@ -41,20 +36,41 @@ class ChargesController < ApplicationController
 
   def update
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
-    card = customer.cards.create(card: params[:stripeToken])
+    card = customer.sources.create(card: stripe_token(params))
     card.save
     customer.default_card = card.id
     customer.save
-  rescue Stripe::InvalidRequestError => e
+  rescue Stripe::InvalidRequestError, NoMethodError => e
     logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
     @error = true
   end
 
   private
 
-  def update_user_to_premium(stripe_customer)
-    return unless current_user
-    UpgradeUserToPremium.with(current_user, Time.now, stripe_customer.id, PaymentSource::Stripe, plan_class)
+  def create_customer
+    Stripe::Customer.create(
+        email: params[:stripeEmail],
+        source: stripe_token(params),
+        plan: @plan.plan_id
+    )
+  end
+
+  def sponsored_user?
+    @user.present? && current_user != @user
+  end
+
+  def stripe_token(params)
+    Rails.env.test? ? generate_test_token : params[:stripeToken]
+  end
+
+  def generate_test_token
+    StripeMock.create_test_helper.generate_card_token
+  end
+
+  def update_user_to_premium(stripe_customer, user_for_update)
+    user_for_update ||= current_user
+    return unless user_for_update
+    UpgradeUserToPremium.with(user_for_update, Time.now, stripe_customer.id, PaymentSource::Stripe, plan_class)
   end
 
   def plan_name
@@ -76,4 +92,29 @@ class ChargesController < ApplicationController
   def acknowledgement_email_template
     "send_#{plan_name}_payment_complete".to_sym
   end
+end
+
+class Plan
+  attr_reader :plan_id
+
+  def initialize(plan_id)
+    @plan_id = plan_id
+  end
+
+  def to_s
+    PLANS[plan_id]
+  end
+
+  def free_trial?
+    plan_id == 'premium'
+  end
+
+  private
+
+  PLANS = {
+      'premium' => 'Premium',
+      'premiummob' => 'Premium Mob',
+      'premiumf2f' => 'Premium F2F',
+      'premiumplus' => 'Premium Plus'
+  }
 end
