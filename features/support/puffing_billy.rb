@@ -37,6 +37,10 @@ Billy.configure do |c|
                      'http://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html',
                      'https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html',
                      'http://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html',
+                     'https://checkout.stripe.com/v3/n57eSArn7ygyGTkooaU7A.html',
+                     'http://checkout.stripe.com/v3/n57eSArn7ygyGTkooaU7A.html',
+                     'https://checkout.stripe.com/v3/n57eSArn7ygyGTkooaU7A.html',
+                     'http://checkout.stripe.com/v3/n57eSArn7ygyGTkooaU7A.html',
                      'http://csi.gstatic.com/csi',
                      'https://csi.gstatic.com/csi',
   ]
