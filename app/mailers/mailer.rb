@@ -10,11 +10,11 @@ class Mailer < ActionMailer::Base
   end
 
   def send_premium_mob_payment_complete(email)
-    mail(to: email, subject: 'Welcome to AgileVentures Premium MOB')
+    mail(to: email, subject: 'Welcome to AgileVentures Premium Mob')
   end
 
   def send_premium_plus_payment_complete(email)
-    mail(to: email, subject: 'Welcome to AgileVentures Premium PLUS')
+    mail(to: email, subject: 'Welcome to AgileVentures Premium Plus')
   end
 
   def send_welcome_message(user)

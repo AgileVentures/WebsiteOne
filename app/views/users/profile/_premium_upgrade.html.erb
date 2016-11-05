@@ -1,4 +1,10 @@
-<%= form_tag charges_path(plan: 'premium') do %>
+<% if presenter.user_same_as?(current_user) %>
+  <% data_label = 'Upgrade to Premium' %>
+<% else %>
+  <% data_label = 'Sponsor for Premium' %>
+<% end %>
+
+<%= form_tag charges_path(plan: 'premium', user: presenter.user) do %>
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
             data-description="A month's subscription"
@@ -6,6 +12,6 @@
             data-currency="GBP"
             data-locale="en-US"
             data-name="Premium Membership"
-            data-label="Upgrade to Premium"></script>
+            data-label="<%= data_label %>"></script>
 
 <% end %>
