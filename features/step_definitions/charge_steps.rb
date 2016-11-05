@@ -35,3 +35,13 @@ end
 Then(/^I should see a paypal form$/) do
   expect(page).to have_xpath("//form[@action='https://www.paypal.com/cgi-bin/webscr']")
 end
+
+Given(/^the following plans exist$/) do |table|
+  table.hashes.each do |hash|
+    @stripe_test_helper.create_plan(hash)
+  end
+end
+
+And(/^a stripe customer with id "([^"]*)"$/) do |stripe_customer_id|
+  StripeMock.create_test_helper.create_customer(id: stripe_customer_id)
+end

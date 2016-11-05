@@ -86,6 +86,7 @@ group :test do
   gem 'shoulda-matchers', require: false # simplifies tests of common Rails functionality
   gem 'capybara-screenshot' # creates screenshots from capybara failures
   gem 'puffing-billy' # sandboxes network connections from javascript browser tests
+  gem 'stripe-ruby-mock', '~> 2.3.1', :require => 'stripe_mock'
 end
 
 group :development, :test do

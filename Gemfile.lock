@@ -172,6 +172,7 @@ GEM
       nokogiri (~> 1.5)
       railties (>= 3, < 5)
     cucumber-wire (0.0.1)
+    dante (0.2.0)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     deep_merge (1.0.1)
@@ -516,6 +517,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
     stripe (1.41.0)
       rest-client (~> 1.4)
+    stripe-ruby-mock (2.3.1)
+      dante (>= 0.2.0)
+      multi_json (~> 1.0)
+      stripe (~> 1.31)
     sucker_punch (2.0.2)
       concurrent-ruby (~> 1.0.0)
     temple (0.7.6)
@@ -672,6 +677,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails (= 2.3.3)
   stripe
+  stripe-ruby-mock (~> 2.3.1)
   sucker_punch
   therubyracer
   turbolinks
