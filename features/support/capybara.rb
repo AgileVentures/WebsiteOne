@@ -36,7 +36,7 @@ Capybara.register_driver :poltergeist_billy do |app|
   Capybara::Poltergeist::Driver.new(app, test_options)
 end
 
-Capybara.default_max_wait_time = 20
+Capybara.default_max_wait_time = 5
 
 Capybara.javascript_driver = :poltergeist_billy
 

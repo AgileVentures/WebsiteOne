@@ -83,3 +83,10 @@ And(/^there should be three snapshots$/) do
   @hangout.reload
   expect(@hangout.hangout_participants_snapshots.count).to eq 3
 end
+
+And(/^the following event instances exist:$/) do |table|
+  table.hashes.each do |hash|
+    hash[:project] = Project.find_by title: hash[:project]
+    EventInstance.create hash
+  end
+end
