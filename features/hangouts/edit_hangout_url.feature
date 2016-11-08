@@ -11,8 +11,8 @@ Feature: Manual Edit of Hangout URL
       | Repeat Scrum | Daily scrum meeting | Scrum    | 2014/02/03 07:00:00 UTC | 15       | weekly  | UTC       | 1                     | 15                                        |
     And the following event instances exist:
       | title        | hangout_url         | created_at          | updated_at          | uid | category | project    | user_id | yt_video_id | hoa_status | url_set_directly |
-      | HangoutsFlow | http://hangout.test | 2012-02-04 07:00:00 | 2012-02-04 07:02:00 | 100 | Scrum    | Websiteone | 1       | QWERT55     | finished   | true             |
-      | HangoutsFlow | http://hangout.test | 2014-02-04 07:00:00 | 2014-02-04 07:03:00 | 100 | Scrum    | Websiteone | 1       | QWERT55     | finished   | true             |
+      | HangoutsFlow | http://hangout.test | 2012-02-04 07:00:00 | 2012-02-04 07:02:00 | 100 | Scrum    | Websiteone | 1       | QWERT55     | started   | true             |
+      | HangoutsFlow | http://hangout.test | 2014-02-04 07:00:00 | 2014-02-04 07:03:00 | 100 | Scrum    | Websiteone | 1       | QWERT55     | started   | true             |
     And I am logged in
     And I have Slack notifications enabled
 
@@ -34,18 +34,11 @@ Feature: Manual Edit of Hangout URL
     And I open the Edit URL controls
     And I fill in "hangout_url" with "https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
     And I click on the Save button
+    And I navigate to the show page for event "Repeat Scrum"
     Then I should see link "Join now" with "https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
     And I jump to one minute before the end of the event at "2014-02-06 07:14:00"
     And I navigate to the show page for event "Repeat Scrum"
     Then I should see link "Join now" with "https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
-    And the date is "2014-02-07 07:00:00"
-    And I navigate to the show page for event "Repeat Scrum"
-    And I open the Edit URL controls
-    And I fill in "hangout_url" with "https://hangouts.google.com/hangouts/_/ytl/zdfsdfsdfsfsdfsfdfxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
-    And I click on the Save button
-    And I navigate to the show page for event "Repeat Scrum"
-    Then I should see link "Join now" with "https://hangouts.google.com/hangouts/_/ytl/zdfsdfsdfsfsdfsfdfxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
-
 
     And I jump to one minute before the end of the event at "2014-02-13 07:01:00"
     And I navigate to the show page for event "Repeat Scrum"
