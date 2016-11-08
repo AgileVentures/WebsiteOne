@@ -39,7 +39,7 @@ Feature: Manual Edit of Hangout URL
     And I jump to one minute before the end of the event at "2014-02-06 07:14:00"
     And I navigate to the show page for event "Repeat Scrum"
     Then I should see link "Join now" with "https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0"
-
+   #  this below should fail, but does not ... hmm
     And I jump to one minute before the end of the event at "2014-02-13 07:01:00"
     And I navigate to the show page for event "Repeat Scrum"
     Then I should not see "Join now"
