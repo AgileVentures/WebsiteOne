@@ -14,8 +14,8 @@ class EventInstancesController < ApplicationController
       SlackService.post_hangout_notification(event_instance) if (slack_notify && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed)
       SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed
 
-      #TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed
-      #TwitterService.tweet_yt_link(event_instance) if yt_video_id_changed
+      TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed
+      TwitterService.tweet_yt_link(event_instance) if yt_video_id_changed
 
       redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
       head :ok
@@ -80,6 +80,7 @@ class EventInstancesController < ApplicationController
 
   def merge_participants(existing_participants, new_participants)
     return new_participants unless existing_participants
+    return existing_participants unless new_participants
     new_participants.each do |_, v|
       unless existing_participants.values.any? { |struc| struc['person']['id'] == v['person']['id'] }
         existing_participants[existing_participants.length.to_s] = v
