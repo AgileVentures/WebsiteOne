@@ -10,9 +10,9 @@ Feature: Manual Edit of Hangout URL
       | Scrum        | Daily scrum meeting | Scrum    | 2014/02/04 07:00:00 UTC | 15       | never   | UTC       |                       |                                           |
       | Repeat Scrum | Daily scrum meeting | Scrum    | 2014/02/03 07:00:00 UTC | 15       | weekly  | UTC       | 1                     | 31                                        |
     And the following event instances (with default participants) exist:
-      | title        | hangout_url         | created_at          | updated_at          | uid | category | project    | user_id | yt_video_id | hoa_status | url_set_directly |
-      | HangoutsFlow | http://hangout.test | 2012-02-04 07:00:00 | 2012-02-04 07:02:00 | 100 | Scrum    | Websiteone | 1       | QWERT55     | started   | true             |
-      | HangoutsFlow | http://hangout.test | 2014-02-04 07:00:00 | 2014-02-04 07:03:00 | 100 | Scrum    | Websiteone | 1       | QWERT55     | started   | true             |
+      | title        | hangout_url         | created_at          | updated_at          | uid | category | project    | user_id | yt_video_id | hoa_status | url_set_directly | event        |
+      | HangoutsFlow | http://hangout.test | 2012-02-04 07:00:00 | 2012-02-04 07:02:00 | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
+      | HangoutsFlow | http://hangout.test | 2014-02-04 07:00:00 | 2014-02-04 07:03:00 | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
     And I am logged in
     And I have Slack notifications enabled
 
@@ -47,3 +47,7 @@ Feature: Manual Edit of Hangout URL
     And I navigate to the show page for event "Repeat Scrum"
     Then I should not see "This event is now live!"
 
+    # and navigate to past events page, and check that we have at least 3 events ...
+
+#    When I visit "/hangouts"
+#    Then I should see 3 hangouts

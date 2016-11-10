@@ -87,6 +87,7 @@ end
 And(/^the following event instances \(with default participants\) exist:$/) do |table|
   participants = {"0" => {"id" => "hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone" => "true", "hasCamera" => "true", "hasAppEnabled" => "true", "isBroadcaster" => "true", "isInBroadcast" => "true", "displayIndex" => "0", "person" => {"id" => "108533475599002820142", "displayName" => "Alejandro Babio", "image" => {"url" => "https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na" => "false"}, "locale" => "en", "na" => "false"}}
   table.hashes.each do |hash|
+    hash[:event] = Event.find_by name: hash[:event]
     hash[:project] = Project.find_by title: hash[:project]
     hash[:participants] = participants
     EventInstance.create hash
