@@ -67,6 +67,7 @@ gem 'active_model-errors_details'
 
 gem 'stripe'
 gem 'kaminari'
+gem 'yt'
 
 
 group :test do

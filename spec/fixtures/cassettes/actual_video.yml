@@ -1,0 +1,72 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=My04-8l_INc&key=AIzaSyCv4wTEqPmcTepNWMNXXuW9_ciCzXFlFJU&maxResults=50&part=contentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Thu, 10 Nov 2016 18:43:36 GMT
+      Date:
+      - Thu, 10 Nov 2016 18:43:36 GMT
+      Cache-Control:
+      - private, max-age=300, must-revalidate, no-transform
+      Etag:
+      - '"sZ5p5Mo8dPpfIzLYQBF8QIQJym0/1npdBMOcTxnr3pRwGqAWIlVDbxk"'
+      Vary:
+      - Origin
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '514'
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="36,35,34"
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "kind": "youtube#videoListResponse",
+         "etag": "\"sZ5p5Mo8dPpfIzLYQBF8QIQJym0/1npdBMOcTxnr3pRwGqAWIlVDbxk\"",
+         "pageInfo": {
+          "totalResults": 1,
+          "resultsPerPage": 1
+         },
+         "items": [
+          {
+           "kind": "youtube#video",
+           "etag": "\"sZ5p5Mo8dPpfIzLYQBF8QIQJym0/P0KW__g6Hx8-Hyl8O_MAIJSqjv0\"",
+           "id": "My04-8l_INc",
+           "contentDetails": {
+            "duration": "PT15M41S",
+            "dimension": "2d",
+            "definition": "hd",
+            "caption": "false",
+            "licensedContent": false,
+            "projection": "rectangular"
+           }
+          }
+         ]
+        }
+    http_version: 
+  recorded_at: Thu, 10 Nov 2016 18:43:35 GMT
+recorded_with: VCR 3.0.1

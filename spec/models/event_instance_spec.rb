@@ -97,6 +97,21 @@ describe EventInstance, type: :model do
     end
   end
 
+  context "Interacting with the actual YouTube video" do
+    it "Checks that video exists" do
+      expect(hangout).not_to have_video
+
+      hangout.yt_video_id = 'My04-8l_INc'
+      expect(hangout).to have_video
+    end
+
+    it "Updates the video when it updates the video id" do
+      hangout.yt_video_id = 'My04-8l_INc'
+
+      expect(hangout.video.id).to eq 'My04-8l_INc'
+    end
+  end
+
   context 'associated hangout_participant_snapshots' do
     let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil,
                                        hangout_participants_snapshots_attributes: [{participants: "blah"}]) }
