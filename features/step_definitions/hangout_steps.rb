@@ -93,3 +93,33 @@ And(/^the following event instances \(with default participants\) exist:$/) do |
     EventInstance.create hash
   end
 end
+
+Then(/^there should be exactly (\d+) hangouts$/) do |number|
+  expect(EventInstance.count).to eq number.to_i
+end
+
+And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
+  @hangout_url = 'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0'
+  visit event_path(Event.find_by_name(name))
+  page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
+  fill_in 'hangout_url', :with => @hangout_url
+  page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
+end
+
+Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
+  event = Event.find_by_name(event_name)
+  visit event_path(event)
+  expect(page).to have_link('Join now', href: @hangout_url)
+  time = Time.parse(@jump_date) + event.duration.minutes - 1.minute
+  Delorean.time_travel_to(time)
+  visit event_path(event)
+  expect(page).to have_link('Join now', href: @hangout_url)
+end
+
+And(/^"([^"]*)" is not live the following day$/) do |event_name|
+  event = Event.find_by_name(event_name)
+  Delorean.time_travel_to(Time.parse(@jump_date) + 1.day)
+  visit event_path(event)
+  expect(page).not_to have_content('This event is now live!')
+end
+
