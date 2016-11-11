@@ -99,6 +99,7 @@ describe EventInstance, type: :model do
 
   context "Interacting with the actual YouTube video" do
     it "Checks that video exists" do
+      stub_request(:any, "www.googleapis.com")
       expect(hangout).not_to have_video
 
       hangout.yt_video_id = 'My04-8l_INc'

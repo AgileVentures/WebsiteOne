@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://www.googleapis.com/youtube/v3/videos?id=not-a-video&key=AIzaSyCv4wTEqPmcTepNWMNXXuW9_ciCzXFlFJU&maxResults=50&part=contentDetails
+    uri: https://www.googleapis.com/youtube/v3/videos?id=11&key=AIzaSyCv4wTEqPmcTepNWMNXXuW9_ciCzXFlFJU&maxResults=50&part=contentDetails
     body:
       encoding: US-ASCII
       string: ''
@@ -17,9 +17,9 @@ http_interactions:
       message: OK
     headers:
       Expires:
-      - Thu, 10 Nov 2016 15:39:05 GMT
+      - Fri, 11 Nov 2016 17:45:21 GMT
       Date:
-      - Thu, 10 Nov 2016 15:39:05 GMT
+      - Fri, 11 Nov 2016 17:45:21 GMT
       Cache-Control:
       - private, max-age=300, must-revalidate, no-transform
       Etag:
@@ -54,5 +54,5 @@ http_interactions:
          "items": []
         }
     http_version: 
-  recorded_at: Thu, 10 Nov 2016 15:39:04 GMT
+  recorded_at: Fri, 11 Nov 2016 17:45:21 GMT
 recorded_with: VCR 3.0.1

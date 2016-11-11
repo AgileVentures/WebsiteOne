@@ -72,12 +72,11 @@ describe EventInstancesController do
       end
 
       it 'calls the SlackService to post yt_link on successful update' do
-        VCR.use_cassette("actual_video") do
-          allow_any_instance_of(EventInstance).to receive(:update).and_call_original
-          expect(SlackService).to receive(:post_yt_link).with(an_instance_of(EventInstance))
-          expect_any_instance_of(EventInstance).to receive(:yt_video_id?).at_least(:once).and_return(true)
-          get :update, params.merge(notify: 'true', yt_video_id: 'My04-8l_INc')
-        end
+        stub_request(:any, "www.googleapis.com")
+        allow_any_instance_of(EventInstance).to receive(:update).and_call_original
+        expect(SlackService).to receive(:post_yt_link).with(an_instance_of(EventInstance))
+        expect_any_instance_of(EventInstance).to receive(:yt_video_id?).at_least(:once).and_return(true)
+        get :update, params.merge(notify: 'true', yt_video_id: 'My04-8l_INc')
       end
 
       it 'does not call the SlackService to post yt_link if not update' do
@@ -94,19 +93,17 @@ describe EventInstancesController do
 
     context 'twitter notification' do
       it 'calls the TwitterService to tweet yt_link if yt_video_id is changed and the video exists' do
-        VCR.use_cassette("actual_video") do
-          allow_any_instance_of(EventInstance).to receive(:update).and_call_original
-          expect(TwitterService).to receive(:tweet_yt_link).with(an_instance_of(EventInstance))
-          get :update, params.merge(yt_video_id: 'My04-8l_INc')
-        end
+        stub_request(:any, "www.googleapis.com")
+        allow_any_instance_of(EventInstance).to receive(:update).and_call_original
+        expect(TwitterService).to receive(:tweet_yt_link).with(an_instance_of(EventInstance))
+        get :update, params.merge(yt_video_id: 'My04-8l_INc')
       end
 
       it 'does not tweet the link if the video does not exist' do
-        VCR.use_cassette("bad_video") do
-          allow_any_instance_of(EventInstance).to receive(:update).and_call_original
-          expect(TwitterService).not_to receive(:tweet_yt_link).with(an_instance_of(EventInstance))
-          get :update, params.merge(yt_video_id: 'not-a-video')
-        end
+        stub_request(:any, "www.googleapis.com")
+        allow_any_instance_of(EventInstance).to receive(:update).and_call_original
+        expect(TwitterService).not_to receive(:tweet_yt_link).with(an_instance_of(EventInstance))
+        get :update, params.merge(yt_video_id: 'not-a-video')
       end
 
       it 'does not call the TwitterService to tweet yt_link if yt_video_id is not changed' do
