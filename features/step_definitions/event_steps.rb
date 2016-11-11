@@ -92,7 +92,8 @@ Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
 end
 
 Given(/^the date is "([^"]*)"$/) do |jump_date|
-  Delorean.time_travel_to(Time.parse(jump_date))
+  @jump_date = jump_date
+  Delorean.time_travel_to(Time.parse(@jump_date))
 end
 
 When(/^I follow "([^"]*)" for "([^"]*)" "([^"]*)"$/) do |linkid, table_name, hookup_number|
