@@ -462,8 +462,8 @@ describe Event, :type => :model do
 
   describe '#recent_hangouts' do
     before(:each) do
-      event.event_instances.create(updated_at: 2.days.ago, created_at: Date.yesterday)
-      @recent_hangout = event.event_instances.create(created_at: Date.yesterday, updated_at: Date.yesterday)
+      event.event_instances.create(created_at: Date.yesterday, updated_at: Date.yesterday + 15.minutes)
+      @recent_hangout = event.event_instances.create(created_at: 1.second.ago, updated_at: 1.second.ago)
     end
 
     it 'returns only the hangouts updated between yesterday and today' do
