@@ -52,7 +52,7 @@ class EventInstance < ActiveRecord::Base
     # The second check is a hack on the gem to prevent having to rescue an error.
     # I might try opening a PR to the gem itself for this
     min_plausible_vid_length = 2
-    self.yt_video_id? && !!video.content_details.first && video.duration > min_plausible_vid_length
+    self.yt_video_id? && video.content_details.any? && video.duration > min_plausible_vid_length
   end
 
   def yt_video_id=(video_id)
