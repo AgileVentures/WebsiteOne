@@ -305,9 +305,25 @@ When(/^I refresh the page$/) do
   visit current_url
 end
 
-Then(/^I should see a link to create a new event$/) do
-  expect(page).to have_css "a[href='#{new_event_path}']", text: "Create event"
+def assert_link_exists path, text
+  expect(page).to have_css "a[href='#{path}']", text: text
 end
+Then(/^I should see a link to create a new event$/) do
+  assert_link_exists(new_event_path, "Create event")
+end
+
+Then(/^I should see a link to upcoming events$/) do
+  assert_link_exists(events_path, "Upcoming events")
+end
+
+Then(/^I should see a link to past scrums$/) do
+  assert_link_exists(scrums_path, "Past scrums")
+end
+
+Then(/^I should see a link to past events$/) do
+  assert_link_exists(hangouts_path, "Past events")
+end
+
 
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
   expect(page).to have_css "a[href='#{link}']", text: text
