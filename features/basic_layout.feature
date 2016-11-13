@@ -29,6 +29,7 @@ Feature: Setting up basic page layout for site
     Then I should see a link "Upcoming events" to "/events"
     And I should see a link "Past scrums" to "/scrums"
     And I should see a link "Past events" to "/hangouts"
+    And I should see a link to create a new event
 
   Scenario: Render footer
     And I should see "AgileVentures" in footer

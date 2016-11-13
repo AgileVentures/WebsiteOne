@@ -68,6 +68,9 @@
                 <a class="custom_menu_link" href="<%= hangouts_path %>">
                   <li><i class="fa fa-bookmark-o custom_menu_item"></i>Past events</li>
                 </a>
+                <a class="custom_menu_link" href="<%= new_event_path %>">
+                  <li><i class="fa fa-users custom_menu_item"></i>Create event</li>
+                </a>
               </ul>
             </li>
             <li><%= link_to 'Getting started', static_page_path('Getting started'), class: "#{is_in_static_page?('Getting started') ? 'active' : ''}" %></li>

@@ -305,6 +305,10 @@ When(/^I refresh the page$/) do
   visit current_url
 end
 
+Then(/^I should see a link to create a new event$/) do
+  expect(page).to have_css "a[href='#{new_event_path}']", text: "Create event"
+end
+
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
   expect(page).to have_css "a[href='#{link}']", text: text
 end
