@@ -46,7 +46,7 @@ Feature: As a user of the site
       | title         | description             | status |
       | hello world   | greetings earthlings    | active |
       | hello jupiter | greetings jupiter folks | active |
-    When I click "Bob Butcher"
+    When I click the first instance of "Bob Butcher"
     Then I should be on the "user profile" page for "Bob"
     And I should see:
       | title         |
