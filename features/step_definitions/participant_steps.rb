@@ -38,11 +38,9 @@ Then(/^the hangout participants should still include everyone who ever joined$/)
 end
 
 def ping_with(participants)
-  VCR.use_cassette('fake_video') do
-    header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
-    put "/hangouts/#{@hangout.uid}", {title: @hangout.title, host_id: '3', event_id: '',
-                                      participants: participants, hangout_url: 'http://hangout.test',
-                                      hoa_status: 'live', project_id: '1', category: 'PairProgramming',
-                                      yt_video_id: '11'}
-  end
+  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
+  put "/hangouts/#{@hangout.uid}", {title: @hangout.title, host_id: '3', event_id: '',
+                                    participants: participants, hangout_url: 'http://hangout.test',
+                                    hoa_status: 'live', project_id: '1', category: 'PairProgramming',
+                                    yt_video_id: '11'}
 end
