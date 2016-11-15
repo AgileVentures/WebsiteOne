@@ -26,9 +26,10 @@ Feature: Setting up basic page layout for site
 
   Scenario: Events is a dropdown with links
     When I dropdown the "Events" menu
-    Then I should see a link "Upcoming events" to "/events"
-    And I should see a link "Past scrums" to "/scrums"
-    And I should see a link "Past events" to "/hangouts"
+    Then I should see a link to upcoming events
+    And I should see a link to past scrums
+    And I should see a link to past events
+    And I should see a link to create a new event
 
   Scenario: Render footer
     And I should see "AgileVentures" in footer
@@ -37,6 +38,10 @@ Feature: Setting up basic page layout for site
     And I should see "Social" in footer
     And I should see "Our Sponsors" in footer
     And I should see "Contact us" in footer
+    And I should see a link "drie" to "https://drie.co/"
+    And I should see a link "Craft Academy" to "http://craftacademy.se/english"
+    And I should see a link "Mentive" to "http://www.mentive.co/"
+    And I should see a link "RubyMine" to "https://www.jetbrains.com/ruby/"
 
   @javascript @desktop
   Scenario: Show Sponsors on desktop computer
