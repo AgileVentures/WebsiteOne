@@ -38,13 +38,7 @@
               <i class="fa fa-github-alt"></i> <%= commit_count %>
             </li>
           <% end %>
-          <% gpa = project.gpa %>
-          <% unless gpa.nil? %>
-          <li data-toggle="tooltip" data-placement="top"
-              title="<%= gpa %> CodeClimate GPA">
-            <i class="fa fa-chevron-circle-up"></i> <%= gpa %>
-          </li>
-          <% end %>
+
         </ul>
       </div>
       <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
