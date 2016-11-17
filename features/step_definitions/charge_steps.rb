@@ -45,3 +45,8 @@ end
 And(/^a stripe customer with id "([^"]*)"$/) do |stripe_customer_id|
   StripeMock.create_test_helper.create_customer(id: stripe_customer_id)
 end
+
+
+And(/^there is a card error updating subscription$/) do
+  StripeMock.prepare_card_error(:card_declined, :update_subscription)
+end
