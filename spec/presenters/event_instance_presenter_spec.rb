@@ -110,7 +110,7 @@ describe EventInstancePresenter do
     end
 
     it 'returns a link to video' do
-      expect(presenter.video_link).to be_nil
+      expect(presenter.video_link).to eq "video unavailable ('Start Broadcast' not pressed, or Hangout/YouTube fail)"
     end
 
     it 'returns a link to youtube player' do

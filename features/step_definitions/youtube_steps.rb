@@ -44,6 +44,15 @@ Given(/^the project "(.*?)" has (\d+) videos of user "(.*?)"$/) do |project_titl
   end
 end
 
+Given(/^there is a dud video for project "([^"]*)"$/) do |project_title|
+  project = Project.find_by(title: project_title)
+  EventInstance.create title: "PP on #{project_title} - feature: cool",
+                       project: project, user: User.first, created_at: Time.new('2014', '04', '15').utc.beginning_of_day,
+                       yt_video_id: ''
+end
+
+
+
 Given /^there are no videos$/ do
   # No videos created
 end
