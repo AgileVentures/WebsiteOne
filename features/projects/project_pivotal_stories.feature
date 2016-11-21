@@ -15,7 +15,7 @@ Feature: Adding pivotal tracker stories to projects
       Given The project has no stories on Pivotal Tracker
       And I am on the "Show" page for project "WebsiteOne"
       Then I click "Activity"
-      Then I should see "No PivotalTracker Stories can be found for project WebsiteOne"
+      Then I should see "No IssueTracker Stories can be found for project WebsiteOne"
 
     Scenario: Project Show Page Renders List of Pivotal Tracker Stories
       Given The project has some stories on Pivotal Tracker
