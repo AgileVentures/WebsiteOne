@@ -66,16 +66,16 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
-  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'delorean'
   gem 'launchy'
-  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'puffing-billy'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
-  gem 'stripe-ruby-mock', '~> 2.3.1', :require => 'stripe_mock'
+  gem 'stripe-ruby-mock', '~> 2.3.1', require: 'stripe_mock'
   gem 'vcr'
   gem 'webmock'
   gem 'webrat'
@@ -86,9 +86,9 @@ group :development, :test do
   gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'brakeman', :require => false
+  gem 'brakeman', require: false
   gem 'bullet'
-  gem 'bundler-audit', :require => false
+  gem 'bundler-audit', require: false
   gem 'constant-redefinition'
   gem 'dotenv-rails'
   gem 'guard'
