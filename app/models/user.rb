@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_paranoid
   include Filterable
 
   extend Forwardable
@@ -18,7 +19,7 @@ class User < ActiveRecord::Base
       user.city = geo.data['city']
       user.region = geo.data['region_name']
       user.country_name = geo.data['country_name']
-      user.country_code = geo.data['country_code']
+      user.country_coUde = geo.data['country_code']
     end
   end
 

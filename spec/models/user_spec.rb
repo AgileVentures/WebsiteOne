@@ -60,6 +60,12 @@ describe User, type: :model do
     expect(FactoryGirl.build(:user)).to respond_to(:is_privileged?)
   end
 
+  it 'should soft destroy' do
+    user = FactoryGirl.create(:user)
+    user.destroy
+    expect(build_stubbed(:user)).to be_valid
+  end
+
   describe 'scopes' do
     it '#mail_receiver' do
       expect(User).to respond_to(:mail_receiver)
