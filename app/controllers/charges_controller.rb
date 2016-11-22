@@ -13,12 +13,15 @@ class ChargesController < ApplicationController
   end
 
   def upgrade
-    current_user.subscription.type = 'PremiumPlus'
-    current_user.save
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
     subscription.plan = "premiumplus"
     subscription.save
+    current_user.subscription.type = 'PremiumPlus'
+    current_user.save
+  rescue Stripe::StripeError => e
+    flash[:error] = e.message
+    redirect_to user_path(current_user)
   end
 
   def create
@@ -29,7 +32,7 @@ class ChargesController < ApplicationController
     update_user_to_premium(create_customer, @user)
     send_acknowledgement_email
 
-  rescue Stripe::CardError => e
+  rescue Stripe::StripeError => e
     flash[:error] = e.message
     redirect_to new_charge_path
   end
@@ -40,7 +43,7 @@ class ChargesController < ApplicationController
     card.save
     customer.default_card = card.id
     customer.save
-  rescue Stripe::InvalidRequestError, NoMethodError => e
+  rescue Stripe::StripeError, NoMethodError => e
     logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
     @error = true
   end
