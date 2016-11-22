@@ -60,9 +60,9 @@ Feature: Browse and create projects
     When I am on the "projects" page
     Then I should not see the very stylish "New Project" button
 
-  Scenario: See codeclimate stats
-    Given I am on the "projects" page
-    Then I should see a GPA of "3.5" for "hello world"
+#  Scenario: See codeclimate stats
+#    Given I am on the "projects" page
+#    Then I should see a GPA of "3.5" for "hello world"
 
 # This scenario is no longer valid after we added ordering by status and commit count
 #  Scenario: Alphabetically display pagination in "Our Projects" page
