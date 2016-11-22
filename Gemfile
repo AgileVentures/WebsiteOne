@@ -16,7 +16,6 @@ gem 'compass-rails'
 gem 'config'
 gem 'coveralls', '~> 0.7.9', require: false
 gem 'devise', '~> 3.5.1'
-gem 'eefgilm'
 gem 'eventmachine', '~> 1.0.7'
 gem 'exception_notification'
 gem 'factory_girl_rails', '4.5.0'
