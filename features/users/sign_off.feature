@@ -8,7 +8,6 @@ Feature: Sign off
   Scenario: User signs off
     Given I am logged in
     When I sign off
-    Then I should see a signed out message
     When I return to the site
     Then I should be signed out
-    And I should not be able to see my name
+    And I should not exist as a user
