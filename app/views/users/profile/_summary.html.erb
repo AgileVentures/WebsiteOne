@@ -60,11 +60,19 @@
                       type: 'button' %>
         </li>
         <li>
-          <p><%= link_to 'Set status', '#',
+          <%= link_to 'Set status', '#',
                          data: {toggle: 'modal',
                                 target: '#myModal'},
                          class: 'user-profile-btn',
-                         type: 'button' %></p>
+                         type: 'button' %>
+        </li>
+        <li>
+          <p><%= link_to 'Deactivate Account', '#',
+                      data: {toggle: 'modal',
+                             target: '#myDestroyModal'},
+                      class: 'user-profile-btn',
+                      type: 'button' %>
+          </p>
         </li>
     <% end %>
       <li><%= presenter.user.membership_type %> Member</li>
