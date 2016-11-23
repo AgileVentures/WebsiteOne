@@ -436,6 +436,15 @@ describe User, type: :model do
 
   end
 
+  context 'destroying user' do
+    it 'should soft destroy' do
+       user = User.new({ email: 'doh@doh.com', password: '12345678' })
+       user.save!
+       user.destroy!
+       expect(user.deleted_at).to_not eq nil
+    end
+  end
+
   context 'creating user' do
     it 'should not be possible to save a user with nil Karma' do
       user = User.new({ email: 'doh@doh.com', password: '12345678' })
