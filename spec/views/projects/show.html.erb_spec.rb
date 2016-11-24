@@ -53,9 +53,9 @@ describe 'projects/show.html.erb', type: :view do
     expect(rendered).to have_link("#{project.title}", :href => project.pivotaltracker_url)
   end
 
-  it 'renders an unlinked message when project has no PivotalTracker link' do
+  it 'renders an unlinked message when project has no IssueTracker link' do
     render
-    expect(rendered).to have_text 'not linked to PivotalTracker'
+    expect(rendered).to have_text 'not linked to IssueTracker'
   end
 
   it 'renders project description' do
@@ -127,7 +127,7 @@ describe 'projects/show.html.erb', type: :view do
     it 'renders a message when no Pivotal Tracker stories are found' do
       assign :stories, []
       render
-      expect(rendered).to have_text "No PivotalTracker Stories can be found for project #{project.title}"
+      expect(rendered).to have_text "No IssueTracker Stories can be found for project #{project.title}"
     end
 
     context 'with Pivotal Tracker stories' do
