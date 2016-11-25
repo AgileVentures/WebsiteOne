@@ -22,3 +22,4 @@
 en:
   error_messages:
     public_email: "Your %{provider} account needs to have a public email address for sign up. <a href='https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/solutions_for_signup_issues.md'>Click here for instructions</a>."
+    video_missing: "video unavailable ('Start Broadcast' not pressed, or Hangout/YouTube fail)"
