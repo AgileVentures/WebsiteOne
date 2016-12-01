@@ -20,9 +20,8 @@ module GithubCommitsJob
     commit_count = client.contributors(github_url(project), true, per_page: 100).reduce(0) do |memo, contrib|
       memo += contrib.contributions
     end
-    last_commit = client.commits(github_url(project))[0] if (client.repository? github_url(project))
 
-    project.update(commit_count: commit_count, last_commit_at: last_commit.commit.committer.date, last_commit_url: last_commit.html_url)
+    project.update(commit_count: commit_count, last_commit_at: project.updated_at)
   end
 
   def github_url(project)

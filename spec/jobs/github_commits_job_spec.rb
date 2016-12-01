@@ -43,11 +43,7 @@ describe GithubCommitsJob do
     end
 
     it 'stores last_commit_at only for projects that have a github_url' do
-      expect(project.last_commit_at).to be > '2000-01-01'
-    end
-
-    it 'stores last_commit_url only for projects that have a github_url' do
-      expect(project.last_commit_url).to start_with 'http'
+      expect(project.updated_at).to be > '2000-01-01'
     end
   end
 end
