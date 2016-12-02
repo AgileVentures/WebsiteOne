@@ -1,4 +1,4 @@
-class ChargesController < ApplicationController
+class SubscriptionsController < ApplicationController
 
   before_filter :authenticate_user!, only: [:edit, :update]
 
