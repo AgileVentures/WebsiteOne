@@ -1,6 +1,18 @@
 Development Process
 ------------------
 
+To get involved please follow these steps:
+
+1. install WSO on your dev environment (laptop or c9)
+2. get tests passing
+3. check site can be run manually 
+4. (optional) deploy to remote (e.g. Heroku, drie etc.)
+5. review [open PRs](https://github.com/AgileVentures/WebsiteOne/pulls) (and [project board](https://waffle.io/AgileVentures/WebsiteOne)) - leave comments or collaborate if interested
+6. look through ready column - feel free to start work, but always interested to hear chat in slack, scrum wherever
+7. look through estimated column - feel free to ask about priority, as these are not prioritised
+8. look at backlog - if there is an interesting ticket - get it voted on - join a scrum or do [ASYNC Vote](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md)
+
+
 Please see [the project setup guide](docs/project_setup.md) to get set up with the project for development.
 
 Our default working branch is `develop`.  We do work by creating branches off `develop` for new features and bugfixes.  Any feature should include appropriate Cucumber acceptance tests and RSpec unit tests.  We try to avoid view and controller specs, and focus purely on unit tests at the model and service level where possible.  A bugfix may include an acceptance test depending on where the bug occurred, but fixing a bug should start with the creation of a test that replicates the bug, so that any bugfix submission will include an appropriate test as well as the fix itself.

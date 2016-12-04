@@ -80,6 +80,7 @@ class EventInstancesController < ApplicationController
 
   def merge_participants(existing_participants, new_participants)
     return new_participants unless existing_participants
+    return existing_participants unless new_participants
     new_participants.each do |_, v|
       unless existing_participants.values.any? { |struc| struc['person']['id'] == v['person']['id'] }
         existing_participants[existing_participants.length.to_s] = v
