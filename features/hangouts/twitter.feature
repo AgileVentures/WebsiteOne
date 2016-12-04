@@ -7,8 +7,7 @@ Feature: Tweeting Live Events
   Background:
     Given following events exist:
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
-      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |
-    And an event "Scrum"                     |                       |
+      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         | And an event "Scrum"                      |                       |
 
   Scenario: Event going live causes tweet of hangout link to be sent
     Given that the HangoutConnection has pinged to indicate the event start
