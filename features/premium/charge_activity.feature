@@ -28,7 +28,7 @@ Feature: Charge Users Money
   Scenario: Sign up for premium membership
     Given I visit "/subscriptions/new"
     And I should not see "Sign Me Up For Premium Plus!"
-    And I click "Sign Me Up For Premium!"
+    And I click "Subscribe"
     When I fill in appropriate card details for premium
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"
     And the user should receive a "Welcome to AgileVentures Premium" email
