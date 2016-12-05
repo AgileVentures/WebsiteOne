@@ -60,7 +60,7 @@ Feature: Charge Users Money
   Scenario: Sign up for premium membership, but encounter error
     Given my card will be rejected
     And I visit "/subscriptions/new"
-    And I click "Sign Me Up For Premium!"
+    And I click "Subscribe"
     When I fill in appropriate card details for premium
     Then I should not see "Thanks, you're now an AgileVentures Premium Member!"
     And I should see "The card was declined"
