@@ -57,6 +57,15 @@ Feature: Charge Users Money
     Then I should see "Thanks, you're now an AgileVentures Premium Plus Member!"
     And the user should receive a "Welcome to AgileVentures Premium Plus" email
 
+  Scenario: Sign up for premium membership, but encounter error
+    Given my card will be rejected
+    And I visit "/subscriptions/new"
+    And I click "Sign Me Up For Premium!"
+    When I fill in appropriate card details for premium
+    Then I should not see "Thanks, you're now an AgileVentures Premium Member!"
+    And I should see "The card was declined"
+    And the user should not receive a "Welcome to AgileVentures Premium" email
+
   Scenario: User decides to change card details
     Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
     And I visit "subscriptions/tansaku/edit"

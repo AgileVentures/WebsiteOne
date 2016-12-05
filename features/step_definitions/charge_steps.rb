@@ -46,7 +46,6 @@ And(/^a stripe customer with id "([^"]*)"$/) do |stripe_customer_id|
   StripeMock.create_test_helper.create_customer(id: stripe_customer_id)
 end
 
-
 And(/^there is a card error updating subscription$/) do
   StripeMock.prepare_card_error(:card_declined, :update_subscription)
 end
@@ -56,4 +55,9 @@ And(/^I should see myself in the premium members list$/) do
   within '.user-preview' do
     expect(page).to have_text(@user.first_name)
   end
+end
+
+Given(/^my card will be rejected$/) do
+  # StripeMock.toggle_debug(true)
+  StripeMock.prepare_card_error(:card_declined, :new_customer)
 end

@@ -34,7 +34,7 @@ class SubscriptionsController < ApplicationController
 
   rescue Stripe::StripeError => e
     flash[:error] = e.message
-    redirect_to new_charge_path
+    redirect_to new_subscription_path
   end
 
   def update
