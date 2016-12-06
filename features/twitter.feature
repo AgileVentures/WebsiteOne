@@ -11,8 +11,7 @@ Feature: Tweeting Live Events
     And an event "Scrum"
 
   Scenario: Event going live causes tweet of hangout link to be sent
-    Given that the HangoutConnection has pinged to indicate the event start
-    Then an appropriate tweet has been sent  # would be great to check number of participants
+    When the HangoutConnection has pinged to indicate the event start, an appropriate tweet will be sent
 
   Scenario: Event stream going live causes tweet of the youtube stream to be sent
     Given that the HangoutConnection has pinged to indicate the event start
