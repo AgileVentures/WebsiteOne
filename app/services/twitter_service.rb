@@ -51,7 +51,8 @@ module TwitterService
 
   def self.valid_recording(code)
     unless code == ''
-[p]
+      uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
+      Net::HTTP.get(uri)
     else
       'Video not found'
     end

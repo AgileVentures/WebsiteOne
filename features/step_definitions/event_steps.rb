@@ -281,9 +281,6 @@ end
 
 Then(/^an appropriate tweet has been sent  \# would be great to check number of participants$/) do
 
-  #uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
-  #Net::HTTP.get(uri)
-
 end
 
 Then(/^the event should (still )?be live$/) do |ignore|
