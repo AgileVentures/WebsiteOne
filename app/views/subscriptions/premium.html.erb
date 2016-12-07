@@ -1,46 +1,29 @@
-<article>
-  <h1>Agile Ventures Premium Membership</h1>
-  <br/>
-  <a href='/premium'>Further details</a>
-  </p>
-  <label class="amount">
-    <p>The price for Premium Membership is £10.00/Month</p>
-    <p>7 day free trial! No charge for 7 days</p>
-  </label>
-  <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-  <% end %>
-  <br/>
-</article>
-<div class="row">
-  <div id="paypal_section" class="col-lg-5 well">
-    <div style="margin-bottom: 15px;">Get Premium via Paypal:</div>
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-      <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="N5R9T269YU7XC">
-      <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-      <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-    </form>
-  </div>
+<%= form_tag subscriptions_path(plan: 'premium') do %>
+    <article>
+      <h1>Agile Ventures Premium Membership</h1>
+      <br/>
+      <a href='/premium'>Further details</a>
+      </p>
+      <label class="amount">
+        <p>The price for Premium Membership is £10.00/Month</p>
+        <p>7 day free trial! No charge for 7 days</p>
+      </label>
+      <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+      <% end %>
+      <br/>
+    </article>
 
-  <div id="card_section" class="col-lg-5 well">
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="A month's subscription"
+            data-amount="1000"
+            data-currency="GBP"
+            data-locale="en-US"
+            data-name="Premium Membership"
+            data-label="Sign Me Up For Premium!"></script>
 
-    <div style="margin-bottom: 15px;">Get Premium via Credit/Debit Card:</div>
-    <%= form_tag subscriptions_path(plan: 'premium') do %>
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                data-description="A month's subscription"
-                data-amount="1000"
-                data-currency="GBP"
-                data-locale="en-US"
-                data-name="Premium Membership"
-                data-label="Subscribe"></script>
-    <% end %>
-
-  </div>
-</div>
-
-<%= stylesheet_link_tag params[:controller], 'data-turbolinks-track' => true  %>
+<% end %>
 
