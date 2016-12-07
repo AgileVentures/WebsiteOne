@@ -4,7 +4,7 @@
   <% data_label = 'Sponsor for Premium' %>
 <% end %>
 
-<%= form_tag charges_path(plan: 'premium', user: presenter.user) do %>
+<%= form_tag subscriptions_path(plan: 'premium', user: presenter.user) do %>
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
             data-description="A month's subscription"
