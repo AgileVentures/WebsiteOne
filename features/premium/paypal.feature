@@ -4,7 +4,7 @@ Feature: Charge Users Money
   I would like to be able to sign them up for a recurring plan via paypal
 
   Scenario: Sign up for premium membership via paypal
-    Given I visit "/charges/paypal"
+    Given I visit "/subscriptions/paypal"
     And I should see "Agile Ventures Premium Membership"
     Then I should see a paypal form
 
