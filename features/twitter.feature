@@ -10,10 +10,5 @@ Feature: Tweeting Live Events
       | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         | And an event "Scrum"                      |                       |
     And an event "Scrum"
 
-  Scenario: Event going live causes tweet of hangout link to be sent
-    When the HangoutConnection has pinged to indicate the event start, an appropriate tweet will be sent
-
-  Scenario: Event stream going live causes tweet of the youtube stream to be sent
-    Given that the HangoutConnection has pinged to indicate the event start
-    And youtube stream has gone live
-    Then an appropriate tweet has been sent # e.g. see live stream
+  Scenario: Event going live causes tweets of hangout link and youtube link to be sent
+    When the HangoutConnection has pinged to indicate the event start, appropriate tweets will be sent

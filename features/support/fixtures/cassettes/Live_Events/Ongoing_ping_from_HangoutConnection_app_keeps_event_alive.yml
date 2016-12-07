@@ -1,6 +1,161 @@
 ---
 http_interactions:
 - request:
+    method: post
+    uri: https://api.twitter.com/1.1/statuses/update.json
+    body:
+      encoding: UTF-8
+      string: status=%23Scrum+meeting+with+our+%23distributedteam+is+live+on+http%3A%2F%2Fhangout.test+Join+in+and+learn+about+our+%23opensource+%23projects%21
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Twitter Ruby Gem 5.11.0
+      Authorization:
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="d28dc42239935c372ee98b0b222c6277",
+        oauth_signature="4obfPj4oDCywLvUuQrjue5Onk%2FI%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1481115305", oauth_token="twitter access token", oauth_version="1.0"
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Length:
+      - '85'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 07 Dec 2016 12:54:05 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Wed, 07 Dec 2016 12:54:05 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id=v1%3A148111524559008402; Domain=.twitter.com; Path=/; Expires=Fri,
+        07-Dec-2018 12:54:05 UTC
+      - lang=en; Path=/
+      Status:
+      - 403 Forbidden
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read-write
+      X-Connection-Hash:
+      - a3c5be6d1d93a8769fda65ec45e98120
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Response-Time:
+      - '26'
+      X-Transaction:
+      - 009dfcde003d8b4c
+      X-Tsa-Request-Body-Time:
+      - '1'
+      X-Twitter-Response-Tags:
+      - BouncerCompliant
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: '{"errors":[{"code":187,"message":"Status is a duplicate."}]}'
+    http_version: 
+  recorded_at: Wed, 07 Dec 2016 12:55:05 GMT
+- request:
+    method: get
+    uri: https://api.twitter.com/1.1/statuses/user_timeline.json?count=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Twitter Ruby Gem 5.11.0
+      Authorization:
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="b9d15815a55215190f90d110fd3e679c",
+        oauth_signature="r%2FWiJPE8psWEAOrgtSr7XDamVHY%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1481115305", oauth_token="twitter access token", oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Length:
+      - '1053'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 07 Dec 2016 12:54:05 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Wed, 07 Dec 2016 12:54:05 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id=v1%3A148111524579326147; Domain=.twitter.com; Path=/; Expires=Fri,
+        07-Dec-2018 12:54:05 UTC
+      - lang=en; Path=/
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read-write
+      X-Connection-Hash:
+      - 41585a30857e45b99f21fa3fd439496e
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Rate-Limit-Limit:
+      - '900'
+      X-Rate-Limit-Remaining:
+      - '897'
+      X-Rate-Limit-Reset:
+      - '1481116144'
+      X-Response-Time:
+      - '102'
+      X-Transaction:
+      - 004addd300155269
+      X-Twitter-Response-Tags:
+      - BouncerCompliant
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"created_at":"Wed Dec 07 12:49:00 +0000 2016","id":806480627965054976,"id_str":"806480627965054976","text":"Alejandro
+        just hosted an online #scrum Missed it? Catch the recording at https:\/\/t.co\/Jrm31gfYxd
+        #CodeForGood #opensource","truncated":false,"entities":{"hashtags":[{"text":"scrum","indices":[32,38]},{"text":"CodeForGood","indices":[97,109]},{"text":"opensource","indices":[110,121]}],"symbols":[],"user_mentions":[],"urls":[{"url":"https:\/\/t.co\/Jrm31gfYxd","expanded_url":"http:\/\/youtu.be\/11","display_url":"youtu.be\/11","indices":[73,96]}]},"source":"\u003ca
+        href=\"http:\/\/www.agileventures.com\" rel=\"nofollow\"\u003eWebsiteOneTest\u003c\/a\u003e","in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":431173698,"id_str":"431173698","name":"Matthew
+        Lindsey","screen_name":"matthewrlindsey","location":"Boston","description":"Walking
+        the path","url":"http:\/\/t.co\/7jvrcOh9cP","entities":{"url":{"urls":[{"url":"http:\/\/t.co\/7jvrcOh9cP","expanded_url":"http:\/\/www.matthewrlindsey.org","display_url":"matthewrlindsey.org","indices":[0,22]}]},"description":{"urls":[]}},"protected":false,"followers_count":18,"friends_count":62,"listed_count":7,"created_at":"Thu
+        Dec 08 00:36:48 +0000 2011","favourites_count":10,"utc_offset":-18000,"time_zone":"Eastern
+        Time (US & Canada)","geo_enabled":false,"verified":false,"statuses_count":58,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"000000","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_link_color":"19CF86","profile_sidebar_border_color":"000000","profile_sidebar_fill_color":"000000","profile_text_color":"000000","profile_use_background_image":false,"has_extended_profile":true,"default_profile":false,"default_profile_image":false,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"possibly_sensitive":false,"lang":"en"}]'
+    http_version: 
+  recorded_at: Wed, 07 Dec 2016 12:55:05 GMT
+- request:
     method: get
     uri: http://gdata.youtube.com/feeds/api/videos/11
     body:
@@ -27,9 +182,9 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Thu, 23 Jun 2016 14:00:26 GMT
+      - Wed, 07 Dec 2016 12:54:05 GMT
       Expires:
-      - Thu, 23 Jun 2016 14:00:26 GMT
+      - Wed, 07 Dec 2016 12:54:05 GMT
       Cache-Control:
       - private, max-age=0
       X-Content-Type-Options:
@@ -44,5 +199,160 @@ http_interactions:
       encoding: UTF-8
       string: No longer available
     http_version: 
-  recorded_at: Thu, 23 Jun 2016 14:00:26 GMT
+  recorded_at: Wed, 07 Dec 2016 12:55:05 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/1.1/statuses/update.json
+    body:
+      encoding: UTF-8
+      string: status=Alejandro+just+hosted+an+online+%23scrum+Missed+it%3F+Catch+the+recording+at+youtu.be%2F11+%23CodeForGood+%23opensource
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Twitter Ruby Gem 5.11.0
+      Authorization:
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="71ebab8626b8732888613739b233abed",
+        oauth_signature="%2BSDnBGDWqNObcKNni0OlasYMi%2FI%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1481115305", oauth_token="twitter access token", oauth_version="1.0"
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Length:
+      - '85'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 07 Dec 2016 12:54:06 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Wed, 07 Dec 2016 12:54:06 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id=v1%3A148111524615041542; Domain=.twitter.com; Path=/; Expires=Fri,
+        07-Dec-2018 12:54:06 UTC
+      - lang=en; Path=/
+      Status:
+      - 403 Forbidden
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read-write
+      X-Connection-Hash:
+      - fa5e159e53a3c44113231a443283eab0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Response-Time:
+      - '21'
+      X-Transaction:
+      - 003fedae0056dba5
+      X-Tsa-Request-Body-Time:
+      - '0'
+      X-Twitter-Response-Tags:
+      - BouncerCompliant
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: '{"errors":[{"code":187,"message":"Status is a duplicate."}]}'
+    http_version: 
+  recorded_at: Wed, 07 Dec 2016 12:55:06 GMT
+- request:
+    method: get
+    uri: https://api.twitter.com/1.1/statuses/user_timeline.json?count=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Twitter Ruby Gem 5.11.0
+      Authorization:
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="4245f4932fb6e08a912ebafb2aa2c37f",
+        oauth_signature="6Opc3Idj%2BqyE6aUgR1672tNsZh8%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1481115306", oauth_token="twitter access token", oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Length:
+      - '1053'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 07 Dec 2016 12:54:06 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Wed, 07 Dec 2016 12:54:06 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id=v1%3A148111524635667252; Domain=.twitter.com; Path=/; Expires=Fri,
+        07-Dec-2018 12:54:06 UTC
+      - lang=en; Path=/
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read-write
+      X-Connection-Hash:
+      - 46894f8e36e77d2200c820474864cc33
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Rate-Limit-Limit:
+      - '900'
+      X-Rate-Limit-Remaining:
+      - '896'
+      X-Rate-Limit-Reset:
+      - '1481116144'
+      X-Response-Time:
+      - '57'
+      X-Transaction:
+      - 0011a6730051e847
+      X-Twitter-Response-Tags:
+      - BouncerCompliant
+      X-Xss-Protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"created_at":"Wed Dec 07 12:49:00 +0000 2016","id":806480627965054976,"id_str":"806480627965054976","text":"Alejandro
+        just hosted an online #scrum Missed it? Catch the recording at https:\/\/t.co\/Jrm31gfYxd
+        #CodeForGood #opensource","truncated":false,"entities":{"hashtags":[{"text":"scrum","indices":[32,38]},{"text":"CodeForGood","indices":[97,109]},{"text":"opensource","indices":[110,121]}],"symbols":[],"user_mentions":[],"urls":[{"url":"https:\/\/t.co\/Jrm31gfYxd","expanded_url":"http:\/\/youtu.be\/11","display_url":"youtu.be\/11","indices":[73,96]}]},"source":"\u003ca
+        href=\"http:\/\/www.agileventures.com\" rel=\"nofollow\"\u003eWebsiteOneTest\u003c\/a\u003e","in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":431173698,"id_str":"431173698","name":"Matthew
+        Lindsey","screen_name":"matthewrlindsey","location":"Boston","description":"Walking
+        the path","url":"http:\/\/t.co\/7jvrcOh9cP","entities":{"url":{"urls":[{"url":"http:\/\/t.co\/7jvrcOh9cP","expanded_url":"http:\/\/www.matthewrlindsey.org","display_url":"matthewrlindsey.org","indices":[0,22]}]},"description":{"urls":[]}},"protected":false,"followers_count":18,"friends_count":62,"listed_count":7,"created_at":"Thu
+        Dec 08 00:36:48 +0000 2011","favourites_count":10,"utc_offset":-18000,"time_zone":"Eastern
+        Time (US & Canada)","geo_enabled":false,"verified":false,"statuses_count":58,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"000000","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_link_color":"19CF86","profile_sidebar_border_color":"000000","profile_sidebar_fill_color":"000000","profile_text_color":"000000","profile_use_background_image":false,"has_extended_profile":true,"default_profile":false,"default_profile_image":false,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"possibly_sensitive":false,"lang":"en"}]'
+    http_version: 
+  recorded_at: Wed, 07 Dec 2016 12:55:06 GMT
 recorded_with: VCR 3.0.1
