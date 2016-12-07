@@ -18,6 +18,7 @@ describe UpgradeUserToPremium do
     allow(subscription_klass).to receive(:new)
     allow(user).to receive(:subscription=)
     allow(user).to receive(:save)
+    allow(user).to receive_message_chain(:title_list, :<<)
   end
 
   it 'creates a payment source' do
@@ -34,6 +35,11 @@ describe UpgradeUserToPremium do
   it 'sets the user subscription' do
     expect(subscription_klass).to receive(:new).and_return(subscription)
     expect(user).to receive(:subscription=).with(subscription)
+    upgrade_user_to_premium
+  end
+
+  it 'adds Premium to the user title list' do
+    expect(user).to receive_message_chain(:title_list, :<<).with('Premium')
     upgrade_user_to_premium
   end
 
