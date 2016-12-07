@@ -1,4 +1,4 @@
-class ChargesController < ApplicationController
+class SubscriptionsController < ApplicationController
 
   before_filter :authenticate_user!, only: [:edit, :update]
 
@@ -34,7 +34,7 @@ class ChargesController < ApplicationController
 
   rescue Stripe::StripeError => e
     flash[:error] = e.message
-    redirect_to new_charge_path
+    redirect_to new_subscription_path
   end
 
   def update
