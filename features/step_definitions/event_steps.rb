@@ -279,10 +279,6 @@ And(/^that the HangoutConnection has pinged to indicate the event start$/) do
                                yt_video_id: '11'}
 end
 
-Then(/^an appropriate tweet has been sent  \# would be great to check number of participants$/) do
-
-end
-
 Then(/^the event should (still )?be live$/) do |ignore|
   visit event_path(@event)
   expect(page).to have_content('This event is now live!')
