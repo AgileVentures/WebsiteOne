@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => [:index, :show]
 
-  before_action :get_user, only: [:show, :add_status]
+  before_action :get_user, only: [:show, :destroy, :add_status]
   before_filter :authenticate_user!, only: [:add_status]
 
   def index
@@ -55,6 +55,12 @@ class UsersController < ApplicationController
     else
       raise ActiveRecord::RecordNotFound.new('User has not exposed his profile publicly')
     end
+  end
+
+  def destroy
+    @user.destroy
+    flash[:notice] = 'Your account has been deactivated'
+    redirect_to users_path
   end
 
   def add_status
