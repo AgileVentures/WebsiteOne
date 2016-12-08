@@ -6,5 +6,9 @@ if Rails.env == 'test'
     c.configure_rspec_metadata! unless ENV['CUCUMBER']
     c.cassette_library_dir = Rails.root.join('spec', 'fixtures', 'cassettes')
     c.hook_into :webmock
+    c.filter_sensitive_data('twitter consumer key') { Settings.twitter.consumer_key }
+    c.filter_sensitive_data('twitter consumer secret') { Settings.twitter.consumer_secret }
+    c.filter_sensitive_data('twitter access token') { Settings.twitter.access_token }
+    c.filter_sensitive_data('twitter access token secret') { Settings.twitter.access_token_secret }
   end
 end

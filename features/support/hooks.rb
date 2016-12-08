@@ -8,6 +8,15 @@
 #   Capybara.javascript_driver =  @original_javascript_driver
 #
 
+Before '@disable_twitter' do
+  @original_twitter = Settings.features.twitter.notifications.enabled
+  Settings.features.twitter.notifications.enabled = false
+end
+
+After '@disable_twitter' do
+  Settings.features.twitter.notifications.enabled = @original_twitter
+end
+
 After '@javascript' do
   Capybara.send('session_pool').each do |_, session|
     next unless session.driver.is_a?(Capybara::Poltergeist::Driver)

@@ -12,9 +12,9 @@ http_interactions:
       User-Agent:
       - Twitter Ruby Gem 5.11.0
       Authorization:
-      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="aa6784cf2ba11147a9af172cf8a177fa",
-        oauth_signature="w3TqhmxKsmF7AEXPdGEnhO0%2FPi0%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1481115243", oauth_token="twitter access token", oauth_version="1.0"
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="8454c596b790b60189fe66c51c804c7f",
+        oauth_signature="yeyWrMBMwvxdCBCWPlQbgwNwEE8%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1481115666", oauth_token="twitter access token", oauth_version="1.0"
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -33,18 +33,18 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:06 GMT
       Expires:
       - Tue, 31 Mar 1981 05:00:00 GMT
       Last-Modified:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:06 GMT
       Pragma:
       - no-cache
       Server:
       - tsa_b
       Set-Cookie:
-      - guest_id=v1%3A148111524401834193; Domain=.twitter.com; Path=/; Expires=Fri,
-        07-Dec-2018 12:54:04 UTC
+      - guest_id=v1%3A148111524689915138; Domain=.twitter.com; Path=/; Expires=Fri,
+        07-Dec-2018 12:54:06 UTC
       - lang=en; Path=/
       Status:
       - 403 Forbidden
@@ -53,17 +53,17 @@ http_interactions:
       X-Access-Level:
       - read-write
       X-Connection-Hash:
-      - 12407535c07bbf09effe7bd09e159d6a
+      - 4119853e8ac73cd87f98a5013084b408
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
       - SAMEORIGIN
       X-Response-Time:
-      - '22'
+      - '23'
       X-Transaction:
-      - 00db025d001528b7
+      - 008ec4d5006abccf
       X-Tsa-Request-Body-Time:
-      - '0'
+      - '1'
       X-Twitter-Response-Tags:
       - BouncerCompliant
       X-Xss-Protection:
@@ -72,7 +72,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"errors":[{"code":187,"message":"Status is a duplicate."}]}'
     http_version: 
-  recorded_at: Wed, 07 Dec 2016 12:54:04 GMT
+  recorded_at: Wed, 07 Dec 2016 13:01:06 GMT
 - request:
     method: get
     uri: https://api.twitter.com/1.1/statuses/user_timeline.json?count=1
@@ -85,9 +85,9 @@ http_interactions:
       User-Agent:
       - Twitter Ruby Gem 5.11.0
       Authorization:
-      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="6044215aa474800b05f44853f8b842d6",
-        oauth_signature="wLpK1DyQbIbsKBHNuZ4WhrKnliI%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1481115244", oauth_token="twitter access token", oauth_version="1.0"
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="fc208f8232d2a95b8240d2d3ec6cf671",
+        oauth_signature="BLLDGgHV5ExPuCmU2qQXsKDtT1Q%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1481115666", oauth_token="twitter access token", oauth_version="1.0"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -104,18 +104,18 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:07 GMT
       Expires:
       - Tue, 31 Mar 1981 05:00:00 GMT
       Last-Modified:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:07 GMT
       Pragma:
       - no-cache
       Server:
       - tsa_b
       Set-Cookie:
-      - guest_id=v1%3A148111524421157669; Domain=.twitter.com; Path=/; Expires=Fri,
-        07-Dec-2018 12:54:04 UTC
+      - guest_id=v1%3A148111524709441734; Domain=.twitter.com; Path=/; Expires=Fri,
+        07-Dec-2018 12:54:07 UTC
       - lang=en; Path=/
       Status:
       - 200 OK
@@ -124,7 +124,7 @@ http_interactions:
       X-Access-Level:
       - read-write
       X-Connection-Hash:
-      - 3dbb067af0e0276b1b49062793d01ffa
+      - be0f11815679dfa7a6170fae384bf25a
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -132,13 +132,13 @@ http_interactions:
       X-Rate-Limit-Limit:
       - '900'
       X-Rate-Limit-Remaining:
-      - '899'
+      - '895'
       X-Rate-Limit-Reset:
       - '1481116144'
       X-Response-Time:
-      - '29'
+      - '33'
       X-Transaction:
-      - 00e45f1200b97bd7
+      - 00f934be00fe79dd
       X-Twitter-Response-Tags:
       - BouncerCompliant
       X-Xss-Protection:
@@ -154,7 +154,7 @@ http_interactions:
         Dec 08 00:36:48 +0000 2011","favourites_count":10,"utc_offset":-18000,"time_zone":"Eastern
         Time (US & Canada)","geo_enabled":false,"verified":false,"statuses_count":58,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"000000","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_link_color":"19CF86","profile_sidebar_border_color":"000000","profile_sidebar_fill_color":"000000","profile_text_color":"000000","profile_use_background_image":false,"has_extended_profile":true,"default_profile":false,"default_profile_image":false,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"possibly_sensitive":false,"lang":"en"}]'
     http_version: 
-  recorded_at: Wed, 07 Dec 2016 12:54:04 GMT
+  recorded_at: Wed, 07 Dec 2016 13:01:07 GMT
 - request:
     method: get
     uri: http://gdata.youtube.com/feeds/api/videos/11
@@ -182,9 +182,9 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:07 GMT
       Expires:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:07 GMT
       Cache-Control:
       - private, max-age=0
       X-Content-Type-Options:
@@ -199,7 +199,7 @@ http_interactions:
       encoding: UTF-8
       string: No longer available
     http_version: 
-  recorded_at: Wed, 07 Dec 2016 12:54:04 GMT
+  recorded_at: Wed, 07 Dec 2016 13:01:07 GMT
 - request:
     method: post
     uri: https://api.twitter.com/1.1/statuses/update.json
@@ -212,9 +212,9 @@ http_interactions:
       User-Agent:
       - Twitter Ruby Gem 5.11.0
       Authorization:
-      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="75328b14020c0a74b4e618c6c82b91f9",
-        oauth_signature="Q4oM%2FazdSBG6%2BEsCVzXocDCHMng%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1481115244", oauth_token="twitter access token", oauth_version="1.0"
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="9d442123dc55f0b130b1138a830cbcc9",
+        oauth_signature="whCF75%2FJhmkFTMP7BWLeJBqqBR8%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1481115667", oauth_token="twitter access token", oauth_version="1.0"
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -233,18 +233,18 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:07 GMT
       Expires:
       - Tue, 31 Mar 1981 05:00:00 GMT
       Last-Modified:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:07 GMT
       Pragma:
       - no-cache
       Server:
       - tsa_b
       Set-Cookie:
-      - guest_id=v1%3A148111524454596392; Domain=.twitter.com; Path=/; Expires=Fri,
-        07-Dec-2018 12:54:04 UTC
+      - guest_id=v1%3A148111524740417428; Domain=.twitter.com; Path=/; Expires=Fri,
+        07-Dec-2018 12:54:07 UTC
       - lang=en; Path=/
       Status:
       - 403 Forbidden
@@ -253,17 +253,17 @@ http_interactions:
       X-Access-Level:
       - read-write
       X-Connection-Hash:
-      - f30f1045f1237cbf5d8d33dc7c51ced9
+      - 8d1ad44970285e64e8db8d3cb03d90a7
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
       - SAMEORIGIN
       X-Response-Time:
-      - '23'
+      - '58'
       X-Transaction:
-      - 00cab57300716d3b
+      - 00340d7700d103a0
       X-Tsa-Request-Body-Time:
-      - '1'
+      - '0'
       X-Twitter-Response-Tags:
       - BouncerCompliant
       X-Xss-Protection:
@@ -272,7 +272,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"errors":[{"code":187,"message":"Status is a duplicate."}]}'
     http_version: 
-  recorded_at: Wed, 07 Dec 2016 12:54:04 GMT
+  recorded_at: Wed, 07 Dec 2016 13:01:07 GMT
 - request:
     method: get
     uri: https://api.twitter.com/1.1/statuses/user_timeline.json?count=1
@@ -285,9 +285,9 @@ http_interactions:
       User-Agent:
       - Twitter Ruby Gem 5.11.0
       Authorization:
-      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="883827670ce20782e5856622652b2252",
-        oauth_signature="v2ajBaN3rosKsRl8ef1cqivQpNg%3D", oauth_signature_method="HMAC-SHA1",
-        oauth_timestamp="1481115244", oauth_token="twitter access token", oauth_version="1.0"
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="522ea0442e64a6f8efbb7db90902e193",
+        oauth_signature="s5U7ZNOrQsKfg9tP2eIyxpkA1Wk%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1481115667", oauth_token="twitter access token", oauth_version="1.0"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response:
@@ -304,18 +304,18 @@ http_interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:07 GMT
       Expires:
       - Tue, 31 Mar 1981 05:00:00 GMT
       Last-Modified:
-      - Wed, 07 Dec 2016 12:54:04 GMT
+      - Wed, 07 Dec 2016 12:54:07 GMT
       Pragma:
       - no-cache
       Server:
       - tsa_b
       Set-Cookie:
-      - guest_id=v1%3A148111524474463961; Domain=.twitter.com; Path=/; Expires=Fri,
-        07-Dec-2018 12:54:04 UTC
+      - guest_id=v1%3A148111524767388475; Domain=.twitter.com; Path=/; Expires=Fri,
+        07-Dec-2018 12:54:07 UTC
       - lang=en; Path=/
       Status:
       - 200 OK
@@ -324,7 +324,7 @@ http_interactions:
       X-Access-Level:
       - read-write
       X-Connection-Hash:
-      - 4176bd8bfd90fa04047137859e0063aa
+      - 0a351dbb216c600631fdb6af1ab7d8c8
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -332,13 +332,13 @@ http_interactions:
       X-Rate-Limit-Limit:
       - '900'
       X-Rate-Limit-Remaining:
-      - '898'
+      - '894'
       X-Rate-Limit-Reset:
       - '1481116144'
       X-Response-Time:
-      - '58'
+      - '34'
       X-Transaction:
-      - 00cea6360086754b
+      - 0098ff2b00a138c6
       X-Twitter-Response-Tags:
       - BouncerCompliant
       X-Xss-Protection:
@@ -354,5 +354,5 @@ http_interactions:
         Dec 08 00:36:48 +0000 2011","favourites_count":10,"utc_offset":-18000,"time_zone":"Eastern
         Time (US & Canada)","geo_enabled":false,"verified":false,"statuses_count":58,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"000000","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_link_color":"19CF86","profile_sidebar_border_color":"000000","profile_sidebar_fill_color":"000000","profile_text_color":"000000","profile_use_background_image":false,"has_extended_profile":true,"default_profile":false,"default_profile_image":false,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"possibly_sensitive":false,"lang":"en"}]'
     http_version: 
-  recorded_at: Wed, 07 Dec 2016 12:54:04 GMT
+  recorded_at: Wed, 07 Dec 2016 13:01:07 GMT
 recorded_with: VCR 3.0.1
