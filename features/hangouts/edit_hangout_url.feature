@@ -1,4 +1,4 @@
-@vcr @javascript
+@vcr @javascript @disable_twitter
 Feature: Manual Edit of Hangout URL
   As a person involved in an event
   So that I can ensure everyone can access the correct link to join an event

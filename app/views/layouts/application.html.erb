@@ -16,13 +16,13 @@
       </div>
     <% else %>
       <div class="container">
-        <div class="col-lg-9">
-          <%= yield %>
-        </div>
-        <div class="col-lg-3">
-          <%= render 'layouts/sponsors' %>
-        </div>
-      </div>
+    <div class="col-lg-9">
+      <%= yield %>
+    </div>
+    <div class="col-lg-3">
+      <%= render 'layouts/sponsors' %>
+    </div>
+  </div>
     <% end %>
   </div>
   <% if current_user && current_user.incomplete? && new_user_session_url == request.referrer %>
