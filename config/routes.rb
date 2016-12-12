@@ -14,6 +14,7 @@ WebsiteOne::Application.routes.draw do
   resources :users, :only => [:index, :show], :format => false do
     member do
       patch :add_status
+      delete :destroy
     end
   end
 
