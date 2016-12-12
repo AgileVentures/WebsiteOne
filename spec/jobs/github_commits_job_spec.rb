@@ -41,5 +41,9 @@ describe GithubCommitsJob do
     it 'stores correct total commit count for projects' do
       expect(project.commit_count).to eq 3116
     end
+
+    it 'stores last_commit_at only for projects that have a github_url' do
+      expect(project.updated_at).to be > '2000-01-01'
+    end
   end
 end
