@@ -2,11 +2,14 @@ class SubscriptionsController < ApplicationController
 
   before_filter :authenticate_user!, only: [:edit, :update]
 
+  skip_before_filter :verify_authenticity_token, only: [:paypal]
+
   def new
     render plan_name
   end
 
   def paypal
+    byebug
   end
 
   def edit
