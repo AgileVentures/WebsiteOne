@@ -9,7 +9,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def paypal
-    byebug
+    # will want to work on passing through the create process 
+    # render 'create'
   end
 
   def edit

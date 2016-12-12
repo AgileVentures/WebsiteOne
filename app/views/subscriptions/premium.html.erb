@@ -17,16 +17,7 @@
 <div class="row">
   <div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
     <div style="margin-bottom: 15px;">Get Premium via Paypal:</div>
-    <!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
-      <!--<input type="hidden" name="cmd" value="_s-xclick">-->
-      <!--<input type="hidden" name="item_number" value="123">-->
-      <!--<input type="image" src="https://www.sandbox.paypal.com/en_GB/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">-->
-      <!--<img alt="" border="0" src="https://www.sandbox.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1">-->
-    <!--</form>-->
-
-
-
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+      <form action="<%= paypal_form_url %>" method="post" target="_blank">
 
       <!-- Identify your business so that you can collect the payments. -->
       <input type="hidden" name="business" value="sam-facilitator@agileventures.org">
@@ -36,7 +27,7 @@
 
       <!-- Identify the subscription. -->
       <input type="hidden" name="item_name" value="Premium">
-      <input type="hidden" name="item_number" value="123">
+      <input type="hidden" name="item_number" value="<%= current_user.try(:id) || 'not logged in' %>">
 
       <!-- Set the terms of the 1st trial period. -->
       <input type="hidden" name="currency_code" value="GBP">
@@ -61,24 +52,13 @@
       <!-- do a post -->
       <input type="hidden" name="rm" value="2">
 
-      <!--<input type="hidden" name="notify_url" value="http://localhost:3000/subscriptions/paypal">-->
-
       <!-- Display the payment button. -->
       <input type="image" name="submit"
-             src="https://www.sandbox.paypal.com/en_GB/i/btn/btn_subscribe_LG.gif"
+             src="<%= paypal_form_asset_url %>/en_GB/i/btn/btn_subscribe_LG.gif"
              alt="Subscribe">
       <img alt="" width="1" height="1"
-           src="https://www.sandbox.paypal.com/en_GB/i/scr/pixel.gif" >
+           src="<%= paypal_form_asset_url %>/en_GB/i/scr/pixel.gif" >
     </form>
-
-
-    <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
-      <!--<input type="hidden" name="cmd" value="_s-xclick">-->
-      <!--<input type="hidden" name="item_number" value="<% current_user.try(:id)%>">-->
-      <!--<input type="hidden" name="hosted_button_id" value="N5R9T269YU7XC">-->
-      <!--<input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">-->
-      <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">-->
-    <!--</form>-->
   </div>
 
   <div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
