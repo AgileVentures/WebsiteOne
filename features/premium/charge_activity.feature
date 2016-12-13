@@ -28,7 +28,7 @@ Feature: Charge Users Money
   Scenario: Sign up for premium membership
     Given I visit "/subscriptions/new"
     And I should not see "Sign Me Up For Premium Plus!"
-    And I click "Subscribe"
+    And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"
     And the user should receive a "Welcome to AgileVentures Premium" email
@@ -60,7 +60,7 @@ Feature: Charge Users Money
   Scenario: Sign up for premium membership, but encounter error
     Given my card will be rejected
     And I visit "/subscriptions/new"
-    And I click "Subscribe"
+    And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should not see "Thanks, you're now an AgileVentures Premium Member!"
     And I should see "The card was declined"

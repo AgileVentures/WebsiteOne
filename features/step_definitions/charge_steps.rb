@@ -33,7 +33,7 @@ def submit_card_details_for_button_with(text, email='random@morerandom.com')
 end
 
 Then(/^I should see a paypal form$/) do
-  expect(page).to have_xpath("//form[@action='https://www.paypal.com/cgi-bin/webscr']")
+  expect(page).to have_xpath("//form[@action='https://www.sandbox.paypal.com/cgi-bin/webscr']")
 end
 
 Given(/^the following plans exist$/) do |table|
@@ -60,4 +60,13 @@ end
 Given(/^my card will be rejected$/) do
   # StripeMock.toggle_debug(true)
   StripeMock.prepare_card_error(:card_declined, :new_customer)
+end
+
+And(/^Paypal updates our endpoint$/) do
+  body = {"CONTEXT"=>"wtgSziM4C5x0SI-9CmKcv2vkSeTLK5P_g6HqzC__YTYkcqziFNcB84p79Ja", "txn_type"=>"subscr_signup", "subscr_id"=>"I-PEG1KSWM8TBU", "last_name"=>"buyer", "residence_country"=>"GB", "mc_currency"=>"GBP", "item_name"=>"Premium", "business"=>"sam-facilitator@agileventures.org", "recurring"=>"1", "payer_status"=>"verified", "payer_email"=>"sam-buyer@agileventures.org", "first_name"=>"test", "receiver_email"=>"sam-facilitator@agileventures.org", "payer_id"=>"9EG5X4H5DJJW4", "reattempt"=>"1", "item_number"=>"not logged in", "subscr_date"=>"10:07:19 Dec 12, 2016 PST", "charset"=>"windows-1252", "period1"=>"7 D", "mc_amount1"=>"0.00", "period3"=>"1 M", "mc_amount3"=>"10.00", "auth"=>"A31jSI5vY44zpPcQlAUk8WdibsJJT72rGx6ptiGPil6MG30OuCoFtHJ38.CJmmBQ.NNbZg.XEaWj298bVa5FZIw", "form_charset"=>"UTF-8"}
+  post subscriptions_path, body
+end
+
+And(/^I should see "([^"]*)" in last_response$/) do |text|
+  expect(last_response.body).to include(text)
 end

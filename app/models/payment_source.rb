@@ -9,4 +9,7 @@ module PaymentSource
 
   class Stripe < PaymentSource
   end
+
+  class PayPal < PaymentSource
+  end
 end
