@@ -28,6 +28,8 @@ class SubscriptionsController < ApplicationController
     @plan = detect_plan
     @sponsored_user = sponsored_user?
 
+    create_stripe_customer unless paypal?
+
     update_user_to_premium(@user)
     send_acknowledgement_email
 
@@ -64,7 +66,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def create_stripe_customer
-    Stripe::Customer.create(
+    @stripe_customer = Stripe::Customer.create(
         email: params[:stripeEmail],
         source: stripe_token(params),
         plan: @plan.plan_id
@@ -89,7 +91,7 @@ class SubscriptionsController < ApplicationController
     if paypal?
       UpgradeUserToPremium.with(user, Time.now, params['payer_id'], PaymentSource::PayPal, plan_class)
     else
-      UpgradeUserToPremium.with(user, Time.now, create_stripe_customer.id, PaymentSource::Stripe, plan_class)
+      UpgradeUserToPremium.with(user, Time.now, @stripe_customer.id, PaymentSource::Stripe, plan_class)
     end
   end
 
