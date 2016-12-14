@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
 
   before_filter :authenticate_user!, only: [:edit, :update]
 
-  skip_before_filter :verify_authenticity_token, only: [:paypal]
+  skip_before_filter :verify_authenticity_token, only: [:create]
 
   def new
     render plan_name
@@ -33,7 +33,7 @@ class SubscriptionsController < ApplicationController
     update_user_to_premium(@user)
     send_acknowledgement_email
 
-  rescue Stripe::StripeError => e
+  rescue StandardError => e
     flash[:error] = e.message
     redirect_to new_subscription_path
   end

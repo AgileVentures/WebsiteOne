@@ -25,14 +25,6 @@ Feature: Charge Users Money
 
   # following four could be converted to scenario outline
 
-  Scenario: Sign up for premium membership
-    Given I visit "/subscriptions/new"
-    And I should not see "Sign Me Up For Premium Plus!"
-    And I click "Subscribe" within the card_section
-    When I fill in appropriate card details for premium
-    Then I should see "Thanks, you're now an AgileVentures Premium Member!"
-    And the user should receive a "Welcome to AgileVentures Premium" email
-
   Scenario: Sign up for premium mob membership
     Given I visit "/subscriptions/new?plan=premiummob"
     And I should not see "Sign Me Up For Premium!"
@@ -56,15 +48,6 @@ Feature: Charge Users Money
     When I fill in appropriate card details for premium plus
     Then I should see "Thanks, you're now an AgileVentures Premium Plus Member!"
     And the user should receive a "Welcome to AgileVentures Premium Plus" email
-
-  Scenario: Sign up for premium membership, but encounter error
-    Given my card will be rejected
-    And I visit "/subscriptions/new"
-    And I click "Subscribe" within the card_section
-    When I fill in appropriate card details for premium
-    Then I should not see "Thanks, you're now an AgileVentures Premium Member!"
-    And I should see "The card was declined"
-    And the user should not receive a "Welcome to AgileVentures Premium" email
 
   Scenario: User decides to change card details
     Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
