@@ -26,7 +26,7 @@ def css_selector_for(container)
       '.mercury-modal'
 
     else
-      pending
+      "##{container}"
   end
 end
 

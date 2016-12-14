@@ -1,6 +1,10 @@
-And /^(?:The user|I) should receive a "(.*?)" email$/ do |subject|
-  expect(ActionMailer::Base.deliveries.size).to eq 1
-  expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
+And /^(?:the user|I) should( not)? receive a "(.*?)" email$/ do |negate, subject|
+  unless negate
+    expect(ActionMailer::Base.deliveries.size).to eq 1
+    expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
+  else
+    expect(ActionMailer::Base.deliveries.size).to eq 0
+  end
 end
 
 And /^I should not receive an email$/ do
