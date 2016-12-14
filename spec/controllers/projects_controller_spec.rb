@@ -40,14 +40,6 @@ describe ProjectsController, :type => :controller do
       expect(assigns(:projects).title).to eq 'Carrier has arrived.'
     end
 
-    it 'orders project by github update' do
-      allow(Project).to receive(:search).and_return(@projects)
-      @projects.stub(:includes).and_return([@project, @project2].sort {|a,b| b.last_github_update <=> a.last_github_update})
-      get :index, {search: ''}, valid_session
-      expect(assigns(:projects)).to match([@project2, @project])
-    end
-  end
-
   describe '#show' do
     before(:each) do
       @project = build_stubbed(Project, valid_attributes)
