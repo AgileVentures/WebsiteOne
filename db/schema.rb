@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 20161128165206) do
     t.text     "pitch"
     t.integer  "commit_count",                   default: 0
     t.string   "image_url",          limit: 255
-    t.datetime "last_update_at"
+    t.datetime "last_github_update"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree

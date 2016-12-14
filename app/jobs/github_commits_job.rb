@@ -21,7 +21,7 @@ module GithubCommitsJob
       memo += contrib.contributions
     end
 
-    project.update(commit_count: commit_count, last_update_at: project.updated_at)
+    project.update(commit_count: commit_count, last_github_update: project.updated_at)
   end
 
   def github_url(project)

@@ -42,6 +42,7 @@
       </div>
       <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
         <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
+        <div>Last update in Github:<%= project.last_github_update %></div>
         <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, user_path(project.user) %></div>
       </div>
   </div>
