@@ -18,7 +18,7 @@ Feature: Subscribe Self to Premium
 
     # And my member page should show premium details # TODO IMPORTANT - require login?
 
-  Scenario: Pay by Paypal
+  Scenario: Pay by PayPal
     Given I visit "subscriptions/new"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint
