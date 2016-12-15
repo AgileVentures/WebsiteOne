@@ -40,7 +40,6 @@ Feature: Browse and create projects
     Then I should see:
       | Text                    |
       | hello world             |
-      | greetings earthlings    |
       | hello jupiter           |
       | greetings jupiter folks |
       | hello saturn            |
