@@ -40,5 +40,5 @@ Feature: Subscribe Self to Premium
     Given I visit "subscriptions/new"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint incorrectly
-    Then the user should not receive a "Welcome to AgileVentures Premium" email
     And I should see "redirected" in last_response
+    Then the user should not receive a "Welcome to AgileVentures Premium" email
