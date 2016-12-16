@@ -49,3 +49,15 @@ Feature: Allow Users to Sponsor other members
     Then I should not see "Basic Member"
     Then I should not see "Sponsor for Premium"
     And I should not see "Upgrade to Premium"
+
+  Scenario: non logged in user upgrades another user from free tier to premium via PayPal
+    Given I visit Alice's profile page
+    And I click "Sponsor for Premium"
+    Then I should see a paypal form within the paypal_section
+    When Paypal updates our endpoint after sponsoring Alice
+    Then I should see "you have sponsored Alice Jones as a Premium Member" in last_response
+    Given I visit Alice's profile page
+    Then I should see "Premium Member"
+    Then I should not see "Basic Member"
+    Then I should not see "Sponsor for Premium"
+    And I should not see "Upgrade to Premium"

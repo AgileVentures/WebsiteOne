@@ -33,6 +33,7 @@ Feature: Allow Users to Upgrade Membership
     Given I am logged in
     And I am on my profile page
     And I click "Upgrade to Premium"
+    And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "Premium Member"
     Given I am on my profile page

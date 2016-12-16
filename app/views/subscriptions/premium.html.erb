@@ -1,10 +1,10 @@
 <article>
-  <h1>Agile Ventures Premium <%=@sponsorship ? 'Sponsorship':'Membership'%></h1>
+  <h1>Agile Ventures Premium <%= type %></h1>
   <br/>
   <a href='/premium'>Further details</a>
   </p>
   <label class="amount">
-    <p>The price for Premium <%=@sponsorship ? 'Sponsorship':'Membership'%> is £10.00/Month</p>
+    <p>The price for Premium <%= type %> is £10.00/Month</p>
     <p>7 day free trial! No charge for 7 days</p>
   </label>
   <% if flash[:error].present? %>
@@ -16,7 +16,7 @@
 </article>
 <div class="row">
   <div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
-    <div style="margin-bottom: 15px;">Get Premium via Paypal:</div>
+    <div style="margin-bottom: 15px;"><%= action_text %> via Paypal:</div>
     <%= form_tag Settings.paypal.form_url, method: "post", target: "_blank" do %>
       <!--<form action="<%= Settings.paypal.form_url %>" method="post" target="_blank">-->
 
@@ -64,13 +64,8 @@
   </div>
 
   <div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
-    <% unless @sponsorship %>
-        <% data_label = 'Upgrade to Premium' %>
-    <% else %>
-        <% data_label = 'Sponsor for Premium' %>
-    <% end %>
 
-    <div style="margin-bottom: 15px;">Get Premium via Credit/Debit Card:</div>
+    <div style="margin-bottom: 15px;"><%= action_text %> via Credit/Debit Card:</div>
     <%= form_tag subscriptions_path(plan: 'premium', user: @upgrade_user) do %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
@@ -79,7 +74,7 @@
                 data-currency="GBP"
                 data-locale="en-US"
                 data-name="Premium Membership"
-                data-label="<%= data_label %>"></script>
+                data-label="Subscribe"></script>
     <% end %>
 
   </div>
