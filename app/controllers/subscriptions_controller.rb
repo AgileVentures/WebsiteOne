@@ -1,10 +1,12 @@
 class SubscriptionsController < ApplicationController
 
   before_filter :authenticate_user!, only: [:edit, :update]
-  
+
   skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
+    @upgrade_user = params[:user_id]
+    @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
     render plan_name
   end
 
@@ -57,8 +59,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def detect_user
-    return User.find_by_id(params['item_number']) if paypal?
-    User.find_by_slug(params[:user])
+    slug = paypal? ? params['item_number'] : params[:user]
+    User.find_by(slug: slug)
   end
 
   def paypal?
