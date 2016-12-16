@@ -83,7 +83,7 @@ And(/^Paypal updates our endpoint after sponsoring Alice$/) do
   body['item_number'] = 'alice-jones'
 
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
-  post subscriptions_path, PAYPAL_REDIRECT_BODY
+  post subscriptions_path, body
 end
 
 And(/^Paypal updates our endpoint incorrectly$/) do
