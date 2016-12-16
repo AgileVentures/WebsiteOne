@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
 
   before_filter :authenticate_user!, only: [:edit, :update]
 
-  skip_before_filter :verify_authenticity_token, only: [:create]
+  skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
     render plan_name
