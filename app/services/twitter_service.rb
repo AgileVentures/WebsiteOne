@@ -14,7 +14,7 @@ module TwitterService
     unless valid_recording(hangout.yt_video_id) == 'Video not found'
       case hangout.category
         when 'Scrum'
-          tweet("#{hangout.broadcaster.split[0]} just hosted an online #scrum using #googlehangouts Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource")
+          TwitterService.tweet("#{hangout.broadcaster.split[0]} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource")
         when 'PairProgramming'
           tweet("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme")
       end
@@ -25,7 +25,7 @@ module TwitterService
 
   def self.tweet(message)
     if Settings.features.twitter.notifications.enabled == true
-      check_response twitter_client.update(message)
+      check_response twitter_client.update(message[0..139])
     else
       false
     end
