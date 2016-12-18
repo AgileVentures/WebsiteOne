@@ -37,3 +37,4 @@ twitter:
 paypal:
   form_url: 'https://www.paypal.com/cgi-bin/webscr'
   form_asset_root: 'https://www.paypalobjects.com'
+  email: 'sam@agileventures.org'

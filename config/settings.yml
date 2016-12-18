@@ -61,3 +61,4 @@ agile_bot_url: <%= ENV['AGILE_BOT_URL'] %>
 paypal:
   form_url: 'https://www.sandbox.paypal.com/cgi-bin/webscr'
   form_asset_root: 'https://www.sandbox.paypal.com'
+  email: 'sam-facilitator@agileventures.org'
