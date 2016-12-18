@@ -44,6 +44,7 @@ end
 Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
     @stripe_test_helper.create_plan(hash)
+    Plan.create(hash)
   end
 end
 
