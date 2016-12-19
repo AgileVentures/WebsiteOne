@@ -8,13 +8,14 @@ Feature: Subscribe Self to Premium
     Given the following plans exist
       | name        | id          |
       | Premium     | premium     |
+    And the email queue is clear
 
   Scenario: Pay by card
     Given I visit "subscriptions/new"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"
-    And the user should receive a "Welcome to AgileVentures Premium" email
+    And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
 
     # And my member page should show premium details # TODO IMPORTANT - require login?
 
@@ -22,7 +23,7 @@ Feature: Subscribe Self to Premium
     Given I visit "subscriptions/new"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint
-    Then the user should receive a "Welcome to AgileVentures Premium" email
+    Then "sam-buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium" email
     And I should see "Thanks, you're now an AgileVentures Premium Member!" in last_response
 
     # And my member page should show premium details # TODO IMPORTANT - will need hookup
@@ -34,11 +35,11 @@ Feature: Subscribe Self to Premium
     When I fill in appropriate card details for premium
     Then I should not see "Thanks, you're now an AgileVentures Premium Member!"
     And I should see "The card was declined"
-    And the user should not receive a "Welcome to AgileVentures Premium" email
+    And "random@morerandom.com" should not receive a "Welcome to AgileVentures Premium" email
 
   Scenario: Pay by PayPal, but encounter error
     Given I visit "subscriptions/new"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint incorrectly
-    Then the user should not receive a "Welcome to AgileVentures Premium" email
+    Then "sam-buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium" email
     And I should see "redirected" in last_response
