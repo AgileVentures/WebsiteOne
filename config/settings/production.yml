@@ -29,7 +29,7 @@ mailer:
     password: <%= ENV['SMTP_PASSWORD'] %>
     address: <%= ENV['SMTP_ADDRESS'] %>
     domain: <%= ENV['SMTP_DOMAIN'] %>
-    authentication: 'plain'`
+  authentication: 'plain'
   url_host: 'agileventures.org'
 
 disqus:
