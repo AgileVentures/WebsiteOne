@@ -84,7 +84,7 @@ describe 'TwitterService' do
 
       it 'tweets video link' do
         hangout.yt_video_id = 'new_video_id'
-        expect(TwitterService).to receive(:tweet).with("#{hangout.broadcaster.split[0]} just hosted an online #scrum using #googlehangouts Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource") { :success }
+        expect(TwitterService).to receive(:tweet).with("#{hangout.broadcaster.split[0]} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource") { :success }
         TwitterService.tweet_yt_link(hangout)
       end
     end

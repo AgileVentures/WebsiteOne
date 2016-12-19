@@ -255,6 +255,21 @@ Given(/^an event "([^"]*)"$/) do |event_name|
   @google_id = '123456789'
 end
 
+
+When(/^the HangoutConnection has pinged to indicate the event start, appropriate tweets will be sent$/) do
+  yt_tweet = "Alejandro just hosted an online #scrum Missed it? Catch the recording at youtu.be/11 #CodeForGood #opensource"
+  hangout_tweet = "#Scrum meeting with our #distributedteam is live on http://hangout.test Join in and learn about our #opensource #projects!"
+   expect(TwitterService.twitter_client).to receive(:update).with(hangout_tweet).and_call_original
+  expect(TwitterService.twitter_client).to receive(:update).with(yt_tweet).and_call_original
+
+  participants = {"0"=>{"id"=>"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=>"true", "hasCamera"=>"true", "hasAppEnabled"=>"true", "isBroadcaster"=>"true", "isInBroadcast"=>"true", "displayIndex"=>"0", "person"=>{"id"=>"108533475599002820142", "displayName"=>"Alejandro Babio", "image"=>{"url"=>"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=>"false"}, "locale"=>"en", "na"=>"false"}}
+  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
+  put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
+                               participants: participants, hangout_url: 'http://hangout.test',
+                               hoa_status: 'live', project_id: '1', category: 'Scrum',
+                               yt_video_id: '11'}
+end
+
 And(/^that the HangoutConnection has pinged to indicate the event start$/) do
   participants = {"0"=>{"id"=>"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=>"true", "hasCamera"=>"true", "hasAppEnabled"=>"true", "isBroadcaster"=>"true", "isInBroadcast"=>"true", "displayIndex"=>"0", "person"=>{"id"=>"108533475599002820142", "displayName"=>"Alejandro Babio", "image"=>{"url"=>"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=>"false"}, "locale"=>"en", "na"=>"false"}}
   header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
