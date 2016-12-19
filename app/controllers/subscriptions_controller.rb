@@ -8,7 +8,6 @@ class SubscriptionsController < ApplicationController
     @upgrade_user = params[:user_id]
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
     @plan = Plan.find_by(stripe_identifier: params[:plan])
-    byebug
     #render plan_name
   end
 
