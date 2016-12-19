@@ -5,6 +5,12 @@ class Mailer < ActionMailer::Base
     mail(to: email, subject: 'Welcome to AgileVentures Premium')
   end
 
+  def send_sponsor_premium_payment_complete(email, sponsor_email)
+    user = User.find_by(email: sponsor_email)
+    @sponsor = user.nil? ? sponsor_email : user.full_name
+    mail(to: email, subject: 'You\'ve been sponsored for AgileVentures Premium Membership')
+  end
+
   def send_premium_f2f_payment_complete(email)
     mail(to: email, subject: 'Welcome to AgileVentures Premium F2F')
   end
