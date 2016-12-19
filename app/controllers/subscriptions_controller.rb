@@ -7,7 +7,8 @@ class SubscriptionsController < ApplicationController
   def new
     @upgrade_user = params[:user_id]
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
-    render plan_name
+    @plan = Plan.find(params[:plan])
+    #render plan_name
   end
 
   def edit
@@ -127,27 +128,27 @@ class SubscriptionsController < ApplicationController
   end
 end
 
-class Plan
-  attr_reader :plan_id
-
-  def initialize(plan_id)
-    @plan_id = plan_id
-  end
-
-  def to_s
-    PLANS[plan_id]
-  end
-
-  def free_trial?
-    plan_id == 'premium'
-  end
-
-  private
-
-  PLANS = {
-      'premium' => 'Premium',
-      'premiummob' => 'Premium Mob',
-      'premiumf2f' => 'Premium F2F',
-      'premiumplus' => 'Premium Plus'
-  }
-end
+# class Plan
+#   attr_reader :plan_id
+#
+#   def initialize(plan_id)
+#     @plan_id = plan_id
+#   end
+#
+#   def to_s
+#     PLANS[plan_id]
+#   end
+#
+#   def free_trial?
+#     plan_id == 'premium'
+#   end
+#
+#   private
+#
+#   PLANS = {
+#       'premium' => 'Premium',
+#       'premiummob' => 'Premium Mob',
+#       'premiumf2f' => 'Premium F2F',
+#       'premiumplus' => 'Premium Plus'
+#   }
+# end
