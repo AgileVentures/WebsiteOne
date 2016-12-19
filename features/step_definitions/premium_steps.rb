@@ -48,6 +48,7 @@ end
 Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
     @stripe_test_helper.create_plan(hash)
+    hash[:stripe_identifier] = hash.delete("id")
     Plan.create(hash)
   end
 end
