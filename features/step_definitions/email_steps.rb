@@ -1,5 +1,5 @@
-Then(/^the user should receive a "([^"]*)" email$/) do |arg1|
-  check_email('random@random.com', negate, subject)
+Then(/^the user should( not)? receive a "([^"]*)" email$/) do |negate, subject|
+  check_email('random@morerandom.com', negate, subject)
 end
 
 And /^"(.*?)" should( not)? receive a "(.*?)" email$/ do |user_email, negate, subject|
