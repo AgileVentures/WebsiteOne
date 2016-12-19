@@ -12,6 +12,10 @@ Given(/^I fill in appropriate card details for premium mob/) do
   submit_card_details_for_button_with('Pay £25.00')
 end
 
+Given(/^I fill in appropriate card details for nonprofitbasic/) do
+  submit_card_details_for_button_with('Pay £10.00')
+end
+
 Given(/^I fill in appropriate card details for premium f2f/) do
   submit_card_details_for_button_with('Pay £50.00')
 end
