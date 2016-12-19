@@ -60,6 +60,10 @@ When /^I sign out$/ do
   page.driver.submit :delete, destroy_user_session_path, {}
 end
 
+When(/^I sign off$/) do
+  delete_user
+end
+
 When /^I sign up with valid user data$/ do
   create_visitor
   sign_up
@@ -401,4 +405,9 @@ When(/^I click Karma link for "([^"]*)"$/) do |user_name|
   user = User.find_by_first_name(user_name)
   link = user_path(user)
   page.find(:css, %Q{a[href="#{link}?tab=activity"]}).trigger('click')
+end
+
+Then(/^I should not exist as a user$/) do
+  user = User.find_by(first_name: 'Anders')
+  expect(user).to be_nil
 end

@@ -2,11 +2,12 @@ class SubscriptionsController < ApplicationController
 
   before_filter :authenticate_user!, only: [:edit, :update]
 
-  def new
-    render plan_name
-  end
+  skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
-  def paypal
+  def new
+    @upgrade_user = params[:user_id]
+    @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
+    render plan_name
   end
 
   def edit
@@ -25,14 +26,16 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_slug(params[:user])
-    @plan = Plan.new params[:plan]
+    @user = detect_user
+    @plan = detect_plan
     @sponsored_user = sponsored_user?
 
-    update_user_to_premium(create_customer, @user)
+    create_stripe_customer unless paypal?
+
+    update_user_to_premium(@user)
     send_acknowledgement_email
 
-  rescue Stripe::StripeError => e
+  rescue StandardError => e
     flash[:error] = e.message
     redirect_to new_subscription_path
   end
@@ -50,8 +53,22 @@ class SubscriptionsController < ApplicationController
 
   private
 
-  def create_customer
-    Stripe::Customer.create(
+  def detect_plan
+    return Plan.new params['item_name'].downcase if paypal?
+    Plan.new params[:plan]
+  end
+
+  def detect_user
+    slug = paypal? ? params['item_number'] : params[:user]
+    User.find_by(slug: slug)
+  end
+
+  def paypal?
+    params['item_number']
+  end
+
+  def create_stripe_customer
+    @stripe_customer = Stripe::Customer.create(
         email: params[:stripeEmail],
         source: stripe_token(params),
         plan: @plan.plan_id
@@ -70,10 +87,14 @@ class SubscriptionsController < ApplicationController
     StripeMock.create_test_helper.generate_card_token
   end
 
-  def update_user_to_premium(stripe_customer, user_for_update)
-    user_for_update ||= current_user
-    return unless user_for_update
-    UpgradeUserToPremium.with(user_for_update, Time.now, stripe_customer.id, PaymentSource::Stripe, plan_class)
+  def update_user_to_premium(user)
+    user ||= current_user
+    return unless user
+    if paypal?
+      UpgradeUserToPremium.with(user, Time.now, params['payer_id'], PaymentSource::PayPal, plan_class)
+    else
+      UpgradeUserToPremium.with(user, Time.now, @stripe_customer.id, PaymentSource::Stripe, plan_class)
+    end
   end
 
   def plan_name
@@ -89,7 +110,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def send_acknowledgement_email
-    Mailer.send(acknowledgement_email_template, params[:stripeEmail]).deliver_now
+    if paypal?
+      Mailer.send(acknowledgement_email_template, params['payer_email']).deliver_now
+    else
+      Mailer.send(acknowledgement_email_template, params[:stripeEmail]).deliver_now
+    end
   end
 
   def acknowledgement_email_template
