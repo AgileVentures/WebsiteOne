@@ -1,7 +1,20 @@
-And /^(?:the user|I) should( not)? receive a "(.*?)" email$/ do |negate, subject|
+Then(/^I should( not)? receive a "([^"]*)" email$/) do |negate, subject|
+  check_email(nil, negate, subject)
+end
+
+Then(/^the user should( not)? receive a "([^"]*)" email$/) do |negate, subject|
+  check_email('random@morerandom.com', negate, subject)
+end
+
+And /^"(.*?)" should( not)? receive a "(.*?)" email$/ do |user_email, negate, subject|
+  check_email(user_email, negate, subject)
+end
+
+def check_email(email, negate, subject)
   unless negate
     expect(ActionMailer::Base.deliveries.size).to eq 1
     expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
+    expect(ActionMailer::Base.deliveries[0].to).to include(email) unless email.nil?
   else
     expect(ActionMailer::Base.deliveries.size).to eq 0
   end
