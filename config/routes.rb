@@ -6,7 +6,6 @@ WebsiteOne::Application.routes.draw do
   resources :activities
   resources :newsletters
 
-  match '/subscriptions/paypal' => 'subscriptions#paypal', :via => [:get]
   match '/subscriptions/upgrade' => 'subscriptions#upgrade', :via => [:put]
   resources :subscriptions
 
@@ -14,6 +13,7 @@ WebsiteOne::Application.routes.draw do
   resources :users, :only => [:index, :show], :format => false do
     member do
       patch :add_status
+      delete :destroy
     end
   end
 
