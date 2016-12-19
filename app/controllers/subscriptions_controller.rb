@@ -38,6 +38,7 @@ class SubscriptionsController < ApplicationController
 
   rescue StandardError => e
     flash[:error] = e.message
+    byebug
     redirect_to new_subscription_path
   end
 
@@ -56,7 +57,7 @@ class SubscriptionsController < ApplicationController
 
   def detect_plan
     return Plan.new params['item_name'].downcase if paypal?
-    Plan.new params[:plan]
+    Plan.find_by(stripe_identifier: params[:plan])
   end
 
   def detect_user
@@ -72,7 +73,7 @@ class SubscriptionsController < ApplicationController
     @stripe_customer = Stripe::Customer.create(
         email: params[:stripeEmail],
         source: stripe_token(params),
-        plan: @plan.plan_id
+        plan: @plan.stripe_identifier
     )
   end
 
