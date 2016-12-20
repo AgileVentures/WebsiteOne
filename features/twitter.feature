@@ -12,3 +12,4 @@ Feature: Tweeting Live Events
 
   Scenario: Event going live causes tweets of hangout link and youtube link to be sent
     When the HangoutConnection has pinged to indicate the event start, appropriate tweets will be sent
+

@@ -25,14 +25,6 @@ Feature: Charge Users Money
 
   # following four could be converted to scenario outline
 
-  Scenario: Sign up for premium mob membership
-    Given I visit "/subscriptions/new?plan=premiummob"
-    And I should not see "Sign Me Up For Premium!"
-    And I click "Subscribe" within the card_section
-    When I fill in appropriate card details for premium mob
-    Then I should see "Thanks, you're now an AgileVentures Premium Mob Member!"
-    And the user should receive a "Welcome to AgileVentures Premium Mob" email
-
   Scenario: Sign up for premium f2f membership
     Given I visit "/subscriptions/new?plan=premiumf2f"
     And I should not see "Sign Me Up For Premium!"
