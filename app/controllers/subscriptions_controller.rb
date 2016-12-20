@@ -7,7 +7,8 @@ class SubscriptionsController < ApplicationController
   def new
     @upgrade_user = params[:user_id]
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
-    @plan = Plan.find_by(stripe_identifier: params[:plan])
+    plan = params[:plan] || 'premium'
+    @plan = Plan.find_by(stripe_identifier: plan)
     #render plan_name
   end
 
@@ -38,7 +39,6 @@ class SubscriptionsController < ApplicationController
 
   rescue StandardError => e
     flash[:error] = e.message
-    byebug
     redirect_to new_subscription_path
   end
 

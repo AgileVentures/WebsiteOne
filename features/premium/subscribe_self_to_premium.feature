@@ -6,8 +6,8 @@ Feature: Subscribe Self to Premium
 
   Background:
     Given the following plans exist
-      | name        | id          |
-      | Premium     | premium     |
+      | name        | id          |  amount |
+      | Premium     | premium     |  1000   |
     And the email queue is clear
 
   Scenario: Pay by card

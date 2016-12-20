@@ -6,11 +6,11 @@ Feature: Charge Users Money
 
   Background:
     Given the following plans exist
-      | name        | id          |
-      | Premium     | premium     |
-      | PremiumMob  | premiummob  |
-      | PremiumF2F  | premiumf2f  |
-      | PremiumPlus | premiumplus |
+      | name         | id          | amount |
+      | Premium      | premium     | 1000   |
+      | Premium Mob  | premiummob  | 2500   |
+      | Premium F2F  | premiumf2f  | 5000   |
+      | Premium Plus | premiumplus | 10000  |
     And the following pages exist
       | title           | body                    |
       | About Us        | Agile Ventures          |
@@ -28,7 +28,7 @@ Feature: Charge Users Money
   Scenario: Sign up for premium mob membership
     Given I visit "/subscriptions/new?plan=premiummob"
     And I should not see "Sign Me Up For Premium!"
-    And I click "Sign Me Up For Premium Mob!"
+    And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium mob
     Then I should see "Thanks, you're now an AgileVentures Premium Mob Member!"
     And the user should receive a "Welcome to AgileVentures Premium Mob" email
@@ -36,7 +36,7 @@ Feature: Charge Users Money
   Scenario: Sign up for premium f2f membership
     Given I visit "/subscriptions/new?plan=premiumf2f"
     And I should not see "Sign Me Up For Premium!"
-    And I click "Sign Me Up For Premium F2F!"
+    And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium f2f
     Then I should see "Thanks, you're now an AgileVentures Premium F2F Member!"
     And the user should receive a "Welcome to AgileVentures Premium F2F" email
@@ -44,7 +44,7 @@ Feature: Charge Users Money
   Scenario: Sign up for premium plus membership
     Given I visit "/subscriptions/new?plan=premiumplus"
     And I should not see "Sign Me Up For Premium!"
-    And I click "Sign Me Up For Premium Plus!"
+    And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium plus
     Then I should see "Thanks, you're now an AgileVentures Premium Plus Member!"
     And the user should receive a "Welcome to AgileVentures Premium Plus" email

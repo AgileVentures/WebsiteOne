@@ -4,6 +4,7 @@ class CreatePlans < ActiveRecord::Migration
       t.string :name
       t.integer :free_trial
       t.string :stripe_identifier
+      t.integer :amount
 
       t.timestamps null: false
     end
