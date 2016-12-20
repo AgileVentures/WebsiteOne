@@ -6,11 +6,11 @@ Feature: Subscribe to NonProfit Basic Support
 
   Background:
     Given the following plans exist
-      | name                    | id             |
-      | NonProfit Basic Support | nonprofitbasic |
+      | name                    | id             | amount |
+      | NonProfit Basic Support | nonprofitbasic | 2000   |
 
   Scenario: Sign up for nonprofitbasic  support
     Given I visit "subscriptions/new?plan=nonprofitbasic"
-    And I click "Sign Me Up For NonProfit Basic Support!"
+    And I click "Subscribe" within the card_section
     When I fill in appropriate card details for nonprofitbasic
     Then I should see "Thanks, you're now an AgileVentures NonProfit Basic Support Member!"
