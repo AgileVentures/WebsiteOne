@@ -56,8 +56,8 @@ class SubscriptionsController < ApplicationController
   private
 
   def detect_plan
-    return Plan.new params['item_name'].downcase if paypal?
-    Plan.find_by(stripe_identifier: params[:plan])
+    id = paypal? ? params['item_name'].downcase : params[:plan]
+    Plan.find_by(stripe_identifier: id)
   end
 
   def detect_user

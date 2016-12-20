@@ -13,4 +13,4 @@ Feature: Subscribe to NonProfit Basic Support
     Given I visit "subscriptions/new?plan=nonprofitbasic"
     And I click "Sign Me Up For NonProfit Basic Support!"
     When I fill in appropriate card details for nonprofitbasic
-    Then I should see "Thanks, you now have AgileVentures NonProfit Basic Support!"
+    Then I should see "Thanks, you're now an AgileVentures NonProfit Basic Support Member!"
