@@ -6,9 +6,9 @@ Feature: Allow Users to Upgrade Membership
 
   Background:
     Given the following plans exist
-      | name    | id      |
-      | Premium | premium |
-      | PremiumPlus | premiumplus |
+      | name         | id          | amount |
+      | Premium      | premium     | 1000   |
+      | Premium Plus | premiumplus | 10000  |
     And the following users exist
       | first_name | last_name | email                  | github_profile_url         | last_sign_in_ip |
       | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |

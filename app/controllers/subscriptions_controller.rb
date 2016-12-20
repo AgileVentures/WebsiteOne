@@ -9,7 +9,6 @@ class SubscriptionsController < ApplicationController
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
     plan = params[:plan] || 'premium'
     @plan = Plan.find_by(stripe_identifier: plan)
-    #render plan_name
   end
 
   def edit
