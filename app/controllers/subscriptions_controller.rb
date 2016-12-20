@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
 
   rescue StandardError => e
     flash[:error] = e.message
-    redirect_to new_subscription_path
+    redirect_to new_subscription_path(plan: (@plan.try(:stripe_identifier) || 'premium'))
   end
 
   def update
@@ -55,7 +55,7 @@ class SubscriptionsController < ApplicationController
   private
 
   def detect_plan
-    id = paypal? ? params['item_name'].downcase : params[:plan]
+    id = paypal? ? params['item_name'].downcase.gsub(' ','_') : params[:plan]
     Plan.find_by(stripe_identifier: id)
   end
 
@@ -127,28 +127,3 @@ class SubscriptionsController < ApplicationController
     "send_#{plan_name}_payment_complete".to_sym
   end
 end
-
-# class Plan
-#   attr_reader :plan_id
-#
-#   def initialize(plan_id)
-#     @plan_id = plan_id
-#   end
-#
-#   def to_s
-#     PLANS[plan_id]
-#   end
-#
-#   def free_trial?
-#     plan_id == 'premium'
-#   end
-#
-#   private
-#
-#   PLANS = {
-#       'premium' => 'Premium',
-#       'premiummob' => 'Premium Mob',
-#       'premiumf2f' => 'Premium F2F',
-#       'premiumplus' => 'Premium Plus'
-#   }
-# end

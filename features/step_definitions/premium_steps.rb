@@ -82,6 +82,13 @@ And(/^Paypal updates our endpoint$/) do
   post subscriptions_path, body
 end
 
+And(/^Paypal updates our endpoint for premium mob$/) do
+  body = PAYPAL_REDIRECT_BODY.clone
+  body['item_name'] = 'Premium Mob'
+  body['payer_email'] = 'sam-buyer@agileventures.org'
+  post subscriptions_path, body
+end
+
 And(/^Paypal updates our endpoint after sponsoring Alice$/) do
   body = PAYPAL_REDIRECT_BODY.clone
   body['item_name'] = 'Premium'

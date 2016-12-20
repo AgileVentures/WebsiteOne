@@ -1,12 +1,12 @@
 <article>
   <h1>Agile Ventures <%= @plan.name %> <%= type %></h1>
   <br/>
-  <a href='/<%= @plan.name.downcase %>'>Further details</a>
+  <a href='/<%= @plan.name.downcase.gsub(' ','_') %>'>Further details</a>
   </p>
   <label class="amount">
-    <p>The price for <%= @plan.name %> <%= type %> is £10.00/Month</p>
-    <% if @plan.free_trial%>
-       <p>7 day free trial! No charge for 7 days</p>
+    <p>The price for <%= @plan.name %> <%= type %> is £<%= number_to_currency(@plan.amount / 100.0, unit: '') %>/Month</p>
+    <% if @plan.free_trial > 0 %>
+       <p><%= @plan.free_trial %> day free trial! No charge for <%= @plan.free_trial %> days</p>
     <% end %>
   </label>
   <% if flash[:error].present? %>
@@ -18,7 +18,7 @@
 </article>
 <div class="row">
   <div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
-    <div style="margin-bottom: 15px;"><%= action_text %> via Paypal:</div>
+    <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Paypal:</div>
     <%= form_tag Settings.paypal.form_url, method: "post", target: "_blank" do %>
         <!--<form action="<%= Settings.paypal.form_url %>" method="post" target="_blank">-->
 
@@ -39,7 +39,7 @@
         <input type="hidden" name="t1" value="D">
 
         <!-- Set the terms of the regular subscription. -->
-        <input type="hidden" name="a3" value="<%= @plan.amount / 100.0  %>">
+        <input type="hidden" name="a3" value="<%= number_to_currency(@plan.amount / 100.0, unit: '')  %>">
         <input type="hidden" name="p3" value="1">
         <input type="hidden" name="t3" value="M">
 
@@ -67,7 +67,7 @@
 
   <div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
 
-    <div style="margin-bottom: 15px;"><%= action_text %> via Credit/Debit Card:</div>
+    <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Credit/Debit Card:</div>
     <%= form_tag subscriptions_path(plan: @plan.stripe_identifier, user: @upgrade_user) do %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
