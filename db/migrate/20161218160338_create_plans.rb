@@ -3,7 +3,7 @@ class CreatePlans < ActiveRecord::Migration
     create_table :plans do |t|
       t.string :name
       t.integer :free_trial_length_days
-      t.string :stripe_identifier
+      t.string :third_party_identifier
       t.integer :amount
 
       t.timestamps null: false

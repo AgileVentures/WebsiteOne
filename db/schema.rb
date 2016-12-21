@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20161218160338) do
   create_table "plans", force: :cascade do |t|
     t.string   "name"
     t.integer  "free_trial_length_days"
-    t.string   "stripe_identifier"
+    t.string   "third_party_identifier"
     t.integer  "amount"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

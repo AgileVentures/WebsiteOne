@@ -68,7 +68,7 @@
   <div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
 
     <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Credit/Debit Card:</div>
-    <%= form_tag subscriptions_path(plan: @plan.stripe_identifier, user: @upgrade_user) do %>
+    <%= form_tag subscriptions_path(plan: @plan.third_party_identifier, user: @upgrade_user) do %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                 data-description="A month's subscription"
