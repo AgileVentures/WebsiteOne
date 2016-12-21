@@ -1,10 +1,10 @@
 <article>
-  <h1>Agile Ventures Premium Membership</h1>
+  <h1>Agile Ventures Premium <%= type %></h1>
   <br/>
   <a href='/premium'>Further details</a>
   </p>
   <label class="amount">
-    <p>The price for Premium Membership is £10.00/Month</p>
+    <p>The price for Premium <%= type %> is £10.00/Month</p>
     <p>7 day free trial! No charge for 7 days</p>
   </label>
   <% if flash[:error].present? %>
@@ -16,18 +16,19 @@
 </article>
 <div class="row">
   <div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
-    <div style="margin-bottom: 15px;">Get Premium via Paypal:</div>
-      <form action="<%= Settings.paypal.form_url %>" method="post" target="_blank">
+    <div style="margin-bottom: 15px;"><%= action_text %> via Paypal:</div>
+    <%= form_tag Settings.paypal.form_url, method: "post", target: "_blank" do %>
+      <!--<form action="<%= Settings.paypal.form_url %>" method="post" target="_blank">-->
 
       <!-- Identify your business so that you can collect the payments. -->
-      <input type="hidden" name="business" value="sam-facilitator@agileventures.org">
+      <input type="hidden" name="business" value="<%= Settings.paypal.email%>">
 
       <!-- Specify a Subscribe button. -->
       <input type="hidden" name="cmd" value="_xclick-subscriptions">
 
       <!-- Identify the subscription. -->
       <input type="hidden" name="item_name" value="Premium">
-      <input type="hidden" name="item_number" value="<%= current_user.try(:id) || 'not logged in' %>">
+      <input type="hidden" name="item_number" value="<%= @upgrade_user || 'not logged in' %>">
 
       <!-- Set the terms of the 1st trial period. -->
       <input type="hidden" name="currency_code" value="GBP">
@@ -59,13 +60,13 @@
              alt="Subscribe">
       <img alt="" width="1" height="1"
            src="<%= Settings.paypal.form_asset_root %>/en_GB/i/scr/pixel.gif" >
-    </form>
+    <% end %>
   </div>
 
   <div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
 
-    <div style="margin-bottom: 15px;">Get Premium via Credit/Debit Card:</div>
-    <%= form_tag subscriptions_path(plan: 'premium') do %>
+    <div style="margin-bottom: 15px;"><%= action_text %> via Credit/Debit Card:</div>
+    <%= form_tag subscriptions_path(plan: 'premium', user: @upgrade_user) do %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                 data-description="A month's subscription"

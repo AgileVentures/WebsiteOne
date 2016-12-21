@@ -2,9 +2,11 @@ class SubscriptionsController < ApplicationController
 
   before_filter :authenticate_user!, only: [:edit, :update]
 
-  skip_before_filter :verify_authenticity_token, only: [:create]
+  skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
+    @upgrade_user = params[:user_id]
+    @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
     render plan_name
   end
 
@@ -57,8 +59,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def detect_user
-    return User.find_by_id(params['item_number']) if paypal?
-    User.find_by_slug(params[:user])
+    slug = paypal? ? params['item_number'] : params[:user]
+    User.find_by(slug: slug)
   end
 
   def paypal?
@@ -108,11 +110,16 @@ class SubscriptionsController < ApplicationController
   end
 
   def send_acknowledgement_email
-    if paypal?
-      Mailer.send(acknowledgement_email_template, params['payer_email']).deliver_now
+    payer_email = paypal? ? params['payer_email'] : params[:stripeEmail]
+    if sponsored_user?
+      Mailer.send(sponsor_acknowledgement_email_template, @user.email, payer_email).deliver_now
     else
-      Mailer.send(acknowledgement_email_template, params[:stripeEmail]).deliver_now
+      Mailer.send(acknowledgement_email_template, payer_email).deliver_now
     end
+  end
+
+  def sponsor_acknowledgement_email_template
+    "send_sponsor_#{plan_name}_payment_complete".to_sym
   end
 
   def acknowledgement_email_template
