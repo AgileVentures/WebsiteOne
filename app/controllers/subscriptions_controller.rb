@@ -113,17 +113,10 @@ class SubscriptionsController < ApplicationController
   def send_acknowledgement_email
     payer_email = paypal? ? params['payer_email'] : params[:stripeEmail]
     if sponsored_user?
-      Mailer.send(sponsor_acknowledgement_email_template, @user.email, payer_email).deliver_now
+      Mailer.send_sponsor_premium_payment_complete(@user.email, payer_email).deliver_now
     else
-      Mailer.send(acknowledgement_email_template, payer_email).deliver_now
+      Mailer.send_premium_payment_complete(@plan, payer_email).deliver_now
     end
   end
 
-  def sponsor_acknowledgement_email_template
-    "send_sponsor_#{plan_name}_payment_complete".to_sym
-  end
-
-  def acknowledgement_email_template
-    "send_#{plan_name}_payment_complete".to_sym
-  end
 end
