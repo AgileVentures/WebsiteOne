@@ -41,6 +41,11 @@
 # Ignore application configuration
 #/config/application.yml
 .env
+.env_develop_server
+
+# Ignore Railroady docs
+
+doc/**/*
 
 # Versioning
 .rvmrc.env
