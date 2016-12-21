@@ -15,6 +15,14 @@ Feature: Tweeting Live Events
     When the HangoutConnection has pinged to indicate the event start
     Then the youtube link will not be sent
 
+  Scenario: Event going live without valid live stream will have youtube link tweeted later when live
+    Given the live stream has not started
+    When the HangoutConnection has pinged to indicate the event start
+    Then the youtube link will not be sent
+    And the live stream has started
+    And the HangoutConnection has pinged to indicate the event continuing
+    Then the youtube link will be sent
+
   Scenario: Event going live without valid live stream still causes hangout link to be tweeted
     Given the live stream has not started
     When the HangoutConnection has pinged to indicate the event start
