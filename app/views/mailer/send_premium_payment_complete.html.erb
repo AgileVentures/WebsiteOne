@@ -6,11 +6,13 @@
 <body>
 <h3>Welcome!</h3>
 
-<p><strong>Thanks for signing up for AgileVentures Premium!</strong></p>
+<p><strong>Thanks for signing up for AgileVentures <% @plan.name %>!</strong></p>
 
-<p>Your seven day free trial has now started.  Your card will not be charged until seven days have passed.</p>
+<% if @plan.free_trial? %>
+    <p>Your <%= @plan.free_trial_length_days %> day free trial has now started.  You will not be charged until <%= @plan.free_trial_length_days %> days have passed.</p>
+<% end %>
 
-<p>An AgileVentures mentor will be in touch shortly to help you receive all of your Premium membership benefits.</p>
+<p>An AgileVentures mentor will be in touch shortly to help you receive all of your <% @plan.name %> membership benefits.</p>
 
 <p>If you need help at any time, please contact us by replying to this message.
   Similarly, if you ever have any questions then please do not hesitate to send us a message or email</p>

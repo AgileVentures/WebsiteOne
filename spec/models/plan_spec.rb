@@ -7,6 +7,6 @@ RSpec.describe Plan, type: :model do
       plan = Plan.new(free_trial_length_days: 6)
       expect(plan).to be_free_trial
     end
-end
+  end
 
 end
