@@ -46,6 +46,276 @@ http_interactions:
     http_version: 
   recorded_at: Tue, 28 Jun 2016 13:38:22 GMT
 - request:
+<<<<<<< HEAD
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=11&maxResults=50&part=contentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Vary:
+      - Origin,Accept-Encoding
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 14 Nov 2016 12:34:40 GMT
+      Expires:
+      - Mon, 14 Nov 2016 12:34:40 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="36,35,34"
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "usageLimits",
+            "reason": "dailyLimitExceededUnreg",
+            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
+            "extendedHelp": "https://code.google.com/apis/console"
+           }
+          ],
+          "code": 403,
+          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
+         }
+        }
+    http_version: 
+  recorded_at: Mon, 14 Nov 2016 12:34:43 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=11&maxResults=50&part=contentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Vary:
+      - Origin,Accept-Encoding
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 14 Nov 2016 12:34:43 GMT
+      Expires:
+      - Mon, 14 Nov 2016 12:34:43 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="36,35,34"
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "usageLimits",
+            "reason": "dailyLimitExceededUnreg",
+            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
+            "extendedHelp": "https://code.google.com/apis/console"
+           }
+          ],
+          "code": 403,
+          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
+         }
+        }
+    http_version: 
+  recorded_at: Mon, 14 Nov 2016 12:34:46 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=11&maxResults=50&part=contentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Vary:
+      - Origin,Accept-Encoding
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 14 Nov 2016 12:34:56 GMT
+      Expires:
+      - Mon, 14 Nov 2016 12:34:56 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="36,35,34"
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "usageLimits",
+            "reason": "dailyLimitExceededUnreg",
+            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
+            "extendedHelp": "https://code.google.com/apis/console"
+           }
+          ],
+          "code": 403,
+          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
+         }
+        }
+    http_version: 
+  recorded_at: Mon, 14 Nov 2016 12:34:59 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=11&maxResults=50&part=contentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Vary:
+      - Origin,Accept-Encoding
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 14 Nov 2016 12:35:19 GMT
+      Expires:
+      - Mon, 14 Nov 2016 12:35:19 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="36,35,34"
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "usageLimits",
+            "reason": "dailyLimitExceededUnreg",
+            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
+            "extendedHelp": "https://code.google.com/apis/console"
+           }
+          ],
+          "code": 403,
+          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
+         }
+        }
+    http_version: 
+  recorded_at: Mon, 14 Nov 2016 12:35:22 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?id=11&key=AIzaSyAYXJjUwwDKVEliqBxQ8AMbk7ocWJ-z4zw&maxResults=50&part=contentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Mon, 14 Nov 2016 12:41:25 GMT
+      Date:
+      - Mon, 14 Nov 2016 12:41:25 GMT
+      Cache-Control:
+      - private, max-age=300, must-revalidate, no-transform
+      Etag:
+      - '"sZ5p5Mo8dPpfIzLYQBF8QIQJym0/Rk41fm-2TD0VG1yv0-bkUvcBi9s"'
+      Vary:
+      - Origin
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+=======
     method: post
     uri: https://api.twitter.com/1.1/statuses/update.json
     body:
@@ -99,10 +369,35 @@ http_interactions:
       - read-write
       X-Connection-Hash:
       - e60a2343778881a8d6d3d0c4f919f116
+>>>>>>> e720b10806177f0589ee5b27d41eff9e9feaeeb4
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
       - SAMEORIGIN
+<<<<<<< HEAD
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '189'
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="36,35,34"
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "kind": "youtube#videoListResponse",
+         "etag": "\"sZ5p5Mo8dPpfIzLYQBF8QIQJym0/Rk41fm-2TD0VG1yv0-bkUvcBi9s\"",
+         "pageInfo": {
+          "totalResults": 0,
+          "resultsPerPage": 0
+         },
+         "items": []
+        }
+    http_version: 
+  recorded_at: Mon, 14 Nov 2016 12:41:28 GMT
+=======
       X-Response-Time:
       - '149'
       X-Transaction:
@@ -125,4 +420,5 @@ http_interactions:
         Time (US & Canada)","geo_enabled":false,"verified":false,"statuses_count":59,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"000000","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/742356635528626176\/0CK3ZufF_normal.jpg","profile_link_color":"19CF86","profile_sidebar_border_color":"000000","profile_sidebar_fill_color":"000000","profile_text_color":"000000","profile_use_background_image":false,"has_extended_profile":true,"default_profile":false,"default_profile_image":false,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":null,"is_quote_status":false,"retweet_count":0,"favorite_count":0,"favorited":false,"retweeted":false,"possibly_sensitive":false,"lang":"en"}'
     http_version: 
   recorded_at: Wed, 07 Dec 2016 13:08:12 GMT
+>>>>>>> e720b10806177f0589ee5b27d41eff9e9feaeeb4
 recorded_with: VCR 3.0.1

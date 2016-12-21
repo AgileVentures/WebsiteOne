@@ -16,7 +16,7 @@ module TwitterService
         when 'Scrum'
           TwitterService.tweet("#{hangout.broadcaster.split[0]} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource")
         when 'PairProgramming'
-          TwitterService.tweet("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme")
+          tweet("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme")
       end
     end
   end

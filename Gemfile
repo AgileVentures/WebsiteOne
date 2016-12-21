@@ -60,6 +60,7 @@ gem 'uglifier'
 gem 'utf8-cleaner'
 gem 'verbs'
 gem 'will_paginate-bootstrap'
+gem 'yt'
 gem 'yui-compressor'
 
 group :test do

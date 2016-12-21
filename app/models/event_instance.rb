@@ -48,7 +48,25 @@ class EventInstance < ActiveRecord::Base
     self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' }
   end
 
+  def has_video?
+    # The second check is a hack on the gem to prevent having to rescue an error.
+    # I might try opening a PR to the gem itself for this
+    min_plausible_vid_length = 2
+    self.yt_video_id? && video.content_details.any? && video.duration > min_plausible_vid_length
+  end
+
+  def yt_video_id=(video_id)
+    super
+    self.video = Yt::Video.new id: video_id
+  end
+
+  def video
+    @video ||= Yt::Video.new id: yt_video_id
+  end
+
   private
+
+  attr_writer :video
 
   def manually_updated_event_not_finished?
     url_set_directly && within_current_event_duration?
