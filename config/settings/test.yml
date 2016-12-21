@@ -3,10 +3,10 @@ features:
     notifications:
       enabled: false
     invites:
-      enabled: false
+      enabled: true
   twitter:
     hangout_notifications:
-      enabled: false
+      enabled: true
     notifications:
       enabled: true
 
@@ -18,11 +18,7 @@ mailer:
 
 privileged_users: 'chesa@example.com, random@random.com' 
 
-twitter:
-  consumer_key: asdf
-  consumer_secret: qwerty
-  access_token: lkjh
-  access_token_secret: mnbv
-
+hangouts:
+  app_id: '10095526298'
 
 agile_bot_url: https://agile-bot.herokuapp.com

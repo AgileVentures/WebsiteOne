@@ -5,6 +5,8 @@ describe 'TwitterService' do
     before :each do
       Settings.features.twitter.notifications.enabled = true
       stub_request(:post, /api\.twitter\.com/).to_return(:status => 200, :body => '{ "id": 243145735212777472, "text": "hello world" }')
+      stub_request(:get, 'www.googleapis.com').to_return(:status => 200 )
+      #https://www.googleapis.com/youtube/v3/videos?id=new_video_id&key=AIzaSyDbyoFJgEUyqqz8qmv7n_-nXVxCdUAaEOo&maxResults=50&part=contentDetails
     end
 
     let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil, yt_video_id: nil) }
@@ -49,6 +51,12 @@ describe 'TwitterService' do
         it 'tweets video link with project title' do
           hangout.yt_video_id = 'new_video_id'
           expect(TwitterService).to receive(:tweet).with("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme") { :success }
+          TwitterService.tweet_yt_link(hangout)
+        end
+
+        it 'does not tweet video link if video is invalid' do
+          hangout.yt_video_id = nil
+          expect(TwitterService).not_to receive(:tweet).with("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme") { :success }
           TwitterService.tweet_yt_link(hangout)
         end
       end

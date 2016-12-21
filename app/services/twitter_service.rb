@@ -53,6 +53,9 @@ module TwitterService
     unless code == ''
       uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
       Net::HTTP.get(uri)
+      video = Yt::Video.new id: code
+      return if video && video.duration > 2 # && video.content_details.any?
+      'Video not found'
     else
       'Video not found'
     end

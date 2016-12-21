@@ -13,3 +13,9 @@ hangouts:
   app_id: '10095526298'
 # comma separated list
 privileged_users: "random@random.com"
+
+twitter:
+  consumer_key: aaa
+  consumer_secret: bbb
+  access_token_token: ccc
+  access_secret: ddd
