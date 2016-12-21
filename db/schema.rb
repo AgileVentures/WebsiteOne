@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20161223092205) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.integer  "user_id"
+    t.integer  "plan_id"
   end
 
   create_table "taggings", force: :cascade do |t|
