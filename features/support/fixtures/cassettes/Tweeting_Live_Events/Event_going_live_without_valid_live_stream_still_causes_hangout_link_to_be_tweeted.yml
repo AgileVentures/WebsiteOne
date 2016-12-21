@@ -45,4 +45,52 @@ http_interactions:
       string: No longer available
     http_version: 
   recorded_at: Wed, 21 Dec 2016 13:02:34 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/1.1/statuses/update.json
+    body:
+      encoding: UTF-8
+      string: status=%23Scrum+meeting+with+our+%23distributedteam+is+live+on+http%3A%2F%2Fhangout.test+Join+in+and+learn+about+our+%23opensource+%23projects%21
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Twitter Ruby Gem 5.11.0
+      Authorization:
+      - OAuth oauth_consumer_key="twitter consumer key", oauth_nonce="4ac5a0493e2ea51656f7b090fb392296",
+        oauth_signature="PkTbRQMFYDmQMkNnRIl%2BLoiTiY0%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1482342325", oauth_token="twitter consumer key", oauth_version="1.0"
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 401
+      message: Authorization Required
+    headers:
+      Content-Length:
+      - '87'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 21 Dec 2016 17:45:26 GMT
+      Server:
+      - tsa_f
+      Set-Cookie:
+      - guest_id=v1%3A148234232661636487; Domain=.twitter.com; Path=/; Expires=Fri,
+        21-Dec-2018 17:45:26 UTC
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Connection-Hash:
+      - b5e7c1683125c41f9ab59b3bb1a76dd4
+      X-Response-Time:
+      - '100'
+      X-Tsa-Request-Body-Time:
+      - '1'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"errors":[{"code":89,"message":"Invalid or expired token."}]}'
+    http_version: 
+  recorded_at: Wed, 21 Dec 2016 17:45:26 GMT
 recorded_with: VCR 3.0.1
