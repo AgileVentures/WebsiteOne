@@ -5,7 +5,10 @@ Feature: Migrate the stripe data
   I want to migrate to the new data structure
 
   Background:
-    Given the following users exist
+    Given the following plans exist
+      | name         | id          | amount | free_trial_length_days |
+      | Premium      | premium     | 1000   | 7                      |
+    And the following users exist
       | first_name | last_name | email                  | stripe_customer |
       | Alice      | Jones     | alice@btinternet.co.uk | 345rfyuh        |
 
