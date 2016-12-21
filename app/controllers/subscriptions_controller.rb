@@ -55,7 +55,7 @@ class SubscriptionsController < ApplicationController
   private
 
   def detect_plan
-    id = paypal? ? params['item_name'].downcase.gsub(' ','') : params[:plan]
+    id = paypal? ? params['item_name'].downcase.delete(' ') : params[:plan]
     Plan.find_by(third_party_identifier: id)
   end
 
