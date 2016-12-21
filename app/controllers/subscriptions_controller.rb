@@ -8,7 +8,7 @@ class SubscriptionsController < ApplicationController
     @upgrade_user = params[:user_id]
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
     plan = params[:plan] || 'premium'
-    @plan = Plan.find_by(stripe_identifier: plan)
+    @plan = Plan.find_by(third_party_identifier: plan)
   end
 
   def edit
@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
 
   rescue StandardError => e
     flash[:error] = e.message
-    redirect_to new_subscription_path(plan: (@plan.try(:stripe_identifier) || 'premium'))
+    redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))
   end
 
   def update
@@ -56,7 +56,7 @@ class SubscriptionsController < ApplicationController
 
   def detect_plan
     id = paypal? ? params['item_name'].downcase.gsub(' ','') : params[:plan]
-    Plan.find_by(stripe_identifier: id)
+    Plan.find_by(third_party_identifier: id)
   end
 
   def detect_user
@@ -72,7 +72,7 @@ class SubscriptionsController < ApplicationController
     @stripe_customer = Stripe::Customer.create(
         email: params[:stripeEmail],
         source: stripe_token(params),
-        plan: @plan.stripe_identifier
+        plan: @plan.third_party_identifier
     )
   end
 
