@@ -9,7 +9,7 @@ Feature: Tweeting Live Events
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
       | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         | And an event "Scrum"                      |                       |
     And an event "Scrum"
-    
+
   Scenario: Event going live without valid live stream does not cause youtube link to be tweeted
     Given the live stream has not started
     When the HangoutConnection has pinged to indicate the event start

@@ -6,8 +6,8 @@ Feature: Subscribe to NonProfit Basic Support
 
   Background:
     Given the following plans exist
-      | name                    | id             | amount |
-      | NonProfit Basic Support | nonprofitbasic | 2000   |
+      | name                    | id             | amount | free_trial_length_days |
+      | NonProfit Basic Support | nonprofitbasic | 2000   | 0                      |
 
   Scenario: Sign up for nonprofitbasic  support
     Given I visit "subscriptions/new?plan=nonprofitbasic"

@@ -5,8 +5,8 @@
   </p>
   <label class="amount">
     <p>The price for <%= @plan.name %> <%= type %> is £<%= number_to_currency(@plan.amount / 100.0, unit: '') %>/Month</p>
-    <% if @plan.free_trial > 0 %>
-       <p><%= @plan.free_trial %> day free trial! No charge for <%= @plan.free_trial %> days</p>
+    <% if @plan.free_trial? %>
+       <p><%= @plan.free_trial_length_days %> day free trial! No charge for <%= @plan.free_trial_length_days %> days</p>
     <% end %>
   </label>
   <% if flash[:error].present? %>

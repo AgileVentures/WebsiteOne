@@ -6,8 +6,8 @@ Feature: Subscribe Self to Premium
 
   Background:
     Given the following plans exist
-      | name        | id         | amount | free_trial |
-      | Premium Mob | premiummob | 2500   | 0          |
+      | name        | id         | amount | free_trial_length_days |
+      | Premium Mob | premiummob | 2500   | 0                      |
     And the email queue is clear
 
   Scenario: Pay by card
