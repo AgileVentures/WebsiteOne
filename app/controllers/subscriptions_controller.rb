@@ -91,11 +91,14 @@ class SubscriptionsController < ApplicationController
   def add_appropriate_subscription(user)
     user ||= current_user
     return unless user
+
     if paypal?
-      AddSubscriptionToUserForPlan.with(user, Time.now, params['payer_id'], @plan, PaymentSource::PayPal)
+      payment_source = PaymentSource::PayPal.new identifier: params['payer_id']
     else
-      AddSubscriptionToUserForPlan.with(user, Time.now, @stripe_customer.id, @plan, PaymentSource::Stripe)
+      payment_source = PaymentSource::Stripe.new identifier: @stripe_customer.id
     end
+
+    AddSubscriptionToUserForPlan.with(user, Time.now, @plan, payment_source)
   end
 
   def send_acknowledgement_email
