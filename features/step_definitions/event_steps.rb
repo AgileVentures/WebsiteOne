@@ -277,7 +277,7 @@ Then(/^the youtube link will not be sent$/) do
 end
 
 Then(/^the youtube link will be sent$/) do
-  expect(WebMock).to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').
+  expect(WebMock).not_to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').twice.
       with { |req| req.body =~ /youtu\.be\/11/ }
 end
 

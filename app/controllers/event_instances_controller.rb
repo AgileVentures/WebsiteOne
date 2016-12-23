@@ -15,7 +15,11 @@ class EventInstancesController < ApplicationController
       SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed
 
       TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed
-      TwitterService.tweet_yt_link(event_instance) if yt_video_id_changed
+      tweeted = TwitterService.tweet_yt_link(event_instance) if yt_video_id_changed || !event_instance.youtube_tweet_sent
+      if tweeted
+        event_instance.youtube_tweet_sent = true
+        event_instance.save
+      end
 
       redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
       head :ok
@@ -74,7 +78,8 @@ class EventInstancesController < ApplicationController
         yt_video_id: params[:yt_video_id],
         hoa_status: params[:hoa_status],
         url_set_directly: params[:url_set_directly],
-        updated_at: Time.now
+        updated_at: Time.now,
+        youtube_tweet_sent: params[:you_tube_tweet_sent]
     ).permit!
   end
 
