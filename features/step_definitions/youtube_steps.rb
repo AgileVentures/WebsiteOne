@@ -51,8 +51,6 @@ Given(/^there is a dud video for project "([^"]*)"$/) do |project_title|
                        yt_video_id: ''
 end
 
-
-
 Given /^there are no videos$/ do
   # No videos created
 end
@@ -67,4 +65,9 @@ Given /^the live stream has started$/ do
   mock = {}
   expect(mock).to receive(:duration).and_return(3)
   expect(Yt::Video).to receive(:new).with(id: '11').and_return mock
+end
+
+Then(/^the event instance will be marked tweet sent$/) do
+  ei = EventInstance.find_by(yt_video_id: 11)
+  expect(ei.youtube_tweet_sent).to eq(true)
 end

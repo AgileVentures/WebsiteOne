@@ -22,6 +22,7 @@ Feature: Tweeting Live Events
     And the live stream has started
     And the HangoutConnection has pinged to indicate the event continuing
     Then the youtube link will be sent
+    Then the event instance will be marked tweet sent
 
   Scenario: Event going live without valid live stream still causes hangout link to be tweeted
     Given the live stream has not started
@@ -32,9 +33,4 @@ Feature: Tweeting Live Events
     Given the live stream has started
     When the HangoutConnection has pinged to indicate the event start
     Then appropriate tweets will be sent
-
-  #  Scenario: Broadcast termination causes tweet of the youtube URL to be sent
-  #    Given that the HangoutConnection has pinged to indicate the event start
-  #    And youtube stream has gone live
-  #    And that recording has finished
-  #    Then an appropriate tweet has been sent # e.g. see recording
+    Then the event instance will be marked tweet sent
