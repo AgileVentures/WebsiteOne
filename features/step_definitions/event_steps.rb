@@ -262,7 +262,7 @@ When(/^the HangoutConnection has pinged to indicate the event (start|continuing)
   mock = {}
   expect(mock).to receive(:duration).at_most(3).times.and_return(3)
   expect(Yt::Video).to receive(:new).at_most(3).times.with(id: '11').and_return mock
-  TwitterService.stub(:tweet).and_return(true)
+  #TwitterService.stub(:tweet).and_return(true)
   Net::HTTP.stub(:get)
   put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
                                participants: participants, hangout_url: 'http://hangout.test',
@@ -270,8 +270,6 @@ When(/^the HangoutConnection has pinged to indicate the event (start|continuing)
 end
 
 Then(/^appropriate tweets will be sent$/) do
-  expect(WebMock).to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').
-      with { |req| req.body =~ /youtu\.be/ }
   expect(WebMock).to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').
       with { |req| req.body =~ /hangout\.test/ }
 end
