@@ -108,6 +108,9 @@ end
 
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
   event = Event.find_by_name(event_name)
+  mock = {}
+  expect(mock).to receive(:duration).and_return(3)
+  Yt::Video.stub(:new).and_return mock
   visit event_path(event)
   expect(page).to have_link('Join now', href: @hangout_url)
   time = Time.parse(@jump_date) + event.duration.minutes - 1.minute
