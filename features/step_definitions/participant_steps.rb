@@ -42,6 +42,7 @@ def ping_with(participants)
   mock = {}
   expect(mock).to receive(:duration).and_return(3)
   Yt::Video.stub(:new).and_return mock
+  TwitterService.stub(:tweet).and_return(true)
   put "/hangouts/#{@hangout.uid}", {title: @hangout.title, host_id: '3', event_id: '',
                                     participants: participants, hangout_url: 'http://hangout.test',
                                     hoa_status: 'live', project_id: '1', category: 'PairProgramming',
