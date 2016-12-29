@@ -9,7 +9,7 @@ Feature: Live Events
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
       | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
 
-  Scenario: Event is seem to be live when event is started a minute previously
+  Scenario: Event is seen to be live when event is started a minute previously
     Given an event "Scrum"
     And the HangoutConnection has pinged to indicate the event start
     Then the event should be live

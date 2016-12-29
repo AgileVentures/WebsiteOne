@@ -5,10 +5,8 @@ features:
     invites:
       enabled: false
   twitter:
-    hangout_notifications:
-      enabled: false
     notifications:
-      enabled: true
+      enabled: false
 
   email_registrations:
     enabled: true

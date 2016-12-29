@@ -262,16 +262,19 @@ When(/^the HangoutConnection has pinged to indicate the event (start|continuing)
   mock = {}
   expect(mock).to receive(:duration).at_most(3).times.and_return(3)
   expect(Yt::Video).to receive(:new).at_most(3).times.with(id: '11').and_return mock
-  #TwitterService.stub(:tweet).and_return(true)
   Net::HTTP.stub(:get)
+  #Twitter::REST::Client.stub(:update).and_return(true)
   put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
                                participants: participants, hangout_url: 'http://hangout.test',
                                hoa_status: 'live', project_id: '1', category: 'Scrum', yt_video_id: '11'}
 end
 
 Then(/^appropriate tweets will be sent$/) do
-  expect(WebMock).to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').
+  if Settings.features.twitter.notifications.enabled == true
+    expect(WebMock).to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').
       with { |req| req.body =~ /hangout\.test/ }
+  end
+
 end
 
 Then(/^the youtube link will not be sent$/) do
@@ -285,8 +288,10 @@ Then(/^the youtube link will be sent$/) do
 end
 
 Then(/^the hangout link will be sent$/) do
-  expect(WebMock).to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').
+  if Settings.features.twitter.notifications.enabled == true
+    expect(WebMock).to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').
       with { |req| req.body =~ /hangout\.test/ }
+  end
 end
 
 Then(/^the event should (still )?be live$/) do |ignore|

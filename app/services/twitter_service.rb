@@ -15,12 +15,11 @@ module TwitterService
       host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
       case hangout.category
         when 'Scrum'
-          return TwitterService.tweet("#{host} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource")
+          tweet("#{host} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource")
         when 'PairProgramming'
-          return TwitterService.tweet("#{host} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme")
+          tweet("#{host} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme")
       end
     end
-    return false
   end
 
   private
