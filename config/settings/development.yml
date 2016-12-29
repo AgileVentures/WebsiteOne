@@ -12,12 +12,6 @@ features:
   welcome_email:
     enabled: false
 
-twitter:
-    consumer_key: sGySqLyYULoh3ybriL3lLG72A
-    consumer_secret: NCNshdh9srv4VOvhiLZcNXpNKM30AJzZ13XcisHeuMkPjIYUi9
-    access_token_token: 431173698-uKQncdJA1E8VZplm8T9uV7txXR1THADXGrj1uH4A
-    access_secret: QiIQJWHDEXnSdpNjhedSt4rOPz8b0dU9cp73hV4v0duyH
-
 hangouts:
   app_id: '10095526298'
 
