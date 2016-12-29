@@ -31,7 +31,8 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
                      hangout_url: hangout['EventInstance link'],
                      created: start_time,
                      updated_at: update_time,
-                     hoa_status: 'live')
+                     hoa_status: 'live',
+                     youtube_tweet_sent: true)
 
 end
 
@@ -58,7 +59,8 @@ Given /^the following hangouts exist:$/ do |table|
                        participants: participants,
                        yt_video_id: hash['Youtube video id'],
                        created: hash['Start time'],
-                       updated: hash['End time'])
+                       updated: hash['End time'],
+                       youtube_tweet_sent: hash['Youtube tweet sent'])
   end
 end
 
@@ -108,9 +110,6 @@ end
 
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
   event = Event.find_by_name(event_name)
-  mock = {}
-  expect(mock).to receive(:duration).and_return(3)
-  Yt::Video.stub(:new).and_return mock
   visit event_path(event)
   expect(page).to have_link('Join now', href: @hangout_url)
   time = Time.parse(@jump_date) + event.duration.minutes - 1.minute

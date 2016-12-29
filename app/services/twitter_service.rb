@@ -11,7 +11,7 @@ module TwitterService
   end
 
   def self.tweet_yt_link(hangout)
-    unless valid_recording(hangout.yt_video_id) == 'Video not found'
+    if valid_recording(hangout.yt_video_id)
       host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
       case hangout.category
         when 'Scrum'
@@ -51,15 +51,17 @@ module TwitterService
   end
 
   def self.valid_recording(code)
-    unless code == ''
+    if not Settings.features.twitter.notifications.enabled == true
+      return true
+    elsif code == ''
+      return false
+    else
       uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
       Net::HTTP.get(uri)
       video = Yt::Video.new id: code
-      return if video && video.duration > 2
-      'Video not found'
-    else
-      'Video not found'
+      return true if video && video.duration > 2
     end
+    return false
   end
 
 end
