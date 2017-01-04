@@ -37,8 +37,16 @@ When(/^I run the rake task for migrating plans$/) do
   $rake['db:migrate_plans'].execute
 end
 
+When(/^I run the rake task for creating plans$/) do
+  $rake['db:create_plans'].execute
+end
+
 Then(/^"([^"]*)" should have a "([^"]*)" subscription plan$/) do |email, plan|
   user = User.find_by_email(email)
   expect(user.subscription.plan).to eq Plan.find_by(name: plan)
+end
+
+Then(/^there should be a "([^"]*)" subscription plan$/) do |plan|
+  expect(Plan.find_by(name: plan)).not_to be_nil
 end
 
