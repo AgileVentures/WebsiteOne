@@ -53,7 +53,6 @@ module TwitterService
   def self.tweet_yt_link(hangout)
     return if hangout.youtube_tweet_sent || !Settings.features.twitter.notifications.enabled
     if valid_recording(hangout.yt_video_id)
-      host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
       hangout.update(youtube_tweet_sent: true) if YTTweeterFactory.get_tweeter(hangout).tweet
     end
   end
