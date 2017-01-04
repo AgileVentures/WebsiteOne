@@ -1,4 +1,4 @@
-@vcr
+@vcr @twitter_disabled
 Feature: Live Events
   As a site user
   In order to be able participate in an event with others

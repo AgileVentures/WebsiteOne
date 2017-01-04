@@ -6,7 +6,7 @@ features:
       enabled: false
   twitter:
     notifications:
-      enabled: false
+      enabled: true
 
   email_registrations:
     enabled: true
