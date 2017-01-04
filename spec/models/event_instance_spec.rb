@@ -9,6 +9,20 @@ describe EventInstance, type: :model do
 
   it { should delegate_method(:within_current_event_duration?).to(:event) }
 
+  it 'creates an associated Event if one does not exist' do
+    event_instance = EventInstance.create(title: "title")
+    expect(event_instance.event.name).to eq("title")
+  end
+
+  it 'does not create an associated Event if one does exist' do
+    event = FactoryGirl.create(Event)
+    event_count = Event.all.count
+    event_instance = EventInstance.create(event_id: event.id)
+    expect(event_instance.event.id).to be(event.id)
+    expect(event_count).to eq(Event.all.count)
+  end
+
+
   context '#updated_within_last_two_minutes?' do
     it 'should return false when updated_at is more than two minutes ago' do
       allow(Time).to receive(:now).and_return(Time.mktime('10:02:59'))

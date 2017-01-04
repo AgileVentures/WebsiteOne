@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
   attr_accessor :repeat_ends_string
 
   COLLECTION_TIME_FUTURE = 10.days
-  COLLECTION_TIME_PAST = 15.minutes
+  COLLECTION_TIME_PAST = 300.minutes
 
   REPEATS_OPTIONS = %w[never weekly]
   REPEAT_ENDS_OPTIONS = %w[on never]
@@ -26,6 +26,22 @@ class Event < ActiveRecord::Base
 
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? "on" : "never"
+  end
+
+  def self.base_events(project)
+    project.nil? ? Event.all : Event.where(project_id: project)
+  end
+
+  def self.upcoming_events(project=nil)
+    events = Event.base_events(project).inject([]) do |memo, event|
+      memo << event.next_occurrences
+    end.flatten.sort_by { |e| e[:time] }
+    Event.remove_past_events(events)
+  end
+
+  def self.remove_past_events(events)
+    events.delete_if {|event| !event[:event].event_instances.first.try(:live?) &&
+                           (event[:time] + event[:event].duration.minutes) < Time.current}
   end
 
   def self.hookups
