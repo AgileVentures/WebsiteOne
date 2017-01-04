@@ -27,7 +27,7 @@ module TwitterService
 
   class YTTweeterFactory
     def self.get_tweeter(hangout)
-      ("YTTweeterFor"+hangout.category).constantize.new(hangout)
+      "YTTweeterFor#{hangout.category}".constantize.new(hangout)
     end
   end
 
