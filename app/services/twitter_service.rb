@@ -1,5 +1,6 @@
 module TwitterService
   def self.tweet_hangout_notification(hangout)
+    return unless Settings.features.twitter.notifications.enabled
     case hangout.category
       when 'Scrum'
         tweet("#Scrum meeting with our #distributedteam is live on #{hangout.hangout_url} Join in and learn about our #opensource #projects!")
@@ -11,7 +12,7 @@ module TwitterService
   end
 
   def self.tweet_yt_link(hangout)
-    return if hangout.youtube_tweet_sent
+    return if hangout.youtube_tweet_sent || !Settings.features.twitter.notifications.enabled
     if valid_recording(hangout.yt_video_id)
       host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
       case hangout.category
