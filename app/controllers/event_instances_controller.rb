@@ -6,18 +6,16 @@ class EventInstancesController < ApplicationController
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
 
     event_instance_params = check_and_transform_params(event_instance)
+    hangout_url_changed = event_instance.hangout_url != event_instance_params[:hangout_url]
+    yt_video_id_changed = event_instance.yt_video_id != event_instance_params[:yt_video_id]
     slack_notify = params[:notify] == 'true'
 
     if event_instance.try!(:update, event_instance_params)
-      SlackService.post_hangout_notification(event_instance) if (slack_notify && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed(event_instance))
-      SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed(event_instance)
+      SlackService.post_hangout_notification(event_instance) if (slack_notify && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed)
+      SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed
 
-      TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed(event_instance)
-      tweeted = TwitterService.tweet_yt_link(event_instance) if !event_instance.youtube_tweet_sent
-      if tweeted
-        event_instance.youtube_tweet_sent = true
-        event_instance.save
-      end
+      TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed
+      TwitterService.tweet_yt_link(event_instance) if !event_instance.youtube_tweet_sent
 
       redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
       head :ok
@@ -33,14 +31,6 @@ class EventInstancesController < ApplicationController
   end
 
   private
-
-  def hangout_url_changed(event_instance)
-    event_instance.hangout_url != event_instance_params[:hangout_url]
-  end
-
-  def yt_video_id_changed(event_instance)
-    event_instance.yt_video_id != event_instance_params[:yt_video_id]
-  end
 
   def cors_preflight_check
     head :bad_request and return unless (allowed? || local_request?)

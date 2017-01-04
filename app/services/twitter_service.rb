@@ -15,12 +15,13 @@ module TwitterService
     return if hangout.youtube_tweet_sent || !Settings.features.twitter.notifications.enabled
     if valid_recording(hangout.yt_video_id)
       host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
-      case hangout.category
+      response = case hangout.category
         when 'Scrum'
           tweet("#{host} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource")
         when 'PairProgramming'
           tweet("#{host} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme")
-      end
+        end
+      hangout.update(youtube_tweet_sent: true) if check_response(response)
     end
   end
 
