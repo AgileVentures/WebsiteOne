@@ -1,8 +1,9 @@
 module TwitterService
 
   class YTTweeter
-    def initialize(service)
+    def initialize(service,hangout)
       @service = service
+      @host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
     end
     def tweet
       @service.tweet(@msg)
@@ -11,17 +12,15 @@ module TwitterService
 
   class YTTweeterForScrum < YTTweeter
     def initialize(hangout, service = TwitterService)
-      super(service)
-      host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
-      @msg = "#{host} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource"
+      super(service,hangout)
+      @msg = "#{@host} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource"
     end
   end
 
   class YTTweeterForPairProgramming < YTTweeter
     def initialize(hangout, service = TwitterService)
-      super(service)
-      host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
-      @msg = "#{host} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme"
+      super(service,hangout)
+      @msg = "#{@host} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme"
     end
   end
 
