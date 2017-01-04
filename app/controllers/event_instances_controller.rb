@@ -15,7 +15,7 @@ class EventInstancesController < ApplicationController
       SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed
 
       TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed
-      tweeted = TwitterService.tweet_yt_link(event_instance) if yt_video_id_changed || !event_instance.youtube_tweet_sent
+      tweeted = TwitterService.tweet_yt_link(event_instance) if !event_instance.youtube_tweet_sent
       if tweeted
         event_instance.youtube_tweet_sent = true
         event_instance.save
