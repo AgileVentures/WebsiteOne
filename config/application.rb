@@ -43,10 +43,5 @@ module WebsiteOne
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
 
     config.active_record.raise_in_transactional_callbacks = true
-
-    Yt.configure do |config|
-      config.api_key = ENV['GOOGLE_PROJECT_API_KEY']
-      config.log_level = :debug
-    end
   end
 end
