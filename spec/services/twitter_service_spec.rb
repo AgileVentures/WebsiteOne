@@ -6,7 +6,6 @@ describe 'TwitterService' do
       Settings.features.twitter.notifications.enabled = true
       stub_request(:post, /api\.twitter\.com/).to_return(:status => 200, :body => '{ "id": 243145735212777472, "text": "hello world" }')
       stub_request(:get, 'www.googleapis.com').to_return(:status => 200 )
-      #https://www.googleapis.com/youtube/v3/videos?id=new_video_id&key=AIzaSyDbyoFJgEUyqqz8qmv7n_-nXVxCdUAaEOo&maxResults=50&part=contentDetails
     end
 
     let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil, yt_video_id: nil) }

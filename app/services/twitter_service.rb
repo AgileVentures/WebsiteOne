@@ -11,7 +11,7 @@ module TwitterService
   end
 
   def self.tweet_yt_link(hangout)
-    if valid_recording(hangout.yt_video_id)
+    if valid_recording(hangout.yt_video_id) && !hangout.youtube_tweet_sent
       host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
       case hangout.category
         when 'Scrum'
@@ -51,9 +51,7 @@ module TwitterService
   end
 
   def self.valid_recording(code)
-    if not Settings.features.twitter.notifications.enabled == true
-      return true
-    elsif code == ''
+    if code == ''
       return false
     else
       uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
