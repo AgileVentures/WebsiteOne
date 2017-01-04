@@ -1,4 +1,4 @@
-@vcr @twitter_disabled
+@vcr @disable_twitter
 Feature: Seeing participants of past and current hangouts
   As an admin
   So that I can see if people are getting together or not
