@@ -1,4 +1,43 @@
 module TwitterService
+
+  class YTTweeter
+    def initialize(service)
+      @service = service
+    end
+    def tweet
+      @service.tweet(@msg)
+    end
+  end
+
+  class YTTweeterForScrum < YTTweeter
+    def initialize(hangout, service = TwitterService)
+      super(service)
+      host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
+      @msg = "#{host} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource"
+    end
+  end
+
+  class YTTweeterForPairProgramming < YTTweeter
+    def initialize(hangout, service = TwitterService)
+      super(service)
+      host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
+      @msg = "#{host} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme"
+    end
+  end
+
+  class YTTweeterFactory
+    def self.get_tweeter(hangout)
+      case hangout.category
+        when 'Scrum'
+          YTTweeterForScrum.new(hangout)
+        when 'PairProgramming'
+          YTTweeterForPairProgramming.new(hangout)
+        else
+          Rails.logger.error "''#{hangout.category}'' is not a recognized event category for Twitter notifications. Must be one of: 'Scrum', 'PairProgramming'"
+      end
+    end
+  end
+
   def self.tweet_hangout_notification(hangout)
     return unless Settings.features.twitter.notifications.enabled
     case hangout.category
@@ -15,13 +54,7 @@ module TwitterService
     return if hangout.youtube_tweet_sent || !Settings.features.twitter.notifications.enabled
     if valid_recording(hangout.yt_video_id)
       host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
-      response = case hangout.category
-        when 'Scrum'
-          tweet("#{host} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource")
-        when 'PairProgramming'
-          tweet("#{host} just finished #PairProgramming on #{hangout.project ? hangout.project.title : hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme")
-      end
-      hangout.update(youtube_tweet_sent: true) if response
+      hangout.update(youtube_tweet_sent: true) if YTTweeterFactory.get_tweeter(hangout).tweet
     end
   end
 
