@@ -27,14 +27,7 @@ module TwitterService
 
   class YTTweeterFactory
     def self.get_tweeter(hangout)
-      case hangout.category
-        when 'Scrum'
-          YTTweeterForScrum.new(hangout)
-        when 'PairProgramming'
-          YTTweeterForPairProgramming.new(hangout)
-        else
-          Rails.logger.error "''#{hangout.category}'' is not a recognized event category for Twitter notifications. Must be one of: 'Scrum', 'PairProgramming'"
-      end
+      ("YTTweeterFor"+hangout.category).constantize.new(hangout)
     end
   end
 
