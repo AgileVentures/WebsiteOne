@@ -11,7 +11,8 @@ module TwitterService
   end
 
   def self.tweet_yt_link(hangout)
-    if valid_recording(hangout.yt_video_id) && !hangout.youtube_tweet_sent
+    return if hangout.youtube_tweet_sent
+    if valid_recording(hangout.yt_video_id)
       host = hangout.broadcaster ? hangout.broadcaster.split[0] : 'Host'
       case hangout.category
         when 'Scrum'
