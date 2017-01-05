@@ -24,9 +24,22 @@ module TwitterService
     end
   end
 
+  class YTTweeterForNull < YTTweeter
+    def initalize(hangout, service= TwitterService)
+      super(service,hangout)
+    end
+    def tweet
+    end
+  end
+
   class YTTweeterFactory
-    def self.get_tweeter(hangout)
-      "TwitterService::YTTweeterFor#{hangout.category}".constantize.new(hangout)
+    def self.tweeter(hangout)
+      begin
+        "TwitterService::YTTweeterFor#{hangout.category}".constantize.new(hangout)
+      rescue StandardError => e
+        Rails.logger.error "''#{hangout.category}'' is not a recognized event category for Twitter notifications. Must be one of: 'Scrum', 'PairProgramming'"
+        return TwitterService::YTTweeterForNull.new(hangout)
+      end
     end
   end
 
@@ -45,7 +58,7 @@ module TwitterService
   def self.tweet_yt_link(hangout)
     return if hangout.youtube_tweet_sent || !Settings.features.twitter.notifications.enabled
     if valid_recording(hangout.yt_video_id)
-      hangout.update(youtube_tweet_sent: true) if YTTweeterFactory.get_tweeter(hangout).tweet
+      hangout.update(youtube_tweet_sent: true) if YTTweeterFactory.tweeter(hangout).tweet
     end
   end
 
@@ -78,14 +91,11 @@ module TwitterService
   end
 
   def self.valid_recording(code)
-    if code == ''
-      return false
-    else
-      uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
-      Net::HTTP.get(uri)
-      video = Yt::Video.new id: code
-      return true if video && video.duration > 2
-    end
+    return false if code.blank?
+    uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
+    Net::HTTP.get(uri)
+    video = Yt::Video.new id: code
+    return true if video && video.duration > 2
     return false
   end
 
