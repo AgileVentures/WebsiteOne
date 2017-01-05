@@ -57,7 +57,7 @@ describe 'TwitterService' do
         end
 
         it 'does not tweet video link if video is invalid' do
-          hangout.yt_video_id = nil
+          hangout.yt_video_id = 'invalidId'
           expect(TwitterService).not_to receive(:tweet).with("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme") { :success }
           mock = {}
           expect(mock).to receive(:duration).and_return(1)

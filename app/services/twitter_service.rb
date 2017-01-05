@@ -24,8 +24,8 @@ module TwitterService
     end
   end
 
-  class YTTweeterForNull < YTTweeter
-    def initalize(hangout, service= TwitterService)
+  class NullYTTweeter < YTTweeter
+    def initialize(hangout, service = TwitterService)
       super(service,hangout)
     end
     def tweet
@@ -36,9 +36,9 @@ module TwitterService
     def self.tweeter(hangout)
       begin
         "TwitterService::YTTweeterFor#{hangout.category}".constantize.new(hangout)
-      rescue StandardError => e
+      rescue StandardError
         Rails.logger.error "''#{hangout.category}'' is not a recognized event category for Twitter notifications. Must be one of: 'Scrum', 'PairProgramming'"
-        return TwitterService::YTTweeterForNull.new(hangout)
+        NullYTTweeter.new(hangout)
       end
     end
   end
