@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(version: 20161223092205) do
     t.string   "github_url",         limit: 255
     t.string   "pivotaltracker_url", limit: 255
     t.text     "pitch"
-    t.integer  "commit_count",                   default: 0
+    t.integer  "commit_count",       default: 0
     t.string   "image_url",          limit: 255
     t.datetime "last_github_update"
   end
