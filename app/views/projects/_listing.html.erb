@@ -38,17 +38,11 @@
               <i class="fa fa-github-alt"></i> <%= commit_count %>
             </li>
           <% end %>
-          <% gpa = project.gpa %>
-          <% unless gpa.nil? %>
-          <li data-toggle="tooltip" data-placement="top"
-              title="<%= gpa %> CodeClimate GPA">
-            <i class="fa fa-chevron-circle-up"></i> <%= gpa %>
-          </li>
-          <% end %>
         </ul>
       </div>
       <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
         <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
+        <div>Last update in Github:<%= project.last_github_update %></div>
         <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, user_path(project.user) %></div>
       </div>
   </div>

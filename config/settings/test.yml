@@ -5,20 +5,15 @@ features:
     invites:
       enabled: false
   twitter:
-    hangout_notifications:
-      enabled: false
+    notifications:
+      enabled: true
+
   email_registrations:
     enabled: true
 
 mailer:
   delivery_method: 'test'
 
-privileged_users: 'chesa@example.com, random@random.com' 
-
-twitter:
-  consumer_key:        nil
-  consumer_secret:     nil
-  access_token:        nil
-  access_token_secret: nil
+privileged_users: 'chesa@example.com, random@random.com'
 
 agile_bot_url: https://agile-bot.herokuapp.com

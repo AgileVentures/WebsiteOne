@@ -1,4 +1,5 @@
 Then(/^I should see "([^"]*)" table$/) do |legend|
+
   expect(page).to have_css 'h1', text: legend
 end
 
@@ -124,4 +125,8 @@ Then(/^I should see a GPA of "([^"]*)" for "([^"]*)"$/) do |gpa, project_name|
   within('ul#project-list') do
     expect(page).to have_css("li[title=\"#{gpa} CodeClimate GPA\"]")
   end
+end
+
+When(/^I go to the next page$/) do
+  click_link "Next →", match: :first
 end

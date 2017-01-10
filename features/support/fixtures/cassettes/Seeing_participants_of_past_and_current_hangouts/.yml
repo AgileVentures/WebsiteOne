@@ -21,15 +21,15 @@ http_interactions:
       message: Gone
     headers:
       X-Gdata-User-Country:
-      - GB
+      - US
       Content-Type:
       - text/html; charset=UTF-8
       Transfer-Encoding:
       - chunked
       Date:
-      - Tue, 28 Jun 2016 13:38:16 GMT
+      - Thu, 29 Dec 2016 12:09:11 GMT
       Expires:
-      - Tue, 28 Jun 2016 13:38:16 GMT
+      - Thu, 29 Dec 2016 12:09:11 GMT
       Cache-Control:
       - private, max-age=0
       X-Content-Type-Options:
@@ -44,5 +44,95 @@ http_interactions:
       encoding: UTF-8
       string: No longer available
     http_version: 
-  recorded_at: Tue, 28 Jun 2016 13:38:22 GMT
+  recorded_at: Thu, 29 Dec 2016 12:09:10 GMT
+- request:
+    method: get
+    uri: http://gdata.youtube.com/feeds/api/videos/11
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - gdata.youtube.com
+  response:
+    status:
+      code: 410
+      message: Gone
+    headers:
+      X-Gdata-User-Country:
+      - US
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 29 Dec 2016 12:09:11 GMT
+      Expires:
+      - Thu, 29 Dec 2016 12:09:11 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+    body:
+      encoding: UTF-8
+      string: No longer available
+    http_version: 
+  recorded_at: Thu, 29 Dec 2016 12:09:10 GMT
+- request:
+    method: get
+    uri: http://gdata.youtube.com/feeds/api/videos/11
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - gdata.youtube.com
+  response:
+    status:
+      code: 410
+      message: Gone
+    headers:
+      X-Gdata-User-Country:
+      - US
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 29 Dec 2016 12:09:11 GMT
+      Expires:
+      - Thu, 29 Dec 2016 12:09:11 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+    body:
+      encoding: UTF-8
+      string: No longer available
+    http_version: 
+  recorded_at: Thu, 29 Dec 2016 12:09:11 GMT
 recorded_with: VCR 3.0.1

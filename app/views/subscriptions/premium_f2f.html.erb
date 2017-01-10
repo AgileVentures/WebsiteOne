@@ -1,0 +1,27 @@
+<%= form_tag subscriptions_path(plan: 'premiumf2f') do %>
+    <article>
+      <h1>Agile Ventures Premium F2F Membership</h1>
+      <br/>
+      <a href='/premium-f2f'>Further details</a>
+      </p>
+      <label class="amount">
+        <p>The price for Premium F2F Membership is £50.00/Month</p>
+      </label>
+      <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+      <% end %>
+      <br/>
+    </article>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="A month's subscription"
+            data-amount="5000"
+            data-currency="GBP"
+            data-locale="en-US"
+            data-name="Premium F2F Membership"
+            data-label="Sign Me Up For Premium F2F!"></script>
+
+<% end %>

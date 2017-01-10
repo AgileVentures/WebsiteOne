@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103011445) do
+ActiveRecord::Schema.define(version: 20161223092205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,18 +83,19 @@ ActiveRecord::Schema.define(version: 20161103011445) do
 
   create_table "event_instances", force: :cascade do |t|
     t.integer  "event_id"
-    t.string   "title",            limit: 255
-    t.string   "hangout_url",      limit: 255
+    t.string   "title",              limit: 255
+    t.string   "hangout_url",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "uid",              limit: 255
-    t.string   "category",         limit: 255
+    t.string   "uid",                limit: 255
+    t.string   "category",           limit: 255
     t.integer  "project_id"
     t.integer  "user_id"
-    t.string   "yt_video_id",      limit: 255
+    t.string   "yt_video_id",        limit: 255
     t.text     "participants"
-    t.string   "hoa_status",       limit: 255
-    t.boolean  "url_set_directly",             default: false
+    t.string   "hoa_status",         limit: 255
+    t.boolean  "url_set_directly",               default: false
+    t.boolean  "youtube_tweet_sent",             default: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -189,8 +190,9 @@ ActiveRecord::Schema.define(version: 20161103011445) do
     t.string   "github_url",         limit: 255
     t.string   "pivotaltracker_url", limit: 255
     t.text     "pitch"
-    t.integer  "commit_count",                   default: 0
+    t.integer  "commit_count",       default: 0
     t.string   "image_url",          limit: 255
+    t.datetime "last_github_update"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
@@ -276,8 +278,10 @@ ActiveRecord::Schema.define(version: 20161103011445) do
     t.string   "country_code",           limit: 255
     t.integer  "status_count",                       default: 0
     t.string   "stripe_customer"
+    t.datetime "deleted_at"
   end
 
+  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree

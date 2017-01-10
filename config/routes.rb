@@ -6,14 +6,14 @@ WebsiteOne::Application.routes.draw do
   resources :activities
   resources :newsletters
 
-  match '/charges/paypal' => 'charges#paypal', :via => [:get]
-  match '/charges/upgrade' => 'charges#upgrade', :via => [:put]
-  resources :charges
+  match '/subscriptions/upgrade' => 'subscriptions#upgrade', :via => [:put]
+  resources :subscriptions
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show], :format => false do
     member do
       patch :add_status
+      delete :destroy
     end
   end
 

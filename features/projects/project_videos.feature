@@ -46,6 +46,11 @@ Feature: See project related videos
     Given I am on the "Show" page for project "hello world"
     And I should see video "PP on hello world - feature: 2" in "player"
 
+  Scenario: show video missing when video is a dud
+    Given there is a dud video for project "hello mars"
+    And I am on the "Show" page for project "hello mars"
+    Then I should see "video unavailable ('Start Broadcast' not pressed, or Hangout/YouTube fail)"
+
   Scenario: show only 25 last videos
     Given the project "hello mars" has 25 videos of user "John Doe"
     Given I am on the "Show" page for project "hello mars"

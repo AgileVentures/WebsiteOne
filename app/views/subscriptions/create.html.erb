@@ -1,0 +1,13 @@
+<% if @sponsored_user %>
+    <h2 id='payment_complete'>Thanks, you have sponsored <%= @user.display_name %> as a <%= @plan %> Member!</h2>
+    <% if @plan.free_trial? %>
+      <p>A seven day free trial has now started.  You will not be charged until seven days have passed.</p>
+    <% end %>
+    <p>An AgileVentures mentor will be in touch shortly to help <%= @user.display_name %> receive all their membership benefits.</p>
+<% else %>
+  <h2 id='payment_complete'>Thanks, you're now an AgileVentures <%= @plan %> Member!</h2>
+    <% if @plan.free_trial? %>
+        <p>You're seven day free trial has now started.  Your card will not be charged until seven days have passed.</p>
+    <% end %>
+    <p>An AgileVentures mentor will be in touch shortly to help you receive all of your membership benefits.</p>
+<% end %>
