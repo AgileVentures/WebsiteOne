@@ -286,7 +286,6 @@ ActiveRecord::Schema.define(version: 20161223092205) do
     t.integer  "timezone_offset"
     t.string   "country_code",           limit: 255
     t.integer  "status_count",                       default: 0
-    t.string   "stripe_customer"
     t.datetime "deleted_at"
   end
 
