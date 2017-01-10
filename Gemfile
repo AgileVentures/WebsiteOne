@@ -14,7 +14,6 @@ gem 'coffee-rails'
 gem 'colored'
 gem 'compass-rails'
 gem 'config'
-gem 'coveralls', '~> 0.7.9', require: false
 gem 'devise', '~> 3.5.1'
 gem 'eventmachine', '~> 1.0.7'
 gem 'exception_notification'
@@ -106,6 +105,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
+  gem 'coveralls', require: false
   gem 'simplecov'
 end
 
