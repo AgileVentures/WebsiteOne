@@ -96,11 +96,6 @@ describe EventInstancesController do
         get :update, params.merge(yt_video_id: 'new_video_id')
       end
 
-      it 'does not calls the TwitterService to tweet yt_link if yt_video_id is not changed' do
-        expect(TwitterService).not_to receive(:tweet_yt_link).with(an_instance_of(EventInstance))
-        get :update, params
-      end
-
       it 'calls the TwitterService to tweet notification if event has started and hangout url changed' do
         expect(TwitterService).to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
         expect_any_instance_of(EventInstance).to receive(:started?).at_least(:once).and_return(true)
@@ -137,10 +132,12 @@ describe EventInstancesController do
 
       upd_params = {
         "title"=>"title", "project_id"=>"project_id", "event_id"=>"event_id",
-        "category"=>"category", "user_id"=>"host","participants"=>"one, two",
+        "category"=>"category", "user_id"=>"host",
         "hangout_participants_snapshots_attributes"=>[{"participants"=>"one, two"}],
+        "participants"=>"one, two",
         "hangout_url"=>"test_url", "yt_video_id"=>"video", "hoa_status"=>"started",
-        "url_set_directly"=>nil, "updated_at"=>Time.now
+        "url_set_directly"=>nil, "updated_at"=>Time.now,
+        "youtube_tweet_sent"=>nil
       }
       expect_any_instance_of(EventInstance).to receive(:update).with(upd_params)
       get :update, params.merge(upd_params)

@@ -6,16 +6,16 @@ Feature: Browse and create projects
 
   Background:
     Given the following projects exist:
-      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count |
-      | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         |
-      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  | 2000         |
-      | hello jupiter | greetings jupiter folks |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         |
-      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  | 1900         |
-      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  | 1900         |
-      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |              |
-      | hello venus   | greetings venus folks   |             | active   |                                             |                                                  |              |
-      | hello terra   | greetings terra folks   |             | active   |                                             |                                                  |              |
-      | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         |
+      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count | last_github_update |
+      | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         | 01/12/1999         |
+      | hello mars    | greetings aliens        |             | active   |                                             |                                                  | 2000         | 01/11/2000         |
+      | hello jupiter | greetings jupiter folks |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         | 01/10/2000         |
+      | hello mercury | greetings mercury folks |             | active   |                                             |                                                  | 1900         | 01/08/2000         |
+      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  | 1900         | 01/09/2000         |
+      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  | 1800         | 01/01/2000         |
+      | hello venus   | greetings venus folks   |             | active   |                                             |                                                  |              | 01/01/2000         |
+      | hello terra   | greetings terra folks   |             | active   |                                             |                                                  |              | 01/01/2000         |
+      | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         | 01/01/2000         |
 
     And there are no videos
 
@@ -40,7 +40,6 @@ Feature: Browse and create projects
     Then I should see:
       | Text                    |
       | hello world             |
-      | greetings earthlings    |
       | hello jupiter           |
       | greetings jupiter folks |
       | hello saturn            |
@@ -60,29 +59,24 @@ Feature: Browse and create projects
     When I am on the "projects" page
     Then I should not see the very stylish "New Project" button
 
-#  Scenario: See codeclimate stats
-#    Given I am on the "projects" page
-#    Then I should see a GPA of "3.5" for "hello world"
-
-# This scenario is no longer valid after we added ordering by status and commit count
-#  Scenario: Alphabetically display pagination in "Our Projects" page
-#    Given I am on the "home" page
-#    When I follow "Projects" within the navbar
-#    Then I should see:
-#      | greetings aliens        |
-#      | greetings jupiter folks |
-#      | greetings mercury folks |
-#      | greetings saturn folks  |
-#      | greetings sun folks     |
-#    And I should not see "greetings earthlings"
-#    When I go to the next page
-#    Then I should not see:
-#      | greetings aliens        |
-#      | greetings jupiter folks |
-#      | greetings mercury folks |
-#      | greetings saturn folks  |
-#      | greetings sun folks     |
-#    And I should see "greetings earthlings"
+  Scenario: Display most recently updated at top "Our Projects" page paginated
+    Given I am on the "home" page
+    When I follow "Projects" within the navbar
+    Then I should see:
+      | greetings aliens        |
+      | greetings jupiter folks |
+      | greetings mercury folks |
+      | greetings saturn folks  |
+      | greetings sun folks     |
+    When I go to the next page
+    Then I should see:
+      | greetings earthlings    |
+    And I should not see:
+      | greetings aliens        |
+      | greetings jupiter folks |
+      | greetings mercury folks |
+      | greetings saturn folks  |
+      | greetings sun folks     |
 
 #  Scenarios for NEW page
 
