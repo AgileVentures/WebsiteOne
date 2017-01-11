@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    @projects = Project.order('status ASC').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
+    @projects = Project.order('status ASC').order('last_github_update DESC NULLS LAST').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
     render layout: 'with_sidebar_sponsor_right'
   end
 

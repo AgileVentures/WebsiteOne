@@ -5,7 +5,7 @@ module GithubCommitsJob
 
   def run
     Project.with_github_url.each do |project|
-      begin    
+      begin
         update_total_commit_count_for(project)
         update_user_commit_counts_for(project)
       rescue Exception
@@ -20,7 +20,8 @@ module GithubCommitsJob
     commit_count = client.contributors(github_url(project), true, per_page: 100).reduce(0) do |memo, contrib|
       memo += contrib.contributions
     end
-    project.update(commit_count: commit_count)
+
+    project.update(commit_count: commit_count, last_github_update: project.updated_at)
   end
 
   def github_url(project)
