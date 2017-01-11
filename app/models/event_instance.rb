@@ -56,7 +56,7 @@ class EventInstance < ActiveRecord::Base
   end
 
   def broadcaster
-    self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' }
+    self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' } if self.participants
   end
 
   private
