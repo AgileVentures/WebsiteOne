@@ -1,4 +1,4 @@
-@vcr
+@vcr @disable_twitter
 Feature: Tweeting Live Events
   As a site admin
   In order to increase participation in events

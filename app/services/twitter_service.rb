@@ -92,10 +92,21 @@ module TwitterService
 
   def self.valid_recording(code)
     return false if code.blank?
+
     uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
     Net::HTTP.get(uri)
     video = Yt::Video.new id: code
-    return true if video && video.duration > 2
+
+    if video.live_streaming_details.first
+      return true if video.live_streaming_details.first.actual_start_time
+    end
+
+    begin
+      return true if video.duration > 2
+    rescue Yt::Errors::NoItems
+      return false
+    end
+
     return false
   end
 

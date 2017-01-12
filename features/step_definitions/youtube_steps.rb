@@ -58,18 +58,20 @@ end
 
 Given /^the live stream has not started$/ do
   mock = {}
+  expect(mock).to receive(:live_streaming_details).at_most(1).times
   expect(mock).to receive(:duration).at_most(1).times.and_return(0)
-  expect(Yt::Video).to receive(:new).at_most(1).times.with(id: '11').and_return mock
+  expect(Yt::Video).to receive(:new).at_most(1).times.with(id: 'xAPWS7PKprc').and_return mock
 end
 
 Given /^the live stream has started$/ do
   mock = {}
+  expect(mock).to receive(:live_streaming_details).at_most(1).times
   expect(mock).to receive(:duration).at_most(1).times.and_return(3)
-  expect(Yt::Video).to receive(:new).at_most(1).times.with(id: '11').and_return mock
+  expect(Yt::Video).to receive(:new).at_most(1).times.with(id: 'xAPWS7PKprc').and_return mock
 end
 
 Then(/^the event instance will be marked tweet sent$/) do
-  ei = EventInstance.find_by(yt_video_id: 11)
+  ei = EventInstance.find_by(yt_video_id: 'xAPWS7PKprc')
   if Settings.features.twitter.notifications.enabled == true
     expect(ei.youtube_tweet_sent).to eq(true)
   else
