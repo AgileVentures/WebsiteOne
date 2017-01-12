@@ -55,9 +55,8 @@ describe 'TwitterService' do
 
         it 'does not tweet video link if video is invalid' do
           hangout.yt_video_id = 'invalidId'
+
           expect(TwitterService).not_to receive(:tweet).with("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme") { :success }
-          mock = {}
-          Yt::Video.stub(:new).and_return mock
           TwitterService.tweet_yt_link(hangout)
         end
       end
@@ -74,6 +73,7 @@ describe 'TwitterService' do
         it 'tweets video link with hangout title' do
           hangout.yt_video_id = 'xAPWS7PKprc'
           expect(TwitterService).to receive(:tweet).with("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme") { :success }
+
           TwitterService.tweet_yt_link(hangout)
         end
       end
