@@ -59,12 +59,14 @@ end
 Given /^the live stream has not started$/ do
   mock = {}
   expect(mock).to receive(:live_streaming_details).at_most(1).times
+  expect(mock).to receive(:duration).at_most(1).times.and_return(0)
   expect(Yt::Video).to receive(:new).at_most(1).times.with(id: 'xAPWS7PKprc').and_return mock
 end
 
 Given /^the live stream has started$/ do
   mock = {}
   expect(mock).to receive(:live_streaming_details).at_most(1).times
+  expect(mock).to receive(:duration).at_most(1).times.and_return(3)
   expect(Yt::Video).to receive(:new).at_most(1).times.with(id: 'xAPWS7PKprc').and_return mock
 end
 
