@@ -261,7 +261,7 @@ When(/^the HangoutConnection has pinged to indicate the event (start|continuing)
   header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
   put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
                                participants: participants, hangout_url: 'http://hangout.test',
-                               hoa_status: 'live', project_id: '1', category: 'Scrum', yt_video_id: '11'}
+                               hoa_status: 'live', project_id: '1', category: 'Scrum', yt_video_id: 'xAPWS7PKprc'}
 end
 
 Then(/^appropriate tweets will be sent$/) do
@@ -274,12 +274,12 @@ end
 
 Then(/^the youtube link will not be sent$/) do
   expect(WebMock).not_to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').
-      with { |req| req.body =~ /youtu\.be\/11/ }
+      with { |req| req.body =~ /youtu\.be\/xAPWS7PKprc/ }
 end
 
 Then(/^the youtube link will be sent$/) do
   expect(WebMock).not_to have_requested(:post, 'https://api.twitter.com/1.1/statuses/update.json').twice.
-      with { |req| req.body =~ /youtu\.be\/11/ }
+      with { |req| req.body =~ /youtu\.be\/xAPWS7PKprc/ }
 end
 
 Then(/^the hangout link will be sent$/) do

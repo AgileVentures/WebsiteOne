@@ -305,4 +305,94 @@ http_interactions:
       string: No longer available
     http_version: 
   recorded_at: Fri, 23 Dec 2016 10:53:05 GMT
+- request:
+    method: get
+    uri: http://gdata.youtube.com/feeds/api/videos/xAPWS7PKprc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - gdata.youtube.com
+  response:
+    status:
+      code: 410
+      message: Gone
+    headers:
+      X-Gdata-User-Country:
+      - US
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 12 Jan 2017 09:40:49 GMT
+      Expires:
+      - Thu, 12 Jan 2017 09:40:49 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+    body:
+      encoding: UTF-8
+      string: No longer available
+    http_version: 
+  recorded_at: Thu, 12 Jan 2017 09:40:49 GMT
+- request:
+    method: get
+    uri: http://gdata.youtube.com/feeds/api/videos/xAPWS7PKprc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - gdata.youtube.com
+  response:
+    status:
+      code: 410
+      message: Gone
+    headers:
+      X-Gdata-User-Country:
+      - US
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 12 Jan 2017 09:42:22 GMT
+      Expires:
+      - Thu, 12 Jan 2017 09:42:22 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+    body:
+      encoding: UTF-8
+      string: No longer available
+    http_version: 
+  recorded_at: Thu, 12 Jan 2017 09:42:22 GMT
 recorded_with: VCR 3.0.1
