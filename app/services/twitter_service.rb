@@ -97,10 +97,12 @@ module TwitterService
     Net::HTTP.get(uri)
     video = Yt::Video.new id: code
 
-    return false if video.nil?
+    if video.live_streaming_details.first
+      return true if video.live_streaming_details.first.actual_start_time
+    end
 
     begin
-      video.live_streaming_details.first ? (return true if video.live_streaming_details.first.actual_start_time) : (return true if video.duration > 2)
+      return true if video.duration > 2
     rescue Yt::Errors::NoItems
       return false
     end
