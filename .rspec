@@ -1,1 +1,2 @@
---color --format documentation --order rand
+--color
+--order rand
