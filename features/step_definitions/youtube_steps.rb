@@ -58,13 +58,17 @@ end
 
 Given /^the live stream has not started$/ do
   mock = {}
-  expect(mock).to receive(:duration).at_most(1).times.and_return(0)
+  results = {}
+  mock.stub_chain(:live_streaming_details,:first).and_return(results)
+  expect(results).to receive(:try).with(:actual_start_time).at_most(1).times.and_return(nil)
   expect(Yt::Video).to receive(:new).at_most(1).times.with(id: '11').and_return mock
 end
 
 Given /^the live stream has started$/ do
   mock = {}
-  expect(mock).to receive(:duration).at_most(1).times.and_return(3)
+  results = {}
+  mock.stub_chain(:live_streaming_details,:first).and_return(results)
+  expect(results).to receive(:try).with(:actual_start_time).at_most(1).times.and_return(Time.now)
   expect(Yt::Video).to receive(:new).at_most(1).times.with(id: '11').and_return mock
 end
 

@@ -51,7 +51,9 @@ describe 'TwitterService' do
           hangout.yt_video_id = 'new_video_id'
           expect(TwitterService).to receive(:tweet).with("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme") { :success }
           mock = {}
-          expect(mock).to receive(:duration).and_return(3)
+          results = {}
+          mock.stub_chain(:live_streaming_details,:first).and_return(results)
+          expect(results).to receive(:try).with(:actual_start_time).at_most(1).times.and_return(Time.now)
           Yt::Video.stub(:new).and_return mock
           TwitterService.tweet_yt_link(hangout)
         end
@@ -60,7 +62,9 @@ describe 'TwitterService' do
           hangout.yt_video_id = 'invalidId'
           expect(TwitterService).not_to receive(:tweet).with("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.project.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme") { :success }
           mock = {}
-          expect(mock).to receive(:duration).and_return(1)
+          results = {}
+          mock.stub_chain(:live_streaming_details,:first).and_return(results)
+          expect(results).to receive(:try).with(:actual_start_time).at_most(1).times.and_return(nil)
           Yt::Video.stub(:new).and_return mock
           TwitterService.tweet_yt_link(hangout)
         end
@@ -79,7 +83,9 @@ describe 'TwitterService' do
           hangout.yt_video_id = 'new_video_id'
           expect(TwitterService).to receive(:tweet).with("#{hangout.broadcaster.split[0]} just finished #PairProgramming on #{hangout.title} You can catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #pairwithme") { :success }
           mock = {}
-          expect(mock).to receive(:duration).and_return(3)
+          results = {}
+          mock.stub_chain(:live_streaming_details,:first).and_return(results)
+          expect(results).to receive(:try).with(:actual_start_time).at_most(1).times.and_return(Time.now)
           Yt::Video.stub(:new).and_return mock
           TwitterService.tweet_yt_link(hangout)
         end
@@ -102,7 +108,9 @@ describe 'TwitterService' do
         hangout.yt_video_id = 'new_video_id'
         expect(TwitterService).to receive(:tweet).with("#{hangout.broadcaster.split[0]} just hosted an online #scrum Missed it? Catch the recording at youtu.be/#{hangout.yt_video_id} #CodeForGood #opensource") { :success }
         mock = {}
-        expect(mock).to receive(:duration).and_return(3)
+        results = {}
+        mock.stub_chain(:live_streaming_details,:first).and_return(results)
+        expect(results).to receive(:try).with(:actual_start_time).at_most(1).times.and_return(Time.now)
         Yt::Video.stub(:new).and_return mock
         TwitterService.tweet_yt_link(hangout)
       end
