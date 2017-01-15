@@ -3,14 +3,18 @@ class EventInstancesController < ApplicationController
   before_filter :cors_preflight_check, except: [:index]
 
   def update
-    event_instance = EventInstance.find_or_create_by(uid: params[:id])
+    unless EventInstance.find_by(uid: params[:id])
+      EventInstance.create(uid: params[:id], event_id: params[:event_id])
+    end
+    event_instance = EventInstance.find_by(uid: params[:id])
+    # another option could be to just call a different method on the instance.
 
     event_instance_params = check_and_transform_params(event_instance)
     hangout_url_changed = event_instance.hangout_url != event_instance_params[:hangout_url]
     yt_video_id_changed = event_instance.yt_video_id != event_instance_params[:yt_video_id]
     slack_notify = params[:notify] == 'true'
 
-    if event_instance.try!(:update, event_instance_params)
+    if event_instance.try!(:update, event_instance_params) #why would it not update.  is it only if things changed?
       SlackService.post_hangout_notification(event_instance) if (slack_notify && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed)
       SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed
 

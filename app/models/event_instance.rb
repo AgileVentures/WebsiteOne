@@ -1,4 +1,5 @@
 class EventInstance < ActiveRecord::Base
+  after_create :create_related_event
   self.per_page = 30
 
   belongs_to :event
@@ -19,6 +20,16 @@ class EventInstance < ActiveRecord::Base
   accepts_nested_attributes_for :hangout_participants_snapshots
 
   validate :dont_update_after_finished, on: :update
+
+  def create_related_event
+    unless self.event
+      event = Event.new(start_datetime: Time.current, name: self.title, time_zone: Time.zone, repeats: false, duration: 60,
+                        category: self.category, description: self.project_id, project_id: self.project_id)
+      event.save
+      self.event = event
+      self.save
+    end
+  end
 
   def started?
     hangout_url?
