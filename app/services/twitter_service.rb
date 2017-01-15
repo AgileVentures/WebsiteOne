@@ -95,7 +95,7 @@ module TwitterService
     uri = URI.parse("http://gdata.youtube.com/feeds/api/videos/#{code}")
     Net::HTTP.get(uri)
     video = Yt::Video.new id: code
-    return true if video && video.duration > 2
+    return true if video.live_streaming_details.first.try(:actual_start_time)
     return false
   end
 
