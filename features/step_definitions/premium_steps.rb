@@ -12,6 +12,10 @@ Given(/^I fill in appropriate card details for premium mob/) do
   submit_card_details_for_button_with('Pay £25.00')
 end
 
+Given(/^I fill in appropriate card details for nonprofitbasic/) do
+  submit_card_details_for_button_with('Pay £20.00')
+end
+
 Given(/^I fill in appropriate card details for premium f2f/) do
   submit_card_details_for_button_with('Pay £50.00')
 end
@@ -43,7 +47,9 @@ end
 
 Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
-    @stripe_test_helper.create_plan(hash)
+    @stripe_test_helper.try(:create_plan, hash)
+    hash[:third_party_identifier] = hash.delete("id")
+    Plan.create(hash)
   end
 end
 
@@ -72,6 +78,13 @@ PAYPAL_REDIRECT_BODY = {"CONTEXT"=>"wtgSziM4C5x0SI-9CmKcv2vkSeTLK5P_g6HqzC__YTYk
 And(/^Paypal updates our endpoint$/) do
   body = PAYPAL_REDIRECT_BODY.clone
   body['item_name'] = 'Premium'
+  body['payer_email'] = 'sam-buyer@agileventures.org'
+  post subscriptions_path, body
+end
+
+And(/^Paypal updates our endpoint for premium mob$/) do
+  body = PAYPAL_REDIRECT_BODY.clone
+  body['item_name'] = 'Premium Mob'
   body['payer_email'] = 'sam-buyer@agileventures.org'
   post subscriptions_path, body
 end

@@ -1,0 +1,9 @@
+FactoryGirl.define do
+  factory :plan do
+    name ""
+    free_trial_length_days ""
+    third_party_identifier "MyString"
+    amount 0
+  end
+
+end
