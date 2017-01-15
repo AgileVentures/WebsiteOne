@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
 
   def membership_type
     return "Basic" unless subscription
-    subscription.type
+    subscription.plan.name
   end
 
   def apply_omniauth(omniauth)
