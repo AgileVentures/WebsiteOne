@@ -1,0 +1,228 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://gdata.youtube.com/feeds/api/videos/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - gdata.youtube.com
+  response:
+    status:
+      code: 410
+      message: Gone
+    headers:
+      X-Gdata-User-Country:
+      - US
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Tue, 27 Dec 2016 13:34:11 GMT
+      Expires:
+      - Tue, 27 Dec 2016 13:34:11 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+    body:
+      encoding: UTF-8
+      string: No longer available
+    http_version: 
+  recorded_at: Tue, 04 Feb 2014 06:59:00 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?forUsername=&part=id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Vary:
+      - Origin,Accept-Encoding
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 27 Dec 2016 13:34:11 GMT
+      Expires:
+      - Tue, 27 Dec 2016 13:34:11 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="35,34"
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "usageLimits",
+            "reason": "dailyLimitExceededUnreg",
+            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
+            "extendedHelp": "https://code.google.com/apis/console"
+           }
+          ],
+          "code": 403,
+          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
+         }
+        }
+    http_version: 
+  recorded_at: Tue, 04 Feb 2014 06:59:01 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?forUsername=&part=id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Vary:
+      - Origin,Accept-Encoding
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 27 Dec 2016 13:34:15 GMT
+      Expires:
+      - Tue, 27 Dec 2016 13:34:15 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="35,34"
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "usageLimits",
+            "reason": "dailyLimitExceededUnreg",
+            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
+            "extendedHelp": "https://code.google.com/apis/console"
+           }
+          ],
+          "code": 403,
+          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
+         }
+        }
+    http_version: 
+  recorded_at: Tue, 04 Feb 2014 06:59:04 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/videos?forUsername=&part=id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Yt::Request (gzip)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      Vary:
+      - Origin,Accept-Encoding
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 27 Dec 2016 13:34:28 GMT
+      Expires:
+      - Tue, 27 Dec 2016 13:34:28 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="35,34"
+      Accept-Ranges:
+      - none
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "usageLimits",
+            "reason": "dailyLimitExceededUnreg",
+            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
+            "extendedHelp": "https://code.google.com/apis/console"
+           }
+          ],
+          "code": 403,
+          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
+         }
+        }
+    http_version: 
+  recorded_at: Tue, 04 Feb 2014 06:59:17 GMT
+recorded_with: VCR 3.0.1

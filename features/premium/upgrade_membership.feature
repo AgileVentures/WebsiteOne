@@ -6,9 +6,9 @@ Feature: Allow Users to Upgrade Membership
 
   Background:
     Given the following plans exist
-      | name    | id      |
-      | Premium | premium |
-      | PremiumPlus | premiumplus |
+      | name         | id          | amount | free_trial_length_days |
+      | Premium      | premium     | 1000   | 7                      |
+      | Premium Plus | premiumplus | 10000  | 0                      |
     And the following users exist
       | first_name | last_name | email                  | github_profile_url         | last_sign_in_ip |
       | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |
@@ -49,7 +49,7 @@ Feature: Allow Users to Upgrade Membership
     And I click "Upgrade to Premium Plus"
     Then I should see "Premium Plus Member"
     Given I am on my profile page
-    Then I should see "PremiumPlus Member"
+    Then I should see "Premium Plus Member"
     Then I should not see "Basic Member"
     And I should not see "Premium Member"
     And I should not see button "Upgrade to Premium"
@@ -63,7 +63,7 @@ Feature: Allow Users to Upgrade Membership
     Then I should see "The card was declined"
     And I should not see "Premium Plus Member"
     Given I am on my profile page
-    Then I should not see "PremiumPlus Member"
+    Then I should not see "Premium Plus Member"
     Then I should not see "Basic Member"
     And I should see "Premium Member"
     And I should see button "Upgrade to Premium Plus"
