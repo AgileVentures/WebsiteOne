@@ -11,20 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122200727) do
+ActiveRecord::Schema.define(version: 20161223092205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
-    t.string   "trackable_type"
+    t.string   "trackable_type", limit: 255
     t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "key"
+    t.string   "owner_type",     limit: 255
+    t.string   "key",            limit: 255
     t.text     "parameters"
     t.integer  "recipient_id"
-    t.string   "recipient_type"
+    t.string   "recipient_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,9 +36,9 @@ ActiveRecord::Schema.define(version: 20161122200727) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "title",      null: false
+    t.string   "title",      limit: 255, null: false
     t.text     "content"
-    t.string   "slug",       null: false
+    t.string   "slug",       limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,9 +48,9 @@ ActiveRecord::Schema.define(version: 20161122200727) do
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "authentications", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "provider",   null: false
-    t.string   "uid",        null: false
+    t.integer  "user_id",                null: false
+    t.string   "provider",   limit: 255, null: false
+    t.string   "uid",        limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,14 +67,14 @@ ActiveRecord::Schema.define(version: 20161122200727) do
   add_index "commit_counts", ["user_id"], name: "index_commit_counts_on_user_id", using: :btree
 
   create_table "documents", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.text     "body"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.integer  "user_id"
-    t.string   "slug"
+    t.string   "slug",       limit: 255
   end
 
   add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree
@@ -82,34 +83,35 @@ ActiveRecord::Schema.define(version: 20161122200727) do
 
   create_table "event_instances", force: :cascade do |t|
     t.integer  "event_id"
-    t.string   "title"
-    t.string   "hangout_url"
+    t.string   "title",              limit: 255
+    t.string   "hangout_url",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "uid"
-    t.string   "category"
+    t.string   "uid",                limit: 255
+    t.string   "category",           limit: 255
     t.integer  "project_id"
     t.integer  "user_id"
-    t.string   "yt_video_id"
+    t.string   "yt_video_id",        limit: 255
     t.text     "participants"
-    t.string   "hoa_status"
-    t.boolean  "url_set_directly", default: false
+    t.string   "hoa_status",         limit: 255
+    t.boolean  "url_set_directly",               default: false
+    t.boolean  "youtube_tweet_sent",             default: false
   end
 
   create_table "events", force: :cascade do |t|
-    t.string   "name"
-    t.string   "category"
+    t.string   "name",                                      limit: 255
+    t.string   "category",                                  limit: 255
     t.text     "description"
-    t.string   "repeats"
+    t.string   "repeats",                                   limit: 255
     t.integer  "repeats_every_n_weeks"
     t.integer  "repeats_weekly_each_days_of_the_week_mask"
     t.boolean  "repeat_ends"
     t.date     "repeat_ends_on"
-    t.string   "time_zone"
+    t.string   "time_zone",                                 limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url"
-    t.string   "slug"
+    t.string   "url",                                       limit: 255
+    t.string   "slug",                                      limit: 255
     t.datetime "start_datetime"
     t.integer  "duration"
     t.text     "exclusions"
@@ -121,11 +123,11 @@ ActiveRecord::Schema.define(version: 20161122200727) do
   add_index "events", ["start_datetime"], name: "index_events_on_start_datetime", using: :btree
 
   create_table "follows", force: :cascade do |t|
-    t.integer  "followable_id",                   null: false
-    t.string   "followable_type",                 null: false
-    t.integer  "follower_id",                     null: false
-    t.string   "follower_type",                   null: false
-    t.boolean  "blocked",         default: false, null: false
+    t.integer  "followable_id",                               null: false
+    t.string   "followable_type", limit: 255,                 null: false
+    t.integer  "follower_id",                                 null: false
+    t.string   "follower_type",   limit: 255,                 null: false
+    t.boolean  "blocked",                     default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -160,12 +162,12 @@ ActiveRecord::Schema.define(version: 20161122200727) do
   end
 
   create_table "newsletters", force: :cascade do |t|
-    t.string   "title",                        null: false
-    t.string   "subject",                      null: false
-    t.text     "body",                         null: false
-    t.boolean  "do_send",      default: false
-    t.boolean  "was_sent",     default: false
-    t.integer  "last_user_id", default: 0
+    t.string   "title",        limit: 255,                 null: false
+    t.string   "subject",      limit: 255,                 null: false
+    t.text     "body",                                     null: false
+    t.boolean  "do_send",                  default: false
+    t.boolean  "was_sent",                 default: false
+    t.integer  "last_user_id",             default: 0
     t.datetime "sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -177,29 +179,38 @@ ActiveRecord::Schema.define(version: 20161122200727) do
     t.integer "subscription_id"
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "free_trial"
+    t.string   "stripe_identifier"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "projects", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",              limit: 255
     t.text     "description"
-    t.string   "status"
+    t.string   "status",             limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "slug"
-    t.string   "github_url"
-    t.string   "pivotaltracker_url"
+    t.string   "slug",               limit: 255
+    t.string   "github_url",         limit: 255
+    t.string   "pivotaltracker_url", limit: 255
     t.text     "pitch"
-    t.integer  "commit_count",       default: 0
-    t.string   "image_url"
+    t.integer  "commit_count",                   default: 0
+    t.string   "image_url",          limit: 255
+    t.datetime "last_github_update"
   end
 
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "static_pages", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.text     "body"
     t.integer  "parent_id"
-    t.string   "slug"
+    t.string   "slug",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -207,7 +218,7 @@ ActiveRecord::Schema.define(version: 20161122200727) do
   add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
 
   create_table "statuses", force: :cascade do |t|
-    t.string   "status"
+    t.string   "status",     limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -218,14 +229,15 @@ ActiveRecord::Schema.define(version: 20161122200727) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.integer  "user_id"
+    t.integer  "plan_id"
   end
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
-    t.string   "taggable_type"
+    t.string   "taggable_type", limit: 255
     t.integer  "tagger_id"
-    t.string   "tagger_type"
+    t.string   "tagger_type",   limit: 255
     t.string   "context",       limit: 128
     t.datetime "created_at"
   end
@@ -236,45 +248,44 @@ ActiveRecord::Schema.define(version: 20161122200727) do
   add_index "taggings", ["tagger_type"], name: "index_taggings_on_tagger_type", using: :btree
 
   create_table "tags", force: :cascade do |t|
-    t.string  "name"
-    t.integer "taggings_count", default: 0
+    t.string  "name",           limit: 255
+    t.integer "taggings_count",             default: 0
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "",   null: false
+    t.string   "encrypted_password",     limit: 255, default: "",   null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,    null: false
+    t.integer  "sign_in_count",                      default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
     t.boolean  "display_email"
-    t.string   "youtube_id"
-    t.string   "slug"
-    t.boolean  "display_profile",        default: true
+    t.string   "slug",                   limit: 255
+    t.string   "youtube_id",             limit: 255
+    t.boolean  "display_profile",                    default: true
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "country_name"
-    t.string   "city"
-    t.string   "region"
-    t.string   "youtube_user_name"
-    t.string   "github_profile_url"
+    t.string   "country_name",           limit: 255
+    t.string   "city",                   limit: 255
+    t.string   "region",                 limit: 255
+    t.string   "youtube_user_name",      limit: 255
+    t.string   "github_profile_url",     limit: 255
     t.boolean  "display_hire_me"
     t.text     "bio"
-    t.boolean  "receive_mailings",       default: true
-    t.string   "country_code"
+    t.boolean  "receive_mailings",                   default: true
     t.integer  "timezone_offset"
-    t.integer  "status_count",           default: 0
-    t.string   "stripe_customer"
+    t.string   "country_code",           limit: 255
+    t.integer  "status_count",                       default: 0
     t.datetime "deleted_at"
   end
 
@@ -284,10 +295,10 @@ ActiveRecord::Schema.define(version: 20161122200727) do
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
   create_table "versions", force: :cascade do |t|
-    t.string   "item_type",  null: false
-    t.integer  "item_id",    null: false
-    t.string   "event",      null: false
-    t.string   "whodunnit"
+    t.string   "item_type",  limit: 255, null: false
+    t.integer  "item_id",                null: false
+    t.string   "event",      limit: 255, null: false
+    t.string   "whodunnit",  limit: 255
     t.text     "object"
     t.datetime "created_at"
   end
@@ -296,11 +307,11 @@ ActiveRecord::Schema.define(version: 20161122200727) do
 
   create_table "votes", force: :cascade do |t|
     t.integer  "votable_id"
-    t.string   "votable_type"
+    t.string   "votable_type", limit: 255
     t.integer  "voter_id"
-    t.string   "voter_type"
+    t.string   "voter_type",   limit: 255
     t.boolean  "vote_flag"
-    t.string   "vote_scope"
+    t.string   "vote_scope",   limit: 255
     t.integer  "vote_weight"
     t.datetime "created_at"
     t.datetime "updated_at"

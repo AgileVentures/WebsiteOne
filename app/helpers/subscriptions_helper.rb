@@ -4,7 +4,7 @@ module SubscriptionsHelper
   end
 
   def action_text
-    @sponsorship ? 'Sponsor Premium' : 'Get Premium'
+    @sponsorship ? 'Sponsor' : 'Get'
   end
 
   def type

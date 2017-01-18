@@ -6,7 +6,7 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
 
   @current_user = @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
   if premium
-    subscription = Premium.create(user: @user, started_at: Time.now)
+    subscription = Subscription.create(user: @user, plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
     customer = Stripe::Customer.create({
                                            email: email,
                                            source: @stripe_test_helper.generate_card_token
