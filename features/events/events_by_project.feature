@@ -1,5 +1,5 @@
 @vcr
-Feature: List Events
+Feature: List Events by Project
   As a site user
   So I can find events relevant to me
   I would like to see a list of events linked to a given project
@@ -48,4 +48,3 @@ Feature: List Events
     Then I should not see "Standup"
     And I should see "PP Session"
     And "cs169" is selected in the project dropdown
-
