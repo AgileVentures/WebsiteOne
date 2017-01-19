@@ -6,14 +6,15 @@ Then(/^the user should( not)? receive a "([^"]*)" email$/) do |negate, subject|
   check_email('random@morerandom.com', negate, subject)
 end
 
-And /^"(.*?)" should( not)? receive a "(.*?)" email$/ do |user_email, negate, subject|
-  check_email(user_email, negate, subject)
+And /^"(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/ do |user_email, negate, subject, body|
+  check_email(user_email, negate, subject, body)
 end
 
-def check_email(email, negate, subject)
+def check_email(email, negate, subject, body)
   unless negate
     expect(ActionMailer::Base.deliveries.size).to eq 1
     expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
+    expect(ActionMailer::Base.deliveries[0].body).to include(body) unless body.nil?
     expect(ActionMailer::Base.deliveries[0].to).to include(email) unless email.nil?
   else
     expect(ActionMailer::Base.deliveries.size).to eq 0
