@@ -179,6 +179,14 @@ ActiveRecord::Schema.define(version: 20161223092205) do
     t.integer "subscription_id"
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "free_trial"
+    t.string   "stripe_identifier"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "title",              limit: 255
     t.text     "description"
@@ -190,7 +198,7 @@ ActiveRecord::Schema.define(version: 20161223092205) do
     t.string   "github_url",         limit: 255
     t.string   "pivotaltracker_url", limit: 255
     t.text     "pitch"
-    t.integer  "commit_count",       default: 0
+    t.integer  "commit_count",                   default: 0
     t.string   "image_url",          limit: 255
     t.datetime "last_github_update"
   end
@@ -221,6 +229,7 @@ ActiveRecord::Schema.define(version: 20161223092205) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.integer  "user_id"
+    t.integer  "plan_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -277,7 +286,6 @@ ActiveRecord::Schema.define(version: 20161223092205) do
     t.integer  "timezone_offset"
     t.string   "country_code",           limit: 255
     t.integer  "status_count",                       default: 0
-    t.string   "stripe_customer"
     t.datetime "deleted_at"
   end
 

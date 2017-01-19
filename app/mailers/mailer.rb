@@ -1,26 +1,15 @@
 class Mailer < ActionMailer::Base
   default from: 'info@agileventures.org', reply_to: 'info@agileventures.org', cc: 'support@agileventures.org'
 
-  def send_premium_payment_complete(email)
-    mail(to: email, subject: 'Welcome to AgileVentures Premium')
+  def send_premium_payment_complete(plan, email)
+    @plan = plan
+    mail(to: email, subject: "Welcome to AgileVentures #{@plan.name}")
   end
 
   def send_sponsor_premium_payment_complete(email, sponsor_email)
     user = User.find_by(email: sponsor_email)
     @sponsor = user.nil? ? sponsor_email : user.full_name
     mail(to: email, subject: 'You\'ve been sponsored for AgileVentures Premium Membership')
-  end
-
-  def send_premium_f2f_payment_complete(email)
-    mail(to: email, subject: 'Welcome to AgileVentures Premium F2F')
-  end
-
-  def send_premium_mob_payment_complete(email)
-    mail(to: email, subject: 'Welcome to AgileVentures Premium Mob')
-  end
-
-  def send_premium_plus_payment_complete(email)
-    mail(to: email, subject: 'Welcome to AgileVentures Premium Plus')
   end
 
   def send_welcome_message(user)
