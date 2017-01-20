@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Mailer do
 
   describe 'send_premium_payment_complete_message' do
-    let(:plan) { instance_double(Plan, name: 'Premium', free_trial_length_days: 7, free_trial?: true) }
+    let(:plan) { instance_double(Plan, name: 'Premium', free_trial_length_days: 7, free_trial?: true, category: nil) }
     it 'sends payment complete message' do
       mail = Mailer.send_premium_payment_complete(plan, 'candice@clemens.com')
       expect(mail.from).to include('info@agileventures.org')
