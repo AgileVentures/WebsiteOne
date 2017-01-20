@@ -8,9 +8,16 @@ module GithubCommitsJob
       begin
         update_total_commit_count_for(project)
         update_user_commit_counts_for(project)
+      rescue Exception
+        Rails.logger.warn "#{project.github_url} may have caused the issue. Commit1 update terminated for this project!"
+      end
+    end
+
+    Project.with_github_url.each do |project|
+      begin
         update_last_pushed_dt_for(project)
       rescue Exception
-        Rails.logger.warn "#{project.github_url} may have caused the issue. Commit update terminated for this project!"
+        Rails.logger.warn "#{project.github_url} may have caused the issue. Commit2 update terminated for this project!"
       end
     end
   end
