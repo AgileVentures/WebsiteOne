@@ -60,7 +60,7 @@ module GithubCommitsJob
     dt = get_project_stats(project)
     begin
       project.update(last_github_update: dt)
-    rescue Exception => ex
+    rescue Exception
       Rails.logger.error "#{dt} caused an error, but that will not stop me!"
     end
   end
