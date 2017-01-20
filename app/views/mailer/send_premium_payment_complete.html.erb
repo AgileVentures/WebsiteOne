@@ -12,7 +12,11 @@
     <p>Your <%= @plan.free_trial_length_days %> day free trial has now started.  You will not be charged until <%= @plan.free_trial_length_days %> days have passed.</p>
 <% end %>
 
-<p>An AgileVentures mentor will be in touch shortly to help you receive all of your <%= @plan.name %> membership benefits.</p>
+<% if @plan.category == 'organization' %>
+  <p>An AgileVentures specialist will be in touch shortly to help you receive all of your subscription benefits.</p>
+<% else %>
+  <p>An AgileVentures mentor will be in touch shortly to help you receive all of your membership benefits.</p>
+<% end %>
 
 <p>If you need help at any time, please contact us by replying to this message.
   Similarly, if you ever have any questions then please do not hesitate to send us a message or email</p>
