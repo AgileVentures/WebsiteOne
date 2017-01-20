@@ -10,7 +10,7 @@ And /^"(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/ do 
   check_email(user_email, negate, subject, body)
 end
 
-def check_email(email, negate, subject, body)
+def check_email(email, negate, subject, body = nil)
   unless negate
     expect(ActionMailer::Base.deliveries.size).to eq 1
     expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
