@@ -16,7 +16,7 @@ Feature: Browse and create projects
       | hello venus   | greetings venus folks   |             | active   |                                             |                                                  |              | 01/01/2000         |
       | hello terra   | greetings terra folks   |             | active   |                                             |                                                  |              | 01/01/2000         |
       | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         | 01/01/2000         |
-
+      | hello alpha   | greetings alpha folks   |             | active   |                                             |                                                  | 300          | 01/12/2000         |
     And there are no videos
 
 #  Scenarios for Index page
@@ -67,16 +67,16 @@ Feature: Browse and create projects
       | greetings jupiter folks |
       | greetings mercury folks |
       | greetings saturn folks  |
-      | greetings sun folks     |
+      | greetings alpha folks     |
     When I go to the next page
     Then I should see:
+      | greetings alpha folks   |
       | greetings earthlings    |
     And I should not see:
       | greetings aliens        |
       | greetings jupiter folks |
       | greetings mercury folks |
       | greetings saturn folks  |
-      | greetings sun folks     |
 
 #  Scenarios for NEW page
 
