@@ -7,8 +7,7 @@ class SubscriptionsController < ApplicationController
   def new
     @upgrade_user = params[:user_id]
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
-    plan = params[:plan] || 'premium'
-    @plan = Plan.find_by(third_party_identifier: plan)
+    @plan = detect_plan_before_payment
   end
 
   def edit
@@ -28,7 +27,7 @@ class SubscriptionsController < ApplicationController
 
   def create
     @user = detect_user
-    @plan = detect_plan
+    @plan = detect_plan_after_payment
     @sponsored_user = sponsored_user?
 
     create_stripe_customer unless paypal?
@@ -54,7 +53,17 @@ class SubscriptionsController < ApplicationController
 
   private
 
-  def detect_plan
+  def detect_plan_before_payment
+    Plan.find_by(third_party_identifier: params[:plan]) || default_plan
+  rescue ActiveRecord::NotFound
+    default_plan
+  end
+
+  def default_plan
+    Plan.find_by(third_party_identifier: 'premium')
+  end
+
+  def detect_plan_after_payment
     id = paypal? ? params['item_name'].downcase.delete(' ') : params[:plan]
     Plan.find_by(third_party_identifier: id)
   end

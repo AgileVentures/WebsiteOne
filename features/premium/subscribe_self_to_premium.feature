@@ -43,3 +43,10 @@ Feature: Subscribe Self to Premium
     When Paypal updates our endpoint incorrectly
     Then "sam-buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium" email
     And I should see "redirected" in last_response
+
+  Scenario: Pay by card, and default to Premium
+    Given I visit "subscriptions/new?plan=76a5uydstjg"
+    And I click "Subscribe" within the card_section
+    When I fill in appropriate card details for premium
+    Then I should see "Thanks, you're now an AgileVentures Premium Member!"
+    And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
