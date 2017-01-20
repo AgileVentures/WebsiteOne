@@ -8,6 +8,7 @@ module GithubCommitsJob
       begin
         update_total_commit_count_for(project)
         update_user_commit_counts_for(project)
+        update_last_pushed_dt_for(project)
       rescue Exception
         Rails.logger.warn "#{project.github_url} may have caused the issue. Commit update terminated for this project!"
       end
@@ -51,6 +52,24 @@ module GithubCommitsJob
       contributors = client.contributor_stats(repo)
       return contributors unless contributors.nil?
       Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
+      sleep 3
+    end
+  end
+
+  def update_last_pushed_dt_for(project)
+    dt = get_project_stats(project)
+    begin
+      project.update(last_github_update: dt)
+    rescue Exception => ex
+      Rails.logger.error "#{dt} caused an error, but that will not stop me!"
+    end
+  end
+
+  def get_project_stats(project)
+    loop do
+      dt =  client.repo(github_url(project)).pushed_at
+      return dt unless dt.nil?
+      Rails.logger.warn "Waiting for Github to return last_pushed_dt for #{project}"
       sleep 3
     end
   end
