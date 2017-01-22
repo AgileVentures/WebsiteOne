@@ -16,8 +16,8 @@ Feature: Update github last update field of all projects
     When I run the rake task for fetching github
     Then I should see projects with following updates:
       | title        | status   | last_github_update      |
-      | WebsiteTwo   | active   | 2000-01-01 01:01:01.000000000 +0000 |
-      | WebsiteOne   | inactive | 2000-01-01 01:01:01.000000000 +0000 |
+      | WebsiteTwo   | active   | 2016-05-05 14:09:50.000000000 +0000 |
+      | WebsiteOne   | inactive | 2017-01-22 11:38:40.000000000 +0000 |
       | edx          | active   | 2000-01-01 01:01:01.000000000 +0000 |
       | Unity        | active   | 2000-01-01 01:01:01.000000000 +0000 |
-      | LocalSupport | active   | 2000-01-01 01:01:01.000000000 +0000 |
+      | LocalSupport | active   | 2017-01-20 19:07:00.000000000 +0000 |
