@@ -6,7 +6,7 @@ When(/^I run the rake task for fetching github commits$/) do
   $rake['fetch_github_commits'].execute
 end
 
-When(/^I run the rake task for fetching github$/) do
+When(/^I run the rake task for fetching github last_pushed_at information$/) do
   $rake['fetch_github'].execute
 end
 
