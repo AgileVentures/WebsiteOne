@@ -34,13 +34,13 @@
 
         <% if @plan.free_trial? %>
         <!-- Set the terms of the 1st trial period. -->
-        <input type="hidden" name="currency_code" value="GBP">
         <input type="hidden" name="a1" value="0">
         <input type="hidden" name="p1" value="<%= @plan.free_trial_length_days %>">
         <input type="hidden" name="t1" value="D">
         <% end %>
 
         <!-- Set the terms of the regular subscription. -->
+        <input type="hidden" name="currency_code" value="GBP">
         <input type="hidden" name="a3" value="<%= number_to_currency(@plan.amount / 100.0, unit: '')  %>">
         <input type="hidden" name="p3" value="1">
         <input type="hidden" name="t3" value="M">
