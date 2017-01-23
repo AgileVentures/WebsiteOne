@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_next_scrum
-    @next_event = Event.next_occurrence(:Scrum)
+    @next_event = Event.next_occurrence(:Scrum, 15.minutes.ago)
   end
 
   def store_location
