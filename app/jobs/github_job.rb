@@ -4,7 +4,7 @@ module GithubJob
   extend self
 
   def run
-    Project.all.each do |p|
+    Project.with_github_url.each do |p|
       begin
         p.last_github_update = client.repo("#{p.github_repo_name}/#{p.github_repo_user_name}").pushed_at
         p.save
