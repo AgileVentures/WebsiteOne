@@ -77,9 +77,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     When I am on the home page
     Then I should see "Scrum is live!"
     And I should see link "Click to join!" with "http://hangout.test"
-    
+
   @time-travel-step
-  Scenario: Don't render Join live event link
+  Scenario: Don't render Join live event link when event is not live
     Given the date is "2014/02/03 07:01:00 UTC"
     When I am on the home page
     Then I should not see "Scrum is live!"
