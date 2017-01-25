@@ -118,7 +118,17 @@ Then(/^I should see projects with following details:$/) do |table|
       updated_project = Project.find_by_title(project["title"])
       expect(updated_project.commit_count).to eq(project["commit_count"].to_i)
    end
-   
+
+end
+
+Then(/^I should see projects with following updates:$/) do |table|
+  # table is a Cucumber::Core::Ast::DataTable
+  projects = table.hashes
+  projects.each do | project |
+    updated_project = Project.find_by_title(project["title"])
+    expect(updated_project.last_github_update).to eq(project["last_github_update"])
+  end
+
 end
 
 Then(/^I should see a GPA of "([^"]*)" for "([^"]*)"$/) do |gpa, project_name|
