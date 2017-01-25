@@ -1,5 +1,7 @@
 class CardsController < ApplicationController
 
+  before_filter :authenticate_user!
+
   def edit
   end
 
@@ -12,6 +14,16 @@ class CardsController < ApplicationController
   rescue Stripe::StripeError, NoMethodError => e
     logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
     @error = true
+  end
+
+  private
+
+  def stripe_token(params)
+    Rails.env.test? ? generate_test_token : params[:stripeToken]
+  end
+
+  def generate_test_token
+    StripeMock.create_test_helper.generate_card_token
   end
 
 end
