@@ -10,9 +10,6 @@ class SubscriptionsController < ApplicationController
     @plan = detect_plan_before_payment
   end
 
-  def edit
-  end
-
   def upgrade
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
@@ -38,17 +35,6 @@ class SubscriptionsController < ApplicationController
   rescue StandardError => e
     flash[:error] = e.message
     redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))
-  end
-
-  def update
-    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
-    card = customer.sources.create(card: stripe_token(params))
-    card.save
-    customer.default_card = card.id
-    customer.save
-  rescue Stripe::StripeError, NoMethodError => e
-    logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
-    @error = true
   end
 
   private
