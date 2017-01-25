@@ -16,9 +16,9 @@ class SubscriptionsController < ApplicationController
   def upgrade
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
-    subscription.plan = "premiumplus"
+    subscription.plan = "premiummob"
     subscription.save
-    current_user.subscription.plan = Plan.find_by third_party_identifier: 'premiumplus'
+    current_user.subscription.plan = Plan.find_by third_party_identifier: 'premiummob'
     current_user.save
   rescue Stripe::StripeError => e
     flash[:error] = e.message
