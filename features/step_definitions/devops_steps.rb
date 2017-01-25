@@ -7,7 +7,7 @@ When(/^I run the rake task for fetching github commits$/) do
 end
 
 When(/^I run the rake task for fetching github last_pushed_at information$/) do
-  $rake['fetch_github'].execute
+  $rake['fetch_github_last_updates'].execute
 end
 
 When(/^I run the rake task for migrating stripe$/) do

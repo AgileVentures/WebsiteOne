@@ -1,6 +1,6 @@
 require 'octokit'
 
-module GithubJob
+module GithubLastUpdatesJob
   extend self
 
   def run

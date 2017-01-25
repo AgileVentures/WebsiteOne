@@ -4,8 +4,8 @@ task :fetch_github_commits => :environment do
   GithubCommitsJob.run
 end
 
-task :fetch_github => :environment do
-  GithubJob.run
+task :fetch_github_last_updates => :environment do
+  GithubLastUpdatesJob.run
 end
 
 task :karma_calculator => :environment do
