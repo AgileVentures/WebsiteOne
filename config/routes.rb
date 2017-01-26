@@ -6,8 +6,10 @@ WebsiteOne::Application.routes.draw do
   resources :activities
   resources :newsletters
 
+  match '/cards/update' => 'cards#update', :via => [:put]
+  match '/cards/:user_slug/edit' => 'cards#edit', :via => [:get]
   match '/subscriptions/upgrade' => 'subscriptions#upgrade', :via => [:put]
-  resources :subscriptions, only: [:create, :edit, :update, :new]
+  resources :subscriptions, only: [:create, :update, :new]
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show], :format => false do
