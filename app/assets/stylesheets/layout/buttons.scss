@@ -16,6 +16,12 @@
   margin-top: 2px;
 }
 
+.call-to-action{
+  max-width: 75%;
+  @media(max-width: 414px) {
+    max-width: 100%;
+  }
+}
 .call-to-action:hover {
     background: #34495e;
 }

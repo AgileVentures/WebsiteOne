@@ -119,6 +119,15 @@ strong {
 /* Custom page CSS
 -------------------------------------------------- */
 
+a.call-to-action > span {
+  font-size: 2.5em;
+  @media(max-width: 414px){
+    font-size: 1.1em;
+  }
+  @media(min-width: 768px){
+    font-size: 1.8em;
+  }
+}
 #wrap > .container {
   padding: 60px 15px 0;
 }
