@@ -8,18 +8,6 @@ class SubscriptionsController < ApplicationController
     @plan = detect_plan_before_payment
   end
 
-  def upgrade
-    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
-    subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
-    subscription.plan = "premiummob"
-    subscription.save
-    current_user.subscription.plan = Plan.find_by third_party_identifier: 'premiummob'
-    current_user.save
-  rescue Stripe::StripeError => e
-    flash[:error] = e.message
-    redirect_to user_path(current_user)
-  end
-
   def create
     @user = detect_user
     @plan = detect_plan_after_payment
@@ -33,6 +21,18 @@ class SubscriptionsController < ApplicationController
   rescue StandardError => e
     flash[:error] = e.message
     redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))
+  end
+
+  def update
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+    subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
+    subscription.plan = "premiummob"
+    subscription.save
+    current_user.subscription.plan = Plan.find_by third_party_identifier: 'premiummob'
+    current_user.save
+  rescue Stripe::StripeError => e
+    flash[:error] = e.message
+    redirect_to user_path(current_user)
   end
 
   private
