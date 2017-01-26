@@ -1,16 +1,11 @@
 class SubscriptionsController < ApplicationController
 
-  before_filter :authenticate_user!, only: [:edit, :update]
-
   skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
     @upgrade_user = params[:user_id]
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
     @plan = detect_plan_before_payment
-  end
-
-  def edit
   end
 
   def upgrade
@@ -38,17 +33,6 @@ class SubscriptionsController < ApplicationController
   rescue StandardError => e
     flash[:error] = e.message
     redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))
-  end
-
-  def update
-    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
-    card = customer.sources.create(card: stripe_token(params))
-    card.save
-    customer.default_card = card.id
-    customer.save
-  rescue Stripe::StripeError, NoMethodError => e
-    logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
-    @error = true
   end
 
   private
