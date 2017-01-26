@@ -1,4 +1,4 @@
-<%= form_tag cards_update_path(current_user.slug), method: :put do %>
+<%= form_tag card_path(current_user.slug), method: :put do %>
   <script
   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
   data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
