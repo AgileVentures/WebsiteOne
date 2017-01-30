@@ -90,10 +90,10 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the date is "2014/02/03 07:01:00 UTC"
     When I am on the home page
     Then I should not see "Scrum is live!"
-    And I should not see link "Click to join!" with "http://hangout.test"
+    And I should not see "Click to join!"
 
-  @time-travel-step
-  @javascript
+
+  @javascript @time-travel-step
   Scenario: Don't show the Join live event link on the upcoming events page when event is not live
     Given the date is "2014/02/03 07:01:00 UTC"
     Given I am on the show page for event "Scrum"
