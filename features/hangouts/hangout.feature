@@ -10,7 +10,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Scrum         | Daily scrum meeting  | Scrum         | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |                       |                                           |
       | Repeat Scrum  | Daily scrum meeting  | Scrum         | 2014/02/03 07:00:00 UTC | 150      | weekly  | UTC       | 1                     | 15                                        |
       | Retrospective | Weekly retrospective | ClientMeeting | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |                       |                                           |
-      | Earlier       | Weekly retrospective | Scrum         | 2014/02/03 06:30:00 UTC | 15       | never   | UTC       |                       |                                           |
     And the following hangouts exist:
       | Start time          | Title        | Project    | Category | Event        | EventInstance url   | Youtube video id | End time            |
       | 2012-02-04 07:00:00 | HangoutsFlow | WebsiteOne | Scrum    | Repeat Scrum | http://hangout.test | QWERT55          | 2014-02-04 07:02:00 |
@@ -64,41 +63,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Then I should see the Edit URL controls
     And I click on the Cancel button
     Then I should not see the Edit URL controls
-
-  @time-travel-step
-  Scenario: Render Join live event link
-    Given the date is "2014/02/03 07:01:00 UTC"
-    And the Hangout for event "Scrum" has been started with details:
-      | EventInstance link | http://hangout.test |
-      | Started at         | 07:00:00 UTC        |
-
-    When I am on the show page for event "Scrum"
-    Then I should see link "Join now" with "http://hangout.test"
-
-    When I am on the home page
-    Then I should see "Scrum is live!"
-    And I should see link "Click to join!" with "http://hangout.test"
-
-  @time-travel-step
-  Scenario: Show correct upcoming scrum on home page
-    Given the date is "2014/02/03 07:01:00 UTC"
-    When I am on the home page
-    Then I should see "Scrum is about to start"
-
-  @time-travel-step
-  Scenario: Don't show the Join live event link on the home page when event is not live
-    Given the date is "2014/02/03 07:01:00 UTC"
-    When I am on the home page
-    Then I should not see "Scrum is live!"
-    And I should not see "Click to join!"
-
-
-  @javascript @time-travel-step
-  Scenario: Don't show the Join live event link on the upcoming events page when event is not live
-    Given the date is "2014/02/03 07:01:00 UTC"
-    Given I am on the show page for event "Scrum"
-    Then I should not see "Scrum is live!"
-# The above test should fail pass without a fix.  It isn't seeing the javascript #FIXME
 
   @javascript
   Scenario: Display hangout button on a project's page
