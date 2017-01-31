@@ -17,6 +17,7 @@ Feature: Sign in
     Then I see a successful sign in message
     When I return to the site
     Then I should be signed in
+    And I should not see a sign up link
 
   Scenario Outline: User enters wrong credentials
     Given I exist as a user
