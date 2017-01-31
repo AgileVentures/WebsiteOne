@@ -125,6 +125,10 @@ Then /^I should be signed in$/ do
   expect(page).to_not have_content "Log in"
 end
 
+And /^I should not see a sign up link$/ do
+  expect(page).to_not have_xpath("//a[@href = '#{new_user_registration_path}']")
+end
+
 Then /^I should be signed out$/ do
   expect(page).to have_content "Sign up"
   expect(page).to have_content "Log in"
