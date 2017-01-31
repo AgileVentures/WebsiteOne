@@ -46,6 +46,8 @@ def path_to(page_name, id = '')
       new_newsletter_path
     when 'newsletters index' then
       newsletters_path
+    when 'sign up' then
+      new_user_registration_path
     else
       raise('path to specified is not listed in #path_to')
   end

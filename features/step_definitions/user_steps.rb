@@ -122,7 +122,6 @@ end
 ### THEN ###
 Then /^I should be signed in$/ do
   expect(page).to have_content "Log out"
-  expect(page).to_not have_content "Sign up"
   expect(page).to_not have_content "Log in"
 end
 
