@@ -69,7 +69,7 @@
     <% end %>
       <li><%= presenter.user.membership_type %> Member</li>
       <% if presenter.user.membership_type == 'Premium' %>
-        <li><%= render 'users/profile/premium_mob_upgrade' %></li>
+        <li><%= render 'users/profile/premium_mob_upgrade', presenter: presenter  %></li>
       <% elsif presenter.user.membership_type == 'Basic' %>
         <li><%= render 'users/profile/premium_upgrade', presenter: presenter %></li>
       <% end %>

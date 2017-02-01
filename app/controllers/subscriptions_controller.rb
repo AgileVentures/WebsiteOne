@@ -24,6 +24,14 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
+    # so we have multiple cases here
+    # 1. existing sponsor has already paid and is adding additional upgrade - below code would work
+    # 2. user has paid for their own premium, and upgrades themselves - below code is good
+    # 3. current_user paying for upgrade is different from user who paid for initial premium - will either fail or update incorrectly
+    # 4. sponsor is sponsoring multiple different users - will update incorrectly
+
+    # have adjusted presentation logic to only show the button to upgrade the subscription if the
+    # user themselves actually paid for the original premium plan
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
     subscription.plan = "premiummob"
@@ -31,6 +39,7 @@ class SubscriptionsController < ApplicationController
     current_user.subscription.plan = Plan.find_by third_party_identifier: 'premiummob'
     current_user.save
   rescue Stripe::StripeError => e
+    # nil customer id will lead to Stripe::InvalidRequestError
     flash[:error] = e.message
     redirect_to user_path(current_user)
   end
