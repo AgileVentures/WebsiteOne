@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
   has_one :subscription, autosave: true
 
   def stripe_customer_id # ultimately replacing the field stripe_customer
+    return nil unless subscription
     subscription.identifier
   end
 

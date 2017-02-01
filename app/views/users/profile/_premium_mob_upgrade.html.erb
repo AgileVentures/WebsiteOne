@@ -1,3 +1,9 @@
-<%= form_tag subscription_path, method: "put" do %>
-  <%= submit_tag "Upgrade to Premium Mob", class:"btn btn-primary btn-lg active", style: "margin: 5px;"%>
+<% if presenter.user_same_as?(current_user) %>
+    <% button_text = 'Upgrade to Premium Mob' %>
+    <%= form_tag subscription_path, method: "put" do %>
+        <input type="hidden" name="user_id" value="<%=presenter.user.slug %>">
+        <%= submit_tag button_text, class:"btn btn-primary btn-lg active", style: "margin: 5px;"%>
+    <% end %>
 <% end %>
+
+
