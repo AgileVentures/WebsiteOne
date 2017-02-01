@@ -6,11 +6,14 @@ Feature: Allow Users to Sponsor other members
 
   Background:
     Given the following plans exist
-      | name         | id          | amount | free_trial_length_days |
-      | Premium      | premium     | 1000   | 7                      |
+      | name    | id      | amount | free_trial_length_days |
+      | Premium | premium | 1000   | 7                      |
     And the following users exist
       | first_name | last_name | email                  | github_profile_url         | last_sign_in_ip |
       | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |
+    And the following premium users exist
+      | first_name | last_name | email                | github_profile_url         | last_sign_in_ip |
+      | Billy      | Bob       | bob@btinternet.co.uk | http://github.com/BillyBob | 127.0.0.1       |
     And the email queue is clear
 
   Scenario: User upgrades another user from free tier to premium via card
@@ -23,8 +26,8 @@ Feature: Allow Users to Sponsor other members
     And "alice@btinternet.co.uk" should receive a "You've been sponsored for AgileVentures Premium Membership" email
     Given I visit Alice's profile page
     Then I should see "Premium Member"
-    Then I should not see "Basic Member"
-    Then I should not see "Sponsor for Premium"
+    And I should not see "Basic Member"
+    And I should not see "Sponsor for Premium"
     And I should not see "Upgrade to Premium"
 
   Scenario: User upgrades another user from free tier to premium via PayPal
@@ -37,8 +40,8 @@ Feature: Allow Users to Sponsor other members
     Given I visit Alice's profile page
     And "alice@btinternet.co.uk" should receive a "You've been sponsored for AgileVentures Premium Membership" email
     Then I should see "Premium Member"
-    Then I should not see "Basic Member"
-    Then I should not see "Sponsor for Premium"
+    And I should not see "Basic Member"
+    And I should not see "Sponsor for Premium"
     And I should not see "Upgrade to Premium"
 
   Scenario: non logged in user upgrades another user from free tier to premium
@@ -50,8 +53,8 @@ Feature: Allow Users to Sponsor other members
     And "alice@btinternet.co.uk" should receive a "You've been sponsored for AgileVentures Premium Membership" email
     Given I visit Alice's profile page
     Then I should see "Premium Member"
-    Then I should not see "Basic Member"
-    Then I should not see "Sponsor for Premium"
+    And I should not see "Basic Member"
+    And I should not see "Sponsor for Premium"
     And I should not see "Upgrade to Premium"
 
   Scenario: non logged in user upgrades another user from free tier to premium via PayPal
@@ -63,6 +66,12 @@ Feature: Allow Users to Sponsor other members
     And "alice@btinternet.co.uk" should receive a "You've been sponsored for AgileVentures Premium Membership" email
     Given I visit Alice's profile page
     Then I should see "Premium Member"
-    Then I should not see "Basic Member"
-    Then I should not see "Sponsor for Premium"
+    And I should not see "Basic Member"
+    And I should not see "Sponsor for Premium"
     And I should not see "Upgrade to Premium"
+
+  Scenario: Different User attempts to update an existing Premium user (and won't see button)
+    Given I am logged in
+    When I visit Billy's profile page
+    Then I should not see button "Sponsor for Premium Mob"
+    And I should not see button "Upgrade to Premium Mob"

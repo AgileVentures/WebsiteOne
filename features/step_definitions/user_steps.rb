@@ -5,15 +5,8 @@ end
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
 
   @current_user = @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
-  if premium
-    subscription = Subscription.create(user: @user, plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
-    customer = Stripe::Customer.create({
-                                           email: email,
-                                           source: @stripe_test_helper.generate_card_token
-                                       })
-    customer.subscriptions.create(plan: 'premium')
-    payment_source = PaymentSource::Stripe.create(identifier: customer.id, subscription: subscription )
-  end
+
+  set_user_as_premium(@user) if premium
 
   visit new_user_session_path
   within ('#main') do
@@ -21,6 +14,16 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
     fill_in 'user_password', :with => password
     click_button 'Sign in'
   end
+end
+
+def set_user_as_premium(user)
+  subscription = Subscription.create(user: user, plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
+  customer = Stripe::Customer.create({
+                                         email: user.email,
+                                         source: @stripe_test_helper.generate_card_token
+                                     })
+  customer.subscriptions.create(plan: 'premium')
+  payment_source = PaymentSource::Stripe.create(identifier: customer.id, subscription: subscription )
 end
 
 Given /^I am not logged in$/ do
@@ -181,6 +184,15 @@ end
 Given /^the following users exist$/ do |table|
   table.hashes.each do |attributes|
     FactoryGirl.create(:user, attributes)
+  end
+end
+
+Given /^the following premium users exist$/ do |table|
+  table.hashes.each do |attributes|
+    attributes['password'] = 'password' unless attributes['password']
+    attributes['password_confirmation'] = 'password' unless attributes['password_confirmation']
+    user = User.create(attributes)
+    set_user_as_premium(user)
   end
 end
 
