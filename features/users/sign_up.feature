@@ -7,11 +7,6 @@ Feature: As a developer
   Background:
     Given I am not logged in
 
-  Scenario: User clicks call to action and ends up on sign up page
-    Given I am on the "home" page
-    And I click "Sign up now to start coding!"
-    Then I should be on the "sign up" page
-
   Scenario: Let a visitor register as a site user
     Given I am on the "registration" page
     And I submit "user@example.com" as username
