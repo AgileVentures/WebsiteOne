@@ -4,6 +4,12 @@ Feature: Escalating Call to Action
   So that we can move towards sustainability
   I would like users to see an escalating call to action depending on their subscription
 
+  Background:
+    Given the following plans exist
+      | name        | id         | amount | free_trial_length_days |
+      | Premium     | premium    | 1000   | 7                      |
+      | Premium Mob | premiummob | 2500   | 0                      |
+
   Scenario: Guest user sees call to action which links to sign up page
     Given I am on the "home" page
     When I click "Sign up now to start coding!"
@@ -27,4 +33,3 @@ Feature: Escalating Call to Action
     When I click "Upgrade to Premium F2F for individual sessions with a Mentor"
     Then I should be on the "premium f2f sign up" page
 
-    
