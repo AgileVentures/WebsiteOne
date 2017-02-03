@@ -32,7 +32,7 @@ Feature:
     Given I am on the "Articles" page
     Then I should see "Ruby"
     When I click "Ruby" within the sidebar
-    Then I should be on the "Articles" page
+    Then I should be on the "Articles with Ruby tag" page
     And I should see "Ruby is on Fire"
     And I should not see "Rails is not for trains"
     And I should not see "JQuery cannot be queried"
