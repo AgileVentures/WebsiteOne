@@ -19,7 +19,7 @@ def path_to(page_name, id = '')
     when 'new project' then
       new_project_path
     when 'articles' then
-      articles_path
+      articles_path(tag: 'Ruby')
     when 'edit' then
       edit_project_path(id)
     when 'show' then
