@@ -1,0 +1,14 @@
+<% if current_user %>
+    <% if current_user.membership_type == 'Basic' %>
+        <% path = new_subscription_path %>
+        <% message = 'Upgrade to Premium for additional support' %>
+    <% elsif current_user.membership_type == 'Premium' %>
+        <% path = new_subscription_path(plan: 'premiummob') %>
+        <% message = 'Upgrade to Premium Mob for group sessions with a Mentor' %>
+    <% end %>
+<% else %>
+    <% path = new_user_registration_path %>
+    <% message = 'Sign up now to start coding!' %>
+<% end %>
+
+<a href="<%= path %>" class="btn btn-primary btn-block call-to-action " style="margin: auto; margin-bottom: 10px;"><span><%= message %></span></a>
