@@ -19,6 +19,8 @@ def path_to(page_name, id = '')
     when 'new project' then
       new_project_path
     when 'articles' then
+      articles_path
+    when 'articles with ruby tag' then
       articles_path(tag: 'Ruby')
     when 'edit' then
       edit_project_path(id)
