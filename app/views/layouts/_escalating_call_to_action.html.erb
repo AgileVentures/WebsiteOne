@@ -5,9 +5,6 @@
     <% elsif current_user.membership_type == 'Premium' %>
         <% path = new_subscription_path(plan: 'premiummob') %>
         <% message = 'Upgrade to Premium Mob for group sessions with a Mentor' %>
-    <% elsif current_user.membership_type == 'Premium Mob' %>
-        <% path = new_subscription_path(plan: 'premiumf2f') %>
-        <% message = 'Upgrade to Premium F2F for individual sessions with a Mentor' %>
     <% end %>
 <% else %>
     <% path = new_user_registration_path %>

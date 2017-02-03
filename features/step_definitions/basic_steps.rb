@@ -48,6 +48,10 @@ def path_to(page_name, id = '')
       newsletters_path
     when 'sign up' then
       new_user_registration_path
+    when 'premium sign up' then
+      new_subscription_path
+    when 'premium mob sign up' then
+      new_subscription_path(plan: 'premiummob')
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -163,7 +167,11 @@ Then(/^I should not see a link "([^"]*)" to "([^"]*)"$/) do |link, url|
 end
 
 Then /^I should be on the "([^"]*)" page$/ do |page|
-  expect(current_path).to eq path_to(page)
+  expect(current_fullpath).to eq path_to(page)
+end
+
+def current_fullpath
+  URI.parse(current_url).request_uri
 end
 
 Then /^I should see a form(?: "([^"]*)")? with:$/ do |name, table|

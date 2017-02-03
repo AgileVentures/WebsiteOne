@@ -3,17 +3,10 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
 end
 
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
-  login_handling_premium(premium, name, email, password)
-end
 
-Given /^I am logged in as( a premium mob)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
-  login_handling_premium(premium, name, email, password, true)
-end
-
-def login_handling_premium(premium, name, email, password, mob = false)
   @current_user = @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
 
-  set_user_as_premium(@user, mob) if premium
+  set_user_as_premium(@user) if premium
 
   visit new_user_session_path
   within ('#main') do
@@ -23,9 +16,8 @@ def login_handling_premium(premium, name, email, password, mob = false)
   end
 end
 
-def set_user_as_premium(user, mob = false)
-  plan = mob ? 'Premium Mob' : 'Premium'
-  subscription = Subscription.create(user: user, plan: Plan.find_by(name: plan), started_at: Time.now)
+def set_user_as_premium(user)
+  subscription = Subscription.create(user: user, plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
   customer = Stripe::Customer.create({
                                          email: user.email,
                                          source: @stripe_test_helper.generate_card_token
