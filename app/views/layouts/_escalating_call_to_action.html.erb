@@ -11,4 +11,6 @@
     <% message = 'Sign up now to start coding!' %>
 <% end %>
 
+<% if path && message %>
 <a href="<%= path %>" class="btn btn-primary btn-block call-to-action " style="margin: auto; margin-bottom: 10px;"><span><%= message %></span></a>
+<% end %>
