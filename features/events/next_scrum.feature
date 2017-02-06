@@ -46,5 +46,6 @@ Feature: Visibility to the next scrum
   @javascript @time-travel-step
   Scenario: Show the next scrum join link on all pages
     Given the date is "2014/02/03 07:01:00 UTC"
-    Given I am on the show page for event "Random"
+    And the window size is wide
+    When I am on the show page for event "Random"
     Then I should see "Scrum is live!"

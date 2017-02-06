@@ -38,7 +38,7 @@ end
 
 Capybara.default_max_wait_time = 5
 
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :poltergeist_billy
 
 Capybara.save_and_open_page_path = 'tmp/capybara'
 
