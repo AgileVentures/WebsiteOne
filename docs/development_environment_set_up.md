@@ -1,7 +1,7 @@
-### Installation issues
+### Installation Details: PostgreSQL, PhantomJS, capybara-webkit, Rails
 
-## PostgreSQL
-Install the pg gem. You’ll need to include the following options to set your path and DDainclude the needed headers:
+## [PostgreSQL](id:postgreSQL)
+Install the pg gem. You’ll need to include the following options to set your path and include the needed headers:
 
 ```bash
 gem install pg -- --with-pg-config=/Applications/Postgres93.app/Contents/MacOS/bin/pg_config --with-pg-include='/Applications/Postgres93.app/Contents/MacOS/include/'
@@ -9,7 +9,7 @@ gem install pg -- --with-pg-config=/Applications/Postgres93.app/Contents/MacOS/b
 **Note that you may need to adjust these lines depending on the exact name of your Postgres.app application. Example:
 If your application is named Postgres93, then “Postgres.app” will need to be changed to “Postgres93.app” in both places.
 
-### Install using brew
+### OS X: Install using brew
 
 `brew install postgres`
 
@@ -39,7 +39,7 @@ OSX no longer needs host: `localhost` in `database.yml` if you export PG_HOST=lo
 * Heroku deployment
 
 
-## capybara-webkit gem
+## [capybara-webkit gem](id:capybara-webkit)
 
 The `capybara-webkit` gem needs the Qt toolchain (including qmake and the webkit library and header files). You want version 4.8 or later. To install them in Ubuntu release 12.04 LTS "precise pangolin", or later, run:
 
@@ -55,7 +55,7 @@ Note that on Mac, even after performing the aforementioned install, you are like
 
 After that try running `bundle install` again.
 
-## Phantomjs
+## [Phantomjs](id:phantomjs)
 
 On Linux run `sudo apt-get install phantomjs`
 
