@@ -40,4 +40,9 @@ class RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(resource)
     user_path(resource)
   end
+
+  def after_sign_up_path_for(resource)
+    flash[:user_signup] = true
+    request.env['omniauth.origin'] || session[:previous_url] || root_path
+  end
 end
