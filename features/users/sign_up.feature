@@ -42,7 +42,7 @@ Feature: As a developer
     Given I am on the "registration" page
     When I click "GitHub"
     Then I should see "Signed in successfully."
-    And the page should contain the google adwords conversion script
+    And the page should contain the google adwords conversion code
 
   @omniauth
   Scenario: User signs up with a Google+ account
