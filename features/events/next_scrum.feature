@@ -51,10 +51,3 @@ Feature: Visibility to the next scrum
     And the window size is wide
     When I am on the show page for event "Random"
     Then I should see "Scrum is live!"
-
-  @javascript @time-travel-step
-  Scenario: Next upcoming scrum displays when not on home page
-    Given the date is "2014/02/03 06:50:00 UTC"
-    And the window size is wide
-    When I am on the show page for event "Random"
-    Then I should see "to Scrum"
