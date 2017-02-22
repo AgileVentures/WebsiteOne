@@ -385,3 +385,8 @@ end
 And(/^I debug$/) do
   byebug
 end
+
+
+And(/^the window size is wide$/) do
+  Capybara.page.current_window.resize_to(1300,400)
+end
