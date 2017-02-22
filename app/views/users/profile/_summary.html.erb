@@ -30,8 +30,8 @@
         </li>
     <% end %>
 
-    <% if presenter.display_email %>
-        <li><i class="fa fa-envelope fa-lg"></i> <%= presenter.email_link %></li>
+    <% if presenter.display_email %>  
+        <li><i class="fa fa-envelope fa-lg"></i> <%= mail_to presenter.email %></li>
     <% end %>
 
     <% if @user.online? & presenter.status? %>
