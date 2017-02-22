@@ -64,20 +64,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I click on the Cancel button
     Then I should not see the Edit URL controls
 
-  @time-travel-step
-  Scenario: Render Join live event link
-    Given the date is "2014/02/03 07:01:00 UTC"
-    And the Hangout for event "Scrum" has been started with details:
-      | EventInstance link | http://hangout.test |
-      | Started at         | 07:00:00 UTC        |
-
-    When I am on the show page for event "Scrum"
-    Then I should see link "Join now" with "http://hangout.test"
-
-    When I am on the home page
-    Then I should see "Scrum is live!"
-    And I should see link "Click to join!" with "http://hangout.test"
-
   @javascript
   Scenario: Display hangout button on a project's page
     Given I am a member of project "WebsiteOne"
