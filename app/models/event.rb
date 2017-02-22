@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
 
   COLLECTION_TIME_FUTURE = 10.days
   COLLECTION_TIME_PAST = 300.minutes
-  FRONT_PAGE_COLLECTION_TIME_PAST = 15.minutes
+  NEXT_SCRUM_COLLECTION_TIME_PAST = 15.minutes
 
   REPEATS_OPTIONS = %w[never weekly]
   REPEAT_ENDS_OPTIONS = %w[on never]
@@ -109,7 +109,7 @@ class Event < ActiveRecord::Base
     next_occurrence.present? ? next_occurrence[:time] : nil
   end
 
-  def self.next_occurrence(event_type, begin_time = FRONT_PAGE_COLLECTION_TIME_PAST.ago)
+  def self.next_occurrence(event_type, begin_time = NEXT_SCRUM_COLLECTION_TIME_PAST.ago)
     events_with_times = []
     events_with_times = Event.where(category: event_type).map { |event|
       event.next_event_occurrence_with_time(begin_time)
