@@ -5,23 +5,23 @@ end
 
 Given(/^I fill in appropriate card details for premium(?: for user with email "([^"]*)")?$/) do |email|
   email = email.present? ? email : 'random@morerandom.com'
-  submit_card_details_for_button_with('Pay £10.00', email)
+  submit_card_details_for_button_with('Subscribe £10.00', email)
 end
 
 Given(/^I fill in appropriate card details for premium mob/) do
-  submit_card_details_for_button_with('Pay £25.00')
+  submit_card_details_for_button_with('Subscribe £25.00')
 end
 
 Given(/^I fill in appropriate card details for nonprofitbasic/) do
-  submit_card_details_for_button_with('Pay £20.00')
+  submit_card_details_for_button_with('Subscribe £20.00')
 end
 
 Given(/^I fill in appropriate card details for premium f2f/) do
-  submit_card_details_for_button_with('Pay £50.00')
+  submit_card_details_for_button_with('Subscribe £50.00')
 end
 
 Given(/^I fill in appropriate card details for premium plus$/) do
-  submit_card_details_for_button_with('Pay £100.00')
+  submit_card_details_for_button_with('Subscribe £100.00')
 end
 
 Given(/^I fill in updated card details for premium(?: for user with email "([^"]*)")?$/) do |email|

@@ -73,8 +73,9 @@
     <%= form_tag subscriptions_path(plan: @plan.third_party_identifier, user: @upgrade_user) do %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                data-description="A month's subscription"
+                data-description="Monthly Subscription"
                 data-amount="<%= @plan.amount %>"
+                data-panel-label="Subscribe"
                 data-currency="GBP"
                 data-locale="en-US"
                 data-name="<%= @plan.name %> <%= type %>"
