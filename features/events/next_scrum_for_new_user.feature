@@ -1,15 +1,13 @@
 @vcr
-Feature: Visibility to the next scrum
-  In order to manage hangouts of scrums and PP sessions  easily
-    As a site user
-    I would like to see when the next scrum is
-    So that I can join
-  As a scrum leader
-    I would like my scrum to be visible to others
-    So that people will become interested in my project
-  As a member of AgileVentures
-    I would like scrums to be visible to others
-    So that more people join and contribute to projects
+Feature: Visibility to the next scrum for new user
+  As an AgileVentures Admin,
+  So that new members are more likely to watch and/or attend scrums and other events
+  I would like the language in the upcoming event notification to me as welcoming as possible
+  Instead of mentioning things like "scrum" and "kent beck" that may be unfamiliar
+
+  As a new member
+  So that I can discover if AgileVentures can help me in my professional development
+  I would like to learn more about how AV events operate
 
   Background:
     Given following events exist:
@@ -21,19 +19,18 @@ Feature: Visibility to the next scrum
       | title       | description          | status |
       | WebsiteOne  | greetings earthlings | active |
       | Autograders | greetings earthlings | active |
-    And I am logged in
 
   @time-travel-step
   Scenario: Next upcoming scrum on home page
     Given the date is "2014/02/03 06:55:00 UTC"
     When I am on the home page
-    Then I should see "Scrum in 5 minutes"
+    Then I should see "Want to learn more? Listen in during the next projects review meeting starting in 5 minutes"
 
   @time-travel-step
   Scenario: Within duration next scrum on home page
     Given the date is "2014/02/03 07:01:00 UTC"
     When I am on the home page
-    Then I should see "Scrum is about to start"
+    Then I should see "Want to learn more? Listen in during the next projects review meeting is about to start"
 
   @time-travel-step
   Scenario: Live scrum on home page
@@ -51,4 +48,4 @@ Feature: Visibility to the next scrum
     Given the date is "2014/02/03 07:01:00 UTC"
     And the window size is wide
     When I am on the show page for event "Random"
-    Then I should see "Scrum is live!"
+    Then I should see "Want to learn more? Listen in to this projects review meeting which is live now!"
