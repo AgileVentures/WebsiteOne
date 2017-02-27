@@ -6,5 +6,7 @@
 
 <%= form_tag new_subscription_path, method: "get" do %>
   <input type="hidden" name="user_id" value="<%=presenter.user.slug %>">
-  <%= submit_tag button_text, class:"btn btn-primary btn-lg active", style: "margin: 5px;"%>
+  <%= submit_tag button_text, class:"btn btn-primary btn-lg active",
+                              style: "margin: 5px;",
+                              title: 'Premium Support is a £10 a month subscription to support the AgileVentures charity, that gives you access to priority code review and various discounts'%>
 <% end %>
