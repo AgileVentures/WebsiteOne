@@ -24,13 +24,13 @@ Feature: Visibility to the next scrum for new user
   Scenario: Next upcoming scrum on home page
     Given the date is "2014/02/03 06:55:00 UTC"
     When I am on the home page
-    Then I should see "Want to learn more? Listen in during the next projects review meeting starting in 5 minutes"
+    Then I should see "Want to learn more? Listen in. Next projects review meeting in 5 minutes"
 
   @time-travel-step
   Scenario: Within duration next scrum on home page
     Given the date is "2014/02/03 07:01:00 UTC"
     When I am on the home page
-    Then I should see "Want to learn more? Listen in during the next projects review meeting is about to start"
+    Then I should see "Want to learn more? Listen in. Next projects review meeting is about to start"
 
   @time-travel-step
   Scenario: Live scrum on home page
@@ -38,9 +38,8 @@ Feature: Visibility to the next scrum for new user
     And the Hangout for event "Scrum" has been started with details:
       | EventInstance link | http://hangout.test |
       | Started at         | 07:00:00 UTC        |
-
     When I am on the home page
-    Then I should see "Scrum is live!"
+    Then I should see "Want to learn more? Listen in. Next projects review meeting is live!"
     And I should see link "Click to join!" with "http://hangout.test"
 
   @javascript @time-travel-step
@@ -48,4 +47,4 @@ Feature: Visibility to the next scrum for new user
     Given the date is "2014/02/03 07:01:00 UTC"
     And the window size is wide
     When I am on the show page for event "Random"
-    Then I should see "Want to learn more? Listen in to this projects review meeting which is live now!"
+    Then I should see "Next projects review meeting - listen in to learn more about AgileVentures"
