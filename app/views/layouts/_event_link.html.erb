@@ -1,6 +1,5 @@
-<% event_name = current_user ? event['name'] : 'Want to learn more? Listen in. Next projects review meeting '%>
-
 <% if event.present? %>
+  <% event_name = current_user ? event['name'] : 'Want to learn more? Listen in. Next projects review meeting '%>
   <p>
     <%= link_to event_name, event_path(event['id']) %>
     <% start_time = event.next_occurrence_time_attr.to_datetime %>
