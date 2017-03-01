@@ -45,6 +45,7 @@ describe 'visitors/index.html.erb', type: :view do
     end
   end
 
+  let(:invite_text) { 'Want to learn more? Listen in. Next projects review meeting' }
 
   context 'event is planned for next day' do
     before :each do
@@ -53,8 +54,8 @@ describe 'visitors/index.html.erb', type: :view do
 
     it 'should display countdown' do
       render
-      expect(rendered).to have_link @event.name, event_path(@event)
-      expect(rendered).to have_text [@event.name, 'in'].join(' ')
+      expect(rendered).to have_link invite_text, event_path(@event)
+      expect(rendered).to have_text "#{invite_text} in"
       expect(rendered).to have_text '2 days'
       expect(rendered).to have_text '1 hour'
       expect(rendered).to have_text '15 minutes'
@@ -68,8 +69,8 @@ describe 'visitors/index.html.erb', type: :view do
 
     it 'should display countdown but skip the "O days"' do
       render
-      expect(rendered).to have_link @event.name, event_path(@event)
-      expect(rendered).to have_text [@event.name, 'in'].join(' ')
+      expect(rendered).to have_link invite_text, event_path(@event)
+      expect(rendered).to have_text "#{invite_text} in"
       expect(rendered).to_not have_text '0 days'
       expect(rendered).to have_text '1 hour'
       expect(rendered).to have_text '15 minutes'
@@ -83,8 +84,9 @@ describe 'visitors/index.html.erb', type: :view do
 
     it 'should display countdown but skip the "O hours"' do
       render
-      expect(rendered).to have_link @event.name, event_path(@event)
-      expect(rendered).to have_text [@event.name, 'in'].join(' ')
+
+      expect(rendered).to have_link invite_text, event_path(@event)
+      expect(rendered).to have_text "#{invite_text} in"
       expect(rendered).to_not have_text '0 days'
       expect(rendered).to_not have_text '0 hours'
       expect(rendered).to have_text '15 minutes'
@@ -98,7 +100,7 @@ describe 'visitors/index.html.erb', type: :view do
 
     it 'should <event> about to start' do
       render
-      expect(rendered).to have_link @event.name, event_path(@event)
+      expect(rendered).to have_link invite_text, event_path(@event)
       expect(rendered).to have_text 'about to start...'
     end
   end
@@ -111,7 +113,7 @@ describe 'visitors/index.html.erb', type: :view do
 
     it 'should <event> has just started!' do
       render
-      expect(rendered).to have_link @event.name, event_path(@event)
+      expect(rendered).to have_link invite_text, event_path(@event)
       expect(rendered).to have_text 'is live!'
     end
 
@@ -135,8 +137,8 @@ describe 'visitors/index.html.erb', type: :view do
 
     it 'should display countdown without -1' do
       render
-      expect(rendered).to have_link @event.name, event_path(@event)
-      expect(rendered).to have_text [@event.name, 'in'].join(' ')
+      expect(rendered).to have_link invite_text, event_path(@event)
+      expect(rendered).to have_text "#{invite_text} in"
       expect(rendered).to_not have_text '-1 hours'
       expect(rendered).to have_text '23 hours'
       expect(rendered).to have_text '45 minutes'
