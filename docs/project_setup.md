@@ -28,7 +28,7 @@ You should now have the entire project -- all of the directories and files -- on
 
 When you've finished working on you changes, create a pull request (PR) on GitHub. Here are [detailed insttructions on how to create a pull request for WSO](how_to_submit_a_pull_request_on_github.md).
 
-The whole process of doing a PR and getting it reviewed and merged into this project is described in [CONTRIBUTING.md](https://github.com/AgileVentures/WebsiteOne/CONTRIBUTING.md).
+The whole process of doing a PR and getting it reviewed and merged into this project is described in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 
 ### Step 3: Install the gems with `bundle install`
