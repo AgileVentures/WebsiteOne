@@ -38,7 +38,7 @@ describe 'visitors/index.html.erb', type: :view do
       expect(rendered).to have_content 'Gain valuable software development and agile team skills working on real projects delivering real value to real charity and non-profit clients. Participate in multiple ways, regardless of skill level. Everything we do is open source making your contributions visible on Github.'
     end
   end
-  
+
   context 'event is planned for next day' do
     before :each do
       fix_time_at('2014-03-05 09:15:00 UTC')

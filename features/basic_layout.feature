@@ -67,20 +67,3 @@ Feature: Setting up basic page layout for site
     And I am on Projects index page
     Then I should not see the supporter content
 
-  @javascript @desktop
-  Scenario: Show Round banners on desktop computer
-    Given I am on a tablet
-    And I visit the site
-    Then I should see the round banners
-
-  @javascript @tablet
-  Scenario: Hide Round banners from Tablets
-    Given I am on a tablet
-    And I visit the site
-    Then I should not see the round banners
-
-  @javascript @smartphone
-  Scenario: Hide Round banners from Smartphones
-    Given I am on a smartphone
-    And I visit the site
-    Then I should not see the round banners
