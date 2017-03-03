@@ -21,27 +21,21 @@ describe 'visitors/index.html.erb', type: :view do
     it {expect(rendered).to render_template(partial: 'layouts/_flash')}
     it {expect(rendered).to render_template(partial: 'layouts/_navbar')}
     it {expect(rendered).to render_template(partial: 'layouts/_event_link')}
-    it {expect(rendered).to render_template(partial: 'layouts/_round_banners')}
+    it {expect(rendered).to render_template(partial: 'layouts/_main_banner')}
     it {expect(rendered).to render_template(partial: 'layouts/_footer')}
 
   end
 
-  describe 'should link to topic pages from round banners' do
+  describe 'should have main messaging' do
     before(:each) do
       render
     end
 
-    it 'link to Learn' do
-      expect(rendered).to have_link 'Read more..', static_page_path('Learn')
+    it 'title' do
+      expect(rendered).to have_content 'Level up as a Developer and Save the World!'
     end
-    it 'link to Code' do
-      expect(rendered).to have_link 'Read more..', static_page_path('Code')
-    end
-    it 'link to Pair' do
-      expect(rendered).to have_link 'Read more..', static_page_path('Pair')
-    end
-    it 'link to Grow' do
-      expect(rendered).to have_link 'Read more..', static_page_path('Grow')
+    it 'tagline' do
+      expect(rendered).to have_content 'Gain valuable software development and agile team skills working on real projects delivering real value to real charity and non-profit clients. Participate in multiple ways, regardless of skill level. Everything we do is open source making your contributions visible on Github.'
     end
   end
 

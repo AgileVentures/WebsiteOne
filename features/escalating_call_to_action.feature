@@ -24,5 +24,6 @@ Feature: Escalating Call to Action
   @stripe_javascript @javascript
   Scenario: Premium user sees call to action which links to premium mob subscription page
     Given I am logged in as a premium user with name "John", email "john@gmail.com", with password "12345678"
+    And the window size is wide
     When I click "Upgrade to Premium Mob for group sessions with a Mentor"
     Then I should be on the "premium mob sign up" page
