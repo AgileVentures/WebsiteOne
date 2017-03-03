@@ -106,3 +106,11 @@ end
 And(/^I should see "([^"]*)" in last_response$/) do |text|
   expect(last_response.body).to include(text)
 end
+
+Then(/^I should see a tooltip explanation of Premium$/) do
+  expect(page).to have_xpath("//form/input[@value='Upgrade to Premium' and @title='Premium Support is a £10 a month subscription to support the AgileVentures charity, that gives you access to priority code review and various software and online course discounts']")
+end
+
+Then(/^I should see a tooltip explanation of Premium Mob$/) do
+  expect(page).to have_xpath("//form/input[@value='Upgrade to Premium Mob' and @title='Premium Mob is a £25 a month subscription to support the AgileVentures charity, that gives you access to group coding sessions with an AgileVentures Mentor and professional development planning support']")
+end
