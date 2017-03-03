@@ -106,3 +106,25 @@ end
 And(/^I should see "([^"]*)" in last_response$/) do |text|
   expect(last_response.body).to include(text)
 end
+
+Then(/^I should see a tooltip explanation of Premium$/) do
+  xpath_tooltip = "//form/input[@value='Upgrade to Premium' and @title='#{I18n.t('premium.tooltip')}']"
+  expect(page).to have_xpath(xpath_tooltip)
+end
+
+Then(/^I should see a tooltip explanation of Premium Mob$/) do
+  xpath_tooltip = "//form/input[@value='Upgrade to Premium Mob' and @title='#{I18n.t('premium_mob.tooltip')}']"
+  expect(page).to have_xpath(xpath_tooltip)
+end
+
+And(/^my profile page should reflect that I am a "([^"]*)" member$/) do |plan_name|
+  visit user_path @current_user
+  expect(page).to have_content
+  other_plans(plan_name).each do |other_plan_name|
+    expect(page).not_to have_content "#{other_plan_name} Member"
+  end
+end
+
+def other_plans(plan_name)
+  Plan.all.pluck(:name).reject!{|e| e == plan_name}.push('Basic')
+end
