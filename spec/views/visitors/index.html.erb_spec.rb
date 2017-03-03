@@ -21,7 +21,7 @@ describe 'visitors/index.html.erb', type: :view do
     it {expect(rendered).to render_template(partial: 'layouts/_flash')}
     it {expect(rendered).to render_template(partial: 'layouts/_navbar')}
     it {expect(rendered).to render_template(partial: 'layouts/_event_link')}
-    it {expect(rendered).to render_template(partial: 'layouts/_round_banners')}
+    it {expect(rendered).to render_template(partial: 'layouts/_main_banner')}
     it {expect(rendered).to render_template(partial: 'layouts/_footer')}
 
   end
