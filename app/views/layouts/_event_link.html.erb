@@ -1,6 +1,6 @@
 <% if event.present? %>
   <p>
-    <%= link_to event['name'], event_path(event['id']) %>
+    <%= link_to event_name_or_invitation_to_guest_user(event), event_path(event['id']) %>
     <% start_time = event.next_occurrence_time_attr.to_datetime %>
     <% if event.last_hangout.try!(:live?) %>
       is live! <%= link_to 'Click to join!', event.last_hangout.hangout_url %>
