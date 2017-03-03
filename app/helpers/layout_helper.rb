@@ -12,5 +12,9 @@ module LayoutHelper
   def show_layout_flash?
     @layout_flash.nil? ? true : @layout_flash
   end
+
+  def event_name_or_invitation_to_guest_user(event)
+    current_user ? event['name'] : 'Want to learn more? Listen in. Next projects review meeting '
+  end
 end
 
