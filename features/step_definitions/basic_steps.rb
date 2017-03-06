@@ -44,6 +44,8 @@ def path_to(page_name, id = '')
       hookups_path
     when 'dashboard' then
       '/dashboard'
+    when 'getting started' then
+      '/getting-started'
     when 'new newsletter' then
       new_newsletter_path
     when 'newsletters index' then
