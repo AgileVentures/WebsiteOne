@@ -41,4 +41,4 @@ Feature: Activities View
   Scenario: use karma link display a flash message if there is no contributions
     Given I am on the members page
     When I click Karma link for "John"
-    Then I should see a flash "User does not have activity log"
+    Then I should see a success flash "User does not have activity log"
