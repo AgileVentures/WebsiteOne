@@ -45,7 +45,7 @@ def path_to(page_name, id = '')
     when 'dashboard' then
       '/dashboard'
     when 'getting started' then
-      '/getting-started'
+      static_page_path('getting-started')
     when 'new newsletter' then
       new_newsletter_path
     when 'newsletters index' then
