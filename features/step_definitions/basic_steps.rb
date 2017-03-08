@@ -201,11 +201,13 @@ Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
   end
 end
 
-Then /^I should( not)? see a flash "([^"]*)"$/ do |negative, string|
+Then /^I should( not)? see a (notice|success) flash "([^"]*)"$/ do |negative, type, string|
   unless negative
     expect(page).to have_css '.alert', text: string
+    expect(page).to have_css ".alert-#{type}", text: string
   else
-    expect(page).to_not have_css '.alert', text: string
+    expect(page).not_to have_css '.alert', text: string
+    expect(page).not_to have_css ".alert-#{type}", text: string
   end
 end
 
