@@ -34,7 +34,7 @@ Feature: Edit Project
     And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
-    And I should see a flash "Project was successfully updated."
+    And I should see a success flash "Project was successfully updated."
     And I should see "Hello, Uranus!"
     And I should see a link to "hello mars" on github
     And I should see a link to "hello mars" on Pivotal Tracker
@@ -62,7 +62,7 @@ Feature: Edit Project
     And I am using the Mercury Editor to edit project "hello mars"
     When I fill in the editable field "Pitch" for "project" with "This is my exciting marketing content"
     And I click "Save" within Mercury Editor toolbar
-    Then I should see a flash "The project has been successfully updated."
+    Then I should see a success flash "The project has been successfully updated."
     Then I should be on the "Show" page for project "hello mars"
     And I should see "This is my exciting marketing content"
 
