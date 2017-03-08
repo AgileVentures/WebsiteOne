@@ -9,7 +9,7 @@ describe RegistrationsController do
       end
 
       it 'redirects to index' do
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(static_page_path('getting-started'))
       end
 
       it 'assigns successful message' do
