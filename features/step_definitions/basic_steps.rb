@@ -44,6 +44,8 @@ def path_to(page_name, id = '')
       hookups_path
     when 'dashboard' then
       '/dashboard'
+    when 'getting started' then
+      static_page_path('getting-started')
     when 'new newsletter' then
       new_newsletter_path
     when 'newsletters index' then
@@ -200,11 +202,13 @@ Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
   end
 end
 
-Then /^I should( not)? see a flash "([^"]*)"$/ do |negative, string|
+Then /^I should( not)? see a (notice|success) flash "([^"]*)"$/ do |negative, type, string|
   unless negative
     expect(page).to have_css '.alert', text: string
+    expect(page).to have_css ".alert-#{type}", text: string
   else
-    expect(page).to_not have_css '.alert', text: string
+    expect(page).not_to have_css '.alert', text: string
+    expect(page).not_to have_css ".alert-#{type}", text: string
   end
 end
 
