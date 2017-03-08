@@ -6,13 +6,16 @@ Feature: As a developer
 
   Background:
     Given I am not logged in
+    And the following pages exist
+      | title           | body                    |
+      | Getting Started | Remote Pair Programming |
 
   Scenario: Let a visitor register as a site user
     Given I am on the "registration" page
     And I submit "user@example.com" as username
     And I submit "password" as password
     And I click "Sign up" button
-    Then I should be on the "home" page
+    Then I should be on the "getting started" page
     And I should see a successful sign up message
     And I should receive a "Welcome to AgileVentures.org" email
     And replies to that email should go to "info@agileventures.org"
