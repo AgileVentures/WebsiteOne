@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe GithubLastUpdatesJob do
   describe '#run' do
-    context 'shf-project with hyphen' do
+    context 'shf-project with hyphen', vcr: true do
       let!(:project){FactoryGirl.create(:project, github_url: 'https://github.com/AgileVentures/shf-project')}
       it 'has correct last commit date after job run' do
         GithubLastUpdatesJob.run
