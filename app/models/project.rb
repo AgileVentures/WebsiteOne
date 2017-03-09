@@ -58,7 +58,7 @@ class Project < ActiveRecord::Base
   end
 
   def github_repo_user_name
-    /github.com\/\w+\/(\w+)/.match(github_url)[1] if github_url
+    /github.com\/\w+\/([\w\-]+)/.match(github_url)[1] if github_url
   end
 
   def contribution_url

@@ -139,6 +139,13 @@ describe Project, type: :model do
     end
   end
 
+  describe "#github_repo_user_name" do
+    subject { build_stubbed(:project, github_url: 'https://github.com/AgileVentures/shf-project') }
+    it 'deals with hyphen gracefully' do
+      expect(subject.github_repo_user_name).to eq 'shf-project'
+    end
+  end
+
   describe '#codeclimate_gpa' do
 
     subject(:project) { build_stubbed(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne') }
