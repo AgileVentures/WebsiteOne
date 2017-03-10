@@ -4,7 +4,7 @@ describe 'OmniAuth authentication' do
 
   supported_auths = {
       'github' => 'GitHub',
-      'gplus'  => 'Google+'
+      'gplus'  => 'Google'
   }
 
   before do
@@ -26,10 +26,10 @@ describe 'OmniAuth authentication' do
       context "with a #{name} profile" do
         it 'should work with valid credentials' do
           visit new_user_session_path
-          expect(page).to have_content "#{name}"
+          expect(page).to have_content "with #{name}"
           expect {
             expect {
-              click_link "#{name}"
+              click_link "with #{name}"
             }.to change(User, :count).by(1)
           }.to change(Authentication, :count).by(1)
           expect(page).to have_content('Signed in successfully.')
@@ -40,7 +40,7 @@ describe 'OmniAuth authentication' do
           visit new_user_session_path
           expect {
             expect {
-              click_link "#{name}"
+              click_link "with #{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
           expect(page).to have_content('invalid_credentials')
@@ -48,7 +48,7 @@ describe 'OmniAuth authentication' do
 
         it 'should not allow removal of profiles without passwords' do
           visit new_user_session_path
-          click_link "#{name}"
+          click_link "with #{name}"
           visit edit_user_registration_path
           #click_link '#user_info'
           #click_link 'My Account'
@@ -74,10 +74,10 @@ describe 'OmniAuth authentication' do
 
         it 'finds the right user if auth exists' do
           visit new_user_session_path
-          expect(page).to have_content "#{name}"
+          expect(page).to have_content "with #{name}"
           expect {
             expect {
-              click_link "#{name}"
+              click_link "with #{name}"
             }.to change(User, :count).by(0)
           }.to change(Authentication, :count).by(0)
           expect(page).to have_content('Signed in successfully.')
@@ -85,7 +85,7 @@ describe 'OmniAuth authentication' do
 
         it 'should be removable for users with a password' do
           visit new_user_session_path
-          click_link "#{name}"
+          click_link "with #{name}"
           visit edit_user_registration_path(@user)
           expect(page).to have_css "input[value='#{@user.email}']"
           expect {
@@ -100,7 +100,7 @@ describe 'OmniAuth authentication' do
           supported_auths.each do |p, n|
             next if p == provider
             visit new_user_session_path
-            click_link "#{name}"
+            click_link "with #{name}"
             visit edit_user_registration_path(@user)
             expect {
               expect { click_link "#{n}" }.to change(Authentication, :count).by(1)
@@ -110,7 +110,7 @@ describe 'OmniAuth authentication' do
 
         it 'should not accept multiple profiles from the same source' do
           visit new_user_session_path
-          click_link "#{name}"
+          click_link "with #{name}"
           OmniAuth.config.mock_auth[provider.to_sym] = {
               'provider'  => provider,
               'uid'       => "randomplus#{@uid}"
