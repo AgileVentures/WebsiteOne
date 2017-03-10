@@ -50,30 +50,36 @@ module ApplicationHelper
     date.strftime("#{date.day.ordinalize} %b %Y")
   end
 
+  DISPLAY_NAME = {
+      'github' => 'GitHub',
+      'gplus' => 'Google'
+  }
+
+  FA_ICON = {
+      'github' => 'github-alt',
+      'gplus' => 'google'
+  }
+
   def social_button(provider, options={})
     provider = provider.downcase
-    display_name = {
-        'github' => 'GitHub',
-        'gplus' => 'Google+'
-    }
-
-    fa_icon = {
-        'github' => 'github-alt',
-        'gplus' => 'google-plus'
-    }
 
     options[:url] = root_path unless options[:url].present?
-    text = options[:text] || (options[:delete] ? 'Remove' : '')
+
+    text = options[:text] || (options[:delete] ? 'Remove' : prefix)
     path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
         "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}"
 
     raw <<-HTML
     <div data-no-turbolink>
       <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'method="delete" ' if options[:delete]}href="#{path}">
-        <i class="fa fa-#{fa_icon[provider]}"></i> #{text} #{display_name[provider]}
+        <i class="fa fa-#{FA_ICON[provider]}"></i> #{text} #{DISPLAY_NAME[provider]}
       </a>
     </div>
     HTML
+  end
+
+  def prefix
+    action_name == 'new' ? 'with' : ''
   end
 
   def supported_third_parties
