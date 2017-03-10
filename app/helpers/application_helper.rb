@@ -54,16 +54,19 @@ module ApplicationHelper
     provider = provider.downcase
     display_name = {
         'github' => 'GitHub',
-        'gplus' => 'Google+'
+        'gplus' => 'Google'
     }
 
     fa_icon = {
         'github' => 'github-alt',
-        'gplus' => 'google-plus'
+        'gplus' => 'google'
     }
 
     options[:url] = root_path unless options[:url].present?
-    text = options[:text] || (options[:delete] ? 'Remove' : '')
+
+    action_name == 'new' ? prefix = 'with' : prefix = ''
+
+    text = options[:text] || (options[:delete] ? 'Remove' : prefix)
     path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
         "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}"
 

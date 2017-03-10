@@ -171,6 +171,7 @@ Then(/^I should not see a link "([^"]*)" to "([^"]*)"$/) do |link, url|
 end
 
 Then /^I should be on the "([^"]*)" page$/ do |page|
+  # byebug
   expect(current_fullpath).to eq path_to(page)
 end
 
