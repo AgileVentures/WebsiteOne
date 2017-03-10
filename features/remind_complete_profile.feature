@@ -25,7 +25,7 @@ Feature: Remind User complete profile
     And I have an incomplete profile
     When I sign in with valid credentials
     And I click "Continue using the site"
-    Then I should be on the "home" page
+    Then I should be on the "getting started" page
 
   Scenario: User has complete profile from home page
     Given I exist as a user

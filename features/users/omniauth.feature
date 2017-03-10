@@ -18,6 +18,8 @@ Scenario: Log in with Google account
 
 Scenario: redirect to the last visited page after login with Google
   Given I exist as a user
+  And I visit "/users/sign_in"
+  And I click "Google+"
   And I am not logged in
   And I am on Events index page
   And I visit "/users/sign_in"
@@ -26,6 +28,8 @@ Scenario: redirect to the last visited page after login with Google
 
 Scenario: redirect to the last visited page after login with Github
   Given I exist as a user
+  And I visit "/users/sign_in"
+  And I click "GitHub"
   And I am not logged in
   And I am on Events index page
   And I visit "/users/sign_in"

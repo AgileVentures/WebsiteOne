@@ -23,6 +23,7 @@ describe 'Events' do
   end
 
   def login
+    StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
     visit new_user_session_path
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: '123456789'

@@ -5,6 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
     super
     unless @user.new_record?
       session[:omniauth] = nil
+      flash[:user_signup] = 'Signed up successfully.'
       Mailer.send_welcome_message(@user).deliver_now if Features.enabled?(:welcome_email)
     end
   end
