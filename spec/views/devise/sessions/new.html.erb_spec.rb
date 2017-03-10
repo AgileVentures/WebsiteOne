@@ -21,12 +21,12 @@ describe 'devise/sessions/new', :type => :view do
     expect(rendered).to have_css('.btn-github')
     expect(rendered).to have_link('GitHub', '/auth/github')
     expect(rendered).to have_css('.btn-gplus')
-    expect(rendered).to have_link('Google+', '/auth/gplus')
+    expect(rendered).to have_link('Google', '/auth/gplus')
   end
 
   it 'expects the social buttons to have an origin url param for redirect' do
     expect(rendered).to have_link('GitHub', '/auth/github?origin=')
-    expect(rendered).to have_link('Google+', '/auth/gplus?origin=')
+    expect(rendered).to have_link('Google', '/auth/gplus?origin=')
   end
 
   it 'renders the forgot password and sign up link' do
