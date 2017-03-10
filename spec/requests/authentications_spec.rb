@@ -8,6 +8,7 @@ describe 'OmniAuth authentication' do
   }
 
   before do
+    StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
     @uid = '12345678'
     supported_auths.each do |provider, name|
       OmniAuth.config.mock_auth[provider.to_sym] = {
