@@ -66,4 +66,5 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Before do
   Settings.reload!
+  StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
 end
