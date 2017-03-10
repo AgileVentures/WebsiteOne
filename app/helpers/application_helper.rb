@@ -53,13 +53,13 @@ module ApplicationHelper
   def social_button(provider, options={})
     provider = provider.downcase
     display_name = {
-        'github' => 'GitHub',
-        'gplus' => 'Google+'
+        'github' => 'with GitHub',
+        'gplus' => 'with Google'
     }
 
     fa_icon = {
         'github' => 'github-alt',
-        'gplus' => 'google-plus'
+        'gplus' => 'google'
     }
 
     options[:url] = root_path unless options[:url].present?
