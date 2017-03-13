@@ -45,7 +45,7 @@ describe 'visitors/index.html.erb', type: :view do
     end
   end
 
-  let(:invite_text) { 'Want to learn more? Listen in. Next projects review meeting' }
+  let(:invite_text) { 'Want to learn more? Listen in. Next projects' review meeting' }
 
   context 'event is planned for next day' do
     before :each do

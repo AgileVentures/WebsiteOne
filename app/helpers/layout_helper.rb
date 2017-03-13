@@ -14,7 +14,7 @@ module LayoutHelper
   end
 
   def event_name_or_invitation_to_guest_user(event)
-    current_user ? event['name'] : 'Want to learn more? Listen in. Next projects review meeting '
+    current_user ? event['name'] : 'Want to learn more? Listen in. Next projects' review meeting '
   end
 end
 
