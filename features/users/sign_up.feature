@@ -16,6 +16,8 @@ Feature: As a developer
     And I submit "password" as password
     And I click "Sign up" button
     Then I should be on the "getting started" page
+    And I should see "Signed up successfully."
+    And the page should contain the google adwords conversion code
     And I should see a successful sign up message
     And I should receive a "Welcome to AgileVentures.org" email
     And replies to that email should go to "info@agileventures.org"
@@ -47,12 +49,15 @@ Feature: As a developer
     Then I should see "Signed in successfully."
     And I should see "Signed up successfully."
     And the page should contain the google adwords conversion code
+    And I should be on the "getting started" page
 
   @omniauth
-  Scenario: User signs up with a Google+ account
+  Scenario: User signs up with a Google account
     Given I am on the "registration" page
-    When I click "Google+"
+    When I click "Google"
     Then I should see "Signed in successfully."
+    And the page should contain the google adwords conversion code
+    And I should be on the "getting started" page
 
   @omniauth-without-email
   Scenario: User signs up with a GitHub account having no public email (sad path)
@@ -62,9 +67,9 @@ Feature: As a developer
 
   #removed g+ signup while it appears broken
   @omniauth-without-email
-  Scenario: User signs up with a Google+ account having no public email (sad path)
+  Scenario: User signs up with a Google account having no public email (sad path)
     Given I am on the "registration" page
-    When I click "Google+"
-    Then I should see the "google-plus" icon
+    When I click "Google"
+    Then I should see the "google" icon
     Then I should see "Your Gplus account needs to have a public email address for sign up"
     And I should not see "Password can't be blank"

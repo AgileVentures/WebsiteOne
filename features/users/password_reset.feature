@@ -23,7 +23,7 @@ Feature: Password retrieval
     And I fill in "user_password" with "12345678"
     And I fill in "user_password_confirmation" with "12345678"
     And I click "Change my password"
-    Then I should be on the "home" page
+    Then I should be on the "getting started" page
     And I should see "Your password was changed successfully. You are now signed in."
 
   Scenario: Retrieve password for a non-existent user
