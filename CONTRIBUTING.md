@@ -62,7 +62,7 @@ Note that you should be re-syncing daily (even hourly at very active times) on y
 feature/bugfix branch to ensure that you are always building on top of very latest develop code.
 
 ### Pull Requests: naming, syncing, size
-Here is [how to create and submit a pull requests](https://help.github.com/articles/creating-a-pull-request/).
+Here is [how to create and submit a pull requests](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/how_to_submit_a_pull_request_on_github.md).
 
 Every pull request should refer to a corresponding GitHub issue, and when you create feature/bug-fix branches please include the id of the relevant issue, e.g.
 
