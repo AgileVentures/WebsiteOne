@@ -3,6 +3,9 @@ WebsiteOne::Application.routes.draw do
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
+
+  get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
+
   resources :activities
   resources :newsletters
 
