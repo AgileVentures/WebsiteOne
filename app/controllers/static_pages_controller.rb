@@ -1,6 +1,11 @@
 class StaticPagesController < ApplicationController
   before_filter :authenticate_user!, except: [:show]
 
+  def letsencrypt
+    # use your code here, not mine
+    render text: "jh18bNMcssLYrwpx3TeQGnxWXhXxysSzUXA4-faODz4.9tmfKoRwoUJvAUfJMFgbHSW9b226ODrWnsfOEjMkm1A"
+  end
+
   def show
     return false if redirect_email_blunder
     @page = StaticPage.friendly.find(get_page_id(params[:id]))
