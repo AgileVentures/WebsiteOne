@@ -1,9 +1,8 @@
 class StaticPagesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show]
+  before_filter :authenticate_user!, except: [:show, :letsencrypt]
 
   def letsencrypt
-    # use your code here, not mine
-    render text: "jh18bNMcssLYrwpx3TeQGnxWXhXxysSzUXA4-faODz4.9tmfKoRwoUJvAUfJMFgbHSW9b226ODrWnsfOEjMkm1A"
+    render text: "jh18bNMcssLYrwpx3TeQGnxWXhXxysSzUXA4-faODz4.9tmfKoRwoUJvAUfJMFgbHSW9b226ODrWnsfOEjMkm1A", :layout => false
   end
 
   def show
