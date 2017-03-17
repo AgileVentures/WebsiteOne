@@ -1,5 +1,9 @@
 class StaticPagesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show]
+  before_filter :authenticate_user!, except: [:show, :letsencrypt]
+
+  def letsencrypt
+    render text: "#{params[:id]}.9tmfKoRwoUJvAUfJMFgbHSW9b226ODrWnsfOEjMkm1A", :layout => false
+  end
 
   def show
     return false if redirect_email_blunder
