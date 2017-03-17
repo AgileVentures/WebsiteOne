@@ -22,7 +22,7 @@ Feature: Events
   Scenario: Render Next Scrum info on landing page
     Given the date is "2014/02/01 09:15:00 UTC"
     And I am on the home page
-    Then I should see "Want to learn more? Listen in. Next projects review meeting in"
+    Then I should see "Want to learn more? Listen in. Next projects' review meeting in"
     And the next event should be in:
       | period | interval |
       | 1      | day     |
@@ -33,7 +33,7 @@ Feature: Events
   Scenario: Do not render '0 days'
     Given the date is "2014/02/02 09:15:00 UTC"
     And I am on the home page
-    Then I should see "Want to learn more? Listen in. Next projects review meeting in"
+    Then I should see "Want to learn more? Listen in. Next projects' review meeting in"
     And the next event should be in:
       | period | interval |
       | 21     | hours    |
@@ -44,7 +44,7 @@ Feature: Events
   Scenario: Do not render '0 hours'
     Given the date is "2014/02/03 06:15:00 UTC"
     And I am on the home page
-    Then I should see "Want to learn more? Listen in. Next projects review meeting in"
+    Then I should see "Want to learn more? Listen in. Next projects' review meeting in"
     And the next event should be in:
       | period | interval |
       | 45     | minutes  |
@@ -55,7 +55,7 @@ Feature: Events
   Scenario: Do not render '-1 hour'
     Given the date is "2014/02/02 07:50:00 UTC"
     And I am on the home page
-    Then I should see "Want to learn more? Listen in. Next projects review meeting in"
+    Then I should see "Want to learn more? Listen in. Next projects' review meeting in"
     And the next event should be in:
       | period | interval |
       | 23     | hours    |
