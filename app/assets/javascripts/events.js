@@ -19,7 +19,16 @@ var events = {
     addToCalendar: function () {
         $('#calendar_link').on('click', function () {
             $('#calendar_links').show();
-        })
+        });
+        /* Anything that gets to the document
+         will hide the calendar links div */
+        $(document).click(function(e){
+            if(e.currentTarget.activeElement.id == 'calendar_link') {
+                $("#calendar_links").show();
+            } else {
+                $("#calendar_links").hide();
+            }
+        });
     }
 };
 
