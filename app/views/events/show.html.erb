@@ -60,9 +60,7 @@
                 <p class="help-block">Occurs weekly at the specified times</p>
             <% end %>
             <!-- in here goes the Google Calendar link -->
-            <%= link_to 'Export to Google Cal',
-                       "https://calendar.google.com/calendar/render?action=TEMPLATE&dates=#{@event.next_event_occurrence_with_time[:time].strftime('%Y%m%dT%H%M%SZ')}%2f#{(@event.next_event_occurrence_with_time[:time] + @event.duration*60).strftime('%Y%m%dT%H%M%SZ')}&sprop=website:#{auto_link(@event.description)}&text=#{@event.name}&location=online&sprop=name:AgileVentures&details=#{@event.description}"
-              %>
+            <%= link_to 'Export to Google Cal', google_calendar_link(@event) %>
           </div>
         <!-- '20170320T0000000000Z%2f20170320T0010000000Z' -->
         <!-- '20170318T163000Z%2f20170318T193000Z'  -->
