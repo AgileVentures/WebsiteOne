@@ -20,8 +20,7 @@ var events = {
         $('#calendar_link').on('click', function () {
             $('#calendar_links').show();
         });
-        /* Anything not the calendar link
-         will hide the calendar links div */
+        /* Anything not the calendar link will hide the calendar links div */
         $(document).click(function(e){
             if(e.currentTarget.activeElement.id === 'calendar_link') {
                 $("#calendar_links").show();
