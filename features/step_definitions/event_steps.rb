@@ -340,3 +340,7 @@ And(/^The box for "([\w]+)" should be checked$/) do |day|
   expect(box).to be_checked
 end
 
+
+When(/^I click the calendar icon$/) do
+  find('#calendar_link').click
+end
