@@ -13,14 +13,8 @@ var events = {
             browserAdapter.jumpTo(href);
         });
     },
-    hideCalendarLinks: function () {
-        $('#calendar_links').hide();
-    },
     addToCalendar: function () {
-        $('#calendar_link').on('click', function () {
-            $('#calendar_links').show();
-        });
-        /* Anything not the calendar link will hide the calendar links div */
+        /* Any click not the calendar link will hide the calendar links div */
         $(document).click(function(e){
             if(e.currentTarget.activeElement.id === 'calendar_link') {
                 $("#calendar_links").show();
@@ -33,7 +27,6 @@ var events = {
 
 $(document).ready(function () {
     events.makeRowBodyClickable();
-    events.hideCalendarLinks();
     events.addToCalendar();
     editEventForm.handleUserTimeZone();
     showEvent.showUserTimeZone();
