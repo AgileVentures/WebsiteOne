@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   before_filter :authenticate_user!, except: [:show, :letsencrypt]
 
   def letsencrypt
-    render text: "#{params[:id]}.#{ENV['CERTBOT_SSL_CHALLENGE']}", :layout => false
+    render plain: "#{params[:id]}.#{ENV['CERTBOT_SSL_CHALLENGE']}", :layout => false
   end
 
   def show
