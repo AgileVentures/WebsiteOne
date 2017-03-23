@@ -144,6 +144,7 @@ Feature: Show Events
     Given the date is "2014/02/01 09:15:00 UTC"
     And I am on Events index page
     And I click "Scrum"
+    Then the export to google calendar link should not be visible
     When I click the calendar icon
     And I click "Export to Google Cal"
     Then I should see "Sign in to continue to Google Calendar"
