@@ -344,3 +344,7 @@ end
 When(/^I click the calendar icon$/) do
   find('#calendar_link').click
 end
+
+Then(/^the export to google calendar link should not be visible$/) do
+  expect(page).not_to have_css("#calendar_links", visible: true)
+end
