@@ -86,12 +86,3 @@ vendor/assets/javascripts/bootstrap-datepicker.js
 vendor/assets/javascripts/bootstrap-timepicker.min.js
 vendor/assets/javascripts/typeahead.jquery.js
 vendor/assets/javascripts/nprogress.js
-
-# Ignore a thousand fonts google installs when you visit the calendar page (during testing)
-features/support/fixtures/req_cache/get_fonts*.yml
-features/support/fixtures/req_cache/get_calendar*.yml
-features/support/fixtures/req_cache/get_accounts.youtube*.yml
-features/support/fixtures/req_cache/get_ssl.gstatic*.yml
-features/support/fixtures/req_cache/get_accounts.google*.yml
-features/support/fixtures/req_cache/get_www.gstatic*.yml
-
