@@ -138,3 +138,13 @@ Feature: Show Events
     And I am on Events index page
     And I click on the event body for the event named "Scrum"
     Then I should be on the event "show" page for "Scrum"
+
+  @javascript
+  Scenario: I add an event to my Google Calendar
+    Given the date is "2014/02/01 09:15:00 UTC"
+    And I am on Events index page
+    And I click "Scrum"
+    Then the export to google calendar link should not be visible
+    When I click the calendar icon
+    And I click "Export to Google Cal"
+    Then I should see "Sign in to continue to Google Calendar"
