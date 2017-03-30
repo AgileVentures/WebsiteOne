@@ -54,7 +54,11 @@
         <h4>Next scheduled event:</h4>
 
           <div class="calendar-text">
-            <i class="fa fa-calendar"></i><span class="month"><%=  local_time(@event.next_event_occurrence_with_time[:time],'%A, %B %d, %Y') %></span><br/>
+            <a href='#' id='calendar_link'><i class="fa fa-calendar-plus-o"></i></a><span class="month"><%=  local_time(@event.next_event_occurrence_with_time[:time],'%A, %B %d, %Y') %></span>
+            <div id='calendar_links'>
+              <i class='fa fa-google'></i><%= link_to 'Export to Google Cal', google_calendar_link(@event) %>
+            </div>
+            <br/>
             <i class="fa fa-clock-o"></i><span id='local_time'><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
             <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
                 <p class="help-block">Occurs weekly at the specified times</p>
