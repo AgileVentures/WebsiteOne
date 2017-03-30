@@ -18,7 +18,7 @@ We keep our code on [GitHub](http://github.com) and use [git](https://git-scm.co
 ## General Steps
 To get involved please follow these steps:
 
-####1. Get the system working on your development environment:
+#### 1. Get the system working on your development environment:
 
    1. [install WSO on your dev environment (laptop or c9)](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)
 
@@ -28,12 +28,12 @@ To get involved please follow these steps:
 
    4. (optional) deploy to a remote (e.g. Heroku, drie etc.) and ensure it runs there
 
-####2. Look at what needs to be done on GitHub
+#### 2. Look at what needs to be done on GitHub
 
 * review [open PRs](https://github.com/AgileVentures/WebsiteOne/pulls) on GitHub - leave comments or collaborate if interested
 
 
-####3. Look at what needs to be done on [our waffle project board:](https://waffle.io/AgileVentures/WebsiteOne)
+#### 3. Look at what needs to be done on [our waffle project board:](https://waffle.io/AgileVentures/WebsiteOne)
 
   1. look through **[ready](https://waffle.io/AgileVentures/WebsiteOne)** column - feel free to start work, but always interested to hear chat in slack, scrum wherever
 
