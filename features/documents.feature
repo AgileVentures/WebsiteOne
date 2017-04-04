@@ -50,7 +50,7 @@ Feature: Manage Document
     When I click the sidebar link "Documentation"
     Then I should be on the "Show" page for document "Documentation"
     And I should see "Documentation"
-    And I should see "New content 2"
+    And I should see "New content 2 "
 
 
   Scenario: A document can have children
