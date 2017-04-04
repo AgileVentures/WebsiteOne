@@ -39,7 +39,7 @@ module ApplicationHelper
   end
 
   def current_projects
-    Project.order('status ASC').order('commit_count DESC NULLS LAST')
+    Project.where(status: 'active').order('title ASC').order('commit_count DESC NULLS LAST')
   end
 
   def roots
@@ -54,8 +54,8 @@ module ApplicationHelper
       'github' => 'GitHub',
       'gplus' => 'Google'
   }
-
   FA_ICON = {
+
       'github' => 'github-alt',
       'gplus' => 'google'
   }
