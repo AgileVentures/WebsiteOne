@@ -39,7 +39,7 @@ module ApplicationHelper
   end
 
   def current_projects
-    Project.where(status: 'active').order('title ASC').order('commit_count DESC NULLS LAST')
+    Project.where(status: ['Active', 'active']).order('title ASC').order('commit_count DESC NULLS LAST')
   end
 
   def roots
