@@ -9,7 +9,7 @@ Feature: Sidebar navigation
       | title       | description          | status   | id |
       | hello world | greetings earthlings | active   | 1  |
       | hello mars  | greetings aliens     | inactive | 2  |
-      | hello moon  | greetings moonsters  | active   | 3  |
+      | hello moon  | greetings moonians   | active   | 3  |
       | hello pluto | greetings plutonians | active   | 4  |
 
     And the following documents exist:
