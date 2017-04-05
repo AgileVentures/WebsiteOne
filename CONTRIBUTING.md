@@ -95,10 +95,12 @@ which will associate the pull request with the issue in the Waffle board.
 Pull Request Review
 -------------------
 
-Currently @tansaku and @diraulo are pairing on the project management of WebSiteOne.  The project managers will review your pull request as soon as possible.  The project managers can merge unilaterally if necessary, but in general both project managers will need to sign off on a pull request before it is merged.
+Currently https://github.com/tansaku is project managing WebSiteOne.  The project manager will review your pull request as soon as possible.  Usually the project manager will need to sign off in order to merge a pull request.
 
 The project managers will review the pull request for coherence with the specified feature or bug fix, and give feedback on code quality, user experience, documentation and git style.  Please respond to comments from the project managers with explanation, or further commits to your pull request in order to get merged in as quickly as possible.
 
-To maximize flexibility add the project managers as collaborators to your WebSiteOne fork in order to allow them to help you fix your pull request, but this is not required.
+To maximize flexibility add the project manager as a collaborator to your WebSiteOne fork in order to allow them to help you fix your pull request, but this is not required.
+
+If your tests are passing locally, but failing on CI, please have a look at the fails and if you can't fix, please do reach out to the project manager.
 
 
