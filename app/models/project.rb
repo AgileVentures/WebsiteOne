@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-  scope :with_github_url, -> { where.not(github_url: '') }
+  scope :with_github_url, -> { where.not(projects: { github_url: nil }) }
 
   def self.search(search, page)
     order('LOWER(title)')
