@@ -50,7 +50,11 @@ class Project < ActiveRecord::Base
   end
 
   def github_repo
-    /github.com\/(.+)/.match(github_url)[1] unless github_url.blank?
+    if github_url.blank?
+      ''
+    else
+      /github.com\/(.+)/.match(github_url)[1]
+    end
   end
 
   def github_repo_name

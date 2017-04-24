@@ -7,9 +7,15 @@ module GithubCommitsJob
     Project.with_github_url.each do |project|
       begin
         update_total_commit_count_for(project)
-        update_user_commit_counts_for(project)
       rescue StandardError
         Rails.logger.warn "#{project.github_url} may have caused the issue. Commit1 update terminated for this project!"
+      end
+    end
+    Project.with_github_url.each do |project|
+      begin
+        update_user_commit_counts_for(project)
+      rescue StandardError
+        Rails.logger.warn "#{project.github_url} may have caused the issue. Commit2 update terminated for this project!"
       end
     end
   end
@@ -56,6 +62,6 @@ module GithubCommitsJob
   end
 
   def client
-    @client ||= Octokit::Client.new(:access_token => Settings.github.auth_token)
+    @client ||= Octokit::Client.new(:client_id => Settings.github.client_id, :client_secret => Settings.github.client_secret)
   end
 end
