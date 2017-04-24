@@ -51,6 +51,5 @@ paypal:
   email: <%= ENV["PAYPAL_EMAIL"] || 'sam@agileventures.org' %>
 
 github:
-  auth_token: <%= ENV["GITHUB_TOKEN"] %>
-  client_id: <%= ENV["GITHUB_CLIENT_ID"] %>
-  client_secret: <%= ENV["GITHUB_CLIENT_SECRET"] %>
+  client_id: <%= ENV["GITHUB_KEY"] %>
+  client_secret: <%= ENV["GITHUB_SECRET"] %>
