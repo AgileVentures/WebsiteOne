@@ -3,7 +3,12 @@ require 'octokit'
 module GithubCommitsJob
   extend self
 
+  def initialize
+    @client ||= Octokit::Client.new(:client_id => Settings.github.client_id, :client_secret => Settings.github.client_secret)
+  end
+
   def run
+    initialize
     Project.with_github_url.each do |project|
       begin
         update_total_commit_count_for(project)
@@ -62,6 +67,6 @@ module GithubCommitsJob
   end
 
   def client
-    @client ||= Octokit::Client.new(:client_id => Settings.github.client_id, :client_secret => Settings.github.client_secret)
+    @client
   end
 end
