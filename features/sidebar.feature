@@ -9,6 +9,8 @@ Feature: Sidebar navigation
       | title       | description          | status   | id |
       | hello world | greetings earthlings | active   | 1  |
       | hello mars  | greetings aliens     | inactive | 2  |
+      | hello moon  | greetings moonians   | active   | 3  |
+      | hello pluto | greetings plutonians | active   | 4  |
 
     And the following documents exist:
       | title         | body             | project_id |
@@ -36,6 +38,20 @@ Feature: Sidebar navigation
     Then I should see a link to "Show" page for project "hello world" within the sidebar
     And I should see a link to "Show" page for document "Howto" within the sidebar
     And I should see a link to "Show" page for document "Documentation" within the sidebar
-    And I should see a link to "Show" page for project "hello mars" within the sidebar
-    And I should see a link to "Show" page for document "Another doc" within the sidebar
+    And I should not be able to see a link to "Show" page for project "hello mars" within the sidebar
+    And I should not be able to see a link to "Show" page for document "Another doc" within the sidebar
     And I should not be able to see a link to "Show" page for document "Howto 2" within the sidebar
+
+  Scenario: Sidebar projects are organised alphabetically
+    Given I am on the "projects" page
+    Then I should see "hello moon" before "hello pluto"
+    And I should see "hello pluto" before "hello world"
+    Given I am logged in
+    And I am on the "Edit" page for project "hello mars"
+    Then I should see "hello moon" before "hello pluto"
+    And I should see "hello pluto" before "hello world"
+    Given I am on the "Show" page for project "hello mars"
+    Then I should see "hello moon" before "hello pluto"
+    And I should see "hello pluto" before "hello world"
+
+
