@@ -45,5 +45,11 @@ describe GithubCommitsJob do
     it 'stores last_commit_at only for projects that have a github_url' do
       expect(project.updated_at).to be > '2000-01-01'
     end
+
+    it 'executes user_commits method even if total_commits dies for project' do
+      allow(GithubCommitsJob).to receive(:update_total_commits_for).and_raise "StandardError"
+      expect(GithubCommitsJob).to receive(:update_user_commit_counts_for).with project
+      GithubCommitsJob.run
+    end
   end
 end
