@@ -49,3 +49,7 @@ paypal:
   form_url: <%= ENV["PAYPAL_FORM_URL"] || 'https://www.paypal.com/cgi-bin/webscr' %>
   form_asset_root: <%= ENV["PAYPAL_FORM_ASSET_ROOT"] ||  'https://www.paypalobjects.com' %>
   email: <%= ENV["PAYPAL_EMAIL"] || 'sam@agileventures.org' %>
+
+github:
+  client_id: <%= ENV["GITHUB_KEY"] %>
+  client_secret: <%= ENV["GITHUB_SECRET"] %>
