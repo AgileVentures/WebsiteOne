@@ -41,8 +41,8 @@ class Event < ActiveRecord::Base
   end
 
   def self.remove_past_events(events)
-    events.delete_if {|event| !event[:event].event_instances.last.try(:live?) &&
-                           (event[:time] + event[:event].duration.minutes) < Time.current}
+    events.delete_if {|event| (event[:time] + event[:event].duration.minutes) < Time.current &&
+                            !event[:event].event_instances.last.try(:live?)}
   end
 
   def self.hookups
