@@ -18,7 +18,7 @@ task :karma_calculator => :environment do
     end
 
     usr.karma.total = sum_elements
-    return if usr.created_at.blank?
+    next if usr.created_at.blank?
     usr.karma.save!
   end
 end
