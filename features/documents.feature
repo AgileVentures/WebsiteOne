@@ -46,11 +46,11 @@ Feature: Manage Document
     Then I should be on the "Show" page for project "hello world"
 
   Scenario: Show a document
-    Given I am on the "Show" page for project "hello mars"
-    When I click the sidebar link "Guides"
-    Then I should be on the "Show" page for document "Guides"
-    And I should see "Guides"
-    And I should see "New content 0"
+    Given I am on the "Show" page for project "hello world"
+    When I click the sidebar link "Documentation"
+    Then I should be on the "Show" page for document "Documentation"
+    And I should see "Documentation"
+    And I should see "New content 2 "
 
 
   Scenario: A document can have children

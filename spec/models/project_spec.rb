@@ -121,9 +121,9 @@ describe Project, type: :model do
   end
 
   describe "#github_repo" do
-    it 'returns nil if github url does not exist' do
+    it 'returns blank if github url does not exist' do
       project = build_stubbed(:project, github_url: nil)
-      expect(project.github_repo).to be_nil
+      expect(project.github_repo).to be_blank
     end
 
     it 'returns the proper repo name if github url exists' do
