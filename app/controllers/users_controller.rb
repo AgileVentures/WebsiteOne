@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     @users = users
     @users_count = @users.total_count
-    @projects = Project.all
+    @projects = Project.all.sort { |a, b| a.title <=> b.title }
     @user_type = params[:title].blank? ? 'Volunteer' : params[:title]
     @user_type = 'Premium Member' if params[:title] == 'Premium'
 
