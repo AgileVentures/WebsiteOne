@@ -4,21 +4,19 @@ describe KarmaCalculator do
 
   describe 'for new members' do
     subject { KarmaCalculator.new(user) }
-    let(:user) { FactoryGirl.build(:user, :with_karma, created_at: nil) }
-    let(:karma_points) { subject.perform; user.karma_total }
+    let(:user) { FactoryGirl.build(:user, :without_karma, created_at: nil) }
 
-    it 'should assign 0 karma points to members who have not yet been created' do
-      expect(karma_points).to eq(0)
+    it 'should assign nil karma to members who have not yet been created' do
+      expect(user.karma).to be_nil
     end
   end
 
   describe 'for new members without karma' do
     subject { KarmaCalculator.new(user) }
     let(:user) { FactoryGirl.build(:user, :without_karma, created_at: nil) }
-    let(:karma_points) { subject.perform; user.karma_total }
 
-    it 'should assign 0 karma points to members without karma' do
-      expect(karma_points).to eq(0)
+    it 'should assign nil karma to members without karma' do
+      expect(user.karma).to be_nil
     end
   end
 
