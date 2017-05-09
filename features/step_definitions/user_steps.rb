@@ -5,7 +5,7 @@ end
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
   StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
 
-  @current_user = @user = FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)
+  @current_user = @user = FactoryGirl.create(:user, :with_karma, first_name: name, email: email, password: password, password_confirmation: password)
 
   set_user_as_premium(@user) if premium
 
@@ -184,7 +184,7 @@ end
 
 Given /^the following users exist$/ do |table|
   table.hashes.each do |attributes|
-    FactoryGirl.create(:user, attributes)
+    FactoryGirl.create(:user, :with_karma, attributes)
   end
 end
 
