@@ -342,6 +342,7 @@ describe User, type: :model do
       let!(:commit_count) { FactoryGirl.create(:commit_count, user: user, commit_count: 369) }
 
       it 'has a default value with a total of zero' do
+        user.reload
         expect(user.karma.total).to eq 0
       end
 
