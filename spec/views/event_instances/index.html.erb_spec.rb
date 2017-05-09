@@ -64,8 +64,8 @@ describe 'event_instances/index', type: :view do
 
   describe 'renders participants avatars' do
     before do
-      FactoryGirl.create(:user, :with_karma, gplus: @event_instances.first.participants.first.last['person']['id'])
-      FactoryGirl.create(:user, :with_karma)
+      FactoryGirl.create(:user, gplus: @event_instances.first.participants.first.last['person']['id'])
+      FactoryGirl.create(:user)
     end
 
     it_behaves_like 'it has clickable user avatar with popover' do

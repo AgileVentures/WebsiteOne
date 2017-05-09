@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user, aliases: [:whodunnit] do
+
     trait(:with_karma) {  karma { Karma.new } }
-    trait(:without_karma) {  karma { nil } }
 
     transient do
       gplus 'youtube_id_1'
