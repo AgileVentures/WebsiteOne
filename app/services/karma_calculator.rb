@@ -7,9 +7,13 @@ class KarmaCalculator
   end
 
   def perform
-    user.karma.total = 0
-    return if user.created_at.blank?
+    if user.karma
+      user.karma.total = 0
+    else
+      user.karma = Karma.find_or_create_by(user_id: user.id, total: 0)
+    end
 
+    return if user.created_at.blank?
     user.karma.total = sum_elements
     # better to have time in pairing sessions, code contributed (related to quality), issues, ...
   end
