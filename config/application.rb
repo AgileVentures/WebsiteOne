@@ -10,7 +10,6 @@ Bundler.require(:default, Rails.env)
 module WebsiteOne
   class Application < Rails::Application
     # necessary to make Settings available
-
     Config::Integrations::Rails::Railtie.preload
 
     # Settings in config/environments/* take precedence over those specified here.
