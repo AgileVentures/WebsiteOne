@@ -19,7 +19,7 @@ describe SlackService do
       subject.post_hangout_notification(hangout)
 
       assert_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify', times: 1) do |req|
-        expect(req.body).to eq "title=MockEvent&link=mock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}&project=edx"
+        expect(req.body).to eq "title=MockEvent&link=mock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}&project"
       end
     end
 
@@ -52,7 +52,7 @@ describe SlackService do
       subject.post_yt_link(hangout)
 
       assert_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify', times: 1) do |req|
-        expect(req.body).to eq "title=MockEvent&video=https%3A%2F%2Fyoutu.be%2Fmock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}&project=localsupport"
+        expect(req.body).to eq "title=MockEvent&video=https%3A%2F%2Fyoutu.be%2Fmock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}&project"
       end
     end
 
