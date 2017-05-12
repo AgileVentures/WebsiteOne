@@ -13,7 +13,7 @@ Feature: Escalating Call to Action
   Scenario: Guest user sees call to action which links to sign up page
     Given I am on the "home" page
     When I click "Get started now to begin coding on real projects!"
-    Then I should be on the "sign up" page
+    Then I should be on the "premium membership" page
 
   Scenario: Logged in use sees call to action which links to premium subscription page
     Given I am logged in
