@@ -9,6 +9,9 @@ Feature: Escalating Call to Action
       | name        | id         | amount | free_trial_length_days |
       | Premium     | premium    | 1000   | 7                      |
       | Premium Mob | premiummob | 2500   | 0                      |
+    And the following pages exist
+      | title              | slug    | body    |
+      | Premium Membership | premium | Premium |
 
   Scenario: Guest user sees call to action which links to sign up page
     Given I am on the "home" page
