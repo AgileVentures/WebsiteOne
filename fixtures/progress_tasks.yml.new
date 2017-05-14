@@ -1,0 +1,30 @@
+---
+progress_tasks_001:
+  id: '1'
+  title: Connect to Slack
+  description: Go to slack.com and create a user if you
+  order_num: 1
+  created_at: '2014-03-01 13:34:59.451651'
+  updated_at: '2014-03-01 13:34:59.451651'
+progress_tasks_002:
+  id: '2'
+  title: Join a Channel and say 'Hi'
+  description: Go to interface and join a channel by clicking
+  order_num: 2
+  created_at: '2014-03-01 14:34:59.451651'
+  updated_at: '2014-03-01 14:34:59.451651'
+progress_tasks_003:
+  id: '3'
+  title: Attend a Scrum
+  description: Go to agileventures.com and find a scrum
+  order_num: 3
+  created_at: '2014-03-01 15:34:59.451651'
+  updated_at: '2014-03-01 15:34:59.451651'
+progress_tasks_004:
+  id: '4'
+  title: Run a Scrum
+  order_num: 4
+  description: Start the scrum using the method described
+  created_at: '2014-03-01 16:34:59.451651'
+  updated_at: '2014-03-01 16:34:59.451651'
+
