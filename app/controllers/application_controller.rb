@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include CustomErrors
 
+  def getting_started
+    @progress_tasks = ProgressTask.all
+  end
+
   protected
 
   def configure_permitted_parameters
