@@ -94,7 +94,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def create_new_user_with_authentication(omniauth)
-    user = User.new
+    user = User.new(karma: Karma.new)
     user.apply_omniauth(omniauth)
 
     if user.save
