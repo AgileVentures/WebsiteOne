@@ -10,23 +10,24 @@ Feature: Escalating Call to Action
       | Premium     | premium    | 1000   | 7                      |
       | Premium Mob | premiummob | 2500   | 0                      |
     And the following pages exist
-      | title              | slug    | body    |
-      | Premium Membership | premium | Premium |
+      | title                  | slug        | body        |
+      | Premium Membership     | premium     | Premium     |
+      | Premium Mob Membership | premium_mob | Premium Mob |
 
   Scenario: Guest user sees call to action which links to sign up page
     Given I am on the "home" page
     When I click "Get started now to begin coding on real projects!"
-    Then I should be on the "premium membership" page
+    Then I should be on the "sign up" page
 
   Scenario: Logged in use sees call to action which links to premium subscription page
     Given I am logged in
     And I am on the "home" page
     When I click "Upgrade to Premium for additional support"
-    Then I should be on the "premium sign up" page
+    Then I should be on the "premium membership" page
 
   @stripe_javascript @javascript
   Scenario: Premium user sees call to action which links to premium mob subscription page
     Given I am logged in as a premium user with name "John", email "john@gmail.com", with password "12345678"
     And I am on the home page
     When I click "Upgrade to Premium Mob for group sessions with a Mentor"
-    Then I should be on the "premium mob sign up" page
+    Then I should be on the "premium mob membership" page
