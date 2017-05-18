@@ -14,7 +14,7 @@ describe SlackService do
     let(:hangout) { EventInstance.create(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user) }
 
     it 'sends a post request to the agile-bot with the proper data' do
-      hangout.project = Project.create( slug: 'edx')
+      hangout.project = Project.create( slug: 'edx', title: 'Edx', description: 'hmm', status: 'active')
 
       subject.post_hangout_notification(hangout)
 
@@ -47,7 +47,7 @@ describe SlackService do
 
     it 'sends a post request to the agile-bot with the proper data' do
       hangout.yt_video_id = 'mock_url'
-      hangout.project = Project.create( slug: 'localsupport')
+      hangout.project = Project.create( slug: 'localsupport', title: 'Local Support', description: 'hmmm', status: 'active')
 
       subject.post_yt_link(hangout)
 
