@@ -30,11 +30,16 @@
 
 a.call-to-action {
   white-space: normal !important;
-  background: #34495e;
+  background: rgb(0,128,128);
   box-shadow: rgba(0, 0, 0, 0.8) 4px 5px 10px 0px;
 }
 
 .call-to-action:hover {
-  background: #2c3e50;
+  background: #6baba1;
+  box-shadow: rgba(0, 0, 0, 0.8) 8px 10px 20px 0px;
+}
+
+.call-to-action:active {
+  background: #6baba1;
   box-shadow: rgba(0, 0, 0, 0.8) 8px 10px 20px 0px;
 }
