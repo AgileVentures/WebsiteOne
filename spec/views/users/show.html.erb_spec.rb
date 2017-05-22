@@ -126,7 +126,7 @@ describe 'users/show.html.erb' do
   it 'renders list of youtube links and published dates if user has videos' do
     render
     @event_instances.each do |video|
-      href = "http://www.youtube.com/watch?v=#{video.yt_video_id}&feature=youtube_gdata"
+      href = "https://www.youtube.com/watch?v=#{video.yt_video_id}&feature=youtube_gdata"
       expect(rendered).to have_link(video.title, :href => href)
       expect(rendered).to have_text(video.created_at.strftime('%H:%M %d/%m'))
     end

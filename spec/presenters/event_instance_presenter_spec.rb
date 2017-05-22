@@ -45,7 +45,7 @@ describe EventInstancePresenter do
     end
 
     it 'returns video url' do
-      expect(presenter.video_url).to eq("http://www.youtube.com/watch?v=#{presenter.yt_video_id}&feature=youtube_gdata")
+      expect(presenter.video_url).to eq("https://www.youtube.com/watch?v=#{presenter.yt_video_id}&feature=youtube_gdata")
     end
 
     it 'returns a link to video' do
@@ -56,7 +56,7 @@ describe EventInstancePresenter do
     end
 
     it 'returns a link to youtube player' do
-      link = "http://www.youtube.com/embed/#{presenter.yt_video_id}?enablejsapi=1"
+      link = "https://www.youtube.com/embed/#{presenter.yt_video_id}?enablejsapi=1"
       expect(presenter.video_embed_link).to eq(link)
     end
   end
