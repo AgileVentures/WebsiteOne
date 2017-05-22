@@ -31,7 +31,7 @@ class EventInstancePresenter < BasePresenter
 
   def video_url
     if id = event_instance.yt_video_id
-      "http://www.youtube.com/watch?v=#{id}&feature=youtube_gdata".html_safe
+      "https://www.youtube.com/watch?v=#{id}&feature=youtube_gdata".html_safe
     else
       '#'
     end
@@ -48,7 +48,7 @@ class EventInstancePresenter < BasePresenter
 
   def video_embed_link
     if yt_video_id.present?
-      "http://www.youtube.com/embed/#{yt_video_id}?enablejsapi=1"
+      "https://www.youtube.com/embed/#{yt_video_id}?enablejsapi=1"
     end
   end
 

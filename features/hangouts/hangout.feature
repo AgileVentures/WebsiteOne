@@ -91,7 +91,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | WebsiteOne   |
     And I should see the avatar for "Alice"
     And I should see link "Join" with "http://hangout.test"
-    And I should see link "Watch" with "http://www.youtube.com/watch?v=QWERT55&feature=youtube_gdata"
+    And I should see link "Watch" with "https://www.youtube.com/watch?v=QWERT55&feature=youtube_gdata"
 
     And I should see:
       | 11:11       |
@@ -100,7 +100,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Autograders |
     And I should see the avatar for "Bob"
     And I should see link "Join" with "http://hangout.session"
-    And I should see link "Watch" with "http://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
+    And I should see link "Watch" with "https://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
 
   Scenario: Display live sessions - extra info
     Given the date is "2014/02/01 11:10:00 UTC"
