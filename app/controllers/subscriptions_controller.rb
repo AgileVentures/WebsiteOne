@@ -40,7 +40,8 @@ class SubscriptionsController < ApplicationController
     current_user.save
   rescue Stripe::StripeError => e
     # nil customer id will lead to Stripe::InvalidRequestError
-    flash[:error] = e.message
+    logger.error "Failing plan upgrade through Stripe: #{e.message}"
+    flash[:error] = "We're sorry but we can't automatically upgrade your plan at this time.  Please email info@agileventures.org to receive an upgrade"
     redirect_to user_path(current_user)
   end
 
