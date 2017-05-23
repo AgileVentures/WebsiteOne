@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
     subscription.save
     current_user.subscription.plan = Plan.find_by third_party_identifier: 'premiummob'
     current_user.save
-  rescue Stripe::StripeError => e
+  rescue StandardError => e
     # nil customer id will lead to Stripe::InvalidRequestError
     logger.error "Failing plan upgrade through Stripe: #{e.message}"
     flash[:error] = "We're sorry but we can't automatically upgrade your plan at this time.  Please email info@agileventures.org to receive an upgrade"
