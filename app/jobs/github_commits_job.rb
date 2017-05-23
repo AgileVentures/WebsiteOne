@@ -45,7 +45,7 @@ module GithubCommitsJob
             CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
             Rails.logger.info "#{user.display_name} stats are okay"
 
-          rescue StandardError
+          rescue StandardError => e
             ErrorLoggingService.new(e).log("Updating contributions for #{contributor.author.login} caused an error!")
           end
         end
