@@ -27,6 +27,35 @@ def set_user_as_premium(user)
   payment_source = PaymentSource::Stripe.create(identifier: customer.id, subscription: subscription )
 end
 
+Given /^(?:|I am) logged in as a premium user paid for the plan via PayPal$/ do
+  @current_user = FactoryGirl.create(:user)
+  visit new_user_session_path
+  within ('#main') do
+    fill_in 'user_email', :with => @current_user.email
+    fill_in 'user_password', :with => @current_user.password
+    click_button 'Sign in'
+  end
+  body = PAYPAL_REDIRECT_BODY.clone
+  body['item_name'] = 'Premium'
+  body['payer_email'] = @current_user.email
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
+  post subscriptions_path, body
+end
+
+Given /^(?:|I am) logged in as a CraftAcademy premium user$/ do
+  @current_user = FactoryGirl.create(:user)
+  subscription = Subscription.create(user: @current_user, 
+                                     plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
+  PaymentSource::CraftAcademy.create(
+                                     subscription: subscription)
+  visit new_user_session_path
+  within('#main') do
+    fill_in 'user_email', :with => @current_user.email
+    fill_in 'user_password', :with => @current_user.password
+    click_button 'Sign in'
+  end
+end
+
 Given /^I am not logged in$/ do
   step 'I sign out'
 end
