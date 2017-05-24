@@ -2,7 +2,6 @@
   <h1>Agile Ventures <%= @plan.name %> <%= type %></h1>
   <br/>
   <a href='/<%= @plan.name.downcase.gsub(' ','_') %>'>Further details</a>
-  </p>
   <label class="amount">
     <p>The price for <%= @plan.name %> <%= type %> is £<%= number_to_currency(@plan.amount / 100.0, unit: '') %>/Month</p>
     <% if @plan.free_trial? %>
