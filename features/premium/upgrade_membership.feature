@@ -66,3 +66,20 @@ Feature: Allow Users to Upgrade Membership
     Then I should not see "Basic Member"
     And I should see "Premium Member"
     And I should see button "Upgrade to Premium Mob"
+
+  Scenario: User upgrades to premium mob from premium via PayPal but fails
+    Given I am logged in as a premium user paid for the plan via PayPal
+    And I am on my profile page
+    Then I should see "Premium Member"
+    When I click "Upgrade to Premium Mob"
+    Then I should see "Please email info@agileventures.org to receive an upgrade"
+    And I should not see "Premium Mob Member"
+  
+  Scenario: CraftAcademy student upgrades premium plan to premium mob via Stripe but fails
+    Given I am logged in as a CraftAcademy premium user
+    And I am on my profile page
+    Then I should see "Premium Member"
+    When I click "Upgrade to Premium Mob"
+    Then I should see "Please email info@agileventures.org to receive an upgrade"
+    And I should not see "Premium Mob Member"
+    
