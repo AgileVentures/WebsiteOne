@@ -100,6 +100,11 @@ Then(/^there should be exactly (\d+) hangouts$/) do |number|
   expect(EventInstance.count).to eq number.to_i
 end
 
+Then(/^there should be exactly (\d+) hangouts associated with "([^"]*)"$/) do |number, project|
+  project = Project.find_by(title: project)
+  expect(EventInstance.where(project: project).count).to eq number.to_i
+end
+
 And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   @hangout_url = 'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0'
   visit event_path(Event.find_by_name(name))

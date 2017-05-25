@@ -8,8 +8,8 @@ module GithubLastUpdatesJob
       begin
         p.last_github_update = client.repo("#{p.github_repo_name}/#{p.github_repo_user_name}").pushed_at
         p.save
-      rescue StandardError
-        Rails.logger.warn "#{p.github_url} may have caused the issue. Commit terminated for this project!"
+      rescue StandardError => e
+        ErrorLoggingService.new(e).log("Updating the last update for #{p.github_url} may have caused the issue!")
       end
     end
   end
