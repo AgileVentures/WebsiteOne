@@ -14,6 +14,7 @@ You'll need to be able to use both of those.
 ### Step 2: Get your own local copy of the project to work on
 You'll do your development work on your own copy of the project.
 
+[Additional Notes for installation on: [c9](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/c9), [ubuntu](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/ubuntu), [osx](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/osx) ]
 
 * On GitHub, fork [AgileVentures/WebSiteOne](https://help.github.com/articles/fork-a-repo/) into your own GitHub area. 
 * Clone your fork to your local development machine (or where-ever you are going to do your development coding).
