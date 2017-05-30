@@ -22,10 +22,9 @@ module GithubCommitsJob
       commit_count = client.contributors(github_url(project), true, per_page: 100).reduce(0) do |memo, contrib|
         memo += contrib.contributions
       end
-
       project.update(commit_count: commit_count)
-    rescue StandardError
-      Rails.logger.warn "#{project.github_url} may have caused the issue. Commit1 update terminated for this project!"
+    rescue StandardError => e
+      ErrorLoggingService.new(e).log("Retrieving total github commits for #{project.github_url} may have caused the following issue!")
     end
   end
 
@@ -46,8 +45,8 @@ module GithubCommitsJob
             CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
             Rails.logger.info "#{user.display_name} stats are okay"
 
-          rescue StandardError
-            Rails.logger.error "#{contributor.author.login} caused an error, but that will not stop me!"
+          rescue StandardError => e
+            ErrorLoggingService.new(e).log("Updating contributions for #{contributor.author.login} caused an error!")
           end
         end
       rescue StandardError

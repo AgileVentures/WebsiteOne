@@ -14,6 +14,7 @@ You'll need to be able to use both of those.
 ### Step 2: Get your own local copy of the project to work on
 You'll do your development work on your own copy of the project.
 
+[Additional Notes for installation on: [c9](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/c9), [ubuntu](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/ubuntu), [osx](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/osx) ]
 
 * On GitHub, fork [AgileVentures/WebSiteOne](https://help.github.com/articles/fork-a-repo/) into your own GitHub area. 
 * Clone your fork to your local development machine (or where-ever you are going to do your development coding).
@@ -83,7 +84,7 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
     
 ### Step 6: Request the .env file and confirm your locale
     
-* You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.
+* You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.  The `.env` file should go in the root of the WSO project.
 * When you request the `.env` file also confirm which _locale_ you are working in (which language and country).
 
     
