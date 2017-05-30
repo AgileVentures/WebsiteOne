@@ -84,7 +84,7 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
     
 ### Step 6: Request the .env file and confirm your locale
     
-* You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.
+* You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.  The `.env` file should go in the root of the WSO project.
 * When you request the `.env` file also confirm which _locale_ you are working in (which language and country).
 
     
