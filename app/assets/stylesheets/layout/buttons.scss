@@ -18,6 +18,11 @@
 
 .call-to-action{
   max-width: 75%;
+  -webkit-transition: all .8s;
+  -moz-transition: all .8s;
+  -o-transition: all .8s;
+  transition: all .8s;
+  border-width: 0px;
   @media(max-width: 414px) {
     max-width: 100%;
   }
@@ -25,8 +30,16 @@
 
 a.call-to-action {
   white-space: normal !important;
+  background: rgb(0,128,128);
+  box-shadow: rgba(0, 0, 0, 0.8) 4px 5px 10px 0px;
 }
 
 .call-to-action:hover {
-    background: #34495e;
+  background: #6baba1;
+  box-shadow: rgba(0, 0, 0, 0.8) 8px 10px 20px 0px;
+}
+
+.call-to-action:active {
+  background: #6baba1;
+  box-shadow: rgba(0, 0, 0, 0.8) 8px 10px 20px 0px;
 }
