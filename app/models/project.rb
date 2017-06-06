@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-  scope :with_github_url, -> { where.not(github_url: '') }
+  scope :with_github_url, -> { where.not(projects: { github_url: nil }) }
 
   def self.search(search, page)
     order('LOWER(title)')
@@ -50,15 +50,19 @@ class Project < ActiveRecord::Base
   end
 
   def github_repo
-    /github.com\/(.+)/.match(github_url)[1] unless github_url.blank?
+    if github_url.blank?
+      ''
+    else
+      /github.com\/(.+)/.match(github_url)[1]
+    end
   end
 
   def github_repo_name
-    /github.com\/(\w+)\/\w+/.match(github_url)[1] if github_url
+    github_url ? /github.com\/(\w+)\/\w+/.match(github_url)[1] : ''
   end
 
   def github_repo_user_name
-    /github.com\/\w+\/([\w\-]+)/.match(github_url)[1] if github_url
+    github_url ? /github.com\/\w+\/([\w\-]+)/.match(github_url)[1] : ''
   end
 
   def contribution_url

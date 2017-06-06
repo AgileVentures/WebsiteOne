@@ -44,6 +44,10 @@ def path_to(page_name, id = '')
       hookups_path
     when 'dashboard' then
       '/dashboard'
+    when 'premium membership' then
+      static_page_path('premium')
+    when 'premium mob membership' then
+      static_page_path('premium_mob')
     when 'getting started' then
       static_page_path('getting-started')
     when 'new newsletter' then

@@ -4,13 +4,13 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 Bundler.require(:default, Rails.env)
 
 module WebsiteOne
   class Application < Rails::Application
     # necessary to make Settings available
-    Bundler.require(*Rails.groups)
-    Config::Integration::Rails::Railtie.preload
+    Config::Integrations::Rails::Railtie.preload
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

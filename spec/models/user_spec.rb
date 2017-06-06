@@ -301,7 +301,7 @@ describe User, type: :model do
 
   describe 'incomplete profile' do
 
-    let(:user) { FactoryGirl.create(:user, updated_at: '2014-09-30 05:00:00 UTC') }
+    let(:user) { FactoryGirl.create(:user, :with_karma, updated_at: '2014-09-30 05:00:00 UTC') }
 
     it 'returns true if bio empty' do
       user.bio = ''
@@ -337,7 +337,7 @@ describe User, type: :model do
 
     describe '#commit_count_total' do
 
-      subject(:user) { FactoryGirl.create(:user) }
+      subject(:user) { FactoryGirl.create(:user, :with_karma) }
 
       let!(:commit_count) { FactoryGirl.create(:commit_count, user: user, commit_count: 369) }
 
@@ -357,7 +357,7 @@ describe User, type: :model do
 
     describe '#number_hangouts_started_with_more_than_one_participant' do
 
-      subject(:user) { FactoryGirl.create(:user) }
+      subject(:user) { FactoryGirl.create(:user, :with_karma) }
 
       let!(:event_instance) { FactoryGirl.create(:event_instance, user: user) }
       context 'single event instance' do
@@ -377,42 +377,42 @@ describe User, type: :model do
 
 
     describe '#hangouts_attended_with_more_than_one_participant' do
-      subject(:user) {FactoryGirl.create(:user, hangouts_attended_with_more_than_one_participant: 1)}
+      subject(:user) {FactoryGirl.create(:user, :with_karma, hangouts_attended_with_more_than_one_participant: 1)}
       it 'returns 1' do
         expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
       end
     end
 
     describe '#profile_completeness' do
-      subject(:user) { FactoryGirl.create(:user) }
+      subject(:user) { FactoryGirl.create(:user, :with_karma) }
       it 'calculates profile completeness' do
         expect(user.profile_completeness).to eq 6
       end
     end
 
     describe '#activity' do
-      subject(:user) { FactoryGirl.create(:user) }
+      subject(:user) { FactoryGirl.create(:user, :with_karma) }
       it 'calculates sign in activity' do
         expect(user.activity).to eq 0
       end
     end
 
     describe '#membership_length' do
-      subject(:user) { FactoryGirl.create(:user) }
+      subject(:user) { FactoryGirl.create(:user, :with_karma) }
       it 'calculates membership length' do
         expect(user.membership_length).to eq 0
       end
     end
 
     describe '#membership_type' do
-      subject(:user) { FactoryGirl.create(:user) }
+      subject(:user) { FactoryGirl.create(:user, :with_karma) }
 
       it 'returns membership type' do
         expect(user.membership_type).to eq 'Basic'
       end
 
       context 'premium member' do
-        subject(:user) { FactoryGirl.create(:user) }
+        subject(:user) { FactoryGirl.create(:user, :with_karma) }
         subject(:plan) { FactoryGirl.create(:plan, name: 'Premium') }
         let!(:premium) { FactoryGirl.create(:subscription, user: user, plan: plan) }
 
@@ -423,12 +423,12 @@ describe User, type: :model do
     end
 
     describe '#karma_total' do
-      subject(:user) { FactoryGirl.create(:user) }
+      subject(:user) { FactoryGirl.create(:user, :with_karma) }
       it 'returns 0 when user initially created' do
         expect(user.karma_total).to eq 0
       end
       context 'once associated karma object is created' do
-        subject(:user) { FactoryGirl.build(:user, karma: FactoryGirl.create(:karma, total: 50)) }
+        subject(:user) { FactoryGirl.build(:user, :with_karma, karma: FactoryGirl.create(:karma, total: 50)) }
         it 'returns non zero' do
           expect(user.karma_total).to eq 50
         end
@@ -447,11 +447,6 @@ describe User, type: :model do
   end
 
   context 'creating user' do
-    it 'should not be possible to save a user with nil Karma' do
-      user = User.new({ email: 'doh@doh.com', password: '12345678' })
-      user.save!
-      expect(user.karma).not_to be_nil
-    end
     it 'should not override existing karma' do
       user = User.new({ email: 'doh@doh.com', password: '12345678' })
       user.karma = Karma.new(total: 50)

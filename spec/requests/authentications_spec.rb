@@ -34,6 +34,7 @@ describe 'OmniAuth authentication' do
             }.to change(User, :count).by(1)
           }.to change(Authentication, :count).by(1)
           expect(page).to have_content('Signed in successfully.')
+          expect(User.first.karma).not_to be_nil
         end
 
         it 'should not work with invalid credentials' do

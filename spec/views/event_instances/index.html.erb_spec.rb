@@ -32,7 +32,7 @@ describe 'event_instances/index', type: :view do
     expect(rendered).to have_text(hangout.title)
     expect(rendered).to have_link(hangout.project.title, project_path(hangout.project))
     expect(rendered).to have_link('Join', href: hangout.hangout_url)
-    expect(rendered).to have_link('Watch', href: "http://www.youtube.com/watch?v=#{hangout.yt_video_id}&feature=youtube_gdata")
+    expect(rendered).to have_link('Watch', href: "https://www.youtube.com/watch?v=#{hangout.yt_video_id}&feature=youtube_gdata")
   end
 
   it 'disables the join button if hangout is not live' do
@@ -64,8 +64,8 @@ describe 'event_instances/index', type: :view do
 
   describe 'renders participants avatars' do
     before do
-      FactoryGirl.create(:user, gplus: @event_instances.first.participants.first.last['person']['id'])
-      FactoryGirl.create(:user)
+      FactoryGirl.create(:user, :with_karma, gplus: @event_instances.first.participants.first.last['person']['id'])
+      FactoryGirl.create(:user, :with_karma)
     end
 
     it_behaves_like 'it has clickable user avatar with popover' do
