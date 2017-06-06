@@ -6,65 +6,65 @@
 2) update the local software (all the linux packages on the c9 machine)
 
 ```
-$ sudo apt-get update
+sudo apt-get update
 
 ```
 
 3) install qtmake (cross-platform build tool) and fix any missing elements (choose Y for install):
 
 ```
-$ sudo apt-get install qt5-default --fix-missing
+sudo apt-get install qt5-default --fix-missing
 ```
 
 4) install libqt5webkit5 (helps run our acceptance tests) (choose Y for install):
 
 ```
-$ sudo apt-get install libqt5webkit5-dev
+sudo apt-get install libqt5webkit5-dev
 ```
 
 5) Install X virtual frame buffer (also for our acceptance tests)
 
 ```
-$ sudo apt-get install xvfb
+sudo apt-get install xvfb
 ```
 
 6) install bundler (manages all our ruby gems)
 
 ```
-$ gem install bundle
+gem install bundle
 ```
 
 7) install gems (note that forkbomb protection on c9 may kill bundle and you will need to re-run it several times to complete the install of all the gems)
 
 ```
-$ bundle install
+bundle install
 ```
 
 8) install javascript dependencies (ensure bower is installed `npm install bower`)
 
 ```
-$ npm install
+npm install
 ```
 
 9) Configure the pre-installed postgreSQL. Check which version is installed with ls /etc/postgresql/. If the version is not 9.3, the sed commands must be edited to reflect the current version.
 
 ```
 # Change conf files to map your user to postgres user
-$ sudo sed -i 's/local[ ]*all[ ]*postgres[ ]*peer/local all postgres peer map=basic/' /etc/postgresql/9.3/main/pg_hba.conf
-$ sudo sed -i "$ a\basic $USER postgres" /etc/postgresql/9.3/main/pg_ident.conf
+sudo sed -i 's/local[ ]*all[ ]*postgres[ ]*peer/local all postgres peer map=basic/' /etc/postgresql/9.3/main/pg_hba.conf
+sudo sed -i "$ a\basic $USER postgres" /etc/postgresql/9.3/main/pg_ident.conf
     
 # Start the service
-$ sudo service postgresql start
+sudo service postgresql start
 
 # Make the default database template encoded in unicode
-$ psql -U postgres -c "update pg_database set encoding = 6, datcollate = 'C', datctype = 'C' where datname = 'template1';"
-$ sudo /etc/init.d/postgresql restart
+psql -U postgres -c "update pg_database set encoding = 6, datcollate = 'C', datctype = 'C' where datname = 'template1';"
+sudo /etc/init.d/postgresql restart
 ```
 
 10) initialize the db
 
 ```
-$ bundle exec rake db:setup
+bundle exec rake db:setup
 ```
 
 11) Request the .env file
@@ -74,9 +74,9 @@ $ bundle exec rake db:setup
 12) Run the tests
 
 ```
-$ bundle exec rake spec
-$ bundle exec rake jasmine:ci
-$ bundle exec rake cucumber
+bundle exec rake spec
+bundle exec rake jasmine:ci
+bundle exec rake cucumber
 ```
 
 Discuss any errors with the team.
@@ -84,15 +84,15 @@ Discuss any errors with the team.
 13) add some seed data
 
 ```
-$ rake db:seed
+rake db:seed
 ```
 
 14) Start the server
 
 ```
-$ bundle exec rails s -b $IP -p $PORT
+bundle exec rails s -b $IP -p $PORT
 ```
     
 15) View the running site 
 
-    http://<c9_workspace_name>.<your_c9_user_name>.c9users.io/
+`http://<c9_workspace_name>.<your_c9_user_name>.c9users.io/`
