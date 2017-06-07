@@ -54,3 +54,12 @@ Then(/^there should be a "([^"]*)" subscription plan$/) do |plan|
   expect(Plan.find_by(name: plan)).not_to be_nil
 end
 
+
+When(/^I hit the letsencrypt endpoint$/) do
+  ENV['CERTBOT_SSL_CHALLENGE'] = 'qwertyui'
+  @response = get '/.well-known/acme-challenge/123456789'
+end
+
+Then(/^I should receive the correct challenge response$/) do
+  expect(@response.body).to eq '123456789.qwertyui'
+end
