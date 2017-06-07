@@ -69,14 +69,51 @@ $ bundle exec rake db:setup
 
 11) Request the .env file
     
-    ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in
+Ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in.
+
+Assuming your locate is `en_US.UTF-8` do the following:
+
+Run in terminal:
+
+```
+sudo locale-gen en_US.UTF-8
+```
+
+Then:
+
+```
+c9 ~/.bashrc
+```
+
+After `. /etc/apache2/envvars` add these lines:
+
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+```
+
+**Note**: If you face the error `Fontconfig warning: ignoring C.UTF-8: not a valid language tag`, then your locale is not correctly set. 
 
 12) Run the tests
 
 ```
-$ bundle exec rake spec
+$ xvfb-run -a bundle exec rake spec
 $ bundle exec rake jasmine:ci
 $ bundle exec rake cucumber
+```
+
+If you get timeouts in running cucumber. They start with `Timed out waiting for response to`, you may increase the value explicitly in `features/support/capybara.rb`:
+```
+test_options = {
+    phantomjs_options: [
+        '--ignore-ssl-errors=yes',
+        "--proxy=#{Billy.proxy.host}:#{Billy.proxy.port}"
+    ],
+    timeout: 500,
+    phantomjs: Phantomjs.path,
+    js_errors: true,
+}
 ```
 
 Discuss any errors with the team.
@@ -95,4 +132,4 @@ $ bundle exec rails s -b $IP -p $PORT
     
 15) View the running site 
 
-    http://<c9_workspace_name>.<your_c9_user_name>.c9users.io/
+Click on `Share` on top right corner. The url in front of `Application` is the one which you can use to view your site.
