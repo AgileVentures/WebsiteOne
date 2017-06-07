@@ -69,7 +69,31 @@ $ bundle exec rake db:setup
 
 11) Request the .env file
     
-    ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in
+Ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in.
+
+Assuming your locate is `en_US.UTF-8` do the following:
+
+Run in terminal:
+
+```
+sudo locale-gen en_US.UTF-8
+```
+
+Then:
+
+```
+c9 ~/.bashrc
+```
+
+After `. /etc/apache2/envvars` add these lines:
+
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+```
+
+**Note**: If you face the error `Fontconfig warning: ignoring C.UTF-8: not a valid language tag`, then your locale is not correctly set. 
 
 12) Run the tests
 
