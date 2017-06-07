@@ -132,4 +132,4 @@ $ bundle exec rails s -b $IP -p $PORT
     
 15) View the running site 
 
-    http://<c9_workspace_name>.<your_c9_user_name>.c9users.io/
+Click on `Share` on top right corner. The url in front of `Application` is the one which you can use to view your site.
