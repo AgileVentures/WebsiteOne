@@ -98,7 +98,7 @@ export LANGUAGE=en_US.UTF-8
 12) Run the tests
 
 ```
-$ bundle exec rake spec
+$ xvfb-run -a bundle exec rake spec
 $ bundle exec rake jasmine:ci
 $ bundle exec rake cucumber
 ```
