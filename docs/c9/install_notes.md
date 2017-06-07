@@ -103,6 +103,19 @@ $ bundle exec rake jasmine:ci
 $ bundle exec rake cucumber
 ```
 
+If you get timeouts in running cucumber. They start with `Timed out waiting for response to`, you may increase the value explicitly in `features/support/capybara.rb`:
+```
+test_options = {
+    phantomjs_options: [
+        '--ignore-ssl-errors=yes',
+        "--proxy=#{Billy.proxy.host}:#{Billy.proxy.port}"
+    ],
+    timeout: 500,
+    phantomjs: Phantomjs.path,
+    js_errors: true,
+}
+```
+
 Discuss any errors with the team.
 
 13) add some seed data
