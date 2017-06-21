@@ -40,6 +40,6 @@ Capybara.default_max_wait_time = 5
 
 Capybara.javascript_driver = :poltergeist_billy
 
-Capybara.save_and_open_page_path = 'tmp/capybara'
+Capybara.save_path = 'tmp/capybara'
 
 Capybara.asset_host = 'http://localhost:3000'
