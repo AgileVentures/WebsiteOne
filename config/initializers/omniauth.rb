@@ -1,3 +1,5 @@
+OmniAuth.config.logger = Rails.logger
+
 Rails.application.config.middleware.use OmniAuth::Builder do
   if Rails.env.development? || Rails.env.test?
     ENV['GPLUS_KEY'] = '463111787485-rj34ev5ai9pncbjl0oreqg3gr86jt92j.apps.googleusercontent.com'
