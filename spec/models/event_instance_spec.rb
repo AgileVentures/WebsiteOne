@@ -52,10 +52,21 @@ describe EventInstance, type: :model do
     end
 
     context 'url manually overridden' do
-      before { hangout.url_set_directly = true }
-      it 'reports live if the link is older than 2 minutes, and event duration not expired' do
-        allow(hangout).to receive(:within_current_event_duration?).and_return(true)
-        allow(Time).to receive(:now).and_return(Time.parse('10:02:01 UTC'))
+      before do
+        hangout.url_set_directly = true
+        allow(hangout.event).to receive(:current_start_time).and_return(Time.parse('10:00 UTC'))
+        allow(hangout.event).to receive(:current_end_time).and_return(Time.parse('10:30 UTC'))
+        allow(Time).to receive(:now).and_return(Time.parse('10:02 UTC'))
+      end
+
+      
+      it 'does not report live when link not updated' do
+        allow(hangout.event).to receive(:updated_at).and_return(Time.parse('9:30 UTC'))
+        expect(hangout.live?).to be_falsey
+      end
+      
+      it 'report live when link is updated' do
+        allow(hangout.event).to receive(:updated_at).and_return(Time.parse('10:01 UTC'))
         expect(hangout.live?).to be_truthy
       end
     end
