@@ -29,9 +29,12 @@ class EventInstance < ActiveRecord::Base
   end
 
   def live?
-    started? && hoa_status != 'finished' &&
-      updated_at > event.schedule.previous_occurrence(Time.now) &&
-      updated_at < (event.schedule.previous_occurrence(Time.now) + event.duration*60)
+    return false unless started? && hoa_status != 'finished'
+    return true if updated_within_last_two_minutes?
+    return url_set_directly &&
+      ((updated_at > event.schedule.previous_occurrence(Time.now) &&
+      updated_at < (event.schedule.previous_occurrence(Time.now) + event.duration*60)) ||
+      updated_within_last_two_minutes?)
   end
 
   def duration
