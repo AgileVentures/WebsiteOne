@@ -56,17 +56,30 @@ describe EventInstance, type: :model do
         hangout.url_set_directly = true
         allow(hangout.event).to receive(:current_start_time).and_return(Time.parse('10:00 UTC'))
         allow(hangout.event).to receive(:current_end_time).and_return(Time.parse('10:30 UTC'))
-        allow(Time).to receive(:now).and_return(Time.parse('10:02 UTC'))
       end
 
       it 'does not report live when link not updated' do
+        allow(Time).to receive(:now).and_return(Time.parse('10:02 UTC'))
         allow(hangout).to receive(:updated_at).and_return(Time.parse('9:30 UTC'))
         expect(hangout.live?).to be_falsey
       end
       
       it 'report live when link is updated' do
+        allow(Time).to receive(:now).and_return(Time.parse('10:02 UTC'))
         allow(hangout).to receive(:updated_at).and_return(Time.parse('10:01 UTC'))
         expect(hangout.live?).to be_truthy
+      end
+
+      it 'does not report live when event ends' do
+        allow(Time).to receive(:now).and_return(Time.parse('10:31 UTC'))
+        allow(hangout).to receive(:updated_at).and_return(Time.parse('10:01 UTC'))
+        expect(hangout.live?).to be_falsey
+      end
+
+      it 'reports live when link is updated 10 min before start time' do
+        allow(Time).to receive(:now).and_return(Time.parse('9:58 UTC'))
+        allow(hangout).to receive(:updated_at).and_return(Time.parse('09:51 UTC'))
+        expect(hangout.live?).to be_truthy        
       end
     end
   end

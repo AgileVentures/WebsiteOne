@@ -229,9 +229,7 @@ class Event < ActiveRecord::Base
 
   def current_end_time
     schedule.previous_occurrence(Time.now) + duration*60
-  end  
-
-  private
+  end
 
   def before_current_end_time?
     Time.now < current_end_time
@@ -244,6 +242,8 @@ class Event < ActiveRecord::Base
   rescue
     false
   end
+
+  private
 
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
