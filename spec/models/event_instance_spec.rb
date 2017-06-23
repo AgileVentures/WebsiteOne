@@ -59,14 +59,13 @@ describe EventInstance, type: :model do
         allow(Time).to receive(:now).and_return(Time.parse('10:02 UTC'))
       end
 
-      
       it 'does not report live when link not updated' do
-        allow(hangout.event).to receive(:updated_at).and_return(Time.parse('9:30 UTC'))
+        allow(hangout).to receive(:updated_at).and_return(Time.parse('9:30 UTC'))
         expect(hangout.live?).to be_falsey
       end
       
       it 'report live when link is updated' do
-        allow(hangout.event).to receive(:updated_at).and_return(Time.parse('10:01 UTC'))
+        allow(hangout).to receive(:updated_at).and_return(Time.parse('10:01 UTC'))
         expect(hangout.live?).to be_truthy
       end
     end

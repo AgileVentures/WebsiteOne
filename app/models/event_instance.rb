@@ -28,10 +28,16 @@ class EventInstance < ActiveRecord::Base
     updated_at > 2.minutes.ago
   end
 
+  # margin: Seconds for which condition can be relaxed for start time
+  def updated_within_current_event_duration?(margin)
+    updated_at > event.current_start_time - margin &&
+      updated_at < event.current_end_time
+  end
+
   def live?
     return false if !started? || hoa_status == 'finished'
     return true if updated_within_last_two_minutes?
-    return url_set_directly && event.updated_within_current_event_duration?
+    return url_set_directly && updated_within_current_event_duration?(600)
   end
 
   def duration
