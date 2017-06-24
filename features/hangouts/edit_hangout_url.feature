@@ -31,3 +31,12 @@ Feature: Manual Edit of Hangout URL
     Then "Repeat Scrum" shows live for that hangout link for the event duration
     And "Repeat Scrum" is not live the following day
     And there should be exactly 3 hangouts
+
+  Scenario: Ensure event doesn't go live when Hangout URL isn't edited
+    Given the date is "2014 Feb 6th 7:03am"
+    Then "Repeat Scrum" doesn't shows live for that hangout link for the event duration
+
+  Scenario: Ensure event go live when Hangout URL is edited
+    Given the date is "2014 Feb 6th 7:03am"
+    And I manually set a hangout link for event "Repeat Scrum"
+    Then "Repeat Scrum" shows live for that hangout link for the event duration
