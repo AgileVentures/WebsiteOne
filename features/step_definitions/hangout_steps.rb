@@ -117,28 +117,28 @@ Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |
   event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).to have_link('Join now', href: @hangout_url)
-  time = event.current_end_time - 1.minute
+  time = Time.parse(@jump_date) + event.duration.minutes - 10.minute
   Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).to have_link('Join now', href: @hangout_url)
-  time = event.current_end_time + 1.minute
+  time = Time.parse(@jump_date) + event.duration.minutes + 10.minute
   Delorean.time_travel_to(time)
   visit event_path(event)
-  expect(page).not_to have_link('Join now', href: @hangout_url)
+  expect(page).not_to have_link('Join now')
 end
 
 Then(/^"([^"]*)" doesn't shows live for that hangout link for the event duration$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
-  expect(page).not_to have_link('Join now', href: @hangout_url)
-  time = event.current_end_time - 1.minute
+  expect(page).not_to have_link('Join now')
+  time = Time.parse(@jump_date) + event.duration.minutes - 10.minute
   Delorean.time_travel_to(time)
   visit event_path(event)
-  expect(page).not_to have_link('Join now', href: @hangout_url)
-  time = event.current_end_time + 1.minute
+  expect(page).not_to have_link('Join now')
+  time = Time.parse(@jump_date) + event.duration.minutes + 10.minute
   Delorean.time_travel_to(time)
   visit event_path(event)
-  expect(page).not_to have_link('Join now', href: @hangout_url)
+  expect(page).not_to have_link('Join now')
 end
 
 And(/^"([^"]*)" is not live the following day$/) do |event_name|
