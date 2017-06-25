@@ -107,10 +107,12 @@ end
 
 And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   @hangout_url = 'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0'
-  visit event_path(Event.find_by_name(name))
+  event = Event.find_by_name(name)
+  visit event_path(event)
   page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
   fill_in 'hangout_url', :with => @hangout_url
   page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
+  visit event_path(event)
 end
 
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
@@ -127,16 +129,8 @@ Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |
   expect(page).not_to have_link('Join now')
 end
 
-Then(/^"([^"]*)" doesn't shows live for that hangout link for the event duration$/) do |event_name|
+Given(/^"([^"]*)" doesn't shows live for that hangout link at the moment$/) do |event_name|
   event = Event.find_by_name(event_name)
-  visit event_path(event)
-  expect(page).not_to have_link('Join now')
-  time = Time.parse(@jump_date) + event.duration.minutes - 10.minute
-  Delorean.time_travel_to(time)
-  visit event_path(event)
-  expect(page).not_to have_link('Join now')
-  time = Time.parse(@jump_date) + event.duration.minutes + 10.minute
-  Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).not_to have_link('Join now')
 end
