@@ -3,7 +3,8 @@ namespace :db do
   task :import_pages => :environment do
     # Creating Root Pages
     Dir.entries(Rails.root.join('app', 'views', 'pages').to_s).select { |f| f.ends_with? ".html.erb" }.each do |page|
-      StaticPage.create!(title: get_title(page), body: File.open(Rails.root.join('app', 'views', 'pages', page).to_s).read)
+      StaticPage.create!(title: get_title(page), body: File.open(Rails.root.join('app', 'views', 'pages', page).to_s).read,
+        slug: page.gsub(".html.erb", ""))
       puts "Created Static Page: #{get_title(page)}"
     end
 
@@ -25,5 +26,5 @@ end
 
 
 def get_title(page)
-  page.gsub(".html.erb", "").gsub("-", " ").split.map(&:capitalize).join(' ')
+  page.gsub(".html.erb", "").gsub(/[-_]/, " ").split.map(&:capitalize).join(' ')
 end
