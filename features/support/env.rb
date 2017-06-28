@@ -8,7 +8,7 @@ Coveralls.wear_merged!('rails')
 
 require 'cucumber/rails'
 require 'capybara/poltergeist'
-require 'billy/cucumber'
+require 'billy/capybara/cucumber'
 require 'cucumber/rspec/doubles'
 require 'webmock/cucumber'
 require 'capybara-screenshot/cucumber'

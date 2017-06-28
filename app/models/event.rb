@@ -222,20 +222,28 @@ class Event < ActiveRecord::Base
   def within_current_event_duration?
     after_current_start_time? and before_current_end_time?
   end
+  
+  def current_start_time
+    schedule.previous_occurrence(Time.now)
+  end
 
-  private
+  def current_end_time
+    schedule.previous_occurrence(Time.now) + duration*60
+  end
 
   def before_current_end_time?
-    Time.now < (schedule.previous_occurrence(Time.now) + duration*60)
+    Time.now < current_end_time
   rescue
     false
   end
 
   def after_current_start_time?
-    Time.now > schedule.previous_occurrence(Time.now)
+    Time.now > current_start_time
   rescue
     false
   end
+
+  private
 
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
     if repeats_weekly_each_days_of_the_week.empty?
