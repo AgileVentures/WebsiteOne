@@ -36,6 +36,6 @@ Feature: Manual Edit of Hangout URL
     Given the date is "2014 Feb 5th 6:00am"
     And I manually set a hangout link for event "Repeat Scrum"
     Given the date is "2014 Feb 5th 7:05am"
-    And "Repeat Scrum" doesn't shows live for that hangout link at the moment
+    Then "Repeat Scrum" doesn't shows live for that hangout link at the moment
     And I manually set a hangout link for event "Repeat Scrum"
     Then "Repeat Scrum" shows live for that hangout link for the event duration

@@ -119,11 +119,11 @@ Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |
   event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).to have_link('Join now', href: @hangout_url)
-  time = Time.parse(@jump_date) + event.duration.minutes - 10.minute
+  time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).to have_link('Join now', href: @hangout_url)
-  time = Time.parse(@jump_date) + event.duration.minutes + 10.minute
+  time = Time.parse(@jump_date) + event.duration.minutes + 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).not_to have_link('Join now')
