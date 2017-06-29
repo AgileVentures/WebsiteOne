@@ -4,7 +4,7 @@ WebsiteOne.define('Users', function () {
     function selectVideo(event) {
         event.preventDefault();
         player = $('#ytplayer');
-        player.attr('src', 'http://www.youtube.com/v/' + this.id + '?version=3&enablejsapi=1');
+        player.attr('src', 'https://www.youtube.com/v/' + this.id + '?version=3&enablejsapi=1');
         $('#video_contents').text($(this).data('content'));
 
         $('html, body').animate({
