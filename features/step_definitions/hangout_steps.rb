@@ -118,6 +118,7 @@ end
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
+  # byebug
   expect(page).to have_link('Join now', href: @hangout_url)
   time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
   Delorean.time_travel_to(time)
@@ -129,7 +130,13 @@ Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |
   expect(page).not_to have_link('Join now')
 end
 
-Given(/^"([^"]*)" doesn't shows live for that hangout link at the moment$/) do |event_name|
+When(/^I start the "([^"]*)" event$/) do |event_name|
+  event = Event.find_by_name(event_name)
+  visit event_path(event)
+  find('#liveHOA-placeholder').click
+end
+
+Then(/^the "([^"]*)" event should not go live$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).not_to have_link('Join now')
