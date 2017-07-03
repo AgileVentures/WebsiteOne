@@ -9,7 +9,7 @@ var Scrum = {
   select_video: function(event) {
     event.preventDefault();
     player = $("#scrumVideo .modal-body iframe").get(0);
-    player.src = 'http://www.youtube.com/embed/' + $(this).data('source') + '?enablejsapi=1';
+    player.src = 'https://www.youtube.com/embed/' + $(this).data('source') + '?enablejsapi=1';
     $('#scrumVideo #playerTitle').text($(this).data('content'));
   }
 
