@@ -1,0 +1,21 @@
+Corresponds to background of edit_past_event.feature
+
+id: 3,
+ name: "Daily Standup",
+ category: "PairProgramming",
+ description: "We stand up",
+ repeats: "weekly",
+ repeats_every_n_weeks: 1,
+ repeats_weekly_each_days_of_the_week_mask: 9,
+ repeat_ends: true,
+ repeat_ends_on: Wed, 14 Jun 2017,
+ time_zone: "UTC",
+ created_at: Tue, 13 Jun 2017 08:26:15 UTC +00:00,
+ updated_at: Tue, 13 Jun 2017 08:26:15 UTC +00:00,
+ url: nil,
+ slug: "daily-standup",
+ start_datetime: Tue, 13 Jun 2017 08:23:00 UTC +00:00,
+ duration: 30,
+ exclusions: nil,
+ project_id: 1,
+ creator_id: 302
