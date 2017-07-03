@@ -38,6 +38,7 @@ Feature: Setting up basic page layout for site
     And I should see "Social" in footer
     And I should see "Our Sponsors" in footer
     And I should see "Contact us" in footer
+    And I should see "Opportunities" in footer
     And I should see a link "drie" to "https://drie.co/"
     And I should see a link "Craft Academy" to "http://craftacademy.se/english"
     And I should see a link "Mentive" to "http://www.mentive.co/"
