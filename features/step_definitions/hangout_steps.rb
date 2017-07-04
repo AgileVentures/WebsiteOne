@@ -112,11 +112,13 @@ And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
   fill_in 'hangout_url', :with => @hangout_url
   page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
+  visit event_path(event)
 end
 
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
+  # byebug
   expect(page).to have_link('Join now', href: @hangout_url)
   time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
   Delorean.time_travel_to(time)
