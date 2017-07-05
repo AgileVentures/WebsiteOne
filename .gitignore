@@ -86,3 +86,6 @@ vendor/assets/javascripts/bootstrap-datepicker.js
 vendor/assets/javascripts/bootstrap-timepicker.min.js
 vendor/assets/javascripts/typeahead.jquery.js
 vendor/assets/javascripts/nprogress.js
+
+latest.dump
+certbot.log
