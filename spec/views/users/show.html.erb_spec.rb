@@ -201,7 +201,7 @@ describe 'users/show.html.erb' do
     it 'should display email if it is set to public' do
       @user.display_email = true
       render
-      expect(rendered).to have_link(@user.email)
+      expect(rendered).to have_link("#{@user.email}", href: "mailto:#{@user.email}")
     end
 
     it 'should display an hire me button if it set to public' do
