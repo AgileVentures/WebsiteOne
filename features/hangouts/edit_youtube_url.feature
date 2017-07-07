@@ -20,7 +20,7 @@ Feature: Manual Edit of Youtube URL
 
   Scenario: Edit Youtube URL and ensure URL is saved
     Given the date is "2014 Feb 4th 7:01am"
-    And I manually set a youtube link for event "Scrum"
+    And I manually set youtube link with youtube id "1234" for event "Scrum"
     Then "Scrum" shows that youtube link for event duration
 
   Scenario: Edit Youtube URL and ensure video appears on Project page

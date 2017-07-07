@@ -130,3 +130,20 @@ And(/^"([^"]*)" is not live the following day$/) do |event_name|
   expect(page).not_to have_content('This event is now live!')
 end
 
+Then(/^"([^"]*)" shows that youtube link for event duration$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)"$/) do |yt_id, event_name|
+  @yt_url = 'https://youtu.be/' + yt_id
+  visit event_path(Event.find_by_name(event_name))
+  page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
+  fill_in 'hangout_url', :with => @yt_url
+  page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
+end
+
+Then(/^I should see video with youtube id "([^"]*)"$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+

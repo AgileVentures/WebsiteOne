@@ -27,6 +27,9 @@
             <li role="edit_hoa_link">
               <%= link_to 'Edit hangout link', '#', remote: true, data: {toggle: 'collapse', target: '#edit-link-form'}, role: 'menuitem', tabindex: '-1' %>
             </li>
+            <li role="edit_yt_link">
+              <%= link_to 'Edit youtube link', '#', remote: true, data: {toggle: 'collapse', target: '#edit-link-form'}, role: 'menuitem', tabindex: '-1' %>
+            </li>            
           </ul>
         </div>
 
@@ -112,6 +115,7 @@
             <div class="form-group">
               <label class="control-label sr-only" for="hangout-url">Manually modify Hangout link</label>
             </div>
+            <b>Hangout Link</b>
             <div class="form-group">
               <div class="col-sm-8">
                 <input type="url" required class="form-control" name="hangout_url" placeholder="Copy and paste the hangout link in here.." value="<%= @recent_hangout.try!(:started?) ? @recent_hangout.try!(:hangout_url) : '' %>">
@@ -121,6 +125,22 @@
               </div>
               <div class="col-sm-2">
                 <input type="submit" class="form-control btn-primary" value="Save" id="hoa_link_save"/>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="control-label sr-only" for="yt-video-id">Manually modify Youtube link</label>
+            </div>
+            <b>Youtube Link</b>
+            <div class="form-group">
+              <div class="col-sm-8">
+                <input type="url" required class="form-control" name="yt_video_id" placeholder="Copy and paste the youtube link in here.." value="<%= @recent_hangout.try!(:started?) ? @recent_hangout.try!(:yt_video_id) : '' %>">
+              </div>
+              <div class="col-sm-2">
+                <button type="button" class="form-control btn-default" data-toggle="collapse" data-target="#edit-link-form" id="yt_link_cancel">Cancel</button>
+              </div>
+              <div class="col-sm-2">
+                <input type="submit" class="form-control btn-primary" value="Save" id="yt_link_save"/>
               </div>
             </div>
         <% end %>
