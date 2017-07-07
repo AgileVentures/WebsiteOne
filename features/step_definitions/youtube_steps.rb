@@ -21,7 +21,7 @@ end
 
 Then /^I should see video "([^"]*)" in "player"$/ do |name|
   id = find_link(name)[:id]
-  expect(page.find(:css, '#ytplayer')[:src]).to match /#{id}/
+  expect(page.find(:css, '#ytplayer')[:src]).to include "www.youtube.com/embed/#{id}"
 end
 
 Then /^I should see "([^"]*)" before "([^"]*)"$/ do |title_1, title_2|
