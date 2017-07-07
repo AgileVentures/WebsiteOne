@@ -1,6 +1,6 @@
 @vcr @javascript @disable_twitter
 Feature: Manual Edit of Youtube URL
-  As a person involved in an event
+  As a person involved in an event that starts at 7am
   So that I can ensure everyone can access the correct link to watch an event
   I would like to have means of editing the youtube URL
 
@@ -19,7 +19,7 @@ Feature: Manual Edit of Youtube URL
     And I am logged in
 
   Scenario: Edit Youtube URL and ensure URL is saved
-    Given the date is "2014 Feb 4th 6:59am"
+    Given the date is "2014 Feb 4th 7:01am"
     And I manually set a youtube link for event "Scrum"
     Then "Scrum" shows that youtube link for event duration
 
