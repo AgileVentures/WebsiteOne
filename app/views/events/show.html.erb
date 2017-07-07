@@ -111,7 +111,7 @@
             <% if @event.project %>
               <%= hidden_field_tag 'project_id', @event.project.id %>
             <% end %>
-            <%= hidden_field_tag 'yt_video_id', @recent_hangout.try!(:yt_video_id) %>
+            <%= hidden_field_tag 'yt_url', @recent_hangout.try!(:yt_url) %>
 
             <div class="form-group">
               <label class="control-label sr-only" for="hangout-url">Manually modify Hangout link</label>
