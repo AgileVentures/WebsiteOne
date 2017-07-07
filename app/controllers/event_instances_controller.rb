@@ -9,7 +9,6 @@ class EventInstancesController < ApplicationController
     hangout_url_changed = event_instance.hangout_url != event_instance_params[:hangout_url]
     yt_video_id_changed = event_instance.yt_video_id != event_instance_params[:yt_video_id]
     slack_notify = params[:notify] == 'true'
-
     if event_instance.try!(:update, event_instance_params)
       SlackService.post_hangout_notification(event_instance) if (slack_notify && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed)
       SlackService.post_yt_link(event_instance) if (slack_notify && event_instance.yt_video_id?) || yt_video_id_changed
@@ -71,7 +70,7 @@ class EventInstancesController < ApplicationController
         hangout_participants_snapshots_attributes: [{participants: params[:participants]}],
         participants: merge_participants(event_instance.participants, params[:participants]),
         hangout_url: params[:hangout_url],
-        yt_video_id: params[:yt_video_id],
+        yt_video_id: EventInstance.extract_yt_id(params[:yt_url]),
         hoa_status: params[:hoa_status],
         url_set_directly: params[:url_set_directly],
         updated_at: Time.now,
