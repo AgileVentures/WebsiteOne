@@ -135,13 +135,11 @@ describe EventInstancesController do
         "category"=>"category", "user_id"=>"host",
         "hangout_participants_snapshots_attributes"=>[{"participants"=>"one, two"}],
         "participants"=>"one, two",
-        "hangout_url"=>"test_url", "yt_url"=>"https://www.youtube.com/watch?v=ssxagCsEz3U",
-        "hoa_status"=>"started",
+        "hangout_url"=>"test_url", "yt_video_id"=>"video", "hoa_status"=>"started",
         "url_set_directly"=>nil, "updated_at"=>Time.now,
         "youtube_tweet_sent"=>nil
       }
-      received_params = upd_params.except('yt_url').merge('yt_video_id': 'ssxagCsEz3U')
-      expect_any_instance_of(EventInstance).to receive(:update).with(received_params)
+      expect_any_instance_of(EventInstance).to receive(:update).with(upd_params)
       get :update, params.merge(upd_params)
     end
 
