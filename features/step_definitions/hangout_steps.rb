@@ -112,17 +112,6 @@ And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
   fill_in 'hangout_url', :with => @hangout_url
   page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
-  visit event_path(event)
-end
-
-And(/^I manually set a hangout link for event "([^"]*)" to a different URL$/) do |name|
-  @hangout_url = 'https://hangouts.google.com/hangouts/_/ytl/25xi7ef6erhbxeff5q5ymzgdfme=?hl=en_US&authuser=0'
-  event = Event.find_by_name(name)
-  visit event_path(event)
-  page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
-  fill_in 'hangout_url', :with => @hangout_url
-  page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
-  visit event_path(event)
 end
 
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
@@ -151,4 +140,21 @@ And(/^"([^"]*)" is not live the following day$/) do |event_name|
   visit event_path(event)
   expect(page).not_to have_content('This event is now live!')
 end
+
+Given(/^that "([^"]*)" went live the previous day$/) do |name|
+  steps %Q{
+    Given the date is "2014 Feb 5th 6:00am"
+    And I manually set a hangout link for event "Repeat Scrum"
+  }
+  event = Event.find_by_name(name)
+  visit event_path(event)
+end
+
+Then(/^it should not go live the next day just because the event start time is passed$/) do
+  steps %Q{
+    Given the date is "2014 Feb 5th 7:05am"
+    Then "Repeat Scrum" doesn't go live
+  }
+end
+
 

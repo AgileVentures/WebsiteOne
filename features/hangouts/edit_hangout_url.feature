@@ -33,9 +33,7 @@ Feature: Manual Edit of Hangout URL
     And there should be exactly 3 hangouts
 
   Scenario: Event doesn't go live before Hangout URL is updated
-    Given the date is "2014 Feb 5th 6:00am"
-    And I manually set a hangout link for event "Repeat Scrum"
-    Given the date is "2014 Feb 5th 7:05am"
-    Then "Repeat Scrum" doesn't go live
-    And I manually set a hangout link for event "Repeat Scrum" to a different URL
+    Given that "Repeat Scrum" went live the previous day
+    Then it should not go live the next day just because the event start time is passed
+    When I manually set a hangout link for event "Repeat Scrum"
     Then "Repeat Scrum" shows live for that hangout link for the event duration
