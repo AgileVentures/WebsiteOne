@@ -2,7 +2,7 @@
 
   <div class="row"> 
     <% if project.image_url.present? %>
-      <div class="col-xs-12">
+      <div id="project_listing_image" class="col-xs-12">
         <%= image_tag project.image_url, class: 'img-responsive' %>
       </div>
     <% end %>
