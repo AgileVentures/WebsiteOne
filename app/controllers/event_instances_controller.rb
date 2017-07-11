@@ -70,7 +70,7 @@ class EventInstancesController < ApplicationController
         hangout_participants_snapshots_attributes: [{participants: params[:participants]}],
         participants: merge_participants(event_instance.participants, params[:participants]),
         hangout_url: params[:hangout_url],
-        yt_video_id: EventInstance.extract_yt_id(params[:yt_url]) || params[:yt_video_id],
+        yt_video_id: YouTubeRails.extract_video_id(params[:yt_url]) || params[:yt_video_id],
         hoa_status: params[:hoa_status],
         url_set_directly: params[:url_set_directly],
         updated_at: Time.now,

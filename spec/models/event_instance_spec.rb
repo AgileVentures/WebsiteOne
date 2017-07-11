@@ -133,22 +133,6 @@ describe EventInstance, type: :model do
     end
   end
   
-  context '.extract_yt_id' do
-    it 'should extract correct youtube id from full youtube link' do
-      youtube_link = 'https://www.youtube.com/watch?v=mLBSQV-h-xo&feature=youtu.be'
-      expect(EventInstance.extract_yt_id(youtube_link)).to eq('mLBSQV-h-xo')
-    end
-
-    it 'should extract correct youtube id from short youtube link' do
-      youtube_link = 'https://youtu.be/mLBSQV-h-xo'
-      expect(EventInstance.extract_yt_id(youtube_link)).to eq('mLBSQV-h-xo')
-    end
-    
-    it 'should return nil on bad youtube link' do
-      expect(EventInstance.extract_yt_id('youtube')).to eq(nil)
-    end
-  end
-  
   context '.yt_url' do
     it 'should return youtube link from youtube id' do
       hangout.yt_video_id = 'mLBSQV-h-xo'

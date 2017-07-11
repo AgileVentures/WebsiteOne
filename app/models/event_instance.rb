@@ -24,14 +24,6 @@ class EventInstance < ActiveRecord::Base
     select(&:live?)
   end
 
-  def self.extract_yt_id(yt_video_url)
-    yt_short_link_regex = /youtu.be\/([\w-]{11})/
-    yt_long_link_regex = /watch\?v=([\w-]{11})/
-    capture = yt_short_link_regex.match(yt_video_url) ||
-      yt_long_link_regex.match(yt_video_url)
-    capture[1] if capture
-  end
-
   def started?
     hangout_url?
   end
