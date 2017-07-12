@@ -6,7 +6,6 @@ Feature: Scrums Index
 
   Background:
     Given that there are 25 past scrums
-    And there is one past scrum with invalid youtube id
 
   Scenario: Scrums index page renders a timeline of scrums for users to view in descending order
     Given I visit "/scrums"
@@ -29,5 +28,6 @@ Feature: Scrums Index
     Then I should see a modal window with the second scrum
 
   Scenario: Videos with youtube id nill do not show
-    Given I visit "/scrums"
+    Given there is one past scrum with invalid youtube id
+    And I visit "/scrums"
     Then video with youtube id nil shouldn't be clickable
