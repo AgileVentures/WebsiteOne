@@ -7,11 +7,11 @@
 
       <div class="row">
         <% if @project.image_url.present? %>
-          <div class="col-xs-12">
+          <div id="project_image" class="col-xs-2">
             <%= image_tag @project.image_url, class: "img-responsive" %>
           </div>
         <% end %>
-        <div class="col-xs-10">
+        <div id="project_title" class="col-xs-10">
           <h1><%= @project.title %></h1>
         </div>
       </div>

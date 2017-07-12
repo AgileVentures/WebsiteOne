@@ -157,4 +157,29 @@ Then(/^it should not go live the next day just because the event start time is p
   }
 end
 
+Then(/^"([^"]*)" shows youtube link with youtube id "([^"]*)"$/) do |event_name, yt_id|
+  yt_url = 'https://youtu.be/' + yt_id
+  visit event_path(Event.find_by_name(event_name))
+  page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
+  page.should have_field('yt_url', with: yt_url)
+end
+
+Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)"$/) do |yt_id, event_name|
+  yt_url = 'https://youtu.be/' + yt_id
+  visit event_path(Event.find_by_name(event_name))
+  page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
+  fill_in 'yt_url', :with => yt_url
+  page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
+end
+
+Then(/^I should see video with youtube id "([^"]*)"$/) do |yt_id|
+  expect(page.find(:css, '#ytplayer')[:src]).to include "www.youtube.com/embed/#{yt_id}"
+end
+
+Then(/^Hangout link does not change for "([^"]*)"$/) do |event_name|
+  visit event_path(Event.find_by_name(event_name))
+  page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
+  page.should have_field('hangout_url', with: @hangout_url)
+end
+
 
