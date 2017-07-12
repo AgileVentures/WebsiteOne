@@ -107,7 +107,8 @@ end
 
 And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   @hangout_url = 'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0'
-  visit event_path(Event.find_by_name(name))
+  event = Event.find_by_name(name)
+  visit event_path(event)
   page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
   fill_in 'hangout_url', :with => @hangout_url
   page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
@@ -117,10 +118,20 @@ Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |
   event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).to have_link('Join now', href: @hangout_url)
-  time = Time.parse(@jump_date) + event.duration.minutes - 1.minute
+  time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).to have_link('Join now', href: @hangout_url)
+  time = Time.parse(@jump_date) + event.duration.minutes + 10.minutes
+  Delorean.time_travel_to(time)
+  visit event_path(event)
+  expect(page).not_to have_link('Join now')
+end
+
+Given(/^"([^"]*)" doesn't go live$/) do |event_name|
+  event = Event.find_by_name(event_name)
+  visit event_path(event)
+  expect(page).not_to have_link('Join now')
 end
 
 And(/^"([^"]*)" is not live the following day$/) do |event_name|
@@ -128,6 +139,22 @@ And(/^"([^"]*)" is not live the following day$/) do |event_name|
   Delorean.time_travel_to(Time.parse(@jump_date) + 1.day)
   visit event_path(event)
   expect(page).not_to have_content('This event is now live!')
+end
+
+Given(/^that "([^"]*)" went live the previous day$/) do |name|
+  steps %Q{
+    Given the date is "2014 Feb 5th 6:00am"
+    And I manually set a hangout link for event "Repeat Scrum"
+  }
+  event = Event.find_by_name(name)
+  visit event_path(event)
+end
+
+Then(/^it should not go live the next day just because the event start time is passed$/) do
+  steps %Q{
+    Given the date is "2014 Feb 5th 7:05am"
+    Then "Repeat Scrum" doesn't go live
+  }
 end
 
 Then(/^"([^"]*)" shows youtube link with youtube id "([^"]*)"$/) do |event_name, yt_id|
@@ -154,6 +181,5 @@ Then(/^Hangout link does not change for "([^"]*)"$/) do |event_name|
   page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
   page.should have_field('hangout_url', with: @hangout_url)
 end
-
 
 
