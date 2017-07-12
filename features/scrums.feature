@@ -27,7 +27,7 @@ Feature: Scrums Index
     And I click the second scrum in the timeline
     Then I should see a modal window with the second scrum
 
-  Scenario: Videos with youtube id nill do not show
+  Scenario: Videos with nil youtube id do not display youtube embed link
     Given there is one past scrum with invalid youtube id
     And I visit "/scrums"
     Then video with youtube id nil shouldn't be clickable
