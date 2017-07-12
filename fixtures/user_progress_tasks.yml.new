@@ -1,0 +1,29 @@
+---
+user_progress_tasks_001:
+  id: 1
+  user_id: 1
+  progress_task_id: 1
+  done: true
+  created_at: '2014-03-01 13:34:59.451651'
+  updated_at: '2014-03-01 13:34:59.451651'
+user_progress_tasks_002:
+  id: 2
+  user_id: 1
+  progress_task_id: 2
+  done: true
+  created_at: '2014-03-01 13:35:59.451651'
+  updated_at: '2014-03-01 13:35:59.451651'
+user_progress_tasks_003:
+  id: 3
+  user_id: 1
+  progress_task_id: 3
+  done: false
+  created_at: '2014-03-01 13:36:59.451651'
+  updated_at: '2014-03-01 13:36:59.451651'
+user_progress_tasks_004:
+  id: 2
+  user_id: 1
+  progress_task_id: 4
+  done: false
+  created_at: '2014-03-01 13:37:59.451651'
+  updated_at: '2014-03-01 13:37:59.451651'

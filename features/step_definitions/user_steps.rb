@@ -217,6 +217,12 @@ Given /^the following users exist$/ do |table|
   end
 end
 
+Given /^the following progress tasks exist$/ do |table|
+  table.hashes.each do |attributes|
+    FactoryGirl.create(:progress_task, attributes)
+  end
+end
+
 Given /^the following premium users exist$/ do |table|
   table.hashes.each do |attributes|
     attributes['password'] = 'password' unless attributes['password']

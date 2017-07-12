@@ -20,6 +20,8 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
+  match '/getting-started' => 'application#getting_started', :via => [:get], as: 'getting-started'
+
   resources :articles, :format => false do
     member do
       get :upvote
