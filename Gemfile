@@ -62,6 +62,7 @@ gem 'verbs'
 gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
+gem 'youtube_rails'
 
 group :test do
   gem 'capybara'
