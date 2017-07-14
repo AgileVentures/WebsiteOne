@@ -20,6 +20,10 @@ class EventInstance < ActiveRecord::Base
 
   validate :dont_update_after_finished, on: :update
 
+  def self.active_hangouts
+    select(&:live?)
+  end
+
   def started?
     hangout_url?
   end
@@ -45,16 +49,16 @@ class EventInstance < ActiveRecord::Base
     updated_at - created_at
   end
 
-  def self.active_hangouts
-    select(&:live?)
-  end
-
   def start_datetime
     event != nil ? event.start_datetime : created_at
   end
 
   def broadcaster
     self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' } if self.participants
+  end
+
+  def yt_url
+    yt_video_id && "https://youtu.be/#{yt_video_id}"
   end
 
   private
