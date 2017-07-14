@@ -30,4 +30,5 @@ $(document).ready(function () {
     events.addToCalendar();
     editEventForm.handleUserTimeZone();
     showEvent.showUserTimeZone();
+    showEvent.toggleDropdown();
 });
