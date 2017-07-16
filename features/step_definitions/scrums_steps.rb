@@ -30,8 +30,7 @@ Given(/^that there are (\d+) past scrums$/) do |number|
 end
 
 Given(/^there is one past scrum with invalid youtube id$/) do
-  FactoryGirl.create(:event_instance,
-    created_at: Time.now, yt_video_id: nil, title: 'Invalid',
+  EventInstance.create!(yt_video_id: nil, title: 'Invalid',
     category: 'Scrum', project_id: nil
   )
 end
