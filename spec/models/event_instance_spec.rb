@@ -132,5 +132,16 @@ describe EventInstance, type: :model do
       expect(hangout.hangout_participants_snapshots.count).to eq 2
     end
   end
-
+  
+  context '.yt_url' do
+    it 'should return youtube link from youtube id' do
+      hangout.yt_video_id = 'mLBSQV-h-xo'
+      expect(hangout.yt_url).to eq 'https://youtu.be/mLBSQV-h-xo'
+    end
+    
+    it 'should return nil if youtube id is nil' do
+      hangout.yt_video_id = nil
+      expect(hangout.yt_url).to eq nil
+    end
+  end
 end
