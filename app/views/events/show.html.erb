@@ -106,7 +106,7 @@
 
 <% if user_signed_in? %>
 
-    <% hangout_is_live = @hangout.try!(:live?) %>
+    <% hangout_is_live = @recent_hangout.try!(:live?) %>
     <div class="row">
       <div class="col-lg-12 collapse" id="edit-link-form" aria-expanded="false">
         <%= form_tag hangout_url(hangout_is_live ? @recent_hangout.uid : generate_event_instance_id(current_user)), method: :put, class: 'form-horizontal', role: 'form' do %>
