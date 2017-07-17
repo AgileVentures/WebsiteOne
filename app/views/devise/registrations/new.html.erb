@@ -16,6 +16,7 @@
   <% unless Features.email_registrations.enabled %>
     <p><small>Email Registrations are temporarily disabled.  Please sign up via Github above.</small></p>
   <% else %>
+
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
         <fieldset>
           <div class='form-group'>
@@ -29,6 +30,10 @@
                 <%= f.password_field :password_confirmation, placeholder: 'Repeat password', class: 'form-control input-lg' %>
               </div>
           <% end %>
+          <div class='form-group'>
+          <!--<%= flash[:recaptcha_error] %>-->
+          <%= recaptcha_tags %>
+          </div>
           <div class='form-group'>
             <%= f.submit 'Sign up', class: 'btn btn-primary btn-lg btn-block' %>
           </div>
