@@ -28,3 +28,14 @@ end
 Given(/^that there are (\d+) past scrums$/) do |number|
   FactoryGirl.create_list(:event_instance, number.to_i, category: 'Scrum', created_at: rand(1.months.seconds.to_i).seconds.ago, project_id: nil)
 end
+
+Given(/^there is one past scrum with invalid youtube id$/) do
+  EventInstance.create!(yt_video_id: nil, title: 'Invalid',
+    category: 'Scrum', project_id: nil
+  )
+end
+
+Then(/^video with youtube id nil shouldn't be clickable$/) do
+  event = EventInstance.find_by_title('Invalid')
+  expect(page).not_to have_css("a##{event.id}")
+end
