@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   layout 'with_sidebar'
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :get_current_stories, only: [:show]
   include DocumentsHelper
