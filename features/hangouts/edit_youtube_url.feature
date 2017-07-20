@@ -42,3 +42,8 @@ Feature: Manual Edit of Youtube URL
     And I manually set a hangout link for event "Scrum"
     When I manually set youtube link with youtube id "12341234111" for event "Scrum"
     Then a separate event instance is not created
+
+  Scenario: Hangout URL is not posted in slack when Youtube URL is editted
+    Given the date is "2014 Feb 10th 7:01am"
+    And I manually set a hangout link for event "Scrum"
+    Then Youtube URL is posted in slack but not hangout URL when Youtube URL is editted
