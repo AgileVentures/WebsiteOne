@@ -9,13 +9,35 @@ describe User, type: :model do
   end
   subject { build_stubbed :user }
 
-  it { should have_one :subscription }
+  context "included modules" do
+    it { expect(User.ancestors.include?(Filterable)).to eq(true) }
+  end
 
-  it { is_expected.to have_many(:status) }
+  context "associations" do
+    it { should have_one(:subscription).autosave(true) }
 
-  it { is_expected.to accept_nested_attributes_for :status }
+    it { should have_one :karma }
 
-  it { is_expected.to respond_to :status_count }
+    it { should have_many(:authentications).dependent(:destroy) }
+    
+    it { should have_many(:projects) }
+    
+    it { should have_many(:documents) }
+    
+    it { should have_many(:articles) }
+
+    it { should have_many(:event_instances) }
+
+    it { should have_many(:commit_counts) }
+
+    it { should have_many(:status) }
+
+    it { should have_many(:status) }
+  end
+    
+  it { should accept_nested_attributes_for :status }
+
+  it { should respond_to :status_count }
 
   it 'should have valid factory' do
     expect(FactoryGirl.create(:user)).to be_valid
