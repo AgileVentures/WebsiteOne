@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   layout 'layouts/user_profile_layout', only: [:edit]
+  prepend_before_action :check_captcha, only: [:create]
 
   def create
     super
@@ -29,6 +30,14 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
+  def check_captcha
+    unless verify_recaptcha
+      self.resource = resource_class.new sign_up_params
+      resource.validate # Look for any other validation errors besides Recaptcha
+      respond_with_navigational(resource) { render :new }
+    end
+  end
 
   def build_resource(hash = nil)
     self.resource = User.new_with_session(hash || {}, session)
