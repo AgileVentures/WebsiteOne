@@ -36,3 +36,9 @@ Feature: Manual Edit of Youtube URL
     When I am on the "Show" page for project "LS"
     And I click "Videos (1)"
     Then I should see video with youtube id "12341234111"
+
+  Scenario: Edit Youtube URL when event is live and ensure a separate event instance is not created
+    Given the date is "2014 Feb 7th 7:01am"
+    And I manually set a hangout link for event "Scrum"
+    When I manually set youtube link with youtube id "12341234111" for event "Scrum"
+    Then a separate event instance is not created
