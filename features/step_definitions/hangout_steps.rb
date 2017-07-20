@@ -190,7 +190,7 @@ Then(/^a separate event instance is not created$/) do
     .to eq(1)
 end
 
-Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is editted$/) do
+Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is edited$/) do
   expect(SlackService).not_to receive :post_hangout_notification
   expect(SlackService).to receive(:post_yt_link)
 
