@@ -9,8 +9,8 @@ describe User, type: :model do
   end
   subject { build_stubbed :user }
 
-  context "included modules" do
-    it { expect(User.ancestors.include?(Filterable)).to eq(true) }
+  it "includes Filterable module" do
+    expect(User.ancestors).to include(Filterable)
   end
 
   context "associations" do
@@ -29,8 +29,6 @@ describe User, type: :model do
     it { should have_many(:event_instances) }
 
     it { should have_many(:commit_counts) }
-
-    it { should have_many(:status) }
 
     it { should have_many(:status) }
   end
