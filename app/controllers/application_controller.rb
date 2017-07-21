@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) do |u|
+    devise_parameter_sanitizer.enum_for(:account_update) do |u|
       u.permit(:first_name, :last_name, :email, :bio, :password,
                :password_confirmation, :current_password,
                :display_email, :display_profile, :display_hire_me,
