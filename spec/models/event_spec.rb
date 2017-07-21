@@ -88,7 +88,7 @@ describe Event, :type => :model do
 
   context 'can remove event instance' do
     before(:each) do
-      @event = FactoryGirl.build(Event,
+      @event = FactoryGirl.build(:event,
                                  name: 'Spec Scrum',
                                  start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
                                  duration: 30,
@@ -123,7 +123,7 @@ describe Event, :type => :model do
 
   context 'should create a scrum event that ' do
     it 'is scheduled for one occasion' do
-      event = FactoryGirl.build_stubbed(Event,
+      event = FactoryGirl.build_stubbed(:event,
                                         name: 'one time event',
                                         category: 'Scrum',
                                         description: '',
@@ -139,7 +139,7 @@ describe Event, :type => :model do
     end
 
     it 'is scheduled for every weekend' do
-      event = FactoryGirl.build_stubbed(Event,
+      event = FactoryGirl.build_stubbed(:event,
                                         name: 'every weekend event',
                                         category: 'Scrum',
                                         description: '',
@@ -155,7 +155,7 @@ describe Event, :type => :model do
     end
 
     it 'is scheduled for every Sunday' do
-      event = FactoryGirl.build_stubbed(Event,
+      event = FactoryGirl.build_stubbed(:event,
                                         name: 'every Sunday event',
                                         category: 'Scrum',
                                         description: '',
@@ -171,7 +171,7 @@ describe Event, :type => :model do
     end
 
     it 'is scheduled for every Monday' do
-      event = FactoryGirl.build_stubbed(Event,
+      event = FactoryGirl.build_stubbed(:event,
                                         name: 'every Monday event',
                                         category: 'Scrum',
                                         description: '',
@@ -189,7 +189,7 @@ describe Event, :type => :model do
 
   context 'should create a hookup event that' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryGirl.build_stubbed(:event,
                                          name: 'PP Monday event',
                                          category: 'PairProgramming',
                                          start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
@@ -248,7 +248,7 @@ describe Event, :type => :model do
 
   describe '#next_event_occurrence_with_time' do
     before(:each) do
-      @event = FactoryGirl.build(Event,
+      @event = FactoryGirl.build(:event,
                                  name: 'Spec Scrum',
                                  start_datetime: 'Mon, 10 Jun 2013 09:00:00 UTC',
                                  duration: 30,
@@ -295,7 +295,7 @@ describe Event, :type => :model do
 
   describe '#next_occurences' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryGirl.build_stubbed(:event,
                                          name: 'Spec Scrum',
                                          start_datetime: '2014-03-07 10:30:00 UTC',
                                          duration: 30)
@@ -357,7 +357,7 @@ describe Event, :type => :model do
 
   describe 'Event#start_datetime_for_collection for starting event' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryGirl.build_stubbed(:event,
                                          name: 'Spec Scrum never ends',
                                          start_datetime: '2014-03-07 10:30:00 UTC',
                                          duration: 30)
@@ -372,7 +372,7 @@ describe Event, :type => :model do
 
   describe 'Event#final_datetime_for_collection for repeating event with ends_on' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryGirl.build_stubbed(:event,
                                          name: 'Spec Scrum ends',
                                          start_datetime: '2014-03-07 10:30:00 UTC',
                                          repeats: 'weekly',
@@ -402,7 +402,7 @@ describe Event, :type => :model do
 
   describe 'Event#final_datetime_for_display for never-ending event' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryGirl.build_stubbed(:event,
                                          name: 'Spec Scrum never-ending',
                                          start_datetime: '2014-03-07 10:30:00 UTC',
                                          repeats: 'weekly',
@@ -425,7 +425,7 @@ describe Event, :type => :model do
   end
 
   describe 'Event.next_event_occurence' do
-    @event = FactoryGirl.build(Event,
+    @event = FactoryGirl.build(:event,
                                category: 'Scrum',
                                name: 'Spec Scrum one-time',
                                start_datetime: '2014-03-07 10:30:00 UTC',
