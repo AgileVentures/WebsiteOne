@@ -28,8 +28,6 @@
 //= require events
 //= stub event_instances
 //= require local_time
-//= require jvectormap
-//= require jvectormap/maps/world_mill_en
 //= require moment.min
 //= require moment-timezone-with-data-2010-2020
 //= require chatlio
