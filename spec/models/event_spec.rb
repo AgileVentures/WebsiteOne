@@ -468,14 +468,14 @@ describe Event, :type => :model do
 
   describe '#upcoming_events' do
     before(:each) do
-      @event1 = FactoryGirl.create(Event,
+      @event1 = FactoryGirl.create(:event,
                                  category: 'Scrum',
                                  name: 'Spec Scrum one-time',
                                  start_datetime: '2015-06-15 09:20:00 UTC',
                                  duration: 30,
                                  repeats: 'never'
       )
-      @event2 = FactoryGirl.create(Event,
+      @event2 = FactoryGirl.create(:event,
                                  category: 'Scrum',
                                  name: 'Spec Scrum one-time',
                                  start_datetime: '2015-06-15 09:25:00 UTC',
@@ -505,7 +505,7 @@ describe Event, :type => :model do
     end
 
     it 'returns event past event duration, but still live' do
-      event_instance = FactoryGirl.create(EventInstance)
+      event_instance = FactoryGirl.create(:event_instance)
       event_end_time = event_instance.event.start_datetime + event_instance.event.duration.minutes
       expect(event_end_time).to be < Time.current
       expect(event_instance.event).to eq(Event.upcoming_events.last[:event])

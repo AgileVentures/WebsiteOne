@@ -4,7 +4,7 @@ include LocalTimeHelper
 
 describe 'events/show', type: :view do
   before(:each) do
-    @event = FactoryGirl.build_stubbed(Event, name: 'EuroAsia Scrum',
+    @event = FactoryGirl.build_stubbed(:event, name: 'EuroAsia Scrum',
                                        category: 'Scrum',
                                        description: 'EuroAsia Scrum and Pair hookup http://lin.ky/',
                                        time_zone: 'Eastern Time (US & Canada)',
