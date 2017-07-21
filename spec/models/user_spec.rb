@@ -81,8 +81,26 @@ describe User, type: :model do
   end
 
   describe 'scopes' do
-    it '#mail_receiver' do
-      expect(User).to respond_to(:mail_receiver)
+    context '#mail_receiver' do
+      let!(:user1) { FactoryGirl.create(:user, receive_mailings: false) }
+      let!(:user2) { FactoryGirl.create(:user, receive_mailings: true) }
+      
+      it { expect(User).to respond_to(:mail_receiver) }
+      
+      it { expect(User.mail_receiver).to include(user2) }
+      
+      it { expect(User.mail_receiver).to_not include(user1) }
+    end
+    
+    context '#allow_to_display' do
+      let!(:user1) { FactoryGirl.create(:user, display_profile: false) }
+      let!(:user2) { FactoryGirl.create(:user, display_profile: true) }
+      
+      it { expect(User).to respond_to(:allow_to_display) }
+      
+      it { expect(User.allow_to_display).to include(user2) }
+      
+      it { expect(User.allow_to_display).to_not include(user1) }
     end
   end
 
