@@ -40,9 +40,9 @@ RSpec.configure do |config|
   end
 
   config.include Helpers
-  config.include Devise::TestHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :helper
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :helper
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include RSpecHtmlMatchers
 
   config.before(:suite) do
