@@ -6,8 +6,8 @@ GIT
       httparty
 
 GIT
-  remote: https://github.com/jejacks0n/mercury.git
-  revision: 1cc637b0bccea19085f824d2881c6513ed5ee8ae
+  remote: https://github.com/mattlindsey/mercury.git
+  revision: 0b404aa8f23e5964c329cd4188ad5cb4f378c25e
   specs:
     mercury-rails (0.9.0)
       coffee-rails (>= 3.2.2)
