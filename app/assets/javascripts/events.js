@@ -30,4 +30,14 @@ $(document).ready(function () {
     events.addToCalendar();
     editEventForm.handleUserTimeZone();
     showEvent.showUserTimeZone();
+    $('#btn-jitsi').click(function() {
+        var options = {
+            domain: "meet.jit.si",
+            room: "JitsiMeetAPIExample",
+            width: 700,
+            height: 700,
+            htmlElement: document.querySelector('#meet')
+        }
+        var api = new JitsiMeetExternalAPI(options.domain, options);        
+    })
 });
