@@ -1,5 +1,3 @@
-<%= javascript_include_tag('https://meet.jit.si/external_api.js') %>
-
 <div class="row">
   <div class="col-xs-12">
     <h1><%= @event.name %></h1>
@@ -37,11 +35,9 @@
 
         <% #if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
         <% if true %>
-          <div id='btn-jitsi' class='pull-right'>
-            <%= link_to '#meet' do %>
-              <button type="button" class="btn btn-primary">
-                Start Jitsi Meet
-              </button>
+          <div id='btn-jitsi' class='btn-jitsi pull-right'>
+            <%= button_tag(type: "button", class: "btn btn-primary") do %>
+              Start Jitsi Meet
             <% end %>
           </div>
 
@@ -62,8 +58,8 @@
 
 <hr/>
 
-<div id='#meet'></div>
-
+<%= content_tag(:iframe, '', id: 'meet', width: 700, height: 700,
+  style: "display:none;", hidden_src: @event.jitsi_room_link) %>
 <div class="row" id="hangout-details">
   <% if @event.next_event_occurrence_with_time %>
       <div class="col-xs-12 col-sm-6">

@@ -31,13 +31,8 @@ $(document).ready(function () {
     editEventForm.handleUserTimeZone();
     showEvent.showUserTimeZone();
     $('#btn-jitsi').click(function() {
-        var options = {
-            domain: "meet.jit.si",
-            room: "JitsiMeetAPIExample",
-            width: 700,
-            height: 700,
-            htmlElement: document.querySelector('#meet')
-        }
-        var api = new JitsiMeetExternalAPI(options.domain, options);        
+        var iframe = document.getElementById('meet');
+        iframe.src = iframe.getAttribute('hidden_src');
+        iframe.style.display = 'block';       
     })
 });
