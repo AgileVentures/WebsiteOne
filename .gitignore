@@ -89,3 +89,5 @@ vendor/assets/javascripts/nprogress.js
 
 latest.dump
 certbot.log
+
+app/services/live_stream_service.rb-oauth2.json

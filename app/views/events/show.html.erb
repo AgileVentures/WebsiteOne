@@ -58,7 +58,7 @@
 
 <hr/>
 
-<%= content_tag(:iframe, '', id: 'meet', width: 700, height: 700,
+<%= content_tag(:iframe, '', id: 'meet', width: '100%', height: 700,
   style: "display:none;", hidden_src: @event.jitsi_room_link) %>
 <div class="row" id="hangout-details">
   <% if @event.next_event_occurrence_with_time %>
