@@ -60,6 +60,21 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def start_recording
+    options = {
+      stream_title: 'live test',
+      broadcast_title: 'live test',
+      start_time: Time.now.getutc.iso8601(3),
+      end_time: '2018-01-30T00:01:00.000Z',
+      privacy_status: 'private'
+    }
+    
+    client, youtube = LiveStreamService.get_authenticated_service
+    stream = LiveStreamService.insert_stream(client, youtube, options)
+    
+    render json: stream
+  end
+
   private
 
   def transform_params

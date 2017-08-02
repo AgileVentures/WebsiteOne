@@ -17,8 +17,8 @@ module LiveStreamService
       :application_version => '1.0.0'
     )
     youtube = client.discovered_api(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION)
-  
-    file_storage = Google::APIClient::FileStorage.new("#{$PROGRAM_NAME}-oauth2.json")
+
+    file_storage = Google::APIClient::FileStorage.new("app/services/live_stream-oauth2.json")
     if file_storage.authorization.nil?
       client_secrets = Google::APIClient::ClientSecrets.load
       flow = Google::APIClient::InstalledAppFlow.new(
@@ -54,7 +54,6 @@ module LiveStreamService
       }
     )
   
-    p "Broadcast: #{insert_broadcast_response.data.id}"
     return insert_broadcast_response.data.id
   end
   
@@ -77,8 +76,10 @@ module LiveStreamService
       }
     )
   
-    p "Stream: #{insert_stream_response.data.cdn.ingestionInfo.streamName}"
-    return insert_stream_response.data.id
+    return {
+      stream_id: insert_stream_response.data.id,
+      stream_name: insert_stream_response.data.cdn.ingestionInfo.streamName
+    }
   end
   
   # Bind the broadcast to the video stream. By doing so, you link the video that
@@ -98,26 +99,23 @@ module LiveStreamService
         streamId: stream_id
       }
     )
-  
-    p "Broadcast #{bind_broadcast_response.data.id}"\
-      "was bound to stream #{bind_broadcast_response.data.contentDetails.boundStreamId}"
   end
   
   
-  options = {
-    stream_title: 'test',
-    broadcast_title: 'test',
-    start_time: Time.now.getutc.iso8601(3),
-    end_time: '2018-01-30T00:01:00.000Z',
-    privacy_status: 'private'
-  }
+  # options = {
+  #   stream_title: 'test',
+  #   broadcast_title: 'test',
+  #   start_time: Time.now.getutc.iso8601(3),
+  #   end_time: '2018-01-30T00:01:00.000Z',
+  #   privacy_status: 'private'
+  # }
   
-  client, youtube = get_authenticated_service
-  stream_id = insert_stream(client, youtube, options)
-  broadcast_id = insert_broadcast(client, youtube, options)
+  # client, youtube = get_authenticated_service
+  # stream_id = insert_stream(client, youtube, options)
+  # broadcast_id = insert_broadcast(client, youtube, options)
   # stream_id = 'CNSDdM72mVvwG_Tn6ptkog1501146171928817'
   # broadcast_id = 'iRpcISisx1g'
-  bind_broadcast(client, youtube, broadcast_id, stream_id)
+  # bind_broadcast(client, youtube, broadcast_id, stream_id)
   
 
 end
