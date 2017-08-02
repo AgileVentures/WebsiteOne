@@ -14,28 +14,28 @@ describe User, type: :model do
   end
 
   context "associations" do
-    it { should have_one(:subscription).autosave(true) }
+    it { is_expected.to have_one(:subscription).autosave(true) }
 
-    it { should have_one :karma }
+    it { is_expected.to have_one :karma }
 
-    it { should have_many(:authentications).dependent(:destroy) }
+    it { is_expected.to have_many(:authentications).dependent(:destroy) }
     
-    it { should have_many(:projects) }
+    it { is_expected.to have_many(:projects) }
     
-    it { should have_many(:documents) }
+    it { is_expected.to have_many(:documents) }
     
-    it { should have_many(:articles) }
+    it { is_expected.to have_many(:articles) }
 
-    it { should have_many(:event_instances) }
+    it { is_expected.to have_many(:event_instances) }
 
-    it { should have_many(:commit_counts) }
+    it { is_expected.to have_many(:commit_counts) }
 
-    it { should have_many(:status) }
+    it { is_expected.to have_many(:status) }
   end
     
-  it { should accept_nested_attributes_for :status }
+  it { is_expected.to accept_nested_attributes_for :status }
 
-  it { should respond_to :status_count }
+  it { is_expected.to respond_to :status_count }
 
   it 'should have valid factory' do
     expect(FactoryGirl.create(:user)).to be_valid
