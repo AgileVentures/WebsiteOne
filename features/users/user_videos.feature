@@ -35,11 +35,11 @@ Feature: As a site user
     When I go to my "profile" page
     And I should see video "PP on hello world - feature: 2" in "player"
 
-#  @javascript
-#  Scenario: Selecting videos from the list
-#    Given I have some videos on project "hello world"
-#    And my YouTube channel is connected
-#    And I am on my "profile" page
-#    When I click "PP on hello world - feature: 1"
-#    Then I should see "PP on hello world - feature: 1" in "video description"
-#    And I should see video "PP on hello world - feature: 1" in "player"
+  @javascript @javascript_ignore_js_errors
+  Scenario: Selecting videos from the list
+    Given I have some videos on project "hello world"
+    And my YouTube channel is connected
+    And I am on my "profile" page
+    When I click "PP on hello world - feature: 1"
+    Then I should see "PP on hello world - feature: 1" in "video description"
+    And I should see video "PP on hello world - feature: 1" in "player"
