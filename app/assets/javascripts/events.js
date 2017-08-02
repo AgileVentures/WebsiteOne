@@ -25,14 +25,21 @@ var events = {
     }
 };
 
+var jitsi_events = {
+    showIframe: function() {
+        $('#btn-jitsi').click(function() {
+            var iframe_container = document.getElementById('meet-container');
+            var iframe = document.getElementById('meet');
+            iframe.src = iframe.getAttribute('hidden_src');
+            iframe_container.style.display = 'block';       
+        })
+    }
+}
+
 $(document).ready(function () {
     events.makeRowBodyClickable();
     events.addToCalendar();
     editEventForm.handleUserTimeZone();
     showEvent.showUserTimeZone();
-    $('#btn-jitsi').click(function() {
-        var iframe = document.getElementById('meet');
-        iframe.src = iframe.getAttribute('hidden_src');
-        iframe.style.display = 'block';       
-    })
+    jitsi_events.showIframe();
 });
