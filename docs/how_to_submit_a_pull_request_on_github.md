@@ -34,13 +34,13 @@ This fetches and merges your current branch with the latest upstream/develop bra
 $ git push origin <your_feature_branch>
 ```
 
-5) When you view this branch on GitHub, click the green button whose tooltip says 'Compare, review, create pull request':
+5) When you view this branch on GitHub, click the gray button that says 'New pull request':
 
-![Compare, review, create pull request](https://dl.dropboxusercontent.com/u/20922989/Screen%20Shot%202014-08-09%20at%2012.36.44%20AM.png)
+![Compare, review, create pull request](https://dl.dropboxusercontent.com/s/vrr9vjuokg67fg7/Screenshot%202017-08-01%2023.21.19.png?dl=0)
 
 Or, if you visit your repo shortly after pushing the branch, there will be a prominent notice about the push, with a prompt to create a pull request:
 
-![Compare and pull request](https://dl.dropboxusercontent.com/u/20922989/Screen%20Shot%202014-08-09%20at%2011.25.32%20AM.png)
+![Compare and pull request](https://dl.dropboxusercontent.com/s/ovs26nmy3hz5lin/Screenshot%202017-08-01%2023.13.28.png?dl=0)
 
 6) Fill out the description including "fixes #123" (replacing 123 with the id of the GitHub issue you've been working on) & a brief description of what you've done and create the pull request.
 
