@@ -36,6 +36,7 @@ end
 
 After '@javascript_ignore_js_errors' do
   Capybara.javascript_driver = :poltergeist_billy
+  Capybara.current_driver = Capybara.javascript_driver
 end
 
 Before '@stripe_javascript' do

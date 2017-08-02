@@ -7740,4 +7740,186 @@ http_interactions:
 '
     http_version: 
   recorded_at: Wed, 02 Aug 2017 02:43:57 GMT
+- request:
+    method: post
+    uri: https://api.chatlio.com/v1/v/visitor/register
+    body:
+      encoding: UTF-8
+      string: '{"vsUuid":"09d284ac-c122-4b9b-a01d-f762408070c0","ceUuid":"8a54fdee-6747-4ce9-4d69-f03c2af664f2","page":"http://127.0.0.1:59723/users/sign_in","loaderVersion":"459dc1d-1489104113585","widgetVersion":"18ea608-1495785511396"}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Referer:
+      - http://127.0.0.1:59723/users/sign_in
+      Origin:
+      - http://127.0.0.1:59723
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NDkwMzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.x9WTtj9sVmFa8DKPmhh4LtiziRrGt7g5exMC1Ifq5OA
+      Content-Type:
+      - application/xml
+      Accept:
+      - "*/*"
+      Content-Length:
+      - '223'
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - api.chatlio.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 02 Aug 2017 06:24:54 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '26'
+      Connection:
+      - close
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization
+      Access-Control-Allow-Methods:
+      - POST, GET, PUT, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
+      Expires:
+      - "-1"
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: 'token_expired_during_auth
+
+'
+    http_version: 
+  recorded_at: Wed, 02 Aug 2017 06:24:54 GMT
+- request:
+    method: get
+    uri: https://api.chatlio.com/v1/v/visitor/token/ack?ceUuid=8a54fdee-6747-4ce9-4d69-f03c2af664f2&vsUuid=09d284ac-c122-4b9b-a01d-f762408070c0
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Referer:
+      - http://127.0.0.1:59723/users/sign_in
+      Origin:
+      - http://127.0.0.1:59723
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NDkwMzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.x9WTtj9sVmFa8DKPmhh4LtiziRrGt7g5exMC1Ifq5OA
+      Accept:
+      - "*/*"
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - api.chatlio.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 02 Aug 2017 06:24:54 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '26'
+      Connection:
+      - close
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization
+      Access-Control-Allow-Methods:
+      - POST, GET, PUT, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
+      Expires:
+      - "-1"
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: 'token_expired_during_auth
+
+'
+    http_version: 
+  recorded_at: Wed, 02 Aug 2017 06:24:54 GMT
+- request:
+    method: post
+    uri: https://api.chatlio.com/v1/v/visitor/register
+    body:
+      encoding: UTF-8
+      string: '{"vsUuid":"09d284ac-c122-4b9b-a01d-f762408070c0","ceUuid":"8a54fdee-6747-4ce9-4d69-f03c2af664f2","page":"http://127.0.0.1:59723/getting-started","loaderVersion":"459dc1d-1489104113585","widgetVersion":"18ea608-1495785511396"}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Referer:
+      - http://127.0.0.1:59723/getting-started
+      Origin:
+      - http://127.0.0.1:59723
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NDkwMzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.x9WTtj9sVmFa8DKPmhh4LtiziRrGt7g5exMC1Ifq5OA
+      Content-Type:
+      - application/xml
+      Accept:
+      - "*/*"
+      Content-Length:
+      - '225'
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - api.chatlio.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 02 Aug 2017 06:24:55 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '26'
+      Connection:
+      - close
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization
+      Access-Control-Allow-Methods:
+      - POST, GET, PUT, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
+      Expires:
+      - "-1"
+      X-Content-Type-Options:
+      - nosniff
+    body:
+      encoding: UTF-8
+      string: 'token_expired_during_auth
+
+'
+    http_version: 
+  recorded_at: Wed, 02 Aug 2017 06:24:55 GMT
 recorded_with: VCR 3.0.3
