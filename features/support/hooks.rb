@@ -30,13 +30,12 @@ end
 # see https://github.com/AgileVentures/WebsiteOne/issues/1754
 
 Before '@javascript_ignore_js_errors' do
-  @current_javascript_driver = Capybara.javascript_driver
   Capybara.javascript_driver = :poltergeist
   Capybara.current_driver = Capybara.javascript_driver
 end
 
 After '@javascript_ignore_js_errors' do
-  Capybara.javascript_driver = @current_javascript_driver
+  Capybara.javascript_driver = :poltergeist_billy
 end
 
 Before '@stripe_javascript' do
