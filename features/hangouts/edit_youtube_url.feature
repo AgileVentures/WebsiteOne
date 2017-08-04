@@ -39,12 +39,13 @@ Feature: Manual Edit of Youtube URL
     #
     # see https://github.com/AgileVentures/WebsiteOne/issues/1754
     #
-#  Scenario: Edit Youtube URL and ensure video appears on Project page
-#    Given the date is "2014 Feb 6th 7:01am"
-#    And I manually set youtube link with youtube id "cdODZWHUwhc" for event "Repeat Scrum"
-#    When I am on the "Show" page for project "LS"
-#    And I click "Videos (1)"
-#    Then I should see video with youtube id "cdODZWHUwhc"
+  @javascript_ignore_js_errors
+  Scenario: Edit Youtube URL and ensure video appears on Project page
+    Given the date is "2014 Feb 6th 7:01am"
+    And I manually set youtube link with youtube id "cdODZWHUwhc" for event "Repeat Scrum"
+    When I am on the "Show" page for project "LS"
+    And I click "Videos (1)"
+    Then I should see video with youtube id "cdODZWHUwhc"
 
   Scenario: Edit Youtube URL when event is live and ensure a separate event instance is not created
     Given the date is "2014 Feb 7th 7:01am"

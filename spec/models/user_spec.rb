@@ -9,10 +9,30 @@ describe User, type: :model do
   end
   subject { build_stubbed :user }
 
-  it { should have_one :subscription }
+  it "includes Filterable module" do
+    expect(User.ancestors).to include(Filterable)
+  end
 
-  it { is_expected.to have_many(:status) }
+  context "associations" do
+    it { is_expected.to have_one(:subscription).autosave(true) }
 
+    it { is_expected.to have_one :karma }
+
+    it { is_expected.to have_many(:authentications).dependent(:destroy) }
+    
+    it { is_expected.to have_many(:projects) }
+    
+    it { is_expected.to have_many(:documents) }
+    
+    it { is_expected.to have_many(:articles) }
+
+    it { is_expected.to have_many(:event_instances) }
+
+    it { is_expected.to have_many(:commit_counts) }
+
+    it { is_expected.to have_many(:status) }
+  end
+    
   it { is_expected.to accept_nested_attributes_for :status }
 
   it { is_expected.to respond_to :status_count }
@@ -61,8 +81,26 @@ describe User, type: :model do
   end
 
   describe 'scopes' do
-    it '#mail_receiver' do
-      expect(User).to respond_to(:mail_receiver)
+    context '#mail_receiver' do
+      let!(:user1) { FactoryGirl.create(:user, receive_mailings: false) }
+      let!(:user2) { FactoryGirl.create(:user, receive_mailings: true) }
+      
+      it { expect(User).to respond_to(:mail_receiver) }
+      
+      it { expect(User.mail_receiver).to include(user2) }
+      
+      it { expect(User.mail_receiver).to_not include(user1) }
+    end
+    
+    context '#allow_to_display' do
+      let!(:user1) { FactoryGirl.create(:user, display_profile: false) }
+      let!(:user2) { FactoryGirl.create(:user, display_profile: true) }
+      
+      it { expect(User).to respond_to(:allow_to_display) }
+      
+      it { expect(User.allow_to_display).to include(user2) }
+      
+      it { expect(User.allow_to_display).to_not include(user1) }
     end
   end
 
