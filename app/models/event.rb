@@ -244,7 +244,7 @@ class Event < ActiveRecord::Base
   end
 
   def jitsi_room_link
-    "https://meet.jit.si/AV_#{name.tr(' ', '_')}"
+    "https://meet.jit.si/AV_#{name.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
   end
 
   private
