@@ -63,6 +63,7 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
+gem 'google-api-client', '0.8'
 
 group :test do
   gem 'capybara'

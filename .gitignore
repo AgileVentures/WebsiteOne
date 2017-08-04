@@ -89,3 +89,5 @@ vendor/assets/javascripts/nprogress.js
 
 latest.dump
 certbot.log
+
+app/services/live_stream-oauth2.json

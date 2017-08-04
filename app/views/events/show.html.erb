@@ -33,12 +33,11 @@
           </ul>
         </div>
 
-        <% if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
-          <div class='btn-jitsi pull-right'>
-            <%= link_to @event.jitsi_room_link, target: '_blank' do %>
-              <button type="button" class="btn btn-primary">
-                Start Jitsi Meet
-              </button>
+        <% #if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
+        <% if true %>
+          <div id='btn-jitsi' class='btn-jitsi pull-right'>
+            <%= button_tag(type: "button", class: "btn btn-primary") do %>
+              Start Jitsi Meet
             <% end %>
           </div>
 
@@ -59,6 +58,15 @@
 
 <hr/>
 
+<div id='meet-container' style="display:none;">
+  <%= button_tag(type: 'button', id: 'jitsi-record',
+    href: event_path(@event) + '/start_recording',
+    class: 'btn btn-success btn-block') do %>
+    Start Recording
+  <% end %>
+  <%= content_tag(:iframe, '', id: 'meet', width: '100%', height: 700,
+    hidden_src: @event.jitsi_room_link) %>
+</div>
 <div class="row" id="hangout-details">
   <% if @event.next_event_occurrence_with_time %>
       <div class="col-xs-12 col-sm-6">
