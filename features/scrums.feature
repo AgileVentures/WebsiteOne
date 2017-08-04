@@ -11,7 +11,7 @@ Feature: Scrums Index
     Given I visit "/scrums"
     Then I should see 20 scrums in descending order by published date:
 
-  @javascript
+  @javascript @javascript_ignore_js_errors
   Scenario: Clicking on the video should bring up a modal YouTube player window
     Given I visit "/scrums"
     Then I should not see a modal window
