@@ -9,10 +9,10 @@
 <hr/>
 
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-xs-4">
     <p>Event type: <%= @event.category %></p>
   </div>
-  <div class="col-xs-6">
+  <div class="col-xs-8">
     <% if user_signed_in? %>
         <div class="dropdown dropdown-beside-HOA pull-right">
           <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
@@ -33,8 +33,16 @@
           </ul>
         </div>
 
-        <div class="btn-HOA pull-right">
-          <% if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
+        <% if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
+          <div class='btn-jitsi pull-right'>
+            <%= link_to @event.jitsi_room_link, target: '_blank' do %>
+              <button type="button" class="btn btn-primary">
+                Start Jitsi Meet
+              </button>
+            <% end %>
+          </div>
+
+          <div class="btn-HOA pull-right">
             <% hangout_uid = (@recent_hangout && @recent_hangout.live?) ? @recent_hangout.uid : '' %>
             <%= render partial: 'event_instances/hangout_button', locals: {
                                                                         event_instance_id: hangout_uid,
@@ -42,9 +50,9 @@
                                                                         category: @event.category,
                                                                         project_id: @event.project_id,
                                                                         title: @event.name
-                                                                } %>
-          <% end %>
-        </div>
+                                                                        } %>
+          </div>
+        <% end %>
     <% end %>
   </div>
 </div>

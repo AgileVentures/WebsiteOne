@@ -79,6 +79,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def jitsi_room_link
+    "https://meet.jit.si/AV_#{title.tr(' ', '_')}"
+  end
+
   private
 
   def should_generate_new_friendly_id?
