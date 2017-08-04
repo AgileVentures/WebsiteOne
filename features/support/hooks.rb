@@ -24,6 +24,21 @@ After '@javascript' do
   end
 end
 
+# have added the below because while the youtube video player works
+# it generates some errors that stop the tests from running ...
+#
+# see https://github.com/AgileVentures/WebsiteOne/issues/1754
+
+Before '@javascript_ignore_js_errors' do
+  Capybara.javascript_driver = :poltergeist
+  Capybara.current_driver = Capybara.javascript_driver
+end
+
+After '@javascript_ignore_js_errors' do
+  Capybara.javascript_driver = :poltergeist_billy
+  Capybara.current_driver = Capybara.javascript_driver
+end
+
 Before '@stripe_javascript' do
   Capybara.javascript_driver = :poltergeist
   Capybara.current_driver = Capybara.javascript_driver
