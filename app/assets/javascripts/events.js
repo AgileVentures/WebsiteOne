@@ -41,12 +41,12 @@ var jitsi_events = {
                 url: $(this).attr('href'),
                 timeout: 30000,
                 success: function(res) {
-                    alert(res.stream_name);
+                    alert('Start jitsi live stream with this key: ' +
+                        res.stream_name);
                 },
                 error: function(xhrObj, textStatus, exception) {
                     alert('Error!'); 
                 }
-                // 'success' and 'error' functions will be passed 3 args
             });            
         })
     }
