@@ -15,7 +15,7 @@ Feature: Start jitsi meet
 
   Scenario: Start jitsi meet
     Given the date is "2014 Feb 5th 6:55am"
-    And I navigate to the show page for event "Scrum"
+    And I navigate to the show page for event "Repeat Scrum"
     Then I should see a start jitsi meet button
     
   #TODO: Write for project page
