@@ -93,6 +93,7 @@ which will associate the pull request with the issue in the Waffle board.
 
 This all adds up to a work flow that should look something like this:
 
+0) ensure issue has full description of change and has been voted on
 1) create branch prefixed with id of issue (moves issue into 'in progress')  
 2) create failing test on the branch (acceptance level)  
 3) create failing tests (unit level)  
