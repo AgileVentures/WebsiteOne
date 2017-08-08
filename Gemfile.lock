@@ -306,6 +306,8 @@ GEM
     lumberjack (1.0.11)
     mail (2.6.5)
       mime-types (>= 1.16, < 4)
+    medium-editor-rails (2.3.1)
+      railties (>= 3.0)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
@@ -633,6 +635,7 @@ DEPENDENCIES
   kaminari
   launchy
   local_time (~> 1.0.3)
+  medium-editor-rails
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
@@ -693,4 +696,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.15.1
+   1.15.3

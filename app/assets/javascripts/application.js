@@ -33,6 +33,7 @@
 //= require moment.min
 //= require moment-timezone-with-data-2010-2020
 //= require chatlio
+//= require medium-editor
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code
