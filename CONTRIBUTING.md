@@ -41,7 +41,7 @@ To get involved please follow these steps:
 
   4. look at **[backlog](https://waffle.io/AgileVentures/WebsiteOne)** - if there is an interesting ticket get it voted on in a scrum or do an [ASYNC Vote](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md) in Slack
 
-  Items need to be voted on before work can start.  Voting happens in scrums or using the [ASYNC Voting bot](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md) in the Slack channel.
+  Items need to be voted on before work can start.  Voting happens in scrums or the weekly meeting (currently Fridays).  Note that even without the meetings you can get a vote on any issue you're thinking of working on by using the Async voting bot in the [#websiteone slack channel](https://agileventures.slack.com/messages/C029E8G80/details/), using the following syntax: `\voter [ISSUE NAME] [LINK TO ISSUE]`.
 
 
 
@@ -91,6 +91,20 @@ fixes #799
 
 which will associate the pull request with the issue in the Waffle board.
 
+This all adds up to a work flow that should look something like this:
+
+0) ensure issue has full description of change and has been voted on
+1) create branch prefixed with id of issue (moves issue into 'in progress')  
+2) create failing test on the branch (acceptance level)  
+3) create failing tests (unit level)  
+4) get test to pass with functionality  
+5) submit pull request with fixes #xyz   
+6) pull request reviewed  
+7) changes to original PR if required  
+8) pull request merged (presence of "fixes #xyz" then moves issue to 'done')
+9) code moved to staging and checked against production data clone
+10) code moved to production
+
 Acceptance Tests and Caching
 ----------------------------
 
@@ -114,7 +128,7 @@ Pull Request Review
 
 Currently https://github.com/tansaku is project managing WebSiteOne.  The project manager will review your pull request as soon as possible.  Usually the project manager will need to sign off in order to merge a pull request.
 
-The project managers will review the pull request for coherence with the specified feature or bug fix, and give feedback on code quality, user experience, documentation and git style.  Please respond to comments from the project managers with explanation, or further commits to your pull request in order to get merged in as quickly as possible.
+The project manager will review the pull request for coherence with the specified feature or bug fix, and give feedback on code quality, user experience, documentation and git style.  Please respond to comments from the project managers with explanation, or further commits to your pull request in order to get merged in as quickly as possible.
 
 To maximize flexibility add the project manager as a collaborator to your WebSiteOne fork in order to allow them to help you fix your pull request, but this is not required.
 
