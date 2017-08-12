@@ -80,7 +80,7 @@ class Project < ActiveRecord::Base
   end
 
   def jitsi_room_link
-    "https://meet.jit.si/AV_#{title.tr(' ', '_')}"
+    "https://meet.jit.si/AV_#{title.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
   end
 
   private
