@@ -1,4 +1,7 @@
 <head>
+  <%= javascript_tag do %>
+      window._rails_env = "<%= Rails.env %>"
+  <% end %>
   <%= render 'layouts/meta_tags' %>
   <title><%= content_for?(:title) ? [ yield(:title),  ' | AgileVentures - WebsiteOne'].join(' ') : 'AgileVentures - WebsiteOne' %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
