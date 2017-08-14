@@ -1,0 +1,5 @@
+<%= form_for @event_instance, :url => "/event_instances/#{@event_instance.id}" do |f| %>
+  <%= f.label "Youtube Link" %>
+  <%= f.text_field :yt_video_id, :value => "http://youtube.com/watch?v#{@event_instance.yt_video_id}" %>
+  <%= f.submit %>
+<% end %>

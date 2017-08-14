@@ -1,6 +1,7 @@
 class EventInstancesController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :cors_preflight_check, except: [:index]
+  before_filter :cors_preflight_check, except: [:index, :edit, :update_link]
+  # before_action :authenticate_user!, only: [:edit, :update_link]
 
   def update
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
@@ -29,7 +30,26 @@ class EventInstancesController < ApplicationController
     @event_instances = relation.paginate(:page => params[:page])
   end
 
+  def edit
+    @event_instance = EventInstance.find(params[:id])
+  end
+
+  def update_link
+    @event_instance = EventInstance.find(params[:id])
+    if @event_instance.update_attributes(yt_video_id: YouTubeRails.extract_video_id(event_instance_params[:yt_video_id]) )
+      flash[:notice] = "Link Updated"
+      redirect_to edit_event_instance_path(@event_instance)
+    else
+      flash[:alert] = "Error.  Please Try again"
+      render edit_event_instance_path(@event_instance)
+    end
+  end
+
   private
+
+  def event_instance_params
+    params.require(:event_instance).permit(:yt_video_id)
+  end
 
   def cors_preflight_check
     head :bad_request and return unless (allowed? || local_request?)
