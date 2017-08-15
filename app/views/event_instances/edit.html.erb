@@ -1,5 +1,7 @@
-<%= form_for @event_instance, :url => "/event_instances/#{@event_instance.id}" do |f| %>
-  <%= f.label "Youtube Link" %>
-  <%= f.text_field :yt_video_id, :value => "http://youtube.com/watch?v#{@event_instance.yt_video_id}" %>
+<%= form_for @event_instance, :url => "/event_instances/#{@event_instance.id}", html: {class: 'form-vertical', id: 'event-form'} do |f| %>
+  <div class='form-group'>
+  <%= f.label "Youtube Video Link", class: 'control-label' %>
+  <%= f.text_field :yt_video_id,  :value => "http://youtube.com/watch?v=#{@event_instance.yt_video_id}", class: 'form-control' %>
+  </div>
   <%= f.submit %>
 <% end %>

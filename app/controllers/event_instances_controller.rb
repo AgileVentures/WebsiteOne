@@ -36,12 +36,13 @@ class EventInstancesController < ApplicationController
 
   def update_link
     @event_instance = EventInstance.find(params[:id])
-    if @event_instance.update_attributes(yt_video_id: YouTubeRails.extract_video_id(event_instance_params[:yt_video_id]) )
+    youtube_id = YouTubeRails.extract_video_id(event_instance_params[:yt_video_id])
+    if youtube_id && @event_instance.update_attributes(yt_video_id: youtube_id )
       flash[:notice] = "Link Updated"
       redirect_to edit_event_instance_path(@event_instance)
     else
       flash[:alert] = "Error.  Please Try again"
-      render edit_event_instance_path(@event_instance)
+      redirect_to edit_event_instance_path(@event_instance)
     end
   end
 
