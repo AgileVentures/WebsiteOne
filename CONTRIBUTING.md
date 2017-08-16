@@ -41,6 +41,8 @@ To get involved please follow these steps:
 
   4. look at **[backlog](https://waffle.io/AgileVentures/WebsiteOne)** - if there is an interesting ticket get it voted on in a scrum or do an [ASYNC Vote](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md) in Slack
 
+##### Voting
+
   Items need to be voted on before work can start.  Voting happens in scrums or the weekly meeting (currently Fridays).  Note that even without the meetings you can get a vote on any issue you're thinking of working on by using the Async voting bot in the [#websiteone slack channel](https://agileventures.slack.com/messages/C029E8G80/details/), using the following syntax: `\voter [ISSUE NAME] [LINK TO ISSUE]`.
 
 
