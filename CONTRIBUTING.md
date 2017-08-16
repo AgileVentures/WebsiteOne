@@ -51,6 +51,7 @@ e.g.
 /voter make a press-kit link in the footer https://github.com/AgileVentures/WebsiteOne/issues/1738
 ```
 
+More on how to handle a vote can be found at: https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md#automated-async-vote
 
 ## git and GitHub
 Our **default working branch is `develop`**.  We do work by creating branches off `develop` for new features and bugfixes.
