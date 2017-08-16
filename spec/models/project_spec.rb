@@ -155,4 +155,11 @@ describe Project, type: :model do
       expect(project.gpa).to eq '3.4'
     end
   end
+
+  context '#jitsi_room_link' do
+    it 'returns correct link' do
+      project = FactoryGirl.build(:project, title: 'Simple Project-~!@#$')
+      expect(project.jitsi_room_link).to eq('https://meet.jit.si/AV_Simple_Project')
+    end
+  end
 end

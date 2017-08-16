@@ -512,4 +512,11 @@ describe Event, :type => :model do
     end
 
   end
+  
+  context '#jitsi_room_link' do
+    it 'returns correct link' do
+      event = FactoryGirl.build(:event, name: 'Repeat Scrum-~!@#$')
+      expect(event.jitsi_room_link).to eq('https://meet.jit.si/AV_Repeat_Scrum')
+    end
+  end
 end
