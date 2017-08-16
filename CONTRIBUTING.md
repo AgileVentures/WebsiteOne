@@ -43,12 +43,8 @@ To get involved please follow these steps:
 
 ##### Voting
 
-  Items need to be voted on before work can start.  Voting happens in scrums or the weekly meeting (currently Fridays).  Note that even without the meetings you can get a vote on any issue you're thinking of working on by using the Async voting bot in the [#websiteone slack channel](https://agileventures.slack.com/messages/C029E8G80/details/), using the following syntax: `/voter [ISSUE NAME] [LINK TO ISSUE]`.
+  Items need to be voted on before work can start.  Voting happens in scrums or the weekly meeting (currently Fridays).  Note that even without the meetings you can get a vote on any issue you're thinking of working on by using the Async voting bot in the [#websiteone slack channel](https://agileventures.slack.com/messages/C029E8G80/details/), using the following syntax: `/voter ISSUE NAME https://github.com/AgileVentures/WebsiteOne/issues/number`.
 
-e.g.
-```
-/voter make a press-kit link in the footer https://github.com/AgileVentures/WebsiteOne/issues/1738
-```
 
 
 ## git and GitHub
