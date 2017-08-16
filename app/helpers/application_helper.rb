@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def resource
-    @resource ||= User.new
+    @resource ||= User.new(Karma.new)
   end
 
   def devise_mapping
