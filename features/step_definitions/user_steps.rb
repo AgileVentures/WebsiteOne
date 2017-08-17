@@ -461,3 +461,8 @@ And(/^the page should contain the google adwords conversion code/) do
   script = page.all('script', visible: false).inject('') { |m, el| m << el.native.text }
   expect(script).to include 'Zms8CLTN-20Q-NGSmwM'
 end
+
+And(/^the user "([^"]*)" should have karma$/) do |email|
+  user = User.find_by email: email
+  expect(user.karma).not_to be_nil
+end
