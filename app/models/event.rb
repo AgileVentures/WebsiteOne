@@ -34,7 +34,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.future_events
-    Event.where('repeat_ends = false OR repeat_ends_on > ?', Time.now)
+    Event.where('repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on > ?', Time.now)
   end
 
   def self.upcoming_events(project=nil)
