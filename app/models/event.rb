@@ -29,12 +29,16 @@ class Event < ActiveRecord::Base
     @repeat_ends_string = repeat_ends ? "on" : "never"
   end
 
-  def self.base_events(project)
-    project.nil? ? Event.all : Event.where(project_id: project)
+  def self.base_future_events(project)
+    project.nil? ? Event.future_events : Event.future_events.where(project_id: project)
+  end
+
+  def self.future_events
+    Event.where('repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on > ?', Time.now)
   end
 
   def self.upcoming_events(project=nil)
-    events = Event.base_events(project).inject([]) do |memo, event|
+    events = Event.base_future_events(project).inject([]) do |memo, event|
       memo << event.next_occurrences
     end.flatten.sort_by { |e| e[:time] }
     Event.remove_past_events(events)
