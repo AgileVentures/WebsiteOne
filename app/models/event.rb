@@ -30,7 +30,11 @@ class Event < ActiveRecord::Base
   end
 
   def self.base_events(project)
-    project.nil? ? Event.all : Event.where(project_id: project)
+    project.nil? ? Event.future_events : Event.future_events.where(project_id: project)
+  end
+
+  def self.future_events
+    Event.where('repeat_ends = false OR repeat_ends_on > ?', Time.now)
   end
 
   def self.upcoming_events(project=nil)
