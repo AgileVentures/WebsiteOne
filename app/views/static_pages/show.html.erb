@@ -26,9 +26,7 @@
   </div>
 </div>
 
-<div id="static_page_body" data-mercury="full" data-type="editable"><%= clean_html(@page.body) %></div>
-
-<div id="static_page_body_medium" class="editable_medium"></div>
+<div id="static_page_body" class="editable"><%= clean_html(@page.body) %></div>
 
 <% if user_signed_in? %>
   <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
