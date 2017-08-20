@@ -40,6 +40,8 @@ sudo apt-get install git
 sudo apt-get install curl bundler postgresql-common postgresql-9.3 libpq-dev libgdbm-dev libncurses5-dev automake libtool bison libffi-dev libqtwebkit-dev
 ```
 
+> If you have trouble installing PostgreSQL, read more at [Official PostgreSQL Website](https://www.postgresql.org/download/linux/ubuntu/)
+
 ## Install xvfb (Virtual frame buffer implementing X11 display server protocol)
 ```
 sudo apt-get install xvfb
@@ -54,7 +56,7 @@ source ~/.rvm/scripts/rvm
 
 ## Install ruby
 ```
-rvm install ruby-2.2.2
+rvm install ruby-2.3.1
 ```
 
 ## Clone the respository (after a fork)
