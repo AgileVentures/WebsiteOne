@@ -56,7 +56,7 @@ source ~/.rvm/scripts/rvm
 
 ## Install ruby
 ```
-rvm install ruby-2.2.2
+rvm install ruby-2.3.1
 ```
 
 ## Clone the respository (after a fork)
