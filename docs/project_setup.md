@@ -80,7 +80,7 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 
 * Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
 
-    bundle exec rake db:setup
+    `bundle exec rake db:setup`
     
 ### Step 6: Request the .env file and confirm your locale
     
