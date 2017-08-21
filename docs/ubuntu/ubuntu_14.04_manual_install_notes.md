@@ -67,9 +67,9 @@ git clone git@github.com:<your github handle>/WebsiteOne.git
 ## Generate rvm config files within project
 ```
 cd WebsiteOne
-echo "ruby-2.2.2" > .ruby-version
+echo "ruby-2.3.1" > .ruby-version
 rvm gemset create websiteone
-rvm use ruby-2.2.2@agileventures
+rvm use ruby-2.3.1@agileventures
 echo "websiteone" > .ruby-gemset
 ```
 
