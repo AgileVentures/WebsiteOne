@@ -189,3 +189,9 @@ Then(/^a separate event instance is not created$/) do
   expect(EventInstance.where("created_at >= ?", Time.now.beginning_of_day).size)
     .to eq(1)
 end
+
+Given(/^I visit the "([^"]*)" page for "([^"]*)" "([^"]*)"$/) do |action, object_title, object|
+  instance = object.camelize.constantize.find_by(title: object_title)
+  path = action.downcase + "_" + object + "_path"
+  visit self.send(path.to_sym, instance)
+end
