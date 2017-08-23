@@ -144,11 +144,5 @@ describe 'layouts/application.html.erb' do
         expect(footer).to have_link 'Twitter', href: 'https://twitter.com/AgileVentures'
       end
     end
-
-    it 'should render a link to the "Press Kit" page' do
-      rendered.within('#footer') do |footer|
-        expect(footer).to have_link "Press Kit", :href => "http://www.agileventures.org/press-kit"
-      end
-    end
   end
 end
