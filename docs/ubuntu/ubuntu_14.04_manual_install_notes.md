@@ -66,15 +66,8 @@ git clone git@github.com:<your github handle>/WebsiteOne.git
 
 ## Generate rvm config files within project
 ```
-cd WebsiteOne
-echo "ruby-2.2.2" > .ruby-version
-rvm gemset create websiteone
-rvm use ruby-2.2.2@agileventures
-echo "websiteone" > .ruby-gemset
+rvm use ruby-2.3.1@WebsiteOne --ruby-version --create
 ```
-
-You can use gemset name of your own choice.
-
 
 ## Install bundler
 Just to be safe, install bundle gem first. Otherwise `bundle install` may fail.
