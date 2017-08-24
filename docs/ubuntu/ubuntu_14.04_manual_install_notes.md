@@ -97,7 +97,7 @@ Find postgres user and change its authentication mode from peer to trust. Save a
 
 ## Restart the database
 ```
-sudo /etc/init.d/posrgresql restart
+sudo /etc/init.d/postgresql restart
 ```
 
 ## Test database login
