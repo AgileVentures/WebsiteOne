@@ -60,3 +60,11 @@ Feature: Manual Edit of Youtube URL
     When I fill in "event_instance_yt_video_id" with "http://youtube.com/watch?v=cdODZWHUwhc"
     And I click "Update Event instance"
     Then I should see "Link Updated"
+    
+  Scenario: Edit past youtube URL does not cause an event instance to show as Live
+    Given the date is "2014 Feb 10th 7:01am"
+    And I visit the "Edit" page for "Old" "event_instance"
+    When I fill in "event_instance_yt_video_id" with "http://youtube.com/watch?v=cdODZWHUwhc"
+    And I click "Update Event instance"
+    # Then "Old" event instance is not live
+    Then "Repeat Scrum" doesn't go live
