@@ -37,7 +37,7 @@ class EventInstancesController < ApplicationController
   def update_link
     @event_instance = EventInstance.find(params[:id])
     youtube_id = YouTubeRails.extract_video_id(event_instance_params[:yt_video_id])
-    if youtube_id && @event_instance.update_attributes(yt_video_id: youtube_id )
+    if youtube_id && @event_instance.update_attributes(yt_video_id: youtube_id, hoa_status: event_instance_params[:hoa_status] )
       flash[:notice] = "Link Updated"
       redirect_to edit_event_instance_path(@event_instance)
     else
@@ -49,7 +49,7 @@ class EventInstancesController < ApplicationController
   private
 
   def event_instance_params
-    params.require(:event_instance).permit(:yt_video_id)
+    params.require(:event_instance).permit(:yt_video_id, :hoa_status)
   end
 
   def cors_preflight_check
