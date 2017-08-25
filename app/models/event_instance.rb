@@ -40,10 +40,11 @@ class EventInstance < ActiveRecord::Base
 
   def live?
     return false if !started? || hoa_status == 'finished'
+    return true if updated_within_last_two_minutes?
     return url_set_directly && updated_within_current_event_duration?(600) &&
-      event.before_current_end_time? && created_at_within_current_event_duration(600)
+      event.before_current_end_time?
   end
-  
+
   def duration
     updated_at - created_at
   end
@@ -61,11 +62,6 @@ class EventInstance < ActiveRecord::Base
   end
 
   private
-  
-  def created_at_within_current_event_duration(margin)
-    created_at > (event.current_start_time - margin) &&
-      created_at < event.current_end_time
-  end
 
   def manually_updated_event_not_finished?
     url_set_directly && within_current_event_duration?
