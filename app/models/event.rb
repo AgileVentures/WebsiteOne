@@ -243,6 +243,10 @@ class Event < ActiveRecord::Base
     false
   end
 
+  def jitsi_room_link
+    "https://meet.jit.si/AV_#{name.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
+  end
+
   private
 
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week

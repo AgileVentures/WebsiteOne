@@ -30,7 +30,7 @@ describe Mailer do
       expect(mail.reply_to).to include('info@agileventures.org')
       expect(mail.to).to include('candice@clemens.com')
       expect(mail.subject).to include('Welcome to AgileVentures.org')
-      expect(mail.body.raw_source).to include('Thanks for joining our community! ')
+      expect(mail.body.raw_source).to include('Welcome!')
       expect(mail).to have_default_cc_addresses
     end
   end
