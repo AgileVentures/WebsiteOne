@@ -225,4 +225,132 @@ http_interactions:
         }
     http_version: 
   recorded_at: Tue, 04 Feb 2014 06:59:17 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: post
+    uri: https://api.chatlio.com/v1/p/visitor/session/new
+    body:
+      encoding: UTF-8
+      string: '{"vsUuid":"09d284ac-c122-4b9b-a01d-f762408070c0","ceUuid":"8a54fdee-6747-4ce9-4d69-f03c2af664f2","page":"http://127.0.0.1:59723/events/scrum"}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Referer:
+      - http://127.0.0.1:59723/events/scrum
+      Origin:
+      - http://127.0.0.1:59723
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1NjQ3MTM4MzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.P3ili2AK2c6ilHRpygvEOa1jT4x2LoFY1fc1p6ILBY0
+      Content-Type:
+      - application/xml
+      Accept:
+      - "*/*"
+      Content-Length:
+      - '142'
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - api.chatlio.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 02 Aug 2017 06:27:02 GMT
+      Content-Type:
+      - application/javascript
+      Content-Length:
+      - '17'
+      Connection:
+      - close
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization
+      Access-Control-Allow-Methods:
+      - POST, GET, PUT, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
+      Expires:
+      - "-1"
+      X-Chatlio-At:
+      - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NjI0MjIsImlhdCI6MTUwMTY1NTIyMiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.NiKMQ3PC0QhClCxErgWtZMDTNSxShOl3cl-eaOIiwwo
+      X-Chatlio-Rt:
+      - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1NjQ3MjcyMjIsImlhdCI6MTUwMTY1NTIyMiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.d6MT2eZ4klnjeRvgqLotoQwFCABpUY4GMoFKMTg94Ow
+      X-Chatlio-Vsuuid:
+      - 09d284ac-c122-4b9b-a01d-f762408070c0
+    body:
+      encoding: UTF-8
+      string: '{"status": "200"}'
+    http_version: 
+  recorded_at: Tue, 04 Feb 2014 07:04:00 GMT
+- request:
+    method: post
+    uri: https://api.chatlio.com/v1/p/visitor/session/new
+    body:
+      encoding: UTF-8
+      string: '{"vsUuid":"09d284ac-c122-4b9b-a01d-f762408070c0","ceUuid":"8a54fdee-6747-4ce9-4d69-f03c2af664f2","page":"http://127.0.0.1:59723/events/scrum"}'
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Referer:
+      - http://127.0.0.1:59723/events/scrum
+      Origin:
+      - http://127.0.0.1:59723
+      Authorization:
+      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1NjQ3MTM4MzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.P3ili2AK2c6ilHRpygvEOa1jT4x2LoFY1fc1p6ILBY0
+      Content-Type:
+      - application/xml
+      Accept:
+      - "*/*"
+      Content-Length:
+      - '142'
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - api.chatlio.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 02 Aug 2017 06:27:02 GMT
+      Content-Type:
+      - application/javascript
+      Content-Length:
+      - '17'
+      Connection:
+      - close
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization
+      Access-Control-Allow-Methods:
+      - POST, GET, PUT, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
+      Expires:
+      - "-1"
+      X-Chatlio-At:
+      - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NjI0MjIsImlhdCI6MTUwMTY1NTIyMiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.NiKMQ3PC0QhClCxErgWtZMDTNSxShOl3cl-eaOIiwwo
+      X-Chatlio-Rt:
+      - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1NjQ3MjcyMjIsImlhdCI6MTUwMTY1NTIyMiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.d6MT2eZ4klnjeRvgqLotoQwFCABpUY4GMoFKMTg94Ow
+      X-Chatlio-Vsuuid:
+      - 09d284ac-c122-4b9b-a01d-f762408070c0
+    body:
+      encoding: UTF-8
+      string: '{"status": "200"}'
+    http_version: 
+  recorded_at: Tue, 04 Feb 2014 07:04:00 GMT
+recorded_with: VCR 3.0.3
