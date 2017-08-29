@@ -246,7 +246,7 @@ describe 'users/show.html.erb' do
   context 'users own profile page' do
     before(:each) do
         @user_logged_in ||= FactoryGirl.create :user
-        sign_in @user_logged_in # method from devise:TestHelpers
+        sign_in @user_logged_in # method from devise:Test::ControllerHelpers
     end
 
     it 'displays an edit button if it is my profile' do

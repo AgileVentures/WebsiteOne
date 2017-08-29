@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   layout 'layouts/user_profile_layout', only: [:show]
 
-  skip_before_filter :verify_authenticity_token, :only => [:index, :show]
+  skip_before_action :verify_authenticity_token, :only => [:index, :show]
 
   before_action :get_user, only: [:show, :destroy, :add_status]
   before_action :get_user, only: [:show, :add_status]
-  before_filter :authenticate_user!, only: [:add_status]
+  before_action :authenticate_user!, only: [:add_status]
 
   def index
     @users = users

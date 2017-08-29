@@ -1,4 +1,4 @@
-class AddHoaStatusToEventInstances < ActiveRecord::Migration
+class AddHoaStatusToEventInstances < ActiveRecord::Migration[5.1]
   def change
     add_column :event_instances, :hoa_status, :string
     EventInstance.reset_column_information

@@ -1,6 +1,6 @@
 class EventInstancesController < ApplicationController
-  skip_before_filter :verify_authenticity_token
-  before_filter :cors_preflight_check, except: [:index]
+  skip_before_action :verify_authenticity_token
+  before_action :cors_preflight_check, except: [:index]
 
   def update
     event_instance = EventInstance.find_or_create_by(uid: params[:id])

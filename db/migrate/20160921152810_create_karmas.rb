@@ -1,4 +1,4 @@
-class CreateKarmas < ActiveRecord::Migration
+class CreateKarmas < ActiveRecord::Migration[5.1]
   def change
     create_table :karmas do |t|
       t.references :user

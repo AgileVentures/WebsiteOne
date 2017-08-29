@@ -26,8 +26,8 @@ describe UsersController, :type => :controller do
 
   describe '#show' do
     before do
-      @projects = build_stubbed_list(Project, 3)
-      @user = build_stubbed(User)
+      @projects = build_stubbed_list(:project, 3)
+      @user = build_stubbed(:user)
       allow(@user).to receive(:following_by_type).and_return(@projects)
       allow(@user).to receive(:skill_list).and_return([])
       User.stub_chain(:friendly, :find).and_return(@user)
@@ -74,7 +74,7 @@ describe UsersController, :type => :controller do
     let(:mail) { ActionMailer::Base.deliveries }
 
     before(:each) do
-      @user = build_stubbed(User, display_hire_me: true)
+      @user = build_stubbed(:user, display_hire_me: true)
       allow(User).to receive(:find).with(@user.id.to_s).and_return(@user)
       request.env['HTTP_REFERER'] = 'back'
       mail.clear

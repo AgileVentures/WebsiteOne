@@ -1,4 +1,4 @@
-class AddTimezoneOffsetToUsers < ActiveRecord::Migration
+class AddTimezoneOffsetToUsers < ActiveRecord::Migration[5.1]
   def up
     add_column :users, :timezone_offset, :integer
   end

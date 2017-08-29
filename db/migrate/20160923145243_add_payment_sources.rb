@@ -1,4 +1,4 @@
-class AddPaymentSources < ActiveRecord::Migration
+class AddPaymentSources < ActiveRecord::Migration[5.1]
   def change
     create_table :payment_sources do |t|
       t.string :type

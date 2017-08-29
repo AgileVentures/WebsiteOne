@@ -1,4 +1,4 @@
-class ReplaceDocumentIndex < ActiveRecord::Migration
+class ReplaceDocumentIndex < ActiveRecord::Migration[5.1]
   def change
     remove_index :documents, :slug
     add_index :documents, [:slug, :user_id], unique: true

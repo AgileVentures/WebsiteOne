@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
-  before_filter :get_next_scrum, :store_location, unless: -> { request.xhr? }
+  before_action :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
-  after_filter :user_activity
+  after_action :user_activity
 
   include ApplicationHelper
   include CustomErrors
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) do |u|
+    devise_parameter_sanitizer.enum_for(:account_update) do |u|
       u.permit(:first_name, :last_name, :email, :bio, :password,
                :password_confirmation, :current_password,
                :display_email, :display_profile, :display_hire_me,

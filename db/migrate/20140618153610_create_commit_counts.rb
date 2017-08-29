@@ -1,4 +1,4 @@
-class CreateCommitCounts < ActiveRecord::Migration
+class CreateCommitCounts < ActiveRecord::Migration[5.1]
   def change
     create_table :commit_counts do |t|
       t.integer :commit_count
