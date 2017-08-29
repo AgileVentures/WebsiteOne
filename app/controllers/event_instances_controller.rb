@@ -27,7 +27,7 @@ class EventInstancesController < ApplicationController
   def index
     relation = (params[:live] == 'true') ? EventInstance.live : EventInstance.latest
     relation = relation.includes(:project, :event, :user)
-    @event_instances = relation.paginate(:page => params[:page])
+    @event_instances = relation.paginate(:page => params[:page], per_page: 5)
   end
 
   private
@@ -46,7 +46,7 @@ class EventInstancesController < ApplicationController
   end
 
   def local_request?
-    request.env['HTTP_ORIGIN'] =~ /#{request.env['HTTP_HOST']}/
+    request.env['HTTP_ORIGIN'].include?(request.env['HTTP_HOST'])
   end
 
   def set_cors_headers

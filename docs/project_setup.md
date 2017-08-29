@@ -31,6 +31,22 @@ When you've finished working on you changes, create a pull request (PR) on GitHu
 
 The whole process of doing a PR and getting it reviewed and merged into this project is described in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
+#### Keeping a fork up to date
+1. Clone your fork:
+```
+git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git
+```
+
+2. Add remote from original repository in your forked repository:
+```
+cd into/cloned/fork-repo
+git remote add upstream https://github.com/AgileVentures/WebsiteOne.git
+git fetch upstream
+```
+3. Updating your fork from original repo to keep up with [WebsiteOne](https://github.com/AgileVentures/WebsiteOne):
+```
+git pull upstream develop
+```
 
 ### Step 3: Install the gems with `bundle install`
 
@@ -80,7 +96,7 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 
 * Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
 
-    bundle exec rake db:setup
+    `bundle exec rake db:setup`
     
 ### Step 6: Request the .env file and confirm your locale
     
