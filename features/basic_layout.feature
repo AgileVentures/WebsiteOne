@@ -43,6 +43,7 @@ Feature: Setting up basic page layout for site
     And I should see a link "Mentive" to "http://www.mentive.co/"
     And I should see a link "RubyMine" to "https://www.jetbrains.com/ruby/"
     And I should see a link "Blog" to "http://nonprofits.agileventures.org/blog/"
+    And I should see a link "Press Kit" to "http://www.agileventures.org/press-kit"
 
   @javascript @desktop
   Scenario: Show Sponsors on desktop computer
