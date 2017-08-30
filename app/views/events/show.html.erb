@@ -36,7 +36,7 @@
         <% if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
           <div class='btn-jitsi pull-right'>
             <%= link_to @event.jitsi_room_link, target: '_blank' do %>
-              <button type="button" class="btn btn-primary">
+              <button type="button" class="btn btn-primary" id='start-jitsi'>
                 Start Jitsi Meet
               </button>
             <% end %>
@@ -114,7 +114,7 @@
             <%= hidden_field_tag 'host_id', current_user.id %>
             <%= hidden_field_tag 'event_id', @event.id %>
             <%= hidden_field_tag 'url_set_directly', true %>
-            <%= hidden_field_tag 'notify', true %>
+            <%= hidden_field_tag 'notify_hangout', true %>
             <%= hidden_field_tag 'category', @event.category %>
             <% if @event.project %>
               <%= hidden_field_tag 'project_id', @event.project.id %>
@@ -145,7 +145,7 @@
             <%= hidden_field_tag 'host_id', current_user.id %>
             <%= hidden_field_tag 'event_id', @event.id %>
             <%= hidden_field_tag 'url_set_directly', true %>
-            <%= hidden_field_tag 'notify', true %>
+            <%= hidden_field_tag 'notify_yt', true %>
             <%= hidden_field_tag 'category', @event.category %>
             <% if @event.project %>
               <%= hidden_field_tag 'project_id', @event.project.id %>
