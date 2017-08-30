@@ -39,8 +39,9 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def build_resource(hash = nil)
-    self.resource = User.new_with_session(hash || {}, session)
+  def build_resource(hash = {})
+    hash.merge!({karma: Karma.new})
+    self.resource = User.new_with_session(hash, session)
     if session[:omniauth]
       @user.apply_omniauth(session[:omniauth])
       @user.valid?

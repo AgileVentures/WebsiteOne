@@ -18,6 +18,7 @@ Feature: As a developer
     Then I should be on the "getting started" page
     And I should see "Signed up successfully."
     And the page should contain the google adwords conversion code
+    And the user "user@example.com" should have karma
     And I should see a successful sign up message
     And I should receive a "Welcome to AgileVentures.org" email
     And replies to that email should go to "info@agileventures.org"
@@ -65,7 +66,6 @@ Feature: As a developer
     When I sign up with GitHub
     Then I should see link for instructions to sign up
 
-  #removed g+ signup while it appears broken
   @omniauth-without-email
   Scenario: User signs up with a Google account having no public email (sad path)
     Given I am on the "registration" page
