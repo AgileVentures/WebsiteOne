@@ -8,7 +8,18 @@ WebsiteOne.define('GoogleAnalytics', function() {
   function init() {
     window._gaq.push(['_trackPageview']);
   }
-
+  function() {
+    try {
+      var trackers = ga.getAll();
+      var i, len;
+      for (i = 0, len = trackers.length; i < len; i += 1) {
+        if (trackers[i].get('trackingId') === 'UA-47795185-1') {
+          return trackers[i].get('clientId');
+        }
+      }
+    } catch(e) {}
+    return 'false';
+  }
   return {
     init: init
   };
