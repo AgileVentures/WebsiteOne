@@ -24,7 +24,7 @@ Feature: Subscribe Self to Premium
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"
-    And I should see "Your 7 day free trial has now started"
+    And I should see "Your 31 day free trial has now started"
     And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
 
     # And my member page should show premium details # TODO IMPORTANT - require login?
