@@ -59,9 +59,9 @@ Feature: As a user of the site
       | 20    | 20                                               |
     When I click on the avatar for "Bob"
     Then I should be on the "user profile" page for "Bob"
-    And I should see "20"
+    And Profile page should have html element with "span.karma-summary" css selector and it should contain "20"
   
   Scenario: Having karma count as zero on users profile page with zero hangouts_attended_with_more_than_one_participant
     When I click on the avatar for "Alice"
     Then I should be on the "user profile" page for "Alice"
-    And I should see "0"
+    And Profile page should have html element with "span.karma-summary" css selector and it should contain "0"

@@ -351,6 +351,12 @@ Given(/^user "(.*?)" have karma:$/) do |user, table|
   end
 end
 
+Then(/^Profile page should have html element with "([^"]*)" css selector and it should contain "([^"]*)"$/) do |css_selector, value|
+  expect(page).to have_css(css_selector)
+  expect(page).to have_css("#{css_selector} .fa.fa-fire")
+  expect(page.find(:css, css_selector)).to have_content value
+end
+
 Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   @user = User.find_by_first_name first_name
   visit new_user_session_path
