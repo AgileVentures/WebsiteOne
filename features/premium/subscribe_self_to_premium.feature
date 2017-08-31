@@ -6,8 +6,9 @@ Feature: Subscribe Self to Premium
 
   Background:
     Given the following plans exist
-      | name         | id          | amount | free_trial_length_days |
-      | Premium      | premium     | 1000   | 7                      |
+      | name                       | id                       | amount | free_trial_length_days |
+      | Premium                    | premium                  | 1000   | 7                      |
+      | Premium (first month free) | premium_first_month_free | 1000   | 31                     |
     And the email queue is clear
 
   Scenario: Pay by card
@@ -15,6 +16,15 @@ Feature: Subscribe Self to Premium
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"
+    And I should see "Your 7 day free trial has now started"
+    And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
+
+  Scenario: Pay by card (with free trial month)
+    Given I visit "subscriptions/new?plan=av_premium_first_month_free"
+    And I click "Subscribe" within the card_section
+    When I fill in appropriate card details for premium
+    Then I should see "Thanks, you're now an AgileVentures Premium Member!"
+    And I should see "Your 7 day free trial has now started"
     And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
 
     # And my member page should show premium details # TODO IMPORTANT - require login?
