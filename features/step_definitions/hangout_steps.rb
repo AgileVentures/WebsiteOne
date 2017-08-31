@@ -190,6 +190,12 @@ Then(/^a separate event instance is not created$/) do
     .to eq(1)
 end
 
+Given(/^I visit the "([^"]*)" page for "([^"]*)" "([^"]*)"$/) do |action, object_title, object|
+  instance = object.camelize.constantize.find_by(title: object_title)
+  path = action.downcase + "_" + object + "_path"
+  visit self.send(path.to_sym, instance)
+end
+
 Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is edited$/) do
   expect(SlackService).not_to receive :post_hangout_notification
   expect(SlackService).to receive(:post_yt_link)
@@ -202,3 +208,4 @@ Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is ed
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
   visit event_path(event)
 end
+

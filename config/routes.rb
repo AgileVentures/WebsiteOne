@@ -4,6 +4,8 @@ WebsiteOne::Application.routes.draw do
 
   root 'visitors#index'
 
+
+
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
 
   resources :activities
@@ -30,6 +32,9 @@ WebsiteOne::Application.routes.draw do
 
   match '/hangouts/:id' => 'event_instances#update', :via => [:put, :options], as: 'hangout'
   match '/hangouts' => 'event_instances#index', :via => [:get], as: 'hangouts'
+
+  resources :event_instances, :only => [:edit]
+  patch '/event_instances/:id', to: 'event_instances#update_link'
 
   resources :projects, :format => false do
     member do
@@ -82,7 +87,3 @@ WebsiteOne::Application.routes.draw do
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
 
 end
-
-
-
-
