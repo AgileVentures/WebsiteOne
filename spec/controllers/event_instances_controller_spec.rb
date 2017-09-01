@@ -74,7 +74,7 @@ describe EventInstancesController do
       it 'calls the SlackService to post yt_link on successful update' do
         expect(SlackService).to receive(:post_yt_link).with(an_instance_of(EventInstance))
         expect_any_instance_of(EventInstance).to receive(:yt_video_id?).at_least(:once).and_return(true)
-        get :update, params.merge(notify: 'true', yt_video_id: 'test')
+        get :update, params.merge(notify_yt: 'true', yt_video_id: 'test')
       end
 
       it 'does not call the SlackService to post yt_link if not update' do

@@ -16,6 +16,7 @@ Feature: Manual Edit of Youtube URL
       | title        | hangout_url         | created_at       | updated_at          | uid | category | project    | user_id | yt_video_id | hoa_status | url_set_directly | event        |
       | HangoutsFlow | http://hangout.test | 2012 Feb 4th 7am | 2012 Feb 4th 7:04am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
       | HangoutsFlow | http://hangout.test | 2014 Feb 4th 7am | 2014 Feb 4th 7:03am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
+      | Old          | http://hangout.test | 2014 Jan 4th 7am | 2014 Jan 4th 7:03am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
     And I am logged in
 
   Scenario: Editing Youtube URL has no effect on Hangout URL
@@ -51,4 +52,24 @@ Feature: Manual Edit of Youtube URL
     Given the date is "2014 Feb 7th 7:01am"
     And I manually set a hangout link for event "Scrum"
     When I manually set youtube link with youtube id "12341234111" for event "Scrum"
-    Then a separate event instance is not created
+    Then a separate event instance is not created  
+    
+  Scenario: Edit past youtube URL
+    Given the date is "2014 Feb 10th 7:01am"
+    And I visit the "Edit" page for "Old" "event_instance"
+    When I fill in "event_instance_yt_video_id" with "http://youtube.com/watch?v=cdODZWHUwhc"
+    And I click "Update Event instance"
+    Then I should see "Hangout Updated"
+  
+  Scenario: Edit past youtube URL does not cause an event instance to show as Live
+    Given the date is "2014 Feb 10th 7:01am"
+    And I visit the "Edit" page for "Old" "event_instance"
+    When I fill in "event_instance_yt_video_id" with "http://youtube.com/watch?v=cdODZWHUwhc"
+    And I select "event_instance_hoa_status" to "finished"
+    And I click "Update Event instance"
+    Then "Repeat Scrum" doesn't go live
+
+  Scenario: Hangout URL is not posted in slack when Youtube URL is edited
+    Given the date is "2014 Feb 10th 7:01am"
+    And I manually set a hangout link for event "Scrum"
+    Then Youtube URL is posted in slack but not hangout URL when Youtube URL is edited
