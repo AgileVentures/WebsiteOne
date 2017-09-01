@@ -18,8 +18,6 @@ class EventInstance < ActiveRecord::Base
   has_many :hangout_participants_snapshots
   accepts_nested_attributes_for :hangout_participants_snapshots
 
-  validate :dont_update_after_finished, on: :update
-
   def self.active_hangouts
     select(&:live?)
   end
@@ -65,11 +63,5 @@ class EventInstance < ActiveRecord::Base
 
   def manually_updated_event_not_finished?
     url_set_directly && within_current_event_duration?
-  end
-
-  def dont_update_after_finished
-    if hoa_status_was == 'finished'
-      self.errors.add :base, 'Can\'t update a finished event'
-    end
   end
 end
