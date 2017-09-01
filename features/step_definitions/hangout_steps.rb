@@ -189,3 +189,23 @@ Then(/^a separate event instance is not created$/) do
   expect(EventInstance.where("created_at >= ?", Time.now.beginning_of_day).size)
     .to eq(1)
 end
+
+Given(/^I visit the "([^"]*)" page for "([^"]*)" "([^"]*)"$/) do |action, object_title, object|
+  instance = object.camelize.constantize.find_by(title: object_title)
+  path = action.downcase + "_" + object + "_path"
+  visit self.send(path.to_sym, instance)
+end
+
+Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is edited$/) do
+  expect(SlackService).not_to receive :post_hangout_notification
+  expect(SlackService).to receive(:post_yt_link)
+
+  yt_url = 'https://youtu.be/11111111111'
+  event = Event.find_by_name('Scrum')
+  visit event_path(event)
+  page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
+  fill_in 'yt_url', :with => yt_url
+  page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
+  visit event_path(event)
+end
+
