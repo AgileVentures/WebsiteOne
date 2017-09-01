@@ -52,16 +52,3 @@ Feature: As a user of the site
       | title         |
       | hello world   |
       | hello jupiter |
-
-  Scenario: Having karma count on users profile page
-    Given user "Bob" have karma:
-      | total | hangouts_attended_with_more_than_one_participant |
-      | 20    | 20                                               |
-    When I click on the avatar for "Bob"
-    Then I should be on the "user profile" page for "Bob"
-    And Profile page should have html element with "span.karma-summary" css selector and it should contain "20"
-  
-  Scenario: Having karma count as zero on users profile page with zero hangouts_attended_with_more_than_one_participant
-    When I click on the avatar for "Alice"
-    Then I should be on the "user profile" page for "Alice"
-    And Profile page should have html element with "span.karma-summary" css selector and it should contain "0"
