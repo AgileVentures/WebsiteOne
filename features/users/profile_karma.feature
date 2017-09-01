@@ -1,5 +1,6 @@
 @vcr
-Feature: As a user of the site
+Feature: Showing Karma summary on profile page
+  As a member of the community
   In order to see my status in the community
   I want to see karma on profile page.
 
