@@ -19,14 +19,14 @@
   <div id="page-side-panel">
     <% if user_signed_in? %>
       <ul>
-        <li><%= custom_css_btn 'edit', 'fa-2x fa fa-pencil-square-o', static_page_edit_path, id: 'edit_link',
-                               data: {save_url: static_page_mercury_update_path(@page.slug)} %>
+        <li><%= custom_css_btn 'save', 'fa-2x fa fa-save', static_page_update_path(@page.slug,body:grab_body()), id: 'edit_link',
+                               remote: true %>
       </ul>
     <% end %>
   </div>
 </div>
 
-<div id="static_page_body"><%= clean_html(@page.body) %></div>
+<div id="static_page_body" class="editable"><%= clean_html(@page.body) %></div>
 
 <% if user_signed_in? %>
   <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
