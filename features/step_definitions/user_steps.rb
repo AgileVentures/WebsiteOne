@@ -69,6 +69,14 @@ Given /^I exist as a user$/ do
   create_user
 end
 
+Given /^I exist as a deactivated user$/ do
+  @user = create_user
+  # REMOVEME
+  puts @user.email
+  puts @user.password
+  @user.update(deleted_at: Date.today)
+end
+
 Given /^I do not exist as a user$/ do
   create_visitor
   delete_user

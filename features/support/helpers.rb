@@ -66,6 +66,9 @@ module Helpers
 
   def sign_in
     visit new_user_session_path
+    # REMOVEME
+    puts @visitor[:email]
+    puts @visitor[:password]
     within ('#main') do
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]

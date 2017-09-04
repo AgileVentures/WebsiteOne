@@ -37,3 +37,10 @@ Feature: Sign in
     And I am on Events index page
     When I sign in with valid credentials
     Then I should be on the Events "Index" page
+  
+  Scenario: User is deactivated
+    Given I exist as a deactivated user
+    And I am not logged in
+    When I sign in with valid credentials
+    Then I see an invalid login message
+    And I should be signed out
