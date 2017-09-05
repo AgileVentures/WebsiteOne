@@ -46,4 +46,5 @@ Feature: Sign in
     And I am on the "Sign in" page
     And I click "Google"
     Then I see a user deactivated message
+    And I should be signed out
     
