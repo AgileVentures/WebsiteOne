@@ -3,6 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   prepend_before_action :check_captcha, only: [:create]
 
   def create
+    show_deactivated_message_and_redirect_to_root and return if deactivated_user.present?
     super
     unless @user.new_record?
       session[:omniauth] = nil
@@ -54,5 +55,14 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(_resource)
     '/getting-started'
+  end
+  
+  def deactivated_user
+    User.with_deleted.where(email: params.fetch(:user, {}).fetch(:email, '')).first
+  end
+  
+  def show_deactivated_message_and_redirect_to_root
+    flash[:alert] = 'User is deactivated.'
+    redirect_to root_path
   end
 end

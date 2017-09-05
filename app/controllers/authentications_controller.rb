@@ -12,6 +12,9 @@ class AuthenticationsController < ApplicationController
 
     elsif current_user
       create_new_authentication_for_current_user(omniauth, @path)
+      
+    elsif deactivated_user.present?
+      show_deactivated_message_and_redirect_to_root
 
     else
       create_new_user_with_authentication(omniauth)
@@ -108,5 +111,16 @@ class AuthenticationsController < ApplicationController
       session[:omniauth] = omniauth.except('extra')
       redirect_to new_user_registration_url
     end
+  end
+  
+  def deactivated_user
+    omniauth = request.env['omniauth.auth']
+    email = omniauth['info']['email']
+    User.with_deleted.where(email: email).first
+  end
+  
+  def show_deactivated_message_and_redirect_to_root
+    flash[:alert] = 'User is deactivated.'
+    redirect_to root_path
   end
 end
