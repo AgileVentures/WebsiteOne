@@ -38,9 +38,12 @@ Feature: Sign in
     When I sign in with valid credentials
     Then I should be on the Events "Index" page
   
+  @omniauth
   Scenario: User is deactivated
-    Given I exist as a deactivated user
+    Given I exist as a user signed up via google
     And I am not logged in
-    When I sign in with valid credentials
-    Then I see an invalid login message
-    And I should be signed out
+    And I have deactivated my account
+    And I am on the "Sign in" page
+    And I click "Google"
+    Then I see a user deactivated message
+    
