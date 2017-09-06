@@ -355,6 +355,22 @@ Given(/^user "(.*?)" follows projects:$/) do |user, table|
   end
 end
 
+Given(/^user "(.*?)" have karma:$/) do |user, table|
+  @user = User.find_by_first_name user
+  table.hashes.each do |karma|
+    @user.karma.update(
+      hangouts_attended_with_more_than_one_participant: karma[:hangouts_attended_with_more_than_one_participant],
+      total: karma[:total]
+    )
+  end
+end
+
+Then(/^the karma summary is "([^"]*)"$/) do |value|
+  expect(page).to have_css("span.karma-summary")
+  expect(page).to have_css("span.karma-summary .fa.fa-fire")
+  expect(page.find(:css, "span.karma-summary")).to have_content value
+end
+
 Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   @user = User.find_by_first_name first_name
   visit new_user_session_path
