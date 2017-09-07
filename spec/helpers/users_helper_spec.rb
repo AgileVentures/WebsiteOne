@@ -20,19 +20,5 @@ describe 'UsersHelper' do
       expect(helper.about_tab("activity")).to be nil
     end
   end
-  
-  describe '#deactivated_user_with_email' do
-    before do
-      @deactivated_user = FactoryGirl.create(:user, deleted_at: DateTime.new(2000, 1, 1), email: 'random@random.com')
-      @user = FactoryGirl.create(:user, email: 'example@example.com')
-    end
-    
-    it "should return deactivated user when email is deactivated_user's email" do
-      expect(helper.deactivated_user_with_email(@deactivated_user.email)).to eq @deactivated_user
-    end
-    
-    it "should return nil when email is user's email" do
-      expect(helper.deactivated_user_with_email(@user.email)).to be nil
-    end
-  end
+
 end

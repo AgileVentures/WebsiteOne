@@ -1,5 +1,5 @@
 class AuthenticationsController < ApplicationController
-  include UsersHelper
+  include DeactivatedUserFinder
   
   before_action :authenticate_user!, only: [:destroy]
 

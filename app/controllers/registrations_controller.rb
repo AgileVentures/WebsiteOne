@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  include UsersHelper
+  include DeactivatedUserFinder
 
   layout 'layouts/user_profile_layout', only: [:edit]
   prepend_before_action :check_for_deactivated_user, only: [:create]
