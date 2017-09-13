@@ -132,7 +132,7 @@ Feature: Show Events
     And I should see link "Event live! Join now" with "http://hangout.test"
     Then I should see "PP Session"
     And I should see "10:00-10:15 (UTC)"
-
+    
   @javascript
   Scenario: Show events information (unstarted)
     Given the date is "2014/02/03 07:01:00 UTC"
