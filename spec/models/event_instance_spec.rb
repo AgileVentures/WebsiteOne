@@ -102,24 +102,6 @@ describe EventInstance, type: :model do
 
   end
 
-  context 'validation: dont update after finished' do
-    it 'when hoa_status is "finished" should not be updated' do
-      hangout.hangout_url = 'test'
-      hangout.hoa_status = 'finished'
-      hangout.save
-      hangout.reload
-      expect(hangout.update(hoa_status: 'finished')).to be_falsey
-    end
-
-    it 'when hoa_status is not "finished" it is updated' do
-      hangout.hangout_url = 'test'
-      hangout.hoa_status = 'broadcasting'
-      hangout.save
-      hangout.reload
-      expect(hangout.update(hoa_status: 'finished')).to be_truthy
-    end
-  end
-
   context 'associated hangout_participant_snapshots' do
     let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil,
                                        hangout_participants_snapshots_attributes: [{participants: "blah"}]) }
