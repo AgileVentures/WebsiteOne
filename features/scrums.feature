@@ -11,7 +11,7 @@ Feature: Scrums Index
     Given I visit "/scrums"
     Then I should see 20 scrums in descending order by published date:
 
-  @javascript
+  @javascript @javascript_ignore_js_errors
   Scenario: Clicking on the video should bring up a modal YouTube player window
     Given I visit "/scrums"
     Then I should not see a modal window
@@ -26,3 +26,8 @@ Feature: Scrums Index
     When I close the modal
     And I click the second scrum in the timeline
     Then I should see a modal window with the second scrum
+
+  Scenario: Videos with nil youtube id do not display youtube embed link
+    Given there is one past scrum with invalid youtube id
+    And I visit "/scrums"
+    Then video with youtube id nil shouldn't be clickable

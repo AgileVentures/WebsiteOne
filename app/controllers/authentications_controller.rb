@@ -1,4 +1,6 @@
 class AuthenticationsController < ApplicationController
+  include DeactivatedUserFinder
+  
   before_action :authenticate_user!, only: [:destroy]
 
   def create
@@ -12,6 +14,9 @@ class AuthenticationsController < ApplicationController
 
     elsif current_user
       create_new_authentication_for_current_user(omniauth, @path)
+      
+    elsif deactivated_user_with_email(omniauth['info']['email']).present?
+      show_deactivated_message_and_redirect_to_root and return
 
     else
       create_new_user_with_authentication(omniauth)
@@ -109,4 +114,5 @@ class AuthenticationsController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
+
 end

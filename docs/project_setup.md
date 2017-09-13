@@ -31,6 +31,22 @@ When you've finished working on you changes, create a pull request (PR) on GitHu
 
 The whole process of doing a PR and getting it reviewed and merged into this project is described in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
+#### Keeping a fork up to date
+1. Clone your fork:
+```
+git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git
+```
+
+2. Add remote from original repository in your forked repository:
+```
+cd into/cloned/fork-repo
+git remote add upstream https://github.com/AgileVentures/WebsiteOne.git
+git fetch upstream
+```
+3. Updating your fork from original repo to keep up with [WebsiteOne](https://github.com/AgileVentures/WebsiteOne):
+```
+git pull upstream develop
+```
 
 ### Step 3: Install the gems with `bundle install`
 
@@ -80,12 +96,19 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 
 * Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
 
-    bundle exec rake db:setup
+    `bundle exec rake db:setup`
     
 ### Step 6: Request the .env file and confirm your locale
     
 * You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.  The `.env` file should go in the root of the WSO project.
-* When you request the `.env` file also confirm which _locale_ you are working in (which language and country).
+* Add the following to that file:
+
+```
+RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+RECAPTCHA_SECRET_KEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+```
+
+the above are test keys from https://developers.google.com/recaptcha/docs/faq
 
     
 ### Step 7: Run the tests

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = User.new(Karma.new)
     @user.status.build
   end
 
