@@ -12,6 +12,7 @@
       </div>
 
       <%= awesome_text_field f, :github_url, placeholder: 'https://github.com/projectname', label_text: 'GitHub link' %>
+      <button id="add_repo_field_button">Add repo</button>
       <%= awesome_text_field f, :pivotaltracker_url, label_text: 'Issue Tracker link', placeholder: 'https://www.pivotaltracker.com/s/projects/id' %>
 
       <% if @project.new_record? %>
