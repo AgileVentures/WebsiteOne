@@ -14,6 +14,8 @@ class Project < ActiveRecord::Base
   has_many :documents
   has_many :event_instances
   has_many :commit_counts
+  has_many :source_repositories
+  accepts_nested_attributes_for :source_repositories, reject_if: :all_blank, allow_destroy: true
 
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
