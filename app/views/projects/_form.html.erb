@@ -1,6 +1,6 @@
 <div class='row'>
   <div class='col-sm-8'>
-    <%= form_for @project, :html => { :role => 'form' } do |f| %>
+    <%= form_for @project, html: { role: 'form', id: 'project_form' } do |f| %>
 
       <%= awesome_text_field f, :title, placeholder: 'Name' %>
       <%= awesome_text_field f, :image_url, placeholder: 'Paste a link to your image here' %>
@@ -11,17 +11,12 @@
         <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
       </div>
 
-      <%= awesome_text_field f, :github_url, placeholder: 'https://github.com/projectname', label_text: 'GitHub link' %>
-      <button id="add_repo_field_button">Add repo</button>
-
-
-      <h3>Source Repositories</h3>
-      <div id="source_repositories">
+      <div id='source_repositories' class='form-group'>
         <%= f.fields_for :source_repositories do |source_repository| %>
-            <%= render 'source_repository_fields', f: source_repository %>
+          <%= render 'source_repository_fields', f: source_repository %>
         <% end %>
-        <div class="links">
-          <%= link_to_add_association 'add source_repository', f, :source_repositories %>
+        <div class='links form-group'>
+          <%= link_to_add_association 'Add more repos', f, :source_repositories, class: 'btn btn-default' %>
         </div>
       </div>
 
@@ -47,4 +42,17 @@
   </div>
 </div>
 
+<script>
+  $(document).on('ready', function(){
+    $('#source_repositories').on('cocoon:after-insert', function(e, added_repo) {
+      var sourceRepositories = $('#project_form').find('.nested-fields');
+      var sourceRepositoriesSize = $(sourceRepositories).size();
 
+      if (sourceRepositoriesSize > 1) {
+        for(var i = 1; i < sourceRepositoriesSize; i++){
+          $(sourceRepositories[i]).find('.repo_field_label').html('GitHub url ('+(i+1)+')')
+        }
+      }
+    });
+  })
+</script>

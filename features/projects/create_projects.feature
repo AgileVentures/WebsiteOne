@@ -67,18 +67,19 @@ Feature: Create projects
     When I click the very stylish "New Project" button
     When I fill in "Title" with "multiple repo project"
     And I fill in "Description" with "has lots of code"
-    And I fill in "GitHub link" with "http://www.github.com/new"
-    And I click "Add repo"
-    And I fill in "GitHub link 2" with "http://www.github.com/new2"
+    And I fill in "GitHub url (primary)" with "http://www.github.com/new"
+    And I click "Add more repos"
+    Then I should see "GitHub url (2)"
+    And I fill in "GitHub url (2)" with "http://www.github.com/new2"
     And I fill in "Issue Tracker link" with "http://www.waffle.com/new"
     And I select "Status" to "Active"
     And I click the "Submit" button
-    Then I should be on the "Show" page for project "multiple repo projec"
+    Then I should be on the "Show" page for project "multiple repo project"
     And I should see "Project was successfully created."
     And I should see:
-      | Text          |
-      | "multiple repo project       |
-      | has lots of code |
-      | ACTIVE        |
-    And I should see a link to "multiple repo projec" on github
-    And I should see a link to "multiple repo projec" on Pivotal Tracker
+      | Text                  |
+      | multiple repo project |
+      | has lots of code      |
+      | ACTIVE                |
+    And I should see a link to "multiple repo project" on github
+    And I should see a link to "multiple repo project" on Pivotal Tracker
