@@ -20,12 +20,12 @@ Feature: Create projects
     When I click the very stylish "New Project" button
     Then I should see "Creating a new Project"
     And I should see a form with:
-      | Field              |
-      | Title              |
-      | Description        |
-      | Status             |
-      | GitHub link        |
-      | Issue Tracker link |
+      | Field                |
+      | Title                |
+      | Description          |
+      | Status               |
+      | GitHub url (primary) |
+      | Issue Tracker link   |
 
   Scenario Outline: Saving a new project: success
     Given I am logged in
@@ -33,7 +33,7 @@ Feature: Create projects
     When I click the very stylish "New Project" button
     When I fill in "Title" with "<title>"
     And I fill in "Description" with "<description>"
-    And I fill in "GitHub link" with "<gh_link>"
+    And I fill in "GitHub url (primary)" with "<gh_link>"
     And I fill in "Issue Tracker link" with "<pt_link>"
     And I select "Status" to "Active"
     And I click the "Submit" button

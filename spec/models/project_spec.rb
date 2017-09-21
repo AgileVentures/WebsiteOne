@@ -29,12 +29,12 @@ describe Project, type: :model do
     end
 
     it 'should not accept invalid github url' do
-      subject.github_url = 'https:/github.com/google/instant-hangouts'
+      subject.source_repositories.create(url: 'https:/github.com/google/instant-hangouts')
       expect(subject).to_not be_valid
     end
 
     it 'should throw error for incomplete github url' do
-      subject.github_url = 'https://github.com/edx'
+      subject.source_repositories.create(url: 'https://github.com/edx')
       expect{ subject.github_repo_name }.to raise_error(NoMethodError, "undefined method `[]' for nil:NilClass")
     end
 
@@ -127,7 +127,8 @@ describe Project, type: :model do
     end
 
     it 'returns the proper repo name if github url exists' do
-      project = build_stubbed(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne')
+      project = build_stubbed(:project)
+      project.source_repositories.create(url: 'https://github.com/AgileVentures/WebsiteOne')
       expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
     end
   end
@@ -140,9 +141,10 @@ describe Project, type: :model do
   end
 
   describe "#github_repo_user_name" do
-    subject { build_stubbed(:project, github_url: 'https://github.com/AgileVentures/shf-project') }
     it 'deals with hyphen gracefully' do
-      expect(subject.github_repo_user_name).to eq 'shf-project'
+      project = build_stubbed(:project)
+      project.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project')
+      expect(project.github_repo_user_name).to eq 'shf-project'
     end
   end
 

@@ -20,7 +20,7 @@ class Project < ActiveRecord::Base
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-  scope :with_github_url, -> { where.not(projects: { github_url: nil }) }
+  scope :with_github_url, ->{ includes(:source_repositories).where.not(source_repositories: { id: nil }) }
 
   def self.search(search, page)
     order('LOWER(title)')
@@ -30,6 +30,10 @@ class Project < ActiveRecord::Base
 
   def gpa
     CodeClimateBadges.new("github/#{github_repo}").gpa
+  end
+
+  def github_url
+    source_repositories.first.try(:url)
   end
 
   def youtube_tags

@@ -4,13 +4,17 @@ Then(/^I should see "([^"]*)" table$/) do |legend|
 end
 
 Given(/^the following projects exist:$/) do |table|
-  #TODO YA rewrite with factoryGirl
   table.hashes.each do |hash|
     if hash[:author].present?
       u = User.find_by_first_name hash[:author]
       project = Project.new(hash.except('author', 'tags').merge(user_id: u.id))
     else
       project = default_test_author.projects.new(hash.except('author', 'tags'))
+    end
+    if hash[:github_url].present?
+      project.source_repositories.build(url: hash[:github_url])
+    else
+      project.source_repositories.build
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
