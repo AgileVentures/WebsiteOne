@@ -73,3 +73,25 @@ Feature: As a developer
     Then I should see the "google" icon
     Then I should see "Your Gplus account needs to have a public email address for sign up"
     And I should not see "Password can't be blank"
+    
+  @omniauth
+  Scenario: User is deactivated and tries to sign up again with google
+    Given I exist as a user signed up via google
+    And I am not logged in
+    And I have deactivated my account
+    And I am on the "registration" page
+    And I click "Google"
+    Then I see a user deactivated message
+    And I should be signed out
+  
+  @omniauth
+  Scenario: User is deactivated and tries to sign up again with email
+    Given I exist as a user signed up via google
+    And I am not logged in
+    And I have deactivated my account
+    And I am on the "registration" page
+    And I submit "mock@email.com" as username
+    And I submit "password" as password
+    And I click "Sign up" button
+    Then I see a user deactivated message
+    And I should be signed out

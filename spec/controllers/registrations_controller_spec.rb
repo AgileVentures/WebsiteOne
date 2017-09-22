@@ -42,6 +42,21 @@ describe RegistrationsController do
         expect(session[:omniauth]).to eq nil
       end
     end
+    
+    context 'deactivated user' do
+      before(:each) do
+        @user = double('user', id: 1, friendly_id: 'some-id')
+        request.env['devise.mapping'] = Devise.mappings[:user]
+        expect(controller).to receive(:deactivated_user_with_email).with('random@random.com').and_return(@user)
+      end
+      
+      it "should show user deactivated message and redirect_to root_path" do
+        post :create, user: {email: 'random@random.com', password: 'randomrandom', password_confirmation: 'randomrandom'}
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to eq("User is deactivated.")
+      end
+      
+    end
   end
 
   describe '#update' do
