@@ -8,19 +8,21 @@ WebsiteOne.define('GoogleAnalytics', function() {
   function init() {
     window._gaq.push(['_trackPageview']);
   }
-  function() {
-    try {
-      var trackers = ga.getAll();
-      var i, len;
-      for (i = 0, len = trackers.length; i < len; i += 1) {
-        if (trackers[i].get('trackingId') === 'UA-47795185-1') {
-          return trackers[i].get('clientId');
-        }
-      }
-    } catch(e) {}
-    return 'false';
+
+  var GA_LOCAL_STORAGE_KEY = 'ga:clientId';
+
+  if (window.localStorage) {
+    ga('create', 'UA-47795185-1', {
+      'storage': 'none',
+      'clientId': localStorage.getItem(GA_LOCAL_STORAGE_KEY)
+    });
+    ga(function(tracker) {
+      localStorage.setItem(GA_LOCAL_STORAGE_KEY, tracker.get('clientId'));
+    });
   }
-  return {
-    init: init
-  };
+  else {
+    ga('create', 'UA-47795185-1', 'auto');
+  }
+
+  ga('send', 'pageview');
 });
