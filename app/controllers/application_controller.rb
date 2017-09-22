@@ -70,5 +70,10 @@ class ApplicationController < ActionController::Base
   def user_activity
     current_user.try :touch
   end
+  
+  def show_deactivated_message_and_redirect_to_root
+    flash[:alert] = 'User is deactivated.'
+    redirect_to root_path
+  end
 
 end

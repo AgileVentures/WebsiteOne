@@ -69,6 +69,16 @@ Given /^I exist as a user$/ do
   create_user
 end
 
+Given /^I exist as a user signed up via google/ do
+  step 'I am on the "registration" page'
+  step 'I click "Google"'
+  @user = User.where(email: 'mock@email.com').first
+end
+
+When(/^I have deactivated my account$/) do
+  @user.destroy
+end
+
 Given /^I do not exist as a user$/ do
   create_visitor
   delete_user
@@ -195,6 +205,10 @@ end
 
 Then /^I see an invalid login message$/ do
   expect(page).to have_content "Invalid email or password."
+end
+
+Then(/^I see a user deactivated message$/) do
+  expect(page).to have_content "User is deactivated."
 end
 
 Then /^I should (not |)see my name$/ do |should|

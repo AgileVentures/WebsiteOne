@@ -100,6 +100,19 @@ describe AuthenticationsController do
         expect(response).to redirect_to new_user_registration_path
       end
     end
+    
+    context 'for deactivated users' do
+      before(:each) do
+        expect(Authentication).to receive(:find_by_provider_and_uid).and_return nil
+        expect(controller).to receive(:deactivated_user_with_email).with('foo@agileventures.org').and_return(@user)
+      end
+      
+      it 'should redirect to root path with deactivated user alert message' do
+        get :create, provider: @provider
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to eq('User is deactivated.')
+      end
+    end
   end
 
   context 'for signed in users' do
