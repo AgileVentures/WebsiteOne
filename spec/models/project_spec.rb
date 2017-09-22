@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Project, type: :model do
+
+  it { is_expected.to have_many :source_repositories}
+  it { is_expected.to have_many :documents}
+  it { is_expected.to have_many :event_instances}
+  it { is_expected.to have_many :commit_counts}
+
+  it { is_expected.to belong_to :user}
+
   context '#save' do
     subject { build_stubbed(:project) }
     it { is_expected.to respond_to :create_activity }
@@ -162,6 +170,21 @@ describe Project, type: :model do
     it 'returns correct link' do
       project = FactoryGirl.build(:project, title: 'Simple Project-~!@#$')
       expect(project.jitsi_room_link).to eq('https://meet.jit.si/AV_Simple_Project')
+    end
+  end
+
+  context '.with_github_url' do
+    it 'returns all projects that have at least one source repository' do
+      project = FactoryGirl.create(:project)
+      project.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project')
+      project2 = FactoryGirl.create(:project)
+      project2.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project2')
+      expect(Project.with_github_url).to include(project, project2)
+    end
+
+    it 'does not return projects that do not have a source repository' do
+      project = FactoryGirl.build(:project)
+      expect(Project.with_github_url).not_to include(project)
     end
   end
 end
