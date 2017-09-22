@@ -85,4 +85,17 @@ describe ApplicationHelper do
       expect(btn_html).to have_css '[method=delete]'
     end
   end
+  
+  describe "#resource_name" do
+    it "should return :user" do
+      expect(helper.resource_name).to eq(:user)
+    end
+  end
+  
+  describe "#resource" do
+    it "should return new user with karma" do
+      expect(helper.resource).to be_instance_of(User)
+      expect(helper.resource.karma).not_to be_nil
+    end
+  end
 end
