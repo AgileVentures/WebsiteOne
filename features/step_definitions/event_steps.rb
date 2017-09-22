@@ -111,6 +111,10 @@ And(/^I select "([^"]*)" from the event project dropdown$/) do |project_name|
   page.select project_name, from: "event_project_id"
 end
 
+When(/^I select "([^"]*)" from the event category dropdown$/) do |category|
+  page.select category, from: "event_category"
+end
+
 And(/^I select "([^"]*)" from the project dropdown$/) do |project_name|
   page.select project_name, from: "project_id"
 end
