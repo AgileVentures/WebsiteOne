@@ -35,7 +35,7 @@ Feature: As a site user
     When I go to my "profile" page
     And I should see video "PP on hello world - feature: 2" in "player"
 
-  @javascript @javascript_ignore_js_errors
+  @javascript
   Scenario: Selecting videos from the list
     Given I have some videos on project "hello world"
     And my YouTube channel is connected
