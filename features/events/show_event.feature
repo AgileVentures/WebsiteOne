@@ -14,6 +14,7 @@ Feature: Show Events
       | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
       | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | UTC       |         |                                           |                       |
       | Standup    | Daily standup meeting   | Scrum           | 2014/02/03 07:00:00 UTC | 150      | weekly  | UTC       |         | 15                                        | 1                     |
+      | ClientMtg  | Daily client meeting    | ClientMeeting   | 2014/02/03 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
 
 
   @javascript
@@ -131,6 +132,13 @@ Feature: Show Events
     And I should see link "Event live! Join now" with "http://hangout.test"
     Then I should see "PP Session"
     And I should see "10:00-10:15 (UTC)"
+    
+  @javascript
+  Scenario: Show events information (unstarted)
+    Given the date is "2014/02/03 07:01:00 UTC"
+    And I am on Events index page
+    Then I should see "ClientMtg"
+    And I should see "11:00-13:30 (UTC)"
 
   @javascript
   Scenario: Body of event is clickable

@@ -148,6 +148,11 @@ describe 'users/show.html.erb' do
     expect(rendered).to have_content(@user.first_name)
     expect(rendered).to have_content(@user.last_name)
   end
+  
+  it 'renders user karma count' do
+    render
+    expect(rendered).to have_content(@user.karma_total)
+  end
 
   it 'renders user status' do
     render
