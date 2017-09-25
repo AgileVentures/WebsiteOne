@@ -4,5 +4,5 @@
 # end
 
 Slack.configure do |config|
-  config.token = ENV['PRODUCTION_SLACK_AUTH_TOKEN']
+  config.token = ENV['SLACK_AUTH_TOKEN']
 end

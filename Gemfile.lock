@@ -473,6 +473,9 @@ GEM
       rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    ruby-gitter (0.1.0)
+      hashie
+      httparty
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     safe_yaml (1.0.4)
@@ -677,6 +680,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-html-matchers
   rspec-rails
+  ruby-gitter
   sass-rails
   selenium-webdriver
   shoulda-matchers
