@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def resource
-    @resource ||= User.new(Karma.new)
+    @resource ||= User.new({karma: Karma.new})
   end
 
   def devise_mapping
@@ -40,10 +40,6 @@ module ApplicationHelper
 
   def current_projects
     Project.where(status: ["active", "Active"]).order('title ASC').order('commit_count DESC NULLS LAST')
-  end
-
-  def roots
-    @roots = Document.roots.where('project_id = ?', @project.id).order(:created_at)
   end
 
   def date_format(date)
