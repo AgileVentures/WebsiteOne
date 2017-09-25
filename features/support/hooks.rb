@@ -123,6 +123,7 @@ Before('@rake') do |scenario|
     Rake.application.rake_require 'tasks/scheduler'
     Rake.application.rake_require 'tasks/migrate_plans'
     Rake.application.rake_require 'tasks/create_plans'
+    Rake.application.rake_require 'tasks/db'
     Rake::Task.define_task(:environment)
     $rake = Rake::Task
   end

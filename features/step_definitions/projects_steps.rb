@@ -23,6 +23,14 @@ Given(/^the following projects exist:$/) do |table|
   end
 end
 
+Given(/^the following legacy projects exist:$/) do |table|
+  # table is a table.hashes.keys # => [:title, :description, :github_url, :status, :commit_count]
+  table.hashes.each do |hash|
+    project = default_test_author.projects.new(hash.except('author', 'tags'))
+    project.save!
+  end
+end
+
 Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |parent, child|
   parent_doc = Document.find_by_title(parent)
   parent_doc.children.create!(
@@ -115,14 +123,23 @@ Then(/^I should see (\d+) member avatars$/) do |count|
 
 end
 
-Then(/^I should see projects with following details:$/) do |table|
+Then(/^I should see projects looked up by title with the correct commit count:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
-   projects = table.hashes
-   projects.each do | project | 
-      updated_project = Project.find_by_title(project["title"])
-      expect(updated_project.commit_count).to eq(project["commit_count"].to_i)
-   end
+  projects = table.hashes
+  projects.each do | project |
+    updated_project = Project.find_by_title(project["title"])
+    expect(updated_project.commit_count).to eq(project["commit_count"].to_i)
+  end
+end
 
+Then(/^I should see projects looked up by title with first source repository same as github_url:$/) do |table|
+  # table is a Cucumber::Core::Ast::DataTable
+  projects = table.hashes
+  projects.each do | project |
+    updated_project = Project.find_by_title(project["title"])
+    expect(updated_project.github_url).to eq(project["github_url"])
+    expect(updated_project.source_repositories.first.url).to eq(project["github_url"])
+  end
 end
 
 Then(/^I should see projects with following updates:$/) do |table|
@@ -132,7 +149,6 @@ Then(/^I should see projects with following updates:$/) do |table|
     updated_project = Project.find_by_title(project["title"])
     expect(updated_project.last_github_update).to eq(project["last_github_update"])
   end
-
 end
 
 Then(/^I should see a GPA of "([^"]*)" for "([^"]*)"$/) do |gpa, project_name|
@@ -144,3 +160,4 @@ end
 When(/^I go to the next page$/) do
   click_link "Next →", match: :first
 end
+
