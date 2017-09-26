@@ -1,6 +1,6 @@
 <div class='row'>
   <div class='col-sm-8'>
-    <%= form_for @project, :html => { :role => 'form' } do |f| %>
+    <%= form_for @project, html: { role: 'form', id: 'project_form' } do |f| %>
 
       <%= awesome_text_field f, :title, placeholder: 'Name' %>
       <%= awesome_text_field f, :image_url, placeholder: 'Paste a link to your image here' %>
@@ -11,7 +11,15 @@
         <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
       </div>
 
-      <%= awesome_text_field f, :github_url, placeholder: 'https://github.com/projectname', label_text: 'GitHub link' %>
+      <div id='source_repositories' class='form-group'>
+        <%= f.fields_for :source_repositories do |source_repository| %>
+          <%= render 'source_repository_fields', f: source_repository %>
+        <% end %>
+        <div class='links form-group'>
+          <%= link_to_add_association 'Add more repos', f, :source_repositories, class: 'btn btn-default' %>
+        </div>
+      </div>
+
       <%= awesome_text_field f, :pivotaltracker_url, label_text: 'Issue Tracker link', placeholder: 'https://www.pivotaltracker.com/s/projects/id' %>
 
       <% if @project.new_record? %>
@@ -33,5 +41,3 @@
     <% end %>
   </div>
 </div>
-
-

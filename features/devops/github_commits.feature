@@ -14,10 +14,10 @@ Feature: Update github stats of all projects
 
    Scenario: Update github commit count of all projects with valid github_url
       When I run the rake task for fetching github commits
-      Then I should see projects with following details:
-      | title        | status   | commit_count |
-      | WebsiteTwo   | active   | 94           |
-      | WebsiteOne   | inactive | 3572         |
-      | edx          | active   | 1            |
-      | Unity        | active   | 1            |
-      | LocalSupport | active   | 3262         |
+      Then I should see projects looked up by title with the correct commit count:
+      | title        | commit_count |
+      | WebsiteTwo   | 94           |
+      | WebsiteOne   | 3572         |
+      | edx          | 1            |
+      | Unity        | 1            |
+      | LocalSupport | 3262         |
