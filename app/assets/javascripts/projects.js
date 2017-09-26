@@ -19,3 +19,16 @@ WebsiteOne.define('Projects', function() {
     }
   }
 });
+
+$(document).on('ready', function(){
+    $('#source_repositories').on('cocoon:after-insert', function(e, added_repo) {
+        var sourceRepositories = $('#project_form').find('.nested-fields');
+        var sourceRepositoriesSize = $(sourceRepositories).size();
+
+        if (sourceRepositoriesSize > 1) {
+            for(var i = 1; i < sourceRepositoriesSize; i++){
+                $(sourceRepositories[i]).find('.repo_field_label').html('GitHub url ('+(i+1)+')')
+            }
+        }
+    });
+})

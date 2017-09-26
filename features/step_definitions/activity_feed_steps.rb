@@ -27,11 +27,11 @@ And(/^I create a project named "([^"]*)"$/) do |project|
     And I am on the "Projects" page
     And I click the very stylish "New Project" button
     When I fill in:
-      | Field               | Text                                            |
-      | Title               | #{project}                                      |
-      | Description         | Description New                                 |
-      | GitHub link         | http://www.github.com/abc                       |
-      | Issue Tracker link | http://www.pivotaltracker.com/s/projects/982890 |
+      | Field                | Text                                            |
+      | Title                | #{project}                                      |
+      | Description          | Description New                                 |
+      | GitHub url (primary) | http://www.github.com/abc                       |
+      | Issue Tracker link   | http://www.pivotaltracker.com/s/projects/982890 |
     And I select "Status" to "Active"
     And I click the "Submit" button
 }
