@@ -83,3 +83,4 @@ Feature: Create projects
       | ACTIVE                |
     And I should see a link to "multiple repo project" on github
     And I should see a link to "multiple repo project" on Pivotal Tracker
+
