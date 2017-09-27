@@ -30,7 +30,7 @@ Feature: Edit Project
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
-    And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
+    And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
@@ -75,7 +75,7 @@ Feature: Edit Project
   Scenario: Update GitHub url if valid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
-    And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
+    And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on github
@@ -91,6 +91,6 @@ Feature: Edit Project
   Scenario: Reject GitHub url update if invalid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
-    And I fill in "GitHub link" with "https:/github.com/google/instant-hangouts"
+    And I fill in "GitHub url (primary)" with "https:/github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should see "Project was not updated."

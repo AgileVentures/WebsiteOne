@@ -69,6 +69,16 @@ Given /^I exist as a user$/ do
   create_user
 end
 
+Given /^I exist as a user signed up via google/ do
+  step 'I am on the "registration" page'
+  step 'I click "Google"'
+  @user = User.where(email: 'mock@email.com').first
+end
+
+When(/^I have deactivated my account$/) do
+  @user.destroy
+end
+
 Given /^I do not exist as a user$/ do
   create_visitor
   delete_user
@@ -195,6 +205,10 @@ end
 
 Then /^I see an invalid login message$/ do
   expect(page).to have_content "Invalid email or password."
+end
+
+Then(/^I see a user deactivated message$/) do
+  expect(page).to have_content "User is deactivated."
 end
 
 Then /^I should (not |)see my name$/ do |should|
@@ -339,6 +353,22 @@ Given(/^user "(.*?)" follows projects:$/) do |user, table|
   table.hashes.each do |project|
     step %Q{I should become a member of project "#{project[:title]}"}
   end
+end
+
+Given(/^user "(.*?)" have karma:$/) do |user, table|
+  @user = User.find_by_first_name user
+  table.hashes.each do |karma|
+    @user.karma.update(
+      hangouts_attended_with_more_than_one_participant: karma[:hangouts_attended_with_more_than_one_participant],
+      total: karma[:total]
+    )
+  end
+end
+
+Then(/^the karma summary is "([^"]*)"$/) do |value|
+  expect(page).to have_css("span.karma-summary")
+  expect(page).to have_css("span.karma-summary .fa.fa-fire")
+  expect(page.find(:css, "span.karma-summary")).to have_content value
 end
 
 Given(/^I am logged in as "([^"]*)"$/) do |first_name|

@@ -63,3 +63,7 @@ end
 Then(/^I should receive the correct challenge response$/) do
   expect(@response.body).to eq '123456789.qwertyui'
 end
+
+When(/^I run the rake task for migrating github urls$/) do
+  $rake['db:migrate_from_github_url_to_source_repository'].execute
+end

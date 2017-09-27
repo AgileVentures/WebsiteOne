@@ -7,7 +7,8 @@ describe GithubCommitsJob do
     let(:project) { @project.reload }
     let(:project_without_url) { @project_without_url.reload }
     before do
-      @project = FactoryGirl.create(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne')
+      @project = FactoryGirl.create(:project)
+      @project.source_repositories.create(url: 'https://github.com/AgileVentures/WebsiteOne')
       @project_without_url = FactoryGirl.create(:project)
       @users_with_github_profile_urls = [
         FactoryGirl.create(:user, github_profile_url: 'https://github.com/tochman'),
