@@ -19,6 +19,13 @@ Feature: Edit Project
 
     And there are no videos
 
+  @javascript
+  Scenario: Existing project with multiple repos shows them correctly in edit form
+    Given I am logged in
+    And that project "hello world" has an extra repository "https://github.com/AgileVentures/WebsiteOne"
+    When I am on the "Edit" page for projects "hello world"
+    Then I should see "GitHub url (primary)"
+    And I should see "GitHub url (2)"
 
   Scenario: Edit page has a return link
     Given I am logged in
