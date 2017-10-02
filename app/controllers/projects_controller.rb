@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @project.source_repositories.build
   end
 
   def create
@@ -117,6 +118,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :pitch, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id, :image_url)
+    params.require(:project).permit(:title, :description, :pitch, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id, :image_url, source_repositories_attributes: [:id, :url, :_destroy])
   end
 end

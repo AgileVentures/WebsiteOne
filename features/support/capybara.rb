@@ -25,10 +25,10 @@ plain_options = {
 debug_options = {
     phantomjs_options: [
         '--ignore-ssl-errors=yes',
-        "--proxy=#{Billy.proxy.host}:#{Billy.proxy.port}"
     ],
     phantomjs: Phantomjs.path,
     inspector: true,
+    debug: true,
     js_errors: true,
 }
 

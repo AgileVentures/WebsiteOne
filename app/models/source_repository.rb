@@ -1,0 +1,3 @@
+class SourceRepository < ActiveRecord::Base
+  belongs_to :project
+end
