@@ -43,6 +43,11 @@ Feature: Editing an event with a start date in the future
     And I visit the edit page for the event named "Daily Standup"
     Then the "Repeat ends" selector should be set to "never"
 
+  Scenario: Edit an existing event but cancel, and go back to show page for that event
+    And I visit the edit page for the event named "Daily Standup"
+    And I click the "Cancel" button
+    Then I should be on the event "Show" page for "Daily Standup"
+
   Scenario: User in non-UTC timezone edits and overrides the timezone of an existing event, and has expected side-effects for user in UTC timezone
     Given an existing event
     And the user is in "US/Hawaii"
