@@ -61,7 +61,11 @@
       </div>
 
       <div class="form-group">
-        <%= link_to 'Cancel', events_path, class: 'btn btn-default' %>
+        <% if @event.new_record? %>
+          <%= link_to 'Cancel', events_path, class: 'btn btn-default' %>
+        <% else %>
+          <%= link_to 'Cancel', event_path(@event), class: 'btn btn-default' %>
+        <% end %>        
         <%= f.submit 'Save', class: 'btn btn-default', data: {disable_with: 'Working...'} %>
       </div>
   <% end %>
