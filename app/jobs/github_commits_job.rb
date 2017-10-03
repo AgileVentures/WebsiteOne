@@ -2,6 +2,7 @@ require 'octokit'
 
 module GithubCommitsJob
   extend self
+  MAX_RETRY_COUNT = 3
 
   def initialize
     @client ||= Octokit::Client.new(:client_id => Settings.github.client_id, :client_secret => Settings.github.client_secret)
@@ -55,11 +56,14 @@ module GithubCommitsJob
     end
 
   def get_contributor_stats(repo)
+    retry_count = 1
     loop do
+      return [] if retry_number >= MAX_RETRY_COUNT
       contributors = client.contributor_stats(repo)
       return contributors unless contributors.nil?
       Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
       sleep 3
+      retry_count += 1
     end
   end
 
