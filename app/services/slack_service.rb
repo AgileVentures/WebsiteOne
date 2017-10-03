@@ -4,11 +4,9 @@ require 'gitter'
 module SlackService
   extend self
 
-  def post_hangout_notification(hangout)
+  def post_hangout_notification(hangout, client = Slack::Web::Client.new)
     # return unless Features.slack.notifications.enabled
     return if hangout.hangout_url.blank?
-
-    client = Slack::Web::Client.new
 
     channel = channel_for_project(hangout.project)
 
@@ -19,13 +17,12 @@ module SlackService
     elsif hangout.category == "PairProgramming"
 
       if channel == CHANNELS[:cs169]
-        puts('sending PP event to gitter: ' + channel)
-        send_gitter_message_avoid_repeats "[#{hangout.title} with #{user.name}](#{hangout.hangout_url}) is starting NOW!"
+        # puts("sending PP event to gitter: #{channel}")
+        send_gitter_message_avoid_repeats "[#{hangout.title} with #{hangout.user.display_name}](#{hangout.hangout_url}) is starting NOW!"
       else
-        send_slack_message client, CHANNELS[:general], "#{hangout.title}: #{hangout.link}", hangout.user
-
+        send_slack_message client, CHANNELS[:general], "#{hangout.title}: #{hangout.hangout_url}", hangout.user
         send_slack_message client, CHANNELS[:pairing_notifications], "@channel #{hangout.title}: #{hangout.hangout_url}", hangout.user
-        puts('sending PP event to slack: ' + channel)
+        # puts("sending PP event to slack: #{channel}")
       end
     end
     # send all types of events to associated project "channel" if there is one
@@ -39,7 +36,6 @@ module SlackService
   end
 
   def send_gitter_message_avoid_repeats(text)
-    # TODO need a gitter client
     client = Gitter::Client.new(ENV['GITTER_API_TOKEN'])
 
     messages = client.messages(GITTER_ROOMS['saasbook/MOOC'], limit: 50)
@@ -49,18 +45,21 @@ module SlackService
   end
 
   def channel_for_project(project)
+    return nil if project.nil? or project.slug.nil?
     CHANNELS[project.try(:slug).to_sym]
   end
 
-  def post_yt_link(hangout)
+  def post_yt_link(hangout, client = Slack::Web::Client.new)
     return unless Features.slack.notifications.enabled
     return if hangout.yt_video_id.blank?
+
+    channel = channel_for_project(hangout.project)
 
     video = "https://youtu.be/#{hangout.yt_video_id}"
 
     if hangout.category == "Scrum"
       send_slack_message client, CHANNELS[:general], "Video/Livestream for #{hangout.title}: #{video}", hangout.user
-    elsif hangout.type == "PairProgramming"
+    elsif hangout.category == "PairProgramming"
       channel = channel_for_project(hangout.project)
       unless channel == CHANNELS[:cs169]
         send_slack_message client, CHANNELS[:general], "Video/Livestream for #{hangout.title}: #{video}", hangout.user
@@ -70,6 +69,9 @@ module SlackService
 
   end
 
+
+  # @TODO move these all into settings - need to swtich based on instance,
+  # e.g. staging.agileventures.org, www.agileventures.org ...
 
   CHANNELS =    {
       "cs169": "C29J4CYA2",

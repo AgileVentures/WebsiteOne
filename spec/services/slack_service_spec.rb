@@ -1,67 +1,109 @@
 require 'spec_helper'
 
 describe SlackService do
-  subject { SlackService }
+  subject(:slack_service) { SlackService }
 
   let(:user) { User.new email: 'random@random.com' }
-  let(:gravatar) { CGI.escape 'https://www.gravatar.com/avatar/47548e7f026bc689ba743b2af2d391ee?d=retro' }
 
   before { Features.slack.notifications.enabled = true }
 
   describe '.post_hangout_notification' do
-    before { stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify') }
-
     let(:hangout) { EventInstance.create(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user) }
+    let(:client) { double(:slack_client) }
 
-    it 'sends a post request to the agile-bot with the proper data' do
-      hangout.project = Project.create( slug: 'edx', title: 'Edx', description: 'hmm', status: 'active')
+    # @TODO Improve the message format to hide the URL details ... and welcome newcomers ...
+    # @TODO we should pass in CHANNELS and GITTER ROOMS work out a way to handle that based on deployed instance, e.g staging, production etc.
 
-      subject.post_hangout_notification(hangout)
-
-      assert_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify', times: 1) do |req|
-        expect(req.body).to eq "title=MockEvent&link=mock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}&project=edx"
-      end
+    let(:general_channel_post_args) do
+      {
+          channel: 'C0TLAE1MH',
+          text: 'MockEvent: mock_url',
+          username: user.display_name,
+          icon_url: user.gravatar_url,
+          link_names: 1
+      }
+    end
+    let(:project_channel_post_args) do
+      {
+          channel: 'C29J4QQ9W',
+          text: '@here MockEvent: mock_url',
+          username: user.display_name,
+          icon_url: user.gravatar_url,
+          link_names: 1
+      }
+    end
+    let(:pairing_notifications_channel_post_args) do
+      {
+          channel: 'C29J3DPGW',
+          text: '@channel MockEvent: mock_url',
+          username: user.display_name,
+          icon_url: user.gravatar_url,
+          link_names: 1
+      }
     end
 
-    it 'does not fail when event has no associated project' do
-      subject.post_hangout_notification(hangout)
+    it 'sends the correct slack message to the correct channels for pairing' do
+      hangout.project = Project.create(title: 'websiteone', description: 'hmm', status: 'active')
 
-      assert_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify', times: 1) do |req|
-        expect(req.body).to eq "title=MockEvent&link=mock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}&project"
-      end
+      expect(client).to receive(:chat_postMessage).with(general_channel_post_args)
+      expect(client).to receive(:chat_postMessage).with(project_channel_post_args)
+      expect(client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
+
+      slack_service.post_hangout_notification(hangout, client)
     end
 
-    it 'does not post notification if hangout url is blank' do
+    it 'does not fail when event has no associated project for pairing' do
+
+      expect(client).to receive(:chat_postMessage).with(general_channel_post_args)
+      expect(client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
+
+      slack_service.post_hangout_notification(hangout, client)
+    end
+
+    xit 'should ping gitter when the project is cs169'
+    xit 'sends the correct slack message to the correct channels for scrums'
+    xit 'does not fail when event has no associated project for scrums'
+    xit 'does not post notification if hangout url is blank for scrums'
+
+    it 'does not post notification if hangout url is blank for pairing' do
       hangout.hangout_url = "     "
 
-      subject.post_hangout_notification(hangout)
+      expect(client).not_to receive(:chat_postMessage)
 
-      assert_not_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify')
+      slack_service.post_hangout_notification(hangout)
     end
   end
 
   describe '.post_yt_link' do
-    before { stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify') }
-
     let(:hangout) { EventInstance.create(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user) }
-
-    it 'sends a post request to the agile-bot with the proper data' do
-      hangout.yt_video_id = 'mock_url'
-      hangout.project = Project.create( slug: 'localsupport', title: 'Local Support', description: 'hmmm', status: 'active')
-
-      subject.post_yt_link(hangout)
-
-      assert_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify', times: 1) do |req|
-        expect(req.body).to eq "title=MockEvent&video=https%3A%2F%2Fyoutu.be%2Fmock_url&type=PairProgramming&host_name=random&host_avatar=#{gravatar}&project=local-support"
-      end
+    let(:client) { spy(:slack_client) }
+    let(:expected_post_args) do
+      {
+        text: 'Video/Livestream for MockEvent: https://youtu.be/mock_url',
+        username: user.display_name,
+        icon_url: user.gravatar_url,
+        link_names: 1
+      }
     end
 
-    it 'does not post youtube video link if yt_video_id is blank' do
+    it 'sends the correct slack message to the correct channels for pairing' do
+      hangout.yt_video_id = 'mock_url'
+      hangout.project = Project.create(slug: 'websiteone', title: 'WebSiteOne', description: 'hmmm', status: 'active')
+
+      slack_service.post_yt_link(hangout, client)
+
+      expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: 'C0TLAE1MH'))
+      expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: 'C29J4QQ9W'))
+    end
+
+    xit 'sends the correct slack message to the correct channels for scrums'
+    xit 'does not post youtube video link if yt_video_id is blank for scrums'
+
+    it 'does not post youtube video link if yt_video_id is blank for pairing' do
       hangout.yt_video_id = '    '
+      slack_service.post_yt_link(hangout, client)
 
-      subject.post_yt_link(hangout)
-
-      assert_not_requested(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify')
+      expect(client).not_to have_received(:chat_postMessage)
     end
   end
 end
