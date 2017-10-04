@@ -219,7 +219,7 @@ GEM
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     formatador (0.2.5)
-    friendly_id (5.2.1)
+    friendly_id (5.2.3)
       activerecord (>= 4.0.0)
     geocoder (1.4.3)
     gherkin (4.1.3)
