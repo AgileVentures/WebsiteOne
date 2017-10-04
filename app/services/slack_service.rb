@@ -4,8 +4,8 @@ require 'gitter'
 module SlackService
   extend self
 
-  def post_hangout_notification(hangout, client = Slack::Web::Client.new)
-    # return unless Features.slack.notifications.enabled
+  def post_hangout_notification(hangout, client = Slack::Web::Client.new(logger: Rails.logger))
+    return unless Features.slack.notifications.enabled
     return if hangout.hangout_url.blank?
 
     channel = channel_for_project(hangout.project)
@@ -49,7 +49,7 @@ module SlackService
     CHANNELS[project.try(:slug).to_sym]
   end
 
-  def post_yt_link(hangout, client = Slack::Web::Client.new)
+  def post_yt_link(hangout, client = Slack::Web::Client.new(logger: Rails.logger))
     return unless Features.slack.notifications.enabled
     return if hangout.yt_video_id.blank?
 
