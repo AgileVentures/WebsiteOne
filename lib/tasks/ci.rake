@@ -11,6 +11,6 @@ unless Rails.env.production?
 
   namespace :ci do
     desc 'Run Rspec and Cucumber then push coverage report to coveralls'
-    task tests: [:spec, :ci_cucumber, 'coveralls:push']
+    task tests: [:spec, 'cucumber:first_try', 'cucumber:second_try', 'coveralls:push']
   end
 end
