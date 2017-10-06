@@ -1,51 +1,6 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: http://gdata.youtube.com/feeds/api/videos/11
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Host:
-      - gdata.youtube.com
-  response:
-    status:
-      code: 410
-      message: Gone
-    headers:
-      X-Gdata-User-Country:
-      - US
-      Content-Type:
-      - text/html; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Thu, 23 Jun 2016 14:00:26 GMT
-      Expires:
-      - Thu, 23 Jun 2016 14:00:26 GMT
-      Cache-Control:
-      - private, max-age=0
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      Server:
-      - GSE
-    body:
-      encoding: UTF-8
-      string: No longer available
-    http_version: 
-  recorded_at: Thu, 23 Jun 2016 14:00:26 GMT
-- request:
     method: post
     uri: https://slack.com/api/chat.postMessage
     body:
@@ -76,7 +31,7 @@ http_interactions:
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Date:
-      - Wed, 04 Oct 2017 08:42:48 GMT
+      - Wed, 04 Oct 2017 08:48:11 GMT
       Expires:
       - Mon, 26 Jul 1997 05:00:00 GMT
       Pragma:
@@ -98,21 +53,21 @@ http_interactions:
       X-Slack-Backend:
       - h
       X-Slack-Req-Id:
-      - 34dd858f-8650-4063-b059-ecc7b9a05856
+      - 671b7567-e603-4a0d-8d8e-b5e0d6caa5ca
       X-Xss-Protection:
       - '0'
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 16291083b92e5aa4f2f272f1da69c5e4.cloudfront.net (CloudFront)
+      - 1.1 6bcf655959f9c4651f5af6c76be7ec7b.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - nmfJ292IXW0kwdbJcXMY2YMBuVYIvfL2hdNt5-I_kXd6AsOOBBILRw==
+      - TDULW-hDir9grPC3u1QIrqzn_QfBnecjUQAYietS7hPauyL-02scvw==
     body:
       encoding: ASCII-8BIT
-      string: '{"ok":true,"channel":"C0TLAE1MH","ts":"1507106568.000330","message":{"text":"<!here>
-        Scrum: <http:\/\/hangout.test>","username":"Anonymous","icons":{"image_48":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/bot_icons\/2017-10-03\/250486441554_48.png"},"bot_id":"B360ZMNES","type":"message","subtype":"bot_message","ts":"1507106568.000330"}}'
+      string: '{"ok":true,"channel":"C0TLAE1MH","ts":"1507106891.000163","message":{"text":"<!here>
+        Scrum: <http:\/\/hangout.test>","username":"Anonymous","icons":{"image_48":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/bot_icons\/2017-10-03\/250486441554_48.png"},"bot_id":"B360ZMNES","type":"message","subtype":"bot_message","ts":"1507106891.000163"}}'
     http_version: 
-  recorded_at: Wed, 04 Oct 2017 08:42:50 GMT
+  recorded_at: Wed, 04 Oct 2017 08:48:12 GMT
 - request:
     method: post
     uri: https://slack.com/api/chat.postMessage
@@ -144,7 +99,7 @@ http_interactions:
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Date:
-      - Wed, 04 Oct 2017 08:42:49 GMT
+      - Wed, 04 Oct 2017 08:48:11 GMT
       Expires:
       - Mon, 26 Jul 1997 05:00:00 GMT
       Pragma:
@@ -166,19 +121,19 @@ http_interactions:
       X-Slack-Backend:
       - h
       X-Slack-Req-Id:
-      - 23db9d84-f610-4e7f-aa7e-b024cc266f55
+      - 6eaaad30-db4f-4c23-8d99-eefb492269cd
       X-Xss-Protection:
       - '0'
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 699f29706ac19519e0b631e243565331.cloudfront.net (CloudFront)
+      - 1.1 32ae8cb69e094c4793f264ed99171242.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - vJhWRvVqAZXWLPdQIrl2CR4fEMNwCdPR4YuFYGRIAArNPi17nrW9NQ==
+      - 9abkPeuxqntL8Zjax5ctLOnZe2klqkU_4C3-bJ9l9J1ir0pEmCWvRg==
     body:
       encoding: ASCII-8BIT
-      string: '{"ok":true,"channel":"C29JE6HGR","ts":"1507106568.000518","message":{"text":"<!channel>
-        Scrum: <http:\/\/hangout.test>","username":"Anonymous","icons":{"image_48":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/bot_icons\/2017-10-03\/250486441554_48.png"},"bot_id":"B360ZMNES","type":"message","subtype":"bot_message","ts":"1507106568.000518"}}'
+      string: '{"ok":true,"channel":"C29JE6HGR","ts":"1507106891.000113","message":{"text":"<!channel>
+        Scrum: <http:\/\/hangout.test>","username":"Anonymous","icons":{"image_48":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/bot_icons\/2017-10-03\/250486441554_48.png"},"bot_id":"B360ZMNES","type":"message","subtype":"bot_message","ts":"1507106891.000113"}}'
     http_version: 
-  recorded_at: Wed, 04 Oct 2017 08:42:50 GMT
+  recorded_at: Wed, 04 Oct 2017 08:48:13 GMT
 recorded_with: VCR 3.0.3
