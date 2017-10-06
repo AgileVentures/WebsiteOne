@@ -68,3 +68,9 @@ Before do
   Settings.reload!
   StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
 end
+
+# To be used in conjunction with rerun option, so that we don't return a failing
+# exit code until the second try fails
+at_exit do
+  exit 0 if ENV['NEVER_FAIL'] == 'true'
+end
