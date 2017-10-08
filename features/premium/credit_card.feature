@@ -8,6 +8,11 @@ Feature: Charge Users Money
     Given the following plans exist
       | name         | id          | amount | free_trial_length_days |
       | Premium      | premium     | 1000   | 7                      |
+    And the following active users exist
+      | first_name | last_name | email                   | projects     | latitude | longitude | updated_at    |
+      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | 59.33    | 18.06     | 1 minute ago  |
+
+
 
   Scenario: User decides to change card details
     Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
@@ -27,3 +32,11 @@ Feature: Charge Users Money
   Scenario: User cannot change card details if not logged in
     Given I visit "cards/tansaku/edit"
     Then I should be on the "sign in" page
+
+  Scenario: User without existing card wants to add one
+    Given I am logged in as "Alice"
+    And I visit "cards/alice-jones/new"
+    And I click "Add Card Details"
+    When I fill in new card details for premium for user with email "alice@btinternet.co.uk"
+    Then I should see "Your card details have been successfully added"
+    
