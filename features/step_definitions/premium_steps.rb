@@ -29,6 +29,10 @@ Given(/^I fill in updated card details for premium(?: for user with email "([^"]
   submit_card_details_for_button_with('Update Card Details', email)
 end
 
+When(/^I fill in new card details for premium for user with email "([^"]*)"$/) do |email|
+  submit_card_details_for_button_with('Add Card Details', email)
+end
+
 def submit_card_details_for_button_with(text, email='random@morerandom.com')
   stripe_iframe = all('iframe[name=stripe_checkout_app]').last
   Capybara.within_frame stripe_iframe do

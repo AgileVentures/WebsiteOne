@@ -8,9 +8,9 @@ Feature: Charge Users Money
     Given the following plans exist
       | name         | id          | amount | free_trial_length_days |
       | Premium      | premium     | 1000   | 7                      |
-    And the following active users exist
-      | first_name | last_name | email                   | projects     | latitude | longitude | updated_at    |
-      | Alice      | Jones     | alice@btinternet.co.uk  | hello world  | 59.33    | 18.06     | 1 minute ago  |
+    And the following users exist
+      | first_name | last_name | email                   | latitude | longitude | updated_at    |
+      | Alice      | Jones     | alice@btinternet.co.uk  | 59.33    | 18.06     | 1 minute ago  |
 
 
 
