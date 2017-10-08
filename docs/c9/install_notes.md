@@ -2,6 +2,11 @@
 
 ![](images/Screenshot%202016-05-25%2008.40.44.png)
 
+1a) install ruby 2.3.1
+
+```
+$ rvm install 2.3.1
+```
 
 2) update the local software (all the linux packages on the c9 machine)
 
