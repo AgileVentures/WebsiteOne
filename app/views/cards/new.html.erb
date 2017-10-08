@@ -1,0 +1,11 @@
+<%= form_tag cards_path, method: :post do %>
+  <script
+  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+  data-name="Agile Ventures"
+  data-panel-label="Add Card Details"
+  data-label="Add Card Details"
+  data-allow-remember-me=false
+  data-locale="en-US">
+  </script>
+<% end %>
