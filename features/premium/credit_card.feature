@@ -35,7 +35,7 @@ Feature: Charge Users Money
 
   Scenario: User without existing card wants to add one
     Given I am logged in as "Alice"
-    And I visit "cards/alice-jones/new"
+    And I visit "cards/new"
     And I click "Add Card Details"
     When I fill in new card details for premium for user with email "alice@btinternet.co.uk"
     Then I should see "Your card details have been successfully added"
