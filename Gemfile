@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
-gem 'rails', '4.2.8'
+gem 'rails', '4.2.10'
 gem 'active_model-errors_details'
 gem 'acts-as-taggable-on'
 gem 'acts_as_follower'
