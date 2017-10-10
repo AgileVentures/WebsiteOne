@@ -9,7 +9,20 @@ WebsiteOne.define('GoogleAnalytics', function() {
     window._gaq.push(['_trackPageview']);
   }
 
-  return {
-    init: init
-  };
+  var GA_LOCAL_STORAGE_KEY = 'ga:clientId';
+
+  if (window.localStorage) {
+    ga('create', 'UA-47795185-1', {
+      'storage': 'none',
+      'clientId': localStorage.getItem(GA_LOCAL_STORAGE_KEY)
+    });
+    ga(function(tracker) {
+      localStorage.setItem(GA_LOCAL_STORAGE_KEY, tracker.get('clientId'));
+    });
+  }
+  else {
+    ga('create', 'UA-47795185-1', 'auto');
+  }
+
+  ga('send', 'pageview');
 });
