@@ -400,7 +400,7 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.4.2)
-    railroady (1.5.2)
+    railroady (1.5.3)
     rails (4.2.10)
       actionmailer (= 4.2.10)
       actionpack (= 4.2.10)
