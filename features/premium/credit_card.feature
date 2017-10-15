@@ -12,8 +12,6 @@ Feature: Charge Users Money
       | first_name | last_name | email                   | latitude | longitude | updated_at    |
       | Alice      | Jones     | alice@btinternet.co.uk  | 59.33    | 18.06     | 1 minute ago  |
 
-
-
   Scenario: User decides to change card details
     Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
     And I visit "cards/tansaku/edit"
@@ -39,4 +37,12 @@ Feature: Charge Users Money
     And I click "Add Card Details"
     When I fill in new card details for premium for user with email "alice@btinternet.co.uk"
     Then I should see "Your card details have been successfully added"
-    
+
+  Scenario: User without existing card wants to add one but encounters an error
+    Given I am logged in as "Alice"
+    And I visit "cards/new"
+    And I click "Add Card Details"
+    When I fill in expired card details for premium for user with email "tansaku+stripe@gmail.com"
+    Then I should not see "Your card details have been successfully updated"
+    And I should see "something has gone wrong with changing your card details."
+

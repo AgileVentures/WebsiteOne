@@ -33,11 +33,16 @@ When(/^I fill in new card details for premium for user with email "([^"]*)"$/) d
   submit_card_details_for_button_with('Add Card Details', email)
 end
 
-def submit_card_details_for_button_with(text, email='random@morerandom.com')
+When(/^I fill in expired card details for premium for user with email "([^"]*)"$/) do |email|
+#  StripeMock.prepare_card_error(:expired_card, :create_card)
+  submit_card_details_for_button_with('Add Card Details', email, '4000 0000 0000 0010')
+end
+
+def submit_card_details_for_button_with(text, email='random@morerandom.com', number='4242 4242 4242 4242')
   stripe_iframe = all('iframe[name=stripe_checkout_app]').last
   Capybara.within_frame stripe_iframe do
     fill_in 'Email', with: email
-    fill_in 'Card number', with: '4242 4242 4242 4242'
+    fill_in 'Card number', with: number
     fill_in 'CVC', with: '123'
     fill_in 'cc-exp', with: '12/2019'
     click_button text
