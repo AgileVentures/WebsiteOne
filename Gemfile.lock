@@ -318,7 +318,7 @@ GEM
     mime-types (2.99.3)
     mini_portile2 (2.1.0)
     minitest (5.10.3)
-    multi_json (1.12.1)
+    multi_json (1.12.2)
     multi_test (0.1.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -521,12 +521,12 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    stripe (1.58.0)
-      rest-client (>= 1.4, < 4.0)
-    stripe-ruby-mock (2.3.1)
+    stripe (3.3.2)
+      faraday (~> 0.9)
+    stripe-ruby-mock (2.5.0)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
-      stripe (~> 1.31)
+      stripe (>= 2.0.3)
     sucker_punch (2.0.2)
       concurrent-ruby (~> 1.0.0)
     term-ansicolor (1.6.0)
@@ -692,7 +692,7 @@ DEPENDENCIES
   slack-ruby-client
   sprockets-rails (= 2.3.3)
   stripe
-  stripe-ruby-mock (~> 2.3.1)
+  stripe-ruby-mock (~> 2.5.0)
   sucker_punch
   therubyracer
   turbolinks

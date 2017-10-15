@@ -34,7 +34,7 @@ When(/^I fill in new card details for premium for user with email "([^"]*)"$/) d
 end
 
 When(/^I fill in expired card details for premium for user with email "([^"]*)"$/) do |email|
-#  StripeMock.prepare_card_error(:expired_card, :create_card)
+  StripeMock.prepare_card_error(:incorrect_zip, :create_card)
   submit_card_details_for_button_with('Add Card Details', email, '4000 0000 0000 0010')
 end
 
@@ -56,6 +56,7 @@ end
 
 Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
+    hash['amount'] = Integer(hash['amount'])
     @stripe_test_helper.try(:create_plan, hash)
     hash[:third_party_identifier] = hash.delete("id")
     Plan.create(hash)
