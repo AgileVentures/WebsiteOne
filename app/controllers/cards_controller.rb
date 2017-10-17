@@ -11,7 +11,7 @@ class CardsController < ApplicationController
     card.save
     customer.default_card = card.id
     customer.save
-  rescue Stripe::StripeError, NoMethodError => e
+  rescue Stripe::StripeError, StandardError => e
     logger.error "Stripe error while adding card info: #{e.message} for #{current_user}"
     @error = true
   end
@@ -25,7 +25,7 @@ class CardsController < ApplicationController
     card.save
     customer.default_card = card.id
     customer.save
-  rescue Stripe::StripeError, NoMethodError => e
+  rescue Stripe::StripeError, StandardError => e
     logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
     @error = true
   end

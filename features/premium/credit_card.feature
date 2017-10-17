@@ -42,7 +42,7 @@ Feature: Charge Users Money
     Given I am logged in as "Alice"
     And I visit "cards/new"
     And I click "Add Card Details"
-    When I fill in expired card details for premium for user with email "tansaku+stripecardtest2@gmail.com"
+    When I fill in card details for premium for user that will fail with email "tansaku+stripecardtest2@gmail.com"
     Then I should not see "Your card details have been successfully updated"
-    And I should see "something has gone wrong with changing your card details."
+    And I should see "something has gone wrong with adding your card details."
 

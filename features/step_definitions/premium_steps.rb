@@ -33,9 +33,10 @@ When(/^I fill in new card details for premium for user with email "([^"]*)"$/) d
   submit_card_details_for_button_with('Add Card Details', email)
 end
 
-When(/^I fill in expired card details for premium for user with email "([^"]*)"$/) do |email|
-  StripeMock.prepare_card_error(:incorrect_zip, :create_card)
-  submit_card_details_for_button_with('Add Card Details', email, '4000 0000 0000 0010')
+When(/^I fill in card details for premium for user that will fail with email "([^"]*)"$/) do |email|
+  custom_error = StandardError.new("Unable to create customer")
+  StripeMock.prepare_error(custom_error, :new_customer)
+  submit_card_details_for_button_with('Add Card Details', email)
 end
 
 def submit_card_details_for_button_with(text, email='random@morerandom.com', number='4242 4242 4242 4242')
