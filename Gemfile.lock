@@ -527,7 +527,7 @@ GEM
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
-    sucker_punch (2.0.2)
+    sucker_punch (2.0.4)
       concurrent-ruby (~> 1.0.0)
     term-ansicolor (1.6.0)
       tins (~> 1.0)
