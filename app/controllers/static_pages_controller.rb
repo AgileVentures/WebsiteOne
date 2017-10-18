@@ -1,8 +1,12 @@
 class StaticPagesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :letsencrypt]
+  before_filter :authenticate_user!, except: [:show, :letsencrypt, :loaderio]
+
+  def loaderio
+    render plain: "loaderio-bd60fb88537b106821044fd9098f271c", layout: false
+  end
 
   def letsencrypt
-    render plain: "#{params[:id]}.#{ENV['CERTBOT_SSL_CHALLENGE']}", :layout => false
+    render plain: "#{params[:id]}.#{ENV['CERTBOT_SSL_CHALLENGE']}", layout: false
   end
 
   def show

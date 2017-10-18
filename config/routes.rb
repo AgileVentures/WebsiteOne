@@ -4,9 +4,8 @@ WebsiteOne::Application.routes.draw do
 
   root 'visitors#index'
 
-
-
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
+  get 'loaderio-bd60fb88537b106821044fd9098f271c.html' => 'static_pages#loaderio'
 
   resources :activities
   resources :newsletters
