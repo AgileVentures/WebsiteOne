@@ -1,3 +1,7 @@
+def loaderio_token
+  (ENV['LOADERIO_TOKEN'] || "loaderio-296a53739de683b99e3a2c4d7944230f")
+end
+
 WebsiteOne::Application.routes.draw do
 
   mount Mercury::Engine => '/'
@@ -5,7 +9,7 @@ WebsiteOne::Application.routes.draw do
   root 'visitors#index'
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
-  get 'loaderio-bd60fb88537b106821044fd9098f271c.html' => 'static_pages#loaderio'
+  get loaderio_token => 'static_pages#loaderio'
 
   resources :activities
   resources :newsletters
