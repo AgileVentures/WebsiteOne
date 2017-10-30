@@ -209,3 +209,16 @@ Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is ed
   visit event_path(event)
 end
 
+And(/^that we're spying on the SlackService$/) do
+  allow(SlackService).to receive :post_yt_link
+  allow(SlackService).to receive :post_hangout_notification
+end
+
+Then(/^the Youtube URL is not posted in Slack$/) do
+  expect(SlackService).not_to have_received :post_yt_link
+end
+
+And(/^the Hangout URL is posted in Slack$/) do
+  expect(SlackService).to have_received :post_hangout_notification
+end
+

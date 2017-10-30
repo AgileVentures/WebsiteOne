@@ -37,3 +37,10 @@ Feature: Manual Edit of Hangout URL
     Then it should not go live the next day just because the event start time is passed
     When I manually set a hangout link for event "Repeat Scrum"
     Then "Repeat Scrum" shows live for that hangout link for the event duration
+
+  Scenario: Event doesn't ping old youtube URL
+    Given the date is "2014 Feb 5th 6:59am"
+    And that we're spying on the SlackService
+    When I manually set a hangout link for event "Repeat Scrum"
+    Then the Hangout URL is posted in Slack
+    And the Youtube URL is not posted in Slack
