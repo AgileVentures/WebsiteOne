@@ -212,7 +212,7 @@ class Event < ActiveRecord::Base
 
   def recent_hangouts
     event_instances
-      .where('updated_at BETWEEN ? AND ?', 1.days.ago + duration, DateTime.now.end_of_day)
+      .where('updated_at BETWEEN ? AND ?', 1.days.ago + duration.minutes, DateTime.now.end_of_day)
       .order(updated_at: :desc)
   end
 
