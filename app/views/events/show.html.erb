@@ -43,14 +43,7 @@
           </div>
 
           <div class="btn-HOA pull-right">
-            <% hangout_uid = (@recent_hangout && @recent_hangout.live?) ? @recent_hangout.uid : '' %>
-            <%= render partial: 'event_instances/hangout_button', locals: {
-                                                                        event_instance_id: hangout_uid,
-                                                                        event_id: @event.id,
-                                                                        category: @event.category,
-                                                                        project_id: @event.project_id,
-                                                                        title: @event.name
-                                                                        } %>
+            <%= link_to 'Start Hangout Instructions', 'https://support.google.com/youtube/answer/7083786' %>
           </div>
         <% end %>
     <% end %>
