@@ -42,7 +42,8 @@
                     </ul>
                   </li>
                 <li class="hangout-btn">
-                    <%= render partial: 'event_instances/hangout_button', locals: {event_instance_id: '', event_id: '', category: 'PairProgramming', project_id: @project.id, title: "PairProgramming on #{@project.title}"} %></li>
+                  <%= button_to 'Start Hangout Instructions', 'https://support.google.com/youtube/answer/7083786', class: "btn btn-primary", form: {target: '_blank'} %>
+                </li>
                 </ul>
                 <hr>
             <% else %>
