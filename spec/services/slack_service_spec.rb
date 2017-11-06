@@ -19,7 +19,7 @@ describe SlackService do
       }
     end
 
-    let(:message) { '<mock_url|MockEvent>' }
+    let(:message) { 'MockEvent: <mock_url|click to join>' }
     let(:here_message) { "@here #{message}" }
     let(:channel_message) { "@channel #{message}" }
 
@@ -141,7 +141,7 @@ describe SlackService do
     let(:client) { spy(:slack_client) }
     let(:expected_post_args) do
       {
-          text: '<https://youtu.be/mock_url|Video/Livestream for MockEvent>',
+          text: 'Video/Livestream: <https://youtu.be/mock_url|click to play>',
           username: user.display_name,
           icon_url: user.gravatar_url,
           link_names: 1
