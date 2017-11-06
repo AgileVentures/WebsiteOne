@@ -10,18 +10,15 @@ end
 
 Then /^I should (not )?see hangout button$/ do |absent|
   if absent
-    expect(page).not_to have_css '#liveHOA-placeholder'
+    expect(page).not_to have_css '#hoa_instructions'
   else
-    expect(page).to have_css "#liveHOA-placeholder"
-    src = page.find(:css, '#liveHOA-placeholder iframe')['src']
-    expect(src).to match /talkgadget.google.com/
+    expect(page).to have_css "#hoa_instructions"
   end
 end
 
 Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
-
 
   start_time = hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now
   update_time = hangout['Updated at'] ? Time.parse(hangout['Updated at']) : start_time
