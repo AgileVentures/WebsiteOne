@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_next_scrum
-    @next_event = Event.next_occurrence(:Scrum) if ENV['GET_NEXT_SCRUM']
+    @next_event = Event.next_occurrence(:Scrum) if Features.get_next_scrum.enabled
   end
 
   def store_location

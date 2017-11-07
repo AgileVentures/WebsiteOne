@@ -1,4 +1,6 @@
 features:
+  get_next_scrum:
+    enabled: true
   slack:
     notifications:
       enabled: false

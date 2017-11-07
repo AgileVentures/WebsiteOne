@@ -1,4 +1,6 @@
 features:
+  get_next_scrum:
+    enabled: <%= ENV['GET_NEXT_SCRUM'] %>
   custom_errors:
     enabled: true
   slack:
