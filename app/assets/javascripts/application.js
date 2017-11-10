@@ -133,7 +133,7 @@ $(function() {
       var timezoneoffset = new Date().getTimezoneOffset();
       var events = [];
       $.ajax({
-        url: '/events.json?start=' + start + '&end=' + end,
+        url: '/events.json',
         success: function(doc) {
           $.map(doc, function(event) {
             event.start = moment(event.start + 'Z').zone(timezoneoffset);
