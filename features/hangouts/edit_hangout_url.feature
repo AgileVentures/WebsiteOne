@@ -15,7 +15,7 @@ Feature: Manual Edit of Hangout URL
     And the following event instances (with default participants) exist:
       | title        | hangout_url         | created_at       | updated_at          | uid | category | project    | user_id | yt_video_id | hoa_status | url_set_directly | event        |
       | HangoutsFlow | http://hangout.test | 2012 Feb 4th 7am | 2012 Feb 4th 7:04am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
-      | HangoutsFlow | http://hangout.test | 2014 Feb 4th 7am | 2014 Feb 4th 7:03am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
+      | HangoutsFlow | http://hangout.test | 2014 Feb 4th 7am | 2014 Feb 4th 7:16am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
     And I am logged in
 
   Scenario: Edit Hangout URL and ensure event stays live
@@ -38,6 +38,7 @@ Feature: Manual Edit of Hangout URL
     When I manually set a hangout link for event "Repeat Scrum"
     Then "Repeat Scrum" shows live for that hangout link for the event duration
 
+  # wraps bug described in https://github.com/AgileVentures/WebsiteOne/issues/1809
   Scenario: Event doesn't ping old youtube URL
     Given the date is "2014 Feb 5th 6:59am"
     And that we're spying on the SlackService

@@ -1,4 +1,8 @@
 features:
+  edit_static_pages:
+    enabled: true
+  get_next_scrum:
+    enabled: true
   slack:
     notifications:
       enabled: false
