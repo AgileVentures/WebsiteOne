@@ -127,8 +127,22 @@ $(function() {
 $(function() {
   $('#calendar').fullCalendar({
     header: {
-      right: 'prev, next, today, month, agendaWeek'
+      right: 'prev, next, today, month, agendaWeek, agendaDay'
+    },
+    events: function(start, end, timezone, callback) {
+      var timezoneoffset = new Date().getTimezoneOffset();
+      var events = [];
+      $.ajax({
+        url: '/events.json?start=' + start + '&end=' + end,
+        success: function(doc) {
+          $.map(doc, function(event) {
+            event.start = moment(event.start + 'Z').zone(timezoneoffset);
+            event.end = moment(event.end + 'Z').zone(timezoneoffset);
+            events.push(event);
+          });
+          callback(events);
+        }
+      });
     }
-    // events: '/events.json'
   });
 });
