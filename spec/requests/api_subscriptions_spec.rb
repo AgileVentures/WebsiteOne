@@ -7,7 +7,8 @@ describe "Subscriptions" do
     let(:headers) do
       {
        "ACCEPT" => "application/json",     # This is what Rails 4 accepts
-       "HTTP_ACCEPT" => "application/json" # This is what Rails 3 accepts
+       "HTTP_ACCEPT" => "application/json", # This is what Rails 3 accepts
+       "Authorization: Token" => "token=TEST"
       }
     end
 
