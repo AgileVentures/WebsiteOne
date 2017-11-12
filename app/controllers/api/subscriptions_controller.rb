@@ -1,7 +1,8 @@
 class Api::SubscriptionsController < ApplicationController
-	respond_to :json
+  respond_to :json
 
   before_action :authenticate_api!
+
 
   def authenticate_api!
     return true if authenticate_token
@@ -14,8 +15,8 @@ class Api::SubscriptionsController < ApplicationController
 
   private
   def authenticate_token
-    authenticate_with_http_token do |token, options|
-      token == Rails.settings.api.premium_subscriptions_api_token
+    authenticate_or_request_with_http_token do |token, options|
+      token == Settings.api.premium_subscriptions_token
     end
   end
 end
