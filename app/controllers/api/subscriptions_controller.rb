@@ -14,10 +14,8 @@ class Api::SubscriptionsController < ApplicationController
 
   private
   def authenticate_token
-    debugger
     authenticate_with_http_token do |token, options|
-      debugger
-      token == Api.premium_subscriptions_api_token
+      token == Rails.settings.api.premium_subscriptions_api_token
     end
   end
 end

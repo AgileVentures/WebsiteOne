@@ -6,14 +6,14 @@ describe "Subscriptions" do
     let!(:subscription) { FactoryGirl.create(:subscription, user: user) }
     let(:headers) do
       {
-       "ACCEPT" => "application/json",     # This is what Rails 4 accepts
-       "HTTP_ACCEPT" => "application/json", # This is what Rails 3 accepts
-       "Authorization: Token" => "token=TEST"
+       "Authorization" => "Token token=TEST",
+       "Accept" => "application/json"     # This is what Rails 4 accepts
+       # "http_accept" => "application/json", # This is what Rails 3 accepts
       }
     end
 
     it "succeeds" do
-      get api_subscriptions_path, headers
+      get api_subscriptions_path, header: headers
       expect(response).to be_success
       expect(JSON.parse(response.body)).to include(a_hash_including("email"  => "kitty@cat.com"))
     end
