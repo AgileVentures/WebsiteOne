@@ -1,5 +1,5 @@
 json.array! @subscriptions do |subscription|
-  json.email subscription.user.email
+  json.email subscription.user.try(:email)
   #date_format = subscription.all_day_event? ? '%Y-%m-%d' : '%Y-%m-%dT%H:%M:%S'
   #json.id subscription.id
   #json.title subscription.title
