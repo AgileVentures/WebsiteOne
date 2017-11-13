@@ -15,7 +15,7 @@ class Api::SubscriptionsController < ApplicationController
 
   private
   def authenticate_token
-    authenticate_or_request_with_http_token do |token, options|
+    authenticate_or_request_with_http_token do |token, _options|
       token == Settings.api.premium_subscriptions_token
     end
   end
