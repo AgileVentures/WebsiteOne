@@ -10,7 +10,7 @@ class Api::SubscriptionsController < ApplicationController
   end
 
   def index
-    @subscriptions = Subscription.includes(:user).all
+    @subscriptions = Subscription.includes(:user).joins(:payment_source).all
   end
 
   private

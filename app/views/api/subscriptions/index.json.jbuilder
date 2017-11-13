@@ -1,6 +1,10 @@
 json.array! @subscriptions do |subscription|
   json.email subscription.user.try(:email)
-  #date_format = subscription.all_day_event? ? '%Y-%m-%d' : '%Y-%m-%dT%H:%M:%S'
+  json.started_on subscription.started_at.strftime('%Y-%m-%d')
+  json.ended_on subscription.ended_at.try(:strftime,'%Y-%m-%d')
+  json.plan_name subscription.plan.name
+  json.payment_source subscription.payment_source.type
+  #date_format = subscription.all_day_event? ? '%Y-%m-%d'
   #json.id subscription.id
   #json.title subscription.title
   #json.start subscription.start_date.strftime(date_format)
