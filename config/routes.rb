@@ -4,6 +4,7 @@ end
 
 WebsiteOne::Application.routes.draw do
 
+  apipie
   mount Mercury::Engine => '/'
 
   root 'visitors#index'

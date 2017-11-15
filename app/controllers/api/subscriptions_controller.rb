@@ -3,12 +3,18 @@ class Api::SubscriptionsController < ApplicationController
 
   before_action :authenticate_api!
 
-
   def authenticate_api!
     return true if authenticate_token
-    render json: { errors: [ { detail: "Access denied" } ] }, status: 401
+    render json: { errors: [ { detail: 'Access denied' } ] }, status: 401
   end
 
+  # I want to have a version in the api http://localhost:3000/api/v1/subscriptions.json
+  # like documentation in the tests
+  # mention this in the README/SETUP ...
+
+  api :GET, '/subscriptions.json', 'Get all subscribed Premium users'
+  error :code => 401, :desc => 'Access denied; token required to access this endpoint'
+  description 'Get a list of all Premium subscribed users and their start dates'
   def index
     @subscriptions = Subscription.includes(:user).joins(:payment_source).all
   end
