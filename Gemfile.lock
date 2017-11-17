@@ -64,6 +64,8 @@ GEM
       airbrake-ruby (~> 2.0)
     airbrake-ruby (2.2.2)
     andand (1.3.3)
+    apipie-rails (0.5.5)
+      rails (>= 4.1)
     arel (6.0.4)
     autoprefixer-rails (7.0.1)
       execjs
@@ -605,6 +607,7 @@ DEPENDENCIES
   acts_as_votable (~> 0.10.0)
   addressable
   airbrake
+  apipie-rails
   awesome_print
   better_errors
   binding_of_caller
