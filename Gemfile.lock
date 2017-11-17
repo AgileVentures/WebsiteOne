@@ -69,7 +69,7 @@ GEM
     arel (6.0.4)
     autoprefixer-rails (7.0.1)
       execjs
-    awesome_print (1.7.0)
+    awesome_print (1.8.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
