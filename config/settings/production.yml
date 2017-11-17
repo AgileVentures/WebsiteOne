@@ -14,6 +14,9 @@ features:
     notifications:
       enabled: <%= ENV['TWITTER_NOTIFICATIONS_ENABLED'] %>
 
+api:
+  premium_subscriptions_token: <%= ENV['PREMIUM_SUBSCRIPTIONS_API_TOKEN'] %>
+
 #mailer:
 #  delivery_method: 'smtp'
 #  smtp_settings:

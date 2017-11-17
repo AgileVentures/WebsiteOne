@@ -16,6 +16,9 @@ features:
   welcome_email:
     enabled: false
 
+api:
+  premium_subscriptions_token: <%= ENV['PREMIUM_SUBSCRIPTIONS_API_TOKEN'] %>
+
 hangouts:
   app_id: '10095526298'
 
