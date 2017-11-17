@@ -89,6 +89,9 @@ GEM
     bundler-audit (0.5.0)
       bundler (~> 1.2)
       thor (~> 0.18)
+    business_time (0.7.6)
+      activesupport (>= 3.1.0)
+      tzinfo
     byebug (9.0.6)
     capybara (2.13.0)
       addressable
@@ -365,7 +368,8 @@ GEM
       activerecord (>= 4.0, < 5.2)
     pg (0.20.0)
     phantomjs (2.1.1.0)
-    pivotal-tracker-api (0.1.9)
+    pivotal-tracker-api (1.0.3)
+      business_time (~> 0.7.6)
       rest-client (~> 1.7)
     poltergeist (1.16.0)
       capybara (~> 2.1)
@@ -667,7 +671,7 @@ DEPENDENCIES
   paranoia (~> 2.2)
   pg
   phantomjs
-  pivotal-tracker-api (= 0.1.9)
+  pivotal-tracker-api (= 1.0.3)
   poltergeist
   polyamorous (~> 1.2.0)
   pry-byebug
