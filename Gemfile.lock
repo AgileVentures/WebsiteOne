@@ -397,7 +397,7 @@ GEM
       multi_json
     puma (3.10.0)
     rack (1.6.8)
-    rack-cache (1.7.0)
+    rack-cache (1.7.1)
       rack (>= 0.4)
     rack-test (0.6.3)
       rack (>= 1.0)
