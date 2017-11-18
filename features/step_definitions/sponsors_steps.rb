@@ -8,3 +8,8 @@ Then(/^I should be (.*)'s sponsor$/) do |name|
   subscription = Subscription.find_by(user: user)
   expect(subscription.sponsor).to eq(@current_user)
 end
+
+Then(/^I should be my own sponsor$/) do
+  subscription = Subscription.find_by(user: @current_user)
+  expect(subscription.sponsor).to eq(@current_user)
+end
