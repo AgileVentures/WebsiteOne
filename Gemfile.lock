@@ -253,7 +253,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    hashdiff (0.3.4)
+    hashdiff (0.3.7)
     hashie (3.5.6)
     hirb (0.7.3)
     http (0.6.4)
@@ -570,7 +570,7 @@ GEM
       i18n
     warden (1.2.7)
       rack (>= 1.0)
-    webmock (3.0.1)
+    webmock (3.1.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
