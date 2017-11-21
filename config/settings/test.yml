@@ -15,6 +15,9 @@ features:
   email_registrations:
     enabled: true
 
+api:
+  premium_subscriptions_token: 'TEST'
+
 mailer:
   delivery_method: 'test'
 

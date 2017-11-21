@@ -7,6 +7,7 @@ WebsiteOne
 [support]: http://www.agileventures.org/
 [about-us]: http://www.agileventures.org/about-us
 [members]: http://www.agileventures.org/users
+[premium api]: http://www.agileventures.org/apipie/1.0/subscriptions/index.html
 
 
 #### A website for [Agile Ventures][application] - a platform for online collaboration and crowdsourced project development.

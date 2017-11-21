@@ -4,6 +4,7 @@ end
 
 WebsiteOne::Application.routes.draw do
 
+  apipie
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
@@ -61,6 +62,11 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
+  scope '/api' do
+    scope '/subscriptions' do
+      get '/' => 'api/subscriptions#index', as: 'api_subscriptions', defaults: { format: 'json' }
+    end
+  end
 
   get '/mentors' => 'users#index', defaults: {title: 'Mentor'}
   get '/premium_members' => 'users#index', defaults: {title: 'Premium'}
