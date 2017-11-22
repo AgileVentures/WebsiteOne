@@ -43,6 +43,7 @@ Feature: Allow Users to Sponsor other members
     And I should not see "Basic Member"
     And I should not see "Sponsor for Premium"
     And I should not see "Upgrade to Premium"
+    And I should be Alice's sponsor
 
   Scenario: non logged in user upgrades another user from free tier to premium
     Given I visit Alice's profile page
