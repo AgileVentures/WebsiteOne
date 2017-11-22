@@ -36,6 +36,13 @@ describe 'users/index.html.erb', :type => :view do
       expect(rendered).to have_content('In My Timezone')
       expect(rendered).to have_content('Wider Timezone Area')
     end
+
+    it 'should display a text search form' do
+      render
+
+      expect(rendered).to have_content('User Name')
+      expect(rendered).to have_css('.username-search-form')
+    end
   end
 
   it 'should display a list of users' do
