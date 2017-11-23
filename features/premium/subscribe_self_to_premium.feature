@@ -19,6 +19,16 @@ Feature: Subscribe Self to Premium
     And I should see "Your 7 day free trial has now started"
     And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
 
+  Scenario: Logged in user has sponsor set to self
+    Given I am logged in
+    And I visit "subscriptions/new"
+    And I click "Subscribe" within the card_section
+    When I fill in appropriate card details for premium
+    Then I should see "Thanks, you're now an AgileVentures Premium Member!"
+    And I should see "Your 7 day free trial has now started"
+    And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
+    And I should be my own sponsor
+
   Scenario: Pay by card (with free trial month)
     Given I visit "subscriptions/new?plan=av_premium_first_month_free"
     And I click "Subscribe" within the card_section
