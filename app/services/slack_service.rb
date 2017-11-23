@@ -13,9 +13,13 @@ module SlackService
 
     channel = channel_for_project(hangout.project)
 
+    message = "#{hangout.title}: <#{hangout.hangout_url}|click to join>"
+    here_message = "@here #{message}"
+    channel_message = "@channel #{message}"
+
     if hangout.category == "Scrum"
-      send_slack_message slack_client, CHANNELS[:general], "@here #{hangout.title}: #{hangout.hangout_url}", hangout.user
-      send_slack_message slack_client, CHANNELS[:standup_notifications], "@channel #{hangout.title}: #{hangout.hangout_url}", hangout.user
+      send_slack_message slack_client, CHANNELS[:general], here_message, hangout.user
+      send_slack_message slack_client, CHANNELS[:standup_notifications], channel_message, hangout.user
 
     elsif hangout.category == "PairProgramming"
 
@@ -23,14 +27,14 @@ module SlackService
         # puts("sending PP event to gitter: #{channel}")
         send_gitter_message_avoid_repeats gitter_client, "[#{hangout.title} with #{hangout.user.display_name}](#{hangout.hangout_url}) is starting NOW!"
       else
-        send_slack_message slack_client, CHANNELS[:general], "@here #{hangout.title}: #{hangout.hangout_url}", hangout.user
+        send_slack_message slack_client, CHANNELS[:general], here_message, hangout.user
         # puts("sending PP event to slack: #{channel}")
       end
-      send_slack_message slack_client, CHANNELS[:pairing_notifications], "@channel #{hangout.title}: #{hangout.hangout_url}", hangout.user
+      send_slack_message slack_client, CHANNELS[:pairing_notifications], channel_message, hangout.user
     end
     # send all types of events to associated project "channel" if there is one
     if channel
-      send_slack_message slack_client, channel, "@here #{hangout.title}: #{hangout.hangout_url}", hangout.user
+      send_slack_message slack_client, channel, here_message, hangout.user
     end
   end
 
@@ -57,16 +61,18 @@ module SlackService
     channel = channel_for_project(hangout.project)
 
     video = "https://youtu.be/#{hangout.yt_video_id}"
+    message = "Video/Livestream: <#{video}|click to play>"
 
     if hangout.category == "Scrum"
-      send_slack_message client, CHANNELS[:general], "Video/Livestream for #{hangout.title}: #{video}", hangout.user
+      send_slack_message client, CHANNELS[:general], message, hangout.user
     elsif hangout.category == "PairProgramming"
       channel = channel_for_project(hangout.project)
       unless channel == CHANNELS[:cs169]
-        send_slack_message client, CHANNELS[:general], "Video/Livestream for #{hangout.title}: #{video}", hangout.user
-        send_slack_message client, channel, "Video/Livestream for #{hangout.title}: #{video}", hangout.user
+        send_slack_message client, CHANNELS[:general], message, hangout.user
       end
     end
+
+    send_slack_message client, channel, message, hangout.user if channel
 
   end
 

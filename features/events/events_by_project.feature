@@ -7,12 +7,12 @@ Feature: List Events by Project
   Background:
     Given the following projects exist:
       | title | description          | pitch | status |
-      | wso   |  blah                |       | active |
-      | auto  |  blah                |       | active |
+      | wso   | blah                 |       | active |
+      | auto  | blah                 |       | active |
       | cs169 | greetings earthlings |       | active |
     Given following events exist:
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project |
-      | Standup    | Daily standup meeting   | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |
+      | Standup1   | Daily standup meeting   | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |
       | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | UTC       | cs169   |
     Given the date is "2014/02/01 09:15:00 UTC"
 
@@ -38,13 +38,13 @@ Feature: List Events by Project
 
   Scenario: Show events associated with cs169
     And I am on the project events index page
-    Then I should not see "Standup"
+    Then I should not see "Standup1"
     And I should see "PP Session"
 
   Scenario: Choose which project events to display
     Given I am on Events index page
     And I select "cs169" from the project dropdown
     And I click "Filter by Project" button
-    Then I should not see "Standup"
+    Then I should not see "Standup1"
     And I should see "PP Session"
     And "cs169" is selected in the project dropdown
