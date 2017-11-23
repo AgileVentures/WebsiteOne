@@ -9,7 +9,7 @@ describe Authentication, :type => :model do
   it 'must have an associated user' do
     # Bryan: validations done at database level to avoid complications, but will raise exceptions
     @auth.user_id = nil
-    expect{ @auth.save }.to raise_error
+    expect{ @auth.save }.to raise_error ActiveRecord::StatementInvalid
   end
 
   it 'must have an associated provider' do
