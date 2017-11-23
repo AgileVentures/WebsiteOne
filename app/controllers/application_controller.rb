@@ -1,7 +1,6 @@
 require 'custom_errors.rb'
 
 class ApplicationController < ActionController::Base
-  include YoutubeHelper
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -58,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_next_scrum
-    @next_event = Event.next_occurrence(:Scrum)
+    @next_event = Event.next_occurrence(:Scrum) if Features.get_next_scrum.enabled
   end
 
   def store_location
@@ -70,6 +69,11 @@ class ApplicationController < ActionController::Base
 
   def user_activity
     current_user.try :touch
+  end
+  
+  def show_deactivated_message_and_redirect_to_root
+    flash[:alert] = 'User is deactivated.'
+    redirect_to root_path
   end
 
 end

@@ -17,7 +17,7 @@
     </h1>
   </div>
   <div id="page-side-panel">
-    <% if user_signed_in? %>
+    <% if user_signed_in? and Features.edit_static_pages.enabled %>
       <ul>
         <li><%= custom_css_btn 'edit', 'fa-2x fa fa-pencil-square-o', static_page_edit_path, id: 'edit_link',
                                data: {save_url: static_page_mercury_update_path(@page.slug)} %>

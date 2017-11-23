@@ -14,11 +14,13 @@ class Project < ActiveRecord::Base
   has_many :documents
   has_many :event_instances
   has_many :commit_counts
+  has_many :source_repositories
+  accepts_nested_attributes_for :source_repositories, reject_if: :all_blank, allow_destroy: true
 
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-  scope :with_github_url, -> { where.not(projects: { github_url: nil }) }
+  scope :with_github_url, ->{ includes(:source_repositories).where.not(source_repositories: { id: nil }) }
 
   def self.search(search, page)
     order('LOWER(title)')
@@ -28,6 +30,10 @@ class Project < ActiveRecord::Base
 
   def gpa
     CodeClimateBadges.new("github/#{github_repo}").gpa
+  end
+
+  def github_url
+    source_repositories.first.try(:url)
   end
 
   def youtube_tags

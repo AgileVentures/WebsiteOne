@@ -1,0 +1,38 @@
+{
+  "subscriptions#index": [
+    {
+      "verb": "GET",
+      "path": "/api/subscriptions",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": [
+        {
+          "email": "kitty@cat.com",
+          "started_on": "2001-02-03",
+          "ended_on": "2002-02-03",
+          "plan_name": "Premium",
+          "payment_source": "PaymentSource::PayPal"
+        }
+      ],
+      "code": 200,
+      "show_in_doc": 1,
+      "recorded": true
+    },
+    {
+      "verb": "GET",
+      "path": "/api/subscriptions",
+      "versions": [
+        "1.0"
+      ],
+      "query": null,
+      "request_data": null,
+      "response_data": "HTTP Token: Access denied.\n",
+      "code": 401,
+      "show_in_doc": 0,
+      "recorded": true
+    }
+  ]
+}

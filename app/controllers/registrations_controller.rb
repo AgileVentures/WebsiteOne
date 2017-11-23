@@ -1,5 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
+  include DeactivatedUserFinder
+
   layout 'layouts/user_profile_layout', only: [:edit]
+  prepend_before_action :check_for_deactivated_user, only: [:create]
   prepend_before_action :check_captcha, only: [:create]
 
   def create
@@ -54,5 +57,13 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(_resource)
     '/getting-started'
+  end
+  
+  def fetch_email_from_params
+    params.fetch(:user, {}).fetch(:email, '')
+  end
+  
+  def check_for_deactivated_user
+    show_deactivated_message_and_redirect_to_root if deactivated_user_with_email(fetch_email_from_params).present?
   end
 end

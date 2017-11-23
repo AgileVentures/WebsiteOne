@@ -52,4 +52,3 @@ Feature: As a user of the site
       | title         |
       | hello world   |
       | hello jupiter |
-

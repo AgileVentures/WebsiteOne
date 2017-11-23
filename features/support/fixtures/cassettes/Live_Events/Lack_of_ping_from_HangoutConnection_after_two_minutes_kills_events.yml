@@ -45,4 +45,140 @@ http_interactions:
       string: No longer available
     http_version: 
   recorded_at: Thu, 23 Jun 2016 14:41:29 GMT
-recorded_with: VCR 3.0.1
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: channel=C0TLAE1MH&icon_url=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fd41d8cd98f00b204e9800998ecf8427e%3Fd%3Dretro&link_names=1&text=%40here+Scrum%3A+http%3A%2F%2Fhangout.test&token=xoxp-27386983986-27368814966-106652383568-dbf7be900d03524d05b9dc93d846d4b9&username=Anonymous
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.7.7
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '266'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Date:
+      - Wed, 04 Oct 2017 08:43:22 GMT
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Pragma:
+      - no-cache
+      Referrer-Policy:
+      - no-referrer
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - chat:write:bot,post
+      X-Content-Type-Options:
+      - nosniff
+      X-Oauth-Scopes:
+      - read,client,admin,identify,post,apps
+      X-Slack-Backend:
+      - h
+      X-Slack-Req-Id:
+      - a4891324-bd6f-4079-ad08-0a49b15ffc2d
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 dd12e7e803f596deb3908675a4e017be.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - XcMYyhxRX5pZNl8e0sCHEmrwYAJetN2rxX0c42rfVvbDRPcFS378Zg==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"channel":"C0TLAE1MH","ts":"1507106601.000309","message":{"text":"<!here>
+        Scrum: <http:\/\/hangout.test>","username":"Anonymous","icons":{"image_48":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/bot_icons\/2017-10-03\/250486441554_48.png"},"bot_id":"B360ZMNES","type":"message","subtype":"bot_message","ts":"1507106601.000309"}}'
+    http_version: 
+  recorded_at: Wed, 04 Oct 2017 08:43:23 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: channel=C29JE6HGR&icon_url=https%3A%2F%2Fwww.gravatar.com%2Favatar%2Fd41d8cd98f00b204e9800998ecf8427e%3Fd%3Dretro&link_names=1&text=%40channel+Scrum%3A+http%3A%2F%2Fhangout.test&token=xoxp-27386983986-27368814966-106652383568-dbf7be900d03524d05b9dc93d846d4b9&username=Anonymous
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.7.7
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '265'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Date:
+      - Wed, 04 Oct 2017 08:43:22 GMT
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Pragma:
+      - no-cache
+      Referrer-Policy:
+      - no-referrer
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - chat:write:bot,post
+      X-Content-Type-Options:
+      - nosniff
+      X-Oauth-Scopes:
+      - read,client,admin,identify,post,apps
+      X-Slack-Backend:
+      - h
+      X-Slack-Req-Id:
+      - 13c3d0ec-309f-4372-8548-eb9670d9ab24
+      X-Xss-Protection:
+      - '0'
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 f5d27f80802e2b6e66ec3970da5568b8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 8WgLjPXW26TllOR_qY4revdUlAFDRirj6RD0xnY0Em38vfTYXxYctw==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"channel":"C29JE6HGR","ts":"1507106602.000178","message":{"text":"<!channel>
+        Scrum: <http:\/\/hangout.test>","username":"Anonymous","icons":{"image_48":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/bot_icons\/2017-10-03\/250486441554_48.png"},"bot_id":"B360ZMNES","type":"message","subtype":"bot_message","ts":"1507106602.000178"}}'
+    http_version: 
+  recorded_at: Wed, 04 Oct 2017 08:43:23 GMT
+recorded_with: VCR 3.0.3

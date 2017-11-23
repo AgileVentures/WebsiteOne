@@ -1,17 +1,21 @@
+def loaderio_token
+  (ENV['LOADERIO_TOKEN'] || "loaderio-296a53739de683b99e3a2c4d7944230f")
+end
+
 WebsiteOne::Application.routes.draw do
 
+  apipie
   mount Mercury::Engine => '/'
 
   root 'visitors#index'
 
-
-
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
+  get loaderio_token => 'static_pages#loaderio'
 
   resources :activities
   resources :newsletters
 
-  resources :cards, only: [:update, :edit]
+  resources :cards, only: [:create, :update, :edit, :new]
   resources :subscriptions, only: [:create, :update, :new]
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
@@ -58,6 +62,11 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
+  scope '/api' do
+    scope '/subscriptions' do
+      get '/' => 'api/subscriptions#index', as: 'api_subscriptions', defaults: { format: 'json' }
+    end
+  end
 
   get '/mentors' => 'users#index', defaults: {title: 'Mentor'}
   get '/premium_members' => 'users#index', defaults: {title: 'Premium'}

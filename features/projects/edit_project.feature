@@ -19,6 +19,13 @@ Feature: Edit Project
 
     And there are no videos
 
+  @javascript
+  Scenario: Existing project with multiple repos shows them correctly in edit form
+    Given I am logged in
+    And that project "hello world" has an extra repository "https://github.com/AgileVentures/WebsiteOne"
+    When I am on the "Edit" page for projects "hello world"
+    Then I should see "GitHub url (primary)"
+    And I should see "GitHub url (2)"
 
   Scenario: Edit page has a return link
     Given I am logged in
@@ -30,7 +37,7 @@ Feature: Edit Project
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
-    And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
+    And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
@@ -75,7 +82,7 @@ Feature: Edit Project
   Scenario: Update GitHub url if valid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
-    And I fill in "GitHub link" with "https://github.com/google/instant-hangouts"
+    And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on github
@@ -91,6 +98,6 @@ Feature: Edit Project
   Scenario: Reject GitHub url update if invalid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
-    And I fill in "GitHub link" with "https:/github.com/google/instant-hangouts"
+    And I fill in "GitHub url (primary)" with "https:/github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should see "Project was not updated."

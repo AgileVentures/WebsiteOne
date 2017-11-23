@@ -10,18 +10,15 @@ end
 
 Then /^I should (not )?see hangout button$/ do |absent|
   if absent
-    expect(page).not_to have_css '#liveHOA-placeholder'
+    expect(page).not_to have_css '#hoa_instructions'
   else
-    expect(page).to have_css "#liveHOA-placeholder"
-    src = page.find(:css, '#liveHOA-placeholder iframe')['src']
-    expect(src).to match /talkgadget.google.com/
+    expect(page).to have_css "#hoa_instructions"
   end
 end
 
 Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
-
 
   start_time = hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now
   update_time = hangout['Updated at'] ? Time.parse(hangout['Updated at']) : start_time
@@ -207,5 +204,18 @@ Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is ed
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
   visit event_path(event)
+end
+
+And(/^that we're spying on the SlackService$/) do
+  allow(SlackService).to receive :post_yt_link
+  allow(SlackService).to receive :post_hangout_notification
+end
+
+Then(/^the Youtube URL is not posted in Slack$/) do
+  expect(SlackService).not_to have_received :post_yt_link
+end
+
+And(/^the Hangout URL is posted in Slack$/) do
+  expect(SlackService).to have_received :post_hangout_notification
 end
 
