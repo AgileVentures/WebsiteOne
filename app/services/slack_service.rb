@@ -13,7 +13,7 @@ module SlackService
 
     channel = channel_for_project(hangout.project)
 
-    message = "<#{hangout.hangout_url}|#{hangout.title}>"
+    message = "#{hangout.title}: <#{hangout.hangout_url}|click to join>"
     here_message = "@here #{message}"
     channel_message = "@channel #{message}"
 
@@ -61,7 +61,7 @@ module SlackService
     channel = channel_for_project(hangout.project)
 
     video = "https://youtu.be/#{hangout.yt_video_id}"
-    message = "<#{video}|Video/Livestream for #{hangout.title}>"
+    message = "Video/Livestream: <#{video}|click to play>"
 
     if hangout.category == "Scrum"
       send_slack_message client, CHANNELS[:general], message, hangout.user

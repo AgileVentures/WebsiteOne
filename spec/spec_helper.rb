@@ -27,6 +27,9 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include Capybara::DSL
   config.include FactoryGirl::Syntax::Methods
+
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.filter_run :show_in_doc => true if ENV['APIPIE_RECORD']
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

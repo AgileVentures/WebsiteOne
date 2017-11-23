@@ -1,16 +1,13 @@
 require 'spec_helper'
 
-
-
 describe SlackInviteJob do
   subject { SlackInviteJob.new }
   let(:email) { 'random@random.com' }
-  before { stub_const('Slack::AUTH_TOKEN', 'test') }
+  before { expect(Slack).to receive_message_chain(:config, :token).and_return 'test' }
 
   it 'sends a post request to invite the user to slack and returns the proper response' do
     stub_request(:post, SlackInviteJob::SLACK_INVITE_URL).
         to_return(body: '{"ok": true}')
-
 
     response = subject.perform(email)
 
@@ -34,11 +31,10 @@ describe SlackInviteJob do
 
     it 'includes information about user and error' do
       allow(AdminMailer).to receive_message_chain(:failed_to_invite_user_to_slack, :deliver_later)
-      expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, error, nil)
+      expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, String, nil)
       subject.perform(email)
     end
   end
-
 
   context 'when slack response not ok should notify admin' do
     before do
@@ -53,7 +49,7 @@ describe SlackInviteJob do
 
     it 'includes information about user and error' do
       allow(AdminMailer).to receive_message_chain(:failed_to_invite_user_to_slack, :deliver_later)
-      expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, nil, "already invited")
+      expect(AdminMailer).to receive(:failed_to_invite_user_to_slack).with(email, nil, '"already invited"')
       subject.perform(email)
     end
   end
