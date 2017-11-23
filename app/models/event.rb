@@ -34,7 +34,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.future_events
-    Event.where('repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on > ?', Time.now)
+    Event.where('repeats = \'never\' OR repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on > ?', Time.now)
   end
 
   def self.upcoming_events(project=nil)
@@ -212,8 +212,8 @@ class Event < ActiveRecord::Base
 
   def recent_hangouts
     event_instances
-      .where('updated_at BETWEEN ? AND ?', 1.days.ago + duration, DateTime.now.end_of_day)
-      .order(updated_at: :desc)
+      .where('created_at BETWEEN ? AND ?', 1.days.ago + duration.minutes, DateTime.now.end_of_day)
+      .order(created_at: :desc)
   end
 
   def less_than_ten_till_start?

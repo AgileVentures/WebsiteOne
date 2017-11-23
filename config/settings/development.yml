@@ -1,4 +1,8 @@
 features:
+  edit_static_pages:
+    enabled: <%= ENV['EDIT_STATIC_PAGES'] %>
+  get_next_scrum:
+    enabled: <%= ENV['GET_NEXT_SCRUM'] %>
   custom_errors:
     enabled: false
   slack:
@@ -11,6 +15,9 @@ features:
       enabled: false
   welcome_email:
     enabled: false
+
+api:
+  premium_subscriptions_token: <%= ENV['PREMIUM_SUBSCRIPTIONS_API_TOKEN'] %>
 
 hangouts:
   app_id: '10095526298'
