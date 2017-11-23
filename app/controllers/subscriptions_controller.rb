@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
 
     create_stripe_customer unless paypal?
 
-    add_appropriate_subscription(@user)
+    add_appropriate_subscription(@user, current_user)
     send_acknowledgement_email
 
   rescue StandardError => e
@@ -95,7 +95,7 @@ class SubscriptionsController < ApplicationController
     StripeMock.create_test_helper.generate_card_token
   end
 
-  def add_appropriate_subscription(user)
+  def add_appropriate_subscription(user, sponsor = user)
     user ||= current_user
     return unless user
 
@@ -105,7 +105,7 @@ class SubscriptionsController < ApplicationController
       payment_source = PaymentSource::Stripe.new identifier: @stripe_customer.id
     end
 
-    AddSubscriptionToUserForPlan.with(user, Time.now, @plan, payment_source)
+    AddSubscriptionToUserForPlan.with(user, sponsor, Time.now, @plan, payment_source)
   end
 
   def send_acknowledgement_email
