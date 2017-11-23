@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AddSubscriptionToUserForPlan do
 
-  subject(:add_subscription_to_user_for_plan) { described_class.with(user, time, plan, payment_source, subscription_klass) }
+  subject(:add_subscription_to_user_for_plan) { described_class.with(user, sponsor, time, plan, payment_source, subscription_klass) }
 
   let(:subscription_klass) { class_double(Subscription) }
 
@@ -10,6 +10,7 @@ describe AddSubscriptionToUserForPlan do
   let(:third_party_id) { instance_double('ThirdPartyID') }
   let(:time) { instance_double(Time) }
   let(:user) { instance_double(User) }
+  let(:sponsor) { instance_double(User) }
   let(:subscription) { instance_double(Subscription) }
   let(:payment_source) { instance_double(PaymentSource::Stripe) }
 
@@ -21,7 +22,7 @@ describe AddSubscriptionToUserForPlan do
   end
 
   it 'creates a subscription of the appropriate type' do
-    expect(subscription_klass).to receive(:new).with(started_at: time, plan: plan, payment_source: payment_source)
+    expect(subscription_klass).to receive(:new).with(started_at: time, sponsor: sponsor, plan: plan, payment_source: payment_source)
     add_subscription_to_user_for_plan
   end
 
