@@ -59,7 +59,8 @@ GEM
     acts_as_tree (2.7.0)
       activerecord (>= 3.0.0)
     acts_as_votable (0.11.1)
-    addressable (2.4.0)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     airbrake (6.0.0)
       airbrake-ruby (~> 2.0)
     airbrake-ruby (2.2.2)
@@ -389,11 +390,12 @@ GEM
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
-    puffing-billy (0.10.0)
-      addressable (~> 2.4.0)
-      em-http-request (~> 1.1.0)
+    public_suffix (3.0.1)
+    puffing-billy (0.11.0)
+      addressable (~> 2.4, >= 2.4.0)
+      em-http-request (~> 1.1, >= 1.1.0)
       em-synchrony
-      eventmachine (~> 1.0.4)
+      eventmachine (~> 1.0, >= 1.0.4)
       eventmachine_httpserver
       http_parser.rb (~> 0.6.0)
       multi_json
