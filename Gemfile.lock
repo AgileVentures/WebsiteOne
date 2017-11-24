@@ -363,7 +363,7 @@ GEM
       activerecord (>= 3.0, < 6.0)
       activesupport (>= 3.0, < 6.0)
       request_store (~> 1.1)
-    paranoia (2.3.1)
+    paranoia (2.4.0)
       activerecord (>= 4.0, < 5.2)
     pg (0.20.0)
     phantomjs (2.1.1.0)
@@ -664,7 +664,7 @@ DEPENDENCIES
   omniauth-gplus (~> 2.0.1)
   omniauth-oauth2 (~> 1.4.0)
   paper_trail (= 4.0.0)
-  paranoia (~> 2.2)
+  paranoia (~> 2.4)
   pg
   phantomjs
   pivotal-tracker-api (= 0.1.9)
