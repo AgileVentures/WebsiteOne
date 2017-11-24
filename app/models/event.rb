@@ -25,8 +25,19 @@ class Event < ActiveRecord::Base
   REPEAT_ENDS_OPTIONS = %w[on never]
   DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
 
+  # hoped the below would help address the issue about how rails 4 -> 5 is going to treat setting non-booleans
+  # to booleans - adding the setter fixes the specs, but breaks the acceptance tests
+  #
+  # def repeat_ends=(repeat_ends)
+  #   super repeat_ends == 'on'
+  # end
+  #
+  # def repeat_ends
+  #   super ? 'on' : 'never'
+  # end
+
   def set_repeat_ends_string
-    @repeat_ends_string = repeat_ends ? "on" : "never"
+    @repeat_ends_string = repeat_ends ? 'on' : 'never'
   end
 
   def self.base_future_events(project)
