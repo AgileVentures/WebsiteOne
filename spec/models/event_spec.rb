@@ -148,7 +148,7 @@ describe Event, :type => :model do
                                         repeats: 'weekly',
                                         repeats_every_n_weeks: 1,
                                         repeats_weekly_each_days_of_the_week_mask: 96,
-                                        repeat_ends: 'never',
+                                        repeat_ends: false,
                                         repeat_ends_on: 'Tue, 25 Jun 2013',
                                         time_zone: 'Eastern Time (US & Canada)')
       expect(event.schedule.first(5)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sun, 23 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
@@ -164,7 +164,7 @@ describe Event, :type => :model do
                                         repeats: 'weekly',
                                         repeats_every_n_weeks: 1,
                                         repeats_weekly_each_days_of_the_week_mask: 64,
-                                          repeat_ends: 'never',
+                                        repeat_ends: false,
                                         repeat_ends_on: 'Mon, 17 Jun 2013',
                                         time_zone: 'Eastern Time (US & Canada)')
       expect(event.schedule.first(5)).to eq(['Sun, 23 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sun, 07 Jul 2013 09:00:00 UTC +00:00', 'Sun, 14 Jul 2013 09:00:00 UTC +00:00', 'Sun, 21 Jul 2013 09:00:00 UTC +00:00'])
@@ -180,7 +180,7 @@ describe Event, :type => :model do
                                         repeats: 'weekly',
                                         repeats_every_n_weeks: 1,
                                         repeats_weekly_each_days_of_the_week_mask: 1,
-                                        repeat_ends: 'never',
+                                        repeat_ends: false,
                                         repeat_ends_on: 'Mon, 17 Jun 2013',
                                         time_zone: 'UTC')
       expect(event.schedule.first(5)).to eq(['Mon, 17 Jun 2013 09:00:00 GMT +00:00', 'Mon, 24 Jun 2013 09:00:00 GMT +00:00', 'Mon, 01 Jul 2013 09:00:00 GMT +00:00', 'Mon, 08 Jul 2013 09:00:00 GMT +00:00', 'Mon, 15 Jul 2013 09:00:00 GMT +00:00'])
@@ -230,7 +230,7 @@ describe Event, :type => :model do
                 duration: 600,
                 repeats: 'never',
                 repeats_every_n_weeks: nil,
-                repeat_ends: 'never',
+                repeat_ends: false,
                 repeat_ends_on: 'Mon, 17 Jun 2013',
                 time_zone: 'Eastern Time (US & Canada)'}
     end
@@ -255,7 +255,7 @@ describe Event, :type => :model do
                                  repeats: 'weekly',
                                  repeats_every_n_weeks: 1,
                                  repeats_weekly_each_days_of_the_week_mask: 0b1000000,
-                                 repeat_ends: 'on',
+                                 repeat_ends: true,
                                  repeat_ends_on: '2013-07-01')
     end
 
@@ -378,7 +378,7 @@ describe Event, :type => :model do
                                          repeats: 'weekly',
                                          repeats_every_n_weeks: 1,
                                          repeats_weekly_each_days_of_the_week_mask: 0b1111111,
-                                         repeat_ends: 'on',
+                                         repeat_ends: true,
                                          repeat_ends_on: '2015-6-25')
     end
 
@@ -408,7 +408,7 @@ describe Event, :type => :model do
                                          repeats: 'weekly',
                                          repeats_every_n_weeks: 1,
                                          repeats_weekly_each_days_of_the_week_mask: 0b1111111,
-                                         repeat_ends: 'never')
+                                         repeat_ends: false)
     end
 
     it 'should return the options[:endtime] when specified' do
