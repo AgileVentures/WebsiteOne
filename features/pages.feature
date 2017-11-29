@@ -25,7 +25,7 @@ Feature: Static pages
   # Sponsors and Guides scenarios not really needed. To be removed later.
   Scenario: See Sponsor Banners
     When I am on the "projects" page
-    Then I should see sponsor banner for "drie"
+    Then I should see sponsor banner for "Standuply"
     And I should see sponsor banner for "Craft Academy"
     And I should see sponsor banner for "Mooqita"
     And I should see sponsor banner for "RubyMine"
