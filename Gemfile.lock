@@ -593,7 +593,7 @@ GEM
     uniform_notifier (1.10.0)
     utf8-cleaner (0.2.5)
       activesupport
-    vcr (3.0.3)
+    vcr (4.0.0)
     verbs (2.1.4)
       activesupport (>= 2.3.4)
       i18n
