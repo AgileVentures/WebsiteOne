@@ -13,13 +13,18 @@ Given(/^the following projects exist:$/) do |table|
     end
     if hash[:github_url].present?
       project.source_repositories.build(url: hash[:github_url])
-    else
-      project.source_repositories.build
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
     end
     project.save!
+  end
+end
+
+Given(/^the following source repositories exist:$/) do |table|
+  table.hashes.each do |hash|
+    source_repository = SourceRepository.new(url: hash[:url], project_id: Project.find_by(title: hash[:project]).id)
+    source_repository.save!
   end
 end
 
@@ -96,6 +101,10 @@ end
 Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, name|
   object = Project.find_by_title(name)
   step %Q{I #{option} see link "#{object.github_url.split('/').last}"}
+end
+
+Given(/^I (should not|should) see links to "(.*?)" on github$/) do |option, name|
+  step %Q{I #{option} see link "#{name}"}
 end
 
 Given(/^I (should not|should) see a link to "(.*?)" on Pivotal Tracker$/) do |option, name|
