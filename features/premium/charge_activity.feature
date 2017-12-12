@@ -17,6 +17,7 @@ Feature: Charge Users Money
       | Pricing         | wonga                   |
       | Getting Started | Remote Pair Programming |
 
+
   Scenario: There should be a link to the premium page on the navbar
     Given I am on the home page
     Then I should see "PREMIUM" within the navigation bar
@@ -25,8 +26,16 @@ Feature: Charge Users Money
 
   # following four could be converted to scenario outline
 
+  Scenario: Cannot sign up for premium without logging in
+    Given I visit "/subscriptions/new?plan=premium"
+    Then I should be on the "sign in" page
+    When I sign in with valid credentials
+    Then I should be on the "premium sign up" page
+    And I should see "Sign Me Up For Premium!"
+
   Scenario: Sign up for premium f2f membership
-    Given I visit "/subscriptions/new?plan=premiumf2f"
+    Given I am logged in
+    And I visit "/subscriptions/new?plan=premiumf2f"
     And I should not see "Sign Me Up For Premium!"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium f2f
@@ -34,7 +43,8 @@ Feature: Charge Users Money
     And the user should receive a "Welcome to AgileVentures Premium F2F" email
 
   Scenario: Sign up for premium plus membership
-    Given I visit "/subscriptions/new?plan=premiumplus"
+    Given I am logged in
+    And  I visit "/subscriptions/new?plan=premiumplus"
     And I should not see "Sign Me Up For Premium!"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium plus

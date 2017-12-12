@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
 
+  before_action :authenticate_user!
   skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
