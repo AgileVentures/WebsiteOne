@@ -35,6 +35,19 @@ describe "Subscriptions" do
           expect(JSON.parse(response.body)).to include(a_hash_including("payment_source" => "PaymentSource::PayPal", "plan_name" => plan.name, "email" => "kitty@cat.com", "sponsor_email" => "kitty@cat.com", "started_on" => start_date, "ended_on" => nil))
         end
       end
+
+      context 'with deleted user and sponsor' do
+        let(:sponsor) { FactoryGirl.create(:user, email: "catty@kit.com", deleted_at: 2.days.ago) }
+        let!(:subscription) { FactoryGirl.create(:subscription, user: user, sponsor: sponsor, plan: plan, started_at: start_time, ended_at: end_time) }
+
+        it 'succeeds' do
+          user.destroy
+          get api_subscriptions_path, nil, headers
+          expect(response).to be_success
+          expect(JSON.parse(response.body)).to include(a_hash_including("payment_source" => "PaymentSource::PayPal", "plan_name" => plan.name, "email" => "kitty@cat.com", "sponsor_email" => "catty@kit.com", "started_on" => start_date, "ended_on" => end_date))
+        end
+
+      end
     end
 
     context 'without proper token' do
