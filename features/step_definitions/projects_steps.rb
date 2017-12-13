@@ -13,6 +13,8 @@ Given(/^the following projects exist:$/) do |table|
     end
     if hash[:github_url].present?
       project.source_repositories.build(url: hash[:github_url])
+    else
+      project.source_repositories.build
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
@@ -23,7 +25,9 @@ end
 
 Given(/^the following source repositories exist:$/) do |table|
   table.hashes.each do |hash|
-    source_repository = SourceRepository.new(url: hash[:url], project_id: Project.find_by(title: hash[:project]).id)
+    project = Project.find_by(title: hash[:project])
+    project.source_repositories.delete_all
+    source_repository = SourceRepository.new(url: hash[:url], project_id: project.id)
     source_repository.save!
   end
 end
