@@ -21,7 +21,7 @@ module CustomErrors
     error.backtrace.each_with_index { |line, index| Rails.logger.error line; break if index >= 5 }
 
     unless [ 404 ].include? status
-      notice = Airbrake.build_notice(exception)
+      notice = Airbrake.build_notice(error)
       notice.stash[:rack_request] = env['grape.request']
       Airbrake.notify(notice)
       # ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'was doing something wrong' })
