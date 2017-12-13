@@ -1,6 +1,6 @@
 <aside class="sidebar-widget projects-sidebar-group">
   <h1 class="widget-title">Connected on</h1>
-  <% if @project.source_repositories.size > 0 %>
+  <% if (@project.source_repositories.size > 0) && ! @project.source_repositories[0].url.nil? %>
       <% @project.source_repositories.each do |repo| %>
         <p><i class="fa fa-github-alt fa-lg"></i>
         <span class="small"><%= link_to "#{repo.url.split('/').last} ", repo.url %>on GitHub</span></p>

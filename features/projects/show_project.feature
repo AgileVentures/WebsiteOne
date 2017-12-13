@@ -21,6 +21,7 @@ Feature: Display Projects
       | url                                 | project   |
       | https://github.com/HelloSun         | hello sun |
       | https://github.com/HelloSunExtras   | hello sun |
+
     And there are no videos
 
   Scenario: Project show page renders a list of members
