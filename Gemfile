@@ -7,6 +7,7 @@ gem 'acts-as-taggable-on'
 gem 'acts_as_follower'
 gem 'acts_as_tree'
 gem 'acts_as_votable', '~> 0.11.1'
+gem 'airbrake'
 gem 'apipie-rails'
 gem 'addressable'
 gem 'bootstrap-sass'
@@ -120,7 +121,6 @@ group :development, :staging, :production do
 end
 
 group :production do
-  gem 'airbrake'
   gem 'newrelic_rpm'
   gem 'rails_12factor'
 end
