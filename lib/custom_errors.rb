@@ -1,3 +1,5 @@
+require 'airbrake'
+
 module CustomErrors
 
   def self.included(base)
