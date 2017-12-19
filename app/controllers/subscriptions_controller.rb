@@ -61,11 +61,6 @@ class SubscriptionsController < ApplicationController
     store_location_for(:user, request.fullpath)
   end
 
-  def store_user_location!
-    # :user is the scope we are authenticating
-    store_location_for(:user, request.fullpath)
-  end
-
   def detect_plan_before_payment
     Plan.find_by(third_party_identifier: params[:plan]) || default_plan
   rescue ActiveRecord::NotFound
