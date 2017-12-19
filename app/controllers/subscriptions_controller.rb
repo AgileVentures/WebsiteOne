@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
 
+  before_action :store_user_location! #, if: :storable_location?
   before_action :authenticate_user!
   skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
@@ -51,6 +52,19 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
+  def storable_location?
+    (action_name == "new") && current_user.nil?
+  end
+
+  def store_user_location!
+    store_location_for(:user, request.fullpath)
+  end
+
+  def store_user_location!
+    # :user is the scope we are authenticating
+    store_location_for(:user, request.fullpath)
+  end
 
   def detect_plan_before_payment
     Plan.find_by(third_party_identifier: params[:plan]) || default_plan

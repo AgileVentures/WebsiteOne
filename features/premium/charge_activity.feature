@@ -27,11 +27,12 @@ Feature: Charge Users Money
   # following four could be converted to scenario outline
 
   Scenario: Cannot sign up for premium without logging in
-    Given I visit "/subscriptions/new?plan=premium"
+    Given I exist as a user
+    And I visit "/subscriptions/new?plan=premium"
     Then I should be on the "sign in" page
     When I sign in with valid credentials
     Then I should be on the "premium sign up" page
-    And I should see "Sign Me Up For Premium!"
+    And I should see "7 day free trial! No charge for 7 days"
 
   Scenario: Sign up for premium f2f membership
     Given I am logged in
