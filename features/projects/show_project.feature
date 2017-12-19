@@ -17,7 +17,7 @@ Feature: Display Projects
       | hello terra   | greetings terra folks   |             | active   |                                             |                                                  |              |
       | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         |
 
-    And the following source repositories exist:
+      And the following source repositories exist:
       | url                                 | project   |
       | https://github.com/HelloSun         | hello sun |
       | https://github.com/HelloSunExtras   | hello sun |
