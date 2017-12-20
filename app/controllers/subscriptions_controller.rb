@@ -54,7 +54,9 @@ class SubscriptionsController < ApplicationController
   private
 
   def require_login?
-    true unless action_name == "create" && Rails.env.test?
+    # we have this exception for paypal creation in test since we can't easily
+    # maintain the capybara session for API endpoint hit
+    true unless action_name == "create" && paypal? && Rails.env.test?
   end
 
   def storable_location?
