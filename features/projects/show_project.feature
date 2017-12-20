@@ -17,6 +17,11 @@ Feature: Display Projects
       | hello terra   | greetings terra folks   |             | active   |                                             |                                                  |              |
       | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         |
 
+    And the following source repositories exist:
+      | url                               | project   |
+      | https://github.com/HelloSun       | hello sun |
+      | https://github.com/HelloSunExtras | hello sun |
+
     And there are no videos
 
   Scenario: Project show page renders a list of members
@@ -29,6 +34,11 @@ Feature: Display Projects
     Given I am on the "Show" page for project "hello world"
     And I should see a link to "hello world" on github
     And I should see a link to "hello world" on Pivotal Tracker
+
+  Scenario: Project show page has links to multiple github repos
+    Given I am on the "Show" page for project "hello sun"
+    And I should see links to "HelloSun" on github
+    And I should see links to "HelloSunExtras" on github
 
   Scenario: Project show page has hangout button for users that not follow the project
     Given I am logged in
