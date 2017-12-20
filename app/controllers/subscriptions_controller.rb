@@ -1,7 +1,7 @@
 class SubscriptionsController < ApplicationController
 
-  before_action :store_user_location! #, if: :storable_location?
-  before_action :authenticate_user!
+  before_action :store_user_location! , if: :storable_location?
+  before_action :authenticate_user!, if: :require_login?
   skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
@@ -52,6 +52,10 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
+  def require_login?
+    true unless action_name == "create" && Rails.env.test?
+  end
 
   def storable_location?
     (action_name == "new") && current_user.nil?

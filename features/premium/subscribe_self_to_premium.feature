@@ -31,7 +31,7 @@ Feature: Subscribe Self to Premium
     And I should be my own sponsor
 
   Scenario: Pay by card (with free trial month)
-    Given I logged in
+    Given I am logged in
     And I visit "subscriptions/new?plan=av_premium_first_month_free"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
