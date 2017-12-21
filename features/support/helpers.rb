@@ -65,7 +65,7 @@ module Helpers
   end
 
   def sign_in
-    visit new_user_session_path
+    visit new_user_session_path unless current_path == new_user_session_path
     within ('#main') do
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]
