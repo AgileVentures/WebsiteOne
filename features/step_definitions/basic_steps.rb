@@ -57,7 +57,7 @@ def path_to(page_name, id = '')
     when 'sign up' then
       new_user_registration_path
     when 'premium sign up' then
-      new_subscription_path
+      new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
     else
