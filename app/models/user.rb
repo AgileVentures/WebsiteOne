@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   has_many :commit_counts
   has_many :status
 
-  has_one :subscription, autosave: true
+  has_many :subscriptions, autosave: true
 
   def stripe_customer_id # ultimately replacing the field stripe_customer
     return nil unless subscription
