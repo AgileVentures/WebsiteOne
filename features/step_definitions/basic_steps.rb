@@ -8,6 +8,8 @@ def path_to(page_name, id = '')
   case name
     when 'home' then
       root_path
+    when 'about' then
+      '/about-us'
     when 'registration' then
       new_user_registration_path
     when 'edit registration' then
