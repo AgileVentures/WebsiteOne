@@ -403,7 +403,7 @@ GEM
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    polyamorous (1.3.1)
+    polyamorous (1.3.2)
       activerecord (>= 3.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -698,7 +698,7 @@ DEPENDENCIES
   phantomjs
   pivotal-tracker-api (= 0.1.9)
   poltergeist
-  polyamorous (~> 1.3.1)
+  polyamorous (~> 1.3.2)
   pry-byebug
   pry-rails
   public_activity
