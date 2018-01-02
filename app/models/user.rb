@@ -49,8 +49,9 @@ class User < ActiveRecord::Base
   has_many :subscriptions, autosave: true
 
   def stripe_customer_id # ultimately replacing the field stripe_customer
-    return nil unless current_subscription
-    current_subscription.identifier
+    subscription = current_subscription
+    return nil unless subscription
+    subscription.identifier
   end
 
   has_one :karma
@@ -90,6 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def membership_type
+    subscription = current_subscription
     return "Basic" unless subscription
     subscription.plan.name
   end
