@@ -49,8 +49,8 @@ class User < ActiveRecord::Base
   has_many :subscriptions, autosave: true
 
   def stripe_customer_id # ultimately replacing the field stripe_customer
-    return nil unless subscription
-    subscription.identifier
+    return nil unless current_subscription
+    current_subscription.identifier
   end
 
   has_one :karma
@@ -77,6 +77,12 @@ class User < ActiveRecord::Base
   scope :title, -> (title) { tagged_with(title) }
 
   self.per_page = 30
+
+  def current_subscription
+    current_subscriptions = subscriptions.where(ended_at: nil).where('started_at < :now', {now: DateTime.now})
+    return nil if current_subscriptions.nil? or current_subscriptions.empty?
+    current_subscriptions.first
+  end
 
   def self.filter_if_title title
     return User.all if title.blank?

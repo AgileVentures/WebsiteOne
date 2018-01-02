@@ -493,14 +493,24 @@ describe User, type: :model do
     end
   end
 
-  context 'look up stripe id from subscription' do
-    let(:subscription) { mock_model(Subscription, save: true) }
-    before { allow(subscription).to receive(:[]=) }
+  context 'supporting current subscription' do
+    subject(:user) { FactoryGirl.create(:user, :with_karma) }
+    let(:premium) { FactoryGirl.create(:plan, name: 'Premium') }
+    let(:premium_mob) { FactoryGirl.create(:plan, name: 'Premium Mob') }
+    let(:payment_source) { PaymentSource::PayPal.create(identifier: '75e') }
+
+    # presence of type (no longer used) in the Subscriptions model is confusing ...
+    # should get rid of all the STI classes ...
+
+    let!(:subscription1) { FactoryGirl.create(:subscription, user: user, plan: premium, started_at: 2.days.ago, ended_at: 1.day.ago) }
+    let!(:subscription2) { FactoryGirl.create(:subscription, user: user, plan: premium_mob, started_at: 1.day.ago, payment_source: payment_source) }
+
+    it 'returns subscription that has started and has not ended' do
+      expect(user.current_subscription.id).to eq subscription2.id
+    end
 
     it 'asks subscription for identifier' do
-      expect(subscription).to receive :identifier
-      subject.subscription = subscription
-      subject.stripe_customer_id
+      expect(subject.stripe_customer_id).to eq '75e'
     end
 
   end
