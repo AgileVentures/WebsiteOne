@@ -16,7 +16,7 @@ describe AddSubscriptionToUserForPlan do
 
   before do
     allow(subscription_klass).to receive(:new)
-    allow(user).to receive(:subscription=)
+    allow(user).to receive_message_chain(:subscriptions, :<<)
     allow(user).to receive(:save)
     allow(user).to receive_message_chain(:title_list, :<<)
   end
@@ -28,7 +28,7 @@ describe AddSubscriptionToUserForPlan do
 
   it 'sets the user subscription' do
     expect(subscription_klass).to receive(:new).and_return(subscription)
-    expect(user).to receive(:subscription=).with(subscription)
+    expect(user).to receive_message_chain(:subscriptions, :<<).with(subscription)
     add_subscription_to_user_for_plan
   end
 
