@@ -26,7 +26,7 @@ Feature: Connect to social sites
 
   @omniauth-with-invalid-credentials
   Scenario: Try to log in with invalid credentials
-    When I click "with Github"
+    When I click "with GitHub"
     Then I should see "invalid_credentials"
     And I should be signed out
 
