@@ -106,3 +106,14 @@ Feature: Static pages
     Given the page "About Us" has a child page with title "SubPage1"
     And I am on the static "SubPage1" page
     Then I should see ancestry "Agile Ventures >> About Us >> SubPage1"
+
+  Scenario: The browser tab text should reflect the page the user is on
+    Given I am on the "Home" page
+    Then the "Home" page title should read "Home | AgileVentures"
+    When I click "About"
+    Then I should be on the static "About Us" page
+    And the "About" page title should read "About Us | AgileVentures"
+
+  Scenario: The browser tab of the registration page should say AgileVentures
+    Given I am on the "registration" page
+    Then the "Sign up" page title should read "AgileVentures"
