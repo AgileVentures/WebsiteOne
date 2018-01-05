@@ -598,7 +598,7 @@ GEM
       i18n
     warden (1.2.7)
       rack (>= 1.0)
-    webmock (3.2.0)
+    webmock (3.2.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
