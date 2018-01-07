@@ -76,7 +76,7 @@ $ bundle exec rake db:setup
     
 Ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in.
 
-Assuming your locate is `en_US.UTF-8` do the following:
+Assuming your locale is `en_US.UTF-8` do the following:
 
 Run in terminal:
 
