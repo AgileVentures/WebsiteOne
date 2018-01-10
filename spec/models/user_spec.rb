@@ -137,7 +137,7 @@ describe User, type: :model do
     subject { build(:user, last_sign_in_ip: '85.228.111.204') }
 
     before(:each) do
-      Geocoder.configure(:ip_lookup => :test)
+      Geocoder.configure(lookup: :test, ip_lookup: :test)
       Geocoder::Lookup::Test.add_stub(
           '85.228.111.204', [
           {
