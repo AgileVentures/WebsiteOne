@@ -68,6 +68,8 @@ class EventInstancesController < ApplicationController
 
   def local_request?
     request.env['HTTP_ORIGIN'].include?(request.env['HTTP_HOST'])
+  rescue
+    true
   end
 
   def set_cors_headers

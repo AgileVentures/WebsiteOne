@@ -37,6 +37,16 @@ Given(/^following events exist:$/) do |table|
   end
 end
 
+Given(/^the following events exist that repeat every weekday:$/) do |table|
+  table.hashes.each do |hash|
+    hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
+    hash[:repeats_weekly_each_days_of_the_week_mask] = 31
+    hash[:repeats_every_n_weeks] = 1
+    hash[:repeats] = 'weekly'
+    Event.create!(hash)
+  end
+end
+
 Given(/^following events exist for project "([^"]*)" with active hangouts:$/) do |project_title, table|
   project = Project.where(title: "#{project_title}").take
 
@@ -351,4 +361,9 @@ end
 
 Then(/^the export to google calendar link should not be visible$/) do
   expect(page).not_to have_css("#calendar_links", visible: true)
+end
+
+
+And(/^I should not see any HTML tags$/) do
+  expect(page).not_to match /<.*>/
 end

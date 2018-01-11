@@ -3,7 +3,7 @@
       window._rails_env = "<%= Rails.env %>"
   <% end %>
   <%= render 'layouts/meta_tags' %>
-  <title><%= content_for?(:title) ? [ yield(:title),  ' | AgileVentures - WebsiteOne'].join(' ') : 'AgileVentures - WebsiteOne' %></title>
+  <title><%= content_for?(:title) ? [ yield(:title),  '| AgileVentures'].join(' ') : 'AgileVentures' %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:400,100,900' %>
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Ubuntu' %>
