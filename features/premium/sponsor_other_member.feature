@@ -46,8 +46,11 @@ Feature: Allow Users to Sponsor other members
     And I should be Alice's sponsor
 
   Scenario: non logged in user upgrades another user from free tier to premium
-    Given I visit Alice's profile page
+    Given I exist as a user
+    And I visit Alice's profile page
     And I click "Sponsor for Premium"
+    Then I should be on the "sign in" page
+    When I sign in with valid credentials
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "you have sponsored Alice Jones as a Premium Member"
@@ -59,8 +62,11 @@ Feature: Allow Users to Sponsor other members
     And I should not see "Upgrade to Premium"
 
   Scenario: non logged in user upgrades another user from free tier to premium via PayPal
-    Given I visit Alice's profile page
+    Given I exist as a user
+    And I visit Alice's profile page
     And I click "Sponsor for Premium"
+    Then I should be on the "sign in" page
+    When I sign in with valid credentials
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint after sponsoring Alice
     Then I should see "you have sponsored Alice Jones as a Premium Member" in last_response

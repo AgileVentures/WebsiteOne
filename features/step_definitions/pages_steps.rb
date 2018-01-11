@@ -59,3 +59,8 @@ Then(/^I should see ancestry "([^"]*)"$/) do |str|
     end
   end
 end
+
+Then(/^the "([^"]*)" page title should read "([^"]*)"$/) do |str, title|
+	visit path_to(str)
+	expect(page.title).to eq "#{title}"
+end

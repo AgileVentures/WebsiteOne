@@ -23,6 +23,15 @@ Given(/^the following projects exist:$/) do |table|
   end
 end
 
+Given(/^the following source repositories exist:$/) do |table|
+  table.hashes.each do |hash|
+    project = Project.find_by(title: hash[:project])
+    project.source_repositories.delete_all
+    source_repository = SourceRepository.new(url: hash[:url], project_id: project.id)
+    source_repository.save!
+  end
+end
+
 Given(/^the following legacy projects exist:$/) do |table|
   # table is a table.hashes.keys # => [:title, :description, :github_url, :status, :commit_count]
   table.hashes.each do |hash|
@@ -96,6 +105,10 @@ end
 Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, name|
   object = Project.find_by_title(name)
   step %Q{I #{option} see link "#{object.github_url.split('/').last}"}
+end
+
+Given(/^I (should not|should) see links to "(.*?)" on github$/) do |option, name|
+  step %Q{I #{option} see link "#{name}"}
 end
 
 Given(/^I (should not|should) see a link to "(.*?)" on Pivotal Tracker$/) do |option, name|

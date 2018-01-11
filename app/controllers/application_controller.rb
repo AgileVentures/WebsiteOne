@@ -26,9 +26,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.sign_in_count <= 1
-      '/getting-started'
+      stored_location_for(resource) || '/getting-started'
     else
-      request.env['omniauth.origin'] || session[:previous_url] || root_path
+      stored_location_for(resource) || request.env['omniauth.origin'] || session[:previous_url] || root_path
     end
   end
 
