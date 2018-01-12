@@ -3,6 +3,8 @@ features:
     enabled: <%= ENV['EDIT_STATIC_PAGES'] %>
   get_next_scrum:
     enabled: <%= ENV['GET_NEXT_SCRUM'] %>
+  get_next_scrum_homepage:
+    enabled: <%= ENV['GET_NEXT_SCRUM_HOMEPAGE'] %>
   custom_errors:
     enabled: true
   slack:

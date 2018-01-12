@@ -8,4 +8,12 @@ class VisitorsController < ApplicationController
 
     render layout: false
   end
+
+  def get_next_scrum
+    if Features.get_next_scrum_homepage.enabled
+      super
+    else
+      @next_event = nil
+    end
+  end
 end
