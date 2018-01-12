@@ -3,6 +3,8 @@ features:
     enabled: true
   get_next_scrum:
     enabled: true
+  get_next_scrum_homepage:
+    enabled: true
   slack:
     notifications:
       enabled: false
