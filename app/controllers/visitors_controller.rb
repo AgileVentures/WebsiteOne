@@ -10,7 +10,6 @@ class VisitorsController < ApplicationController
   end
 
   def get_next_scrum
-    byebug
     if Features.get_next_scrum_homepage.enabled
       super
     else
