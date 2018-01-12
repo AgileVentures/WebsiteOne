@@ -16,12 +16,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:first_name, :last_name, :email, :bio, :password,
-               :password_confirmation, :current_password,
-               :display_email, :display_profile, :display_hire_me,
-               :receive_mailings, :status)
-    end
+    devise_parameter_sanitizer.permit(:account_update, keys:[
+      :first_name, :last_name, :email, :bio, :password,
+      :password_confirmation, :current_password,
+      :display_email, :display_profile, :display_hire_me,
+      :receive_mailings, :status])
   end
 
   def after_sign_in_path_for(resource)
