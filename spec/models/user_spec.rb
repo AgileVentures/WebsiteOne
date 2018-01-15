@@ -137,41 +137,43 @@ describe User, type: :model do
     subject { build(:user, last_sign_in_ip: '85.228.111.204') }
 
     before(:each) do
-      Geocoder.configure(:ip_lookup => :test)
-      Geocoder::Lookup::Test.add_stub(
-          '85.228.111.204', [
-          {
-              ip: '85.228.111.204',
-              country_code: 'SE',
-              country_name: 'Sweden',
-              region_code: '28',
-              region_name: 'Västra Götaland',
-              city: 'Alingsås',
-              zipcode: '44139',
-              latitude: 57.9333,
-              longitude: 12.5167,
-              metro_code: '',
-              areacode: ''
-          }.as_json
+      Geocoder.configure(lookup: :test, ip_lookup: :test)
+      sweden_address = [
+        {
+          ip: '85.228.111.204',
+          country_code: 'SE',
+          country_name: 'Sweden',
+          region_code: '28',
+          region_name: 'Västra Götaland',
+          city: 'Alingsås',
+          zipcode: '44139',
+          latitude: 57.9333,
+          longitude: 12.5167,
+          metro_code: '',
+          areacode: ''
+        }.as_json
       ]
-      )
+
+      Geocoder::Lookup::Test.add_stub('127.0.0.1', sweden_address)
+      Geocoder::Lookup::Test.add_stub('0.0.0.0', sweden_address)
+      Geocoder::Lookup::Test.add_stub('85.228.111.204', sweden_address)
 
       Geocoder::Lookup::Test.add_stub(
-          '50.78.167.161', [
+        '50.78.167.161', [
           {
-              ip: '50.78.167.161',
-              country_code: 'US',
-              country_name: 'United States',
-              region_code: 'WA',
-              region_name: 'Washington',
-              city: 'Seattle',
-              zipcode: '',
-              latitude: 47.6062,
-              longitude: -122.3321,
-              metro_code: '819',
-              areacode: '206'
+            ip: '50.78.167.161',
+            country_code: 'US',
+            country_name: 'United States',
+            region_code: 'WA',
+            region_name: 'Washington',
+            city: 'Seattle',
+            zipcode: '',
+            latitude: 47.6062,
+            longitude: -122.3321,
+            metro_code: '819',
+            areacode: '206'
           }.as_json
-      ]
+        ]
       )
 
     end
