@@ -140,3 +140,9 @@ end
 def other_plans(plan_name)
   Plan.all.pluck(:name).reject!{|e| e == plan_name}.push('Basic')
 end
+
+# use for debugging only
+And(/^I am a "([^"]*)" Member$/) do |type|
+  puts @user.subscriptions.map{|s| s.inspect}
+  expect(@user.membership_type).to eq type
+end

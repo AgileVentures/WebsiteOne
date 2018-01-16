@@ -5,6 +5,7 @@ class AddSubscriptionToUserForPlan
     user.subscriptions << subscription_klass.new(started_at: time, sponsor: sponsor, plan: plan, payment_source: payment_source)
     user.title_list << plan.name
     user.save!
+    # puts User.find(user.id).subscriptions.map{|s| s.inspect}
   end
 
   def self.ensure_all_previous_subscriptions_are_ended(user, time)

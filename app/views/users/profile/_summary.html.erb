@@ -69,7 +69,6 @@
                          type: 'button' %></p>
         </li>
     <% end %>
-      <% # byebug  # the presence of this allows features/premium/upgrade_membership.feature:36 to pass for me locally %>
       <li><%= presenter.user.membership_type %> Member</li>
       <% if presenter.user.membership_type == 'Premium' %>
         <li><%= render 'users/profile/premium_mob_upgrade', presenter: presenter  %></li>
