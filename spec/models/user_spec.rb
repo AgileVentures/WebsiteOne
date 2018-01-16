@@ -509,7 +509,6 @@ describe User, type: :model do
     let!(:subscription1) { FactoryGirl.create(:subscription, user: user, plan: premium, started_at: 2.days.ago, ended_at: 1.day.ago) }
     let!(:subscription2) { FactoryGirl.create(:subscription, user: user, plan: premium_mob, started_at: 1.day.ago, payment_source: payment_source) }
 
-
     it 'returns subscription that has started and has not ended' do
       expect(user.current_subscription.id).to eq subscription2.id
     end
@@ -518,6 +517,9 @@ describe User, type: :model do
       expect(subject.stripe_customer_id).to eq '75e'
     end
 
+    # this nails an issue that we were checking < and not <= but
+    # it doesn't seem to capture that we need to_i's to get the date
+    # equality comparison to work ...
     context 'just started a new plan' do
       before { subscription2.ended_at = now ; subscription2.save }
       let!(:subscription3) { FactoryGirl.create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source) }

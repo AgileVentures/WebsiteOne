@@ -1,4 +1,3 @@
-
 class User < ActiveRecord::Base
   acts_as_paranoid
 
@@ -80,17 +79,8 @@ class User < ActiveRecord::Base
   self.per_page = 30
 
   def current_subscription
-    # puts "all user subs: #{subscriptions.map{|s| s.inspect}}"
     now = DateTime.now
-    # puts now
-
-    # subscriptions.each do |s|
-    #   puts "#{s.id}: s.ended_at.nil?: #{s.ended_at.nil?}"
-    #   puts "#{s.id}: s.started_at <= now: #{s.started_at <= now}"
-    # end
-    current_subscriptions = subscriptions.select{|s| s.ended_at.nil? and s.started_at.to_i <= now.to_i}
-                                #.where(ended_at: nil).where('started_at <= :now', {now: DateTime.now})
-    # puts "current subs: #{current_subscriptions.map{|s| s.inspect}}"
+    current_subscriptions = subscriptions.select { |s| s.ended_at.nil? and s.started_at.to_i <= now.to_i }
     return nil if current_subscriptions.nil? or current_subscriptions.empty?
     current_subscriptions.first
   end

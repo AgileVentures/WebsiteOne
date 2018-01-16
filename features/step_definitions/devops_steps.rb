@@ -47,7 +47,7 @@ end
 
 Then(/^"([^"]*)" should have a "([^"]*)" subscription plan$/) do |email, plan|
   user = User.find_by_email(email)
-  expect(user.subscription.plan).to eq Plan.find_by(name: plan)
+  expect(user.current_subscription.plan).to eq Plan.find_by(name: plan)
 end
 
 Then(/^there should be a "([^"]*)" subscription plan$/) do |plan|
