@@ -129,8 +129,9 @@ Then(/^I should see a tooltip explanation of Premium Mob$/) do
 end
 
 And(/^my profile page should reflect that I am a "([^"]*)" member$/) do |plan_name|
+  # sleep(1)
   visit user_path @current_user
-  expect(page).to have_content
+  expect(page).to have_content "#{plan_name} Member"
   other_plans(plan_name).each do |other_plan_name|
     expect(page).not_to have_content "#{other_plan_name} Member"
   end
@@ -138,4 +139,10 @@ end
 
 def other_plans(plan_name)
   Plan.all.pluck(:name).reject!{|e| e == plan_name}.push('Basic')
+end
+
+# use for debugging only
+And(/^I am a "([^"]*)" Member$/) do |type|
+  puts @user.subscriptions.map{|s| s.inspect}
+  expect(@user.membership_type).to eq type
 end

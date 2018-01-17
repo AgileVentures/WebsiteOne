@@ -57,7 +57,7 @@ RSpec.configure do |config|
     Settings.reload!
   end
 
-  config.after(:each) do
+  config.append_after(:each) do
     DatabaseCleaner.clean
   end
 
