@@ -138,8 +138,8 @@ class SubscriptionsController < ApplicationController
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
     subscription.plan = new_subscription_plan.third_party_identifier
     subscription.save
-    user.subscription.plan = new_subscription_plan
-    user.save
+    payment_source = user.current_subscription.payment_source
+    AddSubscriptionToUserForPlan.with(user, user, Time.now, new_subscription_plan, payment_source)
   end
 
 end
