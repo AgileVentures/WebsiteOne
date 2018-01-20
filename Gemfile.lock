@@ -429,7 +429,7 @@ GEM
       eventmachine_httpserver
       http_parser.rb (~> 0.6.0)
       multi_json
-    puma (3.11.0)
+    puma (3.11.2)
     rack (1.6.8)
     rack-cache (1.7.1)
       rack (>= 0.4)
@@ -602,7 +602,7 @@ GEM
       i18n
     warden (1.2.7)
       rack (>= 1.0)
-    webmock (3.2.1)
+    webmock (3.3.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
