@@ -14,16 +14,16 @@ describe User, type: :model do
   end
 
   context "associations" do
-    it { is_expected.to have_one(:subscription).autosave(true) }
+    it { is_expected.to have_many(:subscriptions).autosave(true) }
 
     it { is_expected.to have_one :karma }
 
     it { is_expected.to have_many(:authentications).dependent(:destroy) }
-    
+
     it { is_expected.to have_many(:projects) }
-    
+
     it { is_expected.to have_many(:documents) }
-    
+
     it { is_expected.to have_many(:articles) }
 
     it { is_expected.to have_many(:event_instances) }
@@ -32,7 +32,7 @@ describe User, type: :model do
 
     it { is_expected.to have_many(:status) }
   end
-    
+
   it { is_expected.to accept_nested_attributes_for :status }
 
   it { is_expected.to respond_to :status_count }
@@ -84,22 +84,22 @@ describe User, type: :model do
     context '#mail_receiver' do
       let!(:user1) { FactoryGirl.create(:user, receive_mailings: false) }
       let!(:user2) { FactoryGirl.create(:user, receive_mailings: true) }
-      
+
       it { expect(User).to respond_to(:mail_receiver) }
-      
+
       it { expect(User.mail_receiver).to include(user2) }
-      
+
       it { expect(User.mail_receiver).to_not include(user1) }
     end
-    
+
     context '#allow_to_display' do
       let!(:user1) { FactoryGirl.create(:user, display_profile: false) }
       let!(:user2) { FactoryGirl.create(:user, display_profile: true) }
-      
+
       it { expect(User).to respond_to(:allow_to_display) }
-      
+
       it { expect(User.allow_to_display).to include(user2) }
-      
+
       it { expect(User.allow_to_display).to_not include(user1) }
     end
   end
@@ -139,19 +139,19 @@ describe User, type: :model do
     before(:each) do
       Geocoder.configure(lookup: :test, ip_lookup: :test)
       sweden_address = [
-        {
-          ip: '85.228.111.204',
-          country_code: 'SE',
-          country_name: 'Sweden',
-          region_code: '28',
-          region_name: 'Västra Götaland',
-          city: 'Alingsås',
-          zipcode: '44139',
-          latitude: 57.9333,
-          longitude: 12.5167,
-          metro_code: '',
-          areacode: ''
-        }.as_json
+          {
+              ip: '85.228.111.204',
+              country_code: 'SE',
+              country_name: 'Sweden',
+              region_code: '28',
+              region_name: 'Västra Götaland',
+              city: 'Alingsås',
+              zipcode: '44139',
+              latitude: 57.9333,
+              longitude: 12.5167,
+              metro_code: '',
+              areacode: ''
+          }.as_json
       ]
 
       Geocoder::Lookup::Test.add_stub('127.0.0.1', sweden_address)
@@ -159,21 +159,21 @@ describe User, type: :model do
       Geocoder::Lookup::Test.add_stub('85.228.111.204', sweden_address)
 
       Geocoder::Lookup::Test.add_stub(
-        '50.78.167.161', [
+          '50.78.167.161', [
           {
-            ip: '50.78.167.161',
-            country_code: 'US',
-            country_name: 'United States',
-            region_code: 'WA',
-            region_name: 'Washington',
-            city: 'Seattle',
-            zipcode: '',
-            latitude: 47.6062,
-            longitude: -122.3321,
-            metro_code: '819',
-            areacode: '206'
+              ip: '50.78.167.161',
+              country_code: 'US',
+              country_name: 'United States',
+              region_code: 'WA',
+              region_name: 'Washington',
+              city: 'Seattle',
+              zipcode: '',
+              latitude: 47.6062,
+              longitude: -122.3321,
+              metro_code: '819',
+              areacode: '206'
           }.as_json
-        ]
+      ]
       )
 
     end
@@ -417,7 +417,7 @@ describe User, type: :model do
 
 
     describe '#hangouts_attended_with_more_than_one_participant' do
-      subject(:user) {FactoryGirl.create(:user, :with_karma, hangouts_attended_with_more_than_one_participant: 1)}
+      subject(:user) { FactoryGirl.create(:user, :with_karma, hangouts_attended_with_more_than_one_participant: 1) }
       it 'returns 1' do
         expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
       end
@@ -479,30 +479,54 @@ describe User, type: :model do
 
   context 'destroying user' do
     it 'should soft destroy' do
-       user = User.new({ email: 'doh@doh.com', password: '12345678' })
-       user.save!
-       user.destroy!
-       expect(user.deleted_at).to_not eq nil
+      user = User.new({email: 'doh@doh.com', password: '12345678'})
+      user.save!
+      user.destroy!
+      expect(user.deleted_at).to_not eq nil
     end
   end
 
   context 'creating user' do
     it 'should not override existing karma' do
-      user = User.new({ email: 'doh@doh.com', password: '12345678' })
+      user = User.new({email: 'doh@doh.com', password: '12345678'})
       user.karma = Karma.new(total: 50)
       user.save!
       expect(user.karma.total).to eq 50
     end
   end
 
-  context 'look up stripe id from subscription' do
-    let(:subscription) { mock_model(Subscription, save: true) }
-    before { allow(subscription).to receive(:[]=) }
+  context 'supporting current subscription' do
+    subject(:user) { FactoryGirl.create(:user, :with_karma) }
+    let(:premium) { FactoryGirl.create(:plan, name: 'Premium') }
+    let(:premium_mob) { FactoryGirl.create(:plan, name: 'Premium Mob') }
+    let(:premium_f2f) { FactoryGirl.create(:plan, name: 'Premium F2F') }
+    let(:payment_source) { PaymentSource::PayPal.create(identifier: '75e') }
+    let(:now) { DateTime.now }
+
+    # presence of type (no longer used) in the Subscriptions model is confusing ...
+    # should get rid of all the STI classes ...
+
+    let!(:subscription1) { FactoryGirl.create(:subscription, user: user, plan: premium, started_at: 2.days.ago, ended_at: 1.day.ago) }
+    let!(:subscription2) { FactoryGirl.create(:subscription, user: user, plan: premium_mob, started_at: 1.day.ago, payment_source: payment_source) }
+
+    it 'returns subscription that has started and has not ended' do
+      expect(user.current_subscription.id).to eq subscription2.id
+    end
 
     it 'asks subscription for identifier' do
-      expect(subscription).to receive :identifier
-      subject.subscription = subscription
-      subject.stripe_customer_id
+      expect(subject.stripe_customer_id).to eq '75e'
+    end
+
+    # this nails an issue that we were checking < and not <= but
+    # it doesn't seem to capture that we need to_i's to get the date
+    # equality comparison to work ...
+    context 'just started a new plan' do
+      before { subscription2.ended_at = now ; subscription2.save }
+      let!(:subscription3) { FactoryGirl.create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source) }
+
+      it 'returns subscription that has started right now and has not ended' do
+        expect(user.current_subscription.id).to eq subscription3.id
+      end
     end
 
   end
