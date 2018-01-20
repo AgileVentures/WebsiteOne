@@ -28,14 +28,14 @@ Feature: Adding pivotal tracker stories to projects
         | Labels     |
         | State      |
       And I should see:
-        | text                    |
-        | Refactor cucumber steps |
-        | accepted                |
+        | text                             |
+        | YT sync is failing in some cases |
+        | finished                         |
       And I should see:
-        | text                   |
-        | Skills on user profile |
-        | accepted               |
+        | text                           |
+        | Clean up turbolinks attributes |
+        | started                       |
       And I should see:
-        | text                   |
-        | Pivotaltracker stories |
-        | accepted               |
+        | text                                                              |
+        | Project description not taking into account the github repository |
+        | started                                                          |
