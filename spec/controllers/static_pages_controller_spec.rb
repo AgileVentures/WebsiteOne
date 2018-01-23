@@ -15,7 +15,7 @@ describe StaticPagesController, :type => :controller do
   before(:each) do
     allow(request.env['warden']).to receive(:authenticate!).and_return(user)
     allow(controller).to receive(:current_user) { user }
-    allow(user).to receive(:touch).and_return(true)
+    allow(user).to receive(:touch)
   end
 
   describe 'GET show' do
