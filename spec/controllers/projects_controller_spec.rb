@@ -54,10 +54,11 @@ describe ProjectsController, :type => :controller do
         expect(event_instances).to receive(:order).with(created_at: :desc).and_return(ordered_event_instances)
         expect(event_instances).to receive(:count).and_return('count')
         expect(ordered_event_instances).to receive(:limit).with(25).and_return('videos')
-        allow(PivotalService).to receive(:one_project).and_return('')
-        dummy = Object.new
-        dummy.stub(stories: "stories")
-        PivotalService.stub(iterations: dummy)
+        project = Object.new
+        iteration = Object.new
+        iteration.stub(stories: "stories")
+        project.stub(current_iteration: iteration)
+        allow(PivotalAPI::Project).to receive(:retrieve).and_return(project)
       end
 
       it 'assigns the requested project as @project' do
@@ -85,7 +86,7 @@ describe ProjectsController, :type => :controller do
         expect(assigns(:event_instances_count)).to eq 'count'
       end
 
-      it 'assigns the list of related PivtalTracker stories' do
+      it 'assigns the list of related PivotalTracker stories' do
         get :show, {id: @project.friendly_id}, valid_session
         expect(assigns(:stories)).to eq 'stories'
       end
