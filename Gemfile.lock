@@ -239,10 +239,10 @@ GEM
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
     execjs (2.7.0)
-    factory_girl (4.5.0)
+    factory_girl (4.9.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.5.0)
-      factory_girl (~> 4.5.0)
+    factory_girl_rails (4.9.0)
+      factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
@@ -294,7 +294,7 @@ GEM
     http_parser.rb (0.6.0)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.9.1)
+    i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     ice_cube (0.16.2)
     inflecto (0.0.2)
@@ -665,7 +665,7 @@ DEPENDENCIES
   dotenv-rails
   eventmachine (~> 1.0.7)
   exception_notification
-  factory_girl_rails (= 4.5.0)
+  factory_girl_rails
   faker
   font-awesome-rails
   friendly_id
