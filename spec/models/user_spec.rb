@@ -46,7 +46,7 @@ describe User, type: :model do
   end
 
   it 'should be invalid with an invalid email address' do
-    expect(build_stubbed(:user, email: 'user@foo,com')).to_not be_valid
+    expect(build(:user, email: 'user@foo,com')).to_not be_valid
   end
 
   it 'should be valid with all the correct attributes' do
@@ -55,13 +55,13 @@ describe User, type: :model do
 
   it 'should reject duplicate email addresses' do
     user = FactoryGirl.create(:user)
-    expect(build_stubbed(:user, email: user.email)).to_not be_valid
+    expect(build(:user, email: user.email)).to_not be_valid
   end
 
   it 'should reject email addresses identical up to case' do
     upcased_email = subject.email.upcase
     _existing_user = FactoryGirl.create(:user, email: upcased_email)
-    expect(build_stubbed(:user, email: subject.email)).to_not be_valid
+    expect(build(:user, email: subject.email)).to_not be_valid
   end
 
   it 'should be invalid without password' do
