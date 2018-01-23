@@ -7,7 +7,7 @@
     <% unix_millis = (Time.now.to_f * 1000.0).to_i %>
     <%= javascript_include_tag "lolex.js" %>
     <%= javascript_tag do %>
-      lolex.install({ now: <%= unix_millis %>, shouldAdvanceTime: true });
+      window.clock = lolex.install({ now: <%= unix_millis %>, shouldAdvanceTime: true });
     <% end %>
   <% end %>
 

@@ -33,4 +33,19 @@ Feature: Events page countdown widget
     Given the date is "2014/02/05 09:00:00 UTC"
     And I am on events index page
     And the window size is wide
-    And I should see " to Scrum 2"
+    And I should see " foo Scrum 2"
+
+  @time-travel-step
+  Scenario: Event is not shown as live after it's duration has passed
+    Given the date is "2014/02/05 10:45:00 UTC"
+    And I am on events index page
+    And the window size is wide
+    And I should not see "Scrum 2 is live"
+
+  @time-travel-step
+  Scenario: Event is not shown as live even if browser is not refreshed
+    Given the date is "2014/02/05 10:00:00 UTC"
+    And I am on events index page
+    And 45 minutes pass
+    And the window size is wide
+    And I should not see "Scrum 2 is live"

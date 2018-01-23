@@ -123,6 +123,7 @@
   <% if @next_event %>
     <div class="hidden-sm hidden-xs hidden-md" id="next-event" data-event-time="<%= @next_event.next_occurrence_time_attr.to_datetime %>"
          data-event-url="<%= event_path(@next_event) %>"
+         data-event-duration="<%= @next_event.duration %>"
          data-event-name="<%= current_user ? @next_event.name : 'Next projects review meeting - listen in to learn more about AgileVentures' %>"></div>
   <% end %>
   <%= render 'layouts/flash' %>
