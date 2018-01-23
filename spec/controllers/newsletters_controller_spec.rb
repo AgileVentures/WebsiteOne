@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe NewslettersController do
 
-  let(:valid_attributes) { FactoryGirl.attributes_for(:newsletter) }
+  let(:valid_attributes) { FactoryBot.attributes_for(:newsletter) }
 
   let(:valid_session) { {} }
   let(:user) { @user }
@@ -26,7 +26,7 @@ describe NewslettersController do
 
     describe "GET index" do
       it "assigns all newsletters as @newsletters" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         get :index, {}, valid_session
         expect(assigns(:newsletters)).to eq([newsletter])
       end
@@ -34,7 +34,7 @@ describe NewslettersController do
 
     describe "GET show" do
       it "assigns the requested newsletter as @newsletter" do
-        newsletter = FactoryGirl.create(:newsletter)
+        newsletter = FactoryBot.create(:newsletter)
         get :show, {:id => newsletter.to_param}, valid_session
         expect(assigns(:newsletter)).to eq(newsletter)
       end
@@ -50,7 +50,7 @@ describe NewslettersController do
 
     describe "GET edit" do
       it "assigns the requested newsletter as @newsletter" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         get :edit, {:id => newsletter.to_param}, valid_session
         expect(assigns(:newsletter)).to eq(newsletter)
       end
@@ -94,19 +94,19 @@ describe NewslettersController do
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested newsletter" do
-          newsletter = FactoryGirl.create(:newsletter)
+          newsletter = FactoryBot.create(:newsletter)
           expect_any_instance_of(Newsletter).to receive(:update).with({ "title" => "MyString" })
           put :update, {:id => newsletter.to_param, :newsletter => { "title" => "MyString" }}, valid_session
         end
 
         it "assigns the requested newsletter as @newsletter" do
-          newsletter = FactoryGirl.create(:newsletter) 
+          newsletter = FactoryBot.create(:newsletter)
           put :update, {:id => newsletter.to_param, :newsletter => valid_attributes}, valid_session
           expect(assigns(:newsletter)).to eq(newsletter)
         end
 
         it "redirects to the newsletter" do
-          newsletter = FactoryGirl.create(:newsletter) 
+          newsletter = FactoryBot.create(:newsletter)
           put :update, {:id => newsletter.to_param, :newsletter => valid_attributes}, valid_session
           expect(response).to redirect_to(newsletter)
         end
@@ -114,14 +114,14 @@ describe NewslettersController do
 
       describe "with invalid params" do
         it "assigns the newsletter as @newsletter" do
-          newsletter = FactoryGirl.create(:newsletter) 
+          newsletter = FactoryBot.create(:newsletter)
           Newsletter.any_instance.stub(:save).and_return(false)
           put :update, {:id => newsletter.to_param, :newsletter => { "title" => "invalid value" }}, valid_session
           expect(assigns(:newsletter)).to eq(newsletter)
         end
 
         it "re-renders the 'edit' template" do
-          newsletter = FactoryGirl.create(:newsletter) 
+          newsletter = FactoryBot.create(:newsletter)
           Newsletter.any_instance.stub(:save).and_return(false)
           put :update, {:id => newsletter.to_param, :newsletter => { "title" => "invalid value" }}, valid_session
           expect(response).to render_template("edit")
@@ -131,14 +131,14 @@ describe NewslettersController do
 
     describe "DELETE destroy" do
       it "destroys the requested newsletter" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         expect {
           delete :destroy, {:id => newsletter.to_param}, valid_session
         }.to change(Newsletter, :count).by(-1)
       end
 
       it "redirects to the newsletters list" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         delete :destroy, {:id => newsletter.to_param}, valid_session
         expect(response).to redirect_to(newsletters_url( only_path: true))
       end
@@ -149,7 +149,7 @@ describe NewslettersController do
   describe "As unpvivileged user" do
     
     before :each do
-      @user =  FactoryGirl.create(:user)
+      @user =  FactoryBot.create(:user)
       request.env['warden'].stub :authenticate => @user
       controller.stub :current_user =>  @user
     end
@@ -169,7 +169,7 @@ describe NewslettersController do
 
     describe "GET edit" do
       it "renders status 403" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         get :edit, {:id => newsletter.to_param}, valid_session
         expect(response.status).to eq(403)
       end
@@ -177,7 +177,7 @@ describe NewslettersController do
     
     describe "DELETE destroy" do
       it "wont delete Newsletter" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         expect {
           delete :destroy, {:id => newsletter.to_param}, valid_session
         }.to change(Newsletter, :count).by(0)
@@ -185,7 +185,7 @@ describe NewslettersController do
       end
       
       it "renders status 403" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         delete :destroy, {:id => newsletter.to_param}, valid_session
         expect(response.status).to eq(403)
       end
@@ -193,13 +193,13 @@ describe NewslettersController do
 
     describe "PUT update" do
       it "renders status 403" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         put :update, {:id => newsletter.to_param, :newsletter => { "title" => "MyString" }}, valid_session
         expect(response.status).to eq(403)
       end
 
       it "displays template 403" do
-        newsletter = FactoryGirl.create(:newsletter) 
+        newsletter = FactoryBot.create(:newsletter)
         put :update, {:id => newsletter.to_param, :newsletter => { "title" => "MyString" }}, valid_session
         expect(response).to  render_template(:file => "#{Rails.root}/public/403.html") 
       end

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Status do
-  let(:user) { FactoryGirl.create(:user) }
-  subject { FactoryGirl.create(:status, user: user) }
+  let(:user) { FactoryBot.create(:user) }
+  subject { FactoryBot.create(:status, user: user) }
 
   it { is_expected.to belong_to(:user).counter_cache(:status_count)}
   it { is_expected.to validate_presence_of :status}
@@ -10,7 +10,7 @@ describe Status do
 
 
   it 'should have valid factory' do
-    expect(FactoryGirl.create(:status)).to be_valid
+    expect(FactoryBot.create(:status)).to be_valid
   end
 
   it 'assigns user_id to status' do

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe StaticPagesController, :type => :controller do
 
-  let(:user) { FactoryGirl.build_stubbed(:user) }
-  let(:page) { FactoryGirl.create(:static_page) }
+  let(:user) { FactoryBot.build_stubbed(:user) }
+  let(:page) { FactoryBot.create(:static_page) }
   let(:valid_attributes) do
     {
         'title' => 'MyString',
@@ -36,7 +36,7 @@ describe StaticPagesController, :type => :controller do
     end
 
     it 'assigns the requested child page ancestry as @ancestry' do
-      page_child = FactoryGirl.create(:static_page, parent_id: page.id)
+      page_child = FactoryBot.create(:static_page, parent_id: page.id)
       get :show, {:id => page_child.to_param}, valid_session
       expect(assigns(:ancestry)).to eq([page.title, page_child.title])
     end

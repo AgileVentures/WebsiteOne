@@ -38,7 +38,7 @@ describe User, type: :model do
   it { is_expected.to respond_to :status_count }
 
   it 'should have valid factory' do
-    expect(FactoryGirl.create(:user)).to be_valid
+    expect(FactoryBot.create(:user)).to be_valid
   end
 
   it 'should be invalid without email' do
@@ -54,13 +54,13 @@ describe User, type: :model do
   end
 
   it 'should reject duplicate email addresses' do
-    user = FactoryGirl.create(:user)
+    user = FactoryBot.create(:user)
     expect(build(:user, email: user.email)).to_not be_valid
   end
 
   it 'should reject email addresses identical up to case' do
     upcased_email = subject.email.upcase
-    _existing_user = FactoryGirl.create(:user, email: upcased_email)
+    _existing_user = FactoryBot.create(:user, email: upcased_email)
     expect(build(:user, email: subject.email)).to_not be_valid
   end
 
@@ -77,13 +77,13 @@ describe User, type: :model do
   end
 
   it 'should respond to is_privileged?' do
-    expect(FactoryGirl.build(:user)).to respond_to(:is_privileged?)
+    expect(FactoryBot.build(:user)).to respond_to(:is_privileged?)
   end
 
   describe 'scopes' do
     context '#mail_receiver' do
-      let!(:user1) { FactoryGirl.create(:user, receive_mailings: false) }
-      let!(:user2) { FactoryGirl.create(:user, receive_mailings: true) }
+      let!(:user1) { FactoryBot.create(:user, receive_mailings: false) }
+      let!(:user2) { FactoryBot.create(:user, receive_mailings: true) }
 
       it { expect(User).to respond_to(:mail_receiver) }
 
@@ -93,8 +93,8 @@ describe User, type: :model do
     end
 
     context '#allow_to_display' do
-      let!(:user1) { FactoryGirl.create(:user, display_profile: false) }
-      let!(:user2) { FactoryGirl.create(:user, display_profile: true) }
+      let!(:user1) { FactoryBot.create(:user, display_profile: false) }
+      let!(:user2) { FactoryBot.create(:user, display_profile: true) }
 
       it { expect(User).to respond_to(:allow_to_display) }
 
@@ -105,7 +105,7 @@ describe User, type: :model do
   end
 
   describe 'slug generation' do
-    subject { FactoryGirl.build(:user, slug: nil) }
+    subject { FactoryBot.build(:user, slug: nil) }
     it 'should automatically generate a slug' do
       subject.save
       expect(subject.slug).to_not eq nil
@@ -235,9 +235,9 @@ describe User, type: :model do
 
     context 'has filters' do
       before(:each) do
-        @user1 = FactoryGirl.create(:user, latitude: 59.33, longitude: 18.06)
-        @user2 = FactoryGirl.create(:user, latitude: -29.15, longitude: 27.74)
-        @project = FactoryGirl.create(:project)
+        @user1 = FactoryBot.create(:user, latitude: 59.33, longitude: 18.06)
+        @user2 = FactoryBot.create(:user, latitude: -29.15, longitude: 27.74)
+        @project = FactoryBot.create(:project)
       end
 
       it 'filters users for project' do
@@ -253,7 +253,7 @@ describe User, type: :model do
 
       context 'filters users for timezone area' do
         before(:each) do
-          @current_user = FactoryGirl.create(:user, timezone_offset: 3600)
+          @current_user = FactoryBot.create(:user, timezone_offset: 3600)
         end
 
         it 'filters user1 when choose In My Timezone' do
@@ -287,9 +287,9 @@ describe User, type: :model do
       subject { User.filter(params).allow_to_display }
 
       before(:each) do
-        FactoryGirl.create(:user, first_name: 'Bob', created_at: 5.days.ago)
-        FactoryGirl.create(:user, first_name: 'Marley', created_at: 2.days.ago)
-        FactoryGirl.create(:user, first_name: 'Janice', display_profile: false)
+        FactoryBot.create(:user, first_name: 'Bob', created_at: 5.days.ago)
+        FactoryBot.create(:user, first_name: 'Marley', created_at: 2.days.ago)
+        FactoryBot.create(:user, first_name: 'Janice', display_profile: false)
       end
 
       it 'ordered by creation date' do
@@ -305,8 +305,8 @@ describe User, type: :model do
 
     describe '.find_by_github_username' do
       it 'returns the user if it exists' do
-        user_with_github = FactoryGirl.create(:user, github_profile_url: 'https://github.com/sampritipanda')
-        user_without_github = FactoryGirl.create(:user, github_profile_url: nil)
+        user_with_github = FactoryBot.create(:user, github_profile_url: 'https://github.com/sampritipanda')
+        user_without_github = FactoryBot.create(:user, github_profile_url: nil)
         expect(User.find_by_github_username('sampritipanda')).to eq user_with_github
       end
 
@@ -320,7 +320,7 @@ describe User, type: :model do
       let(:user) { @user }
 
       before(:each) do
-        @user = FactoryGirl.create(:user, updated_at: '2014-09-30 05:00:00 UTC')
+        @user = FactoryBot.create(:user, updated_at: '2014-09-30 05:00:00 UTC')
       end
 
       after(:each) do
@@ -341,7 +341,7 @@ describe User, type: :model do
 
   describe 'incomplete profile' do
 
-    let(:user) { FactoryGirl.create(:user, :with_karma, updated_at: '2014-09-30 05:00:00 UTC') }
+    let(:user) { FactoryBot.create(:user, :with_karma, updated_at: '2014-09-30 05:00:00 UTC') }
 
     it 'returns true if bio empty' do
       user.bio = ''
@@ -377,9 +377,9 @@ describe User, type: :model do
 
     describe '#commit_count_total' do
 
-      subject(:user) { FactoryGirl.create(:user, :with_karma) }
+      subject(:user) { FactoryBot.create(:user, :with_karma) }
 
-      let!(:commit_count) { FactoryGirl.create(:commit_count, user: user, commit_count: 369) }
+      let!(:commit_count) { FactoryBot.create(:commit_count, user: user, commit_count: 369) }
 
       context 'single commit count' do
         it 'returns totals commits over all projects' do
@@ -388,7 +388,7 @@ describe User, type: :model do
       end
 
       context 'multiple commit count' do
-        let!(:commit_count_2) { FactoryGirl.create(:commit_count, user: user, commit_count: 123) }
+        let!(:commit_count_2) { FactoryBot.create(:commit_count, user: user, commit_count: 123) }
         it 'returns totals commits over all projects' do
           expect(user.commit_count_total).to eq 492
         end
@@ -397,9 +397,9 @@ describe User, type: :model do
 
     describe '#number_hangouts_started_with_more_than_one_participant' do
 
-      subject(:user) { FactoryGirl.create(:user, :with_karma) }
+      subject(:user) { FactoryBot.create(:user, :with_karma) }
 
-      let!(:event_instance) { FactoryGirl.create(:event_instance, user: user) }
+      let!(:event_instance) { FactoryBot.create(:event_instance, user: user) }
       context 'single event instance' do
         it 'returns total number of hangouts started with more than one participant' do
           expect(user.number_hangouts_started_with_more_than_one_participant).to eq 1
@@ -407,7 +407,7 @@ describe User, type: :model do
       end
 
       context 'two event instances' do
-        let!(:event_instance2) { FactoryGirl.create(:event_instance, user: user) }
+        let!(:event_instance2) { FactoryBot.create(:event_instance, user: user) }
         it 'returns total number of hangouts started with more than one participant' do
           expect(user.number_hangouts_started_with_more_than_one_participant).to eq 2
         end
@@ -417,44 +417,44 @@ describe User, type: :model do
 
 
     describe '#hangouts_attended_with_more_than_one_participant' do
-      subject(:user) { FactoryGirl.create(:user, :with_karma, hangouts_attended_with_more_than_one_participant: 1) }
+      subject(:user) { FactoryBot.create(:user, :with_karma, hangouts_attended_with_more_than_one_participant: 1) }
       it 'returns 1' do
         expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
       end
     end
 
     describe '#profile_completeness' do
-      subject(:user) { FactoryGirl.create(:user, :with_karma) }
+      subject(:user) { FactoryBot.create(:user, :with_karma) }
       it 'calculates profile completeness' do
         expect(user.profile_completeness).to eq 6
       end
     end
 
     describe '#activity' do
-      subject(:user) { FactoryGirl.create(:user, :with_karma) }
+      subject(:user) { FactoryBot.create(:user, :with_karma) }
       it 'calculates sign in activity' do
         expect(user.activity).to eq 0
       end
     end
 
     describe '#membership_length' do
-      subject(:user) { FactoryGirl.create(:user, :with_karma) }
+      subject(:user) { FactoryBot.create(:user, :with_karma) }
       it 'calculates membership length' do
         expect(user.membership_length).to eq 0
       end
     end
 
     describe '#membership_type' do
-      subject(:user) { FactoryGirl.create(:user, :with_karma) }
+      subject(:user) { FactoryBot.create(:user, :with_karma) }
 
       it 'returns membership type' do
         expect(user.membership_type).to eq 'Basic'
       end
 
       context 'premium member' do
-        subject(:user) { FactoryGirl.create(:user, :with_karma) }
-        subject(:plan) { FactoryGirl.create(:plan, name: 'Premium') }
-        let!(:premium) { FactoryGirl.create(:subscription, user: user, plan: plan) }
+        subject(:user) { FactoryBot.create(:user, :with_karma) }
+        subject(:plan) { FactoryBot.create(:plan, name: 'Premium') }
+        let!(:premium) { FactoryBot.create(:subscription, user: user, plan: plan) }
 
         it 'returns premium' do
           expect(user.membership_type).to eq 'Premium'
@@ -463,12 +463,12 @@ describe User, type: :model do
     end
 
     describe '#karma_total' do
-      subject(:user) { FactoryGirl.create(:user, :with_karma) }
+      subject(:user) { FactoryBot.create(:user, :with_karma) }
       it 'returns 0 when user initially created' do
         expect(user.karma_total).to eq 0
       end
       context 'once associated karma object is created' do
-        subject(:user) { FactoryGirl.build(:user, :with_karma, karma: FactoryGirl.create(:karma, total: 50)) }
+        subject(:user) { FactoryBot.build(:user, :with_karma, karma: FactoryBot.create(:karma, total: 50)) }
         it 'returns non zero' do
           expect(user.karma_total).to eq 50
         end
@@ -496,18 +496,18 @@ describe User, type: :model do
   end
 
   context 'supporting current subscription' do
-    subject(:user) { FactoryGirl.create(:user, :with_karma) }
-    let(:premium) { FactoryGirl.create(:plan, name: 'Premium') }
-    let(:premium_mob) { FactoryGirl.create(:plan, name: 'Premium Mob') }
-    let(:premium_f2f) { FactoryGirl.create(:plan, name: 'Premium F2F') }
+    subject(:user) { FactoryBot.create(:user, :with_karma) }
+    let(:premium) { FactoryBot.create(:plan, name: 'Premium') }
+    let(:premium_mob) { FactoryBot.create(:plan, name: 'Premium Mob') }
+    let(:premium_f2f) { FactoryBot.create(:plan, name: 'Premium F2F') }
     let(:payment_source) { PaymentSource::PayPal.create(identifier: '75e') }
     let(:now) { DateTime.now }
 
     # presence of type (no longer used) in the Subscriptions model is confusing ...
     # should get rid of all the STI classes ...
 
-    let!(:subscription1) { FactoryGirl.create(:subscription, user: user, plan: premium, started_at: 2.days.ago, ended_at: 1.day.ago) }
-    let!(:subscription2) { FactoryGirl.create(:subscription, user: user, plan: premium_mob, started_at: 1.day.ago, payment_source: payment_source) }
+    let!(:subscription1) { FactoryBot.create(:subscription, user: user, plan: premium, started_at: 2.days.ago, ended_at: 1.day.ago) }
+    let!(:subscription2) { FactoryBot.create(:subscription, user: user, plan: premium_mob, started_at: 1.day.ago, payment_source: payment_source) }
 
     it 'returns subscription that has started and has not ended' do
       expect(user.current_subscription.id).to eq subscription2.id
@@ -522,7 +522,7 @@ describe User, type: :model do
     # equality comparison to work ...
     context 'just started a new plan' do
       before { subscription2.ended_at = now ; subscription2.save }
-      let!(:subscription3) { FactoryGirl.create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source) }
+      let!(:subscription3) { FactoryBot.create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source) }
 
       it 'returns subscription that has started right now and has not ended' do
         expect(user.current_subscription.id).to eq subscription3.id

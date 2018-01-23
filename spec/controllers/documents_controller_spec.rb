@@ -11,17 +11,17 @@ describe DocumentsController do
   let(:valid_session) { {} }
   let(:categories) do 
     [
-    FactoryGirl.create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: "Title-1"),
-    FactoryGirl.create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: "Title-2")
+    FactoryBot.create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: "Title-1"),
+    FactoryBot.create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: "Title-2")
     ]
   end
   let(:params) { {:id => categories.first.to_param, project_id: document.project.friendly_id, categories: 'true'} }
 
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user
-    @document = FactoryGirl.create(:document)
+    @document = FactoryBot.create(:document)
     allow(@document).to receive(:create_activity)
   end
 
@@ -49,7 +49,7 @@ describe DocumentsController do
 
     context 'with more than one project' do
       before(:each) do
-        @document_2 = FactoryGirl.create(:document)
+        @document_2 = FactoryBot.create(:document)
       end
 
       it 'should not mistakenly render the document under the wrong project' do
@@ -169,7 +169,7 @@ describe DocumentsController do
   end
 
   describe 'DELETE destroy' do
-    before(:each) { @document = FactoryGirl.create(:document) }
+    before(:each) { @document = FactoryBot.create(:document) }
 
     it 'destroys the requested document' do
       expect {

@@ -8,7 +8,7 @@ describe UsersController, :type => :controller do
     end
 
     it 'should assign the results of the search to @users' do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       get :index
       expect(assigns(:users)).to include(user)
     end
@@ -198,7 +198,7 @@ describe UsersController, :type => :controller do
   end
 
   describe 'PATCH add_status_user' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let(:valid_attributes) { {status: 'Sleeping at my keyboard', user_id: user.friendly_id} }
 
     before(:each) do

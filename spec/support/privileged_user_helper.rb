@@ -1,6 +1,6 @@
 def create_privileged_user
   Settings.privileged_users.split(',').each do |email|
-    FactoryGirl.create(:user, email: email)
+    FactoryBot.create(:user, email: email)
   end
 end
 

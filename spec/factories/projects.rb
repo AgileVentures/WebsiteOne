@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence(:tag) {|n| "tag_#{n}"}
 
   factory :project do

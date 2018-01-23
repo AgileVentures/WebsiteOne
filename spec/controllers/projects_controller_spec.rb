@@ -223,7 +223,7 @@ describe ProjectsController, :type => :controller do
 
     describe '#update' do
       before(:each) do
-        @project = FactoryGirl.create(:project)
+        @project = FactoryBot.create(:project)
         allow(@project).to receive(:create_activity)
         Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
       end
@@ -269,7 +269,7 @@ describe ProjectsController, :type => :controller do
       end
 
       context 'pitch update with Mercury' do
-        @project = FactoryGirl.create(:project)
+        @project = FactoryBot.create(:project)
         let(:params) do
           {:id => @project,
            :content =>
