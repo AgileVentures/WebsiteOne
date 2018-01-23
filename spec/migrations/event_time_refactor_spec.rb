@@ -25,7 +25,7 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
 
   describe 'down' do
     before do
-      FactoryGirl.create(Event,
+      FactoryGirl.create(:event,
                         name: 'every Monday event',
                         category: 'Scrum',
                         start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
