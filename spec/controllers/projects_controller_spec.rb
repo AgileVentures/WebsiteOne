@@ -14,7 +14,7 @@ describe ProjectsController, :type => :controller do
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
     # stubbing out devise methods to simulate authenticated user
-    @user = build_stubbed(User, id: 1, slug: 'some-id')
+    @user = build_stubbed(:user, id: 1, slug: 'some-id')
     allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
     allow(controller).to receive(:current_user).and_return(@user)
   end
@@ -42,11 +42,11 @@ describe ProjectsController, :type => :controller do
 
     describe '#show' do
       before(:each) do
-        @project = build_stubbed(Project, valid_attributes)
+        @project = build_stubbed(:project, valid_attributes)
         allow(@project).to receive(:tag_list).and_return ['WSO']
         Project.stub_chain(:friendly, :find).and_return @project
         @project.stub_chain(:user, :display_name).and_return "Happy User"
-        @users = [build_stubbed(User, slug: 'my-friendly-id', display_profile: true)]
+        @users = [build_stubbed(:user, slug: 'my-friendly-id', display_profile: true)]
         expect(@project).to receive(:members).and_return @users
         event_instances = double('event_instances')
         ordered_event_instances = double('ordered_event_instances')
