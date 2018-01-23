@@ -17,6 +17,7 @@ describe ProjectsController, :type => :controller do
     @user = build_stubbed(:user, id: 1, slug: 'some-id')
     allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
     allow(controller).to receive(:current_user).and_return(@user)
+    allow(@user).to receive(:touch).and_return(true)
   end
 
   let(:user) { @user }
