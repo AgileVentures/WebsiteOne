@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, aliases: [:whodunnit] do
     trait(:with_karma) {  karma { Karma.new } }
     trait(:without_karma) {  karma { nil } }

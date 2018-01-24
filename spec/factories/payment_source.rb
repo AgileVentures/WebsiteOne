@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :paypal, :class => PaymentSource::PayPal do
   end
 end
