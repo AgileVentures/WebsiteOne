@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AgileVentures::BulkMailer do
   before(:each) do
-    2.times { FactoryGirl.create(:user) }
+    2.times { FactoryBot.create(:user) }
 
     @opts = { subject: 'my subject',
               heading: 'my heading',
