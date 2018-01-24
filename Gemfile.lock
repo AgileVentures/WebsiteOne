@@ -734,7 +734,7 @@ DEPENDENCIES
   sucker_punch
   therubyracer
   turbolinks
-  twitter (~> 5.14)
+  twitter (~> 5.15)
   uglifier
   utf8-cleaner
   vcr
