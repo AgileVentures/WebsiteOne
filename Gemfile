@@ -60,7 +60,7 @@ gem 'stripe'
 gem 'sucker_punch'
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
-gem 'twitter', '~> 5.11.0'
+gem 'twitter', '~> 5.17'
 gem 'uglifier'
 gem 'utf8-cleaner'
 gem 'verbs'
