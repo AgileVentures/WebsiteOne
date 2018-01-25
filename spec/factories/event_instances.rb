@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence :participant do |n|
     { "#{n}" => { 'person' => { displayName: "Participant_#{n}", 'id' => "youtube_id_#{n}", isBroadcaster: 'false' } } }
   end

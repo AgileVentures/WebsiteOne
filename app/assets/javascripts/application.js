@@ -27,7 +27,7 @@
 //= stub disqus
 //= require events
 //= stub event_instances
-//= require local_time
+//= require local-time
 //= require jvectormap
 //= require jvectormap/maps/world_mill_en
 //= require moment.min

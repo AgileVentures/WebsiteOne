@@ -8,7 +8,7 @@ describe 'TwitterService' do
       stub_request(:get, 'www.googleapis.com').to_return(:status => 200 )
     end
 
-    let(:hangout) { FactoryGirl.create(:event_instance, updated: '10:00 UTC', hangout_url: nil, yt_video_id: nil) }
+    let(:hangout) { FactoryBot.create(:event_instance, updated: '10:00 UTC', hangout_url: nil, yt_video_id: nil) }
     let(:hangout_participants) do
         {"0" => {"id" => "xxx.id.google.com^xxx", "hasMicrophone" => "true",
               "hasCamera" => "true", "hasAppEnabled" => "false",

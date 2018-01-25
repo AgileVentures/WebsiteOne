@@ -5,7 +5,7 @@ end
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
   StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
 
-  @current_user = @user = FactoryGirl.create(:user, :with_karma, first_name: name, email: email, password: password, password_confirmation: password)
+  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: name, email: email, password: password, password_confirmation: password)
 
   set_user_as_premium(@user) if premium
 
@@ -28,7 +28,7 @@ def set_user_as_premium(user)
 end
 
 Given /^(?:|I am) logged in as a premium user paid for the plan via PayPal$/ do
-  @current_user = FactoryGirl.create(:user)
+  @current_user = FactoryBot.create(:user)
   visit new_user_session_path
   within ('#main') do
     fill_in 'user_email', :with => @current_user.email
@@ -43,7 +43,7 @@ Given /^(?:|I am) logged in as a premium user paid for the plan via PayPal$/ do
 end
 
 Given /^(?:|I am) logged in as a CraftAcademy premium user$/ do
-  @current_user = FactoryGirl.create(:user)
+  @current_user = FactoryBot.create(:user)
   subscription = Subscription.create(user: @current_user,
                                      plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
   PaymentSource::CraftAcademy.create(
@@ -227,7 +227,7 @@ end
 
 Given /^the following users exist$/ do |table|
   table.hashes.each do |attributes|
-    FactoryGirl.create(:user, :with_karma, attributes)
+    FactoryBot.create(:user, :with_karma, attributes)
   end
 end
 
@@ -244,7 +244,7 @@ Given /^the following active users exist$/ do |table|
   table.hashes.each do |attributes|
     p = Project.find_by(title: attributes['projects'])
     Delorean.time_travel_to(attributes['updated_at']) if attributes['updated_at']
-    u = FactoryGirl.create(
+    u = FactoryBot.create(
         :user,
         first_name: attributes['first_name'],
         last_name: attributes['last_name'],
@@ -260,7 +260,7 @@ end
 Given /^the following statuses have been set$/ do |table|
   table.hashes.each do |attributes|
     user = User.find_by_first_name(attributes[:user])
-    FactoryGirl.create(:status, status: attributes[:status], user_id: user.id)
+    FactoryBot.create(:status, status: attributes[:status], user_id: user.id)
   end
 end
 
@@ -412,7 +412,7 @@ end
 And(/^I have authentication enabled with my github username$/) do
   @user.github_profile_url = @github_profile_url
   @user.save
-  @authentication = FactoryGirl.create(:authentication, user_id: @user.id, provider: "github", uid: 42672)
+  @authentication = FactoryBot.create(:authentication, user_id: @user.id, provider: "github", uid: 42672)
   @authentication.save
 end
 
@@ -465,7 +465,7 @@ Given(/^I have an incomplete profile$/) do
 end
 
 Given(/^there are an extra (\d+) users$/) do |number|
-  number.to_i.times { FactoryGirl.create(:user) }
+  number.to_i.times { FactoryBot.create(:user) }
 end
 
 And(/^I am on the members page$/) do
