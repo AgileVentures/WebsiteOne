@@ -34,6 +34,7 @@
 //= require moment-timezone-with-data-2010-2020
 //= require chatlio
 //= require cocoon
+//= require lolex
 
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
