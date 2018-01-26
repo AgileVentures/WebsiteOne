@@ -44,7 +44,7 @@ end
 
 Given /^(?:|I am) logged in as a CraftAcademy premium user$/ do
   @current_user = FactoryBot.create(:user)
-  subscription = Subscription.create(user: @current_user, 
+  subscription = Subscription.create(user: @current_user,
                                      plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
   PaymentSource::CraftAcademy.create(
                                      subscription: subscription)
