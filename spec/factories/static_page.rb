@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :static_page do
     sequence(:title) {|n| "Page #{n}"}
     sequence(:body) {|n| "My Static Page #{n}"}

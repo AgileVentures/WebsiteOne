@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ConsoleMailer do
   describe "#newsletter" do
     before do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
     end
     let(:valid_params) {
       { heading: 'my heading',

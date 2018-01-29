@@ -176,7 +176,7 @@ GEM
     deep_merge (1.1.1)
     delorean (2.1.0)
       chronic
-    devise (4.4.0)
+    devise (4.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 5.2)
@@ -230,7 +230,7 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    equalizer (0.0.11)
+    equalizer (0.0.10)
     erubi (1.7.0)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
@@ -239,10 +239,10 @@ GEM
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
     execjs (2.7.0)
-    factory_girl (4.5.0)
+    factory_bot (4.8.2)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.5.0)
-      factory_girl (~> 4.5.0)
+    factory_bot_rails (4.8.2)
+      factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
@@ -285,16 +285,20 @@ GEM
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
     hashdiff (0.3.7)
-    hashie (3.5.6)
+    hashie (3.5.7)
     hirb (0.7.3)
-    http (0.6.4)
+    http (1.0.4)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 1.0.1)
       http_parser.rb (~> 0.6.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    http-form_data (1.0.3)
     http_parser.rb (0.6.0)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.9.1)
+    i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     ice_cube (0.16.2)
     inflecto (0.0.2)
@@ -339,8 +343,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    local_time (1.0.3)
-      coffee-rails
+    local_time (2.0.0)
     loofah (2.1.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -354,7 +357,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.1)
-    multi_json (1.12.2)
+    multi_json (1.13.1)
     multi_test (0.1.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -406,7 +409,7 @@ GEM
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    polyamorous (1.3.2)
+    polyamorous (1.3.3)
       activerecord (>= 3.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -535,13 +538,13 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
-    simple_oauth (0.2.0)
+    simple_oauth (0.3.1)
     simplecov (0.14.1)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    slack-ruby-client (0.11.0)
+    slack-ruby-client (0.11.1)
       activesupport
       faraday (>= 0.9)
       faraday_middleware
@@ -557,7 +560,7 @@ GEM
       sprockets (>= 3.0.0)
     stripe (3.3.2)
       faraday (~> 0.9)
-    stripe-ruby-mock (2.5.0)
+    stripe-ruby-mock (2.5.1)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
@@ -575,20 +578,20 @@ GEM
     turbolinks (5.1.0)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
-    twitter (5.11.0)
+    twitter (5.17.0)
       addressable (~> 2.3)
       buftok (~> 0.2.0)
-      equalizer (~> 0.0.9)
+      equalizer (= 0.0.10)
       faraday (~> 0.9.0)
-      http (~> 0.6.0)
+      http (~> 1.0)
       http_parser.rb (~> 0.6.0)
       json (~> 1.8)
       memoizable (~> 0.4.0)
       naught (~> 1.0)
-      simple_oauth (~> 0.2.0)
+      simple_oauth (~> 0.3.0)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    uglifier (4.1.4)
+    uglifier (4.1.5)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -665,7 +668,7 @@ DEPENDENCIES
   dotenv-rails
   eventmachine (~> 1.0.7)
   exception_notification
-  factory_girl_rails (= 4.5.0)
+  factory_bot_rails
   faker
   font-awesome-rails
   friendly_id
@@ -684,7 +687,7 @@ DEPENDENCIES
   jvectormap-rails (~> 1.0.0)
   kaminari
   launchy
-  local_time (~> 1.0.3)
+  local_time (~> 2.0)
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
@@ -700,7 +703,7 @@ DEPENDENCIES
   phantomjs
   pivotal-tracker-api (= 1.0.3)
   poltergeist
-  polyamorous (~> 1.3.2)
+  polyamorous (~> 1.3.3)
   pry-byebug
   pry-rails
   public_activity
@@ -726,11 +729,11 @@ DEPENDENCIES
   slack-ruby-client
   sprockets-rails (~> 3.2, >= 3.2.1)
   stripe
-  stripe-ruby-mock (~> 2.5.0)
+  stripe-ruby-mock (~> 2.5.1)
   sucker_punch
   therubyracer
   turbolinks
-  twitter (~> 5.11.0)
+  twitter (~> 5.17)
   uglifier
   utf8-cleaner
   vcr
