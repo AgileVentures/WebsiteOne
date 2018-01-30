@@ -138,3 +138,12 @@ $ bundle exec rails s -b $IP -p $PORT
 15) View the running site 
 
 Click on `Share` on top right corner. The url in front of `Application` is the one which you can use to view your site.
+
+
+**Note**
+
+Each time you come back to c9 you may need to restart the database:
+
+```
+sudo service postgresql start
+```
