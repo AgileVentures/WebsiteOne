@@ -369,7 +369,7 @@ GEM
     nenv (0.3.0)
     netrc (0.11.0)
     newrelic_rpm (4.7.1.340)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -691,7 +691,7 @@ DEPENDENCIES
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
-  nokogiri (= 1.8.1)
+  nokogiri (= 1.8.2)
   octokit
   omniauth
   omniauth-github (~> 1.1.2)
