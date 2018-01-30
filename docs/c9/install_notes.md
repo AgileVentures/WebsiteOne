@@ -102,6 +102,8 @@ export LANGUAGE=en_US.UTF-8
 
 12) Run the tests
 
+**Note** to run the tests we need to ensure the test database has been migrated, use `bin/rake db:migrate RAILS_ENV=test`
+
 ```
 $ xvfb-run -a bundle exec rake spec
 $ bundle exec rake jasmine:ci
