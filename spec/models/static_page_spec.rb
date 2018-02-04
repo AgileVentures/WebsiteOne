@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe StaticPage, :type => :model do
-  subject { FactoryGirl.create(:static_page) }
+  subject { FactoryBot.create(:static_page) }
 
   it { is_expected.to be_versioned }
 
@@ -16,7 +16,7 @@ describe StaticPage, :type => :model do
 
   context 'correct urls for static pages' do
     context 'with ancestors' do
-      let(:page_child) { FactoryGirl.create(:static_page, parent_id: subject.id) }
+      let(:page_child) { FactoryBot.create(:static_page, parent_id: subject.id) }
       let(:page_url) { "#{subject.slug}/#{page_child.slug}" }
 
       it 'returns url for static page object' do

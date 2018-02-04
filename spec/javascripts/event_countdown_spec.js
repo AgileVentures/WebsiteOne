@@ -5,10 +5,12 @@ describe('Event Countdown', function () {
     beforeEach(function () {
         url = 'https://coming.home';
         name = 'Homecoming';
+        duration = 30;
 
         setFixtures(sandbox({
             id: 'next-event',
             'data-event-time': '',
+            'data-event-duration': duration,
             'data-event-url': url,
             'data-event-name': name
         }));
@@ -45,6 +47,7 @@ describe('Event Countdown', function () {
                 expect(this.data).toHaveBeenCalledWith(this.countdownClock[0], "event-time");
                 expect(this.data).toHaveBeenCalledWith(this.countdownClock[0], "event-url");
                 expect(this.data).toHaveBeenCalledWith(this.countdownClock[0], "event-name");
+                expect(this.data).toHaveBeenCalledWith(this.countdownClock[0], "event-duration");
             });
 
             it('calls update', function () {
@@ -108,14 +111,18 @@ describe('Event Countdown', function () {
             expect(this.countdownClock.text()).toEqual('Homecoming is live!')
         });
 
-        it('recalculates the time every second unless the event has already started', function () {
+        it('recalculates the time every second', function () {
             var setTimeout = spyOn(window, 'setTimeout');
             WebsiteOne.EventCountdown.update();
             expect(setTimeout).toHaveBeenCalledWith(this.update, 1000);
-            floor.and.returnValue(0);
-            setTimeout.calls.reset();
-            WebsiteOne.EventCountdown.update();
-            expect(setTimeout).not.toHaveBeenCalled()
+        });
+
+        it('reports that the event has ended after duration is up and does not recalculate time', function() {
+          var setTimeout = spyOn(window, 'setTimeout');
+          event.setMinutes(event.getMinutes() - 60); // event just ended
+          WebsiteOne.EventCountdown.update();
+          expect(setTimeout).not.toHaveBeenCalled()
+          expect(this.countdownClock.text()).toEqual('Homecoming has ended.')
         });
 
         it('should still work calling it through the window object', function() {

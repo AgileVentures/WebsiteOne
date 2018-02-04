@@ -23,7 +23,7 @@ Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |eve
   start_time = hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now
   update_time = hangout['Updated at'] ? Time.parse(hangout['Updated at']) : start_time
   event = Event.find_by_name(event_name)
-  FactoryGirl.create(:event_instance,
+  FactoryBot.create(:event_instance,
                      event_id: event.id,
                      hangout_url: hangout['EventInstance link'],
                      created: start_time,
@@ -46,7 +46,7 @@ Given /^the following hangouts exist:$/ do |table|
       ["0", {'person' => {displayName: "#{name}", 'id' => gplus_id}}]
     end
 
-    FactoryGirl.create(:event_instance,
+    FactoryBot.create(:event_instance,
                        title: hash['Title'],
                        project: Project.find_by_title(hash['Project']),
                        event: Event.find_by_name(hash['Event']),
@@ -66,7 +66,7 @@ Then /^I have Slack notifications enabled$/ do
 end
 
 Given(/^(\d+) hangouts exists$/) do |count|
-  count.to_i.times { FactoryGirl.create :event_instance }
+  count.to_i.times { FactoryBot.create :event_instance }
 end
 
 Then(/^I should see (\d+) hangouts$/) do |count|
