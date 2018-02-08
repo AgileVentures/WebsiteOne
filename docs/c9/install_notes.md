@@ -102,6 +102,8 @@ export LANGUAGE=en_US.UTF-8
 
 12) Run the tests
 
+**Note** to run the tests we need to ensure the test database has been migrated, use `bin/rake db:migrate RAILS_ENV=test`
+
 ```
 $ xvfb-run -a bundle exec rake spec
 $ bundle exec rake jasmine:ci
@@ -138,3 +140,12 @@ $ bundle exec rails s -b $IP -p $PORT
 15) View the running site 
 
 Click on `Share` on top right corner. The url in front of `Application` is the one which you can use to view your site.
+
+
+**Note**
+
+Each time you come back to c9 you may need to restart the database:
+
+```
+sudo service postgresql start
+```
