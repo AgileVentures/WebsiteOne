@@ -82,7 +82,7 @@ group :test do
   gem 'puffing-billy'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
-  gem 'stripe-ruby-mock', '~> 2.5.1', require: 'stripe_mock'
+  gem 'stripe-ruby-mock', '~> 2.5.2', require: 'stripe_mock'
   gem 'vcr'
   gem 'webmock'
   gem 'webrat'
