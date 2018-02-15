@@ -6,7 +6,6 @@ describe GithubCommitsJob do
   describe '.job', vcr: vcr_index do
     let(:project) { @project.reload }
     let(:project_without_url) { @project_without_url.reload }
-    # let(:project_with_empty_repo) { @project_with_empty_repo.reload }
     before do
       @project = FactoryBot.create(:project)
       @project.source_repositories.create(url: 'https://github.com/AgileVentures/WebsiteOne')
