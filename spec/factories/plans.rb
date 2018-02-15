@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :plan do
     name ""
     free_trial_length_days ""

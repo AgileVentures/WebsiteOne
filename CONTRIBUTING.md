@@ -30,7 +30,7 @@ To get involved please follow these steps:
 
    1. [install WSO on your dev environment (laptop or c9)](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)
 
-   2. get tests passing
+   2. get tests passing (unit and integration tests in `spec/` and acceptance tests in `features`)
 
    3. check that the site can be run manually (locally)
 

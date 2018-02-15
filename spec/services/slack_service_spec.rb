@@ -35,6 +35,12 @@ describe SlackService do
           text: here_message,
       }.merge!(default_post_args)
     end
+    let(:localsupport_project_channel_post_args) do
+      {
+          channel: 'C69J9GC1Y',
+          text: here_message,
+      }.merge!(default_post_args)
+    end
     let(:cs169_project_channel_post_args) do
       {
           channel: 'C29J4CYA2',
@@ -54,58 +60,71 @@ describe SlackService do
       }.merge!(default_post_args)
     end
 
+    let(:cs169_project) { mock_model Project, slug: 'cs169' }
+    let(:websiteone_project) { mock_model Project, slug: 'websiteone' }
+
     context('PairProgramming') do
-      let(:hangout) { EventInstance.create(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user) }
 
-      it 'sends the correct slack message to the correct channels' do
-        hangout.project = Project.create(title: 'websiteone', description: 'hmm', status: 'active')
+      let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: cs169_project }
+      let(:missing_url_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "  ", user: user }
+      let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project }
+      let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: nil }
 
+      it 'sends the correct slack message to the correct channels when associated with a project' do
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(websiteone_project_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
 
-        slack_service.post_hangout_notification(hangout, slack_client, gitter_client)
+        slack_service.post_hangout_notification(websiteone_hangout, slack_client, gitter_client)
       end
 
       it 'does not fail when event has no associated project' do
-
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
 
-        slack_service.post_hangout_notification(hangout, slack_client, gitter_client)
+        slack_service.post_hangout_notification(no_project_hangout, slack_client, gitter_client)
       end
 
       it 'should ping gitter and slack (but not general) when the project is cs169' do
-        hangout.project = Project.create(title: 'cs169', description: 'hmm', status: 'active')
-
         expect(gitter_client).to receive(:messages).with('56b8bdffe610378809c070cc', limit: 50).and_return([])
         expect(gitter_client).to receive(:send_message).with('[MockEvent with random](mock_url) is starting NOW!', "56b8bdffe610378809c070cc")
-        expect(slack_client).to receive(:chat_postMessage).with(cs169_project_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(cs169_project_channel_post_args)
 
-        slack_service.post_hangout_notification(hangout, slack_client, gitter_client)
+        slack_service.post_hangout_notification(cs169_hangout, slack_client, gitter_client)
       end
 
       it 'does not post notification if hangout url is blank' do
-        hangout.hangout_url = "     "
-
         expect(slack_client).not_to receive(:chat_postMessage)
 
-        slack_service.post_hangout_notification(hangout, slack_client, gitter_client)
+        slack_service.post_hangout_notification(missing_url_hangout, slack_client, gitter_client)
+      end
+
+      let(:multiple_channel_project) { mock_model Project, slug: 'multiple-channels' }
+      let(:multiple_channel_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: multiple_channel_project }
+
+      it 'can post to multiple channels' do
+        expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(websiteone_project_channel_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(localsupport_project_channel_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
+
+        slack_service.post_hangout_notification(multiple_channel_hangout, slack_client, gitter_client)
       end
     end
 
     context('Scrums') do
-      let(:hangout) { EventInstance.create(title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user) }
+      let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: cs169_project }
+      let(:missing_url_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "  ", user: user }
+      let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: websiteone_project }
+      let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: nil }
 
       it 'sends the correct slack message to the correct channels' do
-        hangout.project = Project.create(title: 'websiteone', description: 'hmm', status: 'active')
-
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(websiteone_project_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(standup_notifications_channel_post_args)
 
-        slack_service.post_hangout_notification(hangout, slack_client, gitter_client)
+        slack_service.post_hangout_notification(websiteone_hangout, slack_client, gitter_client)
       end
 
       it 'does not fail when event has no associated project' do
@@ -113,25 +132,21 @@ describe SlackService do
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(standup_notifications_channel_post_args)
 
-        slack_service.post_hangout_notification(hangout, slack_client, gitter_client)
+        slack_service.post_hangout_notification(no_project_hangout, slack_client, gitter_client)
       end
 
       it 'should ping slack when the project is cs169' do
-        hangout.project = Project.create(title: 'cs169', description: 'hmm', status: 'active')
-
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(cs169_project_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(standup_notifications_channel_post_args)
 
-        slack_service.post_hangout_notification(hangout, slack_client, gitter_client)
+        slack_service.post_hangout_notification(cs169_hangout, slack_client, gitter_client)
       end
 
       it 'does not post notification if hangout url is blank for pairing' do
-        hangout.hangout_url = "     "
-
         expect(slack_client).not_to receive(:chat_postMessage)
 
-        slack_service.post_hangout_notification(hangout, slack_client, gitter_client)
+        slack_service.post_hangout_notification(missing_url_hangout, slack_client, gitter_client)
       end
 
     end

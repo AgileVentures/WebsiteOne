@@ -2,20 +2,20 @@ require 'spec_helper'
 
 describe Newsletter do
   it 'has a valid factory' do
-    expect(FactoryGirl.build(:newsletter)).to be_valid
+    expect(FactoryBot.build(:newsletter)).to be_valid
   end
 
   describe "is invalid" do
     it 'when subejct is empty' do
-      expect(FactoryGirl.build(:newsletter, subject: nil)).to_not be_valid
+      expect(FactoryBot.build(:newsletter, subject: nil)).to_not be_valid
     end
 
     it 'when title is emtpy' do
-      expect(FactoryGirl.build(:newsletter, title: nil)).to_not be_valid
+      expect(FactoryBot.build(:newsletter, title: nil)).to_not be_valid
     end
 
     it 'when body is empty' do
-      expect(FactoryGirl.build(:newsletter, body: nil)).to_not be_valid
+      expect(FactoryBot.build(:newsletter, body: nil)).to_not be_valid
     end
   end
 
@@ -36,9 +36,9 @@ describe Newsletter do
 
   describe 'sends mailings in instant mode' do
     before :each do 
-      receiver_users = FactoryGirl.create_list(:user, 2, receive_mailings: true)
-      non_receiver_users = FactoryGirl.create_list(:user, 2, receive_mailings: false)
-      @newsletter = FactoryGirl.create(:newsletter)
+      receiver_users = FactoryBot.create_list(:user, 2, receive_mailings: true)
+      non_receiver_users = FactoryBot.create_list(:user, 2, receive_mailings: false)
+      @newsletter = FactoryBot.create(:newsletter)
       Newsletter.redefine_without_warning('SEND_AS', :instant)
     end
 
@@ -69,7 +69,7 @@ describe Newsletter do
 
   describe 'does not instantely send in scheduler_job mode' do
     before :each do
-      @newsletter = FactoryGirl.build(:newsletter)
+      @newsletter = FactoryBot.build(:newsletter)
     end
 
     it 'awaits scheduler' do

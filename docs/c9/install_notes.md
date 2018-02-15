@@ -76,7 +76,7 @@ $ bundle exec rake db:setup
     
 Ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in.
 
-Assuming your locate is `en_US.UTF-8` do the following:
+Assuming your locale is `en_US.UTF-8` do the following:
 
 Run in terminal:
 
@@ -101,6 +101,8 @@ export LANGUAGE=en_US.UTF-8
 **Note**: If you face the error `Fontconfig warning: ignoring C.UTF-8: not a valid language tag`, then your locale is not correctly set. 
 
 12) Run the tests
+
+**Note** to run the tests we need to ensure the test database has been migrated, use `bin/rake db:migrate RAILS_ENV=test`
 
 ```
 $ xvfb-run -a bundle exec rake spec
@@ -138,3 +140,12 @@ $ bundle exec rails s -b $IP -p $PORT
 15) View the running site 
 
 Click on `Share` on top right corner. The url in front of `Application` is the one which you can use to view your site.
+
+
+**Note**
+
+Each time you come back to c9 you may need to restart the database:
+
+```
+sudo service postgresql start
+```

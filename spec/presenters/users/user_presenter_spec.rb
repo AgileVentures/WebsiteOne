@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UserPresenter do
   subject { UserPresenter.new(user) }
-  let(:user) { FactoryGirl.build_stubbed(:user, first_name: '', last_name: '', email: '') }
+  let(:user) { FactoryBot.build_stubbed(:user, first_name: '', last_name: '', email: '') }
 
   describe '#display_name' do
     it 'should display the first part of the email address when no name is given' do
@@ -65,10 +65,10 @@ describe UserPresenter do
   end
 
   describe 'user status' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     before(:each) do
-      @status = FactoryGirl.create_list(:status, 3,
+      @status = FactoryBot.create_list(:status, 3,
                                         status: Status::OPTIONS[rand(Status::OPTIONS.length)],
                                         user: user)
       user.reload
@@ -88,7 +88,7 @@ describe UserPresenter do
   end
 
   describe 'empty profile fields' do
-    let!(:user) { FactoryGirl.create(:user) }
+    let!(:user) { FactoryBot.create(:user) }
 
     it 'should return a list of all fields if they are nil' do
       user.first_name = user.last_name = user.bio = nil

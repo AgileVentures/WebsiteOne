@@ -1,5 +1,6 @@
 json.array! @subscriptions do |subscription|
   json.email subscription.user.try(:email)
+  json.sponsor_email subscription.sponsor.try(:email)
   json.started_on subscription.started_at.strftime('%Y-%m-%d')
   json.ended_on subscription.ended_at.try(:strftime,'%Y-%m-%d')
   json.plan_name subscription.plan.name
