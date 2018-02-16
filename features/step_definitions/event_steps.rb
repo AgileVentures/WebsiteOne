@@ -106,12 +106,17 @@ Given(/^the date is "([^"]*)"$/) do |jump_date|
   Delorean.time_travel_to(Time.parse(@jump_date))
 end
 
+And(/^(\d+) minutes pass$/) do |minutes|
+  mn = "\"45:00\""
+  page.execute_script "window.clock.tick(#{mn});"
+  sleep 5
+end
+
 When(/^I follow "([^"]*)" for "([^"]*)" "([^"]*)"$/) do |linkid, table_name, hookup_number|
   links = page.all(:css, "table##{table_name} td##{linkid} a")
   link = links[hookup_number.to_i - 1]
   link.click
 end
-
 
 And(/^I click on the "([^"]*)" div$/) do |arg|
   find("div.#{arg}").click

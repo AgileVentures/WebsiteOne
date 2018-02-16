@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe ScrumsController do
 
-  let!(:scrum) { FactoryGirl.create(:event_instance, category: 'Scrum', created_at: DateTime.now) }
-  let!(:scrum2) { FactoryGirl.create(:event_instance, category: 'Scrum', created_at: DateTime.now.at_beginning_of_day) }
-  let!(:hangout) { FactoryGirl.create(:event_instance, category: 'PairProgramming') }
+  let!(:scrum) { FactoryBot.create(:event_instance, category: 'Scrum', created_at: DateTime.now) }
+  let!(:scrum2) { FactoryBot.create(:event_instance, category: 'Scrum', created_at: DateTime.now.at_beginning_of_day) }
+  let!(:hangout) { FactoryBot.create(:event_instance, category: 'PairProgramming') }
 
   describe '#index' do
     context '@scrums instance variable' do

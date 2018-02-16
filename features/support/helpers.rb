@@ -43,7 +43,7 @@ module Helpers
   end
 
   def create_user
-    @user ||= FactoryGirl.create(:user, create_visitor)
+    @user ||= FactoryBot.create(:user, create_visitor)
     @current_user = @user
   end
 

@@ -27,13 +27,15 @@
 //= stub disqus
 //= require events
 //= stub event_instances
-//= require local_time
+//= require local-time
 //= require jvectormap
 //= require jvectormap/maps/world_mill_en
 //= require moment.min
 //= require moment-timezone-with-data-2010-2020
 //= require chatlio
 //= require cocoon
+//= require lolex
+
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code

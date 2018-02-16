@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Article, :type => :model do
 
-  let(:user) { FactoryGirl.create :user } 
+  let(:user) { FactoryBot.create :user }
   subject { Article.new slug: 'test-article', user: user }
 
   it { is_expected.to respond_to :tag_list}

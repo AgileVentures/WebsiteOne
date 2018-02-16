@@ -26,7 +26,7 @@ Capybara.javascript_driver = :webkit
 RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include Capybara::DSL
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   config.filter_run :show_in_doc => true if ENV['APIPIE_RECORD']
   # ## Mock Framework

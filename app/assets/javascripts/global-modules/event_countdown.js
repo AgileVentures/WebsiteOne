@@ -1,7 +1,7 @@
 WebsiteOne.define('EventCountdown', function () {
 
     function EventCountdown() {
-        var countdownClock, eventName, eventTime, eventUrl, textToAppend;
+        var countdownClock, eventName, eventTime, eventDuration, eventUrl, textToAppend;
         var self = this;
 
         this.format = function(num) {
@@ -15,8 +15,14 @@ WebsiteOne.define('EventCountdown', function () {
                 timeInHours = Math.floor(timeInMins / 60);
 
             if (timeInSeconds <= 0) {
-                countdownClock.html('<a href="' + eventUrl + '">' + eventName +
-                                    '</a> is live!');
+                if (timeInMins + eventDuration <= 0) {
+                  countdownClock.html('<a href="' + eventUrl + '">' + eventName +
+                                      '</a> has ended.');
+                } else {
+                  countdownClock.html('<a href="' + eventUrl + '">' + eventName +
+                                      '</a> is live!');
+                  setTimeout(self.update, 1000);
+                }
             } else {
                 var tmp = '<p>';
                 if (timeInHours > 0) {
@@ -36,6 +42,7 @@ WebsiteOne.define('EventCountdown', function () {
             countdownClock = $('#next-event');
             if (countdownClock.length > 0) {
                 eventTime = Date.parse(countdownClock.data('event-time'));
+                eventDuration = countdownClock.data('event-duration');
                 eventUrl = countdownClock.data('event-url');
                 eventName = countdownClock.data('event-name');
                 textToAppend = ' to <a href="' + eventUrl + '">' + eventName + '</a></p>';
