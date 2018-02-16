@@ -12,7 +12,8 @@ Feature: Subscribe Self to Premium
     And the email queue is clear
 
   Scenario: Pay by card
-    Given I visit "subscriptions/new"
+    Given I am logged in
+    And I visit "subscriptions/new"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"
@@ -30,7 +31,8 @@ Feature: Subscribe Self to Premium
     And I should be my own sponsor
 
   Scenario: Pay by card (with free trial month)
-    Given I visit "subscriptions/new?plan=av_premium_first_month_free"
+    Given I am logged in
+    And I visit "subscriptions/new?plan=av_premium_first_month_free"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "Thanks, you're now an AgileVentures Premium (first month free) Member!"
@@ -40,7 +42,8 @@ Feature: Subscribe Self to Premium
     # And my member page should show premium details # TODO IMPORTANT - require login?
 
   Scenario: Pay by PayPal
-    Given I visit "subscriptions/new"
+    Given I am logged in
+    And I visit "subscriptions/new"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint
     Then "sam-buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium" email
@@ -50,6 +53,7 @@ Feature: Subscribe Self to Premium
 
   Scenario: Pay by card, but encounter error
     Given my card will be rejected
+    And I am logged in
     And I visit "/subscriptions/new"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
@@ -58,14 +62,16 @@ Feature: Subscribe Self to Premium
     And "random@morerandom.com" should not receive a "Welcome to AgileVentures Premium" email
 
   Scenario: Pay by PayPal, but encounter error
-    Given I visit "subscriptions/new"
+    Given I am logged in
+    And I visit "subscriptions/new"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint incorrectly
     Then "sam-buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium" email
     And I should see "redirected" in last_response
 
   Scenario: Pay by card, and default to Premium
-    Given I visit "subscriptions/new?plan=76a5uydstjg"
+    Given I am logged in
+    And I visit "subscriptions/new?plan=76a5uydstjg"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
     Then I should see "Thanks, you're now an AgileVentures Premium Member!"

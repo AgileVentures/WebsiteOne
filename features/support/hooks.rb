@@ -98,6 +98,12 @@ Before('@omniauth') do
   }
 end
 
+Before('@omniauth-with-invalid-credentials') do
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:gplus] = :invalid_credentials
+  OmniAuth.config.mock_auth[:github] = :invalid_credentials
+end
+
 Before('@omniauth-without-email') do
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:github] = {
@@ -113,7 +119,7 @@ Before('@omniauth-without-email') do
   }
 end
 
-After('@omniauth, @omniauth-with-email') do
+After('@omniauth, @omniauth-with-email, @omniauth-with-invalid-credentials') do
   OmniAuth.config.test_mode = false
 end
 

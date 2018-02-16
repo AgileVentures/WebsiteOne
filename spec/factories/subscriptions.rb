@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :subscription do
     type 'Premium'
     started_at Time.now
