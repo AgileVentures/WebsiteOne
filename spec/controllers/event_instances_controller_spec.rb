@@ -13,8 +13,8 @@ describe EventInstancesController do
 
   describe '#index' do
     before do
-      FactoryGirl.create_list(:event_instance, 3)
-      FactoryGirl.create_list(:event_instance, 3, updated: 1.hour.ago)
+      FactoryBot.create_list(:event_instance, 3)
+      FactoryBot.create_list(:event_instance, 3, updated: 1.hour.ago)
     end
 
     context 'show all hangouts/event-instances' do

@@ -1,4 +1,3 @@
-
 class User < ActiveRecord::Base
   acts_as_paranoid
 
@@ -46,9 +45,10 @@ class User < ActiveRecord::Base
   has_many :commit_counts
   has_many :status
 
-  has_one :subscription, autosave: true
+  has_many :subscriptions, autosave: true
 
   def stripe_customer_id # ultimately replacing the field stripe_customer
+    subscription = current_subscription
     return nil unless subscription
     subscription.identifier
   end
@@ -78,12 +78,20 @@ class User < ActiveRecord::Base
 
   self.per_page = 30
 
+  def current_subscription
+    now = DateTime.now
+    current_subscriptions = subscriptions.select { |s| s.ended_at.nil? and s.started_at.to_i <= now.to_i }
+    return nil if current_subscriptions.nil? or current_subscriptions.empty?
+    current_subscriptions.first
+  end
+
   def self.filter_if_title title
     return User.all if title.blank?
     User.tagged_with(title)
   end
 
   def membership_type
+    subscription = current_subscription
     return "Basic" unless subscription
     subscription.plan.name
   end

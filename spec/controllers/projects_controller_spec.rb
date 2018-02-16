@@ -14,9 +14,10 @@ describe ProjectsController, :type => :controller do
   #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
     # stubbing out devise methods to simulate authenticated user
-    @user = build_stubbed(User, id: 1, slug: 'some-id')
+    @user = build_stubbed(:user, id: 1, slug: 'some-id')
     allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
     allow(controller).to receive(:current_user).and_return(@user)
+    allow(@user).to receive(:touch)
   end
 
   let(:user) { @user }
@@ -42,11 +43,11 @@ describe ProjectsController, :type => :controller do
 
     describe '#show' do
       before(:each) do
-        @project = build_stubbed(Project, valid_attributes)
+        @project = build_stubbed(:project, valid_attributes)
         allow(@project).to receive(:tag_list).and_return ['WSO']
         Project.stub_chain(:friendly, :find).and_return @project
         @project.stub_chain(:user, :display_name).and_return "Happy User"
-        @users = [build_stubbed(User, slug: 'my-friendly-id', display_profile: true)]
+        @users = [build_stubbed(:user, slug: 'my-friendly-id', display_profile: true)]
         expect(@project).to receive(:members).and_return @users
         event_instances = double('event_instances')
         ordered_event_instances = double('ordered_event_instances')
@@ -54,10 +55,11 @@ describe ProjectsController, :type => :controller do
         expect(event_instances).to receive(:order).with(created_at: :desc).and_return(ordered_event_instances)
         expect(event_instances).to receive(:count).and_return('count')
         expect(ordered_event_instances).to receive(:limit).with(25).and_return('videos')
-        allow(PivotalService).to receive(:one_project).and_return('')
-        dummy = Object.new
-        dummy.stub(stories: "stories")
-        PivotalService.stub(iterations: dummy)
+        project = Object.new
+        iteration = Object.new
+        iteration.stub(stories: "stories")
+        project.stub(current_iteration: iteration)
+        allow(PivotalAPI::Project).to receive(:retrieve).and_return(project)
       end
 
       it 'assigns the requested project as @project' do
@@ -85,7 +87,7 @@ describe ProjectsController, :type => :controller do
         expect(assigns(:event_instances_count)).to eq 'count'
       end
 
-      it 'assigns the list of related PivtalTracker stories' do
+      it 'assigns the list of related PivotalTracker stories' do
         get :show, {id: @project.friendly_id}, valid_session
         expect(assigns(:stories)).to eq 'stories'
       end
@@ -222,7 +224,7 @@ describe ProjectsController, :type => :controller do
 
     describe '#update' do
       before(:each) do
-        @project = FactoryGirl.create(:project)
+        @project = FactoryBot.create(:project)
         allow(@project).to receive(:create_activity)
         Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
       end
@@ -268,7 +270,7 @@ describe ProjectsController, :type => :controller do
       end
 
       context 'pitch update with Mercury' do
-        @project = FactoryGirl.create(:project)
+        @project = FactoryBot.create(:project)
         let(:params) do
           {:id => @project,
            :content =>
