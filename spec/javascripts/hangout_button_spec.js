@@ -53,7 +53,7 @@ describe('hangouts', function(){
         });
       });
 
-      it('does not render hangout button', function() {
+      describe ('does not render hangout button', function() {
         it('if placeholder div is not loaded', function() {
           setFixtures('');
           WebsiteOne.renderHangoutButton();
