@@ -400,7 +400,7 @@ GEM
       request_store (~> 1.1)
     paranoia (2.4.0)
       activerecord (>= 4.0, < 5.2)
-    pg (0.21.0)
+    pg (1.0.0)
     phantomjs (2.1.1.0)
     pivotal-tracker-api (1.0.3)
       business_time (~> 0.7.6)
