@@ -1,6 +1,6 @@
 Given /^the following newsletters exist$/ do |table|
   table.hashes.each do |attributes|
-    FactoryGirl.create(:newsletter, attributes)
+    FactoryBot.create(:newsletter, attributes)
   end
 end
 

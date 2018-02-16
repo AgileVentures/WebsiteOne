@@ -1,7 +1,7 @@
 
 Given(/^a gplus user who has attended one event$/) do
-  hangout = FactoryGirl.create(:event_instance, created: '1979-10-14 11:15 UTC')
-  @gplus_user = FactoryGirl.create(:user, gplus: hangout.participants.first.last['person']['id'])
+  hangout = FactoryBot.create(:event_instance, created: '1979-10-14 11:15 UTC')
+  @gplus_user = FactoryBot.create(:user, gplus: hangout.participants.first.last['person']['id'])
 end
 
 Then(/^the gplus user should be credit as having attended one event$/) do

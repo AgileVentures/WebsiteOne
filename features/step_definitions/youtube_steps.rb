@@ -37,9 +37,9 @@ Given(/^the project "(.*?)" has (\d+) videos of user "(.*?)"$/) do |project_titl
   names = user_name.split
   user = (user_name == 'me') && @current_user
   user ||= User.find_by first_name: names[0], last_name: names[1]
-  user ||= FactoryGirl.create :user, first_name: names[0], last_name: names[1]
+  user ||= FactoryBot.create :user, first_name: names[0], last_name: names[1]
   count.to_i.times do |n|
-    FactoryGirl.create :event_instance, title: "PP on #{project_title} - feature: #{n}",
+    FactoryBot.create :event_instance, title: "PP on #{project_title} - feature: #{n}",
                        project: project, user: user, created_at: Time.new('2014', '04', '15').utc.beginning_of_day + n.minutes,
                        youtube_tweet_sent: false
   end

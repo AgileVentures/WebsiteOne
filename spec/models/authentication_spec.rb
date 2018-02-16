@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Authentication, :type => :model do
   before do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     @auth = @user.authentications.create!(provider: 'github', uid: '12345')
   end
 

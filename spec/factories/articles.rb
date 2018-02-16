@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :article do
     sequence(:title) {|n| "Title #{n}"}
     content Faker::Lorem.paragraph(1)
