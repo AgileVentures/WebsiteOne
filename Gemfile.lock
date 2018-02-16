@@ -320,8 +320,8 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.6)
-    jvectormap-rails (1.0.1)
-      railties (>= 3.1, < 5.0)
+    jvectormap-rails (2.0.0)
+      railties (>= 3.1)
     jwt (1.5.6)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -684,7 +684,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-turbolinks (= 2.1.0)
-  jvectormap-rails (~> 1.0.0)
+  jvectormap-rails (~> 2.0.0)
   kaminari
   launchy
   local_time (~> 2.0)
