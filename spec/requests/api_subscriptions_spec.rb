@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe "Subscriptions" do
   describe "GET /subscriptions" do
-    let(:user) { FactoryGirl.create(:user, email: "kitty@cat.com") }
+    let(:user) { FactoryBot.create(:user, email: "kitty@cat.com") }
     let(:start_time) { DateTime.new(2001, 2, 3, 4, 5, 6) }
     let(:end_time) { DateTime.new(2002, 2, 3, 4, 5, 6) }
     let(:start_date) { '2001-02-03' }
     let(:end_date) { '2002-02-03' }
-    let(:plan) { FactoryGirl.create(:plan, name: 'Premium') }
-    let!(:subscription) { FactoryGirl.create(:subscription, user: user, sponsor: user, plan: plan, started_at: start_time, ended_at: end_time) }
-    let!(:payment_source) { FactoryGirl.create(:paypal, subscription: subscription) }
+    let(:plan) { FactoryBot.create(:plan, name: 'Premium') }
+    let!(:subscription) { FactoryBot.create(:subscription, user: user, sponsor: user, plan: plan, started_at: start_time, ended_at: end_time) }
+    let!(:payment_source) { FactoryBot.create(:paypal, subscription: subscription) }
     let(:credentials) { ActionController::HttpAuthentication::Token.encode_credentials('TEST') }
     let(:headers) do
       {
@@ -37,8 +37,8 @@ describe "Subscriptions" do
       end
 
       context 'with deleted user and sponsor' do
-        let(:sponsor) { FactoryGirl.create(:user, email: "catty@kit.com", deleted_at: 2.days.ago) }
-        let!(:subscription) { FactoryGirl.create(:subscription, user: user, sponsor: sponsor, plan: plan, started_at: start_time, ended_at: end_time) }
+        let(:sponsor) { FactoryBot.create(:user, email: "catty@kit.com", deleted_at: 2.days.ago) }
+        let!(:subscription) { FactoryBot.create(:subscription, user: user, sponsor: sponsor, plan: plan, started_at: start_time, ended_at: end_time) }
 
         it 'succeeds' do
           user.destroy

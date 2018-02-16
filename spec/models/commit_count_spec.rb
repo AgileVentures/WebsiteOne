@@ -23,7 +23,7 @@ describe CommitCount, type: :model do
   end
 
   context 'with a duplicate record having same user and project' do
-    let(:duplicate_record) { FactoryGirl.create(:commit_count) }
+    let(:duplicate_record) { FactoryBot.create(:commit_count) }
     subject { build(:commit_count,  duplicate_record.attributes)}
     it { is_expected.to_not be_valid }
   end

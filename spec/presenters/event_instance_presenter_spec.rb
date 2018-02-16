@@ -4,7 +4,7 @@ describe EventInstancePresenter do
   let(:presenter){ EventInstancePresenter.new(hangout) }
 
   context 'all fields are present' do
-    let(:hangout){ FactoryGirl.build_stubbed(:event_instance, created: '1979-10-14 11:15 UTC') }
+    let(:hangout){ FactoryBot.build_stubbed(:event_instance, created: '1979-10-14 11:15 UTC') }
 
     it 'displays created time' do
       expect(presenter.created_at).to eq('11:15 14/10')
@@ -33,14 +33,14 @@ describe EventInstancePresenter do
     end
 
     it 'returns an array of participants' do
-      participant = FactoryGirl.create(:user, gplus: hangout.participants.first.last['person']['id'])
+      participant = FactoryBot.create(:user, gplus: hangout.participants.first.last['person']['id'])
 
       expect(presenter.participants.count).to eq(2)
       expect(presenter.participants.first).to eq(participant)
     end
 
     it 'do not show the host in the list of participants' do
-      FactoryGirl.create(:user, gplus: hangout.participants.first.last['person']['id'])
+      FactoryBot.create(:user, gplus: hangout.participants.first.last['person']['id'])
       expect(presenter.participants).not_to include(hangout.user)
     end
 
@@ -62,7 +62,7 @@ describe EventInstancePresenter do
   end
 
   context 'some fields are missing' do
-    let(:hangout){ FactoryGirl.build_stubbed(:event_instance,
+    let(:hangout){ FactoryBot.build_stubbed(:event_instance,
                          title: nil,
                          category: nil,
                          project: nil,

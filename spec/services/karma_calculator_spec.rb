@@ -4,7 +4,7 @@ describe KarmaCalculator do
 
   describe 'for new members' do
     subject { KarmaCalculator.new(user) }
-    let(:user) { FactoryGirl.build(:user, :without_karma, created_at: nil) }
+    let(:user) { FactoryBot.build(:user, :without_karma, created_at: nil) }
 
     it 'should assign nil karma to members who have not yet been created' do
       expect(user.karma).to be_nil
@@ -13,7 +13,7 @@ describe KarmaCalculator do
 
   describe 'for new members without karma' do
     subject { KarmaCalculator.new(user) }
-    let(:user) { FactoryGirl.build(:user, :without_karma, created_at: nil) }
+    let(:user) { FactoryBot.build(:user, :without_karma, created_at: nil) }
 
     it 'should assign nil karma to members without karma' do
       expect(user.karma).to be_nil
@@ -24,7 +24,7 @@ describe KarmaCalculator do
 
     describe 'for old members' do
       subject { KarmaCalculator.new(user) }
-      let(:user) { FactoryGirl.build(:user, :with_karma, created_at: 31.days.ago) }
+      let(:user) { FactoryBot.build(:user, :with_karma, created_at: 31.days.ago) }
       let(:karma_points) { subject.perform; user.karma_total }
 
       it 'should assign karma points to members' do
@@ -33,9 +33,9 @@ describe KarmaCalculator do
     end
 
     describe 'for members attending hangouts' do
-      let(:hangout) { FactoryGirl.create(:event_instance) }
+      let(:hangout) { FactoryBot.create(:event_instance) }
       # subject {  }
-      let(:user) { FactoryGirl.create(:user, :with_karma, created_at: 31.days.ago, gplus: hangout.participants.first.last['person']['id']) }
+      let(:user) { FactoryBot.create(:user, :with_karma, created_at: 31.days.ago, gplus: hangout.participants.first.last['person']['id']) }
 
       it 'gives points for hangout participation' do
         subject = KarmaCalculator.new(user)

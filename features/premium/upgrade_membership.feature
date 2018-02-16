@@ -40,7 +40,7 @@ Feature: Allow Users to Upgrade Membership
     And I click "Upgrade to Premium"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
-    Then I should see "Premium Member"
+    Then I should see "Thanks, you're now an AgileVentures Premium Member"
     And my profile page should reflect that I am a "Premium" member
     And I should see button "Upgrade to Premium Mob"
     And I should see myself in the premium members list
