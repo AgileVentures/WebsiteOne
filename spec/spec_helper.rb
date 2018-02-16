@@ -26,7 +26,9 @@ Capybara.javascript_driver = :webkit
 RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include Capybara::DSL
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
+
+  config.filter_run :show_in_doc => true if ENV['APIPIE_RECORD']
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -40,9 +42,9 @@ RSpec.configure do |config|
   end
 
   config.include Helpers
-  config.include Devise::TestHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :helper
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :helper
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include RSpecHtmlMatchers
 
   config.before(:suite) do
@@ -55,7 +57,7 @@ RSpec.configure do |config|
     Settings.reload!
   end
 
-  config.after(:each) do
+  config.append_after(:each) do
     DatabaseCleaner.clean
   end
 

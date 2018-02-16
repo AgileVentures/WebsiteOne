@@ -168,22 +168,22 @@ describe Project, type: :model do
 
   context '#jitsi_room_link' do
     it 'returns correct link' do
-      project = FactoryGirl.build(:project, title: 'Simple Project-~!@#$')
+      project = FactoryBot.build(:project, title: 'Simple Project-~!@#$')
       expect(project.jitsi_room_link).to eq('https://meet.jit.si/AV_Simple_Project')
     end
   end
 
   context '.with_github_url' do
     it 'returns all projects that have at least one source repository' do
-      project = FactoryGirl.create(:project)
+      project = FactoryBot.create(:project)
       project.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project')
-      project2 = FactoryGirl.create(:project)
+      project2 = FactoryBot.create(:project)
       project2.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project2')
       expect(Project.with_github_url).to include(project, project2)
     end
 
     it 'does not return projects that do not have a source repository' do
-      project = FactoryGirl.build(:project)
+      project = FactoryBot.build(:project)
       expect(Project.with_github_url).not_to include(project)
     end
   end

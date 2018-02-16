@@ -2,6 +2,20 @@ class CardsController < ApplicationController
 
   before_filter :authenticate_user!
 
+  def new
+  end
+
+  def create
+    customer = Stripe::Customer.create(email: params[:stripeEmail])
+    card = customer.sources.create(card: stripe_token(params))
+    card.save
+    customer.default_card = card.id
+    customer.save
+  rescue Stripe::StripeError, StandardError => e
+    logger.error "Stripe error while adding card info: #{e.message} for #{current_user}"
+    @error = true
+  end
+
   def edit
   end
 
@@ -11,7 +25,7 @@ class CardsController < ApplicationController
     card.save
     customer.default_card = card.id
     customer.save
-  rescue Stripe::StripeError, NoMethodError => e
+  rescue Stripe::StripeError, StandardError => e
     logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
     @error = true
   end

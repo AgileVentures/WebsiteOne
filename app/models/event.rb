@@ -25,8 +25,19 @@ class Event < ActiveRecord::Base
   REPEAT_ENDS_OPTIONS = %w[on never]
   DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
 
+  # hoped the below would help address the issue about how rails 4 -> 5 is going to treat setting non-booleans
+  # to booleans - adding the setter fixes the specs, but breaks the acceptance tests
+  #
+  # def repeat_ends=(repeat_ends)
+  #   super repeat_ends == 'on'
+  # end
+  #
+  # def repeat_ends
+  #   super ? 'on' : 'never'
+  # end
+
   def set_repeat_ends_string
-    @repeat_ends_string = repeat_ends ? "on" : "never"
+    @repeat_ends_string = repeat_ends ? 'on' : 'never'
   end
 
   def self.base_future_events(project)
@@ -34,7 +45,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.future_events
-    Event.where('repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on > ?', Time.now)
+    Event.where('repeats = \'never\' OR repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on > ?', Time.now)
   end
 
   def self.upcoming_events(project=nil)
@@ -212,8 +223,8 @@ class Event < ActiveRecord::Base
 
   def recent_hangouts
     event_instances
-      .where('updated_at BETWEEN ? AND ?', 1.days.ago + duration, DateTime.now.end_of_day)
-      .order(updated_at: :desc)
+      .where('created_at BETWEEN ? AND ?', 1.days.ago + duration.minutes, DateTime.now.end_of_day)
+      .order(created_at: :desc)
   end
 
   def less_than_ten_till_start?

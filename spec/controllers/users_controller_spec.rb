@@ -8,7 +8,7 @@ describe UsersController, :type => :controller do
     end
 
     it 'should assign the results of the search to @users' do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       get :index
       expect(assigns(:users)).to include(user)
     end
@@ -26,8 +26,8 @@ describe UsersController, :type => :controller do
 
   describe '#show' do
     before do
-      @projects = build_stubbed_list(Project, 3)
-      @user = build_stubbed(User)
+      @projects = build_stubbed_list(:project, 3)
+      @user = build_stubbed(:user)
       allow(@user).to receive(:following_by_type).and_return(@projects)
       allow(@user).to receive(:skill_list).and_return([])
       User.stub_chain(:friendly, :find).and_return(@user)
@@ -64,7 +64,7 @@ describe UsersController, :type => :controller do
       end
 
       it 'it renders an error message when accessing a private profile' do
-        expect{get 'show', id: @user.friendly_id}.to raise_error
+        expect{get 'show', id: @user.friendly_id}.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -74,7 +74,7 @@ describe UsersController, :type => :controller do
     let(:mail) { ActionMailer::Base.deliveries }
 
     before(:each) do
-      @user = build_stubbed(User, display_hire_me: true)
+      @user = build_stubbed(:user, display_hire_me: true)
       allow(User).to receive(:find).with(@user.id.to_s).and_return(@user)
       request.env['HTTP_REFERER'] = 'back'
       mail.clear
@@ -198,7 +198,7 @@ describe UsersController, :type => :controller do
   end
 
   describe 'PATCH add_status_user' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let(:valid_attributes) { {status: 'Sleeping at my keyboard', user_id: user.friendly_id} }
 
     before(:each) do

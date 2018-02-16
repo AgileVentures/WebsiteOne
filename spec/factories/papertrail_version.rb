@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :version, class: PaperTrail::Version do
     item_type 'Document'
     event 'create'

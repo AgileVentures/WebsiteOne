@@ -1,4 +1,10 @@
 features:
+  edit_static_pages:
+    enabled: true
+  get_next_scrum:
+    enabled: true
+  get_next_scrum_homepage:
+    enabled: true
   slack:
     notifications:
       enabled: false
@@ -10,6 +16,9 @@ features:
 
   email_registrations:
     enabled: true
+
+api:
+  premium_subscriptions_token: 'TEST'
 
 mailer:
   delivery_method: 'test'

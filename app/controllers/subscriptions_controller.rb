@@ -1,5 +1,7 @@
 class SubscriptionsController < ApplicationController
 
+  before_action :store_user_location! , if: :storable_location?
+  before_action :authenticate_user!, if: :require_login?
   skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
@@ -15,7 +17,7 @@ class SubscriptionsController < ApplicationController
 
     create_stripe_customer unless paypal?
 
-    add_appropriate_subscription(@user)
+    add_appropriate_subscription(@user, current_user)
     send_acknowledgement_email
 
   rescue StandardError => e
@@ -50,6 +52,20 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
+  def require_login?
+    # we have this exception for paypal creation in test since we can't easily
+    # maintain the capybara session for API endpoint hit
+    true unless action_name == "create" && paypal? && Rails.env.test?
+  end
+
+  def storable_location?
+    (action_name == "new") && current_user.nil?
+  end
+
+  def store_user_location!
+    store_location_for(:user, request.fullpath)
+  end
 
   def detect_plan_before_payment
     Plan.find_by(third_party_identifier: params[:plan]) || default_plan
@@ -95,7 +111,7 @@ class SubscriptionsController < ApplicationController
     StripeMock.create_test_helper.generate_card_token
   end
 
-  def add_appropriate_subscription(user)
+  def add_appropriate_subscription(user, sponsor = user)
     user ||= current_user
     return unless user
 
@@ -105,7 +121,7 @@ class SubscriptionsController < ApplicationController
       payment_source = PaymentSource::Stripe.new identifier: @stripe_customer.id
     end
 
-    AddSubscriptionToUserForPlan.with(user, Time.now, @plan, payment_source)
+    AddSubscriptionToUserForPlan.with(user, sponsor, Time.now, @plan, payment_source)
   end
 
   def send_acknowledgement_email
@@ -122,8 +138,8 @@ class SubscriptionsController < ApplicationController
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
     subscription.plan = new_subscription_plan.third_party_identifier
     subscription.save
-    user.subscription.plan = new_subscription_plan
-    user.save
+    payment_source = user.current_subscription.payment_source
+    AddSubscriptionToUserForPlan.with(user, user, Time.now, new_subscription_plan, payment_source)
   end
 
 end

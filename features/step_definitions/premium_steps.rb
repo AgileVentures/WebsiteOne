@@ -29,11 +29,21 @@ Given(/^I fill in updated card details for premium(?: for user with email "([^"]
   submit_card_details_for_button_with('Update Card Details', email)
 end
 
-def submit_card_details_for_button_with(text, email='random@morerandom.com')
+When(/^I fill in new card details for premium for user with email "([^"]*)"$/) do |email|
+  submit_card_details_for_button_with('Add Card Details', email)
+end
+
+When(/^I fill in card details for premium for user that will fail with email "([^"]*)"$/) do |email|
+  custom_error = StandardError.new("Unable to create customer")
+  StripeMock.prepare_error(custom_error, :new_customer)
+  submit_card_details_for_button_with('Add Card Details', email)
+end
+
+def submit_card_details_for_button_with(text, email='random@morerandom.com', number='4242 4242 4242 4242')
   stripe_iframe = all('iframe[name=stripe_checkout_app]').last
   Capybara.within_frame stripe_iframe do
     fill_in 'Email', with: email
-    fill_in 'Card number', with: '4242 4242 4242 4242'
+    fill_in 'Card number', with: number
     fill_in 'CVC', with: '123'
     fill_in 'cc-exp', with: '12/2019'
     click_button text
@@ -47,6 +57,7 @@ end
 
 Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
+    hash['amount'] = Integer(hash['amount'])
     @stripe_test_helper.try(:create_plan, hash)
     hash[:third_party_identifier] = hash.delete("id")
     Plan.create(hash)
@@ -118,8 +129,9 @@ Then(/^I should see a tooltip explanation of Premium Mob$/) do
 end
 
 And(/^my profile page should reflect that I am a "([^"]*)" member$/) do |plan_name|
+  # sleep(1)
   visit user_path @current_user
-  expect(page).to have_content
+  expect(page).to have_content "#{plan_name} Member"
   other_plans(plan_name).each do |other_plan_name|
     expect(page).not_to have_content "#{other_plan_name} Member"
   end
@@ -127,4 +139,10 @@ end
 
 def other_plans(plan_name)
   Plan.all.pluck(:name).reject!{|e| e == plan_name}.push('Basic')
+end
+
+# use for debugging only
+And(/^I am a "([^"]*)" Member$/) do |type|
+  puts @user.subscriptions.map{|s| s.inspect}
+  expect(@user.membership_type).to eq type
 end

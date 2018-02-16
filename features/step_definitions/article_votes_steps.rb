@@ -10,7 +10,7 @@ Given(/^the following articles with votes exist:$/) do |table|
       # create a voter so that a vote can be cast
       # distinct by email eg. avoter_<article_count><voter_count>@example.com
       user_email = "avoter_#{article_count}#{voter_count}@example.com"
-      u = FactoryGirl.create(:user, email: user_email)
+      u = FactoryBot.create(:user, email: user_email)
       votes.to_i >= 0 ? article.upvote_from(u) : article.downvote_from(u)
 
     end

@@ -3,8 +3,8 @@ require 'spec_helper'
 RSpec.describe DocumentsHelper, :type => :helper do
   describe "#metadata" do
     before do
-      @user = FactoryGirl.build_stubbed(:user, first_name: "User", last_name: nil)
-      @document = FactoryGirl.build_stubbed(:document, user: @user)
+      @user = FactoryBot.build_stubbed(:user, first_name: "User", last_name: nil)
+      @document = FactoryBot.build_stubbed(:document, user: @user)
     end
     
     it "should return metadata of the newly created document" do

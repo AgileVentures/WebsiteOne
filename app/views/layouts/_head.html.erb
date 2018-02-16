@@ -2,8 +2,17 @@
   <%= javascript_tag do %>
       window._rails_env = "<%= Rails.env %>"
   <% end %>
+
+  <% if defined?(Delorean) %>
+    <% unix_millis = (Time.now.to_f * 1000.0).to_i %>
+    <%= javascript_include_tag "lolex.js" %>
+    <%= javascript_tag do %>
+      window.clock = lolex.install({ now: <%= unix_millis %>, shouldAdvanceTime: true });
+    <% end %>
+  <% end %>
+
   <%= render 'layouts/meta_tags' %>
-  <title><%= content_for?(:title) ? [ yield(:title),  ' | AgileVentures - WebsiteOne'].join(' ') : 'AgileVentures - WebsiteOne' %></title>
+  <title><%= content_for?(:title) ? [ yield(:title),  '| AgileVentures'].join(' ') : 'AgileVentures' %></title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:400,100,900' %>
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Ubuntu' %>

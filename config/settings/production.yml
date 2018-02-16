@@ -1,4 +1,10 @@
 features:
+  edit_static_pages:
+    enabled: <%= ENV['EDIT_STATIC_PAGES'] %>
+  get_next_scrum:
+    enabled: <%= ENV['GET_NEXT_SCRUM'] %>
+  get_next_scrum_homepage:
+    enabled: <%= ENV['GET_NEXT_SCRUM_HOMEPAGE'] %>
   custom_errors:
     enabled: true
   slack:
@@ -9,6 +15,9 @@ features:
   twitter:
     notifications:
       enabled: <%= ENV['TWITTER_NOTIFICATIONS_ENABLED'] %>
+
+api:
+  premium_subscriptions_token: <%= ENV['PREMIUM_SUBSCRIPTIONS_API_TOKEN'] %>
 
 #mailer:
 #  delivery_method: 'smtp'
