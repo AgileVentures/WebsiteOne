@@ -31,7 +31,9 @@
 	  <a href="https://www.pivotaltracker.com/story/show/<%= story.id %>">
 	  <%= story.name %>
 	</a>
-	  (<span><%= story.owned_by[:initials] if story.owned_by %></span>)
+    <% if story.owners && !story.owners.empty? %>
+	    (<span><%= story.owners.map { |owner| owner.initials }.join(" ") %></span>)
+    <% end %>
 	</p>
       </td>
       <td><%= story.current_state %></td>

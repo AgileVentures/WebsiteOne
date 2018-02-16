@@ -1,11 +1,11 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :document do
     sequence(:title) {|n| "Title #{n}"}
     sequence(:body) {|n| "MyText #{n}"}
     slug { title.parameterize }
-    versions { [FactoryGirl.build(:version)] }
+    versions { [FactoryBot.build(:version)] }
     project
     user
   end

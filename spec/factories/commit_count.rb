@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :commit_count do
     commit_count { rand(500) }
     user
