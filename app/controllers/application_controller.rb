@@ -16,19 +16,18 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:first_name, :last_name, :email, :bio, :password,
-               :password_confirmation, :current_password,
-               :display_email, :display_profile, :display_hire_me,
-               :receive_mailings, :status)
-    end
+    devise_parameter_sanitizer.permit(:account_update, keys:[
+      :first_name, :last_name, :email, :bio, :password,
+      :password_confirmation, :current_password,
+      :display_email, :display_profile, :display_hire_me,
+      :receive_mailings, :status])
   end
 
   def after_sign_in_path_for(resource)
     if resource.sign_in_count <= 1
-      '/getting-started'
+      stored_location_for(resource) || '/getting-started'
     else
-      request.env['omniauth.origin'] || session[:previous_url] || root_path
+      stored_location_for(resource) || request.env['omniauth.origin'] || session[:previous_url] || root_path
     end
   end
 

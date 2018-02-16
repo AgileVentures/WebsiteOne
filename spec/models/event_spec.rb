@@ -22,19 +22,19 @@ describe Event, :type => :model do
   end
 
   it 'is invalid without name' do
-    expect(FactoryGirl.build(:event, name: nil)).to_not be_valid
+    expect(FactoryBot.build(:event, name: nil)).to_not be_valid
   end
 
   it 'is invalid without category' do
-    expect(FactoryGirl.build(:event, category: nil)).to_not be_valid
+    expect(FactoryBot.build(:event, category: nil)).to_not be_valid
   end
 
   it 'is invalid without repeats' do
-    expect(FactoryGirl.build(:event, repeats: nil)).to_not be_valid
+    expect(FactoryBot.build(:event, repeats: nil)).to_not be_valid
   end
 
   it 'is invalid with invalid url' do
-    expect(FactoryGirl.build(:event, url: 'http:google.com')).to_not be_valid
+    expect(FactoryBot.build(:event, url: 'http:google.com')).to_not be_valid
   end
 
   describe "#less_than_ten_till_start?" do
@@ -88,7 +88,7 @@ describe Event, :type => :model do
 
   context 'can remove event instance' do
     before(:each) do
-      @event = FactoryGirl.build(Event,
+      @event = FactoryBot.build(:event,
                                  name: 'Spec Scrum',
                                  start_datetime: 'Mon, 17 Jun 2013 09:00:00 UTC',
                                  duration: 30,
@@ -123,7 +123,7 @@ describe Event, :type => :model do
 
   context 'should create a scrum event that ' do
     it 'is scheduled for one occasion' do
-      event = FactoryGirl.build_stubbed(Event,
+      event = FactoryBot.build_stubbed(:event,
                                         name: 'one time event',
                                         category: 'Scrum',
                                         description: '',
@@ -139,7 +139,7 @@ describe Event, :type => :model do
     end
 
     it 'is scheduled for every weekend' do
-      event = FactoryGirl.build_stubbed(Event,
+      event = FactoryBot.build_stubbed(:event,
                                         name: 'every weekend event',
                                         category: 'Scrum',
                                         description: '',
@@ -148,14 +148,14 @@ describe Event, :type => :model do
                                         repeats: 'weekly',
                                         repeats_every_n_weeks: 1,
                                         repeats_weekly_each_days_of_the_week_mask: 96,
-                                        repeat_ends: 'never',
+                                        repeat_ends: false,
                                         repeat_ends_on: 'Tue, 25 Jun 2013',
                                         time_zone: 'Eastern Time (US & Canada)')
       expect(event.schedule.first(5)).to eq(['Sat, 22 Jun 2013 09:00:00 UTC +00:00', 'Sun, 23 Jun 2013 09:00:00 UTC +00:00', 'Sat, 29 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sat, 06 Jul 2013 09:00:00 UTC +00:00'])
     end
 
     it 'is scheduled for every Sunday' do
-      event = FactoryGirl.build_stubbed(Event,
+      event = FactoryBot.build_stubbed(:event,
                                         name: 'every Sunday event',
                                         category: 'Scrum',
                                         description: '',
@@ -164,14 +164,14 @@ describe Event, :type => :model do
                                         repeats: 'weekly',
                                         repeats_every_n_weeks: 1,
                                         repeats_weekly_each_days_of_the_week_mask: 64,
-                                        repeat_ends: 'never',
+                                        repeat_ends: false,
                                         repeat_ends_on: 'Mon, 17 Jun 2013',
                                         time_zone: 'Eastern Time (US & Canada)')
       expect(event.schedule.first(5)).to eq(['Sun, 23 Jun 2013 09:00:00 UTC +00:00', 'Sun, 30 Jun 2013 09:00:00 UTC +00:00', 'Sun, 07 Jul 2013 09:00:00 UTC +00:00', 'Sun, 14 Jul 2013 09:00:00 UTC +00:00', 'Sun, 21 Jul 2013 09:00:00 UTC +00:00'])
     end
 
     it 'is scheduled for every Monday' do
-      event = FactoryGirl.build_stubbed(Event,
+      event = FactoryBot.build_stubbed(:event,
                                         name: 'every Monday event',
                                         category: 'Scrum',
                                         description: '',
@@ -180,7 +180,7 @@ describe Event, :type => :model do
                                         repeats: 'weekly',
                                         repeats_every_n_weeks: 1,
                                         repeats_weekly_each_days_of_the_week_mask: 1,
-                                        repeat_ends: 'never',
+                                        repeat_ends: false,
                                         repeat_ends_on: 'Mon, 17 Jun 2013',
                                         time_zone: 'UTC')
       expect(event.schedule.first(5)).to eq(['Mon, 17 Jun 2013 09:00:00 GMT +00:00', 'Mon, 24 Jun 2013 09:00:00 GMT +00:00', 'Mon, 01 Jul 2013 09:00:00 GMT +00:00', 'Mon, 08 Jul 2013 09:00:00 GMT +00:00', 'Mon, 15 Jul 2013 09:00:00 GMT +00:00'])
@@ -189,7 +189,7 @@ describe Event, :type => :model do
 
   context 'should create a hookup event that' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryBot.build_stubbed(:event,
                                          name: 'PP Monday event',
                                          category: 'PairProgramming',
                                          start_datetime: 'Mon, 17 Jun 2014 09:00:00 UTC',
@@ -230,7 +230,7 @@ describe Event, :type => :model do
                 duration: 600,
                 repeats: 'never',
                 repeats_every_n_weeks: nil,
-                repeat_ends: 'never',
+                repeat_ends: false,
                 repeat_ends_on: 'Mon, 17 Jun 2013',
                 time_zone: 'Eastern Time (US & Canada)'}
     end
@@ -248,7 +248,7 @@ describe Event, :type => :model do
 
   describe '#next_event_occurrence_with_time' do
     before(:each) do
-      @event = FactoryGirl.build(Event,
+      @event = FactoryBot.build(:event,
                                  name: 'Spec Scrum',
                                  start_datetime: 'Mon, 10 Jun 2013 09:00:00 UTC',
                                  duration: 30,
@@ -295,7 +295,7 @@ describe Event, :type => :model do
 
   describe '#next_occurences' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryBot.build_stubbed(:event,
                                          name: 'Spec Scrum',
                                          start_datetime: '2014-03-07 10:30:00 UTC',
                                          duration: 30)
@@ -357,7 +357,7 @@ describe Event, :type => :model do
 
   describe 'Event#start_datetime_for_collection for starting event' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryBot.build_stubbed(:event,
                                          name: 'Spec Scrum never ends',
                                          start_datetime: '2014-03-07 10:30:00 UTC',
                                          duration: 30)
@@ -372,7 +372,7 @@ describe Event, :type => :model do
 
   describe 'Event#final_datetime_for_collection for repeating event with ends_on' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryBot.build_stubbed(:event,
                                          name: 'Spec Scrum ends',
                                          start_datetime: '2014-03-07 10:30:00 UTC',
                                          repeats: 'weekly',
@@ -402,7 +402,7 @@ describe Event, :type => :model do
 
   describe 'Event#final_datetime_for_display for never-ending event' do
     before do
-      @event = FactoryGirl.build_stubbed(Event,
+      @event = FactoryBot.build_stubbed(:event,
                                          name: 'Spec Scrum never-ending',
                                          start_datetime: '2014-03-07 10:30:00 UTC',
                                          repeats: 'weekly',
@@ -425,7 +425,7 @@ describe Event, :type => :model do
   end
 
   describe 'Event.next_event_occurence' do
-    @event = FactoryGirl.build(Event,
+    @event = FactoryBot.build(:event,
                                category: 'Scrum',
                                name: 'Spec Scrum one-time',
                                start_datetime: '2014-03-07 10:30:00 UTC',
@@ -468,14 +468,14 @@ describe Event, :type => :model do
 
   describe '#upcoming_events' do
     before(:each) do
-      @event1 = FactoryGirl.create(Event,
+      @event1 = FactoryBot.create(:event,
                                  category: 'Scrum',
                                  name: 'Spec Scrum one-time',
                                  start_datetime: '2015-06-15 09:20:00 UTC',
                                  duration: 30,
                                  repeats: 'never'
       )
-      @event2 = FactoryGirl.create(Event,
+      @event2 = FactoryBot.create(:event,
                                  category: 'Scrum',
                                  name: 'Spec Scrum one-time',
                                  start_datetime: '2015-06-15 09:25:00 UTC',
@@ -505,7 +505,7 @@ describe Event, :type => :model do
     end
 
     it 'returns event past event duration, but still live' do
-      event_instance = FactoryGirl.create(EventInstance)
+      event_instance = FactoryBot.create(:event_instance)
       event_end_time = event_instance.event.start_datetime + event_instance.event.duration.minutes
       expect(event_end_time).to be < Time.current
       expect(event_instance.event).to eq(Event.upcoming_events.last[:event])
@@ -515,7 +515,7 @@ describe Event, :type => :model do
   
   context '#jitsi_room_link' do
     it 'returns correct link' do
-      event = FactoryGirl.build(:event, name: 'Repeat Scrum-~!@#$')
+      event = FactoryBot.build(:event, name: 'Repeat Scrum-~!@#$')
       expect(event.jitsi_room_link).to eq('https://meet.jit.si/AV_Repeat_Scrum')
     end
   end

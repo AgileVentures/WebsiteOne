@@ -1,0 +1,2505 @@
+[
+  {
+    "velocity":1,
+    "points":4,
+    "effective_points":4.0,
+    "analytics":{
+      "kind":"analytics",
+      "stories_accepted":0,
+      "bugs_created":0,
+      "cycle_time":0,
+      "rejection_rate":0.0
+    },
+    "stories":[
+      {
+        "id":80154166,
+        "story_type":"bug",
+        "name":"YT sync is failing in some cases",
+        "description":"When new users want to sync theit YT accounts/channels they get an error message - 500 error. This needs to be investigated. ",
+        "current_state":"finished",
+        "url":"https://www.pivotaltracker.com/story/show/80154166",
+        "requested_by":{
+          "kind":"person",
+          "id":1104242,
+          "name":"Thomas Ochman",
+          "email":"tochman10@gmail.com",
+          "initials":"TO",
+          "username":"thomasochman"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":1518634,
+            "name":"Alejandro Babio",
+            "email":"alejandroebabio@gmail.com",
+            "initials":"AB",
+            "username":"alejandrobabio"
+          }
+        ],
+        "labels":[
+
+        ],
+        "tasks":[
+
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":1295184,
+            "name":"Rene Paulokat",
+            "email":"rene@so36.net",
+            "initials":"RP",
+            "username":"renepaulokat1"
+          },
+          {
+            "kind":"person",
+            "id":1104242,
+            "name":"Thomas Ochman",
+            "email":"tochman10@gmail.com",
+            "initials":"TO",
+            "username":"thomasochman"
+          },
+          {
+            "kind":"person",
+            "id":1518634,
+            "name":"Alejandro Babio",
+            "email":"alejandroebabio@gmail.com",
+            "initials":"AB",
+            "username":"alejandrobabio"
+          },
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          },
+          {
+            "kind":"person",
+            "id":1563384,
+            "name":"Raoul Diffouo",
+            "email":"diraulo@gmail.com",
+            "initials":"RD",
+            "username":"diraulo"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":81496756,
+            "text":"partial PR: https://github.com/AgileVentures/WebsiteOne/pull/569 - first shot to provide some hint to users facing this problem...",
+            "created_at":"2014-10-06T20:09:44Z",
+            "updated_at":"2014-10-06T20:09:44Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1295184,
+              "name":"Rene Paulokat",
+              "email":"rene@so36.net",
+              "initials":"RP",
+              "username":"renepaulokat1"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":95724102,
+            "text":"@renepaulokat1 Do you plan to further investigate this bug?",
+            "created_at":"2015-03-20T19:43:37Z",
+            "updated_at":"2015-03-20T19:43:37Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1104242,
+              "name":"Thomas Ochman",
+              "email":"tochman10@gmail.com",
+              "initials":"TO",
+              "username":"thomasochman"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":101139622,
+            "text":"The problem seem to be if a user has two YT accounts configured it will cause a 500 error. We need to refactor the connection method and add a rescue block to push out a error message to the user if the connection fails. ",
+            "created_at":"2015-05-20T10:21:13Z",
+            "updated_at":"2015-05-20T10:21:13Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1104242,
+              "name":"Thomas Ochman",
+              "email":"tochman10@gmail.com",
+              "initials":"TO",
+              "username":"thomasochman"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":101139682,
+            "text":"At May 20, 2015, I can't connect my youtube account. Receiving: 500 Internal Error.",
+            "created_at":"2015-05-20T10:22:09Z",
+            "updated_at":"2015-05-20T10:22:09Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":101139992,
+            "text":"I have only one youtube account. But my son has an youtube account and he is also called Alejandro Babio.",
+            "created_at":"2015-05-20T10:26:47Z",
+            "updated_at":"2015-05-20T10:26:47Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":101140278,
+            "text":"That could be the problem. I also have two (or more...) accounts and when I tried to re-connect/re-sync my YT account i was presented with the 500-error\n",
+            "created_at":"2015-05-20T10:30:59Z",
+            "updated_at":"2015-05-20T10:30:59Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1104242,
+              "name":"Thomas Ochman",
+              "email":"tochman10@gmail.com",
+              "initials":"TO",
+              "username":"thomasochman"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":101141058,
+            "text":"Ok. I want to investigate this issue, but after my other tasks were finished.",
+            "created_at":"2015-05-20T10:41:12Z",
+            "updated_at":"2015-05-20T10:41:12Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":101141082,
+            "text":"Sure thing!",
+            "created_at":"2015-05-20T10:41:33Z",
+            "updated_at":"2015-05-20T10:41:33Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1104242,
+              "name":"Thomas Ochman",
+              "email":"tochman10@gmail.com",
+              "initials":"TO",
+              "username":"thomasochman"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":116349974,
+            "text":"hi @alejandrobabio any update on this?",
+            "created_at":"2015-10-30T08:47:40Z",
+            "updated_at":"2015-10-30T08:47:40Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":116453880,
+            "text":"Hi @tansaku & @diraulo I did test it again and still fails. A 500 server error is returned at production, and a 400 at development. \n\nOn the other hand, because of some changes I made, we don't need a YouTube connection for retrieve user's videos any more. I did not find any need of keep users links to theirs YouTube accounts at AV. Them if you are agree we can rid this unused connection, and close this issue.",
+            "created_at":"2015-11-01T14:54:07Z",
+            "updated_at":"2015-11-01T14:54:07Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":117619704,
+            "text":"@alejandrobabio that makes sense - can you point to where in the code we might remove this? and/or make a pull request?",
+            "created_at":"2015-11-13T08:41:32Z",
+            "updated_at":"2015-11-13T08:41:32Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":117873372,
+            "text":"@tansaku & @diraulo I will make a PR for this.",
+            "created_at":"2015-11-17T02:46:09Z",
+            "updated_at":"2015-11-17T02:46:09Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":117915344,
+            "text":"thanks @alejandrobabio ",
+            "created_at":"2015-11-17T14:30:31Z",
+            "updated_at":"2015-11-17T14:30:31Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1563384,
+              "name":"Raoul Diffouo",
+              "email":"diraulo@gmail.com",
+              "initials":"RD",
+              "username":"diraulo"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":120324912,
+            "text":"hi @alejandrobabio .. where you able to spend some time on this? :-)",
+            "created_at":"2015-12-13T18:28:13Z",
+            "updated_at":"2015-12-13T18:28:13Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1563384,
+              "name":"Raoul Diffouo",
+              "email":"diraulo@gmail.com",
+              "initials":"RD",
+              "username":"diraulo"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":120326744,
+            "text":"Yes @diraulo , I did start with the analysis of changes needed.\n\nAfter some checking of the source code I found:\n* Remove the youtube links buttons from edit page is a pretty easy task (also we can remove the user_helper methods).\n* There are a second use of `user.youtube_id` and it is at `authentication_controller`. This could be annoying for a user which is using she/he's youtube account for authenitcation. (here I don't know if it is working or not)\n\nAt this point, I'm not sure If we can move forward with this task. Of course, removing the links (that don't work any more) will stop request of 500 server errors. Please, let me know what you think about.\n",
+            "created_at":"2015-12-13T20:44:22Z",
+            "updated_at":"2015-12-13T20:44:22Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":123652553,
+            "text":"@alejandrobabio hope you're well - any thoughts on this task going forward?  Should we review if this is still causing a problem?",
+            "created_at":"2016-01-25T12:24:37Z",
+            "updated_at":"2016-01-25T12:24:37Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":124003159,
+            "text":"@tansaku : Yes, it is still responding with 500. I did test it today. After a second check on the source, I fond that the code at `authentication_controller` is the answer for the connect/disconnect actions from youtube links. Then, I think we could remove the links safely. ",
+            "created_at":"2016-01-27T23:28:46Z",
+            "updated_at":"2016-01-27T23:29:25Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":124025987,
+            "text":"@alejandrobabio thanks for checking it - is there a simple fix here that could come in via pull request?  Do you need support or help getting something done?",
+            "created_at":"2016-01-28T07:53:18Z",
+            "updated_at":"2016-01-28T07:53:18Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":124122621,
+            "text":"I sent a PR with these changes: https://github.com/AgileVentures/WebsiteOne/pull/747",
+            "created_at":"2016-01-28T22:26:02Z",
+            "updated_at":"2016-01-28T22:26:02Z",
+            "story_id":80154166,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+          {
+            "state":"finished",
+            "story_id":80154166,
+            "project_id":982890,
+            "project_version":6107,
+            "occurred_at":"2016-02-03T17:23:33Z",
+            "performed_by_id":1563384,
+            "kind":"story_transition"
+          },
+          {
+            "state":"started",
+            "story_id":80154166,
+            "project_id":982890,
+            "project_version":5858,
+            "occurred_at":"2015-05-20T10:19:30Z",
+            "performed_by_id":1518634,
+            "kind":"story_transition"
+          }
+        ],
+        "cycle_time_details":{
+          "total_cycle_time":84341682000,
+          "started_time":22403043000,
+          "started_count":1,
+          "finished_time":61938639000,
+          "finished_count":1,
+          "delivered_time":0,
+          "delivered_count":0,
+          "rejected_time":0,
+          "rejected_count":0,
+          "story_id":80154166,
+          "kind":"cycle_time_details"
+        }
+      },
+      {
+        "id":79861342,
+        "story_type":"bug",
+        "name":"User preference for 'Hire Me' button can be bypassed",
+        "description":"As an AG user\nIn order to not receive messages through the Hire Me button\nI would like to have my preference setting respected\n\nSomewhat related to the 'hire me' spam bug #76244298\n\nCurrently the controller will receive the hire me form params and send and email even if the user has chosen not to place a hire me button on their profile page.\n\nThe users controller needs to be updated to guard against this: https://github.com/AgileVentures/WebsiteOne/blob/develop/app/controllers/users_controller.rb#L16\n",
+        "current_state":"started",
+        "url":"https://www.pivotaltracker.com/story/show/79861342",
+        "requested_by":{
+          "kind":"person",
+          "id":1343640,
+          "name":"Christopher Milne",
+          "email":"christopher.milne@gmail.com",
+          "initials":"CM",
+          "username":"christophermilne"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":951101,
+            "name":"Sampriti Panda",
+            "email":"sampdingo@hotmail.com",
+            "initials":"SP",
+            "username":"sampritip"
+          }
+        ],
+        "labels":[
+          {
+            "id":7464532,
+            "project_id":982890,
+            "kind":"label",
+            "name":"users",
+            "created_at":"2014-01-14T09:15:33Z",
+            "updated_at":"2014-01-14T09:15:33Z"
+          }
+        ],
+        "tasks":[
+
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":1104242,
+            "name":"Thomas Ochman",
+            "email":"tochman10@gmail.com",
+            "initials":"TO",
+            "username":"thomasochman"
+          },
+          {
+            "kind":"person",
+            "id":951101,
+            "name":"Sampriti Panda",
+            "email":"sampdingo@hotmail.com",
+            "initials":"SP",
+            "username":"sampritip"
+          },
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":95725212,
+            "text":"What's the status of this @sampritip ?",
+            "created_at":"2015-03-20T19:53:41Z",
+            "updated_at":"2015-03-20T19:53:41Z",
+            "story_id":79861342,
+            "person":{
+              "kind":"person",
+              "id":1104242,
+              "name":"Thomas Ochman",
+              "email":"tochman10@gmail.com",
+              "initials":"TO",
+              "username":"thomasochman"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":116350036,
+            "text":"@sampritip is this still an issue?",
+            "created_at":"2015-10-30T08:49:29Z",
+            "updated_at":"2015-10-30T08:49:29Z",
+            "story_id":79861342,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+
+        ]
+      },
+      {
+        "id":85232534,
+        "estimate":2,
+        "story_type":"feature",
+        "name":"Update Events show page",
+        "description":"As site admin\nIn order to make the experience for a visitor better\nI would like to display only the necessary information about the next upcoming event instance",
+        "current_state":"started",
+        "url":"https://www.pivotaltracker.com/story/show/85232534",
+        "requested_by":{
+          "kind":"person",
+          "id":1104242,
+          "name":"Thomas Ochman",
+          "email":"tochman10@gmail.com",
+          "initials":"TO",
+          "username":"thomasochman"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":1495762,
+            "name":"aaron chock",
+            "email":"aaron.chock@gmail.com",
+            "initials":"AC",
+            "username":"aaronchock"
+          },
+          {
+            "kind":"person",
+            "id":1628196,
+            "name":"Piotr Kedzia",
+            "email":"ptrkedzia@gmail.com",
+            "initials":"PK",
+            "username":"piotrkedzia"
+          }
+        ],
+        "labels":[
+
+        ],
+        "tasks":[
+
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":1343640,
+            "name":"Christopher Milne",
+            "email":"christopher.milne@gmail.com",
+            "initials":"CM",
+            "username":"christophermilne"
+          },
+          {
+            "kind":"person",
+            "id":1104242,
+            "name":"Thomas Ochman",
+            "email":"tochman10@gmail.com",
+            "initials":"TO",
+            "username":"thomasochman"
+          },
+          {
+            "kind":"person",
+            "id":1219108,
+            "name":"Bryan Yap",
+            "email":"bryan.yap.mh@gmail.com",
+            "initials":"BY",
+            "username":"bryanyap"
+          },
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          },
+          {
+            "kind":"person",
+            "id":1563384,
+            "name":"Raoul Diffouo",
+            "email":"diraulo@gmail.com",
+            "initials":"RD",
+            "username":"diraulo"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":88360232,
+            "created_at":"2014-12-29T20:43:56Z",
+            "updated_at":"2014-12-29T20:43:56Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1343640,
+              "name":"Christopher Milne",
+              "email":"christopher.milne@gmail.com",
+              "initials":"CM",
+              "username":"christophermilne"
+            },
+            "file_attachments":[
+              {
+                "kind":"file_attachment",
+                "id":40197452,
+                "filename":"Screen Shot 2014-12-29 at 3.43.08 PM.png",
+                "created_at":"2014-12-29T20:43:34Z",
+                "uploader_id":1343640,
+                "thumbnailable":true,
+                "height":1209,
+                "width":2115,
+                "size":292024,
+                "download_url":"/file_attachments/40197452/download",
+                "content_type":"image/png",
+                "uploaded":true,
+                "big_url":"https://s3.amazonaws.com/prod.tracker2/resource/40197452/Screen%20Shot%202014-12-29%20at%203.43.08%20PM_big.png?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20180120%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180120T143412Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=4e3944e358f40ac8ae3a3191357a6724f0a7683adfc837c1e0b1b769b78da9d9",
+                "thumbnail_url":"https://s3.amazonaws.com/prod.tracker2/resource/40197452/Screen%20Shot%202014-12-29%20at%203.43.08%20PM_thumb.png?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20180120%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180120T143412Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=239636bd06b0ed7e19888639c1de543ed0d6542752012ffd32be8106d1559562"
+              }
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":88429360,
+            "text":"updated lo-fi's attached in google drive pdf...",
+            "created_at":"2014-12-30T19:35:33Z",
+            "updated_at":"2014-12-30T19:35:33Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1343640,
+              "name":"Christopher Milne",
+              "email":"christopher.milne@gmail.com",
+              "initials":"CM",
+              "username":"christophermilne"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+              70640
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":88456602,
+            "text":"@bryanyap Wanna hit start on this one?",
+            "created_at":"2014-12-31T08:03:15Z",
+            "updated_at":"2014-12-31T08:03:15Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1104242,
+              "name":"Thomas Ochman",
+              "email":"tochman10@gmail.com",
+              "initials":"TO",
+              "username":"thomasochman"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":95726920,
+            "text":"@bryanyap @christophermilne let's make a push on this one ;-)\n",
+            "created_at":"2015-03-20T20:09:13Z",
+            "updated_at":"2015-03-20T20:09:13Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1104242,
+              "name":"Thomas Ochman",
+              "email":"tochman10@gmail.com",
+              "initials":"TO",
+              "username":"thomasochman"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":97622316,
+            "text":"for those taking up this story, I believe the latest version is on my repo: https://github.com/yggie/WebsiteOne/tree/events-show-page-revisited (correct me if I am wrong @christophermilne). We have deviated slightly from the original wireframes, but it is mostly done. If you guys have any questions, ping me on slack!",
+            "created_at":"2015-04-10T20:27:00Z",
+            "updated_at":"2015-04-10T20:27:00Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1219108,
+              "name":"Bryan Yap",
+              "email":"bryan.yap.mh@gmail.com",
+              "initials":"BY",
+              "username":"bryanyap"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":117619940,
+            "text":"@bryanyap any update on this?",
+            "created_at":"2015-11-13T08:45:27Z",
+            "updated_at":"2015-11-13T08:45:27Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":118691296,
+            "text":"@tansaku none from my side unfortunately… I was under the impression that this was taken over but apparently not… if you would still like this in, I can spend some time cleaning up the old branch and make a new PR from that",
+            "created_at":"2015-11-24T10:57:33Z",
+            "updated_at":"2015-11-24T10:57:33Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1219108,
+              "name":"Bryan Yap",
+              "email":"bryan.yap.mh@gmail.com",
+              "initials":"BY",
+              "username":"bryanyap"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":118971592,
+            "text":"Thanks @bryanyap would be great if you could get some time to do that :-)",
+            "created_at":"2015-11-27T08:55:15Z",
+            "updated_at":"2015-11-27T08:55:15Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1563384,
+              "name":"Raoul Diffouo",
+              "email":"diraulo@gmail.com",
+              "initials":"RD",
+              "username":"diraulo"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":123652641,
+            "text":"thanks @bryanyap - did you get a chance to look at this?",
+            "created_at":"2016-01-25T12:25:44Z",
+            "updated_at":"2016-01-25T12:25:44Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":123675083,
+            "text":"yes I did, but I ran into an issue… we are missing mockups for the existing “edit hangout link” functionality. I could improvise but I don’t know if everyone will be happy with it. The easiest solution might just be to keep the old edit functionality, keeping it somewhere in the form. Do you have any suggestions on how you might want it to look @diraulo @tansaku?",
+            "created_at":"2016-01-25T15:50:30Z",
+            "updated_at":"2016-01-25T15:50:30Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1219108,
+              "name":"Bryan Yap",
+              "email":"bryan.yap.mh@gmail.com",
+              "initials":"BY",
+              "username":"bryanyap"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":123683687,
+            "text":"@bryanyap thanks for the quick response - we definitely want to keep the old edit functionality since occasionally it is critically necessary when the WSO connection fails - which does happen occasionally - as regards how it looks ... I don't think it matters much as this is kind of an advanced functionality that few people will use and we can always iterate on it.  I would say any layout that matched with the new layout should be fine as a first pass",
+            "created_at":"2016-01-25T16:44:54Z",
+            "updated_at":"2016-01-25T16:44:54Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":124631363,
+            "text":"@bryanyap we're experimenting with moving from PT to waffle - care to move this into https://waffle.io/AgileVentures/WebsiteOne by creating a new ticket?",
+            "created_at":"2016-02-03T16:51:13Z",
+            "updated_at":"2016-02-03T16:51:13Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":124854965,
+            "text":"@tansaku sorry for the late response, I see it is already done https://waffle.io/AgileVentures/WebsiteOne/cards/56b46eb71a1ce00e0022bb94",
+            "created_at":"2016-02-05T09:59:14Z",
+            "updated_at":"2016-02-05T09:59:14Z",
+            "story_id":85232534,
+            "person":{
+              "kind":"person",
+              "id":1219108,
+              "name":"Bryan Yap",
+              "email":"bryan.yap.mh@gmail.com",
+              "initials":"BY",
+              "username":"bryanyap"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+
+        ]
+      },
+      {
+        "id":92255450,
+        "story_type":"chore",
+        "name":"Clean up turbolinks attributes",
+        "description":"After turbolinks was removed to fix the Google search issue on #77003304, but the code base was not cleaned up from all helpers/workarounds/attributes to make it Turbolinks compatible. At this point, it is now dead code, so it should be removed.",
+        "current_state":"started",
+        "url":"https://www.pivotaltracker.com/story/show/92255450",
+        "requested_by":{
+          "kind":"person",
+          "id":1219108,
+          "name":"Bryan Yap",
+          "email":"bryan.yap.mh@gmail.com",
+          "initials":"BY",
+          "username":"bryanyap"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":1563384,
+            "name":"Raoul Diffouo",
+            "email":"diraulo@gmail.com",
+            "initials":"RD",
+            "username":"diraulo"
+          }
+        ],
+        "labels":[
+
+        ],
+        "tasks":[
+          {
+            "id":30788534,
+            "kind":"task",
+            "description":"Remove all data-turbolinks-xxx attributes",
+            "complete":false,
+            "story_id":92255450,
+            "position":1,
+            "created_at":"2015-04-10T19:57:46Z",
+            "updated_at":"2015-04-10T19:57:46Z"
+          },
+          {
+            "id":30788536,
+            "kind":"task",
+            "description":"All turbolinks event hooks (e.g. page:load) should be removed",
+            "complete":false,
+            "story_id":92255450,
+            "position":2,
+            "created_at":"2015-04-10T19:57:46Z",
+            "updated_at":"2015-04-10T19:57:46Z"
+          },
+          {
+            "id":30788538,
+            "kind":"task",
+            "description":"the WSO helper should also be removed (window.WebsiteOne defined in application.js)",
+            "complete":false,
+            "story_id":92255450,
+            "position":3,
+            "created_at":"2015-04-10T19:57:46Z",
+            "updated_at":"2015-04-10T19:57:46Z"
+          }
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":951101,
+            "name":"Sampriti Panda",
+            "email":"sampdingo@hotmail.com",
+            "initials":"SP",
+            "username":"sampritip"
+          },
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          },
+          {
+            "kind":"person",
+            "id":1563384,
+            "name":"Raoul Diffouo",
+            "email":"diraulo@gmail.com",
+            "initials":"RD",
+            "username":"diraulo"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":118558486,
+            "text":"@diraulo we'll put this back to icebox unless you feel otherwise",
+            "created_at":"2015-11-23T09:02:10Z",
+            "updated_at":"2015-11-23T09:02:10Z",
+            "story_id":92255450,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":118971646,
+            "text":"Will spend some time working on this this weekend",
+            "created_at":"2015-11-27T08:56:21Z",
+            "updated_at":"2015-11-27T08:56:21Z",
+            "story_id":92255450,
+            "person":{
+              "kind":"person",
+              "id":1563384,
+              "name":"Raoul Diffouo",
+              "email":"diraulo@gmail.com",
+              "initials":"RD",
+              "username":"diraulo"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":123652683,
+            "text":"@diraulo hiya - how's this going?",
+            "created_at":"2016-01-25T12:26:11Z",
+            "updated_at":"2016-01-25T12:26:11Z",
+            "story_id":92255450,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+          {
+            "state":"started",
+            "story_id":92255450,
+            "project_id":982890,
+            "project_version":5735,
+            "occurred_at":"2015-04-11T19:08:47Z",
+            "performed_by_id":1563384,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unstarted",
+            "story_id":92255450,
+            "project_id":982890,
+            "project_version":5723,
+            "occurred_at":"2015-04-10T20:40:10Z",
+            "performed_by_id":1104242,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unscheduled",
+            "story_id":92255450,
+            "project_id":982890,
+            "project_version":5684,
+            "occurred_at":"2015-04-10T19:57:46Z",
+            "performed_by_id":1219108,
+            "kind":"story_transition"
+          }
+        ],
+        "cycle_time_details":{
+          "total_cycle_time":87679525000,
+          "started_time":87679525000,
+          "started_count":1,
+          "finished_time":0,
+          "finished_count":0,
+          "delivered_time":0,
+          "delivered_count":0,
+          "rejected_time":0,
+          "rejected_count":0,
+          "story_id":92255450,
+          "kind":"cycle_time_details"
+        }
+      },
+      {
+        "id":91253176,
+        "story_type":"bug",
+        "name":"front page \"click to join\" appears before scrum master starts hangout",
+        "description":"As a user overcoming my huge fear of hangouts\nWhen I join a hangout for the first time\nI want to actually meet other people rather than being in a dead hangout from the previous day\n\n**How should it be demonstrated?**\n1. Before the scheduled time for the event: Show countdown time\n2. After the scheduled time for the next event, if it's live or within 15 minutes:\n - If the event is live: show link \"Click to join\" with \"is live!\" legend\n - if the event is not yet live: show link to event with \"not yet live ...\" legend  + link to Slack channel with text: \"see Slack for more info...\"\n3. After 15 minutes of scheduled time and if no live event,  the event is replaced with the next event, showing countdown time.\n\nCurrent design is mantained, on root page and other routes.",
+        "current_state":"started",
+        "url":"https://www.pivotaltracker.com/story/show/91253176",
+        "requested_by":{
+          "kind":"person",
+          "id":8098,
+          "name":"Sam Joseph",
+          "email":"sam@neurogrid.com",
+          "initials":"SJ",
+          "username":"tansaku"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":1518634,
+            "name":"Alejandro Babio",
+            "email":"alejandroebabio@gmail.com",
+            "initials":"AB",
+            "username":"alejandrobabio"
+          }
+        ],
+        "labels":[
+          {
+            "id":8641488,
+            "project_id":982890,
+            "kind":"label",
+            "name":"hangouts",
+            "created_at":"2014-06-09T20:56:56Z",
+            "updated_at":"2014-06-09T20:56:56Z"
+          }
+        ],
+        "tasks":[
+          {
+            "id":31221544,
+            "kind":"task",
+            "description":"Improve EventInstance model to respond to live? if the hangout is realy live (not 5 mintutes check)",
+            "complete":true,
+            "story_id":91253176,
+            "position":1,
+            "created_at":"2015-04-24T22:05:22Z",
+            "updated_at":"2015-12-13T21:17:19Z"
+          }
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":1518634,
+            "name":"Alejandro Babio",
+            "email":"alejandroebabio@gmail.com",
+            "initials":"AB",
+            "username":"alejandrobabio"
+          },
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          },
+          {
+            "kind":"person",
+            "id":1104242,
+            "name":"Thomas Ochman",
+            "email":"tochman10@gmail.com",
+            "initials":"TO",
+            "username":"thomasochman"
+          },
+          {
+            "kind":"person",
+            "id":951101,
+            "name":"Sampriti Panda",
+            "email":"sampdingo@hotmail.com",
+            "initials":"SP",
+            "username":"sampritip"
+          },
+          {
+            "kind":"person",
+            "id":1563384,
+            "name":"Raoul Diffouo",
+            "email":"diraulo@gmail.com",
+            "initials":"RD",
+            "username":"diraulo"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":98847798,
+            "text":"@thomasochman as manager & @tansaku as owner: please, review the description (how should it be demonstrated?), in order to advance in the right direction.",
+            "created_at":"2015-04-24T02:13:31Z",
+            "updated_at":"2015-04-24T02:13:31Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":98945916,
+            "text":"At app/views/layouts/_event_link.html.erb apears the click to join link.",
+            "created_at":"2015-04-24T22:39:31Z",
+            "updated_at":"2015-04-24T22:39:31Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":99225876,
+            "text":"It's not possible to know if a hangout is alive from http://gdata.youtube.com/feeds/api/videos/#{code}, because there are a delay on the update of the response, perhaps 10 or 20 minutes.\n\nIn order to know if a hangout is currently live, I fond https://developers.google.com/+/hangouts/api/gapi.hangout.onair function: ```isBroadcasting()```\n\ncode at: ```https://plus.google.com/hangouts/_/api/dev/hangout.js```",
+            "created_at":"2015-04-28T22:26:07Z",
+            "updated_at":"2015-04-28T23:46:46Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":99508882,
+            "text":"After an appraisal of ```hangouts_path``` with a hangout running. I saw how the \"join\" button of the hangout was enabled during all the hangout life, and exactly 5'37'' after hangouts ends. Also, EventInstance model respond to ```:live?``` within the 5 minutes of updated (using ```updated_at``` field).\n\nAnd, the ```event_instances#update``` action accepts CORS calls from ```a-hangout-opensocial.googleusercontent.com```. \n\nAs @thomasochman and @tansaku have commented it was a hangouts app, that must be https://github.com/AgileVentures/HangoutConnection or https://github.com/AgileVentures/WSO-HOAConnect (once cofirmed I'll update this comment), which does de CORS call. **Edit:** The first one is the actual used on production.\n\nThis lead us to think (not confirmed yet): \n1. The hangout app updates WSO each 5 minutes.\n2. The hangout app updates WSO on end of hangout.\n\nI wonder if we can send an update with the close status of the hangout, to WSO.\n",
+            "created_at":"2015-05-01T14:24:58Z",
+            "updated_at":"2015-05-18T22:29:38Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":100973670,
+            "text":"Status:\n1. HangoutConnection send CORS message to production server of WSO, even if the hangout was open from the development site: http://websiteone-develop.herokuapp.com\n2. http://websiteone-develop.herokuapp.com use the production hangouts.app_id, then it must be using \"production\" environment. Also it is spected because is the heroku best practice recomendation.\n3. Following the ```rails_config``` advice of using with heroku does not work with boolean values. Because it store the values at ```ENV``` variables as strings. And ```features.slack.notifications.enabled``` returns ```\"false\"``` string instead of boolean ```false```, and the string \"false\" becomes true when it is used as a condition. I try severals approachs to fix this. At the end I modify the gem (and I will make a PR to the gem source). At this time I'm using the rails_config gem updated from my github repository.\n4. We can update the event_instance with the broadcasting status (started and finished). Also, I still prefer use a security elapsed time (it could be 2 minutes), in case the finished message was not received on the server (perhaps the broadcaster close the hangout instead of finish broadcasting first).\n\nTodo:\n1. Improve HangoutConnection:\n - Send broadcasting status on change of it\n - Send update message each 2 minutes\n - Use hangout app callbackUrl for update instead of fixed production url\n   a. WSO is using http and not https (we must set at ```config/environment/production.rb```: the value ```config.force_ssl = false```) and this must be enough to make it work.\n   b. Remove HangoutConnection fixed url\n2. Improve WSO to update event_instance status.\n - Make work on development / staging / production heroku environments, moving setting to config variables (following heroku and rails_config advices), and use updated rails_config to work with booleans. (done only at my personal heroku wso)\n - Receive broadcasting status from hangout, and update event_instance\n - Respond to ```:live?``` with true if status is not ```finished``` and it was updated within 2 minutes.\n\nAfter this was done, we can start with the subject of this task.\n\n@thomasochman : If you are agree with this approach, I will make all changes to my heroku WSO and we could see how it works before moving to develop. If not, let me know what you think.\n",
+            "created_at":"2015-05-18T23:06:24Z",
+            "updated_at":"2015-05-18T23:22:10Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":100974812,
+            "text":"@alejandrobabio Looks good. Let's try it out on a demo site if possible.",
+            "created_at":"2015-05-18T23:23:31Z",
+            "updated_at":"2015-05-18T23:23:31Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1104242,
+              "name":"Thomas Ochman",
+              "email":"tochman10@gmail.com",
+              "initials":"TO",
+              "username":"thomasochman"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":101979246,
+            "text":"@thomasochman I made it work. At this first video at https://youtu.be/_gT9S0_GhxI you can see how EventInstance.hoa_status is updated. And at this video: https://youtu.be/R4G99XmjYyw you can see the join button enabled/disabled on change of broadcasting status. ",
+            "created_at":"2015-05-29T12:14:38Z",
+            "updated_at":"2015-05-29T12:14:38Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":102074204,
+            "text":"Changes done to projects:\n\nWSO:\n\n1. In order to deploy to a heroku server which is not production (develop or staging) we need to define 3 environment variables:\n - ```ENV['HANGOUTS_APP_ID']```\n - ```ENV['SLACK_NOTIFICATIONS_ENABLED']```\n - ```ENV['TWITTER_NOTIFICATIONS_ENABLED']```\n2. Store at ```EventInstance``` the ```hoa_status``` (new field) as it were received from the hangout session (started, broadcasting, and finished).\n3. EventInstance is ```live?``` if it is ```started``` (has ```hangout_url```), the ```hoa_status``` is not finished and it was updated between the last 2 minutes.\n4. Forbade update ```EventInstance``` after ```hoa_status``` becomes finished. Because the records are found by ```uid``` (```user_id + project_id + Time.now```), and we want to prevent overwrite a hangout session with a new one (from the same hangout button). A future improvement could be refresh the page after start a hangout, and then the ```uid``` will change.\n5. Remove protocol (```http``` or ```https```) from hangout ```callbackUrl```, which is send to the hangout app. In order to prevent error raised when from hangout (on a ```https``` connection) send a call to wso with ```http``` protocol. Doing this way the hangout call with ```https``` to ```callbackUrl``` without issues, or hardcode the url.\n\nHangoutConnection:\n\n1. Update WSO server each 2 minutes.\n2. Remove obsolete ```v0``` version of app.\n3. Send update to WSO server on change of broadcasting status (start/end), with ```hoa_status```.\n4. Stop update server after finish.\n5. Automatize default rake task with: ```compile + tests + build```\n",
+            "created_at":"2015-05-31T15:43:07Z",
+            "updated_at":"2015-05-31T15:43:07Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":102074304,
+            "text":"Implementation:\n\n1. Add to WSO Heroku the new env variables:\n - **Development:**\n - ```ENV['HANGOUTS_APP_ID']= 331105831845```\n - ```ENV['SLACK_NOTIFICATIONS_ENABLED']= false```\n - ```ENV['TWITTER_NOTIFICATIONS_ENABLED'] = false```\n - **Production:**\n - ```ENV['HANGOUTS_APP_ID']= 135304697558```\n - ```ENV['SLACK_NOTIFICATIONS_ENABLED']= true```\n - ```ENV['TWITTER_NOTIFICATIONS_ENABLED'] = true```\n2. At Github define a Development branch for HangoutConnection.\n3. Update the Google apis hangouts -> application_url of ```project_id 331105831845``` with the raw link of ```public/websiteone.xml``` on branch develop. And check that the ```project_id 135304697558``` been using the same link on branch master.\n4. Now, we can move WSO and HangoutConnection safely to develop -it requires migration of db-, and to production.\n\n**Edited**: updated HANGOUTS_APP_ID s with current values\n",
+            "created_at":"2015-05-31T15:51:00Z",
+            "updated_at":"2015-07-03T14:39:33Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":102402306,
+            "text":"WSO PR: https://github.com/AgileVentures/WebsiteOne/pull/694\nHC PR: https://github.com/AgileVentures/HangoutConnection/pull/9",
+            "created_at":"2015-06-03T10:23:20Z",
+            "updated_at":"2015-06-03T10:23:20Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":105312738,
+            "text":"New PR for WSO: https://github.com/AgileVentures/WebsiteOne/pull/709\n",
+            "created_at":"2015-07-03T14:12:29Z",
+            "updated_at":"2015-07-03T14:12:29Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":105793030,
+            "text":"@thomasochman & @tansaku : I've been thinking on the implementation. And I want to do all the moves (to develop & production) in one day (a couple of hours). At the PR #709 are the environments settings (here too). Also is needed to update the google app 135304697558 in the same way it was with development (331105831845) app. \n\n**Development/Staging**\n1. Set the environment: ENV['HANGOUTS_APP_ID']= 331105831845\n2. Move to development\n3. Migrate db\n\n**Production**\n1. Update the production google app 135304697558 (as Sam did with development)\n * Visit https://code.google.com/apis/console/b/0/?noredirect , select app (Project ID: wso-hoa-connect Project Number: 135304697558), select \"Hangouts\", and fill at \"Application URL (Required)\" with the production link of our app: https://raw.githubusercontent.com/AgileVentures/HangoutConnection/master/public/websiteone.xml\n * Make it public, checking 'Make your application available to all users.'\n * Create OAuth 2.0 credentials for this app, on \"API Access\" it should look as the develop one.\n2. Set the environments variables\n * ENV['HANGOUTS_APP_ID']= 135304697558\n * ENV['SLACK_NOTIFICATIONS_ENABLED']= true\n * ENV['TWITTER_NOTIFICATIONS_ENABLED'] = true\n3. Move to production.\n4. Migrate db !\n5. Move to production HangoutConnection develop branch\n\n**Recovery Strategy**\nIf things go wrong on production:\n1. Try setting ENV['HANGOUTS_APP_ID']= 227702023966 (the actual Yaro app)\n2. If it doesn't work, and we can confirm that the hangout button is using the Yaro app, them we must to revert the PR.\n",
+            "created_at":"2015-07-09T14:17:14Z",
+            "updated_at":"2015-07-10T13:57:04Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":105801310,
+            "text":"old hangout app_id  was 10095526298 on develop and on staging",
+            "created_at":"2015-07-09T15:18:03Z",
+            "updated_at":"2015-07-13T15:57:11Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":106139192,
+            "text":"old production hangout XML was: https://raw.githubusercontent.com/AgileVentures/WSO-HOAConnect/master/public/websiteone.xml",
+            "created_at":"2015-07-14T07:49:10Z",
+            "updated_at":"2015-07-14T07:49:10Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":106144314,
+            "text":"Production test was successful, however we lost slack notifications for some reason - needs investigation @sampritip @alejandrobabio ",
+            "created_at":"2015-07-14T09:07:41Z",
+            "updated_at":"2015-07-14T09:07:41Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":117620266,
+            "text":"https://github.com/AgileVentures/WebsiteOne/pull/712",
+            "created_at":"2015-11-13T08:51:50Z",
+            "updated_at":"2015-11-13T08:51:50Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":118558604,
+            "text":"@alejandrobabio now this is all deployed - does that clear the way to work on the original issue?  Or is it now resolved?  Is \"click to join\" only displayed after hangout goes live?",
+            "created_at":"2015-11-23T09:03:34Z",
+            "updated_at":"2015-11-23T09:03:34Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":120330708,
+            "text":"@tansaku & @diraulo I'm close to finish this task. One of the issues was the \"is live!\" message before the hangout event was live, but after its start time. Now the idea is showing \"is live!\" only if the event is alive. After start time when it was not started yet the message could be: \"on time, not yet live\" at home page, and \"on time\" on the others pages (when the count down ends). Otherwise, we need a new action to call by javascript when countdown reach zero. Please, let me know what you think. ",
+            "created_at":"2015-12-14T00:04:42Z",
+            "updated_at":"2015-12-14T00:05:51Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":1518634,
+              "name":"Alejandro Babio",
+              "email":"alejandroebabio@gmail.com",
+              "initials":"AB",
+              "username":"alejandrobabio"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":123652853,
+            "text":"hi @alejandrobabio sorry for the delay in responding.  I think \"On time, not yet streaming\" might be good, but we can easily change the copy. Being able to distinguish these different states would be really good.  How hard is it to add the extra javascript action you mention?",
+            "created_at":"2016-01-25T12:28:07Z",
+            "updated_at":"2016-01-25T12:28:07Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":124631557,
+            "text":"@alejandrobabio thanks for all your work on this - we are experimenting with waffle as a replacement for pivotal tracker - could you re-open this ticket there? https://waffle.io/AgileVentures/WebsiteOne\n\nmany thanks in advance",
+            "created_at":"2016-02-03T16:52:19Z",
+            "updated_at":"2016-02-03T16:52:19Z",
+            "story_id":91253176,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+          {
+            "state":"started",
+            "story_id":91253176,
+            "project_id":982890,
+            "project_version":5838,
+            "occurred_at":"2015-05-18T20:22:19Z",
+            "performed_by_id":1518634,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unstarted",
+            "story_id":91253176,
+            "project_id":982890,
+            "project_version":5546,
+            "occurred_at":"2015-03-27T07:51:07Z",
+            "performed_by_id":8098,
+            "kind":"story_transition"
+          }
+        ],
+        "cycle_time_details":{
+          "total_cycle_time":84478313000,
+          "started_time":84478313000,
+          "started_count":1,
+          "finished_time":0,
+          "finished_count":0,
+          "delivered_time":0,
+          "delivered_count":0,
+          "rejected_time":0,
+          "rejected_count":0,
+          "story_id":91253176,
+          "kind":"cycle_time_details"
+        }
+      },
+      {
+        "id":78458056,
+        "estimate":2,
+        "story_type":"feature",
+        "name":"Link to live feed",
+        "description":"As a user\nIn order to know what's going on in the community even if I feel to intimidated to join an ongoing scrum but rather just watch the scrum\nI would like to see a link to YT live feed on the event show page/event listing. (and slack)",
+        "current_state":"started",
+        "url":"https://www.pivotaltracker.com/story/show/78458056",
+        "requested_by":{
+          "kind":"person",
+          "id":1104242,
+          "name":"Thomas Ochman",
+          "email":"tochman10@gmail.com",
+          "initials":"TO",
+          "username":"thomasochman"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":1563384,
+            "name":"Raoul Diffouo",
+            "email":"diraulo@gmail.com",
+            "initials":"RD",
+            "username":"diraulo"
+          },
+          {
+            "kind":"person",
+            "id":951101,
+            "name":"Sampriti Panda",
+            "email":"sampdingo@hotmail.com",
+            "initials":"SP",
+            "username":"sampritip"
+          }
+        ],
+        "labels":[
+
+        ],
+        "tasks":[
+          {
+            "id":30368708,
+            "kind":"task",
+            "description":"display on events page",
+            "complete":false,
+            "story_id":78458056,
+            "position":1,
+            "created_at":"2015-03-27T07:47:13Z",
+            "updated_at":"2015-03-27T07:47:13Z"
+          },
+          {
+            "id":30368710,
+            "kind":"task",
+            "description":"display on landing page",
+            "complete":false,
+            "story_id":78458056,
+            "position":2,
+            "created_at":"2015-03-27T07:47:24Z",
+            "updated_at":"2015-03-27T07:47:24Z"
+          },
+          {
+            "id":30368712,
+            "kind":"task",
+            "description":"display in slack",
+            "complete":true,
+            "story_id":78458056,
+            "position":3,
+            "created_at":"2015-03-27T07:47:32Z",
+            "updated_at":"2015-11-17T14:35:13Z"
+          }
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":301937,
+            "name":"Amy Lightholder",
+            "email":"sidhene@gmail.com",
+            "initials":"Amy",
+            "username":"amylightholder3"
+          },
+          {
+            "kind":"person",
+            "id":1563384,
+            "name":"Raoul Diffouo",
+            "email":"diraulo@gmail.com",
+            "initials":"RD",
+            "username":"diraulo"
+          },
+          {
+            "kind":"person",
+            "id":951101,
+            "name":"Sampriti Panda",
+            "email":"sampdingo@hotmail.com",
+            "initials":"SP",
+            "username":"sampritip"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":87595540,
+            "text":"Perhaps we should use the \"live\" view of the hangouts page: http://agileventures.org/hangouts?live=true\n\nThis would have the benefit of staying on the site for a unified experience",
+            "created_at":"2014-12-16T01:40:21Z",
+            "updated_at":"2014-12-16T01:40:21Z",
+            "story_id":78458056,
+            "person":{
+              "kind":"person",
+              "id":301937,
+              "name":"Amy Lightholder",
+              "email":"sidhene@gmail.com",
+              "initials":"Amy",
+              "username":"amylightholder3"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":117915848,
+            "text":"@sampriti recently submitted a PR that posts video link to slack along with link to hangout\n",
+            "created_at":"2015-11-17T14:35:11Z",
+            "updated_at":"2015-11-17T14:35:11Z",
+            "story_id":78458056,
+            "person":{
+              "kind":"person",
+              "id":1563384,
+              "name":"Raoul Diffouo",
+              "email":"diraulo@gmail.com",
+              "initials":"RD",
+              "username":"diraulo"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":117915964,
+            "text":"@sampritip do you think you could have time to look at the other items on the task list for this feature?",
+            "created_at":"2015-11-17T14:36:06Z",
+            "updated_at":"2015-11-17T14:36:06Z",
+            "story_id":78458056,
+            "person":{
+              "kind":"person",
+              "id":1563384,
+              "name":"Raoul Diffouo",
+              "email":"diraulo@gmail.com",
+              "initials":"RD",
+              "username":"diraulo"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+          {
+            "state":"started",
+            "story_id":78458056,
+            "project_id":982890,
+            "project_version":5999,
+            "occurred_at":"2015-11-17T14:35:17Z",
+            "performed_by_id":1563384,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unstarted",
+            "story_id":78458056,
+            "project_id":982890,
+            "project_version":5482,
+            "occurred_at":"2015-03-20T20:08:02Z",
+            "performed_by_id":1104242,
+            "kind":"story_transition"
+          }
+        ],
+        "cycle_time_details":{
+          "total_cycle_time":68687935000,
+          "started_time":68687935000,
+          "started_count":1,
+          "finished_time":0,
+          "finished_count":0,
+          "delivered_time":0,
+          "delivered_count":0,
+          "rejected_time":0,
+          "rejected_count":0,
+          "story_id":78458056,
+          "kind":"cycle_time_details"
+        }
+      },
+      {
+        "id":108642934,
+        "story_type":"bug",
+        "name":"Project description not taking into account the github repository",
+        "description":"When you go to the page:\nhttp://www.agileventures.org/projects?page=6\n\nYou can see the MetPlus project and it says there are no commits related with the project, despite the fact that we currently have almost 300  commits on it.\n\n\nInformation shown in the website:\n\nMetPlus\n 11   19   0\nStatus: ACTIVE\nCreated 3 months ago by Thomas Ochman\nMetPlus is a non-profit that aim to help the people of Detroit, and hopefully Michigan, to find a job that suits them. The vision of the client is to create one application(PETS) that would allow the users to find the a job and for companies to...",
+        "current_state":"started",
+        "url":"https://www.pivotaltracker.com/story/show/108642934",
+        "requested_by":{
+          "kind":"person",
+          "id":1177674,
+          "name":"Joao Pereira",
+          "email":"joaopapereira@gmail.com",
+          "initials":"JP",
+          "username":"joaopereira1"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":1824416,
+            "name":"Cheema, Khasham",
+            "email":"kcheema1@binghamton.edu",
+            "initials":"KC",
+            "username":"cheemak"
+          }
+        ],
+        "labels":[
+
+        ],
+        "tasks":[
+
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          },
+          {
+            "kind":"person",
+            "id":1824416,
+            "name":"Cheema, Khasham",
+            "email":"kcheema1@binghamton.edu",
+            "initials":"KC",
+            "username":"cheemak"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":123652927,
+            "text":"@cheemak did you make any progress investigating this?",
+            "created_at":"2016-01-25T12:29:19Z",
+            "updated_at":"2016-01-25T12:29:19Z",
+            "story_id":108642934,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":124849775,
+            "text":"migrated this to https://github.com/AgileVentures/WebsiteOne/issues/758",
+            "created_at":"2016-02-05T08:30:38Z",
+            "updated_at":"2016-02-05T08:30:38Z",
+            "story_id":108642934,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+          {
+            "state":"started",
+            "story_id":108642934,
+            "project_id":982890,
+            "project_version":6061,
+            "occurred_at":"2015-12-17T23:24:56Z",
+            "performed_by_id":1824416,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unstarted",
+            "story_id":108642934,
+            "project_id":982890,
+            "project_version":6043,
+            "occurred_at":"2015-12-13T18:32:59Z",
+            "performed_by_id":1563384,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unscheduled",
+            "story_id":108642934,
+            "project_id":982890,
+            "project_version":6006,
+            "occurred_at":"2015-11-20T19:06:24Z",
+            "performed_by_id":1177674,
+            "kind":"story_transition"
+          }
+        ],
+        "cycle_time_details":{
+          "total_cycle_time":66064156000,
+          "started_time":66064156000,
+          "started_count":1,
+          "finished_time":0,
+          "finished_count":0,
+          "delivered_time":0,
+          "delivered_count":0,
+          "rejected_time":0,
+          "rejected_count":0,
+          "story_id":108642934,
+          "kind":"cycle_time_details"
+        }
+      },
+      {
+        "id":90656646,
+        "story_type":"bug",
+        "name":"Pivotal tracker url validator bug",
+        "description":"Bug description:\n\nHey everyone, not sure who I should notify in here for this but I believe I found a bug with website one. If you create a pivotal tracker account and then try to add it to your agileventures project, it currently says that the URL is invalid. I looked up the test cases currently being used to see why it was rejecting the URL, and it was because the regex used expects a pivotaltracker...../s/### format\n\nChris Maltzan [5:21 PM]\nbut the link pivotal tracker gave me had a /n/ rather than a /s/\n\nChris Maltzan [5:23 PM]\nI got around it by changing my \"n\" to an \"s\" so that agileventures would accept it. Pivotal tracker was smart enough to redirect the url I gave back to an \"/n/\" so its actually still a valid URL.\n\nChris Maltzan [5:24 PM]\nfor testing purposes, here was the link to my pivotal tracker page: https://www.pivotaltracker.com/n/projects/1303750\n",
+        "current_state":"started",
+        "url":"https://www.pivotaltracker.com/story/show/90656646",
+        "requested_by":{
+          "kind":"person",
+          "id":1343640,
+          "name":"Christopher Milne",
+          "email":"christopher.milne@gmail.com",
+          "initials":"CM",
+          "username":"christophermilne"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":1824416,
+            "name":"Cheema, Khasham",
+            "email":"kcheema1@binghamton.edu",
+            "initials":"KC",
+            "username":"cheemak"
+          }
+        ],
+        "labels":[
+
+        ],
+        "tasks":[
+
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":1628196,
+            "name":"Piotr Kedzia",
+            "email":"ptrkedzia@gmail.com",
+            "initials":"PK",
+            "username":"piotrkedzia"
+          },
+          {
+            "kind":"person",
+            "id":1343640,
+            "name":"Christopher Milne",
+            "email":"christopher.milne@gmail.com",
+            "initials":"CM",
+            "username":"christophermilne"
+          },
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          },
+          {
+            "kind":"person",
+            "id":1563384,
+            "name":"Raoul Diffouo",
+            "email":"diraulo@gmail.com",
+            "initials":"RD",
+            "username":"diraulo"
+          },
+          {
+            "kind":"person",
+            "id":1824416,
+            "name":"Cheema, Khasham",
+            "email":"kcheema1@binghamton.edu",
+            "initials":"KC",
+            "username":"cheemak"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":96906988,
+            "text":"@christophermilne So, solution for this bug is one letter. Yes? I can swap 's' to 'n' in proper validator.",
+            "created_at":"2015-04-02T16:31:07Z",
+            "updated_at":"2015-04-02T16:55:37Z",
+            "story_id":90656646,
+            "person":{
+              "kind":"person",
+              "id":1628196,
+              "name":"Piotr Kedzia",
+              "email":"ptrkedzia@gmail.com",
+              "initials":"PK",
+              "username":"piotrkedzia"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":117619970,
+            "text":"@christophermilne any updates on this?",
+            "created_at":"2015-11-13T08:46:12Z",
+            "updated_at":"2015-11-13T08:46:12Z",
+            "story_id":90656646,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":118186624,
+            "text":"sorry @tansaku. haven't been in codebase for quite some time. things are a bit crazy for me now (switching jobs). probably can't even look at this for another month",
+            "created_at":"2015-11-18T18:20:15Z",
+            "updated_at":"2015-11-18T18:20:15Z",
+            "story_id":90656646,
+            "person":{
+              "kind":"person",
+              "id":1343640,
+              "name":"Christopher Milne",
+              "email":"christopher.milne@gmail.com",
+              "initials":"CM",
+              "username":"christophermilne"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":118558454,
+            "text":"@christophermilne shall we put this back in the backlog/icebox then?",
+            "created_at":"2015-11-23T09:01:35Z",
+            "updated_at":"2015-11-23T09:01:35Z",
+            "story_id":90656646,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":120324886,
+            "text":"sending back to backlog",
+            "created_at":"2015-12-13T18:26:42Z",
+            "updated_at":"2015-12-13T18:26:42Z",
+            "story_id":90656646,
+            "person":{
+              "kind":"person",
+              "id":1563384,
+              "name":"Raoul Diffouo",
+              "email":"diraulo@gmail.com",
+              "initials":"RD",
+              "username":"diraulo"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          },
+          {
+            "kind":"comment",
+            "id":123652963,
+            "text":"@cheemak did you make any progress on this?",
+            "created_at":"2016-01-25T12:29:59Z",
+            "updated_at":"2016-01-25T12:29:59Z",
+            "story_id":90656646,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+          {
+            "state":"started",
+            "story_id":90656646,
+            "project_id":982890,
+            "project_version":6062,
+            "occurred_at":"2015-12-18T17:32:03Z",
+            "performed_by_id":1824416,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unstarted",
+            "story_id":90656646,
+            "project_id":982890,
+            "project_version":6038,
+            "occurred_at":"2015-12-13T18:26:49Z",
+            "performed_by_id":1563384,
+            "kind":"story_transition"
+          },
+          {
+            "state":"started",
+            "story_id":90656646,
+            "project_id":982890,
+            "project_version":5672,
+            "occurred_at":"2015-04-07T20:31:50Z",
+            "performed_by_id":1628196,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unstarted",
+            "story_id":90656646,
+            "project_id":982890,
+            "project_version":5486,
+            "occurred_at":"2015-03-21T05:53:06Z",
+            "performed_by_id":1104242,
+            "kind":"story_transition"
+          },
+          {
+            "state":"unscheduled",
+            "story_id":90656646,
+            "project_id":982890,
+            "project_version":5456,
+            "occurred_at":"2015-03-18T23:13:58Z",
+            "performed_by_id":1343640,
+            "kind":"story_transition"
+          }
+        ],
+        "cycle_time_details":{
+          "total_cycle_time":87591428000,
+          "started_time":87591428000,
+          "started_count":2,
+          "finished_time":0,
+          "finished_count":0,
+          "delivered_time":0,
+          "delivered_count":0,
+          "rejected_time":0,
+          "rejected_count":0,
+          "story_id":90656646,
+          "kind":"cycle_time_details"
+        }
+      },
+      {
+        "id":67538948,
+        "story_type":"chore",
+        "name":"make AgileVentures an official UK charity",
+        "current_state":"started",
+        "url":"https://www.pivotaltracker.com/story/show/67538948",
+        "requested_by":{
+          "kind":"person",
+          "id":8098,
+          "name":"Sam Joseph",
+          "email":"sam@neurogrid.com",
+          "initials":"SJ",
+          "username":"tansaku"
+        },
+        "owners":[
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          }
+        ],
+        "labels":[
+
+        ],
+        "tasks":[
+
+        ],
+        "followers":[
+          {
+            "kind":"person",
+            "id":8098,
+            "name":"Sam Joseph",
+            "email":"sam@neurogrid.com",
+            "initials":"SJ",
+            "username":"tansaku"
+          }
+        ],
+        "comments":[
+          {
+            "kind":"comment",
+            "id":124047275,
+            "text":"created a draft constitution based on UK government recommendations: https://docs.google.com/document/d/1OQ9LtdpmTYFE5HhRJOYG5S1dKDM_29Lfe7Y80CzLq-o/edit",
+            "created_at":"2016-01-28T13:04:29Z",
+            "updated_at":"2016-01-28T13:04:29Z",
+            "story_id":67538948,
+            "person":{
+              "kind":"person",
+              "id":8098,
+              "name":"Sam Joseph",
+              "email":"sam@neurogrid.com",
+              "initials":"SJ",
+              "username":"tansaku"
+            },
+            "file_attachments":[
+
+            ],
+            "google_attachment_ids":[
+
+            ]
+          }
+        ],
+        "transitions":[
+          {
+            "state":"started",
+            "story_id":67538948,
+            "project_id":982890,
+            "project_version":6088,
+            "occurred_at":"2016-01-28T10:42:45Z",
+            "performed_by_id":8098,
+            "kind":"story_transition"
+          }
+        ],
+        "cycle_time_details":{
+          "total_cycle_time":62481087000,
+          "started_time":62481087000,
+          "started_count":1,
+          "finished_time":0,
+          "finished_count":0,
+          "delivered_time":0,
+          "delivered_count":0,
+          "rejected_time":0,
+          "rejected_count":0,
+          "story_id":67538948,
+          "kind":"cycle_time_details"
+        }
+      }
+    ],
+    "team_strength":1,
+    "project_id":982890,
+    "length":2,
+    "start":"2018-01-17T00:00:00Z",
+    "finish":"2018-01-31T00:00:00Z",
+    "number":106
+  }
+]
