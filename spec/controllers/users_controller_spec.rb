@@ -240,7 +240,7 @@ describe UsersController, :type => :controller do
     end
 
     context 'timezone_filter is blank' do
-      it 'returns nil' do
+      xit 'returns nil' do
         event = @user_controller.send(:set_timezone_offset_range, {timezone_filter: ""})
         expect(event).to be nil
       end
@@ -253,17 +253,17 @@ describe UsersController, :type => :controller do
           @current_user.stub(:try).and_return(0)
         end
 
-        it 'returns right params when choose "In My Timezone"' do
+        xit 'returns right params when choose "In My Timezone"' do
           event = @user_controller.send(:set_timezone_offset_range, {timezone_filter: "In My Timezone"})
           expect(event).to eq([0, 0])
         end
 
-        it 'returns right params when choose "Wider Timezone Area"' do
+        xit 'returns right params when choose "Wider Timezone Area"' do
           event = @user_controller.send(:set_timezone_offset_range, {timezone_filter: "Wider Timezone Area"})
           expect(event).to eq([-3600, 3600])
         end
 
-        it 'deletes timezone_filter when change names but not corrected the method' do
+        xit 'deletes timezone_filter when change names but not corrected the method' do
           params = {timezone_filter: "Wrong Name"}
           @user_controller.send(:set_timezone_offset_range, params)
           expect(params).to eq({})
@@ -271,7 +271,7 @@ describe UsersController, :type => :controller do
       end
 
       context 'user has not timezone offset' do
-        it 'reditects with error' do
+        xit 'reditects with error' do
           event = @user_controller.send(:set_timezone_offset_range, {timezone_filter: "In My Timezone"})
           expect(event).to match(/redirected/)
         end
