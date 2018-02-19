@@ -83,7 +83,7 @@ GEM
     brakeman (4.1.1)
     buftok (0.2.0)
     builder (3.2.3)
-    bullet (5.7.2)
+    bullet (5.7.3)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11.0)
     bundler-audit (0.6.0)
@@ -298,16 +298,16 @@ GEM
     http_parser.rb (0.6.0)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.9.4)
+    i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     ice_cube (0.16.2)
     inflecto (0.0.2)
-    jasmine (2.8.0)
-      jasmine-core (>= 2.8.0, < 3.0.0)
+    jasmine (3.0.0)
+      jasmine-core (= 3.0.0)
       phantomjs
       rack (>= 1.2.1)
       rake
-    jasmine-core (2.8.0)
+    jasmine-core (3.0.0)
     jasmine-jquery-rails (2.0.3)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -682,8 +682,8 @@ DEPENDENCIES
   guard-rspec
   hirb
   ice_cube (= 0.16.2)
-  jasmine
-  jasmine-jquery-rails
+  jasmine (~> 3.0)
+  jasmine-jquery-rails (~> 2.0, >= 2.0.3)
   jbuilder
   jquery-rails
   jquery-turbolinks (= 2.1.0)
