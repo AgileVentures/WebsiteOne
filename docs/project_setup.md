@@ -92,13 +92,7 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 #### Phantomjs
 [Phantomjs](http://phantomjs.org/) is used to run tests.  [Here are detailed instructions for installing it.](development_environment_set_up.md#phantomjs)
 
-### Step 5: Set up the database
-
-* Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
-
-    `bundle exec rake db:setup`
-    
-### Step 6: Request the .env file and confirm your locale
+### Step 5: Request the .env file and confirm your locale
     
 * You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.  The `.env` file should go in the root of the WSO project.
 * Add the following to that file:
@@ -106,10 +100,20 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 ```
 RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
 RECAPTCHA_SECRET_KEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+AIRBRAKE_API_KEY=blahblahblah
+AIRBRAKE_PROJECT_ID=123
+SECRET_KEY_BASE=blabla
 ```
 
 the above are test keys from https://developers.google.com/recaptcha/docs/faq
 
+    
+
+### Step 6: Set up the database
+
+* Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
+
+    `bundle exec rake db:setup`
     
 ### Step 7: Run the tests
 
