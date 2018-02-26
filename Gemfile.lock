@@ -80,7 +80,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    brakeman (4.1.1)
+    brakeman (4.2.0)
     buftok (0.2.0)
     builder (3.2.3)
     bullet (5.7.3)
@@ -560,7 +560,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
     stripe (3.3.2)
       faraday (~> 0.9)
-    stripe-ruby-mock (2.5.2)
+    stripe-ruby-mock (2.5.3)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
@@ -729,7 +729,7 @@ DEPENDENCIES
   slack-ruby-client
   sprockets-rails (= 2.3.3)
   stripe
-  stripe-ruby-mock (~> 2.5.2)
+  stripe-ruby-mock (~> 2.5.3)
   sucker_punch
   therubyracer
   turbolinks
