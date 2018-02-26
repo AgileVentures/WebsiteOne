@@ -103,7 +103,7 @@ class UsersController < ApplicationController
 
   def set_timezone_offset_range(filter_params)
     unless filter_params[:timezone_filter].blank?
-      if offset = @current_user.try(:timezone_offset)
+      if offset = current_user.try(:timezone_offset)
         case filter_params[:timezone_filter]
           when 'In My Timezone'
             filter_params[:timezone_filter] = [offset, offset]
