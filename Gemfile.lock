@@ -80,7 +80,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    brakeman (4.1.1)
+    brakeman (4.2.0)
     buftok (0.2.0)
     builder (3.2.3)
     bullet (5.7.3)
@@ -320,8 +320,8 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.6)
-    jvectormap-rails (1.0.1)
-      railties (>= 3.1, < 5.0)
+    jvectormap-rails (2.0.0)
+      railties (>= 3.1)
     jwt (1.5.6)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -344,7 +344,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
     local_time (2.0.0)
-    loofah (2.1.1)
+    loofah (2.2.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.12)
@@ -396,9 +396,8 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paper_trail (4.0.0)
-      activerecord (>= 3.0, < 6.0)
-      activesupport (>= 3.0, < 6.0)
+    paper_trail (8.1.2)
+      activerecord (>= 4.2, < 5.2)
       request_store (~> 1.1)
     paranoia (2.4.0)
       activerecord (>= 4.0, < 5.2)
@@ -481,7 +480,8 @@ GEM
       json
     redcarpet (3.4.0)
     ref (2.0.0)
-    request_store (1.3.2)
+    request_store (1.4.0)
+      rack (>= 1.4)
     require_all (1.4.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
@@ -562,7 +562,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
     stripe (3.3.2)
       faraday (~> 0.9)
-    stripe-ruby-mock (2.5.2)
+    stripe-ruby-mock (2.5.3)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
@@ -686,7 +686,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-turbolinks (= 2.1.0)
-  jvectormap-rails (~> 1.0.0)
+  jvectormap-rails (~> 2.0)
   kaminari
   launchy
   local_time (~> 2.0)
@@ -700,7 +700,7 @@ DEPENDENCIES
   omniauth-github (~> 1.1.2)
   omniauth-gplus (~> 2.0.1)
   omniauth-oauth2 (~> 1.3.1)
-  paper_trail (= 4.0.0)
+  paper_trail (~> 8.1, >= 8.1.2)
   paranoia (~> 2.4)
   pg
   phantomjs
@@ -732,7 +732,7 @@ DEPENDENCIES
   slack-ruby-client
   sprockets-rails (= 2.3.3)
   stripe
-  stripe-ruby-mock (~> 2.5.2)
+  stripe-ruby-mock (~> 2.5.3)
   sucker_punch
   therubyracer
   turbolinks
