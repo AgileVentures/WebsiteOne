@@ -55,7 +55,7 @@ gem 'redcarpet'
 gem 'ruby-gitter'
 gem 'sass-rails'
 gem 'slack-ruby-client'
-gem 'sprockets-rails', '2.3.3'
+gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'stripe'
 gem 'sucker_punch'
 gem 'therubyracer', platforms: :ruby
