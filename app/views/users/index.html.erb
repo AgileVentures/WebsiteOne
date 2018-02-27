@@ -15,7 +15,7 @@
           <div class="col-xs-12 col-sm-4">
           <%= select_tag :project_filter, options_from_collection_for_select(@projects, 'id', 'title', params[:project_filter]), {prompt: 'Project involvement...', class: 'form-control'} %>
           </div>
-          <% if @current_user && @current_user.latitude %>
+          <% if current_user && current_user.latitude %>
               <div class="col-xs-12 col-sm-4">
                 <%= select_tag :timezone_filter, options_for_select(['In My Timezone', 'Wider Timezone Area'], params[:timezone_filter]), {prompt: 'Time zone...', class: 'form-control'} %>
               </div>
@@ -24,7 +24,7 @@
             <%= check_box_tag :online, params[:online], (true if !params[:online].nil?) %> Recently Online
             <%= submit_tag 'Search', class: 'btn btn-default' %>
           </div>
-        </div
+        </div>
     <% end %>
   </div>
 
