@@ -1,4 +1,4 @@
-class Status < ActiveRecord::Base
+class Status < ApplicationRecord
   belongs_to :user, counter_cache: :status_count
 
 
