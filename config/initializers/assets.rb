@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w[ jquery-1.7.js subscriptions.css lolex.js ]
+Rails.application.config.assets.precompile += %w[ jquery-1.7.js subscriptions.css lolex.js jasmine-jquery.js ]

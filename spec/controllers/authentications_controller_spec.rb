@@ -36,7 +36,7 @@ describe AuthenticationsController do
       User.stub(find: @user)
       expect(controller).to receive(:authenticate_user!)
       expect(@user).to receive(:update_attributes)
-      get :destroy, id: 1
+      get :destroy, params: { id: 1 }
     end
 
     it 'should be removable for users with a password' do
@@ -44,14 +44,14 @@ describe AuthenticationsController do
       expect(@auths).to receive(:count).and_return 2
       expect(@auth).to receive(:destroy).and_return true
       expect(@user).to receive(:update_attributes).and_return true
-      get :destroy, id: 1
+      get :destroy, params: { id: 1 }
       expect(flash[:notice]).to eq 'Successfully removed profile.'
     end
 
     it 'should not be allowed for users without any other means of authentication' do
       expect(@auths).to receive(:count).and_return 1
       expect(@user).to receive(:encrypted_password).and_return nil
-      get :destroy, id: 1
+      get :destroy, params: { id: 1 }
       expect(flash[:alert]).to eq 'Failed to unlink GitHub. Please use another provider for login or reset password.'
     end
   end
@@ -74,7 +74,7 @@ describe AuthenticationsController do
       expect(controller).to receive(:sign_in_and_redirect) do
         controller.redirect_to root_path
       end
-      get :create, provider: @provider
+      get :create, params: { provider: @provider }
       expect(flash[:notice]).to eq 'Signed in successfully.'
     end
 
@@ -90,13 +90,13 @@ describe AuthenticationsController do
         expect(controller).to receive(:sign_in_and_redirect) do
           controller.redirect_to root_path
         end
-        get :create, provider: @provider
+        get :create, params: { provider: @provider }
         expect(flash[:notice]).to eq 'Signed in successfully.'
       end
 
       it 'should redirect to the new user form if there is an error' do
         expect(@user).to receive(:save).and_return(false)
-        get :create, provider: @provider
+        get :create, params: { provider: @provider }
         expect(response).to redirect_to new_user_registration_path
       end
     end
@@ -108,7 +108,7 @@ describe AuthenticationsController do
       end
       
       it 'should redirect to root path with deactivated user alert message' do
-        get :create, provider: @provider
+        get :create, params: { provider: @provider }
         expect(response).to redirect_to root_path
         expect(flash[:alert]).to eq('User is deactivated.')
       end
@@ -129,7 +129,7 @@ describe AuthenticationsController do
       Authentication.stub(:find_by_provider_and_uid).and_return @auth
       other_user = double(User, id: @user.id + 1)
       controller.stub :current_user => other_user
-      get :create, provider: @provider
+      get :create, params: { provider: @provider }
       expect(flash[:alert]).to eq 'Another account is already associated with these credentials!'
       expect(response).to redirect_to @path
     end
@@ -145,7 +145,7 @@ describe AuthenticationsController do
         other_auths = %w( Glitter Smoogle HitPub )
         other_auths.each do |p|
           expect(@auth).to receive(:save).and_return true
-          get :create, provider: p
+          get :create, params: { provider: p }
           expect(flash[:notice]).to eq 'Authentication successful.'
           expect(response).to redirect_to @path
         end
@@ -153,7 +153,7 @@ describe AuthenticationsController do
 
       it 'should not accept multiple profiles from the same source' do
         expect(@auth).to receive(:save).and_return false
-        get :create, provider: @provider
+        get :create, params: { provider: @provider }
         expect(flash[:alert]).to eq 'Unable to create additional profiles.'
         expect(response).to redirect_to @path
       end
@@ -169,6 +169,7 @@ describe AuthenticationsController do
           'info' => { 'urls' => { 'GitHub' => 'http://github.com/test' } }
       }
     end
+
     it 'links Github profile when authenticate with GitHub' do
       user = stub_model(User, github_profile_url: nil)
       controller.stub(current_user: user)
@@ -176,7 +177,7 @@ describe AuthenticationsController do
       user.stub(:reload)
 
       expect(controller).to receive(:link_github_profile).and_call_original
-      get :create, provider: 'github'
+      get :create, params: { provider: 'github' }
       expect(user.github_profile_url).to eq('http://github.com/test')
     end
 
@@ -194,7 +195,7 @@ describe AuthenticationsController do
       expect(@auth).to receive(:destroy).and_return true
 
       expect(controller).to receive(:destroy).and_call_original
-      get :destroy, id: @user.id
+      get :destroy, params: { id: @user.id }
       expect(@user.github_profile_url).to be_nil
     end
   end

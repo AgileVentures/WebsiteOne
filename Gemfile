@@ -3,7 +3,7 @@ ruby '2.3.1'
 
 gem 'rails', '~> 5.1', '>= 5.1.5'
 gem 'acts-as-taggable-on'
-gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+gem 'acts_as_follower', git: 'https://github.com/tcocca/acts_as_follower.git'
 gem 'acts_as_tree'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'airbrake'
