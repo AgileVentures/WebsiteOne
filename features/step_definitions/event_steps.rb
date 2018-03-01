@@ -122,6 +122,10 @@ And(/^I click on the "([^"]*)" div$/) do |arg|
   find("div.#{arg}").click
 end
 
+And(/^I select "([^"]*)" from the event for dropdown$/) do |for_whom|
+  page.select for_whom, from: "event_for"
+end
+
 And(/^I select "([^"]*)" from the event project dropdown$/) do |project_name|
   page.select project_name, from: "event_project_id"
 end

@@ -72,7 +72,7 @@ class EventsController < ApplicationController
 
   def whitelist_event_params
     permitted = [
-      :name, :category, :project_id, :description, :duration, :repeats,
+      :name, :category, :for, :project_id, :description, :duration, :repeats,
       :repeats_every_n_weeks, :repeat_ends_string, :time_zone, :creator_id,
       :start_datetime, :repeat_ends, :repeat_ends_on
     ]
@@ -112,6 +112,6 @@ class EventsController < ApplicationController
   def new_params
     params[:project_id] = Project.friendly.find(params[:project]).id.to_s if params[:project]
     params[:project_id] = Project.find_by(title: "CS169").try(:id) unless params[:project_id]
-    params.permit(:name, :category, :project_id).merge(start_datetime: Time.now.utc, duration: 30, repeat_ends: true)
+    params.permit(:name, :category, :for, :project_id).merge(start_datetime: Time.now.utc, duration: 30, repeat_ends: true)
   end
 end
