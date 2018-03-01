@@ -11,6 +11,7 @@
 <div class="row">
   <div class="col-xs-4">
     <p>Event type: <%= @event.category %></p>
+    <p>Event for: <%= @event.for %></p>
   </div>
   <div class="col-xs-8">
     <% if user_signed_in? %>
@@ -29,7 +30,7 @@
             </li>
             <li role="edit_yt_link">
               <%= link_to 'Edit youtube link', '#', remote: true, data: {toggle: 'collapse', target: '#edit-yt-link-form'}, role: 'menuitem', tabindex: '-1' %>
-            </li>            
+            </li>
           </ul>
         </div>
 
