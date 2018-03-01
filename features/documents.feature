@@ -109,6 +109,15 @@ Feature: Manage Document
     And I try to use the Mercury Editor to edit document "Documentation"
     Then I should see "You do not have the right privileges to complete action."
 
+  Scenario: Basic users cannot edit documents
+    Given I am logged in
+    When I am on the "Show" page for document "Documentation"
+    Then I should not see the Edit button
+    
+  Scenario: Premium users can edit documents
+    
+  Scenario: Privileged users can edit documents
+
   Scenario: The Mercury Editor should only work for the documents
     Given I am logged in
     And I visit the site
