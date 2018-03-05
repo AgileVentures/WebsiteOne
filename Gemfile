@@ -112,8 +112,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
-  gem 'coveralls', require: false
-  gem 'simplecov'
+  gem 'simplecov', '~> 0.15.1'
 end
 
 group :development, :staging, :production do
