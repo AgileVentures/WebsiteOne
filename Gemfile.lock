@@ -302,12 +302,12 @@ GEM
       concurrent-ruby (~> 1.0)
     ice_cube (0.16.2)
     inflecto (0.0.2)
-    jasmine (3.0.0)
-      jasmine-core (= 3.0.0)
+    jasmine (3.1.0)
+      jasmine-core (= 3.1.0)
       phantomjs
       rack (>= 1.2.1)
       rake
-    jasmine-core (3.0.0)
+    jasmine-core (3.1.0)
     jasmine-jquery-rails (2.0.3)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -432,7 +432,7 @@ GEM
       http_parser.rb (~> 0.6.0)
       multi_json
     puma (3.11.2)
-    rack (1.6.8)
+    rack (1.6.9)
     rack-cache (1.7.1)
       rack (>= 0.4)
     rack-test (0.6.3)
@@ -679,7 +679,7 @@ DEPENDENCIES
   guard-rspec
   hirb
   ice_cube (= 0.16.2)
-  jasmine (~> 3.0)
+  jasmine (~> 3.1)
   jasmine-jquery-rails (~> 2.0, >= 2.0.3)
   jbuilder
   jquery-rails
