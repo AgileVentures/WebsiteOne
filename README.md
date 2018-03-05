@@ -23,25 +23,11 @@ The principal organization behind this project is AgileVentures, a UK based char
 
 ## Eager to get started?
 
-Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)
-page.
-
-Please also see our [contribution guidelines](CONTRIBUTING.md).
-
-## Project management
-
-All the stories for the project are managed by using Waffle and can be found [here][waffle].
-
-## Dependencies
-
-The tests requires `phantomjs` to run the cucumber tests, refer to the [Poltergeist](https://github.com/jonleighton/poltergeist)
-
-
-
-## <a name="contributing"></a>Contributing
 In the spirit of [open source software][oo-sw], **everyone** is encouraged to help
 improve this project.
 
+Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)
+page.
 
 Here are some ways *you* can contribute:
 
@@ -54,3 +40,12 @@ Here are some ways *you* can contribute:
 * by closing [issues][waffle]
 * by [reviewing code][code-climate]
 
+Please also see our [contribution guidelines](CONTRIBUTING.md).
+
+## Project management
+
+All the stories for the project are managed by using Waffle and can be found [here][waffle].
+
+## Dependencies
+
+The tests requires `phantomjs` to run the cucumber tests, refer to the [Poltergeist](https://github.com/jonleighton/poltergeist)
