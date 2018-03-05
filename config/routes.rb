@@ -94,6 +94,7 @@ WebsiteOne::Application.routes.draw do
 
   get '/dashboard', to: 'dashboard#index'
   get '*id/edit', to: 'static_pages#edit', as: 'static_page_edit', :format => false
+  get '*id/update', to: 'static_pages#update', as: 'static_page_update', :format => false
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
 
 end

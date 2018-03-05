@@ -19,7 +19,7 @@
   <div id="page-side-panel">
     <% if user_signed_in? %>
       <ul>
-        <li><%= custom_css_btn 'save', 'fa-2x fa fa-save', static_page_update_path(@page.slug,body:grab_body()), id: 'edit_link',
+        <li><%= custom_css_btn 'save', 'fa-2x fa fa-save', static_page_update_path(@page.slug,body:''), id: 'edit_link',
                                remote: true %>
       </ul>
     <% end %>
