@@ -41,8 +41,7 @@ describe UsersController, :type => :controller do
         object2 = double('object2')
         expect(object).to receive(:order).with(created_at: :desc).and_return(object2)
         expect(object2).to receive(:limit).with(5).and_return('videos')
-
-        get 'show', id: @user.friendly_id
+        get 'show', params: { id: @user.friendly_id }
       end
 
       it 'assigns a user instance' do
@@ -64,7 +63,7 @@ describe UsersController, :type => :controller do
       end
 
       it 'it renders an error message when accessing a private profile' do
-        expect{get 'show', id: @user.friendly_id}.to raise_error ActiveRecord::RecordNotFound
+        expect{get 'show', params: { id: @user.friendly_id } }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -92,7 +91,7 @@ describe UsersController, :type => :controller do
     end
 
     context 'with valid parameters' do
-      before(:each) { post :hire_me_contact_form, valid_params }
+      before(:each) { post :hire_me_contact_form, params: valid_params }
 
       it 'should redirect to the previous page' do
         expect(response).to redirect_to 'back'
@@ -109,7 +108,7 @@ describe UsersController, :type => :controller do
 
       it 'should respond with "Your message has not been sent!" if the message was not delivered successfully' do
         Mailer.stub_chain(:hire_me_form, :deliver_now).and_return(false)
-        post :hire_me_contact_form, valid_params
+        post :hire_me_contact_form, params: valid_params
         expect(flash[:alert]).to eq 'Your message has not been sent!'
       end
     end
@@ -117,7 +116,7 @@ describe UsersController, :type => :controller do
     context 'with invalid parameters' do
 
       context 'empty form fields' do
-        before(:each) { post :hire_me_contact_form, message_form: { name: '', email: '', message: '' } }
+        before(:each) { post :hire_me_contact_form, params: { message_form: { name: '', email: '', message: '' } } }
 
         it 'should redirect to the previous page' do
           expect(response).to redirect_to 'back'
@@ -129,7 +128,7 @@ describe UsersController, :type => :controller do
       end
 
       context 'invalid email address' do
-        before(:each) { post :hire_me_contact_form, message_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you', recipient_id: @user.id } }
+        before(:each) { post :hire_me_contact_form, params: { message_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you', recipient_id: @user.id } } }
 
         it 'should redirect to the previous page' do
           expect(response).to redirect_to 'back'
@@ -143,7 +142,7 @@ describe UsersController, :type => :controller do
 
     context 'with spam trap field filled out' do
 
-      before(:each) { post :hire_me_contact_form, message_form: { name: 'Thomas', email: 'example@example.com', message: 'spam', fellforit: 'I am a spammer!',  recipient_id: @user.id } }
+      before(:each) { post :hire_me_contact_form, params: { message_form: { name: 'Thomas', email: 'example@example.com', message: 'spam', fellforit: 'I am a spammer!',  recipient_id: @user.id } } }
 
       it 'should redirect to the home page' do
         expect(response).to redirect_to root_path
@@ -161,7 +160,7 @@ describe UsersController, :type => :controller do
     context 'when recipent has disabled hire me functionality' do
       before(:each) do
         allow(@user).to receive(:display_hire_me).and_return(false)
-        post :hire_me_contact_form, message_form: { name: 'Thomas', email: 'example@example.com', message: 'test', recipient_id: @user.id }
+        post :hire_me_contact_form, params: { message_form: { name: 'Thomas', email: 'example@example.com', message: 'test', recipient_id: @user.id } }
       end
 
       it 'should redirect to the previous page' do
@@ -180,18 +179,18 @@ describe UsersController, :type => :controller do
     context 'with empty parameters' do
 
       it 'should not fail with empty params' do
-        post :hire_me_contact_form, { }
+        post :hire_me_contact_form, params: {}
         expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
       end
 
       it 'should not fail with empty message_form' do
-        post :hire_me_contact_form, message_form: { }
+        post :hire_me_contact_form, params: { message_form: {} }
         expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
       end
 
       it 'should not fail with no back path' do
         request.env['HTTP_REFERER'] = nil
-        post :hire_me_contact_form, message_form: { name: '', email: '', message: '' }
+        post :hire_me_contact_form, params: { message_form: { name: '', email: '', message: '' } }
         expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
       end
     end
@@ -207,7 +206,7 @@ describe UsersController, :type => :controller do
 
     context 'with valid attributes' do
       before(:each) do
-        patch :add_status, id: user, user: valid_attributes
+        patch :add_status, params: { id: user, user: valid_attributes }
       end
 
       it 'should require user to be signed in' do
@@ -225,7 +224,7 @@ describe UsersController, :type => :controller do
 
     context 'with invalid attributes' do
       it 'should render a failure flash message' do
-        patch :add_status, id: user, user: { }
+        patch :add_status, params: { id: user, user: {} }
         expect(flash[:alert]).to eq 'Something went wrong...'
       end
     end

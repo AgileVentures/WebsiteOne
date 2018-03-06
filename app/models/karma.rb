@@ -1,2 +1,2 @@
-class Karma < ActiveRecord::Base
+class Karma < ApplicationRecord
 end

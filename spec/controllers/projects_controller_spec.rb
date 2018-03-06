@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ProjectsController, :type => :controller do
 
-  let(:valid_attributes) { {:id => 1,
+  let(:valid_attributes) { { id: 1,
                             :title => 'WebTwentyFive',
                             :description => 'My project description',
                             :status => 'Active',
@@ -63,32 +63,32 @@ describe ProjectsController, :type => :controller do
       end
 
       it 'assigns the requested project as @project' do
-        get :show, {:id => @project.friendly_id}, valid_session
+        get :show, params: { id: @project.friendly_id }.merge(valid_session)
         expect(assigns(:project)).to eq(@project)
       end
 
       it 'renders the show template' do
-        get :show, {:id => @project.friendly_id}, valid_session
+        get :show, params: { id: @project.friendly_id }.merge(valid_session)
         expect(response).to render_template 'show'
       end
 
       it 'assigns the list of members with public profiles to @members' do
-        get :show, {id: @project.friendly_id}, valid_session
+        get :show, params: { id: @project.friendly_id }.merge(valid_session)
         expect(assigns(:members)).to eq @users
       end
 
       it 'assigns the list of related YouTube videos in created_at descending order' do
-        get :show, {id: @project.friendly_id}, valid_session
+        get :show, params: { id: @project.friendly_id }.merge(valid_session)
         expect(assigns(:event_instances)).to eq 'videos'
       end
 
       it 'assigns the count of related YouTube videos' do
-        get :show, {id: @project.friendly_id}, valid_session
+        get :show, params: { id: @project.friendly_id }.merge(valid_session)
         expect(assigns(:event_instances_count)).to eq 'count'
       end
 
       it 'assigns the list of related PivotalTracker stories' do
-        get :show, {id: @project.friendly_id}, valid_session
+        get :show, params: { id: @project.friendly_id }.merge(valid_session)
         expect(assigns(:stories)).to eq 'stories'
       end
     end
@@ -120,14 +120,14 @@ describe ProjectsController, :type => :controller do
 
       it 'assigns a newly created project as @project' do
         allow(@project).to receive(:save)
-        post :create, @params
+        post :create, params: @params
         expect(assigns(:project)).to eq @project
       end
 
       context 'successful save' do
         before(:each) do
           allow(@project).to receive(:save).and_return(true)
-          post :create, @params
+          post :create, params: @params
         end
         it 'redirects to index' do
           expect(response).to redirect_to(project_path(@project))
@@ -145,7 +145,7 @@ describe ProjectsController, :type => :controller do
         it 'passes current_user id into new' do
           expect(Project).to receive(:new).with({"title" => "Title 1", "description" => "Description 1", "status" => "Status 1", "user_id" => @user.id})
           allow(@project).to receive(:save).and_return(true)
-          post :create, @params
+          post :create, params: @params
         end
       end
 
@@ -153,7 +153,7 @@ describe ProjectsController, :type => :controller do
         it 'renders new template' do
           allow(@project).to receive(:save).and_return(false)
 
-          post :create, @params
+          post :create, params: @params
 
           expect(response).to render_template :new
         end
@@ -161,7 +161,7 @@ describe ProjectsController, :type => :controller do
         it 'assigns failure message' do
           allow(@project).to receive(:save).and_return(false)
 
-          post :create, @params
+          post :create, params: @params
 
           expect(flash[:alert]).to eql('Project was not saved. Please check the input.')
         end
@@ -172,7 +172,7 @@ describe ProjectsController, :type => :controller do
       before(:each) do
         @project = Project.new
         Project.stub_chain(:friendly, :find).with(an_instance_of(String)).and_return(@project)
-        get :edit, id: 'some-random-thing'
+        get :edit, params: { id: 'some-random-thing' }
       end
 
       it 'renders the edit template' do
@@ -231,14 +231,14 @@ describe ProjectsController, :type => :controller do
 
       it 'assigns the requested project as @project' do
         expect(@project).to receive(:update_attributes)
-        put :update, id: 'update', project: {title: ''}
+        put :update, params: { id: 'update', project: {title: ''} }
         expect(assigns(:project)).to eq(@project)
       end
 
       context 'successful update' do
         before(:each) do
           allow(@project).to receive(:update_attributes).and_return(true)
-          put :update, id: 'update', project: {title: ''}
+          put :update, params: { id: 'update', project: {title: ''} }
         end
 
         it 'received :create_activity with :update' do
@@ -258,7 +258,7 @@ describe ProjectsController, :type => :controller do
       context 'unsuccessful save' do
         before(:each) do
           allow(@project).to receive(:update_attributes).and_return(false)
-          put :update, id: 'update', project: {title: ''}
+          put :update, params: { id: 'update', project: {title: ''} }
         end
         it 'renders edit' do
           expect(response).to render_template(:edit)
@@ -272,7 +272,7 @@ describe ProjectsController, :type => :controller do
       context 'pitch update with Mercury' do
         @project = FactoryBot.create(:project)
         let(:params) do
-          {:id => @project,
+          { id: @project,
            :content =>
                {:pitch_content => {:value => "my new pitch"},
                }}
@@ -282,7 +282,7 @@ describe ProjectsController, :type => :controller do
         before(:each) do
           allow(@project).to receive(:update_attributes).and_return(true)
           allow(project).to receive(:create_activity)
-          put :mercury_update, params
+          put :mercury_update, params: params
 
         end
 
@@ -304,5 +304,3 @@ describe ProjectsController, :type => :controller do
     end
   end
 end
-
-

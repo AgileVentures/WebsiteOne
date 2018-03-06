@@ -1,3 +1,4 @@
+[![Build Status](https://semaphoreci.com/api/v1/agileventures/websiteone/branches/1058_add_google_calendar_link/shields_badge.svg)](https://semaphoreci.com/agileventures/websiteone) [![Maintainability](https://api.codeclimate.com/v1/badges/8bbffaef68e73422ca40/maintainability)](https://codeclimate.com/github/AgileVentures/WebsiteOne/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8bbffaef68e73422ca40/test_coverage)](https://codeclimate.com/github/AgileVentures/WebsiteOne/test_coverage)
 
 # AgileVentures WebSiteOne
 
@@ -42,7 +43,6 @@ Later Raoul Diffou joined to take over as project manager as Thomas and Bryan ha
 * [Imperative vs Declarative Cucumber](http://fasteragile.com/blog/2015/01/19/declarative-user-stories-translate-to-good-cucumber-features/)
 * [JavaScript Acceptance test trials](https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/)
 
-
 ## Walkthroughs
 
 * An example of a simple interface change
@@ -57,26 +57,3 @@ Later Raoul Diffou joined to take over as project manager as Thomas and Bryan ha
   ...
 * An example of a bug fix
   ...
-  
-  
-Services and Metrics
------------------------
-
-| Service                  | Status                                                                                                                                                               |
-| ------------------------ | -----------------                                                                                                                                                    |
-| *Test coverage*          |                                                                                                                                                                      |
-| Coveralls                | [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.svg?branch=develop)](https://coveralls.io/r/AgileVentures/WebsiteOne?branch=develop)   |
-| *Continuous integration* |                                                                                                                                                                      |
-| Semaphore CI (master)    | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/318335/badge.png)](https://semaphoreapp.com/agileventures/websiteone) |
-| Semaphore CI (staging)   | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/317640/badge.png)](https://semaphoreapp.com/agileventures/websiteone) |
-| Semaphore CI (develop)   | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/292874/badge.png)](https://semaphoreapp.com/agileventures/websiteone) |
-| *Dependencies*           |                                                                                                                                                                      |
-| Gemnasium                | [![Dependency Status](https://gemnasium.com/AgileVentures/WebsiteOne.png)](https://gemnasium.com/AgileVentures/WebsiteOne)                                           |
-| Code quality             |                                                                                                                                                                      |
-| CodeClimate              | [![CodeClimate](https://codeclimate.com/github/AgileVentures/WebsiteOne.png)](https://codeclimate.com/github/AgileVentures/WebsiteOne)                               |
-| *Deploys*                |                                                                                                                                                                      |
-| DevelopServer            | [websiteone-develop.herokuapp.com](http://websiteone-develop.herokuapp.com/)                                                                                         |
-| StagingServer            | [websiteone-staging.herokuapp.com](http://websiteone-staging.herokuapp.com/)                                                                                         |
-| ProductionServer         | [https://www.agileventures.org/](https://www.agileventures.org/)                                                                                                                                     |
-| *Project management*     |                                                                                                                                                                      |
-| Waffle                   | [WebsiteOne](waffle.io/AgileVentures/WebsiteOne/)                                                                                                                                                 |
