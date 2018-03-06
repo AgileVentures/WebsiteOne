@@ -1,4 +1,4 @@
-class Document < ActiveRecord::Base
+class Document < ApplicationRecord
   include ActAsPage
   include UserNullable
   include PublicActivity::Common

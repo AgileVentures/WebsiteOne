@@ -5,7 +5,7 @@ describe RegistrationsController do
     context 'successful save' do
       before(:each) do
         request.env['devise.mapping'] = Devise.mappings[:user]
-        post :create, user: {email: 'random@random.com', password: 'randomrandom', password_confirmation: 'randomrandom'}
+        post :create, params: { user: {email: 'random@random.com', password: 'randomrandom', password_confirmation: 'randomrandom'} }
       end
 
       it 'redirects to index' do
@@ -33,12 +33,12 @@ describe RegistrationsController do
       end
 
       it 'does not email upon failure to register' do
-        post :create, user: {email: 'random@random.com', password: 'randomrando', password_confirmation: 'randomrandom'}
+        post :create, params: { user: {email: 'random@random.com', password: 'randomrando', password_confirmation: 'randomrandom'} }
         expect(ActionMailer::Base.deliveries.size).to eq 0
       end
 
       it 'sets omniauth session to nil' do
-        post :create, user: {email: 'random2@random.com', password: 'randomrando', password_confirmation: 'randomrandom'}
+        post :create, params: { user: {email: 'random2@random.com', password: 'randomrando', password_confirmation: 'randomrandom'} }
         expect(session[:omniauth]).to eq nil
       end
     end
@@ -51,7 +51,7 @@ describe RegistrationsController do
       end
       
       it "should show user deactivated message and redirect_to root_path" do
-        post :create, user: {email: 'random@random.com', password: 'randomrandom', password_confirmation: 'randomrandom'}
+        post :create, params: { user: {email: 'random@random.com', password: 'randomrandom', password_confirmation: 'randomrandom'} }
         expect(response).to redirect_to root_path
         expect(flash[:alert]).to eq("User is deactivated.")
       end
@@ -75,20 +75,20 @@ describe RegistrationsController do
 
     it 'renders edit on preview' do
       @user.stub(:display_email=)
-      put :update, id: 'update', preview: true, user: {email: ''}
+      put :update, params: { id: 'update', preview: true, user: {email: ''} }
       expect(response).to render_template(:edit)
     end
 
     it 'assigns the requested project as @project' do
       expect(@user).to receive(:update_attributes)
-      put :update, id: 'update', user: {display_hire_me: true}
+      put :update, params: { id: 'update', user: {display_hire_me: true} }
       expect(assigns(:user)).to eq(@user)
     end
 
     context 'successful update' do
       before(:each) do
         @user.stub(:update_attributes).and_return(true)
-        put :update, id: 'some-id', user: {display_hire_me: true}
+        put :update, params: { id: 'some-id', user: {display_hire_me: true} }
       end
 
       it 'redirects to the user show page' do
@@ -103,7 +103,7 @@ describe RegistrationsController do
     context 'unsuccessful update' do
       before(:each) do
         @user.stub(:update_attributes).and_return(false)
-        put :update, id: 'some-id', user: {email: ''}
+        put :update, params: { id: 'some-id', user: {email: ''} }
       end
       it 'renders edit' do
         expect(response).to render_template(:edit)

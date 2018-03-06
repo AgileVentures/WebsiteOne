@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   has_many :event_instances
   belongs_to :project
   serialize :exclusions
