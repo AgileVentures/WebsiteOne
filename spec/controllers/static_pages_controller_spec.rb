@@ -21,7 +21,7 @@ describe StaticPagesController, :type => :controller do
   describe 'GET show' do
 
     before(:each) do
-      get :show, {:id => page.to_param }, valid_session
+      get :show, params: { id: page.to_param }.merge(valid_session)
     end
 
     it 'assigns the requested page as page' do
@@ -38,7 +38,7 @@ describe StaticPagesController, :type => :controller do
 
     it 'assigns the requested child page ancestry as @ancestry' do
       page_child = FactoryBot.create(:static_page, parent_id: page.id)
-      get :show, {:id => page_child.to_param}, valid_session
+      get :show, params: { id: page_child.to_param }.merge(valid_session)
       expect(assigns(:ancestry)).to eq([page.title, page_child.title])
     end
   end
@@ -50,14 +50,14 @@ describe StaticPagesController, :type => :controller do
     end
 
     it 'assigns the requested page as @page' do
-      post :mercury_update, id: page.slug, content: { static_page_title: { value: 'MyTitle' }, static_page_body: { value: 'MyBody' } }
+      post :mercury_update, params: { id: page.slug, content: { static_page_title: { value: 'MyTitle' }, static_page_body: { value: 'MyBody' } } }
       expect(assigns(:page)).to eq(page)
     end
 
     context 'with valid params' do
       before(:each) do
         allow(page).to receive(:update_attributes).with(title: 'MyTitle', body: 'MyBody').and_return true
-        post :mercury_update, id: page.slug, content: { static_page_title: { value: 'MyTitle' }, static_page_body: { value: 'MyBody' } }
+        post :mercury_update, params: { id: page.slug, content: { static_page_title: { value: 'MyTitle' }, static_page_body: { value: 'MyBody' } } }
       end
 
       it 'should render a blank string' do
@@ -68,7 +68,7 @@ describe StaticPagesController, :type => :controller do
     context 'with invalid params' do
       before(:each) do
         allow(page).to receive(:update_attributes).and_return false
-        post :mercury_update, id: page.slug, content: { static_page_title: { value: '' }, static_page_body: { value: '' } }
+        post :mercury_update, params: { id: page.slug, content: { static_page_title: { value: '' }, static_page_body: { value: '' } } }
       end
 
       it 'should not render anything' do
@@ -80,7 +80,7 @@ describe StaticPagesController, :type => :controller do
 
   describe 'GET mercury_saved' do
     before(:each) do
-      get :mercury_saved, id: page.slug
+      get :mercury_saved, params: { id: page.slug }
     end
 
     it 'should redirect to the static_page_path' do
