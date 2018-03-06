@@ -1,4 +1,4 @@
-class EventCombineDateAndTimeFields < ActiveRecord::Migration
+class EventCombineDateAndTimeFields < ActiveRecord::Migration[4.2]
 
   def convert_start_datetime(e)
     Time.utc(e.read_attribute(:event_date).year,

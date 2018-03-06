@@ -11,11 +11,11 @@ class ImageUrlValidator < ActiveModel::Validator
     
     if record.image_url.present?
       if invalid_format?(record.image_url)
-        record.errors[:image_url] = 'Invalid format. Image must be png, jpg, or jpeg.'
+        record.errors.messages[:image_url] = 'Invalid format. Image must be png, jpg, or jpeg.'
       end
 
       unless is_image_host_whitelisted?(record.image_url) 
-        record.errors[:image_url] = 'Invalid image url. Image provider not found in provider whitelist.'
+        record.errors.messages[:image_url] = 'Invalid image url. Image provider not found in provider whitelist.'
       end
     end
   end
