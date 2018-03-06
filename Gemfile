@@ -78,7 +78,7 @@ group :test do
   gem 'launchy'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
-  gem 'puffing-billy'
+  gem 'puffing-billy', '~> 0.11.1'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
   gem 'stripe-ruby-mock', '~> 2.5.3', require: 'stripe_mock'
