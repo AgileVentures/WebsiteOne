@@ -1,6 +1,6 @@
 module PaymentSource
 
-  class PaymentSource < ActiveRecord::Base
+  class PaymentSource < ApplicationRecord
     belongs_to :subscription
   end
 
