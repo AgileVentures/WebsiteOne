@@ -479,7 +479,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    recaptcha (4.6.5)
+    recaptcha (4.6.6)
       json
     redcarpet (3.4.0)
     ref (2.0.0)
@@ -707,7 +707,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
-  puffing-billy
+  puffing-billy (~> 0.11.1)
   puma
   rack-cache
   rack-timeout
