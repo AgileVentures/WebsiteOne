@@ -1,4 +1,4 @@
-class Project < ActiveRecord::Base
+class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
 

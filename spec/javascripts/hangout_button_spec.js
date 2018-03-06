@@ -113,7 +113,7 @@ describe('hangouts', function(){
   describe('Hangouts module for WebsiteOne', function() {
 
     beforeEach(function() {
-      reloadScript('hangout_button.js');
+      reloadScript('hangout_button');
     });
 
     it('defines Hangouts module for WebsiteOne', function() {
