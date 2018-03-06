@@ -707,7 +707,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
-  puffing-billy
+  puffing-billy (~> 0.11.1)
   puma
   rack-cache
   rack-timeout
