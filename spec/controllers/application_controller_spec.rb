@@ -1,25 +1,25 @@
 require 'spec_helper'
 
-describe ApplicationController do 
+describe ApplicationController do
   controller do
     def events
-      render :text => ""
-    end 
+      render plain: ''
+    end
     def new
-      render :text => ""
-    end 
+      render plain: ''
+    end
     def new_user
-      render :text => ""
-    end 
+      render plain: ''
+    end
     def new_password
-      render :text => ""
-    end 
+      render plain: ''
+    end
     def signout
-      render :text => ""
-    end 
+      render plain: ''
+    end
     def edit_password
-      render :text => ""
-    end 
+      render plain: ''
+    end
   end
 
   before do
@@ -45,7 +45,7 @@ describe ApplicationController do
       expect(session[:previous_url]).to_not eq('/events')
     end 
     it "should not store the path in the session if an xhr request" do
-      xhr :get,  :events
+      get :events, xhr: true
       expect(session[:previous_url]).to_not eq('/events')
     end 
     it "should not store the path in the session if a delete request" do

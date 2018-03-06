@@ -1,6 +1,6 @@
 require 'open-uri'
 
-class CommitCount < ActiveRecord::Base
+class CommitCount < ApplicationRecord
   belongs_to :user
   belongs_to :project
 

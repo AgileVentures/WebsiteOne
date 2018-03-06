@@ -1,4 +1,4 @@
-class Follow < ActiveRecord::Base
+class Follow < ApplicationRecord
 
   extend ActsAsFollower::FollowerLib
   extend ActsAsFollower::FollowScopes

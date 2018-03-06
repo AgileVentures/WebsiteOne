@@ -69,7 +69,7 @@ class DocumentsController < ApplicationController
     if @document.update_attributes(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
       @document.create_activity :update, owner: current_user
-      render text: '' # So mercury knows it is successful
+      render html: ''
     end
   end
 

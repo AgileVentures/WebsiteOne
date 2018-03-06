@@ -18,7 +18,7 @@ describe('Affixed Navbar', function () {
         hasClass = spyOn($.prototype, 'hasClass').and.callThrough();
         scroll = spyOn($.prototype, 'scroll').and.callThrough();
 
-        reloadScript('affix_navbar.js');
+        reloadScript('affix_navbar');
         onScrollSpy = spyOn(WebsiteOne.AffixedNavbar, 'onScroll').and.callThrough();
         $(document).trigger('page:load');
     });
