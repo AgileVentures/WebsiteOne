@@ -1,4 +1,4 @@
-class StaticPage < ActiveRecord::Base
+class StaticPage < ApplicationRecord
   include ActAsPage
 
   #Sampriti: Used to generate paths, both for routes and testing. DO NOT DELETE
