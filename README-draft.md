@@ -19,7 +19,7 @@ See our [Contribution guidelines](CONTRIBUTING.md)
 
 ## History
 
-in 2011 Sam Joseph had the idea for an online pairing community where everyone worked together to use the agile development methodology to deliver solutions to IT charities and non-profits.  Thomas Ochman joined as project manager and led the development of the WebSiteOne codebase with Bryan Yap serving as technical lead.  Initialy Sam was the notional "client", not getting involved in the tech development, and many different volunteers contributed code.  During this phase the events, projects and user systems were developed.  There was also a blog like articles system.  Yaro Appletov led a tight integration with Google hangouts to allow recordable hangouts to be launched from the site and report back telemetry.
+in 2011, inspired by Dave Patterson and Armando Fox's UCBerkeley Software Engineering Massive Open Online Class (MOOC),  Sam Joseph had the idea for a global online pairing community where everyone worked together to use the agile development methodology to deliver solutions to IT charities and non-profits.  Thomas Ochman joined as project manager and led the development of the WebSiteOne codebase with Bryan Yap serving as technical lead.  Initialy Sam was the notional "client", not getting involved in the tech development, and many different volunteers contributed code.  During this phase the events, projects and user systems were developed.  There was also a blog like articles system.  Yaro Appletov led a tight integration with Google hangouts to allow recordable hangouts to be launched from the site and report back telemetry.
 
 Later Raoul Diffou joined to take over as project manager as Thomas and Bryan had less and less time for the project.  Sam took over the technical lead role in 2016 and also stared pairing with Raoul as project manager.  Later in 2016 as Raoul had less and less time Sam became the sole project manager.  During the course of 2016 Sam and long time AV contributor Michael revised the events framework, and replaced the articles system with a Premium payments framework intended to help ensure AV was sustainable into the future.  In 2017 Google withdrew their Hangouts API breaking various functionality in the site.  Sam and Lokesh Sharma replaced the API integration with manual updates, and Sam pulled in the agile-bot node microservice so that WSO now communicates directly with Slack to alert members about new online meetings and their recordings.
 
@@ -29,7 +29,7 @@ Later Raoul Diffou joined to take over as project manager as Thomas and Bryan ha
   * We try to work from user stories in regular sprints, offer daily standups, and get regular feedback from end users.  We try to reflect regularly on our process and experiment with incremental changes to how we get things done.
 * Behaviour Driven Development (BDD)
   - We use Cucumber and RSpec testing tools that describe the behaviours of the system and its units
-  - We try to work outside in, starting with acceptance tests, dropping to unit tests and then writing application code
+  - We try to work outside in, starting with acceptance tests, dropping to integration tests, then unit tests and then writing application code
   - We do spike application code occasionally to work out what's going on, but then either throw away the spike, or make sure all our tests break before wrapping the application code in tests (by strategically or globally breaking things)
   - Where possible we go for declarative over imperative scenarios in our acceptance tests, trying to boil down the high level features to be easily comprehensible in terms of user intention
 * Domain Driven Design (DDD)
@@ -51,7 +51,32 @@ Later Raoul Diffou joined to take over as project manager as Thomas and Bryan ha
   * We did not write a spec, as this would have involved a view spec which we don't feel add any value
   * Here's the [code](app/views/events/show.html.erb#L38) that implemented the feature
   
+:construction: UNDER CONSTRUCTION :construction:  
+  
 * An example of a new feature involving a database change
   ...
 * An example of a bug fix
   ...
+  
+  
+Services and Metrics
+-----------------------
+
+| Service                  | Status                                                                                                                                                               |
+| ------------------------ | -----------------                                                                                                                                                    |
+| *Test coverage*          |                                                                                                                                                                      |
+| Coveralls                | [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.svg?branch=develop)](https://coveralls.io/r/AgileVentures/WebsiteOne?branch=develop)   |
+| *Continuous integration* |                                                                                                                                                                      |
+| Semaphore CI (master)    | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/318335/badge.png)](https://semaphoreapp.com/agileventures/websiteone) |
+| Semaphore CI (staging)   | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/317640/badge.png)](https://semaphoreapp.com/agileventures/websiteone) |
+| Semaphore CI (develop)   | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/292874/badge.png)](https://semaphoreapp.com/agileventures/websiteone) |
+| *Dependencies*           |                                                                                                                                                                      |
+| Gemnasium                | [![Dependency Status](https://gemnasium.com/AgileVentures/WebsiteOne.png)](https://gemnasium.com/AgileVentures/WebsiteOne)                                           |
+| Code quality             |                                                                                                                                                                      |
+| CodeClimate              | [![CodeClimate](https://codeclimate.com/github/AgileVentures/WebsiteOne.png)](https://codeclimate.com/github/AgileVentures/WebsiteOne)                               |
+| *Deploys*                |                                                                                                                                                                      |
+| DevelopServer            | [websiteone-develop.herokuapp.com](http://websiteone-develop.herokuapp.com/)                                                                                         |
+| StagingServer            | [websiteone-staging.herokuapp.com](http://websiteone-staging.herokuapp.com/)                                                                                         |
+| ProductionServer         | [agileventures.org][application]                                                                                                                                     |
+| *Project management*     |                                                                                                                                                                      |
+| Waffle                   | [WebsiteOne][waffle]                                                                                                                                                 |
