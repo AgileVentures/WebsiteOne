@@ -1,4 +1,4 @@
-class AddCreatedByToProjects < ActiveRecord::Migration
+class AddCreatedByToProjects < ActiveRecord::Migration[4.2]
   def self.up
     add_column :projects, :user_id, :integer
     add_index :projects, :user_id

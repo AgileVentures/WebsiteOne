@@ -13,11 +13,11 @@ describe DocumentsController do
     #end
     #
     #it "routes to #show" do
-    #  expect(get("/documents/1")).to route_to("documents#show", :id => "1")
+    #  expect(get("/documents/1")).to route_to("documents#show", id: "1")
     #end
     #
     #it "routes to #edit" do
-    #  expect(get("/documents/1/edit")).to route_to("documents#edit", :id => "1")
+    #  expect(get("/documents/1/edit")).to route_to("documents#edit", id: "1")
     #end
     #
     #it "routes to #create" do
