@@ -1,4 +1,4 @@
-class AddProjectAndHostToHangout < ActiveRecord::Migration
+class AddProjectAndHostToHangout < ActiveRecord::Migration[4.2]
   def change
     add_column :hangouts, :project_id, :integer
     add_column :hangouts, :user_id, :integer
