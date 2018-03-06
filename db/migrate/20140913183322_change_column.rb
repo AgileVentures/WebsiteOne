@@ -1,4 +1,4 @@
-class ChangeColumn < ActiveRecord::Migration
+class ChangeColumn < ActiveRecord::Migration[4.2]
   def change
     change_column :projects, :pitch, :text
   end

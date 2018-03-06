@@ -1,4 +1,4 @@
-class CreateAuthentications < ActiveRecord::Migration
+class CreateAuthentications < ActiveRecord::Migration[4.2]
   def change
     create_table :authentications do |t|
       t.integer :user_id, null: false
