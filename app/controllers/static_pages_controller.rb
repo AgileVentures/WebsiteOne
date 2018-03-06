@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :letsencrypt, :loaderio]
+  before_action :authenticate_user!, except: [:show, :letsencrypt, :loaderio]
 
   def loaderio
     render plain: ENV['LOADERIO_TOKEN'] || "loaderio-296a53739de683b99e3a2c4d7944230f", layout: false
@@ -30,9 +30,9 @@ class StaticPagesController < ApplicationController
     @page = StaticPage.friendly.find(params[:id])
     if @page.update_attributes(title: params[:content][:static_page_title][:value],
                                    body: params[:content][:static_page_body][:value])
-      render text: '' # So mercury knows it is successful
+      render html: ''
     else
-      render nothing: true
+      render html: ''
     end
   end
 
