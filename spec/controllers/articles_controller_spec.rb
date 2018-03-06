@@ -16,7 +16,7 @@ describe ArticlesController do
     it 'should render the index template for all possible paths' do
       get :index
       expect(response).to render_template :index
-      get :index, tag: 'Javascript'
+      get :index, params: { tag: 'Javascript' }
       expect(response).to render_template :index
     end
 
@@ -31,7 +31,7 @@ describe ArticlesController do
       expect(Article).to receive(:tagged_with).with('Ruby')
       Article.stub_chain("tagged_with.order").and_return(@ruby_rails_articles)
       @ruby_rails_articles.stub(:includes).and_return(@ruby_rails_articles)
-      get :index, tag: 'Ruby'
+      get :index, params: { tag: 'Ruby' }
       expect(assigns(:articles)).to eq @ruby_rails_articles
     end
   end
@@ -44,7 +44,7 @@ describe ArticlesController do
     end
 
     it 'should render the show template' do
-      get :show, id: @article.friendly_id
+      get :show, params: { id: @article.friendly_id }
       expect(response).to render_template :show
     end
 
@@ -52,16 +52,16 @@ describe ArticlesController do
       dummy = Object.new
       expect(Article).to receive(:friendly).and_return(dummy)
       expect(dummy).to receive(:find).with(@article.friendly_id).and_return(@article)
-      get :show, id: @article.friendly_id
+      get :show, params: { id: @article.friendly_id }
     end
 
     it 'should assign the requested article to @article' do
-      get :show, id: @article.friendly_id
+      get :show, params: { id: @article.friendly_id }
       expect(assigns(:article)).to eq @article
     end
 
     it 'should assign the requested article author to @author' do
-      get :show, id: @article.friendly_id
+      get :show, params: { id: @article.friendly_id }
       expect(assigns(:author)).to eq @author
     end
   end
@@ -90,7 +90,7 @@ describe ArticlesController do
       dummy = double('Article')
       expect(Article).to receive(:new).and_return(dummy)
       expect(dummy).to receive(:tag_list=).with([ tag ])
-      get :new, tag: tag
+      get :new, params: { tag: tag }
     end
   end
 
@@ -103,18 +103,18 @@ describe ArticlesController do
 
     it 'should require authentication' do
       expect(controller).to receive(:authenticate_user!)
-      get :edit, id: @article.friendly_id
+      get :edit, params: { id: @article.friendly_id }
     end
 
     it 'should search for the article using friendly ids' do
       dummy = Object.new
       expect(Article).to receive(:friendly).and_return(dummy)
       expect(dummy).to receive(:find).with(@article.friendly_id)
-      get :edit, id: @article.friendly_id
+      get :edit, params: { id: @article.friendly_id }
     end
 
     it 'should assign the article to be edited to @article' do
-      get :edit, id: @article.friendly_id
+      get :edit, params: { id: @article.friendly_id }
       expect(assigns(:article)).to eq @article
     end
   end
@@ -131,7 +131,7 @@ describe ArticlesController do
 
     it 'should require authentication' do
       expect(controller).to receive(:authenticate_user!)
-      post :create, valid_params
+      post :create, params:valid_params
     end
 
     it 'should create the article through the current user' do
@@ -139,18 +139,18 @@ describe ArticlesController do
       dummy = Object.new
       expect(@user).to receive(:articles).and_return(dummy)
       expect(dummy).to receive(:build).and_return(@article)
-      post :create, valid_params
+      post :create, params:valid_params
     end
 
     it 'should be successful for requests with valid params' do
-      post :create, valid_params
+      post :create, params:valid_params
       expect(flash[:notice]).to match /^Successfully created the article/
       # Bryan: assumes title is equal to the friendly id
       expect(response).to redirect_to article_path(@article)
     end
 
     it 'should receive :create_activity with :create' do
-      post :create, valid_params
+      post :create, params:valid_params
       expect(@article).to have_received(:create_activity).with(:create, {owner: @user})
     end
 
@@ -158,7 +158,7 @@ describe ArticlesController do
       expect(@article).to receive(:save).and_return(false)
       error_message = 'error!'
       @article.stub_chain('errors.full_messages.join').and_return(error_message)
-      post :create, valid_params
+      post :create, params:valid_params
       expect(flash.now[:alert]).to eq error_message
       expect(response).to render_template :new
     end
@@ -177,16 +177,16 @@ describe ArticlesController do
 
     it 'should require authentication' do
       expect(controller).to receive(:authenticate_user!)
-      post :update, valid_update_params
+      post :update, params: valid_update_params
     end
 
     it 'should receive :create_activity with :update' do
-      post :update, valid_update_params
+      post :update, params: valid_update_params
       expect(@article).to have_received(:create_activity).with(:update, {owner: @user})
     end
 
     it 'should redirect the user back to the show page with a flash message on success' do
-      post :update, valid_update_params
+      post :update, params: valid_update_params
       expect(flash[:notice]).to match /^Successfully updated the article/
       expect(response).to redirect_to article_path(@article)
     end
@@ -195,7 +195,7 @@ describe ArticlesController do
       error_messages = 'error!'
       expect(@article).to receive(:update_attributes).and_return(false)
       @article.stub_chain('errors.full_messages.join').and_return(error_messages)
-      post :update, valid_update_params
+      post :update, params: valid_update_params
       expect(flash.now[:alert]).to eq error_messages
       expect(response).to render_template :edit
     end
@@ -209,16 +209,16 @@ describe ArticlesController do
 
     it 'should require authentication' do
       expect(controller).to receive(:authenticate_user!)
-      patch :preview, @params
+      patch :preview, params: @params
     end
 
     it 'should render the preview template' do
-      patch :preview, @params
+      patch :preview, params: @params
       expect(response).to render_template :preview
     end
 
     it 'should assign a new article with the given parameters' do
-      patch :preview, @params
+      patch :preview, params: @params
       expect(assigns(:article)).to be_a(Article)
 
       @params[:article].each_pair do |k, v|
@@ -229,7 +229,7 @@ describe ArticlesController do
     it 'should assign default parameters to the preview article' do
       @user = double('User', id: 1)
       controller.stub(:current_user).and_return(@user)
-      patch :preview, @params
+      patch :preview, params: @params
       expect(assigns(:author)).to eq @user
       expect(assigns(:article).created_at).to_not be_nil
       expect(assigns(:article).created_at).to_not be_nil
