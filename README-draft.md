@@ -77,6 +77,6 @@ Services and Metrics
 | *Deploys*                |                                                                                                                                                                      |
 | DevelopServer            | [websiteone-develop.herokuapp.com](http://websiteone-develop.herokuapp.com/)                                                                                         |
 | StagingServer            | [websiteone-staging.herokuapp.com](http://websiteone-staging.herokuapp.com/)                                                                                         |
-| ProductionServer         | [agileventures.org][application]                                                                                                                                     |
+| ProductionServer         | [https://www.agileventures.org/](https://www.agileventures.org/)                                                                                                                                     |
 | *Project management*     |                                                                                                                                                                      |
-| Waffle                   | [WebsiteOne][waffle]                                                                                                                                                 |
+| Waffle                   | [WebsiteOne](waffle.io/AgileVentures/WebsiteOne/)                                                                                                                                                 |
