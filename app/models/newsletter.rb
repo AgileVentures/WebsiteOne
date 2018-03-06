@@ -1,4 +1,4 @@
-class Newsletter < ActiveRecord::Base
+class Newsletter < ApplicationRecord
   validates       :subject, :title, :body, presence: true
   after_save      :send_mailings, if: :instantly_sendable?
   before_create   :init_last_user_id

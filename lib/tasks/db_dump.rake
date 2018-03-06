@@ -5,11 +5,11 @@ namespace :db do
     task :dump => :environment do
       sql  = "SELECT * FROM %s ORDER BY ID"
       skip_tables = ["schema_info", "schema_migrations"]
-      ActiveRecord::Base.establish_connection(Rails.env)
-      (ActiveRecord::Base.connection.tables - skip_tables).each do |table_name|
+      ApplicationRecord.establish_connection(Rails.env)
+      (ApplicationRecord.connection.tables - skip_tables).each do |table_name|
         i = "000"
         File.open("#{Rails.root}/fixtures/#{table_name}.yml.new", 'w+') do |file|
-          data = ActiveRecord::Base.connection.select_all(sql % table_name)
+          data = ApplicationRecord.connection.select_all(sql % table_name)
           file.write data.inject({}) { |hash, record|
             hash["#{table_name}_#{i.succ!}"] = record
             hash

@@ -19,7 +19,7 @@ describe NewslettersController do
 
     describe "authorization" do
       it 'check_privileged' do
-        get :new, {}, valid_session
+        get :new, params: {}.merge(valid_session)
         expect(controller.current_user.email).to be_in(Settings.privileged_users.split(','))
       end
     end
@@ -27,7 +27,7 @@ describe NewslettersController do
     describe "GET index" do
       it "assigns all newsletters as @newsletters" do
         newsletter = FactoryBot.create(:newsletter)
-        get :index, {}, valid_session
+        get :index, params: {}.merge(valid_session)
         expect(assigns(:newsletters)).to eq([newsletter])
       end
     end
@@ -35,14 +35,14 @@ describe NewslettersController do
     describe "GET show" do
       it "assigns the requested newsletter as @newsletter" do
         newsletter = FactoryBot.create(:newsletter)
-        get :show, {:id => newsletter.to_param}, valid_session
+        get :show, params: { id: newsletter.to_param }.merge(valid_session)
         expect(assigns(:newsletter)).to eq(newsletter)
       end
     end
 
     describe "GET new" do
       it "assigns a new newsletter as @newsletter" do
-        get :new, {}, valid_session
+        get :new, params: {}.merge(valid_session)
         expect(assigns(:newsletter)).to be_a_new(Newsletter)
       end
 
@@ -51,7 +51,7 @@ describe NewslettersController do
     describe "GET edit" do
       it "assigns the requested newsletter as @newsletter" do
         newsletter = FactoryBot.create(:newsletter)
-        get :edit, {:id => newsletter.to_param}, valid_session
+        get :edit, params: { id: newsletter.to_param }.merge(valid_session)
         expect(assigns(:newsletter)).to eq(newsletter)
       end
     end
@@ -60,18 +60,18 @@ describe NewslettersController do
       describe "with valid params" do
         it "creates a new Newsletter" do
           expect {
-            post :create, {:newsletter => valid_attributes}, valid_session
+            post :create, params: { newsletter: valid_attributes}.merge(valid_session)
           }.to change(Newsletter, :count).by(1)
         end
 
         it "assigns a newly created newsletter as @newsletter" do
-          post :create, {:newsletter => valid_attributes}, valid_session
+          post :create, params: { newsletter: valid_attributes}.merge(valid_session)
           expect(assigns(:newsletter)).to be_a(Newsletter)
           expect(assigns(:newsletter)).to be_persisted
         end
 
         it "redirects to the created newsletter" do
-          post :create, {:newsletter => valid_attributes}, valid_session
+          post :create, params: { newsletter: valid_attributes}.merge(valid_session)
           expect(response).to redirect_to(Newsletter.last)
         end
       end
@@ -79,13 +79,13 @@ describe NewslettersController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved newsletter as @newsletter" do
           Newsletter.any_instance.stub(:save).and_return(false)
-          post :create, {:newsletter => { "title" => "invalid value" }}, valid_session
+          post :create, params: { newsletter: { "title" => "invalid value" } }.merge(valid_session)
           expect(assigns(:newsletter)).to be_a_new(Newsletter)
         end
 
         it "re-renders the 'new' template" do
           Newsletter.any_instance.stub(:save).and_return(false)
-          post :create, {:newsletter => { "title" => "invalid value" }}, valid_session
+          post :create, params: { newsletter: { "title" => "invalid value" } }.merge(valid_session)
           expect(response).to render_template("new")
         end
       end
@@ -96,18 +96,18 @@ describe NewslettersController do
         it "updates the requested newsletter" do
           newsletter = FactoryBot.create(:newsletter)
           expect_any_instance_of(Newsletter).to receive(:update).with({ "title" => "MyString" })
-          put :update, {:id => newsletter.to_param, :newsletter => { "title" => "MyString" }}, valid_session
+          put :update, params: { id: newsletter.to_param, newsletter: { "title" => "MyString" } }.merge(valid_session)
         end
 
         it "assigns the requested newsletter as @newsletter" do
           newsletter = FactoryBot.create(:newsletter)
-          put :update, {:id => newsletter.to_param, :newsletter => valid_attributes}, valid_session
+          put :update, params: { id: newsletter.to_param, newsletter: valid_attributes }.merge(valid_session)
           expect(assigns(:newsletter)).to eq(newsletter)
         end
 
         it "redirects to the newsletter" do
           newsletter = FactoryBot.create(:newsletter)
-          put :update, {:id => newsletter.to_param, :newsletter => valid_attributes}, valid_session
+          put :update, params: { id: newsletter.to_param, newsletter: valid_attributes }.merge(valid_session)
           expect(response).to redirect_to(newsletter)
         end
       end
@@ -116,14 +116,14 @@ describe NewslettersController do
         it "assigns the newsletter as @newsletter" do
           newsletter = FactoryBot.create(:newsletter)
           Newsletter.any_instance.stub(:save).and_return(false)
-          put :update, {:id => newsletter.to_param, :newsletter => { "title" => "invalid value" }}, valid_session
+          put :update, params: { id: newsletter.to_param, newsletter: { "title" => "invalid value" } }.merge(valid_session)
           expect(assigns(:newsletter)).to eq(newsletter)
         end
 
         it "re-renders the 'edit' template" do
           newsletter = FactoryBot.create(:newsletter)
           Newsletter.any_instance.stub(:save).and_return(false)
-          put :update, {:id => newsletter.to_param, :newsletter => { "title" => "invalid value" }}, valid_session
+          put :update, params: { id: newsletter.to_param, newsletter: { "title" => "invalid value" } }.merge(valid_session)
           expect(response).to render_template("edit")
         end
       end
@@ -133,13 +133,13 @@ describe NewslettersController do
       it "destroys the requested newsletter" do
         newsletter = FactoryBot.create(:newsletter)
         expect {
-          delete :destroy, {:id => newsletter.to_param}, valid_session
+          delete :destroy, params: { id: newsletter.to_param }.merge(valid_session)
         }.to change(Newsletter, :count).by(-1)
       end
 
       it "redirects to the newsletters list" do
         newsletter = FactoryBot.create(:newsletter)
-        delete :destroy, {:id => newsletter.to_param}, valid_session
+        delete :destroy, params: { id: newsletter.to_param }.merge(valid_session)
         expect(response).to redirect_to(newsletters_url( only_path: true))
       end
     end
@@ -156,13 +156,13 @@ describe NewslettersController do
    
     describe 'authorization' do
       it 'check_privilged' do
-        get :new, {}, valid_session
+        get :new, params: {}.merge(valid_session)
         expect(controller.current_user.email).not_to be_in(Settings.privileged_users.split(','))
       end
     end
     describe "GET new" do
       it "renders status 403" do
-        get :new, {}, valid_session
+        get :new, params: {}.merge(valid_session)
         expect(response.status).to eq(403)
       end
     end
@@ -170,7 +170,7 @@ describe NewslettersController do
     describe "GET edit" do
       it "renders status 403" do
         newsletter = FactoryBot.create(:newsletter)
-        get :edit, {:id => newsletter.to_param}, valid_session
+        get :edit, params: { id: newsletter.to_param }.merge(valid_session)
         expect(response.status).to eq(403)
       end
     end
@@ -179,14 +179,14 @@ describe NewslettersController do
       it "wont delete Newsletter" do
         newsletter = FactoryBot.create(:newsletter)
         expect {
-          delete :destroy, {:id => newsletter.to_param}, valid_session
+          delete :destroy, params: { id: newsletter.to_param }.merge(valid_session)
         }.to change(Newsletter, :count).by(0)
         expect(response.status).to eq(403)
       end
       
       it "renders status 403" do
         newsletter = FactoryBot.create(:newsletter)
-        delete :destroy, {:id => newsletter.to_param}, valid_session
+        delete :destroy, params: { id: newsletter.to_param }.merge(valid_session)
         expect(response.status).to eq(403)
       end
     end
@@ -194,13 +194,13 @@ describe NewslettersController do
     describe "PUT update" do
       it "renders status 403" do
         newsletter = FactoryBot.create(:newsletter)
-        put :update, {:id => newsletter.to_param, :newsletter => { "title" => "MyString" }}, valid_session
+        put :update, params: { id: newsletter.to_param, newsletter: { "title" => "MyString" }}.merge(valid_session)
         expect(response.status).to eq(403)
       end
 
       it "displays template 403" do
         newsletter = FactoryBot.create(:newsletter)
-        put :update, {:id => newsletter.to_param, :newsletter => { "title" => "MyString" }}, valid_session
+        put :update, params: { id: newsletter.to_param, newsletter: { "title" => "MyString" }}.merge(valid_session)
         expect(response).to  render_template(:file => "#{Rails.root}/public/403.html") 
       end
     end
