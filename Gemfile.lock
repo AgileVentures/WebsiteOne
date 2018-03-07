@@ -428,15 +428,15 @@ GEM
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     public_suffix (3.0.2)
-    puffing-billy (0.11.1)
-      addressable (~> 2.4, >= 2.4.0)
+    puffing-billy (1.0.0)
+      addressable (~> 2.5)
       em-http-request (~> 1.1, >= 1.1.0)
       em-synchrony
       eventmachine (~> 1.0.4)
       eventmachine_httpserver
       http_parser.rb (~> 0.6.0)
       multi_json
-    puma (3.11.2)
+    puma (3.11.3)
     rack (2.0.4)
     rack-cache (1.7.1)
       rack (>= 0.4)
@@ -710,7 +710,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
-  puffing-billy (~> 0.11.1)
+  puffing-billy (~> 1.0.0)
   puma
   rack-cache
   rack-timeout
