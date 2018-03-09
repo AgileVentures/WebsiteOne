@@ -33,14 +33,14 @@ describe EventInstancePresenter do
     end
 
     it 'returns an array of participants' do
-      participant = FactoryBot.create(:user, gplus: hangout.participants.first.last['person']['id'])
+      participant = FactoryBot.create(:user, gplus: hangout.participants.to_unsafe_hash.first.last['person']['id'])
 
       expect(presenter.participants.count).to eq(2)
       expect(presenter.participants.first).to eq(participant)
     end
 
     it 'do not show the host in the list of participants' do
-      FactoryBot.create(:user, gplus: hangout.participants.first.last['person']['id'])
+      FactoryBot.create(:user, gplus: hangout.participants.to_unsafe_hash.first.last['person']['id'])
       expect(presenter.participants).not_to include(hangout.user)
     end
 
