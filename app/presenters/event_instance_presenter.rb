@@ -61,7 +61,7 @@ class EventInstancePresenter < BasePresenter
   end
 
   def participants_as_parameters(participants)
-    participants.to_unsafe_hash.map{ |participant| process_users(participant) }.compact
+    participants.to_unsafe_h.map{ |participant| process_users(participant) }.compact
   end
 
   def participants_as_array(participants)
