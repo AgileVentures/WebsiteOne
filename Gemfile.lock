@@ -350,6 +350,8 @@ GEM
     lumberjack (1.0.12)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
+    medium-editor-rails (2.3.1)
+      railties (>= 3.0)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.9.0)
@@ -688,6 +690,7 @@ DEPENDENCIES
   kaminari
   launchy
   local_time (~> 2.0)
+  medium-editor-rails
   mercury-rails!
   nearest_time_zone
   newrelic_rpm

@@ -33,6 +33,7 @@
 //= require moment.min
 //= require moment-timezone-with-data-2010-2020
 //= require chatlio
+//= require static_pages
 //= require cocoon
 //= require lolex
 

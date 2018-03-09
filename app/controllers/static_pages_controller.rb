@@ -15,6 +15,17 @@ class StaticPagesController < ApplicationController
     @ancestry = @page.self_and_ancestors.map(&:title).reverse
   end
 
+  def edit
+    return false if redirect_email_blunder
+    @page = StaticPage.friendly.find(get_page_id(params[:id]))
+    @ancestry = @page.self_and_ancestors.map(&:title).reverse
+  end
+
+  def update
+    @page = StaticPage.friendly.find(params[:id])
+
+  end
+
   def mercury_update
     @page = StaticPage.friendly.find(params[:id])
     if @page.update_attributes(title: params[:content][:static_page_title][:value],
