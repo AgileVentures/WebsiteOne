@@ -52,5 +52,22 @@ describe GithubCommitsJob do
         GithubCommitsJob.run
       end
     end
+    
+    context 'when empty project is present' do
+      let(:project_with_empty_repo) { @project_with_empty_repo.reload }
+      
+      before do
+        @project_with_empty_repo = FactoryGirl.create(:project, github_url: 'https://github.com/AgileVentures/empty_project')
+        GithubCommitsJob.run
+      end
+      
+      it 'stores commit count for project with epmty repo' do
+        expect(project_with_empty_repo.commit_counts.count).to eq(0)
+      end
+      
+      it 'stores total commit count for project with epmty repo' do
+        expect(project_with_empty_repo.commit_count).to eq(0)
+      end
+    end
   end
 end
