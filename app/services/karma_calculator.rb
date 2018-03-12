@@ -63,7 +63,7 @@ class KarmaCalculator
   end
 
   def more_than_one?(event_instance)
-    !event_instance.participants.nil? && event_instance.participants.values.count > 1
+    !event_instance.participants.nil? && event_instance.participants.to_unsafe_h.values.count > 1
   end
 
   def activity # 6
