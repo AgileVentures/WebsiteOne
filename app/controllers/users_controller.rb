@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   layout 'layouts/user_profile_layout', only: [:show]
 
-  skip_before_filter :verify_authenticity_token, :only => [:index, :show]
+  skip_before_action :verify_authenticity_token, :only => [:index, :show]
 
   before_action :get_user, only: [:show, :destroy, :add_status]
   before_action :get_user, only: [:show, :add_status]
-  before_filter :authenticate_user!, only: [:add_status]
+  before_action :authenticate_user!, only: [:add_status]
 
   def index
     @users = users
@@ -33,18 +33,17 @@ class UsersController < ApplicationController
         message_params['name'].blank? or
         message_params['email'].blank? or
         message_params['message'].blank?
-      redirect_to :back, alert: 'Please fill in Name, Email and Message field'
+      redirect_back fallback_location: root_path, alert: 'Please fill in Name, Email and Message field'
     elsif !User.find(message_params['recipient_id']).display_hire_me
-      redirect_to :back, alert: 'User has disabled hire me button'
+      redirect_back fallback_location: root_path, alert: 'User has disabled hire me button'
     elsif !Devise.email_regexp.match(message_params['email'])
-      redirect_to :back, alert: 'Please give a valid email address'
+      redirect_back fallback_location: root_path, alert: 'Please give a valid email address'
     elsif !message_params['fellforit'].blank?
       redirect_to :root, notice: 'Form not submitted. Are you human?'
     elsif Mailer.hire_me_form(User.find(message_params['recipient_id']), message_params).deliver_now
-      redirect_to :back, notice: 'Your message has been sent successfully!'
-
+      redirect_back fallback_location: root_path, notice: 'Your message has been sent successfully!'
     else
-      redirect_to :back, alert: 'Your message has not been sent!'
+      redirect_back fallback_location: root_path, alert: 'Your message has not been sent!'
     end
   end
 
@@ -66,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   def add_status
-    unless params[:user][:status].blank?
+    if user_has_status(params)
       @user.status.create({status: (params[:user][:status]), user_id: @user})
       flash[:notice] = 'Your status has been set'
       redirect_to user_path(@user)
@@ -76,8 +75,11 @@ class UsersController < ApplicationController
     end
   end
 
-
   private
+
+  def user_has_status(params)
+    params.has_key?(:user) && params[:user].has_key?(:status)
+  end
 
   def users
     User.page(params[:page]).per(15)
@@ -103,7 +105,7 @@ class UsersController < ApplicationController
 
   def set_timezone_offset_range(filter_params)
     unless filter_params[:timezone_filter].blank?
-      if offset = @current_user.try(:timezone_offset)
+      if offset = current_user.try(:timezone_offset)
         case filter_params[:timezone_filter]
           when 'In My Timezone'
             filter_params[:timezone_filter] = [offset, offset]

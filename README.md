@@ -1,70 +1,59 @@
-WebsiteOne
-==========
-[oo-sw]: http://opensource.org/osd
-[waffle]: https://waffle.io/AgileVentures/WebsiteOne
-[application]: http://www.agileventures.org/
-[code-climate]: https://codeclimate.com/github/AgileVentures/WebsiteOne
-[support]: http://www.agileventures.org/
-[about-us]: http://www.agileventures.org/about-us
-[members]: http://www.agileventures.org/users
-[premium api]: http://www.agileventures.org/apipie/1.0/subscriptions/index.html
+[![Build Status](https://semaphoreci.com/api/v1/agileventures/websiteone/branches/1058_add_google_calendar_link/shields_badge.svg)](https://semaphoreci.com/agileventures/websiteone) [![Maintainability](https://api.codeclimate.com/v1/badges/8bbffaef68e73422ca40/maintainability)](https://codeclimate.com/github/AgileVentures/WebsiteOne/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8bbffaef68e73422ca40/test_coverage)](https://codeclimate.com/github/AgileVentures/WebsiteOne/test_coverage)
 
+# AgileVentures WebSiteOne
 
-#### A website for [Agile Ventures][application] - a platform for online collaboration and crowdsourced project development.
-<a href='https://pledgie.com/campaigns/28766'><img alt='Click here to lend your support to: Help us #CodeForGood and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/28766.png?skin_name=chrome' border='0' ></a>
-<!--[![AgileVentures WebsiteOne](http://img.youtube.com/vi/kjDehcx6Igk/0.jpg)](http://www.youtube.com/watch?v=kjDehcx6Igk)-->
+This [Ruby on Rails](http://rubyonrails.org/) app powers the [AgileVentures main developer site](http://agileventures.org/), showing lists of active [projects](https://www.agileventures.org/projects), [members](https://www.agileventures.org/users), [upcoming events](https://www.agileventures.org/events), [past event recordings](https://www.agileventures.org/scrums), as well as all the machinery for [Premium membership payments](https://www.agileventures.org/pricing).
 
+## Installation
 
-Agile Ventures is a non-profit organization dedicated to crowdsourced learning and project development. We run a [project incubator](http://www.agileventures.org/projects) that stimulates and supports development of social innovations, [open source projects and free software][oo-sw]. But first and foremost, we are a [place for learning][about-us] and personal development with [members][members] from across the world with various levels of competence and experience in software development.
+See the [Project Setup](docs/project_setup.md) documentation
 
-We are proudly using Agile methods and Ruby on Rails as the framework to deliver well tested and solid software.
+## Usage
 
-The principal organization behind this project is AgileVentures, a UK based charity.
+:construction: UNDER CONSTRUCTION :construction:
 
+See the site [How To](docs/how_to_use_the_site.md) documentation
 
- Service                 |  Status      |
-|------------------------ | ----------------- |
-| *Test coverage*         |                  |
-| Coveralls                |  [![Coverage Status](https://coveralls.io/repos/AgileVentures/WebsiteOne/badge.svg?branch=develop)](https://coveralls.io/r/AgileVentures/WebsiteOne?branch=develop)   |
-| *Continuous integration* |    |
-| Semaphore CI (master)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/318335/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
-| Semaphore CI (staging)       | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/317640/badge.png)](https://semaphoreapp.com/agileventures/websiteone)|
-| Semaphore CI (develop)      | [![Build Status](https://semaphoreapp.com/api/v1/projects/c32396d1-6630-46b6-9eb4-4243766f1ec0/292874/badge.png)](https://semaphoreapp.com/agileventures/websiteone)  |
-| *Dependencies*          |         |
-| Gemnasium               |[![Dependency Status](https://gemnasium.com/AgileVentures/WebsiteOne.png)](https://gemnasium.com/AgileVentures/WebsiteOne)  |
-| Code quality            |         |
-| CodeClimate             | [![CodeClimate](https://codeclimate.com/github/AgileVentures/WebsiteOne.png)](https://codeclimate.com/github/AgileVentures/WebsiteOne) |
-|*Deploys*                |         |
-| DevelopServer           | [websiteone-develop.herokuapp.com](http://websiteone-develop.herokuapp.com/) |
-| StagingServer           |[websiteone-staging.herokuapp.com](http://websiteone-staging.herokuapp.com/)  |
-| ProductionServer        | [agileventures.org][application]  |
-|*Project management*       |         |
-|Waffle          |[WebsiteOne][waffle]|
+## Contributing
 
-## Dependencies
+See our [Contribution guidelines](CONTRIBUTING.md)
 
-The tests requires `phantomjs` to run the cucumber tests, refer to the [Poltergeist](https://github.com/jonleighton/poltergeist)
+## History
 
+in 2011, inspired by Dave Patterson and Armando Fox's UCBerkeley Software Engineering Massive Open Online Class (MOOC),  Sam Joseph had the idea for a global online pairing community where everyone worked together to use the agile development methodology to deliver solutions to IT charities and non-profits.  Thomas Ochman joined as project manager and led the development of the WebSiteOne codebase with Bryan Yap serving as technical lead.  Initialy Sam was the notional "client", not getting involved in the tech development, and many different volunteers contributed code.  During this phase the events, projects and user systems were developed.  There was also a blog like articles system.  Yaro Appletov led a tight integration with Google hangouts to allow recordable hangouts to be launched from the site and report back telemetry.
 
+Later Raoul Diffou joined to take over as project manager as Thomas and Bryan had less and less time for the project.  Sam took over the technical lead role in 2016 and also stared pairing with Raoul as project manager.  Later in 2016 as Raoul had less and less time Sam became the sole project manager.  During the course of 2016 Sam and long time AV contributor Michael revised the events framework, and replaced the articles system with a Premium payments framework intended to help ensure AV was sustainable into the future.  In 2017 Google withdrew their Hangouts API breaking various functionality in the site.  Sam and Lokesh Sharma replaced the API integration with manual updates, and Sam pulled in the agile-bot node microservice so that WSO now communicates directly with Slack to alert members about new online meetings and their recordings.
 
-## <a name="contributing"></a>Contributing
-In the spirit of [open source software][oo-sw], **everyone** is encouraged to help
-improve this project.
+## Approaches
 
+* Agile Development
+  * We try to work from user stories in regular sprints, offer daily standups, and get regular feedback from end users.  We try to reflect regularly on our process and experiment with incremental changes to how we get things done.
+* Behaviour Driven Development (BDD)
+  - We use Cucumber and RSpec testing tools that describe the behaviours of the system and its units
+  - We try to work outside in, starting with acceptance tests, dropping to integration tests, then unit tests and then writing application code
+  - We do spike application code occasionally to work out what's going on, but then either throw away the spike, or make sure all our tests break before wrapping the application code in tests (by strategically or globally breaking things)
+  - Where possible we go for declarative over imperative scenarios in our acceptance tests, trying to boil down the high level features to be easily comprehensible in terms of user intention
+* Domain Driven Design (DDD)
+  - Sometimes we switch to inside out, trying to adjust the underlying entity schema to better represent the domain model
+* Self-documenting code
+  - We prefer executable documentation (tests) and relatively short methods where the method and variable names effectively document the code
 
-Here are some ways *you* can contribute:
+## Reading material
 
-* by using the [application][application]
-* by [reporting][waffle] bugs
-* by [suggesting new features][waffle]
-* by writing code (**no patch is too small**: fix typos, add comments, clean up
-  inconsistent whitespace)
-* by [refactoring][waffle] code
-* by closing [issues][waffle]
-* by [reviewing code][code-climate]
+* [Imperative vs Declarative Cucumber](http://fasteragile.com/blog/2015/01/19/declarative-user-stories-translate-to-good-cucumber-features/)
+* [JavaScript Acceptance test trials](https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/)
 
-Eager to get started? Check out our [Project Setup](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)
-page
+## Walkthroughs
 
-Please also see our [contribution guidelines](CONTRIBUTING.md)
-
+* An example of a simple interface change
+  * Here is the original [user story](features/jitsi_meet/start_jitsi_button.feature#L1)
+  * Here is the original [cucumber scenario](features/jitsi_meet/start_jitsi_button.feature#L15)
+  * We did not write a spec, as this would have involved a view spec which we don't feel add any value
+  * Here's the [code](app/views/events/show.html.erb#L38) that implemented the feature
+  
+:construction: UNDER CONSTRUCTION :construction:  
+  
+* An example of a new feature involving a database change
+  ...
+* An example of a bug fix
+  ...

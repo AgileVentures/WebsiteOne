@@ -1,4 +1,4 @@
-class EventInstance < ActiveRecord::Base
+class EventInstance < ApplicationRecord
   self.per_page = 30
 
   belongs_to :event
