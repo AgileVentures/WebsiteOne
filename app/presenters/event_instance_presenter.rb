@@ -56,16 +56,7 @@ class EventInstancePresenter < BasePresenter
 
   def map_to_users(participants)
     participants ||= ActionController::Parameters.new({})
-    return participants_as_array(participants) if participants.is_a?(Array)
-    participants_as_parameters(participants)
-  end
-
-  def participants_as_parameters(participants)
     participants.to_unsafe_h.map{ |participant| process_users(participant) }.compact
-  end
-
-  def participants_as_array(participants)
-    participants.map{ |participant| process_users(participant) }.compact
   end
 
   def process_users(participant)

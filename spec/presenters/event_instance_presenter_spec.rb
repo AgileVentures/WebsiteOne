@@ -96,12 +96,12 @@ describe EventInstancePresenter do
     end
 
     it 'returns an array with nullUser if participant gplus_id is not found' do
-      hangout.participants = [ [ "0", { 'person' => { displayName: "Bob", 'id' => "not_registered" } } ] ]
+      hangout.participants = ActionController::Parameters.new({ '0' => { person: { displayName: 'Bob', id: 'not_registered'} } } )
       expect(presenter.participants.first.display_name).to eq('Bob')
     end
 
     it "don't throw an exception when have nil person at participants" do
-      hangout.participants = [ [ "0", { :person => nil } ] ]
+      hangout.participants = ActionController::Parameters.new( { '0' => { person: nil } } )
       expect(presenter.participants).to be_empty
     end
 
