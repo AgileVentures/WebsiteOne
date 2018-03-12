@@ -80,6 +80,11 @@ describe User, type: :model do
     expect(FactoryBot.build(:user)).to respond_to(:is_privileged?)
   end
 
+  it "should return false if 'Settings.privileged_users' is not setup" do
+    Settings.privileged_users = nil
+    expect(FactoryBot.create(:user).is_privileged?).to be false
+  end
+
   describe 'scopes' do
     context '#mail_receiver' do
       let!(:user1) { FactoryBot.create(:user, receive_mailings: false) }
@@ -414,7 +419,6 @@ describe User, type: :model do
       end
 
     end
-
 
     describe '#hangouts_attended_with_more_than_one_participant' do
       subject(:user) { FactoryBot.create(:user, :with_karma, hangouts_attended_with_more_than_one_participant: 1) }
