@@ -155,6 +155,7 @@ class User < ApplicationRecord
   end
 
   def is_privileged?
+    return false if Settings.privileged_users.blank?
     Settings.privileged_users.split(',').include?(email)
   end
 
