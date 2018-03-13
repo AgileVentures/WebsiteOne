@@ -155,6 +155,7 @@ class User < ApplicationRecord
   end
 
   def is_privileged?
+    return false if Settings.privileged_users.blank?
     Settings.privileged_users.split(',').include?(email)
   end
 
@@ -183,7 +184,7 @@ class User < ApplicationRecord
   end
 
   def number_hangouts_started_with_more_than_one_participant
-    event_instances.select { |h| h.participants != nil && h.participants.count > 1 }.count
+    event_instances.select { |h| h.participants != nil && h.participants.to_unsafe_h.count > 1 }.count
   end
 
   def activity

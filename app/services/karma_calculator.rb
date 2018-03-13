@@ -56,14 +56,14 @@ class KarmaCalculator
 
   def calculate_hangouts_attended_with_more_than_one_participant(id)
     EventInstance.all.select do |i|
-      more_than_one?(i) && i.participants.values.any? do |p|
+      more_than_one?(i) && i.participants.to_unsafe_h.values.any? do |p|
         p['person']['id'] == id
       end
     end.count
   end
 
   def more_than_one?(event_instance)
-    !event_instance.participants.nil? && event_instance.participants.values.count > 1
+    !event_instance.participants.nil? && event_instance.participants.to_unsafe_h.values.count > 1
   end
 
   def activity # 6
