@@ -94,6 +94,7 @@ module SlackService
         "projectscope": "C1NJX7KM1",
         "redeemify": "C1FQZHJJX",
         "refugee_tech": "C0GUTH7RS",
+        "rundfunk-mitbestimmen": "C5LCQSJMA",
         "secondappinion": "C03D6RUR7",
         "shf-project": "C2SBUUNRY",
         "snow-angels": "C03D6RUR7",
