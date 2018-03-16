@@ -137,8 +137,8 @@ $(function() {
         url: '/events.json',
         success: function(doc) {
           $.map(doc, function(event) {
-            event.start = moment(event.start + 'Z').zone(timezoneoffset);
-            event.end = moment(event.end + 'Z').zone(timezoneoffset);
+            event.start = moment.utc(event.start).local();
+            event.end = moment.utc(event.end).local();
             events.push(event);
           });
           callback(events);
