@@ -4,6 +4,8 @@ require 'base64'
 module GithubStaticPagesJob
   extend self
 
+  FILE_NAME_REGEX = /\w+[^\.md]/
+
   def client
     credentials = {
         client_id: Settings.github.client_id,
@@ -13,19 +15,53 @@ module GithubStaticPagesJob
   end
 
   def run
-    repo_content = client.contents('agileventures/agileventures')
-    md_pages = repo_content.select{|page| page if page[:path] =~ /\.md$/i}
-    md_pages.each do |page|
-      page_content = client.contents('agileventures/agileventures', path: page[:path])
-      markdown = Base64.decode64(page_content[:content])
-      # TODO: identify static page that is gonna get updated
-      static_page = StaticPage.find_by_slug('about-us')
-      unless static_page.nil?
-        static_page.body = MarkdownConverter.new(markdown).as_html
-        static_page.save!
-      end
-      # TODO: create a new static page if we didn't find it?
-      break
+    begin
+      repo_content = client.contents('agileventures/agileventures')
+      md_pages = repo_content.select{|page| page if page[:path] =~ /\.md$/i}
+      process_markdown_pages(md_pages)
+    rescue StandardError => e
+      ErrorLoggingService.new(e).log("Trying to get the content from the repository may have caused the issue!")
     end
+  end
+
+  private
+
+  def process_markdown_pages(md_pages)
+    md_pages.each do |page|
+      begin
+        filename = page[:path]
+        page_content = client.contents('agileventures/agileventures', path: filename)
+        markdown = Base64.decode64(page_content[:content])
+        static_page = StaticPage.find_by_slug(get_slug(filename))
+        static_page.nil? ? create_static_page(filename, markdown) : update_body(static_page, markdown)
+      rescue Encoding::UndefinedConversionError => e
+        ErrorLoggingService.new(e).log("Trying to convert this page: #{filename} caused the issue!")
+      end
+    end
+  end
+
+  def create_static_page(filename, markdown)
+    StaticPage.create(
+      title: get_title(filename),
+      body: convert_markdown_to_html(markdown),
+      slug: get_slug(filename)
+    )
+  end
+
+  def update_body(static_page, markdown)
+    static_page.body = convert_markdown_to_html(markdown)
+    static_page.save!
+  end
+
+  def get_title(filename)
+    get_slug(filename).gsub("-", " ").titleize
+  end
+
+  def get_slug(filename)
+    FILE_NAME_REGEX.match(filename)[0].downcase.gsub("_", "-")
+  end
+
+  def convert_markdown_to_html(markdown)
+    MarkdownConverter.new(markdown).as_html
   end
 end
