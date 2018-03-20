@@ -16,15 +16,22 @@ module GithubStaticPagesJob
 
   def run
     begin
-      repo_content = client.contents('agileventures/agileventures')
-      md_pages = repo_content.select{|page| page if page[:path] =~ /\.md$/i}
-      process_markdown_pages(md_pages)
+      content = get_content('agileventures/agileventures')
+      process_markdown_pages(get_markdown_pages(content))
     rescue StandardError => e
       ErrorLoggingService.new(e).log("Trying to get the content from the repository may have caused the issue!")
     end
   end
 
   private
+
+  def get_content(repository)
+    client.contents(repository)
+  end
+
+  def get_markdown_pages(content)
+    content.select{|page| page if page[:path] =~ /\.md$/i}
+  end
 
   def process_markdown_pages(md_pages)
     md_pages.each do |page|
