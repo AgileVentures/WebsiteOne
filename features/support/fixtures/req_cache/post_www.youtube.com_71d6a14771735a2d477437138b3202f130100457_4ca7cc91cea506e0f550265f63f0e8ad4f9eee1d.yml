@@ -1,0 +1,23 @@
+---
+:scope: 
+:url: https://www.youtube.com/ad_data_204
+:body: dt=1521148766759&flash=0&frm=2&u_tz=0&u_his=4&u_java=false&u_h=768&u_w=1024&u_ah=768&u_aw=1024&u_cd=32&u_nplug=0&u_nmime=0&ca_type=image&bid=ANyPxKoCCESPT6SR6P9SaelxmdNX2OlmTgbg4_DY6CFvnrUxUL743M94iy5SFVKt6khX2PQ4oCQV&bsq=0&session_token=QUFFLUhqbGVoLXpqYV9NT3VncENEaXJWWk9KNHFkYU1Qd3xBQ3Jtc0tuTmxGc1psc1ZPS3VCVXJkaVFJU0dqSER3aEhUbVltUGxLbmdkOXR6YThkTEU1OFA0Z0dmeWREd0VVN085Zk92UDd4RHNJbU1TV0YyVHJxZ2Y5dlJUby0wSkVqNU9PYm03a1diYmc1ZUdYdEJKOWcyZC13R1o3Z2J4aEFpaUVSOFhkbWNFekw0cGxZcURWTVhkdFcyWXI4YWtRU3c%3D
+:status: 204
+:method: post
+:headers:
+  Expires: Tue, 27 Apr 1971 19:44:06 EST
+  Access-Control-Allow-Credentials: 'true'
+  Content-Length: '0'
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Access-Control-Allow-Origin: https://www.youtube.com
+  X-Frame-Options: SAMEORIGIN
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: no-cache
+  Date: Thu, 15 Mar 2018 21:19:33 GMT
+  Server: YouTube Frontend Proxy
+  X-XSS-Protection: 1; mode=block
+  Alt-Svc: hq=":443"; ma=2592000; quic=51303431; quic=51303339; quic=51303335,quic=":443";
+    ma=2592000; v="41,39,35"
+  Connection: close
+:content: ''
