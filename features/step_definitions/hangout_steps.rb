@@ -193,10 +193,7 @@ Given(/^I visit the "([^"]*)" page for "([^"]*)" "([^"]*)"$/) do |action, object
   visit self.send(path.to_sym, instance)
 end
 
-Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is edited$/) do
-  expect(SlackService).not_to receive :post_hangout_notification
-  expect(SlackService).to receive(:post_yt_link)
-
+When(/^I manually edit the Youtube URL$/) do
   yt_url = 'https://youtu.be/11111111111'
   event = Event.find_by_name('Scrum')
   visit event_path(event)
@@ -204,6 +201,14 @@ Then(/^Youtube URL is posted in slack but not hangout URL when Youtube URL is ed
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
   visit event_path(event)
+end
+
+Then(/^the Youtube URL is posted in Slack$/) do
+  expect(SlackService).to have_received :post_yt_link
+end
+
+Then(/^the Hangout URL is not posted in Slack$/) do
+  expect(SlackService).not_to have_received :post_hangout_notification
 end
 
 And(/^that we're spying on the SlackService$/) do
