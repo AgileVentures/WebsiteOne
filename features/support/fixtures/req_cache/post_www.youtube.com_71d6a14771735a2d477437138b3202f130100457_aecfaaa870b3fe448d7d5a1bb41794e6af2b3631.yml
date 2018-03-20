@@ -1,0 +1,30 @@
+---
+:scope: 
+:url: https://www.youtube.com/ad_data_204
+:body: dt=1521568268923&flash=0&frm=2&u_tz=0&u_his=1&u_java=false&u_h=768&u_w=1024&u_ah=768&u_aw=1024&u_cd=32&u_nplug=0&u_nmime=0&bid=ANyPxKoCCESPT6SR6P9SaelxmdNX2OlmTgbg4_DY6CFvnrUxUL743M94iy5SFVKt6khX2PQ4oCQV&ca_type=image&bc=1&bih=-12245933&biw=-12245933&brdim=0%2C0%2C0%2C0%2C1024%2C0%2C0%2C0%2C568%2C350&vis=1&wgl=false&bsq=0&session_token=QUFFLUhqbjN0OS10cFkyanFLcWV6LWdrTDF5cDc4NUM3d3xBQ3Jtc0ttdExCTUNTVjIyODRtTnZ0TzhCeG81U0dURnZDVkJscHpMbGYzSm9QcnF6b19mY2NUVUZwdERBSGw2dWNoTmxZWGdIU1cyVWJKZ3NubnRvS2sxNDM5Uno5ZlNHX1N5c3p4MDd2dVpqUENERzIwQ3pzal9fMVA0RV9wd0RubFljUlBuYm9TOUxTTHJFaXNVT3hXblJlQlpNeDViZFE%3D
+:status: 204
+:method: post
+:headers:
+  Content-Length: '0'
+  Cache-Control: no-cache
+  Access-Control-Allow-Credentials: 'true'
+  X-Content-Type-Options: nosniff
+  Expires: Tue, 27 Apr 1971 19:44:06 EST
+  X-Frame-Options: SAMEORIGIN
+  P3P: CP="This is not a P3P policy! See http://support.google.com/accounts/answer/151657?hl=en-GB
+    for more info."
+  Strict-Transport-Security: max-age=31536000
+  Content-Type: text/html; charset=utf-8
+  Access-Control-Allow-Origin: https://www.youtube.com
+  Date: Tue, 20 Mar 2018 17:51:10 GMT
+  Server: YouTube Frontend Proxy
+  X-XSS-Protection: 1; mode=block
+  Set-Cookie:
+  - VISITOR_INFO1_LIVE=Uv7xSlMI-Ss; path=/; domain=.youtube.com; expires=Mon, 19-Nov-2018
+    05:44:10 GMT; httponly
+  - PREF=f1=50000000; path=/; domain=.youtube.com; expires=Mon, 19-Nov-2018 05:44:10
+    GMT
+  Alt-Svc: hq=":443"; ma=2592000; quic=51303432; quic=51303431; quic=51303339; quic=51303335,quic=":443";
+    ma=2592000; v="42,41,39,35"
+  Connection: close
+:content: ''

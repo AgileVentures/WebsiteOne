@@ -11317,4 +11317,61 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Thu, 06 Feb 2014 07:01:11 GMT
+- request:
+    method: get
+    uri: https://www.youtube.com/api/stats/qoe?bh=0.000:0.000&c=WEB_EMBEDDED_PLAYER&cbr=Safari&cmt=0.000:0.000,0.000:0.000&cos=Macintosh&cplayer=UNIPLAYER&cpn=9CKjNgENdNrGet-z&cver=20180314&docid=cdODZWHUwhc&ei=XeOqWuS5Ioab0wWr3onIDA&el=embedded&error=0.000:html5.missingapi:0.000:nocodecs.1&event=streamingstats&fexp=23704844,23707875,23708904,23708906,23708910,23710476,23713711,23716256,23717313,23720702,23721656,23721728,23721898,23722411,23722828,23723618,23723955,23724298,23726171,23726651,23727730,23729442,23730757,23731309,23731442,23731646,9422596,9431754,9449243,9463154,9485000&ns=yt&seq=1&vis=0.000:0&vps=0.000:N,0.000:ER
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Referer:
+      - https://www.youtube.com/embed/cdODZWHUwhc?enablejsapi=1
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Accept:
+      - "*/*"
+      Cookie:
+      - YSC=43RzqbnLDPA; VISITOR_INFO1_LIVE=ax2ZbzY5qQg; PREF=f1=50000000
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - www.youtube.com
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Tue, 20 Mar 2018 17:39:13 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - Video Stats Server
+      Content-Length:
+      - '0'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - hq=":443"; ma=2592000; quic=51303431; quic=51303339; quic=51303335,quic=":443";
+        ma=2592000; v="41,39,35"
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 06 Feb 2014 07:01:04 GMT
 recorded_with: VCR 4.0.0
