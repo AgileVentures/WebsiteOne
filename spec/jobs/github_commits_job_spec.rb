@@ -6,8 +6,10 @@ describe GithubCommitsJob do
   describe '.job', vcr: vcr_index do
     context 'when no empty repo present' do
       let(:project) { @project.reload }
+      let(:project_without_url) { @project_without_url.reload }
       before do
         @project = FactoryBot.create(:project)
+        @project_without_url = FactoryBot.create(:project)
         @project.source_repositories.create(url: 'https://github.com/AgileVentures/WebsiteOne')
         @users_with_github_profile_urls = [
           FactoryBot.create(:user, github_profile_url: 'https://github.com/tochman'),
@@ -57,7 +59,7 @@ describe GithubCommitsJob do
       let(:project_with_empty_repo) { @project_with_empty_repo.reload }
       
       before do
-        @project_with_empty_repo = FactoryGirl.create(:project, github_url: 'https://github.com/AgileVentures/empty_project')
+        @project_with_empty_repo = FactoryBot.create(:project, github_url: 'https://github.com/AgileVentures/empty_project')
         GithubCommitsJob.run
       end
       
