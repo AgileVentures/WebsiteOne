@@ -54,11 +54,11 @@ module GithubStaticPagesJob
   end
 
   def get_title(filename)
-    get_slug(filename).gsub("-", " ").titleize
+    get_slug(filename).tr("-", " ").titleize
   end
 
   def get_slug(filename)
-    FILE_NAME_REGEX.match(filename)[0].downcase.gsub("_", "-")
+    FILE_NAME_REGEX.match(filename)[0].downcase.tr("_", "-")
   end
 
   def convert_markdown_to_html(markdown)
