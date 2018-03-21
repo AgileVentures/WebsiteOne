@@ -38,8 +38,8 @@ gem 'nokogiri', '1.8.2'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github', '~> 1.1.2'
-gem 'omniauth-gplus', '~> 2.0.1'
 gem 'omniauth-oauth2', '~> 1.3.1'
+gem 'omniauth-google-oauth2', '~> 0.5.2'
 gem 'paper_trail', '~> 8.1', '>= 8.1.2'
 gem 'paranoia', '~> 2.4'
 gem 'pg'
@@ -78,7 +78,7 @@ group :test do
   gem 'launchy'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
-  gem 'puffing-billy', '~> 0.11.1'
+  gem 'puffing-billy', '~> 1.0.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
   gem 'stripe-ruby-mock', '~> 2.5.3', require: 'stripe_mock'
@@ -112,7 +112,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
-  gem 'simplecov', '~> 0.15.1'
+  gem 'simplecov', '~> 0.16.0'
 end
 
 group :development, :staging, :production do
