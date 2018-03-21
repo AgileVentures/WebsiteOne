@@ -113,7 +113,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
-  gem 'simplecov', '~> 0.16.0'
+  gem 'simplecov', '~> 0.16.1'
 end
 
 group :development, :staging, :production do
