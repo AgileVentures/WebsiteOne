@@ -22,7 +22,7 @@ FactoryBot.define do
     event
     user
 
-    participants { (generate :broadcaster).merge((generate :participant)) }
+    participants { ActionController::Parameters.new((generate :broadcaster).merge(generate :participant)) }
 
     created_at { Time.parse("#{created} UTC")}
     updated_at { Time.parse("#{updated} UTC")}
