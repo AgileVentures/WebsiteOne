@@ -72,4 +72,7 @@ Feature: Manual Edit of Youtube URL
   Scenario: Hangout URL is not posted in slack when Youtube URL is edited
     Given the date is "2014 Feb 10th 7:01am"
     And I manually set a hangout link for event "Scrum"
-    Then Youtube URL is posted in slack but not hangout URL when Youtube URL is edited
+    And that we're spying on the SlackService
+    When I manually edit the Youtube URL
+    Then the Youtube URL is posted in Slack
+    And the Hangout URL is not posted in Slack
