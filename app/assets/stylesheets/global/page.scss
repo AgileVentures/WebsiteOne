@@ -97,4 +97,10 @@ section.page-preview {
   margin: 15px 0;
   font-size: 21px;
   line-height: 1.58;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 }
