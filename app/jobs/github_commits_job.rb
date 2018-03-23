@@ -55,12 +55,9 @@ module GithubCommitsJob
     end
 
   def get_contributor_stats(repo)
-    loop do
-      contributors = client.contributor_stats(repo)
-      return contributors unless contributors.nil?
-      Rails.logger.warn "Waiting for Github to calculate project statistics for #{repo}"
-      sleep 3
-    end
+    contributors = client.contributor_stats(repo, { retry_timeout: 6, retry_wait: 3 })
+    return [] if contributors.nil?
+    contributors
   end
 
   def client
