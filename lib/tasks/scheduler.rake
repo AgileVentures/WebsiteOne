@@ -9,8 +9,9 @@ task :fetch_github_last_updates => :environment do
 end
 
 task :karma_calculator => :environment do
-  User.all.each do |usr|
-    KarmaCalculator.new(usr).perform
-    usr.karma.save!
-  end
+  events = EventInstance.all.where.not(participants: nil)
+    User.all.each do |usr|
+      KarmaCalculator.new(usr, events).perform
+      usr.karma.save!
+    end
 end
