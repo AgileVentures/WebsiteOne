@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+
+ruby '2.5.0'
 
 gem 'rails', '~> 5.1', '>= 5.1.5'
 gem 'acts-as-taggable-on'
@@ -112,7 +113,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
-  gem 'simplecov', '~> 0.16.0'
+  gem 'simplecov', '~> 0.16.1'
 end
 
 group :development, :staging, :production do
