@@ -127,8 +127,10 @@ Feature: Events
       | Start Date  | 2018-03-23       |
       | Start Time  | 09:00            |
       | Description | meet and discuss |
-    And I select "Repeats" to "biweekly"
-    And I check "Monday"
+    When I select "Repeats" to "biweekly"
+    And I click the "Save" button
+    Then I should see "Repeat ends on can't be blank and You must have at least one repeats weekly each days of the week"
+    When I check "Monday"
     And I click on the "repeat_ends_on" div
     And I fill in event field:
       | name     | value      |
