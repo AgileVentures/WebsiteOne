@@ -61,26 +61,7 @@ section.page-preview {
   position: relative;
 }
 
-#page-overview {
-  width: 80%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#page-side-panel {
-  font-size: 130%;
-  padding-top: 25px;
-  width: 10%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#page-side-panel ul {
-  list-style: none;
-}
-
 .tab-content {
-  // padding: 0 15px 10px 15px;
   border: 1px solid #dddddd;
   border-top-color: transparent;
 }
@@ -103,4 +84,27 @@ section.page-preview {
     height: auto;
     display: block;
   }
+
+  ol, ul {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  dd {
+    padding-left: 10px;
+  }
+  dd {
+    margin-bottom: 5px;
+  }
+  details {
+    margin-top: 10px;
+  }
+
+  table { width: 100%; }
+
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  tr:nth-child(even) {background-color: #f2f2f2;}
 }
