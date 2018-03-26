@@ -1,9 +1,10 @@
 class KarmaCalculator
 
-  attr_reader :user
+  attr_reader :user, :events
 
-  def initialize(user)
+  def initialize(user, events)
     @user = user
+    @events = events
   end
 
   def perform
@@ -55,15 +56,10 @@ class KarmaCalculator
   end
 
   def calculate_hangouts_attended_with_more_than_one_participant(id)
-    EventInstance.all.select do |i|
-      more_than_one?(i) && i.participants.to_unsafe_h.values.any? do |p|
-        p['person']['id'] == id
-      end
+    events.select do |i|
+      participant = i.participants.to_unsafe_h.values
+      participant.count > 1 && participant.any? { |p| p['person']['id'] == id }
     end.count
-  end
-
-  def more_than_one?(event_instance)
-    !event_instance.participants.nil? && event_instance.participants.to_unsafe_h.values.count > 1
   end
 
   def activity # 6
