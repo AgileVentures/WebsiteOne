@@ -212,12 +212,10 @@ describe Event, :type => :model do
       Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
       expect(@event).to be_live
     end
-
-    it 'should not be started if events have not started' do
-      hangout = @event.event_instances.create(hangout_url: nil,
-                                              updated_at: nil)
-      Delorean.time_travel_to(Time.parse('2014-06-17 9:30:00 UTC'))
-      expect(@event.live?).to be_falsey
+    
+    it 'should be started in start time even if hangout has not started' do
+      Delorean.time_travel_to(Time.parse('2014-06-17 10:26:00 UTC'))
+      expect(@event).to be_live
     end
   end
 
