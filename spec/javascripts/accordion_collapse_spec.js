@@ -2,7 +2,7 @@ describe('AccordionCollapse module', function() {
   beforeEach(function() {
     setFixtures('<a class="collapse-button"><i class="fa fa-caret-down"></i></a>');
 
-    reloadScript('accordion_collapse.js');
+    reloadScript('accordion_collapse');
 
     $(document).trigger('page:load');
   });

@@ -1,4 +1,4 @@
-class SourceRepository < ActiveRecord::Base
+class SourceRepository < ApplicationRecord
   belongs_to :project
 
   def name

@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
 
   before_action :store_user_location! , if: :storable_location?
   before_action :authenticate_user!, if: :require_login?
-  skip_before_filter :verify_authenticity_token, only: [:create], if: :paypal?
+  skip_before_action :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
     @upgrade_user = params[:user_id]

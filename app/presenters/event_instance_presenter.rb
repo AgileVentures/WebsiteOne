@@ -55,18 +55,18 @@ class EventInstancePresenter < BasePresenter
   private
 
   def map_to_users(participants)
-    participants ||= []
+    participants ||= ActionController::Parameters.new({})
+    participants.to_unsafe_h.map{ |participant| process_users(participant) }.compact
+  end
 
-    participants.map do |participant|
-      begin
-        person = participant.last['person']
-        user = Authentication.find_by(provider: 'gplus', uid: person['id']).try!(:user)
-        next if user == host
-        user || NullUser.new(person[:displayName])
-      rescue NoMethodError
-        Rails.logger.error "Exception at event_instance_presenter#map_to_users"
-        nil
-      end
-    end.compact
+  def process_users(participant)
+    begin
+      person = participant.last['person']
+      user = Authentication.find_by(provider: 'gplus', uid: person['id']).try!(:user)
+      user || NullUser.new(person[:displayName]) if user != host
+    rescue NoMethodError
+      Rails.logger.error "Exception at event_instance_presenter#map_to_users"
+      nil
+    end
   end
 end

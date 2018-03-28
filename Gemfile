@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
 
-gem 'rails', '4.2.10'
-gem 'active_model-errors_details'
+ruby '2.5.0'
+
+gem 'rails', '~> 5.1', '>= 5.1.5'
 gem 'acts-as-taggable-on'
-gem 'acts_as_follower'
+gem 'acts_as_follower', git: 'https://github.com/tcocca/acts_as_follower.git'
 gem 'acts_as_tree'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'airbrake'
@@ -33,14 +33,14 @@ gem 'jquery-turbolinks', '2.1.0'
 gem 'jvectormap-rails', '~> 2.0'
 gem 'kaminari'
 gem 'local_time', '~> 2.0'
-gem 'mercury-rails', git: 'https://github.com/jejacks0n/mercury.git'
+gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
 gem 'nearest_time_zone'
 gem 'nokogiri', '1.8.2'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github', '~> 1.1.2'
-gem 'omniauth-gplus', '~> 2.0.1'
 gem 'omniauth-oauth2', '~> 1.3.1'
+gem 'omniauth-google-oauth2', '~> 0.5.2'
 gem 'paper_trail', '~> 8.1', '>= 8.1.2'
 gem 'paranoia', '~> 2.4'
 gem 'pg'
@@ -55,7 +55,7 @@ gem 'redcarpet'
 gem 'ruby-gitter'
 gem 'sass-rails'
 gem 'slack-ruby-client'
-gem 'sprockets-rails', '2.3.3'
+gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'stripe'
 gem 'sucker_punch'
 gem 'therubyracer', platforms: :ruby
@@ -79,7 +79,7 @@ group :test do
   gem 'launchy'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
-  gem 'puffing-billy'
+  gem 'puffing-billy', '~> 1.0.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
   gem 'stripe-ruby-mock', '~> 2.5.3', require: 'stripe_mock'
@@ -87,6 +87,7 @@ group :test do
   gem 'webmock'
   gem 'webrat'
   gem 'zeus'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
 end
 
 group :development, :test do
@@ -112,8 +113,7 @@ group :development, :test do
   gem 'rspec-activemodel-mocks'
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
-  gem 'coveralls', require: false
-  gem 'simplecov'
+  gem 'simplecov', '~> 0.16.1'
 end
 
 group :development, :staging, :production do

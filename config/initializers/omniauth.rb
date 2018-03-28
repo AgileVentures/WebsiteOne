@@ -10,10 +10,13 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   end
 
   provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
-  provider :gplus, ENV['GPLUS_KEY'], ENV['GPLUS_SECRET'],
-           :setup => ->(env) {
-             if (params = env['rack.session']['omniauth.params']) && params.fetch('youtube', false)
-               env['omniauth.strategy'].options[:scope] = 'youtube,userinfo.email'
-             end
-           }
+  provider :google_oauth2, ENV['GPLUS_KEY'], ENV['GPLUS_SECRET'],
+       {
+         :name => 'gplus',
+         :setup => ->(env) {
+           if (params = env['rack.session']['omniauth.params']) && params.fetch('youtube', false)
+             env['omniauth.strategy'].options[:scope] = 'youtube,userinfo.email'
+           end
+         }
+       }
 end
