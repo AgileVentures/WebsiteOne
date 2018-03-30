@@ -23,7 +23,8 @@ describe KarmaCalculator do
   context 'for existing members' do
 
     describe 'for old members' do
-      subject { KarmaCalculator.new(user) }
+      subject { KarmaCalculator.new(user, hangouts) }
+      let(:hangouts) { FactoryBot.create_list(:event_instance, 2) }
       let(:user) { FactoryBot.build(:user, :with_karma, created_at: 31.days.ago) }
       let(:karma_points) { subject.perform; user.karma_total }
 
@@ -33,12 +34,12 @@ describe KarmaCalculator do
     end
 
     describe 'for members attending hangouts' do
-      let(:hangout) { FactoryBot.create(:event_instance) }
+      let(:hangouts) { FactoryBot.create_list(:event_instance, 2) }
       # subject {  }
-      let(:user) { FactoryBot.create(:user, :with_karma, created_at: 31.days.ago, gplus: hangout.participants.to_unsafe_h.first.last['person']['id']) }
+      let(:user) { FactoryBot.create(:user, :with_karma, created_at: 31.days.ago, gplus: hangouts[0].participants.to_unsafe_h.first.last['person']['id']) }
 
       it 'gives points for hangout participation' do
-        subject = KarmaCalculator.new(user)
+        subject = KarmaCalculator.new(user, hangouts)
         subject.perform
         expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
       end
