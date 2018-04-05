@@ -28,21 +28,21 @@ Given(/^the following payment sources exist$/) do |table|
   end
 end
 
-# Given(/^the following subscriptions exist$/) do |table|
-#   table.hashes.each do |hash|
-#     user = User.find_by(first_name: hash.delete('user'))
-#     hash[:user_id] = user.id
-#     hash[:started_at] = Time.now
-#     Subscription.create!(hash)
-#   end
-# end
-
-Given(/^the following subscriptions exist( with plan)?$/) do |table|
+Given(/^the following subscriptions exist$/) do |table|
   table.hashes.each do |hash|
     user = User.find_by(first_name: hash.delete('user'))
     hash[:user_id] = user.id
     hash[:started_at] = Time.now
-    hash[:plan_id] = Plan.first.id if Plan.first
+    Subscription.create!(hash)
+  end
+end
+
+Given(/^the following subscriptions exist with plan$/) do |table|
+  table.hashes.each do |hash|
+    user = User.find_by(first_name: hash.delete('user'))
+    hash[:user_id] = user.id
+    hash[:started_at] = Time.now
+    hash[:plan_id] = Plan.first.id
     Subscription.create!(hash)
   end
 end
