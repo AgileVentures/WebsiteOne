@@ -73,9 +73,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Display live sessions - basic info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
-      | Start time | Title        | Project     | Event         | Category        | Host  | EventInstance url      | Youtube video id | End time | Participants |
-      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    | Alice, Bob   |
-      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    | Alice, Bob   |
+      | Start time | Title        | Project     | Event         | Category        | Host  | EventInstance url      | Youtube video id | End time |
+      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    |
+      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    |
     When I visit "/hangouts"
     Then I should see:
 
@@ -105,9 +105,9 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Display live sessions - extra info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
-      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id | Participants | End time |
-      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | Jane, Bob    | 11:25    |
-      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | Greg, Jake   | 12:42    |
+      | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id | End time |
+      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    |
+      | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    |
 
     When I visit "/hangouts"
     Then I should see:
@@ -119,7 +119,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Scrum           |
       | PairProgramming |
       | 10 min          |
-    And I should see the avatar for "Jane"
+    And I should see the avatar for "Alice"
     And I should see the avatar for "Bob"
 
     And I should see:
