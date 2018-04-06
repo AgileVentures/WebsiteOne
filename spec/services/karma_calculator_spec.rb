@@ -39,7 +39,7 @@ describe KarmaCalculator do
       it 'event participation count is zero' do
         subject = KarmaCalculator.new(user)
         subject.perform
-        expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
+        expect(user.event_participation_count).to eq 0
       end
     end
 
