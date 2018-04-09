@@ -67,6 +67,7 @@ class EventsController < ApplicationController
     create_start_date_time(event_params)
     event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
     event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
+    event_params[:repeats_every_n_weeks] = 2 if event_params['repeats'] == 'biweekly'
     event_params
   end
 

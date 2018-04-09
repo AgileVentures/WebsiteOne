@@ -16,7 +16,8 @@ var eventDatepicker = {
             case 'never':
                 // Nothing
                 break;
-
+            
+            case 'biweekly':    
             case 'weekly':
                 $('#repeats_options').show();
                 $('#repeats_weekly_options').show();
