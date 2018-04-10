@@ -119,6 +119,30 @@ Feature: Events
     And I click "Upcoming events"
     And I should see multiple "Standup" events
 
+  Scenario: Creating a biweekly event
+    Given the date is "2018-03-19"
+    Given I fill in event field:
+      | name        | value            |
+      | Name        | Biweekly Meeting |
+      | Start Date  | 2018-03-23       |
+      | Start Time  | 09:00            |
+      | Description | meet and discuss |
+    When I select "Repeats" to "biweekly"
+    And I click the "Save" button
+    Then I should see "Repeat ends on can't be blank and You must have at least one repeats weekly each days of the week"
+    When I check "Monday"
+    And I click on the "repeat_ends_on" div
+    And I fill in event field:
+      | name     | value      |
+      | End Date | 2018-05-01 |
+    And I click the "Save" button
+    Then I should see "Event Created"
+    Then I should be on the event "Show" page for "Biweekly Meeting"
+    And I should see "Occurs every two weeks at the specified times"
+    When I dropdown the "Events" menu
+    And I click "Upcoming events"
+    Then I should see 3 "Biweekly Meeting" events
+    
 
 
 # dimensions

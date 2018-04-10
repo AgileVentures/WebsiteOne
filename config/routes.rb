@@ -56,7 +56,7 @@ WebsiteOne::Application.routes.draw do
     resources :events, only: [:index]
   end
 
-  resources :events, :format => false do
+  resources :events do
     member do
       patch :update_only_url
     end

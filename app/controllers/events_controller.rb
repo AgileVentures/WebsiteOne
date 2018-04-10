@@ -16,7 +16,10 @@ class EventsController < ApplicationController
 
   def index
     @projects = Project.all
-    @events = Event.upcoming_events(specified_project)
+    respond_to do |format|
+      format.html {@events = Event.upcoming_events(specified_project) }
+      format.json {@events = Event.upcoming_events(specified_project) }
+    end
   end
 
   def edit
@@ -67,6 +70,7 @@ class EventsController < ApplicationController
     create_start_date_time(event_params)
     event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
     event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
+    event_params[:repeats_every_n_weeks] = 2 if event_params['repeats'] == 'biweekly'
     event_params
   end
 

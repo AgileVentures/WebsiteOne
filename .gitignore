@@ -89,3 +89,8 @@ vendor/assets/javascripts/nprogress.js
 
 latest.dump
 certbot.log
+
+
+# Ignore vscode config
+
+.vscode/**/*

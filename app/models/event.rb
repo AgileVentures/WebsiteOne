@@ -11,9 +11,9 @@ class Event < ApplicationRecord
   include IceCube
   validates :name, :time_zone, :repeats, :category, :start_datetime, :duration, presence: true
   validates :url, uri: true, :allow_blank => true
-  validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' }
-  validates :repeat_ends_on, :presence => true, :allow_blank => false, :if => lambda{ |e| e.repeats == 'weekly' and e.repeat_ends_string == 'on'}
-  validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' }
+  validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' or e.repeats == 'biweekly' }
+  validates :repeat_ends_on, :presence => true, :allow_blank => false, :if => lambda{ |e| (e.repeats == 'weekly' or e.repeats == 'biweekly') and e.repeat_ends_string == 'on' }
+  validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' or e.repeats == 'biweekly' }
   attr_accessor :next_occurrence_time_attr
   attr_accessor :repeat_ends_string
 
@@ -21,7 +21,7 @@ class Event < ApplicationRecord
   COLLECTION_TIME_PAST = 300.minutes
   NEXT_SCRUM_COLLECTION_TIME_PAST = 15.minutes
 
-  REPEATS_OPTIONS = %w[never weekly]
+  REPEATS_OPTIONS = %w[never weekly biweekly]
   REPEAT_ENDS_OPTIONS = %w[on never]
   DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
 
@@ -202,7 +202,7 @@ class Event < ApplicationRecord
     case repeats
       when 'never'
         sched.add_recurrence_time(start_datetime)
-      when 'weekly'
+      when 'weekly', 'biweekly'
         days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
         sched.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
