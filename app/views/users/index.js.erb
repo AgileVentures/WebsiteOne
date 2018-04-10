@@ -1,1 +1,4 @@
 $('#UsersList').html("<%= escape_javascript(render 'user_list') %>");
+$('#gotoactivity').click(function() {
+  $('#tabs a[href="#activity"]').tab('show');
+});
