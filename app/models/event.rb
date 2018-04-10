@@ -99,7 +99,7 @@ class Event < ApplicationRecord
   end
 
   def live?
-    (last_hangout.present? && last_hangout.live?) || within_current_event_duration?
+    last_hangout.present? && last_hangout.live?
   end
 
   def final_datetime_for_collection(options = {})

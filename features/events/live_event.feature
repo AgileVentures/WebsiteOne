@@ -34,7 +34,8 @@ Feature: Live Events
     And after three minutes
     Then the event should be dead
     
-  Scenario: Event goes live whether hangout has startted or not
+  Scenario: Shows a message at start time to indicate that the event should be started
     Given an event "Scrum"
-    And the time now is "2014/02/03 07:00-09:30 UTC"
-    Then the event should be live
+    When the time now is "2014/02/03 07:00-09:30 UTC"
+    And I am on the show page for event "Scrum"
+    Then I should see "It's time please start the event!"
