@@ -12,4 +12,10 @@ module PaymentSource
 
   class PayPal < PaymentSource
   end
+
+  class Invoice < PaymentSource
+  end
+
+  class Other < PaymentSource
+  end
 end
