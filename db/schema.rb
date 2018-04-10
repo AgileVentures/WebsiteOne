@@ -10,32 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121175914) do
+ActiveRecord::Schema.define(version: 20180406015134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
-  create_table "activities", force: :cascade do |t|
-    t.integer  "trackable_id"
-    t.string   "trackable_type"
-    t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "key"
-    t.text     "parameters"
-    t.integer  "recipient_id"
-    t.string   "recipient_type"
-=======
   create_table "activities", id: :serial, force: :cascade do |t|
-    t.string "trackable_type"
     t.integer "trackable_id"
-    t.string "owner_type"
+    t.string "trackable_type"
     t.integer "owner_id"
+    t.string "owner_type"
     t.string "key"
     t.text "parameters"
-    t.string "recipient_type"
     t.integer "recipient_id"
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
+    t.string "recipient_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
@@ -43,23 +31,11 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
   end
 
-<<<<<<< HEAD
-  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
-  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
-  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
-
-  create_table "articles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "title",      null: false
-    t.text     "content"
-    t.string   "slug",       null: false
-=======
   create_table "articles", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "title", null: false
     t.text "content"
     t.string "slug", null: false
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["slug"], name: "index_articles_on_slug", unique: true
@@ -67,21 +43,10 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
-<<<<<<< HEAD
-  add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
-  add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
-  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
-
-  create_table "authentications", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "provider",   null: false
-    t.string   "uid",        null: false
-=======
   create_table "authentications", id: :serial, force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider", null: false
     t.string "uid", null: false
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["user_id"], name: "index_authentications_on_user_id"
@@ -95,74 +60,6 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.index ["user_id"], name: "index_commit_counts_on_user_id"
   end
 
-<<<<<<< HEAD
-  add_index "commit_counts", ["project_id"], name: "index_commit_counts_on_project_id", using: :btree
-  add_index "commit_counts", ["user_id"], name: "index_commit_counts_on_user_id", using: :btree
-
-  create_table "documents", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "parent_id"
-    t.integer  "user_id"
-    t.string   "slug"
-  end
-
-  add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree
-  add_index "documents", ["slug", "user_id"], name: "index_documents_on_slug_and_user_id", unique: true, using: :btree
-  add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
-
-  create_table "event_instances", force: :cascade do |t|
-    t.integer  "event_id"
-    t.string   "title"
-    t.string   "hangout_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "uid"
-    t.string   "category"
-    t.integer  "project_id"
-    t.integer  "user_id"
-    t.string   "yt_video_id"
-    t.text     "participants"
-    t.string   "hoa_status"
-    t.boolean  "url_set_directly",   default: false
-    t.boolean  "youtube_tweet_sent", default: false
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string   "name"
-    t.string   "category"
-    t.text     "description"
-    t.string   "repeats"
-    t.integer  "repeats_every_n_weeks"
-    t.integer  "repeats_weekly_each_days_of_the_week_mask"
-    t.boolean  "repeat_ends"
-    t.date     "repeat_ends_on"
-    t.string   "time_zone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "url"
-    t.string   "slug"
-    t.datetime "start_datetime"
-    t.integer  "duration"
-    t.text     "exclusions"
-    t.integer  "project_id"
-    t.integer  "creator_id"
-    t.string   "for"
-  end
-
-  add_index "events", ["slug"], name: "index_events_on_slug", unique: true, using: :btree
-  add_index "events", ["start_datetime"], name: "index_events_on_start_datetime", using: :btree
-
-  create_table "follows", force: :cascade do |t|
-    t.integer  "followable_id",                   null: false
-    t.string   "followable_type",                 null: false
-    t.integer  "follower_id",                     null: false
-    t.string   "follower_type",                   null: false
-    t.boolean  "blocked",         default: false, null: false
-=======
   create_table "documents", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -219,12 +116,11 @@ ActiveRecord::Schema.define(version: 20180121175914) do
   end
 
   create_table "follows", id: :serial, force: :cascade do |t|
-    t.string "followable_type", null: false
     t.integer "followable_id", null: false
-    t.string "follower_type", null: false
+    t.string "followable_type", null: false
     t.integer "follower_id", null: false
+    t.string "follower_type", null: false
     t.boolean "blocked", default: false, null: false
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["followable_id", "followable_type"], name: "fk_followables"
@@ -256,15 +152,6 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-  create_table "newsletters", force: :cascade do |t|
-    t.string   "title",                        null: false
-    t.string   "subject",                      null: false
-    t.text     "body",                         null: false
-    t.boolean  "do_send",      default: false
-    t.boolean  "was_sent",     default: false
-    t.integer  "last_user_id", default: 0
-=======
   create_table "newsletters", id: :serial, force: :cascade do |t|
     t.string "title", null: false
     t.string "subject", null: false
@@ -272,7 +159,6 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.boolean "do_send", default: false
     t.boolean "was_sent", default: false
     t.integer "last_user_id", default: 0
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -294,21 +180,6 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.string "category"
   end
 
-<<<<<<< HEAD
-  create_table "projects", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-    t.string   "slug"
-    t.string   "github_url"
-    t.string   "pivotaltracker_url"
-    t.text     "pitch"
-    t.integer  "commit_count",       default: 0
-    t.string   "image_url"
-=======
   create_table "projects", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -322,7 +193,6 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.text "pitch"
     t.integer "commit_count", default: 0
     t.string "image_url"
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "last_github_update"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -335,35 +205,19 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-  create_table "static_pages", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "parent_id"
-    t.string   "slug"
-=======
   create_table "static_pages", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.integer "parent_id"
     t.string "slug"
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["slug"], name: "index_static_pages_on_slug", unique: true
   end
 
-<<<<<<< HEAD
-  add_index "static_pages", ["slug"], name: "index_static_pages_on_slug", unique: true, using: :btree
-
-  create_table "statuses", force: :cascade do |t|
-    t.string   "status"
-    t.integer  "user_id"
-=======
   create_table "statuses", id: :serial, force: :cascade do |t|
     t.string "status"
     t.integer "user_id"
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -377,23 +231,13 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.integer "sponsor_id"
   end
 
-<<<<<<< HEAD
-  create_table "taggings", force: :cascade do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context",       limit: 128
-=======
   create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
-    t.string "taggable_type"
     t.integer "taggable_id"
-    t.string "tagger_type"
+    t.string "taggable_type"
     t.integer "tagger_id"
+    t.string "tagger_type"
     t.string "context", limit: 128
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "created_at"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
@@ -401,52 +245,6 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.index ["tagger_type"], name: "index_taggings_on_tagger_type"
   end
 
-<<<<<<< HEAD
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
-  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
-  add_index "taggings", ["tagger_type"], name: "index_taggings_on_tagger_type", using: :btree
-
-  create_table "tags", force: :cascade do |t|
-    t.string  "name"
-    t.integer "taggings_count", default: 0
-  end
-
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
-
-  create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,    null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.boolean  "display_email"
-    t.string   "youtube_id"
-    t.string   "slug"
-    t.boolean  "display_profile",        default: true
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "country_name"
-    t.string   "city"
-    t.string   "region"
-    t.string   "youtube_user_name"
-    t.string   "github_profile_url"
-    t.boolean  "display_hire_me"
-    t.text     "bio"
-    t.boolean  "receive_mailings",       default: true
-    t.string   "country_code"
-    t.integer  "timezone_offset"
-    t.integer  "status_count",           default: 0
-=======
   create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
@@ -485,59 +283,32 @@ ActiveRecord::Schema.define(version: 20180121175914) do
     t.string "country_code"
     t.integer "timezone_offset"
     t.integer "status_count", default: 0
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "deleted_at"
+    t.integer "event_participation_count", default: 0
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
-<<<<<<< HEAD
-  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
-
-  create_table "versions", force: :cascade do |t|
-    t.string   "item_type",  null: false
-    t.integer  "item_id",    null: false
-    t.string   "event",      null: false
-    t.string   "whodunnit"
-    t.text     "object"
-=======
   create_table "versions", id: :serial, force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
     t.text "object"
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "created_at"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-<<<<<<< HEAD
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
-
-  create_table "votes", force: :cascade do |t|
-    t.integer  "votable_id"
-    t.string   "votable_type"
-    t.integer  "voter_id"
-    t.string   "voter_type"
-    t.boolean  "vote_flag"
-    t.string   "vote_scope"
-    t.integer  "vote_weight"
-=======
   create_table "votes", id: :serial, force: :cascade do |t|
-    t.string "votable_type"
     t.integer "votable_id"
-    t.string "voter_type"
+    t.string "votable_type"
     t.integer "voter_id"
+    t.string "voter_type"
     t.boolean "vote_flag"
     t.string "vote_scope"
     t.integer "vote_weight"
->>>>>>> eb5091931b7b3864b9cad1b57615a3d8427f03f4
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
