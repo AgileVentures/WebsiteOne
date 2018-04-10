@@ -16,7 +16,10 @@ class EventsController < ApplicationController
 
   def index
     @projects = Project.all
-    @events = Event.upcoming_events(specified_project)
+    respond_to do |format|
+      format.html {@events = Event.upcoming_events(specified_project) }
+      format.json {@events = Event.upcoming_events(specified_project) }
+    end
   end
 
   def edit
