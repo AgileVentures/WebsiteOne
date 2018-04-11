@@ -38,6 +38,10 @@
                       <div class="event-notice pull-right">
                         <%= link_to 'Event live! Join now', recent_hangout.hangout_url, class: 'btn btn-default pull-right' %>
                       </div>
+                  <% elsif event.within_current_event_duration? %>
+                      <div class="event-notice pull-right">
+                        <%= link_to "Event time! Start now", '#', class: 'btn btn-default pull-right'%>
+                      </div>  
                   <% end %>
                 <% end %>
               </div>
