@@ -44,3 +44,9 @@ Feature: Live Events
     Given the time now is "2014/02/03 07:00:09 UTC"
     When I am on events index page
     Then I should see "Event time! Start now"
+
+  Scenario: Clicking the Start Now button redirects to hangouts instructions
+    Given the time now is "2014/02/03 07:00:09 UTC"
+    And I am on events index page
+    When I click "Event time! Start now"
+    Then I should be on the "hangout instructions" page
