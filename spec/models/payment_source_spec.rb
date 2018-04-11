@@ -25,3 +25,13 @@ describe PaymentSource::Stripe do
   let(:type) { 'PaymentSource::Stripe' }
   it_behaves_like 'a payment source'
 end
+
+describe PaymentSource::Invoice do
+  let(:type) { 'PaymentSource::Invoice' }
+  it_behaves_like 'a payment source'
+end
+
+describe PaymentSource::Other do
+  let(:type) { 'PaymentSource::Other' }
+  it_behaves_like 'a payment source'
+end
