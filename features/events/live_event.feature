@@ -38,4 +38,4 @@ Feature: Live Events
     Given an event "Scrum"
     When the time now is "2014/02/03 07:00:09 UTC"
     And I am on the show page for event "Scrum"
-    Then I should see "It's time please start the event!"
+    Then I should see "It's time! Please start the event."
