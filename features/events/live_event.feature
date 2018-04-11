@@ -36,6 +36,6 @@ Feature: Live Events
     
   Scenario: Shows a message at start time to indicate that the event should be started
     Given an event "Scrum"
-    When the time now is "2014/02/03 07:00-09:30 UTC"
+    When the time now is "2014/02/03 07:00:09 UTC"
     And I am on the show page for event "Scrum"
     Then I should see "It's time please start the event!"
