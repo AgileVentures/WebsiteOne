@@ -62,8 +62,6 @@ def path_to(page_name, id = '')
       new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
-    when 'hangout instructions' then
-      'https://support.google.com/youtube/answer/7083786'
     else
       raise('path to specified is not listed in #path_to')
   end
