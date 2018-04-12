@@ -61,26 +61,7 @@ section.page-preview {
   position: relative;
 }
 
-#page-overview {
-  width: 80%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#page-side-panel {
-  font-size: 130%;
-  padding-top: 25px;
-  width: 10%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#page-side-panel ul {
-  list-style: none;
-}
-
 .tab-content {
-  // padding: 0 15px 10px 15px;
   border: 1px solid #dddddd;
   border-top-color: transparent;
 }
@@ -97,9 +78,24 @@ section.page-preview {
   margin: 15px 0;
   font-size: 21px;
   line-height: 1.58;
-}
 
-#static_page_title .mercury-textarea {
-  width: 125%;
-}
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 
+  ol, ul {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  dd {
+    padding-left: 10px;
+  }
+  dd {
+    margin-bottom: 5px;
+  }
+  details {
+    margin-top: 10px;
+  }
+}

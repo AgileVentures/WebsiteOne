@@ -15,20 +15,6 @@ class StaticPagesController < ApplicationController
     @ancestry = @page.self_and_ancestors.map(&:title).reverse
   end
 
-  def mercury_update
-    @page = StaticPage.friendly.find(params[:id])
-    if @page.update_attributes(title: params[:content][:static_page_title][:value],
-                                   body: params[:content][:static_page_body][:value])
-      render html: ''
-    else
-      render html: ''
-    end
-  end
-
-  def mercury_saved
-    redirect_to static_page_path(get_page_id(params[:id])), notice: 'The page has been successfully updated.'
-  end
-
   private
 
   def get_page_id page
