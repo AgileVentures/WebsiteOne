@@ -49,3 +49,11 @@ Feature: Live Events
     Given the time now is "2014/02/03 07:00:09 UTC"
     And I am on events index page
     Then I should see a link "Event time! Start now" to "https://support.google.com/youtube/answer/7083786"
+
+  Scenario: Should not see Event time message and link when the event is live
+    Given an event "Scrum"
+    And the HangoutConnection has pinged to indicate the event start
+    When I am on events index page
+    Then I should not see "It's time! Please start the event."
+    When I am on events index page
+    Then I should not see "Event time! Start now"
