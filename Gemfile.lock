@@ -336,6 +336,7 @@ GEM
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
     kdtree (0.4)
+    kramdown (1.16.2)
     launchy (2.4.3)
       addressable (~> 2.3)
     libv8 (3.16.14.19)
@@ -436,7 +437,7 @@ GEM
       eventmachine_httpserver
       http_parser.rb (~> 0.6.0)
       multi_json
-    puma (3.11.3)
+    puma (3.11.4)
     rack (2.0.4)
     rack-cache (1.7.1)
       rack (>= 0.4)
@@ -689,6 +690,7 @@ DEPENDENCIES
   jquery-turbolinks (= 2.1.0)
   jvectormap-rails (~> 2.0)
   kaminari
+  kramdown (~> 1.16, >= 1.16.2)
   launchy
   local_time (~> 2.0)
   mercury-rails!
