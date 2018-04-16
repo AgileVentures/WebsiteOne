@@ -10,37 +10,4 @@
   <% end %>
 </div>
 
-<div id="page-box">
-  <div id="page-overview">
-    <h1>
-      <div id="static_page_title" style="display: inline;" data-mercury="simple" data-type="editable"><%= @page.title %></div>
-    </h1>
-  </div>
-  <div id="page-side-panel">
-    <% if user_signed_in? and Features.edit_static_pages.enabled %>
-      <ul>
-        <li><%= custom_css_btn 'edit', 'fa-2x fa fa-pencil-square-o', mercury_edit_path, id: 'edit_link',
-                               data: {save_url: static_page_mercury_update_path(@page.slug)} %>
-      </ul>
-    <% end %>
-  </div>
-</div>
-
-<div id="static_page_body" data-mercury="full" data-type="editable"><%= clean_html(@page.body) %></div>
-
-<% if user_signed_in? %>
-  <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
-  <%= link_to 'Cancel', '', id: 'cancel_link', class: 'btn btn-default', style: 'display:none;' %>
-<% end %>
-<br />
-<% if @page.versions.count > 1 %>
-  <a id="revisions-anchor" href="javascript:void(0)"><h4 style="display: inline-flex;">Revisions</h4><i id="arrow" class="fa fa-arrow-down fa-lg" style="display:inline-flex;margin-left:5px;position:relative;top:2px;"></i></a>
-  <div style="margin-bottom: 20px">
-    <div id="revisions" style="display: none;">
-      <% @page.versions.each do |version| %>
-        <%= user_details(version.whodunnit.to_i) %>
-        <%= version.event %>d <b>"<%= @page.title %>"</b>  <%= time_ago_in_words(version.created_at) %> ago <br/>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+<div id="static_page_body"><%= clean_html(@page.body) %></div>
