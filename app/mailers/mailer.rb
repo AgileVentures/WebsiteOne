@@ -29,4 +29,9 @@ class Mailer < ActionMailer::Base
     @newsletter = newsletter
     mail(to: user.email, subject: newsletter.subject)
   end
+  
+  def alert_project_creator_about_new_member(project, user) 
+    project_creator = User.find(project.user_id)
+    mail(to: project_creator.email, subject: "#{user.first_name} #{user.last_name} just joined #{project.title} project")
+  end
 end
