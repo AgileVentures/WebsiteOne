@@ -185,8 +185,7 @@ Given(/^I go to the "([^"]*)" project "([^"]*)" page$/) do |title, page|
   visit path_to(page, id)
 end
 
-And /^"(.*?)" project creator should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/ do |title, negate, subject, body|
-  user_id = Project.find_by(title: title).user_id
-  user_email = User.find(user_id).email
+And (/^"(.*?)" project creator should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/) do |title, negate, subject, body|
+  user_email = User.find(Project.find_by(title: title).user_id).email
   check_email(user_email, negate, subject, body)
 end
