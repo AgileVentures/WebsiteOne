@@ -268,39 +268,6 @@ describe ProjectsController, :type => :controller do
           expect(flash[:alert]).to eq('Project was not updated.')
         end
       end
-
-      context 'pitch update with Mercury' do
-        @project = FactoryBot.create(:project)
-        let(:params) do
-          { id: @project,
-           :content =>
-               {:pitch_content => {:value => "my new pitch"},
-               }}
-        end
-        let(:project) { @project }
-
-        before(:each) do
-          allow(@project).to receive(:update_attributes).and_return(true)
-          allow(project).to receive(:create_activity)
-          put :mercury_update, params: params
-
-        end
-
-        it 'should render an empty string' do
-          expect(response.body).to be_empty
-        end
-
-
-        it 'should update the project pitch with the content' do
-          expect(project).to have_received(:update_attributes)
-                                 .with(pitch: 'my new pitch')
-        end
-
-        it 'received :create_activity with :update' do
-          expect(project).to have_received(:create_activity)
-                                 .with(:update, owner: @user)
-        end
-      end
     end
   end
 end
