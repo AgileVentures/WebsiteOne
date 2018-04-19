@@ -98,6 +98,10 @@
           <br/>
           <%= link_to 'Join now', @recent_hangout.hangout_url %>
         </div>
+    <% elsif @event.try :within_current_event_duration? %>
+        <div class="event-notice">
+          It's time! Please start the event.
+        </div>
     <% end %>
   </div>
 </div>

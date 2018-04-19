@@ -161,7 +161,7 @@ When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
   end
 end
 
-Given /^the time now is "([^"]*)"$/ do |time|
+Given (/^the time now is "([^"]*)"$/) do |time|
   # use delorean
   Time.stub(now: Time.parse(time))
 end
@@ -199,7 +199,7 @@ Then /^I should( not)? see:$/ do |negative, table|
   end
 end
 
-Then /^I should( not)? see "([^"]*)"$/ do |negative, string|
+Then (/^I should( not)? see "([^"]*)"$/) do |negative, string|
   unless negative
     expect(page).to have_text string
   else
