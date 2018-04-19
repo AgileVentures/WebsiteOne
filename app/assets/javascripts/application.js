@@ -34,8 +34,8 @@
 //= require moment-timezone-with-data-2010-2020
 //= require chatlio
 //= require cocoon
+//= require fullcalendar
 //= require lolex
-
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code
@@ -49,66 +49,70 @@
 // The module's init method will automatically be called on TurboLink's
 // page:load or document ready event
 
-window.WebsiteOne = window.WebsiteOne || (function() {
-  var modules = [],
+window.WebsiteOne =
+  window.WebsiteOne ||
+  (function() {
+    var modules = [],
       newPageLoaded = false,
       runOnceCallbacks = {};
 
-  function define(name, factory) {
-    window.WebsiteOne[name] = window.WebsiteOne[name] || (function() {
-      modules.push(name);
-      var newModule = factory();
+    function define(name, factory) {
+      window.WebsiteOne[name] =
+        window.WebsiteOne[name] ||
+        (function() {
+          modules.push(name);
+          var newModule = factory();
 
-      if (!window.WebsiteOne._newPageLoaded) {
-        newModule.init();
+          if (!window.WebsiteOne._newPageLoaded) {
+            newModule.init();
+          }
+
+          return newModule;
+        })();
+
+      return window.WebsiteOne[name];
+    }
+
+    function runOnce(name, callback) {
+      runOnceCallbacks[name] = runOnceCallbacks[name] || {
+        callback: callback,
+        executed: false
+      };
+    }
+
+    function clear() {
+      for (var i = 0; i < modules.length; i++) {
+        delete window.WebsiteOne[modules[i]];
       }
 
-      return newModule;
-    })();
-
-    return window.WebsiteOne[name];
-  }
-
-  function runOnce(name, callback) {
-    runOnceCallbacks[name] = runOnceCallbacks[name] || {
-      callback: callback,
-      executed: false
-    }
-  }
-
-  function clear() {
-    for (var i = 0; i < modules.length; i++) {
-      delete window.WebsiteOne[modules[i]];
+      modules.length = 0;
     }
 
-    modules.length = 0;
-  }
-
-  function init() {
-    for (var i = 0; i < modules.length; i++) {
-      window.WebsiteOne[modules[i]].init();
-    }
-
-    for (var name in runOnceCallbacks) {
-      if (!runOnceCallbacks[name].executed) {
-        runOnceCallbacks[name].callback();
-        runOnceCallbacks[name].executed = true;
+    function init() {
+      for (var i = 0; i < modules.length; i++) {
+        window.WebsiteOne[modules[i]].init();
       }
+
+      for (var name in runOnceCallbacks) {
+        if (!runOnceCallbacks[name].executed) {
+          runOnceCallbacks[name].callback();
+          runOnceCallbacks[name].executed = true;
+        }
+      }
+
+      window.WebsiteOne._newPageLoaded = false;
     }
 
-    window.WebsiteOne._newPageLoaded = false;
-  }
-
-  return {
-    _init: init,
-    define: define,
-    runOnce: runOnce,
-    _modules: modules,
-    _registered: false,
-    _newPageLoaded: newPageLoaded,
-    _clear: clear
-  }
-})();
+    return {
+      _init: init,
+      define: define,
+      runOnce: runOnce,
+      _modules: modules,
+      _registered: false,
+      _newPageLoaded: newPageLoaded,
+      _clear: clear
+    };
+  })();
 
 window.WebsiteOne._newPageLoaded = true;
 
@@ -119,4 +123,27 @@ $(function() {
 
     window.WebsiteOne._registered = true;
   }
+});
+
+$(function() {
+  $('#calendar').fullCalendar({
+    header: {
+      right: 'prev, next, today, month, agendaWeek, agendaDay'
+    },
+    events: function(start, end, timezone, callback) {
+      var timezoneoffset = new Date().getTimezoneOffset();
+      var events = [];
+      $.ajax({
+        url: '/events.json',
+        success: function(doc) {
+          $.map(doc, function(event) {
+            event.start = moment.utc(event.start).local();
+            event.end = moment.utc(event.end).local();
+            events.push(event);
+          });
+          callback(events);
+        }
+      });
+    }
+  });
 });
