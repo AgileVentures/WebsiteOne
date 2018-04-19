@@ -51,18 +51,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def mercury_update
-    set_project
-    @project.update_attributes(pitch: params[:content][:pitch_content][:value])
-    add_to_feed(:update)
-    render html: ''
-  end
-
-  def mercury_saved
-    @project = Project.find_by_slug(params[:id])
-    redirect_to project_path(@project), notice: 'The project has been successfully updated.'
-  end
-
   def destroy
     #if @project.destroy
     #  @notice = 'Project was successfully deleted.'
