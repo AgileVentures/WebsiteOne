@@ -304,12 +304,13 @@ describe ProjectsController, :type => :controller do
     end
     describe '#follow' do
         before(:each) do
-          @user = FactoryBot.create(:user, id: 1)
-          @project = FactoryBot.create(:project, user: @user)
+          @user1 = FactoryBot.create(:user, id: 1)
+          @user2 = FactoryBot.create(:user, id: 2)
+          @project = FactoryBot.create(:project, user: @user2)
         end
         it 'calls the mailer model method alert_project_creator_about_new_member' do
           message_delivery = instance_double(ActionMailer::MessageDelivery)
-          expect(Mailer).to receive(:alert_project_creator_about_new_member).with(@project, @user).and_return(message_delivery)
+          expect(Mailer).to receive(:alert_project_creator_about_new_member).with(@project, @user1).and_return(message_delivery)
           allow(message_delivery).to receive(:deliver_now)
           get :follow, params: { id: @project.id }
         end
