@@ -3,9 +3,11 @@ require 'spec_helper'
 describe RegistrationsController do
   describe 'POST create' do
     context 'successful save' do
+      let(:emails_opt_in) { '1' }
+
       before(:each) do
         request.env['devise.mapping'] = Devise.mappings[:user]
-        post :create, params: { user: {email: 'random@random.com', password: 'randomrandom', password_confirmation: 'randomrandom'} }
+        post :create, params: { user: {email: 'random@random.com', password: 'randomrandom', password_confirmation: 'randomrandom', emails_opt_in: emails_opt_in} }
       end
 
       it 'redirects to index' do
@@ -23,6 +25,32 @@ describe RegistrationsController do
         recipients = email.to
         expect(recipients.size).to eq 1
         expect(recipients[0]).to eq 'random@random.com'
+      end
+      
+      context 'should set emails_opt_in in user' do
+        it 'set emails_opt_in to true when params[:emails_opt_in] is 1' do
+          user = User.find_by email: 'random@random.com'
+          expect(user.emails_opt_in).to eq(true)
+        end
+      end
+
+      context 'should set emails_opt_in in user' do
+        let(:emails_opt_in) { '0' }
+
+        it 'set emails_opt_in to false when params[:emails_opt_in] is 0' do
+  
+          user = User.find_by email: 'random@random.com'
+          expect(user.emails_opt_in).to eq(false)
+        end
+      end
+      
+      context 'should set emails_opt_in in user' do
+        let(:emails_opt_in) { nil }
+
+        it 'set emails_opt_in to false when params[:emails_opt_in] is nil' do
+          user = User.find_by email: 'random@random.com'
+          expect(user.emails_opt_in).to eq(false)
+        end
       end
     end
 

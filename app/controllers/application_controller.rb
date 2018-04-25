@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
       :password_confirmation, :current_password,
       :display_email, :display_profile, :display_hire_me,
       :receive_mailings, :status])
+    
+    modify_user_signup_params
   end
 
   def after_sign_in_path_for(resource)
@@ -73,6 +75,14 @@ class ApplicationController < ActionController::Base
   def show_deactivated_message_and_redirect_to_root
     flash[:alert] = 'User is deactivated.'
     redirect_to root_path
+  end
+  
+  def modify_user_signup_params
+    devise_parameter_sanitizer.permit(:sign_up) do |user_signup_params|
+      user_signup_params.permit(:emails_opt_in)
+      user_signup_params[:emails_opt_in] = user_signup_params[:emails_opt_in] == '1'
+      user_signup_params.permit!
+    end
   end
 
 end
