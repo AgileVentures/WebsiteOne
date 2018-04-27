@@ -17,8 +17,14 @@ Background:
   
                                       
 
- Scenario: Having karma link to activity tab
+ Scenario: user with hangouts attended with more than one participant
     Given I am logged in as "Alice"
     And I am on my "Profile" page
     When I click on the karma link
     Then the Activity tab displays "Contributions (GitHub) - 500 total commits x 1 - 500"
+
+  Scenario: user not attended hangouts with more than one participant
+    Given I am logged in as "John"
+    And I am on my "Profile" page
+    When I click on the karma link
+    Then the Activity tab does not display "Contributions"
