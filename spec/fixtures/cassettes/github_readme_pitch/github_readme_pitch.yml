@@ -1,0 +1,529 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/fake/repository/contents/PITCH.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 01 May 2018 18:50:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '40'
+      X-Ratelimit-Reset:
+      - '1525202856'
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.022758'
+      X-Github-Request-Id:
+      - A958:27B5:3D82EB7:893F7AB:5AE8B6E7
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
+    http_version: 
+  recorded_at: Tue, 01 May 2018 18:50:16 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/fake/repository/contents/README.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 01 May 2018 18:50:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '39'
+      X-Ratelimit-Reset:
+      - '1525202856'
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.015194'
+      X-Github-Request-Id:
+      - A95A:27AF:26D6B0F:5D24FD3:5AE8B6E8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
+    http_version: 
+  recorded_at: Tue, 01 May 2018 18:50:16 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/README.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 01 May 2018 18:50:17 GMT
+      Content-Type:
+      - application/vnd.github.html; charset=utf-8
+      Content-Length:
+      - '4728'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '38'
+      X-Ratelimit-Reset:
+      - '1525202856'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - '"06ba001b49a7c9eb032b3809a62db448f8558073"'
+      Last-Modified:
+      - Tue, 01 May 2018 11:39:30 GMT
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.047969'
+      X-Github-Request-Id:
+      - A95C:27B0:571E0EE:AA0732A:5AE8B6E9
+    body:
+      encoding: UTF-8
+      string: |-
+        <div id="file" class="announce instapaper_body md" data-path="README.md"><article class="markdown-body entry-content" itemprop="text"><p><a href="https://travis-ci.org/AgileVentures/LocalSupport" rel="nofollow"><img src="https://camo.githubusercontent.com/d16061b38261e29c60358f72cacd60e9ff7d8c49/68747470733a2f2f7472617669732d63692e6f72672f4167696c6556656e74757265732f4c6f63616c537570706f72742e706e67" alt="Build Status" data-canonical-src="https://travis-ci.org/AgileVentures/LocalSupport.png" style="max-width:100%;"></a> <a href="https://codeclimate.com/github/AgileVentures/LocalSupport/maintainability" rel="nofollow"><img src="https://camo.githubusercontent.com/f8b663b417ebde32e165904a32a4c2129ff3c662/68747470733a2f2f6170692e636f6465636c696d6174652e636f6d2f76312f6261646765732f33343438663635346164636466653334623030372f6d61696e7461696e6162696c697479" alt="Maintainability" data-canonical-src="https://api.codeclimate.com/v1/badges/3448f654adcdfe34b007/maintainability" style="max-width:100%;"></a> <a href="https://codeclimate.com/github/AgileVentures/LocalSupport/test_coverage" rel="nofollow"><img src="https://camo.githubusercontent.com/54876f91c8630fc0af13a1ce7ea6a7b437e2ffde/68747470733a2f2f6170692e636f6465636c696d6174652e636f6d2f76312f6261646765732f33343438663635346164636466653334623030372f746573745f636f766572616765" alt="Test Coverage" data-canonical-src="https://api.codeclimate.com/v1/badges/3448f654adcdfe34b007/test_coverage" style="max-width:100%;"></a></p>
+        <h1><a id="user-content-localsupport" class="anchor" aria-hidden="true" href="#localsupport"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LocalSupport</h1>
+        <p>LocalSupport is the software that runs the <a href="https://www.harrowcn.org.uk/" rel="nofollow">Harrow Community Network</a>, which was originally conceived as a directory of local support services, e.g. a list charities and non-profits in a particular area.  It's since pivoted to focus on volunteer opportunities in a local area, but the list of organisations remains accessible.</p>
+        <p><a href="http://www.agileventures.org/projects/localsupport/documents/project-overview-localsupport" rel="nofollow">Project Overview on AgileVentures</a></p>
+        <p>Installation and other technical issues are being moved from the github wiki to the docs dir:</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/blob/develop/docs/installation.md#installation">Installation notes</a></p>
+        <p>To help with development please see our <a href="CONTRIBUTING.md">contribution guidelines</a>.</p>
+        <p>If you encounter any issues or trouble, please search the issues tracker, and if necessary open a new issue describing the problem in detail including information about platforms, versions etc.</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/issues">https://github.com/AgileVentures/LocalSupport/issues</a></p>
+        <p>Many thanks to all the contributions from volunteers from all around the world.</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/contributors">Graph of Contributors</a></p>
+        <a href="mailto:tansaku@gmail.com?subject=Pairing on LocalSupport" title="Pair program with me!">
+          <img src="https://camo.githubusercontent.com/9f9e2984449459c75bbeef9c6feb3ed812371e9c/687474703a2f2f7061697270726f6772616d776974682e6d652f62616467652e706e67" alt="Pair program with me!" data-canonical-src="http://pairprogramwith.me/badge.png" style="max-width:100%;">
+        </a>
+        <h1><a id="user-content-license" class="anchor" aria-hidden="true" href="#license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>License</h1>
+        <p>The logo is copyright Alex, all rights reserved.</p>
+        <p>The authors and contributors have agreed to license all other software
+        under the MIT license, an open source free software license. See the
+        file named COPYING which includes a disclaimer of warranty.</p>
+        </article></div>
+    http_version: 
+  recorded_at: Tue, 01 May 2018 18:50:17 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/PITCH.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 01 May 2018 18:50:18 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '37'
+      X-Ratelimit-Reset:
+      - '1525202856'
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.030976'
+      X-Github-Request-Id:
+      - A95E:27B5:3D82F90:893F9AF:5AE8B6E9
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
+    http_version: 
+  recorded_at: Tue, 01 May 2018 18:50:18 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/README.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 01 May 2018 18:50:18 GMT
+      Content-Type:
+      - application/vnd.github.html; charset=utf-8
+      Content-Length:
+      - '4728'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '36'
+      X-Ratelimit-Reset:
+      - '1525202856'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - '"06ba001b49a7c9eb032b3809a62db448f8558073"'
+      Last-Modified:
+      - Tue, 01 May 2018 11:39:30 GMT
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.051749'
+      X-Github-Request-Id:
+      - A960:27B0:571E1AE:AA074C4:5AE8B6EA
+    body:
+      encoding: UTF-8
+      string: |-
+        <div id="file" class="announce instapaper_body md" data-path="README.md"><article class="markdown-body entry-content" itemprop="text"><p><a href="https://travis-ci.org/AgileVentures/LocalSupport" rel="nofollow"><img src="https://camo.githubusercontent.com/d16061b38261e29c60358f72cacd60e9ff7d8c49/68747470733a2f2f7472617669732d63692e6f72672f4167696c6556656e74757265732f4c6f63616c537570706f72742e706e67" alt="Build Status" data-canonical-src="https://travis-ci.org/AgileVentures/LocalSupport.png" style="max-width:100%;"></a> <a href="https://codeclimate.com/github/AgileVentures/LocalSupport/maintainability" rel="nofollow"><img src="https://camo.githubusercontent.com/f8b663b417ebde32e165904a32a4c2129ff3c662/68747470733a2f2f6170692e636f6465636c696d6174652e636f6d2f76312f6261646765732f33343438663635346164636466653334623030372f6d61696e7461696e6162696c697479" alt="Maintainability" data-canonical-src="https://api.codeclimate.com/v1/badges/3448f654adcdfe34b007/maintainability" style="max-width:100%;"></a> <a href="https://codeclimate.com/github/AgileVentures/LocalSupport/test_coverage" rel="nofollow"><img src="https://camo.githubusercontent.com/54876f91c8630fc0af13a1ce7ea6a7b437e2ffde/68747470733a2f2f6170692e636f6465636c696d6174652e636f6d2f76312f6261646765732f33343438663635346164636466653334623030372f746573745f636f766572616765" alt="Test Coverage" data-canonical-src="https://api.codeclimate.com/v1/badges/3448f654adcdfe34b007/test_coverage" style="max-width:100%;"></a></p>
+        <h1><a id="user-content-localsupport" class="anchor" aria-hidden="true" href="#localsupport"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LocalSupport</h1>
+        <p>LocalSupport is the software that runs the <a href="https://www.harrowcn.org.uk/" rel="nofollow">Harrow Community Network</a>, which was originally conceived as a directory of local support services, e.g. a list charities and non-profits in a particular area.  It's since pivoted to focus on volunteer opportunities in a local area, but the list of organisations remains accessible.</p>
+        <p><a href="http://www.agileventures.org/projects/localsupport/documents/project-overview-localsupport" rel="nofollow">Project Overview on AgileVentures</a></p>
+        <p>Installation and other technical issues are being moved from the github wiki to the docs dir:</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/blob/develop/docs/installation.md#installation">Installation notes</a></p>
+        <p>To help with development please see our <a href="CONTRIBUTING.md">contribution guidelines</a>.</p>
+        <p>If you encounter any issues or trouble, please search the issues tracker, and if necessary open a new issue describing the problem in detail including information about platforms, versions etc.</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/issues">https://github.com/AgileVentures/LocalSupport/issues</a></p>
+        <p>Many thanks to all the contributions from volunteers from all around the world.</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/contributors">Graph of Contributors</a></p>
+        <a href="mailto:tansaku@gmail.com?subject=Pairing on LocalSupport" title="Pair program with me!">
+          <img src="https://camo.githubusercontent.com/9f9e2984449459c75bbeef9c6feb3ed812371e9c/687474703a2f2f7061697270726f6772616d776974682e6d652f62616467652e706e67" alt="Pair program with me!" data-canonical-src="http://pairprogramwith.me/badge.png" style="max-width:100%;">
+        </a>
+        <h1><a id="user-content-license" class="anchor" aria-hidden="true" href="#license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>License</h1>
+        <p>The logo is copyright Alex, all rights reserved.</p>
+        <p>The authors and contributors have agreed to license all other software
+        under the MIT license, an open source free software license. See the
+        file named COPYING which includes a disclaimer of warranty.</p>
+        </article></div>
+    http_version: 
+  recorded_at: Tue, 01 May 2018 18:50:18 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/nisevi/nisevi/contents/PITCH.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 01 May 2018 18:50:19 GMT
+      Content-Type:
+      - application/vnd.github.html; charset=utf-8
+      Content-Length:
+      - '805'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '35'
+      X-Ratelimit-Reset:
+      - '1525202856'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - '"d25bb0737558204b4f0d08efc0519c53d2efd0cb"'
+      Last-Modified:
+      - Tue, 01 May 2018 17:54:10 GMT
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.044519'
+      X-Github-Request-Id:
+      - A962:27B0:571E22C:AA075CD:5AE8B6EB
+    body:
+      encoding: UTF-8
+      string: |-
+        <div id="file" class="announce instapaper_body md" data-path="PITCH.md"><article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-introduction" class="anchor" aria-hidden="true" href="#introduction"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introduction</h1>
+        <p>This project is a blog built by using Rails 5.</p>
+        </article></div>
+    http_version: 
+  recorded_at: Tue, 01 May 2018 18:50:19 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/nisevi/nisevi/contents/PITCH.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 01 May 2018 18:50:20 GMT
+      Content-Type:
+      - application/vnd.github.html; charset=utf-8
+      Content-Length:
+      - '805'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '34'
+      X-Ratelimit-Reset:
+      - '1525202856'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - '"d25bb0737558204b4f0d08efc0519c53d2efd0cb"'
+      Last-Modified:
+      - Tue, 01 May 2018 17:54:10 GMT
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.042540'
+      X-Github-Request-Id:
+      - A964:27B0:571E28E:AA0769B:5AE8B6EB
+    body:
+      encoding: UTF-8
+      string: |-
+        <div id="file" class="announce instapaper_body md" data-path="PITCH.md"><article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-introduction" class="anchor" aria-hidden="true" href="#introduction"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introduction</h1>
+        <p>This project is a blog built by using Rails 5.</p>
+        </article></div>
+    http_version: 
+  recorded_at: Tue, 01 May 2018 18:50:20 GMT
+recorded_with: VCR 4.0.0
