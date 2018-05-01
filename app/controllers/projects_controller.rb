@@ -64,6 +64,7 @@ class ProjectsController < ApplicationController
     set_project
     if current_user
       current_user.follow(@project)
+      Mailer.alert_project_creator_about_new_member(@project, current_user).deliver_now
       redirect_to project_path(@project)
       flash[:notice] = "You just joined #{@project.title}."
     else
