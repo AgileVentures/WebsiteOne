@@ -8,6 +8,7 @@ Feature: Notify project creator when people join project
       | first_name | last_name | email                  | skill_list         | hangouts_attended_with_more_than_one_participant | id |
       | Alice      | Jones     | alicejones@hotmail.com | ruby, rails, rspec |  1                                               | 1  |
       | John       | Doe       | john@doe.com           | ruby, rails, rspec |  nil                                             |    |
+      | Bryan      | Yap       | test@test.com          |                    |                                                  |    |
     Given the following projects exist:
       | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count | user_id |
       | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         | 2       |
@@ -23,3 +24,8 @@ Feature: Notify project creator when people join project
     And I click on the avatar for "Alice"
     When I click the "Edit" button
     And I uncheck "Receive site emails"
+    Given I sign out
+    When I am logged in as "Bryan"
+    And I go to the "hello world" project "show" page
+    When I click "Join Project"
+    Then "hello world" project creator should not receive a "Bryan Yap just joined hello world project" email
