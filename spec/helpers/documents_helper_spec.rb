@@ -15,7 +15,7 @@ RSpec.describe DocumentsHelper, :type => :helper do
     it "should return metadata of the latest version of the document" do
       @document.versions.last.update_attribute(:created_at, 2.months.ago)
       allow(User).to receive(:find_by_id).and_return(@user)
-      expect(helper.metadata).to eq('Created about 2 months ago by User')
+      expect(helper.metadata).to match(/Created( about)? 2 months ago by User/)
     end
   end
 end
