@@ -16,20 +16,22 @@ module GithubReadmeFilesJob
 
   def run(projects)
     projects.each do |project|
-      project.pitch = content(project.github_repo, 'PITCH.md')
-      project.save!
-    rescue StandardError => e
-      evaluate_exception(e, project)
+      begin
+        project.update(pitch: content(project.github_repo, 'PITCH.md'))
+      rescue StandardError => e
+        evaluate_exception(e, project)
+      end
     end
   end
 
   private
 
   def project_readme(project)
-    project.pitch = content(project.github_repo, 'README.md')
-    project.save!
-  rescue StandardError => e
-    log_error(e, project)
+    begin
+      project.update(pitch: content(project.github_repo, 'README.md'))
+    rescue StandardError => e
+      log_error(e, project)
+    end
   end
 
   def error_message(repository)
