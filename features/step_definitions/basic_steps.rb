@@ -319,8 +319,12 @@ Then(/^I should see (\d+) rows with text "(.*?)" in a table$/) do |count, text|
   expect(page).to have_css('table tr', text: text, count: count)
 end
 
-Then(/^I check "([^"]*)"$/) do |item|
-  check item
+Then(/^I (un)?check "([^"]*)"$/) do |negate, item|
+  if negate
+    uncheck item
+  else
+    check item
+  end
 end
 
 Then(/^I check by value "([^"]*)"$/) do |value|
