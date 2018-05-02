@@ -58,6 +58,7 @@ WebsiteOne.define('Users', function () {
             }, 5);
         });
 
+
         $('#user-filter').on('keyup', function (e) {
             e.preventDefault();
 
@@ -71,6 +72,11 @@ WebsiteOne.define('Users', function () {
         });
 
         $('#require_users_profile').modal({show: true});
+
+        $('#gotoactivity').click(function() {
+            $('#tabs a[href="#activity"]').tab('show');
+        });
+
 
         enableBootstrapTooltipsOnNonTouchDevices();
     }
