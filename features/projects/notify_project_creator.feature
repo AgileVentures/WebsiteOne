@@ -12,4 +12,4 @@ Feature: Notify project creator when people join project
     Given I am logged in
     And I go to the "hello world" project "show" page
     When I click "Join Project"
-    Then "hello world" project creator should receive a "Anders Persson just joined hello world project" email
+    Then "hello world" project creator should receive a "Anders Persson just joined hello world project" email containing "example@example.com just joined your project hello world, you can reach out and personally welcome them."
