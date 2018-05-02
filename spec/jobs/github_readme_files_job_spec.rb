@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe GithubReadmeFilesJob do
-  vcr_index = {cassette_name: 'github_readme_pitch/github_readme_pitch'}
+  vcr_index = { cassette_name: 'github_readme_pitch/github_readme_pitch' }
 
   describe '.job using readme', vcr: vcr_index do
     context 'Update pitch on project using the README.md file' do
