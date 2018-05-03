@@ -10,6 +10,6 @@ describe Mailer, :type => :model do
         email = Mailer.alert_project_creator_about_new_member(@project, @user2).deliver_now
         assert !ActionMailer::Base.deliveries.empty?
         assert_equal [@user1.email], email.to
-        assert_equal "#{@user2.email} just joined #{@project.title} project", email.subject
+        assert_equal "#{@user2.display_name} just joined #{@project.title} project", email.subject
     end
 end
