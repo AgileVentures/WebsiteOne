@@ -126,6 +126,7 @@ end
 Before('@rake') do |scenario|
   unless $rake
     require 'rake'
+    Rake.application.rake_require 'tasks/github_content_for_static_pages'
     Rake.application.rake_require 'tasks/scheduler'
     Rake.application.rake_require 'tasks/migrate_plans'
     Rake.application.rake_require 'tasks/create_plans'

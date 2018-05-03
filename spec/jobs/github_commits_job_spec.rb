@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe GithubCommitsJob do
-  vcr_index = {cassette_name: 'github_commit_count/websiteone_stats'}
+  vcr_index = { cassette_name: 'github_commit_count/websiteone_stats' }
 
   describe '.job', vcr: vcr_index do
     context 'when no empty repo present' do
@@ -36,12 +36,12 @@ describe GithubCommitsJob do
       end
   
       it 'stores correct commit counts by user and project' do
-        expect(CommitCount.find_by!(project: project, user: @users[0]).commit_count).to eq 481
+        expect(CommitCount.find_by!(project: project, user: @users[0]).commit_count).to eq 482
         expect(CommitCount.find_by(project: project, user: @users[1])).to be_nil
       end
   
       it 'stores correct total commit count for projects' do
-        expect(project.commit_count).to eq 3116
+        expect(project.commit_count).to eq 4220
       end
   
       it 'stores last_commit_at only for projects that have a github_url' do
