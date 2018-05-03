@@ -22,6 +22,7 @@ class Project < ApplicationRecord
 
   def self.with_github_url
     includes(:source_repositories)
+      .where("status ILIKE ?", "%active%")
       .where("source_repositories.url ILIKE ?", '%github%')
       .references(:source_repositories)
   end
