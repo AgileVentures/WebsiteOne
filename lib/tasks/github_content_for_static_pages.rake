@@ -6,7 +6,7 @@ namespace :fetch_github do
 
   desc 'Load PITCH/README file for AV projects using associated GitHub repository.'
   task :readme_files => :environment do
-    projects = Project.with_github_url
+    projects = Project.active.with_github_url
     GithubReadmeFilesJob.run(projects)
   end
 end
