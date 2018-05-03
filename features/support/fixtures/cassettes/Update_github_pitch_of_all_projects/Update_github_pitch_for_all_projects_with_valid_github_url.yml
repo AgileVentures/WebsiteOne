@@ -1,0 +1,475 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/WebsiteOne/contents/PITCH.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 03 May 2018 07:25:05 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4999'
+      X-Ratelimit-Reset:
+      - '1525335905'
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.045380'
+      X-Github-Request-Id:
+      - 8194:64A2:11444AD:22B105A:5AEAB951
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
+    http_version: 
+  recorded_at: Thu, 03 May 2018 07:25:05 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/WebsiteOne/contents/README.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 03 May 2018 07:25:06 GMT
+      Content-Type:
+      - application/vnd.github.html; charset=utf-8
+      Content-Length:
+      - '12097'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4998'
+      X-Ratelimit-Reset:
+      - '1525335905'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - '"8df66f1cb7dc78e22f87f87f70bcbf2bcbf1dcec"'
+      Last-Modified:
+      - Thu, 03 May 2018 07:04:41 GMT
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.057029'
+      X-Github-Request-Id:
+      - 8196:649F:908CBB:1531A1D:5AEAB951
+    body:
+      encoding: ASCII-8BIT
+      string: "<h1>AgileVentures WebSiteOne</h1>"
+    http_version: 
+  recorded_at: Thu, 03 May 2018 07:25:06 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/PITCH.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 03 May 2018 07:25:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4997'
+      X-Ratelimit-Reset:
+      - '1525335905'
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.076378'
+      X-Github-Request-Id:
+      - 8198:649F:908CFA:1531ABA:5AEAB952
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
+    http_version: 
+  recorded_at: Thu, 03 May 2018 07:25:07 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/README.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 03 May 2018 07:25:07 GMT
+      Content-Type:
+      - application/vnd.github.html; charset=utf-8
+      Content-Length:
+      - '4728'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4996'
+      X-Ratelimit-Reset:
+      - '1525335905'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - '"06ba001b49a7c9eb032b3809a62db448f8558073"'
+      Last-Modified:
+      - Thu, 03 May 2018 07:05:16 GMT
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.052463'
+      X-Github-Request-Id:
+      - 819A:64A2:114460E:22B132A:5AEAB953
+    body:
+      encoding: UTF-8
+      string: "<h1>AgileVentures LocalSupport</h1>"
+    http_version: 
+  recorded_at: Thu, 03 May 2018 07:25:07 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/nisevi/nisevi/contents/PITCH.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 03 May 2018 07:25:08 GMT
+      Content-Type:
+      - application/vnd.github.html; charset=utf-8
+      Content-Length:
+      - '805'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4995'
+      X-Ratelimit-Reset:
+      - '1525335905'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - '"d25bb0737558204b4f0d08efc0519c53d2efd0cb"'
+      Last-Modified:
+      - Tue, 01 May 2018 17:54:10 GMT
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.062386'
+      X-Github-Request-Id:
+      - 819C:649F:908D93:1531BF8:5AEAB954
+    body:
+      encoding: UTF-8
+      string: "<h1>nisevi</h1>"
+    http_version: 
+  recorded_at: Thu, 03 May 2018 07:25:08 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/fake/repo/contents/PITCH.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 03 May 2018 07:36:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4994'
+      X-Ratelimit-Reset:
+      - '1525335905'
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.024888'
+      X-Github-Request-Id:
+      - 81CC:64A1:D5FE97:1D069E5:5AEABBE6
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
+    http_version: 
+  recorded_at: Thu, 03 May 2018 07:36:06 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/fake/repo/contents/README.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.html
+      User-Agent:
+      - Octokit Ruby Gem 4.8.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 03 May 2018 07:36:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4993'
+      X-Ratelimit-Reset:
+      - '1525335905'
+      X-Github-Media-Type:
+      - github.v3; param=html
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.041490'
+      X-Github-Request-Id:
+      - 81CE:64A2:115C91A:22E0C00:5AEABBE7
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
+    http_version: 
+  recorded_at: Thu, 03 May 2018 07:36:07 GMT
+recorded_with: VCR 4.0.0

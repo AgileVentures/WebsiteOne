@@ -6,7 +6,6 @@ describe GithubLastUpdatesJob do
       let!(:project) { FactoryBot.create(:project) }
       before { project.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project') }
       it 'has correct last commit date after job run' do
-        # byebug
         GithubLastUpdatesJob.run
         expect(project.reload.last_github_update).not_to be_nil
       end

@@ -20,7 +20,13 @@ class Project < ApplicationRecord
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-  scope :with_github_url, ->{ includes(:source_repositories).where.not(source_repositories: { id: nil }) }
+  scope :active, -> { where("status ILIKE ?", "%active%") }
+
+  def self.with_github_url
+    includes(:source_repositories)
+      .where("source_repositories.url ILIKE ?", '%github%')
+      .references(:source_repositories)
+  end
 
   def self.search(search, page)
     order('LOWER(title)')
@@ -56,11 +62,9 @@ class Project < ApplicationRecord
   end
 
   def github_repo
-    if github_url.blank?
-      ''
-    else
-      /github.com\/(.+)/.match(github_url)[1]
-    end
+    matches = /[^\b(github.com\/)\b][a-zA-Z0-9\-]+\/[a-zA-Z0-9\-]+/.match(github_url)
+    return '' if github_url.blank? || matches.nil?
+    matches[0]
   end
 
   def github_repo_name
