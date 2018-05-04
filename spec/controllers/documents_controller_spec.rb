@@ -183,47 +183,4 @@ describe DocumentsController do
       expect(response).to redirect_to(project_documents_path(id))
     end
   end
-
-  describe 'POST mercury_update' do
-    before(:each) do
-      Document.stub_chain(:friendly, :find)
-        .with(@document.friendly_id).and_return(document)
-    end
-
-    context 'with valid params' do
-      let(:params) do
-        {
-          project_id: @document.project.friendly_id,
-          document_id: @document.friendly_id,
-          content: {
-            document_title: { value: 'my title' },
-            document_body: { value: 'document body' }
-          }
-        }
-      end
-
-      before(:each) do
-        allow(document).to receive(:create_activity)
-        allow(document).to receive(:update_attributes)
-          .and_return(true)
-      end
-
-      it 'should render an empty string' do
-        put :mercury_update, params: params
-        expect(response.body).to be_empty
-      end
-
-      it 'should update the document with the new title and body' do
-        put :mercury_update, params: params
-        expect(document).to have_received(:update_attributes)
-          .with({ title: 'my title', body: 'document body' })
-      end
-
-      it 'should create a document update activity' do
-        put :mercury_update, params: params
-        expect(document).to have_received(:create_activity)
-          .with(:update, owner: user)
-      end
-    end
-  end
 end
