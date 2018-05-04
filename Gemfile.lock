@@ -6,14 +6,6 @@ GIT
       httparty
 
 GIT
-  remote: https://github.com/AgileVentures/mercury.git
-  revision: 9d7d7f1c270014a0f27216ca5d31930bcc52eef4
-  specs:
-    mercury-rails (0.9.0)
-      coffee-rails (>= 3.2.2)
-      railties (>= 3.0)
-
-GIT
   remote: https://github.com/tcocca/acts_as_follower.git
   revision: c5ac7b9601c4af01eb4d9112330b27be4d694ecc
   specs:
@@ -696,7 +688,6 @@ DEPENDENCIES
   launchy
   letter_opener
   local_time (~> 2.0)
-  mercury-rails!
   nearest_time_zone
   newrelic_rpm
   nokogiri (= 1.8.2)
