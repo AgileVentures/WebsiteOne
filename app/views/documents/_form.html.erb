@@ -1,37 +1,38 @@
-<div class='row'>
-  <div class='col-sm-6'>
-    <% if @document.errors.any? %>
-      <div id="error_explanation" style="color: red;">
-        <p><%= pluralize(@document.errors.count, "error") %> prevented this document from being saved:</p>
-        <ul>
-          <% @document.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <%= form_for [@project, @document], :html => { :class => 'form-vertical', style: 'padding-left: 0;' } do |f| %>
+<div class='container-fluid'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <% if @document.errors.any? %>
+        <div id="error_explanation" style="color: red;">
+          <p><%= pluralize(@document.errors.count, "error") %> prevented this document from being saved:</p>
+          <ul>
+            <% @document.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= form_for [@project, @document], :html => { :class => 'form-vertical', style: 'padding-left: 0;' } do |f| %>
 
-      <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
+        <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
 
-
-      <div class='form-group'>
-        <%= f.label :title %>
-        <%= f.text_field :title, :class => 'form-control', placeholder: 'Title' %>
-      </div>
-      <!--div class='form-group'>
-          <%= f.label :body %>
-          <%= f.text_area :body, :class => 'form-control',  'rows' => 10, placeholder: 'Document body'%>
-        </div-->
-      <div class='form-group'>
-        <%= f.hidden_field :project_id, value: params[:project_id] %>
-      </div>
-      <div class='form-group'>
-        <%= f.submit 'Submit', class: 'btn btn-default', data: { disable_with: 'Working...' } %>
-      </div>
-      <div class="form-group">
-        <%= link_to 'Back', project_path(@project), type: 'button', class: 'btn btn-default' %>
-      </div>
-    <% end %>
+        <div class='form-group'>
+          <%= f.label :title %>
+          <%= f.text_field :title, :class => 'form-control', placeholder: 'Title' %>
+        </div>
+        <div class='form-group'>
+            <%= f.label :body %>
+            <%= f.text_area :body, :class => 'form-control',  'rows' => 10, placeholder: 'Document body'%>
+        </div>
+        <div class='form-group'>
+          <%= f.hidden_field :project_id, value: params[:project_id] %>
+        </div>
+        <div class='form-group'>
+          <%= f.submit 'Submit', class: 'btn btn-default', data: { disable_with: 'Working...' } %>
+        </div>
+        <div class="form-group">
+          <%= link_to 'Back', project_path(@project), type: 'button', class: 'btn btn-default' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -11,15 +11,11 @@ class StaticPagesController < ApplicationController
 
   def show
     return false if redirect_email_blunder
-    @page = StaticPage.friendly.find(get_page_id(params[:id]))
+    @page = StaticPage.friendly.find(params[:id].split('/').last)
     @ancestry = @page.self_and_ancestors.map(&:title).reverse
   end
 
   private
-  
-  def get_page_id page
-    page.split('/').reject { |i| ['mercury_saved', 'mercury_update'].include? i }.last
-  end
 
   def redirect_email_blunder
     if params[:id] == "premiumplus  "

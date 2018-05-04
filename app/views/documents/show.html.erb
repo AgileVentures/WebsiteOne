@@ -25,13 +25,11 @@
 </div>
 
 <h1>
-  <div id="document_title" style="width: 100%;" data-mercury="simple" data-type="editable"><%= @document.title %></div>
+  <div id="document_title" style="width: 100%;" data-type="editable"><%= @document.title %></div>
 </h1>
 <% if user_signed_in? %>
   <ul class="user-controls">
-    <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o fa-2x', mercury_edit_path, id: 'edit_link',
-                           data: {save_url: project_document_mercury_update_path(@project, @document)} %></li>
-
+    <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o fa-2x', edit_project_document_path(@project, @document), id: 'edit_link' %></li>
     <% if @document.root? %>
       <li><%= custom_css_btn 'new sub-document', 'fa fa-file-text-o fa-2x', new_project_document_path(project_id: @project.friendly_id, parent_id: @document.id), id: 'new_document_link' %></li>
     <% end %>
@@ -43,7 +41,7 @@
   <div><%= metadata %></div>
 </div>
 
-<div id="document_body" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
+<div id="document_body" data-type="editable"><%= clean_html(@document.body) %></div>
 
 <% if user_signed_in? %>
   <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
@@ -77,4 +75,3 @@
     </ul>
   <% end %>
 </div>
-<%= render partial: 'disqus/disqus', locals: {entity: @document, project: @project} unless inside_mercury? %>
