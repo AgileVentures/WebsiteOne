@@ -11,8 +11,4 @@ module DocumentsHelper
       "#{@document.versions.last.event.titleize}d #{time_ago_in_words(@document.versions.last.created_at)} ago by #{user_details(@document.versions.last.version_author)}"
     end
   end
-
-  def inside_mercury?
-    controller.request.original_url =~ /mercury_frame=true/
-  end
 end
