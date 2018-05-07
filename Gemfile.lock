@@ -339,6 +339,8 @@ GEM
     kramdown (1.16.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.6.0)
+      launchy (~> 2.2)
     libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -692,6 +694,7 @@ DEPENDENCIES
   kaminari
   kramdown (~> 1.16, >= 1.16.2)
   launchy
+  letter_opener
   local_time (~> 2.0)
   mercury-rails!
   nearest_time_zone
