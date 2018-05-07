@@ -32,6 +32,7 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks', '2.1.0'
 gem 'jvectormap-rails', '~> 2.0'
 gem 'kaminari'
+gem "letter_opener", :group => :development
 gem 'local_time', '~> 2.0'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
 gem 'nearest_time_zone'
