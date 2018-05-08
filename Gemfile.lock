@@ -571,7 +571,7 @@ GEM
       sprockets (>= 3.0.0)
     stripe (3.3.2)
       faraday (~> 0.9)
-    stripe-ruby-mock (2.5.3)
+    stripe-ruby-mock (2.5.4)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
@@ -738,7 +738,7 @@ DEPENDENCIES
   slack-ruby-client
   sprockets-rails (~> 3.2, >= 3.2.1)
   stripe
-  stripe-ruby-mock (~> 2.5.3)
+  stripe-ruby-mock (~> 2.5.4)
   sucker_punch
   therubyracer
   turbolinks
