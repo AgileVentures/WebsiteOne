@@ -9,6 +9,7 @@ Feature: Show Events
     Given the following users exist
       | first_name | last_name | email                      | latitude | longitude | updated_at   |
       | Alice      | Jones     | MyEmailAddress@example.com | 59.33    | 18.06     | 1 minute ago |
+      | Billy      | Bob       | MyFakeNews@example.com     | 59.33    | 18.06     | 1 minute ago |
     Given following events exist:
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
       | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
@@ -18,12 +19,24 @@ Feature: Show Events
 
 
   @javascript
-  Scenario: Event show page shows creator's icon and links to creator's profile
-    Given that "Alice" created the "Standup" event
+  Scenario: Event show page shows creator's icon, links to creator's profile, and date created
     Given the date is "2016/05/01 09:15:00 UTC"
-    And they view the event "Standup"
-    Then they should see a link to the creator of the event
-    Then they should see the icon of the creator of the event
+    Given that "Alice" created the "Standup" event
+    Then they view the event "Standup"
+    And they should see a link to the creator of the event
+    And they should see the icon of the creator of the event
+    And they should see the date of when it was created
+
+  @javascript
+  Scenario: Event show page shows modifier's icon, links to modifier's profile, and date modified
+    Given the date is "2018/01/01 09:15:00 UTC"
+    Given that "Alice" created the "Standup" event
+    When the date is "2018/05/04 01:00:00 UTC"
+    And that "Billy" modified the "Standup" event
+    Then they view the event "Standup"
+    And they should see a link to the modifier of the event
+    And they should see the icon of the modifier of the event
+    And they should see the date of when it was modified
 
   @javascript
   Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time, and while event is running
@@ -132,7 +145,7 @@ Feature: Show Events
     And I should see link "Event live! Join now" with "http://hangout.test"
     Then I should see "PP Session"
     And I should see "10:00-10:15 (UTC)"
-    
+
   @javascript
   Scenario: Show events information (unstarted)
     Given the date is "2014/02/03 07:01:00 UTC"
