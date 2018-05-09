@@ -35,4 +35,16 @@ describe EventHelper do
       expect(actual_result).to eql expected_result
     end
   end
+
+  describe 'set_column_width' do
+    it 'should be col-sm-2 when modifier_id exists' do
+      @event = FactoryBot.build(:event, name: 'Spec Scrum', modifier_id: 1)
+      expect(set_column_width).to eq('<div class="col-xs-12 col-sm-2"></div>')
+    end
+
+    it 'should be col-sm-4 when modifier_id does not exist' do
+      @event = FactoryBot.build(:event, name: 'Spec Scrum')
+      expect(set_column_width).to eq('<div class="col-xs-12 col-sm-4"></div>')
+    end
+  end
 end

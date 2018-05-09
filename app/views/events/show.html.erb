@@ -76,8 +76,7 @@
       </div>
   <% end %>
   <% if @event.creator %>
-      <div class="col-xs-12 col-sm-4">
-      </div>
+      <%= set_column_width %>
       <div class="col-xs-12 col-sm-2">
         <div class="row text-center">
           <%= link_to @event.creator.presenter.gravatar_image(size: 80, id: 'user-gravatar', class: 'img-circle'), user_path(@event.creator) %>
@@ -88,7 +87,27 @@
         <div class="row text-center">
           <%= link_to @event.creator.display_name, user_path(@event.creator) %>
         </div>
+        <div class="row text-center">
+          <%= @event.created_at.strftime "%F" %>
+        </div>
       </div>
+  <% end %>
+
+  <% if @event.modifier_id %>
+    <div class="col-xs-12 col-sm-2">
+      <div class="row text-center">
+        <%= link_to @event.modifier.presenter.gravatar_image(size: 80, id: 'user-gravatar', class: 'img-circle'), user_path(@event.modifier) %>
+      </div>
+      <div class="row text-center">
+        updated by:
+      </div>
+      <div class="row text-center">
+        <%= link_to @event.modifier.display_name, user_path(@event.modifier) %>
+      </div>
+      <div class="row text-center">
+        <%= @event.updated_at.strftime "%F" %>
+      </div>
+    </div>
   <% end %>
 
   <div class="col-xs-12 col-sm-6">
@@ -153,7 +172,7 @@
               <%= hidden_field_tag 'project_id', @event.project.id %>
             <% end %>
             <%= hidden_field_tag 'hangout_url', @recent_hangout.try!(:hangout_url) %>
-    
+
             <div class="form-group">
               <label class="control-label sr-only" for="yt_url">Manually modify Youtube link</label>
             </div>
