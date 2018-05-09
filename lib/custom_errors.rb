@@ -23,7 +23,7 @@ module CustomErrors
     unless [404].include? status
       if Rails.env.production?
         notice = Airbrake.build_notice(error)
-        notice.stash[:rack_request] = env['grape.request']
+        notice.stash[:rack_request] = Rails.env['grape.request']
         Airbrake.notify(notice)
       else
         ExceptionNotifier.notify_exception(error, env: request.env, :data => {message: 'was doing something wrong'})
