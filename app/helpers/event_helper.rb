@@ -43,4 +43,8 @@ module EventHelper
   def google_calendar_link(event)
     "https://calendar.google.com/calendar/render?action=TEMPLATE&dates=#{event.next_event_occurrence_with_time[:time].strftime('%Y%m%dT%H%M%SZ')}%2f#{(event.next_event_occurrence_with_time[:time] + @event.duration*60).strftime('%Y%m%dT%H%M%SZ')}&sprop=website:#{auto_link(event.description)}&text=#{event.name}&location=online&sprop=name:AgileVentures&details=#{event.description}"
   end
+
+  def set_column_width
+    @event.modifier_id ? '<div class="col-xs-12 col-sm-2"></div>'.html_safe : '<div class="col-xs-12 col-sm-4"></div>'.html_safe
+  end
 end

@@ -78,12 +78,16 @@ class EventsController < ApplicationController
     permitted = [
       :name, :category, :for, :project_id, :description, :duration, :repeats,
       :repeats_every_n_weeks, :repeat_ends_string, :time_zone, :creator_id,
-      :start_datetime, :repeat_ends, :repeat_ends_on
+      :start_datetime, :repeat_ends, :repeat_ends_on, :modifier_id
     ]
 
-    params.merge(event: params[:event].merge(creator_id: current_user.id))
+    params.merge(event: params[:event].merge(action_initiator))
           .require(:event)
           .permit(permitted, repeats_weekly_each_days_of_the_week: [])
+  end
+
+  def action_initiator
+    @event && @event.creator_id ? { modifier_id: current_user.id } : { creator_id: current_user.id }
   end
 
   # next_date and start_date are in the same dst or non-dst
