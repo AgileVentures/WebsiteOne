@@ -1,0 +1,6 @@
+module StaticPagesHelper
+	
+	def github_static_pages_edit_url
+		"https://github.com/AgileVentures/AgileVentures/edit/master/#{@page.title.gsub(' ','_').upcase}.md"
+	end
+end
