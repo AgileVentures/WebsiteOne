@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi <%= @project_creator.display_name %>,<br></p>
+    <p>
+      <%= mail_to @user.email, "#{@user.email}" %> just joined your project <%= @project.title %>, you can reach out and personally welcome them.<br>
+    </p>
+    <p>
+      You are receiving this email because you registered at <a href="http://www.agileventures.org/">www.agileventures.org</a>. If you wish to be removed from this mailing list, please login at av.org and go to your profile page and edit "Receive site emails" to be unchecked - if you are already logged in go directly to: <a href="http://www.agileventures.org/users/edit">www.agileventures.org/users/edit</a>.
+    </p>
+  </body>
+</html>

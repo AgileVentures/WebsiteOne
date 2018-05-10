@@ -192,8 +192,8 @@ describe Project, type: :model do
     it 'does not send an email when user\'s receive_mailings attribute is set to false' do
       user = FactoryBot.create(:user, receive_mailings: false)
       project = FactoryBot.create(:project, user: user)
-      project.send_notification_to_project_creator(user)
-      assert ActionMailer::Base.deliveries.empty?
+      mail = project.send_notification_to_project_creator(user)
+      expect(mail).to be_nil
     end
   end
 end

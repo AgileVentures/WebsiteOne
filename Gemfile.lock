@@ -67,9 +67,9 @@ GEM
     acts_as_votable (0.11.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (7.3.0)
-      airbrake-ruby (~> 2.5)
-    airbrake-ruby (2.8.3)
+    airbrake (7.3.2)
+      airbrake-ruby (~> 2.10)
+    airbrake-ruby (2.10.0)
     andand (1.3.3)
     apipie-rails (0.5.8)
       rails (>= 4.1)
@@ -107,7 +107,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
-    capybara-screenshot (1.0.19)
+    capybara-screenshot (1.0.21)
       capybara (>= 1.0, < 4)
       launchy
     capybara-webkit (1.15.0)
@@ -339,6 +339,8 @@ GEM
     kramdown (1.16.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.6.0)
+      launchy (~> 2.2)
     libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -382,7 +384,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    octokit (4.8.0)
+    octokit (4.9.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     omniauth (1.8.1)
       hashie (>= 3.4.6, < 3.6.0)
@@ -569,7 +571,7 @@ GEM
       sprockets (>= 3.0.0)
     stripe (3.3.2)
       faraday (~> 0.9)
-    stripe-ruby-mock (2.5.3)
+    stripe-ruby-mock (2.5.4)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
@@ -692,6 +694,7 @@ DEPENDENCIES
   kaminari
   kramdown (~> 1.16, >= 1.16.2)
   launchy
+  letter_opener
   local_time (~> 2.0)
   mercury-rails!
   nearest_time_zone
@@ -735,7 +738,7 @@ DEPENDENCIES
   slack-ruby-client
   sprockets-rails (~> 3.2, >= 3.2.1)
   stripe
-  stripe-ruby-mock (~> 2.5.3)
+  stripe-ruby-mock (~> 2.5.4)
   sucker_punch
   therubyracer
   turbolinks
