@@ -13,15 +13,10 @@ class StaticPagesController < ApplicationController
     return false if redirect_email_blunder
     @page = StaticPage.friendly.find(get_page_id(params[:id]))
     @ancestry = @page.self_and_ancestors.map(&:title).reverse
-    #new code
-    
-    #new code
   end
 
   private
-  #new code
   
-  #new code
   def get_page_id page
     page.split('/').reject { |i| ['mercury_saved', 'mercury_update'].include? i }.last
   end
