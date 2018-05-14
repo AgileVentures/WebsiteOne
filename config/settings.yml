@@ -55,6 +55,8 @@ twitter:
 
 github:
   auth_token: <%= ENV["GITHUB_AUTH_TOKEN"] %>
+  client_id: <%= ENV["GITHUB_KEY"] %>
+  client_secret: <%= ENV["GITHUB_SECRET"] %>
 
 agile_bot_url: <%= ENV['AGILE_BOT_URL'] %>
 

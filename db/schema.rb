@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418182311) do
+ActiveRecord::Schema.define(version: 20180507045056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20180418182311) do
     t.integer "project_id"
     t.integer "creator_id"
     t.string "for"
+    t.integer "modifier_id"
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["start_datetime"], name: "index_events_on_start_datetime"
   end
@@ -285,7 +286,6 @@ ActiveRecord::Schema.define(version: 20180418182311) do
     t.integer "status_count", default: 0
     t.datetime "deleted_at"
     t.integer "event_participation_count", default: 0
-    t.boolean "emails_opt_in"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

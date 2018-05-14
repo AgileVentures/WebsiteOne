@@ -145,6 +145,15 @@ Then(/^I should see projects looked up by title with the correct commit count:$/
   end
 end
 
+Then(/^I should see projects with pitch updated:$/) do |table|
+  # table is a Cucumber::Core::Ast::DataTable
+  projects = table.hashes
+  projects.each do | project |
+    updated_project = Project.find_by_title(project["title"])
+    expect(updated_project.pitch).to eq(project["pitch"])
+  end
+end
+
 Then(/^I should see projects looked up by title with first source repository same as github_url:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
@@ -183,9 +192,4 @@ end
 Given(/^I go to the "([^"]*)" project "([^"]*)" page$/) do |title, page|
   id = Project.find_by(title: title).id
   visit path_to(page, id)
-end
-
-And (/^"(.*?)" project creator should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/) do |title, negate, subject, body|
-  user_email = User.find(Project.find_by(title: title).user_id).email
-  check_email(user_email, negate, subject, body)
 end

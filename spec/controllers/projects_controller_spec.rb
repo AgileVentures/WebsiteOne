@@ -268,52 +268,6 @@ describe ProjectsController, :type => :controller do
           expect(flash[:alert]).to eq('Project was not updated.')
         end
       end
-
-      context 'pitch update with Mercury' do
-        @project = FactoryBot.create(:project)
-        let(:params) do
-          { id: @project,
-           :content =>
-               {:pitch_content => {:value => "my new pitch"},
-               }}
-        end
-        let(:project) { @project }
-
-        before(:each) do
-          allow(@project).to receive(:update_attributes).and_return(true)
-          allow(project).to receive(:create_activity)
-          put :mercury_update, params: params
-
-        end
-
-        it 'should render an empty string' do
-          expect(response.body).to be_empty
-        end
-
-
-        it 'should update the project pitch with the content' do
-          expect(project).to have_received(:update_attributes)
-                                 .with(pitch: 'my new pitch')
-        end
-
-        it 'received :create_activity with :update' do
-          expect(project).to have_received(:create_activity)
-                                 .with(:update, owner: @user)
-        end
-      end
-    end
-    describe '#follow' do
-        before(:each) do
-          @user1 = FactoryBot.create(:user, id: 1)
-          @user2 = FactoryBot.create(:user, id: 2)
-          @project = FactoryBot.create(:project, user: @user2)
-        end
-        it 'calls the mailer model method alert_project_creator_about_new_member' do
-          message_delivery = instance_double(ActionMailer::MessageDelivery)
-          expect(Mailer).to receive(:alert_project_creator_about_new_member).with(@project, @user1).and_return(message_delivery)
-          allow(message_delivery).to receive(:deliver_now)
-          get :follow, params: { id: @project.id }
-        end
     end
   end
 end

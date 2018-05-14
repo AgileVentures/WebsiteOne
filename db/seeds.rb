@@ -36,22 +36,25 @@ while true
     u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
     puts 'Added default user with email: ' + u.email.bold.blue + ' and password: ' + pw.bold.red
 
-    u.projects.create! :title => 'Autograder',
+    autograder = u.projects.create! :title => 'Autograder',
                        :description => 'Autograder for the EdX CS169.x SaaS course',
                        :status => 'Active',
                        commit_count: 200
+    autograder.source_repositories.create!(url: 'https://github.com/saasbook/rag')
 
-    u.projects.create! :title => 'WebsiteOne',
+    websiteone = u.projects.create! :title => 'WebsiteOne',
                        :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
                        :status => 'Active',
                        commit_count: 190
+    websiteone.source_repositories.create!(url: 'https://github.com/AgileVentures/WebsiteOne')
 
-    u.projects.create! :title => 'LocalSupport',
+    localsupport = u.projects.create! :title => 'LocalSupport',
                        :description => 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
 Our customer is the non-profit organization Voluntary Action Harrow.
 The mission is to support members of the public searching for support groups for things like helping care for an elderly or sick relative; and also to help charities and non-profits find each other and network.',
                        :status => 'Active',
                        commit_count: 100
+    localsupport.source_repositories.create!(url: 'https://github.com/AgileVentures/LocalSupport')
 
     u.projects.create! :title => 'EduChat',
                        :description => 'Supporting real time synchronous chat in online classes',

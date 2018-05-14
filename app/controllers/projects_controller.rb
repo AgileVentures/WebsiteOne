@@ -51,18 +51,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def mercury_update
-    set_project
-    @project.update_attributes(pitch: params[:content][:pitch_content][:value])
-    add_to_feed(:update)
-    render html: ''
-  end
-
-  def mercury_saved
-    @project = Project.find_by_slug(params[:id])
-    redirect_to project_path(@project), notice: 'The project has been successfully updated.'
-  end
-
   def destroy
     #if @project.destroy
     #  @notice = 'Project was successfully deleted.'
@@ -76,7 +64,7 @@ class ProjectsController < ApplicationController
     set_project
     if current_user
       current_user.follow(@project)
-      Mailer.alert_project_creator_about_new_member(@project, current_user).deliver_now
+      @project.send_notification_to_project_creator(current_user)
       redirect_to project_path(@project)
       flash[:notice] = "You just joined #{@project.title}."
     else
