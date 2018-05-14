@@ -79,8 +79,8 @@ class ApplicationController < ActionController::Base
   
   def modify_user_signup_params
     devise_parameter_sanitizer.permit(:sign_up) do |user_signup_params|
-      user_signup_params.permit(:emails_opt_in)
-      user_signup_params[:emails_opt_in] = user_signup_params[:emails_opt_in] == '1'
+      user_signup_params.permit(:receive_mailings)
+      user_signup_params[:receive_mailings] = user_signup_params[:receive_mailings] == '1'
       user_signup_params.permit!
     end
   end

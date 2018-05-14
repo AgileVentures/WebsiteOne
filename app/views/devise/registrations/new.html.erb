@@ -35,8 +35,8 @@
           <%= recaptcha_tags %>
           </div>
           <div class='form-group' style="display:inline-flex;">
-                <%= f.check_box :emails_opt_in %>
-                <%= f.label :emails_opt_in, "I give permission for AV to send me occasional emails.", { class: 'custom-label', style: "margin-left: 5px;" } %>
+                <%= f.check_box :receive_mailings %>
+                <%= f.label :receive_mailings, "I give permission for AV to send me occasional emails.", { class: 'custom-label', style: "margin-left: 5px;" } %>
               </div>
           <div class='form-group'>
             <%= f.submit 'Sign up', class: 'btn btn-primary btn-lg btn-block' %>
