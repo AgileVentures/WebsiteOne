@@ -54,7 +54,7 @@ module Helpers
     @current_user = nil
   end
 
-  def sign_up
+  def sign_up    
     delete_user
     visit new_user_registration_path
     within ('#main') do
