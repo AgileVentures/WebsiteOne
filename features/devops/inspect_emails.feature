@@ -1,13 +1,9 @@
+@intercept
 Feature: Inspect outgoing emails
   As a developer
   I want to be able to inspect generated emails
   
   Background:
-    Given I set the environment variables to:
-      | variable         | value        |
-      | USER_EMAIL       | me@ymail.com |
-      | INTERCEPT_EMAILS | true         |
-
     Given the following users exist
       | first_name | last_name | email                  | receive_mailings  | 
       | Alice      | Jones     | alicejones@hotmail.com | true              | 
