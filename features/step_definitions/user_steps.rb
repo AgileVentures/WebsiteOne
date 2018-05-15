@@ -108,7 +108,7 @@ When(/^I sign off$/) do
 end
 
 When /^I sign up with valid user data( giving consent)?$/ do |consent|
-  create_visitor(!consent.nil?)
+  create_visitor(receive_mailings: !consent.nil?)
   sign_up
 end
 
