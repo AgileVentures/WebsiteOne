@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'user'
 
 describe Event, :type => :model do
   before(:each) do
@@ -512,7 +513,17 @@ describe Event, :type => :model do
     end
 
   end
-  
+
+  context 'modifier' do
+    it 'responds to modifier' do
+      @event = FactoryBot.build(:event,
+                                 name: 'Spec Scrum',
+                                 modifier_id: 1)
+      expect(User).to receive(:find).with(1)
+      @event.modifier
+    end
+  end
+
   context '#jitsi_room_link' do
     it 'returns correct link' do
       event = FactoryBot.build(:event, name: 'Repeat Scrum-~!@#$')

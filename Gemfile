@@ -81,10 +81,10 @@ group :test do
   gem 'launchy'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
-  gem 'puffing-billy', '~> 1.1.0'
+  gem 'puffing-billy', '~> 1.1.1'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
-  gem 'stripe-ruby-mock', '~> 2.5.3', require: 'stripe_mock'
+  gem 'stripe-ruby-mock', '~> 2.5.4', require: 'stripe_mock'
   gem 'vcr'
   gem 'webmock'
   gem 'webrat'

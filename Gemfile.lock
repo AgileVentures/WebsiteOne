@@ -67,7 +67,7 @@ GEM
     acts_as_votable (0.11.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (7.3.1)
+    airbrake (7.3.3)
       airbrake-ruby (~> 2.10)
     airbrake-ruby (2.10.0)
     andand (1.3.3)
@@ -87,7 +87,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    brakeman (4.2.1)
+    brakeman (4.3.0)
     buftok (0.2.0)
     builder (3.2.3)
     bullet (5.7.5)
@@ -384,7 +384,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    octokit (4.8.0)
+    octokit (4.9.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     omniauth (1.8.1)
       hashie (>= 3.4.6, < 3.6.0)
@@ -431,7 +431,7 @@ GEM
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     public_suffix (3.0.2)
-    puffing-billy (1.1.0)
+    puffing-billy (1.1.1)
       addressable (~> 2.5)
       em-http-request (~> 1.1, >= 1.1.0)
       em-synchrony
@@ -441,7 +441,7 @@ GEM
       multi_json
     puma (3.11.4)
     rack (2.0.5)
-    rack-cache (1.7.1)
+    rack-cache (1.7.2)
       rack (>= 0.4)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
@@ -543,7 +543,7 @@ GEM
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
-    selenium-webdriver (3.11.0)
+    selenium-webdriver (3.12.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
     shellany (0.0.1)
@@ -571,7 +571,7 @@ GEM
       sprockets (>= 3.0.0)
     stripe (3.3.2)
       faraday (~> 0.9)
-    stripe-ruby-mock (2.5.3)
+    stripe-ruby-mock (2.5.4)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
@@ -715,7 +715,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
-  puffing-billy (~> 1.1.0)
+  puffing-billy (~> 1.1.1)
   puma
   rack-cache
   rack-timeout
@@ -738,7 +738,7 @@ DEPENDENCIES
   slack-ruby-client
   sprockets-rails (~> 3.2, >= 3.2.1)
   stripe
-  stripe-ruby-mock (~> 2.5.3)
+  stripe-ruby-mock (~> 2.5.4)
   sucker_punch
   therubyracer
   turbolinks
