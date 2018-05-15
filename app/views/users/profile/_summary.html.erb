@@ -5,7 +5,7 @@
 
 <div class="col-md-12 col-sm-6 col-xs-12 user-summary" style="padding: 0">
   <ul>
-    <h3><%= presenter.display_name %> <span class="karma-summary"><i class="fa fa-fire"></i><%= presenter.karma_total %></span></h3>
+    <h3><%= presenter.display_name %> <a href="#" id="gotoactivity"><span class="karma-summary"><i class="fa fa-fire"></i><%= presenter.karma_total %></span></a></h3>
     <% if presenter.has_title? %>
         <li>
           <%= presenter.title_list %>
@@ -46,12 +46,6 @@
           <%= link_to 'Hire me', user_path(presenter.user),
                       {remote: true, class: 'user-profile-btn',
                        data: {toggle: 'modal', target: '#modal-window'}} %>
-        </li>
-    <% end %>
-
-    <% if presenter.can_create_newsletter? && privileged_visitor? %>
-        <li>
-          <%= link_to 'New Newsletter', new_newsletter_path, class: 'user-profile-btn' %>
         </li>
     <% end %>
 

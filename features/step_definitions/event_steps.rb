@@ -348,14 +348,36 @@ Then(/^they should see the icon of the creator of the event$/) do
   expect(page).to have_xpath("//a[@href='#{user_path(@event.creator)}']/img[contains(@src, 'https://www.gravatar.com/avatar/0bc83cb571cd1c50ba6f3e8a78ef1346?s=80&d=retro')]")
 end
 
+Then(/^they should see the icon of the modifier of the event$/) do
+  expect(page).to have_xpath("//a[@href='#{user_path(@event.modifier)}']/img[contains(@src, 'https://www.gravatar.com/avatar/8c5d77ccca5d26e3ae00ddb782876d74?s=80&d=retro')]")
+end
+
 Then(/^they should see a link to the creator of the event$/) do
   expect(page).to have_link(@event.creator.display_name, href: user_path(@event.creator))
+end
+
+Then(/^they should see a link to the modifier of the event$/) do
+  expect(page).to have_link(@event.modifier.display_name, href: user_path(@event.modifier))
+end
+
+Then(/^they should see the date of when it was created$/) do
+  expect(page).to have_content(@event.created_at.strftime "%F")
+end
+
+Then(/^they should see the date of when it was modified$/) do
+  expect(page).to have_content(@event.updated_at.strftime "%F")
 end
 
 Given(/^that "([^"]*)" created the "([^"]*)" event$/) do |first_name, event_name|
   @event = Event.find_by(name: event_name)
   @event.creator = User.find_by(first_name: first_name)
   @event.save
+end
+
+Given(/^that "([^"]*)" modified the "([^"]*)" event$/) do |first_name, event_name|
+  step "I am logged in as \"#{first_name}\""
+  step "I visit the edit page for the event named \"#{event_name}\""
+  step "I click the \"Save\" button"
 end
 
 And(/^The box for "([\w]+)" should be checked$/) do |day|

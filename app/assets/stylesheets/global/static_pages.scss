@@ -77,7 +77,10 @@ section.page-preview {
   padding: 10px 5px;
   margin: 15px 0;
   font-size: 21px;
-  line-height: 1.58;
+
+  p {
+    line-height: 1.58;
+  }  
 
   img {
     max-width: 100%;

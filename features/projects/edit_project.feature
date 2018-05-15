@@ -53,32 +53,6 @@ Feature: Edit Project
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
-  Scenario: Launching Mercury editor
-    Given I am logged in
-    And I am on the "Show" page for project "hello mars"
-    And I click the "Join Project" button
-    And I click "Project Actions"
-    And I click "Edit Project Pitch"
-    Then I should be in the Mercury Editor
-
-  @javascript
-  Scenario: Editing Pitch content with Mercury Editor
-    Given I am logged in
-    And I am on the "Show" page for project "hello mars"
-    And I click the "Join Project" button
-    And I am using the Mercury Editor to edit project "hello mars"
-    When I fill in the editable field "Pitch" for "project" with "This is my exciting marketing content"
-    And I click "Save" within Mercury Editor toolbar
-    Then I should see a success flash "The project has been successfully updated."
-    Then I should be on the "Show" page for project "hello mars"
-    And I should see "This is my exciting marketing content"
-
-  Scenario: The Mercury Editor cannot be accessed by non-logged in users
-    Given I am on the "Show" page for project "hello mars"
-    Then I should not see "Edit Pitch"
-    And I try to use the Mercury Editor to edit project "hello mars"
-    Then I should see "You do not have the right privileges to complete action."
-
   Scenario: Update GitHub url if valid
     Given I am logged in
     And I am on the "Edit" page for project "hello mars"
