@@ -29,7 +29,7 @@ describe('WebsiteOne FlashMessages module', function() {
       // it appears jasmine uses window.setTimeout internally, so run this again manually
       $(document).trigger('page:load');
       // checks second argument to window.setTimeout
-      expect(timeoutSpy.calls.mostRecent().args[1]).toEqual(5000);
+      expect(timeoutSpy).toHaveBeenCalledWith(jasmine.anything(), 5000)
     });
 
     it('should cause the flash to fade over 0.5 seconds', function() {

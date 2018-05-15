@@ -237,7 +237,7 @@ class Event < ApplicationRecord
   def within_current_event_duration?
     after_current_start_time? and before_current_end_time?
   end
-  
+
   def current_start_time
     schedule.previous_occurrence(Time.now)
   end
@@ -260,6 +260,10 @@ class Event < ApplicationRecord
 
   def jitsi_room_link
     "https://meet.jit.si/AV_#{name.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
+  end
+
+  def modifier
+    User.find modifier_id
   end
 
   private
