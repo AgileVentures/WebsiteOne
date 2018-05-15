@@ -43,60 +43,6 @@ Feature: Static pages
     And I should see "Getting Started"
     And I should see "Remote Pair Programming"
 
-  Scenario: Has a link to edit a page using the Mercury Editor
-    Given I am logged in
-    And I am on the static "About Us" page
-    When I click the very stylish "Edit" button
-    Then I should be in the Mercury Editor
-
-  @javascript
-  Scenario: Mercury editor shows Save and Cancel buttons
-    Given I am logged in
-    And I am using the Mercury Editor to edit static "About Us" page
-    Then I should see button "Save" in Mercury Editor
-    And I should see button "Cancel" in Mercury Editor
-
-  @javascript
-  Scenario: Mercury editor Save button works
-    Given I am logged in
-    And I am using the Mercury Editor to edit static "About Us" page
-    When I fill in the editable field "Title" for "static_page" with "My new title"
-    And I fill in the editable field "Body" for "static_page" with "This is my new body text"
-    And I click "Save" in Mercury Editor
-    Then I should see "The page has been successfully updated."
-    Then I should be on the static "About Us" page
-    And I should see "My new title"
-    And I should see "This is my new body text"
-
-  @javascript
-  Scenario: Mercury editor Cancel button works
-    Given I am logged in
-    And I am using the Mercury Editor to edit static "About Us" page
-    When I fill in the editable field "Title" for "static_page" with "My new title"
-    And I click "Cancel" in Mercury Editor
-    Then I should be on the static "About Us" page
-    And I should see "About Us"
-
-  Scenario: The Mercury Editor should only work for the static pages
-    Given I am logged in
-    And I visit the site
-    When I try to edit the page
-    Then I should see "You do not have the right privileges to complete action."
-    Given I am on the "Projects" page
-    When I try to edit the page
-    Then I should see "You do not have the right privileges to complete action."
-
-  Scenario: The Mercury Editor cannot be accessed by non-logged in users
-    Given I am on the static "About Us" page
-    Then I should not see "Edit"
-    And I try to use the Mercury Editor to edit static "About Us" page
-    Then I should see "You do not have the right privileges to complete action."
-
-  Scenario: Page should have a history of changes
-    Given I am on the static "About Us" page
-    Then I should see "Revisions"
-    And I should see 4 revisions for the page "About Us"
-
   Scenario: Page can have children and children should have a correct url
     Given the page "About Us" has a child page with title "SubPage1"
     And I am on the static "SubPage1" page
