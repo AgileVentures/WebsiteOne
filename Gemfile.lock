@@ -401,7 +401,7 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paper_trail (9.0.1)
+    paper_trail (9.0.2)
       activerecord (>= 4.2, < 5.3)
       request_store (~> 1.1)
     paranoia (2.4.1)
