@@ -7,5 +7,5 @@ default: <%= std_opts %> features
 ci: --format pretty --strict features
 wip: --tags @wip:3 --wip features
 rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip
-first_try:  NEVER_FAIL=true  <%= std_opts %> --format rerun --out rerun.txt features --strict --tags ~@wip
+first_try:  NEVER_FAIL=false  <%= std_opts %> --format rerun --out rerun.txt features --strict --tags ~@wip
 second_try: NEVER_FAIL=false <%= std_opts %> @rerun.txt  --strict --tags ~@wip
