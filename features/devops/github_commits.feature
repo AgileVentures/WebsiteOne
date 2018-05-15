@@ -16,8 +16,8 @@ Feature: Update github stats of all projects
       When I run the rake task for fetching github commits
       Then I should see projects looked up by title with the correct commit count:
       | title        | commit_count |
-      | WebsiteTwo   | 94           |
-      | WebsiteOne   | 3572         |
+      | WebsiteTwo   | 95           |
+      | WebsiteOne   | 4250         |
       | edx          | 1            |
       | Unity        | 1            |
-      | LocalSupport | 3262         |
+      | LocalSupport | 3707         |
