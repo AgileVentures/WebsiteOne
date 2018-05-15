@@ -107,8 +107,8 @@ When(/^I sign off$/) do
   delete_user
 end
 
-When /^I sign up with valid user data$/ do
-  create_visitor
+When /^I sign up with valid user data( giving consent)?$/ do |consent|
+  create_visitor(!consent.nil?)
   sign_up
 end
 
