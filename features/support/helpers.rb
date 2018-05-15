@@ -32,14 +32,15 @@ module Helpers
     }
   end
 
-  def create_visitor
+  def create_visitor(receive_mailings = false)
     @visitor ||= { first_name: 'Anders',
                    last_name: 'Persson',
                    email: 'example@example.com',
                    password: 'changemesomeday',
                    password_confirmation: 'changemesomeday',
                    slug: 'slug-ma',
-                   country_name: 'Sweden'}
+                   country_name: 'Sweden',
+                   receive_mailings: receive_mailings}
   end
 
   def create_user
@@ -53,13 +54,14 @@ module Helpers
     @current_user = nil
   end
 
-  def sign_up
+  def sign_up    
     delete_user
     visit new_user_registration_path
     within ('#main') do
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]
       fill_in 'user_password_confirmation', :with => @visitor[:password_confirmation]
+      find(:css, "#user_receive_mailings").set(@visitor[:receive_mailings])
       click_button 'Sign up'
     end
   end
