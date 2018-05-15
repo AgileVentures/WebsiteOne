@@ -71,8 +71,3 @@ end
 When(/^I run the rake task for migrating github urls$/) do
   $rake['db:migrate_from_github_url_to_source_repository'].execute
 end
-
-When(/^the environment variable are correctly set$/) do
-  ENV['USER_EMAIL']='me@ymail.com'
-  ENV['INTERCEPT_EMAILS']='true'
-end

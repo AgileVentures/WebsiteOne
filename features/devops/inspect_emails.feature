@@ -3,6 +3,11 @@ Feature: Inspect outgoing emails
   I want to be able to inspect generated emails
   
   Background:
+    Given I set the environment variables to:
+      | variable         | value        |
+      | USER_EMAIL       | me@ymail.com |
+      | INTERCEPT_EMAILS | true         |
+
     Given the following users exist
       | first_name | last_name | email                  | receive_mailings  | 
       | Alice      | Jones     | alicejones@hotmail.com | true              | 
@@ -13,8 +18,7 @@ Feature: Inspect outgoing emails
       | hello world   | greetings earthlings  | active   | Alice  |
 
   Scenario: when a person joins project an email is sent to project creator
-    Given I am logged in as "John"
+    When I am logged in as "John"
     And I go to the "hello world" project "show" page
     When I click "Join Project"
-    And the environment variable are correctly set
     Then "me@ymail.com" should receive a "John Doe just joined hello world project" email
