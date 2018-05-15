@@ -32,7 +32,7 @@ module Helpers
     }
   end
 
-  def create_visitor(receive_mailings = false)
+  def create_visitor(receive_mailings: false)
     @visitor ||= { first_name: 'Anders',
                    last_name: 'Persson',
                    email: 'example@example.com',
