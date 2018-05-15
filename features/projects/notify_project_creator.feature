@@ -18,7 +18,7 @@ Feature: Notify project creator when people join project
     Given I am logged in as "John"
     And I go to the "hello world" project "show" page
     When I click "Join Project"
-    Then "alicejones@hotmail.com" should receive a "John Doe just joined hello world project" email containing "john@doe.com just joined your project hello world, you can reach out and personally welcome them."
+    Then "alicejones@hotmail.com" should receive a "John Doe just joined hello world project" email
 
   Scenario: Notification should not be sent to project creator if they disable site emails
     Given I am logged in as "Bryan"
