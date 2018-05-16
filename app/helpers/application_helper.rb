@@ -63,7 +63,7 @@ module ApplicationHelper
 
     text = options[:text] || (options[:delete] ? 'Remove' : prefix)
     path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
-        "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}"
+        "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}&user[receive_mailings]=true"
 
     raw <<-HTML
     <div data-no-turbolink>

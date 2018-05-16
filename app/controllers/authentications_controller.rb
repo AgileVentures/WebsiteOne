@@ -5,6 +5,7 @@ class AuthenticationsController < ApplicationController
 
   def create
     omniauth = request.env['omniauth.auth']
+    omniauth_params = request.env['omniauth.params']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
 
     @path = request.env['omniauth.origin'] || root_path
@@ -19,7 +20,7 @@ class AuthenticationsController < ApplicationController
       show_deactivated_message_and_redirect_to_root and return
 
     else
-      create_new_user_with_authentication(omniauth)
+      create_new_user_with_authentication(omniauth, omniauth_params)
     end
 
     if current_user && omniauth['provider']=='github' && current_user.github_profile_url.blank?
@@ -98,8 +99,8 @@ class AuthenticationsController < ApplicationController
     end
   end
 
-  def create_new_user_with_authentication(omniauth)
-    user = User.new(karma: Karma.new)
+  def create_new_user_with_authentication(omniauth, omniauth_params)
+    user = User.new(omniauth_params['user'].merge({karma: Karma.new}))
     user.apply_omniauth(omniauth)
 
     if user.save
