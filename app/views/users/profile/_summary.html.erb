@@ -49,12 +49,6 @@
         </li>
     <% end %>
 
-    <% if presenter.can_create_newsletter? && privileged_visitor? %>
-        <li>
-          <%= link_to 'New Newsletter', new_newsletter_path, class: 'user-profile-btn' %>
-        </li>
-    <% end %>
-
     <% if presenter.object.eql?(current_user) %>
         <li>
           <%= link_to 'Edit', edit_user_registration_path,

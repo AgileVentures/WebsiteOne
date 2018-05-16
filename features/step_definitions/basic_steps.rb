@@ -52,10 +52,6 @@ def path_to(page_name, id = '')
       static_page_path('premium_mob')
     when 'getting started' then
       static_page_path('getting-started')
-    when 'new newsletter' then
-      new_newsletter_path
-    when 'newsletters index' then
-      newsletters_path
     when 'sign up' then
       new_user_registration_path
     when 'premium sign up' then
