@@ -19,7 +19,9 @@ Then(/^I should see an 'Edit Page' button$/) do
 end
 
 Then(/^'Edit Page' should link to github edit page$/) do
-  expect(find_link('Edit Page')[:target]).to eq(github_edit_url)
+	 #expect(page).to have_selector('a[href="url"][target=github_edit_url]')
+	 expect(page).to have_link('Edit Page', href: github_edit_url)
+  #expect(find_link('Edit Page')[:target]).to eq(github_edit_url)
 end
 
 
