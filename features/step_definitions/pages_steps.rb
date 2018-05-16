@@ -6,7 +6,7 @@ Given(/^the following pages exist$/) do |table|
   table.hashes.each do |hash|
     StaticPage.create!(hash)
   end
-end
+end 
 
 Then /^I (am|should be) on the static "([^"]*)" page$/ do |option, page|
   case option
