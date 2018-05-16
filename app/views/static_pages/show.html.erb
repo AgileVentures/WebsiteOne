@@ -10,4 +10,6 @@
   <% end %>
 </div>
 
+<%= link_to 'Edit Page', github_static_pages_edit_url, class: 'btn btn-default pull-right' %>
+
 <div id="static_page_body"><%= clean_html(@page.body) %></div>
