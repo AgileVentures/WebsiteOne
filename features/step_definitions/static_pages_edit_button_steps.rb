@@ -1,9 +1,9 @@
 def github_edit_url
-	"https://github.com/AgileVentures/AgileVentures/edit/master/#{static_page.tr(' ','_').upcase}.md"
+  "https://github.com/AgileVentures/AgileVentures/edit/master/#{static_page.tr(' ','_').upcase}.md"
 end
 
 def static_page
-	'Sponsors'
+  'Sponsors'
 end
 
 When(/^I click the 'Sponsors' page$/) do
@@ -21,6 +21,3 @@ end
 Then(/^'Edit Page' should link to github edit page$/) do
   expect(find_link('Edit Page')[:target]).to eq(github_edit_url)
 end
-
-
-
