@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
   end
 
   private
-
+  
   def get_page_id page
     page.split('/').reject { |i| ['mercury_saved', 'mercury_update'].include? i }.last
   end

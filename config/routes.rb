@@ -13,7 +13,6 @@ WebsiteOne::Application.routes.draw do
   get loaderio_token => 'static_pages#loaderio'
 
   resources :activities
-  resources :newsletters
 
   resources :cards, only: [:create, :update, :edit, :new]
   resources :subscriptions, only: [:create, :update, :new]

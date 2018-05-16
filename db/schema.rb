@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507045056) do
+ActiveRecord::Schema.define(version: 20180515093331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,18 +153,6 @@ ActiveRecord::Schema.define(version: 20180507045056) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "newsletters", id: :serial, force: :cascade do |t|
-    t.string "title", null: false
-    t.string "subject", null: false
-    t.text "body", null: false
-    t.boolean "do_send", default: false
-    t.boolean "was_sent", default: false
-    t.integer "last_user_id", default: 0
-    t.datetime "sent_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "payment_sources", id: :serial, force: :cascade do |t|
     t.string "type"
     t.string "identifier"
@@ -280,7 +268,7 @@ ActiveRecord::Schema.define(version: 20180507045056) do
     t.string "github_profile_url"
     t.boolean "display_hire_me"
     t.text "bio"
-    t.boolean "receive_mailings", default: true
+    t.boolean "receive_mailings", default: false
     t.string "country_code"
     t.integer "timezone_offset"
     t.integer "status_count", default: 0
