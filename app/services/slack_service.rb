@@ -86,7 +86,7 @@ module SlackService
         "esaas-mooc": "C02A6835V",
         "eventmanager": "C39J4DTP0",
         "agileventures-community": ["C3Q9A5ZJA", "C02P3CAPA"],
-        "metplus": "C09LSBWER",
+        "metplus": "C0VEPAPJP",
         "localsupport": "C0KK907B5",
         "osra-support-system": "C02AAM8SY",
         "github-api-gem": "C02QZ46S9",
