@@ -201,13 +201,13 @@
   <ol>
     <% @event_instances.each do |event_instance| %>
       <li>
-        <%= "#{event_instance.created_at.strftime '%A, %B %e, %Y'} - " %>
-        <%= link_to "link to video", "https://www.youtube.com/watch?v=#{event_instance.yt_video_id}" %>
+        <%= link_to "#{event_instance.created_at.strftime '%A, %B %e, %Y'} - link to video", "https://www.youtube.com/watch?v=#{event_instance.yt_video_id}" %>
       </li>
     <% end %>
   </ol>
 </div>
 
+<hr/>
 <div class="row">
   <div class="col-xs-12">
     <p><%= link_to 'Learn more about Scrums', static_page_path('Getting started') %></p>
