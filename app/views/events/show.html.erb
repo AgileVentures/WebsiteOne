@@ -191,8 +191,22 @@
         <% end %>
       </div>
     </div>
-    <hr/>
 <% end %>
+<hr/>
+
+<div class="row" id="recent_event_list">
+  <% unless @event_instances.first %>
+    <p>No previous instances of this event</p>
+  <% end %>
+  <ol>
+    <% @event_instances.each do |event_instance| %>
+      <li>
+        <%= "#{event_instance.created_at.strftime '%A, %B %e, %Y'} - " %>
+        <%= link_to "link to video", "https://www.youtube.com/watch?v=#{event_instance.yt_video_id}" %>
+      </li>
+    <% end %>
+  </ol>
+</div>
 
 <div class="row">
   <div class="col-xs-12">
