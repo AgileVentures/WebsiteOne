@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
+  before_action :set_user_id
   before_action :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :user_activity
@@ -83,6 +84,13 @@ class ApplicationController < ActionController::Base
       user_signup_params[:receive_mailings] = user_signup_params[:receive_mailings] == '1'
       user_signup_params.permit!
     end
+  end
+
+  # set current_user.id to a cookie to allow google analytics to access current_user var
+  private
+
+  def set_user_id
+    cookies[:user_id] = current_user.id if current_user
   end
 
 end
