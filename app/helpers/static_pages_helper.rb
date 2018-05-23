@@ -3,4 +3,3 @@ module StaticPagesHelper
     "https://github.com/AgileVentures/AgileVentures/edit/master/#{@page.title.tr(' ','_').upcase}.md"
   end
 end
-
