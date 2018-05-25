@@ -411,7 +411,7 @@ GEM
     pivotal-tracker-api (1.0.3)
       business_time (~> 0.7.6)
       rest-client (~> 1.7)
-    poltergeist (1.18.0)
+    poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
