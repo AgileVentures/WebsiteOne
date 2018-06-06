@@ -630,7 +630,7 @@ GEM
     xpath (3.0.0)
       nokogiri (~> 1.8)
     youtube_rails (1.2.2)
-    yt (0.32.1)
+    yt (0.32.2)
       activesupport
       yt-support (>= 0.1)
     yt-support (0.1.3)
