@@ -91,6 +91,7 @@ module SlackService
         "osra-support-system": "C02AAM8SY",
         "github-api-gem": "C02QZ46S9",
         "oodls": "C03GBBASJ",
+        "phoenixone": "C7JANJXC4",
         "projectscope": "C1NJX7KM1",
         "redeemify": "C1FQZHJJX",
         "refugee_tech": "C0GUTH7RS",
