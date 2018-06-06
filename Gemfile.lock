@@ -336,7 +336,7 @@ GEM
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
     kdtree (0.4)
-    kramdown (1.16.2)
+    kramdown (1.17.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.6.0)
@@ -692,7 +692,7 @@ DEPENDENCIES
   jquery-turbolinks (= 2.1.0)
   jvectormap-rails (~> 2.0)
   kaminari
-  kramdown (~> 1.16, >= 1.16.2)
+  kramdown (~> 1.17)
   launchy
   letter_opener
   local_time (~> 2.0)

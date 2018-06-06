@@ -69,7 +69,7 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
-gem 'kramdown', '~> 1.16', '>= 1.16.2'
+gem 'kramdown', '~> 1.17'
 
 group :test do
   gem 'capybara'
