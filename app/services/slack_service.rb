@@ -40,7 +40,9 @@ module SlackService
 
   def send_slack_message(client, channels, text, user)
     channels.each do |channel|
-      client.chat_postMessage(channel: channel, text: text, username: user.display_name, icon_url: user.gravatar_url, link_names: 1)
+      unless channel.nil?
+        client.chat_postMessage(channel: channel, text: text, username: user.display_name, icon_url: user.gravatar_url, link_names: 1)
+      end
     end
   end
 
