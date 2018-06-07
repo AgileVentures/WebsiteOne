@@ -17,7 +17,7 @@ Feature: Allow Users to Sponsor other members
     And the email queue is clear
 
   Scenario: User upgrades another user from free tier to premium via card
-    Given I am logged in
+    Given I have logged in
     And I visit Alice's profile page
     And I click "Sponsor for Premium"
     And I click "Subscribe" within the card_section
@@ -31,7 +31,7 @@ Feature: Allow Users to Sponsor other members
     And I should not see "Upgrade to Premium"
 
   Scenario: User upgrades another user from free tier to premium via PayPal
-    Given I am logged in
+    Given I have logged in
     And I visit Alice's profile page
     And I click "Sponsor for Premium"
     Then I should see a paypal form within the paypal_section
@@ -78,7 +78,7 @@ Feature: Allow Users to Sponsor other members
     And I should not see "Upgrade to Premium"
 
   Scenario: Different User attempts to update an existing Premium user (and won't see button)
-    Given I am logged in
+    Given I have logged in
     When I visit Billy's profile page
     Then I should not see button "Sponsor for Premium Mob"
     And I should not see button "Upgrade to Premium Mob"
