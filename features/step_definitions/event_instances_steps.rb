@@ -23,7 +23,7 @@ end
 
 Then /^they should see all information for the instance "([^"]*)"$/ do |event_instance|
   event_instance = EventInstance.find_by title: event_instance
-  expect(page).to have_css('#recent_event_list li', text: "#{event_instance.created_at.strftime '%A, %B %e, %Y'} - ")
+  expect(page).to have_css('#recent_event_list li', text: "#{event_instance.created_at.strftime '%A, %B %-d, %Y'} - ")
   expect(page).to have_link("link to video", href: "https://www.youtube.com/watch?v=#{event_instance.yt_video_id}")
 end
 
@@ -37,7 +37,7 @@ Then /^they should see the most (\d+) recent events first$/ do |num_event_instan
   most_recent_events_first = ''
   num_event_instances.to_i.times.reverse_each do |num|
     next_recent_event = starting_date + num.days
-    next_recent_event = next_recent_event.strftime('%A, %B %e, %Y').to_s
+    next_recent_event = next_recent_event.strftime('%A, %B %-d, %Y').to_s
     most_recent_events_first << next_recent_event + '.*'
   end
   expect(page.text).to match(Regexp.new(most_recent_events_first))
