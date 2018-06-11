@@ -77,6 +77,10 @@ GEM
     autoprefixer-rails (8.1.0)
       execjs
     awesome_print (1.8.0)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
     better_errors (2.4.0)
       coderay (>= 1.0.0)
@@ -120,6 +124,8 @@ GEM
     cliver (0.3.2)
     cocoon (1.2.11)
     coderay (1.1.2)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -177,6 +183,8 @@ GEM
     deep_merge (1.2.1)
     delorean (2.1.0)
       chronic
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -261,6 +269,13 @@ GEM
     gli (2.17.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    grape (1.0.3)
+      activesupport
+      builder
+      mustermann-grape (~> 1.0.0)
+      rack (>= 1.3.0)
+      rack-accept
+      virtus (>= 1.0.0)
     guard (2.14.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -301,6 +316,7 @@ GEM
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     ice_cube (0.16.2)
+    ice_nine (0.11.2)
     inflecto (0.0.2)
     jasmine (3.1.0)
       jasmine-core (= 3.1.0)
@@ -364,6 +380,9 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    mustermann (1.0.2)
+    mustermann-grape (1.0.0)
+      mustermann (~> 1.0.0)
     naught (1.1.0)
     nearest_time_zone (0.0.4)
       andand
@@ -441,6 +460,8 @@ GEM
       multi_json
     puma (3.11.4)
     rack (2.0.5)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
     rack-cache (1.7.2)
       rack (>= 0.4)
     rack-test (1.0.0)
@@ -611,6 +632,11 @@ GEM
     verbs (2.1.4)
       activesupport (>= 2.3.4)
       i18n
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.7)
       rack (>= 1.0)
     webmock (3.4.2)
@@ -679,6 +705,7 @@ DEPENDENCIES
   font-awesome-rails
   friendly_id
   geocoder
+  grape
   guard
   guard-cucumber
   guard-livereload

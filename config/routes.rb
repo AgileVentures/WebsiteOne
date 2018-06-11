@@ -61,6 +61,8 @@ WebsiteOne::Application.routes.draw do
     end
   end
 
+  mount Events::API => '/'
+
   scope '/api' do
     scope '/subscriptions' do
       get '/' => 'api/subscriptions#index', as: 'api_subscriptions', defaults: { format: 'json' }
