@@ -103,6 +103,7 @@ RECAPTCHA_SECRET_KEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 AIRBRAKE_API_KEY=blahblahblah
 AIRBRAKE_PROJECT_ID=123
 SECRET_KEY_BASE=blabla
+RACK_TIMEOUT_SERVICE_TIMEOUT=200000000
 ```
 
 the above are test keys from https://developers.google.com/recaptcha/docs/faq
