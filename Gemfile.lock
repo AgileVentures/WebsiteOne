@@ -87,7 +87,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    brakeman (4.3.0)
+    brakeman (4.3.1)
     buftok (0.2.0)
     builder (3.2.3)
     bullet (5.7.5)
@@ -346,7 +346,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    local_time (2.0.0)
+    local_time (2.0.1)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -401,9 +401,11 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paper_trail (9.0.1)
+    paper_trail (9.2.0)
       activerecord (>= 4.2, < 5.3)
+      paper_trail-association_tracking (< 2)
       request_store (~> 1.1)
+    paper_trail-association_tracking (1.0.0)
     paranoia (2.4.1)
       activerecord (>= 4.0, < 5.3)
     pg (1.0.0)
@@ -441,11 +443,11 @@ GEM
       multi_json
     puma (3.11.4)
     rack (2.0.5)
-    rack-cache (1.7.2)
+    rack-cache (1.8.0)
       rack (>= 0.4)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
-    rack-timeout (0.4.2)
+    rack-timeout (0.5.1)
     railroady (1.5.3)
     rails (5.1.6)
       actioncable (= 5.1.6)
@@ -759,4 +761,4 @@ RUBY VERSION
    ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
