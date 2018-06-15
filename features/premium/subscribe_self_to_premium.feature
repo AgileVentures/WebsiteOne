@@ -12,7 +12,7 @@ Feature: Subscribe Self to Premium
     And the email queue is clear
 
   Scenario: Pay by card
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
@@ -21,7 +21,7 @@ Feature: Subscribe Self to Premium
     And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
 
   Scenario: Logged in user has sponsor set to self
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
@@ -31,7 +31,7 @@ Feature: Subscribe Self to Premium
     And I should be my own sponsor
 
   Scenario: Pay by card (with free trial month)
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new?plan=av_premium_first_month_free"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
@@ -42,7 +42,7 @@ Feature: Subscribe Self to Premium
     # And my member page should show premium details # TODO IMPORTANT - require login?
 
   Scenario: Pay by PayPal
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint
@@ -53,7 +53,7 @@ Feature: Subscribe Self to Premium
 
   Scenario: Pay by card, but encounter error
     Given my card will be rejected
-    And I am logged in
+    And I have logged in
     And I visit "/subscriptions/new"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
@@ -62,7 +62,7 @@ Feature: Subscribe Self to Premium
     And "random@morerandom.com" should not receive a "Welcome to AgileVentures Premium" email
 
   Scenario: Pay by PayPal, but encounter error
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint incorrectly
@@ -70,7 +70,7 @@ Feature: Subscribe Self to Premium
     And I should see "redirected" in last_response
 
   Scenario: Pay by card, and default to Premium
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new?plan=76a5uydstjg"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium
