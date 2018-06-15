@@ -5,7 +5,7 @@ Feature: See project related videos
   I would like to see a list of videos on a project page
 
   Background:
-    Given I am logged in
+    Given I have logged in
     And the following projects exist:
       | title       | description          | status   | tags            |
       | hello world | greetings earthlings | active   | WSO, WebsiteOne |

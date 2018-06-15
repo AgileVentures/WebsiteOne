@@ -20,7 +20,7 @@ Feature: Escalating Call to Action
     Then I should be on the "sign up" page
 
   Scenario: Logged in use sees call to action which links to premium subscription page
-    Given I am logged in
+    Given I have logged in
     And I am on the "home" page
     When I click "Upgrade to Premium for additional support"
     Then I should be on the "premium membership" page

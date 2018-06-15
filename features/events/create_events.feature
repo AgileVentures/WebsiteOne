@@ -5,7 +5,7 @@ Feature: Events
   I would like to create events
 
   Background:
-    Given I am logged in
+    Given I have logged in
     And the following projects exist:
       | title | description          | pitch | status | commit_count |
       | WSO   | greetings earthlings |       | active | 2795         |
@@ -142,7 +142,7 @@ Feature: Events
     When I dropdown the "Events" menu
     And I click "Upcoming events"
     Then I should see 3 "Biweekly Meeting" events
-    
+
 
 
 # dimensions

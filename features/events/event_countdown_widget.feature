@@ -19,7 +19,7 @@ Feature: Events page countdown widget
       | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15 | never   | Eastern Time (US & Canada) |
       | Scrum 2    | Another scrum           | Scrum           | 2014/02/05 10:00:00 UTC | 15 | never   | Eastern Time (US & Canada) |
 
-    And I am logged in
+    And I have logged in
 
   @time-travel-step
   Scenario: Render live Scrum info on events page

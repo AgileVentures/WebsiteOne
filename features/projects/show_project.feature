@@ -41,7 +41,7 @@ Feature: Display Projects
     And I should see links to "HelloSunExtras" on github
 
   Scenario: Project show page has hangout button for users that not follow the project
-    Given I am logged in
+    Given I have logged in
     And I am on the "Show" page for project "hello world"
     When I click "Start Live Hangout" button
     Then I should see "You should join this project before you can start the hangouts"
