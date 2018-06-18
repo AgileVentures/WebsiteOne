@@ -36,7 +36,7 @@ gem "letter_opener", :group => :development
 gem 'local_time', '~> 2.0'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
 gem 'nearest_time_zone'
-gem 'nokogiri', '1.8.2'
+gem 'nokogiri', '1.8.3'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github', '~> 1.1.2'
