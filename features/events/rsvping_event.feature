@@ -20,4 +20,10 @@ Feature: RSVPing AV events
     Given I am logged in as "Alice"
     When I am creating an event
     And I click "Save"
-    Then I should see "Alice is hosting the event"
+    Then I should see "Alice Jones is hosting the event"
+
+  Scenario: project creator can mention that they cannot attend
+    Given I am logged in as "Alice"
+    And I am on the "ClientMtg" event page
+    When I click "Cannot Attend"
+    Then I should not see "Alice Jones is hosting the event"
