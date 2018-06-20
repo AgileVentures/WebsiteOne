@@ -40,7 +40,7 @@ Feature: As a site user
     Then I should see "Bob Butcher"
 
   Scenario: Email should be private by default
-    Given I am logged in
+    Given I have logged in
     And I am on my "Profile" page
     Then I should not see my email
 
@@ -54,7 +54,7 @@ Feature: As a site user
 
   @javascript
   Scenario: Should be able to make my email public
-    Given I am logged in
+    Given I have logged in
     And I am on my "Edit Profile" page
     And "Display email" should not be checked
     When I set my email to be public
@@ -64,7 +64,7 @@ Feature: As a site user
 
   @javascript
   Scenario: Should be able to make my email private again
-    Given I am logged in
+    Given I have logged in
     And My email was set to public
     And I am on my "Edit Profile" page
     Then "Display email" should be checked
@@ -74,13 +74,13 @@ Feature: As a site user
     Then I should not see my email
 
   Scenario: Hire Me button should be private by default
-    Given I am logged in
+    Given I have logged in
     And I sign out
     And I am on my "Profile" page
     Then I should not see button "Hire me"
 
   Scenario: Should be able to make my Hire Me button public
-    Given I am logged in
+    Given I have logged in
     And I am on my "Edit Profile" page
     And "Display Hire Me" should not be checked
     When I set my Hire Me to be public
@@ -90,7 +90,7 @@ Feature: As a site user
     Then I should see button "Hire me"
 
   Scenario: Should be able to make my Hire Me button private again
-    Given I am logged in
+    Given I have logged in
     And My hire me was set to public
     And I am on my "Edit Profile" page
     Then "Display Hire Me" should be checked
@@ -101,7 +101,7 @@ Feature: As a site user
     Then I should not see button "Hire me"
 
   Scenario: Should not be able to see Hire Me button when logged in
-    Given I am logged in
+    Given I have logged in
     And I am on my "Edit Profile" page
     And "Display Hire Me" should not be checked
     When I set my Hire Me to be public

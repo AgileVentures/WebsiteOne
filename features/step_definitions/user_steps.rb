@@ -65,6 +65,11 @@ Given /^I am logged in$/ do
   sign_in
 end
 
+Given /^I have logged in$/ do
+  create_user
+  login_as @user, :scope => :user
+end
+
 Given /^I exist as a user$/ do
   create_user
 end

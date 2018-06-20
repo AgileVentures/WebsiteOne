@@ -21,20 +21,20 @@ Feature: Edit Project
 
   @javascript
   Scenario: Existing project with multiple repos shows them correctly in edit form
-    Given I am logged in
+    Given I have logged in
     And that project "hello world" has an extra repository "https://github.com/AgileVentures/WebsiteOne"
     When I am on the "Edit" page for projects "hello world"
     Then I should see "GitHub url (primary)"
     And I should see "GitHub url (2)"
 
   Scenario: Edit page has a return link
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for projects "hello mars"
     When I click "Back"
     Then I should be on the "Show" page for project "hello mars"
 
   Scenario: Updating a project: success
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
@@ -47,14 +47,14 @@ Feature: Edit Project
     And I should see a link to "hello mars" on Pivotal Tracker
 
   Scenario: Saving a project: failure
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     When I fill in "Title" with ""
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
   Scenario: Update GitHub url if valid
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I click the "Submit" button
@@ -62,7 +62,7 @@ Feature: Edit Project
     And I should see a link to "hello mars" on github
 
   Scenario: Update Issue Tracker url if valid pivotal tracker link
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
     And I click the "Submit" button
@@ -70,7 +70,7 @@ Feature: Edit Project
     And I should see a link to "hello mars" on Pivotal Tracker
 
   Scenario: Reject GitHub url update if invalid
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "GitHub url (primary)" with "https:/github.com/google/instant-hangouts"
     And I click the "Submit" button

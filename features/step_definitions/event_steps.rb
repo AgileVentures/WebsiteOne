@@ -2,6 +2,20 @@ Given(/^I visit the edit page for the event named "(.*?)"$/) do |event_name|
   visit edit_event_path(Event.find_by(name: event_name))
 end
 
+Given /^the "([^"]*)" "([^"]*)" event exists$/ do |event_name, repeat|
+  Event.create name: event_name,
+               category: "Scrum",
+               description: "we stand up",
+               repeats: repeat,
+               repeats_every_n_weeks: 1,
+               repeats_weekly_each_days_of_the_week_mask: 9,
+               repeat_ends: true,
+               repeat_ends_on: "Fri, 04 Mar 2016",
+               time_zone: "UTC",
+               start_datetime: "Tue, 04 Feb 2014 09:00:00 UTC +00:00",
+               duration: 30
+end
+
 Then(/^the "(.*?)" selector should be set to "(.*?)"$/) do |selector, value|
   #note: expect(page).to have_select(selector, selected: "on") passes right now which encodes the error
   #delete this after finishing this feature

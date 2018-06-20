@@ -29,7 +29,7 @@ Feature: Manage Document
     And I should not see the document "Guides"
 
   Scenario: Create a new document
-    Given I am logged in
+    Given I have logged in
     Given I am on the "Show" page for project "hello world"
     When I click the "Join Project" button
     And I click the "Create new document" button
@@ -38,7 +38,7 @@ Feature: Manage Document
     Then I should see "Document was successfully created."
 
   Scenario: Create a new document page should have a back button
-    Given I am logged in
+    Given I have logged in
     Given I am on the "Show" page for project "hello world"
     When I click the "Join Project" button
     And I click the "Create new document" button
@@ -73,7 +73,7 @@ Feature: Manage Document
 
   Scenario: Has a link to edit a document using the Mercury Editor
     Given the document "Guides" has a child document with title "Howto"
-    Given I am logged in
+    Given I have logged in
     And I am on the "Show" page for document "Howto"
     When I click the very stylish "Edit" button
     Then I should be in the Mercury Editor
@@ -81,7 +81,7 @@ Feature: Manage Document
   @javascript
   Scenario: Mercury editor shows Save and Cancel buttons, hides New Document button, Save button works
     Given the document "Guides" has a child document with title "Howto"
-    And I am logged in
+    And I have logged in
     And I am using the Mercury Editor to edit document "Howto"
     Then I should see button "Save" in Mercury Editor
     And I should see button "Cancel" in Mercury Editor
@@ -96,7 +96,7 @@ Feature: Manage Document
   @javascript
   Scenario: Mercury editor Cancel button works
     Given the document "Guides" has a child document with title "Howto"
-    And I am logged in
+    And I have logged in
     And I am using the Mercury Editor to edit document "Howto"
     When I fill in the editable field "Title" for "document" with "My new title"
     And I click "Cancel" in Mercury Editor
@@ -110,7 +110,7 @@ Feature: Manage Document
     Then I should see "You do not have the right privileges to complete action."
 
   Scenario: The Mercury Editor should only work for the documents
-    Given I am logged in
+    Given I have logged in
     And I visit the site
     When I try to edit the page
     Then I should see "You do not have the right privileges to complete action."
@@ -129,7 +129,7 @@ Feature: Manage Document
   @javascript
   Scenario: A user can insert an image
     Given the document "Guides" has a child document with title "Howto"
-    And I am logged in
+    And I have logged in
     And I am using the Mercury Editor to edit document "Howto"
     And I am focused on the "document body" within the Mercury Editor
     When I click on the "Insert Media" button within the Mercury Toolbar
@@ -142,7 +142,7 @@ Feature: Manage Document
   @javascript
   Scenario: Missing Image gets added when a user can inserts an invalid image
     Given the document "Guides" has a child document with title "Howto"
-    And I am logged in
+    And I have logged in
     And I am using the Mercury Editor to edit document "Howto"
     And I am focused on the "document body" within the Mercury Editor
     When I click on the "Insert Media" button within the Mercury Toolbar
@@ -154,7 +154,7 @@ Feature: Manage Document
 
   @javascript @intermittent-ci-js-fail
   Scenario: Insert media model accepts full url youtube links
-    Given I am logged in
+    Given I have logged in
     And I am using the Mercury Editor to edit document "Guides"
     And I am focused on the "document body" within the Mercury Editor
     And I click on the "Insert Media" button within the Mercury Toolbar
@@ -167,7 +167,7 @@ Feature: Manage Document
 
   @javascript @intermittent-ci-js-fail
   Scenario: Insert media model rejects badly formatted youtube links
-    Given I am logged in
+    Given I have logged in
     And I am using the Mercury Editor to edit document "Guides"
     And I am focused on the "document body" within the Mercury Editor
     And I click on the "Insert Media" button within the Mercury Toolbar
@@ -180,7 +180,7 @@ Feature: Manage Document
 
   @javascript
   Scenario: A logged in user could change a document's parent section
-    Given I am logged in
+    Given I have logged in
     And the following documents exist:
       | title         | body             | project     |
       | Decisions     | Examplehere      | hello mars  |

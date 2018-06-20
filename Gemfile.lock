@@ -60,14 +60,14 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    acts-as-taggable-on (5.0.0)
-      activerecord (>= 4.2.8)
+    acts-as-taggable-on (6.0.0)
+      activerecord (~> 5.0)
     acts_as_tree (2.7.1)
       activerecord (>= 3.0.0)
     acts_as_votable (0.11.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (7.3.3)
+    airbrake (7.3.4)
       airbrake-ruby (~> 2.10)
     airbrake-ruby (2.10.0)
     andand (1.3.3)
@@ -87,7 +87,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    brakeman (4.3.0)
+    brakeman (4.3.1)
     buftok (0.2.0)
     builder (3.2.3)
     bullet (5.7.5)
@@ -239,10 +239,10 @@ GEM
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
     execjs (2.7.0)
-    factory_bot (4.8.2)
+    factory_bot (4.10.0)
       activesupport (>= 3.0.0)
-    factory_bot_rails (4.8.2)
-      factory_bot (~> 4.8.2)
+    factory_bot_rails (4.10.0)
+      factory_bot (~> 4.10.0)
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
@@ -256,7 +256,7 @@ GEM
     formatador (0.2.5)
     friendly_id (5.2.4)
       activerecord (>= 4.0.0)
-    geocoder (1.4.7)
+    geocoder (1.4.9)
     gherkin (4.1.3)
     gli (2.17.1)
     globalid (0.4.1)
@@ -336,7 +336,7 @@ GEM
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
     kdtree (0.4)
-    kramdown (1.16.2)
+    kramdown (1.17.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.6.0)
@@ -346,7 +346,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    local_time (2.0.0)
+    local_time (2.0.1)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -371,9 +371,9 @@ GEM
       require_all
     nenv (0.3.0)
     netrc (0.11.0)
-    newrelic_rpm (5.1.0.344)
+    newrelic_rpm (5.2.0.345)
     nio4r (2.3.0)
-    nokogiri (1.8.2)
+    nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -401,9 +401,11 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paper_trail (9.0.1)
+    paper_trail (9.2.0)
       activerecord (>= 4.2, < 5.3)
+      paper_trail-association_tracking (< 2)
       request_store (~> 1.1)
+    paper_trail-association_tracking (1.0.0)
     paranoia (2.4.1)
       activerecord (>= 4.0, < 5.3)
     pg (1.0.0)
@@ -411,7 +413,7 @@ GEM
     pivotal-tracker-api (1.0.3)
       business_time (~> 0.7.6)
       rest-client (~> 1.7)
-    poltergeist (1.18.0)
+    poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
@@ -441,11 +443,11 @@ GEM
       multi_json
     puma (3.11.4)
     rack (2.0.5)
-    rack-cache (1.7.2)
+    rack-cache (1.8.0)
       rack (>= 0.4)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
-    rack-timeout (0.4.2)
+    rack-timeout (0.5.1)
     railroady (1.5.3)
     rails (5.1.6)
       actioncable (= 5.1.6)
@@ -599,7 +601,7 @@ GEM
       simple_oauth (~> 0.3.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.10)
+    uglifier (4.1.11)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -613,7 +615,7 @@ GEM
       i18n
     warden (1.2.7)
       rack (>= 1.0)
-    webmock (3.4.1)
+    webmock (3.4.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
@@ -630,7 +632,7 @@ GEM
     xpath (3.0.0)
       nokogiri (~> 1.8)
     youtube_rails (1.2.2)
-    yt (0.32.1)
+    yt (0.32.2)
       activesupport
       yt-support (>= 0.1)
     yt-support (0.1.3)
@@ -692,14 +694,14 @@ DEPENDENCIES
   jquery-turbolinks (= 2.1.0)
   jvectormap-rails (~> 2.0)
   kaminari
-  kramdown (~> 1.16, >= 1.16.2)
+  kramdown (~> 1.17)
   launchy
   letter_opener
   local_time (~> 2.0)
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
-  nokogiri (= 1.8.2)
+  nokogiri (= 1.8.3)
   octokit
   omniauth
   omniauth-github (~> 1.1.2)
@@ -759,4 +761,4 @@ RUBY VERSION
    ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

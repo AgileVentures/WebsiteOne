@@ -8,7 +8,7 @@ Feature: Provide a ClientMeeting Category
     Given following events exist:
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
       | ClientMtg  | Daily client meeting    | ClientMeeting   | 2014/02/03 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
-    And I am logged in
+    And I have logged in
     And the following projects exist:
       | title | description          | pitch | status | commit_count |
       | WSO   | greetings earthlings |       | active | 2795         |
