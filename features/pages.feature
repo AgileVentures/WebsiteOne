@@ -28,7 +28,6 @@ Feature: Static pages
     Then I should see sponsor banner for "Standuply"
     And I should see sponsor banner for "Craft Academy"
     And I should see sponsor banner for "Mooqita"
-    And I should see sponsor banner for "RubyMine"
     And I should see link "Become a supporter"
 
   Scenario: Render Sponsors page

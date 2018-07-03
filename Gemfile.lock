@@ -71,7 +71,7 @@ GEM
       airbrake-ruby (~> 2.10)
     airbrake-ruby (2.10.0)
     andand (1.3.3)
-    apipie-rails (0.5.8)
+    apipie-rails (0.5.9)
       rails (>= 4.1)
     arel (8.0.0)
     autoprefixer-rails (8.1.0)
@@ -187,9 +187,9 @@ GEM
     docile (1.3.0)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.4.0)
-    dotenv-rails (2.4.0)
-      dotenv (= 2.4.0)
+    dotenv (2.5.0)
+    dotenv-rails (2.5.0)
+      dotenv (= 2.5.0)
       railties (>= 3.2, < 6.0)
     dry-configurable (0.7.0)
       concurrent-ruby (~> 1.0)
@@ -250,7 +250,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
-    ffi (1.9.23)
+    ffi (1.9.25)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     formatador (0.2.5)
@@ -372,7 +372,7 @@ GEM
     nenv (0.3.0)
     netrc (0.11.0)
     newrelic_rpm (5.2.0.345)
-    nio4r (2.3.0)
+    nio4r (2.3.1)
     nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
@@ -433,7 +433,7 @@ GEM
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     public_suffix (3.0.2)
-    puffing-billy (1.1.1)
+    puffing-billy (1.1.2)
       addressable (~> 2.5)
       em-http-request (~> 1.1, >= 1.1.0)
       em-synchrony
@@ -487,7 +487,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    recaptcha (4.8.0)
+    recaptcha (4.9.0)
       json
     redcarpet (3.4.0)
     ref (2.0.0)
@@ -545,7 +545,7 @@ GEM
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
-    selenium-webdriver (3.12.0)
+    selenium-webdriver (3.13.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
     shellany (0.0.1)
@@ -564,7 +564,7 @@ GEM
       gli
       hashie
       websocket-driver
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -601,7 +601,7 @@ GEM
       simple_oauth (~> 0.3.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.12)
+    uglifier (4.1.14)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -717,7 +717,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
-  puffing-billy (~> 1.1.1)
+  puffing-billy (~> 1.1.2)
   puma
   rack-cache
   rack-timeout
