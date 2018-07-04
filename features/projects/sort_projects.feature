@@ -18,3 +18,8 @@ Feature: Sort Projects
       | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         | 1999-01-01 09:37:14 UTC | Ruby on Rails |
       | hello alpha   | greetings alpha folks   |             | active   |                                             |                                                  | 300          | 2000-01-12 09:37:14 UTC | Ruby on Rails |
 		And there are no videos
+
+	Scenario: Sort projects based on technology stack
+	  Given I am on the "projects" page
+	  When I select "Ruby on Rails" from "stack"
+	  Then I should not see "hello world"
