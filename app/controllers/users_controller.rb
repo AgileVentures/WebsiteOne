@@ -53,7 +53,7 @@ class UsersController < ApplicationController
                              .order(created_at: :desc).limit(5)
       set_activity_tab(params[:tab])
     else
-      raise ActiveRecord::RecordNotFound.new('User has not exposed his profile publicly')
+      raise ActiveRecord::RecordNotFound.new('User has not exposed their profile publicly')
     end
   end
 

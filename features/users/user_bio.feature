@@ -2,7 +2,7 @@
 Feature: User bio
   As a site user
   In order to get to know other users better
-  I would like to see a short bio of a user on his profile page
+  I would like to see a short bio of a user on their profile page
 
   Background:
     Given the following users exist
