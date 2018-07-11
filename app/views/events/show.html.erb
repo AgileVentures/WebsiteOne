@@ -76,7 +76,6 @@
       </div>
   <% end %>
   <% if @event.creator %>
-     <%= @event.creator.display_name %> is hosting the event <input type="Submit" value="Cannot Attend">
       <%= set_column_width %>
       <div class="col-xs-12 col-sm-2">
         <div class="row text-center">
@@ -125,6 +124,10 @@
     <% end %>
   </div>
 </div>
+
+<% if @event.creator %>
+  <%= @event.creator.display_name %> is hosting the event <input type="Submit" value="Cannot Attend">
+<% end %>
 
 <% if user_signed_in? %>
 
