@@ -46,7 +46,7 @@ Stories (rather than chores or bugfixes) in the backlog should then be estimated
 
 All members are free to start the story and begin pair programming (see Git flow)
 
-Once completed, a pull request should be submitted and the story should be updated with a link to the pull request on GitHub, do not click finish on the story. 
+Once completed, a pull request should be submitted and the story should be updated with a link to the pull request on GitHub, do not click finish on the story.
 
 ### Git flow:
 
@@ -57,7 +57,7 @@ Once completed, a pull request should be submitted and the story should be updat
   ```
 
   This requires SSH keys to be set up on GitHub, for more information, check out this link:
-  https://help.github.com/articles/generating-ssh-keys. 
+  https://help.github.com/articles/generating-ssh-keys.
 
   For more information on setting up the project locally, refer to this document.
 
@@ -72,9 +72,9 @@ Once completed, a pull request should be submitted and the story should be updat
 
 4. When the story is complete:
 
-  merge with the latest upstream/develop branch, so that his pull request contains all the latest changes:
+  merge with the latest upstream/develop branch, so that your pull request contains all the latest changes:
   ```
-  $ git fetch upstream 
+  $ git fetch upstream
   $ git merge upstream/develop
   ```
 
