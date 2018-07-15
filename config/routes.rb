@@ -11,6 +11,7 @@ WebsiteOne::Application.routes.draw do
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
   get loaderio_token => 'static_pages#loaderio'
+  get '/get-token' => 'av_dashboard_tokens#create', as: 'get_av_dashboard_token'
 
   resources :activities
 
