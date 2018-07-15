@@ -1,8 +1,10 @@
 class AvDashboardTokensController < ApplicationController
   require 'jwt'
+  require 'Date'
 
   def create
-    payload = { data: 'kitty' }
-    @token = JWT.encode payload, nil, 'none'
+    expiration_timestamp = (DateTime.now + 1.day).strftime("%Q")
+    payload = { authorized: 'true', exp: expiration_timestamp}
+    @token = JWT.encode payload, Settings.av_dashboard_token_secret, 'HS256'
   end
 end
