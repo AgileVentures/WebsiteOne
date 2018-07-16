@@ -21,5 +21,5 @@ Feature: Sort Projects
 
 	Scenario: Sort projects based on technology stack
 	  Given I am on the "projects" page
-	  When I select "RubyOnRails" from "project_stack"
+	  When I select "Ruby On Rails" from "project_stack"
 	  Then I should not see "hello world"
