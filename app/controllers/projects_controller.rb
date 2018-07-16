@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.order('status ASC').order('last_github_update DESC NULLS LAST').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
+    @project = Project.new
     render layout: 'with_sidebar_sponsor_right'
   end
 

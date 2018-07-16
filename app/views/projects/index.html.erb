@@ -14,10 +14,14 @@
     To get involved in any of the projects, join one of the <%= link_to 'scrums', events_path %> and reach out to us,
     or send us an email at <a href="mailto:info@agileventures.org">info@agileventures.org</a>.
   </p>
-  <%= will_paginate @projects %>
+<%= will_paginate @projects %>
+  <div class="row">
+      <%= simple_form_for @project, html: {class: 'form-vertical', id: 'stack'} do |f| %>
+        <%= f.input :stack, collection: %w( RubyOnRails Node EmberJS Elixir ) %>
+      <% end %>
   <ul id="project-list" style="list-style: none; padding-left: 0;">
     <% @projects.each do |project| %>
-      <li class="listing">
+      <li class="listing"> 
         <%= render 'listing', project: project %>
       </li>
     <% end %>
