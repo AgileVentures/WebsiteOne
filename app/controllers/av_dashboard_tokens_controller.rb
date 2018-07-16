@@ -1,6 +1,6 @@
 class AvDashboardTokensController < ApplicationController
   require 'jwt'
-  require 'Date'
+  require 'date'
 
   def create
     expiration_timestamp = (DateTime.now + 1.day).strftime("%Q")

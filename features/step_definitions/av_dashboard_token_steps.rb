@@ -1,6 +1,6 @@
 Then(/^I should have a valid authorized AVDashboard token on the rendered page$/) do
-  expect(page.body).to have_css("p#token")
-  encoded_token = page.find(:css, "p#token").text
+  expect(page.body).to have_css("form#av_dashboard")
+  encoded_token = page.find(:xpath, '//form[@id="av_dashboard"]/input[1]', visible: false).value
   require 'jwt'
   decoded_token = JWT.decode encoded_token, Settings.av_dashboard_token_secret, 'HS256'
   expect(decoded_token).to include(hash_including("authorized" => "true"))

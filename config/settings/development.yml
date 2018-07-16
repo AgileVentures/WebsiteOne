@@ -25,3 +25,5 @@ hangouts:
   app_id: '10095526298'
 
 privileged_users: "random@random.com"
+
+av_dashboard_token_secret: 'super_sauce'
