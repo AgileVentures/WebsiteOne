@@ -441,7 +441,7 @@ GEM
       eventmachine_httpserver
       http_parser.rb (~> 0.6.0)
       multi_json
-    puma (3.11.4)
+    puma (3.12.0)
     rack (2.0.5)
     rack-cache (1.8.0)
       rack (>= 0.4)
