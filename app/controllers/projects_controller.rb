@@ -84,10 +84,6 @@ class ProjectsController < ApplicationController
     flash[:notice] = "You are no longer a member of #{@project.title}."
   end
 
-  def self.by_stacks
-    order('stacks DESC')
-  end
-
   private
   def set_project
     @project = Project.friendly.find(params[:id])
