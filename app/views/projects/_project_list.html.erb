@@ -1,0 +1,8 @@
+<h1>List of Projects by Stack</h1>
+<ul>
+  <% Project.all.each do |project| %>
+    <% project.stacks.each do |name| %> 
+     <li><%= p project.title if name.stack == 'Ruby on Rails' %></li>
+    <% end %> 
+  <% end %>
+</ul>

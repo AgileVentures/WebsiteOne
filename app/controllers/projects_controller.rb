@@ -15,6 +15,11 @@ class ProjectsController < ApplicationController
     stacks_array = Stack.all.each do |name|
        @projects_stacks_array << name.stack 
     end
+    
+    respond_to do |format|
+      format.js
+      format.html
+    end
     render layout: 'with_sidebar_sponsor_right'
   end
 

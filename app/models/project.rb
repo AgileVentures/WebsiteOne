@@ -29,7 +29,7 @@ class Project < ApplicationRecord
       .where("source_repositories.url ILIKE ?", '%github%')
       .references(:source_repositories)
   end
-
+    
   def self.search(search, page)
     order('LOWER(title)')
       .where('title LIKE ?', "%#{search}%")

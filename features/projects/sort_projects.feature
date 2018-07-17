@@ -6,7 +6,7 @@ Feature: Sort Projects
 
 	Background:
     Given the following projects exist:
-      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count | last_github_update      | stack         |
+      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count | last_github_update      | stacks        |
       | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         | 2000-01-13 09:37:14 UTC | Node          |
       | hello mars    | greetings aliens        |             | active   |                                             |                                                  | 2000         | 1999-01-11 09:37:14 UTC | Python        |
       | hello jupiter | greetings jupiter folks |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         | 1999-01-10 09:37:14 UTC | Ruby on Rails |
@@ -21,5 +21,5 @@ Feature: Sort Projects
 
 	Scenario: Sort projects based on technology stack
 	  Given I am on the "projects" page
-	  When I select "Ruby On Rails" from "project_stack"
+	  When I select "Ruby on Rails" from "project_stacks"
 	  Then I should not see "hello world"
