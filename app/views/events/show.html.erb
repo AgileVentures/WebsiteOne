@@ -90,7 +90,9 @@
         <div class="row text-center">
           <%= @event.created_at.strftime "%F" %>
         </div>
-        <button type="Submit" class="btn btn-danger">Cannot Attend</button>
+        <%= link_to("#", :class => "btn btn-danger") do %>
+          Cannot Attend
+        <% end %>
       </div>
   <% end %>
 
