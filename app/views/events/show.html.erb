@@ -76,7 +76,6 @@
       </div>
   <% end %>
   <% if @event.creator %>
-      <input type="Submit" class="btn btn-primary" value="Cannot Attend">
       <%= set_column_width %>
       <div class="col-xs-12 col-sm-2">
         <div class="row text-center">
@@ -91,6 +90,7 @@
         <div class="row text-center">
           <%= @event.created_at.strftime "%F" %>
         </div>
+        <input type="Submit" class="btn btn-danger" value="Cannot Attend">
       </div>
   <% end %>
 
