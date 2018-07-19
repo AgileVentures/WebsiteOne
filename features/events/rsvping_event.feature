@@ -12,6 +12,10 @@ Feature: RSVPing AV events
       | name       | description             | category        | creator_id | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
       | ClientMtg  | Weekly client meeting   | ClientMeeting   | 4          | 2014/02/03 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                        |
 
+  Scenario: Regular users cannot see Cannot Attend button
+    Given I am logged in as "John"
+    Then I should not see "Cannot Attend"
+
   Scenario: project creator can see Cannot Attend button after creating event
     Given I am logged in as "Alice"
     When I am creating an event
