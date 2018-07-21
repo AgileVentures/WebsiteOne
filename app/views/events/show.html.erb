@@ -90,7 +90,7 @@
         <div class="row text-center">
           <%= @event.created_at.strftime "%F" %>
         </div>
-        <%= link_to(event_attendance_path, :method => :put, :class => "btn btn-danger") do %>
+        <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-danger") do %>
           Cannot Attend
         <% end %>
       </div>
