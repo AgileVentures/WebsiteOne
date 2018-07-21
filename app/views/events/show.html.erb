@@ -114,6 +114,11 @@
   <% end %>
 
   <div class="col-xs-12 col-sm-6">
+    <% if !@event.attendance %>
+      <div class="event-notice">
+        Event creator cannot host the event.
+      </div>
+    <% end %>
     <% if @recent_hangout.try :live? %>
         <div class="event-notice">
           This event is now live!
