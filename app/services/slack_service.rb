@@ -40,7 +40,9 @@ module SlackService
 
   def send_slack_message(client, channels, text, user)
     channels.each do |channel|
-      client.chat_postMessage(channel: channel, text: text, username: user.display_name, icon_url: user.gravatar_url, link_names: 1)
+      unless channel.nil?
+        client.chat_postMessage(channel: channel, text: text, username: user.display_name, icon_url: user.gravatar_url, link_names: 1)
+      end
     end
   end
 
@@ -86,11 +88,12 @@ module SlackService
         "esaas-mooc": "C02A6835V",
         "eventmanager": "C39J4DTP0",
         "agileventures-community": ["C3Q9A5ZJA", "C02P3CAPA"],
-        "metplus": "C09LSBWER",
+        "metplus": "C0VEPAPJP",
         "localsupport": "C0KK907B5",
         "osra-support-system": "C02AAM8SY",
         "github-api-gem": "C02QZ46S9",
         "oodls": "C03GBBASJ",
+        "phoenixone": "C7JANJXC4",
         "projectscope": "C1NJX7KM1",
         "redeemify": "C1FQZHJJX",
         "refugee_tech": "C0GUTH7RS",

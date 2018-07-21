@@ -5,7 +5,7 @@ Feature: Create projects
   I would like to create a new project profile
 
   Scenario: Show New Project button if user is logged in
-    When I am logged in
+    When I have logged in
     And I am on the "projects" page
     Then I should see the very stylish "New Project" button
 
@@ -15,7 +15,7 @@ Feature: Create projects
     Then I should not see the very stylish "New Project" button
 
   Scenario: Creating a new project
-    Given I am logged in
+    Given I have logged in
     And I am on the "projects" page
     When I click the very stylish "New Project" button
     Then I should see "Creating a new Project"
@@ -28,7 +28,7 @@ Feature: Create projects
       | Issue Tracker link   |
 
   Scenario Outline: Saving a new project: success
-    Given I am logged in
+    Given I have logged in
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
     When I fill in "Title" with "<title>"
@@ -53,7 +53,7 @@ Feature: Create projects
       | Title New | Description New | http://www.github.com/new | http://www.pivotaltracker.com/n/projects/982890 |
 
   Scenario: Saving a new project: failure
-    Given I am logged in
+    Given I have logged in
     And I am on the "projects" page
     And I click the very stylish "New Project" button
     When I fill in "Title" with ""
@@ -62,7 +62,7 @@ Feature: Create projects
 
   @javascript
   Scenario: Saving a new project with multiple repositories: success
-    Given I am logged in
+    Given I have logged in
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
     When I fill in "Title" with "multiple repo project"

@@ -24,7 +24,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Bob        | Anchous   | bob@btinternet.co.uk   | 12345678 | yt_id_2 |
       | Jane       | Anchous   | jan@btinternet.co.uk   | 12345678 | yt_id_3 |
     And there are no videos
-    And I am logged in
+    And I have logged in
     And I have Slack notifications enabled
 
   @javascript

@@ -38,7 +38,7 @@ Feature:
     And I should not see "JQuery cannot be queried"
 
   Scenario: Should be able to create a new article from the article index page
-    Given I am logged in
+    Given I have logged in
     When I am on the "Articles" page
     And I click the very stylish "New Article" button
     Then I should see "Create a New Article"
@@ -49,7 +49,7 @@ Feature:
     And I should see "An example of Markdown"
 
   Scenario: Should be able to edit an article from the article show page
-    Given I am logged in
+    Given I have logged in
     And I am on the "Show" page for article "Ruby is on Fire"
     And I click the very stylish "Edit article" button
     Then I should be on the "Edit" page for article "Ruby is on Fire"
