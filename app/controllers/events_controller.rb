@@ -66,7 +66,7 @@ class EventsController < ApplicationController
   end
 
   def event_attendance
-
+    Event.find_by(id: params[:id]).update_attributes(attendance: false)
   end
 
   private
