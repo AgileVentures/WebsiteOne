@@ -65,6 +65,11 @@ Given /^I am logged in$/ do
   sign_in
 end
 
+Given /^I have logged in$/ do
+  create_user
+  login_as @user, :scope => :user
+end
+
 Given /^I exist as a user$/ do
   create_user
 end
@@ -108,7 +113,7 @@ When(/^I sign off$/) do
 end
 
 When /^I sign up with valid user data( giving consent)?$/ do |consent|
-  create_visitor(!consent.nil?)
+  create_visitor(receive_mailings: !consent.nil?)
   sign_up
 end
 

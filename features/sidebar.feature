@@ -22,7 +22,7 @@ Feature: Sidebar navigation
 
 
   Scenario: Sidebar is always visible
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     Then I should see the sidebar
     Given I am on the "Show" page for project "hello mars"
@@ -33,7 +33,7 @@ Feature: Sidebar navigation
     Then I should see the sidebar
 
   Scenario: Sidebar always shows the relevant information
-    Given I am logged in
+    Given I have logged in
     And I am on the "Show" page for document "Howto 2"
     Then I should see a link to "Show" page for project "hello world" within the sidebar
     And I should see a link to "Show" page for document "Howto" within the sidebar
@@ -46,7 +46,7 @@ Feature: Sidebar navigation
     Given I am on the "projects" page
     Then I should see "hello moon" before "hello pluto"
     And I should see "hello pluto" before "hello world"
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     Then I should see "hello moon" before "hello pluto"
     And I should see "hello pluto" before "hello world"

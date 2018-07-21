@@ -41,7 +41,7 @@ Feature: Show Events
   @javascript
   Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time, and while event is running
     Given the date is "<date>"
-    And I am logged in
+    And I have logged in
     And I am on the show page for event "Standup"
     Then I <assertion> see hangout button
     Examples:
@@ -79,7 +79,7 @@ Feature: Show Events
     And I should see "Monday, February 01, 2016"
 
   Scenario: Show index of events with a New Event button for logged in user
-    Given I am logged in
+    Given I have logged in
     Given I am on Events index page
     Then I should see "AgileVentures Events"
     And I should see link "New Event"
@@ -97,7 +97,7 @@ Feature: Show Events
     And I should not see "Event Actions"
 
   Scenario: Show an planned event when a user is logged in
-    Given I am logged in
+    Given I have logged in
     And the date is "2014/02/01 09:15:00 UTC"
     And I am on Events index page
     And I click "Scrum"
@@ -119,7 +119,7 @@ Feature: Show Events
       | 45     | minutes  |
 
   Scenario: Don't save with empty name
-    Given I am logged in
+    Given I have logged in
     And I am on Events index page
     When I click "New Event"
     And I fill in event field:

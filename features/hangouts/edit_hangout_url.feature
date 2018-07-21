@@ -16,7 +16,7 @@ Feature: Manual Edit of Hangout URL
       | title        | hangout_url         | created_at       | updated_at          | uid | category | project    | user_id | yt_video_id | hoa_status | url_set_directly | event        |
       | HangoutsFlow | http://hangout.test | 2012 Feb 4th 7am | 2012 Feb 4th 7:04am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
       | HangoutsFlow | http://hangout.test | 2014 Feb 4th 7am | 2014 Feb 4th 7:03am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
-    And I am logged in
+    And I have logged in
 
   Scenario: Edit Hangout URL and ensure event stays live
     Given the date is "2014 Feb 4th 6:59am"

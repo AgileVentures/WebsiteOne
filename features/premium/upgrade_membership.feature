@@ -18,14 +18,14 @@ Feature: Allow Users to Upgrade Membership
       | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |
 
   Scenario: User is on free tier and looking at own page
-    Given I am logged in
+    Given I have logged in
     And I am on my profile page
     Then I should see "Basic Member"
     And I should not see "Premium Member"
     And I should not see "Premium Mob Member"
 
   Scenario: User is on free tier and looking at other persons profile page
-    Given I am logged in
+    Given I have logged in
     And I visit Alice's profile page
     Then I should see "Basic Member"
     And I should not see "Premium Member"
@@ -34,7 +34,7 @@ Feature: Allow Users to Upgrade Membership
     And I should not see button "Upgrade to Premium Mob"
 
   Scenario: User upgrades to premium from free tier
-    Given I am logged in
+    Given I have logged in
     When I am on my profile page
     Then I should see a tooltip explanation of Premium
     And I click "Upgrade to Premium"
@@ -74,7 +74,7 @@ Feature: Allow Users to Upgrade Membership
     When I click "Upgrade to Premium Mob"
     Then I should see "Please email info@agileventures.org to receive an upgrade"
     And I should not see "Premium Mob Member"
-  
+
   Scenario: CraftAcademy student upgrades premium plan to premium mob via Stripe but fails
     Given I am logged in as a CraftAcademy premium user
     And I am on my profile page
@@ -82,4 +82,4 @@ Feature: Allow Users to Upgrade Membership
     When I click "Upgrade to Premium Mob"
     Then I should see "Please email info@agileventures.org to receive an upgrade"
     And I should not see "Premium Mob Member"
-    
+

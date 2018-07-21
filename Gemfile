@@ -36,7 +36,7 @@ gem "letter_opener", :group => :development
 gem 'local_time', '~> 2.0'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
 gem 'nearest_time_zone'
-gem 'nokogiri', '1.8.2'
+gem 'nokogiri', '1.8.4'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github', '~> 1.1.2'
@@ -69,7 +69,7 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
-gem 'kramdown', '~> 1.16', '>= 1.16.2'
+gem 'kramdown', '~> 1.17'
 
 group :test do
   gem 'capybara'
@@ -81,7 +81,7 @@ group :test do
   gem 'launchy'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
-  gem 'puffing-billy', '~> 1.1.1'
+  gem 'puffing-billy', '~> 1.1.2'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
   gem 'stripe-ruby-mock', '~> 2.5.4', require: 'stripe_mock'
