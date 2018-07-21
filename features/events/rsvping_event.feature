@@ -9,8 +9,9 @@ Feature: RSVPing AV events
       | Alice      | Jones     | 4  | 12345678  | alicejones@hotmail.com |                                               
       | John       | Doe       |    | password  | john@doe.com           |
     And following events exist:
-      | name       | description             | category        | creator_id | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
-      | ClientMtg  | Weekly client meeting   | ClientMeeting   | 4          | 2014/02/03 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                        |
+      | name       | description             | category        | creator_id | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks | attendance |
+      | ClientMtg  | Weekly client meeting   | ClientMeeting   | 4          | 2018/07/19 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       | true       |
+      | Meeting    | Weekly meeting          | Meeting         | 4          | 2018/07/21 11:00:00 UTC | 150      | weekly  | UTC       |         | 31                                        | 1                     | false      |
 
   Scenario: Non-logged in users should not see Cannot Attend button
     Given I am on the "ClientMtg" event page
@@ -31,4 +32,9 @@ Feature: RSVPing AV events
     Given I am logged in as "Alice"
     And I am on the "ClientMtg" event page
     When I click "Cannot Attend"
+    Then I should see "Alice Jones cannot host the event"
+
+  Scenario: Should see cannot attend message for repeating events
+    Given the date is "2018/07/28 10:00:00 UTC"
+    And I am on the "Meeting" event page
     Then I should see "Alice Jones cannot host the event"
