@@ -90,8 +90,10 @@
         <div class="row text-center">
           <%= @event.created_at.strftime "%F" %>
         </div>
+        <% if (user_signed_in? and current_user.id == @event.creator.id) %>
         <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-danger") do %>
           Cannot Attend
+        <% end %>
         <% end %>
       </div>
   <% end %>
