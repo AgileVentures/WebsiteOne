@@ -12,6 +12,10 @@ Feature: RSVPing AV events
       | name       | description             | category        | creator_id | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
       | ClientMtg  | Weekly client meeting   | ClientMeeting   | 4          | 2014/02/03 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                        |
 
+  Scenario: Non-logged in users should not see Cannot Attend button
+    Given I am on the "ClientMtg" event page
+    Then I should not see "Cannot Attend"
+
   Scenario: Regular users cannot see Cannot Attend button
     Given I am logged in as "John"
     When I am on the "ClientMtg" event page
