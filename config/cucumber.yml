@@ -3,10 +3,10 @@ rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""
 rerun_opts = rerun.to_s.strip.empty? ? "--format #{ENV['CUCUMBER_FORMAT'] || 'progress'} features" : "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} #{rerun}"
 std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} --strict --tags ~@wip -r features/"
 %>
-default: <%= std_opts %> features ALLOW_EMAILS=true
+default: <%= std_opts %> features
 ci: --format pretty --strict features
 wip: --tags @wip:3 --wip features
 rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip
 first_try:  NEVER_FAIL=true COVERAGE=true <%= std_opts %> --format rerun --out rerun.txt features --strict --tags ~@wip
 second_try: NEVER_FAIL=false <%= std_opts %> @rerun.txt  --strict --tags ~@wip
-intercept: USER_EMAIL=me@ymail.com --tags @intercept
+intercept:  INTERCEPT_EMAILS=true USER_EMAIL=me@ymail.com --tags @intercept
