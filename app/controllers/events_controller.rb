@@ -65,7 +65,7 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
-  def event_attendence
+  def event_attendance
 
   end
 
