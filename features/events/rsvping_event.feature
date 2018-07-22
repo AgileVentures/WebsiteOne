@@ -38,3 +38,9 @@ Feature: RSVPing AV events
     Given the date is "2018/07/28 10:00:00 UTC"
     And I am on the "Meeting" event page
     Then I should see "Alice Jones cannot host the event"
+
+  Scenario: Project creator can see Attend button
+    Given I am logged in as "Alice"
+    When I am on the "Meeting" event page
+    Then I should not see "Cannot Attend"
+    And I should see "Attend"
