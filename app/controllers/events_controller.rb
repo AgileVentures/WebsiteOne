@@ -66,12 +66,7 @@ class EventsController < ApplicationController
   end
 
   def event_attendance
-    event = Event.find_by(id: params[:id])
-    if event.attendance
-      event.update_attributes(attendance: false)
-    else
-      event.update_attributes(attendance: true)
-    end
+    Event.find_by(id: params[:id]).event_attendance
     redirect_to event_path
   end
 
