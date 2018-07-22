@@ -204,7 +204,7 @@
   </div>
   <div class="col-xs-12 col-sm-4"></div>
   <div class="col-xs-12 col-sm-2">
-    <% if (user_signed_in? and current_user.id == @event.creator.id) %>
+    <% if (user_signed_in? and @event.creator and current_user.id == @event.creator.id) %>
       <% if @event.attendance %>
         <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-danger") do %>
           Cannot Attend
