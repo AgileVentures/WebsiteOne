@@ -46,3 +46,9 @@ Feature: RSVPing AV events
     When I am on the "Meeting" event page
     Then I should not see "Cannot Attend"
     And I should see "Attend"
+
+  Scenario: When project creator clicks Attend button the cannot attend message is not shown
+    Given I am logged in as "Alice"
+    And I am on the "Meeting" event page
+    When I click "Attend"
+    Then I should not see "Alice Jones cannot host the event"
