@@ -5,13 +5,13 @@ Feature: RSVPing AV events
   
   Background: 
     Given the following users exist
-      | first_name | last_name | id | password  | email                  |
-      | Alice      | Jones     | 4  | 12345678  | alicejones@hotmail.com |                                               
-      | John       | Doe       |    | password  | john@doe.com           |
+      | first_name | last_name | id  | password  | email                  |
+      | Alice      | Jones     | 401 | 12345678  | alicejones@hotmail.com |                                               
+      | John       | Doe       |     | password  | john@doe.com           |
     And following events exist:
       | name       | description             | category        | creator_id | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks | attendance |
-      | ClientMtg  | Weekly client meeting   | ClientMeeting   | 4          | 2018/07/19 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       | true       |
-      | Meeting    | Weekly meeting          | Meeting         | 4          | 2018/07/21 11:00:00 UTC | 150      | weekly  | UTC       |         | 31                                        | 1                     | false      |
+      | ClientMtg  | Weekly client meeting   | ClientMeeting   | 401        | 2018/07/19 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       | true       |
+      | Meeting    | Weekly meeting          | Meeting         | 401        | 2018/07/21 11:00:00 UTC | 150      | weekly  | UTC       |         | 31                                        | 1                     | false      |
 
   Scenario: Non-logged in users should not see Cannot Attend button
     Given I am on the "ClientMtg" event page
