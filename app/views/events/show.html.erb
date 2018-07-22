@@ -95,6 +95,10 @@
             <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-danger") do %>
               Cannot Attend
             <% end %>
+          <% else %>
+            <%= link_to( "#", :class => "btn btn-success") do %>
+              Attend
+            <% end %>
           <% end %>
         <% end %>
       </div>
