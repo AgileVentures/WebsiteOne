@@ -96,7 +96,7 @@
               Cannot Attend
             <% end %>
           <% else %>
-            <%= link_to( "#", :class => "btn btn-success") do %>
+            <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-success") do %>
               Attend
             <% end %>
           <% end %>
