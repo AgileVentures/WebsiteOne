@@ -34,12 +34,12 @@ Feature: RSVPing AV events
     Given I am logged in as "Alice"
     And I am on the "ClientMtg" event page
     When I click "Cannot Attend"
-    Then I should see "Alice Jones cannot host the event"
+    Then I should see "Alice Jones cannot attend the event"
 
   Scenario: Should see cannot attend message for repeating events
     Given the date is "2018/07/28 10:00:00 UTC"
     And I am on the "Meeting" event page
-    Then I should see "Alice Jones cannot host the event"
+    Then I should see "Alice Jones cannot attend the event"
 
   Scenario: Project creator can see Attend button
     Given I am logged in as "Alice"
@@ -51,4 +51,4 @@ Feature: RSVPing AV events
     Given I am logged in as "Alice"
     And I am on the "Meeting" event page
     When I click "Attend"
-    Then I should not see "Alice Jones cannot host the event"
+    Then I should not see "Alice Jones cannot attend the event"
