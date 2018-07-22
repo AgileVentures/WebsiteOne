@@ -90,17 +90,6 @@
         <div class="row text-center">
           <%= @event.created_at.strftime "%F" %>
         </div>
-        <% if (user_signed_in? and current_user.id == @event.creator.id) %>
-          <% if @event.attendance %>
-            <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-danger") do %>
-              Cannot Attend
-            <% end %>
-          <% else %>
-            <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-success") do %>
-              Attend
-            <% end %>
-          <% end %>
-        <% end %>
       </div>
   <% end %>
 
@@ -122,11 +111,6 @@
   <% end %>
 
   <div class="col-xs-12 col-sm-6">
-    <% if !@event.attendance %>
-      <div class="event-notice">
-      <%= @event.creator.display_name %> cannot host the event.
-      </div>
-    <% end %>
     <% if @recent_hangout.try :live? %>
         <div class="event-notice">
           This event is now live!
@@ -208,6 +192,31 @@
       </div>
     </div>
 <% end %>
+<hr/>
+
+<div class="row" id="attendees">
+  <div class="col-xs-12 col-sm-6">
+    <% if !@event.attendance %>
+      <div class="event-notice">
+        <%= @event.creator.display_name %> cannot host the event.
+      </div>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-sm-4"></div>
+  <div class="col-xs-12 col-sm-2">
+    <% if (user_signed_in? and current_user.id == @event.creator.id) %>
+      <% if @event.attendance %>
+        <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-danger") do %>
+          Cannot Attend
+        <% end %>
+      <% else %>
+        <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-success") do %>
+          Attend
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 <hr/>
 
 <div class="row" id="recent_event_list">
