@@ -16,11 +16,13 @@ Feature: RSVPing AV events
   Scenario: Non-logged in users should not see Cannot Attend button
     Given I am on the "ClientMtg" event page
     Then I should not see "Cannot Attend"
+    And I should not see "Attend"
 
   Scenario: Regular users cannot see Cannot Attend button
     Given I am logged in as "John"
     When I am on the "ClientMtg" event page
     Then I should not see "Cannot Attend"
+    And I should not see "Attend"
 
   Scenario: project creator can see Cannot Attend button after creating event
     Given I am logged in as "Alice"
