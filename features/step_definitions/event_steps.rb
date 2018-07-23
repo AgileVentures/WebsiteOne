@@ -100,7 +100,9 @@ When(/^the next event should be in:$/) do |table|
 end
 
 Given(/^I am on the show page for event "([^"]*)"$/) do |name|
+  byebug
   event = Event.find_by_name(name)
+  byebug
   visit event_path(event)
 end
 

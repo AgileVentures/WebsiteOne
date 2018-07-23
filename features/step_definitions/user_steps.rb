@@ -3,7 +3,10 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
 end
 
 Given(/^the I am logged in as a user with "([^"]*)"$/) do |plan|
-  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: "Susan_#{plan}", email: "Susan_#{plan}@gmail.com", password: "Susan_#{plan}", password_confirmation: "Susan_#{plan}")
+  StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
+  email =  "Susan_#{plan}@gmail.com"
+  password = "Susan_#{plan}"
+  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: "Susan_#{plan}", email: email, password: password, password_confirmation: password)
 
   set_user_as_premium(@user, plan) 
 
