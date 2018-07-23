@@ -25,7 +25,7 @@ WebsiteOne::Application.configure do
   config.assets.debug = false
   config.assets.compress = false
 
-  config.action_mailer.delivery_method = :letter_opener if ENV['LETTER_OPENER'] == 'true'
+  config.action_mailer.delivery_method = :letter_opener unless ENV['LETTER_OPENER'] == 'false'
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
