@@ -2,6 +2,19 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
 
+Given(/^the I am logged in as a user with "([^"]*)"$/) do |plan|
+  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: "Susan_#{plan}", email: "Susan_#{plan}@gmail.com", password: "Susan_#{plan}", password_confirmation: "Susan_#{plan}")
+
+  set_user_as_premium(@user, plan) 
+
+  visit new_user_session_path
+  within ('#main') do
+    fill_in 'user_email', :with => email
+    fill_in 'user_password', :with => password
+    click_button 'Sign in'
+  end
+end
+
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
   StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
 
@@ -17,13 +30,13 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
   end
 end
 
-def set_user_as_premium(user)
-  subscription = Subscription.create(user: user, plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
+def set_user_as_premium(user, plan = 'Premium')
+  subscription = Subscription.create(user: user, plan: Plan.find_by(name: plan), started_at: Time.now)
   customer = Stripe::Customer.create({
                                          email: user.email,
                                          source: @stripe_test_helper.generate_card_token
                                      })
-  customer.subscriptions.create(plan: 'premium')
+  customer.subscriptions.create(plan: plan.downcase)
   payment_source = PaymentSource::Stripe.create(identifier: customer.id, subscription: subscription )
 end
 
