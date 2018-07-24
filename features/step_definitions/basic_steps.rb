@@ -352,7 +352,7 @@ end
 
 
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-  expect(page).to have_css "a[href='#{link}']", text: text
+  expect(page).to have_link text, href: link
 end
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|

@@ -2,13 +2,13 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
 
-Given(/^the I am logged in as a user with "([^"]*)"$/) do |plan|
+Given(/^I am logged in as a user with "([^"]*)"$/) do |plan|
   StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
   email =  "Susan_#{plan}@gmail.com"
   password = "Susan_#{plan}"
   @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: "Susan_#{plan}", email: email, password: password, password_confirmation: password)
 
-  set_user_as_premium(@user, plan) 
+  set_user_as_premium(@user, plan)
 
   visit new_user_session_path
   within ('#main') do
@@ -34,6 +34,7 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
 end
 
 def set_user_as_premium(user, plan = 'Premium')
+  return if plan.downcase == 'free'
   subscription = Subscription.create(user: user, plan: Plan.find_by(name: plan), started_at: Time.now)
   customer = Stripe::Customer.create({
                                          email: user.email,
