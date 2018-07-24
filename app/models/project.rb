@@ -15,6 +15,8 @@ class Project < ApplicationRecord
   has_many :event_instances
   has_many :commit_counts
   has_many :source_repositories
+  has_and_belongs_to_many :stacks
+  accepts_nested_attributes_for :stacks, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :source_repositories, reject_if: :all_blank, allow_destroy: true
 
   acts_as_followable
@@ -27,7 +29,7 @@ class Project < ApplicationRecord
       .where("source_repositories.url ILIKE ?", '%github%')
       .references(:source_repositories)
   end
-
+    
   def self.search(search, page)
     order('LOWER(title)')
       .where('title LIKE ?', "%#{search}%")
@@ -92,7 +94,7 @@ class Project < ApplicationRecord
   def jitsi_room_link
     "https://meet.jit.si/AV_#{title.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
   end
-  
+
   def send_notification_to_project_creator(user)
     Mailer.alert_project_creator_about_new_member(self, user).deliver_now if User.find(user_id).receive_mailings
   end

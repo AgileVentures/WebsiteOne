@@ -266,6 +266,10 @@ When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
 end
 
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, field|
+  select option, from: field, visible: false
+end
+
 Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end

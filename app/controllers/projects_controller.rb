@@ -10,6 +10,16 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.order('status ASC').order('last_github_update DESC NULLS LAST').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
+    @project = Project.new
+    @projects_stacks_array = Array.new
+    stacks_array = Stack.all.each do |name|
+       @projects_stacks_array << name.stack 
+    end
+    
+    respond_to do |format|
+      format.js
+      format.html
+    end
     render layout: 'with_sidebar_sponsor_right'
   end
 
@@ -107,6 +117,9 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :pitch, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id, :image_url, source_repositories_attributes: [:id, :url, :_destroy])
+    params.require(:project).permit(:title, :description, :pitch, :created, :status,
+                                    :user_id, :github_url, :pivotaltracker_url,
+                                    :pivotaltracker_id, :image_url, stacks_attributes: [:stack],
+                                    stack_ids: [], source_repositories_attributes: [:id, :url, :_destroy])
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180515093331) do
+ActiveRecord::Schema.define(version: 20180716190635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,9 +187,22 @@ ActiveRecord::Schema.define(version: 20180515093331) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
+  create_table "projects_stacks", id: false, force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "stack_id"
+    t.index ["project_id"], name: "index_projects_stacks_on_project_id"
+    t.index ["stack_id"], name: "index_projects_stacks_on_stack_id"
+  end
+
   create_table "source_repositories", id: :serial, force: :cascade do |t|
     t.string "url"
     t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stacks", force: :cascade do |t|
+    t.string "stack"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -238,6 +251,13 @@ ActiveRecord::Schema.define(version: 20180515093331) do
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "tech_stacks", force: :cascade do |t|
+    t.string "tech_stack"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

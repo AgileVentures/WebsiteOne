@@ -41,12 +41,14 @@ while true
                        :status => 'Active',
                        commit_count: 200
     autograder.source_repositories.create!(url: 'https://github.com/saasbook/rag')
-
+    autograder.stacks.create!(stack: 'Ruby')
+    
     websiteone = u.projects.create! :title => 'WebsiteOne',
                        :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
                        :status => 'Active',
                        commit_count: 190
     websiteone.source_repositories.create!(url: 'https://github.com/AgileVentures/WebsiteOne')
+    websiteone.stacks.create!(stack: 'Ruby on Rails')
 
     localsupport = u.projects.create! :title => 'LocalSupport',
                        :description => 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
@@ -55,6 +57,7 @@ The mission is to support members of the public searching for support groups for
                        :status => 'Active',
                        commit_count: 100
     localsupport.source_repositories.create!(url: 'https://github.com/AgileVentures/LocalSupport')
+    localsupport.stacks.create!(stack: 'Ruby on Rails')
 
     u.projects.create! :title => 'EduChat',
                        :description => 'Supporting real time synchronous chat in online classes',
