@@ -300,7 +300,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
-    ice_cube (0.16.2)
+    ice_cube (0.16.3)
     inflecto (0.0.2)
     jasmine (3.1.0)
       jasmine-core (= 3.1.0)
@@ -686,7 +686,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   hirb
-  ice_cube (= 0.16.2)
+  ice_cube (= 0.16.3)
   jasmine (~> 3.0)
   jasmine-jquery-rails (~> 2.0, >= 2.0.3)
   jbuilder
