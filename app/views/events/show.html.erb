@@ -206,6 +206,9 @@
   <div class="col-xs-12 col-sm-2">
     <% if (user_signed_in? and @event.creator and current_user.id == @event.creator.id) %>
       <% if @event.attendance %>
+      <%= form_for @event, :url => url_for(controller: "events", action: "update", params: {  } ), :html => {class: "form-class"}  do |f| %>
+        <%=  check_box 'event', 'attendance', {id: 'attendance_checkbox'}, 'true', 'false' %>
+      <% end %>
         <%= link_to(event_attendance_path(id: @event.id), :method => :put, :class => "btn btn-danger") do %>
           Cannot Attend
         <% end %>
