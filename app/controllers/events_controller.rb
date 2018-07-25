@@ -85,7 +85,7 @@ class EventsController < ApplicationController
     permitted = [
       :name, :category, :for, :project_id, :description, :duration, :repeats,
       :repeats_every_n_weeks, :repeat_ends_string, :time_zone, :creator_id,
-      :start_datetime, :repeat_ends, :repeat_ends_on, :modifier_id
+      :start_datetime, :repeat_ends, :repeat_ends_on, :modifier_id, :attendance
     ]
 
     params.merge(event: params[:event].merge(action_initiator))
