@@ -11,14 +11,9 @@ var showEvent = {
       });
     },
 
-    attendance: function(){
+    toggleAttendance: function(){
         $("#attendance_checkbox").click( function (){
             $(".form-class").submit();
           });
-          /*$('#attendance_checkbox').change(function() {
-            if(this.checked) {
-                console.log('check')
-            }
-        });*/
     }
 };

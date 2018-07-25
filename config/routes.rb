@@ -93,7 +93,4 @@ WebsiteOne::Application.routes.draw do
 
   get '/dashboard', to: 'dashboard#index'
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
-
-  put 'events/attendance/:id', to: 'events#event_attendance', as: :event_attendance
-
 end
