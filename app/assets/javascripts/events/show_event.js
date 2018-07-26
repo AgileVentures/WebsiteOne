@@ -12,7 +12,7 @@ var showEvent = {
     },
 
     toggleAttendance: function(){
-        $("#attendance_checkbox").click( function (){
+        $("#attendance_checkbox").change( function (){
             $(".form-class").submit();
           });
     }
