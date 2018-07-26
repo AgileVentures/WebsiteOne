@@ -1,9 +1,0 @@
-FROM node:8.11.3-alpine
-
-RUN apk add --no-cache git
-
-WORKDIR /WebsiteOne
-
-ADD package.json .
-RUN npm install bower -g
-RUN npm install

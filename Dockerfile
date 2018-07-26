@@ -7,11 +7,5 @@ COPY Gemfile /WebsiteOne/Gemfile
 COPY Gemfile.lock /WebsiteOne/Gemfile.lock
 RUN bundle install
 RUN npm install
-COPY 'node_modules/nprogress/nprogress.js' \
-     'node_modules/corejs-typeahead/dist/typeahead.jquery.js' \
-     'node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js' \
-     'node_modules/bootstrap-datepicker/js/bootstrap-datepicker.js' \
-     'node_modules/moment/min/moment.min.js' \
-     'node_modules/moment-timezone/builds/moment-timezone-with-data-2010-2020.js' \
-     /vendor/assets/javascripts/
 COPY . /WebsiteOne
+RUN /WebsiteOne/scripts/copy_javascript_dependencies.js
