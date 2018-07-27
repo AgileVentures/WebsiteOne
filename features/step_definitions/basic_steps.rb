@@ -398,7 +398,6 @@ Given(/^I am on a (.*)/) do |device|
   page.driver.headers = { 'User-Agent' => agent }
 end
 
-
 And(/^I debug$/) do
   byebug
 end
@@ -407,7 +406,10 @@ And(/^I remote debug/) do
   page.driver.debug
 end
 
-
 And(/^the window size is wide$/) do
   Capybara.page.current_window.resize_to(1300,400)
+end
+
+When(/^I toggle to( Cannot)? Attend$/) do |negated|
+  find("#attendance_checkbox", visible: false).trigger('click')
 end

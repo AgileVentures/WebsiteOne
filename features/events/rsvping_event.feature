@@ -1,12 +1,13 @@
+@javascript
 Feature: RSVPing AV events
   As an event creator
   In order to see people planning to attend my event
   I would like to be able to confirm attendence
-  
-  Background: 
+
+  Background:
     Given the following users exist
       | first_name | last_name | id  | password  | email                  |
-      | Alice      | Jones     | 401 | 12345678  | alicejones@hotmail.com |                                               
+      | Alice      | Jones     | 401 | 12345678  | alicejones@hotmail.com |
       | John       | Doe       |     | password  | john@doe.com           |
     And following events exist:
       | name       | description             | category        | creator_id | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks | attendance |
@@ -18,22 +19,22 @@ Feature: RSVPing AV events
     Then I should not see "Cannot Attend"
     And I should not see "Attend"
 
-  Scenario: Regular users cannot see Cannot Attend button
+  Scenario: Users who have not created event cannot see Attend buttons
     Given I am logged in as "John"
     When I am on the "ClientMtg" event page
     Then I should not see "Cannot Attend"
     And I should not see "Attend"
 
-  Scenario: project creator can see Cannot Attend button after creating event
+  Scenario: Event creator can see Cannot Attend button after creating event
     Given I am logged in as "Alice"
     When I am creating an event
     And I click "Save"
-    Then I should see "Cannot Attend"
+    Then I should see "Attend"
 
-  Scenario: project creator can mention that they cannot attend
+  Scenario: Event creator can mention that they cannot attend
     Given I am logged in as "Alice"
     And I am on the "ClientMtg" event page
-    When I click "Cannot Attend"
+    When I toggle to Cannot Attend
     Then I should see "Alice Jones cannot attend the event"
 
   Scenario: Should see cannot attend message for repeating events
@@ -41,14 +42,14 @@ Feature: RSVPing AV events
     And I am on the "Meeting" event page
     Then I should see "Alice Jones cannot attend the event"
 
-  Scenario: Project creator can see Attend button
+  Scenario: Event creator can see Cannot Attend button
     Given I am logged in as "Alice"
     When I am on the "Meeting" event page
-    Then I should not see "Cannot Attend"
-    And I should see "Attend"
+    And I should see "Cannot Attend"
+    And I should see "Alice Jones cannot attend the event"
 
-  Scenario: When project creator clicks Attend button the cannot attend message is not shown
+  Scenario: When event creator toggles to Attend, the cannot attend message is not shown
     Given I am logged in as "Alice"
     And I am on the "Meeting" event page
-    When I click "Attend"
+    When I toggle to Attend
     Then I should not see "Alice Jones cannot attend the event"
