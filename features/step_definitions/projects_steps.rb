@@ -116,6 +116,10 @@ Given(/^I (should not|should) see a link to "(.*?)" on Pivotal Tracker$/) do |op
   step %Q{I #{option} see link "#{object.title}"}
 end
 
+Then /^I should see a link to the slack channel for "([^"]*)"$/ do |project_title|
+  expect(page).to have_link 'hello', href: "https://agileventures.slack.com/app_redirect?channel=#{project_title}"
+end
+
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
   project = Project.find_by_title(title)
   case item.downcase.pluralize
