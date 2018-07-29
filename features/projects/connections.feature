@@ -9,8 +9,9 @@ Feature: Projects should show links to the connected APIs
       | Bill       | Bob       | Bill@example.com | true              |
 
     Given the following projects exist:
-      | title | description | status   | author | pivotaltracker_url                               | github_url               | slack_channel_name |
-      | hello | earthlings  | active   | Bill   | https://www.pivotaltracker.com/n/projects/742821 | https://github.com/hello | hello_earthlings   |
+      | title   | description | status   | author | pivotaltracker_url                               | github_url               | slack_channel_name |
+      | hello   | earthlings  | active   | Bill   | https://www.pivotaltracker.com/n/projects/742821 | https://github.com/hello | hello_earthlings   |
+      | Bat Man | All bat     | active   | Bill   | https://www.pivotaltracker.com/n/projects/742821 | https://github.com/bat   |                    |
 
   Scenario: I can see a link to the GitHub project page
     When I go to the "hello" project "show" page
@@ -26,3 +27,8 @@ Feature: Projects should show links to the connected APIs
     When I go to the "hello" project "show" page
     Then I should see "hello on Slack"
     And I should see a link to the slack channel for "hello"
+
+  Scenario: I can see when a project is not connected to slack
+    When I go to the "Bat Man" project "show" page
+    Then I should not see "Bat Man on Slack"
+    And I should see "not linked to Slack"
