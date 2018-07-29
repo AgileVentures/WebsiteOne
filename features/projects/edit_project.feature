@@ -39,12 +39,14 @@ Feature: Edit Project
     And I fill in "Description" with "Hello, Uranus!"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "Slack channel name" with "slackin"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a success flash "Project was successfully updated."
     And I should see "Hello, Uranus!"
     And I should see a link to "hello mars" on github
     And I should see a link to "hello mars" on Pivotal Tracker
+    And I should see a link to the slack channel for "hello mars"
 
   Scenario: Saving a project: failure
     Given I have logged in

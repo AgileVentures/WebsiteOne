@@ -26,6 +26,7 @@ Feature: Create projects
       | Status               |
       | GitHub url (primary) |
       | Issue Tracker link   |
+      | Slack channel name   |
 
   Scenario Outline: Saving a new project: success
     Given I have logged in
@@ -35,6 +36,7 @@ Feature: Create projects
     And I fill in "Description" with "<description>"
     And I fill in "GitHub url (primary)" with "<gh_link>"
     And I fill in "Issue Tracker link" with "<pt_link>"
+    And I fill in "Slack channel name" with "slackin"
     And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "<title>"
