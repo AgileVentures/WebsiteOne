@@ -9,8 +9,8 @@ Feature: Projects should show links to the connected APIs
       | Bill       | Bob       | Bill@example.com | true              |
 
     Given the following projects exist:
-      | title | description | status   | author | pivotaltracker_url                               | github_url               |
-      | hello | earthlings  | active   | Bill   | https://www.pivotaltracker.com/n/projects/742821 | https://github.com/hello |
+      | title | description | status   | author | pivotaltracker_url                               | github_url               | slack_channel_name |
+      | hello | earthlings  | active   | Bill   | https://www.pivotaltracker.com/n/projects/742821 | https://github.com/hello | hello_earthlings   |
 
   Scenario: I can click a link to the GitHub project page
     When I go to the "hello" project "show" page
