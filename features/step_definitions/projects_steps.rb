@@ -116,7 +116,7 @@ end
 
 Then /^I should see a link to the slack channel for "([^"]*)"$/ do |project_title|
   project = Project.find_by title: project_title
-  expect(page).to have_link 'hello', href: "https://agileventures.slack.com/app_redirect?channel=#{project.slack_channel_name}"
+  expect(page).to have_link project_title, href: "https://agileventures.slack.com/app_redirect?channel=#{project.slack_channel_name}"
 end
 
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
