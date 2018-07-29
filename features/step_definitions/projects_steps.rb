@@ -13,8 +13,6 @@ Given(/^the following projects exist:$/) do |table|
     end
     if hash[:github_url].present?
       project.source_repositories.build(url: hash[:github_url])
-    else
-      project.source_repositories.build
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
