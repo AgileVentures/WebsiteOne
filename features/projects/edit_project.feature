@@ -33,18 +33,22 @@ Feature: Edit Project
     When I click "Back"
     Then I should be on the "Show" page for project "hello mars"
 
+  @javascript
   Scenario: Updating a project: success
     Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
+    And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "Slack channel name" with "slackin"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a success flash "Project was successfully updated."
     And I should see "Hello, Uranus!"
     And I should see a link to "hello mars" on github
     And I should see a link to "hello mars" on Pivotal Tracker
+    And I should see a link to the slack channel for "hello mars"
 
   Scenario: Saving a project: failure
     Given I have logged in
@@ -53,9 +57,11 @@ Feature: Edit Project
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
+  @javascript
   Scenario: Update GitHub url if valid
     Given I have logged in
     And I am on the "Edit" page for project "hello mars"
+    And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
@@ -69,9 +75,11 @@ Feature: Edit Project
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on Pivotal Tracker
 
+  @javascript
   Scenario: Reject GitHub url update if invalid
     Given I have logged in
     And I am on the "Edit" page for project "hello mars"
+    And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https:/github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should see "Project was not updated."
