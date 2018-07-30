@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/brchristian/acts_as_follower.git
+  revision: aad74b7f1801f012ec8395351859ca7d9d28e08c
+  branch: patch-1
+  specs:
+    acts_as_follower (0.2.1)
+      activerecord (>= 4.0)
+
+GIT
   remote: https://github.com/AgileVentures/codeclimate_badges
   revision: 88f15dfae8679a7895e8fa3cf6a9cb39f665745e
   specs:
@@ -12,13 +20,6 @@ GIT
     mercury-rails (0.9.0)
       coffee-rails (>= 3.2.2)
       railties (>= 3.0)
-
-GIT
-  remote: https://github.com/tcocca/acts_as_follower.git
-  revision: c5ac7b9601c4af01eb4d9112330b27be4d694ecc
-  specs:
-    acts_as_follower (0.2.1)
-      activerecord (>= 4.0)
 
 GEM
   remote: https://rubygems.org/
