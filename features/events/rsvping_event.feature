@@ -10,7 +10,7 @@ Feature: RSVPing AV events
       | Alice      | Jones     | 401 | 12345678  | alicejones@hotmail.com |
       | John       | Doe       |     | password  | john@doe.com           |
     And following events exist:
-      | name       | description             | category        | creator_id | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks | attendance |
+      | name       | description             | category        | creator_id | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks | creator_attendance |
       | ClientMtg  | Weekly client meeting   | ClientMeeting   | 401        | 2018/07/19 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       | true       |
       | Meeting    | Weekly meeting          | Meeting         | 401        | 2018/07/21 11:00:00 UTC | 150      | weekly  | UTC       |         | 31                                        | 1                     | false      |
 

@@ -197,7 +197,7 @@
 
 <div class="row" id="attendees">
   <div class="col-xs-12 col-sm-6">
-    <% if !@event.attendance %>
+    <% if !@event.creator_attendance %>
       <div class="event-notice">
         <%= @event.creator.display_name %> cannot attend the event.
       </div>
@@ -207,7 +207,7 @@
   <div class="col-xs-12 col-sm-2">
     <% if (user_signed_in? and @event.creator and current_user.id == @event.creator.id) %>
       <%= form_for @event, url: url_for(controller: "events", action: "update"), html: {class: "form-class"}  do |f| %>
-        <%=  check_box 'event', 'attendance', { id: 'attendance_checkbox', 'data-toggle':'toggle', 'data-on':'Attend', 'data-off':'Cannot Attend', 'data-onstyle':'success', 'data-offstyle':'danger' }, 'true', 'false' %>
+        <%=  check_box 'event', 'creator_attendance', { id: 'attendance_checkbox', 'data-toggle':'toggle', 'data-on':'Attend', 'data-off':'Cannot Attend', 'data-onstyle':'success', 'data-offstyle':'danger' }, 'true', 'false' %>
       <% end %>
     <% end %>
   </div>
