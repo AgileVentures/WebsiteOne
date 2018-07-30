@@ -13,9 +13,9 @@ class ProjectsController < ApplicationController
     @project = Project.new
     @projects_stacks_array = Array.new
     stacks_array = Stack.all.each do |name|
-       @projects_stacks_array << name.stack 
+       @projects_stacks_array << name.stack
     end
-    
+
     respond_to do |format|
       format.js
       format.html

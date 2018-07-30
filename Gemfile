@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.0'
+ruby '2.5.1'
 
 gem 'rails', '~> 5.1'
 gem 'acts-as-taggable-on'
@@ -26,7 +26,7 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'friendly_id'
 gem 'geocoder'
-gem 'ice_cube', '0.16.2'
+gem 'ice_cube', '0.16.3'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-turbolinks', '2.1.0'
