@@ -17,6 +17,3 @@ COPY package-lock.json /WebsiteOne/package-lock.json
 RUN npm install
 
 COPY . /WebsiteOne
-
-RUN /WebsiteOne/scripts/copy_javascript_dependencies.js
-RUN ls -al /WebsiteOne/vendor/assets/javascripts
