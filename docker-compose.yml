@@ -13,8 +13,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      volumes:
+        dbVolume:
+        webVolume:
 
-volumes:
-  dbVolume:
-  webVolume:
