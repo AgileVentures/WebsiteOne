@@ -4,7 +4,7 @@ ruby '2.5.1'
 
 gem 'rails', '~> 5.1'
 gem 'acts-as-taggable-on'
-gem 'acts_as_follower', git: 'https://github.com/tcocca/acts_as_follower.git'
+gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts_as_tree'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'airbrake'
