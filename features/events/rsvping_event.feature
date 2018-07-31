@@ -14,18 +14,18 @@ Feature: RSVPing AV events
       | ClientMtg  | Weekly client meeting   | ClientMeeting   | 401        | 2018/07/19 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       | true       |
       | Meeting    | Weekly meeting          | Meeting         | 401        | 2018/07/21 11:00:00 UTC | 150      | weekly  | UTC       |         | 31                                        | 1                     | false      |
 
-  Scenario: Non-logged in users should not see Cannot Attend button
+  Scenario: Non-logged in users should not see Attend toggle
     Given I am on the "ClientMtg" event page
     Then I should not see "Cannot Attend"
     And I should not see "Attend"
 
-  Scenario: Users who have not created event cannot see Attend buttons
+  Scenario: Users who have not created event cannot see Attend toggle
     Given I am logged in as "John"
     When I am on the "ClientMtg" event page
     Then I should not see "Cannot Attend"
     And I should not see "Attend"
 
-  Scenario: Event creator can see Cannot Attend button after creating event
+  Scenario: Event creator can see Attend toggle after creating event
     Given I am logged in as "Alice"
     When I am creating an event
     And I click "Save"
@@ -42,7 +42,7 @@ Feature: RSVPing AV events
     And I am on the "Meeting" event page
     Then I should see "Alice Jones cannot attend the event"
 
-  Scenario: Event creator can see Cannot Attend button
+  Scenario: Event creator can see Cannot Attend toggle
     Given I am logged in as "Alice"
     When I am on the "Meeting" event page
     And I should see "Cannot Attend"
