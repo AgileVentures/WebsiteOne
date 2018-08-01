@@ -17,6 +17,7 @@ Feature: Display Projects
       | hello terra   | greetings terra folks   |             | active   |                                             |                                                  |              |
       | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         |
 
+    And The projects have no stories on Pivotal Tracker
     And the following source repositories exist:
       | url                               | project   |
       | https://github.com/HelloSun       | hello sun |
