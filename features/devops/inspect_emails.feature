@@ -1,4 +1,4 @@
-@intercept
+@intercept @wip
 Feature: Inspect outgoing emails
   As a developer
   I want to be able to inspect generated emails
