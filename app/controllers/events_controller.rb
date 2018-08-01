@@ -65,6 +65,11 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def event_attendance
+    Event.find_by(id: params[:id]).event_attendance
+    redirect_to event_path
+  end
+
   private
 
   def transform_params

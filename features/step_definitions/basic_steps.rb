@@ -58,6 +58,8 @@ def path_to(page_name, id = '')
       new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
+    when 'event' then
+      event_path(id: id)
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -81,6 +83,11 @@ end
 # WHEN steps
 When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
+end
+
+When(/^I (?:go to|am on) the "([^"]*)" event page$/) do |name|
+  id = Event.find_by_name(name).id
+  visit path_to('event', id)
 end
 
 When(/^(?:when I|I) click "([^"]*)"$/) do |text|

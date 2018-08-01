@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20180729040001) do
 
   # These are extensions that must be enabled in order to support this database
@@ -112,6 +113,7 @@ ActiveRecord::Schema.define(version: 20180729040001) do
     t.integer "creator_id"
     t.string "for"
     t.integer "modifier_id"
+    t.boolean "attendance", default: true
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["start_datetime"], name: "index_events_on_start_datetime"
   end

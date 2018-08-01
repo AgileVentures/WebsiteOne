@@ -266,6 +266,14 @@ class Event < ApplicationRecord
     User.find modifier_id
   end
 
+  def event_attendance
+    if self.attendance
+      update_attributes(attendance: false)
+    else
+      update_attributes(attendance: true)
+    end
+  end
+
   private
 
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
