@@ -191,8 +191,3 @@ Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_
   project = Project.find_by_title(project_name)
   project.source_repositories.create(url: repo)
 end
-
-Given(/^I go to the "([^"]*)" project "([^"]*)" page$/) do |title, page|
-  id = Project.find_by(title: title).id
-  visit path_to(page, id)
-end
