@@ -13,6 +13,8 @@ Feature: Projects should show links to the connected APIs
       | hello   | earthlings  | active   | Bill   | https://www.pivotaltracker.com/n/projects/742821 | https://github.com/hello | hello_earthlings   |
       | Bat Man | All bat     | active   | Bill   |                                                  |                          |                    |
 
+    Given The project has no stories on Pivotal Tracker
+
   Scenario: I can see a link to the GitHub project page
     When I go to the "hello" project "show" page
     Then I should see "hello on GitHub"
