@@ -13,8 +13,6 @@ Given(/^the following projects exist:$/) do |table|
     end
     if hash[:github_url].present?
       project.source_repositories.build(url: hash[:github_url])
-    else
-      project.source_repositories.build
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
@@ -116,6 +114,11 @@ Given(/^I (should not|should) see a link to "(.*?)" on Pivotal Tracker$/) do |op
   step %Q{I #{option} see link "#{object.title}"}
 end
 
+Then /^I should see a link to the slack channel for "([^"]*)"$/ do |project_title|
+  project = Project.find_by title: project_title
+  expect(page).to have_link project_title, href: "https://agileventures.slack.com/app_redirect?channel=#{project.slack_channel_name}"
+end
+
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
   project = Project.find_by_title(title)
   case item.downcase.pluralize
@@ -187,9 +190,4 @@ end
 Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_name, repo|
   project = Project.find_by_title(project_name)
   project.source_repositories.create(url: repo)
-end
-
-Given(/^I go to the "([^"]*)" project "([^"]*)" page$/) do |title, page|
-  id = Project.find_by(title: title).id
-  visit path_to(page, id)
 end
