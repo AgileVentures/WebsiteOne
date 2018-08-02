@@ -58,6 +58,8 @@ def path_to(page_name, id = '')
       new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
+    when 'event' then
+      event_path(id: id)
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -81,6 +83,11 @@ end
 # WHEN steps
 When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
+end
+
+When(/^I (?:go to|am on) the "([^"]*)" event page$/) do |name|
+  id = Event.find_by_name(name).id
+  visit path_to('event', id)
 end
 
 When(/^(?:when I|I) click "([^"]*)"$/) do |text|
@@ -391,7 +398,6 @@ Given(/^I am on a (.*)/) do |device|
   page.driver.headers = { 'User-Agent' => agent }
 end
 
-
 And(/^I debug$/) do
   byebug
 end
@@ -400,7 +406,10 @@ And(/^I remote debug/) do
   page.driver.debug
 end
 
-
 And(/^the window size is wide$/) do
   Capybara.page.current_window.resize_to(1300,400)
+end
+
+When(/^I toggle to( Cannot)? Attend$/) do |negated|
+  find("#attendance_checkbox", visible: false).trigger('click')
 end
