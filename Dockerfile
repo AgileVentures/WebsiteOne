@@ -21,6 +21,4 @@ RUN dos2unix scripts/copy_javascript_dependencies.js
 
 RUN npm install --unsafe-perm
 
-RUN chmod -R 777 vendor/assets/javascripts
-
 COPY . /WebsiteOne
