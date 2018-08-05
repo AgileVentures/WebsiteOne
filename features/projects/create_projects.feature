@@ -49,7 +49,7 @@ Feature: Create projects
       | ACTIVE        |
     And I should see a link to "<title>" on github
     And I should see a link to "<title>" on Pivotal Tracker
-    And I should see a link to the slack channel for "<title>"
+    And I should see a link "<title>" that connects to the "slack_channel"
 
     Examples:
       | title     | description     | gh_link                   | pt_link                                         |

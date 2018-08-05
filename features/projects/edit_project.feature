@@ -49,7 +49,7 @@ Feature: Edit Project
     And I should see "Hello, Uranus!"
     And I should see a link to "hello mars" on github
     And I should see a link to "hello mars" on Pivotal Tracker
-    And I should see a link to the slack channel for "hello mars"
+    And I should see a link "hello mars" that connects to the "slack_channel"
 
   Scenario: Saving a project: failure
     Given I have logged in
