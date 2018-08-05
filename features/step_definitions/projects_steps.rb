@@ -114,11 +114,6 @@ Given(/^I (should not|should) see links to "(.*?)" on github$/) do |option, name
   step %Q{I #{option} see link "#{name}"}
 end
 
-Given(/^I (should not|should) see a link to "(.*?)" on Pivotal Tracker$/) do |option, name|
-  object = Project.find_by_title(name)
-  step %Q{I #{option} see link "#{object.title}"}
-end
-
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
   project = Project.find_by_title(title)
   case item.downcase.pluralize
