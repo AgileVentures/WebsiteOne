@@ -38,8 +38,8 @@ Feature: Display Projects
 
   Scenario: Project show page has links to multiple github repos
     Given I am on the "Show" page for project "hello sun"
-    And I should see links to "HelloSun" on github
-    And I should see links to "HelloSunExtras" on github
+    And I should see link "HelloSun"
+    And I should see link "HelloSunExtras"
 
   Scenario: Project show page has hangout button for users that not follow the project
     Given I have logged in

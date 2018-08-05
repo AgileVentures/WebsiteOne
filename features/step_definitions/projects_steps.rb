@@ -110,10 +110,6 @@ Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, nam
   step %Q{I #{option} see link "#{object.github_url.split('/').last}"}
 end
 
-Given(/^I (should not|should) see links to "(.*?)" on github$/) do |option, name|
-  step %Q{I #{option} see link "#{name}"}
-end
-
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
   project = Project.find_by_title(title)
   case item.downcase.pluralize
