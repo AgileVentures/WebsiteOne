@@ -29,14 +29,14 @@ Feature: Projects should show links to the connected APIs
   Scenario: I can see a link to the GitHub project page
     When I go to the "show" page for project "hello"
     Then I should see "hello on GitHub"
-    And I should see a link to "hello" on github
+    And I should see a link "hello" that connects to the "github_url"
 
   Scenario: I can see a link to the projects issue tracker
     When I go to the "show" page for project "hello"
     Then I should see "hello on IssueTracker"
-    And I should see a link to "hello" on Pivotal Tracker
+    And I should see a link "hello" that connects to the "pivotaltracker_url"
 
   Scenario: I can see a link to the projects slack channel
     When I go to the "show" page for project "hello"
     Then I should see "hello on Slack"
-    And I should see a link to the slack channel for "hello"
+    And I should see a link "hello" that connects to the "slack_channel"
