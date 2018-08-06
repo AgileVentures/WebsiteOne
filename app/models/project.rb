@@ -29,11 +29,17 @@ class Project < ApplicationRecord
       .where("source_repositories.url ILIKE ?", '%github%')
       .references(:source_repositories)
   end
-    
+
   def self.search(search, page)
     order('LOWER(title)')
       .where('title LIKE ?', "%#{search}%")
       .paginate(per_page: 5, page: page)
+  end
+
+  def self.search_by_tech_stack(search)
+    includes(:stacks)
+      .where("stacks.stack ILIKE ?", "%#{search}%")
+      .references(:stacks)
   end
 
   def gpa

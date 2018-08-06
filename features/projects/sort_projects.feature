@@ -1,4 +1,4 @@
-@vcr
+@vcr @javascript
 Feature: Sort Projects
 	As an agile ventures member
 	So that I can find a project based on a technology stack
@@ -22,4 +22,6 @@ Feature: Sort Projects
 	Scenario: Sort projects based on technology stack
 	  Given I am on the "projects" page
 	  When I select "Ruby on Rails" from "project_stacks"
+		And I click "Filter" button
+		Then show me the page
 	  Then I should not see "hello world"

@@ -17,11 +17,12 @@
 <%= will_paginate @projects %>
   <%= simple_form_for(@project, params: :stack_filter, method: "get", remote: true, html: {class: 'form-vertical', id: 'stack'}) do |f| %>
     <%= f.input :stacks, collection: @projects_stacks_array.uniq %>
-    <%= f.button :submit, label: 'Filter', class: 'btn btn-info' %>
+    <%= f.button :submit, 'Filter', class: 'btn btn-info' %>
   <% end %>
+
   <ul id="project-list" style="list-style: none; padding-left: 0;">
     <% @projects.each do |project| %>
-      <li class="listing"> 
+      <li class="listing">
         <%= render 'listing', project: project %>
       </li>
     <% end %>

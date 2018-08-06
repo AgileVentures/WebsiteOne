@@ -3,7 +3,6 @@ development: &dev
   encoding: unicode
   database: websiteone_development
   pool: 20
-  host: db
   username: postgres
   password:
 test: &test

@@ -15,6 +15,9 @@ class ProjectsController < ApplicationController
     stacks_array = Stack.all.each do |name|
        @projects_stacks_array << name.stack
     end
+    @stack = if params[:project]
+                params[:project][:stacks]
+              end
 
     respond_to do |format|
       format.js

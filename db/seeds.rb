@@ -33,7 +33,7 @@ while true
     klasses.each(&:delete_all)
 
     pw = 'randomrandom'
-    u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
+    u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random1@random.com', password: pw)
     puts 'Added default user with email: ' + u.email.bold.blue + ' and password: ' + pw.bold.red
 
     autograder = u.projects.create! :title => 'Autograder',
@@ -42,7 +42,7 @@ while true
                        commit_count: 200
     autograder.source_repositories.create!(url: 'https://github.com/saasbook/rag')
     autograder.stacks.create!(stack: 'Ruby')
-    
+
     websiteone = u.projects.create! :title => 'WebsiteOne',
                        :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
                        :status => 'Active',
@@ -69,9 +69,10 @@ The mission is to support members of the public searching for support groups for
 Solution: is something that requires absolutely minimal effort on their part to use in order to let them pair",
                        :status => 'Active'
 
-    u.projects.create! :title => 'Funniest Computer Ever',
-                       :description => "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
-                       :status => 'Active'
+    funniestcomputerever = u.projects.create! :title => 'Funniest Computer Ever',
+                                              :description => "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
+                                              :status => 'Active'
+    funniestcomputerever.stacks.create!(stack: 'Node')
 
     puts 'Created default projects'
     break
