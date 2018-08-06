@@ -44,6 +44,10 @@ class Project < ApplicationRecord
     source_repositories.first.try(:url)
   end
 
+  def slack_channel
+    "https://agileventures.slack.com/app_redirect?channel=#{slack_channel_name}"
+  end
+
   def youtube_tags
     tag_list
       .clone

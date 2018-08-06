@@ -416,3 +416,9 @@ end
 Then(/^I should see (\d+) "([^"]*)" events$/) do |number, event|
   expect(page.all(:css, 'a', text: event, visible: false).count).to be == number.to_i
 end
+
+When(/^I am creating an event$/) do
+  step %(I dropdown the "Events" menu)
+  step %(I click "Create event")
+  step %(I fill in "Name" with "mob")
+end

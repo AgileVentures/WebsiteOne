@@ -36,6 +36,7 @@ Feature: Create projects
     And I fill in "Description" with "<description>"
     And I fill in "GitHub url (primary)" with "<gh_link>"
     And I fill in "Issue Tracker link" with "<pt_link>"
+    And The project has no stories on Pivotal Tracker
     And I fill in "Slack channel name" with "slackin"
     And I select "Status" to "Active"
     And I click the "Submit" button
@@ -47,8 +48,8 @@ Feature: Create projects
       | <description> |
       | ACTIVE        |
     And I should see a link to "<title>" on github
-    And I should see a link to "<title>" on Pivotal Tracker
-    And I should see a link to the slack channel for "<title>"
+    And I should see a link "<title>" that connects to the "pivotaltracker_url"
+    And I should see a link "<title>" that connects to the "slack_channel"
 
     Examples:
       | title     | description     | gh_link                   | pt_link                                         |
@@ -75,6 +76,7 @@ Feature: Create projects
     Then I should see "GitHub url (2)"
     And I fill in "GitHub url (2)" with "http://www.github.com/new2"
     And I fill in "Issue Tracker link" with "http://www.waffle.com/new"
+    And The project has no stories on Pivotal Tracker
     And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "multiple repo project"
@@ -85,4 +87,4 @@ Feature: Create projects
       | has lots of code      |
       | ACTIVE                |
     And I should see a link to "multiple repo project" on github
-    And I should see a link to "multiple repo project" on Pivotal Tracker
+    And I should see a link "multiple repo project" that connects to the "pivotaltracker_url"
