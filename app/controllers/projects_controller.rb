@@ -129,7 +129,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :description, :pitch, :created, :status,
-                                    :user_id, :github_url, :pivotaltracker_url,
+                                    :user_id, :github_url, :pivotaltracker_url, :slack_channel_name,
                                     :pivotaltracker_id, :image_url, stacks_attributes: [:stack],
                                     stack_ids: [], source_repositories_attributes: [:id, :url, :_destroy])
   end
