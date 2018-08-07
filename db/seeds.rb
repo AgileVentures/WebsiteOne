@@ -33,7 +33,7 @@ while true
     klasses.each(&:delete_all)
 
     pw = 'randomrandom'
-    u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random1@random.com', password: pw)
+    u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
     puts 'Added default user with email: ' + u.email.bold.blue + ' and password: ' + pw.bold.red
 
     autograder = u.projects.create! :title => 'Autograder',

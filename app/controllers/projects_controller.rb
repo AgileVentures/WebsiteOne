@@ -11,13 +11,8 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.order('status ASC').order('last_github_update DESC NULLS LAST').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
     @project = Project.new
-    @projects_stacks_array = Array.new
-    stacks_array = Stack.all.each do |name|
-       @projects_stacks_array << name.stack
-    end
-    @stack = if params[:project]
-                params[:project][:stacks]
-              end
+    populate_stacks_dropdown
+    filter_projects if params[:project]
 
     respond_to do |format|
       format.js
@@ -37,6 +32,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.source_repositories.build
+    @project.stacks.build
   end
 
   def create
@@ -90,6 +86,18 @@ class ProjectsController < ApplicationController
     current_user.stop_following(@project)
     redirect_to project_path(@project)
     flash[:notice] = "You are no longer a member of #{@project.title}."
+  end
+
+  def populate_stacks_dropdown
+    @projects_stacks_array = Array.new
+    Stack.all.each do |name|
+      @projects_stacks_array << name.stack
+    end
+  end
+
+  def filter_projects
+    @stack = params[:project][:stacks]
+    @projects = Project.search_by_tech_stack(@stack)
   end
 
   private
