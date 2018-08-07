@@ -411,10 +411,7 @@ end
 And(/^the window size is wide$/) do
   Capybara.page.current_window.resize_to(1300,400)
 end
-<<<<<<< HEAD
-=======
 
 When(/^I toggle to( Cannot)? Attend$/) do |negated|
   find("#attendance_checkbox", visible: false).trigger('click')
 end
->>>>>>> develop
