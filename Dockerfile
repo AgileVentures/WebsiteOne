@@ -22,3 +22,4 @@ RUN dos2unix scripts/copy_javascript_dependencies.js
 RUN npm install --unsafe-perm
 
 COPY . /WebsiteOne
+COPY ./docker/config/database.yml ./config/database.yml
