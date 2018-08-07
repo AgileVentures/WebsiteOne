@@ -2,6 +2,7 @@ development: &dev
   adapter: postgresql
   encoding: unicode
   database: websiteone_development
+  host: db
   pool: 20
   username: postgres
   password:
