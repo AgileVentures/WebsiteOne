@@ -88,7 +88,8 @@ class UsersController < ApplicationController
         .order("karmas.total DESC")
 
     users = users.allow_to_display unless privileged_visitor?
-    users = users.where(email: params[:email])
+    users = users.where(email: params[:email]) if params[:email]
+    users
   end
 
   def should_display_user?(user)
