@@ -34,9 +34,9 @@ class SubscriptionsController < ApplicationController
       plan = Plan.find_by(third_party_identifier: 'premiummob')
     end
 
-    begin
-      user = User.find_by slug: params[:user_slug] if current_user.is_privileged?
-    rescue
+    if current_user.is_privileged? and params[:user_slug] 
+      user = User.find_by slug: params[:user_slug] 
+    else
       user = current_user
     end
     # so we have multiple cases here
