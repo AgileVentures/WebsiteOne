@@ -67,7 +67,7 @@ end
 
 Given(/^I am logged in$/) do
   create_user
-  login_as @user, :scope => :user
+  sign_in
 end
 
 Given /^I have logged in$/ do
