@@ -32,7 +32,7 @@ WebsiteOne.define('Projects', function () {
 
 $(document).on('ready', function () {
   WebsiteOne.Projects.ensure_github_url_numbering()
-  
+
   $('#source_repositories').on('cocoon:after-insert', function (e, added_repo) {
     WebsiteOne.Projects.ensure_github_url_numbering()
   });

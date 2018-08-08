@@ -1,6 +1,10 @@
 @import "variables";
 @import "mixins";
 
+.new-project-btn {
+  margin-top: 30px;
+}
+
 .activity {
   i {
     margin:10px 0 0 5px;
@@ -87,6 +91,35 @@ $avatar-size: 32px;
   padding: 1em 15px;
 }
 
+.stack-search {
+  margin: 30px -15px;
+}
+
+.stack-search-btn {
+  margin-top: 28px;
+}
+
+.container .jumbotron {
+  padding-left: 40px;
+  padding-right: 15px;
+}
+
+.jumbotron {
+  background-color: #35b0ee;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: 220px;
+  @media (max-width: $screen-lg-min - 1px) {
+    height: auto;
+  }
+}
+
+.jumbotron p {
+  margin: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+
 #project_image {
   padding: 18px;
   width: 128px;
@@ -96,6 +129,10 @@ $avatar-size: 32px;
   padding: 18px;
 }
 
+#projects-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
 #project_listing_image {
   width: 64px;
