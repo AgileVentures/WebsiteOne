@@ -41,5 +41,6 @@ Feature: As a site user
     And my YouTube channel is connected
     And I am on my "profile" page
     When I click "PP on hello world - feature: 1"
+    When I click "PP on hello world - feature: 1"
     Then I should see "PP on hello world - feature: 1" in "video description"
     And I should see video "PP on hello world - feature: 1" in "player"
