@@ -23,6 +23,6 @@ api:
 mailer:
   delivery_method: 'test'
 
-privileged_users: 'chesa@example.com, random@random.com'
+privileged_users: 'admin@privileged.com, chesa@example.com, random@random.com'
 
 agile_bot_url: https://agile-bot.herokuapp.com

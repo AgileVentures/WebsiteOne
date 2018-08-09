@@ -24,4 +24,4 @@ api:
 hangouts:
   app_id: '10095526298'
 
-privileged_users: "random@random.com"
+privileged_users: <%= ENV["PRIVILEGED_USERS"] || "random@random.com" %>
