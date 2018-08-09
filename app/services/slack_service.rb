@@ -15,7 +15,7 @@ module SlackService
     @here_message = "@here #{@message}"
     @channel_message = "@channel #{@message}"
 
-    send_notifications hangout.category, slack_client, gitter_client, hangout, channels
+    send_notifications slack_client, gitter_client, hangout, channels
   end
 
   def send_slack_message(client, channels, text, user)
@@ -144,8 +144,8 @@ module SlackService
                        @channel_message, hangout.user
   end
 
-  def send_notifications event_type, slack_client, gitter_client, hangout, channels
-    case event_type
+  def send_notifications slack_client, gitter_client, hangout, channels
+    case hangout.category
     when "Scrum"
       post_scrum_notification slack_client, gitter_client, hangout
     when "PairProgramming"
