@@ -187,3 +187,7 @@ Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_
   project = Project.find_by_title(project_name)
   project.source_repositories.create(url: repo)
 end
+
+Then(/^I scroll to the bottom of the page$/) do
+  page.execute_script "window.scrollBy(0,10000)"
+end

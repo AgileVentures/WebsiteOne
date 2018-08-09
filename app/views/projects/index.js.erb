@@ -1,2 +1,12 @@
-$('#project-list').html("<%= escape_javascript(render 'project_list') %>");
-$('#projects-header').html("<%= "#{@stack} Projects" %>")
+<% if params[:infinite] %>
+  $('#project-list').append("<%= escape_javascript(render 'project_list') %>");
+  <% if @projects.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate @projects %>');
+  <% else %>
+    $(window).off('scroll');
+    $('.pagination').remove();
+  <% end %>
+<% else %>
+  $('#project-list').html("<%= escape_javascript(render 'project_list') %>");
+  $('#projects-header').html("<%= "#{@stack} Projects" %>")
+<% end %>
