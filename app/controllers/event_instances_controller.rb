@@ -5,19 +5,10 @@ class EventInstancesController < ApplicationController
 
   def update
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
-
     event_instance_params = check_and_transform_params(event_instance)
-    hangout_url_changed = event_instance.hangout_url != event_instance_params[:hangout_url]
-    yt_video_id_changed = event_instance.yt_video_id != event_instance_params[:yt_video_id]
-    slack_notify_hangout = params[:notify_hangout] == 'true'
-    slack_notify_yt = params[:notify_yt] == 'true'
+    event_url = event_instance.hangout_url
     if event_instance.try!(:update, event_instance_params)
-      SlackService.post_hangout_notification(event_instance) if (slack_notify_hangout && event_instance.hangout_url?) || (event_instance.started? && hangout_url_changed)
-      SlackService.post_yt_link(event_instance) if (slack_notify_yt && event_instance.yt_video_id?) || yt_video_id_changed
-
-      TwitterService.tweet_hangout_notification(event_instance) if event_instance.started? && hangout_url_changed
-      TwitterService.tweet_yt_link(event_instance)
-
+      send_messages_to_social_media event_instance, event_url, event_instance_params
       redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
       head :ok
     else
@@ -48,6 +39,43 @@ class EventInstancesController < ApplicationController
   end
 
   private
+
+  def send_messages_to_social_media event, event_url, event_params
+    SlackService.post_hangout_notification(event) if updating_hangout_url?(event, event_params)
+    SlackService.post_yt_link(event) if updating_valid_yt_url?(event, event_params)
+    TwitterService.tweet_hangout_notification(event) if (hangout_started?(event) &&
+                                                         url_updated?(event_url, event_params))
+    TwitterService.tweet_yt_link(event)
+  end
+
+  def updating_hangout_url? event, event_params
+    (slack_notify_hangout? && event.hangout_url?) || (hangout_started?(event) &&
+                                                      url_updated?(event_url, event_params))
+  end
+
+  def slack_notify_hangout?
+    params[:notify_hangout] == 'true'
+  end
+
+  def hangout_started? event
+    event.started?
+  end
+
+  def url_updated? event_url, event_params
+    event_url != event_params[:hangout_url]
+  end
+
+  def updating_valid_yt_url? event, event_params
+    (slack_notify_yt? && event.yt_video_id?) || yt_video_id_changed?(event, event_params)
+  end
+
+  def yt_video_id_changed? event, event_params
+    event.yt_video_id != event_params[:yt_video_id]
+  end
+
+  def slack_notify_yt?
+     params[:notify_yt] == 'true'
+  end
 
   def event_instance_params
     params.require(:event_instance).permit(:yt_video_id, :hoa_status)
