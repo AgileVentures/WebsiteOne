@@ -70,4 +70,7 @@
         <li><%= render 'users/profile/premium_upgrade', presenter: presenter %></li>
       <% end %>
   </ul>
+  <% if privileged_visitor? %>
+    <%= render 'users/profile/set_level', presenter: presenter %>
+  <% end %>
 </div>
