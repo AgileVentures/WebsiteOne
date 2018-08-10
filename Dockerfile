@@ -16,8 +16,7 @@ RUN bundle install
 COPY package.json /WebsiteOne/package.json
 COPY package-lock.json /WebsiteOne/package-lock.json
 COPY scripts /WebsiteOne/scripts
-
-RUN dos2unix scripts/copy_javascript_dependencies.js
+COPY vendor/assets/javascripts /WebsiteOne/assets/javascripts
 
 RUN npm install --unsafe-perm
 RUN npm install -g phantomjs-prebuilt --unsafe-perm
