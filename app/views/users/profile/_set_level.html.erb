@@ -1,0 +1,8 @@
+<%= form_tag subscription_path(presenter.user.current_subscription), method: 'put' do %>
+  <input type="hidden" name="user_slug" value="<%=presenter.user.slug %>">
+  <%= label_tag 'subscription_plan_id', 'Plan' %>
+  <%= collection_select(:subscription, :plan_id, Plan.order(:name), :id, :name, prompt: true) %> 
+  <%= submit_tag 'Adjust Level', class: 'btn btn-primary btn-lg active',
+                              style: 'margin: 5px;',
+                              title: I18n.t('adjust.tooltip') %>
+<% end %>

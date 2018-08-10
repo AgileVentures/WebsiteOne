@@ -27,3 +27,5 @@ hangouts:
 privileged_users: "random@random.com"
 
 av_dashboard_token_secret: 'super_sauce'
+
+privileged_users: <%= ENV["PRIVILEGED_USERS"] || "random@random.com" %>

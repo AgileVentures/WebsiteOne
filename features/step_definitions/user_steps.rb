@@ -60,7 +60,12 @@ Given /^I am not logged in$/ do
   step 'I sign out'
 end
 
-Given /^I am logged in$/ do
+Given /^I am logged in as a privileged user$/ do
+  create_privileged_user
+  login_as @user, :scope => :user
+end
+
+Given(/^I am logged in$/) do
   create_user
   sign_in
 end
@@ -480,6 +485,11 @@ When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_na
            end
 
   page.select(selected_from_list, from: filter)
+end
+
+
+When(/^I search for user with email "([^"]*)"$/) do |email|
+  visit "/users?email=#{email}"
 end
 
 Given(/^I have an incomplete profile$/) do
