@@ -11,5 +11,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - DB_HOST=db
 volumes:
   dbVolume:

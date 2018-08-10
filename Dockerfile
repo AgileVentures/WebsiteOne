@@ -23,4 +23,3 @@ RUN npm install --unsafe-perm
 RUN npm install -g phantomjs-prebuilt --unsafe-perm
 
 COPY . /WebsiteOne
-COPY ./docker/config/database.yml ./config/database.yml
