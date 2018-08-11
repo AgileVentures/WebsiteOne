@@ -6,7 +6,7 @@ Feature: Sort Projects
 
 	Background:
     Given the following projects exist:
-      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count | last_github_update      | stacks        |
+      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count | last_github_update      | languages     |
       | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         | 2000-01-13 09:37:14 UTC | Node          |
       | hello mars    | greetings aliens        |             | active   |                                             |                                                  | 2000         | 1999-01-11 09:37:14 UTC | Python        |
       | hello jupiter | greetings jupiter folks |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         | 1999-01-10 09:37:14 UTC | Ruby on Rails |
@@ -18,8 +18,8 @@ Feature: Sort Projects
       | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         | 1999-01-01 09:37:14 UTC | Ruby on Rails |
       | hello alpha   | greetings alpha folks   |             | active   |                                             |                                                  | 300          | 2000-01-12 09:37:14 UTC | Ruby on Rails |
 
-	Scenario: Search for projects by technology stack
+	Scenario: Search for projects by technology languages
 	  Given I am on the "projects" page
-		When I filter "project_stacks" for "Ruby on Rails"
+		When I filter "project_languages" for "Ruby on Rails"
 		Then I should see "Ruby on Rails Projects"
 	  Then I should not see "hello world" within "project-list"

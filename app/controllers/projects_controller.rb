@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.order('status ASC').order('last_github_update DESC NULLS LAST').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
     @project = Project.new
-    populate_stacks_dropdown
+    populate_languages_dropdown
     filter_projects if params[:project]
 
     respond_to do |format|
@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.source_repositories.build
-    @project.stacks.build
+    @project.languages.build
   end
 
   def create
@@ -87,16 +87,16 @@ class ProjectsController < ApplicationController
     flash[:notice] = "You are no longer a member of #{@project.title}."
   end
 
-  def populate_stacks_dropdown
-    @projects_stacks_array = Array.new
-    Stack.all.each do |name|
-      @projects_stacks_array << name.stack
+  def populate_languages_dropdown
+    @projects_languages_array = Array.new
+    Language.all.each do |language|
+      @projects_languages_array << language.name
     end
   end
 
   def filter_projects
-    @stack = params[:project][:stacks]
-    @projects = Project.search_by_tech_stack(@stack)
+    @language = params[:project][:languages]
+    @projects = Project.search_by_language(@language)
   end
 
   private
@@ -129,7 +129,7 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:title, :description, :pitch, :created, :status,
                                     :user_id, :github_url, :pivotaltracker_url, :slack_channel_name,
-                                    :pivotaltracker_id, :image_url, stacks_attributes: [:stack],
-                                    stack_ids: [], source_repositories_attributes: [:id, :url, :_destroy])
+                                    :pivotaltracker_id, :image_url, languages_attributes: [:name],
+                                    name_ids: [], source_repositories_attributes: [:id, :url, :_destroy])
   end
 end

@@ -8,5 +8,5 @@
   <% end %>
 <% else %>
   $('#project-list').html("<%= escape_javascript(render 'project_list') %>");
-  $('#projects-header').html("<%= "#{@stack} Projects" %>")
+  $('#projects-header').html("<%= "#{@language} Projects" %>")
 <% end %>
