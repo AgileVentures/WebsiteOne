@@ -8,6 +8,10 @@ task :fetch_github_last_updates => :environment do
   GithubLastUpdatesJob.run
 end
 
+task :fetch_github_languages => :environment do
+  GithubLanguagesJob.run
+end
+
 task :karma_calculator => :environment do
   User.find_each do |usr|
     begin
