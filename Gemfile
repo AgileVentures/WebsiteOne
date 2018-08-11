@@ -70,6 +70,7 @@ gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
 gem 'kramdown', '~> 1.17'
+gem 'simple_form', '~> 4.0', '>= 4.0.1'
 
 group :test do
   gem 'capybara'

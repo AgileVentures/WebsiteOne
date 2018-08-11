@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-
   layout 'with_sidebar'
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
@@ -10,6 +9,14 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.order('status ASC').order('last_github_update DESC NULLS LAST').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
+    @project = Project.new
+    populate_languages_dropdown
+    filter_projects if params[:project]
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
     render layout: 'with_sidebar_sponsor_right'
   end
 
@@ -24,6 +31,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.source_repositories.build
+    @project.languages.build
   end
 
   def create
@@ -79,6 +87,18 @@ class ProjectsController < ApplicationController
     flash[:notice] = "You are no longer a member of #{@project.title}."
   end
 
+  def populate_languages_dropdown
+    @projects_languages_array = Array.new
+    Language.all.each do |language|
+      @projects_languages_array << language.name
+    end
+  end
+
+  def filter_projects
+    @language = params[:project][:languages]
+    @projects = Project.search_by_language(@language)
+  end
+
   private
   def set_project
     @project = Project.friendly.find(params[:id])
@@ -107,6 +127,9 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :pitch, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id, :slack_channel_name, :image_url, source_repositories_attributes: [:id, :url, :_destroy])
+    params.require(:project).permit(:title, :description, :pitch, :created, :status,
+                                    :user_id, :github_url, :pivotaltracker_url, :slack_channel_name,
+                                    :pivotaltracker_id, :image_url, languages_attributes: [:name],
+                                    name_ids: [], source_repositories_attributes: [:id, :url, :_destroy])
   end
 end

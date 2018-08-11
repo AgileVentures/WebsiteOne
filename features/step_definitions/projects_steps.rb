@@ -9,10 +9,15 @@ Given(/^the following projects exist:$/) do |table|
       u = User.find_by_first_name hash[:author]
       project = Project.new(hash.except('author', 'tags').merge(user_id: u.id))
     else
-      project = default_test_author.projects.new(hash.except('author', 'tags'))
+      project = default_test_author.projects.new(hash.except('author', 'tags', 'languages'))
     end
     if hash[:github_url].present?
       project.source_repositories.build(url: hash[:github_url])
+    end
+    if hash[:languages].present?
+      project.languages.build(name: hash[:languages])
+    else
+      project.languages.build
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
@@ -181,4 +186,8 @@ end
 Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_name, repo|
   project = Project.find_by_title(project_name)
   project.source_repositories.create(url: repo)
+end
+
+Then(/^I scroll to the bottom of the page$/) do
+  page.execute_script "window.scrollBy(0,10000)"
 end

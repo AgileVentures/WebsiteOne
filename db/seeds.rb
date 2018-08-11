@@ -33,7 +33,7 @@ while true
     klasses.each(&:delete_all)
 
     pw = 'randomrandom'
-    u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
+    u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random1@random.com', password: pw)
     puts 'Added default user with email: ' + u.email.bold.blue + ' and password: ' + pw.bold.red
 
     autograder = u.projects.create! :title => 'Autograder',
@@ -41,12 +41,14 @@ while true
                        :status => 'Active',
                        commit_count: 200
     autograder.source_repositories.create!(url: 'https://github.com/saasbook/rag')
+    autograder.languages.create!(name: 'Ruby')
 
     websiteone = u.projects.create! :title => 'WebsiteOne',
                        :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
                        :status => 'Active',
                        commit_count: 190
     websiteone.source_repositories.create!(url: 'https://github.com/AgileVentures/WebsiteOne')
+    websiteone.languages.create!(name: 'Ruby on Rails')
 
     localsupport = u.projects.create! :title => 'LocalSupport',
                        :description => 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
@@ -55,6 +57,7 @@ The mission is to support members of the public searching for support groups for
                        :status => 'Active',
                        commit_count: 100
     localsupport.source_repositories.create!(url: 'https://github.com/AgileVentures/LocalSupport')
+    localsupport.languages.create!(name: 'Ruby on Rails')
 
     u.projects.create! :title => 'EduChat',
                        :description => 'Supporting real time synchronous chat in online classes',
@@ -66,9 +69,181 @@ The mission is to support members of the public searching for support groups for
 Solution: is something that requires absolutely minimal effort on their part to use in order to let them pair",
                        :status => 'Active'
 
-    u.projects.create! :title => 'Funniest Computer Ever',
-                       :description => "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
+    funniestcomputerever = u.projects.create! :title => 'Funniest Computer Ever',
+                                              :description => "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
+                                              :status => 'Active'
+    funniestcomputerever.languages.create!(name: 'Node')
+    autograder = u.projects.create! :title => 'Autograder',
+                       :description => 'Autograder for the EdX CS169.x SaaS course',
+                       :status => 'Active',
+                       commit_count: 200
+    autograder.source_repositories.create!(url: 'https://github.com/saasbook/rag')
+    autograder.languages.create!(name: 'Ruby')
+
+    websiteone = u.projects.create! :title => 'WebsiteOne',
+                       :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
+                       :status => 'Active',
+                       commit_count: 190
+    websiteone.source_repositories.create!(url: 'https://github.com/AgileVentures/WebsiteOne')
+    websiteone.languages.create!(name: 'Ruby on Rails')
+
+    localsupport = u.projects.create! :title => 'LocalSupport',
+                       :description => 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
+Our customer is the non-profit organization Voluntary Action Harrow.
+The mission is to support members of the public searching for support groups for things like helping care for an elderly or sick relative; and also to help charities and non-profits find each other and network.',
+                       :status => 'Active',
+                       commit_count: 100
+    localsupport.source_repositories.create!(url: 'https://github.com/AgileVentures/LocalSupport')
+    localsupport.languages.create!(name: 'Ruby on Rails')
+
+    u.projects.create! :title => 'EduChat',
+                       :description => 'Supporting real time synchronous chat in online classes',
+                       :status => 'Inactive',
+                       commit_count: 100
+
+    u.projects.create! :title => 'PP Scheduler',
+                       :description => "Problem: Lots of people want to pair, but they don't know when each other are available
+Solution: is something that requires absolutely minimal effort on their part to use in order to let them pair",
                        :status => 'Active'
+
+    funniestcomputerever = u.projects.create! :title => 'Funniest Computer Ever',
+                                              :description => "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
+                                              :status => 'Active'
+    funniestcomputerever.languages.create!(name: 'Node')
+    autograder = u.projects.create! :title => 'Autograder',
+                       :description => 'Autograder for the EdX CS169.x SaaS course',
+                       :status => 'Active',
+                       commit_count: 200
+    autograder.source_repositories.create!(url: 'https://github.com/saasbook/rag')
+    autograder.languages.create!(name: 'Ruby')
+
+    websiteone = u.projects.create! :title => 'WebsiteOne',
+                       :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
+                       :status => 'Active',
+                       commit_count: 190
+    websiteone.source_repositories.create!(url: 'https://github.com/AgileVentures/WebsiteOne')
+    websiteone.languages.create!(name: 'Ruby on Rails')
+
+    localsupport = u.projects.create! :title => 'LocalSupport',
+                       :description => 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
+Our customer is the non-profit organization Voluntary Action Harrow.
+The mission is to support members of the public searching for support groups for things like helping care for an elderly or sick relative; and also to help charities and non-profits find each other and network.',
+                       :status => 'Active',
+                       commit_count: 100
+    localsupport.source_repositories.create!(url: 'https://github.com/AgileVentures/LocalSupport')
+    localsupport.languages.create!(name: 'Ruby on Rails')
+
+    u.projects.create! :title => 'EduChat',
+                       :description => 'Supporting real time synchronous chat in online classes',
+                       :status => 'Inactive',
+                       commit_count: 100
+
+    u.projects.create! :title => 'PP Scheduler',
+                       :description => "Problem: Lots of people want to pair, but they don't know when each other are available
+Solution: is something that requires absolutely minimal effort on their part to use in order to let them pair",
+                       :status => 'Active'
+
+    funniestcomputerever = u.projects.create! :title => 'Funniest Computer Ever',
+                                              :description => "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
+                                              :status => 'Active'
+    funniestcomputerever.languages.create!(name: 'Node')
+
+    rundfunkmitbestimmen = u.projects.create! title: 'Rundfunk-Mitbestimmen',
+                                              description: 'Public broadcasting in Germany receives €8,000,000,000 (eight billion euros) annually, yet it is subject to little or no public feedback, ranking, or even debate on what constitutes value or quality. We want to change that',
+                                              status: 'Active',
+                                              commit_count: 1589
+    rundfunkmitbestimmen.source_repositories.create!(url: 'https://github.com/roschaefer/rundfunk-mitbestimmen')
+    rundfunkmitbestimmen.languages.create!(name: 'Ruby on Rails')
+    rundfunkmitbestimmen.languages.create!(name: 'EmberJS')
+
+    wikiedudashboard = u.projects.create! title: 'Wiki Ed Dashboard',
+                                          description: 'The Wiki Ed Dashboard is a Rails and React app. It lets instructors design and run Wikipedia editing assignments in their classes and keep track of all the work their students.',
+                                          status: 'Active',
+                                          commit_count: 9175
+    wikiedudashboard.source_repositories.create!(url: 'https://github.com/WikiEducationFoundation/WikiEduDashboard')
+    wikiedudashboard.languages.create!(name: 'Ruby on Rails')
+    wikiedudashboard.languages.create!(name: 'React')
+
+    openfarm = u.projects.create! title: 'Open Farm',
+                                  description: 'OpenFarm is a free and open database and web application for farming and gardening knowledge.',
+                                  status: 'Active',
+                                  commit_count: 2381
+    openfarm.source_repositories.create!(url: 'https://github.com/openfarmcc/OpenFarm/')
+    openfarm.languages.create!(name: 'Ruby')
+    openfarm.languages.create!(name: 'JavaScript')
+
+    shfproject = u.projects.create! title: 'SHF Project',
+                       description: 'Membership system for Sveriges Hundföretagare (Swedish Dog Industry Association)',
+                       status: 'Active',
+                       commit_count: 614
+    shfproject.source_repositories.create!(url: 'https://github.com/AgileVentures/shf-project')
+    shfproject.languages.create!(name: 'Ruby')
+    shfproject.languages.create!(name: 'Gherkin')
+
+    fastnosql = u.projects.create! title: 'FastoNoSQL',
+                       description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
+                       status: 'Active',
+                       commit_count: 53
+    fastnosql.source_repositories.create!(url: 'https://github.com/fastogt/fastonosql')
+    fastnosql.languages.create!(name: 'C++')
+
+    metplus = u.projects.create! title: 'MetPlus',
+                       description: 'MetPlus is a non-profit that aim to help the people of Detroit, and hopefully Michigan, to find a job that suits them.',
+                       status: 'Active',
+                       commit_count: 232
+    metplus.source_repositories.create!(url: 'https://github.com/AgileVentures/MetPlus_PETS')
+    metplus.languages.create!(name: 'Ruby')
+    metplus.languages.create!(name: 'Java')
+
+
+    y = u.projects.create! title: 'Y',
+                       description: 'Y is a new way to fund public services: you choose which services are funded, and where they are funded.',
+                       status: 'Active',
+                       commit_count: 19
+    y.source_repositories.create!(url: 'https://github.com/AgileVentures/Y')
+    y.languages.create!(name: 'JavaScript')
+    y.languages.create!(name: 'Elm')
+
+    asyncvoter = u.projects.create! title: 'AsyncVoter',
+                       description: 'Provide a mechanism for asynchronous planning poker on stories, bugs, and chores.',
+                       status: 'Active',
+                       commit_count: 115
+    asyncvoter.source_repositories.create!(url: 'https://github.com/AgileVentures/asyncvoter-slack-command')
+    asyncvoter.languages.create!(name: 'JavaScript')
+
+    fastnosql = u.projects.create! title: 'FastoNoSQL',
+                       description: 'FastoNoSQL it is GUI platform for NoSQL databases.',
+                       status: 'Active',
+                       commit_count: 53
+    fastnosql.source_repositories.create!(url: 'https://github.com/fastogt/fastonosql')
+    fastnosql.languages.create!(name: 'C++')
+
+    metplus = u.projects.create! title: 'MetPlus',
+                       description: 'MetPlus is a non-profit that aim to help the people of Detroit, and hopefully Michigan, to find a job that suits them.',
+                       status: 'Active',
+                       commit_count: 232
+    metplus.source_repositories.create!(url: 'https://github.com/AgileVentures/MetPlus_PETS')
+    metplus.languages.create!(name: 'Ruby')
+    metplus.languages.create!(name: 'Java')
+
+
+    y = u.projects.create! title: 'Y',
+                       description: 'Y is a new way to fund public services: you choose which services are funded, and where they are funded.',
+                       status: 'Active',
+                       commit_count: 19
+    y.source_repositories.create!(url: 'https://github.com/AgileVentures/Y')
+    y.languages.create!(name: 'JavaScript')
+    y.languages.create!(name: 'Elm')
+
+    asyncvoter = u.projects.create! title: 'AsyncVoter',
+                       description: 'Provide a mechanism for asynchronous planning poker on stories, bugs, and chores.',
+                       status: 'Active',
+                       commit_count: 115
+    asyncvoter.source_repositories.create!(url: 'https://github.com/AgileVentures/asyncvoter-slack-command')
+    asyncvoter.languages.create!(name: 'JavaScript')
+
+
+
 
     puts 'Created default projects'
     break

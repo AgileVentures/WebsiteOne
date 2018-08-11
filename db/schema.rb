@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180730173345) do
+ActiveRecord::Schema.define(version: 20180810234509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,19 @@ ActiveRecord::Schema.define(version: 20180730173345) do
     t.integer "hangouts_attended_with_more_than_one_participant", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "languages_projects", id: false, force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "language_id"
+    t.index ["language_id"], name: "index_languages_projects_on_language_id"
+    t.index ["project_id"], name: "index_languages_projects_on_project_id"
   end
 
   create_table "payment_sources", id: :serial, force: :cascade do |t|
