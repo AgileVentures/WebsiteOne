@@ -36,12 +36,6 @@ $(document).on('ready', function () {
   $('#source_repositories').on('cocoon:after-insert', function (e, added_repo) {
     WebsiteOne.Projects.ensure_github_url_numbering()
   });
-
-  $(window).on('scroll', function() {
-    var more_posts_url;
-    more_posts_url = $('.pagination .next_page').attr('href');
-    if (more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 200) {
-      $.getScript(more_posts_url + "&infinite=true");
-    }
-  });
-})
+  var params = "&infinite=true"
+  infiniteScroll(params);
+});
