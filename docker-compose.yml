@@ -4,8 +4,6 @@ services:
     image: postgres
     volumes:
       - dbVolume:/var/lib/postgresql/data
-      - javascript_vendors:/vendor/assets/javascripts
-      - scripts:/scripts
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -17,6 +15,8 @@ services:
       - DB_HOST=db
     volumes:
       - .:/WebsiteOne
+      - javascript_vendors:/vendor/assets/javascripts
+      - scripts:/scripts
 volumes:
   dbVolume:
   javascript_vendors:
