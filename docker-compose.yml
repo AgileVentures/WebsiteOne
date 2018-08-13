@@ -15,8 +15,8 @@ services:
       - DB_HOST=db
     volumes:
       - .:/WebsiteOne
-      - javascript_vendors:/vendor/assets/javascripts
-      - scripts:/scripts
+      - javascript_vendors:/WebsiteOne/vendor/assets/javascripts
+      - scripts:/WebsiteOne/scripts
 volumes:
   dbVolume:
   javascript_vendors:
