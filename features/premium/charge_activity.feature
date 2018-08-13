@@ -14,7 +14,7 @@ Feature: Charge Users Money
     And the following pages exist
       | title           | body                    |
       | About Us        | Agile Ventures          |
-      | Pricing         | wonga                   |
+      | Membership Plans         | wonga                   |
       | Getting Started | Remote Pair Programming |
 
 
@@ -22,7 +22,7 @@ Feature: Charge Users Money
     Given I am on the home page
     Then I should see "PREMIUM" within the navigation bar
     When I click "Premium" within the navigation bar
-    Then I should be on the static "Pricing" page
+    Then I should be on the static "Membership Plans" page
 
   # following four could be converted to scenario outline
 
