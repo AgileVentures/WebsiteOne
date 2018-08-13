@@ -9,10 +9,15 @@ Given(/^the following projects exist:$/) do |table|
       u = User.find_by_first_name hash[:author]
       project = Project.new(hash.except('author', 'tags').merge(user_id: u.id))
     else
-      project = default_test_author.projects.new(hash.except('author', 'tags'))
+      project = default_test_author.projects.new(hash.except('author', 'tags', 'languages'))
     end
     if hash[:github_url].present?
       project.source_repositories.build(url: hash[:github_url])
+    end
+    if hash[:languages].present?
+      project.languages.build(name: hash[:languages])
+    else
+      project.languages.build
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)

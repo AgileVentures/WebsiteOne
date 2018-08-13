@@ -275,6 +275,10 @@ When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
 end
 
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, field|
+  select option, from: field, visible: false
+end
+
 Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
@@ -414,4 +418,10 @@ end
 
 When(/^I toggle to( Cannot)? Attend$/) do |negated|
   find("#attendance_checkbox", visible: false).trigger('click')
+end
+
+Then(/^I should not see "([^"]*)" within "([^"]*)"$/) do |project_title, project_list_area|
+  within("##{project_list_area}") do
+    expect(page).to_not have_content(project_title)
+  end
 end

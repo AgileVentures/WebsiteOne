@@ -1,0 +1,3 @@
+$('#project-list').html("<%= escape_javascript(render 'filtered_project_list') %>");
+$('#projects-header').html("<%= "#{@language} Projects" %>")
+$('.pagination').replaceWith('<%= j will_paginate @filtered_projects %>');

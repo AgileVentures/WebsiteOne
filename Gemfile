@@ -117,6 +117,7 @@ group :development, :test do
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
   gem 'simplecov', '~> 0.16.1'
+  gem 'simple_form', '~> 4.0', '>= 4.0.1'
 end
 
 group :development, :staging, :production do

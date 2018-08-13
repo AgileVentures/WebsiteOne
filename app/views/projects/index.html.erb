@@ -1,6 +1,6 @@
 <% provide :title, 'Projects' %>
 
-<h1>List of Projects</h1>
+<h1 id="projects-header">List of Projects</h1>
 <% if user_signed_in? %>
   <ul class="user-controls">
     <li><%= custom_css_btn 'new project', 'fa-2x fa fa-plus', new_project_path %></li>
@@ -14,6 +14,16 @@
     To get involved in any of the projects, join one of the <%= link_to 'scrums', events_path %> and reach out to us,
     or send us an email at <a href="mailto:info@agileventures.org">info@agileventures.org</a>.
   </p>
+  <div class="row stack-search">
+  <%= simple_form_for(@project, params: :language_filter, method: "get", remote: true, html: {class: 'form-vertical', id: 'stack'}) do |f| %>
+    <div class="col-xs-9">
+      <%= f.input :languages, label: 'Search projects by programming language', collection: @projects_languages_array.uniq %>
+    </div>
+    <div class="col-xs-3 language-search-btn">
+      <%= f.button :submit, 'Search', class: 'btn btn-info' %>
+    </div>
+  </div>
+  <% end %>
   <%= will_paginate @projects %>
   <ul id="project-list" style="list-style: none; padding-left: 0;">
     <% @projects.each do |project| %>
