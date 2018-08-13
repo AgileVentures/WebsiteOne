@@ -16,11 +16,7 @@
   </p>
   <%= will_paginate @projects %>
   <ul id="project-list" style="list-style: none; padding-left: 0;">
-    <% @projects.each do |project| %>
-      <li class="listing">
-        <%= render 'listing', project: project %>
-      </li>
-    <% end %>
+    <%= render 'listing' %>
   </ul>
   <%= will_paginate @projects %>
 <% end %>

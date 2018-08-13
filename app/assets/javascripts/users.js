@@ -77,6 +77,8 @@ WebsiteOne.define('Users', function () {
             $('#tabs a[href="#activity"]').tab('show');
         });
 
+        var params = "&infinite=true"
+        infiniteScroll(params);
 
         enableBootstrapTooltipsOnNonTouchDevices();
     }

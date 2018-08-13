@@ -1,57 +1,62 @@
-<section class="doc-preview">
+<% @projects.each do |project| %>
+  <li class="listing">
+    <section class="doc-preview">
 
-  <div class="row"> 
-    <% if project.image_url.present? %>
-      <div id="project_listing_image" class="col-xs-12">
-        <%= image_tag project.image_url, class: 'img-responsive' %>
+      <div class="row">
+        <% if project.image_url.present? %>
+          <div id="project_listing_image" class="col-xs-12">
+            <%= image_tag project.image_url, class: 'img-responsive' %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="row">
-      <div class="col-xs-12">  
-        <h3><%= link_to project.title, project_path(project) %></h3>
+      <div class="row">
+          <div class="col-xs-12">
+            <h3><%= link_to project.title, project_path(project) %></h3>
+          </div>
       </div>
-  </div>
-  <div class="row"> 
-    <div class="col-xs-9">     
-      <div class="stats">
-        <ul>
-          <% follower_count = project.followers.count %>
-          <% if follower_count > 0 %>
-            <li data-toggle="tooltip" data-placement="top"
-                title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
-              <i class="fa fa-users"></i> <%= follower_count %>
-            </li>
-          <% end %>
-          <% documents_count = project.documents.count %>
-          <% if documents_count > 0 %>
-            <li data-toggle="tooltip" data-placement="top"
-                title="<%= documents_count %> related <%= 'document'.pluralize(documents_count) %>">
-              <i class="fa fa-file-text-o"></i> <%= documents_count %>
-            </li>
-          <% end %>
+      <div class="row">
+        <div class="col-xs-9">
+          <div class="stats">
+            <ul>
+              <% follower_count = project.followers.count %>
+              <% if follower_count > 0 %>
+                <li data-toggle="tooltip" data-placement="top"
+                    title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
+                  <i class="fa fa-users"></i> <%= follower_count %>
+                </li>
+              <% end %>
+              <% documents_count = project.documents.count %>
+              <% if documents_count > 0 %>
+                <li data-toggle="tooltip" data-placement="top"
+                    title="<%= documents_count %> related <%= 'document'.pluralize(documents_count) %>">
+                  <i class="fa fa-file-text-o"></i> <%= documents_count %>
+                </li>
+              <% end %>
 
-          <% commit_count = project.commit_count %>
-          <% unless commit_count.nil? %>
-            <li data-toggle="tooltip" data-placement="top"
-                title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
-              <i class="fa fa-github-alt"></i> <%= commit_count %>
-            </li>
-          <% end %>
-        </ul>
+              <% commit_count = project.commit_count %>
+              <% unless commit_count.nil? %>
+                <li data-toggle="tooltip" data-placement="top"
+                    title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
+                  <i class="fa fa-github-alt"></i> <%= commit_count %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
+            <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
+            <div>Last update in Github: <%= project.last_github_update %></div>
+            <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, user_path(project.user) %></div>
+          </div>
       </div>
-      <div style="display: inline-block; font-size: 1.0em; font-style: italic;">
-        <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
-        <div>Last update in Github: <%= project.last_github_update %></div>
-        <div><%= "Created #{time_ago_in_words(project.created_at)} ago" %> by <%= link_to project.user.display_name, user_path(project.user) %></div>
-      </div>
-  </div>
-  <div class="container-fluid">
-    <div class="row"> 
-      <div class="col-xs-12">
-        <p><%= project.description.truncate(250, separator: ' ') %></p>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12">
+            <p><%= project.description.truncate(250, separator: ' ') %></p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</section>
+    </section>
+
+  </li>
+<% end %>

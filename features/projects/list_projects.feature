@@ -34,7 +34,7 @@ Feature: Browse  projects
     When I go to the "projects" page
     Then I should see "List of Projects" table
 
-
+  @javascript
   Scenario: Display most recently updated at top "Our Projects" page paginated
     Given I am on the "home" page
     When I follow "Projects" within the navbar
@@ -44,7 +44,13 @@ Feature: Browse  projects
       | greetings aliens        |
       | greetings jupiter folks |
       | greetings mercury folks |
-    When I go to the next page
+    And I should not see:
+      | greetings saturn folks |
+      | greetings sun folks    |
+      | greetings venus folks  |
+      | greetings terra folks  |
+      | greetings pluto folks  |
+    When I scroll to the bottom of the page
     Then I should see:
       | greetings saturn folks |
       | greetings sun folks    |
@@ -52,8 +58,7 @@ Feature: Browse  projects
       | greetings terra folks  |
       | greetings pluto folks  |
     And I should not see:
-      | greetings alpha folks   |
-      | greetings earthlings    |
-      | greetings aliens        |
-      | greetings jupiter folks |
-      | greetings mercury folks |
+      | greetings alpha folks  |            
+    When I scroll to the bottom of the page
+    Then I should see:
+      | greetings alpha folks  |
