@@ -693,6 +693,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks (= 2.1.0)
   jvectormap-rails (~> 2.0)
+  jwt
   kaminari
   kramdown (~> 1.17)
   launchy
