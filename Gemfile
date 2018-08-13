@@ -31,6 +31,7 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-turbolinks', '2.1.0'
 gem 'jvectormap-rails', '~> 2.0'
+gem 'jwt'
 gem 'kaminari'
 gem "letter_opener", :group => :development
 gem 'local_time', '~> 2.0'

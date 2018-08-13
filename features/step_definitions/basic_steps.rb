@@ -58,6 +58,8 @@ def path_to(page_name, id = '')
       new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
+    when 'av dashboard token' then
+      get_av_dashboard_token_path
     when 'event' then
       event_path(id: id)
     else

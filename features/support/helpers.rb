@@ -43,8 +43,8 @@ module Helpers
                    receive_mailings: receive_mailings}
   end
 
-  def create_user
-    @user ||= FactoryBot.create(:user, create_visitor)
+  def create_user(opts = {})
+    @user ||= FactoryBot.create(:user, create_visitor.merge(opts))
     @current_user = @user
   end
 
@@ -72,7 +72,7 @@ module Helpers
     @current_user = nil
   end
 
-  def sign_up    
+  def sign_up
     delete_user
     visit new_user_registration_path
     within ('#main') do

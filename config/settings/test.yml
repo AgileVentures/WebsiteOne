@@ -26,3 +26,5 @@ mailer:
 privileged_users: 'admin@privileged.com, chesa@example.com, random@random.com'
 
 agile_bot_url: https://agile-bot.herokuapp.com
+
+av_dashboard_token_secret: 'super_sauce'

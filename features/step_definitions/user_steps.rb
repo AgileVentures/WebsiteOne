@@ -75,8 +75,26 @@ Given /^I have logged in$/ do
   login_as @user, :scope => :user
 end
 
+Given /^I have logged in as a user who is authorized to view the AVDashboard$/ do
+  create_user(can_see_dashboard: true)
+  login_as @user, :scope => :user
+end
+
+Given /^I have logged in as a user who is not authorized to view the AVDashboard$/ do
+  create_user
+  login_as @user, :scope => :user
+end
+
 Given /^I exist as a user$/ do
   create_user
+end
+
+Given /^I exist as a user who is not authorized to view the AVDashboard$/ do
+  create_user
+end
+
+Given /^I exist as a user who is authorized to view the AVDashboard$/ do
+  create_user(can_see_dashboard: true)
 end
 
 Given /^I exist as a user signed up via google/ do
