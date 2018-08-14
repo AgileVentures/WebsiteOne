@@ -11,5 +11,13 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - DB_HOST=db
+    volumes:
+      - .:/WebsiteOne
+      - javascript_vendors:/WebsiteOne/vendor/assets/javascripts
+      - scripts:/WebsiteOne/scripts
 volumes:
   dbVolume:
+  javascript_vendors:
+  scripts:

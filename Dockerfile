@@ -16,11 +16,10 @@ RUN bundle install
 COPY package.json /WebsiteOne/package.json
 COPY package-lock.json /WebsiteOne/package-lock.json
 COPY scripts /WebsiteOne/scripts
+COPY vendor/assets/javascripts /WebsiteOne/assets/javascripts
 
 RUN dos2unix scripts/copy_javascript_dependencies.js
-
 RUN npm install --unsafe-perm
 RUN npm install -g phantomjs-prebuilt --unsafe-perm
 
 COPY . /WebsiteOne
-COPY ./docker/config/database.yml ./config/database.yml
