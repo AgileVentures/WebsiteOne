@@ -1,11 +1,6 @@
 <%= content_for :content do %>
-  
-    <aside class="col-sm-3 hidden-xs">
-      <nav id="sidebar" role="complementary">
-        <%= render partial: 'layouts/sidebar', locals: { project: @project, document: @document } %>
-      </nav>
-    </aside>
-    <div id="not-sidebar" class="col-sm-6">
+
+    <div id="not-sidebar" class="col-sm-9">
       <div id="not-sidebar-content">
        <%= yield %>
      </div>

@@ -31,7 +31,7 @@ class Project < ApplicationRecord
   def self.search(search, page)
     order('LOWER(title)')
       .where('title LIKE ?', "%#{search}%")
-      .paginate(per_page: 5, page: page)
+      .paginate(per_page: 9, page: page)
   end
 
   def gpa

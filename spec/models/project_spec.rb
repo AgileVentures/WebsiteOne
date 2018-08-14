@@ -86,10 +86,10 @@ describe Project, type: :model do
   end
 
   describe '#search' do
-    before(:each) { build_stubbed_list(:project, 9) }
+    before(:each) { build_stubbed_list(:project, 12) }
 
-    it 'should return paginated projects with 5 per page' do
-      expect(Project.search(nil, nil).per_page).to eq(5)
+    it 'should return paginated projects with 9 to start with' do
+      expect(Project.search(nil, nil).per_page).to eq(9)
     end
   end
 
@@ -187,7 +187,7 @@ describe Project, type: :model do
       expect(Project.with_github_url).not_to include(project)
     end
   end
-  
+
   describe '#send_notification_to_project_creator' do
     it 'does not send an email when user\'s receive_mailings attribute is set to false' do
       user = FactoryBot.create(:user, receive_mailings: false)

@@ -87,6 +87,35 @@ $avatar-size: 32px;
   padding: 1em 15px;
 }
 
+.new-project-btn {
+  margin-top: 30px;
+}
+
+.container .jumbotron {
+  padding-left: 40px;
+  padding-right: 15px;
+}
+
+.jumbotron {
+  background-color: $off-white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: 220px;
+  @media (max-width: $screen-lg-min - 1px) {
+    height: auto;
+  }
+}
+
+.jumbotron:hover {
+  background: rgba(60, 190, 255, .3);
+}
+
+.jumbotron p {
+  margin: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+
 #project_image {
   padding: 18px;
   width: 128px;
@@ -96,7 +125,11 @@ $avatar-size: 32px;
   padding: 18px;
 }
 
-
 #project_listing_image {
   width: 64px;
+}
+
+#projects-header {
+  text-align: center;
+  margin-bottom: 40px;
 }

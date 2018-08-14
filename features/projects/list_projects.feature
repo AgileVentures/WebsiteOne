@@ -39,21 +39,25 @@ Feature: Browse  projects
     Given I am on the "home" page
     When I follow "Projects" within the navbar
     Then I should see:
-      | greetings alpha folks   |
-      | greetings earthlings    |
-      | greetings aliens        |
-      | greetings jupiter folks |
-      | greetings mercury folks |
+      | hello world   |
+      | hello alpha   |
+      | hello mars    |
+      | hello jupiter |
+      | hello mercury |
+      | hello saturn  |
+      | hello sun     |
+      | hello terra   |
+      | hello venus   |
     When I go to the next page
     Then I should see:
-      | greetings saturn folks |
-      | greetings sun folks    |
-      | greetings venus folks  |
-      | greetings terra folks  |
-      | greetings pluto folks  |
+      | hello pluto   |
     And I should not see:
-      | greetings alpha folks   |
-      | greetings earthlings    |
-      | greetings aliens        |
-      | greetings jupiter folks |
-      | greetings mercury folks |
+    | hello world   |
+    | hello alpha   |
+    | hello mars    |
+    | hello jupiter |
+    | hello mercury |
+    | hello saturn  |
+    | hello sun     |
+    | hello terra   |
+    | hello venus   |
