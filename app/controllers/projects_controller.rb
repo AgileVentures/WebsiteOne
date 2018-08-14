@@ -87,17 +87,6 @@ class ProjectsController < ApplicationController
     flash[:notice] = "You are no longer a member of #{@project.title}."
   end
 
-  def populate_languages_dropdown
-    @projects_languages_array = Array.new
-    Language.all.each do |language|
-      @projects_languages_array << language.name
-    end
-  end
-
-  def filter_projects
-    @language = params[:project][:languages]
-    @filtered_projects = Project.search_by_language(@language, params[:page])
-  end
 
   private
   def set_project
@@ -124,6 +113,18 @@ class ProjectsController < ApplicationController
       end
     end
     @stories ||= []
+  end
+
+  def populate_languages_dropdown
+    @projects_languages_array = Array.new
+    Language.all.each do |language|
+      @projects_languages_array << language.name
+    end
+  end
+
+  def filter_projects
+    @language = params[:project][:languages]
+    @filtered_projects = Project.search_by_language(@language, params[:page])
   end
 
   def project_params
