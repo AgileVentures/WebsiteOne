@@ -279,6 +279,10 @@ Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
 
+Then(/^I should not see the sidebar$/) do
+  expect(page).to_not have_selector('#sidebar')
+end
+
 Then(/^I should( not)? see the supporter content/) do |negative|
   unless negative
     expect(page).to have_css 'div#sponsorsBar', visible: true
