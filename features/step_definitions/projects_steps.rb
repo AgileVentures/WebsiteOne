@@ -16,8 +16,6 @@ Given(/^the following projects exist:$/) do |table|
     end
     if hash[:languages].present?
       project.languages.build(name: hash[:languages])
-    else
-      project.languages.build
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
@@ -169,6 +167,21 @@ Then(/^I should see projects with following updates:$/) do |table|
   projects.each do | project |
     updated_project = Project.find_by_title(project["title"])
     expect(updated_project.last_github_update).to eq(project["last_github_update"])
+  end
+end
+
+Then(/^I should see projects with the following language updates:$/) do |table|
+  # table is a Cucumber::Core::Ast::DataTable
+  projects = table.hashes
+  projects.each do |project|
+    updated_project = Project.find_by_title(project["title"])
+    @updated_language_array = Array.new
+    updated_project.languages.each do |language|
+      if language.name.eql?(project[:languages])
+        @updated_language_array << language.name
+      end
+    end
+    expect(@updated_language_array).to include(project[:languages])
   end
 end
 
