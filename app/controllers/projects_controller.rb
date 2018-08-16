@@ -8,10 +8,17 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    @projects = Project.order('status ASC').order('last_github_update DESC NULLS LAST').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
-    @project = Project.new
+    @projects = Project.order('status ASC')
+                       .order('last_github_update DESC NULLS LAST')
+                       .order('commit_count DESC NULLS LAST')
+                       .includes(:user)
     populate_languages_dropdown
-    filter_projects if params[:project]
+    if params[:project]
+      @language = params[:project][:languages]
+      @projects = @projects.search_by_language(@language, params[:page])
+    else
+      @projects = @projects.search(params[:search], params[:page])
+    end
 
     respond_to do |format|
       format.js
@@ -87,7 +94,6 @@ class ProjectsController < ApplicationController
     flash[:notice] = "You are no longer a member of #{@project.title}."
   end
 
-
   private
   def set_project
     @project = Project.friendly.find(params[:id])
@@ -120,11 +126,6 @@ class ProjectsController < ApplicationController
     Language.all.each do |language|
       @projects_languages_array << language.name
     end
-  end
-
-  def filter_projects
-    @language = params[:project][:languages]
-    @filtered_projects = Project.search_by_language(@language, params[:page])
   end
 
   def project_params

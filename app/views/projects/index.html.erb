@@ -15,7 +15,7 @@
     or send us an email at <a href="mailto:info@agileventures.org">info@agileventures.org</a>.
   </p>
   <div class="row stack-search">
-  <%= simple_form_for(@project, params: :language_filter, method: "get", remote: true, html: {class: 'form-vertical', id: 'stack'}) do |f| %>
+  <%= simple_form_for(:project, method: "get", remote: true, html: {class: 'form-vertical', id: 'stack'}) do |f| %>
     <div class="col-xs-9">
       <%= f.input :languages, label: 'Search projects by programming language', collection: @projects_languages_array.uniq %>
     </div>
