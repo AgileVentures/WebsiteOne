@@ -25,7 +25,7 @@ describe KarmaCalculator do
     describe 'for old members' do
       subject { KarmaCalculator.new(user) }
       let(:user) { FactoryBot.build(:user, :with_karma, created_at: 31.days.ago) }
-      let(:karma_points) { subject.perform; user.karma_total }
+      let(:karma_points) { subject.calculate[:total] }
 
       it 'should assign karma points to members' do
         expect(karma_points).to be > 0
@@ -38,8 +38,7 @@ describe KarmaCalculator do
 
       it 'event participation count is zero' do
         subject = KarmaCalculator.new(user)
-        subject.perform
-        expect(user.event_participation_count).to eq 0
+        expect(subject.calculate[:event_participation]).to eq 0
       end
     end
 
