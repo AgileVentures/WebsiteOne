@@ -1,8 +1,8 @@
 @vcr @javascript
 Feature: Sort Projects
 	As an agile ventures member
-	So that I can find a project based on a technology stack
-	I would like to sort the projects according to my stack
+	So that I can find a project based on a specific language I would like to work with
+	I would like to search projects according to programming language
 
 	Background:
     Given the following projects exist:
@@ -18,8 +18,17 @@ Feature: Sort Projects
       | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         | 1999-01-01 09:37:14 UTC | Ruby on Rails |
       | hello alpha   | greetings alpha folks   |             | active   |                                             |                                                  | 300          | 2000-01-12 09:37:14 UTC | Ruby on Rails |
 
-	Scenario: Search for projects by technology languages
+	Scenario: Search for projects by their languages
 	  Given I am on the "projects" page
 		When I filter "project_languages" for "Ruby on Rails"
 		Then I should see "Ruby on Rails Projects"
-	  Then I should not see "hello world" within "project-list"
+	  And I should not see "hello world" within "project-list"
+
+	Scenario: Filtered projects should be paginated
+		Given I am on the "projects" page
+		When I filter "project_languages" for "Ruby on Rails"
+		Then I should see "hello jupiter" within "project-list"
+		Then I should not see "hello pluto" within "project-list"
+		When I go to the next page
+		Then I should see "hello pluto" within "project-list"
+		And I should not see "hello jupiter" within "project-list"
