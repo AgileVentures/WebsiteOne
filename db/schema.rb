@@ -152,6 +152,11 @@ ActiveRecord::Schema.define(version: 20180813125658) do
     t.integer "hangouts_attended_with_more_than_one_participant", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "membership_length", default: 0
+    t.integer "profile_completeness", default: 0
+    t.integer "number_github_contributions", default: 0
+    t.integer "activity", default: 0
+    t.integer "event_participation", default: 0
   end
 
   create_table "languages", force: :cascade do |t|
