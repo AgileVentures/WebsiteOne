@@ -12,8 +12,7 @@ This same token will also need to be put into the appropriate environmental vari
 
 ## Giving a specific user access to the dashboard
 
-In general, for a user to be given access to the dashboard, they should sign the current Agile Ventures Data Sharing Agreement.  Provided,
-they have done this, you can give them access to the dashboard if you know their email as follows in the rails console:-
+In general, for a user to be given access to the dashboard, they should sign the current [Agile Ventures Data Sharing Agreement](http://bit.ly/AV-confidentiality).  Provided, they have done this, you can give them access to the dashboard if you know their email as follows in the rails console:-
 
 ```
   Users.find_by(email: "somedude@gmail.com").update(can_see_dashboard: true)
