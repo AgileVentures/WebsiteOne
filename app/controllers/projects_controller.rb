@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
                        .order('last_github_update DESC NULLS LAST')
                        .order('commit_count DESC NULLS LAST')
                        .includes(:user)
-    populate_languages_dropdown
+    @projects_languages_array = Language.all.collect(&:name)
     if params[:project]
       @language = params[:project][:languages]
       @projects = @projects.search_by_language(@language, params[:page])
@@ -119,13 +119,6 @@ class ProjectsController < ApplicationController
       end
     end
     @stories ||= []
-  end
-
-  def populate_languages_dropdown
-    @projects_languages_array = Array.new
-    Language.all.each do |language|
-      @projects_languages_array << language.name
-    end
   end
 
   def project_params

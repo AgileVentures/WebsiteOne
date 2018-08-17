@@ -18,7 +18,10 @@ module GithubLanguagesJob
         language_names = languages.to_hash.keys
         existing_languages = p.languages.collect(&:name).collect(&:to_sym)
         incoming_languages = language_names - existing_languages
-        incoming_languages.each { |language| p.languages.build(name: language) }
+        incoming_languages.each do |language|
+          unique_to_language_db = Language.find_or_create_by name: language
+          p.languages.build(name: unique_to_language_db.name)
+        end
         p.save!
       rescue StandardError => e
         ErrorLoggingService.new(e).log("Updating the languages for #{p.github_url} may have caused the issue!")
