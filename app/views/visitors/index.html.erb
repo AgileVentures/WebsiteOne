@@ -86,7 +86,11 @@
             </p>
             <%= image_tag 'jobs', class: 'img-responsive'%>
 
-            <a href="/users/sign_up" class="btn btn-primary btn-block call-to-action " style="margin: auto; margin-bottom: 10px; margin-top: 20px;"><span>Sign Up Now</span></a>
+            <% if @current_user %>
+              <a href="/users/sign_up" class="btn btn-primary btn-block call-to-action " style="margin: auto; margin-bottom: 10px; margin-top: 20px;"><span>Sign Up Now</span></a>
+            <% else %>
+              <a href="<%= static_page_path('Getting started')%>" class="btn btn-primary btn-block call-to-action " style="margin: auto; margin-bottom: 10px; margin-top: 20px;"><span>Get Started</span></a>
+            <% end %>
           </div>
         </div>
       </section>
