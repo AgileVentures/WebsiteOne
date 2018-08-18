@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
                        .order('last_github_update DESC NULLS LAST')
                        .order('commit_count DESC NULLS LAST')
                        .includes(:user)
-    @projects_languages_array = Language.all.collect(&:name).uniq
+    @projects_languages_array = Language.pluck(:name).uniq
     if params[:project]
       @language = params[:project][:languages]
       @projects = @projects.search_by_language(@language, params[:page])
