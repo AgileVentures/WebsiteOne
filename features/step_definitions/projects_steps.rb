@@ -15,7 +15,8 @@ Given(/^the following projects exist:$/) do |table|
       project.source_repositories.build(url: hash[:github_url])
     end
     if hash[:languages].present?
-      project.languages.build(name: hash[:languages])
+      language = Language.find_or_create_by(name: hash[:languages])
+      project.languages << language
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
