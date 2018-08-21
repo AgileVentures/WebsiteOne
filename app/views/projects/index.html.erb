@@ -17,7 +17,7 @@
   <div class="row stack-search">
   <%= simple_form_for(:project, method: "get", remote: true, html: {class: 'form-vertical', id: 'stack'}) do |f| %>
     <div class="col-xs-9">
-      <%= f.input :languages, label: 'Search projects by programming language', collection: @projects_languages_array %>
+      <%= f.input :languages, label: 'Search projects by programming language', collection: @projects_languages_array, selected: @language, include_blank: true %>
     </div>
     <div class="col-xs-3 language-search-btn">
       <%= f.button :submit, 'Search', class: 'btn btn-info' %>
