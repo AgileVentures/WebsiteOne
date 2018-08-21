@@ -8,23 +8,14 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    @projects = Project.order('status ASC')
-                       .order('last_github_update DESC NULLS LAST')
-                       .order('commit_count DESC NULLS LAST')
-                       .includes(:user)
+    initialze_projects
     @projects_languages_array = Language.pluck(:name)
-    if params[:project]
-      @language = params[:project][:languages]
-      @projects = @projects.search_by_language(@language, params[:page])
-    else
-      @projects = @projects.search(params[:search], params[:page])
-    end
-
+    filter_projects_list_by_language if params[:project]
+    @projects = @projects.search(params[:search], params[:page])
     respond_to do |format|
       format.js
-      format.html
+      format.html { render layout: 'with_sidebar_sponsor_right' }
     end
-    render layout: 'with_sidebar_sponsor_right'
   end
 
   def show
@@ -97,6 +88,18 @@ class ProjectsController < ApplicationController
   private
   def set_project
     @project = Project.friendly.find(params[:id])
+  end
+
+  def initialze_projects
+    @projects = Project.order('status ASC')
+                       .order('last_github_update DESC NULLS LAST')
+                       .order('commit_count DESC NULLS LAST')
+                       .includes(:user)
+  end
+
+  def filter_projects_list_by_language
+    @language = params[:project][:languages]
+    @projects = @projects.search_by_language(@language, params[:page])
   end
 
   def add_to_feed(action)
