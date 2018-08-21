@@ -62,3 +62,5 @@ paypal:
 github:
   client_id: <%= ENV["GITHUB_KEY"] %>
   client_secret: <%= ENV["GITHUB_SECRET"] %>
+
+av_dashboard_token_secret: <%= ENV["AV_DASHBOARD_SECRET_TOKEN"] %>

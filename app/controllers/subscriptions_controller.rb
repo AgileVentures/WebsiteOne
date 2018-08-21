@@ -26,6 +26,19 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
+    # "user_slug"=>"<slug>", "subscription"=>{"plan_id"=>"12"}, 
+    # "commit"=>"Adjust Level", "controller"=>"subscriptions", "action"=>"update", "id"=>"45"} permitted: false>
+    begin
+      plan = Plan.find params[:subscription][:plan_id]
+    rescue
+      plan = Plan.find_by(third_party_identifier: 'premiummob')
+    end
+
+    if current_user.is_privileged? and params[:user_slug] 
+      user = User.find_by slug: params[:user_slug] 
+    else
+      user = current_user
+    end
     # so we have multiple cases here
     # 1. existing sponsor has already paid and is adding additional upgrade - below code would work
     # 2. user has paid for their own premium, and upgrades themselves - below code is good
@@ -35,8 +48,7 @@ class SubscriptionsController < ApplicationController
     # have adjusted presentation logic to only show the button to upgrade the subscription if the
     # user themselves actually paid for the original premium plan
     
-    plan = Plan.find_by(third_party_identifier: 'premiummob')
-    upgrade_plan_through_stripe(current_user, plan)
+    change_plan_through_stripe(user, plan)
   rescue Stripe::InvalidRequestError => e
     logger.error "Failing plan upgrade through Stripe: #{e.message}"
     flash[:error] = "We're sorry but we can't automatically upgrade your plan at this time. Please email info@agileventures.org to receive an upgrade"
@@ -133,7 +145,7 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def upgrade_plan_through_stripe(user, new_subscription_plan)
+  def change_plan_through_stripe(user, new_subscription_plan)
     customer = Stripe::Customer.retrieve(user.stripe_customer_id)
     subscription = customer.subscriptions.retrieve(customer.subscriptions.first.id)
     subscription.plan = new_subscription_plan.third_party_identifier

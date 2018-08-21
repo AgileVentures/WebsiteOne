@@ -1,13 +1,13 @@
-Given(/^The project has some stories on Pivotal Tracker$/) do
-  @current ||= File.read('spec/fixtures/pivotal_tracker_project_current_iteration.json')
-  @project ||= File.read('spec/fixtures/pivotal_tracker_project_response.json')
-  stub_request(:get, /www\.pivotaltracker\..+\d+[^\/]*$/).
-    to_return(status: 200, body: @project, headers: {})
-  stub_request(:get, /www\.pivotaltracker\..+\d+\/iterations[^\/]*$/).
-    to_return(:status => 200, :body => @current, :headers => {})
+Given /^The projects? (has|have) some stories on Pivotal Tracker$/ do |arg|
+  project = JSON.parse File.read('spec/fixtures/pivotal_tracker_project_response.json')
+  response = File.read('spec/fixtures/pivotal_tracker_project_current_iteration.json')
+  json_iterations = JSON.parse(response, {:symbolize_names => true})
+  iteration_object = PivotalAPI::Iterations.from_json(json_iterations)
+  allow(PivotalAPI::Project).to receive(:retrieve).and_return(PivotalAPI::Project.new project)
+  allow(PivotalAPI::Service).to receive(:iterations).and_return(iteration_object)
 end
 
-Given(/The project has no stories on Pivotal Tracker/) do
+Given /^The projects? (has|have) no stories on Pivotal Tracker$/ do |arg|
   project = Object.new
   iteration = Object.new
   iteration.stub(stories: nil)

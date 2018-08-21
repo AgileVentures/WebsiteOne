@@ -115,28 +115,28 @@ end
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
-  expect(page).to have_link('Join now', href: @hangout_url)
+  expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
   time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
-  expect(page).to have_link('Join now', href: @hangout_url)
+  expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
   time = Time.parse(@jump_date) + event.duration.minutes + 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
-  expect(page).not_to have_link('Join now')
+  expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
 end
 
 Given(/^"([^"]*)" doesn't go live$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
-  expect(page).not_to have_link('Join now')
+  expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
 end
 
 And(/^"([^"]*)" is not live the following day$/) do |event_name|
   event = Event.find_by_name(event_name)
   Delorean.time_travel_to(Time.parse(@jump_date) + 1.day)
   visit event_path(event)
-  expect(page).not_to have_content('This event is now live!')
+  expect(page).not_to have_content('JOIN THIS LIVE EVENT NOW')
 end
 
 Given(/^that "([^"]*)" went live the previous day$/) do |name|

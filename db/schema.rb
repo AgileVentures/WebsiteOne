@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180515093331) do
+ActiveRecord::Schema.define(version: 20180810180605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20180515093331) do
     t.integer "creator_id"
     t.string "for"
     t.integer "modifier_id"
+    t.boolean "creator_attendance", default: true
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["start_datetime"], name: "index_events_on_start_datetime"
   end
@@ -151,6 +152,11 @@ ActiveRecord::Schema.define(version: 20180515093331) do
     t.integer "hangouts_attended_with_more_than_one_participant", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "membership_length", default: 0
+    t.integer "profile_completeness", default: 0
+    t.integer "number_github_contributions", default: 0
+    t.integer "activity", default: 0
+    t.integer "event_participation", default: 0
   end
 
   create_table "payment_sources", id: :serial, force: :cascade do |t|
@@ -183,6 +189,7 @@ ActiveRecord::Schema.define(version: 20180515093331) do
     t.integer "commit_count", default: 0
     t.string "image_url"
     t.datetime "last_github_update"
+    t.string "slack_channel_name"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
   end

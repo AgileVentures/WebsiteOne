@@ -24,6 +24,7 @@ end
 
 And(/^I create a project named "([^"]*)"$/) do |project|
   steps %Q{
+    Given The project has no stories on Pivotal Tracker
     And I am on the "Projects" page
     And I click the very stylish "New Project" button
     When I fill in:

@@ -42,6 +42,10 @@ class Project < ApplicationRecord
     source_repositories.first.try(:url)
   end
 
+  def slack_channel
+    "https://agileventures.slack.com/app_redirect?channel=#{slack_channel_name}"
+  end
+
   def youtube_tags
     tag_list
       .clone
@@ -92,7 +96,7 @@ class Project < ApplicationRecord
   def jitsi_room_link
     "https://meet.jit.si/AV_#{title.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
   end
-  
+
   def send_notification_to_project_creator(user)
     Mailer.alert_project_creator_about_new_member(self, user).deliver_now if User.find(user_id).receive_mailings
   end
