@@ -12,10 +12,7 @@ class ProjectsController < ApplicationController
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
     @projects = @projects.search(params[:search], params[:page])
-    respond_to do |format|
-      format.js
-      format.html { render layout: 'with_sidebar_sponsor_right' }
-    end
+    render layout: 'with_sidebar_sponsor_right'
   end
 
   def show
