@@ -85,6 +85,15 @@ class User < ApplicationRecord
     current_subscriptions.first
   end
 
+  def validate_user_subscription_plan(event)
+    if event.category == 'Mob'
+      subscription = current_subscription
+      subscription.plan.id > 2 unless subscription.nil?
+    else
+      true
+    end
+  end
+
   def self.filter_if_title title
     return User.all if title.blank?
     User.tagged_with(title)
