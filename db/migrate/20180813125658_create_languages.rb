@@ -7,7 +7,7 @@ class CreateLanguages < ActiveRecord::Migration[5.1]
 
     create_table :languages_projects, id: false do |t|
       t.belongs_to :project, index: true
-      t.belongs_to :language, index: true
+      t.belongs_to :language, index: true, unique: true
     end
   end
 end

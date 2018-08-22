@@ -18,7 +18,7 @@ module GithubLanguagesJob
         language_names = languages.to_hash.keys
         language_names.each do |language|
           unique_to_language_db = Language.find_or_create_by(name: language)
-          p.languages << unique_to_language_db unless p.languages.include? unique_to_language_db
+          p.languages << unique_to_language_db
         end
       rescue StandardError => e
         ErrorLoggingService.new(e).log("Updating the languages for #{p.github_url} may have caused the issue!")
