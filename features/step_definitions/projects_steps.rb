@@ -182,3 +182,15 @@ Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_
   project = Project.find_by_title(project_name)
   project.source_repositories.create(url: repo)
 end
+
+Given(/^"([^"]*)" creates the project "([^"]*)"$/) do |name, project_title|
+  first_name, last_name = name.split
+  user = User.create last_name: last_name, first_name: first_name, email: 'bob@example.org', password: 'asdf1234'
+  Project.create title: project_title, description: "Hello world", status: 'Active', user_id: user.id
+end
+
+Given(/^"([^"]*)" deactivates his account$/) do |name|
+  first_name, last_name = name.split
+  user = User.find_by first_name: first_name, last_name: last_name
+  user.delete
+end
