@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-
   layout 'with_sidebar'
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
@@ -9,7 +8,10 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    @projects = Project.order('status ASC').order('last_github_update DESC NULLS LAST').order('commit_count DESC NULLS LAST').search(params[:search], params[:page]).includes(:user)
+    initialze_projects
+    @projects_languages_array = Language.pluck(:name)
+    filter_projects_list_by_language if params[:project]
+    @projects = @projects.search(params[:search], params[:page])
     render layout: 'with_sidebar_sponsor_right'
   end
 
@@ -24,6 +26,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.source_repositories.build
+    @project.languages.build
   end
 
   def create
@@ -84,6 +87,18 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
+  def initialze_projects
+    @projects = Project.order('status ASC')
+                       .order('last_github_update DESC NULLS LAST')
+                       .order('commit_count DESC NULLS LAST')
+                       .includes(:user)
+  end
+
+  def filter_projects_list_by_language
+    @language = params[:project][:languages]
+    @projects = @projects.search_by_language(@language, params[:page])
+  end
+
   def add_to_feed(action)
     @project.create_activity action, owner: current_user
   end
@@ -107,6 +122,9 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :pitch, :created, :status, :user_id, :github_url, :pivotaltracker_url, :pivotaltracker_id, :slack_channel_name, :image_url, source_repositories_attributes: [:id, :url, :_destroy])
+    params.require(:project).permit(:title, :description, :pitch, :created, :status,
+                                    :user_id, :github_url, :pivotaltracker_url, :slack_channel_name,
+                                    :pivotaltracker_id, :image_url, languages_attributes: [:name],
+                                    name_ids: [], source_repositories_attributes: [:id, :url, :_destroy])
   end
 end

@@ -9,10 +9,14 @@ Given(/^the following projects exist:$/) do |table|
       u = User.find_by_first_name hash[:author]
       project = Project.new(hash.except('author', 'tags').merge(user_id: u.id))
     else
-      project = default_test_author.projects.new(hash.except('author', 'tags'))
+      project = default_test_author.projects.new(hash.except('author', 'tags', 'languages'))
     end
     if hash[:github_url].present?
       project.source_repositories.build(url: hash[:github_url])
+    end
+    if hash[:languages].present?
+      language = Language.find_or_create_by(name: hash[:languages])
+      project.languages << language
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
@@ -164,6 +168,21 @@ Then(/^I should see projects with following updates:$/) do |table|
   projects.each do | project |
     updated_project = Project.find_by_title(project["title"])
     expect(updated_project.last_github_update).to eq(project["last_github_update"])
+  end
+end
+
+Then(/^I should see projects with the following language updates:$/) do |table|
+  # table is a Cucumber::Core::Ast::DataTable
+  projects = table.hashes
+  projects.each do |project|
+    updated_project = Project.find_by_title(project["title"])
+    @updated_language_array = Array.new
+    updated_project.languages.each do |language|
+      if language.name.eql?(project[:languages])
+        @updated_language_array << language.name
+      end
+    end
+    expect(@updated_language_array).to include(project[:languages])
   end
 end
 
