@@ -16,7 +16,9 @@ module GithubLanguagesJob
       begin
         languages = client.languages("#{p.github_repo_name}/#{p.github_repo_user_name}")
         language_names = languages.to_hash.keys
-        language_names.each do |language|
+        existing_languages = p.languages.collect(&:name).collect(&:to_sym)
+        incoming_languages = language_names - existing_languages
+        incoming_languages.each do |language|
           unique_to_language_db = Language.find_or_create_by(name: language)
           p.languages << unique_to_language_db
         end
