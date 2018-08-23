@@ -38,7 +38,7 @@ class Project < ApplicationRecord
 
   def self.search_by_language(search, page)
     includes(:languages)
-      .where("languages.name ILIKE ?", "%#{search}%")
+      .where("languages.name ILIKE ?", "#{search}")
       .references(:languages)
       .paginate(per_page: 5, page: page)
   end
