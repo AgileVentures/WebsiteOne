@@ -426,9 +426,17 @@ When(/^I scroll to the bottom of the page$/) do
 end
 
 Then(/^I should( not)? see "([^"]*)" within "([^"]*)"$/) do |negated, project_title, project_list_area|
-  if negated
-    expect(page).to_not have_content(project_title)
-  else
-    expect(page).to have_content(project_title)
+  within("##{project_list_area}") do
+    if negated
+      expect(page).to_not have_content(project_title)
+    else
+      expect(page).to have_content(project_title)
+    end
+  end
+end
+
+Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_list_area, table|
+  table.rows.each do |row|
+    step %Q{I should see "#{row[0]}" within "#{project_list_area}"}
   end
 end
