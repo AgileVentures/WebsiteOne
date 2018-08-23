@@ -18,7 +18,7 @@ gem 'coffee-rails'
 gem 'colored'
 gem 'compass-rails'
 gem 'config'
-gem 'devise', '~> 4.4'
+gem 'devise', '~> 4.5'
 gem 'eventmachine', '~> 1.0.7'
 gem 'exception_notification'
 gem 'factory_bot_rails'
@@ -117,6 +117,7 @@ group :development, :test do
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
   gem 'simplecov', '~> 0.16.1'
+  gem 'simple_form', '~> 4.0', '>= 4.0.1'
 end
 
 group :development, :staging, :production do

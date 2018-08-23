@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180730173345) do
+ActiveRecord::Schema.define(version: 20180819232321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,28 @@ ActiveRecord::Schema.define(version: 20180730173345) do
     t.integer "hangouts_attended_with_more_than_one_participant", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "membership_length", default: 0
+    t.integer "profile_completeness", default: 0
+    t.integer "number_github_contributions", default: 0
+    t.integer "activity", default: 0
+    t.integer "event_participation", default: 0
+  end
+
+  create_table "language_projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.index ["name"], name: "index_languages_on_name", unique: true
+  end
+
+  create_table "languages_projects", id: false, force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "language_id"
+    t.index ["language_id"], name: "index_languages_projects_on_language_id"
+    t.index ["project_id"], name: "index_languages_projects_on_project_id"
   end
 
   create_table "payment_sources", id: :serial, force: :cascade do |t|
@@ -276,6 +298,7 @@ ActiveRecord::Schema.define(version: 20180730173345) do
     t.integer "status_count", default: 0
     t.datetime "deleted_at"
     t.integer "event_participation_count", default: 0
+    t.boolean "can_see_dashboard", default: false
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
