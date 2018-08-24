@@ -8,4 +8,4 @@ Feature: List projects with deactivated users
     And "Billy Bob" deactivates his account
     When I visit "/projects"
     Then I should see "Home run"
-    And I should see "by anonymous"
+    And I should see "by Anonymous"
