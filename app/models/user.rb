@@ -85,6 +85,11 @@ class User < ApplicationRecord
     current_subscriptions.first
   end
 
+  def has_attendance_rights?(event)
+    return true if event.category != 'Mob'
+    current_subscription and current_subscription.plan.id > 2
+  end
+
   def self.filter_if_title title
     return User.all if title.blank?
     User.tagged_with(title)
