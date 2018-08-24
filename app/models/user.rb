@@ -85,13 +85,9 @@ class User < ApplicationRecord
     current_subscriptions.first
   end
 
-  def validate_user_subscription_plan(event)
-    if event.category == 'Mob'
-      subscription = current_subscription
-      subscription.plan.id > 2 unless subscription.nil?
-    else
-      true
-    end
+  def has_attendance_rights?(event)
+    return true if event.category != 'Mob'
+    current_subscription and current_subscription.plan.id > 2
   end
 
   def self.filter_if_title title

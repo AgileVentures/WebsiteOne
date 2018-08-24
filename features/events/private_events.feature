@@ -24,11 +24,11 @@ Feature: Private Events
             | Started at         | 10:25:00 UTC        |
         And the time now is "10:26:00 UTC"
         When I am on the show page for event "Mob"
-        Then I <assertion> see a link "JOIN THIS LIVE EVENT NOW" to "http://hangout.test"
+        Then I <assertion> see a link "IT'S TIME TO MOB NOW" to "http://hangout.test"
         Examples:
             | plan        | assertion  |
-            | PremiumF2F | should     |
-            | PremiumMob | should     |
+            | PremiumF2F | should      |
+            | PremiumMob | should      |
             | Premium     | should not |
             | Associate   | should not |
             | Free        | should not |

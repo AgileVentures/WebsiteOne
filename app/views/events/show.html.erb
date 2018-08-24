@@ -112,12 +112,15 @@
   <% end %>
 
   <div class="col-xs-12 col-sm-6">
-    <% if @recent_hangout.try :live?  %>
-      <%  if current_user.nil? || current_user.validate_user_subscription_plan(@event) %>
-        <div class="pull-right">
-          <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
-        </div>
-      <% end %>
+    <%  if @recent_hangout.try :live? and current_user and current_user.has_attendance_rights?(@event) %>
+      <div class="pull-right">
+        <%= link_to "IT'S TIME TO MOB NOW", @recent_hangout.hangout_url, class: 'btn btn-success' %>
+      </div>
+    <% end %>
+    <% if @recent_hangout.try :live? and @event.category != 'Mob' %>
+      <div class="pull-right">
+        <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
+      </div>
     <% elsif @event.try :within_current_event_duration? %>
       <div class="event-notice">
         It's time! Please start the event.
@@ -125,7 +128,6 @@
     <% end %>
   </div>
 </div>
-
 <% if user_signed_in? %>
 
     <% hangout_is_live = @recent_hangout.try!(:live?) %>
