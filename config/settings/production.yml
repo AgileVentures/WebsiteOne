@@ -39,7 +39,7 @@ mailer:
     address: <%= ENV['SMTP_ADDRESS'] || 'smtp.sendgrid.net' %>
     domain: <%= ENV['SMTP_DOMAIN'] || 'heroku.com' %>
     authentication: <%= ENV['MAILER_AUTHENTICATION'] || 'plain' %>
-  url_host: 'agileventures.org'
+  url_host: 'www.agileventures.org'
 
 disqus:
   shortname: 'agileventures'
