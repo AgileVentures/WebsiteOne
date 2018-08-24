@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180819232321) do
+ActiveRecord::Schema.define(version: 20180813125658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,20 +159,15 @@ ActiveRecord::Schema.define(version: 20180819232321) do
     t.integer "event_participation", default: 0
   end
 
-  create_table "language_projects", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "languages", force: :cascade do |t|
     t.string "name"
-    t.index ["name"], name: "index_languages_on_name", unique: true
   end
 
   create_table "languages_projects", id: false, force: :cascade do |t|
     t.bigint "project_id"
     t.bigint "language_id"
     t.index ["language_id"], name: "index_languages_projects_on_language_id"
+    t.index ["project_id", "language_id"], name: "index_languages_projects_on_project_id_and_language_id", unique: true
     t.index ["project_id"], name: "index_languages_projects_on_project_id"
   end
 
