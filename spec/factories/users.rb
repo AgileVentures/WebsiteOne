@@ -6,15 +6,15 @@ FactoryBot.define do
     trait(:without_karma) {  karma { nil } }
 
     transient do
-      gplus 'youtube_id_1'
+      gplus { 'youtube_id_1' }
     end
 
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
-    password '12345678'
+    password { '12345678' }
     password_confirmation { password }
-    display_profile true
+    display_profile { true }
     slug { "#{first_name} #{last_name}".parameterize }
     bio { Faker::Lorem.sentence }
     skill_list { Faker::Lorem.words(4) }
