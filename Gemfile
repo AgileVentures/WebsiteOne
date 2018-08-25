@@ -56,6 +56,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'redcarpet'
 gem 'ruby-gitter'
 gem 'sass-rails'
+gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'slack-ruby-client'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'stripe'
@@ -117,7 +118,6 @@ group :development, :test do
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
   gem 'simplecov', '~> 0.16.1'
-  gem 'simple_form', '~> 4.0', '>= 4.0.1'
 end
 
 group :development, :staging, :production do
