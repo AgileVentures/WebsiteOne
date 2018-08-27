@@ -112,18 +112,30 @@
   <% end %>
 
   <div class="col-xs-12 col-sm-6">
-    <% if @recent_hangout.try :live? %>
+    <%  if @recent_hangout.try :live?  %>
+      <% if @event.category == 'Mob' %>
+        <% if current_user and current_user.allowed_to_attend?(@event) %>
+          <% @message =  "IT'S TIME TO MOB NOW" %>
+          <% @display = true %>
+        <% else %>
+          <% @display = false %>
+        <% end %>
+      <% else %>
+        <% @message =  "JOIN THIS LIVE EVENT NOW" %>
+        <% @display = true %>
+      <% end %>
+      <% if @display %>
         <div class="pull-right">
-          <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
+          <%= link_to @message, @recent_hangout.hangout_url, class: 'btn btn-success' %>
         </div>
-    <% elsif @event.try :within_current_event_duration? %>
-        <div class="event-notice">
-          It's time! Please start the event.
-        </div>
+      <% end %>
+    <% else @event.try :within_current_event_duration? %>
+      <div class="event-notice">
+        It's time! Please start the event.
+      </div>
     <% end %>
   </div>
 </div>
-
 <% if user_signed_in? %>
 
     <% hangout_is_live = @recent_hangout.try!(:live?) %>
