@@ -70,7 +70,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (6.0.0)
       activerecord (~> 5.0)
-    acts_as_tree (2.7.1)
+    acts_as_tree (2.8.0)
       activerecord (>= 3.0.0)
     acts_as_votable (0.11.1)
     addressable (2.5.2)
