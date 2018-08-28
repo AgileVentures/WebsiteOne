@@ -66,7 +66,7 @@
             </div>
             <br/>
             <i class="fa fa-clock-o"></i><span id='local_time'><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
-            <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
+            <% if event_frequency %>
                 <% if @event.repeats_every_n_weeks == 2 %>
                     <p class="help-block">Occurs every two weeks at the specified times</p>
                 <% else %>

@@ -60,4 +60,8 @@ module EventHelper
       @display = true
     end
   end
+
+  def event_frequency
+   @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule')
+  end
 end
