@@ -47,4 +47,17 @@ module EventHelper
   def set_column_width
     @event.modifier_id ? '<div class="col-xs-12 col-sm-2"></div>'.html_safe : '<div class="col-xs-12 col-sm-4"></div>'.html_safe
   end
+
+  def show_live_events
+    if @event.category == 'Mob'
+      @display = false
+      if current_user and current_user.allowed_to_attend?(@event)
+        @message =  "IT'S TIME TO MOB NOW"
+        @display = true
+      end
+    else
+      @message =  "JOIN THIS LIVE EVENT NOW"
+      @display = true
+    end
+  end
 end
