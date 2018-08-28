@@ -113,17 +113,7 @@
 
   <div class="col-xs-12 col-sm-6">
     <%  if @recent_hangout.try :live?  %>
-      <% if @event.category == 'Mob' %>
-        <% if current_user and current_user.allowed_to_attend?(@event) %>
-          <% @message =  "IT'S TIME TO MOB NOW" %>
-          <% @display = true %>
-        <% else %>
-          <% @display = false %>
-        <% end %>
-      <% else %>
-        <% @message =  "JOIN THIS LIVE EVENT NOW" %>
-        <% @display = true %>
-      <% end %>
+      <% show_live_events %>
       <% if @display %>
         <div class="pull-right">
           <%= link_to @message, @recent_hangout.hangout_url, class: 'btn btn-success' %>
