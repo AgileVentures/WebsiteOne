@@ -75,7 +75,7 @@ gem 'kramdown', '~> 1.17'
 
 group :test do
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'capybara-selenium', '~> 0.0.6'
   gem 'capybara-screenshot'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
