@@ -12,9 +12,11 @@ test:
   collecting: false
 production:
   active_record_adapter: postgresql
-  <% uri = URI.parse(ENV['DATABASE_URL']) %>
+  <% uri = URI.parse(ENV['DATABASE_URL']) rescue uri = nil %>
+  <% if uri %>
   host:     <%= uri.host %>
   username: <%= uri.username %>
   password: <%= uri.password %>
   port:     <%= uri.port %>
   database: <%= uri.path.sub('/', '') %>
+  <% end %>
