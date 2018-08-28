@@ -1,0 +1,20 @@
+development:
+  adapter: active_record
+  active_record_adapter: postgresql
+  database: websiteone_development
+  host: <%= ENV['DB_HOST'] || ""%>
+  pool: 20
+  username: postgres
+  password:
+test:
+  adapter: active_record
+  active_record_adapter: default
+  collecting: false
+production:
+  active_record_adapter: postgresql
+  <% uri = URI.parse(ENV['DATABASE_URL']) %>
+  host:     <%= uri.host %>
+  username: <%= uri.username %>
+  password: <%= uri.password %>
+  port:     <%= uri.port %>
+  database: <%= uri.path.sub('/', '') %>

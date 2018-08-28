@@ -609,6 +609,8 @@ GEM
     uniform_notifier (1.11.0)
     utf8-cleaner (0.2.5)
       activesupport
+    vanity (2.2.10)
+      i18n
     vcr (4.0.0)
     verbs (2.1.4)
       activesupport (>= 2.3.4)
@@ -748,6 +750,7 @@ DEPENDENCIES
   twitter (~> 5.17)
   uglifier
   utf8-cleaner
+  vanity
   vcr
   verbs
   webmock
@@ -762,4 +765,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.2
+   1.16.3
