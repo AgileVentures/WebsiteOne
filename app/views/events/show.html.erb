@@ -113,10 +113,8 @@
 
   <div class="col-xs-12 col-sm-6">
     <% if @recent_hangout.try :live? %>
-        <div class="event-notice">
-          This event is now live!
-          <br/>
-          <%= link_to 'Join now', @recent_hangout.hangout_url %>
+        <div class="pull-right">
+          <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
         </div>
     <% elsif @event.try :within_current_event_duration? %>
         <div class="event-notice">

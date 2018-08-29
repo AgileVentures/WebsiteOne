@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :scrum do
-    title "MyString"
+    title { "MyString" }
   end
 end
