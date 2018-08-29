@@ -81,11 +81,10 @@ group :test do
   gem 'database_cleaner'
   gem 'delorean'
   gem 'launchy'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
   gem 'puffing-billy', '~> 1.1.2'
   gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
+  gem 'chromedriver-helper', '~> 1.2'
   gem 'shoulda-matchers', require: false
   gem 'stripe-ruby-mock', '~> 2.5.4', require: 'stripe_mock'
   gem 'vcr'

@@ -393,7 +393,7 @@ end
 Given(/^I am on a (.*)/) do |device|
   case device
     when 'desktop'
-      agent = 'Poltergeist'
+      agent = 'Selenium'
     when 'tablet'
       agent = 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10'
     when 'smartphone'
@@ -426,6 +426,6 @@ Then(/^I should( not)? see "([^"]*)" within "([^"]*)"$/) do |negated, project_ti
       expect(page).to_not have_content(project_title)
     else
       expect(page).to have_content(project_title)
-    end  
+    end
   end
 end

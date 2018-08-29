@@ -15,7 +15,6 @@ Feature: Provide a ClientMeeting Category
       | EdX   | greetings earthlings |       | active | 2795         |
       | AAA   | for roadists         |       | active |              |
 
-  @javascript
   Scenario: Show Client Meeting event
     Given the date is "2014/02/03 07:01:00 UTC"
     And I am on Events index page

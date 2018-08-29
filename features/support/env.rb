@@ -6,12 +6,28 @@
 require 'simplecov'
 
 require 'cucumber/rails'
-require 'capybara/poltergeist'
 require 'billy/capybara/cucumber'
 require 'cucumber/rspec/doubles'
 require 'webmock/cucumber'
 require 'capybara-screenshot/cucumber'
+require 'selenium/webdriver'
 
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: { args: %w(headless disable-gpu no-sandbox) },
+  )
+
+  Capybara::Selenium::Driver.new app,
+    browser: :chrome,
+    desired_capabilities: capabilities
+end
+
+Capybara.javascript_driver = :headless_chrome
+Capybara.asset_host = 'http://localhost:3000'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -46,16 +62,16 @@ end
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
 #
-#   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { :except => [:widgets] } may not do what you expect here
-#     # as Cucumber::Rails::Database.javascript_strategy overrides
-#     # this setting.
-#     DatabaseCleaner.strategy = :truncation
-#   end
+# Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
+#   # { :except => [:widgets] } may not do what you expect here
+#   # as Cucumber::Rails::Database.javascript_strategy overrides
+#   # this setting.
+#   DatabaseCleaner.strategy = :truncation
+# end
 #
-#   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
-#     DatabaseCleaner.strategy = :transaction
-#   end
+# Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
+#   DatabaseCleaner.strategy = :truncation
+# end
 #
 
 # Possible values are :truncation and :transaction
@@ -68,8 +84,11 @@ Before do
   StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
 end
 
+Capybara.save_path = 'tmp/capybara'
+
 # To be used in conjunction with rerun option, so that we don't return a failing
 # exit code until the second try fails
 at_exit do
+  browser.quit
   exit 0 if ENV['NEVER_FAIL'] == 'true'
 end

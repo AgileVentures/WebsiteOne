@@ -40,11 +40,11 @@ module Helpers
                    password_confirmation: 'changemesomeday',
                    slug: 'slug-ma',
                    country_name: 'Sweden',
-                   receive_mailings: receive_mailings}
+                   receive_mailings: receive_mailings }
   end
 
   def create_user(opts = {})
-    @user ||= FactoryBot.create(:user, create_visitor.merge(opts))
+    @user ||= User.create(create_visitor.merge(opts))
     @current_user = @user
   end
 
