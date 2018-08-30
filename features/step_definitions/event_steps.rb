@@ -328,7 +328,7 @@ end
 
 Then(/^the event should (still )?be live$/) do |ignore|
   visit event_path(@event)
-  expect(page).to have_content('This event is now live!')
+  expect(page).to have_content('JOIN THIS LIVE EVENT NOW')
 end
 
 And(/^after three (more )?minutes$/) do |ignore|
@@ -351,7 +351,7 @@ end
 
 Then(/^the event should be dead$/) do
   visit event_path(@event)
-  expect(page).not_to have_content('This event is now live!')
+  expect(page).not_to have_content('JOIN THIS LIVE EVENT NOW')
 end
 
 Given(/^the event "([^"]*)"$/) do |name|
