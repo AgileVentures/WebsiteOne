@@ -4,8 +4,8 @@ development: &dev
   database: websiteone_development
   host: <%= ENV['DB_HOST'] || ""%>
   pool: 20
-  username: <%= ENV["POSTGRES_USERNAME"] %>
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  username: postgres
+  password: 
 test: &test
   <<: *dev
   database: websiteone_test
