@@ -9,6 +9,7 @@ development:
 test:
   adapter: active_record
   active_record_adapter: default
+  database: websiteone_test
   collecting: false
 production:
   active_record_adapter: postgresql
