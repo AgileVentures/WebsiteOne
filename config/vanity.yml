@@ -4,8 +4,8 @@ development:
   database: websiteone_development
   host: <%= ENV['DB_HOST'] || ""%>
   pool: 20
-  username: runner
-  password: semaphoredb
+  username: <%= ENV["DATABASE_POSTGRESQL_USERNAME"] %>
+  password: <%= ENV["DATABASE_POSTGRESQL_PASSWORD"] %>
 test:
   adapter: active_record
   active_record_adapter: default
