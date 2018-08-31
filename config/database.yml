@@ -5,7 +5,7 @@ development: &dev
   host: <%= ENV['DB_HOST'] || ""%>
   pool: 20
   username: postgres
-  password:
+  password: 
 test: &test
   <<: *dev
   database: websiteone_test

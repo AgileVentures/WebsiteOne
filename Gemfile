@@ -33,7 +33,8 @@ gem 'jquery-turbolinks', '2.1.0'
 gem 'jvectormap-rails', '~> 2.0'
 gem 'jwt'
 gem 'kaminari'
-gem "letter_opener", :group => :development
+gem 'kramdown', '~> 1.17'
+gem 'letter_opener', :group => :development
 gem 'local_time', '~> 2.0'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
 gem 'nearest_time_zone'
@@ -66,12 +67,12 @@ gem 'turbolinks'
 gem 'twitter', '~> 5.17'
 gem 'uglifier'
 gem 'utf8-cleaner'
+gem 'vanity'
 gem 'verbs'
 gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
-gem 'kramdown', '~> 1.17'
 
 group :test do
   gem 'capybara'
