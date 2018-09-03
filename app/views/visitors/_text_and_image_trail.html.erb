@@ -1,0 +1,75 @@
+    <li>
+      <section id="landing-projects" class="landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8 pull-right">
+            <h2>Are you ...</h2>
+            <p>
+              Tired of toy projects, tutorials and online courses?
+            </p>
+            <%= image_tag 'lady-dev', class: 'img-responsive'%>
+          </div>
+        </div>
+      </section>
+    </li>
+
+    <li>
+      <section id="landing-learning" class="landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8">
+            <h2>Stand up!</h2>
+            <p>
+              Sitting down at home, or not, meet other people in our online hangouts.
+            </p>
+            <%= image_tag 'standups', class: 'img-responsive'%>
+          </div>
+        </div>
+      </section>
+    </li>
+
+    <li>
+      <section id="landing-community" class="landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8 pull-right">
+            <h2>Join Real Project Teams!</h2>
+            <p>
+              Satisfy real charity customers with open source code for great causes around the world.
+            </p>
+            <%= image_tag 'real-projects', class: 'img-responsive'%>
+          </div>
+        </div>
+      </section>
+    </li>
+
+    <li>
+      <section id="landing-open-source" class="landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8">
+            <h2>Sprint!</h2>
+            <p>
+              Now you have got yourself introduced and interested in a project, accelerate by commiting to a Sprint.
+            </p>
+            <%= image_tag 'runners', class: 'img-responsive'%>            
+          </div>
+        </div>
+      </section>
+    </li>
+
+    <li>
+      <section id="landing-community" class="landing-page-section">
+        <div class="container">
+          <div class="section-well col-sm-8 pull-right">
+            <h2>Get a Job!</h2>
+            <p>
+              Premium members can get compensated for their time on paid projects, and many other alumni have gone on to great things in the wider world.
+            </p>
+            <%= image_tag 'jobs', class: 'img-responsive'%>
+
+            <% if @current_user %>
+              <a href="/users/sign_up" class="btn btn-primary btn-block call-to-action " style="margin: auto; margin-bottom: 10px; margin-top: 20px;"><span>Sign Up Now</span></a>
+            <% else %>
+              <a href="<%= static_page_path('Getting started')%>" class="btn btn-primary btn-block call-to-action " style="margin: auto; margin-bottom: 10px; margin-top: 20px;"><span>Get Started</span></a>
+            <% end %>
+          </div>
+        </div>
+      </section>
+    </li>
