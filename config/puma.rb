@@ -19,5 +19,5 @@ end
 
 after_worker_fork do |server, worker|
   ActiveRecord::Base.establish_connection
-  Vanity.playground.establish_connection
+  Vanity.playground.establish_connection unless ENV['RACK_ENV'] == 'test'
 end
