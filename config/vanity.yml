@@ -12,11 +12,12 @@ test:
   database: websiteone_test
   collecting: false
 production:
+  adapter: active_record
   active_record_adapter: postgresql
   <% uri = URI.parse(ENV['DATABASE_URL']) rescue uri = nil %>
   <% if uri %>
   host:     <%= uri.host %>
-  username: <%= uri.username %>
+  username: <%= uri.user %>
   password: <%= uri.password %>
   port:     <%= uri.port %>
   database: <%= uri.path.sub('/', '') %>
