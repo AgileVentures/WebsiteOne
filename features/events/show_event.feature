@@ -17,6 +17,12 @@ Feature: Show Events
       | Standup    | Daily standup meeting   | Scrum           | 2014/02/03 07:00:00 UTC | 150      | weekly  | UTC       |         | 15                                        | 1                     |
       | ClientMtg  | Daily client meeting    | ClientMeeting   | 2014/02/03 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
 
+  @javascript
+  Scenario: Event show page should display on the day of the event given the event already occurred
+    Given the date is "2018/09/05 09:15:00 UTC"
+    Given "Billy" created the "CS169 - HW2" event with an event instance "CS169"
+    When they view the event "CS169 - HW2"
+    Then I am on the show page for event "CS169 - HW2"
 
   @javascript
   Scenario: Event show page shows creator's icon, links to creator's profile, and date created
