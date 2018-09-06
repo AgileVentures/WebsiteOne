@@ -69,6 +69,9 @@
       <% elsif presenter.user.membership_type == 'Basic' %>
         <li><%= render 'users/profile/premium_upgrade', presenter: presenter %></li>
       <% end %>
+      <% unless presenter.user.membership_type == 'Basic' %>
+        <li><%= render 'edit_card' %></li>
+      <% end %>
   </ul>
   <% if privileged_visitor? %>
     <%= render 'users/profile/set_level', presenter: presenter %>
