@@ -99,6 +99,12 @@ When(/^the next event should be in:$/) do |table|
   end
 end
 
+Given(/^"([^"]*)" created the "([^"]*)" event with an event instance "([^"]*)"$/) do |user_name, event_name, event_instance_name|
+  user = User.find_by(first_name: user_name)
+  event = Event.create!(name: event_name, category: "PairProgramming", description: "Pairing together", repeats: "never", repeats_every_n_weeks: 1, repeats_weekly_each_days_of_the_week_mask: 0, repeat_ends: true, time_zone: "UTC", created_at: "2018-09-05 00:49:47", updated_at: "2018-09-05 04:12:15", start_datetime: "2018-09-06 07:00:00", duration: 30, creator_id: user.id)
+  EventInstance.create!(event_id: event.id, title: event_instance_name, hangout_url: "https://hangouts.google.com/call/BxivVrWsi_HEyfRVa...", created_at: "2018-09-05 03:22:02", updated_at: "2018-09-05 03:30:20", category: "PairProgramming", url_set_directly: true, yt_video_id: "hx7c0P0qKWc")
+end
+
 Given(/^I am on the show page for event "([^"]*)"$/) do |name|
   event = Event.find_by_name(name)
   visit event_path(event)
