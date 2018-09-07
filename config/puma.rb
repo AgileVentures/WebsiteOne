@@ -16,3 +16,8 @@ on_worker_boot do
     ApplicationRecord.establish_connection(config)
   end
 end
+
+after_worker_fork do |server, worker|
+  ActiveRecord::Base.establish_connection
+  Vanity.playground.establish_connection unless ENV['SEMAPHORE'] == 'true'
+end

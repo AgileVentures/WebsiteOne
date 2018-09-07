@@ -92,6 +92,16 @@ WebsiteOne::Application.routes.draw do
 
   resources :hookups
 
+  get '/vanity' =>'vanity#index'
+  get '/vanity/participant/:id' => 'vanity#participant'
+  post '/vanity/complete'
+  post '/vanity/chooses'
+  post '/vanity/reset'
+  post '/vanity/enable'
+  post '/vanity/disable'
+  post '/vanity/add_participant'
+  get '/vanity/image'
+
   get '/dashboard', to: 'dashboard#index'
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
 end
