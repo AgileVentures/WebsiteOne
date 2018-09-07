@@ -40,6 +40,11 @@ module WebsiteOne
       disqus.js event_instances.js scrums.js
     )
 
+    # ensure svg assets are compiled in production
+    config.assets.precompile += %w( jobs.svg lady-dev.svg real-projects.svg runners.svg standups.svg )  
+    
+    # config.assets.css_compressor = :sass
+
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
   end
 end

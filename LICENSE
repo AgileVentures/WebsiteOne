@@ -18,3 +18,13 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Note that the following files:
+
+* app/assets/images/jobs.svg
+* app/assets/images/lady-dev.svg
+* app/assets/images/real-projects.svg
+* app/assets/images/runners.svg
+* app/assets/images/standups.svg
+
+Are not MIT License and are subject to the [Shutterstock Licensing terms](https://www.shutterstock.com/license)  
