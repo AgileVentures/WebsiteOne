@@ -3,7 +3,7 @@
 
   <div class="col-xs-12 text-center">
     <div class="video-container">
-      <iframe id="ytplayer" width="480" height="320" type="text/html" src="<%= presenter.video_embed_link %>" frameborder="0"></iframe>
+      <iframe id="ytplayer" type="text/html" src="<%= presenter.video_embed_link %>" frameborder="0"></iframe>
     </div>
   </div>
 </div>
@@ -15,7 +15,7 @@
     <% videos.each do |video| %>
       <% present video do |presenter| %>
         <tr>
-          <td><%= presenter.video_link %><small><%= video.created_at.strftime '%A, %B %-d, %Y' %></small></td>
+          <td><%= presenter.video_link %><small> <%= video.created_at.strftime '%A, %B %-d, %Y'  %></small></td>
         </tr>
       <% end %>
     <% end %>
