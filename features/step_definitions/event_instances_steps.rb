@@ -14,7 +14,7 @@ When /^a user views the event "([^"]*)"$/ do |event|
 end
 
 Then /^they should see (\d+) event instances$/ do |num_event_instances|
-  expect(page).to have_css('#recent_event_list li', count: num_event_instances)
+  expect(page).to have_css('#video_links td', count: num_event_instances)
 end
 
 Then /^they should see a message stating: "([^"]*)"$/ do |message|
@@ -23,8 +23,8 @@ end
 
 Then /^they should see all information for the instance "([^"]*)"$/ do |event_instance|
   event_instance = EventInstance.find_by title: event_instance
-  expect(page).to have_css('#recent_event_list li', text: "#{event_instance.created_at.strftime '%A, %B %-d, %Y'} - ")
-  expect(page).to have_link("link to video", href: "https://www.youtube.com/watch?v=#{event_instance.yt_video_id}")
+  expect(page).to have_css('#video_links td', text: "#{event_instance.title}")
+  expect(page).to have_link("#{event_instance.title}", href: "https://www.youtube.com/watch?v=#{event_instance.yt_video_id}&feature=youtube_gdata")
 end
 
 Given /^(\d+) event instance exists without a youtube id$/ do |num_event_instances|

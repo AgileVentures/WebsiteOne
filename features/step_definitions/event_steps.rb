@@ -428,3 +428,12 @@ When(/^I am creating an event$/) do
   step %(I click "Create event")
   step %(I fill in "Name" with "mob")
 end
+
+Given(/^the following event instances exist:$/) do |table|
+  table.hashes.each do |hash|
+    hash[:event] = Event.find_by name: hash[:event]
+    hash[:project] = Project.find_by title: hash[:project]
+    EventInstance.create hash
+  end
+end
+
