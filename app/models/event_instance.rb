@@ -32,6 +32,7 @@ class EventInstance < ApplicationRecord
 
   # margin: Seconds for which condition can be relaxed for start time
   def updated_within_current_event_duration?(margin)
+    return false unless event.current_start_time
     updated_at > (event.current_start_time - margin) &&
       updated_at < event.current_end_time
   end

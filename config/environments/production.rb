@@ -27,6 +27,9 @@ WebsiteOne::Application.configure do
   config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :yui
 
+  # ensure svg assets are compiled in production
+  config.assets.precompile += %w( '.svg' )  
+
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
 
