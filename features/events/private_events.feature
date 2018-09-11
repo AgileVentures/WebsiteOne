@@ -12,8 +12,8 @@ Feature: Private Events
             | name         | id          | amount | free_trial_length_days |
             | Associate    | associate   | 500    | 0                      |
             | Premium      | premium     | 1000   | 7                      |
-            | PremiumMob  | premiummob  | 2500   | 0                      |
-            | PremiumF2F  | premiumf2f  | 5000   | 0                      |
+            | PremiumMob   | premiummob  | 2500   | 0                      |
+            | PremiumF2F   | premiumf2f  | 5000   | 0                      |
             | Premium Plus | premiumplus | 10000  | 0                      |
 
     Scenario Outline: show mob hangout links to users with correct plans
@@ -27,8 +27,8 @@ Feature: Private Events
         Then I <assertion> see a link "IT'S TIME TO MOB NOW" to "http://hangout.test"
         Examples:
             | plan        | assertion  |
-            | PremiumF2F | should      |
-            | PremiumMob | should      |
+            | PremiumF2F  | should      |
+            | PremiumMob  | should      |
             | Premium     | should not |
             | Associate   | should not |
             | Free        | should not |
