@@ -1,8 +1,8 @@
 @vcr
 Feature: Events
-    As the site administrator
-    In order to help my members plan their time
-    And in order to increase the attendance in scrums (published on G+ api)
+  As the site administrator
+  In order to help my members plan their time
+  And in order to increase the attendance in scrums (published on G+ api)
   I want to display a countdown to the next AV Scrum on the home page
 
   As a site user
