@@ -27,8 +27,8 @@ Feature: Private Events
         Then I <assertion> see a link "IT'S TIME TO MOB NOW" to "http://hangout.test"
         Examples:
             | plan        | assertion  |
-            | PremiumF2F  | should      |
-            | PremiumMob  | should      |
+            | PremiumF2F  | should     |
+            | PremiumMob  | should     |
             | Premium     | should not |
             | Associate   | should not |
             | Free        | should not |
