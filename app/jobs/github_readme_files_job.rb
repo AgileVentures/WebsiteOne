@@ -28,7 +28,18 @@ module GithubReadmeFilesJob
 
   def project_readme(project)
     begin
-      project.update(pitch: content(project.github_repo, 'README.md'))
+      projects_readme = content(project.github_repo, 'README.md')
+      @doc = Nokogiri::HTML(projects_readme)
+      relative_paths = @doc.xpath('//a/@href').reject { |href| href.value.match?(/http/) || href.value.match?(/^\#/) }.map(&:value)
+      @absolute_paths = relative_paths.map { |relative_path| "#{project.github_url}/blob/master/#{relative_path}" }
+      i = 0
+      @doc.css("a").each do |link|
+        unless (link['href'].match?(/http/) || link['href'].match?(/^\#/))
+          link['href'] = @absolute_paths[i]
+          i += 1
+        end
+      end
+      project.update(pitch: @doc.to_html)
     rescue StandardError => e
       log_error(e, project)
     end
