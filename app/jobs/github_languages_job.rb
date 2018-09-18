@@ -22,7 +22,7 @@ module GithubLanguagesJob
   end
 
   def add_new_languages_to(project)
-    new_languages_for(project).each { |language| project.languages.create(name: language) }
+    new_languages_for(project).each { |language| project.languages << Language.find_or_create_by(name: language) }
   end
 
   def github_languages_for(project)
