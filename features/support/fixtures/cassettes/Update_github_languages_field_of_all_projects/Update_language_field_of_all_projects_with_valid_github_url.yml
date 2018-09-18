@@ -1,0 +1,363 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/MetPlus_PETS/languages?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.11.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Sep 2018 20:55:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4975'
+      X-Ratelimit-Reset:
+      - '1537304344'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - W/"643d4e8a4aa5860da372250eeb6b528d"
+      Last-Modified:
+      - Sat, 01 Sep 2018 20:49:02 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.021623'
+      X-Github-Request-Id:
+      - BB02:493D:2479D3:5B09E5:5BA16653
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Ruby":968034,"HTML":242428,"Gherkin":170330,"JavaScript":133574,"CSS":15886,"CoffeeScript":4977}'
+    http_version: 
+  recorded_at: Tue, 18 Sep 2018 20:55:48 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/WebsiteTwo/languages?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.11.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Sep 2018 20:55:49 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4974'
+      X-Ratelimit-Reset:
+      - '1537304344'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - W/"bcc13f4dabe80a4792919c6929fb58ed"
+      Last-Modified:
+      - Mon, 25 Jan 2016 08:13:15 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.031636'
+      X-Github-Request-Id:
+      - BB0C:493D:2479EE:5B0A52:5BA16654
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Ruby":63828,"HTML":20808,"CSS":4529,"CoffeeScript":844,"JavaScript":661}'
+    http_version: 
+  recorded_at: Tue, 18 Sep 2018 20:55:49 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/WebsiteOne/languages?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.11.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Sep 2018 20:55:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4973'
+      X-Ratelimit-Reset:
+      - '1537304344'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - W/"a362c859c7b68b0bc2bb5929d762c46d"
+      Last-Modified:
+      - Mon, 17 Sep 2018 09:20:12 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.028534'
+      X-Github-Request-Id:
+      - DC84:493F:151114:3765E8:5BA16655
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Ruby":579172,"HTML":572370,"Gherkin":216269,"CSS":151726,"JavaScript":55614,"Shell":1292,"Dockerfile":751,"CoffeeScript":422}'
+    http_version: 
+  recorded_at: Tue, 18 Sep 2018 20:55:50 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/AgileVentures/LocalSupport/languages?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.11.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Sep 2018 20:55:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4972'
+      X-Ratelimit-Reset:
+      - '1537304344'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - W/"94738d8504dfb2d55dafeab70c4aeee0"
+      Last-Modified:
+      - Tue, 18 Sep 2018 08:56:23 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.033906'
+      X-Github-Request-Id:
+      - BB20:493E:55DC91:AE9B8C:5BA16656
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Ruby":512304,"Gherkin":204609,"HTML":99844,"CSS":25129,"JavaScript":21318,"CoffeeScript":1284,"Dockerfile":855,"Shell":684}'
+    http_version: 
+  recorded_at: Tue, 18 Sep 2018 20:55:51 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/roschaefer/rundfunk-mitbestimmen/languages?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.11.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 18 Sep 2018 20:55:52 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4971'
+      X-Ratelimit-Reset:
+      - '1537304344'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - W/"f789da409eb93a80870ca0881c657388"
+      Last-Modified:
+      - Tue, 18 Sep 2018 20:49:25 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.021252'
+      X-Github-Request-Id:
+      - BB32:4940:40E300:903B8F:5BA16657
+    body:
+      encoding: ASCII-8BIT
+      string: '{"Ruby":308140,"JavaScript":190475,"HTML":113228,"PLpgSQL":37862,"Gherkin":34911,"CSS":2358,"Dockerfile":1206}'
+    http_version: 
+  recorded_at: Tue, 18 Sep 2018 20:55:52 GMT
+recorded_with: VCR 4.0.0

@@ -5,10 +5,13 @@ VCR.configure do |c|
   c.cassette_library_dir = 'features/support/fixtures/cassettes'
   c.ignore_localhost = true
   c.default_cassette_options = {
-      :match_requests_on => [
-          :method,
-          VCR.request_matchers.uri_without_param(:imp, :prev_imp, :distinct_id)
-      ]
+    clean_outdated_http_interactions: true,
+    re_record_interval: 1.month.to_i,
+    record: :once,
+    :match_requests_on => [
+        :method,
+        VCR.request_matchers.uri_without_param(:imp, :prev_imp, :distinct_id)
+    ]
   }
   c.filter_sensitive_data('<SLACK_AUTH_TOKEN>') { ENV['SLACK_AUTH_TOKEN'] }
   c.filter_sensitive_data('<GITTER_API_TOKEN>') { ENV['GITTER_API_TOKEN'] }
