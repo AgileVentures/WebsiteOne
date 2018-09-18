@@ -28,18 +28,8 @@ module GithubReadmeFilesJob
 
   def project_readme(project)
     begin
-      projects_readme = content(project.github_repo, 'README.md')
-      @doc = Nokogiri::HTML(projects_readme)
-      relative_paths = @doc.xpath('//a/@href').reject { |href| href.value.match?(/http/) || href.value.match?(/^\#/) }.map(&:value)
-      @absolute_paths = relative_paths.map { |relative_path| "#{project.github_url}/blob/master/#{relative_path}" }
-      i = 0
-      @doc.css("a").each do |link|
-        unless (link['href'].match?(/http/) || link['href'].match?(/^\#/))
-          link['href'] = @absolute_paths[i]
-          i += 1
-        end
-      end
-      project.update(pitch: @doc.to_html)
+      project_readme_content = content(project.github_repo, 'README.md')
+      project.update(pitch: replace_relative_links_with_absolute(project_readme_content, project))
     rescue StandardError => e
       log_error(e, project)
     end
@@ -59,6 +49,25 @@ module GithubReadmeFilesJob
     else
       log_error(error, project)
     end
+  end
+
+  def replace_relative_links_with_absolute(project_readme_content, project)
+    source_site = "#{project.github_url}/blob/master/"
+    doc = Nokogiri::HTML(project_readme_content)
+    tags = { 'a' => 'href' }
+    doc.search(tags.keys.join('')).each do |node|
+      url_param = tags[node.name]
+
+      href = node[url_param]
+      unless (href.empty?) || (href.match? /^\#/)
+        uri = URI.parse(href)
+        if uri.relative?
+          uri = "#{source_site}#{uri}"
+          node[url_param] = uri
+        end
+      end
+    end
+    doc.to_html
   end
 
   def log_error(error, project)

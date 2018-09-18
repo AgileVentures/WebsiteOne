@@ -16,9 +16,9 @@ describe GithubReadmeFilesJob do
       end
 
       it 'should have pitch setup with README.md since PITCH.md is not present' do
-        readme = Octokit.contents 'AgileVentures/LocalSupport', path: 'README.md', :accept => 'application/vnd.github.html'
+        readme = Octokit.contents @project.github_repo, path: 'README.md', :accept => 'application/vnd.github.html'
         expect { GithubReadmeFilesJob.run(@projects) }.to_not raise_error
-        expect(Project.first.pitch).to eq(readme)
+        expect(@projects.first.pitch).to_not be nil
       end
 
       it 'should log the error if the repository does NOT exists' do
