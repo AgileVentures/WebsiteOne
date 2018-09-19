@@ -86,7 +86,6 @@ class User < ApplicationRecord
   end
 
   def allowed_to_attend?(event)
-    return true if event.category != 'Mob'
     current_subscription and current_subscription.plan.id > 2
   end
 
