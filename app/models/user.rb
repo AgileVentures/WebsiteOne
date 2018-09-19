@@ -85,7 +85,7 @@ class User < ApplicationRecord
     current_subscriptions.first
   end
 
-  def allowed_to_attend?(event)
+  def allowed_to_attend?
     current_subscription and current_subscription.plan.id > 2
   end
 

@@ -50,6 +50,6 @@ module EventHelper
 
   def show_live_events?
     return true unless @event.category == 'Mob'
-    current_user and current_user.allowed_to_attend?(@event)
+    current_user and current_user.allowed_to_attend?
   end
 end
