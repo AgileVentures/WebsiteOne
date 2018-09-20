@@ -86,7 +86,8 @@ class User < ApplicationRecord
   end
 
   def allowed_to_attend?
-    current_subscription and current_subscription.plan.id > 2
+    PREMIUM_MOB_ID = 2
+    current_subscription and current_subscription.plan.id >= PREMIUM_MOB_ID
   end
 
   def self.filter_if_title title
