@@ -23,6 +23,8 @@ class User < ApplicationRecord
       user.country_code = geo.data['country_code']
     end
   end
+  
+  PREMIUM_MOB_ID = 2
 
   acts_as_taggable_on :skills, :titles
   acts_as_voter
@@ -86,7 +88,6 @@ class User < ApplicationRecord
   end
 
   def allowed_to_attend?
-    PREMIUM_MOB_ID = 2
     current_subscription and current_subscription.plan.id >= PREMIUM_MOB_ID
   end
 
