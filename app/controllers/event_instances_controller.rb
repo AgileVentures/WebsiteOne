@@ -45,8 +45,6 @@ class EventInstancesController < ApplicationController
     begin
       SlackService.post_hangout_notification(event) if updating_hangout_url?(event, hangout_url_changed)
       SlackService.post_yt_link(event) if updating_valid_yt_url?(event, event_params)
-      TwitterService.tweet_hangout_notification(event) if (hangout_started?(event) && hangout_url_changed)
-      TwitterService.tweet_yt_link(event)
     rescue => e
       Rails.logger.error "Error sending hangout notifications:"
       Rails.logger.error e.message

@@ -6,8 +6,6 @@ describe EventInstancesController do
   before do
     allow(controller).to receive(:allowed?).and_return(true)
     allow(SlackService).to receive(:post_hangout_notification)
-    allow(TwitterService).to receive(:tweet_hangout_notification)
-    allow(TwitterService).to receive(:tweet_yt_link)
     request.env['HTTP_ORIGIN'] = 'http://test.com'
   end
 
@@ -88,31 +86,6 @@ describe EventInstancesController do
         get :update, params: params.merge(notify: 'false')
       end
 
-    end
-
-    context 'twitter notification' do
-      it 'calls the TwitterService to tweet yt_link if yt_video_id is changed' do
-        expect(TwitterService).to receive(:tweet_yt_link).with(an_instance_of(EventInstance))
-        get :update, params: params.merge(yt_video_id: 'new_video_id')
-      end
-
-      it 'calls the TwitterService to tweet notification if event has started and hangout url changed' do
-        expect(TwitterService).to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
-        expect_any_instance_of(EventInstance).to receive(:started?).at_least(:once).and_return(true)
-        get :update, params: params.merge(hangout_url: 'new_hangout_url')
-      end
-
-      it 'does not call the TwitterService to tweet notification if event has not started' do
-        expect(TwitterService).not_to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
-        expect_any_instance_of(EventInstance).to receive(:started?).at_least(:once).and_return(false)
-        get :update, params: params.merge(hangout_url: 'new_hangout_url')
-      end
-
-      it 'does not call the TwitterService to tweet notification if event hangout url has not changed' do
-        expect(TwitterService).not_to receive(:tweet_hangout_notification).with(an_instance_of(EventInstance))
-        expect_any_instance_of(EventInstance).to receive(:started?).at_least(:once).and_return(true)
-        get :update, params: params
-      end
     end
 
     it 'returns a failure response if update is unsuccessful' do
