@@ -11,9 +11,9 @@ WebsiteOne::Application.routes.draw do
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
   get loaderio_token => 'static_pages#loaderio'
+  get '/get-token' => 'av_dashboard_tokens#create', as: 'get_av_dashboard_token'
 
   resources :activities
-  resources :newsletters
 
   resources :cards, only: [:create, :update, :edit, :new]
   resources :subscriptions, only: [:create, :update, :new]
@@ -92,7 +92,16 @@ WebsiteOne::Application.routes.draw do
 
   resources :hookups
 
+  get '/vanity' =>'vanity#index'
+  get '/vanity/participant/:id' => 'vanity#participant'
+  post '/vanity/complete'
+  post '/vanity/chooses'
+  post '/vanity/reset'
+  post '/vanity/enable'
+  post '/vanity/disable'
+  post '/vanity/add_participant'
+  get '/vanity/image'
+
   get '/dashboard', to: 'dashboard#index'
   get '*id', to: 'static_pages#show', as: 'static_page', :format => false
-
 end

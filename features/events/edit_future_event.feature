@@ -6,7 +6,7 @@ Feature: Editing an event with a start date in the future
 
   Background:
     Given the date is "2014/02/01 09:15:00 UTC"
-    And I am logged in
+    And I have logged in
     And I am on Events index page
     When I click "New Event"
     And I select "Repeats" to "weekly"

@@ -60,13 +60,41 @@ Given /^I am not logged in$/ do
   step 'I sign out'
 end
 
-Given /^I am logged in$/ do
+Given /^I am logged in as a privileged user$/ do
+  create_privileged_user
+  login_as @user, :scope => :user
+end
+
+Given(/^I am logged in$/) do
   create_user
   sign_in
 end
 
+Given /^I have logged in$/ do
+  create_user
+  login_as @user, :scope => :user
+end
+
+Given /^I have logged in as a user who is authorized to view the AVDashboard$/ do
+  create_user(can_see_dashboard: true)
+  login_as @user, :scope => :user
+end
+
+Given /^I have logged in as a user who is not authorized to view the AVDashboard$/ do
+  create_user
+  login_as @user, :scope => :user
+end
+
 Given /^I exist as a user$/ do
   create_user
+end
+
+Given /^I exist as a user who is not authorized to view the AVDashboard$/ do
+  create_user
+end
+
+Given /^I exist as a user who is authorized to view the AVDashboard$/ do
+  create_user(can_see_dashboard: true)
 end
 
 Given /^I exist as a user signed up via google/ do
@@ -107,8 +135,8 @@ When(/^I sign off$/) do
   delete_user
 end
 
-When /^I sign up with valid user data$/ do
-  create_visitor
+When /^I sign up with valid user data( giving consent)?$/ do |consent|
+  create_visitor(receive_mailings: !consent.nil?)
   sign_up
 end
 
@@ -457,6 +485,11 @@ When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_na
            end
 
   page.select(selected_from_list, from: filter)
+end
+
+
+When(/^I search for user with email "([^"]*)"$/) do |email|
+  visit "/users?email=#{email}"
 end
 
 Given(/^I have an incomplete profile$/) do

@@ -17,14 +17,14 @@ Feature: Manual Edit of Youtube URL
       | HangoutsFlow | http://hangout.test | 2012 Feb 4th 7am | 2012 Feb 4th 7:04am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
       | HangoutsFlow | http://hangout.test | 2014 Feb 4th 7am | 2014 Feb 4th 7:03am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
       | Old          | http://hangout.test | 2014 Jan 4th 7am | 2014 Jan 4th 7:03am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
-    And I am logged in
+    And I have logged in
 
   Scenario: Editing Youtube URL has no effect on Hangout URL
     Given the date is "2014 Feb 4th 7:01am"
     And I manually set a hangout link for event "Scrum"
     And I manually set youtube link with youtube id "12341234111" for event "Scrum"
     Then Hangout link does not change for "Scrum"
-        
+
   Scenario: Editing Hangout URL has no effect on Youtube URL
     Given the date is "2014 Feb 4th 7:01am"
     And I manually set youtube link with youtube id "12341234111" for event "Scrum"
@@ -52,15 +52,15 @@ Feature: Manual Edit of Youtube URL
     Given the date is "2014 Feb 7th 7:01am"
     And I manually set a hangout link for event "Scrum"
     When I manually set youtube link with youtube id "12341234111" for event "Scrum"
-    Then a separate event instance is not created  
-    
+    Then a separate event instance is not created
+
   Scenario: Edit past youtube URL
     Given the date is "2014 Feb 10th 7:01am"
     And I visit the "Edit" page for "Old" "event_instance"
     When I fill in "event_instance_yt_video_id" with "http://youtube.com/watch?v=cdODZWHUwhc"
     And I click "Update Event instance"
     Then I should see "Hangout Updated"
-  
+
   Scenario: Edit past youtube URL does not cause an event instance to show as Live
     Given the date is "2014 Feb 10th 7:01am"
     And I visit the "Edit" page for "Old" "event_instance"

@@ -62,6 +62,7 @@ describe SlackService do
 
     let(:cs169_project) { mock_model Project, slug: 'cs169' }
     let(:websiteone_project) { mock_model Project, slug: 'websiteone' }
+    let(:noslack_project) { mock_model Project, slug: 'noslack' }
 
     context('PairProgramming') do
 
@@ -69,6 +70,7 @@ describe SlackService do
       let(:missing_url_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "  ", user: user }
       let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project }
       let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: nil }
+      let(:project_with_no_slack_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: noslack_project }
 
       it 'sends the correct slack message to the correct channels when associated with a project' do
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
@@ -83,6 +85,13 @@ describe SlackService do
         expect(slack_client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
 
         slack_service.post_hangout_notification(no_project_hangout, slack_client, gitter_client)
+      end      
+      
+      it 'does not try to post to slack channel when project has no associated slack channel in lookup table' do
+        expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
+
+        slack_service.post_hangout_notification(project_with_no_slack_hangout, slack_client, gitter_client)
       end
 
       it 'should ping gitter and slack (but not general) when the project is cs169' do

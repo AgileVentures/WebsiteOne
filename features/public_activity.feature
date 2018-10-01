@@ -18,7 +18,7 @@ Feature: Display Public Activity
       | Title           | Content                | Tag List    |
       | Ruby is on Fire | Fire is fire and sunny | Ruby, Rails |
 
-    Given I am logged in
+    Given I have logged in
     And I edit article "Ruby is on Fire"
     And I create a document named "A New Guide to the Galaxy"
     And I create a project named "Build NCC-1701 Enterprise"

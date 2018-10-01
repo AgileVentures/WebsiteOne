@@ -5,7 +5,7 @@ Feature: Create projects
   I would like to create a new project profile
 
   Scenario: Show New Project button if user is logged in
-    When I am logged in
+    When I have logged in
     And I am on the "projects" page
     Then I should see the very stylish "New Project" button
 
@@ -15,7 +15,7 @@ Feature: Create projects
     Then I should not see the very stylish "New Project" button
 
   Scenario: Creating a new project
-    Given I am logged in
+    Given I have logged in
     And I am on the "projects" page
     When I click the very stylish "New Project" button
     Then I should see "Creating a new Project"
@@ -26,15 +26,18 @@ Feature: Create projects
       | Status               |
       | GitHub url (primary) |
       | Issue Tracker link   |
+      | Slack channel name   |
 
   Scenario Outline: Saving a new project: success
-    Given I am logged in
+    Given I have logged in
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
     When I fill in "Title" with "<title>"
     And I fill in "Description" with "<description>"
     And I fill in "GitHub url (primary)" with "<gh_link>"
     And I fill in "Issue Tracker link" with "<pt_link>"
+    And The project has no stories on Pivotal Tracker
+    And I fill in "Slack channel name" with "slackin"
     And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "<title>"
@@ -45,7 +48,8 @@ Feature: Create projects
       | <description> |
       | ACTIVE        |
     And I should see a link to "<title>" on github
-    And I should see a link to "<title>" on Pivotal Tracker
+    And I should see a link "<title>" that connects to the "pivotaltracker_url"
+    And I should see a link "<title>" that connects to the "slack_channel"
 
     Examples:
       | title     | description     | gh_link                   | pt_link                                         |
@@ -53,7 +57,7 @@ Feature: Create projects
       | Title New | Description New | http://www.github.com/new | http://www.pivotaltracker.com/n/projects/982890 |
 
   Scenario: Saving a new project: failure
-    Given I am logged in
+    Given I have logged in
     And I am on the "projects" page
     And I click the very stylish "New Project" button
     When I fill in "Title" with ""
@@ -62,7 +66,7 @@ Feature: Create projects
 
   @javascript
   Scenario: Saving a new project with multiple repositories: success
-    Given I am logged in
+    Given I have logged in
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
     When I fill in "Title" with "multiple repo project"
@@ -72,6 +76,7 @@ Feature: Create projects
     Then I should see "GitHub url (2)"
     And I fill in "GitHub url (2)" with "http://www.github.com/new2"
     And I fill in "Issue Tracker link" with "http://www.waffle.com/new"
+    And The project has no stories on Pivotal Tracker
     And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "multiple repo project"
@@ -82,5 +87,4 @@ Feature: Create projects
       | has lots of code      |
       | ACTIVE                |
     And I should see a link to "multiple repo project" on github
-    And I should see a link to "multiple repo project" on Pivotal Tracker
-
+    And I should see a link "multiple repo project" that connects to the "pivotaltracker_url"

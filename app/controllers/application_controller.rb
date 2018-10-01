@@ -6,9 +6,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
+  before_action :set_user_id
   before_action :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :user_activity
+
+  use_vanity :current_user
 
   include ApplicationHelper
   include CustomErrors
@@ -21,6 +24,8 @@ class ApplicationController < ActionController::Base
       :password_confirmation, :current_password,
       :display_email, :display_profile, :display_hire_me,
       :receive_mailings, :status])
+    
+    modify_user_signup_params
   end
 
   def after_sign_in_path_for(resource)
@@ -73,6 +78,21 @@ class ApplicationController < ActionController::Base
   def show_deactivated_message_and_redirect_to_root
     flash[:alert] = 'User is deactivated.'
     redirect_to root_path
+  end
+  
+  def modify_user_signup_params
+    devise_parameter_sanitizer.permit(:sign_up) do |user_signup_params|
+      user_signup_params.permit(:receive_mailings)
+      user_signup_params[:receive_mailings] = user_signup_params[:receive_mailings] == '1'
+      user_signup_params.permit!
+    end
+  end
+
+  # set current_user.id to a cookie to allow google analytics to access current_user var
+  private
+
+  def set_user_id
+    cookies[:user_id] = current_user.id if current_user
   end
 
 end

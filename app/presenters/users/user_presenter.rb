@@ -81,10 +81,6 @@ class UserPresenter < BasePresenter
     user.status.size > 0
   end
 
-  def can_create_newsletter?
-    user.is_privileged?
-  end
-
   def blank_fields
     %w{first_name last_name skills bio}
       .select { |field| user.send(field).blank? }

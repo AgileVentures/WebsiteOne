@@ -11,7 +11,7 @@ Feature: Subscribe Self to Premium
     And the email queue is clear
 
   Scenario: Pay by card
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new?plan=premiummob"
     And I click "Subscribe" within the card_section
     When I fill in appropriate card details for premium mob
@@ -21,7 +21,7 @@ Feature: Subscribe Self to Premium
     # And my member page should show premium details # TODO IMPORTANT - require login?
 
   Scenario: Pay by PayPal
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new?plan=premiummob"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint for premium mob
@@ -31,7 +31,7 @@ Feature: Subscribe Self to Premium
     # And my member page should show premium details # TODO IMPORTANT - will need hookup
 
   Scenario: Pay by card, but encounter error
-    Given I am logged in
+    Given I have logged in
     And my card will be rejected
     And I visit "/subscriptions/new?plan=premiummob"
     And I click "Subscribe" within the card_section
@@ -41,7 +41,7 @@ Feature: Subscribe Self to Premium
     And "random@morerandom.com" should not receive a "Welcome to AgileVentures Premium Mob" email
 
   Scenario: Pay by PayPal, but encounter error
-    Given I am logged in
+    Given I have logged in
     And I visit "subscriptions/new?plan=premiummob"
     Then I should see a paypal form within the paypal_section
     When Paypal updates our endpoint incorrectly

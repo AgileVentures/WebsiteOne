@@ -52,16 +52,16 @@ def path_to(page_name, id = '')
       static_page_path('premium_mob')
     when 'getting started' then
       static_page_path('getting-started')
-    when 'new newsletter' then
-      new_newsletter_path
-    when 'newsletters index' then
-      newsletters_path
     when 'sign up' then
       new_user_registration_path
     when 'premium sign up' then
       new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
+    when 'av dashboard token' then
+      get_av_dashboard_token_path
+    when 'event' then
+      event_path(id: id)
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -85,6 +85,11 @@ end
 # WHEN steps
 When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
+end
+
+When(/^I (?:go to|am on) the "([^"]*)" event page$/) do |name|
+  id = Event.find_by_name(name).id
+  visit path_to('event', id)
 end
 
 When(/^(?:when I|I) click "([^"]*)"$/) do |text|
@@ -270,6 +275,10 @@ When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
 end
 
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, field|
+  select option, from: field, visible: false
+end
+
 Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
@@ -395,7 +404,6 @@ Given(/^I am on a (.*)/) do |device|
   page.driver.headers = { 'User-Agent' => agent }
 end
 
-
 And(/^I debug$/) do
   byebug
 end
@@ -404,7 +412,20 @@ And(/^I remote debug/) do
   page.driver.debug
 end
 
-
 And(/^the window size is wide$/) do
   Capybara.page.current_window.resize_to(1300,400)
+end
+
+When(/^I toggle to( Cannot)? Attend$/) do |negated|
+  find("#attendance_checkbox", visible: false).trigger('click')
+end
+
+Then(/^I should( not)? see "([^"]*)" within "([^"]*)"$/) do |negated, project_title, project_list_area|
+  within("##{project_list_area}") do
+    if negated
+      expect(page).to_not have_content(project_title)
+    else
+      expect(page).to have_content(project_title)
+    end  
+  end
 end

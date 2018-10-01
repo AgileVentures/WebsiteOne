@@ -21,83 +21,67 @@ Feature: Edit Project
 
   @javascript
   Scenario: Existing project with multiple repos shows them correctly in edit form
-    Given I am logged in
+    Given I have logged in
     And that project "hello world" has an extra repository "https://github.com/AgileVentures/WebsiteOne"
     When I am on the "Edit" page for projects "hello world"
     Then I should see "GitHub url (primary)"
     And I should see "GitHub url (2)"
 
   Scenario: Edit page has a return link
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for projects "hello mars"
     When I click "Back"
     Then I should be on the "Show" page for project "hello mars"
 
+  @javascript
   Scenario: Updating a project: success
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
+    And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And The project has no stories on Pivotal Tracker
+    And I fill in "Slack channel name" with "slackin"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a success flash "Project was successfully updated."
     And I should see "Hello, Uranus!"
     And I should see a link to "hello mars" on github
-    And I should see a link to "hello mars" on Pivotal Tracker
+    And I should see a link "hello mars" that connects to the "pivotaltracker_url"
+    And I should see a link "hello mars" that connects to the "slack_channel"
 
   Scenario: Saving a project: failure
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     When I fill in "Title" with ""
     And I click the "Submit" button
     Then I should see "Project was not updated."
 
-  Scenario: Launching Mercury editor
-    Given I am logged in
-    And I am on the "Show" page for project "hello mars"
-    And I click the "Join Project" button
-    And I click "Project Actions"
-    And I click "Edit Project Pitch"
-    Then I should be in the Mercury Editor
-
   @javascript
-  Scenario: Editing Pitch content with Mercury Editor
-    Given I am logged in
-    And I am on the "Show" page for project "hello mars"
-    And I click the "Join Project" button
-    And I am using the Mercury Editor to edit project "hello mars"
-    When I fill in the editable field "Pitch" for "project" with "This is my exciting marketing content"
-    And I click "Save" within Mercury Editor toolbar
-    Then I should see a success flash "The project has been successfully updated."
-    Then I should be on the "Show" page for project "hello mars"
-    And I should see "This is my exciting marketing content"
-
-  Scenario: The Mercury Editor cannot be accessed by non-logged in users
-    Given I am on the "Show" page for project "hello mars"
-    Then I should not see "Edit Pitch"
-    And I try to use the Mercury Editor to edit project "hello mars"
-    Then I should see "You do not have the right privileges to complete action."
-
   Scenario: Update GitHub url if valid
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
+    And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on github
 
   Scenario: Update Issue Tracker url if valid pivotal tracker link
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And The project has no stories on Pivotal Tracker
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
-    And I should see a link to "hello mars" on Pivotal Tracker
+    And I should see a link "hello mars" that connects to the "pivotaltracker_url"
 
+  @javascript
   Scenario: Reject GitHub url update if invalid
-    Given I am logged in
+    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
+    And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https:/github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should see "Project was not updated."

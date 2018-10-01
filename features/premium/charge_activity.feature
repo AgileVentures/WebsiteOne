@@ -14,7 +14,7 @@ Feature: Charge Users Money
     And the following pages exist
       | title           | body                    |
       | About Us        | Agile Ventures          |
-      | Pricing         | wonga                   |
+      | Membership Plans         | wonga                   |
       | Getting Started | Remote Pair Programming |
 
 
@@ -22,7 +22,7 @@ Feature: Charge Users Money
     Given I am on the home page
     Then I should see "PREMIUM" within the navigation bar
     When I click "Premium" within the navigation bar
-    Then I should be on the static "Pricing" page
+    Then I should be on the static "Membership Plans" page
 
   # following four could be converted to scenario outline
 
@@ -35,7 +35,7 @@ Feature: Charge Users Money
     And I should see "7 day free trial! No charge for 7 days"
 
   Scenario: Sign up for premium f2f membership
-    Given I am logged in
+    Given I have logged in
     And I visit "/subscriptions/new?plan=premiumf2f"
     And I should not see "Sign Me Up For Premium!"
     And I click "Subscribe" within the card_section
@@ -44,7 +44,7 @@ Feature: Charge Users Money
     And the user should receive a "Welcome to AgileVentures Premium F2F" email
 
   Scenario: Sign up for premium plus membership
-    Given I am logged in
+    Given I have logged in
     And  I visit "/subscriptions/new?plan=premiumplus"
     And I should not see "Sign Me Up For Premium!"
     And I click "Subscribe" within the card_section

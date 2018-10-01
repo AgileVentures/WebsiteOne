@@ -138,6 +138,32 @@ In the ideal world the `develop` branch would run green for you and there would 
 
 However the above is complicated and we are actively looking for some sort of testing solution that allows us to avoid the intermittent failing tests (maybe we need to upgrade capybara) and maybe dropping the whole caching approach is one way forward.  Please jump in our [Slack channel](https://agileventures.slack.com/messages/C029E8G80/details/) and let us know what you think :-)
 
+Airbrake Issues
+---------------
+
+Currently Airbrake automatically opens github issues when we have an error on production.  We suspect that a good portion of them are related to performance, i.e. heroku's business model is based on limiting our memory size, and when we run out of memory then some requests die giving the run for longer than 150000ms errors or what have you, e.g. 
+
+https://github.com/AgileVentures/WebsiteOne/issues/2478
+
+Ultimately the solution there is getting more money to pay heroku, migrating to azure/dokku or re-engineering the events system so that it's not so memory intensive (or finding and fixing memory problems elsewhere).  Others are probably unfixable, or at least untraceable: e.g. 
+
+https://github.com/AgileVentures/WebsiteOne/issues/2518
+
+and others probably represent places where our code should be more robust:
+
+e.g. https://github.com/AgileVentures/WebsiteOne/issues/2515 
+and https://github.com/AgileVentures/WebsiteOne/issues/2506
+
+We are very grateful to https://github.com/nisevi for spending time closing airbrake issues out and putting them into groups
+
+e.g. https://github.com/AgileVentures/WebsiteOne/issues/2238
+
+someone with some spare time could usefully triage them into the sets that https://github.com/nisevi made since the profusion of airbrake issues is kind of a drag to seeing what's going on.  All of the sets have the "airbrake" and "help wanted" labels, and mention "airbrake related" in the description:
+
+https://github.com/AgileVentures/WebsiteOne/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+airbrake+related
+
+Sensibly any new airbrake issue would be compared with that set, and either added to the summary tickets (with a link ref) and closed, OR used as the basis for a new set
+
 
 Pull Request Review
 -------------------

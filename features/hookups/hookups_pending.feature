@@ -5,7 +5,7 @@ Feature: Show Pending Hookups
   I would like to be able to create pending events
 
   Background:
-    Given I am logged in
+    Given I have logged in
     And the date is "2014-07-15 12:00:00 UTC"
     And following events exist:
       | name     | description    | category        | start_datetime          | duration | repeats | time_zone |

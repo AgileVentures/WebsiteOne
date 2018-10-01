@@ -54,4 +54,19 @@ describe Mailer do
       expect(mail).to have_default_cc_addresses
     end
   end
+  describe '#alert_project_creator_about_new_member' do
+    before(:each) do
+        @user1 = FactoryBot.create(:user, first_name: 'Reva', last_name: 'Satterfield')
+        @project = FactoryBot.create(:project, title: 'Title 1', user: @user1)
+        @user2 = FactoryBot.create(:user, email: 'leif.kozey@bruen.org')
+    end
+    it 'sends an email to project creator about new member' do
+        email = Mailer.alert_project_creator_about_new_member(@project, @user2).deliver_now
+        assert !ActionMailer::Base.deliveries.empty?
+        assert_equal [@user1.email], email.to
+        assert_equal "#{@user2.display_name} just joined #{@project.title} project", email.subject
+        assert_equal read_fixture('project_creator_notification_text').join, email.text_part.body.to_s
+        assert_equal read_fixture('project_creator_notification_html').join, email.html_part.body.to_s 
+    end
+end
 end

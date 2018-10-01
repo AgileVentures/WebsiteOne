@@ -26,13 +26,13 @@ Feature: User status
     And I should not see "I'm offline"
 
   @time-travel-step
-  Scenario: I should see a users status on his profile page if user is online
+  Scenario: I should see a users status on their profile page if user is online
     Given the date is "2014-09-30 05:15:00 UTC"
     Given I visit Alice's profile page
     Then I should see "Ready to pair"
 
   @time-travel-step
-  Scenario: I should not see a users status on his profile page if user is offline
+  Scenario: I should not see a users status on their profile page if user is offline
     Given the date is "2014-09-30 05:15:00 UTC"
     And I visit Bob's profile page
     Then I should not see "I'm offline"

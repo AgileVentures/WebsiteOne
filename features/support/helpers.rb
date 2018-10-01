@@ -32,18 +32,37 @@ module Helpers
     }
   end
 
-  def create_visitor
+  def create_visitor(receive_mailings: false)
     @visitor ||= { first_name: 'Anders',
                    last_name: 'Persson',
                    email: 'example@example.com',
                    password: 'changemesomeday',
                    password_confirmation: 'changemesomeday',
                    slug: 'slug-ma',
-                   country_name: 'Sweden'}
+                   country_name: 'Sweden',
+                   receive_mailings: receive_mailings}
   end
 
-  def create_user
-    @user ||= FactoryBot.create(:user, create_visitor)
+  def create_user(opts = {})
+    @user ||= FactoryBot.create(:user, create_visitor.merge(opts))
+    @current_user = @user
+  end
+
+  def create_privileged_visitor(receive_mailings: false)
+    @visitor ||= { first_name: 'Admin',
+                   last_name: 'Privilege',
+                   email: 'admin@privileged.com',
+                   password: 'changemesomeday',
+                   password_confirmation: 'changemesomeday',
+                   slug: 'slug-admin',
+                   country_name: 'UK',
+                   receive_mailings: receive_mailings}
+  end
+
+
+
+  def create_privileged_user
+    @user ||= FactoryBot.create(:user, create_privileged_visitor)
     @current_user = @user
   end
 
@@ -60,6 +79,7 @@ module Helpers
       fill_in 'user_email', :with => @visitor[:email]
       fill_in 'user_password', :with => @visitor[:password]
       fill_in 'user_password_confirmation', :with => @visitor[:password_confirmation]
+      find(:css, "#user_receive_mailings").set(@visitor[:receive_mailings])
       click_button 'Sign up'
     end
   end

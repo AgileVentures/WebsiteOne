@@ -2,7 +2,7 @@
 Feature: User bio
   As a site user
   In order to get to know other users better
-  I would like to see a short bio of a user on his profile page
+  I would like to see a short bio of a user on their profile page
 
   Background:
     Given the following users exist
@@ -16,7 +16,7 @@ Feature: User bio
 
   @javascript
   Scenario: Add bio content to profile
-    Given I am logged in
+    Given I have logged in
     And I am on "profile" page for user "me"
     And I click the "Edit" button
     And I fill in "Bio" with "Lives on a farm with many sheep and goats"

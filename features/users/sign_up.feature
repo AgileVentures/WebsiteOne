@@ -23,9 +23,17 @@ Feature: As a developer
     And I should receive a "Welcome to AgileVentures.org" email
     And replies to that email should go to "info@agileventures.org"
 
-  Scenario: User signs up with valid data
+ Scenario: User signs up successfully with no consent for mailings
     When I sign up with valid user data
     Then I should see a successful sign up message
+    And I go to my "edit profile" page
+    Then "receive mailings" should not be checked
+
+Scenario: User signs up successfully giving consent for mailings
+    When I sign up with valid user data giving consent
+    Then I should see a successful sign up message
+    And I go to my "edit profile" page
+    Then "receive mailings" should be checked
 
   Scenario: User signs up with invalid email
     When I sign up with an invalid email
