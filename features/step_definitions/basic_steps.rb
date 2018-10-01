@@ -437,6 +437,7 @@ end
 
 Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_list_area, table|
   table.rows.each do |row|
-    step %Q{I should see "#{row[0]}" within "#{project_list_area}"}
+    project_title = row.first
+    step %Q{I should see "#{project_title}" within "#{project_list_area}"}
   end
 end
