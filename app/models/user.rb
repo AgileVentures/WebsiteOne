@@ -24,7 +24,7 @@ class User < ApplicationRecord
     end
   end
   
-  PREMIUM_MOB_ID = 2
+  PREMIUM_MOB_PLAN_AMOUNT = 2500
 
   acts_as_taggable_on :skills, :titles
   acts_as_voter
@@ -88,7 +88,7 @@ class User < ApplicationRecord
   end
 
   def allowed_to_attend?
-    current_subscription and current_subscription.plan.id >= PREMIUM_MOB_ID
+    current_subscription and current_subscription.plan.amount >= PREMIUM_MOB_PLAN_AMOUNT
   end
 
   def self.filter_if_title title
