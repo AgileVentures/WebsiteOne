@@ -1,5 +1,5 @@
 @vcr @javascript
-Feature: Sort Projects
+Feature: Search for Projects by Language
 	As an agile ventures member
 	So that I can find a project based on a specific language I would like to work with
 	I would like to search projects according to programming language
@@ -24,11 +24,11 @@ Feature: Sort Projects
 		Then I should see "hello alpha" within "project-list"
 	  And I should not see "hello world" within "project-list"
 
-	Scenario: Filtered projects should be paginated
+	@javascript
+	Scenario: Filtered projects should be utilize pagination
 		Given I am on the "projects" page
 		When I filter "project_languages" for "Ruby"
 		Then I should see "hello jupiter" within "project-list"
 		Then I should not see "hello pluto" within "project-list"
-		When I go to the next page
+		When I scroll to the bottom of the page
 		Then I should see "hello pluto" within "project-list"
-		And I should not see "hello jupiter" within "project-list"

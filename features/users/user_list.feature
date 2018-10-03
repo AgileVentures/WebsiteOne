@@ -41,8 +41,8 @@ Feature: List Users
     And I am on the members page
     Then I should see "15" user avatars within the main content
     And I should see "Check out our 20 awesome volunteers from all over the globe!"
-    When I click on page "2" of users
-    And I should see "5" user avatars within the main content
+    When I scroll to the bottom of the page
+    And I should see "20" user avatars within the main content
 
   Scenario: Filtering by project involvement
     Given I am on the "our members" page
