@@ -23,6 +23,8 @@ class User < ApplicationRecord
       user.country_code = geo.data['country_code']
     end
   end
+  
+  PREMIUM_MOB_PLAN_AMOUNT = 2500
 
   acts_as_taggable_on :skills, :titles
   acts_as_voter
@@ -83,6 +85,10 @@ class User < ApplicationRecord
     current_subscriptions = subscriptions.select { |s| s.ended_at.nil? and s.started_at.to_i <= now.to_i }
     return nil if current_subscriptions.nil? or current_subscriptions.empty?
     current_subscriptions.first
+  end
+
+  def allowed_to_attend?
+    current_subscription and current_subscription.plan.amount >= PREMIUM_MOB_PLAN_AMOUNT
   end
 
   def self.filter_if_title title
