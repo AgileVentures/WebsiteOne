@@ -48,8 +48,8 @@ Feature: Edit Project
     And I should see a success flash "Project was successfully updated."
     And I should see "Hello, Uranus!"
     And I should see a link to "hello mars" on github
-    And I should see a link to "hello mars" on Pivotal Tracker
-    And I should see a link to the slack channel for "hello mars"
+    And I should see a link "hello mars" that connects to the "pivotaltracker_url"
+    And I should see a link "hello mars" that connects to the "slack_channel"
 
   Scenario: Saving a project: failure
     Given I have logged in
@@ -75,7 +75,7 @@ Feature: Edit Project
     And The project has no stories on Pivotal Tracker
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
-    And I should see a link to "hello mars" on Pivotal Tracker
+    And I should see a link "hello mars" that connects to the "pivotaltracker_url"
 
   @javascript
   Scenario: Reject GitHub url update if invalid

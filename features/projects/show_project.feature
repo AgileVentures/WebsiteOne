@@ -34,12 +34,12 @@ Feature: Display Projects
   Scenario: Project show page has links to github and Pivotal Tracker
     Given I am on the "Show" page for project "hello world"
     And I should see a link to "hello world" on github
-    And I should see a link to "hello world" on Pivotal Tracker
+    And I should see a link "hello world" that connects to the "pivotaltracker_url"
 
   Scenario: Project show page has links to multiple github repos
     Given I am on the "Show" page for project "hello sun"
-    And I should see links to "HelloSun" on github
-    And I should see links to "HelloSunExtras" on github
+    And I should see link "HelloSun"
+    And I should see link "HelloSunExtras"
 
   Scenario: Project show page has hangout button for users that not follow the project
     Given I have logged in

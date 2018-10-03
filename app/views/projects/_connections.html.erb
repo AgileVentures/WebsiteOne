@@ -19,10 +19,10 @@
   <% if @project.slack_channel_name.present? %>
     <p><i class="fa fa-slack" aria-hidden="true"></i>
       <span class="small">
-        <%= link_to "#{@project.title} ", "https://agileventures.slack.com/app_redirect?channel=#{@project.slack_channel_name}" %>on Slack
+        <%= link_to "#{@project.title} ", @project.slack_channel %>on Slack
       </span>
     </p>
   <% else %>
-    <p><i class="fa fa-gear fa-lg"></i> <span class="small">not linked to Slack</span></p>
+    <p><i class="fa fa-slack fa-lg"></i> <span class="small">not linked to Slack</span></p>
   <% end %>
 </aside>

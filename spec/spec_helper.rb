@@ -10,6 +10,7 @@ require 'webmock/rspec'
 require 'capybara-screenshot/rspec'
 require 'public_activity/testing'
 require 'paper_trail/frameworks/rspec'
+require 'selenium/webdriver'
 
 PublicActivity.enabled = true
 
@@ -20,7 +21,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 OmniAuth.config.test_mode = true
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :headless_chrome
 
 RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
@@ -93,4 +94,18 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: { args: %w(headless disable-gpu) }
+  )
+
+  Capybara::Selenium::Driver.new app,
+    browser: :chrome,
+    desired_capabilities: capabilities
 end

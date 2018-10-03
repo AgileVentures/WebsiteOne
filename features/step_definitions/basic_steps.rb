@@ -58,6 +58,8 @@ def path_to(page_name, id = '')
       new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
+    when 'av dashboard token' then
+      get_av_dashboard_token_path
     when 'event' then
       event_path(id: id)
     else
@@ -273,6 +275,10 @@ When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
 end
 
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, field|
+  select option, from: field, visible: false
+end
+
 Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
@@ -412,4 +418,14 @@ end
 
 When(/^I toggle to( Cannot)? Attend$/) do |negated|
   find("#attendance_checkbox", visible: false).trigger('click')
+end
+
+Then(/^I should( not)? see "([^"]*)" within "([^"]*)"$/) do |negated, project_title, project_list_area|
+  within("##{project_list_area}") do
+    if negated
+      expect(page).to_not have_content(project_title)
+    else
+      expect(page).to have_content(project_title)
+    end  
+  end
 end

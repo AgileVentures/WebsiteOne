@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if should_display_user?(@user)
+    if should_display_user?(@user) 
       @event_instances = EventInstance.where(user_id: @user.id)
                              .order(created_at: :desc).limit(5)
       set_activity_tab(params[:tab])
@@ -82,15 +82,18 @@ class UsersController < ApplicationController
   end
 
   def users
-    User.page(params[:page]).per(15)
+    users = User.page(params[:page]).per(15)
         .includes(:status, :titles, :karma)
         .filter(set_filter_params)
-        .allow_to_display
         .order("karmas.total DESC")
+
+    users = users.allow_to_display unless privileged_visitor?
+    users = users.where(email: params[:email]) if params[:email]
+    users
   end
 
   def should_display_user?(user)
-    user.display_profile || current_user == @user
+    user.display_profile || current_user == @user || privileged_visitor?
   end
 
   def get_user

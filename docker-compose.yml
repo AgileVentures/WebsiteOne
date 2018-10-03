@@ -3,13 +3,21 @@ services:
   db:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data:rw
+      - dbVolume:/var/lib/postgresql/data
   web:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    volumes:
-      - .:/WebsiteOne
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - DB_HOST=db
+    volumes:
+      - .:/WebsiteOne
+      - javascript_vendors:/WebsiteOne/vendor/assets/javascripts
+      - scripts:/WebsiteOne/scripts
+volumes:
+  dbVolume:
+  javascript_vendors:
+  scripts:
