@@ -436,4 +436,3 @@ Given(/^the following event instances exist:$/) do |table|
     EventInstance.create hash
   end
 end
-

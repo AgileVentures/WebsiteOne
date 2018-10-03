@@ -14,9 +14,9 @@ Feature: Events
 
   Background:
     Given following events exist:
-      | name       | description             | category        | start_datetime              | duration                | repeats | time_zone                  |
-      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150 | never   | London                     |
-      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15 | never   | Eastern Time (US & Canada) |
+      | name       | description             | category        | start_datetime          | duration | repeats | time_zone                  |
+      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | London                     |
+      | PP Session | Pair programming on WSO | PairProgramming | 2014/02/07 10:00:00 UTC | 15       | never   | Eastern Time (US & Canada) |
 
   @time-travel-step
   Scenario: Render Next Scrum info on landing page
@@ -25,7 +25,7 @@ Feature: Events
     Then I should see "Want to learn more? Listen in. Next projects' review meeting in"
     And the next event should be in:
       | period | interval |
-      | 1      | day     |
+      | 1      | day      |
       | 21     | hours    |
       | 45     | minutes  |
 
