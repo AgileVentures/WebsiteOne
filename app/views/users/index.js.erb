@@ -1,2 +1,11 @@
-$('#UsersList').html("<%= escape_javascript(render 'user_list') %>");
-
+<% if params[:infinite] %>
+  $('#UsersList').append("<%= escape_javascript(render 'user_list') %>");
+  <% if @users.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate @users %>');
+  <% else %>
+    $(window).off('scroll');
+    $('.pagination').remove();
+  <% end %>
+<% else %>
+  $('#UsersList').html("<%= escape_javascript(render 'user_list') %>");
+<% end %>

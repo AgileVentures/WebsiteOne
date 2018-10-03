@@ -34,26 +34,22 @@ Feature: Browse  projects
     When I go to the "projects" page
     Then I should see "List of Projects" table
 
-
-  Scenario: Display most recently updated at top "Our Projects" page paginated
+  @javascript
+  Scenario: Display most recently updated at top "Our Projects" page paginated with Infinite Scroll
     Given I am on the "home" page
     When I follow "Projects" within the navbar
-    Then I should see:
-      | greetings alpha folks   |
-      | greetings earthlings    |
-      | greetings aliens        |
-      | greetings jupiter folks |
-      | greetings mercury folks |
-    When I go to the next page
-    Then I should see:
-      | greetings saturn folks |
-      | greetings sun folks    |
-      | greetings venus folks  |
-      | greetings terra folks  |
-      | greetings pluto folks  |
-    And I should not see:
-      | greetings alpha folks   |
-      | greetings earthlings    |
-      | greetings aliens        |
-      | greetings jupiter folks |
-      | greetings mercury folks |
+    Then I should see "<title>" within "project-list":
+      | title          |
+      | hello world    |
+      | hello alpha    |
+      | hello mars     |
+      | hello mercury  |
+      | hello jupiter  |
+    And I scroll to the bottom of the page
+    Then I should see "<title>" within "project-list":
+      | title          |
+      | hello saturn   |
+      | hello venus    |
+      | hello sun      |
+      | hello terra    |
+      | hello pluto    |
