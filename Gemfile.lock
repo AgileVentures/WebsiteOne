@@ -348,7 +348,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    local_time (2.0.1)
+    local_time (2.1.0)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -702,7 +702,7 @@ DEPENDENCIES
   kramdown (~> 1.17)
   launchy
   letter_opener
-  local_time (~> 2.0)
+  local_time (~> 2.1)
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
