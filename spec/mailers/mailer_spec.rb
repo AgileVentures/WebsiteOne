@@ -56,17 +56,33 @@ describe Mailer do
   end
   describe '#alert_project_creator_about_new_member' do
     before(:each) do
-        @user1 = FactoryBot.create(:user, first_name: 'Reva', last_name: 'Satterfield')
-        @project = FactoryBot.create(:project, title: 'Title 1', user: @user1)
-        @user2 = FactoryBot.create(:user, email: 'leif.kozey@bruen.org')
+        @project_creator = FactoryBot.create(:user, first_name: 'Reva', last_name: 'Satterfield')
+        @project = FactoryBot.create(:project, title: 'Title 1', user: @project_creator)
+        @new_member = FactoryBot.create(:user, email: 'leif.kozey@bruen.org')
     end
     it 'sends an email to project creator about new member' do
-        email = Mailer.alert_project_creator_about_new_member(@project, @user2).deliver_now
+        email = Mailer.alert_project_creator_about_new_member(@project, @new_member).deliver_now
         assert !ActionMailer::Base.deliveries.empty?
-        assert_equal [@user1.email], email.to
-        assert_equal "#{@user2.display_name} just joined #{@project.title} project", email.subject
+        assert_equal [@project_creator.email], email.to
+        assert_equal "#{@new_member.display_name} just joined #{@project.title} project", email.subject
         assert_equal read_fixture('project_creator_notification_text').join, email.text_part.body.to_s
-        assert_equal read_fixture('project_creator_notification_html').join, email.html_part.body.to_s 
+        assert_equal read_fixture('project_creator_notification_html').join, email.html_part.body.to_s
     end
-end
+  end
+
+  describe '#welcome_project_joinee' do
+    before(:each) do
+      @project_creator = FactoryBot.create(:user, first_name: 'Reva', last_name: 'Satterfield')
+      @project = FactoryBot.create(:project, title: 'Title 1', user: @project_creator)
+      @new_member = FactoryBot.create(:user, email: 'leif.kozey@bruen.org')
+    end
+    it 'sends an email to a new project joinee' do
+      email = Mailer.welcome_project_joinee(@project, @new_member).deliver_now
+      assert !ActionMailer::Base.deliveries.empty?
+      assert_equal [@new_member.email], email.to
+      # assert_equal "#{@new_member.display_name} just joined #{@project.title} project", email.subject
+      # assert_equal read_fixture('project_creator_notification_text').join, email.text_part.body.to_s
+      # assert_equal read_fixture('project_creator_notification_html').join, email.html_part.body.to_s
+    end
+  end
 end

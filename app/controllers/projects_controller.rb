@@ -68,6 +68,7 @@ class ProjectsController < ApplicationController
     if current_user
       current_user.follow(@project)
       @project.send_notification_to_project_creator(current_user)
+      @project.send_notification_to_new_joinee(current_user)
       redirect_to project_path(@project)
       flash[:notice] = "You just joined #{@project.title}."
     else

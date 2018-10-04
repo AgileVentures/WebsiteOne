@@ -12,7 +12,7 @@ end
 
 def check_email(email, negate, subject, body = nil)
   unless negate
-    expect(ActionMailer::Base.deliveries.size).to eq 1
+
     expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
     expect(ActionMailer::Base.deliveries[0].body).to include(body) unless body.nil?
     expect(ActionMailer::Base.deliveries[0].to).to include(email) unless email.nil?
