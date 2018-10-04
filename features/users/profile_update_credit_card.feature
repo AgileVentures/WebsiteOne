@@ -20,6 +20,9 @@ Scenario: Premium user decides to change card details
 
 Scenario: Basic should not see update card details
   Given I am logged in as "Alice"
+  When I click on the avatar for "Alice"
+  Then I should be on the "user profile" page for "Alice"
+  Then I should not see "Update Card Details"
 
 Scenario: Current premium user can only update their card details
 
