@@ -24,11 +24,30 @@ module GithubReadmeFilesJob
     end
   end
 
+  def replace_relative_links_with_absolute(project_readme_content, project)
+    source_site = "#{project.github_url}/blob/master/"
+    doc = Nokogiri::HTML(project_readme_content)
+    tags = { 'a' => 'href' }
+    doc.search(tags.keys.join('')).each do |node|
+      url_param = tags[node.name]
+      href = node[url_param]
+      unless (href.empty?) || (href.match?(/^\#/))
+        uri = URI.parse(href)
+        if uri.relative?
+          uri = "#{source_site}#{uri}"
+          node[url_param] = uri
+        end
+      end
+    end
+    doc.to_html
+  end
+
   private
 
   def project_readme(project)
     begin
-      project.update(pitch: content(project.github_repo, 'README.md'))
+      project_readme_content = content(project.github_repo, 'README.md')
+      project.update(pitch: replace_relative_links_with_absolute(project_readme_content, project))
     rescue StandardError => e
       log_error(e, project)
     end
@@ -49,6 +68,7 @@ module GithubReadmeFilesJob
       log_error(error, project)
     end
   end
+
 
   def log_error(error, project)
     ErrorLoggingService.new(error).log(error_message(project.github_repo))

@@ -5,16 +5,18 @@ http_interactions:
     uri: https://www.youtube.com/ad_data_204
     body:
       encoding: UTF-8
-      string: dt=1537309191118&flash=0&frm=2&u_tz=0&u_his=1&u_java=false&u_h=768&u_w=1024&u_ah=768&u_aw=1024&u_cd=32&u_nplug=0&u_nmime=0&ca_type=image&bid=ANyPxKoCCESPT6SR6P9SaelxmdNX2OlmTgbg4_DY6CFvnrUxUL743M94iy5SFVKt6khX2PQ4oCQV&bsq=0&session_token=QUFFLUhqbjJFdW5XaHdVWUNha2ZoMzNmZjdrdmxfT3B2Z3xBQ3Jtc0ttOVliWXBFR0hmZmRwMVhWQmRSV2FRTmhkSkVnWU5ybVRSdFV0Q1MtZ2JycHlSMUhPeFBKTVFZUkZaNzA4Q3pjaFJldnFzTVFPN0FSdkM5RWJMeHlhU0lJdXVqeW9DWHgwcURNZjdVUHotRkxIcXZLV1ZEOEttOEVpamZNcnp2M1djVl9EQ3FmLWRSc0xESnV2STVRSEJZQndUTnc%3D
+      string: dt=1537308798214&flash=0&frm=2&u_tz=0&u_his=1&u_java=false&u_h=768&u_w=1024&u_ah=768&u_aw=1024&u_cd=32&u_nplug=0&u_nmime=0&ca_type=image&bid=ANyPxKoCCESPT6SR6P9SaelxmdNX2OlmTgbg4_DY6CFvnrUxUL743M94iy5SFVKt6khX2PQ4oCQV&bsq=0&session_token=QUFFLUhqa1J0MTZ5U3JQVmlPOHQwamxELWRIRUFNR1dfQXxBQ3Jtc0trWF9wZ1JmVGQ3TzdSekJTWTNhaUhzLWk0VmpOOHFsa2FnSzBSdVcxdDh5QjI4TzNiMjdMQzRjVU5SWTd2M3ZsblRzSHBjYmxIaTV0WFJBRGowOWNuY2VLS05VZlpab1AyZW55Q0M4YWNnUkFDX1BSRXRuaXkyYnUwQUhzWUt0UDNrMnJOM0NWV2wwQ1NzMkRuS1Zuc1c2SF9aV2c%3D
     headers:
       Origin:
       - https://www.youtube.com
-      Referer:
-      - https://www.youtube.com/embed/yt_video_id_80?enablejsapi=1
+      X-Youtube-Utc-Offset:
+      - '0'
       X-Youtube-Client-Name:
       - '56'
+      Referer:
+      - https://www.youtube.com/embed/QWERT55?enablejsapi=1
       X-Youtube-Client-Version:
-      - '20180425'
+      - '20180913'
       User-Agent:
       - Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko)
         PhantomJS/2.1.1 Safari/538.1
@@ -25,7 +27,7 @@ http_interactions:
       Content-Length:
       - '504'
       Cookie:
-      - VISITOR_INFO1_LIVE=tX0yn28Wce0; YSC=9d1gAoqqs6Q; PREF=f1=50000000
+      - YSC=N_APZYmgiy4; PREF=f1=50000000; VISITOR_INFO1_LIVE=G9vhVIp6OTU
       Connection:
       - Keep-Alive
       Accept-Language:
@@ -37,26 +39,26 @@ http_interactions:
       code: 204
       message: No Content
     headers:
-      Cache-Control:
-      - no-cache
-      Expires:
-      - Tue, 27 Apr 1971 19:44:06 EST
       Content-Length:
       - '0'
-      X-Frame-Options:
-      - SAMEORIGIN
       X-Content-Type-Options:
       - nosniff
-      Content-Type:
-      - text/html; charset=utf-8
       Access-Control-Allow-Origin:
       - https://www.youtube.com
-      Access-Control-Allow-Credentials:
-      - 'true'
+      Cache-Control:
+      - no-cache
       Strict-Transport-Security:
       - max-age=31536000
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Content-Type:
+      - text/html; charset=utf-8
+      Expires:
+      - Tue, 27 Apr 1971 19:44:06 EST
+      X-Frame-Options:
+      - SAMEORIGIN
       Date:
-      - Tue, 18 Sep 2018 22:19:52 GMT
+      - Tue, 18 Sep 2018 22:13:19 GMT
       Server:
       - YouTube Frontend Proxy
       X-Xss-Protection:
@@ -69,5 +71,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 05 Feb 2014 07:00:21 GMT
+  recorded_at: Wed, 05 Feb 2014 06:59:02 GMT
 recorded_with: VCR 4.0.0

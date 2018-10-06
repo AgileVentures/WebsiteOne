@@ -26,10 +26,10 @@ Feature: Update github pitch of all projects
   Scenario: Update github pitch for all projects with valid github_url
     When I run the rake task for fetching github readme
     Then I should see projects with pitch updated:
-      | title        | pitch                               |
-      | WebsiteOne   | <h1>AgileVentures WebSiteOne</h1>   |
-      | LocalSupport | <h1>AgileVentures LocalSupport</h1> |
-      | closed       | keepclosed                          |
-      | edx          | edx                                 |
-      | nisevi       | <h1>nisevi</h1>                     |
-      | fakerepo     | keepfake                            |
+      | title        | pitch                     |
+      | WebsiteOne   | AgileVentures WebSiteOne  |
+      | LocalSupport | LocalSupport              |
+      | closed       | keepclosed                |
+      | edx          | edx                       |
+      | nisevi       | Introduction              |
+      | fakerepo     | keepfake                  |
