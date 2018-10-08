@@ -1,0 +1,184 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Referer:
+      - http://127.0.0.1:32833/events/whatever
+      User-Agent:
+      - Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - gitcdn.github.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - application/javascript; charset=utf-8
+      Last-Modified:
+      - Thu, 17 Mar 2016 21:46:39 GMT
+      Etag:
+      - W/"56eb25bf-1021"
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Thu, 30 Aug 2018 06:36:57 GMT
+      Cache-Control:
+      - max-age=600
+      Content-Encoding:
+      - gzip
+      X-Github-Request-Id:
+      - 2AF4:4880:26C4FC4:33BED30:5B878EA2
+      Content-Length:
+      - '1331'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Tue, 18 Sep 2018 20:57:01 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '189'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-gru17121-GRU
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '19'
+      X-Timer:
+      - S1537304221.416715,VS0,VE0
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-Id:
+      - 4f23bf5f628d1fe918a675321818d1a74a9c6055
+    body:
+      encoding: UTF-8
+      string: |-
+        /*! ========================================================================
+         * Bootstrap Toggle: bootstrap-toggle.js v2.2.0
+         * http://www.bootstraptoggle.com
+         * ========================================================================
+         * Copyright 2014 Min Hur, The New York Times Company
+         * Licensed under MIT
+         * ======================================================================== */
+        +function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.toggle"),f="object"==typeof b&&b;e||d.data("bs.toggle",e=new c(this,f)),"string"==typeof b&&e[b]&&e[b]()})}var c=function(b,c){this.$element=a(b),this.options=a.extend({},this.defaults(),c),this.render()};c.VERSION="2.2.0",c.DEFAULTS={on:"On",off:"Off",onstyle:"primary",offstyle:"default",size:"normal",style:"",width:null,height:null},c.prototype.defaults=function(){return{on:this.$element.attr("data-on")||c.DEFAULTS.on,off:this.$element.attr("data-off")||c.DEFAULTS.off,onstyle:this.$element.attr("data-onstyle")||c.DEFAULTS.onstyle,offstyle:this.$element.attr("data-offstyle")||c.DEFAULTS.offstyle,size:this.$element.attr("data-size")||c.DEFAULTS.size,style:this.$element.attr("data-style")||c.DEFAULTS.style,width:this.$element.attr("data-width")||c.DEFAULTS.width,height:this.$element.attr("data-height")||c.DEFAULTS.height}},c.prototype.render=function(){this._onstyle="btn-"+this.options.onstyle,this._offstyle="btn-"+this.options.offstyle;var b="large"===this.options.size?"btn-lg":"small"===this.options.size?"btn-sm":"mini"===this.options.size?"btn-xs":"",c=a('<label class="btn">').html(this.options.on).addClass(this._onstyle+" "+b),d=a('<label class="btn">').html(this.options.off).addClass(this._offstyle+" "+b+" active"),e=a('<span class="toggle-handle btn btn-default">').addClass(b),f=a('<div class="toggle-group">').append(c,d,e),g=a('<div class="toggle btn" data-toggle="toggle">').addClass(this.$element.prop("checked")?this._onstyle:this._offstyle+" off").addClass(b).addClass(this.options.style);this.$element.wrap(g),a.extend(this,{$toggle:this.$element.parent(),$toggleOn:c,$toggleOff:d,$toggleGroup:f}),this.$toggle.append(f);var h=this.options.width||Math.max(c.outerWidth(),d.outerWidth())+e.outerWidth()/2,i=this.options.height||Math.max(c.outerHeight(),d.outerHeight());c.addClass("toggle-on"),d.addClass("toggle-off"),this.$toggle.css({width:h,height:i}),this.options.height&&(c.css("line-height",c.height()+"px"),d.css("line-height",d.height()+"px")),this.update(!0),this.trigger(!0)},c.prototype.toggle=function(){this.$element.prop("checked")?this.off():this.on()},c.prototype.on=function(a){return this.$element.prop("disabled")?!1:(this.$toggle.removeClass(this._offstyle+" off").addClass(this._onstyle),this.$element.prop("checked",!0),void(a||this.trigger()))},c.prototype.off=function(a){return this.$element.prop("disabled")?!1:(this.$toggle.removeClass(this._onstyle).addClass(this._offstyle+" off"),this.$element.prop("checked",!1),void(a||this.trigger()))},c.prototype.enable=function(){this.$toggle.removeAttr("disabled"),this.$element.prop("disabled",!1)},c.prototype.disable=function(){this.$toggle.attr("disabled","disabled"),this.$element.prop("disabled",!0)},c.prototype.update=function(a){this.$element.prop("disabled")?this.disable():this.enable(),this.$element.prop("checked")?this.on(a):this.off(a)},c.prototype.trigger=function(b){this.$element.off("change.bs.toggle"),b||this.$element.change(),this.$element.on("change.bs.toggle",a.proxy(function(){this.update()},this))},c.prototype.destroy=function(){this.$element.off("change.bs.toggle"),this.$toggleGroup.remove(),this.$element.removeData("bs.toggle"),this.$element.unwrap()};var d=a.fn.bootstrapToggle;a.fn.bootstrapToggle=b,a.fn.bootstrapToggle.Constructor=c,a.fn.toggle.noConflict=function(){return a.fn.bootstrapToggle=d,this},a(function(){a("input[type=checkbox][data-toggle^=toggle]").bootstrapToggle()}),a(document).on("click.bs.toggle","div[data-toggle^=toggle]",function(b){var c=a(this).find("input[type=checkbox]");c.bootstrapToggle("toggle"),b.preventDefault()})}(jQuery);
+        //# sourceMappingURL=bootstrap-toggle.min.js.map
+    http_version: 
+  recorded_at: Mon, 03 Feb 2014 07:01:05 GMT
+- request:
+    method: get
+    uri: https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/css,*/*;q=0.1
+      Referer:
+      - http://127.0.0.1:32833/events/whatever
+      User-Agent:
+      - Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
+      Host:
+      - gitcdn.github.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/css; charset=utf-8
+      Last-Modified:
+      - Thu, 17 Mar 2016 21:46:39 GMT
+      Etag:
+      - W/"56eb25bf-636"
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Wed, 22 Aug 2018 06:19:12 GMT
+      Cache-Control:
+      - max-age=600
+      Content-Encoding:
+      - gzip
+      X-Github-Request-Id:
+      - 79A4:7294:14D2C91:1C75510:5B7D007E
+      Content-Length:
+      - '548'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Tue, 18 Sep 2018 20:57:01 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '188'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-gru17122-GRU
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '41'
+      X-Timer:
+      - S1537304221.417722,VS0,VE0
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-Id:
+      - 1fb50d3927e0a99ccb92327bf571f73fab6ee99c
+    body:
+      encoding: UTF-8
+      string: |-
+        /*! ========================================================================
+         * Bootstrap Toggle: bootstrap-toggle.css v2.2.0
+         * http://www.bootstraptoggle.com
+         * ========================================================================
+         * Copyright 2014 Min Hur, The New York Times Company
+         * Licensed under MIT
+         * ======================================================================== */
+        .checkbox label .toggle,.checkbox-inline .toggle{margin-left:-20px;margin-right:5px}
+        .toggle{position:relative;overflow:hidden}
+        .toggle input[type=checkbox]{display:none}
+        .toggle-group{position:absolute;width:200%;top:0;bottom:0;left:0;transition:left .35s;-webkit-transition:left .35s;-moz-user-select:none;-webkit-user-select:none}
+        .toggle.off .toggle-group{left:-100%}
+        .toggle-on{position:absolute;top:0;bottom:0;left:0;right:50%;margin:0;border:0;border-radius:0}
+        .toggle-off{position:absolute;top:0;bottom:0;left:50%;right:0;margin:0;border:0;border-radius:0}
+        .toggle-handle{position:relative;margin:0 auto;padding-top:0;padding-bottom:0;height:100%;width:0;border-width:0 1px}
+        .toggle.btn{min-width:59px;min-height:34px}
+        .toggle-on.btn{padding-right:24px}
+        .toggle-off.btn{padding-left:24px}
+        .toggle.btn-lg{min-width:79px;min-height:45px}
+        .toggle-on.btn-lg{padding-right:31px}
+        .toggle-off.btn-lg{padding-left:31px}
+        .toggle-handle.btn-lg{width:40px}
+        .toggle.btn-sm{min-width:50px;min-height:30px}
+        .toggle-on.btn-sm{padding-right:20px}
+        .toggle-off.btn-sm{padding-left:20px}
+        .toggle.btn-xs{min-width:35px;min-height:22px}
+        .toggle-on.btn-xs{padding-right:12px}
+        .toggle-off.btn-xs{padding-left:12px}
+    http_version: 
+  recorded_at: Mon, 03 Feb 2014 07:01:05 GMT
+recorded_with: VCR 4.0.0

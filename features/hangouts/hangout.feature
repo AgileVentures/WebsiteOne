@@ -53,7 +53,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Scrum               |
       | Scrum               |
       | Daily scrum meeting |
-    And I should see link "Join now" with "http://hangout.test"
+    And I should see link "JOIN THIS LIVE EVENT NOW" with "http://hangout.test"
     And I should not see hangout button
 
   @javascript

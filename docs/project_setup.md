@@ -48,7 +48,14 @@ git fetch upstream
 git pull upstream develop
 ```
 
-### Step 3: Install the gems with `bundle install`
+### Step 3: There are two options of setting up, choose one.
+
+## Option 1 - Installation and Usage with Docker
+See the [Docker Project Setup](../docker/README.md) documentation
+
+## Option 2 - Local Installation
+
+### Step 1: Install the gems with `bundle install`
 
     bundle install
 
@@ -80,7 +87,7 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
    gem install libv8 -v '3.16.14.3' -- --with-system-v8
 ```
     
-### Step 4: Install javascript dependencies using `npm`
+### Step 2: Install javascript dependencies using `npm`
 * Use [npm](https://www.npmjs.com/) to install all of the javascript dependencies for WSO: 
 
     `npm install`
@@ -92,7 +99,7 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 #### Phantomjs
 [Phantomjs](http://phantomjs.org/) is used to run tests.  [Here are detailed instructions for installing it.](development_environment_set_up.md#phantomjs)
 
-### Step 5: Request the .env file and confirm your locale
+### Step 3: Request the .env file and confirm your locale
     
 * You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.  The `.env` file should go in the root of the WSO project.
 * Add the following to that file:
@@ -110,13 +117,13 @@ the above are test keys from https://developers.google.com/recaptcha/docs/faq
 
     
 
-### Step 6: Set up the database
+### Step 4: Set up the database
 
 * Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
 
     `bundle exec rake db:setup`
     
-### Step 7: Run the tests
+### Step 5: Run the tests
 
 Now you're ready to run the tests:
 
@@ -126,7 +133,7 @@ Now you're ready to run the tests:
 
 Discuss any errors with the team on Slack, in a scrum, or in mob or pair programming.
 
-### Step 8. Start the server
+### Step 6. Start the server
 
     bundle exec rails s
     

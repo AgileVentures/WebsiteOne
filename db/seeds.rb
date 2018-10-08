@@ -133,6 +133,13 @@ Event.create!( name: 'evening event',
                repeat_ends_on: 'Mon, 17 Jun 2015',
                time_zone: 'UTC')
 
+event = Event.find_by(name: 'evening event')
+project = Project.find_by(title: localsupport.title)
+
+10.times do
+  EventInstance.create(event: event, project: project, yt_video_id: 'QWERT55')
+end
+
 if StaticPage.count == 0
   Rake::Task['db:import_pages'].invoke
 end

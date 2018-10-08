@@ -39,7 +39,7 @@ mailer:
     address: <%= ENV['SMTP_ADDRESS'] || 'smtp.sendgrid.net' %>
     domain: <%= ENV['SMTP_DOMAIN'] || 'heroku.com' %>
     authentication: <%= ENV['MAILER_AUTHENTICATION'] || 'plain' %>
-  url_host: 'agileventures.org'
+  url_host: 'www.agileventures.org'
 
 disqus:
   shortname: 'agileventures'
@@ -62,3 +62,5 @@ paypal:
 github:
   client_id: <%= ENV["GITHUB_KEY"] %>
   client_secret: <%= ENV["GITHUB_SECRET"] %>
+
+av_dashboard_token_secret: <%= ENV["AV_DASHBOARD_SECRET_TOKEN"] %>

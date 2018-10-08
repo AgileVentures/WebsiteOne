@@ -18,6 +18,10 @@ When(/^I run the rake task for migrating stripe$/) do
   $rake['db:migrate_stripe'].execute
 end
 
+When(/^I run the rake task for fetching github languages/) do
+  $rake['fetch_github_languages'].execute
+end
+
 Then(/^"([^"]*)" shoud have "([^"]*)" in their subscription$/) do |email, stripe_id|
   user = User.find_by_email(email)
   expect(user.stripe_customer_id).to eq stripe_id

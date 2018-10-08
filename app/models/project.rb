@@ -15,6 +15,8 @@ class Project < ApplicationRecord
   has_many :event_instances
   has_many :commit_counts
   has_many :source_repositories
+  has_and_belongs_to_many :languages
+
   accepts_nested_attributes_for :source_repositories, reject_if: :all_blank, allow_destroy: true
 
   acts_as_followable
@@ -34,12 +36,23 @@ class Project < ApplicationRecord
       .paginate(per_page: 5, page: page)
   end
 
+  def self.search_by_language(search, page)
+    includes(:languages)
+      .where("languages.name ILIKE ?", "#{search}")
+      .references(:languages)
+      .paginate(per_page: 5, page: page)
+  end
+
   def gpa
     CodeClimateBadges.new("github/#{github_repo}").gpa
   end
 
   def github_url
     source_repositories.first.try(:url)
+  end
+
+  def slack_channel
+    "https://agileventures.slack.com/app_redirect?channel=#{slack_channel_name}"
   end
 
   def youtube_tags
@@ -92,7 +105,7 @@ class Project < ApplicationRecord
   def jitsi_room_link
     "https://meet.jit.si/AV_#{title.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
   end
-  
+
   def send_notification_to_project_creator(user)
     Mailer.alert_project_creator_about_new_member(self, user).deliver_now if User.find(user_id).receive_mailings
   end
