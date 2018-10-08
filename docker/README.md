@@ -11,20 +11,23 @@ In order to run this container you'll need docker installation
 
 Create a .env file at the root of your directory.
 
-``` 
-touch .env
+```
+$ touch .env
 ```
 
 * You'll have to get the `.env` file content from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.  The `.env` file should go in the root of the WSO project.
 * Add the following to that file:
 
 ```
-RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
-RECAPTCHA_SECRET_KEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+2_ADDITIONAL_KEYS=please_contact_tansaku_or_diraulo_on_slack
 AIRBRAKE_API_KEY=blahblahblah
 AIRBRAKE_PROJECT_ID=123
-SECRET_KEY_BASE=blabla
+DATABASE_POSTGRESQL_USERNAME=postgres
+DATABASE_POSTGRESQL_PASSWORD=postgres
 RACK_TIMEOUT_SERVICE_TIMEOUT=200000000
+RECAPTCHA_SECRET_KEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+RECAPTCHA_SITE_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+SECRET_KEY_BASE=blabla
 ```
 
 the above are test keys from https://developers.google.com/recaptcha/docs/faq
@@ -58,10 +61,37 @@ Stop the application
 $ ./docker/stop.sh
 ```
 
+## Tests inside docker container
+
+To get a shell inside the docker container run:
+
+```
+$ docker-compose run web bash
+```
+
+From there you can run the cucumber tests 
+
+(this takes almost 30min on a i5 laptop from 2017)
+
+```
+$ bundle exec cucumber
+```
+
+or rspec
+
+```
+$ bundle exec rspec
+```
+
 ps: those docker commands were tested under the following environment:
 
 - MacOS 10.13.6
-- Docker version 18.06.0-ce, build 0ffa825
-- docker-compose version 1.22.0, build f46880f
+    - Docker version 18.06.0-ce, build 0ffa825
+    - docker-compose version 1.22.0, build f46880f
+
+- Linux Manjaro 17.1.12
+    - Docker version 18.06.1-ce, build e68fc7a215
+    - docker-compose version 1.22.0
+
 
 If it doesn't work for you, try to check your docker version and consider upgrading it if you have an older version.
