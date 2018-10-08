@@ -12,7 +12,7 @@ Feature: Inspect outgoing emails
     Given the following projects exist:
       | title         | description           | status   | author |
       | hello world   | greetings earthlings  | active   | Alice  |
-
+ 
   Scenario: when a person joins project an email is sent to project creator
     When I am logged in as "John"
     And I go to the "hello world" project "show" page
