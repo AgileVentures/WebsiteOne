@@ -16,9 +16,6 @@ class CardsController < ApplicationController
     @error = true
   end
 
-  def edit
-  end
-
   def update
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
     card = customer.sources.create(card: stripe_token(params))
