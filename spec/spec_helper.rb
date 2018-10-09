@@ -1,7 +1,6 @@
 require 'simplecov'
 
 ENV['RAILS_ENV'] ||= 'test'
-#ENV['ALLOW_EMAILS'] ||= 'true'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'shoulda/matchers'
