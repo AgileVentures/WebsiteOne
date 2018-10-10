@@ -36,4 +36,7 @@ $(document).on('ready', function () {
   $('#source_repositories').on('cocoon:after-insert', function (e, added_repo) {
     WebsiteOne.Projects.ensure_github_url_numbering()
   });
-})
+
+  var params = "&infinite=true"
+  infiniteScroll(params);
+});

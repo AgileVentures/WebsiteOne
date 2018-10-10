@@ -37,7 +37,7 @@ Feature: Sign in
     And I am on Events index page
     When I sign in with valid credentials
     Then I should be on the Events "Index" page
-  
+
   @omniauth
   Scenario: User is deactivated
     Given I exist as a user signed up via google
@@ -47,4 +47,3 @@ Feature: Sign in
     And I click "Google"
     Then I see a user deactivated message
     And I should be signed out
-    

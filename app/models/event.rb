@@ -48,6 +48,10 @@ class Event < ApplicationRecord
     Event.where('repeats = \'never\' OR repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on > ?', Time.now)
   end
 
+  def repeats?
+   schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule')
+  end
+
   def self.upcoming_events(project=nil)
     events = Event.base_future_events(project).inject([]) do |memo, event|
       memo << event.next_occurrences

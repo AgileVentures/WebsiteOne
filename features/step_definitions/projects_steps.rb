@@ -148,7 +148,7 @@ Then(/^I should see projects with pitch updated:$/) do |table|
   projects = table.hashes
   projects.each do | project |
     updated_project = Project.find_by_title(project["title"])
-    expect(updated_project.pitch).to eq(project["pitch"])
+    expect(updated_project.pitch).to match(/#{project["pitch"]}/)
   end
 end
 
