@@ -15,7 +15,7 @@ WebsiteOne::Application.routes.draw do
 
   resources :activities
 
-  resources :cards, only: [:create, :update, :new]
+  resources :cards, only: [:create, :update, :edit, :new]
   resources :subscriptions, only: [:create, :update, :new]
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
