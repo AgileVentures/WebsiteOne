@@ -5,7 +5,7 @@ class NullUser < User
   end
 
   def initialize(name)
-    super({ first_name: name, created_at: Time.now })
+    super({ id: -1, first_name: name, created_at: Time.now })
   end
 
   def presenter

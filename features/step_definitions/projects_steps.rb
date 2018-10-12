@@ -213,3 +213,8 @@ Given(/^"([^"]*)" deactivates his account$/) do |name|
   user = User.find_by first_name: first_name, last_name: last_name
   user.delete
 end
+
+Given(/^the anonymous user exists$/) do
+  attributes = { id: -1, first_name: 'Anonymous', last_name: '', email: 'anonymous@example.org' }
+  FactoryBot.create(:user, attributes)
+end
