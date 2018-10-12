@@ -324,6 +324,10 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   expect(current_path).to eq path_to(page, this_user)
 end
 
+Given(/^I should be on the anonymous profile page$/) do
+  expect(current_path).to eq('/users/-1')
+end
+
 Given(/^I (?:am on|go to|should be on) my "([^"]*)" page$/) do |page|
   page.downcase!
   if page == 'profile'
