@@ -35,6 +35,7 @@
 //= require cocoon
 //= require fullcalendar
 //= require lolex
+//= require amazon_smile
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code
