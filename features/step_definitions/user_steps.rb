@@ -33,6 +33,11 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
   end
 end
 
+Given /^A( premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)" exists$/ do |premium, name, email, password|
+  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: name, email: email, password: password, password_confirmation: password)
+  set_user_as_premium(@user) if premium
+end
+
 def set_user_as_premium(user, plan = 'Premium')
   return if plan.downcase == 'free'
   subscription = Subscription.create(user: user, plan: Plan.find_by(name: plan), started_at: Time.now)
