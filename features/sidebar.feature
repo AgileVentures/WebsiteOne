@@ -28,7 +28,6 @@ Feature: Sidebar navigation
     Given I am on the "Show" page for project "hello mars"
     Then I should see the sidebar
     Given I am on the "projects" page
-    Then I should not see the sidebar
     When I click the very stylish "New Project" button
     Then I should see the sidebar
 
