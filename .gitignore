@@ -94,3 +94,5 @@ certbot.log
 # Ignore vscode config
 
 .vscode/**/*
+
+db/schema.rb

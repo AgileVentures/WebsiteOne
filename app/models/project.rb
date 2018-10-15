@@ -15,6 +15,8 @@ class Project < ApplicationRecord
   has_many :event_instances
   has_many :commit_counts
   has_many :source_repositories
+  has_and_belongs_to_many :languages
+
   accepts_nested_attributes_for :source_repositories, reject_if: :all_blank, allow_destroy: true
 
   acts_as_followable
@@ -32,6 +34,13 @@ class Project < ApplicationRecord
     order('LOWER(title)')
       .where('title LIKE ?', "%#{search}%")
       .paginate(per_page: 9, page: page)
+  end
+
+  def self.search_by_language(search, page)
+    includes(:languages)
+      .where("languages.name ILIKE ?", "#{search}")
+      .references(:languages)
+      .paginate(per_page: 5, page: page)
   end
 
   def gpa

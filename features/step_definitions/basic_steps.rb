@@ -275,6 +275,10 @@ When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
 end
 
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, field|
+  select option, from: field, visible: false
+end
+
 Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
@@ -365,7 +369,7 @@ end
 
 
 Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-  expect(page).to have_css "a[href='#{link}']", text: text
+  expect(page).to have_link text, href: link
 end
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
@@ -418,4 +422,25 @@ end
 
 When(/^I toggle to( Cannot)? Attend$/) do |negated|
   find("#attendance_checkbox", visible: false).trigger('click')
+end
+
+When(/^I scroll to the bottom of the page$/) do
+  page.execute_script "window.scrollBy(0,10000)"
+end
+
+Then(/^I should( not)? see "([^"]*)" within "([^"]*)"$/) do |negated, project_title, project_list_area|
+  within("##{project_list_area}") do
+    if negated
+      expect(page).to_not have_content(project_title)
+    else
+      expect(page).to have_content(project_title)
+    end
+  end
+end
+
+Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_list_area, table|
+  table.rows.each do |row|
+    project_title = row.first
+    step %Q{I should see "#{project_title}" within "#{project_list_area}"}
+  end
 end

@@ -9,10 +9,14 @@ Given(/^the following projects exist:$/) do |table|
       u = User.find_by_first_name hash[:author]
       project = Project.new(hash.except('author', 'tags').merge(user_id: u.id))
     else
-      project = default_test_author.projects.new(hash.except('author', 'tags'))
+      project = default_test_author.projects.new(hash.except('author', 'tags', 'languages'))
     end
     if hash[:github_url].present?
       project.source_repositories.build(url: hash[:github_url])
+    end
+    if hash[:languages].present?
+      language = Language.find_or_create_by(name: hash[:languages])
+      project.languages << language
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
@@ -144,7 +148,7 @@ Then(/^I should see projects with pitch updated:$/) do |table|
   projects = table.hashes
   projects.each do | project |
     updated_project = Project.find_by_title(project["title"])
-    expect(updated_project.pitch).to eq(project["pitch"])
+    expect(updated_project.pitch).to match(/#{project["pitch"]}/)
   end
 end
 
@@ -167,6 +171,21 @@ Then(/^I should see projects with following updates:$/) do |table|
   end
 end
 
+Then(/^I should see projects with the following language updates:$/) do |table|
+  # table is a Cucumber::Core::Ast::DataTable
+  projects = table.hashes
+  projects.each do |project|
+    updated_project = Project.find_by_title(project["title"])
+    @updated_language_array = Array.new
+    updated_project.languages.each do |language|
+      if language.name.eql?(project[:languages])
+        @updated_language_array << language.name
+      end
+    end
+    expect(@updated_language_array).to include(project[:languages])
+  end
+end
+
 Then(/^I should see a GPA of "([^"]*)" for "([^"]*)"$/) do |gpa, project_name|
   within('ul#project-list') do
     expect(page).to have_css("li[title=\"#{gpa} CodeClimate GPA\"]")
@@ -181,4 +200,21 @@ end
 Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_name, repo|
   project = Project.find_by_title(project_name)
   project.source_repositories.create(url: repo)
+end
+
+Given(/^"([^"]*)" creates the project "([^"]*)"$/) do |name, project_title|
+  first_name, last_name = name.split
+  user = User.create last_name: last_name, first_name: first_name, email: 'bob@example.org', password: 'asdf1234'
+  Project.create title: project_title, description: "Hello world", status: 'Active', user_id: user.id
+end
+
+Given(/^"([^"]*)" deactivates his account$/) do |name|
+  first_name, last_name = name.split
+  user = User.find_by first_name: first_name, last_name: last_name
+  user.delete
+end
+
+Given(/^the anonymous user exists$/) do
+  attributes = { id: -1, first_name: 'Anonymous', last_name: '', email: 'anonymous@example.org' }
+  FactoryBot.create(:user, attributes)
 end

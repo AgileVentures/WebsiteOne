@@ -55,6 +55,9 @@
                       class: 'user-profile-btn',
                       type: 'button' %>
         </li>
+        <% unless presenter.user.membership_type == 'Basic' %>
+        <li><%= render 'edit_card' %></li>
+        <% end %>
         <li>
           <p><%= link_to 'Set status', '#',
                          data: {toggle: 'modal',

@@ -1,492 +1,75 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: http://gdata.youtube.com/feeds/api/videos/
+    method: post
+    uri: https://www.youtube.com/ad_data_204
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: dt=1537304457419&flash=0&frm=2&u_tz=0&u_his=1&u_java=false&u_h=768&u_w=1024&u_ah=768&u_aw=1024&u_cd=32&u_nplug=0&u_nmime=0&ca_type=image&bid=ANyPxKoCCESPT6SR6P9SaelxmdNX2OlmTgbg4_DY6CFvnrUxUL743M94iy5SFVKt6khX2PQ4oCQV&bsq=0&session_token=QUFFLUhqa1J0MTZ5U3JQVmlPOHQwamxELWRIRUFNR1dfQXxBQ3Jtc0trWF9wZ1JmVGQ3TzdSekJTWTNhaUhzLWk0VmpOOHFsa2FnSzBSdVcxdDh5QjI4TzNiMjdMQzRjVU5SWTd2M3ZsblRzSHBjYmxIaTV0WFJBRGowOWNuY2VLS05VZlpab1AyZW55Q0M4YWNnUkFDX1BSRXRuaXkyYnUwQUhzWUt0UDNrMnJOM0NWV2wwQ1NzMkRuS1Zuc1c2SF9aV2c%3D
     headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Origin:
+      - https://www.youtube.com
+      X-Youtube-Utc-Offset:
+      - '0'
+      X-Youtube-Client-Name:
+      - '56'
+      Referer:
+      - https://www.youtube.com/embed/QWERT55?enablejsapi=1
+      X-Youtube-Client-Version:
+      - '20180913'
+      User-Agent:
+      - Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Content-Type:
+      - application/x-www-form-urlencoded
       Accept:
       - "*/*"
-      User-Agent:
-      - Ruby
+      Content-Length:
+      - '504'
+      Cookie:
+      - YSC=N_APZYmgiy4; PREF=f1=50000000; VISITOR_INFO1_LIVE=G9vhVIp6OTU; GPS=1
+      Connection:
+      - Keep-Alive
+      Accept-Language:
+      - en-US,*
       Host:
-      - gdata.youtube.com
+      - www.youtube.com
   response:
     status:
-      code: 410
-      message: Gone
+      code: 204
+      message: No Content
     headers:
-      X-Gdata-User-Country:
-      - US
-      Content-Type:
-      - text/html; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Date:
-      - Tue, 27 Dec 2016 13:34:53 GMT
-      Expires:
-      - Tue, 27 Dec 2016 13:34:53 GMT
-      Cache-Control:
-      - private, max-age=0
-      X-Content-Type-Options:
-      - nosniff
+      Access-Control-Allow-Origin:
+      - https://www.youtube.com
       X-Frame-Options:
       - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      Server:
-      - GSE
-    body:
-      encoding: UTF-8
-      string: No longer available
-    http_version: 
-  recorded_at: Thu, 06 Feb 2014 07:00:00 GMT
-- request:
-    method: get
-    uri: https://www.googleapis.com/youtube/v3/videos?forUsername=&part=id
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Cache-Control:
+      - no-cache
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Strict-Transport-Security:
+      - max-age=31536000
       Content-Length:
       - '0'
-      User-Agent:
-      - Yt::Request (gzip)
-  response:
-    status:
-      code: 403
-      message: Forbidden
-    headers:
-      Vary:
-      - Origin,Accept-Encoding
-      - X-Origin
-      Content-Type:
-      - application/json; charset=UTF-8
-      Date:
-      - Tue, 27 Dec 2016 13:34:53 GMT
       Expires:
-      - Tue, 27 Dec 2016 13:34:53 GMT
-      Cache-Control:
-      - private, max-age=0
+      - Tue, 27 Apr 1971 19:44:06 EST
       X-Content-Type-Options:
       - nosniff
-      X-Frame-Options:
-      - SAMEORIGIN
+      Date:
+      - Tue, 18 Sep 2018 21:01:13 GMT
+      Server:
+      - YouTube Frontend Proxy
       X-Xss-Protection:
       - 1; mode=block
-      Server:
-      - GSE
       Alt-Svc:
-      - quic=":443"; ma=2592000; v="35,34"
-      Accept-Ranges:
-      - none
-      Transfer-Encoding:
-      - chunked
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+      Connection:
+      - close
     body:
       encoding: UTF-8
-      string: |
-        {
-         "error": {
-          "errors": [
-           {
-            "domain": "usageLimits",
-            "reason": "dailyLimitExceededUnreg",
-            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
-            "extendedHelp": "https://code.google.com/apis/console"
-           }
-          ],
-          "code": 403,
-          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
-         }
-        }
-    http_version: 
-  recorded_at: Thu, 06 Feb 2014 07:00:01 GMT
-- request:
-    method: get
-    uri: https://www.googleapis.com/youtube/v3/videos?forUsername=&part=id
-    body:
-      encoding: US-ASCII
       string: ''
-    headers:
-      Content-Length:
-      - '0'
-      User-Agent:
-      - Yt::Request (gzip)
-  response:
-    status:
-      code: 403
-      message: Forbidden
-    headers:
-      Vary:
-      - Origin,Accept-Encoding
-      - X-Origin
-      Content-Type:
-      - application/json; charset=UTF-8
-      Date:
-      - Tue, 27 Dec 2016 13:34:56 GMT
-      Expires:
-      - Tue, 27 Dec 2016 13:34:56 GMT
-      Cache-Control:
-      - private, max-age=0
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      Server:
-      - GSE
-      Alt-Svc:
-      - quic=":443"; ma=2592000; v="35,34"
-      Accept-Ranges:
-      - none
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: |
-        {
-         "error": {
-          "errors": [
-           {
-            "domain": "usageLimits",
-            "reason": "dailyLimitExceededUnreg",
-            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
-            "extendedHelp": "https://code.google.com/apis/console"
-           }
-          ],
-          "code": 403,
-          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
-         }
-        }
-    http_version: 
-  recorded_at: Thu, 06 Feb 2014 07:00:04 GMT
-- request:
-    method: get
-    uri: https://www.googleapis.com/youtube/v3/videos?forUsername=&part=id
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Length:
-      - '0'
-      User-Agent:
-      - Yt::Request (gzip)
-  response:
-    status:
-      code: 403
-      message: Forbidden
-    headers:
-      Vary:
-      - Origin,Accept-Encoding
-      - X-Origin
-      Content-Type:
-      - application/json; charset=UTF-8
-      Date:
-      - Tue, 27 Dec 2016 13:35:10 GMT
-      Expires:
-      - Tue, 27 Dec 2016 13:35:10 GMT
-      Cache-Control:
-      - private, max-age=0
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      Server:
-      - GSE
-      Alt-Svc:
-      - quic=":443"; ma=2592000; v="35,34"
-      Accept-Ranges:
-      - none
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: UTF-8
-      string: |
-        {
-         "error": {
-          "errors": [
-           {
-            "domain": "usageLimits",
-            "reason": "dailyLimitExceededUnreg",
-            "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup.",
-            "extendedHelp": "https://code.google.com/apis/console"
-           }
-          ],
-          "code": 403,
-          "message": "Daily Limit for Unauthenticated Use Exceeded. Continued use requires signup."
-         }
-        }
     http_version: 
   recorded_at: Thu, 06 Feb 2014 07:00:17 GMT
-- request:
-    method: post
-    uri: https://api.chatlio.com/v1/v/visitor/register
-    body:
-      encoding: UTF-8
-      string: '{"vsUuid":"09d284ac-c122-4b9b-a01d-f762408070c0","ceUuid":"8a54fdee-6747-4ce9-4d69-f03c2af664f2","page":"http://127.0.0.1:64502/events/repeat-scrum","loaderVersion":"459dc1d-1489104113585","widgetVersion":"18ea608-1495785511396"}'
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
-        PhantomJS/2.1.1 Safari/538.1
-      Referer:
-      - http://127.0.0.1:64502/events/repeat-scrum
-      Origin:
-      - http://127.0.0.1:64502
-      Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NDkwMzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.x9WTtj9sVmFa8DKPmhh4LtiziRrGt7g5exMC1Ifq5OA
-      Content-Type:
-      - application/xml
-      Accept:
-      - "*/*"
-      Content-Length:
-      - '229'
-      Connection:
-      - Keep-Alive
-      Accept-Language:
-      - en-GB,*
-      Host:
-      - api.chatlio.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Wed, 02 Aug 2017 02:47:30 GMT
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - close
-      Vary:
-      - Accept-Encoding
-      Access-Control-Allow-Headers:
-      - Content-Type, Authorization
-      Access-Control-Allow-Methods:
-      - POST, GET, PUT, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
-      Cache-Control:
-      - max-age=30, no-transform, public
-      Expires:
-      - "-1"
-      Content-Encoding:
-      - gzip
-    body:
-      encoding: UTF-8
-      string: '{"off":false,"maxVisitorInactiveMins":3,"status":"online","hideWhenOffline":false,"showAvatarPreChat":false,"showTeamAvatarPreChat":false,"newMsgNotifications":true,"playSound":true,"activeAgentAvatar":"","forwardSlackUserName":false,"titleColor":"#3f51b5","titleFontColor":"#fff","onlineTitle":"How
-        can we help you?","offlineTitle":"Contact Us","agentLabel":"Support","browserSideAuthorLabel":"","onlineMessagePlaceholder":"Type
-        message here...","whiteLabel":false,"trackPresence":false,"offlineGreeting":"Sorry
-        we are away, but we would love to hear from you and chat soon!","offlineEmailPlaceholder":"Email","offlineMessagePlaceholder":"Your
-        message here","offlineNamePlaceholder":"Name (optional but helpful)","offlineSendButton":"Send","offlineThankYouMessage":"Thanks
-        for your message. We will be in touch soon!","requireInfo":false,"requireInfoGreeting":"Enter
-        your name and email to start chatting!","requireInfoSubmitBtn":"Start","requestScreenshotText":"Operator
-        would like to take a screenshot of your browser. Confirm below.","requestScreenshotAllowLabel":"Take
-        screenshot","requestScreenshotDeclineLabel":"Decline","teamAvatarOn":false,"collapsedMode":"chip","defaultOkBtnLabel":"Ok","defaultSendBtnLabel":"Send","defaultCancelBtnLabel":"Cancel","defaultYesBtnLabel":"Yes","defaultNoBtnLabel":"No","showConversationEnd":false,"showConversationRating":true,"conversationEndLabel":"Your
-        chat session has ended. Thanks for chatting!","conversationRatingLabel":"How
-        would you rate this chat?","conversationRatingThankYou":"Thanks for rating
-        your chat session!","conversationRatingPlaceholder":"How can we improve?","conversationEndTranscriptPlaceholder":"Email
-        to send transcript of chat","conversationEndConfirmationQuestion":"Are you
-        sure you want to end this chat?","blacklistedUrls":"","triggerJson":"","useSgmt":false,"autoResponseMessage":"Question?
-        Just type it below and we are online and ready to answer."}'
-    http_version: 
-  recorded_at: Thu, 06 Feb 2014 07:00:01 GMT
-- request:
-    method: post
-    uri: https://api.chatlio.com/v1/v/visitor/m
-    body:
-      encoding: UTF-8
-      string: '{"page":"http://127.0.0.1:64502/events/repeat-scrum"}'
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
-        PhantomJS/2.1.1 Safari/538.1
-      Referer:
-      - http://127.0.0.1:64502/events/repeat-scrum
-      Origin:
-      - http://127.0.0.1:64502
-      Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NDkwMzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.x9WTtj9sVmFa8DKPmhh4LtiziRrGt7g5exMC1Ifq5OA
-      Content-Type:
-      - application/xml
-      Accept:
-      - "*/*"
-      Content-Length:
-      - '53'
-      Connection:
-      - Keep-Alive
-      Accept-Language:
-      - en-GB,*
-      Host:
-      - api.chatlio.com
-  response:
-    status:
-      code: 204
-      message: No Content
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Wed, 02 Aug 2017 02:47:30 GMT
-      Connection:
-      - close
-      Access-Control-Allow-Headers:
-      - Content-Type, Authorization
-      Access-Control-Allow-Methods:
-      - POST, GET, PUT, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
-      Expires:
-      - "-1"
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Thu, 06 Feb 2014 07:00:01 GMT
-- request:
-    method: post
-    uri: https://api.chatlio.com/v1/v/visitor/register
-    body:
-      encoding: UTF-8
-      string: '{"vsUuid":"09d284ac-c122-4b9b-a01d-f762408070c0","ceUuid":"8a54fdee-6747-4ce9-4d69-f03c2af664f2","page":"http://127.0.0.1:64502/events/repeat-scrum","loaderVersion":"459dc1d-1489104113585","widgetVersion":"18ea608-1495785511396"}'
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
-        PhantomJS/2.1.1 Safari/538.1
-      Referer:
-      - http://127.0.0.1:64502/events/repeat-scrum
-      Origin:
-      - http://127.0.0.1:64502
-      Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NDkwMzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.x9WTtj9sVmFa8DKPmhh4LtiziRrGt7g5exMC1Ifq5OA
-      Content-Type:
-      - application/xml
-      Accept:
-      - "*/*"
-      Content-Length:
-      - '229'
-      Connection:
-      - Keep-Alive
-      Accept-Language:
-      - en-GB,*
-      Host:
-      - api.chatlio.com
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Wed, 02 Aug 2017 02:47:31 GMT
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - close
-      Vary:
-      - Accept-Encoding
-      Access-Control-Allow-Headers:
-      - Content-Type, Authorization
-      Access-Control-Allow-Methods:
-      - POST, GET, PUT, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
-      Cache-Control:
-      - max-age=30, no-transform, public
-      Expires:
-      - "-1"
-      Content-Encoding:
-      - gzip
-    body:
-      encoding: UTF-8
-      string: '{"off":false,"maxVisitorInactiveMins":3,"status":"online","hideWhenOffline":false,"showAvatarPreChat":false,"showTeamAvatarPreChat":false,"newMsgNotifications":true,"playSound":true,"activeAgentAvatar":"","forwardSlackUserName":false,"titleColor":"#3f51b5","titleFontColor":"#fff","onlineTitle":"How
-        can we help you?","offlineTitle":"Contact Us","agentLabel":"Support","browserSideAuthorLabel":"","onlineMessagePlaceholder":"Type
-        message here...","whiteLabel":false,"trackPresence":false,"offlineGreeting":"Sorry
-        we are away, but we would love to hear from you and chat soon!","offlineEmailPlaceholder":"Email","offlineMessagePlaceholder":"Your
-        message here","offlineNamePlaceholder":"Name (optional but helpful)","offlineSendButton":"Send","offlineThankYouMessage":"Thanks
-        for your message. We will be in touch soon!","requireInfo":false,"requireInfoGreeting":"Enter
-        your name and email to start chatting!","requireInfoSubmitBtn":"Start","requestScreenshotText":"Operator
-        would like to take a screenshot of your browser. Confirm below.","requestScreenshotAllowLabel":"Take
-        screenshot","requestScreenshotDeclineLabel":"Decline","teamAvatarOn":false,"collapsedMode":"chip","defaultOkBtnLabel":"Ok","defaultSendBtnLabel":"Send","defaultCancelBtnLabel":"Cancel","defaultYesBtnLabel":"Yes","defaultNoBtnLabel":"No","showConversationEnd":false,"showConversationRating":true,"conversationEndLabel":"Your
-        chat session has ended. Thanks for chatting!","conversationRatingLabel":"How
-        would you rate this chat?","conversationRatingThankYou":"Thanks for rating
-        your chat session!","conversationRatingPlaceholder":"How can we improve?","conversationEndTranscriptPlaceholder":"Email
-        to send transcript of chat","conversationEndConfirmationQuestion":"Are you
-        sure you want to end this chat?","blacklistedUrls":"","triggerJson":"","useSgmt":false,"autoResponseMessage":"Question?
-        Just type it below and we are online and ready to answer."}'
-    http_version: 
-  recorded_at: Thu, 06 Feb 2014 07:25:00 GMT
-- request:
-    method: post
-    uri: https://api.chatlio.com/v1/v/visitor/m
-    body:
-      encoding: UTF-8
-      string: '{"page":"http://127.0.0.1:64502/events/repeat-scrum"}'
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
-        PhantomJS/2.1.1 Safari/538.1
-      Referer:
-      - http://127.0.0.1:64502/events/repeat-scrum
-      Origin:
-      - http://127.0.0.1:64502
-      Authorization:
-      - Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZVVVSUQiOiI4YTU0ZmRlZS02NzQ3LTRjZTktNGQ2OS1mMDNjMmFmNjY0ZjIiLCJleHAiOjE1MDE2NDkwMzYsImlhdCI6MTUwMTY0MTgzNiwidnNVVUlEIjoiMDlkMjg0YWMtYzEyMi00YjliLWEwMWQtZjc2MjQwODA3MGMwIn0.x9WTtj9sVmFa8DKPmhh4LtiziRrGt7g5exMC1Ifq5OA
-      Content-Type:
-      - application/xml
-      Accept:
-      - "*/*"
-      Content-Length:
-      - '53'
-      Connection:
-      - Keep-Alive
-      Accept-Language:
-      - en-GB,*
-      Host:
-      - api.chatlio.com
-  response:
-    status:
-      code: 204
-      message: No Content
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Wed, 02 Aug 2017 02:47:31 GMT
-      Connection:
-      - close
-      Access-Control-Allow-Headers:
-      - Content-Type, Authorization
-      Access-Control-Allow-Methods:
-      - POST, GET, PUT, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Expose-Headers:
-      - X-Chatlio-Vsuuid, X-Chatlio-At, X-Chatlio-Rt
-      Expires:
-      - "-1"
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Thu, 06 Feb 2014 07:25:00 GMT
-recorded_with: VCR 3.0.3
+recorded_with: VCR 4.0.0
