@@ -66,11 +66,11 @@
             </div>
             <br/>
             <i class="fa fa-clock-o"></i><span id='local_time'><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
-            <% if @event.schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule') %>
+            <% if @event.try :repeats? %>
                 <% if @event.repeats_every_n_weeks == 2 %>
-                    <p class="help-block">Occurs every two weeks at the specified times</p>
+                  <p class="help-block">Occurs every two weeks at the specified times</p>
                 <% else %>
-                    <p class="help-block">Occurs weekly at the specified times</p>
+                  <p class="help-block">Occurs weekly at the specified times</p>
                 <% end %>
             <% end %>
           </div>
@@ -112,18 +112,19 @@
   <% end %>
 
   <div class="col-xs-12 col-sm-6">
-    <% if @recent_hangout.try :live? %>
+    <%  if @recent_hangout.try(:live?) %>
+      <% if show_live_events? %>
         <div class="pull-right">
           <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
         </div>
-    <% elsif @event.try :within_current_event_duration? %>
-        <div class="event-notice">
-          It's time! Please start the event.
-        </div>
+      <% end %>
+    <% else @event.try :within_current_event_duration? %>
+      <div class="event-notice">
+        It's time! Please start the event.
+      </div>
     <% end %>
   </div>
 </div>
-
 <% if user_signed_in? %>
 
     <% hangout_is_live = @recent_hangout.try!(:live?) %>

@@ -95,4 +95,3 @@ Feature: Editing an event with a start date in the future
     And I click the "Save" button
     Then I should see "Failed to update event: Repeat ends on can't be blank"
     And The box for "Friday" should be checked
-

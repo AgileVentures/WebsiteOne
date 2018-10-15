@@ -75,9 +75,9 @@ GEM
     acts_as_votable (0.11.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (7.3.5)
-      airbrake-ruby (~> 2.10)
-    airbrake-ruby (2.11.0)
+    airbrake (7.4.0)
+      airbrake-ruby (~> 2.12)
+    airbrake-ruby (2.12.0)
     andand (1.3.3)
     apipie-rails (0.5.10)
       rails (>= 4.1)
@@ -348,7 +348,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    local_time (2.0.1)
+    local_time (2.1.0)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -372,7 +372,7 @@ GEM
     netrc (0.11.0)
     newrelic_rpm (5.4.0.347)
     nio4r (2.3.1)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -383,7 +383,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    octokit (4.11.0)
+    octokit (4.13.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     omniauth (1.8.1)
       hashie (>= 3.4.6, < 3.6.0)
@@ -504,7 +504,7 @@ GEM
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
       rspec-mocks (~> 3.8.0)
-    rspec-activemodel-mocks (1.0.3)
+    rspec-activemodel-mocks (1.1.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       rspec-mocks (>= 2.99, < 4.0)
@@ -555,9 +555,9 @@ GEM
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
-    selenium-webdriver (3.14.0)
+    selenium-webdriver (3.14.1)
       childprocess (~> 0.5)
-      rubyzip (~> 1.2)
+      rubyzip (~> 1.2, >= 1.2.2)
     shellany (0.0.1)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
@@ -569,7 +569,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    slack-ruby-client (0.13.0)
+    slack-ruby-client (0.13.1)
       activesupport
       faraday (>= 0.9)
       faraday_middleware
@@ -583,9 +583,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stripe (3.26.1)
+    stripe (3.28.0)
       faraday (~> 0.10)
-    stripe-ruby-mock (2.5.4)
+    stripe-ruby-mock (2.5.5)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
@@ -702,11 +702,11 @@ DEPENDENCIES
   kramdown (~> 1.17)
   launchy
   letter_opener
-  local_time (~> 2.0)
+  local_time (~> 2.1)
   mercury-rails!
   nearest_time_zone
   newrelic_rpm
-  nokogiri (= 1.8.4)
+  nokogiri (= 1.8.5)
   octokit
   omniauth
   omniauth-github (~> 1.1.2)
@@ -747,7 +747,7 @@ DEPENDENCIES
   slack-ruby-client
   sprockets-rails (~> 3.2, >= 3.2.1)
   stripe
-  stripe-ruby-mock (~> 2.5.4)
+  stripe-ruby-mock (~> 2.5.5)
   sucker_punch
   therubyracer
   turbolinks
