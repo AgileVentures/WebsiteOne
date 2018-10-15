@@ -1,3 +1,5 @@
+require "#{Rails.root}/app/jobs/extract_audio_from_retrospectives"
+
 desc "This task is called by the Heroku Scheduler"
 
 task :fetch_github_commits => :environment do
@@ -10,6 +12,10 @@ end
 
 task :fetch_github_languages => :environment do
   GithubLanguagesJob.run
+end
+
+task :extract_audio_from_retrospectives => :environment do 
+  ExtractAudioFromRetrospectivesJob.run
 end
 
 task :karma_calculator => :environment do

@@ -22,6 +22,10 @@ When(/^I run the rake task for fetching github languages/) do
   $rake['fetch_github_languages'].execute
 end
 
+When(/^I run the rake task for extracting audio from Retrospectives$/) do
+  $rake['extract_audio_from_retrospectives'].execute
+end
+
 Then(/^"([^"]*)" shoud have "([^"]*)" in their subscription$/) do |email, stripe_id|
   user = User.find_by_email(email)
   expect(user.stripe_customer_id).to eq stripe_id
@@ -74,4 +78,8 @@ end
 
 When(/^I run the rake task for migrating github urls$/) do
   $rake['db:migrate_from_github_url_to_source_repository'].execute
+end
+
+Then(/^I have a new audio in my audio directory$/) do
+  pending # Write code here that turns the phrase above into concrete actions
 end

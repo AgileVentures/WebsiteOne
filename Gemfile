@@ -38,7 +38,7 @@ gem 'letter_opener', :group => :development
 gem 'local_time', '~> 2.1'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
 gem 'nearest_time_zone'
-gem 'nokogiri', '1.8.5'
+gem 'nokogiri'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github', '~> 1.1.2'
@@ -72,6 +72,9 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
+gem 'youtube-dl.rb'
+gem 'rest-client'
+
 
 group :test do
   gem 'capybara'
