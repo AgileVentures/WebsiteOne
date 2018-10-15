@@ -24,7 +24,7 @@ class User < ApplicationRecord
     end
   end
   
-  PREMIUM_MOB_PLAN_AMOUNT = 2500
+  PREMIUM_MOB_MEMBERSHIP_AND_ABOVE_ARRAY = ['PremiumMob', 'PremiumF2F', 'PremiumPlus']
 
   acts_as_taggable_on :skills, :titles
   acts_as_voter
@@ -88,7 +88,8 @@ class User < ApplicationRecord
   end
 
   def allowed_to_attend?
-    current_subscription and current_subscription.plan.amount >= PREMIUM_MOB_PLAN_AMOUNT
+    allowed_memberships = Plan.where(name: PREMIUM_MOB_MEMBERSHIP_AND_ABOVE_ARRAY).pluck(:name)
+    allowed_memberships.include? membership_type
   end
 
   def self.filter_if_title title
