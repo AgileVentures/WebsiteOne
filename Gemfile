@@ -72,6 +72,8 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
+gem 'overcommit'
+gem 'ruby-lint'
 
 group :test do
   gem 'capybara'

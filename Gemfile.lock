@@ -303,6 +303,7 @@ GEM
       concurrent-ruby (~> 1.0)
     ice_cube (0.16.3)
     inflecto (0.0.2)
+    iniparse (1.4.4)
     jaro_winkler (1.5.1)
     jasmine (3.2.0)
       jasmine-core (= 3.2.0)
@@ -400,6 +401,9 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    overcommit (0.46.0)
+      childprocess (~> 0.6, >= 0.6.3)
+      iniparse (~> 1.4)
     paper_trail (10.0.1)
       activerecord (>= 4.2, < 5.3)
       request_store (~> 1.1)
@@ -541,6 +545,9 @@ GEM
     ruby-gitter (0.1.0)
       hashie
       httparty
+    ruby-lint (2.3.1)
+      parser (~> 2.2)
+      slop (~> 3.4, >= 3.4.7)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
@@ -576,6 +583,7 @@ GEM
       gli
       hashie
       websocket-driver
+    slop (3.6.0)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -712,6 +720,7 @@ DEPENDENCIES
   omniauth-github (~> 1.1.2)
   omniauth-google-oauth2 (~> 0.5.2)
   omniauth-oauth2 (~> 1.3.1)
+  overcommit
   paper_trail (~> 10.0)
   paranoia (~> 2.4)
   pg
@@ -739,6 +748,7 @@ DEPENDENCIES
   rspec-rails
   rubocop-rspec (>= 1.28)
   ruby-gitter
+  ruby-lint
   sass-rails
   selenium-webdriver
   shoulda-matchers
