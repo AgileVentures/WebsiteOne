@@ -15,6 +15,12 @@ Feature: Start Events
     And I am on the show page for event "Scrum"
     Then I should see "It's time! Please start the event."
 
+  Scenario: Does not show a start event message prior to start time
+    Given an event "Scrum"
+    When the time now is "2014/02/03 06:59:59 UTC"
+    And I am on the show page for event "Scrum"
+    Then I should not see "It's time! Please start the event."
+
   Scenario: In the events page the event has a start now button when it's time
     Given the time now is "2014/02/03 07:00:09 UTC"
     When I am on events index page
