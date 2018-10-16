@@ -48,4 +48,8 @@ Feature: Private Events
 # event is live and a link to upgrade if they'd like to join
 # and perhaps the option to view the video as part of a free trial?
 
+# ideally what we'd love the Premium/Associate/Free members to see is a note that
+# event is live and a link to upgrade if they'd like to join
+# and perhaps the option to view the video as part of a free trial?
+
 # maybe a link to start to start the free trial so they could jump in?

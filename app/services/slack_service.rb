@@ -9,6 +9,7 @@ module SlackService
                                 gitter_client = Gitter::Client.new(ENV['GITTER_API_TOKEN']))
     return unless Features.slack.notifications.enabled
     return if hangout.hangout_url.blank?
+    
     channels = channels_for_project(hangout.project) # hangout.project.slack_channel
     @message = "#{hangout.title}: <#{hangout.hangout_url}|click to join>"
     @here_message = "@here #{@message}"
@@ -150,7 +151,7 @@ module SlackService
   end
 
   def send_notifications slack_client, gitter_client, hangout, channels
-    return post_premium_mob_notification if hangout.event.for = 'Premium Mob Members'
+    return post_premium_mob_notification if hangout.event.for == 'Premium Mob Members'
     case hangout.category
     when "Scrum"
       post_scrum_notification slack_client, gitter_client, hangout
