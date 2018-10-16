@@ -4,7 +4,7 @@ end
 
 Given(/^I am logged in as a user with "([^"]*)"$/) do |plan|
   StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
-  email =  "Susan_#{plan}@gmail.com"
+  email =  "Susan_#{plan.parameterize}@gmail.com"
   password = "Susan_#{plan}"
   @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: "Susan_#{plan}", email: email, password: password, password_confirmation: password)
 
@@ -45,7 +45,7 @@ def set_user_as_premium(user, plan = 'Premium')
                                          email: user.email,
                                          source: @stripe_test_helper.generate_card_token
                                      })
-  customer.subscriptions.create(plan: plan.downcase)
+  customer.subscriptions.create(plan: plan.downcase.delete(' '))
   payment_source = PaymentSource::Stripe.create(identifier: customer.id, subscription: subscription )
 end
 
