@@ -151,7 +151,7 @@ module SlackService
   end
 
   def send_notifications slack_client, gitter_client, hangout, channels
-    return post_premium_mob_notification if hangout.event.for == 'Premium Mob Members'
+    return post_premium_mob_notification if hangout.for == 'Premium Mob Members' # demeter violation SOLID principles
     case hangout.category
     when "Scrum"
       post_scrum_notification slack_client, gitter_client, hangout

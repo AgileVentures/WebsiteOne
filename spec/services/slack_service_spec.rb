@@ -66,11 +66,13 @@ describe SlackService do
 
     context('PairProgramming') do
 
-      let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: cs169_project }
-      let(:missing_url_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "  ", user: user }
-      let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project }
-      let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: nil }
-      let(:project_with_no_slack_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: noslack_project }
+      let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: cs169_project, for: '' }
+      let(:missing_url_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "  ", user: user, for: '' }
+      let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project, for: '' }
+      let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: nil, for: '' }
+      let(:project_with_no_slack_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: noslack_project, for: '' }
+
+     #  if hangout.event.for == 'Premium Mob Members'
 
       it 'sends the correct slack message to the correct channels when associated with a project' do
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
@@ -110,7 +112,7 @@ describe SlackService do
       end
 
       let(:multiple_channel_project) { mock_model Project, slug: 'multiple-channels' }
-      let(:multiple_channel_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: multiple_channel_project }
+      let(:multiple_channel_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: multiple_channel_project, for: '' }
 
       it 'can post to multiple channels' do
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
@@ -123,10 +125,10 @@ describe SlackService do
     end
 
     context('Scrums') do
-      let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: cs169_project }
-      let(:missing_url_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "  ", user: user }
-      let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: websiteone_project }
-      let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: nil }
+      let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: cs169_project, for: ''  }
+      let(:missing_url_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "  ", user: user, for: ''  }
+      let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: websiteone_project, for: ''  }
+      let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "Scrum", hangout_url: "mock_url", user: user, project: nil, for: ''  }
 
       it 'sends the correct slack message to the correct channels' do
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
@@ -172,7 +174,8 @@ describe SlackService do
       }
     end
     context('PairProgramming') do
-      let(:hangout) { EventInstance.create(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user) }
+      let(:hangout) { EventInstance.create(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user ) }
+      before { allow(hangout).to receive(:for).and_return '' }
 
       it 'sends the correct slack message to the correct channels' do
         hangout.yt_video_id = 'mock_url'
@@ -203,7 +206,8 @@ describe SlackService do
     end
 
     context('Scrums') do
-      let(:hangout) { EventInstance.create(title: 'MockEvent', category: 'Scrum', hangout_url: 'mock_url', user: user) }
+      let(:hangout) { EventInstance.create(title: 'MockEvent', category: 'Scrum', hangout_url: 'mock_url', user: user ) }
+      before { allow(hangout).to receive(:for).and_return '' }
 
       it 'sends the correct slack message to the correct channels' do
         hangout.yt_video_id = 'mock_url'
