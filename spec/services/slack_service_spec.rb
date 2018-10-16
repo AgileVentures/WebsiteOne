@@ -59,11 +59,23 @@ describe SlackService do
           text: channel_message,
       }.merge!(default_post_args)
     end
+    let(:post_premium_mob_notification_post_args) do 
+      {
+        channel: 'C29J4QQ9M',
+        text: here_message,
+      }.merge!(default_post_args)
+    end
+    let(:post_premium_mob_trialists_notification_post_args) do 
+      {
+        channel: 'C29J4QQ9F',
+        text: here_message,
+      }.merge!(default_post_args)
+    end
 
     let(:cs169_project) { mock_model Project, slug: 'cs169' }
     let(:websiteone_project) { mock_model Project, slug: 'websiteone' }
     let(:noslack_project) { mock_model Project, slug: 'noslack' }
-
+    
     context('PairProgramming') do
 
       let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: cs169_project, for: '' }
@@ -159,7 +171,28 @@ describe SlackService do
 
         slack_service.post_hangout_notification(missing_url_hangout, slack_client, gitter_client)
       end
+    end
 
+    context 'Premium Mob Members Events' do
+      let(:premium_mob_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project, for: 'Premium Mob Members' }
+      let(:general_channel_id) { 'C0TLAE1MH' }
+      let(:pairing_notifications_channel_id) { 'C29J3DPGW' }
+      let(:websiteone_channel_id) { 'C29J4QQ9W' }
+      
+      it 'posts notification to appropriate private channels' do
+        expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_notification_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_trialists_notification_post_args)
+        
+        slack_service.post_hangout_notification(premium_mob_hangout, slack_client)
+      end
+
+      it 'does not post to public channels' do
+        expect(slack_client).not_to receive(:chat_postMessage).with hash_including(channel: general_channel_id)
+        expect(slack_client).not_to receive(:chat_postMessage).with hash_including(channel: pairing_notifications_channel_id)
+        expect(slack_client).not_to receive(:chat_postMessage).with hash_including(channel: websiteone_channel_id)
+        
+        slack_service.post_hangout_notification(premium_mob_hangout, slack_client)
+      end
     end
   end
 

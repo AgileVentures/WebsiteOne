@@ -107,6 +107,8 @@ module SlackService
         "general": "C0TLAE1MH",
         "pairing_notifications": "C29J3DPGW",
         "standup_notifications": "C29JE6HGR",
+        "premium_extra": "C29J4QQ9M",
+        "premium_mob_trialists": "C29J4QQ9F"
     }
 
     GITTER_ROOMS = {
@@ -146,12 +148,12 @@ module SlackService
                        @channel_message, hangout.user
   end
 
-  def post_premium_mob_notification
-    # send_slack_message slack_client, [CHANNELS[:general]], @here_message, hangout.user
+  def post_premium_mob_notification slack_client, hangout
+    send_slack_message slack_client, [CHANNELS[:premium_extra], CHANNELS[:premium_mob_trialists]], @here_message, hangout.user
   end
 
   def send_notifications slack_client, gitter_client, hangout, channels
-    return post_premium_mob_notification if hangout.for == 'Premium Mob Members' # demeter violation SOLID principles
+    return post_premium_mob_notification(slack_client, hangout) if hangout.for == 'Premium Mob Members' # demeter violation SOLID principles
     case hangout.category
     when "Scrum"
       post_scrum_notification slack_client, gitter_client, hangout
