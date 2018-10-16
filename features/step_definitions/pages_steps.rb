@@ -66,15 +66,15 @@ Then(/^the "([^"]*)" page title should read "([^"]*)"$/) do |str, title|
 end
 
 Then(/^I see the banners for all sponsors$/) do
-sponsors = {
-  "Standuply" => "https://standuply.com/?utm_source=links&utm_medium=agileventures&utm_campaign=partnership",
-  "Craft Academy" => "http://craftacademy.se/english",
-  "Mooqita" => "https://mooqita.org/",
-  "Amazon Smile" => "https://smile.amazon.co.uk/ch/1170963-0"
-}
-  sponsors.each do |key, value|
-    within("//a[@href='#{value}']/div") do
-      find(:xpath, "//img[@alt='#{key}']")
+  sponsors = {
+    "Standuply" => "https://standuply.com/?utm_source=links&utm_medium=agileventures&utm_campaign=partnership",
+    "Craft Academy" => "http://craftacademy.se/english",
+    "Mooqita" => "https://mooqita.org/",
+    "Amazon Smile" => "https://smile.amazon.co.uk/ch/1170963-0"
+  }
+  sponsors.each do |alt_text, url|
+    within("//a[@href='#{url}']/div") do
+      expect(page).to have_selector("img[@alt='#{alt_text}']")
     end
   end
 end
