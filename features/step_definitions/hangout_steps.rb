@@ -237,6 +237,13 @@ Then(/^the Hangout URL is posted only in appropriate private channels in Slack$/
   expect(SlackService).not_to have_received :post_pair_programming_notification
 end
 
+Then(/^the Youtube URL is posted in select private channels in Slack$/) do
+  expect(SlackService).to have_received :post_premium_mob_notification
+  expect(SlackService).not_to have_received :send_slack_message
+  expect(SlackService).not_to have_received :post_pair_programming_notification
+end
+
+
 And(/^the event "([^"]*)" was last updated at "([^"]*)"$/) do |event_name, date|
   id = Event.where(name: event_name).first[:id]
   EventInstance.where(event_id: id).order("created_at DESC").first.update_attributes(updated_at: date)

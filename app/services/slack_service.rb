@@ -33,24 +33,24 @@ module SlackService
     gitter_client.send_message(text, GITTER_ROOMS[:'saasbook/MOOC'])
   end
 
-  def post_yt_link(hangout, client = Slack::Web::Client.new(logger: Rails.logger))
+  def post_yt_link(hangout, slack_client = Slack::Web::Client.new(logger: Rails.logger))
     return unless Features.slack.notifications.enabled
     return if hangout.yt_video_id.blank?
-
     channels = channels_for_project(hangout.project)
-
+    
     video = "https://youtu.be/#{hangout.yt_video_id}"
-    message = "Video/Livestream: <#{video}|click to play>"
-
+    @yt_message = "Video/Livestream: <#{video}|click to play>"
+    
+    return post_premium_mob_notification(slack_client, hangout) if hangout.for == 'Premium Mob Members'
     if hangout.category == "Scrum"
-      send_slack_message client, [CHANNELS[:general]], message, hangout.user
+      send_slack_message slack_client, [CHANNELS[:general]], @yt_message, hangout.user
     elsif hangout.category == "PairProgramming"
       unless channels.include? CHANNELS[:cs169]
-        send_slack_message client, [CHANNELS[:general]], message, hangout.user
+        send_slack_message slack_client, [CHANNELS[:general]], @yt_message, hangout.user
       end
     end
 
-    send_slack_message client, channels, message, hangout.user if channels
+    send_slack_message slack_client, channels, @yt_message, hangout.user if channels
 
   end
 
@@ -149,6 +149,7 @@ module SlackService
   end
 
   def post_premium_mob_notification slack_client, hangout
+    send_slack_message slack_client, [CHANNELS[:premium_extra]], @yt_message, hangout.user if hangout.yt_video_id
     send_slack_message slack_client, [CHANNELS[:premium_extra], CHANNELS[:premium_mob_trialists]], @here_message, hangout.user
   end
 

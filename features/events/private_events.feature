@@ -34,7 +34,7 @@ Feature: Private Events
             | Associate    | should not |
             | Free         | should not |
 
-    Scenario: Edit hangout url for private event pings appropriate private channels
+    Scenario: Edit hangout url for private event pings only appropriate private channels
       Given I have logged in
       And the date is "2014/02/03 9:00:00 UTC"
       And that we're spying on the SlackService private and public channels
@@ -42,7 +42,13 @@ Feature: Private Events
       When I manually set a hangout link for event "Mob"
       Then the Hangout URL is posted only in appropriate private channels in Slack
 
-    # Scenario: Edit hangout url does not ping public channels
+    Scenario: Edit youtube url for private event pings only appropriate private channels
+      Given I have logged in
+      And the date is "2014/02/03 9:00:00 UTC"
+      And that we're spying on the SlackService private and public channels
+      And the Slack notifications are enabled
+      When I manually set youtube link with youtube id "12341234111" for event "Mob"
+      Then the Youtube URL is posted in select private channels in Slack
 
 # ideally what we'd love the Premium/Associate/Free members to see is a note that
 # event is live and a link to upgrade if they'd like to join

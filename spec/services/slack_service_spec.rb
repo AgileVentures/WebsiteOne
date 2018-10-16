@@ -179,14 +179,14 @@ describe SlackService do
       let(:pairing_notifications_channel_id) { 'C29J3DPGW' }
       let(:websiteone_channel_id) { 'C29J4QQ9W' }
       
-      it 'posts notification to appropriate private channels' do
+      it 'posts hangout url to appropriate private channels' do
         expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_notification_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_trialists_notification_post_args)
         
         slack_service.post_hangout_notification(premium_mob_hangout, slack_client)
       end
 
-      it 'does not post to public channels' do
+      it 'does not post hangout url to public channels' do
         expect(slack_client).not_to receive(:chat_postMessage).with hash_including(channel: general_channel_id)
         expect(slack_client).not_to receive(:chat_postMessage).with hash_including(channel: pairing_notifications_channel_id)
         expect(slack_client).not_to receive(:chat_postMessage).with hash_including(channel: websiteone_channel_id)
@@ -195,68 +195,99 @@ describe SlackService do
       end
     end
   end
-
+  
   describe '.post_yt_link' do
     let(:client) { spy(:slack_client) }
     let(:expected_post_args) do
       {
-          text: 'Video/Livestream: <https://youtu.be/mock_url|click to play>',
-          username: user.display_name,
-          icon_url: user.gravatar_url,
-          link_names: 1
+        text: 'Video/Livestream: <https://youtu.be/mock_url|click to play>',
+        username: user.display_name,
+        icon_url: user.gravatar_url,
+        link_names: 1
       }
     end
     context('PairProgramming') do
       let(:hangout) { EventInstance.create(title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user ) }
       before { allow(hangout).to receive(:for).and_return '' }
-
+      
       it 'sends the correct slack message to the correct channels' do
         hangout.yt_video_id = 'mock_url'
         hangout.project = Project.create(title: 'WebSiteOne', description: 'hmmm', status: 'active')
-
+        
         slack_service.post_yt_link(hangout, client)
-
+        
         expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: 'C0TLAE1MH'))
         expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: 'C29J4QQ9W'))
       end
-
+      
       it 'does not ping slack when the project is cs169' do
         hangout.yt_video_id = 'mock_url'
         hangout.project = Project.create(title: 'cs169', description: 'hmmm', status: 'active')
-
+        
         slack_service.post_yt_link(hangout, client)
-
+        
         expect(client).not_to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: 'C0TLAE1MH'))
         expect(client).not_to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: 'C29J4QQ9W'))
       end
-
+      
       it 'does not post youtube video link if yt_video_id is blank' do
         hangout.yt_video_id = '    '
         slack_service.post_yt_link(hangout, client)
-
+        
         expect(client).not_to have_received(:chat_postMessage)
       end
     end
-
+    
     context('Scrums') do
       let(:hangout) { EventInstance.create(title: 'MockEvent', category: 'Scrum', hangout_url: 'mock_url', user: user ) }
       before { allow(hangout).to receive(:for).and_return '' }
-
+      
       it 'sends the correct slack message to the correct channels' do
         hangout.yt_video_id = 'mock_url'
         hangout.project = Project.create(slug: 'websiteone', title: 'WebSiteOne', description: 'hmmm', status: 'active')
-
+        
         slack_service.post_yt_link(hangout, client)
-
+        
         expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: 'C0TLAE1MH'))
         expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: 'C29J4QQ9W'))
       end
-
+      
       it 'does not post youtube video link if yt_video_id is blank' do
         hangout.yt_video_id = '    '
         slack_service.post_yt_link(hangout, client)
-
+        
         expect(client).not_to have_received(:chat_postMessage)
+      end
+    end
+    
+    context 'Premium Mob Members Events' do
+      let(:hangout) { EventInstance.create(title: 'MockEvent', category: 'PairProgramming', hangout_url: 'mock_url', user: user ) }
+      let(:general_channel_id) { 'C0TLAE1MH' }
+      let(:pairing_notifications_channel_id) { 'C29J3DPGW' }
+      let(:websiteone_channel_id) { 'C29J4QQ9W' }
+      let(:premium_extra_channel_id) { 'C29J4QQ9M' }
+      let(:premium_mob_trialists_channel_id) { 'C29J4QQ9F' }
+      before { allow(hangout).to receive(:for).and_return 'Premium Mob Members' }
+      
+      it 'posts youtube url to appropriate private channels' do
+        hangout.yt_video_id = 'mock_url'
+        hangout.project = Project.create(slug: 'websiteone', title: 'WebSiteOne', description: 'hmmm', status: 'active')
+        
+        slack_service.post_yt_link(hangout, client)
+
+        expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: premium_extra_channel_id))
+        expect(client).not_to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: premium_mob_trialists_channel_id))
+      end
+
+      it 'does not post youtube url to public channels' do
+        hangout.yt_video_id = 'mock_url'
+        hangout.project = Project.create(slug: 'websiteone', title: 'WebSiteOne', description: 'hmmm', status: 'active')
+        
+        slack_service.post_yt_link(hangout, client)
+
+        expect(client).not_to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: general_channel_id))
+        expect(client).not_to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: pairing_notifications_channel_id))
+        expect(client).not_to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: websiteone_channel_id))
       end
     end
   end
