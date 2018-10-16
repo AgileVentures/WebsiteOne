@@ -64,3 +64,17 @@ Then(/^the "([^"]*)" page title should read "([^"]*)"$/) do |str, title|
 	visit path_to(str)
 	expect(page.title).to eq "#{title}"
 end
+
+Then(/^I see the banners for all sponsors$/) do
+sponsors = {
+  "Standuply" => "https://standuply.com/?utm_source=links&utm_medium=agileventures&utm_campaign=partnership",
+  "Craft Academy" => "http://craftacademy.se/english",
+  "Mooqita" => "https://mooqita.org/",
+  "Amazon Smile" => "https://smile.amazon.co.uk/ch/1170963-0"
+}
+  sponsors.each do |key, value|
+    within("//a[@href='#{value}']/div") do
+      find(:xpath, "//img[@alt='#{key}']")
+    end
+  end
+end
