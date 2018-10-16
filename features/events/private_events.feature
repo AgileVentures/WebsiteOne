@@ -14,7 +14,7 @@ Feature: Private Events
             | Premium      | premium     | 1000   | 7                      |
             | PremiumMob   | premiummob  | 2500   | 0                      |
             | PremiumF2F   | premiumf2f  | 5000   | 0                      |
-            | Premium Plus | premiumplus | 10000  | 0                      |
+            | PremiumPlus  | premiumplus | 10000  | 0                      |
 
     Scenario Outline: show mob hangout links to users with correct plans
         Given the date is "2014/02/03 10:26:00 UTC"
@@ -27,6 +27,7 @@ Feature: Private Events
         Then I <assertion> see a link "JOIN THIS LIVE EVENT NOW" to "http://hangout.test"
         Examples:
             | plan        | assertion  |
+            | PremiumPlus | should     |
             | PremiumF2F  | should     |
             | PremiumMob  | should     |
             | Premium     | should not |
