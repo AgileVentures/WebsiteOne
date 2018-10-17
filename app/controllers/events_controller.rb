@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @projects = Project.where(status: "Active")
     respond_to do |format|
       format.html {@events = Event.upcoming_events(specified_project) }
       format.json {@events = Event.upcoming_events(specified_project) }
