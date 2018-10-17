@@ -1,12 +1,1 @@
-<%= form_tag card_path(current_user.slug), method: :put do %>
-  <script
-  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-  data-name="Agile Ventures"
-  data-panel-label="Update Card Details"
-  data-label="Update Card Details"
-  data-allow-remember-me=false
-  data-locale="en-US"
-  data-image="/favicon.ico?v=2">
-  </script>
-<% end %>
+<%= render 'edit_card' %>

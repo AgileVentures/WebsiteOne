@@ -148,7 +148,7 @@ Then(/^I should see projects with pitch updated:$/) do |table|
   projects = table.hashes
   projects.each do | project |
     updated_project = Project.find_by_title(project["title"])
-    expect(updated_project.pitch).to eq(project["pitch"])
+    expect(updated_project.pitch).to match(/#{project["pitch"]}/)
   end
 end
 
@@ -212,4 +212,9 @@ Given(/^"([^"]*)" deactivates his account$/) do |name|
   first_name, last_name = name.split
   user = User.find_by first_name: first_name, last_name: last_name
   user.delete
+end
+
+Given(/^the anonymous user exists$/) do
+  attributes = { id: -1, first_name: 'Anonymous', last_name: '', email: 'anonymous@example.org' }
+  FactoryBot.create(:user, attributes)
 end

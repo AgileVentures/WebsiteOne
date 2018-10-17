@@ -18,7 +18,7 @@ Feature: Update github last update field of all projects
     Then I should see projects with following updates:
       | title        | status   | last_github_update                  |
       | WebsiteTwo   | active   | 2016-05-05 14:09:50.000000000 +0000 |
-      | WebsiteOne   | inactive | 2017-01-22 11:38:40.000000000 +0000 |
+      | WebsiteOne   | inactive | Tue, 16 Oct 2018 20:17:42 UTC +00:00|
       | edx          | active   | 2000-01-01 01:01:01.000000000 +0000 |
       | Unity        | active   | 2000-01-01 01:01:01.000000000 +0000 |
-      | LocalSupport | active   | 2017-01-20 19:07:00.000000000 +0000 |
+      | LocalSupport | active   | Tue, 16 Oct 2018 08:16:50 UTC +00:00|
