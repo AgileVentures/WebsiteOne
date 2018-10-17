@@ -117,6 +117,10 @@
         <div class="pull-right">
           <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
         </div>
+      <% else %>
+        <div>
+          <%= link_to 'THIS EVENT IS LIVE, UPGRADE NOW TO JOIN', new_subscription_path %>
+        </div>
       <% end %>
     <% elsif @event.try :within_current_event_duration? %>
       <div class="event-notice">
