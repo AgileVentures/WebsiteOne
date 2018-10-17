@@ -2,10 +2,10 @@
 
 ![](images/Screenshot%202016-05-25%2008.40.44.png)
 
-1a) install ruby 2.3.1
+1a) install ruby 2.5.1
 
 ```
-$ rvm install 2.3.1
+$ rvm install 2.5.1
 ```
 
 2) update the local software (all the linux packages on the c9 machine)
@@ -36,7 +36,7 @@ $ sudo apt-get install xvfb
 6) install bundler (manages all our ruby gems)
 
 ```
-$ gem install bundle
+$ gem install bundler
 ```
 
 7) install gems (note that forkbomb protection on c9 may kill bundle and you will need to re-run it several times to complete the install of all the gems)
