@@ -65,21 +65,25 @@
   </div>
 
   <div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
-
     <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Credit/Debit Card:</div>
-    <%= form_tag subscriptions_path(plan: @plan.third_party_identifier, user: @upgrade_user) do %>
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                data-description="Monthly Subscription"
-                data-amount="<%= @plan.amount %>"
-                data-panel-label="Subscribe"
-                data-currency="GBP"
-                data-locale="en-US"
-                data-name="<%= @plan.name %> <%= type %>"
-                data-label="Subscribe"
-                data-image="/favicon.ico?v=2"></script>
-    <% end %>
+      <%= form_tag subscriptions_path(plan: @plan.third_party_identifier, user: @upgrade_user) do %>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="Monthly Subscription"
+              data-amount="<%= @plan.amount %>"
+              data-panel-label="Subscribe"
+              data-currency="GBP"
+              data-locale="en-US"
+              data-name="<%= @plan.name %> <%= type %>"
+              data-label="Subscribe"
+              data-image="/favicon.ico?v=2"></script>
+      <% end %>
 
+  </div>
+
+  <div id="crypto_payment" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
+    <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> with crypto currency:</div>
+    
   </div>
 </div>
 
