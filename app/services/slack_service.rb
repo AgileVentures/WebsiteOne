@@ -41,7 +41,7 @@ module SlackService
     video = "https://youtu.be/#{hangout.yt_video_id}"
     @yt_message = "Video/Livestream: <#{video}|click to play>"
     
-    return post_premium_mob_notification(slack_client, hangout) if hangout.for == 'Premium Mob Members'
+    return post_premium_mob_yt_notification(slack_client, hangout) if hangout.for == 'Premium Mob Members'
     if hangout.category == "Scrum"
       send_slack_message slack_client, [CHANNELS[:general]], @yt_message, hangout.user
     elsif hangout.category == "PairProgramming"
@@ -148,13 +148,16 @@ module SlackService
                        @channel_message, hangout.user
   end
 
-  def post_premium_mob_notification slack_client, hangout
-    send_slack_message slack_client, [CHANNELS[:premium_extra]], @yt_message, hangout.user if hangout.yt_video_id
+  def post_premium_mob_yt_notification slack_client, hangout
+    send_slack_message slack_client, [CHANNELS[:premium_extra]], @yt_message, hangout.user
+  end
+
+  def post_premium_mob_hangout_notification slack_client, hangout
     send_slack_message slack_client, [CHANNELS[:premium_extra], CHANNELS[:premium_mob_trialists]], @here_message, hangout.user
   end
 
   def send_notifications slack_client, gitter_client, hangout, channels
-    return post_premium_mob_notification(slack_client, hangout) if hangout.for == 'Premium Mob Members' # demeter violation SOLID principles
+    return post_premium_mob_hangout_notification(slack_client, hangout) if hangout.for == 'Premium Mob Members' # demeter violation SOLID principles
     case hangout.category
     when "Scrum"
       post_scrum_notification slack_client, gitter_client, hangout
