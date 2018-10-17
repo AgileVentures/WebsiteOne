@@ -6,7 +6,7 @@ Feature: Allow payment of Premium with crypto
   Scenario: User sees an option to pay with crypto on the new subscriptions page
   When I sign in with valid credentials
   When I go to the new subscriptions page
-  Then I should see text "Get Premium with crypto currency"
+  Then I should see text "Get Premium with Crypto currency"
 
 
   
