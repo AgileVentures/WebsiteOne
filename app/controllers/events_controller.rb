@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new(new_params)
     @event.set_repeat_ends_string
-    @projects = Project.all
+    @projects = Project.where(status: "Active").sort { |a, b| a.title <=> b.title }
   end
 
   def show
@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @projects = Project.where(status: "Active")
+    @projects = Project.where(status: "Active").sort { |a, b| a.title <=> b.title }
     respond_to do |format|
       format.html {@events = Event.upcoming_events(specified_project) }
       format.json {@events = Event.upcoming_events(specified_project) }
