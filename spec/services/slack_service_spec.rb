@@ -180,8 +180,8 @@ describe SlackService do
       let(:websiteone_channel_id) { 'C29J4QQ9W' }
       
       it 'posts hangout url to appropriate private channels' do
-        expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_notification_post_args)
-        expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_trialists_notification_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_notification_post_args).once
+        expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_trialists_notification_post_args).once
         
         slack_service.post_hangout_notification(premium_mob_hangout, slack_client)
       end
@@ -268,6 +268,22 @@ describe SlackService do
       let(:premium_extra_channel_id) { 'C29J4QQ9M' }
       let(:premium_mob_trialists_channel_id) { 'C29J4QQ9F' }
       before { allow(hangout).to receive(:for).and_return 'Premium Mob Members' }
+
+      let(:default_post_args) do
+        {
+            username: user.display_name,
+            icon_url: user.gravatar_url,
+            link_names: 1
+        }
+      end
+      let(:message) { 'MockEvent: <mock_url|click to join>' }
+      let(:here_message) { "@here #{message}" }
+      let(:post_premium_mob_notification_post_args) do 
+        {
+          channel: 'C29J4QQ9M',
+          text: here_message,
+        }.merge!(default_post_args)
+      end
       
       it 'posts youtube url to appropriate private channels' do
         hangout.yt_video_id = 'mock_url'
@@ -277,6 +293,8 @@ describe SlackService do
 
         expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: premium_extra_channel_id))
         expect(client).not_to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: premium_mob_trialists_channel_id))
+        # expect(client).to have_received(:chat_postMessage).with(post_premium_mob_notification_post_args.merge!(channel: premium_extra_channel_id))
+        expect(client).to have_received(:chat_postMessage).with(hash_including(channel: premium_extra_channel_id)).once
       end
 
       it 'does not post youtube url to public channels' do
