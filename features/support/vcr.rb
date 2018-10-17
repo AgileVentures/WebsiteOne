@@ -12,6 +12,8 @@ VCR.configure do |c|
   }
   c.filter_sensitive_data('<SLACK_AUTH_TOKEN>') { ENV['SLACK_AUTH_TOKEN'] }
   c.filter_sensitive_data('<GITTER_API_TOKEN>') { ENV['GITTER_API_TOKEN'] }
+  c.filter_sensitive_data('<GITHUB_CLIENT_ID>') { ENV['GITHUB_KEY'] }
+  c.filter_sensitive_data('<GITHUB_CLIENT_SECRET>') { ENV['GITHUB_SECRET'] }
 end
 
 VCR.cucumber_tags do |t|
