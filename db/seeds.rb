@@ -82,12 +82,28 @@ Solution: is something that requires absolutely minimal effort on their part to 
 end
 
 u ||= User.last
-3.times do |i|
-  p = u.projects.create title: Faker::Lorem.words(3).join(' '), description: Faker::Lorem.paragraph, status: 'active', created_at: i.month.ago
-  3.times do |j|
-    d = p.documents.create title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph, created_at: 1.month.ago, user_id: p.user_id
-    for k in (1..rand(3))
-      d.children.create title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph, project_id: p.id, created_at: 1.month.ago, user_id: p.user_id
+3.times do
+  p = u.projects.create(
+    title: Faker::Lorem.words(3).join(' '),
+    description: Faker::Lorem.paragraph,
+    status: 'active',
+    created_at: 1.month.ago
+  )
+  3.times do
+    d = p.documents.create(
+      title: Faker::Lorem.words(3).join(' '),
+      body: Faker::Lorem.paragraph,
+      created_at: 1.month.ago,
+      user_id: p.user_id
+    )
+    3.times do
+      d.children.create(
+        title: Faker::Lorem.words(3).join(' '),
+        body: Faker::Lorem.paragraph,
+        project_id: p.id,
+        created_at: 1.month.ago,
+        user_id: p.user_id
+      )
     end
   end
 end
@@ -138,7 +154,7 @@ end
   end
 end
 
-for i in (1..4)
+4.times do
   User.all.sample(3).each do |u|
     u.articles.create!(
       title: Faker::Lorem.words(3).join(' '),
