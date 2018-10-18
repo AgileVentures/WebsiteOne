@@ -58,7 +58,7 @@ Feature: Private Events
           | Started at         | 10:25:00 UTC        |
       And the time now is "10:26:00 UTC"
       When I am on the show page for event "Mob"
-      Then I <assertion> see a link "THIS EVENT IS LIVE, UPGRADE NOW TO JOIN" to "/subscriptions/new"
+      Then I <assertion> see a link "THIS EVENT IS LIVE, UPGRADE NOW TO JOIN" to "/subscriptions/new?plan=premiummob"
       Examples:
           | plan         | assertion  |
           | Premium Plus | should not |
