@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 klasses = [ Project, Document, User, Article, Event ]
 old_counts = klasses.map(&:count)
 should_prompt = old_counts.min > 0
@@ -78,14 +70,31 @@ Solution: is something that requires absolutely minimal effort on their part to 
 end
 
 u ||= User.last
-for i in (1..3)
-  p = u.projects.create title: Faker::Lorem.words(3).join(' '), description: Faker::Lorem.paragraph, status: 'active', created_at: 1.month.ago
-  for j in (1..3)
+3.times do |i|
+  p = u.projects.create title: Faker::Lorem.words(3).join(' '), description: Faker::Lorem.paragraph, status: 'active', created_at: i.month.ago
+  3.times do |j|
     d = p.documents.create title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph, created_at: 1.month.ago, user_id: p.user_id
     for k in (1..rand(3))
       d.children.create title: Faker::Lorem.words(3).join(' '), body: Faker::Lorem.paragraph, project_id: p.id, created_at: 1.month.ago, user_id: p.user_id
     end
   end
+end
+
+# Premium Users
+Rake::Task['db:create_plans'].invoke
+
+plans = ["premium", "premiummob", "premiumf2f", "premiumplus"]
+plans.each  do |plan|
+  get_country
+  u = User.create!(first_name: Faker::Name.first_name,
+                   last_name: Faker::Name.last_name,
+                   email: "#{plan}@premi.um",
+                   password: "premium123",
+                   country_name: @country[:country_name],
+                   country_code: @country[:country_code])
+  Subscription.create(started_at: DateTime.now,
+                      user_id: u.id,
+                      plan_id: Plan.find_by_third_party_identifier(plan).id)
 end
 
 for i in (1..300)
@@ -102,35 +111,28 @@ for i in (1..4)
   end
 end
 
-
 Event.create!( name: 'Seeded event',
                category: 'Scrum',
                description: 'Seeded content',
-               # event_date: 'Mon, 17 Jun 2013',
-               # start_time: '2000-01-01 09:00:00 UTC',
-               # end_time: '2000-01-01 17:00:00 UTC',
-               start_datetime: 'Mon, 17 Jun 2014',
+               start_datetime: DateTime.now.change({ hour: 12, min: 15, sec: 0 }),
                duration: 600,
                repeats: 'weekly',
                repeats_every_n_weeks: '1',
                repeats_weekly_each_days_of_the_week_mask: '31',
                repeat_ends: 'never',
-               repeat_ends_on: 'Mon, 17 Jun 2015',
+               repeat_ends_on:  Date.today + 1.year,
                time_zone: 'UTC')
 
 Event.create!( name: 'evening event',
                category: 'Scrum',
                description: 'Seeded content',
-               # event_date: 'Mon, 17 Jun 2013',
-               # start_time: '2000-01-01 09:00:00 UTC',
-               # end_time: '2000-01-01 17:00:00 UTC',
-               start_datetime: 'Mon, 17 Jun 2014 17:00:00 UTC',
+               start_datetime: DateTime.now.change({ hour: 17, min: 45, sec: 0 }),
                duration: 600,
                repeats: 'weekly',
                repeats_every_n_weeks: '1',
                repeats_weekly_each_days_of_the_week_mask: '31',
                repeat_ends: 'never',
-               repeat_ends_on: 'Mon, 17 Jun 2015',
+               repeat_ends_on:  Date.today + 1.year,
                time_zone: 'UTC')
 
 event = Event.find_by(name: 'evening event')
