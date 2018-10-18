@@ -1,4 +1,4 @@
-klasses = [ Project, Document, User, Article, Event ]
+klasses = [ Project, Document, User, Subscription, Karma, Plan, Article, Event, Karma ]
 old_counts = klasses.map(&:count)
 should_prompt = old_counts.min > 0
 
@@ -28,39 +28,51 @@ while true
     u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
     puts 'Added default user with email: ' + u.email.bold.blue + ' and password: ' + pw.bold.red
 
-    autograder = u.projects.create! :title => 'Autograder',
-                       :description => 'Autograder for the EdX CS169.x SaaS course',
-                       :status => 'Active',
-                       commit_count: 200
+    autograder = u.projects.create!(
+      title: 'Autograder',
+      description: 'Autograder for the EdX CS169.x SaaS course',
+      status: 'Active',
+      commit_count: 200
+    )
     autograder.source_repositories.create!(url: 'https://github.com/saasbook/rag')
 
-    websiteone = u.projects.create! :title => 'WebsiteOne',
-                       :description => 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
-                       :status => 'Active',
-                       commit_count: 190
+    websiteone = u.projects.create!(
+      title: 'WebsiteOne',
+      description: 'The AgileVentures site - a platform for online collaboration and crowdsourced project development.',
+      status: 'Active',
+      commit_count: 190
+    )
     websiteone.source_repositories.create!(url: 'https://github.com/AgileVentures/WebsiteOne')
 
-    localsupport = u.projects.create! :title => 'LocalSupport',
-                       :description => 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
+    localsupport = u.projects.create!(
+      title: 'LocalSupport',
+      description: 'The open source project Local Support is a directory of local charity and non-profit organisations for a small geographical area.
 Our customer is the non-profit organization Voluntary Action Harrow.
 The mission is to support members of the public searching for support groups for things like helping care for an elderly or sick relative; and also to help charities and non-profits find each other and network.',
-                       :status => 'Active',
-                       commit_count: 100
+      status: 'Active',
+      commit_count: 100
+    )
     localsupport.source_repositories.create!(url: 'https://github.com/AgileVentures/LocalSupport')
 
-    u.projects.create! :title => 'EduChat',
-                       :description => 'Supporting real time synchronous chat in online classes',
-                       :status => 'Inactive',
-                       commit_count: 100
+    u.projects.create!(
+      title: 'EduChat',
+      description: 'Supporting real time synchronous chat in online classes',
+      status: 'Inactive',
+      commit_count: 100
+    )
 
-    u.projects.create! :title => 'PP Scheduler',
-                       :description => "Problem: Lots of people want to pair, but they don't know when each other are available
+    u.projects.create!(
+      title: 'PP Scheduler',
+      description: "Problem: Lots of people want to pair, but they don't know when each other are available
 Solution: is something that requires absolutely minimal effort on their part to use in order to let them pair",
-                       :status => 'Active'
+      status: 'Active'
+    )
 
-    u.projects.create! :title => 'Funniest Computer Ever',
-                       :description => "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
-                       :status => 'Active'
+    u.projects.create!(
+      title: 'Funniest Computer Ever',
+      description: "Can YOU write a program to make humans laugh? Get your editors fired up and your coding caps ready because you've arrived at the Funniest Computer Ever competition!",
+      status: 'Active'
+    )
 
     puts 'Created default projects'
     break
