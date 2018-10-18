@@ -86,20 +86,41 @@ Rake::Task['db:create_plans'].invoke
 plans = ["premium", "premiummob", "premiumf2f", "premiumplus"]
 plans.each  do |plan|
   get_country
-  u = User.create!(first_name: Faker::Name.first_name,
-                   last_name: Faker::Name.last_name,
-                   email: "#{plan}@premi.um",
-                   password: "premium123",
-                   country_name: @country[:country_name],
-                   country_code: @country[:country_code])
-  Subscription.create(started_at: DateTime.now,
-                      user_id: u.id,
-                      plan_id: Plan.find_by_third_party_identifier(plan).id)
+  u = User.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: "#{plan}@premi.um",
+    password: "premium123",
+    country_name: @country[:country_name],
+    country_code: @country[:country_code]
+  )
+  Subscription.create(
+    started_at: DateTime.now,
+    user_id: u.id,
+    plan_id: Plan.find_by_third_party_identifier(plan).id
+  )
 end
 
-for i in (1..300)
+100.times do |counter|
   get_country
-  u = User.create first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: Faker::Lorem.characters(10), country_name: @country[:country_name], country_code: @country[:country_code]
+  u = User.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: Faker::Lorem.characters(10),
+    country_name: @country[:country_name],
+    country_code: @country[:country_code],
+  )
+  Karma.create(
+    user_id: u.id,
+    total: counter,
+    activity: Faker::Number.digit,
+    event_participation: Faker::Number.digit,
+    membership_length: Faker::Number.digit,
+    profile_completeness: Faker::Number.digit,
+    number_github_contributions: Faker::Number.digit,
+  )
+
   Project.all.sample(3).each do |p|
     u.follow p
   end
@@ -107,33 +128,55 @@ end
 
 for i in (1..4)
   User.all.sample(3).each do |u|
-    u.articles.create!(title: Faker::Lorem.words(3).join(' '), content: Faker::Lorem.paragraphs(3).join('\n'))
+    u.articles.create!(
+      title: Faker::Lorem.words(3).join(' '),
+      content: Faker::Lorem.paragraphs(3).join('\n')
+    )
   end
 end
 
-Event.create!( name: 'Seeded event',
-               category: 'Scrum',
-               description: 'Seeded content',
-               start_datetime: DateTime.now.change({ hour: 12, min: 15, sec: 0 }),
-               duration: 600,
-               repeats: 'weekly',
-               repeats_every_n_weeks: '1',
-               repeats_weekly_each_days_of_the_week_mask: '31',
-               repeat_ends: 'never',
-               repeat_ends_on:  Date.today + 1.year,
-               time_zone: 'UTC')
+Event.create!(
+  name: 'Morning event',
+  category: 'Scrum',
+  description: Faker::Lorem.paragraph,
+  start_datetime: DateTime.now.change({ hour: 12, min: 15, sec: 0 }),
+  duration: 800,
+  repeats: 'weekly',
+  repeats_every_n_weeks: '1',
+  repeats_weekly_each_days_of_the_week_mask: '31',
+  repeat_ends: 'never',
+  repeat_ends_on:  Date.today + 1.year,
+  time_zone: 'UTC'
+)
 
-Event.create!( name: 'evening event',
-               category: 'Scrum',
-               description: 'Seeded content',
-               start_datetime: DateTime.now.change({ hour: 17, min: 45, sec: 0 }),
-               duration: 600,
-               repeats: 'weekly',
-               repeats_every_n_weeks: '1',
-               repeats_weekly_each_days_of_the_week_mask: '31',
-               repeat_ends: 'never',
-               repeat_ends_on:  Date.today + 1.year,
-               time_zone: 'UTC')
+Event.create!(
+  name: 'Evening event',
+  category: 'Scrum',
+  description: Faker::Lorem.paragraph,
+  start_datetime: DateTime.now.change({ hour: 17, min: 45, sec: 0 }),
+  duration: 160,
+  repeats: 'weekly',
+  repeats_every_n_weeks: '1',
+  repeats_weekly_each_days_of_the_week_mask: '31',
+  repeat_ends: 'never',
+  repeat_ends_on:  Date.today + 1.year,
+  time_zone: 'UTC'
+)
+
+Event.create!(
+  name: 'Premium event',
+  for: 'Premium Mob Members',
+  category: 'Scrum',
+  description: Faker::Lorem.paragraph,
+  start_datetime: DateTime.now.change({ hour: 11, min: 45, sec: 0 }),
+  duration: 800,
+  repeats: 'weekly',
+  repeats_every_n_weeks: '1',
+  repeats_weekly_each_days_of_the_week_mask: '31',
+  repeat_ends: 'never',
+  repeat_ends_on:  Date.today + 1.year,
+  time_zone: 'UTC'
+)
 
 event = Event.find_by(name: 'evening event')
 project = Project.find_by(title: localsupport.title)
