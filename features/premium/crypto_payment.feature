@@ -18,7 +18,7 @@ Feature: Allow payment of Premium with crypto
 	 	Given I exist as a user
 	  Given I am logged in
 	  When I go to the new subscriptions page
-	  And I click "Pay with Crypto currency"
+	  And I click "Subscribe with Crypto"
 
 
 
