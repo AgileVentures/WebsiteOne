@@ -14,7 +14,7 @@ Feature: Allow payment of Premium with crypto
 	  When I go to the new subscriptions page
 	  Then I should see text "Get Premium with Crypto currency"
 
-	 Scenario: User able to view addresses to send crypto to
+	Scenario: User able to view addresses to send crypto to
 	 	Given I exist as a user
 	  Given I am logged in
 	  When I go to the new subscriptions page
