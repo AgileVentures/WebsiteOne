@@ -33,6 +33,23 @@
             </li>
           </ul>
         </div>
+        <div class="col-xs-12 col-sm-6">
+          <%  if @recent_hangout.try(:live?) %>
+            <% if show_live_events? %>
+              <div class="pull-right">
+                <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
+              </div>
+            <% else %>
+              <div>
+                <%= link_to 'THIS EVENT IS LIVE, UPGRADE NOW TO JOIN', new_subscription_path, class: 'btn btn-success' %>
+              </div>
+            <% end %>
+          <% elsif @event.try :within_current_event_duration? %>
+            <div class="event-notice">
+              It's time! Please start the event.
+            </div>
+          <% end %>
+        </div>
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         <% if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
@@ -50,6 +67,7 @@
         <% end %>
     <% end %>
   </div>
+
 </div>
 
 <hr/>
@@ -110,24 +128,6 @@
       </div>
     </div>
   <% end %>
-
-  <div class="col-xs-12 col-sm-6">
-    <%  if @recent_hangout.try(:live?) %>
-      <% if show_live_events? %>
-        <div class="pull-right">
-          <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
-        </div>
-      <% else %>
-        <div>
-          <%= link_to 'THIS EVENT IS LIVE, UPGRADE NOW TO JOIN', new_subscription_path %>
-        </div>
-      <% end %>
-    <% elsif @event.try :within_current_event_duration? %>
-      <div class="event-notice">
-        It's time! Please start the event.
-      </div>
-    <% end %>
-  </div>
 </div>
 <% if user_signed_in? %>
 
