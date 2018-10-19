@@ -7,6 +7,9 @@ WebsiteOne::Application.routes.draw do
   apipie
   mount Mercury::Engine => '/'
 
+  mount Events::API => '/'
+  mount EventInstances::API => '/'
+
   root 'visitors#index'
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
@@ -61,8 +64,6 @@ WebsiteOne::Application.routes.draw do
       patch :update_only_url
     end
   end
-
-  mount Events::API => '/'
 
   scope '/api' do
     scope '/subscriptions' do
