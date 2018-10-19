@@ -1,3 +1,6 @@
+require 'slack'
+require 'gitter'
+
 class HangoutNotificationService
   def self.with(hangout,
                 slack_client = Slack::Web::Client.new(logger: Rails.logger),

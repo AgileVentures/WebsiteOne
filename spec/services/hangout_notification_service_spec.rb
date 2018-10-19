@@ -178,7 +178,7 @@ describe HangoutNotificationService do
         expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_notification_post_args).once
         expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_trialists_notification_post_args).once
         
-        hangout_notification_service.with(premium_mob_hangout, slack_client, gitter_client)
+        hangout_notification_service.with(premium_mob_hangout, slack_client)
       end
 
       it 'does not post hangout url to public channels' do
@@ -186,7 +186,7 @@ describe HangoutNotificationService do
         expect(slack_client).not_to receive(:chat_postMessage).with hash_including(channel: pairing_notifications_channel_id)
         expect(slack_client).not_to receive(:chat_postMessage).with hash_including(channel: websiteone_channel_id)
         
-        hangout_notification_service.with(premium_mob_hangout, slack_client, gitter_client)
+        hangout_notification_service.with(premium_mob_hangout, slack_client)
       end
     end
   end

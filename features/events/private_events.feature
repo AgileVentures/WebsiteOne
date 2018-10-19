@@ -17,22 +17,22 @@ Feature: Private Events
             | Premium Plus | premiumplus | 10000  | 0                      |
 
     Scenario Outline: show mob hangout links to users with correct plans
-        Given the date is "2014/02/03 10:26:00 UTC"
-        Given I am logged in as a user with "<plan>"
-        Given the Hangout for event "Mob" has been started with details:
-            | EventInstance link | http://hangout.test |
-            | Started at         | 10:25:00 UTC        |
-        And the time now is "10:26:00 UTC"
-        When I am on the show page for event "Mob"
-        Then I <assertion> see a link "JOIN THIS LIVE EVENT NOW" to "http://hangout.test"
-        Examples:
-            | plan         | assertion  |
-            | Premium Plus | should     |
-            | Premium F2F  | should     |
-            | Premium Mob  | should     |
-            | Premium      | should not |
-            | Associate    | should not |
-            | Free         | should not |
+      Given the date is "2014/02/03 10:26:00 UTC"
+      Given I am logged in as a user with "<plan>"
+      Given the Hangout for event "Mob" has been started with details:
+          | EventInstance link | http://hangout.test |
+          | Started at         | 10:25:00 UTC        |
+      And the time now is "10:26:00 UTC"
+      When I am on the show page for event "Mob"
+      Then I <assertion> see a link "JOIN THIS LIVE EVENT NOW" to "http://hangout.test"
+      Examples:
+          | plan         | assertion  |
+          | Premium Plus | should     |
+          | Premium F2F  | should     |
+          | Premium Mob  | should     |
+          | Premium      | should not |
+          | Associate    | should not |
+          | Free         | should not |
         
     Scenario: Edit hangout url for private event pings only appropriate private channels
       Given I have logged in
