@@ -3,78 +3,86 @@
   <%= render 'layouts/escalating_call_to_action' %>
       <!-- BEGIN LIST ELEMENT -->
   <li class="hidden-sm hidden-xs hidden-md">
-    <div class="circle">
-      <div class="front front-popular">
-        <div class="title color-1-font glyphicon glyphicon-star"></div>
-        <div class="price color-1-font"><span class="total">LEARN</span></div>
-        <div class="description">Meet people online</div>
-      </div><!-- end div .front -->
-      <div class="popular color-1-font glyphicon glyphicon-star"></div>
-      <div class="back color-1-bg info">
-        <div class="title">Learn</div>
-        <div class="description">
-          <p>Super charge your learning by collaborating with others</p>
-          <%= link_to 'Read more..', static_page_path('Learn'), class: 'btn btn-danger' %>
-        </div><!-- end div .description -->
-      </div><!-- end div .back color-1-bg info -->
-    </div><!-- end div .circle -->
+    <%= link_to static_page_path('Learn') do %>
+      <div class="circle">
+        <div class="front front-popular">
+          <div class="title color-1-font glyphicon glyphicon-star"></div>
+          <div class="price color-1-font"><span class="total">LEARN</span></div>
+          <div class="description">Meet people online</div>
+        </div><!-- end div .front -->
+        <div class="popular color-1-font glyphicon glyphicon-star"></div>
+        <div class="back color-1-bg info">
+          <div class="title">Learn</div>
+          <div class="description">
+            <p>Super charge your learning by collaborating with others</p>
+            <%= link_to 'Read more..', static_page_path('Learn'), class: 'btn btn-danger' %>
+          </div><!-- end div .description -->
+        </div><!-- end div .back color-1-bg info -->
+      </div><!-- end div .circle -->
+    <% end %>
   </li>
   <!-- END LIST ELEMENT -->
   <!-- BEGIN LIST ELEMENT -->
   <li class="hidden-sm hidden-xs hidden-md">
-    <div class="circle">
-      <div class="front front-popular">
-        <div class="title color-2-font glyphicon glyphicon-user"></div>
-        <div class="price color-2-font"><span class="total">CODE</span></div>
-        <div class="description">Collaborate online</div>
-      </div><!-- end div .front -->
-      <div class="popular color-2-font glyphicon glyphicon-user"></div>
-      <div class="back color-2-bg info">
-        <div class="title">Code</div>
-        <div class="description">
-          <p>Develop your team skills</p>
-          <%= link_to 'Read more..', static_page_path('Code'), class: 'btn btn-primary' %>
-        </div><!-- end div .description -->
-      </div><!-- end div .back color-1-bg info -->
-    </div><!-- end div .circle -->
+    <%= link_to static_page_path('Code') do %>
+      <div class="circle">
+        <div class="front front-popular">
+          <div class="title color-2-font glyphicon glyphicon-user"></div>
+          <div class="price color-2-font"><span class="total">CODE</span></div>
+          <div class="description">Collaborate online</div>
+        </div><!-- end div .front -->
+        <div class="popular color-2-font glyphicon glyphicon-user"></div>
+        <div class="back color-2-bg info">
+          <div class="title">Code</div>
+          <div class="description">
+            <p>Develop your team skills</p>
+            <%= link_to 'Read more..', static_page_path('Code'), class: 'btn btn-primary' %>
+          </div><!-- end div .description -->
+        </div><!-- end div .back color-1-bg info -->
+      </div><!-- end div .circle -->
+    <% end %>
   </li>
   <!-- END LIST ELEMENT -->
   <!-- BEGIN LIST ELEMENT -->
   <li class="hidden-sm hidden-xs hidden-md">
-    <div class="circle">
-      <div class="front front-popular">
-        <div class="title color-4-font glyphicon glyphicon-time"></div>
-        <div class="price color-4-font"><span class="total">PAIR</span></div>
-        <div class="description">Work on projects</div>
-      </div><!-- end div .front -->
-      <div class="popular color-4-font glyphicon glyphicon-time"></div>
-      <div class="back color-4-bg info">
-        <div class="title">Pair</div>
-        <div class="description">
-          <p>Remote Pairing FTW!</p>
-          <%= link_to 'Read more..', static_page_path('Pair'), class: 'btn btn-warning' %>
-        </div><!-- end div .description -->
-      </div><!-- end div .back color-4-bg info -->
-    </div><!-- end div .circle -->
+    <%= link_to static_page_path('Pair') do %>
+      <div class="circle">
+        <div class="front front-popular">
+          <div class="title color-4-font glyphicon glyphicon-time"></div>
+          <div class="price color-4-font"><span class="total">PAIR</span></div>
+          <div class="description">Work on projects</div>
+        </div><!-- end div .front -->
+        <div class="popular color-4-font glyphicon glyphicon-time"></div>
+        <div class="back color-4-bg info">
+          <div class="title">Pair</div>
+          <div class="description">
+            <p>Remote Pairing FTW!</p>
+            <%= link_to 'Read more..', static_page_path('Pair'), class: 'btn btn-warning' %>
+          </div><!-- end div .description -->
+        </div><!-- end div .back color-4-bg info -->
+      </div><!-- end div .circle -->
+    <% end %>
   </li>
   <!-- END LIST ELEMENT -->
   <!-- BEGIN LIST ELEMENT -->
   <li class="hidden-sm hidden-xs hidden-md">
-    <div class="circle">
-      <div class="front front-popular">
-        <div class="title color-3-font glyphicon glyphicon-tag"></div>
-        <div class="price color-3-font"><span class="total">GROW</span></div>
-        <div class="description">Use Agile methods</div>
-      </div><!-- end div .front -->
-      <div class="popular color-3-font glyphicon glyphicon-tag"></div>
-      <div class="back color-3-bg info">
-        <div class="title">Grow</div>
-        <div class="description">
-          <p>Build your agile arsenal</p>
-          <%= link_to 'Read more..', static_page_path('Grow'), class: 'btn btn-success' %>
-        </div><!-- end div .description -->
-      </div><!-- end div .back color-3-bg info -->
-    </div><!-- end div .circle -->
+    <%= link_to static_page_path('Grow') do %>
+      <div class="circle">
+        <div class="front front-popular">
+          <div class="title color-3-font glyphicon glyphicon-tag"></div>
+          <div class="price color-3-font"><span class="total">GROW</span></div>
+          <div class="description">Use Agile methods</div>
+        </div><!-- end div .front -->
+        <div class="popular color-3-font glyphicon glyphicon-tag"></div>
+        <div class="back color-3-bg info">
+          <div class="title">Grow</div>
+          <div class="description">
+            <p>Build your agile arsenal</p>
+            <%= link_to 'Read more..', static_page_path('Grow'), class: 'btn btn-success' %>
+          </div><!-- end div .description -->
+        </div><!-- end div .back color-3-bg info -->
+      </div><!-- end div .circle -->
+    <% end %>
   </li>
   <!-- END LIST ELEMENT -->
   <%= render partial: 'layouts/event_link', locals: {event: @event} %>
