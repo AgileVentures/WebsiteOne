@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :article do
     sequence(:title) {|n| "Title #{n}"}
-    content Faker::Lorem.paragraph(1)
-    tag_list [ 'Ruby' ]
+    content { Faker::Lorem.paragraph(1) }
+    tag_list { [ 'Ruby' ] }
     slug { title.parameterize }
     user
   end

@@ -17,7 +17,7 @@ Feature: Update github stats of all projects
       Then I should see projects looked up by title with the correct commit count:
       | title        | commit_count |
       | WebsiteTwo   | 95           |
-      | WebsiteOne   | 4254         |
+      | WebsiteOne   | 4393         |
       | edx          | 1            |
       | Unity        | 1            |
-      | LocalSupport | 3707         |
+      | LocalSupport | 3812         |

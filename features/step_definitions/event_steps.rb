@@ -2,6 +2,20 @@ Given(/^I visit the edit page for the event named "(.*?)"$/) do |event_name|
   visit edit_event_path(Event.find_by(name: event_name))
 end
 
+Given /^the "([^"]*)" "([^"]*)" event exists$/ do |event_name, repeat|
+  Event.create name: event_name,
+               category: "Scrum",
+               description: "we stand up",
+               repeats: repeat,
+               repeats_every_n_weeks: 1,
+               repeats_weekly_each_days_of_the_week_mask: 9,
+               repeat_ends: true,
+               repeat_ends_on: "Fri, 04 Mar 2016",
+               time_zone: "UTC",
+               start_datetime: "Tue, 04 Feb 2014 09:00:00 UTC +00:00",
+               duration: 30
+end
+
 Then(/^the "(.*?)" selector should be set to "(.*?)"$/) do |selector, value|
   #note: expect(page).to have_select(selector, selected: "on") passes right now which encodes the error
   #delete this after finishing this feature
@@ -83,6 +97,12 @@ When(/^the next event should be in:$/) do |table|
   table.rows.each do |period, interval|
     expect(page).to have_content([period, interval].join(' '))
   end
+end
+
+Given(/^"([^"]*)" created the "([^"]*)" event with an event instance "([^"]*)"$/) do |user_name, event_name, event_instance_name|
+  user = User.find_by(first_name: user_name)
+  event = Event.create!(name: event_name, category: "PairProgramming", description: "Pairing together", repeats: "never", repeats_every_n_weeks: 1, repeats_weekly_each_days_of_the_week_mask: 0, repeat_ends: true, time_zone: "UTC", created_at: "2018-09-05 00:49:47", updated_at: "2018-09-05 04:12:15", start_datetime: "2018-09-06 07:00:00", duration: 30, creator_id: user.id)
+  EventInstance.create!(event_id: event.id, title: event_instance_name, hangout_url: "https://hangouts.google.com/call/BxivVrWsi_HEyfRVa...", created_at: "2018-09-05 03:22:02", updated_at: "2018-09-05 03:30:20", category: "PairProgramming", url_set_directly: true, yt_video_id: "hx7c0P0qKWc")
 end
 
 Given(/^I am on the show page for event "([^"]*)"$/) do |name|
@@ -314,7 +334,7 @@ end
 
 Then(/^the event should (still )?be live$/) do |ignore|
   visit event_path(@event)
-  expect(page).to have_content('This event is now live!')
+  expect(page).to have_content('JOIN THIS LIVE EVENT NOW')
 end
 
 And(/^after three (more )?minutes$/) do |ignore|
@@ -337,7 +357,7 @@ end
 
 Then(/^the event should be dead$/) do
   visit event_path(@event)
-  expect(page).not_to have_content('This event is now live!')
+  expect(page).not_to have_content('JOIN THIS LIVE EVENT NOW')
 end
 
 Given(/^the event "([^"]*)"$/) do |name|
@@ -401,4 +421,18 @@ end
 
 Then(/^I should see (\d+) "([^"]*)" events$/) do |number, event|
   expect(page.all(:css, 'a', text: event, visible: false).count).to be == number.to_i
+end
+
+When(/^I am creating an event$/) do
+  step %(I dropdown the "Events" menu)
+  step %(I click "Create event")
+  step %(I fill in "Name" with "mob")
+end
+
+Given(/^the following event instances exist:$/) do |table|
+  table.hashes.each do |hash|
+    hash[:event] = Event.find_by name: hash[:event]
+    hash[:project] = Project.find_by title: hash[:project]
+    EventInstance.create hash
+  end
 end

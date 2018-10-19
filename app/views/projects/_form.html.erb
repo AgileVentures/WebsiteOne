@@ -22,6 +22,8 @@
 
       <%= awesome_text_field f, :pivotaltracker_url, label_text: 'Issue Tracker link', placeholder: 'https://www.pivotaltracker.com/s/projects/id' %>
 
+      <%= awesome_text_field f, :slack_channel_name, label_text: 'Slack channel name', placeholder: 'project_slack_channel_name' %>
+
       <% if @project.new_record? %>
         <div class="form-group">
           <h3>New project checklist</h3>

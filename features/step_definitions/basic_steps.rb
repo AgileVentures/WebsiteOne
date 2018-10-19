@@ -58,6 +58,10 @@ def path_to(page_name, id = '')
       new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
+    when 'av dashboard token' then
+      get_av_dashboard_token_path
+    when 'event' then
+      event_path(id: id)
     else
       raise('path to specified is not listed in #path_to')
   end
@@ -81,6 +85,11 @@ end
 # WHEN steps
 When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
   visit path_to(page)
+end
+
+When(/^I (?:go to|am on) the "([^"]*)" event page$/) do |name|
+  id = Event.find_by_name(name).id
+  visit path_to('event', id)
 end
 
 When(/^(?:when I|I) click "([^"]*)"$/) do |text|
@@ -168,8 +177,12 @@ Then /^I should see link "([^"]*)" with "([^"]*)"$/ do |link, url|
   expect(page).to have_link(link, href: url)
 end
 
-Then(/^I should not see a link "([^"]*)" to "([^"]*)"$/) do |link, url|
-  expect(page).to_not have_link(link, href: url)
+Then(/^I should( not)? see a link "([^"]*)" to "([^"]*)"$/) do |negate, link, url|
+  if negate
+    expect(page).to have_no_link(link, href: url)
+  else
+    expect(page).to have_link(link, href: url)
+  end
 end
 
 Then /^I should be on the "([^"]*)" page$/ do |page|
@@ -266,6 +279,10 @@ When(/^I select "([^"]*)" to "([^"]*)"$/) do |field, option|
   find(:select, field).find(:option, option).select_option
 end
 
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |option, field|
+  select option, from: field, visible: false
+end
+
 Then(/^I should see the sidebar$/) do
   page.find(:css, '#sidebar')
 end
@@ -350,10 +367,9 @@ Then(/^I should see a link to past events$/) do
   assert_link_exists(hangouts_path, "Past events")
 end
 
-
-Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-  expect(page).to have_css "a[href='#{link}']", text: text
-end
+# Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
+#   expect(page).to have_link text, href: link
+# end
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
   expect(page).to have_css "img[src*=\"#{source}\"]"
@@ -391,7 +407,6 @@ Given(/^I am on a (.*)/) do |device|
   page.driver.headers = { 'User-Agent' => agent }
 end
 
-
 And(/^I debug$/) do
   byebug
 end
@@ -400,7 +415,32 @@ And(/^I remote debug/) do
   page.driver.debug
 end
 
-
 And(/^the window size is wide$/) do
   Capybara.page.current_window.resize_to(1300,400)
+end
+
+When(/^I toggle to( Cannot)? Attend$/) do |negated|
+  find("#attendance_checkbox", visible: false).trigger('click')
+end
+
+
+When(/^I scroll to the bottom of the page$/) do
+  page.execute_script "window.scrollBy(0,10000)"
+end
+
+Then(/^I should( not)? see "([^"]*)" within "([^"]*)"$/) do |negated, project_title, project_list_area|
+  within("##{project_list_area}") do
+    if negated
+      expect(page).to_not have_content(project_title)
+    else
+      expect(page).to have_content(project_title)
+    end
+  end
+end
+
+Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_list_area, table|
+  table.rows.each do |row|
+    project_title = row.first
+    step %Q{I should see "#{project_title}" within "#{project_list_area}"}
+  end
 end

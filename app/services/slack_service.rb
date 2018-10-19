@@ -7,41 +7,22 @@ module SlackService
   def post_hangout_notification(hangout,
                                 slack_client = Slack::Web::Client.new(logger: Rails.logger),
                                 gitter_client = Gitter::Client.new(ENV['GITTER_API_TOKEN']))
-
     return unless Features.slack.notifications.enabled
     return if hangout.hangout_url.blank?
+    
+    channels = channels_for_project(hangout.project) # hangout.project.slack_channel
+    @message = "#{hangout.title}: <#{hangout.hangout_url}|click to join>"
+    @here_message = "@here #{@message}"
+    @channel_message = "@channel #{@message}"
 
-    channels = channels_for_project(hangout.project)
-
-    message = "#{hangout.title}: <#{hangout.hangout_url}|click to join>"
-    here_message = "@here #{message}"
-    channel_message = "@channel #{message}"
-
-    if hangout.category == "Scrum"
-      send_slack_message slack_client, [CHANNELS[:general]], here_message, hangout.user
-      send_slack_message slack_client, [CHANNELS[:standup_notifications]], channel_message, hangout.user
-
-    elsif hangout.category == "PairProgramming"
-
-      if channels.include? CHANNELS[:cs169]
-        # puts("sending PP event to gitter: #{channel}")
-        send_gitter_message_avoid_repeats gitter_client, "[#{hangout.title} with #{hangout.user.display_name}](#{hangout.hangout_url}) is starting NOW!"
-      else
-        send_slack_message slack_client, [CHANNELS[:general]], here_message, hangout.user
-        # puts("sending PP event to slack: #{channel}")
-      end
-      send_slack_message slack_client, [CHANNELS[:pairing_notifications]], channel_message, hangout.user
-    end
-    # send all types of events to associated project "channel" if there is one
-    if channels
-      send_slack_message slack_client, channels, here_message, hangout.user
-    end
+    send_notifications slack_client, gitter_client, hangout, channels
   end
 
   def send_slack_message(client, channels, text, user)
     channels.each do |channel|
       unless channel.nil?
-        client.chat_postMessage(channel: channel, text: text, username: user.display_name, icon_url: user.gravatar_url, link_names: 1)
+        client.chat_postMessage(channel: channel, text: text, username: user.display_name,
+                                icon_url: user.gravatar_url, link_names: 1)
       end
     end
   end
@@ -49,28 +30,27 @@ module SlackService
   def send_gitter_message_avoid_repeats(gitter_client, text)
     messages = gitter_client.messages(GITTER_ROOMS[:'saasbook/MOOC'], limit: 50)
     return if messages.include? text
-
     gitter_client.send_message(text, GITTER_ROOMS[:'saasbook/MOOC'])
   end
 
-  def post_yt_link(hangout, client = Slack::Web::Client.new(logger: Rails.logger))
+  def post_yt_link(hangout, slack_client = Slack::Web::Client.new(logger: Rails.logger))
     return unless Features.slack.notifications.enabled
     return if hangout.yt_video_id.blank?
-
     channels = channels_for_project(hangout.project)
-
+    
     video = "https://youtu.be/#{hangout.yt_video_id}"
-    message = "Video/Livestream: <#{video}|click to play>"
-
+    @yt_message = "Video/Livestream: <#{video}|click to play>"
+    
+    return post_premium_mob_yt_notification(slack_client, hangout) if hangout.for == 'Premium Mob Members'
     if hangout.category == "Scrum"
-      send_slack_message client, [CHANNELS[:general]], message, hangout.user
+      send_slack_message slack_client, [CHANNELS[:general]], @yt_message, hangout.user
     elsif hangout.category == "PairProgramming"
       unless channels.include? CHANNELS[:cs169]
-        send_slack_message client, [CHANNELS[:general]], message, hangout.user
+        send_slack_message slack_client, [CHANNELS[:general]], @yt_message, hangout.user
       end
     end
 
-    send_slack_message client, channels, message, hangout.user if channels
+    send_slack_message slack_client, channels, @yt_message, hangout.user if channels
 
   end
 
@@ -109,7 +89,9 @@ module SlackService
         "wiki-ed-dashboard": "C36MNPWTD",
         "general": "C0285CSUF",
         "pairing_notifications": "C02BNVCM1",
-        "standup_notifications": "C02B4QH1C"
+        "standup_notifications": "C02B4QH1C",
+        "premium_mob_trialists": "GBNRMP4KH",
+        "premium_extra": "G33RPEG8K"
     }
     GITTER_ROOMS = {
         "saasbook/MOOC": "544100afdb8155e6700cc5e4",
@@ -125,6 +107,8 @@ module SlackService
         "general": "C0TLAE1MH",
         "pairing_notifications": "C29J3DPGW",
         "standup_notifications": "C29JE6HGR",
+        "premium_extra": "C29J4QQ9M",
+        "premium_mob_trialists": "C29J4QQ9F"
     }
 
     GITTER_ROOMS = {
@@ -142,5 +126,46 @@ module SlackService
     result = CHANNELS[project.try(:slug).to_sym]
     return [result] unless result.respond_to? :each
     result
+  end
+
+  def post_scrum_notification slack_client, gitter_client, hangout
+    send_slack_message slack_client, [CHANNELS[:general]], @here_message, hangout.user
+    send_slack_message slack_client, [CHANNELS[:standup_notifications]],
+                       @channel_message, hangout.user
+  end
+
+  def post_pair_programming_notification channels, slack_client, gitter_client, hangout
+    if channels.include? CHANNELS[:cs169]
+      message = "[#{hangout.title} with #{hangout.user.display_name}](#{hangout.hangout_url})"
+      message << " is starting NOW!"
+      # puts("sending PP event to gitter: #{channel}")
+      send_gitter_message_avoid_repeats gitter_client, message
+    else
+      send_slack_message slack_client, [CHANNELS[:general]], @here_message, hangout.user
+      # puts("sending PP event to slack: #{channel}")
+    end
+    send_slack_message slack_client, [CHANNELS[:pairing_notifications]],
+                       @channel_message, hangout.user
+  end
+
+  def post_premium_mob_yt_notification slack_client, hangout
+    send_slack_message slack_client, [CHANNELS[:premium_extra]], @yt_message, hangout.user
+  end
+
+  def post_premium_mob_hangout_notification slack_client, hangout
+    send_slack_message slack_client, [CHANNELS[:premium_extra], CHANNELS[:premium_mob_trialists]], @here_message, hangout.user
+  end
+
+  def send_notifications slack_client, gitter_client, hangout, channels
+    return post_premium_mob_hangout_notification(slack_client, hangout) if hangout.for == 'Premium Mob Members' # demeter violation SOLID principles
+    case hangout.category
+    when "Scrum"
+      post_scrum_notification slack_client, gitter_client, hangout
+    when "PairProgramming"
+      post_pair_programming_notification channels, slack_client, gitter_client, hangout
+    end
+
+    # send all types of events to associated project "channel" if there is one
+    send_slack_message slack_client, channels, @here_message, hangout.user
   end
 end

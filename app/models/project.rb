@@ -15,12 +15,19 @@ class Project < ApplicationRecord
   has_many :event_instances
   has_many :commit_counts
   has_many :source_repositories
+  has_and_belongs_to_many :languages
+
   accepts_nested_attributes_for :source_repositories, reject_if: :all_blank, allow_destroy: true
 
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
   scope :active, -> { where("status ILIKE ?", "%active%") }
+  scope :search_by_language, ->(search) {
+    includes(:languages)
+      .where("languages.name ILIKE ?", "#{search}")
+      .references(:languages)
+  }
 
   def self.with_github_url
     includes(:source_repositories)
@@ -40,6 +47,10 @@ class Project < ApplicationRecord
 
   def github_url
     source_repositories.first.try(:url)
+  end
+
+  def slack_channel
+    "https://agileventures.slack.com/app_redirect?channel=#{slack_channel_name}"
   end
 
   def youtube_tags
@@ -92,7 +103,7 @@ class Project < ApplicationRecord
   def jitsi_room_link
     "https://meet.jit.si/AV_#{title.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
   end
-  
+
   def send_notification_to_project_creator(user)
     Mailer.alert_project_creator_about_new_member(self, user).deliver_now if User.find(user_id).receive_mailings
   end

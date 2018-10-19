@@ -5,23 +5,8 @@ Feature: Editing an event with start date in the past
   I would like to edit event details
 
   Background:
-    Given the date is "2016/02/01 09:15:00 UTC"
-    And I am logged in
-    And I am on Events index page
-    When I click "New Event"
-    And I select "Repeats" to "weekly"
-    And I check "Monday"
-    And I check "Thursday"
-    Given I fill in event field:
-      | name        | value         |
-      | Name        | Daily Standup |
-      | Start Date  | 2014-02-04    |
-      | Start Time  | 09:00         |
-      | Description | we stand up   |
-      | End Date    | 2016-03-04    |
-    Then the event is set to end sometime
-    And I click on the "repeat_ends_on" div
-    And I click the "Save" button
+    Given I have logged in
+    And the "Daily Standup" "weekly" event exists
     And I am on Events index page
 
   Scenario: Check that edit page reflects initial settings

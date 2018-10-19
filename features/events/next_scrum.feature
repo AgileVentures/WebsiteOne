@@ -21,7 +21,7 @@ Feature: Visibility to the next scrum
       | title       | description          | status |
       | WebsiteOne  | greetings earthlings | active |
       | Autograders | greetings earthlings | active |
-    And I am logged in
+    And I have logged in
 
   @time-travel-step
   Scenario: Next upcoming scrum on home page

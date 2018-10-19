@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.github.com/repos/AgileVentures/WebsiteOne/contents/PITCH.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    uri: https://api.github.com/repos/AgileVentures/WebsiteOne/contents/PITCH.md?client_id=<GITHUB_CLIENT_ID>&client_secret=<GITHUB_CLIENT_SECRET>
     body:
       encoding: US-ASCII
       string: ''
@@ -10,7 +10,7 @@ http_interactions:
       Accept:
       - application/vnd.github.html
       User-Agent:
-      - Octokit Ruby Gem 4.8.0
+      - Octokit Ruby Gem 4.13.0
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 03 May 2018 07:25:05 GMT
+      - Tue, 16 Oct 2018 21:10:57 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,9 +33,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4999'
+      - '4949'
       X-Ratelimit-Reset:
-      - '1525335905'
+      - '1539726507'
       X-Github-Media-Type:
       - github.v3; param=html
       Access-Control-Expose-Headers:
@@ -55,18 +55,16 @@ http_interactions:
       - origin-when-cross-origin, strict-origin-when-cross-origin
       Content-Security-Policy:
       - default-src 'none'
-      X-Runtime-Rack:
-      - '0.045380'
       X-Github-Request-Id:
-      - 8194:64A2:11444AD:22B105A:5AEAB951
+      - DF4E:65ED:1C2D6B1:3AE65F6:5BC653E0
     body:
       encoding: ASCII-8BIT
       string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
     http_version: 
-  recorded_at: Thu, 03 May 2018 07:25:05 GMT
+  recorded_at: Tue, 16 Oct 2018 21:10:57 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/AgileVentures/WebsiteOne/contents/README.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    uri: https://api.github.com/repos/AgileVentures/WebsiteOne/contents/README.md?client_id=<GITHUB_CLIENT_ID>&client_secret=<GITHUB_CLIENT_SECRET>
     body:
       encoding: US-ASCII
       string: ''
@@ -74,7 +72,7 @@ http_interactions:
       Accept:
       - application/vnd.github.html
       User-Agent:
-      - Octokit Ruby Gem 4.8.0
+      - Octokit Ruby Gem 4.13.0
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -87,7 +85,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 03 May 2018 07:25:06 GMT
+      - Tue, 16 Oct 2018 21:10:57 GMT
       Content-Type:
       - application/vnd.github.html; charset=utf-8
       Content-Length:
@@ -97,17 +95,17 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4998'
+      - '4948'
       X-Ratelimit-Reset:
-      - '1525335905'
+      - '1539726507'
       Cache-Control:
       - public, max-age=60, s-maxage=60
       Vary:
       - Accept
       Etag:
-      - '"8df66f1cb7dc78e22f87f87f70bcbf2bcbf1dcec"'
+      - '"6fc6960f9a492dd3c8009f0185daa10b32da4792"'
       Last-Modified:
-      - Thu, 03 May 2018 07:04:41 GMT
+      - Tue, 16 Oct 2018 15:39:50 GMT
       X-Github-Media-Type:
       - github.v3; param=html
       Access-Control-Expose-Headers:
@@ -127,18 +125,17 @@ http_interactions:
       - origin-when-cross-origin, strict-origin-when-cross-origin
       Content-Security-Policy:
       - default-src 'none'
-      X-Runtime-Rack:
-      - '0.057029'
       X-Github-Request-Id:
-      - 8196:649F:908CBB:1531A1D:5AEAB951
+      - A756:65ED:1C2D6C9:3AE6625:5BC653E1
     body:
       encoding: ASCII-8BIT
-      string: "<h1>AgileVentures WebSiteOne</h1>"
+      string: !binary |-
+        PGRpdiBpZD0iZmlsZSIgY2xhc3M9Imluc3RhcGFwZXJfYm9keSBtZCIgZGF0YS1wYXRoPSJSRUFETUUubWQiPjxhcnRpY2xlIGNsYXNzPSJtYXJrZG93bi1ib2R5IGVudHJ5LWNvbnRlbnQiIGl0ZW1wcm9wPSJ0ZXh0Ij48cD48YSBocmVmPSJodHRwczovL3NlbWFwaG9yZWNpLmNvbS9hZ2lsZXZlbnR1cmVzL3dlYnNpdGVvbmUiIHJlbD0ibm9mb2xsb3ciPjxpbWcgc3JjPSJodHRwczovL2NhbW8uZ2l0aHVidXNlcmNvbnRlbnQuY29tL2U5MmUzYTllY2Q3OGFkODRiYzQwYTNmMzJkOTMwZGZhYmRlNDY2ODEvNjg3NDc0NzA3MzNhMmYyZjczNjU2ZDYxNzA2ODZmNzI2NTYzNjkyZTYzNmY2ZDJmNjE3MDY5MmY3NjMxMmY2MTY3Njk2YzY1NzY2NTZlNzQ3NTcyNjU3MzJmNzc2NTYyNzM2OTc0NjU2ZjZlNjUyZjYyNzI2MTZlNjM2ODY1NzMyZjMxMzAzNTM4NWY2MTY0NjQ1ZjY3NmY2ZjY3NmM2NTVmNjM2MTZjNjU2ZTY0NjE3MjVmNmM2OTZlNmIyZjczNjg2OTY1NmM2NDczNWY2MjYxNjQ2NzY1MmU3Mzc2NjciIGFsdD0iQnVpbGQgU3RhdHVzIiBkYXRhLWNhbm9uaWNhbC1zcmM9Imh0dHBzOi8vc2VtYXBob3JlY2kuY29tL2FwaS92MS9hZ2lsZXZlbnR1cmVzL3dlYnNpdGVvbmUvYnJhbmNoZXMvMTA1OF9hZGRfZ29vZ2xlX2NhbGVuZGFyX2xpbmsvc2hpZWxkc19iYWRnZS5zdmciIHN0eWxlPSJtYXgtd2lkdGg6MTAwJTsiPjwvYT4gPGEgaHJlZj0iaHR0cHM6Ly9jb2RlY2xpbWF0ZS5jb20vZ2l0aHViL0FnaWxlVmVudHVyZXMvV2Vic2l0ZU9uZS9tYWludGFpbmFiaWxpdHkiIHJlbD0ibm9mb2xsb3ciPjxpbWcgc3JjPSJodHRwczovL2NhbW8uZ2l0aHVidXNlcmNvbnRlbnQuY29tLzZkYzE3NjYyNjVkMWUwZDc1MGZlMTJhMjBhNWVjNmFmZTczYmZlMWMvNjg3NDc0NzA3MzNhMmYyZjYxNzA2OTJlNjM2ZjY0NjU2MzZjNjk2ZDYxNzQ2NTJlNjM2ZjZkMmY3NjMxMmY2MjYxNjQ2NzY1NzMyZjM4NjI2MjY2NjY2MTY1NjYzNjM4NjUzNzMzMzQzMjMyNjM2MTM0MzAyZjZkNjE2OTZlNzQ2MTY5NmU2MTYyNjk2YzY5NzQ3OSIgYWx0PSJNYWludGFpbmFiaWxpdHkiIGRhdGEtY2Fub25pY2FsLXNyYz0iaHR0cHM6Ly9hcGkuY29kZWNsaW1hdGUuY29tL3YxL2JhZGdlcy84YmJmZmFlZjY4ZTczNDIyY2E0MC9tYWludGFpbmFiaWxpdHkiIHN0eWxlPSJtYXgtd2lkdGg6MTAwJTsiPjwvYT4gPGEgaHJlZj0iaHR0cHM6Ly9jb2RlY2xpbWF0ZS5jb20vZ2l0aHViL0FnaWxlVmVudHVyZXMvV2Vic2l0ZU9uZS90ZXN0X2NvdmVyYWdlIiByZWw9Im5vZm9sbG93Ij48aW1nIHNyYz0iaHR0cHM6Ly9jYW1vLmdpdGh1YnVzZXJjb250ZW50LmNvbS9kZDEwZTYwODFjZTFkMmY2MGUxNjYzNDg1MDk4OGE5NTc0M2I4NWRlLzY4NzQ3NDcwNzMzYTJmMmY2MTcwNjkyZTYzNmY2NDY1NjM2YzY5NmQ2MTc0NjUyZTYzNmY2ZDJmNzYzMTJmNjI2MTY0Njc2NTczMmYzODYyNjI2NjY2NjE2NTY2MzYzODY1MzczMzM0MzIzMjYzNjEzNDMwMmY3NDY1NzM3NDVmNjM2Zjc2NjU3MjYxNjc2NSIgYWx0PSJUZXN0IENvdmVyYWdlIiBkYXRhLWNhbm9uaWNhbC1zcmM9Imh0dHBzOi8vYXBpLmNvZGVjbGltYXRlLmNvbS92MS9iYWRnZXMvOGJiZmZhZWY2OGU3MzQyMmNhNDAvdGVzdF9jb3ZlcmFnZSIgc3R5bGU9Im1heC13aWR0aDoxMDAlOyI+PC9hPjwvcD4KPGgxPjxhIGlkPSJ1c2VyLWNvbnRlbnQtYWdpbGV2ZW50dXJlcy13ZWJzaXRlb25lIiBjbGFzcz0iYW5jaG9yIiBhcmlhLWhpZGRlbj0idHJ1ZSIgaHJlZj0iI2FnaWxldmVudHVyZXMtd2Vic2l0ZW9uZSI+PHN2ZyBjbGFzcz0ib2N0aWNvbiBvY3RpY29uLWxpbmsiIHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00IDloMXYxSDRjLTEuNSAwLTMtMS42OS0zLTMuNVMyLjU1IDMgNCAzaDRjMS40NSAwIDMgMS42OSAzIDMuNSAwIDEuNDEtLjkxIDIuNzItMiAzLjI1VjguNTljLjU4LS40NSAxLTEuMjcgMS0yLjA5QzEwIDUuMjIgOC45OCA0IDggNEg0Yy0uOTggMC0yIDEuMjItMiAyLjVTMyA5IDQgOXptOS0zaC0xdjFoMWMxIDAgMiAxLjIyIDIgMi41UzEzLjk4IDEyIDEzIDEySDljLS45OCAwLTItMS4yMi0yLTIuNSAwLS44My40Mi0xLjY0IDEtMi4wOVY2LjI1Yy0xLjA5LjUzLTIgMS44NC0yIDMuMjVDNiAxMS4zMSA3LjU1IDEzIDkgMTNoNGMxLjQ1IDAgMy0xLjY5IDMtMy41UzE0LjUgNiAxMyA2eiI+PC9wYXRoPjwvc3ZnPjwvYT5BZ2lsZVZlbnR1cmVzIFdlYlNpdGVPbmU8L2gxPgo8cD5UaGlzIDxhIGhyZWY9Imh0dHA6Ly9ydWJ5b25yYWlscy5vcmcvIiByZWw9Im5vZm9sbG93Ij5SdWJ5IG9uIFJhaWxzPC9hPiBhcHAgcG93ZXJzIHRoZSA8YSBocmVmPSJodHRwOi8vYWdpbGV2ZW50dXJlcy5vcmcvIiByZWw9Im5vZm9sbG93Ij5BZ2lsZVZlbnR1cmVzIG1haW4gZGV2ZWxvcGVyIHNpdGU8L2E+LCBzaG93aW5nIGxpc3RzIG9mIGFjdGl2ZSA8YSBocmVmPSJodHRwczovL3d3dy5hZ2lsZXZlbnR1cmVzLm9yZy9wcm9qZWN0cyIgcmVsPSJub2ZvbGxvdyI+cHJvamVjdHM8L2E+LCA8YSBocmVmPSJodHRwczovL3d3dy5hZ2lsZXZlbnR1cmVzLm9yZy91c2VycyIgcmVsPSJub2ZvbGxvdyI+bWVtYmVyczwvYT4sIDxhIGhyZWY9Imh0dHBzOi8vd3d3LmFnaWxldmVudHVyZXMub3JnL2V2ZW50cyIgcmVsPSJub2ZvbGxvdyI+dXBjb21pbmcgZXZlbnRzPC9hPiwgPGEgaHJlZj0iaHR0cHM6Ly93d3cuYWdpbGV2ZW50dXJlcy5vcmcvc2NydW1zIiByZWw9Im5vZm9sbG93Ij5wYXN0IGV2ZW50IHJlY29yZGluZ3M8L2E+LCBhcyB3ZWxsIGFzIGFsbCB0aGUgbWFjaGluZXJ5IGZvciA8YSBocmVmPSJodHRwczovL3d3dy5hZ2lsZXZlbnR1cmVzLm9yZy9tZW1iZXJzaGlwLXBsYW5zIiByZWw9Im5vZm9sbG93Ij5QcmVtaXVtIG1lbWJlcnNoaXAgcGF5bWVudHM8L2E+LjwvcD4KPGgyPjxhIGlkPSJ1c2VyLWNvbnRlbnQtaW5zdGFsbGF0aW9uIiBjbGFzcz0iYW5jaG9yIiBhcmlhLWhpZGRlbj0idHJ1ZSIgaHJlZj0iI2luc3RhbGxhdGlvbiI+PHN2ZyBjbGFzcz0ib2N0aWNvbiBvY3RpY29uLWxpbmsiIHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00IDloMXYxSDRjLTEuNSAwLTMtMS42OS0zLTMuNVMyLjU1IDMgNCAzaDRjMS40NSAwIDMgMS42OSAzIDMuNSAwIDEuNDEtLjkxIDIuNzItMiAzLjI1VjguNTljLjU4LS40NSAxLTEuMjcgMS0yLjA5QzEwIDUuMjIgOC45OCA0IDggNEg0Yy0uOTggMC0yIDEuMjItMiAyLjVTMyA5IDQgOXptOS0zaC0xdjFoMWMxIDAgMiAxLjIyIDIgMi41UzEzLjk4IDEyIDEzIDEySDljLS45OCAwLTItMS4yMi0yLTIuNSAwLS44My40Mi0xLjY0IDEtMi4wOVY2LjI1Yy0xLjA5LjUzLTIgMS44NC0yIDMuMjVDNiAxMS4zMSA3LjU1IDEzIDkgMTNoNGMxLjQ1IDAgMy0xLjY5IDMtMy41UzE0LjUgNiAxMyA2eiI+PC9wYXRoPjwvc3ZnPjwvYT5JbnN0YWxsYXRpb248L2gyPgo8cD5TZWUgdGhlIDxhIGhyZWY9ImRvY3MvcHJvamVjdF9zZXR1cC5tZCI+UHJvamVjdCBTZXR1cDwvYT4gZG9jdW1lbnRhdGlvbjwvcD4KPGgyPjxhIGlkPSJ1c2VyLWNvbnRlbnQtdXNhZ2UiIGNsYXNzPSJhbmNob3IiIGFyaWEtaGlkZGVuPSJ0cnVlIiBocmVmPSIjdXNhZ2UiPjxzdmcgY2xhc3M9Im9jdGljb24gb2N0aWNvbi1saW5rIiB2aWV3Qm94PSIwIDAgMTYgMTYiIHZlcnNpb249IjEuMSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNCA5aDF2MUg0Yy0xLjUgMC0zLTEuNjktMy0zLjVTMi41NSAzIDQgM2g0YzEuNDUgMCAzIDEuNjkgMyAzLjUgMCAxLjQxLS45MSAyLjcyLTIgMy4yNVY4LjU5Yy41OC0uNDUgMS0xLjI3IDEtMi4wOUMxMCA1LjIyIDguOTggNCA4IDRINGMtLjk4IDAtMiAxLjIyLTIgMi41UzMgOSA0IDl6bTktM2gtMXYxaDFjMSAwIDIgMS4yMiAyIDIuNVMxMy45OCAxMiAxMyAxMkg5Yy0uOTggMC0yLTEuMjItMi0yLjUgMC0uODMuNDItMS42NCAxLTIuMDlWNi4yNWMtMS4wOS41My0yIDEuODQtMiAzLjI1QzYgMTEuMzEgNy41NSAxMyA5IDEzaDRjMS40NSAwIDMtMS42OSAzLTMuNVMxNC41IDYgMTMgNnoiPjwvcGF0aD48L3N2Zz48L2E+VXNhZ2U8L2gyPgo8cD48Zy1lbW9qaSBjbGFzcz0iZy1lbW9qaSIgYWxpYXM9ImNvbnN0cnVjdGlvbiIgZmFsbGJhY2stc3JjPSJodHRwczovL2Fzc2V0cy1jZG4uZ2l0aHViLmNvbS9pbWFnZXMvaWNvbnMvZW1vamkvdW5pY29kZS8xZjZhNy5wbmciPvCfmqc8L2ctZW1vamk+IFVOREVSIENPTlNUUlVDVElPTiA8Zy1lbW9qaSBjbGFzcz0iZy1lbW9qaSIgYWxpYXM9ImNvbnN0cnVjdGlvbiIgZmFsbGJhY2stc3JjPSJodHRwczovL2Fzc2V0cy1jZG4uZ2l0aHViLmNvbS9pbWFnZXMvaWNvbnMvZW1vamkvdW5pY29kZS8xZjZhNy5wbmciPvCfmqc8L2ctZW1vamk+PC9wPgo8cD5TZWUgdGhlIHNpdGUgPGEgaHJlZj0iZG9jcy9ob3dfdG9fdXNlX3RoZV9zaXRlLm1kIj5Ib3cgVG88L2E+IGRvY3VtZW50YXRpb248L3A+CjxoMj48YSBpZD0idXNlci1jb250ZW50LWNvbnRyaWJ1dGluZyIgY2xhc3M9ImFuY2hvciIgYXJpYS1oaWRkZW49InRydWUiIGhyZWY9IiNjb250cmlidXRpbmciPjxzdmcgY2xhc3M9Im9jdGljb24gb2N0aWNvbi1saW5rIiB2aWV3Qm94PSIwIDAgMTYgMTYiIHZlcnNpb249IjEuMSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNCA5aDF2MUg0Yy0xLjUgMC0zLTEuNjktMy0zLjVTMi41NSAzIDQgM2g0YzEuNDUgMCAzIDEuNjkgMyAzLjUgMCAxLjQxLS45MSAyLjcyLTIgMy4yNVY4LjU5Yy41OC0uNDUgMS0xLjI3IDEtMi4wOUMxMCA1LjIyIDguOTggNCA4IDRINGMtLjk4IDAtMiAxLjIyLTIgMi41UzMgOSA0IDl6bTktM2gtMXYxaDFjMSAwIDIgMS4yMiAyIDIuNVMxMy45OCAxMiAxMyAxMkg5Yy0uOTggMC0yLTEuMjItMi0yLjUgMC0uODMuNDItMS42NCAxLTIuMDlWNi4yNWMtMS4wOS41My0yIDEuODQtMiAzLjI1QzYgMTEuMzEgNy41NSAxMyA5IDEzaDRjMS40NSAwIDMtMS42OSAzLTMuNVMxNC41IDYgMTMgNnoiPjwvcGF0aD48L3N2Zz48L2E+Q29udHJpYnV0aW5nPC9oMj4KPHA+U2VlIG91ciA8YSBocmVmPSJDT05UUklCVVRJTkcubWQiPkNvbnRyaWJ1dGlvbiBndWlkZWxpbmVzPC9hPjwvcD4KPGgyPjxhIGlkPSJ1c2VyLWNvbnRlbnQtaGlzdG9yeSIgY2xhc3M9ImFuY2hvciIgYXJpYS1oaWRkZW49InRydWUiIGhyZWY9IiNoaXN0b3J5Ij48c3ZnIGNsYXNzPSJvY3RpY29uIG9jdGljb24tbGluayIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTQgOWgxdjFINGMtMS41IDAtMy0xLjY5LTMtMy41UzIuNTUgMyA0IDNoNGMxLjQ1IDAgMyAxLjY5IDMgMy41IDAgMS40MS0uOTEgMi43Mi0yIDMuMjVWOC41OWMuNTgtLjQ1IDEtMS4yNyAxLTIuMDlDMTAgNS4yMiA4Ljk4IDQgOCA0SDRjLS45OCAwLTIgMS4yMi0yIDIuNVMzIDkgNCA5em05LTNoLTF2MWgxYzEgMCAyIDEuMjIgMiAyLjVTMTMuOTggMTIgMTMgMTJIOWMtLjk4IDAtMi0xLjIyLTItMi41IDAtLjgzLjQyLTEuNjQgMS0yLjA5VjYuMjVjLTEuMDkuNTMtMiAxLjg0LTIgMy4yNUM2IDExLjMxIDcuNTUgMTMgOSAxM2g0YzEuNDUgMCAzLTEuNjkgMy0zLjVTMTQuNSA2IDEzIDZ6Ij48L3BhdGg+PC9zdmc+PC9hPkhpc3Rvcnk8L2gyPgo8cD5pbiAyMDExLCBpbnNwaXJlZCBieSBEYXZlIFBhdHRlcnNvbiBhbmQgQXJtYW5kbyBGb3gncyBVQ0JlcmtlbGV5IFNvZnR3YXJlIEVuZ2luZWVyaW5nIE1hc3NpdmUgT3BlbiBPbmxpbmUgQ2xhc3MgKE1PT0MpLCAgU2FtIEpvc2VwaCBoYWQgdGhlIGlkZWEgZm9yIGEgZ2xvYmFsIG9ubGluZSBwYWlyaW5nIGNvbW11bml0eSB3aGVyZSBldmVyeW9uZSB3b3JrZWQgdG9nZXRoZXIgdG8gdXNlIHRoZSBhZ2lsZSBkZXZlbG9wbWVudCBtZXRob2RvbG9neSB0byBkZWxpdmVyIHNvbHV0aW9ucyB0byBJVCBjaGFyaXRpZXMgYW5kIG5vbi1wcm9maXRzLiAgVGhvbWFzIE9jaG1hbiBqb2luZWQgYXMgcHJvamVjdCBtYW5hZ2VyIGFuZCBsZWQgdGhlIGRldmVsb3BtZW50IG9mIHRoZSBXZWJTaXRlT25lIGNvZGViYXNlIHdpdGggQnJ5YW4gWWFwIHNlcnZpbmcgYXMgdGVjaG5pY2FsIGxlYWQuICBJbml0aWFseSBTYW0gd2FzIHRoZSBub3Rpb25hbCAiY2xpZW50Iiwgbm90IGdldHRpbmcgaW52b2x2ZWQgaW4gdGhlIHRlY2ggZGV2ZWxvcG1lbnQsIGFuZCBtYW55IGRpZmZlcmVudCB2b2x1bnRlZXJzIGNvbnRyaWJ1dGVkIGNvZGUuICBEdXJpbmcgdGhpcyBwaGFzZSB0aGUgZXZlbnRzLCBwcm9qZWN0cyBhbmQgdXNlciBzeXN0ZW1zIHdlcmUgZGV2ZWxvcGVkLiAgVGhlcmUgd2FzIGFsc28gYSBibG9nIGxpa2UgYXJ0aWNsZXMgc3lzdGVtLiAgWWFybyBBcHBsZXRvdiBsZWQgYSB0aWdodCBpbnRlZ3JhdGlvbiB3aXRoIEdvb2dsZSBoYW5nb3V0cyB0byBhbGxvdyByZWNvcmRhYmxlIGhhbmdvdXRzIHRvIGJlIGxhdW5jaGVkIGZyb20gdGhlIHNpdGUgYW5kIHJlcG9ydCBiYWNrIHRlbGVtZXRyeS48L3A+CjxwPkxhdGVyIFJhb3VsIERpZmZvdSBqb2luZWQgdG8gdGFrZSBvdmVyIGFzIHByb2plY3QgbWFuYWdlciBhcyBUaG9tYXMgYW5kIEJyeWFuIGhhZCBsZXNzIGFuZCBsZXNzIHRpbWUgZm9yIHRoZSBwcm9qZWN0LiAgU2FtIHRvb2sgb3ZlciB0aGUgdGVjaG5pY2FsIGxlYWQgcm9sZSBpbiAyMDE2IGFuZCBhbHNvIHN0YXJlZCBwYWlyaW5nIHdpdGggUmFvdWwgYXMgcHJvamVjdCBtYW5hZ2VyLiAgTGF0ZXIgaW4gMjAxNiBhcyBSYW91bCBoYWQgbGVzcyBhbmQgbGVzcyB0aW1lIFNhbSBiZWNhbWUgdGhlIHNvbGUgcHJvamVjdCBtYW5hZ2VyLiAgRHVyaW5nIHRoZSBjb3Vyc2Ugb2YgMjAxNiBTYW0gYW5kIGxvbmcgdGltZSBBViBjb250cmlidXRvciBNaWNoYWVsIHJldmlzZWQgdGhlIGV2ZW50cyBmcmFtZXdvcmssIGFuZCByZXBsYWNlZCB0aGUgYXJ0aWNsZXMgc3lzdGVtIHdpdGggYSBQcmVtaXVtIHBheW1lbnRzIGZyYW1ld29yayBpbnRlbmRlZCB0byBoZWxwIGVuc3VyZSBBViB3YXMgc3VzdGFpbmFibGUgaW50byB0aGUgZnV0dXJlLiAgSW4gMjAxNyBHb29nbGUgd2l0aGRyZXcgdGhlaXIgSGFuZ291dHMgQVBJIGJyZWFraW5nIHZhcmlvdXMgZnVuY3Rpb25hbGl0eSBpbiB0aGUgc2l0ZS4gIFNhbSBhbmQgTG9rZXNoIFNoYXJtYSByZXBsYWNlZCB0aGUgQVBJIGludGVncmF0aW9uIHdpdGggbWFudWFsIHVwZGF0ZXMsIGFuZCBTYW0gcHVsbGVkIGluIHRoZSBhZ2lsZS1ib3Qgbm9kZSBtaWNyb3NlcnZpY2Ugc28gdGhhdCBXU08gbm93IGNvbW11bmljYXRlcyBkaXJlY3RseSB3aXRoIFNsYWNrIHRvIGFsZXJ0IG1lbWJlcnMgYWJvdXQgbmV3IG9ubGluZSBtZWV0aW5ncyBhbmQgdGhlaXIgcmVjb3JkaW5ncy48L3A+CjxoMj48YSBpZD0idXNlci1jb250ZW50LWFwcHJvYWNoZXMiIGNsYXNzPSJhbmNob3IiIGFyaWEtaGlkZGVuPSJ0cnVlIiBocmVmPSIjYXBwcm9hY2hlcyI+PHN2ZyBjbGFzcz0ib2N0aWNvbiBvY3RpY29uLWxpbmsiIHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00IDloMXYxSDRjLTEuNSAwLTMtMS42OS0zLTMuNVMyLjU1IDMgNCAzaDRjMS40NSAwIDMgMS42OSAzIDMuNSAwIDEuNDEtLjkxIDIuNzItMiAzLjI1VjguNTljLjU4LS40NSAxLTEuMjcgMS0yLjA5QzEwIDUuMjIgOC45OCA0IDggNEg0Yy0uOTggMC0yIDEuMjItMiAyLjVTMyA5IDQgOXptOS0zaC0xdjFoMWMxIDAgMiAxLjIyIDIgMi41UzEzLjk4IDEyIDEzIDEySDljLS45OCAwLTItMS4yMi0yLTIuNSAwLS44My40Mi0xLjY0IDEtMi4wOVY2LjI1Yy0xLjA5LjUzLTIgMS44NC0yIDMuMjVDNiAxMS4zMSA3LjU1IDEzIDkgMTNoNGMxLjQ1IDAgMy0xLjY5IDMtMy41UzE0LjUgNiAxMyA2eiI+PC9wYXRoPjwvc3ZnPjwvYT5BcHByb2FjaGVzPC9oMj4KPHVsPgo8bGk+QWdpbGUgRGV2ZWxvcG1lbnQKPHVsPgo8bGk+V2UgdHJ5IHRvIHdvcmsgZnJvbSB1c2VyIHN0b3JpZXMgaW4gcmVndWxhciBzcHJpbnRzLCBvZmZlciBkYWlseSBzdGFuZHVwcywgYW5kIGdldCByZWd1bGFyIGZlZWRiYWNrIGZyb20gZW5kIHVzZXJzLiAgV2UgdHJ5IHRvIHJlZmxlY3QgcmVndWxhcmx5IG9uIG91ciBwcm9jZXNzIGFuZCBleHBlcmltZW50IHdpdGggaW5jcmVtZW50YWwgY2hhbmdlcyB0byBob3cgd2UgZ2V0IHRoaW5ncyBkb25lLjwvbGk+CjwvdWw+CjwvbGk+CjxsaT5CZWhhdmlvdXIgRHJpdmVuIERldmVsb3BtZW50IChCREQpCjx1bD4KPGxpPldlIHVzZSBDdWN1bWJlciBhbmQgUlNwZWMgdGVzdGluZyB0b29scyB0aGF0IGRlc2NyaWJlIHRoZSBiZWhhdmlvdXJzIG9mIHRoZSBzeXN0ZW0gYW5kIGl0cyB1bml0czwvbGk+CjxsaT5XZSB0cnkgdG8gd29yayBvdXRzaWRlIGluLCBzdGFydGluZyB3aXRoIGFjY2VwdGFuY2UgdGVzdHMsIGRyb3BwaW5nIHRvIGludGVncmF0aW9uIHRlc3RzLCB0aGVuIHVuaXQgdGVzdHMgYW5kIHRoZW4gd3JpdGluZyBhcHBsaWNhdGlvbiBjb2RlPC9saT4KPGxpPldlIGRvIHNwaWtlIGFwcGxpY2F0aW9uIGNvZGUgb2NjYXNpb25hbGx5IHRvIHdvcmsgb3V0IHdoYXQncyBnb2luZyBvbiwgYnV0IHRoZW4gZWl0aGVyIHRocm93IGF3YXkgdGhlIHNwaWtlLCBvciBtYWtlIHN1cmUgYWxsIG91ciB0ZXN0cyBicmVhayBiZWZvcmUgd3JhcHBpbmcgdGhlIGFwcGxpY2F0aW9uIGNvZGUgaW4gdGVzdHMgKGJ5IHN0cmF0ZWdpY2FsbHkgb3IgZ2xvYmFsbHkgYnJlYWtpbmcgdGhpbmdzKTwvbGk+CjxsaT5XaGVyZSBwb3NzaWJsZSB3ZSBnbyBmb3IgZGVjbGFyYXRpdmUgb3ZlciBpbXBlcmF0aXZlIHNjZW5hcmlvcyBpbiBvdXIgYWNjZXB0YW5jZSB0ZXN0cywgdHJ5aW5nIHRvIGJvaWwgZG93biB0aGUgaGlnaCBsZXZlbCBmZWF0dXJlcyB0byBiZSBlYXNpbHkgY29tcHJlaGVuc2libGUgaW4gdGVybXMgb2YgdXNlciBpbnRlbnRpb248L2xpPgo8L3VsPgo8L2xpPgo8bGk+RG9tYWluIERyaXZlbiBEZXNpZ24gKERERCkKPHVsPgo8bGk+U29tZXRpbWVzIHdlIHN3aXRjaCB0byBpbnNpZGUgb3V0LCB0cnlpbmcgdG8gYWRqdXN0IHRoZSB1bmRlcmx5aW5nIGVudGl0eSBzY2hlbWEgdG8gYmV0dGVyIHJlcHJlc2VudCB0aGUgZG9tYWluIG1vZGVsPC9saT4KPC91bD4KPC9saT4KPGxpPlNlbGYtZG9jdW1lbnRpbmcgY29kZQo8dWw+CjxsaT5XZSBwcmVmZXIgZXhlY3V0YWJsZSBkb2N1bWVudGF0aW9uICh0ZXN0cykgYW5kIHJlbGF0aXZlbHkgc2hvcnQgbWV0aG9kcyB3aGVyZSB0aGUgbWV0aG9kIGFuZCB2YXJpYWJsZSBuYW1lcyBlZmZlY3RpdmVseSBkb2N1bWVudCB0aGUgY29kZTwvbGk+CjwvdWw+CjwvbGk+CjwvdWw+CjxoMj48YSBpZD0idXNlci1jb250ZW50LXJlYWRpbmctbWF0ZXJpYWwiIGNsYXNzPSJhbmNob3IiIGFyaWEtaGlkZGVuPSJ0cnVlIiBocmVmPSIjcmVhZGluZy1tYXRlcmlhbCI+PHN2ZyBjbGFzcz0ib2N0aWNvbiBvY3RpY29uLWxpbmsiIHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00IDloMXYxSDRjLTEuNSAwLTMtMS42OS0zLTMuNVMyLjU1IDMgNCAzaDRjMS40NSAwIDMgMS42OSAzIDMuNSAwIDEuNDEtLjkxIDIuNzItMiAzLjI1VjguNTljLjU4LS40NSAxLTEuMjcgMS0yLjA5QzEwIDUuMjIgOC45OCA0IDggNEg0Yy0uOTggMC0yIDEuMjItMiAyLjVTMyA5IDQgOXptOS0zaC0xdjFoMWMxIDAgMiAxLjIyIDIgMi41UzEzLjk4IDEyIDEzIDEySDljLS45OCAwLTItMS4yMi0yLTIuNSAwLS44My40Mi0xLjY0IDEtMi4wOVY2LjI1Yy0xLjA5LjUzLTIgMS44NC0yIDMuMjVDNiAxMS4zMSA3LjU1IDEzIDkgMTNoNGMxLjQ1IDAgMy0xLjY5IDMtMy41UzE0LjUgNiAxMyA2eiI+PC9wYXRoPjwvc3ZnPjwvYT5SZWFkaW5nIG1hdGVyaWFsPC9oMj4KPHVsPgo8bGk+PGEgaHJlZj0iaHR0cDovL2Zhc3RlcmFnaWxlLmNvbS9ibG9nLzIwMTUvMDEvMTkvZGVjbGFyYXRpdmUtdXNlci1zdG9yaWVzLXRyYW5zbGF0ZS10by1nb29kLWN1Y3VtYmVyLWZlYXR1cmVzLyIgcmVsPSJub2ZvbGxvdyI+SW1wZXJhdGl2ZSB2cyBEZWNsYXJhdGl2ZSBDdWN1bWJlcjwvYT48L2xpPgo8bGk+PGEgaHJlZj0iaHR0cHM6Ly9iaWJ3aWxkLndvcmRwcmVzcy5jb20vMjAxNi8wMi8xOC9zdHJ1Z2dsaW5nLXRvd2FyZHMtcmVsaWFibGUtY2FweWJhcmEtamF2YXNjcmlwdC10ZXN0aW5nLyIgcmVsPSJub2ZvbGxvdyI+SmF2YVNjcmlwdCBBY2NlcHRhbmNlIHRlc3QgdHJpYWxzPC9hPjwvbGk+CjwvdWw+CjxoMj48YSBpZD0idXNlci1jb250ZW50LXdhbGt0aHJvdWdocyIgY2xhc3M9ImFuY2hvciIgYXJpYS1oaWRkZW49InRydWUiIGhyZWY9IiN3YWxrdGhyb3VnaHMiPjxzdmcgY2xhc3M9Im9jdGljb24gb2N0aWNvbi1saW5rIiB2aWV3Qm94PSIwIDAgMTYgMTYiIHZlcnNpb249IjEuMSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNCA5aDF2MUg0Yy0xLjUgMC0zLTEuNjktMy0zLjVTMi41NSAzIDQgM2g0YzEuNDUgMCAzIDEuNjkgMyAzLjUgMCAxLjQxLS45MSAyLjcyLTIgMy4yNVY4LjU5Yy41OC0uNDUgMS0xLjI3IDEtMi4wOUMxMCA1LjIyIDguOTggNCA4IDRINGMtLjk4IDAtMiAxLjIyLTIgMi41UzMgOSA0IDl6bTktM2gtMXYxaDFjMSAwIDIgMS4yMiAyIDIuNVMxMy45OCAxMiAxMyAxMkg5Yy0uOTggMC0yLTEuMjItMi0yLjUgMC0uODMuNDItMS42NCAxLTIuMDlWNi4yNWMtMS4wOS41My0yIDEuODQtMiAzLjI1QzYgMTEuMzEgNy41NSAxMyA5IDEzaDRjMS40NSAwIDMtMS42OSAzLTMuNVMxNC41IDYgMTMgNnoiPjwvcGF0aD48L3N2Zz48L2E+V2Fsa3Rocm91Z2hzPC9oMj4KPHVsPgo8bGk+QW4gZXhhbXBsZSBvZiBhIHNpbXBsZSBpbnRlcmZhY2UgY2hhbmdlCjx1bD4KPGxpPkhlcmUgaXMgdGhlIG9yaWdpbmFsIDxhIGhyZWY9ImZlYXR1cmVzL2ppdHNpX21lZXQvc3RhcnRfaml0c2lfYnV0dG9uLmZlYXR1cmUjTDEiPnVzZXIgc3Rvcnk8L2E+PC9saT4KPGxpPkhlcmUgaXMgdGhlIG9yaWdpbmFsIDxhIGhyZWY9ImZlYXR1cmVzL2ppdHNpX21lZXQvc3RhcnRfaml0c2lfYnV0dG9uLmZlYXR1cmUjTDE1Ij5jdWN1bWJlciBzY2VuYXJpbzwvYT48L2xpPgo8bGk+V2UgZGlkIG5vdCB3cml0ZSBhIHNwZWMsIGFzIHRoaXMgd291bGQgaGF2ZSBpbnZvbHZlZCBhIHZpZXcgc3BlYyB3aGljaCB3ZSBkb24ndCBmZWVsIGFkZCBhbnkgdmFsdWU8L2xpPgo8bGk+SGVyZSdzIHRoZSA8YSBocmVmPSJhcHAvdmlld3MvZXZlbnRzL3Nob3cuaHRtbC5lcmIjTDM4Ij5jb2RlPC9hPiB0aGF0IGltcGxlbWVudGVkIHRoZSBmZWF0dXJlPC9saT4KPC91bD4KPC9saT4KPC91bD4KPHA+PGctZW1vamkgY2xhc3M9ImctZW1vamkiIGFsaWFzPSJjb25zdHJ1Y3Rpb24iIGZhbGxiYWNrLXNyYz0iaHR0cHM6Ly9hc3NldHMtY2RuLmdpdGh1Yi5jb20vaW1hZ2VzL2ljb25zL2Vtb2ppL3VuaWNvZGUvMWY2YTcucG5nIj7wn5qnPC9nLWVtb2ppPiBVTkRFUiBDT05TVFJVQ1RJT04gPGctZW1vamkgY2xhc3M9ImctZW1vamkiIGFsaWFzPSJjb25zdHJ1Y3Rpb24iIGZhbGxiYWNrLXNyYz0iaHR0cHM6Ly9hc3NldHMtY2RuLmdpdGh1Yi5jb20vaW1hZ2VzL2ljb25zL2Vtb2ppL3VuaWNvZGUvMWY2YTcucG5nIj7wn5qnPC9nLWVtb2ppPjwvcD4KPHVsPgo8bGk+QW4gZXhhbXBsZSBvZiBhIG5ldyBmZWF0dXJlIGludm9sdmluZyBhIGRhdGFiYXNlIGNoYW5nZQouLi48L2xpPgo8bGk+QW4gZXhhbXBsZSBvZiBhIGJ1ZyBmaXgKLi4uPC9saT4KPC91bD4KPC9hcnRpY2xlPjwvZGl2Pg==
     http_version: 
-  recorded_at: Thu, 03 May 2018 07:25:06 GMT
+  recorded_at: Tue, 16 Oct 2018 21:10:57 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/PITCH.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/PITCH.md?client_id=<GITHUB_CLIENT_ID>&client_secret=<GITHUB_CLIENT_SECRET>
     body:
       encoding: US-ASCII
       string: ''
@@ -146,7 +143,7 @@ http_interactions:
       Accept:
       - application/vnd.github.html
       User-Agent:
-      - Octokit Ruby Gem 4.8.0
+      - Octokit Ruby Gem 4.13.0
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -159,7 +156,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 03 May 2018 07:25:07 GMT
+      - Tue, 16 Oct 2018 21:10:58 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -169,9 +166,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4997'
+      - '4947'
       X-Ratelimit-Reset:
-      - '1525335905'
+      - '1539726507'
       X-Github-Media-Type:
       - github.v3; param=html
       Access-Control-Expose-Headers:
@@ -191,18 +188,16 @@ http_interactions:
       - origin-when-cross-origin, strict-origin-when-cross-origin
       Content-Security-Policy:
       - default-src 'none'
-      X-Runtime-Rack:
-      - '0.076378'
       X-Github-Request-Id:
-      - 8198:649F:908CFA:1531ABA:5AEAB952
+      - DF5C:65ED:1C2D6E3:3AE6658:5BC653E1
     body:
       encoding: ASCII-8BIT
       string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
     http_version: 
-  recorded_at: Thu, 03 May 2018 07:25:07 GMT
+  recorded_at: Tue, 16 Oct 2018 21:10:58 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/README.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    uri: https://api.github.com/repos/AgileVentures/LocalSupport/contents/README.md?client_id=<GITHUB_CLIENT_ID>&client_secret=<GITHUB_CLIENT_SECRET>
     body:
       encoding: US-ASCII
       string: ''
@@ -210,7 +205,7 @@ http_interactions:
       Accept:
       - application/vnd.github.html
       User-Agent:
-      - Octokit Ruby Gem 4.8.0
+      - Octokit Ruby Gem 4.13.0
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -223,27 +218,27 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 03 May 2018 07:25:07 GMT
+      - Tue, 16 Oct 2018 21:10:58 GMT
       Content-Type:
       - application/vnd.github.html; charset=utf-8
       Content-Length:
-      - '4728'
+      - '6273'
       Status:
       - 200 OK
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4996'
+      - '4946'
       X-Ratelimit-Reset:
-      - '1525335905'
+      - '1539726507'
       Cache-Control:
       - public, max-age=60, s-maxage=60
       Vary:
       - Accept
       Etag:
-      - '"06ba001b49a7c9eb032b3809a62db448f8558073"'
+      - '"e707462985f6bd2b64b7428db8a71f7add3b8cf6"'
       Last-Modified:
-      - Thu, 03 May 2018 07:05:16 GMT
+      - Tue, 16 Oct 2018 08:14:11 GMT
       X-Github-Media-Type:
       - github.v3; param=html
       Access-Control-Expose-Headers:
@@ -263,18 +258,43 @@ http_interactions:
       - origin-when-cross-origin, strict-origin-when-cross-origin
       Content-Security-Policy:
       - default-src 'none'
-      X-Runtime-Rack:
-      - '0.052463'
       X-Github-Request-Id:
-      - 819A:64A2:114460E:22B132A:5AEAB953
+      - A768:65EA:152F596:3013253:5BC653E2
     body:
       encoding: UTF-8
-      string: "<h1>AgileVentures LocalSupport</h1>"
+      string: |-
+        <div id="file" class="instapaper_body md" data-path="README.md"><article class="markdown-body entry-content" itemprop="text"><p><a href="https://travis-ci.org/AgileVentures/LocalSupport" rel="nofollow"><img src="https://camo.githubusercontent.com/d16061b38261e29c60358f72cacd60e9ff7d8c49/68747470733a2f2f7472617669732d63692e6f72672f4167696c6556656e74757265732f4c6f63616c537570706f72742e706e67" alt="Build Status" data-canonical-src="https://travis-ci.org/AgileVentures/LocalSupport.png" style="max-width:100%;"></a> <a href="https://codeclimate.com/github/AgileVentures/LocalSupport/maintainability" rel="nofollow"><img src="https://camo.githubusercontent.com/f8b663b417ebde32e165904a32a4c2129ff3c662/68747470733a2f2f6170692e636f6465636c696d6174652e636f6d2f76312f6261646765732f33343438663635346164636466653334623030372f6d61696e7461696e6162696c697479" alt="Maintainability" data-canonical-src="https://api.codeclimate.com/v1/badges/3448f654adcdfe34b007/maintainability" style="max-width:100%;"></a> <a href="https://codeclimate.com/github/AgileVentures/LocalSupport/test_coverage" rel="nofollow"><img src="https://camo.githubusercontent.com/54876f91c8630fc0af13a1ce7ea6a7b437e2ffde/68747470733a2f2f6170692e636f6465636c696d6174652e636f6d2f76312f6261646765732f33343438663635346164636466653334623030372f746573745f636f766572616765" alt="Test Coverage" data-canonical-src="https://api.codeclimate.com/v1/badges/3448f654adcdfe34b007/test_coverage" style="max-width:100%;"></a></p>
+        <h1><a id="user-content-localsupport" class="anchor" aria-hidden="true" href="#localsupport"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>LocalSupport</h1>
+        <p>LocalSupport is the software that runs the <a href="https://www.harrowcn.org.uk/" rel="nofollow">Harrow Community Network</a>, which was originally conceived as a directory of local support services, e.g. a list charities and non-profits in a particular area.  It's since pivoted to focus on volunteer opportunities in a local area, but the list of organisations remains accessible.</p>
+        <h2><a id="user-content-project-overview-video" class="anchor" aria-hidden="true" href="#project-overview-video"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Project Overview Video</h2>
+        <p>Please see the following video for an overview of the project background:</p>
+        <p align="center">
+          <a href="http://www.youtube.com/watch?v=TM37kPVpDZ0" title="LocalSupport Overview" rel="nofollow">
+            <img src="https://camo.githubusercontent.com/3ce161ca89c477a41faf55986ccc5e3774eea15f/687474703a2f2f696d672e796f75747562652e636f6d2f76692f544d33376b505670445a302f302e6a7067" data-canonical-src="http://img.youtube.com/vi/TM37kPVpDZ0/0.jpg" style="max-width:100%;">
+          </a>
+        </p>
+        <h2><a id="user-content-installation" class="anchor" aria-hidden="true" href="#installation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
+        <p>Installation and other technical issues are being moved from the github wiki to the docs dir:</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/blob/develop/docs/installation.md#installation">Installation notes</a></p>
+        <p>To help with development please see our <a href="CONTRIBUTING.md">contribution guidelines</a>.</p>
+        <p>If you encounter any issues or trouble, please search the issues tracker, and if necessary open a new issue describing the problem in detail including information about platforms, versions etc.</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/issues">https://github.com/AgileVentures/LocalSupport/issues</a></p>
+        <p>Many thanks to all the contributions from volunteers from all around the world.</p>
+        <p><a href="https://github.com/AgileVentures/LocalSupport/contributors">Graph of Contributors</a></p>
+        <a href="mailto:tansaku@gmail.com?subject=Pairing on LocalSupport" title="Pair program with me!">
+          <img src="https://camo.githubusercontent.com/9f9e2984449459c75bbeef9c6feb3ed812371e9c/687474703a2f2f7061697270726f6772616d776974682e6d652f62616467652e706e67" alt="Pair program with me!" data-canonical-src="http://pairprogramwith.me/badge.png" style="max-width:100%;">
+        </a>
+        <h1><a id="user-content-license" class="anchor" aria-hidden="true" href="#license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>License</h1>
+        <p>The logo is copyright Alex, all rights reserved.</p>
+        <p>The authors and contributors have agreed to license all other software
+        under the MIT license, an open source free software license. See the
+        file named COPYING which includes a disclaimer of warranty.</p>
+        </article></div>
     http_version: 
-  recorded_at: Thu, 03 May 2018 07:25:07 GMT
+  recorded_at: Tue, 16 Oct 2018 21:10:58 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/nisevi/nisevi/contents/PITCH.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    uri: https://api.github.com/repos/nisevi/nisevi/contents/PITCH.md?client_id=<GITHUB_CLIENT_ID>&client_secret=<GITHUB_CLIENT_SECRET>
     body:
       encoding: US-ASCII
       string: ''
@@ -282,7 +302,7 @@ http_interactions:
       Accept:
       - application/vnd.github.html
       User-Agent:
-      - Octokit Ruby Gem 4.8.0
+      - Octokit Ruby Gem 4.13.0
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -295,19 +315,19 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 03 May 2018 07:25:08 GMT
+      - Tue, 16 Oct 2018 21:10:58 GMT
       Content-Type:
       - application/vnd.github.html; charset=utf-8
       Content-Length:
-      - '805'
+      - '796'
       Status:
       - 200 OK
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4995'
+      - '4945'
       X-Ratelimit-Reset:
-      - '1525335905'
+      - '1539726507'
       Cache-Control:
       - public, max-age=60, s-maxage=60
       Vary:
@@ -315,7 +335,7 @@ http_interactions:
       Etag:
       - '"d25bb0737558204b4f0d08efc0519c53d2efd0cb"'
       Last-Modified:
-      - Tue, 01 May 2018 17:54:10 GMT
+      - Fri, 05 Oct 2018 05:20:42 GMT
       X-Github-Media-Type:
       - github.v3; param=html
       Access-Control-Expose-Headers:
@@ -335,18 +355,19 @@ http_interactions:
       - origin-when-cross-origin, strict-origin-when-cross-origin
       Content-Security-Policy:
       - default-src 'none'
-      X-Runtime-Rack:
-      - '0.062386'
       X-Github-Request-Id:
-      - 819C:649F:908D93:1531BF8:5AEAB954
+      - DF70:65EA:152F5A8:3013283:5BC653E2
     body:
       encoding: UTF-8
-      string: "<h1>nisevi</h1>"
+      string: |-
+        <div id="file" class="instapaper_body md" data-path="PITCH.md"><article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-introduction" class="anchor" aria-hidden="true" href="#introduction"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introduction</h1>
+        <p>This project is a blog built by using Rails 5.</p>
+        </article></div>
     http_version: 
-  recorded_at: Thu, 03 May 2018 07:25:08 GMT
+  recorded_at: Tue, 16 Oct 2018 21:10:58 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/fake/repo/contents/PITCH.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    uri: https://api.github.com/repos/fake/repo/contents/PITCH.md?client_id=<GITHUB_CLIENT_ID>&client_secret=<GITHUB_CLIENT_SECRET>
     body:
       encoding: US-ASCII
       string: ''
@@ -354,7 +375,7 @@ http_interactions:
       Accept:
       - application/vnd.github.html
       User-Agent:
-      - Octokit Ruby Gem 4.8.0
+      - Octokit Ruby Gem 4.13.0
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -367,7 +388,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 03 May 2018 07:36:06 GMT
+      - Tue, 16 Oct 2018 21:10:59 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -377,9 +398,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4994'
+      - '4944'
       X-Ratelimit-Reset:
-      - '1525335905'
+      - '1539726507'
       X-Github-Media-Type:
       - github.v3; param=html
       Access-Control-Expose-Headers:
@@ -399,18 +420,16 @@ http_interactions:
       - origin-when-cross-origin, strict-origin-when-cross-origin
       Content-Security-Policy:
       - default-src 'none'
-      X-Runtime-Rack:
-      - '0.024888'
       X-Github-Request-Id:
-      - 81CC:64A1:D5FE97:1D069E5:5AEABBE6
+      - A778:65EA:152F5BA:30132A7:5BC653E3
     body:
       encoding: ASCII-8BIT
       string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
     http_version: 
-  recorded_at: Thu, 03 May 2018 07:36:06 GMT
+  recorded_at: Tue, 16 Oct 2018 21:10:59 GMT
 - request:
     method: get
-    uri: https://api.github.com/repos/fake/repo/contents/README.md?client_id=d05eb310ebf549e53889&client_secret=6a5988af12a8a012399e037d0586bf706c4bfbf0
+    uri: https://api.github.com/repos/fake/repo/contents/README.md?client_id=<GITHUB_CLIENT_ID>&client_secret=<GITHUB_CLIENT_SECRET>
     body:
       encoding: US-ASCII
       string: ''
@@ -418,7 +437,7 @@ http_interactions:
       Accept:
       - application/vnd.github.html
       User-Agent:
-      - Octokit Ruby Gem 4.8.0
+      - Octokit Ruby Gem 4.13.0
       Content-Type:
       - application/json
       Accept-Encoding:
@@ -431,7 +450,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Thu, 03 May 2018 07:36:07 GMT
+      - Tue, 16 Oct 2018 21:10:59 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -441,9 +460,9 @@ http_interactions:
       X-Ratelimit-Limit:
       - '5000'
       X-Ratelimit-Remaining:
-      - '4993'
+      - '4943'
       X-Ratelimit-Reset:
-      - '1525335905'
+      - '1539726507'
       X-Github-Media-Type:
       - github.v3; param=html
       Access-Control-Expose-Headers:
@@ -463,13 +482,11 @@ http_interactions:
       - origin-when-cross-origin, strict-origin-when-cross-origin
       Content-Security-Policy:
       - default-src 'none'
-      X-Runtime-Rack:
-      - '0.041490'
       X-Github-Request-Id:
-      - 81CE:64A2:115C91A:22E0C00:5AEABBE7
+      - DF82:65ED:1C2D739:3AE6723:5BC653E3
     body:
       encoding: ASCII-8BIT
       string: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/contents/#get-contents"}'
     http_version: 
-  recorded_at: Thu, 03 May 2018 07:36:07 GMT
+  recorded_at: Tue, 16 Oct 2018 21:10:59 GMT
 recorded_with: VCR 4.0.0

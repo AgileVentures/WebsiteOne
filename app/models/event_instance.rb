@@ -18,6 +18,10 @@ class EventInstance < ApplicationRecord
   has_many :hangout_participants_snapshots
   accepts_nested_attributes_for :hangout_participants_snapshots
 
+  def for 
+    self.event.for
+  end
+
   def self.active_hangouts
     select(&:live?)
   end
@@ -32,6 +36,7 @@ class EventInstance < ApplicationRecord
 
   # margin: Seconds for which condition can be relaxed for start time
   def updated_within_current_event_duration?(margin)
+    return false unless event.current_start_time
     updated_at > (event.current_start_time - margin) &&
       updated_at < event.current_end_time
   end

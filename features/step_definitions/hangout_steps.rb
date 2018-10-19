@@ -115,28 +115,28 @@ end
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
-  expect(page).to have_link('Join now', href: @hangout_url)
+  expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
   time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
-  expect(page).to have_link('Join now', href: @hangout_url)
+  expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
   time = Time.parse(@jump_date) + event.duration.minutes + 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
-  expect(page).not_to have_link('Join now')
+  expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
 end
 
 Given(/^"([^"]*)" doesn't go live$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
-  expect(page).not_to have_link('Join now')
+  expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
 end
 
 And(/^"([^"]*)" is not live the following day$/) do |event_name|
   event = Event.find_by_name(event_name)
   Delorean.time_travel_to(Time.parse(@jump_date) + 1.day)
   visit event_path(event)
-  expect(page).not_to have_content('This event is now live!')
+  expect(page).not_to have_content('JOIN THIS LIVE EVENT NOW')
 end
 
 Given(/^that "([^"]*)" went live the previous day$/) do |name|
@@ -216,6 +216,14 @@ And(/^that we're spying on the SlackService$/) do
   allow(SlackService).to receive :post_hangout_notification
 end
 
+And(/^that we're spying on the SlackService private and public channels$/) do
+  allow(SlackService).to receive :post_scrum_notification
+  allow(SlackService).to receive :post_pair_programming_notification
+  allow(SlackService).to receive :send_slack_message
+  allow(SlackService).to receive :post_premium_mob_hangout_notification
+  allow(SlackService).to receive :post_premium_mob_yt_notification
+end
+
 Then(/^the Youtube URL is not posted in Slack$/) do
   expect(SlackService).not_to have_received :post_yt_link
 end
@@ -224,7 +232,24 @@ And(/^the Hangout URL is posted in Slack$/) do
   expect(SlackService).to have_received :post_hangout_notification
 end
 
+Then(/^the Hangout URL is posted only in appropriate private channels in Slack$/) do
+  expect(SlackService).to have_received :post_premium_mob_hangout_notification
+  expect(SlackService).not_to have_received :send_slack_message
+  expect(SlackService).not_to have_received :post_pair_programming_notification
+end
+
+Then(/^the Youtube URL is posted in select private channels in Slack$/) do
+  expect(SlackService).to have_received :post_premium_mob_yt_notification
+  expect(SlackService).not_to have_received :send_slack_message
+  expect(SlackService).not_to have_received :post_pair_programming_notification
+end
+
+
 And(/^the event "([^"]*)" was last updated at "([^"]*)"$/) do |event_name, date|
   id = Event.where(name: event_name).first[:id]
   EventInstance.where(event_id: id).order("created_at DESC").first.update_attributes(updated_at: date)
+end
+
+Given(/^the Slack notifications are enabled$/) do
+  Features.slack.notifications.enabled = true
 end

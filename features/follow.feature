@@ -16,7 +16,7 @@ Feature: Join projects
 
 
   Scenario: Join a project
-    Given I am logged in
+    Given I have logged in
     And I am not a member of project "hello mars"
     And I am on the "Show" page for project "hello mars"
     And I click the "Join Project" button
@@ -24,7 +24,7 @@ Feature: Join projects
     And I should see "You just joined hello mars"
 
   Scenario: Leave a project
-    Given I am logged in
+    Given I have logged in
     And I am a member of project "hello mars"
     And I am on the "Show" page for project "hello mars"
     And I click "Leave Project"

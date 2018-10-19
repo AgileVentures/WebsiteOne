@@ -4,7 +4,7 @@ Feature: As a site user
   I would like to see these videos at the member profile
 
   Background:
-    Given I am logged in
+    Given I have logged in
     And the following projects exist:
       | title       | description          | status   | tags            |
       | hello world | greetings earthlings | active   | WSO, WebsiteOne |

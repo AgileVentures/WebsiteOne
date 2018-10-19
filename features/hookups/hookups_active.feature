@@ -5,7 +5,7 @@ Feature: Show Active Hookups
   I would like to view and manage active events
 
   Background:
-    Given I am logged in
+    Given I have logged in
     Given the time now is "2014-02-03 09:15:00 UTC"
     Given the following projects exist:
       | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               |

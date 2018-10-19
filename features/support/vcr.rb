@@ -5,13 +5,15 @@ VCR.configure do |c|
   c.cassette_library_dir = 'features/support/fixtures/cassettes'
   c.ignore_localhost = true
   c.default_cassette_options = {
-      :match_requests_on => [
-          :method,
-          VCR.request_matchers.uri_without_param(:imp, :prev_imp, :distinct_id)
-      ]
+    :match_requests_on => [
+        :method,
+        VCR.request_matchers.uri_without_param(:imp, :prev_imp, :distinct_id)
+    ]
   }
   c.filter_sensitive_data('<SLACK_AUTH_TOKEN>') { ENV['SLACK_AUTH_TOKEN'] }
   c.filter_sensitive_data('<GITTER_API_TOKEN>') { ENV['GITTER_API_TOKEN'] }
+  c.filter_sensitive_data('<GITHUB_CLIENT_ID>') { ENV['GITHUB_KEY'] }
+  c.filter_sensitive_data('<GITHUB_CLIENT_SECRET>') { ENV['GITHUB_SECRET'] }
 end
 
 VCR.cucumber_tags do |t|

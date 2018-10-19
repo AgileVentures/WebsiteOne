@@ -2,6 +2,22 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
 
+Given(/^I am logged in as a user with "([^"]*)"$/) do |plan|
+  StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
+  email =  "Susan_#{plan.parameterize}@gmail.com"
+  password = "Susan_#{plan}"
+  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: "Susan_#{plan}", email: email, password: password, password_confirmation: password)
+
+  set_user_as_premium(@user, plan)
+
+  visit new_user_session_path
+  within ('#main') do
+    fill_in 'user_email', :with => email
+    fill_in 'user_password', :with => password
+    click_button 'Sign in'
+  end
+end
+
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
   StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
 
@@ -17,13 +33,19 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
   end
 end
 
-def set_user_as_premium(user)
-  subscription = Subscription.create(user: user, plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
+Given /^A( premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)" exists$/ do |premium, name, email, password|
+  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: name, email: email, password: password, password_confirmation: password)
+  set_user_as_premium(@user) if premium
+end
+
+def set_user_as_premium(user, plan = 'Premium')
+  return if plan.downcase == 'free'
+  subscription = Subscription.create(user: user, plan: Plan.find_by(name: plan), started_at: Time.now)
   customer = Stripe::Customer.create({
                                          email: user.email,
                                          source: @stripe_test_helper.generate_card_token
                                      })
-  customer.subscriptions.create(plan: 'premium')
+  customer.subscriptions.create(plan: plan.downcase.delete(' '))
   payment_source = PaymentSource::Stripe.create(identifier: customer.id, subscription: subscription )
 end
 
@@ -60,13 +82,41 @@ Given /^I am not logged in$/ do
   step 'I sign out'
 end
 
-Given /^I am logged in$/ do
+Given /^I am logged in as a privileged user$/ do
+  create_privileged_user
+  login_as @user, :scope => :user
+end
+
+Given(/^I am logged in$/) do
   create_user
   sign_in
 end
 
+Given /^I have logged in$/ do
+  create_user
+  login_as @user, :scope => :user
+end
+
+Given /^I have logged in as a user who is authorized to view the AVDashboard$/ do
+  create_user(can_see_dashboard: true)
+  login_as @user, :scope => :user
+end
+
+Given /^I have logged in as a user who is not authorized to view the AVDashboard$/ do
+  create_user
+  login_as @user, :scope => :user
+end
+
 Given /^I exist as a user$/ do
   create_user
+end
+
+Given /^I exist as a user who is not authorized to view the AVDashboard$/ do
+  create_user
+end
+
+Given /^I exist as a user who is authorized to view the AVDashboard$/ do
+  create_user(can_see_dashboard: true)
 end
 
 Given /^I exist as a user signed up via google/ do
@@ -274,6 +324,10 @@ Given(/^I should be on the "([^"]*)" page for "(.*?)"$/) do |page, user|
   expect(current_path).to eq path_to(page, this_user)
 end
 
+Given(/^I should be on the anonymous profile page$/) do
+  expect(current_path).to eq('/users/-1')
+end
+
 Given(/^I (?:am on|go to|should be on) my "([^"]*)" page$/) do |page|
   page.downcase!
   if page == 'profile'
@@ -457,6 +511,11 @@ When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_na
            end
 
   page.select(selected_from_list, from: filter)
+end
+
+
+When(/^I search for user with email "([^"]*)"$/) do |email|
+  visit "/users?email=#{email}"
 end
 
 Given(/^I have an incomplete profile$/) do
