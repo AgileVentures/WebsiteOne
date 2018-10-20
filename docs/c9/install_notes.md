@@ -42,7 +42,7 @@ $ gem install bundler
 7) install gems (note that forkbomb protection on c9 may kill bundle and you will need to re-run it several times to complete the install of all the gems)
 
 ```
-$ bundle install
+$ bundle install --without production
 ```
 
 8) install javascript dependencies (ensure bower is installed `npm install bower`)
@@ -51,29 +51,66 @@ $ bundle install
 $ npm install
 ```
 
-9) Configure the pre-installed postgreSQL. Check which version is installed with ls /etc/postgresql/. If the version is not 9.3, the sed commands must be edited to reflect the current version.
+9) Configure the pre-installed postgreSQL. Check which version is installed with `ls /etc/postgresql/`. If the version is not 9.3, the sed commands must be edited to reflect the current version.
 
 ```
 # Change conf files to map your user to postgres user
 $ sudo sed -i 's/local[ ]*all[ ]*postgres[ ]*peer/local all postgres peer map=basic/' /etc/postgresql/9.3/main/pg_hba.conf
 $ sudo sed -i "$ a\basic $USER postgres" /etc/postgresql/9.3/main/pg_ident.conf
-    
+```
+
+- Then start postgres
+
+```
 # Start the service
 $ sudo service postgresql start
+```
+- Set encoding
 
+```
 # Make the default database template encoded in unicode
 $ psql -U postgres -c "update pg_database set encoding = 6, datcollate = 'C', datctype = 'C' where datname = 'template1';"
 $ sudo /etc/init.d/postgresql restart
 ```
 
+- If the following error occurs when setting the encoding
+
+```
+psql: FATAL:  Peer authentication failed for user "postgres"
+```
+
+- Then login into postgres by typing `psql` at the command line
+
+```
+$ psql
+```
+
+- And follow the [stackoverflow](https://stackoverflow.com/a/16737776/10166730) fix.
+- Also for easy reference the commands are listed below.
+
+```
+UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+DROP DATABASE template1;
+CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+\c template1
+VACUUM FREEZE;
+```
+
+- Then exit postgres
+
+```
+\q
+```
+
 10) initialize the db
 
 ```
-$ bundle exec rake db:setup
+$ bundle exec rake db:create db:migrate db:setup
 ```
 
 11) Request the .env file
-    
+
 Ask one of the admins (e.g. @tansaku or @diraulo) for the project .env file, and also confirm which locale you are working in.
 
 Assuming your locale is `en_US.UTF-8` do the following:
@@ -98,7 +135,7 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 ```
 
-**Note**: If you face the error `Fontconfig warning: ignoring C.UTF-8: not a valid language tag`, then your locale is not correctly set. 
+**Note**: If you face the error `Fontconfig warning: ignoring C.UTF-8: not a valid language tag`, then your locale is not correctly set.
 
 12) Run the tests
 
@@ -136,8 +173,8 @@ $ rake db:seed
 ```
 $ bundle exec rails s -b $IP -p $PORT
 ```
-    
-15) View the running site 
+
+15) View the running site
 
 Click on `Share` on top right corner. The url in front of `Application` is the one which you can use to view your site.
 
