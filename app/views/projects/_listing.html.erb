@@ -1,52 +1,42 @@
 <% @projects.each do |project| %>
   <li class="col-xs-4">
-    <div class="jumbotron">
+    <div class="project_card">
       <div class="row">
-        <% if project.image_url.present? %>
-          <div id="project_listing_image" class="col-xs-12">
-            <%= image_tag project.image_url, class: 'img-responsive' %>
-          </div>
-        <% end %>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <h3><%= link_to project.title, project_path(project) %></h3>
+        <div id="project_listing_image" class="col-xs-12">
+          <%= image_tag "http://i.imgur.com/23ePvyN.jpg", class: 'img-responsive' %>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <div class="stats">
-            <ul>
-            <% follower_count = project.followers.count %>
-            <% if follower_count > 0 %>
-              <li data-toggle="tooltip" data-placement="top" title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
-                <i class="fa fa-users"></i> <%= follower_count %>
-              </li>
-            <% end %>
-            <% documents_count = project.documents.count %>
-            <% if documents_count > 0 %>
-              <li data-toggle="tooltip" data-placement="top" title="<%= documents_count %> related <%= 'document'.pluralize(documents_count) %>">
-                <i class="fa fa-file-text-o"></i> <%= documents_count %>
-              </li>
-            <% end %>
+          <div class="project_card_stats">
+            <h3><%= link_to project.title, project_path(project) %></h3>
+            <ul class="project_card_stats_items">
+              <% follower_count = project.followers.count %>
+                <% if follower_count > 0 %>
+                  <li data-toggle="tooltip" data-placement="top" title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
+                    <i class="fa fa-users"></i>
+                    <%= follower_count %>
+                  </li>
+                <% end %>
+                <% documents_count = project.documents.count %>
+                  <% if documents_count > 0 %>
+                    <li data-toggle="tooltip" data-placement="top" title="<%= documents_count %> related <%= 'document'.pluralize(documents_count) %>">
+                      <i class="fa fa-file-text-o"></i>
+                      <%= documents_count %>
+                    </li>
+                  <% end %>
 
-            <% commit_count = project.commit_count %>
-            <% unless commit_count.nil? %>
-              <li data-toggle="tooltip" data-placement="top"
-                  title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
-                <i class="fa fa-github-alt"></i> <%= commit_count %>
-              </li>
-            <% end %>
-            </ul>
+                  <% commit_count = project.commit_count %>
+                    <% unless commit_count.nil? %>
+                      <li data-toggle="tooltip" data-placement="top" title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
+                        <i class="fa fa-github-alt"></i>
+                        <%= commit_count %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>Status: <strong style="font-style: normal;"><%= project.status.upcase %></strong></div>
-          <div>Last update in Github: <%= project.last_github_update %></div>
-          <div>
-            <%= "Created #{time_ago_in_words(project.created_at)} ago" %> by 
-            <%= link_to project.user.display_name, user_path(project.user) %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </li>
-<% end %>
+        </li>
+      <% end %>
