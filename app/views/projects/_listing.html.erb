@@ -2,9 +2,15 @@
   <li class="col-xs-4">
     <div class="project_card">
       <div class="row">
+      <% if project.image_url.present? %>
         <div id="project_listing_image" class="col-xs-12">
-          <%= image_tag "http://i.imgur.com/23ePvyN.jpg", class: 'img-responsive' %>
+          <%= image_tag project.image_url, class: 'img-responsive' %>
         </div>
+      <% else %>
+        <div id="project_listing_image" class="col-xs-12">
+          <%= image_tag 'full_logo2.png', class: 'img-responsive' %>
+        </div>
+      <% end %>
       </div>
       <div class="row">
         <div class="col-xs-12">
