@@ -2,10 +2,10 @@ require 'slack'
 require 'gitter'
 
 class HangoutNotificationService
-  def self.with(hangout,
+  def self.with(event_instance,
                 slack_client = Slack::Web::Client.new(logger: Rails.logger),
                 gitter_client = Gitter::Client.new(ENV['GITTER_API_TOKEN']))
-          new(hangout, slack_client, gitter_client).send(:post_hangout_notifications)
+          new(event_instance, slack_client, gitter_client).send(:post_hangout_notification)
   end
   
   if ENV['LIVE_ENV'] == 'production'
@@ -74,20 +74,20 @@ class HangoutNotificationService
 
   private
 
-  def initialize hangout, slack_client, gitter_client
-    @hangout = hangout
+  def initialize event_instance, slack_client, gitter_client
+    @event_instance = event_instance
     @slack_client = slack_client
     @gitter_client = gitter_client    
   end
 
-  def post_hangout_notifications
+  def post_hangout_notification
     return unless Features.slack.notifications.enabled
-    return if @hangout.hangout_url.blank?
+    return if @event_instance.hangout_url.blank?
     
-    channels = channels_for_project @hangout.project
-    @message = "#{@hangout.title}: <#{@hangout.hangout_url}|click to join>"
-    @here_message = "@here #{@message}"
-    @channel_message = "@channel #{@message}"
+    channels = channels_for_project @event_instance.project
+    message = "#{@event_instance.title}: <#{@event_instance.hangout_url}|click to join>"
+    @here_message = "@here #{message}"
+    @channel_message = "@channel #{message}"
     
     send_notifications channels
   end
@@ -100,8 +100,8 @@ class HangoutNotificationService
   end
 
   def send_notifications channels
-    return post_premium_mob_hangout_notification if @hangout.for == 'Premium Mob Members'
-    case @hangout.category
+    return post_premium_mob_hangout_notification if @event_instance.for == 'Premium Mob Members'
+    case @event_instance.category
     when 'Scrum'
       post_scrum_notification
     when 'PairProgramming'
@@ -113,7 +113,8 @@ class HangoutNotificationService
   end
 
   def post_premium_mob_hangout_notification
-    send_slack_message @slack_client, [CHANNELS[:premium_extra], CHANNELS[:premium_mob_trialists]], @here_message
+    send_slack_message @slack_client, [CHANNELS[:premium_extra], 
+                       CHANNELS[:premium_mob_trialists]], @here_message
   end
 
   def post_scrum_notification
@@ -124,7 +125,7 @@ class HangoutNotificationService
 
   def post_pair_programming_notification channels
     if channels.include? CHANNELS[:cs169]
-      message = "[#{@hangout.title} with #{@hangout.user.display_name}](#{@hangout.hangout_url})"
+      message = "[#{@event_instance.title} with #{@event_instance.user.display_name}](#{@event_instance.hangout_url})"
       message << ' is starting NOW!'
       send_gitter_message_avoid_repeats message
     else
@@ -141,7 +142,7 @@ class HangoutNotificationService
   end
 
   def send_slack_message client, channels, message
-    user = @hangout.user
+    user = @event_instance.user
     channels.each do |channel|
       unless channel.nil?
         client.chat_postMessage(channel: channel, text: message, username: user.display_name,
