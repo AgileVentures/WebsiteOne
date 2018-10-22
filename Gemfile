@@ -37,7 +37,6 @@ gem 'kramdown', '~> 1.17'
 gem 'letter_opener', :group => :development
 gem 'local_time', '~> 2.1'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
-#gem 'nearest_time_zone'
 gem 'timezone'
 gem 'nokogiri', '1.8.5'
 gem 'octokit'
@@ -120,7 +119,6 @@ group :development, :test do
   gem 'rspec-html-matchers'
   gem 'rspec-rails'
   gem 'simplecov', '~> 0.16.1'
-  gem 'rdoc'
 end
 
 group :staging, :production do

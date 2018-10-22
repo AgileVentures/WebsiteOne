@@ -480,7 +480,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    rdoc (6.0.4)
     recaptcha (4.12.0)
       json
     redcarpet (3.4.0)
@@ -725,7 +724,6 @@ DEPENDENCIES
   rails-controller-testing (~> 1.0, >= 1.0.2)
   rails_12factor
   rails_autolink (~> 1.1.6)
-  rdoc
   recaptcha
   redcarpet
   rspec
