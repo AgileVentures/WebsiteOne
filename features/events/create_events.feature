@@ -7,10 +7,12 @@ Feature: Events
   Background:
     Given I have logged in
     And the following projects exist:
-      | title | description          | pitch | status | commit_count |
-      | WSO   | greetings earthlings |       | active | 2795         |
-      | EdX   | greetings earthlings |       | active | 2795         |
-      | AAA   | for roadists         |       | active |              |
+      | title            | description          | pitch | status   | commit_count |
+      | WSO              | greetings earthlings |       | active   | 2795         |
+      | EdX              | greetings earthlings |       | active   | 2795         |
+      | AAA              | for roadists         |       | active   |              |
+      | Inactive Project | Has inactive project |       | inactive |              |
+      | Closed Project   | Has closed project   |       | closed   |              |
     And I am on Events index page
     When I click "New Event"
     Given the date is "2014/02/01 09:15:00 UTC"
@@ -78,7 +80,8 @@ Feature: Events
     And I should see "19:00-19:30 (UTC)"
 
   Scenario: Projects should be ordered alphabetically
-    Then I should see "EdX" before "WSO"
+    Then the dropdown with id "event_project_id" should only have active projects
+    And I should see "EdX" before "WSO"
 
   Scenario: Create a new event for a different project
     Given I fill in event field:

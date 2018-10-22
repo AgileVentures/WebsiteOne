@@ -22,7 +22,7 @@ class Project < ApplicationRecord
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-  scope :active, -> { where("status ILIKE ?", "%active%") }
+  scope :active, -> { where("status ILIKE ?", "active").order(:title) }
   scope :search_by_language, ->(search) {
     includes(:languages)
       .where("languages.name ILIKE ?", "#{search}")
