@@ -39,7 +39,7 @@ class UserPresenter < BasePresenter
   end
 
   def timezone
-    NearestTimeZone.to(user.latitude, user.longitude)
+    Timezone.lookup(user.latitude, user.longitude).name
   end
 
   def timezone_formatted_offset

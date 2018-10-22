@@ -35,9 +35,16 @@ describe UserPresenter do
 
   describe '#timezone' do
     it 'should display timezone when it can be determined' do
+      user.latitude = 34
+      user.longitude = -118
+      expect(Timezone.lookup(user.latitude, user.longitude).name).to eq('America/Los_Angeles')
+      user.latitude = 51
+      user.longitude = 0
+      expect(Timezone.lookup(user.latitude, user.longitude).name).to eq('Europe/London')
       user.latitude = 25.9500
       user.longitude = 32.5833
-      expect(NearestTimeZone).to receive(:to).with(user.latitude, user.longitude).and_return('Africa/Cairo')
+      #expect(NearestTimeZone).to receive(:to).with(user.latitude, user.longitude).and_return('Africa/Cairo')
+      expect(Timezone.lookup(user.latitude, user.longitude).name).to eq('Africa/Cairo')
       expect(subject.timezone).to eq 'Africa/Cairo'
     end
   end

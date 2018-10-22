@@ -218,7 +218,7 @@ class User < ApplicationRecord
 
   def generate_timezone_offset
     if self.latitude && self.longitude
-      self.timezone_offset = ActiveSupport::TimeZone.new(NearestTimeZone.to(self.latitude, self.longitude)).utc_offset
+      self.timezone_offset = Timezone.lookup(self.latitude, self.longitude).utc_offset
     end
   end
 
