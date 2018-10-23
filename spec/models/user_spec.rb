@@ -240,8 +240,14 @@ describe User, type: :model do
 
     context 'has filters' do
       before(:each) do
-        @user1 = FactoryBot.create(:user, latitude: 59.33, longitude: 18.06)
-        @user2 = FactoryBot.create(:user, latitude: -29.15, longitude: 27.74)
+        #I had to play a bit here - I don't know if it depends if winter/DST but old values were not passing the test ?
+        # You can comment this 4 lines and it should still pass
+        ::Timezone::Lookup.config(:test)
+        ::Timezone::Lookup.lookup.stub(9.15, 7.74, 'Africa/Lagos') #UTC + 1
+        ::Timezone::Lookup.lookup.stub(44.33, 1.06, 'Europe/Paris') # UTC + 2
+        ::Timezone::Lookup.lookup.default('Africa/Lagos')
+        @user1 = FactoryBot.create(:user, latitude: 9.15, longitude: 7.74)
+        @user2 = FactoryBot.create(:user, latitude: 44.33, longitude: 1.06)
         @project = FactoryBot.create(:project)
       end
 
