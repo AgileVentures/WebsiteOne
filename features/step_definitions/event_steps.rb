@@ -454,3 +454,17 @@ Then(/^I should see a link to join or upgrade based on my (.*)$/) do |plan_name|
   end
 end
 
+Then(/^the dropdown with id "(.*)" should only have active projects$/) do |select_id|
+  # Write code here that turns the phrase above into concrete actions
+  active_projects = Project.active
+  non_active_projects = Project.all - active_projects
+  # page.select project_name, from: "project_id"
+  within "##{select_id}" do
+    active_projects.pluck(:title).each do |title|
+      expect(page).to have_content(title)
+    end
+    non_active_projects.pluck(:title).each do |title|
+      expect(page).to have_no_content(title)
+    end
+  end
+end
