@@ -1,4 +1,4 @@
-@vcr @javascript @stripe_javascript
+@javascript @stripe_javascript
 Feature: Private Events
     As a Premium User of sufficient grade
     In order to be able to join a private mobbing event

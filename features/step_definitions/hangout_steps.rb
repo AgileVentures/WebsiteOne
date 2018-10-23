@@ -204,44 +204,50 @@ When(/^I manually edit the Youtube URL$/) do
 end
 
 Then(/^the Youtube URL is posted in Slack$/) do
-  expect(SlackService2).to have_received :post_yt_link
+  expect(YoutubeNotificationService).to have_received :with
 end
 
 Then(/^the Hangout URL is not posted in Slack$/) do
-  expect(SlackService2).not_to have_received :post_hangout_notification
+  expect(HangoutNotificationService).not_to have_received :with
 end
 
 And(/^that we're spying on the SlackService$/) do
-  allow(SlackService2).to receive :post_yt_link
-  allow(SlackService2).to receive :post_hangout_notification
+  allow(HangoutNotificationService).to receive :with
+  allow(YoutubeNotificationService).to receive :with
+  # allow(YoutubeNotificationService).to receive :post_hangout_notification
 end
 
 And(/^that we're spying on the SlackService private and public channels$/) do
-  allow(SlackService2).to receive :post_pair_programming_notification
-  allow(SlackService2).to receive :send_slack_message
-  allow(SlackService2).to receive :post_premium_mob_hangout_notification
-  allow(SlackService2).to receive :post_hangout_notification  
-  allow(SlackService2).to receive :post_premium_mob_yt_notification
+  allow(HangoutNotificationService).to receive :with
+  allow(YoutubeNotificationService).to receive :with
+  
+  # allow(HangoutNotificationService).to receive :post_hangout_notification  
+  # allow(HangoutNotificationService).to receive :post_premium_mob_hangout_notification
+  # allow(HangoutNotificationService).to receive :send_slack_message
+  # allow(HangoutNotificationService).to receive :post_pair_programming_notification
+
+  # allow(HangoutNotificationService).to receive :post_premium_mob_yt_notification
 end
 
 Then(/^the Youtube URL is not posted in Slack$/) do
-  expect(SlackService2).not_to have_received :post_yt_link
+  expect(YoutubeNotificationService).not_to have_received :with
 end
 
 And(/^the Hangout URL is posted in Slack$/) do
-  expect(SlackService2).to have_received :post_hangout_notification
+  expect(HangoutNotificationService).to have_received :with
 end
 
 Then(/^the Hangout URL is posted only in appropriate private channels in Slack$/) do
-  expect(SlackService2).to have_received :post_premium_mob_hangout_notification
-  expect(SlackService2).not_to have_received :send_slack_message
-  expect(SlackService2).not_to have_received :post_pair_programming_notification
+  expect(HangoutNotificationService).to have_received :with
+  # expect(HangoutNotificationService).to have_received :post_hangout_notification
+  # expect(HangoutNotificationService).to have_received :send_slack_message
+  # expect(HangoutNotificationService).not_to have_received :post_pair_programming_notification
 end
 
 Then(/^the Youtube URL is posted in select private channels in Slack$/) do
-  expect(SlackService2).to have_received :post_premium_mob_yt_notification
-  expect(SlackService2).not_to have_received :send_slack_message
-  expect(SlackService2).not_to have_received :post_pair_programming_notification
+  expect(YoutubeNotificationService).to have_received :with
+  # expect(YoutubeNotificationService).not_to have_received :send_slack_message
+  # expect(YoutubeNotificationService).not_to have_received :post_pair_programming_notification
 end
 
 

@@ -5,6 +5,7 @@ class HangoutNotificationService
   def self.with(event_instance,
                 slack_client = Slack::Web::Client.new(logger: Rails.logger),
                 gitter_client = Gitter::Client.new(ENV['GITTER_API_TOKEN']))
+    
           new(event_instance, slack_client, gitter_client).send(:post_hangout_notification)
   end
   
@@ -64,22 +65,22 @@ class HangoutNotificationService
       'premium_extra': 'C29J4QQ9M',
       'premium_mob_trialists': 'C29J4QQ9F'
     }
-
+    
     GITTER_ROOMS = {
       'saasbook/MOOC': '56b8bdffe610378809c070cc',
       'saasbook/AV102': '56b8bdffe610378809c070cc',
       'AgileVentures/agile-bot': '56b8bdffe610378809c070cc'
     }
   end
-
+  
   private
-
+  
   def initialize event_instance, slack_client, gitter_client
     @event_instance = event_instance
     @slack_client = slack_client
     @gitter_client = gitter_client    
   end
-
+  
   def post_hangout_notification
     return unless Features.slack.notifications.enabled
     return if @event_instance.hangout_url.blank?
@@ -91,14 +92,14 @@ class HangoutNotificationService
     
     send_notifications channels
   end
-
+  
   def channels_for_project project
     return [] if project.nil? or project.slug.nil?
     result = CHANNELS[project.try(:slug).to_sym]
     return [result] unless result.respond_to? :each
     result
   end
-
+  
   def send_notifications channels
     return post_premium_mob_hangout_notification if @event_instance.for == 'Premium Mob Members'
     case @event_instance.category
@@ -107,11 +108,11 @@ class HangoutNotificationService
     when 'PairProgramming'
       post_pair_programming_notification channels
     end
-
+    
     # # send all types of events to associated project 'channel' if there is one
     send_slack_message @slack_client, channels, @here_message
   end
-
+  
   def post_premium_mob_hangout_notification
     send_slack_message @slack_client, [CHANNELS[:premium_extra], 
                        CHANNELS[:premium_mob_trialists]], @here_message
