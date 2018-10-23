@@ -34,25 +34,30 @@ describe UserPresenter do
   end
 
   describe '#timezone' do
+    before do
+      ::Timezone::Lookup.config(:test)
+      ::Timezone::Lookup.lookup.stub(34.0, -118.0, 'America/Los_Angeles')
+      ::Timezone::Lookup.lookup.default('Europe/London')
+    end
     it 'should display timezone when it can be determined' do
-      user.latitude = 34
-      user.longitude = -118
+      user.latitude = 34.0
+      user.longitude = -118.0
       expect(Timezone.lookup(user.latitude, user.longitude).name).to eq('America/Los_Angeles')
       user.latitude = 51
       user.longitude = 0
       expect(Timezone.lookup(user.latitude, user.longitude).name).to eq('Europe/London')
-      user.latitude = 25.9500
-      user.longitude = 32.5833
-      #expect(NearestTimeZone).to receive(:to).with(user.latitude, user.longitude).and_return('Africa/Cairo')
-      expect(Timezone.lookup(user.latitude, user.longitude).name).to eq('Africa/Cairo')
-      expect(subject.timezone).to eq 'Africa/Cairo'
+      expect(subject.timezone).to eq 'Europe/London'
     end
   end
 
   describe '#timezone_formatted_offset' do
+    before do
+      ::Timezone::Lookup.config(:test)
+      ::Timezone::Lookup.lookup.stub(25.95, 32.58, 'Africa/Cairo')
+    end
     it 'should display timezone formatted offset when it can be determined' do
-      user.latitude = 25.9500
-      user.longitude = 32.5833
+      user.latitude = 25.95
+      user.longitude = 32.58
       expect(ActiveSupport::TimeZone.new(subject.timezone)).to receive(:formatted_offset).and_return('+02:00')
       expect(subject.timezone_formatted_offset).to eq '+02:00'
     end
