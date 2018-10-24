@@ -7,6 +7,11 @@ Feature: Editing an event with a start date in the future
   Background:
     Given the date is "2014/02/01 09:15:00 UTC"
     And I have logged in
+    And the following projects exist:
+      | title   | description          | pitch | status | commit_count |
+      | WSO     | greetings earthlings |       | active | 2795         |
+      | EdX     | greetings earthlings |       | active | 2795         |
+      | CS169   | for roadists         |       | active |              |
     And I am on Events index page
     When I click "New Event"
     And I select "Repeats" to "weekly"
@@ -20,6 +25,7 @@ Feature: Editing an event with a start date in the future
       | Description | we stand up   |
       | End Date    | 2014-03-04    |
     Then the event is set to end sometime
+    And I select "EdX" from the event project dropdown
     And I click on the "repeat_ends_on" div
     And I click the "Save" button
     And I am on Events index page
@@ -95,3 +101,7 @@ Feature: Editing an event with a start date in the future
     And I click the "Save" button
     Then I should see "Failed to update event: Repeat ends on can't be blank"
     And The box for "Friday" should be checked
+
+  Scenario: Editing existing event whose project is not CS169 doesnt default its project to CS169
+    And I visit the edit page for the event named "Daily Standup"
+    Then "Edx" is selected in the event project dropdown
