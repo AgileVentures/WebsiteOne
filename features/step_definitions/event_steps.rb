@@ -196,7 +196,6 @@ end
 And(/^"([^"]*)" is selected in the event project dropdown$/) do |project_slug|
   project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug.downcase).id
   expect(find("#event_project_id").value).to eq project_id.to_s
-
 end
 
 
