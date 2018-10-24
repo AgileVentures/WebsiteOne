@@ -17,7 +17,9 @@ services:
       - .:/WebsiteOne
       - javascript_vendors:/WebsiteOne/vendor/assets/javascripts
       - scripts:/WebsiteOne/scripts
+      - bundle_cache:/bundle
 volumes:
   dbVolume:
   javascript_vendors:
   scripts:
+  bundle_cache:

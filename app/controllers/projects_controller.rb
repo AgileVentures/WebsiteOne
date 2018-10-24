@@ -96,7 +96,7 @@ class ProjectsController < ApplicationController
 
   def filter_projects_list_by_language
     @language = params[:project][:languages]
-    @projects = @projects.search_by_language(@language, params[:page])
+    @projects = @projects.search_by_language(@language)
   end
 
   def add_to_feed(action)

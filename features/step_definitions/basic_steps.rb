@@ -177,8 +177,12 @@ Then /^I should see link "([^"]*)" with "([^"]*)"$/ do |link, url|
   expect(page).to have_link(link, href: url)
 end
 
-Then(/^I should not see a link "([^"]*)" to "([^"]*)"$/) do |link, url|
-  expect(page).to_not have_link(link, href: url)
+Then(/^I should( not)? see a link "([^"]*)" to "([^"]*)"$/) do |negate, link, url|
+  if negate
+    expect(page).to have_no_link(link, href: url)
+  else
+    expect(page).to have_link(link, href: url)
+  end
 end
 
 Then /^I should be on the "([^"]*)" page$/ do |page|
@@ -363,10 +367,9 @@ Then(/^I should see a link to past events$/) do
   assert_link_exists(hangouts_path, "Past events")
 end
 
-
-Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-  expect(page).to have_link text, href: link
-end
+# Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
+#   expect(page).to have_link text, href: link
+# end
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
   expect(page).to have_css "img[src*=\"#{source}\"]"

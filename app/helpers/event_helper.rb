@@ -49,7 +49,7 @@ module EventHelper
   end
 
   def show_live_events?
-    return true unless @event.category == 'Mob'
+    return true unless @event.for == 'Premium Mob Members'
     current_user and current_user.allowed_to_attend?
   end
 end

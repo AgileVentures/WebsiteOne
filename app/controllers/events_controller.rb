@@ -1,11 +1,11 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
+  before_action :set_projects, only: [:new, :edit, :update, :create]
 
   def new
     @event = Event.new(new_params)
     @event.set_repeat_ends_string
-    @projects = Project.all
   end
 
   def show
@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @projects = Project.active
     respond_to do |format|
       format.html {@events = Event.upcoming_events(specified_project) }
       format.json {@events = Event.upcoming_events(specified_project) }
@@ -26,7 +26,6 @@ class EventsController < ApplicationController
 
   def edit
     @event.set_repeat_ends_string
-    @projects = Project.all
   end
 
   def create
@@ -39,7 +38,6 @@ class EventsController < ApplicationController
                                            failure: ->(event) do
                                              @event = event
                                              flash[:notice] = @event.errors.full_messages.to_sentence
-                                             @projects = Project.all
                                              render :new
                                            end)
   end
@@ -117,6 +115,10 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.friendly.find(params[:id])
+  end
+
+  def set_projects
+    @projects = Project.active.collect { |project| [project.title, project.id] }
   end
 
   def new_params
