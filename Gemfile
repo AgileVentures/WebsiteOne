@@ -121,7 +121,7 @@ group :development, :test do
   gem 'simplecov', '~> 0.16.1'
 end
 
-group :development, :staging, :production do
+group :staging, :production do
   gem 'rack-timeout'
 end
 
