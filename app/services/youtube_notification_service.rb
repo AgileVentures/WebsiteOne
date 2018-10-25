@@ -4,7 +4,7 @@ class YoutubeNotificationService
   def self.with(event_instance,
                 slack_client = Slack::Web::Client.new(logger: Rails.logger)
                )
-           new(event_instance, slack_client).send(:post_youtube_notification)
+           new(event_instance, slack_client).send(:run)
   end
   if ENV['LIVE_ENV'] == 'production'
     CHANNELS = {
@@ -66,7 +66,7 @@ class YoutubeNotificationService
     @slack_client = slack_client
   end
 
-  def post_youtube_notification
+  def run
     return unless Features.slack.notifications.enabled
     return if @event_instance.yt_video_id.blank?
     channels = channels_for_project @event_instance.project

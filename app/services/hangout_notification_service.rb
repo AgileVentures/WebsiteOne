@@ -5,8 +5,7 @@ class HangoutNotificationService
   def self.with(event_instance,
                 slack_client = Slack::Web::Client.new(logger: Rails.logger),
                 gitter_client = Gitter::Client.new(ENV['GITTER_API_TOKEN']))
-    
-          new(event_instance, slack_client, gitter_client).send(:post_hangout_notification)
+          new(event_instance, slack_client, gitter_client).send(:run)
   end
   
   if ENV['LIVE_ENV'] == 'production'
@@ -81,7 +80,7 @@ class HangoutNotificationService
     @gitter_client = gitter_client    
   end
   
-  def post_hangout_notification
+  def run
     return unless Features.slack.notifications.enabled
     return if @event_instance.hangout_url.blank?
     
@@ -115,15 +114,15 @@ class HangoutNotificationService
   
   def post_premium_mob_hangout_notification
     send_slack_message @slack_client, [CHANNELS[:premium_extra], 
-                       CHANNELS[:premium_mob_trialists]], @here_message
+    CHANNELS[:premium_mob_trialists]], @here_message
   end
-
+  
   def post_scrum_notification
     send_slack_message @slack_client, [CHANNELS[:general]], @here_message
     send_slack_message @slack_client, [CHANNELS[:standup_notifications]], 
-                       @channel_message
+    @channel_message
   end
-
+  
   def post_pair_programming_notification channels
     if channels.include? CHANNELS[:cs169]
       message = "[#{@event_instance.title} with #{@event_instance.user.display_name}](#{@event_instance.hangout_url})"
@@ -133,15 +132,15 @@ class HangoutNotificationService
       send_slack_message @slack_client, [CHANNELS[:general]], @here_message
     end
     send_slack_message @slack_client, [CHANNELS[:pairing_notifications]],
-                       @channel_message
+    @channel_message
   end
-
+  
   def send_gitter_message_avoid_repeats message
     messages = @gitter_client.messages(GITTER_ROOMS[:'saasbook/MOOC'], limit: 50)
     return if messages.include? message
     @gitter_client.send_message(message, GITTER_ROOMS[:'saasbook/MOOC'])
   end
-
+  
   def send_slack_message client, channels, message
     user = @event_instance.user
     channels.each do |channel|
