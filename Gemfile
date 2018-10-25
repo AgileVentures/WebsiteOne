@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-gem 'rails', '~> 5.1'
+gem 'rails', '= 5.2'
 gem 'acts-as-taggable-on'
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts_as_tree'
@@ -72,6 +72,7 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
+gem 'bootsnap', '~> 1.3', '>= 1.3.2'
 
 group :test do
   gem 'capybara'
