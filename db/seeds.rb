@@ -145,7 +145,7 @@ if StaticPage.count == 0
 end
 
 # Create ghost user
- Rake::Task['user:create_anonymous'].invoke
+Rake::Task['user:create_anonymous'].invoke
 
 klasses.each_with_index do |klass, i|
   puts "#{klass.name}.count " + old_counts[i].to_s.bold.red + ' -> ' + klass.count.to_s.bold.green
