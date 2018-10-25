@@ -35,9 +35,9 @@ describe UserPresenter do
 
   describe '#timezone' do
     before do
-      ::Timezone::Lookup.config(:test)
-      ::Timezone::Lookup.lookup.stub(34.0, -118.0, 'America/Los_Angeles')
-      ::Timezone::Lookup.lookup.default('Europe/London')
+      Timezone::Lookup.config(:test)
+      Timezone::Lookup.lookup.stub(34.0, -118.0, 'America/Los_Angeles')
+      Timezone::Lookup.lookup.default('Europe/London')
     end
     it 'should display timezone when it can be determined' do
       user.latitude = 34.0
@@ -52,8 +52,8 @@ describe UserPresenter do
 
   describe '#timezone_formatted_offset' do
     before do
-      ::Timezone::Lookup.config(:test)
-      ::Timezone::Lookup.lookup.stub(25.95, 32.58, 'Africa/Cairo')
+      Timezone::Lookup.config(:test)
+      Timezone::Lookup.lookup.stub(25.95, 32.58, 'Africa/Cairo')
     end
     it 'should display timezone formatted offset when it can be determined' do
       user.latitude = 25.95
