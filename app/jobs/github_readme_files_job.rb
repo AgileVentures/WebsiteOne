@@ -38,13 +38,17 @@ module GithubReadmeFilesJob
     tags = { 'a' => 'href' }
     url_param = tags[node.name]                    # return "href"
     href = node[url_param]                           # node['href'] -> returns the nodes url. node.attributes.value
-    unless (href.empty?) || (href.match?(/^\#/))
+    unless anchor_link?
       uri = URI.parse(href)
       if uri.relative?
         uri = "#{source_site}#{uri}"
         node[url_param] = uri
       end
-    end    
+    end  
+  end
+  
+  def anchor_link?
+    href.empty? || href.match? /^\#/
   end
 
   def project_readme(project)
