@@ -25,9 +25,10 @@ module WebsiteOne
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     #config.time_zone = 'Central Time (US & Canada)'
   Timezone::Lookup.config(:geonames) do |c|
-    c.username = 'dkuku'
+    c.username = ENV['GEONAMES_USERNAME']
     c.offset_etc_zones = true
   end
+
   ENV['TZ'] = 'UTC'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
@@ -46,7 +47,7 @@ module WebsiteOne
 
     # ensure svg assets are compiled in production
     config.assets.precompile += %w( jobs.svg lady-dev.svg real-projects.svg runners.svg standups.svg )  
-    
+
     # config.assets.css_compressor = :sass
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
