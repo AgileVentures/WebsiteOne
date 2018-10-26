@@ -34,19 +34,32 @@ describe UserPresenter do
   end
 
   describe '#timezone' do
-    before do
-      Timezone::Lookup.config(:test)
-      Timezone::Lookup.lookup.stub(34.0, -118.0, 'America/Los_Angeles')
-      Timezone::Lookup.lookup.default('Europe/London')
+    context 'when latitude and longitude present' do
+      before do
+        Timezone::Lookup.config(:test)
+        Timezone::Lookup.lookup.stub(34.0, -118.0, 'America/Los_Angeles')
+        Timezone::Lookup.lookup.default('Europe/London')
+      end
+      it 'should display timezone when it can be determined' do
+        user.latitude = 34.0
+        user.longitude = -118.0
+        expect(subject.timezone).to eq 'America/Los_Angeles'
+        user.latitude = 51
+        user.longitude = 0
+        expect(subject.timezone).to eq 'Europe/London'
+      end
     end
-    it 'should display timezone when it can be determined' do
-      user.latitude = 34.0
-      user.longitude = -118.0
-      expect(Timezone.lookup(user.latitude, user.longitude).name).to eq('America/Los_Angeles')
-      user.latitude = 51
-      user.longitude = 0
-      expect(Timezone.lookup(user.latitude, user.longitude).name).to eq('Europe/London')
-      expect(subject.timezone).to eq 'Europe/London'
+    context 'when no latitude and longitude present' do
+      it 'should display guessed timezone' do
+        user.latitude = nil
+        user.longitude = nil
+        user.timezone_offset = nil
+        expect(subject.timezone).to eq('UTC')
+        user.timezone_offset = 0
+        expect(subject.timezone).to eq('Casablanca')
+        user.timezone_offset = 3600
+        expect(subject.timezone).to eq('Amsterdam')
+      end
     end
   end
 
@@ -81,8 +94,8 @@ describe UserPresenter do
 
     before(:each) do
       @status = FactoryBot.create_list(:status, 3,
-                                        status: Status::OPTIONS[rand(Status::OPTIONS.length)],
-                                        user: user)
+                                       status: Status::OPTIONS[rand(Status::OPTIONS.length)],
+                                       user: user)
       user.reload
     end
 

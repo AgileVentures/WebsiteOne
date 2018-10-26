@@ -191,6 +191,7 @@ describe User, type: :model do
       expect(subject.city).to_not eq nil
       expect(subject.country_name).to_not eq nil
       expect(subject.country_code).to_not eq nil
+      expect(subject.timezone_offset).to_not eq nil
     end
 
     it 'should set user location' do
@@ -245,8 +246,9 @@ describe User, type: :model do
         Timezone::Lookup.lookup.stub(9.15, 7.74, 'Africa/Lagos') #UTC + 1
         Timezone::Lookup.lookup.stub(44.33, 1.06, 'Europe/Paris') # UTC + 2
         Timezone::Lookup.lookup.default('Africa/Lagos')
-        @user1 = FactoryBot.create(:user, latitude: 9.15, longitude: 7.74)
-        @user2 = FactoryBot.create(:user, latitude: 44.33, longitude: 1.06)
+        @user1 = FactoryBot.create(:user, latitude: 9.15, longitude: 7.74, status_count: 1)
+        @user2 = FactoryBot.create(:user, latitude: 44.33, longitude: 1.06, status_count: 2)
+        @user3 = FactoryBot.create(:user, status_count: 3)
         @project = FactoryBot.create(:project)
       end
 
@@ -263,7 +265,7 @@ describe User, type: :model do
 
       context 'filters users for timezone area' do
         before(:each) do
-          @current_user = FactoryBot.create(:user, timezone_offset: 3600)
+          @current_user = FactoryBot.create(:user, timezone_offset: 7200)
         end
 
         it 'filters user1 when choose In My Timezone' do
@@ -271,8 +273,8 @@ describe User, type: :model do
 
           results = User.filter(params).allow_to_display
 
-          expect(results).to include(@user1)
-          expect(results).not_to include(@user2)
+          expect(results).to include(@user2)
+          expect(results).not_to include(@user1)
         end
 
         it 'filters both users when choose Members Within 2 Timezones' do

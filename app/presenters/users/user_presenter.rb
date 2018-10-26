@@ -39,7 +39,12 @@ class UserPresenter < BasePresenter
   end
 
   def timezone
-    Timezone.lookup(user.latitude, user.longitude).name
+    begin
+      Timezone.lookup(user.latitude, user.longitude).name
+    rescue
+      return ActiveSupport::TimeZone[user.timezone_offset / 3600].name if user.timezone_offset
+      'UTC'
+    end
   end
 
   def timezone_formatted_offset

@@ -219,6 +219,10 @@ class User < ApplicationRecord
   def generate_timezone_offset
     if self.latitude && self.longitude
       self.timezone_offset = Timezone.lookup(self.latitude, self.longitude).utc_offset
+    elsif self.timezone_offset
+      self.timezone_offset #this is only needed for tests to pass
+    else
+      self.timezone_offset = 0
     end
   end
 

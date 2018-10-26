@@ -24,10 +24,6 @@ module WebsiteOne
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     #config.time_zone = 'Central Time (US & Canada)'
-  Timezone::Lookup.config(:geonames) do |c|
-    c.username = ENV['GEONAMES_USERNAME']
-    c.offset_etc_zones = true
-  end
 
   ENV['TZ'] = 'UTC'
 
