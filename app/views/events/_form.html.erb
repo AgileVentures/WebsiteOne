@@ -23,7 +23,7 @@
 
       <div class='form-group'>
         <%= f.label :project_id, class: 'control-label' %>
-        <%= f.select :project_id, @projects.collect { |p| [p.title, p.id] }.sort, {}, class: 'form-control' %>
+        <%= f.select :project_id, @projects, {}, class: 'form-control' %>
       </div>
 
       <%= awesome_text_area f, :description, rows: 10 %>
