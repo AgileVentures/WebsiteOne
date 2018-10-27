@@ -90,7 +90,7 @@ WebsiteOne::Application.routes.draw do
   get 'sections', to: 'documents#get_doc_categories', as: 'project_document_sections', :format => false
   put 'update_document_parent_id/:project_id/:id', to: 'documents#update_parent_id', as: 'update_document_parent_id', :format => false
 
-  get 'calendar', to: 'calendar#index'
+  get '/calendar' => 'calendar#index'
 
   resources :hookups
 
