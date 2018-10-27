@@ -72,6 +72,7 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
+gem 'icalendar'
 
 group :test do
   gem 'capybara'
