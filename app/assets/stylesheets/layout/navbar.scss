@@ -103,6 +103,10 @@ $gravatar-size: 35px;
   }
 }
 
+#navbar-toggle-mobile {
+  border-color: #fff;
+}
+
 @media (min-width: $screen-sm-min - 1px) {
   .navbar-nav.nav-justified > li {
     float: none;

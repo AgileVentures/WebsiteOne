@@ -83,6 +83,11 @@ $avatar-size: 32px;
     background-color: darken(#15ab94, 7%)
   }
 }
+
+.btn-search {
+  background-color: $theme-dark;
+}
+
 .tab-pane {
   padding: 1em 15px;
 }
@@ -93,6 +98,9 @@ $avatar-size: 32px;
 
 .language-search-btn {
   margin-top: 28px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  padding-left: 0px;
 }
 
 .project_card {
@@ -120,7 +128,6 @@ $avatar-size: 32px;
 
 .project_card_stats {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   height: 110px;
 }
@@ -128,6 +135,11 @@ $avatar-size: 32px;
 .project_card_stats_items {
   display: flex;
   margin-top: 5px;
+}
+
+.flex {
+  display: flex;
+  align-items: flex-end;
 }
 
 #project_image {
