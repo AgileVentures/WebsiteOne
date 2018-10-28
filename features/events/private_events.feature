@@ -33,7 +33,7 @@ Feature: Private Events
             | Premium      | should not |
             | Associate    | should not |
             | Free         | should not |
-        
+
     Scenario: Edit hangout url for private event pings only appropriate private channels
       Given I have logged in
       And the date is "2014/02/03 9:00:00 UTC"
