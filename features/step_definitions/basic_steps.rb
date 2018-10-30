@@ -444,3 +444,10 @@ Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_li
     step %Q{I should see "#{project_title}" within "#{project_list_area}"}
   end
 end
+Then /^I should receive a file(?: "([^"]*)")?/ do |file|
+  result = page.response_headers['Content-Type'].should == "text/calendar"
+  if result
+    result = page.response_headers['Content-Disposition'].should =~ /#{file}/
+  end
+  result
+end
