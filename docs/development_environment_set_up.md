@@ -35,25 +35,8 @@ OSX no longer needs host: `localhost` in `database.yml` if you export PG_HOST=lo
 
 * Ubuntu
 * Mac
-* Capybara-webkit
 * Heroku deployment
 
-
-## [capybara-webkit gem](id:capybara-webkit)
-
-The `capybara-webkit` gem needs the Qt toolchain (including qmake and the webkit library and header files). You want version 4.8 or later. To install them in Ubuntu release 12.04 LTS "precise pangolin", or later, run:
-
-     sudo apt-get install libqtwebkit-dev
-
-This command also works on Debian 7.
-
-If you have an older version of Ubuntu, you can install a new version from scratch, or upgrade with `sudo do-release-upgrade`. If on Amazon EC2, see http://gregrickaby.com/safely-update-an-ubuntu-ec2-instance-on-amazon-aws/
-
-For other platforms, see http://qt-project.org/downloads.
-
-Note that on Mac, even after performing the aforementioned install, you are likely to need to install something else to get the `qmake` build tool. Install [Homebrew](http://brew.sh/), if you don't have it already, then run `brew install qt`. Then you should be able to run `gem install capybara-webkit -v '1.0.0'` successfully.
-
-After that try running `bundle install` again.
 
 ## [Phantomjs](id:phantomjs)
 
@@ -63,6 +46,8 @@ On older versions of ubuntu (like the one that the saasbook vm is created upon) 
 You will need version 1.8.1.  Please see this [gist](https://gist.github.com/jezgomez/5019242) for instructions.
 
 If you have already installed the old phantomjs run `sudo apt-get remove phantomjs` to remove it first.
+
+On OSX you can install it by downloading a Zip File from the url [phantomjs](http://phantomjs.org/download.html), unzip it to a directory of your choice, then ensure you set the PATH for the bin directory for phantomjs in your environment. You can find help [here](https://coolestguidesontheplanet.com/add-shell-path-osx/) on how to set the path
 
 ## Updating Rails
 Run `bundle update rails`
