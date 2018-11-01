@@ -25,10 +25,6 @@ Feature: Browse  projects
     Given  I am on the "home" page
     When I follow "Projects" within the navbar
     Then I should see "List of Projects"
-    Then I should see:
-      | Text   |
-      | Create |
-      | Status |
 
   Scenario: Columns in projects table
     When I go to the "projects" page

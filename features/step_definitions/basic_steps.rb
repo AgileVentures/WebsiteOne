@@ -423,7 +423,6 @@ When(/^I toggle to( Cannot)? Attend$/) do |negated|
   find("#attendance_checkbox", visible: false).trigger('click')
 end
 
-
 When(/^I scroll to the bottom of the page$/) do
   page.execute_script "window.scrollBy(0,10000)"
 end

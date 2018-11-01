@@ -21,14 +21,13 @@ Feature: Sidebar navigation
     And there are no videos
 
 
-  Scenario: Sidebar is always visible
+  Scenario: Sidebar is visible except on projects index page
     Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     Then I should see the sidebar
     Given I am on the "Show" page for project "hello mars"
     Then I should see the sidebar
     Given I am on the "projects" page
-    Then I should see the sidebar
     When I click the very stylish "New Project" button
     Then I should see the sidebar
 
@@ -53,5 +52,3 @@ Feature: Sidebar navigation
     Given I am on the "Show" page for project "hello mars"
     Then I should see "hello moon" before "hello pluto"
     And I should see "hello pluto" before "hello world"
-
-
