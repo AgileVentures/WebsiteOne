@@ -323,7 +323,7 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
-    json (1.8.6)
+    json (2.1.0)
     jvectormap-rails (2.0.0)
       railties (>= 3.1)
     jwt (1.5.6)
@@ -488,7 +488,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    recaptcha (4.12.0)
+    recaptcha (4.13.0)
       json
     redcarpet (3.4.0)
     ref (2.0.0)
