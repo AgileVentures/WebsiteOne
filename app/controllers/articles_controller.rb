@@ -61,7 +61,7 @@ class ArticlesController < ApplicationController
   def upvote
     if check_vote_author == false then
       @article.upvote_by current_user
-      case @article.vote_registered?
+      case check_vote_registered
       when true
         flash[:notice] = %Q{Successfully voted up the article "#{@article.title}"}
       when false
@@ -76,7 +76,7 @@ class ArticlesController < ApplicationController
   def downvote
     if check_vote_author == false then
       @article.downvote_by current_user
-      case @article.vote_registered?
+      case check_vote_registered
       when true
         flash[:notice] = %Q{Successfully voted down the article "#{@article.title}"}
       when false
@@ -86,6 +86,10 @@ class ArticlesController < ApplicationController
       end
     end
     redirect_to_article_path
+  end
+  
+  def check_vote_registered
+    @article.vote_registered?
   end
   
   def check_vote_author
