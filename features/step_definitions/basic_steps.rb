@@ -367,10 +367,6 @@ Then(/^I should see a link to past events$/) do
   assert_link_exists(hangouts_path, "Past events")
 end
 
-# Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-#   expect(page).to have_link text, href: link
-# end
-
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
   expect(page).to have_css "img[src*=\"#{source}\"]"
 end
