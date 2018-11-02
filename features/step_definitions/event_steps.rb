@@ -105,6 +105,8 @@ Given(/^"([^"]*)" created the "([^"]*)" event with an event instance "([^"]*)"$/
   EventInstance.create!(event_id: event.id, title: event_instance_name, hangout_url: "https://hangouts.google.com/call/BxivVrWsi_HEyfRVa...", created_at: "2018-09-05 03:22:02", updated_at: "2018-09-05 03:30:20", category: "PairProgramming", url_set_directly: true, yt_video_id: "hx7c0P0qKWc")
 end
 
+
+
 Given(/^I am on the show page for event "([^"]*)"$/) do |name|
   event = Event.find_by_name(name)
   visit event_path(event)
@@ -434,6 +436,21 @@ Given(/^the following event instances exist:$/) do |table|
     hash[:event] = Event.find_by name: hash[:event]
     hash[:project] = Project.find_by title: hash[:project]
     EventInstance.create hash
+  end
+end
+
+Then(/^I should see a link to join or upgrade based on my (.*)$/) do |plan_name|
+  join_message = 'JOIN THIS LIVE EVENT NOW'
+  join_link = 'http://hangout.test'
+  upgrade_message = 'THIS EVENT IS LIVE, UPGRADE NOW TO JOIN'
+  upgrade_link = '/subscriptions/new?plan=premiummob'
+  premium_mob_and_above_array = ['Premium Plus','Premium F2F', 'Premium Mob']
+  if premium_mob_and_above_array.include? plan_name
+    expect(page).to have_link(join_message, href: join_link) 
+    expect(page).to have_no_link(upgrade_message, href: upgrade_link) 
+  else
+    expect(page).to have_link(upgrade_message, href: upgrade_link) 
+    expect(page).to have_no_link(join_message, href: join_link) 
   end
 end
 
