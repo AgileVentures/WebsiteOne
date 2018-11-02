@@ -40,7 +40,7 @@ OSX no longer needs host: `localhost` in `database.yml` if you export PG_HOST=lo
 
 ## [Phantomjs](id:phantomjs)
 
-On Linux run `sudo apt-get install phantomjs`
+On Linux run `sudo apt-get install phantomjs` or `npm i -g phantomjs-prebuilt`
 
 On older versions of ubuntu (like the one that the saasbook vm is created upon) this installs an old version of phantomjs.
 You will need version 1.8.1.  Please see this [gist](https://gist.github.com/jezgomez/5019242) for instructions.
