@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
     if @article.save
       @article.create_activity :create, owner: current_user
       flash[:notice] = %Q{Successfully created the article "#{@article.title}!"}
-      redirect_to article_path(@article)
+      redirect_to_article_path
     else
       flash.now[:alert] = @article.errors.full_messages.join(', ')
       render 'new'
@@ -41,7 +41,7 @@ class ArticlesController < ApplicationController
     if @article.update_attributes(article_params)
       @article.create_activity :update, owner: current_user
       flash[:notice] = %Q{Successfully updated the article "#{@article.title}"}
-      redirect_to article_path(@article)
+      redirect_to_article_path
     else
       flash.now[:alert] = @article.errors.full_messages.join(', ')
       render 'edit'
@@ -59,9 +59,7 @@ class ArticlesController < ApplicationController
 
   # article voting
   def upvote
-    if @article.authored_by?(current_user) then
-      flash[:error] = %Q{Can not vote for your own article "#{@article.title}"}
-    else
+    if check_vote_author == false then
       @article.upvote_by current_user
       case @article.vote_registered?
       when true
@@ -69,16 +67,14 @@ class ArticlesController < ApplicationController
       when false
         flash[:error] = "You have already given this article an up vote"
       when nil
-        flash[:error] = "Your vote was not registered"
+        vote_not_registered
       end
     end
-    redirect_to article_path(@article)
+    redirect_to_article_path
   end
 
   def downvote
-    if @article.authored_by?(current_user) then
-      flash[:error] = %Q{Can not vote for your own article "#{@article.title}"}
-    else
+    if check_vote_author == false then
       @article.downvote_by current_user
       case @article.vote_registered?
       when true
@@ -86,9 +82,23 @@ class ArticlesController < ApplicationController
       when false
         flash[:error] = "You have already given this article a down vote"
       when nil
-        flash[:error] = "Your vote was not registered"
+        vote_not_registered
       end
     end
+    redirect_to_article_path
+  end
+  
+  def check_vote_author
+    if @article.authored_by?(current_user) then
+      flash[:error] = %Q{Can not vote for your own article "#{@article.title}"}
+    end
+  end
+  
+  def vote_not_registered
+    flash[:error] = "Your vote was not registered"
+  end
+  
+  def redirect_to_article_path
     redirect_to article_path(@article)
   end
 
@@ -102,7 +112,7 @@ class ArticlesController < ApplicationController
     when nil
       flash[:error] = "Can not cancel when you have not voted for this article"
     end
-    redirect_to article_path(@article)
+    redirect_to_article_path
   end
 
   private
