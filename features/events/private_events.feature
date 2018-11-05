@@ -16,7 +16,7 @@ Feature: Private Events
             | Premium F2F  | premiumf2f  | 5000   | 0                      |
             | Premium Plus | premiumplus | 10000  | 0                      |
 
-    Scenario Outline: show mob hangout links to users with correct plans
+    Scenario Outline: Show mob hangout links to users with correct plans
         Given the date is "2014/02/03 10:26:00 UTC"
         Given I am logged in as a user with "<plan>"
         Given the Hangout for event "Mob" has been started with details:
@@ -33,41 +33,59 @@ Feature: Private Events
             | Premium      | should not |
             | Associate    | should not |
             | Free         | should not |
-        
+
     Scenario: Edit hangout url for private event pings only appropriate private channels
-      Given I have logged in
-      And the date is "2014/02/03 9:00:00 UTC"
-      And that we're spying on the SlackService private and public channels
-      And the Slack notifications are enabled
-      When I manually set a hangout link for event "Mob"
-      Then the Hangout URL is posted only in appropriate private channels in Slack
+        Given I have logged in
+        And the date is "2014/02/03 9:00:00 UTC"
+        And that we're spying on the SlackService private and public channels
+        And the Slack notifications are enabled
+        When I manually set a hangout link for event "Mob"
+        Then the Hangout URL is posted only in appropriate private channels in Slack
 
     Scenario: Edit youtube url for private event pings only appropriate private channels
-      Given I have logged in
-      And the date is "2014/02/03 9:00:00 UTC"
-      And that we're spying on the SlackService private and public channels
-      And the Slack notifications are enabled
-      When I manually set youtube link with youtube id "12341234111" for event "Mob"
-      Then the Youtube URL is posted in select private channels in Slack
+        Given I have logged in
+        And the date is "2014/02/03 9:00:00 UTC"
+        And that we're spying on the SlackService private and public channels
+        And the Slack notifications are enabled
+        When I manually set youtube link with youtube id "12341234111" for event "Mob"
+        Then the Youtube URL is posted in select private channels in Slack
 
     Scenario Outline: Users with a plan lower than Premium Mob see the Mobs are live with link to upgrade plan
-      Given the date is "2014/02/03 10:26:00 UTC"
-      Given I am logged in as a user with "<plan>"
-      Given the Hangout for event "Mob" has been started with details:
-          | EventInstance link | http://hangout.test |
-          | Started at         | 10:25:00 UTC        |
-      And the time now is "10:26:00 UTC"
-      When I am on the show page for event "Mob"
-      Then I <assertion> see a link "THIS EVENT IS LIVE, UPGRADE NOW TO JOIN" to "/subscriptions/new?plan=premiummob"
-      Examples:
-          | plan         | assertion  |
-          | Premium Plus | should not |
-          | Premium F2F  | should not |
-          | Premium Mob  | should not |
-          | Premium      | should     |
-          | Associate    | should     |
-          | Free         | should     |
+        Given the date is "2014/02/03 10:26:00 UTC"
+        Given I am logged in as a user with "<plan>"
+        Given the Hangout for event "Mob" has been started with details:
+            | EventInstance link | http://hangout.test |
+            | Started at         | 10:25:00 UTC        |
+        And the time now is "10:26:00 UTC"
+        When I am on the show page for event "Mob"
+        Then I <assertion> see a link "THIS EVENT IS LIVE, UPGRADE NOW TO JOIN" to "/subscriptions/new?plan=premiummob"
+        Examples:
+            | plan         | assertion  |
+            | Premium Plus | should not |
+            | Premium F2F  | should not |
+            | Premium Mob  | should not |
+            | Premium      | should     |
+            | Associate    | should     |
+            | Free         | should     |
 
+
+    Scenario Outline: Show mob video links to users with correct plans
+        Given the date is "2014/02/03 10:26:00 UTC"
+        Given I am logged in as a user with "<plan>"
+        Given the Hangout for event "Mob" has been started with details:
+            | EventInstance link | http://hangout.test |
+            | Started at         | 10:25:00 UTC        |
+        And the time now is "10:26:00 UTC"
+        When I am on the show page for event "Mob"
+        Then I <assertion> see a title of the video "Mob - Monday, 3rd Feb at 10:26am(UTC)"
+        Examples:
+            | plan         | assertion  |
+            | Premium Plus | should     |
+            | Premium F2F  | should     |
+            | Premium Mob  | should     |
+            | Premium      | should not |
+            | Associate    | should not |
+            | Free         | should not |
 
 
 # ideally what we'd love the Premium/Associate/Free members to see is a note that
