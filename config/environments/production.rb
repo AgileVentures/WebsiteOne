@@ -96,7 +96,7 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
-  
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   # Do not dump schema after migrations.
   # config.active_record.dump_schema_after_migration = false
 end

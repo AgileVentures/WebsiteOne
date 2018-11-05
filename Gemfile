@@ -85,6 +85,7 @@ group :test do
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'puffing-billy', '~> 1.1.2'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
   gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
@@ -93,7 +94,6 @@ group :test do
   gem 'webmock'
   gem 'webrat'
   gem 'zeus'
-  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
 end
 
 group :development, :test do
@@ -128,5 +128,4 @@ end
 
 group :production do
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
 end
