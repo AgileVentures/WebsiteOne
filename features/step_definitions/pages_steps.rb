@@ -84,3 +84,4 @@ Then(/^I see the banners for all sponsors$/) do
     end
   end
 end
+

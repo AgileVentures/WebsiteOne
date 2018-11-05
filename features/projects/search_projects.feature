@@ -24,11 +24,3 @@ Feature: Search for Projects by Language
 		Then I should see "hello alpha" within "project-list"
 	  And I should not see "hello world" within "project-list"
 
-	@javascript
-	Scenario: Filtered projects should be utilize pagination
-		Given I am on the "projects" page
-		When I filter "project_languages" for "Ruby"
-		Then I should see "hello jupiter" within "project-list"
-		Then I should not see "hello pluto" within "project-list"
-		When I scroll to the bottom of the page
-		Then I should see "hello pluto" within "project-list"
