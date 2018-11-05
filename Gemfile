@@ -72,6 +72,7 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
+gem 'icalendar'
 
 group :test do
   gem 'capybara'
@@ -87,7 +88,7 @@ group :test do
   gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
-  gem 'stripe-ruby-mock', '~> 2.5.5', require: 'stripe_mock'
+  gem 'stripe-ruby-mock', '~> 2.5.6', require: 'stripe_mock'
   gem 'vcr'
   gem 'webmock'
   gem 'webrat'
@@ -109,7 +110,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'hirb'
-  gem 'jasmine', '~> 3.2'
+  gem 'jasmine', '~> 3.3'
   gem 'jasmine-jquery-rails', '~> 2.0', '>= 2.0.3'
   gem 'pry-byebug'
   gem 'pry-rails'
@@ -121,7 +122,7 @@ group :development, :test do
   gem 'simplecov', '~> 0.16.1'
 end
 
-group :development, :staging, :production do
+group :staging, :production do
   gem 'rack-timeout'
 end
 

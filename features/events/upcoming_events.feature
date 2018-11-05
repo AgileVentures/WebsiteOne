@@ -27,6 +27,15 @@ As a site user
     Given I am on Events index page
     And I should see "25 Min"
 
+  Scenario: Show event calendar download link
+    Given I am on Events index page
+    Then  I should see a link "calendar" to "/calendar"
+  
+  Scenario: Show event calendar download link
+    Given I am on Events index page
+    When I click the "calendar" link
+    Then I should receive a file "AgileVentures_events.ics"
+
   Scenario: Doesn't show event past scheduled event duration
     Given I am on Events index page
     And I should not see "6 Min"

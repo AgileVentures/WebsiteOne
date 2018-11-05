@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     @users = users
     @users_count = @users.total_count
-    @projects = Project.all.sort { |a, b| a.title <=> b.title }
+    @projects = Project.where(status: "active").sort { |a, b| a.title <=> b.title }
     @user_type = params[:title].blank? ? 'Volunteer' : params[:title]
     @user_type = 'Premium Member' if params[:title] == 'Premium'
 
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if should_display_user?(@user) 
+    if should_display_user?(@user)
       @event_instances = EventInstance.where(user_id: @user.id)
                              .order(created_at: :desc).limit(5)
       set_activity_tab(params[:tab])
