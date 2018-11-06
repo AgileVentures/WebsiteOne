@@ -43,6 +43,7 @@ Feature: Manual Edit of Hangout URL
     Given the date is "2014 Feb 5th 6:59am"
     And the event "Repeat Scrum" was last updated at "2014 Feb 4th 7:16am"
     And that we're spying on the SlackService
+    And the Slack notifications are enabled
     When I manually set a hangout link for event "Repeat Scrum"
     Then the Hangout URL is posted in Slack
-    And the Youtube URL is not posted in Slack
+    # And the Youtube URL is not posted in Slack

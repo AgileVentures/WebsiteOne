@@ -75,9 +75,6 @@ After you do that, re-try running `bundle install` and you should be good to go 
 The database used is [postgreSQL](https://www.postgresql.org/).  You need to have this installed and running on your local machine. 
 (The `pg` gem accesses the postgreSQL database.)  [Here are instructions on installing postgreSQL.](development_environment_set_up.md#postgreSQL)
 
-#### `capybara-webkit` gem
-The `capybara-webkit` gem is used for testing and depends on QT tools and libraries, including `libqtwebkit`.  Here are some [tips and troubleshooting solutions](development_environment_set_up.md#capybara-webkit) if you have trouble installing the `capybara-webkit` gem. 
-
 #### Updating Rails
 If you need to update rails, you can run `bundle update rails`.  If you run into problems with rails and `libv8` on OS X, try this:
 ```shell

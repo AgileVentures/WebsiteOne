@@ -204,46 +204,58 @@ When(/^I manually edit the Youtube URL$/) do
 end
 
 Then(/^the Youtube URL is posted in Slack$/) do
-  expect(SlackService).to have_received :post_yt_link
+  expect(@slack_client).to have_received :chat_postMessage
 end
 
 Then(/^the Hangout URL is not posted in Slack$/) do
-  expect(SlackService).not_to have_received :post_hangout_notification
-end
-
-And(/^that we're spying on the SlackService$/) do
-  allow(SlackService).to receive :post_yt_link
-  allow(SlackService).to receive :post_hangout_notification
-end
-
-And(/^that we're spying on the SlackService private and public channels$/) do
-  allow(SlackService).to receive :post_scrum_notification
-  allow(SlackService).to receive :post_pair_programming_notification
-  allow(SlackService).to receive :send_slack_message
-  allow(SlackService).to receive :post_premium_mob_hangout_notification
-  allow(SlackService).to receive :post_premium_mob_yt_notification
+  expect(@slack_client).not_to have_received :chat_postMessage
 end
 
 Then(/^the Youtube URL is not posted in Slack$/) do
-  expect(SlackService).not_to have_received :post_yt_link
+  expect(@slack_client).not_to have_received :chat_postMessage
+end
+
+And(/^that we're spying on the SlackService$/) do
+  @slack_client = double(Slack::Web::Client)
+  allow(Slack::Web::Client).to receive(:new).and_return(@slack_client)
+  allow(@slack_client).to receive(:chat_postMessage)  
 end
 
 And(/^the Hangout URL is posted in Slack$/) do
-  expect(SlackService).to have_received :post_hangout_notification
+  expect(@slack_client).to have_received(:chat_postMessage).twice
 end
 
 Then(/^the Hangout URL is posted only in appropriate private channels in Slack$/) do
-  expect(SlackService).to have_received :post_premium_mob_hangout_notification
-  expect(SlackService).not_to have_received :send_slack_message
-  expect(SlackService).not_to have_received :post_pair_programming_notification
+  # user = User.find(EventInstance.first.user_id)
+  # default_post_args =
+  # {
+  #   username: user.display_name,
+  #   icon_url: user.gravatar_url,
+  #   link_names: 1
+  # }
+  # message = 'MockEvent: <mock_url|click to join>'
+  # here_message = "@here #{message}"
+  # channel_message = "@channel #{message}"
+  # post_premium_mob_notification_post_args = 
+  # {
+  #   channel: 'C29J4QQ9M',
+  #   text: here_message,
+  # }.merge!(default_post_args)
+  
+  # post_premium_mob_trialists_notification_post_args = 
+  # { 
+  #   channel: 'C29J4QQ9F',
+  #   text: here_message,
+  # }.merge!(default_post_args)
+  
+  expect(@slack_client).to have_received(:chat_postMessage).twice
+  # expect(@slack_client).to have_received(:chat_postMessage).with(post_premium_mob_notification_post_args).once
+  # expect(@slack_client).to have_received(:chat_postMessage).with(post_premium_mob_trialists_notification_post_args).once
 end
 
 Then(/^the Youtube URL is posted in select private channels in Slack$/) do
-  expect(SlackService).to have_received :post_premium_mob_yt_notification
-  expect(SlackService).not_to have_received :send_slack_message
-  expect(SlackService).not_to have_received :post_pair_programming_notification
+  expect(@slack_client).to have_received(:chat_postMessage).once
 end
-
 
 And(/^the event "([^"]*)" was last updated at "([^"]*)"$/) do |event_name, date|
   id = Event.where(name: event_name).first[:id]
@@ -253,3 +265,4 @@ end
 Given(/^the Slack notifications are enabled$/) do
   Features.slack.notifications.enabled = true
 end
+
