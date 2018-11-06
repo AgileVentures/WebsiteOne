@@ -3,7 +3,8 @@
 #### Issue addressed
 <!-- include `fixes #<issue-number>` -->
 <!-- the relevant issue in https://github.com/AgileVentures/WebsiteOne/issues  -->
-<!-- should include all the context and motivation  -->
+
+fixes #
 
 #### Screenshots (if appropriate):
 <!-- please include screenshots of any changes to the UI for quick review  -->
