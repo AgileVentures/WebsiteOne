@@ -442,7 +442,7 @@ GEM
       http_parser.rb (~> 0.6.0)
       multi_json
     puma (3.12.0)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-cache (1.8.0)
       rack (>= 0.4)
     rack-test (1.1.0)
