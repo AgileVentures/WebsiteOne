@@ -7,6 +7,7 @@
 ## Current Behavior
 <!--- If describing a bug, tell us what happens instead of the expected behavior -->
 <!--- If suggesting a change/improvement, explain the difference from current behavior -->
+<!--- Please link to the place where the current behaviour is, e.g. https://agileventures.org/events -->
 
 ## Possible Solution
 <!--- Not obligatory, but suggest a fix/reason for the bug, -->
