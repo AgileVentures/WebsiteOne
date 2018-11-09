@@ -504,8 +504,6 @@ When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_na
   filter = case list_name
              when 'projects'
                'project_filter'
-             when 'timezones'
-               'timezone_filter'
              when 'online status'
                'online'
            end
