@@ -24,25 +24,25 @@ module GithubReadmeFilesJob
     end
   end
 
-  def replace_relative_links_with_absolute(project_readme_content, project)
-    source_site = "#{project.github_url}/blob/master/"
-    doc = Nokogiri::HTML(project_readme_content)
-    tags = { 'a' => 'href' }
-    doc.search(tags.keys.join('')).each do |node|
-      url_param = tags[node.name]
-      href = node[url_param]
-      unless (href.empty?) || (href.match?(/^\#/))
-        uri = URI.parse(href)
-        if uri.relative?
-          uri = "#{source_site}#{uri}"
-          node[url_param] = uri
-        end
-      end
+  def replace_relative_links_with_absolute(project_readme_html, project)
+    anchor_tag = 'a'
+    base_uri = "#{project.github_url}/blob/master/"
+    doc = Nokogiri::HTML(project_readme_html)
+    doc.search(anchor_tag).each do |node|
+      convert_path(node, base_uri) unless anchor_link?(node[:href])
     end
     doc.to_html
   end
 
   private
+  
+  def anchor_link?(url)
+    url.empty? || url.match?(/^\#/)
+  end
+  
+  def convert_path(node, base_uri)
+    node[:href] = "#{base_uri}#{URI(node[:href])}" if URI(node[:href]).relative?
+  end
 
   def project_readme(project)
     begin
