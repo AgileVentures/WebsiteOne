@@ -72,7 +72,7 @@ GEM
       activerecord (~> 5.0)
     acts_as_tree (2.8.0)
       activerecord (>= 3.0.0)
-    acts_as_votable (0.11.1)
+    acts_as_votable (0.12.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     airbrake (7.4.0)
@@ -646,7 +646,7 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_follower!
   acts_as_tree
-  acts_as_votable (~> 0.11.1)
+  acts_as_votable (~> 0.12.0)
   addressable
   airbrake
   apipie-rails
