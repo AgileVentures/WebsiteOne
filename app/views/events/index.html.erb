@@ -26,7 +26,7 @@
 <% end %>
 
 <div class="eventContainer">
-  <% @events.each_slice(2) do |slice| %>
+  <% cache @events.each_slice(2) do |slice| %>
       <% slice.each do |instance| %>
           <% event = instance[:event] %>
           <div class="event-row" id="details_<%= event.id %>">
