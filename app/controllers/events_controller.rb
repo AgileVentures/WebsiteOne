@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
   before_action :set_projects, only: [:new, :edit, :update, :create]
-  caches_action :index
   
   def new
     @event = Event.new(new_params)
