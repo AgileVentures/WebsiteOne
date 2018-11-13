@@ -170,7 +170,7 @@ Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)
   page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
-  visit event_path(event)
+  find_by_id(yt_id)
 end
 
 Then(/^I should see video with youtube id "([^"]*)"$/) do |yt_id|
@@ -201,7 +201,7 @@ When(/^I manually edit the Youtube URL$/) do
   page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
-  visit event_path(event)
+  find_by_id('11111111111')
 end
 
 Then(/^the Youtube URL is posted in Slack$/) do
