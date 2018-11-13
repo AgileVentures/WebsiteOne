@@ -17,10 +17,13 @@ class EventsController < ApplicationController
   end
 
   def index
-    @projects = Project.active
-    respond_to do |format|
-      format.html {@events = Event.upcoming_events(specified_project) }
-      format.json {@events = Event.upcoming_events(specified_project) }
+    @events = Event.all
+    if stale? @events 
+      @projects = Project.active
+      respond_to do |format|
+        format.html {@events = Event.upcoming_events(specified_project) }
+        format.json {@events = Event.upcoming_events(specified_project) }
+      end
     end
   end
 
