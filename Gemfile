@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.5.1'
 
 gem 'rails', '~> 5.1'
+gem 'actionpack-action_caching'
 gem 'acts-as-taggable-on'
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts_as_tree'

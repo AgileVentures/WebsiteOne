@@ -2,7 +2,8 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
   before_action :set_projects, only: [:new, :edit, :update, :create]
-
+  caches_action :index
+  
   def new
     @event = Event.new(new_params)
     @event.set_repeat_ends_string
@@ -17,12 +18,14 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all
+    @events = Rails.cache.fetch("events", expires_in: 12.hours) do
+      Event.upcoming_events(specified_project)
+    end
     if stale? @events 
       @projects = Project.active
       respond_to do |format|
-        format.html {@events = Event.upcoming_events(specified_project) }
-        format.json {@events = Event.upcoming_events(specified_project) }
+        format.html 
+        format.json
       end
     end
   end
