@@ -3,7 +3,7 @@ class Event < ApplicationRecord
   belongs_to :project
   serialize :exclusions
 
-  belongs_to :creator, class_name: 'User'
+  belongs_to :creator, class_name: 'User', touch: true
 
   extend FriendlyId
   friendly_id :name, use: :slugged
