@@ -463,3 +463,7 @@ Then(/^the dropdown with id "(.*)" should only have active projects$/) do |selec
       expect(page).to_not have_css("##{select_id}", :text => title, visible: false)
     end
 end
+
+And(/^I hit back$/) do
+  page.go_back
+end
