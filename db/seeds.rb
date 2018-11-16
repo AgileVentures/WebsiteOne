@@ -1,4 +1,4 @@
-klasses = [ Project, Document, User, Subscription, Karma, Plan, Article, Event, Karma ]
+klasses = [ Project, Document, User, Subscription, Karma, Plan, Article, Event, EventInstance, Karma ]
 old_counts = klasses.map(&:count)
 should_prompt = old_counts.min > 0
 
@@ -163,58 +163,14 @@ end
   end
 end
 
-Event.create!(
-  name: 'Morning event',
-  category: 'Scrum',
-  description: Faker::Lorem.paragraph,
-  start_datetime: DateTime.now.change({ hour: 12, min: 15, sec: 0 }),
-  duration: 800,
-  repeats: 'weekly',
-  repeats_every_n_weeks: '1',
-  repeats_weekly_each_days_of_the_week_mask: '31',
-  repeat_ends: 'never',
-  repeat_ends_on:  Date.today + 1.year,
-  time_zone: 'UTC'
-)
-
-Event.create!(
-  name: 'Evening event',
-  category: 'Scrum',
-  description: Faker::Lorem.paragraph,
-  start_datetime: DateTime.now.change({ hour: 17, min: 45, sec: 0 }),
-  duration: 160,
-  repeats: 'weekly',
-  repeats_every_n_weeks: '1',
-  repeats_weekly_each_days_of_the_week_mask: '31',
-  repeat_ends: 'never',
-  repeat_ends_on:  Date.today + 1.year,
-  time_zone: 'UTC'
-)
-
-Event.create!(
-  name: 'Premium event',
-  for: 'Premium Mob Members',
-  category: 'Scrum',
-  description: Faker::Lorem.paragraph,
-  start_datetime: DateTime.now.change({ hour: 11, min: 45, sec: 0 }),
-  duration: 800,
-  repeats: 'weekly',
-  repeats_every_n_weeks: '1',
-  repeats_weekly_each_days_of_the_week_mask: '31',
-  repeat_ends: 'never',
-  repeat_ends_on:  Date.today + 1.year,
-  time_zone: 'UTC'
-)
-
-event = Event.find_by(name: 'evening event')
-project = Project.find_by(title: localsupport.title)
-
-10.times do
-  EventInstance.create(event: event, project: project, yt_video_id: 'QWERT55')
-end
-
 if StaticPage.count == 0
   Rake::Task['db:import_pages'].invoke
+end
+
+# Seed data from "db/seeds" folder
+Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
+  puts "seeding from : #{seed}"
+  load seed
 end
 
 # Create ghost user
