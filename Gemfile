@@ -72,6 +72,7 @@ gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
 gem 'icalendar'
+gem 'seed_dump'
 
 group :test do
   gem 'capybara'
