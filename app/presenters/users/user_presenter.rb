@@ -38,14 +38,6 @@ class UserPresenter < BasePresenter
     user.titles.size > 0
   end
 
-  def timezone
-    NearestTimeZone.to(user.latitude, user.longitude)
-  end
-
-  def timezone_formatted_offset
-    ActiveSupport::TimeZone.new(timezone).formatted_offset
-  end
-
   def gravatar_image(options={})
     if options[:default]
       gravatar_url = "https://www.gravatar.com/avatar/1&d=retro&f=y"
