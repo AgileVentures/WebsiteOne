@@ -474,3 +474,8 @@ Then(/^no project is selected in the event project dropdown$/) do
   end
   expect(find("#event_project_id").value).to eq ''
 end
+
+Then(/^correct project for event named "([^"]*)" is selected in the event project dropdown$/) do |event_name|
+  event_project_id = Event.find_by(name: event_name).project_id
+  expect(find("#event_project_id").value).to eq event_project_id.to_s
+end

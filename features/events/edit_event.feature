@@ -24,5 +24,12 @@ Scenario: Updating an event defaults to correct project
   Given I visit the edit page for the event named "Scrum"
   Then no project is selected in the event project dropdown
   When I click the "Save" button
-  Then I should be on the event "Show" page for "Daily Standup"
+  Then I should be on the event "Show" page for "Scrum"
   And the event named "Scrum" is not associated with any project
+
+Scenario: Updating an event defaults to correct project
+  Given I visit the edit page for the event named "PP Session"
+  Then correct project for event named "PP Session" is selected in the event project dropdown
+  When I click the "Save" button
+  Then I should be on the event "Show" page for "PP Session"
+  And the event named "PP Session" is associated with "EdX"
