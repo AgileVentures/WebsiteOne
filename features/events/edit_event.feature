@@ -23,3 +23,6 @@ Background:
 Scenario: Updating an event defaults to correct project
   Given I visit the edit page for the event named "Scrum"
   Then no project is selected in the event project dropdown
+  When I click the "Save" button
+  Then I should be on the event "Show" page for "Daily Standup"
+  And the event named "Scrum" is not associated with any project
