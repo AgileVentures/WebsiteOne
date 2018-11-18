@@ -446,11 +446,11 @@ Then(/^I should see a link to join or upgrade based on my (.*)$/) do |plan_name|
   upgrade_link = '/subscriptions/new?plan=premiummob'
   premium_mob_and_above_array = ['Premium Plus','Premium F2F', 'Premium Mob']
   if premium_mob_and_above_array.include? plan_name
-    expect(page).to have_link(join_message, href: join_link) 
-    expect(page).to have_no_link(upgrade_message, href: upgrade_link) 
+    expect(page).to have_link(join_message, href: join_link)
+    expect(page).to have_no_link(upgrade_message, href: upgrade_link)
   else
-    expect(page).to have_link(upgrade_message, href: upgrade_link) 
-    expect(page).to have_no_link(join_message, href: join_link) 
+    expect(page).to have_link(upgrade_message, href: upgrade_link)
+    expect(page).to have_no_link(join_message, href: join_link)
   end
 end
 
@@ -466,4 +466,11 @@ end
 
 And(/^I hit back$/) do
   page.go_back
+end
+
+Then(/^no project is selected in the event project dropdown$/) do
+  Project.all.pluck(:id).each do |project_id|
+    expect(find("#event_project_id").value).not_to eq project_id.to_s
+  end
+  expect(find("#event_project_id").value).to eq ''
 end
