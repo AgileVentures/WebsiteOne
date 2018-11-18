@@ -3,13 +3,15 @@
 
 .activity {
   i {
-    margin:10px 0 0 5px;
+    margin: 10px 0 0 5px;
   }
-  .story_name{
+
+  .story_name {
     span {
       color: #6BABA1;
     }
   }
+
   .story_estimate {
     display: block;
     margin: 0 0 0 5px;
@@ -19,6 +21,7 @@
 }
 
 $avatar-size: 32px;
+
 .projects-user-avatar {
   display: inline-block;
   width: $avatar-size;
@@ -30,31 +33,38 @@ $avatar-size: 32px;
 .members-list-item {
   display: inline-block;
 }
+
 .project-sidebar {
   // mainly overrides in this section :(
   margin-top: 43px;
-  padding: 0 15px 10px 15px;
+  padding: 0 15px 10px;
 
   .media-body {
     display: inline;
     width: 60%;
   }
+
   .media-heading {
     display: inline;
   }
+
   .media-item {
     margin-bottom: 0;
     height: auto;
   }
+
   .user-preview {
     height: auto;
     overflow: hidden;
     padding: 0;
     border-radius: 0;
+
     &:hover {
       background: none;
     }
-    p.media-heading { // overriding is painful because other rules are far too specific
+
+    p.media-heading {
+      // overriding is painful because other rules are far too specific
       font-size: 15px;
     }
   }
@@ -70,17 +80,20 @@ $avatar-size: 32px;
 .widget-title {
   font-size: 1em;
   font-weight: 700;
+
   span {
     font-weight: 400;
   }
 }
+
 .btn-join {
   background-color: #15ab94; // #15ab94, #f89403
   color: #fff;
   font-size: 1.1em;
   font-weight: 700;
+
   &:hover {
-    background-color: darken(#15ab94, 7%)
+    background-color: darken(#15ab94, 7%);
   }
 }
 
@@ -100,7 +113,7 @@ $avatar-size: 32px;
   margin-top: 28px;
   margin-left: 15px;
   margin-bottom: 15px;
-  padding-left: 0px;
+  padding-left: 0;
 }
 
 .project_card {
@@ -110,11 +123,21 @@ $avatar-size: 32px;
 
 .project_card h3 {
   font-size: 18px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .project_card:hover {
-  background: $light-bg-color;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.project_card:hover .project_card_stats {
+  border-top: 1px solid #ccc;
+}
+
+.project_card:hover .project_card_stats {
+  border-top: 1px solid #ccc;
 }
 
 .project_card ul {
@@ -130,6 +153,11 @@ $avatar-size: 32px;
   display: flex;
   flex-direction: column;
   height: 110px;
+  padding-left: 20px;
+
+  a {
+    color: #EE7335;
+  }
 }
 
 .project_card_stats_items {
