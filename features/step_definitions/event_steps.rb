@@ -446,11 +446,11 @@ Then(/^I should see a link to join or upgrade based on my (.*)$/) do |plan_name|
   upgrade_link = '/subscriptions/new?plan=premiummob'
   premium_mob_and_above_array = ['Premium Plus','Premium F2F', 'Premium Mob']
   if premium_mob_and_above_array.include? plan_name
-    expect(page).to have_link(join_message, href: join_link) 
-    expect(page).to have_no_link(upgrade_message, href: upgrade_link) 
+    expect(page).to have_link(join_message, href: join_link)
+    expect(page).to have_no_link(upgrade_message, href: upgrade_link)
   else
-    expect(page).to have_link(upgrade_message, href: upgrade_link) 
-    expect(page).to have_no_link(join_message, href: join_link) 
+    expect(page).to have_link(upgrade_message, href: upgrade_link)
+    expect(page).to have_no_link(join_message, href: join_link)
   end
 end
 
@@ -466,4 +466,12 @@ end
 
 And(/^I hit back$/) do
   page.go_back
+end
+
+Then(/^the event named "([^"]*)" is not associated with any project$/) do |event_name|
+   # Write code here that turns the phrase above into concrete actions
+   event_project_id = Event.find_by(name: event_name).project_id
+   Project.all.pluck('id').each do |project_id|
+     expect(project_id).not_to eq(event_project_id)
+   end
 end
