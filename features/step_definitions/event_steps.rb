@@ -469,13 +469,15 @@ And(/^I hit back$/) do
 end
 
 Then(/^no project is selected in the event project dropdown$/) do
-  Project.all.pluck(:id).each do |project_id|
-    expect(find("#event_project_id").value).not_to eq project_id.to_s
-  end
-  expect(find("#event_project_id").value).to eq ''
+  expect(find("#event_project_id").value).to be_empty
 end
 
 Then(/^correct project for event named "([^"]*)" is selected in the event project dropdown$/) do |event_name|
   event_project_id = Event.find_by(name: event_name).project_id
   expect(find("#event_project_id").value).to eq event_project_id.to_s
+end
+
+Then(/^the event named "([^"]*)" is not associated with any project$/) do |event_name|
+  event_project_id = Event.find_by(name: event_name).project_id
+  expect(event_project_id).to be_nil
 end
