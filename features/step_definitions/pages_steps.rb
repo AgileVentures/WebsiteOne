@@ -22,6 +22,12 @@ When(/^I (try to use|am using) the Mercury Editor to edit static "([^"]*)" page$
   visit "/editor#{static_page_path(title)}"
 end
 
+When("I visit the profile page for {string}") do |first_name|
+  user = User.find_by(first_name: first_name)
+  visit user_path(user)
+end
+
+
 Given(/^the following page revisions exist$/) do |table|
   table.hashes.each do |hash|
     hash[:revisions].to_i.times do |number|
