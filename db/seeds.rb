@@ -154,47 +154,6 @@ end
   end
 end
 
- Event.create!(
-  name: 'Morning event',
-  category: 'Scrum',
-  description: Faker::Lorem.paragraph,
-  start_datetime: DateTime.now.change({ hour: 12, min: 15, sec: 0 }),
-  duration: 800,
-  repeats: 'weekly',
-  repeats_every_n_weeks: '1',
-  repeats_weekly_each_days_of_the_week_mask: '31',
-  repeat_ends: 'never',
-  repeat_ends_on:  Date.today + 1.year,
-  time_zone: 'UTC'
-)
- Event.create!(
-  name: 'Evening event',
-  category: 'Scrum',
-  description: Faker::Lorem.paragraph,
-  start_datetime: DateTime.now.change({ hour: 17, min: 45, sec: 0 }),
-  duration: 160,
-  repeats: 'weekly',
-  repeats_every_n_weeks: '1',
-  repeats_weekly_each_days_of_the_week_mask: '31',
-  repeat_ends: 'never',
-  repeat_ends_on:  Date.today + 1.year,
-  time_zone: 'UTC'
-)
- Event.create!(
-  name: 'Premium event',
-  for: 'Premium Mob Members',
-  category: 'Scrum',
-  description: Faker::Lorem.paragraph,
-  start_datetime: DateTime.now.change({ hour: 11, min: 45, sec: 0 }),
-  duration: 800,
-  repeats: 'weekly',
-  repeats_every_n_weeks: '1',
-  repeats_weekly_each_days_of_the_week_mask: '31',
-  repeat_ends: 'never',
-  repeat_ends_on:  Date.today + 1.year,
-  time_zone: 'UTC'
-)
-
 4.times do
   User.all.sample(3).each do |u|
     u.articles.create!(
