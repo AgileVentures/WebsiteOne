@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-WebsiteOne::Application.load_tasks
+Rails.application.load_tasks

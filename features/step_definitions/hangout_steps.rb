@@ -109,7 +109,7 @@ And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
   fill_in 'hangout_url', :with => @hangout_url
   page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
-  visit event_path(event)
+  expect(page).to have_css('.btn-success')
 end
 
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
@@ -158,8 +158,9 @@ end
 Then(/^"([^"]*)" shows youtube link with youtube id "([^"]*)"$/) do |event_name, yt_id|
   yt_url = 'https://youtu.be/' + yt_id
   visit event_path(Event.find_by_name(event_name))
-  page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
-  page.should have_field('yt_url', with: yt_url)
+  page.find(:css, '#actions-dropdown').trigger('click')
+  page.find_link('Edit youtube link').trigger('click')
+  expect(page).to have_field('yt_url', with: yt_url)
 end
 
 Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)"$/) do |yt_id, event_name|
@@ -169,7 +170,7 @@ Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)
   page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
-  visit event_path(event)
+  find_by_id(yt_id)
 end
 
 Then(/^I should see video with youtube id "([^"]*)"$/) do |yt_id|
@@ -200,10 +201,11 @@ When(/^I manually edit the Youtube URL$/) do
   page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
-  visit event_path(event)
+  find_by_id('11111111111')
 end
 
 Then(/^the Youtube URL is posted in Slack$/) do
+  sleep 1
   expect(@slack_client).to have_received :chat_postMessage
 end
 
@@ -212,6 +214,7 @@ Then(/^the Hangout URL is not posted in Slack$/) do
 end
 
 Then(/^the Youtube URL is not posted in Slack$/) do
+  sleep 1
   expect(@slack_client).not_to have_received :chat_postMessage
 end
 
@@ -226,34 +229,11 @@ And(/^the Hangout URL is posted in Slack$/) do
 end
 
 Then(/^the Hangout URL is posted only in appropriate private channels in Slack$/) do
-  # user = User.find(EventInstance.first.user_id)
-  # default_post_args =
-  # {
-  #   username: user.display_name,
-  #   icon_url: user.gravatar_url,
-  #   link_names: 1
-  # }
-  # message = 'MockEvent: <mock_url|click to join>'
-  # here_message = "@here #{message}"
-  # channel_message = "@channel #{message}"
-  # post_premium_mob_notification_post_args = 
-  # {
-  #   channel: 'C29J4QQ9M',
-  #   text: here_message,
-  # }.merge!(default_post_args)
-  
-  # post_premium_mob_trialists_notification_post_args = 
-  # { 
-  #   channel: 'C29J4QQ9F',
-  #   text: here_message,
-  # }.merge!(default_post_args)
-  
   expect(@slack_client).to have_received(:chat_postMessage).twice
-  # expect(@slack_client).to have_received(:chat_postMessage).with(post_premium_mob_notification_post_args).once
-  # expect(@slack_client).to have_received(:chat_postMessage).with(post_premium_mob_trialists_notification_post_args).once
 end
 
 Then(/^the Youtube URL is posted in select private channels in Slack$/) do
+  sleep 1
   expect(@slack_client).to have_received(:chat_postMessage).once
 end
 

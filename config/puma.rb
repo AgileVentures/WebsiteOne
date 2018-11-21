@@ -1,4 +1,6 @@
 workers Integer(ENV['PUMA_WORKERS'] || 3)
+# threads_count = ENV.fetch("MAX_THREADS")
+# threads threads_count, threads_count
 threads Integer(ENV['MIN_THREADS']  || 1), Integer(ENV['MAX_THREADS'] || 16)
 
 preload_app!
@@ -21,3 +23,6 @@ after_worker_fork do |server, worker|
   ActiveRecord::Base.establish_connection
   Vanity.playground.establish_connection unless ENV['SEMAPHORE'] == 'true'
 end
+
+# Allow puma to be restarted by `rails restart` command.
+plugin :tmp_restart

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-gem 'rails', '~> 5.1'
+gem 'rails', '= 5.2'
 gem 'acts-as-taggable-on'
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts_as_tree'
@@ -40,9 +40,9 @@ gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
 gem 'nokogiri', '1.8.5'
 gem 'octokit'
 gem 'omniauth'
-gem 'omniauth-github', '~> 1.1.2'
-gem 'omniauth-oauth2', '~> 1.3.1'
-gem 'omniauth-google-oauth2', '~> 0.5.2'
+gem 'omniauth-github'
+gem 'omniauth-oauth2'
+gem 'omniauth-google-oauth2'
 gem 'paper_trail', '~> 10.0'
 gem 'paranoia', '~> 2.4'
 gem 'pg'
@@ -71,6 +71,7 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
+gem 'bootsnap', '~> 1.3', '>= 1.3.2'
 gem 'icalendar'
 
 group :test do
@@ -84,6 +85,7 @@ group :test do
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'puffing-billy', '~> 1.1.2'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
   gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
@@ -92,7 +94,6 @@ group :test do
   gem 'webmock'
   gem 'webrat'
   gem 'zeus'
-  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
 end
 
 group :development, :test do
@@ -127,5 +128,4 @@ end
 
 group :production do
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
 end
