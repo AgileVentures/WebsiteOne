@@ -73,6 +73,7 @@ gem 'yui-compressor'
 gem 'youtube_rails'
 gem 'bootsnap', '~> 1.3', '>= 1.3.2'
 gem 'icalendar'
+gem 'seed_dump'
 
 group :test do
   gem 'capybara'

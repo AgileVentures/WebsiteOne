@@ -566,6 +566,9 @@ GEM
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
+    seed_dump (3.3.1)
+      activerecord (>= 4)
+      activesupport (>= 4)
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -752,6 +755,7 @@ DEPENDENCIES
   rubocop-rspec (>= 1.28)
   ruby-gitter
   sass-rails
+  seed_dump
   selenium-webdriver
   shoulda-matchers
   simple_form (~> 4.0, >= 4.0.1)
@@ -780,4 +784,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.4
+   1.17.0
