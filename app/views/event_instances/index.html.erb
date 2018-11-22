@@ -2,30 +2,29 @@
 <section class="live-hangouts">
   <div class='col-lg-12'>
     <div class='row hg-toggles'>
-        <button id="btn-hg-toggle" type="button" class="btn btn-default">toggle summary</button>
-        <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn btn-default' %>
+      <button id="btn-hg-toggle" type="button" class="btn btn-default">toggle summary</button>
+      <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn btn-default' %>
     </div>
   </div>
+
   <div class="clearfix"></div>
-  <div class="panel-group" id="accordion">
-    <div class="panel panel-info hidden-xs">
-      <div class="panel-heading hg-headings">
-        <%= render 'index_header' %>
-      </div>
-    </div>
-    <% if @event_instances.empty? %>
-      <div class="panel panel-default">
-        <div class="panel-heading empty">
-          We are sorry, but it seems that there are no live sessions at this moment.<br>
-          Please come back later or click 'Show all/live' button to browse older sessions.
+  <div class="container">
+    <div class="row">
+      <% if @event_instances.empty? %>
+        <div class="panel panel-default">
+          <div class="panel-heading empty">
+            We are sorry, but it seems that there are no live sessions at this moment.<br>
+            Please come back later or click 'Show all/live' button to browse older sessions.
+          </div>
         </div>
-      </div>
-    <% else  %>
-      <div id='hg-container'>
-        <%= render 'hangouts' %>
-      </div>
-      <%= will_paginate @event_instances, page_links: false %>
-    <% end %>
+      <% else  %>
+        <div id='hg-container'>
+          <%= render 'hangout_cards' %>
+        </div>
+        <div class="clearfix"></div>
+        <%= will_paginate @event_instances, page_links: false %>
+      <% end %>
+    </div>
   </div>
 </section>
 <%=javascript_include_tag 'event_instances.js' %>
