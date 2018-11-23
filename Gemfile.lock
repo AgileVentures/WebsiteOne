@@ -255,7 +255,7 @@ GEM
     erubi (1.7.1)
     eventmachine (1.0.9.1)
     eventmachine_httpserver (0.2.1)
-    exception_notification (4.2.2)
+    exception_notification (4.3.0)
       actionmailer (>= 4.0, < 6)
       activesupport (>= 4.0, < 6)
     execjs (2.7.0)
