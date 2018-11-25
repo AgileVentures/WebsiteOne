@@ -20,5 +20,5 @@ npm install --unsafe-perm && npm install -g phantomjs-prebuilt --unsafe-perm
 #     BUNDLE_BIN=/bundle/bin \
 #     GEM_HOME=/bundle
 # ENV PATH="${BUNDLE_BIN}:${PATH}"
-EXPOSE 80 443
+EXPOSE 80
 COPY . /WebsiteOne
