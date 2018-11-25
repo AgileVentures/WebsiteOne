@@ -14,13 +14,11 @@ COPY vendor/assets/javascripts /WebsiteOne/assets/javascripts
 RUN dos2unix scripts/copy_javascript_dependencies.js && bundle install && \
 npm install --unsafe-perm && npm install -g phantomjs-prebuilt --unsafe-perm
 
-RUN bundle install
-
-COPY ./docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-ENV BUNDLE_PATH=/bundle \
-    BUNDLE_BIN=/bundle/bin \
-    GEM_HOME=/bundle
-ENV PATH="${BUNDLE_BIN}:${PATH}"
+# COPY ./docker-entrypoint.sh /
+# ENTRYPOINT ["/docker-entrypoint.sh"]
+# ENV BUNDLE_PATH=/bundle \
+#     BUNDLE_BIN=/bundle/bin \
+#     GEM_HOME=/bundle
+# ENV PATH="${BUNDLE_BIN}:${PATH}"
 
 COPY . /WebsiteOne

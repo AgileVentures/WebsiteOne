@@ -12,7 +12,7 @@ test: &test
 
 production:
   <<: *dev
-  database: websiteone_production
+  url: <%= ENV["DATABASE_URL"] %>
 
 cucumber:
   <<: *test

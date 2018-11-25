@@ -71,18 +71,5 @@
     "TWITTER_NOTIFICATIONS_ENABLED": {
       "required": true
     }
-  },
-  "addons": [
-    "sendgrid",
-    "heroku-postgresql",
-    "airbrake"
-  ],
-  "buildpacks": [
-    {
-      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
-    },
-    {
-      "url": "https://github.com/heroku/heroku-buildpack-ruby"
-    }
-  ]
+  }
 }
