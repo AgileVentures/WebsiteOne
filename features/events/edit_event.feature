@@ -20,16 +20,10 @@ Background:
     | Scrum 2    | Another scrum           | Scrum           |       1      | 2014/02/05 10:00:00 UTC | 15           | never   | Eastern Time (US & Canada) |
 
 
-Scenario: Updating an event defaults to correct project
-  Given I visit the edit page for the event named "Scrum"
-  Then no project is selected in the event project dropdown
-  When I click the "Save" button
-  Then I should be on the event "Show" page for "Scrum"
-  And the event named "Scrum" is not associated with any project
+Scenario: Updating an event not associated with project defaults to correct project
+  Given I update an event with no project association without adding a project association
+  Then the event should have no project association
 
-Scenario: Updating an event defaults to correct project
-  Given I visit the edit page for the event named "PP Session"
-  Then correct project for event named "PP Session" is selected in the event project dropdown
-  When I click the "Save" button
-  Then I should be on the event "Show" page for "PP Session"
-  And the event named "PP Session" is associated with "EdX"
+Scenario: Updating an event associated with project defaults to correct project
+  Given I update an event associated to a given project without changing its project association
+  Then the project association for the given event should not change

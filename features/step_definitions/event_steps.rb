@@ -468,16 +468,28 @@ And(/^I hit back$/) do
   page.go_back
 end
 
-Then(/^no project is selected in the event project dropdown$/) do
+Given(/^I update an event with no project association without adding a project association$/) do
+  event = Event.find_by(name: "Scrum")
+  visit edit_event_path(event)
   expect(find("#event_project_id").value).to be_empty
+  fill_in "Description", with: "Happy description"
+  click_button "Save"
 end
 
-Then(/^correct project for event named "([^"]*)" is selected in the event project dropdown$/) do |event_name|
-  event_project_id = Event.find_by(name: event_name).project_id
-  expect(find("#event_project_id").value).to eq event_project_id.to_s
+Then(/^the event should have no project association$/) do
+  event = Event.find_by(name: "Scrum")
+  expect(event.project_id).to be_nil
 end
 
-Then(/^the event named "([^"]*)" is not associated with any project$/) do |event_name|
-  event_project_id = Event.find_by(name: event_name).project_id
-  expect(event_project_id).to be_nil
+Given(/^I update an event associated to a given project without changing its project association$/) do
+  event = Event.find_by(name: "PP Session")
+  visit edit_event_path(event)
+  expect(find("#event_project_id").value).to eq(event.project_id.to_s)
+  fill_in "Description", with: "Happy description"
+  click_button "Save"
+end
+
+Then(/^the project association for the given event should not change$/) do
+  event = Event.find_by(name: "PP Session")
+  expect(event.project_id).to eq(2)
 end
