@@ -1,0 +1,3 @@
+WAIT=8 #Wait 8 seconds before each attempt
+ATTEMPTS=6 #Try 6 times, if it still doesn't work, the deploy has failed and the old container (app) will be kept
+/check_deploy.txt deploy_successful
