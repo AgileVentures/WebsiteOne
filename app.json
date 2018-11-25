@@ -17,9 +17,6 @@
     "AIRBRAKE_PROJECT_ID": {
       "required": true
     },
-    "BUILDPACK_URL": {
-      "required": true
-    },
     "ENABLE_NOTIFICATIONS": {
       "required": true
     },
@@ -66,9 +63,6 @@
       "required": true
     },
     "STRIPE_SECRET_KEY": {
-      "required": true
-    },
-    "SSL_HOST": {
       "required": true
     },
     "TWITTER_NOTIFICATIONS_ENABLED": {
