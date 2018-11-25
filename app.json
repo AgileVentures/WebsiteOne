@@ -2,7 +2,10 @@
   "name": "WebsiteOne",
   "description": "A website for AgileVentures",
   "scripts":{
-    "postdeploy": "bundle exec rake db:setup"
+    "dokku":{
+      "predeploy": "bundle exec rake db:migrate"
+    },
+      "postdeploy": "bundle exec rake db:setup"
   },
   "env": {
     "AGILE_BOT_URL": {
