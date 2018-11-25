@@ -35,9 +35,6 @@
     "HANGOUTS_APP_ID": {
       "required": true
     },
-    "MAX_THREADS": {
-      "required": true
-    },
     "PUMA_WORKERS": {
       "required": true
     },
