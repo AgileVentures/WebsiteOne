@@ -24,3 +24,6 @@ ENV BUNDLE_PATH=/bundle \
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 
 COPY . /WebsiteOne
+ 
+# The default command that gets ran will be to start the Puma server.
+CMD bundle exec puma -C config/puma.rb
