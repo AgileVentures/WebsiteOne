@@ -147,7 +147,7 @@ Feature: Events
     Then I should see 3 "Biweekly Meeting" events
 
   @javascript
-  Scenario: Create a new event with no project selected defaults to no project
+  Scenario: Creating a new event without a project association selected defaults to no project
     Given I fill in event field:
       | name        | value          |
       | Name        | Whatever       |
