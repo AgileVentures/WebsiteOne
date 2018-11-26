@@ -1,4 +1,4 @@
-workers Integer(ENV['PUMA_WORKERS'] || 3)
+workers ENV.fetch('PUMA_WORKERS') { 3 }
 
 threads_count = ENV.fetch("MAX_THREADS") { 5 }
 threads threads_count, threads_count
