@@ -36,6 +36,11 @@ class Event < ApplicationRecord
   #   super ? 'on' : 'never'
   # end
 
+  def after_save
+    Event.upcoming_events(nil, true)
+    Event.upcoming_events(self.project, true)
+  end  
+
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? 'on' : 'never'
   end
@@ -52,11 +57,13 @@ class Event < ApplicationRecord
    schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule')
   end
 
-  def self.upcoming_events(project=nil)
-    events = Event.base_future_events(project).inject([]) do |memo, event|
-      memo << event.next_occurrences
-    end.flatten.sort_by { |e| e[:time] }
-    Event.remove_past_events(events)
+  def self.upcoming_events(project=nil, force=false)
+    Rails.cache.fetch("upcoming_events:#{project.nil? ? '' : project.title}", force: force, expires_in: 12.hours) do
+      events = Event.base_future_events(project).inject([]) do |memo, event|
+        memo << event.next_occurrences
+      end.flatten.sort_by { |e| e[:time] }
+      Event.remove_past_events(events)
+    end
   end
 
   def self.remove_past_events(events)
