@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
@@ -11,7 +11,7 @@ module WebsiteOne
   class Application < Rails::Application
     # necessary to make Settings available
     Config::Integrations::Rails::Railtie.preload
-
+    # config.load_defaults 5.0
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -10,7 +10,6 @@ Feature: Sign in
     Then I see an invalid login message
     And I should be signed out
 
-  @intermittent-ci-js-fail
   Scenario: User signs in successfully
     Given I exist as a user
     And I am not logged in

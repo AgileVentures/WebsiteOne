@@ -2,7 +2,7 @@ def loaderio_token
   (ENV['LOADERIO_TOKEN'] || "loaderio-296a53739de683b99e3a2c4d7944230f")
 end
 
-WebsiteOne::Application.routes.draw do
+Rails.application.routes.draw do
 
   apipie
   mount Mercury::Engine => '/'

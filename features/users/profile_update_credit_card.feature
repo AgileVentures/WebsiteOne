@@ -28,13 +28,13 @@ Scenario: Basic user should not see update card details
 
 Scenario: Premium profile owners can only see update card details on their profiles
   Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234"
-  And A premium user with name "emily", email "emily@gmail.com", with password "asdf1234" exists
-  When I click on the avatar for "emily"
-  Then I should be on the "user profile" page for "emily"
+  And A premium user with name "Emily Smith", email "emily@gmail.com", with password "asdf1234" exists
+  When I visit the profile page for "Emily"
+  Then I should be on the "user profile" page for "Emily"
   Then I should not see "Update Card Details"
 
 
 Scenario: Not logged in user cannot see update card details
-  Given A premium user with name "emily", email "emily@gmail.com", with password "asdf1234" exists
-  And I click on the avatar for "emily"
+  Given A premium user with name "Emily Smith", email "emily@gmail.com", with password "asdf1234" exists
+  When I visit the profile page for "Emily"
   Then I should not see "Update Card Details"
