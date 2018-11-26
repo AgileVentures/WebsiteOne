@@ -196,7 +196,7 @@ end
 
 
 And(/^"([^"]*)" is selected in the event project dropdown$/) do |project_slug|
-  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
+  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug.downcase).id
   expect(find("#event_project_id").value).to eq project_id.to_s
 end
 
@@ -446,11 +446,11 @@ Then(/^I should see a link to join or upgrade based on my (.*)$/) do |plan_name|
   upgrade_link = '/subscriptions/new?plan=premiummob'
   premium_mob_and_above_array = ['Premium Plus','Premium F2F', 'Premium Mob']
   if premium_mob_and_above_array.include? plan_name
-    expect(page).to have_link(join_message, href: join_link) 
-    expect(page).to have_no_link(upgrade_message, href: upgrade_link) 
+    expect(page).to have_link(join_message, href: join_link)
+    expect(page).to have_no_link(upgrade_message, href: upgrade_link)
   else
-    expect(page).to have_link(upgrade_message, href: upgrade_link) 
-    expect(page).to have_no_link(join_message, href: join_link) 
+    expect(page).to have_link(upgrade_message, href: upgrade_link)
+    expect(page).to have_no_link(join_message, href: join_link)
   end
 end
 
@@ -466,4 +466,30 @@ end
 
 And(/^I hit back$/) do
   page.go_back
+end
+
+Given(/^I update an event with no project association without adding a project association$/) do
+  event = Event.find_by(name: "Scrum")
+  visit edit_event_path(event)
+  expect(find("#event_project_id").value).to be_empty
+  fill_in "Description", with: "Happy description"
+  click_button "Save"
+end
+
+Then(/^the event should have no project association$/) do
+  event = Event.find_by(name: "Scrum")
+  expect(event.project_id).to be_nil
+end
+
+Given(/^I update an event associated to a given project without changing its project association$/) do
+  event = Event.find_by(name: "PP Session")
+  visit edit_event_path(event)
+  expect(find("#event_project_id").value).to eq(event.project_id.to_s)
+  fill_in "Description", with: "Happy description"
+  click_button "Save"
+end
+
+Then(/^the project association for the given event should not change$/) do
+  event = Event.find_by(name: "PP Session")
+  expect(event.project_id).to eq(2)
 end
