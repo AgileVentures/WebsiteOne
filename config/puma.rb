@@ -4,7 +4,7 @@ threads_count = ENV.fetch("MAX_THREADS") { 5 }
 threads threads_count, threads_count
 # threads Integer(ENV['MIN_THREADS']  || 1), Integer(ENV['MAX_THREADS'] || 16)
 
-# preload_app!
+preload_app!
 
 rackup      DefaultRackup
 port        ENV.fetch("PORT") { 3000 }
