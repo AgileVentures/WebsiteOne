@@ -32,8 +32,6 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  
-
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
@@ -85,8 +83,8 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
-  config.assets.compile = false
+  # config.assets.precompile += %w( '.svg' )
+  config.assets.compile = true
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
