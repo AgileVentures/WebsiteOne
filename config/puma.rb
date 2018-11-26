@@ -10,15 +10,15 @@ rackup      DefaultRackup
 port        ENV.fetch("PORT") { 3000 }
 environment ENV.fetch("RAILS_ENV") { "development" }
 
-# on_worker_boot do
-#   # worker specific setup
-#   ActiveSupport.on_load(:active_record) do
-#     config = ApplicationRecord.configurations[Rails.env] ||
-#                 Rails.application.config.database_configuration[Rails.env]
-#     config['pool'] = ENV['MAX_THREADS'] || 16
-#     ApplicationRecord.establish_connection(config)
-#   end
-# end
+on_worker_boot do
+  # worker specific setup
+  ActiveSupport.on_load(:active_record) do
+    config = ApplicationRecord.configurations[Rails.env] ||
+                Rails.application.config.database_configuration[Rails.env]
+    config['pool'] = ENV['MAX_THREADS'] || 16
+    ApplicationRecord.establish_connection(config)
+  end
+end
 
 # after_worker_fork do |server, worker|
 #   ActiveRecord::Base.establish_connection
