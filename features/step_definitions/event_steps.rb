@@ -196,7 +196,7 @@ end
 
 
 And(/^"([^"]*)" is selected in the event project dropdown$/) do |project_slug|
-  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
+  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug.downcase).id
   expect(find("#event_project_id").value).to eq project_id.to_s
 end
 
@@ -468,10 +468,34 @@ And(/^I hit back$/) do
   page.go_back
 end
 
+Given(/^I update an event with no project association without adding a project association$/) do
+  event = Event.find_by(name: "Scrum")
+  visit edit_event_path(event)
+  expect(find("#event_project_id").value).to be_empty
+  fill_in "Description", with: "Happy description"
+  click_button "Save"
+end
+
+Then(/^the event should have no project association$/) do
+  event = Event.find_by(name: "Scrum")
+  expect(event.project_id).to be_nil
+end
+
+Given(/^I update an event associated to a given project without changing its project association$/) do
+  event = Event.find_by(name: "PP Session")
+  visit edit_event_path(event)
+  expect(find("#event_project_id").value).to eq(event.project_id.to_s)
+  fill_in "Description", with: "Happy description"
+  click_button "Save"
+end
+
+Then(/^the project association for the given event should not change$/) do
+  event = Event.find_by(name: "PP Session")
+  expect(event.project_id).to eq(2)
+end
+
 Then(/^the event named "([^"]*)" is not associated with any project$/) do |event_name|
    # Write code here that turns the phrase above into concrete actions
    event_project_id = Event.find_by(name: event_name).project_id
-   Project.all.pluck('id').each do |project_id|
-     expect(project_id).not_to eq(event_project_id)
-   end
+   expect(event_project_id).to be_nil
 end
