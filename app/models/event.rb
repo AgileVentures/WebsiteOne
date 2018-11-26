@@ -36,7 +36,7 @@ class Event < ApplicationRecord
   #   super ? 'on' : 'never'
   # end
 
-  def after_save
+  after_save do
     Event.upcoming_events(nil, true)
     Event.upcoming_events(self.project, true)
   end  
