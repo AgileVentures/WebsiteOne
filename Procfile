@@ -1,1 +1,1 @@
-web: bundle exec foreman start -f Procfile.real
+web: bundle exec puma -C config/puma.rb
