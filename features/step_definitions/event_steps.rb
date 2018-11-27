@@ -493,3 +493,9 @@ Then(/^the project association for the given event should not change$/) do
   event = Event.find_by(name: "PP Session")
   expect(event.project_id).to eq(2)
 end
+
+Then(/^the event named "([^"]*)" is not associated with any project$/) do |event_name|
+   # Write code here that turns the phrase above into concrete actions
+   event_project_id = Event.find_by(name: event_name).project_id
+   expect(event_project_id).to be_nil
+end
