@@ -9,5 +9,3 @@ $(document).ready(function(){
     $(this).find('iframe').attr('src',address.slice(0, -11));
   });
 });
-
-//TODO it's not working for newly loaded hangout cards
