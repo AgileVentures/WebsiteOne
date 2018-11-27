@@ -38,7 +38,7 @@ class Event < ApplicationRecord
 
   after_save do
     Event.upcoming_events(nil, true)
-    Event.upcoming_events(self.project, true)
+    Event.upcoming_events(self.project, true) if self.project
   end  
 
   def set_repeat_ends_string
