@@ -3,9 +3,8 @@
   "description": "A website for AgileVentures",
   "scripts":{
     "dokku":{
-      "predeploy": "bundle exec rake db:migrate"
-    },
-      "postdeploy": "bundle exec rake db:setup"
+      "predeploy": "bundle exec rake db:migrate",
+    }
   },
   "env": {
     "AGILE_BOT_URL": {
