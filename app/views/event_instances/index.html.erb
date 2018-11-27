@@ -8,23 +8,19 @@
   </div>
 
   <div class="clearfix"></div>
-  <div class="container">
-    <div class="row">
-      <% if @event_instances.empty? %>
-        <div class="panel panel-default">
-          <div class="panel-heading empty">
-            We are sorry, but it seems that there are no live sessions at this moment.<br>
-            Please come back later or click 'Show all/live' button to browse older sessions.
-          </div>
+  <div class="row is-flex" id="hg-container">
+    <% if @event_instances.empty? %>
+      <div class="panel panel-default">
+        <div class="panel-heading empty">
+          We are sorry, but it seems that there are no live sessions at this moment.<br>
+          Please come back later or click 'Show all/live' button to browse older sessions.
         </div>
-      <% else  %>
-        <div id='hg-container'>
-          <%= render 'hangout_cards' %>
-        </div>
-        <div class="clearfix"></div>
-        <%= will_paginate @event_instances, page_links: false %>
-      <% end %>
-    </div>
+      </div>
+    <% else  %>
+      <%= render 'hangout_cards', event_instances: @event_instances %>
+    <% end %>
   </div>
+  <%= will_paginate @event_instances, page_links: false %>
 </section>
 <%=javascript_include_tag 'event_instances.js' %>
+<%=javascript_include_tag 'hangout_play_on_hover.js' %>

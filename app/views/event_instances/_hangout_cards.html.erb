@@ -1,16 +1,16 @@
 <% @event_instances.each_with_index do |event, index| %>
   <% present event do |hangout| %>
-    <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+    <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
       <div class="card">
         <div class="box ">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%=hangout.yt_video_id%>"></iframe>
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%=hangout.yt_video_id%>?rel=0&amp;showinfo=0"></iframe>
           </div>
           <div class="card-block">
             <h4 class="card-title"><%= hangout.event_link %></h4>
             <div class="meta">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-sm-6">
                   <%= render 'users/user_avatar', user: hangout.host %>
                 </div>
                 <div class="col-lg-6">
@@ -31,7 +31,6 @@
         </div>
       </div>
     </div>
-
   <% end %>
 <% end %>
 
