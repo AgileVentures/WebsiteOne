@@ -495,7 +495,6 @@ Then(/^the project association for the given event should not change$/) do
 end
 
 Then(/^the event is not associated with any project$/) do
-   # Write code here that turns the phrase above into concrete actions
    event_project_id = Event.find_by(name: "Whatever").project_id
    expect(event_project_id).to be_nil
 end
@@ -510,15 +509,3 @@ Given("I create an event without a project association") do
   created_event_name = (Event.find_by(name: "Whatever").name).downcase
   expect(current_path).to eq event_path id: created_event_name
 end
-
-
-# Given I fill in event field:
-#   | name        | value          |
-#   | Name        | Whatever       |
-#   | Description | something else |
-#   | Start Date  | 2014-02-04     |
-#   | Start Time  | 09:00          |
-# And I click the "Save" button
-# Then I should see "Event Created"
-# And I should be on the event "Show" page for "Whatever"
-# And the event named "Whatever" is not associated with any project
