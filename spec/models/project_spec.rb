@@ -152,7 +152,7 @@ describe Project, type: :model do
     it 'deals with hyphen gracefully' do
       project = build_stubbed(:project)
       project.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project')
-      expect(project.github_repo_user_name).to eq 'shf-project'
+      expect(project.github_repo_name).to eq 'shf-project'
     end
   end
 
