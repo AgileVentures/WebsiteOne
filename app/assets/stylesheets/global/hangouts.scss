@@ -266,7 +266,26 @@ h5 {
     padding: 0;
     border: none;
     border-radius: .28571429rem;
-    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+		padding-top: 1em;
+		box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+.card:after {
+    z-index: -1;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease-in-out;
+}
+.card:hover{
+  transform: scale(1.05, 1.05);
+}
+
+.card:hover::after {
+    opacity: 1;
 }
 
 .card-block {
@@ -309,10 +328,6 @@ h5 {
     background: #fff;
 }
 
-.card-inverse .btn {
-    border: 1px solid rgba(0, 0, 0, .05);
-}
-
 .profile {
     position: absolute;
     top: -12px;
@@ -324,19 +339,6 @@ h5 {
     margin: 0;
     border: 1px solid #fff;
     border-radius: 50%;
-}
-
-.profile-avatar {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-}
-
-.profile-inline {
-    position: relative;
-    top: 0;
-    display: inline-block;
 }
 
 .profile-inline ~ .card-title {
@@ -362,17 +364,23 @@ h5 {
 .meta a:hover {
     color: rgba(0, 0, 0, .87);
 }
+.is-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.card {
+    display: flex;
+		flex: 1 0 auto;
+}
 
-.box > .icon { text-align: center; position: relative; }
-.box > .icon > .image { position: relative; z-index: 2; margin: auto; width: 88px; height: 88px; border: 8px solid white; line-height: 88px; border-radius: 50%; background: #63B76C; vertical-align: middle; }
-.box > .icon:hover > .image { background: #333; -webkit-transition: all 0.4s ease-in-out; -moz-transition: all 0.4s ease-in-out; -o-transition: all 0.4s ease-in-out; transition: all 0.4s ease-in-out; -webkit-transform:rotate(360deg) scale(1.5); -moz-transform:rotate(360deg) scale(1.5); -o-transform:rotate(360deg) scale(1.5); -ms-transform:rotate(360deg) scale(1.5); transform:rotate(360deg) scale(1.5); }
-.box > .icon > .image > i { font-size: 36px !important; color: #fff !important; }
-.box > .icon:hover > .image > i { color: white !important; }
-.box > .icon > .info { margin-top: -24px; background: rgba(0, 0, 0, 0.04); border: 1px solid #e0e0e0; padding: 15px 0 10px 0; }
-.box > .icon:hover > .info { background: rgba(0, 0, 0, 0.04); border-color: #e0e0e0; color: white; }
-.box > .icon > .info > h3.title { font-family: "Roboto",sans-serif !important; font-size: 16px; color: #222; font-weight: 500; }
-.box > .icon > .info > p { font-family: "Roboto",sans-serif !important; font-size: 13px; color: #666; line-height: 1.5em; margin: 20px;}
-.box > .icon:hover > .info > h3.title, .box > .icon:hover > .info > p, .box > .icon:hover > .info > .more > a { color: #222; }
-.box > .icon > .info > .more a { font-family: "Roboto",sans-serif !important; font-size: 12px; color: #222; line-height: 12px; text-transform: uppercase; text-decoration: none; }
-.box > .icon:hover > .info > .more > a { color: #fff; padding: 6px 8px; background-color: #63B76C; }
-.box .space { height: 30px; }
+.row.is-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+		margin-bottom: 1em;
+		align-content: space-around;
+		justify-content: space-evenly;
+}
+.meta > .row [class*='col-'] {
+	align-self: start;
+}
+
