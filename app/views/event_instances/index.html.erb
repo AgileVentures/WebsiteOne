@@ -17,7 +17,7 @@
         </div>
       </div>
     <% else  %>
-      <%= render 'hangout_cards', event_instances: @event_instances %>
+      <%= render 'hangouts', event_instances: @event_instances %>
     <% end %>
   </div>
   <%= will_paginate @event_instances, page_links: false %>

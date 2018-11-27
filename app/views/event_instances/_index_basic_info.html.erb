@@ -1,21 +1,13 @@
-<div class='container-fluid'>
-  <div class='row hg-row' data-event-instance-id=<%=hangout.id%>>
-    <div class="col-xs-1 col-sm-1 hg-toggle">
-      <%= fa_icon "caret-right" %>
-    </div>
-    <div class="col-xs-4 col-sm-1"> <%= hangout.created_at %> </div>
-    <div class="col-xs-12 col-sm-4"> <%= hangout.title %> </div>
-    <div class="col-xs-12 col-sm-4"><%= hangout.project_link %></div>
-    <div class="col-xs-4 col-sm-1 hg-avatar">
-      <%= render 'users/user_avatar', user: hangout.host %>
-    </div>
-    <div class="col-xs-2 col-sm-1">
-      <div class="row">
-        <% if watchable? hangout %>
-          <div><%= link_to 'Join', hangout.hangout_url, { class: "btn-hg-join #{hangout.live? ? '' : 'disable'}" } %></div>
-          <div><%= link_to 'Watch', hangout.video_url, { class: 'btn-hg-watch' } %></div>
-        <% end %>
+<div class='row' data-event-instance-id=<%=hangout.id%>>
+  <div class="col-sm-6 hg-avatar">
+    <%= render 'users/user_avatar', user: hangout.host %>
+  </div>
+  <div class="col-sm-6">
+    <% if watchable? hangout %>
+      <div> <%= link_to 'Join', hangout.hangout_url,
+        { class: "btn-hg-join #{hangout.live? ? '' : 'disable'}" } %>
       </div>
-    </div>
+      <div><%= link_to 'Watch', hangout.video_url, { class: 'btn-hg-watch' } %></div>
+    <% end %>
   </div>
 </div>
