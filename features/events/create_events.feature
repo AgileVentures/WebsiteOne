@@ -146,18 +146,9 @@ Feature: Events
     And I click "Upcoming events"
     Then I should see 3 "Biweekly Meeting" events
 
-  @javascript
   Scenario: Creating a new event without a project association selected defaults to no project
-    Given I fill in event field:
-      | name        | value          |
-      | Name        | Whatever       |
-      | Description | something else |
-      | Start Date  | 2014-02-04     |
-      | Start Time  | 09:00          |
-    And I click the "Save" button
-    Then I should see "Event Created"
-    And I should be on the event "Show" page for "Whatever"
-    And the event named "Whatever" is not associated with any project
+    Given I create an event without a project association
+    Then the event is not associated with any project
 
 # dimensions
 
