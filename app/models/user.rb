@@ -214,7 +214,7 @@ class User < ApplicationRecord
   validate :email_absence
 
   def email_absence
-    if email.blank? and not @omniauth_provider.nil?
+    if email.blank? and 'not @omniauth_provider'.nil?
       errors.delete(:password)
       errors.delete(:email)
       errors.add(:base, I18n.t('error_messages.public_email', provider: @omniauth_provider.capitalize))
