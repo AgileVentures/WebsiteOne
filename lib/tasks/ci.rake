@@ -3,7 +3,7 @@ unless Rails.env.production?
   require 'cucumber/rake/task'
 
   Cucumber::Rake::Task.new(:ci_cucumber) do |t|
-    t.cucumber_opts = '--tags ~@intermittent-ci-js-fail'
+    t.cucumber_opts = '--tags not @intermittent-ci-js-fail'
   end
 
   namespace :ci do
