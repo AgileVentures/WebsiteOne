@@ -1,11 +1,12 @@
 <%
-rerun = File.file?('rerun.txt') ? IO.read('rerun.txt') : ""
+rerun = File.file?('rerun.txt') ? IO.read('rerun.txt').gsub(/\n/, ' ') : ""
 rerun_opts = rerun.to_s.strip.empty? ? "--format #{ENV['CUCUMBER_FORMAT'] || 'progress'} features" : "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} #{rerun}"
-std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} --strict --tags ~@wip -r features/"
+std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} --strict --tags 'not @wip' -r features/"
 %>
 default: <%= std_opts %> features
 ci: --format pretty --strict features
 wip: --tags @wip:3 --wip features
-rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip
-first_try:  NEVER_FAIL=true COVERAGE=true <%= std_opts %> --format rerun --out rerun.txt features --strict --tags ~@wip
-second_try: NEVER_FAIL=false <%= std_opts %> @rerun.txt  --strict --tags ~@wip
+rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags 'not @wip'
+first_try:  NEVER_FAIL=true COVERAGE=true <%= std_opts %> --format rerun --out rerun.txt --strict --tags 'not @wip'
+second_try: NEVER_FAIL=false <%= std_opts %> @rerun.txt --strict --tags 'not @wip'
+
