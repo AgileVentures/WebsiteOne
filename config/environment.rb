@@ -1,6 +1,6 @@
 # Load the Rails application.
-require File.expand_path('../application', __FILE__)
-require File.expand_path('../nested_key_extension', __FILE__)
+require_relative 'application'
+require_relative 'nested_key_extension'
 
 # Initialize the Rails application.
-WebsiteOne::Application.initialize!
+Rails.application.initialize!
