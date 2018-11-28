@@ -79,28 +79,24 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     When I visit "/hangouts"
     Then I should see:
 
-      | Title   |
-      | Project |
-      | Host    |
-      | Join    |
-      | Watch   |
+      | Hangouts   |
     And I should see:
       | 11:15        |
       | 01/02        |
       | HangoutsFlow |
-      | WebsiteOne   |
     And I should see the avatar for "Alice"
     And I should see link "Join" with "http://hangout.test"
     And I should see link "Watch" with "https://www.youtube.com/watch?v=QWERT55&feature=youtube_gdata"
+    And I should see iframe with "https://www.youtube.com/embed/QWERT55?rel=0&showinfo=0"
 
     And I should see:
       | 11:11       |
       | 01/02       |
       | GithubClone |
-      | Autograders |
     And I should see the avatar for "Bob"
     And I should see link "Join" with "http://hangout.session"
     And I should see link "Watch" with "https://www.youtube.com/watch?v=TGI345&feature=youtube_gdata"
+    And I should see iframe with "https://www.youtube.com/embed/TGI345?rel=0&showinfo=0"
 
   Scenario: Display live sessions - extra info
     Given the date is "2014/02/01 11:10:00 UTC"
@@ -111,10 +107,8 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
     When I visit "/hangouts"
     Then I should see:
-      | Event        |
-      | Category     |
-      | Participants |
-      | Duration     |
+      | Join  |
+      | Watch |
     Then I should see:
       | Scrum           |
       | PairProgramming |
@@ -131,9 +125,23 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
   Scenario: Infinite scroll on hangouts scroll down until no more hangouts
     Given 18 hangouts exists
     When I visit "/hangouts"
-    Then I should see 10 hangouts
+    Then I should see 6 hangouts
     And I scroll to bottom of page
-    Then I should see 15 hangouts
+    Then I should see 12 hangouts
     And I scroll to bottom of page
     Then I should see 18 hangouts
+    And I scroll to bottom of page
     And I should see "No more hangouts"
+
+
+
+  @javascript
+  Scenario: Youtube videos autoplay on mouseove
+    Giver the following hangouts exist:
+      | Start time | Title        | Project    | Event | Category        | Host  | Hangout url         | Youtube video id | End time |
+      | 11:15      | HangoutsFlow | WebsiteOne | Scrum | PairProgramming | Alice | http://hangout.test | QWERT55          | 11:25    |
+
+    When I visit "/hangouts"
+    And I should see iframe with "https://www.youtube.com/embed/QWERT55?rel=0&showinfo=0"
+    When I hover mouse on the video
+    And I should see iframe with "https://www.youtube.com/embed/QWERT55?rel=0&showinfo=0&autoplay=1"
