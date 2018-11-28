@@ -38,7 +38,6 @@ class Event < ApplicationRecord
 
   after_save do
     Event.upcoming_events(nil, true)
-    Event.upcoming_events(self.project, true) if self.project
   end  
 
   def set_repeat_ends_string
@@ -58,12 +57,17 @@ class Event < ApplicationRecord
   end
 
   def self.upcoming_events(project=nil, force=false)
+    return self.upcoming_events_raw(project) if project
     Rails.cache.fetch("upcoming_events:#{project.nil? ? '' : project.title}", force: force, expires_in: 12.hours) do
-      events = Event.base_future_events(project).inject([]) do |memo, event|
-        memo << event.next_occurrences
-      end.flatten.sort_by { |e| e[:time] }
-      Event.remove_past_events(events)
+      self.upcoming_events_raw
     end
+  end
+
+  def self.upcoming_events_raw(project=nil)
+    events = Event.base_future_events(project).inject([]) do |memo, event|
+      memo << event.next_occurrences
+    end.flatten.sort_by { |e| e[:time] }
+    Event.remove_past_events(events)
   end
 
   def self.remove_past_events(events)

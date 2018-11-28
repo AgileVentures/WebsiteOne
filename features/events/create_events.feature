@@ -146,7 +146,6 @@ Feature: Events
     And I click "Upcoming events"
     Then I should see 3 "Biweekly Meeting" events
 
-  @javascript
   Scenario: Creating a new event without a project association selected defaults to no project
     Given I fill in event field:
       | name        | value          |
