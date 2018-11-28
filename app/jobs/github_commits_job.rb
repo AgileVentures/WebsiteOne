@@ -29,7 +29,7 @@ module GithubCommitsJob
   end
 
   def github_url(project)
-    "#{project.github_repo_name}/#{project.github_repo_user_name}"
+    "#{project.github_repo_user_name}/#{project.github_repo_name}"
   end
 
     def update_user_commit_counts_for(project)
