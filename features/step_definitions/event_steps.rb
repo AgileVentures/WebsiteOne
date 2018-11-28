@@ -494,8 +494,18 @@ Then(/^the project association for the given event should not change$/) do
   expect(event.project_id).to eq(2)
 end
 
-Then(/^the event named "([^"]*)" is not associated with any project$/) do |event_name|
-   # Write code here that turns the phrase above into concrete actions
-   event_project_id = Event.find_by(name: event_name).project_id
+Then(/^the event is not associated with any project$/) do
+   event_project_id = Event.find_by(name: "Whatever").project_id
    expect(event_project_id).to be_nil
+end
+
+Given("I create an event without a project association") do
+  fill_in "Name", with: "Whatever"
+  fill_in "Description", with: "something else"
+  fill_in "Start Date", with: "2014-02-04"
+  fill_in "Start Time", with: "09:00"
+  click_button "Save"
+  expect(page).to have_content("Event Created")
+  created_event_name = (Event.find_by(name: "Whatever").name).downcase
+  expect(current_path).to eq event_path id: created_event_name
 end
