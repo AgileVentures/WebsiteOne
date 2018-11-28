@@ -9,5 +9,6 @@ unless Rails.env.production?
   namespace :ci do
     desc 'Run Rspec and Cucumber'
     task tests: [:spec, 'cucumber:first_try', 'cucumber:second_try']
+    task third_try: ['cucumber:third_try']
   end
 end
