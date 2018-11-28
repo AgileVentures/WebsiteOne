@@ -170,7 +170,9 @@ Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)
   page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
-  find_by_id(yt_id)
+  page.find(:css, '#actions-dropdown').trigger('click')
+  page.find_link('Edit youtube link').trigger('click')
+  expect(page).to have_field('yt_url', with: yt_url)
 end
 
 Then(/^I should see video with youtube id "([^"]*)"$/) do |yt_id|
