@@ -1,7 +1,7 @@
 <% @event_instances.each_with_index do |event, index| %>
   <% present event do |hangout| %>
-    <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
-      <div class="card">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-4">
+      <div class="card hangout">
         <div class="box ">
           <% if watchable? hangout %>
           <div class="embed-responsive embed-responsive-16by9">
@@ -12,10 +12,9 @@
             </iframe>
           </div>
           <% else %>
-            <img src="screenshot.png" alt="">
+            <%= image_tag 'avpremium.png', alt: 'premium event', class: 'card-img-top' %>
           <% end %>
           <div class="card-block">
-            <h4 class="card-title"><%= hangout.event_link %></h4>
             <div class="meta">
               <%= render partial: 'index_basic_info', locals: { hangout: hangout, index: index}  %>
             </div>
@@ -28,5 +27,3 @@
     </div>
   <% end %>
 <% end %>
-
-

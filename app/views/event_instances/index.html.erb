@@ -1,11 +1,7 @@
 <% provide :title, 'Hangouts' %>
 <section class="live-hangouts">
-  <div class='col-lg-12'>
-    <div class='row hg-toggles'>
-      <button id="btn-hg-toggle" type="button" class="btn btn-default">toggle summary</button>
-      <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn btn-default' %>
-    </div>
-  </div>
+
+  <%= render 'index_header' %>
 
   <div class="clearfix"></div>
   <div class="row is-flex" id="hg-container">
