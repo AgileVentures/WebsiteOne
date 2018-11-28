@@ -12,7 +12,7 @@ module GithubLanguagesJob
   end
 
   def run
-    Project.with_github_url.each do |project| 
+    Project.with_github_url.each do |project|
       begin
         add_new_languages_to(project)
       rescue StandardError => error
@@ -26,7 +26,7 @@ module GithubLanguagesJob
   end
 
   def github_languages_for(project)
-    languages = client.languages("#{project.github_repo_name}/#{project.github_repo_user_name}")
+    languages = client.languages("#{project.github_repo_user_name}/#{project.github_repo_name}")
     languages.to_hash.keys
   end
 
@@ -39,6 +39,6 @@ module GithubLanguagesJob
   end
 
   def log_error(error, project)
-    ErrorLoggingService.new(error).log("Updating the languages for #{project.github_url} may have caused the issue!") 
+    ErrorLoggingService.new(error).log("Updating the languages for #{project.github_url} may have caused the issue!")
   end
 end

@@ -79,11 +79,11 @@ class Project < ApplicationRecord
   end
 
   def github_repo_name
-    github_url ? /github.com\/(\w+)\/\w+/.match(github_url)[1] : ''
+    github_url ? /github.com\/\w+\/([\w\-]+)/.match(github_url)[1] : ''
   end
 
   def github_repo_user_name
-    github_url ? /github.com\/\w+\/([\w\-]+)/.match(github_url)[1] : ''
+    github_url ? /github.com\/(\w+)\/\w+/.match(github_url)[1] : ''
   end
 
   def contribution_url
