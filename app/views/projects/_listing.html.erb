@@ -2,47 +2,49 @@
   <li class="col-xs-4">
     <div class="project_card">
       <div class="row">
-      <% if project.image_url.present? %>
-        <div id="project_listing_image" class="col-xs-12">
-          <%= image_tag project.image_url, class: 'img-responsive' %>
-        </div>
-      <% else %>
-        <div id="project_listing_image" class="col-xs-12">
-          <%= image_tag 'full_logo2.png', class: 'img-responsive' %>
-        </div>
+        <%= link_to project_path(project) do %>
+        <% if project.image_url.present? %>
+          <div id="project_listing_image" class="col-xs-12">
+            <%= image_tag project.image_url, class: 'img-responsive' %>
+          </div>
+        <% else %>
+          <div id="project_listing_image" class="col-xs-12">
+            <%= image_tag 'full_logo2_agile_ventures.png', class: 'img-responsive' %>
+          </div>
+        <% end %>
       <% end %>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="project_card_stats">
-            <h3><%= link_to project.title, project_path(project) %></h3>
-            <ul class="project_card_stats_items">
-              <% follower_count = project.followers.count %>
-                <% if follower_count > 0 %>
-                  <li data-toggle="tooltip" data-placement="top" title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
-                    <i class="fa fa-users"></i>
-                    <%= follower_count %>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="project_card_stats">
+          <h3><%= link_to project.title, project_path(project) %></h3>
+          <ul class="project_card_stats_items">
+            <% follower_count = project.followers.count %>
+              <% if follower_count > 0 %>
+                <li data-toggle="tooltip" data-placement="top" title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
+                  <i class="fa fa-users"></i>
+                  <%= follower_count %>
+                </li>
+              <% end %>
+              <% documents_count = project.documents.count %>
+                <% if documents_count > 0 %>
+                  <li data-toggle="tooltip" data-placement="top" title="<%= documents_count %> related <%= 'document'.pluralize(documents_count) %>">
+                    <i class="fa fa-file-text-o"></i>
+                    <%= documents_count %>
                   </li>
                 <% end %>
-                <% documents_count = project.documents.count %>
-                  <% if documents_count > 0 %>
-                    <li data-toggle="tooltip" data-placement="top" title="<%= documents_count %> related <%= 'document'.pluralize(documents_count) %>">
-                      <i class="fa fa-file-text-o"></i>
-                      <%= documents_count %>
+
+                <% commit_count = project.commit_count %>
+                  <% unless commit_count.nil? %>
+                    <li data-toggle="tooltip" data-placement="top" title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
+                      <i class="fa fa-github-alt"></i>
+                      <%= commit_count %>
                     </li>
                   <% end %>
-
-                  <% commit_count = project.commit_count %>
-                    <% unless commit_count.nil? %>
-                      <li data-toggle="tooltip" data-placement="top" title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
-                        <i class="fa fa-github-alt"></i>
-                        <%= commit_count %>
-                      </li>
-                    <% end %>
-                  </ul>
-                </div>
+                </ul>
               </div>
             </div>
           </div>
-        </li>
-      <% end %>
+        </div>
+      </li>
+    <% end %>

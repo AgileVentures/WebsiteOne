@@ -1,4 +1,4 @@
-WebsiteOne::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -27,17 +27,15 @@ WebsiteOne::Application.configure do
   config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :yui
 
-  # ensure svg assets are compiled in production
-  config.assets.precompile += %w( '.svg' )  
+   
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  # config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.0'
+  
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -51,7 +49,7 @@ WebsiteOne::Application.configure do
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
-
+  config.log_tags = [ :request_id ]
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
@@ -92,4 +90,13 @@ WebsiteOne::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.assets.compile = false
+
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  end
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # Do not dump schema after migrations.
+  # config.active_record.dump_schema_after_migration = false
 end
