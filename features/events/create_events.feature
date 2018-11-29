@@ -146,7 +146,9 @@ Feature: Events
     And I click "Upcoming events"
     Then I should see 3 "Biweekly Meeting" events
 
-
+  Scenario: Creating a new event without a project association selected defaults to no project
+    Given I create an event without a project association
+    Then the event is not associated with any project
 
 # dimensions
 

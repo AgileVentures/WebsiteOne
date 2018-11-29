@@ -51,7 +51,7 @@
     <% end %>
     <div class="col-xs-12 col-sm-6">
       <%  if @recent_hangout.try(:live?) %>
-        <% if show_live_events? %>
+        <% if show_private_event_info? %>
           <div class="pull-right">
             <%= link_to 'JOIN THIS LIVE EVENT NOW', @recent_hangout.hangout_url, class: 'btn btn-success' %>
           </div>
@@ -222,10 +222,12 @@
     <p>No previous instances of this event</p>
   <% end %>
   <% unless @event_instances.blank? %>
-    <% present @event_instances.first do |presenter| %>
-      <div class="row">
-        <%= render 'videos', videos: @event_instances, presenter: presenter %>
-      </div>
+    <% if show_private_event_info? %>
+      <% present @event_instances.first do |presenter| %>
+        <div class="row">
+          <%= render 'videos', videos: @event_instances, presenter: presenter %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>
