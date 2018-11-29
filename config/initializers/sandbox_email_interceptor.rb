@@ -1,3 +1,3 @@
-if (Rails.env.development? || Rails.env.staging?) and ENV['INTERCEPT_EMAILS'] == 'true'
+if ENV['INTERCEPT_EMAILS']
   ActionMailer::Base.register_interceptor(SandboxEmailInterceptor)
 end
