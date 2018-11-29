@@ -8,6 +8,7 @@ RUN mkdir /WebsiteOne
 WORKDIR /WebsiteOne
 
 COPY Gemfile Gemfile.lock package.json package-lock.json /WebsiteOne/
+COPY scripts/copy_javascript_dependencies.js /WebsiteOne
 RUN bundle install && npm install --unsafe-perm
 
 COPY . /WebsiteOne
