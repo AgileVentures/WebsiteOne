@@ -80,3 +80,13 @@ Then(/^the event instance will be marked tweet sent$/) do
     expect(ei.youtube_tweet_sent).not_to eq(true)
   end
 end
+
+Then(/I should( not)? see a link to watch the event's past video/) do |negate|
+  if negate
+    expect(page).to have_no_css("#video_links")
+  else
+    within('#video_links') do
+      expect(page).to have_css("a", count: 1)
+    end
+  end 
+end
