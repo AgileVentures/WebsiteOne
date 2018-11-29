@@ -18,5 +18,48 @@
   </div>
   <%= will_paginate @event_instances, page_links: false %>
 </section>
+<script>
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+var players = new Array();
+
+var playerList = $('.player')
+
+function onYouTubeIframeAPIReady() {
+    if (typeof playerList === 'undefined') return;
+    
+    for (var i = 0; i < playerList.length; i++) {
+      console.log($(playerList[i]).attr('id'))
+        var curplayer = createPlayer($(playerList[i]).attr('id'));
+        players[i] = curplayer;
+    }
+}
+
+
+function createPlayer(playerInfo) {
+    return new YT.Player(playerInfo.id, {
+       events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+
+$(document).ready(function () {
+    $('#stop').click(function () {
+        //loop players array to stop them all
+        $(players).each(function (i) {
+            console.log(this);
+            this.startVideo();
+        });
+    });
+})
+</script>
+
+
+
 <%=javascript_include_tag 'event_instances.js' %>
 <%=javascript_include_tag 'hangout_play_on_hover.js' %>
