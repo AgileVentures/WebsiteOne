@@ -177,8 +177,12 @@ Then /^I should see link "([^"]*)" with "([^"]*)"$/ do |link, url|
   expect(page).to have_link(link, href: url)
 end
 
-Then(/^I should not see a link "([^"]*)" to "([^"]*)"$/) do |link, url|
-  expect(page).to_not have_link(link, href: url)
+Then(/^I should( not)? see a link "([^"]*)" to "([^"]*)"$/) do |negate, link, url|
+  if negate
+    expect(page).to have_no_link(link, href: url)
+  else
+    expect(page).to have_link(link, href: url)
+  end
 end
 
 Then /^I should be on the "([^"]*)" page$/ do |page|
@@ -363,11 +367,6 @@ Then(/^I should see a link to past events$/) do
   assert_link_exists(hangouts_path, "Past events")
 end
 
-
-Then(/^I should see a link "([^"]*)" to "([^"]*)"$/) do |text, link|
-  expect(page).to have_link text, href: link
-end
-
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
   expect(page).to have_css "img[src*=\"#{source}\"]"
 end
@@ -420,7 +419,6 @@ When(/^I toggle to( Cannot)? Attend$/) do |negated|
   find("#attendance_checkbox", visible: false).trigger('click')
 end
 
-
 When(/^I scroll to the bottom of the page$/) do
   page.execute_script "window.scrollBy(0,10000)"
 end
@@ -440,4 +438,11 @@ Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_li
     project_title = row.first
     step %Q{I should see "#{project_title}" within "#{project_list_area}"}
   end
+end
+Then /^I should receive a file(?: "([^"]*)")?/ do |file|
+  result = page.response_headers['Content-Type'].should == "text/calendar"
+  if result
+    result = page.response_headers['Content-Disposition'].should =~ /#{file}/
+  end
+  result
 end

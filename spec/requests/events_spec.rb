@@ -16,8 +16,8 @@ describe 'Events' do
     expect(page).to have_select('Category', selected: 'Scrum')
   end
 
-  it 'allows prepopulation of form with project' do
-    FactoryBot.create(:project, title: 'edX', slug: 'edx')
+  it 'allows prepopulation of form with active project' do
+    FactoryBot.create(:project, title: 'edX', slug: 'edx', status: 'active')
     visit new_event_path(project: 'edx')
     expect(page).to have_select('Project', selected: 'edX')
   end

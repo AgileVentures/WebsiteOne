@@ -22,6 +22,12 @@ When(/^I (try to use|am using) the Mercury Editor to edit static "([^"]*)" page$
   visit "/editor#{static_page_path(title)}"
 end
 
+When("I visit the profile page for {string}") do |first_name|
+  user = User.find_by(first_name: first_name)
+  visit user_path(user)
+end
+
+
 Given(/^the following page revisions exist$/) do |table|
   table.hashes.each do |hash|
     hash[:revisions].to_i.times do |number|
@@ -64,3 +70,18 @@ Then(/^the "([^"]*)" page title should read "([^"]*)"$/) do |str, title|
 	visit path_to(str)
 	expect(page.title).to eq "#{title}"
 end
+
+Then(/^I see the banners for all sponsors$/) do
+  sponsors = {
+    "Standuply" => "https://standuply.com/?utm_source=links&utm_medium=agileventures&utm_campaign=partnership",
+    "Craft Academy" => "http://craftacademy.se/english",
+    "Mooqita" => "https://mooqita.org/",
+    "Amazon Smile" => "https://smile.amazon.co.uk/ch/1170963-0"
+  }
+  sponsors.each do |alt_text, url|
+    within("//a[@href='#{url}']/div") do
+      expect(page).to have_selector("img[@alt='#{alt_text}']")
+    end
+  end
+end
+

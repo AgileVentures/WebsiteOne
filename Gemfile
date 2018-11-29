@@ -2,11 +2,11 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-gem 'rails', '~> 5.1'
+gem 'rails', '5.2.1'
 gem 'acts-as-taggable-on'
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts_as_tree'
-gem 'acts_as_votable', '~> 0.11.1'
+gem 'acts_as_votable', '~> 0.12.0'
 gem 'airbrake'
 gem 'apipie-rails'
 gem 'addressable'
@@ -37,27 +37,27 @@ gem 'kramdown', '~> 1.17'
 gem 'letter_opener', :group => :development
 gem 'local_time', '~> 2.1'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
-gem 'nearest_time_zone'
-gem 'nokogiri', '1.8.4'
+gem 'nokogiri', '1.8.5'
 gem 'octokit'
 gem 'omniauth'
-gem 'omniauth-github', '~> 1.1.2'
-gem 'omniauth-oauth2', '~> 1.3.1'
-gem 'omniauth-google-oauth2', '~> 0.5.2'
+gem 'omniauth-github'
+gem 'omniauth-oauth2'
+gem 'omniauth-google-oauth2'
 gem 'paper_trail', '~> 10.0'
 gem 'paranoia', '~> 2.4'
 gem 'pg'
 gem 'pivotal-tracker-api', git: 'https://github.com/atljeremy/pivotal-tracker-api.git'
-gem 'polyamorous', '~> 1.3.3'
+gem 'polyamorous'
 gem 'public_activity'
 gem 'puma'
 gem 'rack-cache'
 gem 'rails_autolink', '~>1.1.6'
+gem 'ransack'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'redcarpet'
 gem 'ruby-gitter'
 gem 'sass-rails'
-gem 'simple_form', '~> 4.0', '>= 4.0.1'
+gem 'simple_form', '~> 4.1'
 gem 'slack-ruby-client'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'stripe'
@@ -72,6 +72,9 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
+gem 'bootsnap', '~> 1.3', '>= 1.3.2'
+gem 'icalendar'
+gem 'seed_dump'
 
 group :test do
   gem 'capybara'
@@ -84,15 +87,15 @@ group :test do
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'puffing-billy', '~> 1.1.2'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
   gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
-  gem 'stripe-ruby-mock', '~> 2.5.5', require: 'stripe_mock'
+  gem 'stripe-ruby-mock', '~> 2.5.6', require: 'stripe_mock'
   gem 'vcr'
   gem 'webmock'
   gem 'webrat'
   gem 'zeus'
-  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
 end
 
 group :development, :test do
@@ -109,7 +112,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'hirb'
-  gem 'jasmine', '~> 3.2'
+  gem 'jasmine', '~> 3.3'
   gem 'jasmine-jquery-rails', '~> 2.0', '>= 2.0.3'
   gem 'pry-byebug'
   gem 'pry-rails'
@@ -121,11 +124,10 @@ group :development, :test do
   gem 'simplecov', '~> 0.16.1'
 end
 
-group :development, :staging, :production do
+group :staging, :production do
   gem 'rack-timeout'
 end
 
 group :production do
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
 end

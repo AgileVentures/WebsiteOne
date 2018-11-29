@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     @users = users
     @users_count = @users.total_count
-    @projects = Project.all.sort { |a, b| a.title <=> b.title }
+    @projects = Project.where(status: "active").sort { |a, b| a.title <=> b.title }
     @user_type = params[:title].blank? ? 'Volunteer' : params[:title]
     @user_type = 'Premium Member' if params[:title] == 'Premium'
 
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if should_display_user?(@user) 
+    if should_display_user?(@user)
       @event_instances = EventInstance.where(user_id: @user.id)
                              .order(created_at: :desc).limit(5)
       set_activity_tab(params[:tab])
@@ -101,26 +101,8 @@ class UsersController < ApplicationController
   end
 
   def set_filter_params
-    filter_params = params.slice(:project_filter, :timezone_filter, :online, :title)
-    set_timezone_offset_range(filter_params)
+    filter_params = params.slice(:project_filter, :online, :title)
     filter_params
-  end
-
-  def set_timezone_offset_range(filter_params)
-    unless filter_params[:timezone_filter].blank?
-      if offset = current_user.try(:timezone_offset)
-        case filter_params[:timezone_filter]
-          when 'In My Timezone'
-            filter_params[:timezone_filter] = [offset, offset]
-          when 'Wider Timezone Area'
-            filter_params[:timezone_filter] = [offset - 3600, offset + 3600]
-          else
-            filter_params.delete(:timezone_filter)
-        end
-      else
-        redirect_to :back, alert: "Can't determine your location!"
-      end
-    end
   end
 
   def set_activity_tab(param)

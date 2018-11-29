@@ -22,7 +22,12 @@ class Project < ApplicationRecord
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-  scope :active, -> { where("status ILIKE ?", "%active%") }
+  scope :active, -> { where("status ILIKE ?", "active").order(:title) }
+  scope :search_by_language, ->(search) {
+    includes(:languages)
+      .where("languages.name ILIKE ?", "#{search}")
+      .references(:languages)
+  }
 
   def self.with_github_url
     includes(:source_repositories)
@@ -33,14 +38,7 @@ class Project < ApplicationRecord
   def self.search(search, page)
     order('LOWER(title)')
       .where('title LIKE ?', "%#{search}%")
-      .paginate(per_page: 5, page: page)
-  end
-
-  def self.search_by_language(search, page)
-    includes(:languages)
-      .where("languages.name ILIKE ?", "#{search}")
-      .references(:languages)
-      .paginate(per_page: 5, page: page)
+      .paginate(per_page: 9, page: page)
   end
 
   def gpa
@@ -81,11 +79,11 @@ class Project < ApplicationRecord
   end
 
   def github_repo_name
-    github_url ? /github.com\/(\w+)\/\w+/.match(github_url)[1] : ''
+    github_url ? /github.com\/\w+\/([\w\-]+)/.match(github_url)[1] : ''
   end
 
   def github_repo_user_name
-    github_url ? /github.com\/\w+\/([\w\-]+)/.match(github_url)[1] : ''
+    github_url ? /github.com\/(\w+)\/\w+/.match(github_url)[1] : ''
   end
 
   def contribution_url

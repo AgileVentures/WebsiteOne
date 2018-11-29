@@ -56,7 +56,7 @@ source ~/.rvm/scripts/rvm
 
 ## Install ruby
 ```
-rvm install ruby-2.3.1
+rvm install ruby-2.5.1
 ```
 
 ## Clone the respository (after a fork)
@@ -66,7 +66,7 @@ git clone git@github.com:<your github handle>/WebsiteOne.git
 
 ## Generate rvm config files within project
 ```
-rvm use ruby-2.3.1@WebsiteOne --ruby-version --create
+rvm use ruby-2.5.1@WebsiteOne --ruby-version --create
 ```
 
 ## Install bundler
@@ -136,7 +136,7 @@ bundle exec rake cucumber
 
 In case of remote machine (like aws), few rspec tests may fail due to absence of display system. To avoid those erros, use **xvfb**
 ```
-xvfb -a bundle exec rspec
+xvfb-run -a bundle exec rspec
 ```
 
 
