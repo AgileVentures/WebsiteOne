@@ -2,7 +2,7 @@ def loaderio_token
   (ENV['LOADERIO_TOKEN'] || "loaderio-296a53739de683b99e3a2c4d7944230f")
 end
 
-WebsiteOne::Application.routes.draw do
+Rails.application.routes.draw do
 
   apipie
   mount Mercury::Engine => '/'
@@ -89,6 +89,8 @@ WebsiteOne::Application.routes.draw do
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false
   get 'sections', to: 'documents#get_doc_categories', as: 'project_document_sections', :format => false
   put 'update_document_parent_id/:project_id/:id', to: 'documents#update_parent_id', as: 'update_document_parent_id', :format => false
+
+  get '/calendar' => 'calendar#index'
 
   resources :hookups
 

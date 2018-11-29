@@ -105,6 +105,8 @@ Given(/^"([^"]*)" created the "([^"]*)" event with an event instance "([^"]*)"$/
   EventInstance.create!(event_id: event.id, title: event_instance_name, hangout_url: "https://hangouts.google.com/call/BxivVrWsi_HEyfRVa...", created_at: "2018-09-05 03:22:02", updated_at: "2018-09-05 03:30:20", category: "PairProgramming", url_set_directly: true, yt_video_id: "hx7c0P0qKWc")
 end
 
+
+
 Given(/^I am on the show page for event "([^"]*)"$/) do |name|
   event = Event.find_by_name(name)
   visit event_path(event)
@@ -194,7 +196,7 @@ end
 
 
 And(/^"([^"]*)" is selected in the event project dropdown$/) do |project_slug|
-  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug).id
+  project_id = project_slug == 'All' ? '' : Project.friendly.find(project_slug.downcase).id
   expect(find("#event_project_id").value).to eq project_id.to_s
 end
 
@@ -435,4 +437,75 @@ Given(/^the following event instances exist:$/) do |table|
     hash[:project] = Project.find_by title: hash[:project]
     EventInstance.create hash
   end
+end
+
+Then(/^I should see a link to join or upgrade based on my (.*)$/) do |plan_name|
+  join_message = 'JOIN THIS LIVE EVENT NOW'
+  join_link = 'http://hangout.test'
+  upgrade_message = 'THIS EVENT IS LIVE, UPGRADE NOW TO JOIN'
+  upgrade_link = '/subscriptions/new?plan=premiummob'
+  premium_mob_and_above_array = ['Premium Plus','Premium F2F', 'Premium Mob']
+  if premium_mob_and_above_array.include? plan_name
+    expect(page).to have_link(join_message, href: join_link)
+    expect(page).to have_no_link(upgrade_message, href: upgrade_link)
+  else
+    expect(page).to have_link(upgrade_message, href: upgrade_link)
+    expect(page).to have_no_link(join_message, href: join_link)
+  end
+end
+
+Then(/^the dropdown with id "(.*)" should only have active projects$/) do |select_id|
+  # Write code here that turns the phrase above into concrete actions
+    Project.active.pluck(:title).each do |title|
+      expect(page).to have_css("##{select_id}", :text => title, visible: false)
+    end
+    Project.where.not(status: 'active').pluck(:title).each do |title|
+      expect(page).to_not have_css("##{select_id}", :text => title, visible: false)
+    end
+end
+
+And(/^I hit back$/) do
+  page.go_back
+end
+
+Given(/^I update an event with no project association without adding a project association$/) do
+  event = Event.find_by(name: "Scrum")
+  visit edit_event_path(event)
+  expect(find("#event_project_id").value).to be_empty
+  fill_in "Description", with: "Happy description"
+  click_button "Save"
+end
+
+Then(/^the event should have no project association$/) do
+  event = Event.find_by(name: "Scrum")
+  expect(event.project_id).to be_nil
+end
+
+Given(/^I update an event associated to a given project without changing its project association$/) do
+  event = Event.find_by(name: "PP Session")
+  visit edit_event_path(event)
+  expect(find("#event_project_id").value).to eq(event.project_id.to_s)
+  fill_in "Description", with: "Happy description"
+  click_button "Save"
+end
+
+Then(/^the project association for the given event should not change$/) do
+  event = Event.find_by(name: "PP Session")
+  expect(event.project_id).to eq(2)
+end
+
+Then(/^the event is not associated with any project$/) do
+   event_project_id = Event.find_by(name: "Whatever").project_id
+   expect(event_project_id).to be_nil
+end
+
+Given("I create an event without a project association") do
+  fill_in "Name", with: "Whatever"
+  fill_in "Description", with: "something else"
+  fill_in "Start Date", with: "2014-02-04"
+  fill_in "Start Time", with: "09:00"
+  click_button "Save"
+  expect(page).to have_content("Event Created")
+  created_event_name = (Event.find_by(name: "Whatever").name).downcase
+  expect(current_path).to eq event_path id: created_event_name
 end

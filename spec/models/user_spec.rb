@@ -255,37 +255,6 @@ describe User, type: :model do
         expect(results).to include(@user1)
         expect(results).not_to include(@user2)
       end
-
-      context 'filters users for timezone area' do
-        before(:each) do
-          @current_user = FactoryBot.create(:user, timezone_offset: 3600)
-        end
-
-        it 'filters user1 when choose In My Timezone' do
-          params['timezone_filter'] = [@current_user.timezone_offset, @current_user.timezone_offset]
-
-          results = User.filter(params).allow_to_display
-
-          expect(results).to include(@user1)
-          expect(results).not_to include(@user2)
-        end
-
-        it 'filters both users when choose Members Within 2 Timezones' do
-          params['timezone_filter'] = [@current_user.timezone_offset - 3600, @current_user.timezone_offset + 3600]
-
-          results = User.filter(params).allow_to_display
-
-          expect(results).to include(@user1)
-          expect(results).to include(@user2)
-        end
-      end
-
-      it 'does not raise error when filters are empty' do
-        params['project_filter'] = ''
-        params['timezone_filter'] = ''
-
-        expect { User.filter(params).allow_to_display }.to_not raise_error
-      end
     end
 
     context 'no filters' do

@@ -6,7 +6,7 @@ module CustomErrors
     base.rescue_from Exception, with: ->(exception) { render_error 500, exception }
 
     base.rescue_from ActionController::RoutingError,
-                     ActionController::UnknownController,
+                    #  ActionController::UnknownController,
                      AbstractController::ActionNotFound,
                      ActiveRecord::RecordNotFound,
                      with: ->(exception) { render_error 404, exception }

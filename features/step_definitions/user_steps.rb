@@ -34,7 +34,10 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
 end
 
 Given /^A( premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)" exists$/ do |premium, name, email, password|
-  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: name, email: email, password: password, password_confirmation: password)
+  split_name = name.split(' ')
+  first_name = split_name.first
+  last_name  = split_name.last
+  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: first_name, last_name: last_name, email: email, password: password, password_confirmation: password)
   set_user_as_premium(@user) if premium
 end
 
@@ -216,7 +219,7 @@ Then /^I should be signed in$/ do
 end
 
 And /^I should not see a sign up link$/ do
-  expect(page).to_not have_xpath("//a[@href = '#{new_user_registration_path}']")
+  expect(page).to have_no_link "Sign up"
 end
 
 Then /^I should be signed out$/ do
@@ -504,8 +507,6 @@ When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_na
   filter = case list_name
              when 'projects'
                'project_filter'
-             when 'timezones'
-               'timezone_filter'
              when 'online status'
                'online'
            end

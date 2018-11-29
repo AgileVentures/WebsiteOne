@@ -109,7 +109,7 @@ And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
   fill_in 'hangout_url', :with => @hangout_url
   page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
-  visit event_path(event)
+  expect(page).to have_css('.btn-success')
 end
 
 Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
@@ -158,8 +158,9 @@ end
 Then(/^"([^"]*)" shows youtube link with youtube id "([^"]*)"$/) do |event_name, yt_id|
   yt_url = 'https://youtu.be/' + yt_id
   visit event_path(Event.find_by_name(event_name))
-  page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
-  page.should have_field('yt_url', with: yt_url)
+  page.find(:css, '#actions-dropdown').trigger('click')
+  page.find_link('Edit youtube link').trigger('click')
+  expect(page).to have_field('yt_url', with: yt_url)
 end
 
 Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)"$/) do |yt_id, event_name|
@@ -169,7 +170,7 @@ Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)
   page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
-  visit event_path(event)
+  find_by_id(yt_id)
 end
 
 Then(/^I should see video with youtube id "([^"]*)"$/) do |yt_id|
@@ -200,31 +201,48 @@ When(/^I manually edit the Youtube URL$/) do
   page.execute_script(  %q{$('li[role="edit_yt_link"] > a').trigger('click')}  )
   fill_in 'yt_url', :with => yt_url
   page.find(:css, %q{input[id="yt_link_save"]}).trigger('click')
-  visit event_path(event)
+  find_by_id('11111111111')
 end
 
 Then(/^the Youtube URL is posted in Slack$/) do
-  expect(SlackService).to have_received :post_yt_link
+  sleep 1
+  expect(@slack_client).to have_received :chat_postMessage
 end
 
 Then(/^the Hangout URL is not posted in Slack$/) do
-  expect(SlackService).not_to have_received :post_hangout_notification
-end
-
-And(/^that we're spying on the SlackService$/) do
-  allow(SlackService).to receive :post_yt_link
-  allow(SlackService).to receive :post_hangout_notification
+  expect(@slack_client).not_to have_received :chat_postMessage
 end
 
 Then(/^the Youtube URL is not posted in Slack$/) do
-  expect(SlackService).not_to have_received :post_yt_link
+  sleep 1
+  expect(@slack_client).not_to have_received :chat_postMessage
+end
+
+And(/^that we're spying on the SlackService$/) do
+  @slack_client = double(Slack::Web::Client)
+  allow(Slack::Web::Client).to receive(:new).and_return(@slack_client)
+  allow(@slack_client).to receive(:chat_postMessage)  
 end
 
 And(/^the Hangout URL is posted in Slack$/) do
-  expect(SlackService).to have_received :post_hangout_notification
+  expect(@slack_client).to have_received(:chat_postMessage).twice
+end
+
+Then(/^the Hangout URL is posted only in appropriate private channels in Slack$/) do
+  expect(@slack_client).to have_received(:chat_postMessage).twice
+end
+
+Then(/^the Youtube URL is posted in select private channels in Slack$/) do
+  sleep 1
+  expect(@slack_client).to have_received(:chat_postMessage).once
 end
 
 And(/^the event "([^"]*)" was last updated at "([^"]*)"$/) do |event_name, date|
   id = Event.where(name: event_name).first[:id]
   EventInstance.where(event_id: id).order("created_at DESC").first.update_attributes(updated_at: date)
 end
+
+Given(/^the Slack notifications are enabled$/) do
+  Features.slack.notifications.enabled = true
+end
+

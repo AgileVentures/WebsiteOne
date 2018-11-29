@@ -6,10 +6,12 @@ Feature: List Events by Project
 
   Background:
     Given the following projects exist:
-      | title | description          | pitch | status |
-      | wso   | blah                 |       | active |
-      | auto  | blah                 |       | active |
-      | cs169 | greetings earthlings |       | active |
+      | title      | description          | pitch | status    |
+      | wso        | blah                 |       | active    |
+      | auto       | blah                 |       | active    |
+      | cs169      | greetings earthlings |       | active    |
+      | project x  | great movie project  |       | inactive  |
+      | mega main  | great movie project  |       | closed    |
     Given following events exist:
       | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project |
       | Standup1   | Daily standup meeting   | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |
@@ -48,3 +50,20 @@ Feature: List Events by Project
     Then I should not see "Standup1"
     And I should see "PP Session"
     And "cs169" is selected in the project dropdown
+
+  Scenario: projects dropdown should only have active projects
+    Given I am on the events index page
+    Then the dropdown with id "project_id" should only have active projects
+
+@javascript
+  Scenario: Project drop-down resets on hit back
+    Given I am on the home page
+    When I dropdown the "Events" menu
+    And I click "Upcoming events"
+    And I select "cs169" from the project dropdown
+    And I click "Filter by Project" button
+    Then I should see "Standup1"
+    And I hit back
+    Then "All" is selected in the project dropdown
+    And I should see "PP Session"
+

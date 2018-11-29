@@ -1,11 +1,25 @@
 starting_date = 1.year.ago
 
 Given /^(\d+) event instances? exists?$/ do |num_event_instances|
-
   num_event_instances.to_i.times do |num|
     created_at_date = starting_date + num.days
     EventInstance.create title: "Bob's mob", event_id: 3, category: "Scrum", yt_video_id: "fake_id_#{num}", created_at: "#{created_at_date}"
   end
+end
+
+Given /^an event instance exists for event id (\d+)$/ do |event_id|
+  created_at_date = starting_date + 2
+  EventInstance.create title: "Event #{event_id}", event_id: event_id, category: "Mob", yt_video_id: "fake_id_#{event_id}", created_at: "#{created_at_date}"
+end
+
+When /^I should not see a link to watch the video for event (\d+)$/ do |event_id|
+  you_tube_link = "https://www.youtube.com/watch?v=fake_id_#{event_id}&feature=youtube_gdata"
+  expect(page).not_to have_link(href: you_tube_link, text: "Watch")
+end
+
+When /^I should see a link to watch the video for event (\d+)$/ do |event_id|
+  you_tube_link = "https://www.youtube.com/watch?v=fake_id_#{event_id}&feature=youtube_gdata"
+  expect(page).to have_link(href: you_tube_link, text: "Watch")
 end
 
 When /^a user views the event "([^"]*)"$/ do |event|
