@@ -48,7 +48,7 @@ module EventHelper
     @event.modifier_id ? '<div class="col-xs-12 col-sm-2"></div>'.html_safe : '<div class="col-xs-12 col-sm-4"></div>'.html_safe
   end
 
-  def show_live_events?
+  def show_private_event_info?
     return true unless @event.for == 'Premium Mob Members'
     current_user and current_user.allowed_to_attend?
   end
