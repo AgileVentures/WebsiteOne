@@ -22,6 +22,21 @@ When(/^I run the rake task for fetching github languages/) do
   $rake['fetch_github_languages'].execute
 end
 
+When(/^I run the rake task for fetching static pages from github$/) do
+  $rake['fetch_github:content_for_static_pages'].execute
+end
+
+Then(/^I should see all the pages on github in the site as static pages with the content from github$/) do
+  visit static_page_path('About Us')
+  expect(page).to have_content 'Agile Ventures is an official UK Charity'
+  visit static_page_path('Business Plan')
+  expect(page).to have_content 'learning experiences for everyone around the world through collaborative'
+  visit static_page_path('Code of Conduct')
+  expect(page).to have_content 'A primary goal of Agile Ventures is to be inclusive to the largest number of contributors'
+  visit static_page_path('Constitution')
+  expect(page).to have_content 'is to provide a forum for any individual to develop their skills'
+end
+
 Then(/^"([^"]*)" shoud have "([^"]*)" in their subscription$/) do |email, stripe_id|
   user = User.find_by_email(email)
   expect(user.stripe_customer_id).to eq stripe_id
