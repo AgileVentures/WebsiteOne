@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'byebug'
 
-describe Api::SubscriptionsController, type: :request do
-  describe "GET /subscriptions" do
+describe Subscriptions::API, type: :request do
+  describe "GET /api/v1/subscriptions" do
     let(:user) { FactoryBot.create(:user, email: "kitty@cat.com") }
     let(:start_time) { DateTime.new(2001, 2, 3, 4, 5, 6) }
     let(:end_time) { DateTime.new(2002, 2, 3, 4, 5, 6) }
@@ -21,8 +21,8 @@ describe Api::SubscriptionsController, type: :request do
     end
     context 'with proper token' do
       it "succeeds", :show_in_doc do
-        get api_subscriptions_path, params: {}, headers: headers
-        expect(response).to be_success
+        get subscriptions_api_path, params: {}, headers: headers
+        expect(response).to be_successful
         expect(JSON.parse(response.body)).to include(a_hash_including("payment_source" => "PaymentSource::PayPal", "plan_name" => plan.name, "email" => "kitty@cat.com", "sponsor_email" => "kitty@cat.com", "started_on" => start_date, "ended_on" => end_date))
       end
 
@@ -30,8 +30,8 @@ describe Api::SubscriptionsController, type: :request do
         let(:end_time) { nil }
 
         it 'succeeds' do
-          get api_subscriptions_path, params: {}, headers: headers
-          expect(response).to be_success
+          get subscriptions_api_path, params: {}, headers: headers
+          expect(response).to be_successful
           expect(JSON.parse(response.body)).to include(a_hash_including("payment_source" => "PaymentSource::PayPal", "plan_name" => plan.name, "email" => "kitty@cat.com", "sponsor_email" => "kitty@cat.com", "started_on" => start_date, "ended_on" => nil))
         end
       end
@@ -42,8 +42,8 @@ describe Api::SubscriptionsController, type: :request do
 
         it 'succeeds' do
           user.destroy
-          get api_subscriptions_path, params: {}, headers: headers
-          expect(response).to be_success
+          get subscriptions_api_path, params: {}, headers: headers
+          expect(response).to be_successful
           expect(JSON.parse(response.body)).to include(a_hash_including("payment_source" => "PaymentSource::PayPal", "plan_name" => plan.name, "email" => "kitty@cat.com", "sponsor_email" => "catty@kit.com", "started_on" => start_date, "ended_on" => end_date))
         end
 
@@ -54,8 +54,8 @@ describe Api::SubscriptionsController, type: :request do
       let(:credentials) { ActionController::HttpAuthentication::Token.encode_credentials('wrongtoken') }
 
       it "fails", :show_in_doc do
-        get api_subscriptions_path, params: {}, headers: headers
-        expect(response).not_to be_success
+        get subscriptions_api_path, params: {}, headers: headers
+        expect(response).not_to be_successful
       end
     end
   end
