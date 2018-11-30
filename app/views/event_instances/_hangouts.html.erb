@@ -4,15 +4,15 @@
       <div class="card hangout">
         <div class="box ">
           <% if watchable? hangout %>
-          <div class="embed-responsive embed-responsive-16by9">
+            <div class="embed-responsive embed-responsive-16by9">
 
-            <iframe class="embed-responsive-item player"
-                    src="https://www.youtube.com/embed/<%=hangout.yt_video_id%>?enablejsapi=true"
-                    id="<%=hangout.yt_video_id%>"
-                    >
-            </iframe>
-            
-          </div>
+              <iframe class="embed-responsive-item player"
+                      src="https://www.youtube.com/embed/<%=hangout.yt_video_id%>?enablejsapi=1"
+                      id="<%=hangout.yt_video_id%>"
+                      style='background-image:url("https://img.youtube.com/vi/<%=hangout.yt_video_id%>/sddefault.jpg")'
+                      >
+              </iframe>
+            </div>
           <% else %>
             <%= image_tag 'avpremium.png', alt: 'premium event', class: 'card-img-top' %>
           <% end %>
