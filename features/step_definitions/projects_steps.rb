@@ -202,6 +202,11 @@ Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_
   project.source_repositories.create(url: repo)
 end
 
+When(/^I go to the "([^"]*)" project "([^"]*)" page$/) do |title, page|
+  id = Project.find_by(title: title).id
+  visit path_to(page, id)
+end
+
 Given(/^"([^"]*)" creates the project "([^"]*)"$/) do |name, project_title|
   first_name, last_name = name.split
   user = User.create last_name: last_name, first_name: first_name, email: 'bob@example.org', password: 'asdf1234'
