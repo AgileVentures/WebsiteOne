@@ -4,34 +4,32 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var players = {}
-var player
+var iframe
 var currentPlayerId = null
 var currentPlayer = null
 
-$(document).ready(function(){
-  $('#hg-container').on("mouseenter", ".card", function(){
-    currentPlayerId = $(this).find('iframe').attr('id');
-    player = $(this).find('iframe')[0];
+$('#hg-container').on("mouseenter", ".card", function () {
+  if (currentPlayerId && players[currentPlayerId]) {
+    players[currentPlayerId].pauseVideo();
+  }
+  currentPlayerId = $(this).find('iframe').attr('id');
+  iframe = document.getElementById(currentPlayerId);
 
-    if (!players[currentPlayerId]){
-      players[currentPlayerId] = new YT.Player(player, {
-        playerVars: { 'autoplay': 1 },
-        events: {'onReady': onPlayerReady }
-      });
-    }
-    else{
-      currentPlayer = players[currentPlayerId]
-      currentPlayer.playVideo();
-    }
-  });
-
-  $('#hg-container').on("mouseleave", ".card", function(){
-    currentPlayer.pauseVideo();
-    currentPlayer = null;
-  });
+  if (!players[currentPlayerId]) {
+    players[currentPlayerId] = new YT.Player(iframe, {
+      playerVars: { 'autoplay': 1 },
+      events: { 'onReady': onPlayerReady }
+    });
+  }
+  else if (currentPlayerId && players[currentPlayerId]) {
+    players[currentPlayerId].playVideo();
+  } else {
+    console.log("player not ready")
+  }
 });
 function onPlayerReady(event) {
-  currentPlayer = players[currentPlayerId]
-  currentPlayer.seekTo(10);
-  currentPlayer.playVideo();
+  event.target.playVideo()
+}
+
+function onYouTubeIframeAPIReady() {
 }
