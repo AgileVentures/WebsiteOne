@@ -61,6 +61,6 @@ When("I hover mouse on the video") do
   page.find('.card', match: :first).trigger(:mouseover)
 end
 
-When("I should see iframe with {string}") do |link|
-  page.should have_selector(:css, "iframe[src='#{link}']")
+When("I should see iframe with address {string}") do |link|
+  page.should have_selector(:css, "iframe[src^='#{link}']")
 end
