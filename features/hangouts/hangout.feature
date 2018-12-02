@@ -12,8 +12,8 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | Retrospective | Weekly retrospective | ClientMeeting | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |                       |                                           |
     And the following hangouts exist:
       | Start time          | Title        | Project    | Category | Event        | EventInstance url   | Youtube video id | End time            |
-      | 2012-02-04 07:00:00 | HangoutsFlow | WebsiteOne | Scrum    | Repeat Scrum | http://hangout.test | QWERT55          | 2014-02-04 07:02:00 |
-      | 2014-02-05 07:00:00 | HangoutsFlow | WebsiteOne | Scrum    | Repeat Scrum | http://hangout.test | QWERT55          | 2014-02-05 07:03:00 |
+      | 2012-02-04 07:00:00 | Hangout_Flow | WebsiteOne | Scrum    | Repeat Scrum | http://hangout.test | QWERT55          | 2014-02-04 07:02:00 |
+      | 2014-02-05 07:00:00 | Hangout_Flow | WebsiteOne | Scrum    | Repeat Scrum | http://hangout.test | QWERT55          | 2014-02-05 07:03:00 |
     And the following projects exist:
       | title       | description          | status |
       | WebsiteOne  | greetings earthlings | active |
@@ -106,7 +106,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
       | Start time | Title        | Project     | Event         | Category        | Host  | Hangout url            | Youtube video id | End time |
-      | 11:15      | HangoutsFlow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    |
+      | 11:15      | Hangouts_Flow | WebsiteOne  | Scrum         | PairProgramming | Alice | http://hangout.test    | QWERT55          | 11:25    |
       | 11:11      | GithubClone  | Autograders | Retrospective | ClientMeeting   | Bob   | http://hangout.session | TGI345           | 12:42    |
 
     When I visit "/hangouts"
@@ -129,7 +129,7 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
 
   @javascript
   Scenario: Infinite scroll on hangouts scroll down until no more hangouts
-    Given 18 hangouts exists
+    Given 16 hangouts exists
     When I visit "/hangouts"
     Then I should see 10 hangouts
     And I scroll to bottom of page
