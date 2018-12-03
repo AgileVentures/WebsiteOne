@@ -27,7 +27,8 @@ class EventInstancesController < ApplicationController
       format.json { render json:
         @event_instances.to_json(include:
           [
-            :user => {only: [ :first_name, :last_name, :slug ]},
+            :user => {only: [:first_name, :last_name, :slug],
+                      methods: :gravatar_url},
             :project => {:except => [:created_at, :updated_at]},
             :event => {:except => [:created_at, :updated_at]}
           ]
