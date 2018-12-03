@@ -457,6 +457,7 @@ GEM
     rack (2.0.6)
     rack-cache (1.8.0)
       rack (>= 0.4)
+    rack-cors (1.0.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rack-timeout (0.5.1)
@@ -744,6 +745,7 @@ DEPENDENCIES
   puffing-billy (~> 1.1.2)
   puma
   rack-cache
+  rack-cors
   rack-timeout
   railroady
   rails (= 5.2.1.1)
@@ -787,4 +789,4 @@ RUBY VERSION
    ruby 2.5.3p105
 
 BUNDLED WITH
-   1.17.0
+   1.17.1
