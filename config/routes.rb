@@ -6,7 +6,13 @@ Rails.application.routes.draw do
 
   apipie
   mount Mercury::Engine => '/'
-
+  
+  mount Events::API => '/'
+  mount Subscriptions::API => '/'
+  mount Users::API => '/'
+  mount Projects::API => '/'
+  # mount EventInstances::API => '/'
+  
   root 'visitors#index'
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
@@ -62,11 +68,11 @@ Rails.application.routes.draw do
     end
   end
 
-  scope '/api' do
-    scope '/subscriptions' do
-      get '/' => 'api/subscriptions#index', as: 'api_subscriptions', defaults: { format: 'json' }
-    end
-  end
+  # scope '/api' do
+  #   scope '/subscriptions' do
+  #     get '/' => 'api/subscriptions#index', as: 'api_subscriptions', defaults: { format: 'json' }
+  #   end
+  # end
 
   get '/mentors' => 'users#index', defaults: {title: 'Mentor'}
   get '/premium_members' => 'users#index', defaults: {title: 'Premium'}
