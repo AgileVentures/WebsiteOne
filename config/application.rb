@@ -48,5 +48,12 @@ module WebsiteOne
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
 
     config.cache_store = :memory_store, { size: 64.megabytes }
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'https://www.react.agileventures.org'
+        resource '*', :headers => :any, :methods => [:get]
+      end
+    end
   end
 end
