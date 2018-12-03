@@ -33,7 +33,7 @@ describe EventInstancesController do
 
   describe '#index' do
     before do
-      FactoryBot.create_list(:event_instance, 3)
+      FactoryBot.create_list(:event_instance, 4)
       FactoryBot.create_list(:event_instance, 3, updated: 1.hour.ago)
     end
 
@@ -51,7 +51,7 @@ describe EventInstancesController do
         hash_body = nil
         expect { hash_body = JSON.parse(response.body) }.not_to raise_exception
         expect(hash_body).to be_an(Array)
-        expect(hash_body.length).to eq(5)
+        expect(hash_body.length).to eq(6)
         expect(hash_body).to all(be_a(Hash))
         [:id, :event_id, :title, :hangout_url, :category,
          :yt_video_id, :user_id].each do |key|
