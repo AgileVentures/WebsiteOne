@@ -17,6 +17,7 @@ module Projects
     resource :projects do
       desc 'Return the upcoming events.'
       get '/' do
+        authenticate!
         Project.all
       end
     end
