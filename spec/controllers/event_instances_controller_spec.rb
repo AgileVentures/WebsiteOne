@@ -77,7 +77,7 @@ describe EventInstancesController do
         expect(hash_body.length).to eq(1)
         expect(hash_body).to all(be_a(Hash))
         [:id, :event_id, :title, :hangout_url, :category,
-         :yt_video_id, :user_id].each do |key|
+         :yt_video_id, :user_id, :user, :project, :event].each do |key|
           expect(hash_body.first).to have_key(key.to_s)
         end
       end

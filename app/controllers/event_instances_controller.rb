@@ -24,7 +24,15 @@ class EventInstancesController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-      format.json { render json: @event_instances }
+      format.json { render json:
+        @event_instances.to_json(include:
+          [
+            :user => {only: [ :first_name, :last_name, :slug ]},
+            :project => {:except => [:created_at, :updated_at]},
+            :event => {:except => [:created_at, :updated_at]}
+          ]
+        )
+      }
     end
   end
 
