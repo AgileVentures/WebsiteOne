@@ -21,6 +21,11 @@ class EventInstancesController < ApplicationController
     relation = (params[:live] == 'true') ? EventInstance.live : EventInstance.latest
     relation = relation.includes(:project, :event, :user)
     @event_instances = relation.paginate(:page => params[:page], per_page: 5)
+    respond_to do |format|
+      format.html
+      format.js
+      format.json { render json: @event_instances }
+    end
   end
 
   def edit

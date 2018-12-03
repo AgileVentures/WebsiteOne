@@ -31,6 +31,59 @@ describe EventInstancesController do
     end
   end
 
+  describe '#index' do
+    before do
+      FactoryBot.create_list(:event_instance, 3)
+      FactoryBot.create_list(:event_instance, 3, updated: 1.hour.ago)
+    end
+
+    context 'json GET #index first page' do
+      before do
+        get :index, format: :json
+      end
+
+      it "returns json http success" do
+        expect(response).to have_http_status(:success)
+        expect(response.header['Content-Type']).to include 'application/json'
+      end
+
+      it "response with JSON body containing expected Hangouts" do
+        hash_body = nil
+        expect { hash_body = JSON.parse(response.body) }.not_to raise_exception
+        expect(hash_body).to be_an(Array)
+        expect(hash_body.length).to eq(5)
+        expect(hash_body).to all(be_a(Hash))
+        [:id, :event_id, :title, :hangout_url, :category,
+         :yt_video_id, :user_id].each do |key|
+          expect(hash_body.first).to have_key(key.to_s)
+        end
+      end
+    end
+
+    context 'json GET #index second page' do
+      before do
+        get :index, format: :json, params: { page: 2 }
+      end
+
+      it "returns json http success" do
+        expect(response).to have_http_status(:success)
+        expect(response.header['Content-Type']).to include 'application/json'
+      end
+
+      it "response with JSON body containing expected Hangouts" do
+        hash_body = nil
+        expect { hash_body = JSON.parse(response.body) }.not_to raise_exception
+        expect(hash_body).to be_an(Array)
+        expect(hash_body.length).to eq(1)
+        expect(hash_body).to all(be_a(Hash))
+        [:id, :event_id, :title, :hangout_url, :category,
+         :yt_video_id, :user_id].each do |key|
+          expect(hash_body.first).to have_key(key.to_s)
+        end
+      end
+    end
+  end
+
   describe '#update' do
     before do
       allow_any_instance_of(EventInstance).to receive(:update).and_return('true')
