@@ -70,7 +70,7 @@ Given(/^(\d+) hangouts exists$/) do |count|
 end
 
 Then(/^I should see (\d+) hangouts$/) do |count|
-  expect(page).to have_content("Hangout_", count: count.to_i)
+  expect(page).to have_css(".hangout", count: count.to_i)
 end
 
 When(/^I scroll to bottom of page$/) do

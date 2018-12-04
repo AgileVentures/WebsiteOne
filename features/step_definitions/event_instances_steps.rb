@@ -56,3 +56,11 @@ Then /^they should see the most (\d+) recent events first$/ do |num_event_instan
   end
   expect(page.text).to match(Regexp.new(most_recent_events_first))
 end
+
+When("I hover mouse on the video") do
+  page.find('.card', match: :first).trigger(:mouseover)
+end
+
+When("I should see iframe with address {string}") do |link|
+  page.should have_selector(:css, "iframe[src^='#{link}']")
+end

@@ -78,3 +78,13 @@
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
+
+.flex-center {
+  display:flex;
+  align-items: center;
+}
+@media only screen and (min-width: 992px) {
+    .pull-right-lg {
+        float: right !important;
+    }
+}
