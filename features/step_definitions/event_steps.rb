@@ -458,8 +458,12 @@ Then(/^the dropdown with id "(.*)" should only have active projects$/) do |selec
   # Write code here that turns the phrase above into concrete actions
     active_projects = Project.active.pluck(:title)
     not_active_projects = Project.where.not(status: 'active').pluck(:title)
-    expect(page).to have_select("##{select_id}", options: active_projects, visible: false)
-    expect(page).to_not have_select("##{select_id}", options: not_active_projects)
+    active_projects.each do |project|
+      expect(page).to have_selector("##{select_id}", text: project)
+    end
+    not_active_projects.each do |project|
+      expect(page).to_not have_selector("##{select_id}", text: project)
+    end
 end
 
 And(/^I hit back$/) do
