@@ -1,18 +1,10 @@
 <% provide :title, 'Hangouts' %>
 <section class="live-hangouts">
-  <div class='col-lg-12'>
-    <div class='row hg-toggles'>
-        <button id="btn-hg-toggle" type="button" class="btn btn-default">toggle summary</button>
-        <%= link_to 'show all/live', hangouts_path(live: !(params[:live]=='true')), class: 'btn btn-default' %>
-    </div>
-  </div>
+
+  <%= render 'index_header' %>
+
   <div class="clearfix"></div>
-  <div class="panel-group" id="accordion">
-    <div class="panel panel-info hidden-xs">
-      <div class="panel-heading hg-headings">
-        <%= render 'index_header' %>
-      </div>
-    </div>
+  <div class="row is-flex" id="hg-container">
     <% if @event_instances.empty? %>
       <div class="panel panel-default">
         <div class="panel-heading empty">
@@ -21,11 +13,10 @@
         </div>
       </div>
     <% else  %>
-      <div id='hg-container'>
-        <%= render 'hangouts' %>
-      </div>
-      <%= will_paginate @event_instances, page_links: false %>
+      <%= render 'hangouts', event_instances: @event_instances %>
     <% end %>
   </div>
+  <%= will_paginate @event_instances, page_links: false %>
 </section>
 <%=javascript_include_tag 'event_instances.js' %>
+<%=javascript_include_tag 'hangout_play_on_hover.js' %>
