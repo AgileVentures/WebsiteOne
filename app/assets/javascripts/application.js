@@ -27,6 +27,7 @@
 //= stub disqus
 //= require events
 //= stub event_instances
+//= stub hangout_play_on_hover
 //= require local-time
 //= require jvectormap
 //= require jvectormap/maps/world_mill
