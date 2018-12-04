@@ -15,7 +15,7 @@ describe Subscriptions::API, type: :request do
     let(:headers) do
       {
           "Authorization" => credentials,
-          "Accept" => "application/json" # This is what Rails 4 accepts
+          "Content-Type" => "application/json" # This is what Rails 4 accepts
           # "http_accept" => "application/json", # This is what Rails 3 accepts
       }
     end

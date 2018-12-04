@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   mount Subscriptions::API => '/'
   mount Users::API => '/'
   mount Projects::API => '/'
-  # mount EventInstances::API => '/'
+  mount EventInstances::API => '/'
   
   root 'visitors#index'
 

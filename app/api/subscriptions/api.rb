@@ -1,6 +1,6 @@
 module Subscriptions
   class API < Grape::API
-    version "v1", using: :path, vendor: "agileventures"
+    version "v1", using: :headers, vendor: "agileventures"
     format :json
     prefix :api
 
@@ -11,9 +11,7 @@ module Subscriptions
       end
       
       def authenticate_token
-        authenticate_or_request_with_http_token do |token, _options|
-         token == Settings.api.premium_subscriptions_token
-        end
+        Settings.api.premium_subscriptions_token
       end
     end
 
