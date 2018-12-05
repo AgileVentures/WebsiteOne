@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   mount Mercury::Engine => '/'
   
   mount Events::API => '/'
-  # mount EventInstances::API => '/'
+  mount EventInstances::API => '/'
+  mount Projects::API => '/'
+  mount Users::API => '/'
   
   root 'visitors#index'
 

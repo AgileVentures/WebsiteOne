@@ -22,7 +22,7 @@ describe LegacyApi::SubscriptionsController, type: :request do
     context 'with proper token' do
       it "succeeds", :show_in_doc do
         get api_subscriptions_path, params: {}, headers: headers
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(JSON.parse(response.body)).to include(a_hash_including("payment_source" => "PaymentSource::PayPal", "plan_name" => plan.name, "email" => "kitty@cat.com", "sponsor_email" => "kitty@cat.com", "started_on" => start_date, "ended_on" => end_date))
       end
 
@@ -31,7 +31,7 @@ describe LegacyApi::SubscriptionsController, type: :request do
 
         it 'succeeds' do
           get api_subscriptions_path, params: {}, headers: headers
-          expect(response).to be_success
+          expect(response).to be_successful
           expect(JSON.parse(response.body)).to include(a_hash_including("payment_source" => "PaymentSource::PayPal", "plan_name" => plan.name, "email" => "kitty@cat.com", "sponsor_email" => "kitty@cat.com", "started_on" => start_date, "ended_on" => nil))
         end
       end
@@ -43,7 +43,7 @@ describe LegacyApi::SubscriptionsController, type: :request do
         it 'succeeds' do
           user.destroy
           get api_subscriptions_path, params: {}, headers: headers
-          expect(response).to be_success
+          expect(response).to be_successful
           expect(JSON.parse(response.body)).to include(a_hash_including("payment_source" => "PaymentSource::PayPal", "plan_name" => plan.name, "email" => "kitty@cat.com", "sponsor_email" => "catty@kit.com", "started_on" => start_date, "ended_on" => end_date))
         end
 
@@ -55,7 +55,7 @@ describe LegacyApi::SubscriptionsController, type: :request do
 
       it "fails", :show_in_doc do
         get api_subscriptions_path, params: {}, headers: headers
-        expect(response).not_to be_success
+        expect(response).not_to be_successful
       end
     end
   end
