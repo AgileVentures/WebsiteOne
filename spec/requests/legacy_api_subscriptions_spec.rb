@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'byebug'
 
-describe Api::SubscriptionsController, type: :request do
+describe LegacyApi::SubscriptionsController, type: :request do
   describe "GET /subscriptions" do
     let(:user) { FactoryBot.create(:user, email: "kitty@cat.com") }
     let(:start_time) { DateTime.new(2001, 2, 3, 4, 5, 6) }
