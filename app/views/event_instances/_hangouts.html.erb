@@ -1,12 +1,27 @@
-<% @event_instances.each_with_index do |hangout, index| %>
-  <% present hangout do |hangout_presenter| %>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <%= render partial: 'index_basic_info', locals: { hangout: hangout_presenter, index: index}  %>
-      </div>
-      <div id="<%= "collapse#{index}" %>" class="panel-collapse collapse">
-        <div class="panel-body">
-          <%= render partial: 'index_extra_info', locals: { hangout: hangout_presenter }  %>
+<% @event_instances.each_with_index do |event, index| %>
+  <% present event do |hangout| %>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-4">
+      <div class="card hangout">
+        <div class="box ">
+          <% if watchable? hangout %>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item player"
+                      src="https://www.youtube.com/embed/<%=hangout.yt_video_id%>?enablejsapi=1&amp;origin=<%=request.base_url%>"
+                      id="<%=hangout.yt_video_id%>"
+                      >
+              </iframe>
+            </div>
+          <% else %>
+            <%= image_tag 'avpremium.png', alt: 'premium event', class: 'card-img-top' %>
+          <% end %>
+          <div class="card-block">
+            <div class="meta">
+              <%= render partial: 'index_basic_info', locals: { hangout: hangout, index: index}  %>
+            </div>
+            <div id="<%= "collapse#{index}" %>" class="card-footer collapse">
+              <%= render partial: 'index_extra_info', locals: { hangout: hangout }  %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
