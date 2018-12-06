@@ -88,3 +88,9 @@ Feature: Create projects
       | ACTIVE                |
     And I should see a link to "multiple repo project" on github
     And I should see a link "multiple repo project" that connects to the "pivotaltracker_url"
+
+  @javascript
+  Scenario: Saving a new project with multiple issue trackers: success
+    Given I have logged in
+    And that I create a project with more than one issue tracker
+    Then I should have a project created with more than one issue tracker
