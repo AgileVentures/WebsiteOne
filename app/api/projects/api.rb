@@ -32,8 +32,8 @@ module Projects
           projects_followers_count.merge!("#{project.title}": project.followers.count) 
           projects_documents_count.merge!("#{project.title}": project.documents.count)
         end
-        { projects: ordered_projects, languages: projects_languages_hash.to_json, 
-          followers: projects_followers_count.to_json, documents: projects_documents_count.to_json }
+        { projects: ordered_projects, languages: projects_languages_hash, 
+          followers: projects_followers_count, documents: projects_documents_count }
       end
     end
   end
