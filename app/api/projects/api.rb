@@ -12,6 +12,13 @@ module Projects
       def authenticate!
         error!('401 Unauthorized', 401) unless current_user
       end
+
+      def ordered_projects 
+        Project.order('status ASC')
+          .order('last_github_update DESC NULLS LAST')
+          .order('commit_count DESC NULLS LAST')
+          .includes(:user)
+      end
     end
 
     resource :projects do
@@ -25,7 +32,7 @@ module Projects
           projects_followers_count.merge!("#{project.title}": project.followers.count) 
           projects_documents_count.merge!("#{project.title}": project.documents.count)
         end
-        { projects: Project.all.to_json, languages: projects_languages_hash.to_json, 
+        { projects: ordered_projects, languages: projects_languages_hash.to_json, 
           followers: projects_followers_count.to_json, documents: projects_documents_count.to_json }
       end
     end
