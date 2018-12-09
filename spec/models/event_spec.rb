@@ -506,7 +506,7 @@ describe Event, :type => :model do
     end
 
     it 'returns event past event duration, but still live' do
-      event_instance = FactoryBot.create(:event_instance)
+      event_instance = FactoryBot.create(:live_event_instance)
       event_end_time = event_instance.event.start_datetime + event_instance.event.duration.minutes
       expect(event_end_time).to be < Time.current
       expect(event_instance.event).to eq(Event.upcoming_events.last[:event])
