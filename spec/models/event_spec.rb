@@ -569,6 +569,16 @@ describe Event, :type => :model do
         Delorean.time_travel_to(Time.parse('2018-10-28 10:30:00 UTC'))
         expect(Event.future_events.count).to eq(1)
       end
+
+      it 'should return event with a repeat ends true with a date in the future' do
+        FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                           start_datetime: '2018-06-28 09:20:00 UTC', duration: 30,
+                           repeats: 'weekly', repeat_ends_on: '2019-06-28 09:20:00 UTC',
+                           repeat_ends: true
+        )
+        Delorean.time_travel_to(Time.parse('2018-10-28 10:30:00 UTC'))
+        expect(Event.future_events.count).to eq(1)
+      end
     end
   end
 end
