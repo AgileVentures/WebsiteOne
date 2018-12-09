@@ -530,4 +530,45 @@ describe Event, :type => :model do
       expect(event.jitsi_room_link).to eq('https://meet.jit.si/AV_Repeat_Scrum')
     end
   end
+
+  describe '.future events' do
+    it 'does not pull non-repeating past events' do
+      FactoryBot.create(:event, category: 'Scrum', name: 'Spec Scrum one-time',
+                         start_datetime: '2015-06-15 09:20:00 UTC', duration: 30,
+                         repeats: 'never'
+      )
+      Delorean.time_travel_to(Time.parse('2018-06-15 10:30:00 UTC'))
+      expect(Event.future_events.count).to eq(0)
+    end
+
+    it 'should pull an event in the future that does not repeat' do
+      FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                         start_datetime: '2018-06-28 09:20:00 UTC', duration: 30,
+                         repeats: 'never'
+      )
+      Delorean.time_travel_to(Time.parse('2018-06-15 10:30:00 UTC'))
+      expect(Event.future_events.count).to eq(1)
+    end
+
+    context 'pulling past events that repeat' do
+
+      it 'should not return event with an end date in the past' do
+        FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                           start_datetime: '2018-06-28 09:20:00 UTC', duration: 30,
+                           repeats: 'weekly', repeat_ends_on: '2018-010-10 09:20:00 UTC'
+        )
+        Delorean.time_travel_to(Time.parse('2018-11-15 10:30:00 UTC'))
+        expect(Event.future_events.count).to eq(0)
+      end
+
+      it 'should return event with an end date in the future' do
+        FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                           start_datetime: '2018-06-28 09:20:00 UTC', duration: 30,
+                           repeats: 'weekly', repeat_ends_on: '2019-06-28 09:20:00 UTC'
+        )
+        Delorean.time_travel_to(Time.parse('2018-10-28 10:30:00 UTC'))
+        expect(Event.future_events.count).to eq(1)
+      end
+    end
+  end
 end
