@@ -3,7 +3,7 @@ class Event < ApplicationRecord
   belongs_to :project
   serialize :exclusions
 
-  belongs_to :creator, class_name: 'User', touch: true
+  belongs_to :creator, class_name: 'User'
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -36,10 +36,6 @@ class Event < ApplicationRecord
   #   super ? 'on' : 'never'
   # end
 
-  after_save do
-    Event.upcoming_events(nil, true)
-  end  
-
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? 'on' : 'never'
   end
@@ -56,14 +52,7 @@ class Event < ApplicationRecord
    schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule')
   end
 
-  def self.upcoming_events(project=nil, force=false)
-    return self.upcoming_events_raw(project) if project
-    Rails.cache.fetch("upcoming_events:#{project.nil? ? '' : project.title}", force: force, expires_in: 12.hours) do
-      self.upcoming_events_raw
-    end
-  end
-
-  def self.upcoming_events_raw(project=nil)
+  def self.upcoming_events(project=nil)
     events = Event.base_future_events(project).inject([]) do |memo, event|
       memo << event.next_occurrences
     end.flatten.sort_by { |e| e[:time] }
