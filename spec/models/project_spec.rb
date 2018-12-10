@@ -36,6 +36,11 @@ describe Project, type: :model do
       expect(subject).to_not be_valid
     end
 
+    it 'should not crash the website with an invalid image url ' do
+      subject.image_url = 'https://www.flickr.com/photos/63977906@N00'
+      expect(subject).to_not be_valid
+    end
+
     it 'should not accept invalid github url' do
       subject.source_repositories.create(url: 'https:/github.com/google/instant-hangouts')
       expect(subject).to_not be_valid
