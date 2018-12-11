@@ -58,7 +58,7 @@ class Event < ApplicationRecord
 
   def self.upcoming_events(project=nil, force=false)
     return self.upcoming_events_raw(project) if project
-    Rails.cache.fetch("upcoming_events:#{project.nil? ? '' : project.title}", force: force, expires_in: 12.hours) do
+    Rails.cache.fetch("upcoming_events:#{project.nil? ? '' : project.title}", force: force, expires_in: 1.hour) do
       self.upcoming_events_raw
     end
   end
