@@ -45,7 +45,8 @@ class Event < ApplicationRecord
   end
 
   def self.future_events
-    Event.where('start_datetime > ? OR repeat_ends = false AND repeats != ? OR repeat_ends = false AND repeat_ends_on IS NULL OR repeat_ends_on > ?', Time.current - 1.day, 'never', Time.current - 1.day)
+    Event.where('start_datetime > ? OR repeat_ends = false AND repeats != ? OR repeat_ends = false AND repeat_ends_on IS NULL OR repeat_ends_on > ?', Time.current - 1.day, 'never', Time.current - 1.day).
+          where.not('repeats = ? AND start_datetime < ?', 'never', Time.current - 1.day)
   end
 
   def repeats?
