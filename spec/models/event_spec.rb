@@ -559,6 +559,15 @@ describe Event, :type => :model do
       expect(Event.future_events.count).to eq(1)
     end
 
+    it 'should not pull an event that no longer repeats, and does not have an end date' do
+      FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                         start_datetime: '2016-06-28 09:20:00 UTC', duration: 30,
+                         repeats: 'never', repeat_ends: false,
+                         repeat_ends_on: nil
+      )
+      expect(Event.future_events.count).to eq(0)
+    end
+
     context 'pulling past events that repeat' do
 
       it 'should not return event with an end date in the past' do
