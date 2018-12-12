@@ -46,7 +46,6 @@ module WebsiteOne
     # config.assets.css_compressor = :sass
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
-
     config.cache_store = :memory_store, { size: 64.megabytes }
 
     config.middleware.insert_before 0, Rack::Cors do
