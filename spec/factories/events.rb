@@ -14,6 +14,8 @@ FactoryBot.define do
 
     factory :recent_event do
       start_datetime { Time.current - 8.hours }
+      repeat_ends_on { Time.current + 1.year }
+      repeats_weekly_each_days_of_the_week_mask { '127' }
     end
   end
   factory :invalid_event do

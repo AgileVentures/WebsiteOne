@@ -252,13 +252,13 @@ class Event < ApplicationRecord
   end
 
   def before_current_end_time?
-    Time.now < current_end_time
+    Time.current < current_end_time
   rescue
     false
   end
 
   def after_current_start_time?
-    Time.now > current_start_time
+    Time.current > current_start_time
   rescue
     false
   end

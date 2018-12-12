@@ -40,38 +40,36 @@ describe Event, :type => :model do
 
   describe "#less_than_ten_till_start?" do
 
-    before(:each) { Delorean.time_travel_to '2014-03-16 23:30:00 UTC' }
-
     context 'event starts five minutes from now' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:35:00 UTC' }
+      subject(:recent_event) { build_stubbed :recent_event, start_datetime: 5.minutes.from_now }
       it 'returns true' do
-        expect(event).to be_less_than_ten_till_start
+        expect(recent_event).to be_less_than_ten_till_start
       end
     end
 
     context 'event starts 20 minutes from now' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:50:00 UTC' }
+      subject(:recent_event) { build_stubbed :recent_event, start_datetime: 20.minutes.from_now }
       it 'returns false' do
-        expect(event).not_to be_less_than_ten_till_start
+        expect(recent_event).not_to be_less_than_ten_till_start
       end
     end
 
     context 'event started five minutes ago and has not ended' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:25:00 UTC' , duration: '10'}
+      subject(:recent_event) { build_stubbed :recent_event, start_datetime: 5.minutes.ago , duration: '10'}
       it 'returns true' do
-        expect(event).to be_less_than_ten_till_start
+        expect(recent_event).to be_less_than_ten_till_start
       end
     end
 
     context 'event finished 10 minutes ago' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-16 23:10:00 UTC', duration: '10' }
+      subject(:recent_event) { build_stubbed :recent_event, start_datetime: 20.minutes.ago, duration: '10' }
       it 'returns false' do
-        expect(event).not_to be_less_than_ten_till_start
+        expect(recent_event).not_to be_less_than_ten_till_start
       end
     end
 
     context 'event sequence has been terminated' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:50:00 UTC', repeat_ends_on: '2014-03-10' }
+      subject(:event) { build_stubbed :event, start_datetime: 1.year.ago, repeat_ends_on: 1.day.ago}
       it 'returns false' do
         expect(event).not_to be_less_than_ten_till_start
       end
