@@ -244,11 +244,11 @@ class Event < ApplicationRecord
   end
 
   def current_start_time
-    schedule.previous_occurrence(Time.current)
+    schedule.occurrences_between(1.month.ago, Time.current).last
   end
 
   def current_end_time
-    schedule.previous_occurrence(Time.current) + duration*60
+    schedule.occurrences_between(1.month.ago, Time.current).last + duration*60
   end
 
   def before_current_end_time?
