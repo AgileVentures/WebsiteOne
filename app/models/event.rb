@@ -202,11 +202,11 @@ class Event < ApplicationRecord
     save!
   end
 
-  def schedule(start_date = start_datetime)
-    sched = series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_date) : IceCube::Schedule.new(start_date, :end_time => series_end_time)
+  def schedule
+    sched = series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
     case repeats
       when 'never'
-        sched.add_recurrence_time(start_date)
+        sched.add_recurrence_time(start_datetime)
       when 'weekly', 'biweekly'
         days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
         sched.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
@@ -244,7 +244,7 @@ class Event < ApplicationRecord
   end
 
   def current_start_time
-    schedule(Time.current - 1.day).previous_occurrence(Time.current)
+    schedule.previous_occurrence(Time.current)
   end
 
   def current_end_time
