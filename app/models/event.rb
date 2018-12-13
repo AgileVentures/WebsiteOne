@@ -3,7 +3,7 @@ class Event < ApplicationRecord
   belongs_to :project
   serialize :exclusions
 
-  belongs_to :creator, class_name: 'User', touch: true
+  belongs_to :creator, class_name: 'User'
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -36,10 +36,6 @@ class Event < ApplicationRecord
   #   super ? 'on' : 'never'
   # end
 
-  after_save do
-    Event.upcoming_events(nil, true)
-  end  
-
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? 'on' : 'never'
   end
@@ -49,21 +45,15 @@ class Event < ApplicationRecord
   end
 
   def self.future_events
-    Event.where('repeats = \'never\' OR repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on > ?', Time.now)
+    Event.where('start_datetime > ? OR repeat_ends = false AND repeats != ? OR repeat_ends = false AND repeat_ends_on IS NULL OR repeat_ends_on > ?', Time.current - 1.day, 'never', Time.current - 1.day).
+          where.not('repeats = ? AND start_datetime < ?', 'never', Time.current - 1.day)
   end
 
   def repeats?
    schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule')
   end
 
-  def self.upcoming_events(project=nil, force=false)
-    return self.upcoming_events_raw(project) if project
-    Rails.cache.fetch("upcoming_events:#{project.nil? ? '' : project.title}", force: force, expires_in: 1.hour) do
-      self.upcoming_events_raw
-    end
-  end
-
-  def self.upcoming_events_raw(project=nil)
+  def self.upcoming_events(project=nil)
     events = Event.base_future_events(project).inject([]) do |memo, event|
       memo << event.next_occurrences
     end.flatten.sort_by { |e| e[:time] }
@@ -212,7 +202,7 @@ class Event < ApplicationRecord
     save!
   end
 
-  def schedule()
+  def schedule
     sched = series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
     case repeats
       when 'never'
@@ -254,21 +244,21 @@ class Event < ApplicationRecord
   end
 
   def current_start_time
-    schedule.previous_occurrence(Time.now)
+    schedule.occurrences_between(1.month.ago, Time.current).last
   end
 
   def current_end_time
-    schedule.previous_occurrence(Time.now) + duration*60
+    schedule.occurrences_between(1.month.ago, Time.current).last + duration*60
   end
 
   def before_current_end_time?
-    Time.now < current_end_time
+    Time.current < current_end_time
   rescue
     false
   end
 
   def after_current_start_time?
-    Time.now > current_start_time
+    Time.current > current_start_time
   rescue
     false
   end
