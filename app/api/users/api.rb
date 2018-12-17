@@ -15,7 +15,7 @@ module Users
     end
 
     resource :users do
-      desc 'Return the upcoming events.'
+      desc 'Return all users'
       get '/' do
         User.all
       end
