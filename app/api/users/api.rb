@@ -17,7 +17,7 @@ module Users
     resource :users do
       desc 'Return all users'
       get '/' do
-        User.all
+        User.limit(50)
       end
     end
   end
