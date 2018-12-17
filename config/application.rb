@@ -50,7 +50,7 @@ module WebsiteOne
     config.cache_store = :memory_store, { size: 64.megabytes }
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'https://www.react.agileventures.org'
+        origins '*'
         resource '*', :headers => :any, :methods => [:get, :options]
       end
     end
