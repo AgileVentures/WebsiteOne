@@ -57,6 +57,7 @@ Given(/^the following events exist that repeat every weekday:$/) do |table|
     hash[:repeats_weekly_each_days_of_the_week_mask] = 31
     hash[:repeats_every_n_weeks] = 1
     hash[:repeats] = 'weekly'
+    hash[:repeat_ends] = false
     Event.create!(hash)
   end
 end
@@ -456,11 +457,13 @@ end
 
 Then(/^the dropdown with id "(.*)" should only have active projects$/) do |select_id|
   # Write code here that turns the phrase above into concrete actions
-    Project.active.pluck(:title).each do |title|
-      expect(page).to have_css("##{select_id}", :text => title, visible: false)
+    active_projects = Project.active.pluck(:title)
+    not_active_projects = Project.where.not(status: 'active').pluck(:title)
+    active_projects.each do |project|
+      expect(page).to have_selector("##{select_id}", text: project, visible: false)
     end
-    Project.where.not(status: 'active').pluck(:title).each do |title|
-      expect(page).to_not have_css("##{select_id}", :text => title, visible: false)
+    not_active_projects.each do |project|
+      expect(page).to_not have_selector("##{select_id}", text: project, visible: false)
     end
 end
 
