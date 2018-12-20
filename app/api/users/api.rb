@@ -14,7 +14,7 @@ module Users
       end
 
       def ordered_users 
-        User.includes(:karma, :titles)
+        User.where.not(id: -1).includes(:karma, :titles)
         .order("karmas.total DESC")
         .limit(500)
       end
