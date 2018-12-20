@@ -12,6 +12,12 @@ module Users
       def authenticate!
         error!('401 Unauthorized', 401) unless current_user
       end
+
+      def ordered_users 
+        User.includes(:karma, :titles)
+        .order("karmas.total DESC")
+        .limit(500)
+      end
     end
 
     resource :users do
@@ -25,7 +31,7 @@ module Users
           users_gravatar_url_hash.merge!("#{user.id}": user.gravatar_url)
           users_titles_hash.merge!("#{user.id}": user.titles.pluck(:name))
         end
-        { users: User.limit(500), karma_total: users_karma_total_hash, gravatar_url: users_gravatar_url_hash, users_title: users_titles_hash }
+        { users: ordered_users, karma_total: users_karma_total_hash, gravatar_url: users_gravatar_url_hash, users_title: users_titles_hash }
       end
     end
   end
