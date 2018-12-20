@@ -19,11 +19,13 @@ module Users
       get '/' do
         users_karma_total_hash = {}
         users_gravatar_url_hash = {}
-        User.limit(500).each do |user|
+        users_titles_hash = {}
+        User.includes(:karma, :titles).order("karmas.total DESC").limit(500).each do |user|
           users_karma_total_hash.merge!("#{user.id}": user.karma_total)
           users_gravatar_url_hash.merge!("#{user.id}": user.gravatar_url)
+          users_titles_hash.merge!("#{user.id}": user.titles.pluck(:name))
         end
-        { users: User.limit(500), karma_total: users_karma_total_hash, gravatar_url: users_gravatar_url_hash }
+        { users: User.limit(500), karma_total: users_karma_total_hash, gravatar_url: users_gravatar_url_hash, users_title: users_titles_hash }
       end
     end
   end
