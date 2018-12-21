@@ -18,6 +18,16 @@ namespace :util do
     time = DateTime.parse(datetime)
     AddSubscriptionToUserForPlan.with(user, user, time, plan, payment_source)
   end 
+  desc 'give Premium mob subscription via sponsor'
+  task :paypal, [:email, :sponsor_email, :datetime, :identifier] => [:environment] do |task, args|
+    user = User.find_by email: args[:email]
+    sponsor = User.find_by email:
+    payment_source = sponsor.subscritions.first.payment_source
+    plan = Plan.find(2)
+    datetime = args[:datetime] || DateTime.now # '2018-09-26 10:58:08'
+    time = DateTime.parse(datetime)
+    AddSubscriptionToUserForPlan.with(user, sponsor, time, plan, payment_source)
+  end 
   desc 'mark a subscription as ended'
   task :end_subscription, [:email, :datetime] => [:environment] do
     user = User.find_by email: args[:email]
