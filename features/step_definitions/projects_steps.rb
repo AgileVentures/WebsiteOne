@@ -223,3 +223,25 @@ Given(/^the anonymous user exists$/) do
   attributes = { id: -1, first_name: 'Anonymous', last_name: '', email: 'anonymous@example.org' }
   FactoryBot.create(:user, attributes)
 end
+
+Given("I create a project with more than one issue tracker") do
+    # And I am on the "Projects" page
+    # When I click the very stylish "New Project" button
+    # When I fill in "Title" with "multiple repo project"
+    # And I fill in "Description" with "has lots of code"
+    # And I fill in "GitHub url (primary)" with "http://www.github.com/new"
+    # And I click "Add more repos"
+    # Then I should see "GitHub url (2)"
+    # And I fill in "GitHub url (2)" with "http://www.github.com/new2"
+    # And I fill in "Issue Tracker link" with "http://www.waffle.com/new"
+    # And The project has no stories on Pivotal Tracker
+    # And I select "Status" to "Active"
+    # And I click the "Submit" button
+    visit path_to("Projects")
+    save_and_open_page
+    #click_button("New Project")
+end
+
+Then("I should have a project created with more than one issue tracker") do
+  pending # Write code here that turns the phrase above into concrete actions
+end
