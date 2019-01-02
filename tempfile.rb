@@ -28,9 +28,9 @@ module Projects
         projects_followers_count = {}
         projects_documents_count = {}
         Project.all.each do |project|
-          projects_languages_hash.merge!(project.title => project.languages)
-          projects_followers_count.merge!(project.title => project.followers.count) 
-          projects_documents_count.merge!(project.title => project.documents.count)
+          projects_languages_hash.merge!("#{project.title}": project.languages)
+          projects_followers_count.merge!("#{project.title}": project.followers.count) 
+          projects_documents_count.merge!("#{project.title}": project.documents.count)
         end
         { projects: ordered_projects, languages: projects_languages_hash, 
           followers: projects_followers_count, documents: projects_documents_count }
