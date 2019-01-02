@@ -15,6 +15,7 @@ class Project < ApplicationRecord
   has_many :event_instances
   has_many :commit_counts
   has_many :source_repositories
+  has_and_belongs_to_many :slack_channels
   has_and_belongs_to_many :languages
 
   accepts_nested_attributes_for :source_repositories, reject_if: :all_blank, allow_destroy: true
