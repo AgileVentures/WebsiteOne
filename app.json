@@ -3,7 +3,7 @@
   "description": "A website for AgileVentures",
   "scripts":{
     "dokku":{
-      "predeploy": "bundle exec rake db:migrate",
+      "predeploy": "bundle exec rake db:migrate"
     }
   },
   "env": {
