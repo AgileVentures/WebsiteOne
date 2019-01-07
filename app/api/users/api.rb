@@ -16,7 +16,7 @@ module Users
       def ordered_users 
         User.where.not(id: -1).includes(:karma, :titles)
         .order("karmas.total DESC")
-        .limit(500)
+        .limit(400)
       end
 
       def contributions(user) 
@@ -50,7 +50,7 @@ module Users
         users_membership_length_hash = {}
         users_activity_hash = {}
 
-        User.includes(:karma, :titles).order("karmas.total DESC").limit(500).each do |user|
+        User.includes(:karma, :titles).order("karmas.total DESC").limit(400).each do |user|
           users_karma_total_hash.merge!("#{user.id}": user.karma_total)
           users_gravatar_url_hash.merge!("#{user.id}": user.gravatar_url(size: 250))
           users_titles_hash.merge!("#{user.id}": user.titles.pluck(:name))
