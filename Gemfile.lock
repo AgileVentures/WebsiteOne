@@ -334,7 +334,7 @@ GEM
       ice_cube (~> 0.16)
     ice_cube (0.16.3)
     ice_nine (0.11.2)
-    jaro_winkler (1.5.1)
+    jaro_winkler (1.5.2)
     jasmine (3.3.0)
       jasmine-core (~> 3.3.0)
       phantomjs
@@ -559,7 +559,7 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.60.0)
+    rubocop (0.62.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -567,7 +567,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.4.0)
-    rubocop-rspec (1.30.1)
+    rubocop-rspec (1.31.0)
       rubocop (>= 0.60.0)
     ruby-gitter (0.1.0)
       hashie
@@ -645,7 +645,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
-    unicode-display_width (1.4.0)
+    unicode-display_width (1.4.1)
     uniform_notifier (1.12.1)
     utf8-cleaner (0.2.5)
       activesupport
