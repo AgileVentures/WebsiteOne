@@ -41,13 +41,12 @@ module WebsiteOne
     )
 
     # ensure svg assets are compiled in production
-    config.assets.precompile += %w( jobs.svg lady-dev.svg real-projects.svg runners.svg standups.svg )  
-    
+    config.assets.precompile += %w( jobs.svg lady-dev.svg real-projects.svg runners.svg standups.svg )
+
     # config.assets.css_compressor = :sass
 
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
-    config.cache_store = :memory_store, { size: 64.megabytes }
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'

@@ -26,5 +26,9 @@ FactoryBot.define do
 
     created_at { Time.parse("#{created} UTC")}
     updated_at { Time.parse("#{updated} UTC")}
+
+    factory :live_event_instance do
+      association :event, factory: :recent_event
+    end
   end
 end

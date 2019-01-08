@@ -57,6 +57,7 @@ Given(/^the following events exist that repeat every weekday:$/) do |table|
     hash[:repeats_weekly_each_days_of_the_week_mask] = 31
     hash[:repeats_every_n_weeks] = 1
     hash[:repeats] = 'weekly'
+    hash[:repeat_ends] = false
     Event.create!(hash)
   end
 end

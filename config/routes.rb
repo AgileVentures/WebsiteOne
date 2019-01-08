@@ -8,10 +8,9 @@ Rails.application.routes.draw do
   mount Mercury::Engine => '/'
   
   mount Events::API => '/'
-  mount Subscriptions::API => '/'
-  mount Users::API => '/'
-  mount Projects::API => '/'
   mount EventInstances::API => '/'
+  mount Projects::API => '/'
+  mount Users::API => '/'
   
   root 'visitors#index'
 
@@ -68,11 +67,11 @@ Rails.application.routes.draw do
     end
   end
 
-  # scope '/api' do
-  #   scope '/subscriptions' do
-  #     get '/' => 'api/subscriptions#index', as: 'api_subscriptions', defaults: { format: 'json' }
-  #   end
-  # end
+  scope '/legacy_api' do
+    scope '/subscriptions' do
+      get '/' => 'legacy_api/subscriptions#index', as: 'api_subscriptions', defaults: { format: 'json' }
+    end
+  end
 
   get '/mentors' => 'users#index', defaults: {title: 'Mentor'}
   get '/premium_members' => 'users#index', defaults: {title: 'Premium'}

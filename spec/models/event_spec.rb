@@ -40,38 +40,36 @@ describe Event, :type => :model do
 
   describe "#less_than_ten_till_start?" do
 
-    before(:each) { Delorean.time_travel_to '2014-03-16 23:30:00 UTC' }
-
     context 'event starts five minutes from now' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:35:00 UTC' }
+      subject(:recent_event) { build_stubbed :recent_event, start_datetime: 5.minutes.from_now }
       it 'returns true' do
-        expect(event).to be_less_than_ten_till_start
+        expect(recent_event).to be_less_than_ten_till_start
       end
     end
 
     context 'event starts 20 minutes from now' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:50:00 UTC' }
+      subject(:recent_event) { build_stubbed :recent_event, start_datetime: 20.minutes.from_now }
       it 'returns false' do
-        expect(event).not_to be_less_than_ten_till_start
+        expect(recent_event).not_to be_less_than_ten_till_start
       end
     end
 
     context 'event started five minutes ago and has not ended' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:25:00 UTC' , duration: '10'}
+      subject(:recent_event) { build_stubbed :recent_event, start_datetime: 5.minutes.ago , duration: '10'}
       it 'returns true' do
-        expect(event).to be_less_than_ten_till_start
+        expect(recent_event).to be_less_than_ten_till_start
       end
     end
 
     context 'event finished 10 minutes ago' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-16 23:10:00 UTC', duration: '10' }
+      subject(:recent_event) { build_stubbed :recent_event, start_datetime: 20.minutes.ago, duration: '10' }
       it 'returns false' do
-        expect(event).not_to be_less_than_ten_till_start
+        expect(recent_event).not_to be_less_than_ten_till_start
       end
     end
 
     context 'event sequence has been terminated' do
-      subject(:event) { build_stubbed :event, start_datetime: '2014-03-07 23:50:00 UTC', repeat_ends_on: '2014-03-10' }
+      subject(:event) { build_stubbed :event, start_datetime: 1.year.ago, repeat_ends_on: 1.day.ago}
       it 'returns false' do
         expect(event).not_to be_less_than_ten_till_start
       end
@@ -506,7 +504,7 @@ describe Event, :type => :model do
     end
 
     it 'returns event past event duration, but still live' do
-      event_instance = FactoryBot.create(:event_instance)
+      event_instance = FactoryBot.create(:live_event_instance)
       event_end_time = event_instance.event.start_datetime + event_instance.event.duration.minutes
       expect(event_end_time).to be < Time.current
       expect(event_instance.event).to eq(Event.upcoming_events.last[:event])
@@ -528,6 +526,75 @@ describe Event, :type => :model do
     it 'returns correct link' do
       event = FactoryBot.build(:event, name: 'Repeat Scrum-~!@#$')
       expect(event.jitsi_room_link).to eq('https://meet.jit.si/AV_Repeat_Scrum')
+    end
+  end
+
+  describe '.future events' do
+    it 'does not pull non-repeating past events' do
+      FactoryBot.create(:event, category: 'Scrum', name: 'Spec Scrum one-time',
+                         start_datetime: '2015-06-15 09:20:00 UTC', duration: 30,
+                         repeats: 'never'
+      )
+      Delorean.time_travel_to(Time.parse('2018-06-15 10:30:00 UTC'))
+      expect(Event.future_events.count).to eq(0)
+    end
+
+    it 'should pull an event in the future that does not repeat' do
+      FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                         start_datetime: '2018-06-28 09:20:00 UTC', duration: 30,
+                         repeats: 'never'
+      )
+      Delorean.time_travel_to(Time.parse('2018-06-15 10:30:00 UTC'))
+      expect(Event.future_events.count).to eq(1)
+    end
+
+    it 'should pull an active repeating event with an outdated end date' do
+      FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                         start_datetime: '2016-06-28 09:20:00 UTC', duration: 30,
+                         repeats: 'weekly', repeat_ends: false,
+                         repeat_ends_on: '2017-06-28 09:20:00 UTC'
+      )
+      expect(Event.future_events.count).to eq(1)
+    end
+
+    it 'should not pull an event that no longer repeats, and does not have an end date' do
+      FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                         start_datetime: '2016-06-28 09:20:00 UTC', duration: 30,
+                         repeats: 'never', repeat_ends: false,
+                         repeat_ends_on: nil
+      )
+      expect(Event.future_events.count).to eq(0)
+    end
+
+    context 'pulling past events that repeat' do
+
+      it 'should not return event with an end date in the past' do
+        FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                           start_datetime: '2018-06-28 09:20:00 UTC', duration: 30,
+                           repeats: 'weekly', repeat_ends_on: '2018-010-10 09:20:00 UTC'
+        )
+        Delorean.time_travel_to(Time.parse('2018-11-15 10:30:00 UTC'))
+        expect(Event.future_events.count).to eq(0)
+      end
+
+      it 'should return event with an end date in the future' do
+        FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                           start_datetime: '2018-06-28 09:20:00 UTC', duration: 30,
+                           repeats: 'weekly', repeat_ends_on: '2019-06-28 09:20:00 UTC'
+        )
+        Delorean.time_travel_to(Time.parse('2018-10-28 10:30:00 UTC'))
+        expect(Event.future_events.count).to eq(1)
+      end
+
+      it 'should return event with a repeat ends true with a date in the future' do
+        FactoryBot.create(:event, category: 'Pair with me', name: 'Pairing for the greater good',
+                           start_datetime: '2018-06-28 09:20:00 UTC', duration: 30,
+                           repeats: 'weekly', repeat_ends_on: '2019-06-28 09:20:00 UTC',
+                           repeat_ends: true
+        )
+        Delorean.time_travel_to(Time.parse('2018-10-28 10:30:00 UTC'))
+        expect(Event.future_events.count).to eq(1)
+      end
     end
   end
 end
