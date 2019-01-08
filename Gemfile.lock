@@ -212,6 +212,9 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (1.0.0)
+      devise (> 3.5.2, < 4.6)
+      rails (>= 4.2.0, < 6)
     diff-lcs (1.3)
     docile (1.3.1)
     domain_name (0.5.20180417)
@@ -721,6 +724,7 @@ DEPENDENCIES
   database_cleaner
   delorean
   devise (~> 4.5)
+  devise_token_auth
   dotenv-rails
   eventmachine (~> 1.0.7)
   exception_notification
