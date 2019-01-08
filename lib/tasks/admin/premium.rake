@@ -21,12 +21,13 @@ namespace :util do
   desc 'give Premium mob subscription via sponsor'
   task :paypal, [:email, :sponsor_email, :datetime, :identifier] => [:environment] do |task, args|
     user = User.find_by email: args[:email]
-    sponsor = User.find_by email:
-    payment_source = sponsor.subscritions.first.payment_source
+    sponsor = User.find_by email: args[:sponsor_email]
+    payment_source = sponsor.subscriptions.first.payment_source
     plan = Plan.find(2)
-    datetime = args[:datetime] || DateTime.now # '2018-09-26 10:58:08'
-    time = DateTime.parse(datetime)
+    datetime = args[:datetime] 
+    time = DateTime.parse(datetime) || DateTime.now # '2018-09-26 10:58:08' # should be catching here ...
     AddSubscriptionToUserForPlan.with(user, sponsor, time, plan, payment_source)
+    # should probably also do is set the sponsorship to expire in three months
   end 
   desc 'mark a subscription as ended'
   task :end_subscription, [:email, :datetime] => [:environment] do
