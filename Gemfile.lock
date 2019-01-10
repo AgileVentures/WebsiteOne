@@ -82,7 +82,7 @@ GEM
     airbrake (7.4.0)
       airbrake-ruby (~> 2.12)
     airbrake-ruby (2.12.0)
-    apipie-rails (0.5.14)
+    apipie-rails (0.5.15)
       rails (>= 4.1)
     arel (9.0.0)
     ast (2.4.0)
@@ -389,7 +389,7 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
     mime-types (2.99.3)
-    mimemagic (0.3.2)
+    mimemagic (0.3.3)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
@@ -407,7 +407,7 @@ GEM
     netrc (0.11.0)
     newrelic_rpm (5.6.0.349)
     nio4r (2.3.1)
-    nokogiri (1.9.1)
+    nokogiri (1.10.0)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -750,7 +750,7 @@ DEPENDENCIES
   local_time (~> 2.1)
   mercury-rails!
   newrelic_rpm
-  nokogiri (= 1.9.1)
+  nokogiri (= 1.10.0)
   octokit
   omniauth
   omniauth-github
