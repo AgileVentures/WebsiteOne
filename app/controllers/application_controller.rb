@@ -3,9 +3,9 @@ require 'custom_errors.rb'
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  protect_from_forgery unless: -> { request.format.json? }
+  
   helper_method :static_page_path
-
   before_action :set_user_id
   before_action :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -86,6 +86,27 @@ class ApplicationController < ActionController::Base
       user_signup_params[:receive_mailings] = user_signup_params[:receive_mailings] == '1'
       user_signup_params.permit!
     end
+  end
+  
+  def render_resource(resource)
+    if resource.errors.empty?
+      render json: resource
+    else
+      validation_error(resource)
+    end
+  end
+
+  def validation_error(resource)
+    render json: {
+      errors: [
+        {
+          status: '400',
+          title: 'Bad Request',
+          detail: resource.errors,
+          code: '100'
+        }
+      ]
+    }, status: :bad_request
   end
 
   # set current_user.id to a cookie to allow google analytics to access current_user var
