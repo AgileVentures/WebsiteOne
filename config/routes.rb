@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     sessions: 'sessions',
-    registrations: 'registrations'
+    registrations: 'api_registrations'
   }
   resources :users, :only => [:index, :show], :format => false do
     member do
