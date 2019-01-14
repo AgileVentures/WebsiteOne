@@ -45,12 +45,15 @@ module WebsiteOne
 
     # config.assets.css_compressor = :sass
 
-    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
-    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    config.autoload_paths += Dir[Rails.root.join('app', '**/')]
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :options]
+        resource '*',
+        headers: %w(Authorization),
+        expose: %w(Authorization),
+        methods: [:get, :post, :patch, :delete, :options]
       end
     end
   end

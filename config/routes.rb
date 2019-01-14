@@ -23,7 +23,10 @@ Rails.application.routes.draw do
   resources :cards, only: [:create, :update, :edit, :new]
   resources :subscriptions, only: [:create, :update, :new]
 
-  devise_for :users, :controllers => {:registrations => 'registrations'}
+  devise_for :users, controllers: {
+    sessions: 'sessions',
+    registrations: 'api_registrations'
+  }
   resources :users, :only => [:index, :show], :format => false do
     member do
       patch :add_status
