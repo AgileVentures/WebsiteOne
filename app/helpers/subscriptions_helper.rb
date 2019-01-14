@@ -1,6 +1,6 @@
 module SubscriptionsHelper
   def paypal_return_url
-    return "#{root_url}#{subscriptions_path}"
+    return "#{root_url.chomp('/')}#{subscriptions_paypal_redirect_path}"
   end
 
   def action_text
