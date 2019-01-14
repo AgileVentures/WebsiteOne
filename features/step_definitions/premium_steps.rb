@@ -99,7 +99,6 @@ PAYPAL_REDIRECT_BODY = {'CONTEXT' => 'wtgSziM4C5x0SI-9CmKcv2vkSeTLK5P_g6HqzC__YT
 
 And(/^Paypal updates our endpoint$/) do
   body = PAYPAL_REDIRECT_BODY.clone
-  body['item_number'] = @user.slug
   body['item_name'] = 'Premium'
   body['payer_email'] = 'sam-buyer@agileventures.org'
   post subscriptions_path, body
