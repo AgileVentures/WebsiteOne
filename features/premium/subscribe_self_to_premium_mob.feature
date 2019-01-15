@@ -55,3 +55,4 @@ Feature: Subscribe Self to Premium
     When Paypal updates our endpoint for premium mob via get
     Then "sam-buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium Mob" email
     And I should see "Thanks, you're now an AgileVentures Premium Mob Member!" in last_response
+    
