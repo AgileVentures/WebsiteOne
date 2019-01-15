@@ -2,9 +2,22 @@ class SubscriptionsController < ApplicationController
 
   before_action :store_user_location! , if: :storable_location?
   before_action :authenticate_user!, if: :require_login?
-  skip_before_action :verify_authenticity_token, only: [:create], if: :paypal?
 
+  def express_checkout
+    plan = Plan.find(params[:plan].to_i)
+    response = EXPRESS_GATEWAY.setup_purchase(plan.amount,
+      ip: request.remote_ip,
+      return_url: "#{root_url.chomp('/')}#{subscriptions_path}",
+      cancel_return_url: root_path,
+      currency: "GBP",
+      items: [{name: "Subscription", description: "Subscription for #{plan.name}", quantity: "1", amount: plan.amount}]
+    )
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+  end
+  
   def new
+    binding.pry
+    @subscription = Subscription.new(express_token: params[:token])
     @upgrade_user = params[:user_id]
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
     @plan = detect_plan_before_payment
@@ -21,6 +34,18 @@ class SubscriptionsController < ApplicationController
     Vanity.track!(:premium_signups)
     send_acknowledgement_email
 
+    @subscription = @plan.build_subscription(subscription_params)
+    @subscription.ip = request.remote_ip
+
+  if @subscription.save
+    if @subscription.purchase # this is where we purchase the subscription. refer to the model method below
+      redirect_to subscription_url(@subscription)
+    else
+      render :action => "failure"
+    end
+  else
+    render :action => 'new'
+  end
   rescue StandardError => e
     flash[:error] = e.message
     redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))

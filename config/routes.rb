@@ -21,8 +21,10 @@ Rails.application.routes.draw do
   resources :activities
 
   resources :cards, only: [:create, :update, :edit, :new]
+  # resources :subscriptions, only: [:create, :update, :new]
   resources :subscriptions, only: [:create, :update, :new]
-
+  get 'express_checkout', to: 'subscriptions#express_checkout'
+  
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show], :format => false do
     member do

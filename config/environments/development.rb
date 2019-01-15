@@ -60,5 +60,13 @@ Rails.application.configure do
     Bullet.bullet_logger = true
     Bullet.console = true
     Bullet.rails_logger = true
+    
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+      login: ENV['PAYPAL_API_USERNAME'],
+      password: ENV['PAYPAL_API_PASSWORD'],
+      signature: ENV['PAYPAL_API_SIGNATURE']
+    }
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
   end
 end
