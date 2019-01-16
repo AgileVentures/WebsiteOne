@@ -28,7 +28,7 @@
 
         <!-- Identify the subscription. -->
         <input type="hidden" name="item_name" value="<%= @plan.name %>">
-        <input type="hidden" name="item_number" value="<%= @upgrade_user || 'not logged in' %>">
+        <input type="hidden" name="item_number" value="<%= @upgrade_user || 'not sponsored' %>">
 
         <% if @plan.free_trial? %>
         <!-- Set the terms of the 1st trial period. -->
@@ -50,7 +50,7 @@
         <input type="hidden" name="no_shipping" value="1">
 
         <!-- url to return to on success -->
-        <input type="hidden" name="return" value="<%= paypal_return_url %>">
+        <input type="hidden" name="return" value="<%= paypal_return_url(@upgrade_user || 'not sponsored') %>">
 
         <!-- do a post -->
         <input type="hidden" name="rm" value="2">

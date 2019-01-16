@@ -94,7 +94,9 @@ PAYPAL_REDIRECT_BODY = {'CONTEXT' => 'wtgSziM4C5x0SI-9CmKcv2vkSeTLK5P_g6HqzC__YT
                         'recurring' => '1',
                         'payer_status' => 'verified',
                         'first_name' => 'test',
-                        'receiver_email' => 'sam-facilitator@agileventures.org',                        'payer_id' => '9EG5X4H5DJJW4', 'reattempt' => '1',
+                        'receiver_email' => 'sam-facilitator@agileventures.org',                        
+                        'payer_id' => '9EG5X4H5DJJW4', 
+                        'reattempt' => '1',
                         'item_number' => 'not logged in',
                         'subscr_date' => '10:07:19 Dec 12, 2016 PST',
                         'charset' => 'windows-1252',
@@ -120,12 +122,9 @@ And(/^Paypal updates our endpoint for premium mob$/) do
 end
 
 And(/^Paypal updates our endpoint for premium mob via get$/) do
-  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
-  body = {}
-  body['item_number'] = @user.slug
-  body['item_name'] = 'Premium Mob'
-  body['payer_email'] = 'sam-buyer@agileventures.org'
-  get subscriptions_paypal_redirect_path, body
+  paypal = Paypal.new 'not sponsored', 'Premium Mob', 'sam-buyer@agileventures.org'
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
+  get "#{subscriptions_paypal_redirect_path}?#{paypal.url_params}"
 end
 
 And(/^Paypal updates our endpoint after sponsoring Alice$/) do
@@ -136,6 +135,12 @@ And(/^Paypal updates our endpoint after sponsoring Alice$/) do
 
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
   post subscriptions_path, body
+end
+
+And(/^Paypal updates our endpoint after sponsoring Alice via get$/) do
+  paypal = Paypal.new 'alice-jones', 'Premium', 'sam-buyer@agileventures.org'
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
+  get "#{subscriptions_paypal_redirect_path}?#{paypal.url_params}"
 end
 
 And(/^Paypal updates our endpoint incorrectly$/) do
