@@ -1,6 +1,6 @@
 Then(/^my member page should show premium details$/) do
   visit
-  expect(page).to have_content "Premium"
+  expect(page).to have_content 'Premium'
 end
 
 Given(/^I fill in appropriate card details for premium(?: for user with email "([^"]*)")?$/) do |email|
@@ -34,12 +34,12 @@ When(/^I fill in new card details for premium for user with email "([^"]*)"$/) d
 end
 
 When(/^I fill in card details for premium for user that will fail with email "([^"]*)"$/) do |email|
-  custom_error = StandardError.new("Unable to create customer")
+  custom_error = StandardError.new('Unable to create customer')
   StripeMock.prepare_error(custom_error, :new_customer)
   submit_card_details_for_button_with('Add Card Details', email)
 end
 
-def submit_card_details_for_button_with(text, email='random@morerandom.com', number='4242 4242 4242 4242')
+def submit_card_details_for_button_with(text, email = 'random@morerandom.com', number = '4242 4242 4242 4242')
   stripe_iframe = all('iframe[name=stripe_checkout_app]').last
   Capybara.within_frame stripe_iframe do
     fill_in 'Email', with: email
@@ -59,7 +59,7 @@ Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
     hash['amount'] = Integer(hash['amount'])
     @stripe_test_helper.try(:create_plan, hash)
-    hash[:third_party_identifier] = hash.delete("id")
+    hash[:third_party_identifier] = hash.delete('id')
     Plan.create(hash)
   end
 end
@@ -84,7 +84,28 @@ Given(/^my card will be rejected$/) do
   StripeMock.prepare_card_error(:card_declined, :new_customer)
 end
 
-PAYPAL_REDIRECT_BODY = {"CONTEXT"=>"wtgSziM4C5x0SI-9CmKcv2vkSeTLK5P_g6HqzC__YTYkcqziFNcB84p79Ja", "txn_type"=>"subscr_signup", "subscr_id"=>"I-PEG1KSWM8TBU", "last_name"=>"buyer", "residence_country"=>"GB", "mc_currency"=>"GBP", "business"=>"sam-facilitator@agileventures.org", "recurring"=>"1", "payer_status"=>"verified", "first_name"=>"test", "receiver_email"=>"sam-facilitator@agileventures.org", "payer_id"=>"9EG5X4H5DJJW4", "reattempt"=>"1", "item_number"=>"not logged in", "subscr_date"=>"10:07:19 Dec 12, 2016 PST", "charset"=>"windows-1252", "period1"=>"7 D", "mc_amount1"=>"0.00", "period3"=>"1 M", "mc_amount3"=>"10.00", "auth"=>"A31jSI5vY44zpPcQlAUk8WdibsJJT72rGx6ptiGPil6MG30OuCoFtHJ38.CJmmBQ.NNbZg.XEaWj298bVa5FZIw", "form_charset"=>"UTF-8"}
+PAYPAL_REDIRECT_BODY = {'CONTEXT' => 'wtgSziM4C5x0SI-9CmKcv2vkSeTLK5P_g6HqzC__YTYkcqziFNcB84p79Ja',
+                        'txn_type' => 'subscr_signup',
+                        'subscr_id' => 'I-PEG1KSWM8TBU',
+                        'last_name' => 'buyer',
+                        'residence_country' => 'GB',
+                        'mc_currency' => 'GBP',
+                        'business' => 'sam-facilitator@agileventures.org',
+                        'recurring' => '1',
+                        'payer_status' => 'verified',
+                        'first_name' => 'test',
+                        'receiver_email' => 'sam-facilitator@agileventures.org',                        
+                        'payer_id' => '9EG5X4H5DJJW4', 
+                        'reattempt' => '1',
+                        'item_number' => 'not logged in',
+                        'subscr_date' => '10:07:19 Dec 12, 2016 PST',
+                        'charset' => 'windows-1252',
+                        'period1' => '7 D',
+                        'mc_amount1' => '0.00',
+                        'period3' => '1 M',
+                        'mc_amount3' => '10.00',
+                        'auth' => 'A31jSI5vY44zpPcQlAUk8WdibsJJT72rGx6ptiGPil6MG30OuCoFtHJ38.CJmmBQ.NNbZg.XEaWj298bVa5FZIw',
+                        'form_charset' => 'UTF-8'}
 
 And(/^Paypal updates our endpoint$/) do
   body = PAYPAL_REDIRECT_BODY.clone
@@ -100,6 +121,12 @@ And(/^Paypal updates our endpoint for premium mob$/) do
   post subscriptions_path, body
 end
 
+And(/^Paypal updates our endpoint for premium mob via get$/) do
+  paypal = Paypal.new 'not sponsored', 'Premium Mob', 'sam-buyer@agileventures.org'
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
+  get "#{subscriptions_paypal_redirect_path}?#{paypal.url_params}"
+end
+
 And(/^Paypal updates our endpoint after sponsoring Alice$/) do
   body = PAYPAL_REDIRECT_BODY.clone
   body['item_name'] = 'Premium'
@@ -108,6 +135,12 @@ And(/^Paypal updates our endpoint after sponsoring Alice$/) do
 
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
   post subscriptions_path, body
+end
+
+And(/^Paypal updates our endpoint after sponsoring Alice via get$/) do
+  paypal = Paypal.new 'alice-jones', 'Premium', 'sam-buyer@agileventures.org'
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
+  get "#{subscriptions_paypal_redirect_path}?#{paypal.url_params}"
 end
 
 And(/^Paypal updates our endpoint incorrectly$/) do
@@ -138,11 +171,11 @@ And(/^my profile page should reflect that I am a "([^"]*)" member$/) do |plan_na
 end
 
 def other_plans(plan_name)
-  Plan.all.pluck(:name).reject!{|e| e == plan_name}.push('Basic')
+  Plan.all.pluck(:name).reject! { |e| e == plan_name }.push('Basic')
 end
 
 # use for debugging only
 And(/^I am a "([^"]*)" Member$/) do |type|
-  puts @user.subscriptions.map{|s| s.inspect}
+  puts @user.subscriptions.map { |s| s.inspect }
   expect(@user.membership_type).to eq type
 end
