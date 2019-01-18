@@ -1,3 +1,5 @@
+# require 'paypal.rb'
+
 class Paypal
   def initialize(item_number, item_name, payer_email)
     @item_number = item_number
