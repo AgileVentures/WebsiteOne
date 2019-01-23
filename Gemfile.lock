@@ -106,13 +106,13 @@ GEM
     bootstrap-sass (3.4.0)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    brakeman (4.3.1)
+    brakeman (4.4.0)
     builder (3.2.3)
     bullet (5.9.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
-    bundler-audit (0.6.0)
-      bundler (~> 1.2)
+    bundler-audit (0.6.1)
+      bundler (>= 1.2.0, < 3)
       thor (~> 0.18)
     business_time (0.9.3)
       activesupport (>= 3.2.0)
@@ -290,7 +290,7 @@ GEM
     gli (2.18.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    grape (1.2.2)
+    grape (1.2.3)
       activesupport
       builder
       mustermann-grape (~> 1.0.0)
@@ -328,7 +328,7 @@ GEM
     http_parser.rb (0.6.0)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
-    i18n (1.5.1)
+    i18n (1.5.2)
       concurrent-ruby (~> 1.0)
     icalendar (2.5.2)
       ice_cube (~> 0.16)
@@ -368,7 +368,7 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
-    kramdown (1.17.0)
+    kramdown (2.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.7.0)
@@ -620,7 +620,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stripe (4.5.0)
+    stripe (4.6.0)
       faraday (~> 0.13)
       net-http-persistent (~> 3.0)
     stripe-ruby-mock (2.5.6)
@@ -745,7 +745,7 @@ DEPENDENCIES
   jvectormap-rails (~> 2.0)
   jwt
   kaminari
-  kramdown (~> 1.17)
+  kramdown (~> 2.0)
   launchy
   letter_opener
   local_time (~> 2.1)
