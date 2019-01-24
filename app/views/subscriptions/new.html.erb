@@ -18,49 +18,9 @@
 <div class="row">
   <div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
     <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Paypal:</div>
-    <%= form_tag Settings.paypal.form_url, method: "post", target: "_blank" do %>
-
-        <!-- Identify your business so that you can collect the payments. -->
-        <input type="hidden" name="business" value="<%= Settings.paypal.email%>">
-
-        <!-- Specify a Subscribe button. -->
-        <input type="hidden" name="cmd" value="_xclick-subscriptions">
-
-        <!-- Identify the subscription. -->
-        <input type="hidden" name="item_name" value="<%= @plan.name %>">
-        <input type="hidden" name="item_number" value="<%= @upgrade_user || 'not sponsored' %>">
-
-        <% if @plan.free_trial? %>
-        <!-- Set the terms of the 1st trial period. -->
-        <input type="hidden" name="a1" value="0">
-        <input type="hidden" name="p1" value="<%= @plan.free_trial_length_days %>">
-        <input type="hidden" name="t1" value="D">
-        <% end %>
-
-        <!-- Set the terms of the regular subscription. -->
-        <input type="hidden" name="currency_code" value="GBP">
-        <input type="hidden" name="a3" value="<%= number_to_currency(@plan.amount / 100.0, unit: '')  %>">
-        <input type="hidden" name="p3" value="1">
-        <input type="hidden" name="t3" value="M">
-
-        <!-- Set recurring payments until canceled. -->
-        <input type="hidden" name="src" value="1">
-
-        <!-- don't ask user for address. -->
-        <input type="hidden" name="no_shipping" value="1">
-
-        <!-- url to return to on success -->
-        <input type="hidden" name="return" value="<%= paypal_return_url(@upgrade_user || 'not sponsored') %>">
-
-        <!-- do a post -->
-        <input type="hidden" name="rm" value="2">
-
-        <!-- Display the payment button. -->
-        <input type="image" name="submit"
-               src="<%= Settings.paypal.form_asset_root %>/en_GB/i/btn/btn_subscribe_LG.gif"
-               alt="Subscribe">
-        <img alt="" width="1" height="1"
-             src="<%= Settings.paypal.form_asset_root %>/en_GB/i/scr/pixel.gif" >
+    <%= form_tag paypal_api_path, method: "post" do %>
+      <input type="image" src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/C2/logos-buttons/optimize/44_Yellow_PayPal_Pill_Button.png" alt="Subscribe" name="submit">
+      <img alt="" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
     <% end %>
   </div>
 

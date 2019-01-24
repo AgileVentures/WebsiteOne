@@ -442,6 +442,9 @@ GEM
       activerecord (>= 4.0, < 5.3)
     parser (2.6.0.0)
       ast (~> 2.4.0)
+    paypal-sdk-rest (1.7.3)
+      multi_json (~> 1.0)
+      xml-simple
     pg (1.1.4)
     phantomjs (2.1.1.0)
     poltergeist (1.18.1)
@@ -676,6 +679,7 @@ GEM
     will_paginate (3.1.6)
     will_paginate-bootstrap (1.0.1)
       will_paginate (>= 3.0.3)
+    xml-simple (1.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     youtube_rails (1.2.2)
@@ -759,6 +763,7 @@ DEPENDENCIES
   omniauth-oauth2
   paper_trail (~> 10.1)
   paranoia (~> 2.4)
+  paypal-sdk-rest
   pg
   phantomjs
   pivotal-tracker-api!
