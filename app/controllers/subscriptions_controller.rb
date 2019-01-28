@@ -154,5 +154,4 @@ class SubscriptionsController < ApplicationController
     payment_source = user.current_subscription.payment_source
     AddSubscriptionToUserForPlan.with(user, user, Time.now, new_subscription_plan, payment_source)
   end
-
 end

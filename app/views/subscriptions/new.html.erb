@@ -1,4 +1,4 @@
-<article>
+<article id="target-element">
   <h1>Agile Ventures <%= @plan.name %> <%= type %></h1>
   <br/>
   <a href='/<%= @plan.name.downcase.gsub(' ','_') %>'>Further details</a>
@@ -18,9 +18,9 @@
 <div class="row">
   <div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
     <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Paypal:</div>
-    <%= form_tag paypal_api_path, method: "post" do %>
-      <input type="image" src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/C2/logos-buttons/optimize/44_Yellow_PayPal_Pill_Button.png" alt="Subscribe" name="submit">
-      <img alt="" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+    <%= form_tag paypal_api_path(plan: @plan), method: "post", data: { behavior: 'ajax-spin', target: '#target-element'  } do %>
+      <input type="image" name="submit" src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif" alt="Subscribe">
+      <img alt="" width="1" height="1" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" hidden="" style="display: none !important;">
     <% end %>
   </div>
 
