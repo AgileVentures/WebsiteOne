@@ -62,7 +62,7 @@ class PaypalService
           amount:
           {
             currency: "GBP",
-            value: @plan.amount
+            value: @plan.amount / 100
           }
         },
         {
@@ -107,7 +107,7 @@ class PaypalService
           amount:
           {
             currency: "GBP",
-            value: @plan.amount
+            value: @plan.amount / 100
           }
         }],
       merchant_preferences: {
