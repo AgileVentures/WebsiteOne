@@ -8,9 +8,9 @@ PayPal::SDK::REST.set_config(
 )
 
 class PaypalService
-  def initialize(plan)
-    @plan = plan
-  end
+  # def initialize(plan)
+  #   @plan = plan
+  # end
   
   def create_and_activate_recurring_plan
     plan = PayPal::SDK::REST::Plan.new(plan_params_without_trial)
@@ -19,8 +19,9 @@ class PaypalService
     plan
   end
   
-  def create_agreement(plan)
-    agreement = PayPal::SDK::REST::Agreement.new(agreement_params(plan.id))
+  def create_agreement(id)
+    plan = PayPal::SDK::REST::Plan.find(id)
+    agreement = PayPal::SDK::REST::Agreement.new(agreement_params(plan))
     agreement.create
     agreement
   end
@@ -125,13 +126,13 @@ class PaypalService
     }
   end
   
-  def agreement_params(plan_id)
+  def agreement_params(plan)
     {
-      name: @plan.name,
-      description: "#{@plan.name} membership for £#{@plan.amount / 100}/month",
+      name: plan.name,
+      description: "#{plan.name} membership",
       start_date: (DateTime.now + 2.days).iso8601,
       payer: { payment_method: 'paypal' },
-      plan: { id: plan_id }
+      plan: { id: plan.id }
     }
   end
 end

@@ -17,7 +17,7 @@ class PaypalController < ApplicationController
   private
 
   def new_paypal_service
-    PaypalService.new(@plan).create_recurring_agreement
+    PaypalService.new(@plan).create_and_activate_recurring_plan
   end
 
   def execute_recurring_payment(agreement_token)
