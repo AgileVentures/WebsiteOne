@@ -21,9 +21,10 @@ Rails.application.routes.draw do
   resources :activities
 
   resources :cards, only: [:create, :update, :edit, :new]
-  resources :subscriptions, only: [:create, :update, :new]
+  resources :subscriptions, only: [:create, :update]
   get '/subscriptions_paypal_redirect' => 'subscriptions#create'
-  post '/paypal_api' => 'paypal#checkout'
+  post '/paypal_api' => 'paypal#subscribe'
+  get 'subscriptions/new' => 'paypal#new'
   get '/subscriptions/execute' => 'paypal#execute'
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
