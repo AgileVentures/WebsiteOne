@@ -25,7 +25,7 @@ class PaypalService
   def agreement_params(plan)
     {
       name: plan.name,
-      description: "#{plan.name} membership",
+      description: "#{plan.name} membership for £#{plan.payment_definitions[0].amount.value}/month",
       start_date: (DateTime.now + 2.days).iso8601,
       payer: { payment_method: 'paypal' },
       plan: { id: plan.id }
