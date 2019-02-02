@@ -84,7 +84,6 @@ end
 
 # WHEN steps
 When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
-  binding.pry
   visit path_to(page)
 end
 
