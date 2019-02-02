@@ -225,9 +225,6 @@ Given(/^the anonymous user exists$/) do
 end
 
 Given("I create a project with more than one issue tracker") do
-    # When I fill in "Title" with "multiple repo project"
-    # And I fill in "Description" with "has lots of code"
-    # And I fill in "GitHub url (primary)" with "http://www.github.com/new"
     # And I click "Add more repos"
     # Then I should see "GitHub url (2)"
     # And I fill in "GitHub url (2)" with "http://www.github.com/new2"
@@ -240,7 +237,7 @@ Given("I create a project with more than one issue tracker") do
     fill_in "Description", with: "has lots of code"
     fill_in "GitHub url (primary)", with: "http://www.github.com/new"
     fill_in "Issue Tracker (primary)", with: "http://www.waffle.com/new"
-    click "Add more trackers"
+    click_button "Add more trackers"
     expect(page).to have_text("Issue Tracker 2")
     select "Active", from: "Status"
     click_button "Submit"
