@@ -55,6 +55,13 @@ Then(/^I should see a paypal form$/) do
   expect(page).to have_xpath("//form[@action='https://www.sandbox.paypal.com/cgi-bin/webscr']")
 end
 
+Then("I should see a paypal subscribe button") do
+  within('#paypal_section') do
+    expect(page).to have_css('input[src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif"]')
+  end
+end
+
+
 Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
     hash['amount'] = Integer(hash['amount'])
@@ -119,6 +126,14 @@ And(/^Paypal updates our endpoint for premium mob$/) do
   body['item_name'] = 'Premium Mob'
   body['payer_email'] = 'sam-buyer@agileventures.org'
   post subscriptions_path, body
+end
+
+And(/^Paypal API updates our endpoint for premium mob$/) do
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
+  get subscriptions_paypal_redirect_path payment_method: 'paypal',
+                                         payer_id: 'paypal_payer_id',
+                                         plan: 'premiummob',
+                                         email: 'sam-buyer@agileventures.org'
 end
 
 And(/^Paypal updates our endpoint for premium mob via get$/) do

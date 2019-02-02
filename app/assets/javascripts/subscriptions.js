@@ -1,6 +1,6 @@
 (function() {
   $(function() {
-    return $('[data-behavior~=ajax-spin').on('click', function() {
+    return $('[data-behavior~=ajax-spin]').on('click', function() {
       var target;
       target = $(this).data('target');
       return $(target).spin({

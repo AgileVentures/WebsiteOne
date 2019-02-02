@@ -97,7 +97,12 @@ class SubscriptionsController < ApplicationController
 
   def detect_user
     id = if paypal?
-           @upgrade_user ? @upgrade_user.id : current_user.id 
+           user = if params[:user]
+                    User.find_by(slug: params[:user])
+                  else
+                    current_user
+                  end
+           user.id
          else
            params[:user]
          end
