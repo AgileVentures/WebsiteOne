@@ -225,8 +225,6 @@ Given(/^the anonymous user exists$/) do
 end
 
 Given("I create a project with more than one issue tracker") do
-    # And I am on the "Projects" page
-    # When I click the very stylish "New Project" button
     # When I fill in "Title" with "multiple repo project"
     # And I fill in "Description" with "has lots of code"
     # And I fill in "GitHub url (primary)" with "http://www.github.com/new"
@@ -237,7 +235,16 @@ Given("I create a project with more than one issue tracker") do
     # And The project has no stories on Pivotal Tracker
     # And I select "Status" to "Active"
     # And I click the "Submit" button
-    visit path_to("Projects")
+    visit path_to("new project")
+    fill_in "Title", with: "Multiple issue tracker project"
+    fill_in "Description", with: "has lots of code"
+    fill_in "GitHub url (primary)", with: "http://www.github.com/new"
+    fill_in "Issue Tracker (primary)", with: "http://www.waffle.com/new"
+    click "Add more trackers"
+    expect(page).to have_text("Issue Tracker 2")
+    select "Active", from: "Status"
+    click_button "Submit"
+
     save_and_open_page
     #click_button("New Project")
 end
