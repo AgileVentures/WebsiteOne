@@ -47,3 +47,13 @@ Feature: Subscribe Self to Premium
     When Paypal updates our endpoint incorrectly
     Then "sam-buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium Mob" email
     And I should see "redirected" in last_response
+
+  Scenario: Pay by Paypal, when PayPals POST redirect doesn't work
+    Given I have logged in
+    And I visit "subscriptions/new?plan=premiummob"
+    Then I should see a paypal form within the paypal_section
+    # a tighter test would grab the return URL from the form
+    When Paypal updates our endpoint for premium mob via get
+    Then "sam-buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium Mob" email
+    And I should see "Thanks, you're now an AgileVentures Premium Mob Member!" in last_response
+    

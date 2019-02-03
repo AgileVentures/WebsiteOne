@@ -45,7 +45,12 @@ class HangoutNotificationService
       'pairing_notifications': 'C02BNVCM1',
       'standup_notifications': 'C02B4QH1C',
       'premium_mob_trialists': 'GBNRMP4KH',
-      'premium_extra': 'G33RPEG8K'
+      'premium_extra': 'G33RPEG8K',
+      'human-connection': 'CEANP62HG',
+      'weekend-heretics': 'CAW8XPFG8',
+      'new-members': 'C02G8J689',
+      'retrospectives': 'CCWNMMHHT',
+      'refactoring': 'CBZCZP3GA'
     }
     GITTER_ROOMS = {
       'saasbook/MOOC': '544100afdb8155e6700cc5e4',
