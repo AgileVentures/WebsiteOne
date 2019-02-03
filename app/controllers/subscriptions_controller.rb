@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
 
   before_action :store_user_location! , if: :storable_location?
   before_action :authenticate_user!, if: :require_login?
-  skip_before_action :verify_authenticity_token, only: [:create], if: :paypal?
+  # skip_before_action :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
     @upgrade_user = params[:user_id]
@@ -91,17 +91,26 @@ class SubscriptionsController < ApplicationController
   end
 
   def detect_plan_after_payment
-    id = paypal? ? params['item_name'].downcase.delete(' ') : params[:plan]
+    id = params[:plan]
     Plan.find_by(third_party_identifier: id)
   end
 
   def detect_user
-    slug = paypal? ? params['item_number'] : params[:user]
-    User.find_by(slug: slug)
+    id = if paypal?
+           user = if params[:user]
+                    User.find_by(slug: params[:user])
+                  else
+                    current_user
+                  end
+           user.id
+         else
+           params[:user]
+         end
+    User.find(id)
   end
 
   def paypal?
-    params['item_number']
+    params[:payment_method] === 'paypal'
   end
 
   def create_stripe_customer
@@ -129,7 +138,7 @@ class SubscriptionsController < ApplicationController
     return unless user
 
     if paypal?
-      payment_source = PaymentSource::PayPal.new identifier: params['payer_id']
+      payment_source = PaymentSource::PayPal.new identifier: params[:payer_id]
     else
       payment_source = PaymentSource::Stripe.new identifier: @stripe_customer.id
     end
@@ -138,7 +147,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def send_acknowledgement_email
-    payer_email = paypal? ? params['payer_email'] : params[:stripeEmail]
+    payer_email = paypal? ? params[:email] : params[:stripeEmail]
     if sponsored_user?
       Mailer.send_sponsor_premium_payment_complete(@user.email, payer_email).deliver_now
     else
@@ -154,5 +163,4 @@ class SubscriptionsController < ApplicationController
     payment_source = user.current_subscription.payment_source
     AddSubscriptionToUserForPlan.with(user, user, Time.now, new_subscription_plan, payment_source)
   end
-
 end
