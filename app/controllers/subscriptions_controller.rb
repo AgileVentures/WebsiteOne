@@ -96,17 +96,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def detect_user
-    id = if paypal?
-           user = if params[:user]
-                    User.find_by(slug: params[:user])
-                  else
-                    current_user
-                  end
-           user.id
-         else
-           params[:user]
-         end
-    User.find(id)
+    user = if params[:user]
+             User.find_by(slug: params[:user])
+           else
+             current_user
+           end
+    User.find(user.id)
   end
 
   def paypal?

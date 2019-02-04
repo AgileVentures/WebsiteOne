@@ -44,8 +44,8 @@ Feature: Subscribe Self to Premium
   Scenario: Pay by PayPal
     Given I have logged in
     And I visit "subscriptions/new"
-    Then I should see a paypal form within the paypal_section
-    When Paypal updates our endpoint
+    Then I should see a paypal subscribe button
+    When Paypal API updates our endpoint for premium
     Then "sam-buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium" email
     And I should see "Thanks, you're now an AgileVentures Premium Member!" in last_response
 
@@ -64,8 +64,8 @@ Feature: Subscribe Self to Premium
   Scenario: Pay by PayPal, but encounter error
     Given I have logged in
     And I visit "subscriptions/new"
-    Then I should see a paypal form within the paypal_section
-    When Paypal updates our endpoint incorrectly
+    Then I should see a paypal subscribe button
+    When Paypal API updates our endpoint incorrectly
     Then "sam-buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium" email
     And I should see "redirected" in last_response
 
