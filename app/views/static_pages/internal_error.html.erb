@@ -1,6 +1,12 @@
 <% content_for :title do %>500 Internal Error<% end %>
 <% #TODO: refactor this for Bootstrap framework %>
-<section id="500">
-    <h3>500 Internal Error</h3>
-    <p>Something went terribly wrong</p>
+<section id="500"; style="text-align:center; font-size:20px;">  
+  <p>We were unable to process your request at this time.</p>  
+  <p>We're very sorry for the inconvenience.</p>
+  <p>Don't worry, it's not you, it's us.</p>
+  <hr>
+  <p>Please try again later, or if you'd like more help and support feel free to email us at the address below.</p>
+  <%= mail_to "info@agileventures.org", nil, subject: "500 Internal Error" %>
+  <hr>
+  <%= button_to "Return Home", root_path %>
 </section>

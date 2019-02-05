@@ -1,4 +1,4 @@
-class Api::SubscriptionsController < ApplicationController
+class LegacyApi::SubscriptionsController < ApplicationController
   respond_to :json
 
   before_action :authenticate_api!
