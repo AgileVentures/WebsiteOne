@@ -28,7 +28,9 @@ module GithubLanguagesJob
   def github_languages_for(project)
     languages_array  = []
     project.source_repositories.each do |source_repository|
-      languages = client.languages(URI.parse(source_repository.url).path.reverse.chop.reverse)
+      path = URI.parse(source_repository.url).path
+      path = path.slice(1..path.length)
+      languages = client.languages(path)
       languages_array << languages.to_hash.keys
     end
     languages_array.flatten!
