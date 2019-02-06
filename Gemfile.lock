@@ -368,7 +368,7 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
-    kramdown (2.0.0)
+    kramdown (2.1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.7.0)
@@ -745,7 +745,7 @@ DEPENDENCIES
   jvectormap-rails (~> 2.0)
   jwt
   kaminari
-  kramdown (~> 2.0)
+  kramdown (~> 2.1)
   launchy
   letter_opener
   local_time (~> 2.1)
