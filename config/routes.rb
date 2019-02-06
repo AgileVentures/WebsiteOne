@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get '/subscriptions_paypal_redirect' => 'subscriptions#create'
   post '/paypal/new' => 'paypal_agreement#new'
   get '/paypal/create' => 'paypal_agreement#create'
-
+  mount ActionCable.server => '/cable'
   devise_for :users, controllers: {
     sessions: 'sessions',
     registrations: 'api_registrations'
