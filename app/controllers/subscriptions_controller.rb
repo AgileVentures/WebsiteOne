@@ -96,11 +96,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def detect_user
-    user = if params[:user]
-             User.find_by(slug: params[:user])
-           else
-             current_user
-           end
+    user = params[:user] ? User.find_by(slug: params[:user]) : current_user
     User.find(user.id)
   end
 
