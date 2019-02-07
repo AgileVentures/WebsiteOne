@@ -20,7 +20,9 @@ class SubscriptionsController < ApplicationController
     add_appropriate_subscription(@user, current_user)
     Vanity.track!(:premium_signups)
     send_acknowledgement_email
-
+    respond_to do |format|
+      format.json { render json: { success: 'Subscription created' } }
+    end
   rescue StandardError => e
     flash[:error] = e.message
     redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))
