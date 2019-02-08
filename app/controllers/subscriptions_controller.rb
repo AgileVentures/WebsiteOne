@@ -96,8 +96,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def detect_user
-    user = params[:user] ? User.find_by(slug: params[:user]) : current_user
-    User.find(user.id)
+    return User.find_by slug: params[:user] if params[:user]
+    current_user
   end
 
   def paypal?

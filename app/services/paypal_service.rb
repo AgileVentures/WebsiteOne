@@ -1,7 +1,7 @@
 require 'paypal-sdk-rest'
 
 PayPal::SDK::REST.set_config(
-  mode: Rails.env.production? ? 'live' : 'sandbox',
+  mode: ENV['PAYPAL_SDK_MODE'],
   client_id: ENV['PAYPAL_CLIENT_ID'],
   client_secret: ENV['PAYPAL_CLIENT_SECRET']
 )
