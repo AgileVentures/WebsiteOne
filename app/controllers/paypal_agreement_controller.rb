@@ -25,7 +25,9 @@ class PaypalAgreementController < ApplicationController
                                                    format: :json
   rescue StandardError => e
     flash[:error] = e.message
-    redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))
+    respond_to do |format|
+      format.json { render json: { error: e.message } }
+    end
   end
 
   private
