@@ -23,11 +23,6 @@ class SubscriptionsController < ApplicationController
     respond_to do |format|
       format.json { render json: { success: 'Subscription created' } }
     end
-  rescue StandardError => e
-    flash[:error] = e.message
-    respond_to do |format|
-      format.json { render json: { error: e.message } }
-    end
   end
 
   def update

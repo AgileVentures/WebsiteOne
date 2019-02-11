@@ -23,11 +23,6 @@ class PaypalAgreementController < ApplicationController
                                                    email: @executed_agreement.payer.payer_info.email,
                                                    user: session[:user],
                                                    format: :json
-  rescue StandardError => e
-    flash[:error] = e.message
-    respond_to do |format|
-      format.json { render json: { error: e.message } }
-    end
   end
 
   private
