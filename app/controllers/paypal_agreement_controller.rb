@@ -18,14 +18,15 @@ class PaypalAgreementController < ApplicationController
                                                    plan: params[:plan],
                                                    email: @executed_agreement.payer.payer_info.email,
                                                    user: session[:user]
-  rescue StandardError => e
-    flash[:error] = e.message
-    redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))
+                                                  rescue StandardError => e
+                                                    flash[:error] = e.message
+                                                    redirect_to new_subscription_path(plan: (@plan.try(:third_party_identifier) || 'premium'))
   end
-
+                                                  
   private
-
+  
   def new_paypal_agreement
+    binding.pry
     PaypalService.new.create_agreement(@plan.paypal_id)
   end
 end
