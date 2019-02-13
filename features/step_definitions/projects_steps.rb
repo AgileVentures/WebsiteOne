@@ -12,7 +12,7 @@ Given(/^the following projects exist:$/) do |table|
       project = default_test_author.projects.new(hash.except('author', 'tags', 'languages'))
     end
     if hash[:github_url].present?
-      project.source_repositories.build(url: hash[:github_url])
+      hash[:github_url].split(', ').each { |source_repository| project.source_repositories.build(url: source_repository) }
     end
     if hash[:languages].present?
       language = Language.find_or_create_by(name: hash[:languages])
