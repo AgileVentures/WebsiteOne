@@ -47,9 +47,14 @@ module Projects
       route_param :slug do
         get do
           project = Project.find_by(slug: params[:slug])
-          { project: project,
+          projects_source_repositories = {}
+          project.source_repositories.each do |repo|
+            projects_source_repositories.merge!(repo: repo, name: repo.name)
+          end
+          { 
+            project: project,
             projectManager: project.user.display_name,
-            sourceRepositories: project.source_repositories
+            sourceRepositories: projects_source_repositories
           }
         end  
       end
