@@ -47,7 +47,10 @@ module Projects
       route_param :slug do
         get do
           project = Project.find_by(slug: params[:slug])
-          { project: project }
+          { project: project,
+            projectManager: project.user.display_name,
+            sourceRepositories: project.source_repositories
+          }
         end  
       end
     end
