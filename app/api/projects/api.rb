@@ -42,9 +42,9 @@ module Projects
       
       desc 'Return a projects show page info'
       params do
-        requires :slug, type: Integer, desc: 'Project id.'
+        requires :slug, type: String, desc: 'Project slug.'
       end
-      route_param :id do
+      route_param :slug do
         get do
           project = Project.find_by(slug: params[:slug])
           { project: project }
