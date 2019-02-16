@@ -5,14 +5,6 @@ module Projects
     prefix :api
 
     helpers do
-      def current_user
-        @current_user ||= User.authorize!(env)
-      end
-
-      def authenticate!
-        error!('401 Unauthorized', 401) unless current_user
-      end
-
       def ordered_projects 
         Project.order('status ASC')
           .order('last_github_update DESC NULLS LAST')
@@ -24,16 +16,39 @@ module Projects
     resource :projects do
       desc 'Return projects list.'
       get '/' do
-        projects_languages_hash = {}
         projects_followers_count = {}
         projects_documents_count = {}
+        projects_languages_hash = {}
         Project.all.each do |project|
-          projects_languages_hash.merge!("#{project.title}": project.languages)
           projects_followers_count.merge!("#{project.title}": project.followers.count) 
           projects_documents_count.merge!("#{project.title}": project.documents.count)
+          projects_languages_hash.merge!("#{project.title}": project.languages)
         end
-        { projects: ordered_projects, languages: projects_languages_hash, 
-          followers: projects_followers_count, documents: projects_documents_count }
+        { projects: ordered_projects,
+          followers: projects_followers_count,
+          documents: projects_documents_count,
+          languages: projects_languages_hash
+        }
+      end
+      
+      desc "Return a project's languages"
+      get :languages do
+        projects_languages_hash = {}
+        Project.all.each do |project|
+          projects_languages_hash.merge!("#{project.title}": project.languages)
+        end
+        { languages: projects_languages_hash }
+      end
+      
+      desc 'Return a projects show page info'
+      params do
+        requires :slug, type: Integer, desc: 'Project id.'
+      end
+      route_param :id do
+        get do
+          project = Project.find_by(slug: params[:slug])
+          { project: project }
+        end  
       end
     end
   end
