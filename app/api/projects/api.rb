@@ -58,7 +58,7 @@ module Projects
             sourceRepositories: project.source_repositories,
             members: project.members.first(5).reverse,
             membersGravatarUrl: users_gravatar_url_hash,
-            videos: project.event_instances.latest.limit(6)
+            videos: project.event_instances.latest.limit(5)
           }
         end  
       end
