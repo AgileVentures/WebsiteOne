@@ -48,8 +48,10 @@ module Projects
         get do
           project = Project.find_by(slug: params[:slug])
           projects_source_repositories = {}
+          i = 1
           project.source_repositories.each do |repo|
-            projects_source_repositories.merge!(repo: repo, name: repo.name)
+            projects_source_repositories.merge!("url#{i}": repo.url, "name#{i}": repo.name)
+            i += 1
           end
           { 
             project: project,
