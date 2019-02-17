@@ -57,7 +57,8 @@ module Projects
             projectManager: project.user.display_name,
             sourceRepositories: project.source_repositories,
             members: project.members.first(5).reverse,
-            membersGravatarUrl: users_gravatar_url_hash
+            membersGravatarUrl: users_gravatar_url_hash,
+            videos: project.event_instances.latest.limit(6)
           }
         end  
       end
