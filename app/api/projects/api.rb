@@ -50,7 +50,7 @@ module Projects
           project = Project.find_by(slug: params[:slug])
           users_gravatar_url_hash = {}
           project.members.first(5).reverse.each do |member|
-            users_gravatar_url_hash.merge!("#{member.slug}": member.gravatar_url)
+            users_gravatar_url_hash.merge!("#{member.slug}": member.gravatar_url(size: 32))
           end
           { 
             project: project,
