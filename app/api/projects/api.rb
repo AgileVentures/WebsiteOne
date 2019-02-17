@@ -48,11 +48,16 @@ module Projects
       route_param :slug do
         get do
           project = Project.find_by(slug: params[:slug])
+          users_gravatar_url_hash = {}
+          project.members.first(5).reverse.each do |member|
+            users_gravatar_url_hash.merge!("#{member.slug}": member.gravatar_url)
+          end
           { 
             project: project,
             projectManager: project.user.display_name,
             sourceRepositories: project.source_repositories,
-            members: project.members.first(5).reverse
+            members: project.members.first(5).reverse,
+            membersGravatarUrl: users_gravatar_url_hash
           }
         end  
       end
