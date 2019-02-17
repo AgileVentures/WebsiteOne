@@ -24,7 +24,8 @@ module Projects
           projects_documents_count.merge!("#{project.title}": project.documents.count)
           projects_languages_hash.merge!("#{project.title}": project.languages)
         end
-        { projects: ordered_projects,
+        { 
+          projects: ordered_projects,
           followers: projects_followers_count,
           documents: projects_documents_count,
           languages: projects_languages_hash
@@ -47,16 +48,10 @@ module Projects
       route_param :slug do
         get do
           project = Project.find_by(slug: params[:slug])
-          projects_source_repositories = {}
-          i = 1
-          project.source_repositories.each do |repo|
-            projects_source_repositories.merge!("url#{i}": repo.url, "name#{i}": repo.name)
-            i += 1
-          end
           { 
             project: project,
             projectManager: project.user.display_name,
-            sourceRepositories: projects_source_repositories
+            sourceRepositories: project.source_repositories,
           }
         end  
       end
