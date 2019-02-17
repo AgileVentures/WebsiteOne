@@ -52,6 +52,7 @@ module Projects
             project: project,
             projectManager: project.user.display_name,
             sourceRepositories: project.source_repositories,
+            members: project.members.first(5).reverse
           }
         end  
       end
