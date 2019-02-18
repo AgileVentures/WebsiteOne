@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   mount EventInstances::API => '/'
   mount Projects::API => '/'
   mount Users::API => '/'
+  mount StaticPages::API => '/'
   
   root 'visitors#index'
 
