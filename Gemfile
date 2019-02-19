@@ -72,7 +72,7 @@ gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'yui-compressor'
 gem 'youtube_rails'
-gem 'bootsnap', '~> 1.3', '>= 1.3.2'
+gem 'bootsnap', '~> 1.4'
 gem 'icalendar'
 gem 'seed_dump'
 
