@@ -79,7 +79,7 @@ GEM
     acts_as_votable (0.12.0)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (8.1.2)
+    airbrake (8.1.4)
       airbrake-ruby (~> 3.2)
     airbrake-ruby (3.2.4)
       rbtree3 (~> 0.5)
