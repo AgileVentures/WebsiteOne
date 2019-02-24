@@ -30,10 +30,10 @@ module Events
           {
             event: event,
             creator: event_creator(event),
-            creatorGravatarUrl: event.creator.gravatar_url,
+            creatorGravatarUrl: event.creator.gravatar_url(size: 80),
             createdAt: event.created_at.strftime('%F'),
             modifier: event_modifier(event),
-            modifierGravatarUrl: event.modifier_id.present? ? event.modifier.gravatar_url : nil,
+            modifierGravatarUrl: event.modifier_id.present? ? event.modifier.gravatar_url(size: 80) : nil,
             updatedAt: event.updated_at.strftime('%F'),
             videos: event.event_instances.latest.limit(5),
             nextScheduledEvent: event.next_event_occurrence_with_time
