@@ -9,7 +9,7 @@ class SubscriptionsController < ApplicationController
     @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
     @plan = detect_plan_before_payment
   end
-
+  
   def create
     @user = detect_user
     @plan = detect_plan_after_payment
@@ -90,22 +90,13 @@ class SubscriptionsController < ApplicationController
   end
 
   def detect_plan_after_payment
-    id = params[:plan]
-    Plan.find_by(third_party_identifier: id)
+    slug = params[:plan] 
+    Plan.find_by(third_party_identifier: slug)
   end
 
   def detect_user
-    id = if paypal?
-           user = if params[:user]
-                    User.find_by(slug: params[:user])
-                  else
-                    current_user
-                  end
-           user.id
-         else
-           params[:user]
-         end
-    User.find(id)
+    user = params[:user] ? User.find_by(slug: params[:user]) : current_user
+    User.find(user.id)
   end
 
   def paypal?

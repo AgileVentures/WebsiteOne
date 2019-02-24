@@ -3,7 +3,7 @@ class Mailer < ActionMailer::Base
 
   def send_premium_payment_complete(plan, email)
     @plan = plan
-    mail(to: email, subject: "Welcome to AgileVentures #{@plan.name}")
+    mail(to: email, subject: "[TEST from React Frontend] Welcome to AgileVentures #{@plan.name}")
   end
 
   def send_sponsor_premium_payment_complete(email, sponsor_email)
