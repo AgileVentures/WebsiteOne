@@ -36,7 +36,7 @@ module Events
             modifierGravatarUrl: event.modifier_id.present? ? event.modifier.gravatar_url(size: 80) : nil,
             updatedAt: event.updated_at.strftime('%F'),
             videos: event.event_instances.latest.limit(5),
-            nextScheduledEvent: event.next_event_occurrence_with_time
+            nextScheduledEvent: event.next_event_occurrence_with_time,
           }
         end
       end

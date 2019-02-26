@@ -6,4 +6,5 @@ json.array! @events do |event|
   end_time = event[:time] + event[:event].duration * 60
   json.end end_time.strftime(date_format)
   json.description event[:event].description
+  json.slug event[:event].slug
 end
