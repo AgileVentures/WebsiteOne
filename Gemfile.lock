@@ -608,7 +608,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    slack-ruby-client (0.14.0)
+    slack-ruby-client (0.14.1)
       activesupport
       faraday (>= 0.9)
       faraday_middleware
