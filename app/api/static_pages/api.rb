@@ -7,7 +7,7 @@ module StaticPages
     resource '/static-pages' do
       desc 'Membership plans page'
       get '/membership-plans' do
-        membership_plan = StaticPage.find_by title: 'Membership Plans'
+        membership_plan = StaticPage.find_by slug: 'membership-plans'
         membership_plan.body
       end
       
