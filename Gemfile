@@ -117,6 +117,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'railroady'
+  gem 'rb-readline'
   gem 'rspec'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-html-matchers'

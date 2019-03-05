@@ -8,7 +8,7 @@ class HangoutNotificationService
           new(event_instance, slack_client, gitter_client).send(:run)
   end
   
-  if ENV['LIVE_ENV'] == 'production'x
+  if ENV['LIVE_ENV'] == 'production'
     CHANNELS = {
       'asyncvoter': 'C2HGJF54G',
       'autograder': ['C0UFNHRAB','C02AHEA5P'],
