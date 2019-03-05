@@ -8,7 +8,7 @@ class HangoutNotificationService
           new(event_instance, slack_client, gitter_client).send(:run)
   end
   
-  if ENV['LIVE_ENV'] == 'production'x
+  if ENV['LIVE_ENV'] == 'production'
     CHANNELS = {
       'asyncvoter': 'C2HGJF54G',
       'autograder': ['C0UFNHRAB','C02AHEA5P'],
@@ -100,7 +100,7 @@ class HangoutNotificationService
   def channels_for_project project
     return [] if project.nil? or project.slug.nil?
     # result = CHANNELS[project.try(:slug).to_sym]
-    result = project.slack_channels
+    result = project.slack_channel_codes
     return [result] unless result.respond_to? :each
     result
   end

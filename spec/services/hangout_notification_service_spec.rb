@@ -69,7 +69,7 @@ describe HangoutNotificationService do
   let(:user) { User.new email: 'random@random.com' }
   let(:websiteone_project) { mock_model Project, slug: 'websiteone' }
   let(:noslack_project) { mock_model Project, slug: 'noslack' }
-  let(:cs169_project) { mock_model Project, slug: 'cs169' }
+  let(:cs169_project) { mock_model Project, slug: 'cs169', slack_channel_codes: [ 'C29J4CYA2' ] }
   let(:multiple_channel_project) { mock_model Project, slug: 'multiple-channels' }
 
   before { Features.slack.notifications.enabled = true }
