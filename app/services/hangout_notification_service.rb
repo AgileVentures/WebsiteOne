@@ -100,7 +100,7 @@ class HangoutNotificationService
   def channels_for_project project
     return [] if project.nil? or project.slug.nil?
     # result = CHANNELS[project.try(:slug).to_sym]
-    result = project.slack_channels
+    result = project.slack_channel_codes
     return [result] unless result.respond_to? :each
     result
   end
