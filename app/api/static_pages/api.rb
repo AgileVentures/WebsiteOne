@@ -36,8 +36,8 @@ module StaticPages
       end
       
       desc 'Getting Started page 1'
-      get '/getting-started-1' do
-        membership_plan = StaticPage.find_by title: 'Getting Started 1 (of 7)'
+      get '/getting-started' do
+        membership_plan = StaticPage.find_by slug: 'getting-started'
         membership_plan.body
       end
 
