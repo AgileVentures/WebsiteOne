@@ -25,7 +25,7 @@
           <%= render 'issue_tracker_fields', f: issue_tracker %>
         <% end %>
         <div class= 'links form-group'>
-          <% link_to_add_association 'Add more trackers', f, :issue_trackers, class: 'btn btn-default'%>
+          <%= link_to_add_association 'Add more trackers', f, :issue_trackers, class: 'btn btn-default'%>
         </div>
       </div>
 

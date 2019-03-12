@@ -92,5 +92,4 @@ Feature: Create projects
   @javascript
   Scenario: Saving a new project with multiple issue trackers: success
     Given I have logged in
-    And I create a project with more than one issue tracker
-    Then I should have a project created with more than one issue tracker
+    Then I should be able to create a project with more than one issue tracker
