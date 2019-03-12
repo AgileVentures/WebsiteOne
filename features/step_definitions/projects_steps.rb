@@ -109,6 +109,11 @@ Then /^I should see a link "([^"]*)" that connects to the "([^"]*)"$/ do |text, 
   step %Q{I should see a link "#{text}" to "#{project.send url}"}
 end
 
+Then /^I should see a link "([^"]*)" that connects to the issue tracker's url, "([^"]*)"$/ do |link, url|
+  project = Project.find_by title: text
+  expect(page).to have_link(link, href: url)
+end
+
 Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, name|
   object = Project.find_by_title(name)
   step %Q{I #{option} see link "#{object.github_url.split('/').last}"}
