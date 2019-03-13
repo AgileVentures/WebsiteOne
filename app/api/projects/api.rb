@@ -32,6 +32,11 @@ module Projects
         }
       end
       
+      desc 'Return all active projects'
+      get :active do
+        Project.active
+      end
+      
       desc "Return a project's languages"
       get :languages do
         projects_languages_hash = {}
