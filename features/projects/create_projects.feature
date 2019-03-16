@@ -48,7 +48,7 @@ Feature: Create projects
       | <description> |
       | ACTIVE        |
     And I should see a link to "<title>" on github
-    And I should see a link "<title>" that connects to the issue tracker's url, "<pt_link>"
+    And I should see a link "<title>" that connects to the issue tracker's url
     And I should see a link "<title>" that connects to the "slack_channel"
 
     Examples:
@@ -87,7 +87,7 @@ Feature: Create projects
       | has lots of code      |
       | ACTIVE                |
     And I should see a link to "multiple repo project" on github
-    And I should see a link "multiple repo project" that connects to the issue tracker's url, "http://www.waffle.com/new"
+    And I should see a link "multiple repo project" that connects to the issue tracker's url
 
   @javascript
   Scenario: Saving a new project with multiple issue trackers: success

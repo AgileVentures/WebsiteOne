@@ -18,6 +18,9 @@ Given(/^the following projects exist:$/) do |table|
       language = Language.find_or_create_by(name: hash[:languages])
       project.languages << language
     end
+    if hash[:pivotaltracker_url]
+      project.issue_trackers.build(url: hash[:pivotaltracker_url])
+    end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
     end
@@ -109,9 +112,12 @@ Then /^I should see a link "([^"]*)" that connects to the "([^"]*)"$/ do |text, 
   step %Q{I should see a link "#{text}" to "#{project.send url}"}
 end
 
-Then /^I should see a link "([^"]*)" that connects to the issue tracker's url, "([^"]*)"$/ do |link, url|
-  project = Project.find_by title: text
-  expect(page).to have_link(link, href: url)
+Then /^I should see a link "([^"]*)" that connects to the issue tracker's url$/ do |link|
+  
+  project = Project.find_by title: link
+  project.issue_trackers.each do | issue_tracker |
+    expect(page).to have_link(link, href: issue_tracker.url)
+  end
 end
 
 Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, name|
