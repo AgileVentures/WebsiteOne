@@ -209,7 +209,6 @@ Then /^I should( not)? see:$/ do |negative, table|
 end
 
 Then (/^I should( not)? see "([^"]*)"$/) do |negative, string|
-  binding.pry
   unless negative
     expect(page).to have_text string
   else
