@@ -19,27 +19,24 @@ WebsiteOne.define('Projects', function () {
     },
     ensure_github_url_numbering: function () {
       var sourceRepositories = $('#project_form').find('.nested-fields');
-      var sourceRepositoriesSize = $(sourceRepositories).size();
-
-      if (sourceRepositoriesSize > 1) {
-        for (var i = 1; i < sourceRepositoriesSize; i++) {
-          $(sourceRepositories[i]).find('.repo_field_label').html('GitHub url (' + (i + 1) + ')')
-        }
-      }
+      ensure_numbering(sourceRepositories, 'repo_field_label', 'GitHub url')
     },
-    ensure_issue_tracker_numbering: function() {
-      
+    ensure_issue_tracker_numbering: function () {
+
       var issueTrackers = $('#project_form').find('.nested-issue-tracker-fields');
-      var issueTrackersSize = $(issueTrackers).size()
-      
-      if(issueTrackersSize > 1) {
-        for (var i = 1; i< issueTrackersSize; i++) {
-          $(issueTrackers[i]).find('.issue_tracker_field_label').html('Issue Tracker (' + (i + 1) + ')')
-        }
-      }
+      ensure_numbering(issueTrackers, 'issue_tracker_field_label', 'Issue Tracker')
     }
   }
 });
+
+function ensure_numbering(element, field_label_class, label_text) {
+
+  if (element.size() > 1) {
+    for (var i = 1; i < element.size(); i++) {
+      $(element[i]).find('.' + field_label_class).html(label_text + ' (' + (i + 1) + ')')
+    }
+  }
+}
 
 $(document).on('ready', function () {
   WebsiteOne.Projects.ensure_github_url_numbering()
