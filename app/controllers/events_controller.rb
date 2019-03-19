@@ -11,16 +11,16 @@ class EventsController < ApplicationController
   def show
     @event_schedule = @event.next_occurrences
     @recent_hangout = @event.recent_hangouts.first
-    @event_instances = EventInstance.where(event_id: @event.id).where.not(yt_video_id: nil).
-                                     order(created_at: :desc).limit(5)
+    @event_instances = EventInstance.where(event_id: @event.id).where.not(yt_video_id: nil)
+                                    .order(created_at: :desc).limit(5)
     render partial: 'hangouts_management' if request.xhr?
   end
 
   def index
     @projects = Project.active
     respond_to do |format|
-      format.html {@events = Event.upcoming_events(specified_project) }
-      format.json {@events = Event.upcoming_events(specified_project) }
+      format.html { @events = Event.upcoming_events(specified_project) }
+      format.json { @events = Event.upcoming_events(specified_project) }
     end
   end
 
@@ -29,17 +29,20 @@ class EventsController < ApplicationController
   end
 
   def create
+    params[:creator_id] = current_user.id
     EventCreatorService.new(Event).perform(transform_params,
-                                           success: ->(event) do
-                                             @event = event
-                                             flash[:notice] = 'Event Created'
-                                             redirect_to event_path(@event)
-                                           end,
-                                           failure: ->(event) do
-                                             @event = event
-                                             flash[:notice] = @event.errors.full_messages.to_sentence
-                                             render :new
-                                           end)
+                                                  success: -> (event) do
+                                                    respond_to do |format|
+                                                      format.html { redirect_to event_path(event) }
+                                                      format.json { render json: {event: event} }
+                                                    end
+                                                  end,
+                                                  failure: -> (event) do
+                                                    respond_to do |format|
+                                                      format.html { render :new }
+                                                      format.json { render json: {error: event.errors.full_messages.to_sentence} }
+                                                    end
+                                                  end)
   end
 
   def update
@@ -69,7 +72,7 @@ class EventsController < ApplicationController
     event_params = whitelist_event_params
     create_start_date_time(event_params)
     event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
-    event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
+    event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ''
     event_params[:repeats_every_n_weeks] = 2 if event_params['repeats'] == 'biweekly'
     event_params
   end
@@ -78,7 +81,7 @@ class EventsController < ApplicationController
     permitted = [
       :name, :category, :for, :project_id, :description, :duration, :repeats,
       :repeats_every_n_weeks, :repeat_ends_string, :time_zone, :creator_id,
-      :start_datetime, :repeat_ends, :repeat_ends_on, :modifier_id, :creator_attendance
+      :start_datetime, :repeat_ends, :repeat_ends_on, :modifier_id, :creator_attendance,
     ]
 
     params.merge(event: params[:event].merge(action_initiator))
@@ -87,7 +90,7 @@ class EventsController < ApplicationController
   end
 
   def action_initiator
-    @event && @event.creator_id ? { modifier_id: current_user.id } : { creator_id: current_user.id }
+    @event && @event.creator_id ? {modifier_id: current_user.id} : {creator_id: current_user.id}
   end
 
   # next_date and start_date are in the same dst or non-dst
@@ -97,7 +100,7 @@ class EventsController < ApplicationController
   def create_start_date_time(event_params)
     return unless date_and_time_present?
     tz = TZInfo::Timezone.get(params['start_time_tz'])
-    event_params[:start_datetime] = next_date_offset(tz).to_utc(DateTime.parse(params['start_date']+ ' ' + params['start_time']))
+    event_params[:start_datetime] = next_date_offset(tz).to_utc(DateTime.parse(params['start_date'] + ' ' + params['start_time']))
   end
 
   def next_date_offset(tz)
@@ -123,7 +126,7 @@ class EventsController < ApplicationController
 
   def new_params
     params[:project_id] = Project.friendly.find(params[:project]).id.to_s if params[:project]
-    params[:project_id] = Project.find_by(title: "CS169").try(:id) unless params[:project_id]
+    params[:project_id] = Project.find_by(title: 'CS169').try(:id) unless params[:project_id]
     params.permit(:name, :category, :for, :project_id).merge(start_datetime: Time.now.utc, duration: 30, repeat_ends: true)
   end
 end

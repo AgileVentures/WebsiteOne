@@ -40,7 +40,6 @@ module Events
           }
         end
       end
-
     end
   end
 end
