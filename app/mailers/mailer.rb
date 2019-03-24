@@ -33,6 +33,6 @@ class Mailer < ActionMailer::Base
 
   def welcome_project_joinee(project, user)
     @user = user
-    mail(to: @user.email, subject: "Welcome to the hello world project")
+    mail(to: @user.email, subject: "Welcome to the #{project.title} project!")
   end
 end
