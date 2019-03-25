@@ -20,13 +20,13 @@ Feature: Create projects
     When I click the very stylish "New Project" button
     Then I should see "Creating a new Project"
     And I should see a form with:
-      | Field                |
-      | Title                |
-      | Description          |
-      | Status               |
-      | GitHub url (primary) |
-      | Issue Tracker link   |
-      | Slack channel name   |
+      | Field                   |
+      | Title                   |
+      | Description             |
+      | Status                  |
+      | GitHub url (primary)    |
+      | Issue Tracker (primary) |
+      | Slack channel name      |
 
   Scenario Outline: Saving a new project: success
     Given I have logged in
@@ -35,7 +35,7 @@ Feature: Create projects
     When I fill in "Title" with "<title>"
     And I fill in "Description" with "<description>"
     And I fill in "GitHub url (primary)" with "<gh_link>"
-    And I fill in "Issue Tracker link" with "<pt_link>"
+    And I fill in "Issue Tracker (primary)" with "<pt_link>"
     And The project has no stories on Pivotal Tracker
     And I fill in "Slack channel name" with "slackin"
     And I select "Status" to "Active"
@@ -48,7 +48,7 @@ Feature: Create projects
       | <description> |
       | ACTIVE        |
     And I should see a link to "<title>" on github
-    And I should see a link "<title>" that connects to the "pivotaltracker_url"
+    And I should see a link "<title>" that connects to the issue tracker's url
     And I should see a link "<title>" that connects to the "slack_channel"
 
     Examples:
@@ -75,7 +75,7 @@ Feature: Create projects
     And I click "Add more repos"
     Then I should see "GitHub url (2)"
     And I fill in "GitHub url (2)" with "http://www.github.com/new2"
-    And I fill in "Issue Tracker link" with "http://www.waffle.com/new"
+    And I fill in "Issue Tracker (primary)" with "http://www.waffle.com/new"
     And The project has no stories on Pivotal Tracker
     And I select "Status" to "Active"
     And I click the "Submit" button
@@ -87,4 +87,9 @@ Feature: Create projects
       | has lots of code      |
       | ACTIVE                |
     And I should see a link to "multiple repo project" on github
-    And I should see a link "multiple repo project" that connects to the "pivotaltracker_url"
+    And I should see a link "multiple repo project" that connects to the issue tracker's url
+
+  @javascript
+  Scenario: Saving a new project with multiple issue trackers: success
+    Given I have logged in
+    Then I should be able to create a project with more than one issue tracker
