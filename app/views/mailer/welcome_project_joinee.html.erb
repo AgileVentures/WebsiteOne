@@ -1,17 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
+<% if @project.title == 'websiteone' %>
+<p>
+Hi,<br>
+
+Thanks so much for joining the WebSiteOne project - as you might know, it's the Rails code that powers our main site - we coordinate via #websiteone on slack and there's a #websiteone-install channel for help to get set up.<br>
+
+Just reach out if there's anything you need<br>
+
+Best, Sam
+</p>
+
+<% else %>
     <h1>Welcome to the websiteone project!, Billy Bob</h1>
     <p>
       You have successfully joined websiteone.<br>
       Please feel free to join the projects slack channel at <a href="#">#websiteone</a>
     </p>
     <p>Thanks for joining and have a great day!</p>
-    <footer>
-      You are receiving this email because you registered at <a href="http://www.agileventures.org/">www.agileventures.org</a>. If you wish to be removed from this mailing list, please login at av.org and go to your profile page and edit "Receive site emails" to be unchecked - if you are already logged in go directly to: <a href="http://www.agileventures.org/users/edit">www.agileventures.org/users/edit</a>.
-    </footer>
-  </body>
-</html>
+<% end %>
+
+<footer>
+  You are receiving this email because you registered at <a href="http://www.agileventures.org/">www.agileventures.org</a>. If you wish to be removed from this mailing list, please login at av.org and go to your profile page and edit "Receive site emails" to be unchecked - if you are already logged in go directly to: <a href="http://www.agileventures.org/users/edit">www.agileventures.org/users/edit</a>.
+</footer>
