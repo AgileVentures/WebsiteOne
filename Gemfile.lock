@@ -408,7 +408,7 @@ GEM
     netrc (0.11.0)
     newrelic_rpm (6.2.0.354)
     nio4r (2.3.1)
-    nokogiri (1.10.1)
+    nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -753,7 +753,7 @@ DEPENDENCIES
   local_time (~> 2.1)
   mercury-rails!
   newrelic_rpm
-  nokogiri (= 1.10.1)
+  nokogiri (= 1.10.2)
   octokit
   omniauth
   omniauth-github
