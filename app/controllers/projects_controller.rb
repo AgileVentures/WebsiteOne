@@ -33,10 +33,15 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params.merge('user_id' => current_user.id))
     if @project.save
       add_to_feed(:create)
-      redirect_to project_path(@project), notice: 'Project was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to project_path(@project), notice: 'Project was successfully created.' }
+        format.json { render json: { project: @project } }
+      end
     else
-      flash.now[:alert] = 'Project was not saved. Please check the input.'
-      render action: 'new'
+      respond_to do |format|
+        format.html { render :new , notice: 'Project was not saved. Please check the input.' }
+        format.json { render json: {error: @project.errors.full_messages.to_sentence} }
+      end
     end
   end
 
