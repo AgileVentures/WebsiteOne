@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
   has_many :event_instances
   belongs_to :project
+  has_and_belongs_to_many :slack_channels
+  
   serialize :exclusions
 
   belongs_to :creator, class_name: 'User'
@@ -271,6 +273,10 @@ class Event < ApplicationRecord
     User.find modifier_id
   end
 
+  def slack_channel_codes
+    slack_channels.pluck(:code)
+  end
+  
   private
 
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week

@@ -126,12 +126,4 @@ describe EventInstance, type: :model do
       expect(hangout.yt_url).to eq nil
     end
   end
-
-  context '#slack_channel_codes' do
-    context 'default' do
-      it 'should return an empty array' do
-        expect(hangout.slack_channel_codes).to eq []
-      end
-    end
-  end
 end
