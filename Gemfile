@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.1'
 
-gem 'rails', '5.2.2'
+gem 'rails', '5.2.2.1'
 gem 'acts-as-taggable-on'
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts_as_tree'
@@ -38,7 +38,7 @@ gem 'kramdown', '~> 2.1'
 gem 'letter_opener', :group => :development
 gem 'local_time', '~> 2.1'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
-gem 'nokogiri', '1.10.1'
+gem 'nokogiri', '1.10.2'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'

@@ -20,7 +20,14 @@
         </div>
       </div>
 
-      <%= awesome_text_field f, :pivotaltracker_url, label_text: 'Issue Tracker link', placeholder: 'https://www.pivotaltracker.com/s/projects/id' %>
+      <div id="issue_trackers" class="form-group"> 
+        <%= f.fields_for :issue_trackers do |issue_tracker| %>
+          <%= render 'issue_tracker_fields', f: issue_tracker %>
+        <% end %>
+        <div class= 'links form-group'>
+          <%= link_to_add_association 'Add more trackers', f, :issue_trackers, class: 'btn btn-default'%>
+        </div>
+      </div>
 
       <%= awesome_text_field f, :slack_channel_name, label_text: 'Slack channel name', placeholder: 'project_slack_channel_name' %>
 
