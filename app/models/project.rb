@@ -15,10 +15,12 @@ class Project < ApplicationRecord
   has_many :event_instances
   has_many :commit_counts
   has_many :source_repositories
+  has_many :issue_trackers
   has_and_belongs_to_many :slack_channels
   has_and_belongs_to_many :languages
 
   accepts_nested_attributes_for :source_repositories, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :issue_trackers, reject_if: :all_blank, allow_destroy: true
 
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags

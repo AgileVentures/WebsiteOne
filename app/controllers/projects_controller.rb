@@ -26,6 +26,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.source_repositories.build
+    @project.issue_trackers.build
     @project.languages.build
   end
 
@@ -125,6 +126,7 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(:title, :description, :pitch, :created, :status,
                                     :user_id, :github_url, :pivotaltracker_url, :slack_channel_name,
                                     :pivotaltracker_id, :image_url, languages_attributes: [:name],
-                                    name_ids: [], source_repositories_attributes: [:id, :url, :_destroy])
+                                    name_ids: [], source_repositories_attributes: [:id, :url, :_destroy],
+                                    issue_trackers_attributes: [:id, :url, :_destroy])
   end
 end
