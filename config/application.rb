@@ -46,8 +46,8 @@ module WebsiteOne
     # config.assets.css_compressor = :sass
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
-    config.autoload_paths += Dir[Rails.root.join('lib')]
-
+    config.eager_load_paths += Dir[Rails.root.join('lib')]
+    
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
