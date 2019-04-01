@@ -2,7 +2,8 @@ FROM ruby:2.5
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get update -qq && apt-get install -y build-essential \
-    libpq-dev nodejs && rm -rf /var/cache/apt/archives/*
+    libpq-dev nodejs && gem install bundler && \ 
+    rm -rf /var/cache/apt/archives/*
 
 RUN mkdir /WebsiteOne
 WORKDIR /WebsiteOne
