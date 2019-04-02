@@ -1,0 +1,7 @@
+<div class='nested-fields nested-slack-channel-fields form-group'>
+  <div class="field form-group">
+    <%= f.label :code, 'Slack Channel (primary)', class: 'slack_channel_field_label' %>
+    <%= f.text_field :code, placeholder: 'event_slack_channel_name', class: 'form-control input-lg' %>
+  </div>
+  <%= link_to_remove_association 'Delete slack channel', f, class: 'btn btn-danger'%>
+</div>

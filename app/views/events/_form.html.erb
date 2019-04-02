@@ -7,7 +7,7 @@
 <% duration = params.fetch(:duration, @event.duration) %>
 
 <div class="col-lg-8 col-lg-offset-2">
-  <%= form_for @event, html: {class: 'form-vertical', id: 'event-form'} do |f| %>
+  <%= form_for @event, html: { class: 'form-vertical', id: 'event-form' } do |f| %>
 
       <%= awesome_text_field f, :name %>
 
@@ -63,6 +63,15 @@
 
       <div class="form-group">
         <%= f.hidden_field :time_zone, value: 'UTC' %>
+      </div>
+
+      <div id="slack_channels" class="form-group"> 
+        <%= f.fields_for :slack_channels do |slack_channel| %>
+          <%= render 'slack_channel_fields', f: slack_channel %>
+        <% end %>
+        <div class= 'links form-group'>
+          <%= link_to_add_association 'Add more slack channels', f, :slack_channels, class: 'btn btn-default'%>
+        </div>
       </div>
 
       <div class="form-group">

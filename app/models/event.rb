@@ -3,6 +3,8 @@ class Event < ApplicationRecord
   belongs_to :project
   has_and_belongs_to_many :slack_channels
   
+  accepts_nested_attributes_for :slack_channels, reject_if: :all_blank, allow_destroy: true
+
   serialize :exclusions
 
   belongs_to :creator, class_name: 'User'

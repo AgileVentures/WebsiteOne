@@ -75,7 +75,7 @@ describe HangoutNotificationService do
   before { Features.slack.notifications.enabled = true }
   
   describe '.post_hangout_notification' do
-    let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project, for: '' }
+    let(:websiteone_hangout) { EventInstance.create title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project }
     let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: nil, for: '' }
     let(:project_with_no_slack_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: noslack_project, for: '' }
     let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: cs169_project, for: '' }
@@ -88,7 +88,7 @@ describe HangoutNotificationService do
         expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(websiteone_project_channel_post_args)
         expect(slack_client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
-        
+        websiteone_hangout.event_id = FactoryBot.create(:event).id
         hangout_notification_service.with(websiteone_hangout, slack_client, gitter_client)
       end
 

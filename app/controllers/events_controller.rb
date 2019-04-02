@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new(new_params)
+    @event.slack_channels.build
     @event.set_repeat_ends_string
   end
 
@@ -78,7 +79,8 @@ class EventsController < ApplicationController
     permitted = [
       :name, :category, :for, :project_id, :description, :duration, :repeats,
       :repeats_every_n_weeks, :repeat_ends_string, :time_zone, :creator_id,
-      :start_datetime, :repeat_ends, :repeat_ends_on, :modifier_id, :creator_attendance
+      :start_datetime, :repeat_ends, :repeat_ends_on, :modifier_id, :creator_attendance,
+      slack_channels_attributes: [:id, :code, :_destroy]
     ]
 
     params.merge(event: params[:event].merge(action_initiator))

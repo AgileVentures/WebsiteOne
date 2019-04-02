@@ -22,6 +22,7 @@ class HangoutNotificationService
     return if @event_instance.hangout_url.blank?
     
     channels = channels_for_project @event_instance.project
+    channels += channels_for_event @event_instance.event_id
     message = "#{@event_instance.title}: <#{@event_instance.hangout_url}|click to join>"
     @here_message = "@here #{message}"
     @channel_message = "@channel #{message}"
@@ -35,6 +36,12 @@ class HangoutNotificationService
     result = project.slack_channel_codes
     return [result] unless result.respond_to? :each
     result
+  end
+  
+  def channels_for_event event_id
+    return [] if event_id.nil?
+    event = Event.find(event_id)
+    event.slack_channel_codes
   end
   
   def send_notifications channels
