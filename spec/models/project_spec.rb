@@ -6,6 +6,7 @@ describe Project, type: :model do
   it { is_expected.to have_many :documents}
   it { is_expected.to have_many :event_instances}
   it { is_expected.to have_many :commit_counts}
+  it { is_expected.to have_many :issue_trackers}
 
   it { is_expected.to belong_to :user}
 

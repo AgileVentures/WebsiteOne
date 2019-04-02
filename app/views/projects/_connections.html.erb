@@ -9,9 +9,11 @@
     <p><i class="fa fa-github-alt fa-lg"></i> <span class="small">not linked to GitHub</span></p>
   <% end %>
 
-  <% if @project.pivotaltracker_url.present? %>
-    <p><i class="fa fa-gear fa-lg"></i>
-      <span class="small"><%= link_to "#{@project.title} ", @project.pivotaltracker_url %>on IssueTracker</span></p>
+  <% if @project.issue_trackers.size > 0 %>
+    <% @project.issue_trackers.each do |issue_tracker| %>
+      <p><i class="fa fa-gear fa-lg"></i>
+      <span class="small"><%= link_to "#{@project.title} ", issue_tracker.url %>on IssueTracker</span></p>
+    <% end %>
   <% else %>
     <p><i class="fa fa-gear fa-lg"></i> <span class="small">not linked to IssueTracker</span></p>
   <% end %>
