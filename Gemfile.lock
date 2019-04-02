@@ -622,7 +622,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stripe (4.11.0)
+    stripe (4.12.0)
       faraday (~> 0.13)
       net-http-persistent (~> 3.0)
     stripe-ruby-mock (2.5.6)
