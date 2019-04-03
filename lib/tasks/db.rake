@@ -5,4 +5,13 @@ namespace :db do
       project.source_repositories.create(url: project[:github_url])
     end
   end
+
+  desc "add slack channel codes to project slack channels join table"
+  task add_project_slack_channels: :environment do
+    include ChannelsList
+    Project.all.each do |project|
+      project.slack_channels.build(code: CHANNELS[project.slug.to_sym])
+      project.save!
+    end   
+  end
 end

@@ -1,6 +1,6 @@
 require 'slack'
 require 'gitter'
-require 'channels_list.rb'
+include ChannelsList
 
 class HangoutNotificationService
   def self.with(event_instance,

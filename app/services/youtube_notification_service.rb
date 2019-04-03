@@ -1,5 +1,6 @@
 require 'slack'
-require 'channels_list.rb'
+include ChannelsList
+
 class YoutubeNotificationService
   def self.with(event_instance,
                 slack_client = Slack::Web::Client.new(logger: Rails.logger)
