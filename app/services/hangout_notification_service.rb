@@ -31,10 +31,7 @@ class HangoutNotificationService
   
   def channels_for_project project
     return [] if project.nil? or project.slug.nil?
-    
-    projects_slack_channels = project.slack_channel_codes
-    return [projects_slack_channels] unless projects_slack_channels.respond_to? :each
-    projects_slack_channels
+    project.slack_channel_codes
   end
   
   def send_notifications channels
