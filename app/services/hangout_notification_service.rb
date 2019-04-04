@@ -1,6 +1,6 @@
 require 'slack'
 require 'gitter'
-require 'channels_list.rb'
+include ChannelsList
 
 class HangoutNotificationService
   def self.with(event_instance,
@@ -31,9 +31,7 @@ class HangoutNotificationService
   
   def channels_for_project project
     return [] if project.nil? or project.slug.nil?
-    result = CHANNELS[project.try(:slug).to_sym]
-    return [result] unless result.respond_to? :each
-    result
+    project.slack_channel_codes
   end
   
   def send_notifications channels

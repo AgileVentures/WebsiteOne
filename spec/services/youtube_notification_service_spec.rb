@@ -30,7 +30,8 @@ describe YoutubeNotificationService do
       
       it 'sends the correct slack message to the correct channels' do
         event_instance.yt_video_id = 'mock_url'
-        event_instance.project = Project.create(title: 'WebSiteOne', description: 'hmmm', status: 'active')
+        slack_channel = SlackChannel.create(code: 'C29J4QQ9W')
+        event_instance.project = Project.create(title: 'WebSiteOne', description: 'hmmm', status: 'active', slack_channels: [slack_channel])
         
         youtube_notification_service.with event_instance, client
         expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: general_channel_id))
@@ -39,7 +40,8 @@ describe YoutubeNotificationService do
 
       it 'does not ping slack when the project is cs169' do
         event_instance.yt_video_id = 'mock_url'
-        event_instance.project = Project.create(title: 'cs169', description: 'hmmm', status: 'active')
+        slack_channel = SlackChannel.create(code: 'C29J4CYA2')
+        event_instance.project = Project.create(title: 'cs169', description: 'hmmm', status: 'active', slack_channels: [slack_channel])
         
         youtube_notification_service.with event_instance, client
         expect(client).not_to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: general_channel_id))
@@ -60,7 +62,8 @@ describe YoutubeNotificationService do
       
       it 'sends the correct slack message to the correct channels' do
         event_instance.yt_video_id = 'mock_url'
-        event_instance.project = Project.create(slug: 'websiteone', title: 'WebSiteOne', description: 'hmmm', status: 'active')
+        slack_channel = SlackChannel.create(code: 'C29J4QQ9W')
+        event_instance.project = Project.create(slug: 'websiteone', title: 'WebSiteOne', description: 'hmmm', status: 'active', slack_channels: [slack_channel])
         
         youtube_notification_service.with(event_instance, client)
         
