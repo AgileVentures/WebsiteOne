@@ -10,7 +10,7 @@ namespace :db do
   task add_project_slack_channels: :environment do
     include ChannelsList
     Project.all.each do |project|
-      project.slack_channels.build(code: CHANNELS[project.slug.to_sym])
+      project.slack_channels << SlackChannel.find_or_create_by(code: CHANNELS[project.slug.to_sym])
       project.save!
     end   
   end
