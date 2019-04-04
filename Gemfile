@@ -112,7 +112,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'hirb'
-  gem 'jasmine', '~> 3.3'
+  gem 'jasmine', '~> 3.4'
   gem 'jasmine-jquery-rails', '~> 2.0', '>= 2.0.3'
   gem 'pry-byebug'
   gem 'pry-rails'
