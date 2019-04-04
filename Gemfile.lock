@@ -336,12 +336,12 @@ GEM
     ice_cube (0.16.3)
     ice_nine (0.11.2)
     jaro_winkler (1.5.2)
-    jasmine (3.3.0)
-      jasmine-core (~> 3.3.0)
+    jasmine (3.4.0)
+      jasmine-core (~> 3.4.0)
       phantomjs
       rack (>= 1.2.1)
       rake
-    jasmine-core (3.3.0)
+    jasmine-core (3.4.0)
     jasmine-jquery-rails (2.0.3)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
@@ -739,7 +739,7 @@ DEPENDENCIES
   hirb
   icalendar
   ice_cube (= 0.16.3)
-  jasmine (~> 3.3)
+  jasmine (~> 3.4)
   jasmine-jquery-rails (~> 2.0, >= 2.0.3)
   jbuilder
   jquery-rails
