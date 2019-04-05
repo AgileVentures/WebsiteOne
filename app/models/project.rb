@@ -111,6 +111,10 @@ class Project < ApplicationRecord
     Mailer.alert_project_creator_about_new_member(self, user).deliver_now if User.find(user_id).receive_mailings
   end
 
+  def slack_channel_codes
+    slack_channels.pluck(:code)
+  end
+
   private
 
   def should_generate_new_friendly_id?
