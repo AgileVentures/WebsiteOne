@@ -71,30 +71,59 @@ describe Mailer do
   end
 
   describe '#welcome_project_joinee' do
-    before(:each) do
-      @project_creator = FactoryBot.create(:user, first_name: 'Reva', last_name: 'Satterfield')
-      @project = FactoryBot.create(:project, title: 'websiteone', user: @project_creator)
-      @new_member = FactoryBot.create(:user, first_name: 'Billy', last_name: 'Bob', email: 'billybob@example.org')
-      @email = Mailer.welcome_project_joinee(@project, @new_member).deliver_now
-    end
-    it 'queues mailer for delivery' do
-      assert !ActionMailer::Base.deliveries.empty?
-    end
+    context 'websiteone project' do
+      before(:each) do
+        @project_creator = FactoryBot.create(:user, first_name: 'Sam', last_name: 'Satterfield')
+        @project = FactoryBot.create(:project, title: 'websiteone', user: @project_creator)
+        @new_member = FactoryBot.create(:user, first_name: 'Billy', last_name: 'Bob', email: 'billybob@example.org')
+        @email = Mailer.welcome_project_joinee(@project, @new_member).deliver_now
+      end
+      it 'queues mailer for delivery' do
+        assert !ActionMailer::Base.deliveries.empty?
+      end
 
-    it 'sends an email to the new project joinee' do
-      assert_equal [@new_member.email], @email.to
-    end
+      it 'sends an email to the new project joinee' do
+        assert_equal [@new_member.email], @email.to
+      end
 
-    it 'displays the project title in the subject' do
-      assert_equal "Welcome to the websiteone project!", @email.subject
-    end
+      it 'displays the project title in the subject' do
+        assert_equal "Welcome to the websiteone project!", @email.subject
+      end
 
-    it 'sends an email with a text part' do
-      assert_equal read_fixture('project_joinee_notification_text').join, @email.text_part.body.to_s
-    end
+      it 'sends an email with a text part' do
+        assert_equal read_fixture('project_joinee_notification_text').join, @email.text_part.body.to_s
+      end
 
-    it 'sends an email with an html part' do
-      assert_equal read_fixture('project_joinee_notification_html').join, @email.html_part.body.to_s
+      it 'sends an email with an html part' do
+        assert_equal read_fixture('project_joinee_notification_html').join, @email.html_part.body.to_s
+      end
+    end
+    context 'hello world project' do
+      before(:each) do
+        @project_creator = FactoryBot.create(:user, first_name: 'Reva', last_name: 'Satterfield')
+        @project = FactoryBot.create(:project, title: 'Hello World', user: @project_creator, slack_channel_name: '#helloworld')
+        @new_member = FactoryBot.create(:user, first_name: 'John', last_name: 'Boy', email: 'billybob@example.org')
+        @email = Mailer.welcome_project_joinee(@project, @new_member).deliver_now
+      end
+      it 'queues mailer for delivery' do
+        assert !ActionMailer::Base.deliveries.empty?
+      end
+
+      it 'sends an email to the new project joinee' do
+        assert_equal [@new_member.email], @email.to
+      end
+
+      it 'displays the project title in the subject' do
+        assert_equal "Welcome to the Hello World project!", @email.subject
+      end
+
+      it 'sends an email with a text part' do
+        assert_equal read_fixture('project_joinee_notification_helloworld_text').join, @email.text_part.body.to_s
+      end
+
+      it 'sends an email with an html part' do
+        assert_equal read_fixture('project_joinee_notification_helloworld_html').join, @email.html_part.body.to_s
+      end
     end
   end
 end
