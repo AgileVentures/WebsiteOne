@@ -18,10 +18,10 @@ Feature: Notify project joinee when people join project
     Given I am logged in as "John"
     And I go to the "show" page for project "hello world"
     When I click "Join Project"
-    Then joinee "john@doe.com" should receive a "Welcome to the hello world project!" email
+    Then project joinee "john@doe.com" should receive a "Welcome to the hello world project!" email
 
   Scenario: Notification should not be sent to project joinee if they disable site emails
     Given I am logged in as "Bryan"
     And I go to the "show" page for project "hello mars"
     When I click "Join Project"
-    Then joinee "test@test.com" should not receive a "Welcome to the hello mars project!" email
+    Then project joinee "test@test.com" should not receive a "Welcome to the hello mars project!" email
