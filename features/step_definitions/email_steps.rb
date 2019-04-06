@@ -10,14 +10,17 @@ And /^"(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/ do 
   check_email(user_email, negate, subject, body)
 end
 
-def check_email(email, negate, subject, body = nil)
-  unless negate
+Then /^joinee "(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/ do |user_email, negate, subject, body|
+  check_email(user_email, negate, subject, body, 1)
+end
 
-    expect(ActionMailer::Base.deliveries[0].subject).to include(subject)
-    expect(ActionMailer::Base.deliveries[0].body).to include(body) unless body.nil?
-    expect(ActionMailer::Base.deliveries[0].to).to include(email) unless email.nil?
+def check_email(email, negate, subject, body = nil, message = 0)
+  unless negate
+    expect(ActionMailer::Base.deliveries[message].subject).to include(subject)
+    expect(ActionMailer::Base.deliveries[message].body).to include(body) unless body.nil?
+    expect(ActionMailer::Base.deliveries[message].to).to include(email) unless email.nil?
   else
-    expect(ActionMailer::Base.deliveries.size).to eq 0
+    expect(ActionMailer::Base.deliveries.size).to eq 1
   end
 end
 
