@@ -40,7 +40,8 @@ Feature: Edit Project
     And I fill in "Description" with "Hello, Uranus!"
     And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
-    And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I click "Add more trackers"
+    And I fill in "Issue Tracker (primary)" with "https://www.pivotaltracker.com/s/projects/853345"
     And The project has no stories on Pivotal Tracker
     And I fill in "Slack channel name" with "slackin"
     And I click the "Submit" button
@@ -48,7 +49,7 @@ Feature: Edit Project
     And I should see a success flash "Project was successfully updated."
     And I should see "Hello, Uranus!"
     And I should see a link to "hello mars" on github
-    And I should see a link "hello mars" that connects to the "pivotaltracker_url"
+    And I should see a link "hello mars" that connects to the issue tracker's url
     And I should see a link "hello mars" that connects to the "slack_channel"
 
   Scenario: Saving a project: failure
@@ -68,14 +69,16 @@ Feature: Edit Project
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on github
 
+  @javascript
   Scenario: Update Issue Tracker url if valid pivotal tracker link
     Given I have logged in
     And I am on the "Edit" page for project "hello mars"
-    And I fill in "Issue Tracker link" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I click "Add more trackers"
+    And I fill in "Issue Tracker (primary)" with "https://www.pivotaltracker.com/s/projects/853345"
     And The project has no stories on Pivotal Tracker
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
-    And I should see a link "hello mars" that connects to the "pivotaltracker_url"
+    And I should see a link "hello mars" that connects to the issue tracker's url
 
   @javascript
   Scenario: Reject GitHub url update if invalid

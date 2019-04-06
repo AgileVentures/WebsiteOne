@@ -1,4 +1,5 @@
 require 'custom_errors.rb'
+require 'paypal.rb'
 
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.

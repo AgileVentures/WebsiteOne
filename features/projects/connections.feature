@@ -5,13 +5,13 @@ Feature: Projects should show links to the connected APIs
 
   Background:
     Given the following users exist
-      | first_name | last_name | email            | receive_mailings  |
-      | Bill       | Bob       | Bill@example.com | true              |
+      | first_name | last_name | email            | receive_mailings |
+      | Bill       | Bob       | Bill@example.com | true             |
 
     Given the following projects exist:
-      | title   | description | status   | author | pivotaltracker_url                               | github_url               | slack_channel_name |
-      | hello   | earthlings  | active   | Bill   | https://www.pivotaltracker.com/n/projects/742821 | https://github.com/hello | hello_earthlings   |
-      | Bat Man | All bat     | active   | Bill   |                                                  |                          |                    |
+      | title   | description | status | author | pivotaltracker_url                               | github_url               | slack_channel_name |
+      | hello   | earthlings  | active | Bill   | https://www.pivotaltracker.com/n/projects/742821 | https://github.com/hello | hello_earthlings   |
+      | Bat Man | All bat     | active | Bill   |                                                  |                          |                    |
 
     Given The project has no stories on Pivotal Tracker
 
@@ -29,7 +29,7 @@ Feature: Projects should show links to the connected APIs
   Scenario Outline: Show links for when a project has connections
     When I go to the "show" page for project "hello"
     Then I should see "<text>"
-    And I should see a link "hello" that connects to the "<url>"
+    And I should see a link "hello" that connects to the issue tracker's url
 
     Examples:
       | text                  | url                |

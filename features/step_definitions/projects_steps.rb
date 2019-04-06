@@ -12,11 +12,16 @@ Given(/^the following projects exist:$/) do |table|
       project = default_test_author.projects.new(hash.except('author', 'tags', 'languages'))
     end
     if hash[:github_url].present?
-      project.source_repositories.build(url: hash[:github_url])
+      hash[:github_url].split(', ').each { |source_repository| project.source_repositories.build(url: source_repository) }
     end
     if hash[:languages].present?
       language = Language.find_or_create_by(name: hash[:languages])
       project.languages << language
+    end
+    if hash[:pivotaltracker_url]
+      unless hash[:pivotaltracker_url].empty?
+        project.issue_trackers.build(url: hash[:pivotaltracker_url])
+      end
     end
     if hash[:tags]
       project.tag_list.add(hash[:tags], parse: true)
@@ -107,6 +112,14 @@ end
 Then /^I should see a link "([^"]*)" that connects to the "([^"]*)"$/ do |text, url|
   project = Project.find_by title: text
   step %Q{I should see a link "#{text}" to "#{project.send url}"}
+end
+
+Then /^I should see a link "([^"]*)" that connects to the issue tracker's url$/ do |link|
+  
+  project = Project.find_by title: link
+  project.issue_trackers.each do | issue_tracker |
+    expect(page).to have_link(link, href: issue_tracker.url)
+  end
 end
 
 Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, name|
@@ -223,3 +236,19 @@ Given(/^the anonymous user exists$/) do
   attributes = { id: -1, first_name: 'Anonymous', last_name: '', email: 'anonymous@example.org' }
   FactoryBot.create(:user, attributes)
 end
+
+Given("I should be able to create a project with more than one issue tracker") do
+    visit path_to('new project')
+    fill_in 'Title', with: 'Multiple issue tracker project'
+    fill_in 'Description', with: 'has lots of code'
+    fill_in 'GitHub url (primary)', with: 'http://www.github.com/new'
+    fill_in 'Issue Tracker (primary)', with: 'http://www.waffle.com/new'
+    click_link_or_button 'Add more trackers'
+    expect(page).to have_text('Issue Tracker (2)')
+    select 'Active', from: 'Status'
+    click_button 'Submit'
+    expect(page).to have_content('Multiple issue tracker project')
+    expect(page).to have_content('has lots of code')
+
+end
+
