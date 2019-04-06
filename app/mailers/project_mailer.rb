@@ -1,0 +1,2 @@
+class ProjectMailer < ApplicationMailer
+end
