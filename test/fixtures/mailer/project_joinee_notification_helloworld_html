@@ -1,13 +1,13 @@
 <html>
   <body>
     <p>
-Hi Billy,<br />
+Hi John,<br />
 
-Thanks so much for joining the websiteone project! - as you might know, it's the Rails code that powers our main site - we coordinate via #websiteone on slack and there's a #websiteone-install channel for help to get set up.<br />
+Thanks so much for joining the Hello World project!  We coordinate via <a href="https://agileventures.slack.com/app_redirect?channel=#helloworld">Hello World</a> on slack and are looking forward to working with you.
 
 Just reach out if there's anything you need.<br />
 
-Best, Sam
+Best, Reva
 </p>
 
 
