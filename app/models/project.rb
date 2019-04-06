@@ -109,7 +109,7 @@ class Project < ApplicationRecord
   end
 
   def send_notification_to_new_joinee(user)
-    Mailer.welcome_project_joinee(self, user).deliver_now if User.find(user_id).receive_mailings
+    Mailer.welcome_project_joinee(self, user).deliver_now if user.receive_mailings
   end
 
   private
