@@ -1,6 +1,6 @@
 Hi <%= @user.first_name %>,
 
-Thanks so much for joining the <%= @project.title %> project!<% if @project.title == 'websiteone' %> - as you might know, it's the Rails code that powers our main site - we coordinate via #websiteone on slack and there's a #websiteone-install channel for help to get set up.
+Thanks so much for joining the <%= @project.title %> project!<% if @project.title == 'WebsiteOne' %> - as you might know, it's the Rails code that powers our main site - we coordinate via #websiteone on slack and there's a #websiteone-install channel for help to get set up.
 <% end %>
 <% if @project.slack_channel_name.present? %>
   We coordinate via <%= @project.slack_channel %> on slack and are looking forward to working with you.

@@ -22,7 +22,7 @@ RSpec.describe ProjectMailer, type: :mailer do
     context 'websiteone project' do
       before(:each) do
         @project_creator = FactoryBot.create(:user, first_name: 'Sam', last_name: 'Satterfield')
-        @project = FactoryBot.create(:project, title: 'websiteone', user: @project_creator)
+        @project = FactoryBot.create(:project, title: 'WebsiteOne', user: @project_creator)
         @new_member = FactoryBot.create(:user, first_name: 'Billy', last_name: 'Bob', email: 'billybob@example.org')
         @email = ProjectMailer.with(user: @new_member, project: @project, project_creator: @project_creator).welcome_project_joinee.deliver_now
       end
@@ -35,7 +35,7 @@ RSpec.describe ProjectMailer, type: :mailer do
       end
 
       it 'displays the project title in the subject' do
-        assert_equal "Welcome to the websiteone project!", @email.subject
+        assert_equal "Welcome to the WebsiteOne project!", @email.subject
       end
 
       it 'sends an email with a text part' do
