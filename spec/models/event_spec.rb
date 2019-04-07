@@ -67,13 +67,6 @@ describe Event, :type => :model do
         expect(recent_event).not_to be_less_than_ten_till_start
       end
     end
-
-    context 'event sequence has been terminated' do
-      subject(:event) { build_stubbed :event, start_datetime: 1.year.ago, repeat_ends_on: 1.day.ago}
-      it 'returns false' do
-        expect(event).not_to be_less_than_ten_till_start
-      end
-    end
   end
 
   describe '#last_hangout' do
