@@ -107,10 +107,6 @@ class Project < ApplicationRecord
     "https://meet.jit.si/AV_#{title.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
   end
 
-  def send_notification_to_project_creator(user)
-    Mailer.alert_project_creator_about_new_member(self, user).deliver_now if User.find(user_id).receive_mailings
-  end
-
   def slack_channel_codes
     slack_channels.pluck(:code)
   end
