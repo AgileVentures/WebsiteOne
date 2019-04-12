@@ -22,6 +22,7 @@ class HangoutNotificationService
     return if @event_instance.hangout_url.blank?
     
     channels = channels_for_project @event_instance.project
+    channels += channels_for_event @event_instance.event_id
     message = "#{@event_instance.title}: <#{@event_instance.hangout_url}|click to join>"
     @here_message = "@here #{message}"
     @channel_message = "@channel #{message}"
@@ -33,6 +34,13 @@ class HangoutNotificationService
     return [] if project.nil? or project.slug.nil?
     project.slack_channel_codes
   end
+
+  def channels_for_event event_id
+    return [] if event_id.nil?
+    event = Event.find(event_id)
+    event.slack_channel_codes
+  end
+
   
   def send_notifications channels
     return post_premium_mob_hangout_notification if @event_instance.for == 'Premium Mob Members'

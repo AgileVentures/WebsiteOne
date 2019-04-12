@@ -590,4 +590,13 @@ describe Event, :type => :model do
       end
     end
   end
+
+  context '#slack_channel_codes' do
+    context 'default' do
+      it 'should return an empty array' do
+        event = FactoryBot.build(:event, name: 'Event without slack channel associated')
+        expect(event.slack_channel_codes).to eq []
+      end
+    end
+  end
 end
