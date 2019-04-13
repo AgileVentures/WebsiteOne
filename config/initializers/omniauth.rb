@@ -9,7 +9,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     ENV['GITHUB_SECRET'] = '6a5988af12a8a012399e037d0586bf706c4bfbf0'
   end
 
-  provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
+  provider :github, 'd05eb310ebf549e53889', '6a5988af12a8a012399e037d0586bf706c4bfbf0', {:provider_ignores_state => true}
   provider :google_oauth2, ENV['GPLUS_KEY'], ENV['GPLUS_SECRET'],
        {
          :name => 'gplus',
