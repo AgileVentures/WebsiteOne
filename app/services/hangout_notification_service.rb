@@ -22,7 +22,7 @@ class HangoutNotificationService
     return if @event_instance.hangout_url.blank?
     
     channels = channels_for_project @event_instance.project
-    channels += @event_instance.channels_for_event @event_instance.event_id
+    channels += @event_instance.channels_for_event
     message = "#{@event_instance.title}: <#{@event_instance.hangout_url}|click to join>"
     @here_message = "@here #{message}"
     @channel_message = "@channel #{message}"
