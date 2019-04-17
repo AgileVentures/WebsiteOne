@@ -90,6 +90,16 @@ describe HangoutNotificationService do
     let(:multiple_channel_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: multiple_channel_project, for: '' }
     let(:event_instance_with_event_slack_channels) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project, for: '', event_id: event_with_slack_channels.id }
     
+    before do
+      allow(websiteone_hangout).to receive(:channels_for_event).and_return([])
+      allow(no_project_hangout).to receive(:channels_for_event).and_return([])
+      allow(project_with_no_slack_hangout).to receive(:channels_for_event).and_return([])
+      allow(cs169_hangout).to receive(:channels_for_event).and_return([])
+      allow(missing_url_hangout).to receive(:channels_for_event).and_return([])
+      allow(multiple_channel_hangout).to receive(:channels_for_event).and_return([])
+      allow(event_instance_with_event_slack_channels).to receive(:channels_for_event).and_return(['C02G8J699'])
+    end
+
     context 'PairProgramming' do
       
       it 'sends the correct slack message to the correct channels when associated with a project' do
@@ -190,6 +200,8 @@ describe HangoutNotificationService do
       let(:general_channel_id) { 'C0TLAE1MH' }
       let(:pairing_notifications_channel_id) { 'C29J3DPGW' }
       let(:websiteone_channel_id) { 'C29J4QQ9W' }
+      
+      before { allow(premium_mob_hangout).to receive(:channels_for_event).and_return([]) }
       
       it 'posts hangout url to appropriate private channels' do
         expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_notification_post_args).once
