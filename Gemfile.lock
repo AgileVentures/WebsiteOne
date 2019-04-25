@@ -109,7 +109,7 @@ GEM
       sassc (>= 2.0.0)
     brakeman (4.5.0)
     builder (3.2.3)
-    bullet (5.9.0)
+    bullet (6.0.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     bundler-audit (0.6.1)
