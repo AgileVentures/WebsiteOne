@@ -19,6 +19,20 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def react_oauth_user
+    token = params[:token]
+    payload = TokiToki.decode(token)
+    @current_user ||= User.find(payload[0]["sub"])
+  end
+
+  def logged_in?
+    react_oauth_user != nil
+  end
+
+  def authenticate_user_from_api!
+    head :unauthorized unless logged_in?
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys:[
       :first_name, :last_name, :email, :bio, :password,
