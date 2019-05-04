@@ -6,6 +6,7 @@ module Events
 
     helpers do
       def event_creator(event)
+        return if event.nil?
         event.creator_id.present? ? User.find(event.creator_id).display_name : nil
       end
       
@@ -27,6 +28,7 @@ module Events
       route_param :slug do
         get do
           event = Event.find_by(slug: params[:slug])
+          return if event.nil?
           {
             event: event,
             creator: event_creator(event),

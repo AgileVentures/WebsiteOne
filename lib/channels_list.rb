@@ -41,7 +41,8 @@ module ChannelsList
       'weekend-heretics': 'CAW8XPFG8',
       'new-members': 'C02G8J689',
       'retrospectives': 'CCWNMMHHT',
-      'refactoring': 'CBZCZP3GA'
+      'refactoring': 'CBZCZP3GA',
+      'react_slack_tests': 'CJ2V9TZ26'
     }
     GITTER_ROOMS = {
       'saasbook/MOOC': '544100afdb8155e6700cc5e4',

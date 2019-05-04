@@ -54,7 +54,7 @@ module WebsiteOne
         resource '*',
         headers: %w(Authorization),
         expose: %w(Authorization),
-        methods: [:get, :post, :patch, :delete, :options]
+        methods: [:get, :post, :patch, :delete, :options, :put]
       end
     end
   end

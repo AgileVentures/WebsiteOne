@@ -1,17 +1,24 @@
 class EventInstancesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :cors_preflight_check, except: [:index, :edit, :update_link]
+  # before_action :cors_preflight_check, except: [:index, :edit, :update_link]
   before_action :authenticate_user!, only: [:edit, :update_link]
 
   def update
+    # authenticate_user_from_api! unless current_user
+    params[:host_id] = current_user.id
+    params[:url_set_directly] = true
+
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
     event_instance_params = check_and_transform_params(event_instance)
     event_url = event_instance.hangout_url
     hangout_url_changed = event_url != event_instance_params[:hangout_url]
     if event_instance.try!(:update, event_instance_params)
       send_messages_to_social_media event_instance, event_instance_params, hangout_url_changed
-      redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
-      head :ok
+      respond_to do |format|
+        format.json { render json: { hangout: "Hangout successfully posted" } }
+      end
+      # redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
+      # head :ok
     else
       head :internal_server_error
     end
@@ -43,7 +50,8 @@ class EventInstancesController < ApplicationController
 
   def send_messages_to_social_media event, event_params, hangout_url_changed
     begin
-      HangoutNotificationService.with event if updating_hangout_url? event, hangout_url_changed
+      HangoutNotificationService.with event, current_user 
+      # if updating_hangout_url? event, hangout_url_changed
       YoutubeNotificationService.with event if updating_valid_yt_url? event, event_params
     rescue => e
       Rails.logger.error "Error sending hangout notifications:"
@@ -51,7 +59,7 @@ class EventInstancesController < ApplicationController
       Rails.logger.error e.backtrace.join "\n"
       flash[:alert] = "Ooops: Some or all hangout notifications may have not been posted."
     end
-    flash[:notice] = "Hangout successfully posted"
+    # flash[:notice] = "Hangout successfully posted"
   end
 
   def updating_hangout_url? event, hangout_url_changed

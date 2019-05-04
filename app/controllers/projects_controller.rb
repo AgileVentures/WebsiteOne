@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
     else
       respond_to do |format|
         format.html { render :new , notice: 'Project was not saved. Please check the input.' }
-        format.json { render json: {error: @project.errors.full_messages.to_sentence} }
+        format.json { render json: { error: @project.errors.full_messages.to_sentence } }
       end
     end
   end
