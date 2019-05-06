@@ -19,7 +19,7 @@ class EventInstance < ApplicationRecord
   accepts_nested_attributes_for :hangout_participants_snapshots
 
   def for 
-    self.event.for
+    self.event&.for
   end
 
   def self.active_hangouts
