@@ -126,4 +126,11 @@ describe EventInstance, type: :model do
       expect(hangout.yt_url).to eq nil
     end
   end
+  
+  context '#for' do
+    it 'returns nil if event is nil' do
+      hangout.event = nil
+      expect(hangout.for).to eq nil
+    end
+  end
 end
