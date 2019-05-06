@@ -58,7 +58,8 @@ module ChannelsList
       'pairing_notifications': 'C29J3DPGW',
       'standup_notifications': 'C29JE6HGR',
       'premium_extra': 'C29J4QQ9M',
-      'premium_mob_trialists': 'C29J4QQ9F'
+      'premium_mob_trialists': 'C29J4QQ9F',
+      'new-members': 'C02G8J699'
     }
     GITTER_ROOMS = {
       'saasbook/MOOC': '56b8bdffe610378809c070cc',

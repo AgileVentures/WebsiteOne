@@ -19,7 +19,8 @@ class YoutubeNotificationService
     return unless Features.slack.notifications.enabled
     return if @event_instance.yt_video_id.blank?
     channels = channels_for_project @event_instance.project
-
+    channels += @event_instance.channels_for_event
+    
     video = "https://youtu.be/#{@event_instance.yt_video_id}"
     @yt_message = "Video/Livestream: <#{video}|click to play>"
 
