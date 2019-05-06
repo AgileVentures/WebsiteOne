@@ -107,6 +107,7 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'constant-redefinition'
   gem 'dotenv-rails'
+  gem 'rails-erd'
   gem 'guard'
   gem 'guard-cucumber'
   gem 'guard-livereload'
