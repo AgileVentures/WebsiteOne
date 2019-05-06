@@ -18,7 +18,7 @@ Then /^I (am|should be) on the static "([^"]*)" page$/ do |option, page|
       pending
   end
 end
-When(/^I (try to use|am using) the Mercury Editor to edit static "([^"]*)" page$/) do |opt, title|
+When(/^I (try to use|am using) the Mercury Editor to edit static "([^"]*)" page$/) do |_opt, title|
   visit "/editor#{static_page_path(title)}"
 end
 

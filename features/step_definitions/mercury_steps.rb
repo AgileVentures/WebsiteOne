@@ -24,7 +24,7 @@ Then(/^I should be in the Mercury Editor$/) do
   expect(current_path).to match(/\/editor\//i)
 end
 
-When(/^I (try to use|am using) the Mercury Editor to edit ([^"]*) "([^"]*)"$/) do |opt, model, title|
+When(/^I (try to use|am using) the Mercury Editor to edit ([^"]*) "([^"]*)"$/) do |_opt, model, title|
   visit "/editor#{url_for_title(action: 'show', controller: model, title: title)}"
 end
 

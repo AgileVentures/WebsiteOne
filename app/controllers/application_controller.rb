@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     raise ::AgileVentures::AccessDenied.new(current_user, request) unless current_user.is_privileged?
   end
 
-  rescue_from ::AgileVentures::AccessDenied do |exception|
+  rescue_from ::AgileVentures::AccessDenied do |_exception|
     render file: "#{Rails.root}/public/403.html", status: 403, layout: false
   end
 

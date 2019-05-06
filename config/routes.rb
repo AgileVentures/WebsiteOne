@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   get '/mentors' => 'users#index', defaults: {title: 'Mentor'}
   get '/premium_members' => 'users#index', defaults: {title: 'Premium'}
 
-  get '/verify/:id' => redirect { |params, request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}" }
+  get '/verify/:id' => redirect { |params, _request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}" }
 
   post 'preview/article', to: 'articles#preview', :format => false
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
