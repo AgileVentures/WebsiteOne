@@ -1,9 +1,10 @@
 class PaypalAgreementController < ApplicationController
   def new
     @plan = Plan.find(params[:plan])
+    binding.pry
     session.delete(:user)
     session[:user] = params[:user] if params[:user]
-    if (@agreement = PaypalService.new.create_agreement(@plan.paypal_id)).error.nil?
+    if (@agreement = new_paypal_agreement).error.nil?
       @redirect_url = @agreement.links.find { |v| v.method == 'REDIRECT' }.href
       redirect_to @redirect_url
     else
