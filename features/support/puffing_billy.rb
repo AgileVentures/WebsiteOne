@@ -55,7 +55,7 @@ Billy.configure do |c|
   c.non_successful_cache_disabled = false
 end
 
-Before('@billy_directories') do |scenario, block|
+Before('@billy_directories') do |scenario, _block|
   Billy.configure do |c|
     feature_name = scenario.feature.name.underscore
     scenario_name = scenario.name.underscore

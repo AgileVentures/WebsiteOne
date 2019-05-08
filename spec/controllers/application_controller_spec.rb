@@ -49,11 +49,11 @@ describe ApplicationController do
       expect(session[:previous_url]).to_not eq('/events')
     end 
     it "should not store the path in the session if a delete request" do
-      delete  :events
+      delete :events
       expect(session[:previous_url]).to_not eq('/events')
     end 
     it "should not store the path in the session if a post request" do
-      post  :events
+      post :events
       expect(session[:previous_url]).to_not eq('/events')
     end 
   end
