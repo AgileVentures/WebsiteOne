@@ -1,7 +1,6 @@
 class PaypalAgreementController < ApplicationController
   def new
     @plan = Plan.find(params[:plan])
-    binding.pry
     session.delete(:user)
     session[:user] = params[:user] if params[:user]
     if (@agreement = new_paypal_agreement).error.nil?
