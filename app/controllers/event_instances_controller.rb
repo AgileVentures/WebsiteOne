@@ -5,9 +5,14 @@ class EventInstancesController < ApplicationController
 
   def update
     # authenticate_user_from_api! unless current_user
+    @event = Event.find(params[:event_id])
+
     params[:host_id] = current_user.id
     params[:url_set_directly] = true
-
+    params[:notify_hangout] = true
+    # params[:category] = @event.category
+    params[:for] = @event.for
+    params[:title] = "#{@event.name} - #{current_occurrence_time(@event.next_occurrences.first(1))}"
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
     event_instance_params = check_and_transform_params(event_instance)
     event_url = event_instance.hangout_url
@@ -49,9 +54,10 @@ class EventInstancesController < ApplicationController
   private
 
   def send_messages_to_social_media event, event_params, hangout_url_changed
-    begin
-      HangoutNotificationService.with event, current_user 
-      # if updating_hangout_url? event, hangout_url_changed
+    begin respond_to do |format|
+      format.json { render json: { hangout: "Hangout successfully posted" } }
+    end
+      HangoutNotificationService.with event, current_user if updating_hangout_url? event, hangout_url_changed
       YoutubeNotificationService.with event if updating_valid_yt_url? event, event_params
     rescue => e
       Rails.logger.error "Error sending hangout notifications:"
@@ -67,7 +73,7 @@ class EventInstancesController < ApplicationController
   end
 
   def slack_notify_hangout?
-    params[:notify_hangout] == 'true'
+    params[:notify_hangout] === true
   end
 
   def hangout_started? event
@@ -148,5 +154,13 @@ class EventInstancesController < ApplicationController
       end
     end
     return existing_participants
+  end
+
+  def current_occurrence_time(event)
+    time = nested_hash_value(event, :time)
+    return nil if time.nil?
+
+    event_date = time.strftime("%A, #{time.day.ordinalize} %b")
+    "#{event_date} at #{time.strftime("%I:%M%P (%Z)")}"
   end
 end
