@@ -50,9 +50,13 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    @project = Project.find(params[:project][:id])
     if @project.update_attributes(project_params)
       add_to_feed(:update)
-      redirect_to project_path(@project), notice: 'Project was successfully updated.'
+      respond_to do |format|
+        format.json { render json: { project: @project }}
+      end
+      # redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else
       # TODO change this to notify for invalid params
       flash.now[:alert] = 'Project was not updated.'
