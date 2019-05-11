@@ -19,7 +19,7 @@ describe CalendarController, type: :controller do
       get :index
       expect(response.body).to match(/BEGIN:VCALENDAR/)
       expect(response.body).to include(@name)
-      expect(response.body).to include(@event.start_datetime.strftime'%Y%m%d')
+      expect(response.body).to include(@event.start_datetime.strftime '%Y%m%d')
     end
   end
 end

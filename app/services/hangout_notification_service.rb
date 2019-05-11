@@ -23,6 +23,7 @@ class HangoutNotificationService
     # return unless Features.slack.notifications.enabled
     return if @event_instance.hangout_url.blank?
     channels = channels_for_project @event_instance.project
+    channels += @event_instance.channels_for_event
     message = "#{@event_instance.title}: <#{@event_instance.hangout_url}|click to join>"
     @here_message = "@here #{message}"
     @channel_message = "@channel #{message}"
@@ -34,7 +35,7 @@ class HangoutNotificationService
     return [] if project.nil? or project.slug.nil?
     project.slack_channel_codes
   end
-  
+
   def send_notifications channels
     return test_react_frontend_hangout_notification(channels) if channels.include? CHANNELS[:react_slack_tests]
     return post_premium_mob_hangout_notification if @event_instance.for == 'Premium Mob Members'

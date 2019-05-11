@@ -11,7 +11,8 @@ describe YoutubeNotificationService do
   let(:websiteone_channel_id) { 'C29J4QQ9W' }
   let(:premium_extra_channel_id) { 'C29J4QQ9M' }
   let(:premium_mob_trialists_channel_id) { 'C29J4QQ9F' }
-  
+  let(:new_members_channel_id) { 'C02G8J699' }
+
   describe '.post_yt_link' do
     let(:client) { spy(:slack_client) }
     
@@ -25,7 +26,9 @@ describe YoutubeNotificationService do
     end
     
     context('PairProgramming') do
-      let(:event_instance) { EventInstance.create(title: 'MockEvent', category: 'PairProgramming', hangout_url: 'mock_url', user: user ) }
+      let(:event_instance) { EventInstance.create(title: 'MockEvent', category: 'PairProgramming', hangout_url: 'mock_url', user: user, event_id: event_with_slack_channels.id ) }
+      let(:event_with_slack_channels) { FactoryBot.create(:event, slack_channels: Array(SlackChannel.create({ code: 'C02G8J699' }))) }
+      
       before { allow(event_instance).to receive(:for).and_return '' }
       
       it 'sends the correct slack message to the correct channels' do
@@ -36,6 +39,7 @@ describe YoutubeNotificationService do
         youtube_notification_service.with event_instance, client
         expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: general_channel_id))
         expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: websiteone_channel_id))
+        expect(client).to have_received(:chat_postMessage).with(expected_post_args.merge!(channel: new_members_channel_id))
       end
 
       it 'does not ping slack when the project is cs169' do

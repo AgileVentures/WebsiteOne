@@ -199,7 +199,7 @@ Then(/^I should see projects with the following language updates:$/) do |table|
   end
 end
 
-Then(/^I should see a GPA of "([^"]*)" for "([^"]*)"$/) do |gpa, project_name|
+Then(/^I should see a GPA of "([^"]*)" for "([^"]*)"$/) do |gpa, _project_name|
   within('ul#project-list') do
     expect(page).to have_css("li[title=\"#{gpa} CodeClimate GPA\"]")
   end

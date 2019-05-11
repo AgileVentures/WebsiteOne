@@ -65,6 +65,12 @@ describe HangoutNotificationService do
       text: here_message,
     }.merge!(default_post_args)
   end
+  let(:new_members_notification_post_args) do
+    {
+      channel: 'C02G8J699',
+      text: here_message,
+    }.merge!(default_post_args)
+  end
 
   let(:user) { User.new email: 'random@random.com' }
   let(:websiteone_project) { mock_model Project, slug: 'websiteone', slack_channel_codes: [ 'C29J4QQ9W' ] }
@@ -75,13 +81,25 @@ describe HangoutNotificationService do
   before { Features.slack.notifications.enabled = true }
   
   describe '.post_hangout_notification' do
+    let(:event_with_slack_channels) { FactoryBot.create(:event, slack_channels: Array(SlackChannel.create({ code: 'C02G8J699' }))) }
     let(:websiteone_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project, for: '' }
     let(:no_project_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: nil, for: '' }
     let(:project_with_no_slack_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: noslack_project, for: '' }
     let(:cs169_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: cs169_project, for: '' }
     let(:missing_url_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "  ", user: user, for: '' }
     let(:multiple_channel_hangout) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: multiple_channel_project, for: '' }
+    let(:event_instance_with_event_slack_channels) { mock_model EventInstance, title: 'MockEvent', category: "PairProgramming", hangout_url: "mock_url", user: user, project: websiteone_project, for: '', event_id: event_with_slack_channels.id }
     
+    before do
+      allow(websiteone_hangout).to receive(:channels_for_event).and_return([])
+      allow(no_project_hangout).to receive(:channels_for_event).and_return([])
+      allow(project_with_no_slack_hangout).to receive(:channels_for_event).and_return([])
+      allow(cs169_hangout).to receive(:channels_for_event).and_return([])
+      allow(missing_url_hangout).to receive(:channels_for_event).and_return([])
+      allow(multiple_channel_hangout).to receive(:channels_for_event).and_return([])
+      allow(event_instance_with_event_slack_channels).to receive(:channels_for_event).and_return(['C02G8J699'])
+    end
+
     context 'PairProgramming' do
       
       it 'sends the correct slack message to the correct channels when associated with a project' do
@@ -129,6 +147,15 @@ describe HangoutNotificationService do
 
         hangout_notification_service.with(multiple_channel_hangout, slack_client, gitter_client)
       end
+
+      it 'sends the correct slack message to the correct channels when associated with an event' do
+        expect(slack_client).to receive(:chat_postMessage).with(general_channel_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(websiteone_project_channel_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(pairing_notifications_channel_post_args)
+        expect(slack_client).to receive(:chat_postMessage).with(new_members_notification_post_args)
+        
+        hangout_notification_service.with(event_instance_with_event_slack_channels, slack_client, gitter_client)
+      end
     end
     
     context('Scrums') do
@@ -173,6 +200,8 @@ describe HangoutNotificationService do
       let(:general_channel_id) { 'C0TLAE1MH' }
       let(:pairing_notifications_channel_id) { 'C29J3DPGW' }
       let(:websiteone_channel_id) { 'C29J4QQ9W' }
+      
+      before { allow(premium_mob_hangout).to receive(:channels_for_event).and_return([]) }
       
       it 'posts hangout url to appropriate private channels' do
         expect(slack_client).to receive(:chat_postMessage).with(post_premium_mob_notification_post_args).once
