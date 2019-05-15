@@ -67,13 +67,6 @@ describe Event, :type => :model do
         expect(recent_event).not_to be_less_than_ten_till_start
       end
     end
-
-    context 'event sequence has been terminated' do
-      subject(:event) { build_stubbed :event, start_datetime: 1.year.ago, repeat_ends_on: 1.day.ago}
-      it 'returns false' do
-        expect(event).not_to be_less_than_ten_till_start
-      end
-    end
   end
 
   describe '#last_hangout' do
@@ -594,6 +587,15 @@ describe Event, :type => :model do
         )
         Delorean.time_travel_to(Time.parse('2018-10-28 10:30:00 UTC'))
         expect(Event.future_events.count).to eq(1)
+      end
+    end
+  end
+
+  context '#slack_channel_codes' do
+    context 'default' do
+      it 'should return an empty array' do
+        event = FactoryBot.build(:event, name: 'Event without slack channel associated')
+        expect(event.slack_channel_codes).to eq []
       end
     end
   end

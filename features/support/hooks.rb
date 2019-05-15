@@ -123,7 +123,7 @@ After('@omniauth, @omniauth-with-email, @omniauth-with-invalid-credentials') do
   OmniAuth.config.test_mode = false
 end
 
-Before('@rake') do |scenario|
+Before('@rake') do |_scenario|
   unless $rake
     require 'rake'
     Rake.application.rake_require 'tasks/github_content_for_static_pages'

@@ -129,7 +129,7 @@ Given(/^the date is "([^"]*)"$/) do |jump_date|
   Delorean.time_travel_to(Time.parse(@jump_date))
 end
 
-And(/^(\d+) minutes pass$/) do |minutes|
+And(/^(\d+) minutes pass$/) do |_minutes|
   mn = "\"45:00\""
   page.execute_script "window.clock.tick(#{mn});"
   sleep 5
@@ -302,7 +302,7 @@ Given(/^an event "([^"]*)"$/) do |event_name|
 end
 
 
-When(/^the HangoutConnection has pinged to indicate the event (start|continuing)$/) do |type|
+When(/^the HangoutConnection has pinged to indicate the event (start|continuing)$/) do |_type|
   participants = {"0"=>{"id"=>"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=>"true", "hasCamera"=>"true", "hasAppEnabled"=>"true", "isBroadcaster"=>"true", "isInBroadcast"=>"true", "displayIndex"=>"0", "person"=>{"id"=>"108533475599002820142", "displayName"=>"Alejandro Babio", "image"=>{"url"=>"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=>"false"}, "locale"=>"en", "na"=>"false"}}
   header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
   put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
@@ -335,16 +335,16 @@ Then(/^the hangout link will be sent$/) do
   end
 end
 
-Then(/^the event should (still )?be live$/) do |ignore|
+Then(/^the event should (still )?be live$/) do |_ignore|
   visit event_path(@event)
   expect(page).to have_content('JOIN THIS LIVE EVENT NOW')
 end
 
-And(/^after three (more )?minutes$/) do |ignore|
+And(/^after three (more )?minutes$/) do |_ignore|
   Delorean.time_travel_to '3 minutes from now'
 end
 
-And(/^after one (more )?minute$/) do |ignore|
+And(/^after one (more )?minute$/) do |_ignore|
   Delorean.time_travel_to '1 minute from now'
 end
 

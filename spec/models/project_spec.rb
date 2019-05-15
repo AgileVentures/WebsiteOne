@@ -6,6 +6,7 @@ describe Project, type: :model do
   it { is_expected.to have_many :documents}
   it { is_expected.to have_many :event_instances}
   it { is_expected.to have_many :commit_counts}
+  it { is_expected.to have_many :issue_trackers}
 
   it { is_expected.to belong_to :user}
 
@@ -190,15 +191,6 @@ describe Project, type: :model do
     it 'does not return projects that do not have a source repository' do
       project = FactoryBot.build(:project)
       expect(Project.with_github_url).not_to include(project)
-    end
-  end
-
-  describe '#send_notification_to_project_creator' do
-    it 'does not send an email when user\'s receive_mailings attribute is set to false' do
-      user = FactoryBot.create(:user, receive_mailings: false)
-      project = FactoryBot.create(:project, user: user)
-      mail = project.send_notification_to_project_creator(user)
-      expect(mail).to be_nil
     end
   end
 end

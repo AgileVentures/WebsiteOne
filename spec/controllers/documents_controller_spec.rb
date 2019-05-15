@@ -70,7 +70,7 @@ describe DocumentsController do
       it 'assigns the available categories to @categories' do
         get :get_doc_categories, params: params.merge({id: document.to_param})
         extended_categories = categories.push(document)
-        expect(assigns(:categories)).to  match_array extended_categories
+        expect(assigns(:categories)).to match_array extended_categories
       end
     end
   end

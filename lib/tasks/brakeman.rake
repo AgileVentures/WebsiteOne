@@ -1,7 +1,7 @@
 namespace :brakeman do
 
   desc 'Run Brakeman'
-  task :run, :output_files do |t, args|
+  task :run, :output_files do |_t, args|
     require 'brakeman'
 
     files = args[:output_files].split(' ') if args[:output_files]

@@ -19,7 +19,7 @@ on_worker_boot do
   end
 end
 
-after_worker_fork do |server, worker|
+after_worker_fork do |_server, _worker|
   ActiveRecord::Base.establish_connection
   Vanity.playground.establish_connection unless ENV['SEMAPHORE'] == 'true'
 end

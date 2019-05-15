@@ -26,6 +26,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.source_repositories.build
+    @project.issue_trackers.build
     @project.languages.build
   end
 
@@ -67,7 +68,7 @@ class ProjectsController < ApplicationController
     set_project
     if current_user
       current_user.follow(@project)
-      @project.send_notification_to_project_creator(current_user)
+      send_email_notifications
       redirect_to project_path(@project)
       flash[:notice] = "You just joined #{@project.title}."
     else
@@ -83,6 +84,15 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def send_email_notifications
+    ProjectMailer.with(project: @project, user: current_user, project_creator: @project.user).
+        alert_project_creator_about_new_member.deliver_now if @project.user.receive_mailings
+
+    ProjectMailer.with(project: @project, user: current_user, project_creator: @project.user).
+        welcome_project_joinee.deliver_now if current_user.receive_mailings
+  end
+
   def set_project
     @project = Project.friendly.find(params[:id])
   end
@@ -125,6 +135,7 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(:title, :description, :pitch, :created, :status,
                                     :user_id, :github_url, :pivotaltracker_url, :slack_channel_name,
                                     :pivotaltracker_id, :image_url, languages_attributes: [:name],
-                                    name_ids: [], source_repositories_attributes: [:id, :url, :_destroy])
+                                    name_ids: [], source_repositories_attributes: [:id, :url, :_destroy],
+                                    issue_trackers_attributes: [:id, :url, :_destroy])
   end
 end
