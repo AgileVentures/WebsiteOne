@@ -40,13 +40,13 @@ Feature: Subscribe Self to Premium
     And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
 
     # And my member page should show premium details # TODO IMPORTANT - require login?
-
+  @vcr
   Scenario: Pay by PayPal
     Given I have logged in
     And I visit "subscriptions/new"
     Then I should see a paypal subscribe button
     When Paypal API updates our endpoint for premium
-    Then "sam-buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium" email
+    Then "matt+buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium" email
     And I should see "Thanks, you're now an AgileVentures Premium Member!" in last_response
 
     # And my member page should show premium details # TODO IMPORTANT - will need hookup

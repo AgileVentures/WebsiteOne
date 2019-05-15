@@ -101,10 +101,8 @@ end
 
 And(/^Paypal API updates our endpoint for premium$/) do
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
-  get subscriptions_paypal_redirect_path payment_method: 'paypal',
-                                         payer_id: 'paypal_payer_id',
-                                         plan: 'premium',
-                                         email: 'sam-buyer@agileventures.org'
+  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premium'
+  get "#{paypal_create_path}?#{paypal.url_params}"
 end
 
 

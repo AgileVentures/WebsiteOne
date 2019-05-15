@@ -19,7 +19,7 @@ Feature: Subscribe Self to Premium
     And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium Mob" email
 
     # And my member page should show premium details # TODO IMPORTANT - require login?
-
+  @vcr
   Scenario: Pay by PayPal
     Given I have logged in
     And I visit "subscriptions/new?plan=premiummob"
