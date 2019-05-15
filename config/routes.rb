@@ -6,13 +6,13 @@ Rails.application.routes.draw do
 
   apipie
   mount Mercury::Engine => '/'
-  
+
   mount Events::API => '/'
   mount EventInstances::API => '/'
   mount Projects::API => '/'
   mount Users::API => '/'
   mount StaticPages::API => '/'
-  
+
   root 'visitors#index'
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   devise_for :users, controllers: {
     sessions: 'sessions',
-    registrations: 'api_registrations'
+    registrations: 'api_registrations',
+    passwords: 'passwords'
   }
   resources :users, :only => [:index, :show], :format => false do
     member do
@@ -89,7 +90,7 @@ Rails.application.routes.draw do
   patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
 
   get 'projects/:project_id/:id', to: 'documents#show', :format => false
-  
+
   get '/auth/github', to: 'authentication#github', format: false
   get '/auth/:provider/callback' => 'authentications#create', :format => false
   get '/auth/failure' => 'authentications#failure', :format => false
