@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :set_user_id
   before_action :get_next_scrum, :store_location, unless: -> { request.xhr? }
   before_action :configure_permitted_parameters, if: :devise_controller?
-  after_action :user_activity
+  # after_action :user_activity
 
   use_vanity :current_user
 
@@ -18,6 +18,20 @@ class ApplicationController < ActionController::Base
   include CustomErrors
 
   protected
+
+  def react_oauth_user
+    token = params[:token]
+    payload = TokiToki.decode(token)
+    @current_user ||= User.find(payload[0]["sub"])
+  end
+
+  def logged_in?
+    react_oauth_user != nil
+  end
+
+  def authenticate_user_from_api!
+    head :unauthorized unless logged_in?
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys:[
@@ -43,7 +57,7 @@ class ApplicationController < ActionController::Base
     raise ::AgileVentures::AccessDenied.new(current_user, request) unless current_user.is_privileged?
   end
 
-  rescue_from ::AgileVentures::AccessDenied do |exception|
+  rescue_from ::AgileVentures::AccessDenied do |_exception|
     render file: "#{Rails.root}/public/403.html", status: 403, layout: false
   end
 

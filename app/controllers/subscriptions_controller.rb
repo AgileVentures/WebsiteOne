@@ -18,7 +18,7 @@ class SubscriptionsController < ApplicationController
     create_stripe_customer unless paypal?
 
     add_appropriate_subscription(@user, current_user)
-    # Vanity.track!(:premium_signups)
+    Vanity.track!(:premium_signups)
     send_acknowledgement_email
     respond_to do |format|
       format.json { render json: { success: 'Subscription created' } }

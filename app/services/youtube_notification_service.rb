@@ -1,5 +1,6 @@
 require 'slack'
-require 'channels_list.rb'
+include ChannelsList
+
 class YoutubeNotificationService
   def self.with(event_instance,
                 slack_client = Slack::Web::Client.new(logger: Rails.logger)
@@ -18,7 +19,8 @@ class YoutubeNotificationService
     return unless Features.slack.notifications.enabled
     return if @event_instance.yt_video_id.blank?
     channels = channels_for_project @event_instance.project
-
+    channels += @event_instance.channels_for_event
+    
     video = "https://youtu.be/#{@event_instance.yt_video_id}"
     @yt_message = "Video/Livestream: <#{video}|click to play>"
 
@@ -27,9 +29,7 @@ class YoutubeNotificationService
 
   def channels_for_project project 
     return [] if project.nil? or project.slug.nil?
-    result = CHANNELS[project.try(:slug).to_sym]
-    return [result] unless result.respond_to? :each
-    result
+    project.slack_channel_codes
   end
 
   def send_notifications channels 

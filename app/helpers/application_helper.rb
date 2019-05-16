@@ -92,10 +92,10 @@ module ApplicationHelper
       if v.is_a?(Hash)
         # Bryan: this extra level is to support data tags
         v.each do |key, value|
-          s = %Q{#{s} #{k}-#{key.to_s.gsub(/_/, '-')}="#{value}"}
+          s = %Q{#{s} #{k}-#{key.to_s.tr('_', '-')}="#{value}"}
         end
       else
-        s = %Q{#{s} #{k.to_s}="#{v}"}
+        s = %Q{#{s} #{k}="#{v}"}
       end
     end
     # Bryan: data-link-text attribute is used to find this element in the tests

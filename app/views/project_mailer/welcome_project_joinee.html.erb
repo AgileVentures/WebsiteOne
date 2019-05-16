@@ -1,0 +1,15 @@
+<p>Hi <%= @user.first_name %>,</p>
+
+<p>Thanks so much for joining the <%= @project.title %> project!<% if @project.title == 'WebsiteOne' %> - as you might know, it's the Rails code that powers our main site - we coordinate via #websiteone on slack and there's a #websiteone-install channel for help to get set up.</p><% else %></p>
+<% end %>
+<% if @project.slack_channel_name.present? %>
+<p>We coordinate via <%= link_to "#{@project.title}", @project.slack_channel %> on slack and are looking forward to working with you.</p>
+<% end %>
+
+<p>Just reach out if there's anything you need.</p>
+
+<p>Best, <%= @project_creator.first_name %></p>
+
+<footer>
+  <p>You are receiving this email because you registered at <%= link_to "www.agileventures.org", root_url %>. If you wish to be removed from this mailing list, please login at av.org and go to your profile page and edit "Receive site emails" to be unchecked - if you are already logged in go directly to: <%= link_to "www.agileventures.org/users/edit", edit_user_registration_url %>.</p>
+</footer>

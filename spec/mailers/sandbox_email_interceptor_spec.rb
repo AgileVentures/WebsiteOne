@@ -9,7 +9,7 @@ describe SandboxEmailInterceptor do
        end
        it 'delivers all emails to user when intercept_emails is set to true' do
            stub_const('ENV', {'USER_EMAIL' => 'me@ymail.com'})
-           mail = Mailer.alert_project_creator_about_new_member(@project, @user2).deliver_now
+           mail = ProjectMailer.with(user: @user2, project: @project, project_creator: @user1).alert_project_creator_about_new_member.deliver_now
            SandboxEmailInterceptor.delivering_email(mail)
            expect(ActionMailer::Base.deliveries[0].to).to include(ENV['USER_EMAIL'])
        end

@@ -1,9 +1,11 @@
 class Event < ApplicationRecord
   has_many :event_instances
   belongs_to :project
+  belongs_to :creator, class_name: 'User'
+  has_and_belongs_to_many :slack_channels
+  
   serialize :exclusions
 
-  belongs_to :creator, class_name: 'User'
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -269,6 +271,10 @@ class Event < ApplicationRecord
 
   def modifier
     User.find modifier_id
+  end
+
+  def slack_channel_codes
+    slack_channels.pluck(:code)
   end
 
   private

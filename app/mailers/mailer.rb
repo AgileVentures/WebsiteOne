@@ -23,11 +23,4 @@ class Mailer < ActionMailer::Base
     subject = ['message from', @form[:name]].join(' ')
     mail(to: @user.email, reply_to: @form[:email], from: @form[:email], subject: subject)
   end
-  
-  def alert_project_creator_about_new_member(project, user) 
-    @user = user
-    @project = project
-    @project_creator = User.find(project.user_id)
-    mail(to: @project_creator.email, subject: "#{user.display_name} just joined #{project.title} project")
-  end
 end

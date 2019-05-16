@@ -64,6 +64,12 @@ class EventInstance < ApplicationRecord
     yt_video_id && "https://youtu.be/#{yt_video_id}"
   end
 
+  def channels_for_event
+    return [] if self.event_id.nil?
+    event = Event.find(self.event_id)
+    event.slack_channel_codes
+  end
+
   private
 
   def manually_updated_event_not_finished?

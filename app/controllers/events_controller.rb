@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  # before_action :authenticate_user_from_api!, except: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
   before_action :set_projects, only: [:new, :edit, :update, :create]
 
@@ -29,6 +29,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    authenticate_user_from_api! unless current_user
     params[:creator_id] = current_user.id
     EventCreatorService.new(Event).perform(transform_params,
                                                   success: -> (event) do

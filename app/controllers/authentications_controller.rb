@@ -7,24 +7,25 @@ class AuthenticationsController < ApplicationController
     omniauth = request.env['omniauth.auth']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
 
-    @path = request.env['omniauth.origin'] || root_path
-
     if authentication.present?
-      attempt_login_with_auth(authentication, @path)
-
-    elsif current_user
-      create_new_authentication_for_current_user(omniauth, @path)
+      # Generate token...
+      token = TokiToki.encode(authentication.user_id)
+      redirect_to "#{ENV['AGILEVENTURES_CLIENT_URL']}?token=#{token}"
       
-    elsif deactivated_user_with_email(omniauth['info']['email']).present?
-      show_deactivated_message_and_redirect_to_root and return
+      elsif current_user
+        create_new_authentication_for_current_user(omniauth, @path)
 
-    else
-      create_new_user_with_authentication(omniauth)
+      elsif deactivated_user_with_email(omniauth['info']['email']).present?
+        show_deactivated_message_and_redirect_to_root and return
+
+      else
+        create_new_user_with_authentication(omniauth)
     end
 
     if current_user && omniauth['provider']=='github' && current_user.github_profile_url.blank?
       link_github_profile
     end
+
   end
 
   def failure
@@ -115,5 +116,4 @@ class AuthenticationsController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
-
 end
