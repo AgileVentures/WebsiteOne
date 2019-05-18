@@ -5,7 +5,6 @@ class PasswordsController < Devise::PasswordsController
 
   def respond_with(resource, _opts = {})
     respond_to do |format|
-      puts resource, _opts
       format.html { render :new }
       format.json { render json: resource }
     end
