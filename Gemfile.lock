@@ -635,7 +635,7 @@ GEM
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
-    sucker_punch (2.1.1)
+    sucker_punch (2.1.2)
       concurrent-ruby (~> 1.0)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
