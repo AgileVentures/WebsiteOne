@@ -24,7 +24,8 @@ module GithubLanguagesJob
   def add_new_languages_to(project)
     begin
       new_languages_for(project).each { |language| project.languages << Language.find_or_create_by(name: language) }
-    rescue ActiveRecord::RecordNotUnique
+    rescue ActiveRecord::RecordNotUnique => error
+      log_error(error, project)
       retry
     end
   end
