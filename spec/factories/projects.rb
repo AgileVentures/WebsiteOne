@@ -8,6 +8,7 @@ FactoryBot.define do
     pitch { "'I AM the greatest!' - M. Ali" }
     status { "We feel your presence." }
 
+
     factory :project_with_tags do
       transient do
         tags { [generate(:tag), generate(:tag)] }
@@ -18,6 +19,15 @@ FactoryBot.define do
         project.save
       end
     end
-  end
 
+    factory :project_with_documents do
+      transient do
+        documents_count { 5 }
+      end
+
+      after(:create) do |project, evaluator|
+        create_list(:document, evaluator.documents_count, project: project)
+      end
+    end
+  end
 end
