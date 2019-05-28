@@ -93,16 +93,14 @@ end
 
 And(/^Paypal API updates our endpoint for premium mob$/) do
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
-  get subscriptions_paypal_redirect_path payment_method: 'paypal',
-                                         payer_id: 'paypal_payer_id',
-                                         plan: 'premiummob',
-                                         email: 'sam-buyer@agileventures.org'
+  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premiummob'
+  visit "#{paypal_create_path}?#{paypal.url_params}"
 end
 
 And(/^Paypal API updates our endpoint for premium$/) do
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
   paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premium'
-  get "#{paypal_create_path}?#{paypal.url_params}"
+  visit "#{paypal_create_path}?#{paypal.url_params}"
 end
 
 
@@ -121,6 +119,10 @@ end
 
 And(/^I should see "([^"]*)" in last_response$/) do |text|
   expect(last_response.body).to include(text)
+end
+
+And(/^I should see "([^"]*)" on the page$/) do |text|
+  expect(page).to have_content(text)
 end
 
 Then(/^I should see a tooltip explanation of Premium$/) do
