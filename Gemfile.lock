@@ -658,7 +658,7 @@ GEM
       activesupport
     vanity (3.0.0)
       i18n
-    vcr (4.0.0)
+    vcr (5.0.0)
     verbs (2.1.4)
       activesupport (>= 2.3.4)
       i18n
