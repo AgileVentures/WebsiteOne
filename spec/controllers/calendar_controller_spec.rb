@@ -8,7 +8,7 @@ describe CalendarController, type: :controller do
     before do
       @time = Time.now
       @name = "Test_Event"
-      @event = FactoryBot.create(:event, category: 'PairProgramming', name: @name, start_datetime: @time)
+      @event = FactoryBot.create(:event, category: 'PairProgramming', name: @name, start_datetime: @time, repeat_ends: false)
     end
     it 'with proper headers' do
       get :index

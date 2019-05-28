@@ -9,7 +9,7 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
       ActiveRecord::Migration.verbose = false
 
       EventCombineDateAndTimeFields.new.down
-      sql= %Q{INSERT INTO events (name, category, repeats, start_time, event_date, end_time, time_zone) VALUES ('test', 'PairProgramming', 'never', TIME'10:00', DATE'2013-06-17', TIME'11:00', 'UTC');}
+      sql= %Q{INSERT INTO events (name, category, repeats, start_time, event_date, end_time, time_zone, repeat_ends) VALUES ('test', 'PairProgramming', 'never', TIME'10:00', DATE'2013-06-17', TIME'11:00', 'UTC', true);}
       ApplicationRecord.connection.execute(sql)
     end
 

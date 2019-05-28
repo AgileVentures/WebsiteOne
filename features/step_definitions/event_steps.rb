@@ -47,6 +47,7 @@ Given(/^following events exist:$/) do |table|
   table.hashes.each do |hash|
     hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
     hash.delete('project')
+    hash[:repeat_ends] = false
     Event.create!(hash)
   end
 end
@@ -66,6 +67,7 @@ Given(/^following events exist for project "([^"]*)" with active hangouts:$/) do
   project = Project.where(title: "#{project_title}").take
 
   table.hashes.each do |hash|
+    hash[:repeat_ends] = false
     event = Event.create!(hash)
     event.event_instances.create(hangout_url: 'x@x.com',
                                  updated_at: 1.minute.ago,
