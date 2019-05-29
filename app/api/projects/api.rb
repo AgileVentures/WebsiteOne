@@ -16,13 +16,10 @@ module Projects
 
     resource :projects do
       desc 'Return projects list.'
+      params { optional :status, type: String, desc: 'Project status' }
       get '/' do
-        ordered_projects
-      end
-
-      desc 'Return all active projects'
-      get :active do
-        Project.active
+        return ordered_projects if !params['status']
+        params['status'] =='active' ? Project.active : nil        
       end
       
       desc "Return a project's languages"
