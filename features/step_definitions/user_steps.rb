@@ -64,7 +64,7 @@ Given /^(?:|I am) logged in as a premium user paid for the plan via PayPal$/ do
   get subscriptions_paypal_redirect_path payment_method: 'paypal',
                                          payer_id: 'paypal_payer_id',
                                          plan: 'premium',
-                                         email: 'sam-buyer@agileventures.org'
+                                         email: 'matt+buyer@agileventures.org'
 end
 
 Given /^(?:|I am) logged in as a CraftAcademy premium user$/ do

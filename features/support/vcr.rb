@@ -15,7 +15,7 @@ VCR.configure do |c|
   c.filter_sensitive_data('<GITHUB_CLIENT_ID>') { ENV['GITHUB_KEY'] }
   c.filter_sensitive_data('<GITHUB_CLIENT_SECRET>') { ENV['GITHUB_SECRET'] }
   c.filter_sensitive_data('<AUTHORIZATION_HEADERS>') do |interaction|
-    interaction.request.headers['Authorization'].first
+    interaction.request.headers['Authorization'].try(:first)
   end
 end
 

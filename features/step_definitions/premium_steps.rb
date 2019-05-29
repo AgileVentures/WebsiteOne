@@ -93,13 +93,13 @@ end
 
 And(/^Paypal API updates our endpoint for premium mob$/) do
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
-  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premiummob'
+  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premiummob', nil
   visit "#{paypal_create_path}?#{paypal.url_params}"
 end
 
 And(/^Paypal API updates our endpoint for premium$/) do
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
-  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premium'
+  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premium', nil
   visit "#{paypal_create_path}?#{paypal.url_params}"
 end
 

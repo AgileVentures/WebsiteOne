@@ -45,5 +45,5 @@ Feature: Subscribe Self to Premium
     And I visit "subscriptions/new?plan=premiummob"
     Then I should see a paypal subscribe button
     When Paypal API updates our endpoint incorrectly
-    Then "sam-buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium Mob" email
+    Then "matt+buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium Mob" email
     And I should see "redirected" in last_response

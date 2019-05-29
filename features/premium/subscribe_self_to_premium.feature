@@ -66,7 +66,7 @@ Feature: Subscribe Self to Premium
     And I visit "subscriptions/new"
     Then I should see a paypal subscribe button
     When Paypal API updates our endpoint incorrectly
-    Then "sam-buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium" email
+    Then "matt+buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium" email
     And I should see "redirected" in last_response
 
   Scenario: Pay by card, and default to Premium

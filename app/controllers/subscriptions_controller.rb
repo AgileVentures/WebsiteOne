@@ -14,7 +14,7 @@ class SubscriptionsController < ApplicationController
     @user = detect_user
     @plan = detect_plan_after_payment
     @sponsored_user = sponsored_user?
-
+    
     create_stripe_customer unless paypal?
 
     add_appropriate_subscription(@user, current_user)
