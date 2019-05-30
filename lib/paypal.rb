@@ -1,11 +1,14 @@
 class Paypal
-  def initialize(item_number, item_name, payer_email)
-    @item_number = item_number
-    @item_name = item_name
-    @payer_email = payer_email
+  def initialize(token, email, payer_id, payment_method, plan, user)
+    @payer_id = payer_id
+    @plan = plan
+    @email = email
+    @payment_method = payment_method
+    @token = token
+    @user = user
   end
 
   def url_params
-    "item_number=#{@item_number}&item_name=#{@item_name}&payer_email=#{@payer_email}"
+    "token=#{@token}&email=#{@email}&payer_id=#{@payer_id}&payment_method=#{@payment_method}&plan=#{@plan}&user=#{@user}"
   end    
 end

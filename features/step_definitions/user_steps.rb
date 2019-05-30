@@ -60,11 +60,11 @@ Given /^(?:|I am) logged in as a premium user paid for the plan via PayPal$/ do
     fill_in 'user_password', :with => @current_user.password
     click_button 'Sign in'
   end
-  body = PAYPAL_REDIRECT_BODY.clone
-  body['item_name'] = 'Premium'
-  body['payer_email'] = @current_user.email
-  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
-  post subscriptions_path, body
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
+  get subscriptions_paypal_redirect_path payment_method: 'paypal',
+                                         payer_id: 'paypal_payer_id',
+                                         plan: 'premium',
+                                         email: 'matt+buyer@agileventures.org'
 end
 
 Given /^(?:|I am) logged in as a CraftAcademy premium user$/ do

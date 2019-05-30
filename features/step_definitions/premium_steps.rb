@@ -55,6 +55,13 @@ Then(/^I should see a paypal form$/) do
   expect(page).to have_xpath("//form[@action='https://www.sandbox.paypal.com/cgi-bin/webscr']")
 end
 
+Then("I should see a paypal subscribe button") do
+  within('#paypal_section') do
+    expect(page).to have_css('input[src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif"]')
+  end
+end
+
+
 Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
     hash['amount'] = Integer(hash['amount'])
@@ -84,71 +91,38 @@ Given(/^my card will be rejected$/) do
   StripeMock.prepare_card_error(:card_declined, :new_customer)
 end
 
-PAYPAL_REDIRECT_BODY = {'CONTEXT' => 'wtgSziM4C5x0SI-9CmKcv2vkSeTLK5P_g6HqzC__YTYkcqziFNcB84p79Ja',
-                        'txn_type' => 'subscr_signup',
-                        'subscr_id' => 'I-PEG1KSWM8TBU',
-                        'last_name' => 'buyer',
-                        'residence_country' => 'GB',
-                        'mc_currency' => 'GBP',
-                        'business' => 'sam-facilitator@agileventures.org',
-                        'recurring' => '1',
-                        'payer_status' => 'verified',
-                        'first_name' => 'test',
-                        'receiver_email' => 'sam-facilitator@agileventures.org',                        
-                        'payer_id' => '9EG5X4H5DJJW4', 
-                        'reattempt' => '1',
-                        'item_number' => 'not logged in',
-                        'subscr_date' => '10:07:19 Dec 12, 2016 PST',
-                        'charset' => 'windows-1252',
-                        'period1' => '7 D',
-                        'mc_amount1' => '0.00',
-                        'period3' => '1 M',
-                        'mc_amount3' => '10.00',
-                        'auth' => 'A31jSI5vY44zpPcQlAUk8WdibsJJT72rGx6ptiGPil6MG30OuCoFtHJ38.CJmmBQ.NNbZg.XEaWj298bVa5FZIw',
-                        'form_charset' => 'UTF-8'}
-
-And(/^Paypal updates our endpoint$/) do
-  body = PAYPAL_REDIRECT_BODY.clone
-  body['item_name'] = 'Premium'
-  body['payer_email'] = 'sam-buyer@agileventures.org'
-  post subscriptions_path, body
-end
-
-And(/^Paypal updates our endpoint for premium mob$/) do
-  body = PAYPAL_REDIRECT_BODY.clone
-  body['item_name'] = 'Premium Mob'
-  body['payer_email'] = 'sam-buyer@agileventures.org'
-  post subscriptions_path, body
-end
-
-And(/^Paypal updates our endpoint for premium mob via get$/) do
-  paypal = Paypal.new 'not sponsored', 'Premium Mob', 'sam-buyer@agileventures.org'
+And(/^Paypal API updates our endpoint for premium mob$/) do
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
-  get "#{subscriptions_paypal_redirect_path}?#{paypal.url_params}"
+  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premiummob', nil
+  visit "#{paypal_create_path}?#{paypal.url_params}"
 end
 
-And(/^Paypal updates our endpoint after sponsoring Alice$/) do
-  body = PAYPAL_REDIRECT_BODY.clone
-  body['item_name'] = 'Premium'
-  body['payer_email'] = 'sam-buyer@agileventures.org'
-  body['item_number'] = 'alice-jones'
-
-  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
-  post subscriptions_path, body
+And(/^Paypal API updates our endpoint for premium$/) do
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
+  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premium', nil
+  visit "#{paypal_create_path}?#{paypal.url_params}"
 end
 
-And(/^Paypal updates our endpoint after sponsoring Alice via get$/) do
-  paypal = Paypal.new 'alice-jones', 'Premium', 'sam-buyer@agileventures.org'
-  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value};"
-  get "#{subscriptions_paypal_redirect_path}?#{paypal.url_params}"
+
+And(/^Paypal API updates our endpoint after sponsoring Alice$/) do
+  set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
+  get subscriptions_paypal_redirect_path payment_method: 'paypal',
+                                         payer_id: 'paypal_payer_id',
+                                         plan: 'premium',
+                                         email: 'sam-buyer@agileventures.org',
+                                         user: 'alice-jones'
 end
 
-And(/^Paypal updates our endpoint incorrectly$/) do
-  post subscriptions_path, PAYPAL_REDIRECT_BODY
+And(/^Paypal API updates our endpoint incorrectly$/) do
+  get subscriptions_paypal_redirect_path
 end
 
 And(/^I should see "([^"]*)" in last_response$/) do |text|
   expect(last_response.body).to include(text)
+end
+
+And(/^I should see "([^"]*)" on the page$/) do |text|
+  expect(page).to have_content(text)
 end
 
 Then(/^I should see a tooltip explanation of Premium$/) do

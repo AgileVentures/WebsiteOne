@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   resources :cards, only: [:create, :update, :edit, :new]
   resources :subscriptions, only: [:create, :update, :new]
   get '/subscriptions_paypal_redirect' => 'subscriptions#create'
+  post '/paypal/new' => 'paypal_agreement#new'
+  get '/paypal/create' => 'paypal_agreement#create'
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show], :format => false do
