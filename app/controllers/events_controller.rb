@@ -103,19 +103,11 @@ class EventsController < ApplicationController
   def check_days_of_week(event_params)
     # local timezone vs utc timezone
     offset= (DateTime.parse(params[:start_date]).wday - event_params[:start_datetime].wday)%7
-    days=[]
-    if offset==0
-      return
-    elsif offset==1 
-      params["event"]["repeats_weekly_each_days_of_the_week"].each do |day|
-        days<<Date::DAYNAMES[(Date.parse(day).wday-1)%7].downcase if day !=""
-      end
-    else
-      params["event"]["repeats_weekly_each_days_of_the_week"].each do |day|
-        days<<Date::DAYNAMES[(Date.parse(day).wday+1)%7].downcase if day !=""
-      end
+    return if offset==0
+    event_params["repeats_weekly_each_days_of_the_week"]=[]
+    params["event"]["repeats_weekly_each_days_of_the_week"].each do |day|
+      event_params["repeats_weekly_each_days_of_the_week"]<<Date::DAYNAMES[(Date.parse(day).wday-offset)%7].downcase if day !=""
     end
-    event_params["repeats_weekly_each_days_of_the_week"]=days
   end
 
   def next_date_offset(tz)
