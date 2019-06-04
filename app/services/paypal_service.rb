@@ -7,7 +7,22 @@ PayPal::SDK::REST.set_config(
 )
 
 class PaypalService
-  def create_agreement(id)
+  def initialize(plan)
+    @plan = plan
+  end
+
+  def create_and_activate_recurring_plan
+    plan = if  @plan.third_party_identifier === 'premium'
+             PayPal::SDK::REST::Plan.new(plan_params_with_trial)
+           else
+             PayPal::SDK::REST::Plan.new(plan_params_without_trial)
+           end
+    plan.update(activate_plan_params) if plan.create
+    plan
+  end
+
+  def create_agreement
+    id = @plan.paypal_id
     plan = PayPal::SDK::REST::Plan.find(id)
     agreement = PayPal::SDK::REST::Agreement.new(agreement_params(plan))
     agreement.create
@@ -22,6 +37,92 @@ class PaypalService
 
   private
   
+  def activate_plan_params
+    {
+      op: 'replace',
+      value: { state: 'ACTIVE' },
+      path: '/'
+    }
+  end
+
+  def plan_params_with_trial
+    {
+      name: @plan.name,
+      description: "#{@plan.name} membership for £#{@plan.amount / 100}/month",
+      type: 'FIXED',
+      payment_definitions: [
+        {
+          name: "Regular payment definition",
+          type: "REGULAR",
+          frequency_interval: "1",
+          frequency: "MONTH",
+          cycles: "12",
+          amount:
+          {
+            currency: "GBP",
+            value: @plan.amount / 100
+          }
+        },
+        {
+          name: "Trial payment definition",
+          type: "trial",
+          frequency_interval: "1",
+          frequency: "week",
+          cycles: "1",
+          amount:
+          {
+            currency: "GBP",
+            value: "0"
+          }
+        }],
+      merchant_preferences: {
+        setup_fee:
+        {
+          currency: "GBP",
+          value: "0"
+        },
+        return_url: "#{ENV['BASE_URL']}/paypal/create?plan=#{@plan.third_party_identifier}",
+        cancel_url: "#{ENV['BASE_URL']}/subscriptions/new?plan=#{@plan.third_party_identifier}",
+        auto_bill_amount: "YES",
+        initial_fail_amount_action: "CONTINUE",
+        max_fail_attempts: "0"
+      },
+    }
+  end
+
+  def plan_params_without_trial
+    {
+      name: @plan.name,
+      description:  "#{@plan.name} membership for £#{@plan.amount / 100}/month",
+      type: 'FIXED',
+      payment_definitions: [
+        {
+          name: "Regular payment definition",
+          type: "REGULAR",
+          frequency_interval: "1",
+          frequency: "MONTH",
+          cycles: "12",
+          amount:
+          {
+            currency: "GBP",
+            value: @plan.amount / 100
+          }
+        }],
+      merchant_preferences: {
+        setup_fee:
+        {
+          currency: "GBP",
+          value: "0"
+        },
+        return_url: "#{ENV['BASE_URL']}/paypal/create?plan=#{@plan.third_party_identifier}",
+        cancel_url: "#{ENV['BASE_URL']}/subscriptions/new?plan=#{@plan.third_party_identifier}",
+        auto_bill_amount: "YES",
+        initial_fail_amount_action: "CONTINUE",
+        max_fail_attempts: "0"
+      },
+    }
+  end
+
   def agreement_params(plan)
     {
       name: plan.name,
