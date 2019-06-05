@@ -12,11 +12,8 @@ class PaypalService
   end
 
   def create_and_activate_recurring_plan
-    plan = if  @plan.third_party_identifier === 'premium'
-             PayPal::SDK::REST::Plan.new(plan_params_with_trial)
-           else
-             PayPal::SDK::REST::Plan.new(plan_params_without_trial)
-           end
+    plan_type = @plan.third_party_identifier === 'premium' ? plan_params_with_trial : plan_params_without_trial
+    plan = PayPal::SDK::REST::Plan.new(plan_type)
     plan.update(activate_plan_params) if plan.create
     plan
   end
