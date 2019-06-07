@@ -33,7 +33,7 @@ Feature: Start Events
 
   Scenario: Should not see Event time message and link when the event is live
     Given an event "Scrum"
-    And the HangoutConnection has pinged to indicate the event start
+    And the "Scrum" host has started the event
     When I am on the show page for event "Scrum"
     Then I should not see "It's time! Please start the event."
     When I am on events index page

@@ -1,4 +1,4 @@
-@vcr @disable_twitter @javascript
+@vcr @disable_twitter
 Feature: Live Events
   As a site user
   In order to be able participate in an event with others
