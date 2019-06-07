@@ -61,15 +61,11 @@ class EventInstancesController < ApplicationController
   end
 
   def updating_hangout_url? event, hangout_url_changed
-    (slack_notify_hangout? && event.hangout_url?) || (hangout_started?(event) && hangout_url_changed)
+    (slack_notify_hangout? && event.hangout_url?) || (event.started? && hangout_url_changed)
   end
 
   def slack_notify_hangout?
     params[:notify_hangout] == 'true'
-  end
-
-  def hangout_started? event
-    event.started?
   end
 
   def updating_valid_yt_url? event, event_params
