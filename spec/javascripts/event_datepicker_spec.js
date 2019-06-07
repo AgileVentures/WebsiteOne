@@ -42,4 +42,12 @@ describe('eventDatePicker', function(){
     expect($('#repeat_ends_on')).toBeHidden();
   });
 
+  it('set repeat-ends-on to an empty string when it is set and changed to never', function () {
+    set_event_repeats_to_weekly();
+    $("#repeat_ends_on").val('2019-08-01')
+    set_event_repeat_ends_to_never();
+    expect($('#repeat_ends_on')).toBeHidden();
+    expect($('#repeat_ends_on_label')).toBeHidden();
+    expect($('#repeat_ends_on').val()).toEqual('');
+  });
 });
