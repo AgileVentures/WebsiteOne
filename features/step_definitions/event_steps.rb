@@ -304,12 +304,15 @@ Given(/^an event "([^"]*)"$/) do |event_name|
 end
 
 
-When(/^the HangoutConnection has pinged to indicate the event (start|continuing)$/) do |_type|
-  participants = {"0"=>{"id"=>"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=>"true", "hasCamera"=>"true", "hasAppEnabled"=>"true", "isBroadcaster"=>"true", "isInBroadcast"=>"true", "displayIndex"=>"0", "person"=>{"id"=>"108533475599002820142", "displayName"=>"Alejandro Babio", "image"=>{"url"=>"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=>"false"}, "locale"=>"en", "na"=>"false"}}
-  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
-  put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
-                               participants: participants, hangout_url: 'http://hangout.test',
-                               hoa_status: 'live', project_id: '1', category: 'Scrum', yt_video_id: '11'}
+Given("the {string} host has started the event") do |event|
+  @event = Event.find_by(name: event)
+  create_user
+  sign_in
+  visit event_path(@event)
+  click_button('Event Actions')
+  click_link('Edit hangout link')
+  fill_in('hangout_url', with: 'http://hangout.test')
+  click_button('Save')
 end
 
 Then(/^appropriate tweets will be sent$/) do

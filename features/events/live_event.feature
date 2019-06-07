@@ -1,4 +1,4 @@
-@vcr @disable_twitter
+@vcr @disable_twitter @javascript
 Feature: Live Events
   As a site user
   In order to be able participate in an event with others
@@ -11,7 +11,7 @@ Feature: Live Events
 
   Scenario: Event is seen to be live when event is started a minute previously
     Given an event "Scrum"
-    And the HangoutConnection has pinged to indicate the event start
+    And the "Scrum" host has started the event
     Then the event should be live
     And after one minute
     Then the event should still be live
@@ -29,7 +29,7 @@ Feature: Live Events
 
   Scenario: Lack of ping from HangoutConnection after two minutes kills events
     Given an event "Scrum"
-    And the HangoutConnection has pinged to indicate the event start
+    And the "Scrum" host has started the event
     Then the event should be live
     And after three minutes
     Then the event should be dead
