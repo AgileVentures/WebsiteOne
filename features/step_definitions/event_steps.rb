@@ -312,7 +312,7 @@ Given("the {string} host has started the event") do |event|
   click_button('Event Actions')
   click_link('Edit hangout link')
   fill_in('hangout_url', with: 'http://hangout.test')
-  click_button('Save')
+  click_button('hoa_link_save')
 end
 
 Then(/^appropriate tweets will be sent$/) do
