@@ -139,26 +139,4 @@ describe EventInstancesController do
       end
     end
   end
-
-  describe 'CORS handling' do
-    it 'drops request if the origin is not allowed' do
-      allow(controller).to receive(:allowed?).and_return(false)
-      get :update, params: params
-      expect(response.status).to eq(400)
-    end
-
-    it 'sets CORS headers' do
-      headers = { 'Access-Control-Allow-Origin' => 'http://test.com',
-                  'Access-Control-Allow-Methods' => 'PUT' }
-      request.headers.merge!(headers)
-      get :update, params: params
-      expect(response.headers.to_h).to include(headers)
-    end
-
-    it 'responses OK on preflight check' do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-      get :update, params: params
-      expect(response.status).to eq(200)
-    end
-  end
 end
