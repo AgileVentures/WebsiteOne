@@ -104,7 +104,7 @@ class EventInstancesController < ApplicationController
         category: params[:category],
         user_id: params[:host_id],
         hangout_participants_snapshots_attributes: [{participants: params[:participants]}],
-        participants: merge_participants(event_instance.participants, params[:participants]),
+        participants: params[:participants],
         hangout_url: params[:hangout_url],
         yt_video_id: YouTubeRails.extract_video_id(params[:yt_url]) || params[:yt_video_id],
         hoa_status: params[:hoa_status],
@@ -112,16 +112,5 @@ class EventInstancesController < ApplicationController
         updated_at: Time.now,
         youtube_tweet_sent: params[:you_tube_tweet_sent]
     ).permit!
-  end
-
-  def merge_participants(existing_participants, new_participants)
-    return new_participants unless existing_participants
-    return existing_participants unless new_participants
-    new_participants.each do |_, v|
-      unless existing_participants.values.any? { |struc| struc['person']['id'] == v['person']['id'] }
-        existing_participants[existing_participants.length.to_s] = v
-      end
-    end
-    return existing_participants
   end
 end
