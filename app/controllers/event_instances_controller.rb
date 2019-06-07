@@ -4,13 +4,11 @@ class EventInstancesController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update_link, :update]
 
   def update
-    event_instance = EventInstance.find_or_create_by(uid: params[:id])
-    event_instance_params = check_and_transform_params(event_instance)
-    event_url = event_instance.hangout_url
-    hangout_url_changed = event_url != event_instance_params[:hangout_url]
-    if event_instance.try!(:update, event_instance_params)
-      send_messages_to_social_media event_instance, event_instance_params, hangout_url_changed
-      redirect_to(event_path params[:event_id]) && return if local_request? && params[:event_id].present?
+    @event_instance = EventInstance.find_or_create_by(uid: params[:id])
+    @event_instance_params = check_and_transform_params(@event_instance)
+    if @event_instance.try!(:update, @event_instance_params)
+      send_messages_to_social_media @event_instance, @event_instance_params, hangout_url_changed?
+      redirect_to(event_path params[:event_id]) && return if local_event?
       head :ok
     else
       head :internal_server_error
@@ -40,6 +38,14 @@ class EventInstancesController < ApplicationController
   end
 
   private
+
+  def local_event?
+    local_request? && params[:event_id].present?
+  end
+
+  def hangout_url_changed?
+    @event_instance.hangout_url != @event_instance_params[:hangout_url]
+  end
 
   def send_messages_to_social_media event, event_params, hangout_url_changed
     begin
