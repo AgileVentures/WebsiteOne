@@ -30,7 +30,7 @@ As a site user
   Scenario: Show event calendar download link
     Given I am on Events index page
     Then  I should see a link "calendar" to "/calendar"
-  
+
   Scenario: Show event calendar download link
     Given I am on Events index page
     When I click the "calendar" link
@@ -42,7 +42,7 @@ As a site user
 
   Scenario: Shows event past end time when still live
     Given an event "Still Live"
-    And the HangoutConnection has pinged to indicate the event start
+    And the "Still Live" host has started the event
     Then the event should be live
     Given I am on Events index page
     Then I should see "Still Live"
