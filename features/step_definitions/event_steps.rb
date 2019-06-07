@@ -353,16 +353,6 @@ And(/^after one (more )?minute$/) do |_ignore|
   Delorean.time_travel_to '1 minute from now'
 end
 
-When(/^the HangoutConnection pings to indicate the event is ongoing$/) do
-  event_instance = @event.event_instances.first
-  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
-  put "/hangouts/#{event_instance.uid}", {title: event_instance.title, host_id: event_instance.user_id, event_id: @event.id,
-                                          participants: event_instance.participants, hangout_url: event_instance.hangout_url,
-                                          hoa_status: 'live', project_id: event_instance.project_id, category: event_instance.category,
-                                          yt_video_id: event_instance.yt_video_id}
-
-end
-
 Then(/^the event should be dead$/) do
   visit event_path(@event)
   expect(page).not_to have_content('JOIN THIS LIVE EVENT NOW')
