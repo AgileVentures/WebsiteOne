@@ -1,7 +1,7 @@
 class EventInstancesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :cors_preflight_check, except: [:index, :edit, :update_link]
-  before_action :authenticate_user!, only: [:edit, :update_link]
+  before_action :authenticate_user!, only: [:edit, :update_link, :update]
 
   def update
     event_instance = EventInstance.find_or_create_by(uid: params[:id])
