@@ -4,9 +4,8 @@ class EventInstancesController < ApplicationController
 
   def update
     @event_instance = EventInstance.find_or_create_by(uid: params[:id])
-    @event_instance_params = check_and_transform_params(@event_instance)
-    if @event_instance.try!(:update, @event_instance_params)
-      send_messages_to_social_media @event_instance, @event_instance_params, hangout_url_changed?
+    if @event_instance.try!(:update, whitelist_params)
+      send_messages_to_social_media @event_instance, whitelist_params, hangout_url_changed?
       redirect_to(event_path params[:event_id]) && return if local_event?
       head :ok
     else
@@ -43,7 +42,7 @@ class EventInstancesController < ApplicationController
   end
 
   def hangout_url_changed?
-    @event_instance.hangout_url != @event_instance_params[:hangout_url]
+    @event_instance.hangout_url != whitelist_params[:hangout_url]
   end
 
   def send_messages_to_social_media event, event_params, hangout_url_changed
@@ -89,14 +88,14 @@ class EventInstancesController < ApplicationController
     true
   end
 
-  def check_and_transform_params(event_instance)
+  def whitelist_params
     params.require(:host_id)
     params.require(:title)
 
-    transform_params(event_instance)
+    transform_params.permit!
   end
 
-  def transform_params(event_instance)
+  def transform_params
     ActionController::Parameters.new(
         title: params[:title],
         project_id: params[:project_id],
@@ -111,6 +110,6 @@ class EventInstancesController < ApplicationController
         url_set_directly: params[:url_set_directly],
         updated_at: Time.now,
         youtube_tweet_sent: params[:you_tube_tweet_sent]
-    ).permit!
+    )
   end
 end
