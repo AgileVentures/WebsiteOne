@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   resources :event_instances, :only => [:edit]
   patch '/event_instances/:id', to: 'event_instances#update_link'
 
-  resources :projects, :format => false do
+  resources :projects, except: [:destroy], :format => false do
     member do
       put :mercury_update
       get :mercury_saved
