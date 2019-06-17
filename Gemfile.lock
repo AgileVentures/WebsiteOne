@@ -467,7 +467,7 @@ GEM
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     public_suffix (3.1.0)
-    puffing-billy (2.1.0)
+    puffing-billy (2.1.1)
       addressable (~> 2.5)
       em-http-request (~> 1.1, >= 1.1.0)
       em-synchrony
@@ -781,7 +781,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
-  puffing-billy (~> 2.1.0)
+  puffing-billy (~> 2.1.1)
   puma
   rack-cache
   rack-cors
