@@ -39,7 +39,7 @@ class Project < ApplicationRecord
   end
 
   def self.search(search, page)
-    order('LOWER(title)')
+    order(Arel.sql('LOWER(title)'))
       .where('title LIKE ?', "%#{search}%")
       .paginate(per_page: 9, page: page)
   end
