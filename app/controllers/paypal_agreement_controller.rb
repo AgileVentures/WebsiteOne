@@ -26,6 +26,6 @@ class PaypalAgreementController < ApplicationController
   private
   
   def new_paypal_agreement
-    PaypalService.new.create_agreement(@plan.paypal_id)
+    PaypalService.new(@plan).create_agreement
   end
 end

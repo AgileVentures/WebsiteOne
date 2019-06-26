@@ -14,7 +14,7 @@ describe PaypalAgreementController, type: :request do
     let(:agreement) { double :agreement, error: nil, links: json_object_links }
 
     it 'redirects to a redirect url on successful agreement creation' do
-      allow_any_instance_of(PaypalService).to receive(:create_agreement).with(premium_plan.paypal_id).and_return(agreement)
+      allow_any_instance_of(PaypalService).to receive(:create_agreement).and_return(agreement)
       post '/paypal/new', params: { plan: premium_plan.id }
       expect(response).to redirect_to(redirect_url)
     end    
