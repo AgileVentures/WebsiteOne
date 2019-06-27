@@ -649,7 +649,7 @@ GEM
       unicode-display_width (~> 1.5)
       unicode_utils (~> 1.4)
     strings-ansi (0.1.0)
-    stripe (4.19.0)
+    stripe (4.20.0)
       faraday (~> 0.13)
       net-http-persistent (~> 3.0)
     stripe-ruby-mock (2.5.7)
