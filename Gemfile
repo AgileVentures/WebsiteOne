@@ -93,7 +93,7 @@ group :test do
   gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
-  gem 'stripe-ruby-mock', '~> 2.5.7', require: 'stripe_mock'
+  gem 'stripe-ruby-mock', '~> 2.5.8', require: 'stripe_mock'
   gem 'vcr'
   gem 'webmock'
   gem 'webrat'

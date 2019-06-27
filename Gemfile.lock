@@ -652,7 +652,7 @@ GEM
     stripe (4.20.0)
       faraday (~> 0.13)
       net-http-persistent (~> 3.0)
-    stripe-ruby-mock (2.5.7)
+    stripe-ruby-mock (2.5.8)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (>= 2.0.3)
@@ -835,7 +835,7 @@ DEPENDENCIES
   spinjs-rails
   sprockets-rails (~> 3.2, >= 3.2.1)
   stripe
-  stripe-ruby-mock (~> 2.5.7)
+  stripe-ruby-mock (~> 2.5.8)
   sucker_punch
   therubyracer
   turbolinks
