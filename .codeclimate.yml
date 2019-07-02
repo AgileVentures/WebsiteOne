@@ -1,12 +1,10 @@
 ---
 version: "2"
 checks:
+  identical-code:
+    enabled: false
   similar-code:
-    enabled: true
-    config:
-      threshold: 3
-      languages:
-      - ruby
+    enabled: false
 plugins:
   brakeman:
     enabled: true
@@ -14,6 +12,12 @@ plugins:
     enabled: true
   coffeelint:
     enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        ruby:
+          count_threshold: 3
   eslint:
     enabled: true
   fixme:
