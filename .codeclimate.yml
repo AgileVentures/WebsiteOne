@@ -1,24 +1,5 @@
 ---
 version: "2"
-checks:
-  similar-code:
-    enabled: true
-    config:
-      threshold: 3
-      languages:
-      - ruby
-      - javascript
-      - python
-      - php
-  identical-code:
-    enabled: true
-    config:
-      threshold: 3
-      languages:
-      - ruby
-      - javascript
-      - python
-      - php
 plugins:
   brakeman:
     enabled: true
