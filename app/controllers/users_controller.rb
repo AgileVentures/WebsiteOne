@@ -34,8 +34,6 @@ class UsersController < ApplicationController
         message_params['email'].blank? or
         message_params['message'].blank?
       redirect_back fallback_location: root_path, alert: 'Please fill in Name, Email and Message field'
-    elsif !User.find(message_params['recipient_id']).display_hire_me
-      redirect_back fallback_location: root_path, alert: 'User has disabled hire me button'
     elsif !Devise.email_regexp.match(message_params['email'])
       redirect_back fallback_location: root_path, alert: 'Please give a valid email address'
     elsif !message_params['fellforit'].blank?

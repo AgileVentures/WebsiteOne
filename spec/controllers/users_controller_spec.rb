@@ -166,14 +166,6 @@ describe UsersController, :type => :controller do
       it 'should redirect to the previous page' do
         expect(response).to redirect_to 'back'
       end
-
-      it 'should respond with appropriate error message' do
-        expect(flash[:alert]).to eq 'User has disabled hire me button'
-      end
-
-      it 'should not send an email' do
-        expect(mail.count).to eq 0
-      end
     end
 
     context 'with empty parameters' do
