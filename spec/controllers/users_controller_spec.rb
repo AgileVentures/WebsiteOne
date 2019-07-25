@@ -178,17 +178,17 @@ describe UsersController, :type => :controller do
 
     context 'with empty parameters' do
 
-      it 'should not fail with empty params' do
+      it 'should fail with empty params' do
         post :hire_me_contact_form, params: {}
         expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
       end
 
-      it 'should not fail with empty message_form' do
+      it 'should fail with empty message_form' do
         post :hire_me_contact_form, params: { message_form: {} }
         expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
       end
 
-      it 'should not fail with no back path' do
+      it 'should fail with no back path' do
         request.env['HTTP_REFERER'] = nil
         post :hire_me_contact_form, params: { message_form: { name: '', email: '', message: '' } }
         expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
