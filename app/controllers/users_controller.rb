@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def hire_me_contact_form
-    message_params = params['message_form']
+    message_params = params.fetch(:message_form, {})
     request.env['HTTP_REFERER'] ||= root_path
     contact_form = ContactForm.new(name: message_params['name'],
                                    email: message_params['email'],
