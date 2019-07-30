@@ -533,7 +533,7 @@ GEM
     rbtree3 (0.5.0)
     recaptcha (5.0.0)
       json
-    redcarpet (3.4.0)
+    redcarpet (3.5.0)
     ref (2.0.0)
     regexp_parser (1.6.0)
     request_store (1.4.1)
