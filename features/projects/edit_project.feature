@@ -19,6 +19,11 @@ Feature: Edit Project
 
     And there are no videos
 
+  Scenario: Edit page has a link to upload an image
+    Given I am logged in
+    And I am on the "Edit" page for projects "hello mars"
+    Then I should see link "imgur.com/upload" with "https://imgur.com/upload"
+
   @javascript
   Scenario: Existing project with multiple repos shows them correctly in edit form
     Given I have logged in
