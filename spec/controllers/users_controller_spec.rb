@@ -123,7 +123,7 @@ describe UsersController, :type => :controller do
         end
 
         it 'should respond with "Please fill in Name, Email and Message field"' do
-          expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
+          expect(flash[:alert]).to include "Email can't be blank"
         end
       end
 
@@ -135,7 +135,7 @@ describe UsersController, :type => :controller do
         end
 
         it 'should respond with "Please give a valid email address"' do
-          expect(flash[:alert]).to eq 'Please give a valid email address'
+          expect(flash[:alert]).to eq ["Email is invalid"]
         end
       end
     end
@@ -172,18 +172,21 @@ describe UsersController, :type => :controller do
 
       it 'should fail with empty params' do
         post :hire_me_contact_form, params: {}
-        expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
+        expect(flash[:alert]).to include "Message can't be blank"
       end
 
       it 'should fail with empty message_form' do
         post :hire_me_contact_form, params: { message_form: {} }
-        expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
+        expect(flash[:alert]).to include "Name can't be blank"
       end
 
       it 'should fail with no back path' do
         request.env['HTTP_REFERER'] = nil
         post :hire_me_contact_form, params: { message_form: { name: '', email: '', message: '' } }
-        expect(flash[:alert]).to eq 'Please fill in Name, Email and Message field'
+        expect(flash[:alert]).to include "Email is invalid"
+        expect(flash[:alert]).to include "Email can't be blank"
+        expect(flash[:alert]).to include "Name can't be blank"
+        expect(flash[:alert]).to include "Message can't be blank"
       end
     end
   end

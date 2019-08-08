@@ -33,9 +33,8 @@ class UsersController < ApplicationController
                                    message: message_params['message'])
 
     if contact_form.invalid?
-      redirect_back fallback_location: root_path, alert: 'Please fill in Name, Email and Message field'
-    elsif !Devise.email_regexp.match(message_params['email'])
-      redirect_back fallback_location: root_path, alert: 'Please give a valid email address'
+      flash[:alert] = contact_form.errors.full_messages
+      redirect_back fallback_location: root_path# alert: 'Please fill in Name, Email and Message field'
     elsif !message_params['fellforit'].blank?
       redirect_to :root, notice: 'Form not submitted. Are you human?'
     elsif Mailer.hire_me_form(User.find(message_params['recipient_id']), message_params).deliver_now
