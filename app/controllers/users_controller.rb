@@ -33,11 +33,8 @@ class UsersController < ApplicationController
                                    message: message_params['message'])
 
     if contact_form.valid?
-      if Mailer.hire_me_form(User.find(message_params['recipient_id']), message_params).deliver_now
+      Mailer.hire_me_form(User.find(message_params['recipient_id']), message_params).deliver_now
       redirect_back fallback_location: root_path, notice: 'Your message has been sent successfully!'
-      else
-        redirect_back fallback_location: root_path, alert: 'Your message has not been sent!'
-      end
     else
       flash[:alert] = contact_form.errors.full_messages
       redirect_back fallback_location: root_path

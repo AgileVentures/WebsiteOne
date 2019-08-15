@@ -105,12 +105,6 @@ describe UsersController, :type => :controller do
         expect(mail.count).to eq 1
         expect(mail.last.to).to include @user.email
       end
-
-      it 'should respond with "Your message has not been sent!" if the message was not delivered successfully' do
-        Mailer.stub_chain(:hire_me_form, :deliver_now).and_return(false)
-        post :hire_me_contact_form, params: valid_params
-        expect(flash[:alert]).to eq 'Your message has not been sent!'
-      end
     end
 
     context 'with invalid parameters' do
