@@ -31,7 +31,7 @@ var eventDatepicker = {
         switch ($('#event_repeat_ends_string').val()) {
             case 'never':
                 $('#repeat_ends_on_label').hide();
-                $('#repeat_ends_on').hide();
+                $('#repeat_ends_on').hide().val('');
                 break;
             case 'on':
                 $('#repeat_ends_on_label').show();

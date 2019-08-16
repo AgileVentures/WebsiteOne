@@ -1,0 +1,85 @@
+{
+  "body": {  
+    "name":"Premium Mob",
+    "description":"Premium Mob membership for £25/month",
+    "start_date":"2019-05-09T16:19:39+00:00",
+    "plan":{  
+      "id":"P-6A8554404E294635VUDTNLWQ",
+      "state":"ACTIVE",
+      "name":"Premium Mob",
+      "description":"Premium Mob membership for £25/month",
+      "type":"FIXED",
+      "payment_definitions":[  
+        {  
+          "id":"PD-7P863477AD393581DUDTNLWQ",
+          "name":"Regular payment definition",
+          "type":"REGULAR",
+          "frequency":"Month",
+          "amount":{  
+            "currency":"GBP",
+            "value":"25"
+           },
+           "cycles":"12",
+           "frequency_interval":"1"
+          }
+        ],
+        "merchant_preferences":{  
+          "setup_fee":{  
+            "currency":"GBP",
+            "value":"0"
+          },
+          "max_fail_attempts":"0",
+          "return_url":"http://localhost:3000/paypal/create?plan=premiummob",
+          "cancel_url":"http://localhost:3000/subscriptions/new?plan=premiummob",
+          "auto_bill_amount":"YES",
+          "initial_fail_amount_action":"CONTINUE"
+        }
+      },
+      "links":[  
+      {  
+       "href":"https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-8G803347TJ631023W",
+       "rel":"approval_url",
+       "method":"REDIRECT"
+      },
+      {  
+        "href":"https://api.sandbox.paypal.com/v1/payments/billing-agreements/EC-8G803347TJ631023W/agreement-execute",
+        "rel":"execute",
+        "method":"POST"
+      }
+    ]
+  },
+  "headers": {
+      "date":   [  
+         "Tue, 07 May 2019 16:19:39 GMT"
+      ],
+      "server":   [  
+         "Apache"
+      ],
+      "paypal-debug-id":   [  
+         "fe4d763bdc904",
+         "fe4d763bdc904"
+      ],
+      "content-language":   [  
+         "*"
+      ],
+      "http_x_pp_az_locator":   [  
+         "sandbox.slc"
+      ],
+      "set-cookie":   [  
+         "X-PP-SILOVER=name%3DSANDBOX3.API.1%26silo_version%3D1880%26app%3Dapiplatformproxyserv%26TIME%3D464572764%26HTTP_X_PP_AZ_LOCATOR%3Dsandbox.slc; Expires=Tue, 07 May 2019 16:49:43 GMT; domain=.paypal.com; path=/; Secure; HttpOnly",
+         "X-PP-SILOVER=; Expires=Thu, 01 Jan 1970 00:00:01 GMT"
+      ],
+      "vary":   [  
+         "Authorization"
+      ],
+      "content-length":   [  
+         "1077"
+      ],
+      "connection":   [  
+         "close"
+      ],
+      "content-type":   [  
+         "application/json"
+      ]
+   }
+}

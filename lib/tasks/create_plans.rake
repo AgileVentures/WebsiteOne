@@ -12,3 +12,13 @@ namespace :db do
     Plan.create name: 'NonProfit Enterprise', third_party_identifier: 'nonprofitenterprise', amount: 25000, category: 'organization'
   end
 end
+
+namespace :paypal do
+  desc 'Create paypal plans'
+  task :create_paypal_plans => :environment do
+    Plan.all.each do |plan|
+      paypal_plan = PaypalService.new(plan).create_and_activate_recurring_plan
+      plan.update paypal_id: paypal_plan.id
+    end
+  end
+end

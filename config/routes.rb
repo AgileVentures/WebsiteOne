@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   resources :cards, only: [:create, :update, :edit, :new]
   resources :subscriptions, only: [:create, :update, :new]
   get '/subscriptions_paypal_redirect' => 'subscriptions#create'
+  post '/paypal/new' => 'paypal_agreement#new'
+  get '/paypal/create' => 'paypal_agreement#create'
 
   devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :users, :only => [:index, :show], :format => false do
@@ -46,7 +48,7 @@ Rails.application.routes.draw do
   resources :event_instances, :only => [:edit]
   patch '/event_instances/:id', to: 'event_instances#update_link'
 
-  resources :projects, :format => false do
+  resources :projects, except: [:destroy], :format => false do
     member do
       put :mercury_update
       get :mercury_saved

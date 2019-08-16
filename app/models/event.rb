@@ -16,6 +16,7 @@ class Event < ApplicationRecord
   validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' or e.repeats == 'biweekly' }
   validates :repeat_ends_on, :presence => true, :allow_blank => false, :if => lambda{ |e| (e.repeats == 'weekly' or e.repeats == 'biweekly') and e.repeat_ends_string == 'on' }
   validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' or e.repeats == 'biweekly' }
+  validates :repeat_ends, inclusion: { in: [true, false]  } 
   attr_accessor :next_occurrence_time_attr
   attr_accessor :repeat_ends_string
 

@@ -40,14 +40,14 @@ Feature: Subscribe Self to Premium
     And "random@morerandom.com" should receive a "Welcome to AgileVentures Premium" email
 
     # And my member page should show premium details # TODO IMPORTANT - require login?
-
+  @vcr
   Scenario: Pay by PayPal
     Given I have logged in
     And I visit "subscriptions/new"
-    Then I should see a paypal form within the paypal_section
-    When Paypal updates our endpoint
-    Then "sam-buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium" email
-    And I should see "Thanks, you're now an AgileVentures Premium Member!" in last_response
+    Then I should see a paypal subscribe button
+    When Paypal API updates our endpoint for premium
+    Then "matt+buyer@agileventures.org" should receive a "Welcome to AgileVentures Premium" email
+    And I should see "Thanks, you're now an AgileVentures Premium Member!" on the page
 
     # And my member page should show premium details # TODO IMPORTANT - will need hookup
 
@@ -64,9 +64,9 @@ Feature: Subscribe Self to Premium
   Scenario: Pay by PayPal, but encounter error
     Given I have logged in
     And I visit "subscriptions/new"
-    Then I should see a paypal form within the paypal_section
-    When Paypal updates our endpoint incorrectly
-    Then "sam-buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium" email
+    Then I should see a paypal subscribe button
+    When Paypal API updates our endpoint incorrectly
+    Then "matt+buyer@agileventures.org" should not receive a "Welcome to AgileVentures Premium" email
     And I should see "redirected" in last_response
 
   Scenario: Pay by card, and default to Premium

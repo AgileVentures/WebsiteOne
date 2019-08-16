@@ -1,5 +1,11 @@
 ---
-engines:
+version: "2"
+checks:
+  identical-code:
+    enabled: false
+  similar-code:
+    enabled: false
+plugins:
   brakeman:
     enabled: true
   bundler-audit:
@@ -10,32 +16,15 @@ engines:
     enabled: true
     config:
       languages:
-      - ruby
-      - javascript
-      - python
-      - php
+        ruby:
+          count_threshold: 3
   eslint:
     enabled: true
   fixme:
     enabled: true
   rubocop:
     enabled: true
-ratings:
-  paths:
-  - Gemfile.lock
-  - "**.erb"
-  - "**.haml"
-  - "**.rb"
-  - "**.rhtml"
-  - "**.slim"
-  - "**.coffee"
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
-exclude_paths:
+exclude_patterns:
 - config/
 - db/
 - features/

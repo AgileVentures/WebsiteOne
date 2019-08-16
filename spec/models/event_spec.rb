@@ -38,6 +38,10 @@ describe Event, :type => :model do
     expect(FactoryBot.build(:event, url: 'http:google.com')).to_not be_valid
   end
 
+  it 'is invalid without repeat_ends' do
+    expect(FactoryBot.build(:event, repeat_ends: nil)).to_not be_valid
+  end
+
   describe "#less_than_ten_till_start?" do
 
     context 'event starts five minutes from now' do
@@ -600,3 +604,4 @@ describe Event, :type => :model do
     end
   end
 end
+

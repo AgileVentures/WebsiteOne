@@ -34,6 +34,12 @@ describe EventInstancesController do
   describe '#update' do
     before do
       allow_any_instance_of(EventInstance).to receive(:update).and_return('true')
+      allow(controller).to receive(:authenticate_user!).and_return(true)
+    end
+
+    it 'requires user to be logged in' do
+      expect(controller).to receive(:authenticate_user!)
+      get :update, params: params
     end
 
     it 'creates a hangout if there is no hangout assosciated with the event' do
@@ -86,7 +92,6 @@ describe EventInstancesController do
         expect(YoutubeNotificationService).not_to receive(:with).with(an_instance_of(EventInstance))
         get :update, params: params.merge(notify: 'false')
       end
-
     end
 
     it 'returns a failure response if update is unsuccessful' do
@@ -132,29 +137,6 @@ describe EventInstancesController do
         params[:title] = nil
         expect{ get :update, params: params }.to raise_error(ActionController::ParameterMissing)
       end
-
     end
   end
-
-  describe 'CORS handling' do
-    it 'drops request if the origin is not allowed' do
-      allow(controller).to receive(:allowed?).and_return(false)
-      get :update, params: params
-      expect(response.status).to eq(400)
-    end
-
-    it 'sets CORS headers' do
-      headers = { 'Access-Control-Allow-Origin' => 'http://test.com',
-                  'Access-Control-Allow-Methods' => 'PUT' }
-      request.headers.merge!(headers)
-      get :update, params: params
-      expect(response.headers.to_h).to include(headers)
-    end
-
-    it 'responses OK on preflight check' do
-      get :update, params: params
-      expect(response.status).to eq(200)
-    end
-  end
-
 end

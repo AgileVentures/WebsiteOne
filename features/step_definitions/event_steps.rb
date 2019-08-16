@@ -47,6 +47,7 @@ Given(/^following events exist:$/) do |table|
   table.hashes.each do |hash|
     hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
     hash.delete('project')
+    hash[:repeat_ends] = false
     Event.create!(hash)
   end
 end
@@ -66,6 +67,7 @@ Given(/^following events exist for project "([^"]*)" with active hangouts:$/) do
   project = Project.where(title: "#{project_title}").take
 
   table.hashes.each do |hash|
+    hash[:repeat_ends] = false
     event = Event.create!(hash)
     event.event_instances.create(hangout_url: 'x@x.com',
                                  updated_at: 1.minute.ago,
@@ -302,12 +304,15 @@ Given(/^an event "([^"]*)"$/) do |event_name|
 end
 
 
-When(/^the HangoutConnection has pinged to indicate the event (start|continuing)$/) do |_type|
-  participants = {"0"=>{"id"=>"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=>"true", "hasCamera"=>"true", "hasAppEnabled"=>"true", "isBroadcaster"=>"true", "isInBroadcast"=>"true", "displayIndex"=>"0", "person"=>{"id"=>"108533475599002820142", "displayName"=>"Alejandro Babio", "image"=>{"url"=>"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=>"false"}, "locale"=>"en", "na"=>"false"}}
-  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
-  put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
-                               participants: participants, hangout_url: 'http://hangout.test',
-                               hoa_status: 'live', project_id: '1', category: 'Scrum', yt_video_id: '11'}
+Given("the {string} host has started the event") do |event|
+  @event = Event.find_by(name: event)
+  create_user
+  sign_in
+  visit event_path(@event)
+  click_button('Event Actions')
+  click_link('Edit hangout link')
+  fill_in('hangout_url', with: 'http://hangout.test')
+  click_button('hoa_link_save')
 end
 
 Then(/^appropriate tweets will be sent$/) do
@@ -346,16 +351,6 @@ end
 
 And(/^after one (more )?minute$/) do |_ignore|
   Delorean.time_travel_to '1 minute from now'
-end
-
-When(/^the HangoutConnection pings to indicate the event is ongoing$/) do
-  event_instance = @event.event_instances.first
-  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
-  put "/hangouts/#{event_instance.uid}", {title: event_instance.title, host_id: event_instance.user_id, event_id: @event.id,
-                                          participants: event_instance.participants, hangout_url: event_instance.hangout_url,
-                                          hoa_status: 'live', project_id: event_instance.project_id, category: event_instance.category,
-                                          yt_video_id: event_instance.yt_video_id}
-
 end
 
 Then(/^the event should be dead$/) do

@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update]
   before_action :get_current_stories, only: [:show]
   include DocumentsHelper
 
@@ -53,15 +53,6 @@ class ProjectsController < ApplicationController
       flash.now[:alert] = 'Project was not updated.'
       render 'edit'
     end
-  end
-
-  def destroy
-    #if @project.destroy
-    #  @notice = 'Project was successfully deleted.'
-    #else
-    #  @notice = 'Project was not successfully deleted.'
-    #end
-    #redirect_to projects_path, notice: @notice
   end
 
   def follow
