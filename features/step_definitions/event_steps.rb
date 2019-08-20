@@ -507,3 +507,11 @@ Given("I create an event without a project association") do
   created_event_name = (Event.find_by(name: "Whatever").name).downcase
   expect(current_path).to eq event_path id: created_event_name
 end
+
+Given(/^the user is located in "([^"]*)"$/) do |timezone|
+  ENV['TZ'] = timezone
+end
+
+And(/^reset timezone to UTC$/) do
+  ENV['TZ'] = 'UTC'
+end 
