@@ -410,7 +410,7 @@ GEM
       connection_pool (~> 2.2)
     netrc (0.11.0)
     newrelic_rpm (6.5.0.357)
-    nio4r (2.4.0)
+    nio4r (2.5.1)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.1)
@@ -477,7 +477,7 @@ GEM
       eventmachine_httpserver
       http_parser.rb (~> 0.6.0)
       multi_json
-    puma (4.1.0)
+    puma (4.1.1)
       nio4r (~> 2.0)
     rack (2.0.7)
     rack-accept (0.4.5)
