@@ -134,29 +134,7 @@ describe UsersController, :type => :controller do
       end
     end
 
-    context 'when recipent has disabled hire me functionality' do
-      before(:each) do
-        allow(@user).to receive(:display_hire_me).and_return(false)
-        post :hire_me_contact_form, params: { message_form: { name: 'Thomas', email: 'example@example.com', message: 'test', recipient_id: @user.id } }
-      end
-
-      it 'should redirect to the previous page' do
-        expect(response).to redirect_to 'back'
-      end
-    end
-
     context 'with empty parameters' do
-
-      it 'should fail with empty params' do
-        post :hire_me_contact_form, params: {}
-        expect(flash[:alert]).to include "Message can't be blank"
-      end
-
-      it 'should fail with empty message_form' do
-        post :hire_me_contact_form, params: { message_form: {} }
-        expect(flash[:alert]).to include "Name can't be blank"
-      end
-
       it 'should fail with no back path' do
         request.env['HTTP_REFERER'] = nil
         post :hire_me_contact_form, params: { message_form: { name: '', email: '', message: '' } }
