@@ -28,4 +28,5 @@ Feature: As a member of the Agile Ventures team
     And I fill in "f-email" with ""
     And I fill in "f-message" with "I want to hire you"
     And I click the "Send message" button within the modal dialog
-    Then I should see "Please fill in Name, Email and Message field"
+    Then I should see "Email can't be blank"
+    Then I should see "Email is invalid"
