@@ -81,10 +81,32 @@ describe UsersController, :type => :controller do
 
     let(:valid_params) do
       {
-          message_form: {
+          contact_form: {
               name: 'Thomas',
               email: 'example@example.com',
               message: 'This is a message just for you',
+              recipient_id: @user.id
+          }
+      }
+    end
+
+    let(:invalid_params) do
+      {
+          contact_form: {
+              name: 'Thomas',
+              email: '',
+              message: 'This is a message just for you',
+              recipient_id: @user.id
+          }
+      }
+    end
+
+    let(:empty_params) do
+      {
+          contact_form: {
+              name: '',
+              email: '',
+              message: '',
               recipient_id: @user.id
           }
       }
@@ -94,7 +116,7 @@ describe UsersController, :type => :controller do
       before(:each) { post :hire_me_contact_form, params: valid_params }
 
       it 'should redirect to the previous page' do
-        expect(response).to redirect_to 'back'
+        expect(response).to redirect_to user_path(@user.id)
       end
 
       it 'should respond with "Your message has been sent successfully!"' do
@@ -110,22 +132,22 @@ describe UsersController, :type => :controller do
     context 'with invalid parameters' do
 
       context 'empty form fields' do
-        before(:each) { post :hire_me_contact_form, params: { message_form: { name: '', email: '', message: '' } } }
+        before(:each) { post :hire_me_contact_form, params: invalid_params }
 
         it 'should redirect to the previous page' do
-          expect(response).to redirect_to 'back'
+          expect(response).to have_http_status(:ok)
         end
 
-        it 'should respond with "Please fill in Name, Email and Message field"' do
+        it 'should respond with "Email cant be blank' do
           expect(flash[:alert]).to include "Email can't be blank"
         end
       end
 
       context 'invalid email address' do
-        before(:each) { post :hire_me_contact_form, params: { message_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you', recipient_id: @user.id } } }
+        before(:each) { post :hire_me_contact_form, params: { contact_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you', recipient_id: @user.id } } }
 
         it 'should redirect to the previous page' do
-          expect(response).to redirect_to 'back'
+          expect(response).to have_http_status :ok
         end
 
         it 'should respond with "Please give a valid email address"' do
@@ -137,7 +159,7 @@ describe UsersController, :type => :controller do
     context 'with empty parameters' do
       it 'should fail with no back path' do
         request.env['HTTP_REFERER'] = nil
-        post :hire_me_contact_form, params: { message_form: { name: '', email: '', message: '' } }
+        post :hire_me_contact_form, params: empty_params
         expect(flash[:alert]).to include "Email is invalid"
         expect(flash[:alert]).to include "Email can't be blank"
         expect(flash[:alert]).to include "Name can't be blank"
