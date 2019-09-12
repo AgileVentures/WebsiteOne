@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @user.status.build
   end
 
-  def hire_me_contact_form
+  def hire_me
     @user = User.find(params[:contact_form][:recipient_id])
     message_params = params.fetch(:contact_form, {})
     @contact_form = ContactForm.new(name: message_params['name'],

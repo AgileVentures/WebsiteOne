@@ -113,7 +113,7 @@ describe UsersController, :type => :controller do
     end
 
     context 'with valid parameters' do
-      before(:each) { post :hire_me_contact_form, params: valid_params }
+      before(:each) { post :hire_me, params: valid_params }
 
       it 'should redirect to the previous page' do
         expect(response).to redirect_to user_path(@user.id)
@@ -132,7 +132,7 @@ describe UsersController, :type => :controller do
     context 'with invalid parameters' do
 
       context 'empty form fields' do
-        before(:each) { post :hire_me_contact_form, params: invalid_params }
+        before(:each) { post :hire_me, params: invalid_params }
 
         it 'should redirect to the previous page' do
           expect(response).to have_http_status(:ok)
@@ -144,7 +144,7 @@ describe UsersController, :type => :controller do
       end
 
       context 'invalid email address' do
-        before(:each) { post :hire_me_contact_form, params: { contact_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you', recipient_id: @user.id } } }
+        before(:each) { post :hire_me, params: { contact_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you', recipient_id: @user.id } } }
 
         it 'should redirect to the previous page' do
           expect(response).to have_http_status :ok
@@ -159,7 +159,7 @@ describe UsersController, :type => :controller do
     context 'with empty parameters' do
       it 'should fail with no back path' do
         request.env['HTTP_REFERER'] = nil
-        post :hire_me_contact_form, params: empty_params
+        post :hire_me, params: empty_params
         expect(flash[:alert]).to include "Email is invalid"
         expect(flash[:alert]).to include "Email can't be blank"
         expect(flash[:alert]).to include "Name can't be blank"
