@@ -615,7 +615,7 @@ GEM
     simple_form (4.1.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    simplecov (0.17.0)
+    simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
@@ -806,7 +806,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simple_form (~> 4.1)
-  simplecov (~> 0.17.0)
+  simplecov (~> 0.17.1)
   slack-ruby-client
   spinjs-rails
   sprockets-rails (~> 3.2, >= 3.2.1)
