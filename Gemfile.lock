@@ -278,7 +278,7 @@ GEM
     factory_bot_rails (5.0.2)
       factory_bot (~> 5.0.2)
       railties (>= 4.2.0)
-    faker (2.2.2)
+    faker (2.4.0)
       i18n (~> 1.6.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
@@ -410,7 +410,7 @@ GEM
       connection_pool (~> 2.2)
     netrc (0.11.0)
     newrelic_rpm (6.5.0.357)
-    nio4r (2.4.0)
+    nio4r (2.5.1)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.1)
@@ -477,7 +477,7 @@ GEM
       eventmachine_httpserver
       http_parser.rb (~> 0.6.0)
       multi_json
-    puma (4.1.0)
+    puma (4.1.1)
       nio4r (~> 2.0)
     rack (2.0.7)
     rack-accept (0.4.5)
@@ -615,7 +615,7 @@ GEM
     simple_form (4.1.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    simplecov (0.17.0)
+    simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
@@ -678,7 +678,7 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.8)
       rack (>= 2.0.6)
-    webmock (3.7.2)
+    webmock (3.7.5)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -806,7 +806,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simple_form (~> 4.1)
-  simplecov (~> 0.17.0)
+  simplecov (~> 0.17.1)
   slack-ruby-client
   spinjs-rails
   sprockets-rails (~> 3.2, >= 3.2.1)
