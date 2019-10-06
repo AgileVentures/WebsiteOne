@@ -21,43 +21,17 @@ var editEventForm = {
         let daysOfWeek = document.querySelectorAll('#daysOfWeek>label>input')
         let arrayOfdays = []
         daysOfWeek.forEach((checkBox) => arrayOfdays.push(checkBox.checked))
-        /*
-        normalized_start_date_time.year()
-        local_start_date_time.year()
-        normalized_start_date_time.month()
-        local_start_date_time.month()
-        normalized_start_date_time.date()
-        local_start_date_time.date()
-        */
-       console.log(normalized_start_date_time)
-       let local_date;
-        let rotation;
-        if(
-            normalized_start_date_time.year() === local_start_date_time.year() &&
-            normalized_start_date_time.month() ===local_start_date_time.month() &&
-            normalized_start_date_time.date()===local_start_date_time.date()
-    
-        ){
-            rotation=0
+
+        if (normalized_start_date_time.toDate().getUTCDate() !== normalized_start_date_time.toDate().getDate()) {
+            if (normalized_start_date_time._offset > 0) {
+                let tmp = arrayOfdays.pop()
+                arrayOfdays.unshift(tmp)
+            } else {
+                let tmp = arrayOfdays.shift()
+                arrayOfdays.push(tmp)
+
+            }
         }
-        else if (normalized_start_date_time.year() > local_start_date_time.year() 
-        ||
-        normalized_start_date_time.year() === local_start_date_time.year() &&
-        normalized_start_date_time.month() >local_start_date_time.month()
-        ||
-        normalized_start_date_time.year() === local_start_date_time.year() &&
-        normalized_start_date_time.month() ===local_start_date_time.month() &&
-        normalized_start_date_time.date()>local_start_date_time.date()
-        ) {
-            rotation = 1
-        }else{
-            rotation = -1
-        }
-        /*
-        console.log(arrayOfdats)
-        todo : rotate
-        arrayOfdays[0] = true
-        */
         daysOfWeek.forEach((checkBox, index) => checkBox.checked = arrayOfdays[index])
 
     }
