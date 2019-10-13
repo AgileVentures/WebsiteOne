@@ -612,7 +612,7 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (4.1.2)
       activesupport (>= 4.2.0)
-    simple_form (4.1.0)
+    simple_form (5.0.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     simplecov (0.17.1)
@@ -805,7 +805,7 @@ DEPENDENCIES
   seed_dump
   selenium-webdriver
   shoulda-matchers
-  simple_form (~> 4.1)
+  simple_form (~> 5.0)
   simplecov (~> 0.17.1)
   slack-ruby-client
   spinjs-rails
