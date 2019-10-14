@@ -3,6 +3,12 @@
     <%= form_for @project, html: { role: 'form', id: 'project_form' } do |f| %>
 
       <%= awesome_text_field f, :title, placeholder: 'Name' %>
+      <div id='help-link'>
+        You can upload an image at
+        <a href='https://imgur.com/upload' target="_blank">
+          imgur.com/upload
+        </a>
+      </div>
       <%= awesome_text_field f, :image_url, placeholder: 'Paste a link to your image here' %>
       <%= awesome_text_area f, :description, rows: 10, placeholder: 'Description' %>
 
