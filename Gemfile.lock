@@ -289,7 +289,7 @@ GEM
     formatador (0.2.5)
     friendly_id (5.2.5)
       activerecord (>= 4.0.0)
-    geocoder (1.5.1)
+    geocoder (1.5.2)
     gherkin (5.1.0)
     gli (2.18.1)
     globalid (0.4.2)
