@@ -25,29 +25,24 @@ class UsersController < ApplicationController
     @user.status.build
   end
 
-  def hire_me_contact_form
-    message_params = params['message_form']
-    request.env['HTTP_REFERER'] ||= root_path
+  def hire_me
+    @user = User.find(params[:contact_form][:recipient_id])
+    message_params = params.fetch(:contact_form, {})
+    @contact_form = ContactForm.new(name: message_params['name'],
+                                   email: message_params['email'],
+                                   message: message_params['message'])
 
-    if message_params.nil? or
-        message_params['name'].blank? or
-        message_params['email'].blank? or
-        message_params['message'].blank?
-      redirect_back fallback_location: root_path, alert: 'Please fill in Name, Email and Message field'
-    elsif !User.find(message_params['recipient_id']).display_hire_me
-      redirect_back fallback_location: root_path, alert: 'User has disabled hire me button'
-    elsif !Devise.email_regexp.match(message_params['email'])
-      redirect_back fallback_location: root_path, alert: 'Please give a valid email address'
-    elsif !message_params['fellforit'].blank?
-      redirect_to :root, notice: 'Form not submitted. Are you human?'
-    elsif Mailer.hire_me_form(User.find(message_params['recipient_id']), message_params).deliver_now
-      redirect_back fallback_location: root_path, notice: 'Your message has been sent successfully!'
+    if @contact_form.valid?
+      Mailer.hire_me_form(@user, message_params).deliver_now
+      redirect_to({ action: :show, id: @user.id }, notice: 'Your message has been sent successfully!')
     else
-      redirect_back fallback_location: root_path, alert: 'Your message has not been sent!'
+      flash[:alert] = @contact_form.errors.full_messages
+      render :show
     end
   end
 
   def show
+    @contact_form = ContactForm.new
     if should_display_user?(@user)
       @event_instances = EventInstance.where(user_id: @user.id)
                              .order(created_at: :desc).limit(5)

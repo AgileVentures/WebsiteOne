@@ -80,6 +80,7 @@ RSpec.configure do |config|
   # config.order = "random"
 
   config.infer_spec_type_from_file_location!
+  config.example_status_persistence_file_path = 'tmp/rspec_failures'
 end
 
 RSpec.configure do |config|
