@@ -18,7 +18,7 @@
 <div class="row">
   <div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
     <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Paypal:</div>
-    <%= form_tag paypal_new_path(plan: @plan, user: @upgrade_user), method: "post", data: { behavior: 'ajax-spin', target: '#target-element'  } do %>
+    <%= form_tag paypal_new_path(plan: @plan, user: @sponsee_slug), method: "post", data: { behavior: 'ajax-spin', target: '#target-element'  } do %>
       <input type="image" name="submit" src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif" alt="Subscribe">
       <img alt="" width="1" height="1" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" hidden="" style="display: none !important;">
     <% end %>
@@ -27,7 +27,7 @@
   <div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
 
     <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Credit/Debit Card:</div>
-    <%= form_tag subscriptions_path(plan: @plan.third_party_identifier, user: @upgrade_user) do %>
+    <%= form_tag subscriptions_path(plan: @plan.third_party_identifier, user: @sponsee_slug) do %>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                 data-description="Monthly Subscription"
