@@ -18,22 +18,26 @@ var editEventForm = {
         start_date.val(local_start_date_time.format("YYYY-MM-DD"));
         start_time.val(local_next_date_time.format("hh:mm A"));
 
-        let daysOfWeek = document.querySelectorAll('#daysOfWeek>label>input')
-        let arrayOfdays = []
-        daysOfWeek.forEach((checkBox) => arrayOfdays.push(checkBox.checked))
+        var daysOfWeek = document.querySelectorAll('#daysOfWeek>label>input')
+        try {
 
-        if (normalized_start_date_time.toDate().getUTCDate() !== normalized_start_date_time.toDate().getDate()) {
-            if (normalized_start_date_time._offset > 0) {
-                let tmp = arrayOfdays.pop()
-                arrayOfdays.unshift(tmp)
-            } else {
-                let tmp = arrayOfdays.shift()
-                arrayOfdays.push(tmp)
+            var arrayOfdays = []
+            daysOfWeek.forEach(function (checkBox) { arrayOfdays.push(checkBox.checked) })
 
+            if (normalized_start_date_time.toDate().getUTCDate() !== normalized_start_date_time.toDate().getDate()) {
+                if (normalized_start_date_time._offset > 0) {
+                    var tmp = arrayOfdays.pop()
+                    arrayOfdays.unshift(tmp)
+                } else {
+                    var tmp = arrayOfdays.shift()
+                    arrayOfdays.push(tmp)
+
+                }
             }
-        }
-        daysOfWeek.forEach((checkBox, index) => checkBox.checked = arrayOfdays[index])
+            daysOfWeek.forEach(function (checkBox, index) { checkBox.checked = arrayOfdays[index] })
+        } catch (error) {
 
+        }
     }
 };
 
