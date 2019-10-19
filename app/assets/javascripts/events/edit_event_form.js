@@ -19,25 +19,23 @@ var editEventForm = {
         start_time.val(local_next_date_time.format("hh:mm A"));
 
         var daysOfWeek = document.querySelectorAll('#daysOfWeek>label>input')
-        try {
-
-            var arrayOfdays = []
-            daysOfWeek.forEach(function (checkBox) { arrayOfdays.push(checkBox.checked) })
-
-            if (normalized_start_date_time.toDate().getUTCDate() !== normalized_start_date_time.toDate().getDate()) {
-                if (normalized_start_date_time._offset > 0) {
-                    var tmp = arrayOfdays.pop()
-                    arrayOfdays.unshift(tmp)
-                } else {
-                    var tmp = arrayOfdays.shift()
-                    arrayOfdays.push(tmp)
-
-                }
-            }
-            daysOfWeek.forEach(function (checkBox, index) { checkBox.checked = arrayOfdays[index] })
-        } catch (error) {
-
+        if (daysOfWeek.length === 0) {
+            return
         }
+        var arrayOfdays = []
+        daysOfWeek.forEach(function (checkBox) { arrayOfdays.push(checkBox.checked) })
+        if (normalized_start_date_time.toDate().getUTCDate() !== normalized_start_date_time.toDate().getDate()) {
+            var tmp;
+            if (normalized_start_date_time._offset > 0) {
+                tmp = arrayOfdays.pop()
+                arrayOfdays.unshift(tmp)
+            } else {
+                tmp = arrayOfdays.shift()
+                arrayOfdays.push(tmp)
+
+            }
+        }
+        daysOfWeek.forEach(function (checkBox, index) { checkBox.checked = arrayOfdays[index] })
     }
 };
 
