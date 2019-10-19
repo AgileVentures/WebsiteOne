@@ -19,7 +19,7 @@ var editEventForm = {
         start_time.val(local_next_date_time.format("hh:mm A"));
 
         var daysOfWeek = document.querySelectorAll('#daysOfWeek>label>input')
-        try {
+        if(daysOfWeek) {
 
             var arrayOfdays = []
             daysOfWeek.forEach(function (checkBox) { arrayOfdays.push(checkBox.checked) })
@@ -35,8 +35,6 @@ var editEventForm = {
                 }
             }
             daysOfWeek.forEach(function (checkBox, index) { checkBox.checked = arrayOfdays[index] })
-        } catch (error) {
-            console.log(error)
         }
     }
 };
