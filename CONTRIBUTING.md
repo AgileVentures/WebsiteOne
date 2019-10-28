@@ -16,7 +16,7 @@ First be sure that you've set up your development environment following all the 
  in **[Setting Up for Development on WebSiteOne _(Project Set Up)_](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)**
 
 
-We use [Waffle](https://waffle.io/AgileVentures/WebsiteOne) to manage our work on features, chores and bugfixes.
+We use [ZenHub](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370) to manage our work on features, chores and bugfixes.
 
 We keep our code on [GitHub](http://github.com) and use [git](https://git-scm.com) for version control.
 
@@ -41,13 +41,13 @@ To get involved please follow these steps:
 * review [open PRs](https://github.com/AgileVentures/WebsiteOne/pulls) on GitHub - leave comments or collaborate if interested
 
 
-#### 3. Look at what needs to be done on [our waffle project board:](https://waffle.io/AgileVentures/WebsiteOne)
+#### 3. Look at what needs to be done on [our zenhub project board:](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)
 
-  1. look through **[ready](https://waffle.io/AgileVentures/WebsiteOne)** column - feel free to start work, but always interested to hear chat in slack, scrum wherever
+  1. look through **[ready](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** column - feel free to start work, but always interested to hear chat in slack, scrum wherever
 
-  3. look through **[estimated](https://waffle.io/AgileVentures/WebsiteOne)** column - feel free to ask about priority, as these are not prioritised
+  3. look through **[new issues](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** column - feel free to ask about priority, as these are not prioritised
 
-  4. look at **[backlog](https://waffle.io/AgileVentures/WebsiteOne)** - if there is an interesting ticket get it voted on in a scrum or do an [ASYNC Vote](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md) in Slack
+  4. look at **[backlog](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** - if there is an interesting ticket get it voted on in a scrum or do an [ASYNC Vote](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md) in Slack
 
 ##### Voting
 
@@ -105,7 +105,7 @@ This PR adds a CONTRIBUTING.md file and a docs directory
 fixes #799
 ```
 
-which will associate the pull request with the issue in the Waffle board.
+which will associate the pull request with the issue in the ZenHub board.
 
 This all adds up to a work flow that should look something like this:
 
