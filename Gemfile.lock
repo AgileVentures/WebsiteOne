@@ -485,7 +485,7 @@ GEM
     rack-cors (1.0.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rack-timeout (0.5.1)
+    rack-timeout (0.5.2)
     railroady (1.5.3)
     rails (5.2.3)
       actioncable (= 5.2.3)
