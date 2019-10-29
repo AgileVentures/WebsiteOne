@@ -49,9 +49,6 @@
                       class: 'user-profile-btn',
                       type: 'button' %>
         </li>
-        <% unless presenter.user.membership_type == 'Basic' %>
-        <li><%= render 'edit_card' %></li>
-        <% end %>
         <li>
           <p><%= link_to 'Set status', '#',
                          data: {toggle: 'modal',
@@ -59,8 +56,15 @@
                          class: 'user-profile-btn',
                          type: 'button' %></p>
         </li>
+        <li>
+          <% unless presenter.user.membership_type == 'Basic' %>
+            <%= render 'edit_card' %>
+          <% end %>
+        </li>
     <% end %>
-      <li><%= presenter.user.membership_type %> Member</li>
+      <li style="margin-top: 0.7em">
+        <%= presenter.user.membership_type %> Member
+      </li>
       <% if presenter.user.membership_type == 'Premium' %>
         <li><%= render 'users/profile/premium_mob_upgrade', presenter: presenter  %></li>
       <% elsif presenter.user.membership_type == 'Basic' %>
