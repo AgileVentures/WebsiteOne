@@ -44,6 +44,12 @@ Given(/^I click on the event body for the event named "(.*?)"$/) do |name|
 end
 
 Given(/^following events exist:$/) do |table|
+  table.map_column!('start_datetime') do |date|
+    if date == 'TODAYS_DATE'
+      date = Time.current.strftime('%c')
+    end
+    date
+  end
   table.hashes.each do |hash|
     hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
     hash.delete('project')
@@ -514,4 +520,4 @@ end
 
 And(/^reset timezone to UTC$/) do
   ENV['TZ'] = 'UTC'
-end 
+end

@@ -120,18 +120,20 @@ end
 
 Then("{string} shows a live hangout link near the end of the event") do |event_name|
   event = Event.find_by_name(event_name)
-  time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
+  time = Time.current + event.duration.minutes - 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
+  Delorean.back_to_the_present
 end
 
 Then("{string} does NOT show a live hangout link after the event ends") do |event_name|
   event = Event.find_by_name(event_name)
-  time = Time.parse(@jump_date) + event.duration.minutes + 10.minutes
+  time = Time.current + event.duration.minutes + 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
+  Delorean.back_to_the_present
 end
 
 Given(/^"([^"]*)" doesn't go live$/) do |event_name|
@@ -142,16 +144,17 @@ end
 
 And(/^"([^"]*)" is not live the following day$/) do |event_name|
   event = Event.find_by_name(event_name)
-  Delorean.time_travel_to(Time.parse(@jump_date) + 1.day)
+  Delorean.time_travel_to(Time.current + 1.day)
   visit event_path(event)
   expect(page).not_to have_content('JOIN THIS LIVE EVENT NOW')
 end
 
 Given(/^that "([^"]*)" went live the previous day$/) do |name|
+  Delorean.time_travel_to(Time.current - 1.day)
   steps %Q{
-    Given the date is "2014 Feb 5th 6:00am"
     And I manually set a hangout link for event "Repeat Scrum"
   }
+  Delorean.back_to_the_present
   event = Event.find_by_name(name)
   visit event_path(event)
 end

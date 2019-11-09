@@ -9,9 +9,9 @@ Feature: Manual Edit of Hangout URL
       |title | description | status |
       | LS   | LS          | active |
     Given following events exist:
-      | name         | description         | category | start_datetime   | duration | repeats | time_zone | repeats_every_n_weeks | repeats_weekly_each_days_of_the_week_mask | project |
-      | Scrum        | Daily scrum meeting | Scrum    | 2014 Feb 4th 7am | 15       | never   | UTC       |                       |                                           |  LS     |
-      | Repeat Scrum | Daily scrum meeting | Scrum    | 2014 Feb 3rd 7am | 15       | weekly  | UTC       | 1                     | 31                                        |         |
+      | name         | description         | category | start_datetime | duration | repeats | time_zone | repeats_every_n_weeks | repeats_weekly_each_days_of_the_week_mask | project |
+      | Scrum        | Daily scrum meeting | Scrum    | TODAYS_DATE    | 15       | never   | UTC       |                       | 127                                       |  LS     |
+      | Repeat Scrum | Daily scrum meeting | Scrum    | TODAYS_DATE    | 15       | weekly  | UTC       | 1                     | 127                                       |         |
     And the following event instances (with default participants) exist:
       | title        | hangout_url         | created_at       | updated_at          | uid | category | project    | user_id | yt_video_id | hoa_status | url_set_directly | event        |
       | HangoutsFlow | http://hangout.test | 2012 Feb 4th 7am | 2012 Feb 4th 7:04am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
@@ -19,15 +19,15 @@ Feature: Manual Edit of Hangout URL
     And I have logged in
 
   Scenario: Edit Hangout URL and ensure event stays live
-    Given the date is "2014 Feb 4th 6:59am"
-    And I manually set a hangout link for event "Scrum"
-    Then "Scrum" shows live for that hangout link for the event duration
+    Given I manually set a hangout link for event "Scrum"
+    Then "Scrum" shows a live hangout link at start of event
+    Then "Scrum" shows a live hangout link near the end of the event
+    Then "Scrum" does NOT show a live hangout link after the event ends
     And there should be exactly 3 hangouts
     And there should be exactly 1 hangouts associated with "LS"
 
   Scenario: Edit Hangout URL on repeating event and ensure event stays live
-    Given the date is "2014 Feb 6th 7am"
-    And I manually set a hangout link for event "Repeat Scrum"
+    Given I manually set a hangout link for event "Repeat Scrum"
     Then "Repeat Scrum" shows a live hangout link at start of event
     Then "Repeat Scrum" shows a live hangout link near the end of the event
     Then "Repeat Scrum" does NOT show a live hangout link after the event ends
@@ -36,9 +36,11 @@ Feature: Manual Edit of Hangout URL
 
   Scenario: Event doesn't go live before Hangout URL is updated
     Given that "Repeat Scrum" went live the previous day
-    Then it should not go live the next day just because the event start time is passed
+    Then "Repeat Scrum" doesn't go live
     When I manually set a hangout link for event "Repeat Scrum"
-    Then "Repeat Scrum" shows live for that hangout link for the event duration
+    Then "Repeat Scrum" shows a live hangout link at start of event
+    Then "Repeat Scrum" shows a live hangout link near the end of the event
+    Then "Repeat Scrum" does NOT show a live hangout link after the event ends
 
   # wraps bug described in https://github.com/AgileVentures/WebsiteOne/issues/1809
   Scenario: Event doesn't ping old youtube URL
