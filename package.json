@@ -22,7 +22,7 @@
   "dependencies": {
     "bootstrap-datepicker": "^1.4.0",
     "bootstrap-timepicker": "^0.5.2",
-    "bower": "^1.8.4",
+    "bower": "^1.8.8",
     "copyfiles": "^1.0.0",
     "corejs-typeahead": "^1.2.1",
     "moment": "^2.13.0",

@@ -1,9 +1,9 @@
-<% if @sponsored_user %>
-    <h2 id='payment_complete'>Thanks, you have sponsored <%= @user.display_name %> as a <%= @plan.name %> Member!</h2>
+<% if @is_sponsorship %>
+    <h2 id='payment_complete'>Thanks, you have sponsored <%= @sponsee.display_name %> as a <%= @plan.name %> Member!</h2>
     <% if @plan.free_trial? %>
       <p>A <%= @plan.free_trial_length_days %> day free trial has now started.  You will not be charged until <%= @plan.free_trial_length_days %> days have passed.</p>
     <% end %>
-    <p>An AgileVentures mentor will be in touch shortly to help <%= @user.display_name %> receive all their membership benefits.</p>
+    <p>An AgileVentures mentor will be in touch shortly to help <%= @sponsee.display_name %> receive all their membership benefits.</p>
 <% else %>
   <% if @plan.category == 'organization' %>
     <h2 id='payment_complete'>Thanks, your organization has now subscribed to the AgileVentures <%= @plan.name %> Plan!</h2>
