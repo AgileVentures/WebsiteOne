@@ -112,14 +112,22 @@ And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   expect(page).to have_css('.btn-success')
 end
 
-Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
+Then("{string} shows a live hangout link at start of event") do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
+end
+
+Then("{string} shows a live hangout link near the end of the event") do |event_name|
+  event = Event.find_by_name(event_name)
   time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
+end
+
+Then("{string} does NOT show a live hangout link after the event ends") do |event_name|
+  event = Event.find_by_name(event_name)
   time = Time.parse(@jump_date) + event.duration.minutes + 10.minutes
   Delorean.time_travel_to(time)
   visit event_path(event)
@@ -221,7 +229,7 @@ end
 And(/^that we're spying on the SlackService$/) do
   @slack_client = double(Slack::Web::Client)
   allow(Slack::Web::Client).to receive(:new).and_return(@slack_client)
-  allow(@slack_client).to receive(:chat_postMessage)  
+  allow(@slack_client).to receive(:chat_postMessage)
 end
 
 And(/^the Hangout URL is posted in Slack$/) do

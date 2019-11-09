@@ -28,7 +28,9 @@ Feature: Manual Edit of Hangout URL
   Scenario: Edit Hangout URL on repeating event and ensure event stays live
     Given the date is "2014 Feb 6th 7am"
     And I manually set a hangout link for event "Repeat Scrum"
-    Then "Repeat Scrum" shows live for that hangout link for the event duration
+    Then "Repeat Scrum" shows a live hangout link at start of event
+    Then "Repeat Scrum" shows a live hangout link near the end of the event
+    Then "Repeat Scrum" does NOT show a live hangout link after the event ends
     And "Repeat Scrum" is not live the following day
     And there should be exactly 3 hangouts
 
