@@ -17,7 +17,7 @@ var editEventForm = {
         var local_start_date_time = normalized_start_date_time.tz(this.timezone());
         start_date.val(local_start_date_time.format("YYYY-MM-DD"));
         start_time.val(local_next_date_time.format("hh:mm A"));
-        if (normalized_start_date_time.toDate().getUTCDate() != normalized_start_date_time.toDate().getDate())
+        if (normalized_start_date_time.toDate().getUTCDate() !== normalized_start_date_time.toDate().getDate())
             this.localizeDaysOfWeek(normalized_start_date_time._offset)
     },
     localizeDaysOfWeek: function (offset) {
