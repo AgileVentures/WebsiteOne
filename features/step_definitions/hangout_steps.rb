@@ -1,3 +1,7 @@
+def set_event_start_date(event_ins, num)
+  event_ins.updated_at -= num.minutes
+end
+
 Given(/^I navigate to the show page for event "([^"]*)"$/) do |name|
   event = Event.find_by_name(name)
   visit event_path(event)
@@ -110,7 +114,7 @@ Given("a hangout link was set for event {string} {int} minutes ago") do |name, n
                                    event_id: event.id,
                                    hangout_url: @hangout_url,
                                    url_set_directly: true)
-  event_ins.updated_at -= num.minutes
+  set_event_start_date(event_ins, num)
   event_ins.save!
 end
 
