@@ -102,6 +102,18 @@ Then(/^there should be exactly (\d+) hangouts associated with "([^"]*)"$/) do |n
   expect(EventInstance.where(project: project).count).to eq number.to_i
 end
 
+Given("a hangout link was set for event {string} {int} minutes ago") do |name, num|
+  @hangout_url = 'https://streamyard.com/35mRYwG5vr'
+  uid = '865600-888b0a67-ae31-4ecc-a9fa-5617792959d4'
+  event = Event.find_by_name(name)
+  event_ins = EventInstance.create(uid: uid,
+                                   event_id: event.id,
+                                   hangout_url: @hangout_url,
+                                   url_set_directly: true)
+  event_ins.updated_at -= num.minutes
+  event_ins.save!
+end
+
 And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   @hangout_url = 'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0'
   event = Event.find_by_name(name)
@@ -120,43 +132,20 @@ end
 
 Then("{string} shows a live hangout link near the end of the event") do |event_name|
   event = Event.find_by_name(event_name)
-  time = Time.current + event.duration.minutes - 10.minutes
-  Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
-  Delorean.back_to_the_present
 end
 
 Then("{string} does NOT show a live hangout link after the event ends") do |event_name|
   event = Event.find_by_name(event_name)
-  time = Time.current + event.duration.minutes + 10.minutes
-  Delorean.time_travel_to(time)
   visit event_path(event)
   expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
-  Delorean.back_to_the_present
 end
 
 Given(/^"([^"]*)" doesn't go live$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
-end
-
-And(/^"([^"]*)" is not live the following day$/) do |event_name|
-  event = Event.find_by_name(event_name)
-  Delorean.time_travel_to(Time.current + 1.day)
-  visit event_path(event)
-  expect(page).not_to have_content('JOIN THIS LIVE EVENT NOW')
-end
-
-Given(/^that "([^"]*)" went live the previous day$/) do |name|
-  Delorean.time_travel_to(Time.current - 1.day)
-  steps %Q{
-    And I manually set a hangout link for event "Repeat Scrum"
-  }
-  Delorean.back_to_the_present
-  event = Event.find_by_name(name)
-  visit event_path(event)
 end
 
 Then(/^it should not go live the next day just because the event start time is passed$/) do

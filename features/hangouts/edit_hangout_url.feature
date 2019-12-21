@@ -19,29 +19,33 @@ Feature: Manual Edit of Hangout URL
       | HangoutsFlow | http://hangout.test | 2014 Feb 4th 7am | 2014 Feb 4th 7:03am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
     And I have logged in
 
-  Scenario: Edit Hangout URL and ensure event stays live
-    Given I manually set a hangout link for event "Scrum"
+  Scenario: Hangout link is active at start of event
+    Given a hangout link was set for event "Scrum" 0 minutes ago
     Then "Scrum" shows a live hangout link at start of event
+
+  Scenario: Hangout link is active near the end of event
+    Given a hangout link was set for event "Scrum" 10 minutes ago
     Then "Scrum" shows a live hangout link near the end of the event
+
+  Scenario: Hangout link is NOT active after event ends
+    Given a hangout link was set for event "Scrum" 20 minutes ago
     Then "Scrum" does NOT show a live hangout link after the event ends
-    And there should be exactly 3 hangouts
-    And there should be exactly 1 hangouts associated with "LS"
 
-  Scenario: Edit Hangout URL on repeating event and ensure event stays live
-    Given I manually set a hangout link for event "Repeat Scrum"
+  Scenario: Edit Hangout URL on repeating event at start of event
+    Given a hangout link was set for event "Repeat Scrum" 0 minutes ago
     Then "Repeat Scrum" shows a live hangout link at start of event
-    Then "Repeat Scrum" shows a live hangout link near the end of the event
-    Then "Repeat Scrum" does NOT show a live hangout link after the event ends
-    And "Repeat Scrum" is not live the following day
-    And there should be exactly 3 hangouts
 
-  Scenario: Event doesn't go live before Hangout URL is updated
-    Given that "The daily" went live the previous day
-    Then "The daily" doesn't go live
-    When I manually set a hangout link for event "The daily"
-    Then "The daily" shows a live hangout link at start of event
-    Then "The daily" shows a live hangout link near the end of the event
-    Then "The daily" does NOT show a live hangout link after the event ends
+  Scenario: Edit Hangout URL on repeating event near the end
+    Given a hangout link was set for event "Repeat Scrum" 10 minutes ago
+    Then "Repeat Scrum" shows a live hangout link near the end of the event
+
+  Scenario: Edit Hangout URL on repeating event after event ends
+    Given a hangout link was set for event "Repeat Scrum" 20 minutes ago
+    Then "Repeat Scrum" does NOT show a live hangout link after the event ends
+
+  Scenario: Repeating event is NOT live after one day
+    Given a hangout link was set for event "Repeat Scrum" 1440 minutes ago
+    Then "Repeat Scrum" does NOT show a live hangout link after the event ends
 
   # wraps bug described in https://github.com/AgileVentures/WebsiteOne/issues/1809
   Scenario: Event doesn't ping old youtube URL
