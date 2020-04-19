@@ -79,7 +79,7 @@ class UsersController < ApplicationController
   def users
     users = User.page(params[:page]).per(15)
         .includes(:status, :titles, :karma)
-        .filter(set_filter_params)
+        .param_filter(set_filter_params)
         .order("karmas.total DESC")
 
     users = users.allow_to_display unless privileged_visitor?
