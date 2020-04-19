@@ -581,6 +581,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     rubocop-performance (1.5.2)
       rubocop (>= 0.71.0)
+    rubocop-rails (2.5.2)
+      activesupport
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
     rubocop-rspec (1.37.1)
       rubocop (>= 0.68.1)
     ruby-gitter (0.1.0)
@@ -800,6 +804,7 @@ DEPENDENCIES
   rspec-html-matchers
   rspec-rails
   rubocop-performance (~> 1.5, >= 1.5.2)
+  rubocop-rails (~> 2.5, >= 2.5.2)
   rubocop-rspec (>= 1.28)
   ruby-gitter
   sass-rails
