@@ -3,7 +3,7 @@ require:
   - rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6.3
   DisabledByDefault: true
   Exclude:
     - app/models/user.rb
