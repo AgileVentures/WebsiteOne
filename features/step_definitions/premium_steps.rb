@@ -45,7 +45,7 @@ def submit_card_details_for_button_with(text, email = 'random@morerandom.com', n
     fill_in 'Email', with: email
     fill_in 'Card number', with: number
     fill_in 'CVC', with: '123'
-    fill_in 'cc-exp', with: '12/2019'
+    fill_in 'cc-exp', with: 1.year.from_now.strftime('%m/%Y')
     click_button text
   end
   sleep(3)
