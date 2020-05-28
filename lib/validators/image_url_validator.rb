@@ -28,6 +28,6 @@ class ImageUrlValidator < ActiveModel::Validator
   end
 
   def is_image_host_whitelisted?(url)
-    IMAGE_HOST_WHITELIST.any? {|whitelist_item| url.match /#{Regexp.escape(whitelist_item)}/ }
+    IMAGE_HOST_WHITELIST.any? {|whitelist_item| url.match(/#{Regexp.escape(whitelist_item)}/) }
   end
 end

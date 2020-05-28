@@ -218,7 +218,7 @@ describe Event, :type => :model do
   end
 
   context 'Event url' do
-    before (:each) do
+    before(:each) do
       @event = {name: 'one time event',
                 category: 'Scrum',
                 description: '',

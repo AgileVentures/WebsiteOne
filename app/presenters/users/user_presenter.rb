@@ -8,7 +8,7 @@ class UserPresenter < BasePresenter
   end
 
   def has_skills?
-    !user.skill_list.blank?
+    user.skill_list.present?
   end
 
   def joined_projects?

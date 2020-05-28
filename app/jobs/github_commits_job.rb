@@ -38,7 +38,7 @@ module GithubCommitsJob
 
         contributors.map do |contributor|
           begin
-            user = User.find_by_github_username(contributor.author.login)
+            user = User.find_by(github_username: contributor.author.login)
 
             Rails.logger.warn "#{contributor.author.login} could not be found in the database" unless user
 

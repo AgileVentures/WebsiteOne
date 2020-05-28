@@ -39,7 +39,7 @@ module GithubStaticPagesJob
         filename = page[:path]
         page_content = client.contents('agileventures/agileventures', path: filename)
         markdown = Base64.decode64(page_content[:content])
-        static_page = StaticPage.find_by_slug(get_slug(filename))
+        static_page = StaticPage.find_by(slug: get_slug(filename))
         static_page.nil? ? create_static_page(filename, markdown) : update_body(static_page, markdown)
       rescue Encoding::UndefinedConversionError => e
         ErrorLoggingService.new(e).log("Trying to convert this page: #{filename} caused the issue!")

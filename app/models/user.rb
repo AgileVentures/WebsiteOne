@@ -78,7 +78,7 @@ class User < ApplicationRecord
   def current_subscription
     now = DateTime.now
     current_subscriptions = subscriptions.select { |s| s.ended_at.nil? and s.started_at.to_i <= now.to_i }
-    return nil if current_subscriptions.nil? or current_subscriptions.empty?
+    return nil if current_subscriptions.blank?
     current_subscriptions.first
   end
 
@@ -99,12 +99,12 @@ class User < ApplicationRecord
 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid']) unless email.blank?
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid']) if email.present?
     @omniauth_provider = omniauth['provider']
   end
 
   def password_required?
-    (authentications.empty? || !password.blank?) && super
+    (authentications.empty? || password.present?) && super
   end
 
   def has_auth(provider)
@@ -123,7 +123,7 @@ class User < ApplicationRecord
 
   def full_name
     full_name = "#{first_name} #{last_name}".squish
-    full_name unless full_name.blank?
+    full_name.presence
   end
 
   def email_designator
@@ -185,7 +185,7 @@ class User < ApplicationRecord
   end
 
   def number_hangouts_started_with_more_than_one_participant
-    event_instances.select { |h| h.participants != nil && h.participants.to_unsafe_h.count > 1 }.count
+    event_instances.count { |h| h.participants != nil && h.participants.to_unsafe_h.count > 1 }
   end
 
   def activity

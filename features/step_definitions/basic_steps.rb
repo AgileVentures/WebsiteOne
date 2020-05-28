@@ -88,7 +88,7 @@ When(/^I (?:go to|am on) the "([^"]*)" page$/) do |page|
 end
 
 When(/^I (?:go to|am on) the "([^"]*)" event page$/) do |name|
-  id = Event.find_by_name(name).id
+  id = Event.find_by(name: name).id
   visit path_to('event', id)
 end
 
@@ -137,7 +137,7 @@ When(/^I follow "([^"]*)"$/) do |text|
 end
 
 When(/^I dropdown the "([^"]*)" menu$/) do |text|
-  within ('.navbar') do
+  within('.navbar') do
     click_link text
   end
 
@@ -148,7 +148,7 @@ When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in field, with: value
 end
 
-When /^I fill in(?: "([^"]*)")?:$/ do |name, table|
+When(/^I fill in(?: "([^"]*)")?:$/) do |name, table|
   with_scope(name) do
     table.rows.each do |row|
       fill_in row[0], with: row[1]
@@ -156,7 +156,7 @@ When /^I fill in(?: "([^"]*)")?:$/ do |name, table|
   end
 end
 
-When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
+When(/^I fill in event field(?: "([^"]*)")?:$/) do |name, table|
   with_scope(name) do
     table.rows.each do |row|
       within('form#event-form') do
@@ -166,14 +166,14 @@ When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
   end
 end
 
-Given (/^the time now is "([^"]*)"$/) do |time|
+Given(/^the time now is "([^"]*)"$/) do |time|
   # use delorean
   Time.stub(now: Time.parse(time))
 end
 
 # THEN steps
 
-Then /^I should see link "([^"]*)" with "([^"]*)"$/ do |link, url|
+Then(/^I should see link "([^"]*)" with "([^"]*)"$/) do |link, url|
   expect(page).to have_link(link, href: url)
 end
 
@@ -185,7 +185,7 @@ Then(/^I should( not)? see a link "([^"]*)" to "([^"]*)"$/) do |negate, link, ur
   end
 end
 
-Then /^I should be on the "([^"]*)" page$/ do |page|
+Then(/^I should be on the "([^"]*)" page$/) do |page|
   expect(current_fullpath).to eq path_to(page)
 end
 
@@ -193,7 +193,7 @@ def current_fullpath
   URI.parse(current_url).request_uri
 end
 
-Then /^I should see a form(?: "([^"]*)")? with:$/ do |name, table|
+Then(/^I should see a form(?: "([^"]*)")? with:$/) do |name, table|
   with_scope(name) do
     table.rows.each do |row|
       step %Q{the "#{row[0]}" field should contain "#{row[1]}"}
@@ -201,14 +201,14 @@ Then /^I should see a form(?: "([^"]*)")? with:$/ do |name, table|
   end
 end
 
-Then /^I should( not)? see:$/ do |negative, table|
+Then(/^I should( not)? see:$/) do |negative, table|
   expectation = negative ? :should_not : :should
   table.rows.flatten.each do |string|
     page.send(expectation, have_text(string))
   end
 end
 
-Then (/^I should( not)? see "([^"]*)"$/) do |negative, string|
+Then(/^I should( not)? see "([^"]*)"$/) do |negative, string|
   unless negative
     expect(page).to have_text string
   else
@@ -216,7 +216,7 @@ Then (/^I should( not)? see "([^"]*)"$/) do |negative, string|
   end
 end
 
-Then /^I should( not)? see a (notice|success) flash "([^"]*)"$/ do |negative, type, string|
+Then(/^I should( not)? see a (notice|success) flash "([^"]*)"$/) do |negative, type, string|
   unless negative
     expect(page).to have_css '.alert', text: string
     expect(page).to have_css ".alert-#{type}", text: string
@@ -226,11 +226,11 @@ Then /^I should( not)? see a (notice|success) flash "([^"]*)"$/ do |negative, ty
   end
 end
 
-Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
+Then(/^I should( not)? see "([^"]*)" in "([^"]*)"$/) do |negative, string, scope|
   within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
 end
 
-Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
+Then(/^I should( not)? see link "([^"]*)"$/) do |negative, link|
   if negative
     expect(page.has_link? link).to be_falsey
   else
@@ -238,7 +238,7 @@ Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
   end
 end
 
-Then /^I should( not)? see button "([^"]*)"$/ do |negative, button|
+Then(/^I should( not)? see button "([^"]*)"$/) do |negative, button|
   unless negative
     expect(page.has_link_or_button? button).to be_truthy
   else
@@ -246,7 +246,7 @@ Then /^I should( not)? see button "([^"]*)"$/ do |negative, button|
   end
 end
 
-Then /^the "([^"]*)" field(?: within (.*))? should( not)? contain "([^"]*)"$/ do |field, parent, negative, value|
+Then(/^the "([^"]*)" field(?: within (.*))? should( not)? contain "([^"]*)"$/) do |field, parent, negative, value|
   with_scope(parent) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
@@ -321,7 +321,7 @@ Then(/^I should see the sub-documents in this order:$/) do |table|
   expect(actual_order).to eq expected_order
 end
 
-Then /^I should see a "([^"]*)" table with:$/ do |name, table|
+Then(/^I should see a "([^"]*)" table with:$/) do |name, table|
   expect(page).to have_text(name)
   table.rows.flatten.each do |heading|
     expect(page).to have_css('table th', :text => heading)
@@ -379,8 +379,8 @@ Then(/^I should see an video with source "([^"]*)"$/) do |source|
   expect(page).to have_css "iframe[src*=\"#{source}\"]"
 end
 
-Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, table_name|
-  within ("table##{table_name}") do
+Then(/^I should( not)? see "([^"]*)" in table "([^"]*)"$/) do |negative, title, table_name|
+  within("table##{table_name}") do
     if negative
       expect(page.body).not_to have_content(/#{title}/m)
     else
@@ -439,7 +439,7 @@ Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_li
     step %Q{I should see "#{project_title}" within "#{project_list_area}"}
   end
 end
-Then /^I should receive a file(?: "([^"]*)")?/ do |file|
+Then(/^I should receive a file(?: "([^"]*)")?/) do |file|
   result = page.response_headers['Content-Type'].should == "text/calendar"
   if result
     result = page.response_headers['Content-Disposition'].should =~ /#{file}/

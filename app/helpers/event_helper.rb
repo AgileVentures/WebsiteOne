@@ -13,11 +13,11 @@ module EventHelper
   end
 
   def format_timepicker(datetime)
-    !datetime.blank? ? datetime.strftime('%I:%M %P') : ''
+    datetime.present? ? datetime.strftime('%I:%M %P') : ''
   end
 
   def format_datepicker(datetime)
-    !datetime.blank? ? datetime.strftime('%Y-%m-%d') : ''
+    datetime.present? ? datetime.strftime('%Y-%m-%d') : ''
   end
 
   def format_time_range(event)

@@ -2,7 +2,7 @@ Given(/^I visit the edit page for the event named "(.*?)"$/) do |event_name|
   visit edit_event_path(Event.find_by(name: event_name))
 end
 
-Given /^the "([^"]*)" "([^"]*)" event exists$/ do |event_name, repeat|
+Given(/^the "([^"]*)" "([^"]*)" event exists$/) do |event_name, repeat|
   Event.create name: event_name,
                category: "Scrum",
                description: "we stand up",
@@ -51,7 +51,7 @@ Given(/^following events exist:$/) do |table|
     date
   end
   table.hashes.each do |hash|
-    hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
+    hash[:project_id] = Project.find_by(title: hash['project']).id if hash['project'].present?
     hash.delete('project')
     hash[:repeat_ends] = false
     Event.create!(hash)
@@ -60,7 +60,7 @@ end
 
 Given(/^the following events exist that repeat every weekday:$/) do |table|
   table.hashes.each do |hash|
-    hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
+    hash[:project_id] = Project.find_by(title: hash['project']).id if hash['project'].present?
     hash[:repeats_weekly_each_days_of_the_week_mask] = 31
     hash[:repeats_every_n_weeks] = 1
     hash[:repeats] = 'weekly'
@@ -117,12 +117,12 @@ end
 
 
 Given(/^I am on the show page for event "([^"]*)"$/) do |name|
-  event = Event.find_by_name(name)
+  event = Event.find_by(name: name)
   visit event_path(event)
 end
 
 Then(/^I should be on the event "([^"]*)" page for "([^"]*)"$/) do |page, name|
-  event = Event.find_by_name(name)
+  event = Event.find_by(name: name)
   page.downcase!
   case page
     when 'show'
@@ -305,7 +305,7 @@ When(/^they view the event "([^"]*)"$/) do |event_name|
 end
 
 Given(/^an event "([^"]*)"$/) do |event_name|
-  @event = Event.find_by_name(event_name)
+  @event = Event.find_by(name: event_name)
   @google_id = '123456789'
 end
 
@@ -420,7 +420,7 @@ end
 
 
 And(/^I should not see any HTML tags$/) do
-  expect(page).not_to match /<.*>/
+  expect(page).not_to match(/<.*>/)
 end
 
 Then(/^I should see (\d+) "([^"]*)" events$/) do |number, event|

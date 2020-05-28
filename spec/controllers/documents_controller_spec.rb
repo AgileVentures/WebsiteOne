@@ -77,10 +77,10 @@ describe DocumentsController do
 
   describe 'PUT update_document_parent_id/' do
     let(:do_post) { post :update_parent_id, params: params.merge({ new_parent_id: parent_id }) }
-    let(:current_document) { Document.find_by_id(categories.first.id) }
+    let(:current_document) { Document.find_by(id: categories.first.id) }
 
     context 'with a valid parent id' do
-      let(:parent) { Document.find_by_id(categories.last.id) }
+      let(:parent) { Document.find_by(id: categories.last.id) }
       let(:parent_id) { parent.id.to_s }
 
       it 'changes the document parent id' do

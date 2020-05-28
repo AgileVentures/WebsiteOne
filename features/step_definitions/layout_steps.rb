@@ -20,7 +20,7 @@ When(/^I should see "([^"]*)" in footer$/) do |string|
   end
 end
 
-Then /^I should see link$/ do |table|
+Then(/^I should see link$/) do |table|
   table.rows.flatten.each do |link|
     expect(page).to have_link link
   end

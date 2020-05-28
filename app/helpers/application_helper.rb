@@ -4,7 +4,7 @@ module ApplicationHelper
   include DisqusHelper
 
   def user_details(id)
-    user = User.find_by_id(id)
+    user = User.find_by(id: id)
     if user.present?
       user.display_name
     else
@@ -59,7 +59,7 @@ module ApplicationHelper
   def social_button(provider, options={})
     provider = provider.downcase
 
-    options[:url] = root_path unless options[:url].present?
+    options[:url] = root_path if options[:url].blank?
 
     text = options[:text] || (options[:delete] ? 'Remove' : prefix)
     path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :

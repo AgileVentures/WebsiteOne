@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'DeactivatedUserFinderConcern' do
   before :all do
-    class FakeController < ActionController::Base
+    class FakeController < ApplicationController
       include DeactivatedUserFinder
     end
     @fake_controller = FakeController.new

@@ -38,7 +38,7 @@ Then(/^I should see all the pages on github in the site as static pages with the
 end
 
 Then(/^"([^"]*)" shoud have "([^"]*)" in their subscription$/) do |email, stripe_id|
-  user = User.find_by_email(email)
+  user = User.find_by(email: email)
   expect(user.stripe_customer_id).to eq stripe_id
 end
 
@@ -69,7 +69,7 @@ When(/^I run the rake task for creating plans$/) do
 end
 
 Then(/^"([^"]*)" should have a "([^"]*)" subscription plan$/) do |email, plan|
-  user = User.find_by_email(email)
+  user = User.find_by(email: email)
   expect(user.current_subscription.plan).to eq Plan.find_by(name: plan)
 end
 

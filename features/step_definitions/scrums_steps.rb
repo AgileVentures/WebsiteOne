@@ -26,7 +26,7 @@ When(/^I close the modal$/) do
 end
 
 Given(/^that there are (\d+) past scrums$/) do |number|
-  FactoryBot.create_list(:event_instance, number.to_i, category: 'Scrum', created_at: rand(1.months.seconds.to_i).seconds.ago, project_id: nil)
+  FactoryBot.create_list(:event_instance, number.to_i, category: 'Scrum', created_at: rand(1.month.seconds.to_i).seconds.ago, project_id: nil)
 end
 
 Given(/^there is one past scrum with invalid youtube id$/) do
@@ -36,6 +36,6 @@ Given(/^there is one past scrum with invalid youtube id$/) do
 end
 
 Then(/^video with youtube id nil shouldn't be clickable$/) do
-  event = EventInstance.find_by_title('Invalid')
+  event = EventInstance.find_by(title: 'Invalid')
   expect(page).not_to have_css("a##{event.id}")
 end

@@ -1,4 +1,4 @@
-When /^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/ do |button|
+When(/^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/) do |button|
   selector_for = {
       'save' => 'mercury-save-button'
   }
@@ -32,7 +32,7 @@ When(/^I try to edit the page$/) do
   visit '/editor' + current_path
 end
 
-Then /^I should( not)? see button "([^"]*)" in Mercury Editor$/ do |negative, button|
+Then(/^I should( not)? see button "([^"]*)" in Mercury Editor$/) do |negative, button|
   button = 'new_document_link' if button == 'New document'
   page.driver.within_frame('mercury_iframe') {
     unless negative
@@ -43,7 +43,7 @@ Then /^I should( not)? see button "([^"]*)" in Mercury Editor$/ do |negative, bu
   }
 end
 
-When /I click "([^"]*)" in Mercury Editor/ do |button|
+When(/I click "([^"]*)" in Mercury Editor/) do |button|
   page.execute_script('Mercury.silent = true')   # disabling the confirmation dialog for saving changes
   page.driver.within_frame('mercury_iframe') {
     click_link button

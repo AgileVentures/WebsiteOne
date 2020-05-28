@@ -4,7 +4,7 @@ Then(/^I should see sponsor banner for "(.*?)"$/) do |supporter_name|
 end
 
 Then(/^I should be (.*)'s sponsor$/) do |name|
-  user = User.find_by_first_name name
+  user = User.find_by first_name: name
   subscription = Subscription.find_by(user: user)
   expect(subscription.sponsor).to eq(@current_user)
 end

@@ -4,7 +4,7 @@ Then(/^my member page should show premium details$/) do
 end
 
 Given(/^I fill in appropriate card details for premium(?: for user with email "([^"]*)")?$/) do |email|
-  email = email.present? ? email : 'random@morerandom.com'
+  email = email.presence || 'random@morerandom.com'
   submit_card_details_for_button_with('Subscribe £10.00', email)
 end
 
@@ -25,7 +25,7 @@ Given(/^I fill in appropriate card details for premium plus$/) do
 end
 
 Given(/^I fill in updated card details for premium(?: for user with email "([^"]*)")?$/) do |email|
-  email = email.present? ? email : 'random@morerandom.com'
+  email = email.presence || 'random@morerandom.com'
   submit_card_details_for_button_with('Update Card Details', email)
 end
 

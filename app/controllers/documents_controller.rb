@@ -66,7 +66,7 @@ class DocumentsController < ApplicationController
 
   def mercury_update
     @document = Document.friendly.find(params[:document_id])
-    if @document.update_attributes(title: params[:content][:document_title][:value],
+    if @document.update(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
       @document.create_activity :update, owner: current_user
       render html: ''
@@ -83,7 +83,7 @@ class DocumentsController < ApplicationController
   end
 
   def set_document
-    @document = @project.documents.find_by_slug!(params[:id])
+    @document = @project.documents.find_by!(slug: params[:id])
   end
 
   def set_parent
@@ -93,7 +93,7 @@ class DocumentsController < ApplicationController
   end
 
   def change_document_parent(new_parent_id)
-    valid_category = Document.find_by_id(new_parent_id)
+    valid_category = Document.find_by(id: new_parent_id)
     if valid_category
       @document.parent_id = valid_category.id
       flash[:notice] = "You have successfully moved #{@document.title} to the #{valid_category.title} section." if @document.save

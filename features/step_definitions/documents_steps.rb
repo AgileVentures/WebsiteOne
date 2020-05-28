@@ -1,11 +1,11 @@
 Given(/^the following documents exist:$/) do |table|
   table.hashes.each do |hash|
     if hash[:project].present?
-      hash[:project_id] = Project.find_by_title(hash[:project]).id
+      hash[:project_id] = Project.find_by(title: hash[:project]).id
       hash.except! 'project'
     end
     if hash[:author].present?
-      u = User.find_by_first_name hash[:author]
+      u = User.find_by first_name: hash[:author]
       hash.except! 'author'
       document = u.documents.new hash
     else
@@ -19,7 +19,7 @@ end
 Given(/^the following revisions exist$/) do |table|
   table.hashes.each do |hash|
     hash[:revisions].to_i.times do |number|
-      doc = Document.find_by_title(hash[:title])
+      doc = Document.find_by(title: hash[:title])
       doc.update(:body => "New content #{number}")
       doc.save!
     end
@@ -41,7 +41,7 @@ When(/^I click "([^"]*)" in "([^"]*)"$/) do |link, scope|
 end
 
 When(/^I should see ([^"]*) revisions for "([^"]*)"$/) do |revisions, document|
-  doc = Document.find_by_title(document)
+  doc = Document.find_by(title: document)
   expect doc.versions.count == revisions
   expect(page).to have_xpath('//div[@id="revisions"]/b', count: revisions)
 end

@@ -32,15 +32,15 @@ describe DeviseHelper do
       helper.stub_chain(:resource, :class, :model_name, :human).and_return "devise"
       expect(I18n).to receive(:t).and_return sentence
       result = helper.devise_error_messages_flash
-      expect(result).to have_text (sentence)
-      expect(result).to have_css ('.alert.alert-danger')
-      @messages.each { |msg| expect(result).to have_text (msg) }
+      expect(result).to have_text(sentence)
+      expect(result).to have_css('.alert.alert-danger')
+      @messages.each { |msg| expect(result).to have_text(msg) }
 
     end
     it '#devise_error_simple_message' do
       result = helper.devise_error_simple_message
-      expect(result).to have_css ('.alert.alert-danger')
-      @messages.each { |msg| expect(result).to have_text (msg) }
+      expect(result).to have_css('.alert.alert-danger')
+      @messages.each { |msg| expect(result).to have_text(msg) }
 
     end
   end

@@ -3,7 +3,7 @@ Given(/^the following articles exist:$/) do |table|
     hash = {}
     raw_hash.each_pair { |k, v| hash[k.to_s.downcase.squish.gsub(/\s+/, '_')] = v }
     if hash['author'].present?
-      u = User.find_by_first_name hash['author']
+      u = User.find_by first_name: hash['author']
       hash.except! 'author'
       article = u.articles.new hash
     else

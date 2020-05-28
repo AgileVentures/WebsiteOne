@@ -42,7 +42,7 @@ class EventInstancePresenter < BasePresenter
   end
 
   def video_link
-    return I18n.t('error_messages.video_missing') unless yt_video_id.present?
+    return I18n.t('error_messages.video_missing') if yt_video_id.blank?
     link_to title, video_url, id: yt_video_id, class: 'yt_link', data: { content: title }
   end
 
@@ -62,7 +62,7 @@ class EventInstancePresenter < BasePresenter
   def process_users(participant)
     begin
       person = participant.last['person']
-      user = Authentication.find_by(provider: 'gplus', uid: person['id']).try!(:user)
+      user = Authentication.find_by(provider: 'gplus', uid: person['id'])&.user
       user || NullUser.new(person[:displayName]) if user != host
     rescue NoMethodError
       Rails.logger.error "Exception at event_instance_presenter#map_to_users"

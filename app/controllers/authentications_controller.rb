@@ -5,7 +5,7 @@ class AuthenticationsController < ApplicationController
 
   def create
     omniauth = request.env['omniauth.auth']
-    authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+    authentication = Authentication.find_by(provider: omniauth['provider'], uid: omniauth['uid'])
 
     @path = request.env['omniauth.origin'] || root_path
 
@@ -40,7 +40,7 @@ class AuthenticationsController < ApplicationController
       flash[:alert] = 'Failed to unlink GitHub. Please use another provider for login or reset password.'
     elsif @authentication and @authentication.destroy
       user = User.find(current_user.id)
-      if user.update_attributes(github_profile_url: nil)
+      if user.update(github_profile_url: nil)
         flash[:notice] = 'Successfully removed profile.'
       else
         flash[:notice] = 'Github profile url could not be removed.'
@@ -65,7 +65,7 @@ class AuthenticationsController < ApplicationController
     end
 
     user = User.find(current_user.id)
-    if user.update_attributes(github_profile_url: url)
+    if user.update(github_profile_url: url)
       # success
       current_user.reload
     else

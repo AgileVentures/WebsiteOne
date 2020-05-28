@@ -42,7 +42,7 @@ describe Article, :type => :model do
       allow(subject).to receive(:get_upvotes).and_return(upvotes)
       allow(subject).to receive(:get_downvotes).and_return(downvotes)
 
-      expect(subject.vote_value).to eq -1
+      expect(subject.vote_value).to eq(-1)
     end
   end
 

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'StatisticsConcern' do
   before :all do
-    class FakeController < ActionController::Base
+    class FakeController < ApplicationController
       include Statistics
     end
     @time = Time.now

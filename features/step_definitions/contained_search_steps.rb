@@ -38,6 +38,6 @@ Then(/^(.*) within the (.*)$/) do |s, container|
       page.driver.within_frame('mercury_iframe') { step(s) }
 
     else
-      page.within(css_selector_for(container.downcase)) { step (s) }
+      page.within(css_selector_for(container.downcase)) { step(s) }
   end
 end

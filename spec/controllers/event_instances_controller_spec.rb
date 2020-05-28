@@ -44,7 +44,7 @@ describe EventInstancesController do
 
     it 'creates a hangout if there is no hangout assosciated with the event' do
       get :update, params: params
-      hangout = EventInstance.find_by_uid('333')
+      hangout = EventInstance.find_by(uid: '333')
       expect(hangout).to be_valid
     end
 

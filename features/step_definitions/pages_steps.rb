@@ -8,7 +8,7 @@ Given(/^the following pages exist$/) do |table|
   end
 end 
 
-Then /^I (am|should be) on the static "([^"]*)" page$/ do |option, page|
+Then(/^I (am|should be) on the static "([^"]*)" page$/) do |option, page|
   case option
     when 'am'
       visit static_page_path(page)
@@ -31,7 +31,7 @@ end
 Given(/^the following page revisions exist$/) do |table|
   table.hashes.each do |hash|
     hash[:revisions].to_i.times do |number|
-      page = StaticPage.find_by_title(hash[:title])
+      page = StaticPage.find_by(title: hash[:title])
       page.update(:body => "New content #{number}")
       page.save!
     end
@@ -39,12 +39,12 @@ Given(/^the following page revisions exist$/) do |table|
 end
 
 When(/^I should see ([^"]*) revisions for the page "([^"]*)"$/) do |revisions, document|
-  page = StaticPage.find_by_title(document)
+  page = StaticPage.find_by(title: document)
   expect page.versions.count == revisions
 end
 
 Given(/^the page "([^"]*)" has a child page with title "([^"]*)"$/) do |parent, child|
-  parent_page = StaticPage.find_by_title(parent)
+  parent_page = StaticPage.find_by(title: parent)
   StaticPage.create!(
       {
           title: child,

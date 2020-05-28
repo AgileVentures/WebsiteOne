@@ -231,7 +231,7 @@ class Event < ApplicationRecord
 
   def recent_hangouts
     event_instances
-      .where('created_at BETWEEN ? AND ?', 1.days.ago + duration.minutes, DateTime.now.end_of_day)
+      .where('created_at BETWEEN ? AND ?', 1.day.ago + duration.minutes, DateTime.now.end_of_day)
       .order(created_at: :desc)
   end
 
@@ -287,6 +287,6 @@ class Event < ApplicationRecord
   end
 
   def repeating_and_ends?
-    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
+    repeats != 'never' && repeat_ends && repeat_ends_on.present?
   end
 end

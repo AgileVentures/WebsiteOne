@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @users = users
     @users_count = @users.total_count
     @projects = Project.where(status: "active").sort { |a, b| a.title <=> b.title }
-    @user_type = params[:title].blank? ? 'Volunteer' : params[:title]
+    @user_type = params[:title].presence || 'Volunteer'
     @user_type = 'Premium Member' if params[:title] == 'Premium'
 
     respond_to do |format|
@@ -101,7 +101,7 @@ class UsersController < ApplicationController
   end
 
   def set_activity_tab(param)
-    return unless param.present?
+    return if param.blank?
     @param_tab = param
     unless UserPresenter.new(@user).contributed?
       @param_tab = nil

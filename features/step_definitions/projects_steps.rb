@@ -6,7 +6,7 @@ end
 Given(/^the following projects exist:$/) do |table|
   table.hashes.each do |hash|
     if hash[:author].present?
-      u = User.find_by_first_name hash[:author]
+      u = User.find_by first_name: hash[:author]
       project = Project.new(hash.except('author', 'tags').merge(user_id: u.id))
     else
       project = default_test_author.projects.new(hash.except('author', 'tags', 'languages'))
@@ -48,7 +48,7 @@ Given(/^the following legacy projects exist:$/) do |table|
 end
 
 Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |parent, child|
-  parent_doc = Document.find_by_title(parent)
+  parent_doc = Document.find_by(title: parent)
   parent_doc.children.create!(
       {
           :project_id => parent_doc.project_id,
@@ -59,7 +59,7 @@ Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |
 end
 
 Then(/^I should become a member of project "([^"]*)"$/) do | name|
-  object = Project.find_by_title(name)
+  object = Project.find_by(title: name)
   @user.follow(object)
 end
 
@@ -68,13 +68,13 @@ When(/^I am a member of project "([^"]*)"$/) do |name|
 end
 
 When(/^"(.*)" is a member of project "([^"]*)"$/) do |name, project|
-  user = User.find_by_first_name(name)
-  object = Project.find_by_title(project)
+  user = User.find_by(first_name: name)
+  object = Project.find_by(title: project)
   user.follow(object)
 end
 
 Then(/^I should stop being a member of project "([^"]*)"$/) do |name|
-  object = Project.find_by_title(name)
+  object = Project.find_by(title: name)
   @user.stop_following(object)
 end
 
@@ -83,8 +83,8 @@ When(/^I am not a member of project "([^"]*)"$/) do |name|
 end
 
 When(/^"(.*)" is not a member of project "([^"]*)"$/) do |name, project|
-  user = User.find_by_first_name(name)
-  object = Project.find_by_title(project)
+  user = User.find_by(first_name: name)
+  object = Project.find_by(title: project)
   user.stop_following(object)
 end
 
@@ -93,7 +93,7 @@ Given(/^I am on the home page$/) do
 end
 
 Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (\d+) days ago$/) do |parent, child, days_ago|
-  parent_doc = Document.find_by_title(parent)
+  parent_doc = Document.find_by(title: parent)
   parent_doc.children.create!(
       {
           :project_id => parent_doc.project_id,
@@ -109,12 +109,12 @@ end
 #  table.hashes
 #end
 
-Then /^I should see a link "([^"]*)" that connects to the "([^"]*)"$/ do |text, url|
+Then(/^I should see a link "([^"]*)" that connects to the "([^"]*)"$/) do |text, url|
   project = Project.find_by title: text
   step %Q{I should see a link "#{text}" to "#{project.send url}"}
 end
 
-Then /^I should see a link "([^"]*)" that connects to the issue tracker's url$/ do |link|
+Then(/^I should see a link "([^"]*)" that connects to the issue tracker's url$/) do |link|
   
   project = Project.find_by title: link
   project.issue_trackers.each do | issue_tracker |
@@ -123,12 +123,12 @@ Then /^I should see a link "([^"]*)" that connects to the issue tracker's url$/ 
 end
 
 Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, name|
-  object = Project.find_by_title(name)
+  object = Project.find_by(title: name)
   step %Q{I #{option} see link "#{object.github_url.split('/').last}"}
 end
 
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
-  project = Project.find_by_title(title)
+  project = Project.find_by(title: title)
   case item.downcase.pluralize
     when 'members'
       (1..num.to_i).each do
@@ -141,7 +141,7 @@ Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
 end
 
 Then(/^I should see (\d+) member avatars$/) do |count|
-  within ('#members-list') do
+  within('#members-list') do
     expect(page).to have_css '.user-preview', count: count
   end
 
@@ -151,7 +151,7 @@ Then(/^I should see projects looked up by title with the correct commit count:$/
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
   projects.each do | project |
-    updated_project = Project.find_by_title(project["title"])
+    updated_project = Project.find_by(title: project["title"])
     expect(updated_project.commit_count).to eq(project["commit_count"].to_i)
   end
 end
@@ -160,7 +160,7 @@ Then(/^I should see projects with pitch updated:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
   projects.each do | project |
-    updated_project = Project.find_by_title(project["title"])
+    updated_project = Project.find_by(title: project["title"])
     expect(updated_project.pitch).to match(/#{project["pitch"]}/)
   end
 end
@@ -169,7 +169,7 @@ Then(/^I should see projects looked up by title with first source repository sam
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
   projects.each do | project |
-    updated_project = Project.find_by_title(project["title"])
+    updated_project = Project.find_by(title: project["title"])
     expect(updated_project.github_url).to eq(project["github_url"])
     expect(updated_project.source_repositories.first.url).to eq(project["github_url"])
   end
@@ -179,7 +179,7 @@ Then(/^I should see projects with following updates:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
   projects.each do | project |
-    updated_project = Project.find_by_title(project["title"])
+    updated_project = Project.find_by(title: project["title"])
     expect(updated_project.last_github_update).to eq(project["last_github_update"])
   end
 end
@@ -188,7 +188,7 @@ Then(/^I should see projects with the following language updates:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
   projects.each do |project|
-    updated_project = Project.find_by_title(project["title"])
+    updated_project = Project.find_by(title: project["title"])
     @updated_language_array = Array.new
     updated_project.languages.each do |language|
       if language.name.eql?(project[:languages])
@@ -211,7 +211,7 @@ end
 
 
 Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_name, repo|
-  project = Project.find_by_title(project_name)
+  project = Project.find_by(title: project_name)
   project.source_repositories.create(url: repo)
 end
 

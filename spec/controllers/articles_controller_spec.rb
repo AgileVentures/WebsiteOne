@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ArticlesController do
 
-  let (:valid_params) { { article: { 'title' => 'title',
+  let(:valid_params) { { article: { 'title' => 'title',
                                      'content' => 'Content',
                                      'tag_list' => 'Ruby on Rails' } } }
 
@@ -144,7 +144,7 @@ describe ArticlesController do
 
     it 'should be successful for requests with valid params' do
       post :create, params:valid_params
-      expect(flash[:notice]).to match /^Successfully created the article/
+      expect(flash[:notice]).to match(/^Successfully created the article/)
       # Bryan: assumes title is equal to the friendly id
       expect(response).to redirect_to article_path(@article)
     end
@@ -173,7 +173,7 @@ describe ArticlesController do
       allow(@article).to receive(:create_activity)
     end
 
-    let (:valid_update_params) { valid_params.merge(id: @article.friendly_id) }
+    let(:valid_update_params) { valid_params.merge(id: @article.friendly_id) }
 
     it 'should require authentication' do
       expect(controller).to receive(:authenticate_user!)
@@ -187,7 +187,7 @@ describe ArticlesController do
 
     it 'should redirect the user back to the show page with a flash message on success' do
       post :update, params: valid_update_params
-      expect(flash[:notice]).to match /^Successfully updated the article/
+      expect(flash[:notice]).to match(/^Successfully updated the article/)
       expect(response).to redirect_to article_path(@article)
     end
 

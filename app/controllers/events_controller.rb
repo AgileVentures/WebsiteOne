@@ -44,7 +44,7 @@ class EventsController < ApplicationController
 
   def update
     begin
-      updated = @event.update_attributes(transform_params)
+      updated = @event.update(transform_params)
     rescue
       attr_error = 'attributes invalid'
     end
@@ -121,7 +121,7 @@ class EventsController < ApplicationController
   end
 
   def specified_project
-    @project = Project.friendly.find(params[:project_id]) unless params[:project_id].blank?
+    @project = Project.friendly.find(params[:project_id]) if params[:project_id].present?
   end
 
   def set_event

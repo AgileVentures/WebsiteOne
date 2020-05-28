@@ -126,7 +126,7 @@ describe User, type: :model do
     it 'should be remade when the display name changes' do
       subject.save
       slug = subject.slug
-      subject.update_attributes first_name: 'Shawn'
+      subject.update first_name: 'Shawn'
       expect(subject.slug).to_not eq slug
     end
 
@@ -203,7 +203,7 @@ describe User, type: :model do
 
     it 'should change location if ip changes' do
       subject.save
-      subject.update_attributes last_sign_in_ip: '50.78.167.161'
+      subject.update last_sign_in_ip: '50.78.167.161'
       expect(subject.city).to eq 'Seattle'
       expect(subject.country_name).to eq 'United States'
       expect(subject.country_code).to eq 'US'
@@ -281,11 +281,11 @@ describe User, type: :model do
       it 'returns the user if it exists' do
         user_with_github = FactoryBot.create(:user, github_profile_url: 'https://github.com/sampritipanda')
         user_without_github = FactoryBot.create(:user, github_profile_url: nil)
-        expect(User.find_by_github_username('sampritipanda')).to eq user_with_github
+        expect(User.find_by(github_username: 'sampritipanda')).to eq user_with_github
       end
 
       it 'returns nil if no user exists' do
-        expect(User.find_by_github_username('unknown-guy')).to be_nil
+        expect(User.find_by(github_username: 'unknown-guy')).to be_nil
       end
     end
 

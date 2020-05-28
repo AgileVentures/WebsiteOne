@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ::AgileVentures::AccessDenied do |_exception|
-    render file: "#{Rails.root}/public/403.html", status: 403, layout: false
+    render file: "#{Rails.root}/public/403.html", status: :forbidden, layout: false
   end
 
   private
@@ -89,7 +89,6 @@ class ApplicationController < ActionController::Base
   end
 
   # set current_user.id to a cookie to allow google analytics to access current_user var
-  private
 
   def set_user_id
     cookies[:user_id] = current_user.id if current_user

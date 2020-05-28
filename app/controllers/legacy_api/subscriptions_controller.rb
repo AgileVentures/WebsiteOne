@@ -5,7 +5,7 @@ class LegacyApi::SubscriptionsController < ApplicationController
 
   def authenticate_api!
     return true if authenticate_token
-    render json: { errors: [ { detail: 'Access denied' } ] }, status: 401
+    render json: { errors: [ { detail: 'Access denied' } ] }, status: :unauthorized
   end
 
   # I want to have a version in the api http://localhost:3000/api/v1/subscriptions.json

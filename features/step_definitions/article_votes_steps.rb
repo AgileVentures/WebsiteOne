@@ -24,7 +24,7 @@ end
 
 Given(/^I have voted "(.*?)" article "(.*?)"$/) do |up_or_down, article|
 
-  @article = Article.find_by_title( article )
+  @article = Article.find_by( title: article )
 
   case up_or_down.downcase
     when 'up'
@@ -40,6 +40,6 @@ end
 Given(/^I have authored article "(.*?)"$/) do |title|
   @user = default_test_author
   step %Q{I am logged in as "#{@user.first_name}"}
-  @article = Article.find_by_title title
+  @article = Article.find_by title: title
   @article ||= @user.articles.create( {title: title, content: 'An Author vote test article.'} )
 end
