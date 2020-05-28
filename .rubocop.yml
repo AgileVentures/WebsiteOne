@@ -1,6 +1,24 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
-  TargetRubyVersion: 2.5
   DisabledByDefault: true
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  TargetRubyVersion: 2.5
+  Exclude:
+    - 'spec/spec_helper.rb'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+
+require:
+  - rubocop-rspec
+  - rubocop-rails
+  - rubocop-performance
+
+Rails:
+ Enabled: true
 
 #################### Lint ################################
 
@@ -73,9 +91,11 @@ Layout/EndAlignment:
   Description: 'Align ends correctly.'
   Enabled: true
 
-Lint/EndInMethod:
-  Description: 'END blocks should not be placed inside method definitions.'
-  Enabled: true
+
+# Renamed to Style/EndBlock - and already defined at line 651
+# Lint/EndInMethod:
+#   Description: 'END blocks should not be placed inside method definitions.'
+#   Enabled: true
 
 Lint/EnsureReturn:
   Description: 'Do not use return in an ensure block.'
@@ -90,7 +110,12 @@ Lint/FormatParameterMismatch:
   Description: 'The number of parameters to format/sprint must match the fields.'
   Enabled: true
 
-Lint/HandleExceptions:
+#  Renamed to Lint/SuppressedException
+# Lint/HandleExceptions:
+#   Description: "Don't suppress exception."
+#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions'
+#   Enabled: true
+Lint/SuppressedException:
   Description: "Don't suppress exception."
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions'
   Enabled: true
@@ -143,7 +168,12 @@ Lint/ShadowingOuterLocalVariable:
                  for block arguments or block local variables.
   Enabled: true
 
-Lint/StringConversionInInterpolation:
+# Renamed to Lint/RedundantStringCoercion
+# Lint/StringConversionInInterpolation:
+#   Description: 'Checks for Object#to_s usage in string interpolation.'
+#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-to-s'
+#   Enabled: true
+Lint/RedundantStringCoercion:
   Description: 'Checks for Object#to_s usage in string interpolation.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-to-s'
   Enabled: true
@@ -152,7 +182,14 @@ Lint/UnderscorePrefixedVariableName:
   Description: 'Do not use prefix `_` for a variable that is used.'
   Enabled: true
 
-Lint/UnneededCopDisableDirective:
+  # Renamed to Lint/RedundantCopDisableDirective
+# Lint/UnneededCopDisableDirective:
+#   Description: >-
+#                  Checks for rubocop:disable comments that can be removed.
+#                  Note: this cop is not disabled when disabling all cops.
+#                  It must be explicitly disabled.
+#   Enabled: true
+Lint/RedundantCopDisableDirective:
   Description: >-
                  Checks for rubocop:disable comments that can be removed.
                  Note: this cop is not disabled when disabling all cops.
@@ -225,7 +262,7 @@ Metrics/CyclomaticComplexity:
                  of test cases needed to validate a method.
   Enabled: true
 
-Metrics/LineLength:
+Layout/LineLength:
   Description: 'Limit lines to 80 characters.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#80-character-limits'
   Enabled: false
@@ -286,7 +323,7 @@ Performance/ReverseEach:
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerablereverseeach-vs-enumerablereverse_each-code'
   Enabled: true
 
-Performance/Sample:
+Style/Sample:
   Description: >-
                   Use `sample` instead of `shuffle.first`,
                   `shuffle.last`, and `shuffle[Fixnum]`.
@@ -376,20 +413,41 @@ Style/Alias:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#alias-method'
   Enabled: false
 
-Layout/AlignArray:
-  Description: >-
-                 Align the elements of an array literal if they span more than
-                 one line.
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#align-multiline-arrays'
-  Enabled: false
+# Renamed to Layout/ArrayAlignment
+# Layout/AlignArray:
+#   Description: >-
+#                  Align the elements of an array literal if they span more than
+#                  one line.
+#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#align-multiline-arrays'
+#   Enabled: false
+#
+Layout/ArrayAlignment:
+ Description: >-
+                Align the elements of an array literal if they span more than
+                one line.
+ StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#align-multiline-arrays'
+ Enabled: false
 
-Layout/AlignHash:
+# Renamed to Layout/HashAlignment
+# Layout/AlignHash:
+#   Description: >-
+#                  Align the elements of a hash literal if they span more than
+#                  one line.
+#   Enabled: false
+Layout/HashAlignment:
   Description: >-
                  Align the elements of a hash literal if they span more than
                  one line.
   Enabled: false
 
-Layout/AlignParameters:
+# Renamed to Layout/ParameterAlignment
+# Layout/AlignParameters:
+#   Description: >-
+#                  Align the parameters of a method call if they span more
+#                  than one line.
+#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-double-indent'
+#   Enabled: false
+Layout/ParameterAlignment:
   Description: >-
                  Align the parameters of a method call if they span more
                  than one line.
@@ -448,9 +506,10 @@ Style/BlockDelimiters:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#single-line-blocks'
   Enabled: false
 
-Style/BracesAroundHashParameters:
-  Description: 'Enforce braces style around hash parameters.'
-  Enabled: false
+# Removed
+# Style/BracesAroundHashParameters:
+#   Description: 'Enforce braces style around hash parameters.'
+#   Enabled: false
 
 Style/CaseEquality:
   Description: 'Avoid explicit use of the case equality operator(===).'
@@ -591,7 +650,7 @@ Style/EmptyLiteral:
 Style/EndBlock:
   Description: 'Avoid the use of END blocks.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-END-blocks'
-  Enabled: false
+  Enabled: true
 
 Layout/EndOfLine:
   Description: 'Use Unix-style line endings.'
@@ -675,13 +734,23 @@ Layout/IndentationWidth:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-indentation'
   Enabled: false
 
-Layout/IndentArray:
+# Renamed to Layout/FirstArrayElementIndentation
+# Layout/IndentArray:
+#   Description: >-
+#                  Checks the indentation of the first element in an array
+#                  literal.
+#   Enabled: false
+Layout/FirstArrayElementIndentation:
   Description: >-
                  Checks the indentation of the first element in an array
                  literal.
   Enabled: false
 
-Layout/IndentHash:
+# Renamed to Layout/FirstHashElementIndentation
+# Layout/IndentHash:
+#   Description: 'Checks the indentation of the first key in a hash literal.'
+#   Enabled: false
+Layout/FirstHashElementIndentation:
   Description: 'Checks the indentation of the first key in a hash literal.'
   Enabled: false
 
@@ -1059,12 +1128,22 @@ Style/SymbolProc:
   Description: 'Use symbols as procs instead of blocks when possible.'
   Enabled: false
 
-Layout/Tab:
+# Renamed to Layout/IndentationStyle
+# Layout/Tab:
+#   Description: 'No hard tabs.'
+#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-indentation'
+#   Enabled: false
+Layout/IndentationStyle:
   Description: 'No hard tabs.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-indentation'
   Enabled: false
 
-Layout/TrailingBlankLines:
+# Renamed to Layout/TrailingEmptyLines
+# Layout/TrailingBlankLines:
+#   Description: 'Checks trailing blank lines and final newline.'
+#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#newline-eof'
+#   Enabled: false
+Layout/TrailingEmptyLines:
   Description: 'Checks trailing blank lines and final newline.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#newline-eof'
   Enabled: false
@@ -1096,11 +1175,20 @@ Style/UnlessElse:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-else-with-unless'
   Enabled: false
 
-Style/UnneededCapitalW:
+  # Renamed to Style/RedundantCapitalW
+# Style/UnneededCapitalW:
+#   Description: 'Checks for %W when interpolation is not needed.'
+#   Enabled: false
+Style/RedundantCapitalW:
   Description: 'Checks for %W when interpolation is not needed.'
   Enabled: false
 
-Style/UnneededPercentQ:
+  # Renamed to Style/RedundantPercentQ
+# Style/UnneededPercentQ:
+#   Description: 'Checks for %q/%Q when single quotes or double quotes would do.'
+#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-q'
+#   Enabled: false
+Style/RedundantPercentQ:
   Description: 'Checks for %q/%Q when single quotes or double quotes would do.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-q'
   Enabled: false

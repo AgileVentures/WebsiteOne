@@ -90,7 +90,6 @@ group :test do
   gem 'poltergeist'
   gem 'puffing-billy', '~> 2.2.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
-  gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
   gem 'stripe-ruby-mock', '~> 2.5.8', require: 'stripe_mock'
@@ -101,6 +100,10 @@ group :test do
 end
 
 group :development, :test do
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'rubocop-performance', require: false
   gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller'
