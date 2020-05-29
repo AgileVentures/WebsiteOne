@@ -3,13 +3,6 @@
     <div class="col-xs-9">
       <h1 id="projects-header">List of Projects</h1>
     </div>
-    <div class="col-xs-3">
-      <% if user_signed_in? %>
-        <ul class="user-controls new-project-btn">
-          <li><%= custom_css_btn 'new project', 'fa-2x fa fa-plus', new_project_path %></li>
-        </ul>
-      <% end %>
-    </div>
   </div>
 
   <% if @projects.empty? %>
