@@ -50,16 +50,11 @@ Rails.application.routes.draw do
 
   resources :projects, except: [:new, :create, :edit, :update, :destroy], :format => false do
     member do
-      put :mercury_update
-      get :mercury_saved
       get :follow
       get :unfollow
     end
 
-    resources :documents, except: [:edit, :update], :format => false do
-      put :mercury_update
-      get :mercury_saved
-    end
+    resources :documents, except: [:new, :create, :edit, :update, :destroy], :format => false
 
     resources :events, only: [:index]
   end
@@ -96,7 +91,6 @@ Rails.application.routes.draw do
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false
   get 'sections', to: 'documents#get_doc_categories', as: 'project_document_sections', :format => false
-  put 'update_document_parent_id/:project_id/:id', to: 'documents#update_parent_id', as: 'update_document_parent_id', :format => false
 
   get '/calendar' => 'calendar#index'
 

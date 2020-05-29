@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    initialze_projects
+    initialize_projects
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
     @projects = @projects.search(params[:search], params[:page])
@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
-  def initialze_projects
+  def initialize_projects
     @projects = Project.order('status ASC')
                        .order('last_github_update DESC NULLS LAST')
                        .order('commit_count DESC NULLS LAST')
