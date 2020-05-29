@@ -5,6 +5,9 @@ require:
 AllCops:
   TargetRubyVersion: 2.5
   DisabledByDefault: true
+  Exclude:
+    - app/models/user.rb
+    - lib/validators/uri_validator.rb
 
 #################### Lint ################################
 
