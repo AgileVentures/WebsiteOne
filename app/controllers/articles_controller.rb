@@ -15,48 +15,6 @@ class ArticlesController < ApplicationController
     @author = @article.user
   end
 
-  def new
-    @article = Article.new
-    @article.tag_list = [ params[:tag] ]
-  end
-
-  def edit
-  end
-
-  def create
-    @article = current_user.articles.build(article_params)
-
-    if @article.save
-      @article.create_activity :create, owner: current_user
-      flash[:notice] = %Q{Successfully created the article "#{@article.title}!"}
-      redirect_to article_path(@article)
-    else
-      flash.now[:alert] = @article.errors.full_messages.join(', ')
-      render 'new'
-    end
-  end
-
-  def update
-
-    if @article.update_attributes(article_params)
-      @article.create_activity :update, owner: current_user
-      flash[:notice] = %Q{Successfully updated the article "#{@article.title}"}
-      redirect_to article_path(@article)
-    else
-      flash.now[:alert] = @article.errors.full_messages.join(', ')
-      render 'edit'
-    end
-  end
-
-  def preview
-    @article = Article.new(article_params)
-
-    # fill with dummy data
-    @article.created_at = Time.now
-    @article.updated_at = Time.now
-    @author = current_user
-  end
-
   # article voting
   def upvote
     if @article.authored_by?(current_user) then
@@ -106,10 +64,6 @@ class ArticlesController < ApplicationController
   end
 
   private
-
-  def article_params
-    params[:article].permit(:title, :content, :tag_list)
-  end
 
   def load_article
     @article = Article.friendly.find(params[:id])

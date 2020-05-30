@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :articles, :format => false do
+  resources :articles, except: [:new, :create, :edit, :update, :destroy], :format => false do
     member do
       get :upvote
       get :downvote
@@ -75,9 +75,6 @@ Rails.application.routes.draw do
   get '/premium_members' => 'users#index', defaults: {title: 'Premium'}
 
   get '/verify/:id' => redirect { |params, _request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}" }
-
-  post 'preview/article', to: 'articles#preview', :format => false
-  patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
 
   get 'projects/:project_id/:id', to: 'documents#show', :format => false
 
