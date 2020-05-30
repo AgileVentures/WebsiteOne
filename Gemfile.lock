@@ -200,7 +200,7 @@ GEM
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
     dante (0.2.0)
-    database_cleaner (1.7.0)
+    database_cleaner (1.8.5)
     debug_inspector (0.0.3)
     deep_merge (1.2.1)
     delorean (2.1.0)
@@ -830,4 +830,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.17.1
+   1.17.2
