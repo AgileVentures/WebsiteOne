@@ -9,7 +9,7 @@ describe DocumentsController do
       'user_id' => "#{user.id}"
   } }
   let(:valid_session) { {} }
-  let(:categories) do 
+  let(:categories) do
     [
     FactoryBot.create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: "Title-1"),
     FactoryBot.create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: "Title-2")
@@ -21,7 +21,7 @@ describe DocumentsController do
     @user = FactoryBot.create(:user)
     request.env['warden'].stub :authenticate! => user
     controller.stub :current_user => user
-    @document = FactoryBot.create(:document)
+    @document = FactoryBot.create(:document, title: "doc title")
     allow(@document).to receive(:create_activity)
   end
 

@@ -235,7 +235,7 @@ describe User, type: :model do
     end
   end
 
-  describe '.filter' do
+  describe '.param_filter' do
     let(:params) { {} }
 
     context 'has filters' do
@@ -250,7 +250,7 @@ describe User, type: :model do
         @user2.stop_following @project
         params['project_filter'] = @project.id
 
-        results = User.filter(params).allow_to_display
+        results = User.param_filter(params).allow_to_display
 
         expect(results).to include(@user1)
         expect(results).not_to include(@user2)
@@ -258,7 +258,7 @@ describe User, type: :model do
     end
 
     context 'no filters' do
-      subject { User.filter(params).allow_to_display }
+      subject { User.param_filter(params).allow_to_display }
 
       before(:each) do
         FactoryBot.create(:user, first_name: 'Bob', created_at: 5.days.ago)
