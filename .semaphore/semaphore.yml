@@ -1,0 +1,39 @@
+version: v1.0
+name: Test MyApp
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Test
+    task:
+      env_vars:
+        - name: RAILS_ENV
+          value: test
+      secrets:
+        - name: stripe-sk
+        - name: stripe-pbk
+        - name: cc_test_id
+
+      jobs:
+        - name: Test
+          commands:
+            - checkout
+            - sem-service start postgres 11
+            - sem-version ruby 2.5.1
+            - sudo -u postgres createuser -s semaphore
+            - createdb -U postgres -h 0.0.0.0 websiteone_test
+            - change-phantomjs-version 2.1.1
+            - cache restore
+            - bundle install --deployment --path vendor/bundle
+            - npm install bower
+            - npm install
+            - cache store
+            - 'RAILS_ENV=test bundle exec rake db:migrate'
+            - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
+            - chmod +x ./cc-test-reporter
+            - ./cc-test-reporter before-build
+            - 'bundle exec rake jasmine:ci'
+            - 'bundle exec rake ci:tests'
+            - cat $HOME/cucumber_report.json || true
+            - ./cc-test-reporter after-build
