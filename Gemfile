@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '2.6.3'
 
 gem 'rails', '5.2.3'
 gem 'acts-as-taggable-on'
@@ -90,6 +90,8 @@ group :test do
   gem 'poltergeist'
   gem 'puffing-billy', '~> 2.2.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
+  gem 'rubocop-performance', '~> 1.5', '>= 1.5.2'
+  gem 'rubocop-rails', '~> 2.5', '>= 2.5.2'
   gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
