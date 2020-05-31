@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
 #TODO YA Add controller specs for all the code
 
   def index
-    initialze_projects
+    initialize_projects
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
     @projects = @projects.search(params[:search], params[:page])
@@ -21,38 +21,6 @@ class ProjectsController < ApplicationController
     relation = EventInstance.where(project_id: @project.id)
     @event_instances_count = relation.count
     @event_instances = relation.order(created_at: :desc).limit(25)
-  end
-
-  def new
-    @project = Project.new
-    @project.source_repositories.build
-    @project.issue_trackers.build
-    @project.languages.build
-  end
-
-  def create
-    @project = Project.new(project_params.merge('user_id' => current_user.id))
-    if @project.save
-      add_to_feed(:create)
-      redirect_to project_path(@project), notice: 'Project was successfully created.'
-    else
-      flash.now[:alert] = 'Project was not saved. Please check the input.'
-      render action: 'new'
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    if @project.update_attributes(project_params)
-      add_to_feed(:update)
-      redirect_to project_path(@project), notice: 'Project was successfully updated.'
-    else
-      # TODO change this to notify for invalid params
-      flash.now[:alert] = 'Project was not updated.'
-      render 'edit'
-    end
   end
 
   def follow
@@ -88,7 +56,7 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
-  def initialze_projects
+  def initialize_projects
     @projects = Project.order('status ASC')
                        .order('last_github_update DESC NULLS LAST')
                        .order('commit_count DESC NULLS LAST')

@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :articles, :format => false do
+  resources :articles, except: [:new, :create, :edit, :update, :destroy], :format => false do
     member do
       get :upvote
       get :downvote
@@ -48,18 +48,13 @@ Rails.application.routes.draw do
   resources :event_instances, :only => [:edit]
   patch '/event_instances/:id', to: 'event_instances#update_link'
 
-  resources :projects, except: [:destroy], :format => false do
+  resources :projects, except: [:new, :create, :edit, :update, :destroy], :format => false do
     member do
-      put :mercury_update
-      get :mercury_saved
       get :follow
       get :unfollow
     end
 
-    resources :documents, except: [:edit, :update], :format => false do
-      put :mercury_update
-      get :mercury_saved
-    end
+    resources :documents, except: [:new, :create, :edit, :update, :destroy], :format => false
 
     resources :events, only: [:index]
   end
@@ -81,9 +76,6 @@ Rails.application.routes.draw do
 
   get '/verify/:id' => redirect { |params, _request| "http://av-certificates.herokuapp.com/verify/#{params[:id]}" }
 
-  post 'preview/article', to: 'articles#preview', :format => false
-  patch 'preview/article', to: 'articles#preview', as: 'preview_articles', :format => false
-
   get 'projects/:project_id/:id', to: 'documents#show', :format => false
 
   get '/auth/:provider/callback' => 'authentications#create', :format => false
@@ -96,7 +88,6 @@ Rails.application.routes.draw do
   put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', :format => false
   get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', :format => false
   get 'sections', to: 'documents#get_doc_categories', as: 'project_document_sections', :format => false
-  put 'update_document_parent_id/:project_id/:id', to: 'documents#update_parent_id', as: 'update_document_parent_id', :format => false
 
   get '/calendar' => 'calendar#index'
 
