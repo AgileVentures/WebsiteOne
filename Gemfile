@@ -38,7 +38,7 @@ gem 'kramdown', '~> 2.1'
 gem 'letter_opener', :group => :development
 gem 'local_time', '~> 2.1'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
-gem 'nokogiri', '1.10.5'
+gem 'nokogiri', '1.10.8'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
