@@ -358,7 +358,7 @@ GEM
     json (2.2.0)
     jvectormap-rails (2.0.0)
       railties (>= 3.1)
-    jwt (2.1.0)
+    jwt (2.2.1)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
