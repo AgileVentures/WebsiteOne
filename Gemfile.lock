@@ -355,7 +355,7 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
-    json (2.2.0)
+    json (2.3.0)
     jvectormap-rails (2.0.0)
       railties (>= 3.1)
     jwt (2.1.0)
