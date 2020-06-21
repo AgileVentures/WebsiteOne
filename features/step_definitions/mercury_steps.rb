@@ -52,6 +52,7 @@ end
 
 When(/^I click on the "Insert Media" button$/) do
   find(:css, '.mercury-primary-toolbar .mercury-insertMedia-button').click()
+  sleep 1
 end
 
 Then(/^the Mercury Editor modal window should (not |)be visible$/) do |visible|
