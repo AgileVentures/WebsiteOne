@@ -371,7 +371,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    kramdown (2.1.0)
+    kramdown (2.2.1)
+      rexml
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.7.0)
@@ -544,6 +545,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rexml (3.2.4)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -764,7 +766,7 @@ DEPENDENCIES
   jvectormap-rails (~> 2.0)
   jwt
   kaminari
-  kramdown (~> 2.1)
+  kramdown (~> 2.2)
   launchy
   letter_opener
   local_time (~> 2.1)
