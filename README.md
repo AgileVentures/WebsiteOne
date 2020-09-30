@@ -27,7 +27,7 @@ Later Raoul Diffou joined to take over as project manager as Thomas and Bryan ha
 ## Approaches
 
 * Agile Development
-  * We try to work from user stories in regular sprints, offer daily standups, and get regular feedback from end users.  We try to reflect regularly on our process and experiment with incremental changes to how we get things done.
+  * We try to work from user stories in regular sprints, offer daily stand-ups, and get regular feedback from end users.  We try to reflect regularly on our process and experiment with incremental changes to how we get things done.
 * Behaviour Driven Development (BDD)
   - We use Cucumber and RSpec testing tools that describe the behaviours of the system and its units
   - We try to work outside in, starting with acceptance tests, dropping to integration tests, then unit tests and then writing application code
