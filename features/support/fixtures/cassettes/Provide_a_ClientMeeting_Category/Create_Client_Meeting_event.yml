@@ -79,7 +79,7 @@ http_interactions:
          * ======================================================================== */
         +function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.toggle"),f="object"==typeof b&&b;e||d.data("bs.toggle",e=new c(this,f)),"string"==typeof b&&e[b]&&e[b]()})}var c=function(b,c){this.$element=a(b),this.options=a.extend({},this.defaults(),c),this.render()};c.VERSION="2.2.0",c.DEFAULTS={on:"On",off:"Off",onstyle:"primary",offstyle:"default",size:"normal",style:"",width:null,height:null},c.prototype.defaults=function(){return{on:this.$element.attr("data-on")||c.DEFAULTS.on,off:this.$element.attr("data-off")||c.DEFAULTS.off,onstyle:this.$element.attr("data-onstyle")||c.DEFAULTS.onstyle,offstyle:this.$element.attr("data-offstyle")||c.DEFAULTS.offstyle,size:this.$element.attr("data-size")||c.DEFAULTS.size,style:this.$element.attr("data-style")||c.DEFAULTS.style,width:this.$element.attr("data-width")||c.DEFAULTS.width,height:this.$element.attr("data-height")||c.DEFAULTS.height}},c.prototype.render=function(){this._onstyle="btn-"+this.options.onstyle,this._offstyle="btn-"+this.options.offstyle;var b="large"===this.options.size?"btn-lg":"small"===this.options.size?"btn-sm":"mini"===this.options.size?"btn-xs":"",c=a('<label class="btn">').html(this.options.on).addClass(this._onstyle+" "+b),d=a('<label class="btn">').html(this.options.off).addClass(this._offstyle+" "+b+" active"),e=a('<span class="toggle-handle btn btn-default">').addClass(b),f=a('<div class="toggle-group">').append(c,d,e),g=a('<div class="toggle btn" data-toggle="toggle">').addClass(this.$element.prop("checked")?this._onstyle:this._offstyle+" off").addClass(b).addClass(this.options.style);this.$element.wrap(g),a.extend(this,{$toggle:this.$element.parent(),$toggleOn:c,$toggleOff:d,$toggleGroup:f}),this.$toggle.append(f);var h=this.options.width||Math.max(c.outerWidth(),d.outerWidth())+e.outerWidth()/2,i=this.options.height||Math.max(c.outerHeight(),d.outerHeight());c.addClass("toggle-on"),d.addClass("toggle-off"),this.$toggle.css({width:h,height:i}),this.options.height&&(c.css("line-height",c.height()+"px"),d.css("line-height",d.height()+"px")),this.update(!0),this.trigger(!0)},c.prototype.toggle=function(){this.$element.prop("checked")?this.off():this.on()},c.prototype.on=function(a){return this.$element.prop("disabled")?!1:(this.$toggle.removeClass(this._offstyle+" off").addClass(this._onstyle),this.$element.prop("checked",!0),void(a||this.trigger()))},c.prototype.off=function(a){return this.$element.prop("disabled")?!1:(this.$toggle.removeClass(this._onstyle).addClass(this._offstyle+" off"),this.$element.prop("checked",!1),void(a||this.trigger()))},c.prototype.enable=function(){this.$toggle.removeAttr("disabled"),this.$element.prop("disabled",!1)},c.prototype.disable=function(){this.$toggle.attr("disabled","disabled"),this.$element.prop("disabled",!0)},c.prototype.update=function(a){this.$element.prop("disabled")?this.disable():this.enable(),this.$element.prop("checked")?this.on(a):this.off(a)},c.prototype.trigger=function(b){this.$element.off("change.bs.toggle"),b||this.$element.change(),this.$element.on("change.bs.toggle",a.proxy(function(){this.update()},this))},c.prototype.destroy=function(){this.$element.off("change.bs.toggle"),this.$toggleGroup.remove(),this.$element.removeData("bs.toggle"),this.$element.unwrap()};var d=a.fn.bootstrapToggle;a.fn.bootstrapToggle=b,a.fn.bootstrapToggle.Constructor=c,a.fn.toggle.noConflict=function(){return a.fn.bootstrapToggle=d,this},a(function(){a("input[type=checkbox][data-toggle^=toggle]").bootstrapToggle()}),a(document).on("click.bs.toggle","div[data-toggle^=toggle]",function(b){var c=a(this).find("input[type=checkbox]");c.bootstrapToggle("toggle"),b.preventDefault()})}(jQuery);
         //# sourceMappingURL=bootstrap-toggle.min.js.map
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Feb 2014 07:01:05 GMT
 - request:
     method: get
@@ -179,6 +179,323 @@ http_interactions:
         .toggle.btn-xs{min-width:35px;min-height:22px}
         .toggle-on.btn-xs{padding-right:12px}
         .toggle-off.btn-xs{padding-left:12px}
-    http_version: 
+    http_version:
   recorded_at: Mon, 03 Feb 2014 07:01:05 GMT
-recorded_with: VCR 4.0.0
+- request:
+    method: post
+    uri: http://hn.inspectlet.com/ginit/1674848404
+    body:
+      encoding: UTF-8
+      string: w=1674848404&uid=-1&sid=-1&pad=-1&nv=true&u=http%3A%2F%2F127.0.0.1%3A55024%2Fevents&or=http%3A%2F%2F127.0.0.1%3A55024&ref=&title=Events+%7C+AgileVentures&pw=1024&ph=768&ism=false&cloc=undefined&sd=768&st=1565&dbgk=&jv=4&identity=&targcv%5Blochref%5D=http%3A%2F%2F127.0.0.1%3A55024%2Fevents&targcv%5Bdoctitle%5D=Events+%7C+AgileVentures&targcv%5Blptitle%5D=Events+%7C+AgileVentures&targcv%5Blpurl%5D=http%3A%2F%2F127.0.0.1%3A55024%2Fevents&targcv%5B%24browser%5D%5Bwebkit%5D=true&targcv%5B%24browser%5D%5Bversion%5D=538.1&targcv%5B%24browser%5D%5Bsafari%5D=true&targcv%5BuserAgent%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bmobchua%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bref%5D=&targcv%5Bnv%5D=true&isvp=false
+    headers:
+      Accept:
+      - application/json, text/javascript, */*; q=0.01
+      Referer:
+      - http://127.0.0.1:55024/events
+      Origin:
+      - http://127.0.0.1:55024
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=UTF-8
+      Content-Length:
+      - '888'
+      Cookie:
+      - __cfduid=d0b7dd6ca78e185c3b0c9f5f51e9b00351604448394
+      Connection:
+      - Keep-Alive
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-US,*
+      Host:
+      - hn.inspectlet.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - close
+      X-Powered-By:
+      - Express
+      Cache-Control:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - http://127.0.0.1:55024
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Access-Control-Allow-Headers:
+      - X-Requested-With, Content-Type
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '27'
+      Date:
+      - Wed, 04 Nov 2020 00:06:38 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"noinspectlet":"crawlbot"}'
+    http_version:
+  recorded_at: Mon, 03 Feb 2014 07:01:04 GMT
+- request:
+    method: get
+    uri: https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/css,*/*;q=0.1
+      Referer:
+      - http://127.0.0.1:55024/events/whatever
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Connection:
+      - Keep-Alive
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-US,*
+      Host:
+      - gitcdn.github.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - close
+      Content-Length:
+      - '1590'
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/css; charset=utf-8
+      X-Origin-Cache:
+      - HIT
+      Last-Modified:
+      - Thu, 17 Mar 2016 21:46:39 GMT
+      Etag:
+      - '"56eb25bf-636"'
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Tue, 03 Nov 2020 13:10:10 GMT
+      Cache-Control:
+      - max-age=600
+      X-Proxy-Cache:
+      - MISS
+      X-Github-Request-Id:
+      - 1550:7B4C:BD5026:E11212:5FA1545A
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 04 Nov 2020 00:06:40 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-bos4680-BOS
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1604448400.256446,VS0,VE16
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-Id:
+      - ad0d9852cfd9abb579050e1d7c1fb6bd83557206
+    body:
+      encoding: UTF-8
+      string: |-
+        /*! ========================================================================
+         * Bootstrap Toggle: bootstrap-toggle.css v2.2.0
+         * http://www.bootstraptoggle.com
+         * ========================================================================
+         * Copyright 2014 Min Hur, The New York Times Company
+         * Licensed under MIT
+         * ======================================================================== */
+        .checkbox label .toggle,.checkbox-inline .toggle{margin-left:-20px;margin-right:5px}
+        .toggle{position:relative;overflow:hidden}
+        .toggle input[type=checkbox]{display:none}
+        .toggle-group{position:absolute;width:200%;top:0;bottom:0;left:0;transition:left .35s;-webkit-transition:left .35s;-moz-user-select:none;-webkit-user-select:none}
+        .toggle.off .toggle-group{left:-100%}
+        .toggle-on{position:absolute;top:0;bottom:0;left:0;right:50%;margin:0;border:0;border-radius:0}
+        .toggle-off{position:absolute;top:0;bottom:0;left:50%;right:0;margin:0;border:0;border-radius:0}
+        .toggle-handle{position:relative;margin:0 auto;padding-top:0;padding-bottom:0;height:100%;width:0;border-width:0 1px}
+        .toggle.btn{min-width:59px;min-height:34px}
+        .toggle-on.btn{padding-right:24px}
+        .toggle-off.btn{padding-left:24px}
+        .toggle.btn-lg{min-width:79px;min-height:45px}
+        .toggle-on.btn-lg{padding-right:31px}
+        .toggle-off.btn-lg{padding-left:31px}
+        .toggle-handle.btn-lg{width:40px}
+        .toggle.btn-sm{min-width:50px;min-height:30px}
+        .toggle-on.btn-sm{padding-right:20px}
+        .toggle-off.btn-sm{padding-left:20px}
+        .toggle.btn-xs{min-width:35px;min-height:22px}
+        .toggle-on.btn-xs{padding-right:12px}
+        .toggle-off.btn-xs{padding-left:12px}
+    http_version:
+  recorded_at: Mon, 03 Feb 2014 07:01:06 GMT
+- request:
+    method: get
+    uri: https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Referer:
+      - http://127.0.0.1:55024/events/whatever
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Connection:
+      - Keep-Alive
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-US,*
+      Host:
+      - gitcdn.github.io
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - close
+      Content-Length:
+      - '4129'
+      Server:
+      - GitHub.com
+      Content-Type:
+      - application/javascript; charset=utf-8
+      X-Origin-Cache:
+      - HIT
+      Last-Modified:
+      - Thu, 17 Mar 2016 21:46:39 GMT
+      Etag:
+      - '"56eb25bf-1021"'
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Mon, 02 Nov 2020 15:30:22 GMT
+      Cache-Control:
+      - max-age=600
+      X-Proxy-Cache:
+      - HIT
+      X-Github-Request-Id:
+      - 3A98:4F78:542751:64D884:5FA02432
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 04 Nov 2020 00:06:40 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-bos4664-BOS
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1604448400.267025,VS0,VE17
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-Id:
+      - 454c0f65ecc3cbd4dd6da4664d960672c7fb9d3e
+    body:
+      encoding: UTF-8
+      string: |-
+        /*! ========================================================================
+         * Bootstrap Toggle: bootstrap-toggle.js v2.2.0
+         * http://www.bootstraptoggle.com
+         * ========================================================================
+         * Copyright 2014 Min Hur, The New York Times Company
+         * Licensed under MIT
+         * ======================================================================== */
+        +function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.toggle"),f="object"==typeof b&&b;e||d.data("bs.toggle",e=new c(this,f)),"string"==typeof b&&e[b]&&e[b]()})}var c=function(b,c){this.$element=a(b),this.options=a.extend({},this.defaults(),c),this.render()};c.VERSION="2.2.0",c.DEFAULTS={on:"On",off:"Off",onstyle:"primary",offstyle:"default",size:"normal",style:"",width:null,height:null},c.prototype.defaults=function(){return{on:this.$element.attr("data-on")||c.DEFAULTS.on,off:this.$element.attr("data-off")||c.DEFAULTS.off,onstyle:this.$element.attr("data-onstyle")||c.DEFAULTS.onstyle,offstyle:this.$element.attr("data-offstyle")||c.DEFAULTS.offstyle,size:this.$element.attr("data-size")||c.DEFAULTS.size,style:this.$element.attr("data-style")||c.DEFAULTS.style,width:this.$element.attr("data-width")||c.DEFAULTS.width,height:this.$element.attr("data-height")||c.DEFAULTS.height}},c.prototype.render=function(){this._onstyle="btn-"+this.options.onstyle,this._offstyle="btn-"+this.options.offstyle;var b="large"===this.options.size?"btn-lg":"small"===this.options.size?"btn-sm":"mini"===this.options.size?"btn-xs":"",c=a('<label class="btn">').html(this.options.on).addClass(this._onstyle+" "+b),d=a('<label class="btn">').html(this.options.off).addClass(this._offstyle+" "+b+" active"),e=a('<span class="toggle-handle btn btn-default">').addClass(b),f=a('<div class="toggle-group">').append(c,d,e),g=a('<div class="toggle btn" data-toggle="toggle">').addClass(this.$element.prop("checked")?this._onstyle:this._offstyle+" off").addClass(b).addClass(this.options.style);this.$element.wrap(g),a.extend(this,{$toggle:this.$element.parent(),$toggleOn:c,$toggleOff:d,$toggleGroup:f}),this.$toggle.append(f);var h=this.options.width||Math.max(c.outerWidth(),d.outerWidth())+e.outerWidth()/2,i=this.options.height||Math.max(c.outerHeight(),d.outerHeight());c.addClass("toggle-on"),d.addClass("toggle-off"),this.$toggle.css({width:h,height:i}),this.options.height&&(c.css("line-height",c.height()+"px"),d.css("line-height",d.height()+"px")),this.update(!0),this.trigger(!0)},c.prototype.toggle=function(){this.$element.prop("checked")?this.off():this.on()},c.prototype.on=function(a){return this.$element.prop("disabled")?!1:(this.$toggle.removeClass(this._offstyle+" off").addClass(this._onstyle),this.$element.prop("checked",!0),void(a||this.trigger()))},c.prototype.off=function(a){return this.$element.prop("disabled")?!1:(this.$toggle.removeClass(this._onstyle).addClass(this._offstyle+" off"),this.$element.prop("checked",!1),void(a||this.trigger()))},c.prototype.enable=function(){this.$toggle.removeAttr("disabled"),this.$element.prop("disabled",!1)},c.prototype.disable=function(){this.$toggle.attr("disabled","disabled"),this.$element.prop("disabled",!0)},c.prototype.update=function(a){this.$element.prop("disabled")?this.disable():this.enable(),this.$element.prop("checked")?this.on(a):this.off(a)},c.prototype.trigger=function(b){this.$element.off("change.bs.toggle"),b||this.$element.change(),this.$element.on("change.bs.toggle",a.proxy(function(){this.update()},this))},c.prototype.destroy=function(){this.$element.off("change.bs.toggle"),this.$toggleGroup.remove(),this.$element.removeData("bs.toggle"),this.$element.unwrap()};var d=a.fn.bootstrapToggle;a.fn.bootstrapToggle=b,a.fn.bootstrapToggle.Constructor=c,a.fn.toggle.noConflict=function(){return a.fn.bootstrapToggle=d,this},a(function(){a("input[type=checkbox][data-toggle^=toggle]").bootstrapToggle()}),a(document).on("click.bs.toggle","div[data-toggle^=toggle]",function(b){var c=a(this).find("input[type=checkbox]");c.bootstrapToggle("toggle"),b.preventDefault()})}(jQuery);
+        //# sourceMappingURL=bootstrap-toggle.min.js.map
+    http_version:
+  recorded_at: Mon, 03 Feb 2014 07:01:06 GMT
+- request:
+    method: post
+    uri: http://hn.inspectlet.com/ginit/1674848404
+    body:
+      encoding: UTF-8
+      string: w=1674848404&uid=-1&sid=-1&pad=-1&nv=true&u=http%3A%2F%2F127.0.0.1%3A62065%2Fevents%2Fnew&or=http%3A%2F%2F127.0.0.1%3A62065&ref=http%3A%2F%2F127.0.0.1%3A62065%2Fevents&title=New+Events+%7C+AgileVentures&pw=1024&ph=768&ism=false&cloc=undefined&sd=768&st=1392&dbgk=&jv=4&identity=&targcv%5Blochref%5D=http%3A%2F%2F127.0.0.1%3A62065%2Fevents%2Fnew&targcv%5Bdoctitle%5D=New+Events+%7C+AgileVentures&targcv%5Blptitle%5D=New+Events+%7C+AgileVentures&targcv%5Blpurl%5D=http%3A%2F%2F127.0.0.1%3A62065%2Fevents%2Fnew&targcv%5B%24browser%5D%5Bwebkit%5D=true&targcv%5B%24browser%5D%5Bversion%5D=538.1&targcv%5B%24browser%5D%5Bsafari%5D=true&targcv%5BuserAgent%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bmobchua%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bref%5D=http%3A%2F%2F127.0.0.1%3A62065%2Fevents&targcv%5Bnv%5D=true&isvp=false
+    headers:
+      Accept:
+      - application/json, text/javascript, */*; q=0.01
+      Referer:
+      - http://127.0.0.1:62065/events/new
+      Origin:
+      - http://127.0.0.1:62065
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=UTF-8
+      Content-Length:
+      - '996'
+      Cookie:
+      - __cfduid=d0b7dd6ca78e185c3b0c9f5f51e9b00351604448394
+      Connection:
+      - Keep-Alive
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-US,*
+      Host:
+      - hn.inspectlet.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - close
+      X-Powered-By:
+      - Express
+      Cache-Control:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - http://127.0.0.1:62065
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Access-Control-Allow-Headers:
+      - X-Requested-With, Content-Type
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '27'
+      Date:
+      - Wed, 04 Nov 2020 11:33:18 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"noinspectlet":"crawlbot"}'
+    http_version:
+  recorded_at: Mon, 03 Feb 2014 07:01:05 GMT
+recorded_with: VCR 5.0.0
