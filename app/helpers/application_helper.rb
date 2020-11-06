@@ -39,7 +39,7 @@ module ApplicationHelper
   end
 
   def current_projects
-    Project.where(status: ["active", "Active"]).order('title ASC').order('commit_count DESC NULLS LAST')
+    Project.order('title ASC').order('commit_count DESC NULLS LAST') #.where(status: ["active", "Active"])
   end
 
   def date_format(date)
