@@ -52,3 +52,21 @@ $(document).on('ready', function () {
   var params = "&infinite=true"
   infiniteScroll(params);
 });
+
+var ProjectListFilter = {
+  filter_inactive: function() {
+    if ($(this).is(':checked')) {
+      $('a.inactive').css({ display: "none" });
+    } else {
+      $('a.inactive').css({ display: "" });
+    }
+  },
+  setup: function() {
+    var labelAndCheckbox =
+    $('<form><label for="activefilter">Show Only Active Projects:</label>' +
+      '<input type="checkbox" id="activefilter" checked=true/></form>' );
+    labelAndCheckbox.insertAfter('#sidebar');
+    $('#activefilter').on("click", ProjectListFilter.filter_inactive);
+  }
+}
+$(ProjectListFilter.setup);

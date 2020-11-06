@@ -31,21 +31,20 @@ Feature: Browse  projects
     Then I should see "List of Projects" table
 
   @javascript
-  Scenario: Display most recently updated at top "Our Projects" page paginated with Infinite Scroll
+  Scenario: Display most recently updated at top "Our Projects" page
     Given I am on the "home" page
     When I follow "Projects" within the navbar
-    Then I should see "<title>" within "project-list":
+    Then I should see "<title>" within "sidebar":
       | title          |
       | hello world    |
       | hello alpha    |
       | hello mars     |
       | hello mercury  |
       | hello jupiter  |
-    And I scroll to the bottom of the page
-    Then I should see "<title>" within "project-list":
-      | title          |
-      | hello saturn   |
-      | hello venus    |
-      | hello sun      |
-      | hello terra    |
-      | hello pluto    |
+    But I should not see "hello pluto" within "sidebar"
+
+  @javascript
+  Scenario: Display also closed projects
+    Given I am on the "projects" page
+    And I uncheck active
+    Then I should see "hello pluto" within "sidebar"

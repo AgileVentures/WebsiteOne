@@ -93,11 +93,17 @@ class ProjectsController < ApplicationController
                        .order('last_github_update DESC NULLS LAST')
                        .order('commit_count DESC NULLS LAST')
                        .includes(:user)
+                       .param_filter(set_filter_params)
   end
 
   def filter_projects_list_by_language
     @language = params[:project][:languages]
     @projects = @projects.search_by_language(@language)
+  end
+
+  def set_filter_params
+    filter_params = params.slice(:project_filter, :active, :title)
+    filter_params
   end
 
   def add_to_feed(action)
