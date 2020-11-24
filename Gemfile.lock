@@ -72,16 +72,16 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    acts-as-taggable-on (6.0.0)
-      activerecord (~> 5.0)
-    acts_as_tree (2.9.0)
+    acts-as-taggable-on (6.5.0)
+      activerecord (>= 5.0, < 6.1)
+    acts_as_tree (2.9.1)
       activerecord (>= 3.0.0)
     acts_as_votable (0.12.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    airbrake (9.4.3)
-      airbrake-ruby (~> 4.6)
-    airbrake-ruby (4.6.0)
+    airbrake (9.5.5)
+      airbrake-ruby (~> 4.8)
+    airbrake-ruby (4.8.0)
       rbtree3 (~> 0.5)
     apipie-rails (0.5.16)
       rails (>= 4.1)
@@ -107,7 +107,7 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    brakeman (4.7.0)
+    brakeman (4.7.2)
     builder (3.2.4)
     bullet (6.0.2)
       activesupport (>= 3.0.0)
@@ -119,7 +119,7 @@ GEM
       activesupport (>= 3.2.0)
       tzinfo
     byebug (10.0.2)
-    capybara (3.29.0)
+    capybara (3.32.2)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -127,7 +127,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    capybara-screenshot (1.0.23)
+    capybara-screenshot (1.0.24)
       capybara (>= 1.0, < 4)
       launchy
     capybara-selenium (0.0.6)
@@ -190,7 +190,7 @@ GEM
       cucumber-tag_expressions (~> 1.1.0)
       gherkin (~> 5.0)
     cucumber-expressions (6.0.1)
-    cucumber-rails (1.8.0)
+    cucumber-rails (2.0.0)
       capybara (>= 2.12, < 4)
       cucumber (>= 3.0.2, < 4)
       mime-types (>= 2.0, < 4)
@@ -199,14 +199,14 @@ GEM
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
     dante (0.2.0)
-    database_cleaner (1.7.0)
+    database_cleaner (1.8.5)
     debug_inspector (0.0.3)
     deep_merge (1.2.1)
     delorean (2.1.0)
       chronic
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.7.0)
+    devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -284,7 +284,7 @@ GEM
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
-    faker (2.6.0)
+    faker (2.7.0)
       i18n (>= 1.6, < 1.8)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
@@ -308,7 +308,7 @@ GEM
       rack (>= 1.3.0)
       rack-accept
       virtus (>= 1.0.0)
-    guard (2.15.1)
+    guard (2.16.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
       lumberjack (>= 1.0.12, < 2.0)
@@ -345,7 +345,7 @@ GEM
       ice_cube (~> 0.16)
     ice_cube (0.16.3)
     ice_nine (0.11.2)
-    jaro_winkler (1.5.3)
+    jaro_winkler (1.5.4)
     jasmine (3.5.0)
       jasmine-core (~> 3.5.0)
       phantomjs
@@ -362,22 +362,22 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
-    json (2.2.0)
+    json (2.3.0)
     jvectormap-rails (2.0.0)
       railties (>= 3.1)
     jwt (2.1.0)
-    kaminari (1.1.1)
+    kaminari (1.2.1)
       activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.1.1)
-      kaminari-activerecord (= 1.1.1)
-      kaminari-core (= 1.1.1)
-    kaminari-actionview (1.1.1)
+      kaminari-actionview (= 1.2.1)
+      kaminari-activerecord (= 1.2.1)
+      kaminari-core (= 1.2.1)
+    kaminari-actionview (1.2.1)
       actionview
-      kaminari-core (= 1.1.1)
-    kaminari-activerecord (1.1.1)
+      kaminari-core (= 1.2.1)
+    kaminari-activerecord (1.2.1)
       activerecord
-      kaminari-core (= 1.1.1)
-    kaminari-core (1.1.1)
+      kaminari-core (= 1.2.1)
+    kaminari-core (1.2.1)
     kramdown (2.1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -403,7 +403,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.2)
     msgpack (1.3.1)
-    multi_json (1.13.1)
+    multi_json (1.14.1)
     multi_test (0.1.2)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
@@ -446,7 +446,7 @@ GEM
     paper_trail (10.3.1)
       activerecord (>= 4.2)
       request_store (~> 1.1)
-    parallel (1.18.0)
+    parallel (1.19.1)
     paranoia (2.4.2)
       activerecord (>= 4.0, < 6.1)
     parser (2.6.5.0)
@@ -473,8 +473,8 @@ GEM
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
-    public_suffix (4.0.1)
-    puffing-billy (2.1.1)
+    public_suffix (4.0.5)
+    puffing-billy (2.2.0)
       addressable (~> 2.5)
       em-http-request (~> 1.1, >= 1.1.0)
       em-synchrony
@@ -482,17 +482,18 @@ GEM
       eventmachine_httpserver
       http_parser.rb (~> 0.6.0)
       multi_json
-    puma (4.2.1)
+    puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-accept (0.4.5)
       rack (>= 0.4)
-    rack-cache (1.9.0)
+    rack-cache (1.10.0)
       rack (>= 0.4)
-    rack-cors (1.0.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rack-timeout (0.5.1)
+    rack-timeout (0.5.2)
     railroady (1.5.3)
     rails (5.2.4.4)
       actioncable (= 5.2.4.4)
@@ -540,7 +541,7 @@ GEM
       json
     redcarpet (3.5.0)
     ref (2.0.0)
-    regexp_parser (1.6.0)
+    regexp_parser (1.7.1)
     request_store (1.4.1)
       rack (>= 1.4)
     responders (3.0.0)
@@ -558,18 +559,18 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       rspec-mocks (>= 2.99, < 4.0)
-    rspec-core (3.8.0)
+    rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
-    rspec-expectations (3.8.2)
+    rspec-expectations (3.8.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-html-matchers (0.9.1)
+    rspec-html-matchers (0.9.2)
       nokogiri (~> 1)
       rspec (>= 3.0.0.a, < 4)
-    rspec-mocks (3.8.0)
+    rspec-mocks (3.8.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-rails (3.8.2)
+    rspec-rails (3.8.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -577,22 +578,28 @@ GEM
       rspec-expectations (~> 3.8.0)
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
-    rspec-support (3.8.0)
-    rubocop (0.75.1)
+    rspec-support (3.8.3)
+    rubocop (0.77.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
-    rubocop-rspec (1.36.0)
+    rubocop-performance (1.5.2)
+      rubocop (>= 0.71.0)
+    rubocop-rails (2.5.2)
+      activesupport
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
+    rubocop-rspec (1.37.1)
       rubocop (>= 0.68.1)
     ruby-gitter (0.1.0)
       hashie
       httparty
     ruby-graphviz (1.2.4)
     ruby-progressbar (1.10.1)
-    rubyzip (2.0.0)
+    rubyzip (2.3.0)
     safe_yaml (1.0.5)
     sass (3.4.25)
     sass-rails (5.0.8)
@@ -610,7 +617,7 @@ GEM
     seed_dump (3.3.1)
       activerecord (>= 4)
       activesupport (>= 4)
-    selenium-webdriver (3.142.6)
+    selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     shellany (0.0.1)
@@ -700,7 +707,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     youtube_rails (1.2.2)
-    yt (0.32.4)
+    yt (0.32.5)
       activesupport
     yui-compressor (0.12.0)
     zeus (0.15.14)
@@ -770,7 +777,7 @@ DEPENDENCIES
   local_time (~> 2.1)
   mercury-rails!
   newrelic_rpm
-  nokogiri (= 1.10.4)
+  nokogiri (= 1.10.8)
   octokit
   omniauth
   omniauth-github
@@ -786,7 +793,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
-  puffing-billy (~> 2.1.1)
+  puffing-billy (~> 2.2.0)
   puma
   rack-cache
   rack-cors
@@ -803,6 +810,8 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-html-matchers
   rspec-rails
+  rubocop-performance (~> 1.5, >= 1.5.2)
+  rubocop-rails (~> 2.5, >= 2.5.2)
   rubocop-rspec (>= 1.28)
   ruby-gitter
   sass-rails
@@ -837,4 +846,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   1.17.1
+   1.17.2
