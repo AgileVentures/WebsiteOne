@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '2.7.2'
 
-gem 'rails', '5.2.3'
+gem 'rails', '5.2.4.4'
 gem 'acts-as-taggable-on'
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts_as_tree'
@@ -61,6 +61,7 @@ gem 'sass-rails'
 gem 'simple_form', '~> 5.0'
 gem 'slack-ruby-client'
 gem 'spinjs-rails'
+gem 'sprockets', '<4'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'stripe'
 gem 'sucker_punch'
