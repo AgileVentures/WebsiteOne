@@ -24,4 +24,21 @@
     <nav id="sidebar" role="complementary">
       <%= render partial: 'layouts/sidebar', locals: { project: @project, document: @document } %>
     </nav>
+    <h1>List of Projects by Recent Activity</h1>
+    <div class="row stack-search">
+      <%= simple_form_for(:project, method: "get", html: { class: 'form-vertical no-margin' }) do |f| %>
+      <div class="col-xs-12 flex">
+        <%= f.input :languages, label: 'Search projects by programming language', collection: @projects_languages_array, selected: @language, include_blank: true %>
+        <div class="language-search-btn">
+          <%= f.button :submit, 'Search', class: 'btn btn-search btn' %>
+        </div>
+      </div>
+    </div>
   <% end %>
+  <div class="row">
+    <ul id="project-list" style="list-style: none; padding-left: 0;">
+      <%= render 'listing' %>
+    </ul>
+  </div>
+  <%= will_paginate @projects %>
+<% end %>
