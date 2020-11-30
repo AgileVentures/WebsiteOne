@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.6.3
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get update -qq && apt-get install -y build-essential \
