@@ -56,7 +56,7 @@ source ~/.rvm/scripts/rvm
 
 ## Install ruby
 ```
-rvm install ruby-2.6.3
+rvm install ruby-2.7.2
 ```
 
 ## Clone the respository (after a fork)
@@ -66,7 +66,7 @@ git clone git@github.com:<your github handle>/WebsiteOne.git
 
 ## Generate rvm config files within project
 ```
-rvm use ruby-2.6.3@WebsiteOne --ruby-version --create
+rvm use ruby-2.7.2@WebsiteOne --ruby-version --create
 ```
 
 ## Install bundler
