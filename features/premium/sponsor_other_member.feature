@@ -16,19 +16,19 @@ Feature: Allow Users to Sponsor other members
       | Billy      | Bob       | bob@btinternet.co.uk | http://github.com/BillyBob | 127.0.0.1       |
     And the email queue is clear
 
-  Scenario: User upgrades another user from free tier to premium via card
-    Given I have logged in
-    And I visit Alice's profile page
-    And I click "Sponsor for Premium"
-    And I click "Subscribe" within the card_section
-    When I fill in appropriate card details for premium
-    Then I should see "you have sponsored Alice Jones as a Premium Member"
-    And "alice@btinternet.co.uk" should receive a "You've been sponsored for AgileVentures Premium Membership" email
-    Given I visit Alice's profile page
-    Then I should see "Premium Member"
-    And I should not see "Basic Member"
-    And I should not see "Sponsor for Premium"
-    And I should not see "Upgrade to Premium"
+  # Scenario: User upgrades another user from free tier to premium via card
+  #   Given I have logged in
+  #   And I visit Alice's profile page
+  #   And I click "Sponsor for Premium"
+  #   And I click "Subscribe" within the card_section
+  #   When I fill in appropriate card details for premium
+  #   Then I should see "you have sponsored Alice Jones as a Premium Member"
+  #   And "alice@btinternet.co.uk" should receive a "You've been sponsored for AgileVentures Premium Membership" email
+  #   Given I visit Alice's profile page
+  #   Then I should see "Premium Member"
+  #   And I should not see "Basic Member"
+  #   And I should not see "Sponsor for Premium"
+  #   And I should not see "Upgrade to Premium"
 
   Scenario: User upgrades another user from free tier to premium via PayPal
     Given I have logged in
@@ -45,21 +45,21 @@ Feature: Allow Users to Sponsor other members
     And I should not see "Upgrade to Premium"
     And I should be Alice's sponsor
 
-  Scenario: non logged in user upgrades another user from free tier to premium
-    Given I exist as a user
-    And I visit Alice's profile page
-    And I click "Sponsor for Premium"
-    Then I should be on the "sign in" page
-    When I sign in with valid credentials
-    And I click "Subscribe" within the card_section
-    When I fill in appropriate card details for premium
-    Then I should see "you have sponsored Alice Jones as a Premium Member"
-    And "alice@btinternet.co.uk" should receive a "You've been sponsored for AgileVentures Premium Membership" email
-    Given I visit Alice's profile page
-    Then I should see "Premium Member"
-    And I should not see "Basic Member"
-    And I should not see "Sponsor for Premium"
-    And I should not see "Upgrade to Premium"
+  # Scenario: non logged in user upgrades another user from free tier to premium
+  #   Given I exist as a user
+  #   And I visit Alice's profile page
+  #   And I click "Sponsor for Premium"
+  #   Then I should be on the "sign in" page
+  #   When I sign in with valid credentials
+  #   And I click "Subscribe" within the card_section
+  #   When I fill in appropriate card details for premium
+  #   Then I should see "you have sponsored Alice Jones as a Premium Member"
+  #   And "alice@btinternet.co.uk" should receive a "You've been sponsored for AgileVentures Premium Membership" email
+  #   Given I visit Alice's profile page
+  #   Then I should see "Premium Member"
+  #   And I should not see "Basic Member"
+  #   And I should not see "Sponsor for Premium"
+  #   And I should not see "Upgrade to Premium"
 
   Scenario: non logged in user upgrades another user from free tier to premium via PayPal
     Given I exist as a user

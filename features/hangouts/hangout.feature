@@ -121,14 +121,14 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | ClientMeeting |
       | about 2 hours |
 
-  @javascript
-  Scenario: Infinite scroll on hangouts scroll down until no more hangouts
-    Given 18 hangouts exists
-    When I visit "/hangouts"
-    Then I should see 6 hangouts
-    And I scroll to bottom of page
-    Then I should see 12 hangouts
-    And I scroll to bottom of page
-    Then I should see 18 hangouts
-    And I scroll to bottom of page
-    And I should see "No more hangouts"
+  # @javascript
+  # Scenario: Infinite scroll on hangouts scroll down until no more hangouts
+  #   Given 18 hangouts exists
+  #   When I visit "/hangouts"
+  #   Then I should see 6 hangouts
+  #   And I scroll to bottom of page
+  #   Then I should see 12 hangouts
+  #   And I scroll to bottom of page
+  #   Then I should see 18 hangouts
+  #   And I scroll to bottom of page
+  #   And I should see "No more hangouts"

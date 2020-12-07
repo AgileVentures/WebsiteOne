@@ -18,17 +18,17 @@ Feature: Connect to social sites
     When I click "with Google"
     Then I should see "Signed in successfully."
 
-  @omniauth-with-invalid-credentials
-  Scenario: Try to log in with invalid credentials
-    When I click "with Google"
-    Then I should see "invalid_credentials"
-    And I should be signed out
+  # @omniauth-with-invalid-credentials
+  # Scenario: Try to log in with invalid credentials
+  #   When I click "with Google"
+  #   Then I should see "invalid_credentials"
+  #   And I should be signed out
 
-  @omniauth-with-invalid-credentials
-  Scenario: Try to log in with invalid credentials
-    When I click "with GitHub"
-    Then I should see "invalid_credentials"
-    And I should be signed out
+  # @omniauth-with-invalid-credentials
+  # Scenario: Try to log in with invalid credentials
+  #   When I click "with GitHub"
+  #   Then I should see "invalid_credentials"
+  #   And I should be signed out
 
   @omniauth
   Scenario: redirect to the last visited page after login with Google
