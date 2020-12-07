@@ -23,7 +23,7 @@ class User < ApplicationRecord
       user.country_code = geo.data['country_code']
     end
   end
-  
+
   PREMIUM_MOB_PLAN_AMOUNT = 2500
 
   acts_as_taggable_on :skills, :titles
@@ -185,7 +185,7 @@ class User < ApplicationRecord
   end
 
   def number_hangouts_started_with_more_than_one_participant
-    event_instances.select { |h| h.participants != nil && h.participants.to_unsafe_h.count > 1 }.count
+    event_instances.count { |h| h.participants != nil && h.participants.to_unsafe_h.count > 1 }
   end
 
   def activity

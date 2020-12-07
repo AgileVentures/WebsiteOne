@@ -68,6 +68,7 @@ class EventsController < ApplicationController
   def transform_params
     event_params = whitelist_event_params
     create_start_date_time(event_params)
+    check_days_of_week(event_params)
     event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
     event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
     event_params[:repeats_every_n_weeks] = 2 if event_params['repeats'] == 'biweekly'
@@ -98,6 +99,16 @@ class EventsController < ApplicationController
     return unless date_and_time_present?
     tz = TZInfo::Timezone.get(params['start_time_tz'])
     event_params[:start_datetime] = next_date_offset(tz).to_utc(DateTime.parse(params['start_date']+ ' ' + params['start_time']))
+  end
+  def check_days_of_week(event_params)
+    # local timezone vs utc timezone
+    return unless date_and_time_present?
+    offset= (DateTime.parse(params[:start_date]).wday - event_params[:start_datetime].wday)%7
+    return event_params["repeats_weekly_each_days_of_the_week"] if offset==0
+    event_params["repeats_weekly_each_days_of_the_week"]=[]
+    params["event"]["repeats_weekly_each_days_of_the_week"].each do |day|
+      event_params["repeats_weekly_each_days_of_the_week"]<<Date::DAYNAMES[(Date.parse(day).wday-offset)%7].downcase if day !=""
+    end
   end
 
   def next_date_offset(tz)
