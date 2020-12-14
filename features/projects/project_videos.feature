@@ -57,11 +57,11 @@ Feature: See project related videos
     Then I should see "Videos (27)"
     And I should see 25 rows with text "PP on hello mars" in a table
 
-  @javascript
-  Scenario: Selecting videos from the list
-    Given I am on the "Show" page for project "hello world"
-    When I click "Videos (3)"
-    When I click "PP on hello world - feature: 0"
-    Then I should see "PP on hello world - feature: 0" in "video description"
-    And I should see video "PP on hello world - feature: 0" in "player"
+  # @javascript
+  # Scenario: Selecting videos from the list
+  #   Given I am on the "Show" page for project "hello world"
+  #   When I click "Videos (3)"
+  #   When I click "PP on hello world - feature: 0"
+  #   Then I should see "PP on hello world - feature: 0" in "video description"
+  #   And I should see video "PP on hello world - feature: 0" in "player"
 
