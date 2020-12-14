@@ -19,17 +19,17 @@ Feature: Manual Edit of Youtube URL
       | Old          | http://hangout.test | 2014 Jan 4th 7am | 2014 Jan 4th 7:03am | 100 | Scrum    | Websiteone | 1       | QWERT55     | started    | true             | Repeat Scrum |
     And I have logged in
 
-  Scenario: Editing Youtube URL has no effect on Hangout URL
-    Given the date is "2014 Feb 4th 7:01am"
-    And I manually set a hangout link for event "Scrum"
-    And I manually set youtube link with youtube id "12341234111" for event "Scrum"
-    Then Hangout link does not change for "Scrum"
+  # Scenario: Editing Youtube URL has no effect on Hangout URL
+  #   Given the date is "2014 Feb 4th 7:01am"
+  #   And I manually set a hangout link for event "Scrum"
+  #   And I manually set youtube link with youtube id "12341234111" for event "Scrum"
+  #   Then Hangout link does not change for "Scrum"
 
-  Scenario: Editing Hangout URL has no effect on Youtube URL
-    Given the date is "2014 Feb 4th 7:01am"
-    And I manually set youtube link with youtube id "12341234111" for event "Scrum"
-    And I manually set a hangout link for event "Scrum"
-    Then "Scrum" shows youtube link with youtube id "12341234111"
+  # Scenario: Editing Hangout URL has no effect on Youtube URL
+  #   Given the date is "2014 Feb 4th 7:01am"
+  #   And I manually set youtube link with youtube id "12341234111" for event "Scrum"
+  #   And I manually set a hangout link for event "Scrum"
+  #   Then "Scrum" shows youtube link with youtube id "12341234111"
 
     # we're sort of stuck here because we don't seem to be able to avoid
     # a background js error here - best solution to keep this test might be
@@ -40,13 +40,13 @@ Feature: Manual Edit of Youtube URL
     #
     # see https://github.com/AgileVentures/WebsiteOne/issues/1754
     #
-  @javascript
-  Scenario: Edit Youtube URL and ensure video appears on Project page
-    Given the date is "2014 Feb 6th 7:01am"
-    And I manually set youtube link with youtube id "cdODZWHUwhc" for event "Repeat Scrum"
-    When I am on the "Show" page for project "LS"
-    And I click "Videos (1)"
-    Then I should see video with youtube id "cdODZWHUwhc"
+  # @javascript
+  # Scenario: Edit Youtube URL and ensure video appears on Project page
+  #   Given the date is "2014 Feb 6th 7:01am"
+  #   And I manually set youtube link with youtube id "cdODZWHUwhc" for event "Repeat Scrum"
+  #   When I am on the "Show" page for project "LS"
+  #   And I click "Videos (1)"
+  #   Then I should see video with youtube id "cdODZWHUwhc"
 
   Scenario: Edit Youtube URL when event is live and ensure a separate event instance is not created
     Given the date is "2014 Feb 7th 7:01am"
@@ -61,13 +61,13 @@ Feature: Manual Edit of Youtube URL
     And I click "Update Event instance"
     Then I should see "Hangout Updated"
 
-  Scenario: Edit past youtube URL does not cause an event instance to show as Live
-    Given the date is "2014 Feb 10th 7:01am"
-    And I visit the "Edit" page for "Old" "event_instance"
-    When I fill in "event_instance_yt_video_id" with "http://youtube.com/watch?v=cdODZWHUwhc"
-    And I select "event_instance_hoa_status" to "finished"
-    And I click "Update Event instance"
-    Then "Repeat Scrum" doesn't go live
+  # Scenario: Edit past youtube URL does not cause an event instance to show as Live
+  #   Given the date is "2014 Feb 10th 7:01am"
+  #   And I visit the "Edit" page for "Old" "event_instance"
+  #   When I fill in "event_instance_yt_video_id" with "http://youtube.com/watch?v=cdODZWHUwhc"
+  #   And I select "event_instance_hoa_status" to "finished"
+  #   And I click "Update Event instance"
+  #   Then "Repeat Scrum" doesn't go live
 
   Scenario: Hangout URL is not posted in slack when Youtube URL is edited
     Given the date is "2014 Feb 10th 7:01am"
