@@ -31,28 +31,28 @@ Feature: Manual Edit of Hangout URL
     Given a hangout link was set for event "Scrum" 20 minutes ago
     Then "Scrum" does NOT show a live hangout link after the event ends
 
-  Scenario: Edit Hangout URL on repeating event at start of event
-    Given a hangout link was set for event "Repeat Scrum" 0 minutes ago
-    Then "Repeat Scrum" shows a live hangout link at start of event
+  # Scenario: Edit Hangout URL on repeating event at start of event
+  #   Given a hangout link was set for event "Repeat Scrum" 0 minutes ago
+  #   Then "Repeat Scrum" shows a live hangout link at start of event
 
-  Scenario: Edit Hangout URL on repeating event near the end
-    Given a hangout link was set for event "Repeat Scrum" 10 minutes ago
-    Then "Repeat Scrum" shows a live hangout link near the end of the event
+  # Scenario: Edit Hangout URL on repeating event near the end
+  #   Given a hangout link was set for event "Repeat Scrum" 10 minutes ago
+  #   Then "Repeat Scrum" shows a live hangout link near the end of the event
 
-  Scenario: Edit Hangout URL on repeating event after event ends
-    Given a hangout link was set for event "Repeat Scrum" 20 minutes ago
-    Then "Repeat Scrum" does NOT show a live hangout link after the event ends
+  # Scenario: Edit Hangout URL on repeating event after event ends
+  #   Given a hangout link was set for event "Repeat Scrum" 20 minutes ago
+  #   Then "Repeat Scrum" does NOT show a live hangout link after the event ends
 
-  Scenario: Repeating event is NOT live after one day
-    Given a hangout link was set for event "Repeat Scrum" 1440 minutes ago
-    Then "Repeat Scrum" does NOT show a live hangout link after the event ends
+  # Scenario: Repeating event is NOT live after one day
+  #   Given a hangout link was set for event "Repeat Scrum" 1440 minutes ago
+  #   Then "Repeat Scrum" does NOT show a live hangout link after the event ends
 
-  # wraps bug described in https://github.com/AgileVentures/WebsiteOne/issues/1809
-  Scenario: Event doesn't ping old youtube URL
-    Given the date is "2014 Feb 5th 6:59am"
-    And the event "Repeat Scrum" was last updated at "2014 Feb 4th 7:16am"
-    And that we're spying on the SlackService
-    And the Slack notifications are enabled
-    When I manually set a hangout link for event "Repeat Scrum"
-    Then the Hangout URL is posted in Slack
-    # And the Youtube URL is not posted in Slack
+  # # wraps bug described in https://github.com/AgileVentures/WebsiteOne/issues/1809
+  # Scenario: Event doesn't ping old youtube URL
+  #   Given the date is "2014 Feb 5th 6:59am"
+  #   And the event "Repeat Scrum" was last updated at "2014 Feb 4th 7:16am"
+  #   And that we're spying on the SlackService
+  #   And the Slack notifications are enabled
+  #   When I manually set a hangout link for event "Repeat Scrum"
+  #   Then the Hangout URL is posted in Slack
+  #   # And the Youtube URL is not posted in Slack
