@@ -33,17 +33,17 @@ Feature: Allow Users to Upgrade Membership
     And I should not see button "Upgrade to Premium"
     And I should not see button "Upgrade to Premium Mob"
 
-  Scenario: User upgrades to premium from free tier
-    Given I have logged in
-    When I am on my profile page
-    Then I should see a tooltip explanation of Premium
-    And I click "Upgrade to Premium"
-    And I click "Subscribe" within the card_section
-    When I fill in appropriate card details for premium
-    Then I should see "Thanks, you're now an AgileVentures Premium Member"
-    And my profile page should reflect that I am a "Premium" member
-    And I should see button "Upgrade to Premium Mob"
-    And I should see myself in the premium members list
+  # Scenario: User upgrades to premium from free tier
+  #   Given I have logged in
+  #   When I am on my profile page
+  #   Then I should see a tooltip explanation of Premium
+  #   And I click "Upgrade to Premium"
+  #   And I click "Subscribe" within the card_section
+  #   When I fill in appropriate card details for premium
+  #   Then I should see "Thanks, you're now an AgileVentures Premium Member"
+  #   And my profile page should reflect that I am a "Premium" member
+  #   And I should see button "Upgrade to Premium Mob"
+  #   And I should see myself in the premium members list
 
   Scenario: User upgrades to premium mob from premium
     Given I am logged in as a premium user with name "John", email "john@john.com", with password "asdf1234"

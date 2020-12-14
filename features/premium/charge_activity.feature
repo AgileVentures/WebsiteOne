@@ -34,20 +34,20 @@ Feature: Charge Users Money
     Then I should be on the "premium sign up" page
     And I should see "7 day free trial! No charge for 7 days"
 
-  Scenario: Sign up for premium f2f membership
-    Given I have logged in
-    And I visit "/subscriptions/new?plan=premiumf2f"
-    And I should not see "Sign Me Up For Premium!"
-    And I click "Subscribe" within the card_section
-    When I fill in appropriate card details for premium f2f
-    Then I should see "Thanks, you're now an AgileVentures Premium F2F Member!"
-    And the user should receive a "Welcome to AgileVentures Premium F2F" email
+  # Scenario: Sign up for premium f2f membership
+  #   Given I have logged in
+  #   And I visit "/subscriptions/new?plan=premiumf2f"
+  #   And I should not see "Sign Me Up For Premium!"
+  #   And I click "Subscribe" within the card_section
+  #   When I fill in appropriate card details for premium f2f
+  #   Then I should see "Thanks, you're now an AgileVentures Premium F2F Member!"
+  #   And the user should receive a "Welcome to AgileVentures Premium F2F" email
 
-  Scenario: Sign up for premium plus membership
-    Given I have logged in
-    And  I visit "/subscriptions/new?plan=premiumplus"
-    And I should not see "Sign Me Up For Premium!"
-    And I click "Subscribe" within the card_section
-    When I fill in appropriate card details for premium plus
-    Then I should see "Thanks, you're now an AgileVentures Premium Plus Member!"
-    And the user should receive a "Welcome to AgileVentures Premium Plus" email
+  # Scenario: Sign up for premium plus membership
+  #   Given I have logged in
+  #   And  I visit "/subscriptions/new?plan=premiumplus"
+  #   And I should not see "Sign Me Up For Premium!"
+  #   And I click "Subscribe" within the card_section
+  #   When I fill in appropriate card details for premium plus
+  #   Then I should see "Thanks, you're now an AgileVentures Premium Plus Member!"
+  #   And the user should receive a "Welcome to AgileVentures Premium Plus" email
