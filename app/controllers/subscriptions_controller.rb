@@ -5,19 +5,19 @@ class SubscriptionsController < ApplicationController
   # skip_before_action :verify_authenticity_token, only: [:create], if: :paypal?
 
   def new
-    @upgrade_user = params[:user_id]
-    @sponsorship = @upgrade_user && current_user.try(:id) != @upgrade_user
+    @sponsee_slug = params[:user_id]
+    @sponsorship = @sponsee_slug && current_user.try(:id) != @sponsee_slug
     @plan = detect_plan_before_payment
   end
 
   def create
-    @user = detect_user
+    @sponsee = detect_user
     @plan = detect_plan_after_payment
-    @sponsored_user = sponsored_user?
+    @is_sponsorship = is_sponsorship?
     
     create_stripe_customer unless paypal?
 
-    add_appropriate_subscription(@user, current_user)
+    add_appropriate_subscription(@sponsee, current_user)
     Vanity.track!(:premium_signups)
     send_acknowledgement_email
 
@@ -112,8 +112,8 @@ class SubscriptionsController < ApplicationController
     )
   end
 
-  def sponsored_user?
-    @user.present? && current_user != @user
+  def is_sponsorship?
+    @sponsee.present? && current_user != @sponsee
   end
 
   def stripe_token(params)
@@ -139,8 +139,8 @@ class SubscriptionsController < ApplicationController
 
   def send_acknowledgement_email
     payer_email = paypal? ? params[:email] : params[:stripeEmail]
-    if sponsored_user?
-      Mailer.send_sponsor_premium_payment_complete(@user.email, payer_email).deliver_now
+    if is_sponsorship?
+      Mailer.send_sponsor_premium_payment_complete(@sponsee.email, payer_email).deliver_now
     else
       Mailer.send_premium_payment_complete(@plan, payer_email).deliver_now
     end

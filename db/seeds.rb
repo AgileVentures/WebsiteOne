@@ -84,21 +84,21 @@ end
 u ||= User.last
 3.times do
   p = u.projects.create(
-    title: Faker::Lorem.words(3).join(' '),
+    title: Faker::Lorem.words(number: 3).join(' '),
     description: Faker::Lorem.paragraph,
     status: 'active',
     created_at: 1.month.ago
   )
   3.times do
     d = p.documents.create(
-      title: Faker::Lorem.words(3).join(' '),
+      title: Faker::Lorem.words(number: 3).join(' '),
       body: Faker::Lorem.paragraph,
       created_at: 1.month.ago,
       user_id: p.user_id
     )
     3.times do
       d.children.create(
-        title: Faker::Lorem.words(3).join(' '),
+        title: Faker::Lorem.words(number: 3).join(' '),
         body: Faker::Lorem.paragraph,
         project_id: p.id,
         created_at: 1.month.ago,
@@ -135,7 +135,7 @@ end
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
-    password: Faker::Lorem.characters(10),
+    password: Faker::Lorem.characters(number: 10),
     country_name: @country[:country_name],
     country_code: @country[:country_code],
   )
@@ -157,8 +157,8 @@ end
 4.times do
   User.all.sample(3).each do |u|
     u.articles.create!(
-      title: Faker::Lorem.words(3).join(' '),
-      content: Faker::Lorem.paragraphs(3).join('\n')
+      title: Faker::Lorem.words(number: 3).join(' '),
+      content: Faker::Lorem.paragraphs(number: 3).join('\n')
     )
   end
 end

@@ -16,9 +16,9 @@ Feature: As a site user
     Given I am on the show page for event "Repeat Scrum"
     Then I should see video "RepeatScrum1" in "player"
 
-  @javascript
-  Scenario: Selecting videos from the list
-    Given I am on the show page for event "Repeat Scrum"
-    When I click "RepeatScrum2"
-    Then I should see "RepeatScrum2" in "video description"
-    And I should see video "RepeatScrum2" in "player"
+  # @javascript
+  # Scenario: Selecting videos from the list
+  #   Given I am on the show page for event "Repeat Scrum"
+  #   When I click "RepeatScrum2"
+  #   Then I should see "RepeatScrum2" in "video description"
+  #   And I should see video "RepeatScrum2" in "player"
