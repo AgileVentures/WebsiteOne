@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.assets.js_compressor = :uglifier
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -25,9 +26,6 @@ Rails.application.configure do
   # Compress JavaScripts and CSS.
   config.assets.compress = true
   config.assets.js_compressor = :uglifier
-  config.assets.css_compressor = :yui
-
-   
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   # config.assets.compile = true

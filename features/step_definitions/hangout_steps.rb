@@ -1,3 +1,7 @@
+def set_event_start_date(event_ins, num)
+  event_ins.updated_at -= num.minutes
+end
+
 Given(/^I navigate to the show page for event "([^"]*)"$/) do |name|
   event = Event.find_by_name(name)
   visit event_path(event)
@@ -102,6 +106,18 @@ Then(/^there should be exactly (\d+) hangouts associated with "([^"]*)"$/) do |n
   expect(EventInstance.where(project: project).count).to eq number.to_i
 end
 
+Given("a hangout link was set for event {string} {int} minutes ago") do |name, num|
+  @hangout_url = 'https://streamyard.com/35mRYwG5vr'
+  uid = '865600-888b0a67-ae31-4ecc-a9fa-5617792959d4'
+  event = Event.find_by_name(name)
+  event_ins = EventInstance.create(uid: uid,
+                                   event_id: event.id,
+                                   hangout_url: @hangout_url,
+                                   url_set_directly: true)
+  set_event_start_date(event_ins, num)
+  event_ins.save!
+end
+
 And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   @hangout_url = 'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&authuser=0'
   event = Event.find_by_name(name)
@@ -112,16 +128,20 @@ And(/^I manually set a hangout link for event "([^"]*)"$/) do |name|
   expect(page).to have_css('.btn-success')
 end
 
-Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
+Then("{string} shows a live hangout link at start of event") do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
-  time = Time.parse(@jump_date) + event.duration.minutes - 10.minutes
-  Delorean.time_travel_to(time)
+end
+
+Then("{string} shows a live hangout link near the end of the event") do |event_name|
+  event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).to have_link('JOIN THIS LIVE EVENT NOW', href: @hangout_url)
-  time = Time.parse(@jump_date) + event.duration.minutes + 10.minutes
-  Delorean.time_travel_to(time)
+end
+
+Then("{string} does NOT show a live hangout link after the event ends") do |event_name|
+  event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
 end
@@ -130,22 +150,6 @@ Given(/^"([^"]*)" doesn't go live$/) do |event_name|
   event = Event.find_by_name(event_name)
   visit event_path(event)
   expect(page).not_to have_link('JOIN THIS LIVE EVENT NOW')
-end
-
-And(/^"([^"]*)" is not live the following day$/) do |event_name|
-  event = Event.find_by_name(event_name)
-  Delorean.time_travel_to(Time.parse(@jump_date) + 1.day)
-  visit event_path(event)
-  expect(page).not_to have_content('JOIN THIS LIVE EVENT NOW')
-end
-
-Given(/^that "([^"]*)" went live the previous day$/) do |name|
-  steps %Q{
-    Given the date is "2014 Feb 5th 6:00am"
-    And I manually set a hangout link for event "Repeat Scrum"
-  }
-  event = Event.find_by_name(name)
-  visit event_path(event)
 end
 
 Then(/^it should not go live the next day just because the event start time is passed$/) do
@@ -221,7 +225,7 @@ end
 And(/^that we're spying on the SlackService$/) do
   @slack_client = double(Slack::Web::Client)
   allow(Slack::Web::Client).to receive(:new).and_return(@slack_client)
-  allow(@slack_client).to receive(:chat_postMessage)  
+  allow(@slack_client).to receive(:chat_postMessage)
 end
 
 And(/^the Hangout URL is posted in Slack$/) do
