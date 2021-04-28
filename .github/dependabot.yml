@@ -1,0 +1,29 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: stripe
+    versions:
+    - 5.29.0
+    - 5.29.1
+    - 5.30.0
+  - dependency-name: faker
+    versions:
+    - 2.15.1
+    - 2.16.0
+  - dependency-name: octokit
+    versions:
+    - 4.20.0
+  - dependency-name: kramdown
+    versions:
+    - 2.3.0
+  - dependency-name: jasmine
+    versions:
+    - 3.6.0
+  - dependency-name: jwt
+    versions:
+    - 2.2.2
