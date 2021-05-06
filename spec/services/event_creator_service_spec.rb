@@ -1,15 +1,15 @@
-require 'active_support/all'
-require_relative '../../app/models/event_date'
-require_relative '../../app/services/event_creator_service'
-describe EventCreatorService do
+# require 'active_support/all'
+# require_relative '../../app/models/event_date'
+# require_relative '../../app/services/event_creator_service'
+RSpec.describe EventCreatorService do
   let(:event_repository) { double(:event_repository, new: event) }
   let(:event_params) do
     { name: 'event', start_datetime: '', duration: '' }
   end
   let(:service) { EventCreatorService.new(event_repository) }
   let(:callback) do
-    { success: ->(_event) { 'success' },
-      failure: ->(_event) { 'failure' } }
+    { success: ->() { 'success' },
+      failure: ->() { 'failure' } }
   end
 
   context 'on success creates an event' do
