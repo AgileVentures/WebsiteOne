@@ -1,8 +1,5 @@
-require 'spec_helper'
-
 describe EventInstance, type: :model do
-  let(:hangout) { FactoryBot.create(:event_instance, updated: '10:00 UTC', hangout_url: nil) }
-
+  let!(:hangout) { create(:event_instance, updated: '10:00 UTC', hangout_url: nil, creator: create(:user)) }
   it 'has url_set_directly default to false' do
     expect(hangout.url_set_directly).to be_falsey
   end

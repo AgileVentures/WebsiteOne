@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe User, type: :model do
   include_examples 'presentable'

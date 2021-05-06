@@ -104,6 +104,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'rspec-rails'
   gem 'awesome_print'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -124,10 +125,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'railroady'
   gem 'rb-readline'
-  gem 'rspec'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-html-matchers'
-  gem 'rspec-rails'
   gem 'simplecov', '~> 0.17.1'
 end
 

@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe EventDate, :type => :model do
   it 'returns todays date if event_date is nil' do

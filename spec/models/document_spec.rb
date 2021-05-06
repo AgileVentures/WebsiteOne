@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe Document, :type => :model do
   subject { FactoryBot.build_stubbed(:document) }

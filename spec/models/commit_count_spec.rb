@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe CommitCount, type: :model do
   subject { build_stubbed :commit_count }
