@@ -1,5 +1,5 @@
 version: v1.0
-name: Test WebsiteOne
+name: WebsiteOne - CI
 agent:
   machine:
     type: e1-standard-2
