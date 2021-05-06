@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe GithubCommitsJob do
   vcr_index = { cassette_name: 'github_commit_count/websiteone_stats' }

@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 require 'byebug'
 
 describe LegacyApi::SubscriptionsController, type: :request do
