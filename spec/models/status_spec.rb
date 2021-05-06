@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe Status do
   let(:user) { FactoryBot.create(:user) }

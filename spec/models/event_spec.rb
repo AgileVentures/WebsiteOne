@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 require 'user'
 
 describe Event, :type => :model do

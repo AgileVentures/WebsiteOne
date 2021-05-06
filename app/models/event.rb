@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   has_many :event_instances
-  belongs_to :project
-  belongs_to :creator, class_name: 'User'
+  belongs_to :project, optional: true
+  belongs_to :creator, class_name: 'User', optional: true
   has_and_belongs_to_many :slack_channels
   
   serialize :exclusions
