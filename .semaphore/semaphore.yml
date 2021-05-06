@@ -26,6 +26,7 @@ blocks:
             - change-phantomjs-version 2.1.1
             - cache restore
             - bundle install --path vendor/bundle
+            - mkdir -p tmp/pids
             - npm install bower
             - npm install
             - cache store
