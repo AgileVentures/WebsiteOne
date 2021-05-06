@@ -1,0 +1,69 @@
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'server/**/*'
+    - 'vendor/**/*'
+  TargetRubyVersion: 2.4
+
+Layout/DefEndAlignment:
+  AutoCorrect: true
+
+Layout/EndAlignment:
+  AutoCorrect: true
+  EnforcedStyleAlignWith: keyword
+
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/Debugger:
+  Enabled: true
+
+Naming/FileName:
+  Description: Use snake_case for source file names.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-files
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/AutoResourceCleanup:
+  Enabled: true
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/CollectionMethods:
+  Description: Preferred collection methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#map-find-select-reduce-size
+  Enabled: true
+  PreferredMethods:
+    collect: map
+    collect!: map!
+    find: detect
+    find_all: select
+    reduce: inject
+
+Style/Documentation:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '()'
+    '%I': '()'
+    '%r': '{}'
+    '%w': '()'
+    '%W': '()'
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
