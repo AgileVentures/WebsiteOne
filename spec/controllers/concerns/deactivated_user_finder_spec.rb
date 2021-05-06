@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe 'DeactivatedUserFinderConcern' do
   before :all do

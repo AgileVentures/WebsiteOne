@@ -4,9 +4,9 @@ class EventInstance < ApplicationRecord
   belongs_to :event
   delegate :within_current_event_duration?, to: :event
 
-  belongs_to :user
+  belongs_to :user, optional: true
+  belongs_to :project, optional: true
   include UserNullable
-  belongs_to :project
 
   serialize :participants
 
