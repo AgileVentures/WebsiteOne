@@ -15,7 +15,6 @@ To get involved please contact Sam Joseph <sam@agileventures.org> or Thomas Ochm
 
 ### Resources
 - [Agile Ventures site](http://agileventures.org)
-- [WebsiteOne on waffle.io](https://waffle.io/AgileVentures/WebsiteOne)
 - [Staging & developers servers](https://github.com/AgileVentures/WebsiteOne/wiki/Current-staging-servers)
 - [Expanded Mission Statement](expanded_mission_statement.md)
 
