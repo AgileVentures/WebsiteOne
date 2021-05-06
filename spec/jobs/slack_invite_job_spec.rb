@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe SlackInviteJob do
   subject { SlackInviteJob.new }
