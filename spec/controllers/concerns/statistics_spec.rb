@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe 'StatisticsConcern' do
   before :all do

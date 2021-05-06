@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe DocumentsController do
   let(:user) { @user }
