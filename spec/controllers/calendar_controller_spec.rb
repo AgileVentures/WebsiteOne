@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 describe CalendarController, type: :controller do
   it 'should have calendar route' do
     get :index

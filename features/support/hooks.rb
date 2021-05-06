@@ -74,7 +74,7 @@ Before('@time-travel-step') do
   ENV['TZ'] = 'UTC'
 end
 
-After('@time-travel , @time-travel-step') do
+After('@time-travel or @time-travel-step') do
   Delorean.back_to_the_present
   ENV['TZ'] = @default_tz
 end
@@ -119,7 +119,7 @@ Before('@omniauth-without-email') do
   }
 end
 
-After('@omniauth, @omniauth-with-email, @omniauth-with-invalid-credentials') do
+After('@omniauth or @omniauth-with-email or @omniauth-with-invalid-credentials') do
   OmniAuth.config.test_mode = false
 end
 
