@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe HookupsController, type: :controller do
   let(:event){ FactoryBot.create(:event, category: 'PairProgramming') }

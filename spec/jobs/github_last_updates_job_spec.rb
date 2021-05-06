@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe GithubLastUpdatesJob do
   describe '#run' do
