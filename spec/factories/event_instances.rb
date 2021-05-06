@@ -8,10 +8,10 @@ FactoryBot.define do
   end
 
   factory :event_instance do
-    # transient do
-    #   created { Time.now }
-    #   updated { Time.now }
-    # end
+    transient do
+      created { Time.now }
+      updated { Time.now }
+    end
 
     project
     event
