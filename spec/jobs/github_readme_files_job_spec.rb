@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe GithubReadmeFilesJob do
   describe '.replace_relative_links_with_absolute' do

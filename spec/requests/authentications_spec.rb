@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe 'OmniAuth authentication' do
 

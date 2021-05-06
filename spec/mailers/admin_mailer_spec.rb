@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe AdminMailer, type: :mailer do
   context 'slack invite errors' do

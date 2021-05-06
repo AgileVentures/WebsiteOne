@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe EventInstancePresenter do
   let(:presenter){ EventInstancePresenter.new(hangout) }
