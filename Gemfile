@@ -99,8 +99,6 @@ group :test do
   gem 'stripe-ruby-mock', '~> 2.5.8', require: 'stripe_mock'
   gem 'vcr'
   gem 'webmock'
-  gem 'webrat'
-  gem 'zeus'
 end
 
 group :development, :test do
