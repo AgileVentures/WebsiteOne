@@ -8,7 +8,7 @@ gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.
 gem 'acts_as_tree'
 gem 'acts_as_votable', '~> 0.12.1'
 gem 'airbrake'
-gem 'apipie-rails'
+# gem 'apipie-rails'
 gem 'addressable'
 gem 'bootstrap-sass'
 gem 'cocoon'
