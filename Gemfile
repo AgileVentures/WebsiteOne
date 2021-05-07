@@ -61,7 +61,7 @@ gem 'sass-rails'
 gem 'simple_form', '~> 5.0'
 gem 'slack-ruby-client'
 gem 'spinjs-rails'
-gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
+gem 'sprockets-rails', '~> 3.2'
 gem 'stripe'
 gem 'sucker_punch'
 gem 'therubyracer', platforms: :ruby
