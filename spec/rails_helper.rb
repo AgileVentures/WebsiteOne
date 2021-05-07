@@ -22,6 +22,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 OmniAuth.config.test_mode = true
 Capybara.javascript_driver = :headless_chrome
+WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
@@ -30,25 +31,16 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.include Capybara::DSL
   config.include FactoryBot::Syntax::Methods
-  
-  config.filter_run :show_in_doc => true if ENV['APIPIE_RECORD']
-  # ## Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-  
-  config.mock_with :rspec do |c|
-    c.syntax = [:should, :expect]
-  end
-  
   config.include Helpers
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :helper
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include RSpecHtmlMatchers
+  
+  config.filter_run :show_in_doc => true if ENV['APIPIE_RECORD']
+  config.mock_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
   
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
