@@ -243,7 +243,7 @@ end
 
 And(/^the event "([^"]*)" was last updated at "([^"]*)"$/) do |event_name, date|
   id = Event.where(name: event_name).first[:id]
-  EventInstance.where(event_id: id).order("created_at DESC").first.update_attributes(updated_at: date)
+  EventInstance.where(event_id: id).order("created_at DESC").first.update(updated_at: date)
 end
 
 Given(/^the Slack notifications are enabled$/) do

@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe StaticPage, :type => :model do
   subject { FactoryBot.create(:static_page) }
