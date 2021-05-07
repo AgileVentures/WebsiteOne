@@ -59,11 +59,11 @@ RSpec.describe GithubCommitsJob do
         GithubCommitsJob.run
       end
 
-      it 'stores commit count for project with epmty repo' do
+      it 'stores commit count for project with empty repo' do
         expect(project_with_empty_repo.commit_counts.count).to eq(0)
       end
 
-      it 'stores total commit count for project with epmty repo' do
+      it 'stores total commit count for project with empty repo' do
         expect(project_with_empty_repo.commit_count).to eq(0)
       end
     end

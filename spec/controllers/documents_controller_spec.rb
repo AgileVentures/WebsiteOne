@@ -204,7 +204,7 @@ describe DocumentsController do
 
       before(:each) do
         allow(document).to receive(:create_activity)
-        allow(document).to receive(:update_attributes)
+        allow(document).to receive(:update)
           .and_return(true)
       end
 
@@ -215,7 +215,7 @@ describe DocumentsController do
 
       it 'should update the document with the new title and body' do
         put :mercury_update, params: params
-        expect(document).to have_received(:update_attributes)
+        expect(document).to have_received(:update)
           .with({ title: 'my title', body: 'document body' })
       end
 

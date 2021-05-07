@@ -1,6 +1,6 @@
  
 
-describe ProjectsController, :type => :controller do
+RSpec.describe ProjectsController, :type => :controller do
 
   let(:valid_attributes) { { id: 1,
                             :title => 'WebTwentyFive',
@@ -11,9 +11,7 @@ describe ProjectsController, :type => :controller do
                             :slug => 'my-project'} }
   let(:valid_session) { {} }
 
-  #TODO split specs into 'logged in' vs 'not logged in'
   before :each do
-    # stubbing out devise methods to simulate authenticated user
     @user = build_stubbed(:user, id: 1, slug: 'some-id')
     allow(request.env['warden']).to receive(:authenticate!).and_return(@user)
     allow(controller).to receive(:current_user).and_return(@user)
@@ -29,12 +27,12 @@ describe ProjectsController, :type => :controller do
       @projects = [@project, @project2]
     end
 
-    it 'should render index page for projects' do
+    it 'is expected to render index page for projects' do
       get :index
       expect(response).to render_template 'index'
     end
 
-    it 'should assign variables to be rendered by view' do
+    it 'is expected to assign variables to be rendered by view' do
       allow(Project).to receive(:search).and_return(@project)
       @project.stub(:includes).and_return(@project)
       get :index
@@ -94,7 +92,7 @@ describe ProjectsController, :type => :controller do
     end
 
     describe '#new' do
-      it 'should render a new project page' do
+      it 'is expected to render a new project page' do
         get :new
         expect(assigns(:project)).to be_a_new(Project)
         expect(response).to render_template 'new'
@@ -192,14 +190,14 @@ describe ProjectsController, :type => :controller do
       end
 
       it 'assigns the requested project as @project' do
-        expect(@project).to receive(:update_attributes)
+        expect(@project).to receive(:update)
         put :update, params: { id: 'update', project: {title: ''} }
         expect(assigns(:project)).to eq(@project)
       end
 
       context 'successful update' do
         before(:each) do
-          allow(@project).to receive(:update_attributes).and_return(true)
+          allow(@project).to receive(:update).and_return(true)
           put :update, params: { id: 'update', project: {title: ''} }
         end
 
@@ -219,7 +217,7 @@ describe ProjectsController, :type => :controller do
 
       context 'unsuccessful save' do
         before(:each) do
-          allow(@project).to receive(:update_attributes).and_return(false)
+          allow(@project).to receive(:update).and_return(false)
           put :update, params: { id: 'update', project: {title: ''} }
         end
         it 'renders edit' do

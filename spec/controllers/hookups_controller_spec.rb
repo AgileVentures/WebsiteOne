@@ -1,8 +1,6 @@
- 
-
-describe HookupsController, type: :controller do
-  let(:event){ FactoryBot.create(:event, category: 'PairProgramming') }
-  let(:hangout){ FactoryBot.create(:event_instance, event: event, category: 'PairProgramming', hangout_url: nil) }
+RSpec.describe HookupsController, type: :controller do
+  let(:event) { create(:event, category: 'PairProgramming') }
+  let(:hangout) { create(:event_instance, event: event, category: 'PairProgramming', hangout_url: nil) }
 
   it 'assigns a pending hookup to the view' do
     allow_any_instance_of(Event).to receive(:last_hangout).and_return(hangout)

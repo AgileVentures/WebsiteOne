@@ -1,7 +1,7 @@
 class EventInstance < ApplicationRecord
   self.per_page = 30
 
-  belongs_to :event
+  belongs_to :event, optional: true
   delegate :within_current_event_duration?, to: :event
 
   belongs_to :user, optional: true
