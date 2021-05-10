@@ -88,7 +88,7 @@ group :test do
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'poltergeist'
   gem 'puffing-billy', '~> 2.2.0'
-  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
+  gem 'rails-controller-testing', '~> 1.0'
   gem 'rubocop-performance', '~> 1.5', '>= 1.5.2'
   gem 'rubocop-rails', '~> 2.5', '>= 2.5.2'
   gem 'rubocop-rspec', '>=1.28'
