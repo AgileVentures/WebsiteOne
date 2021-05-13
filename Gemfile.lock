@@ -391,7 +391,9 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
     mime-types (2.99.3)
-    mimemagic (0.3.3)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
@@ -447,7 +449,7 @@ GEM
     paypal-sdk-rest (1.7.3)
       multi_json (~> 1.0)
       xml-simple
-    pg (1.1.4)
+    pg (1.2.3)
     phantomjs (2.1.1.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
