@@ -1,5 +1,6 @@
 RSpec.describe GithubCommitsJob do
-  describe '.job' do
+  vcr_index = { cassette_name: 'github_commit_count/websiteone_stats' }
+  describe '.job', vcr: vcr_index do
     context 'when no empty repo present' do
       let(:project) { @project.reload }
       let(:project_without_url) { @project_without_url.reload }
@@ -37,7 +38,8 @@ RSpec.describe GithubCommitsJob do
       end
 
       it 'stores correct total commit count for projects' do
-        expect(project.commit_count).to eq 4220
+        expected_commit_count = 4919
+        expect(project.commit_count).to eq expected_commit_count
       end
 
       it 'stores last_commit_at only for projects that have a github_url' do

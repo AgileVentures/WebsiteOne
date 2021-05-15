@@ -83,7 +83,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-selenium', '~> 0.0.6'
   gem 'capybara-screenshot'
-  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails', '~> 2.0', require: false
   gem 'database_cleaner'
   gem 'delorean'
   gem 'launchy'

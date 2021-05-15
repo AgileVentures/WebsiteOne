@@ -101,8 +101,6 @@ GEM
       airbrake-ruby (~> 5.1)
     airbrake-ruby (5.2.0)
       rbtree3 (~> 0.5)
-    apipie-rails (0.5.18)
-      rails (>= 4.1)
     ast (2.4.2)
     autoprefixer-rails (10.2.4.0)
       execjs
@@ -764,7 +762,6 @@ DEPENDENCIES
   acts_as_votable (~> 0.12.1)
   addressable
   airbrake
-  apipie-rails
   awesome_print
   better_errors
   binding_of_caller
@@ -784,7 +781,7 @@ DEPENDENCIES
   compass-rails (~> 4.0)
   config
   constant-redefinition
-  cucumber-rails
+  cucumber-rails (~> 2.0)
   database_cleaner
   delorean
   devise (~> 4.7)

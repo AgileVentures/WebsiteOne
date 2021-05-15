@@ -55,7 +55,10 @@ After '@stripe_javascript' do
   end
 end
 
-Before('@desktop') { page.driver.resize(1228, 768) }
+Before('@desktop') { 
+  byebug
+  page.driver.resize(1228, 768) 
+}
 
 Before('@tablet') { page.driver.resize(768, 768) }
 
