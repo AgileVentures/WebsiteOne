@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe VisitorsController do
   let(:valid_params){ {name: 'Ivan', email: 'my@email.com', message: 'Love your site!'} }

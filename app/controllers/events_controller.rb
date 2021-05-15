@@ -44,7 +44,7 @@ class EventsController < ApplicationController
 
   def update
     begin
-      updated = @event.update_attributes(transform_params)
+      updated = @event.update(transform_params)
     rescue
       attr_error = 'attributes invalid'
     end
