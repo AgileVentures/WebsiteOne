@@ -65,7 +65,7 @@ gem 'spinjs-rails'
 gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'stripe'
 gem 'sucker_punch'
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
 gem 'uglifier'
 gem 'utf8-cleaner'

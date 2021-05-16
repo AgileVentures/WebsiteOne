@@ -409,7 +409,6 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    libv8 (3.16.14.19-x86_64-darwin-18)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -582,7 +581,6 @@ GEM
     recaptcha (5.7.0)
       json
     redcarpet (3.5.1)
-    ref (2.0.0)
     regexp_parser (2.1.1)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -709,9 +707,6 @@ GEM
       concurrent-ruby (~> 1.0)
     sys-uname (1.2.2)
       ffi (~> 1.1)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -757,6 +752,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-18
+  x86_64-darwin-20
 
 DEPENDENCIES
   acts-as-taggable-on
@@ -869,7 +865,6 @@ DEPENDENCIES
   stripe
   stripe-ruby-mock (~> 2.5.8)
   sucker_punch
-  therubyracer
   turbolinks
   uglifier
   utf8-cleaner
