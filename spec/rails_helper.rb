@@ -1,7 +1,8 @@
 require 'simplecov'
- 
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
+
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'capybara/rspec'
@@ -10,6 +11,7 @@ require 'capybara-screenshot/rspec'
 require 'public_activity/testing'
 require 'paper_trail/frameworks/rspec'
 require 'selenium/webdriver'
+
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 PublicActivity.enabled = true
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -36,22 +38,22 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :helper
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include RSpecHtmlMatchers
-  
+
   config.filter_run :show_in_doc => true if ENV['APIPIE_RECORD']
   config.mock_with :rspec do |c|
     c.syntax = [:should, :expect]
   end
-  
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
-  
+
   config.before(:each) do
     DatabaseCleaner.start
     Settings.reload!
   end
-  
+
   config.after :each do
     Warden.test_reset!
   end
