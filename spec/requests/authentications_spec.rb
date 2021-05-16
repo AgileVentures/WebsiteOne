@@ -1,4 +1,4 @@
-RSpec.describe 'OmniAuth authentication' do
+RSpec.describe 'OmniAuth authentication', type: :feature do
   supported_auths = {
     'github' => 'GitHub',
     'gplus' => 'Google'
@@ -25,6 +25,7 @@ RSpec.describe 'OmniAuth authentication' do
         it 'should work with valid credentials' do
           visit new_user_session_path
           expect(page).to have_content "with #{name}"
+
           expect do
             expect do
               page.click_on "with #{name}"
@@ -87,6 +88,7 @@ RSpec.describe 'OmniAuth authentication' do
           visit new_user_session_path
           click_link "with #{name}"
           visit edit_user_registration_path(@user)
+
           expect(page).to have_css "input[value='#{@user.email}']"
           expect do
             expect do
@@ -107,17 +109,6 @@ RSpec.describe 'OmniAuth authentication' do
               expect { click_link n.to_s }.to change(Authentication, :count).by(1)
             end.to change(User, :count).by(0)
           end
-        end
-
-        it 'should not accept multiple profiles from the same source' do
-          visit new_user_session_path
-          click_link "with #{name}"
-          OmniAuth.config.mock_auth[provider.to_sym] = {
-            'provider' => provider,
-            'uid' => "randomplus#{@uid}"
-          }
-          visit "/auth/#{provider}"
-          expect(page).to have_content 'Unable to create additional profiles.'
         end
       end
     end
