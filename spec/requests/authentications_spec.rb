@@ -1,4 +1,4 @@
-RSpec.describe 'OmniAuth authentication' do
+RSpec.describe 'OmniAuth authentication', type: :feature do
   supported_auths = {
     'github' => 'GitHub',
     'gplus' => 'Google'
@@ -25,6 +25,7 @@ RSpec.describe 'OmniAuth authentication' do
         it 'should work with valid credentials' do
           visit new_user_session_path
           expect(page).to have_content "with #{name}"
+
           expect do
             expect do
               page.click_on "with #{name}"
@@ -87,6 +88,7 @@ RSpec.describe 'OmniAuth authentication' do
           visit new_user_session_path
           click_link "with #{name}"
           visit edit_user_registration_path(@user)
+
           expect(page).to have_css "input[value='#{@user.email}']"
           expect do
             expect do
