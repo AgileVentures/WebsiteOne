@@ -110,17 +110,6 @@ RSpec.describe 'OmniAuth authentication', type: :feature do
             end.to change(User, :count).by(0)
           end
         end
-
-        it 'should not accept multiple profiles from the same source' do
-          visit new_user_session_path
-          click_link "with #{name}"
-          OmniAuth.config.mock_auth[provider.to_sym] = {
-            'provider' => provider,
-            'uid' => "randomplus#{@uid}"
-          }
-          visit "/auth/#{provider}"
-          expect(page).to have_content 'Unable to create additional profiles.'
-        end
       end
     end
   end
