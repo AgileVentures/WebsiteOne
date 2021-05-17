@@ -389,7 +389,7 @@ end
 
 
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
-  @user.update_attributes("display_#{value.underscore}".to_sym => (option == 'public'))
+  @user.update("display_#{value.underscore}".to_sym => (option == 'public'))
 end
 
 # Bryan: To be deleted
