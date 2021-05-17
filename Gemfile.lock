@@ -76,7 +76,7 @@ GEM
       activerecord (>= 5.0, < 6.1)
     acts_as_tree (2.9.1)
       activerecord (>= 3.0.0)
-    acts_as_votable (0.12.1)
+    acts_as_votable (0.13.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     airbrake (9.5.5)
@@ -391,7 +391,9 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
     mime-types (2.99.3)
-    mimemagic (0.3.3)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
@@ -712,7 +714,7 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_follower!
   acts_as_tree
-  acts_as_votable (~> 0.12.1)
+  acts_as_votable (~> 0.13.1)
   addressable
   airbrake
   apipie-rails
