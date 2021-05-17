@@ -19,7 +19,7 @@ FactoryBot.define do
     bio { Faker::Lorem.sentence }
     skill_list { Faker::Lorem.words(number: 4) }
 
-    after(:create) do |user, evaluator|
+    after(:save) do |user, evaluator|
       create(:authentication, provider: 'gplus', uid: evaluator.gplus, user_id: user.id)
     end
   end

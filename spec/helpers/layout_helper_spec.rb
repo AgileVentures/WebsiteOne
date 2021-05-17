@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe LayoutHelper, :type => :helper do
 
