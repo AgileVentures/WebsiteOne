@@ -73,7 +73,7 @@ gem 'verbs'
 gem 'will_paginate-bootstrap'
 gem 'yt'
 gem 'youtube_rails'
-gem 'bootsnap', '~> 1.4'
+gem 'bootsnap', '~> 1.7'
 gem 'icalendar'
 gem 'seed_dump'
 
