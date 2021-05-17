@@ -1,14 +1,14 @@
  
-describe CalendarController, type: :controller do
-  it 'should have calendar route' do
+RSpec.describe CalendarController, type: :controller do
+  it 'is expected to have calendar route' do
     get :index
     expect(response.status).to eq(200)
   end
-  context 'should send a file' do
+  context 'is expected to send a file' do
     before do
       @time = Time.now
       @name = "Test_Event"
-      @event = FactoryBot.create(:event, category: 'PairProgramming', name: @name, start_datetime: @time, repeat_ends: false)
+      @event = create(:event, category: 'PairProgramming', name: @name, start_datetime: @time, repeat_ends: false)
     end
     it 'with proper headers' do
       get :index
