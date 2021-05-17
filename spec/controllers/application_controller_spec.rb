@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe ApplicationController do
   controller do
