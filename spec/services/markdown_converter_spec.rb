@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 RSpec.describe MarkdownConverter, type: :service do
   subject(:markdown_converter) { MarkdownConverter.new(markdown) }

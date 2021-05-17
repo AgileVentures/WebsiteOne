@@ -4,9 +4,9 @@ class UriValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     uri = parse_uri(value)
     if !uri
-      record.errors[attribute] << generic_failure_message
+      record.errors.add(attribute, generic_failure_message)
     elsif !allowed_protocols.include?(uri.scheme)
-      record.errors[attribute] << "must begin with #{allowed_protocols_humanized}"
+      record.errors.add(attribute, "must begin with #{allowed_protocols_humanized}")
     end
   end
 
