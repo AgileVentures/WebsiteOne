@@ -29,17 +29,14 @@ class EventsController < ApplicationController
   end
 
   def create
-    EventCreatorService.new(Event).perform(transform_params,
-                                           success: ->(event) do
-                                             @event = event
-                                             flash[:notice] = 'Event Created'
-                                             redirect_to event_path(@event)
-                                           end,
-                                           failure: ->(event) do
-                                             @event = event
-                                             flash[:notice] = @event.errors.full_messages.to_sentence
-                                             render :new
-                                           end)
+    @event = Event.new(normalize_event_dates(transform_params))
+    if @event.save
+      flash[:notice] = 'Event Created'
+      redirect_to event_path(@event)
+    else
+      flash[:notice] = @event.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def update
@@ -69,9 +66,16 @@ class EventsController < ApplicationController
     event_params = whitelist_event_params
     create_start_date_time(event_params)
     check_days_of_week(event_params)
-    event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
+    event_params[:repeat_ends] = (event_params[:repeat_ends_string] == 'on')
     event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
     event_params[:repeats_every_n_weeks] = 2 if event_params['repeats'] == 'biweekly'
+    event_params
+  end
+
+  def normalize_event_dates(event_params)
+    event_params[:start_datetime] = Time.now if event_params[:start_datetime].blank?
+    event_params[:duration] = 30.minutes if event_params[:duration].blank?
+    event_params[:repeat_ends] = event_params[:repeat_ends_string] == 'on'
     event_params
   end
 
@@ -91,15 +95,12 @@ class EventsController < ApplicationController
     @event && @event.creator_id ? { modifier_id: current_user.id } : { creator_id: current_user.id }
   end
 
-  # next_date and start_date are in the same dst or non-dst
-  # next_date in dst and start_date in non-dst ==> get an hour back
-  # next_date in non-dst and start_date in dst ==> ???
-
   def create_start_date_time(event_params)
     return unless date_and_time_present?
     tz = TZInfo::Timezone.get(params['start_time_tz'])
-    event_params[:start_datetime] = next_date_offset(tz).to_utc(DateTime.parse(params['start_date']+ ' ' + params['start_time']))
+    event_params[:start_datetime] = tz.local_to_utc(DateTime.parse "#{params['start_date']} #{params['start_time']}")
   end
+
   def check_days_of_week(event_params)
     # local timezone vs utc timezone
     return unless date_and_time_present?
@@ -109,11 +110,6 @@ class EventsController < ApplicationController
     params["event"]["repeats_weekly_each_days_of_the_week"].each do |day|
       event_params["repeats_weekly_each_days_of_the_week"]<<Date::DAYNAMES[(Date.parse(day).wday-offset)%7].downcase if day !=""
     end
-  end
-
-  def next_date_offset(tz)
-    next_date_time = DateTime.parse(params['next_date'] + ' ' + params['start_time'])
-    tz.period_for_utc(next_date_time).offset
   end
 
   def date_and_time_present?
