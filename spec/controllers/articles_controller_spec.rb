@@ -6,32 +6,29 @@ RSpec.describe ArticlesController do
   end
 
   describe 'GET index' do
-    before(:each) do
-      @articles = (1..7).collect { double('Article', tag_list: 'Javascript') }
-      @ruby_rails_articles = @articles[0..3]
-      @ruby_rails_articles.each { |a| a.stub(:tag_list).and_return('Ruby, Rails') }
+    let(:articles) { instance_double(ActiveRecord::Relation) }
+
+    before { allow(articles).to receive_messages(order: articles, includes: articles) }
+
+    context 'when tag is provided' do
+      before { allow(Article).to receive(:tagged_with).and_return articles }
+
+      it 'executes tagged queries', :aggregate_failures do
+        get :index, params: { tag: 'tag' }
+        expect(Article).to have_received(:tagged_with).with 'tag'
+        expect(articles).to have_received(:order).with 'created_at DESC'
+        expect(articles).to have_received(:includes).with :user
+      end
     end
 
-    it 'is expected to render the index template for all possible paths' do
-      get :index
-      expect(response).to render_template :index
-      get :index, params: { tag: 'Javascript' }
-      expect(response).to render_template :index
-    end
+    context 'when tag is not provided' do
+      before { allow(Article).to receive(:order).and_return articles }
 
-    it 'is expected to assign all articles to @articles' do
-      expect(Article).to receive(:order).and_return(@articles)
-      @articles.stub(:includes).and_return(@articles)
-      get :index
-      expect(assigns(:articles)).to eq @articles
-    end
-
-    it 'is expected to be able to filter by tags' do
-      expect(Article).to receive(:tagged_with).with('Ruby')
-      Article.stub_chain('tagged_with.order').and_return(@ruby_rails_articles)
-      @ruby_rails_articles.stub(:includes).and_return(@ruby_rails_articles)
-      get :index, params: { tag: 'Ruby' }
-      expect(assigns(:articles)).to eq @ruby_rails_articles
+      it 'executes untagged queries', :aggregate_failures do
+        get :index
+        expect(Article).to have_received(:order).with 'created_at DESC'
+        expect(articles).to have_received(:includes).with :user
+      end
     end
   end
 
