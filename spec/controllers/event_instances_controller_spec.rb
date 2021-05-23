@@ -2,7 +2,6 @@ RSpec.describe EventInstancesController do
   let(:params) { { id: '333', host_id: 'host', title: 'title' } }
 
   before do
-    allow(controller).to receive(:allowed?).and_return(true)
     allow(HangoutNotificationService).to receive(:with)
     allow(YoutubeNotificationService).to receive(:with)
     request.env['HTTP_ORIGIN'] = 'http://test.com'
