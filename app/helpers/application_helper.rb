@@ -58,16 +58,30 @@ module ApplicationHelper
 
   def social_button(provider, options={})
     provider = provider.downcase
-
     options[:url] = root_path unless options[:url].present?
 
-    text = options[:text] || (options[:delete] ? 'Remove' : prefix)
-    path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
-        "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}"
+    options[:delete] ? remove_social_account_button(provider, options) : add_social_account_button(provider, options)
+  end
+
+  def add_social_account_button(provider, options)
+    text = options[:text] || prefix
+    path = "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}"
+
+    # Underneath uses CSRF protection workaround provided by https://github.com/cookpad/omniauth-rails_csrf_protection
+    link_to path, method: :post, class: "btn btn-block btn-social btn-#{provider} #{options[:extra_class]}" do
+      raw <<-HTML
+        <i class="fa fa-#{FA_ICON[provider]}"></i> #{text} #{DISPLAY_NAME[provider]}
+      HTML
+    end
+  end
+
+  def remove_social_account_button(provider, options)
+    text = options[:text] || 'Remove'
+    path = "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}"
 
     raw <<-HTML
     <div data-no-turbolink>
-      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'method="delete" ' if options[:delete]}href="#{path}">
+      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}" method="delete" href="#{path}">
         <i class="fa fa-#{FA_ICON[provider]}"></i> #{text} #{DISPLAY_NAME[provider]}
       </a>
     </div>

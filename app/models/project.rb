@@ -8,7 +8,7 @@ class Project < ApplicationRecord
   validates_with ImageUrlValidator
   validates :image_url, uri: true, :allow_blank => true
 
-  belongs_to :user
+  belongs_to :user, optional: true
   include UserNullable
   include PublicActivity::Common
   has_many :documents

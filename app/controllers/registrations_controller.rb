@@ -24,7 +24,7 @@ class RegistrationsController < Devise::RegistrationsController
       @user.skill_list = params[:user].delete 'skill_list' # Extracts skills from params
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
 
-      if @user.update_attributes(account_update_params)
+      if @user.update(account_update_params)
         set_flash_message :notice, :updated
         redirect_to after_update_path_for(@user)
       else

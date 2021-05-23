@@ -1,2 +1,4 @@
+--require rails_helper
+--format documentation
 --color
 --order rand

@@ -51,8 +51,8 @@ doc/**/*
 .rvmrc.env
 
 .rvmrc
-.ruby-version
-.ruby-gemset
+# .ruby-version
+# .ruby-gemset
 
 # Ignore Precompiled Assets
 public/assets/**
@@ -95,4 +95,4 @@ certbot.log
 
 .vscode/**/*
 
-db/schema.rb
+# db/schema.rb
