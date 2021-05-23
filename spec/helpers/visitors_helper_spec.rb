@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe VisitorsHelper do
   describe '#display_countdown' do
