@@ -1,4 +1,4 @@
- 
+
 
 RSpec.describe ProjectsController, :type => :controller do
 
@@ -53,11 +53,8 @@ RSpec.describe ProjectsController, :type => :controller do
         expect(event_instances).to receive(:order).with(created_at: :desc).and_return(ordered_event_instances)
         expect(event_instances).to receive(:count).and_return('count')
         expect(ordered_event_instances).to receive(:limit).with(25).and_return('videos')
-        project = Object.new
-        iteration = Object.new
-        iteration.stub(stories: "stories")
-        project.stub(current_iteration: iteration)
-        allow(PivotalAPI::Project).to receive(:retrieve).and_return(project)
+        allow(PivotalAPI::Project).to receive(:retrieve).and_return(Project)
+        allow(Project).to receive_messages(current_iteration: Project, stories: "stories")
       end
 
       it 'assigns the requested project as @project' do
