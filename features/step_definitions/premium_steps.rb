@@ -65,6 +65,7 @@ end
 Given(/^the following plans exist$/) do |table|
   table.hashes.each do |hash|
     hash['amount'] = Integer(hash['amount'])
+    byebug
     @stripe_test_helper.try(:create_plan, hash)
     hash[:third_party_identifier] = hash.delete('id')
     Plan.create(hash)
