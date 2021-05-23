@@ -10,6 +10,8 @@ blocks:
       env_vars:
         - name: RAILS_ENV
           value: test
+        - name: CC_TEST_REPORTER_ID
+          value: c70a143fe21eb298eb2a98131dfc592947ea7ebfb87fbff9d9f69e724721d636
       secrets:
         - name: stripe-sk
         - name: stripe-pbk
@@ -37,4 +39,4 @@ blocks:
             - 'bundle exec rake jasmine:ci'
             - 'bundle exec rake ci:tests'
             # - cat $HOME/cucumber_report.json || true
-            - ./cc-test-reporter after-build
+            -  ./cc-test-reporter after-build
