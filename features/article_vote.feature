@@ -1,9 +1,9 @@
 @vcr
 Feature:
-  As a developer
+  "As a developer
   So that I may see the ranking of articles
   I would like to see the vote count on an article
-  And ability to vote up or down an article
+  And ability to vote up or down an article"
 
   Background:
     Given the following articles with votes exist:
@@ -11,8 +11,6 @@ Feature:
       | Ruby is on Fire          | Fire is fire and sunny           | 0         |
       | Rails is not for trains  | Train `tracks` do not work       | 5         |
       | JQuery cannot be queried | JQuery moves **towards** the ... | -1        |
-
-# Not logged in
 
   Scenario: I should see the vote value of an article on the article show page
     Given I am on the "Show" page for article "Ruby is on Fire"
@@ -28,15 +26,11 @@ Feature:
     Then I should not see link "Up Vote"
     And I should not see link "Down Vote"
 
-# Logged in
-
   Scenario: I should see the links to Up/Down Vote an article on the article show page
     Given I have logged in
     And I am on the "Show" page for article "Ruby is on Fire"
     Then I should see link "Up Vote"
     And I should see link "Down Vote"
-
-# voting should change vote value
 
   Scenario: I should be able to vote up an article
     Given I have logged in
@@ -49,8 +43,6 @@ Feature:
     And I have voted "down" article "JQuery cannot be queried"
     And I am on the "Show" page for article "JQuery cannot be queried"
     Then I should see a Vote value of "-2"
-
-# See cancel links after voting
 
   Scenario: I should see the link to Cancel Up Vote after voting up an article
     Given I have logged in
