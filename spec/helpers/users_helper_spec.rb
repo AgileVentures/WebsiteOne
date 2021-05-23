@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe 'UsersHelper' do
   describe '#activity_tab' do
