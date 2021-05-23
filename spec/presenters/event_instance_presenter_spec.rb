@@ -31,10 +31,12 @@ RSpec.describe EventInstancePresenter do
     end
 
     it 'returns an array of participants' do
-      participant = create(:user, gplus: hangout.participants.to_unsafe_h.first.last['person']['id'])
-
-      expect(presenter.participants.count).to eq(2)
-      expect(presenter.participants.first).to eq(participant)
+      expect(presenter.participants).to eq(
+        [
+          NullUser.new('Anonymous'),
+          NullUser.new('Anonymous')
+        ]
+      )
     end
 
     it 'do not show the host in the list of participants' do
