@@ -40,6 +40,8 @@ RSpec.describe ProjectsController, :type => :controller do
     end
 
     describe '#show' do
+      let(:pivotal_tracker) { instance_double(PivotalAPI::Project) }
+
       before(:each) do
         @project = build_stubbed(:project, valid_attributes)
         allow(@project).to receive(:tag_list).and_return ['WSO']
@@ -53,8 +55,8 @@ RSpec.describe ProjectsController, :type => :controller do
         expect(event_instances).to receive(:order).with(created_at: :desc).and_return(ordered_event_instances)
         expect(event_instances).to receive(:count).and_return('count')
         expect(ordered_event_instances).to receive(:limit).with(25).and_return('videos')
-        allow(PivotalAPI::Project).to receive(:retrieve).and_return(Project)
-        allow(Project).to receive_messages(current_iteration: Project, stories: "stories")
+        allow(PivotalAPI::Project).to receive(:retrieve).and_return(pivotal_tracker)
+        allow(pivotal_tracker).to receive_messages(current_iteration: pivotal_tracker, stories: "stories")
       end
 
       it 'assigns the requested project as @project' do
