@@ -7,7 +7,7 @@ Then /^I should see "([^"]*)" avatars$/ do | arg |
 end
 
 Then /^I should see "([^"]*)" user avatars$/ do | arg |
-  expect(page).to have_css('img[src*="gravatar.com"]', :count => arg)
+  expect(page).to have_css('img[src*="gravatar.com"]', count: arg)
 end
 
 When /^I click on the avatar for "(.*?)"$/ do | user |
