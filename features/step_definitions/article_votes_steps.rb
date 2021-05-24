@@ -7,12 +7,9 @@ Given(/^the following articles with votes exist:$/) do |table|
     article = default_test_author.articles.new hash
     article.save!
     votes.to_i.abs.times do |voter_count|
-      # create a voter so that a vote can be cast
-      # distinct by email eg. avoter_<article_count><voter_count>@example.com
       user_email = "avoter_#{article_count}#{voter_count}@example.com"
       u = FactoryBot.create(:user, email: user_email)
       votes.to_i >= 0 ? article.upvote_from(u) : article.downvote_from(u)
-
     end
   end
 
@@ -23,16 +20,12 @@ Then(/^I should see a Vote value of "(.*?)"$/) do |vote_value|
 end
 
 Given(/^I have voted "(.*?)" article "(.*?)"$/) do |up_or_down, article|
-
   @article = Article.find_by_title( article )
-
   case up_or_down.downcase
     when 'up'
-      @article.upvote_by @current_user
+      @article.liked_by @current_user
     when 'down'
-      @article.downvote_by @current_user
-    else
-      raise 'unkown vote type'
+      @article.downvote_from @current_user
   end
 
 end

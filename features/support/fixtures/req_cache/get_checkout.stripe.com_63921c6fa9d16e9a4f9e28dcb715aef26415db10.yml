@@ -1,0 +1,29 @@
+---
+:scope:
+:url: https://checkout.stripe.com/v3/yiWszEIcz0H0K2eT1bmgQ.html?distinct_id=e41a61d4-57c1-d3bc-681e-d794d640d5c3
+:body: ''
+:status: 404
+:method: get
+:headers:
+  Connection: close
+  Content-Length: '56'
+  Server: Varnish
+  Retry-After: '0'
+  Content-Type: text/html
+  Accept-Ranges: bytes
+  Date: Sun, 23 May 2021 20:40:36 GMT
+  Via: 1.1 varnish
+  X-Served-By: cache-cph20647-CPH
+  X-Cache: MISS
+  X-Cache-Hits: '0'
+  X-Timer: S1621802436.241486,VS0,VE674
+  Strict-Transport-Security: max-age=31556926; includeSubDomains; preload
+  Content-Security-Policy: 'connect-src ''self'' https://api.stripe.com wss://verificator.stripe.com
+    wss://verificator-main.stripe.com https://*.stripecdn.com https://errors.stripe.com;
+    default-src ''self''; font-src ''none''; frame-src ''self'' stripecheckout: bitcoin:
+    https://*.stripecdn.com https://js.stripe.com; img-src * data: blob:; media-src
+    ''none''; object-src ''self'' https://*.stripecdn.com; script-src ''self'' ''unsafe-inline''
+    ''unsafe-eval'' https://js.stripe.com https://*.stripecdn.com https://stripecdn.com
+    https://api.stripe.com; style-src ''self'' ''unsafe-inline'' https://cloud.typography.com
+    https://*.stripecdn.com'
+:content: "<html><body><h1>Error 404 - Not Found</h1></body></html>"
