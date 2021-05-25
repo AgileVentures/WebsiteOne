@@ -51,8 +51,8 @@ doc/**/*
 .rvmrc.env
 
 .rvmrc
-.ruby-version
-.ruby-gemset
+# .ruby-version
+# .ruby-gemset
 
 # Ignore Precompiled Assets
 public/assets/**
@@ -65,6 +65,8 @@ public/assets/**
 zeus.json
 
 .pryrc
+
+features/support/fixtures/req_cache/
 
 config/secrets.yml
 config/settings.local.yml
@@ -95,4 +97,4 @@ certbot.log
 
 .vscode/**/*
 
-db/schema.rb
+# db/schema.rb

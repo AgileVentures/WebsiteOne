@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe "Documents" do
   describe "GET /documents" do

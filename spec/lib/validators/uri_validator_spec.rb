@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 # from https://gist.github.com/timocratic/5113293
 
 
