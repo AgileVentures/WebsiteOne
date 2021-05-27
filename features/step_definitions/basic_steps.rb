@@ -58,8 +58,6 @@ def path_to(page_name, id = '')
       new_subscription_path(plan: 'premium')
     when 'premium mob sign up' then
       new_subscription_path(plan: 'premiummob')
-    when 'av dashboard token' then
-      get_av_dashboard_token_path
     when 'event' then
       event_path(id: id)
     else
@@ -352,19 +350,15 @@ def assert_link_exists path, text
   expect(page).to have_css "a[href='#{path}']", text: text
 end
 Then(/^I should see a link to create a new event$/) do
-  assert_link_exists(new_event_path, "Create event")
+  assert_link_exists(new_event_path, "CREATE EVENT")
 end
 
 Then(/^I should see a link to upcoming events$/) do
-  assert_link_exists(events_path, "Upcoming events")
-end
-
-Then(/^I should see a link to past scrums$/) do
-  assert_link_exists(scrums_path, "Past scrums")
+  assert_link_exists(events_path, "UPCOMING EVENTS")
 end
 
 Then(/^I should see a link to past events$/) do
-  assert_link_exists(hangouts_path, "Past events")
+  assert_link_exists(scrums_path, "PAST EVENTS")
 end
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|

@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 load 'db/migrate/20140725131327_event_combine_date_and_time_fields.rb'
 
 ActiveRecord::Migration.verbose = false
