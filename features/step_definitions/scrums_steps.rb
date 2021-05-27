@@ -25,24 +25,28 @@ When(/^I close the modal$/) do
   expect(page).not_to have_css('.close')
 end
 
-Given(/^that there are (\d+) past events$/) do |number|
+Given('that there are {int} past events') do |number|
   number.times do
-    FactoryBot.create(:event_instance,
-                      category: 'Scrum',
-                      created_at: rand(1.months.seconds.to_i).seconds.ago,
-                      project_id: nil)
+    create(:event_instance,
+           category: 'Scrum',
+           created_at: rand(1.months.seconds.to_i).seconds.ago,
+           project_id: nil)
   end
 end
 
-Given(/^there is one past scrum with invalid youtube id$/) do
-  FactoryBot.create(:event_instance,
-                    yt_video_id: nil,
-                    title: 'Invalid',
-                    category: 'Scrum',
-                    project_id: nil)
+Given('there is one past scrum with invalid youtube id') do
+  create(:event_instance,
+         yt_video_id: nil,
+         title: 'Invalid',
+         category: 'Scrum',
+         project_id: nil)
 end
 
-Then(/^video with youtube id nil shouldn't be clickable$/) do
+Then("video with youtube id nil shouldn't be clickable") do
   event = EventInstance.find_by_title('Invalid')
   expect(page).not_to have_css("a##{event.id}")
+end
+
+Then('wait {int} second') do |int|
+  sleep int
 end

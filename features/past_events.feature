@@ -1,5 +1,4 @@
 @vcr
-
 Feature: Scrums Index
   "As a developer
   So that I can get up to speed on Agile Ventures
@@ -16,4 +15,5 @@ Feature: Scrums Index
   Scenario: Videos with nil youtube id do not display youtube embed link
     Given there is one past scrum with invalid youtube id
     And I visit "/scrums"
+    Then wait 1 second
     Then video with youtube id nil shouldn't be clickable
