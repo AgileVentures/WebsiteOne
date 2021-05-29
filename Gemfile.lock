@@ -106,6 +106,10 @@ GEM
       execjs
     awesome_print (1.9.2)
     bcrypt (3.1.16)
+    better_errors (2.9.1)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     bootsnap (1.7.5)
@@ -770,6 +774,7 @@ DEPENDENCIES
   addressable
   airbrake
   awesome_print
+  better_errors
   binding_of_caller
   bootsnap (~> 1.4)
   bootstrap-sass
