@@ -21,14 +21,13 @@ Feature: Setting up basic page layout for site
       | About Us        |
       | Projects        |
       | Members         |
-      | Premium         |
+      | Get involved    |
       | Events          |
       | Getting started |
 
   Scenario: Events is a dropdown with links
     When I dropdown the "Events" menu
     Then I should see a link to upcoming events
-    And I should see a link to past scrums
     And I should see a link to past events
     And I should see a link to create a new event
 

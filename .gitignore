@@ -66,6 +66,8 @@ zeus.json
 
 .pryrc
 
+features/support/fixtures/req_cache/
+
 config/secrets.yml
 config/settings.local.yml
 config/settings/*.local.yml
