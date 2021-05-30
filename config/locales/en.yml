@@ -24,6 +24,6 @@ en:
     public_email: "Your %{provider} account needs to have a public email address for sign up. <a href='https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/solutions_for_signup_issues.md'>Click here for instructions</a>."
     video_missing: "video unavailable ('Start Broadcast' not pressed, or Hangout/YouTube fail)"
   premium:
-    tooltip: "Premium Support is a £10 a month subscription to support the AgileVentures charity, that gives you access to priority code review and various software and online course discounts"
+    tooltip: "Associate Membership is a £5 a month subscription to support the AgileVentures charity, that gives you access to priority code review and various software and online course discounts"
   premium_mob:
-    tooltip: "Premium Mob is a £25 a month subscription to support the AgileVentures charity, that gives you access to group coding sessions with an AgileVentures Mentor and professional development planning support"
+    tooltip: "Premium Mob Membership is discontinued"
