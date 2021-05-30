@@ -83,7 +83,7 @@ tags
 node_modules/*
 
 vendor/assets/javascripts/moment.min.js
-vendor/assets/javascripts/moment-timezone-with-data-2012-2022.js
+# vendor/assets/javascripts/moment-timezone-with-data-2012-2022.js
 vendor/assets/javascripts/bootstrap-datepicker.js
 vendor/assets/javascripts/bootstrap-timepicker.min.js
 vendor/assets/javascripts/typeahead.jquery.js
