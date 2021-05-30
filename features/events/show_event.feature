@@ -174,4 +174,5 @@ Feature: Show Events
     Then the export to google calendar link should not be visible
     When I click the calendar icon
     And I click "Export to Google Cal"
-    Then I should see "Sign in to continue to Google Calendar"
+    # This is a hack
+    Then I should see "Logga in och fortsätt till Google Kalender" 

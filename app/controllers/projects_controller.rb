@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    if @project.update_attributes(project_params)
+    if @project.update(project_params)
       add_to_feed(:update)
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else

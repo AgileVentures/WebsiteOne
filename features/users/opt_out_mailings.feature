@@ -1,13 +1,14 @@
 @vcr
-Feature: As a site user
+Feature: "Opt out from mailings"
+  "As a site user
   In order to opt-out of mailings
-  I want to be able to toggle email retrieval settings
+  I want to be able to toggle email retrieval settings"
 
   Background:
     Given the following users exist
-      | first_name  | last_name   | email                   | receive_mailings  |
-      | Alice       | Jones       | alice@btinternet.co.uk  |     false         |
-      | Bob         | Butcher     | bobb112@hotmail.com     |     true          |
+      | first_name | last_name | email                  | receive_mailings |
+      | Alice      | Jones     | alice@btinternet.co.uk | false            |
+      | Bob        | Butcher   | bobb112@hotmail.com    | true             |
 
   Scenario: Receive mailings should be false
     Given I am logged in as "Alice"
