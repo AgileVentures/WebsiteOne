@@ -1,7 +1,6 @@
 WebsiteOne
 ==========
 [oo-sw]: http://opensource.org/osd
-[waffle]: https://waffle.io/AgileVentures/WebsiteOne
 [application]: http://www.agileventures.org/
 [code-climate]: https://codeclimate.com/github/AgileVentures/WebsiteOne
 [support]: http://www.agileventures.org/
