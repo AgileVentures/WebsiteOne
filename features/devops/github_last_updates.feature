@@ -1,8 +1,8 @@
 @vcr, @rake
 Feature: Update github last update field of all projects
-  As a website admin
+  "As a website admin
   So that users can see which are the recently active projects
-  I would like to ensure all projects with valid github URLs know when the last commit happened
+  I would like to ensure all projects with valid github URLs know when the last commit happened"
 
   Background: projects have been added to database
     Given the following projects exist:
@@ -16,9 +16,9 @@ Feature: Update github last update field of all projects
   Scenario: Update last update field of all projects with valid github_url
     When I run the rake task for fetching github last_pushed_at information
     Then I should see projects with following updates:
-      | title        | status   | last_github_update                  |
-      | WebsiteTwo   | active   | 2016-05-05 14:09:50.000000000 +0000 |
-      | WebsiteOne   | inactive | Tue, 16 Oct 2018 20:17:42 UTC +00:00|
-      | edx          | active   | 2000-01-01 01:01:01.000000000 +0000 |
-      | Unity        | active   | 2000-01-01 01:01:01.000000000 +0000 |
-      | LocalSupport | active   | Tue, 16 Oct 2018 08:16:50 UTC +00:00|
+      | title        | status   | last_github_update                             |
+      | WebsiteTwo   | active   | 2020-12-14 04:13:58.000000000 +0000            |
+      | WebsiteOne   | inactive | 2021-05-30 06:33:14.000000000 +0000            |
+      | edx          | active   | 2000-01-01 01:01:01.000000000 +0000            |
+      | Unity        | active   | 2000-01-01 01:01:01.000000000 +0000            |
+      | LocalSupport | active   | Mon, 24 May 2021 18:16:19.000000000 UTC +00:00 |
