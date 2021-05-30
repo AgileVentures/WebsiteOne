@@ -126,7 +126,7 @@ class EventsController < ApplicationController
   end
 
   def set_event
-    @event = Event.find_by(slug: params[:id])
+    @event = Event.friendly.find(params[:id]) || Event.find_by(slug: params[:id])
   end
 
   def set_projects

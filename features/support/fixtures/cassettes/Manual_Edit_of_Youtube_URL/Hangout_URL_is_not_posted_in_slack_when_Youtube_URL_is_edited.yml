@@ -12451,4 +12451,85 @@ http_interactions:
         i1.prototype.toString=Array.prototype.join;"undefined"==typeof Float32Array&&(i1.BYTES_PER_ELEMENT=4,i1.prototype.BYTES_PER_ELEMENT=4,i1.prototype.set=i1.prototype.set,i1.prototype.toString=i1.prototype.toString,g.Fa("Float32Array",i1,void 0));j1.prototype.set=function(a,b){b=b||0;for(var c=0;c<a.length&&b+c<this.length;c++)this[b+c]=a[c]};
         j1.prototype.toString=Array.prototype.join;if("undefined"==typeof Float64Array){try{j1.BYTES_PER_ELEMENT=8}catch(a){}j1.prototype.BYTES_PER_ELEMENT=8;j1.prototype.set=j1.prototype.set;j1.prototype.toString=j1.prototype.toString;g.Fa("Float64Array",j1,void 0)};})(_yt_player);
   recorded_at: Mon, 10 Feb 2014 07:01:03 GMT
+- request:
+    method: post
+    uri: https://www.youtube.com/error_204?a=logerror&client.name=56&level=ERROR&line=776&msg=null%20is%20not%20a%20constructor%20(evaluating%20%27d(a.ea,e,a.i)%27)&t=jserror&type=TypeError
+    body:
+      encoding: UTF-8
+      string: url=https%3A%2F%2Fwww.youtube.com%2Fembed%2F11111111111%3Fenablejsapi%3D1&file=https%3A%2F%2Fwww.youtube.com%2Fs%2Fplayer%2F408be03a%2Fwww-embed-player.vflset%2Fwww-embed-player.js&stack=D%40https%3A%2F%2Fwww.youtube.com%2Fs%2Fplayer%2F408be03a%2Fwww-embed-player.vflset%2Fwww-embed-player.js%3A776%3A398%0Af%40https%3A%2F%2Fwww.youtube.com%2Fs%2Fplayer%2F408be03a%2Fwww-embed-player.vflset%2Fwww-embed-player.js%3A468%3A303%0Ahttps%3A%2F%2Fwww.youtube.com%2Fs%2Fplayer%2F408be03a%2Fwww-embed-player.vflset%2Fwww-embed-player.js%3A455%3A68&client.name=56&client.version=20201202&client.vendor=Apple%20Computer%2C%20Inc.&session_token=QUFFLUhqbTZxc3RzQzdIQk9raFByMnQ1OUw4a0dTQ0RCZ3xBQ3Jtc0tsbUM3akxnZnpaeXo5X05qZkY2M3BOYlhONkVicUVxSmR6UTN5X3dzbUVhS3pMRlNINmZFa0lIN1FvbXdwb3ltemRTQTdSSnk1THhFZDVjOWZxY2dmaXQ4dXhtNDloOGJ1X1AyMkd6YmNNWVdmX1dXU2FpVU05SHVCVktyNl93QWR6dG13LUIyaUhVV2t6eDhsSS1SOVRJZ0tYTFE%3D
+    headers:
+      Origin:
+      - https://www.youtube.com
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Youtube-Utc-Offset:
+      - '0'
+      X-Youtube-Client-Name:
+      - '56'
+      Referer:
+      - https://www.youtube.com/embed/11111111111?enablejsapi=1
+      X-Youtube-Client-Version:
+      - '20201202'
+      X-Youtube-Ad-Signals:
+      - dt=1622414965792&flash=0&frm=2&u_tz&u_his=4&u_java&u_h=768&u_w=1024&u_ah=768&u_aw=1024&u_cd=32&u_nplug&u_nmime&bc=1&bih=-12245933&biw=-12245933&brdim=0%2C0%2C0%2C0%2C1024%2C0%2C0%2C0%2C970%2C576&vis=1&wgl&ca_type=image
+      Accept:
+      - "*/*"
+      Content-Length:
+      - '900'
+      Cookie:
+      - VISITOR_INFO1_LIVE=pjHVtAVV_9Y; YSC=4jXSzSQnk1k
+      Connection:
+      - close
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-US,*
+      Host:
+      - www.youtube.com
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 30 May 2021 22:49:26 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - https://www.youtube.com
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - Video Stats Server
+      Content-Length:
+      - '0'
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      Set-Cookie:
+      - CONSENT=PENDING+902; expires=Fri, 01-Jan-2038 00:00:00 GMT; path=/; domain=.youtube.com;
+        Secure
+      P3p:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      Alt-Svc:
+      - h3-29=":443"; ma=2592000,h3-T051=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Mon, 10 Feb 2014 07:01:04 GMT
 recorded_with: VCR 6.0.0
