@@ -1,4 +1,5 @@
-@vcr, @rake
+@vcr
+@rake
 Feature: Update github languages field of all projects
   As a website admin
   So that users can see which languages projects use

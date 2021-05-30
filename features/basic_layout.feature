@@ -1,9 +1,8 @@
 @javascript
-
 Feature: Setting up basic page layout for site
-  As a user
+  "As a user
   So that I can navigate the site
-  I should see a basic navigation elements
+  I should see a basic navigation elements"
   https://www.pivotaltracker.com/story/show/63523208
 
 

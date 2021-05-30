@@ -54,7 +54,7 @@ Given(/^the following subscriptions exist$/) do |table|
     user = User.find_by(first_name: hash.delete('user'))
     hash[:user_id] = user.id
     hash[:started_at] = Time.now
-    Subscription.create!(hash)
+    create(:subscription, hash)
   end
 end
 

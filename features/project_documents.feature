@@ -1,6 +1,5 @@
 @vcr
-
-Feature: Manage Document
+Feature: Manage Documents
   "As a project member
   So that I can share my work related to a project
   I would like to be able to create and edit new documents"

@@ -1,4 +1,5 @@
-@vcr, @rake
+@vcr
+@rake
 Feature: Update github stats of all projects
    As a website admin, i should be able to update
    total commit counts of projects with valid github url

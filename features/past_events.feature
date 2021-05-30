@@ -1,5 +1,5 @@
 @vcr
-Feature: Scrums Index
+Feature: Past Events Index
   "As a developer
   So that I can get up to speed on Agile Ventures
   I would like to be able to see a list of previous scrums"

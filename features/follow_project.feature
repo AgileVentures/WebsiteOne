@@ -1,5 +1,4 @@
 @vcr
-
 Feature: Join projects
     "As a user
     So that I can participate in projects

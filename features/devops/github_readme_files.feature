@@ -1,4 +1,5 @@
-@vcr, @rake
+@vcr
+@rake
 Feature: Update github pitch of all projects
   As a website admin, I should be able to update
   about section of projects with valid github url

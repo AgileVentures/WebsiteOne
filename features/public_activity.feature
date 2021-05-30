@@ -1,4 +1,4 @@
-@vcr, @javascript
+@vcr
 Feature: Display Public Activity
   "As a user
   In order to get a better overview of what is going on
@@ -22,12 +22,13 @@ Feature: Display Public Activity
     And I create a document named "A New Guide to the Galaxy"
     And I create a project named "Build NCC-1701 Enterprise"
 
+  @javascript
   Scenario: Navigate to activity feed
     Given I am on the "Dashboard" page
     And I click the "Activity feed" link
     Then I should see a "activity-feed" tab set to active
     And I should see a activity feed
-
+  @javascript
   Scenario: Render activity
     Given Given I am on the Activity feed
     Then I should see "Anders Persson edited the article: Ruby is on Fire."

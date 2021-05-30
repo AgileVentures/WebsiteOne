@@ -1,6 +1,5 @@
 @vcr
-
-Feature:
+Feature: Custom Errors
   "As a visitor
   In order to understand what happened when something goes wrong
   I would like to have a comprehensible error message"

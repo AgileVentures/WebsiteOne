@@ -1,5 +1,4 @@
 @vcr
-
 Feature: Remind User complete profile
   "As site admin
   In order to increase the quality of our users database

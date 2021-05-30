@@ -1,5 +1,4 @@
 @vcr
-
 Feature: Add current_user options to navbar
   "As site developer
   In order to enhance user experience

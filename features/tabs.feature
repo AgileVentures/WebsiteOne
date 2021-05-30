@@ -1,5 +1,5 @@
-@vcr, @javascript
-
+@vcr
+@javascript
 Feature: Add in-page links for projects show page to open the tabbed contents
   "As a user
   So that I may share a link directly to a tabbed page

@@ -1,5 +1,4 @@
 @vcr
-
 Feature: Display Statistics
   "As a project maintainer
   In order to attract more users to AgileVentures

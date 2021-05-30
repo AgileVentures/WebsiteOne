@@ -1,5 +1,4 @@
 @vcr
-
 Feature: User status
   "As site administrator
   In order to simplify interactions between users
