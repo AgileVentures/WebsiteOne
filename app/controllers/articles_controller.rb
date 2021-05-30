@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
 
   def update
 
-    if @article.update_attributes(article_params)
+    if @article.update(article_params)
       @article.create_activity :update, owner: current_user
       flash[:notice] = %Q{Successfully updated the article "#{@article.title}"}
       redirect_to article_path(@article)

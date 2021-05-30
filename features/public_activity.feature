@@ -1,13 +1,12 @@
-@vcr
-@javascript
+@vcr, @javascript
 Feature: Display Public Activity
-  As a user
+  "As a user
   In order to get a better overview of what is going on
-  I would like to see latest activities in projects that I participate in presented as a activity feed
+  I would like to see latest activities in projects that I participate in presented as a activity feed"
 
-  As a site visitor
+  "As a site visitor
   In order to get a clearer picture of what is going on in all AgileVenture projects
-  I would like to see an activity feed
+  I would like to see an activity feed"
 
   Background:
     Given the following projects exist:
