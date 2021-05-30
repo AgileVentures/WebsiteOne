@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe ProjectsHelper do
   describe '#created_date' do

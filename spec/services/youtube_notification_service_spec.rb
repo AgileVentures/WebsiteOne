@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe YoutubeNotificationService do
   subject(:youtube_notification_service) { YoutubeNotificationService }

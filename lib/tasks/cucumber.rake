@@ -17,6 +17,7 @@ begin
     Cucumber::Rake::Task.new({:ok => 'test:prepare'}, 'Run features that should pass') do |t|
       t.binary = vendored_cucumber_bin # If nil, the gem's binary is used.
       t.fork = true # You may get faster startup if you set this to false
+      t.cucumber_opts = "--publish-quiet"
       t.profile = 'default'
     end
 
@@ -38,7 +39,7 @@ begin
     desc 'Run all features, record any failures'
     Cucumber::Rake::Task.new({first_try: 'test:prepare'}, 'run all features and record failures') do |t|
       t.binary = vendored_cucumber_bin
-      t.cucumber_opts = "--tags 'not @intermittent-ci-js-fail'"
+      t.cucumber_opts = "--tags 'not @intermittent-ci-js-fail' --publish-quiet"
       t.fork = true # You may get faster startup if you set this to false
       t.profile = 'first_try'
     end
@@ -46,7 +47,7 @@ begin
     desc 'Run failures if any exist'
     Cucumber::Rake::Task.new({second_try: 'test:prepare'}, 'rerun any recorded failures') do |t|
       t.binary = vendored_cucumber_bin
-      t.cucumber_opts = "--tags 'not @intermittent-ci-js-fail'"
+      t.cucumber_opts = "--tags 'not @intermittent-ci-js-fail' --publish-quiet"
       t.fork = true # You may get faster startup if you set this to false
       t.profile = 'second_try'
     end
@@ -54,7 +55,7 @@ begin
     desc 'Run failures if any exist'
     Cucumber::Rake::Task.new({third_try: 'test:prepare'}, 'testing failures') do |t|
       t.binary = vendored_cucumber_bin
-      t.cucumber_opts = "--tags 'not @intermittent-ci-js-fail'"
+      t.cucumber_opts = "--tags 'not @intermittent-ci-js-fail' --publish-quiet"
       t.fork = true # You may get faster startup if you set this to false
       t.profile = 'third_try'
     end

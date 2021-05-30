@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe PaypalAgreementController, type: :request do
   describe 'POST /paypal/new' do
