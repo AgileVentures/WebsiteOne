@@ -55,19 +55,19 @@ Then(/^I should see a paypal form$/) do
   expect(page).to have_xpath("//form[@action='https://www.sandbox.paypal.com/cgi-bin/webscr']")
 end
 
-Then("I should see a paypal subscribe button") do
+Then('I should see a paypal subscribe button') do
   within('#paypal_section') do
     expect(page).to have_css('input[src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif"]')
   end
 end
 
-
-Given(/^the following plans exist$/) do |table|
+Given('the following plans exist') do |table|
   table.hashes.each do |hash|
+    product = @stripe_test_helper.create_product(name: hash['name'], id: hash['id'])
     hash['amount'] = Integer(hash['amount'])
-    @stripe_test_helper.try(:create_plan, hash)
+    @stripe_test_helper.create_plan(hash.merge(product: product.id))
     hash[:third_party_identifier] = hash.delete('id')
-    Plan.create(hash)
+    create(:plan, hash)
   end
 end
 
@@ -93,7 +93,8 @@ end
 
 And(/^Paypal API updates our endpoint for premium mob$/) do
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
-  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premiummob', nil
+  paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premiummob',
+                      nil
   visit "#{paypal_create_path}?#{paypal.url_params}"
 end
 
@@ -102,7 +103,6 @@ And(/^Paypal API updates our endpoint for premium$/) do
   paypal = Paypal.new 'EC-4U870158WU919683B', 'matt+buyer@agileventures.org', '6HAXA86M2NVH8', 'paypal', 'premium', nil
   visit "#{paypal_create_path}?#{paypal.url_params}"
 end
-
 
 And(/^Paypal API updates our endpoint after sponsoring Alice$/) do
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"

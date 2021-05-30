@@ -19,20 +19,20 @@ Then /^I should (not )?see hangout button$/ do |absent|
   end
 end
 
-Given /^the Hangout for event "([^"]*)" has been started with details:$/ do |event_name, table|
+Given("the Hangout for event {string} has been started with details:") do |event_name, table|
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
 
   start_time = hangout['Started at'] ? Time.parse(hangout['Started at']) : Time.now
   update_time = hangout['Updated at'] ? Time.parse(hangout['Updated at']) : start_time
   event = Event.find_by_name(event_name)
-  FactoryBot.create(:event_instance,
-                    event_id: event.id,
-                    hangout_url: hangout['EventInstance link'],
-                    created: start_time,
-                    updated_at: update_time,
-                    hoa_status: 'live',
-                    youtube_tweet_sent: true)
+  create(:event_instance,
+         event_id: event.id,
+         hangout_url: hangout['EventInstance link'],
+         created: start_time,
+         updated_at: update_time,
+         hoa_status: 'live',
+         youtube_tweet_sent: true)
 end
 
 Given /^the following hangouts exist:$/ do |table|

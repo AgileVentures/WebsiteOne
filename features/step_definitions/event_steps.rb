@@ -116,7 +116,7 @@ end
 
 
 
-Given(/^I am on the show page for event "([^"]*)"$/) do |name|
+Given("I am on the show page for event {string}") do |name|
   event = Event.find_by_name(name)
   visit event_path(event)
 end
@@ -440,8 +440,8 @@ Then(/^I should see a link to join or upgrade based on my (.*)$/) do |plan_name|
   join_message = 'JOIN THIS LIVE EVENT NOW'
   join_link = 'http://hangout.test'
   upgrade_message = 'THIS EVENT IS LIVE, UPGRADE NOW TO JOIN'
-  upgrade_link = '/subscriptions/new?plan=premiummob'
-  premium_mob_and_above_array = ['Premium Plus','Premium F2F', 'Premium Mob']
+  upgrade_link = '/subscriptions/new?plan=associate'
+  premium_mob_and_above_array = ['Associate']
   if premium_mob_and_above_array.include? plan_name
     expect(page).to have_link(join_message, href: join_link)
     expect(page).to have_no_link(upgrade_message, href: upgrade_link)
