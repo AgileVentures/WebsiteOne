@@ -32,7 +32,7 @@
 //= require jvectormap
 //= require jvectormap/maps/world_mill
 //= require moment.min
-//= require moment-timezone-with-data-2012-2022
+//= require moment-timezone-with-data-2012-2022.js
 //= require cocoon
 //= require fullcalendar
 //= require lolex

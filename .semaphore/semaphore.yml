@@ -31,6 +31,7 @@ blocks:
             - mkdir -p tmp/pids
             - npm install bower
             - npm install
+            - node ./scripts/copy_javascript_dependencies.js
             - cache store
             - 'RAILS_ENV=test bundle exec rake db:migrate'
             - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
