@@ -11,6 +11,7 @@ When(/^I click the 'Sponsors' page$/) do
 end
 
 Then(/^I should be on 'Sponsors' page$/) do
+  
   expect(page.title).to have_content('Sponsors')
 end
 

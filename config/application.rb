@@ -9,6 +9,7 @@ Bundler.require(:default, Rails.env)
 
 module WebsiteOne
   class Application < Rails::Application
+    config.load_defaults 5.0
     # necessary to make Settings available
     Config::Integrations::Rails::Railtie.preload
     # config.load_defaults 5.0
@@ -37,7 +38,7 @@ module WebsiteOne
     # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
     config.assets.precompile += %w(
       mercury_init.js 404.js projects.js events.js google-analytics.js
-      disqus.js event_instances.js scrums.js
+      disqus.js event_instances.js scrums.js moment-timezone-with-data-2012-2022.js
     )
 
     # ensure svg assets are compiled in production

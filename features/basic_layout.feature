@@ -1,8 +1,8 @@
-@vcr
+@javascript
 Feature: Setting up basic page layout for site
-  As a user
+  "As a user
   So that I can navigate the site
-  I should see a basic navigation elements
+  I should see a basic navigation elements"
   https://www.pivotaltracker.com/story/show/63523208
 
 
@@ -20,14 +20,13 @@ Feature: Setting up basic page layout for site
       | About Us        |
       | Projects        |
       | Members         |
-      | Premium         |
+      | Get involved    |
       | Events          |
       | Getting started |
 
   Scenario: Events is a dropdown with links
     When I dropdown the "Events" menu
     Then I should see a link to upcoming events
-    And I should see a link to past scrums
     And I should see a link to past events
     And I should see a link to create a new event
 
@@ -45,7 +44,7 @@ Feature: Setting up basic page layout for site
     And I should see a link "Blog" to "http://nonprofits.agileventures.org/blog/"
     And I should see a link "Press Kit" to "http://www.agileventures.org/press-kit"
 
-  @javascript @desktop
+  @desktop
   Scenario: Show Sponsors on desktop computer
     Given I am on a desktop
     And I am on Events index page
@@ -53,7 +52,7 @@ Feature: Setting up basic page layout for site
     And I am on Projects index page
     Then I should see the supporter content
 
-  @javascript @tablet
+  @tablet
   Scenario: Hide Sponsors from Tablets
     Given I am on a tablet
     And I am on Events index page
@@ -61,7 +60,7 @@ Feature: Setting up basic page layout for site
     And I am on Projects index page
     Then I should not see the supporter content
 
-  @javascript @smartphone
+  @smartphone
   Scenario: Hide Sponsors from Smartphones
     Given I am on a smartphone
     And I am on Events index page
@@ -69,19 +68,19 @@ Feature: Setting up basic page layout for site
     And I am on Projects index page
     Then I should not see the supporter content
 
-  @javascript @desktop
+  @desktop
   Scenario: Show Round banners on desktop computer
     Given I am on a tablet
     And I visit the site
     Then I should see the round banners
 
-  @javascript @tablet
+  @tablet
   Scenario: Hide Round banners from Tablets
     Given I am on a tablet
     And I visit the site
     Then I should not see the round banners
 
-  @javascript @smartphone
+  @smartphone
   Scenario: Hide Round banners from Smartphones
     Given I am on a smartphone
     And I visit the site
