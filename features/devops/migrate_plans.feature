@@ -6,11 +6,11 @@ Feature: Migrate the stripe data
 
   Background:
     Given the following plans exist
-      | name         | id          | amount | free_trial_length_days |
-      | Premium      | premium     | 1000   | 7                      |
-      | Premium Mob  | premiummob  | 2500   | 0                      |
-      | Premium F2F  | premiumf2f  | 5000   | 0                      |
-      | Premium Plus | premiumplus | 10000  | 0                      |
+      | name        | id          | amount | free_trial_length_days |
+      | Premium     | premium     | 1000   | 7                      |
+      | PremiumMob  | premiummob  | 2500   | 0                      |
+      | PremiumF2F  | premiumf2f  | 5000   | 0                      |
+      | PremiumPlus | premiumplus | 10000  | 0                      |
     And the following users exist
       | first_name | last_name | email                  |
       | Alice      | Jones     | alice@btinternet.co.uk |
@@ -33,6 +33,6 @@ Feature: Migrate the stripe data
   Scenario: Migrate the stripe data to the new architecture
     When I run the rake task for migrating plans
     Then "alice@btinternet.co.uk" should have a "Premium" subscription plan
-    And "umar@btinternet.co.uk" should have a "Premium Plus" subscription plan
-    And "yi@btinternet.co.uk" should have a "Premium Mob" subscription plan
-    And "fidel@btinternet.co.uk" should have a "Premium F2F" subscription plan
+    And "umar@btinternet.co.uk" should have a "PremiumPlus" subscription plan
+    And "yi@btinternet.co.uk" should have a "PremiumMob" subscription plan
+    And "fidel@btinternet.co.uk" should have a "PremiumF2F" subscription plan

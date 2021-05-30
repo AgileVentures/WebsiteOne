@@ -44,16 +44,18 @@ Given(/^the following payment sources exist$/) do |table|
   table.hashes.each do |hash|
     user = User.find_by(first_name: hash.delete('user'))
     subscription = Subscription.find_by(user_id: user.id)
-    hash[:subscription_id] = subscription
-    PaymentSource::PaymentSource.create!(hash)
+    hash[:subscription_id] = subscription.id
+    create(:paypal, hash)
   end
 end
 
-Given(/^the following subscriptions exist$/) do |table|
+Given("the following subscriptions exist") do |table|
   table.hashes.each do |hash|
     user = User.find_by(first_name: hash.delete('user'))
+    plan = Plan.find_by(name: hash[:type])
     hash[:user_id] = user.id
     hash[:started_at] = Time.now
+    hash[:plan_id] = plan.id
     create(:subscription, hash)
   end
 end

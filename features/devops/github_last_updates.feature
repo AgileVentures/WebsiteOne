@@ -17,9 +17,9 @@ Feature: Update github last update field of all projects
   Scenario: Update last update field of all projects with valid github_url
     When I run the rake task for fetching github last_pushed_at information
     Then I should see projects with following updates:
-      | title        | status   | last_github_update                             |
-      | WebsiteTwo   | active   | 2020-12-14 04:13:58.000000000 +0000            |
-      | WebsiteOne   | inactive | 2021-05-30 06:33:14.000000000 +0000            |
-      | edx          | active   | 2000-01-01 01:01:01.000000000 +0000            |
-      | Unity        | active   | 2000-01-01 01:01:01.000000000 +0000            |
-      | LocalSupport | active   | Mon, 24 May 2021 18:16:19.000000000 UTC +00:00 |
+      | title        | status   | last_github_update                  |
+      | WebsiteTwo   | active   | 2016-05-05 14:09:50.000000000 +0000 |
+      | WebsiteOne   | inactive | 2018-10-16 20:17:42.000000000 +0000 |
+      | edx          | active   | 2000-01-01 01:01:01.000000000 +0000 |
+      | Unity        | active   | 2000-01-01 01:01:01.000000000 +0000 |
+      | LocalSupport | active   | 2018-10-16 08:16:50.000000000 +0000 |
