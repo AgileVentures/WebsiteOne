@@ -1,8 +1,8 @@
 @vcr
 Feature: Password retrieval
-  As an existing User
+  "As an existing User
   So that I can recover a lost password
-  I want to be able to ask that system for a new password
+  I want to be able to ask that system for a new password"
 
   Background:
     Given the following users exist

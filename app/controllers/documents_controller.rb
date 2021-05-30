@@ -66,7 +66,7 @@ class DocumentsController < ApplicationController
 
   def mercury_update
     @document = Document.friendly.find(params[:document_id])
-    if @document.update_attributes(title: params[:content][:document_title][:value],
+    if @document.update(title: params[:content][:document_title][:value],
                                    body: params[:content][:document_body][:value])
       @document.create_activity :update, owner: current_user
       render html: ''

@@ -59,7 +59,7 @@
             <li><%= link_to 'About', static_page_path('About Us'), class: is_in_static_page?('About Us') ? 'active' : ''%></li>
             <li><%= link_to 'Projects', projects_path, class: active_if_controller_is('projects') %></li>
             <li><%= link_to 'Members', users_path, class: active_if_controller_is('users') %></li>
-            <li><%= link_to 'Premium', static_page_path('Membership Plans'), class: active_if_controller_is('subscriptions') %></li>
+            <li><%= link_to 'Get involved', static_page_path('Membership Plans'), class: active_if_controller_is('subscriptions') %></li>
             <li class="dropdown">
               <a href="#" id="events-dropdown" data-toggle="dropdown">Events
                 <span class="caret"></span></a>
@@ -70,12 +70,9 @@
                 </a>
                 <a class="custom_menu_link" href="<%= scrums_path %>">
                   <li>
-                    <i class="fa fa-play custom_menu_item"></i>Past scrums</li>
+                    <i class="fa fa-play custom_menu_item"></i>Past events</li>
                 </a>
-                <a class="custom_menu_link" href="<%= hangouts_path %>">
-                  <li>
-                    <i class="fa fa-bookmark-o custom_menu_item"></i>Past events</li>
-                </a>
+              
                 <a class="custom_menu_link" href="<%= new_event_path %>">
                   <li>
                     <i class="fa fa-users custom_menu_item"></i>Create event</li>

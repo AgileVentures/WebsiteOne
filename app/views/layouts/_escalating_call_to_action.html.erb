@@ -1,10 +1,7 @@
 <% if current_user %>
     <% if current_user.membership_type == 'Basic' %>
         <% path = '/premium' %>
-        <% message = 'Upgrade to Premium for additional support' %>
-    <% elsif current_user.membership_type == 'Premium' %>
-        <% path = '/premium_mob' %>
-        <% message = 'Upgrade to Premium Mob for group sessions with a Mentor' %>
+        <% message = 'Upgrade to Associate membership and get out more from your membership' %>
     <% end %>
 <% else %>
     <% path = new_user_registration_path %>

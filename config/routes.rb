@@ -4,7 +4,7 @@ end
 
 Rails.application.routes.draw do
 
-  apipie
+  # apipie
   mount Mercury::Engine => '/'
 
   mount Events::API => '/'
