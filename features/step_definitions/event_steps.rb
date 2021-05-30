@@ -218,11 +218,6 @@ And(/^the start date is "([^"]*)"$/) do |start_date|
   expect(find("#start_date").value).to eq start_date
 end
 
-# would like this to be more robust
-Given(/^daylight savings are in effect now$/) do
-  Delorean.time_travel_to(Time.parse('2015/06/14 09:15:00 UTC'))
-end
-
 And(/^the user is in "([^"]*)"$/) do |zone|
   @zone = zone
 end
