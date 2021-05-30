@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe PivotalTrackerUrlValidator do
   let(:dummy_class) do
