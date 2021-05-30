@@ -55,7 +55,9 @@ After '@stripe_javascript' do
   end
 end
 
-Before('@desktop') { page.driver.resize(1228, 768) }
+Before('@desktop') {
+  page.driver.resize(1228, 768)
+}
 
 Before('@tablet') { page.driver.resize(768, 768) }
 
@@ -74,7 +76,7 @@ Before('@time-travel-step') do
   ENV['TZ'] = 'UTC'
 end
 
-After('@time-travel , @time-travel-step') do
+After('@time-travel or @time-travel-step') do
   Delorean.back_to_the_present
   ENV['TZ'] = @default_tz
 end
@@ -119,7 +121,7 @@ Before('@omniauth-without-email') do
   }
 end
 
-After('@omniauth, @omniauth-with-email, @omniauth-with-invalid-credentials') do
+After('@omniauth or @omniauth-with-email or @omniauth-with-invalid-credentials') do
   OmniAuth.config.test_mode = false
 end
 

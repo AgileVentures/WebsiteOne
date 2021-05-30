@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 shared_examples 'a payment source' do
   it { should belong_to :subscription }
