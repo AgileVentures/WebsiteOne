@@ -1,4 +1,5 @@
 @rake
+@stripe_javascript
 Feature: Migrate the stripe data
   As the admin
   So that users can get premium related functionality related to the new data schema

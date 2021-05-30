@@ -11,6 +11,6 @@ unless Rails.env.production?
     desc 'Run Rspec and Cucumber'
     # task tests: [:spec, 'coveralls:push']
     task tests: [:spec, 'cucumber:first_try', 'cucumber:second_try', 'coveralls:push']
-    # task third_try: ['cucumber:third_try']
+    task third_try: ['cucumber:third_try']
   end
 end
