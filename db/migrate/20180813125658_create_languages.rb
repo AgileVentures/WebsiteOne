@@ -2,7 +2,7 @@ class CreateLanguages < ActiveRecord::Migration[5.1]
   def change
     create_table :languages do |t|
       t.string :name, unique: true
-      t.timestamp
+      t.timestamps
     end
 
     create_table :languages_projects, id: false do |t|

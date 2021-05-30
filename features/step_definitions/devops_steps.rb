@@ -28,9 +28,7 @@ end
 
 Then(/^I should see all the pages on github in the site as static pages with the content from github$/) do
   visit static_page_path('About Us')
-  expect(page).to have_content 'Agile Ventures is an official UK Charity'
-  visit static_page_path('Business Plan')
-  expect(page).to have_content 'learning experiences for everyone around the world through collaborative'
+  expect(page).to have_content 'AgileVentures is an official UK Charity dedicated to crowdsourced learning and social coding'
   visit static_page_path('Code of Conduct')
   expect(page).to have_content 'A primary goal of Agile Ventures is to be inclusive to the largest number of contributors'
   visit static_page_path('Constitution')
