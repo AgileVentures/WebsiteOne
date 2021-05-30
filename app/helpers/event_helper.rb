@@ -49,7 +49,7 @@ module EventHelper
   end
 
   def show_private_event_info?
-    return true unless @event.for == 'Premium Mob Members'
+    return true unless @event.for == 'Associate Members'
     current_user and current_user.allowed_to_attend?
   end
 end

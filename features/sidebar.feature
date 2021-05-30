@@ -1,8 +1,8 @@
 @vcr
 Feature: Sidebar navigation
-  As a user
+  "As a user
   So that I may navigate through project documents with ease
-  I want to have a sidebar to navigate project documents with
+  I want to have a sidebar to navigate project documents with"
 
   Background:
     Given the following projects exist:
@@ -14,10 +14,10 @@ Feature: Sidebar navigation
 
     And the following documents exist:
       | title         | body             | project_id |
-      | Howto         | How to start     |          1 |
-      | Documentation | My documentation |          1 |
-      | Another doc   | My content       |          2 |
-      | Howto 2       | My documentation |          2 |
+      | Howto         | How to start     | 1          |
+      | Documentation | My documentation | 1          |
+      | Another doc   | My content       | 2          |
+      | Howto 2       | My documentation | 2          |
     And there are no videos
 
 

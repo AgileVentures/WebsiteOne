@@ -24,7 +24,7 @@ class User < ApplicationRecord
     end
   end
 
-  PREMIUM_MOB_PLAN_AMOUNT = 2500
+  PREMIUM_MOB_PLAN_AMOUNT = 500 # downgrading this to associate membership level
 
   acts_as_taggable_on :skills, :titles
   acts_as_voter
