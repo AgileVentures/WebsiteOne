@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe UserPresenter do
   subject { UserPresenter.new(user) }

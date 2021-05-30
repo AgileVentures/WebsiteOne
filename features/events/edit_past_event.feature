@@ -47,7 +47,7 @@ Feature: Editing an event with start date in the past
     Then the user should see the date and time adjusted for their timezone in the edit form
 
   Scenario: User in non-UTC timezone saves an existing event with no changes, during daylight savings
-    Given daylight savings are in effect now
+    Given the date is "2014/06/01 09:15:00 UTC"
     And the user is in "Europe/London"
     And edits an event with start date in standard time
     When they save without making any changes
