@@ -43,7 +43,7 @@ Given(/^I click on the event body for the event named "(.*?)"$/) do |name|
   page.find(:css, "#details_#{e.id}").click
 end
 
-Given(/^following events exist:$/) do |table|
+Given("following events exist:") do |table|
   table.map_column!('start_datetime') do |date|
     if date == 'TODAYS_DATE'
       date = Time.current.strftime('%c')
@@ -54,7 +54,7 @@ Given(/^following events exist:$/) do |table|
     hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
     hash.delete('project')
     hash[:repeat_ends] = false
-    Event.create!(hash)
+    create(:event, hash)
   end
 end
 
@@ -216,11 +216,6 @@ end
 
 And(/^the start date is "([^"]*)"$/) do |start_date|
   expect(find("#start_date").value).to eq start_date
-end
-
-# would like this to be more robust
-Given(/^daylight savings are in effect now$/) do
-  Delorean.time_travel_to(Time.parse('2015/06/14 09:15:00 UTC'))
 end
 
 And(/^the user is in "([^"]*)"$/) do |zone|

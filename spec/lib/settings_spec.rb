@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe Settings, type: 'model' do
   describe 'in production' do
