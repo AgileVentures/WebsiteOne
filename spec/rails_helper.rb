@@ -17,7 +17,6 @@ require 'capybara-screenshot/rspec'
 require 'public_activity/testing'
 require 'paper_trail/frameworks/rspec'
 require 'selenium/webdriver'
-require 'pry-byebug'
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 PublicActivity.enabled = true
