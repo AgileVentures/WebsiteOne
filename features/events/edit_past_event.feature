@@ -1,4 +1,4 @@
-@javascript, @vcr
+@javascript @vcr
 Feature: Editing an event with start date in the past
   As a site user
   In order to be able to update existing activities
