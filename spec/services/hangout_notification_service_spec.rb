@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 describe HangoutNotificationService do
   subject(:hangout_notification_service) { HangoutNotificationService }
