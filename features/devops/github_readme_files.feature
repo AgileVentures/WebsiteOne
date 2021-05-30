@@ -8,9 +8,8 @@ Feature: Update github pitch of all projects
       | title        | description            | status   | pitch        |
       | WebsiteOne   | website one project    | active   | WebsiteOne   |
       | edx          | MOOC platform          | active   | edx          |
-      | Unity        | Unity project          | pending  | Unity        |
       | LocalSupport | Scheduler queue        | active   | LocalSupport |
-      | nisevi       | ROR blog and portfolio | active   | ROR          |
+      | Unity        | Unity project          | pending  | Unity        |
       | closed       | closed project         | closed   | keepclosed   |
       | fakerepo     | fake repository        | active   | keepfake     |
 
@@ -19,7 +18,6 @@ Feature: Update github pitch of all projects
       | https://github.com/AgileVentures/WebsiteOne   | WebsiteOne   |
       | https://github.com/edx                        | edx          |
       | https://github.com/AgileVentures/LocalSupport | LocalSupport |
-      | https://github.com/nisevi/nisevi              | nisevi       |
       | https://github.com/AgileVentures/LocalSupport | closed       |
       | https://github.com/fake/repo                  | fakerepo     |
 
@@ -31,5 +29,4 @@ Feature: Update github pitch of all projects
       | LocalSupport | LocalSupport              |
       | closed       | keepclosed                |
       | edx          | edx                       |
-      | nisevi       | Introduction              |
       | fakerepo     | keepfake                  |
