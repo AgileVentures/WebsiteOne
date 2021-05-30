@@ -123,7 +123,6 @@ group :development, :test do
   gem 'hirb'
   gem 'jasmine', '~> 3.5'
   gem 'jasmine-jquery-rails', '~> 2.0', '>= 2.0.3'
-  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'railroady'
   gem 'rb-readline'
