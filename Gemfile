@@ -86,10 +86,10 @@ group :test do
   gem 'capybara-screenshot'
   gem 'cucumber-rails', '~> 2.0', require: false
   gem 'database_cleaner'
-  gem 'delorean'
+  gem 'delorean' # gem is discontinued
   gem 'launchy'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
+  gem 'phantomjs', require: 'phantomjs/poltergeist' # not maintained since 2016
+  gem 'poltergeist' # not maintained since 2018
   gem 'puffing-billy', '~> 2.2.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
   gem 'rubocop-performance', '~> 1.5', '>= 1.5.2'
