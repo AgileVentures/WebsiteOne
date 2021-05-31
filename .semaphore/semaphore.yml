@@ -12,6 +12,10 @@ blocks:
           value: test
         - name: CC_TEST_REPORTER_ID
           value: c70a143fe21eb298eb2a98131dfc592947ea7ebfb87fbff9d9f69e724721d636
+        - name: STRIPE_SECRET_KEY
+          value: sk_test_4O7CTmoS1jwlDAX3z1abLYWm
+        - name: STRIPE_PUBLISHABLE_KEY
+          value: pk_test_4O7CBxlnqMFgw0BAmpKmOjTn
       secrets:
         - name: stripe-sk
         - name: stripe-pbk
