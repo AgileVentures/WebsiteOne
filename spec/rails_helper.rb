@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 require 'coveralls'
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 SimpleCov.start do
   add_filter 'app/secrets'
 end
-
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
@@ -18,7 +19,7 @@ require 'public_activity/testing'
 require 'paper_trail/frameworks/rspec'
 require 'selenium/webdriver'
 
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 PublicActivity.enabled = true
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -45,9 +46,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include RSpecHtmlMatchers
 
-  config.filter_run :show_in_doc => true if ENV['APIPIE_RECORD']
+  config.filter_run show_in_doc: true if ENV['APIPIE_RECORD']
   config.mock_with :rspec do |c|
-    c.syntax = [:should, :expect]
+    c.syntax = %i(should expect)
   end
 
   config.before(:suite) do
@@ -87,6 +88,6 @@ Capybara.register_driver :headless_chrome do |app|
   )
 
   Capybara::Selenium::Driver.new app,
-    browser: :chrome,
-    desired_capabilities: capabilities
+                                 browser: :chrome,
+                                 desired_capabilities: capabilities
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'vcr'
 
 VCR.configure do |c|
@@ -6,8 +8,8 @@ VCR.configure do |c|
   c.ignore_localhost = true
   c.default_cassette_options = {
     match_requests_on: [
-        :method,
-        VCR.request_matchers.uri_without_param(:imp, :prev_imp, :distinct_id)
+      :method,
+      VCR.request_matchers.uri_without_param(:imp, :prev_imp, :distinct_id)
     ]
   }
   c.filter_sensitive_data('<SLACK_AUTH_TOKEN>') { ENV['SLACK_AUTH_TOKEN'] }

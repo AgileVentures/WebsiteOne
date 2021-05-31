@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 class DocumentsController < ApplicationController
   layout 'with_sidebar'
   before_action :find_project
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :get_doc_categories, :update_parent_id]
-  before_action :authenticate_user!, except: [:index, :show]
-
+  before_action :set_document, only: %i(show edit update destroy get_doc_categories update_parent_id)
+  before_action :authenticate_user!, except: %i(index show)
 
   # GET /documents
   # GET /documents.json
@@ -25,14 +26,13 @@ class DocumentsController < ApplicationController
 
   def get_doc_categories
     @categories = @project.documents.where(parent_id: nil)
-    render partial: "categories"
+    render partial: 'categories'
   end
 
   # GET /documents/new
   def new
     set_parent
     @document = Document.new
-
   end
 
   # POST /documents
@@ -41,8 +41,10 @@ class DocumentsController < ApplicationController
     @document = @project.documents.build(document_params.merge(user_id: current_user.id))
     respond_to do |format|
       if @document.save
-       @document.create_activity :create, owner: current_user
-        format.html { redirect_to project_document_path(@project, @document), notice: 'Document was successfully created.' }
+        @document.create_activity :create, owner: current_user
+        format.html do
+          redirect_to project_document_path(@project, @document), notice: 'Document was successfully created.'
+        end
         format.json { render action: 'show', status: :created, location: @document }
       else
         set_parent
@@ -50,7 +52,6 @@ class DocumentsController < ApplicationController
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   # DELETE /documents/1
@@ -67,17 +68,19 @@ class DocumentsController < ApplicationController
   def mercury_update
     @document = Document.friendly.find(params[:document_id])
     if @document.update(title: params[:content][:document_title][:value],
-                                   body: params[:content][:document_body][:value])
+                        body: params[:content][:document_body][:value])
       @document.create_activity :update, owner: current_user
       render html: ''
     end
   end
 
   def mercury_saved
-    redirect_to project_document_path(@project, id: params[:document_id]), notice: 'The document has been successfully updated.'
+    redirect_to project_document_path(@project, id: params[:document_id]),
+                notice: 'The document has been successfully updated.'
   end
 
   private
+
   def find_project
     @project = Project.friendly.find(params[:project_id])
   end
@@ -87,9 +90,7 @@ class DocumentsController < ApplicationController
   end
 
   def set_parent
-    if params[:parent_id].present?
-      @parent = Document.find(params[:parent_id])
-    end
+    @parent = Document.find(params[:parent_id]) if params[:parent_id].present?
   end
 
   def change_document_parent(new_parent_id)
@@ -98,7 +99,7 @@ class DocumentsController < ApplicationController
       @document.update!(parent_id: new_parent_id)
       flash[:notice] = "You have successfully moved #{@document.title} to the #{valid_category.title} section."
     else
-      flash[:error] = "Could not find the new parent document"
+      flash[:error] = 'Could not find the new parent document'
     end
   end
 

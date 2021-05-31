@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Project, type: :model do
   it { is_expected.to have_many :source_repositories }
   it { is_expected.to have_many :documents }
@@ -109,7 +111,7 @@ RSpec.describe Project, type: :model do
   describe '#youtube_tags' do
     it 'returns the tags for project including the project title' do
       project = build_stubbed(:project, title: 'WebsiteOne', tag_list: ['WSO'])
-      expect(project.youtube_tags).to eq %w[wso websiteone]
+      expect(project.youtube_tags).to eq %w(wso websiteone)
     end
   end
 
@@ -117,7 +119,7 @@ RSpec.describe Project, type: :model do
     it 'returns the tags for project members with thier youtube user names' do
       users = [User.new(youtube_user_name: 'test_id'), User.new(youtube_user_name: 'test_id_2')]
       allow(subject).to receive(:members).and_return(users)
-      expect(subject.members_tags).to eq %w[test_id test_id_2]
+      expect(subject.members_tags).to eq %w(test_id test_id_2)
     end
   end
 

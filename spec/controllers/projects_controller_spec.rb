@@ -1,14 +1,15 @@
+# frozen_string_literal: true
 
-
-RSpec.describe ProjectsController, :type => :controller do
-
-  let(:valid_attributes) { { id: 1,
-                            :title => 'WebTwentyFive',
-                            :description => 'My project description',
-                            :status => 'Active',
-                            :pitch => 'My project pitch ...',
-                            :pivotaltracker_url => 'https://www.pivotaltracker.com/s/projects/982890',
-                            :slug => 'my-project'} }
+RSpec.describe ProjectsController, type: :controller do
+  let(:valid_attributes) do
+    { id: 1,
+      title: 'WebTwentyFive',
+      description: 'My project description',
+      status: 'Active',
+      pitch: 'My project pitch ...',
+      pivotaltracker_url: 'https://www.pivotaltracker.com/s/projects/982890',
+      slug: 'my-project' }
+  end
   let(:valid_session) { {} }
 
   before :each do
@@ -46,7 +47,7 @@ RSpec.describe ProjectsController, :type => :controller do
         @project = build_stubbed(:project, valid_attributes)
         allow(@project).to receive(:tag_list).and_return ['WSO']
         Project.stub_chain(:friendly, :find).and_return @project
-        @project.stub_chain(:user, :display_name).and_return "Happy User"
+        @project.stub_chain(:user, :display_name).and_return 'Happy User'
         @users = [build_stubbed(:user, slug: 'my-friendly-id', display_profile: true)]
         expect(@project).to receive(:members).and_return @users
         event_instances = double('event_instances')
@@ -56,7 +57,7 @@ RSpec.describe ProjectsController, :type => :controller do
         expect(event_instances).to receive(:count).and_return('count')
         expect(ordered_event_instances).to receive(:limit).with(25).and_return('videos')
         allow(PivotalAPI::Project).to receive(:retrieve).and_return(pivotal_tracker)
-        allow(pivotal_tracker).to receive_messages(current_iteration: pivotal_tracker, stories: "stories")
+        allow(pivotal_tracker).to receive_messages(current_iteration: pivotal_tracker, stories: 'stories')
       end
 
       it 'assigns the requested project as @project' do
@@ -101,18 +102,17 @@ RSpec.describe ProjectsController, :type => :controller do
     describe '#create' do
       before(:each) do
         @params = {
-            project: {
-                id: 1,
-                title: 'Title 1',
-                description: 'Description 1',
-                status: 'Status 1'
-            }
+          project: {
+            id: 1,
+            title: 'Title 1',
+            description: 'Description 1',
+            status: 'Status 1'
+          }
         }
         @project = mock_model(Project, friendly_id: 'some-project')
         allow(Project).to receive(:new).and_return(@project)
         allow(controller).to receive(:current_user).and_return(@user)
         allow(@project).to receive(:create_activity)
-
       end
 
       it 'assigns a newly created project as @project' do
@@ -131,16 +131,17 @@ RSpec.describe ProjectsController, :type => :controller do
         end
 
         it 'received :create_activity with :create' do
-          expect(@project).to have_received(:create_activity).with(:create, {owner: @user})
+          expect(@project).to have_received(:create_activity).with(:create, { owner: @user })
         end
 
         it 'assigns successful message' do
-          #TODO YA add a show view_spec to check if flash is actually displayed
+          # TODO: YA add a show view_spec to check if flash is actually displayed
           expect(flash[:notice]).to eq('Project was successfully created.')
         end
 
         it 'passes current_user id into new' do
-          expect(Project).to receive(:new).with({"title" => "Title 1", "description" => "Description 1", "status" => "Status 1", "user_id" => @user.id})
+          expect(Project).to receive(:new).with({ 'title' => 'Title 1', 'description' => 'Description 1',
+                                                  'status' => 'Status 1', 'user_id' => @user.id })
           allow(@project).to receive(:save).and_return(true)
           post :create, params: @params
         end
@@ -190,19 +191,19 @@ RSpec.describe ProjectsController, :type => :controller do
 
       it 'assigns the requested project as @project' do
         expect(@project).to receive(:update)
-        put :update, params: { id: 'update', project: {title: ''} }
+        put :update, params: { id: 'update', project: { title: '' } }
         expect(assigns(:project)).to eq(@project)
       end
 
       context 'successful update' do
         before(:each) do
           allow(@project).to receive(:update).and_return(true)
-          put :update, params: { id: 'update', project: {title: ''} }
+          put :update, params: { id: 'update', project: { title: '' } }
         end
 
         it 'received :create_activity with :update' do
           expect(@project).to have_received(:create_activity)
-                                  .with(:update, {owner: @user})
+            .with(:update, { owner: @user })
         end
 
         it 'redirects to the project' do
@@ -217,7 +218,7 @@ RSpec.describe ProjectsController, :type => :controller do
       context 'unsuccessful save' do
         before(:each) do
           allow(@project).to receive(:update).and_return(false)
-          put :update, params: { id: 'update', project: {title: ''} }
+          put :update, params: { id: 'update', project: { title: '' } }
         end
         it 'renders edit' do
           expect(response).to render_template(:edit)

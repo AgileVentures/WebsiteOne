@@ -1,10 +1,9 @@
- 
+# frozen_string_literal: true
 
 describe ApplicationHelper do
-
   it '#date_format returns formatted date 1st Jan 2015' do
-    expect(date_format(Date.new(2015,1,1))).to eq('1st Jan 2015')
-    expect(date_format(Date.new(2015,5,3))).to eq('3rd May 2015')
+    expect(date_format(Date.new(2015, 1, 1))).to eq('1st Jan 2015')
+    expect(date_format(Date.new(2015, 5, 3))).to eq('3rd May 2015')
   end
 
   describe '#valid_email?' do
@@ -24,7 +23,7 @@ describe ApplicationHelper do
 
   describe '#shared_meta_keywords' do
     before do
-      @keywords = helper.shared_meta_keywords.split(',').map { |word| word.squish }
+      @keywords = helper.shared_meta_keywords.split(',').map(&:squish)
     end
 
     it 'should contain AgileVentures' do
@@ -48,7 +47,8 @@ describe ApplicationHelper do
 
   describe '#custom_css_btn' do
     before(:each) do
-      @custom_btn_html = helper.custom_css_btn 'this is a text', 'fa fa-icon', root_path, id: 'my-id', class: 'btn-random'
+      @custom_btn_html = helper.custom_css_btn 'this is a text', 'fa fa-icon', root_path, id: 'my-id',
+                                                                                          class: 'btn-random'
     end
 
     it 'should render the text "this is a text"' do
@@ -85,15 +85,15 @@ describe ApplicationHelper do
       expect(btn_html).to have_css '[method=delete]'
     end
   end
-  
-  describe "#resource_name" do
-    it "should return :user" do
+
+  describe '#resource_name' do
+    it 'should return :user' do
       expect(helper.resource_name).to eq(:user)
     end
   end
-  
-  describe "#resource" do
-    it "should return new user with karma" do
+
+  describe '#resource' do
+    it 'should return new user with karma' do
       expect(helper.resource).to be_instance_of(User)
       expect(helper.resource.karma).not_to be_nil
     end

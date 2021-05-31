@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
@@ -38,7 +40,7 @@ Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
 end
 
 Given /^A( premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)" exists$/ do |premium, name, email, password|
-  split_name = name.split(' ')
+  split_name = name.split
   first_name = split_name.first
   last_name  = split_name.last
   @current_user = @user = FactoryBot.create(:user,
@@ -351,9 +353,10 @@ end
 
 Given(/^I (?:am on|go to|should be on) my "([^"]*)" page$/) do |page|
   page.downcase!
-  if page == 'profile'
+  case page
+  when 'profile'
     visit user_path(@user)
-  elsif page == 'edit profile'
+  when 'edit profile'
     visit edit_user_registration_path(@user)
   else
     pending

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'airbrake'
 
 module CustomErrors
-  
   def self.included(base)
     base.rescue_from Exception, with: ->(exception) { render_error 500, exception }
 

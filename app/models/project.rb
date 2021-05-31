@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class Project < ApplicationRecord
   extend FriendlyId
-  friendly_id :title, use: [:slugged, :history]
+  friendly_id :title, use: %i(slugged history)
 
   validates :title, :description, :status, presence: true
   validates_with PivotalTrackerUrlValidator
-  validates :github_url, uri: true, :allow_blank => true
+  validates :github_url, uri: true, allow_blank: true
   validates_with ImageUrlValidator
-  validates :image_url, uri: true, :allow_blank => true
+  validates :image_url, uri: true, allow_blank: true
 
   belongs_to :user, optional: true
   include UserNullable
@@ -25,16 +27,16 @@ class Project < ApplicationRecord
   acts_as_followable
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
-  scope :active, -> { where("status ILIKE ?", "active").order(:title) }
-  scope :search_by_language, ->(search) {
+  scope :active, -> { where('status ILIKE ?', 'active').order(:title) }
+  scope :search_by_language, lambda { |search|
     includes(:languages)
-      .where("languages.name ILIKE ?", "#{search}")
+      .where('languages.name ILIKE ?', search.to_s)
       .references(:languages)
   }
 
   def self.with_github_url
     includes(:source_repositories)
-      .where("source_repositories.url ILIKE ?", '%github%')
+      .where('source_repositories.url ILIKE ?', '%github%')
       .references(:source_repositories)
   end
 
@@ -70,23 +72,24 @@ class Project < ApplicationRecord
 
   def members_tags
     members.map(&:youtube_user_name)
-      .compact
-      .map(&:downcase)
-      .uniq
+           .compact
+           .map(&:downcase)
+           .uniq
   end
 
   def github_repo
-    matches = /[^\b(github.com\/)\b][a-zA-Z0-9\-]+\/[a-zA-Z0-9\-]+/.match(github_url)
+    matches = %r{[^\b(github.com/)][a-zA-Z0-9\-]+/[a-zA-Z0-9\-]+}.match(github_url)
     return '' if github_url.blank? || matches.nil?
+
     matches[0]
   end
 
   def github_repo_name
-    github_url ? /github.com\/\w+\/([\w\-]+)/.match(github_url)[1] : ''
+    github_url ? %r{github.com/\w+/([\w\-]+)}.match(github_url)[1] : ''
   end
 
   def github_repo_user_name
-    github_url ? /github.com\/(\w+)\/\w+/.match(github_url)[1] : ''
+    github_url ? %r{github.com/(\w+)/\w+}.match(github_url)[1] : ''
   end
 
   def contribution_url

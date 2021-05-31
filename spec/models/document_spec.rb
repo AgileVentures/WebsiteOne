@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Document, type: :model do
   subject { build_stubbed(:document) }
 
@@ -37,7 +39,7 @@ RSpec.describe Document, type: :model do
   describe '#slug_candidates' do
     it 'is expected to return correct slug candidates' do
       expect(subject.slug_candidates)
-        .to eq [:title, %i[title project_title]]
+        .to eq [:title, %i(title project_title)]
     end
   end
 end

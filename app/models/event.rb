@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Event < ApplicationRecord
   has_many :event_instances
   belongs_to :project, optional: true
@@ -28,9 +30,9 @@ class Event < ApplicationRecord
   COLLECTION_TIME_PAST = 300.minutes
   NEXT_SCRUM_COLLECTION_TIME_PAST = 15.minutes
 
-  REPEATS_OPTIONS = %w[never weekly biweekly]
-  REPEAT_ENDS_OPTIONS = %w[on never]
-  DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
+  REPEATS_OPTIONS = %w(never weekly biweekly).freeze
+  REPEAT_ENDS_OPTIONS = %w(on never).freeze
+  DAYS_OF_THE_WEEK = %w(monday tuesday wednesday thursday friday saturday sunday).freeze
 
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? 'on' : 'never'
@@ -70,7 +72,7 @@ class Event < ApplicationRecord
   def self.pending_hookups
     pending = []
     hookups.each do |h|
-      started = h.last_hangout && h.last_hangout.started?
+      started = h.last_hangout&.started?
       expired_without_starting = !h.last_hangout && Time.now.utc > h.instance_end_time
       pending << h if !started && !expired_without_starting
     end
@@ -216,7 +218,7 @@ class Event < ApplicationRecord
     when 'never'
       sched.add_recurrence_time(start_datetime)
     when 'weekly', 'biweekly'
-      days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
+      days = repeats_weekly_each_days_of_the_week.map(&:to_sym)
       sched.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
     self.exclusions ||= []

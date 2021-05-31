@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe ArticlesController do
   let(:valid_params) do
     { article: { title: 'title',
@@ -156,7 +158,7 @@ RSpec.describe ArticlesController do
 
       before do
         allow(article).to(
-          receive_message_chain(:errors, :full_messages, :join).and_return error_message
+          receive_message_chain(:errors, :full_messages, :join).and_return(error_message)
         )
       end
 

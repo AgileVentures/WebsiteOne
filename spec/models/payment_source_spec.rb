@@ -1,4 +1,4 @@
- 
+# frozen_string_literal: true
 
 shared_examples 'a payment source' do
   it { should belong_to :subscription }

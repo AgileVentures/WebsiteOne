@@ -1,7 +1,7 @@
- 
+# frozen_string_literal: true
 
 describe VisitorsController do
-  let(:valid_params){ {name: 'Ivan', email: 'my@email.com', message: 'Love your site!'} }
+  let(:valid_params) { { name: 'Ivan', email: 'my@email.com', message: 'Love your site!' } }
   it 'renders index template' do
     get :index
     expect(response).to render_template('index')

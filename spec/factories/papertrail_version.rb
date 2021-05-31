@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  factory :version , class: PaperTrail::Version do
+  factory :version, class: PaperTrail::Version do
     item_type { 'Document' }
     event { 'create' }
     object { nil }

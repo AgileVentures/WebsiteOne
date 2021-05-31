@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe DocumentsController, type: :controller do
   let(:user) { @user }
   let(:document) { @document }

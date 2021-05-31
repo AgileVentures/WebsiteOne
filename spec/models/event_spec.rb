@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'user'
 
 RSpec.describe Event, type: :model do
@@ -425,11 +427,11 @@ RSpec.describe Event, type: :model do
   describe 'Event.next_event_occurence' do
     before do
       @event = create(:event,
-                     category: 'Scrum',
-                     name: 'Spec Scrum one-time',
-                     start_datetime: '2014-03-07 10:30:00 UTC',
-                     duration: 30,
-                     repeats: 'never')
+                      category: 'Scrum',
+                      name: 'Spec Scrum one-time',
+                      start_datetime: '2014-03-07 10:30:00 UTC',
+                      duration: 30,
+                      repeats: 'never')
     end
 
     it 'should return the next event occurence' do

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class AuthenticationsController < ApplicationController
   include DeactivatedUserFinder
-  
+
   before_action :authenticate_user!, only: [:destroy]
 
   def create
@@ -14,7 +16,7 @@ class AuthenticationsController < ApplicationController
 
     elsif current_user
       create_new_authentication_for_current_user(omniauth, @path)
-      
+
     elsif deactivated_user_with_email(omniauth['info']['email']).present?
       show_deactivated_message_and_redirect_to_root and return
 
@@ -22,9 +24,7 @@ class AuthenticationsController < ApplicationController
       create_new_user_with_authentication(omniauth)
     end
 
-    if current_user && omniauth['provider']=='github' && current_user.github_profile_url.blank?
-      link_github_profile
-    end
+    link_github_profile if current_user && omniauth['provider'] == 'github' && current_user.github_profile_url.blank?
   end
 
   def failure
@@ -35,22 +35,21 @@ class AuthenticationsController < ApplicationController
 
   def destroy
     @authentication = current_user.authentications.find(params[:id])
-    if @authentication and current_user.authentications.count == 1 and current_user.encrypted_password.blank?
+    if @authentication && (current_user.authentications.count == 1) && current_user.encrypted_password.blank?
       # Bryan: TESTED
       flash[:alert] = 'Failed to unlink GitHub. Please use another provider for login or reset password.'
-    elsif @authentication and @authentication.destroy
+    elsif @authentication&.destroy
       user = User.find(current_user.id)
-      if user.update(github_profile_url: nil)
-        flash[:notice] = 'Successfully removed profile.'
-      else
-        flash[:notice] = 'Github profile url could not be removed.'
-      end
+      flash[:notice] = if user.update(github_profile_url: nil)
+                         'Successfully removed profile.'
+                       else
+                         'Github profile url could not be removed.'
+                       end
     else
       flash[:alert] = 'Authentication method could not be removed.'
     end
     redirect_to edit_user_registration_path(current_user)
   end
-
 
   private
 
@@ -75,7 +74,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def attempt_login_with_auth(authentication, path)
-    if current_user.present? and authentication.user != current_user
+    if current_user.present? && (authentication.user != current_user)
       flash[:alert] = 'Another account is already associated with these credentials!'
       redirect_to path
     else
@@ -85,7 +84,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def create_new_authentication_for_current_user(omniauth, path)
-    if auth = current_user.authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+    if auth = current_user.authentications.build(provider: omniauth['provider'], uid: omniauth['uid'])
       if auth.save
         # Bryan: TESTED
         flash[:notice] = 'Authentication successful.'
@@ -115,5 +114,4 @@ class AuthenticationsController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
-
 end

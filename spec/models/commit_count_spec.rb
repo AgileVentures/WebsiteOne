@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe CommitCount, type: :model do
   subject { build_stubbed :commit_count }
 

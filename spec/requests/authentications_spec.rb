@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'OmniAuth authentication', type: :feature do
   supported_auths = {
     'github' => 'GitHub',

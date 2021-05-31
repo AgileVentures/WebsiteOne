@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Then(/^my member page should show premium details$/) do
   visit
   expect(page).to have_content 'Premium'
@@ -150,6 +152,6 @@ end
 
 # use for debugging only
 And(/^I am a "([^"]*)" Member$/) do |type|
-  puts @user.subscriptions.map { |s| s.inspect }
+  puts @user.subscriptions.map(&:inspect)
   expect(@user.membership_type).to eq type
 end

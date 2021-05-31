@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # class LegacyApi::SubscriptionsController < ApplicationController
 #   respond_to :json
 

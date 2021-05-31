@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe GithubCommitsJob do
   vcr_index = { cassette_name: 'github_commit_count/websiteone_stats' }
   describe '.job', vcr: vcr_index do

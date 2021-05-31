@@ -1,5 +1,6 @@
-Then(/^I should see "([^"]*)" table$/) do |legend|
+# frozen_string_literal: true
 
+Then(/^I should see "([^"]*)" table$/) do |legend|
   expect(page).to have_css 'h1', text: legend
 end
 
@@ -12,20 +13,18 @@ Given(/^the following projects exist:$/) do |table|
       project = default_test_author.projects.new(hash.except('author', 'tags', 'languages'))
     end
     if hash[:github_url].present?
-      hash[:github_url].split(', ').each { |source_repository| project.source_repositories.build(url: source_repository) }
+      hash[:github_url].split(', ').each do |source_repository|
+        project.source_repositories.build(url: source_repository)
+      end
     end
     if hash[:languages].present?
       language = Language.find_or_create_by(name: hash[:languages])
       project.languages << language
     end
-    if hash[:pivotaltracker_url]
-      unless hash[:pivotaltracker_url].empty?
-        project.issue_trackers.build(url: hash[:pivotaltracker_url])
-      end
+    if hash[:pivotaltracker_url] && !hash[:pivotaltracker_url].empty?
+      project.issue_trackers.build(url: hash[:pivotaltracker_url])
     end
-    if hash[:tags]
-      project.tag_list.add(hash[:tags], parse: true)
-    end
+    project.tag_list.add(hash[:tags], parse: true) if hash[:tags]
     project.save!
   end
 end
@@ -50,21 +49,21 @@ end
 Given(/^the document "([^"]*)" has a child document with title "([^"]*)"$/) do |parent, child|
   parent_doc = Document.find_by_title(parent)
   parent_doc.children.create!(
-      {
-          :project_id => parent_doc.project_id,
-          :title => child,
-          user_id: parent_doc.user_id
-      }
+    {
+      project_id: parent_doc.project_id,
+      title: child,
+      user_id: parent_doc.user_id
+    }
   )
 end
 
-Then(/^I should become a member of project "([^"]*)"$/) do | name|
+Then(/^I should become a member of project "([^"]*)"$/) do |name|
   object = Project.find_by_title(name)
   @user.follow(object)
 end
 
 When(/^I am a member of project "([^"]*)"$/) do |name|
-  step %Q{I should become a member of project "#{name}"}
+  step %(I should become a member of project "#{name}")
 end
 
 When(/^"(.*)" is a member of project "([^"]*)"$/) do |name, project|
@@ -79,7 +78,7 @@ Then(/^I should stop being a member of project "([^"]*)"$/) do |name|
 end
 
 When(/^I am not a member of project "([^"]*)"$/) do |name|
-  step %Q{I should stop being a member of project "#{name}"}
+  step %(I should stop being a member of project "#{name}")
 end
 
 When(/^"(.*)" is not a member of project "([^"]*)"$/) do |name, project|
@@ -95,72 +94,70 @@ end
 Given(/^the document "([^"]*)" has a sub-document with title "([^"]*)" created (\d+) days ago$/) do |parent, child, days_ago|
   parent_doc = Document.find_by_title(parent)
   parent_doc.children.create!(
-      {
-          :project_id => parent_doc.project_id,
-          :title => child,
-          :created_at => days_ago.to_i.days.ago,
-          user_id: parent_doc.user_id
-      }
+    {
+      project_id: parent_doc.project_id,
+      title: child,
+      created_at: days_ago.to_i.days.ago,
+      user_id: parent_doc.user_id
+    }
   )
 end
 
 # Bryan: Redundant, does nothing
-#And(/^the following sub-documents exist:$/) do |table|
+# And(/^the following sub-documents exist:$/) do |table|
 #  table.hashes
-#end
+# end
 
 Then /^I should see a link "([^"]*)" that connects to the "([^"]*)"$/ do |text, url|
   project = Project.find_by title: text
-  step %Q{I should see a link "#{text}" to "#{project.send url}"}
+  step %(I should see a link "#{text}" to "#{project.send url}")
 end
 
 Then /^I should see a link "([^"]*)" that connects to the issue tracker's url$/ do |link|
-  
   project = Project.find_by title: link
-  project.issue_trackers.each do | issue_tracker |
+  project.issue_trackers.each do |issue_tracker|
     expect(page).to have_link(link, href: issue_tracker.url)
   end
 end
 
 Given(/^I (should not|should) see a link to "(.*?)" on github$/) do |option, name|
   object = Project.find_by_title(name)
-  step %Q{I #{option} see link "#{object.github_url.split('/').last}"}
+  step %(I #{option} see link "#{object.github_url.split('/').last}")
 end
 
 Given(/^The project "([^"]*)" has (\d+) (.*)$/) do |title, num, item|
   project = Project.find_by_title(title)
   case item.downcase.pluralize
-    when 'members'
-      (1..num.to_i).each do
-        u = User.create(email: Faker::Internet.email, password: '1234567890')
-        u.follow(project)
-      end
-    else
-      pending
+  when 'members'
+    (1..num.to_i).each do
+      u = User.create(email: Faker::Internet.email, password: '1234567890')
+      u.follow(project)
+    end
+  else
+    pending
   end
 end
 
 Then(/^I should see (\d+) member avatars$/) do |count|
-  within ('#members-list') do
+  within('#members-list') do
     expect(page).to have_css '.user-preview', count: count
   end
-
 end
 
 Then(/^I should see projects looked up by title with the correct commit count:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
-  projects.each do | project |
-    updated_project = Project.find_by_title(project["title"])
-    expect(updated_project.commit_count).to eq(project["commit_count"].to_i)
+  projects.each do |project|
+    updated_project = Project.find_by_title(project['title'])
+    expect(updated_project.commit_count).to eq(project['commit_count'].to_i)
   end
 end
 
 Then(/^I should see projects with pitch updated:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
-  projects.each do | project |
-    updated_project = Project.find_by_title(project["title"])
+  projects.each do |project|
+    updated_project = Project.find_by_title(project['title'])
     expect(updated_project.pitch).to match(/#{project["pitch"]}/)
   end
 end
@@ -168,19 +165,19 @@ end
 Then(/^I should see projects looked up by title with first source repository same as github_url:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
-  projects.each do | project |
-    updated_project = Project.find_by_title(project["title"])
-    expect(updated_project.github_url).to eq(project["github_url"])
-    expect(updated_project.source_repositories.first.url).to eq(project["github_url"])
+  projects.each do |project|
+    updated_project = Project.find_by_title(project['title'])
+    expect(updated_project.github_url).to eq(project['github_url'])
+    expect(updated_project.source_repositories.first.url).to eq(project['github_url'])
   end
 end
 
 Then(/^I should see projects with following updates:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
-  projects.each do | project |
-    updated_project = Project.find_by_title(project["title"])
-    expect(updated_project.last_github_update).to eq(project["last_github_update"])
+  projects.each do |project|
+    updated_project = Project.find_by_title(project['title'])
+    expect(updated_project.last_github_update).to eq(project['last_github_update'])
   end
 end
 
@@ -188,12 +185,10 @@ Then(/^I should see projects with the following language updates:$/) do |table|
   # table is a Cucumber::Core::Ast::DataTable
   projects = table.hashes
   projects.each do |project|
-    updated_project = Project.find_by_title(project["title"])
-    @updated_language_array = Array.new
+    updated_project = Project.find_by_title(project['title'])
+    @updated_language_array = []
     updated_project.languages.each do |language|
-      if language.name.eql?(project[:languages])
-        @updated_language_array << language.name
-      end
+      @updated_language_array << language.name if language.name.eql?(project[:languages])
     end
     expect(@updated_language_array).to include(project[:languages])
   end
@@ -206,9 +201,8 @@ Then(/^I should see a GPA of "([^"]*)" for "([^"]*)"$/) do |gpa, _project_name|
 end
 
 When(/^I go to the next page$/) do
-  click_link "Next →", match: :first
+  click_link 'Next →', match: :first
 end
-
 
 Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_name, repo|
   project = Project.find_by_title(project_name)
@@ -223,7 +217,7 @@ end
 Given(/^"([^"]*)" creates the project "([^"]*)"$/) do |name, project_title|
   first_name, last_name = name.split
   user = User.create last_name: last_name, first_name: first_name, email: 'bob@example.org', password: 'asdf1234'
-  Project.create title: project_title, description: "Hello world", status: 'Active', user_id: user.id
+  Project.create title: project_title, description: 'Hello world', status: 'Active', user_id: user.id
 end
 
 Given(/^"([^"]*)" deactivates his account$/) do |name|
@@ -237,18 +231,16 @@ Given(/^the anonymous user exists$/) do
   FactoryBot.create(:user, attributes)
 end
 
-Given("I should be able to create a project with more than one issue tracker") do
-    visit path_to('new project')
-    fill_in 'Title', with: 'Multiple issue tracker project'
-    fill_in 'Description', with: 'has lots of code'
-    fill_in 'GitHub url (primary)', with: 'http://www.github.com/new'
-    fill_in 'Issue Tracker (primary)', with: 'http://www.waffle.com/new'
-    click_link_or_button 'Add more trackers'
-    expect(page).to have_text('Issue Tracker (2)')
-    select 'Active', from: 'Status'
-    click_button 'Submit'
-    expect(page).to have_content('Multiple issue tracker project')
-    expect(page).to have_content('has lots of code')
-
+Given('I should be able to create a project with more than one issue tracker') do
+  visit path_to('new project')
+  fill_in 'Title', with: 'Multiple issue tracker project'
+  fill_in 'Description', with: 'has lots of code'
+  fill_in 'GitHub url (primary)', with: 'http://www.github.com/new'
+  fill_in 'Issue Tracker (primary)', with: 'http://www.waffle.com/new'
+  click_link_or_button 'Add more trackers'
+  expect(page).to have_text('Issue Tracker (2)')
+  select 'Active', from: 'Status'
+  click_button 'Submit'
+  expect(page).to have_content('Multiple issue tracker project')
+  expect(page).to have_content('has lots of code')
 end
-

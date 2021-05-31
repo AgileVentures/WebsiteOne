@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 OmniAuth.config.logger = Rails.logger
 
 Rails.application.config.middleware.use OmniAuth::Builder do
@@ -12,7 +14,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
   provider :google_oauth2, ENV['GPLUS_KEY'], ENV['GPLUS_SECRET'], {
     name: 'gplus',
-    setup: ->(env) {
+    setup: lambda { |env|
       if (params = env['rack.session']['omniauth.params']) && params.fetch('youtube', false)
         env['omniauth.strategy'].options[:scope] = 'youtube,userinfo.email'
       end

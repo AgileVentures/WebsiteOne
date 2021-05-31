@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 When(/^I run the rake task for calculating karma points$/) do
   $rake['karma_calculator'].execute
 end
@@ -49,7 +51,7 @@ Given(/^the following payment sources exist$/) do |table|
   end
 end
 
-Given("the following subscriptions exist") do |table|
+Given('the following subscriptions exist') do |table|
   table.hashes.each do |hash|
     user = User.find_by(first_name: hash.delete('user'))
     plan = Plan.find_by(name: hash[:type])
@@ -76,7 +78,6 @@ end
 Then(/^there should be a "([^"]*)" subscription plan$/) do |plan|
   expect(Plan.find_by(name: plan)).not_to be_nil
 end
-
 
 When(/^I hit the letsencrypt endpoint$/) do
   ENV['CERTBOT_SSL_CHALLENGE'] = 'qwertyui'

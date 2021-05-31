@@ -1,7 +1,6 @@
- 
+# frozen_string_literal: true
 
 describe EventHelper do
-
   it 'extract event ocurrence from hash' do
     ocurrence = Time.utc(2014, 'mar', 9, 23, 0, 0)
     time = IceCube::Occurrence.new(ocurrence)

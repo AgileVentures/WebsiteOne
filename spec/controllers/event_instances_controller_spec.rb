@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe EventInstancesController do
   let(:params) { { id: '333', host_id: 'host', title: 'title' } }
 

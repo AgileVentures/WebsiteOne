@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegistrationsController < Devise::RegistrationsController
   include DeactivatedUserFinder
 
@@ -44,7 +46,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def build_resource(hash = {})
-    hash.merge!({karma: Karma.new})
+    hash.merge!({ karma: Karma.new })
     self.resource = User.new_with_session(hash, session)
     if session[:omniauth]
       @user.apply_omniauth(session[:omniauth])
@@ -59,11 +61,11 @@ class RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(_resource)
     '/getting-started'
   end
-  
+
   def fetch_email_from_params
     params.fetch(:user, {}).fetch(:email, '')
   end
-  
+
   def check_for_deactivated_user
     show_deactivated_message_and_redirect_to_root if deactivated_user_with_email(fetch_email_from_params).present?
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe GithubReadmeFilesJob do
   describe '.replace_relative_links_with_absolute' do
     let(:project) { create(:project, pitch: nil) }

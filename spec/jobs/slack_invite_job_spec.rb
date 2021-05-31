@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 RSpec.describe SlackInviteJob do
   subject { SlackInviteJob.new }
   let(:email) { 'random@random.com' }
-  
+
   before { expect(Slack).to receive_message_chain(:config, :token).and_return 'test' }
 
   it 'sends a post request to invite the user to slack and returns the proper response' do

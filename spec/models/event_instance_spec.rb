@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe EventInstance, type: :model do
   let!(:project) { create(:project) }
   let!(:creator) { create(:user) }
@@ -55,7 +57,7 @@ RSpec.describe EventInstance, type: :model do
       end
 
       describe '#started?' do
-        it {  expect(subject.started?).to be_truthy }
+        it { expect(subject.started?).to be_truthy }
       end
     end
 
@@ -68,7 +70,7 @@ RSpec.describe EventInstance, type: :model do
       end
 
       describe '#started?' do
-        it {  expect(subject.started?).to be_truthy }
+        it { expect(subject.started?).to be_truthy }
       end
     end
 

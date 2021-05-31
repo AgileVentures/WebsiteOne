@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Projects
   class API < Grape::API
     version 'v1', using: :path, vendor: 'agileventures'

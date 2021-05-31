@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 def github_edit_url
-  "https://github.com/AgileVentures/AgileVentures/edit/master/#{static_page.tr(' ','_').upcase}.md"
+  "https://github.com/AgileVentures/AgileVentures/edit/master/#{static_page.tr(' ', '_').upcase}.md"
 end
 
 def static_page
@@ -11,7 +13,6 @@ When(/^I click the 'Sponsors' page$/) do
 end
 
 Then(/^I should be on 'Sponsors' page$/) do
-  
   expect(page.title).to have_content('Sponsors')
 end
 
@@ -20,5 +21,5 @@ Then(/^I should see an 'Edit Page' button$/) do
 end
 
 Then(/^'Edit Page' should link to github edit page$/) do
-	expect(page).to have_link('Edit Page', href: github_edit_url)
+  expect(page).to have_link('Edit Page', href: github_edit_url)
 end

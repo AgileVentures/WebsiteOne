@@ -1,9 +1,11 @@
- 
+# frozen_string_literal: true
 
 describe AdminMailer, type: :mailer do
   context 'slack invite errors' do
     context 'ruby error' do
-      subject(:mailer) { AdminMailer.failed_to_invite_user_to_slack('tansaku@gmail.com', StandardError.new('Boom!'), nil) }
+      subject(:mailer) do
+        AdminMailer.failed_to_invite_user_to_slack('tansaku@gmail.com', StandardError.new('Boom!'), nil)
+      end
       it 'sends a mail' do
         expect { mailer.deliver_now }.to change { ActionMailer::Base.deliveries.length }.by(1)
       end
@@ -22,4 +24,3 @@ describe AdminMailer, type: :mailer do
     end
   end
 end
-

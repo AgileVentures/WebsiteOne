@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Based on https://github.com/cucumber/cucumber-ruby/issues/1432
 # HACK: this method was available in cucumber 3.1 and VCR relies on it to
 # generate cassette names.

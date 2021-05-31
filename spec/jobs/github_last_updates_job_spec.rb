@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe GithubLastUpdatesJob do
   describe '#run' do
     context 'shf-project with hyphen', vcr: true do

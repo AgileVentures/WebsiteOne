@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe KarmaCalculator do
   describe 'for new members' do
     subject { described_class.new(user) }

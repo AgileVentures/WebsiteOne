@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: %i(index show)
   before_action :set_event, only: %i(show edit update destroy update_only_url)
@@ -92,7 +94,7 @@ class EventsController < ApplicationController
   end
 
   def action_initiator
-    @event && @event.creator_id ? { modifier_id: current_user.id } : { creator_id: current_user.id }
+    @event&.creator_id ? { modifier_id: current_user.id } : { creator_id: current_user.id }
   end
 
   def create_start_date_time(event_params)
@@ -107,7 +109,7 @@ class EventsController < ApplicationController
     return unless date_and_time_present?
 
     offset = (DateTime.parse(params[:start_date]).wday - event_params[:start_datetime].wday) % 7
-    return event_params['repeats_weekly_each_days_of_the_week'] if offset == 0
+    return event_params['repeats_weekly_each_days_of_the_week'] if offset.zero?
 
     event_params['repeats_weekly_each_days_of_the_week'] = []
     params['event']['repeats_weekly_each_days_of_the_week'].each do |day|
@@ -130,7 +132,7 @@ class EventsController < ApplicationController
   end
 
   def set_projects
-    @projects = Project.active.collect { |project| [project.title, project.id] }
+    @projects = Project.active.map { |project| [project.title, project.id] }
   end
 
   def new_params

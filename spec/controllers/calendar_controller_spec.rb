@@ -1,4 +1,5 @@
- 
+# frozen_string_literal: true
+
 RSpec.describe CalendarController, type: :controller do
   it 'is expected to have calendar route' do
     get :index
@@ -7,7 +8,7 @@ RSpec.describe CalendarController, type: :controller do
   context 'is expected to send a file' do
     before do
       @time = Time.now
-      @name = "Test_Event"
+      @name = 'Test_Event'
       @event = create(:event, category: 'PairProgramming', name: @name, start_datetime: @time, repeat_ends: false)
     end
     it 'with proper headers' do
@@ -19,7 +20,7 @@ RSpec.describe CalendarController, type: :controller do
       get :index
       expect(response.body).to match(/BEGIN:VCALENDAR/)
       expect(response.body).to include(@name)
-      expect(response.body).to include(@event.start_datetime.strftime '%Y%m%d')
+      expect(response.body).to include(@event.start_datetime.strftime('%Y%m%d'))
     end
   end
 end

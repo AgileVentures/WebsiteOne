@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 describe Authentication, type: :model do
   let(:user) { create(:user) }
-  let!(:auth) { user.authentications.create!(provider: 'github', uid: '12345')}
+  let!(:auth) { user.authentications.create!(provider: 'github', uid: '12345') }
   before do
     @user = user
     # @auth = auth
@@ -22,7 +24,6 @@ describe Authentication, type: :model do
   end
 
   it 'must have a unique user-provider combination' do
-
     failed_auth = user.authentications.build(provider: 'github', uid: '098766')
     expect(failed_auth).to_not be_valid
   end

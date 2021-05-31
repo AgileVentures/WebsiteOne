@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe LanguageProject, type: :model do
   it 'validate uniqueness of language name' do
     new_language = Language.create(name: 'New language')

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def url_for_title(options)
   controller = options[:controller]
   eval("#{controller.capitalize.singularize}.find_by_title('#{options[:title]}').url_for_me(options[:action].downcase)")
@@ -6,67 +8,66 @@ end
 def path_to(page_name, id = '')
   name = page_name.downcase
   case name
-    when 'home' then
-      root_path
-    when 'about' then
-      '/about-us'
-    when 'registration' then
-      new_user_registration_path
-    when 'edit registration' then
-      edit_user_registration_path
-    when 'sign in' then
-      new_user_session_path
-    when 'projects' then
-      projects_path
-    when 'new project' then
-      new_project_path
-    when 'articles' then
-      articles_path
-    when 'articles with ruby tag' then
-      articles_path(tag: 'Ruby')
-    when 'edit' then
-      edit_project_path(id)
-    when 'show' then
-      project_path(id)
-    when 'our members' then
-      users_path
-    when 'user profile' then
-      user_path(id)
-    when 'my account' then
-      edit_user_registration_path(id)
-    when 'scrums' then
-      scrums_index_path
-    when 'event_instances' then
-      hangouts_path
-    when 'foobar' then
-      "/#{page}"
-    when 'password reset' then
-      edit_user_password_path(id)
-    when 'hookups' then
-      hookups_path
-    when 'dashboard' then
-      '/dashboard'
-    when 'premium membership' then
-      static_page_path('premium')
-    when 'premium mob membership' then
-      static_page_path('premium_mob')
-    when 'getting started' then
-      static_page_path('getting-started')
-    when 'sign up' then
-      new_user_registration_path
-    when 'premium sign up' then
-      new_subscription_path(plan: 'premium')
-    when 'premium mob sign up' then
-      new_subscription_path(plan: 'premiummob')
-    when 'event' then
-      event_path(id: id)
-    else
-      raise('path to specified is not listed in #path_to')
+  when 'home'
+    root_path
+  when 'about'
+    '/about-us'
+  when 'registration'
+    new_user_registration_path
+  when 'edit registration'
+    edit_user_registration_path
+  when 'sign in'
+    new_user_session_path
+  when 'projects'
+    projects_path
+  when 'new project'
+    new_project_path
+  when 'articles'
+    articles_path
+  when 'articles with ruby tag'
+    articles_path(tag: 'Ruby')
+  when 'edit'
+    edit_project_path(id)
+  when 'show'
+    project_path(id)
+  when 'our members'
+    users_path
+  when 'user profile'
+    user_path(id)
+  when 'my account'
+    edit_user_registration_path(id)
+  when 'scrums'
+    scrums_index_path
+  when 'event_instances'
+    hangouts_path
+  when 'foobar'
+    "/#{page}"
+  when 'password reset'
+    edit_user_password_path(id)
+  when 'hookups'
+    hookups_path
+  when 'dashboard'
+    '/dashboard'
+  when 'premium membership'
+    static_page_path('premium')
+  when 'premium mob membership'
+    static_page_path('premium_mob')
+  when 'getting started'
+    static_page_path('getting-started')
+  when 'sign up'
+    new_user_registration_path
+  when 'premium sign up'
+    new_subscription_path(plan: 'premium')
+  when 'premium mob sign up'
+    new_subscription_path(plan: 'premiummob')
+  when 'event'
+    event_path(id: id)
+  else
+    raise('path to specified is not listed in #path_to')
   end
 end
 
 # GIVEN steps
-
 
 Then(/^show me the page$/) do
   save_and_open_page
@@ -103,15 +104,15 @@ When(/^I click the "([^"]*)" button$/) do |button|
 end
 
 When(/^I open the Edit URL controls/) do
-  page.execute_script(  %q{$('li[role="edit_hoa_link"] > a').trigger('click')}  )
+  page.execute_script(%q{$('li[role="edit_hoa_link"] > a').trigger('click')})
 end
 
 When(/^I click on the Save button/) do
-  page.find(:css, %q{input[id="hoa_link_save"]}).trigger('click')
+  page.find(:css, 'input[id="hoa_link_save"]').trigger('click')
 end
 
 When(/^I click on the Cancel button/) do
-  page.find(:css, %q{button[id="hoa_link_cancel"]}).trigger('click')
+  page.find(:css, 'button[id="hoa_link_cancel"]').trigger('click')
 end
 
 Then(/^I should see the Edit URL controls/) do
@@ -135,12 +136,10 @@ When(/^I follow "([^"]*)"$/) do |text|
 end
 
 When(/^I dropdown the "([^"]*)" menu$/) do |text|
-  within ('.navbar') do
+  within('.navbar') do
     click_link text
   end
-
 end
-
 
 When(/^I fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in field, with: value
@@ -164,7 +163,7 @@ When /^I fill in event field(?: "([^"]*)")?:$/ do |name, table|
   end
 end
 
-Given (/^the time now is "([^"]*)"$/) do |time|
+Given(/^the time now is "([^"]*)"$/) do |time|
   # use delorean
   Time.stub(now: Time.parse(time))
 end
@@ -194,7 +193,7 @@ end
 Then /^I should see a form(?: "([^"]*)")? with:$/ do |name, table|
   with_scope(name) do
     table.rows.each do |row|
-      step %Q{the "#{row[0]}" field should contain "#{row[1]}"}
+      step %(the "#{row[0]}" field should contain "#{row[1]}")
     end
   end
 end
@@ -206,53 +205,53 @@ Then /^I should( not)? see:$/ do |negative, table|
   end
 end
 
-Then (/^I should( not)? see "([^"]*)"$/) do |negative, string|
-  unless negative
-    expect(page).to have_text string
-  else
+Then(/^I should( not)? see "([^"]*)"$/) do |negative, string|
+  if negative
     expect(page).to_not have_text string
+  else
+    expect(page).to have_text string
   end
 end
 
 Then /^I should( not)? see a (notice|success) flash "([^"]*)"$/ do |negative, type, string|
-  unless negative
-    expect(page).to have_css '.alert', text: string
-    expect(page).to have_css ".alert-#{type}", text: string
-  else
+  if negative
     expect(page).not_to have_css '.alert', text: string
     expect(page).not_to have_css ".alert-#{type}", text: string
+  else
+    expect(page).to have_css '.alert', text: string
+    expect(page).to have_css ".alert-#{type}", text: string
   end
 end
 
 Then /^I should( not)? see "([^"]*)" in "([^"]*)"$/ do |negative, string, scope|
-  within(selector_for(scope)) { step %Q{I should#{negative} see "#{string}"} }
+  within(selector_for(scope)) { step %(I should#{negative} see "#{string}") }
 end
 
 Then /^I should( not)? see link "([^"]*)"$/ do |negative, link|
   if negative
-    expect(page.has_link? link).to be_falsey
+    expect(page.has_link?(link)).to be_falsey
   else
-    expect(page.has_link? link).to be_truthy
+    expect(page.has_link?(link)).to be_truthy
   end
 end
 
 Then /^I should( not)? see button "([^"]*)"$/ do |negative, button|
-  unless negative
-    expect(page.has_link_or_button? button).to be_truthy
+  if negative
+    expect(page.has_link_or_button?(button)).to be_falsey
   else
-    expect(page.has_link_or_button? button).to be_falsey
+    expect(page.has_link_or_button?(button)).to be_truthy
   end
 end
 
 Then /^the "([^"]*)" field(?: within (.*))? should( not)? contain "([^"]*)"$/ do |field, parent, negative, value|
   with_scope(parent) do
     field = find_field(field)
-    field_value = (field.tag_name == 'textarea') ? field.text : field.value
+    field_value = field.tag_name == 'textarea' ? field.text : field.value
     field_value ||= ''
-    unless negative
-      expect(field_value).to match(/#{value}/)
-    else
+    if negative
       expect(field_value).to_not match(/#{value}/)
+    else
+      expect(field_value).to match(/#{value}/)
     end
   end
 end
@@ -286,43 +285,43 @@ Then(/^I should see the sidebar$/) do
 end
 
 Then(/^I should( not)? see the supporter content/) do |negative|
-  unless negative
-    expect(page).to have_css 'div#sponsorsBar', visible: true
-  else
+  if negative
     expect(page).to_not have_css '#sponsorsBar'
+  else
+    expect(page).to have_css 'div#sponsorsBar', visible: true
   end
 end
 
 Then(/^I should( not)? see the round banners/) do |negative|
-  unless negative
-    expect(page).to have_css '.circle', visible: true
-  else
+  if negative
     expect(page).to_not have_css '.circle'
+  else
+    expect(page).to have_css '.circle', visible: true
   end
 end
 
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
-  find(:css, %Q{a[title="#{button.downcase}"]}).click()
+  find(:css, %(a[title="#{button.downcase}"])).click
 end
 
 Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, button|
   if should == 'not '
-    expect(page).to_not have_css %Q{a[title="#{button.downcase}"]}
+    expect(page).to_not have_css %(a[title="#{button.downcase}"])
   else
-    expect(page).to have_css %Q{a[title="#{button.downcase}"]}
+    expect(page).to have_css %(a[title="#{button.downcase}"])
   end
 end
 
 Then(/^I should see the sub-documents in this order:$/) do |table|
   expected_order = table.raw.flatten
-  actual_order = page.all('li.listings-item a').collect(&:text)
+  actual_order = page.all('li.listings-item a').map(&:text)
   expect(actual_order).to eq expected_order
 end
 
 Then /^I should see a "([^"]*)" table with:$/ do |name, table|
   expect(page).to have_text(name)
   table.rows.flatten.each do |heading|
-    expect(page).to have_css('table th', :text => heading)
+    expect(page).to have_css('table th', text: heading)
   end
 end
 
@@ -346,19 +345,19 @@ When(/^I refresh the page$/) do
   visit current_url
 end
 
-def assert_link_exists path, text
+def assert_link_exists(path, text)
   expect(page).to have_css "a[href='#{path}']", text: text
 end
 Then(/^I should see a link to create a new event$/) do
-  assert_link_exists(new_event_path, "CREATE EVENT")
+  assert_link_exists(new_event_path, 'CREATE EVENT')
 end
 
 Then(/^I should see a link to upcoming events$/) do
-  assert_link_exists(events_path, "UPCOMING EVENTS")
+  assert_link_exists(events_path, 'UPCOMING EVENTS')
 end
 
 Then(/^I should see a link to past events$/) do
-  assert_link_exists(scrums_path, "PAST EVENTS")
+  assert_link_exists(scrums_path, 'PAST EVENTS')
 end
 
 Then(/^I should see an image with source "([^"]*)"$/) do |source|
@@ -374,7 +373,7 @@ Then(/^I should see an video with source "([^"]*)"$/) do |source|
 end
 
 Then /^I should( not)? see "([^"]*)" in table "([^"]*)"$/ do |negative, title, table_name|
-  within ("table##{table_name}") do
+  within("table##{table_name}") do
     if negative
       expect(page.body).not_to have_content(/#{title}/m)
     else
@@ -385,14 +384,14 @@ end
 
 Given(/^I am on a (.*)/) do |device|
   case device
-    when 'desktop'
-      agent = 'Poltergeist'
-    when 'tablet'
-      agent = 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10'
-    when 'smartphone'
-      agent = 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7'
-    else
-      pending
+  when 'desktop'
+    agent = 'Poltergeist'
+  when 'tablet'
+    agent = 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10'
+  when 'smartphone'
+    agent = 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7'
+  else
+    pending
   end
   page.driver.headers = { 'User-Agent' => agent }
 end
@@ -406,15 +405,15 @@ And(/^I remote debug/) do
 end
 
 And(/^the window size is wide$/) do
-  Capybara.page.current_window.resize_to(1300,400)
+  Capybara.page.current_window.resize_to(1300, 400)
 end
 
 When(/^I toggle to( Cannot)? Attend$/) do |_negated|
-  find("#attendance_checkbox", visible: false).trigger('click')
+  find('#attendance_checkbox', visible: false).trigger('click')
 end
 
 When(/^I scroll to the bottom of the page$/) do
-  page.execute_script "window.scrollBy(0,10000)"
+  page.execute_script 'window.scrollBy(0,10000)'
 end
 
 Then(/^I should( not)? see "([^"]*)" within "([^"]*)"$/) do |negated, project_title, project_list_area|
@@ -430,13 +429,11 @@ end
 Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_list_area, table|
   table.rows.each do |row|
     project_title = row.first
-    step %Q{I should see "#{project_title}" within "#{project_list_area}"}
+    step %(I should see "#{project_title}" within "#{project_list_area}")
   end
 end
 Then /^I should receive a file(?: "([^"]*)")?/ do |file|
-  result = page.response_headers['Content-Type'].should == "text/calendar"
-  if result
-    result = page.response_headers['Content-Disposition'].should =~ /#{file}/
-  end
+  result = page.response_headers['Content-Type'].should == 'text/calendar'
+  result = page.response_headers['Content-Disposition'].should =~ /#{file}/ if result
   result
 end

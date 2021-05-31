@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe AuthenticationsController do
   before(:each) do
     OmniAuth.config.mock_auth['agileventures'] = {

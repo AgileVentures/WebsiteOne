@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'DeactivatedUserFinderConcern' do
   before do
     class FakeController < ActionController::Base
@@ -17,7 +19,7 @@ RSpec.describe 'DeactivatedUserFinderConcern' do
     after do
       Object.send(:remove_const, :FakeController)
     end
-    
+
     it "is expected to return deactivated user when email is deactivated_user's email" do
       expect(@fake_controller.deactivated_user_with_email(@deactivated_user.email)).to eq @deactivated_user
     end

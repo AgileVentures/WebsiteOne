@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLanguages < ActiveRecord::Migration[5.1]
   def change
     create_table :languages do |t|
@@ -9,6 +11,6 @@ class CreateLanguages < ActiveRecord::Migration[5.1]
       t.belongs_to :project, index: true
       t.belongs_to :language, index: true
     end
-    add_index :languages_projects, [:project_id, :language_id], unique: true
+    add_index :languages_projects, %i(project_id language_id), unique: true
   end
 end

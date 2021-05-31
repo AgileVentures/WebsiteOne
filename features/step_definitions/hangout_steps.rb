@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def set_event_start_date(event_ins, num)
   event_ins.updated_at -= num.minutes
 end
@@ -19,7 +21,7 @@ Then /^I should (not )?see hangout button$/ do |absent|
   end
 end
 
-Given("the Hangout for event {string} has been started with details:") do |event_name, table|
+Given('the Hangout for event {string} has been started with details:') do |event_name, table|
   ho_details = table.transpose.hashes
   hangout = ho_details[0]
 
@@ -174,7 +176,7 @@ Then(/^it should not go live the next day just because the event start time is p
 end
 
 Then(/^"([^"]*)" shows youtube link with youtube id "([^"]*)"$/) do |event_name, yt_id|
-  yt_url = 'https://youtu.be/' + yt_id
+  yt_url = "https://youtu.be/#{yt_id}"
   visit event_path(Event.find_by_name(event_name))
   page.find(:css, '#actions-dropdown').trigger('click')
   page.find_link('Edit youtube link').trigger('click')
@@ -182,7 +184,7 @@ Then(/^"([^"]*)" shows youtube link with youtube id "([^"]*)"$/) do |event_name,
 end
 
 Given(/^I manually set youtube link with youtube id "([^"]*)" for event "([^"]*)"$/) do |yt_id, event_name|
-  yt_url = 'https://youtu.be/' + yt_id
+  yt_url = "https://youtu.be/#{yt_id}"
   event = Event.find_by_name(event_name)
   visit event_path(event)
   page.execute_script(%q{$('li[role="edit_yt_link"] > a').trigger('click')})
@@ -208,7 +210,7 @@ end
 
 Given(/^I visit the "([^"]*)" page for "([^"]*)" "([^"]*)"$/) do |action, object_title, object|
   instance = object.camelize.constantize.find_by(title: object_title)
-  path = action.downcase + '_' + object + '_path'
+  path = "#{action.downcase}_#{object}_path"
   visit send(path.to_sym, instance)
 end
 

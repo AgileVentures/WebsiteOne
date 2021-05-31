@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   sequence :participant do |n|
     { n.to_s => { 'person' => { displayName: "Participant_#{n}", 'id' => "youtube_id_#{n}", isBroadcaster: 'false' } } }

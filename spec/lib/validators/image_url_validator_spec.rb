@@ -1,11 +1,11 @@
- 
-
+# frozen_string_literal: true
 
 describe ImageUrlValidator do
   let(:dummy_class) do
     Class.new do
       include ActiveModel::Validations
       attr_accessor :image_url
+
       validates_with ImageUrlValidator
     end
   end
@@ -22,13 +22,12 @@ describe ImageUrlValidator do
     expect(subject).to be_invalid
   end
 
-
   it 'should reject an invalid file format' do
     subject.image_url = 'http://www.facebook.com'
     expect(subject).to be_invalid
   end
 
-  ['http://github.com/AgileVentures/WebsiteOne','<>hi'].each do |invalid_url|
+  ['http://github.com/AgileVentures/WebsiteOne', '<>hi'].each do |invalid_url|
     it "#{invalid_url.inspect} is an invalid url" do
       subject.image_url = invalid_url
       subject.valid?

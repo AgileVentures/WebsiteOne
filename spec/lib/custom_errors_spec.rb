@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'custom_errors'
 
 describe CustomErrors, type: 'controller' do
@@ -9,7 +11,7 @@ describe CustomErrors, type: 'controller' do
     end
 
     def raise_500
-      raise Exception
+      raise StandardError
     end
   end
 

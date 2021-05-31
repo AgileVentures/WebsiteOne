@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventInstance < ApplicationRecord
   self.per_page = 30
 
@@ -18,8 +20,8 @@ class EventInstance < ApplicationRecord
   has_many :hangout_participants_snapshots
   accepts_nested_attributes_for :hangout_participants_snapshots
 
-  def for 
-    self.event&.for
+  def for
+    event&.for
   end
 
   def self.active_hangouts
@@ -37,6 +39,7 @@ class EventInstance < ApplicationRecord
   # margin: Seconds for which condition can be relaxed for start time
   def updated_within_current_event_duration?(margin)
     return false unless event.current_start_time
+
     updated_at > (event.current_start_time - margin) &&
       updated_at < event.current_end_time
   end
@@ -44,7 +47,8 @@ class EventInstance < ApplicationRecord
   def live?
     return false if !started? || hoa_status == 'finished'
     return true if updated_within_last_two_minutes?
-    return url_set_directly && updated_within_current_event_duration?(600) &&
+
+    url_set_directly && updated_within_current_event_duration?(600) &&
       event.before_current_end_time?
   end
 
@@ -53,11 +57,13 @@ class EventInstance < ApplicationRecord
   end
 
   def start_datetime
-    event != nil ? event.start_datetime : created_at
+    event.nil? ? created_at : event.start_datetime
   end
 
   def broadcaster
-    self.participants.each { |_, hash| break hash['person']['displayName'] if hash['isBroadcaster'] == 'true' } if self.participants
+    participants&.each do |_, hash|
+      break hash['person']['displayName'] if hash['isBroadcaster'] == 'true'
+    end
   end
 
   def yt_url
@@ -65,8 +71,9 @@ class EventInstance < ApplicationRecord
   end
 
   def channels_for_event
-    return [] if self.event_id.nil?
-    event = Event.find(self.event_id)
+    return [] if event_id.nil?
+
+    event = Event.find(event_id)
     event.slack_channel_codes
   end
 

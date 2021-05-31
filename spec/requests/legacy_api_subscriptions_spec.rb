@@ -1,4 +1,4 @@
- 
+# frozen_string_literal: true
 # describe LegacyApi::SubscriptionsController, type: :request do
 #   describe "GET /subscriptions" do
 #     let(:user) { FactoryBot.create(:user, email: "kitty@cat.com") }
