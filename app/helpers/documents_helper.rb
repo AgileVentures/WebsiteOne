@@ -1,7 +1,8 @@
-module DocumentsHelper
+# frozen_string_literal: true
 
+module DocumentsHelper
   def documents
-    @documents = Document.where("project_id = ?", @project.id).order(:created_at).includes(:user)
+    @documents = Document.where('project_id = ?', @project.id).order(:created_at).includes(:user)
   end
 
   def metadata

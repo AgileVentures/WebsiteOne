@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def create_privileged_user
   Settings.privileged_users.split(',').each do |email|
     FactoryBot.create(:user, email: email)

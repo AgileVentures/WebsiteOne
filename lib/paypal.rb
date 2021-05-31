@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Paypal
   def initialize(token, email, payer_id, payment_method, plan, user)
     @payer_id = payer_id
@@ -10,5 +12,5 @@ class Paypal
 
   def url_params
     "token=#{@token}&email=#{@email}&payer_id=#{@payer_id}&payment_method=#{@payment_method}&plan=#{@plan}&user=#{@user}"
-  end    
+  end
 end

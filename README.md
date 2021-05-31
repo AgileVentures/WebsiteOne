@@ -2,7 +2,9 @@
 
 # AgileVentures WebSiteOne
 
-This [Ruby on Rails](http://rubyonrails.org/) app powers the [AgileVentures main developer site](http://agileventures.org/), showing lists of active [projects](https://www.agileventures.org/projects), [members](https://www.agileventures.org/users), [upcoming events](https://www.agileventures.org/events), [past event recordings](https://www.agileventures.org/scrums), as well as all the machinery for [Premium membership payments](https://www.agileventures.org/membership-plans).
+### Legacy code
+
+This [Ruby on Rails](http://rubyonrails.org/) app powers the [AgileVentures main developer site](http://agileventures.org/), showing lists of active [projects](https://www.agileventures.org/projects), [members](https://www.agileventures.org/users), [upcoming events](https://www.agileventures.org/events), [past event recordings](https://www.agileventures.org/scrums), as well as information for how to [get involved](https://www.agileventures.org/membership-plans).
 
 ## Installation
 

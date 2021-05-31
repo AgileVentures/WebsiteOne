@@ -1,6 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe CommitCount, type: :model do
+RSpec.describe CommitCount, type: :model do
   subject { build_stubbed :commit_count }
 
   it 'should have a valid factory' do
@@ -23,9 +23,8 @@ describe CommitCount, type: :model do
   end
 
   context 'with a duplicate record having same user and project' do
-    let(:duplicate_record) { FactoryBot.create(:commit_count) }
-    subject { build(:commit_count,  duplicate_record.attributes)}
+    let(:duplicate_record) { create(:commit_count) }
+    subject { build(:commit_count, duplicate_record.attributes) }
     it { is_expected.to_not be_valid }
   end
-
 end

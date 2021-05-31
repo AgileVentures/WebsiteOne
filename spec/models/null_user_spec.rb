@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe NullUser, type: :model do
   let(:user) { NullUser.new('I am not null') }
