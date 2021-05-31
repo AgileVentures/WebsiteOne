@@ -1,43 +1,38 @@
+# frozen_string_literal: true
+
 class Event < ApplicationRecord
   has_many :event_instances
-  belongs_to :project
-  belongs_to :creator, class_name: 'User'
+  belongs_to :project, optional: true
+  belongs_to :creator, class_name: 'User', optional: true
   has_and_belongs_to_many :slack_channels
-  
-  serialize :exclusions
 
+  serialize :exclusions
 
   extend FriendlyId
   friendly_id :name, use: :slugged
 
   include IceCube
   validates :name, :time_zone, :repeats, :category, :start_datetime, :duration, presence: true
-  validates :url, uri: true, :allow_blank => true
-  validates :repeats_every_n_weeks, :presence => true, :if => lambda { |e| e.repeats == 'weekly' or e.repeats == 'biweekly' }
-  validates :repeat_ends_on, :presence => true, :allow_blank => false, :if => lambda{ |e| (e.repeats == 'weekly' or e.repeats == 'biweekly') and e.repeat_ends_string == 'on' }
-  validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, :if => lambda { |e| e.repeats == 'weekly' or e.repeats == 'biweekly' }
-  validates :repeat_ends, inclusion: { in: [true, false]  } 
-  attr_accessor :next_occurrence_time_attr
-  attr_accessor :repeat_ends_string
+  validates :url, uri: true, allow_blank: true
+  validates :repeats_every_n_weeks, presence: true, if: lambda { |e|
+                                                          e.repeats == 'weekly' or e.repeats == 'biweekly'
+                                                        }
+  validates :repeat_ends_on, presence: true, allow_blank: false, if: lambda { |e|
+                                                                       (e.repeats == 'weekly' or e.repeats == 'biweekly') and e.repeat_ends_string == 'on'
+                                                                     }
+  validate :must_have_at_least_one_repeats_weekly_each_days_of_the_week, if: lambda { |e|
+                                                                               e.repeats == 'weekly' or e.repeats == 'biweekly'
+                                                                             }
+  validates :repeat_ends, inclusion: { in: [true, false] }
+  attr_accessor :next_occurrence_time_attr, :repeat_ends_string
 
   COLLECTION_TIME_FUTURE = 10.days
   COLLECTION_TIME_PAST = 300.minutes
   NEXT_SCRUM_COLLECTION_TIME_PAST = 15.minutes
 
-  REPEATS_OPTIONS = %w[never weekly biweekly]
-  REPEAT_ENDS_OPTIONS = %w[on never]
-  DAYS_OF_THE_WEEK = %w[monday tuesday wednesday thursday friday saturday sunday]
-
-  # hoped the below would help address the issue about how rails 4 -> 5 is going to treat setting non-booleans
-  # to booleans - adding the setter fixes the specs, but breaks the acceptance tests
-  #
-  # def repeat_ends=(repeat_ends)
-  #   super repeat_ends == 'on'
-  # end
-  #
-  # def repeat_ends
-  #   super ? 'on' : 'never'
-  # end
+  REPEATS_OPTIONS = %w(never weekly biweekly).freeze
+  REPEAT_ENDS_OPTIONS = %w(on never).freeze
+  DAYS_OF_THE_WEEK = %w(monday tuesday wednesday thursday friday saturday sunday).freeze
 
   def set_repeat_ends_string
     @repeat_ends_string = repeat_ends ? 'on' : 'never'
@@ -48,15 +43,15 @@ class Event < ApplicationRecord
   end
 
   def self.future_events
-    Event.where('start_datetime > ? OR repeat_ends = false AND repeats != ? OR repeat_ends = false AND repeat_ends_on IS NULL OR repeat_ends_on > ?', Time.current - 1.day, 'never', Time.current - 1.day).
-          where.not('repeats = ? AND start_datetime < ?', 'never', Time.current - 1.day)
+    Event.where('start_datetime > ? OR repeat_ends = false AND repeats != ? OR repeat_ends = false AND repeat_ends_on IS NULL OR repeat_ends_on > ?', Time.current - 1.day, 'never', Time.current - 1.day)
+         .where.not('repeats = ? AND start_datetime < ?', 'never', Time.current - 1.day)
   end
 
   def repeats?
-   schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule')
+    schedule.recurrence_rules.map { |rule| rule.class.name }.include?('IceCube::WeeklyRule')
   end
 
-  def self.upcoming_events(project=nil)
+  def self.upcoming_events(project = nil)
     events = Event.base_future_events(project).inject([]) do |memo, event|
       memo << event.next_occurrences
     end.flatten.sort_by { |e| e[:time] }
@@ -64,18 +59,20 @@ class Event < ApplicationRecord
   end
 
   def self.remove_past_events(events)
-    events.delete_if {|event| (event[:time] + event[:event].duration.minutes) < Time.current &&
-                            !event[:event].event_instances.last.try(:live?)}
+    events.delete_if do |event|
+      (event[:time] + event[:event].duration.minutes) < Time.current &&
+        !event[:event].event_instances.last.try(:live?)
+    end
   end
 
   def self.hookups
-    Event.where(category: "PairProgramming")
+    Event.where(category: 'PairProgramming')
   end
 
   def self.pending_hookups
     pending = []
     hookups.each do |h|
-      started = h.last_hangout && h.last_hangout.started?
+      started = h.last_hangout&.started?
       expired_without_starting = !h.last_hangout && Time.now.utc > h.instance_end_time
       pending << h if !started && !expired_without_starting
     end
@@ -95,11 +92,11 @@ class Event < ApplicationRecord
   end
 
   def instance_end_time
-    (start_datetime + duration*60).utc
+    (start_datetime + duration * 60).utc
   end
 
   def end_date
-    if (series_end_time < start_time)
+    if series_end_time < start_time
       (event_date.to_datetime + 1.day).strftime('%Y-%m-%d')
     else
       event_date
@@ -111,13 +108,13 @@ class Event < ApplicationRecord
   end
 
   def final_datetime_for_collection(options = {})
-    if repeating_and_ends? && options[:end_time].present?
-      final_datetime = [options[:end_time], repeat_ends_on.to_datetime].min
-    elsif repeating_and_ends?
-      final_datetime = repeat_ends_on.to_datetime
-    else
-      final_datetime = options[:end_time]
-    end
+    final_datetime = if repeating_and_ends? && options[:end_time].present?
+                       [options[:end_time], repeat_ends_on.to_datetime].min
+                     elsif repeating_and_ends?
+                       repeat_ends_on.to_datetime
+                     else
+                       options[:end_time]
+                     end
     final_datetime ? final_datetime.to_datetime.utc : COLLECTION_TIME_FUTURE.from_now
   end
 
@@ -134,26 +131,28 @@ class Event < ApplicationRecord
 
   def self.next_occurrence(event_type, begin_time = NEXT_SCRUM_COLLECTION_TIME_PAST.ago)
     events_with_times = []
-    events_with_times = Event.where(category: event_type).map { |event|
+    events_with_times = Event.where(category: [event_type, event_type.to_s.humanize]).map do |event|
       event.next_event_occurrence_with_time(begin_time)
-    }.compact
+    end.compact
     return nil if events_with_times.empty?
+
     events_with_times = events_with_times.sort_by { |e| e[:time] }
     events_with_times[0][:event].next_occurrence_time_attr = events_with_times[0][:time]
-    return events_with_times[0][:event]
+    events_with_times[0][:event]
   end
 
   # The IceCube Schedule's occurrences_between method requires a time range as input to find the next time
   # Most of the time, the next instance will be within the next weeek.do
   # But some event instances may have been excluded, so there's not guarantee that the next time for an event will be within the next week, or even the next month
   # To cover these cases, the while loop looks farther and farther into the future for the next event occurrence, just in case there are many exclusions.
-  def next_event_occurrence_with_time(start = Time.now, final= 2.months.from_now)
+  def next_event_occurrence_with_time(start = Time.now, final = 2.months.from_now)
     begin_datetime = start_datetime_for_collection(start_time: start)
     final_datetime = repeating_and_ends? ? repeat_ends_on : final
     n_days = 8
     end_datetime = n_days.days.from_now
     event = nil
-    return next_event_occurrence_with_time_inner(start, final_datetime) if self.repeats == 'never'
+    return next_event_occurrence_with_time_inner(start, final_datetime) if repeats == 'never'
+
     while event.nil? && end_datetime < final_datetime
       event = next_event_occurrence_with_time_inner(start, final_datetime)
       n_days *= 2
@@ -184,7 +183,9 @@ class Event < ApplicationRecord
   end
 
   def repeats_weekly_each_days_of_the_week=(repeats_weekly_each_days_of_the_week)
-    self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DAYS_OF_THE_WEEK).map { |r| 2**DAYS_OF_THE_WEEK.index(r) }.inject(0, :+)
+    self.repeats_weekly_each_days_of_the_week_mask = (repeats_weekly_each_days_of_the_week & DAYS_OF_THE_WEEK).map do |r|
+      2**DAYS_OF_THE_WEEK.index(r)
+    end.inject(0, :+)
   end
 
   def repeats_weekly_each_days_of_the_week
@@ -197,7 +198,7 @@ class Event < ApplicationRecord
     # best if schedule is serialized into the events record...  and an attribute.
     if timedate >= Time.now && timedate == next_occurrence_time_method
       _next_occurrences = next_occurrences(limit: 2)
-      self.start_datetime = (_next_occurrences.size > 1) ? _next_occurrences[1][:time] : timedate + 1.day
+      self.start_datetime = _next_occurrences.size > 1 ? _next_occurrences[1][:time] : timedate + 1.day
     elsif timedate >= Time.now
       self.exclusions ||= []
       self.exclusions << timedate
@@ -206,13 +207,19 @@ class Event < ApplicationRecord
   end
 
   def schedule
-    sched = series_end_time.nil? || !repeat_ends ? IceCube::Schedule.new(start_datetime) : IceCube::Schedule.new(start_datetime, :end_time => series_end_time)
+    sched = if series_end_time.nil? || !repeat_ends
+              IceCube::Schedule.new(start_datetime)
+            else
+              IceCube::Schedule.new(
+                start_datetime, end_time: series_end_time
+              )
+            end
     case repeats
-      when 'never'
-        sched.add_recurrence_time(start_datetime)
-      when 'weekly', 'biweekly'
-        days = repeats_weekly_each_days_of_the_week.map { |d| d.to_sym }
-        sched.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
+    when 'never'
+      sched.add_recurrence_time(start_datetime)
+    when 'weekly', 'biweekly'
+      days = repeats_weekly_each_days_of_the_week.map(&:to_sym)
+      sched.add_recurrence_rule IceCube::Rule.weekly(repeats_every_n_weeks).day(*days)
     end
     self.exclusions ||= []
     self.exclusions.each do |ex|
@@ -231,14 +238,15 @@ class Event < ApplicationRecord
 
   def recent_hangouts
     event_instances
-      .where('created_at BETWEEN ? AND ?', 1.days.ago + duration.minutes, DateTime.now.end_of_day)
+      .where('created_at BETWEEN ? AND ?', 1.day.ago + duration.minutes, DateTime.now.end_of_day)
       .order(created_at: :desc)
   end
 
   def less_than_ten_till_start?
     return true if within_current_event_duration?
+
     Time.now > next_event_occurrence_with_time[:time] - 10.minutes
-  rescue
+  rescue StandardError
     false
   end
 
@@ -251,18 +259,18 @@ class Event < ApplicationRecord
   end
 
   def current_end_time
-    schedule.occurrences_between(1.month.ago, Time.current).last + duration*60
+    schedule.occurrences_between(1.month.ago, Time.current).last + duration * 60
   end
 
   def before_current_end_time?
     Time.current < current_end_time
-  rescue
+  rescue StandardError
     false
   end
 
   def after_current_start_time?
     Time.current > current_start_time
-  rescue
+  rescue StandardError
     false
   end
 
@@ -287,6 +295,6 @@ class Event < ApplicationRecord
   end
 
   def repeating_and_ends?
-    repeats != 'never' && repeat_ends && !repeat_ends_on.blank?
+    repeats != 'never' && repeat_ends && repeat_ends_on.present?
   end
 end

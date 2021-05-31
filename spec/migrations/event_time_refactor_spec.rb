@@ -1,4 +1,5 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
 load 'db/migrate/20140725131327_event_combine_date_and_time_fields.rb'
 
 ActiveRecord::Migration.verbose = false
@@ -9,14 +10,14 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
       ActiveRecord::Migration.verbose = false
 
       EventCombineDateAndTimeFields.new.down
-      sql= %Q{INSERT INTO events (name, category, repeats, start_time, event_date, end_time, time_zone, repeat_ends) VALUES ('test', 'PairProgramming', 'never', TIME'10:00', DATE'2013-06-17', TIME'11:00', 'UTC', true);}
+      sql = %{INSERT INTO events (name, category, repeats, start_time, event_date, end_time, time_zone, repeat_ends) VALUES ('test', 'PairProgramming', 'never', TIME'10:00', DATE'2013-06-17', TIME'11:00', 'UTC', true);}
       ApplicationRecord.connection.execute(sql)
     end
 
     it 'refactors events time fields' do
-      expect {
+      expect do
         EventCombineDateAndTimeFields.new.up
-      }.to change { Event.columns }
+      end.to change { Event.columns }
       event_new = Event.first
       expect(event_new.start_datetime.to_datetime).to eq('2013-06-17 10:00:00'.to_datetime.utc)
       expect(event_new.duration).to eq(60)
@@ -33,9 +34,9 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
     end
 
     it 'refactors events time fields' do
-      expect {
+      expect do
         EventCombineDateAndTimeFields.new.down
-      }.to change { Event.columns }
+      end.to change { Event.columns }
       event_old = Event.first
       expect(event_old.read_attribute(:event_date).to_date).to eq('2013-06-17'.to_date)
       # Postgres stores the time without the date, and when it comes out, the date is set to 2000-01-01.  This may change with different database.
@@ -44,4 +45,3 @@ describe 'EventCombineDateAndTimeFields', type: :migration do
     end
   end
 end
-

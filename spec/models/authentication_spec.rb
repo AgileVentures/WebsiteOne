@@ -1,29 +1,30 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe Authentication, :type => :model do
+describe Authentication, type: :model do
+  let(:user) { create(:user) }
+  let!(:auth) { user.authentications.create!(provider: 'github', uid: '12345') }
   before do
-    @user = FactoryBot.create(:user)
-    @auth = @user.authentications.create!(provider: 'github', uid: '12345')
+    @user = user
+    # @auth = auth
   end
 
   it 'must have an associated user' do
-    # Bryan: validations done at database level to avoid complications, but will raise exceptions
-    @auth.user_id = nil
-    expect{ @auth.save }.to raise_error ActiveRecord::StatementInvalid
+    auth.user_id = nil
+    expect { auth.save }.to raise_error ActiveRecord::StatementInvalid
   end
 
   it 'must have an associated provider' do
-    @auth.provider = nil
-    expect(@auth).to_not be_valid
+    auth.provider = nil
+    expect(auth).to_not be_valid
   end
 
   it 'must have an associated UID' do
-    @auth.uid = nil
-    expect(@auth).to_not be_valid
+    auth.uid = nil
+    expect(auth).to_not be_valid
   end
 
   it 'must have a unique user-provider combination' do
-    auth = @user.authentications.build(provider: 'github', uid: '098766')
-    expect(auth).to_not be_valid
+    failed_auth = user.authentications.build(provider: 'github', uid: '098766')
+    expect(failed_auth).to_not be_valid
   end
 end

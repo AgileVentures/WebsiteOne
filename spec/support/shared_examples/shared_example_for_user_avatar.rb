@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'it has clickable user avatar with popover' do
   before do
     allow_any_instance_of(UserPresenter).to receive(:display_name).and_return('user_name')
@@ -11,6 +13,5 @@ shared_examples_for 'it has clickable user avatar with popover' do
     expect(rendered).to match(/user_name/)
     expect(rendered).to match(/user_gravatar/)
     expect(rendered).to match(/href="profile_link"/)
-
   end
 end

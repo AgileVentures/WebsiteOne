@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImportGettingStartedStaticPage < ActiveRecord::Migration[4.2]
   def up
     page_path = Rails.root.join('app', 'views', 'pages', 'getting-started.html.erb')
@@ -6,7 +8,5 @@ class ImportGettingStartedStaticPage < ActiveRecord::Migration[4.2]
     puts 'Imported Getting_started static page'
   end
 
-  def down
-
-  end
+  def down; end
 end

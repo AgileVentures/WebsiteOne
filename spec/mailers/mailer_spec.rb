@@ -1,7 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Mailer do
-
   describe 'send_premium_payment_complete_message' do
     let(:plan) { instance_double(Plan, name: 'Premium', free_trial_length_days: 7, free_trial?: true, category: nil) }
     it 'sends payment complete message' do
@@ -14,7 +13,6 @@ describe Mailer do
       expect(mail).to have_default_cc_addresses
     end
   end
-
 
   describe '#send_welcome_message' do
     before(:each) do
@@ -36,13 +34,12 @@ describe Mailer do
   end
 
   describe '#hire_me_contact_form' do
-    let(:valid_params) { {name: 'Thomas', email: 'thomas@email.com', message: 'Want to hire you!'} }
+    let(:valid_params) { { name: 'Thomas', email: 'thomas@email.com', message: 'Want to hire you!' } }
     before(:each) do
       @user = User.new first_name: 'Marcelo',
                        last_name: 'Mr G',
                        email: 'marcelo@whatever.com',
                        password: '1234567890'
-
     end
     it 'should send hire_me message' do
       mail = Mailer.hire_me_form(@user, valid_params)

@@ -1,32 +1,34 @@
-klasses = [ Project, Document, User, Subscription, Karma, Plan, Article, Event, EventInstance, Karma ]
+# frozen_string_literal: true
+
+klasses = [Project, Document, User, Subscription, Karma, Plan, Article, Event, EventInstance, Karma]
 old_counts = klasses.map(&:count)
-should_prompt = old_counts.min > 0
+should_prompt = old_counts.min.positive?
 
 def get_country
-  country = File.readlines(Rails.root + 'spec/fixtures/country_codes.txt').sample
+  country = File.readlines("#{Rails.root}spec/fixtures/country_codes.txt").sample
   code, name = country.chomp.split('|')
-  @country = {country_name: name, country_code: code}
+  @country = { country_name: name, country_code: code }
 end
 
 if should_prompt
-  puts 'Would you like to ' + 'delete'.red.bold + ' all the existing projects and documents from the database?'
+  puts "Would you like to #{'delete'.red.bold} all the existing projects and documents from the database?"
 end
 
 while true
   if should_prompt
     print 'yes(y)/no(n): '
-    response = STDIN.gets.downcase.chomp
+    response = $stdin.gets.downcase.chomp
   else
     response = 'y'
   end
 
-  if response == 'y' || response == 'yes'
+  if %w(y yes).include?(response)
     puts 'Clearing existing projects and documents'
     klasses.each(&:delete_all)
 
     pw = 'randomrandom'
     u = User.create(first_name: 'Random', last_name: 'Guy', email: 'random@random.com', password: pw)
-    puts 'Added default user with email: ' + u.email.bold.blue + ' and password: ' + pw.bold.red
+    puts "Added default user with email: #{u.email.bold.blue} and password: #{pw.bold.red}"
 
     autograder = u.projects.create!(
       title: 'Autograder',
@@ -76,7 +78,7 @@ Solution: is something that requires absolutely minimal effort on their part to 
 
     puts 'Created default projects'
     break
-  elsif response == 'n' || response == 'no'
+  elsif %w(n no).include?(response)
     break
   end
 end
@@ -111,14 +113,14 @@ end
 # Premium Users
 Rake::Task['db:create_plans'].invoke
 
-plans = ["premium", "premiummob", "premiumf2f", "premiumplus"]
-plans.each  do |plan|
+plans = %w(premium premiummob premiumf2f premiumplus)
+plans.each do |plan|
   get_country
   u = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: "#{plan}@premi.um",
-    password: "premium123",
+    password: 'premium123',
     country_name: @country[:country_name],
     country_code: @country[:country_code]
   )
@@ -137,7 +139,7 @@ end
     email: Faker::Internet.email,
     password: Faker::Lorem.characters(number: 10),
     country_name: @country[:country_name],
-    country_code: @country[:country_code],
+    country_code: @country[:country_code]
   )
   Karma.create(
     user_id: u.id,
@@ -146,7 +148,7 @@ end
     event_participation: Faker::Number.digit,
     membership_length: Faker::Number.digit,
     profile_completeness: Faker::Number.digit,
-    number_github_contributions: Faker::Number.digit,
+    number_github_contributions: Faker::Number.digit
   )
 
   Project.all.sample(3).each do |p|
@@ -163,12 +165,10 @@ end
   end
 end
 
-if StaticPage.count == 0
-  Rake::Task['db:import_pages'].invoke
-end
+Rake::Task['db:import_pages'].invoke if StaticPage.count.zero?
 
 # Seed data from "db/seeds" folder
-Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
+Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].each do |seed|
   puts "seeding from : #{seed}"
   load seed
 end
@@ -177,5 +177,5 @@ end
 Rake::Task['user:create_anonymous'].invoke
 
 klasses.each_with_index do |klass, i|
-  puts "#{klass.name}.count " + old_counts[i].to_s.bold.red + ' -> ' + klass.count.to_s.bold.green
+  puts "#{klass.name}.count #{old_counts[i].to_s.bold.red} -> #{klass.count.to_s.bold.green}"
 end

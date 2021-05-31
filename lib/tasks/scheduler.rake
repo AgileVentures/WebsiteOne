@@ -1,27 +1,27 @@
-desc "This task is called by the Heroku Scheduler"
+# frozen_string_literal: true
 
-task :fetch_github_commits => :environment do
+desc 'This task is called by the Heroku Scheduler'
+
+task fetch_github_commits: :environment do
   GithubCommitsJob.run
 end
 
-task :fetch_github_last_updates => :environment do
+task fetch_github_last_updates: :environment do
   GithubLastUpdatesJob.run
 end
 
-task :fetch_github_languages => :environment do
+task fetch_github_languages: :environment do
   GithubLanguagesJob.run
 end
 
-task :karma_calculator => :environment do
+task karma_calculator: :environment do
   User.find_each do |user|
-    begin
-      user_karma = Karma.find_or_initialize_by(user_id: user.id)
-      user_karma.attributes = KarmaCalculator.new(user).calculate
-      user_karma.save!
-    rescue => e
-      Rails.logger.error "Error: Occurred while processing KarmaCalculator for User: #{usr.id}"
-      Rails.logger.error e.message
-      Rails.logger.error e.backtrace.join "\n"
-    end
+    user_karma = Karma.find_or_initialize_by(user_id: user.id)
+    user_karma.attributes = KarmaCalculator.new(user).calculate
+    user_karma.save!
+  rescue StandardError => e
+    Rails.logger.error "Error: Occurred while processing KarmaCalculator for User: #{usr.id}"
+    Rails.logger.error e.message
+    Rails.logger.error e.backtrace.join "\n"
   end
 end

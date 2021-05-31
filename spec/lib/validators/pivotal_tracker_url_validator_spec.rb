@@ -1,10 +1,11 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe PivotalTrackerUrlValidator do
   let(:dummy_class) do
     Class.new do
       include ActiveModel::Validations
       attr_accessor :pivotaltracker_url
+
       validates_with PivotalTrackerUrlValidator
     end
   end
@@ -19,5 +20,4 @@ describe PivotalTrackerUrlValidator do
       expect(subject.errors.full_messages).to eq([])
     end
   end
-
 end

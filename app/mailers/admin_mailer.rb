@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AdminMailer < ApplicationMailer
-  default from: "bot@agileventures.org"
+  default from: 'bot@agileventures.org'
 
   def failed_to_invite_user_to_slack(email, error, slack_error_message)
     @error_message = error.message if error
@@ -7,7 +9,7 @@ class AdminMailer < ApplicationMailer
     @email = email
     @slack_error_message = slack_error_message
     mail(subject: "Slack invite failed for user with email '#{email}'.",
-         to: "support@agileventures.org")
+         to: 'support@agileventures.org')
   end
 
   private
@@ -16,5 +18,4 @@ class AdminMailer < ApplicationMailer
     backtrace = @error.backtrace if @error
     backtrace ? backtrace.join("\n\t") : ''
   end
-
 end
