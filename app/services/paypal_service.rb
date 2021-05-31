@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'paypal-sdk-rest'
 
 PayPal::SDK::REST.set_config(
@@ -25,7 +27,7 @@ class PaypalService
     agreement.create
     agreement
   end
-  
+
   def self.execute_agreement(agreement_token)
     agreement = PayPal::SDK::REST::Agreement.new(token: agreement_token)
     agreement.execute unless agreement.error
@@ -33,7 +35,7 @@ class PaypalService
   end
 
   private
-  
+
   def activate_plan_params
     {
       op: 'replace',
@@ -47,8 +49,8 @@ class PaypalService
       name: @plan.name,
       description: "#{@plan.name} membership for £#{@plan.amount / 100}/month",
       type: 'FIXED',
-      payment_definitions: [ regular_payment_definition, trial_payment_definition],
-      merchant_preferences: merchant_preferences,
+      payment_definitions: [regular_payment_definition, trial_payment_definition],
+      merchant_preferences: merchant_preferences
     }
   end
 
@@ -57,8 +59,8 @@ class PaypalService
       name: @plan.name,
       description: "#{@plan.name} membership for £#{@plan.amount / 100}/month",
       type: 'FIXED',
-      payment_definitions: [ regular_payment_definition],
-      merchant_preferences: merchant_preferences,
+      payment_definitions: [regular_payment_definition],
+      merchant_preferences: merchant_preferences
     }
   end
 
@@ -76,27 +78,27 @@ class PaypalService
     {
       setup_fee:
         {
-          currency: "GBP",
-          value: "0"
+          currency: 'GBP',
+          value: '0'
         },
-        return_url: "#{ENV['BASE_URL']}/paypal/create?plan=#{@plan.third_party_identifier}",
-        cancel_url: "#{ENV['BASE_URL']}/subscriptions/new?plan=#{@plan.third_party_identifier}",
-        auto_bill_amount: "YES",
-        initial_fail_amount_action: "CONTINUE",
-        max_fail_attempts: "0"
+      return_url: "#{ENV['BASE_URL']}/paypal/create?plan=#{@plan.third_party_identifier}",
+      cancel_url: "#{ENV['BASE_URL']}/subscriptions/new?plan=#{@plan.third_party_identifier}",
+      auto_bill_amount: 'YES',
+      initial_fail_amount_action: 'CONTINUE',
+      max_fail_attempts: '0'
     }
   end
 
   def regular_payment_definition
     {
-      name: "Regular payment definition",
-      type: "REGULAR",
-      frequency_interval: "1",
-      frequency: "MONTH",
-      cycles: "12",
+      name: 'Regular payment definition',
+      type: 'REGULAR',
+      frequency_interval: '1',
+      frequency: 'MONTH',
+      cycles: '12',
       amount:
       {
-        currency: "GBP",
+        currency: 'GBP',
         value: @plan.amount / 100
       }
     }
@@ -104,15 +106,15 @@ class PaypalService
 
   def trial_payment_definition
     {
-      name: "Trial payment definition",
-      type: "trial",
-      frequency_interval: "1",
-      frequency: "week",
-      cycles: "1",
+      name: 'Trial payment definition',
+      type: 'trial',
+      frequency_interval: '1',
+      frequency: 'week',
+      cycles: '1',
       amount:
       {
-        currency: "GBP",
-        value: "0"
+        currency: 'GBP',
+        value: '0'
       }
     }
   end

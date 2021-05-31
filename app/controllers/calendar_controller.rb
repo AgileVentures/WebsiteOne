@@ -1,8 +1,9 @@
-class CalendarController < ApplicationController
+# frozen_string_literal: true
 
+class CalendarController < ApplicationController
   def index
     cal = Icalendar::Calendar.new
-    filename = "AgileVentures_events"
+    filename = 'AgileVentures_events'
 
     if params[:format] == 'vcs'
       cal.prodid = '-//Microsoft Corporation//Outlook MIMEDIR//EN'
@@ -17,19 +18,21 @@ class CalendarController < ApplicationController
     send_data cal.to_ical, type: 'text/calendar', disposition: 'attachment', filename: filename
   end
 
-
   private
-  def add_events cal
+
+  def add_events(cal)
     events_all = Event.upcoming_events
     events_all.each do |event_instance|
       event             = Icalendar::Event.new
-      event.dtstart     = Icalendar::Values::DateTime.new( event_instance[:time], tzid: event_instance[:event].time_zone)
-      event.dtend       = Icalendar::Values::DateTime.new( event_instance[:time] + 60 * event_instance[:event].duration, tzid: event_instance[:event].time_zone)
+      event.dtstart     = Icalendar::Values::DateTime.new(event_instance[:time],
+                                                          tzid: event_instance[:event].time_zone)
+      event.dtend       = Icalendar::Values::DateTime.new(
+        event_instance[:time] + 60 * event_instance[:event].duration, tzid: event_instance[:event].time_zone
+      )
       event.summary     = event_instance[:event].name
       event.description = event_instance[:event].description
 
       cal.add_event(event)
-
     end
   end
 end

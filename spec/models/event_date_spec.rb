@@ -1,11 +1,11 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe EventDate, :type => :model do
-  it 'returns todays date if event_date is nil' do
+RSpec.describe EventDate, type: :model do
+  it 'is expected to return todays date if given nil as argument' do
     expect(EventDate.for(nil)).to eq Date.today
   end
 
-  it 'returns event_date if event_date is present' do
+  it 'is expected to return date if given date as argument' do
     expect(EventDate.for(Date.tomorrow)).to eq Date.tomorrow
   end
 end

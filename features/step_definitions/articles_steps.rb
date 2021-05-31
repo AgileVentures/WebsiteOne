@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^the following articles exist:$/) do |table|
   table.hashes.each do |raw_hash|
     hash = {}
@@ -15,7 +17,7 @@ Given(/^the following articles exist:$/) do |table|
 end
 
 When(/^I click the Preview button$/) do
-  find_button("Preview").trigger("click")
+  find_button('Preview').trigger('click')
   sleep(0.1)
 end
 

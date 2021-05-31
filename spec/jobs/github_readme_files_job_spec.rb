@@ -1,9 +1,11 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe GithubReadmeFilesJob do
+RSpec.describe GithubReadmeFilesJob do
   describe '.replace_relative_links_with_absolute' do
-    let(:project) { FactoryBot.create(:project, pitch: nil) }
-    let(:project_readme_content) { '<a href="hello">hello</a><a href="http://example.com/hello">hello</a><a href="#hello">hello</a>' }
+    let(:project) { create(:project, pitch: nil) }
+    let(:project_readme_content) do
+      '<a href="hello">hello</a><a href="http://example.com/hello">hello</a><a href="#hello">hello</a>'
+    end
 
     before do
       project.source_repositories.create(url: 'https://github.com/AgileVentures/LocalSupport')
@@ -11,18 +13,18 @@ describe GithubReadmeFilesJob do
     end
 
     it 'converts all relative urls in text to absolute with full host prefix' do
-      converted_link = "https://github.com/AgileVentures/LocalSupport/blob/master/hello"
+      converted_link = 'https://github.com/AgileVentures/LocalSupport/blob/master/hello'
       expect(@converted_text).to include converted_link
       expect(@converted_text).to_not include 'href="hello"'
     end
 
     it 'does not change absolute links' do
-      absolute_link = "http://example.com/hello"
+      absolute_link = 'http://example.com/hello'
       expect(@converted_text).to include absolute_link
     end
 
     it 'does not change anchor links' do
-      anchor_link = "#hello"
+      anchor_link = '#hello'
       expect(@converted_text).to include anchor_link
     end
   end
@@ -32,7 +34,7 @@ describe GithubReadmeFilesJob do
   describe '.job using readme', vcr: vcr_index do
     context 'Update pitch on project using the README.md file' do
       before do
-        @project = FactoryBot.create(:project, pitch: nil)
+        @project = create(:project, pitch: nil)
         @project.source_repositories.create(url: 'https://github.com/AgileVentures/LocalSupport')
         @projects = Project.with_github_url
       end
@@ -58,7 +60,7 @@ describe GithubReadmeFilesJob do
 
     context 'Update pitch on project using the PITCH.md file' do
       before do
-        @project = FactoryBot.create(:project, pitch: nil)
+        @project = create(:project, pitch: nil)
         @project.source_repositories.create(url: 'https://github.com/nisevi/nisevi')
         @projects = Project.with_github_url
       end
@@ -68,7 +70,7 @@ describe GithubReadmeFilesJob do
       end
 
       it 'should have pitch setup with PITCH.md' do
-        pitch = Octokit.contents 'nisevi/nisevi', path: 'PITCH.md', :accept => 'application/vnd.github.html'
+        pitch = Octokit.contents 'nisevi/nisevi', path: 'PITCH.md', accept: 'application/vnd.github.html'
         expect { GithubReadmeFilesJob.run(@projects) }.to_not raise_error
         expect(Project.first.pitch).to eq(pitch)
       end

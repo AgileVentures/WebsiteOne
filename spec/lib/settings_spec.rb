@@ -1,9 +1,9 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Settings, type: 'model' do
   describe 'in production' do
     before do
-      ENV['PRIVILEGED_USERS'] = "one@example.com, two@example.com"
+      ENV['PRIVILEGED_USERS'] = 'one@example.com, two@example.com'
     end
 
     it 'has specific privileged_users fed through ENV' do

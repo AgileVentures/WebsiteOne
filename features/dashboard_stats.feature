@@ -1,8 +1,8 @@
 @vcr
 Feature: Display Statistics
-  As a project maintainer
+  "As a project maintainer
   In order to attract more users to AgileVentures
-  I would like to present some attractive statistics to new visitors of WSO
+  I would like to present some attractive statistics to new visitors of WSO"
 
   Background:
     Given the following articles exist:

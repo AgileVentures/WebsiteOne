@@ -1,14 +1,13 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe Project, type: :model do
+RSpec.describe Project, type: :model do
+  it { is_expected.to have_many :source_repositories }
+  it { is_expected.to have_many :documents }
+  it { is_expected.to have_many :event_instances }
+  it { is_expected.to have_many :commit_counts }
+  it { is_expected.to have_many :issue_trackers }
 
-  it { is_expected.to have_many :source_repositories}
-  it { is_expected.to have_many :documents}
-  it { is_expected.to have_many :event_instances}
-  it { is_expected.to have_many :commit_counts}
-  it { is_expected.to have_many :issue_trackers}
-
-  it { is_expected.to belong_to :user}
+  it { is_expected.to belong_to(:user).optional(true) }
 
   context '#save' do
     subject { build_stubbed(:project) }
@@ -49,7 +48,7 @@ describe Project, type: :model do
 
     it 'should throw error for incomplete github url' do
       subject.source_repositories.create(url: 'https://github.com/edx')
-      expect{ subject.github_repo_name }.to raise_error(NoMethodError, "undefined method `[]' for nil:NilClass")
+      expect { subject.github_repo_name }.to raise_error(NoMethodError, "undefined method `[]' for nil:NilClass")
     end
 
     it 'should not accept invalid Pivotal Tracker URL' do
@@ -57,7 +56,7 @@ describe Project, type: :model do
       expect(subject).to_not be_valid
     end
 
-    context "Updating friendly ids" do
+    context 'Updating friendly ids' do
       let(:project) { create(:project, title: 'Old news') }
       before { project.update(title: 'New and seksay title') }
 
@@ -65,7 +64,7 @@ describe Project, type: :model do
         expect(project.friendly_id).to eq 'new-and-seksay-title'
       end
 
-      it "should still be able to find the project by its old id" do
+      it 'should still be able to find the project by its old id' do
         expect(Project.friendly.find('old-news')).to eq project
       end
     end
@@ -109,32 +108,32 @@ describe Project, type: :model do
     end
   end
 
-  describe "#youtube_tags" do
+  describe '#youtube_tags' do
     it 'returns the tags for project including the project title' do
-      project = build_stubbed(:project, title: "WebsiteOne", tag_list: ["WSO"])
-      expect(project.youtube_tags).to eq ["wso", "websiteone"]
+      project = build_stubbed(:project, title: 'WebsiteOne', tag_list: ['WSO'])
+      expect(project.youtube_tags).to eq %w(wso websiteone)
     end
   end
 
-  describe "#members_tags" do
+  describe '#members_tags' do
     it 'returns the tags for project members with thier youtube user names' do
       users = [User.new(youtube_user_name: 'test_id'), User.new(youtube_user_name: 'test_id_2')]
       allow(subject).to receive(:members).and_return(users)
-      expect(subject.members_tags).to eq ["test_id", "test_id_2"]
+      expect(subject.members_tags).to eq %w(test_id test_id_2)
     end
   end
 
-  describe "#members" do
+  describe '#members' do
     it 'returns followers of the project who have a public profile' do
-      @users = [ User.new(slug: 'my-friendly-id', display_profile: true) ]
-      @more_users = @users + [ User.new(slug: 'another-friendly-id', display_profile: false)]
+      @users = [User.new(slug: 'my-friendly-id', display_profile: true)]
+      @more_users = @users + [User.new(slug: 'another-friendly-id', display_profile: false)]
       allow(subject).to receive(:followers).and_return(@more_users)
 
       expect(subject.members).to eq @users
     end
   end
 
-  describe "#github_repo" do
+  describe '#github_repo' do
     it 'returns blank if github url does not exist' do
       project = build_stubbed(:project, github_url: nil)
       expect(project.github_repo).to be_blank
@@ -147,14 +146,14 @@ describe Project, type: :model do
     end
   end
 
-  describe "#contribution_url" do
+  describe '#contribution_url' do
     it 'returns the url for the project github contribution page' do
       allow(subject).to receive(:github_repo).and_return('test/test')
-      expect(subject.contribution_url).to eq "https://github.com/test/test/graphs/contributors"
+      expect(subject.contribution_url).to eq 'https://github.com/test/test/graphs/contributors'
     end
   end
 
-  describe "#github_repo_user_name" do
+  describe '#github_repo_user_name' do
     it 'deals with hyphen gracefully' do
       project = build_stubbed(:project)
       project.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project')
@@ -163,7 +162,6 @@ describe Project, type: :model do
   end
 
   describe '#codeclimate_gpa' do
-
     subject(:project) { build_stubbed(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne') }
 
     it 'returns the CodeClimate GPA' do

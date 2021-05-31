@@ -1,8 +1,9 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe AddSubscriptionToUserForPlan do
-
-  subject(:add_subscription_to_user_for_plan) { described_class.with(user, sponsor, time, plan, payment_source, subscription_klass) }
+  subject(:add_subscription_to_user_for_plan) do
+    described_class.with(user, sponsor, time, plan, payment_source, subscription_klass)
+  end
 
   let(:subscription_klass) { class_double(Subscription) }
 
@@ -28,7 +29,8 @@ describe AddSubscriptionToUserForPlan do
   end
 
   it 'creates a subscription of the appropriate type' do
-    expect(subscription_klass).to receive(:new).with(started_at: time, sponsor: sponsor, plan: plan, payment_source: payment_source)
+    expect(subscription_klass).to receive(:new).with(started_at: time, sponsor: sponsor, plan: plan,
+                                                     payment_source: payment_source)
     add_subscription_to_user_for_plan
   end
 

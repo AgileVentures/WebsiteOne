@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 When(/^I run the rake task for calculating karma points$/) do
   $rake['karma_calculator'].execute
 end
@@ -28,9 +30,7 @@ end
 
 Then(/^I should see all the pages on github in the site as static pages with the content from github$/) do
   visit static_page_path('About Us')
-  expect(page).to have_content 'Agile Ventures is an official UK Charity'
-  visit static_page_path('Business Plan')
-  expect(page).to have_content 'learning experiences for everyone around the world through collaborative'
+  expect(page).to have_content 'AgileVentures is an official UK Charity dedicated to crowdsourced learning and social coding'
   visit static_page_path('Code of Conduct')
   expect(page).to have_content 'A primary goal of Agile Ventures is to be inclusive to the largest number of contributors'
   visit static_page_path('Constitution')
@@ -46,17 +46,19 @@ Given(/^the following payment sources exist$/) do |table|
   table.hashes.each do |hash|
     user = User.find_by(first_name: hash.delete('user'))
     subscription = Subscription.find_by(user_id: user.id)
-    hash[:subscription_id] = subscription
-    PaymentSource::PaymentSource.create!(hash)
+    hash[:subscription_id] = subscription.id
+    create(:paypal, hash)
   end
 end
 
-Given(/^the following subscriptions exist$/) do |table|
+Given('the following subscriptions exist') do |table|
   table.hashes.each do |hash|
     user = User.find_by(first_name: hash.delete('user'))
+    plan = Plan.find_by(name: hash[:type])
     hash[:user_id] = user.id
     hash[:started_at] = Time.now
-    Subscription.create!(hash)
+    hash[:plan_id] = plan.id
+    create(:subscription, hash)
   end
 end
 
@@ -76,7 +78,6 @@ end
 Then(/^there should be a "([^"]*)" subscription plan$/) do |plan|
   expect(Plan.find_by(name: plan)).not_to be_nil
 end
-
 
 When(/^I hit the letsencrypt endpoint$/) do
   ENV['CERTBOT_SSL_CHALLENGE'] = 'qwertyui'

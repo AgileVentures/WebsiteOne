@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../base_presenter'
 
 class UserPresenter < BasePresenter
@@ -12,11 +14,11 @@ class UserPresenter < BasePresenter
   end
 
   def joined_projects?
-    user.following_projects_count > 0
+    user.following_projects_count.positive?
   end
 
   def contributed?
-    contributions.count > 0
+    contributions.count.positive?
   end
 
   def contributions
@@ -28,33 +30,33 @@ class UserPresenter < BasePresenter
   def country
     user.country_name
   end
-  alias :country? :country
+  alias_method :country?, :country
 
   def title_list
     content_tag(:span, user.titles.map(&:name).join(', '), class: 'member-title')
   end
 
   def has_title?
-    user.titles.size > 0
+    user.titles.size.positive?
   end
 
-  def gravatar_image(options={})
-    if options[:default]
-      gravatar_url = "https://www.gravatar.com/avatar/1&d=retro&f=y"
-    else
-      gravatar_url = user.gravatar_url(options)
-    end
+  def gravatar_image(options = {})
+    gravatar_url = if options[:default]
+                     'https://www.gravatar.com/avatar/1&d=retro&f=y'
+                   else
+                     user.gravatar_url(options)
+                   end
 
-      image_tag(gravatar_url, width: options[:size], id: options[:id],
-                height: options[:size], alt: display_name, class: options[:class], style: options[:style])
+    image_tag(gravatar_url, width: options[:size], id: options[:id],
+                            height: options[:size], alt: display_name, class: options[:class], style: options[:style])
   end
 
-  def email_link(text=nil)
+  def email_link(text = nil)
     link_to(user.email, (text or user.email))
   end
 
   def github_username
-    user.github_profile_url.split('/').last if user.github_profile_url
+    user.github_profile_url&.split('/')&.last
   end
 
   def github_link
@@ -70,16 +72,16 @@ class UserPresenter < BasePresenter
   end
 
   def status?
-    user.status.size > 0
+    user.status.size.positive?
   end
 
   def blank_fields
-    %w{first_name last_name skills bio}
+    %w(first_name last_name skills bio)
       .select { |field| user.send(field).blank? }
       .map(&:humanize).to_sentence
   end
 
-  def user_same_as? other_user
+  def user_same_as?(other_user)
     user == other_user
   end
 
