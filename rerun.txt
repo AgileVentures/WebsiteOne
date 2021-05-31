@@ -1,8 +1,0 @@
-features/events/live_event.feature:12:19
-features/events/rsvping_event.feature:17:22:34:40:45:51
-features/events/show_event.feature:55:56:59
-features/events/start_event.feature:34
-features/events/upcoming_events.feature:43
-features/hangouts/edit_hangout_url.feature:59
-features/hangouts/edit_youtube_url.feature:51:72
-features/hangouts/hangout.feature:31

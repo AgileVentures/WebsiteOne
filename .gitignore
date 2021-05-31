@@ -98,3 +98,5 @@ certbot.log
 .vscode/**/*
 
 # db/schema.rb
+
+rerun.txt
