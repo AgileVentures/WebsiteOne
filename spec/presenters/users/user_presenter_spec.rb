@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe UserPresenter do
   subject { UserPresenter.new(user) }
@@ -51,8 +51,8 @@ describe UserPresenter do
 
     before(:each) do
       @status = FactoryBot.create_list(:status, 3,
-                                        status: Status::OPTIONS[rand(Status::OPTIONS.length)],
-                                        user: user)
+                                       status: Status::OPTIONS[rand(Status::OPTIONS.length)],
+                                       user: user)
       user.reload
     end
 

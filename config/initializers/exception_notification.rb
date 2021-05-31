@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'exception_notification/rails'
 
 ExceptionNotification.configure do |config|
@@ -34,5 +36,4 @@ ExceptionNotification.configure do |config|
   #   :url => 'http://example.com:5555/hubot/path',
   #   :http_method => :post
   # }
-
 end

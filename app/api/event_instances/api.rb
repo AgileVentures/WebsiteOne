@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EventInstances
   class API < Grape::API
     version 'v1', using: :path, vendor: 'agileventures'

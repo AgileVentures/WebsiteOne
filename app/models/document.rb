@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Document < ApplicationRecord
   include ActAsPage
   include UserNullable
@@ -21,6 +23,6 @@ class Document < ApplicationRecord
   end
 
   def slug_candidates
-    [ :title, [:title, :project_title] ]
+    [:title, %i(title project_title)]
   end
 end

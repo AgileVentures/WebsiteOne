@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActAsPage
   def self.included(base)
     base.acts_as_tree

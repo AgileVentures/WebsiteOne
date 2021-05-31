@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 
 class CommitCount < ApplicationRecord
@@ -7,4 +9,3 @@ class CommitCount < ApplicationRecord
   validates :user, :project, :commit_count, presence: true
   validates_uniqueness_of :user, scope: :project
 end
-
