@@ -1,7 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe UsersController, :type => :controller do
-
+describe UsersController, type: :controller do
   describe '#index' do
     it 'should return a status code of 200' do
       expect(response.code).to eq('200')
@@ -19,7 +18,7 @@ describe UsersController, :type => :controller do
       @user = User.new
     end
 
-    it 'new creates a User object" 'do
+    it 'new creates a User object" ' do
       expect(@user).to be_an_instance_of User
     end
   end
@@ -63,13 +62,12 @@ describe UsersController, :type => :controller do
       end
 
       it 'it renders an error message when accessing a private profile' do
-        expect{get 'show', params: { id: @user.friendly_id } }.to raise_error ActiveRecord::RecordNotFound
+        expect { get 'show', params: { id: @user.friendly_id } }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
 
   describe 'send hire me button message' do
-
     let(:mail) { ActionMailer::Base.deliveries }
 
     before(:each) do
@@ -81,34 +79,34 @@ describe UsersController, :type => :controller do
 
     let(:valid_params) do
       {
-          contact_form: {
-              name: 'Thomas',
-              email: 'example@example.com',
-              message: 'This is a message just for you',
-              recipient_id: @user.id
-          }
+        contact_form: {
+          name: 'Thomas',
+          email: 'example@example.com',
+          message: 'This is a message just for you',
+          recipient_id: @user.id
+        }
       }
     end
 
     let(:invalid_params) do
       {
-          contact_form: {
-              name: 'Thomas',
-              email: '',
-              message: 'This is a message just for you',
-              recipient_id: @user.id
-          }
+        contact_form: {
+          name: 'Thomas',
+          email: '',
+          message: 'This is a message just for you',
+          recipient_id: @user.id
+        }
       }
     end
 
     let(:empty_params) do
       {
-          contact_form: {
-              name: '',
-              email: '',
-              message: '',
-              recipient_id: @user.id
-          }
+        contact_form: {
+          name: '',
+          email: '',
+          message: '',
+          recipient_id: @user.id
+        }
       }
     end
 
@@ -130,7 +128,6 @@ describe UsersController, :type => :controller do
     end
 
     context 'with invalid parameters' do
-
       context 'empty form fields' do
         before(:each) { post :hire_me, params: invalid_params }
 
@@ -144,14 +141,18 @@ describe UsersController, :type => :controller do
       end
 
       context 'invalid email address' do
-        before(:each) { post :hire_me, params: { contact_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you', recipient_id: @user.id } } }
+        before(:each) do
+          post :hire_me,
+               params: { contact_form: { name: 'Thomas', email: 'example@example..com', message: 'This is a message just for you',
+                                         recipient_id: @user.id } }
+        end
 
         it 'should redirect to the previous page' do
           expect(response).to have_http_status :ok
         end
 
         it 'should respond with "Please give a valid email address"' do
-          expect(flash[:alert]).to eq ["Email is invalid"]
+          expect(flash[:alert]).to eq ['Email is invalid']
         end
       end
     end
@@ -160,7 +161,7 @@ describe UsersController, :type => :controller do
       it 'should fail with no back path' do
         request.env['HTTP_REFERER'] = nil
         post :hire_me, params: empty_params
-        expect(flash[:alert]).to include "Email is invalid"
+        expect(flash[:alert]).to include 'Email is invalid'
         expect(flash[:alert]).to include "Email can't be blank"
         expect(flash[:alert]).to include "Name can't be blank"
         expect(flash[:alert]).to include "Message can't be blank"
@@ -170,7 +171,7 @@ describe UsersController, :type => :controller do
 
   describe 'PATCH add_status_user' do
     let(:user) { FactoryBot.create(:user) }
-    let(:valid_attributes) { {status: 'Sleeping at my keyboard', user_id: user.friendly_id} }
+    let(:valid_attributes) { { status: 'Sleeping at my keyboard', user_id: user.friendly_id } }
 
     before(:each) do
       allow(request.env['warden']).to receive(:authenticate!).and_return(user)

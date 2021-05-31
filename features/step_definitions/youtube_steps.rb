@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 Given /my YouTube channel is connected/ do
   step 'user "me" has YouTube Channel connected'
 end
 
 Then /I should( not)? see a list of my videos/ do |negative|
-  correct_number = [ EventInstance.where(user: @current_user).count, 5 ].min
+  correct_number = [EventInstance.where(user: @current_user).count, 5].min
   video_links = page.all(:css, '.yt_link')
   if negative
     expect(video_links.size).to eq(0)
@@ -13,7 +15,7 @@ Then /I should( not)? see a list of my videos/ do |negative|
 end
 
 Given /^user "([^"]*)" has YouTube Channel connected/ do |user|
-  user = (user == 'me') ? @current_user : User.find_by_first_name(user)
+  user = user == 'me' ? @current_user : User.find_by_first_name(user)
   user.youtube_id = 'test_id'
   user.youtube_user_name = 'John Doe'
   user.save!
@@ -29,7 +31,7 @@ Then /^I should see "([^"]*)" before "([^"]*)"$/ do |title_1, title_2|
 end
 
 Given(/^I have some videos on project "(.*?)"$/) do |project|
-  step %Q{the project "#{project}" has 3 videos of user "me"}
+  step %(the project "#{project}" has 3 videos of user "me")
 end
 
 Given(/^the project "(.*?)" has (\d+) videos of user "(.*?)"$/) do |project_title, count, user_name|
@@ -40,8 +42,8 @@ Given(/^the project "(.*?)" has (\d+) videos of user "(.*?)"$/) do |project_titl
   user ||= FactoryBot.create :user, first_name: names[0], last_name: names[1]
   count.to_i.times do |n|
     FactoryBot.create :event_instance, title: "PP on #{project_title} - feature: #{n}",
-                       project: project, user: user, created_at: Time.new('2014', '04', '15').utc.beginning_of_day + n.minutes,
-                       youtube_tweet_sent: false
+                                       project: project, user: user, created_at: Time.new('2014', '04', '15').utc.beginning_of_day + n.minutes,
+                                       youtube_tweet_sent: false
   end
 end
 
@@ -59,7 +61,7 @@ end
 Given /^the live stream has not started$/ do
   mock = {}
   results = {}
-  mock.stub_chain(:live_streaming_details,:first).and_return(results)
+  mock.stub_chain(:live_streaming_details, :first).and_return(results)
   expect(results).to receive(:try).with(:actual_start_time).at_most(1).times.and_return(nil)
   expect(Yt::Video).to receive(:new).at_most(1).times.with(id: '11').and_return mock
 end
@@ -67,7 +69,7 @@ end
 Given /^the live stream has started$/ do
   mock = {}
   results = {}
-  mock.stub_chain(:live_streaming_details,:first).and_return(results)
+  mock.stub_chain(:live_streaming_details, :first).and_return(results)
   expect(results).to receive(:try).with(:actual_start_time).at_most(1).times.and_return(Time.now)
   expect(Yt::Video).to receive(:new).at_most(1).times.with(id: '11').and_return mock
 end
@@ -83,10 +85,10 @@ end
 
 Then(/I should( not)? see a link to watch the event's past video/) do |negate|
   if negate
-    expect(page).to have_no_css("#video_links")
+    expect(page).to have_no_css('#video_links')
   else
     within('#video_links') do
-      expect(page).to have_css("a", count: 1)
+      expect(page).to have_css('a', count: 1)
     end
-  end 
+  end
 end

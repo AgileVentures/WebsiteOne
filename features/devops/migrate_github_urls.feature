@@ -1,4 +1,5 @@
-@vcr @rake
+@vcr
+@rake
 Feature: Update from github urls to source repository model
   As a website admin,
   I want to move existing github urls to source repositories

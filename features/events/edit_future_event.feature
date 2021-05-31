@@ -66,20 +66,7 @@ Feature: Editing an event with a start date in the future
     Then the user should see the date and time adjusted for their timezone in the edit form
 
   Scenario: User in non-UTC timezone saves an existing event with no changes, during daylight savings
-    Given daylight savings are in effect now
-    And the user is in "Europe/London"
-    And edits an event with start date in standard time
-    When they save without making any changes
-    Then the event date and time should be unchanged
-
-  Scenario: User in UTC timezone edits an existing event, with no changes, that repeats but with end date in the past
-    Given it is now past the end date for the event
-    And the user is in "Etc/UTC"
-    And they edit and save the event without making any changes
-    Then the event date and time should be unchanged
-
-  Scenario: User in non-UTC timezone edits an existing event, with no changes, and daylight savings involved, that repeats but with end date in past
-    Given daylight savings are in effect and it is now past the end date for the event
+    Given the date is "2013/10/14 09:15:00 UTC"
     And the user is in "Europe/London"
     And edits an event with start date in standard time
     When they save without making any changes

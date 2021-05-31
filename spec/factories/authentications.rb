@@ -1,6 +1,7 @@
-# Read about factories at https://github.com/thoughtbot/factory_bot
+# frozen_string_literal: true
 
 FactoryBot.define do
   factory :authentication do
+    user
   end
 end

@@ -1,7 +1,8 @@
-class NullUser < User
+# frozen_string_literal: true
 
+class NullUser < User
   def persisted?
-    false 
+    false
   end
 
   def initialize(name)
@@ -15,5 +16,4 @@ class NullUser < User
   def gravatar_image
     super.gravatar_image({ default: true })
   end
-
 end

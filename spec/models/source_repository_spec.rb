@@ -1,10 +1,10 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe SourceRepository, type: :model do
-  it { is_expected.to belong_to :project}
+  it { is_expected.to belong_to :project }
 
   describe '#name' do
-    subject(:source_repository){ described_class.new }
+    subject(:source_repository) { described_class.new }
     it 'returns the empty string when url is nil' do
       expect(source_repository.name).to be_empty
     end

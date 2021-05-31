@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddKarmaBreakdownElementsToKarmaTable < ActiveRecord::Migration[5.1]
   def change
     add_column :karmas, :membership_length, :integer, default: 0

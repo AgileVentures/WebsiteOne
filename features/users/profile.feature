@@ -1,7 +1,8 @@
 @vcr
-Feature: As a user of the site
+Feature: Profile
+  "As a user of the site
   In order to get to know other users
-  I want to be able to view a user profile page with information about the user.
+  I want to be able to view a user profile page with information about the user."
 
   Background:
     Given I am on the "home" page

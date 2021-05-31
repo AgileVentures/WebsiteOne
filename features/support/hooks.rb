@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Before('@poltergeist_no_billy') do
 #   Capybara.javascript_driver = :ignore_ssl_errors
 #   Capybara.current_driver = Capybara.javascript_driver
@@ -20,6 +22,7 @@ end
 After '@javascript' do
   Capybara.send('session_pool').each do |_, session|
     next unless session.driver.is_a?(Capybara::Poltergeist::Driver)
+
     session.driver.restart
   end
 end
@@ -51,11 +54,14 @@ After '@stripe_javascript' do
   StripeMock.stop
   Capybara.send('session_pool').each do |_, session|
     next unless session.driver.is_a?(Capybara::Poltergeist::Driver)
+
     session.driver.restart
   end
 end
 
-Before('@desktop') { page.driver.resize(1228, 768) }
+Before('@desktop') do
+  page.driver.resize(1228, 768)
+end
 
 Before('@tablet') { page.driver.resize(768, 768) }
 
@@ -74,7 +80,7 @@ Before('@time-travel-step') do
   ENV['TZ'] = 'UTC'
 end
 
-After('@time-travel , @time-travel-step') do
+After('@time-travel or @time-travel-step') do
   Delorean.back_to_the_present
   ENV['TZ'] = @default_tz
 end
@@ -82,19 +88,19 @@ end
 Before('@omniauth') do
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:github] = {
-      'provider' => 'github',
-      'uid' => '12345678',
-      'info' => {
-          'email' => 'mock@email.com'
-      }
+    'provider' => 'github',
+    'uid' => '12345678',
+    'info' => {
+      'email' => 'mock@email.com'
+    }
   }
   OmniAuth.config.mock_auth[:gplus] = {
-      'provider' => 'gplus',
-      'uid' => '12345678',
-      'info' => {
-          'email' => 'mock@email.com'
-      },
-      'credentials' => {'token' => 'test_token'}
+    'provider' => 'gplus',
+    'uid' => '12345678',
+    'info' => {
+      'email' => 'mock@email.com'
+    },
+    'credentials' => { 'token' => 'test_token' }
   }
 end
 
@@ -107,19 +113,19 @@ end
 Before('@omniauth-without-email') do
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:github] = {
-      'provider' => 'github',
-      'uid' => '12345678',
-      'info' => {}
+    'provider' => 'github',
+    'uid' => '12345678',
+    'info' => {}
   }
   OmniAuth.config.mock_auth[:gplus] = {
-      'provider' => 'gplus',
-      'uid' => '12345678',
-      'info' => {},
-      'credentials' => {'token' => 'test_token'}
+    'provider' => 'gplus',
+    'uid' => '12345678',
+    'info' => {},
+    'credentials' => { 'token' => 'test_token' }
   }
 end
 
-After('@omniauth, @omniauth-with-email, @omniauth-with-invalid-credentials') do
+After('@omniauth or @omniauth-with-email or @omniauth-with-invalid-credentials') do
   OmniAuth.config.test_mode = false
 end
 

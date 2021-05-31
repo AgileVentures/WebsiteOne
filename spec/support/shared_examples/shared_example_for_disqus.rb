@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 shared_examples 'commentable with Disqus' do
-  let(:data_tags) { 
+  let(:data_tags) do
     data_tags = {
       'data-disqus-shortname' => Settings.disqus.shortname,
       'data-disqus-identifier' => entity.friendly_id,
       'data-disqus-title' => entity.title,
       'data-disqus-url' => 'test.com'
     }
-  }
+  end
 
   before :each do
     allow(controller.request).to receive(:url).and_return('test.com')

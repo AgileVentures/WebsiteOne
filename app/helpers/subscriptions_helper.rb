@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SubscriptionsHelper
   def action_text
     @sponsorship ? 'Sponsor' : 'Get'

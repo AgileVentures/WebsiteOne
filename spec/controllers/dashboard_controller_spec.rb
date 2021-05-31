@@ -1,9 +1,7 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe DashboardController, type: :controller do
-
   describe 'GET index' do
-
     it 'renders the correct template' do
       get :index
       expect(response).to render_template 'dashboard/index'
