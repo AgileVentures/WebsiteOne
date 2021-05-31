@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 RSpec.describe Plan, type: :model do
 

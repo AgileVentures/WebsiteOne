@@ -1,4 +1,4 @@
-require 'spec_helper'
+ 
 
 RSpec.describe DocumentsHelper, :type => :helper do
   describe "#metadata" do

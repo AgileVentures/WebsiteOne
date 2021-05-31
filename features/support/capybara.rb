@@ -1,10 +1,3 @@
-
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false,
-                                    phantomjs: Phantomjs.path,
-                                    phantomjs_options: ['--ssl-protocol=tlsv1.2', '--ignore-ssl-errors=yes'])
-end
-
 test_options = {
     phantomjs_options: [
         '--ignore-ssl-errors=yes',
@@ -31,6 +24,15 @@ debug_options = {
     debug: true,
     js_errors: true,
 }
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(
+    app,
+    js_errors: false,
+    phantomjs: Phantomjs.path,
+    phantomjs_options: ['--ssl-protocol=any', '--ignore-ssl-errors=no']
+  )
+end
 
 Capybara.register_driver :poltergeist_billy do |app|
   Capybara::Poltergeist::Driver.new(app, test_options)
