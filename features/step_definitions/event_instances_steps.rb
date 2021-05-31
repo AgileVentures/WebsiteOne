@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 starting_date = 1.year.ago
 

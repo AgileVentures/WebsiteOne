@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Given /^I have an avatar image at "([^"]*)"$/ do |link|
   @avatar_link = link
 end
