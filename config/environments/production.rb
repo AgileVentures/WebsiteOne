@@ -1,3 +1,4 @@
+require "active_support/core_ext/integer/time"
 Rails.application.configure do
   config.assets.js_compressor = :uglifier
   # Settings specified here will take precedence over those in config/application.rb.
@@ -14,6 +15,10 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+
+  # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
+  # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
+  # config.require_master_key = true
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -83,6 +88,12 @@ Rails.application.configure do
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
+
+   # Log disallowed deprecations.
+   config.active_support.disallowed_deprecation = :log
+
+   # Tell Active Support which deprecation messages to disallow.
+   config.active_support.disallowed_deprecation_warnings = []
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new

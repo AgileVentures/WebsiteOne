@@ -43,7 +43,7 @@ Given(/^I click on the event body for the event named "(.*?)"$/) do |name|
   page.find(:css, "#details_#{e.id}").click
 end
 
-Given(/^following events exist:$/) do |table|
+Given("following events exist:") do |table|
   table.map_column!('start_datetime') do |date|
     if date == 'TODAYS_DATE'
       date = Time.current.strftime('%c')
@@ -54,7 +54,7 @@ Given(/^following events exist:$/) do |table|
     hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
     hash.delete('project')
     hash[:repeat_ends] = false
-    Event.create!(hash)
+    create(:event, hash)
   end
 end
 
@@ -116,7 +116,7 @@ end
 
 
 
-Given(/^I am on the show page for event "([^"]*)"$/) do |name|
+Given("I am on the show page for event {string}") do |name|
   event = Event.find_by_name(name)
   visit event_path(event)
 end
@@ -216,11 +216,6 @@ end
 
 And(/^the start date is "([^"]*)"$/) do |start_date|
   expect(find("#start_date").value).to eq start_date
-end
-
-# would like this to be more robust
-Given(/^daylight savings are in effect now$/) do
-  Delorean.time_travel_to(Time.parse('2015/06/14 09:15:00 UTC'))
 end
 
 And(/^the user is in "([^"]*)"$/) do |zone|
@@ -433,11 +428,11 @@ When(/^I am creating an event$/) do
   step %(I fill in "Name" with "mob")
 end
 
-Given(/^the following event instances exist:$/) do |table|
+Given("the following event instances exist:") do |table|
   table.hashes.each do |hash|
-    hash[:event] = Event.find_by name: hash[:event]
-    hash[:project] = Project.find_by title: hash[:project]
-    EventInstance.create hash
+    hash['event'] = Event.find_by name: hash[:event]
+    hash['project'] = Project.find_by title: hash[:project]
+    create(:event_instance, hash)
   end
 end
 
@@ -445,8 +440,8 @@ Then(/^I should see a link to join or upgrade based on my (.*)$/) do |plan_name|
   join_message = 'JOIN THIS LIVE EVENT NOW'
   join_link = 'http://hangout.test'
   upgrade_message = 'THIS EVENT IS LIVE, UPGRADE NOW TO JOIN'
-  upgrade_link = '/subscriptions/new?plan=premiummob'
-  premium_mob_and_above_array = ['Premium Plus','Premium F2F', 'Premium Mob']
+  upgrade_link = '/subscriptions/new?plan=associate'
+  premium_mob_and_above_array = ['Associate']
   if premium_mob_and_above_array.include? plan_name
     expect(page).to have_link(join_message, href: join_link)
     expect(page).to have_no_link(upgrade_message, href: upgrade_link)

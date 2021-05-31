@@ -1,7 +1,8 @@
 @vcr
-Feature: As a site user
+Feature: Privacy setting
+  "As a site user
   To protect my privacy
-  I want to decide if which part of my profile should be made public
+  I want to decide if which part of my profile should be made public"
 
   Background:
     Given the following users exist
@@ -43,14 +44,6 @@ Feature: As a site user
     Given I have logged in
     And I am on my "Profile" page
     Then I should not see my email
-
-    # Bryan: To be added back later in another story
-#  Scenario: Should be preview my email as public
-#    Given I am on my profile page
-#    When I set my email to be public
-#    And I click "Preview"
-#    Then "Display email" should be checked
-#    And I should see my email in the preview
 
   @javascript
   Scenario: Should be able to make my email public
@@ -107,33 +100,3 @@ Feature: As a site user
     When I set my Hire Me to be public
     And I click "Update"
     Then I should not see button "Hire me"
-
-    # Bryan: To be added back later in another story
-#  Scenario: Should be able to make my email private again
-#    Given My email was set to public
-#    And I am on my profile page
-#    When I set my email to be private
-#    And I click "Preview"
-#    Then "Display email" should not be checked
-#    And I should not see my email in the preview
-
-    # Bryan: To be added back later in another story
-  # Scenario: GitHub profiles should be private by default
-  #   Given I am on my profile page
-  #   When I click "Preview"
-  #   Then I should not see a link to my GitHub profile
-
-    # Bryan: To be added back later in another story
-  # Scenario: Should be able to make my GitHub profiles public
-  #   Given I am on my profile page
-  #   When I set my GitHub profile to be public
-  #   And I click "Preview"
-  #   Then I should see a link to my GitHub profile
-
-    # Bryan: To be added back later in another story
-  # Scenario: Should be able to make my GitHub profile private again
-  #   Given My GitHub profile was set to public
-  #   And I am on my profile page
-  #   When I set my GitHub profile to be private
-  #   And I click "Preview"
-  #   Then I should not see a link to my GitHub profile

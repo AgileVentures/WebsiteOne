@@ -51,8 +51,8 @@ doc/**/*
 .rvmrc.env
 
 .rvmrc
-.ruby-version
-.ruby-gemset
+# .ruby-version
+# .ruby-gemset
 
 # Ignore Precompiled Assets
 public/assets/**
@@ -65,6 +65,8 @@ public/assets/**
 zeus.json
 
 .pryrc
+
+features/support/fixtures/req_cache/
 
 config/secrets.yml
 config/settings.local.yml
@@ -81,7 +83,7 @@ tags
 node_modules/*
 
 vendor/assets/javascripts/moment.min.js
-vendor/assets/javascripts/moment-timezone-with-data-2010-2020.js
+# vendor/assets/javascripts/moment-timezone-with-data-2012-2022.js
 vendor/assets/javascripts/bootstrap-datepicker.js
 vendor/assets/javascripts/bootstrap-timepicker.min.js
 vendor/assets/javascripts/typeahead.jquery.js
@@ -95,4 +97,4 @@ certbot.log
 
 .vscode/**/*
 
-db/schema.rb
+# db/schema.rb
