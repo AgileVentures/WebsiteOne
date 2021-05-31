@@ -1255,7 +1255,7 @@ http_interactions:
         \ centered\">\n  <div class=\"header content clearfix\">\n  <div class=\"logo
         logo-w\" aria-label=\"Google\"></div>\n  </div>\n  </div>\n  <div  class=\"main
         content clearfix\">\n<div class=\"banner\">\n<h1>\n  Ett konto. Hela Google.\n</h1>\n
-        \ <h2 class=\"hidden-small\">\n  Sign in to continue to Google Calendar\n
+        \ <h2 class=\"hidden-small\">\n  Sign in to continue to Google Calender\n
         \ </h2>\n</div>\n<div class=\"main-content \n  \n    no-name\n  \n  \n  \n\">\n<div
         \ class=\"card signin-card pre-shift\n  \n  \n   no-name\">\n  <img  class=\"circle-mask\"\n
         \   \n      src=\"https://ssl.gstatic.com/accounts/ui/avatar_2x.png\"\n    >\n
