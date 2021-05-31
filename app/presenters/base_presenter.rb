@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'action_view'
 
 class BasePresenter
-  include ActionView::Helpers::UrlHelper,
-    ActionView::Helpers::DateHelper,
-    ActionView::Helpers::AssetTagHelper
+  include ActionView::Helpers::AssetTagHelper
+  include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::UrlHelper
 
   delegate :url_helpers, to: 'Rails.application.routes'
 
@@ -23,7 +25,7 @@ class BasePresenter
     distance_of_time_in_words(object.created_at.to_date, Date.current)
   end
 
-  def method_missing(*arguments, &block)
-    object.send(*arguments, &block)
+  def method_missing(...)
+    object.send(...)
   end
 end

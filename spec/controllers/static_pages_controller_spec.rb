@@ -1,13 +1,12 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe StaticPagesController, :type => :controller do
-
+describe StaticPagesController, type: :controller do
   let(:user) { FactoryBot.build_stubbed(:user) }
   let(:page) { FactoryBot.create(:static_page) }
   let(:valid_attributes) do
     {
-        'title' => 'MyString',
-        'body' => 'MyText'
+      'title' => 'MyString',
+      'body' => 'MyText'
     }
   end
   let(:valid_session) { {} }
@@ -19,7 +18,6 @@ describe StaticPagesController, :type => :controller do
   end
 
   describe 'GET show' do
-
     before(:each) do
       get :show, params: { id: page.to_param }.merge(valid_session)
     end

@@ -1,6 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe User, type: :model do
+RSpec.describe User, type: :model do
   include_examples 'presentable'
   before do
     Features.slack.invites.enabled = true
@@ -9,11 +9,11 @@ describe User, type: :model do
   end
   subject { build_stubbed :user }
 
-  it "includes Filterable module" do
+  it 'includes Filterable module' do
     expect(User.ancestors).to include(Filterable)
   end
 
-  context "associations" do
+  context 'associations' do
     it { is_expected.to have_many(:subscriptions).autosave(true) }
 
     it { is_expected.to have_one :karma }
@@ -38,7 +38,7 @@ describe User, type: :model do
   it { is_expected.to respond_to :status_count }
 
   it 'should have valid factory' do
-    expect(FactoryBot.create(:user)).to be_valid
+    expect(create(:user)).to be_valid
   end
 
   it 'should be invalid without email' do
@@ -54,13 +54,13 @@ describe User, type: :model do
   end
 
   it 'should reject duplicate email addresses' do
-    user = FactoryBot.create(:user)
+    user = create(:user)
     expect(build(:user, email: user.email)).to_not be_valid
   end
 
   it 'should reject email addresses identical up to case' do
     upcased_email = subject.email.upcase
-    _existing_user = FactoryBot.create(:user, email: upcased_email)
+    _existing_user = create(:user, email: upcased_email)
     expect(build(:user, email: subject.email)).to_not be_valid
   end
 
@@ -77,18 +77,18 @@ describe User, type: :model do
   end
 
   it 'should respond to is_privileged?' do
-    expect(FactoryBot.build(:user)).to respond_to(:is_privileged?)
+    expect(build(:user)).to respond_to(:is_privileged?)
   end
 
   it "should return false if 'Settings.privileged_users' is not setup" do
     Settings.privileged_users = nil
-    expect(FactoryBot.create(:user).is_privileged?).to be false
+    expect(create(:user).is_privileged?).to be false
   end
 
   describe 'scopes' do
     context '#mail_receiver' do
-      let!(:user1) { FactoryBot.create(:user, receive_mailings: false) }
-      let!(:user2) { FactoryBot.create(:user, receive_mailings: true) }
+      let!(:user1) { create(:user, receive_mailings: false) }
+      let!(:user2) { create(:user, receive_mailings: true) }
 
       it { expect(User).to respond_to(:mail_receiver) }
 
@@ -98,8 +98,8 @@ describe User, type: :model do
     end
 
     context '#allow_to_display' do
-      let!(:user1) { FactoryBot.create(:user, display_profile: false) }
-      let!(:user2) { FactoryBot.create(:user, display_profile: true) }
+      let!(:user1) { create(:user, display_profile: false) }
+      let!(:user2) { create(:user, display_profile: true) }
 
       it { expect(User).to respond_to(:allow_to_display) }
 
@@ -110,7 +110,7 @@ describe User, type: :model do
   end
 
   describe 'slug generation' do
-    subject { FactoryBot.build(:user, slug: nil) }
+    subject { build(:user, slug: nil) }
     it 'should automatically generate a slug' do
       subject.save
       expect(subject.slug).to_not eq nil
@@ -126,7 +126,7 @@ describe User, type: :model do
     it 'should be remade when the display name changes' do
       subject.save
       slug = subject.slug
-      subject.update_attributes first_name: 'Shawn'
+      subject.update(first_name: 'Shawn')
       expect(subject.slug).to_not eq slug
     end
 
@@ -144,19 +144,19 @@ describe User, type: :model do
     before(:each) do
       Geocoder.configure(lookup: :test, ip_lookup: :test)
       sweden_address = [
-          {
-              ip: '85.228.111.204',
-              country_code: 'SE',
-              country_name: 'Sweden',
-              region_code: '28',
-              region_name: 'Västra Götaland',
-              city: 'Alingsås',
-              zipcode: '44139',
-              latitude: 57.9333,
-              longitude: 12.5167,
-              metro_code: '',
-              areacode: ''
-          }.as_json
+        {
+          ip: '85.228.111.204',
+          country_code: 'SE',
+          country_name: 'Sweden',
+          region_code: '28',
+          region_name: 'Västra Götaland',
+          city: 'Alingsås',
+          zipcode: '44139',
+          latitude: 57.9333,
+          longitude: 12.5167,
+          metro_code: '',
+          areacode: ''
+        }.as_json
       ]
 
       Geocoder::Lookup::Test.add_stub('127.0.0.1', sweden_address)
@@ -164,23 +164,22 @@ describe User, type: :model do
       Geocoder::Lookup::Test.add_stub('85.228.111.204', sweden_address)
 
       Geocoder::Lookup::Test.add_stub(
-          '50.78.167.161', [
+        '50.78.167.161', [
           {
-              ip: '50.78.167.161',
-              country_code: 'US',
-              country_name: 'United States',
-              region_code: 'WA',
-              region_name: 'Washington',
-              city: 'Seattle',
-              zipcode: '',
-              latitude: 47.6062,
-              longitude: -122.3321,
-              metro_code: '819',
-              areacode: '206'
+            ip: '50.78.167.161',
+            country_code: 'US',
+            country_name: 'United States',
+            region_code: 'WA',
+            region_name: 'Washington',
+            city: 'Seattle',
+            zipcode: '',
+            latitude: 47.6062,
+            longitude: -122.3321,
+            metro_code: '819',
+            areacode: '206'
           }.as_json
-      ]
+        ]
       )
-
     end
 
     it 'should perform geocode' do
@@ -203,12 +202,11 @@ describe User, type: :model do
 
     it 'should change location if ip changes' do
       subject.save
-      subject.update_attributes last_sign_in_ip: '50.78.167.161'
+      subject.update(last_sign_in_ip: '50.78.167.161')
       expect(subject.city).to eq 'Seattle'
       expect(subject.country_name).to eq 'United States'
       expect(subject.country_code).to eq 'US'
     end
-
   end
 
   describe '#followed_project_tags' do
@@ -216,7 +214,7 @@ describe User, type: :model do
       project_1 = build_stubbed(:project, title: 'Big Boom', tag_list: ['Big Regret', 'Boom', 'Bang'])
       project_2 = build_stubbed(:project, title: 'Black hole', tag_list: [])
       allow(subject).to receive(:following_projects).and_return([project_1, project_2])
-      expect(subject.followed_project_tags).to eq ["big regret", "boom", "bang", "big boom", "black hole", "scrum"]
+      expect(subject.followed_project_tags).to eq ['big regret', 'boom', 'bang', 'big boom', 'black hole', 'scrum']
     end
   end
 
@@ -226,7 +224,7 @@ describe User, type: :model do
     let(:user) { User.new(email: email) }
 
     it 'should construct a link to the image at gravatar.com' do
-      regex = /^http[s]:\/\/.*gravatar.*#{user_hash}/
+      regex = %r{^https://.*gravatar.*#{user_hash}}
       expect(user.gravatar_url).to match(regex)
     end
 
@@ -240,9 +238,9 @@ describe User, type: :model do
 
     context 'has filters' do
       before(:each) do
-        @user1 = FactoryBot.create(:user, latitude: 59.33, longitude: 18.06)
-        @user2 = FactoryBot.create(:user, latitude: -29.15, longitude: 27.74)
-        @project = FactoryBot.create(:project)
+        @user1 = create(:user, latitude: 59.33, longitude: 18.06)
+        @user2 = create(:user, latitude: -29.15, longitude: 27.74)
+        @project = create(:project)
       end
 
       it 'filters users for project' do
@@ -261,9 +259,9 @@ describe User, type: :model do
       subject { User.param_filter(params).allow_to_display }
 
       before(:each) do
-        FactoryBot.create(:user, first_name: 'Bob', created_at: 5.days.ago)
-        FactoryBot.create(:user, first_name: 'Marley', created_at: 2.days.ago)
-        FactoryBot.create(:user, first_name: 'Janice', display_profile: false)
+        create(:user, first_name: 'Bob', created_at: 5.days.ago)
+        create(:user, first_name: 'Marley', created_at: 2.days.ago)
+        create(:user, first_name: 'Janice', display_profile: false)
       end
 
       it 'ordered by creation date' do
@@ -279,8 +277,8 @@ describe User, type: :model do
 
     describe '.find_by_github_username' do
       it 'returns the user if it exists' do
-        user_with_github = FactoryBot.create(:user, github_profile_url: 'https://github.com/sampritipanda')
-        user_without_github = FactoryBot.create(:user, github_profile_url: nil)
+        user_with_github = create(:user, github_profile_url: 'https://github.com/sampritipanda')
+        user_without_github = create(:user, github_profile_url: nil)
         expect(User.find_by_github_username('sampritipanda')).to eq user_with_github
       end
 
@@ -290,11 +288,10 @@ describe User, type: :model do
     end
 
     describe 'user online?' do
-
       let(:user) { @user }
 
       before(:each) do
-        @user = FactoryBot.create(:user, updated_at: '2014-09-30 05:00:00 UTC')
+        @user = create(:user, updated_at: '2014-09-30 05:00:00 UTC')
       end
 
       after(:each) do
@@ -314,8 +311,7 @@ describe User, type: :model do
   end
 
   describe 'incomplete profile' do
-
-    let(:user) { FactoryBot.create(:user, :with_karma, updated_at: '2014-09-30 05:00:00 UTC') }
+    let(:user) { create(:user, :with_karma, updated_at: '2014-09-30 05:00:00 UTC') }
 
     it 'returns true if bio empty' do
       user.bio = ''
@@ -348,12 +344,10 @@ describe User, type: :model do
   end
 
   context 'karma' do
-
     describe '#commit_count_total' do
+      subject(:user) { create(:user, :with_karma) }
 
-      subject(:user) { FactoryBot.create(:user, :with_karma) }
-
-      let!(:commit_count) { FactoryBot.create(:commit_count, user: user, commit_count: 369) }
+      let!(:commit_count) { create(:commit_count, user: user, commit_count: 369) }
 
       context 'single commit count' do
         it 'returns totals commits over all projects' do
@@ -362,7 +356,7 @@ describe User, type: :model do
       end
 
       context 'multiple commit count' do
-        let!(:commit_count_2) { FactoryBot.create(:commit_count, user: user, commit_count: 123) }
+        let!(:commit_count_2) { create(:commit_count, user: user, commit_count: 123) }
         it 'returns totals commits over all projects' do
           expect(user.commit_count_total).to eq 492
         end
@@ -370,10 +364,9 @@ describe User, type: :model do
     end
 
     describe '#number_hangouts_started_with_more_than_one_participant' do
+      subject(:user) { create(:user, :with_karma) }
 
-      subject(:user) { FactoryBot.create(:user, :with_karma) }
-
-      let!(:event_instance) { FactoryBot.create(:event_instance, user: user) }
+      let!(:event_instance) { create(:event_instance, user: user) }
       context 'single event instance' do
         it 'returns total number of hangouts started with more than one participant' do
           expect(user.number_hangouts_started_with_more_than_one_participant).to eq 1
@@ -381,53 +374,52 @@ describe User, type: :model do
       end
 
       context 'two event instances' do
-        let!(:event_instance2) { FactoryBot.create(:event_instance, user: user) }
+        let!(:event_instance2) { create(:event_instance, user: user) }
         it 'returns total number of hangouts started with more than one participant' do
           expect(user.number_hangouts_started_with_more_than_one_participant).to eq 2
         end
       end
-
     end
 
     describe '#hangouts_attended_with_more_than_one_participant' do
-      subject(:user) { FactoryBot.create(:user, :with_karma, hangouts_attended_with_more_than_one_participant: 1) }
+      subject(:user) { create(:user, :with_karma, hangouts_attended_with_more_than_one_participant: 1) }
       it 'returns 1' do
         expect(user.hangouts_attended_with_more_than_one_participant).to eq 1
       end
     end
 
     describe '#profile_completeness' do
-      subject(:user) { FactoryBot.create(:user, :with_karma) }
+      subject(:user) { create(:user, :with_karma) }
       it 'calculates profile completeness' do
         expect(user.profile_completeness).to eq 6
       end
     end
 
     describe '#activity' do
-      subject(:user) { FactoryBot.create(:user, :with_karma) }
+      subject(:user) { create(:user, :with_karma) }
       it 'calculates sign in activity' do
         expect(user.activity).to eq 0
       end
     end
 
     describe '#membership_length' do
-      subject(:user) { FactoryBot.create(:user, :with_karma) }
+      subject(:user) { create(:user, :with_karma) }
       it 'calculates membership length' do
         expect(user.membership_length).to eq 0
       end
     end
 
     describe '#membership_type' do
-      subject(:user) { FactoryBot.create(:user, :with_karma) }
+      subject(:user) { create(:user, :with_karma) }
 
       it 'returns membership type' do
         expect(user.membership_type).to eq 'Basic'
       end
 
       context 'premium member' do
-        subject(:user) { FactoryBot.create(:user, :with_karma) }
-        subject(:plan) { FactoryBot.create(:plan, name: 'Premium') }
-        let!(:premium) { FactoryBot.create(:subscription, user: user, plan: plan) }
+        subject(:user) { create(:user, :with_karma) }
+        subject(:plan) { create(:plan, name: 'Premium') }
+        let!(:premium) { create(:subscription, user: user, plan: plan) }
 
         it 'returns premium' do
           expect(user.membership_type).to eq 'Premium'
@@ -436,23 +428,22 @@ describe User, type: :model do
     end
 
     describe '#karma_total' do
-      subject(:user) { FactoryBot.create(:user, :with_karma) }
+      subject(:user) { create(:user, :with_karma) }
       it 'returns 0 when user initially created' do
         expect(user.karma_total).to eq 0
       end
       context 'once associated karma object is created' do
-        subject(:user) { FactoryBot.build(:user, :with_karma, karma: FactoryBot.create(:karma, total: 50)) }
+        subject(:user) { build(:user, :with_karma, karma: FactoryBot.create(:karma, total: 50)) }
         it 'returns non zero' do
           expect(user.karma_total).to eq 50
         end
       end
     end
-
   end
 
   context 'destroying user' do
     it 'should soft destroy' do
-      user = User.new({email: 'doh@doh.com', password: '12345678'})
+      user = User.new({ email: 'doh@doh.com', password: '12345678' })
       user.save!
       user.destroy!
       expect(user.deleted_at).to_not eq nil
@@ -461,7 +452,7 @@ describe User, type: :model do
 
   context 'creating user' do
     it 'should not override existing karma' do
-      user = User.new({email: 'doh@doh.com', password: '12345678'})
+      user = User.new({ email: 'doh@doh.com', password: '12345678' })
       user.karma = Karma.new(total: 50)
       user.save!
       expect(user.karma.total).to eq 50
@@ -469,18 +460,23 @@ describe User, type: :model do
   end
 
   context 'supporting current subscription' do
-    subject(:user) { FactoryBot.create(:user, :with_karma) }
-    let(:premium) { FactoryBot.create(:plan, name: 'Premium') }
-    let(:premium_mob) { FactoryBot.create(:plan, name: 'Premium Mob') }
-    let(:premium_f2f) { FactoryBot.create(:plan, name: 'Premium F2F') }
+    subject(:user) { create(:user, :with_karma) }
+    let(:premium) { create(:plan, name: 'Premium') }
+    let(:premium_mob) { create(:plan, name: 'Premium Mob') }
+    let(:premium_f2f) { create(:plan, name: 'Premium F2F') }
     let(:payment_source) { PaymentSource::PayPal.create(identifier: '75e') }
     let(:now) { DateTime.now }
 
     # presence of type (no longer used) in the Subscriptions model is confusing ...
     # should get rid of all the STI classes ...
 
-    let!(:subscription1) { FactoryBot.create(:subscription, user: user, plan: premium, started_at: 2.days.ago, ended_at: 1.day.ago) }
-    let!(:subscription2) { FactoryBot.create(:subscription, user: user, plan: premium_mob, started_at: 1.day.ago, payment_source: payment_source) }
+    let!(:subscription1) do
+      create(:subscription, user: user, plan: premium, started_at: 2.days.ago, ended_at: 1.day.ago)
+    end
+    let!(:subscription2) do
+      create(:subscription, user: user, plan: premium_mob, started_at: 1.day.ago,
+                            payment_source: payment_source)
+    end
 
     it 'returns subscription that has started and has not ended' do
       expect(user.current_subscription.id).to eq subscription2.id
@@ -494,14 +490,14 @@ describe User, type: :model do
     # it doesn't seem to capture that we need to_i's to get the date
     # equality comparison to work ...
     context 'just started a new plan' do
-      before { subscription2.ended_at = now ; subscription2.save }
-      let!(:subscription3) { FactoryBot.create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source) }
+      before { subscription2.ended_at = now; subscription2.save }
+      let!(:subscription3) do
+        create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source)
+      end
 
       it 'returns subscription that has started right now and has not ended' do
         expect(user.current_subscription.id).to eq subscription3.id
       end
     end
-
   end
-
 end

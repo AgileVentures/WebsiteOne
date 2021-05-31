@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventDate
   def self.for(event_date)
     if event_date.blank?

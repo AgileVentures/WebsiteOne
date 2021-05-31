@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Article < ApplicationRecord
   include ActAsPage
   include UserNullable
@@ -13,14 +15,14 @@ class Article < ApplicationRecord
   # Might want to switch to rake generated paths in the future
   def url_for_me(action)
     if action == 'show'
-      "/articles/#{self.to_param}"
+      "/articles/#{to_param}"
     else
-      "/articles/#{self.to_param}/#{action}"
+      "/articles/#{to_param}/#{action}"
     end
   end
 
   def vote_value
-    self.get_upvotes.size - self.get_downvotes.size
+    get_upvotes.size - get_downvotes.size
   end
 
   def authored_by?(user)

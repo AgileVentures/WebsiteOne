@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 include ProjectsHelper
 
 shared_examples_for 'it has a hangout button' do
@@ -10,14 +12,14 @@ shared_examples_for 'it has a hangout button' do
   context 'with Settings.hangouts.ssl_host' do
     let(:data_tags) do
       start_data =  JSON.generate({
-        'title' => title,
-        'category' => category,
-        'projectId' => project_id.to_s.squish,
-        'eventId' => event_id.to_s.squish,
-        'hostId' => 'user_1',
-        'hangoutId' => '123456',
-        'callbackUrl' => "https://my_fancy_host.com/hangouts/"
-      })
+                                    'title' => title,
+                                    'category' => category,
+                                    'projectId' => project_id.to_s.squish,
+                                    'eventId' => event_id.to_s.squish,
+                                    'hostId' => 'user_1',
+                                    'hangoutId' => '123456',
+                                    'callbackUrl' => 'https://my_fancy_host.com/hangouts/'
+                                  })
       {
         'data-start-data' => start_data,
         'data-app-id' => Settings.hangouts.app_id
@@ -34,14 +36,14 @@ shared_examples_for 'it has a hangout button' do
   context 'without Settings.hangouts.ssl_host' do
     let(:data_tags) do
       start_data =  JSON.generate({
-        'title' => title,
-        'category' => category,
-        'projectId' => project_id.to_s.squish,
-        'eventId' => event_id.to_s.squish,
-        'hostId' => 'user_1',
-        'hangoutId' => '123456',
-        'callbackUrl' => "https://test.host/hangouts/"
-      })
+                                    'title' => title,
+                                    'category' => category,
+                                    'projectId' => project_id.to_s.squish,
+                                    'eventId' => event_id.to_s.squish,
+                                    'hostId' => 'user_1',
+                                    'hangoutId' => '123456',
+                                    'callbackUrl' => 'https://test.host/hangouts/'
+                                  })
       {
         'data-start-data' => start_data,
         'data-app-id' => Settings.hangouts.app_id

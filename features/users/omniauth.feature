@@ -1,8 +1,9 @@
- @silence-omniauth @vcr
+@silence-omniauth, @vcr
 Feature: Connect to social sites
-  As a registered user
+  "As a registered user
   So that I can log in  easily
-  I want to connect my account to other authorization services
+  I want to connect my account to other authorization services"
+  
   Pivotal tracker story: https://www.pivotaltracker.com/story/show/63047066
 
   Background:

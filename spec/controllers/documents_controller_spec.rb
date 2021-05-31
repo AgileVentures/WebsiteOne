@@ -1,74 +1,75 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe DocumentsController do
+RSpec.describe DocumentsController, type: :controller do
   let(:user) { @user }
   let(:document) { @document }
-  let(:valid_attributes) { {
+  let(:valid_attributes) do
+    {
       'title' => 'MyString',
       'body' => 'MyText',
-      'user_id' => "#{user.id}"
-  } }
+      'user_id' => user.id.to_s
+    }
+  end
   let(:valid_session) { {} }
   let(:categories) do
     [
-    FactoryBot.create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: "Title-1"),
-    FactoryBot.create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: "Title-2")
+      create(:document, id: 555, project_id: document.project_id, parent_id: nil, title: 'Title-1'),
+      create(:document, id: 556, project_id: document.project_id, parent_id: nil, title: 'Title-2')
     ]
   end
-  let(:params) { {:id => categories.first.to_param, project_id: document.project.friendly_id, categories: 'true'} }
+  let(:params) { { id: categories.first.to_param, project_id: document.project.friendly_id, categories: 'true' } }
 
   before(:each) do
-    @user = FactoryBot.create(:user)
-    request.env['warden'].stub :authenticate! => user
-    controller.stub :current_user => user
-    @document = FactoryBot.create(:document, title: "doc title")
+    @user = create(:user)
+    request.env['warden'].stub authenticate!: user
+    controller.stub current_user: user
+    @document = create(:document, title: 'doc title')
     allow(@document).to receive(:create_activity)
   end
 
-  it 'should raise an error if no project was found' do
-    expect {
+  it 'is expected to raise an error if no project was found' do
+    expect do
       get :show, params: { id: @document.id, project_id: @document.project.id + 3 }.merge(valid_session)
-    }.to raise_error ActiveRecord::RecordNotFound
+    end.to raise_error ActiveRecord::RecordNotFound
   end
 
   describe 'GET show' do
-
     context 'with a single project' do
       before(:each) do
-        get :show, params: {:id => document.to_param, project_id: document.project.friendly_id}.merge(valid_session)
+        get :show, params: { id: document.to_param, project_id: document.project.friendly_id }.merge(valid_session)
       end
 
-      it 'assigns the requested document as @document' do
+      it 'is expected to assign the requested document as @document' do
         expect(assigns(:document)).to eq(document)
       end
 
-      it 'renders the show template' do
+      it do
         expect(response).to render_template 'show'
       end
     end
 
     context 'with more than one project' do
       before(:each) do
-        @document_2 = FactoryBot.create(:document)
+        @document_2 = create(:document)
       end
 
-      it 'should not mistakenly render the document under the wrong project' do
-        expect {
+      it 'is expected to not mistakenly render the document under the wrong project' do
+        expect do
           get :show, params: { id: document.to_param, project_id: @document_2.project.friendly_id }
-        }.to raise_error ActiveRecord::RecordNotFound
+        end.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
 
   describe 'get_doc_categories' do
-    context 'it has categories to show' do
-      it 'renders the categories partial' do
+    context 'has categories to show' do
+      it 'is expected to render the categories partial' do
         get :get_doc_categories, params: params
-        expect(response).to render_template(:partial => '_categories')
+        expect(response).to render_template(partial: '_categories')
       end
 
-      it 'assigns the available categories to @categories' do
-        get :get_doc_categories, params: params.merge({id: document.to_param})
+      it 'is expected to assign the available categories to @categories' do
+        get :get_doc_categories, params: params.merge({ id: document.to_param })
         extended_categories = categories.push(document)
         expect(assigns(:categories)).to match_array extended_categories
       end
@@ -83,12 +84,12 @@ describe DocumentsController do
       let(:parent) { Document.find_by_id(categories.last.id) }
       let(:parent_id) { parent.id.to_s }
 
-      it 'changes the document parent id' do
+      it 'is expected to change the document parent id' do
         do_post
         expect(current_document.parent_id).to eq(parent.id)
       end
 
-      it 'assigns flash message after changing parent_id' do
+      it 'is expected to assign flash message after changing parent_id' do
         do_post
         expect(flash[:notice]).to eq('You have successfully moved Title-1 to the Title-2 section.')
       end
@@ -97,14 +98,14 @@ describe DocumentsController do
     context 'with an invalid parent id' do
       let(:parent_id) { 'invalid_id' }
 
-      it 'does not change the document parent id' do
+      it 'is not expected to change the document parent id' do
         old_parent_id = current_document.parent_id
         do_post
         current_document.reload
         expect(current_document.parent_id).to eq(old_parent_id)
       end
 
-      it 'renders a flash error message' do
+      it 'is expected to render a flash error message' do
         do_post
         expect(flash[:error]).to eq('Could not find the new parent document')
       end
@@ -112,57 +113,62 @@ describe DocumentsController do
   end
 
   describe 'GET new' do
-    before(:each) { get :new, params: { project_id: document.project.friendly_id}.merge(valid_session) }
+    before(:each) { get :new, params: { project_id: document.project.friendly_id }.merge(valid_session) }
 
-    it 'assigns a new document as @document' do
+    it 'is expected to assign a new document as @document' do
       expect(assigns(:document)).to be_a_new(Document)
     end
 
-    it 'renders the new template' do
+    it do
       expect(response).to render_template 'new'
     end
-
   end
 
   describe 'POST create' do
     describe 'with valid params' do
-      it 'creates a new Document' do
-        expect {
+      it 'is expected to create a new Document' do
+        expect do
           post :create, params: { project_id: document.project.friendly_id, document: valid_attributes }
-        }.to change(Document, :count).by 1
+        end.to change(Document, :count).by 1
       end
 
-      it 'assigns a newly created document as @document' do
-        post :create, params: {project_id: document.project.friendly_id, document: valid_attributes}.merge(valid_session)
+      it 'is expected to assign a newly created document as @document' do
+        post :create,
+             params: { project_id: document.project.friendly_id, document: valid_attributes }.merge(valid_session)
         expect(assigns(:document)).to be_a(Document)
         expect(assigns(:document)).to be_persisted
       end
 
-      it 'redirects to the created document' do
-        post :create, params: { project_id: document.project.friendly_id, document: valid_attributes }.merge(valid_session)
+      it 'is expected to redirect to the created document' do
+        post :create,
+             params: { project_id: document.project.friendly_id, document: valid_attributes }.merge(valid_session)
         expect(response).to redirect_to project_document_path(Document.last.project, Document.last)
       end
 
-      it 'creates a document create activity' do
-        expect {
+      it 'is expected to create a document create activity' do
+        expect do
           post :create, params: { project_id: document.project.friendly_id, document: valid_attributes }
-        }.to change(PublicActivity::Activity, :count).by 1
+        end.to change(PublicActivity::Activity, :count).by 1
       end
     end
 
     describe 'with invalid params' do
-      it 'assigns a newly created but unsaved document as @document' do
+      it 'is expected to assign a newly created but unsaved document as @document' do
         # Trigger the behavior that occurs when invalid params are submitted
         Document.any_instance.stub(:save).and_return(false)
-        post :create, params: { project_id: document.project.friendly_id, document: { title: 'invalid value' } }.merge(valid_session)
+        post :create,
+             params: { project_id: document.project.friendly_id,
+                       document: { title: 'invalid value' } }.merge(valid_session)
         expect(assigns(:document)).to be_a_new(Document)
         expect(assigns(:document)).to_not be_persisted
       end
 
-      it 're-renders the new template' do
+      it 'is expected to re-render the new template' do
         # Trigger the behavior that occurs when invalid params are submitted
         Document.any_instance.stub(:save).and_return(false)
-        post :create, params: { project_id: document.project.friendly_id, document: { title: 'invalid value' } }.merge(valid_session)
+        post :create,
+             params: { project_id: document.project.friendly_id,
+                       document: { title: 'invalid value' } }.merge(valid_session)
         expect(response).to render_template 'new'
       end
     end
@@ -171,15 +177,17 @@ describe DocumentsController do
   describe 'DELETE destroy' do
     before(:each) { @document = FactoryBot.create(:document) }
 
-    it 'destroys the requested document' do
-      expect {
-        delete :destroy, params: { id: @document.to_param, project_id: @document.project.friendly_id }.merge(valid_session)
-      }.to change(Document, :count).by(-1)
+    it 'is expected to destroy the requested document' do
+      expect do
+        delete :destroy,
+               params: { id: @document.to_param, project_id: @document.project.friendly_id }.merge(valid_session)
+      end.to change(Document, :count).by(-1)
     end
 
-    it 'redirects to the documents list' do
+    it 'is expected to redirect to the documents list' do
       id = @document.project.id
-      delete :destroy, params: {id: @document.to_param, project_id: @document.project.friendly_id }.merge(valid_session)
+      delete :destroy,
+             params: { id: @document.to_param, project_id: @document.project.friendly_id }.merge(valid_session)
       expect(response).to redirect_to(project_documents_path(id))
     end
   end
@@ -187,7 +195,7 @@ describe DocumentsController do
   describe 'POST mercury_update' do
     before(:each) do
       Document.stub_chain(:friendly, :find)
-        .with(@document.friendly_id).and_return(document)
+              .with(@document.friendly_id).and_return(document)
     end
 
     context 'with valid params' do
@@ -204,22 +212,22 @@ describe DocumentsController do
 
       before(:each) do
         allow(document).to receive(:create_activity)
-        allow(document).to receive(:update_attributes)
+        allow(document).to receive(:update)
           .and_return(true)
       end
 
-      it 'should render an empty string' do
+      it 'is expected to render an empty string' do
         put :mercury_update, params: params
         expect(response.body).to be_empty
       end
 
-      it 'should update the document with the new title and body' do
+      it 'is expected to update the document with the new title and body' do
         put :mercury_update, params: params
-        expect(document).to have_received(:update_attributes)
+        expect(document).to have_received(:update)
           .with({ title: 'my title', body: 'document body' })
       end
 
-      it 'should create a document update activity' do
+      it 'is expected to create a document update activity' do
         put :mercury_update, params: params
         expect(document).to have_received(:create_activity)
           .with(:update, owner: user)

@@ -1,11 +1,12 @@
-module EventHelper
+# frozen_string_literal: true
 
+module EventHelper
   def current_occurrence_time(event)
     time = nested_hash_value(event, :time)
     return nil if time.nil?
 
     event_date = time.strftime("%A, #{time.day.ordinalize} %b")
-    "#{event_date} at #{time.strftime("%I:%M%P (%Z)")}"
+    "#{event_date} at #{time.strftime('%I:%M%P (%Z)')}"
   end
 
   def topic(event, event_schedule)
@@ -13,11 +14,11 @@ module EventHelper
   end
 
   def format_timepicker(datetime)
-    !datetime.blank? ? datetime.strftime('%I:%M %P') : ''
+    datetime.blank? ? '' : datetime.strftime('%I:%M %P')
   end
 
   def format_datepicker(datetime)
-    !datetime.blank? ? datetime.strftime('%Y-%m-%d') : ''
+    datetime.blank? ? '' : datetime.strftime('%Y-%m-%d')
   end
 
   def format_time_range(event)
@@ -36,12 +37,12 @@ module EventHelper
 
   def show_local_time_range(time, duration)
     start_time = local_time(time, '%H:%M')
-    end_time = local_time(time+duration*60, '%H:%M (%Z)')
+    end_time = local_time(time + duration * 60, '%H:%M (%Z)')
     "#{start_time}-#{end_time}"
   end
 
   def google_calendar_link(event)
-    "https://calendar.google.com/calendar/render?action=TEMPLATE&dates=#{event.next_event_occurrence_with_time[:time].strftime('%Y%m%dT%H%M%SZ')}%2f#{(event.next_event_occurrence_with_time[:time] + @event.duration*60).strftime('%Y%m%dT%H%M%SZ')}&sprop=website:#{auto_link(event.description)}&text=#{event.name}&location=online&sprop=name:AgileVentures&details=#{event.description}"
+    "https://calendar.google.com/calendar/render?action=TEMPLATE&dates=#{event.next_event_occurrence_with_time[:time].strftime('%Y%m%dT%H%M%SZ')}%2f#{(event.next_event_occurrence_with_time[:time] + @event.duration * 60).strftime('%Y%m%dT%H%M%SZ')}&sprop=website:#{auto_link(event.description)}&text=#{event.name}&location=online&sprop=name:AgileVentures&details=#{event.description}"
   end
 
   def set_column_width
@@ -49,7 +50,8 @@ module EventHelper
   end
 
   def show_private_event_info?
-    return true unless @event.for == 'Premium Mob Members'
-    current_user and current_user.allowed_to_attend?
+    return true unless @event.for == 'Associate Members'
+
+    current_user&.allowed_to_attend?
   end
 end

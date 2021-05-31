@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VisitorsController < ApplicationController
   include ApplicationHelper
 

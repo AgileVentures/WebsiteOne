@@ -1,0 +1,186 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://hn.inspectlet.com/ginit/1674848404
+    body:
+      encoding: UTF-8
+      string: w=1674848404&uid=-1&sid=-1&pad=-1&nv=true&u=http%3A%2F%2F127.0.0.1%3A59164%2Fevents%2Fdaily-standup&or=http%3A%2F%2F127.0.0.1%3A59164&ref=http%3A%2F%2F127.0.0.1%3A59164%2Fevents%2Fdaily-standup%2Fedit&title=AgileVentures&pw=1024&ph=768&ism=false&cloc=undefined&sd=768&st=1131&dbgk=&jv=4&identity=&targcv%5Blochref%5D=http%3A%2F%2F127.0.0.1%3A59164%2Fevents%2Fdaily-standup&targcv%5Bdoctitle%5D=AgileVentures&targcv%5Blptitle%5D=AgileVentures&targcv%5Blpurl%5D=http%3A%2F%2F127.0.0.1%3A59164%2Fevents%2Fdaily-standup&targcv%5B%24browser%5D%5Bwebkit%5D=true&targcv%5B%24browser%5D%5Bversion%5D=538.1&targcv%5B%24browser%5D%5Bsafari%5D=true&targcv%5BuserAgent%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bmobchua%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bref%5D=http%3A%2F%2F127.0.0.1%3A59164%2Fevents%2Fdaily-standup%2Fedit&targcv%5Bnv%5D=true&isvp=false
+    headers:
+      Accept:
+      - application/json, text/javascript, */*; q=0.01
+      Referer:
+      - http://127.0.0.1:59164/events/daily-standup
+      Origin:
+      - http://127.0.0.1:59164
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=UTF-8
+      Content-Length:
+      - '1027'
+      Connection:
+      - close
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - hn.inspectlet.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - close
+      X-Powered-By:
+      - Express
+      Cache-Control:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - http://127.0.0.1:59164
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Access-Control-Allow-Headers:
+      - X-Requested-With, Content-Type
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '27'
+      Date:
+      - Mon, 24 May 2021 05:34:41 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"noinspectlet":"crawlbot"}'
+  recorded_at: Sat, 01 Feb 2014 09:15:05 GMT
+- request:
+    method: post
+    uri: http://hn.inspectlet.com/ginit/1674848404
+    body:
+      encoding: UTF-8
+      string: w=1674848404&uid=-1&sid=-1&pad=-1&nv=true&u=http%3A%2F%2F127.0.0.1%3A59164%2Fevents%2Fdaily-standup%2Fedit&or=http%3A%2F%2F127.0.0.1%3A59164&ref=&title=New+Events+%7C+AgileVentures&pw=1024&ph=768&ism=false&cloc=undefined&sd=768&st=1675&dbgk=&jv=4&identity=&targcv%5Blochref%5D=http%3A%2F%2F127.0.0.1%3A59164%2Fevents%2Fdaily-standup%2Fedit&targcv%5Bdoctitle%5D=New+Events+%7C+AgileVentures&targcv%5Blptitle%5D=New+Events+%7C+AgileVentures&targcv%5Blpurl%5D=http%3A%2F%2F127.0.0.1%3A59164%2Fevents%2Fdaily-standup%2Fedit&targcv%5B%24browser%5D%5Bwebkit%5D=true&targcv%5B%24browser%5D%5Bversion%5D=538.1&targcv%5B%24browser%5D%5Bsafari%5D=true&targcv%5BuserAgent%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bmobchua%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bref%5D=&targcv%5Bnv%5D=true&isvp=false
+    headers:
+      Accept:
+      - application/json, text/javascript, */*; q=0.01
+      Referer:
+      - http://127.0.0.1:59164/events/daily-standup/edit
+      Origin:
+      - http://127.0.0.1:59164
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=UTF-8
+      Content-Length:
+      - '969'
+      Connection:
+      - close
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-GB,*
+      Host:
+      - hn.inspectlet.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - close
+      X-Powered-By:
+      - Express
+      Cache-Control:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - http://127.0.0.1:59164
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Access-Control-Allow-Headers:
+      - X-Requested-With, Content-Type
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '27'
+      Date:
+      - Mon, 24 May 2021 05:34:42 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"noinspectlet":"crawlbot"}'
+  recorded_at: Sat, 01 Feb 2014 09:15:05 GMT
+- request:
+    method: post
+    uri: http://hn.inspectlet.com/ginit/1674848404
+    body:
+      encoding: UTF-8
+      string: w=1674848404&uid=-1&sid=-1&pad=-1&nv=true&u=http%3A%2F%2F127.0.0.1%3A53554%2Fevents%2Fdaily-standup%2Fedit&or=http%3A%2F%2F127.0.0.1%3A53554&ref=&title=New+Events+%7C+AgileVentures&pw=1024&ph=768&ism=false&cloc=undefined&sd=768&st=1675&dbgk=&jv=4&identity=&targcv%5Blochref%5D=http%3A%2F%2F127.0.0.1%3A53554%2Fevents%2Fdaily-standup%2Fedit&targcv%5Bdoctitle%5D=New+Events+%7C+AgileVentures&targcv%5Blptitle%5D=New+Events+%7C+AgileVentures&targcv%5Blpurl%5D=http%3A%2F%2F127.0.0.1%3A53554%2Fevents%2Fdaily-standup%2Fedit&targcv%5B%24browser%5D%5Bwebkit%5D=true&targcv%5B%24browser%5D%5Bversion%5D=538.1&targcv%5B%24browser%5D%5Bsafari%5D=true&targcv%5BuserAgent%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bmobchua%5D=Mozilla%2F5.0+(Macintosh%3B+Intel+Mac+OS+X)+AppleWebKit%2F538.1+(KHTML%2C+like+Gecko)+PhantomJS%2F2.1.1+Safari%2F538.1&targcv%5Bref%5D=&targcv%5Bnv%5D=true&isvp=false
+    headers:
+      Accept:
+      - application/json, text/javascript, */*; q=0.01
+      Referer:
+      - http://127.0.0.1:53554/events/daily-standup/edit
+      Origin:
+      - http://127.0.0.1:53554
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=UTF-8
+      Content-Length:
+      - '969'
+      Connection:
+      - close
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-US,*
+      Host:
+      - hn.inspectlet.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      Connection:
+      - close
+      X-Powered-By:
+      - Express
+      Cache-Control:
+      - no-cache
+      Access-Control-Allow-Origin:
+      - http://127.0.0.1:53554
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Access-Control-Allow-Headers:
+      - X-Requested-With, Content-Type
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '27'
+      Date:
+      - Sun, 30 May 2021 18:53:48 GMT
+      Via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"noinspectlet":"crawlbot"}'
+  recorded_at: Sat, 01 Feb 2014 09:15:04 GMT
+recorded_with: VCR 6.0.0

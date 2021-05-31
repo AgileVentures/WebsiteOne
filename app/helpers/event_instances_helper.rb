@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'securerandom'
 module EventInstancesHelper
   def generate_event_instance_id(user, project_id = nil)
@@ -5,6 +7,6 @@ module EventInstancesHelper
   end
 
   def watchable?(event_instance)
-    true unless event_instance.for == "Premium Mob Members"
+    true unless event_instance.for == 'Premium Mob Members'
   end
 end
