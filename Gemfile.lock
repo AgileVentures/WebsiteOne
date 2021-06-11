@@ -117,7 +117,7 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    brakeman (5.0.1)
+    brakeman (5.0.4)
     builder (3.2.4)
     bullet (6.1.4)
       activesupport (>= 3.0.0)
