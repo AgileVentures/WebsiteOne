@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ErrorLoggingService
   def initialize(error)
     @error = error

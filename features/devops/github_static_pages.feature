@@ -1,4 +1,5 @@
-@vcr @rake
+@vcr
+@rake
 Feature: Github Static Pages
   As the admin
   So that we have static page content that is easily editable via Github

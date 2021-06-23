@@ -1,10 +1,9 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe EventInstancesController do
-  let(:params) { {id: '333', host_id: 'host', title: 'title'} }
+RSpec.describe EventInstancesController do
+  let(:params) { { id: '333', host_id: 'host', title: 'title' } }
 
   before do
-    allow(controller).to receive(:allowed?).and_return(true)
     allow(HangoutNotificationService).to receive(:with)
     allow(YoutubeNotificationService).to receive(:with)
     request.env['HTTP_ORIGIN'] = 'http://test.com'
@@ -12,8 +11,8 @@ describe EventInstancesController do
 
   describe '#index' do
     before do
-      FactoryBot.create_list(:event_instance, 3)
-      FactoryBot.create_list(:event_instance, 3, updated: 1.hour.ago)
+      create_list(:event_instance, 3)
+      create_list(:event_instance, 3, updated: 1.hour.ago)
     end
 
     context 'show all hangouts/event-instances' do
@@ -109,19 +108,19 @@ describe EventInstancesController do
     it 'update EventInstance with permitted params' do
       allow(Time).to receive(:now).and_return DateTime.parse('2016-06-23 13:57:37.073318243')
       upd_params = {
-        "title"=>"title",
-        "project_id"=>"project_id",
-        "event_id"=>"event_id",
-        "category"=>"category",
-        "user_id"=>"host",
-        "hangout_participants_snapshots_attributes"=>[{"participants"=>"one, two"}],
-        "participants"=>"one, two",
-        "hangout_url"=>"test_url",
-        "yt_video_id"=>"video",
-        "hoa_status"=>"started",
-        "url_set_directly"=>nil,
-        "updated_at"=>Time.now,
-        "youtube_tweet_sent"=>nil
+        'title' => 'title',
+        'project_id' => 'project_id',
+        'event_id' => 'event_id',
+        'category' => 'category',
+        'user_id' => 'host',
+        'hangout_participants_snapshots_attributes' => [{ 'participants' => 'one, two' }],
+        'participants' => 'one, two',
+        'hangout_url' => 'test_url',
+        'yt_video_id' => 'video',
+        'hoa_status' => 'started',
+        'url_set_directly' => nil,
+        'updated_at' => Time.now,
+        'youtube_tweet_sent' => nil
       }
       allow_any_instance_of(EventInstance).to receive(:update).with(upd_params)
       get :update, params: params.merge(upd_params)
@@ -130,12 +129,12 @@ describe EventInstancesController do
     context 'required parameters are missing' do
       it 'raises exception on missing host_id' do
         params[:host_id] = nil
-        expect{ get :update, params: params }.to raise_error(ActionController::ParameterMissing)
+        expect { get :update, params: params }.to raise_error(ActionController::ParameterMissing)
       end
 
       it 'raises exception on missing title' do
         params[:title] = nil
-        expect{ get :update, params: params }.to raise_error(ActionController::ParameterMissing)
+        expect { get :update, params: params }.to raise_error(ActionController::ParameterMissing)
       end
     end
   end

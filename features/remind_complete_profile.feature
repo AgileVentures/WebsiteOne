@@ -1,9 +1,9 @@
 @vcr
 Feature: Remind User complete profile
-  As site admin
+  "As site admin
   In order to increase the quality of our users database
   I would like to present users with incomplete user profiles with a popup
-  reminding them about the benefits of adding skills, name, description(bio), etc.
+  reminding them about the benefits of adding skills, name, description(bio), etc."
 
   Scenario: User has incomplete profile from home page
     Given I exist as a user

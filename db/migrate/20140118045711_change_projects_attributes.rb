@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeProjectsAttributes < ActiveRecord::Migration[4.2]
   def up
     change_table :projects do |t|
@@ -5,6 +7,3 @@ class ChangeProjectsAttributes < ActiveRecord::Migration[4.2]
     end
   end
 end
-
-
-

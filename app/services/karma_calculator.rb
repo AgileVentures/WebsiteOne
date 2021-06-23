@@ -1,5 +1,6 @@
-class KarmaCalculator
+# frozen_string_literal: true
 
+class KarmaCalculator
   attr_reader :user
 
   def initialize(user)
@@ -22,14 +23,16 @@ class KarmaCalculator
 
   def sum_elements
     membership_length + profile_completeness + activity + number_hangouts_started_with_more_than_one_participant +
-    number_github_contributions + event_participation
+      number_github_contributions + event_participation
   end
 
-  def membership_length # 6
+  # 6
+  def membership_length
     @membership_length ||= user.membership_length
   end
 
-  def profile_completeness # 10
+  # 10
+  def profile_completeness
     @profile_completeness ||= begin
       awarded = user.profile_completeness
       awarded += user.authentications.count * 100
@@ -45,7 +48,8 @@ class KarmaCalculator
     @number_hangouts_started_with_more_than_one_participant ||= user.number_hangouts_started_with_more_than_one_participant
   end
 
-  def activity # 6
+  # 6
+  def activity
     @activity ||= user.activity
   end
 

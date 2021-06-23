@@ -1,9 +1,9 @@
-class CardsController < ApplicationController
+# frozen_string_literal: true
 
+class CardsController < ApplicationController
   before_action :authenticate_user!
 
-  def new
-  end
+  def new; end
 
   def create
     customer = Stripe::Customer.create(email: params[:stripeEmail])
@@ -16,8 +16,7 @@ class CardsController < ApplicationController
     @error = true
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
@@ -39,5 +38,4 @@ class CardsController < ApplicationController
   def generate_test_token
     StripeMock.create_test_helper.generate_card_token
   end
-
 end

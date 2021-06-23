@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^the following commit_counts exist:$/) do |table|
   hash = {}
   project = nil
@@ -12,4 +14,3 @@ Given(/^the following commit_counts exist:$/) do |table|
   CommitCount.new(hash).save!
   user.follow project
 end
-
