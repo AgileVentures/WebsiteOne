@@ -1,8 +1,8 @@
 @vcr
-Feature: Linking and unlinking of github account
-  As a registered user
+Feature: Linking and unlinking of GitHub account
+  "As a registered user
   So that i can use github as authorization
-  I want ability to link and unlink github as authorization provider
+  I want ability to link and unlink github as authorization provider"
 
   @omniauth
   Scenario: Link my GitHub profile link to my profile: success

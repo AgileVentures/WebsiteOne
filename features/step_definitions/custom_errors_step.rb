@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Then(/^the page should be titled "(.*?)"$/) do |title|
-  expect(page.source).to have_css("title", :text => title, :visible => false)
+  expect(page.source).to have_css('title', text: title, visible: false)
 end
 
 And(/^the response status should be "([^"]*)"$/) do |code|

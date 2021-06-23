@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe LanguageProject, type: :model do
   it 'validate uniqueness of language name' do

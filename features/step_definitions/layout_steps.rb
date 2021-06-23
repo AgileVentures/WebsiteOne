@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Then(/^I(?:| should) see a navigation header$/) do
   expect(page).to have_selector('.masthead')
 end

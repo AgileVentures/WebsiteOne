@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe EventInstancesHelper, type: :helper do
   let(:uuid) { '82c2b3b8-42f7-442b-be64-86c2f407b2ed' }

@@ -1,10 +1,10 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe EventInstancePresenter do
-  let(:presenter){ EventInstancePresenter.new(hangout) }
+RSpec.describe EventInstancePresenter do
+  let(:presenter) { EventInstancePresenter.new(hangout) }
 
   context 'all fields are present' do
-    let(:hangout){ FactoryBot.build_stubbed(:event_instance, created: '1979-10-14 11:15 UTC') }
+    let(:hangout) { build_stubbed(:event_instance, created: '1979-10-14 11:15 UTC') }
 
     it 'displays created time' do
       expect(presenter.created_at).to eq('11:15 14/10')
@@ -19,13 +19,13 @@ describe EventInstancePresenter do
     end
 
     it 'displays project' do
-      expect(presenter.project_link).to match %Q(<a href="#{project_path(hangout.project)}")
-      expect(presenter.project_link).to match "#{hangout.project.title}"
+      expect(presenter.project_link).to match %(<a href="#{project_path(hangout.project)}")
+      expect(presenter.project_link).to match hangout.project.title.to_s
     end
 
     it 'displays event' do
-      expect(presenter.event_link).to match %Q(<a href="#{event_path(hangout.event)}")
-      expect(presenter.event_link).to match "#{hangout.event.name}"
+      expect(presenter.event_link).to match %(<a href="#{event_path(hangout.event)}")
+      expect(presenter.event_link).to match hangout.event.name.to_s
     end
 
     it 'returns host' do
@@ -33,14 +33,16 @@ describe EventInstancePresenter do
     end
 
     it 'returns an array of participants' do
-      participant = FactoryBot.create(:user, gplus: hangout.participants.to_unsafe_h.first.last['person']['id'])
-
-      expect(presenter.participants.count).to eq(2)
-      expect(presenter.participants.first).to eq(participant)
+      expect(presenter.participants).to eq(
+        [
+          NullUser.new('Anonymous'),
+          NullUser.new('Anonymous')
+        ]
+      )
     end
 
     it 'do not show the host in the list of participants' do
-      FactoryBot.create(:user, gplus: hangout.participants.to_unsafe_h.first.last['person']['id'])
+      create(:user, gplus: hangout.participants.to_unsafe_h.first.last['person']['id'])
       expect(presenter.participants).not_to include(hangout.user)
     end
 
@@ -62,14 +64,16 @@ describe EventInstancePresenter do
   end
 
   context 'some fields are missing' do
-    let(:hangout){ FactoryBot.build_stubbed(:event_instance,
-                         title: nil,
-                         category: nil,
-                         project: nil,
-                         event: nil,
-                         user: nil,
-                         yt_video_id: nil,
-                         participants: nil) }
+    let(:hangout) do
+      build_stubbed(:event_instance,
+                    title: nil,
+                    category: nil,
+                    project: nil,
+                    event: nil,
+                    user: nil,
+                    yt_video_id: nil,
+                    participants: nil)
+    end
 
     it 'displays title' do
       expect(presenter.title).to eq('No title given')
@@ -96,12 +100,13 @@ describe EventInstancePresenter do
     end
 
     it 'returns an array with nullUser if participant gplus_id is not found' do
-      hangout.participants = ActionController::Parameters.new({ '0' => { person: { displayName: 'Bob', id: 'not_registered'} } } )
+      hangout.participants = ActionController::Parameters.new({ '0' => { person: { displayName: 'Bob',
+                                                                                   id: 'not_registered' } } })
       expect(presenter.participants.first.display_name).to eq('Bob')
     end
 
     it "don't throw an exception when have nil person at participants" do
-      hangout.participants = ActionController::Parameters.new( { '0' => { person: nil } } )
+      hangout.participants = ActionController::Parameters.new({ '0' => { person: nil } })
       expect(presenter.participants).to be_empty
     end
 
@@ -117,6 +122,4 @@ describe EventInstancePresenter do
       expect(presenter.video_embed_link).to be_nil
     end
   end
-
 end
-

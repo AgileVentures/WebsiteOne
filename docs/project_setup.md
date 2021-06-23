@@ -69,7 +69,15 @@ If you then try to install the `eventmachine` gem, it also fails like this: http
 
     brew link openssl --force
 
+Another option is to point the gem to your open ssl settings:
+
+```
+gem install eventmachine -- --with-openssl-dir=/usr/local/opt/openssl@1.1
+```
+
 After you do that, re-try running `bundle install` and you should be good to go on to the next step.
+
+
     
 #### PostgreSQL and the `pg` gem
 The database used is [postgreSQL](https://www.postgresql.org/).  You need to have this installed and running on your local machine. 
@@ -98,7 +106,7 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 
 ### Step 3: Request the .env file and confirm your locale
     
-* You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.  The `.env` file should go in the root of the WSO project.
+* You'll have to get the `.env` file from one of the project admins.  The project won't work without it.  The `.env` file should go in the root of the WSO project.
 * Add the following to that file:
 
 ```

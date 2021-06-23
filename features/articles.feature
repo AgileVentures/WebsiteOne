@@ -1,8 +1,8 @@
 @vcr
 Feature:
-  As a developer
+  "As a developer
   So that I may share or retrieve knowledge between the AgileVentures group
-  I would like to be able to create, read and update special documents in the guides section
+  I would like to be able to create, read and update special documents in the guides section"
 
   Background:
     Given the following articles exist:
@@ -10,12 +10,6 @@ Feature:
       | Ruby is on Fire          | Fire is fire and sunny           | Ruby, Rails        |
       | Rails is not for trains  | Train `tracks` do not work       | Rails              |
       | JQuery cannot be queried | JQuery moves **towards** the ... | Javascript, JQuery |
-
-#  Scenario: There should be a link to the articles page on the navbar
-#    Given I am on the home page
-#    Then I should see "Articles" within the navigation bar
-#    When I click "Articles" within the navigation bar
-#    Then I should be on the "Articles" page
 
   Scenario: There should be a list of articles on the index page
     Given I am on the "Articles" page

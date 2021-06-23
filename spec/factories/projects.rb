@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  sequence(:tag) {|n| "tag_#{n}"}
+  sequence(:tag) { |n| "tag_#{n}" }
 
   factory :project do
-    sequence(:title) {|n| "Title #{n}"}
-    sequence(:slug) {|n| "title-#{n}"}
-    description { "Warp fields stabilize." }
+    sequence(:title) { |n| "Title #{n}" }
+    sequence(:slug) { |n| "title-#{n}" }
+    description { 'Warp fields stabilize.' }
     pitch { "'I AM the greatest!' - M. Ali" }
-    status { "We feel your presence." }
+    status { 'We feel your presence.' }
 
     factory :project_with_tags do
       transient do
@@ -19,5 +21,4 @@ FactoryBot.define do
       end
     end
   end
-
 end

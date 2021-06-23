@@ -1,36 +1,36 @@
-require "spec_helper"
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 describe DocumentsController do
-  describe "routing" do
-
-    # TODO write route tests
-    #it "routes to #index" do
+  describe 'routing' do
+    # TODO: write route tests
+    # it "routes to #index" do
     #  expect(get("/documents")).to route_to("documents#index")
-    #end
+    # end
     #
-    #it "routes to #new" do
+    # it "routes to #new" do
     #  expect(get("/documents/new")).to route_to("documents#new")
-    #end
+    # end
     #
-    #it "routes to #show" do
+    # it "routes to #show" do
     #  expect(get("/documents/1")).to route_to("documents#show", id: "1")
-    #end
+    # end
     #
-    #it "routes to #edit" do
+    # it "routes to #edit" do
     #  expect(get("/documents/1/edit")).to route_to("documents#edit", id: "1")
-    #end
+    # end
     #
-    #it "routes to #create" do
+    # it "routes to #create" do
     #  expect(post("/documents")).to route_to("documents#create")
-    #end
+    # end
     #
-    #it "routes to #update" do
+    # it "routes to #update" do
     #  expect(put("/documents/1")).to route_to("documents#update", :id => "1")
-    #end
+    # end
     #
-    #it "routes to #destroy" do
+    # it "routes to #destroy" do
     #  expect(delete("/documents/1")).to route_to("documents#destroy", :id => "1")
-    #end
-
+    # end
   end
 end

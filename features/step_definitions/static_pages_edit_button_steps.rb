@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 def github_edit_url
-  "https://github.com/AgileVentures/AgileVentures/edit/master/#{static_page.tr(' ','_').upcase}.md"
+  "https://github.com/AgileVentures/AgileVentures/edit/master/#{static_page.tr(' ', '_').upcase}.md"
 end
 
 def static_page
@@ -19,5 +21,5 @@ Then(/^I should see an 'Edit Page' button$/) do
 end
 
 Then(/^'Edit Page' should link to github edit page$/) do
-	expect(page).to have_link('Edit Page', href: github_edit_url)
+  expect(page).to have_link('Edit Page', href: github_edit_url)
 end

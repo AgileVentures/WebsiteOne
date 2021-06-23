@@ -1,5 +1,5 @@
 version: v1.0
-name: Test WebsiteOne
+name: WebsiteOne - CI
 agent:
   machine:
     type: e1-standard-2
@@ -10,6 +10,12 @@ blocks:
       env_vars:
         - name: RAILS_ENV
           value: test
+        - name: CC_TEST_REPORTER_ID
+          value: c70a143fe21eb298eb2a98131dfc592947ea7ebfb87fbff9d9f69e724721d636
+        - name: STRIPE_SECRET_KEY
+          value: sk_test_4O7CTmoS1jwlDAX3z1abLYWm
+        - name: STRIPE_PUBLISHABLE_KEY
+          value: pk_test_4O7CBxlnqMFgw0BAmpKmOjTn
       secrets:
         - name: stripe-sk
         - name: stripe-pbk
@@ -20,12 +26,13 @@ blocks:
           commands:
             - checkout
             - sem-service start postgres 11
-            - sem-version ruby 2.6.3
+            - sem-version ruby 3.0.0
             - sudo -u postgres createuser -s semaphore
             - createdb -U postgres -h 0.0.0.0 websiteone_test
             - change-phantomjs-version 2.1.1
             - cache restore
-            - bundle install --deployment --path vendor/bundle
+            - bundle install --path vendor/bundle
+            - mkdir -p tmp/pids
             - npm install bower
             - npm install
             - cache store
@@ -35,5 +42,5 @@ blocks:
             - ./cc-test-reporter before-build
             - 'bundle exec rake jasmine:ci'
             - 'bundle exec rake ci:tests'
-            - cat $HOME/cucumber_report.json || true
-            - ./cc-test-reporter after-build
+            # - cat $HOME/cucumber_report.json || true
+            -  ./cc-test-reporter after-build

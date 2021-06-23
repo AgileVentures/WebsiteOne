@@ -1,5 +1,6 @@
-module ApplicationHelper
+# frozen_string_literal: true
 
+module ApplicationHelper
   include ArticlesHelper
   include DisqusHelper
 
@@ -17,7 +18,7 @@ module ApplicationHelper
   end
 
   def privileged_visitor?
-    current_user && current_user.is_privileged?
+    current_user&.is_privileged?
   end
 
   def static_page_path(page)
@@ -25,13 +26,13 @@ module ApplicationHelper
   end
 
   def is_in_static_page?(static_page_name)
-    return params[:controller] == 'static_pages' &&
+    params[:controller] == 'static_pages' &&
       params[:action] == 'show' &&
       params[:id] == StaticPage.url_for_me(static_page_name)
   end
 
   def resource
-    @resource ||= User.new({karma: Karma.new})
+    @resource ||= User.new({ karma: Karma.new })
   end
 
   def devise_mapping
@@ -39,7 +40,7 @@ module ApplicationHelper
   end
 
   def current_projects
-    Project.where(status: ["active", "Active"]).order('title ASC').order('commit_count DESC NULLS LAST')
+    Project.where(status: %w(active Active)).order('title ASC').order('commit_count DESC NULLS LAST')
   end
 
   def date_format(date)
@@ -47,27 +48,41 @@ module ApplicationHelper
   end
 
   DISPLAY_NAME = {
-      'github' => 'GitHub',
-      'gplus' => 'Google'
-  }
+    'github' => 'GitHub',
+    'gplus' => 'Google'
+  }.freeze
 
   FA_ICON = {
-      'github' => 'github-alt',
-      'gplus' => 'google'
-  }
+    'github' => 'github-alt',
+    'gplus' => 'google'
+  }.freeze
 
-  def social_button(provider, options={})
+  def social_button(provider, options = {})
     provider = provider.downcase
-
     options[:url] = root_path unless options[:url].present?
 
-    text = options[:text] || (options[:delete] ? 'Remove' : prefix)
-    path = options[:delete] ? "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}" :
-        "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(/^[\/]*/, '/'))}"
+    options[:delete] ? remove_social_account_button(provider, options) : add_social_account_button(provider, options)
+  end
+
+  def add_social_account_button(provider, options)
+    text = options[:text] || prefix
+    path = "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(%r{^/*}, '/'))}"
+
+    # Underneath uses CSRF protection workaround provided by https://github.com/cookpad/omniauth-rails_csrf_protection
+    link_to path, method: :post, class: "btn btn-block btn-social btn-#{provider} #{options[:extra_class]}" do
+      raw <<-HTML
+        <i class="fa fa-#{FA_ICON[provider]}"></i> #{text} #{DISPLAY_NAME[provider]}
+      HTML
+    end
+  end
+
+  def remove_social_account_button(provider, options)
+    text = options[:text] || 'Remove'
+    path = "/auth/destroy/#{current_user.authentications.where(provider: provider).first.id}"
 
     raw <<-HTML
     <div data-no-turbolink>
-      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}"  #{'method="delete" ' if options[:delete]}href="#{path}">
+      <a class="btn btn-block btn-social btn-#{provider} #{options[:extra_class]}" method="delete" href="#{path}">
         <i class="fa fa-#{FA_ICON[provider]}"></i> #{text} #{DISPLAY_NAME[provider]}
       </a>
     </div>
@@ -79,23 +94,23 @@ module ApplicationHelper
   end
 
   def supported_third_parties
-    %w{ github gplus }
+    %w(github gplus)
   end
 
   def valid_email?(email)
-    !!(email =~ /\A([^@\s]+)@((?:[\w]+\.)+[a-z]{2,})\z/i)
+    !!(email =~ /\A([^@\s]+)@((?:\w+\.)+[a-z]{2,})\z/i)
   end
 
-  def custom_css_btn(text, icon_class, path, options={})
+  def custom_css_btn(text, icon_class, path, options = {})
     s = ''
     options.each do |k, v|
       if v.is_a?(Hash)
         # Bryan: this extra level is to support data tags
         v.each do |key, value|
-          s = %Q{#{s} #{k}-#{key.to_s.tr('_', '-')}="#{value}"}
+          s = %(#{s} #{k}-#{key.to_s.tr('_', '-')}="#{value}")
         end
       else
-        s = %Q{#{s} #{k}="#{v}"}
+        s = %(#{s} #{k}="#{v}")
       end
     end
     # Bryan: data-link-text attribute is used to find this element in the tests
@@ -138,12 +153,12 @@ module ApplicationHelper
   end
 
   def default_meta_description
-    @default_meta_description ||= '' +
-        'AgileVentures is a project incubator that stimulates and supports development of social innovations, ' +
-        'open source and free software. We are also a community for learning and personal development with members ' +
-        'from across the world with various levels of competence and experience in software development. We hold ' +
-        'scrum meetings and pair programming sessions every day with participants from all time zones and on all ' +
-        'levels. Come and join us.'
+    @default_meta_description ||= '' \
+                                  'AgileVentures is a project incubator that stimulates and supports development of social innovations, ' \
+                                  'open source and free software. We are also a community for learning and personal development with members ' \
+                                  'from across the world with various levels of competence and experience in software development. We hold ' \
+                                  'scrum meetings and pair programming sessions every day with participants from all time zones and on all ' \
+                                  'levels. Come and join us.'
   end
 
   def present(model)
