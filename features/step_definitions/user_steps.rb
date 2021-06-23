@@ -3,61 +3,77 @@ Given /^I have an avatar image at "([^"]*)"$/ do |link|
 end
 
 Given(/^I am logged in as a user with "([^"]*)"$/) do |plan|
-  StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
+  StaticPage.create!(title: 'getting started', body: 'remote pair programming')
   email =  "Susan_#{plan.parameterize}@gmail.com"
   password = "Susan_#{plan}"
-  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: "Susan_#{plan}", email: email, password: password, password_confirmation: password)
+  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: "Susan_#{plan}", email: email,
+                                                                password: password, password_confirmation: password)
 
   set_user_as_premium(@user, plan)
 
   visit new_user_session_path
-  within ('#main') do
-    fill_in 'user_email', :with => email
-    fill_in 'user_password', :with => password
+  within('#main') do
+    fill_in 'user_email', with: email
+    fill_in 'user_password', with: password
     click_button 'Sign in'
   end
 end
 
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
-  StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
-
-  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: name, email: email, password: password, password_confirmation: password)
-
+  StaticPage.create!(title: 'getting started', body: 'remote pair programming')
+  @current_user = @user = FactoryBot.create(:user,
+                                            :with_karma,
+                                            first_name: name,
+                                            email: email,
+                                            password: password,
+                                            password_confirmation: password)
   set_user_as_premium(@user) if premium
 
   visit new_user_session_path
-  within ('#main') do
-    fill_in 'user_email', :with => email
-    fill_in 'user_password', :with => password
+  within('#main') do
+    fill_in 'user_email', with: email
+    fill_in 'user_password', with: password
     click_button 'Sign in'
   end
 end
 
 Given /^A( premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)" exists$/ do |premium, name, email, password|
-  split_name = name.split(' ')
+  split_name = name.split
   first_name = split_name.first
   last_name  = split_name.last
-  @current_user = @user = FactoryBot.create(:user, :with_karma, first_name: first_name, last_name: last_name, email: email, password: password, password_confirmation: password)
+  @current_user = @user = FactoryBot.create(:user,
+                                            :with_karma,
+                                            first_name: first_name,
+                                            last_name: last_name,
+                                            email: email, password: password, password_confirmation: password)
   set_user_as_premium(@user) if premium
 end
 
 def set_user_as_premium(user, plan = 'Premium')
   return if plan.downcase == 'free'
-  subscription = Subscription.create(user: user, plan: Plan.find_by(name: plan), started_at: Time.now)
-  customer = Stripe::Customer.create({
-                                         email: user.email,
-                                         source: @stripe_test_helper.generate_card_token
-                                     })
+
+  subscription = Subscription.create(
+    user: user,
+    plan: Plan.find_by(name: plan),
+    started_at: Time.now
+  )
+  customer = Stripe::Customer.create(
+    email: user.email,
+    source: StripeMock.create_test_helper.generate_card_token
+  )
   customer.subscriptions.create(plan: plan.downcase.delete(' '))
-  payment_source = PaymentSource::Stripe.create(identifier: customer.id, subscription: subscription )
+  payment_source = PaymentSource::Stripe.create(
+    identifier: customer.id,
+    subscription: subscription
+  )
 end
 
 Given /^(?:|I am) logged in as a premium user paid for the plan via PayPal$/ do
   @current_user = FactoryBot.create(:user)
   visit new_user_session_path
-  within ('#main') do
-    fill_in 'user_email', :with => @current_user.email
-    fill_in 'user_password', :with => @current_user.password
+  within('#main') do
+    fill_in 'user_email', with: @current_user.email
+    fill_in 'user_password', with: @current_user.password
     click_button 'Sign in'
   end
   set_cookie "_WebsiteOne_session=#{page.driver.cookies['_WebsiteOne_session'].value}"
@@ -72,11 +88,12 @@ Given /^(?:|I am) logged in as a CraftAcademy premium user$/ do
   subscription = Subscription.create(user: @current_user,
                                      plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
   PaymentSource::CraftAcademy.create(
-                                     subscription: subscription)
+    subscription: subscription
+  )
   visit new_user_session_path
   within('#main') do
-    fill_in 'user_email', :with => @current_user.email
-    fill_in 'user_password', :with => @current_user.password
+    fill_in 'user_email', with: @current_user.email
+    fill_in 'user_password', with: @current_user.password
     click_button 'Sign in'
   end
 end
@@ -87,7 +104,7 @@ end
 
 Given /^I am logged in as a privileged user$/ do
   create_privileged_user
-  login_as @user, :scope => :user
+  login_as @user, scope: :user
 end
 
 Given(/^I am logged in$/) do
@@ -97,17 +114,17 @@ end
 
 Given /^I have logged in$/ do
   create_user
-  login_as @user, :scope => :user
+  login_as @user, scope: :user
 end
 
 Given /^I have logged in as a user who is authorized to view the AVDashboard$/ do
   create_user(can_see_dashboard: true)
-  login_as @user, :scope => :user
+  login_as @user, scope: :user
 end
 
 Given /^I have logged in as a user who is not authorized to view the AVDashboard$/ do
   create_user
-  login_as @user, :scope => :user
+  login_as @user, scope: :user
 end
 
 Given /^I exist as a user$/ do
@@ -139,12 +156,12 @@ end
 
 ### WHEN ###
 When(/^I submit "([^"]*)" as username$/) do |email|
-  fill_in('user_email', :with => email)
+  fill_in('user_email', with: email)
 end
 
 When(/^I submit "([^"]*)" as password$/) do |password|
-  fill_in('user_password', :with => password)
-  fill_in('user_password_confirmation', :with => password)
+  fill_in('user_password', with: password)
+  fill_in('user_password_confirmation', with: password)
 end
 
 When /^I sign in with valid credentials$/ do
@@ -167,25 +184,25 @@ end
 
 When /^I sign up with an invalid email$/ do
   create_visitor
-  @visitor = @visitor.merge(:email => "notanemail")
+  @visitor = @visitor.merge(email: 'notanemail')
   sign_up
 end
 
 When /^I sign up without a password confirmation$/ do
   create_visitor
-  @visitor = @visitor.merge(:password_confirmation => '')
+  @visitor = @visitor.merge(password_confirmation: '')
   sign_up
 end
 
 When /^I sign up without a password$/ do
   create_visitor
-  @visitor = @visitor.merge(:password => "")
+  @visitor = @visitor.merge(password: '')
   sign_up
 end
 
 When /^I sign up with a mismatched password confirmation$/ do
   create_visitor
-  @visitor = @visitor.merge(:password_confirmation => "changeme123")
+  @visitor = @visitor.merge(password_confirmation: 'changeme123')
   sign_up
 end
 
@@ -194,18 +211,18 @@ When /^I return to the site$/ do
 end
 
 When /^I sign in with a wrong email$/ do
-  @visitor = @visitor.merge(:email => "wrong@example.com")
+  @visitor = @visitor.merge(email: 'wrong@example.com')
   sign_in
 end
 
 When /^I sign in with a wrong password$/ do
-  @visitor = @visitor.merge(:password => "wrongpass")
+  @visitor = @visitor.merge(password: 'wrongpass')
   sign_in
 end
 
 When /^I filter users for "(.*?)"$/ do |first_name|
-  fill_in "user-filter", :with => first_name
-  #click_link_or_button :UsersFilterSubmit
+  fill_in 'user-filter', with: first_name
+  # click_link_or_button :UsersFilterSubmit
 end
 
 When /^I sign up with GitHub$/ do
@@ -214,30 +231,30 @@ end
 
 ### THEN ###
 Then /^I should be signed in$/ do
-  expect(page).to have_content "Log out"
-  expect(page).to_not have_content "Log in"
+  expect(page).to have_content 'Log out'
+  expect(page).to_not have_content 'Log in'
 end
 
 And /^I should not see a sign up link$/ do
-  expect(page).to have_no_link "Sign up"
+  expect(page).to have_no_link 'Sign up'
 end
 
 Then /^I should be signed out$/ do
-  expect(page).to have_content "Sign up"
-  expect(page).to have_content "Log in"
-  expect(page).to_not have_content "Log out"
+  expect(page).to have_content 'Sign up'
+  expect(page).to have_content 'Log in'
+  expect(page).to_not have_content 'Log out'
 end
 
 Then /^I see a successful sign in message$/ do
-  expect(page).to have_content "Signed in successfully."
+  expect(page).to have_content 'Signed in successfully.'
 end
 
 Then /^I should see a successful sign up message$/ do
-  expect(page).to have_content "Welcome! You have signed up successfully."
+  expect(page).to have_content 'Welcome! You have signed up successfully.'
 end
 
 Then /^I should see an invalid email message$/ do
-  expect(page).to have_content "Email is invalid"
+  expect(page).to have_content 'Email is invalid'
 end
 
 Then /^I should see a missing password message$/ do
@@ -253,20 +270,20 @@ Then /^I should see a mismatched password message$/ do
 end
 
 Then /^I should see a signed out message$/ do
-  expect(page).to have_content "Signed out successfully."
+  expect(page).to have_content 'Signed out successfully.'
 end
 
 Then /^I see an invalid login message$/ do
-  expect(page).to have_content "Invalid email or password."
+  expect(page).to have_content 'Invalid email or password.'
 end
 
 Then(/^I see a user deactivated message$/) do
-  expect(page).to have_content "User is deactivated."
+  expect(page).to have_content 'User is deactivated.'
 end
 
 Then /^I should (not |)see my name$/ do |should|
   create_user
-  # TODO Bryan: refactor to display_name
+  # TODO: Bryan: refactor to display_name
   if should == 'not '
     expect(page).to_not have_content @user.presenter.display_name
   else
@@ -275,7 +292,8 @@ Then /^I should (not |)see my name$/ do |should|
 end
 
 Then /^I should see link for instructions to sign up$/ do
-  expect(page).to have_link('Click here for instructions', href: /github.com\/AgileVentures\/WebsiteOne\/tree\/develop\/docs\/solutions_for_signup_issues.md/)
+  expect(page).to have_link('Click here for instructions',
+                            href: %r{github.com/AgileVentures/WebsiteOne/tree/develop/docs/solutions_for_signup_issues.md})
 end
 
 Given /^the following users exist$/ do |table|
@@ -298,12 +316,12 @@ Given /^the following active users exist$/ do |table|
     p = Project.find_by(title: attributes['projects'])
     Delorean.time_travel_to(attributes['updated_at']) if attributes['updated_at']
     u = FactoryBot.create(
-        :user,
-        first_name: attributes['first_name'],
-        last_name: attributes['last_name'],
-        email: attributes['email'],
-        latitude: attributes['latitude'],
-        longitude: attributes['longitude']
+      :user,
+      first_name: attributes['first_name'],
+      last_name: attributes['last_name'],
+      email: attributes['email'],
+      latitude: attributes['latitude'],
+      longitude: attributes['longitude']
     )
     Delorean.back_to_the_present if attributes['updated_at']
     u.follow p
@@ -333,9 +351,10 @@ end
 
 Given(/^I (?:am on|go to|should be on) my "([^"]*)" page$/) do |page|
   page.downcase!
-  if page == 'profile'
+  case page
+  when 'profile'
     visit user_path(@user)
-  elsif page == 'edit profile'
+  when 'edit profile'
     visit edit_user_registration_path(@user)
   else
     pending
@@ -343,22 +362,22 @@ Given(/^I (?:am on|go to|should be on) my "([^"]*)" page$/) do |page|
 end
 
 Given /^I am on "(.*?)" page for user "(.*?)"$/ do |page, user_name|
-  if user_name == 'me'
-    user = @user
-  else
-    user = User.find_by_first_name(user_name)
-  end
+  user = if user_name == 'me'
+           @user
+         else
+           User.find_by_first_name(user_name)
+         end
 
   case page
-    when 'profile' then
-      visit user_path(user)
-    when page == 'edit profile'
-      visit edit_user_registration_path(user)
+  when 'profile'
+    visit user_path(user)
+  when page == 'edit profile'
+    visit edit_user_registration_path(user)
   end
 end
 
 Then(/^I (should not|should)? see my email$/) do |option|
-  if option == "should"
+  if option == 'should'
     expect(page).to have_content @user.email
   else
     expect(page).to_not have_content @user.email
@@ -370,12 +389,11 @@ When(/^I set my ([^"]*) to be (public|private)?$/) do |value, option|
   if option == 'public'
     check("user_display_#{value}")
   else
-    #uncheck "Display #{value}"
+    # uncheck "Display #{value}"
     find("input#user_display_#{value}").set(false)
     expect(find("input#user_display_#{value}")).to_not be_checked
   end
 end
-
 
 When(/^I set ([^"]*) to be (true|false)?$/) do |value, option|
   value = value.underscore
@@ -387,15 +405,14 @@ When(/^I set ([^"]*) to be (true|false)?$/) do |value, option|
   end
 end
 
-
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
-  @user.update_attributes("display_#{value.underscore}".to_sym => (option == 'public'))
+  @user.update("display_#{value.underscore}".to_sym => (option == 'public'))
 end
 
 # Bryan: To be deleted
-#Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
+# Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
 #  pending
-#end
+# end
 
 Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
   if option == 'should'
@@ -408,7 +425,7 @@ end
 Given(/^user "(.*?)" follows projects:$/) do |user, table|
   @user = User.find_by_first_name user
   table.hashes.each do |project|
-    step %Q{I should become a member of project "#{project[:title]}"}
+    step %(I should become a member of project "#{project[:title]}")
   end
 end
 
@@ -423,17 +440,17 @@ Given(/^user "(.*?)" have karma:$/) do |user, table|
 end
 
 Then(/^the karma summary is "([^"]*)"$/) do |value|
-  expect(page).to have_css("span.karma-summary")
-  expect(page).to have_css("span.karma-summary .fa.fa-fire")
-  expect(page.find(:css, "span.karma-summary")).to have_content value
+  expect(page).to have_css('span.karma-summary')
+  expect(page).to have_css('span.karma-summary .fa.fa-fire')
+  expect(page.find(:css, 'span.karma-summary')).to have_content value
 end
 
 Given(/^I am logged in as "([^"]*)"$/) do |first_name|
   @user = User.find_by_first_name first_name
   visit new_user_session_path
-  within ('#main') do
-    fill_in 'user_email', :with => @user.email
-    fill_in 'user_password', :with => test_user_password
+  within('#main') do
+    fill_in 'user_email', with: @user.email
+    fill_in 'user_password', with: test_user_password
     click_button 'Sign in'
   end
 end
@@ -454,7 +471,7 @@ Given(/^I (?:have|add) (?:skill|skills) "(.*)"/) do |skills|
 end
 
 Given(/^I add a new skill: "(.*)"/) do |skills|
-  skills.split(",").each { |s| page.execute_script "$('#skills').tags().addTag('#{s}')"}
+  skills.split(',').each { |s| page.execute_script "$('#skills').tags().addTag('#{s}')" }
 end
 
 And(/^I have a GitHub profile with username "([^"]*)"$/) do |username|
@@ -469,7 +486,7 @@ end
 And(/^I have authentication enabled with my github username$/) do
   @user.github_profile_url = @github_profile_url
   @user.save
-  @authentication = FactoryBot.create(:authentication, user_id: @user.id, provider: "github", uid: 42672)
+  @authentication = FactoryBot.create(:authentication, user_id: @user.id, provider: 'github', uid: 42_672)
   @authentication.save
 end
 
@@ -479,11 +496,11 @@ Then(/^I should not have github_profile_url set in my profile$/) do
 end
 
 Then(/^I should not have any authentications by my github username$/) do
-  expect(@user.authentications.find_by(provider: "github")).to be_nil
+  expect(@user.authentications.find_by(provider: 'github')).to be_nil
 end
 
 Then(/^I should see GitHub account unlinking failed message$/) do
-  expect(page).to have_content "Failed to unlink GitHub. Please use another provider for login or reset password."
+  expect(page).to have_content 'Failed to unlink GitHub. Please use another provider for login or reset password.'
 end
 
 Given(/^I fetch the GitHub contribution statistics$/) do
@@ -494,26 +511,25 @@ When(/^I delete my profile$/) do
   @user.delete
 end
 
-# NOTE search steps below
+# NOTE: search steps below
 
 When(/^I filter "(.*?)" for "(.*?)"$/) do |list_name, selected_from_list|
-  steps %Q{
+  steps %(
     When I select "#{selected_from_list}" from the "#{list_name}" list
     And I click "Search"
-  }
+  )
 end
 
 When(/^I select "(.*?)" from the "(.*?)" list$/) do |selected_from_list, list_name|
   filter = case list_name
-             when 'projects'
-               'project_filter'
-             when 'online status'
-               'online'
+           when 'projects'
+             'project_filter'
+           when 'online status'
+             'online'
            end
 
   page.select(selected_from_list, from: filter)
 end
-
 
 When(/^I search for user with email "([^"]*)"$/) do |email|
   visit "/users?email=#{email}"
@@ -539,7 +555,7 @@ end
 When(/^I click Karma link for "([^"]*)"$/) do |user_name|
   user = User.find_by_first_name(user_name)
   link = user_path(user)
-  page.find(:css, %Q{a[href="#{link}?tab=activity"]}).trigger('click')
+  page.find(:css, %(a[href="#{link}?tab=activity"])).trigger('click')
 end
 
 Then(/^I should not exist as a user$/) do

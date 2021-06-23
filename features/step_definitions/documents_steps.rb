@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^the following documents exist:$/) do |table|
   table.hashes.each do |hash|
     if hash[:project].present?
@@ -20,7 +22,7 @@ Given(/^the following revisions exist$/) do |table|
   table.hashes.each do |hash|
     hash[:revisions].to_i.times do |number|
       doc = Document.find_by_title(hash[:title])
-      doc.update(:body => "New content #{number}")
+      doc.update(body: "New content #{number}")
       doc.save!
     end
   end
@@ -37,7 +39,7 @@ When(/^I click the sidebar link "([^"]*)"$/) do |link|
 end
 
 When(/^I click "([^"]*)" in "([^"]*)"$/) do |link, scope|
-  within(selector_for(scope)) { step %Q{I click "#{link}"} }
+  within(selector_for(scope)) { step %(I click "#{link}") }
 end
 
 When(/^I should see ([^"]*) revisions for "([^"]*)"$/) do |revisions, document|

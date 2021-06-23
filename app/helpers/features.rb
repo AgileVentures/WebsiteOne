@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module Features
   class << self
     def enabled?(feature_name)
       feature = Settings.features.send(feature_name)
       raise "The feature #{feature_name} could not be found" if feature.nil?
+
       feature.try!(:enabled)
     end
 

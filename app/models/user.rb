@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   acts_as_paranoid
 
@@ -24,7 +26,7 @@ class User < ApplicationRecord
     end
   end
 
-  PREMIUM_MOB_PLAN_AMOUNT = 2500
+  PREMIUM_MOB_PLAN_AMOUNT = 500 # downgrading this to associate membership level
 
   acts_as_taggable_on :skills, :titles
   acts_as_voter
@@ -47,9 +49,11 @@ class User < ApplicationRecord
 
   has_many :subscriptions, autosave: true
 
-  def stripe_customer_id # ultimately replacing the field stripe_customer
+  # ultimately replacing the field stripe_customer
+  def stripe_customer_id
     subscription = current_subscription
     return nil unless subscription
+
     subscription.identifier
   end
 
@@ -57,28 +61,29 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :status
   scope :mail_receiver, -> { where(receive_mailings: true) }
-  scope :project_filter, -> (project_id) {
+  scope :project_filter, lambda { |project_id|
     joins(:follows)
-        .where(
-            follows: {
-                blocked: false,
-                followable_id: project_id,
-                followable_type: 'Project',
-                follower_type: 'User'
-            }
-        )
+      .where(
+        follows: {
+          blocked: false,
+          followable_id: project_id,
+          followable_type: 'Project',
+          follower_type: 'User'
+        }
+      )
   }
   scope :allow_to_display, -> { where(display_profile: true) }
   scope :by_create, -> { order(:created_at) }
-  scope :online, -> (_argument) { where("users.updated_at > ?", 10.minutes.ago) }
-  scope :title, -> (title) { tagged_with(title) }
+  scope :online, ->(_argument) { where('users.updated_at > ?', 10.minutes.ago) }
+  scope :title, ->(title) { tagged_with(title) }
 
   self.per_page = 30
 
   def current_subscription
     now = DateTime.now
     current_subscriptions = subscriptions.select { |s| s.ended_at.nil? and s.started_at.to_i <= now.to_i }
-    return nil if current_subscriptions.nil? or current_subscriptions.empty?
+    return nil if current_subscriptions.nil? || current_subscriptions.empty?
+
     current_subscriptions.first
   end
 
@@ -86,20 +91,22 @@ class User < ApplicationRecord
     current_subscription and current_subscription.plan.amount >= PREMIUM_MOB_PLAN_AMOUNT
   end
 
-  def self.filter_if_title title
+  def self.filter_if_title(title)
     return User.all if title.blank?
+
     User.tagged_with(title)
   end
 
   def membership_type
     subscription = current_subscription
-    return "Basic" unless subscription
+    return 'Basic' unless subscription
+
     subscription.plan.name
   end
 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
-    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid']) unless email.blank?
+    authentications.build(provider: omniauth['provider'], uid: omniauth['uid']) unless email.blank?
     @omniauth_provider = omniauth['provider']
   end
 
@@ -113,8 +120,8 @@ class User < ApplicationRecord
 
   def followed_project_tags
     following_projects
-        .flat_map(&:youtube_tags)
-        .push('scrum')
+      .flat_map(&:youtube_tags)
+      .push('scrum')
   end
 
   def display_name
@@ -128,15 +135,16 @@ class User < ApplicationRecord
 
   def email_designator
     return if email.blank?
+
     email.split('@').first
   end
 
   def should_generate_new_friendly_id?
-    self.slug.nil? or ((self.first_name_changed? or self.last_name_changed?) and not self.slug_changed?)
+    slug.nil? or ((first_name_changed? or last_name_changed?) and !slug_changed?)
   end
 
-  def gravatar_url(options={})
-    hash = Digest::MD5::hexdigest(email.strip.downcase)
+  def gravatar_url(options = {})
+    hash = Digest::MD5.hexdigest(email.strip.downcase)
     if options[:size]
       "https://www.gravatar.com/avatar/#{hash}?s=#{options[:size]}&d=retro"
     else
@@ -152,11 +160,12 @@ class User < ApplicationRecord
     awarded += 2 if bio.present?
     awarded += 1 if first_name.present?
     awarded += 1 if last_name.present?
-    return awarded
+    awarded
   end
 
   def is_privileged?
     return false if Settings.privileged_users.blank?
+
     Settings.privileged_users.split(',').include?(email)
   end
 
@@ -171,7 +180,13 @@ class User < ApplicationRecord
 
   def self.map_data
     users = User.group(:country_code).count
-    clean = proc { |k, v| !k.nil? ? Hash === v ? v.delete_if(&clean) : false : true }
+    clean = proc { |k, v|
+      if k.nil?
+        true
+      else
+        v.is_a?(Hash) ? v.delete_if(&clean) : false
+      end
+    }
     users.delete_if(&clean)
     users.to_json
   end
@@ -185,7 +200,7 @@ class User < ApplicationRecord
   end
 
   def number_hangouts_started_with_more_than_one_participant
-    event_instances.count { |h| h.participants != nil && h.participants.to_unsafe_h.count > 1 }
+    event_instances.count { |h| !h.participants.nil? && h.participants.to_unsafe_h.count > 1 }
   end
 
   def activity
@@ -198,6 +213,7 @@ class User < ApplicationRecord
 
   def karma_total
     return karma.total if karma
+
     0
   end
 
@@ -214,7 +230,7 @@ class User < ApplicationRecord
   validate :email_absence
 
   def email_absence
-    if email.blank? and not @omniauth_provider.nil?
+    if email.blank? && !@omniauth_provider.nil?
       errors.delete(:password)
       errors.delete(:email)
       errors.add(:base, I18n.t('error_messages.public_email', provider: @omniauth_provider.capitalize))

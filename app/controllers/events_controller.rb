@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :update_only_url]
-  before_action :set_projects, only: [:new, :edit, :update, :create]
+  before_action :authenticate_user!, except: %i(index show)
+  before_action :set_event, only: %i(show edit update destroy update_only_url)
+  before_action :set_projects, only: %i(new edit update create)
 
   def new
     @event = Event.new(new_params)
@@ -11,16 +13,16 @@ class EventsController < ApplicationController
   def show
     @event_schedule = @event.next_occurrences
     @recent_hangout = @event.recent_hangouts.first
-    @event_instances = EventInstance.where(event_id: @event.id).where.not(yt_video_id: nil).
-                                     order(created_at: :desc).limit(5)
+    @event_instances = EventInstance.where(event_id: @event.id).where.not(yt_video_id: nil)
+                                    .order(created_at: :desc).limit(5)
     render partial: 'hangouts_management' if request.xhr?
   end
 
   def index
     @projects = Project.active
     respond_to do |format|
-      format.html {@events = Event.upcoming_events(specified_project) }
-      format.json {@events = Event.upcoming_events(specified_project) }
+      format.html { @events = Event.upcoming_events(specified_project) }
+      format.json { @events = Event.upcoming_events(specified_project) }
     end
   end
 
@@ -29,23 +31,20 @@ class EventsController < ApplicationController
   end
 
   def create
-    EventCreatorService.new(Event).perform(transform_params,
-                                           success: ->(event) do
-                                             @event = event
-                                             flash[:notice] = 'Event Created'
-                                             redirect_to event_path(@event)
-                                           end,
-                                           failure: ->(event) do
-                                             @event = event
-                                             flash[:notice] = @event.errors.full_messages.to_sentence
-                                             render :new
-                                           end)
+    @event = Event.new(normalize_event_dates(transform_params))
+    if @event.save
+      flash[:notice] = 'Event Created'
+      redirect_to event_path(@event)
+    else
+      flash[:notice] = @event.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def update
     begin
-      updated = @event.update_attributes(transform_params)
-    rescue
+      updated = @event.update(transform_params)
+    rescue StandardError
       attr_error = 'attributes invalid'
     end
     if updated
@@ -69,18 +68,25 @@ class EventsController < ApplicationController
     event_params = whitelist_event_params
     create_start_date_time(event_params)
     check_days_of_week(event_params)
-    event_params[:repeat_ends] = (event_params['repeat_ends_string'] == 'on')
-    event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ""
+    event_params[:repeat_ends] = (event_params[:repeat_ends_string] == 'on')
+    event_params[:repeat_ends_on] = params[:repeat_ends_on].present? ? "#{params[:repeat_ends_on]} UTC" : ''
     event_params[:repeats_every_n_weeks] = 2 if event_params['repeats'] == 'biweekly'
     event_params
   end
 
+  def normalize_event_dates(event_params)
+    event_params[:start_datetime] = Time.now if event_params[:start_datetime].blank?
+    event_params[:duration] = 30.minutes if event_params[:duration].blank?
+    event_params[:repeat_ends] = event_params[:repeat_ends_string] == 'on'
+    event_params
+  end
+
   def whitelist_event_params
-    permitted = [
-      :name, :category, :for, :project_id, :description, :duration, :repeats,
-      :repeats_every_n_weeks, :repeat_ends_string, :time_zone, :creator_id,
-      :start_datetime, :repeat_ends, :repeat_ends_on, :modifier_id, :creator_attendance
-    ]
+    permitted = %i(
+      name category for project_id description duration repeats
+      repeats_every_n_weeks repeat_ends_string time_zone creator_id
+      start_datetime repeat_ends repeat_ends_on modifier_id creator_attendance
+    )
 
     params.merge(event: params[:event].merge(action_initiator))
           .require(:event)
@@ -88,32 +94,29 @@ class EventsController < ApplicationController
   end
 
   def action_initiator
-    @event && @event.creator_id ? { modifier_id: current_user.id } : { creator_id: current_user.id }
+    @event&.creator_id ? { modifier_id: current_user.id } : { creator_id: current_user.id }
   end
-
-  # next_date and start_date are in the same dst or non-dst
-  # next_date in dst and start_date in non-dst ==> get an hour back
-  # next_date in non-dst and start_date in dst ==> ???
 
   def create_start_date_time(event_params)
     return unless date_and_time_present?
+
     tz = TZInfo::Timezone.get(params['start_time_tz'])
-    event_params[:start_datetime] = next_date_offset(tz).to_utc(DateTime.parse(params['start_date']+ ' ' + params['start_time']))
+    event_params[:start_datetime] = tz.local_to_utc(DateTime.parse("#{params['start_date']} #{params['start_time']}"))
   end
+
   def check_days_of_week(event_params)
     # local timezone vs utc timezone
     return unless date_and_time_present?
-    offset= (DateTime.parse(params[:start_date]).wday - event_params[:start_datetime].wday)%7
-    return event_params["repeats_weekly_each_days_of_the_week"] if offset==0
-    event_params["repeats_weekly_each_days_of_the_week"]=[]
-    params["event"]["repeats_weekly_each_days_of_the_week"].each do |day|
-      event_params["repeats_weekly_each_days_of_the_week"]<<Date::DAYNAMES[(Date.parse(day).wday-offset)%7].downcase if day !=""
-    end
-  end
 
-  def next_date_offset(tz)
-    next_date_time = DateTime.parse(params['next_date'] + ' ' + params['start_time'])
-    tz.period_for_utc(next_date_time).offset
+    offset = (DateTime.parse(params[:start_date]).wday - event_params[:start_datetime].wday) % 7
+    return event_params['repeats_weekly_each_days_of_the_week'] if offset.zero?
+
+    event_params['repeats_weekly_each_days_of_the_week'] = []
+    params['event']['repeats_weekly_each_days_of_the_week'].each do |day|
+      if day != ''
+        event_params['repeats_weekly_each_days_of_the_week'] << Date::DAYNAMES[(Date.parse(day).wday - offset) % 7].downcase
+      end
+    end
   end
 
   def date_and_time_present?
@@ -125,16 +128,17 @@ class EventsController < ApplicationController
   end
 
   def set_event
-    @event = Event.friendly.find(params[:id])
+    @event = Event.friendly.find(params[:id]) || Event.find_by(slug: params[:id])
   end
 
   def set_projects
-    @projects = Project.active.collect { |project| [project.title, project.id] }
+    @projects = Project.active.map { |project| [project.title, project.id] }
   end
 
   def new_params
     params[:project_id] = Project.friendly.find(params[:project]).id.to_s if params[:project]
-    params[:project_id] = Project.find_by(title: "CS169").try(:id) unless params[:project_id]
-    params.permit(:name, :category, :for, :project_id).merge(start_datetime: Time.now.utc, duration: 30, repeat_ends: true)
+    params[:project_id] = Project.find_by(title: 'CS169').try(:id) unless params[:project_id]
+    params.permit(:name, :category, :for, :project_id).merge(start_datetime: Time.now.utc, duration: 30,
+                                                             repeat_ends: true)
   end
 end

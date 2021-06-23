@@ -8,19 +8,17 @@ module GithubReadmeFilesJob
 
   def client
     credentials = {
-        client_id: Settings.github.client_id,
-        client_secret: Settings.github.client_secret
+      client_id: Settings.github.client_id,
+      client_secret: Settings.github.client_secret
     }
     @client ||= Octokit::Client.new(credentials)
   end
 
   def run(projects)
     projects.each do |project|
-      begin
-        project.update(pitch: content(project.github_repo, 'PITCH.md'))
-      rescue StandardError => e
-        evaluate_exception(e, project)
-      end
+      project.update(pitch: content(project.github_repo, 'PITCH.md'))
+    rescue StandardError => e
+      evaluate_exception(e, project)
     end
   end
 
@@ -35,22 +33,20 @@ module GithubReadmeFilesJob
   end
 
   private
-  
+
   def anchor_link?(url)
     url.empty? || url.match?(/^\#/)
   end
-  
+
   def convert_path(node, base_uri)
     node[:href] = "#{base_uri}#{URI(node[:href])}" if URI(node[:href]).relative?
   end
 
   def project_readme(project)
-    begin
-      project_readme_content = content(project.github_repo, 'README.md')
-      project.update(pitch: replace_relative_links_with_absolute(project_readme_content, project))
-    rescue StandardError => e
-      log_error(e, project)
-    end
+    project_readme_content = content(project.github_repo, 'README.md')
+    project.update(pitch: replace_relative_links_with_absolute(project_readme_content, project))
+  rescue StandardError => e
+    log_error(e, project)
   end
 
   def error_message(repository)
@@ -68,7 +64,6 @@ module GithubReadmeFilesJob
       log_error(error, project)
     end
   end
-
 
   def log_error(error, project)
     ErrorLoggingService.new(error).log(error_message(project.github_repo))

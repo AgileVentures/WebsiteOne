@@ -1,20 +1,19 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe 'OmniAuth authentication' do
-
+RSpec.describe 'OmniAuth authentication', type: :feature do
   supported_auths = {
-      'github' => 'GitHub',
-      'gplus'  => 'Google'
+    'github' => 'GitHub',
+    'gplus' => 'Google'
   }
 
   before do
-    StaticPage.create!(title: 'getting started', body: 'remote pair programming' )
+    StaticPage.create!(title: 'getting started', body: 'remote pair programming')
     @uid = '12345678'
     supported_auths.each do |provider, name|
       OmniAuth.config.mock_auth[provider.to_sym] = {
-          'provider'  => provider,
-          'uid'       => @uid,
-          'info'      => { 'email' => "#{name}@mock.com"}
+        'provider' => provider,
+        'uid' => @uid,
+        'info' => { 'email' => "#{name}@mock.com" }
       }
     end
     OmniAuth.config.logger.level = Logger::FATAL
@@ -28,11 +27,12 @@ describe 'OmniAuth authentication' do
         it 'should work with valid credentials' do
           visit new_user_session_path
           expect(page).to have_content "with #{name}"
-          expect {
-            expect {
-              click_link "with #{name}"
-            }.to change(User, :count).by(1)
-          }.to change(Authentication, :count).by(1)
+
+          expect do
+            expect do
+              page.click_on "with #{name}"
+            end.to change(User, :count).by(1)
+          end.to change(Authentication, :count).by(1)
           expect(page).to have_content('Signed in successfully.')
           expect(User.first.karma).not_to be_nil
         end
@@ -40,11 +40,12 @@ describe 'OmniAuth authentication' do
         it 'should not work with invalid credentials' do
           OmniAuth.config.mock_auth[provider.to_sym] = :invalid_credentials
           visit new_user_session_path
-          expect {
-            expect {
-              click_link "with #{name}"
-            }.to change(User, :count).by(0)
-          }.to change(Authentication, :count).by(0)
+          expect do
+            expect do
+              # save_and_open_page
+              page.click_on "with #{name}"
+            end.to change(User, :count).by(0)
+          end.to change(Authentication, :count).by(0)
           expect(page).to have_content('invalid_credentials')
         end
 
@@ -52,13 +53,13 @@ describe 'OmniAuth authentication' do
           visit new_user_session_path
           click_link "with #{name}"
           visit edit_user_registration_path
-          #click_link '#user_info'
-          #click_link 'My Account'
-          expect {
-            expect {
+          # click_link '#user_info'
+          # click_link 'My Account'
+          expect do
+            expect do
               click_link "Remove #{name}"
-            }.to change(User, :count).by(0)
-          }.to change(Authentication, :count).by(0)
+            end.to change(User, :count).by(0)
+          end.to change(Authentication, :count).by(0)
           expect(page).to have_content 'Failed to unlink GitHub. Please use another provider for login or reset password.'
         end
       end
@@ -77,11 +78,11 @@ describe 'OmniAuth authentication' do
         it 'finds the right user if auth exists' do
           visit new_user_session_path
           expect(page).to have_content "with #{name}"
-          expect {
-            expect {
+          expect do
+            expect do
               click_link "with #{name}"
-            }.to change(User, :count).by(0)
-          }.to change(Authentication, :count).by(0)
+            end.to change(User, :count).by(0)
+          end.to change(Authentication, :count).by(0)
           expect(page).to have_content('Signed in successfully.')
         end
 
@@ -89,36 +90,27 @@ describe 'OmniAuth authentication' do
           visit new_user_session_path
           click_link "with #{name}"
           visit edit_user_registration_path(@user)
+
           expect(page).to have_css "input[value='#{@user.email}']"
-          expect {
-            expect {
+          expect do
+            expect do
               click_link "Remove #{name}"
-            }.to change(User, :count).by(0)
-          }.to change(Authentication, :count).by(-1)
+            end.to change(User, :count).by(0)
+          end.to change(Authentication, :count).by(-1)
           expect(page).to have_content('Successfully removed profile.')
         end
 
         it 'should be able to create other profiles' do
           supported_auths.each do |p, n|
             next if p == provider
+
             visit new_user_session_path
             click_link "with #{name}"
             visit edit_user_registration_path(@user)
-            expect {
-              expect { click_link "#{n}" }.to change(Authentication, :count).by(1)
-            }.to change(User, :count).by(0)
+            expect do
+              expect { click_link n.to_s }.to change(Authentication, :count).by(1)
+            end.to change(User, :count).by(0)
           end
-        end
-
-        it 'should not accept multiple profiles from the same source' do
-          visit new_user_session_path
-          click_link "with #{name}"
-          OmniAuth.config.mock_auth[provider.to_sym] = {
-              'provider'  => provider,
-              'uid'       => "randomplus#{@uid}"
-          }
-          visit "/auth/#{provider}"
-          expect(page).to have_content 'Unable to create additional profiles.'
         end
       end
     end

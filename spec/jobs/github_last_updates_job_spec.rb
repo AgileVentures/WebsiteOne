@@ -1,9 +1,9 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe GithubLastUpdatesJob do
+RSpec.describe GithubLastUpdatesJob do
   describe '#run' do
     context 'shf-project with hyphen', vcr: true do
-      let!(:project) { FactoryBot.create(:project) }
+      let!(:project) { create(:project) }
       before { project.source_repositories.create(url: 'https://github.com/AgileVentures/shf-project') }
       it 'has correct last commit date after job run' do
         GithubLastUpdatesJob.run
