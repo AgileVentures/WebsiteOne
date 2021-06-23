@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ArticlesHelper
   def clean_html(html)
     raw sanitize html,
@@ -22,7 +24,7 @@ module ArticlesHelper
   end
 
   def link_to_tags(tags)
-    clean_html tags.map{ |tag| link_to tag, articles_path(tag: tag) }.join(', ')
+    clean_html tags.map { |tag| link_to tag, articles_path(tag: tag) }.join(', ')
   end
 
   class CodeRayify < Redcarpet::Render::HTML
@@ -36,12 +38,16 @@ module ArticlesHelper
 
   def from_markdown(markdown)
     return '' if markdown.nil?
-    clean_html(markdown_engine.render markdown)
+
+    clean_html(markdown_engine.render(markdown))
   end
 
   def markdown_preview(markdown)
     return '' if markdown.nil?
-    raw sanitize(markdown_engine.render(markdown), tags: %w( p pre code strong em ), attributes: %w(id class style)).truncate(100, separator: ' ')
+
+    raw sanitize(markdown_engine.render(markdown), tags: %w(p pre code strong em), attributes: %w(id class style)).truncate(
+      100, separator: ' '
+    )
   end
 
   private

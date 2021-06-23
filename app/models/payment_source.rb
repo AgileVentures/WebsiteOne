@@ -1,5 +1,6 @@
-module PaymentSource
+# frozen_string_literal: true
 
+module PaymentSource
   class PaymentSource < ApplicationRecord
     belongs_to :subscription
   end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Given(/^I click on the karma link$/) do
-	click_link('gotoactivity')
+  click_link('gotoactivity')
 end
 
 Then(/^the Activity tab displays "([^"]*)"$/) do |arg1|

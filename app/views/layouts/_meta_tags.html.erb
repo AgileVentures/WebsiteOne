@@ -7,10 +7,10 @@
 <% if content_for?(:robots) %>
   <meta name="robots" content="<%= yield(:robots) %>">
 <% end %>
-<meta name="copyright" content="AgileVentures Nonprofit Ltd.">
+<meta name="copyright" content="AgileVentures Charity ">
 <meta name="coverage" content="Worldwide">
 <meta name="distribution" content="Global">
-<meta name="application-name" content="AgileVentures Official Website">
+<meta name="application-name" content="AgileVentures Charity Official Website">
 
 <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : 'AgileVentures' %>"/>
 <meta property="og:type" content="<%= params[:controller] == 'articles' ? 'article' : 'website' %>"/>

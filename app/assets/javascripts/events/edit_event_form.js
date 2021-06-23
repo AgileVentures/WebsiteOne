@@ -7,16 +7,14 @@ var editEventForm = {
             $('#start_time_tz').setToUserTimeZone(this.timezone());
         }
         if ($('#start_time').length && $('#start_date').length) {
-            this.updateDateAndTimeToUserTimeZone($('#next_date'), $('#start_date'), $('#start_time'));
+            this.updateDateAndTimeToUserTimeZone($('#start_date'), $('#start_time'));
         }
     },
-    updateDateAndTimeToUserTimeZone: function (next_date, start_date, start_time) {
-        var normalized_next_date_time = moment.utc(next_date.val() + " " + start_time.val(), "YYYY-MM-DD hh:mm a");
+    updateDateAndTimeToUserTimeZone: function (start_date, start_time) {
         var normalized_start_date_time = moment.utc(start_date.val() + " " + start_time.val(), "YYYY-MM-DD hh:mm a");
-        var local_next_date_time = normalized_next_date_time.tz(this.timezone());
         var local_start_date_time = normalized_start_date_time.tz(this.timezone());
         start_date.val(local_start_date_time.format("YYYY-MM-DD"));
-        start_time.val(local_next_date_time.format("hh:mm A"));
+        start_time.val(local_start_date_time.format("hh:mm A"));
         if (normalized_start_date_time.toDate().getUTCDate() !== normalized_start_date_time.toDate().getDate())
             this.localizeDaysOfWeek(normalized_start_date_time._offset)
     },

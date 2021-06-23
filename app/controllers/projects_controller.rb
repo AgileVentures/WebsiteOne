@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   layout 'with_sidebar'
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_project, only: [:show, :edit, :update]
+  before_action :authenticate_user!, except: %i(index show)
+  before_action :set_project, only: %i(show edit update)
   before_action :get_current_stories, only: [:show]
   include DocumentsHelper
 
-#TODO YA Add controller specs for all the code
+  # TODO: YA Add controller specs for all the code
 
   def index
     initialze_projects
@@ -41,15 +43,14 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @project.update_attributes(project_params)
+    if @project.update(project_params)
       add_to_feed(:update)
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else
-      # TODO change this to notify for invalid params
+      # TODO: change this to notify for invalid params
       flash.now[:alert] = 'Project was not updated.'
       render 'edit'
     end
@@ -77,11 +78,15 @@ class ProjectsController < ApplicationController
   private
 
   def send_email_notifications
-    ProjectMailer.with(project: @project, user: current_user, project_creator: @project.user).
-        alert_project_creator_about_new_member.deliver_now if @project.user.receive_mailings
+    if @project.user.receive_mailings
+      ProjectMailer.with(project: @project, user: current_user, project_creator: @project.user)
+                   .alert_project_creator_about_new_member.deliver_now
+    end
 
-    ProjectMailer.with(project: @project, user: current_user, project_creator: @project.user).
-        welcome_project_joinee.deliver_now if current_user.receive_mailings
+    if current_user.receive_mailings
+      ProjectMailer.with(project: @project, user: current_user, project_creator: @project.user)
+                   .welcome_project_joinee.deliver_now
+    end
   end
 
   def set_project
@@ -113,9 +118,10 @@ class ProjectsController < ApplicationController
         project = PivotalAPI::Project.retrieve(pivotaltracker_id)
         iteration = project.current_iteration
         @stories = iteration.stories
-      rescue Exception => error
-        # TODO deal with simple not found errors, should not send for all exceptions
-        ExceptionNotifier.notify_exception(error, env: request.env, :data => { message: 'an error occurred in Pivotal Tracker' })
+      rescue Exception => e
+        # TODO: deal with simple not found errors, should not send for all exceptions
+        ExceptionNotifier.notify_exception(e, env: request.env,
+                                              data: { message: 'an error occurred in Pivotal Tracker' })
         @is_non_pt_issue_tracker = true
       end
     end
@@ -126,7 +132,7 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(:title, :description, :pitch, :created, :status,
                                     :user_id, :github_url, :pivotaltracker_url, :slack_channel_name,
                                     :pivotaltracker_id, :image_url, languages_attributes: [:name],
-                                    name_ids: [], source_repositories_attributes: [:id, :url, :_destroy],
-                                    issue_trackers_attributes: [:id, :url, :_destroy])
+                                                                    name_ids: [], source_repositories_attributes: %i(id url _destroy),
+                                                                    issue_trackers_attributes: %i(id url _destroy))
   end
 end

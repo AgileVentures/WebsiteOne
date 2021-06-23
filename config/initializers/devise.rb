@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -41,12 +43,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :email ]
+  config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :email ]
+  config.strip_whitespace_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -141,9 +143,9 @@ Devise.setup do |config|
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
   # config.email_regexp = /\A[^@]+@[^@]+\z/
-  # 
+  #
   # This regex is try to follow the standard. (This is not support IP address in domain part)
-  config.email_regexp = /\A(("[^\f\n\r\t\v\b]+[\s\w\(\),:;<>\[\]@\\!\#$%&'"*+\/=?^`{|}~-]+")|([\w!\#$%&'*+\/=?^`{|}~-]+(?:\.[\w!\#$%&'*+\/=?^`{|}~-]+)*))@((((\w+\-+)|(\w+\.))*\w{1,}\.[a-zA-Z]{2,6})|([a-zA-Z]{2,6}))\z/
+  config.email_regexp = %r{\A(("[^\f\n\r\t\v\b]+[\s\w(),:;<>\[\]@\\!\#$%&'"*+/=?^`{|}~-]+")|([\w!\#$%&'*+/=?^`{|}~-]+(?:\.[\w!\#$%&'*+/=?^`{|}~-]+)*))@((((\w+-+)|(\w+\.))*\w{1,}\.[a-zA-Z]{2,6})|([a-zA-Z]{2,6}))\z}
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -226,7 +228,7 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
-  #config.sign_out_via = :get
+  # config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
