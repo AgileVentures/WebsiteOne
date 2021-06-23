@@ -3,7 +3,7 @@
 describe Mailer do
   describe 'send_premium_payment_complete_message' do
     let(:plan) { instance_double(Plan, name: 'Premium', free_trial_length_days: 7, free_trial?: true, category: nil) }
-    it 'sends payment complete message' do
+    it 'is expected to send payment complete message' do
       mail = Mailer.send_premium_payment_complete(plan, 'candice@clemens.com')
       expect(mail.from).to include('info@agileventures.org')
       expect(mail.reply_to).to include('info@agileventures.org')
@@ -22,7 +22,7 @@ describe Mailer do
                        password: '1234567890'
     end
 
-    it 'should send welcome message' do
+    it 'is expected to send welcome message' do
       mail = Mailer.send_welcome_message(@user)
       expect(mail.from).to include('info@agileventures.org')
       expect(mail.reply_to).to include('info@agileventures.org')
@@ -41,7 +41,7 @@ describe Mailer do
                        email: 'marcelo@whatever.com',
                        password: '1234567890'
     end
-    it 'should send hire_me message' do
+    it 'is expected to send hire_me message' do
       mail = Mailer.hire_me_form(@user, valid_params)
       expect(mail.from).to include('thomas@email.com')
       expect(mail.reply_to).to include('thomas@email.com')
