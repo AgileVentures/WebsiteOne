@@ -5,8 +5,8 @@ Feature: Start jitsi meet
 
   Background:
     Given the following projects exist:
-      |title | description | status |
-      | LS   | LS          | active |
+      | title | description | status |
+      | LS    | LS          | active |
     Given following events exist:
       | name         | description         | category | start_datetime   | duration | repeats | time_zone | repeats_every_n_weeks | repeats_weekly_each_days_of_the_week_mask | project |
       | Repeat Scrum | Daily scrum meeting | Scrum    | 2014 Feb 3rd 7am | 15       | weekly  | UTC       | 1                     | 31                                        |         |
