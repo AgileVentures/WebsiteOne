@@ -3,7 +3,7 @@
     <i class="fa fa-2x fa-plus"></i>
   </div>
   <div class="col-md-1" style="width: 4% !important;">
-    <%= image_tag activity.owner.gravatar_url, width: '30', height: '30', style: 'margin-bottom: -26px;', class: 'img-circle hidden-xs hidden-sm' %>
+    <%= image_tag activity.owner&.gravatar_url, width: '30', height: '30', style: 'margin-bottom: -26px;', class: 'img-circle hidden-xs hidden-sm' %>
   </div>
   <div class="col-md-6">
     <div class="row">
