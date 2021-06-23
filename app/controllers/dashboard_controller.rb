@@ -18,6 +18,7 @@ class DashboardController < ApplicationController
       stats[:documents] = get_stats_for(:documents)
       stats[:pairing_minutes] = get_stats_for(:pairing_minutes)
       stats[:scrum_minutes] = get_stats_for(:scrum_minutes)
+      stats[:map_data] = User.map_data
     end
   end
 end
