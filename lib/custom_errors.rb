@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'airbrake'
+# require 'airbrake'
 
 module CustomErrors
   def self.included(base)
