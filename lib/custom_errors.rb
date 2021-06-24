@@ -30,7 +30,7 @@ module CustomErrors
     #     ExceptionNotifier.notify_exception(error, env: request.env, data: { message: 'was doing something wrong' })
     #   end
     # end
-
+    ExceptionNotifier.notify_exception(error, env: request.env, data: { message: 'was doing something wrong' })
     case status
     when 404
       render template: 'static_pages/not_found', layout: 'layouts/application', status: 404, formats: [:html]
