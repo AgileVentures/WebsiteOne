@@ -517,4 +517,116 @@ http_interactions:
         \           m.setAttribute('content', \"script-src https:;\");\n            toH(m);\n
         \       }();</script>\n    \n</body>\n</html>\n"
   recorded_at: Wed, 05 Feb 2014 06:55:45 GMT
+- request:
+    method: get
+    uri: https://disqus.com/embed/comments/?base=default&f=agileventures-dev&s_o=default&t_d=Howto%20-%20hello%20mars%20%7C%20AgileVentures&t_e=Howto&t_i=howto&t_t=Howto&t_u=http://127.0.0.1:63045/projects/hello-mars/documents/howto
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+      Referer:
+      - http://127.0.0.1:63045/projects/hello-mars/documents/howto
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko)
+        PhantomJS/2.1.1 Safari/538.1
+      Connection:
+      - close
+      Accept-Encoding:
+      - ''
+      Accept-Language:
+      - en-US,*
+      Host:
+      - disqus.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - close
+      Content-Length:
+      - '6313'
+      Server:
+      - nginx
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Security-Policy:
+      - script-src https://*.twitter.com:* https://www.gstatic.com/recaptcha/ https://a.disquscdn.com
+        https://c.disquscdn.com c.disquscdn.com https://*.services.disqus.com:* https://cdn.boomtrain.com/p13n/
+        https://apis.google.com https://cdn.syndication.twimg.com/tweets.json https://connect.facebook.net/en_US/sdk.js
+        https://referrer.disqus.com/juggler/ 'unsafe-inline' https://com-disqus.netmng.com:*
+        https://www.google.com/recaptcha/ https://cf.ignitionone.com:* https://disqus.com
+      Last-Modified:
+      - Thu, 27 May 2021 05:12:13 GMT
+      Etag:
+      - W/"lounge:view:2755338146.905fcadfb231545ca890acca03fde0fd.2"
+      Link:
+      - "<https://c.disquscdn.com>;rel=preconnect,<https://c.disquscdn.com>;rel=dns-prefetch"
+      Cache-Control:
+      - stale-if-error=3600, s-stalewhilerevalidate=3600, stale-while-revalidate=30,
+        no-cache, must-revalidate, public, s-maxage=5
+      P3p:
+      - CP="DSP IDC CUR ADM DELi STP NAV COM UNI INT PHY DEM"
+      Referrer-Policy:
+      - no-referrer-when-downgrade
+      Timing-Allow-Origin:
+      - "*"
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Date:
+      - Thu, 24 Jun 2021 21:10:40 GMT
+      Age:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=300; includeSubdomains
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE html>\n\n<!--[if IE 8]><html lang=\"en\" dir=\"ltr\" class=\"ie8\"><![endif]-->\n<!--[if
+        IE 9]><html lang=\"en\" dir=\"ltr\" class=\"ie9\"><![endif]-->\n<!--[if gt
+        IE 9]><!--><html lang=\"en\" dir=\"ltr\"><!--<![endif]-->\n\n<head>\n    <title>Disqus
+        Comments</title>\n\n    \n    <meta name=\"viewport\" content=\"width=device-width,
+        initial-scale=1, maximum-scale=1, user-scalable=no\">\n    <meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=edge\"/>\n\n    <style>\n        .alert--warning {\n            border-radius:
+        3px;\n            padding: 10px 15px;\n            margin-bottom: 10px;\n
+        \           background-color: #FFE070;\n            color: #A47703;\n        }\n\n
+        \       .alert--warning a,\n        .alert--warning a:hover,\n        .alert--warning
+        strong {\n            color: #A47703;\n            font-weight: bold;\n        }\n\n
+        \       .alert--error p,\n        .alert--warning p {\n            margin-top:
+        5px;\n            margin-bottom: 5px;\n        }\n        \n        </style>\n
+        \   \n    <style>\n        \n        html {\n            overflow: hidden;\n
+        \       }\n        \n\n        #error {\n            display: none;\n        }\n\n
+        \       .clearfix:after {\n            content: \"\";\n            display:
+        block;\n            height: 0;\n            clear: both;\n            visibility:
+        hidden;\n        }\n\n        \n    </style>\n\n</head>\n<body>\n    \n\n
+        \   \n    <div id=\"error\" class=\"alert--error\">\n        <p>We were unable
+        to load Disqus. If you are a moderator please see our <a href=\"https://docs.disqus.com/help/83/\">
+        troubleshooting guide</a>. </p>\n    </div>\n\n    \n    <script type=\"text/json\"
+        id=\"disqus-forumData\">{\"session\":{\"canModerate\":false,\"audienceSyncVerified\":false,\"mustVerify\":false,\"canReply\":true,\"mustVerifyEmail\":false},\"forum\":{\"aetBannerConfirmation\":null,\"founder\":\"109254110\",\"twitterName\":null,\"commentsLinkOne\":\"1
+        Comment\",\"guidelines\":null,\"favicon\":{\"permalink\":\"https://disqus.com/api/forums/favicons/agileventures-dev.jpg\",\"cache\":\"//a.disquscdn.com/1623278138/images/favicon-default.png\"},\"commentsLinkZero\":\"0
+        Comments\",\"disableDisqusBranding\":false,\"id\":\"agileventures-dev\",\"createdAt\":\"2014-06-08T09:49:18.847974\",\"category\":\"Tech\",\"aetBannerEnabled\":false,\"aetBannerTitle\":null,\"raw_guidelines\":null,\"initialCommentCount\":null,\"votingType\":null,\"daysUnapproveNewUsers\":null,\"installCompleted\":true,\"moderatorBadgeText\":\"\",\"commentPolicyText\":null,\"aetEnabled\":false,\"channel\":null,\"sort\":4,\"description\":null,\"newPolicy\":true,\"raw_description\":null,\"customFont\":null,\"language\":\"en\",\"adsReviewStatus\":0,\"commentsPlaceholderTextEmpty\":null,\"daysAlive\":0,\"forumCategory\":{\"date_added\":\"2016-01-28T01:54:31\",\"id\":8,\"name\":\"Tech\"},\"colorScheme\":\"auto\",\"pk\":\"3053135\",\"commentsPlaceholderTextPopulated\":null,\"permissions\":{},\"commentPolicyLink\":null,\"aetBannerDescription\":null,\"name\":\"AgileVentures
+        Development\",\"commentsLinkMultiple\":\"{num} Comments\",\"settings\":{\"threadRatingsEnabled\":false,\"adsDRNativeEnabled\":false,\"adsPositionSidebarEnabled\":false,\"disable3rdPartyTrackers\":true,\"adsVideoEnabled\":false,\"adsProductVideoEnabled\":false,\"adsPositionTopEnabled\":false,\"ssoRequired\":false,\"unapproveLinks\":false,\"adsPositionRecommendationsEnabled\":false,\"linkAffiliationEnabled\":false,\"adsProductLinksThumbnailsEnabled\":false,\"hasCustomAvatar\":false,\"organicDiscoveryEnabled\":false,\"adsProductDisplayEnabled\":false,\"adsProductLinksEnabled\":false,\"threadReactionsEnabled\":false,\"adsEnabled\":false,\"disableSocialShare\":false,\"allowAnonPost\":false,\"adsProductStoriesEnabled\":false,\"adultContent\":false,\"allowAnonVotes\":false,\"gifPickerEnabled\":true,\"mustVerify\":true,\"badgesEnabled\":false,\"mustVerifyEmail\":true,\"unapproveNewUsersEnabled\":false,\"audienceSyncEnabled\":false,\"behindClickEnabled\":false,\"mediaembedEnabled\":true,\"adsPositionBottomEnabled\":false,\"discoveryLocked\":false,\"validateAllPosts\":false,\"adsSettingsLocked\":false,\"isVIP\":false,\"adsPositionInthreadEnabled\":false},\"organizationId\":2271824,\"typeface\":\"auto\",\"url\":\"\",\"daysThreadAlive\":0,\"avatar\":{\"small\":{\"permalink\":\"https://disqus.com/api/forums/avatars/agileventures-dev.jpg?size=32\",\"cache\":\"//a.disquscdn.com/1623278138/images/noavatar32.png\"},\"large\":{\"permalink\":\"https://disqus.com/api/forums/avatars/agileventures-dev.jpg?size=92\",\"cache\":\"//a.disquscdn.com/1623278138/images/noavatar92.png\"}},\"signedUrl\":\"\"}}</script>\n\n
+        \   <script type=\"text/json\" id=\"disqus-threadData\">{\"cursor\":{\"hasPrev\":false,\"prev\":null,\"total\":0,\"hasNext\":false,\"next\":\"1:0:0\"},\"code\":0,\"response\":{\"lastModified\":1622092333,\"posts\":[],\"thread\":{\"feed\":\"https://agileventures-dev.disqus.com/my_new_title_65/latest.rss\",\"clean_title\":\"My
+        new title\",\"dislikes\":0,\"likes\":0,\"message\":\"\",\"ratingsEnabled\":false,\"isSpam\":false,\"isDeleted\":false,\"category\":\"3098810\",\"adsDisabled\":false,\"author\":\"109254110\",\"id\":\"2755338146\",\"signedLink\":\"http://disq.us/?url=http%3A%2F%2F127.0.0.1%3A59695%2Fprojects%2Fhello-mars%2Fdocuments%2Fhowto&key=wG0KbvImRJvPn0InsRn08w\",\"createdAt\":\"2014-06-11T12:39:12\",\"hasStreaming\":false,\"raw_message\":\"\",\"isClosed\":false,\"link\":\"http://127.0.0.1:59695/projects/hello-mars/documents/howto\",\"slug\":\"my_new_title_65\",\"forum\":\"agileventures-dev\",\"identifiers\":[\"howto\"],\"posts\":0,\"moderators\":[53201154,109254110],\"validateAllPosts\":false,\"title\":\"My
+        new title\",\"highlightedPost\":null}},\"order\":\"popular\"}</script>\n\n\n
+        \   <div id=\"fixed-content\"></div>\n\n\n    \n        \n            \n<script
+        type=\"text/json\" id=\"disqus-urls\">{\n    \"root\":\"//disqus.com\",\n
+        \   \"next\":\"https://c.disquscdn.com/next/current\"\n}</script>\n\n        \n
+        \       \n        <script>!function () {\n            var d = document;\n
+        \           var toH = d.head.appendChild.bind(d.head);\n\n            var
+        v = window.location.href.match(/[#&?]version=([0-9a-f]{32})/);\n            var
+        src = 'https://c.disquscdn.com/next/embed/lounge.load';\n            if (v)\n
+        \               src += '.' + v[1];\n            src += '.js';\n\n            var
+        s = d.createElement('script');\n            s.crossOrigin = 'anonymous';\n
+        \           s.id = 'bootstrap-script';\n            s.setAttribute('data-app',
+        'lounge');\n            s.src = src;\n            toH(s);\n\n            var
+        m = d.createElement('meta');\n            m.setAttribute('http-equiv', 'Content-Security-Policy');\n
+        \           m.setAttribute('content', \"script-src https:;\");\n            toH(m);\n
+        \       }();</script>\n    \n</body>\n</html>\n"
+  recorded_at: Wed, 05 Feb 2014 06:55:39 GMT
 recorded_with: VCR 6.0.0
