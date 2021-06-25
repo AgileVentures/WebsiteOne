@@ -26,7 +26,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Store uploaded files on the local file system in a temporary directory
-  config.active_storage.service = :test
+  # config.active_storage.service = :test
   config.action_mailer.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates.
@@ -37,7 +37,7 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
 
   # Store uploaded files on the local file system in a temporary directory.
-  config.active_storage.service = :test
+  # config.active_storage.service = :test
 
   config.action_mailer.perform_caching = false
 

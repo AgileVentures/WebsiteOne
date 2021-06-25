@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   # apipie
   mount Mercury::Engine => '/'
 
-  mount Events::API => '/'
-  mount EventInstances::API => '/'
-  mount Projects::API => '/'
-  mount Users::API => '/'
+  # mount Events::API => '/'
+  # mount EventInstances::API => '/'
+  # mount Projects::API => '/'
+  # mount Users::API => '/'
 
   root 'visitors#index'
 

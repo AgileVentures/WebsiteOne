@@ -1,8 +1,20 @@
 # frozen_string_literal: true
 
 require_relative 'boot'
+require 'rails'
 
-require 'rails/all'
+%w(
+  active_record/railtie
+  action_controller/railtie
+  action_view/railtie
+  action_mailer/railtie
+  active_job/railtie
+  rails/test_unit/railtie
+  sprockets/railtie
+).each do |railtie|
+  require railtie
+rescue LoadError
+end
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -51,11 +63,11 @@ module WebsiteOne
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
     config.autoload_paths += Dir[Rails.root.join('lib')]
 
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'https://www.react.agileventures.org'
-        resource '*', headers: :any, methods: [:get]
-      end
-    end
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins 'https://www.react.agileventures.org'
+    #     resource '*', headers: :any, methods: [:get]
+    #   end
+    # end
   end
 end
