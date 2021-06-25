@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'airbrake'
+# require 'airbrake'
 
 module CustomErrors
   def self.included(base)
@@ -21,16 +21,16 @@ module CustomErrors
     Rails.logger.error error.message
     error.backtrace.each_with_index { |line, index| Rails.logger.error line; break if index >= 5 }
 
-    unless [404].include? status
-      if Rails.env.production?
-        notice = Airbrake.build_notice(error)
-        notice.stash[:rack_request] = Rails.env['grape.request']
-        Airbrake.notify(notice)
-      else
-        ExceptionNotifier.notify_exception(error, env: request.env, data: { message: 'was doing something wrong' })
-      end
-    end
-
+    # unless [404].include? status
+    #   if Rails.env.production?
+    #     notice = Airbrake.build_notice(error)
+    #     notice.stash[:rack_request] = Rails.env['grape.request']
+    #     Airbrake.notify(notice)
+    #   else
+    #     ExceptionNotifier.notify_exception(error, env: request.env, data: { message: 'was doing something wrong' })
+    #   end
+    # end
+    ExceptionNotifier.notify_exception(error, env: request.env, data: { message: 'was doing something wrong' })
     case status
     when 404
       render template: 'static_pages/not_found', layout: 'layouts/application', status: 404, formats: [:html]
