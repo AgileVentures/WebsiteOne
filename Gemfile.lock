@@ -453,7 +453,9 @@ GEM
     nenv (0.3.0)
     netrc (0.11.0)
     nio4r (2.5.7)
-    nokogiri (1.11.5-x86_64-darwin)
+    nokogiri (1.11.7-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.11.7-x86_64-linux)
       racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
@@ -763,6 +765,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-18
+  x86_64-linux
 
 DEPENDENCIES
   actionmailer
@@ -830,7 +833,7 @@ DEPENDENCIES
   local_time (~> 2.1)
   mercury-rails!
   mime-types (~> 3.3, >= 3.3.1)
-  nokogiri (= 1.11.5)
+  nokogiri (= 1.11.7)
   octokit
   omniauth
   omniauth-github
