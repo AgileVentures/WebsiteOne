@@ -80,7 +80,7 @@
 </div>
 
 <script>
-    var usrData = <%= @stats[:map_data] %>;
+    var usrData = <%= @stats[:map_data].to_json %>;
     var defaultText = '<h3>User statistics</h3>'
     $(function () {
         $('#info-box').html(defaultText);
