@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :user_activity
 
-  use_vanity :current_user
+  # use_vanity :current_user
 
   include ApplicationHelper
   include CustomErrors

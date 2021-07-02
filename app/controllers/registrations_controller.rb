@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
     unless @user.new_record?
       session[:omniauth] = nil
       flash[:user_signup] = 'Signed up successfully.'
-      Vanity.track!(:signups)
+      # Vanity.track!(:signups)
       Mailer.send_welcome_message(@user).deliver_now if Features.enabled?(:welcome_email)
     end
   end
