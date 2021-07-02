@@ -5,7 +5,7 @@ old_counts = klasses.map(&:count)
 should_prompt = old_counts.min.positive?
 
 def get_country
-  country = File.readlines("#{Rails.root}spec/fixtures/country_codes.txt").sample
+  country = File.readlines("#{Rails.root}/spec/fixtures/country_codes.txt").sample
   code, name = country.chomp.split('|')
   @country = { country_name: name, country_code: code }
 end

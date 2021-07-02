@@ -330,51 +330,6 @@ ActiveRecord::Schema.define(version: 2019_04_12_143519) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
-  create_table "vanity_conversions", force: :cascade do |t|
-    t.integer "vanity_experiment_id"
-    t.integer "alternative"
-    t.integer "conversions"
-    t.index ["vanity_experiment_id", "alternative"], name: "by_experiment_id_and_alternative", unique: true
-  end
-
-  create_table "vanity_experiments", force: :cascade do |t|
-    t.string "experiment_id"
-    t.integer "outcome"
-    t.boolean "enabled"
-    t.datetime "created_at"
-    t.datetime "completed_at"
-    t.index ["experiment_id"], name: "index_vanity_experiments_on_experiment_id", unique: true
-  end
-
-  create_table "vanity_metric_values", force: :cascade do |t|
-    t.integer "vanity_metric_id"
-    t.integer "index"
-    t.integer "value"
-    t.string "date"
-    t.index ["vanity_metric_id", "date"], name: "index_vanity_metric_values_on_vanity_metric_id_and_date"
-  end
-
-  create_table "vanity_metrics", force: :cascade do |t|
-    t.string "metric_id"
-    t.datetime "updated_at"
-    t.index ["metric_id"], name: "index_vanity_metrics_on_metric_id"
-  end
-
-  create_table "vanity_participants", force: :cascade do |t|
-    t.string "experiment_id"
-    t.string "identity"
-    t.integer "shown"
-    t.integer "seen"
-    t.integer "converted"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["experiment_id", "converted"], name: "by_experiment_id_and_converted"
-    t.index ["experiment_id", "identity"], name: "by_experiment_id_and_identity", unique: true
-    t.index ["experiment_id", "seen"], name: "by_experiment_id_and_seen"
-    t.index ["experiment_id", "shown"], name: "by_experiment_id_and_shown"
-    t.index ["experiment_id"], name: "index_vanity_participants_on_experiment_id"
-  end
-
   create_table "versions", id: :serial, force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
