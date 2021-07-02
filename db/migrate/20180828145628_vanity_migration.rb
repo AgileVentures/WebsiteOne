@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-=begin
+
 require 'vanity/adapters/active_record_adapter'
 
 class VanityMigration < ActiveRecord::Migration[5.1]
@@ -77,4 +77,3 @@ class VanityMigration < ActiveRecord::Migration[5.1]
     end
   end
 end
-=end
