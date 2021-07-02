@@ -19,7 +19,11 @@
         </div>
       </section>
     </li>
+<%
+=begin %>
     <%= render ab_test :landing_page_options %>
+<%
+=end %>
   </ul>
 </div>
 <% if current_user && current_user.incomplete? && new_user_session_url == request.referrer %>
