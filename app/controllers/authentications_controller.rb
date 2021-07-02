@@ -95,7 +95,7 @@ class AuthenticationsController < ApplicationController
 
     if user.save
       # Bryan: TESTED
-      Vanity.track!(:signups)
+      # Vanity.track!(:signups)
       Mailer.send_welcome_message(user).deliver_now if Features.enabled?(:welcome_email)
       flash[:notice] = 'Signed in successfully.'
       flash[:user_signup] = 'Signed up successfully.'

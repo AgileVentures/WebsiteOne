@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'vanity/adapters/active_record_adapter'
+# require 'vanity/adapters/active_record_adapter'
 
 class VanityMigration < ActiveRecord::Migration[5.1]
   # Helper methods to ensure we're connecting to the right database, see
   # https://github.com/assaf/vanity/issues/295.
-
+=begin
   def connection
     @connection ||= ActiveRecord::Base.connection
   end
@@ -76,4 +76,5 @@ class VanityMigration < ActiveRecord::Migration[5.1]
       drop_table :vanity_participants
     end
   end
+=end
 end
