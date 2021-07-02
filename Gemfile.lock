@@ -387,12 +387,13 @@ GEM
     icalendar (2.7.1)
       ice_cube (~> 0.16)
     ice_cube (0.16.3)
-    jasmine (3.7.0)
-      jasmine-core (~> 3.7.0)
+    jasmine (3.8.0)
+      jasmine-core (~> 3.8.0)
       phantomjs
       rack (>= 1.2.1)
       rake
-    jasmine-core (3.7.1)
+      webrick
+    jasmine-core (3.8.0)
     jasmine-jquery-rails (2.0.3)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
@@ -751,6 +752,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
+    webrick (1.7.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -820,7 +822,7 @@ DEPENDENCIES
   hirb
   icalendar
   ice_cube (= 0.16.3)
-  jasmine (~> 3.5)
+  jasmine (~> 3.8)
   jasmine-jquery-rails (~> 2.0, >= 2.0.3)
   jbuilder
   jquery-rails
