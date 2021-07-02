@@ -19,7 +19,6 @@ class SubscriptionsController < ApplicationController
     create_stripe_customer unless paypal?
 
     add_appropriate_subscription(@sponsee, current_user)
-    # Vanity.track!(:premium_signups)
     send_acknowledgement_email
   rescue StandardError => e
     flash[:error] = e.message
