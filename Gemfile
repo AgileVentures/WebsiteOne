@@ -98,7 +98,7 @@ group :test do
   gem 'poltergeist' # not maintained since 2018
   gem 'puffing-billy', '~> 2.2.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
-  gem 'rubocop-performance', '~> 1.5', '>= 1.5.2'
+  gem 'rubocop-performance', '~> 1.11'
   gem 'rubocop-rails', '~> 2.10', '>= 2.10.1'
   gem 'rubocop-rspec', '>=1.28'
   gem 'selenium-webdriver'
