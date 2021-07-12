@@ -494,7 +494,7 @@ GEM
     parallel (1.20.1)
     paranoia (2.4.3)
       activerecord (>= 4.0, < 6.2)
-    parser (3.0.1.1)
+    parser (3.0.2.0)
       ast (~> 2.4.1)
     paypal-sdk-rest (1.7.4)
       multi_json (~> 1.0)
@@ -630,7 +630,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.2)
-    rubocop (1.17.0)
+    rubocop (1.18.3)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
@@ -644,7 +644,7 @@ GEM
     rubocop-performance (1.11.3)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.11.1)
+    rubocop-rails (2.11.3)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
@@ -867,7 +867,7 @@ DEPENDENCIES
   rspec-html-matchers
   rspec-rails
   rubocop-performance (~> 1.5, >= 1.5.2)
-  rubocop-rails (~> 2.10, >= 2.10.1)
+  rubocop-rails (~> 2.11)
   rubocop-rspec (>= 1.28)
   ruby-gitter
   sass-rails (~> 5.0, >= 5.0.8)
