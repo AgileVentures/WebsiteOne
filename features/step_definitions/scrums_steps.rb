@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Then(/^I should see 20 (scrum|events) in descending order by published date$/) do
+Then(/^I should see 20 events in descending order by published date$/) do
   dates = page.text.scan(/\d{4}-\d{2}-\d{2}/)
   clocks = page.all(:css, '.fa-clock-o')
   expect(clocks.count).to eq(20)
