@@ -24,6 +24,7 @@
 <% if current_user && current_user.incomplete? && new_user_session_url == request.referrer %>
   <%= render 'layouts/require_users_profile' %>
 <% end %>
+  <%= render 'text_and_image_trail' %>
 
 <footer id="footer">
   <%= render 'layouts/footer' %>
