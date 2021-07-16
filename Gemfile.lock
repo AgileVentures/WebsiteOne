@@ -709,7 +709,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stripe (5.34.0)
-    stripe-ruby-mock (3.1.0.rc2)
+    stripe-ruby-mock (3.1.0.rc3)
       dante (>= 0.2.0)
       multi_json (~> 1.0)
       stripe (> 5, < 6)
@@ -881,7 +881,7 @@ DEPENDENCIES
   spinjs-rails
   sprockets-rails
   stripe
-  stripe-ruby-mock (~> 3.1.0.rc2)
+  stripe-ruby-mock (~> 3.1.0.rc3)
   sucker_punch
   turbolinks
   uglifier
