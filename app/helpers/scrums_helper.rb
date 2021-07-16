@@ -17,6 +17,6 @@ module ScrumsHelper
   end
 
   def display_error(video)
-    "#{video[:title]}\n[Video unavailable]"
+    "#{video[:title]}\n - There is no recording of the event available"
   end
 end

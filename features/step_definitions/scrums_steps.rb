@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Then(/^I should see 20 scrums in descending order by published date$/) do
+Then(/^I should see 20 (scrum|events) in descending order by published date$/) do
   dates = page.text.scan(/\d{4}-\d{2}-\d{2}/)
   clocks = page.all(:css, '.fa-clock-o')
   expect(clocks.count).to eq(20)
@@ -31,6 +31,15 @@ Given('that there are {int} past events') do |number|
   number.times do
     create(:event_instance,
            category: 'Scrum',
+           created_at: rand(1.months.seconds.to_i).seconds.ago,
+           project_id: nil)
+  end
+end
+
+Given('that there are {int} past non-scrum events') do |number|
+  number.times do
+    create(:event_instance,
+           category: 'Pair Programming',
            created_at: rand(1.months.seconds.to_i).seconds.ago,
            project_id: nil)
   end
