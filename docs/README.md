@@ -1,6 +1,5 @@
 ## Agile Ventures Documentation
 
-:construction: UNDER CONSTRUCTION :construction:
 
 ### Project overview
 * [Project Mission, Goals and Vision](mission_statement.md)
