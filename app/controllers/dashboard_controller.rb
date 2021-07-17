@@ -23,7 +23,7 @@ class DashboardController < ApplicationController
 
   def get_activities
     activities = PublicActivity::Activity.order('created_at desc').where(owner_type: 'User').limit(100)
-    errorous_activities = activities.select { |act| act.owner&.gravatar_url.nil? }
+    errorous_activities = activities.select { |act| act.owner&.gravatar_url.nil? || act.owner.nil? }
     if errorous_activities.empty?
       activities
     else

@@ -3,7 +3,7 @@
 module Helpers
   def default_test_author
     @default_test_author ||= User.find_by_email(default_test_user_details[:email])
-    @default_test_author = User.create!(default_test_user_details) if @default_test_author.nil?
+    @default_test_author = create(:user, default_test_user_details) if @default_test_author.nil?
     @default_test_author
   end
 
@@ -44,7 +44,7 @@ module Helpers
   end
 
   def create_user(opts = {})
-    @user ||= FactoryBot.create(:user, create_visitor.merge(opts))
+    @user ||= create(:user, create_visitor.merge(opts))
     @current_user = @user
   end
 
@@ -60,7 +60,7 @@ module Helpers
   end
 
   def create_privileged_user
-    @user ||= FactoryBot.create(:user, create_privileged_visitor)
+    @user ||= create(:user, create_privileged_visitor)
     @current_user = @user
   end
 
