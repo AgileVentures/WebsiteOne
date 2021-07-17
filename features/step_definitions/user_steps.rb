@@ -21,12 +21,12 @@ end
 
 Given /^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/ do |premium, name, email, password|
   StaticPage.create!(title: 'getting started', body: 'remote pair programming')
-  @current_user = @user = FactoryBot.create(:user,
-                                            :with_karma,
-                                            first_name: name,
-                                            email: email,
-                                            password: password,
-                                            password_confirmation: password)
+  @current_user = @user = create(:user,
+                                 :with_karma,
+                                 first_name: name,
+                                 email: email,
+                                 password: password,
+                                 password_confirmation: password)
   set_user_as_premium(@user) if premium
 
   visit new_user_session_path
@@ -41,11 +41,11 @@ Given /^A( premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with passwo
   split_name = name.split
   first_name = split_name.first
   last_name  = split_name.last
-  @current_user = @user = FactoryBot.create(:user,
-                                            :with_karma,
-                                            first_name: first_name,
-                                            last_name: last_name,
-                                            email: email, password: password, password_confirmation: password)
+  @current_user = @user = create(:user,
+                                 :with_karma,
+                                 first_name: first_name,
+                                 last_name: last_name,
+                                 email: email, password: password, password_confirmation: password)
   set_user_as_premium(@user) if premium
 end
 
@@ -69,7 +69,7 @@ def set_user_as_premium(user, plan = 'Premium')
 end
 
 Given /^(?:|I am) logged in as a premium user paid for the plan via PayPal$/ do
-  @current_user = FactoryBot.create(:user)
+  @current_user = create(:user)
   visit new_user_session_path
   within('#main') do
     fill_in 'user_email', with: @current_user.email
@@ -84,7 +84,7 @@ Given /^(?:|I am) logged in as a premium user paid for the plan via PayPal$/ do
 end
 
 Given /^(?:|I am) logged in as a CraftAcademy premium user$/ do
-  @current_user = FactoryBot.create(:user)
+  @current_user = create(:user)
   subscription = Subscription.create(user: @current_user,
                                      plan: Plan.find_by(name: 'Premium'), started_at: Time.now)
   PaymentSource::CraftAcademy.create(
@@ -117,8 +117,14 @@ Given /^I have logged in$/ do
   login_as @user, scope: :user
 end
 
+
 Given /^I have logged in as a user who is authorized to view the AVDashboard$/ do
   create_user(can_see_dashboard: true)
+  login_as @user, scope: :user
+end
+
+Given('I have logged in as {string}') do |first_name|
+  @user = User.find_by_first_name first_name
   login_as @user, scope: :user
 end
 
@@ -147,6 +153,11 @@ end
 
 When(/^I have deactivated my account$/) do
   @user.destroy
+end
+
+Given(/^User (.*)'s account is deleted$/) do |name|
+  user = User.find_by_first_name name
+  user.really_destroy!
 end
 
 Given /^I do not exist as a user$/ do
@@ -298,7 +309,7 @@ end
 
 Given /^the following users exist$/ do |table|
   table.hashes.each do |attributes|
-    FactoryBot.create(:user, :with_karma, attributes)
+    create(:user, :with_karma, attributes)
   end
 end
 
@@ -313,9 +324,9 @@ end
 
 Given /^the following active users exist$/ do |table|
   table.hashes.each do |attributes|
-    p = Project.find_by(title: attributes['projects'])
+    project = Project.find_by(title: attributes['projects'])
     Delorean.time_travel_to(attributes['updated_at']) if attributes['updated_at']
-    u = FactoryBot.create(
+    user = create(
       :user,
       first_name: attributes['first_name'],
       last_name: attributes['last_name'],
@@ -324,14 +335,14 @@ Given /^the following active users exist$/ do |table|
       longitude: attributes['longitude']
     )
     Delorean.back_to_the_present if attributes['updated_at']
-    u.follow p
+    user.follow project
   end
 end
 
 Given /^the following statuses have been set$/ do |table|
   table.hashes.each do |attributes|
     user = User.find_by_first_name(attributes[:user])
-    FactoryBot.create(:status, status: attributes[:status], user_id: user.id)
+    create(:status, status: attributes[:status], user_id: user.id)
   end
 end
 
@@ -408,11 +419,6 @@ end
 Given(/^My ([^"]*) was set to (public|private)?/) do |value, option|
   @user.update("display_#{value.underscore}".to_sym => (option == 'public'))
 end
-
-# Bryan: To be deleted
-# Then (/^I (should not|should)? see a link to my ([^"]*)$/) do |option, value|
-#  pending
-# end
 
 Then(/^"([^"]*)" (should|should not) be checked$/) do |name, option|
   if option == 'should'

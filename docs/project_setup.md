@@ -122,11 +122,15 @@ the above are test keys from https://developers.google.com/recaptcha/docs/faq
 
     
 
-### Step 4: Set up the database
+### Step 4: Set up the database and static pages
 
 * Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
 
     `bundle exec rake db:setup`
+
+* Run the rake command to fetch the content for the static pages:
+
+    `bundle exec rake fetch_github:content_for_static_pages`
     
 ### Step 5: Run the tests
 
