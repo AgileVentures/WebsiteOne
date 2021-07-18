@@ -47,6 +47,13 @@ class ProjectsController < ApplicationController
     @projects = Project.where(status: 'Pending').order('created_at DESC').paginate(page: params[:page], per_page: 10)
   end
 
+  def activate_project # changes project status from 'Pending' to 'Active' making them visible on the projects index page
+    @project = Project.friendly.find(params[:id])
+    @project.status = 'Active'
+    @project.save
+    redirect_to project_path, notice: 'project active'
+  end
+
   def edit; end
 
   def update

@@ -55,6 +55,15 @@
                       Start Jitsi Meet
                     </button>
                   <% end %>
+                  <!-- form for activating project making it visible on projects index page-->
+                  <% if @project.status != 'Active' %>
+                    <%= form_tag(activate_project_path(@project)) do %>
+                      <%= button_tag(type: "submit" , :class => 'btn btn-primary') do %>
+                          Activate Project <i class="fa fa-power-off"></i>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+
                 </div>
                 <hr>
                 <!-- Modal -->

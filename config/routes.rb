@@ -78,6 +78,7 @@ Rails.application.routes.draw do
   end
 
   get '/pending_projects' => 'projects#pending_projects'
+  post '/activate_project/:id' => 'projects#activate_project', as: 'activate_project'
 
 
   get '/mentors' => 'users#index', defaults: { title: 'Mentor' }
