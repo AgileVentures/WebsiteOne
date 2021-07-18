@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     initialze_projects
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
-    @projects = @projects.search(params[:search], params[:page])
+    @projects = @projects.where(status: 'Active').search(params[:search], params[:page]) # Selects on ACTIVE status projects
     render layout: 'with_sidebar_sponsor_right'
   end
 
