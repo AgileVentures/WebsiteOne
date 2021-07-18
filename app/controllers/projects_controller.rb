@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge('user_id' => current_user.id))
+    @project = Project.new(project_params.merge('user_id' => current_user.id, 'status' => 'Pending')) # Create new project with default status of "Pending"
     if @project.save
       add_to_feed(:create)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
