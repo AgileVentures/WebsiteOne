@@ -54,6 +54,13 @@ class ProjectsController < ApplicationController
     redirect_to project_path, notice: 'project active'
   end
 
+  def deactivate_project # changes project status from 'Active' to 'Pending' making them visible on the projects index page
+    @project = Project.friendly.find(params[:id])
+    @project.status = 'Pending'
+    @project.save
+    redirect_to project_path, notice: 'project deactived'
+  end
+
   def edit; end
 
   def update
