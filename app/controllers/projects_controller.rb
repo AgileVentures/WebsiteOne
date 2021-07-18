@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: %i(index show)
   before_action :set_project, only: %i(show edit update)
   before_action :get_current_stories, only: [:show]
+  before_action :valid_admin, only: [:pending_projects, :activate_project, :deactivate_project]
   include DocumentsHelper
 
   # TODO: YA Add controller specs for all the code
@@ -59,6 +60,12 @@ class ProjectsController < ApplicationController
     @project.status = 'Pending'
     @project.save
     redirect_to project_path, notice: 'project deactived'
+  end
+
+  def valid_admin
+    if !current_user.admin?
+      redirect_to root_path, notice: 'You do not have permission to perform that operation'
+    end
   end
 
   def edit; end
