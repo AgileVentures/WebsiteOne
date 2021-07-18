@@ -43,6 +43,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def pending_projects # view only projects that are of status 'pending'
+    @projects = Project.where(status: 'Pending').order('created_at DESC').paginate(page: params[:page], per_page: 10)
+  end
+
   def edit; end
 
   def update

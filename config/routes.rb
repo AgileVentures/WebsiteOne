@@ -77,6 +77,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/pending_projects' => 'projects#pending_projects'
+
+
   get '/mentors' => 'users#index', defaults: { title: 'Mentor' }
   get '/premium_members' => 'users#index', defaults: { title: 'Premium' }
 
