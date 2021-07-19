@@ -3,9 +3,10 @@
 class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_action :authenticate_user!, except: %i(index show)
-  before_action :set_project, only: %i(show edit update)
+  before_action :set_project, only: %i(show edit update access_to_edit)
   before_action :get_current_stories, only: [:show]
   before_action :valid_admin, only: [:pending_projects, :activate_project, :deactivate_project]
+  before_action :access_to_edit, only: [:edit]
   include DocumentsHelper
 
   # TODO: YA Add controller specs for all the code
@@ -62,11 +63,19 @@ class ProjectsController < ApplicationController
     redirect_to project_path, notice: 'project deactived'
   end
 
-  def valid_admin
+  def valid_admin # Check to see if user is admin
     if !current_user.admin?
       redirect_to root_path, notice: 'You do not have permission to perform that operation'
     end
   end
+
+  def access_to_edit # Check to see if user is admin or project creator
+    unless (current_user.admin?) || (current_user == @project.user)
+      redirect_to root_path, notice: 'You do not have permission to perform that operation'
+    end
+  end
+
+
 
   def edit; end
 
