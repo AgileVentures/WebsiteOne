@@ -67,7 +67,7 @@
                     <!-- form for deactivating project making it invisible on projects index page-->
                     <% if @project.status == 'Active' %>
                       <%= form_tag(deactivate_project_path(@project)) do %>
-                        <%= button_tag(type: "submit" , :class => 'btn btn-primary') do %>
+                        <%= button_tag(type: "submit" , :class => 'btn btn-danger') do %>
                             Deactivate Project <i class="fa fa-power-off"></i>
                         <% end %>
                       <% end %>
