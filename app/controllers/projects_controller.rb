@@ -3,8 +3,10 @@
 class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_action :authenticate_user!, except: %i(index show)
-  before_action :set_project, only: %i(show edit update)
+  before_action :set_project, only: %i(show edit update access_to_edit)
   before_action :get_current_stories, only: [:show]
+  before_action :valid_admin, only: [:pending_projects, :activate_project, :deactivate_project]
+  before_action :access_to_edit, only: [:edit]
   include DocumentsHelper
 
   # TODO: YA Add controller specs for all the code
@@ -13,7 +15,7 @@ class ProjectsController < ApplicationController
     initialze_projects
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
-    @projects = @projects.search(params[:search], params[:page])
+    @projects = @projects.where(status: 'Active').search(params[:search], params[:page]) # Selects on ACTIVE status projects
     render layout: 'with_sidebar_sponsor_right'
   end
 
@@ -33,7 +35,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge('user_id' => current_user.id))
+    @project = Project.new(project_params.merge('user_id' => current_user.id, 'status' => 'Pending')) # Create new project with default status of "Pending"
     if @project.save
       add_to_feed(:create)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
@@ -42,6 +44,38 @@ class ProjectsController < ApplicationController
       render action: 'new'
     end
   end
+
+  def pending_projects # view only projects that are of status 'pending'
+    @projects = Project.where(status: 'Pending').order('created_at DESC').paginate(page: params[:page], per_page: 10)
+  end
+
+  def activate_project # changes project status from 'Pending' to 'Active' making them visible on the projects index page
+    @project = Project.friendly.find(params[:id])
+    @project.status = 'Active'
+    @project.save
+    redirect_to project_path, notice: 'project active'
+  end
+
+  def deactivate_project # changes project status from 'Active' to 'Pending' making them visible on the projects index page
+    @project = Project.friendly.find(params[:id])
+    @project.status = 'Pending'
+    @project.save
+    redirect_to project_path, notice: 'project deactived'
+  end
+
+  def valid_admin # Check to see if user is admin
+    if !current_user.admin?
+      redirect_to root_path, notice: 'You do not have permission to perform that operation'
+    end
+  end
+
+  def access_to_edit # Check to see if user is admin or project creator
+    unless (current_user.admin?) || (current_user == @project.user)
+      redirect_to root_path, notice: 'You do not have permission to perform that operation'
+    end
+  end
+
+
 
   def edit; end
 

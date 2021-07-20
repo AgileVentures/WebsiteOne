@@ -324,6 +324,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_172212) do
     t.datetime "deleted_at"
     t.integer "event_participation_count", default: 0
     t.boolean "can_see_dashboard", default: false
+    t.boolean "admin"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

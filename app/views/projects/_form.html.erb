@@ -11,11 +11,18 @@
       </div>
       <%= awesome_text_field f, :image_url, placeholder: 'Paste a link to your image here' %>
       <%= awesome_text_area f, :description, rows: 10, placeholder: 'Description' %>
-
-      <div class='form-group'>
-        <%= f.label :status %>
-        <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
-      </div>
+      
+      <% if current_user.admin? %>
+        <div class='form-group'>
+          <%= f.label :status %>
+          <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
+        </div>
+      <% elsif @project.user %>
+        <div class='form-group'>
+          <%= f.label :status %>
+          <%= f.select :status, %w( Closed Pending ), {}, :class => 'form-control input-lg' %>
+        </div>
+      <% end %>
 
       <div id='source_repositories' class='form-group'>
         <%= f.fields_for :source_repositories do |source_repository| %>
