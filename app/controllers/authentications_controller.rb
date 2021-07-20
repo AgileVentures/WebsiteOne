@@ -8,27 +8,20 @@ class AuthenticationsController < ApplicationController
   def create
     omniauth = request.env['omniauth.auth']
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-
     @path = request.env['omniauth.origin'] || root_path
-
     if authentication.present?
       attempt_login_with_auth(authentication, @path)
-
     elsif current_user
       create_new_authentication_for_current_user(omniauth, @path)
-
     elsif deactivated_user_with_email(omniauth['info']['email']).present?
       show_deactivated_message_and_redirect_to_root and return
-
     else
       create_new_user_with_authentication(omniauth)
     end
-
     link_github_profile if current_user && omniauth['provider'] == 'github' && current_user.github_profile_url.blank?
   end
 
   def failure
-    # Bryan: TESTED
     flash[:alert] = params[:message] || 'Authentication failed.'
     redirect_to root_path
   end
@@ -36,7 +29,6 @@ class AuthenticationsController < ApplicationController
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     if @authentication && (current_user.authentications.count == 1) && current_user.encrypted_password.blank?
-      # Bryan: TESTED
       flash[:alert] = 'Failed to unlink GitHub. Please use another provider for login or reset password.'
     elsif @authentication&.destroy
       user = User.find(current_user.id)
@@ -103,7 +95,6 @@ class AuthenticationsController < ApplicationController
 
     if user.save
       # Bryan: TESTED
-      Vanity.track!(:signups)
       Mailer.send_welcome_message(user).deliver_now if Features.enabled?(:welcome_email)
       flash[:notice] = 'Signed in successfully.'
       flash[:user_signup] = 'Signed up successfully.'

@@ -4,19 +4,27 @@ source 'https://rubygems.org'
 
 ruby '3.0.0'
 
+# Rather than loading the entire Rails framework, we charry pick the parts we use
+gem "activerecord"
+gem "activemodel"
+gem "actionpack"
+gem "actionview"
+gem "actionmailer"
+gem "activejob"
+gem "activesupport"
+gem "railties"
+gem "sprockets-rails"
+
+# Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts-as-taggable-on'
 gem 'acts_as_tree'
 gem 'acts_as_votable', '~> 0.12.1'
-gem 'airbrake'
-gem 'rails', '~> 6.0'
-# gem 'apipie-rails'
 gem 'addressable'
 gem 'bootstrap-sass'
 gem 'cocoon'
 gem 'code_climate_badges', git: 'https://github.com/AgileVentures/codeclimate_badges'
 gem 'coderay'
-gem 'coffee-rails'
 gem 'colored'
 gem 'compass-rails', '~> 4.0'
 gem 'config'
@@ -28,16 +36,14 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'friendly_id'
 gem 'geocoder'
-gem 'grape'
 gem 'ice_cube', '0.16.3'
-gem 'jbuilder'
 gem 'jquery-rails'
 gem 'jquery-turbolinks', '2.1.0'
 gem 'jvectormap-rails', '~> 2.0'
 gem 'jwt'
+gem 'jbuilder'
 gem 'kaminari'
 gem 'kramdown', '~> 2.1'
-gem 'letter_opener', group: :development
 gem 'local_time', '~> 2.1'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
 gem 'nokogiri', '1.11.5'
@@ -64,10 +70,8 @@ gem 'sass-rails', '~> 5.0', '>= 5.0.8'
 gem 'simple_form', '~> 5.0'
 gem 'slack-ruby-client'
 gem 'spinjs-rails'
-gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'stripe'
 gem 'sucker_punch'
-# gem 'therubyracer', platforms: :ruby
 gem 'bootsnap', '~> 1.4'
 gem 'icalendar'
 gem 'mime-types', '~> 3.3', '>= 3.3.1'
@@ -80,7 +84,7 @@ gem 'vanity'
 gem 'verbs'
 gem 'will_paginate-bootstrap'
 gem 'youtube_rails'
-gem 'yt'
+gem 'rack-timeout'
 
 group :test do
   gem 'capybara'
@@ -106,6 +110,8 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'derailed_benchmarks'
+  gem 'letter_opener'
 end
 
 group :development, :test do
@@ -134,10 +140,4 @@ group :development, :test do
   gem 'simplecov', '~> 0.17.1'
 end
 
-group :staging, :production do
-  gem 'rack-timeout'
-end
 
-group :production do
-  gem 'newrelic_rpm'
-end

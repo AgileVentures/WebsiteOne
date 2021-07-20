@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 require 'custom_errors'
-
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
@@ -13,7 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :user_activity
 
-  use_vanity :current_user
+  # use_vanity :current_user
 
   include ApplicationHelper
   include CustomErrors

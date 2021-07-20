@@ -17,11 +17,7 @@ describe ScrumsController do
         end
 
         it 'includes instances with category Scrum' do
-          expect(subject).to include scrum, scrum2
-        end
-
-        it 'does not includes instances with category PairProgramming' do
-          expect(subject).to_not include hangout
+          expect(subject).to include scrum, scrum2, hangout
         end
       end
     end
