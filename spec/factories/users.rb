@@ -24,5 +24,9 @@ FactoryBot.define do
     after(:save) do |user, evaluator|
       create(:authentication, provider: 'gplus', uid: evaluator.gplus, user_id: user.id)
     end
+
+    factory :signed_in_user do
+      email {'go@go.com'}
+    end
   end
 end
