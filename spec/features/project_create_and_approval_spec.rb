@@ -20,7 +20,7 @@ feature 'user cannot access new project page if signed out' do
       visit('/pending_projects')
     end
 
-    it do
+    it "is expected to have text 'You do not have permission to perform that operation' " do
       expect(page).to have_content('You do not have permission to perform that operation')
     end
   end
@@ -32,7 +32,7 @@ feature 'user cannot access new project page if signed out' do
       visit("/projects/#{project.id}/edit")
     end
 
-    it do
+    it "is expected to have text 'You do not have permission to perform that operation' " do
       expect(page).to have_content('You do not have permission to perform that operation')
     end
   end
@@ -40,68 +40,59 @@ feature 'user cannot access new project page if signed out' do
   feature 'Non-admin user cannot see activate button on project page' do
     before do
       login_as user, scope: :user
-      visit('/projects/new')
+      project = create(:project, status: 'Pending')
+      visit("/projects/#{project.id}")
     end
 
-    it 'is expected to....' do
-      expect(page).to have_content('Creating a new Project')
-
-      fill_in('Title', with: 'Read a book')
-      fill_in('Description', with: 'Excellent read')
-
-      click_button('Submit')
-
-      expect(Project.last.title).to eq('Read a book')
-      expect(Project.last.status).to eq('Pending')
-
-      visit("/projects/#{Project.last.id}")
+    it "is expected to not have text 'Activate Project' " do
       expect(page).to have_no_content('Activate Project')
     end
   end
 
-  scenario 'Non-admin user cannot see deactivate button on project page' do
-    # new_user_form.user_sign_in
-    login_as user, scope: :user
-    @project = create(:project, status: 'Active')
-
-    visit("/projects/#{@project.id}")
-    expect(page).to have_no_content('Deactivate Project')
+  feature 'Non-admin user cannot see deactivate button on project page' do
+    before do
+      login_as user, scope: :user
+      project = create(:project, status: 'Active')
+      visit("/projects/#{project.id}")
+    end
+    
+    it "is expected to not have text 'Deactivate Project' " do
+      expect(page).to have_no_content('Deactivate Project')
+    end
   end
 
-  scenario 'Admin user can access pending projects page' do
-    # new_user_form.admin_user_sign_in
-    login_as admin, scope: :user
-
-    visit('/pending_projects')
-    expect(page).to have_content('List of Pending Projects')
+  feature 'Admin user can access pending projects page' do
+    before do
+      login_as admin, scope: :user
+      visit('/pending_projects')
+    end
+     
+    it "is expected to have text 'List of Pending Projects' " do
+      expect(page).to have_content('List of Pending Projects')
+    end
   end
 
-  scenario 'Admin user can see activate button on project page' do
-    # new_user_form.admin_user_sign_in
-    login_as admin, scope: :user
+  feature 'Admin user can see activate button on project page' do
+    before do
+      login_as admin, scope: :user
+      project = create(:project, status: 'Pending')
+      visit("/projects/#{project.id}")
+    end
 
-    visit('/projects/new')
-    expect(page).to have_content('Creating a new Project')
-
-    fill_in('Title', with: 'Read a book')
-    fill_in('Description', with: 'Excellent read')
-
-    click_button('Submit')
-
-    expect(Project.last.title).to eq('Read a book')
-    expect(Project.last.status).to eq('Pending')
-
-    visit("/projects/#{Project.last.id}")
-    expect(page).to have_content('Activate Project')
+    it "is expected to have text 'Activate Project'" do
+      expect(page).to have_content('Activate Project')
+    end
   end
 
-  scenario 'Admin user can see deactivate button on project page' do
-    # new_user_form.admin_user_sign_in
-    login_as admin, scope: :user
+  feature 'Admin user can see deactivate button on project page' do
+    before do
+      login_as admin, scope: :user
+      @project = create(:project, status: 'Active')
+      visit("/projects/#{@project.id}")
+    end
 
-    @project = create(:project, status: 'Active')
-
-    visit("/projects/#{@project.id}")
-    expect(page).to have_content('Deactivate Project')
+    it "is expected to have text 'Deactivate Project' " do
+      expect(page).to have_content('Deactivate Project')
+    end
   end
 end
