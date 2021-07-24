@@ -55,8 +55,8 @@ Rails.application.routes.draw do
       get :mercury_saved
       get :follow
       get :unfollow
-      post :activate_project, action: :update, defaults: { command: 'activate' }
-      post :deactivate_project, action: :update, defaults: { command: 'deactivate' }
+      post :activate, action: :update, defaults: { command: 'activate' }
+      post :deactivate, action: :update, defaults: { command: 'deactivate' }
     end
     
     resources :documents, except: %i(edit update), format: false do

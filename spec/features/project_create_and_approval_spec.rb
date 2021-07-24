@@ -13,7 +13,7 @@ describe 'Project is subject to approval' do
       fill_in('Description', with: 'Excellent read')
 
       click_button('Submit')
-      expect(Project.last.status).to eq('Pending')
+      expect(Project.last.status).to eq('pending')
     end
   end
 
@@ -45,7 +45,7 @@ describe 'Project is subject to approval' do
   feature 'Non-admin user cannot see activate button on project page' do
     before do
       login_as user, scope: :user
-      project = create(:project, status: 'Pending')
+      project = create(:project, status: 'pending')
       visit("/projects/#{project.id}")
     end
 
@@ -58,7 +58,7 @@ describe 'Project is subject to approval' do
   feature 'Non-admin user cannot see deactivate button on project page' do
     before do
       login_as user, scope: :user
-      project = create(:project, status: 'Active')
+      project = create(:project, status: 'active')
       visit("/projects/#{project.id}")
     end
 
@@ -85,7 +85,7 @@ describe 'Project is subject to approval' do
   feature 'Admin user can see activate button on project page' do
     before do
       login_as admin, scope: :user
-      project = create(:project, status: 'Pending')
+      project = create(:project, status: 'pending')
       visit("/projects/#{project.id}")
     end
 
@@ -98,7 +98,7 @@ describe 'Project is subject to approval' do
   feature 'Admin user can see deactivate button on project page' do
     before do
       login_as admin, scope: :user
-      @project = create(:project, status: 'Active')
+      @project = create(:project, status: 'active')
       visit("/projects/#{@project.id}")
     end
 

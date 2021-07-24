@@ -5,18 +5,22 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: %i(index show)
   before_action :set_project, only: %i(show edit update access_to_edit)
   before_action :get_current_stories, only: [:show]
-  before_action :valid_admin, only: [:pending_projects, :activate_project, :deactivate_project]
-  before_action :access_to_edit, only: [:edit]
+  before_action :valid_admin, only: %i(index), if: -> { params[:status] = 'pending' }
+  # before_action :access_to_edit, only: [:edit]
   include DocumentsHelper
 
   # TODO: YA Add controller specs for all the code
 
   def index
-    initialze_projects
+    initialze_projects(params[:status])
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
     @projects = @projects.where(status: 'Active').search(params[:search], params[:page]) # Selects on ACTIVE status projects
-    render layout: 'with_sidebar_sponsor_right'
+    if params[:status] = 'pending'
+      render :pending_projects, layout: 'with_sidebar_sponsor_right'
+    else
+      render layout: 'with_sidebar_sponsor_right'
+    end
   end
 
   def show
@@ -35,7 +39,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge('user_id' => current_user.id, 'status' => 'Pending')) # Create new project with default status of "Pending"
+    @project = Project.new(project_params.merge('user_id' => current_user.id, 'status' => 'pending')) # Create new project with default status of "Pending"
     if @project.save
       add_to_feed(:create)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
@@ -45,37 +49,35 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def pending_projects # view only projects that are of status 'pending'
-    @projects = Project.where(status: 'Pending').order('created_at DESC').paginate(page: params[:page], per_page: 10)
-  end
-
-  def activate_project # changes project status from 'Pending' to 'Active' making them visible on the projects index page
+  # changes project status from 'Pending' to 'Active' making them visible on the projects index page
+  def activate_project
     @project = Project.friendly.find(params[:id])
-    @project.status = 'Active'
+    # refactor this to use #update
+    @project.status = 'active'
     @project.save
     redirect_to project_path, notice: 'project active'
   end
 
-  def deactivate_project # changes project status from 'Active' to 'Pending' making them visible on the projects index page
+  # changes project status from 'Active' to 'Pending' making them visible on the projects index page
+  def deactivate_project
     @project = Project.friendly.find(params[:id])
-    @project.status = 'Pending'
+    # refactor this to use #update
+    @project.status = 'pending'
     @project.save
     redirect_to project_path, notice: 'project deactived'
   end
 
-  def valid_admin # Check to see if user is admin
-    if !current_user.admin?
+  # Check to see if user is admin
+  def valid_admin
+    redirect_to root_path, notice: 'You do not have permission to perform that operation' unless current_user.admin?
+  end
+
+  # Check to see if user is admin or project creator
+  def access_to_edit
+    unless current_user.admin? || (current_user == @project.user)
       redirect_to root_path, notice: 'You do not have permission to perform that operation'
     end
   end
-
-  def access_to_edit # Check to see if user is admin or project creator
-    unless (current_user.admin?) || (current_user == @project.user)
-      redirect_to root_path, notice: 'You do not have permission to perform that operation'
-    end
-  end
-
-
 
   def edit; end
 
@@ -127,8 +129,9 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
-  def initialze_projects
-    @projects = Project.order('status ASC')
+  def initialze_projects(status)
+    status ||= 'active'
+    @projects = Project.where(status: status)
                        .order('last_github_update DESC NULLS LAST')
                        .order('commit_count DESC NULLS LAST')
                        .includes(:user)
