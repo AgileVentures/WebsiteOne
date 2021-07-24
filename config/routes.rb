@@ -55,15 +55,18 @@ Rails.application.routes.draw do
       get :mercury_saved
       get :follow
       get :unfollow
+      post :activate_project, action: :update, defaults: { command: 'activate' }
+      post :deactivate_project, action: :update, defaults: { command: 'deactivate' }
     end
-
+    
     resources :documents, except: %i(edit update), format: false do
       put :mercury_update
       get :mercury_saved
     end
-
+    
     resources :events, only: [:index]
   end
+  get :pending_projects, controller: :projects, action: :index, defaults: { status: 'pending' }
 
   resources :events do
     member do
@@ -77,10 +80,10 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/pending_projects' => 'projects#pending_projects'
-  post '/activate_project/:id' => 'projects#activate_project', as: 'activate_project'
-  post '/deactivate_project/:id' => 'projects#deactivate_project', as: 'deactivate_project'
-
+  # get '/pending_projects' => 'projects#pending_projects'
+  # post '/activate_project/:id', controller: :projects, action: :activate_project
+  # post '/activate_project/:id' => 'projects#activate_project', as: 'activate_project'
+  # post '/deactivate_project/:id' => 'projects#deactivate_project', as: 'deactivate_project'
 
   get '/mentors' => 'users#index', defaults: { title: 'Mentor' }
   get '/premium_members' => 'users#index', defaults: { title: 'Premium' }
