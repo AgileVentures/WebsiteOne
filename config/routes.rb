@@ -5,13 +5,7 @@ def loaderio_token
 end
 
 Rails.application.routes.draw do
-  # apipie
   mount Mercury::Engine => '/'
-
-  mount Events::API => '/'
-  mount EventInstances::API => '/'
-  mount Projects::API => '/'
-  mount Users::API => '/'
 
   root 'visitors#index'
 
@@ -42,6 +36,8 @@ Rails.application.routes.draw do
       get :cancelvote
     end
   end
+
+  resources :dashboard, only: :index
 
   match '/hangouts/:id' => 'event_instances#update', :via => %i(put options), as: 'hangout'
   match '/hangouts' => 'event_instances#index', :via => [:get], as: 'hangouts'
@@ -110,18 +106,5 @@ Rails.application.routes.draw do
 
   get '/calendar' => 'calendar#index'
 
-  resources :hookups
-
-  get '/vanity' => 'vanity#index'
-  get '/vanity/participant/:id' => 'vanity#participant'
-  post '/vanity/complete'
-  post '/vanity/chooses'
-  post '/vanity/reset'
-  post '/vanity/enable'
-  post '/vanity/disable'
-  post '/vanity/add_participant'
-  get '/vanity/image'
-
-  get '/dashboard', to: 'dashboard#index'
   get '*id', to: 'static_pages#show', as: 'static_page', format: false
 end

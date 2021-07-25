@@ -5,12 +5,13 @@ Feature: Past Events Index
   I would like to be able to see a list of previous scrums"
 
   Background:
-    Given that there are 25 past events
+    Given that there are 5 past events
+    And that there are 15 past non-scrum events
 
   Scenario: Scrums index page renders a timeline of scrums for users to view in descending order
     Given I visit "/scrums"
     Then I should see "Previous events"
-    And I should see 20 scrums in descending order by published date
+    And I should see 20 events in descending order by published date
 
   Scenario: Videos with nil youtube id do not display youtube embed link
     Given there is one past scrum with invalid youtube id

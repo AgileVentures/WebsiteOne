@@ -11,7 +11,6 @@ Given(/^the following articles exist:$/) do |table|
     else
       article = default_test_author.articles.new hash
     end
-
     article.save!
   end
 end
