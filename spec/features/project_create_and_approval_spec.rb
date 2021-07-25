@@ -6,6 +6,7 @@ describe 'Project is subject to approval' do
 
   subject { page }
 
+  # move to model spec?
   feature 'upon creation by a user without admin rights' do
     scenario "is expected to set newly created project status to 'Pending'" do
       login_as user, scope: :user
@@ -30,6 +31,23 @@ describe 'Project is subject to approval' do
     }
   end
 
+  feature 'user with admin rights can access pending projects page' do
+    let!(:projects) { 5.times { create(:project, status: 'pending') } }
+    before do
+      login_as admin, scope: :user
+      visit('/pending_projects')
+    end
+
+    it {
+      is_expected
+        .to have_content('List of Pending Projects')
+    }
+
+    it {
+      is_expected.to have_selector('.project_card', count: 5)
+    }
+  end
+
   feature 'user without admin rights cannot access edit projects view for a project they did not create' do
     before do
       login_as user, scope: :user
@@ -43,10 +61,9 @@ describe 'Project is subject to approval' do
     }
   end
 
-  # Add spec for Admin user being okay to access? 
   feature 'user with admin rights can access edit projects view for a project they did not create' do
     let!(:project) { create(:project, user: user) }
-    
+
     before do
       login_as admin, scope: :user
       visit("/projects/#{project.id}/edit")
@@ -86,21 +103,9 @@ describe 'Project is subject to approval' do
     it {
       is_expected
         .to have_no_content('Deactivate Project')
-    }    
+    }
   end
 
-  feature 'user with admin rights can access pending projects page' do
-    before do
-      login_as admin, scope: :user
-      visit('/pending_projects')
-    end
-
-    it {
-      is_expected
-        .to have_content('List of Pending Projects')
-    }    
-
-  end
 
   feature 'user with admin rights can see activate button on project page' do
     before do
@@ -112,7 +117,7 @@ describe 'Project is subject to approval' do
     it {
       is_expected
         .to have_content('Activate Project')
-    } 
+    }
   end
 
   feature 'user with admin rights can see deactivate button on project page' do
@@ -126,6 +131,6 @@ describe 'Project is subject to approval' do
     it {
       is_expected
         .to have_content('Deactivate Project')
-    } 
+    }
   end
 end
