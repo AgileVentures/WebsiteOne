@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
     projects_status = params[:status] || 'active'
+    binding.pry
     @projects = @projects.where(status: projects_status).search(params[:search], params[:page]) # Selects on ACTIVE status projects
     if params[:status] == 'pending'
       render :pending_projects, layout: 'with_sidebar_sponsor_right'
