@@ -5,7 +5,7 @@ RSpec.describe ProjectsController, type: :controller do
     { id: 1,
       title: 'WebTwentyFive',
       description: 'My project description',
-      status: 'Active',
+      status: 'active',
       pitch: 'My project pitch ...',
       pivotaltracker_url: 'https://www.pivotaltracker.com/s/projects/982890',
       slug: 'my-project' }
