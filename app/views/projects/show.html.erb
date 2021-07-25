@@ -57,15 +57,14 @@
                   <% end %>
                   <% if current_user.admin? %>
                     <!-- form for activating project making it visible on projects index page-->
-                    <% if @project.status != 'Active' %>
+                    <% if @project.status == 'pending' %>
                       <%= form_tag(activate_project_path(@project)) do %>
                         <%= button_tag(type: "submit" , :class => 'btn btn-primary') do %>
                             Activate Project <i class="fa fa-power-off"></i>
                         <% end %>
                       <% end %>
-                    <% end %>
+                    <% else %>
                     <!-- form for deactivating project making it invisible on projects index page-->
-                    <% if @project.status == 'Active' %>
                       <%= form_tag(deactivate_project_path(@project)) do %>
                         <%= button_tag(type: "submit" , :class => 'btn btn-danger') do %>
                             Deactivate Project <i class="fa fa-power-off"></i>

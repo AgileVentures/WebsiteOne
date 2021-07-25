@@ -6,10 +6,8 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i(show edit update access_to_edit)
   before_action :get_current_stories, only: [:show]
   before_action :valid_admin, only: %i(index), if: -> { params[:status] = 'pending' }
-  # before_action :access_to_edit, only: [:edit]
+  before_action :access_to_edit, only: [:edit]
   include DocumentsHelper
-
-  # TODO: YA Add controller specs for all the code
 
   def index
     initialze_projects(params[:status])
