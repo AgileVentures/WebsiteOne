@@ -67,7 +67,6 @@ describe 'Project is subject to approval' do
     before do
       login_as admin, scope: :user
       visit("/projects/#{project.id}/edit")
-      save_and_open_page
     end
 
     it {
