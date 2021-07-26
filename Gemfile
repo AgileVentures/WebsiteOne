@@ -90,7 +90,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'capybara-selenium', '~> 0.0.6'
-  gem 'cucumber-rails', '~> 2.0', require: false
+  gem 'cucumber-rails', '~> 2.4', require: false
   gem 'database_cleaner'
   gem 'delorean' # gem is discontinued
   gem 'launchy'
