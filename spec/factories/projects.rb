@@ -9,7 +9,6 @@ FactoryBot.define do
     description { 'Warp fields stabilize.' }
     pitch { "'I AM the greatest!' - M. Ali" }
     status { 'active' }
-
     factory :project_with_tags do
       transient do
         tags { [generate(:tag), generate(:tag)] }
