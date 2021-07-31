@@ -42,7 +42,6 @@ RSpec.describe 'OmniAuth authentication', type: :feature do
           visit new_user_session_path
           expect do
             expect do
-              # save_and_open_page
               page.click_on "with #{name}"
             end.to change(User, :count).by(0)
           end.to change(Authentication, :count).by(0)

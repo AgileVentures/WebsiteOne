@@ -1,0 +1,40 @@
+<% provide :title, 'Projects' %>
+  <div class="row">
+    <div class="col-xs-9">
+      <h1 id="projects-header">List of Pending Projects</h1>
+    </div>
+    <div class="col-xs-3">
+      <% if user_signed_in? %>
+        <ul class="user-controls new-project-btn">
+          <li><%= custom_css_btn 'new project', 'fa-2x fa fa-plus', new_project_path %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @projects.empty? %>
+    <p>We have no projects right now&#8230;</p>
+  <% else %>
+    <p>
+      To get involved in any of the projects, join one of the
+      <%= link_to 'scrums', events_path %>
+      and reach out to us, or send us an email at
+      <a href="mailto:info@agileventures.org">info@agileventures.org</a>.
+    </p>
+    <div class="row stack-search">
+      <%= simple_form_for(:project, method: "get", html: { class: 'form-vertical no-margin' }) do |f| %>
+      <div class="col-xs-12 flex">
+        <%= f.input :languages, label: 'Search projects by programming language', collection: @projects_languages_array, selected: @language, include_blank: true %>
+        <div class="language-search-btn">
+          <%= f.button :submit, 'Search', class: 'btn btn-search btn' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <ul id="project-list" style="list-style: none; padding-left: 0;">
+      <%= render 'listing' %>
+    </ul>
+  </div>
+  <%= will_paginate @projects %>
+<% end %>

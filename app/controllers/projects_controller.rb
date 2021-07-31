@@ -3,18 +3,23 @@
 class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_action :authenticate_user!, except: %i(index show)
-  before_action :set_project, only: %i(show edit update)
+  before_action :set_project, only: %i(show edit update access_to_edit)
   before_action :get_current_stories, only: [:show]
+  before_action :valid_admin, only: %i(index), if: -> { params[:status] = 'pending' }
+  before_action :access_to_edit, only: [:edit]
   include DocumentsHelper
 
-  # TODO: YA Add controller specs for all the code
-
   def index
-    initialze_projects
+    initialze_projects(params[:status])
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
-    @projects = @projects.search(params[:search], params[:page])
-    render layout: 'with_sidebar_sponsor_right'
+    projects_status = params[:status] || 'active'
+    @projects = @projects.where(status: projects_status).search(params[:search], params[:page]) # Selects on ACTIVE status projects
+    if params[:status] == 'pending'
+      render :pending_projects, layout: 'with_sidebar_sponsor_right'
+    else
+      render layout: 'with_sidebar_sponsor_right'
+    end
   end
 
   def show
@@ -33,7 +38,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge('user_id' => current_user.id))
+    @project = Project.new(project_params.merge('user_id' => current_user.id, 'status' => 'pending')) # Create new project with default status of "Pending"
     if @project.save
       add_to_feed(:create)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
@@ -46,6 +51,7 @@ class ProjectsController < ApplicationController
   def edit; end
 
   def update
+    params[:command].present? && update_project_status(params[:command]) and return
     if @project.update(project_params)
       add_to_feed(:update)
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
@@ -93,8 +99,9 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
-  def initialze_projects
-    @projects = Project.order('status ASC')
+  def initialze_projects(status)
+    status ||= 'active'
+    @projects = Project.where(status: status)
                        .order('last_github_update DESC NULLS LAST')
                        .order('commit_count DESC NULLS LAST')
                        .includes(:user)
@@ -134,5 +141,22 @@ class ProjectsController < ApplicationController
                                     :pivotaltracker_id, :image_url, languages_attributes: [:name],
                                                                     name_ids: [], source_repositories_attributes: %i(id url _destroy),
                                                                     issue_trackers_attributes: %i(id url _destroy))
+  end
+
+  def valid_admin
+    redirect_to root_path, notice: 'You do not have permission to perform that operation' unless current_user.admin?
+  end
+
+  def access_to_edit
+    unless current_user.admin? || (current_user == @project.user)
+      redirect_to root_path, notice: 'You do not have permission to perform that operation'
+    end
+  end
+
+  def update_project_status(command)
+    status = command == 'activate' ? 'active' : 'pending'
+    @project = Project.friendly.find(params[:id])
+    @project.update(status: status)
+    redirect_to project_path, notice: "Project was #{command}d"
   end
 end
