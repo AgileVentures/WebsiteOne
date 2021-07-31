@@ -48,39 +48,10 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # changes project status from 'Pending' to 'Active' making them visible on the projects index page
-  def activate_project
-    @project = Project.friendly.find(params[:id])
-    # refactor this to use #update
-    @project.status = 'active'
-    @project.save
-    redirect_to project_path, notice: 'project active'
-  end
-
-  # changes project status from 'Active' to 'Pending' making them visible on the projects index page
-  def deactivate_project
-    @project = Project.friendly.find(params[:id])
-    # refactor this to use #update
-    @project.status = 'pending'
-    @project.save
-    redirect_to project_path, notice: 'project deactived'
-  end
-
-  # Check to see if user is admin
-  def valid_admin
-    redirect_to root_path, notice: 'You do not have permission to perform that operation' unless current_user.admin?
-  end
-
-  # Check to see if user is admin or project creator
-  def access_to_edit
-    unless current_user.admin? || (current_user == @project.user)
-      redirect_to root_path, notice: 'You do not have permission to perform that operation'
-    end
-  end
-
   def edit; end
 
   def update
+    params[:command].present? && update_project_status(params[:command]) and return
     if @project.update(project_params)
       add_to_feed(:update)
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
@@ -170,5 +141,22 @@ class ProjectsController < ApplicationController
                                     :pivotaltracker_id, :image_url, languages_attributes: [:name],
                                                                     name_ids: [], source_repositories_attributes: %i(id url _destroy),
                                                                     issue_trackers_attributes: %i(id url _destroy))
+  end
+
+  def valid_admin
+    redirect_to root_path, notice: 'You do not have permission to perform that operation' unless current_user.admin?
+  end
+
+  def access_to_edit
+    unless current_user.admin? || (current_user == @project.user)
+      redirect_to root_path, notice: 'You do not have permission to perform that operation'
+    end
+  end
+
+  def update_project_status(command)
+    status = command == 'activate' ? 'active' : 'pending'
+    @project = Project.friendly.find(params[:id])
+    @project.update(status: status)
+    redirect_to project_path, notice: "Project was #{command}d"
   end
 end

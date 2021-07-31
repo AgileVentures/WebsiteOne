@@ -1,14 +1,11 @@
-# require_relative '../support/new_user_form'
-
-describe 'Project is subject to approval' do
+RSpec.describe 'Project is subject to approval' do
   let!(:admin) { create(:user, admin: true) }
   let!(:user) { create(:user, admin: false) }
 
   subject { page }
 
-  # move to model spec?
-  feature 'upon creation by a user without admin rights' do
-    scenario "is expected to set newly created project status to 'Pending'" do
+  feature 'upon creation by a user without admin rights a project' do
+    scenario "is expected to have status set to 'Pending'" do
       login_as user, scope: :user
       visit('/projects/new')
       fill_in('Title', with: 'Read a book')
@@ -19,7 +16,7 @@ describe 'Project is subject to approval' do
     end
   end
 
-  feature 'user without admin rights attempts to access pending projects page' do
+  feature 'user without admin rights attempts to access pending projects view' do
     before do
       login_as user, scope: :user
       visit('/pending_projects')
@@ -31,7 +28,7 @@ describe 'Project is subject to approval' do
     }
   end
 
-  feature 'user with admin rights can access pending projects page' do
+  feature 'user with admin rights can access pending projects view' do
     let!(:projects) { 5.times { create(:project, status: 'pending') } }
     before do
       login_as admin, scope: :user
@@ -93,9 +90,9 @@ describe 'Project is subject to approval' do
   end
 
   feature 'user without admin rights cannot see deactivate button on project page' do
+    let(:project) { create(:project, status: 'active') }
     before do
       login_as user, scope: :user
-      project = create(:project, status: 'active')
       visit("/projects/#{project.id}")
     end
 
@@ -105,11 +102,11 @@ describe 'Project is subject to approval' do
     }
   end
 
-
   feature 'user with admin rights can see activate button on project page' do
+    let(:project) { create(:project, status: 'pending') }
+
     before do
       login_as admin, scope: :user
-      project = create(:project, status: 'pending')
       visit("/projects/#{project.id}")
     end
 
@@ -117,19 +114,45 @@ describe 'Project is subject to approval' do
       is_expected
         .to have_content('Activate Project')
     }
+
+    feature 'and clicking the activate project button' do
+      before { click_on('Activate Project') }
+
+      it 'is expected to set project status to "active"' do
+        expect(project.reload.status).to eq 'active'
+      end
+
+      it {
+        is_expected
+          .to have_content('Project was activated')
+      }
+    end
   end
 
   feature 'user with admin rights can see deactivate button on project page' do
+    let(:project) { create(:project, status: 'active') }
+
     before do
       login_as admin, scope: :user
-      @project = create(:project, status: 'active')
-      visit("/projects/#{@project.id}")
-      save_and_open_page
+      visit("/projects/#{project.id}")
     end
 
     it {
       is_expected
         .to have_content('Deactivate Project')
     }
+
+    feature 'and clicking the activate project button' do
+      before { click_on('Deactivate Project') }
+
+      it 'is expected to set project status to "active"' do
+        expect(project.reload.status).to eq 'pending'
+      end
+
+      it {
+        is_expected
+          .to have_content('Project was deactivated')
+      }
+    end
   end
 end
