@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: %i(index show)
   before_action :set_project, only: %i(show edit update access_to_edit)
   before_action :get_current_stories, only: [:show]
-  before_action :valid_admin, only: %i(index), if: -> { params[:status] = 'pending' }
+  before_action :valid_admin, only: %i(index), if: -> { params[:status] == 'pending' }
   before_action :access_to_edit, only: [:edit]
   include DocumentsHelper
 
@@ -38,8 +38,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params.merge('user_id' => current_user.id, 'status' => 'pending')) # Create new project with default status of "Pending"
-    if @project.save
+    status = current_user.admin? ? project_params[:status].downcase : 'pending'
+    @project = Project.create(project_params.merge(user: current_user, status: status)) # Create new project with default status of "Pending"
+    if @project.persisted? 
       add_to_feed(:create)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else

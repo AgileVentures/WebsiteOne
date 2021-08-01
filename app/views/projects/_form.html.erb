@@ -17,11 +17,6 @@
           <%= f.label :status %>
           <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
         </div>
-      <% elsif @project.user %>
-        <div class='form-group'>
-          <%= f.label :status %>
-          <%= f.select :status, %w( Closed Pending ), {}, :class => 'form-control input-lg' %>
-        </div>
       <% end %>
 
       <div id='source_repositories' class='form-group'>
