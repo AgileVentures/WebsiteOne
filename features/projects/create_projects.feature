@@ -5,7 +5,6 @@ Feature: Create projects
   I would like to create a new project profile"
 
   Background:
-
     Given the following users exist
       | first_name | last_name | email            | admin |
       | Thomas     | Admin     | thomas@admin.com | true  |
@@ -43,7 +42,6 @@ Feature: Create projects
     And I fill in "Issue Tracker (primary)" with "<pt_link>"
     And The project has no stories on Pivotal Tracker
     And I fill in "Slack channel name" with "slackin"
-    # And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "<title>"
     And I should see "Project was successfully created."
@@ -86,7 +84,6 @@ Feature: Create projects
     And I click the "Submit" button
     Then I should be on the "Show" page for project "multiple repo project"
     And I should see "Project was successfully created."
-    Then show me the page
     And I should see:
       | Text                  |
       | multiple repo project |

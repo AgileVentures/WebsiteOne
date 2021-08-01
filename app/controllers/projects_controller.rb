@@ -4,17 +4,17 @@ class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_action :authenticate_user!, except: %i(index show)
   before_action :set_project, only: %i(show edit update access_to_edit)
-  before_action :get_current_stories, only: [:show]
+  before_action :get_current_stories, only: %i(:show)
   before_action :valid_admin, only: %i(index), if: -> { params[:status] == 'pending' }
-  before_action :access_to_edit, only: [:edit]
+  before_action :access_to_edit, only: %i(:edit)
   include DocumentsHelper
 
   def index
-    initialze_projects(params[:status])
+    query_projects(params[:status])
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
     projects_status = params[:status] || 'active'
-    @projects = @projects.where(status: projects_status).search(params[:search], params[:page]) # Selects on ACTIVE status projects
+    @projects = @projects.where(status: projects_status).search(params[:search], params[:page])
     if params[:status] == 'pending'
       render :pending_projects, layout: 'with_sidebar_sponsor_right'
     else
@@ -39,8 +39,8 @@ class ProjectsController < ApplicationController
 
   def create
     status = current_user.admin? ? project_params[:status].downcase : 'pending'
-    @project = Project.create(project_params.merge(user: current_user, status: status)) # Create new project with default status of "Pending"
-    if @project.persisted? 
+    @project = Project.create(project_params.merge(user: current_user, status: status))
+    if @project.persisted?
       add_to_feed(:create)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
@@ -100,7 +100,7 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
-  def initialze_projects(status)
+  def query_projects(status)
     status ||= 'active'
     @projects = Project.where(status: status)
                        .order('last_github_update DESC NULLS LAST')
@@ -109,8 +109,8 @@ class ProjectsController < ApplicationController
   end
 
   def filter_projects_list_by_language
-    @language = params[:project][:languages]
-    @projects = @projects.search_by_language(@language)
+    language = params[:project][:languages]
+    @projects = @projects.search_by_language(language)
   end
 
   def add_to_feed(action)

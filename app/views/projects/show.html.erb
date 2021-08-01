@@ -40,9 +40,6 @@
                       </li>
                     </ul>
                   </li>
-                <li class="hangout-btn">
-                  <%= button_to 'Start Hangout Instructions', 'https://support.google.com/youtube/answer/7083786', id: 'hoa_instructions', class: "btn btn-primary", form: {target: '_blank'} %>
-                </li>
                 </ul>
                 <hr>
             <% else %>
@@ -56,17 +53,15 @@
                     </button>
                   <% end %>
                   <% if current_user.admin? %>
-                    <!-- form for activating project making it visible on projects index page-->
                     <% if @project.status == 'pending' %>
                       <%= form_tag(activate_project_path(@project)) do %>
-                        <%= button_tag(type: "submit" , :class => 'btn btn-primary') do %>
+                        <%= button_tag(type: 'submit' , class: 'btn btn-primary') do %>
                             Activate Project <i class="fa fa-power-off"></i>
                         <% end %>
                       <% end %>
                     <% else %>
-                    <!-- form for deactivating project making it invisible on projects index page-->
                       <%= form_tag(deactivate_project_path(@project)) do %>
-                        <%= button_tag(type: "submit" , :class => 'btn btn-danger') do %>
+                        <%= button_tag(type: 'submit' , class: 'btn btn-danger') do %>
                             Deactivate Project <i class="fa fa-power-off"></i>
                         <% end %>
                       <% end %>
@@ -128,11 +123,8 @@
           <% unless @project.pitch.nil? %>
               <%= clean_html(@project.pitch) %>
           <% else %>
-              <p><b>Project content missing :(</b></p>
-
-              <p>A compelling pitch can make your project
-                <a href="https://www.kickstarter.com/discover/categories/technology?ref=discover_index">more
-                  appealing</a> to potential collaborators. Please add a README to your project in GitHub.</p>
+              <p><b>Project content missing</b></p>
+              <p>A compelling pitch can make your project more appealing to potential collaborators. Please add a README to your project in GitHub.</p>
           <% end %>
         </div>
         <div class="tab-pane" id="documents_list">

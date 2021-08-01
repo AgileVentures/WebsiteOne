@@ -1,7 +1,6 @@
 <div class='row'>
   <div class='col-sm-8'>
     <%= form_for @project, html: { role: 'form', id: 'project_form' } do |f| %>
-
       <%= awesome_text_field f, :title, placeholder: 'Name' %>
       <div id='help-link'>
         You can upload an image at
@@ -15,7 +14,7 @@
       <% if current_user.admin? %>
         <div class='form-group'>
           <%= f.label :status %>
-          <%= f.select :status, %w( Active Closed Pending ), {}, :class => 'form-control input-lg' %>
+          <%= f.select :status, %w( Active Closed Pending ), {}, class: 'form-control input-lg' %>
         </div>
       <% end %>
 
@@ -44,16 +43,16 @@
           <h3>New project checklist</h3>
           <p>What to do next:</p>
           <ul>
-            <li>Attend one of the scrums</li>
-            <li>Share the project with the members</li>
-            <li>Start a Hangout!</li>
+            <li>Attend one of the community follow-ups!</li>
+            <li>Share the project with the community members</li>
+            <li>Start an omline meeting or live stream!</li>
           </ul>
           <p>Ready to kick things off?</p>
         </div>
       <% end %>
       <div class='form-group'>
-        <%= link_to 'Back', (@project.id.nil? ? projects_path : project_path(@project)), :type => 'button', :class => 'btn btn-default'%>
-        <%= f.submit 'Submit', :class => 'btn btn-default' %>
+        <%= link_to 'Back', (@project.id.nil? ? projects_path : project_path(@project)), type: 'button', class: 'btn btn-default'%>
+        <%= f.submit 'Submit', class: 'btn btn-default' %>
       </div>
     <% end %>
   </div>

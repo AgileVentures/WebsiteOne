@@ -76,11 +76,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # get '/pending_projects' => 'projects#pending_projects'
-  # post '/activate_project/:id', controller: :projects, action: :activate_project
-  # post '/activate_project/:id' => 'projects#activate_project', as: 'activate_project'
-  # post '/deactivate_project/:id' => 'projects#deactivate_project', as: 'deactivate_project'
-
   get '/mentors' => 'users#index', defaults: { title: 'Mentor' }
   get '/premium_members' => 'users#index', defaults: { title: 'Premium' }
 
