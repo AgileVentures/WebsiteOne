@@ -1,10 +1,11 @@
 Feature: List projects with deactivated users
-  As a user
+  "As a user
   So that I can browse projects
-  Display anonymous for users that have deactivated their account
+  Display anonymous for users that have deactivated their account"
 
   Scenario: Display anonymous when the project owner account is deactivated
     Given "Billy Bob" creates the project "Home run"
+    And project "Home run" is activated
     And "Billy Bob" deactivates his account
     When I visit "/projects"
     Then I should see "Home run"
