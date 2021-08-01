@@ -40,6 +40,7 @@ module Helpers
                    password_confirmation: 'changemesomeday',
                    slug: 'slug-ma',
                    country_name: 'Sweden',
+                   admin: false,
                    receive_mailings: receive_mailings }
   end
 
@@ -56,6 +57,7 @@ module Helpers
                    password_confirmation: 'changemesomeday',
                    slug: 'slug-admin',
                    country_name: 'UK',
+                   admin: true,
                    receive_mailings: receive_mailings }
   end
 
