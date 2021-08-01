@@ -5,42 +5,43 @@ Feature: Edit Project
   I would like to update a project
 
   Background:
+
+    Given the following users exist
+      | first_name | last_name | email            | admin |
+      | Thomas     | Admin     | thomas@admin.com | true  |
     Given the following projects exist:
-      | title         | description             | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count |
-      | hello world   | greetings earthlings    |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         |
-      | hello mars    | greetings aliens        |             | inactive |                                             |                                                  | 2000         |
-      | hello jupiter | greetings jupiter folks |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         |
-      | hello mercury | greetings mercury folks |             | inactive |                                             |                                                  | 1900         |
-      | hello saturn  | greetings saturn folks  | My pitch... | active   |                                             |                                                  | 1900         |
-      | hello sun     | greetings sun folks     |             | active   |                                             |                                                  |              |
-      | hello venus   | greetings venus folks   |             | active   |                                             |                                                  |              |
-      | hello terra   | greetings terra folks   |             | active   |                                             |                                                  |              |
-      | hello pluto   | greetings pluto folks   |             | inactive |                                             |                                                  | 2000         |
+      | title         | description             | author | pitch       | status   | github_url                                  | pivotaltracker_url                               | commit_count |
+      | hello world   | greetings earthlings    | Thomas |             | active   | https://github.com/AgileVentures/WebsiteOne | https://www.pivotaltracker.com/s/projects/742821 | 2795         |
+      | hello mars    | greetings aliens        | Thomas |             | inactive |                                             |                                                  | 2000         |
+      | hello jupiter | greetings jupiter folks |        |             | active   |                                             | https://jira.atlassian.com/projects/CONFEXT      | 2000         |
+      | hello mercury | greetings mercury folks |        |             | inactive |                                             |                                                  | 1900         |
+      | hello saturn  | greetings saturn folks  |        | My pitch... | active   |                                             |                                                  | 1900         |
+      | hello sun     | greetings sun folks     |        |             | active   |                                             |                                                  |              |
+      | hello venus   | greetings venus folks   |        |             | active   |                                             |                                                  |              |
+      | hello terra   | greetings terra folks   |        |             | active   |                                             |                                                  |              |
+      | hello pluto   | greetings pluto folks   |        |             | inactive |                                             |                                                  | 2000         |
 
     And there are no videos
+    And I am logged in as "Thomas"
 
   Scenario: Edit page has a link to upload an image
-    Given I am logged in
     And I am on the "Edit" page for projects "hello mars"
     Then I should see link "imgur.com/upload" with "https://imgur.com/upload"
 
   @javascript
   Scenario: Existing project with multiple repos shows them correctly in edit form
-    Given I have logged in
     And that project "hello world" has an extra repository "https://github.com/AgileVentures/WebsiteOne"
     When I am on the "Edit" page for projects "hello world"
     Then I should see "GitHub url (primary)"
     And I should see "GitHub url (2)"
 
   Scenario: Edit page has a return link
-    Given I have logged in
     And I am on the "Edit" page for projects "hello mars"
     When I click "Back"
     Then I should be on the "Show" page for project "hello mars"
 
   @javascript
   Scenario: Updating a project: success
-    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I click "Add more repos"
@@ -58,7 +59,6 @@ Feature: Edit Project
     And I should see a link "hello mars" that connects to the "slack_channel"
 
   Scenario: Saving a project: failure
-    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     When I fill in "Title" with ""
     And I click the "Submit" button
@@ -66,7 +66,6 @@ Feature: Edit Project
 
   @javascript
   Scenario: Update GitHub url if valid
-    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
@@ -76,7 +75,6 @@ Feature: Edit Project
 
   @javascript
   Scenario: Update Issue Tracker url if valid pivotal tracker link
-    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I click "Add more trackers"
     And I fill in "Issue Tracker (primary)" with "https://www.pivotaltracker.com/s/projects/853345"
@@ -87,7 +85,6 @@ Feature: Edit Project
 
   @javascript
   Scenario: Reject GitHub url update if invalid
-    Given I have logged in
     And I am on the "Edit" page for project "hello mars"
     And I click "Add more repos"
     And I fill in "GitHub url (primary)" with "https:/github.com/google/instant-hangouts"
