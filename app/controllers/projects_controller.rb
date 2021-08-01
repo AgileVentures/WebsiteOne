@@ -4,9 +4,9 @@ class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_action :authenticate_user!, except: %i(index show)
   before_action :set_project, only: %i(show edit update access_to_edit)
-  before_action :get_current_stories, only: %i(:show)
+  before_action :get_current_stories, only: %i(show)
   before_action :valid_admin, only: %i(index), if: -> { params[:status] == 'pending' }
-  before_action :access_to_edit, only: %i(:edit)
+  before_action :access_to_edit, only: %i(edit)
   include DocumentsHelper
 
   def index
@@ -42,6 +42,7 @@ class ProjectsController < ApplicationController
     @project = Project.create(project_params.merge(user: current_user, status: status))
     if @project.persisted?
       add_to_feed(:create)
+      current_user.follow(@project)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
       flash.now[:alert] = 'Project was not saved. Please check the input.'
@@ -145,7 +146,7 @@ class ProjectsController < ApplicationController
   end
 
   def valid_admin
-    redirect_to root_path, notice: 'You do not have permission to perform that operation' unless current_user.admin?
+    redirect_to root_path, notice: 'You do not have permission to perform that operation' unless user_signed_in? && current_user.admin?
   end
 
   def access_to_edit

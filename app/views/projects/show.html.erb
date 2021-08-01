@@ -22,26 +22,41 @@
       <hr>
       <div class="project-edit">
         <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <% if @project.status == 'pending' %>
+              <%= form_tag(activate_project_path(@project)) do %>
+                <%= button_tag(type: 'submit' , class: 'btn btn-primary') do %>
+                    Activate Project </i>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= form_tag(deactivate_project_path(@project)) do %>
+                <%= button_tag(type: 'submit' , class: 'btn btn-danger') do %>
+                    Deactivate Project</i>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
             <ul class="list-inline">
             <% if current_user.following?(@project) %>
-                  <li class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
-                      Project Actions
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
-                      <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
-                      <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
-                      <li role="presentation" class="divider"></li>
-                      <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-                <hr>
+                <li class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
+                    Project Actions
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <hr>
             <% else %>
                 <div>
                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
@@ -51,21 +66,6 @@
                     <button type="button" class="btn btn-primary" id='start-jitsi'>
                       Start Jitsi Meet
                     </button>
-                  <% end %>
-                  <% if current_user.admin? %>
-                    <% if @project.status == 'pending' %>
-                      <%= form_tag(activate_project_path(@project)) do %>
-                        <%= button_tag(type: 'submit' , class: 'btn btn-primary') do %>
-                            Activate Project <i class="fa fa-power-off"></i>
-                        <% end %>
-                      <% end %>
-                    <% else %>
-                      <%= form_tag(deactivate_project_path(@project)) do %>
-                        <%= button_tag(type: 'submit' , class: 'btn btn-danger') do %>
-                            Deactivate Project <i class="fa fa-power-off"></i>
-                        <% end %>
-                      <% end %>
-                    <% end %>
                   <% end %>
                 </div>
                 <hr>
