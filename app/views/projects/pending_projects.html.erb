@@ -1,0 +1,16 @@
+<% provide :title, 'Pending Projects' %>
+<div class="row">
+  <div class="col-xs-9">
+    <h1 id="projects-header">List of Pending Projects</h1>
+  </div>
+</div>
+
+<% if @projects.empty? %>
+  <p>There are no pending projecs right now&#8230;</p>
+<% end %>
+<div class="row">
+  <ul id="project-list" style="list-style: none; padding-left: 0;">
+    <%= render 'listing' %>
+  </ul>
+</div>
+<%= will_paginate @projects %>
