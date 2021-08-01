@@ -74,9 +74,7 @@ end
 
 Then(/^I see the banners for all sponsors$/) do
   sponsors = {
-    'Standuply' => 'https://standuply.com/?utm_source=links&utm_medium=agileventures&utm_campaign=partnership',
-    'Craft Academy' => 'http://craftacademy.se/english',
-    'Mooqita' => 'https://mooqita.org/',
+    'Craft Academy' => 'https://craftacademy.se/english',
     'Amazon Smile' => 'https://smile.amazon.co.uk/ch/1170963-0'
   }
   sponsors.each do |alt_text, url|
