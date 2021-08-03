@@ -109,7 +109,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.7.5)
+    bootsnap (1.7.7)
       msgpack (~> 1.0)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
@@ -784,7 +784,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  bootsnap (~> 1.4)
+  bootsnap (~> 1.7)
   bootstrap-sass
   brakeman
   bullet
