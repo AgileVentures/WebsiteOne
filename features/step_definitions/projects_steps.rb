@@ -244,3 +244,8 @@ Given('I should be able to create a project with more than one issue tracker') d
   expect(page).to have_content('Multiple issue tracker project')
   expect(page).to have_content('has lots of code')
 end
+
+Given('project {string} is activated') do |title|
+  project = Project.find_by title: title
+  project.update status: 'active'
+end
