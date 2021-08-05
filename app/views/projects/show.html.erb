@@ -22,29 +22,41 @@
       <hr>
       <div class="project-edit">
         <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <% if @project.status == 'pending' %>
+              <%= form_tag(activate_project_path(@project)) do %>
+                <%= button_tag(type: 'submit' , class: 'btn btn-primary') do %>
+                    Activate Project </i>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= form_tag(deactivate_project_path(@project)) do %>
+                <%= button_tag(type: 'submit' , class: 'btn btn-danger') do %>
+                    Deactivate Project</i>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
             <ul class="list-inline">
             <% if current_user.following?(@project) %>
-                  <li class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
-                      Project Actions
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
-                      <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
-                      <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
-                      <li role="presentation" class="divider"></li>
-                      <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a>
-                      </li>
-                    </ul>
-                  </li>
-                <li class="hangout-btn">
-                  <%= button_to 'Start Hangout Instructions', 'https://support.google.com/youtube/answer/7083786', id: 'hoa_instructions', class: "btn btn-primary", form: {target: '_blank'} %>
+                <li class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
+                    Project Actions
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a>
+                    </li>
+                  </ul>
                 </li>
-                </ul>
-                <hr>
+              </ul>
+              <hr>
             <% else %>
                 <div>
                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
@@ -111,11 +123,8 @@
           <% unless @project.pitch.nil? %>
               <%= clean_html(@project.pitch) %>
           <% else %>
-              <p><b>Project content missing :(</b></p>
-
-              <p>A compelling pitch can make your project
-                <a href="https://www.kickstarter.com/discover/categories/technology?ref=discover_index">more
-                  appealing</a> to potential collaborators. Please add a README to your project in GitHub.</p>
+              <p><b>Project content missing</b></p>
+              <p>A compelling pitch can make your project more appealing to potential collaborators. Please add a README to your project in GitHub.</p>
           <% end %>
         </div>
         <div class="tab-pane" id="documents_list">

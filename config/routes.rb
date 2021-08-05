@@ -51,15 +51,18 @@ Rails.application.routes.draw do
       get :mercury_saved
       get :follow
       get :unfollow
+      post :activate, action: :update, defaults: { command: 'activate' }
+      post :deactivate, action: :update, defaults: { command: 'deactivate' }
     end
-
+    
     resources :documents, except: %i(edit update), format: false do
       put :mercury_update
       get :mercury_saved
     end
-
+    
     resources :events, only: [:index]
   end
+  get :pending_projects, controller: :projects, action: :index, defaults: { status: 'pending' }
 
   resources :events do
     member do
