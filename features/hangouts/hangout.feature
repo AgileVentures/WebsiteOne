@@ -64,12 +64,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I click on the Cancel button
     Then I should not see the Edit URL controls
 
-  @javascript
-  Scenario: Display hangout button on a project's page
-    Given I am a member of project "WebsiteOne"
-    And I am on the "Show" page for project "WebsiteOne"
-    Then I should see hangout button
-
   Scenario: Display live sessions - basic info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:

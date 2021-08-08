@@ -20,6 +20,8 @@ def path_to(page_name, id = '')
     new_user_session_path
   when 'projects'
     projects_path
+  when 'pending projects'
+    pending_projects_path
   when 'new project'
     new_project_path
   when 'articles'
