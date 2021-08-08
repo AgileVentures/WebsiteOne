@@ -1,8 +1,13 @@
 @vcr
 Feature: Create projects
-  As a member of AgileVentures
+  "As a member of AgileVentures
   So that I can create a focal point for an AgileVentures project
-  I would like to create a new project profile
+  I would like to create a new project profile"
+
+  Background:
+    Given the following users exist
+      | first_name | last_name | email            | admin |
+      | Thomas     | Admin     | thomas@admin.com | true  |
 
   Scenario: Show New Project button if user is logged in
     When I have logged in
@@ -23,7 +28,6 @@ Feature: Create projects
       | Field                   |
       | Title                   |
       | Description             |
-      | Status                  |
       | GitHub url (primary)    |
       | Issue Tracker (primary) |
       | Slack channel name      |
@@ -38,7 +42,6 @@ Feature: Create projects
     And I fill in "Issue Tracker (primary)" with "<pt_link>"
     And The project has no stories on Pivotal Tracker
     And I fill in "Slack channel name" with "slackin"
-    And I select "Status" to "Active"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "<title>"
     And I should see "Project was successfully created."
@@ -46,7 +49,7 @@ Feature: Create projects
       | Text          |
       | <title>       |
       | <description> |
-      | ACTIVE        |
+      | PENDING       |
     And I should see a link to "<title>" on github
     And I should see a link "<title>" that connects to the issue tracker's url
     And I should see a link "<title>" that connects to the "slack_channel"
@@ -66,7 +69,7 @@ Feature: Create projects
 
   @javascript
   Scenario: Saving a new project with multiple repositories: success
-    Given I have logged in
+    Given I have logged in as "Thomas"
     And I am on the "Projects" page
     When I click the very stylish "New Project" button
     When I fill in "Title" with "multiple repo project"
@@ -91,5 +94,5 @@ Feature: Create projects
 
   @javascript
   Scenario: Saving a new project with multiple issue trackers: success
-    Given I have logged in
+    Given I have logged in as "Thomas"
     Then I should be able to create a project with more than one issue tracker
