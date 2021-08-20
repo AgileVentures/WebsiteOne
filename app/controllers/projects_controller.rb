@@ -43,6 +43,8 @@ class ProjectsController < ApplicationController
     if @project.persisted?
       add_to_feed(:create)
       current_user.follow(@project)
+      # Email to Notify Project Creator of it's creation and pending approval
+      ProjectMailer.with(project: @project, project_creator: @project.user).alert_project_creator_about_new_project_created.deliver_now
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
       flash.now[:alert] = 'Project was not saved. Please check the input.'
@@ -159,6 +161,9 @@ class ProjectsController < ApplicationController
     status = command == 'activate' ? 'active' : 'pending'
     @project = Project.friendly.find(params[:id])
     @project.update(status: status)
+    if @project.status == 'active'
+      ProjectMailer.with(project: @project, project_creator: @project.user).alert_project_creator_about_project_approval.deliver_now
+    end
     redirect_to project_path, notice: "Project was #{command}d"
   end
 end
