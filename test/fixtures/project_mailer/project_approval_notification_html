@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi  Sam Satterfield,<br></p>
+    <p>
+      <a href="mailto:sam@sam.com">sam@sam.com</a>  We are Happy to inform you that your project "WebsiteOne" was reviewd and has been approved. 
+    <p> It will now be active and open to users on agileventures.org to join.</p>
+    <p>  
+    <p> Best,</p>
+    <p> Agile ventures team.</p><br>
+    </p>
+    <p>
+      You are receiving this email because you registered at <a href="http://www.agileventures.org/">www.agileventures.org</a> and your project was approved. 
+    </p>
+  </body>
+</html>
