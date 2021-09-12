@@ -9,6 +9,14 @@ class ProjectMailer < ApplicationMailer
     mail(to: @project_creator.email, subject: "#{@user.display_name} just joined #{@project.title} project")
   end
 
+  def alert_project_creator_about_new_project_created
+    mail(to: @project_creator.email, subject: "#{@project.title} project created pending approval.")
+  end
+
+  def alert_project_creator_about_project_approval
+    mail(to: @project_creator.email, subject: "#{@project.title} project approved.")
+  end
+
   def welcome_project_joinee
     mail(to: @user.email, subject: "Welcome to the #{@project.title} project!")
   end
