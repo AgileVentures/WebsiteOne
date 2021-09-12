@@ -3,6 +3,38 @@
 require 'spec_helper'
 
 RSpec.describe ProjectMailer, type: :mailer do
+  describe '#project_creator_alert' do
+    before(:each) do
+      @project_creator = create(:user, first_name: 'Sam', last_name: 'Satterfield', email: 'sam@sam.com')
+      @project = create(:project, title: 'WebsiteOne', user: @project_creator)
+      @email = ProjectMailer.with(project: @project, project_creator: @project_creator).alert_project_creator_about_new_project_created.deliver_now
+
+    end
+    it 'is expected to send an email notifying project creator of successful creation of project' do
+      expect(@email.from).to include('info@agileventures.org')
+      expect(@email.reply_to).to include('info@agileventures.org')
+      expect(@email.to).to include('sam@sam.com')
+      expect(@email.subject).to include('WebsiteOne project created pending approval.')
+      expect(@email).to have_default_cc_addresses
+    end
+  end
+
+  describe '#project_creator_alert' do
+    before(:each) do
+      @project_creator = create(:user, first_name: 'Sam', last_name: 'Satterfield', email: 'sam@sam.com')
+      @project = create(:project, title: 'WebsiteOne', user: @project_creator)
+      @email = ProjectMailer.with(project: @project, project_creator: @project_creator).alert_project_creator_about_project_approval.deliver_now
+
+    end
+    it 'is expected to send an email notifying project creator of project approval' do
+      expect(@email.from).to include('info@agileventures.org')
+      expect(@email.reply_to).to include('info@agileventures.org')
+      expect(@email.to).to include('sam@sam.com')
+      expect(@email.subject).to include('WebsiteOne project approved.')
+      expect(@email).to have_default_cc_addresses
+    end
+  end
+
   describe '#alert_project_creator_about_new_member' do
     before(:each) do
       @project_creator = FactoryBot.create(:user, first_name: 'Reva', last_name: 'Satterfield')
