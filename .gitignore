@@ -100,3 +100,6 @@ certbot.log
 # db/schema.rb
 
 rerun.txt
+
+# Ignore VCR
+features/support/fixtures/cassettes/**
