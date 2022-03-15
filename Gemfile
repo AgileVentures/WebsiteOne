@@ -5,15 +5,15 @@ source 'https://rubygems.org'
 ruby '3.0.0'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
-gem "activerecord"
-gem "activemodel"
-gem "actionpack"
-gem "actionview"
-gem "actionmailer"
-gem "activejob"
-gem "activesupport"
-gem "railties"
-gem "sprockets-rails"
+gem 'activerecord', '~> 7.0', '>= 7.0.2.3'
+gem "activemodel", '~> 7.0', '>= 7.0.2.3'
+gem "actionpack", '~> 7.0', '>= 7.0.2.3'
+gem "actionview", '~> 7.0', '>= 7.0.2.3'
+gem "actionmailer", '~> 7.0', '>= 7.0.2.3'
+gem "activejob", '~> 7.0', '>= 7.0.2.3'
+gem "activesupport", '~> 7.0', '>= 7.0.2.3'
+gem "railties", '~> 7.0', '>= 7.0.2.3'
+gem 'sprockets-rails', '~> 3.4', '>= 3.4.2'
 
 # Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
@@ -90,7 +90,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'capybara-selenium', '~> 0.0.6'
-  gem 'cucumber-rails', '2.3', require: false
+  gem 'cucumber-rails', '~> 2.5', require: false
   gem 'database_cleaner'
   gem 'delorean' # gem is discontinued
   gem 'launchy'
