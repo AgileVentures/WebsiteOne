@@ -4,8 +4,8 @@ development: &dev
   database: websiteone_development
   url: <%= ENV['DB_URL'] || ""%>
   pool: 20
-  user: <%= ENV["POSTGRES_USER"] %>
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  username: <%= ENV["DATABASE_POSTGRESQL_USERNAME"] %>
+  password: <%= ENV["DATABASE_POSTGRESQL_PASSWORD"] %>
 test: &test
   <<: *dev
   database: websiteone_test

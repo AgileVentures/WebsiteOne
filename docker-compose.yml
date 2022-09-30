@@ -5,7 +5,7 @@ services:
     volumes:
       - dbVolume:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ${DATABASE_POSTGRESQL_USER}
+      POSTGRES_USERNAME: ${DATABASE_POSTGRESQL_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_POSTGRESQL_PASSWORD}
   web:
     build: .
@@ -15,8 +15,6 @@ services:
     depends_on:
       - db
     environment:
-      POSTGRES_USER: ${DATABASE_POSTGRESQL_USER}
-      POSTGRES_PASSWORD: ${DATABASE_POSTGRESQL_PASSWORD}
       DB_URL: postgres://db:5432
     volumes:
       - .:/WebsiteOne
