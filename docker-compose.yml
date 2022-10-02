@@ -4,6 +4,9 @@ services:
     image: postgres
     volumes:
       - dbVolume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USERNAME: ${DATABASE_POSTGRESQL_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_POSTGRESQL_PASSWORD}
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -12,7 +15,7 @@ services:
     depends_on:
       - db
     environment:
-      - DB_HOST=db
+      DB_URL: postgres://db:5432
     volumes:
       - .:/WebsiteOne
       - javascript_vendors:/WebsiteOne/vendor/assets/javascripts
