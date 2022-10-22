@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.0'
+ruby '3.0.4'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
 gem "activerecord"
@@ -72,7 +72,7 @@ gem 'slack-ruby-client'
 gem 'spinjs-rails'
 gem 'stripe'
 gem 'sucker_punch'
-gem 'bootsnap', '~> 1.4'
+gem 'bootsnap', '~> 1.9'
 gem 'icalendar'
 gem 'mime-types', '~> 3.3', '>= 3.3.1'
 gem 'seed_dump'
@@ -139,5 +139,3 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov', '~> 0.17.1'
 end
-
-

@@ -26,7 +26,7 @@ blocks:
           commands:
             - checkout
             - sem-service start postgres 11
-            - sem-version ruby 3.0.0
+            - sem-version ruby 3.0.4
             - sudo -u postgres createuser -s semaphore
             - createdb -U postgres -h 0.0.0.0 websiteone_test
             - change-phantomjs-version 2.1.1

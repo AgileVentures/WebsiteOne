@@ -2,7 +2,7 @@ development: &dev
   adapter: postgresql
   encoding: unicode
   database: websiteone_development
-  host: <%= ENV['DB_HOST'] || ""%>
+  url: <%= ENV['DB_URL'] || ""%>
   pool: 20
   username: <%= ENV["DATABASE_POSTGRESQL_USERNAME"] %>
   password: <%= ENV["DATABASE_POSTGRESQL_PASSWORD"] %>
