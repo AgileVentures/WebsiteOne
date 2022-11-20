@@ -1,8 +1,9 @@
-FROM ruby:3.0.0
+FROM ruby:3.0.4
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get update -qq && apt-get install -y build-essential \
-    libpq-dev nodejs npm qt5-default libqt5webkit5-dev dos2unix \
+    libpq-dev nodejs  \
+    libqt5webkit5-dev dos2unix \
     gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
 
@@ -16,9 +17,12 @@ COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
+#OPENSSL_CONF is set to /dev/null since not able to determine how to
+#set it "correctly" for now. perhaps replace phantomjs with something else?
 ENV BUNDLE_PATH=/bundle \
     BUNDLE_BIN=/bundle/bin \
-    GEM_HOME=/bundle
+    GEM_HOME=/bundle \
+    OPENSSL_CONF=/dev/null
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 
 RUN bundle install
