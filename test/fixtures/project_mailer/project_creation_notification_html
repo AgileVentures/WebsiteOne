@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi Sam Satterfield,<br></p>
+    <p>
+     <a href="mailto:sam@sam.com">sam@sam.com</a> Your project "WebsiteOne" was succesfully created and is pending approval.<br>
+    </p>
+    <p> 
+      On approval, you will be notified.<br>
+    </p> 
+    <p>
+      Thanks<br>
+    </p>
+    <p>
+      You are receiving this email because you registered at <a href="http://www.agileventures.org/">www.agileventures.org</a> and you recently created a project. 
+    </p>
+  </body>
+</html>

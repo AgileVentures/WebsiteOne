@@ -1,0 +1,58 @@
+Arguments: 
+  /usr/local/Cellar/node/16.3.0/bin/node /usr/local/Cellar/yarn/1.22.10/libexec/bin/yarn.js install --no-progress --frozen-lockfile
+
+PATH: 
+  /Users/user/.rbenv/versions/3.0.0/lib/ruby/gems/3.0.0/bin:/Users/user/.rbenv/versions/3.0.0/bin:/usr/local/Cellar/rbenv/1.1.2/libexec:/usr/local/bin:/Users/user/.rbenv/shims:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Apple/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  16.3.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: read ECONNRESET
+      at TLSWrap.onStreamRead (node:internal/stream_base_commons:211:20)
+
+npm manifest: 
+  {
+    "name": "websiteone",
+    "version": "1.0.0",
+    "description": "A website for AgileVentures",
+    "main": "index.js",
+    "directories": {
+      "doc": "docs"
+    },
+    "scripts": {
+      "postinstall": "scripts/copy_javascript_dependencies.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/AgileVentures/WebsiteOne.git"
+    },
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/AgileVentures/WebsiteOne/issues"
+    },
+    "homepage": "https://github.com/AgileVentures/WebsiteOne#readme",
+    "dependencies": {
+      "bootstrap-datepicker": "^1.4.0",
+      "bootstrap-timepicker": "^0.5.2",
+      "bower": "^1.8.12",
+      "copyfiles": "^1.0.0",
+      "corejs-typeahead": "^1.2.1",
+      "moment": "^2.13.0",
+      "moment-timezone": "0.5.4",
+      "nprogress": "^0.1.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
