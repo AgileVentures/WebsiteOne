@@ -1,0 +1,14 @@
+{
+  "srcDir": "public/javascripts",
+  "srcFiles": [
+    "application-*.js"
+  ],
+  "specDir": "spec/javascripts",
+  "specFiles": [
+    "**/*[sS]pec.?(m)js"
+  ],
+  "helpers": [
+    "helpers/**/*.?(m)js"
+  ],
+  // ...
+}

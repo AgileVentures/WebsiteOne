@@ -28,5 +28,9 @@
     "moment": "^2.13.0",
     "moment-timezone": "0.5.4",
     "nprogress": "^0.1.4"
+  },
+  "devDependencies": {
+    "jasmine-browser-runner": "^1.2.0",
+    "jasmine-core": "^4.5.0"
   }
 }

@@ -1,48 +1,21 @@
 # frozen_string_literal: true
 
-test_options = {
-  phantomjs_options: [
-    '--ignore-ssl-errors=yes',
-    "--proxy=#{Billy.proxy.host}:#{Billy.proxy.port}"
-  ],
-  phantomjs: Phantomjs.path,
-  js_errors: true
-}
+# NOTE: must be called `:selenium` not `:chrome_headless` for screenshots
+Capybara.register_driver :selenium do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(
+    # It's the `headless` arg that make Chrome headless
+    # + you also need the `disable-gpu` arg due to a bug
+    args: %w[headless disable-gpu window-size=1366,768]
+  )
 
-plain_options = {
-  phantomjs_options: [
-    '--ignore-ssl-errors=yes'
-  ],
-  phantomjs: Phantomjs.path,
-  js_errors: true
-}
-
-debug_options = {
-  phantomjs_options: [
-    '--ignore-ssl-errors=yes'
-  ],
-  phantomjs: Phantomjs.path,
-  inspector: true,
-  debug: true,
-  js_errors: true
-}
-
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(
+  Capybara::Selenium::Driver.new(
     app,
-    js_errors: false,
-    phantomjs: Phantomjs.path,
-    phantomjs_options: ['--ssl-protocol=any', '--ignore-ssl-errors=no']
+    browser: :chrome,
+    options: options
   )
 end
 
-Capybara.register_driver :poltergeist_billy do |app|
-  Capybara::Poltergeist::Driver.new(app, test_options)
-end
-
-Capybara.default_max_wait_time = 10
-
-Capybara.javascript_driver = :poltergeist_billy
+Capybara.default_driver = :selenium
 
 Capybara.save_path = 'tmp/capybara'
 
