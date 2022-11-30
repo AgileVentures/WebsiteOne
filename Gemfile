@@ -93,7 +93,7 @@ group :test do
   gem 'database_cleaner'
   gem 'delorean' # gem is discontinued
   gem 'launchy'
-  gem 'puffing-billy', '~> 2.2.0'
+  gem 'puffing-billy'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
   gem 'rubocop-performance', '~> 1.5', '>= 1.5.2'
   gem 'rubocop-rails', '~> 2.10', '>= 2.10.1'

@@ -30,7 +30,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 OmniAuth.config.test_mode = true
-Capybara.javascript_driver = :headless_chrome
+#Capybara.javascript_driver = :headless_chrome
 WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
