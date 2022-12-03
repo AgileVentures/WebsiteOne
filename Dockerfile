@@ -15,6 +15,9 @@ COPY Gemfile.lock /WebsiteOne/Gemfile.lock
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
+#OPENSSL_CONF is set to /dev/null since not able to determine how to
+#set it "correctly" for now. perhaps replace phantomjs with something else?
 ENV BUNDLE_PATH=/bundle \
     BUNDLE_BIN=/bundle/bin \
     GEM_HOME=/bundle \
