@@ -99,11 +99,9 @@ group :test do
   gem 'rubocop-performance', '~> 1.5', '>= 1.5.2'
   gem 'rubocop-rails', '~> 2.10', '>= 2.10.1'
   gem 'rubocop-rspec', '>=1.28'
-# gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
   gem 'stripe-ruby-mock', '~> 3.1.0.rc2', require: 'stripe_mock'
   gem 'vcr'
-# gem 'webdrivers', require: !ENV['SELENIUM_REMOTE_URL']
   gem 'webmock'
 end
 
