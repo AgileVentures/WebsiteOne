@@ -303,7 +303,7 @@ Then(/^I should( not)? see the round banners/) do |negative|
 end
 
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
-  find(:css, %(a[title="#{button.downcase}"])).click
+  find_link("#{button.downcase}").click
 end
 
 Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, button|

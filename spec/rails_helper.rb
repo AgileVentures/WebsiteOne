@@ -17,7 +17,7 @@ require 'webmock/rspec'
 require 'capybara-screenshot/rspec'
 require 'public_activity/testing'
 require 'paper_trail/frameworks/rspec'
-require 'selenium/webdriver'
+#require 'selenium/webdriver'
 
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 PublicActivity.enabled = true
@@ -30,7 +30,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 OmniAuth.config.test_mode = true
-Capybara.javascript_driver = :headless_chrome
+#Capybara.javascript_driver = :headless_chrome
 WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -78,16 +78,15 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
-end
+#Capybara.register_driver :chrome do |app|
+#  Capybara::Selenium::Driver.new(app, browser: :chrome)
+#end
 
-Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w(headless disable-gpu) }
-  )
+#Capybara.register_driver :headless_chrome do |app|
+#  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+#    chromeOptions: { args: %w(headless disable-gpu) }
+#  )
 
-  Capybara::Selenium::Driver.new app,
-                                 browser: :chrome,
-                                 desired_capabilities: capabilities
-end
+#  Capybara::Selenium::Driver.new app,
+#                                 browser: :chrome
+#end
