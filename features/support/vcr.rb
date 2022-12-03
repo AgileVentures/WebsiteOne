@@ -11,12 +11,6 @@ VCR.configure do |c|
   # Avoid conflict with Selenium
   c.ignore_localhost = true
 
-  # Allow downloading webdrivers for Selenium
-  driver_hosts = Webdrivers::Common.subclasses.map { |driver| URI(driver.base_url).host }
-  # Downloading the Firefox driver involves a redirect
-  driver_hosts += ["github-releases.githubusercontent.com"]
-  c.ignore_hosts(*driver_hosts)
-
   c.default_cassette_options = {
     match_requests_on: [
       :method,
