@@ -1,7 +1,7 @@
 describe('projects', function () {
 
   it('should create a WebsiteOne module called "Projects"', function() {
-    reloadScript('projects');
+    reloadScript('Projects');
     expect(window.WebsiteOne.Projects).toBeDefined();
   });
 
@@ -11,7 +11,7 @@ describe('projects', function () {
     beforeEach(function() {
       setFixtures('<div class="nav-tabs" id="moons"><a href="#moon">Man</a></div>');
 
-      reloadScript('projects');
+      reloadScript('Projects');
 
       tabCall = spyOn($.fn, 'tab').and.callThrough();
       $(document).trigger('page:load');
