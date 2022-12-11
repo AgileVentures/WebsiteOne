@@ -7,7 +7,7 @@ describe('WebsiteOne FlashMessages module', function() {
       func();
     });
 
-    reloadScript('flash');
+    reloadScript('FlashMessages');
   });
 
   it('should create a new WebsiteOne module called "FlashMessages"', function() {
