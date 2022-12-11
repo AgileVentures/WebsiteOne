@@ -102,4 +102,4 @@ certbot.log
 rerun.txt
 
 # Ignore VCR
-#features/support/fixtures/cassettes/**
+features/support/fixtures/cassettes/**
