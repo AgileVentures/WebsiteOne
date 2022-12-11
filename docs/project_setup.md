@@ -101,9 +101,6 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 
     `npm install bower`
 
-#### Phantomjs
-[Phantomjs](http://phantomjs.org/) is used to run tests.  [Here are detailed instructions for installing it.](development_environment_set_up.md#phantomjs)
-
 ### Step 3: Request the .env file and confirm your locale
     
 * You'll have to get the `.env` file from one of the project admins.  The project won't work without it.  The `.env` file should go in the root of the WSO project.
