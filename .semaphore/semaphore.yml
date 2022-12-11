@@ -34,13 +34,14 @@ blocks:
             - bundle install --path vendor/bundle
             - mkdir -p tmp/pids
             - npm install bower
-            - npm install
+            - npm install yarn
+            - yarn install
             - cache store
             - 'RAILS_ENV=test bundle exec rake db:migrate'
             - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
             - chmod +x ./cc-test-reporter
             - ./cc-test-reporter before-build
-            - 'bundle exec rake jasmine:ci'
+            - 'npx jasmine-browser-runner runSpecs'
             - 'bundle exec rake ci:tests'
             # - cat $HOME/cucumber_report.json || true
             -  ./cc-test-reporter after-build
