@@ -43,5 +43,5 @@ blocks:
             - ./cc-test-reporter before-build
             - 'npx jasmine-browser-runner runSpecs'
             - 'bundle exec rake ci:tests'
-            # - cat $HOME/cucumber_report.json || true
+            # cat $HOME/cucumber_report.json || true
             -  ./cc-test-reporter after-build
