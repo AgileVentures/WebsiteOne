@@ -33,6 +33,7 @@ blocks:
             - cache restore
             - bundle install --path vendor/bundle
             - mkdir -p tmp/pids
+            - npm install
             - npm install bower
             - npm install yarn
             - yarn install
