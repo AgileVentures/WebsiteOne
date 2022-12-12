@@ -36,8 +36,8 @@ blocks:
             - npm install bower
             - npm install yarn
             - yarn install
-            - rake assets:clobber
-            - rake assets:precompile
+            - bundle exec rake assets:clobber
+            - bundle exec rake assets:precompile
             - cache store
             - 'RAILS_ENV=test bundle exec rake db:migrate'
             - 'curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter'
