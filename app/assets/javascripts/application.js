@@ -63,7 +63,7 @@ window.WebsiteOne =
     //hook for spec helper to hook into to get the original factory
     //and restore it
     function restoreModule(name){
-      define(name, restoreModules[name]);
+      define(name, moduleFactories[name]);
     }
 
     function define(name, factory) {
@@ -73,7 +73,7 @@ window.WebsiteOne =
           modules.push(name);
           var newModule = factory();
           //bit of a hack to support jasmine unit testing!
-          restoreModules[name] = factory;
+          moduleFactories[name] = factory;
 
           if (!window.WebsiteOne._newPageLoaded) {
             newModule.init();

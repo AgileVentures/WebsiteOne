@@ -4,6 +4,6 @@ beforeEach(function() {
   WebsiteOne._newPageLoaded = true;
 });
 
-function reloadScript(name) {
+function reloadModule(name) {
   WebsiteOne._restoreModule(name);
 }
