@@ -58,7 +58,7 @@ window.WebsiteOne =
     var modules = [],
       newPageLoaded = false,
       runOnceCallbacks = {},
-      restoreModules = {};
+      moduleFactories = {};
 
     //hook for spec helper to hook into to get the original factory
     //and restore it
@@ -94,7 +94,6 @@ window.WebsiteOne =
 
     function clear() {
       for (var i = 0; i < modules.length; i++) {
-        console.log(modules[i]);
         delete window.WebsiteOne[modules[i]];
       }
       modules.length = 0;
