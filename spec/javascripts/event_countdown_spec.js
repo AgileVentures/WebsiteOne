@@ -18,7 +18,7 @@ describe('Event Countdown', function () {
         this.data = spyOn(jQuery, 'data').and.callThrough();
 
 
-        reloadScript('event_countdown');
+        reloadModule('EventCountdown');
         this.update = spyOn(WebsiteOne.EventCountdown, 'update').and.callThrough();
         this.clearTimeout = spyOn(window, 'clearTimeout').and.callThrough();
         this.dateParse = spyOn(Date, 'parse').and.callThrough();
@@ -35,7 +35,8 @@ describe('Event Countdown', function () {
         });
 
         describe('when the clock is present', function () {
-            it('parses the time into a date object', function () { this.data.and.returnValue('fake date object');
+            it('parses the time into a date object', function () {
+                this.data.and.returnValue('fake date object');
                 WebsiteOne.EventCountdown.init();
 
                 expect(this.dateParse).toHaveBeenCalledWith('fake date object');
