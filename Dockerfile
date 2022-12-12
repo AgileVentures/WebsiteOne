@@ -1,4 +1,4 @@
-FROM ruby:3.0.4
+FROM ruby:3.0.4 as BASE
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get update -qq && apt-get install -y build-essential \
@@ -28,12 +28,14 @@ ENV PATH="${BUNDLE_BIN}:${PATH}"
 RUN bundle install
 
 COPY package.json /WebsiteOne/package.json
-COPY package-lock.json /WebsiteOne/package-lock.json
+#COPY package-lock.json /WebsiteOne/package-lock.json
 COPY scripts /WebsiteOne/scripts
 COPY vendor/assets/javascripts /WebsiteOne/assets/javascripts
 
-RUN dos2unix scripts/copy_javascript_dependencies.js
-RUN npm install --unsafe-perm
-RUN npm install -g phantomjs-prebuilt --unsafe-perm
+FROM BASE
 
+RUN dos2unix scripts/copy_javascript_dependencies.js
+RUN npm install -g yarn
+RUN npm install -g phantomjs-prebuilt --unsafe-perm
+RUN yarn install
 COPY . /WebsiteOne
