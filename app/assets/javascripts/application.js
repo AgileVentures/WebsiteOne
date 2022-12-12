@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
 //= require nprogress
@@ -56,7 +57,14 @@ window.WebsiteOne =
   (function() {
     var modules = [],
       newPageLoaded = false,
-      runOnceCallbacks = {};
+      runOnceCallbacks = {},
+      restoreModules = {};
+
+    //hook for spec helper to hook into to get the original factory
+    //and restore it
+    function restoreModule(name){
+      define(name, restoreModules[name]);
+    }
 
     function define(name, factory) {
       window.WebsiteOne[name] =
@@ -64,6 +72,8 @@ window.WebsiteOne =
         (function() {
           modules.push(name);
           var newModule = factory();
+          //bit of a hack to support jasmine unit testing!
+          restoreModules[name] = factory;
 
           if (!window.WebsiteOne._newPageLoaded) {
             newModule.init();
@@ -84,9 +94,9 @@ window.WebsiteOne =
 
     function clear() {
       for (var i = 0; i < modules.length; i++) {
+        console.log(modules[i]);
         delete window.WebsiteOne[modules[i]];
       }
-
       modules.length = 0;
     }
 
@@ -112,7 +122,8 @@ window.WebsiteOne =
       _modules: modules,
       _registered: false,
       _newPageLoaded: newPageLoaded,
-      _clear: clear
+      _clear: clear,
+      _restoreModule: restoreModule
     };
   })();
 

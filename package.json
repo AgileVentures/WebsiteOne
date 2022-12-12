@@ -27,6 +27,9 @@
     "corejs-typeahead": "^1.2.1",
     "moment": "^2.13.0",
     "moment-timezone": "0.5.4",
-    "nprogress": "^0.1.4"
+    "nprogress": "^0.1.4",
+    "npx": "^10.2.2",
+    "jasmine-browser-runner": "^0.10.0",
+    "jasmine-core": "^3.99.0"
   }
 }
