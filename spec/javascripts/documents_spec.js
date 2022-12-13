@@ -2,7 +2,7 @@ describe('Documents', function(){
   beforeEach(function(){
     setFixtures(sandbox({id: 'something'}));
     appendSetFixtures('<a id="revisions-anchor" href="#">Revisions</a><div id="revisions" style="display:none"><br/>This is <b>first</b> revision</div>');
-    reloadScript('documents');
+    reloadModule('Documents');
     WebsiteOne.Documents.init();
     jQuery.fx.off = true;
   });
