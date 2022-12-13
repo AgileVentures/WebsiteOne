@@ -66,7 +66,8 @@ $ ./docker/stop.sh
 To get a shell inside the docker container run:
 
 ```
-$ docker-compose run web bash
+$ docker-compose run --service-ports web bash
+
 ```
 
 From there you can run the cucumber tests 
@@ -81,6 +82,14 @@ or rspec
 
 ```
 $ bundle exec rspec
+```
+
+or jasmine
+
+```
+$ rake assets:clobber
+$ rake assets:precompile
+$ npx jasmine-browser-runner
 ```
 
 ps: those docker commands were tested under the following environment:
