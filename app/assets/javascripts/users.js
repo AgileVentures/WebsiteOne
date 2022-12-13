@@ -80,7 +80,8 @@ WebsiteOne.define('Users', function () {
         var params = "&infinite=true"
         infiniteScroll(params);
 
-        enableBootstrapTooltipsOnNonTouchDevices();
+        // cuprite testing fails with tooltips on
+        // enableBootstrapTooltipsOnNonTouchDevices();
     }
 
     return {

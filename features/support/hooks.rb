@@ -1,15 +1,5 @@
 # frozen_string_literal: true
 
-# Before('@poltergeist_no_billy') do
-#   Capybara.javascript_driver = :ignore_ssl_errors
-#   Capybara.current_driver = Capybara.javascript_driver
-#   # @original_javascript_driver = Capybara.javascript_driver
-# end
-
-# After('@poltergeist_no_billy') do
-#   Capybara.javascript_driver =  @original_javascript_driver
-#
-
 Before '@disable_twitter' do
   @original_twitter = Settings.features.twitter.notifications.enabled
   Settings.features.twitter.notifications.enabled = false
@@ -17,46 +7,6 @@ end
 
 After '@disable_twitter' do
   Settings.features.twitter.notifications.enabled = @original_twitter
-end
-
-After '@javascript' do
-  Capybara.send('session_pool').each do |_, session|
-    next unless session.driver.is_a?(Capybara::Poltergeist::Driver)
-
-    session.driver.restart
-  end
-end
-
-# have added the below because while the youtube video player works
-# it generates some errors that stop the tests from running ...
-#
-# see https://github.com/AgileVentures/WebsiteOne/issues/1754
-
-Before '@javascript_ignore_js_errors' do
-  Capybara.javascript_driver = :poltergeist
-  Capybara.current_driver = Capybara.javascript_driver
-end
-
-After '@javascript_ignore_js_errors' do
-  Capybara.javascript_driver = :poltergeist_billy
-  Capybara.current_driver = Capybara.javascript_driver
-end
-
-Before '@stripe_javascript' do
-  Capybara.javascript_driver = :poltergeist
-  Capybara.current_driver = Capybara.javascript_driver
-  StripeMock.start
-  @stripe_test_helper = StripeMock.create_test_helper
-end
-
-After '@stripe_javascript' do
-  Capybara.javascript_driver = :poltergeist_billy
-  StripeMock.stop
-  Capybara.send('session_pool').each do |_, session|
-    next unless session.driver.is_a?(Capybara::Poltergeist::Driver)
-
-    session.driver.restart
-  end
 end
 
 Before('@desktop') do

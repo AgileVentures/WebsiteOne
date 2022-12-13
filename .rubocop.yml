@@ -5,7 +5,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'server/**/*'
     - 'vendor/**/*'
-  TargetRubyVersion: 3.0.0
+  TargetRubyVersion: 3.0.4
   NewCops: enable
 
 Gemspec/DateAssignment: # (new in 1.10)
