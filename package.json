@@ -25,8 +25,12 @@
     "bower": "^1.8.12",
     "copyfiles": "^1.0.0",
     "corejs-typeahead": "^1.2.1",
+    "geckodriver": "^3.2.0",
+    "jasmine-browser-runner": "^0.10.0",
+    "jasmine-core": "^3.99.0",
     "moment": "^2.13.0",
     "moment-timezone": "0.5.4",
-    "nprogress": "^0.1.4"
+    "nprogress": "^0.1.4",
+    "npx": "^10.2.2"
   }
 }

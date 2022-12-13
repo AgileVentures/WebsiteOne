@@ -12,7 +12,7 @@ describe('WebsiteOne ProgressBar module', function() {
 
   beforeEach(function() {
     onSpy = spyOn($.fn, 'on');
-    reloadScript('progressbar');
+    reloadScript('ProgressBar');
     $(document).trigger('page:load');
   });
 
