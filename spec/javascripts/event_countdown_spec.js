@@ -18,7 +18,7 @@ describe('Event Countdown', function () {
         this.data = spyOn(jQuery, 'data').and.callThrough();
 
 
-        reloadScript('EventCountdown');
+        reloadModule('EventCountdown');
         this.update = spyOn(WebsiteOne.EventCountdown, 'update').and.callThrough();
         this.clearTimeout = spyOn(window, 'clearTimeout').and.callThrough();
         this.dateParse = spyOn(Date, 'parse').and.callThrough();

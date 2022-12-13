@@ -3,7 +3,7 @@ describe('Users', function() {
     setFixtures(sandbox({ id: 'user-filter' }));
     appendSetFixtures('<ul class="media-list"><li id="bob">Bob Jones</li><li id="alice">Alice Drew</li></ul>');
 
-  reloadScript('Users');
+  reloadModule('Users');
   WebsiteOne.Users.init();
   });
 
