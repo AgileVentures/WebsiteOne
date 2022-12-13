@@ -95,8 +95,8 @@ GEM
     acts_as_tree (2.9.1)
       activerecord (>= 3.0.0)
     acts_as_votable (0.12.1)
-    addressable (2.8.0)
-      public_suffix (>= 2.0.2, < 5.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     autoprefixer-rails (10.2.5.1)
       execjs (> 0)
@@ -136,14 +136,9 @@ GEM
     capybara-screenshot (1.0.25)
       capybara (>= 1.0, < 4)
       launchy
-    capybara-selenium (0.0.6)
-      capybara
-      selenium-webdriver
-    childprocess (3.0.0)
     choice (0.2.0)
     chronic (0.10.2)
     chunky_png (1.4.0)
-    cliver (0.3.2)
     cocoon (1.2.15)
     coderay (1.1.3)
     coffee-rails (5.0.0)
@@ -222,6 +217,9 @@ GEM
       cucumber-core (~> 8.0, >= 8.0.1)
       cucumber-cucumber-expressions (~> 10.3, >= 10.3.0)
       cucumber-messages (~> 13.0, >= 13.0.1)
+    cuprite (0.14.3)
+      capybara (~> 3.0)
+      ferrum (~> 0.13.0)
     dante (0.2.0)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
@@ -336,6 +334,11 @@ GEM
     faraday-net_http_persistent (1.1.0)
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
+    ferrum (0.13)
+      addressable (~> 2.5)
+      concurrent-ruby (~> 1.1)
+      webrick (~> 1.7)
+      websocket-driver (>= 0.6, < 0.8)
     ffi (1.15.3)
     font-awesome-rails (4.7.0.7)
       railties (>= 3.2, < 7)
@@ -387,13 +390,6 @@ GEM
     icalendar (2.7.1)
       ice_cube (~> 0.16)
     ice_cube (0.16.3)
-    jasmine (3.7.0)
-      jasmine-core (~> 3.7.0)
-      phantomjs
-      rack (>= 1.2.1)
-      rake
-    jasmine-core (3.7.1)
-    jasmine-jquery-rails (2.0.3)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
@@ -453,6 +449,8 @@ GEM
     nenv (0.3.0)
     netrc (0.11.0)
     nio4r (2.5.7)
+    nokogiri (1.11.5-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.11.5-x86_64-linux)
       racc (~> 1.4)
     notiffany (0.1.3)
@@ -498,11 +496,6 @@ GEM
       multi_json (~> 1.0)
       xml-simple
     pg (1.2.3)
-    phantomjs (2.1.1.0)
-    poltergeist (1.18.1)
-      capybara (>= 2.1, < 4)
-      cliver (~> 0.3.1)
-      websocket-driver (>= 0.2.0)
     protobuf-cucumber (3.10.8)
       activesupport (>= 3.2)
       middleware
@@ -518,8 +511,8 @@ GEM
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
-    public_suffix (4.0.6)
-    puffing-billy (2.2.0)
+    public_suffix (5.0.0)
+    puffing-billy (3.0.4)
       addressable (~> 2.5)
       em-http-request (~> 1.1, >= 1.1.0)
       em-synchrony
@@ -657,7 +650,7 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-statistics (2.1.3)
     ruby2_keywords (0.0.4)
-    rubyzip (2.3.0)
+    rubyzip (2.3.2)
     sass (3.4.25)
     sass-rails (5.0.8)
       railties (>= 5.2.0)
@@ -673,9 +666,10 @@ GEM
     seed_dump (3.3.1)
       activerecord (>= 4)
       activesupport (>= 4)
-    selenium-webdriver (3.142.7)
-      childprocess (>= 0.5, < 4.0)
-      rubyzip (>= 1.2.2)
+    selenium-webdriver (4.7.1)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     set (1.0.1)
     shellany (0.0.1)
     shoulda-matchers (4.5.1)
@@ -739,16 +733,22 @@ GEM
       activesupport
     vanity (3.0.0)
       i18n
-    vcr (6.0.0)
+    vcr (6.1.0)
     verbs (3.0.0)
       activesupport (>= 2.3.4)
       i18n
     warden (1.2.9)
       rack (>= 2.0.9)
-    webmock (3.13.0)
-      addressable (>= 2.3.6)
+    webdrivers (5.2.0)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (~> 4.0)
+    webmock (3.18.1)
+      addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
+    webrick (1.7.0)
+    websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -764,6 +764,7 @@ GEM
 PLATFORMS
   x86_64-darwin-17
   x86_64-darwin-18
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -789,7 +790,6 @@ DEPENDENCIES
   bundler-audit
   capybara
   capybara-screenshot
-  capybara-selenium (~> 0.0.6)
   cocoon
   code_climate_badges!
   coderay
@@ -798,7 +798,8 @@ DEPENDENCIES
   config
   constant-redefinition
   coveralls
-  cucumber-rails (= 2.3)
+  cucumber-rails
+  cuprite
   database_cleaner
   delorean
   derailed_benchmarks
@@ -818,8 +819,6 @@ DEPENDENCIES
   hirb
   icalendar
   ice_cube (= 0.16.3)
-  jasmine (~> 3.5)
-  jasmine-jquery-rails (~> 2.0, >= 2.0.3)
   jbuilder
   jquery-rails
   jquery-turbolinks (= 2.1.0)
@@ -843,12 +842,10 @@ DEPENDENCIES
   paranoia (~> 2.4)
   paypal-sdk-rest
   pg
-  phantomjs
   pivotal-tracker-api!
-  poltergeist
   pry-rails
   public_activity
-  puffing-billy (~> 2.2.0)
+  puffing-billy
   puma
   rack-cache
   rack-cors
@@ -870,7 +867,6 @@ DEPENDENCIES
   ruby-gitter
   sass-rails (~> 5.0, >= 5.0.8)
   seed_dump
-  selenium-webdriver
   shoulda-matchers
   simple_form (~> 5.0)
   simplecov (~> 0.17.1)
@@ -887,6 +883,7 @@ DEPENDENCIES
   vanity
   vcr
   verbs
+  webdrivers
   webmock
   will_paginate-bootstrap
   youtube_rails
