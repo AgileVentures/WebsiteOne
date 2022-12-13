@@ -5,15 +5,15 @@ source 'https://rubygems.org'
 ruby '3.0.4'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
-gem "activerecord"
-gem "activemodel"
-gem "actionpack"
-gem "actionview"
-gem "actionmailer"
-gem "activejob"
-gem "activesupport"
-gem "railties"
-gem "sprockets-rails"
+gem 'activerecord', '~> 6.1.7'
+gem 'activemodel', '~> 6.1.7'
+gem 'actionpack', '~> 6.1.7'
+gem 'actionview', '~> 6.1.7'
+gem 'actionmailer', '~> 6.1.7'
+gem 'activejob', '~> 6.1.7'
+gem 'activesupport', '~> 6.1.7'
+gem 'railties', '~> 6.1.7'
+gem 'sprockets-rails'
 
 # Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
@@ -62,7 +62,7 @@ gem 'public_activity'
 gem 'puma'
 gem 'rack-cache'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails_autolink', '~>1.1.6'
+gem 'rails_autolink'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'redcarpet'
 gem 'ruby-gitter'

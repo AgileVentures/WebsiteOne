@@ -23,7 +23,7 @@ Bundler.require(:default, Rails.env)
 
 module WebsiteOne
   class Application < Rails::Application
-    config.load_defaults 5.0
+    config.load_defaults 6.1
     # necessary to make Settings available
     Config::Integrations::Rails::Railtie.preload
     # config.load_defaults 5.0
@@ -69,5 +69,15 @@ module WebsiteOne
     #     resource '*', headers: :any, methods: [:get]
     #   end
     # end
+
+    # TODO: Without the line below, 16 tests fail creating records.
+    # See https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
+    # Note that this doesn't work: 
+    #   config.active_record.use_yaml_unsafe_load
+    config.active_record.yaml_column_permitted_classes = [
+       Symbol,
+       ActiveSupport::HashWithIndifferentAccess,
+       ActionController::Parameters
+    ]
   end
 end
