@@ -10,7 +10,7 @@ class EventInstance < ApplicationRecord
   belongs_to :project, optional: true
   include UserNullable
 
-  serialize :participants
+  #serialize :participants
 
   scope :started, -> { where.not(hangout_url: nil) }
   scope :live, -> { where('updated_at > ?', 5.minutes.ago).order('created_at DESC') }
