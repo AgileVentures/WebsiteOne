@@ -36,7 +36,7 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'friendly_id'
 gem 'geocoder'
-#gem 'ice_cube', '0.16.3'
+# gem 'ice_cube', '0.16.3'
 gem 'jquery-rails'
 gem 'jquery-turbolinks', '2.1.0'
 gem 'jvectormap-rails', '~> 2.0'
@@ -141,4 +141,4 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'ice_cube',
   github: 'ice-cube-ruby/ice_cube',
-  ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
+  ref:    '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
