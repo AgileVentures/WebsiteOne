@@ -25,7 +25,7 @@ blocks:
         - name: Test
           commands:
             - checkout
-            - sem-service start postgres 12
+            - sem-service start postgres 13
             - sem-version ruby 3.0.4
             - sudo -u postgres createuser -s semaphore
             - createdb -U postgres -h 0.0.0.0 websiteone_test
