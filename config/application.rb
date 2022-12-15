@@ -23,7 +23,7 @@ Bundler.require(:default, Rails.env)
 
 module WebsiteOne
   class Application < Rails::Application
-    config.load_defaults 5.0
+    config.load_defaults 6.1
     # necessary to make Settings available
     Config::Integrations::Rails::Railtie.preload
     # config.load_defaults 5.0
