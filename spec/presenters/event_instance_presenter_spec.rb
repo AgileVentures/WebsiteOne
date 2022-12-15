@@ -42,7 +42,7 @@ RSpec.describe EventInstancePresenter do
     end
 
     it 'do not show the host in the list of participants' do
-      create(:user, gplus: hangout.participants.to_unsafe_h.first.last['person']['id'])
+      create(:user, gplus: hangout.participants.first.last['person']['id'])
       expect(presenter.participants).not_to include(hangout.user)
     end
 
