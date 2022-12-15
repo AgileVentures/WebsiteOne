@@ -6,8 +6,6 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User', optional: true
   has_and_belongs_to_many :slack_channels
 
-  #serialize :exclusions
-
   extend FriendlyId
   friendly_id :name, use: :slugged
 
