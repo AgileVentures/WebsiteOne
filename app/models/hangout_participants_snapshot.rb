@@ -2,5 +2,5 @@
 
 class HangoutParticipantsSnapshot < ApplicationRecord
   belongs_to :event_instance
-  serialize :participants
+  #serialize :participants
 end
