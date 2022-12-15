@@ -62,7 +62,14 @@ class EventInstancePresenter < BasePresenter
 
   def map_to_users(participants)
     participants ||= ActionController::Parameters.new({})
-    participants.to_unsafe_h.map { |participant| process_users(participant) }.compact
+    participants.map { |participant| process_users(participant) }.compact
+
+    #TODO: SOME STUFF I TRIED BELOW - MATT
+    #users = ActionController::Parameters.new({})
+    #ActionController::Parameters.new({ '0' => { person: nil } })
+    #users.permit(:participants, array: [:key1])
+    #participants.each {|p| users << process_users(p) }
+    #users
   end
 
   def process_users(participant)
