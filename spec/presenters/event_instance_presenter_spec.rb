@@ -99,7 +99,7 @@ RSpec.describe EventInstancePresenter do
       expect(presenter.participants).to eq([])
     end
 
-    xit 'returns an array with nullUser if participant gplus_id is not found' do
+    it 'returns an array with nullUser if participant gplus_id is not found' do
       hangout.participants = ActionController::Parameters.new({ '0' => { person: { displayName: 'Bob', id: 'not_registered' } } })
       expect(presenter.participants.first.display_name).to eq('Bob')
     end
