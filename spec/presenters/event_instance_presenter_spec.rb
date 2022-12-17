@@ -42,7 +42,7 @@ RSpec.describe EventInstancePresenter do
     end
 
     it 'do not show the host in the list of participants' do
-      create(:user, gplus: hangout.participants.to_unsafe_h.first.last['person']['id'])
+      create(:user, gplus: hangout.participants.first.last['person']['id'])
       expect(presenter.participants).not_to include(hangout.user)
     end
 
@@ -100,8 +100,7 @@ RSpec.describe EventInstancePresenter do
     end
 
     it 'returns an array with nullUser if participant gplus_id is not found' do
-      hangout.participants = ActionController::Parameters.new({ '0' => { person: { displayName: 'Bob',
-                                                                                   id: 'not_registered' } } })
+      hangout.participants = ActionController::Parameters.new({ '0' => { person: { displayName: 'Bob', id: 'not_registered' } } })
       expect(presenter.participants.first.display_name).to eq('Bob')
     end
 
