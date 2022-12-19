@@ -1,0 +1,13 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/websiteone-372019/websiteone-web', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/websiteone-372019/websiteone-web']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'websiteone-web', '--image', 'gcr.io/websiteone-372019/websiteone-web', '--region', 'us-central1']
+images:
+- gcr.io/websiteone-372019/websiteone-web

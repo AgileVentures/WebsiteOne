@@ -12,16 +12,9 @@ WORKDIR /WebsiteOne
 COPY Gemfile /WebsiteOne/Gemfile
 COPY Gemfile.lock /WebsiteOne/Gemfile.lock
 
-COPY ./docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
-#OPENSSL_CONF is set to /dev/null since not able to determine how to
-#set it "correctly" for now. perhaps replace phantomjs with something else?
 ENV BUNDLE_PATH=/bundle \
     BUNDLE_BIN=/bundle/bin \
     GEM_HOME=/bundle
-#    OPENSSL_CONF=/dev/null
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 
 RUN bundle install
@@ -39,3 +32,17 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN apt-get update && apt-get -y install google-chrome-stable
 RUN yarn install
 COPY . /WebsiteOne
+
+#Development, use the following:
+#COPY ./docker-entrypoint.sh /
+#RUN chmod +x /docker-entrypoint.sh
+#ENTRYPOINT ["/docker-entrypoint.sh"]
+
+#Production or staging, use the following
+ENV RAILS_LOG_TO_STDOUT true
+ENV RAILS_SERVE_STATIC_FILES true
+ENV PORT 8080
+# Expose Puma port
+EXPOSE 8080
+RUN chmod +x /WebsiteOne/entrypoint.sh
+ENTRYPOINT ["/WebsiteOne/entrypoint.sh"]

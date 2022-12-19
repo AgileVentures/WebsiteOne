@@ -6,6 +6,7 @@ development: &dev
   pool: 20
   username: <%= ENV["DATABASE_POSTGRESQL_USERNAME"] %>
   password: <%= ENV["DATABASE_POSTGRESQL_PASSWORD"] %>
+  
 test: &test
   <<: *dev
   database: websiteone_test
@@ -13,6 +14,7 @@ test: &test
 production:
   <<: *dev
   database: websiteone_production
+  socket: “/cloudsql/websiteone-372019:us-central1:postgres”
 
 cucumber:
   <<: *test
