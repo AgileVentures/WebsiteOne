@@ -14,7 +14,10 @@ test: &test
 production:
   <<: *dev
   database: websiteone_production
-  socket: “/cloudsql/websiteone-372019:us-central1:postgres”
-
+  socket: /cloudsql/websiteone-372019:us-central1:postgres/.s.PGSQL.5432
+#  host: "<%= ENV.fetch("DB_SOCKET_DIR") { '/cloudsql' } %>/<%= ENV["CLOUD_SQL_CONNECTION_NAME"] %>"
+#  host: “/cloudsql/websiteone-372019:us-central1:postgres”
+# host: '35.239.249.67'
+# port: 5432
 cucumber:
   <<: *test
