@@ -30,7 +30,8 @@ blocks:
             - sudo -u postgres createuser -s semaphore
             - createdb -U postgres -h 0.0.0.0 websiteone_test
             - cache restore
-            - bundle install --path vendor/bundle
+            - bundle config set --local path 'vendor/bundle'
+            - bundle install
             - mkdir -p tmp/pids
             - npm install bower
             - npm install yarn
