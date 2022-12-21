@@ -1,0 +1,38 @@
+steps:
+#Decrypt Rails master key file
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['kms', 'decrypt', '--ciphertext-file=./config/master.key.enc', 
+        '--plaintext-file=./config/master.key',
+        '--location=us-central1', '--keyring=websiteone-web-secrets', 
+        '--key=rails_master_key']
+#Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/websiteone-372019/websiteone-web:latest',
+#         '--build-arg', 'postgres', '--build-arg', '98dc8d8f6a1713932542f0c1570749b8%', '.']
+         '--build-arg', 'DB_PASS', '.']
+#         '--build-arg', 'RAILS_MASTER_KEY', '.']
+#         '--file=./Dockerfile.slim', '.']  # eventually use a 'slim' docker image instead
+  secretEnv: ['DB_PASS']
+# 'MASTER_KEY']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/websiteone-372019/websiteone-web:latest']
+# Deploy container image to Cloud R
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', '${_SERVICE_NAME}', '--image', 'gcr.io/websiteone-372019/websiteone-web:latest', '--region', 'us-central1']
+
+timeout: 900s
+images:
+- gcr.io/websiteone-372019/websiteone-web
+
+substitutions:
+  _SERVICE_NAME: websiteone-web
+
+secrets:
+   - kmsKeyName: projects/websiteone-372019/locations/us-central1/keyRings/websiteone-web-secrets/cryptoKeys/db_pass
+     secretEnv:
+       DB_PASS: "CiQAe0cY6eSv8BZMurvsaJ/OrlXvhh32C8tmP/jXsOQe/t/60scSNwCVJUdz4hpdwQAugpkiTiIX+v+VbKZvfu76u/eAyLIgIby14/WpxqK5MUHb7K6IPt7cqScVzhA="
+#   - kmsKeyName: projects/websiteone-372019/locations/us-central1/keyRings/websiteone-web-secrets/cryptoKeys/rails_master_key
+#     secretEnv:
+#       MASTER_KEY: "69a4e0eb799a2fae8711fafc4ed8b4678acedc7fc86e79740ffc3b3513f7f88cfa8f738b49e74384800f574f2fd4ca51b19837d130aff76cf25e06996aa882be"

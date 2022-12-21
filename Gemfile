@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.4'
+ruby '3.0.5'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
 gem 'actionmailer', '~> 6.1.7'
@@ -137,5 +137,6 @@ group :development, :test do
   gem 'simplecov', '~> 0.17.1'
 end
 
+gem "google-cloud-storage"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'ice_cube', github: 'ice-cube-ruby/ice_cube', ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
