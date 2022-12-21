@@ -44,18 +44,17 @@ RUN yarn install
 COPY . /WebsiteOne
 
 #Production or staging, use the following
-# ENV RAILS_LOG_TO_STDOUT true
-# ENV RAILS_SERVE_STATIC_FILES true
-# ENV PORT 8080
-# # Set DB_PASS environment variable from ARG
-# ARG DB_PASS
-# ENV DATABASE_PASSWORD=${DB_PASS}
-# ENV DATABASE_POSTGRESQL_USERNAME=postgres
-# ENV DATABASE_POSTGRESQL_PASSWORD=postgres
-# # Set RAILS_MASTER_KEY to config/master.key from ARG
-# ARG MASTER_KEY
-# ENV RAILS_MASTER_KEY=${MASTER_KEY}
-# # Expose Puma port
-# EXPOSE 8080
-# RUN chmod +x /WebsiteOne/entrypoint.sh
-# ENTRYPOINT ["/WebsiteOne/entrypoint.sh"]
+ENV RAILS_ENV=production
+#ENV RAILS_SERVE_STATIC_FILES=true
+# Redirect Rails log to STDOUT for Cloud Run to capture
+ENV RAILS_LOG_TO_STDOUT=true
+# [START cloudrun_rails_dockerfile_key]
+ARG MASTER_KEY
+ENV RAILS_MASTER_KEY=${MASTER_KEY}
+# [END cloudrun_rails_dockerfile_key]
+
+# pre-compile Rails assets with master key
+RUN bundle exec rake assets:precompile
+
+EXPOSE 8080
+CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]

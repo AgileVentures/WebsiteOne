@@ -1,38 +1,38 @@
-steps:
-#Decrypt Rails master key file
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['kms', 'decrypt', '--ciphertext-file=./config/master.key.enc', 
-        '--plaintext-file=./config/master.key',
-        '--location=us-central1', '--keyring=websiteone-web-secrets', 
-        '--key=rails_master_key']
-#Build the container image
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/websiteone-372019/websiteone-web:latest',
-#         '--build-arg', 'postgres', '--build-arg', '98dc8d8f6a1713932542f0c1570749b8%', '.']
-         '--build-arg', 'DB_PASS', '.']
-#         '--build-arg', 'RAILS_MASTER_KEY', '.']
-#         '--file=./Dockerfile.slim', '.']  # eventually use a 'slim' docker image instead
-  secretEnv: ['DB_PASS']
-# 'MASTER_KEY']
-# Push the container image to Container Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/websiteone-372019/websiteone-web:latest']
-# Deploy container image to Cloud R
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'deploy', '${_SERVICE_NAME}', '--image', 'gcr.io/websiteone-372019/websiteone-web:latest', '--region', 'us-central1']
 
-timeout: 900s
-images:
-- gcr.io/websiteone-372019/websiteone-web
+# [START cloudrun_rails_cloudbuild]
+steps:
+  - id: "build image"
+    name: "gcr.io/cloud-builders/docker"
+    entrypoint: 'bash'
+    args: ["-c", "docker build --build-arg MASTER_KEY=${_RAILS_KEY} -t gcr.io/${PROJECT_ID}/${_SERVICE_NAME} . "]
+#    secretEnv: ["_RAILS_KEY"]
+
+  - id: "push image"
+    name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"]
+
+  - id: "apply migrations"
+    name: "gcr.io/google-appengine/exec-wrapper"
+    entrypoint: "bash"
+    args:
+      [
+        "-c",
+        "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=${_RAILS_KEY} -- bundle exec rails db:migrate"
+      ]
+#    secretEnv: ["_RAILS_KEY"]
 
 substitutions:
-  _SERVICE_NAME: websiteone-web
+  _REGION: us-central1
+  _SERVICE_NAME: av-wso
+  _INSTANCE_NAME: postgres
+#  _SECRET_NAME: rails-master-key
+  _RAILS_KEY: 79c9bca5ff743a515be994095fd41a3a
 
-secrets:
-   - kmsKeyName: projects/websiteone-372019/locations/us-central1/keyRings/websiteone-web-secrets/cryptoKeys/db_pass
-     secretEnv:
-       DB_PASS: "CiQAe0cY6eSv8BZMurvsaJ/OrlXvhh32C8tmP/jXsOQe/t/60scSNwCVJUdz4hpdwQAugpkiTiIX+v+VbKZvfu76u/eAyLIgIby14/WpxqK5MUHb7K6IPt7cqScVzhA="
-#   - kmsKeyName: projects/websiteone-372019/locations/us-central1/keyRings/websiteone-web-secrets/cryptoKeys/rails_master_key
-#     secretEnv:
-#       MASTER_KEY: "69a4e0eb799a2fae8711fafc4ed8b4678acedc7fc86e79740ffc3b3513f7f88cfa8f738b49e74384800f574f2fd4ca51b19837d130aff76cf25e06996aa882be"
+# availableSecrets:
+#   secretManager:
+#   - versionName: projects/${PROJECT_ID}/secrets/${_SECRET_NAME}/versions/latest
+#     env: RAILS_KEY
+
+images:
+  - "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
+# [END cloudrun_rails_cloudbuild]
