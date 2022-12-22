@@ -23,8 +23,8 @@ WORKDIR /WebsiteOne
 COPY Gemfile /WebsiteOne/Gemfile
 COPY Gemfile.lock /WebsiteOne/Gemfile.lock
 
+#Production or staging, use middle 2 config lines below when bundling
 RUN gem install bundler && \
-#   Production, use the following
 #    bundle config set --local deployment 'true' && \
 #    bundle config set --local without 'development test' && \
     bundle install
@@ -45,21 +45,20 @@ RUN yarn install
 COPY . /WebsiteOne
 RUN bundle exec rake assets:precompile
 
-##Production or staging, use the following
-#ENV RAILS_ENV=production
-#ENV RAILS_SERVE_STATIC_FILES=true
-## Redirect Rails log to STDOUT for Cloud Run to capture
-#ENV RAILS_LOG_TO_STDOUT=true
-## [START cloudrun_rails_dockerfile_key]
-#ARG MASTER_KEY
-#ENV RAILS_MASTER_KEY=${MASTER_KEY}
-## [END cloudrun_rails_dockerfile_key]
-#
-## pre-compile Rails assets with master key
-#RUN bundle exec rake assets:precompile
-#
-#EXPOSE 8080
-#CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]
+#Production or staging, use the following
+# ENV RAILS_ENV=production
+# ENV RAILS_SERVE_STATIC_FILES=true
+# # Redirect Rails log to STDOUT for Cloud Run to capture
+# ENV RAILS_LOG_TO_STDOUT=true
+# # [START cloudrun_rails_dockerfile_key]
+# ARG MASTER_KEY
+# ENV RAILS_MASTER_KEY=${MASTER_KEY}
+# # [END cloudrun_rails_dockerfile_key]
+
+# # pre-compile Rails assets with master key
+# RUN bundle exec rake assets:precompile
+# EXPOSE 8080
+# CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]
 
 # Also add lines below to database.yml under 'production:'
 #  username: av

@@ -19,6 +19,16 @@ steps:
         "-c",
         "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=${_RAILS_KEY} -- bundle exec rails db:migrate"
       ]
+
+# Remove seed step below for prodction
+  - id: "seed some display data"
+    name: "gcr.io/google-appengine/exec-wrapper"
+    entrypoint: "bash"
+    args:
+      [
+        "-c",
+        "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=${_RAILS_KEY} -- bundle exec rake db:seed"
+      ]
 #    secretEnv: ["_RAILS_KEY"]
 
 substitutions:
@@ -26,8 +36,8 @@ substitutions:
   _SERVICE_NAME: av-wso
   _INSTANCE_NAME: postgres
 #  _SECRET_NAME: rails-master-key
-# Do not put the key here for any offial site as it will
-# expose any secrets and passwords.  Use the secrets section below put the key in google cloud.
+# Do not put the key here for any official site as it will expose secrets and passwords.
+# Instead, use the availableSecrets section below and put the key in google cloud secrets.
   _RAILS_KEY: 79c9bca5ff743a515be994095fd41a3a
 
 
