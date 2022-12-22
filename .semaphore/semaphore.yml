@@ -3,13 +3,15 @@ name: WebsiteOne - CI
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 blocks:
   - name: Test
     task:
       env_vars:
         - name: RAILS_ENV
           value: test
+        - name: RAILS_KEY
+          value: 79c9bca5ff743a515be994095fd41a3a
         - name: CC_TEST_REPORTER_ID
           value: c70a143fe21eb298eb2a98131dfc592947ea7ebfb87fbff9d9f69e724721d636
         - name: STRIPE_SECRET_KEY
@@ -26,11 +28,12 @@ blocks:
           commands:
             - checkout
             - sem-service start postgres 13
-            - sem-version ruby 3.0.4
+            - sem-version ruby 3.0.5
             - sudo -u postgres createuser -s semaphore
             - createdb -U postgres -h 0.0.0.0 websiteone_test
             - cache restore
-            - bundle install --path vendor/bundle
+            - bundle config set --local path 'vendor/bundle'
+            - bundle install
             - mkdir -p tmp/pids
             - npm install bower
             - npm install yarn
