@@ -15,7 +15,8 @@ production:
   <<: *dev
   database: websiteone-production
   username: av
-  password: <%= Rails.application.credentials.gcp[:db_password] %>
-  host: /cloudsql/av-wso:us-central1:postgres
+# Use lines below when deploying to google cloud
+#  password: <%= Rails.application.credentials.gcp[:db_password] %>
+#  host: /cloudsql/av-wso:us-central1:postgres
 cucumber:
   <<: *test
