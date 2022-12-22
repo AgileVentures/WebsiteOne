@@ -6,13 +6,17 @@ development: &dev
   pool: 20
   username: <%= ENV["DATABASE_POSTGRESQL_USERNAME"] %>
   password: <%= ENV["DATABASE_POSTGRESQL_PASSWORD"] %>
+  
 test: &test
   <<: *dev
   database: websiteone_test
 
 production:
   <<: *dev
-  database: websiteone_production
-
+  database: websiteone-production
+  username: av
+# Use lines below when deploying to google cloud
+#  password: <%= Rails.application.credentials.gcp[:db_password] %>
+#  host: /cloudsql/av-wso:us-central1:postgres
 cucumber:
   <<: *test

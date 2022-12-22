@@ -103,3 +103,4 @@ rerun.txt
 
 # Ignore VCR
 features/support/fixtures/cassettes/**
+/config/master.key
