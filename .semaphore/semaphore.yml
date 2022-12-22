@@ -10,8 +10,6 @@ blocks:
       env_vars:
         - name: RAILS_ENV
           value: test
-        - name: RAILS_KEY
-          value: 79c9bca5ff743a515be994095fd41a3a
         - name: CC_TEST_REPORTER_ID
           value: c70a143fe21eb298eb2a98131dfc592947ea7ebfb87fbff9d9f69e724721d636
         - name: STRIPE_SECRET_KEY
