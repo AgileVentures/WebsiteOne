@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.4'
+ruby '3.0.5'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
 gem 'actionmailer', '~> 6.1.7'
@@ -36,6 +36,7 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'friendly_id'
 gem 'geocoder'
+gem 'google-cloud-storage'
 # gem 'ice_cube', '0.16.3'
 gem 'jquery-rails'
 gem 'jquery-turbolinks', '2.1.0'
@@ -85,6 +86,10 @@ gem 'verbs'
 gem 'will_paginate-bootstrap'
 gem 'youtube_rails'
 gem 'rack-timeout'
+
+group :production do
+  gem 'mini_racer' # for environment without pre-existing js runtimes
+end
 
 group :test do
   gem 'capybara'
