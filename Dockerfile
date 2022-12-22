@@ -60,3 +60,8 @@ RUN bundle exec rake assets:precompile
 #
 #EXPOSE 8080
 #CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]
+
+# Also add lines below to database.yml under 'production:'
+#  username: av
+#  password: <%= Rails.application.credentials.gcp[:db_password] %>
+#  host: /cloudsql/av-wso:us-central1:postgres
