@@ -26,7 +26,10 @@ substitutions:
   _SERVICE_NAME: av-wso
   _INSTANCE_NAME: postgres
 #  _SECRET_NAME: rails-master-key
+# Do not put the key here for any offial site as it will
+# expose any secrets and passwords.  Use the secrets section below put the key in google cloud.
   _RAILS_KEY: 79c9bca5ff743a515be994095fd41a3a
+
 
 # availableSecrets:
 #   secretManager:
