@@ -20,16 +20,16 @@ steps:
         "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=${_RAILS_KEY} -- bundle exec rails db:migrate"
       ]
 
-# Remove seed step below for prodction
-  - id: "seed some display data"
-    name: "gcr.io/google-appengine/exec-wrapper"
-    entrypoint: "bash"
-    args:
-      [
-        "-c",
-        "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=${_RAILS_KEY} -- bundle exec rake db:seed"
-      ]
-#    secretEnv: ["_RAILS_KEY"]
+  # Use seed step below only on first deploy if you want sample data
+  # - id: "seed some display data"
+  #   name: "gcr.io/google-appengine/exec-wrapper"
+  #   entrypoint: "bash"
+  #   args:
+  #     [
+  #       "-c",
+  #       "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=${_RAILS_KEY} -- bundle exec rake db:seed"
+  #     ]
+  #    secretEnv: ["_RAILS_KEY"]
 
 substitutions:
   _REGION: us-central1

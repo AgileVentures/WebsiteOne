@@ -36,6 +36,7 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'friendly_id'
 gem 'geocoder'
+gem 'google-cloud-storage'
 # gem 'ice_cube', '0.16.3'
 gem 'jquery-rails'
 gem 'jquery-turbolinks', '2.1.0'
@@ -85,6 +86,10 @@ gem 'verbs'
 gem 'will_paginate-bootstrap'
 gem 'youtube_rails'
 gem 'rack-timeout'
+
+group :production do
+  gem 'mini_racer' # for environment without pre-existing js runtimes
+end
 
 group :test do
   gem 'capybara'
@@ -137,6 +142,5 @@ group :development, :test do
   gem 'simplecov', '~> 0.17.1'
 end
 
-gem 'google-cloud-storage'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'ice_cube', github: 'ice-cube-ruby/ice_cube', ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'

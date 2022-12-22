@@ -45,7 +45,7 @@ RUN yarn install
 COPY . /WebsiteOne
 RUN bundle exec rake assets:precompile
 
-#Production or staging, use the following
+#Production or staging, take out 'bundle' line above and use the following
 # ENV RAILS_ENV=production
 # ENV RAILS_SERVE_STATIC_FILES=true
 # # Redirect Rails log to STDOUT for Cloud Run to capture
