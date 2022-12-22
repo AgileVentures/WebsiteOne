@@ -35,26 +35,28 @@ COPY vendor/assets/javascripts /WebsiteOne/assets/javascripts
 
 FROM base
 
-RUN dos2unix scripts/copy_javascript_dependencies.js
 # To execute tests, install chrome below
-# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \ 
-#     && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
-# RUN apt-get update && apt-get -y install google-chrome-stable
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \ 
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+RUN apt-get update && apt-get -y install google-chrome-stable
+
+RUN dos2unix scripts/copy_javascript_dependencies.js
 RUN yarn install
 COPY . /WebsiteOne
-
-#Production or staging, use the following
-ENV RAILS_ENV=production
-#ENV RAILS_SERVE_STATIC_FILES=true
-# Redirect Rails log to STDOUT for Cloud Run to capture
-ENV RAILS_LOG_TO_STDOUT=true
-# [START cloudrun_rails_dockerfile_key]
-ARG MASTER_KEY
-ENV RAILS_MASTER_KEY=${MASTER_KEY}
-# [END cloudrun_rails_dockerfile_key]
-
-# pre-compile Rails assets with master key
 RUN bundle exec rake assets:precompile
 
-EXPOSE 8080
-CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]
+##Production or staging, use the following
+#ENV RAILS_ENV=production
+#ENV RAILS_SERVE_STATIC_FILES=true
+## Redirect Rails log to STDOUT for Cloud Run to capture
+#ENV RAILS_LOG_TO_STDOUT=true
+## [START cloudrun_rails_dockerfile_key]
+#ARG MASTER_KEY
+#ENV RAILS_MASTER_KEY=${MASTER_KEY}
+## [END cloudrun_rails_dockerfile_key]
+#
+## pre-compile Rails assets with master key
+#RUN bundle exec rake assets:precompile
+#
+#EXPOSE 8080
+#CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]
