@@ -2,6 +2,7 @@
 
 require_relative 'boot'
 require 'rails'
+require "active_storage/engine"
 
 %w(
   active_record/railtie
