@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_21_093118) do
+ActiveRecord::Schema.define(version: 2022_12_15_193425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_093118) do
     t.integer "project_id"
     t.integer "user_id"
     t.string "yt_video_id"
-    t.text "participants"
+    t.json "participants", default: []
     t.string "hoa_status"
     t.boolean "url_set_directly", default: false
     t.boolean "youtube_tweet_sent", default: false
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_093118) do
     t.string "slug"
     t.datetime "start_datetime"
     t.integer "duration"
-    t.text "exclusions"
+    t.json "exclusions", default: []
     t.integer "project_id"
     t.integer "creator_id"
     t.string "for"
