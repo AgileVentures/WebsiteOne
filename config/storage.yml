@@ -14,14 +14,6 @@ local:
 #   region: us-east-1
 #   bucket: your_own_bucket
 
-# Remember not to checkin your GCS keyfile to a repository
-# [START cloudrun_rails_storage]
-google:
-  service: GCS
-  project: av-wso
-  bucket: av-wso-av-wso-assets
-# [END cloudrun_rails_storage]
-
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
 # microsoft:
 #   service: AzureStorage
