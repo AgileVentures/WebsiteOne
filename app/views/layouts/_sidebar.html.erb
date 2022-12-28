@@ -1,8 +1,8 @@
-<h3>Current Projects</h3>
 <ul>
   <% current_projects.each_with_index do |p, index| %>
     <% should_focus = project == p %>
     <% has_docs = p.documents.any? %>
+    <% show_it = (p.status == 'active' || p.status == 'Active' ? true : false) %>
     <li>
       <% if has_docs %>
         <a href="#collapse<%= index %>" class="collapse-button" data-toggle="collapse">
@@ -11,12 +11,12 @@
       <% end %>
       <% if should_focus and document.nil? %>
         <p class="sidebar-selected"><%= p.title %></p>
-      <% else %>
-        <%= link_to p.title, project_path(p), class: should_focus ? 'focused' : '' %>
+      <% elsif %>
+        <%= link_to p.title, project_path(p), class: should_focus ? 'focused' : '', style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
       <% end %>
     </li>
     <% if has_docs %>
-      <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
+      <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>" style="<%= show_it ? '' : 'display: none;' %>">
         <% p.documents.roots.each do |d| %>
           <% doc_focus = (should_focus and (document == d or document.try(&:root) == d)) %>
           <li>
