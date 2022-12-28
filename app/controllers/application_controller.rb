@@ -1,8 +1,7 @@
-require 'custom_errors.rb'
+# frozen_string_literal: true
 
+require 'custom_errors'
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :static_page_path
 
@@ -11,7 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :user_activity
 
-  use_vanity :current_user
+  # use_vanity :current_user
 
   include ApplicationHelper
   include CustomErrors
@@ -19,12 +18,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys:[
-      :first_name, :last_name, :email, :bio, :password,
-      :password_confirmation, :current_password,
-      :display_email, :display_profile, :display_hire_me,
-      :receive_mailings, :status])
-    
+    devise_parameter_sanitizer.permit(:account_update, keys: %i(
+                                        first_name last_name email bio password
+                                        password_confirmation current_password
+                                        display_email display_profile display_hire_me
+                                        receive_mailings status
+                                      ))
+
     modify_user_signup_params
   end
 
@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
       "#{edit_user_password_path}.*"
     ]
 
-    paths.any?{ |path| request.original_fullpath =~ %r(#{path})}
+    paths.any? { |path| request.original_fullpath =~ /#{path}/ }
   end
 
   def get_next_scrum
@@ -66,20 +66,18 @@ class ApplicationController < ActionController::Base
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
-    if request.get? && !request_path_blacklisted?
-      session[:previous_url] = request.original_fullpath
-    end
+    session[:previous_url] = request.original_fullpath if request.get? && !request_path_blacklisted?
   end
 
   def user_activity
     current_user.try :touch
   end
-  
+
   def show_deactivated_message_and_redirect_to_root
     flash[:alert] = 'User is deactivated.'
     redirect_to root_path
   end
-  
+
   def modify_user_signup_params
     devise_parameter_sanitizer.permit(:sign_up) do |user_signup_params|
       user_signup_params.permit(:receive_mailings)
@@ -89,10 +87,8 @@ class ApplicationController < ActionController::Base
   end
 
   # set current_user.id to a cookie to allow google analytics to access current_user var
-  private
 
   def set_user_id
     cookies[:user_id] = current_user.id if current_user
   end
-
 end

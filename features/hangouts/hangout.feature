@@ -64,12 +64,6 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
     And I click on the Cancel button
     Then I should not see the Edit URL controls
 
-  @javascript
-  Scenario: Display hangout button on a project's page
-    Given I am a member of project "WebsiteOne"
-    And I am on the "Show" page for project "WebsiteOne"
-    Then I should see hangout button
-
   Scenario: Display live sessions - basic info
     Given the date is "2014/02/01 11:10:00 UTC"
     And the following hangouts exist:
@@ -121,14 +115,14 @@ Feature: Managing hangouts of scrums and PairProgramming sessions
       | ClientMeeting |
       | about 2 hours |
 
-  @javascript
-  Scenario: Infinite scroll on hangouts scroll down until no more hangouts
-    Given 18 hangouts exists
-    When I visit "/hangouts"
-    Then I should see 6 hangouts
-    And I scroll to bottom of page
-    Then I should see 12 hangouts
-    And I scroll to bottom of page
-    Then I should see 18 hangouts
-    And I scroll to bottom of page
-    And I should see "No more hangouts"
+  # @javascript
+  # Scenario: Infinite scroll on hangouts scroll down until no more hangouts
+  #   Given 18 hangouts exists
+  #   When I visit "/hangouts"
+  #   Then I should see 6 hangouts
+  #   And I scroll to bottom of page
+  #   Then I should see 12 hangouts
+  #   And I scroll to bottom of page
+  #   Then I should see 18 hangouts
+  #   And I scroll to bottom of page
+  #   And I should see "No more hangouts"

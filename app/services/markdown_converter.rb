@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MarkdownConverter
   attr_reader :markdown
   private :markdown

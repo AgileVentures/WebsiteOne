@@ -1,7 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe LayoutHelper, :type => :helper do
-
+describe LayoutHelper, type: :helper do
   describe '#show_layout_flash?' do
     subject { show_layout_flash? }
 
@@ -17,9 +16,8 @@ describe LayoutHelper, :type => :helper do
   end
 
   describe '#flash_messages' do
-
     context 'without :layout_flash set' do
-      let(:opts){ Hash.new }
+      let(:opts) { {} }
       before { flash_messages(opts) }
 
       it 'sets @layout_flash to true' do
@@ -28,7 +26,7 @@ describe LayoutHelper, :type => :helper do
     end
 
     context 'with :layout_flash set' do
-      let(:opts){ {:layout_flash => false} }
+      let(:opts) { { layout_flash: false } }
       before { flash_messages(opts) }
 
       it 'sets @layout_flash opts(:layout_flash)' do
@@ -38,14 +36,14 @@ describe LayoutHelper, :type => :helper do
 
     context 'with or without :layout_flash set' do
       before { flash[:notice] = 'notice_flash' }
-      let(:opts){ {:layout_flash => false} }
+      let(:opts) { { layout_flash: false } }
       subject(:output) { flash_messages(opts) }
 
       it 'will have flash message' do
         expect(output).to include(flash[:notice])
       end
       it 'will have div with id for each flash' do
-        expect(output).to have_selector("div#flash_notice")
+        expect(output).to have_selector('div#flash_notice')
       end
     end
   end

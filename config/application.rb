@@ -1,6 +1,20 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'rails/all'
+require_relative 'boot'
+require 'rails'
+
+%w(
+  active_record/railtie
+  action_controller/railtie
+  action_view/railtie
+  action_mailer/railtie
+  active_job/railtie
+  rails/test_unit/railtie
+  sprockets/railtie
+).each do |railtie|
+  require railtie
+rescue LoadError
+end
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -9,13 +23,14 @@ Bundler.require(:default, Rails.env)
 
 module WebsiteOne
   class Application < Rails::Application
+    config.load_defaults 6.1
     # necessary to make Settings available
     Config::Integrations::Rails::Railtie.preload
     # config.load_defaults 5.0
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    config.exceptions_app = self.routes
+    config.exceptions_app = routes
 
     config.action_mailer.delivery_method = Settings.mailer.delivery_method.to_sym
     config.action_mailer.smtp_settings = Settings.mailer.smtp_settings.to_hash
@@ -23,7 +38,7 @@ module WebsiteOne
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    #config.time_zone = 'Central Time (US & Canada)'
+    # config.time_zone = 'Central Time (US & Canada)'
     ENV['TZ'] = 'UTC'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
@@ -37,22 +52,22 @@ module WebsiteOne
     # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
     config.assets.precompile += %w(
       mercury_init.js 404.js projects.js events.js google-analytics.js
-      disqus.js event_instances.js scrums.js
+      disqus.js event_instances.js scrums.js moment-timezone-with-data-2012-2022.js
     )
 
     # ensure svg assets are compiled in production
-    config.assets.precompile += %w( jobs.svg lady-dev.svg real-projects.svg runners.svg standups.svg )
+    config.assets.precompile += %w(jobs.svg lady-dev.svg real-projects.svg runners.svg standups.svg)
 
     # config.assets.css_compressor = :sass
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
     config.autoload_paths += Dir[Rails.root.join('lib')]
 
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'https://www.react.agileventures.org'
-        resource '*', :headers => :any, :methods => [:get]
-      end
-    end
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins 'https://www.react.agileventures.org'
+    #     resource '*', headers: :any, methods: [:get]
+    #   end
+    # end
   end
 end

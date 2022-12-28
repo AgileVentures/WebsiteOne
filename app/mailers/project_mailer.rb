@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectMailer < ApplicationMailer
   default from: 'info@agileventures.org', reply_to: 'info@agileventures.org', cc: 'support@agileventures.org'
 

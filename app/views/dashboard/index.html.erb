@@ -80,8 +80,8 @@
 </div>
 
 <script>
-    var usrData = <%= sanitize User.map_data %>;
-    var defaultText = '<h3>User statistics</h3>'
+    const usrData = <%= sanitize @stats[:map_data] %>;
+    const defaultText = '<h3>User statistics</h3>'
     $(function () {
         $('#info-box').html(defaultText);
         $('#map').vectorMap({
@@ -113,7 +113,7 @@
                     normalizeFunction: 'polynomial'
                 }]
             },
-            onRegionLabelShow: function (e, el, code) {
+            onRegionLabelShow:  (e, el, code) => {
                 if (usrData[code] > 0) {
                     $('#info-box').html('<h3>We have ' + usrData[code] + ' users in ' + el.html() + '</h3>');
                 } else {
@@ -123,8 +123,7 @@
                 //el.html(el.html()+' (Users: '+usrData[code]+')');
 
             },
-            onRegionOut: function (event, code) {
-                //console.log(map.getRegionName(code));
+            onRegionOut: (event, code) => {
                 $('#info-box').html(defaultText);
             }
         });

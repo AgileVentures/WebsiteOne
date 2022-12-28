@@ -69,7 +69,15 @@ If you then try to install the `eventmachine` gem, it also fails like this: http
 
     brew link openssl --force
 
+Another option is to point the gem to your open ssl settings:
+
+```
+gem install eventmachine -- --with-openssl-dir=/usr/local/opt/openssl@1.1
+```
+
 After you do that, re-try running `bundle install` and you should be good to go on to the next step.
+
+
     
 #### PostgreSQL and the `pg` gem
 The database used is [postgreSQL](https://www.postgresql.org/).  You need to have this installed and running on your local machine. 
@@ -93,12 +101,9 @@ If you need to update rails, you can run `bundle update rails`.  If you run into
 
     `npm install bower`
 
-#### Phantomjs
-[Phantomjs](http://phantomjs.org/) is used to run tests.  [Here are detailed instructions for installing it.](development_environment_set_up.md#phantomjs)
-
 ### Step 3: Request the .env file and confirm your locale
     
-* You'll have to get the `.env` file from one of the admins: @tansaku or @diraulo.  The project won't work without it.  You can send them a direct message (DM) on Slack.  The `.env` file should go in the root of the WSO project.
+* You'll have to get the `.env` file from one of the project admins.  The project won't work without it.  The `.env` file should go in the root of the WSO project.
 * Add the following to that file:
 
 ```
@@ -114,11 +119,15 @@ the above are test keys from https://developers.google.com/recaptcha/docs/faq
 
     
 
-### Step 4: Set up the database
+### Step 4: Set up the database and static pages
 
 * Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
 
     `bundle exec rake db:setup`
+
+* Run the rake command to fetch the content for the static pages:
+
+    `bundle exec rake fetch_github:content_for_static_pages`
     
 ### Step 5: Run the tests
 

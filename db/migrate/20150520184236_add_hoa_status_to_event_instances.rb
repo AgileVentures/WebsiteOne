@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddHoaStatusToEventInstances < ActiveRecord::Migration[4.2]
   def change
     add_column :event_instances, :hoa_status, :string

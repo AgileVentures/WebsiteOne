@@ -1,4 +1,6 @@
-require "vanity/adapters/active_record_adapter"
+# frozen_string_literal: true
+
+require 'vanity/adapters/active_record_adapter'
 
 class VanityMigration < ActiveRecord::Migration[5.1]
   # Helper methods to ensure we're connecting to the right database, see
@@ -29,7 +31,7 @@ class VanityMigration < ActiveRecord::Migration[5.1]
         t.integer :value
         t.string :date
       end
-      add_index :vanity_metric_values, [:vanity_metric_id, :date]
+      add_index :vanity_metric_values, %i(vanity_metric_id date)
 
       create_table :vanity_experiments do |t|
         t.string :experiment_id
@@ -38,14 +40,15 @@ class VanityMigration < ActiveRecord::Migration[5.1]
         t.datetime :created_at
         t.datetime :completed_at
       end
-      add_index :vanity_experiments, [:experiment_id], :unique => true
+      add_index :vanity_experiments, [:experiment_id], unique: true
 
       create_table :vanity_conversions do |t|
         t.integer :vanity_experiment_id
         t.integer :alternative
         t.integer :conversions
       end
-      add_index :vanity_conversions, [:vanity_experiment_id, :alternative], :name => "by_experiment_id_and_alternative", :unique => true
+      add_index :vanity_conversions, %i(vanity_experiment_id alternative),
+                name: 'by_experiment_id_and_alternative', unique: true
 
       create_table :vanity_participants do |t|
         t.string :experiment_id
@@ -56,10 +59,11 @@ class VanityMigration < ActiveRecord::Migration[5.1]
         t.timestamps null: false
       end
       add_index :vanity_participants, [:experiment_id]
-      add_index :vanity_participants, [:experiment_id, :identity], :name => "by_experiment_id_and_identity", :unique => true
-      add_index :vanity_participants, [:experiment_id, :shown], :name => "by_experiment_id_and_shown"
-      add_index :vanity_participants, [:experiment_id, :seen], :name => "by_experiment_id_and_seen"
-      add_index :vanity_participants, [:experiment_id, :converted], :name => "by_experiment_id_and_converted"
+      add_index :vanity_participants, %i(experiment_id identity), name: 'by_experiment_id_and_identity',
+                                                                  unique: true
+      add_index :vanity_participants, %i(experiment_id shown), name: 'by_experiment_id_and_shown'
+      add_index :vanity_participants, %i(experiment_id seen), name: 'by_experiment_id_and_seen'
+      add_index :vanity_participants, %i(experiment_id converted), name: 'by_experiment_id_and_converted'
     end
   end
 

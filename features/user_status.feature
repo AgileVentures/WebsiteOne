@@ -1,8 +1,8 @@
 @vcr
 Feature: User status
-  As site administrator
+  "As site administrator
   In order to simplify interactions between users
-  I would like them to be able to set current availability status on their user profile.
+  I would like them to be able to set current availability status on their user profile."
 
   PT story: https://www.pivotaltracker.com/story/show/78088070
 
