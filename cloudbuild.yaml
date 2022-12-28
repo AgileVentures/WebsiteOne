@@ -1,0 +1,51 @@
+
+# [START cloudrun_rails_cloudbuild]
+steps:
+  - id: "build image"
+    name: "gcr.io/cloud-builders/docker"
+    entrypoint: 'bash'
+    args: ["-c", "docker build --build-arg MASTER_KEY=${_RAILS_KEY} -t gcr.io/${PROJECT_ID}/${_SERVICE_NAME} . "]
+#    secretEnv: ["_RAILS_KEY"]
+
+  - id: "push image"
+    name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"]
+
+  - id: "apply migrations"
+    name: "gcr.io/google-appengine/exec-wrapper"
+    entrypoint: "bash"
+    args:
+      [
+        "-c",
+        "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=${_RAILS_KEY} -- bundle exec rails db:migrate"
+      ]
+
+  # Use seed step below only on first deploy if you want sample data
+  # - id: "seed some display data"
+  #   name: "gcr.io/google-appengine/exec-wrapper"
+  #   entrypoint: "bash"
+  #   args:
+  #     [
+  #       "-c",
+  #       "/buildstep/execute.sh -i gcr.io/${PROJECT_ID}/${_SERVICE_NAME} -s ${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME} -e RAILS_MASTER_KEY=${_RAILS_KEY} -- bundle exec rake db:seed"
+  #     ]
+  #    secretEnv: ["_RAILS_KEY"]
+
+substitutions:
+  _REGION: us-central1
+  _SERVICE_NAME: av-wso
+  _INSTANCE_NAME: postgres
+#  _SECRET_NAME: rails-master-key
+# Do not put the key here for any official site as it will expose secrets and passwords.
+# Instead, use the availableSecrets section below and put the key in google cloud secrets.
+  _RAILS_KEY: 79c9bca5ff743a515be994095fd41a3a
+
+
+# availableSecrets:
+#   secretManager:
+#   - versionName: projects/${PROJECT_ID}/secrets/${_SECRET_NAME}/versions/latest
+#     env: RAILS_KEY
+
+images:
+  - "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
+# [END cloudrun_rails_cloudbuild]

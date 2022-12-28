@@ -6,13 +6,13 @@ development: &dev
   pool: 20
   username: <%= ENV["DATABASE_POSTGRESQL_USERNAME"] %>
   password: <%= ENV["DATABASE_POSTGRESQL_PASSWORD"] %>
+  
 test: &test
   <<: *dev
   database: websiteone_test
 
 production:
   <<: *dev
-  database: websiteone_production
-
+  database: websiteone-production
 cucumber:
   <<: *test
