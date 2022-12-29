@@ -1,4 +1,4 @@
-<ul>
+<ul id="project-list">
   <% @projects.each_with_index do |p, index| %>
     <% should_focus = project == p %>
     <% has_docs = p.documents.any? %>

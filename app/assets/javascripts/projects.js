@@ -65,8 +65,8 @@ var ProjectListFilter = {
   },
   setup: function() {
     var labelAndCheckbox =
-    $('<form><label for="activefilter">Show Only Active Projects:</label>' +
-      '<input type="checkbox" id="activefilter" checked=true/></form>' );
+    $('<form class="checkbox-inline"><input type="checkbox" id="activefilter" checked=true/>' +
+      '<label for="activeFilter">Show Active Only</label></form>');
     labelAndCheckbox.insertAfter('#project-filters');
     $('#activefilter').on("click", ProjectListFilter.filter_inactive);
   }
