@@ -35,7 +35,7 @@ Feature: Browse  projects
     Then I should see "List of Projects" table
 
   @javascript
-  Scenario: Display most recently updated at top "Our Projects" page paginated with Infinite Scroll
+  Scenario: Display most recently updated at top "Our Projects" page
     Given I am on the "home" page
     When I follow "Projects" within the navbar
     Then I should see "<title>" within "project-list":

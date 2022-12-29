@@ -2,6 +2,7 @@
 
 class Project < ApplicationRecord
   extend FriendlyId
+  include Filterable
   friendly_id :title, use: %i(slugged history)
 
   validates :title, :description, :status, presence: true

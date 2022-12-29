@@ -21,6 +21,12 @@
       and reach out to us, or send us an email at
       <a href="mailto:info@agileventures.org">info@agileventures.org</a>.
     </p>
+    <nav id="sidebar" role="complementary">
+      <%= render partial: 'layouts/sidebar', locals: { project: @project, document: @document } %>
+    </nav>
+    <div id="project-filters">
+    </div>
+    <h1>List of Projects by Recent Activity</h1>
     <div class="row stack-search">
       <%= simple_form_for(:project, method: "get", html: { class: 'form-vertical no-margin' }) do |f| %>
       <div class="col-xs-12 flex">
