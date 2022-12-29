@@ -13,8 +13,7 @@ class ProjectsController < ApplicationController
     query_projects(params[:status])
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
-    projects_status = params[:status] || 'active'
-    @projects = @projects.where(status: projects_status).search(params[:search], params[:page])
+    @projects = @projects.search(params[:search], params[:page])
     if params[:status] == 'pending'
       render :pending_projects, layout: 'with_sidebar_sponsor_right'
     else
@@ -24,6 +23,7 @@ class ProjectsController < ApplicationController
 
   def show
     documents
+    query_projects(params[:status])
     @members = @project.members
     relation = EventInstance.where(project_id: @project.id)
     @event_instances_count = relation.count
@@ -31,6 +31,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
+    query_projects(params[:status])
     @project = Project.new
     @project.source_repositories.build
     @project.issue_trackers.build
@@ -45,12 +46,15 @@ class ProjectsController < ApplicationController
       current_user.follow(@project)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
+      query_projects(params[:status])
       flash.now[:alert] = 'Project was not saved. Please check the input.'
       render action: 'new'
     end
   end
 
-  def edit; end
+  def edit
+    query_projects(params[:status])
+  end
 
   def update
     params[:command].present? && update_project_status(params[:command]) and return
@@ -58,6 +62,7 @@ class ProjectsController < ApplicationController
       add_to_feed(:update)
       redirect_to project_path(@project), notice: 'Project was successfully updated.'
     else
+      query_projects(params[:status])
       # TODO: change this to notify for invalid params
       flash.now[:alert] = 'Project was not updated.'
       render 'edit'
@@ -102,16 +107,25 @@ class ProjectsController < ApplicationController
   end
 
   def query_projects(status)
-    status ||= 'active'
-    @projects = Project.where(status: status)
-                       .order('last_github_update DESC NULLS LAST')
-                       .order('commit_count DESC NULLS LAST')
-                       .includes(:user)
+    @projects = if status == 'pending'
+                  Project.where(status: status)
+                         .includes(:user)
+                         .param_filter(set_filter_params)
+                else
+                  Project.order('last_github_update DESC NULLS LAST')
+                         .order('commit_count DESC NULLS LAST')
+                         .includes(:user)
+                         .param_filter(set_filter_params)
+                end
   end
 
   def filter_projects_list_by_language
     language = params[:project][:languages]
     @projects = @projects.search_by_language(language)
+  end
+
+  def set_filter_params
+    filter_params = params.slice(:project_filter, :title)
   end
 
   def add_to_feed(action)
