@@ -13,9 +13,10 @@ class ProjectsController < ApplicationController
     query_projects(params[:status])
     @projects_languages_array = Language.pluck(:name)
     filter_projects_list_by_language if params[:project]
-    projects_status = params[:status] || 'active'
-    @projects = @projects.where(status: projects_status).search(params[:search], params[:page])
-    if params[:status] == 'pending'
+   # projects_status = params[:status] || 'active'
+   # @projects = @projects.where(status: projects_status).search(params[:search], params[:page])
+   @projects = @projects.search(params[:search], params[:page])
+   if params[:status] == 'pending'
       render :pending_projects, layout: 'with_sidebar_sponsor_right'
     else
       render layout: 'with_sidebar_sponsor_right'
@@ -24,6 +25,7 @@ class ProjectsController < ApplicationController
 
   def show
     documents
+    query_projects(params[:status])
     @members = @project.members
     relation = EventInstance.where(project_id: @project.id)
     @event_instances_count = relation.count
@@ -102,12 +104,17 @@ class ProjectsController < ApplicationController
   end
 
   def query_projects(status)
-    status ||= 'active'
-    @projects = Project.where(status: status)
-                       .order('last_github_update DESC NULLS LAST')
+    #status ||= 'active'
+    if status == 'pending'
+      @projects = Project.where(status: status)
+                       .includes(:user)
+                       .param_filter(set_filter_params)
+    else
+      @projects = Project.order('last_github_update DESC NULLS LAST')
                        .order('commit_count DESC NULLS LAST')
                        .includes(:user)
                        .param_filter(set_filter_params)
+    end
   end
 
   def filter_projects_list_by_language
@@ -116,8 +123,8 @@ class ProjectsController < ApplicationController
   end
 
   def set_filter_params
-    filter_params = params.slice(:project_filter, :active, :title)
-    filter_params
+    #filter_params = params.slice(:project_filter, :active, :title)
+    filter_params = params.slice(:project_filter, :title)
   end
 
   def add_to_feed(action)
