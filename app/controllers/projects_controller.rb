@@ -11,13 +11,9 @@ class ProjectsController < ApplicationController
   include DocumentsHelper
 
   def index
+    @language = params[:language]
     query_projects(params[:status])
-    @projects_languages_array = Language.pluck(:name)
-    if params[:project]
-      @language = params[:project][:languages]
-      @projects = @projects.search_by_language(@language, params[:page])
-    end
-    @projects = @projects.search(params[:search], params[:page])
+    # @projects = @projects.search(params[:search], params[:page])
     if params[:status] == 'pending'
       render :pending_projects, layout: 'with_sidebar_sponsor_right'
     else
@@ -126,6 +122,8 @@ class ProjectsController < ApplicationController
                          .order('commit_count DESC NULLS LAST')
                          .includes(:user)
                 end
+    @projects_languages_array = Language.pluck(:name)
+    @projects = @projects.search_by_language(@language) if @language.presence
   end
 
   def add_to_feed(action)

@@ -1,9 +1,0 @@
-<% if params[:infinite] %>
-  $('#project-list').append("<%= escape_javascript(render 'listing') %>");
-  <% if @projects.next_page %>
-    $('.pagination').replaceWith('<%= j will_paginate @projects %>');
-  <% else %>
-    $(window).off('scroll');
-    $('.pagination').remove();
-  <% end %>
-<% end %>

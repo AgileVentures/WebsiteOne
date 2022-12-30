@@ -58,9 +58,11 @@ var ProjectListFilter = {
     if ($(this).is(':checked')) {
       $('a.inactive').css({ display: "none" });
       $('i.inacive').css({ display: "none" });
+      $('li.inacive').css({ display: "none" });
     } else {
       $('a').css({ display: "" });
       $('i.fa').css({ display: "" });
+      $('div.a').css({ display: "" });
     }
   },
   setup: function() {
