@@ -54,7 +54,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def edit ; end
+  def edit; end
 
   def update
     params[:command].present? && update_project_status(params[:command]) and return
@@ -108,13 +108,13 @@ class ProjectsController < ApplicationController
   def set_projects_alpha
     status = params[:status]
     @projects = if status == 'pending'
-      Project.where(status: %w(pending)).order('title ASC')
-             .includes(:user)
-    else
-      Project.order('title ASC')
-             .order('commit_count DESC NULLS LAST')
-             .includes(:user)
-    end
+                  Project.where(status: %w(pending)).order('title ASC')
+                         .includes(:user)
+                else
+                  Project.order('title ASC')
+                         .order('commit_count DESC NULLS LAST')
+                         .includes(:user)
+                end
   end
 
   def query_projects(status)
