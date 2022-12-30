@@ -20,7 +20,7 @@
     <%= form_tag(projects_path, remote: true, method: "get", class: "form-inline text-left") do %>
         <div class="row">
           <div class="col-xs-12 col-sm-4">
-            <%= select_tag :project_filter, options_for_select(@projects_languages_array), {prompt: 'Language...', class: 'form-control'} %>
+            <%= select_tag :language, options_for_select(@projects_languages_array), {prompt: 'Language...', class: 'form-control'} %>
           </div>
           <div class="col-xs-12 col-sm-4">
             <%= submit_tag 'Search', class: 'btn btn-default' %>
