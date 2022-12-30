@@ -82,6 +82,7 @@ class DocumentsController < ApplicationController
   private
 
   def find_project
+    @projects = Project.where(status: %w(active Active)).order('title ASC')
     @project = Project.friendly.find(params[:project_id])
   end
 

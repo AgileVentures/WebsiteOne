@@ -52,3 +52,25 @@ $(document).on('ready', function () {
   var params = "&infinite=true"
   infiniteScroll(params);
 });
+
+var ProjectListFilter = {
+  filter_inactive: function() {
+    if ($(this).is(':checked')) {
+      $('a.inactive').css({ display: "none" });
+      $('i.inacive').css({ display: "none" });
+      $('li.inacive').css({ display: "none" });
+    } else {
+      $('a').css({ display: "" });
+      $('i.fa').css({ display: "" });
+      $('div.a').css({ display: "" });
+    }
+  },
+  setup: function() {
+    var labelAndCheckbox =
+    $('<form class="checkbox-inline"><input type="checkbox" id="activefilter" checked=true>' +
+      '<label for="activeFilter">Show Active Only</label></form>');
+    labelAndCheckbox.insertAfter('#project-filters');
+    $('#activefilter').on("click", ProjectListFilter.filter_inactive);
+  }
+}
+$(ProjectListFilter.setup);

@@ -204,6 +204,10 @@ When(/^I go to the next page$/) do
   click_link 'Next →', match: :first
 end
 
+When(/^I uncheck active$/) do
+  uncheck "activefilter"
+end
+
 Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_name, repo|
   project = Project.find_by_title(project_name)
   project.source_repositories.create(url: repo)
