@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_action :authenticate_user!, except: %i(index show)
   before_action :set_project, only: %i(show edit update access_to_edit)
-  before_action :set_projects_alpha, only: %i(show edit update new)
+  before_action :query_projects_alpha, only: %i(show edit update new)
   before_action :get_current_stories, only: %i(show)
   before_action :valid_admin, only: %i(index), if: -> { params[:status] == 'pending' }
   before_action :access_to_edit, only: %i(edit)
@@ -13,7 +13,6 @@ class ProjectsController < ApplicationController
   def index
     @language = params[:language]
     query_projects(params[:status])
-    # @projects = @projects.search(params[:search], params[:page])
     if params[:status] == 'pending'
       render :pending_projects, layout: 'with_sidebar_sponsor_right'
     else
@@ -44,7 +43,7 @@ class ProjectsController < ApplicationController
       current_user.follow(@project)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
-      set_projects_alpha
+      query_projects_alpha
       flash.now[:alert] = 'Project was not saved. Please check the input.'
       render action: 'new'
     end
@@ -101,7 +100,7 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
-  def set_projects_alpha
+  def query_projects_alpha
     status = params[:status]
     @projects = if status == 'pending'
                   Project.where(status: %w(pending)).order('title ASC')

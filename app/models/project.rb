@@ -41,12 +41,6 @@ class Project < ApplicationRecord
       .references(:source_repositories)
   end
 
-  #def self.search(search, page)
-  #  order(Arel.sql('LOWER(title)'))
-  #    .where('title LIKE ?', "%#{search}%")
-  #    .paginate(per_page: 9, page: page)
-  #end
-
   def gpa
     CodeClimateBadges.new("github/#{github_repo}").gpa
   end

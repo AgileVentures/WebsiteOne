@@ -40,23 +40,22 @@
 <ul id="project-list">
   <% @projects.each_with_index do |p, index| %>
     <% project = p %>
-    <% should_focus = false %>
     <% has_docs = p.documents.any? %>
     <% show_it = (p.status == 'active' || p.status == 'Active' ? true : false) %>
     <% follower_count = p.followers.count %>
     <% commit_count = p.commit_count %>
     <% content_tag :li, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
-        <div style="display: flex">
-            <% if has_docs %>
-              <a href="#collapse<%= index %>" class="collapse-button" data-toggle="collapse">
-              <i class="collapse-icon fa fa-caret-<%= has_docs and should_focus ? 'down' : 'right' %>"></i>
-            </a>
-            <% end %>
-          <%= link_to p.title, project_path(p), class: should_focus ? 'focused' : show_it ? '' : 'inactive', style: show_it ? '' : 'display: none;' %>
-          <%= content_tag :i, "", style: show_it ? '' : 'display: none;', class: show_it ? 'fa fa-users' : 'inactive' %>
+        <div style='display: flex'>
+          <% if has_docs %>
+            <%= content_tag :a, '', href: '#collapse' + index.to_s, style: show_it ? '' : 'display: none;', class: show_it ? 'collapse-button' : 'inactive', 'data-toggle' => 'collapse' do -%>
+              <i class='collapse-icon fa fa-caret-right'></i>
+            <% end -%>
+          <% end %>
+          <%= link_to p.title, project_path(p), class: show_it ? '' : 'inactive', style: show_it ? '' : 'display: none;' %>
+          <%= content_tag :i, '', style: show_it ? '' : 'display: none;', class: show_it ? 'fa fa-users' : 'inactive' %>
           <%= content_tag :div, follower_count, style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
           <% unless commit_count.nil? or commit_count == 0 %>
-                <%= content_tag :i, "", style: show_it ? '' : 'display: none;', class: show_it ? 'fa fa-github-alt' : 'inactive' %>
+                <%= content_tag :i, '', style: show_it ? '' : 'display: none;', class: show_it ? 'fa fa-github-alt' : 'inactive' %>
                 <%= content_tag :div, commit_count, style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
           <% end %>
         </div>
@@ -64,14 +63,9 @@
     <% if has_docs %>
       <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>" style="<%= show_it ? '' : 'display: none;' %>">
         <% p.documents.roots.each do |d| %>
-          <% doc_focus = (should_focus and (@document == d or @document.try(&:root) == d)) %>
           <li>
             <% display_text = %Q{#{d.title}#{" (#{d.children.count})" unless d.children.empty?}} %>
-            <% if doc_focus and @document == d %>
-              <p class="sidebar-selected"><%= display_text %></p>
-            <% else %>
-              <%= link_to display_text, project_document_path(p, {id: d.to_param}), class: doc_focus ? 'focused' : '' %>
-            <% end %>
+            <%= link_to display_text, project_document_path(p, {id: d.to_param}) %>
           </li>
         <% end %>
       </ul>

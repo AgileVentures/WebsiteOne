@@ -3,16 +3,16 @@
     <% should_focus = project == p %>
     <% has_docs = p.documents.any? %>
     <% show_it = (p.status == 'active' || p.status == 'Active' ? true : false) %>
-    <li list-style="<%= show_it ? '' : 'none'%>">
+    <% content_tag :li, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
       <% if should_focus and document.nil? %>
         <p class="sidebar-selected"><%= p.title %></p>
       <% else %>
         <div style="display: flex">
             <% if has_docs %>
-              <a href="#collapse<%= index %>" class="collapse-button" data-toggle="collapse">
-              <i class="collapse-icon fa fa-caret-<%= has_docs and should_focus ? 'down' : 'right' %>"></i>
-            </a>
-            <% end %>
+              <%= content_tag :a, '', href: '#collapse' + index.to_s, style: show_it ? '' : 'display: none;', class: show_it ? 'collapse-button' : 'inactive', 'data-toggle' => 'collapse' do -%>
+                <i class="collapse-icon fa fa-caret-<%= has_docs and should_focus ? 'down' : 'right' %>"></i>
+              <% end %>
+            <% end -%>
           <%= link_to p.title, project_path(p), class: should_focus ? 'focused' : '', style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
          </div>
       <% end %>
