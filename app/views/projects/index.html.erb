@@ -45,19 +45,29 @@
     <% follower_count = p.followers.count %>
     <% commit_count = p.commit_count %>
     <% content_tag :li, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
-        <div style='display: flex'>
+        <div class="project_card">
           <% if has_docs %>
             <%= content_tag :a, '', href: '#collapse' + index.to_s, style: show_it ? '' : 'display: none;', class: show_it ? 'collapse-button' : 'inactive', 'data-toggle' => 'collapse' do -%>
               <i class='collapse-icon fa fa-caret-right'></i>
             <% end -%>
           <% end %>
-          <%= link_to p.title, project_path(p), class: show_it ? '' : 'inactive', style: show_it ? '' : 'display: none;' %>
-          <%= content_tag :i, '', style: show_it ? '' : 'display: none;', class: show_it ? 'fa fa-users' : 'inactive' %>
-          <%= content_tag :div, follower_count, style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
-          <% unless commit_count.nil? or commit_count == 0 %>
-                <%= content_tag :i, '', style: show_it ? '' : 'display: none;', class: show_it ? 'fa fa-github-alt' : 'inactive' %>
-                <%= content_tag :div, commit_count, style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
-          <% end %>
+          <%= link_to p.title, project_path(p), class: show_it ? 'project_title col' : 'inactive', style: show_it ? '' : 'display: none;' %>
+          <div class="project_card_stats col">
+            <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' do -%>
+              <div data-toggle="tooltip" data-placement="top" title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
+                <i class="fa fa-users"></i>
+                <%= follower_count %>
+              </div>
+            <% end %>
+            <% unless commit_count.nil? or commit_count == 0 %>
+              <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' do -%>
+                <div data-toggle="tooltip" data-placement="top" title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
+                  <i class="fa fa-github-alt"></i>
+                  <%= commit_count %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
         </div>
     </li>
     <% if has_docs %>
