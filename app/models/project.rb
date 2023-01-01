@@ -2,6 +2,7 @@
 
 class Project < ApplicationRecord
   extend FriendlyId
+  include Filterable
   friendly_id :title, use: %i(slugged history)
 
   validates :title, :description, :status, presence: true
@@ -38,12 +39,6 @@ class Project < ApplicationRecord
     includes(:source_repositories)
       .where('source_repositories.url ILIKE ?', '%github%')
       .references(:source_repositories)
-  end
-
-  def self.search(search, page)
-    order(Arel.sql('LOWER(title)'))
-      .where('title LIKE ?', "%#{search}%")
-      .paginate(per_page: 9, page: page)
   end
 
   def gpa

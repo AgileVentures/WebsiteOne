@@ -1,7 +1,7 @@
 <% provide :title, 'Projects' %>
   <div class="row">
     <div class="col-xs-9">
-      <h1 id="projects-header">List of Projects</h1>
+      <h1 id="projects-header">Projects By Recent Activity</h1>
     </div>
     <div class="col-xs-3">
       <% if user_signed_in? %>
@@ -15,26 +15,75 @@
   <% if @projects.empty? %>
     <p>We have no projects right now&#8230;</p>
   <% else %>
+    <div class="col-sm-12 well">
+    <p>Filter projects by</p>
+    <%= form_tag(projects_path, method: "get", class: "form-inline text-left") do %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <%= select_tag :language, options_for_select(@projects_languages_array, params[:language]), {prompt: 'Language...', class: 'form-control'} %>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <%= submit_tag 'Search', class: 'btn btn-default' %>
+          </div>
+          <div id="project-filters">
+          </div>
+        </div>
+    </div>
     <p>
       To get involved in any of the projects, join one of the
       <%= link_to 'scrums', events_path %>
       and reach out to us, or send us an email at
       <a href="mailto:info@agileventures.org">info@agileventures.org</a>.
     </p>
-    <div class="row stack-search">
-      <%= simple_form_for(:project, method: "get", html: { class: 'form-vertical no-margin' }) do |f| %>
-      <div class="col-xs-12 flex">
-        <%= f.input :languages, label: 'Search projects by programming language', collection: @projects_languages_array, selected: @language, include_blank: true %>
-        <div class="language-search-btn">
-          <%= f.button :submit, 'Search', class: 'btn btn-search btn' %>
+
+<nav id="sidebar">
+<ul id="project-list">
+  <% @projects.each_with_index do |p, index| %>
+    <% project = p %>
+    <% has_docs = p.documents.any? %>
+    <% show_it = (p.status == 'active' || p.status == 'Active' ? true : false) %>
+    <% follower_count = p.followers.count %>
+    <% commit_count = p.commit_count %>
+    <% content_tag :li, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
+        <div class="project_card">
+          <% if has_docs %>
+            <%= content_tag :a, '', href: '#collapse' + index.to_s, style: show_it ? '' : 'display: none;', class: show_it ? 'collapse-button' : 'inactive', 'data-toggle' => 'collapse' do -%>
+              <i class='collapse-icon fa fa-caret-right'></i>
+            <% end -%>
+          <% end %>
+          <%= link_to p.title, project_path(p), class: show_it ? 'project_title col' : 'inactive', style: show_it ? '' : 'display: none;' %>
+          <div class="project_card_stats col">
+            <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? 'col' : 'inactive' do -%>
+              <div data-toggle="tooltip" data-placement="top" title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
+                <i class="fa fa-users"></i>
+                <%= follower_count %>
+              </div>
+            <% end %>
+            <% unless commit_count.nil? or commit_count == 0 %>
+              <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? 'col' : 'inactive' do -%>
+                <div data-toggle="tooltip" data-placement="top" title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
+                  <i class="fa fa-github-alt"></i>
+                  <%= commit_count %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
-    </div>
+    </li>
+    <% if has_docs %>
+      <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>" style="<%= show_it ? '' : 'display: none;' %>">
+        <% p.documents.roots.each do |d| %>
+          <li>
+            <% display_text = %Q{#{d.title}#{" (#{d.children.count})" unless d.children.empty?}} %>
+            <%= link_to display_text, project_document_path(p, {id: d.to_param}) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
-  <div class="row">
-    <ul id="project-list" style="list-style: none; padding-left: 0;">
-      <%= render 'listing' %>
-    </ul>
-  </div>
-  <%= will_paginate @projects %>
+</ul>
+</nav>
+
+
+  <% end %>
 <% end %>
