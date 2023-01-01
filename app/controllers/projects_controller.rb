@@ -103,7 +103,7 @@ class ProjectsController < ApplicationController
   def query_projects(order)
     status = params[:status]
     @projects = if status == 'pending'
-                  Project.where(status: status)                         
+                  Project.where(status: status)
                          .order(order)
                          .includes(:user)
                 else
