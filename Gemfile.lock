@@ -347,7 +347,7 @@ GEM
       concurrent-ruby (~> 1.1)
       webrick (~> 1.7)
       websocket-driver (>= 0.6, < 0.8)
-    ffi (1.15.3)
+    ffi (1.15.5)
     font-awesome-rails (4.7.0.7)
       railties (>= 3.2, < 7)
     formatador (0.3.0)
@@ -472,9 +472,9 @@ GEM
       net-protocol
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.11.5-x86_64-darwin)
+    nokogiri (1.12.0-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.11.5-x86_64-linux)
+    nokogiri (1.12.0-x86_64-linux)
       racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
@@ -547,7 +547,7 @@ GEM
       multi_json
     puma (5.4.0)
       nio4r (~> 2.0)
-    racc (1.6.1)
+    racc (1.6.2)
     rack (2.2.4)
     rack-cache (1.12.1)
       rack (>= 0.4)
@@ -699,9 +699,6 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
-    simple_form (5.1.0)
-      actionpack (>= 5.2)
-      activemodel (>= 5.2)
     simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -858,7 +855,7 @@ DEPENDENCIES
   mercury-rails!
   mime-types (~> 3.3, >= 3.3.1)
   mini_racer
-  nokogiri (= 1.11.5)
+  nokogiri (= 1.12.0)
   octokit
   omniauth
   omniauth-github
@@ -896,7 +893,6 @@ DEPENDENCIES
   sass-rails (~> 5.0, >= 5.0.8)
   seed_dump
   shoulda-matchers
-  simple_form (~> 5.0)
   simplecov (~> 0.17.1)
   slack-ruby-client
   sorted_set (~> 1.0, >= 1.0.3)

@@ -17,7 +17,7 @@ Feature: Browse  projects
       | hello mercury | greetings mercury folks |             | active  |                                             |                                                  | 1900         | 1999-01-09 09:37:14 UTC |
       | hello saturn  | greetings saturn folks  | My pitch... | active  |                                             |                                                  | 1900         | 1999-01-09 08:37:14 UTC |
       | hello sun     | greetings sun folks     |             | active  |                                             |                                                  | 1800         | 1999-01-01 09:37:14 UTC |
-      | hello venus   | greetings venus folks   |             | active  |                                             |                                                  |              | 1999-01-01 09:37:14 UTC |
+      | hello venus   | greetings venus folks   |             | inactive  |                                             |                                                  |              | 1999-01-01 09:37:14 UTC |
       | hello terra   | greetings terra folks   |             | active  |                                             |                                                  |              | 1999-01-01 09:37:14 UTC |
       | hello pluto   | greetings pluto folks   |             | pending |                                             |                                                  | 2000         | 1999-01-01 09:37:14 UTC |
       | hello alpha   | greetings alpha folks   |             | active  |                                             |                                                  | 300          | 2000-01-12 09:37:14 UTC |
@@ -28,14 +28,14 @@ Feature: Browse  projects
   Scenario: List of projects in table layout
     Given  I am on the "home" page
     When I follow "Projects" within the navbar
-    Then I should see "List of Projects"
+    Then I should see "Projects By Recent Activity"
 
   Scenario: Columns in projects table
     When I go to the "projects" page
-    Then I should see "List of Projects" table
+    Then I should see "Projects By Recent Activity" table
 
   @javascript
-  Scenario: Display most recently updated at top "Our Projects" page paginated with Infinite Scroll
+  Scenario: Display most recently updated at top "Our Projects" page
     Given I am on the "home" page
     When I follow "Projects" within the navbar
     Then I should see "<title>" within "project-list":
@@ -45,13 +45,12 @@ Feature: Browse  projects
       | hello mars    |
       | hello mercury |
       | hello jupiter |
-    And I scroll to the bottom of the page
-    Then I should see "<title>" within "project-list":
-      | title        |
       | hello saturn |
-      | hello venus  |
       | hello sun    |
       | hello terra  |
+    And I should not see "<title>" within "project-list":
+      | title        |
+      | hello venus  |
 
   Scenario:  Display pending projects
     Given I am logged in as "Thomas"
@@ -59,5 +58,3 @@ Feature: Browse  projects
     Then I should see "<title>" within "project-list":
       | title       |
       | hello pluto |
-
-
