@@ -53,14 +53,14 @@
           <% end %>
           <%= link_to p.title, project_path(p), class: show_it ? 'project_title col' : 'inactive', style: show_it ? '' : 'display: none;' %>
           <div class="project_card_stats col">
-            <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' do -%>
+            <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? 'col' : 'inactive' do -%>
               <div data-toggle="tooltip" data-placement="top" title="<%= follower_count %> <%= 'member'.pluralize(follower_count) %>">
                 <i class="fa fa-users"></i>
                 <%= follower_count %>
               </div>
             <% end %>
             <% unless commit_count.nil? or commit_count == 0 %>
-              <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' do -%>
+              <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? 'col' : 'inactive' do -%>
                 <div data-toggle="tooltip" data-placement="top" title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
                   <i class="fa fa-github-alt"></i>
                   <%= commit_count %>
