@@ -434,6 +434,12 @@ Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_li
     step %(I should see "#{project_title}" within "#{project_list_area}")
   end
 end
+Then(/^I should not see "([^"]*)" within "([^"]*)":$/) do |project_title, project_list_area, table|
+  table.rows.each do |row|
+    project_title = row.first
+    step %(I should not see "#{project_title}" within "#{project_list_area}")
+  end
+end
 Then /^I should receive a file(?: "([^"]*)")?/ do |file|
   result = page.response_headers['Content-Type'].should == 'text/calendar'
   result = page.response_headers['Content-Disposition'].should =~ /#{file}/ if result

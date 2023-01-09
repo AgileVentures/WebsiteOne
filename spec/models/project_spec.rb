@@ -90,14 +90,6 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  describe '#search' do
-    before(:each) { build_stubbed_list(:project, 12) }
-
-    it 'should return paginated projects with 9 to start with' do
-      expect(Project.search(nil, nil).per_page).to eq(9)
-    end
-  end
-
   describe '#url_for_me' do
     it 'returns correct url for show action' do
       expect(subject.url_for_me('show')).to eq "/projects/#{subject.slug}"

@@ -1,22 +1,24 @@
-<h3>Current Projects</h3>
-<ul>
-  <% current_projects.each_with_index do |p, index| %>
+<ul id="project-list">
+  <% @projects.each_with_index do |p, index| %>
     <% should_focus = project == p %>
     <% has_docs = p.documents.any? %>
-    <li>
-      <% if has_docs %>
-        <a href="#collapse<%= index %>" class="collapse-button" data-toggle="collapse">
-          <i class="collapse-icon fa fa-caret-<%= has_docs and should_focus ? 'down' : 'right' %>"></i>
-        </a>
-      <% end %>
+    <% show_it = (p.status == 'active' || p.status == 'Active' ? true : false) %>
+    <% content_tag :li, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
       <% if should_focus and document.nil? %>
         <p class="sidebar-selected"><%= p.title %></p>
       <% else %>
-        <%= link_to p.title, project_path(p), class: should_focus ? 'focused' : '' %>
+        <div style="display: flex">
+            <% if has_docs %>
+              <%= content_tag :a, '', href: '#collapse' + index.to_s, style: show_it ? '' : 'display: none;', class: show_it ? 'collapse-button' : 'inactive', 'data-toggle' => 'collapse' do -%>
+                <i class="collapse-icon fa fa-caret-<%= has_docs and should_focus ? 'down' : 'right' %>"></i>
+              <% end %>
+            <% end -%>
+          <%= link_to p.title, project_path(p), class: should_focus ? 'focused' : '', style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
+         </div>
       <% end %>
     </li>
     <% if has_docs %>
-      <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>">
+      <ul id="collapse<%= index %>" class="<%= project == p ? 'in' : 'collapse' %>" style="<%= show_it ? '' : 'display: none;' %>">
         <% p.documents.roots.each do |d| %>
           <% doc_focus = (should_focus and (document == d or document.try(&:root) == d)) %>
           <li>
