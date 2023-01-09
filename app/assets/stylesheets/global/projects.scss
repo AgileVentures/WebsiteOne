@@ -117,8 +117,13 @@ $avatar-size: 32px;
 }
 
 .project_card {
+  display: flex;
   margin-top: 14px;
   margin-bottom: 28px;
+}
+
+.project_card .col {
+  flex: 1; 
 }
 
 .project_card h3 {
@@ -151,8 +156,6 @@ $avatar-size: 32px;
 
 .project_card_stats {
   display: flex;
-  flex-direction: column;
-  height: 110px;
   padding-left: 20px;
 
   a {
@@ -173,6 +176,12 @@ $avatar-size: 32px;
 #project_image {
   padding: 18px;
   width: 128px;
+}
+
+.project_title {
+  margin: 5px;
+  font-weight: bold;
+  font-size: large;
 }
 
 #project_title {
