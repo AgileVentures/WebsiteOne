@@ -36,17 +36,16 @@
         <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         <% if !@recent_hangout.try(:live?) and @event.less_than_ten_till_start?%>
-          <div class='btn-jitsi pull-right'>
-            <%= link_to @event.jitsi_room_link, target: '_blank' do %>
-              <button type="button" class="btn btn-primary" id='start-jitsi'>
-                Start Jitsi Meet
-              </button>
-            <% end %>
-          </div>
-
-          <div class="btn-HOA pull-right">
-            <%= button_to 'Start Meetig Instructions', '/faq#events-hangouts', id: 'hoa_instructions', class: "btn btn-primary", form: {target: '_blank'} %>
-          </div>
+          <%= link_to (@project ? @project.meet_room_link : ''), target: '_blank' do %>
+            <button type="button" class="btn btn-warning" id="hoa_instructions" data-toggle="modal" data-target="#myModal">
+              Start Google Meet
+            </button>
+          <% end %>
+          <%= link_to @event.jitsi_room_link, target: '_blank' do %>
+            <button type="button" class="btn btn-primary" id='start-jitsi'>
+              Start Jitsi Meet
+            </button>
+          <% end %>
         <% end %>
     <% end %>
     <div class="col-xs-12 col-sm-6">
