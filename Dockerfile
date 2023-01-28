@@ -35,10 +35,8 @@ COPY vendor/assets/javascripts /WebsiteOne/assets/javascripts
 
 FROM base
 
-# To execute tests, install chrome below
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \ 
-    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
-RUN apt-get update && apt-get -y install google-chrome-stable
+# To execute tests, install chromium
+RUN apt install -y chromium
 
 RUN dos2unix scripts/copy_javascript_dependencies.js
 RUN yarn install
