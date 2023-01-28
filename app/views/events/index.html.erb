@@ -43,7 +43,7 @@
                       </div>
                   <% elsif event.within_current_event_duration? %>
                       <div class="event-notice pull-right">
-                        <%= link_to "Event time! Start now", 'https://support.google.com/youtube/answer/7083786', class: 'btn btn-default pull-right' %>
+                        <%= link_to  "Event time! Start now", event_path(event), class: 'btn btn-default pull-right' %>
                       </div>
                   <% end %>
                 <% end %>
