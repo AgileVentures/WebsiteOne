@@ -41,8 +41,7 @@ Feature: Display Projects
     And I should see link "HelloSun"
     And I should see link "HelloSunExtras"
 
-  Scenario: Project show page has hangout button for users that not follow the project
+  Scenario: Project show page should not show Meet button for users that not follow the project
     Given I have logged in
     And I am on the "Show" page for project "hello world"
-    When I click "Start Live Hangout" button
-    Then I should see "You should join this project before you can start the hangouts"
+    Then I should not see "Start Google Meet"
