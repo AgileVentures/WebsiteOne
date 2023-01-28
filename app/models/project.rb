@@ -106,7 +106,7 @@ class Project < ApplicationRecord
   end
 
   def meet_room_link
-    "https://meet.google.com"
+    'https://meet.google.com'
   end
 
   def slack_channel_codes
