@@ -105,6 +105,10 @@ class Project < ApplicationRecord
     "https://meet.jit.si/AV_#{title.tr(' ', '_').gsub(/[^0-9a-zA-Z_]/i, '')}"
   end
 
+  def meet_room_link
+    'https://meet.google.com'
+  end
+
   def slack_channel_codes
     slack_channels.pluck(:code)
   end
