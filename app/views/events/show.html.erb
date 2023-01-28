@@ -44,8 +44,8 @@
             <% end %>
           </div>
         <div>
-        <%= link_to @project.meet_room_link, target: '_blank' do %>
-          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+        <%= link_to (@project ? @project.meet_room_link : ''), target: '_blank' do %>
+          <button type="button" class="btn btn-warning" id='hoa_instructions', data-toggle="modal" data-target="#myModal">
             Start Google Meet
           </button>
         <% end %>
