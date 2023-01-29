@@ -11,5 +11,5 @@
     "**/*jasmine-jquery.js",
     "**/*spec_helper.js"
   ],
-  "browser": "chrome"
+  "browser": "headlessChrome"
 }
