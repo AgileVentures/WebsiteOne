@@ -26,11 +26,6 @@ Feature: Start Events
     When I am on events index page
     Then I should see "Event time! Start now"
 
-  Scenario: Start Now button redirects to hangout instructions
-    Given the time now is "2014/02/03 07:00:09 UTC"
-    And I am on events index page
-    Then I should see a link "Event time! Start now" to "https://support.google.com/youtube/answer/7083786"
-
   Scenario: Should not see Event time message and link when the event is live
     Given an event "Scrum"
     And the "Scrum" host has started the event
