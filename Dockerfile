@@ -36,7 +36,7 @@ COPY vendor/assets/javascripts /WebsiteOne/assets/javascripts
 FROM base
 
 # To execute tests, install chromium
-RUN apt install -y chromium
+RUN apt install -y xvfb chromium chromium-driver
 
 RUN dos2unix scripts/copy_javascript_dependencies.js
 RUN yarn install
