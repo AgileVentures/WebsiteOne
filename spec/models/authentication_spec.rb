@@ -10,7 +10,7 @@ describe Authentication, type: :model do
 
   it 'must have an associated user' do
     auth.user_id = nil
-    expect { auth.save }.to raise_error ActiveRecord::StatementInvalid
+    expect { auth.save! }.to raise_error ActiveRecord::RecordInvalid
   end
 
   it 'must have an associated provider' do
