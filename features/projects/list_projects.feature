@@ -38,19 +38,19 @@ Feature: Browse  projects
   Scenario: Display most recently updated at top "Our Projects" page
     Given I am on the "home" page
     When I follow "Projects" within the navbar
-    Then I should see "<title>" within "project-list":
-      | title         |
-      | hello world   |
-      | hello alpha   |
-      | hello mars    |
-      | hello mercury |
-      | hello jupiter |
-      | hello saturn |
-      | hello sun    |
-      | hello terra  |
-    And I should not see "<title>" within "project-list":
-      | title        |
-      | hello venus  |
+    Then I should see "<title>" and "<last_github_update>" within "project-list":
+      | title         | last_github_update |
+      | hello world   | 2000-01-13 |
+      | hello alpha   | 2000-01-12 |
+      | hello mars    | 1999-01-11 |
+      | hello mercury | 1999-01-09 |
+      | hello jupiter | 1999-01-10 |
+      | hello saturn | 1999-01-09 |
+      | hello sun    | 1999-01-01 |
+      | hello terra  | 1999-01-01 |
+   And I should not see "<title>" within "project-list":
+     | title        |
+     | hello venus  |
 
   Scenario:  Display pending projects
     Given I am logged in as "Thomas"
