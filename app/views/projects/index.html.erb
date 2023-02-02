@@ -44,6 +44,7 @@
     <% show_it = (p.status == 'active' || p.status == 'Active' ? true : false) %>
     <% follower_count = p.followers.count %>
     <% commit_count = p.commit_count %>
+    <% last_update = p.last_github_update %>
     <% content_tag :li, "", style: show_it ? '' : 'display: none;', class: show_it ? '' : 'inactive' %>
         <div class="project_card">
           <% if has_docs %>
@@ -64,6 +65,14 @@
                 <div data-toggle="tooltip" data-placement="top" title="<%= commit_count %> <%= 'commit'.pluralize(commit_count) %>">
                   <i class="fa fa-github-alt"></i>
                   <%= commit_count %>
+                </div>
+              <% end %>
+            <% end %>
+            <% unless last_update.nil? %>
+              <%= content_tag :div, "", style: show_it ? '' : 'display: none;', class: show_it ? 'col' : 'inactive' do -%>
+                <div data-toggle="tooltip" data-placement="top" title="last update on github">
+                  <i class="fa fa-calendar"></i>
+                  <%= format_date(last_update) %>
                 </div>
               <% end %>
             <% end %>
