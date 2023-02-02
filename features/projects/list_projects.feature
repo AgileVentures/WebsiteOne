@@ -48,13 +48,13 @@ Feature: Browse  projects
       | hello saturn | 1999-01-09 |
       | hello sun    | 1999-01-01 |
       | hello terra  | 1999-01-01 |
-#    And I should not see "<title>" and "<last_github_update>" within "project-list":
-#      | title        | last_github_update |
-#      | hello venus  | 1999-01-01 |
+   And I should not see "<title>" within "project-list":
+     | title        |
+     | hello venus  |
 
-  # Scenario:  Display pending projects
-  #   Given I am logged in as "Thomas"
-  #   And I am on the "pending projects" page
-  #   Then I should see "<title>" within "project-list":
-  #     | title       |
-  #     | hello pluto |
+  Scenario:  Display pending projects
+    Given I am logged in as "Thomas"
+    And I am on the "pending projects" page
+    Then I should see "<title>" within "project-list":
+      | title       |
+      | hello pluto |
