@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'exception_notification/rails'
+require_relative '../../app/helpers/features'
 
 ExceptionNotification.configure do |config|
   # Ignore additional exception types.
