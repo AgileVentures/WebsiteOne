@@ -472,10 +472,6 @@ GEM
     nokogiri (1.12.0)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    nokogiri (1.12.0-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.12.0-x86_64-linux)
-      racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -919,7 +915,7 @@ DEPENDENCIES
   youtube_rails
 
 RUBY VERSION
-   ruby 3.0.5p211
+   ruby 3.2.1p31
 
 BUNDLED WITH
-   2.2.33
+   2.4.6
