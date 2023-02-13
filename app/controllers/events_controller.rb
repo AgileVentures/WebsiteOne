@@ -23,8 +23,10 @@ class EventsController < ApplicationController
     @projects = Project.active
     respond_to do |format|
       format.html { @events = Event.upcoming_events(specified_project) }
-      format.json { @events = Event.upcoming_events(specified_project)
-                    @scrums = EventInstance.this_month_until_now }
+      format.json do
+                    @events = Event.upcoming_events(specified_project)
+                    @scrums = EventInstance.this_month_until_now 
+      end
     end
   end
 

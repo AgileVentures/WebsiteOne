@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 date_format = '%Y-%m-%dT%H:%M:%S'
 json.array! @scrums do |scrum|
   json.title scrum.title
