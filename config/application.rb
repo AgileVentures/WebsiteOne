@@ -18,13 +18,13 @@ end
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-# Bundler.require(*Rails.groups)
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
+# Bundler.require(:default, Rails.env)
 
 module WebsiteOne
   class Application < Rails::Application
     config.active_support.cache_format_version 7.0
-    # config.autoloader = :classic
+    config.autoloader = :zeitwerk
     # necessary to make Settings available
     Config::Integrations::Rails::Railtie.preload
     # config.load_defaults 5.0
