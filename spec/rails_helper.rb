@@ -8,7 +8,7 @@ SimpleCov.start do
 end
 
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../config/environment.rb', __dir__)
+require File.expand_path('../config/environment', __dir__)
 
 require 'rspec/rails'
 require 'shoulda/matchers'

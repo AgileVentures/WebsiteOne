@@ -24,7 +24,7 @@ Bundler.require(*Rails.groups)
 module WebsiteOne
   class Application < Rails::Application
     config.active_support.cache_format_version 7.0
-    config.autoloader = :zeitwerk
+    # config.autoloader = :zeitwerk
     # necessary to make Settings available
     Config::Integrations::Rails::Railtie.preload
     # config.load_defaults 5.0

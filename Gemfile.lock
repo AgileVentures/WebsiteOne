@@ -115,7 +115,7 @@ GEM
       execjs (~> 2)
     awesome_print (1.9.2)
     bcrypt (3.1.18)
-    benchmark-ips (2.10.0)
+    benchmark-ips (2.11.0)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -543,7 +543,7 @@ GEM
     rack (2.2.6.2)
     rack-cache (1.13.0)
       rack (>= 0.4)
-    rack-cors (1.1.1)
+    rack-cors (2.0.0)
       rack (>= 2.0.0)
     rack-protection (3.0.5)
       rack
