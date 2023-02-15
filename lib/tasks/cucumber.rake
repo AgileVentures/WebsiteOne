@@ -64,8 +64,8 @@ unless ARGV.any? { |a| a =~ /^gems/ } # Don't load anything when running the gem
 
       task :statsetup do
         require 'rails/code_statistics'
-        ::STATS_DIRECTORIES << %w(Cucumber\ features features) if File.exists?('features')
-        ::CodeStatistics::TEST_TYPES << 'Cucumber features' if File.exists?('features')
+        ::STATS_DIRECTORIES << %w(Cucumber\ features features) if File.exist?('features')
+        ::CodeStatistics::TEST_TYPES << 'Cucumber features' if File.exist?('features')
       end
 
       task :annotations_setup do
