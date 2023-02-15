@@ -24,7 +24,7 @@ module Mercury
     end
 
     def is_static_pages_edit_path?
-      StaticPage.friendly.exist?((params[:requested_uri] || request.env['PATH_INFO']).split('/').reject do |i|
+      StaticPage.friendly.exists?((params[:requested_uri] || request.env['PATH_INFO']).split('/').reject do |i|
                                     %w(mercury_saved mercury_update).include? i
                                   end.last)
     end

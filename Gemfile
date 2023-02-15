@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.2.1'
+ruby '3.0.5'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
 gem 'actionmailer', '~> 7.0.4.2'
