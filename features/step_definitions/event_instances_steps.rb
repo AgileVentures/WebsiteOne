@@ -1,7 +1,7 @@
 
 starting_date = 1.year.ago
 
-Given /^(\d+) event instances? exists?$/ do |num_event_instances|
+Given /^(\d+) event instances? exist?$/ do |num_event_instances|
   num_event_instances.to_i.times do |num|
     created_at_date = starting_date + num.days
     EventInstance.create title: "Bob's mob", event_id: 3, category: 'Scrum', yt_video_id: "fake_id_#{num}",

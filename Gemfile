@@ -2,17 +2,17 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.5'
+ruby '3.2.1'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
-gem 'actionmailer', '~> 6.1.7'
-gem 'actionpack', '~> 6.1.7'
-gem 'actionview', '~> 6.1.7'
-gem 'activejob', '~> 6.1.7'
-gem 'activemodel', '~> 6.1.7'
-gem 'activerecord', '~> 6.1.7'
-gem 'activesupport', '~> 6.1.7'
-gem 'railties', '~> 6.1.7'
+gem 'actionmailer', '~> 7.0.4.2'
+gem 'actionpack', '~> 7.0.4.2'
+gem 'actionview', '~> 7.0.4.2'
+gem 'activejob', '~> 7.0.4.2'
+gem 'activemodel', '~> 7.0.4.2'
+gem 'activerecord', '~> 7.0.4.2'
+gem 'activesupport', '~> 7.0.4.2'
+gem 'railties', '~> 7.0.4.2'
 gem 'sprockets-rails'
 
 # Gems used in production

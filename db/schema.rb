@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_15_193425) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_12_15_193425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,8 +23,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.text "parameters"
     t.string "recipient_type"
     t.integer "recipient_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
     t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
@@ -36,8 +35,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.string "title", null: false
     t.text "content"
     t.string "slug", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["slug"], name: "index_articles_on_slug", unique: true
     t.index ["title"], name: "index_articles_on_title"
     t.index ["user_id"], name: "index_articles_on_user_id"
@@ -47,8 +46,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.integer "user_id", null: false
     t.string "provider", null: false
     t.string "uid", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
@@ -64,8 +63,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.string "title"
     t.text "body"
     t.integer "project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "parent_id"
     t.integer "user_id"
     t.string "slug"
@@ -78,8 +77,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.integer "event_id"
     t.string "title"
     t.string "hangout_url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "uid"
     t.string "category"
     t.integer "project_id"
@@ -101,11 +100,11 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.boolean "repeat_ends"
     t.date "repeat_ends_on"
     t.string "time_zone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "url"
     t.string "slug"
-    t.datetime "start_datetime"
+    t.datetime "start_datetime", precision: nil
     t.integer "duration"
     t.json "exclusions", default: []
     t.integer "project_id"
@@ -130,8 +129,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.string "follower_type", null: false
     t.integer "follower_id", null: false
     t.boolean "blocked", default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["followable_id", "followable_type"], name: "fk_followables"
     t.index ["follower_id", "follower_type"], name: "fk_follows"
   end
@@ -141,7 +140,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
@@ -156,8 +155,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
   create_table "issue_trackers", force: :cascade do |t|
     t.string "url"
     t.bigint "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["project_id"], name: "index_issue_trackers_on_project_id"
   end
 
@@ -165,8 +164,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.integer "user_id"
     t.integer "total", default: 0
     t.integer "hangouts_attended_with_more_than_one_participant", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "membership_length", default: 0
     t.integer "profile_completeness", default: 0
     t.integer "number_github_contributions", default: 0
@@ -176,8 +175,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
 
   create_table "languages", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "languages_projects", id: false, force: :cascade do |t|
@@ -199,8 +198,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.integer "free_trial_length_days"
     t.string "third_party_identifier"
     t.integer "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "category"
     t.string "paypal_id"
   end
@@ -209,8 +208,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.string "title"
     t.text "description"
     t.string "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "user_id"
     t.string "slug"
     t.string "github_url"
@@ -218,7 +217,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.text "pitch"
     t.integer "commit_count", default: 0
     t.string "image_url"
-    t.datetime "last_github_update"
+    t.datetime "last_github_update", precision: nil
     t.string "slack_channel_name"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -239,8 +238,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
   create_table "source_repositories", id: :serial, force: :cascade do |t|
     t.string "url"
     t.integer "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "static_pages", id: :serial, force: :cascade do |t|
@@ -248,22 +247,22 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.text "body"
     t.integer "parent_id"
     t.string "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["slug"], name: "index_static_pages_on_slug", unique: true
   end
 
   create_table "statuses", id: :serial, force: :cascade do |t|
     t.string "status"
     t.integer "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "subscriptions", id: :serial, force: :cascade do |t|
     t.string "type"
-    t.datetime "started_at"
-    t.datetime "ended_at"
+    t.datetime "started_at", precision: nil
+    t.datetime "ended_at", precision: nil
     t.integer "user_id"
     t.integer "plan_id"
     t.integer "sponsor_id"
@@ -276,7 +275,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.string "tagger_type"
     t.integer "tagger_id"
     t.string "context", limit: 128
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
@@ -293,15 +292,15 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "first_name"
     t.string "last_name"
     t.boolean "display_email"
@@ -321,7 +320,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.string "country_code"
     t.integer "timezone_offset"
     t.integer "status_count", default: 0
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.integer "event_participation_count", default: 0
     t.boolean "can_see_dashboard", default: false
     t.boolean "admin"
@@ -337,7 +336,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.string "event", null: false
     t.string "whodunnit"
     t.text "object"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
@@ -349,8 +348,8 @@ ActiveRecord::Schema.define(version: 2022_12_15_193425) do
     t.boolean "vote_flag"
     t.string "vote_scope"
     t.integer "vote_weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
