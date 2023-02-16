@@ -82,7 +82,7 @@ gem 'utf8-cleaner'
 gem 'vanity'
 gem 'verbs'
 gem 'will_paginate-bootstrap'
-gem 'youtube_rails'
+gem 'youtube_rails', '~>1.2.3'
 gem 'rack-timeout'
 
 group :production do
