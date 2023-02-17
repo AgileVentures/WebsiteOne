@@ -25,7 +25,6 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { @events }
       format.json do
-        @events
         @scrums = EventInstance.this_month_until_now
       end
     end
