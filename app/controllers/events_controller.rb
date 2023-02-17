@@ -24,7 +24,10 @@ class EventsController < ApplicationController
     @events = Event.upcoming_events(specified_project)
     respond_to do |format|
       format.html { @events }
-      format.json { @events }
+      format.json do
+        @events
+        @scrums = EventInstance.this_month_until_now
+      end
     end
   end
 
