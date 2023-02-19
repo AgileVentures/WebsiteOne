@@ -45,7 +45,7 @@ Given(/^I click on the event body for the event named "(.*?)"$/) do |name|
 end
 
 Given('following events exist:') do |table|
-  table.map_column!('start_datetime') do |date|
+  table.map_column('start_datetime') do |date|
     date = Time.current.strftime('%c') if date == 'TODAYS_DATE'
     date
   end
