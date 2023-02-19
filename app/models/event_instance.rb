@@ -75,6 +75,13 @@ class EventInstance < ApplicationRecord
     event.slack_channel_codes
   end
 
+  def self.this_month_until_now
+    beginning_of_month = Date.current.at_beginning_of_month
+    EventInstance
+      .where('created_at BETWEEN ? AND ?', beginning_of_month, DateTime.current)
+      .order(created_at: :desc)
+  end
+
   private
 
   def manually_updated_event_not_finished?
