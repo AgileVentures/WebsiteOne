@@ -45,12 +45,9 @@ Given(/^I click on the event body for the event named "(.*?)"$/) do |name|
 end
 
 Given('following events exist:') do |table|
-  table.map_column('start_datetime') do |date|
-    date = Time.current.strftime('%c') if date == 'TODAYS_DATE'
-    date
-  end
   table.hashes.each do |hash|
     hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
+    hash[:start_datetime] = Time.current.strftime('%c') if hash[:start_datetime] == 'TODAYS_DATE'
     hash.delete('project')
     hash[:repeat_ends] = false
     create(:event, hash)
@@ -270,8 +267,8 @@ Then(/^the user should see the date and time adjusted for their timezone in the 
   stub_user_browser_to_specific_timezone
   @start_date = find('#start_date').value
   @start_time = find('#start_time').value
-  expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime).to_date.strftime('%Y-%m-%d')
-  expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime).to_time.strftime('%I:%M %p')
+  expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime).strftime('%Y-%m-%d')
+  expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime).strftime('%I:%M %p')
 end
 
 Given(/^an existing event$/) do
