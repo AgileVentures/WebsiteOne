@@ -18,7 +18,7 @@ RSpec.describe EventInstance, type: :model do
 
   context '#updated_within_last_two_minutes?' do
     it 'is expected to return false when updated_at is more than two minutes ago' do
-      allow(Time).to receive(:now).and_return(Time.mktime('10:01:59'))
+      allow(Time).to receive(:now).and_return(Time.mktime('10:02:59'))
       expect(subject).to be_updated_within_last_two_minutes
     end
 
