@@ -8,7 +8,7 @@ if Rails.env.test?
     def feature
       string = File.read(location.file)
       document = ::Gherkin::Parser.new.parse(string)
-      document[:feature]
+      document.feature
     end
   end
 end
