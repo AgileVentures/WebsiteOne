@@ -38,8 +38,8 @@ $gravatar-size: 35px;
       margin: 0;
     }
 
-    @include css-transition(height 0.3s ease);
-    @include css-transition(padding 0.3s ease);
+    css-transition: height 0.3s ease;
+    css-transition: padding 0.3s ease;
   }
 
   #affix-nav-brand {
@@ -47,8 +47,8 @@ $gravatar-size: 35px;
     height: $small-logo-height;
 
     img {
-      @include css-transition(all 0.3s ease);
-      @include css-transform(scale(0));
+      css-transition: all 0.3s ease;
+      css-transform: scale(0);
     }
   }
 
@@ -57,7 +57,7 @@ $gravatar-size: 35px;
     top: 0;
 
     #affix-nav-brand img {
-      @include css-transform(scale(1));
+      css-transform: scale(1);
     }
 
     #next-event {
@@ -78,7 +78,7 @@ $gravatar-size: 35px;
   .navbar-nav>li>a {
     color: $white;
     background-color: $theme-dark;
-    @include css-transition(background-color 0.3s ease);
+    css-transition: background-color 0.3s ease;
 
     &:hover, &:active, &.active {
       background-color: $theme-darker;
@@ -129,7 +129,7 @@ header#main_header {
   }
 
   h3 {
-    @include css-border-radius(3px);
+    css-border-radius: 3px;
     background: $theme-main;
     font-family: 'Kreon', serif;
     font-size: 34px;
@@ -146,7 +146,7 @@ header#main_header {
   }
 
   .dropdown-menu {
-    @include css-border-radius(0);
+    css-border-radius: 0;
     background: $theme-main;
     border-width: 0;
     font-size: .9em;
@@ -154,7 +154,7 @@ header#main_header {
     padding: 0;
 
     li {
-      @include css-transition(background-color .3s ease);
+      css-transition: background-color .3s ease;
       padding: 15px;
 
       &:hover {
@@ -169,7 +169,7 @@ header#main_header {
     line-height: $header-height;
 
     #user-gravatar {
-      @include css-shadow(0 0 1px 1px $white);
+      css-shadow: 0 0 1px 1px $white;
       display: inline-block;
       height: $gravatar-size;
       width: $gravatar-size;
@@ -199,7 +199,7 @@ header#main_header {
   }
 
   #login-signup a {
-    @include css-border-radius(0);
+    css-border-radius: 0;
     padding: 0 15px;
     text-align: center;
 
@@ -238,7 +238,7 @@ header#main_header {
   }
 
   input.gsc-input {
-    @include box-sizing(content-box);
+    box-sizing: content-box;
     color: $theme-dark;
     font-size: 14px;
     width: auto;
@@ -246,7 +246,7 @@ header#main_header {
 
   .gsc-control-cse-en,
   .gsc-control-cse {
-    @include box-sizing(content-box);
+    box-sizing: content-box;
     background-color: $theme-main;
     border: 0;
     font-family: 'Ubuntu', Arial, sans-serif;
@@ -255,20 +255,20 @@ header#main_header {
     width: auto;
 
     div {
-      @include box-sizing(content-box);
+      box-sizing: content-box;
     }
   }
 
   .gsc-input-box {
-    @include box-sizing(content-box);
-    @include border-radius(5px);
+    box-sizing: content-box;
+    border-radius: 5px;
     height: 32px;
   }
 
   .gsc-search-button,
   .gsc-search-button-v2 {
-    @include box-sizing(content-box);
-    @include border-radius(5px);
+    box-sizing: content-box;
+    border-radius: 5px;
     height: 16px;
     padding-bottom: 8px;
     padding-top: 8px;
@@ -291,7 +291,7 @@ header#main_header {
 
   .gsc-results-wrapper-overlay,
   .gsc-results-wrapper-visible {
-    @include box-sizing(content-box);
+    box-sizing: content-box;
   }
 
   .gsc-results-wrapper-overlay {
