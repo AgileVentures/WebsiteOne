@@ -52,7 +52,7 @@
   border-radius: 100%;
   -webkit-box-shadow: 0 0 10px 0 #dbdbdb;
   box-shadow: 0 0 10px 0 #dbdbdb;
-  css-transition: all 0.3s ease-in-out;
+  @include css-transition(all 0.3s ease-in-out);
 }
 
 /* =====[ MAIN LIST ]============================================================================== */
@@ -160,7 +160,7 @@
   border-radius: 150px;
   -moz-border-radius: 150px;
   -webkit-border-radius: 150px;
-  css-transition: all 1.8s ease-in-out;
+  @include css-transition(all 1.8s ease-in-out);
   position: absolute;
 }
 
@@ -170,17 +170,17 @@
   -moz-border-radius: 150px;
   -webkit-border-radius: 150px;
   opacity: 0;
-  css-transform: scale(0) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+  @include css-transform(scale(0) rotate(0deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg));
   -webkit-backface-visibility: hidden;
 }
 
 .circle:hover .front {
-  css-transform: scale(1.1);
+  @include css-transform(scale(1.1));
   opacity: 1;
 }
 
 .circle:hover .info {
-  css-transform: scale(1) rotate(360deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg);
+  @include css-transform(scale(1) rotate(360deg) translateX(0px) translateY(0px) skewX(0deg) skewY(0deg));
   opacity: 1;
 }
 
@@ -190,7 +190,7 @@
 
 .circle:hover .popular {
   opacity: 1;
-  css-animation: popularAnim 2s 1;
+  @include css-animation(popularAnim 2s 1);
 }
 
 @include keyframes(popularAnim) {

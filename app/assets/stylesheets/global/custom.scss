@@ -70,7 +70,7 @@ p, a, ul, li {
 
 a {
   color: $link-color;
-  css-transition: color 0.3s ease;
+  @include css-transition(color 0.3s ease);
 
   &:hover, &:active {
     color: $link-hover-color;

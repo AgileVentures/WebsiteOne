@@ -70,7 +70,7 @@ Feature: Manual Edit of Youtube URL
   #   Then "Repeat Scrum" doesn't go live
 
   Scenario: Hangout URL is not posted in slack when Youtube URL is edited
-    Given the date is "2014 Feb 10th 7:01am" 'Fri, 04 Mar 2016' 'Tue, 04 Feb 2014 09:00:00 UTC +00:00'
+    Given the date is "2014 Feb 10th 7:01am"
     And the Slack notifications are enabled
     And I manually set a hangout link for event "Scrum"
     And that we're spying on the SlackService

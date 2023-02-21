@@ -75,8 +75,8 @@
   border-style: solid;
   border-color: transparent;
   border-radius: 5px;
-  css-transition: background-color 0.3s ease;
-  css-transition: border-color 0.3s ease;
+  @include css-transition(background-color 0.3s ease);
+  @include css-transition(border-color 0.3s ease);
 
   &:hover {
     background-color: $light-bg-color;
@@ -89,8 +89,8 @@
   width: 100%;
   padding: 10px;
   height: 100%;
-  css-border-radius: 10px;
-  css-transition: background-color 0.3s ease;
+  @include css-border-radius(10px);
+  @include css-transition(background-color 0.3s ease);
 
   &:hover {
     background-color: $light-bg-color;

@@ -6,7 +6,7 @@
   border: 1px solid lightgray;
   opacity: 0.6;
   width: 215px;
-  css-transition: opacity 0.5s ease;
+  @include css-transition(opacity 0.5s ease);
   &:hover {
     opacity: 1;
   }

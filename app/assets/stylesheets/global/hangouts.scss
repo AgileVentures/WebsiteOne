@@ -160,7 +160,7 @@
   }
 
   .btn-hg-join {
-    hg-btn: green;
+    @include hg-btn(green);
     width: 50px;
   }
 
@@ -174,7 +174,7 @@
   }
 
   .btn-hg-watch {
-    hg-btn: $theme-main;
+    @include hg-btn($theme-main);
     width: 50px;
     margin-top: 3px;
   }
