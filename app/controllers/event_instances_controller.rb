@@ -104,7 +104,7 @@ class EventInstancesController < ApplicationController
       project_id: params[:project_id],
       event_id: params[:event_id],
       category: params[:category],
-      user_id: params[:host_id], 
+      user_id: params[:host_id],
       hangout_participants_snapshots_attributes: [{ participants: params[:participants] }],
       participants: params[:participants],
       hangout_url: params[:hangout_url],
