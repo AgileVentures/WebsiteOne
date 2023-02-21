@@ -16,7 +16,7 @@
 
   .alert {
     margin: 0;
-    @include css-border-radius(0);
+    css-border-radius: 0;
     opacity: 0.8;
   }
 }
