@@ -10,8 +10,6 @@ class EventInstance < ApplicationRecord
   belongs_to :project, optional: true
   include UserNullable
 
-  serialize :participants
-
   scope :started, -> { where.not(hangout_url: nil) }
   scope :live, -> { where('updated_at > ?', 5.minutes.ago).order('created_at DESC') }
   scope :latest, -> { order('created_at DESC') }
@@ -75,6 +73,13 @@ class EventInstance < ApplicationRecord
 
     event = Event.find(event_id)
     event.slack_channel_codes
+  end
+
+  def self.this_month_until_now
+    beginning_of_month = Date.current.at_beginning_of_month
+    EventInstance
+      .where('created_at BETWEEN ? AND ?', beginning_of_month, DateTime.current)
+      .order(created_at: :desc)
   end
 
   private

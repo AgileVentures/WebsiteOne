@@ -1,4 +1,4 @@
-### Installation Details: PostgreSQL, PhantomJS, capybara-webkit, Rails
+### Installation Details: PostgreSQL, Rails
 
 ## [PostgreSQL](id:postgreSQL)
 Install the pg gem. You’ll need to include the following options to set your path and include the needed headers:
@@ -36,19 +36,6 @@ OSX no longer needs host: `localhost` in `database.yml` if you export PG_HOST=lo
 * Ubuntu
 * Mac
 * Heroku deployment
-
-
-## [Phantomjs](id:phantomjs)
-
-On Linux run `sudo apt-get install phantomjs` or `npm i -g phantomjs-prebuilt`
-
-On older versions of ubuntu (like the one that the saasbook vm is created upon) this installs an old version of phantomjs.
-You will need version 1.8.1.  Please see this [gist](https://gist.github.com/jezgomez/5019242) for instructions.
-
-If you have already installed the old phantomjs run `sudo apt-get remove phantomjs` to remove it first.
-
-On OSX you can install it by downloading a Zip File from the url [phantomjs](http://phantomjs.org/download.html), unzip it to a directory of your choice, then ensure you set the PATH for the bin directory for phantomjs in your environment. You can find help [here](https://coolestguidesontheplanet.com/add-shell-path-osx/) on how to set the path
-
 ## Updating Rails
 Run `bundle update rails`
 You might get an error with `libv8`

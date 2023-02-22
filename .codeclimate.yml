@@ -33,3 +33,5 @@ exclude_patterns:
 - spec/
 - vendor/
 - public/
+- app/assets/javascripts/jquery_ujs.js
+- app/assets/javascripts/jquery-ui.js

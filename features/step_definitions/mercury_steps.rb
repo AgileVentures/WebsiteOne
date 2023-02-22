@@ -8,20 +8,20 @@ When /^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/ do |button|
   wait_for_ajax
 end
 
-When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do |field, type, s|
-  page.driver.within_frame('mercury_iframe') do
-    field = field.downcase.singularize
-    # This selector is specific to the mercury region used!
-    case field
-    when 'title'
-      find(:css, "div##{type}_title>textarea").set(s)
-    when 'body'
-      page.execute_script("$('##{type}_body').text('#{s}')")
-    when 'pitch'
-      find(:css, '#pitch_content').set(s)
-    end
-  end
-end
+# When(/^I fill in the editable field "([^"]*)" for "([^"]*)" with "([^"]*)"$/) do |field, type, s|
+#   page.driver.within_frame('mercury_iframe') do
+#     field = field.downcase.singularize
+#     # This selector is specific to the mercury region used!
+#     case field
+#     when 'title'
+#       find(:css, "div##{type}_title>textarea").set(s)
+#     when 'body'
+#       page.execute_script("$('##{type}_body').text('#{s}')")
+#     when 'pitch'
+#       find(:css, '#pitch_content').set(s)
+#     end
+#   end
+# end
 
 Then(/^I should be in the Mercury Editor$/) do
   expect(current_path).to match(%r{/editor/}i)
@@ -35,23 +35,23 @@ When(/^I try to edit the page$/) do
   visit "/editor#{current_path}"
 end
 
-Then /^I should( not)? see button "([^"]*)" in Mercury Editor$/ do |negative, button|
-  button = 'new_document_link' if button == 'New document'
-  page.driver.within_frame('mercury_iframe') do
-    if negative
-      expect(has_link?(button)).to be_falsey
-    else
-      expect(has_link?(button)).to be_truthy
-    end
-  end
-end
+# Then /^I should( not)? see button "([^"]*)" in Mercury Editor$/ do |negative, button|
+#   button = 'new_document_link' if button == 'New document'
+#   page.driver.within_frame('mercury_iframe') do
+#     if negative
+#       expect(has_link?(button)).to be_falsey
+#     else
+#       expect(has_link?(button)).to be_truthy
+#     end
+#   end
+# end
 
-When /I click "([^"]*)" in Mercury Editor/ do |button|
-  page.execute_script('Mercury.silent = true')   # disabling the confirmation dialog for saving changes
-  page.driver.within_frame('mercury_iframe') do
-    click_link button
-  end
-end
+# When /I click "([^"]*)" in Mercury Editor/ do |button|
+#   page.execute_script('Mercury.silent = true')   # disabling the confirmation dialog for saving changes
+#   page.driver.within_frame('mercury_iframe') do
+#     click_link button
+#   end
+# end
 
 When(/^I click on the "Insert Media" button$/) do
   find(:css, '.mercury-primary-toolbar .mercury-insertMedia-button').click

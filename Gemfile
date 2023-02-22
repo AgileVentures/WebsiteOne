@@ -2,18 +2,18 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.0'
+ruby '3.0.5'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
-gem "activerecord"
-gem "activemodel"
-gem "actionpack"
-gem "actionview"
-gem "actionmailer"
-gem "activejob"
-gem "activesupport"
-gem "railties"
-gem "sprockets-rails"
+gem 'actionmailer', '~> 6.1.7'
+gem 'actionpack', '~> 6.1.7'
+gem 'actionview', '~> 6.1.7'
+gem 'activejob', '~> 6.1.7'
+gem 'activemodel', '~> 6.1.7'
+gem 'activerecord', '~> 6.1.7'
+gem 'activesupport', '~> 6.1.7'
+gem 'railties', '~> 6.1.7'
+gem 'sprockets-rails'
 
 # Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
@@ -36,7 +36,7 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'friendly_id'
 gem 'geocoder'
-gem 'ice_cube', '0.16.3'
+# gem 'ice_cube', '0.16.3'
 gem 'jquery-rails'
 gem 'jquery-turbolinks', '2.1.0'
 gem 'jvectormap-rails', '~> 2.0'
@@ -46,7 +46,7 @@ gem 'kaminari'
 gem 'kramdown', '~> 2.1'
 gem 'local_time', '~> 2.1'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
-gem 'nokogiri', '1.11.5'
+gem 'nokogiri', '1.12.0'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
@@ -62,17 +62,16 @@ gem 'public_activity'
 gem 'puma'
 gem 'rack-cache'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails_autolink', '~>1.1.6'
+gem 'rails_autolink'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'redcarpet'
 gem 'ruby-gitter'
 gem 'sass-rails', '~> 5.0', '>= 5.0.8'
-gem 'simple_form', '~> 5.0'
 gem 'slack-ruby-client'
 gem 'spinjs-rails'
 gem 'stripe'
 gem 'sucker_punch'
-gem 'bootsnap', '~> 1.4'
+gem 'bootsnap', '~> 1.9'
 gem 'icalendar'
 gem 'mime-types', '~> 3.3', '>= 3.3.1'
 gem 'seed_dump'
@@ -86,25 +85,27 @@ gem 'will_paginate-bootstrap'
 gem 'youtube_rails'
 gem 'rack-timeout'
 
+group :production do
+  gem 'mini_racer' # for environment without pre-existing js runtimes
+end
+
 group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
-  gem 'capybara-selenium', '~> 0.0.6'
-  gem 'cucumber-rails', '2.3', require: false
+  gem 'cucumber-rails', require: false
+  gem 'cuprite'
   gem 'database_cleaner'
   gem 'delorean' # gem is discontinued
   gem 'launchy'
-  gem 'phantomjs', require: 'phantomjs/poltergeist' # not maintained since 2016
-  gem 'poltergeist' # not maintained since 2018
-  gem 'puffing-billy', '~> 2.2.0'
+  gem 'puffing-billy'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'
   gem 'rubocop-performance', '~> 1.5', '>= 1.5.2'
   gem 'rubocop-rails', '~> 2.10', '>= 2.10.1'
   gem 'rubocop-rspec', '>=1.28'
-  gem 'selenium-webdriver'
   gem 'shoulda-matchers', require: false
   gem 'stripe-ruby-mock', '~> 3.1.0.rc2', require: 'stripe_mock'
   gem 'vcr'
+  gem 'webdrivers'
   gem 'webmock'
 end
 
@@ -128,8 +129,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'hirb'
-  gem 'jasmine', '~> 3.5'
-  gem 'jasmine-jquery-rails', '~> 2.0', '>= 2.0.3'
+  gem 'pry-nav'
   gem 'pry-rails'
   gem 'railroady'
   gem 'rails-erd'
@@ -140,4 +140,5 @@ group :development, :test do
   gem 'simplecov', '~> 0.17.1'
 end
 
-
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+gem 'ice_cube', github: 'ice-cube-ruby/ice_cube', ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'

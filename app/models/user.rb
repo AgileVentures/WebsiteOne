@@ -37,7 +37,6 @@ class User < ApplicationRecord
 
   after_validation :geocode, if: ->(obj) { obj.last_sign_in_ip_changed? }
   # after_validation -> { KarmaCalculator.new(self).perform }
-  after_create :send_slack_invite, if: -> { Features.slack.invites.enabled }
 
   has_many :authentications, dependent: :destroy
   has_many :projects
@@ -200,7 +199,7 @@ class User < ApplicationRecord
   end
 
   def number_hangouts_started_with_more_than_one_participant
-    event_instances.count { |h| !h.participants.nil? && h.participants.to_unsafe_h.count > 1 }
+    event_instances.count { |h| !h.participants.nil? && h.participants.count > 1 }
   end
 
   def activity
@@ -221,10 +220,6 @@ class User < ApplicationRecord
 
   def user_age_in_months
     (DateTime.current - created_at.to_datetime).to_i / 30
-  end
-
-  def send_slack_invite
-    SlackInviteJob.perform_async(email)
   end
 
   validate :email_absence

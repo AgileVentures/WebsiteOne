@@ -15,6 +15,7 @@ class EventsController < ApplicationController
     @recent_hangout = @event.recent_hangouts.first
     @event_instances = EventInstance.where(event_id: @event.id).where.not(yt_video_id: nil)
                                     .order(created_at: :desc).limit(5)
+    @project = @event.project
     render partial: 'hangouts_management' if request.xhr?
   end
 
@@ -23,7 +24,9 @@ class EventsController < ApplicationController
     @events = Event.upcoming_events(specified_project)
     respond_to do |format|
       format.html { @events }
-      format.json { @events }
+      format.json do
+        @scrums = EventInstance.this_month_until_now
+      end
     end
   end
 
