@@ -122,7 +122,7 @@ group :development, :test do
   gem 'bullet'
   gem 'bundler-audit', require: false
   gem 'constant-redefinition'
-  gem 'coveralls', require: false
+  gem 'coveralls_reborn', require: false
   gem 'dotenv-rails'
   gem 'guard'
   gem 'guard-cucumber'
