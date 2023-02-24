@@ -129,7 +129,7 @@ header#main_header {
   }
 
   h3 {
-    @include css-border-radius(3px);
+    css-border-radius: 3px;
     background: $theme-main;
     font-family: 'Kreon', serif;
     font-size: 34px;
@@ -146,7 +146,7 @@ header#main_header {
   }
 
   .dropdown-menu {
-    @include css-border-radius(0);
+    css-border-radius: 0;
     background: $theme-main;
     border-width: 0;
     font-size: .9em;
@@ -199,7 +199,7 @@ header#main_header {
   }
 
   #login-signup a {
-    @include css-border-radius(0);
+    css-border-radius: 0;
     padding: 0 15px;
     text-align: center;
 
@@ -261,14 +261,14 @@ header#main_header {
 
   .gsc-input-box {
     @include box-sizing(content-box);
-    @include border-radius(5px);
+    border-radius: 5px;
     height: 32px;
   }
 
   .gsc-search-button,
   .gsc-search-button-v2 {
     @include box-sizing(content-box);
-    @include border-radius(5px);
+    border-radius: 5px;
     height: 16px;
     padding-bottom: 8px;
     padding-top: 8px;
