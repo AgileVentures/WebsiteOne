@@ -26,7 +26,7 @@ blocks:
           commands:
             - checkout
             - sem-service start postgres 13
-            - sem-version ruby 3.0.5
+            - sem-version ruby 3.2.1
             - sudo -u postgres createuser -s semaphore
             - createdb -U postgres -h 0.0.0.0 websiteone_test
             - cache restore

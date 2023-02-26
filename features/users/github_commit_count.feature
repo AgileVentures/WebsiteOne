@@ -16,7 +16,7 @@ Feature: Displaying GitHub contribution statistics for user
     And "Bryan" is a member of project "WebsiteOne"
     And "Thomas" is a member of project "WebsiteOne"
 
-  Scenario: Displays commit counts on user profile page
+  Scenario: Displays commit counts on user profile page 
     Given I am on "profile" page for user "Bryan"
     Then I should see "Contributions"
     And I should see "WebsiteOne - 395 commits"

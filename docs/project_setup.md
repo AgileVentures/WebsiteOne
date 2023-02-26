@@ -14,7 +14,7 @@ You'll need to be able to use both of those.
 ### Step 2: Get your own local copy of the project to work on
 You'll do your development work on your own copy of the project.
 
-[Additional Notes for installation on: [c9](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/c9), [ubuntu](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/ubuntu), [osx](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/osx) ]
+[Additional Notes for installation on: [ubuntu](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/ubuntu), [osx](https://github.com/AgileVentures/WebsiteOne/tree/develop/docs/osx) ]
 
 * On GitHub, fork [AgileVentures/WebSiteOne](https://help.github.com/articles/fork-a-repo/) into your own GitHub area. 
 * Clone your fork to your local development machine (or where-ever you are going to do your development coding).
@@ -61,8 +61,8 @@ See the [Docker Project Setup](../docker/README.md) documentation
 
 **Note:** On OSX El Capitan and above, you may get this error:
 
-    An error occurred while installing eventmachine (1.0.7), and Bundler cannot continue.
-    Make sure that `gem install eventmachine -v '1.0.7'` succeeds before bundling.
+    An error occurred while installing eventmachine (1.2.7), and Bundler cannot continue.
+    Make sure that `gem install eventmachine -v '1.2.7'` succeeds before bundling.
 
 If you then try to install the `eventmachine` gem, it also fails like this: https://github.com/eventmachine/eventmachine/issues/643.
  That's because OpenSSL is no longer distributed with OS X. So you may need to use brew to set up OpenSSL:
@@ -75,10 +75,16 @@ Another option is to point the gem to your open ssl settings:
 gem install eventmachine -- --with-openssl-dir=/usr/local/opt/openssl@1.1
 ```
 
+On a newer M2 mac you can try:
+
+```
+brew install openssl
+brew link openssl --force
+gem install eventmachine -- --with-openssl-dir=/opt/homebrew/opt/openssl@1.1
+```
+
 After you do that, re-try running `bundle install` and you should be good to go on to the next step.
 
-
-    
 #### PostgreSQL and the `pg` gem
 The database used is [postgreSQL](https://www.postgresql.org/).  You need to have this installed and running on your local machine. 
 (The `pg` gem accesses the postgreSQL database.)  [Here are instructions on installing postgreSQL.](development_environment_set_up.md#postgreSQL)
@@ -133,9 +139,9 @@ the above are test keys from https://developers.google.com/recaptcha/docs/faq
 
 Now you're ready to run the tests:
 
-    bundle exec rake spec
-    bundle exec rake jasmine:ci
-    bundle exec rake cucumber
+    bundle exec rspec spec
+    npx jasmine-browser-runner runSpecs
+    bundle exec cucumber features
 
 Discuss any errors with the team on Slack, in a scrum, or in mob or pair programming.
 

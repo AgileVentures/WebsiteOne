@@ -18,12 +18,12 @@ RSpec.describe EventInstance, type: :model do
 
   context '#updated_within_last_two_minutes?' do
     it 'is expected to return false when updated_at is more than two minutes ago' do
-      allow(Time).to receive(:now).and_return(Time.mktime('10:02:59'))
+      allow(Time).to receive(:now).and_return(Time.mktime(2014,"jan",1,10,01,59))
       expect(subject).to be_updated_within_last_two_minutes
     end
 
     it 'is expected to  return true when updated_at is less than two minutes ago' do
-      allow(Time).to receive(:now).and_return(Time.mktime('10:01:59'))
+      allow(Time).to receive(:now).and_return(Time.mktime(2014,"jan",1,10,01,59))
       expect(subject).to be_updated_within_last_two_minutes
     end
   end
@@ -50,7 +50,7 @@ RSpec.describe EventInstance, type: :model do
 
     describe 'and the link is not older than 2 minutes and hoa_status' do
       before do
-        allow(Time).to receive(:now).and_return(Time.mktime('10:01:59'))
+        allow(Time).to receive(:now).and_return(Time.mktime(2014,"jan",1,10,01,59))
       end
       describe '#live?' do
         it { expect(subject.live?).to be_truthy }
@@ -114,7 +114,7 @@ RSpec.describe EventInstance, type: :model do
     end
 
     it 'reports not live if the link is not older than 2 minutes' do
-      allow(Time).to receive(:now).and_return(Time.mktime('10:01:59'))
+      allow(Time).to receive(:now).and_return(Time.mktime(2014,"jan",1,10,01,59))
       expect(subject.live?).to be_falsey
     end
 
