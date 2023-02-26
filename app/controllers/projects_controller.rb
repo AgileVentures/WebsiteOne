@@ -4,17 +4,15 @@ class ProjectsController < ApplicationController
   layout 'with_sidebar'
   before_action :authenticate_user!, except: %i(index show)
   before_action :set_project, only: %i(show edit update access_to_edit)
+  before_action -> { query_projects('title ASC') }, only: %i(show edit update new)
   before_action :get_current_stories, only: %i(show)
   before_action :valid_admin, only: %i(index), if: -> { params[:status] == 'pending' }
   before_action :access_to_edit, only: %i(edit)
   include DocumentsHelper
 
   def index
-    query_projects(params[:status])
-    @projects_languages_array = Language.pluck(:name)
-    filter_projects_list_by_language if params[:project]
-    projects_status = params[:status] || 'active'
-    @projects = @projects.where(status: projects_status).search(params[:search], params[:page])
+    @language = params[:language]
+    query_projects('last_github_update DESC NULLS LAST')
     if params[:status] == 'pending'
       render :pending_projects, layout: 'with_sidebar_sponsor_right'
     else
@@ -45,6 +43,7 @@ class ProjectsController < ApplicationController
       current_user.follow(@project)
       redirect_to project_path(@project), notice: 'Project was successfully created.'
     else
+      query_projects('title ASC')
       flash.now[:alert] = 'Project was not saved. Please check the input.'
       render action: 'new'
     end
@@ -101,17 +100,18 @@ class ProjectsController < ApplicationController
     @project = Project.friendly.find(params[:id])
   end
 
-  def query_projects(status)
-    status ||= 'active'
-    @projects = Project.where(status: status)
-                       .order('last_github_update DESC NULLS LAST')
-                       .order('commit_count DESC NULLS LAST')
-                       .includes(:user)
-  end
-
-  def filter_projects_list_by_language
-    language = params[:project][:languages]
-    @projects = @projects.search_by_language(language)
+  def query_projects(order)
+    status = params[:status]
+    @projects = if status == 'pending'
+                  Project.where(status: status)
+                         .order(order)
+                         .includes(:user)
+                else
+                  Project.order(order)
+                         .includes(:user)
+                end
+    @projects_languages_array = Language.pluck(:name)
+    @projects = @projects.search_by_language(@language) if @language.presence
   end
 
   def add_to_feed(action)

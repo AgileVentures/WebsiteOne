@@ -303,7 +303,7 @@ Then(/^I should( not)? see the round banners/) do |negative|
 end
 
 When(/^I click the very stylish "([^"]*)" button$/) do |button|
-  find(:css, %(a[title="#{button.downcase}"])).click
+  find_link("#{button.downcase}").click
 end
 
 Then(/^I should (not |)see the very stylish "([^"]*)" button$/) do |should, button|
@@ -434,6 +434,27 @@ Then(/^I should see "([^"]*)" within "([^"]*)":$/) do |project_title, project_li
     step %(I should see "#{project_title}" within "#{project_list_area}")
   end
 end
+Then(/^I should not see "([^"]*)" within "([^"]*)":$/) do |project_title, project_list_area, table|
+  table.rows.each do |row|
+    project_title = row.first
+    step %(I should not see "#{project_title}" within "#{project_list_area}")
+  end
+end
+
+Then('I should see {string} and {string} within {string}:') do |project_title, project_date, project_list_area, table|
+   table.rows.each do |row|
+     project_title = row.first
+     project_date = row.second
+     within("##{project_list_area}") do
+       expect(page).to have_content(project_title)
+       expect(page).to have_content(project_date)
+       #TODO: This line should work instead of above:
+       #expect(find('a', text: project_title).find(:xpath, "..").find('.fa-calendar')).to have_content(project_date)
+     end
+   end
+  end
+
+
 Then /^I should receive a file(?: "([^"]*)")?/ do |file|
   result = page.response_headers['Content-Type'].should == 'text/calendar'
   result = page.response_headers['Content-Disposition'].should =~ /#{file}/ if result

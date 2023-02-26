@@ -2,24 +2,19 @@
 
 So you'd like to contribute to the WebSiteOne codebase?  That's wonderful, we're excited to have your help :-)
 
-Please do come and say hello in our [Slack chat](https://agileventures.slack.com/messages/websiteone). You can get an invite by signing up at [AgileVentures](https://www.agileventures.org) or emailing [info@agileventures.org](mailto:info@agileventures.org).  We have [weekly meetings](https://www.agileventures.org/events/websiteone-planning) to coordinate our efforts and we try to do planning poker voting on tickets before starting work on them.  Feel free to join any [AgileVentures daily scrum](https://www.agileventures.org/events/) to ask questions, to listen in, or just say hi :-)
+Please do come and say hello in our [Slack chat](https://agileventures.slack.com/messages/websiteone). You can get an invite by signing up at [AgileVentures](https://www.agileventures.org) or emailing [info@agileventures.org](mailto:info@agileventures.org).  We sometimes have [weekly meetings](https://www.agileventures.org/events/websiteone-planning) to coordinate our efforts and we try to do planning poker voting on tickets before starting work on them.  Feel free to join any [AgileVentures daily scrum](https://www.agileventures.org/events/) to ask questions, to listen in, or just say hi :-)
 
-Getting set up with the system on your local machine can be tricky depending on your platform and your devops skills.  We can provide prepared C9 instances if you want to get straight into the coding :-)
+Getting set up with the system on your local machine can be tricky depending on your platform and your devops skills.
 
 ## Getting Started
 
-This describes how to contribute to WebSiteOne:  the tools we use to track and
-coordinate the work that is happening and that needs to happen. This also describes the
-*workflow* -- the processes and sequences for getting contributions merged into the project in an organized and coherent way.
+This describes how to contribute to WebSiteOne:  the tools we use to track and coordinate the work that is happening and that needs to happen. This also describes the *workflow* -- the processes and sequences for getting contributions merged into the project in an organized and coherent way.
 
 First be sure that you've set up your development environment following all the steps
  in **[Setting Up for Development on WebSiteOne _(Project Set Up)_](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)**
 
 
-We use [ZenHub](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370) to manage our work on features, chores and bugfixes.
-
-We keep our code on [GitHub](http://github.com) and use [git](https://git-scm.com) for version control.
-
+We keep our code on [GitHub](http://github.com), use [git](https://git-scm.com) for version control and [Github](https://github.com/orgs/AgileVentures/projects) to manage our projects.  Sometimes we use [ZenHub](https://zenhub.com) to organize work on features, chores and bugfixes.
 
 
 
@@ -28,30 +23,30 @@ To get involved please follow these steps:
 
 #### 1. Get the system working on your development environment:
 
-   1. [install WSO on your dev environment (laptop or c9)](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md)
+   1. [install WSO on your dev environment (locally)](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/project_setup.md) or [on docker](https://github.com/AgileVentures/WebsiteOne/tree/develop/docker)
 
    2. get tests passing (unit and integration tests in `spec/` and acceptance tests in `features`)
 
    3. check that the site can be run manually (locally)
 
-   4. (optional) deploy to a remote (e.g. Heroku, drie etc.) and ensure it runs there
+   4. (optional) deploy to a remote (e.g. Heroku, drie, google, etc.) and ensure it runs there
 
-#### 2. Look at what needs to be done on GitHub
+#### 2. Look at what needs to be done on our Github [projects](https://github.com/orgs/AgileVentures/projects) or Zenhub:
 
-* review [open PRs](https://github.com/AgileVentures/WebsiteOne/pulls) on GitHub - leave comments or collaborate if interested
+  1. review [open PRs](https://github.com/AgileVentures/WebsiteOne/pulls) on GitHub - leave comments or collaborate if interested
+  
+  2. review [open Issues](https://github.com/AgileVentures/WebsiteOne/issues) on GitHub and leave a comment if you are interested or if you are working on the issue
 
+  3. look through **[ready](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** column - feel free to start work, but always interested to hear chat in slack, scrum wherever
 
-#### 3. Look at what needs to be done on [our zenhub project board:](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)
+  4. look through **[new issues](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** column - feel free to ask about priority, as these are not prioritised
 
-  1. look through **[ready](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** column - feel free to start work, but always interested to hear chat in slack, scrum wherever
-
-  3. look through **[new issues](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** column - feel free to ask about priority, as these are not prioritised
-
-  4. look at **[backlog](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** - if there is an interesting ticket get it voted on in a scrum or do an [ASYNC Vote](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md) in Slack
+  5. look at **[backlog](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** - if there is an interesting ticket get it voted on in a scrum or do an [ASYNC Vote](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md) in Slack
 
 ##### Voting
 
-  Items need to be voted on before work can start.  Voting happens in scrums or the weekly meeting (currently Fridays).  Note that even without the meetings you can get a vote on any issue you're thinking of working on by using the Async voting bot in the [#websiteone slack channel](https://agileventures.slack.com/messages/C029E8G80/details/), using the following syntax: `/voter ISSUE NAME https://github.com/AgileVentures/WebsiteOne/issues/number`.
+  In the past, items needed to be voted on before work could start:
+  Voting happens in scrums or the weekly meeting (currently Fridays).  Note that even without the meetings you can get a vote on any issue you're thinking of working on by using the Async voting bot in the [#websiteone slack channel](https://agileventures.slack.com/messages/C029E8G80/details/), using the following syntax: `/voter ISSUE NAME https://github.com/AgileVentures/WebsiteOne/issues/number`.
 
 e.g. 
 
@@ -74,8 +69,7 @@ Each developer will usually work with a [fork](https://help.github.com/articles/
 git pull upstream develop
 ```
 
-Note that you should be re-syncing daily (even hourly at very active times) on your
-feature/bugfix branch to ensure that you are always building on top of very latest develop code.
+Note that you should be re-syncing often on your feature/bugfix branch to ensure that you are always building on top of very latest develop code.
 
 ### Pull Requests: naming, syncing, size
 Here is [how to create and submit a pull requests](https://github.com/AgileVentures/WebsiteOne/blob/develop/docs/how_to_submit_a_pull_request_on_github.md).
@@ -105,7 +99,7 @@ This PR adds a CONTRIBUTING.md file and a docs directory
 fixes #799
 ```
 
-which will associate the pull request with the issue in the ZenHub board.
+which will associate the pull request with the issue.
 
 This all adds up to a work flow that should look something like this:
 
@@ -136,39 +130,18 @@ There's a Gordian Knot here which is that we'd like it that if a tests passes on
 
 In the ideal world the `develop` branch would run green for you and there would be no extraneous files.  Then you add your new test and it's implementation.  Once it's all working you will likely have a bunch of cache files.  These should be deleted in the first instance since some may be due to erroneous network interactions as you were developing.  Assuming you have got to a reliable green test stage you can clean up (`rake vcr_billy_caches:reset`) and then re-run.  At this point, if you got another complete green run (for safety just run your new tests) any new cache files are associated with your tests, and these should be checked in to ensure that your new test/functionality will run the same everywhere.
 
-However the above is complicated and we are actively looking for some sort of testing solution that allows us to avoid the intermittent failing tests (maybe we need to upgrade capybara) and maybe dropping the whole caching approach is one way forward.  Please jump in our [Slack channel](https://agileventures.slack.com/messages/C029E8G80/details/) and let us know what you think :-)
+However the above is complicated and we are actively looking for some sort of testing solution that allows us to avoid the intermittent failing tests, maybe dropping the whole caching approach is one way forward.
 
 Airbrake Issues
 ---------------
 
-Currently Airbrake automatically opens github issues when we have an error on production.  We suspect that a good portion of them are related to performance, i.e. heroku's business model is based on limiting our memory size, and when we run out of memory then some requests die giving the run for longer than 150000ms errors or what have you, e.g. 
-
-https://github.com/AgileVentures/WebsiteOne/issues/2478
-
-Ultimately the solution there is getting more money to pay heroku, migrating to azure/dokku or re-engineering the events system so that it's not so memory intensive (or finding and fixing memory problems elsewhere).  Others are probably unfixable, or at least untraceable: e.g. 
-
-https://github.com/AgileVentures/WebsiteOne/issues/2518
-
-and others probably represent places where our code should be more robust:
-
-e.g. https://github.com/AgileVentures/WebsiteOne/issues/2515 
-and https://github.com/AgileVentures/WebsiteOne/issues/2506
-
-We are very grateful to https://github.com/nisevi for spending time closing airbrake issues out and putting them into groups
-
-e.g. https://github.com/AgileVentures/WebsiteOne/issues/2238
-
-someone with some spare time could usefully triage them into the sets that https://github.com/nisevi made since the profusion of airbrake issues is kind of a drag to seeing what's going on.  All of the sets have the "airbrake" and "help wanted" labels, and mention "airbrake related" in the description:
-
-https://github.com/AgileVentures/WebsiteOne/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+airbrake+related
-
-Sensibly any new airbrake issue would be compared with that set, and either added to the summary tickets (with a link ref) and closed, OR used as the basis for a new set
+Currently Airbrake automatically opens github issues when we have an error on production.  We suspect that a good portion of them are related to performance, i.e. heroku's business model is based on limiting our memory size, and when we run out of memory then some requests die giving the run for longer than 150000ms errors or what have you.
 
 
 Pull Request Review
 -------------------
 
-Currently https://github.com/tansaku is project managing WebSiteOne.  The project manager will review your pull request as soon as possible.  Usually the project manager will need to sign off in order to merge a pull request.
+A project manager will review your pull request as soon as possible.  Usually the project manager will need to sign off in order to merge a pull request.
 
 The project manager will review the pull request for coherence with the specified feature or bug fix, and give feedback on code quality, user experience, documentation and git style.  Please respond to comments from the project managers with explanation, or further commits to your pull request in order to get merged in as quickly as possible.
 

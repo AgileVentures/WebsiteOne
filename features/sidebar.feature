@@ -46,9 +46,6 @@ Feature: Sidebar navigation
     And I should not be able to see a link to "Show" page for document "Howto 2" within the sidebar
 
   Scenario: Sidebar projects are organised alphabetically
-    Given I am on the "projects" page
-    Then I should see "hello moon" before "hello pluto"
-    And I should see "hello pluto" before "hello world"
     Given I am logged in as "User 1"
     And I am on the "Edit" page for project "hello mars"
     Then I should see "hello moon" before "hello pluto"

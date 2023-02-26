@@ -5,7 +5,12 @@ require 'vcr'
 VCR.configure do |c|
   c.hook_into :webmock
   c.cassette_library_dir = 'features/support/fixtures/cassettes'
+
+  #c.debug_logger = File.open('features/support/record.log', 'w')
+  
+  # Avoid conflict with Selenium
   c.ignore_localhost = true
+
   c.default_cassette_options = {
     match_requests_on: [
       :method,

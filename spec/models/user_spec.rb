@@ -2,11 +2,7 @@
 
 RSpec.describe User, type: :model do
   include_examples 'presentable'
-  before do
-    Features.slack.invites.enabled = true
-    slack_invite_job = class_double(SlackInviteJob).as_stubbed_const(transfer_nested_constants: true)
-    allow(slack_invite_job).to receive(:perform_async).at_least(1).times
-  end
+
   subject { build_stubbed :user }
 
   it 'includes Filterable module' do
@@ -182,6 +178,7 @@ RSpec.describe User, type: :model do
       )
     end
 
+    # TODO: These tests are up for refactoring
     it 'should perform geocode' do
       subject.save
       expect(subject.latitude).to_not eq nil
@@ -208,6 +205,7 @@ RSpec.describe User, type: :model do
       expect(subject.country_code).to eq 'US'
     end
   end
+  # End refactoring block
 
   describe '#followed_project_tags' do
     it 'returns project tags for projects with project title and tags and a scrum tag' do

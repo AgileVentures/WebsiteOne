@@ -1,8 +1,6 @@
 How to Submit a WSO Pull Request on Github
 ==========================================
 
-According to [Rene](http://www.agileventures.org/users/rene-paulokat), the code review process in WSO is something [like this video](https://youtu.be/QEN5-_93gQg)
-
 Assuming that you have the following local setup:
 
 ```
@@ -36,23 +34,13 @@ $ git push origin <your_feature_branch>
 
 5) When you view this branch on GitHub, click the gray button that says 'New pull request':
 
-![Compare, review, create pull request](https://dl.dropboxusercontent.com/s/vrr9vjuokg67fg7/Screenshot%202017-08-01%2023.21.19.png?dl=0)
-
 Or, if you visit your repo shortly after pushing the branch, there will be a prominent notice about the push, with a prompt to create a pull request:
-
-![Compare and pull request](https://dl.dropboxusercontent.com/s/ovs26nmy3hz5lin/Screenshot%202017-08-01%2023.13.28.png?dl=0)
 
 6) Fill out the description including "fixes #123" (replacing 123 with the id of the GitHub issue you've been working on) & a brief description of what you've done and create the pull request.
 
-7) Your branch's last commit will now be tested automatically by [Semaphore CI.](semaphoreci.com) Keep an eye on the result, which typically takes less than 15 minutes to appear:
+7) Your branch's last commit will now be tested automatically by [Semaphore CI.](https://semaphoreci.com) Keep an eye on the result, which typically takes less than 15 minutes to appear:
 
-![passed](https://www.dropbox.com/s/2iiock65a9szf5w/Screenshot%202016-02-29%2011.50.59.png?dl=1)
-
- This is good,
-
-![failed](https://www.dropbox.com/s/7ru2bcjjdnffp8s/Screenshot%202016-02-29%2011.49.33.png?dl=1)
-
- while this means that you probably have some work to do. Click on the red cross to be taken to [Semaphore CI.](semaphoreci.com) where you can scroll through the tests to see the failure(s).
+Click on the red cross to be taken to [Semaphore CI.](https://semaphoreci.com) where you can scroll through the tests to see the failure(s).
 
 8) If your build passed, wait for code review comments, make necessary changes to your code, and repeat the process starting from Step 1 as many times as necessary.
 

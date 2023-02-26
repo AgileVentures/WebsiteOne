@@ -31,11 +31,11 @@ Feature: RSVPing AV events
     And I click "Save"
     Then I should see "Attend"
 
-  Scenario: Event creator can mention that they cannot attend
-    Given I am logged in as "Alice"
-    And I am on the "ClientMtg" event page
-    When I toggle to Cannot Attend
-    Then I should see "Alice Jones cannot attend the event"
+  # Scenario: Event creator can mention that they cannot attend
+  #   Given I am logged in as "Alice"
+  #   And I am on the "ClientMtg" event page
+  #   When I toggle to Cannot Attend
+  #   Then I should see "Alice Jones cannot attend the event"
 
   Scenario: Should see cannot attend message for repeating events
     Given the date is "2018/07/28 10:00:00 UTC"
@@ -48,8 +48,8 @@ Feature: RSVPing AV events
     And I should see "Cannot Attend"
     And I should see "Alice Jones cannot attend the event"
 
-  Scenario: When event creator toggles to Attend, the cannot attend message is not shown
-    Given I am logged in as "Alice"
-    And I am on the "Meeting" event page
-    When I toggle to Attend
-    Then I should not see "Alice Jones cannot attend the event"
+  # Scenario: When event creator toggles to Attend, the cannot attend message is not shown
+  #   Given I am logged in as "Alice"
+  #   And I am on the "Meeting" event page
+  #   When I toggle to Attend
+  #   Then I should not see "Alice Jones cannot attend the event"

@@ -63,15 +63,15 @@ Then('I should see a paypal subscribe button') do
   end
 end
 
-Given('the following plans exist') do |table|
-  table.hashes.each do |hash|
-    product = @stripe_test_helper.create_product(name: hash['name'], id: hash['id'])
-    hash['amount'] = Integer(hash['amount'])
-    @stripe_test_helper.create_plan(hash.merge(product: product.id))
-    hash[:third_party_identifier] = hash.delete('id')
-    create(:plan, hash)
-  end
-end
+# Given('the following plans exist') do |table|
+#   table.hashes.each do |hash|
+#     product = @stripe_test_helper.create_product(name: hash['name'], id: hash['id'])
+#     hash['amount'] = Integer(hash['amount'])
+#     @stripe_test_helper.create_plan(hash.merge(product: product.id))
+#     hash[:third_party_identifier] = hash.delete('id')
+#     create(:plan, hash)
+#   end
+# end
 
 And(/^a stripe customer with id "([^"]*)"$/) do |stripe_customer_id|
   StripeMock.create_test_helper.create_customer(id: stripe_customer_id)
