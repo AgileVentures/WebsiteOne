@@ -127,7 +127,7 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    brakeman (5.4.0)
+    brakeman (5.4.1)
     builder (3.2.4)
     bullet (7.0.7)
       activesupport (>= 3.0.0)
@@ -162,7 +162,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     colored (1.2)
-    concurrent-ruby (1.2.0)
+    concurrent-ruby (1.2.2)
     config (4.1.0)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
@@ -500,7 +500,7 @@ GEM
     paypal-sdk-rest (1.7.4)
       multi_json (~> 1.0)
       xml-simple
-    pg (1.4.5)
+    pg (1.4.6)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -625,14 +625,14 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.12.0)
-    rubocop (1.45.1)
+    rubocop (1.46.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.2.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.24.1, < 2.0)
+      rubocop-ast (>= 1.26.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.26.0)
@@ -642,7 +642,7 @@ GEM
     rubocop-performance (1.16.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.17.4)
+    rubocop-rails (2.18.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
@@ -847,7 +847,7 @@ DEPENDENCIES
   mercury-rails!
   mime-types (~> 3.3, >= 3.3.1)
   mini_racer
-  nokogiri (= 1.14.2)
+  nokogiri (~> 1.14.2)
   octokit
   omniauth
   omniauth-github
