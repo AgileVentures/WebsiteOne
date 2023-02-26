@@ -2,17 +2,17 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.5'
+ruby '3.2.1'
 
 # Rather than loading the entire Rails framework, we charry pick the parts we use
-gem 'actionmailer', '~> 6.1.7'
-gem 'actionpack', '~> 6.1.7'
-gem 'actionview', '~> 6.1.7'
-gem 'activejob', '~> 6.1.7'
-gem 'activemodel', '~> 6.1.7'
-gem 'activerecord', '~> 6.1.7'
-gem 'activesupport', '~> 6.1.7'
-gem 'railties', '~> 6.1.7'
+gem 'actionmailer', '~> 7.0.4.2'
+gem 'actionpack', '~> 7.0.4.2'
+gem 'actionview', '~> 7.0.4.2'
+gem 'activejob', '~> 7.0.4.2'
+gem 'activemodel', '~> 7.0.4.2'
+gem 'activerecord', '~> 7.0.4.2'
+gem 'activesupport', '~> 7.0.4.2'
+gem 'railties', '~> 7.0.4.2'
 gem 'sprockets-rails'
 
 # Gems used in production
@@ -26,7 +26,6 @@ gem 'cocoon'
 gem 'code_climate_badges', git: 'https://github.com/AgileVentures/codeclimate_badges'
 gem 'coderay'
 gem 'colored'
-gem 'compass-rails', '~> 4.0'
 gem 'config'
 gem 'devise', '~> 4.7'
 gem 'eventmachine', '~> 1.2.7'
@@ -46,7 +45,7 @@ gem 'kaminari'
 gem 'kramdown', '~> 2.1'
 gem 'local_time', '~> 2.1'
 gem 'mercury-rails', git: 'https://github.com/AgileVentures/mercury.git'
-gem 'nokogiri', '1.12.0'
+gem 'nokogiri', '~> 1.14.2'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
@@ -82,7 +81,7 @@ gem 'utf8-cleaner'
 gem 'vanity'
 gem 'verbs'
 gem 'will_paginate-bootstrap'
-gem 'youtube_rails'
+gem 'youtube_rails', '~> 1.2.3'
 gem 'rack-timeout'
 
 group :production do
@@ -122,7 +121,7 @@ group :development, :test do
   gem 'bullet'
   gem 'bundler-audit', require: false
   gem 'constant-redefinition'
-  gem 'coveralls', require: false
+  gem 'coveralls_reborn', require: false
   gem 'dotenv-rails'
   gem 'guard'
   gem 'guard-cucumber'
