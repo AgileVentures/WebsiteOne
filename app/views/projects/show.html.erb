@@ -4,7 +4,6 @@
     <div class="col-xs-12">
       <strong><%= link_to 'Projects', projects_path %></strong> <i class="fa fa-angle-double-right"></i>
       <strong><%= @project.title %></strong>
-
       <div class="row">
         <% if @project.image_url.present? %>
           <div id="project_image" class="col-xs-2">
@@ -16,7 +15,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12"><p> <%= clean_html @project.description %></p>
+        <div class="col-xs-12">
+          <p> <%= clean_html @project.description %></p>
         </div>
       </div>
       <hr>
@@ -26,73 +26,56 @@
             <% if @project.status == 'pending' %>
               <%= form_tag(activate_project_path(@project)) do %>
                 <%= button_tag(type: 'submit' , class: 'btn btn-primary') do %>
-                    Activate Project </i>
-                <% end %>
+                  Activate Project </i>
               <% end %>
-            <% else %>
-              <%= form_tag(deactivate_project_path(@project)) do %>
-                <%= button_tag(type: 'submit' , class: 'btn btn-danger') do %>
-                    Deactivate Project</i>
-                <% end %>
-              <% end %>
+            <% end %>
+          <% else %>
+            <%= form_tag(deactivate_project_path(@project)) do %>
+              <%= button_tag(type: 'submit' , class: 'btn btn-danger new-meet-btn') do %>
+                Deactivate Project</i>
             <% end %>
           <% end %>
-            <ul class="list-inline">
-            <% if current_user.following?(@project) %>
-                <li class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
-                    Project Actions
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
-                    <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
-                    <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
-                    <li role="presentation" class="divider"></li>
-                    <li role="presentation">
-                      <a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-              <hr>
-            <% else %>
-                <div>
-                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
-                    Start Live Hangout
-                  </button>
-                  <%= link_to @project.jitsi_room_link, target: '_blank' do %>
-                    <button type="button" class="btn btn-primary" id='start-jitsi'>
-                      Start Jitsi Meet
-                    </button>
-                  <% end %>
-                </div>
-                <hr>
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Info</h4>
-                      </div>
-                      <div class="modal-body">
-                        <p>You should join this project before you can start the hangouts</p>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            <% end %>
         <% end %>
-      </div>
-    </div>
+      <% end %>
+      <ul class="list-inline">
+        <% if current_user.following?(@project) %>
+          <li class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="actions-dropdown" data-toggle="dropdown">
+              Project Actions
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="actions-dropdown">
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="<%= edit_project_path(@project) %>">Edit Project Details</a></li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="<%= new_project_document_path(project_id: @project.friendly_id) %>">Create new document</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation">
+                <a role="menuitem" tabindex="-1" href="<%= unfollow_project_path(@project) %>">Leave Project</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+        <div>
+          <%= link_to @project.meet_room_link, target: '_blank' do %>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+              Start Google Meet
+            </button>
+          <% end %>
+          <%= link_to @project.jitsi_room_link, target: '_blank' do %>
+            <button type="button" class="btn btn-primary" id='start-jitsi'>
+              Start Jitsi Meet
+            </button>
+          <% end %>
+        </div>
+        <hr>
+      <% end %>
+    <% end %>
   </div>
 </div>
-
+</div>
+</div>
 <div class="project-main">
   <div class="row">
     <div class="project-sidebar col-xs-12 col-md-4 col-md-push-8 hidden-xs" role="complementary">
@@ -100,7 +83,6 @@
       <%= render 'connections' %>
       <%= render 'members_list', members: @members %>
     </div>
-
     <div class="project-main col-xs-12 col-md-8 col-md-pull-4">
       <ul class="nav nav-tabs nav-justified">
         <li id="pitch" class="active">
@@ -116,15 +98,14 @@
           <a href="#activities_list" data-toggle="tab" data-hash="activity">Activity (<%= @stories.count %>)</a>
         </li>
       </ul>
-
       <!-- Tab panes -->
       <div class="tab-content" style="background: #fff;">
         <div id="pitch_content" class="mercury-region tab-pane active" data-mercury="full">
           <% unless @project.pitch.nil? %>
-              <%= clean_html(@project.pitch) %>
+            <%= clean_html(@project.pitch) %>
           <% else %>
-              <p><b>Project content missing</b></p>
-              <p>A compelling pitch can make your project more appealing to potential collaborators. Please add a README to your project in GitHub.</p>
+            <p><b>Project content missing</b></p>
+            <p>A compelling pitch can make your project more appealing to potential collaborators. Please add a README to your project in GitHub.</p>
           <% end %>
         </div>
         <div class="tab-pane" id="documents_list">
