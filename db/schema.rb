@@ -97,6 +97,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_193359) do
     t.index ["user_id"], name: "index_commit_counts_on_user_id"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "slug", null: false
+    t.integer "user_id"
+    t.string "status"
+    t.string "slack_channel_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
   create_table "documents", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "body"
