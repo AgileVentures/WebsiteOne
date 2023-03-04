@@ -105,12 +105,12 @@ class User < ApplicationRecord
 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
-    authentications.build(provider: omniauth['provider'], uid: omniauth['uid']) unless email.blank?
+    authentications.build(provider: omniauth['provider'], uid: omniauth['uid']) if email.present?
     @omniauth_provider = omniauth['provider']
   end
 
   def password_required?
-    (authentications.empty? || !password.blank?) && super
+    (authentications.empty? || password.present?) && super
   end
 
   def has_auth(provider)
@@ -129,7 +129,7 @@ class User < ApplicationRecord
 
   def full_name
     full_name = "#{first_name} #{last_name}".squish
-    full_name unless full_name.blank?
+    full_name.presence
   end
 
   def email_designator

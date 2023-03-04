@@ -47,7 +47,7 @@ Given(/^the following hangouts exist:$/) do |table|
 
       name = participant.squish
       user = User.find_by_first_name(name)
-      gplus_id = user.authentications.find_by(provider: 'gplus').try!(:uid) if user.present?
+      gplus_id = user.authentications.find_by(provider: 'gplus')&.uid if user.present?
       ['0', { 'person' => { displayName: name.to_s, 'id' => gplus_id } }]
     end
 

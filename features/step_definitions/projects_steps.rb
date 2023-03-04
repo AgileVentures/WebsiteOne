@@ -21,9 +21,7 @@ Given(/^the following projects exist:$/) do |table|
       language = Language.find_or_create_by(name: hash[:languages])
       project.languages << language
     end
-    if hash[:pivotaltracker_url] && !hash[:pivotaltracker_url].empty?
-      project.issue_trackers.build(url: hash[:pivotaltracker_url])
-    end
+    project.issue_trackers.build(url: hash[:pivotaltracker_url]) if hash[:pivotaltracker_url].present?
     project.tag_list.add(hash[:tags], parse: true) if hash[:tags]
     project.save!
   end

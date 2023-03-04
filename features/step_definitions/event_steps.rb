@@ -46,7 +46,7 @@ end
 
 Given('following events exist:') do |table|
   table.hashes.each do |hash|
-    hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
+    hash[:project_id] = Project.find_by(title: hash['project']).id if hash['project'].present?
     hash[:start_datetime] = Time.current.strftime('%c') if hash[:start_datetime] == 'TODAYS_DATE'
     hash.delete('project')
     hash[:repeat_ends] = false
@@ -56,7 +56,7 @@ end
 
 Given(/^the following events exist that repeat every weekday:$/) do |table|
   table.hashes.each do |hash|
-    hash[:project_id] = Project.find_by(title: hash['project']).id unless hash['project'].blank?
+    hash[:project_id] = Project.find_by(title: hash['project']).id if hash['project'].present?
     hash[:repeats_weekly_each_days_of_the_week_mask] = 31
     hash[:repeats_every_n_weeks] = 1
     hash[:repeats] = 'weekly'

@@ -8,6 +8,8 @@ AllCops:
   TargetRubyVersion: 3.0.5
   NewCops: enable
 
+require: rubocop-rails
+
 Gemspec/DeprecatedAttributeAssignment:
   Enabled: true
 Layout/SpaceBeforeBrackets: # (new in 1.7)

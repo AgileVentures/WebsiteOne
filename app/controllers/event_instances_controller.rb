@@ -4,18 +4,6 @@ class EventInstancesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!, only: %i(edit update_link update)
 
-  def update
-    @event_instance = EventInstance.find_or_create_by(uid: params[:id])
-    if @event_instance.try!(:update, whitelist_params)
-      send_messages_to_social_media @event_instance, whitelist_params, hangout_url_changed?
-      redirect_to(event_path(params[:event_id])) && return if local_event?
-
-      head :ok
-    else
-      head :internal_server_error
-    end
-  end
-
   def index
     relation = params[:live] == 'true' ? EventInstance.live : EventInstance.latest
     relation = relation.includes(:project, :event, :user)
@@ -24,6 +12,18 @@ class EventInstancesController < ApplicationController
 
   def edit
     @event_instance = EventInstance.find(params[:id])
+  end
+
+  def update
+    @event_instance = EventInstance.find_or_create_by(uid: params[:id])
+    if @event_instance&.update(whitelist_params)
+      send_messages_to_social_media @event_instance, whitelist_params, hangout_url_changed?
+      redirect_to(event_path(params[:event_id])) && return if local_event?
+
+      head :ok
+    else
+      head :internal_server_error
+    end
   end
 
   def update_link

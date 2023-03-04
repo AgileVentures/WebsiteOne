@@ -35,6 +35,8 @@ class ProjectsController < ApplicationController
     @project.languages.build
   end
 
+  def edit; end
+
   def create
     status = current_user.admin? ? project_params[:status].downcase : 'pending'
     @project = Project.create(project_params.merge(user: current_user, status: status))
@@ -48,8 +50,6 @@ class ProjectsController < ApplicationController
       render action: 'new'
     end
   end
-
-  def edit; end
 
   def update
     params[:command].present? && update_project_status(params[:command]) and return
