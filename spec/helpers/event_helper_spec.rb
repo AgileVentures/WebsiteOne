@@ -25,7 +25,7 @@ describe EventHelper do
 
     it 'returns a local time range' do
       expected_result = \
-        '<time datetime="2016-02-09T19:00:00Z" data-local="time" '\
+        '<time datetime="2016-02-09T19:00:00Z" data-local="time" ' \
         'data-format="%H:%M">19:00</time>-<time ' \
         'datetime="2016-02-10T10:00:00Z" data-local="time" ' \
         'data-format="%H:%M (%Z)">10:00 (UTC)</time>'

@@ -27,7 +27,7 @@ class CalendarController < ApplicationController
       event.dtstart     = Icalendar::Values::DateTime.new(event_instance[:time],
                                                           tzid: event_instance[:event].time_zone)
       event.dtend       = Icalendar::Values::DateTime.new(
-        event_instance[:time] + 60 * event_instance[:event].duration, tzid: event_instance[:event].time_zone
+        event_instance[:time] + (60 * event_instance[:event].duration), tzid: event_instance[:event].time_zone
       )
       event.summary     = event_instance[:event].name
       event.description = event_instance[:event].description

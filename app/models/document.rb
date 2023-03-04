@@ -8,7 +8,7 @@ class Document < ApplicationRecord
   belongs_to :project
   belongs_to :user
 
-  validates_presence_of :title, :project
+  validates :title, :project, presence: true
 
   delegate :title, to: :project, prefix: true
 
