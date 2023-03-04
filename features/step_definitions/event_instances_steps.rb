@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 starting_date = 1.year.ago
 
 Given(/^(\d+) event instances? exists?$/) do |num_event_instances|

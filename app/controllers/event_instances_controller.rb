@@ -31,11 +31,10 @@ class EventInstancesController < ApplicationController
     youtube_id = YouTubeRails.extract_video_id(event_instance_params[:yt_video_id])
     if youtube_id && @event_instance.update(yt_video_id: youtube_id, hoa_status: event_instance_params[:hoa_status])
       flash[:notice] = 'Hangout Updated'
-      redirect_to edit_event_instance_path(@event_instance)
     else
       flash[:alert] = 'Error.  Please Try again'
-      redirect_to edit_event_instance_path(@event_instance)
     end
+    redirect_to edit_event_instance_path(@event_instance)
   end
 
   private

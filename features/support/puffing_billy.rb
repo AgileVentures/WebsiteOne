@@ -61,7 +61,7 @@ Before('@billy_directories') do |scenario, _block|
     feature_name = scenario.feature.name.underscore
     scenario_name = scenario.name.underscore
     c.cache_path = "features/support/fixtures/req_cache/#{feature_name}/"
-    Dir.mkdir(Billy.config.cache_path) unless File.exist?(Billy.config.cache_path)
+    FileUtils.mkdir_p(Billy.config.cache_path)
     c.cache_path = "features/support/fixtures/req_cache/#{feature_name}/#{scenario_name}/"
   end
 end
