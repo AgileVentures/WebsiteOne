@@ -20,13 +20,13 @@ Before('@smartphone') { page.driver.resize(640, 640) }
 After('@desktop', '@tablet', '@smartphone') { page.driver.resize(1600, 1200) }
 
 Before('@time-travel') do
-  @default_tz = ENV['TZ']
+  @default_tz = ENV.fetch('TZ', nil)
   ENV['TZ'] = 'UTC'
   Delorean.time_travel_to(Time.parse('2014/02/01 09:15:00 UTC'))
 end
 
 Before('@time-travel-step') do
-  @default_tz = ENV['TZ']
+  @default_tz = ENV.fetch('TZ', nil)
   ENV['TZ'] = 'UTC'
 end
 

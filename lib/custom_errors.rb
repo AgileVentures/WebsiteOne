@@ -19,7 +19,10 @@ module CustomErrors
     raise error unless Features.enabled?(:custom_errors)
 
     Rails.logger.error error.message
-    error.backtrace.each_with_index { |line, index| Rails.logger.error line; break if index >= 5 }
+    error.backtrace.each_with_index do |line, index|
+      Rails.logger.error line
+      break if index >= 5
+    end
 
     # unless [404].include? status
     #   if Rails.env.production?

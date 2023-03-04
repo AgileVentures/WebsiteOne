@@ -45,13 +45,11 @@ class UsersController < ApplicationController
 
   def show
     @contact_form = ContactForm.new
-    if should_display_user?(@user)
-      @event_instances = EventInstance.where(user_id: @user.id)
-                                      .order(created_at: :desc).limit(5)
-      set_activity_tab(params[:tab])
-    else
-      raise ActiveRecord::RecordNotFound, 'User has not exposed their profile publicly'
-    end
+    raise ActiveRecord::RecordNotFound, 'User has not exposed their profile publicly' unless should_display_user?(@user)
+
+    @event_instances = EventInstance.where(user_id: @user.id)
+                                    .order(created_at: :desc).limit(5)
+    set_activity_tab(params[:tab])
   end
 
   def destroy
@@ -105,9 +103,9 @@ class UsersController < ApplicationController
     return unless param.present?
 
     @param_tab = param
-    unless UserPresenter.new(@user).contributed?
-      @param_tab = nil
-      flash.now[:notice] = 'User does not have activity log'
-    end
+    return if UserPresenter.new(@user).contributed?
+
+    @param_tab = nil
+    flash.now[:notice] = 'User does not have activity log'
   end
 end

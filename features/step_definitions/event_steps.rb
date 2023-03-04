@@ -4,7 +4,7 @@ Given(/^I visit the edit page for the event named "(.*?)"$/) do |event_name|
   visit edit_event_path(Event.find_by(name: event_name))
 end
 
-Given /^the "([^"]*)" "([^"]*)" event exists$/ do |event_name, repeat|
+Given(/^the "([^"]*)" "([^"]*)" event exists$/) do |event_name, repeat|
   Event.create name: event_name,
                category: 'Scrum',
                description: 'we stand up',
@@ -402,7 +402,7 @@ Then(/^the export to google calendar link should not be visible$/) do
 end
 
 And(/^I should not see any HTML tags$/) do
-  expect(page).not_to match /<.*>/
+  expect(page).not_to match(/<.*>/)
 end
 
 Then(/^I should see (\d+) "([^"]*)" events$/) do |number, event|

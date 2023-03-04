@@ -90,10 +90,10 @@ class ProjectsController < ApplicationController
                    .alert_project_creator_about_new_member.deliver_now
     end
 
-    if current_user.receive_mailings
-      ProjectMailer.with(project: @project, user: current_user, project_creator: @project.user)
-                   .welcome_project_joinee.deliver_now
-    end
+    return unless current_user.receive_mailings
+
+    ProjectMailer.with(project: @project, user: current_user, project_creator: @project.user)
+                 .welcome_project_joinee.deliver_now
   end
 
   def set_project
@@ -146,13 +146,16 @@ class ProjectsController < ApplicationController
   end
 
   def valid_admin
-    redirect_to root_path, notice: 'You do not have permission to perform that operation' unless user_signed_in? && current_user.admin?
+    return if user_signed_in? && current_user.admin?
+
+    redirect_to root_path,
+                notice: 'You do not have permission to perform that operation'
   end
 
   def access_to_edit
-    unless current_user.admin? || (current_user == @project.user)
-      redirect_to root_path, notice: 'You do not have permission to perform that operation'
-    end
+    return if current_user.admin? || (current_user == @project.user)
+
+    redirect_to root_path, notice: 'You do not have permission to perform that operation'
   end
 
   def update_project_status(command)

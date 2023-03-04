@@ -3,9 +3,9 @@
 require 'paypal-sdk-rest'
 
 PayPal::SDK::REST.set_config(
-  mode: ENV['PAYPAL_SDK_MODE'],
-  client_id: ENV['PAYPAL_CLIENT_ID'],
-  client_secret: ENV['PAYPAL_CLIENT_SECRET']
+  mode: ENV.fetch('PAYPAL_SDK_MODE', nil),
+  client_id: ENV.fetch('PAYPAL_CLIENT_ID', nil),
+  client_secret: ENV.fetch('PAYPAL_CLIENT_SECRET', nil)
 )
 
 class PaypalService
@@ -81,8 +81,8 @@ class PaypalService
           currency: 'GBP',
           value: '0'
         },
-      return_url: "#{ENV['BASE_URL']}/paypal/create?plan=#{@plan.third_party_identifier}",
-      cancel_url: "#{ENV['BASE_URL']}/subscriptions/new?plan=#{@plan.third_party_identifier}",
+      return_url: "#{ENV.fetch('BASE_URL', nil)}/paypal/create?plan=#{@plan.third_party_identifier}",
+      cancel_url: "#{ENV.fetch('BASE_URL', nil)}/subscriptions/new?plan=#{@plan.third_party_identifier}",
       auto_bill_amount: 'YES',
       initial_fail_amount_action: 'CONTINUE',
       max_fail_attempts: '0'

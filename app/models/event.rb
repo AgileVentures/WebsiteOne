@@ -90,7 +90,7 @@ class Event < ApplicationRecord
   end
 
   def instance_end_time
-    (start_datetime + duration * 60).utc
+    (start_datetime + (duration * 60)).utc
   end
 
   def end_date
@@ -188,7 +188,7 @@ class Event < ApplicationRecord
 
   def repeats_weekly_each_days_of_the_week
     DAYS_OF_THE_WEEK.reject do |r|
-      ((repeats_weekly_each_days_of_the_week_mask || 0) & 2**DAYS_OF_THE_WEEK.index(r)).zero?
+      ((repeats_weekly_each_days_of_the_week_mask || 0) & (2**DAYS_OF_THE_WEEK.index(r))).zero?
     end
   end
 
@@ -257,7 +257,7 @@ class Event < ApplicationRecord
   end
 
   def current_end_time
-    schedule.occurrences_between(1.month.ago, Time.current).last + duration * 60
+    schedule.occurrences_between(1.month.ago, Time.current).last + (duration * 60)
   end
 
   def before_current_end_time?
@@ -287,9 +287,9 @@ class Event < ApplicationRecord
   private
 
   def must_have_at_least_one_repeats_weekly_each_days_of_the_week
-    if repeats_weekly_each_days_of_the_week.empty?
-      errors.add(:base, 'You must have at least one repeats weekly each days of the week')
-    end
+    return unless repeats_weekly_each_days_of_the_week.empty?
+
+    errors.add(:base, 'You must have at least one repeats weekly each days of the week')
   end
 
   def repeating_and_ends?
