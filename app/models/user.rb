@@ -45,6 +45,7 @@ class User < ApplicationRecord
   has_many :event_instances
   has_many :commit_counts
   has_many :status
+  has_many :courses
 
   has_many :subscriptions, autosave: true
 
