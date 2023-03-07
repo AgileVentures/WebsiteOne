@@ -78,13 +78,13 @@ Solution: is something that requires absolutely minimal effort on their part to 
 
     puts 'Created default projects'
 
-    opensource = u.courses.create!(
+    u.courses.create!(
       title: 'OpenSource',
       description: 'How to contribute to open source projects.',
       status: 'Active'
     )
 
-    gitcourse = u.courses.create!(
+    u.courses.create!(
       title: 'GitCourse',
       description: 'Learn how to use git and github.',
       status: 'Active'
