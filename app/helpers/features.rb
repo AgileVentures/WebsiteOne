@@ -6,7 +6,7 @@ module Features
       feature = Settings.features.send(feature_name)
       raise "The feature #{feature_name} could not be found" if feature.nil?
 
-      feature.try!(:enabled)
+      feature&.enabled
     end
 
     def enable(feature_name)

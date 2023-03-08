@@ -45,7 +45,7 @@ RSpec.describe 'StatisticsConcern' do
     create_list(:event_instance, 5,
                 category: 'PairProgramming',
                 created_at: @time,
-                updated_at: (@time + 10 * 60))
+                updated_at: (@time + (10 * 60)))
     expect(@fake_controller.get_stats_for(:pairing_minutes)).to eq({ value: 50 })
   end
 
@@ -53,7 +53,7 @@ RSpec.describe 'StatisticsConcern' do
     create_list(:event_instance, 5,
                 category: 'Scrum',
                 created_at: @time,
-                updated_at: (@time + 10 * 60))
+                updated_at: (@time + (10 * 60)))
     expect(@fake_controller.get_stats_for(:scrum_minutes)).to eq({ value: 50 })
   end
 end

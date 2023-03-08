@@ -21,9 +21,7 @@ Given(/^the following projects exist:$/) do |table|
       language = Language.find_or_create_by(name: hash[:languages])
       project.languages << language
     end
-    if hash[:pivotaltracker_url] && !hash[:pivotaltracker_url].empty?
-      project.issue_trackers.build(url: hash[:pivotaltracker_url])
-    end
+    project.issue_trackers.build(url: hash[:pivotaltracker_url]) if hash[:pivotaltracker_url].present?
     project.tag_list.add(hash[:tags], parse: true) if hash[:tags]
     project.save!
   end
@@ -108,12 +106,12 @@ end
 #  table.hashes
 # end
 
-Then /^I should see a link "([^"]*)" that connects to the "([^"]*)"$/ do |text, url|
+Then(/^I should see a link "([^"]*)" that connects to the "([^"]*)"$/) do |text, url|
   project = Project.find_by title: text
   step %(I should see a link "#{text}" to "#{project.send url}")
 end
 
-Then /^I should see a link "([^"]*)" that connects to the issue tracker's url$/ do |link|
+Then(/^I should see a link "([^"]*)" that connects to the issue tracker's url$/) do |link|
   project = Project.find_by title: link
   project.issue_trackers.each do |issue_tracker|
     expect(page).to have_link(link, href: issue_tracker.url)
@@ -205,7 +203,7 @@ When(/^I go to the next page$/) do
 end
 
 When(/^I uncheck active$/) do
-  uncheck "activefilter"
+  uncheck 'activefilter'
 end
 
 Given(/^that project "([^"]*)" has an extra repository "([^"]*)"$/) do |project_name, repo|

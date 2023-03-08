@@ -67,7 +67,7 @@ class EventInstancePresenter < BasePresenter
 
   def process_users(participant)
     person = participant.last['person']
-    user = Authentication.find_by(provider: 'gplus', uid: person['id']).try!(:user)
+    user = Authentication.find_by(provider: 'gplus', uid: person['id'])&.user
     user || NullUser.new(person.with_indifferent_access[:displayName]) if user != host
   rescue NoMethodError
     Rails.logger.error 'Exception at event_instance_presenter#map_to_users'

@@ -7,7 +7,7 @@ include ChannelsList
 class HangoutNotificationService
   def self.with(event_instance,
                 slack_client = Slack::Web::Client.new(logger: Rails.logger),
-                gitter_client = Gitter::Client.new(ENV['GITTER_API_TOKEN']))
+                gitter_client = Gitter::Client.new(ENV.fetch('GITTER_API_TOKEN', nil)))
     new(event_instance, slack_client, gitter_client).send(:run)
   end
 
