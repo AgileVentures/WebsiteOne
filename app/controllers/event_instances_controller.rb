@@ -4,18 +4,6 @@ class EventInstancesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!, only: %i(edit update_link update)
 
-  def update
-    @event_instance = EventInstance.find_or_create_by(uid: params[:id])
-    if @event_instance.try!(:update, whitelist_params)
-      send_messages_to_social_media @event_instance, whitelist_params, hangout_url_changed?
-      redirect_to(event_path(params[:event_id])) && return if local_event?
-
-      head :ok
-    else
-      head :internal_server_error
-    end
-  end
-
   def index
     relation = params[:live] == 'true' ? EventInstance.live : EventInstance.latest
     relation = relation.includes(:project, :event, :user)
@@ -26,16 +14,27 @@ class EventInstancesController < ApplicationController
     @event_instance = EventInstance.find(params[:id])
   end
 
+  def update
+    @event_instance = EventInstance.find_or_create_by(uid: params[:id])
+    if @event_instance&.update(whitelist_params)
+      send_messages_to_social_media @event_instance, whitelist_params, hangout_url_changed?
+      redirect_to(event_path(params[:event_id])) && return if local_event?
+
+      head :ok
+    else
+      head :internal_server_error
+    end
+  end
+
   def update_link
     @event_instance = EventInstance.find(params[:id])
     youtube_id = YouTubeRails.extract_video_id(event_instance_params[:yt_video_id])
     if youtube_id && @event_instance.update(yt_video_id: youtube_id, hoa_status: event_instance_params[:hoa_status])
       flash[:notice] = 'Hangout Updated'
-      redirect_to edit_event_instance_path(@event_instance)
     else
       flash[:alert] = 'Error.  Please Try again'
-      redirect_to edit_event_instance_path(@event_instance)
     end
+    redirect_to edit_event_instance_path(@event_instance)
   end
 
   private

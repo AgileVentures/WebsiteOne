@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ::AgileVentures::AccessDenied do |_exception|
-    render file: "#{Rails.root}/public/403.html", status: 403, layout: false
+    render file: "#{Rails.root}/public/403.html", status: :forbidden, layout: false
   end
 
   private

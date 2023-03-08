@@ -13,13 +13,22 @@ class UsersController < ApplicationController
     @users = users
     @users_count = @users.total_count
     @projects = Project.where(status: 'active').sort { |a, b| a.title <=> b.title }
-    @user_type = params[:title].blank? ? 'Volunteer' : params[:title]
+    @user_type = (params[:title].presence || 'Volunteer')
     @user_type = 'Premium Member' if params[:title] == 'Premium'
 
     respond_to do |format|
       format.js
       format.html
     end
+  end
+
+  def show
+    @contact_form = ContactForm.new
+    raise ActiveRecord::RecordNotFound, 'User has not exposed their profile publicly' unless should_display_user?(@user)
+
+    @event_instances = EventInstance.where(user_id: @user.id)
+                                    .order(created_at: :desc).limit(5)
+    set_activity_tab(params[:tab])
   end
 
   def new
@@ -38,19 +47,8 @@ class UsersController < ApplicationController
       Mailer.hire_me_form(@user, message_params).deliver_now
       redirect_to({ action: :show, id: @user.id }, notice: 'Your message has been sent successfully!')
     else
-      flash[:alert] = @contact_form.errors.full_messages
+      flash.now[:alert] = @contact_form.errors.full_messages
       render :show
-    end
-  end
-
-  def show
-    @contact_form = ContactForm.new
-    if should_display_user?(@user)
-      @event_instances = EventInstance.where(user_id: @user.id)
-                                      .order(created_at: :desc).limit(5)
-      set_activity_tab(params[:tab])
-    else
-      raise ActiveRecord::RecordNotFound, 'User has not exposed their profile publicly'
     end
   end
 
@@ -67,7 +65,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'Your status has been set'
       redirect_to user_path(@user)
     else
-      flash[:alert] = 'Something went wrong...'
+      flash.now[:alert] = 'Something went wrong...'
       render :show
     end
   end
@@ -105,9 +103,9 @@ class UsersController < ApplicationController
     return unless param.present?
 
     @param_tab = param
-    unless UserPresenter.new(@user).contributed?
-      @param_tab = nil
-      flash.now[:notice] = 'User does not have activity log'
-    end
+    return if UserPresenter.new(@user).contributed?
+
+    @param_tab = nil
+    flash.now[:notice] = 'User does not have activity log'
   end
 end

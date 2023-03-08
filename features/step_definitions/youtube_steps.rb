@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-Given /my YouTube channel is connected/ do
+Given(/my YouTube channel is connected/) do
   step 'user "me" has YouTube Channel connected'
 end
 
-Then /I should( not)? see a list of my videos/ do |negative|
+Then(/I should( not)? see a list of my videos/) do |negative|
   correct_number = [EventInstance.where(user: @current_user).count, 5].min
   video_links = page.all(:css, '.yt_link')
   if negative
@@ -14,19 +14,19 @@ Then /I should( not)? see a list of my videos/ do |negative|
   end
 end
 
-Given /^user "([^"]*)" has YouTube Channel connected/ do |user|
+Given(/^user "([^"]*)" has YouTube Channel connected/) do |user|
   user = user == 'me' ? @current_user : User.find_by_first_name(user)
   user.youtube_id = 'test_id'
   user.youtube_user_name = 'John Doe'
   user.save!
 end
 
-Then /^I should see video "([^"]*)" in "player"$/ do |name|
+Then(/^I should see video "([^"]*)" in "player"$/) do |name|
   id = find_link(name)[:id]
   expect(page.find(:css, '#ytplayer')[:src]).to include "www.youtube.com/embed/#{id}"
 end
 
-Then /^I should see "([^"]*)" before "([^"]*)"$/ do |title_1, title_2|
+Then(/^I should see "([^"]*)" before "([^"]*)"$/) do |title_1, title_2|
   expect(page.body).to match(/#{title_1}.*#{title_2}/m)
 end
 
@@ -54,11 +54,11 @@ Given(/^there is a dud video for project "([^"]*)"$/) do |project_title|
                        yt_video_id: ''
 end
 
-Given /^there are no videos$/ do
+Given(/^there are no videos$/) do
   # No videos created
 end
 
-Given /^the live stream has not started$/ do
+Given(/^the live stream has not started$/) do
   mock = {}
   results = {}
   mock.stub_chain(:live_streaming_details, :first).and_return(results)
@@ -66,7 +66,7 @@ Given /^the live stream has not started$/ do
   expect(Yt::Video).to receive(:new).at_most(1).times.with(id: '11').and_return mock
 end
 
-Given /^the live stream has started$/ do
+Given(/^the live stream has started$/) do
   mock = {}
   results = {}
   mock.stub_chain(:live_streaming_details, :first).and_return(results)

@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-Then /^I should see my avatar image$/ do
+Then(/^I should see my avatar image$/) do
   expect(page).to have_xpath("//img[contains(@src, '#{@avatar_link}')]")
 end
 
-Then /^I should see "([^"]*)" avatars$/ do |arg|
+Then(/^I should see "([^"]*)" avatars$/) do |arg|
   expect(page).to have_xpath("//img[contains(@src, 'gravatar.com')]", count: arg)
 end
 
-Then /^I should see "([^"]*)" user avatars$/ do |arg|
+Then(/^I should see "([^"]*)" user avatars$/) do |arg|
   expect(page).to have_css('img[src*="gravatar.com"]', count: arg)
 end
 
-When /^I click on the avatar for "(.*?)"$/ do |user|
+When(/^I click on the avatar for "(.*?)"$/) do |user|
   this_user = User.find_by_first_name(user) || User.find_by_email(user)
   first(:css, "a[href*=\"#{this_user.friendly_id}\"] img")
   visit path_to('user profile', this_user)

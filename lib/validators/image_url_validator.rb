@@ -8,15 +8,15 @@ class ImageUrlValidator < ActiveModel::Validator
                             tinypic.com twitpic.com webshots.com weheartit.com zenfolio.com).freeze
 
   def validate(record)
-    if record.image_url.present?
-      if invalid_format?(record.image_url)
-        record.errors.add(:image_url, 'Invalid format. Image must be png, jpg, or jpeg.')
-      end
+    return unless record.image_url.present?
 
-      unless is_image_host_whitelisted?(record.image_url)
-        record.errors.add(:image_url, 'Invalid image url. Image provider not found in provider whitelist.')
-      end
+    if invalid_format?(record.image_url)
+      record.errors.add(:image_url, 'Invalid format. Image must be png, jpg, or jpeg.')
     end
+
+    return if is_image_host_whitelisted?(record.image_url)
+
+    record.errors.add(:image_url, 'Invalid image url. Image provider not found in provider whitelist.')
   end
 
   private
@@ -27,6 +27,6 @@ class ImageUrlValidator < ActiveModel::Validator
   end
 
   def is_image_host_whitelisted?(url)
-    IMAGE_HOST_WHITELIST.any? { |whitelist_item| url.match /#{Regexp.escape(whitelist_item)}/ }
+    IMAGE_HOST_WHITELIST.any? { |whitelist_item| url.match(/#{Regexp.escape(whitelist_item)}/) }
   end
 end

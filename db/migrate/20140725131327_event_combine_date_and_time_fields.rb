@@ -42,7 +42,7 @@ class EventCombineDateAndTimeFields < ActiveRecord::Migration[4.2]
     Event.all.each do |event|
       event.send(:write_attribute, :event_date, event.start_datetime)
       event.send(:write_attribute, :start_time, event.start_datetime)
-      event.send(:write_attribute, :end_time, (event.start_datetime + event.duration * 60).utc)
+      event.send(:write_attribute, :end_time, (event.start_datetime + (event.duration * 60)).utc)
       event.save!
     end
     remove_column :events, :start_datetime, :datetime
