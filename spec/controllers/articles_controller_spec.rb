@@ -147,7 +147,7 @@ RSpec.describe ArticlesController do
 
       it 'is responds with success message', :aggregate_failures do
         post :create, params: valid_params
-        expect(flash[:notice]).to match /^Successfully created the article/
+        expect(flash[:notice]).to match(/^Successfully created the article/)
         expect(response).to redirect_to article_path(article)
       end
     end
@@ -193,7 +193,7 @@ RSpec.describe ArticlesController do
 
     it 'is expected to redirect the user back to the show page with a flash message on success' do
       post :update, params: valid_update_params
-      expect(flash[:notice]).to match /^Successfully updated the article/
+      expect(flash[:notice]).to match(/^Successfully updated the article/)
       expect(response).to redirect_to article_path(@article)
     end
 

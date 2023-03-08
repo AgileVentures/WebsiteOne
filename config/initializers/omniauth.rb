@@ -11,8 +11,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     ENV['GITHUB_SECRET'] = '6a5988af12a8a012399e037d0586bf706c4bfbf0'
   end
 
-  provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
-  provider :google_oauth2, ENV['GPLUS_KEY'], ENV['GPLUS_SECRET'], {
+  provider :github, ENV.fetch('GITHUB_KEY', nil), ENV.fetch('GITHUB_SECRET', nil)
+  provider :google_oauth2, ENV.fetch('GPLUS_KEY', nil), ENV.fetch('GPLUS_SECRET', nil), {
     name: 'gplus',
     setup: lambda { |env|
       if (params = env['rack.session']['omniauth.params']) && params.fetch('youtube', false)
