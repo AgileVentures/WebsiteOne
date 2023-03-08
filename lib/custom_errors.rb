@@ -19,7 +19,10 @@ module CustomErrors
     raise error unless Features.enabled?(:custom_errors)
 
     Rails.logger.error error.message
-    error.backtrace.each_with_index { |line, index| Rails.logger.error line; break if index >= 5 }
+    error.backtrace.each_with_index do |line, index|
+      Rails.logger.error line
+      break if index >= 5
+    end
 
     # unless [404].include? status
     #   if Rails.env.production?
@@ -33,13 +36,15 @@ module CustomErrors
     ExceptionNotifier.notify_exception(error, env: request.env, data: { message: 'was doing something wrong' })
     case status
     when 404
-      render template: 'static_pages/not_found', layout: 'layouts/application', status: 404, formats: [:html]
+      render template: 'static_pages/not_found', layout: 'layouts/application', status: :not_found, formats: [:html]
 
     when 500
-      render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500, formats: [:html]
+      render template: 'static_pages/internal_error', layout: 'layouts/application', status: :internal_server_error,
+             formats: [:html]
 
     else
-      render template: 'static_pages/internal_error', layout: 'layouts/application', status: 500, formats: [:html]
+      render template: 'static_pages/internal_error', layout: 'layouts/application', status: :internal_server_error,
+             formats: [:html]
     end
   end
 end

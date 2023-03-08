@@ -3,7 +3,7 @@
 describe VisitorsHelper do
   describe '#display_countdown' do
     before :each do
-      @default_tz = ENV['TZ']
+      @default_tz = ENV.fetch('TZ', nil)
       ENV['TZ'] = 'UTC'
     end
 

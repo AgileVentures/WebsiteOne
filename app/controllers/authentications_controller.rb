@@ -32,13 +32,13 @@ class AuthenticationsController < ApplicationController
       flash[:alert] = 'Failed to unlink GitHub. Please use another provider for login or reset password.'
     elsif @authentication&.destroy
       user = User.find(current_user.id)
-      flash[:notice] = if user.update(github_profile_url: nil)
-                         'Successfully removed profile.'
-                       else
-                         'Github profile url could not be removed.'
-                       end
+      flash.now[:notice] = if user.update(github_profile_url: nil)
+                             'Successfully removed profile.'
+                           else
+                             'Github profile url could not be removed.'
+                           end
     else
-      flash[:alert] = 'Authentication method could not be removed.'
+      flash.now[:alert] = 'Authentication method could not be removed.'
     end
     redirect_to edit_user_registration_path(current_user)
   end
@@ -76,16 +76,16 @@ class AuthenticationsController < ApplicationController
   end
 
   def create_new_authentication_for_current_user(omniauth, path)
-    if auth = current_user.authentications.build(provider: omniauth['provider'], uid: omniauth['uid'])
-      if auth.save
-        # Bryan: TESTED
-        flash[:notice] = 'Authentication successful.'
-        redirect_to path
-      else
-        # Bryan: TESTED
-        flash[:alert] = 'Unable to create additional profiles.'
-        redirect_to @path
-      end
+    return unless auth = current_user.authentications.build(provider: omniauth['provider'], uid: omniauth['uid'])
+
+    if auth.save
+      # Bryan: TESTED
+      flash[:notice] = 'Authentication successful.'
+      redirect_to path
+    else
+      # Bryan: TESTED
+      flash[:alert] = 'Unable to create additional profiles.'
+      redirect_to @path
     end
   end
 
