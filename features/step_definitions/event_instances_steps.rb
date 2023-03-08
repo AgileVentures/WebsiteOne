@@ -52,7 +52,7 @@ Given(/^(\d+) event instance exists without a youtube id$/) do |num_event_instan
 end
 
 Then(/^they should see the most (\d+) recent events first$/) do |num_event_instances|
-  most_recent_events_first = ''
+  most_recent_events_first = +''
   num_event_instances.to_i.times.reverse_each do |num|
     next_recent_event = starting_date + num.days
     next_recent_event = next_recent_event.strftime('%A, %B %-d, %Y').to_s

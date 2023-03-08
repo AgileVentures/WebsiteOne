@@ -571,7 +571,7 @@ Then(/^I should not exist as a user$/) do
 end
 
 And(/^the page should contain the google adwords conversion code/) do
-  script = page.all('script', visible: false).inject('') { |m, el| m << el.native.text }
+  script = page.all('script', visible: false).inject(+'') { |m, el| m << el.native.text }
   expect(script).to include 'Zms8CLTN-20Q-NGSmwM'
 end
 
