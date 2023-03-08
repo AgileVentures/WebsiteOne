@@ -40,7 +40,7 @@ class EventsController < ApplicationController
       flash[:notice] = 'Event Created'
       redirect_to event_path(@event)
     else
-      flash[:notice] = @event.errors.full_messages.to_sentence
+      flash.now[:notice] = @event.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -55,7 +55,7 @@ class EventsController < ApplicationController
       flash[:notice] = 'Event Updated'
       redirect_to event_path(@event)
     else
-      flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
+      flash.now[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
       @projects = Project.all
       render 'edit'
     end
