@@ -73,14 +73,14 @@ class Project < ApplicationRecord
   end
 
   def github_repo
-    matches = %r{[^\b(github.com/)][a-zA-Z0-9\-]+/[a-zA-Z0-9\-]+}.match(github_url)
+    matches = %r{[^\b(github.com/)][a-zA-Z0-9-]+/[a-zA-Z0-9-]+}.match(github_url)
     return '' if github_url.blank? || matches.nil?
 
     matches[0]
   end
 
   def github_repo_name
-    github_url ? %r{github.com/\w+/([\w\-]+)}.match(github_url)[1] : ''
+    github_url ? %r{github.com/\w+/([\w-]+)}.match(github_url)[1] : ''
   end
 
   def github_repo_user_name

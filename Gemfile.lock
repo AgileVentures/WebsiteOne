@@ -407,6 +407,7 @@ GEM
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
     libv8-node (16.10.0.0-aarch64-linux)
+    libv8-node (16.10.0.0-arm64-darwin)
     libv8-node (16.10.0.0-x86_64-darwin)
     libv8-node (16.10.0.0-x86_64-linux)
     listen (3.8.0)
@@ -452,6 +453,8 @@ GEM
     netrc (0.11.0)
     nio4r (2.5.8)
     nokogiri (1.14.2-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.14.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-darwin)
       racc (~> 1.4)
@@ -777,6 +780,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-22
   x86_64-darwin-17
   x86_64-darwin-18
   x86_64-darwin-20

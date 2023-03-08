@@ -488,7 +488,10 @@ RSpec.describe User, type: :model do
     # it doesn't seem to capture that we need to_i's to get the date
     # equality comparison to work ...
     context 'just started a new plan' do
-      before { subscription2.ended_at = now; subscription2.save }
+      before do
+        subscription2.ended_at = now
+        subscription2.save
+      end
       let!(:subscription3) do
         create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source)
       end

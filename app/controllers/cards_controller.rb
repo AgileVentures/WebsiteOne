@@ -5,6 +5,8 @@ class CardsController < ApplicationController
 
   def new; end
 
+  def edit; end
+
   def create
     customer = Stripe::Customer.create(email: params[:stripeEmail])
     card = customer.sources.create(card: stripe_token(params))
@@ -15,8 +17,6 @@ class CardsController < ApplicationController
     logger.error "Stripe error while adding card info: #{e.message} for #{current_user}"
     @error = true
   end
-
-  def edit; end
 
   def update
     customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?

@@ -37,12 +37,12 @@ module EventHelper
 
   def show_local_time_range(time, duration)
     start_time = local_time(time, '%H:%M')
-    end_time = local_time(time + duration * 60, '%H:%M (%Z)')
+    end_time = local_time(time + (duration * 60), '%H:%M (%Z)')
     "#{start_time}-#{end_time}"
   end
 
   def google_calendar_link(event)
-    "https://calendar.google.com/calendar/render?action=TEMPLATE&dates=#{event.next_event_occurrence_with_time[:time].strftime('%Y%m%dT%H%M%SZ')}%2f#{(event.next_event_occurrence_with_time[:time] + @event.duration * 60).strftime('%Y%m%dT%H%M%SZ')}&sprop=website:#{auto_link(event.description)}&text=#{event.name}&location=online&sprop=name:AgileVentures&details=#{event.description}"
+    "https://calendar.google.com/calendar/render?action=TEMPLATE&dates=#{event.next_event_occurrence_with_time[:time].strftime('%Y%m%dT%H%M%SZ')}%2f#{(event.next_event_occurrence_with_time[:time] + (@event.duration * 60)).strftime('%Y%m%dT%H%M%SZ')}&sprop=website:#{auto_link(event.description)}&text=#{event.name}&location=online&sprop=name:AgileVentures&details=#{event.description}"
   end
 
   def set_column_width

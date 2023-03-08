@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-if Rails.env == 'test'
+if Rails.env.test?
   VCR.configure do |c|
     c.ignore_localhost = true
     c.default_cassette_options = { record: :new_episodes }

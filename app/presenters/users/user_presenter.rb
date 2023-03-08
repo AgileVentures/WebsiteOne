@@ -5,12 +5,10 @@ require_relative '../base_presenter'
 class UserPresenter < BasePresenter
   presents :user
 
-  def display_name
-    user.display_name
-  end
+  delegate :display_name, to: :user
 
   def has_skills?
-    !user.skill_list.blank?
+    user.skill_list.present?
   end
 
   def joined_projects?
