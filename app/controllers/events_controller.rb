@@ -5,9 +5,15 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i(show edit update destroy update_only_url)
   before_action :set_projects, only: %i(new edit update create)
 
-  def new
-    @event = Event.new(new_params)
-    @event.set_repeat_ends_string
+  def index
+    @projects = Project.active
+    @events = Event.upcoming_events(specified_project)
+    respond_to do |format|
+      format.html { @events }
+      format.json do
+        @scrums = EventInstance.this_month_until_now
+      end
+    end
   end
 
   def show
@@ -19,15 +25,9 @@ class EventsController < ApplicationController
     render partial: 'hangouts_management' if request.xhr?
   end
 
-  def index
-    @projects = Project.active
-    @events = Event.upcoming_events(specified_project)
-    respond_to do |format|
-      format.html { @events }
-      format.json do
-        @scrums = EventInstance.this_month_until_now
-      end
-    end
+  def new
+    @event = Event.new(new_params)
+    @event.set_repeat_ends_string
   end
 
   def edit
@@ -40,7 +40,7 @@ class EventsController < ApplicationController
       flash[:notice] = 'Event Created'
       redirect_to event_path(@event)
     else
-      flash[:notice] = @event.errors.full_messages.to_sentence
+      flash.now[:notice] = @event.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -55,7 +55,7 @@ class EventsController < ApplicationController
       flash[:notice] = 'Event Updated'
       redirect_to event_path(@event)
     else
-      flash[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
+      flash.now[:alert] = ['Failed to update event:', @event.errors.full_messages, attr_error].join(' ')
       @projects = Project.all
       render 'edit'
     end
@@ -128,7 +128,7 @@ class EventsController < ApplicationController
   end
 
   def specified_project
-    @project = Project.friendly.find(params[:project_id]) unless params[:project_id].blank?
+    @project = Project.friendly.find(params[:project_id]) if params[:project_id].present?
   end
 
   def set_event

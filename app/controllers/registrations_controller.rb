@@ -9,11 +9,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super
-    unless @user.new_record?
-      session[:omniauth] = nil
-      flash[:user_signup] = 'Signed up successfully.'
-      Mailer.send_welcome_message(@user).deliver_now if Features.enabled?(:welcome_email)
-    end
+    return if @user.new_record?
+
+    session[:omniauth] = nil
+    flash[:user_signup] = 'Signed up successfully.'
+    Mailer.send_welcome_message(@user).deliver_now if Features.enabled?(:welcome_email)
   end
 
   def update
@@ -37,20 +37,20 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def check_captcha
-    unless verify_recaptcha
-      self.resource = resource_class.new sign_up_params
-      resource.validate # Look for any other validation errors besides Recaptcha
-      respond_with_navigational(resource) { render :new }
-    end
+    return if verify_recaptcha
+
+    self.resource = resource_class.new sign_up_params
+    resource.validate # Look for any other validation errors besides Recaptcha
+    respond_with_navigational(resource) { render :new }
   end
 
   def build_resource(hash = {})
     hash.merge!({ karma: Karma.new })
     self.resource = User.new_with_session(hash, session)
-    if session[:omniauth]
-      @user.apply_omniauth(session[:omniauth])
-      @user.valid?
-    end
+    return unless session[:omniauth]
+
+    @user.apply_omniauth(session[:omniauth])
+    @user.valid?
   end
 
   def after_update_path_for(resource)

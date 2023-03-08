@@ -98,9 +98,9 @@ class DocumentsController < ApplicationController
     valid_category = Document.find_by_id(new_parent_id)
     if valid_category
       @document.update!(parent_id: new_parent_id)
-      flash[:notice] = "You have successfully moved #{@document.title} to the #{valid_category.title} section."
+      flash.now[:notice] = "You have successfully moved #{@document.title} to the #{valid_category.title} section."
     else
-      flash[:error] = 'Could not find the new parent document'
+      flash.now[:error] = 'Could not find the new parent document'
     end
   end
 

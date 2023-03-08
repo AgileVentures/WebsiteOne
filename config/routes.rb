@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: :index
 
   match '/hangouts/:id' => 'event_instances#update', :via => %i(put options), as: 'hangout'
-  match '/hangouts' => 'event_instances#index', :via => [:get], as: 'hangouts'
+  get '/hangouts' => 'event_instances#index', as: 'hangouts'
 
   resources :event_instances, only: [:edit]
   patch '/event_instances/:id', to: 'event_instances#update_link'
@@ -54,12 +54,12 @@ Rails.application.routes.draw do
       post :activate, action: :update, defaults: { command: 'activate' }
       post :deactivate, action: :update, defaults: { command: 'deactivate' }
     end
-    
+
     resources :documents, except: %i(edit update), format: false do
       put :mercury_update
       get :mercury_saved
     end
-    
+
     resources :events, only: [:index]
   end
   get :pending_projects, controller: :projects, action: :index, defaults: { status: 'pending' }

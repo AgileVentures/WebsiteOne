@@ -12,8 +12,8 @@ namespace :db do
         i = '000'
         File.open("#{Rails.root}/fixtures/#{table_name}.yml.new", 'w+') do |file|
           data = ApplicationRecord.connection.select_all(sql % table_name)
-          file.write data.each_with_object({}) { |record, hash|
-            hash["#{table_name}_#{i.succ!}"] = record
+          file.write data.index_by { |_record|
+            "#{table_name}_#{i.succ!}"
           }.to_yaml
           puts 'Completed db dump for '.green + table_name.red
         end

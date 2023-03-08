@@ -8,15 +8,15 @@ Then(/^the user should( not)? receive a "([^"]*)" email$/) do |negate, subject|
   check_email('random@morerandom.com', negate, subject)
 end
 
-And /^"(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/ do |user_email, negate, subject, body|
+And(/^"(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/) do |user_email, negate, subject, body|
   check_email(user_email, negate, subject, body)
 end
 
-Then /^project creator "(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/ do |user_email, negate, subject, body|
+Then(/^project creator "(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/) do |user_email, negate, subject, body|
   check_email(user_email, negate, subject, body, 0, 1)
 end
 
-Then /^project joinee "(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/ do |user_email, negate, subject, body|
+Then(/^project joinee "(.*?)" should( not)? receive a "(.*?)" email(?: containing "(.*)")?$/) do |user_email, negate, subject, body|
   check_email(user_email, negate, subject, body, 1, 1)
 end
 
@@ -30,11 +30,11 @@ def check_email(email, negate, subject, body = nil, message = 0, num_mails = 0)
   end
 end
 
-And /^I should not receive an email$/ do
+And(/^I should not receive an email$/) do
   expect(ActionMailer::Base.deliveries.size).to eq 0
 end
 
-And /^the email queue is clear$/ do
+And(/^the email queue is clear$/) do
   ActionMailer::Base.deliveries.clear
 end
 
