@@ -76,16 +76,16 @@ class AuthenticationsController < ApplicationController
   end
 
   def create_new_authentication_for_current_user(omniauth, path)
-    if auth = current_user.authentications.build(provider: omniauth['provider'], uid: omniauth['uid'])
-      if auth.save
-        # Bryan: TESTED
-        flash[:notice] = 'Authentication successful.'
-        redirect_to path
-      else
-        # Bryan: TESTED
-        flash[:alert] = 'Unable to create additional profiles.'
-        redirect_to @path
-      end
+    return unless auth = current_user.authentications.build(provider: omniauth['provider'], uid: omniauth['uid'])
+
+    if auth.save
+      # Bryan: TESTED
+      flash[:notice] = 'Authentication successful.'
+      redirect_to path
+    else
+      # Bryan: TESTED
+      flash[:alert] = 'Unable to create additional profiles.'
+      redirect_to @path
     end
   end
 

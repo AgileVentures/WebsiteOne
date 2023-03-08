@@ -13,7 +13,7 @@ Then(/^I jump to one minute before the end of the event at "([^"]*)"/) do |jump_
   Delorean.time_travel_to(Time.parse(jump_date))
 end
 
-Then /^I should (not )?see hangout button$/ do |absent|
+Then(/^I should (not )?see hangout button$/) do |absent|
   if absent
     expect(page).not_to have_css '#hoa_instructions'
   else
@@ -37,7 +37,7 @@ Given('the Hangout for event {string} has been started with details:') do |event
          youtube_tweet_sent: true)
 end
 
-Given /^the following hangouts exist:$/ do |table|
+Given(/^the following hangouts exist:$/) do |table|
   table.hashes.each do |hash|
     participants = hash['Participants'] || []
     participants = participants.split(',')
@@ -47,7 +47,7 @@ Given /^the following hangouts exist:$/ do |table|
 
       name = participant.squish
       user = User.find_by_first_name(name)
-      gplus_id = user.authentications.find_by(provider: 'gplus').try!(:uid) if user.present?
+      gplus_id = user.authentications.find_by(provider: 'gplus')&.uid if user.present?
       ['0', { 'person' => { displayName: name.to_s, 'id' => gplus_id } }]
     end
 
@@ -66,7 +66,7 @@ Given /^the following hangouts exist:$/ do |table|
   end
 end
 
-Then /^I have Slack notifications enabled$/ do
+Then(/^I have Slack notifications enabled$/) do
   stub_request(:post, 'https://agile-bot.herokuapp.com/hubot/hangouts-notify').to_return(status: 200)
 end
 
