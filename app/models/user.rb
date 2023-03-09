@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  rolify
   acts_as_paranoid
+
+  after_create :assign_default_role
 
   include Filterable
 
@@ -48,6 +51,11 @@ class User < ApplicationRecord
   has_many :courses
 
   has_many :subscriptions, autosave: true
+
+
+  def assign_default_role
+    self.add_role(:student) if self.roles.blank?
+  end
 
   # ultimately replacing the field stripe_customer
   def stripe_customer_id
