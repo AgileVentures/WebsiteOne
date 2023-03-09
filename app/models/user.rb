@@ -4,6 +4,7 @@ class User < ApplicationRecord
   rolify
   acts_as_paranoid
 
+  after_validation :geocode, if: ->(obj) { obj.last_sign_in_ip_changed? }
   after_create :assign_default_role
 
   include Filterable
@@ -38,7 +39,6 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :display_name, use: :slugged
 
-  after_validation :geocode, if: ->(obj) { obj.last_sign_in_ip_changed? }
   # after_validation -> { KarmaCalculator.new(self).perform }
 
   has_many :authentications, dependent: :destroy
@@ -52,9 +52,8 @@ class User < ApplicationRecord
 
   has_many :subscriptions, autosave: true
 
-
   def assign_default_role
-    self.add_role(:student) if self.roles.blank?
+    add_role(:student) if roles.blank?
   end
 
   # ultimately replacing the field stripe_customer
