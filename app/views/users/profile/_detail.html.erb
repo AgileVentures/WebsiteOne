@@ -9,6 +9,7 @@
   <% if presenter.contributed? %>
     <li class="<%= activity_tab(param_tab)%>"><a href="#activity" data-toggle="tab">Activity</a></li>
   <% end %>
+  <li><a href="#roles" data-toggle="tab">Roles</a></li>
 </ul>
 <div id="tab-content" class="tab-content" style="background: #fff;">
 
@@ -47,6 +48,16 @@
         </section>
       </div>
   <% end %>
+  <div class="tab-pane" id="roles">
+        <section class="user-roles">
+          <h4>Roles</h4>
+          <ul>
+            <% presenter.roles.each do |role| %>
+                <li><%= role.name %></li>
+            <% end %>
+          </ul>
+        </section>
+  </div>
 
   <% if presenter.contributed? %>
     <div class="tab-pane <%= activity_tab(param_tab) %>"id="activity">
