@@ -52,8 +52,10 @@
         <section class="user-roles">
           <h4>Roles</h4>
           <ul>
-            <% presenter.roles.each do |role| %>
-                <li><%= role.name %></li>
+            <%= collection_check_boxes :user, :role_ids, Role.all, :id, :name do |b| %>
+              <li>
+                <%= b.check_box %> <%= b.label %>
+              </li>
             <% end %>
           </ul>
         </section>
