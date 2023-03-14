@@ -41,6 +41,7 @@
 </div>
 
 <div id="document_body" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
+<div class="trix-content"><%= @document.content %></div>
 
 <% if user_signed_in? %>
   <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>

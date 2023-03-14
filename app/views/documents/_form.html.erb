@@ -24,6 +24,9 @@
           <%= f.text_area :body, :class => 'form-control',  'rows' => 10, placeholder: 'Document body'%>
         </div-->
       <div class='form-group'>
+        <%= f.rich_text_area :content %>
+      </div>
+      <div class='form-group'>
         <%= f.hidden_field :project_id, value: params[:project_id] %>
       </div>
       <div class='form-group'>
