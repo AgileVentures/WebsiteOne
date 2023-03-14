@@ -75,7 +75,7 @@ Another option is to point the gem to your open ssl settings:
 gem install eventmachine -- --with-openssl-dir=/usr/local/opt/openssl@1.1
 ```
 
-On a newer M2 mac you can try:
+On a newer mac version you can try:
 
 ```
 brew install openssl
