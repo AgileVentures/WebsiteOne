@@ -33,7 +33,6 @@ blocks:
             - bundle config set --local path 'vendor/bundle'
             - bundle install
             - mkdir -p tmp/pids
-            - npm install bower
             - npm install yarn
             - yarn install
             - bundle exec rake assets:clobber

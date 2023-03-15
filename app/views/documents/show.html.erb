@@ -29,21 +29,19 @@
 </h1>
 <% if user_signed_in? %>
   <ul class="user-controls">
-    <li><%= custom_css_btn 'edit', 'fa fa-pencil-square-o fa-2x', mercury_edit_path, id: 'edit_link',
-                           data: {save_url: project_document_mercury_update_path(@project, @document)} %></li>
-
     <% if @document.root? %>
-      <li><%= custom_css_btn 'new sub-document', 'fa fa-file-text-o fa-2x', new_project_document_path(project_id: @project.friendly_id, parent_id: @document.id), id: 'new_document_link' %></li>
+      <li><%= custom_css_btn 'new sub-document', 'fa fa-files-o fa-2x', new_project_document_path(project_id: @project.friendly_id, parent_id: @document.id), id: 'new_document_link' %></li>
     <% end %>
     <li><%= custom_css_btn 'change section', 'fa fa-cogs fa-2x', project_document_sections_path(project_id: @project.id, id: @document), id: 'change_parent_link', 
         data: { toggle: "modal", target: "#DocSections" } %></li>
+    <li><%= custom_css_btn 'edit document', 'fa fa-file-text-o fa-2x', edit_project_document_path %></li>
   </ul>
 <% end %>
 <div class="doc-status-text">
   <div><%= metadata %></div>
 </div>
 
-<div id="document_body" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
+<%= h(@document.content) %>
 
 <% if user_signed_in? %>
   <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
@@ -77,4 +75,4 @@
     </ul>
   <% end %>
 </div>
-<%= render partial: 'disqus/disqus', locals: {entity: @document, project: @project} unless inside_mercury? %>
+<%= render partial: 'disqus/disqus', locals: {entity: @document, project: @project} %>

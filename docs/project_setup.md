@@ -55,7 +55,23 @@ See the [Docker Project Setup](../docker/README.md) documentation
 
 ## Option 2 - Local Installation
 
-### Step 1: Install the gems with `bundle install`
+### Step 1: PostgreSQL and the `pg` gem
+The database used is [postgreSQL](https://www.postgresql.org/).  You need to have this installed and running on your local machine. 
+
+OSX: Install using brew
+
+`brew install postgres`
+
+`psql -V` - to get the version of postgres
+
+`which psql` - to figure out where postgres was installed: returns eg `/Applications/Postgres93.app/Contents/MacOS/bin/psql`
+
+`bundle config build.pg --with-pg-config=/Applications/Postgres93.app/Contents/MacOS/bin/pg_config`
+
+We recommend also installing: http://postgresapp.com/
+
+
+### Step 2: Install the gems with `bundle install`
 
     bundle install
 
@@ -75,7 +91,7 @@ Another option is to point the gem to your open ssl settings:
 gem install eventmachine -- --with-openssl-dir=/usr/local/opt/openssl@1.1
 ```
 
-On a newer M2 mac you can try:
+On a newer macs you can try:
 
 ```
 brew install openssl
@@ -85,29 +101,24 @@ gem install eventmachine -- --with-openssl-dir=/opt/homebrew/opt/openssl@1.1
 
 After you do that, re-try running `bundle install` and you should be good to go on to the next step.
 
-#### PostgreSQL and the `pg` gem
-The database used is [postgreSQL](https://www.postgresql.org/).  You need to have this installed and running on your local machine. 
-(The `pg` gem accesses the postgreSQL database.)  [Here are instructions on installing postgreSQL.](development_environment_set_up.md#postgreSQL)
+**Note:** On OSX El Capitan and above, you may get an error on the pg gem.
 
-#### Updating Rails
-If you need to update rails, you can run `bundle update rails`.  If you run into problems with rails and `libv8` on OS X, try this:
-```shell
-   gem uninstall libv8
-   brew install v8
-   gem install therubyracer
-   gem install libv8 -v '3.16.14.3' -- --with-system-v8
+To install the pg gem. You’ll need to include the following options to set your path and include the needed headers:
+
+```bash
+gem install pg -- --with-pg-config=/Applications/Postgres93.app/Contents/MacOS/bin/pg_config --with-pg-include='/Applications/Postgres93.app/Contents/MacOS/include/'
 ```
+**Note that you may need to adjust these lines depending on the exact name of your Postgres.app application. Example:
+If your application is named Postgres93, then “Postgres.app” will need to be changed to “Postgres93.app” in both places.
+
     
-### Step 2: Install javascript dependencies using `npm`
-* Use [npm](https://www.npmjs.com/) to install all of the javascript dependencies for WSO: 
+### Step 3: Install javascript dependencies using `yarn`
 
-    `npm install`
+* Use the yarn package manager for node.js.  [Here are instructions.](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-the-yarn-package-manager-for-node-js)
 
-* Use [npm](https://www.npmjs.com/) to ensure [bower](https://bower.io/) is installed:
+    `yarn install`
 
-    `npm install bower`
-
-### Step 3: Request the .env file and confirm your locale
+### Step 4: Request the .env file and confirm your locale
     
 * You'll have to get the `.env` file from one of the project admins.  The project won't work without it.  The `.env` file should go in the root of the WSO project.
 * Add the following to that file:
@@ -125,7 +136,7 @@ the above are test keys from https://developers.google.com/recaptcha/docs/faq
 
     
 
-### Step 4: Set up the database and static pages
+### Step 5: Set up the database and static pages
 
 * Run the rake command to set up the database.  Be sure to use `bundle exec` so that the gems specific to this project (listed in the Gemfile) are used:
 
@@ -135,7 +146,7 @@ the above are test keys from https://developers.google.com/recaptcha/docs/faq
 
     `bundle exec rake fetch_github:content_for_static_pages`
     
-### Step 5: Run the tests
+### Step 6: Run the tests
 
 Now you're ready to run the tests:
 
@@ -145,7 +156,7 @@ Now you're ready to run the tests:
 
 Discuss any errors with the team on Slack, in a scrum, or in mob or pair programming.
 
-### Step 6. Start the server
+### Step 7. Start the server
 
     bundle exec rails s
     
