@@ -56,6 +56,15 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def update
+    if @document.update(document_params)
+      redirect_to project_document_path(@project, @document), notice: 'Document was successfully updated.'
+    else
+      flash.now[:alert] = 'Document was not updated.'
+      render 'edit'
+    end
+  end
+
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy

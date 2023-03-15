@@ -41,8 +41,7 @@
   <div><%= metadata %></div>
 </div>
 
-<div id="document_body" data-mercury="full" data-type="editable"><%= clean_html(@document.body) %></div>
-<%= @document.content %>
+<%= h(@document.content) %>
 
 <% if user_signed_in? %>
   <%= link_to 'Save', '', id: 'save_link', class: 'btn btn-default', style: 'display:none;' %>
