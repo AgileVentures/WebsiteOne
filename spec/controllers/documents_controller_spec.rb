@@ -191,5 +191,4 @@ RSpec.describe DocumentsController, type: :controller do
       expect(response).to redirect_to(project_documents_path(id))
     end
   end
-
 end

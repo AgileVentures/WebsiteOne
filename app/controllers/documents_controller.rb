@@ -35,6 +35,8 @@ class DocumentsController < ApplicationController
     @document = Document.new
   end
 
+  def edit; end
+
   # POST /documents
   # POST /documents.json
   def create
@@ -53,8 +55,6 @@ class DocumentsController < ApplicationController
       end
     end
   end
-
-  def edit; end
 
   # DELETE /documents/1
   # DELETE /documents/1.json
