@@ -19,12 +19,9 @@
         <%= f.label :title %>
         <%= f.text_field :title, :class => 'form-control', placeholder: 'Title' %>
       </div>
-      <!--div class='form-group'>
-          <%= f.label :body %>
-          <%= f.text_area :body, :class => 'form-control',  'rows' => 10, placeholder: 'Document body'%>
-        </div-->
       <div class='form-group'>
-        <%= f.rich_text_area :content %>
+        <%= f.label :content %>
+        <%= f.rich_text_area :content, value: "<h1>Default message</h1>" %>
       </div>
       <div class='form-group'>
         <%= f.hidden_field :project_id, value: params[:project_id] %>

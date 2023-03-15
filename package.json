@@ -6,8 +6,9 @@
   "directories": {
     "doc": "docs"
   },
+  "type": "module",
   "scripts": {
-    "postinstall": "scripts/copy_javascript_dependencies.js"
+    "postinstall": "scripts/copy_javascript_dependencies.cjs"
   },
   "repository": {
     "type": "git",
