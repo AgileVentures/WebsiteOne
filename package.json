@@ -6,8 +6,9 @@
   "directories": {
     "doc": "docs"
   },
+  "type": "module",
   "scripts": {
-    "postinstall": "scripts/copy_javascript_dependencies.js"
+    "postinstall": "scripts/copy_javascript_dependencies.cjs"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/AgileVentures/WebsiteOne#readme",
   "dependencies": {
+    "@rails/actiontext": "^7.0.4-3",
     "bootstrap-datepicker": "^1.4.0",
     "bootstrap-timepicker": "^0.5.2",
     "bower": "^1.8.12",
@@ -32,6 +34,7 @@
     "moment-timezone": "0.5.4",
     "nprogress": "^0.1.4",
     "npx": "^10.2.2",
+    "trix": "^2.0.4",
     "yarn": "^1.22.19"
   }
 }

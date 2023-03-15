@@ -294,7 +294,6 @@ Naming/PredicateName:
     - 'app/models/user.rb'
     - 'app/presenters/users/user_presenter.rb'
     - 'features/support/helpers.rb'
-    - 'lib/mercury/authentication.rb'
     - 'lib/validators/image_url_validator.rb'
     - 'lib/validators/pivotal_tracker_url_validator.rb'
 

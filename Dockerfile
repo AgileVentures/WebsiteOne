@@ -38,7 +38,7 @@ FROM base
 # To execute tests, install chromium
 RUN apt install -y xvfb chromium chromium-driver
 
-RUN dos2unix scripts/copy_javascript_dependencies.js
+RUN dos2unix scripts/copy_javascript_dependencies.cjs
 RUN yarn install
 COPY . /WebsiteOne
 RUN bundle exec rake assets:precompile
