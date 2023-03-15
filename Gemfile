@@ -95,6 +95,7 @@ group :test do
   gem 'cuprite'
   gem 'database_cleaner'
   gem 'delorean' # gem is discontinued
+  gem 'faraday-retry'
   gem 'launchy'
   gem 'puffing-billy'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.2'

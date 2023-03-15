@@ -304,6 +304,8 @@ GEM
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
+    faraday-retry (2.1.0)
+      faraday (~> 2.0)
     ferrum (0.13)
       addressable (~> 2.5)
       concurrent-ruby (~> 1.1)
@@ -814,6 +816,7 @@ DEPENDENCIES
   exception_notification
   factory_bot_rails
   faker
+  faraday-retry
   font-awesome-rails
   friendly_id
   geocoder

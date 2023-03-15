@@ -35,6 +35,8 @@ module WebsiteOne
     # -- all .rb files in that directory are automatically loaded.
     config.exceptions_app = routes
 
+    config.active_record.legacy_connection_handling = false
+
     config.action_mailer.delivery_method = Settings.mailer.delivery_method.to_sym
     config.action_mailer.smtp_settings = Settings.mailer.smtp_settings.to_hash
     config.action_mailer.default_url_options = { host: 'www.agileventures.org' }
