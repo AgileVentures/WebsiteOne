@@ -11,7 +11,7 @@ Feature: Manage Documents
       | hello mars  | greetings aliens     | inactive |
 
     And the following documents exist:
-      | title         | body             | project     |
+      | title         | content          | project     |
       | Guides        | My guide to      | hello mars  |
       | Documentation | My documentation | hello world |
 
@@ -28,29 +28,29 @@ Feature: Manage Documents
     And I should not see "Another doc"
     And I should not see the document "Guides"
 
-  # Scenario: Create a new document
-  #   Given I have logged in
-  #   Given I am on the "Show" page for project "hello world"
-  #   When I click the "Join Project" button
-  #   And I click the "Create new document" button
-  #   And I fill in "Title" with "New doc title"
-  #   And I click "Submit"
-  #   Then I should see "Document was successfully created."
+  Scenario: Create a new document
+    Given I have logged in
+    Given I am on the "Show" page for project "hello world"
+    When I click the "Join Project" button
+    And I click the "Create new document" button
+    And I fill in "Title" with "New doc title"
+    And I click "Submit"
+    Then I should see "Document was successfully created."
 
-  # Scenario: Create a new document page should have a back button
-  #   Given I have logged in
-  #   Given I am on the "Show" page for project "hello world"
-  #   When I click the "Join Project" button
-  #   And I click the "Create new document" button
-  #   And I click "Back"
-  #   Then I should be on the "Show" page for project "hello world"
+  Scenario: Create a new document page should have a back button
+    Given I have logged in
+    Given I am on the "Show" page for project "hello world"
+    When I click the "Join Project" button
+    And I click the "Create new document" button
+    And I click "Back"
+    Then I should be on the "Show" page for project "hello world"
 
-  # Scenario: Show a document
-  #   Given I am on the "Show" page for project "hello world"
-  #   When I click the sidebar link "Documentation"
-  #   Then I should be on the "Show" page for document "Documentation"
-  #   And I should see "Documentation"
-  #   And I should see "New content 2"
+  Scenario: Show a document
+    Given I am on the "Show" page for project "hello world"
+    When I click the sidebar link "Documentation"
+    Then I should be on the "Show" page for document "Documentation"
+    And I should see "Documentation"
+    And I should see "My documentation"
 
   Scenario: A document can have children
     Given the document "Guides" has a child document with title "Howto"
@@ -70,18 +70,17 @@ Feature: Manage Documents
       | SubDoc1 |
       | SubDoc2 |
 
-  # @javascript
-  # Scenario: A logged in user could change a document's parent section
-  #   Given I have logged in
-  #   And the following documents exist:
-  #     | title     | body        | project    |
-  #     | Decisions | Examplehere | hello mars |
-  #   And the document "Guides" has a child document with title "Howto"
-  #   And the document "Guides" has a child document with title "PullRequest"
-  #   And I am on the "Show" page for document "Howto"
-  #   When I click the very stylish "Change section" button
-  #   Then I should see "Select new section for the document"
-  #   And I should see "Decisions" in "Modal window"
-  #   When I click "Decisions" in "Modal window"
-  #   Then I should see "You have successfully moved Howto to the Decisions section"
-  #   And I should see "Decisions" in "The Breadcrumb"
+  @javascript
+  Scenario: A logged in user could change a document's parent section
+    Given I have logged in
+    And the following documents exist:
+      | title     | content     | project    |
+      | Decisions | Examplehere | hello mars |
+    And the document "Guides" has a child document with title "Howto"
+    And the document "Guides" has a child document with title "PullRequest"
+    And I am on the "Show" page for document "Howto"
+    When I click the very stylish "Change section" button
+    Then I should see "Select new section for the document"
+    And I should see "Decisions" in "Modal window"
+    When I click "Decisions" in "Modal window"
+    Then I should see "Decisions" in "The Breadcrumb"
