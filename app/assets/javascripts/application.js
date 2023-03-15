@@ -38,7 +38,6 @@
 //= require lolex
 //= require spin
 //= require jquery.spin
-//= require trix
 
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code
