@@ -2,6 +2,8 @@
 
 require_relative 'boot'
 require 'rails'
+require 'active_storage/engine'
+require 'action_text/engine'
 
 %w(
   active_record/railtie
@@ -33,6 +35,8 @@ module WebsiteOne
     # -- all .rb files in that directory are automatically loaded.
     config.exceptions_app = routes
 
+    config.active_record.legacy_connection_handling = false
+
     config.action_mailer.delivery_method = Settings.mailer.delivery_method.to_sym
     config.action_mailer.smtp_settings = Settings.mailer.smtp_settings.to_hash
     config.action_mailer.default_url_options = { host: 'www.agileventures.org' }
@@ -52,7 +56,7 @@ module WebsiteOne
     # Precompile additional assets.
     # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
     config.assets.precompile += %w(
-      mercury_init.js 404.js projects.js events.js google-analytics.js
+      404.js projects.js events.js google-analytics.js
       disqus.js event_instances.js scrums.js moment-timezone-with-data-2012-2022.js
     )
 
