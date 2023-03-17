@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
   end
 
   def letsencrypt
-    render plain: "#{params[:id]}.#{ENV['CERTBOT_SSL_CHALLENGE']}", layout: false
+    render plain: "#{params[:id]}.#{ENV.fetch('CERTBOT_SSL_CHALLENGE', nil)}", layout: false
   end
 
   def show

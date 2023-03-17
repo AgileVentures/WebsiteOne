@@ -27,9 +27,7 @@ class DashboardController < ApplicationController
     if errorous_activities.empty?
       activities
     else
-      errorous_activities.each do |activity|
-        activity.destroy!
-      end
+      errorous_activities.each(&:destroy!)
       get_activities
     end
   end

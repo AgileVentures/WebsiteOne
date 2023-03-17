@@ -7,5 +7,5 @@ class CommitCount < ApplicationRecord
   belongs_to :project
 
   validates :user, :project, :commit_count, presence: true
-  validates_uniqueness_of :user, scope: :project
+  validates :user, uniqueness: { scope: :project }
 end
