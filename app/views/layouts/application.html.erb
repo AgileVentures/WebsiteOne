@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 
+  <!-- TODO: Take CDN out when we get this working in jsbundling-rails/esbuild/sprockets 4 -->
+  <link rel="stylesheet" href="https://cdn.skypack.dev/trix/dist/trix.css">
+  <script type="module">
+    import railsActiontext from 'https://cdn.skypack.dev/@rails/actiontext';
+    import trix from 'https://cdn.skypack.dev/trix';
+  </script>
+  
   <%= render 'layouts/head' %>
 
   <% if flash[:user_signup] %>

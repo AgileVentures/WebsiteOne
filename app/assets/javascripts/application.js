@@ -1,45 +1,3 @@
-// This is a manifest file that will be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
-//
-//= require jquery
-//= require jquery-ui
-//= require jquery_ujs
-//= require bootstrap
-//= require nprogress
-//= require bootstrap-datepicker
-//= require bootstrap-timepicker.min
-//= require typeahead.jquery
-//= require bootstrap-tokenfield.min
-//= require bootstrap-tags
-//= require_self
-//= require_directory ./global-modules
-//= require_tree .
-//= stub mercury_init
-//= stub google-analytics
-//= stub disqus
-//= require events
-//= stub event_instances
-//= stub hangout_play_on_hover
-//= require local-time
-//= require jvectormap
-//= require jvectormap/maps/world_mill
-//= require moment.min
-//= require moment-timezone-with-data-2012-2022.js
-//= require cocoon
-//= require fullcalendar
-//= require lolex
-//= require spin
-//= require jquery.spin
-
 // To deal with the headache of initializing JavaScripts with TurboLinks, I
 // wrote this custom module definer to handle initialization code
 //
@@ -51,6 +9,18 @@
 //
 // The module's init method will automatically be called on TurboLink's
 // page:load or document ready event
+import "jquery";
+import "jquery-ui";
+import "jquery-ujs";
+import "bootstrap";
+import "nprogress";
+import "bootstrap-datepicker";
+//import "bootstrap-timepicker.min";
+//import "typeahead.jquery";
+//import "bootstrap-tokenfield.min";
+//import "bootstrap-tags";
+import "lolex";
+import "trix";
 
 window.WebsiteOne =
   window.WebsiteOne ||
