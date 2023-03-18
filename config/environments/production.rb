@@ -29,10 +29,6 @@ Rails.application.configure do
   config.serve_static_files = true
   config.static_cache_control = 'public, max-age=31536000'
 
-  # Compress JavaScripts and CSS.
-  config.assets.compress = true
-  config.assets.js_compressor = Uglifier.new(harmony: true)
-
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   # config.assets.compile = true
 

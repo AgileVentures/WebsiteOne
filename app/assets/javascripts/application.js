@@ -19,6 +19,7 @@ import "bootstrap-datepicker";
 //import "typeahead.jquery";
 //import "bootstrap-tokenfield.min";
 //import "bootstrap-tags";
+import "lolex";
 import "trix";
 
 window.WebsiteOne =

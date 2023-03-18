@@ -150,6 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_193359) do
     t.string "for"
     t.integer "modifier_id"
     t.boolean "creator_attendance", default: true
+    t.index ["creator_id"], name: "index_events_on_creator_id"
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["start_datetime"], name: "index_events_on_start_datetime"
   end
