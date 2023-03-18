@@ -1,3 +1,4 @@
-//= link_tree ../images
-//= link application.js
+//= link_tree ../builds/ 
+//= link_tree ../images/
 //= link application.css
+//= link disqus.js

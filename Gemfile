@@ -14,7 +14,11 @@ gem 'activerecord', '~> 7.0.4.2'
 gem 'activestorage', '~> 7.0.4.2'
 gem 'activesupport', '~> 7.0.4.2'
 gem 'railties', '~> 7.0.4.2'
+# https://github.com/rails/jsbundling-rails/issues/40
+gem 'sprockets', '~> 4.1.1'
 gem 'sprockets-rails'
+gem 'jsbundling-rails'
+gem 'cssbundling-rails'
 
 # Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
@@ -77,7 +81,6 @@ gem 'spinjs-rails'
 gem 'stripe'
 gem 'sucker_punch'
 gem 'turbolinks'
-gem 'uglifier'
 gem 'utf8-cleaner'
 gem 'vanity'
 gem 'verbs'
@@ -124,6 +127,7 @@ group :development, :test do
   gem 'constant-redefinition'
   gem 'coveralls_reborn', require: false
   gem 'dotenv-rails'
+  gem 'foreman'
   gem 'guard'
   gem 'guard-cucumber'
   gem 'guard-livereload'

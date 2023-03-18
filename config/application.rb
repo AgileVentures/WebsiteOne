@@ -53,26 +53,11 @@ module WebsiteOne
 
     config.assets.enabled = true
 
-    # Precompile additional assets.
-    # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-    config.assets.precompile += %w(
-      404.js projects.js events.js google-analytics.js
-      disqus.js event_instances.js scrums.js moment-timezone-with-data-2012-2022.js
-    )
-
     # ensure svg assets are compiled in production
     config.assets.precompile += %w(jobs.svg lady-dev.svg real-projects.svg runners.svg standups.svg)
-
-    # config.assets.css_compressor = :sass
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
     config.autoload_paths += Dir[Rails.root.join('lib')]
 
-    # config.middleware.insert_before 0, Rack::Cors do
-    #   allow do
-    #     origins 'https://www.react.agileventures.org'
-    #     resource '*', headers: :any, methods: [:get]
-    #   end
-    # end
   end
 end
