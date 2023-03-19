@@ -21,6 +21,7 @@ import "bootstrap-datepicker";
 //import "bootstrap-tags";
 import "lolex";
 import "trix";
+import './global-modules/*.js'
 
 window.WebsiteOne =
   window.WebsiteOne ||

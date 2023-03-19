@@ -10,7 +10,8 @@
   "scripts": {
     "postinstall": "scripts/copy_javascript_dependencies.cjs",
     "build": "node esbuild.config.cjs",
-    "build:css": "pwd"
+    "build:css": "pwd",
+    "build:cssx": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   },
   "repository": {
     "type": "git",
