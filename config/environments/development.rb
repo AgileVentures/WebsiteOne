@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
-  config.assets.js_compressor = :uglifier
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -32,7 +31,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  # config.active_storage.service = :local
+  config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
