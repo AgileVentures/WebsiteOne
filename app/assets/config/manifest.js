@@ -1,5 +1,7 @@
 //= link_tree ../builds/ 
 //= link_tree ../images/
 //= link application.css
-//= link lolex.js
+//= link jquery-ui.js
+//= link jquery-ujs.js
+//= link bootstrap.js
 //= link disqus.js

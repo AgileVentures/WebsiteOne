@@ -13,12 +13,11 @@ gem 'activemodel', '~> 7.0.4.2'
 gem 'activerecord', '~> 7.0.4.2'
 gem 'activestorage', '~> 7.0.4.2'
 gem 'activesupport', '~> 7.0.4.2'
-gem 'railties', '~> 7.0.4.2'
-# https://github.com/rails/jsbundling-rails/issues/40
-gem 'sprockets', '~> 4.1.1'
-gem 'sprockets-rails'
-gem 'jsbundling-rails'
 gem 'cssbundling-rails'
+gem 'jsbundling-rails'
+gem 'railties', '~> 7.0.4.2'
+gem 'sprockets' #, '~> 4.1.1' # https://github.com/rails/jsbundling-rails/issues/40
+gem 'sprockets-rails'
 
 # Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
