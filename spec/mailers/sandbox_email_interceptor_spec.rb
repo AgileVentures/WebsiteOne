@@ -12,7 +12,7 @@ describe SandboxEmailInterceptor do
       mail = ProjectMailer.with(user: @user2, project: @project,
                                 project_creator: @user1).alert_project_creator_about_new_member.deliver_now
       SandboxEmailInterceptor.delivering_email(mail)
-      expect(ActionMailer::Base.deliveries[0].to).to include(ENV['USER_EMAIL'])
+      expect(ActionMailer::Base.deliveries[0].to).to include(ENV.fetch('USER_EMAIL', nil))
     end
   end
 end

@@ -7,7 +7,7 @@ if Rails.env.test?
   Cucumber::Core::Test::Case.class_eval do
     def feature
       string = File.read(location.file)
-      document = ::Gherkin::Parser.new.parse(string)
+      document = Gherkin::Parser.new.parse(string)
       document.feature
     end
   end

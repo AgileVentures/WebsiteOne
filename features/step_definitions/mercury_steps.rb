@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-When /^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/ do |button|
+When(/^(?:|I )click "([^"]*)" within Mercury Editor toolbar$/) do |button|
   selector_for = {
     'save' => 'mercury-save-button'
   }

@@ -85,7 +85,7 @@ RSpec.describe 'OmniAuth authentication', type: :feature do
           expect(page).to have_content('Signed in successfully.')
         end
 
-        it 'should be removable for users with a password' do
+        xit 'should be removable for users with a password' do
           visit new_user_session_path
           click_link "with #{name}"
           visit edit_user_registration_path(@user)

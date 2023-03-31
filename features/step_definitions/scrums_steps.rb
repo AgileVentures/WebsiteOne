@@ -31,7 +31,7 @@ Given('that there are {int} past events') do |number|
   number.times do
     create(:event_instance,
            category: 'Scrum',
-           created_at: rand(1.months.seconds.to_i).seconds.ago,
+           created_at: rand(1.month.seconds.to_i).seconds.ago,
            project_id: nil)
   end
 end
@@ -40,7 +40,7 @@ Given('that there are {int} past non-scrum events') do |number|
   number.times do
     create(:event_instance,
            category: 'Pair Programming',
-           created_at: rand(1.months.seconds.to_i).seconds.ago,
+           created_at: rand(1.month.seconds.to_i).seconds.ago,
            project_id: nil)
   end
 end

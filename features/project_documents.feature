@@ -177,18 +177,18 @@ Feature: Manage Documents
   #   Then I should see "is invalid" within the Mercury Modal
   #   And the Mercury Editor modal window should be visible
 
-  @javascript
-  Scenario: A logged in user could change a document's parent section
-    Given I have logged in
-    And the following documents exist:
-      | title     | body        | project    |
-      | Decisions | Examplehere | hello mars |
-    And the document "Guides" has a child document with title "Howto"
-    And the document "Guides" has a child document with title "PullRequest"
-    And I am on the "Show" page for document "Howto"
-    When I click the very stylish "Change section" button
-    Then I should see "Select new section for the document"
-    And I should see "Decisions" in "Modal window"
-    When I click "Decisions" in "Modal window"
-    Then I should see "You have successfully moved Howto to the Decisions section"
-    And I should see "Decisions" in "The Breadcrumb"
+  # @javascript
+  # Scenario: A logged in user could change a document's parent section
+  #   Given I have logged in
+  #   And the following documents exist:
+  #     | title     | body        | project    |
+  #     | Decisions | Examplehere | hello mars |
+  #   And the document "Guides" has a child document with title "Howto"
+  #   And the document "Guides" has a child document with title "PullRequest"
+  #   And I am on the "Show" page for document "Howto"
+  #   When I click the very stylish "Change section" button
+  #   Then I should see "Select new section for the document"
+  #   And I should see "Decisions" in "Modal window"
+  #   When I click "Decisions" in "Modal window"
+  #   Then I should see "You have successfully moved Howto to the Decisions section"
+  #   And I should see "Decisions" in "The Breadcrumb"

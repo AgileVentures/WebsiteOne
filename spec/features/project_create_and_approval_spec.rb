@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Project is subject to approval' do
   let!(:admin) { create(:user, admin: true) }
   let!(:user) { create(:user, admin: false) }
