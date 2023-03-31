@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
   private
 
   def get_page_id(page)
-    page.split('/').reject { |i| %w(mercury_saved mercury_update).include? i }.last
+    page.split('/').last
   end
 
   def redirect_email_blunder
