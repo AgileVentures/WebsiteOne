@@ -1,0 +1,11 @@
+//= link_tree ../builds/ 
+//= link_tree ../images/
+//= link application.css
+//= link jquery-ui.js
+//= link jquery-ujs.js
+//= link bootstrap.js
+//= link lolex.js
+//= link disqus.js
+//= link event_instances.js
+//= link scrums.js
+//= link 404.js

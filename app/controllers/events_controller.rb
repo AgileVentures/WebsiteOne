@@ -105,7 +105,8 @@ class EventsController < ApplicationController
     return unless date_and_time_present?
 
     tz = TZInfo::Timezone.get(params['start_time_tz'])
-    event_params[:start_datetime] = tz.local_to_utc(DateTime.parse("#{params['start_date']} #{params['start_time']}"))
+    event_params[:start_datetime] = tz.local_to_utc(DateTime.parse(event_params[:start_datetime]))
+    #local_to_utc(params[:start_datetime]) # DateTime.parse("#{params['start_date']} #{params['start_time']}"))
   end
 
   def check_days_of_week(event_params)
