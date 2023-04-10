@@ -13,12 +13,11 @@ Feature: Editing an event with a start date in the future
     And I check "Monday"
     And I check "Thursday"
     Given I fill in event field:
-      | name        | value         |
-      | Name        | Daily Standup |
-      | Start Date  | 2014-02-04    |
-      | Start Time  | 09:00         |
-      | Description | we stand up   |
-      | End Date    | 2014-03-04    |
+      | name        | value             |
+      | Name        | Daily Standup     |
+      | Start Datetime  | 2014-02-04 09:00  |
+      | Description | we stand up       |
+      | End Date    | 2014-03-04        |
     Then the event is set to end sometime
     And I click on the "repeat_ends_on" div
     And I click the "Save" button

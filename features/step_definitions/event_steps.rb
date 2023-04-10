@@ -220,7 +220,8 @@ end
 # reliable way of setting Capybara timezone that will work on CI
 def stub_user_browser_to_specific_timezone
   visit edit_event_path(@event)
-  page.execute_script("timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
+  reloadModule('timeZoneUtilites');
+  page.execute_script("WebsiteOne.timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
   page.execute_script('editEventForm.handleUserTimeZone();')
   @form_tz = find('#start_time_tz').value
   @tz = TZInfo::Timezone.get(@zone)
@@ -286,8 +287,8 @@ end
 When(/^they view the event "([^"]*)"$/) do |event_name|
   @event = Event.find_by(name: event_name)
   visit event_path(@event)
-  page.execute_script("timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
-  page.execute_script('showEvent.showUserTimeZone();')
+  page.execute_script("WebsiteOne.timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script('WebsiteOne.showEvent.showUserTimeZone();')
 end
 
 Given(/^an event "([^"]*)"$/) do |event_name|
@@ -488,8 +489,7 @@ end
 Given('I create an event without a project association') do
   fill_in 'Name', with: 'Whatever'
   fill_in 'Description', with: 'something else'
-  fill_in 'Start Date', with: '2014-02-04'
-  fill_in 'Start Time', with: '09:00'
+  fill_in 'Start Datetime', with: '2014-02-04 09:00'
   click_button 'Save'
   expect(page).to have_content('Event Created')
   created_event_name = Event.find_by(name: 'Whatever').name.downcase

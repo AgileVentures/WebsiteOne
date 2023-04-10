@@ -29,15 +29,13 @@
       <%= awesome_text_area f, :description, rows: 10 %>
 
       <div class="form-group event_date">
-        <%= label_tag 'start_date', 'Start Date', class: 'control-label' %>
-        <%= text_field_tag 'start_date', format_datepicker(start_date), style: 'width:auto;', class: 'form-control datepicker' %>
+        <%= label_tag 'start_datetime', 'Start Datetime', class: 'control-label' %>
+        <%= datetime_local_field_tag :start_datetime, style: 'width:auto;', class: 'form-control' %>
         <%= hidden_field_tag 'next_date', @event.next_event_occurrence_with_time() ? format_datepicker(@event.next_event_occurrence_with_time()[:time]) : format_datepicker(DateTime.now) %>
       </div>
 
       <div class="form-group event_time">
-        <%= label_tag 'start_time', 'Start Time', class: 'control-label' %>
-        <%= text_field_tag 'start_time', format_timepicker(start_time), style: 'width:auto;', class: 'form-control timepicker' %>
-        <%= select_tag 'start_time_tz', options_from_collection_for_select( TZInfo::Timezone.all, 'identifier', 'identifier', 'UTC'), { class: 'form-control', style: 'width:auto;' } %>
+         <%= select_tag 'start_time_tz', options_from_collection_for_select( TZInfo::Timezone.all, 'identifier', 'identifier', 'UTC'), { class: 'form-control', style: 'width:auto;' } %>
       </div>
 
       <div class="form-group">
@@ -58,7 +56,7 @@
 
       <div class="form-group event_option repeat_ends_on">
         <%= label_tag 'repeat_ends_on', 'End Date', class: 'control-label', id: 'repeat_ends_on_label' %>
-        <%= text_field_tag 'repeat_ends_on', format_datepicker(@event.repeat_ends_on), style: 'width:auto;', class: 'form-control datepicker' %>
+        <%= date_select :repeat_ends_on, style: 'width:auto;', class: 'form-control' %>
       </div>
 
       <div class="form-group">

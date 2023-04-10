@@ -1,28 +1,18 @@
-// To deal with the headache of initializing JavaScripts with TurboLinks, I
-// wrote this custom module definer to handle initialization code
-//
-// modules can be defined using the following snippet:
-//
-// window.WebsiteOne.define('<Module Name>', function() {
-//     return <Module Object>;
-// });
-//
-// The module's init method will automatically be called on TurboLink's
-// page:load or document ready event
 import "./jq"
 import "./jquery-ui"
 import * as WebsiteOne from './websiteone';
 import "./bootstrap";
-import "./bootstrap-datepicker";
-import "./bootstrap-timepicker.min";
 // import "typeahead.jquery";
 // import "./bootstrap-tokenfield.min";
 import "./bootstrap-tags";
-import "lolex";
+import "moment";
+import "moment-timezone";
 import "fullcalendar";
 import "trix";
 import './global-modules/*.js';
-import './event_datepicker';
+import './projects';
+import './events/*.js';
+import './events'
 import './event_instances';
 
 $(function() {

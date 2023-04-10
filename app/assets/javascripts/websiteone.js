@@ -1,4 +1,14 @@
-
+// To deal with the headache of initializing JavaScripts with TurboLinks, I
+// wrote this custom module definer to handle initialization code
+//
+// modules can be defined using the following snippet:
+//
+// window.WebsiteOne.define('<Module Name>', function() {
+//     return <Module Object>;
+// });
+//
+// The module's init method will automatically be called on TurboLink's
+// page:load or document ready event
 window.WebsiteOne =
   window.WebsiteOne ||
   (function() {
