@@ -30,7 +30,7 @@ Feature: Provide a ClientMeeting Category
       | name        | value            |
       | Name        | Whatever         |
       | Description | something else   |
-      | Start Datetime  | 2014-02-04 09:00 |
+      | Start Datetime  | 2014-02-04T09:00:00 |
     And I select "EdX" from the event project dropdown
     And I select "ClientMeeting" from the event category dropdown
     And I should not see "End Date"

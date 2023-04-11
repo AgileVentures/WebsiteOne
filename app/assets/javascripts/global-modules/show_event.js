@@ -1,7 +1,6 @@
 WebsiteOne.define('showEvent', function() {
   function showEvent () {
     this.showUserTimeZone = function () {
-        reloadModule('timeZoneUtilites');
         if ($("#local_time").length) {
             $('#local_time').append("&nbsp;" + WebsiteOne.timeZoneUtilities.detectUserTimeZone());
         }

@@ -6,6 +6,5 @@
 //= link bootstrap.js
 //= link lolex.js
 //= link disqus.js
-//= link event_instances.js
 //= link scrums.js
 //= link 404.js

@@ -1,7 +1,7 @@
 WebsiteOne.define('timeZoneUtilities', function() {
     function timeZoneUtilities () {
     this.detectUserTimeZone = function () {
-        return Intl.DateTimeFormat().resolvedOptions().timeZone; //moment.tz.guess();
+        return moment.tz.guess();
     }
     this.init = function() {
     }

@@ -13,7 +13,9 @@ import './global-modules/*.js';
 import './projects';
 import './events/*.js';
 import './events'
-import './event_instances';
+import LocalTime from "local-time"
+
+LocalTime.start()
 
 $(function() {
   if (!window.WebsiteOne._registered) {

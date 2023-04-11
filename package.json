@@ -36,6 +36,7 @@
     "jasmine-browser-runner": "^0.10.0",
     "jasmine-core": "^3.99.0",
     "jquery": "^3.6.4",
+    "local-time": "^2.1.0",
     "lolex": "^6.0.0",
     "moment": "^2.13.0",
     "moment-timezone": "0.5.4",

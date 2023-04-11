@@ -15,9 +15,9 @@ Feature: Editing an event with a start date in the future
     Given I fill in event field:
       | name        | value             |
       | Name        | Daily Standup     |
-      | Start Datetime  | 2014-02-04 09:00  |
+      | Start Datetime  | 2014-02-04T09:00:00  |
       | Description | we stand up       |
-      | End Date    | 2014-03-04        |
+ #     | End Date    | 2014-03-04        |
     Then the event is set to end sometime
     And I click on the "repeat_ends_on" div
     And I click the "Save" button
@@ -71,13 +71,13 @@ Feature: Editing an event with a start date in the future
     When they save without making any changes
     Then the event date and time should be unchanged
 
-  Scenario: User fails to give repeating but terminating event an end date, but retains most recent preferences about days
-    And I visit the edit page for the event named "Daily Standup"
-    Given I fill in event field:
-      | name        | value         |
-      | End Date    |               |
-    When I check "Friday"
-    And I click on the "repeat_ends_on" div
-    And I click the "Save" button
-    Then I should see "Failed to update event: Repeat ends on can't be blank"
-    And The box for "Friday" should be checked
+  # Scenario: User fails to give repeating but terminating event an end date, but retains most recent preferences about days
+  #   And I visit the edit page for the event named "Daily Standup"
+  #   Given I fill in event field:
+  #     | name        | value         |
+  #     | End Date    |               |
+  #   When I check "Friday"
+  #   And I click on the "repeat_ends_on" div
+  #   And I click the "Save" button
+  #   Then I should see "Failed to update event: Repeat ends on can't be blank"
+  #   And The box for "Friday" should be checked

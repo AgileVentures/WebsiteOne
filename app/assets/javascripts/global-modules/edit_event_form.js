@@ -8,17 +8,16 @@ WebsiteOne.define('editEventForm', function () {
         if ($("#start_time_tz").length) {
             $('#start_time_tz').setToUserTimeZone(this.timezone());
         }
-        if ($('#start_time').length && $('#start_date').length) {
-            this.updateDateAndTimeToUserTimeZone($('#start_date'), $('#start_time'));
+        if ($('#start_datetime').length) {
+            this.updateDateAndTimeToUserTimeZone($('#start_datetime'));
         }
     }
-    this.updateDateAndTimeToUserTimeZone = function (start_date, start_time) {
-        var normalized_start_date_time = moment.utc(start_date.val() + " " + start_time.val(), "YYYY-MM-DD hh:mm a");
+    this.updateDateAndTimeToUserTimeZone = function (start_datetime) {
+        var normalized_start_date_time = moment.utc(start_datetime.val(), "YYYY-MM-DDThh:mm");
         var local_start_date_time = normalized_start_date_time.tz(this.timezone());
-        start_date.val(local_start_date_time.format("YYYY-MM-DD"));
-        start_time.val(local_start_date_time.format("hh:mm A"));
+        start_datetime.val(local_start_date_time.format("YYYY-MM-DDTHH:mm"));
         if (normalized_start_date_time.toDate().getUTCDate() !== normalized_start_date_time.toDate().getDate())
-            this.localizeDaysOfWeek(normalized_start_date_time._offset)
+            this.localizeDaysOfWeek(normalized_start_date_time._offset);
     }
     this.localizeDaysOfWeek = function (offset) {
         var daysOfWeek = document.querySelectorAll('#daysOfWeek>label>input')
@@ -37,7 +36,7 @@ WebsiteOne.define('editEventForm', function () {
         }
     }
     this.init = function() {
-        this.handleUserTimeZone();
+        //this.handleUserTimeZone();
     }
     };
     return new editEventForm();
