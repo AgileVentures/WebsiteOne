@@ -26,12 +26,14 @@ plugins:
     enabled: true
     channel: rubocop-1-39-0
 exclude_patterns:
-- config/
-- db/
-- features/
-- script/
-- spec/
-- vendor/
-- public/
-- app/assets/javascripts/jquery_ujs.js
-- app/assets/javascripts/jquery-ui.js
+- "config/"
+- "db/"
+- "features/"
+- "script/"
+- "spec/"
+- "vendor/"
+- "public/"
+- "app/assets/javascripts/bootstrap.js"
+- "app/assets/javascripts/bootstrap-tags.js"
+- "app/assets/javascripts/jquery_ujs.js"
+- "app/assets/javascripts/jquery-ui.js"

@@ -220,8 +220,9 @@ end
 # reliable way of setting Capybara timezone that will work on CI
 def stub_user_browser_to_specific_timezone
   visit edit_event_path(@event)
-  page.execute_script("timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
-  page.execute_script('editEventForm.handleUserTimeZone();')
+  #reloadModule('timeZoneUtilites');
+  page.execute_script("WebsiteOne.timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script('WebsiteOne.editEventForm.handleUserTimeZone();')
   @form_tz = find('#start_time_tz').value
   @tz = TZInfo::Timezone.get(@zone)
   expect(@form_tz).to eq(@zone)
@@ -230,8 +231,7 @@ end
 And(/^edits an event with start date in standard time$/) do
   @event = Event.find_by(name: 'Daily Standup')
   stub_user_browser_to_specific_timezone
-  @start_date = find('#start_date').value
-  @start_time = find('#start_time').value
+  @start_datetime = find('#start_datetime').value
 end
 
 When(/^they save without making any changes$/) do
@@ -241,8 +241,7 @@ end
 Then(/^the event date and time should be unchanged$/) do
   expect(current_path).to eq event_path(@event)
   stub_user_browser_to_specific_timezone
-  expect(find('#start_date').value).to match @start_date
-  expect(find('#start_time').value).to match @start_time
+  expect(find('#start_datetime').value).to match @start_datetime
 end
 
 Given(/^it is now past the end date for the event$/) do
@@ -252,8 +251,7 @@ end
 
 And(/^they edit and save the event without making any changes$/) do
   visit edit_event_path(@event)
-  @start_date = find('#start_date').value
-  @start_time = find('#start_time').value
+  @start_datetime = find('#start_datetime').value
   click_link_or_button 'Save'
 end
 
@@ -265,10 +263,8 @@ end
 
 Then(/^the user should see the date and time adjusted for their timezone in the edit form$/) do
   stub_user_browser_to_specific_timezone
-  @start_date = find('#start_date').value
-  @start_time = find('#start_time').value
-  expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime).strftime('%Y-%m-%d')
-  expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime).strftime('%I:%M %p')
+  @start_datetime = find('#start_datetime').value
+  expect(@start_datetime).to eq @tz.utc_to_local(@event.start_datetime).strftime('%Y-%m-%dT%H:%M')
 end
 
 Given(/^an existing event$/) do
@@ -277,17 +273,15 @@ end
 
 Then(/^the user should see the date and time adjusted for their timezone and updated by (\d+) hours in the edit form$/) do |hours|
   stub_user_browser_to_specific_timezone
-  @start_date = find('#start_date').value
-  @start_time = find('#start_time').value
-  expect(@start_time).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_time.strftime('%I:%M %p')
-  expect(@start_date).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_date.strftime('%Y-%m-%d')
+  @start_datetime = find('#start_datetime').value
+  expect(@start_datetime).to eq @tz.utc_to_local(@event.start_datetime - hours.to_i.hours).to_time.strftime('%Y-%m-%dT%H:%M')
 end
 
 When(/^they view the event "([^"]*)"$/) do |event_name|
   @event = Event.find_by(name: event_name)
   visit event_path(@event)
-  page.execute_script("timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
-  page.execute_script('showEvent.showUserTimeZone();')
+  page.execute_script("WebsiteOne.timeZoneUtilities.detectUserTimeZone = function(){return '#{@zone}'};")
+  page.execute_script('WebsiteOne.showEvent.showUserTimeZone();')
 end
 
 Given(/^an event "([^"]*)"$/) do |event_name|
@@ -488,8 +482,7 @@ end
 Given('I create an event without a project association') do
   fill_in 'Name', with: 'Whatever'
   fill_in 'Description', with: 'something else'
-  fill_in 'Start Date', with: '2014-02-04'
-  fill_in 'Start Time', with: '09:00'
+  fill_in 'Start Datetime', with: '2014-02-04 09:00'
   click_button 'Save'
   expect(page).to have_content('Event Created')
   created_event_name = Event.find_by(name: 'Whatever').name.downcase
