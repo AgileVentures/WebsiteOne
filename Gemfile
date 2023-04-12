@@ -16,7 +16,7 @@ gem 'activesupport', '~> 7.0.4.3'
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'railties', '~> 7.0.4.3'
-gem 'sprockets' #, '~> 4.1.1' # https://github.com/rails/jsbundling-rails/issues/40
+gem 'sprockets'
 gem 'sprockets-rails'
 
 # Gems used in production
@@ -44,8 +44,7 @@ gem 'bootsnap', '~> 1.9'
 gem 'icalendar'
 gem 'jbuilder'
 gem 'jquery-rails'
-# Replace turbolinks: https://www.honeybadger.io/blog/hb-turbolinks-to-turbo/
-gem 'jquery-turbolinks', '2.1.0'
+gem 'jquery-turbolinks', '2.1.0' # Replace turbolinks: https://www.honeybadger.io/blog/hb-turbolinks-to-turbo/
 gem 'jvectormap-rails', '~> 2.0'
 gem 'jwt'
 gem 'kaminari'
