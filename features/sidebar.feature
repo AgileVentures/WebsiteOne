@@ -17,7 +17,7 @@ Feature: Sidebar navigation
       | hello pluto | greetings plutonians | active  | 4  | User 2 |
 
     And the following documents exist:
-      | title         | body             | project_id |
+      | title         | content          | project_id |
       | Howto         | How to start     | 1          |
       | Documentation | My documentation | 1          |
       | Another doc   | My content       | 2          |
