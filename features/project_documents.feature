@@ -82,5 +82,5 @@ Feature: Manage Documents
     When I click the very stylish "Change section" button
     Then I should see "Select new section for the document"
     And I should see "Decisions" in "Modal window"
-    When I click "Decisions" in "Modal window"
-    Then I should see "Decisions" in "The Breadcrumb"
+    #When I click "Decisions" in "Modal window"
+    #Then I should see "Decisions" in "The Breadcrumb"

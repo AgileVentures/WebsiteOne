@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/AgileVentures/WebsiteOne#readme",
   "dependencies": {
+    "@nathanvda/cocoon": "^1.2.14",
     "@popperjs/core": "^2.11.6",
     "@rails/actiontext": "^7.0.4-3",
     "copyfiles": "^1.0.0",

@@ -2,17 +2,18 @@ import "./jq"
 import "./jquery-ui"
 import * as WebsiteOne from './websiteone';
 import "./bootstrap";
-// import "typeahead.jquery";
-// import "./bootstrap-tokenfield.min";
+
 import "./bootstrap-tags";
 import "moment";
 import "moment-timezone";
 import "fullcalendar";
+import "@nathanvda/cocoon";
 import "trix";
 import './global-modules/*.js';
+import './documents';
 import './projects';
-import './events/*.js';
-import './events'
+import './events';
+import './users';
 import LocalTime from "local-time"
 
 LocalTime.start()
