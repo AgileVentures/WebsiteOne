@@ -2,7 +2,6 @@ import "./jq"
 import "./jquery-ui"
 import * as WebsiteOne from './websiteone';
 import "./bootstrap";
-
 import "./bootstrap-tags";
 import "moment";
 import "moment-timezone";
