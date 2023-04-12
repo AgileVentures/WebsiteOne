@@ -27,11 +27,11 @@
                   <i class="fa fa-user fa-custom-accounts"></i>
                   My account</li>
               </a>
-              <a href="<%= destroy_user_session_path %>" data-method="delete" rel="nofollow">
+              <%= button_to destroy_user_session_path, method: :delete do %>
                 <li>
-                  <i class="fa fa-sign-out fa-custom-accounts"></i>
-                  Log out</li>
-              </a>
+                  <i class="fa fa-sign-out fa-custom-accounts">Log out</i>
+                </li>
+<             <% end %>
             </ul>
           </div>
         <% end %>
