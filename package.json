@@ -6,8 +6,12 @@
   "directories": {
     "doc": "docs"
   },
+  "type": "module",
   "scripts": {
-    "postinstall": "scripts/copy_javascript_dependencies.js"
+    "postinstall": "scripts/copy_javascript_dependencies.cjs",
+    "build": "node esbuild.config.cjs",
+    "build:css": "pwd",
+    "build:cssx": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   },
   "repository": {
     "type": "git",
@@ -20,18 +24,26 @@
   },
   "homepage": "https://github.com/AgileVentures/WebsiteOne#readme",
   "dependencies": {
-    "bootstrap-datepicker": "^1.4.0",
-    "bootstrap-timepicker": "^0.5.2",
-    "bower": "^1.8.12",
+    "@nathanvda/cocoon": "^1.2.14",
+    "@popperjs/core": "^2.11.6",
+    "@rails/actiontext": "^7.0.4-3",
     "copyfiles": "^1.0.0",
     "corejs-typeahead": "^1.2.1",
+    "esbuild": "^0.17.11",
+    "esbuild-plugin-import-glob": "^0.1.1",
+    "esbuild-sass-plugin": "^2.6.0",
+    "fullcalendar": "^3.6.2",
     "geckodriver": "^3.2.0",
     "jasmine-browser-runner": "^0.10.0",
     "jasmine-core": "^3.99.0",
+    "jquery": "^3.6.4",
+    "local-time": "^2.1.0",
+    "lolex": "^6.0.0",
     "moment": "^2.13.0",
     "moment-timezone": "0.5.4",
-    "nprogress": "^0.1.4",
     "npx": "^10.2.2",
+    "sass": "^1.59.3",
+    "trix": "^1.3.1",
     "yarn": "^1.22.19"
   }
 }

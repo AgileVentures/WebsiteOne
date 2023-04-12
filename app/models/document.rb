@@ -12,6 +12,8 @@ class Document < ApplicationRecord
 
   delegate :title, to: :project, prefix: true
 
+  has_rich_text :content
+
   # Bryan: Used to generate paths, used only in testing.
   # Might want to switch to rake generated paths in the future
   def url_for_me(action)

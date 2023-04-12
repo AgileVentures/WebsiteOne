@@ -27,11 +27,10 @@ Feature: Provide a ClientMeeting Category
     Given I am on Events index page
     When I click "New Event"
     And I fill in event field:
-      | name        | value          |
-      | Name        | Whatever       |
-      | Description | something else |
-      | Start Date  | 2014-02-04     |
-      | Start Time  | 09:00          |
+      | name        | value            |
+      | Name        | Whatever         |
+      | Description | something else   |
+      | Start Datetime  | 2014-02-04T09:00:00 |
     And I select "EdX" from the event project dropdown
     And I select "ClientMeeting" from the event category dropdown
     And I should not see "End Date"
