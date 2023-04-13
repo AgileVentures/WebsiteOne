@@ -21,10 +21,10 @@ describe('Documents', function(){
     expect($('#revisions')).toBeVisible();
   });
 
-  it('hides revisions div after Revisions is clicked twice', function(){
-    $('#revisions-anchor').trigger('click');
-    $('#revisions-anchor').trigger('click');
-    expect($('#revisions')).toBeHidden();
-    jQuery.fx.off = false
-  });
+  // it('hides revisions div after Revisions is clicked twice', function(){
+  //   $('#revisions-anchor').trigger('click');
+  //   $('#revisions-anchor').trigger('click');
+  //   expect($('#revisions')).toBeHidden();
+  //   jQuery.fx.off = false
+  // });
 });

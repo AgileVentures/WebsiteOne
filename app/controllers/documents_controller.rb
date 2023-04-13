@@ -35,6 +35,8 @@ class DocumentsController < ApplicationController
     @document = Document.new
   end
 
+  def edit; end
+
   # POST /documents
   # POST /documents.json
   def create
@@ -54,6 +56,15 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def update
+    if @document.update(document_params)
+      redirect_to project_document_path(@project, @document), notice: 'Document was successfully updated.'
+    else
+      flash.now[:alert] = 'Document was not updated.'
+      render 'edit'
+    end
+  end
+
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
@@ -63,20 +74,6 @@ class DocumentsController < ApplicationController
       format.html { redirect_to project_documents_path(id), notice: 'Document was successfully deleted.' }
       format.json { head :no_content }
     end
-  end
-
-  def mercury_update
-    @document = Document.friendly.find(params[:document_id])
-    if @document.update(title: params[:content][:document_title][:value],
-                        body: params[:content][:document_body][:value])
-      @document.create_activity :update, owner: current_user
-      render html: ''
-    end
-  end
-
-  def mercury_saved
-    redirect_to project_document_path(@project, id: params[:document_id]),
-                notice: 'The document has been successfully updated.'
   end
 
   private
@@ -106,6 +103,6 @@ class DocumentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def document_params
-    params.require(:document).permit(:title, :body, :parent_id, :user_id)
+    params.require(:document).permit(:title, :content, :parent_id, :user_id)
   end
 end

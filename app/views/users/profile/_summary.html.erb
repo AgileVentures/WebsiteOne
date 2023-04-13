@@ -37,9 +37,12 @@
 
     <% if presenter.display_hire_me?(current_user) %>
         <li>
-          <%= link_to 'Hire me', user_path(presenter.user),
-                      {remote: true, class: 'user-profile-btn',
-                       data: {toggle: 'modal', target: '#modal-window'}} %>
+          <%= link_to user_path(presenter.user), remote: true,
+                       class: 'user-profile-btn',
+                       type: 'button',
+                       data: {toggle: 'modal', target: '#modal-window'} do %>
+            <i class="fa">Hire me</i>
+          <% end %>
         </li>
     <% end %>
 
