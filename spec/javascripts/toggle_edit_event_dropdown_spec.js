@@ -11,6 +11,7 @@ describe('Edit event details dropdown toggle', function() {
                   '</ul>' +
                 '</div>' +
                 '<div class="col-lg-12 collapse" id="edit-link-form" aria-expanded="false"></div>');
+    reloadModule('showEvent');
     WebsiteOne.showEvent.toggleDropdown();
   });
 

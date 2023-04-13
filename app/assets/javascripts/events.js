@@ -26,7 +26,7 @@ var events = {
 };
 
 $(document).ready(function () {
-    events.makeRowBodyClickable();
+    // events.makeRowBodyClickable();
     events.addToCalendar();
     WebsiteOne.editEventForm.handleUserTimeZone();
 
