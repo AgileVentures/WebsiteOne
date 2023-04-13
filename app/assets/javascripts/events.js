@@ -26,10 +26,17 @@ var events = {
 };
 
 $(document).ready(function () {
-    events.makeRowBodyClickable();
+    // events.makeRowBodyClickable();
     events.addToCalendar();
-    editEventForm.handleUserTimeZone();
-    showEvent.showUserTimeZone();
-    showEvent.toggleDropdown();
-    showEvent.toggleAttendance();
+    WebsiteOne.editEventForm.handleUserTimeZone();
+
+    if ($("#local_time").length) {
+        $('#local_time').append("&nbsp;" + WebsiteOne.timeZoneUtilities.detectUserTimeZone());
+    }
+    $(".dropdown-menu a").click(function() {
+        $(this).closest(".dropdown").find("[data-toggle='dropdown']").dropdown("toggle");
+    });
+    $("#attendance_checkbox").change( function (){
+        $(".form-class").submit();
+    });
 });

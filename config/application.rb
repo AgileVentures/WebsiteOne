@@ -2,6 +2,8 @@
 
 require_relative 'boot'
 require 'rails'
+require 'active_storage/engine'
+require 'action_text/engine'
 
 %w(
   active_record/railtie
@@ -33,6 +35,8 @@ module WebsiteOne
     # -- all .rb files in that directory are automatically loaded.
     config.exceptions_app = routes
 
+    config.active_record.legacy_connection_handling = false
+
     config.action_mailer.delivery_method = Settings.mailer.delivery_method.to_sym
     config.action_mailer.smtp_settings = Settings.mailer.smtp_settings.to_hash
     config.action_mailer.default_url_options = { host: 'www.agileventures.org' }
@@ -49,26 +53,11 @@ module WebsiteOne
 
     config.assets.enabled = true
 
-    # Precompile additional assets.
-    # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-    config.assets.precompile += %w(
-      mercury_init.js 404.js projects.js events.js google-analytics.js
-      disqus.js event_instances.js scrums.js moment-timezone-with-data-2012-2022.js
-    )
-
     # ensure svg assets are compiled in production
     config.assets.precompile += %w(jobs.svg lady-dev.svg real-projects.svg runners.svg standups.svg)
-
-    # config.assets.css_compressor = :sass
 
     config.autoload_paths += Dir[Rails.root.join('app', '**/')]
     config.autoload_paths += Dir[Rails.root.join('lib')]
 
-    # config.middleware.insert_before 0, Rack::Cors do
-    #   allow do
-    #     origins 'https://www.react.agileventures.org'
-    #     resource '*', headers: :any, methods: [:get]
-    #   end
-    # end
   end
 end

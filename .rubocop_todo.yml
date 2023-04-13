@@ -118,6 +118,7 @@ Metrics/AbcSize:
     - 'app/jobs/github_commits_job.rb'
     - 'app/models/event.rb'
     - 'db/migrate/20140725131327_event_combine_date_and_time_fields.rb'
+    - 'db/migrate/20230314192607_create_active_storage_tables.active_storage.rb'
     - 'db/migrate/20180828145628_vanity_migration.rb'
     - 'features/step_definitions/basic_steps.rb'
     - 'features/step_definitions/email_steps.rb'
@@ -223,6 +224,7 @@ Metrics/MethodLength:
     - 'db/migrate/20140914202645_create_activities.rb'
     - 'db/migrate/20161103011445_create_friendly_id_slugs.rb'
     - 'db/migrate/20180828145628_vanity_migration.rb'
+    - 'db/migrate/20230314192607_create_active_storage_tables.active_storage.rb'
     - 'features/step_definitions/basic_steps.rb'
     - 'features/step_definitions/contained_search_steps.rb'
     - 'features/step_definitions/user_steps.rb'
@@ -294,7 +296,6 @@ Naming/PredicateName:
     - 'app/models/user.rb'
     - 'app/presenters/users/user_presenter.rb'
     - 'features/support/helpers.rb'
-    - 'lib/mercury/authentication.rb'
     - 'lib/validators/image_url_validator.rb'
     - 'lib/validators/pivotal_tracker_url_validator.rb'
 
@@ -371,6 +372,8 @@ Rails/CreateTableWithTimestamps:
     - 'db/migrate/20180813125658_create_languages.rb'
     - 'db/migrate/20180828145628_vanity_migration.rb'
     - 'db/migrate/20181220155404_create_slack_channel.rb'
+    - 'db/migrate/20230314192607_create_active_storage_tables.active_storage.rb'
+
 
 # Offense count: 5
 # Configuration parameters: EnforcedStyle, AllowToTime.
