@@ -2,7 +2,6 @@
 
 require 'active_support/core_ext/integer/time'
 Rails.application.configure do
-  config.assets.js_compressor = :uglifier
   # Settings specified here will take precedence over those in config/application.rb.
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
@@ -26,7 +25,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Store uploaded files on the local file system in a temporary directory
-  # config.active_storage.service = :test
+  config.active_storage.service = :test
   config.action_mailer.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates.

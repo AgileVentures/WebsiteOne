@@ -5,8 +5,6 @@ def loaderio_token
 end
 
 Rails.application.routes.draw do
-  mount Mercury::Engine => '/'
-
   root 'visitors#index'
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
@@ -47,19 +45,13 @@ Rails.application.routes.draw do
 
   resources :projects, except: [:destroy], format: false do
     member do
-      put :mercury_update
-      get :mercury_saved
       get :follow
       get :unfollow
       post :activate, action: :update, defaults: { command: 'activate' }
       post :deactivate, action: :update, defaults: { command: 'deactivate' }
     end
 
-    resources :documents, except: %i(edit update), format: false do
-      put :mercury_update
-      get :mercury_saved
-    end
-
+    resources :documents
     resources :events, only: [:index]
   end
   get :pending_projects, controller: :projects, action: :index, defaults: { status: 'pending' }
@@ -93,8 +85,6 @@ Rails.application.routes.draw do
   post 'mail_hire_me_form', to: 'users#hire_me', format: false
   get 'scrums', to: 'scrums#index', as: 'scrums', format: false
 
-  put '*id/mercury_update', to: 'static_pages#mercury_update', as: 'static_page_mercury_update', format: false
-  get '*id/mercury_saved', to: 'static_pages#mercury_saved', as: 'static_page_mercury_saved', format: false
   get 'sections', to: 'documents#get_doc_categories', as: 'project_document_sections', format: false
   put 'update_document_parent_id/:project_id/:id', to: 'documents#update_parent_id', as: 'update_document_parent_id',
                                                    format: false
