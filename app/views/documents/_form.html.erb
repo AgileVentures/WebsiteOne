@@ -1,5 +1,4 @@
 <div class='row'>
-  <div class='col-sm-6'>
     <% if @document.errors.any? %>
       <div id="error_explanation" style="color: red;">
         <p><%= pluralize(@document.errors.count, "error") %> prevented this document from being saved:</p>
@@ -11,18 +10,15 @@
       </div>
     <% end %>
     <%= form_for [@project, @document], :html => { :class => 'form-vertical', style: 'padding-left: 0;' } do |f| %>
-
       <%= f.hidden_field :parent_id, :value => params[:parent_id] %>
-
-
       <div class='form-group'>
         <%= f.label :title %>
         <%= f.text_field :title, :class => 'form-control', placeholder: 'Title' %>
       </div>
-      <!--div class='form-group'>
-          <%= f.label :body %>
-          <%= f.text_area :body, :class => 'form-control',  'rows' => 10, placeholder: 'Document body'%>
-        </div-->
+      <div class='form-group'>
+        <%= f.label :content %>
+        <%= f.rich_text_area :content %>
+      </div>
       <div class='form-group'>
         <%= f.hidden_field :project_id, value: params[:project_id] %>
       </div>
@@ -33,5 +29,4 @@
         <%= link_to 'Back', project_path(@project), type: 'button', class: 'btn btn-default' %>
       </div>
     <% end %>
-  </div>
 </div>

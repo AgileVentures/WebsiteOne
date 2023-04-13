@@ -52,7 +52,8 @@ describe('eventDatePicker', function(){
     </div>
     `
     setFixtures(html);
-    eventDatepicker.init();
+    reloadModule('eventDatepicker');
+    WebsiteOne.eventDatepicker.init();
   });
 
   var set_event_repeats_to_weekly = function(){

@@ -153,7 +153,7 @@ header#main_header {
     margin: 0;
     padding: 0;
 
-    li {
+    li form.button_to>li {
       @include css-transition(background-color .3s ease);
       padding: 15px;
 

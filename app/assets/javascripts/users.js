@@ -78,7 +78,14 @@ WebsiteOne.define('Users', function () {
         });
 
         var params = "&infinite=true"
-        infiniteScroll(params);
+        //infiniteScroll(params);
+        $(window).scroll(function() {
+            var url = $('.pagination a[rel="next"]').attr('href');
+            if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 450) {
+              $('.pagination').text("Please Wait...");
+              return $.getScript(url + params);
+            }
+          });
 
         // cuprite testing fails with tooltips on
         // enableBootstrapTooltipsOnNonTouchDevices();
