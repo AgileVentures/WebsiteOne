@@ -30,15 +30,14 @@ WebsiteOne.define('Projects', function () {
 });
 
 function ensure_numbering(element, field_label_class, label_text) {
-
-  if (element.size() > 1) {
-    for (var i = 1; i < element.size(); i++) {
+  if (element.length > 1) {
+    for (var i = 1; i < element.length; i++) {
       $(element[i]).find('.' + field_label_class).html(label_text + ' (' + (i + 1) + ')')
     }
   }
 }
 
-$(document).on('ready', function () {
+$(document).ready(function () {
   WebsiteOne.Projects.ensure_github_url_numbering()
   WebsiteOne.Projects.ensure_issue_tracker_numbering()
 
@@ -50,7 +49,7 @@ $(document).on('ready', function () {
   });
 
   var params = "&infinite=true"
-  infiniteScroll(params);
+  //infiniteScroll(params);
 });
 
 var ProjectListFilter = {

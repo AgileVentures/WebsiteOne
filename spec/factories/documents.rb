@@ -6,6 +6,7 @@ FactoryBot.define do
   factory :document do
     sequence(:title) { |n| "Title #{n}" }
     sequence(:body) { |n| "MyText #{n}" }
+    sequence(:content) { |n| "MyContent #{n}" }
     slug { title.parameterize }
     versions { [FactoryBot.build(:version)] }
     project
