@@ -22,9 +22,11 @@
         <div class="checkbox">
           <%= f.label :receive_mailings, "#{f.check_box(:receive_mailings)} Receive site emails".html_safe %>
         </div>
+        <!-- Fix below, which causes update to fail: 
         <% supported_third_parties.each do |provider| %>
             <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
         <% end %>
+        -->
         <%= link_to 'Deactivate Account', '#',
                     data: {toggle: 'modal',
                            target: '#myDestroyModal'},
