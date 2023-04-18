@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Mailer < ActionMailer::Base
-  default from: 'info@agileventures.org', reply_to: 'info@agileventures.org', cc: 'support@agileventures.org'
+  default from: 'matt@agileventures.org', reply_to: 'matt@agileventures.org', cc: 'support@agileventures.org'
 
   def send_premium_payment_complete(plan, email)
     @plan = plan
