@@ -40,7 +40,7 @@ Feature: Events
     Given the event "Whatever"
     Then I should be on the event "Show" page for "Whatever"
     And the event named "Whatever" is associated with "EdX"
-#    And I should see "09:00-09:30 (UTC)"
+    And I should see "09:00-09:30 (CUT) UTC"
     Then they should see a link to the creator of the event
 
   @javascript
@@ -59,7 +59,7 @@ Feature: Events
     Given the event "Whatever"
     Then I should be on the event "Show" page for "Whatever"
     And the event named "Whatever" is associated with "EdX"
-#    And I should see "09:00-09:30 (UTC)"
+    And I should see "09:00-09:30 (CUT) UTC"
     Then they should see a link to the creator of the event
     And I should see "for: Associate Members"
 
@@ -74,7 +74,7 @@ Feature: Events
     And I click the "Save" button
     Then I should see "Event Created"
     And I should be on the event "Show" page for "Whatever"
-#    And I should see "19:00-19:30 (UTC)"
+    And I should see "19:00-19:30 (CUT) UTC"
 
   Scenario: Projects should be ordered alphabetically
     Then the dropdown with id "event_project_id" should only have active projects

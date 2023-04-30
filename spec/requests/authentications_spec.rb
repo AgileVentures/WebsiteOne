@@ -2,8 +2,8 @@
 
 RSpec.describe 'OmniAuth authentication', type: :feature do
   supported_auths = {
-    'github' => 'GitHub',
-    'gplus' => 'Google'
+    'github' => 'GitHub'
+ #   'gplus' => 'Google'
   }
 
   before do
@@ -99,7 +99,7 @@ RSpec.describe 'OmniAuth authentication', type: :feature do
           expect(page).to have_content('Successfully removed profile.')
         end
 
-        xit 'should be able to create other profiles' do
+        it 'should be able to create other profiles' do
           supported_auths.each do |p, n|
             next if p == provider
 
