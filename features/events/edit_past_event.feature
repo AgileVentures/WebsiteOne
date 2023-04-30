@@ -25,7 +25,7 @@ Feature: Editing an event with start date in the past
     And I select "Repeat ends" to "never"
     And I click the "Save" button
     Then I should be on the event "Show" page for "Daily Standup"
-#    And I should see "09:00-09:30 (UTC)"
+#    And I should see "09:00-09:30 (CUT) UTC"
     And I visit the edit page for the event named "Daily Standup"
     Then the "Repeat ends" selector should be set to "never"
 

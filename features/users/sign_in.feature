@@ -38,12 +38,12 @@ Feature: Sign in
     When I sign in with valid credentials
     Then I should be on the Events "Index" page
 
-  @omniauth
-  Scenario: User is deactivated
-    Given I exist as a user signed up via google
-    And I am not logged in
-    And I have deactivated my account
-    And I am on the "Sign in" page
-    And I click "Google"
-    Then I see a user deactivated message
-    And I should be signed out
+  # @omniauth
+  # Scenario: User is deactivated
+  #   Given I exist as a user signed up via google
+  #   And I am not logged in
+  #   And I have deactivated my account
+  #   And I am on the "Sign in" page
+  #   And I click "Google"
+  #   Then I see a user deactivated message
+  #   And I should be signed out

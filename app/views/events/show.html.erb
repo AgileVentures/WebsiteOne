@@ -29,7 +29,7 @@
               <%= link_to 'Edit hangout link', '#', remote: true, data: {toggle: 'collapse', target: '#edit-link-form'}, role: 'menuitem', tabindex: '-1' %>
             </li>
             <li role="edit_yt_link">
-              <%= link_to 'Edit youtube link', '#', remote: true, data: {toggle: 'collapse', target: '#edit-yt-link-form'}, role: 'menuitem', tabindex: '-1' %>
+              <%= link_to 'Edit streaming link', '#', remote: true, data: {toggle: 'collapse', target: '#edit-yt-link-form'}, role: 'menuitem', tabindex: '-1' %>
             </li>
           </ul>
         </div>
@@ -182,7 +182,7 @@
             <b>Youtube Link</b>
             <div class="form-group">
               <div class="col-sm-8">
-                <input type="url" required class="form-control" name="yt_url" placeholder="Copy and paste the youtube link in here.." value="<%= @recent_hangout.try!(:yt_url) %>">
+                <input type="url" required class="form-control" name="yt_url" placeholder="Copy and paste the streaming link in here.." value="<%= @recent_hangout.try!(:yt_url) %>">
               </div>
               <div class="col-sm-2">
                 <button type="button" class="form-control btn-default" data-toggle="collapse" data-target="#edit-yt-link-form" id="yt_link_cancel">Cancel</button>
