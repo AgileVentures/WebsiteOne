@@ -179,7 +179,7 @@ Then(/^"([^"]*)" shows youtube link with youtube id "([^"]*)"$/) do |event_name,
   yt_url = "https://youtu.be/#{yt_id}"
   visit event_path(Event.find_by_name(event_name))
   page.find(:css, '#actions-dropdown').trigger('click')
-  page.find_link('Edit youtube link').trigger('click')
+  page.find_link('Edit streaming link').trigger('click')
   expect(page).to have_field('yt_url', with: yt_url)
 end
 

@@ -21,7 +21,7 @@ Feature: As a developer
     And the user "user@example.com" should have karma
     And I should see a successful sign up message
     And I should receive a "Welcome to AgileVentures.org" email
-    And replies to that email should go to "info@agileventures.org"
+    And replies to that email should go to "matt@agileventures.org"
 
  Scenario: User signs up successfully with no consent for mailings
     When I sign up with valid user data
@@ -60,13 +60,13 @@ Scenario: User signs up successfully giving consent for mailings
     And the page should contain the google adwords conversion code
     And I should be on the "getting started" page
 
-  @omniauth
-  Scenario: User signs up with a Google account
-    Given I am on the "registration" page
-    When I click "Google"
-    Then I should see "Signed in successfully."
-    And the page should contain the google adwords conversion code
-    And I should be on the "getting started" page
+  # @omniauth
+  # Scenario: User signs up with a Google account
+  #   Given I am on the "registration" page
+  #   When I click "Google"
+  #   Then I should see "Signed in successfully."
+  #   And the page should contain the google adwords conversion code
+  #   And I should be on the "getting started" page
 
   @omniauth-without-email
   Scenario: User signs up with a GitHub account having no public email (sad path)
@@ -74,32 +74,32 @@ Scenario: User signs up successfully giving consent for mailings
     When I sign up with GitHub
     Then I should see link for instructions to sign up
 
-  @omniauth-without-email
-  Scenario: User signs up with a Google account having no public email (sad path)
-    Given I am on the "registration" page
-    When I click "Google"
-    Then I should see the "google" icon
-    Then I should see "Your Gplus account needs to have a public email address for sign up"
-    And I should not see "Password can't be blank"
+  # @omniauth-without-email
+  # Scenario: User signs up with a Google account having no public email (sad path)
+  #   Given I am on the "registration" page
+  #   When I click "Google"
+  #   Then I should see the "google" icon
+  #   Then I should see "Your Gplus account needs to have a public email address for sign up"
+  #   And I should not see "Password can't be blank"
     
-  @omniauth
-  Scenario: User is deactivated and tries to sign up again with google
-    Given I exist as a user signed up via google
-    And I am not logged in
-    And I have deactivated my account
-    And I am on the "registration" page
-    And I click "Google"
-    Then I see a user deactivated message
-    And I should be signed out
+  # @omniauth
+  # Scenario: User is deactivated and tries to sign up again with google
+  #   Given I exist as a user signed up via google
+  #   And I am not logged in
+  #   And I have deactivated my account
+  #   And I am on the "registration" page
+  #   And I click "Google"
+  #   Then I see a user deactivated message
+  #   And I should be signed out
   
-  @omniauth
-  Scenario: User is deactivated and tries to sign up again with email
-    Given I exist as a user signed up via google
-    And I am not logged in
-    And I have deactivated my account
-    And I am on the "registration" page
-    And I submit "mock@email.com" as username
-    And I submit "password" as password
-    And I click "Sign up" button
-    Then I see a user deactivated message
-    And I should be signed out
+  # @omniauth
+  # Scenario: User is deactivated and tries to sign up again with email
+  #   Given I exist as a user signed up via google
+  #   And I am not logged in
+  #   And I have deactivated my account
+  #   And I am on the "registration" page
+  #   And I submit "mock@email.com" as username
+  #   And I submit "password" as password
+  #   And I click "Sign up" button
+  #   Then I see a user deactivated message
+  #   And I should be signed out

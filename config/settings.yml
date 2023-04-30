@@ -6,7 +6,7 @@ features:
       sender: '"Error Police" <error-police@agileventures.org>'
       exception_recipients: ['info@agileventures.org']
   disqus:
-    enabled: true
+    enabled: false
   welcome_email:
     enabled: true
   twitter:
