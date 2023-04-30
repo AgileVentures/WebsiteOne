@@ -21,7 +21,7 @@ Feature: As a developer
     And the user "user@example.com" should have karma
     And I should see a successful sign up message
     And I should receive a "Welcome to AgileVentures.org" email
-    And replies to that email should go to "info@agileventures.org"
+    And replies to that email should go to "matt@agileventures.org"
 
  Scenario: User signs up successfully with no consent for mailings
     When I sign up with valid user data
