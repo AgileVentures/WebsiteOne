@@ -95,7 +95,7 @@ module ApplicationHelper
 
   def supported_third_parties
     %w(github)
-    # %w(github gplus) 
+    # %w(github gplus)
   end
 
   def valid_email?(email)
