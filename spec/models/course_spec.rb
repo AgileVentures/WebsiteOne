@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'course'
 
 RSpec.describe Course, type: :model do
@@ -25,5 +27,4 @@ RSpec.describe Course, type: :model do
       expect(subject).to_not be_valid
     end
   end
-
 end
