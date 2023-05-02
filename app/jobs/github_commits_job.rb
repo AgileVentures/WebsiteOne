@@ -39,10 +39,11 @@ module GithubCommitsJob
     contributors.map do |contributor|
       user = User.find_by_github_username(contributor.author.login)
 
-      Rails.logger.warn "#{contributor.author.login} could not be found in the database" unless user
-
-      CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
-      Rails.logger.info "#{user.display_name} stats are okay"
+      if user
+        CommitCount.find_or_initialize_by(user: user, project: project).update(commit_count: contributor.total)
+      else
+        Rails.logger.warn "#{contributor.author.login} could not be found in the database" unless user
+      end
     rescue StandardError => e
       ErrorLoggingService.new(e).log("Updating contributions for #{contributor.author.login} caused an error!")
     end
