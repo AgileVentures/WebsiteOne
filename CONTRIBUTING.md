@@ -17,7 +17,6 @@ First be sure that you've set up your development environment following all the 
 We keep our code on [GitHub](http://github.com), use [git](https://git-scm.com) for version control and [Github](https://github.com/orgs/AgileVentures/projects) to manage our projects.  Sometimes we use [ZenHub](https://zenhub.com) to organize work on features, chores and bugfixes.
 
 
-
 ## General Steps
 To get involved please follow these steps:
 
@@ -31,17 +30,11 @@ To get involved please follow these steps:
 
    4. (optional) deploy to a remote (e.g. Heroku, drie, google, etc.) and ensure it runs there
 
-#### 2. Look at what needs to be done on our Github [projects](https://github.com/orgs/AgileVentures/projects) or Zenhub:
+#### 2. Look at what needs to be done on our Github [projects](https://github.com/orgs/AgileVentures/projects):
 
   1. review [open PRs](https://github.com/AgileVentures/WebsiteOne/pulls) on GitHub - leave comments or collaborate if interested
   
   2. review [open Issues](https://github.com/AgileVentures/WebsiteOne/issues) on GitHub and leave a comment if you are interested or if you are working on the issue
-
-  3. look through **[ready](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** column - feel free to start work, but always interested to hear chat in slack, scrum wherever
-
-  4. look through **[new issues](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** column - feel free to ask about priority, as these are not prioritised
-
-  5. look at **[backlog](https://app.zenhub.com/workspaces/websiteone-57889e4b621243ff527dc7d9/board?repos=15742370)** - if there is an interesting ticket get it voted on in a scrum or do an [ASYNC Vote](https://github.com/AgileVentures/AgileVentures/blob/master/ASYNC_VOTING.md) in Slack
 
 ##### Voting
 
