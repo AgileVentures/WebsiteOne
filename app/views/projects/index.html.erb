@@ -1,4 +1,5 @@
 <% provide :title, 'Projects' %>
+<div data-controller="projects">
   <div class="row">
     <div class="col-xs-9">
       <h1 id="projects-header">Projects By Recent Activity</h1>
@@ -11,24 +12,24 @@
       <% end %>
     </div>
   </div>
-
   <% if @projects.empty? %>
     <p>We have no projects right now&#8230;</p>
   <% else %>
-    <div class="col-sm-12 well">
+  <div class="col-sm-12 well">
+    <div class="row">
+      <div class="col-sm-4 show-projects-btn">
+        <button data-action="click->projects#show_hidden">Show non-active projects</button>
+      </div>
+    </div>
     <p>Filter projects by</p>
-    <%= form_tag(projects_path, method: "get", class: "form-inline text-left") do %>
+    <%= form_tag(projects_path, method: "get", class: "form-inline text-left",  'data-controller': "projects-languages") do %>
         <div class="row">
           <div class="col-xs-12 col-sm-4">
-            <%= select_tag :language, options_for_select(@projects_languages_array, params[:language]), {prompt: 'Language...', class: 'form-control'} %>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <%= submit_tag 'Search', class: 'btn btn-default' %>
-          </div>
-          <div id="project-filters">
+            <%= select_tag :language, options_for_select(@projects_languages_array, params[:language]), {prompt: 'Language...', class: 'form-control', 'data-action': 'change->projects-languages#language'} %>
           </div>
         </div>
-    </div>
+    <% end %>
+  </div>
     <p>
       To get involved in any of the projects, join one of the
       <%= link_to 'scrums', events_path %>
@@ -92,7 +93,5 @@
   <% end %>
 </ul>
 </nav>
-
-
-  <% end %>
+</div>
 <% end %>

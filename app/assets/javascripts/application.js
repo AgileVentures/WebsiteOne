@@ -13,7 +13,8 @@ import './documents';
 import './projects';
 import './events';
 import './users';
-import LocalTime from "local-time"
+import LocalTime from "local-time";
+import './controllers/*.js';
 
 LocalTime.start()
 
