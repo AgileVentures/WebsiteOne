@@ -18,6 +18,7 @@ gem 'jsbundling-rails'
 gem 'railties', '~> 7.0.4.3'
 gem 'sprockets'
 gem 'sprockets-rails'
+gem 'stimulus-rails'
 
 # Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
