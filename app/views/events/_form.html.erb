@@ -1,5 +1,5 @@
 <% provide :title, 'New Events' %>
-<div data-controller="events">
+<div data-controller="events-form">
 <% start_datetime = params.fetch(:start_date, @event.start_datetime) %>
 <% start_datetime = Time.now if start_datetime.nil? %>
 <% duration = params.fetch(:duration, @event.duration) %>
@@ -28,12 +28,12 @@
 
       <div class="form-group event_date">
         <%= label_tag 'start_datetime', 'Start Datetime', class: 'control-label' %>
-        <%= datetime_local_field_tag :start_datetime, start_datetime.strftime("%Y-%m-%dT%H:%M") %>
+        <%= datetime_local_field_tag :start_datetime, start_datetime.strftime("%Y-%m-%dT%H:%M"), 'data-events-form-target': 'start' %>
         <%= hidden_field_tag 'next_date', @event.next_event_occurrence_with_time() ? format_datepicker(@event.next_event_occurrence_with_time()[:time]) : format_datepicker(DateTime.now) %>
       </div>
 
       <div class="form-group event_time">
-         <%= select_tag 'start_time_tz', options_from_collection_for_select( TZInfo::Timezone.all, 'identifier', 'identifier', 'UTC'), { class: 'form-control', style: 'width:auto;' } %>
+         <%= select_tag 'start_time_tz', options_from_collection_for_select( TZInfo::Timezone.all, 'identifier', 'identifier', 'UTC'), { class: 'form-control', style: 'width:auto;', 'data-events-form-target': 'start_tz' } %>
       </div>
 
       <div class="form-group">

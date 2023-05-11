@@ -7,6 +7,9 @@ import { application } from "./application"
 import EventsController from "./events_controller"
 application.register("events", EventsController)
 
+import EventsFormController from "./events_form_controller"
+application.register("events-form", EventsFormController)
+
 import ProjectsController from "./projects_controller"
 application.register("projects", ProjectsController)
 
