@@ -1,5 +1,5 @@
 <% provide :title, 'New Events' %>
-
+<div data-controller="events">
 <% start_datetime = params.fetch(:start_date, @event.start_datetime) %>
 <% start_datetime = Time.now if start_datetime.nil? %>
 <% duration = params.fetch(:duration, @event.duration) %>
@@ -70,4 +70,5 @@
         <%= f.submit 'Save', class: 'btn btn-default', data: {disable_with: 'Working...'} %>
       </div>
   <% end %>
+</div>
 </div>

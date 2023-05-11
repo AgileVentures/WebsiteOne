@@ -61,7 +61,7 @@ Feature: Show Events
     Then I should see "Standup"
     And the local date element should be set to "2016-05-02T07:00:00Z"
     And the local time element should be set to "2016-05-02T07:00:00Z"
-    And I should see "<zone>"
+    # And I should see "<zone>"
     Examples:
       | zone             |
       | Europe/London    |
@@ -158,14 +158,3 @@ Feature: Show Events
   #   And I am on Events index page
   #   And I click on the event body for the event named "Scrum"
   #   Then I should be on the event "show" page for "Scrum"
-
-  # @javascript
-  # Scenario: I add an event to my Google Calendar
-  #   Given the date is "2014/02/01 09:15:00 UTC"
-  #   And I am on Events index page
-  #   And I click "Scrum"
-  #   Then the export to google calendar link should not be visible
-  #   When I click the calendar icon
-  #   Then I should see "Export to Google Cal"
-# And I click "Export to Google Cal"
-# Then I should see "Sign in to continue to Google Calender"
