@@ -11,7 +11,6 @@ import "trix";
 import './global-modules/*.js';
 import './documents';
 import './projects';
-import './events';
 import './users';
 import LocalTime from "local-time";
 import './controllers/*.js';
