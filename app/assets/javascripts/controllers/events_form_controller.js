@@ -26,13 +26,6 @@ export default class extends Controller {
             daysOfWeek.forEach(function (checkBox, index) { checkBox.checked = arrayOfdays[index] })
         }
     }
-
-    $(".dropdown-menu a").click(function() {
-        $(this).closest(".dropdown").find("[data-toggle='dropdown']").dropdown("toggle");
-    });
-    $("#attendance_checkbox").change( function (){
-        $(".form-class").submit();
-    });
   }
 }
 
