@@ -13,7 +13,7 @@ features:
     notifications:
       enabled: false
   email_registrations:
-    enabled: false
+    enabled: true
 
 mailer:
   delivery_method: 'test'
