@@ -237,8 +237,8 @@ Given('I should be able to create a project with more than one issue tracker') d
   visit path_to('new project')
   fill_in 'Title', with: 'Multiple issue tracker project'
   fill_in 'Description', with: 'has lots of code'
-  fill_in 'GitHub url (primary)', with: 'http://www.github.com/new'
-  fill_in 'Issue Tracker (primary)', with: 'http://www.waffle.com/new'
+  fill_in 'GitHub url', with: 'http://www.github.com/new'
+  fill_in 'Issue Tracker', with: 'http://www.waffle.com/new'
   click_link_or_button 'Add more trackers'
   expect(page).to have_text('Issue Tracker (2)')
   select 'Active', from: 'Status'

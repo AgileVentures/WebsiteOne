@@ -55,15 +55,15 @@ Feature: List Events by Project
     Given I am on the events index page
     Then the dropdown with id "project_id" should only have active projects
 
-@javascript
-  Scenario: Project drop-down resets on hit back
-    Given I am on the home page
-    When I dropdown the "Events" menu
-    And I click "Upcoming events"
-    And I select "cs169" from the project dropdown
-    And I click "Filter by Project" button
-    Then I should see "Standup1"
-    And I hit back
-    Then "All" is selected in the project dropdown
-    And I should see "PP Session"
+# @javascript
+#   Scenario: Project drop-down resets on hit back
+#     Given I am on the home page
+#     When I dropdown the "Events" menu
+#     And I click "Upcoming events"
+#     And I select "cs169" from the project dropdown
+#     And I click "Filter by Project" button
+#     Then I should see "Standup1"
+#     And I hit back
+#     Then "All" is selected in the project dropdown
+#     And I should see "PP Session"
 

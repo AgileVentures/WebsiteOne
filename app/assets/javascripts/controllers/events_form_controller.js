@@ -26,6 +26,41 @@ export default class extends Controller {
             daysOfWeek.forEach(function (checkBox, index) { checkBox.checked = arrayOfdays[index] })
         }
     }
+    this.repeats();
+    this.repeat_ends_on();
+  }
+  repeats() {
+    console.log('in events_repeats_controller repeats')
+    $('.event_option').hide();
+    switch ($('#event_repeats').val()) {
+        case 'never':
+            // Nothing
+            break;
+        case 'biweekly':    
+        case 'weekly':
+            $('#repeats_options').show();
+            $('#repeats_weekly_options').show();
+            $('.event_option').show();
+            this.repeat_ends_on();
+            break;
+    }
+  }
+  repeat_ends_on(){
+    console.log('in events_repeats_controller repeat_ends_on')
+    switch ($('#event_repeat_ends_string').val()) {
+      case 'never':
+          $('#repeat_ends_on_label').hide();
+          $('#event_repeat_ends_on_1i').hide();
+          $('#event_repeat_ends_on_2i').hide();
+          $('#event_repeat_ends_on_3i').hide();
+          break;
+      case 'on':
+          $('#repeat_ends_on_label').show();
+          $('#event_repeat_ends_on_1i').show();
+          $('#event_repeat_ends_on_2i').show();
+          $('#event_repeat_ends_on_3i').show();
+          break;
+    }
   }
 }
 

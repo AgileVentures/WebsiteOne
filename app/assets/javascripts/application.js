@@ -10,7 +10,6 @@ import "@nathanvda/cocoon";
 import "trix";
 import './global-modules/*.js';
 import './documents';
-import './projects';
 import './users';
 import LocalTime from "local-time";
 import './controllers/*.js';

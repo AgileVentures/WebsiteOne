@@ -19,6 +19,7 @@ gem 'railties', '~> 7.0.4.3'
 gem 'sprockets'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
+gem 'turbo-rails'
 
 # Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
@@ -45,7 +46,7 @@ gem 'bootsnap', '~> 1.9'
 gem 'icalendar'
 gem 'jbuilder'
 gem 'jquery-rails'
-gem 'jquery-turbolinks', '2.1.0' # Replace turbolinks: https://www.honeybadger.io/blog/hb-turbolinks-to-turbo/
+# gem 'jquery-turbolinks', '2.1.0' # Replace turbolinks: https://www.honeybadger.io/blog/hb-turbolinks-to-turbo/
 gem 'jvectormap-rails', '~> 2.0'
 gem 'jwt'
 gem 'kaminari'
@@ -80,7 +81,7 @@ gem 'sorted_set', '~> 1.0', '>= 1.0.3'
 gem 'spinjs-rails'
 gem 'stripe'
 gem 'sucker_punch'
-gem 'turbolinks'
+# gem 'turbolinks'
 gem 'utf8-cleaner'
 gem 'vanity'
 gem 'verbs'
@@ -146,3 +147,6 @@ end
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'ice_cube', github: 'ice-cube-ruby/ice_cube', ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"

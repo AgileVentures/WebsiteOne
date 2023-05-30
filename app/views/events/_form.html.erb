@@ -43,18 +43,18 @@
 
       <div class="form-group">
         <%= f.label :repeats, :class => 'control-label' %>
-        <%= f.select :repeats, Event::REPEATS_OPTIONS, {}, default: 'never', class: 'form-control' %>
+        <%= f.select :repeats, Event::REPEATS_OPTIONS, {}, default: 'never', class: 'form-control', 'data-action': 'change->events-form#repeats' %>
         <%= render partial: 'repeats_weekly_options', locals: {f: f} %>
       </div>
 
       <div class="form-group event_option" id="repeats_options">
         <%= label_tag 'event_repeat_ends_string', 'Repeat ends', class: 'control-label' %>
-        <%= f.select :repeat_ends_string, Event::REPEAT_ENDS_OPTIONS, {}, class: 'form-control' %>
+        <%= f.select :repeat_ends_string, Event::REPEAT_ENDS_OPTIONS, {}, class: 'form-control', 'data-action': 'change->events-form#repeat_ends_on' %>
       </div>
 
       <div class="form-group event_option repeat_ends_on">
         <%= label_tag 'repeat_ends_on', 'End Date', class: 'control-label', id: 'repeat_ends_on_label' %>
-        <%= date_select :event, :repeat_ends_on %>
+        <%= date_select :event, :repeat_ends_on, id: 'repeat_ends_on' %>
       </div>
 
       <div class="form-group">

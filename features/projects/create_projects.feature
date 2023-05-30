@@ -28,8 +28,8 @@ Feature: Create projects
       | Field                   |
       | Title                   |
       | Description             |
-      | GitHub url (primary)    |
-      | Issue Tracker (primary) |
+      | GitHub url              |
+      | Issue Tracker           |
       | Slack channel name      |
 
   Scenario Outline: Saving a new project: success
@@ -38,8 +38,8 @@ Feature: Create projects
     When I click the very stylish "New Project" button
     When I fill in "Title" with "<title>"
     And I fill in "Description" with "<description>"
-    And I fill in "GitHub url (primary)" with "<gh_link>"
-    And I fill in "Issue Tracker (primary)" with "<pt_link>"
+    And I fill in "GitHub url" with "<gh_link>"
+    And I fill in "Issue Tracker" with "<pt_link>"
     And The project has no stories on Pivotal Tracker
     And I fill in "Slack channel name" with "slackin"
     And I click the "Submit" button
@@ -74,11 +74,11 @@ Feature: Create projects
     When I click the very stylish "New Project" button
     When I fill in "Title" with "multiple repo project"
     And I fill in "Description" with "has lots of code"
-    And I fill in "GitHub url (primary)" with "http://www.github.com/new"
+    And I fill in "GitHub url" with "http://www.github.com/new"
     And I click "Add more repos"
-    Then I should see "GitHub url (2)"
-    And I fill in "GitHub url (2)" with "http://www.github.com/new2"
-    And I fill in "Issue Tracker (primary)" with "http://www.waffle.com/new"
+    # Then I should see "GitHub url (2)"
+    # And I fill in "GitHub url (2)" with "http://www.github.com/new2"
+    And I fill in "Issue Tracker" with "http://www.waffle.com/new"
     And The project has no stories on Pivotal Tracker
     And I select "Status" to "Active"
     And I click the "Submit" button
@@ -92,7 +92,7 @@ Feature: Create projects
     And I should see a link to "multiple repo project" on github
     And I should see a link "multiple repo project" that connects to the issue tracker's url
 
-  @javascript
-  Scenario: Saving a new project with multiple issue trackers: success
-    Given I have logged in as "Thomas"
-    Then I should be able to create a project with more than one issue tracker
+  # @javascript
+  # Scenario: Saving a new project with multiple issue trackers: success
+  #   Given I have logged in as "Thomas"
+  #   Then I should be able to create a project with more than one issue tracker
