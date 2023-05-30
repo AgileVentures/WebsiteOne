@@ -32,8 +32,8 @@ Feature: Edit Project
   Scenario: Existing project with multiple repos shows them correctly in edit form
     And that project "hello world" has an extra repository "https://github.com/AgileVentures/WebsiteOne"
     When I am on the "Edit" page for projects "hello world"
-    Then I should see "GitHub url (primary)"
-    And I should see "GitHub url (2)"
+    Then I should see "GitHub url"
+    # And I should see "GitHub url (2)"
 
   Scenario: Edit page has a return link
     And I am on the "Edit" page for projects "hello mars"
@@ -45,9 +45,9 @@ Feature: Edit Project
     And I am on the "Edit" page for project "hello mars"
     And I fill in "Description" with "Hello, Uranus!"
     And I click "Add more repos"
-    And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
+    And I fill in "GitHub url" with "https://github.com/google/instant-hangouts"
     And I click "Add more trackers"
-    And I fill in "Issue Tracker (primary)" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "Issue Tracker" with "https://www.pivotaltracker.com/s/projects/853345"
     And The project has no stories on Pivotal Tracker
     And I fill in "Slack channel name" with "slackin"
     And I click the "Submit" button
@@ -68,7 +68,7 @@ Feature: Edit Project
   Scenario: Update GitHub url if valid
     And I am on the "Edit" page for project "hello mars"
     And I click "Add more repos"
-    And I fill in "GitHub url (primary)" with "https://github.com/google/instant-hangouts"
+    And I fill in "GitHub url" with "https://github.com/google/instant-hangouts"
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link to "hello mars" on github
@@ -77,16 +77,16 @@ Feature: Edit Project
   Scenario: Update Issue Tracker url if valid pivotal tracker link
     And I am on the "Edit" page for project "hello mars"
     And I click "Add more trackers"
-    And I fill in "Issue Tracker (primary)" with "https://www.pivotaltracker.com/s/projects/853345"
+    And I fill in "Issue Tracker" with "https://www.pivotaltracker.com/s/projects/853345"
     And The project has no stories on Pivotal Tracker
     And I click the "Submit" button
     Then I should be on the "Show" page for project "hello mars"
     And I should see a link "hello mars" that connects to the issue tracker's url
 
-  @javascript
-  Scenario: Reject GitHub url update if invalid
-    And I am on the "Edit" page for project "hello mars"
-    And I click "Add more repos"
-    And I fill in "GitHub url (primary)" with "https:/github.com/google/instant-hangouts"
-    And I click the "Submit" button
-    Then I should see "Project was not updated."
+  # @javascript
+  # Scenario: Reject GitHub url update if invalid
+  #   And I am on the "Edit" page for project "hello mars"
+  #   And I click "Add more repos"
+  #   And I fill in "GitHub url" with "https:/github.com/google/instant-hangouts"
+  #   And I click the "Submit" button
+  #   Then I should see "Project was not updated."

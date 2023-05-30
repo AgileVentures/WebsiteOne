@@ -1,6 +1,6 @@
 <div class='nested-fields nested-issue-tracker-fields form-group'>
     <div class="field form-group">
-        <%= f.label :url, 'Issue Tracker (primary)', class: 'issue_tracker_field_label' %>
+        <%= f.label :url, 'Issue Tracker', class: 'issue_tracker_field_label' %>
         <%= f.text_field :url, placeholder: 'https://www.pivotaltracker.com/s/projects/id', class: 'form-control input-lg' %>
     </div>
     <%= link_to_remove_association 'Delete issue tracker', f, class: 'btn btn-danger'%>
