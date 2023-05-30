@@ -13,13 +13,13 @@
 
   <%= render 'layouts/meta_tags' %>
   <title><%= content_for?(:title) ? [ yield(:title),  '| AgileVentures'].join(' ') : 'AgileVentures' %></title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:400,100,900' %>
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Ubuntu' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
   <% if ENV['ENABLE_GOOGLE_ANALYTICS'] %>
-    <%= javascript_include_tag 'google-analytics', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'google-analytics', 'data-turbo-track': 'reload' %>
   <% end %>
 </head>

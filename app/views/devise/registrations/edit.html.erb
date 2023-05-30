@@ -22,11 +22,6 @@
         <div class="checkbox">
           <%= f.label :receive_mailings, "#{f.check_box(:receive_mailings)} Receive site emails".html_safe %>
         </div>
-        <!-- Fix below, which causes update to fail: 
-        <% supported_third_parties.each do |provider| %>
-            <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
-        <% end %>
-        -->
         <%= link_to 'Deactivate Account', '#',
                     data: {toggle: 'modal',
                            target: '#myDestroyModal'},
@@ -55,7 +50,7 @@
         <div><%= f.label :skills, 'Skills - (separate with comma)' %>
           <div id="skills" class="tag-list" style="margin-bottom: 10px;"
             data-skill-list="<%= resource.skill_list.to_json %>"></div>
-            <%= f.text_field :skill_list, hidden: true  %>
+            <%= f.text_field :skill_list %>
         </div>
 
         <div><%= f.label :bio %>
@@ -73,6 +68,9 @@
         </div>
       </div>
     <% end %>
+  <% end %>
+  <% supported_third_parties.each do |provider| %>
+     <%= social_button provider, url: edit_user_registration_path(resource), delete: resource.has_auth(provider) %>
   <% end %>
   <!-- HIDDEN TILL ORPHAN DOCUMENTS CAN BE RESOLVED
   <hr />
