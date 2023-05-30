@@ -871,7 +871,7 @@ DEPENDENCIES
   rb-readline
   recaptcha
   redcarpet
-  redis (~> 4.0)
+  redis
   rspec-activemodel-mocks
   rspec-html-matchers
   rspec-rails
