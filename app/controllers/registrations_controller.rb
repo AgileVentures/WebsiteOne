@@ -21,15 +21,22 @@ class RegistrationsController < Devise::RegistrationsController
       resource.display_email = params[:user][:display_email] == '1'
       render action: 'edit'
     else
-      @user = User.friendly.find(current_user.friendly_id)
-      @user.skill_list = params[:user].delete 'skill_list' # Extracts skills from params
+      self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+      prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+      resource.skill_list = params[:user].delete 'skill_list' # Extracts skills from params
       account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
+      resource_updated = resource.update_without_password(account_update_params)
 
-      if @user.update(account_update_params)
-        set_flash_message :notice, :updated
-        redirect_to after_update_path_for(@user)
+      yield resource if block_given?
+      if resource_updated
+        set_flash_message_for_update(resource, prev_unconfirmed_email)
+        bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
+
+        respond_with resource, location: after_update_path_for(resource)
       else
-        render :edit
+        clean_up_passwords resource
+        set_minimum_password_length
+        respond_with resource
       end
     end
   end
