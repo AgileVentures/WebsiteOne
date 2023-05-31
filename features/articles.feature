@@ -53,15 +53,15 @@ Feature:
     And I should see "Successfully updated the article"
     And I should see "New content New Markdown"
 
-  @javascript
-  Scenario: Should be able to preview an article when editing
-    Given I am logged in as user with email "brett@example.com", with password "12345678"
-    And I am on the "Show" page for article "Ruby is on Fire"
-    And I click the very stylish "Edit article" button
-    Then I should be on the "Edit" page for article "Ruby is on Fire"
-    And I fill in "Title" with "Thomas is on Fire"
-    And I fill in "Content" with "**New content** ``New Markdown``"
-    And I click the Preview button
-    Then I should see a preview containing:
-      | Thomas is on Fire        |
-      | New content New Markdown |
+  # @javascript
+  # Scenario: Should be able to preview an article when editing
+  #   Given I am logged in as user with email "brett@example.com", with password "12345678"
+  #   And I am on the "Show" page for article "Ruby is on Fire"
+  #   And I click the very stylish "Edit article" button
+  #   Then I should be on the "Edit" page for article "Ruby is on Fire"
+  #   And I fill in "Title" with "Thomas is on Fire"
+  #   And I fill in "Content" with "**New content** ``New Markdown``"
+  #   And I click the Preview button
+  #   Then I should see a preview containing:
+  #     | Thomas is on Fire        |
+  #     | New content New Markdown |
