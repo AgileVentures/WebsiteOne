@@ -6,3 +6,4 @@
 //= link lolex.js
 //= link disqus.js
 //= link 404.js
+//= link subscriptions.css
