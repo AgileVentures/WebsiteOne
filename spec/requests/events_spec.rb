@@ -2,7 +2,7 @@
 
 require 'capybara/rspec'
 describe 'Events' do
-  let(:user) { User.create!(email: 'something_else@email.com', password: '123456789') }
+  let(:user) { User.create!(email: 'something_else@email.com', password: '123456789', confirmed_at: DateTime.now) }
 
   before { login }
 
