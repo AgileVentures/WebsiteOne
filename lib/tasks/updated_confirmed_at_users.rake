@@ -8,4 +8,4 @@ namespace :user do
     end
   end
 end
-# EOF
+
