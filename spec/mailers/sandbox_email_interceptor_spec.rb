@@ -3,9 +3,9 @@
 describe SandboxEmailInterceptor do
   describe '#delivering_email' do
     before(:each) do
-      @user1 = FactoryBot.create(:user)
+      @user1 = FactoryBot.create(:user, confirmed_at: DateTime.now)
       @project = FactoryBot.create(:project, user: @user1)
-      @user2 = FactoryBot.create(:user)
+      @user2 = FactoryBot.create(:user, confirmed_at: DateTime.now)
     end
     it 'delivers all emails to user when intercept_emails is set to true' do
       stub_const('ENV', { 'USER_EMAIL' => 'me@ymail.com' })
