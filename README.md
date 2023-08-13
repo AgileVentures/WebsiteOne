@@ -39,21 +39,17 @@ Later Raoul Diffou joined to take over as project manager as Thomas and Bryan ha
 * [Imperative vs Declarative Cucumber](http://fasteragile.com/blog/2015/01/19/declarative-user-stories-translate-to-good-cucumber-features/)
 * [JavaScript Acceptance test trials](https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/)
 
-## Relevant rake tasks
+## Walkthroughs
 
-```bash
-rake fetch_github_last_updates
-rake fetch_github_languages
-rake fetch_github_content_for_static_pages
-rake fetch_github_readme_files
-rake fetch_github_commits
-rake geocode:all
-rake mailer:send_welcome_message
-rake modify_event_participation
-rake paypal:create_paypal_plans
-rake stats
-rake user:create_anonymous
-rake vcr_billy_caches:reset
-```
-
-Updating the pages requires the administrator to run the `rake fetch_github:content_for_static_pages` task.
+* An example of a simple interface change
+  * Here is the original [user story](features/jitsi_meet/start_jitsi_button.feature#L1)
+  * Here is the original [cucumber scenario](features/jitsi_meet/start_jitsi_button.feature#L15)
+  * We did not write a spec, as this would have involved a view spec which we don't feel add any value
+  * Here's the [code](app/views/events/show.html.erb#L38) that implemented the feature
+  
+:construction: UNDER CONSTRUCTION :construction:  
+  
+* An example of a new feature involving a database change
+  ...
+* An example of a bug fix
+  ...
