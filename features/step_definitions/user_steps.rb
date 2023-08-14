@@ -30,7 +30,7 @@ Given(/^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
                                  password: password,
                                  password_confirmation: password)
   set_user_as_premium(@user) if premium
-
+  
   visit new_user_session_path
   within('#main') do
     fill_in 'user_email', with: email
