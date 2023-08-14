@@ -11,8 +11,8 @@ class User < ApplicationRecord
   def_delegator :karma, :hangouts_attended_with_more_than_one_participant
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   geocoded_by :last_sign_in_ip do |user, results|
