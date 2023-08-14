@@ -20,6 +20,7 @@ FactoryBot.define do
     slug { "#{first_name} #{last_name}".parameterize }
     bio { Faker::Lorem.sentence }
     skill_list { Faker::Lorem.words(number: 4) }
+    confirmed_at {DateTime.now}
 
     after(:save) do |user, evaluator|
       create(:authentication, provider: 'gplus', uid: evaluator.gplus, user_id: user.id)
