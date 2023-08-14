@@ -5,6 +5,11 @@ def loaderio_token
 end
 
 Rails.application.routes.draw do
+  get 'cookies/policy', to: 'cookies#policy', as: 'cookie_policy'
+  get 'cookies', to: 'cookies#index'
+  get 'cookies/consent', to: 'cookies#consent', as: 'cookie_consent'
+  
+
   root 'visitors#index'
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'
