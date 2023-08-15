@@ -1,2 +1,59 @@
-<h1>Cookies#index</h1>
-<p>Find me in app/views/cookies/index.html.erb</p>
+<%= turbo_frame_tag :cookie_consent do %>
+  <div class='footer'>
+    <div class='card'>
+      <div class='card-body row container'>
+        <div class='col'>
+          <p class='text-center'>
+            This website uses cookies.
+          </p>
+        </div>
+        <div class='col text-right'>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-lg cookie" data-toggle="modal" data-target="#myModal">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          This website uses cookies. You can check out our cookie policy <%= link_to " here", cookie_policy_path, target: '__blank' %>
+        </div>
+        <div class="modal-footer">
+          <%= button_to 'Reject', 
+          cookie_consent_path(consent: false), 
+          method: :post, class: 'btn btn-secondary', 
+          onclick: "hideModal()" %>
+
+          <%= button_to 'Accept', 
+          cookie_consent_path(consent: true), 
+          method: :post, class: 'btn btn-primary', 
+          onclick: "hideModal()"  %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Rejectq</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  hideModal = () => {
+    let consentModal = document.getElementById('myModal')
+    if (consentModal) {
+      //consentModal.style.display = none;
+    
+       let modalToHide = bootstrap.Modal.getInstance(consentModal)
+       modalToHide.hide();
+    }
+  }
+  </script>
+<% end %>
