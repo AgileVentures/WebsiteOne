@@ -1,5 +1,5 @@
 <%= turbo_frame_tag :cookies_modal do %>
-  <% if session[:cookies_accepted].nil? # don't re-render if a true/false selected %>
+  <% if session[:cookies_accepted].nil? %>
     <section class="cookies-modal">
       <p>This website uses cookies. You can take a look at our privacy policy <%= link_to 'here.', '/privacy', target: '__blank' %></p>
       <%= link_to "Accept cookies", cookies_path(cookies: true), method: :post, class: 'btn btn-primary' %>
