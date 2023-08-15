@@ -1,59 +1,9 @@
-<%= turbo_frame_tag :cookie_consent do %>
-  <div class='footer'>
-    <div class='card'>
-      <div class='card-body row container'>
-        <div class='col'>
-          <p class='text-center'>
-            This website uses cookies.
-          </p>
-        </div>
-        <div class='col text-right'>
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary btn-lg cookie" data-toggle="modal" data-target="#myModal">
-            Learn More
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-        </div>
-        <div class="modal-body">
-          This website uses cookies. You can check out our cookie policy <%= link_to " here", cookie_policy_path, target: '__blank' %>
-        </div>
-        <div class="modal-footer">
-          <%= button_to 'Reject', 
-          cookie_consent_path(consent: false), 
-          method: :post, class: 'btn btn-secondary', 
-          onclick: "hideModal()" %>
-
-          <%= button_to 'Accept', 
-          cookie_consent_path(consent: true), 
-          method: :post, class: 'btn btn-primary', 
-          onclick: "hideModal()"  %>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Rejectq</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script>
-  hideModal = () => {
-    let consentModal = document.getElementById('myModal')
-    if (consentModal) {
-      //consentModal.style.display = none;
-    
-       let modalToHide = bootstrap.Modal.getInstance(consentModal)
-       modalToHide.hide();
-    }
-  }
-  </script>
+<%= turbo_frame_tag :cookies_modal do %>
+  <% if session[:cookies_accepted].nil? # don't re-render if a true/false selected %>
+    <section class="cookies-modal">
+      <p>This website uses cookies. You can take a look at our privacy policy <%= link_to 'here.', '/privacy', target: '__blank' %></p>
+      <%= link_to "Accept cookies", cookies_path(cookies: true), method: :post, class: 'btn btn-primary' %>
+      <%= link_to "Reject cookies", cookies_path(cookies: false), method: :post, class: 'btn btn-default' %>
+    </section>
+  <% end %>
 <% end %>
