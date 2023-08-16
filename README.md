@@ -57,3 +57,9 @@ rake vcr_billy_caches:reset
 ```
 
 Updating the pages requires the administrator to run the `rake fetch_github:content_for_static_pages` task.
+:construction: UNDER CONSTRUCTION :construction:  
+  
+* An example of a new feature involving a database change
+  ...
+* An example of a bug fix
+  ...
