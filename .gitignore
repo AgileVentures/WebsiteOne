@@ -102,12 +102,10 @@ certbot.log
 rerun.txt
 
 # Ignore VCR
-<<<<<<< HEAD
+
 features/support/fixtures/cassettes/**
 /config/master.key
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
-=======
-features/support/fixtures/cassettes/**
->>>>>>> e22d3016ebf779f308493baf362b5259aaedf63f
+
