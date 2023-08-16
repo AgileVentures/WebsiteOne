@@ -150,8 +150,7 @@ Feature: Show Events
     Given the date is "2014/02/03 07:01:00 UTC"
     And I am on Events index page
     Then I should see "ClientMtg"
-  # And I should see "11:00-13:30 (UTC)"
-
+#    And I should see "11:00-13:30 (UTC)"
 
   # @javascript
   # Scenario: Body of event is clickable
@@ -159,4 +158,3 @@ Feature: Show Events
   #   And I am on Events index page
   #   And I click on the event body for the event named "Scrum"
   #   Then I should be on the event "show" page for "Scrum"
-
