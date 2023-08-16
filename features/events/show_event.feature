@@ -152,6 +152,7 @@ Feature: Show Events
     Then I should see "ClientMtg"
 #    And I should see "11:00-13:30 (UTC)"
 
+
   # @javascript
   # Scenario: Body of event is clickable
   #   Given the date is "2014/02/01 09:15:00 UTC"
