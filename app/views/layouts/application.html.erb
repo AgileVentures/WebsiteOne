@@ -34,6 +34,8 @@
         <% if current_user && current_user.incomplete? && new_user_session_url == request.referrer %>
           <%= render 'layouts/require_users_profile' %>
         <% end %>
+        <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
+
       </div>
 
       <footer id="footer">

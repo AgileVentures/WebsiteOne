@@ -25,7 +25,8 @@
   <%= render 'layouts/require_users_profile' %>
 <% end %>
   <%= render 'text_and_image_trail' %>
-
+  <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
+  
 <footer id="footer">
   <%= render 'layouts/footer' %>
 </footer>
