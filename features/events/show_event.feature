@@ -152,22 +152,9 @@ Feature: Show Events
     Then I should see "ClientMtg"
 #    And I should see "11:00-13:30 (UTC)"
 
-<<<<<<< HEAD
   # @javascript
   # Scenario: Body of event is clickable
   #   Given the date is "2014/02/01 09:15:00 UTC"
   #   And I am on Events index page
   #   And I click on the event body for the event named "Scrum"
   #   Then I should be on the event "show" page for "Scrum"
-=======
-  @javascript
-  Scenario: I add an event to my Google Calendar
-    Given the date is "2014/02/01 09:15:00 UTC"
-    And I am on Events index page
-    And I click "Scrum"
-    Then the export to google calendar link should not be visible
-    When I click the calendar icon
-    Then I should see "Export to Google Cal"
-# And I click "Export to Google Cal"
-# Then I should see "Sign in to continue to Google Calender"
->>>>>>> e22d3016ebf779f308493baf362b5259aaedf63f
