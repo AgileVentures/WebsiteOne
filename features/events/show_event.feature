@@ -158,3 +158,4 @@ Feature: Show Events
   #   And I am on Events index page
   #   And I click on the event body for the event named "Scrum"
   #   Then I should be on the event "show" page for "Scrum"
+  
