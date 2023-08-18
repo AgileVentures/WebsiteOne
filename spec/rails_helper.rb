@@ -28,6 +28,7 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+Ferrum::Browser.new(:timeout => 15)
 OmniAuth.config.test_mode = true
 WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|

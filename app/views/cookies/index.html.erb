@@ -1,0 +1,9 @@
+<%= turbo_frame_tag :cookies_modal do %>
+  <% if session[:cookies_accepted].nil? %>
+    <section class="cookies-modalo">
+      <p>This website uses cookies. You can take a look at our privacy policy <%= link_to 'here.', '/privacy', target: '__blank' %></p>
+      <%= link_to "Accept cookies", cookies_path(cookies: true), method: :post, class: 'btn btn-primary' %>
+      <%= link_to "Reject cookies", cookies_path(cookies: false), method: :post, class: 'btn btn-default' %>
+    </section>
+  <% end %>
+<% end %>
