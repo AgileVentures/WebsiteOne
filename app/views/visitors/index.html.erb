@@ -25,8 +25,51 @@
   <%= render 'layouts/require_users_profile' %>
 <% end %>
   <%= render 'text_and_image_trail' %>
-  <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
-
+  <!DOCTYPE html>
+  <html>
+    
+    <%= render 'layouts/head' %>
+  
+    <% if flash[:user_signup] %>
+      <%= render 'layouts/adwords_signup_conversion' %>
+    <% end %>
+  
+    <body lang="en-GB">
+  
+      <div id="wrap">
+        <%= render 'layouts/navbar' %>
+        <div id="main">
+          <% if current_page? root_path %>
+            <%= yield %>
+          <% elsif content_for?(:content) %>
+            <div class="container" id="with-sidebar-container">
+              <div class="row">
+                <%= yield(:content) %>
+              </div>
+            </div>
+          <% else %>
+            <div class="container">
+              <div class="col-lg-9">
+                <%= yield %>
+              </div>
+              <div class="col-lg-3">
+                <%= render 'layouts/sponsors' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <% if current_user && current_user.incomplete? && new_user_session_url == request.referrer %>
+          <%= render 'layouts/require_users_profile' %>
+        <% end %>
+        <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
+      </div>
+  
+      <footer id="footer">
+        <%= render 'layouts/footer' %>
+      </footer>
+  
+    </body>
+  </html>
 <footer id="footer">
   <%= render 'layouts/footer' %>
 </footer>
