@@ -30,7 +30,7 @@ Given(/^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^
                                  password: password,
                                  password_confirmation: password)
   set_user_as_premium(@user) if premium
-
+  
   visit new_user_session_path
   within('#main') do
     fill_in 'user_email', with: email
@@ -255,6 +255,32 @@ Then(/^I should be signed out$/) do
   expect(page).to have_content 'Sign up'
   expect(page).to have_content 'Log in'
   expect(page).to_not have_content 'Log out'
+end
+
+And(/^I visit login page/) do
+  visit new_user_session_path
+end
+
+Then(/^a confirmation email should be sent/) do
+  expect(ActionMailer::Base.deliveries.count).to eq(2)
+  # expect(ActionMailer::Base.deliveries[0].to).to include('example@example.com')
+  expect(ActionMailer::Base.deliveries[0].body.to_s).to include(User.last.confirmation_token)
+end
+
+Then(/^I should see a confirmation-email-sent message/) do
+  expect(page).to have_content('A message with a confirmation link has been sent to your email address. Please open the link to activate your account.')
+end
+
+Then(/^I go to the email confirmation link/) do
+  visit ("/users/confirmation?confirmation_token=#{User.last.confirmation_token}")
+end
+
+Then(/^I should see a successful confirmation message/) do
+  expect(page).to have_content('Your account was successfully confirmed.')
+end
+
+Then(/^I should see confirm-your-account-before-continuing message/) do
+  expect(page).to have_content('You have to confirm your account before continuing.')
 end
 
 Then(/^I see a successful sign in message$/) do

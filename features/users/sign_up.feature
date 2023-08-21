@@ -15,23 +15,37 @@ Feature: As a developer
     And I submit "user@example.com" as username
     And I submit "password" as password
     And I click "Sign up" button
-    Then I should be on the "getting started" page
+    Then a confirmation email should be sent
+    Then I should see a confirmation-email-sent message
     And I should see "Signed up successfully."
-    And the page should contain the google adwords conversion code
-    And the user "user@example.com" should have karma
-    And I should see a successful sign up message
-    And I should receive a "Welcome to AgileVentures.org" email
-    And replies to that email should go to "matt@agileventures.org"
+    And I go to the email confirmation link
+    Then I should see a successful confirmation message
 
  Scenario: User signs up successfully with no consent for mailings
     When I sign up with valid user data
-    Then I should see a successful sign up message
+    Then a confirmation email should be sent
+    Then I should see a confirmation-email-sent message
+    And I should see "Signed up successfully."
+    And I go to the email confirmation link
+    Then I should see a successful confirmation message
+    And I visit login page
+    When I sign in with valid credentials
+    Then I should see "Signed in successfully."
+    And I should be on the "getting started" page
     And I go to my "edit profile" page
     Then "receive mailings" should not be checked
 
 Scenario: User signs up successfully giving consent for mailings
     When I sign up with valid user data giving consent
-    Then I should see a successful sign up message
+    Then a confirmation email should be sent
+    Then I should see a confirmation-email-sent message
+    And I should see "Signed up successfully."
+    And I go to the email confirmation link
+    Then I should see a successful confirmation message
+    And I visit login page
+    When I sign in with valid credentials
+    Then I should see "Signed in successfully."
+    And I should be on the "getting started" page
     And I go to my "edit profile" page
     Then "receive mailings" should be checked
 
@@ -55,9 +69,13 @@ Scenario: User signs up successfully giving consent for mailings
   Scenario: User signs up with a GitHub account
     Given I am on the "registration" page
     When I click "GitHub"
-    Then I should see "Signed in successfully."
+    Then a confirmation email should be sent
     And I should see "Signed up successfully."
-    And the page should contain the google adwords conversion code
+    And I go to the email confirmation link
+    Then I should see a successful confirmation message
+    And I visit login page
+    When I click "GitHub"
+    Then I should see "Signed in successfully."
     And I should be on the "getting started" page
 
   # @omniauth
