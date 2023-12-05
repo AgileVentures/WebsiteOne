@@ -1,0 +1,14 @@
+<h3><%=vanity_h metric.name %></h3>
+<%= vanity_simple_format(vanity_h(metric.description), :class=>"description") %>
+<%= vanity_html_safe(%Q{<div class="chart"></div>
+    <script type="text/javascript">
+    $(function() {
+      Vanity.metric("#{vanity_h(id)}")
+        .plot([{
+          label:"#{vanity_h(metric.name)}",
+          data: [#{Vanity::Metric.data(metric).map { |date,value| "['#{date.to_time.httpdate}',#{value}]" }.join(",")}]
+        }])
+    })
+    </script>}
+  )
+%>

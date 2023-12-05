@@ -1,0 +1,18 @@
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+/Users/mac/.rbenv/versions/3.2.1/bin/ruby -I /Users/mac/.rbenv/versions/3.2.1/lib/ruby/3.2.0 extconf.rb
+creating Makefile
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231203-24129-3e1v9o sitelibdir\=./.gem.20231203-24129-3e1v9o clean
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231203-24129-3e1v9o sitelibdir\=./.gem.20231203-24129-3e1v9o
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231203-24129-3e1v9o sitelibdir\=./.gem.20231203-24129-3e1v9o install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20231203-24129-3e1v9o/bootsnap
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231203-24129-3e1v9o sitelibdir\=./.gem.20231203-24129-3e1v9o clean

@@ -1,0 +1,27 @@
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/rbtree-0.4.6
+/Users/mac/.rbenv/versions/3.2.1/bin/ruby -I /Users/mac/.rbenv/versions/3.2.1/lib/ruby/3.2.0 extconf.rb
+checking for ruby/version.h... yes
+checking for rb_exec_recursive() in ruby.h... yes
+checking for rb_exec_recursive_paired() in ruby.h... yes
+checking for rb_proc_lambda_p() in ruby.h... yes
+checking for rb_ary_resize() in ruby.h... yes
+checking for rb_obj_hide() in ruby.h... yes
+checking for rb_safe_level() in ruby.h... no
+checking for rb_cData() in ruby.h... no
+creating Makefile
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/rbtree-0.4.6
+make DESTDIR\= sitearchdir\=./.gem.20231203-19587-49ab57 sitelibdir\=./.gem.20231203-19587-49ab57 clean
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/rbtree-0.4.6
+make DESTDIR\= sitearchdir\=./.gem.20231203-19587-49ab57 sitelibdir\=./.gem.20231203-19587-49ab57
+compiling dict.c
+compiling rbtree.c
+linking shared-object rbtree.bundle
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/rbtree-0.4.6
+make DESTDIR\= sitearchdir\=./.gem.20231203-19587-49ab57 sitelibdir\=./.gem.20231203-19587-49ab57 install
+/usr/bin/install -c -m 0755 rbtree.bundle ./.gem.20231203-19587-49ab57
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/rbtree-0.4.6
+make DESTDIR\= sitearchdir\=./.gem.20231203-19587-49ab57 sitelibdir\=./.gem.20231203-19587-49ab57 clean
