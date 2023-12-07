@@ -1,0 +1,33 @@
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/puma-6.1.0/ext/puma_http11
+/Users/mac/.rbenv/versions/3.2.1/bin/ruby -I /Users/mac/.rbenv/versions/3.2.1/lib/ruby/3.2.0 extconf.rb
+checking for BIO_read() in -llibcrypto... no
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... yes
+checking for DTLS_method() in openssl/ssl.h... yes
+checking for SSL_CTX_set_session_cache_mode(NULL, 0) in openssl/ssl.h... yes
+checking for TLS_server_method() in openssl/ssl.h... yes
+checking for SSL_CTX_set_min_proto_version(NULL, 0) in openssl/ssl.h... yes
+checking for X509_STORE_up_ref()... yes
+checking for SSL_CTX_set_ecdh_auto(NULL, 0) in openssl/ssl.h... yes
+checking for SSL_CTX_set_dh_auto(NULL, 0) in openssl/ssl.h... yes
+checking for SSL_get1_peer_certificate() in openssl/ssl.h... yes
+checking for Random.bytes... yes
+creating Makefile
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/puma-6.1.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20231203-22989-mk0s2o sitelibdir\=./.gem.20231203-22989-mk0s2o clean
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/puma-6.1.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20231203-22989-mk0s2o sitelibdir\=./.gem.20231203-22989-mk0s2o
+compiling http11_parser.c
+compiling mini_ssl.c
+compiling puma_http11.c
+linking shared-object puma/puma_http11.bundle
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/puma-6.1.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20231203-22989-mk0s2o sitelibdir\=./.gem.20231203-22989-mk0s2o install
+/usr/bin/install -c -m 0755 puma_http11.bundle ./.gem.20231203-22989-mk0s2o/puma
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/puma-6.1.0/ext/puma_http11
+make DESTDIR\= sitearchdir\=./.gem.20231203-22989-mk0s2o sitelibdir\=./.gem.20231203-22989-mk0s2o clean
