@@ -1,0 +1,4 @@
+--no-private
+--exclude features
+--markup markdown
+--template-path yard/template/
