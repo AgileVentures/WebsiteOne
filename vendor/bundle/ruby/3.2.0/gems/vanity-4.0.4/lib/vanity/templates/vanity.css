@@ -1,0 +1,36 @@
+.vanity .description { padding: 0; margin: 0 0 .6em 0; color: #666 }
+.vanity .meta { color: #666 }
+.vanity .footer { margin-top: 2em; text-align: right; font-size: 90% }
+.vanity h2, .vanity h3 { margin: 0 0 .3em 0 }
+.vanity .error { color: #ff2020; border: 1px solid #ff2020; background: #fff; padding: .3em }
+
+.vanity .experiments { list-style: none; margin: 0; padding: 0 }
+.vanity .experiment { margin: 1em 0 2em 0; border-bottom: 1px solid #ddd }
+.vanity .experiment .type { margin-left: .3em; color: #bbb; font-size: .8em; font-weight: normal }
+.vanity .experiment .inner {padding: 1em}
+.vanity .experiment .status_completed { background: #EEF }
+.vanity .experiment .status_enabled { background: #EFE }
+.vanity .experiment .status_disabled { background: #FEE }
+.vanity .experiment .enabled-links { float: right; font-weight: normal }
+
+.vanity .ab_test table { border-collapse: collapse; width: 100%; border-bottom: 1px solid #ccc; margin: 1em 0 0 0 }
+.vanity .ab_test td { padding: .5em; border-top: 1px solid #ccc; overflow: hidden }
+.vanity .ab_test .choice td { font-weight: bold; background: #f0f0f8 }
+.vanity .ab_test caption { caption-side: bottom; padding: .5em; background: transparent; text-align: left }
+.vanity .ab_test caption .disabled_info { padding-top: .5em }
+.vanity .ab_test td.option { white-space: nowrap; overflow: hidden }
+.vanity .ab_test td.option .default { font-size: 75% }
+.vanity .ab_test td.value { white-space: nowrap; overflow: hidden }
+.vanity .ab_test td.action { overflow: hidden; text-align: right }
+.vanity .ab_test button.reset { float: right }
+
+.vanity .metrics { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid #ddd }
+.vanity .metric { margin: 2em 0 }
+.vanity .metric .chart { width:100%; margin: .6em 0 }
+.vanity .metric .legend { float: left; width:20%; padding-right: 1em; overflow: hidden }
+.vanity form#milestones { margin: 1em 0 }
+.vanity form#milestones label { margin-right: .5em }
+.vanity form#milestones input { vertical-align: bottom }
+.vanity .metric .marking.label { position: absolute; bottom: 2em; color: #c66; font-size: 80% }
+
+.vanity .alert { padding: 8px 35px 8px 14px; margin-bottom: 20px; text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5); background-color: rgb(252, 248, 227); border: 1px solid rgb(251, 238, 213); border-radius: 4px 4px 4px 4px; }
