@@ -5,6 +5,7 @@ def loaderio_token
 end
 
 Rails.application.routes.draw do
+  get 'cookies', to: 'cookies#index'
   root 'visitors#index'
 
   get '/.well-known/acme-challenge/:id' => 'static_pages#letsencrypt'

@@ -1,0 +1,23 @@
+---
+layout: page
+title: Credits
+---
+
+Made better by:
+Adam Keys
+Brian Leonard
+JS Boulanger
+Ryan Carver
+Stephen Celis
+
+Experiment Driven Development conceived by "Nathaniel Talbott":http://blog.talbott.ws.
+
+A/B tests, influenced by Patrick McKenzie's awesome "A/Bingo":http://www.bingocardcreator.com/abingo.
+
+"jQuery":http://jquery.com, copyright of John Resig, released under the "MIT license":http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt.
+
+"Flot":http://code.google.com/p/flot/, copyright of IOLA and Ole Laursen, released under the "MIT license":http://code.google.com/p/flot/source/browse/trunk/LICENSE.txt.
+
+Original code, copyright of "Assaf Arkin":http://labnotes.org, released under the "MIT license":http://github.com/assaf/vanity/blob/master/MIT-LICENSE.
+
+Documentation available under the "Creative Commons Attribution":http://creativecommons.org/licenses/by/3.0/ license.

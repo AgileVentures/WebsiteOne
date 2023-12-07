@@ -1,0 +1,3 @@
+To copy a PayPal SDK default configuration and initializer to your Rails App.
+
+  rails g paypal-sdk:install

@@ -1,0 +1,22 @@
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/mini_racer-0.6.3/ext/mini_racer_extension
+/Users/mac/.rbenv/versions/3.2.1/bin/ruby -I /Users/mac/.rbenv/versions/3.2.1/lib/ruby/3.2.0 extconf.rb
+checking for -lpthread... yes
+checking for -lobjc... yes
+checking for whether -Wl,--exclude-libs=ALL  is accepted as LDFLAGS... no
+creating Makefile
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/mini_racer-0.6.3/ext/mini_racer_extension
+make DESTDIR\= sitearchdir\=./.gem.20231204-977-yji6b2 sitelibdir\=./.gem.20231204-977-yji6b2 clean
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/mini_racer-0.6.3/ext/mini_racer_extension
+make DESTDIR\= sitearchdir\=./.gem.20231204-977-yji6b2 sitelibdir\=./.gem.20231204-977-yji6b2
+compiling mini_racer_extension.cc
+clang: warning: argument unused during compilation: '-rdynamic' [-Wunused-command-line-argument]
+linking shared-object mini_racer_extension.bundle
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/mini_racer-0.6.3/ext/mini_racer_extension
+make DESTDIR\= sitearchdir\=./.gem.20231204-977-yji6b2 sitelibdir\=./.gem.20231204-977-yji6b2 install
+/usr/bin/install -c -m 0755 mini_racer_extension.bundle ./.gem.20231204-977-yji6b2
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/mini_racer-0.6.3/ext/mini_racer_extension
+make DESTDIR\= sitearchdir\=./.gem.20231204-977-yji6b2 sitelibdir\=./.gem.20231204-977-yji6b2 clean
