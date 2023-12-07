@@ -1,0 +1,13 @@
+doc
+html
+*.sw?
+pkg
+coverage
+.bundle
+tmp
+Gemfile.lock
+*.gem
+results.html
+.DS_Store
+Session.vim
+scaffold_test

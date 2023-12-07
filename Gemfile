@@ -21,7 +21,6 @@ gem 'sprockets'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
-
 # Gems used in production
 gem 'acts_as_follower', git: 'https://github.com/AgileVentures/acts_as_follower.git'
 gem 'acts-as-taggable-on'
