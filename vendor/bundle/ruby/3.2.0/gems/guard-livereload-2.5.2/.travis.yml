@@ -1,0 +1,12 @@
+language: ruby
+bundler_args: --without development
+rvm:
+  - 2.2.3
+  - jruby-head
+matrix:
+  allow_failures:
+    - rvm: jruby-head
+notifications:
+  recipients:
+    - thibaud@thibaud.me
+sudo: false
