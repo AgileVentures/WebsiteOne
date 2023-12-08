@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore /vendor/bundle
-/vendor/bundle
+/vendor/bundle 
 
 # Ignore coverage results
 
