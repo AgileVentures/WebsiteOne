@@ -1,8 +1,0 @@
-.DS_Store
-.bundle
-.byebug_history
-.env
-.idea
-.rspec_status
-Gemfile.lock
-pkg

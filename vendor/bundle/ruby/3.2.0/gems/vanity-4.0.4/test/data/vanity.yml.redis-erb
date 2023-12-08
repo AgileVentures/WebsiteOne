@@ -1,3 +1,0 @@
-test:
-  adapter: redis
-  url: <%= ENV['VANITY_TEST_REDIS_URL'] %>

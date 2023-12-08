@@ -1,1 +1,0 @@
-History.txt has been converted to a formal changelog. Please see CHANGELOG.md.

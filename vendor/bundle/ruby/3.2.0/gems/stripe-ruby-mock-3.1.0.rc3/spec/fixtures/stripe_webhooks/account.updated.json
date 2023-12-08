@@ -1,7 +1,0 @@
-{
-  "id": "evt_123",
-  "type": "account.updated",
-  "data": {
-    "object": {}
-  }
-}

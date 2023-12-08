@@ -1,8 +1,0 @@
-inherit_from:
-  - .hound/defaults.yml
-  - .hound/overrides.yml
-  - .rubocop_todo.yml
-
-# Rails cops (so we don't need to run with -R option)
-AllCops:
-  RunRailsCops: true
