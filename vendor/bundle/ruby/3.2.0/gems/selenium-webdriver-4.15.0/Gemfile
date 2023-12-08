@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+Dir["#{__dir__}/*.gemspec"].each do |spec|
+  gemspec name: File.basename(spec, '.gemspec')
+end
+
+gem 'debug', '~> 1.7', require: false, platforms: %i[mri mingw x64_mingw]
