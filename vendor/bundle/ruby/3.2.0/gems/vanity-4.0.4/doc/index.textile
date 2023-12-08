@@ -1,0 +1,31 @@
+---
+layout: page
+title: Welcome to Vanity
+---
+
+"Vanity":http://github.com/assaf/vanity is an Experiment Driven Development framework for Rails.
+
+!images/sidebar_test.png!
+
+
+h3. Reading Order
+
+* "Introduction & Setup":#intro
+* "Metrics":metrics.html
+* "A/B Testing(Everything you need to know)":ab_testing.html
+* "Using with Rails":rails.html
+* "Managing Identity":identity.html
+
+Also:
+
+* "Experiment Driven Development(Introduction to EDD and Vanity)":http://blog.labnotes.org/2009/11/19/vanity-experiment-driven-development-for-rails/
+* "Get the code(Official Github repository)":http://github.com/assaf/vanity
+* "API reference":http://www.rubydoc.info/gems/vanity
+* "Ask questions on StackOverflow":http://stackoverflow.com/questions/tagged/vanity
+* "Contributing to Vanity":contributing.html
+
+h3(#intro). Introduction & setup
+
+Please see the "setup instructions in the README":https://github.com/assaf/vanity#vanity
+
+Read more about "A/B Testing ...":ab_testing.html

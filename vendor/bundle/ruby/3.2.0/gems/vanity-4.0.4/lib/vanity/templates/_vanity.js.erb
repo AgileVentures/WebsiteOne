@@ -1,0 +1,14 @@
+var httpRequest;
+var params = "v=<%= Vanity.context.vanity_active_experiments.map{|name, alternative| "#{name}=#{alternative.id}" }.join(',') %>&authenticity_token=<%= CGI.escape(form_authenticity_token) %>";
+if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+  httpRequest = new XMLHttpRequest();
+} else if (window.ActiveXObject) { // IE
+  try { httpRequest = new ActiveXObject("Msxml2.XMLHTTP"); }
+  catch (e) { }
+}
+if (httpRequest) {
+  httpRequest.open('POST', "<%= Vanity.playground.add_participant_path %>", true);
+  httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  httpRequest.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+  httpRequest.send(params);
+}
