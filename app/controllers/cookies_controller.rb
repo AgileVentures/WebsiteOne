@@ -5,3 +5,4 @@ class CookiesController < ApplicationController
     session[:cookies_accepted] = params[:cookies] if params[:cookies]
   end
 end
+
