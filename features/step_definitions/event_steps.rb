@@ -144,7 +144,7 @@ When(/^I follow "([^"]*)" for "([^"]*)" "([^"]*)"$/) do |linkid, table_name, hoo
 end
 
 And(/^I click on the "([^"]*)" div$/) do |arg|
-  find("div.#{arg}").click
+  find("div.#{arg}").trigger('click')
 end
 
 And(/^I select "([^"]*)" from the event for dropdown$/) do |for_whom|
