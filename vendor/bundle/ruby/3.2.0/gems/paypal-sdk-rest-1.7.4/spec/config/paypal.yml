@@ -1,0 +1,35 @@
+test: &default
+  client_id: AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS
+  client_secret: EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL
+  username: jb-us-seller_api1.paypal.com
+  password: WX4WTU3S8MY44S7F
+  signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+  app_id: APP-80W284485P519543T
+  http_timeout: 120
+  mode: sandbox
+  sandbox_email_address: Platform.sdk.seller@gmail.com
+
+development:
+  <<: *default
+
+with_authentication:
+  <<: *default
+  client_id: AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS
+  client_secret: EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL
+
+with_certificate:
+  <<: *default
+  username: platfo_1255170694_biz_api1.gmail.com
+  password: 2DPPKUPKB7DQLXNR
+  signature:
+  cert_path: <%= File.expand_path("../cert_key.pem", __FILE__) %>
+  app_id: APP-80W284485P519543T
+
+with_oauth_token:
+  <<: *default
+  token: 3rMSi3kCmK1Q3.BKxkH29I53R0TRLrSuCO..l8AMOAFM6cQhPTTrfQ
+  token_secret: RuE1j8RNRlSuL5T-PSSpVWLvOlI
+
+with_proxy:
+  <<: *default
+  http_proxy: <%= ENV['http_proxy'] %>
