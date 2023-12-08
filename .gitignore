@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore /vendor/bundle
+/vendor/bundle 
+
 # Ignore coverage results
 
 /coverage

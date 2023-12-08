@@ -1,0 +1,9 @@
+<%= turbo_frame_tag :cookies_modal do %>
+  <% if session[:cookies_accepted].nil? # don't re-render if a true/false selected %>
+    <section class="cookies-modal">
+      <h3>We process cookies.</h3>
+      <%= link_to "Accept cookies", cookies_path(cookies: true), method: :post %>
+      <%= link_to "Reject cookies", cookies_path(cookies: false), method: :post %>
+    </section>
+  <% end %>
+<% end %>

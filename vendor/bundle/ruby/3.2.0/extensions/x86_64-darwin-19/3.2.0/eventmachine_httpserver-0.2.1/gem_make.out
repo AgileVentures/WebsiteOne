@@ -1,0 +1,24 @@
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/eventmachine_httpserver-0.2.1/ext
+/Users/mac/.rbenv/versions/3.2.1/bin/ruby -I /Users/mac/.rbenv/versions/3.2.1/lib/ruby/3.2.0 extconf.rb
+checking for -lssl... yes
+checking for -lcrypto... yes
+checking for -lC... yes
+checking for openssl/ssl.h... yes
+checking for openssl/err.h... yes
+creating Makefile
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/eventmachine_httpserver-0.2.1/ext
+make DESTDIR\= sitearchdir\=./.gem.20231203-19587-a3kefa sitelibdir\=./.gem.20231203-19587-a3kefa clean
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/eventmachine_httpserver-0.2.1/ext
+make DESTDIR\= sitearchdir\=./.gem.20231203-19587-a3kefa sitelibdir\=./.gem.20231203-19587-a3kefa
+compiling http.cpp
+compiling rubyhttp.cpp
+linking shared-object eventmachine_httpserver.bundle
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/eventmachine_httpserver-0.2.1/ext
+make DESTDIR\= sitearchdir\=./.gem.20231203-19587-a3kefa sitelibdir\=./.gem.20231203-19587-a3kefa install
+/usr/bin/install -c -m 0755 eventmachine_httpserver.bundle ./.gem.20231203-19587-a3kefa
+
+current directory: /Users/mac/Desktop/rby/WebsiteOne/vendor/bundle/ruby/3.2.0/gems/eventmachine_httpserver-0.2.1/ext
+make DESTDIR\= sitearchdir\=./.gem.20231203-19587-a3kefa sitelibdir\=./.gem.20231203-19587-a3kefa clean
