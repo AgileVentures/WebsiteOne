@@ -1,7 +1,21 @@
 <% if session[:cookies_accepted].nil? # don't re-render if a true/false selected %>
   <section class="cookies-banner-modal">
-    <h3>We process cookies.</h3>
-    <%= link_to "Accept cookies", cookies_path(cookies: true), method: :post %>
-    <%= link_to "Reject cookies", cookies_path(cookies: false), method: :post %>
+    <a class="close">X</a>  
+    <h4>We respect your privacy. Cookies are used to analyze traffic.</h4>
+    <%= link_to "Accept cookies", cookies_path(cookies: true), method: :post, class: 'btn btn-success' %>
+    <%= link_to "Reject cookies", cookies_path(cookies: false), method: :post, class: 'btn btn-default' %>
+    <%= link_to 'Privacy statement', '/privacy' %>
   </section>
 <% end %>
+
+
+<script>
+  if (sessionStorage.getItem('banner') === 'hide') {
+    document.querySelector('.cookies-banner-modal').style.display = 'none';
+  } else {
+    document.querySelector('.close').addEventListener('click', () => {
+      sessionStorage.setItem('banner', 'hide')
+      document.querySelector('.cookies-banner-modal').style.display = 'none';
+    })
+  }
+</script>
