@@ -102,8 +102,7 @@ When(/^(?:when I|I) click the first instance of "([^"]*)"$/) do |text|
 end
 
 When(/^I click the "([^"]*)" button$/) do |button|
-  # click_link_or_button button 
-  find('a', text: button).click
+  click_link_or_button button
 end
 
 When(/^I open the Edit URL controls/) do
