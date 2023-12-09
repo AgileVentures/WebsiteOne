@@ -103,7 +103,7 @@ end
 
 When(/^I click the "([^"]*)" button$/) do |button|
   # click_link_or_button button 
-  find('a em', text: button).click
+  find('a', text: button).click
 end
 
 When(/^I open the Edit URL controls/) do
