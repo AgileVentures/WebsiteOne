@@ -11,9 +11,10 @@ import "trix";
 import './global-modules/*.js';
 import './documents';
 import './users';
-import './google-analytics';
+// import './google-analytics';
 import LocalTime from "local-time";
 import './controllers/*.js';
+
 
 LocalTime.start()
 
