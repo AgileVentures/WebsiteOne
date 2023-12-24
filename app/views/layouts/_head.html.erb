@@ -19,7 +19,14 @@
   <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
-  <% if ENV['ENABLE_GOOGLE_ANALYTICS'] %>
-    <%= javascript_include_tag 'google-analytics', 'data-turbo-track': 'reload' %>
+
+  <% case session[:cookies_accepted] %>
+    <% when 'true' %>
+      <%= javascript_include_tag 'google-analytics', 'data-turbo-track': 'reload' %>
+    <% else %>
+      <% cookies.delete('_ga') %>
+      <% cookies.delete('_gid') %>
+      <% cookies.delete('_gat') %>
+      <% cookies['GA-disable-UA-47795185-1'] = 'true' %>
   <% end %>
 </head>
