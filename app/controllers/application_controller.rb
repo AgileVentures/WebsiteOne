@@ -92,8 +92,7 @@ class ApplicationController < ActionController::Base
     case session[:cookies_accepted]
     when 'true'
       cookies[:user_id] = current_user.id if current_user
-    else
-      cookies.delete('user_id')
     end
   end
 end
+

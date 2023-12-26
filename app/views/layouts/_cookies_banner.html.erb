@@ -1,4 +1,4 @@
-<% if session[:cookies_accepted].nil? # don't re-render if a true/false selected %>
+<% if session[:cookies_accepted].nil? && !(request.cookies['_ga'].present? || request.cookies['_gid'].present? || request.cookies['_gat'].present?)# don't re-render if a true/false selected %>
   <section class="cookies-banner-modal">
     <a class="close">X</a>  
     <h4>We respect your privacy. Cookies are used to analyze traffic.</h4>
@@ -8,14 +8,5 @@
   </section>
 <% end %>
 
+<%= javascript_include_tag 'cookies_banner' %>
 
-<script>
-  if (sessionStorage.getItem('banner') === 'hide') {
-    document.querySelector('.cookies-banner-modal').style.display = 'none';
-  } else {
-    document.querySelector('.close').addEventListener('click', () => {
-      sessionStorage.setItem('banner', 'hide')
-      document.querySelector('.cookies-banner-modal').style.display = 'none';
-    })
-  }
-</script>
