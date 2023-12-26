@@ -1,0 +1,12 @@
+<% if session[:cookies_accepted].nil? && !(request.cookies['_ga'].present? || request.cookies['_gid'].present? || request.cookies['_gat'].present?)# don't re-render if a true/false selected %>
+  <section class="cookies-banner-modal">
+    <a class="close">X</a>  
+    <h4>We respect your privacy. Cookies are used to analyze traffic.</h4>
+    <%= link_to "Accept cookies", cookies_path(cookies: true), method: :post, class: 'btn btn-success' %>
+    <%= link_to "Reject cookies", cookies_path(cookies: false), method: :post, class: 'btn btn-default' %>
+    <%= link_to 'Privacy statement', '/privacy' %>
+  </section>
+<% end %>
+
+<%= javascript_include_tag 'cookies_banner' %>
+

@@ -89,3 +89,16 @@
         float: right !important;
     }
 }
+
+.cookies-banner-modal {
+  position: fixed;
+  padding: 0.5rem;
+  z-index: 2;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  min-width: 50%;
+  max-width: 24rem;
+  word-break: break-word;
+  border-radius: 6px;
+  background: #bad5ff;
+}

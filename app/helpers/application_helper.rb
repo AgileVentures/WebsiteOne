@@ -165,4 +165,11 @@ module ApplicationHelper
   def present(model)
     yield(model.presenter)
   end
+
+  def delete_google_cookies
+    cookies.delete('_ga')
+    cookies.delete('_gid')
+    cookies.delete('_gat')
+    cookies['GA-disable-UA-47795185-1'] = 'true'
+  end
 end
