@@ -7,3 +7,5 @@
 //= link disqus.js
 //= link 404.js
 //= link subscriptions.css
+//= link google-analytics.js
+//= link cookies_banner.js
