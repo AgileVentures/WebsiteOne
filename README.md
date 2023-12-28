@@ -38,7 +38,7 @@ Later Raoul Diffou joined to take over as project manager as Thomas and Bryan ha
 
 * [Imperative vs Declarative Cucumber](http://fasteragile.com/blog/2015/01/19/declarative-user-stories-translate-to-good-cucumber-features/)
 
-## Relevant rake tasks
+## Admin rake tasks
 
 ```bash
 rake fetch_github_last_updates
@@ -46,11 +46,10 @@ rake fetch_github_languages
 rake fetch_github_content_for_static_pages
 rake fetch_github_readme_files
 rake fetch_github_commits
+rake karma_calculator
 rake geocode:all
-rake mailer:send_welcome_message
-rake stats
 rake user:create_anonymous
 rake vcr_billy_caches:reset
 ```
 
-Updating the live static pages (like 'About' and 'Getting Stared') requires the administrator to run the `rake fetch_github:content_for_static_pages` task.
+Updating the live static pages (like 'About' and 'Getting Started') requires the administrator to run `rake fetch_github:content_for_static_pages.`
