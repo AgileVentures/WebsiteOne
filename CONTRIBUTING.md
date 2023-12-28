@@ -2,7 +2,7 @@
 
 So you'd like to contribute to the WebSiteOne codebase?  That's wonderful, we're excited to have your help :-)
 
-Please do come and say hello in our [Slack chat](https://agileventures.slack.com/messages/websiteone). You can get an invite by signing up at [AgileVentures](https://www.agileventures.org) or emailing [info@agileventures.org](mailto:info@agileventures.org).  We sometimes have [weekly meetings](https://www.agileventures.org/events/websiteone-planning) to coordinate our efforts and we try to do planning poker voting on tickets before starting work on them.  Feel free to join any [AgileVentures daily scrum](https://www.agileventures.org/events/) to ask questions, to listen in, or just say hi :-)
+Please do come and say hello in our [Slack chat](https://agileventures.slack.com/messages/websiteone). You can get an invite by signing up at [AgileVentures](https://www.agileventures.org) or emailing [info@agileventures.org](mailto:info@agileventures.org).  We sometimes have [weekly meetings](https://www.agileventures.org/events/websiteone-planning) to coordinate our efforts and we try to do planning poker voting on tickets before starting work on them.  Feel free to join any [event](https://www.agileventures.org/events/) to ask questions, to listen in, or just say hi :-)
 
 Getting set up with the system on your local machine can be tricky depending on your platform and your devops skills.
 
