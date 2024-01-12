@@ -9,3 +9,4 @@
 //= link subscriptions.css
 //= link google-analytics.js
 //= link cookies_banner.js
+//= link application.js
