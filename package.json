@@ -29,6 +29,7 @@
     "@nathanvda/cocoon": "^1.2.14",
     "@popperjs/core": "^2.11.6",
     "@rails/actiontext": "^7.0.4-3",
+    "bower": "^1.8.14",
     "copyfiles": "^1.0.0",
     "corejs-typeahead": "^1.2.1",
     "esbuild": "^0.17.11",

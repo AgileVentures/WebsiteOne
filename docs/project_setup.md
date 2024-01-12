@@ -1,4 +1,4 @@
-# Setting Up for Development on WebSiteOne _(Project Set Up)_
+t # Setting Up for Development on WebSiteOne _(Project Set Up)_
 
 These are the steps for setting up your development environment for WebSiteOne (WSO) project.
 This covers the tools you need to have installed and any specific configuration(s).
