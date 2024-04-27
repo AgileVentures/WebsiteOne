@@ -35,6 +35,7 @@
           <%= render 'layouts/require_users_profile' %>
         <% end %>
       </div>
+      <%= render 'layouts/cookies_banner' if session[:cookies_accepted].nil?  %>
 
       <footer id="footer">
         <%= render 'layouts/footer' %>

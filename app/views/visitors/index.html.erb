@@ -8,6 +8,7 @@
 
 <%= render 'layouts/navbar' %>
 
+
 <div id="main" class="container-fluid" style="padding: 0">
   <ul id="section-list">
     <li>
@@ -25,7 +26,8 @@
   <%= render 'layouts/require_users_profile' %>
 <% end %>
   <%= render 'text_and_image_trail' %>
-
+  <%= render 'layouts/cookies_banner' if session[:cookies_accepted].nil? %>
+  
 <footer id="footer">
   <%= render 'layouts/footer' %>
 </footer>

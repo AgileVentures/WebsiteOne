@@ -89,6 +89,9 @@ class ApplicationController < ActionController::Base
   # set current_user.id to a cookie to allow google analytics to access current_user var
 
   def set_user_id
-    cookies[:user_id] = current_user.id if current_user
+    case session[:cookies_accepted]
+    when 'true'
+      cookies[:user_id] = current_user.id if current_user
+    end
   end
 end

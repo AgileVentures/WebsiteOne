@@ -153,7 +153,21 @@ header#main_header {
     margin: 0;
     padding: 0;
 
+    form.button_to > button{
+      text-wrap: nowrap;
+     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    background-color: transparent;
+    border: none;
+    }
+    form.button_to > button > li > i::before{
+      margin-right: 10px;
+    }
+
     li form.button_to>li {
+
+
       @include css-transition(background-color .3s ease);
       padding: 15px;
 

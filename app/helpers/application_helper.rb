@@ -69,7 +69,7 @@ module ApplicationHelper
     path = "/auth/#{provider}?origin=#{CGI.escape(options[:url].gsub(%r{^/*}, '/'))}"
 
     # Underneath uses CSRF protection workaround provided by https://github.com/cookpad/omniauth-rails_csrf_protection
-    button_to path, method: :post, class: "btn btn-block btn-social btn-#{provider} #{options[:extra_class]}" do
+    button_to path, data: { turbo: false }, method: :post, class: "btn btn-block btn-social btn-#{provider} #{options[:extra_class]}" do
       raw <<-HTML
         <i class="fa fa-#{FA_ICON[provider]}"></i> #{text} #{DISPLAY_NAME[provider]}
       HTML
@@ -164,5 +164,12 @@ module ApplicationHelper
 
   def present(model)
     yield(model.presenter)
+  end
+
+  def delete_google_cookies
+    cookies.delete('_ga')
+    cookies.delete('_gid')
+    cookies.delete('_gat')
+    cookies['GA-disable-UA-47795185-1'] = 'true'
   end
 end

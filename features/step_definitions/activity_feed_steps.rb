@@ -33,8 +33,8 @@ And(/^I create a project named "([^"]*)"$/) do |project|
       | Field                     | Text                                            |
       | Title                     | #{project}                                      |
       | Description               | Description New                                 |
-      | GitHub url (primary)      | http://www.github.com/abc                       |
-      | Issue Tracker (primary)   | http://www.pivotaltracker.com/s/projects/982890 |
+      | GitHub url                | http://www.github.com/abc                       |
+      | Issue Tracker             | http://www.pivotaltracker.com/s/projects/982890 |
     And I click the "Submit" button
 }
 end

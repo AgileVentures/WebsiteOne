@@ -1,3 +1,4 @@
+<div data-controller="events">
 <div class="row">
   <div class="col-xs-12">
     <h1><%= @event.name %></h1>
@@ -76,12 +77,10 @@
         <h4>Next scheduled event:</h4>
 
           <div class="calendar-text">
-            <a href='#' id='calendar_link'><i class="fa fa-calendar-plus-o"></i></a><span class="month"><%=  local_time(@event.next_event_occurrence_with_time[:time],'%A, %B %d, %Y') %></span>
-            <div id='calendar_links'>
-              <i class='fa fa-google'></i><%= link_to 'Export to Google Cal', google_calendar_link(@event) %>
-            </div>
+            <span class="month"><%=  local_time(@event.next_event_occurrence_with_time[:time],'%A, %B %d, %Y') %>&nbsp;</span>
+            </i></a>(<i class='fa fa-calendar-plus-o'></i><%= link_to 'Export to Google Cal', google_calendar_link(@event) %><span>&nbsp;)</span>
             <br/>
-            <i class="fa fa-clock-o"></i><span id='local_time'><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
+            <i class="fa fa-clock-o"></i><span id='local_time' data-events-target="local_time"><%= raw show_local_time_range(@event.next_event_occurrence_with_time[:time], @event.duration) %></span><br/>
             <% if @event.try :repeats? %>
                 <% if @event.repeats_every_n_weeks == 2 %>
                   <p class="help-block">Occurs every two weeks at the specified times</p>
@@ -236,4 +235,5 @@
   <div class="col-xs-12">
     <p><%= link_to 'Learn more about Scrums', static_page_path('Getting started') %></p>
   </div>
+</div>
 </div>

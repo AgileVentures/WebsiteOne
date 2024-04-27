@@ -3,10 +3,11 @@
   <br/>
   <a href='/<%= @plan.name.downcase.gsub(' ','_') %>'>Further details</a>
   <label class="amount">
-    <p>The price for <%= @plan.name %> <%= type %> is £<%= number_to_currency(@plan.amount / 100.0, unit: '') %>/Month</p>
+    <h3>Subscription has been temporaily disabled.</h3>
+    <!--<p>The price for <%= @plan.name %> <%= type %> is £<%= number_to_currency(@plan.amount / 100.0, unit: '') %>/Month</p>
     <% if @plan.free_trial? %>
        <p><%= @plan.free_trial_length_days %> day free trial! No charge for <%= @plan.free_trial_length_days %> days</p>
-    <% end %>
+    <% end %>-->
   </label>
   <% if flash[:error].present? %>
       <div id="error_explanation">
@@ -16,31 +17,35 @@
   <br/>
 </article>
 <div class="row">
-  <div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
-    <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Paypal:</div>
+  <!--<div id="paypal_section" class="col-lg-5 well" style="margin: 10px; text-align: center;">--> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
+    <!--<div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Paypal:</div>
     <%= form_tag paypal_new_path(plan: @plan, user: @sponsee_slug), method: "post", data: { behavior: 'ajax-spin', target: '#target-element'  } do %>
-      <input type="image" name="submit" src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif" alt="Subscribe">
+      <input type="image" name="submit" src="https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif" alt="Subscribe" disabled>
       <img alt="" width="1" height="1" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" hidden="" style="display: none !important;">
     <% end %>
-  </div>
+  </div>-->
 
-  <div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;"> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
+  <!--<div id="card_section" class="col-lg-5 well" style="margin: 10px; text-align: center;">--> <!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450-->
 
-    <div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Credit/Debit Card:</div>
+    <!--<div style="margin-bottom: 15px;"><%= action_text %> <%= @plan.name %> via Credit/Debit Card:</div>
     <%= form_tag subscriptions_path(plan: @plan.third_party_identifier, user: @sponsee_slug) do %>
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                data-description="Monthly Subscription"
-                data-amount="<%= @plan.amount %>"
-                data-panel-label="Subscribe"
-                data-currency="GBP"
-                data-locale="en-US"
-                data-name="<%= @plan.name %> <%= type %>"
-                data-label="Subscribe"
-                data-image="/favicon.ico?v=2"></script>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="Monthly Subscription"
+              data-amount="<%= @plan.amount %>"
+              data-panel-label="Subscribe"
+              data-currency="GBP"
+              data-locale="en-US"
+              data-name="<%= @plan.name %> <%= type %>"
+              data-label="Subscribe"
+              data-image="/favicon.ico?v=2">
+              </script>
     <% end %>
 
-  </div>
+  </div>-->
 </div>
 
 <!-- <%= stylesheet_link_tag params[:controller], 'data-turbolinks-track' => true  %> -->
+<script>
+  document.querySelector('.stripe-button-el').setAttribute('disabled', '')
+</script>

@@ -105,10 +105,10 @@ class ProjectsController < ApplicationController
     @projects = if status == 'pending'
                   Project.where(status: status)
                          .order(order)
-                         .includes(:user)
+                         .includes(:documents)
                 else
                   Project.order(order)
-                         .includes(:user)
+                         .includes(:documents)
                 end
     @projects_languages_array = Language.pluck(:name)
     @projects = @projects.search_by_language(@language) if @language.presence

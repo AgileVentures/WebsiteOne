@@ -17,6 +17,8 @@ features:
       enabled: <%= ENV['TWITTER_NOTIFICATIONS_ENABLED'] %>
   disqus:
     enabled: false
+  email_registrations:
+    enabled: <%= ENV['EMAIL_REGISTRATIONS_ENABLED'] %>
 
 api:
   premium_subscriptions_token: <%= ENV['PREMIUM_SUBSCRIPTIONS_API_TOKEN'] %>
