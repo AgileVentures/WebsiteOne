@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-klasses = [Project, Document, User, Subscription, Karma, Plan, Article, Event, EventInstance, Karma]
+klasses = [Project, Document, User, Subscription, Karma, Plan, Article, Event, EventInstance, Karma, Course]
 old_counts = klasses.map(&:count)
 should_prompt = old_counts.min.positive?
 
@@ -77,6 +77,20 @@ Solution: is something that requires absolutely minimal effort on their part to 
     )
 
     puts 'Created default projects'
+
+    u.courses.create!(
+      title: 'OpenSource',
+      description: 'How to contribute to open source projects.',
+      status: 'Active'
+    )
+
+    u.courses.create!(
+      title: 'GitCourse',
+      description: 'Learn how to use git and github.',
+      status: 'Active'
+    )
+
+    puts 'Created default courses'
     break
   elsif %w(n no).include?(response)
     break
@@ -107,6 +121,15 @@ u ||= User.last
         user_id: p.user_id
       )
     end
+  end
+
+  3.times do
+    p = u.courses.create(
+      title: Faker::Educator.course_name,
+      description: Faker::TvShows::GameOfThrones.quote,
+      status: 'active',
+      created_at: 1.month.ago
+    )
   end
 end
 

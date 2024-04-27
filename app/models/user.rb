@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  rolify
   acts_as_paranoid
+
+  after_validation :geocode, if: ->(obj) { obj.last_sign_in_ip_changed? }
+  after_create :assign_default_role
 
   include Filterable
 
@@ -35,7 +39,6 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :display_name, use: :slugged
 
-  after_validation :geocode, if: ->(obj) { obj.last_sign_in_ip_changed? }
   # after_validation -> { KarmaCalculator.new(self).perform }
 
   has_many :authentications, dependent: :destroy
@@ -45,8 +48,13 @@ class User < ApplicationRecord
   has_many :event_instances
   has_many :commit_counts
   has_many :status
+  has_many :courses
 
   has_many :subscriptions, autosave: true
+
+  def assign_default_role
+    add_role(:student) if roles.blank?
+  end
 
   # ultimately replacing the field stripe_customer
   def stripe_customer_id
